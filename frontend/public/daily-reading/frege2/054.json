@@ -75,154 +75,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "GDP? ? ??? ?? ??? ??? ?? ?? ?? ????."
+                "text": "규모와 성장와 일정 기간"
               },
               {
                 "id": "B",
-                "text": "GDP? ?? ???? ???? ?? ????."
+                "text": "나라의 경제와 활발"
               },
               {
                 "id": "C",
-                "text": "GDP? ????? ?? ?? ?? ?? ?????."
+                "text": "물건과 서비스와 시장에서 거래되"
               },
               {
                 "id": "D",
-                "text": "GDP? ?? ???? ?? ??? ????."
+                "text": "규모와 성장와 물건과 서비스"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s2",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 98,
-                "end": 192
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "GDP? ???? ?? ??? ?? ??? ??? ??."
-              },
-              {
-                "id": "B",
-                "text": "GDP? ??? ?? ??? ??? ? ??? ??."
-              },
-              {
-                "id": "C",
-                "text": "GDP? ???? ?? ??? ?? ?? ????."
-              },
-              {
-                "id": "D",
-                "text": "?? ??? GDP? ?? ??? ?? ???? ??."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s3",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 193,
-                "end": 282
-              }
-            ]
-          },
-          "question": {
-            "prompt": "왜 그런가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "GDP? ?? ??? ??? ?? ?? ??? ?? ???."
-              },
-              {
-                "id": "B",
-                "text": "GDP? ??? ?? ?? ?? ??? ?? ??."
-              },
-              {
-                "id": "C",
-                "text": "GDP? ?? ???? ???? ??? ? ? ???."
-              },
-              {
-                "id": "D",
-                "text": "GDP? ?? ??? ?? ???? ?? ????."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s4",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 283,
-                "end": 322
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "GDP ?? ?? ??? ?? ??? ?? ?? ??."
-              },
-              {
-                "id": "B",
-                "text": "GDP? ??? ?? ??? ???? ????."
-              },
-              {
-                "id": "C",
-                "text": "?? ??? ?? ??? ? ???? ??."
-              },
-              {
-                "id": "D",
-                "text": "GDP? ??? ??? ????? ???? ??."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s5",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -239,26 +116,149 @@
             "choices": [
               {
                 "id": "A",
-                "text": "GDP? ????? ?? ?? ? ?? ?? ??? ??? ??."
+                "text": "규모와 성장와 물건과 서비스"
               },
               {
                 "id": "B",
-                "text": "GDP? ??? ??, ??? ?? ?? ??? ????."
+                "text": "규모와 성장와 일정 기간"
               },
               {
                 "id": "C",
-                "text": "GDP? ?? ??? ??? ??? ??? ????."
+                "text": "나라의 경제와 활발"
               },
               {
                 "id": "D",
-                "text": "GDP?? ???? ???? ?? ?? ??? ??."
+                "text": "물건과 서비스와 시장에서 거래되"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 98,
+                "end": 192
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나라의 경제와 활발"
+              },
+              {
+                "id": "B",
+                "text": "규모와 성장와 일정 기간"
+              },
+              {
+                "id": "C",
+                "text": "물건과 서비스와 시장에서 거래되"
+              },
+              {
+                "id": "D",
+                "text": "규모와 성장와 물건과 서비스"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 193,
+                "end": 282
+              }
+            ]
+          },
+          "question": {
+            "prompt": "왜 그런가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "물건과 서비스와 시장에서 거래되"
+              },
+              {
+                "id": "B",
+                "text": "규모와 성장와 일정 기간"
+              },
+              {
+                "id": "C",
+                "text": "나라의 경제와 활발"
+              },
+              {
+                "id": "D",
+                "text": "규모와 성장와 물건과 서비스"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 283,
+                "end": 322
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "라는 수치와 뒤에 가려진"
+              },
+              {
+                "id": "B",
+                "text": "규모와 성장와 일정 기간"
+              },
+              {
+                "id": "C",
+                "text": "나라의 경제와 활발"
+              },
+              {
+                "id": "D",
+                "text": "물건과 서비스와 시장에서 거래되"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -280,154 +280,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "GDP? ?? ?? ?? ?? ??? ???."
+                "text": "시장와 외에서 이루어지"
               },
               {
                 "id": "B",
-                "text": "GDP? ?? ? ??? ? ??? ????."
+                "text": "규모와 성장와 일정 기간"
               },
               {
                 "id": "C",
-                "text": "GDP? ?? ????? ?? ?? ????."
+                "text": "나라의 경제와 활발"
               },
               {
                 "id": "D",
-                "text": "GDP? ?? ??? ?? ???? ?? ???."
+                "text": "물건과 서비스와 시장에서 거래되"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s7",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 49,
-                "end": 161
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무슨 이유인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ??, ????? ???? GDP?? ???."
-              },
-              {
-                "id": "B",
-                "text": "??? ??? ?? ??? GDP? ?? ????."
-              },
-              {
-                "id": "C",
-                "text": "????? ?? ??? ?? ???? ?? ??."
-              },
-              {
-                "id": "D",
-                "text": "?? ? ??? ?? GDP?? ? ?? ????."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 162,
-                "end": 265
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "?? ?? ????? ??? GDP? ??? ??? ??."
-              },
-              {
-                "id": "B",
-                "text": "??? ??? GDP? ??? ???? ??."
-              },
-              {
-                "id": "C",
-                "text": "??? ??? GDP ??? ?? ???? ???."
-              },
-              {
-                "id": "D",
-                "text": "GDP? ???? ?? ??? ????."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s9",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 266,
-                "end": 324
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "GDP? ???? ??? ?? ??? ??? ???."
-              },
-              {
-                "id": "B",
-                "text": "GDP? ???? ??? ? ??? ?? ??."
-              },
-              {
-                "id": "C",
-                "text": "GDP? ?? ?? ??? ???? ??? ????."
-              },
-              {
-                "id": "D",
-                "text": "GDP? ??? ?? ???? ????."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s10",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -444,26 +321,149 @@
             "choices": [
               {
                 "id": "A",
-                "text": "GDP? ?? ??? ??? ??? ?? ??? ?? ??? ???."
+                "text": "시장와 외에서 이루어지"
               },
               {
                 "id": "B",
-                "text": "GDP? ?? ??? ?????? ?? ?? ???."
+                "text": "규모와 성장와 일정 기간"
               },
               {
                 "id": "C",
-                "text": "GDP? ??? ??? ??? ?? ?? ??? ??."
+                "text": "나라의 경제와 활발"
               },
               {
                 "id": "D",
-                "text": "GDP? ???? ??? ?? ???? ????."
+                "text": "물건과 서비스와 시장에서 거래되"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 49,
+                "end": 161
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무슨 이유인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "예를 들어와 가정 내"
+              },
+              {
+                "id": "B",
+                "text": "규모와 성장와 일정 기간"
+              },
+              {
+                "id": "C",
+                "text": "나라의 경제와 활발"
+              },
+              {
+                "id": "D",
+                "text": "물건과 서비스와 시장에서 거래되"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 162,
+                "end": 265
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반면 교통사고와 발생하여 자동차"
+              },
+              {
+                "id": "B",
+                "text": "규모와 성장와 일정 기간"
+              },
+              {
+                "id": "C",
+                "text": "나라의 경제와 활발"
+              },
+              {
+                "id": "D",
+                "text": "물건과 서비스와 시장에서 거래되"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 266,
+                "end": 324
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "양은 측정하지와 우리에게"
+              },
+              {
+                "id": "B",
+                "text": "규모와 성장와 일정 기간"
+              },
+              {
+                "id": "C",
+                "text": "나라의 경제와 활발"
+              },
+              {
+                "id": "D",
+                "text": "물건과 서비스와 시장에서 거래되"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -485,195 +485,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "GDP? ?? ??? ?? ??? ???? ???."
+                "text": "파괴와 같와 소득의 분배"
               },
               {
                 "id": "B",
-                "text": "GDP? ?? ??? ?? ??? ??? ????."
+                "text": "규모와 성장와 일정 기간"
               },
               {
                 "id": "C",
-                "text": "GDP? ?? ?? ??? ??? ???."
+                "text": "나라의 경제와 활발"
               },
               {
                 "id": "D",
-                "text": "GDP? ??? ??? ???? ???? ????."
+                "text": "물건과 서비스와 시장에서 거래되"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s12",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 47,
-                "end": 132
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "GDP? ??? ?? ??? ??? ?? ?? ???? ???."
-              },
-              {
-                "id": "B",
-                "text": "GDP? ??? ?? ??? ???? ?? ???? ? ? ??."
-              },
-              {
-                "id": "C",
-                "text": "?? ??? GDP? ???? ?? ??? ??."
-              },
-              {
-                "id": "D",
-                "text": "??? ??? ?? ?? ? ??? ?? ??? ??."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s13",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 133,
-                "end": 235
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "?? ??? ?? ??? GDP?? ????? ?? ? ??."
-              },
-              {
-                "id": "B",
-                "text": "?? ?? ??? GDP?? ???? ????."
-              },
-              {
-                "id": "C",
-                "text": "?? ?? ??? GDP? ?? ? ?? ?? ????."
-              },
-              {
-                "id": "D",
-                "text": "??? ???? ?? ??? ??? ????."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s14",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 236,
-                "end": 282
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "?? ???? ???? ? ??? ??? ?? ? ??."
-              },
-              {
-                "id": "B",
-                "text": "?? ??? ??? ??? ??? ? ????."
-              },
-              {
-                "id": "C",
-                "text": "?? ?? ??? ??? ??? ?? ????."
-              },
-              {
-                "id": "D",
-                "text": "?? ??? ?? ??? ?? ??? ??."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s15",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 283,
-                "end": 315
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "?? ??? ??? ???? ?? ??? ??? ????."
-              },
-              {
-                "id": "B",
-                "text": "?? ???? GDP ??? ?? ????."
-              },
-              {
-                "id": "C",
-                "text": "???? ?? ???? ??? ??? ????."
-              },
-              {
-                "id": "D",
-                "text": "?? ? ??? ?? ??? ????."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s16",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -690,26 +526,190 @@
             "choices": [
               {
                 "id": "A",
-                "text": "GDP? ??? ??? ?? ?? ??? ??? ??? ??."
+                "text": "파괴와 같와 소득의 분배"
               },
               {
                 "id": "B",
-                "text": "GDP? ??? ?? ??? ?? ? ?? ??."
+                "text": "규모와 성장와 일정 기간"
               },
               {
                 "id": "C",
-                "text": "?? ??? ??? ?? ???? ??? ????."
+                "text": "나라의 경제와 활발"
               },
               {
                 "id": "D",
-                "text": "GDP? ??? ??? ?? ??? ??? ?? ??."
+                "text": "물건과 서비스와 시장에서 거래되"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 47,
+                "end": 132
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나라의 전체와 높더라도 소수"
+              },
+              {
+                "id": "B",
+                "text": "규모와 성장와 일정 기간"
+              },
+              {
+                "id": "C",
+                "text": "나라의 경제와 활발"
+              },
+              {
+                "id": "D",
+                "text": "물건과 서비스와 시장에서 거래되"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 133,
+                "end": 235
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "무분별한와 개발로 인해"
+              },
+              {
+                "id": "B",
+                "text": "규모와 성장와 일정 기간"
+              },
+              {
+                "id": "C",
+                "text": "나라의 경제와 활발"
+              },
+              {
+                "id": "D",
+                "text": "물건과 서비스와 시장에서 거래되"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 236,
+                "end": 282
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "성장의 수치와 소중한 공동체"
+              },
+              {
+                "id": "B",
+                "text": "규모와 성장와 일정 기간"
+              },
+              {
+                "id": "C",
+                "text": "나라의 경제와 활발"
+              },
+              {
+                "id": "D",
+                "text": "물건과 서비스와 시장에서 거래되"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 283,
+                "end": 315
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지속 가능한와 위해서"
+              },
+              {
+                "id": "B",
+                "text": "규모와 성장와 일정 기간"
+              },
+              {
+                "id": "C",
+                "text": "나라의 경제와 활발"
+              },
+              {
+                "id": "D",
+                "text": "물건과 서비스와 시장에서 거래되"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -731,236 +731,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "?? ?? ??? GDP? ??? ? ??? ????."
+                "text": "이러한 한계와 때문에 최근"
               },
               {
                 "id": "B",
-                "text": "GDP ??? ?? ? ?? ??? ?? ??."
+                "text": "규모와 성장와 일정 기간"
               },
               {
                 "id": "C",
-                "text": "? ??? ???? ???? ? ??? ????."
+                "text": "나라의 경제와 활발"
               },
               {
                 "id": "D",
-                "text": "GDP ?? ??? ?? ? ????? ?????."
+                "text": "물건과 서비스와 시장에서 거래되"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s18",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 61,
-                "end": 120
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "?? ??? ?? GDP ?? ??? ? ???."
-              },
-              {
-                "id": "B",
-                "text": "???? ???? GDP? ???? ? ????."
-              },
-              {
-                "id": "C",
-                "text": "?? GDP? ???? ?? ??? ? ????."
-              },
-              {
-                "id": "D",
-                "text": "?? ??? ??? ?? ???? ?? ???."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s19",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 121,
-                "end": 193
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ??? ??? ???? ???? ?? ?? ??."
-              },
-              {
-                "id": "B",
-                "text": "??? ??? ??? ?? ??? ?? ??."
-              },
-              {
-                "id": "C",
-                "text": "??? ??? ?? ???? ?? ??? ? ??."
-              },
-              {
-                "id": "D",
-                "text": "??? ??? ???? ??? ?? ??? ?? ? ??."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s20",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 194,
-                "end": 266
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "GDP? ???? ??? ??? ??? ??? ???? ??."
-              },
-              {
-                "id": "B",
-                "text": "GDP? ?? ??? ??? ???? ????."
-              },
-              {
-                "id": "C",
-                "text": "?? ??? ?? ??? ???? ??? ?? ??."
-              },
-              {
-                "id": "D",
-                "text": "??? ??? ?? ??? ?? ?? ?? ??."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s21",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 267,
-                "end": 315
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 기억하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ??? ??? ???? ???? ????."
-              },
-              {
-                "id": "B",
-                "text": "??? ?? ?? ???? ??? ??? ? ??."
-              },
-              {
-                "id": "C",
-                "text": "??? ??? ?? ??? ?? ??? ??."
-              },
-              {
-                "id": "D",
-                "text": "??? ??? ??? ?? ??? ? ? ??."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s22",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 316,
-                "end": 352
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ??? ??? ???? ?? ??? ??? ??."
-              },
-              {
-                "id": "B",
-                "text": "?? ????? ?? ??? ?? ??? ????."
-              },
-              {
-                "id": "C",
-                "text": "?? ? ??? ??? ?? ?? ??? ?? ??."
-              },
-              {
-                "id": "D",
-                "text": "?? ???? ??? ??? ? ????."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s23",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -977,26 +772,231 @@
             "choices": [
               {
                 "id": "A",
-                "text": "GDP ??? ??? ?? ??? ? ??? ????."
+                "text": "존엄성과 행복와 이러한 한계"
               },
               {
                 "id": "B",
-                "text": "GDP? ????? ?? ?? ??? ?? ??."
+                "text": "규모와 성장와 일정 기간"
               },
               {
                 "id": "C",
-                "text": "??? ??? ??? ??? ?? ??? ?????."
+                "text": "나라의 경제와 활발"
               },
               {
                 "id": "D",
-                "text": "?? ??? ??? ?? ???? ?? ??."
+                "text": "물건과 서비스와 시장에서 거래되"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 61,
+                "end": 120
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "국민들의 주관적인와 측정하"
+              },
+              {
+                "id": "B",
+                "text": "규모와 성장와 일정 기간"
+              },
+              {
+                "id": "C",
+                "text": "나라의 경제와 활발"
+              },
+              {
+                "id": "D",
+                "text": "물건과 서비스와 시장에서 거래되"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 121,
+                "end": 193
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "경제의 목적와 단순히 숫자"
+              },
+              {
+                "id": "B",
+                "text": "규모와 성장와 일정 기간"
+              },
+              {
+                "id": "C",
+                "text": "나라의 경제와 활발"
+              },
+              {
+                "id": "D",
+                "text": "물건과 서비스와 시장에서 거래되"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s21",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 194,
+                "end": 266
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "존엄성과 행복와 올바르게"
+              },
+              {
+                "id": "B",
+                "text": "규모와 성장와 일정 기간"
+              },
+              {
+                "id": "C",
+                "text": "나라의 경제와 활발"
+              },
+              {
+                "id": "D",
+                "text": "물건과 서비스와 시장에서 거래되"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s22",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 267,
+                "end": 315
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 기억하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "진정한 국와 부는 돈"
+              },
+              {
+                "id": "B",
+                "text": "규모와 성장와 일정 기간"
+              },
+              {
+                "id": "C",
+                "text": "나라의 경제와 활발"
+              },
+              {
+                "id": "D",
+                "text": "물건과 서비스와 시장에서 거래되"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s23",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 316,
+                "end": 352
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "미래의 주역인와 경제"
+              },
+              {
+                "id": "B",
+                "text": "규모와 성장와 일정 기간"
+              },
+              {
+                "id": "C",
+                "text": "나라의 경제와 활발"
+              },
+              {
+                "id": "D",
+                "text": "물건과 서비스와 시장에서 거래되"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         }

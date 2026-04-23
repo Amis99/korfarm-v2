@@ -105,45 +105,6 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 12,
-                "end": 83
-              }
-            ]
-          },
-          "question": {
-            "prompt": "자전거 거치대를 더 늘려야 한다고 보는 이유는 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "아침마다 불편하고 보기에도 어수선하기 때문이다."
-              },
-              {
-                "id": "B",
-                "text": "거치대가 너무 많기 때문이다."
-              },
-              {
-                "id": "C",
-                "text": "학생들이 자전거를 타지 않기 때문이다."
-              },
-              {
-                "id": "D",
-                "text": "운동장이 너무 조용하기 때문이다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s3",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
                 "start": 0,
                 "end": 83
               }
@@ -178,13 +139,52 @@
           }
         },
         {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 12,
+                "end": 83
+              }
+            ]
+          },
+          "question": {
+            "prompt": "자전거 거치대를 더 늘려야 한다고 보는 이유는 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아침마다 불편하고 보기에도 어수선하기 때문이다."
+              },
+              {
+                "id": "B",
+                "text": "거치대가 너무 많기 때문이다."
+              },
+              {
+                "id": "C",
+                "text": "학생들이 자전거를 타지 않기 때문이다."
+              },
+              {
+                "id": "D",
+                "text": "운동장이 너무 조용하기 때문이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 32
+                "end": 78
               }
             ]
           },
@@ -262,7 +262,7 @@
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 42
+                "end": 84
               }
             ]
           },
@@ -340,7 +340,7 @@
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 46
+                "end": 88
               }
             ]
           },
@@ -418,7 +418,7 @@
               {
                 "paragraphId": "p5",
                 "start": 0,
-                "end": 38
+                "end": 82
               }
             ]
           },
@@ -496,7 +496,7 @@
               {
                 "paragraphId": "p6",
                 "start": 0,
-                "end": 40
+                "end": 64
               }
             ]
           },
@@ -610,12 +610,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "?? ??? ???? ??? ??? ??? ?? ??? ????? ??? ??????",
+          "prompt": "'거치대'는 무엇을 뜻하나요?",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 83
+              "start": 19,
+              "end": 22
+            },
+            {
+              "paragraphId": "p4",
+              "start": 17,
+              "end": 20
             }
           ],
           "scoring": {
@@ -623,16 +628,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "거치대"
         },
         {
           "id": "q2",
-          "prompt": "?? ??? ??? ??? ?? ??? ?? ?? ???? ????? ?? ????",
+          "prompt": "'비스듬히'는 어떤 모양을 뜻하나요?",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 78
+              "start": 55,
+              "end": 59
             }
           ],
           "scoring": {
@@ -640,16 +646,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "비스듬히"
         },
         {
           "id": "q3",
-          "prompt": "?? ??? ?? ??? ??? ?? ? ??? ?? ???? ???? ???? ??????",
+          "prompt": "'위험'은 무엇을 뜻하나요?",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 84
+              "start": 67,
+              "end": 69
             }
           ],
           "scoring": {
@@ -657,33 +664,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "위험"
         },
         {
           "id": "q4",
-          "prompt": "?? ??? ?? ??? ?? ??? ?? ????? ??????",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 88
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q5",
-          "prompt": "??? ??? ??? ??? ??? ??? ??? ?? ??? ?? ??? ??????",
+          "prompt": "'첫인상'은 무엇을 뜻하나요?",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 82
+              "start": 41,
+              "end": 44
             }
           ],
           "scoring": {
@@ -691,16 +682,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "첫인상"
         },
         {
-          "id": "q6",
-          "prompt": "??? ??? ???? ? ??? ?? ??? ??? ??? ???????",
+          "id": "q5",
+          "prompt": "'검토'는 무엇을 뜻하나요?",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 64
+              "start": 50,
+              "end": 52
             }
           ],
           "scoring": {
@@ -708,7 +700,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "검토"
         }
       ]
     }

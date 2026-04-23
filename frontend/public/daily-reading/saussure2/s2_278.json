@@ -58,7 +58,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 29
+                "end": 31
               }
             ]
           },
@@ -96,7 +96,46 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 31,
+                "start": 0,
+                "end": 119
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "옥황상제의 분노와 벌"
+              },
+              {
+                "id": "B",
+                "text": "하늘나라의 멋진 옷감 만들기"
+              },
+              {
+                "id": "C",
+                "text": "소들을 튼튼하게 키우는 법"
+              },
+              {
+                "id": "D",
+                "text": "견우와 직녀의 즐거운 하루"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 32,
                 "end": 73
               }
             ]
@@ -130,13 +169,13 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
                 "start": 74,
-                "end": 118
+                "end": 119
               }
             ]
           },
@@ -169,52 +208,13 @@
           }
         },
         {
-          "stepId": "s4",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 118
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 주요 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "옥황상제의 분노와 벌"
-              },
-              {
-                "id": "B",
-                "text": "하늘나라의 멋진 옷감 만들기"
-              },
-              {
-                "id": "C",
-                "text": "소들을 튼튼하게 키우는 법"
-              },
-              {
-                "id": "D",
-                "text": "견우와 직녀의 즐거운 하루"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
           "stepId": "s5",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 25
+                "end": 26
               }
             ]
           },
@@ -252,86 +252,8 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 27,
-                "end": 89
-              }
-            ]
-          },
-          "question": {
-            "prompt": "두 사람이 쫓겨난 곳 사이에 있는 넓고 깊은 별의 강은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "은하수"
-              },
-              {
-                "id": "B",
-                "text": "무지개"
-              },
-              {
-                "id": "C",
-                "text": "오로라"
-              },
-              {
-                "id": "D",
-                "text": "번개"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 91,
-                "end": 129
-              }
-            ]
-          },
-          "question": {
-            "prompt": "은하수를 사이에 두고 두 사람은 어떻게 해야 했나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "멀리서 서로를 바라볼 수밖에 없었다"
-              },
-              {
-                "id": "B",
-                "text": "배를 타고 매일 놀러 다녔다"
-              },
-              {
-                "id": "C",
-                "text": "수영해서 매일 만났다"
-              },
-              {
-                "id": "D",
-                "text": "완전히 서로를 잊어버렸다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
                 "start": 0,
-                "end": 129
+                "end": 130
               }
             ]
           },
@@ -364,13 +286,91 @@
           }
         },
         {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 27,
+                "end": 90
+              }
+            ]
+          },
+          "question": {
+            "prompt": "두 사람이 쫓겨난 곳 사이에 있는 넓고 깊은 별의 강은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "은하수"
+              },
+              {
+                "id": "B",
+                "text": "무지개"
+              },
+              {
+                "id": "C",
+                "text": "오로라"
+              },
+              {
+                "id": "D",
+                "text": "번개"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 91,
+                "end": 130
+              }
+            ]
+          },
+          "question": {
+            "prompt": "은하수를 사이에 두고 두 사람은 어떻게 해야 했나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "멀리서 서로를 바라볼 수밖에 없었다"
+              },
+              {
+                "id": "B",
+                "text": "배를 타고 매일 놀러 다녔다"
+              },
+              {
+                "id": "C",
+                "text": "수영해서 매일 만났다"
+              },
+              {
+                "id": "D",
+                "text": "완전히 서로를 잊어버렸다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s9",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 49
+                "end": 51
               }
             ]
           },
@@ -408,8 +408,47 @@
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 51,
-                "end": 70
+                "start": 0,
+                "end": 124
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "칠월 칠석을 기다리며 슬퍼하는 부부"
+              },
+              {
+                "id": "B",
+                "text": "하늘나라의 새로운 규칙 만들기"
+              },
+              {
+                "id": "C",
+                "text": "칠월에 내리는 비의 이유"
+              },
+              {
+                "id": "D",
+                "text": "눈물을 참는 특별한 방법"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 52,
+                "end": 72
               }
             ]
           },
@@ -442,13 +481,13 @@
           }
         },
         {
-          "stepId": "s11",
+          "stepId": "s12",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 72,
-                "end": 123
+                "start": 73,
+                "end": 124
               }
             ]
           },
@@ -470,45 +509,6 @@
               {
                 "id": "D",
                 "text": "화가 나서 소리를 쳤다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 123
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 주요 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "칠월 칠석을 기다리며 슬퍼하는 부부"
-              },
-              {
-                "id": "B",
-                "text": "하늘나라의 새로운 규칙 만들기"
-              },
-              {
-                "id": "C",
-                "text": "칠월에 내리는 비의 이유"
-              },
-              {
-                "id": "D",
-                "text": "눈물을 참는 특별한 방법"
               }
             ],
             "answerId": "A",
@@ -569,21 +569,21 @@
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 3
+              "end": 4
             },
             {
               "paragraphId": "p1",
               "start": 74,
-              "end": 77
+              "end": 78
             },
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 3
+              "end": 4
             },
             {
               "paragraphId": "p3",
-              "start": 18,
+              "start": 17,
               "end": 21
             }
           ],
@@ -602,18 +602,18 @@
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 40,
-              "end": 42
+              "start": 44,
+              "end": 47
             },
             {
               "paragraphId": "p2",
               "start": 97,
-              "end": 99
+              "end": 100
             },
             {
               "paragraphId": "p3",
-              "start": 96,
-              "end": 98
+              "start": 98,
+              "end": 101
             }
           ],
           "scoring": {
@@ -632,12 +632,12 @@
             {
               "paragraphId": "p3",
               "start": 65,
-              "end": 66
+              "end": 67
             },
             {
               "paragraphId": "p3",
-              "start": 81,
-              "end": 82
+              "start": 84,
+              "end": 86
             }
           ],
           "scoring": {
@@ -655,8 +655,8 @@
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 111,
-              "end": 112
+              "start": 112,
+              "end": 114
             }
           ],
           "scoring": {

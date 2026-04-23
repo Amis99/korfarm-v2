@@ -79,6 +79,47 @@
         {
           "stepId": "s2",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 288
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "손님이 떠난 뒤 어머니 삶은 다시 침묵 속으로 가라앉는다"
+              },
+              {
+                "id": "B",
+                "text": "눈물은 정숙한 과부 굴레를 받아들이는 의식 같다"
+              },
+              {
+                "id": "C",
+                "text": "어머니 선택은 가부장제 폭력을 증명한다"
+              },
+              {
+                "id": "D",
+                "text": "결말은 억압 윤리에 희생된 삶을 보여 준다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -118,7 +159,7 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -151,47 +192,6 @@
               }
             ],
             "answerId": "C",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s4",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 288
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "손님이 떠난 뒤 어머니 삶은 다시 침묵 속으로 가라앉는다"
-              },
-              {
-                "id": "B",
-                "text": "눈물은 정숙한 과부 굴레를 받아들이는 의식 같다"
-              },
-              {
-                "id": "C",
-                "text": "어머니 선택은 가부장제 폭력을 증명한다"
-              },
-              {
-                "id": "D",
-                "text": "결말은 억압 윤리에 희생된 삶을 보여 준다"
-              }
-            ],
-            "answerId": "D",
             "scoring": {
               "correctDeltaSec": 10,
               "wrongDeltaSec": -5,
@@ -243,13 +243,54 @@
         {
           "stepId": "s6",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 300
+              }
+            ]
+          },
+          "question": {
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "일상 소품이 이별의 상징이 된다"
+              },
+              {
+                "id": "B",
+                "text": "어머니 변화는 일상 속에서 분명히 드러난다"
+              },
+              {
+                "id": "C",
+                "text": "닫힌 사랑방과 달걀 거절은 미련 단절을 뜻한다"
+              },
+              {
+                "id": "D",
+                "text": "잠긴 풍금은 사랑과 청춘의 결별 의식이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
                 "start": 45,
-                "end": 147
+                "end": 264
               }
             ]
           },
@@ -282,14 +323,14 @@
           }
         },
         {
-          "stepId": "s7",
+          "stepId": "s8",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 148,
+                "start": 45,
                 "end": 264
               }
             ]
@@ -323,7 +364,7 @@
           }
         },
         {
-          "stepId": "s8",
+          "stepId": "s9",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -356,47 +397,6 @@
               }
             ],
             "answerId": "D",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s9",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 300
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "일상 소품이 이별의 상징이 된다"
-              },
-              {
-                "id": "B",
-                "text": "어머니 변화는 일상 속에서 분명히 드러난다"
-              },
-              {
-                "id": "C",
-                "text": "닫힌 사랑방과 달걀 거절은 미련 단절을 뜻한다"
-              },
-              {
-                "id": "D",
-                "text": "잠긴 풍금은 사랑과 청춘의 결별 의식이다"
-              }
-            ],
-            "answerId": "A",
             "scoring": {
               "correctDeltaSec": 10,
               "wrongDeltaSec": -5,
@@ -448,6 +448,47 @@
         {
           "stepId": "s11",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 302
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "작가는 옥희 시선으로 슬픔을 키운다"
+              },
+              {
+                "id": "B",
+                "text": "옥희 시점이 서사 비극을 극대화한다"
+              },
+              {
+                "id": "C",
+                "text": "옥희는 어머니 고통을 알지 못한다"
+              },
+              {
+                "id": "D",
+                "text": "독자는 순진한 말 속에서 더 큰 연민을 느낀다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -487,7 +528,7 @@
           }
         },
         {
-          "stepId": "s12",
+          "stepId": "s13",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -528,7 +569,7 @@
           }
         },
         {
-          "stepId": "s13",
+          "stepId": "s14",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -561,47 +602,6 @@
               }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s14",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 302
-              }
-            ]
-          },
-          "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "작가는 옥희 시선으로 슬픔을 키운다"
-              },
-              {
-                "id": "B",
-                "text": "옥희 시점이 서사 비극을 극대화한다"
-              },
-              {
-                "id": "C",
-                "text": "옥희는 어머니 고통을 알지 못한다"
-              },
-              {
-                "id": "D",
-                "text": "독자는 순진한 말 속에서 더 큰 연민을 느낀다"
-              }
-            ],
-            "answerId": "B",
             "scoring": {
               "correctDeltaSec": 10,
               "wrongDeltaSec": -5,
@@ -653,6 +653,47 @@
         {
           "stepId": "s16",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 274
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "먹먹함은 개인 약함이 아니라 시대 폭력 때문이다"
+              },
+              {
+                "id": "B",
+                "text": "결말은 시대 폭력이 만든 필연적 비극이다"
+              },
+              {
+                "id": "C",
+                "text": "과부 수절 윤리는 여성 행복을 범죄로 만들었다"
+              },
+              {
+                "id": "D",
+                "text": "불타는 편지는 억압된 여성 자유의 상징이다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -692,7 +733,7 @@
           }
         },
         {
-          "stepId": "s17",
+          "stepId": "s18",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -725,47 +766,6 @@
               }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s18",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 274
-              }
-            ]
-          },
-          "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "먹먹함은 개인 약함이 아니라 시대 폭력 때문이다"
-              },
-              {
-                "id": "B",
-                "text": "결말은 시대 폭력이 만든 필연적 비극이다"
-              },
-              {
-                "id": "C",
-                "text": "과부 수절 윤리는 여성 행복을 범죄로 만들었다"
-              },
-              {
-                "id": "D",
-                "text": "불타는 편지는 억압된 여성 자유의 상징이다"
-              }
-            ],
-            "answerId": "B",
             "scoring": {
               "correctDeltaSec": 10,
               "wrongDeltaSec": -5,
@@ -817,6 +817,47 @@
         {
           "stepId": "s20",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 298
+              }
+            ]
+          },
+          "question": {
+            "prompt": "5문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 소설은 애틋한 사랑을 넘어 사회 고발장이다"
+              },
+              {
+                "id": "B",
+                "text": "결말은 여성 희생과 시대 폭력을 고발한다"
+              },
+              {
+                "id": "C",
+                "text": "어머니 뒷모습은 여성들의 한을 떠올리게 한다"
+              },
+              {
+                "id": "D",
+                "text": "옥희 목소리는 시대 폭력을 알리는 진혼곡이 된다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s21",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -856,7 +897,7 @@
           }
         },
         {
-          "stepId": "s21",
+          "stepId": "s22",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -889,47 +930,6 @@
               }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s22",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p5",
-                "start": 0,
-                "end": 298
-              }
-            ]
-          },
-          "question": {
-            "prompt": "5문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "이 소설은 애틋한 사랑을 넘어 사회 고발장이다"
-              },
-              {
-                "id": "B",
-                "text": "결말은 여성 희생과 시대 폭력을 고발한다"
-              },
-              {
-                "id": "C",
-                "text": "어머니 뒷모습은 여성들의 한을 떠올리게 한다"
-              },
-              {
-                "id": "D",
-                "text": "옥희 목소리는 시대 폭력을 알리는 진혼곡이 된다"
-              }
-            ],
-            "answerId": "B",
             "scoring": {
               "correctDeltaSec": 10,
               "wrongDeltaSec": -5,

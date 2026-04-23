@@ -55,7 +55,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 25
+                "end": 26
               }
             ]
           },
@@ -93,8 +93,47 @@
             "ranges": [
               {
                 "paragraphId": "p1",
+                "start": 0,
+                "end": 113
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "리듬과 박자의 뜻"
+              },
+              {
+                "id": "B",
+                "text": "악기를 연주하는 방법"
+              },
+              {
+                "id": "C",
+                "text": "노래 가사를 외우는 법"
+              },
+              {
+                "id": "D",
+                "text": "다양한 악기의 종류"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
                 "start": 27,
-                "end": 70
+                "end": 71
               }
             ]
           },
@@ -127,13 +166,13 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
                 "start": 72,
-                "end": 112
+                "end": 113
               }
             ]
           },
@@ -155,45 +194,6 @@
               {
                 "id": "D",
                 "text": "무대의 밝기와 어두움"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s4",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 112
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "리듬과 박자의 뜻"
-              },
-              {
-                "id": "B",
-                "text": "악기를 연주하는 방법"
-              },
-              {
-                "id": "C",
-                "text": "노래 가사를 외우는 법"
-              },
-              {
-                "id": "D",
-                "text": "다양한 악기의 종류"
               }
             ],
             "answerId": "A",
@@ -249,86 +249,8 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 35,
-                "end": 91
-              }
-            ]
-          },
-          "question": {
-            "prompt": "느린 박자는 어떤 느낌을 주나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "차분하고 포근한 느낌"
-              },
-              {
-                "id": "B",
-                "text": "신나고 활기찬 느낌"
-              },
-              {
-                "id": "C",
-                "text": "무섭고 두려운 느낌"
-              },
-              {
-                "id": "D",
-                "text": "지루하고 졸린 느낌"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 93,
-                "end": 124
-              }
-            ]
-          },
-          "question": {
-            "prompt": "박자를 다르게 하면 어떻게 되나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "음악의 느낌이 달라진다"
-              },
-              {
-                "id": "B",
-                "text": "악기가 저절로 바뀐다"
-              },
-              {
-                "id": "C",
-                "text": "노래의 가사가 변한다"
-              },
-              {
-                "id": "D",
-                "text": "무조건 신나는 노래가 된다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
                 "start": 0,
-                "end": 124
+                "end": 125
               }
             ]
           },
@@ -361,13 +283,91 @@
           }
         },
         {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 34,
+                "end": 92
+              }
+            ]
+          },
+          "question": {
+            "prompt": "느린 박자는 어떤 느낌을 주나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "차분하고 포근한 느낌"
+              },
+              {
+                "id": "B",
+                "text": "신나고 활기찬 느낌"
+              },
+              {
+                "id": "C",
+                "text": "무섭고 두려운 느낌"
+              },
+              {
+                "id": "D",
+                "text": "지루하고 졸린 느낌"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 93,
+                "end": 125
+              }
+            ]
+          },
+          "question": {
+            "prompt": "박자를 다르게 하면 어떻게 되나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "음악의 느낌이 달라진다"
+              },
+              {
+                "id": "B",
+                "text": "악기가 저절로 바뀐다"
+              },
+              {
+                "id": "C",
+                "text": "노래의 가사가 변한다"
+              },
+              {
+                "id": "D",
+                "text": "무조건 신나는 노래가 된다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s9",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 34
+                "end": 35
               }
             ]
           },
@@ -405,8 +405,47 @@
             "ranges": [
               {
                 "paragraphId": "p3",
+                "start": 0,
+                "end": 105
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단이 전하는 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "리듬을 익히는 쉬운 방법"
+              },
+              {
+                "id": "B",
+                "text": "악기를 고르는 여러 기준"
+              },
+              {
+                "id": "C",
+                "text": "공연장 예절을 지키는 법"
+              },
+              {
+                "id": "D",
+                "text": "노래 가사를 짓는 과정"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
                 "start": 36,
-                "end": 72
+                "end": 73
               }
             ]
           },
@@ -439,13 +478,13 @@
           }
         },
         {
-          "stepId": "s11",
+          "stepId": "s12",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 74,
-                "end": 104
+                "end": 105
               }
             ]
           },
@@ -467,45 +506,6 @@
               {
                 "id": "D",
                 "text": "조용한 곳에서 혼자서"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 104
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단이 전하는 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "리듬을 익히는 쉬운 방법"
-              },
-              {
-                "id": "B",
-                "text": "악기를 고르는 여러 기준"
-              },
-              {
-                "id": "C",
-                "text": "공연장 예절을 지키는 법"
-              },
-              {
-                "id": "D",
-                "text": "노래 가사를 짓는 과정"
               }
             ],
             "answerId": "A",
@@ -571,27 +571,27 @@
             {
               "paragraphId": "p1",
               "start": 5,
-              "end": 6
+              "end": 7
             },
             {
               "paragraphId": "p1",
               "start": 27,
-              "end": 28
+              "end": 29
             },
             {
               "paragraphId": "p2",
               "start": 16,
-              "end": 17
+              "end": 18
             },
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 1
+              "end": 2
             },
             {
               "paragraphId": "p3",
               "start": 89,
-              "end": 90
+              "end": 91
             }
           ],
           "scoring": {
@@ -609,37 +609,37 @@
             {
               "paragraphId": "p1",
               "start": 9,
-              "end": 10
+              "end": 11
             },
             {
               "paragraphId": "p1",
               "start": 72,
-              "end": 73
+              "end": 74
             },
             {
               "paragraphId": "p1",
               "start": 103,
-              "end": 104
+              "end": 105
             },
             {
               "paragraphId": "p2",
               "start": 37,
-              "end": 38
+              "end": 39
             },
             {
               "paragraphId": "p2",
               "start": 68,
-              "end": 69
+              "end": 70
             },
             {
               "paragraphId": "p2",
               "start": 101,
-              "end": 102
+              "end": 103
             },
             {
               "paragraphId": "p3",
               "start": 51,
-              "end": 52
+              "end": 53
             }
           ],
           "scoring": {
@@ -657,7 +657,7 @@
             {
               "paragraphId": "p1",
               "start": 61,
-              "end": 62
+              "end": 63
             }
           ],
           "scoring": {
@@ -675,17 +675,17 @@
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 1
+              "end": 2
             },
             {
               "paragraphId": "p3",
               "start": 21,
-              "end": 22
+              "end": 23
             },
             {
               "paragraphId": "p3",
               "start": 74,
-              "end": 75
+              "end": 76
             }
           ],
           "scoring": {

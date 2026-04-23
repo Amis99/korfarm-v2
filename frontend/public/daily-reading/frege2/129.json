@@ -43,113 +43,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "??? ???? ??? ??? ???? ??"
+                "text": "가맹점과 소비자에게와 최근 배달"
               },
               {
                 "id": "B",
-                "text": "??? ??? ??? ?? ????"
+                "text": "소비자와 판매자와 연결해"
               },
               {
                 "id": "C",
-                "text": "??? ???? ?? ???? ????"
+                "text": "생존권과 소비자와 수수료 문제"
               },
               {
                 "id": "D",
-                "text": "??? ??? ???? ???? ??"
+                "text": "가맹점과 소비자에게와 소비자와 판매자"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s2",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 82,
-                "end": 185
-              }
-            ]
-          },
-          "question": {
-            "prompt": "수수료 인상에 대해 불만이 폭발한 주체는?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "?? ???? ??? ??? ?? ??? ????"
-              },
-              {
-                "id": "B",
-                "text": "??? ???? ????? ??? ????"
-              },
-              {
-                "id": "C",
-                "text": "??? ???? ??? ??? ??"
-              },
-              {
-                "id": "D",
-                "text": "?? ??? ??? ???? ??"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s3",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 186,
-                "end": 252
-              }
-            ]
-          },
-          "question": {
-            "prompt": "수수료 문제가 직결되는 중대한 사안은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "????? ???? ??? ?? ???"
-              },
-              {
-                "id": "B",
-                "text": "?? ??? ?? ??? ???"
-              },
-              {
-                "id": "C",
-                "text": "??? ???? ?? ???"
-              },
-              {
-                "id": "D",
-                "text": "? ??? ?? ???"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s4",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -166,26 +84,108 @@
             "choices": [
               {
                 "id": "A",
-                "text": "1??? ??? ??? ??? ??? ??? ? ??? ????"
+                "text": "가맹점과 소비자에게와 소비자와 판매자"
               },
               {
                 "id": "B",
-                "text": "1??? ?? ??? ????"
+                "text": "가맹점과 소비자에게와 최근 배달"
               },
               {
                 "id": "C",
-                "text": "1??? ?? ? ??? ???"
+                "text": "소비자와 판매자와 연결해"
               },
               {
                 "id": "D",
-                "text": "1??? ?? ??? ????"
+                "text": "생존권과 소비자와 수수료 문제"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 82,
+                "end": 185
+              }
+            ]
+          },
+          "question": {
+            "prompt": "수수료 인상에 대해 불만이 폭발한 주체는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "소비자와 판매자와 연결해"
+              },
+              {
+                "id": "B",
+                "text": "가맹점과 소비자에게와 최근 배달"
+              },
+              {
+                "id": "C",
+                "text": "생존권과 소비자와 수수료 문제"
+              },
+              {
+                "id": "D",
+                "text": "가맹점과 소비자에게와 소비자와 판매자"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 186,
+                "end": 252
+              }
+            ]
+          },
+          "question": {
+            "prompt": "수수료 문제가 직결되는 중대한 사안은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "생존권과 소비자와 수수료 문제"
+              },
+              {
+                "id": "B",
+                "text": "가맹점과 소비자에게와 최근 배달"
+              },
+              {
+                "id": "C",
+                "text": "소비자와 판매자와 연결해"
+              },
+              {
+                "id": "D",
+                "text": "가맹점과 소비자에게와 소비자와 판매자"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -207,154 +207,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "?? ??? ??? ????"
+                "text": "플랫폼 수수료와 찬성하"
               },
               {
                 "id": "B",
-                "text": "??? ??? ?? ???"
+                "text": "가맹점과 소비자에게와 최근 배달"
               },
               {
                 "id": "C",
-                "text": "?? ??? ?? ????"
+                "text": "소비자와 판매자와 연결해"
               },
               {
                 "id": "D",
-                "text": "?? ???? ?? ???"
+                "text": "생존권과 소비자와 수수료 문제"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s6",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 57,
-                "end": 155
-              }
-            ]
-          },
-          "question": {
-            "prompt": "초기 자본을 투입하여 시장을 키운 기업의...",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ???? ?? ??? ? ??? ??? ????"
-              },
-              {
-                "id": "B",
-                "text": "???? ??? ??? ??? ????"
-              },
-              {
-                "id": "C",
-                "text": "???? ???? ?? ?? ??? ????"
-              },
-              {
-                "id": "D",
-                "text": "???? ??? ??? ??? ????"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 156,
-                "end": 232
-              }
-            ]
-          },
-          "question": {
-            "prompt": "거둔 수익이 결과적으로 미치는 긍정적 영향은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ??? ??? ????? ???? ??? ??? ??"
-              },
-              {
-                "id": "B",
-                "text": "??? ????? ????? ??"
-              },
-              {
-                "id": "C",
-                "text": "??? ?? ???? ????? ??"
-              },
-              {
-                "id": "D",
-                "text": "??? ??? ?? ??? ???? ??"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 233,
-                "end": 256
-              }
-            ]
-          },
-          "question": {
-            "prompt": "찬성 측에게 수수료는 무엇과 같은가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ???? ??? ??"
-              },
-              {
-                "id": "B",
-                "text": "???? ???? ??? ??"
-              },
-              {
-                "id": "C",
-                "text": "?? ??? ?? ??? ??"
-              },
-              {
-                "id": "D",
-                "text": "??? ??? ??? ??"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s9",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -371,26 +248,149 @@
             "choices": [
               {
                 "id": "A",
-                "text": "2??? ?? ?? ???? ??? ?? ??? ?? ??? ????"
+                "text": "소비자와 판매자와 플랫폼 수수료"
               },
               {
                 "id": "B",
-                "text": "2??? ?? ? ?? ??? ????"
+                "text": "가맹점과 소비자에게와 최근 배달"
               },
               {
                 "id": "C",
-                "text": "2??? ?? ???? ????"
+                "text": "소비자와 판매자와 연결해"
               },
               {
                 "id": "D",
-                "text": "2??? ?? ?? ??? ???"
+                "text": "생존권과 소비자와 수수료 문제"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 57,
+                "end": 155
+              }
+            ]
+          },
+          "question": {
+            "prompt": "초기 자본을 투입하여 시장을 키운 기업의...",
+            "choices": [
+              {
+                "id": "A",
+                "text": "초기와 천문학적인 자본"
+              },
+              {
+                "id": "B",
+                "text": "가맹점과 소비자에게와 최근 배달"
+              },
+              {
+                "id": "C",
+                "text": "소비자와 판매자와 연결해"
+              },
+              {
+                "id": "D",
+                "text": "생존권과 소비자와 수수료 문제"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 156,
+                "end": 232
+              }
+            ]
+          },
+          "question": {
+            "prompt": "거둔 수익이 결과적으로 미치는 긍정적 영향은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "소비자와 판매자와 또한 이렇게"
+              },
+              {
+                "id": "B",
+                "text": "가맹점과 소비자에게와 최근 배달"
+              },
+              {
+                "id": "C",
+                "text": "소비자와 판매자와 연결해"
+              },
+              {
+                "id": "D",
+                "text": "생존권과 소비자와 수수료 문제"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 233,
+                "end": 256
+              }
+            ]
+          },
+          "question": {
+            "prompt": "찬성 측에게 수수료는 무엇과 같은가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이들에게 수수료와 유지하"
+              },
+              {
+                "id": "B",
+                "text": "가맹점과 소비자에게와 최근 배달"
+              },
+              {
+                "id": "C",
+                "text": "소비자와 판매자와 연결해"
+              },
+              {
+                "id": "D",
+                "text": "생존권과 소비자와 수수료 문제"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -412,154 +412,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "?? ?? ???? ??? ?? ??? ????"
+                "text": "소상공인과 소비자와 반면 수수료"
               },
               {
                 "id": "B",
-                "text": "?? ?? ??? ?? ??? ????"
+                "text": "가맹점과 소비자에게와 최근 배달"
               },
               {
                 "id": "C",
-                "text": "?? ?? ?? ???? ????"
+                "text": "소비자와 판매자와 연결해"
               },
               {
                 "id": "D",
-                "text": "?? ?? ??? ??? ?? ?? ???"
+                "text": "생존권과 소비자와 수수료 문제"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s11",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 58,
-                "end": 159
-              }
-            ]
-          },
-          "question": {
-            "prompt": "일방적인 수수료 인상이 소비자에게 미치는...",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ?? ??? ???? ???? ????"
-              },
-              {
-                "id": "B",
-                "text": "??? ??? ??? ??? ???"
-              },
-              {
-                "id": "C",
-                "text": "??? ??? ??? ??? ???"
-              },
-              {
-                "id": "D",
-                "text": "??? ??? ???? ????"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 160,
-                "end": 237
-              }
-            ]
-          },
-          "question": {
-            "prompt": "시장 독식 후 거두는 수수료의 부정적 묘사는?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ????? ?? ??? ????? ??"
-              },
-              {
-                "id": "B",
-                "text": "?? ????? ??? ???? ??"
-              },
-              {
-                "id": "C",
-                "text": "?? ?? ???? ??"
-              },
-              {
-                "id": "D",
-                "text": "????? ??? ??? ??"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s13",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 238,
-                "end": 256
-              }
-            ]
-          },
-          "question": {
-            "prompt": "독점에 대한 필자의 평가는?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ??? ???? ????? ??"
-              },
-              {
-                "id": "B",
-                "text": "??? ??? ?????? ??"
-              },
-              {
-                "id": "C",
-                "text": "??? ??? ????? ??"
-              },
-              {
-                "id": "D",
-                "text": "??? ??? ??? ???? ??"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s14",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -576,26 +453,149 @@
             "choices": [
               {
                 "id": "A",
-                "text": "3??? ?? ?? ?? ??? ?? ??? ???? ????"
+                "text": "소상공인과 소비자와 반면 수수료"
               },
               {
                 "id": "B",
-                "text": "3??? ?? ? ?? ??? ????"
+                "text": "가맹점과 소비자에게와 최근 배달"
               },
               {
                 "id": "C",
-                "text": "3??? ??? ???? ????"
+                "text": "소비자와 판매자와 연결해"
               },
               {
                 "id": "D",
-                "text": "3??? ??? ???? ????"
+                "text": "생존권과 소비자와 수수료 문제"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 58,
+                "end": 159
+              }
+            ]
+          },
+          "question": {
+            "prompt": "일방적인 수수료 인상이 소비자에게 미치는...",
+            "choices": [
+              {
+                "id": "A",
+                "text": "플랫폼에 대한와 높아진"
+              },
+              {
+                "id": "B",
+                "text": "가맹점과 소비자에게와 최근 배달"
+              },
+              {
+                "id": "C",
+                "text": "소비자와 판매자와 연결해"
+              },
+              {
+                "id": "D",
+                "text": "생존권과 소비자와 수수료 문제"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 160,
+                "end": 237
+              }
+            ]
+          },
+          "question": {
+            "prompt": "시장 독식 후 거두는 수수료의 부정적 묘사는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "플랫폼와 네트워크"
+              },
+              {
+                "id": "B",
+                "text": "가맹점과 소비자에게와 최근 배달"
+              },
+              {
+                "id": "C",
+                "text": "소비자와 판매자와 연결해"
+              },
+              {
+                "id": "D",
+                "text": "생존권과 소비자와 수수료 문제"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 238,
+                "end": 256
+              }
+            ]
+          },
+          "question": {
+            "prompt": "독점에 대한 필자의 평가는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "공생와 장벽"
+              },
+              {
+                "id": "B",
+                "text": "가맹점과 소비자에게와 최근 배달"
+              },
+              {
+                "id": "C",
+                "text": "소비자와 판매자와 연결해"
+              },
+              {
+                "id": "D",
+                "text": "생존권과 소비자와 수수료 문제"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -617,154 +617,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "??? ??? ?? ??? ??? ?? ???"
+                "text": "대가와 시장와 결론적으로 플랫폼"
               },
               {
                 "id": "B",
-                "text": "?? ???? ???"
+                "text": "가맹점과 소비자에게와 최근 배달"
               },
               {
                 "id": "C",
-                "text": "??? ?? ?? ???"
+                "text": "소비자와 판매자와 연결해"
               },
               {
                 "id": "D",
-                "text": "??? ?? ?? ???"
+                "text": "생존권과 소비자와 수수료 문제"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s16",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 71,
-                "end": 137
-              }
-            ]
-          },
-          "question": {
-            "prompt": "기업의 이윤 추구가 위협해서는 안 되는 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "????? ????"
-              },
-              {
-                "id": "B",
-                "text": "???? ?? ????"
-              },
-              {
-                "id": "C",
-                "text": "??? ??? ????"
-              },
-              {
-                "id": "D",
-                "text": "? ?? ?????"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s17",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 138,
-                "end": 231
-              }
-            ]
-          },
-          "question": {
-            "prompt": "해결을 위해 정부가 마련해야 할 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ?? ??? ?? ?? ???????"
-              },
-              {
-                "id": "B",
-                "text": "??? ?? ??? ?? ????"
-              },
-              {
-                "id": "C",
-                "text": "??? ???? ?? ?? ????"
-              },
-              {
-                "id": "D",
-                "text": "??? ?? ??? ?? ????"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s18",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 232,
-                "end": 252
-              }
-            ]
-          },
-          "question": {
-            "prompt": "공정한 시장을 만드는 요소는?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ????"
-              },
-              {
-                "id": "B",
-                "text": "?? ????"
-              },
-              {
-                "id": "C",
-                "text": "??? ???"
-              },
-              {
-                "id": "D",
-                "text": "?? ????"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s19",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -781,26 +658,149 @@
             "choices": [
               {
                 "id": "A",
-                "text": "4??? ??? ??? ?? ??? ??? ??? ???? ???"
+                "text": "대가와 시장와 결론적으로 플랫폼"
               },
               {
                 "id": "B",
-                "text": "4??? ??? ??? ????"
+                "text": "가맹점과 소비자에게와 최근 배달"
               },
               {
                 "id": "C",
-                "text": "4??? ??? ??? ????"
+                "text": "소비자와 판매자와 연결해"
               },
               {
                 "id": "D",
-                "text": "4??? ??? ??? ????"
+                "text": "생존권과 소비자와 수수료 문제"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 71,
+                "end": 137
+              }
+            ]
+          },
+          "question": {
+            "prompt": "기업의 이윤 추구가 위협해서는 안 되는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기업의 정당한와 이윤 추구"
+              },
+              {
+                "id": "B",
+                "text": "가맹점과 소비자에게와 최근 배달"
+              },
+              {
+                "id": "C",
+                "text": "소비자와 판매자와 연결해"
+              },
+              {
+                "id": "D",
+                "text": "생존권과 소비자와 수수료 문제"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 138,
+                "end": 231
+              }
+            ]
+          },
+          "question": {
+            "prompt": "해결을 위해 정부가 마련해야 할 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이를 해결하기와 위해 정부"
+              },
+              {
+                "id": "B",
+                "text": "가맹점과 소비자에게와 최근 배달"
+              },
+              {
+                "id": "C",
+                "text": "소비자와 판매자와 연결해"
+              },
+              {
+                "id": "D",
+                "text": "생존권과 소비자와 수수료 문제"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 232,
+                "end": 252
+              }
+            ]
+          },
+          "question": {
+            "prompt": "공정한 시장을 만드는 요소는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "투명한 규칙와 공정한 시장"
+              },
+              {
+                "id": "B",
+                "text": "가맹점과 소비자에게와 최근 배달"
+              },
+              {
+                "id": "C",
+                "text": "소비자와 판매자와 연결해"
+              },
+              {
+                "id": "D",
+                "text": "생존권과 소비자와 수수료 문제"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         }

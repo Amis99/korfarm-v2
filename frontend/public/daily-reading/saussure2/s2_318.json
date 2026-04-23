@@ -59,7 +59,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 35
+                "end": 34
               }
             ]
           },
@@ -97,8 +97,47 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 37,
-                "end": 84
+                "start": 0,
+                "end": 166
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모두가 두려워하는 피구왕 동기"
+              },
+              {
+                "id": "B",
+                "text": "피구 공을 멀리 던지는 방법"
+              },
+              {
+                "id": "C",
+                "text": "친구들과 사이좋게 노는 시간"
+              },
+              {
+                "id": "D",
+                "text": "달리기 시합에서 일등을 한 동기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 35,
+                "end": 86
               }
             ]
           },
@@ -131,13 +170,13 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 86,
-                "end": 141
+                "start": 87,
+                "end": 166
               }
             ]
           },
@@ -159,45 +198,6 @@
               {
                 "id": "D",
                 "text": "피구 대회에 아무도 나가지 않았다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s4",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 141
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 주요 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "모두가 두려워하는 피구왕 동기"
-              },
-              {
-                "id": "B",
-                "text": "피구 공을 멀리 던지는 방법"
-              },
-              {
-                "id": "C",
-                "text": "친구들과 사이좋게 노는 시간"
-              },
-              {
-                "id": "D",
-                "text": "달리기 시합에서 일등을 한 동기"
               }
             ],
             "answerId": "A",
@@ -253,84 +253,6 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 17,
-                "end": 64
-              }
-            ]
-          },
-          "question": {
-            "prompt": "3반이 다른 반들을 쉽게 이기고 결승전에 올라갈 수 있었던 이유는 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "동기의 엄청난 활약 덕분에"
-              },
-              {
-                "id": "B",
-                "text": "3반 선생님이 대신 던져주어서"
-              },
-              {
-                "id": "C",
-                "text": "다른 반 친구들이 모두 넘어져서"
-              },
-              {
-                "id": "D",
-                "text": "공이 저절로 굴러가서"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 66,
-                "end": 100
-              }
-            ]
-          },
-          "question": {
-            "prompt": "동기가 던진 공은 무엇처럼 빨랐나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "번개"
-              },
-              {
-                "id": "B",
-                "text": "거북이"
-              },
-              {
-                "id": "C",
-                "text": "달팽이"
-              },
-              {
-                "id": "D",
-                "text": "구름"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
                 "start": 0,
                 "end": 139
               }
@@ -365,13 +287,91 @@
           }
         },
         {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 16,
+                "end": 63
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3반이 다른 반들을 쉽게 이기고 결승전에 올라갈 수 있었던 이유는 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "동기의 엄청난 활약 덕분에"
+              },
+              {
+                "id": "B",
+                "text": "3반 선생님이 대신 던져주어서"
+              },
+              {
+                "id": "C",
+                "text": "다른 반 친구들이 모두 넘어져서"
+              },
+              {
+                "id": "D",
+                "text": "공이 저절로 굴러가서"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 64,
+                "end": 101
+              }
+            ]
+          },
+          "question": {
+            "prompt": "동기가 던진 공은 무엇처럼 빨랐나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "번개"
+              },
+              {
+                "id": "B",
+                "text": "거북이"
+              },
+              {
+                "id": "C",
+                "text": "달팽이"
+              },
+              {
+                "id": "D",
+                "text": "구름"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s9",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 39
+                "end": 40
               }
             ]
           },
@@ -409,8 +409,47 @@
             "ranges": [
               {
                 "paragraphId": "p3",
+                "start": 0,
+                "end": 158
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다 함께 연습하며 결승에 오른 5반"
+              },
+              {
+                "id": "B",
+                "text": "동기와 똑같은 옷을 입고 시합하는 5반"
+              },
+              {
+                "id": "C",
+                "text": "쉬는 시간에 술래잡기하며 노는 친구들"
+              },
+              {
+                "id": "D",
+                "text": "결승전에서 져서 엉엉 우는 5반"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
                 "start": 41,
-                "end": 81
+                "end": 126
               }
             ]
           },
@@ -443,13 +482,13 @@
           }
         },
         {
-          "stepId": "s11",
+          "stepId": "s12",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 83,
-                "end": 128
+                "start": 79,
+                "end": 158
               }
             ]
           },
@@ -471,45 +510,6 @@
               {
                 "id": "D",
                 "text": "연습을 한 번도 하지 않고 잠만 잤다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 158
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 주요 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "다 함께 연습하며 결승에 오른 5반"
-              },
-              {
-                "id": "B",
-                "text": "동기와 똑같은 옷을 입고 시합하는 5반"
-              },
-              {
-                "id": "C",
-                "text": "쉬는 시간에 술래잡기하며 노는 친구들"
-              },
-              {
-                "id": "D",
-                "text": "결승전에서 져서 엉엉 우는 5반"
               }
             ],
             "answerId": "A",
@@ -569,13 +569,13 @@
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 74,
-              "end": 77
+              "start": 101,
+              "end": 104
             },
             {
               "paragraphId": "p3",
-              "start": 143,
-              "end": 146
+              "start": 140,
+              "end": 143
             }
           ],
           "scoring": {
@@ -593,13 +593,13 @@
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 10,
-              "end": 12
+              "start": 8,
+              "end": 10
             },
             {
               "paragraphId": "p2",
-              "start": 17,
-              "end": 19
+              "start": 16,
+              "end": 18
             },
             {
               "paragraphId": "p2",
@@ -622,8 +622,8 @@
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 29,
-              "end": 31
+              "start": 33,
+              "end": 35
             },
             {
               "paragraphId": "p3",
@@ -632,13 +632,13 @@
             },
             {
               "paragraphId": "p3",
-              "start": 91,
-              "end": 93
+              "start": 83,
+              "end": 85
             },
             {
               "paragraphId": "p3",
-              "start": 133,
-              "end": 135
+              "start": 130,
+              "end": 132
             }
           ],
           "scoring": {
@@ -656,8 +656,8 @@
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 100,
-              "end": 105
+              "start": 94,
+              "end": 99
             }
           ],
           "scoring": {

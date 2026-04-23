@@ -66,7 +66,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 6
+                "end": 11
               }
             ]
           },
@@ -75,26 +75,26 @@
             "choices": [
               {
                 "id": "A",
-                "text": "?? ?? ?? ??? ?? ??"
+                "text": "끝에서도 시작되는 길"
               },
               {
                 "id": "B",
-                "text": "?? ??? ??? ????"
+                "text": "곳에서도 길의 핵심"
               },
               {
                 "id": "C",
-                "text": "?? ??? ?? ??? ??"
+                "text": "끝에서도 이어지는 길"
               },
               {
                 "id": "D",
-                "text": "?? ??? ???? ???"
+                "text": "새롭게 생기는 길"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -106,7 +106,7 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 7,
+                "start": 0,
                 "end": 18
               }
             ]
@@ -116,154 +116,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "???? ??? ?? ?? ???"
+                "text": "곳에서도 길의 핵심"
               },
               {
                 "id": "B",
-                "text": "???? ?? ?? ???"
+                "text": "끝에서도 시작되는 길"
               },
               {
                 "id": "C",
-                "text": "???? ?? ?? ????"
+                "text": "끝에서도 이어지는 길"
               },
               {
                 "id": "D",
-                "text": "???? ??? ?? ???"
+                "text": "새롭게 생기는 길"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s3",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 19,
-                "end": 30
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ???? ??? ???? ???"
-              },
-              {
-                "id": "B",
-                "text": "??? ???? ??? ???"
-              },
-              {
-                "id": "C",
-                "text": "?? ??? ??? ?? ???"
-              },
-              {
-                "id": "D",
-                "text": "?? ??? ??? ???? ???"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s4",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 31,
-                "end": 36
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ?? ?? ??? ? ? ??"
-              },
-              {
-                "id": "B",
-                "text": "??? ??? ?? ?? ??? ???"
-              },
-              {
-                "id": "C",
-                "text": "?? ??? ?? ??? ?? ??? ???"
-              },
-              {
-                "id": "D",
-                "text": "???? ?? ?? ?? ?????? ???"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s5",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 37,
-                "end": 44
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "? ?? ?? ???? ?? ??? ??? ???"
-              },
-              {
-                "id": "B",
-                "text": "? ?? ?? ??? ??? ???"
-              },
-              {
-                "id": "C",
-                "text": "? ?? ???? ? ??? ????"
-              },
-              {
-                "id": "D",
-                "text": "? ?? ??? ?? ?? ??"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s6",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -280,26 +157,149 @@
             "choices": [
               {
                 "id": "A",
-                "text": "??? ??? ????? ?? ??? ??? ??? ??"
+                "text": "길이 끝나와 곳에서도 길"
               },
               {
                 "id": "B",
-                "text": "?? ???? ? ?? ???? ? ? ??? ????"
+                "text": "끝에서도 시작되는 길"
               },
               {
                 "id": "C",
-                "text": "?? ??? ?? ?? ??? ? ???? ????"
+                "text": "곳에서도 길의 핵심"
               },
               {
                 "id": "D",
-                "text": "?? ?? ?? ?? ???? ????"
+                "text": "끝에서도 이어지는 길"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 19,
+                "end": 30
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "끝에서도 이어지는 길"
+              },
+              {
+                "id": "B",
+                "text": "끝에서도 시작되는 길"
+              },
+              {
+                "id": "C",
+                "text": "곳에서도 길의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "새롭게 생기는 길"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 31,
+                "end": 44
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "새롭게 생기는 길"
+              },
+              {
+                "id": "B",
+                "text": "끝에서도 시작되는 길"
+              },
+              {
+                "id": "C",
+                "text": "곳에서도 길의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "끝에서도 이어지는 길"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 31,
+                "end": 44
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "있다의 핵심"
+              },
+              {
+                "id": "B",
+                "text": "끝에서도 시작되는 길"
+              },
+              {
+                "id": "C",
+                "text": "곳에서도 길의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "끝에서도 이어지는 길"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -312,7 +312,7 @@
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 3
+                "end": 10
               }
             ]
           },
@@ -321,26 +321,26 @@
             "choices": [
               {
                 "id": "A",
-                "text": "?? ??? ??? ??? ?? ???"
+                "text": "스스의 핵심"
               },
               {
                 "id": "B",
-                "text": "?? ??? ??? ?? ?? ??"
+                "text": "끝에서도 시작되는 길"
               },
               {
                 "id": "C",
-                "text": "?? ??? ?? ?? ??? ??"
+                "text": "곳에서도 길의 핵심"
               },
               {
                 "id": "D",
-                "text": "?? ??? ??? ?? ???"
+                "text": "끝에서도 이어지는 길"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -352,7 +352,7 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 4,
+                "start": 0,
                 "end": 10
               }
             ]
@@ -362,154 +362,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "??? ??? ???? ????"
+                "text": "봄길의 핵심"
               },
               {
                 "id": "B",
-                "text": "??? ??? ??? ????"
+                "text": "끝에서도 시작되는 길"
               },
               {
                 "id": "C",
-                "text": "??? ??? ??? ????"
+                "text": "곳에서도 길의 핵심"
               },
               {
                 "id": "D",
-                "text": "??? ?? ?? ??? ???"
+                "text": "끝에서도 이어지는 길"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s9",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 11,
-                "end": 14
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ?? ??? ???? ??? ????"
-              },
-              {
-                "id": "B",
-                "text": "??? ?? ??? ??? ???? ???"
-              },
-              {
-                "id": "C",
-                "text": "??? ?? ??? ??? ???? ???"
-              },
-              {
-                "id": "D",
-                "text": "??? ?? ??? ?? ?? ??? ???"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s10",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 15,
-                "end": 19
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "???? ??? ??? ?? ?? ??"
-              },
-              {
-                "id": "B",
-                "text": "???? ?? ?? ?? ??? ??"
-              },
-              {
-                "id": "C",
-                "text": "???? ?? ????? ??"
-              },
-              {
-                "id": "D",
-                "text": "???? ?? ?? ???"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s11",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 20,
-                "end": 27
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "?? ?? ??? ?? ???? ??? ???"
-              },
-              {
-                "id": "B",
-                "text": "?? ?? ?? ??? ??? ???"
-              },
-              {
-                "id": "C",
-                "text": "?? ?? ?? ??? ????"
-              },
-              {
-                "id": "D",
-                "text": "?? ?? ??? ??? ?? ??"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -526,26 +403,149 @@
             "choices": [
               {
                 "id": "A",
-                "text": "??? ? ??? ??? ?? ??? ??? ???"
+                "text": "스스로 봄길와 되어 끝없"
               },
               {
                 "id": "B",
-                "text": "??? ? ??? ?? ?? ?? ??? ????"
+                "text": "끝에서도 시작되는 길"
               },
               {
                 "id": "C",
-                "text": "??? ? ??? ??? ?? ???? ????"
+                "text": "곳에서도 길의 핵심"
               },
               {
                 "id": "D",
-                "text": "??? ? ??? ??? ???? ????"
+                "text": "끝에서도 이어지는 길"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 11,
+                "end": 27
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "끝없의 핵심"
+              },
+              {
+                "id": "B",
+                "text": "끝에서도 시작되는 길"
+              },
+              {
+                "id": "C",
+                "text": "곳에서도 길의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "끝에서도 이어지는 길"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 11,
+                "end": 27
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "걸어의 핵심"
+              },
+              {
+                "id": "B",
+                "text": "끝에서도 시작되는 길"
+              },
+              {
+                "id": "C",
+                "text": "곳에서도 길의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "끝에서도 이어지는 길"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 11,
+                "end": 27
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "있다의 핵심"
+              },
+              {
+                "id": "B",
+                "text": "끝에서도 시작되는 길"
+              },
+              {
+                "id": "C",
+                "text": "곳에서도 길의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "끝에서도 이어지는 길"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -558,7 +558,7 @@
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 3
+                "end": 12
               }
             ]
           },
@@ -567,26 +567,26 @@
             "choices": [
               {
                 "id": "A",
-                "text": "??? ??? ???"
+                "text": "강물의 핵심"
               },
               {
                 "id": "B",
-                "text": "??? ??? ???"
+                "text": "끝에서도 시작되는 길"
               },
               {
                 "id": "C",
-                "text": "??? ?? ???"
+                "text": "곳에서도 길의 핵심"
               },
               {
                 "id": "D",
-                "text": "?? ??? ???"
+                "text": "끝에서도 이어지는 길"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -598,7 +598,7 @@
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 4,
+                "start": 0,
                 "end": 12
               }
             ]
@@ -608,154 +608,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "?? ??? ???? ?? ??? ????"
+                "text": "멈추고의 핵심"
               },
               {
                 "id": "B",
-                "text": "?? ????? ?? ???"
+                "text": "끝에서도 시작되는 길"
               },
               {
                 "id": "C",
-                "text": "??? ? ?? ??????"
+                "text": "곳에서도 길의 핵심"
               },
               {
                 "id": "D",
-                "text": "?? ?? ?? ???? ?????"
+                "text": "끝에서도 이어지는 길"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s15",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 13,
-                "end": 25
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "? ?? ???? ??? ???? ?? ??"
-              },
-              {
-                "id": "B",
-                "text": "? ?? ??? ??? ????"
-              },
-              {
-                "id": "C",
-                "text": "? ?? ?? ??? ???? ?? ??"
-              },
-              {
-                "id": "D",
-                "text": "? ?? ???? ??? ?? ??"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s16",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 26,
-                "end": 38
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "???? ??? ??? ??? ? ??"
-              },
-              {
-                "id": "B",
-                "text": "???? ?? ?? ??? ???? ???"
-              },
-              {
-                "id": "C",
-                "text": "???? ??? ????? ???"
-              },
-              {
-                "id": "D",
-                "text": "???? ?? ?? ??? ???"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s17",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 39,
-                "end": 50
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "?? ?? ?? ??? ??? ???"
-              },
-              {
-                "id": "B",
-                "text": "?? ?? ??? ?? ?????? ???"
-              },
-              {
-                "id": "C",
-                "text": "?? ?? ? ??? ???? ????"
-              },
-              {
-                "id": "D",
-                "text": "?? ?? ??? ??? ????"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s18",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -772,26 +649,149 @@
             "choices": [
               {
                 "id": "A",
-                "text": "???? ??? ???? ??? ? ??? ????"
+                "text": "흐르다와 멈추고 새들"
               },
               {
                 "id": "B",
-                "text": "???? ???? ??? ? ?? ??? ??? ???"
+                "text": "끝에서도 시작되는 길"
               },
               {
                 "id": "C",
-                "text": "???? ?? ?? ??? ???? ???"
+                "text": "곳에서도 길의 핵심"
               },
               {
                 "id": "D",
-                "text": "??? ??? ??? ???? ???"
+                "text": "끝에서도 이어지는 길"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 13,
+                "end": 28
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "날아와 새들"
+              },
+              {
+                "id": "B",
+                "text": "끝에서도 시작되는 길"
+              },
+              {
+                "id": "C",
+                "text": "곳에서도 길의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "끝에서도 이어지는 길"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 13,
+                "end": 50
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "않고 하늘의 핵심"
+              },
+              {
+                "id": "B",
+                "text": "끝에서도 시작되는 길"
+              },
+              {
+                "id": "C",
+                "text": "곳에서도 길의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "끝에서도 이어지는 길"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 29,
+                "end": 50
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 꽃잎와 흩어져"
+              },
+              {
+                "id": "B",
+                "text": "끝에서도 시작되는 길"
+              },
+              {
+                "id": "C",
+                "text": "곳에서도 길의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "끝에서도 이어지는 길"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -813,195 +813,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "??? ?? ???? ???? ?? ??? ??"
+                "text": "보라 사랑와 끝난"
               },
               {
                 "id": "B",
-                "text": "??? ??? ??? ???? ???"
+                "text": "끝에서도 시작되는 길"
               },
               {
                 "id": "C",
-                "text": "??? ??? ?? ????? ???"
+                "text": "곳에서도 길의 핵심"
               },
               {
                 "id": "D",
-                "text": "???? ?? ? ?????? ???"
+                "text": "끝에서도 이어지는 길"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s20",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 15,
-                "end": 22
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ??? ?? ??? ?? ??? ???"
-              },
-              {
-                "id": "B",
-                "text": "??? ??? ?? ?? ??? ???"
-              },
-              {
-                "id": "C",
-                "text": "?? ??? ??? ???? ??? ???"
-              },
-              {
-                "id": "D",
-                "text": "??? ??? ???? ??? ???"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s21",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 23,
-                "end": 33
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "?? ????? ??? ?? ?? ? ? ??"
-              },
-              {
-                "id": "B",
-                "text": "?? ????? ??? ??? ????"
-              },
-              {
-                "id": "C",
-                "text": "?? ????? ??? ?? ???? ???"
-              },
-              {
-                "id": "D",
-                "text": "?? ????? ??? ???? ???"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s22",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 34,
-                "end": 48
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ?? ??? ??? ??? ?? ??"
-              },
-              {
-                "id": "B",
-                "text": "??? ?? ??? ??? ??? ???"
-              },
-              {
-                "id": "C",
-                "text": "??? ?? ??? ??? ??? ???"
-              },
-              {
-                "id": "D",
-                "text": "??? ?? ??? ?? ??? ???"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s23",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 49,
-                "end": 65
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ?? ??? ??? ?? ?? ?? ??? ???"
-              },
-              {
-                "id": "B",
-                "text": "??? ?? ??? ?? ??? ?????? ???"
-              },
-              {
-                "id": "C",
-                "text": "??? ?? ??? ??? ????? ???"
-              },
-              {
-                "id": "D",
-                "text": "??? ?? ??? ??? ????"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s24",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -1018,26 +854,190 @@
             "choices": [
               {
                 "id": "A",
-                "text": "??? ??? ??? ?? ???? ?? ?? ??? ????"
+                "text": "보라 사랑와 끝난 곳"
               },
               {
                 "id": "B",
-                "text": "??? ?? ? ??? ??? ??? ????"
+                "text": "끝에서도 시작되는 길"
               },
               {
                 "id": "C",
-                "text": "??? ??? ??? ???? ??"
+                "text": "곳에서도 길의 핵심"
               },
               {
                 "id": "D",
-                "text": "??? ???? ??? ??? ???? ??"
+                "text": "끝에서도 이어지는 길"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s21",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 15,
+                "end": 33
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사랑와 남아"
+              },
+              {
+                "id": "B",
+                "text": "끝에서도 시작되는 길"
+              },
+              {
+                "id": "C",
+                "text": "곳에서도 길의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "끝에서도 이어지는 길"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s22",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 15,
+                "end": 33
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "길을 만드는 사람"
+              },
+              {
+                "id": "B",
+                "text": "끝에서도 시작되는 길"
+              },
+              {
+                "id": "C",
+                "text": "곳에서도 길의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "끝에서도 이어지는 길"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s23",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 34,
+                "end": 65
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "스스로 사랑와 되어 한없"
+              },
+              {
+                "id": "B",
+                "text": "끝에서도 시작되는 길"
+              },
+              {
+                "id": "C",
+                "text": "곳에서도 길의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "끝에서도 이어지는 길"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s24",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 45,
+                "end": 65
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "걸어와 봄길"
+              },
+              {
+                "id": "B",
+                "text": "끝에서도 시작되는 길"
+              },
+              {
+                "id": "C",
+                "text": "곳에서도 길의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "끝에서도 이어지는 길"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         }

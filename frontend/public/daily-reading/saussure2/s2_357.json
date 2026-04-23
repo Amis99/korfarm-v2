@@ -97,7 +97,46 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 29,
+                "start": 0,
+                "end": 120
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'배우다'라는 뜻의 한자 '학'이 들어간 낱말 '학교'"
+              },
+              {
+                "id": "B",
+                "text": "학교에서 친구들과 사이좋게 뛰어노는 규칙"
+              },
+              {
+                "id": "C",
+                "text": "한자를 바르게 쓰는 순서와 예쁜 글씨체"
+              },
+              {
+                "id": "D",
+                "text": "새로운 학교로 전학을 가서 친구를 사귀는 방법"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 28,
                 "end": 73
               }
             ]
@@ -131,13 +170,13 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 75,
-                "end": 119
+                "start": 74,
+                "end": 120
               }
             ]
           },
@@ -159,45 +198,6 @@
               {
                 "id": "D",
                 "text": "시장"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s4",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 119
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 주요 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "'배우다'라는 뜻의 한자 '학'이 들어간 낱말 '학교'"
-              },
-              {
-                "id": "B",
-                "text": "학교에서 친구들과 사이좋게 뛰어노는 규칙"
-              },
-              {
-                "id": "C",
-                "text": "한자를 바르게 쓰는 순서와 예쁜 글씨체"
-              },
-              {
-                "id": "D",
-                "text": "새로운 학교로 전학을 가서 친구를 사귀는 방법"
               }
             ],
             "answerId": "A",
@@ -253,86 +253,8 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 51,
-                "end": 88
-              }
-            ]
-          },
-          "question": {
-            "prompt": "숫자를 더하고 빼는 셈을 배우는 과목은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "수학"
-              },
-              {
-                "id": "B",
-                "text": "음악"
-              },
-              {
-                "id": "C",
-                "text": "미술"
-              },
-              {
-                "id": "D",
-                "text": "체육"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 90,
-                "end": 128
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 낱말들에는 모두 어떤 뜻을 가진 '학' 자가 들어 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "배우고 익힌다는 뜻"
-              },
-              {
-                "id": "B",
-                "text": "하늘을 난다는 뜻"
-              },
-              {
-                "id": "C",
-                "text": "노래를 부른다는 뜻"
-              },
-              {
-                "id": "D",
-                "text": "밥을 먹는다는 뜻"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
                 "start": 0,
-                "end": 128
+                "end": 126
               }
             ]
           },
@@ -365,13 +287,91 @@
           }
         },
         {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 50,
+                "end": 87
+              }
+            ]
+          },
+          "question": {
+            "prompt": "숫자를 더하고 빼는 셈을 배우는 과목은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "수학"
+              },
+              {
+                "id": "B",
+                "text": "음악"
+              },
+              {
+                "id": "C",
+                "text": "미술"
+              },
+              {
+                "id": "D",
+                "text": "체육"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 88,
+                "end": 126
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 낱말들에는 모두 어떤 뜻을 가진 '학' 자가 들어 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "배우고 익힌다는 뜻"
+              },
+              {
+                "id": "B",
+                "text": "하늘을 난다는 뜻"
+              },
+              {
+                "id": "C",
+                "text": "노래를 부른다는 뜻"
+              },
+              {
+                "id": "D",
+                "text": "밥을 먹는다는 뜻"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s9",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 53
+                "end": 55
               }
             ]
           },
@@ -409,8 +409,47 @@
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 55,
-                "end": 105
+                "start": 0,
+                "end": 145
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "과학이라는 낱말과 한자를 알면 뜻을 쉽게 이해할 수 있다는 점"
+              },
+              {
+                "id": "B",
+                "text": "과학자가 되기 위해 매일 여러 가지 식물을 기르는 관찰 일기"
+              },
+              {
+                "id": "C",
+                "text": "한자 쓰기 대회에 나가서 큰 상을 받고 기뻐하는 가족의 모습"
+              },
+              {
+                "id": "D",
+                "text": "주변에서 일어나는 이상한 소문의 진짜 이유를 밝혀내는 탐정"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 56,
+                "end": 106
               }
             ]
           },
@@ -443,13 +482,13 @@
           }
         },
         {
-          "stepId": "s11",
+          "stepId": "s12",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 107,
-                "end": 147
+                "end": 145
               }
             ]
           },
@@ -471,45 +510,6 @@
               {
                 "id": "D",
                 "text": "몇 개의 숫자가 있는지"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 147
-              }
-            ]
-          },
-          "question": {
-            "prompt": "3문단의 주요 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "과학이라는 낱말과 한자를 알면 뜻을 쉽게 이해할 수 있다는 점"
-              },
-              {
-                "id": "B",
-                "text": "과학자가 되기 위해 매일 여러 가지 식물을 기르는 관찰 일기"
-              },
-              {
-                "id": "C",
-                "text": "한자 쓰기 대회에 나가서 큰 상을 받고 기뻐하는 가족의 모습"
-              },
-              {
-                "id": "D",
-                "text": "주변에서 일어나는 이상한 소문의 진짜 이유를 밝혀내는 탐정"
               }
             ],
             "answerId": "A",
@@ -569,8 +569,8 @@
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 108,
-              "end": 110
+              "start": 111,
+              "end": 113
             },
             {
               "paragraphId": "p2",
@@ -593,8 +593,8 @@
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 46,
-              "end": 48
+              "start": 38,
+              "end": 40
             }
           ],
           "scoring": {
@@ -612,8 +612,8 @@
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 81,
-              "end": 83
+              "start": 76,
+              "end": 78
             }
           ],
           "scoring": {
@@ -631,18 +631,43 @@
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 45,
-              "end": 46
+              "start": 48,
+              "end": 49
+            },
+            {
+              "paragraphId": "p1",
+              "start": 111,
+              "end": 112
             },
             {
               "paragraphId": "p2",
-              "start": 117,
-              "end": 118
+              "start": 4,
+              "end": 5
+            },
+            {
+              "paragraphId": "p2",
+              "start": 38,
+              "end": 39
+            },
+            {
+              "paragraphId": "p2",
+              "start": 77,
+              "end": 78
+            },
+            {
+              "paragraphId": "p2",
+              "start": 112,
+              "end": 113
             },
             {
               "paragraphId": "p3",
-              "start": 49,
-              "end": 50
+              "start": 38,
+              "end": 39
+            },
+            {
+              "paragraphId": "p3",
+              "start": 44,
+              "end": 45
             }
           ],
           "scoring": {

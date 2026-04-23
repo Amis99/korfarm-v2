@@ -67,7 +67,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 29
+                "end": 30
               }
             ]
           },
@@ -105,47 +105,8 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 30,
-                "end": 79
-              }
-            ]
-          },
-          "question": {
-            "prompt": "왜 이 문제가 관심을 가질 만하다고 하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "학생 생활과 가까워서 관심이 간다."
-              },
-              {
-                "id": "B",
-                "text": "아무도 모르는 문제이기 때문이다."
-              },
-              {
-                "id": "C",
-                "text": "학생 생활과 멀기 때문이다."
-              },
-              {
-                "id": "D",
-                "text": "언제나 같은 답만 있기 때문이다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s3",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
                 "start": 0,
-                "end": 79
+                "end": 80
               }
             ]
           },
@@ -178,13 +139,52 @@
           }
         },
         {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 31,
+                "end": 80
+              }
+            ]
+          },
+          "question": {
+            "prompt": "왜 이 문제가 관심을 가질 만하다고 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "학생 생활과 가까워서 관심이 간다."
+              },
+              {
+                "id": "B",
+                "text": "아무도 모르는 문제이기 때문이다."
+              },
+              {
+                "id": "C",
+                "text": "학생 생활과 멀기 때문이다."
+              },
+              {
+                "id": "D",
+                "text": "언제나 같은 답만 있기 때문이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 83
+                "end": 84
               }
             ]
           },
@@ -223,7 +223,7 @@
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 83
+                "end": 84
               }
             ]
           },
@@ -262,7 +262,7 @@
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 97
+                "end": 98
               }
             ]
           },
@@ -301,7 +301,7 @@
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 97
+                "end": 98
               }
             ]
           },
@@ -340,7 +340,7 @@
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 95
+                "end": 96
               }
             ]
           },
@@ -379,7 +379,7 @@
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 95
+                "end": 96
               }
             ]
           },
@@ -418,7 +418,7 @@
               {
                 "paragraphId": "p5",
                 "start": 0,
-                "end": 70
+                "end": 71
               }
             ]
           },
@@ -457,7 +457,7 @@
               {
                 "paragraphId": "p5",
                 "start": 0,
-                "end": 70
+                "end": 71
               }
             ]
           },
@@ -496,7 +496,7 @@
               {
                 "paragraphId": "p6",
                 "start": 0,
-                "end": 63
+                "end": 64
               }
             ]
           },
@@ -535,7 +535,7 @@
               {
                 "paragraphId": "p6",
                 "start": 0,
-                "end": 63
+                "end": 64
               }
             ]
           },
@@ -610,29 +610,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "?? ??? ???? ???? ?? ?? ??? ?? ???? ??????",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 80
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q2",
-          "prompt": "?? ??? ?? ??? ? ??? ???? ?? ????? ??????",
+          "prompt": "기준은 무슨 뜻인가요?",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 84
+              "start": 63,
+              "end": 65
             }
           ],
           "scoring": {
@@ -640,16 +623,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "기준"
         },
         {
-          "id": "q3",
-          "prompt": "?? ??? ???? ?? ??? ?? ??? ?? ??? ?? ??? ???? ??????",
+          "id": "q2",
+          "prompt": "현실적은 무슨 뜻인가요?",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 98
+              "start": 59,
+              "end": 62
             }
           ],
           "scoring": {
@@ -657,16 +641,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "현실적"
         },
         {
-          "id": "q4",
-          "prompt": "?? ??? ?? ? ?? ??? ? ??? ?? ????? ??? ?? ???? ??????",
+          "id": "q3",
+          "prompt": "함부로는 무슨 뜻인가요?",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 96
+              "start": 25,
+              "end": 28
             }
           ],
           "scoring": {
@@ -674,16 +659,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "함부로"
         },
         {
-          "id": "q5",
-          "prompt": "??? ??? ??? ??? ?? ?? ??? ?? ??? ?? ??? ??????",
+          "id": "q4",
+          "prompt": "질서는 무슨 뜻인가요?",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 71
+              "start": 37,
+              "end": 39
             }
           ],
           "scoring": {
@@ -691,16 +677,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "질서"
         },
         {
-          "id": "q6",
-          "prompt": "??? ??? ???? ??? ??? ?? ?? ??? ?? ???? ???????",
+          "id": "q5",
+          "prompt": "초고는 무슨 뜻인가요?",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 64
+              "start": 30,
+              "end": 32
             }
           ],
           "scoring": {
@@ -708,7 +695,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "초고"
         }
       ]
     }

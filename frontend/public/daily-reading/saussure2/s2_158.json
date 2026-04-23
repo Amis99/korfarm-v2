@@ -58,7 +58,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 39
+                "end": 38
               }
             ]
           },
@@ -96,7 +96,46 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 41,
+                "start": 0,
+                "end": 110
+              }
+            ]
+          },
+          "question": {
+            "prompt": "첫 번째 문단은 무엇에 대해 설명하고 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이어주는 말의 뜻과 종류"
+              },
+              {
+                "id": "B",
+                "text": "기차를 안전하게 타는 방법"
+              },
+              {
+                "id": "C",
+                "text": "마침표와 물음표를 쓰는 법"
+              },
+              {
+                "id": "D",
+                "text": "친구와 싸웠을 때 화해하는 말"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 39,
                 "end": 77
               }
             ]
@@ -130,13 +169,13 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 79,
-                "end": 108
+                "start": 78,
+                "end": 110
               }
             ]
           },
@@ -158,45 +197,6 @@
               {
                 "id": "D",
                 "text": "'빨강', '노랑', '파랑'"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s4",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 108
-              }
-            ]
-          },
-          "question": {
-            "prompt": "첫 번째 문단은 무엇에 대해 설명하고 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "이어주는 말의 뜻과 종류"
-              },
-              {
-                "id": "B",
-                "text": "기차를 안전하게 타는 방법"
-              },
-              {
-                "id": "C",
-                "text": "마침표와 물음표를 쓰는 법"
-              },
-              {
-                "id": "D",
-                "text": "친구와 싸웠을 때 화해하는 말"
               }
             ],
             "answerId": "A",
@@ -252,86 +252,8 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 33,
-                "end": 68
-              }
-            ]
-          },
-          "question": {
-            "prompt": "\"밥을 먹었다. (  ) 물을 마셨다.\" 빈칸에 알맞은 말은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "그리고"
-              },
-              {
-                "id": "B",
-                "text": "그래서"
-              },
-              {
-                "id": "C",
-                "text": "그러나"
-              },
-              {
-                "id": "D",
-                "text": "그런데"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 70,
-                "end": 103
-              }
-            ]
-          },
-          "question": {
-            "prompt": "앞의 일이 뒤에 일어난 일의 이유가 될 때는 어떤 말을 쓰나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "그래서"
-              },
-              {
-                "id": "B",
-                "text": "그리고"
-              },
-              {
-                "id": "C",
-                "text": "만약에"
-              },
-              {
-                "id": "D",
-                "text": "비록"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
                 "start": 0,
-                "end": 130
+                "end": 132
               }
             ]
           },
@@ -364,13 +286,91 @@
           }
         },
         {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 32,
+                "end": 67
+              }
+            ]
+          },
+          "question": {
+            "prompt": "\"밥을 먹었다. (  ) 물을 마셨다.\" 빈칸에 알맞은 말은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그리고"
+              },
+              {
+                "id": "B",
+                "text": "그래서"
+              },
+              {
+                "id": "C",
+                "text": "그러나"
+              },
+              {
+                "id": "D",
+                "text": "그런데"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 68,
+                "end": 102
+              }
+            ]
+          },
+          "question": {
+            "prompt": "앞의 일이 뒤에 일어난 일의 이유가 될 때는 어떤 말을 쓰나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그래서"
+              },
+              {
+                "id": "B",
+                "text": "그리고"
+              },
+              {
+                "id": "C",
+                "text": "만약에"
+              },
+              {
+                "id": "D",
+                "text": "비록"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s9",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 32
+                "end": 31
               }
             ]
           },
@@ -408,7 +408,46 @@
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 34,
+                "start": 0,
+                "end": 118
+              }
+            ]
+          },
+          "question": {
+            "prompt": "세 번째 문단이 우리에게 설명하는 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'그러나'의 쓰임새와 이어주는 말의 장점"
+              },
+              {
+                "id": "B",
+                "text": "아침에 지각하지 않고 일찍 일어나는 법"
+              },
+              {
+                "id": "C",
+                "text": "달리기 시합에서 일 등을 하는 비법"
+              },
+              {
+                "id": "D",
+                "text": "친구의 이야기를 집중해서 잘 듣는 예절"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 32,
                 "end": 59
               }
             ]
@@ -442,12 +481,12 @@
           }
         },
         {
-          "stepId": "s11",
+          "stepId": "s12",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 61,
+                "start": 60,
                 "end": 118
               }
             ]
@@ -470,45 +509,6 @@
               {
                 "id": "D",
                 "text": "어려운 수학 문제를 금방 풀 수 있음"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 118
-              }
-            ]
-          },
-          "question": {
-            "prompt": "세 번째 문단이 우리에게 설명하는 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "'그러나'의 쓰임새와 이어주는 말의 장점"
-              },
-              {
-                "id": "B",
-                "text": "아침에 지각하지 않고 일찍 일어나는 법"
-              },
-              {
-                "id": "C",
-                "text": "달리기 시합에서 일 등을 하는 비법"
-              },
-              {
-                "id": "D",
-                "text": "친구의 이야기를 집중해서 잘 듣는 예절"
               }
             ],
             "answerId": "A",
@@ -568,12 +568,12 @@
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 26,
-              "end": 31
+              "start": 24,
+              "end": 30
             },
             {
               "paragraphId": "p3",
-              "start": 65,
+              "start": 64,
               "end": 70
             }
           ],

@@ -55,7 +55,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 40
+                "end": 39
               }
             ]
           },
@@ -93,8 +93,47 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 42,
-                "end": 74
+                "start": 0,
+                "end": 182
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "물속의 다른 개를 발견함"
+              },
+              {
+                "id": "B",
+                "text": "고기를 잃고 슬퍼함"
+              },
+              {
+                "id": "C",
+                "text": "냇물을 건너기 두려워함"
+              },
+              {
+                "id": "D",
+                "text": "그림자와 싸우기로 결심함"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 40,
+                "end": 73
               }
             ]
           },
@@ -127,13 +166,13 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 76,
-                "end": 111
+                "start": 74,
+                "end": 182
               }
             ]
           },
@@ -166,13 +205,13 @@
           }
         },
         {
-          "stepId": "s4",
+          "stepId": "s5",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 113,
-                "end": 186
+                "start": 110,
+                "end": 182
               }
             ]
           },
@@ -194,45 +233,6 @@
               {
                 "id": "D",
                 "text": "고기를 놓친 개"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s5",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 186
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 주요 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "물속의 다른 개를 발견함"
-              },
-              {
-                "id": "B",
-                "text": "고기를 잃고 슬퍼함"
-              },
-              {
-                "id": "C",
-                "text": "냇물을 건너기 두려워함"
-              },
-              {
-                "id": "D",
-                "text": "그림자와 싸우기로 결심함"
               }
             ],
             "answerId": "A",
@@ -288,164 +288,8 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 28,
-                "end": 106
-              }
-            ]
-          },
-          "question": {
-            "prompt": "개는 속으로 어떤 다짐을 했나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "고기를 빼앗아야겠다"
-              },
-              {
-                "id": "B",
-                "text": "고기를 나누어 주겠다"
-              },
-              {
-                "id": "C",
-                "text": "무서우니 도망쳐야겠다"
-              },
-              {
-                "id": "D",
-                "text": "물에 직접 뛰어들겠다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 108,
-                "end": 135
-              }
-            ]
-          },
-          "question": {
-            "prompt": "개는 물속의 개에게 어떻게 행동했나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "크게 으르렁 짖었다"
-              },
-              {
-                "id": "B",
-                "text": "조용히 바라보기만 했다"
-              },
-              {
-                "id": "C",
-                "text": "반갑게 꼬리를 흔들었다"
-              },
-              {
-                "id": "D",
-                "text": "자기 고기를 던져주었다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s9",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 137,
-                "end": 188
-              }
-            ]
-          },
-          "question": {
-            "prompt": "입을 벌리자 어떤 일이 일어났나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "물고 있던 고기를 빠뜨림"
-              },
-              {
-                "id": "B",
-                "text": "새로운 고기를 건져 올림"
-              },
-              {
-                "id": "C",
-                "text": "그림자가 도망가 버림"
-              },
-              {
-                "id": "D",
-                "text": "자신이 물속으로 빠짐"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s10",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 190,
-                "end": 217
-              }
-            ]
-          },
-          "question": {
-            "prompt": "물에 빠진 고기는 어떻게 되었나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "물살에 떠내려갔다"
-              },
-              {
-                "id": "B",
-                "text": "재빨리 다시 주워 물었다"
-              },
-              {
-                "id": "C",
-                "text": "다른 개가 물어갔다"
-              },
-              {
-                "id": "D",
-                "text": "바위 틈에 끼어 남았다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s11",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
                 "start": 0,
-                "end": 217
+                "end": 215
               }
             ]
           },
@@ -478,13 +322,169 @@
           }
         },
         {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 27,
+                "end": 105
+              }
+            ]
+          },
+          "question": {
+            "prompt": "개는 속으로 어떤 다짐을 했나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "고기를 빼앗아야겠다"
+              },
+              {
+                "id": "B",
+                "text": "고기를 나누어 주겠다"
+              },
+              {
+                "id": "C",
+                "text": "무서우니 도망쳐야겠다"
+              },
+              {
+                "id": "D",
+                "text": "물에 직접 뛰어들겠다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 106,
+                "end": 134
+              }
+            ]
+          },
+          "question": {
+            "prompt": "개는 물속의 개에게 어떻게 행동했나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "크게 으르렁 짖었다"
+              },
+              {
+                "id": "B",
+                "text": "조용히 바라보기만 했다"
+              },
+              {
+                "id": "C",
+                "text": "반갑게 꼬리를 흔들었다"
+              },
+              {
+                "id": "D",
+                "text": "자기 고기를 던져주었다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 135,
+                "end": 187
+              }
+            ]
+          },
+          "question": {
+            "prompt": "입을 벌리자 어떤 일이 일어났나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "물고 있던 고기를 빠뜨림"
+              },
+              {
+                "id": "B",
+                "text": "새로운 고기를 건져 올림"
+              },
+              {
+                "id": "C",
+                "text": "그림자가 도망가 버림"
+              },
+              {
+                "id": "D",
+                "text": "자신이 물속으로 빠짐"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 188,
+                "end": 215
+              }
+            ]
+          },
+          "question": {
+            "prompt": "물에 빠진 고기는 어떻게 되었나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "물살에 떠내려갔다"
+              },
+              {
+                "id": "B",
+                "text": "재빨리 다시 주워 물었다"
+              },
+              {
+                "id": "C",
+                "text": "다른 개가 물어갔다"
+              },
+              {
+                "id": "D",
+                "text": "바위 틈에 끼어 남았다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s12",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 64
+                "end": 63
               }
             ]
           },
@@ -522,8 +522,47 @@
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 66,
-                "end": 104
+                "start": 0,
+                "end": 225
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "만족하는 마음의 중요성"
+              },
+              {
+                "id": "B",
+                "text": "나의 그림자를 이기는 방법"
+              },
+              {
+                "id": "C",
+                "text": "잃어버린 고기를 찾는 법"
+              },
+              {
+                "id": "D",
+                "text": "물에 빠지지 않고 건너기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 64,
+                "end": 177
               }
             ]
           },
@@ -556,13 +595,13 @@
           }
         },
         {
-          "stepId": "s14",
+          "stepId": "s15",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 106,
-                "end": 181
+                "start": 103,
+                "end": 225
               }
             ]
           },
@@ -595,13 +634,13 @@
           }
         },
         {
-          "stepId": "s15",
+          "stepId": "s16",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 183,
-                "end": 231
+                "start": 178,
+                "end": 225
               }
             ]
           },
@@ -623,45 +662,6 @@
               {
                 "id": "D",
                 "text": "원하는 것을 끝까지 기다림"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s16",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 231
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 주요 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "만족하는 마음의 중요성"
-              },
-              {
-                "id": "B",
-                "text": "나의 그림자를 이기는 방법"
-              },
-              {
-                "id": "C",
-                "text": "잃어버린 고기를 찾는 법"
-              },
-              {
-                "id": "D",
-                "text": "물에 빠지지 않고 건너기"
               }
             ],
             "answerId": "A",
@@ -717,22 +717,22 @@
             {
               "paragraphId": "p1",
               "start": 24,
-              "end": 28
+              "end": 29
             },
             {
               "paragraphId": "p1",
-              "start": 53,
-              "end": 57
+              "start": 51,
+              "end": 56
             },
             {
               "paragraphId": "p1",
-              "start": 155,
-              "end": 159
+              "start": 152,
+              "end": 157
             },
             {
               "paragraphId": "p2",
-              "start": 161,
-              "end": 165
+              "start": 159,
+              "end": 164
             }
           ],
           "scoring": {
@@ -751,7 +751,7 @@
             {
               "paragraphId": "p3",
               "start": 50,
-              "end": 52
+              "end": 53
             }
           ],
           "scoring": {
@@ -769,8 +769,8 @@
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 143,
-              "end": 144
+              "start": 140,
+              "end": 142
             }
           ],
           "scoring": {
@@ -788,18 +788,18 @@
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 97,
-              "end": 99
+              "start": 95,
+              "end": 98
             },
             {
               "paragraphId": "p1",
-              "start": 140,
-              "end": 142
+              "start": 137,
+              "end": 140
             },
             {
               "paragraphId": "p2",
-              "start": 171,
-              "end": 173
+              "start": 169,
+              "end": 172
             }
           ],
           "scoring": {

@@ -58,7 +58,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 30
+                "end": 32
               }
             ]
           },
@@ -96,7 +96,46 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 32,
+                "start": 0,
+                "end": 118
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "남극과 북극의 위치와 모습"
+              },
+              {
+                "id": "B",
+                "text": "바다를 건너는 커다란 배"
+              },
+              {
+                "id": "C",
+                "text": "얼음을 깨는 신기한 도구"
+              },
+              {
+                "id": "D",
+                "text": "지구가 둥근 여러 가지 이유"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 33,
                 "end": 76
               }
             ]
@@ -130,13 +169,13 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 78,
-                "end": 119
+                "start": 77,
+                "end": 118
               }
             ]
           },
@@ -169,52 +208,13 @@
           }
         },
         {
-          "stepId": "s4",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 119
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 주요 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "남극과 북극의 위치와 모습"
-              },
-              {
-                "id": "B",
-                "text": "바다를 건너는 커다란 배"
-              },
-              {
-                "id": "C",
-                "text": "얼음을 깨는 신기한 도구"
-              },
-              {
-                "id": "D",
-                "text": "지구가 둥근 여러 가지 이유"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
           "stepId": "s5",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 38
+                "end": 40
               }
             ]
           },
@@ -248,84 +248,6 @@
         },
         {
           "stepId": "s6",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 40,
-                "end": 78
-              }
-            ]
-          },
-          "question": {
-            "prompt": "남극이 더 추운 이유는 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "얼음 밑에 단단한 땅이 있어서"
-              },
-              {
-                "id": "B",
-                "text": "바닷물이 계속 흘러서"
-              },
-              {
-                "id": "C",
-                "text": "태양이 전혀 뜨지 않아서"
-              },
-              {
-                "id": "D",
-                "text": "사람들이 눈을 치워서"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 80,
-                "end": 124
-              }
-            ]
-          },
-          "question": {
-            "prompt": "남극에는 주로 어떤 사람들만 머무나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "과학자들"
-              },
-              {
-                "id": "B",
-                "text": "농부들"
-              },
-              {
-                "id": "C",
-                "text": "어부들"
-              },
-              {
-                "id": "D",
-                "text": "상인들"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
           "highlight": {
             "ranges": [
               {
@@ -364,13 +286,130 @@
           }
         },
         {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 41,
+                "end": 82
+              }
+            ]
+          },
+          "question": {
+            "prompt": "남극이 더 추운 이유는 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "얼음 밑에 단단한 땅이 있어서"
+              },
+              {
+                "id": "B",
+                "text": "바닷물이 계속 흘러서"
+              },
+              {
+                "id": "C",
+                "text": "태양이 전혀 뜨지 않아서"
+              },
+              {
+                "id": "D",
+                "text": "사람들이 눈을 치워서"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 41,
+                "end": 124
+              }
+            ]
+          },
+          "question": {
+            "prompt": "남극에는 주로 어떤 사람들만 머무나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "과학자들"
+              },
+              {
+                "id": "B",
+                "text": "농부들"
+              },
+              {
+                "id": "C",
+                "text": "어부들"
+              },
+              {
+                "id": "D",
+                "text": "상인들"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s9",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 14,
-                "end": 45
+                "start": 0,
+                "end": 125
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "남극과 북극에 사는 동물들"
+              },
+              {
+                "id": "B",
+                "text": "북극곰이 사냥을 하는 방법"
+              },
+              {
+                "id": "C",
+                "text": "펭귄이 수영을 잘하는 이유"
+              },
+              {
+                "id": "D",
+                "text": "동물들이 털갈이를 하는 시기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 15,
+                "end": 47
               }
             ]
           },
@@ -403,13 +442,13 @@
           }
         },
         {
-          "stepId": "s10",
+          "stepId": "s11",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 47,
-                "end": 80
+                "start": 48,
+                "end": 83
               }
             ]
           },
@@ -442,12 +481,12 @@
           }
         },
         {
-          "stepId": "s11",
+          "stepId": "s12",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 82,
+                "start": 48,
                 "end": 125
               }
             ]
@@ -470,45 +509,6 @@
               {
                 "id": "D",
                 "text": "바다에서 같이 수영한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 125
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 주요 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "남극과 북극에 사는 동물들"
-              },
-              {
-                "id": "B",
-                "text": "북극곰이 사냥을 하는 방법"
-              },
-              {
-                "id": "C",
-                "text": "펭귄이 수영을 잘하는 이유"
-              },
-              {
-                "id": "D",
-                "text": "동물들이 털갈이를 하는 시기"
               }
             ],
             "answerId": "A",
@@ -573,23 +573,33 @@
             },
             {
               "paragraphId": "p1",
-              "start": 32,
-              "end": 34
+              "start": 33,
+              "end": 35
             },
             {
               "paragraphId": "p2",
-              "start": 17,
-              "end": 19
+              "start": 16,
+              "end": 18
             },
             {
               "paragraphId": "p2",
-              "start": 80,
-              "end": 82
+              "start": 83,
+              "end": 85
             },
             {
               "paragraphId": "p3",
-              "start": 14,
-              "end": 16
+              "start": 15,
+              "end": 17
+            },
+            {
+              "paragraphId": "p3",
+              "start": 29,
+              "end": 31
+            },
+            {
+              "paragraphId": "p3",
+              "start": 84,
+              "end": 86
             }
           ],
           "scoring": {
@@ -612,28 +622,28 @@
             },
             {
               "paragraphId": "p1",
-              "start": 82,
-              "end": 84
+              "start": 81,
+              "end": 83
             },
             {
               "paragraphId": "p2",
-              "start": 13,
-              "end": 15
+              "start": 12,
+              "end": 14
             },
             {
               "paragraphId": "p2",
-              "start": 40,
-              "end": 42
+              "start": 41,
+              "end": 43
             },
             {
               "paragraphId": "p2",
-              "start": 103,
-              "end": 105
+              "start": 107,
+              "end": 109
             },
             {
               "paragraphId": "p3",
-              "start": 47,
-              "end": 49
+              "start": 51,
+              "end": 53
             }
           ],
           "scoring": {
@@ -651,13 +661,13 @@
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 28,
-              "end": 31
+              "start": 29,
+              "end": 32
             },
             {
               "paragraphId": "p3",
-              "start": 83,
-              "end": 86
+              "start": 84,
+              "end": 87
             }
           ],
           "scoring": {
@@ -675,13 +685,13 @@
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 67,
-              "end": 69
+              "start": 68,
+              "end": 70
             },
             {
               "paragraphId": "p3",
-              "start": 88,
-              "end": 90
+              "start": 89,
+              "end": 91
             }
           ],
           "scoring": {

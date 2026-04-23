@@ -105,45 +105,6 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 31,
-                "end": 88
-              }
-            ]
-          },
-          "question": {
-            "prompt": "축제를 소개하며 바라는 마음은 어떤가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "많은 학생이 꼭 와 줬으면 하는 마음이다."
-              },
-              {
-                "id": "B",
-                "text": "아무도 오지 않았으면 하는 마음이다."
-              },
-              {
-                "id": "C",
-                "text": "축제를 숨기고 싶은 마음이다."
-              },
-              {
-                "id": "D",
-                "text": "행사를 없애고 싶은 마음이다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s3",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
                 "start": 0,
                 "end": 88
               }
@@ -167,6 +128,45 @@
               {
                 "id": "D",
                 "text": "동아리 판매 부스를 비판하고 있다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 32,
+                "end": 88
+              }
+            ]
+          },
+          "question": {
+            "prompt": "축제를 소개하며 바라는 마음은 어떤가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "많은 학생이 꼭 와 줬으면 하는 마음이다."
+              },
+              {
+                "id": "B",
+                "text": "아무도 오지 않았으면 하는 마음이다."
+              },
+              {
+                "id": "C",
+                "text": "축제를 숨기고 싶은 마음이다."
+              },
+              {
+                "id": "D",
+                "text": "행사를 없애고 싶은 마음이다."
               }
             ],
             "answerId": "A",
@@ -805,12 +805,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "?? ??? ???? ??? ???? ?? ??? ??? ???? ?? ??????",
+          "prompt": "체험은 무슨 뜻인가요?",
+          "answerText": "오후에는 체육관 공연이 있고 운동장에는 체험 부스가 열리며 동아리 판매 부스도 같이 운영되기 때문에 볼거리와 먹을거리가 다양할 예정입니다.",
           "answerRanges": [
             {
-              "paragraphId": "p1",
+              "paragraphId": "p2",
               "start": 0,
-              "end": 88
+              "end": 77
             }
           ],
           "scoring": {
@@ -822,7 +823,8 @@
         },
         {
           "id": "q2",
-          "prompt": "?? ??? ??? ???? ????? ?? ???? ??????",
+          "prompt": "'운영되기'는 무슨 뜻인가요?",
+          "answerText": "오후에는 체육관 공연이 있고 운동장에는 체험 부스가 열리며 동아리 판매 부스도 같이 운영되기 때문에 볼거리와 먹을거리가 다양할 예정입니다.",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -839,7 +841,8 @@
         },
         {
           "id": "q3",
-          "prompt": "?? ??? ??? ??? ?? ??? ?? ?? ??? ??? ?????",
+          "prompt": "기대는 무슨 뜻인가요?",
+          "answerText": "특히 댄스부 공연은 분위기가 뜨거울 것 같고 작년에도 반응이 좋았으니 이번에도 많은 학생이 기대해도 될 것 같습니다.",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -856,24 +859,8 @@
         },
         {
           "id": "q4",
-          "prompt": "?? ??? ??? ???? ?? ???? ??? ????? ????",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 72
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q5",
-          "prompt": "??? ??? ??? ???? ?? ?? ???? ??? ?????",
+          "prompt": "추억은 무슨 뜻인가요?",
+          "answerText": "만약 시간이 된다면 친구들과 사진도 많이 찍고 부스도 돌아보면 좋겠고 학교생활의 추억이 꽤 많이 남을 수 있을 것입니다.",
           "answerRanges": [
             {
               "paragraphId": "p5",
@@ -889,8 +876,9 @@
           "answerMatchMode": "ANY"
         },
         {
-          "id": "q6",
-          "prompt": "??? ??? ???? ? ??? ??? ?? ??? ??? ?? ???????",
+          "id": "q5",
+          "prompt": "알차게는 무슨 뜻인가요?",
+          "answerText": "아무튼 이번 축제가 알차게 준비되고 있으니 많은 관심 부탁드리며 저도 기대가 커서 이렇게 초고를 먼저 적어 보았습니다.",
           "answerRanges": [
             {
               "paragraphId": "p6",

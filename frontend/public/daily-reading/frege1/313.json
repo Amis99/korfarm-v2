@@ -99,6 +99,47 @@
         {
           "stepId": "s2",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 161
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "질문을 정리하면 글을 더 깊이 읽게 된다"
+              },
+              {
+                "id": "B",
+                "text": "질문은 읽기보다 빨리 넘길 때 생긴다"
+              },
+              {
+                "id": "C",
+                "text": "질문은 글을 읽은 뒤 없어져야 좋다"
+              },
+              {
+                "id": "D",
+                "text": "질문은 제목 하나면 충분하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -138,7 +179,7 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -179,7 +220,7 @@
           }
         },
         {
-          "stepId": "s4",
+          "stepId": "s5",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -209,47 +250,6 @@
               {
                 "id": "D",
                 "text": "질문 정리는 답을 피하는 방법이다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s5",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 161
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "질문을 정리하면 글을 더 깊이 읽게 된다"
-              },
-              {
-                "id": "B",
-                "text": "질문은 읽기보다 빨리 넘길 때 생긴다"
-              },
-              {
-                "id": "C",
-                "text": "질문은 글을 읽은 뒤 없어져야 좋다"
-              },
-              {
-                "id": "D",
-                "text": "질문은 제목 하나면 충분하다"
               }
             ],
             "answerId": "A",
@@ -304,6 +304,47 @@
         {
           "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 140
+              }
+            ]
+          },
+          "question": {
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "질문은 사실적, 추론적, 비판적으로 나뉜다"
+              },
+              {
+                "id": "B",
+                "text": "질문은 사실만 물으면 충분하다"
+              },
+              {
+                "id": "C",
+                "text": "질문은 모두 느낌만 묻는다"
+              },
+              {
+                "id": "D",
+                "text": "질문은 종류를 나누면 안 된다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -343,7 +384,7 @@
           }
         },
         {
-          "stepId": "s8",
+          "stepId": "s9",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -384,7 +425,7 @@
           }
         },
         {
-          "stepId": "s9",
+          "stepId": "s10",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -414,47 +455,6 @@
               {
                 "id": "D",
                 "text": "비판적 질문은 순서를 외우는 일이다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s10",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 140
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "질문은 사실적, 추론적, 비판적으로 나뉜다"
-              },
-              {
-                "id": "B",
-                "text": "질문은 사실만 물으면 충분하다"
-              },
-              {
-                "id": "C",
-                "text": "질문은 모두 느낌만 묻는다"
-              },
-              {
-                "id": "D",
-                "text": "질문은 종류를 나누면 안 된다"
               }
             ],
             "answerId": "A",
@@ -509,6 +509,47 @@
         {
           "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 162
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "질문을 순서대로 나누면 이해가 깊어진다"
+              },
+              {
+                "id": "B",
+                "text": "질문은 친구와 나누지 않는 편이 낫다"
+              },
+              {
+                "id": "C",
+                "text": "질문은 어려운 말은 빼고 만들어야 한다"
+              },
+              {
+                "id": "D",
+                "text": "질문은 글의 흐름과 상관없이 적어야 한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -548,7 +589,7 @@
           }
         },
         {
-          "stepId": "s13",
+          "stepId": "s14",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -589,7 +630,7 @@
           }
         },
         {
-          "stepId": "s14",
+          "stepId": "s15",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -619,47 +660,6 @@
               {
                 "id": "D",
                 "text": "다른 시각의 질문은 제목만 바꾼다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s15",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 162
-              }
-            ]
-          },
-          "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "질문을 순서대로 나누면 이해가 깊어진다"
-              },
-              {
-                "id": "B",
-                "text": "질문은 친구와 나누지 않는 편이 낫다"
-              },
-              {
-                "id": "C",
-                "text": "질문은 어려운 말은 빼고 만들어야 한다"
-              },
-              {
-                "id": "D",
-                "text": "질문은 글의 흐름과 상관없이 적어야 한다"
               }
             ],
             "answerId": "A",
@@ -714,6 +714,47 @@
         {
           "stepId": "s17",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 156
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "질문하고 답을 찾는 습관이 독자를 키운다"
+              },
+              {
+                "id": "B",
+                "text": "질문은 읽기를 끝낸 뒤 버려야 좋다"
+              },
+              {
+                "id": "C",
+                "text": "질문은 글쓴이 생각과 상관없어야 한다"
+              },
+              {
+                "id": "D",
+                "text": "질문은 답을 찾지 않을 때 더 좋다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -753,7 +794,7 @@
           }
         },
         {
-          "stepId": "s18",
+          "stepId": "s19",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -794,7 +835,7 @@
           }
         },
         {
-          "stepId": "s19",
+          "stepId": "s20",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -824,47 +865,6 @@
               {
                 "id": "D",
                 "text": "질문하는 습관은 제목만 보게 만든다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s20",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 156
-              }
-            ]
-          },
-          "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "질문하고 답을 찾는 습관이 독자를 키운다"
-              },
-              {
-                "id": "B",
-                "text": "질문은 읽기를 끝낸 뒤 버려야 좋다"
-              },
-              {
-                "id": "C",
-                "text": "질문은 글쓴이 생각과 상관없어야 한다"
-              },
-              {
-                "id": "D",
-                "text": "질문은 답을 찾지 않을 때 더 좋다"
               }
             ],
             "answerId": "A",

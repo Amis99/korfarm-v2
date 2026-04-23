@@ -101,13 +101,54 @@
         {
           "stepId": "s2",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 130
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인플레이션은 물가 상승으로 돈값을 낮춘다."
+              },
+              {
+                "id": "B",
+                "text": "인플레이션은 물가 하락으로 돈값을 높인다."
+              },
+              {
+                "id": "C",
+                "text": "인플레이션은 생활비와 상관없는 현상이다."
+              },
+              {
+                "id": "D",
+                "text": "인플레이션은 상품 수량만 늘리는 현상이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
                 "start": 44,
-                "end": 66
+                "end": 91
               }
             ]
           },
@@ -140,14 +181,14 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 67,
+                "start": 44,
                 "end": 91
               }
             ]
@@ -181,7 +222,7 @@
           }
         },
         {
-          "stepId": "s4",
+          "stepId": "s5",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -211,47 +252,6 @@
               {
                 "id": "D",
                 "text": "물가 상승은 구매력과 무관한 변화이다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s5",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 130
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "인플레이션은 물가 상승으로 돈값을 낮춘다."
-              },
-              {
-                "id": "B",
-                "text": "인플레이션은 물가 하락으로 돈값을 높인다."
-              },
-              {
-                "id": "C",
-                "text": "인플레이션은 생활비와 상관없는 현상이다."
-              },
-              {
-                "id": "D",
-                "text": "인플레이션은 상품 수량만 늘리는 현상이다."
               }
             ],
             "answerId": "A",
@@ -306,170 +306,6 @@
         {
           "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 30,
-                "end": 55
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "원자재값과 임금이 오르면 비용 인상이 생긴다."
-              },
-              {
-                "id": "B",
-                "text": "원자재값이 내려가면 비용 인플레가 생긴다."
-              },
-              {
-                "id": "C",
-                "text": "임금이 그대로면 비용 인플레가 커진다."
-              },
-              {
-                "id": "D",
-                "text": "생산비와 물가는 서로 영향을 주지 않는다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 56,
-                "end": 81
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "물가 상승 원인은 수요와 비용 두 갈래가 있다."
-              },
-              {
-                "id": "B",
-                "text": "물가 상승 원인은 금리 상승 하나뿐이다."
-              },
-              {
-                "id": "C",
-                "text": "물가 상승 원인은 소비 절약만으로 설명된다."
-              },
-              {
-                "id": "D",
-                "text": "물가 상승은 공급 증가일 때만 생긴다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s9",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 82,
-                "end": 109
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "사람들이 더 많이 사려 하면 수요 견인이 생긴다."
-              },
-              {
-                "id": "B",
-                "text": "사람들이 덜 살수록 수요 견인이 심해진다."
-              },
-              {
-                "id": "C",
-                "text": "수요 견인은 공급이 남을 때만 생긴다."
-              },
-              {
-                "id": "D",
-                "text": "수요 견인은 비용 인상과 같은 뜻이다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s10",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 110,
-                "end": 141
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "비용 인상 인플레는 생산 비용이 오를 때 생긴다."
-              },
-              {
-                "id": "B",
-                "text": "비용 인상 인플레는 상품값이 내릴 때 생긴다."
-              },
-              {
-                "id": "C",
-                "text": "비용 인상 인플레는 수요가 줄 때만 생긴다."
-              },
-              {
-                "id": "D",
-                "text": "비용 인상 인플레는 임금과 무관하게 생긴다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s11",
-          "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
             "ranges": [
@@ -509,6 +345,170 @@
           }
         },
         {
+          "stepId": "s8",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 30,
+                "end": 81
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "원자재값과 임금이 오르면 비용 인상이 생긴다."
+              },
+              {
+                "id": "B",
+                "text": "원자재값이 내려가면 비용 인플레가 생긴다."
+              },
+              {
+                "id": "C",
+                "text": "임금이 그대로면 비용 인플레가 커진다."
+              },
+              {
+                "id": "D",
+                "text": "생산비와 물가는 서로 영향을 주지 않는다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 30,
+                "end": 81
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "물가 상승 원인은 수요와 비용 두 갈래가 있다."
+              },
+              {
+                "id": "B",
+                "text": "물가 상승 원인은 금리 상승 하나뿐이다."
+              },
+              {
+                "id": "C",
+                "text": "물가 상승 원인은 소비 절약만으로 설명된다."
+              },
+              {
+                "id": "D",
+                "text": "물가 상승은 공급 증가일 때만 생긴다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 82,
+                "end": 141
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사람들이 더 많이 사려 하면 수요 견인이 생긴다."
+              },
+              {
+                "id": "B",
+                "text": "사람들이 덜 살수록 수요 견인이 심해진다."
+              },
+              {
+                "id": "C",
+                "text": "수요 견인은 공급이 남을 때만 생긴다."
+              },
+              {
+                "id": "D",
+                "text": "수요 견인은 비용 인상과 같은 뜻이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 82,
+                "end": 141
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비용 인상 인플레는 생산 비용이 오를 때 생긴다."
+              },
+              {
+                "id": "B",
+                "text": "비용 인상 인플레는 상품값이 내릴 때 생긴다."
+              },
+              {
+                "id": "C",
+                "text": "비용 인상 인플레는 수요가 줄 때만 생긴다."
+              },
+              {
+                "id": "D",
+                "text": "비용 인상 인플레는 임금과 무관하게 생긴다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
           "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
@@ -517,7 +517,7 @@
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 23
+                "end": 48
               }
             ]
           },
@@ -557,7 +557,7 @@
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 24,
+                "start": 0,
                 "end": 48
               }
             ]
@@ -592,170 +592,6 @@
         },
         {
           "stepId": "s14",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 49,
-                "end": 77
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "고정 월급 생활자는 실질 소득이 줄 수 있다."
-              },
-              {
-                "id": "B",
-                "text": "고정 월급 생활자는 물가 상승 때 늘 유리하다."
-              },
-              {
-                "id": "C",
-                "text": "물가가 오르면 빈부 격차는 자동으로 줄어든다."
-              },
-              {
-                "id": "D",
-                "text": "인플레이션은 소득 차이에 영향을 주지 않는다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s15",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 78,
-                "end": 104
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "인플레이션은 수준에 따라 득과 실이 함께 있다."
-              },
-              {
-                "id": "B",
-                "text": "인플레이션은 언제나 좋은 효과만 낸다."
-              },
-              {
-                "id": "C",
-                "text": "인플레이션은 언제나 나쁜 효과만 낸다."
-              },
-              {
-                "id": "D",
-                "text": "인플레이션은 경제 움직임과 별개이다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s16",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 105,
-                "end": 131
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "지나친 인플레이션은 생활비 부담을 키운다."
-              },
-              {
-                "id": "B",
-                "text": "지나친 인플레이션은 생활비를 가볍게 만든다."
-              },
-              {
-                "id": "C",
-                "text": "지나친 인플레이션은 저축을 더 쉽게 만든다."
-              },
-              {
-                "id": "D",
-                "text": "지나친 인플레이션은 월급 가치를 높여 준다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s17",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 132,
-                "end": 157
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "물가 상승 속도가 너무 빠르지 않게 조절돼야 한다."
-              },
-              {
-                "id": "B",
-                "text": "물가 상승 속도는 빠를수록 무조건 좋다."
-              },
-              {
-                "id": "C",
-                "text": "물가 상승 속도는 아예 볼 필요가 없다."
-              },
-              {
-                "id": "D",
-                "text": "물가 상승 속도는 소비자만 결정할 수 있다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s18",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -796,6 +632,170 @@
           }
         },
         {
+          "stepId": "s15",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 49,
+                "end": 104
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "고정 월급 생활자는 실질 소득이 줄 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "고정 월급 생활자는 물가 상승 때 늘 유리하다."
+              },
+              {
+                "id": "C",
+                "text": "물가가 오르면 빈부 격차는 자동으로 줄어든다."
+              },
+              {
+                "id": "D",
+                "text": "인플레이션은 소득 차이에 영향을 주지 않는다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 49,
+                "end": 104
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인플레이션은 수준에 따라 득과 실이 함께 있다."
+              },
+              {
+                "id": "B",
+                "text": "인플레이션은 언제나 좋은 효과만 낸다."
+              },
+              {
+                "id": "C",
+                "text": "인플레이션은 언제나 나쁜 효과만 낸다."
+              },
+              {
+                "id": "D",
+                "text": "인플레이션은 경제 움직임과 별개이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 105,
+                "end": 157
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지나친 인플레이션은 생활비 부담을 키운다."
+              },
+              {
+                "id": "B",
+                "text": "지나친 인플레이션은 생활비를 가볍게 만든다."
+              },
+              {
+                "id": "C",
+                "text": "지나친 인플레이션은 저축을 더 쉽게 만든다."
+              },
+              {
+                "id": "D",
+                "text": "지나친 인플레이션은 월급 가치를 높여 준다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 105,
+                "end": 157
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "물가 상승 속도가 너무 빠르지 않게 조절돼야 한다."
+              },
+              {
+                "id": "B",
+                "text": "물가 상승 속도는 빠를수록 무조건 좋다."
+              },
+              {
+                "id": "C",
+                "text": "물가 상승 속도는 아예 볼 필요가 없다."
+              },
+              {
+                "id": "D",
+                "text": "물가 상승 속도는 소비자만 결정할 수 있다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
           "stepId": "s19",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
@@ -804,7 +804,7 @@
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 20
+                "end": 39
               }
             ]
           },
@@ -844,7 +844,7 @@
             "ranges": [
               {
                 "paragraphId": "p4",
-                "start": 21,
+                "start": 0,
                 "end": 39
               }
             ]
@@ -880,13 +880,54 @@
         {
           "stepId": "s21",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 146
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "정부와 중앙은행은 정책으로 적정 물가를 지키려 한다."
+              },
+              {
+                "id": "B",
+                "text": "정부와 중앙은행은 물가 상승을 키우는 데 집중한다."
+              },
+              {
+                "id": "C",
+                "text": "정부와 중앙은행은 물가보다 수업 진도만 조절한다."
+              },
+              {
+                "id": "D",
+                "text": "정부와 중앙은행은 소비자 선택만 기다리기로 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s22",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
                 "start": 40,
-                "end": 70
+                "end": 98
               }
             ]
           },
@@ -919,14 +960,14 @@
           }
         },
         {
-          "stepId": "s22",
+          "stepId": "s23",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
-                "start": 71,
+                "start": 40,
                 "end": 98
               }
             ]
@@ -960,7 +1001,7 @@
           }
         },
         {
-          "stepId": "s23",
+          "stepId": "s24",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -968,7 +1009,7 @@
               {
                 "paragraphId": "p4",
                 "start": 99,
-                "end": 122
+                "end": 146
               }
             ]
           },
@@ -1001,14 +1042,14 @@
           }
         },
         {
-          "stepId": "s24",
+          "stepId": "s25",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
-                "start": 123,
+                "start": 99,
                 "end": 146
               }
             ]
@@ -1031,47 +1072,6 @@
               {
                 "id": "D",
                 "text": "목표는 저축을 완전히 막는 것이다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s25",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 146
-              }
-            ]
-          },
-          "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "정부와 중앙은행은 정책으로 적정 물가를 지키려 한다."
-              },
-              {
-                "id": "B",
-                "text": "정부와 중앙은행은 물가 상승을 키우는 데 집중한다."
-              },
-              {
-                "id": "C",
-                "text": "정부와 중앙은행은 물가보다 수업 진도만 조절한다."
-              },
-              {
-                "id": "D",
-                "text": "정부와 중앙은행은 소비자 선택만 기다리기로 한다."
               }
             ],
             "answerId": "A",

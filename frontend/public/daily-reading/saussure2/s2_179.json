@@ -57,8 +57,8 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 40,
-                "end": 67
+                "start": 0,
+                "end": 69
               }
             ]
           },
@@ -96,8 +96,47 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 69,
-                "end": 130
+                "start": 0,
+                "end": 161
+              }
+            ]
+          },
+          "question": {
+            "prompt": "첫 번째 문단은 무엇에 대해 설명하고 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자연이 펼쳐져 있고 농사를 짓는 농촌의 모습"
+              },
+              {
+                "id": "B",
+                "text": "지하철을 타고 출근하는 바쁜 사람들의 아침"
+              },
+              {
+                "id": "C",
+                "text": "물건을 사고파는 커다란 상점의 풍경"
+              },
+              {
+                "id": "D",
+                "text": "아픈 곳을 치료해 주는 큰 병원의 역할"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 70,
+                "end": 132
               }
             ]
           },
@@ -130,13 +169,13 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 132,
-                "end": 159
+                "start": 133,
+                "end": 161
               }
             ]
           },
@@ -158,45 +197,6 @@
               {
                 "id": "D",
                 "text": "모두 텐트를 치고 생활함"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s4",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 159
-              }
-            ]
-          },
-          "question": {
-            "prompt": "첫 번째 문단은 무엇에 대해 설명하고 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "자연이 펼쳐져 있고 농사를 짓는 농촌의 모습"
-              },
-              {
-                "id": "B",
-                "text": "지하철을 타고 출근하는 바쁜 사람들의 아침"
-              },
-              {
-                "id": "C",
-                "text": "물건을 사고파는 커다란 상점의 풍경"
-              },
-              {
-                "id": "D",
-                "text": "아픈 곳을 치료해 주는 큰 병원의 역할"
               }
             ],
             "answerId": "A",
@@ -252,7 +252,46 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 35,
+                "start": 0,
+                "end": 164
+              }
+            ]
+          },
+          "question": {
+            "prompt": "두 번째 문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사람이 많고 교통이 편리한 복잡한 도시의 모습"
+              },
+              {
+                "id": "B",
+                "text": "돼지와 소를 키우며 살아가는 따뜻한 농촌 이야기"
+              },
+              {
+                "id": "C",
+                "text": "상점에서 싼 가격에 좋은 물건을 사는 방법"
+              },
+              {
+                "id": "D",
+                "text": "지하철역에서 잃어버린 가방을 찾는 순서"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 34,
                 "end": 72
               }
             ]
@@ -286,13 +325,13 @@
           }
         },
         {
-          "stepId": "s7",
+          "stepId": "s8",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 74,
-                "end": 134
+                "start": 73,
+                "end": 133
               }
             ]
           },
@@ -325,34 +364,34 @@
           }
         },
         {
-          "stepId": "s8",
+          "stepId": "s9",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p2",
+                "paragraphId": "p3",
                 "start": 0,
-                "end": 165
+                "end": 173
               }
             ]
           },
           "question": {
-            "prompt": "두 번째 문단의 중심 내용은 무엇인가요?",
+            "prompt": "세 번째 문단이 우리에게 알려 주는 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "사람이 많고 교통이 편리한 복잡한 도시의 모습"
+                "text": "서로에게 꼭 필요하고 도움을 주고받는 농촌과 도시"
               },
               {
                 "id": "B",
-                "text": "돼지와 소를 키우며 살아가는 따뜻한 농촌 이야기"
+                "text": "도시로 이사하기 위해 꼭 챙겨야 할 물건들"
               },
               {
                 "id": "C",
-                "text": "상점에서 싼 가격에 좋은 물건을 사는 방법"
+                "text": "농촌에서만 자라는 아주 특별한 꽃 이름"
               },
               {
                 "id": "D",
-                "text": "지하철역에서 잃어버린 가방을 찾는 순서"
+                "text": "농사를 지을 때 가장 조심해야 할 날씨"
               }
             ],
             "answerId": "A",
@@ -364,13 +403,13 @@
           }
         },
         {
-          "stepId": "s9",
+          "stepId": "s10",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 43,
-                "end": 89
+                "start": 41,
+                "end": 88
               }
             ]
           },
@@ -403,13 +442,13 @@
           }
         },
         {
-          "stepId": "s10",
+          "stepId": "s11",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 91,
-                "end": 136
+                "start": 89,
+                "end": 135
               }
             ]
           },
@@ -442,13 +481,13 @@
           }
         },
         {
-          "stepId": "s11",
+          "stepId": "s12",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 138,
-                "end": 175
+                "start": 136,
+                "end": 173
               }
             ]
           },
@@ -470,45 +509,6 @@
               {
                 "id": "D",
                 "text": "도움 없이 스스로 모든 것을 만들며 살아감"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 175
-              }
-            ]
-          },
-          "question": {
-            "prompt": "세 번째 문단이 우리에게 알려 주는 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "서로에게 꼭 필요하고 도움을 주고받는 농촌과 도시"
-              },
-              {
-                "id": "B",
-                "text": "도시로 이사하기 위해 꼭 챙겨야 할 물건들"
-              },
-              {
-                "id": "C",
-                "text": "농촌에서만 자라는 아주 특별한 꽃 이름"
-              },
-              {
-                "id": "D",
-                "text": "농사를 지을 때 가장 조심해야 할 날씨"
               }
             ],
             "answerId": "A",
@@ -568,8 +568,8 @@
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 98,
-              "end": 100
+              "start": 99,
+              "end": 101
             }
           ],
           "scoring": {
@@ -586,8 +586,8 @@
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 75,
-              "end": 78
+              "start": 74,
+              "end": 77
             }
           ],
           "scoring": {

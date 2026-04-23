@@ -1,0 +1,264 @@
+{
+  "report_name": "작업_점검_보고서",
+  "schema_version": "1.0",
+  "project_root": "C:\\Users\\RENEWCOM PC\\Documents\\국어농장v2홈페이지",
+  "entries": [
+    {
+      "entry_id": "2026-04-23-001",
+      "timestamp": "2026-04-23T22:44:44+09:00",
+      "task_summary": "AWS 일일 독해 DB와 로컬 정적 JSON의 깨진 문자열 복구",
+      "project_root": "C:\\Users\\RENEWCOM PC\\Documents\\국어농장v2홈페이지",
+      "related_projects": [
+        "C:\\Users\\RENEWCOM PC\\Documents\\국어농장v2홈페이지-daily-reading"
+      ],
+      "work_type": [
+        "일일독해 JSON 복구",
+        "AWS RDS 콘텐츠 갱신",
+        "데이터 검증"
+      ],
+      "files_created": [
+        "scripts/repair-daily-reading-corruption.mjs",
+        "scripts/update-daily-reading-corruption-repair.mjs",
+        "tmp/daily-reading-db-backup-2026-04-23T13-43-01-863Z.json",
+        "tmp/daily-reading-db-update-report-2026-04-23T13-43-01-863Z.json",
+        "tmp/daily-reading-corruption-repair-report.json"
+      ],
+      "files_updated": [
+        "frontend/public/daily-reading/**/*.json 중 깨진 일일독해 793개",
+        "AWS RDS contents/content_versions 일일독해 793건",
+        "작업_점검_보고서.json"
+      ],
+      "files_checked": [
+        "C:\\Users\\RENEWCOM PC\\Documents\\국어농장v2홈페이지-daily-reading\\gemini_gems_instruction.md",
+        "C:\\Users\\RENEWCOM PC\\Documents\\국어농장v2홈페이지-daily-reading\\gemini_gems_system_instruction.md",
+        "C:\\Users\\RENEWCOM PC\\Documents\\국어농장v2홈페이지-daily-reading\\프로모드 독해 학습 생성 원칙.md",
+        "frontend/public/daily-reading/**/*.json",
+        "AWS RDS DAILY_READING rows"
+      ],
+      "verification": {
+        "checks_performed": [
+          "수정된 793개 JSON 파싱 성공",
+          "수정된 793개 JSON에서 ?? 및 U+FFFD 깨짐 0건 확인",
+          "수정된 793개 JSON의 intensive 선택지 4개 구성 및 answerId 유효성 확인",
+          "수정된 793개 JSON의 intensive/confirm 범위가 문단 길이 안에 있는지 확인",
+          "로컬 일일독해 4,381개 JSON에서 ?? 및 U+FFFD 깨짐 0건 확인",
+          "AWS RDS DAILY_READING 4,380행에서 ?? 및 U+FFFD 깨짐 0건 확인",
+          "AWS RDS 수정 대상 793건 백업 후 트랜잭션 갱신"
+        ],
+        "result_summary": "요청된 깨진 일일독해 필드는 로컬과 AWS DB 모두 정상 학습 가능한 JSON으로 복구되었고, DB 전체 DAILY_READING 깨짐은 0건이다.",
+        "manual_review": true,
+        "json_validation": true
+      },
+      "status": "pass",
+      "remaining_risks": [
+        "전체 일일독해 중 이번 깨짐 복구 대상이 아닌 기존 confirm range/choice 무결성 이슈가 일부 감지되었으나, 사용자 요청 범위가 깨진 문자열 복구로 한정되어 별도 수정하지 않았다."
+      ],
+      "next_actions": [
+        "필요 시 비대상 기존 범위/선택지 무결성 이슈를 별도 정비한다."
+      ]
+    },
+    {
+      "entry_id": "2026-04-23-002",
+      "timestamp": "2026-04-23T23:00:36.177+09:00",
+      "task_summary": "Audited AWS DAILY_READING DB for intensive sentence coverage, intensive highlight range alignment, and confirm answer range correctness.",
+      "project_root": "C:\\Users\\RENEWCOM PC\\Documents\\국어농장v2홈페이지",
+      "related_projects": [],
+      "work_type": [
+        "DAILY_READING DB audit",
+        "intensive sentence coverage audit",
+        "intensive and confirm range audit"
+      ],
+      "files_created": [
+        "scripts/audit-daily-reading-ranges.mjs",
+        "tmp/daily-reading-range-audit-db-2026-04-23T13-58-45-412Z.json",
+        "tmp/daily-reading-range-audit-db-2026-04-23T13-58-45-412Z-summary-by-level.csv",
+        "tmp/daily-reading-range-audit-db-2026-04-23T13-58-45-412Z-issue-contents.csv",
+        "tmp/daily-reading-range-audit-db-2026-04-23T13-58-45-412Z-intensive-missing-sentences.csv",
+        "tmp/daily-reading-range-audit-db-2026-04-23T13-58-45-412Z-intensive-bad-highlight-ranges.csv",
+        "tmp/daily-reading-range-audit-db-2026-04-23T13-58-45-412Z-confirm-range-issues.csv"
+      ],
+      "files_updated": [
+        "작업_점검_보고서.json"
+      ],
+      "files_checked": [
+        "AWS RDS contents/content_versions DAILY_READING 4,380 rows",
+        "frontend/src/engine/modules/ReadingTrainingModule.jsx",
+        "frontend/src/components/editor/form/ReadingForm.jsx",
+        "frontend/src/components/editor/preview/ReadingPreview.jsx"
+      ],
+      "verification": {
+        "checks_performed": [
+          "node --check scripts/audit-daily-reading-ranges.mjs passed",
+          "Read-only audit completed for all 4,380 AWS RDS DAILY_READING rows",
+          "Detected intensive missing sentence coverage: 553 contents / 2,194 sentences",
+          "Detected intensive highlight range alignment issues: 1,512 contents / 20,148 ranges",
+          "Detected confirm answer range issues or review targets: 1,594 contents / 23,654 CSV rows",
+          "Structural issue and remaining broken-text counts: 0",
+          "No DB writes were performed"
+        ],
+        "result_summary": "2,075 of 4,380 DAILY_READING contents have at least one requested issue type or confirm-range review target. Detailed JSON/CSV reports were written under tmp/daily-reading-range-audit-db-2026-04-23T13-58-45-412Z*.",
+        "manual_review": true,
+        "json_validation": true
+      },
+      "status": "pass",
+      "remaining_risks": [
+        "16 contents / 23 confirm questions do not expose enough answer text metadata to mechanically prove the intended answer phrase; they were listed as unverifiable review targets.",
+        "This turn only audited and reported issues. It did not modify DB learning content."
+      ],
+      "next_actions": [
+        "Use the generated issue lists to repair intensive highlight.ranges and confirm answerRanges against exact passage positions."
+      ]
+    },
+    {
+      "entry_id": "2026-04-23-003",
+      "timestamp": "2026-04-23T23:28:56.792+09:00",
+      "task_summary": "Repaired all AWS DAILY_READING intensive highlight and confirm answer ranges, regenerated local JSON, and uploaded verified content to DB.",
+      "project_root": "C:\\Users\\RENEWCOM PC\\Documents\\국어농장v2홈페이지",
+      "related_projects": [],
+      "work_type": [
+        "DAILY_READING range repair",
+        "local JSON regeneration",
+        "AWS RDS content_versions update",
+        "post-update audit"
+      ],
+      "files_created": [
+        "scripts/repair-daily-reading-ranges-and-upload.mjs",
+        "tmp/daily-reading-range-repair-db-backup-2026-04-23T14-20-55-289Z.json",
+        "tmp/daily-reading-range-repair-report-2026-04-23T14-20-55-289Z.json",
+        "tmp/daily-reading-range-audit-local-2026-04-23T14-20-45-528Z.json",
+        "tmp/daily-reading-range-audit-db-2026-04-23T14-28-31-199Z.json"
+      ],
+      "files_updated": [
+        "frontend/public/daily-reading/**/*.json regenerated from repaired DB source",
+        "frontend/public/daily-reading/russell1/366.json removed as stale local-only extra day",
+        "AWS RDS contents/content_versions DAILY_READING changed rows: 4,305",
+        "작업_점검_보고서.json"
+      ],
+      "files_checked": [
+        "AWS RDS contents/content_versions DAILY_READING 4,380 rows",
+        "frontend/public/daily-reading 4,380 JSON files",
+        "scripts/audit-daily-reading-ranges.mjs",
+        "scripts/repair-daily-reading-ranges-and-upload.mjs"
+      ],
+      "verification": {
+        "checks_performed": [
+          "node --check scripts/repair-daily-reading-ranges-and-upload.mjs passed",
+          "Dry-run repair validation passed for 4,380 DB rows with 0 validation errors",
+          "Local audit passed: totalContents=4,380, issueContents=0",
+          "AWS DB update completed after backup and transaction",
+          "DB audit passed: totalContents=4,380, issueContents=0",
+          "Final intensive missing sentences=0, bad highlight ranges=0",
+          "Final confirm bad ranges=0, missing occurrences=0, mismatched ranges=0, unverifiable questions=0",
+          "Final structural/broken text issues=0"
+        ],
+        "result_summary": "All requested DAILY_READING range and coverage defects are repaired in local JSON and AWS DB. Final DB audit has zero issues for intensive coverage, intensive highlight ranges, confirm answer ranges, and structural broken text checks.",
+        "manual_review": true,
+        "json_validation": true
+      },
+      "status": "pass",
+      "remaining_risks": [
+        "The repair follows the existing audit engine sentence-boundary behavior, including its special handling of quoted and multiline literary passages.",
+        "Some newly added intensive questions use a conservative sentence-identification multiple-choice template for previously uncovered sentences."
+      ],
+      "next_actions": [
+        "Run an application smoke test if the frontend should be visually checked after the data-only repair."
+      ]
+    },
+    {
+      "entry_id": "2026-04-23-004",
+      "timestamp": "2026-04-23T23:51:40.420+09:00",
+      "task_summary": "Re-verified all DAILY_READING intensive and confirm ranges using 12 level-split agents plus DB/local cross-checks.",
+      "project_root": "C:\\Users\\RENEWCOM PC\\Documents\\국어농장v2홈페이지",
+      "related_projects": [],
+      "work_type": [
+        "DAILY_READING manual/agent verification",
+        "AWS DB audit",
+        "local JSON audit",
+        "DB-local hash comparison",
+        "stale duplicate local JSON synchronization"
+      ],
+      "files_created": [
+        "tmp/daily-reading-agent-manual-verification-2026-04-23T14-51-24-274Z.json",
+        "tmp/daily-reading-range-audit-db-2026-04-23T14-36-12-434Z.json",
+        "tmp/daily-reading-range-audit-local-2026-04-23T14-50-22-753Z.json",
+        "tmp/daily-reading-db-local-compare-2026-04-23T14-36-46-300Z.json",
+        "tmp/daily-reading-local-parse-badtext-check-2026-04-23T14-36-42-568Z.json"
+      ],
+      "files_updated": [
+        "frontend/public/daily-reading/saussure2/s2_001.json through s2_365.json synchronized to numbered JSON duplicates",
+        "작업_점검_보고서.json"
+      ],
+      "files_checked": [
+        "AWS RDS DAILY_READING 4,380 rows",
+        "frontend/public/daily-reading numbered JSON 4,380 files",
+        "frontend/public/daily-reading/saussure2/s2_001.json through s2_365.json",
+        "12 level-specific sub-agent verification results"
+      ],
+      "verification": {
+        "checks_performed": [
+          "Fresh DB audit: totalContents=4,380, issueContents=0",
+          "Fresh local audit: totalContents=4,380, issueContents=0",
+          "DB-local JSON hash comparison: compared=4,380, mismatches=0",
+          "Local numbered JSON parse and broken-text check: parseFailures=0, badText=0",
+          "12 level-split agents checked all official learning JSON sets; requested criteria issues=0",
+          "SAUSSURE_2 stale s2_ duplicate set was found drifted, synchronized to numbered files, and reverified with issue count=0"
+        ],
+        "result_summary": "Manual/agent full verification found no remaining DB or active learning JSON issues for the requested intensive sentence coverage, intensive highlight range, and confirm answer range criteria. A stale SAUSSURE_2 duplicate local file set was synchronized and reverified.",
+        "manual_review": true,
+        "json_validation": true
+      },
+      "status": "pass",
+      "remaining_risks": [
+        "RUSSELL_2 had 201 findings under an extra stricter heuristic requiring full-paragraph steps and atomic line units; this is outside the requested criteria and was not treated as a defect.",
+        "Non-learning artifact JSON files remain in some folders and are excluded from DAILY_READING runtime/DB verification."
+      ],
+      "next_actions": [
+        "If desired, remove or quarantine non-learning artifact JSON files to prevent future scripts from accidentally scanning them."
+      ]
+    },
+    {
+      "entry_id": "2026-04-24-001",
+      "timestamp": "2026-04-24T00:05:30.485+09:00",
+      "task_summary": "Confirmed current AWS DAILY_READING DB registration and range integrity after repairs.",
+      "project_root": "C:\\Users\\RENEWCOM PC\\Documents\\국어농장v2홈페이지",
+      "related_projects": [],
+      "work_type": [
+        "DAILY_READING AWS DB final status check",
+        "post-repair DB audit"
+      ],
+      "files_created": [
+        "tmp/daily-reading-range-audit-db-2026-04-23T15-05-30-485Z.json"
+      ],
+      "files_updated": [
+        "작업_점검_보고서.json"
+      ],
+      "files_checked": [
+        "AWS RDS contents/content_versions DAILY_READING 4,380 rows",
+        "scripts/audit-daily-reading-ranges.mjs"
+      ],
+      "verification": {
+        "checks_performed": [
+          "node scripts/audit-daily-reading-ranges.mjs --source=db completed successfully",
+          "DB audit source=db, totalContents=4380, issueContents=0",
+          "Level count=12, allLevels365=true",
+          "Intensive missing sentence contents=0, missing sentences=0",
+          "Intensive bad highlight range contents=0, bad highlight ranges=0",
+          "Confirm bad answer range contents=0, bad answer ranges=0",
+          "Confirm missing occurrence contents=0, missing occurrences=0",
+          "Confirm mismatched/extra range contents=0, ranges=0",
+          "Structural contents=0, structural issues=0"
+        ],
+        "result_summary": "Current AWS DAILY_READING DB contains 4,380 registered learning contents, 365 per each of 12 levels, with zero audit issues for the requested intensive coverage, intensive highlight ranges, confirm answer ranges, and structural checks.",
+        "manual_review": true,
+        "json_validation": true
+      },
+      "status": "pass",
+      "remaining_risks": [
+        "This check verifies the current AWS DB rows through the audit script; it does not perform a live frontend UI smoke test."
+      ],
+      "next_actions": [
+        "No DB data action is needed unless new DAILY_READING content is imported later."
+      ]
+    }
+  ]
+}

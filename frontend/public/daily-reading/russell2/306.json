@@ -65,9 +65,48 @@
           "highlight": {
             "ranges": [
               {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 26
+              }
+            ]
+          },
+          "question": {
+            "prompt": "제목은 무엇을 가리키는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "쉬는 시간 휴대전화 보관함 사용을 늘리자는 제안"
+              },
+              {
+                "id": "B",
+                "text": "교실 벽 꾸미기 계획"
+              },
+              {
+                "id": "C",
+                "text": "체육 대회 일정"
+              },
+              {
+                "id": "D",
+                "text": "급식 메뉴 소개"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 58
+                "end": 57
               }
             ]
           },
@@ -100,85 +139,7 @@
           }
         },
         {
-          "stepId": "s2",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 58,
-                "end": 123
-              }
-            ]
-          },
-          "question": {
-            "prompt": "쉬는 시간마다 복도에서 어떤 장면이 자주 보인다고 했는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "화면을 보며 걷는 학생이 많고 이동이 느려진다"
-              },
-              {
-                "id": "B",
-                "text": "학생들이 모두 운동장에 모인다"
-              },
-              {
-                "id": "C",
-                "text": "교실 문이 잠긴다"
-              },
-              {
-                "id": "D",
-                "text": "보관함이 텅 빈다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
           "stepId": "s3",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 123,
-                "end": 177
-              }
-            ]
-          },
-          "question": {
-            "prompt": "단순히 보기 안 좋은 문제가 아니라 무엇에 영향을 준다고 했는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "안전과 질서"
-              },
-              {
-                "id": "B",
-                "text": "숙제 양"
-              },
-              {
-                "id": "C",
-                "text": "교복 색깔"
-              },
-              {
-                "id": "D",
-                "text": "책가방 무게"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
@@ -217,676 +178,13 @@
           }
         },
         {
-          "stepId": "s5",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 53
-              }
-            ]
-          },
-          "question": {
-            "prompt": "우리 학교에는 어떤 것이 이미 설치되어 있는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "휴대전화 보관함"
-              },
-              {
-                "id": "B",
-                "text": "새로운 교실"
-              },
-              {
-                "id": "C",
-                "text": "운동 장비실"
-              },
-              {
-                "id": "D",
-                "text": "급식 카트"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s6",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 53,
-                "end": 99
-              }
-            ]
-          },
-          "question": {
-            "prompt": "특히 2층 복도에서 어떤 모습이 보인다고 했는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "사람이 몰리는데도 휴대전화 화면을 보며 걷는 경우"
-              },
-              {
-                "id": "B",
-                "text": "모두 달리기만 하는 경우"
-              },
-              {
-                "id": "C",
-                "text": "보관함을 꼭 쓰는 경우"
-              },
-              {
-                "id": "D",
-                "text": "학생들이 줄을 세우는 경우"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 99,
-                "end": 180
-              }
-            ]
-          },
-          "question": {
-            "prompt": "사용하지 않는 이유로 무엇이 많이 언급되었는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "잠깐 뒤에 다시 꺼낼 거라서 번거롭다는 말"
-              },
-              {
-                "id": "B",
-                "text": "보관함이 너무 멀다는 말"
-              },
-              {
-                "id": "C",
-                "text": "휴대전화가 무겁다는 말"
-              },
-              {
-                "id": "D",
-                "text": "교실이 너무 넓다는 말"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 180
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 중심 내용은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "보관함이 있지만 잘 쓰지 않는 이유와 현황을 말한다"
-              },
-              {
-                "id": "B",
-                "text": "보관함을 없애자는 뜻을 말한다"
-              },
-              {
-                "id": "C",
-                "text": "운동장을 바꾸자는 뜻을 말한다"
-              },
-              {
-                "id": "D",
-                "text": "학생 수를 줄이자는 뜻을 말한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s9",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 53
-              }
-            ]
-          },
-          "question": {
-            "prompt": "보관함을 더 자주 사용하면 무엇이 줄어들 수 있다고 했는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "이동 중 부딪힘"
-              },
-              {
-                "id": "B",
-                "text": "수업 시간"
-              },
-              {
-                "id": "C",
-                "text": "책의 수"
-              },
-              {
-                "id": "D",
-                "text": "창문 수"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s10",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 53,
-                "end": 110
-              }
-            ]
-          },
-          "question": {
-            "prompt": "또 무엇에 집중할 수 있어서 준비도 덜 어수선해진다고 했는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "교과서나 학습 자료를 챙기는 일"
-              },
-              {
-                "id": "B",
-                "text": "청소를 하는 일"
-              },
-              {
-                "id": "C",
-                "text": "급식을 먹는 일"
-              },
-              {
-                "id": "D",
-                "text": "체육복을 정리하는 일"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s11",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 110,
-                "end": 200
-              }
-            ]
-          },
-          "question": {
-            "prompt": "처음에는 어떤 시간대부터 권장하는 방식이 현실적일지도 모르겠다고 했는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "점심시간 전후처럼 혼잡한 시간대"
-              },
-              {
-                "id": "B",
-                "text": "아침 조회 뒤"
-              },
-              {
-                "id": "C",
-                "text": "방과 후만"
-              },
-              {
-                "id": "D",
-                "text": "시험 기간만"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 200
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 중심 내용은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "보관함 사용 확대의 장점과 현실적인 적용 방법을 말한다"
-              },
-              {
-                "id": "B",
-                "text": "보관함을 치우자는 뜻을 말한다"
-              },
-              {
-                "id": "C",
-                "text": "학생 의견을 없애자는 뜻을 말한다"
-              },
-              {
-                "id": "D",
-                "text": "휴대전화 사용을 더 늘리자는 뜻을 말한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s13",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p5",
-                "start": 0,
-                "end": 62
-              }
-            ]
-          },
-          "question": {
-            "prompt": "실천 방법으로 무엇을 생각하고 있는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "학급별 안내문을 붙이고 위치를 잘 보이게 정리하는 방안"
-              },
-              {
-                "id": "B",
-                "text": "학생 회의를 없애는 방안"
-              },
-              {
-                "id": "C",
-                "text": "휴대전화 모델을 바꾸는 방안"
-              },
-              {
-                "id": "D",
-                "text": "창문을 넓히는 방안"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s14",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p5",
-                "start": 62,
-                "end": 108
-              }
-            ]
-          },
-          "question": {
-            "prompt": "처음 2주 정도는 무엇으로 계속 알려 주면 도움이 될 수 있다고 했는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "방송"
-              },
-              {
-                "id": "B",
-                "text": "쪽지 시험"
-              },
-              {
-                "id": "C",
-                "text": "교실 청소"
-              },
-              {
-                "id": "D",
-                "text": "운동장 점검"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s15",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p5",
-                "start": 108,
-                "end": 195
-              }
-            ]
-          },
-          "question": {
-            "prompt": "점검표를 만들거나 사용 여부를 바로 확인하는 방식은 무엇처럼 보일 수도 있다고 했는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "감시"
-              },
-              {
-                "id": "B",
-                "text": "설명"
-              },
-              {
-                "id": "C",
-                "text": "격려"
-              },
-              {
-                "id": "D",
-                "text": "보상"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s16",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p5",
-                "start": 0,
-                "end": 195
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 중심 내용은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "실천 방법과 표현을 부드럽게 다듬을 필요를 말한다"
-              },
-              {
-                "id": "B",
-                "text": "보관함을 당장 없애야 한다고 말한다"
-              },
-              {
-                "id": "C",
-                "text": "학생 의견이 전혀 필요 없다고 말한다"
-              },
-              {
-                "id": "D",
-                "text": "방송을 하지 말자고 말한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s17",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p6",
-                "start": 0,
-                "end": 68
-              }
-            ]
-          },
-          "question": {
-            "prompt": "결론에서는 무엇을 아예 못 쓰게 하자는 뜻이 아니라고 했는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "휴대전화"
-              },
-              {
-                "id": "B",
-                "text": "보관함"
-              },
-              {
-                "id": "C",
-                "text": "교과서"
-              },
-              {
-                "id": "D",
-                "text": "안내문"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s18",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p6",
-                "start": 68,
-                "end": 105
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이렇게만 해도 무엇과 무엇이 조금 나아질 수 있다고 보았는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "복도 질서와 안전"
-              },
-              {
-                "id": "B",
-                "text": "성적과 숙제"
-              },
-              {
-                "id": "C",
-                "text": "운동량과 체력"
-              },
-              {
-                "id": "D",
-                "text": "교실 온도와 습도"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s19",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p6",
-                "start": 105,
-                "end": 189
-              }
-            ]
-          },
-          "question": {
-            "prompt": "지금 초고는 무엇이 개인 경험에 치우쳐 있다고 했는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "근거"
-              },
-              {
-                "id": "B",
-                "text": "제목"
-              },
-              {
-                "id": "C",
-                "text": "문장 수"
-              },
-              {
-                "id": "D",
-                "text": "교실 이름"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s20",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p6",
-                "start": 0,
-                "end": 189
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 결론은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "휴대전화 보관함 사용을 권장하되 초고를 더 다듬어야 한다"
-              },
-              {
-                "id": "B",
-                "text": "휴대전화를 완전히 금지해야 한다"
-              },
-              {
-                "id": "C",
-                "text": "보관함을 모두 없애야 한다"
-              },
-              {
-                "id": "D",
-                "text": "학생 의견은 필요 없다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s21",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 26
-              }
-            ]
-          },
-          "question": {
-            "prompt": "제목은 무엇을 가리키는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "쉬는 시간 휴대전화 보관함 사용을 늘리자는 제안"
-              },
-              {
-                "id": "B",
-                "text": "교실 벽 꾸미기 계획"
-              },
-              {
-                "id": "C",
-                "text": "체육 대회 일정"
-              },
-              {
-                "id": "D",
-                "text": "급식 메뉴 소개"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s22",
+          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 58
+                "end": 57
               }
             ]
           },
@@ -919,7 +217,85 @@
           }
         },
         {
-          "stepId": "s23",
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 177
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "쉬는 시간 휴대전화 보관함 사용 확대를 제안하는 건의문 초고이다"
+              },
+              {
+                "id": "B",
+                "text": "교실 구조를 바꾸는 보고문이다"
+              },
+              {
+                "id": "C",
+                "text": "운동장 사용을 늘리자는 글이다"
+              },
+              {
+                "id": "D",
+                "text": "독서 방법을 설명하는 글이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 58,
+                "end": 122
+              }
+            ]
+          },
+          "question": {
+            "prompt": "쉬는 시간마다 복도에서 어떤 장면이 자주 보인다고 했는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화면을 보며 걷는 학생이 많고 이동이 느려진다"
+              },
+              {
+                "id": "B",
+                "text": "학생들이 모두 운동장에 모인다"
+              },
+              {
+                "id": "C",
+                "text": "교실 문이 잠긴다"
+              },
+              {
+                "id": "D",
+                "text": "보관함이 텅 빈다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s7",
           "highlight": {
             "ranges": [
               {
@@ -958,13 +334,559 @@
           }
         },
         {
-          "stepId": "s24",
+          "stepId": "s8",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 0,
+                "start": 123,
                 "end": 177
+              }
+            ]
+          },
+          "question": {
+            "prompt": "단순히 보기 안 좋은 문제가 아니라 무엇에 영향을 준다고 했는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "안전과 질서"
+              },
+              {
+                "id": "B",
+                "text": "숙제 양"
+              },
+              {
+                "id": "C",
+                "text": "교복 색깔"
+              },
+              {
+                "id": "D",
+                "text": "책가방 무게"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 52
+              }
+            ]
+          },
+          "question": {
+            "prompt": "우리 학교에는 어떤 것이 이미 설치되어 있는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "휴대전화 보관함"
+              },
+              {
+                "id": "B",
+                "text": "새로운 교실"
+              },
+              {
+                "id": "C",
+                "text": "운동 장비실"
+              },
+              {
+                "id": "D",
+                "text": "급식 카트"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 180
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "보관함이 있지만 잘 쓰지 않는 이유와 현황을 말한다"
+              },
+              {
+                "id": "B",
+                "text": "보관함을 없애자는 뜻을 말한다"
+              },
+              {
+                "id": "C",
+                "text": "운동장을 바꾸자는 뜻을 말한다"
+              },
+              {
+                "id": "D",
+                "text": "학생 수를 줄이자는 뜻을 말한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 53,
+                "end": 98
+              }
+            ]
+          },
+          "question": {
+            "prompt": "특히 2층 복도에서 어떤 모습이 보인다고 했는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사람이 몰리는데도 휴대전화 화면을 보며 걷는 경우"
+              },
+              {
+                "id": "B",
+                "text": "모두 달리기만 하는 경우"
+              },
+              {
+                "id": "C",
+                "text": "보관함을 꼭 쓰는 경우"
+              },
+              {
+                "id": "D",
+                "text": "학생들이 줄을 세우는 경우"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 99,
+                "end": 180
+              }
+            ]
+          },
+          "question": {
+            "prompt": "사용하지 않는 이유로 무엇이 많이 언급되었는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "잠깐 뒤에 다시 꺼낼 거라서 번거롭다는 말"
+              },
+              {
+                "id": "B",
+                "text": "보관함이 너무 멀다는 말"
+              },
+              {
+                "id": "C",
+                "text": "휴대전화가 무겁다는 말"
+              },
+              {
+                "id": "D",
+                "text": "교실이 너무 넓다는 말"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 52
+              }
+            ]
+          },
+          "question": {
+            "prompt": "보관함을 더 자주 사용하면 무엇이 줄어들 수 있다고 했는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이동 중 부딪힘"
+              },
+              {
+                "id": "B",
+                "text": "수업 시간"
+              },
+              {
+                "id": "C",
+                "text": "책의 수"
+              },
+              {
+                "id": "D",
+                "text": "창문 수"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 200
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "보관함 사용 확대의 장점과 현실적인 적용 방법을 말한다"
+              },
+              {
+                "id": "B",
+                "text": "보관함을 치우자는 뜻을 말한다"
+              },
+              {
+                "id": "C",
+                "text": "학생 의견을 없애자는 뜻을 말한다"
+              },
+              {
+                "id": "D",
+                "text": "휴대전화 사용을 더 늘리자는 뜻을 말한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 53,
+                "end": 109
+              }
+            ]
+          },
+          "question": {
+            "prompt": "또 무엇에 집중할 수 있어서 준비도 덜 어수선해진다고 했는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "교과서나 학습 자료를 챙기는 일"
+              },
+              {
+                "id": "B",
+                "text": "청소를 하는 일"
+              },
+              {
+                "id": "C",
+                "text": "급식을 먹는 일"
+              },
+              {
+                "id": "D",
+                "text": "체육복을 정리하는 일"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 110,
+                "end": 200
+              }
+            ]
+          },
+          "question": {
+            "prompt": "처음에는 어떤 시간대부터 권장하는 방식이 현실적일지도 모르겠다고 했는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "점심시간 전후처럼 혼잡한 시간대"
+              },
+              {
+                "id": "B",
+                "text": "아침 조회 뒤"
+              },
+              {
+                "id": "C",
+                "text": "방과 후만"
+              },
+              {
+                "id": "D",
+                "text": "시험 기간만"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 61
+              }
+            ]
+          },
+          "question": {
+            "prompt": "실천 방법으로 무엇을 생각하고 있는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "학급별 안내문을 붙이고 위치를 잘 보이게 정리하는 방안"
+              },
+              {
+                "id": "B",
+                "text": "학생 회의를 없애는 방안"
+              },
+              {
+                "id": "C",
+                "text": "휴대전화 모델을 바꾸는 방안"
+              },
+              {
+                "id": "D",
+                "text": "창문을 넓히는 방안"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 195
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "실천 방법과 표현을 부드럽게 다듬을 필요를 말한다"
+              },
+              {
+                "id": "B",
+                "text": "보관함을 당장 없애야 한다고 말한다"
+              },
+              {
+                "id": "C",
+                "text": "학생 의견이 전혀 필요 없다고 말한다"
+              },
+              {
+                "id": "D",
+                "text": "방송을 하지 말자고 말한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 62,
+                "end": 107
+              }
+            ]
+          },
+          "question": {
+            "prompt": "처음 2주 정도는 무엇으로 계속 알려 주면 도움이 될 수 있다고 했는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "방송"
+              },
+              {
+                "id": "B",
+                "text": "쪽지 시험"
+              },
+              {
+                "id": "C",
+                "text": "교실 청소"
+              },
+              {
+                "id": "D",
+                "text": "운동장 점검"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 108,
+                "end": 195
+              }
+            ]
+          },
+          "question": {
+            "prompt": "점검표를 만들거나 사용 여부를 바로 확인하는 방식은 무엇처럼 보일 수도 있다고 했는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "감시"
+              },
+              {
+                "id": "B",
+                "text": "설명"
+              },
+              {
+                "id": "C",
+                "text": "격려"
+              },
+              {
+                "id": "D",
+                "text": "보상"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 67
+              }
+            ]
+          },
+          "question": {
+            "prompt": "결론에서는 무엇을 아예 못 쓰게 하자는 뜻이 아니라고 했는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "휴대전화"
+              },
+              {
+                "id": "B",
+                "text": "보관함"
+              },
+              {
+                "id": "C",
+                "text": "교과서"
+              },
+              {
+                "id": "D",
+                "text": "안내문"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s22",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 189
               }
             ]
           },
@@ -973,19 +895,97 @@
             "choices": [
               {
                 "id": "A",
-                "text": "쉬는 시간 휴대전화 보관함 사용 확대를 제안하는 건의문 초고이다"
+                "text": "휴대전화 보관함 사용을 권장하되 초고를 더 다듬어야 한다"
               },
               {
                 "id": "B",
-                "text": "교실 구조를 바꾸는 보고문이다"
+                "text": "휴대전화를 완전히 금지해야 한다"
               },
               {
                 "id": "C",
-                "text": "운동장 사용을 늘리자는 글이다"
+                "text": "보관함을 모두 없애야 한다"
               },
               {
                 "id": "D",
-                "text": "독서 방법을 설명하는 글이다"
+                "text": "학생 의견은 필요 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s23",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 68,
+                "end": 104
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이렇게만 해도 무엇과 무엇이 조금 나아질 수 있다고 보았는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "복도 질서와 안전"
+              },
+              {
+                "id": "B",
+                "text": "성적과 숙제"
+              },
+              {
+                "id": "C",
+                "text": "운동량과 체력"
+              },
+              {
+                "id": "D",
+                "text": "교실 온도와 습도"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s24",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 105,
+                "end": 189
+              }
+            ]
+          },
+          "question": {
+            "prompt": "지금 초고는 무엇이 개인 경험에 치우쳐 있다고 했는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "근거"
+              },
+              {
+                "id": "B",
+                "text": "제목"
+              },
+              {
+                "id": "C",
+                "text": "문장 수"
+              },
+              {
+                "id": "D",
+                "text": "교실 이름"
               }
             ],
             "answerId": "A",
@@ -1042,9 +1042,34 @@
           "prompt": "물건을 넣어 두는 칸이나 상자는?",
           "answerRanges": [
             {
+              "paragraphId": "p1",
+              "start": 15,
+              "end": 17
+            },
+            {
               "paragraphId": "p2",
               "start": 17,
               "end": 19
+            },
+            {
+              "paragraphId": "p3",
+              "start": 13,
+              "end": 15
+            },
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p5",
+              "start": 23,
+              "end": 25
+            },
+            {
+              "paragraphId": "p6",
+              "start": 42,
+              "end": 44
             }
           ],
           "scoring": {
@@ -1052,7 +1077,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "보관"
         },
         {
           "id": "q2",
@@ -1062,6 +1088,11 @@
               "paragraphId": "p2",
               "start": 33,
               "end": 34
+            },
+            {
+              "paragraphId": "p4",
+              "start": 179,
+              "end": 180
             }
           ],
           "scoring": {
@@ -1069,7 +1100,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "권"
         },
         {
           "id": "q3",
@@ -1086,12 +1118,18 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "혼잡"
         },
         {
           "id": "q4",
           "prompt": "몸에 익어 저절로 하게 되는 버릇은?",
           "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 71,
+              "end": 72
+            },
             {
               "paragraphId": "p5",
               "start": 86,
@@ -1103,16 +1141,42 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "습"
         },
         {
           "id": "q5",
           "prompt": "어지럽지 않고 바르게 갖추어진 상태는?",
           "answerRanges": [
             {
+              "paragraphId": "p2",
+              "start": 148,
+              "end": 149
+            },
+            {
+              "paragraphId": "p3",
+              "start": 173,
+              "end": 174
+            },
+            {
+              "paragraphId": "p4",
+              "start": 45,
+              "end": 46
+            },
+            {
+              "paragraphId": "p4",
+              "start": 103,
+              "end": 104
+            },
+            {
               "paragraphId": "p6",
               "start": 79,
               "end": 80
+            },
+            {
+              "paragraphId": "p6",
+              "start": 93,
+              "end": 94
             }
           ],
           "scoring": {
@@ -1120,7 +1184,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "질"
         }
       ]
     }

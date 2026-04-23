@@ -58,8 +58,47 @@
             "ranges": [
               {
                 "paragraphId": "p1",
+                "start": 0,
+                "end": 159
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "수의사가 되기 위해 대학교에서 공부하는 10년 후의 모습"
+              },
+              {
+                "id": "B",
+                "text": "동물원에서 사자와 호랑이를 구경하는 즐거운 시간"
+              },
+              {
+                "id": "C",
+                "text": "학교에서 친구들과 축구를 하며 신나게 뛰어노는 방법"
+              },
+              {
+                "id": "D",
+                "text": "동물들을 치료하는 신기한 마법의 약을 만드는 이야기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
                 "start": 22,
-                "end": 50
+                "end": 51
               }
             ]
           },
@@ -92,13 +131,13 @@
           }
         },
         {
-          "stepId": "s2",
+          "stepId": "s3",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
                 "start": 52,
-                "end": 84
+                "end": 118
               }
             ]
           },
@@ -131,12 +170,12 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 86,
+                "start": 52,
                 "end": 118
               }
             ]
@@ -170,52 +209,13 @@
           }
         },
         {
-          "stepId": "s4",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 161
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 주요 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "수의사가 되기 위해 대학교에서 공부하는 10년 후의 모습"
-              },
-              {
-                "id": "B",
-                "text": "동물원에서 사자와 호랑이를 구경하는 즐거운 시간"
-              },
-              {
-                "id": "C",
-                "text": "학교에서 친구들과 축구를 하며 신나게 뛰어노는 방법"
-              },
-              {
-                "id": "D",
-                "text": "동물들을 치료하는 신기한 마법의 약을 만드는 이야기"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
           "stepId": "s5",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 35
+                "end": 58
               }
             ]
           },
@@ -253,7 +253,7 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 36,
+                "start": 0,
                 "end": 58
               }
             ]
@@ -292,47 +292,8 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 126,
-                "end": 165
-              }
-            ]
-          },
-          "question": {
-            "prompt": "동물들이 어떻게 나에게 다가올 때 큰 보람을 느낄 것이라고 했나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "꼬리를 흔들며"
-              },
-              {
-                "id": "B",
-                "text": "무섭게 짖으며"
-              },
-              {
-                "id": "C",
-                "text": "이빨을 드러내며"
-              },
-              {
-                "id": "D",
-                "text": "뒤로 도망가며"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
                 "start": 0,
-                "end": 165
+                "end": 164
               }
             ]
           },
@@ -365,13 +326,52 @@
           }
         },
         {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 125,
+                "end": 164
+              }
+            ]
+          },
+          "question": {
+            "prompt": "동물들이 어떻게 나에게 다가올 때 큰 보람을 느낄 것이라고 했나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "꼬리를 흔들며"
+              },
+              {
+                "id": "B",
+                "text": "무섭게 짖으며"
+              },
+              {
+                "id": "C",
+                "text": "이빨을 드러내며"
+              },
+              {
+                "id": "D",
+                "text": "뒤로 도망가며"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s9",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 36
+                "end": 35
               }
             ]
           },
@@ -409,8 +409,47 @@
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 38,
-                "end": 56
+                "start": 0,
+                "end": 152
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주변 사람들에게 힘이 되어주며 현재에 최선을 다하겠다는 다짐"
+              },
+              {
+                "id": "B",
+                "text": "부모님께 예쁜 선물을 사드리기 위해 용돈을 모으는 방법"
+              },
+              {
+                "id": "C",
+                "text": "건강해지기 위해 매일 아침 체조를 하는 규칙"
+              },
+              {
+                "id": "D",
+                "text": "친구들과 사이좋게 지내며 비밀 기지를 짓는 놀이"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 36,
+                "end": 92
               }
             ]
           },
@@ -443,13 +482,13 @@
           }
         },
         {
-          "stepId": "s11",
+          "stepId": "s12",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 95,
-                "end": 154
+                "start": 93,
+                "end": 152
               }
             ]
           },
@@ -471,45 +510,6 @@
               {
                 "id": "D",
                 "text": "맛있는 간식만 매일매일 사 먹겠다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 154
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 주요 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "주변 사람들에게 힘이 되어주며 현재에 최선을 다하겠다는 다짐"
-              },
-              {
-                "id": "B",
-                "text": "부모님께 예쁜 선물을 사드리기 위해 용돈을 모으는 방법"
-              },
-              {
-                "id": "C",
-                "text": "건강해지기 위해 매일 아침 체조를 하는 규칙"
-              },
-              {
-                "id": "D",
-                "text": "친구들과 사이좋게 지내며 비밀 기지를 짓는 놀이"
               }
             ],
             "answerId": "A",
@@ -570,7 +570,7 @@
             {
               "paragraphId": "p1",
               "start": 81,
-              "end": 83
+              "end": 84
             }
           ],
           "scoring": {
@@ -589,7 +589,7 @@
             {
               "paragraphId": "p1",
               "start": 93,
-              "end": 95
+              "end": 96
             }
           ],
           "scoring": {
@@ -608,7 +608,7 @@
             {
               "paragraphId": "p2",
               "start": 36,
-              "end": 40
+              "end": 41
             }
           ],
           "scoring": {
@@ -626,7 +626,7 @@
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 132,
+              "start": 131,
               "end": 132
             }
           ],

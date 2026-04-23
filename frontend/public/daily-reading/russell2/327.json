@@ -65,9 +65,48 @@
           "highlight": {
             "ranges": [
               {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 30
+              }
+            ]
+          },
+          "question": {
+            "prompt": "제목은 무엇을 말하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "학교 앞 횡단보도 보행 신호 시간을 늘려야 한다는 뜻"
+              },
+              {
+                "id": "B",
+                "text": "학교 앞 횡단보도를 없애자는 뜻"
+              },
+              {
+                "id": "C",
+                "text": "등교 시간을 늦추자는 뜻"
+              },
+              {
+                "id": "D",
+                "text": "교실을 옮기자는 뜻"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 71
+                "end": 70
               }
             ]
           },
@@ -100,85 +139,7 @@
           }
         },
         {
-          "stepId": "s2",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 71,
-                "end": 120
-              }
-            ]
-          },
-          "question": {
-            "prompt": "지금 신호가 짧아서 뒤늦게 도착한 학생들은 무엇을 하려고 하는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "서둘러 건너려고 한다"
-              },
-              {
-                "id": "B",
-                "text": "천천히 서 있으려고 한다"
-              },
-              {
-                "id": "C",
-                "text": "오래 기다리려고 한다"
-              },
-              {
-                "id": "D",
-                "text": "교실로 다시 돌아가려고 한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
           "stepId": "s3",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 120,
-                "end": 159
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이런 상황은 어떤 날에 더 위험하게 느껴진다고 했는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "비 오는 날이나 가방이 무거운 날"
-              },
-              {
-                "id": "B",
-                "text": "햇볕이 밝은 날"
-              },
-              {
-                "id": "C",
-                "text": "주말 오후"
-              },
-              {
-                "id": "D",
-                "text": "방학 첫날"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
@@ -217,34 +178,73 @@
           }
         },
         {
-          "stepId": "s5",
+          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p3",
+                "paragraphId": "p2",
                 "start": 0,
-                "end": 30
+                "end": 159
               }
             ]
           },
           "question": {
-            "prompt": "먼저 서론에서는 무엇을 쓰려고 하는가?",
+            "prompt": "이 문단의 결론은?",
             "choices": [
               {
                 "id": "A",
-                "text": "왜 이 문제가 중요한지"
+                "text": "학교 앞 횡단보도 보행 신호 시간을 늘려야 한다는 문제의식이 제시된다"
               },
               {
                 "id": "B",
-                "text": "학생회 명단"
+                "text": "학생들은 뛰지 않아도 된다고 말한다"
               },
               {
                 "id": "C",
-                "text": "점심 메뉴"
+                "text": "차량 통행을 줄이자는 뜻이다"
               },
               {
                 "id": "D",
-                "text": "출근 시간표"
+                "text": "도서관 이용 규칙을 설명한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 71,
+                "end": 119
+              }
+            ]
+          },
+          "question": {
+            "prompt": "지금 신호가 짧아서 뒤늦게 도착한 학생들은 무엇을 하려고 하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서둘러 건너려고 한다"
+              },
+              {
+                "id": "B",
+                "text": "천천히 서 있으려고 한다"
+              },
+              {
+                "id": "C",
+                "text": "오래 기다리려고 한다"
+              },
+              {
+                "id": "D",
+                "text": "교실로 다시 돌아가려고 한다"
               }
             ],
             "answerId": "A",
@@ -260,633 +260,9 @@
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p3",
-                "start": 30,
-                "end": 97
-              }
-            ]
-          },
-          "question": {
-            "prompt": "학교 앞은 누구와 무엇이 함께 지나는 곳인가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "학생뿐 아니라 주민과 차량"
-              },
-              {
-                "id": "B",
-                "text": "학생만"
-              },
-              {
-                "id": "C",
-                "text": "교사와 급식차"
-              },
-              {
-                "id": "D",
-                "text": "차량만"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 97,
-                "end": 151
-              }
-            ]
-          },
-          "question": {
-            "prompt": "아침마다 모두가 항상 매우 위험하다고 단정적으로 쓰면 무엇이 약해 보일 수 있는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "근거"
-              },
-              {
-                "id": "B",
-                "text": "제목"
-              },
-              {
-                "id": "C",
-                "text": "문장 길이"
-              },
-              {
-                "id": "D",
-                "text": "시간표"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 151
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 중심 내용은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "문제의 중요성과 근거의 필요성을 말한다"
-              },
-              {
-                "id": "B",
-                "text": "해결책의 세부 절차를 말한다"
-              },
-              {
-                "id": "C",
-                "text": "반대 의견을 없애자고 한다"
-              },
-              {
-                "id": "D",
-                "text": "보행 신호를 줄이자고 한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s9",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 43
-              }
-            ]
-          },
-          "question": {
-            "prompt": "본론에서는 무엇을 두세 가지로 나누어 설명할 생각인가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "실제로 어떤 어려움이 있는지"
-              },
-              {
-                "id": "B",
-                "text": "학교 역사관의 의미"
-              },
-              {
-                "id": "C",
-                "text": "교복 색의 차이"
-              },
-              {
-                "id": "D",
-                "text": "운동장 사용 규칙"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s10",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 135,
-                "end": 182
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 글에서 넣으려는 예시는 무엇인가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "등교 시간 관찰 결과나 학생 의견"
-              },
-              {
-                "id": "B",
-                "text": "급식표 사진"
-              },
-              {
-                "id": "C",
-                "text": "교실 책상 배치"
-              },
-              {
-                "id": "D",
-                "text": "운동회 상품"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s11",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 135,
-                "end": 182
-              }
-            ]
-          },
-          "question": {
-            "prompt": "그 예시를 넣으면 무엇이 더 생길 것이라고 했는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "설득력"
-              },
-              {
-                "id": "B",
-                "text": "소음"
-              },
-              {
-                "id": "C",
-                "text": "혼잡"
-              },
-              {
-                "id": "D",
-                "text": "속도"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 182
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 중심 내용은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "어려움의 구체화와 설득 자료의 보강을 말한다"
-              },
-              {
-                "id": "B",
-                "text": "문제를 없애자고 한다"
-              },
-              {
-                "id": "C",
-                "text": "신호 시간을 줄이자고 한다"
-              },
-              {
-                "id": "D",
-                "text": "학생 의견을 빼자고 한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s13",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p5",
-                "start": 0,
-                "end": 47
-              }
-            ]
-          },
-          "question": {
-            "prompt": "해결책으로 무엇을 제안하려 하는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "등교 시간대만이라도 보행 신호를 조금 늘리는 방안"
-              },
-              {
-                "id": "B",
-                "text": "모든 신호를 없애는 방안"
-              },
-              {
-                "id": "C",
-                "text": "차량을 금지하는 방안"
-              },
-              {
-                "id": "D",
-                "text": "횡단보도를 닫는 방안"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s14",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p5",
-                "start": 47,
-                "end": 119
-              }
-            ]
-          },
-          "question": {
-            "prompt": "어떤 반대 의견도 함께 적으려 하는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "자동차 흐름이 복잡해질 수 있다는 의견"
-              },
-              {
-                "id": "B",
-                "text": "교실이 너무 넓어진다는 의견"
-              },
-              {
-                "id": "C",
-                "text": "운동이 부족하다는 의견"
-              },
-              {
-                "id": "D",
-                "text": "급식이 늦어진다는 의견"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s15",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p5",
-                "start": 119,
-                "end": 168
-              }
-            ]
-          },
-          "question": {
-            "prompt": "한쪽 주장만 강조하면 무엇이 되지 않는다고 했는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "글이 단단해지지 않는다"
-              },
-              {
-                "id": "B",
-                "text": "학생이 사라진다"
-              },
-              {
-                "id": "C",
-                "text": "신호가 길어진다"
-              },
-              {
-                "id": "D",
-                "text": "반대가 없어지기만 한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s16",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p5",
-                "start": 0,
-                "end": 168
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 중심 내용은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "해결책과 반론을 함께 다루며 제안의 균형을 잡는다"
-              },
-              {
-                "id": "B",
-                "text": "보행 신호를 줄이자고 한다"
-              },
-              {
-                "id": "C",
-                "text": "학생 의견을 없애자고 한다"
-              },
-              {
-                "id": "D",
-                "text": "시범 운영을 서두르지 말자고 한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s17",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p6",
-                "start": 0,
-                "end": 55
-              }
-            ]
-          },
-          "question": {
-            "prompt": "결론에서는 무엇을 다시 강조하려 하는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "신호 시간을 조정하면 서두르지 않고 안전하게 건널 수 있다는 점"
-              },
-              {
-                "id": "B",
-                "text": "교실을 더 넓게 쓰자는 점"
-              },
-              {
-                "id": "C",
-                "text": "운동장을 정리하자는 점"
-              },
-              {
-                "id": "D",
-                "text": "급식 시간을 바꾸자는 점"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s18",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p6",
-                "start": 55,
-                "end": 110
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하지만 지금 초고는 무엇이 조금 흐리다고 했는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "서론과 본론의 경계"
-              },
-              {
-                "id": "B",
-                "text": "제목의 글자 수"
-              },
-              {
-                "id": "C",
-                "text": "학생 수"
-              },
-              {
-                "id": "D",
-                "text": "횡단보도의 위치"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s19",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p6",
-                "start": 110,
-                "end": 155
-              }
-            ]
-          },
-          "question": {
-            "prompt": "자료나 관찰 결과를 더 넣고 무엇을 다듬으면 더 분명해질 것이라고 했는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "표현"
-              },
-              {
-                "id": "B",
-                "text": "신호등"
-              },
-              {
-                "id": "C",
-                "text": "가방"
-              },
-              {
-                "id": "D",
-                "text": "차량"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s20",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p6",
-                "start": 0,
-                "end": 155
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 결론은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "자료를 더 넣고 표현을 다듬어 건의문의 구조를 분명하게 해야 한다"
-              },
-              {
-                "id": "B",
-                "text": "보행 신호를 줄여야 한다"
-              },
-              {
-                "id": "C",
-                "text": "모든 학생이 뛰어야 한다"
-              },
-              {
-                "id": "D",
-                "text": "반대 의견은 빼야 한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s21",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 30
-              }
-            ]
-          },
-          "question": {
-            "prompt": "제목은 무엇을 말하는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "학교 앞 횡단보도 보행 신호 시간을 늘려야 한다는 뜻"
-              },
-              {
-                "id": "B",
-                "text": "학교 앞 횡단보도를 없애자는 뜻"
-              },
-              {
-                "id": "C",
-                "text": "등교 시간을 늦추자는 뜻"
-              },
-              {
-                "id": "D",
-                "text": "교실을 옮기자는 뜻"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s22",
-          "highlight": {
-            "ranges": [
-              {
                 "paragraphId": "p2",
                 "start": 71,
-                "end": 120
+                "end": 119
               }
             ]
           },
@@ -919,7 +295,46 @@
           }
         },
         {
-          "stepId": "s23",
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 120,
+                "end": 159
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이런 상황은 어떤 날에 더 위험하게 느껴진다고 했는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비 오는 날이나 가방이 무거운 날"
+              },
+              {
+                "id": "B",
+                "text": "햇볕이 밝은 날"
+              },
+              {
+                "id": "C",
+                "text": "주말 오후"
+              },
+              {
+                "id": "D",
+                "text": "방학 첫날"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
           "highlight": {
             "ranges": [
               {
@@ -958,13 +373,520 @@
           }
         },
         {
-          "stepId": "s24",
+          "stepId": "s9",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p2",
+                "paragraphId": "p3",
                 "start": 0,
-                "end": 159
+                "end": 29
+              }
+            ]
+          },
+          "question": {
+            "prompt": "먼저 서론에서는 무엇을 쓰려고 하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "왜 이 문제가 중요한지"
+              },
+              {
+                "id": "B",
+                "text": "학생회 명단"
+              },
+              {
+                "id": "C",
+                "text": "점심 메뉴"
+              },
+              {
+                "id": "D",
+                "text": "출근 시간표"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 151
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문제의 중요성과 근거의 필요성을 말한다"
+              },
+              {
+                "id": "B",
+                "text": "해결책의 세부 절차를 말한다"
+              },
+              {
+                "id": "C",
+                "text": "반대 의견을 없애자고 한다"
+              },
+              {
+                "id": "D",
+                "text": "보행 신호를 줄이자고 한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 30,
+                "end": 96
+              }
+            ]
+          },
+          "question": {
+            "prompt": "학교 앞은 누구와 무엇이 함께 지나는 곳인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "학생뿐 아니라 주민과 차량"
+              },
+              {
+                "id": "B",
+                "text": "학생만"
+              },
+              {
+                "id": "C",
+                "text": "교사와 급식차"
+              },
+              {
+                "id": "D",
+                "text": "차량만"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 97,
+                "end": 151
+              }
+            ]
+          },
+          "question": {
+            "prompt": "아침마다 모두가 항상 매우 위험하다고 단정적으로 쓰면 무엇이 약해 보일 수 있는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "근거"
+              },
+              {
+                "id": "B",
+                "text": "제목"
+              },
+              {
+                "id": "C",
+                "text": "문장 길이"
+              },
+              {
+                "id": "D",
+                "text": "시간표"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 42
+              }
+            ]
+          },
+          "question": {
+            "prompt": "본론에서는 무엇을 두세 가지로 나누어 설명할 생각인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "실제로 어떤 어려움이 있는지"
+              },
+              {
+                "id": "B",
+                "text": "학교 역사관의 의미"
+              },
+              {
+                "id": "C",
+                "text": "교복 색의 차이"
+              },
+              {
+                "id": "D",
+                "text": "운동장 사용 규칙"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 182
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "어려움의 구체화와 설득 자료의 보강을 말한다"
+              },
+              {
+                "id": "B",
+                "text": "문제를 없애자고 한다"
+              },
+              {
+                "id": "C",
+                "text": "신호 시간을 줄이자고 한다"
+              },
+              {
+                "id": "D",
+                "text": "학생 의견을 빼자고 한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 135,
+                "end": 182
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 글에서 넣으려는 예시는 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "등교 시간 관찰 결과나 학생 의견"
+              },
+              {
+                "id": "B",
+                "text": "급식표 사진"
+              },
+              {
+                "id": "C",
+                "text": "교실 책상 배치"
+              },
+              {
+                "id": "D",
+                "text": "운동회 상품"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 135,
+                "end": 182
+              }
+            ]
+          },
+          "question": {
+            "prompt": "그 예시를 넣으면 무엇이 더 생길 것이라고 했는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "설득력"
+              },
+              {
+                "id": "B",
+                "text": "소음"
+              },
+              {
+                "id": "C",
+                "text": "혼잡"
+              },
+              {
+                "id": "D",
+                "text": "속도"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 46
+              }
+            ]
+          },
+          "question": {
+            "prompt": "해결책으로 무엇을 제안하려 하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "등교 시간대만이라도 보행 신호를 조금 늘리는 방안"
+              },
+              {
+                "id": "B",
+                "text": "모든 신호를 없애는 방안"
+              },
+              {
+                "id": "C",
+                "text": "차량을 금지하는 방안"
+              },
+              {
+                "id": "D",
+                "text": "횡단보도를 닫는 방안"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 168
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "해결책과 반론을 함께 다루며 제안의 균형을 잡는다"
+              },
+              {
+                "id": "B",
+                "text": "보행 신호를 줄이자고 한다"
+              },
+              {
+                "id": "C",
+                "text": "학생 의견을 없애자고 한다"
+              },
+              {
+                "id": "D",
+                "text": "시범 운영을 서두르지 말자고 한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 47,
+                "end": 118
+              }
+            ]
+          },
+          "question": {
+            "prompt": "어떤 반대 의견도 함께 적으려 하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자동차 흐름이 복잡해질 수 있다는 의견"
+              },
+              {
+                "id": "B",
+                "text": "교실이 너무 넓어진다는 의견"
+              },
+              {
+                "id": "C",
+                "text": "운동이 부족하다는 의견"
+              },
+              {
+                "id": "D",
+                "text": "급식이 늦어진다는 의견"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 119,
+                "end": 168
+              }
+            ]
+          },
+          "question": {
+            "prompt": "한쪽 주장만 강조하면 무엇이 되지 않는다고 했는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "글이 단단해지지 않는다"
+              },
+              {
+                "id": "B",
+                "text": "학생이 사라진다"
+              },
+              {
+                "id": "C",
+                "text": "신호가 길어진다"
+              },
+              {
+                "id": "D",
+                "text": "반대가 없어지기만 한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 54
+              }
+            ]
+          },
+          "question": {
+            "prompt": "결론에서는 무엇을 다시 강조하려 하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "신호 시간을 조정하면 서두르지 않고 안전하게 건널 수 있다는 점"
+              },
+              {
+                "id": "B",
+                "text": "교실을 더 넓게 쓰자는 점"
+              },
+              {
+                "id": "C",
+                "text": "운동장을 정리하자는 점"
+              },
+              {
+                "id": "D",
+                "text": "급식 시간을 바꾸자는 점"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s22",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 155
               }
             ]
           },
@@ -973,19 +895,97 @@
             "choices": [
               {
                 "id": "A",
-                "text": "학교 앞 횡단보도 보행 신호 시간을 늘려야 한다는 문제의식이 제시된다"
+                "text": "자료를 더 넣고 표현을 다듬어 건의문의 구조를 분명하게 해야 한다"
               },
               {
                 "id": "B",
-                "text": "학생들은 뛰지 않아도 된다고 말한다"
+                "text": "보행 신호를 줄여야 한다"
               },
               {
                 "id": "C",
-                "text": "차량 통행을 줄이자는 뜻이다"
+                "text": "모든 학생이 뛰어야 한다"
               },
               {
                 "id": "D",
-                "text": "도서관 이용 규칙을 설명한다"
+                "text": "반대 의견은 빼야 한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s23",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 55,
+                "end": 109
+              }
+            ]
+          },
+          "question": {
+            "prompt": "하지만 지금 초고는 무엇이 조금 흐리다고 했는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서론과 본론의 경계"
+              },
+              {
+                "id": "B",
+                "text": "제목의 글자 수"
+              },
+              {
+                "id": "C",
+                "text": "학생 수"
+              },
+              {
+                "id": "D",
+                "text": "횡단보도의 위치"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s24",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 110,
+                "end": 155
+              }
+            ]
+          },
+          "question": {
+            "prompt": "자료나 관찰 결과를 더 넣고 무엇을 다듬으면 더 분명해질 것이라고 했는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "표현"
+              },
+              {
+                "id": "B",
+                "text": "신호등"
+              },
+              {
+                "id": "C",
+                "text": "가방"
+              },
+              {
+                "id": "D",
+                "text": "차량"
               }
             ],
             "answerId": "A",
@@ -1045,6 +1045,11 @@
               "paragraphId": "p1",
               "start": 9,
               "end": 13
+            },
+            {
+              "paragraphId": "p2",
+              "start": 20,
+              "end": 24
             }
           ],
           "scoring": {
@@ -1052,7 +1057,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "횡단보도"
         },
         {
           "id": "q2",
@@ -1069,7 +1075,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "설득력"
         },
         {
           "id": "q3",
@@ -1079,6 +1086,11 @@
               "paragraphId": "p3",
               "start": 135,
               "end": 137
+            },
+            {
+              "paragraphId": "p6",
+              "start": 86,
+              "end": 88
             }
           ],
           "scoring": {
@@ -1086,7 +1098,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "근거"
         },
         {
           "id": "q4",
@@ -1103,7 +1116,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "반론"
         },
         {
           "id": "q5",
@@ -1120,7 +1134,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "구조"
         }
       ]
     }

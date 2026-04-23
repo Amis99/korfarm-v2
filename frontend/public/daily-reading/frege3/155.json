@@ -103,6 +103,88 @@
         {
           "stepId": "s2",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 238
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사르트르는 자유로운 선택의 인간을 말했다"
+              },
+              {
+                "id": "B",
+                "text": "사르트르는 삶이 선택의 연속이라고 보았다"
+              },
+              {
+                "id": "C",
+                "text": "인간은 스스로 결정하고 책임지는 존재다"
+              },
+              {
+                "id": "D",
+                "text": "실존주의는 정해진 운명 없이 던져진 인간에서 출발한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 238
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사르트르는 삶이 선택의 연속이라고 보았다"
+              },
+              {
+                "id": "B",
+                "text": "인간은 스스로 결정하고 책임지는 존재다"
+              },
+              {
+                "id": "C",
+                "text": "실존주의는 정해진 운명 없이 던져진 인간에서 출발한다"
+              },
+              {
+                "id": "D",
+                "text": "선택과 책임이 인간의 삶을 만든다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -142,7 +224,7 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s5",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -183,7 +265,7 @@
           }
         },
         {
-          "stepId": "s4",
+          "stepId": "s6",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -224,48 +306,7 @@
           }
         },
         {
-          "stepId": "s5",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 238
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "사르트르는 자유로운 선택의 인간을 말했다"
-              },
-              {
-                "id": "B",
-                "text": "사르트르는 삶이 선택의 연속이라고 보았다"
-              },
-              {
-                "id": "C",
-                "text": "인간은 스스로 결정하고 책임지는 존재다"
-              },
-              {
-                "id": "D",
-                "text": "실존주의는 정해진 운명 없이 던져진 인간에서 출발한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s6",
+          "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -306,171 +347,7 @@
           }
         },
         {
-          "stepId": "s7",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 47,
-                "end": 109
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "실존이 본질에 앞선다는 말로 인간을 설명했다"
-              },
-              {
-                "id": "B",
-                "text": "인간은 이유 없이 먼저 존재하게 된다"
-              },
-              {
-                "id": "C",
-                "text": "사물은 미리 목적이 정해져 있다"
-              },
-              {
-                "id": "D",
-                "text": "인간은 살아가며 자기 본질을 만들어 간다"
-              }
-            ],
-            "answerId": "C",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
           "stepId": "s8",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 110,
-                "end": 160
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무슨 이유인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "실존이 본질에 앞선다는 말로 인간을 설명했다"
-              },
-              {
-                "id": "B",
-                "text": "사물은 미리 목적이 정해져 있다"
-              },
-              {
-                "id": "C",
-                "text": "인간은 살아가며 자기 본질을 만들어 간다"
-              },
-              {
-                "id": "D",
-                "text": "인간은 이유 없이 먼저 존재하게 된다"
-              }
-            ],
-            "answerId": "D",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s9",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 161,
-                "end": 215
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "인간은 살아가며 자기 본질을 만들어 간다"
-              },
-              {
-                "id": "B",
-                "text": "실존이 본질에 앞선다는 말로 인간을 설명했다"
-              },
-              {
-                "id": "C",
-                "text": "사물은 미리 목적이 정해져 있다"
-              },
-              {
-                "id": "D",
-                "text": "인간은 이유 없이 먼저 존재하게 된다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s10",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 216,
-                "end": 249
-              }
-            ]
-          },
-          "question": {
-            "prompt": "어떤 결과인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "실존이 본질에 앞선다는 말로 인간을 설명했다"
-              },
-              {
-                "id": "B",
-                "text": "나는 내가 선택한 결과물이라는 뜻이다"
-              },
-              {
-                "id": "C",
-                "text": "사물은 미리 목적이 정해져 있다"
-              },
-              {
-                "id": "D",
-                "text": "인간은 이유 없이 먼저 존재하게 된다"
-              }
-            ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s11",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -511,7 +388,171 @@
           }
         },
         {
+          "stepId": "s9",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 47,
+                "end": 109
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "실존이 본질에 앞선다는 말로 인간을 설명했다"
+              },
+              {
+                "id": "B",
+                "text": "인간은 이유 없이 먼저 존재하게 된다"
+              },
+              {
+                "id": "C",
+                "text": "사물은 미리 목적이 정해져 있다"
+              },
+              {
+                "id": "D",
+                "text": "인간은 살아가며 자기 본질을 만들어 간다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 110,
+                "end": 160
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무슨 이유인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "실존이 본질에 앞선다는 말로 인간을 설명했다"
+              },
+              {
+                "id": "B",
+                "text": "사물은 미리 목적이 정해져 있다"
+              },
+              {
+                "id": "C",
+                "text": "인간은 살아가며 자기 본질을 만들어 간다"
+              },
+              {
+                "id": "D",
+                "text": "인간은 이유 없이 먼저 존재하게 된다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 161,
+                "end": 215
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인간은 살아가며 자기 본질을 만들어 간다"
+              },
+              {
+                "id": "B",
+                "text": "실존이 본질에 앞선다는 말로 인간을 설명했다"
+              },
+              {
+                "id": "C",
+                "text": "사물은 미리 목적이 정해져 있다"
+              },
+              {
+                "id": "D",
+                "text": "인간은 이유 없이 먼저 존재하게 된다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
           "stepId": "s12",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 216,
+                "end": 249
+              }
+            ]
+          },
+          "question": {
+            "prompt": "어떤 결과인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "실존이 본질에 앞선다는 말로 인간을 설명했다"
+              },
+              {
+                "id": "B",
+                "text": "나는 내가 선택한 결과물이라는 뜻이다"
+              },
+              {
+                "id": "C",
+                "text": "사물은 미리 목적이 정해져 있다"
+              },
+              {
+                "id": "D",
+                "text": "인간은 이유 없이 먼저 존재하게 된다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -552,171 +593,7 @@
           }
         },
         {
-          "stepId": "s13",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 40,
-                "end": 107
-              }
-            ]
-          },
-          "question": {
-            "prompt": "어떤 규칙을 말하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "정답이 없으니 결과는 모두 내가 감당해야 한다"
-              },
-              {
-                "id": "B",
-                "text": "무한한 자유는 불안과 책임을 함께 준다"
-              },
-              {
-                "id": "C",
-                "text": "그래서 인간은 자유의 무게에서 도망치기도 한다"
-              },
-              {
-                "id": "D",
-                "text": "남의 기준에 기대는 태도를 자기 기만이라 비판했다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
           "stepId": "s14",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 108,
-                "end": 171
-              }
-            ]
-          },
-          "question": {
-            "prompt": "왜 그런가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "무한한 자유는 불안과 책임을 함께 준다"
-              },
-              {
-                "id": "B",
-                "text": "그래서 인간은 자유의 무게에서 도망치기도 한다"
-              },
-              {
-                "id": "C",
-                "text": "정답이 없으니 결과는 모두 내가 감당해야 한다"
-              },
-              {
-                "id": "D",
-                "text": "남의 기준에 기대는 태도를 자기 기만이라 비판했다"
-              }
-            ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s15",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 172,
-                "end": 219
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무슨 일이 있었나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "무한한 자유는 불안과 책임을 함께 준다"
-              },
-              {
-                "id": "B",
-                "text": "정답이 없으니 결과는 모두 내가 감당해야 한다"
-              },
-              {
-                "id": "C",
-                "text": "남의 기준에 기대는 태도를 자기 기만이라 비판했다"
-              },
-              {
-                "id": "D",
-                "text": "그래서 인간은 자유의 무게에서 도망치기도 한다"
-              }
-            ],
-            "answerId": "C",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s16",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 220,
-                "end": 251
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "무한한 자유는 불안과 책임을 함께 준다"
-              },
-              {
-                "id": "B",
-                "text": "정답이 없으니 결과는 모두 내가 감당해야 한다"
-              },
-              {
-                "id": "C",
-                "text": "그래서 인간은 자유의 무게에서 도망치기도 한다"
-              },
-              {
-                "id": "D",
-                "text": "불안을 피하지 말고 정면으로 마주해야 한다"
-              }
-            ],
-            "answerId": "D",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s17",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -757,7 +634,171 @@
           }
         },
         {
+          "stepId": "s15",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 40,
+                "end": 107
+              }
+            ]
+          },
+          "question": {
+            "prompt": "어떤 규칙을 말하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "정답이 없으니 결과는 모두 내가 감당해야 한다"
+              },
+              {
+                "id": "B",
+                "text": "무한한 자유는 불안과 책임을 함께 준다"
+              },
+              {
+                "id": "C",
+                "text": "그래서 인간은 자유의 무게에서 도망치기도 한다"
+              },
+              {
+                "id": "D",
+                "text": "남의 기준에 기대는 태도를 자기 기만이라 비판했다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 108,
+                "end": 171
+              }
+            ]
+          },
+          "question": {
+            "prompt": "왜 그런가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "무한한 자유는 불안과 책임을 함께 준다"
+              },
+              {
+                "id": "B",
+                "text": "그래서 인간은 자유의 무게에서 도망치기도 한다"
+              },
+              {
+                "id": "C",
+                "text": "정답이 없으니 결과는 모두 내가 감당해야 한다"
+              },
+              {
+                "id": "D",
+                "text": "남의 기준에 기대는 태도를 자기 기만이라 비판했다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 172,
+                "end": 219
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무슨 일이 있었나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "무한한 자유는 불안과 책임을 함께 준다"
+              },
+              {
+                "id": "B",
+                "text": "정답이 없으니 결과는 모두 내가 감당해야 한다"
+              },
+              {
+                "id": "C",
+                "text": "남의 기준에 기대는 태도를 자기 기만이라 비판했다"
+              },
+              {
+                "id": "D",
+                "text": "그래서 인간은 자유의 무게에서 도망치기도 한다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
           "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 220,
+                "end": 251
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "무한한 자유는 불안과 책임을 함께 준다"
+              },
+              {
+                "id": "B",
+                "text": "정답이 없으니 결과는 모두 내가 감당해야 한다"
+              },
+              {
+                "id": "C",
+                "text": "그래서 인간은 자유의 무게에서 도망치기도 한다"
+              },
+              {
+                "id": "D",
+                "text": "불안을 피하지 말고 정면으로 마주해야 한다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s19",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -798,130 +839,7 @@
           }
         },
         {
-          "stepId": "s19",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 61,
-                "end": 112
-              }
-            ]
-          },
-          "question": {
-            "prompt": "어떤 결과인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "진정한 삶에는 선택에 책임지는 태도가 필요하다"
-              },
-              {
-                "id": "B",
-                "text": "실패와 고통도 삶을 완성하는 과정이 된다"
-              },
-              {
-                "id": "C",
-                "text": "결정 결과를 감당하는 용기가 실존주의 핵심이다"
-              },
-              {
-                "id": "D",
-                "text": "다수만 따르는 태도는 자기 부정이다"
-              }
-            ],
-            "answerId": "C",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
           "stepId": "s20",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 113,
-                "end": 171
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "진정한 삶에는 선택에 책임지는 태도가 필요하다"
-              },
-              {
-                "id": "B",
-                "text": "결정 결과를 감당하는 용기가 실존주의 핵심이다"
-              },
-              {
-                "id": "C",
-                "text": "다수만 따르는 태도는 자기 부정이다"
-              },
-              {
-                "id": "D",
-                "text": "실패와 고통도 삶을 완성하는 과정이 된다"
-              }
-            ],
-            "answerId": "D",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s21",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 172,
-                "end": 237
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "다수만 따르는 태도는 자기 부정이다"
-              },
-              {
-                "id": "B",
-                "text": "진정한 삶에는 선택에 책임지는 태도가 필요하다"
-              },
-              {
-                "id": "C",
-                "text": "결정 결과를 감당하는 용기가 실존주의 핵심이다"
-              },
-              {
-                "id": "D",
-                "text": "실패와 고통도 삶을 완성하는 과정이 된다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s22",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -962,7 +880,130 @@
           }
         },
         {
+          "stepId": "s21",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 61,
+                "end": 112
+              }
+            ]
+          },
+          "question": {
+            "prompt": "어떤 결과인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "진정한 삶에는 선택에 책임지는 태도가 필요하다"
+              },
+              {
+                "id": "B",
+                "text": "실패와 고통도 삶을 완성하는 과정이 된다"
+              },
+              {
+                "id": "C",
+                "text": "결정 결과를 감당하는 용기가 실존주의 핵심이다"
+              },
+              {
+                "id": "D",
+                "text": "다수만 따르는 태도는 자기 부정이다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s22",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 113,
+                "end": 171
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "진정한 삶에는 선택에 책임지는 태도가 필요하다"
+              },
+              {
+                "id": "B",
+                "text": "결정 결과를 감당하는 용기가 실존주의 핵심이다"
+              },
+              {
+                "id": "C",
+                "text": "다수만 따르는 태도는 자기 부정이다"
+              },
+              {
+                "id": "D",
+                "text": "실패와 고통도 삶을 완성하는 과정이 된다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
           "stepId": "s23",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 172,
+                "end": 237
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다수만 따르는 태도는 자기 부정이다"
+              },
+              {
+                "id": "B",
+                "text": "진정한 삶에는 선택에 책임지는 태도가 필요하다"
+              },
+              {
+                "id": "C",
+                "text": "결정 결과를 감당하는 용기가 실존주의 핵심이다"
+              },
+              {
+                "id": "D",
+                "text": "실패와 고통도 삶을 완성하는 과정이 된다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s24",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -1003,130 +1044,7 @@
           }
         },
         {
-          "stepId": "s24",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p5",
-                "start": 42,
-                "end": 100
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무슨 일이 있었나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "사르트르는 주체적이고 적극적인 삶을 요구한다"
-              },
-              {
-                "id": "B",
-                "text": "고민과 방황도 자유로운 미래를 만드는 과정이다"
-              },
-              {
-                "id": "C",
-                "text": "내 삶은 내가 결정한다는 선언이 용기를 준다"
-              },
-              {
-                "id": "D",
-                "text": "스스로 선택했다는 사실에서 존엄을 찾을 수 있다"
-              }
-            ],
-            "answerId": "D",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
           "stepId": "s25",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p5",
-                "start": 101,
-                "end": 157
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "고민과 방황도 자유로운 미래를 만드는 과정이다"
-              },
-              {
-                "id": "B",
-                "text": "사르트르는 주체적이고 적극적인 삶을 요구한다"
-              },
-              {
-                "id": "C",
-                "text": "스스로 선택했다는 사실에서 존엄을 찾을 수 있다"
-              },
-              {
-                "id": "D",
-                "text": "내 삶은 내가 결정한다는 선언이 용기를 준다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s26",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p5",
-                "start": 158,
-                "end": 253
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 선언했나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "사르트르는 주체적이고 적극적인 삶을 요구한다"
-              },
-              {
-                "id": "B",
-                "text": "내 삶은 내가 결정한다는 선언이 용기를 준다"
-              },
-              {
-                "id": "C",
-                "text": "스스로 선택했다는 사실에서 존엄을 찾을 수 있다"
-              },
-              {
-                "id": "D",
-                "text": "고민과 방황도 자유로운 미래를 만드는 과정이다"
-              }
-            ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s27",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -1167,15 +1085,56 @@
           }
         },
         {
-          "stepId": "s28",
+          "stepId": "s26",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 238
+                "paragraphId": "p5",
+                "start": 42,
+                "end": 100
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무슨 일이 있었나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사르트르는 주체적이고 적극적인 삶을 요구한다"
+              },
+              {
+                "id": "B",
+                "text": "고민과 방황도 자유로운 미래를 만드는 과정이다"
+              },
+              {
+                "id": "C",
+                "text": "내 삶은 내가 결정한다는 선언이 용기를 준다"
+              },
+              {
+                "id": "D",
+                "text": "스스로 선택했다는 사실에서 존엄을 찾을 수 있다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s27",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 101,
+                "end": 157
               }
             ]
           },
@@ -1184,22 +1143,63 @@
             "choices": [
               {
                 "id": "A",
-                "text": "사르트르는 삶이 선택의 연속이라고 보았다"
+                "text": "고민과 방황도 자유로운 미래를 만드는 과정이다"
               },
               {
                 "id": "B",
-                "text": "인간은 스스로 결정하고 책임지는 존재다"
+                "text": "사르트르는 주체적이고 적극적인 삶을 요구한다"
               },
               {
                 "id": "C",
-                "text": "실존주의는 정해진 운명 없이 던져진 인간에서 출발한다"
+                "text": "스스로 선택했다는 사실에서 존엄을 찾을 수 있다"
               },
               {
                 "id": "D",
-                "text": "선택과 책임이 인간의 삶을 만든다"
+                "text": "내 삶은 내가 결정한다는 선언이 용기를 준다"
               }
             ],
-            "answerId": "D",
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s28",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 158,
+                "end": 253
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 선언했나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사르트르는 주체적이고 적극적인 삶을 요구한다"
+              },
+              {
+                "id": "B",
+                "text": "내 삶은 내가 결정한다는 선언이 용기를 준다"
+              },
+              {
+                "id": "C",
+                "text": "스스로 선택했다는 사실에서 존엄을 찾을 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "고민과 방황도 자유로운 미래를 만드는 과정이다"
+              }
+            ],
+            "answerId": "B",
             "scoring": {
               "correctDeltaSec": 10,
               "wrongDeltaSec": -5,

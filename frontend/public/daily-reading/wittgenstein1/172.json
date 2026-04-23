@@ -571,29 +571,60 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "?? ??? ? ??? ?? ?? ??? ?? ???? ??????",
+          "prompt": "오늘은 그 활동 가운데 진로 탐색 프로그램과 자치 무엇?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 235,
+              "end": 251
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "프로젝트를 소개해 드리겠습니다"
+        },
+        {
+          "id": "q2",
+          "prompt": "무엇: 내용은 분명한데 속도가 조금 빠르네요?",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 252
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q2",
-          "prompt": "?? ??? ? ?? ??? ?? ?? ????? ?? ??? ????",
-          "answerRanges": [
+              "end": 4
+            },
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 208
+              "end": 4
+            },
+            {
+              "paragraphId": "p2",
+              "start": 122,
+              "end": 126
+            },
+            {
+              "paragraphId": "p3",
+              "start": 107,
+              "end": 111
+            },
+            {
+              "paragraphId": "p4",
+              "start": 130,
+              "end": 134
+            },
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 4
+            },
+            {
+              "paragraphId": "p6",
+              "start": 66,
+              "end": 70
             }
           ],
           "scoring": {
@@ -601,67 +632,47 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "지도교사"
         },
         {
           "id": "q3",
-          "prompt": "?? ??? ?? ???? ??? ?? ?? ??? ???? ?????",
+          "prompt": "무엇: 그다음 순서는 제가 맡겠습니다?",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 233
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q4",
-          "prompt": "?? ??? ?? ?? ??? ??? ?? ????? ???? ?????",
-          "answerRanges": [
+              "end": 2
+            },
+            {
+              "paragraphId": "p3",
+              "start": 113,
+              "end": 115
+            },
+            {
+              "paragraphId": "p3",
+              "start": 188,
+              "end": 190
+            },
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 247
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q5",
-          "prompt": "??? ??? ??? ?? ?? ?? ???? ??? ??????",
-          "answerRanges": [
+              "start": 8,
+              "end": 10
+            },
+            {
+              "paragraphId": "p4",
+              "start": 86,
+              "end": 88
+            },
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 225
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q6",
-          "prompt": "??? ??? ? ??? ?? ?? ???? ?? ???? ???????",
-          "answerRanges": [
+              "start": 67,
+              "end": 69
+            },
             {
               "paragraphId": "p6",
               "start": 0,
-              "end": 229
+              "end": 2
             }
           ],
           "scoring": {
@@ -669,7 +680,62 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "준호"
+        },
+        {
+          "id": "q4",
+          "prompt": "발표는 혼자만 잘하는 일이 아니라 앞사람의 말이 끝났다는 신호를 무엇는 일이기도 해요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 195,
+              "end": 209
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "존중하고 자연스럽게 이어받"
+        },
+        {
+          "id": "q5",
+          "prompt": "준호는 원고를 한 문장씩 외우려고 하기보다 무엇 두고 시선을 더 자주 들어 주세요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 91,
+              "end": 103
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "문단별 핵심어만 표시해"
+        },
+        {
+          "id": "q6",
+          "prompt": "준호: 저는 원고에 밑줄을 무엇 쳐 두겠습니다?",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 15,
+              "end": 29
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "긋기보다 핵심어만 동그라미"
         }
       ]
     }

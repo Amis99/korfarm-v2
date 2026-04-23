@@ -66,8 +66,8 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 45,
-                "end": 69
+                "start": 0,
+                "end": 85
               }
             ]
           },
@@ -106,7 +106,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 84
+                "end": 85
               }
             ]
           },
@@ -144,8 +144,8 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 16,
-                "end": 79
+                "start": 0,
+                "end": 91
               }
             ]
           },
@@ -184,7 +184,7 @@
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 90
+                "end": 91
               }
             ]
           },
@@ -222,8 +222,8 @@
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 23,
-                "end": 67
+                "start": 0,
+                "end": 75
               }
             ]
           },
@@ -262,7 +262,7 @@
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 74
+                "end": 75
               }
             ]
           },
@@ -300,8 +300,8 @@
             "ranges": [
               {
                 "paragraphId": "p4",
-                "start": 6,
-                "end": 83
+                "start": 0,
+                "end": 85
               }
             ]
           },
@@ -340,7 +340,7 @@
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 84
+                "end": 85
               }
             ]
           },
@@ -378,8 +378,8 @@
             "ranges": [
               {
                 "paragraphId": "p5",
-                "start": 2,
-                "end": 33
+                "start": 0,
+                "end": 95
               }
             ]
           },
@@ -418,7 +418,7 @@
               {
                 "paragraphId": "p5",
                 "start": 0,
-                "end": 94
+                "end": 95
               }
             ]
           },
@@ -456,8 +456,8 @@
             "ranges": [
               {
                 "paragraphId": "p6",
-                "start": 11,
-                "end": 58
+                "start": 0,
+                "end": 91
               }
             ]
           },
@@ -496,7 +496,7 @@
               {
                 "paragraphId": "p6",
                 "start": 0,
-                "end": 90
+                "end": 91
               }
             ]
           },
@@ -570,105 +570,158 @@
     "confirm": {
       "questions": [
         {
-          "id": "q1",
-          "prompt": "?? ??? ?? ??? ??? ??? ?? ?? ?? ??? ??? ???? ??????",
+          "prompt": "사료 비판에서 먼저 따져 보는 것은 무엇인가?",
+          "choices": [
+            {
+              "id": "A",
+              "text": "언제 누구에 의해 어떤 목적 아래 남겨졌는지"
+            },
+            {
+              "id": "B",
+              "text": "어떤 글씨체로 적혔는지"
+            },
+            {
+              "id": "C",
+              "text": "몇 쪽에 실렸는지"
+            },
+            {
+              "id": "D",
+              "text": "어디에서 읽었는지"
+            }
+          ],
+          "answerId": "A",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 85
+              "start": 45,
+              "end": 69
             }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "answerText": "언제 누구에 의해 어떤 목적 아래 남겨졌는지",
           "answerMatchMode": "ANY"
         },
         {
-          "id": "q2",
-          "prompt": "?? ??? ?? ?? ??? ??? ?? ???? ??? ??? ? ??? ????",
+          "prompt": "같은 사건 기록이라도 무엇이 달라질 수 있는가?",
+          "choices": [
+            {
+              "id": "A",
+              "text": "강조점과 빠진 내용"
+            },
+            {
+              "id": "B",
+              "text": "연도와 글자 수"
+            },
+            {
+              "id": "C",
+              "text": "종이의 색"
+            },
+            {
+              "id": "D",
+              "text": "책의 두께"
+            }
+          ],
+          "answerId": "A",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 91
+              "start": 70,
+              "end": 79
             }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "answerText": "강조점과 빠진 내",
           "answerMatchMode": "ANY"
         },
         {
-          "id": "q3",
-          "prompt": "?? ??? ????? ??? ?? ??? ??? ?? ???? ?? ??? ????? ?? ????",
+          "prompt": "역사가는 내용과 함께 무엇을 살피는가?",
+          "choices": [
+            {
+              "id": "A",
+              "text": "작성 시기와 작성자와 전해지는 경로"
+            },
+            {
+              "id": "B",
+              "text": "글씨체와 종이 재질"
+            },
+            {
+              "id": "C",
+              "text": "문장의 길이"
+            },
+            {
+              "id": "D",
+              "text": "장식의 모양"
+            }
+          ],
+          "answerId": "A",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 75
+              "start": 23,
+              "end": 41
             }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "answerText": "작성 시기와 작성자와 전해지는 경",
           "answerMatchMode": "ANY"
         },
         {
-          "id": "q4",
-          "prompt": "?? ??? ?? ?? ??? ?? ? ?????? ??? ??? ???? ???? ?????",
+          "prompt": "왕이 반포한 교서는 어떤 점을 앞세우기 쉬운가?",
+          "choices": [
+            {
+              "id": "A",
+              "text": "나라를 안정되게 다스렸다는 점"
+            },
+            {
+              "id": "B",
+              "text": "백성의 생활이 어려웠다는 점"
+            },
+            {
+              "id": "C",
+              "text": "다른 기록이 틀렸다는 점"
+            },
+            {
+              "id": "D",
+              "text": "왕이 기록을 남기지 않았다는 점"
+            }
+          ],
+          "answerId": "A",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 85
+              "start": 17,
+              "end": 31
             }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "answerText": "나라를 안정되게 다스렸다는",
           "answerMatchMode": "ANY"
         },
         {
-          "id": "q5",
-          "prompt": "??? ??? ?? ??? ??? ??? ?? ??? ?? ??? ??? ??????",
+          "prompt": "한 가지 사료만으로 결론을 내리면 무엇을 착각할 수 있는가?",
+          "choices": [
+            {
+              "id": "A",
+              "text": "우연히 남은 한쪽 목소리를 역사 전체로"
+            },
+            {
+              "id": "B",
+              "text": "모든 기록이 같은 뜻이라는 것"
+            },
+            {
+              "id": "C",
+              "text": "작성 시기를 알 수 없다는 것"
+            },
+            {
+              "id": "D",
+              "text": "기록이 전부 거짓이라는 것"
+            }
+          ],
+          "answerId": "A",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 95
+              "start": 21,
+              "end": 33
             }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q6",
-          "prompt": "??? ??? ?? ??? ?? ??? ??? ?? ??? ??????",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 91
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "answerText": "우연히 남은 한쪽 목소",
           "answerMatchMode": "ANY"
         }
       ]

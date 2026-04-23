@@ -102,6 +102,47 @@
         {
           "stepId": "s2",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 237
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "개울 장면의 연결 의미를 보여준다"
+              },
+              {
+                "id": "B",
+                "text": "허 생원은 동이에게 업히며 안도감 느낀다"
+              },
+              {
+                "id": "C",
+                "text": "동이는 허 생원을 부축해 업고 건넌다"
+              },
+              {
+                "id": "D",
+                "text": "개울 장면이 둘의 거리를 좁힌다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -141,7 +182,7 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -182,7 +223,7 @@
           }
         },
         {
-          "stepId": "s4",
+          "stepId": "s5",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -223,47 +264,6 @@
           }
         },
         {
-          "stepId": "s5",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 237
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "개울 장면의 연결 의미를 보여준다"
-              },
-              {
-                "id": "B",
-                "text": "허 생원은 동이에게 업히며 안도감 느낀다"
-              },
-              {
-                "id": "C",
-                "text": "동이는 허 생원을 부축해 업고 건넌다"
-              },
-              {
-                "id": "D",
-                "text": "개울 장면이 둘의 거리를 좁힌다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
           "stepId": "s6",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
@@ -272,7 +272,7 @@
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 55
+                "end": 101
               }
             ]
           },
@@ -306,47 +306,6 @@
         },
         {
           "stepId": "s7",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 56,
-                "end": 126
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "동이는 봉평 출신 어머니 사연 털어놓는다"
-              },
-              {
-                "id": "B",
-                "text": "출생 고백이 운명 단서가 됨을 보여준다"
-              },
-              {
-                "id": "C",
-                "text": "그 말을 들은 허 생원 가슴이 뛴다"
-              },
-              {
-                "id": "D",
-                "text": "허 생원은 동이에게 업히며 안도감 느낀다"
-              }
-            ],
-            "answerId": "C",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s8",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -387,6 +346,47 @@
           }
         },
         {
+          "stepId": "s8",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 39,
+                "end": 134
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "동이는 봉평 출신 어머니 사연 털어놓는다"
+              },
+              {
+                "id": "B",
+                "text": "출생 고백이 운명 단서가 됨을 보여준다"
+              },
+              {
+                "id": "C",
+                "text": "그 말을 들은 허 생원 가슴이 뛴다"
+              },
+              {
+                "id": "D",
+                "text": "허 생원은 동이에게 업히며 안도감 느낀다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
           "stepId": "s9",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
@@ -395,7 +395,7 @@
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 88
+                "end": 138
               }
             ]
           },
@@ -430,47 +430,6 @@
         {
           "stepId": "s10",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 89,
-                "end": 143
-              }
-            ]
-          },
-          "question": {
-            "prompt": "어떤 특징이 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "허 생원은 왼손잡이 단서를 발견한다"
-              },
-              {
-                "id": "B",
-                "text": "같은 왼손은 강한 혈연 증표처럼 다가온다"
-              },
-              {
-                "id": "C",
-                "text": "왼손 단서가 혈연 암시한다"
-              },
-              {
-                "id": "D",
-                "text": "허 생원은 동이에게 업히며 안도감 느낀다"
-              }
-            ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s11",
-          "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
             "ranges": [
@@ -502,6 +461,47 @@
               }
             ],
             "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 75,
+                "end": 181
+              }
+            ]
+          },
+          "question": {
+            "prompt": "어떤 특징이 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "허 생원은 왼손잡이 단서를 발견한다"
+              },
+              {
+                "id": "B",
+                "text": "같은 왼손은 강한 혈연 증표처럼 다가온다"
+              },
+              {
+                "id": "C",
+                "text": "왼손 단서가 혈연 암시한다"
+              },
+              {
+                "id": "D",
+                "text": "허 생원은 동이에게 업히며 안도감 느낀다"
+              }
+            ],
+            "answerId": "B",
             "scoring": {
               "correctDeltaSec": 10,
               "wrongDeltaSec": -5,
@@ -553,6 +553,47 @@
         {
           "stepId": "s13",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 224
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "왼손잡이는 부자 관계의 복선이다"
+              },
+              {
+                "id": "B",
+                "text": "혈육의 이끌림을 우아하게 형상화한다"
+              },
+              {
+                "id": "C",
+                "text": "왼손 복선의 예술적 의미를 설명한다"
+              },
+              {
+                "id": "D",
+                "text": "생략과 함축이 진실의 무게 더한다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -592,7 +633,7 @@
           }
         },
         {
-          "stepId": "s14",
+          "stepId": "s15",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -633,47 +674,6 @@
           }
         },
         {
-          "stepId": "s15",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 224
-              }
-            ]
-          },
-          "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "왼손잡이는 부자 관계의 복선이다"
-              },
-              {
-                "id": "B",
-                "text": "혈육의 이끌림을 우아하게 형상화한다"
-              },
-              {
-                "id": "C",
-                "text": "왼손 복선의 예술적 의미를 설명한다"
-              },
-              {
-                "id": "D",
-                "text": "생략과 함축이 진실의 무게 더한다"
-              }
-            ],
-            "answerId": "C",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
           "stepId": "s16",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
@@ -682,7 +682,7 @@
               {
                 "paragraphId": "p5",
                 "start": 0,
-                "end": 67
+                "end": 97
               }
             ]
           },
@@ -717,13 +717,54 @@
         {
           "stepId": "s17",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 242
+              }
+            ]
+          },
+          "question": {
+            "prompt": "5문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "5부는 그리움의 끝이자 새 시작 알린다"
+              },
+              {
+                "id": "B",
+                "text": "청년의 모습에서 사랑의 결실을 만난다"
+              },
+              {
+                "id": "C",
+                "text": "5부 결말의 의미를 정리한다"
+              },
+              {
+                "id": "D",
+                "text": "봉평으로의 귀환과 혈연 예찬을 보여준다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p5",
-                "start": 68,
-                "end": 129
+                "start": 47,
+                "end": 141
               }
             ]
           },
@@ -756,15 +797,15 @@
           }
         },
         {
-          "stepId": "s18",
+          "stepId": "s19",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p5",
-                "start": 130,
-                "end": 235
+                "start": 98,
+                "end": 242
               }
             ]
           },
@@ -789,47 +830,6 @@
               }
             ],
             "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s19",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p5",
-                "start": 0,
-                "end": 242
-              }
-            ]
-          },
-          "question": {
-            "prompt": "5문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "5부는 그리움의 끝이자 새 시작 알린다"
-              },
-              {
-                "id": "B",
-                "text": "청년의 모습에서 사랑의 결실을 만난다"
-              },
-              {
-                "id": "C",
-                "text": "5부 결말의 의미를 정리한다"
-              },
-              {
-                "id": "D",
-                "text": "봉평으로의 귀환과 혈연 예찬을 보여준다"
-              }
-            ],
-            "answerId": "C",
             "scoring": {
               "correctDeltaSec": 10,
               "wrongDeltaSec": -5,

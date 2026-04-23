@@ -101,45 +101,6 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 21,
-                "end": 39
-              }
-            ]
-          },
-          "question": {
-            "prompt": "구름을 벗어난 하늘은 어떤 모습인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "밤하늘이 맑게 드러난 모습"
-              },
-              {
-                "id": "B",
-                "text": "먹구름이 더 짙어진 모습"
-              },
-              {
-                "id": "C",
-                "text": "해가 강하게 비치는 모습"
-              },
-              {
-                "id": "D",
-                "text": "안개가 낮게 내려앉은 모습"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s3",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
                 "start": 0,
                 "end": 39
               }
@@ -163,6 +124,45 @@
               {
                 "id": "D",
                 "text": "안개로 가린 아침 풍경"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 21,
+                "end": 39
+              }
+            ]
+          },
+          "question": {
+            "prompt": "구름을 벗어난 하늘은 어떤 모습인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "밤하늘이 맑게 드러난 모습"
+              },
+              {
+                "id": "B",
+                "text": "먹구름이 더 짙어진 모습"
+              },
+              {
+                "id": "C",
+                "text": "해가 강하게 비치는 모습"
+              },
+              {
+                "id": "D",
+                "text": "안개가 낮게 내려앉은 모습"
               }
             ],
             "answerId": "A",
@@ -528,12 +528,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1??? ?? ??? ?????",
+          "prompt": "바람이 서늘도 하여 뜰 무엇에 하늘은 구름을 벗어나고?",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 39
+              "end": 20
             }
           ],
           "scoring": {
@@ -541,16 +541,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "바람이 서늘도 하여 뜰 앞에 나섰더니"
         },
         {
           "id": "q2",
-          "prompt": "2???? ???? ??? ??? ?????",
+          "prompt": "핵심 개념은 무엇인가요?",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 21
+              "end": 16
             }
           ],
           "scoring": {
@@ -558,11 +559,12 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "산뜻한 초사흘 달이 별과 함께"
         },
         {
           "id": "q3",
-          "prompt": "3??? ??? ???? ?????",
+          "prompt": "주요 소재는 무엇인가요?",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -575,16 +577,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "달은 넘어가고 별만 서로 반짝인다"
         },
         {
           "id": "q4",
-          "prompt": "4???? ???? ?? ?????",
+          "prompt": "무엇 어느 게요?",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 0,
-              "end": 22
+              "end": 16
             }
           ],
           "scoring": {
@@ -592,16 +595,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "저 별은 뉘 별이며 내 별 또"
         },
         {
           "id": "q5",
-          "prompt": "5??? ??? ?????",
+          "prompt": "글에서 설명한 것은 무엇인가요?",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 0,
-              "end": 20
+              "end": 16
             }
           ],
           "scoring": {
@@ -609,7 +613,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "잠자코 호올로 서서 별을 헤어"
         }
       ]
     }

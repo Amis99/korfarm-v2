@@ -495,45 +495,6 @@
             "ranges": [
               {
                 "paragraphId": "p6",
-                "start": 21,
-                "end": 35
-              }
-            ]
-          },
-          "question": {
-            "prompt": "마지막 줄의 표기는 무엇을 알려 주나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "작가와 작품명"
-              },
-              {
-                "id": "B",
-                "text": "등장인물의 이름"
-              },
-              {
-                "id": "C",
-                "text": "공연 장소"
-              },
-              {
-                "id": "D",
-                "text": "연재 순서"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s13",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p6",
                 "start": 0,
                 "end": 35
               }
@@ -557,6 +518,45 @@
               {
                 "id": "D",
                 "text": "상대와의 갈등을 끝내자는 통보"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 21,
+                "end": 35
+              }
+            ]
+          },
+          "question": {
+            "prompt": "마지막 줄의 표기는 무엇을 알려 주나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "작가와 작품명"
+              },
+              {
+                "id": "B",
+                "text": "등장인물의 이름"
+              },
+              {
+                "id": "C",
+                "text": "공연 장소"
+              },
+              {
+                "id": "D",
+                "text": "연재 순서"
               }
             ],
             "answerId": "A",
@@ -613,9 +613,9 @@
           "prompt": "감탄하며 말을 꺼낼 때 쓰는 말은?",
           "answerRanges": [
             {
-              "end": 2,
               "paragraphId": "p1",
-              "start": 0
+              "start": 0,
+              "end": 2
             }
           ],
           "scoring": {
@@ -623,16 +623,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "어와"
         },
         {
           "id": "q2",
           "prompt": "잘못을 깨닫고 마음 아파하는 일은?",
           "answerRanges": [
             {
-              "end": 11,
               "paragraphId": "p2",
-              "start": 8
+              "start": 8,
+              "end": 11
             }
           ],
           "scoring": {
@@ -640,16 +641,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "뉘우침"
         },
         {
           "id": "q3",
           "prompt": "하느님을 높여 이르는 말은?",
           "answerRanges": [
             {
-              "end": 12,
               "paragraphId": "p3",
-              "start": 10
+              "start": 10,
+              "end": 12
             }
           ],
           "scoring": {
@@ -657,16 +659,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "상제"
         },
         {
           "id": "q4",
           "prompt": "잘못으로 생긴 허물은?",
           "answerRanges": [
             {
-              "end": 14,
               "paragraphId": "p4",
-              "start": 13
+              "start": 13,
+              "end": 14
             }
           ],
           "scoring": {
@@ -674,16 +677,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "죄"
         },
         {
           "id": "q5",
           "prompt": "서로에게 맺어진 관계는?",
           "answerRanges": [
             {
-              "end": 9,
               "paragraphId": "p6",
-              "start": 7
+              "start": 7,
+              "end": 9
             }
           ],
           "scoring": {
@@ -691,7 +695,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "인연"
         }
       ]
     }

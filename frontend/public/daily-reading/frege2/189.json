@@ -97,6 +97,47 @@
         {
           "stepId": "s2",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 159
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "CCTV 추가 설치를 두고 찬반이 맞선다"
+              },
+              {
+                "id": "B",
+                "text": "학교는 CCTV를 모두 철거하기로 했다"
+              },
+              {
+                "id": "C",
+                "text": "학생들은 급식실 문제만 논의했다"
+              },
+              {
+                "id": "D",
+                "text": "논의 없이 바로 공사가 시작됐다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -136,7 +177,7 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -177,7 +218,7 @@
           }
         },
         {
-          "stepId": "s4",
+          "stepId": "s5",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -207,47 +248,6 @@
               {
                 "id": "D",
                 "text": "학교는 한쪽 의견만 들었다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s5",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 159
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "CCTV 추가 설치를 두고 찬반이 맞선다"
-              },
-              {
-                "id": "B",
-                "text": "학교는 CCTV를 모두 철거하기로 했다"
-              },
-              {
-                "id": "C",
-                "text": "학생들은 급식실 문제만 논의했다"
-              },
-              {
-                "id": "D",
-                "text": "논의 없이 바로 공사가 시작됐다"
               }
             ],
             "answerId": "A",
@@ -302,6 +302,47 @@
         {
           "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 144
+              }
+            ]
+          },
+          "question": {
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "찬성 쪽은 예방과 증거 확보를 내세운다"
+              },
+              {
+                "id": "B",
+                "text": "찬성 쪽은 사생활 보호만 먼저 말한다"
+              },
+              {
+                "id": "C",
+                "text": "찬성 쪽은 카메라가 무용하다고 본다"
+              },
+              {
+                "id": "D",
+                "text": "찬성 쪽은 설치 비용만 따진다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -341,7 +382,7 @@
           }
         },
         {
-          "stepId": "s8",
+          "stepId": "s9",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -371,47 +412,6 @@
               {
                 "id": "D",
                 "text": "사고 기록을 모두 지워 버린다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s9",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 144
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "찬성 쪽은 예방과 증거 확보를 내세운다"
-              },
-              {
-                "id": "B",
-                "text": "찬성 쪽은 사생활 보호만 먼저 말한다"
-              },
-              {
-                "id": "C",
-                "text": "찬성 쪽은 카메라가 무용하다고 본다"
-              },
-              {
-                "id": "D",
-                "text": "찬성 쪽은 설치 비용만 따진다"
               }
             ],
             "answerId": "A",
@@ -466,6 +466,47 @@
         {
           "stepId": "s11",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 145
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반대 쪽은 감시 불편과 사각지대를 걱정한다"
+              },
+              {
+                "id": "B",
+                "text": "반대 쪽은 예방 효과가 너무 크다며 찬성한다"
+              },
+              {
+                "id": "C",
+                "text": "반대 쪽은 설치 장소가 적어 아쉽다고 본다"
+              },
+              {
+                "id": "D",
+                "text": "반대 쪽은 영상을 자유롭게 보자고 한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -505,7 +546,7 @@
           }
         },
         {
-          "stepId": "s12",
+          "stepId": "s13",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -535,47 +576,6 @@
               {
                 "id": "D",
                 "text": "카메라는 밤에만 작동한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s13",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 145
-              }
-            ]
-          },
-          "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "반대 쪽은 감시 불편과 사각지대를 걱정한다"
-              },
-              {
-                "id": "B",
-                "text": "반대 쪽은 예방 효과가 너무 크다며 찬성한다"
-              },
-              {
-                "id": "C",
-                "text": "반대 쪽은 설치 장소가 적어 아쉽다고 본다"
-              },
-              {
-                "id": "D",
-                "text": "반대 쪽은 영상을 자유롭게 보자고 한다"
               }
             ],
             "answerId": "A",
@@ -630,6 +630,47 @@
         {
           "stepId": "s15",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 139
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "규칙을 갖춘 절충안이 필요하다"
+              },
+              {
+                "id": "B",
+                "text": "무조건 설치만이 답이다"
+              },
+              {
+                "id": "C",
+                "text": "무조건 철거만이 답이다"
+              },
+              {
+                "id": "D",
+                "text": "CCTV는 가치 충돌과 무관하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -669,7 +710,7 @@
           }
         },
         {
-          "stepId": "s16",
+          "stepId": "s17",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -699,47 +740,6 @@
               {
                 "id": "D",
                 "text": "규칙 없이 일단 설치부터 한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s17",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 139
-              }
-            ]
-          },
-          "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "규칙을 갖춘 절충안이 필요하다"
-              },
-              {
-                "id": "B",
-                "text": "무조건 설치만이 답이다"
-              },
-              {
-                "id": "C",
-                "text": "무조건 철거만이 답이다"
-              },
-              {
-                "id": "D",
-                "text": "CCTV는 가치 충돌과 무관하다"
               }
             ],
             "answerId": "A",

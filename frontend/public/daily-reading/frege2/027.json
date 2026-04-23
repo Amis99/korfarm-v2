@@ -65,7 +65,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 25
+                "end": 51
               }
             ]
           },
@@ -105,7 +105,7 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 26,
+                "start": 0,
                 "end": 51
               }
             ]
@@ -140,6 +140,47 @@
         },
         {
           "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 146
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "굶주린 동물들이 자유와 평등의 꿈을 듣는다."
+              },
+              {
+                "id": "B",
+                "text": "존스가 동물들에게 새 약속을 들려준다."
+              },
+              {
+                "id": "C",
+                "text": "동물들이 시장으로 나가 음식을 구한다."
+              },
+              {
+                "id": "D",
+                "text": "메이저가 반란을 말리지 못해 떠난다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s4",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -180,7 +221,7 @@
           }
         },
         {
-          "stepId": "s4",
+          "stepId": "s5",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -188,7 +229,7 @@
               {
                 "paragraphId": "p1",
                 "start": 97,
-                "end": 119
+                "end": 146
               }
             ]
           },
@@ -221,14 +262,14 @@
           }
         },
         {
-          "stepId": "s5",
+          "stepId": "s6",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 120,
+                "start": 97,
                 "end": 146
               }
             ]
@@ -251,47 +292,6 @@
               {
                 "id": "D",
                 "text": "풍성한 먹이가 동물들을 흩어지게 했다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s6",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 146
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "굶주린 동물들이 자유와 평등의 꿈을 듣는다."
-              },
-              {
-                "id": "B",
-                "text": "존스가 동물들에게 새 약속을 들려준다."
-              },
-              {
-                "id": "C",
-                "text": "동물들이 시장으로 나가 음식을 구한다."
-              },
-              {
-                "id": "D",
-                "text": "메이저가 반란을 말리지 못해 떠난다."
               }
             ],
             "answerId": "A",
@@ -346,13 +346,54 @@
         {
           "stepId": "s8",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 130
+              }
+            ]
+          },
+          "question": {
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "메이저의 말은 반란과 첫 승리로 이어졌다."
+              },
+              {
+                "id": "B",
+                "text": "동물들은 존스를 더 굳게 따르기로 했다."
+              },
+              {
+                "id": "C",
+                "text": "반란은 실패하고 동물들만 흩어졌다."
+              },
+              {
+                "id": "D",
+                "text": "메이저의 연설은 다툼만 남기고 끝났다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
                 "start": 39,
-                "end": 64
+                "end": 90
               }
             ]
           },
@@ -385,14 +426,14 @@
           }
         },
         {
-          "stepId": "s9",
+          "stepId": "s10",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 65,
+                "start": 39,
                 "end": 90
               }
             ]
@@ -426,7 +467,7 @@
           }
         },
         {
-          "stepId": "s10",
+          "stepId": "s11",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -434,7 +475,7 @@
               {
                 "paragraphId": "p2",
                 "start": 91,
-                "end": 110
+                "end": 130
               }
             ]
           },
@@ -467,14 +508,14 @@
           }
         },
         {
-          "stepId": "s11",
+          "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 111,
+                "start": 91,
                 "end": 130
               }
             ]
@@ -497,47 +538,6 @@
               {
                 "id": "D",
                 "text": "분노는 있었지만 행동은 전혀 없었다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 130
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "메이저의 말은 반란과 첫 승리로 이어졌다."
-              },
-              {
-                "id": "B",
-                "text": "동물들은 존스를 더 굳게 따르기로 했다."
-              },
-              {
-                "id": "C",
-                "text": "반란은 실패하고 동물들만 흩어졌다."
-              },
-              {
-                "id": "D",
-                "text": "메이저의 연설은 다툼만 남기고 끝났다."
               }
             ],
             "answerId": "A",
@@ -592,170 +592,6 @@
         {
           "stepId": "s14",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 46,
-                "end": 67
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "스노볼과 나폴레옹이 칠계명을 적었다."
-              },
-              {
-                "id": "B",
-                "text": "존스가 돌아와 새 규칙을 적어 두었다."
-              },
-              {
-                "id": "C",
-                "text": "말 복서가 혼자 모든 규칙을 외웠다."
-              },
-              {
-                "id": "D",
-                "text": "동물들은 규칙 없이 바로 흩어졌다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s15",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 68,
-                "end": 93
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무슨 일이 있었나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "모든 동물은 평등하다는 칠계명이 세워졌다."
-              },
-              {
-                "id": "B",
-                "text": "돼지만 특별히 우대받는 규칙이 적혔다."
-              },
-              {
-                "id": "C",
-                "text": "인간 말을 따라야 한다는 규칙이 생겼다."
-              },
-              {
-                "id": "D",
-                "text": "먹이는 힘센 동물만 받는 규칙이 생겼다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s16",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 94,
-                "end": 116
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "동물들은 자신들을 위해 일하겠다고 다짐했다."
-              },
-              {
-                "id": "B",
-                "text": "동물들은 인간을 위해 더 열심히 일하자 했다."
-              },
-              {
-                "id": "C",
-                "text": "동물들은 농장을 버리고 떠나기로 했다."
-              },
-              {
-                "id": "D",
-                "text": "동물들은 규칙보다 싸움이 먼저라 여겼다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s17",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 117,
-                "end": 144
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "새 농장은 자유와 평등을 목표로 출발했다."
-              },
-              {
-                "id": "B",
-                "text": "새 농장은 존스의 복귀를 목표로 삼았다."
-              },
-              {
-                "id": "C",
-                "text": "새 농장은 힘센 동물만 위한 곳이 되었다."
-              },
-              {
-                "id": "D",
-                "text": "새 농장은 아무 원칙 없이 시작되었다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s18",
-          "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
             "ranges": [
@@ -795,6 +631,170 @@
           }
         },
         {
+          "stepId": "s15",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 46,
+                "end": 93
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "스노볼과 나폴레옹이 칠계명을 적었다."
+              },
+              {
+                "id": "B",
+                "text": "존스가 돌아와 새 규칙을 적어 두었다."
+              },
+              {
+                "id": "C",
+                "text": "말 복서가 혼자 모든 규칙을 외웠다."
+              },
+              {
+                "id": "D",
+                "text": "동물들은 규칙 없이 바로 흩어졌다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 46,
+                "end": 93
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무슨 일이 있었나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 동물은 평등하다는 칠계명이 세워졌다."
+              },
+              {
+                "id": "B",
+                "text": "돼지만 특별히 우대받는 규칙이 적혔다."
+              },
+              {
+                "id": "C",
+                "text": "인간 말을 따라야 한다는 규칙이 생겼다."
+              },
+              {
+                "id": "D",
+                "text": "먹이는 힘센 동물만 받는 규칙이 생겼다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 94,
+                "end": 144
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "동물들은 자신들을 위해 일하겠다고 다짐했다."
+              },
+              {
+                "id": "B",
+                "text": "동물들은 인간을 위해 더 열심히 일하자 했다."
+              },
+              {
+                "id": "C",
+                "text": "동물들은 농장을 버리고 떠나기로 했다."
+              },
+              {
+                "id": "D",
+                "text": "동물들은 규칙보다 싸움이 먼저라 여겼다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 94,
+                "end": 144
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "새 농장은 자유와 평등을 목표로 출발했다."
+              },
+              {
+                "id": "B",
+                "text": "새 농장은 존스의 복귀를 목표로 삼았다."
+              },
+              {
+                "id": "C",
+                "text": "새 농장은 힘센 동물만 위한 곳이 되었다."
+              },
+              {
+                "id": "D",
+                "text": "새 농장은 아무 원칙 없이 시작되었다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
           "stepId": "s19",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
@@ -803,7 +803,7 @@
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 24
+                "end": 49
               }
             ]
           },
@@ -843,7 +843,7 @@
             "ranges": [
               {
                 "paragraphId": "p4",
-                "start": 25,
+                "start": 0,
                 "end": 49
               }
             ]
@@ -878,6 +878,47 @@
         },
         {
           "stepId": "s21",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 151
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "풍성한 시작 속에 권력 욕심의 그림자가 드리운다."
+              },
+              {
+                "id": "B",
+                "text": "풍성한 수확 뒤에 평등이 더 굳건해진다."
+              },
+              {
+                "id": "C",
+                "text": "존스가 돌아와 동물들과 화해를 이룬다."
+              },
+              {
+                "id": "D",
+                "text": "동물들은 농장을 떠나 다른 들판으로 옮긴다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s22",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -918,7 +959,7 @@
           }
         },
         {
-          "stepId": "s22",
+          "stepId": "s23",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -926,7 +967,7 @@
               {
                 "paragraphId": "p4",
                 "start": 91,
-                "end": 118
+                "end": 151
               }
             ]
           },
@@ -959,14 +1000,14 @@
           }
         },
         {
-          "stepId": "s23",
+          "stepId": "s24",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
-                "start": 119,
+                "start": 91,
                 "end": 151
               }
             ]
@@ -989,47 +1030,6 @@
               {
                 "id": "D",
                 "text": "수확 실패가 모든 갈등의 유일한 원인이 되었다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s24",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 151
-              }
-            ]
-          },
-          "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "풍성한 시작 속에 권력 욕심의 그림자가 드리운다."
-              },
-              {
-                "id": "B",
-                "text": "풍성한 수확 뒤에 평등이 더 굳건해진다."
-              },
-              {
-                "id": "C",
-                "text": "존스가 돌아와 동물들과 화해를 이룬다."
-              },
-              {
-                "id": "D",
-                "text": "동물들은 농장을 떠나 다른 들판으로 옮긴다."
               }
             ],
             "answerId": "A",

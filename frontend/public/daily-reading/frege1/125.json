@@ -75,6 +75,47 @@
         {
           "stepId": "s2",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 182
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "질문을 만들며 읽는 적극적 독서의 필요성"
+              },
+              {
+                "id": "B",
+                "text": "책을 빨리 읽는 방법"
+              },
+              {
+                "id": "C",
+                "text": "책 표지 꾸미기"
+              },
+              {
+                "id": "D",
+                "text": "글자만 빨리 넘기는 법"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -114,7 +155,7 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -155,7 +196,7 @@
           }
         },
         {
-          "stepId": "s4",
+          "stepId": "s5",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -196,7 +237,7 @@
           }
         },
         {
-          "stepId": "s5",
+          "stepId": "s6",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -226,47 +267,6 @@
               {
                 "id": "D",
                 "text": "귀찮음"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s6",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 182
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "질문을 만들며 읽는 적극적 독서의 필요성"
-              },
-              {
-                "id": "B",
-                "text": "책을 빨리 읽는 방법"
-              },
-              {
-                "id": "C",
-                "text": "책 표지 꾸미기"
-              },
-              {
-                "id": "D",
-                "text": "글자만 빨리 넘기는 법"
               }
             ],
             "answerId": "A",
@@ -321,129 +321,6 @@
         {
           "stepId": "s8",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 53,
-                "end": 125
-              }
-            ]
-          },
-          "question": {
-            "prompt": "글 읽기 전 질문은 어떤 기대를 높여 주나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "글에 대한 기대감을 높여줌"
-              },
-              {
-                "id": "B",
-                "text": "책을 읽기 싫어지게 만듦"
-              },
-              {
-                "id": "C",
-                "text": "책을 더 멀리하게 만든다"
-              },
-              {
-                "id": "D",
-                "text": "내용을 모두 지우게 만든다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s9",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 126,
-                "end": 188
-              }
-            ]
-          },
-          "question": {
-            "prompt": "읽는 중에는 언제 스스로 질문해야 하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "모르는 단어나 이해 안 되는 행동이 나올 때"
-              },
-              {
-                "id": "B",
-                "text": "밥을 먹어야 할 시간이 되었을 때"
-              },
-              {
-                "id": "C",
-                "text": "글자가 너무 작게 보일 때"
-              },
-              {
-                "id": "D",
-                "text": "책 표지가 예쁠 때"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s10",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 189,
-                "end": 226
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 질문들은 어떤 안내선 역할을 하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "내용을 꼼꼼히 읽게 만드는 안내선"
-              },
-              {
-                "id": "B",
-                "text": "독서를 방해하는 시끄러운 소음"
-              },
-              {
-                "id": "C",
-                "text": "책을 대충 넘기게 만드는 선"
-              },
-              {
-                "id": "D",
-                "text": "정답만 외우게 하는 선"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s11",
-          "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
             "ranges": [
@@ -483,417 +360,7 @@
           }
         },
         {
-          "stepId": "s12",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 25
-              }
-            ]
-          },
-          "question": {
-            "prompt": "글을 다 읽은 뒤에는 어떤 질문을 만들어 보면 좋나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "정답이 없는 나만의 질문"
-              },
-              {
-                "id": "B",
-                "text": "책의 저자 나이만 묻기"
-              },
-              {
-                "id": "C",
-                "text": "글자 수만 세는 질문"
-              },
-              {
-                "id": "D",
-                "text": "종이 두께만 묻는 질문"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s13",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 26,
-                "end": 102
-              }
-            ]
-          },
-          "question": {
-            "prompt": "정답이 없는 질문에는 어떤 예가 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "내가 주인공이라면 어떻게 했을까"
-              },
-              {
-                "id": "B",
-                "text": "이 책은 몇 쪽까지일까"
-              },
-              {
-                "id": "C",
-                "text": "글자 크기는 왜 이럴까"
-              },
-              {
-                "id": "D",
-                "text": "책 무게는 얼마나 될까"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s14",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 103,
-                "end": 147
-              }
-            ]
-          },
-          "question": {
-            "prompt": "삶과 연결 짓는 질문은 사고력을 어떻게 하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "사고력을 깊게 해 준다"
-              },
-              {
-                "id": "B",
-                "text": "생각을 더 얕게 만든다"
-              },
-              {
-                "id": "C",
-                "text": "질문을 모두 잊게 만든다"
-              },
-              {
-                "id": "D",
-                "text": "책을 덜 읽게 만든다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s15",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 148,
-                "end": 177
-              }
-            ]
-          },
-          "question": {
-            "prompt": "책 속 지식은 언제 나의 지혜로 바뀌나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "내 삶과 연결해 생각할 때"
-              },
-              {
-                "id": "B",
-                "text": "책장을 빨리 넘길 때"
-              },
-              {
-                "id": "C",
-                "text": "밑줄만 많이 그을 때"
-              },
-              {
-                "id": "D",
-                "text": "책을 덮고 잠들 때"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s16",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 177
-              }
-            ]
-          },
-          "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "글을 읽은 후의 질문과 사고력 확장"
-              },
-              {
-                "id": "B",
-                "text": "독후감 쓰는 요령"
-              },
-              {
-                "id": "C",
-                "text": "책 제목 고르는 방법"
-              },
-              {
-                "id": "D",
-                "text": "독서록 분량 늘리는 법"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s17",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 46
-              }
-            ]
-          },
-          "question": {
-            "prompt": "질문하며 읽는 습관은 우리를 어떤 독자로 성장시키나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "능동적이고 창의적인 독자"
-              },
-              {
-                "id": "B",
-                "text": "수동적이고 게으른 사람"
-              },
-              {
-                "id": "C",
-                "text": "표지만 보는 사람"
-              },
-              {
-                "id": "D",
-                "text": "정답만 베끼는 사람"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s18",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 47,
-                "end": 110
-              }
-            ]
-          },
-          "question": {
-            "prompt": "진정한 배움은 어떤 과정에서 일어나나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "나만의 질문을 던지고 스스로 답을 찾는 과정"
-              },
-              {
-                "id": "B",
-                "text": "작가의 생각을 무비판적으로 외우는 과정"
-              },
-              {
-                "id": "C",
-                "text": "책장을 빨리 넘기는 과정"
-              },
-              {
-                "id": "D",
-                "text": "남의 답만 따라 적는 과정"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s19",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 111,
-                "end": 171
-              }
-            ]
-          },
-          "question": {
-            "prompt": "연습을 계속하면 책 읽기가 어떻게 되나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "책 읽기가 훨씬 즐거워짐"
-              },
-              {
-                "id": "B",
-                "text": "눈이 아파서 책을 멀리하게 됨"
-              },
-              {
-                "id": "C",
-                "text": "책이 더 무겁게 느껴짐"
-              },
-              {
-                "id": "D",
-                "text": "질문이 모두 사라짐"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s20",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 172,
-                "end": 203
-              }
-            ]
-          },
-          "question": {
-            "prompt": "필자는 우리가 어떤 독자가 되어 보자고 하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "책 속에 숨겨진 보물을 찾는 위대한 탐험가"
-              },
-              {
-                "id": "B",
-                "text": "책을 단순히 장식용으로 쓰는 수집가"
-              },
-              {
-                "id": "C",
-                "text": "책만 모으는 수집가"
-              },
-              {
-                "id": "D",
-                "text": "표지만 꾸미는 화가"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s21",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 203
-              }
-            ]
-          },
-          "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "질문하며 읽기의 효과와 탐험가의 자세"
-              },
-              {
-                "id": "B",
-                "text": "책장 정리하는 방법"
-              },
-              {
-                "id": "C",
-                "text": "책 보관과 분류법"
-              },
-              {
-                "id": "D",
-                "text": "도서관 규칙 암기"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s22",
+          "stepId": "s9",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -934,7 +401,7 @@
           }
         },
         {
-          "stepId": "s23",
+          "stepId": "s10",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -975,7 +442,212 @@
           }
         },
         {
-          "stepId": "s24",
+          "stepId": "s11",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 53,
+                "end": 125
+              }
+            ]
+          },
+          "question": {
+            "prompt": "글 읽기 전 질문은 어떤 기대를 높여 주나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "글에 대한 기대감을 높여줌"
+              },
+              {
+                "id": "B",
+                "text": "책을 읽기 싫어지게 만듦"
+              },
+              {
+                "id": "C",
+                "text": "책을 더 멀리하게 만든다"
+              },
+              {
+                "id": "D",
+                "text": "내용을 모두 지우게 만든다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 126,
+                "end": 188
+              }
+            ]
+          },
+          "question": {
+            "prompt": "읽는 중에는 언제 스스로 질문해야 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모르는 단어나 이해 안 되는 행동이 나올 때"
+              },
+              {
+                "id": "B",
+                "text": "밥을 먹어야 할 시간이 되었을 때"
+              },
+              {
+                "id": "C",
+                "text": "글자가 너무 작게 보일 때"
+              },
+              {
+                "id": "D",
+                "text": "책 표지가 예쁠 때"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 189,
+                "end": 226
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 질문들은 어떤 안내선 역할을 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "내용을 꼼꼼히 읽게 만드는 안내선"
+              },
+              {
+                "id": "B",
+                "text": "독서를 방해하는 시끄러운 소음"
+              },
+              {
+                "id": "C",
+                "text": "책을 대충 넘기게 만드는 선"
+              },
+              {
+                "id": "D",
+                "text": "정답만 외우게 하는 선"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 25
+              }
+            ]
+          },
+          "question": {
+            "prompt": "글을 다 읽은 뒤에는 어떤 질문을 만들어 보면 좋나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "정답이 없는 나만의 질문"
+              },
+              {
+                "id": "B",
+                "text": "책의 저자 나이만 묻기"
+              },
+              {
+                "id": "C",
+                "text": "글자 수만 세는 질문"
+              },
+              {
+                "id": "D",
+                "text": "종이 두께만 묻는 질문"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 177
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "글을 읽은 후의 질문과 사고력 확장"
+              },
+              {
+                "id": "B",
+                "text": "독후감 쓰는 요령"
+              },
+              {
+                "id": "C",
+                "text": "책 제목 고르는 방법"
+              },
+              {
+                "id": "D",
+                "text": "독서록 분량 늘리는 법"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -1016,7 +688,7 @@
           }
         },
         {
-          "stepId": "s25",
+          "stepId": "s17",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -1046,6 +718,334 @@
               {
                 "id": "D",
                 "text": "표지 색은 누가 정했을까"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 26,
+                "end": 102
+              }
+            ]
+          },
+          "question": {
+            "prompt": "정답이 없는 질문에는 어떤 예가 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "내가 주인공이라면 어떻게 했을까"
+              },
+              {
+                "id": "B",
+                "text": "이 책은 몇 쪽까지일까"
+              },
+              {
+                "id": "C",
+                "text": "글자 크기는 왜 이럴까"
+              },
+              {
+                "id": "D",
+                "text": "책 무게는 얼마나 될까"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 103,
+                "end": 147
+              }
+            ]
+          },
+          "question": {
+            "prompt": "삶과 연결 짓는 질문은 사고력을 어떻게 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사고력을 깊게 해 준다"
+              },
+              {
+                "id": "B",
+                "text": "생각을 더 얕게 만든다"
+              },
+              {
+                "id": "C",
+                "text": "질문을 모두 잊게 만든다"
+              },
+              {
+                "id": "D",
+                "text": "책을 덜 읽게 만든다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 148,
+                "end": 177
+              }
+            ]
+          },
+          "question": {
+            "prompt": "책 속 지식은 언제 나의 지혜로 바뀌나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "내 삶과 연결해 생각할 때"
+              },
+              {
+                "id": "B",
+                "text": "책장을 빨리 넘길 때"
+              },
+              {
+                "id": "C",
+                "text": "밑줄만 많이 그을 때"
+              },
+              {
+                "id": "D",
+                "text": "책을 덮고 잠들 때"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s21",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 46
+              }
+            ]
+          },
+          "question": {
+            "prompt": "질문하며 읽는 습관은 우리를 어떤 독자로 성장시키나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "능동적이고 창의적인 독자"
+              },
+              {
+                "id": "B",
+                "text": "수동적이고 게으른 사람"
+              },
+              {
+                "id": "C",
+                "text": "표지만 보는 사람"
+              },
+              {
+                "id": "D",
+                "text": "정답만 베끼는 사람"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s22",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 203
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "질문하며 읽기의 효과와 탐험가의 자세"
+              },
+              {
+                "id": "B",
+                "text": "책장 정리하는 방법"
+              },
+              {
+                "id": "C",
+                "text": "책 보관과 분류법"
+              },
+              {
+                "id": "D",
+                "text": "도서관 규칙 암기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s23",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 47,
+                "end": 110
+              }
+            ]
+          },
+          "question": {
+            "prompt": "진정한 배움은 어떤 과정에서 일어나나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나만의 질문을 던지고 스스로 답을 찾는 과정"
+              },
+              {
+                "id": "B",
+                "text": "작가의 생각을 무비판적으로 외우는 과정"
+              },
+              {
+                "id": "C",
+                "text": "책장을 빨리 넘기는 과정"
+              },
+              {
+                "id": "D",
+                "text": "남의 답만 따라 적는 과정"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s24",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 111,
+                "end": 171
+              }
+            ]
+          },
+          "question": {
+            "prompt": "연습을 계속하면 책 읽기가 어떻게 되나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "책 읽기가 훨씬 즐거워짐"
+              },
+              {
+                "id": "B",
+                "text": "눈이 아파서 책을 멀리하게 됨"
+              },
+              {
+                "id": "C",
+                "text": "책이 더 무겁게 느껴짐"
+              },
+              {
+                "id": "D",
+                "text": "질문이 모두 사라짐"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s25",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 172,
+                "end": 203
+              }
+            ]
+          },
+          "question": {
+            "prompt": "필자는 우리가 어떤 독자가 되어 보자고 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "책 속에 숨겨진 보물을 찾는 위대한 탐험가"
+              },
+              {
+                "id": "B",
+                "text": "책을 단순히 장식용으로 쓰는 수집가"
+              },
+              {
+                "id": "C",
+                "text": "책만 모으는 수집가"
+              },
+              {
+                "id": "D",
+                "text": "표지만 꾸미는 화가"
               }
             ],
             "answerId": "A",

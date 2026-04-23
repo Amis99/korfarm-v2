@@ -57,7 +57,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 44
+                "end": 57
               }
             ]
           },
@@ -95,7 +95,46 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 46,
+                "start": 0,
+                "end": 182
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "순차의 뜻과 기본 원리"
+              },
+              {
+                "id": "B",
+                "text": "아침 일찍 일어나는 법"
+              },
+              {
+                "id": "C",
+                "text": "컴퓨터 전원 켜는 순서"
+              },
+              {
+                "id": "D",
+                "text": "밥을 빨리 먹는 방법"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 43,
                 "end": 97
               }
             ]
@@ -129,13 +168,13 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 99,
-                "end": 127
+                "start": 98,
+                "end": 128
               }
             ]
           },
@@ -168,13 +207,13 @@
           }
         },
         {
-          "stepId": "s4",
+          "stepId": "s5",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
                 "start": 129,
-                "end": 181
+                "end": 182
               }
             ]
           },
@@ -207,52 +246,13 @@
           }
         },
         {
-          "stepId": "s5",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 181
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 주요 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "순차의 뜻과 기본 원리"
-              },
-              {
-                "id": "B",
-                "text": "아침 일찍 일어나는 법"
-              },
-              {
-                "id": "C",
-                "text": "컴퓨터 전원 켜는 순서"
-              },
-              {
-                "id": "D",
-                "text": "밥을 빨리 먹는 방법"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
           "stepId": "s6",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 49
+                "end": 52
               }
             ]
           },
@@ -290,125 +290,8 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 51,
-                "end": 101
-              }
-            ]
-          },
-          "question": {
-            "prompt": "반복 명령을 쓰면 컴퓨터가 어떻게 하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "정해진 횟수만큼 처리"
-              },
-              {
-                "id": "B",
-                "text": "자기 마음대로 처리함"
-              },
-              {
-                "id": "C",
-                "text": "딱 한 번만 일하고 쉼"
-              },
-              {
-                "id": "D",
-                "text": "계속 엉뚱한 답을 냄"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 103,
-                "end": 156
-              }
-            ]
-          },
-          "question": {
-            "prompt": "별 백 개를 그릴 때 반복을 쓰면 어떤가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "몇 줄의 코드로 끝냄"
-              },
-              {
-                "id": "B",
-                "text": "백 줄의 코드를 씀"
-              },
-              {
-                "id": "C",
-                "text": "코드를 한 줄도 안 씀"
-              },
-              {
-                "id": "D",
-                "text": "수백 장의 종이가 필요함"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s9",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 158,
-                "end": 176
-              }
-            ]
-          },
-          "question": {
-            "prompt": "반복 명령 덕분에 코딩은 어떻게 되나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "아주 편리해진다"
-              },
-              {
-                "id": "B",
-                "text": "점점 더 복잡해진다"
-              },
-              {
-                "id": "C",
-                "text": "시간이 배로 걸린다"
-              },
-              {
-                "id": "D",
-                "text": "아무도 못 하게 된다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s10",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
                 "start": 0,
-                "end": 176
+                "end": 181
               }
             ]
           },
@@ -441,13 +324,130 @@
           }
         },
         {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 15,
+                "end": 105
+              }
+            ]
+          },
+          "question": {
+            "prompt": "반복 명령을 쓰면 컴퓨터가 어떻게 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "정해진 횟수만큼 처리"
+              },
+              {
+                "id": "B",
+                "text": "자기 마음대로 처리함"
+              },
+              {
+                "id": "C",
+                "text": "딱 한 번만 일하고 쉼"
+              },
+              {
+                "id": "D",
+                "text": "계속 엉뚱한 답을 냄"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 53,
+                "end": 161
+              }
+            ]
+          },
+          "question": {
+            "prompt": "별 백 개를 그릴 때 반복을 쓰면 어떤가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "몇 줄의 코드로 끝냄"
+              },
+              {
+                "id": "B",
+                "text": "백 줄의 코드를 씀"
+              },
+              {
+                "id": "C",
+                "text": "코드를 한 줄도 안 씀"
+              },
+              {
+                "id": "D",
+                "text": "수백 장의 종이가 필요함"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 106,
+                "end": 181
+              }
+            ]
+          },
+          "question": {
+            "prompt": "반복 명령 덕분에 코딩은 어떻게 되나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아주 편리해진다"
+              },
+              {
+                "id": "B",
+                "text": "점점 더 복잡해진다"
+              },
+              {
+                "id": "C",
+                "text": "시간이 배로 걸린다"
+              },
+              {
+                "id": "D",
+                "text": "아무도 못 하게 된다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s11",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 43
+                "end": 46
               }
             ]
           },
@@ -485,8 +485,47 @@
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 45,
-                "end": 84
+                "start": 0,
+                "end": 181
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "조건의 개념과 세 규칙"
+              },
+              {
+                "id": "B",
+                "text": "비 오는 날의 외출 준비"
+              },
+              {
+                "id": "C",
+                "text": "멋진 컴퓨터를 고르는 법"
+              },
+              {
+                "id": "D",
+                "text": "혼자서 길을 잘 찾는 법"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 15,
+                "end": 87
               }
             ]
           },
@@ -519,13 +558,13 @@
           }
         },
         {
-          "stepId": "s13",
+          "stepId": "s14",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 86,
-                "end": 135
+                "start": 47,
+                "end": 139
               }
             ]
           },
@@ -558,13 +597,13 @@
           }
         },
         {
-          "stepId": "s14",
+          "stepId": "s15",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 137,
-                "end": 177
+                "start": 88,
+                "end": 181
               }
             ]
           },
@@ -586,45 +625,6 @@
               {
                 "id": "D",
                 "text": "그림 대회에서 1등을 함"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s15",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 177
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 주요 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "조건의 개념과 세 규칙"
-              },
-              {
-                "id": "B",
-                "text": "비 오는 날의 외출 준비"
-              },
-              {
-                "id": "C",
-                "text": "멋진 컴퓨터를 고르는 법"
-              },
-              {
-                "id": "D",
-                "text": "혼자서 길을 잘 찾는 법"
               }
             ],
             "answerId": "A",
@@ -679,18 +679,18 @@
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 53,
-              "end": 54
+              "start": 50,
+              "end": 52
             },
             {
               "paragraphId": "p1",
-              "start": 60,
-              "end": 61
+              "start": 58,
+              "end": 60
             },
             {
               "paragraphId": "p3",
-              "start": 137,
-              "end": 138
+              "start": 140,
+              "end": 142
             }
           ],
           "scoring": {
@@ -709,22 +709,22 @@
             {
               "paragraphId": "p2",
               "start": 7,
-              "end": 8
+              "end": 9
             },
             {
               "paragraphId": "p2",
-              "start": 54,
-              "end": 55
+              "start": 56,
+              "end": 58
             },
             {
               "paragraphId": "p2",
-              "start": 128,
-              "end": 129
+              "start": 131,
+              "end": 133
             },
             {
               "paragraphId": "p3",
-              "start": 141,
-              "end": 142
+              "start": 144,
+              "end": 146
             }
           ],
           "scoring": {
@@ -743,22 +743,22 @@
             {
               "paragraphId": "p3",
               "start": 7,
-              "end": 8
+              "end": 9
             },
             {
               "paragraphId": "p3",
-              "start": 14,
-              "end": 15
+              "start": 15,
+              "end": 17
             },
             {
               "paragraphId": "p3",
-              "start": 95,
-              "end": 96
+              "start": 97,
+              "end": 99
             },
             {
               "paragraphId": "p3",
-              "start": 145,
-              "end": 146
+              "start": 148,
+              "end": 150
             }
           ],
           "scoring": {
@@ -776,8 +776,8 @@
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 162,
-              "end": 165
+              "start": 165,
+              "end": 169
             }
           ],
           "scoring": {

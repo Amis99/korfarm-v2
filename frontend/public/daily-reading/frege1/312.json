@@ -99,6 +99,47 @@
         {
           "stepId": "s2",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 160
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "보고서 전에는 자료를 모으고 정리해야 한다"
+              },
+              {
+                "id": "B",
+                "text": "보고서는 자료 없이 생각만 쓰면 된다"
+              },
+              {
+                "id": "C",
+                "text": "보고서는 그림만 많으면 잘 쓴 것이다"
+              },
+              {
+                "id": "D",
+                "text": "보고서는 분류하지 말아야 읽기 쉽다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -138,7 +179,7 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -179,7 +220,7 @@
           }
         },
         {
-          "stepId": "s4",
+          "stepId": "s5",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -209,47 +250,6 @@
               {
                 "id": "D",
                 "text": "모은 자료는 제목 없이 두어야 한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s5",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 160
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "보고서 전에는 자료를 모으고 정리해야 한다"
-              },
-              {
-                "id": "B",
-                "text": "보고서는 자료 없이 생각만 쓰면 된다"
-              },
-              {
-                "id": "C",
-                "text": "보고서는 그림만 많으면 잘 쓴 것이다"
-              },
-              {
-                "id": "D",
-                "text": "보고서는 분류하지 말아야 읽기 쉽다"
               }
             ],
             "answerId": "A",
@@ -304,6 +304,47 @@
         {
           "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 155
+              }
+            ]
+          },
+          "question": {
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "개요는 보고서의 순서와 방향을 잡아 준다"
+              },
+              {
+                "id": "B",
+                "text": "개요는 조사 결과를 감추는 데 쓰인다"
+              },
+              {
+                "id": "C",
+                "text": "개요는 자료를 모으지 않아도 되게 한다"
+              },
+              {
+                "id": "D",
+                "text": "개요는 맞춤법만 고치는 일이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -343,7 +384,7 @@
           }
         },
         {
-          "stepId": "s8",
+          "stepId": "s9",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -384,7 +425,7 @@
           }
         },
         {
-          "stepId": "s9",
+          "stepId": "s10",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -414,47 +455,6 @@
               {
                 "id": "D",
                 "text": "탄탄한 개요는 결론을 숨기게 한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s10",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 155
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "개요는 보고서의 순서와 방향을 잡아 준다"
-              },
-              {
-                "id": "B",
-                "text": "개요는 조사 결과를 감추는 데 쓰인다"
-              },
-              {
-                "id": "C",
-                "text": "개요는 자료를 모으지 않아도 되게 한다"
-              },
-              {
-                "id": "D",
-                "text": "개요는 맞춤법만 고치는 일이다"
               }
             ],
             "answerId": "A",
@@ -509,6 +509,47 @@
         {
           "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 153
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자료와 의견을 넣어 분명하게 써야 한다"
+              },
+              {
+                "id": "B",
+                "text": "표만 넣고 설명은 하지 않아도 된다"
+              },
+              {
+                "id": "C",
+                "text": "문장을 길게 늘이면 더 좋은 보고서다"
+              },
+              {
+                "id": "D",
+                "text": "조사 결과는 빼고 느낌만 쓰면 된다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -548,7 +589,7 @@
           }
         },
         {
-          "stepId": "s13",
+          "stepId": "s14",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -589,7 +630,7 @@
           }
         },
         {
-          "stepId": "s14",
+          "stepId": "s15",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -619,47 +660,6 @@
               {
                 "id": "D",
                 "text": "문장은 낱말만 늘어놓아야 한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s15",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 153
-              }
-            ]
-          },
-          "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "자료와 의견을 넣어 분명하게 써야 한다"
-              },
-              {
-                "id": "B",
-                "text": "표만 넣고 설명은 하지 않아도 된다"
-              },
-              {
-                "id": "C",
-                "text": "문장을 길게 늘이면 더 좋은 보고서다"
-              },
-              {
-                "id": "D",
-                "text": "조사 결과는 빼고 느낌만 쓰면 된다"
               }
             ],
             "answerId": "A",
@@ -714,6 +714,47 @@
         {
           "stepId": "s17",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 149
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "고쳐 쓰기와 점검이 보고서 완성도를 높인다"
+              },
+              {
+                "id": "B",
+                "text": "보고서는 한 번 쓰면 다시 볼 필요가 없다"
+              },
+              {
+                "id": "C",
+                "text": "보고서는 맞춤법보다 그림이 더 중요하다"
+              },
+              {
+                "id": "D",
+                "text": "보고서는 자료를 빼야 더 믿을 수 있다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -753,7 +794,7 @@
           }
         },
         {
-          "stepId": "s18",
+          "stepId": "s19",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -794,7 +835,7 @@
           }
         },
         {
-          "stepId": "s19",
+          "stepId": "s20",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -824,47 +865,6 @@
               {
                 "id": "D",
                 "text": "이 과정을 거치면 표만 남게 된다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s20",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 149
-              }
-            ]
-          },
-          "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "고쳐 쓰기와 점검이 보고서 완성도를 높인다"
-              },
-              {
-                "id": "B",
-                "text": "보고서는 한 번 쓰면 다시 볼 필요가 없다"
-              },
-              {
-                "id": "C",
-                "text": "보고서는 맞춤법보다 그림이 더 중요하다"
-              },
-              {
-                "id": "D",
-                "text": "보고서는 자료를 빼야 더 믿을 수 있다"
               }
             ],
             "answerId": "A",

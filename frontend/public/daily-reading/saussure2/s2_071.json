@@ -93,8 +93,47 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 61,
-                "end": 130
+                "start": 0,
+                "end": 198
+              }
+            ]
+          },
+          "question": {
+            "prompt": "물건의 길이를 비교하려면 어떻게 해야 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나란히 두고 한쪽 끝 맞추기"
+              },
+              {
+                "id": "B",
+                "text": "아무렇게나 겹쳐서 올려두기"
+              },
+              {
+                "id": "C",
+                "text": "서로 다른 사람에게 물어보기"
+              },
+              {
+                "id": "D",
+                "text": "물건을 숨겨두고 찾아보기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 60,
+                "end": 132
               }
             ]
           },
@@ -127,13 +166,13 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 132,
-                "end": 196
+                "start": 133,
+                "end": 198
               }
             ]
           },
@@ -155,45 +194,6 @@
               {
                 "id": "D",
                 "text": "가위로 똑같이 잘라서 세어 보기"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s4",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 196
-              }
-            ]
-          },
-          "question": {
-            "prompt": "물건의 길이를 비교하려면 어떻게 해야 하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "나란히 두고 한쪽 끝 맞추기"
-              },
-              {
-                "id": "B",
-                "text": "아무렇게나 겹쳐서 올려두기"
-              },
-              {
-                "id": "C",
-                "text": "서로 다른 사람에게 물어보기"
-              },
-              {
-                "id": "D",
-                "text": "물건을 숨겨두고 찾아보기"
               }
             ],
             "answerId": "A",
@@ -249,86 +249,8 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 59,
-                "end": 121
-              }
-            ]
-          },
-          "question": {
-            "prompt": "정확한 길이를 잴 때 자를 써야 하는 이유는?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "사람마다 손과 발 크기가 달라서"
-              },
-              {
-                "id": "B",
-                "text": "손으로 재면 물건이 더워져서"
-              },
-              {
-                "id": "C",
-                "text": "자가 더 예쁘게 생겼기 때문에"
-              },
-              {
-                "id": "D",
-                "text": "발이 아파서 걸을 수 없어서"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 123,
-                "end": 204
-              }
-            ]
-          },
-          "question": {
-            "prompt": "자로 길이를 정확하게 재는 방법은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "끝을 0에 맞추고 끝나는 숫자 읽기"
-              },
-              {
-                "id": "B",
-                "text": "숫자 1부터 맞추고 대충 읽기"
-              },
-              {
-                "id": "C",
-                "text": "자의 한가운데에 물건 올려두기"
-              },
-              {
-                "id": "D",
-                "text": "가장 큰 숫자부터 거꾸로 읽기"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
                 "start": 0,
-                "end": 204
+                "end": 206
               }
             ]
           },
@@ -361,13 +283,91 @@
           }
         },
         {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 58,
+                "end": 122
+              }
+            ]
+          },
+          "question": {
+            "prompt": "정확한 길이를 잴 때 자를 써야 하는 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사람마다 손과 발 크기가 달라서"
+              },
+              {
+                "id": "B",
+                "text": "손으로 재면 물건이 더워져서"
+              },
+              {
+                "id": "C",
+                "text": "자가 더 예쁘게 생겼기 때문에"
+              },
+              {
+                "id": "D",
+                "text": "발이 아파서 걸을 수 없어서"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 123,
+                "end": 206
+              }
+            ]
+          },
+          "question": {
+            "prompt": "자로 길이를 정확하게 재는 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "끝을 0에 맞추고 끝나는 숫자 읽기"
+              },
+              {
+                "id": "B",
+                "text": "숫자 1부터 맞추고 대충 읽기"
+              },
+              {
+                "id": "C",
+                "text": "자의 한가운데에 물건 올려두기"
+              },
+              {
+                "id": "D",
+                "text": "가장 큰 숫자부터 거꾸로 읽기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s9",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 60
+                "end": 61
               }
             ]
           },
@@ -405,8 +405,47 @@
             "ranges": [
               {
                 "paragraphId": "p3",
+                "start": 0,
+                "end": 208
+              }
+            ]
+          },
+          "question": {
+            "prompt": "길이 재는 법을 알게 되면 우리는 무엇을 할 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "알맞은 단위로 정확히 잴 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "무거운 것도 쉽게 들 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "아무 데나 자를 놓고 놀 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "눈 감고도 길이를 다 맞춘다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
                 "start": 62,
-                "end": 135
+                "end": 136
               }
             ]
           },
@@ -439,13 +478,13 @@
           }
         },
         {
-          "stepId": "s11",
+          "stepId": "s12",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 137,
-                "end": 206
+                "end": 208
               }
             ]
           },
@@ -467,45 +506,6 @@
               {
                 "id": "D",
                 "text": "친구들이 뛰는 속도를 잰다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 206
-              }
-            ]
-          },
-          "question": {
-            "prompt": "길이 재는 법을 알게 되면 우리는 무엇을 할 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "알맞은 단위로 정확히 잴 수 있다"
-              },
-              {
-                "id": "B",
-                "text": "무거운 것도 쉽게 들 수 있다"
-              },
-              {
-                "id": "C",
-                "text": "아무 데나 자를 놓고 놀 수 있다"
-              },
-              {
-                "id": "D",
-                "text": "눈 감고도 길이를 다 맞춘다"
               }
             ],
             "answerId": "A",
@@ -570,8 +570,8 @@
             },
             {
               "paragraphId": "p3",
-              "start": 29,
-              "end": 31
+              "start": 34,
+              "end": 36
             },
             {
               "paragraphId": "p3",
@@ -598,8 +598,8 @@
             },
             {
               "paragraphId": "p2",
-              "start": 124,
-              "end": 126
+              "start": 126,
+              "end": 128
             },
             {
               "paragraphId": "p3",
@@ -621,13 +621,13 @@
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 181,
-              "end": 185
+              "start": 182,
+              "end": 186
             },
             {
               "paragraphId": "p3",
-              "start": 74,
-              "end": 78
+              "start": 77,
+              "end": 81
             }
           ],
           "scoring": {
@@ -642,6 +642,16 @@
           "answerText": "미터",
           "answerMatchMode": "ANY",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 184,
+              "end": 186
+            },
+            {
+              "paragraphId": "p3",
+              "start": 79,
+              "end": 81
+            },
             {
               "paragraphId": "p3",
               "start": 101,

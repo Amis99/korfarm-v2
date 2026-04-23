@@ -101,13 +101,54 @@
         {
           "stepId": "s2",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 164
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "세포와 소기관은 생명 활동의 기본 구조이다."
+              },
+              {
+                "id": "B",
+                "text": "세포핵과 미토콘드리아의 차이만 다룬다."
+              },
+              {
+                "id": "C",
+                "text": "식물 세포의 특별한 구조만 설명한다."
+              },
+              {
+                "id": "D",
+                "text": "세포벽이 생명체를 만드는 과정을 다룬다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
                 "start": 43,
-                "end": 61
+                "end": 86
               }
             ]
           },
@@ -140,14 +181,14 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 62,
+                "start": 43,
                 "end": 86
               }
             ]
@@ -181,7 +222,7 @@
           }
         },
         {
-          "stepId": "s4",
+          "stepId": "s5",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -222,7 +263,7 @@
           }
         },
         {
-          "stepId": "s5",
+          "stepId": "s6",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -252,47 +293,6 @@
               {
                 "id": "D",
                 "text": "세포는 에너지 저장만 담당하는 주머니이다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s6",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 164
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "세포와 소기관은 생명 활동의 기본 구조이다."
-              },
-              {
-                "id": "B",
-                "text": "세포핵과 미토콘드리아의 차이만 다룬다."
-              },
-              {
-                "id": "C",
-                "text": "식물 세포의 특별한 구조만 설명한다."
-              },
-              {
-                "id": "D",
-                "text": "세포벽이 생명체를 만드는 과정을 다룬다."
               }
             ],
             "answerId": "A",
@@ -347,6 +347,47 @@
         {
           "stepId": "s8",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 153
+              }
+            ]
+          },
+          "question": {
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "세포핵은 유전 정보를 담고 세포를 조절한다."
+              },
+              {
+                "id": "B",
+                "text": "세포핵은 에너지 생산을 맡는 발전소이다."
+              },
+              {
+                "id": "C",
+                "text": "세포핵은 식물에만 있는 구조이다."
+              },
+              {
+                "id": "D",
+                "text": "세포핵은 세포벽을 만드는 재료이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -386,7 +427,7 @@
           }
         },
         {
-          "stepId": "s9",
+          "stepId": "s10",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -394,7 +435,7 @@
               {
                 "paragraphId": "p2",
                 "start": 75,
-                "end": 94
+                "end": 117
               }
             ]
           },
@@ -427,14 +468,14 @@
           }
         },
         {
-          "stepId": "s10",
+          "stepId": "s11",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 95,
+                "start": 75,
                 "end": 117
               }
             ]
@@ -468,7 +509,7 @@
           }
         },
         {
-          "stepId": "s11",
+          "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -498,47 +539,6 @@
               {
                 "id": "D",
                 "text": "세포핵은 동물 세포에만 있는 기관이다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 153
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "세포핵은 유전 정보를 담고 세포를 조절한다."
-              },
-              {
-                "id": "B",
-                "text": "세포핵은 에너지 생산을 맡는 발전소이다."
-              },
-              {
-                "id": "C",
-                "text": "세포핵은 식물에만 있는 구조이다."
-              },
-              {
-                "id": "D",
-                "text": "세포핵은 세포벽을 만드는 재료이다."
               }
             ],
             "answerId": "A",
@@ -593,6 +593,47 @@
         {
           "stepId": "s14",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 172
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "미토콘드리아는 에너지를 만드는 핵심 소기관이다."
+              },
+              {
+                "id": "B",
+                "text": "미토콘드리아는 유전 정보를 저장하는 핵이다."
+              },
+              {
+                "id": "C",
+                "text": "미토콘드리아는 식물만 가진 특별 기관이다."
+              },
+              {
+                "id": "D",
+                "text": "미토콘드리아는 모양을 유지하는 벽이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -632,7 +673,7 @@
           }
         },
         {
-          "stepId": "s15",
+          "stepId": "s16",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -673,7 +714,7 @@
           }
         },
         {
-          "stepId": "s16",
+          "stepId": "s17",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -703,47 +744,6 @@
               {
                 "id": "D",
                 "text": "모든 세포에 개수가 완전히 똑같다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s17",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 172
-              }
-            ]
-          },
-          "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "미토콘드리아는 에너지를 만드는 핵심 소기관이다."
-              },
-              {
-                "id": "B",
-                "text": "미토콘드리아는 유전 정보를 저장하는 핵이다."
-              },
-              {
-                "id": "C",
-                "text": "미토콘드리아는 식물만 가진 특별 기관이다."
-              },
-              {
-                "id": "D",
-                "text": "미토콘드리아는 모양을 유지하는 벽이다."
               }
             ],
             "answerId": "A",
@@ -798,6 +798,47 @@
         {
           "stepId": "s19",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 165
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "식물 세포의 특별한 구조가 동물과 다른 삶을 만든다."
+              },
+              {
+                "id": "B",
+                "text": "미토콘드리아가 식물 세포에만 있다는 내용"
+              },
+              {
+                "id": "C",
+                "text": "세포핵이 광합성을 담당한다는 내용"
+              },
+              {
+                "id": "D",
+                "text": "동물과 식물은 세포 구조가 같다는 내용"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -837,7 +878,7 @@
           }
         },
         {
-          "stepId": "s20",
+          "stepId": "s21",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -878,7 +919,7 @@
           }
         },
         {
-          "stepId": "s21",
+          "stepId": "s22",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -886,7 +927,7 @@
               {
                 "paragraphId": "p4",
                 "start": 122,
-                "end": 140
+                "end": 165
               }
             ]
           },
@@ -919,14 +960,14 @@
           }
         },
         {
-          "stepId": "s22",
+          "stepId": "s23",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
-                "start": 141,
+                "start": 122,
                 "end": 165
               }
             ]
@@ -949,47 +990,6 @@
               {
                 "id": "D",
                 "text": "식물 세포는 핵이 없어도 잘 살아간다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s23",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 165
-              }
-            ]
-          },
-          "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "식물 세포의 특별한 구조가 동물과 다른 삶을 만든다."
-              },
-              {
-                "id": "B",
-                "text": "미토콘드리아가 식물 세포에만 있다는 내용"
-              },
-              {
-                "id": "C",
-                "text": "세포핵이 광합성을 담당한다는 내용"
-              },
-              {
-                "id": "D",
-                "text": "동물과 식물은 세포 구조가 같다는 내용"
               }
             ],
             "answerId": "A",

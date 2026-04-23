@@ -97,6 +97,47 @@
         {
           "stepId": "s2",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 120
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1문단은 일회용 컵 문제에 엇갈린 의견이 있음을 말한다"
+              },
+              {
+                "id": "B",
+                "text": "1문단은 환경 보호 주장만 자세히 다룬다"
+              },
+              {
+                "id": "C",
+                "text": "1문단은 카페 설거지 문제만 설명한다"
+              },
+              {
+                "id": "D",
+                "text": "1문단은 친환경 컵 개발만 제안한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -136,7 +177,7 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -177,7 +218,7 @@
           }
         },
         {
-          "stepId": "s4",
+          "stepId": "s5",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -207,47 +248,6 @@
               {
                 "id": "D",
                 "text": "일회용 컵은 친환경 컵보다 늘 비싸다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s5",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 120
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "1문단은 일회용 컵 문제에 엇갈린 의견이 있음을 말한다"
-              },
-              {
-                "id": "B",
-                "text": "1문단은 환경 보호 주장만 자세히 다룬다"
-              },
-              {
-                "id": "C",
-                "text": "1문단은 카페 설거지 문제만 설명한다"
-              },
-              {
-                "id": "D",
-                "text": "1문단은 친환경 컵 개발만 제안한다"
               }
             ],
             "answerId": "A",
@@ -302,6 +302,47 @@
         {
           "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 129
+              }
+            ]
+          },
+          "question": {
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "2문단은 환경 보호 쪽 주장의 근거를 보여 준다"
+              },
+              {
+                "id": "B",
+                "text": "2문단은 일회용 컵 편리함만 옹호한다"
+              },
+              {
+                "id": "C",
+                "text": "2문단은 친환경 컵 대안만 소개한다"
+              },
+              {
+                "id": "D",
+                "text": "2문단은 카페 경영 부담만 설명한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -341,7 +382,7 @@
           }
         },
         {
-          "stepId": "s8",
+          "stepId": "s9",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -382,7 +423,7 @@
           }
         },
         {
-          "stepId": "s9",
+          "stepId": "s10",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -412,47 +453,6 @@
               {
                 "id": "D",
                 "text": "컵 사용은 개인 취향일 뿐이라 말한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s10",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 129
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "2문단은 환경 보호 쪽 주장의 근거를 보여 준다"
-              },
-              {
-                "id": "B",
-                "text": "2문단은 일회용 컵 편리함만 옹호한다"
-              },
-              {
-                "id": "C",
-                "text": "2문단은 친환경 컵 대안만 소개한다"
-              },
-              {
-                "id": "D",
-                "text": "2문단은 카페 경영 부담만 설명한다"
               }
             ],
             "answerId": "A",
@@ -507,6 +507,47 @@
         {
           "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 124
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "3문단은 일회용 컵이 필요하다는 쪽 이유를 말한다"
+              },
+              {
+                "id": "B",
+                "text": "3문단은 환경 피해만 다시 강조한다"
+              },
+              {
+                "id": "C",
+                "text": "3문단은 친환경 컵 개발만 소개한다"
+              },
+              {
+                "id": "D",
+                "text": "3문단은 두 입장을 바로 종합해 결론낸다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -546,7 +587,7 @@
           }
         },
         {
-          "stepId": "s13",
+          "stepId": "s14",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -587,7 +628,7 @@
           }
         },
         {
-          "stepId": "s14",
+          "stepId": "s15",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -617,47 +658,6 @@
               {
                 "id": "D",
                 "text": "카페는 일회용 컵을 쓰면 손님이 줄어든다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s15",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 124
-              }
-            ]
-          },
-          "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "3문단은 일회용 컵이 필요하다는 쪽 이유를 말한다"
-              },
-              {
-                "id": "B",
-                "text": "3문단은 환경 피해만 다시 강조한다"
-              },
-              {
-                "id": "C",
-                "text": "3문단은 친환경 컵 개발만 소개한다"
-              },
-              {
-                "id": "D",
-                "text": "3문단은 두 입장을 바로 종합해 결론낸다"
               }
             ],
             "answerId": "A",
@@ -712,6 +712,47 @@
         {
           "stepId": "s17",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 135
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "4문단은 두 입장을 함께 살필 해결책을 찾자고 말한다"
+              },
+              {
+                "id": "B",
+                "text": "4문단은 환경 쪽 의견만 옳다고 결론낸다"
+              },
+              {
+                "id": "C",
+                "text": "4문단은 편리함만 중시해야 한다고 말한다"
+              },
+              {
+                "id": "D",
+                "text": "4문단은 카페 설거지 방법만 설명한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -751,7 +792,7 @@
           }
         },
         {
-          "stepId": "s18",
+          "stepId": "s19",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -792,7 +833,7 @@
           }
         },
         {
-          "stepId": "s19",
+          "stepId": "s20",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -822,47 +863,6 @@
               {
                 "id": "D",
                 "text": "이 문제는 시간이 지나면 저절로 끝난다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s20",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 135
-              }
-            ]
-          },
-          "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "4문단은 두 입장을 함께 살필 해결책을 찾자고 말한다"
-              },
-              {
-                "id": "B",
-                "text": "4문단은 환경 쪽 의견만 옳다고 결론낸다"
-              },
-              {
-                "id": "C",
-                "text": "4문단은 편리함만 중시해야 한다고 말한다"
-              },
-              {
-                "id": "D",
-                "text": "4문단은 카페 설거지 방법만 설명한다"
               }
             ],
             "answerId": "A",

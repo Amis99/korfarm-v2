@@ -570,108 +570,114 @@
     "confirm": {
       "questions": [
         {
-                "id": "q1",
-                "prompt": "1??? '새로운 데이터에서도 성능이 유지되는지를 함께 봐야 하기 때문'?? ??? ??? ?? ????",
-                "answerRanges": [
-                        {
-                                "paragraphId": "p1",
-                                "start": 0,
-                                "end": 207
-                        }
-                ],
-                "scoring": {
-                        "correctDeltaSec": 30,
-                        "wrongDeltaSec": -45
-                },
-                "revealOnWrong": true,
-                "answerMatchMode": "ANY"
+          "id": "q1",
+          "prompt": "\"새로운 데이터에서도 성능이 유지되는지를 함께 봐야 하기 때문\"에 해당하는 부분은 어디인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 207
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "인공지능 모델을 평가할 때는 단순히 맞힌 개수만 보는 것으로 충분하지 않다. 어떤 문제를 얼마나 잘 해결하는지, 그리고 학습에 쓰지 않은 새로운 데이터에서도 그 성능이 유지되는지를 함께 살펴야 한다. 이때 중요한 개념이 평가 지표와 일반화이다. 평가 지표는 성능을 수치로 나타내는 기준이고, 일반화는 학습한 범위를 넘어 새로운 데이터에서도 적절히 작동하는 성질을 뜻한다."
         },
         {
-                "id": "q2",
-                "prompt": "2??? '전체 정확도보다 재현율이나 정밀도'?? ??? ??? ?? ????",
-                "answerRanges": [
-                        {
-                                "paragraphId": "p2",
-                                "start": 0,
-                                "end": 208
-                        }
-                ],
-                "scoring": {
-                        "correctDeltaSec": 30,
-                        "wrongDeltaSec": -45
-                },
-                "revealOnWrong": true,
-                "answerMatchMode": "ANY"
+          "id": "q2",
+          "prompt": "\"전체 정확도보다 재현율이나 정밀도\"에 해당하는 부분은 어디인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 176,
+              "end": 194
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "전체 정확도보다 재현율이나 정밀도"
         },
         {
-                "id": "q3",
-                "prompt": "3??? '학습 데이터에만 맞춰져 새 데이터에서 성능이 떨어지는 상태'?? ??? ??? ?? ????",
-                "answerRanges": [
-                        {
-                                "paragraphId": "p3",
-                                "start": 0,
-                                "end": 227
-                        }
-                ],
-                "scoring": {
-                        "correctDeltaSec": 30,
-                        "wrongDeltaSec": -45
-                },
-                "revealOnWrong": true,
-                "answerMatchMode": "ANY"
+          "id": "q3",
+          "prompt": "\"학습 데이터에만 맞춰져 새 데이터에서 성능이 떨어지는 상태\"에 해당하는 부분은 어디인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 227
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "일반화는 모델이 학습 데이터에만 지나치게 맞춰지지 않고, 처음 보는 데이터에도 적절히 대응하는지를 묻는 개념이다. 학습 데이터에서 성능이 매우 높다고 해서 실제 사용 환경에서도 반드시 좋은 결과가 나오는 것은 아니다. 학습 과정에서 우연한 잡음이나 특정 패턴에 과하게 적응하면 새로운 입력에서는 오히려 성능이 크게 떨어질 수 있다. 이런 상태를 과적합이라고 하며, 일반화가 잘되지 않는 대표적 사례로 본다."
         },
         {
-                "id": "q4",
-                "prompt": "4??? '각 단계에서 성능 차이를 수치로 보여 주는 것'?? ??? ??? ?? ????",
-                "answerRanges": [
-                        {
-                                "paragraphId": "p4",
-                                "start": 0,
-                                "end": 224
-                        }
-                ],
-                "scoring": {
-                        "correctDeltaSec": 30,
-                        "wrongDeltaSec": -45
-                },
-                "revealOnWrong": true,
-                "answerMatchMode": "ANY"
+          "id": "q4",
+          "prompt": "\"각 단계에서 성능 차이를 수치로 보여 주는 것\"에 해당하는 부분은 어디인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 224
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "그래서 모델 평가에서는 훈련 데이터와 검증 데이터, 테스트 데이터를 나누어 보는 방식이 중요하다. 훈련 데이터로는 모델을 학습시키고, 검증 데이터로는 설정을 조정하며, 마지막 테스트 데이터로는 최종 성능을 확인한다. 이렇게 해야 모델이 이미 본 데이터에만 잘 맞는지, 아니면 새로운 데이터에도 적용 가능한지를 가려낼 수 있다. 평가 지표는 이 각 단계에서 어떤 성능 차이가 나는지를 수치로 보여 준다."
         },
         {
-                "id": "q5",
-                "prompt": "5??? '특정 데이터 분포 안에서만 그 점수가 유지될 때'?? ??? ??? ?? ????",
-                "answerRanges": [
-                        {
-                                "paragraphId": "p5",
-                                "start": 0,
-                                "end": 234
-                        }
-                ],
-                "scoring": {
-                        "correctDeltaSec": 30,
-                        "wrongDeltaSec": -45
-                },
-                "revealOnWrong": true,
-                "answerMatchMode": "ANY"
+          "id": "q5",
+          "prompt": "\"특정 데이터 분포 안에서만 그 점수가 유지될 때\"에 해당하는 부분은 어디인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 234
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "평가 지표와 일반화는 함께 읽어야 의미가 커진다. 지표가 높더라도 그것이 특정 데이터 분포 안에서만 유지된다면 실제 활용 가치는 제한될 수 있다. 반대로 약간 낮은 점수라도 다양한 데이터에서 안정적으로 유지된다면 더 신뢰할 만한 모델일 수 있다. 따라서 모델을 비교할 때는 한 번 나온 수치만 보지 말고, 그 수치가 어떤 데이터와 어떤 지표에서 얻어진 것인지, 또 일반화 가능성을 어떻게 확인했는지를 함께 따져야 한다."
         },
         {
-                "id": "q6",
-                "prompt": "6??? '적절한 지표에서 안정된 성능을 보이며 새로운 상황에도 대응할 수 있는 것'?? ??? ??? ?? ????",
-                "answerRanges": [
-                        {
-                                "paragraphId": "p6",
-                                "start": 0,
-                                "end": 209
-                        }
-                ],
-                "scoring": {
-                        "correctDeltaSec": 30,
-                        "wrongDeltaSec": -45
-                },
-                "revealOnWrong": true,
-                "answerMatchMode": "ANY"
+          "id": "q6",
+          "prompt": "\"적절한 지표에서 안정된 성능을 보이며 새로운 상황에도 대응할 수 있는 것\"에 해당하는 부분은 어디인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 209
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "정리하면 평가 지표는 성능을 측정하는 기준이고, 일반화는 그 성능이 새로운 데이터에서도 유지되는 성질이다. 인공지능에서 좋은 모델이란 단순히 훈련 자료를 많이 외운 모델이 아니라, 적절한 지표에서 안정된 성능을 보이며 새로운 상황에도 대응할 수 있는 모델이다. 그래서 인공지능을 읽을 때는 수치 하나만 볼 것이 아니라, 그 수치의 의미와 일반화 가능성을 함께 해석해야 한다."
         }
-]
+      ]
     }
   }
 }

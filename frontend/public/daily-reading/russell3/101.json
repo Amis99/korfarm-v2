@@ -1,679 +1,683 @@
 {
-    "contentId":  "dr-r3-101",
-    "contentType":  "DAILY_READING",
-    "version":  1,
-    "status":  "PUBLISHED",
-    "title":  "일일 독해(러셀 3) Day 101 비문학- 해시 충돌과 해결",
-    "description":  "일일 독해 - 정독·복기·확인",
-    "targetLevel":  "RUSSELL_3",
-    "schoolGradeRange":  {
-                             "min":  9,
-                             "max":  10
-                         },
-    "area":  "READING",
-    "subArea":  "NONFICTION",
-    "competencies":  [
-                         "READING"
-                     ],
-    "tags":  [
-                 "daily"
-             ],
-    "access":  {
-                   "mode":  "FREE"
-               },
-    "seedReward":  {
-                       "seedType":  "WHEAT",
-                       "count":  3,
-                       "multiplier":  1
-                   },
-    "timeLimitSec":  480,
-    "assets":  {
-
-               },
-    "payload":  {
-                    "passage":  {
-                                    "format":  "TEXT",
-                                    "paragraphs":  [
-                                                       {
-                                                           "id":  "p1",
-                                                           "text":  "해시는 데이터를 짧은 값으로 바꾸어 저장 위치를 빠르게 찾도록 돕는 방법이다. 예를 들어 학생 번호나 단어를 어떤 규칙에 따라 숫자로 바꾸고, 그 숫자를 배열의 인덱스로 쓰면 원하는 정보를 바로 찾아갈 수 있다. 검색 속도가 빠르다는 장점 때문에 해시는 사전, 회원 정보 관리, 중복 검사처럼 많은 프로그램에서 널리 쓰인다."
-                                                       },
-                                                       {
-                                                           "id":  "p2",
-                                                           "text":  "하지만 서로 다른 입력이 같은 해시 값을 가질 수 있다는 점이 문제를 만든다. 이를 해시 충돌이라고 한다. 입력의 종류는 매우 많지만 저장 공간의 칸 수는 한정되어 있으므로, 아무리 좋은 해시 함수라도 충돌을 완전히 없앨 수는 없다. 따라서 해시를 잘 설계한다는 것은 충돌이 생기지 않게 만드는 일이 아니라, 충돌이 생겼을 때도 효율을 크게 잃지 않도록 다루는 일에 가깝다."
-                                                       },
-                                                       {
-                                                           "id":  "p3",
-                                                           "text":  "충돌을 해결하는 대표적인 방법 가운데 하나는 체이닝이다. 같은 위치로 들어온 데이터를 연결 리스트나 동적 배열처럼 한 칸 안에 묶어 두는 방식이다. 이 방법은 빈 칸이 부족해도 새로운 데이터를 비교적 쉽게 추가할 수 있고 구현도 직관적이다. 다만 한 위치에 데이터가 지나치게 몰리면 연결된 목록이 길어져 검색 속도가 떨어질 수 있다."
-                                                       },
-                                                       {
-                                                           "id":  "p4",
-                                                           "text":  "다른 방법은 개방 주소법이다. 충돌이 나면 그 칸에 그대로 두지 않고, 비어 있는 다른 칸을 찾아 옮겨 저장한다. 선형 탐사는 바로 다음 칸부터 차례대로 확인하고, 이차 탐사는 간격을 점점 넓히며 탐색한다. 또 이중 해싱은 두 번째 해시 함수를 사용해 이동 간격을 정한다. 이 방식은 배열 안에 자료가 모여 있어 메모리 접근이 단순하지만, 빈 칸이 줄어들수록 탐색 횟수가 늘어나는 약점이 있다."
-                                                       },
-                                                       {
-                                                           "id":  "p5",
-                                                           "text":  "충돌을 줄이려면 해시 함수와 적재율도 함께 고려해야 한다. 해시 함수가 입력 값을 고르게 퍼뜨리지 못하면 일부 칸에 데이터가 집중되고, 적재율이 지나치게 높아지면 충돌 빈도 자체가 늘어난다. 그래서 해시 테이블은 일정 수준 이상 차면 테이블 크기를 키우고, 기존 데이터를 다시 배치하는 재해싱 과정을 거치기도 한다. 이 과정은 순간적으로 비용이 들지만 전체 성능을 안정적으로 유지하는 데 필요하다."
-                                                       },
-                                                       {
-                                                           "id":  "p6",
-                                                           "text":  "결국 해시 충돌과 해결을 이해한다는 것은 빠른 검색이 어떻게 유지되는지를 이해하는 일이다. 해시는 평균적으로 매우 빠르지만, 충돌이 많아지고 해결 방식이 비효율적이면 장점이 사라질 수 있다. 그래서 좋은 해시 테이블은 충돌을 피할 수 없다는 사실을 인정한 뒤, 자료의 분포와 저장 공간의 상태에 맞는 해결 전략을 선택해 성능 저하를 최소화하도록 설계된다."
-                                                       }
-                                                   ]
-                                },
-                    "intensive":  {
-                                      "timeline":  [
-                                                       {
-                                                           "stepId":  "s1",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p1",
-                                                                                                "start":  0,
-                                                                                                "end":  181
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "해시의 기본 목적은 무엇인가?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "데이터를 짧은 값으로 바꾸어 저장 위치를 빠르게 찾게 하는 것이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "데이터를 무조건 압축하는 것이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "모든 정보를 암호화하는 것이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "배열을 없애는 것이다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s2",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p1",
-                                                                                                "start":  0,
-                                                                                                "end":  181
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "해시가 널리 쓰이는 이유는 무엇인가?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "검색 속도가 빠르기 때문이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "저장 공간이 무한하기 때문이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "충돌이 전혀 없기 때문이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "구현이 항상 가장 쉽기 때문이다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s3",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p2",
-                                                                                                "start":  0,
-                                                                                                "end":  209
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "해시 충돌이란 무엇인가?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "서로 다른 입력이 같은 해시 값을 갖는 것이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "같은 입력이 항상 다른 값을 갖는 것이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "배열이 비어 있는 것이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "해시 함수가 없는 것이다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s4",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p2",
-                                                                                                "start":  0,
-                                                                                                "end":  209
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "좋은 해시 설계의 핵심으로 알맞은 것은 무엇인가?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "충돌이 생겨도 효율을 크게 잃지 않도록 다루는 것이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "충돌을 완전히 없애는 것이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "적재율을 0으로 만드는 것이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "모든 입력을 같은 위치에 두는 것이다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s5",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p3",
-                                                                                                "start":  0,
-                                                                                                "end":  186
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "체이닝의 방식으로 알맞은 것은 무엇인가?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "같은 위치의 데이터를 연결 구조로 묶어 두는 것이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "비어 있는 칸을 무조건 비우는 것이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "값을 두 배로 늘리는 것이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "해시를 다시 계산하지 않는 것이다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s6",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p3",
-                                                                                                "start":  0,
-                                                                                                "end":  186
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "체이닝의 약점으로 알맞은 것은 무엇인가?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "한 위치에 몰리면 목록이 길어져 검색 속도가 떨어질 수 있다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "저장이 불가능하다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "충돌이 아예 생기지 않는다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "배열을 사용할 수 없다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s7",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p4",
-                                                                                                "start":  0,
-                                                                                                "end":  220
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "개방 주소법의 뜻으로 알맞은 것은 무엇인가?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "충돌이 나면 다른 비어 있는 칸을 찾아 저장하는 것이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "같은 칸에 그대로 모두 쌓는 것이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "리스트를 연결하지 않는 것이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "해시 값을 없애는 것이다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s8",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p4",
-                                                                                                "start":  0,
-                                                                                                "end":  220
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "선형 탐사, 이차 탐사, 이중 해싱의 공통점은 무엇인가?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "비어 있는 다른 칸을 찾는 방법들이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "모두 체이닝의 종류이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "모두 재해싱의 종류이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "모두 명령형 함수이다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s9",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p5",
-                                                                                                "start":  0,
-                                                                                                "end":  222
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "적재율이 높아지면 무엇이 생기는가?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "충돌 빈도가 늘어난다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "메모리가 무한해진다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "탐색이 자동으로 빨라진다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "충돌이 사라진다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s10",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p5",
-                                                                                                "start":  0,
-                                                                                                "end":  222
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "재해싱을 하는 이유는 무엇인가?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "성능을 안정적으로 유지하려고 한다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "데이터를 모두 삭제하려고 한다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "해시 함수를 없애려고 한다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "배열 길이를 줄이려고 한다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s11",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p6",
-                                                                                                "start":  0,
-                                                                                                "end":  198
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "해시의 장점을 유지하려면 무엇을 알아야 하는가?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "자료 분포와 저장 공간 상태에 맞는 해결 전략이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "입력의 색깔과 모양이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "프로그래머의 취향이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "숫자의 자릿수만이다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s12",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p6",
-                                                                                                "start":  0,
-                                                                                                "end":  198
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "이 글의 중심 생각으로 알맞은 것은 무엇인가?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "충돌은 피할 수 없으므로 해결 방식 설계가 중요하다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "충돌은 항상 잘못된 것이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "해시는 평균 속도가 느리다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "저장 공간은 무제한이다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       }
-                                                   ]
-                                  },
-                    "recall":  {
-                                   "cards":  [
-                                                 {
-                                                     "id":  "c1",
-                                                     "text":  "해시는 데이터를 짧은 값으로 바꾸어 저장 위치를 빠르게 찾게 해 주는 방법이라서 검색이 중요한 여러 프로그램에서 널리 쓰인다."
-                                                 },
-                                                 {
-                                                     "id":  "c2",
-                                                     "text":  "하지만 서로 다른 입력이 같은 해시 값을 갖는 충돌은 피할 수 없으므로, 해시 설계의 핵심은 충돌을 효율적으로 다루는 데 있다."
-                                                 },
-                                                 {
-                                                     "id":  "c3",
-                                                     "text":  "체이닝은 같은 위치로 들어온 데이터를 한 칸 안의 목록으로 묶어 두는 방식이라 추가는 쉽지만 한 곳에 몰리면 검색이 느려질 수 있다."
-                                                 },
-                                                 {
-                                                     "id":  "c4",
-                                                     "text":  "개방 주소법은 충돌이 나면 비어 있는 다른 칸을 찾아 저장하는 방식으로 메모리 접근은 단순하지만 빈칸이 줄수록 탐색 횟수가 늘어난다."
-                                                 },
-                                                 {
-                                                     "id":  "c5",
-                                                     "text":  "그래서 해시 테이블은 입력을 고르게 퍼뜨리는 함수와 적절한 적재율을 함께 고려하고, 필요하면 재해싱으로 테이블을 다시 정리한다."
-                                                 },
-                                                 {
-                                                     "id":  "c6",
-                                                     "text":  "결국 좋은 해시 테이블은 충돌을 없애려 하기보다 자료 분포와 저장 공간 상태에 맞는 해결 전략으로 빠른 검색 성능을 유지하도록 설계된다."
-                                                 }
-                                             ],
-                                   "correctOrder":  [
-                                                        "c1",
-                                                        "c2",
-                                                        "c3",
-                                                        "c4",
-                                                        "c5",
-                                                        "c6"
-                                                    ],
-                                   "seedPenalty":  1
-                               },
-                    "confirm":  {
-                                    "questions":  [
+  "contentId": "dr-r3-101",
+  "contentType": "DAILY_READING",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "일일 독해(러셀 3) Day 101 비문학- 해시 충돌과 해결",
+  "description": "일일 독해 - 정독·복기·확인",
+  "targetLevel": "RUSSELL_3",
+  "schoolGradeRange": {
+    "min": 9,
+    "max": 10
+  },
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": [
+    "READING"
+  ],
+  "tags": [
+    "daily"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 480,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
         {
-                "id": "q1",
-                "prompt": "1??? '데이터를 짧은 값으로 바꾸어 저장 위치를 빠르게 찾게 하는 것이다'?? ??? ??? ?? ????",
-                "answerRanges": [
-                        {
-                                "paragraphId": "p1",
-                                "start": 0,
-                                "end": 181
-                        }
-                ],
-                "scoring": {
-                        "correctDeltaSec": 30,
-                        "wrongDeltaSec": -45
-                },
-                "revealOnWrong": true,
-                "answerMatchMode": "ANY"
+          "id": "p1",
+          "text": "해시는 데이터를 짧은 값으로 바꾸어 저장 위치를 빠르게 찾도록 돕는 방법이다. 예를 들어 학생 번호나 단어를 어떤 규칙에 따라 숫자로 바꾸고, 그 숫자를 배열의 인덱스로 쓰면 원하는 정보를 바로 찾아갈 수 있다. 검색 속도가 빠르다는 장점 때문에 해시는 사전, 회원 정보 관리, 중복 검사처럼 많은 프로그램에서 널리 쓰인다."
         },
         {
-                "id": "q2",
-                "prompt": "2??? '충돌이 생겨도 효율을 크게 잃지 않도록 다루는 것이다'?? ??? ??? ?? ????",
-                "answerRanges": [
-                        {
-                                "paragraphId": "p2",
-                                "start": 0,
-                                "end": 209
-                        }
-                ],
-                "scoring": {
-                        "correctDeltaSec": 30,
-                        "wrongDeltaSec": -45
-                },
-                "revealOnWrong": true,
-                "answerMatchMode": "ANY"
+          "id": "p2",
+          "text": "하지만 서로 다른 입력이 같은 해시 값을 가질 수 있다는 점이 문제를 만든다. 이를 해시 충돌이라고 한다. 입력의 종류는 매우 많지만 저장 공간의 칸 수는 한정되어 있으므로, 아무리 좋은 해시 함수라도 충돌을 완전히 없앨 수는 없다. 따라서 해시를 잘 설계한다는 것은 충돌이 생기지 않게 만드는 일이 아니라, 충돌이 생겼을 때도 효율을 크게 잃지 않도록 다루는 일에 가깝다."
         },
         {
-                "id": "q3",
-                "prompt": "3??? '한 위치에 몰리면 목록이 길어져 검색 속도가 떨어질 수 있다'?? ??? ??? ?? ????",
-                "answerRanges": [
-                        {
-                                "paragraphId": "p3",
-                                "start": 0,
-                                "end": 186
-                        }
-                ],
-                "scoring": {
-                        "correctDeltaSec": 30,
-                        "wrongDeltaSec": -45
-                },
-                "revealOnWrong": true,
-                "answerMatchMode": "ANY"
+          "id": "p3",
+          "text": "충돌을 해결하는 대표적인 방법 가운데 하나는 체이닝이다. 같은 위치로 들어온 데이터를 연결 리스트나 동적 배열처럼 한 칸 안에 묶어 두는 방식이다. 이 방법은 빈 칸이 부족해도 새로운 데이터를 비교적 쉽게 추가할 수 있고 구현도 직관적이다. 다만 한 위치에 데이터가 지나치게 몰리면 연결된 목록이 길어져 검색 속도가 떨어질 수 있다."
         },
         {
-                "id": "q4",
-                "prompt": "4??? '충돌이 나면 다른 비어 있는 칸을 찾아 저장하는 것이다'?? ??? ??? ?? ????",
-                "answerRanges": [
-                        {
-                                "paragraphId": "p4",
-                                "start": 0,
-                                "end": 220
-                        }
-                ],
-                "scoring": {
-                        "correctDeltaSec": 30,
-                        "wrongDeltaSec": -45
-                },
-                "revealOnWrong": true,
-                "answerMatchMode": "ANY"
+          "id": "p4",
+          "text": "다른 방법은 개방 주소법이다. 충돌이 나면 그 칸에 그대로 두지 않고, 비어 있는 다른 칸을 찾아 옮겨 저장한다. 선형 탐사는 바로 다음 칸부터 차례대로 확인하고, 이차 탐사는 간격을 점점 넓히며 탐색한다. 또 이중 해싱은 두 번째 해시 함수를 사용해 이동 간격을 정한다. 이 방식은 배열 안에 자료가 모여 있어 메모리 접근이 단순하지만, 빈 칸이 줄어들수록 탐색 횟수가 늘어나는 약점이 있다."
         },
         {
-                "id": "q5",
-                "prompt": "5??? '성능을 안정적으로 유지하려고 한다'?? ??? ??? ?? ????",
-                "answerRanges": [
-                        {
-                                "paragraphId": "p5",
-                                "start": 0,
-                                "end": 222
-                        }
-                ],
-                "scoring": {
-                        "correctDeltaSec": 30,
-                        "wrongDeltaSec": -45
-                },
-                "revealOnWrong": true,
-                "answerMatchMode": "ANY"
+          "id": "p5",
+          "text": "충돌을 줄이려면 해시 함수와 적재율도 함께 고려해야 한다. 해시 함수가 입력 값을 고르게 퍼뜨리지 못하면 일부 칸에 데이터가 집중되고, 적재율이 지나치게 높아지면 충돌 빈도 자체가 늘어난다. 그래서 해시 테이블은 일정 수준 이상 차면 테이블 크기를 키우고, 기존 데이터를 다시 배치하는 재해싱 과정을 거치기도 한다. 이 과정은 순간적으로 비용이 들지만 전체 성능을 안정적으로 유지하는 데 필요하다."
         },
         {
-                "id": "q6",
-                "prompt": "6??? '충돌은 피할 수 없으므로 해결 방식 설계가 중요하다'?? ??? ??? ?? ????",
-                "answerRanges": [
-                        {
-                                "paragraphId": "p6",
-                                "start": 0,
-                                "end": 198
-                        }
-                ],
-                "scoring": {
-                        "correctDeltaSec": 30,
-                        "wrongDeltaSec": -45
-                },
-                "revealOnWrong": true,
-                "answerMatchMode": "ANY"
+          "id": "p6",
+          "text": "결국 해시 충돌과 해결을 이해한다는 것은 빠른 검색이 어떻게 유지되는지를 이해하는 일이다. 해시는 평균적으로 매우 빠르지만, 충돌이 많아지고 해결 방식이 비효율적이면 장점이 사라질 수 있다. 그래서 좋은 해시 테이블은 충돌을 피할 수 없다는 사실을 인정한 뒤, 자료의 분포와 저장 공간의 상태에 맞는 해결 전략을 선택해 성능 저하를 최소화하도록 설계된다."
         }
-]
-                                }
-                }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 181
+              }
+            ]
+          },
+          "question": {
+            "prompt": "해시의 기본 목적은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "데이터를 짧은 값으로 바꾸어 저장 위치를 빠르게 찾게 하는 것이다"
+              },
+              {
+                "id": "B",
+                "text": "데이터를 무조건 압축하는 것이다"
+              },
+              {
+                "id": "C",
+                "text": "모든 정보를 암호화하는 것이다"
+              },
+              {
+                "id": "D",
+                "text": "배열을 없애는 것이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 181
+              }
+            ]
+          },
+          "question": {
+            "prompt": "해시가 널리 쓰이는 이유는 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "검색 속도가 빠르기 때문이다"
+              },
+              {
+                "id": "B",
+                "text": "저장 공간이 무한하기 때문이다"
+              },
+              {
+                "id": "C",
+                "text": "충돌이 전혀 없기 때문이다"
+              },
+              {
+                "id": "D",
+                "text": "구현이 항상 가장 쉽기 때문이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 209
+              }
+            ]
+          },
+          "question": {
+            "prompt": "해시 충돌이란 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서로 다른 입력이 같은 해시 값을 갖는 것이다"
+              },
+              {
+                "id": "B",
+                "text": "같은 입력이 항상 다른 값을 갖는 것이다"
+              },
+              {
+                "id": "C",
+                "text": "배열이 비어 있는 것이다"
+              },
+              {
+                "id": "D",
+                "text": "해시 함수가 없는 것이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 209
+              }
+            ]
+          },
+          "question": {
+            "prompt": "좋은 해시 설계의 핵심으로 알맞은 것은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "충돌이 생겨도 효율을 크게 잃지 않도록 다루는 것이다"
+              },
+              {
+                "id": "B",
+                "text": "충돌을 완전히 없애는 것이다"
+              },
+              {
+                "id": "C",
+                "text": "적재율을 0으로 만드는 것이다"
+              },
+              {
+                "id": "D",
+                "text": "모든 입력을 같은 위치에 두는 것이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 186
+              }
+            ]
+          },
+          "question": {
+            "prompt": "체이닝의 방식으로 알맞은 것은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "같은 위치의 데이터를 연결 구조로 묶어 두는 것이다"
+              },
+              {
+                "id": "B",
+                "text": "비어 있는 칸을 무조건 비우는 것이다"
+              },
+              {
+                "id": "C",
+                "text": "값을 두 배로 늘리는 것이다"
+              },
+              {
+                "id": "D",
+                "text": "해시를 다시 계산하지 않는 것이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 186
+              }
+            ]
+          },
+          "question": {
+            "prompt": "체이닝의 약점으로 알맞은 것은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한 위치에 몰리면 목록이 길어져 검색 속도가 떨어질 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "저장이 불가능하다"
+              },
+              {
+                "id": "C",
+                "text": "충돌이 아예 생기지 않는다"
+              },
+              {
+                "id": "D",
+                "text": "배열을 사용할 수 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 220
+              }
+            ]
+          },
+          "question": {
+            "prompt": "개방 주소법의 뜻으로 알맞은 것은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "충돌이 나면 다른 비어 있는 칸을 찾아 저장하는 것이다"
+              },
+              {
+                "id": "B",
+                "text": "같은 칸에 그대로 모두 쌓는 것이다"
+              },
+              {
+                "id": "C",
+                "text": "리스트를 연결하지 않는 것이다"
+              },
+              {
+                "id": "D",
+                "text": "해시 값을 없애는 것이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 220
+              }
+            ]
+          },
+          "question": {
+            "prompt": "선형 탐사, 이차 탐사, 이중 해싱의 공통점은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비어 있는 다른 칸을 찾는 방법들이다"
+              },
+              {
+                "id": "B",
+                "text": "모두 체이닝의 종류이다"
+              },
+              {
+                "id": "C",
+                "text": "모두 재해싱의 종류이다"
+              },
+              {
+                "id": "D",
+                "text": "모두 명령형 함수이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 222
+              }
+            ]
+          },
+          "question": {
+            "prompt": "적재율이 높아지면 무엇이 생기는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "충돌 빈도가 늘어난다"
+              },
+              {
+                "id": "B",
+                "text": "메모리가 무한해진다"
+              },
+              {
+                "id": "C",
+                "text": "탐색이 자동으로 빨라진다"
+              },
+              {
+                "id": "D",
+                "text": "충돌이 사라진다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 222
+              }
+            ]
+          },
+          "question": {
+            "prompt": "재해싱을 하는 이유는 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "성능을 안정적으로 유지하려고 한다"
+              },
+              {
+                "id": "B",
+                "text": "데이터를 모두 삭제하려고 한다"
+              },
+              {
+                "id": "C",
+                "text": "해시 함수를 없애려고 한다"
+              },
+              {
+                "id": "D",
+                "text": "배열 길이를 줄이려고 한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 198
+              }
+            ]
+          },
+          "question": {
+            "prompt": "해시의 장점을 유지하려면 무엇을 알아야 하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자료 분포와 저장 공간 상태에 맞는 해결 전략이다"
+              },
+              {
+                "id": "B",
+                "text": "입력의 색깔과 모양이다"
+              },
+              {
+                "id": "C",
+                "text": "프로그래머의 취향이다"
+              },
+              {
+                "id": "D",
+                "text": "숫자의 자릿수만이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 198
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 글의 중심 생각으로 알맞은 것은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "충돌은 피할 수 없으므로 해결 방식 설계가 중요하다"
+              },
+              {
+                "id": "B",
+                "text": "충돌은 항상 잘못된 것이다"
+              },
+              {
+                "id": "C",
+                "text": "해시는 평균 속도가 느리다"
+              },
+              {
+                "id": "D",
+                "text": "저장 공간은 무제한이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        {
+          "id": "c1",
+          "text": "해시는 데이터를 짧은 값으로 바꾸어 저장 위치를 빠르게 찾게 해 주는 방법이라서 검색이 중요한 여러 프로그램에서 널리 쓰인다."
+        },
+        {
+          "id": "c2",
+          "text": "하지만 서로 다른 입력이 같은 해시 값을 갖는 충돌은 피할 수 없으므로, 해시 설계의 핵심은 충돌을 효율적으로 다루는 데 있다."
+        },
+        {
+          "id": "c3",
+          "text": "체이닝은 같은 위치로 들어온 데이터를 한 칸 안의 목록으로 묶어 두는 방식이라 추가는 쉽지만 한 곳에 몰리면 검색이 느려질 수 있다."
+        },
+        {
+          "id": "c4",
+          "text": "개방 주소법은 충돌이 나면 비어 있는 다른 칸을 찾아 저장하는 방식으로 메모리 접근은 단순하지만 빈칸이 줄수록 탐색 횟수가 늘어난다."
+        },
+        {
+          "id": "c5",
+          "text": "그래서 해시 테이블은 입력을 고르게 퍼뜨리는 함수와 적절한 적재율을 함께 고려하고, 필요하면 재해싱으로 테이블을 다시 정리한다."
+        },
+        {
+          "id": "c6",
+          "text": "결국 좋은 해시 테이블은 충돌을 없애려 하기보다 자료 분포와 저장 공간 상태에 맞는 해결 전략으로 빠른 검색 성능을 유지하도록 설계된다."
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "\"데이터를 짧은 값으로 바꾸어 저장 위치를 빠르게 찾게 하는 것이다\"에 해당하는 부분은 어디인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 181
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "해시는 데이터를 짧은 값으로 바꾸어 저장 위치를 빠르게 찾도록 돕는 방법이다. 예를 들어 학생 번호나 단어를 어떤 규칙에 따라 숫자로 바꾸고, 그 숫자를 배열의 인덱스로 쓰면 원하는 정보를 바로 찾아갈 수 있다. 검색 속도가 빠르다는 장점 때문에 해시는 사전, 회원 정보 관리, 중복 검사처럼 많은 프로그램에서 널리 쓰인다."
+        },
+        {
+          "id": "q2",
+          "prompt": "\"충돌이 생겨도 효율을 크게 잃지 않도록 다루는 것이다\"에 해당하는 부분은 어디인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 209
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "하지만 서로 다른 입력이 같은 해시 값을 가질 수 있다는 점이 문제를 만든다. 이를 해시 충돌이라고 한다. 입력의 종류는 매우 많지만 저장 공간의 칸 수는 한정되어 있으므로, 아무리 좋은 해시 함수라도 충돌을 완전히 없앨 수는 없다. 따라서 해시를 잘 설계한다는 것은 충돌이 생기지 않게 만드는 일이 아니라, 충돌이 생겼을 때도 효율을 크게 잃지 않도록 다루는 일에 가깝다."
+        },
+        {
+          "id": "q3",
+          "prompt": "\"한 위치에 몰리면 목록이 길어져 검색 속도가 떨어질 수 있다\"에 해당하는 부분은 어디인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 186
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "충돌을 해결하는 대표적인 방법 가운데 하나는 체이닝이다. 같은 위치로 들어온 데이터를 연결 리스트나 동적 배열처럼 한 칸 안에 묶어 두는 방식이다. 이 방법은 빈 칸이 부족해도 새로운 데이터를 비교적 쉽게 추가할 수 있고 구현도 직관적이다. 다만 한 위치에 데이터가 지나치게 몰리면 연결된 목록이 길어져 검색 속도가 떨어질 수 있다."
+        },
+        {
+          "id": "q4",
+          "prompt": "\"충돌이 나면 다른 비어 있는 칸을 찾아 저장하는 것이다\"에 해당하는 부분은 어디인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 220
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "다른 방법은 개방 주소법이다. 충돌이 나면 그 칸에 그대로 두지 않고, 비어 있는 다른 칸을 찾아 옮겨 저장한다. 선형 탐사는 바로 다음 칸부터 차례대로 확인하고, 이차 탐사는 간격을 점점 넓히며 탐색한다. 또 이중 해싱은 두 번째 해시 함수를 사용해 이동 간격을 정한다. 이 방식은 배열 안에 자료가 모여 있어 메모리 접근이 단순하지만, 빈 칸이 줄어들수록 탐색 횟수가 늘어나는 약점이 있다."
+        },
+        {
+          "id": "q5",
+          "prompt": "\"성능을 안정적으로 유지하려고 한다\"에 해당하는 부분은 어디인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 222
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "충돌을 줄이려면 해시 함수와 적재율도 함께 고려해야 한다. 해시 함수가 입력 값을 고르게 퍼뜨리지 못하면 일부 칸에 데이터가 집중되고, 적재율이 지나치게 높아지면 충돌 빈도 자체가 늘어난다. 그래서 해시 테이블은 일정 수준 이상 차면 테이블 크기를 키우고, 기존 데이터를 다시 배치하는 재해싱 과정을 거치기도 한다. 이 과정은 순간적으로 비용이 들지만 전체 성능을 안정적으로 유지하는 데 필요하다."
+        },
+        {
+          "id": "q6",
+          "prompt": "\"충돌은 피할 수 없으므로 해결 방식 설계가 중요하다\"에 해당하는 부분은 어디인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 198
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "결국 해시 충돌과 해결을 이해한다는 것은 빠른 검색이 어떻게 유지되는지를 이해하는 일이다. 해시는 평균적으로 매우 빠르지만, 충돌이 많아지고 해결 방식이 비효율적이면 장점이 사라질 수 있다. 그래서 좋은 해시 테이블은 충돌을 피할 수 없다는 사실을 인정한 뒤, 자료의 분포와 저장 공간의 상태에 맞는 해결 전략을 선택해 성능 저하를 최소화하도록 설계된다."
+        }
+      ]
+    }
+  }
 }

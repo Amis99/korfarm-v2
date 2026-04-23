@@ -70,6 +70,47 @@
         {
           "stepId": "s2",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 79
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "글씨에는 내 하루가 남는다"
+              },
+              {
+                "id": "B",
+                "text": "연필과 함께 생각도 자란다"
+              },
+              {
+                "id": "C",
+                "text": "글쓰기로 꿈을 밝히고 싶다"
+              },
+              {
+                "id": "D",
+                "text": "연필 끝에서 생각이 흘러나온다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -109,7 +150,7 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -142,47 +183,6 @@
               }
             ],
             "answerId": "C",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s4",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 79
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "글씨에는 내 하루가 남는다"
-              },
-              {
-                "id": "B",
-                "text": "연필과 함께 생각도 자란다"
-              },
-              {
-                "id": "C",
-                "text": "글쓰기로 꿈을 밝히고 싶다"
-              },
-              {
-                "id": "D",
-                "text": "연필 끝에서 생각이 흘러나온다"
-              }
-            ],
-            "answerId": "D",
             "scoring": {
               "correctDeltaSec": 10,
               "wrongDeltaSec": -5,
@@ -234,47 +234,6 @@
         {
           "stepId": "s6",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 43,
-                "end": 84
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "지워도 자국이 남는다"
-              },
-              {
-                "id": "B",
-                "text": "삐뚤해도 솔직한 하루 담긴다"
-              },
-              {
-                "id": "C",
-                "text": "연필이 종이 위를 달린다"
-              },
-              {
-                "id": "D",
-                "text": "흑연이 하얀 길을 만든다"
-              }
-            ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
             "ranges": [
@@ -306,6 +265,47 @@
               }
             ],
             "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 43,
+                "end": 84
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지워도 자국이 남는다"
+              },
+              {
+                "id": "B",
+                "text": "삐뚤해도 솔직한 하루 담긴다"
+              },
+              {
+                "id": "C",
+                "text": "연필이 종이 위를 달린다"
+              },
+              {
+                "id": "D",
+                "text": "흑연이 하얀 길을 만든다"
+              }
+            ],
+            "answerId": "B",
             "scoring": {
               "correctDeltaSec": 10,
               "wrongDeltaSec": -5,
@@ -357,47 +357,6 @@
         {
           "stepId": "s9",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 36,
-                "end": 76
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "종이 위에 나의 향기가 번진다"
-              },
-              {
-                "id": "B",
-                "text": "뭉툭한 연필 깎을 때 새 생각 자란다"
-              },
-              {
-                "id": "C",
-                "text": "연필이 종이 위를 달린다"
-              },
-              {
-                "id": "D",
-                "text": "흑연이 하얀 길을 만든다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s10",
-          "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
             "ranges": [
@@ -429,6 +388,47 @@
               }
             ],
             "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 36,
+                "end": 76
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "종이 위에 나의 향기가 번진다"
+              },
+              {
+                "id": "B",
+                "text": "뭉툭한 연필 깎을 때 새 생각 자란다"
+              },
+              {
+                "id": "C",
+                "text": "연필이 종이 위를 달린다"
+              },
+              {
+                "id": "D",
+                "text": "흑연이 하얀 길을 만든다"
+              }
+            ],
+            "answerId": "A",
             "scoring": {
               "correctDeltaSec": 10,
               "wrongDeltaSec": -5,
@@ -480,47 +480,6 @@
         {
           "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 36,
-                "end": 77
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "일기장에 별을 그린다"
-              },
-              {
-                "id": "B",
-                "text": "연필이 종이 위를 달린다"
-              },
-              {
-                "id": "C",
-                "text": "흑연이 하얀 길을 만든다"
-              },
-              {
-                "id": "D",
-                "text": "작은 별들이 큰 은하수 되길 바란다"
-              }
-            ],
-            "answerId": "D",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s13",
-          "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
             "ranges": [
@@ -552,6 +511,47 @@
               }
             ],
             "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 36,
+                "end": 77
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "일기장에 별을 그린다"
+              },
+              {
+                "id": "B",
+                "text": "연필이 종이 위를 달린다"
+              },
+              {
+                "id": "C",
+                "text": "흑연이 하얀 길을 만든다"
+              },
+              {
+                "id": "D",
+                "text": "작은 별들이 큰 은하수 되길 바란다"
+              }
+            ],
+            "answerId": "D",
             "scoring": {
               "correctDeltaSec": 10,
               "wrongDeltaSec": -5,

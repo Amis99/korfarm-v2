@@ -58,7 +58,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 39
+                "end": 38
               }
             ]
           },
@@ -96,8 +96,47 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 41,
-                "end": 78
+                "start": 0,
+                "end": 126
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "돈을 쓰지 않고 소중하게 모으는 늙은이"
+              },
+              {
+                "id": "B",
+                "text": "맛있는 음식을 사 먹는 즐거움"
+              },
+              {
+                "id": "C",
+                "text": "낡은 옷을 깨끗하게 수선하는 방법"
+              },
+              {
+                "id": "D",
+                "text": "추운 겨울을 따뜻하게 보내는 요령"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 39,
+                "end": 126
               }
             ]
           },
@@ -130,13 +169,13 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 80,
-                "end": 129
+                "start": 77,
+                "end": 126
               }
             ]
           },
@@ -158,45 +197,6 @@
               {
                 "id": "D",
                 "text": "깊은 땅속"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s4",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 129
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 주요 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "돈을 쓰지 않고 소중하게 모으는 늙은이"
-              },
-              {
-                "id": "B",
-                "text": "맛있는 음식을 사 먹는 즐거움"
-              },
-              {
-                "id": "C",
-                "text": "낡은 옷을 깨끗하게 수선하는 방법"
-              },
-              {
-                "id": "D",
-                "text": "추운 겨울을 따뜻하게 보내는 요령"
               }
             ],
             "answerId": "A",
@@ -252,86 +252,8 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 32,
-                "end": 83
-              }
-            ]
-          },
-          "question": {
-            "prompt": "늙은이는 낡은 동전들을 무엇으로 바꾸어 달라고 했나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "반짝이는 은전 한 닢"
-              },
-              {
-                "id": "B",
-                "text": "금빛 나는 금화"
-              },
-              {
-                "id": "C",
-                "text": "가벼운 지폐"
-              },
-              {
-                "id": "D",
-                "text": "빛나는 보석"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 85,
-                "end": 130
-              }
-            ]
-          },
-          "question": {
-            "prompt": "돈을 바꾸어 주는 사람은 늙은이의 행동을 어떻게 생각했나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "조금 이상하게 생각했다"
-              },
-              {
-                "id": "B",
-                "text": "아주 멋지다고 칭찬했다"
-              },
-              {
-                "id": "C",
-                "text": "너무 화가 나서 소리쳤다"
-              },
-              {
-                "id": "D",
-                "text": "슬퍼서 같이 눈물을 흘렸다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
                 "start": 0,
-                "end": 130
+                "end": 127
               }
             ]
           },
@@ -364,13 +286,91 @@
           }
         },
         {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 31,
+                "end": 127
+              }
+            ]
+          },
+          "question": {
+            "prompt": "늙은이는 낡은 동전들을 무엇으로 바꾸어 달라고 했나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반짝이는 은전 한 닢"
+              },
+              {
+                "id": "B",
+                "text": "금빛 나는 금화"
+              },
+              {
+                "id": "C",
+                "text": "가벼운 지폐"
+              },
+              {
+                "id": "D",
+                "text": "빛나는 보석"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 82,
+                "end": 127
+              }
+            ]
+          },
+          "question": {
+            "prompt": "돈을 바꾸어 주는 사람은 늙은이의 행동을 어떻게 생각했나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "조금 이상하게 생각했다"
+              },
+              {
+                "id": "B",
+                "text": "아주 멋지다고 칭찬했다"
+              },
+              {
+                "id": "C",
+                "text": "너무 화가 나서 소리쳤다"
+              },
+              {
+                "id": "D",
+                "text": "슬퍼서 같이 눈물을 흘렸다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s9",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 37
+                "end": 36
               }
             ]
           },
@@ -408,8 +408,47 @@
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 79,
-                "end": 116
+                "start": 0,
+                "end": 148
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "은전 한 닢을 갖고 싶었던 늙은이의 간절한 소원"
+              },
+              {
+                "id": "B",
+                "text": "돈을 모아서 부자가 된 사람의 이야기"
+              },
+              {
+                "id": "C",
+                "text": "은전을 깨끗하게 닦는 여러 가지 방법"
+              },
+              {
+                "id": "D",
+                "text": "사람들이 돈을 아껴 써야 하는 이유"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 76,
+                "end": 148
               }
             ]
           },
@@ -442,13 +481,13 @@
           }
         },
         {
-          "stepId": "s11",
+          "stepId": "s12",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 118,
-                "end": 151
+                "start": 114,
+                "end": 148
               }
             ]
           },
@@ -470,45 +509,6 @@
               {
                 "id": "D",
                 "text": "누군가에게 줄 선물"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 151
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 주요 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "은전 한 닢을 갖고 싶었던 늙은이의 간절한 소원"
-              },
-              {
-                "id": "B",
-                "text": "돈을 모아서 부자가 된 사람의 이야기"
-              },
-              {
-                "id": "C",
-                "text": "은전을 깨끗하게 닦는 여러 가지 방법"
-              },
-              {
-                "id": "D",
-                "text": "사람들이 돈을 아껴 써야 하는 이유"
               }
             ],
             "answerId": "A",
@@ -573,13 +573,23 @@
             },
             {
               "paragraphId": "p2",
-              "start": 7,
-              "end": 10
+              "start": 6,
+              "end": 9
             },
             {
               "paragraphId": "p3",
               "start": 7,
               "end": 10
+            },
+            {
+              "paragraphId": "p3",
+              "start": 64,
+              "end": 67
+            },
+            {
+              "paragraphId": "p3",
+              "start": 125,
+              "end": 128
             }
           ],
           "scoring": {
@@ -597,8 +607,13 @@
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 56,
-              "end": 58
+              "start": 60,
+              "end": 62
+            },
+            {
+              "paragraphId": "p2",
+              "start": 111,
+              "end": 113
             },
             {
               "paragraphId": "p3",
@@ -607,8 +622,18 @@
             },
             {
               "paragraphId": "p3",
-              "start": 126,
-              "end": 128
+              "start": 51,
+              "end": 53
+            },
+            {
+              "paragraphId": "p3",
+              "start": 85,
+              "end": 87
+            },
+            {
+              "paragraphId": "p3",
+              "start": 121,
+              "end": 123
             }
           ],
           "scoring": {
@@ -626,8 +651,8 @@
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 30,
-              "end": 32
+              "start": 27,
+              "end": 29
             }
           ],
           "scoring": {
@@ -645,8 +670,8 @@
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 110,
-              "end": 112
+              "start": 106,
+              "end": 108
             }
           ],
           "scoring": {

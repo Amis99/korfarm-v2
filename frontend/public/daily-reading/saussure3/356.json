@@ -95,47 +95,8 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 27,
-                "end": 52
-              }
-            ]
-          },
-          "question": {
-            "prompt": "흔들림이 시작되면 즉시 어떻게 하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "몸을 낮추고 숨음"
-              },
-              {
-                "id": "B",
-                "text": "빨리 뛰어감"
-              },
-              {
-                "id": "C",
-                "text": "소리를 지름"
-              },
-              {
-                "id": "D",
-                "text": "잠을 잠"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s3",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": -1,
-                "end": 27
+                "start": 0,
+                "end": 26
               }
             ]
           },
@@ -168,85 +129,7 @@
           }
         },
         {
-          "stepId": "s4",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 81,
-                "end": 107
-              }
-            ]
-          },
-          "question": {
-            "prompt": "언제까지 기다려야 하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "흔들림이 멈출 때까지"
-              },
-              {
-                "id": "B",
-                "text": "배가 고플 때까지"
-              },
-              {
-                "id": "C",
-                "text": "졸릴 때까지"
-              },
-              {
-                "id": "D",
-                "text": "해가 뜰 때까지"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s5",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 108,
-                "end": 135
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇이 나를 지켜주는 힘이 되나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "스스로 정리한 수칙"
-              },
-              {
-                "id": "B",
-                "text": "커다란 풍선"
-              },
-              {
-                "id": "C",
-                "text": "많은 돈"
-              },
-              {
-                "id": "D",
-                "text": "새로운 옷"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s6",
+          "stepId": "s3",
           "highlight": {
             "ranges": [
               {
@@ -258,11 +141,6 @@
                 "paragraphId": "p1",
                 "start": 27,
                 "end": 52
-              },
-              {
-                "paragraphId": "p1",
-                "start": -1,
-                "end": 27
               },
               {
                 "paragraphId": "p1",
@@ -305,7 +183,165 @@
           }
         },
         {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 27,
+                "end": 52
+              }
+            ]
+          },
+          "question": {
+            "prompt": "흔들림이 시작되면 즉시 어떻게 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "몸을 낮추고 숨음"
+              },
+              {
+                "id": "B",
+                "text": "빨리 뛰어감"
+              },
+              {
+                "id": "C",
+                "text": "소리를 지름"
+              },
+              {
+                "id": "D",
+                "text": "잠을 잠"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 53,
+                "end": 80
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문장에서 알 수 있는 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "머리를 보호하는 것이 무척 중요하다는 것을 배움."
+              },
+              {
+                "id": "B",
+                "text": "이 문장은 글의 중심 내용과 관계없는 예외만 말한다."
+              },
+              {
+                "id": "C",
+                "text": "이 문장은 앞뒤 내용과 반대되는 결론만 제시한다."
+              },
+              {
+                "id": "D",
+                "text": "이 문장은 구체적인 의미 없이 제목만 반복한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 81,
+                "end": 107
+              }
+            ]
+          },
+          "question": {
+            "prompt": "언제까지 기다려야 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "흔들림이 멈출 때까지"
+              },
+              {
+                "id": "B",
+                "text": "배가 고플 때까지"
+              },
+              {
+                "id": "C",
+                "text": "졸릴 때까지"
+              },
+              {
+                "id": "D",
+                "text": "해가 뜰 때까지"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
           "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 108,
+                "end": 135
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇이 나를 지켜주는 힘이 되나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "스스로 정리한 수칙"
+              },
+              {
+                "id": "B",
+                "text": "커다란 풍선"
+              },
+              {
+                "id": "C",
+                "text": "많은 돈"
+              },
+              {
+                "id": "D",
+                "text": "새로운 옷"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s8",
           "highlight": {
             "ranges": [
               {
@@ -344,163 +380,7 @@
           }
         },
         {
-          "stepId": "s8",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 26,
-                "end": 51
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 이용하여 내려가야 하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "계단"
-              },
-              {
-                "id": "B",
-                "text": "엘리베이터"
-              },
-              {
-                "id": "C",
-                "text": "창문"
-              },
-              {
-                "id": "D",
-                "text": "옥상"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
           "stepId": "s9",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 52,
-                "end": 75
-              }
-            ]
-          },
-          "question": {
-            "prompt": "어디를 대피 장소로 정했나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "넓은 운동장이나 공원"
-              },
-              {
-                "id": "B",
-                "text": "좁은 방 안"
-              },
-              {
-                "id": "C",
-                "text": "어두운 지하실"
-              },
-              {
-                "id": "D",
-                "text": "높은 지붕 위"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s10",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 76,
-                "end": 101
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇으로 머리를 가리고 이동하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "가방"
-              },
-              {
-                "id": "B",
-                "text": "신발"
-              },
-              {
-                "id": "C",
-                "text": "종이"
-              },
-              {
-                "id": "D",
-                "text": "손바닥만"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s11",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 102,
-                "end": 128
-              }
-            ]
-          },
-          "question": {
-            "prompt": "정리를 하니 어떤 상태를 유지할 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "침착함"
-              },
-              {
-                "id": "B",
-                "text": "당황함"
-              },
-              {
-                "id": "C",
-                "text": "화남"
-              },
-              {
-                "id": "D",
-                "text": "졸림"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s12",
           "highlight": {
             "ranges": [
               {
@@ -559,7 +439,163 @@
           }
         },
         {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 26,
+                "end": 51
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 이용하여 내려가야 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "계단"
+              },
+              {
+                "id": "B",
+                "text": "엘리베이터"
+              },
+              {
+                "id": "C",
+                "text": "창문"
+              },
+              {
+                "id": "D",
+                "text": "옥상"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 52,
+                "end": 75
+              }
+            ]
+          },
+          "question": {
+            "prompt": "어디를 대피 장소로 정했나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "넓은 운동장이나 공원"
+              },
+              {
+                "id": "B",
+                "text": "좁은 방 안"
+              },
+              {
+                "id": "C",
+                "text": "어두운 지하실"
+              },
+              {
+                "id": "D",
+                "text": "높은 지붕 위"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 76,
+                "end": 101
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇으로 머리를 가리고 이동하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가방"
+              },
+              {
+                "id": "B",
+                "text": "신발"
+              },
+              {
+                "id": "C",
+                "text": "종이"
+              },
+              {
+                "id": "D",
+                "text": "손바닥만"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
           "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 102,
+                "end": 128
+              }
+            ]
+          },
+          "question": {
+            "prompt": "정리를 하니 어떤 상태를 유지할 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "침착함"
+              },
+              {
+                "id": "B",
+                "text": "당황함"
+              },
+              {
+                "id": "C",
+                "text": "화남"
+              },
+              {
+                "id": "D",
+                "text": "졸림"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s14",
           "highlight": {
             "ranges": [
               {
@@ -598,163 +634,7 @@
           }
         },
         {
-          "stepId": "s14",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 27,
-                "end": 53
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇의 위치를 미리 확인해 두었나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "대피소"
-              },
-              {
-                "id": "B",
-                "text": "슈퍼마켓"
-              },
-              {
-                "id": "C",
-                "text": "놀이터"
-              },
-              {
-                "id": "D",
-                "text": "친구 집"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
           "stepId": "s15",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 54,
-                "end": 79
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 일기에 적었나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "나의 다짐"
-              },
-              {
-                "id": "B",
-                "text": "돈 자랑"
-              },
-              {
-                "id": "C",
-                "text": "심술 부린 일"
-              },
-              {
-                "id": "D",
-                "text": "장난친 일"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s16",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 80,
-                "end": 105
-              }
-            ]
-          },
-          "question": {
-            "prompt": "규칙을 지키는 나는 어떠한가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "무척 든든함"
-              },
-              {
-                "id": "B",
-                "text": "무척 미움"
-              },
-              {
-                "id": "C",
-                "text": "무척 약함"
-              },
-              {
-                "id": "D",
-                "text": "무척 졸림"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s17",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 106,
-                "end": 133
-              }
-            ]
-          },
-          "question": {
-            "prompt": "오늘 하루를 보낸 것에 무엇을 느끼나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "보람"
-              },
-              {
-                "id": "B",
-                "text": "슬픔"
-              },
-              {
-                "id": "C",
-                "text": "화"
-              },
-              {
-                "id": "D",
-                "text": "배고픔"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s18",
           "highlight": {
             "ranges": [
               {
@@ -802,6 +682,162 @@
               {
                 "id": "D",
                 "text": "친구에게 연락하기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 27,
+                "end": 53
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇의 위치를 미리 확인해 두었나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "대피소"
+              },
+              {
+                "id": "B",
+                "text": "슈퍼마켓"
+              },
+              {
+                "id": "C",
+                "text": "놀이터"
+              },
+              {
+                "id": "D",
+                "text": "친구 집"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 54,
+                "end": 79
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 일기에 적었나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나의 다짐"
+              },
+              {
+                "id": "B",
+                "text": "돈 자랑"
+              },
+              {
+                "id": "C",
+                "text": "심술 부린 일"
+              },
+              {
+                "id": "D",
+                "text": "장난친 일"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 80,
+                "end": 105
+              }
+            ]
+          },
+          "question": {
+            "prompt": "규칙을 지키는 나는 어떠한가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "무척 든든함"
+              },
+              {
+                "id": "B",
+                "text": "무척 미움"
+              },
+              {
+                "id": "C",
+                "text": "무척 약함"
+              },
+              {
+                "id": "D",
+                "text": "무척 졸림"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 106,
+                "end": 133
+              }
+            ]
+          },
+          "question": {
+            "prompt": "오늘 하루를 보낸 것에 무엇을 느끼나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "보람"
+              },
+              {
+                "id": "B",
+                "text": "슬픔"
+              },
+              {
+                "id": "C",
+                "text": "화"
+              },
+              {
+                "id": "D",
+                "text": "배고픔"
               }
             ],
             "answerId": "A",

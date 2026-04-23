@@ -75,6 +75,88 @@
         {
           "stepId": "s2",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 247
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "원숭이 덕분에 두 사람이 마주친다"
+              },
+              {
+                "id": "B",
+                "text": "사라는 원숭이를 잃어버린다"
+              },
+              {
+                "id": "C",
+                "text": "신사는 사라를 못 본 척한다"
+              },
+              {
+                "id": "D",
+                "text": "사라는 학교를 떠날 준비를 한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 247
+              }
+            ]
+          },
+          "question": {
+            "prompt": "사라는 자신의 아버지를 누구라고 말했나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "랄프 대위"
+              },
+              {
+                "id": "B",
+                "text": "크리스포드 신사"
+              },
+              {
+                "id": "C",
+                "text": "민친 교장"
+              },
+              {
+                "id": "D",
+                "text": "람 다스"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -114,7 +196,7 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s5",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -155,7 +237,7 @@
           }
         },
         {
-          "stepId": "s4",
+          "stepId": "s6",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -196,7 +278,7 @@
           }
         },
         {
-          "stepId": "s5",
+          "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -237,48 +319,7 @@
           }
         },
         {
-          "stepId": "s6",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 247
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "원숭이 덕분에 두 사람이 마주친다"
-              },
-              {
-                "id": "B",
-                "text": "사라는 원숭이를 잃어버린다"
-              },
-              {
-                "id": "C",
-                "text": "신사는 사라를 못 본 척한다"
-              },
-              {
-                "id": "D",
-                "text": "사라는 학교를 떠날 준비를 한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s7",
+          "stepId": "s8",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -319,89 +360,7 @@
           }
         },
         {
-          "stepId": "s8",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 101,
-                "end": 169
-              }
-            ]
-          },
-          "question": {
-            "prompt": "크리스포드는 사라에게 어떤 진실을 밝혀 주었나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "자신이 아버지 친구이자 재산 주인"
-              },
-              {
-                "id": "B",
-                "text": "민친 교장이 착한 사람이라는 것"
-              },
-              {
-                "id": "C",
-                "text": "사라가 학교 주인이라는 것"
-              },
-              {
-                "id": "D",
-                "text": "원숭이가 보물을 찾았다는 것"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
           "stepId": "s9",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 170,
-                "end": 240
-              }
-            ]
-          },
-          "question": {
-            "prompt": "사라는 무엇을 물려받게 되었나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "다이아몬드 재산"
-              },
-              {
-                "id": "B",
-                "text": "낡은 다락방"
-              },
-              {
-                "id": "C",
-                "text": "교장의 자리"
-              },
-              {
-                "id": "D",
-                "text": "새 학교 규칙"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s10",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -442,7 +401,89 @@
           }
         },
         {
+          "stepId": "s10",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 101,
+                "end": 169
+              }
+            ]
+          },
+          "question": {
+            "prompt": "크리스포드는 사라에게 어떤 진실을 밝혀 주었나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자신이 아버지 친구이자 재산 주인"
+              },
+              {
+                "id": "B",
+                "text": "민친 교장이 착한 사람이라는 것"
+              },
+              {
+                "id": "C",
+                "text": "사라가 학교 주인이라는 것"
+              },
+              {
+                "id": "D",
+                "text": "원숭이가 보물을 찾았다는 것"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
           "stepId": "s11",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 170,
+                "end": 240
+              }
+            ]
+          },
+          "question": {
+            "prompt": "사라는 무엇을 물려받게 되었나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다이아몬드 재산"
+              },
+              {
+                "id": "B",
+                "text": "낡은 다락방"
+              },
+              {
+                "id": "C",
+                "text": "교장의 자리"
+              },
+              {
+                "id": "D",
+                "text": "새 학교 규칙"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -483,89 +524,7 @@
           }
         },
         {
-          "stepId": "s12",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 86,
-                "end": 176
-              }
-            ]
-          },
-          "question": {
-            "prompt": "사라는 베키와 어떻게 살기로 했나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "베키를 데리고 함께 살기로 했다"
-              },
-              {
-                "id": "B",
-                "text": "베키를 학교에 남겨 두기로 했다"
-              },
-              {
-                "id": "C",
-                "text": "베키를 멀리 보내기로 했다"
-              },
-              {
-                "id": "D",
-                "text": "베키와 인연을 끊기로 했다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
           "stepId": "s13",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 177,
-                "end": 241
-              }
-            ]
-          },
-          "question": {
-            "prompt": "사라는 끝까지 어떤 태도를 잃지 않았나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "기품 있고 너그러운 태도"
-              },
-              {
-                "id": "B",
-                "text": "비굴하고 겁 많은 태도"
-              },
-              {
-                "id": "C",
-                "text": "차갑고 무뚝뚝한 태도"
-              },
-              {
-                "id": "D",
-                "text": "교만하고 거친 태도"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s14",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -606,7 +565,89 @@
           }
         },
         {
+          "stepId": "s14",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 86,
+                "end": 176
+              }
+            ]
+          },
+          "question": {
+            "prompt": "사라는 베키와 어떻게 살기로 했나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "베키를 데리고 함께 살기로 했다"
+              },
+              {
+                "id": "B",
+                "text": "베키를 학교에 남겨 두기로 했다"
+              },
+              {
+                "id": "C",
+                "text": "베키를 멀리 보내기로 했다"
+              },
+              {
+                "id": "D",
+                "text": "베키와 인연을 끊기로 했다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
           "stepId": "s15",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 177,
+                "end": 241
+              }
+            ]
+          },
+          "question": {
+            "prompt": "사라는 끝까지 어떤 태도를 잃지 않았나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기품 있고 너그러운 태도"
+              },
+              {
+                "id": "B",
+                "text": "비굴하고 겁 많은 태도"
+              },
+              {
+                "id": "C",
+                "text": "차갑고 무뚝뚝한 태도"
+              },
+              {
+                "id": "D",
+                "text": "교만하고 거친 태도"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -647,89 +688,7 @@
           }
         },
         {
-          "stepId": "s16",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 91,
-                "end": 172
-              }
-            ]
-          },
-          "question": {
-            "prompt": "사라의 씩씩한 태도는 어떤 기적을 만들었나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "마법보다 큰 기적"
-              },
-              {
-                "id": "B",
-                "text": "더 깊은 슬픔"
-              },
-              {
-                "id": "C",
-                "text": "차가운 겨울"
-              },
-              {
-                "id": "D",
-                "text": "긴 잠만"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
           "stepId": "s17",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 173,
-                "end": 230
-              }
-            ]
-          },
-          "question": {
-            "prompt": "진짜 공주는 무엇으로 증명된다고 하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "가난 속에서도 빛나는 마음"
-              },
-              {
-                "id": "B",
-                "text": "화려한 왕관"
-              },
-              {
-                "id": "C",
-                "text": "많은 하인"
-              },
-              {
-                "id": "D",
-                "text": "큰 목소리"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s18",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -770,36 +729,77 @@
           }
         },
         {
+          "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 91,
+                "end": 172
+              }
+            ]
+          },
+          "question": {
+            "prompt": "사라의 씩씩한 태도는 어떤 기적을 만들었나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "마법보다 큰 기적"
+              },
+              {
+                "id": "B",
+                "text": "더 깊은 슬픔"
+              },
+              {
+                "id": "C",
+                "text": "차가운 겨울"
+              },
+              {
+                "id": "D",
+                "text": "긴 잠만"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
           "stepId": "s19",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 247
+                "paragraphId": "p4",
+                "start": 173,
+                "end": 230
               }
             ]
           },
           "question": {
-            "prompt": "사라는 자신의 아버지를 누구라고 말했나요?",
+            "prompt": "진짜 공주는 무엇으로 증명된다고 하나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "랄프 대위"
+                "text": "가난 속에서도 빛나는 마음"
               },
               {
                 "id": "B",
-                "text": "크리스포드 신사"
+                "text": "화려한 왕관"
               },
               {
                 "id": "C",
-                "text": "민친 교장"
+                "text": "많은 하인"
               },
               {
                 "id": "D",
-                "text": "람 다스"
+                "text": "큰 목소리"
               }
             ],
             "answerId": "A",

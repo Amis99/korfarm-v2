@@ -66,7 +66,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 9
+                "end": 19
               }
             ]
           },
@@ -75,26 +75,26 @@
             "choices": [
               {
                 "id": "A",
-                "text": "?? ??? ? ?? ?? ?? ???? ???"
+                "text": "내가 그와 이름"
               },
               {
                 "id": "B",
-                "text": "?? ??? ? ?? ?? ?? ?? ??"
+                "text": "불러 주기의 핵심"
               },
               {
                 "id": "C",
-                "text": "?? ??? ? ?? ??? ?????"
+                "text": "몸짓의 핵심"
               },
               {
                 "id": "D",
-                "text": "?? ??? ? ?? ???? ????"
+                "text": "지나지 않았다의 핵심"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -106,7 +106,7 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 10,
+                "start": 0,
                 "end": 19
               }
             ]
@@ -116,154 +116,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "?? ??? ??? ??? ???? ???"
+                "text": "불러 주기의 핵심"
               },
               {
                 "id": "B",
-                "text": "?? ??? ?? ??? ?????"
+                "text": "몸짓의 핵심"
               },
               {
                 "id": "C",
-                "text": "?? ??? ??? ? ? ????"
+                "text": "지나지 않았다의 핵심"
               },
               {
                 "id": "D",
-                "text": "?? ??? ?? ?? ??? ??"
+                "text": "불러 주었의 핵심"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s3",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 20,
-                "end": 29
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "?? ?? ?? ? ??? ????"
-              },
-              {
-                "id": "B",
-                "text": "?? ?? ?? ? ??? ? ????"
-              },
-              {
-                "id": "C",
-                "text": "?? ?? ?? ? ??? ? ??"
-              },
-              {
-                "id": "D",
-                "text": "?? ?? ?? ? ??? ????"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s4",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 30,
-                "end": 33
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ??? ? ?? ??? ??? ???"
-              },
-              {
-                "id": "B",
-                "text": "??? ??? ? ?? ??? ??? ??"
-              },
-              {
-                "id": "C",
-                "text": "??? ??? ? ?? ??? ??"
-              },
-              {
-                "id": "D",
-                "text": "??? ??? ? ?? ???? ??"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s5",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 34,
-                "end": 42
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ??? ??? ??? ???? ????"
-              },
-              {
-                "id": "B",
-                "text": "??? ??? ? ???? ??? ???"
-              },
-              {
-                "id": "C",
-                "text": "??? ??? ?? ???"
-              },
-              {
-                "id": "D",
-                "text": "??? ??? ??? ????"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s6",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -280,26 +157,149 @@
             "choices": [
               {
                 "id": "A",
-                "text": "??? ?? ?? ??? ??? ?? ??? ??? ?? ???"
+                "text": "내가 그와 불러"
               },
               {
                 "id": "B",
-                "text": "??? ?? ?? ??? ?? ??? ????? ????"
+                "text": "불러 주기의 핵심"
               },
               {
                 "id": "C",
-                "text": "??? ??? ??? ????? ????"
+                "text": "몸짓의 핵심"
               },
               {
                 "id": "D",
-                "text": "??? ??? ?? ??? ??? ????"
+                "text": "지나지 않았다의 핵심"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 20,
+                "end": 42
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그는 다와 하나"
+              },
+              {
+                "id": "B",
+                "text": "불러 주기의 핵심"
+              },
+              {
+                "id": "C",
+                "text": "몸짓의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "지나지 않았다의 핵심"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 26,
+                "end": 42
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "몸짓의 핵심"
+              },
+              {
+                "id": "B",
+                "text": "불러 주기의 핵심"
+              },
+              {
+                "id": "C",
+                "text": "지나지 않았다의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "불러 주었의 핵심"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 26,
+                "end": 42
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지나지 않았다의 핵심"
+              },
+              {
+                "id": "B",
+                "text": "불러 주기의 핵심"
+              },
+              {
+                "id": "C",
+                "text": "몸짓의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "불러 주었의 핵심"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -312,7 +312,7 @@
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 9
+                "end": 19
               }
             ]
           },
@@ -321,26 +321,26 @@
             "choices": [
               {
                 "id": "A",
-                "text": "??? ?? ?? ?? ?? ???"
+                "text": "내가 그와 이름"
               },
               {
                 "id": "B",
-                "text": "??? ?? ?? ?? ????"
+                "text": "불러 주기의 핵심"
               },
               {
                 "id": "C",
-                "text": "??? ?? ?? ?? ????"
+                "text": "몸짓의 핵심"
               },
               {
                 "id": "D",
-                "text": "??? ?? ?? ?? ????"
+                "text": "지나지 않았다의 핵심"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -352,7 +352,7 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 10,
+                "start": 0,
                 "end": 19
               }
             ]
@@ -362,154 +362,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "??? ??? ?? ?? ??? ???"
+                "text": "불러 주었의 핵심"
               },
               {
                 "id": "B",
-                "text": "??? ??? ?? ???? ???"
+                "text": "불러 주기의 핵심"
               },
               {
                 "id": "C",
-                "text": "??? ???? ??? ????"
+                "text": "몸짓의 핵심"
               },
               {
                 "id": "D",
-                "text": "??? ??? ?? ????"
+                "text": "지나지 않았다의 핵심"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s9",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 20,
-                "end": 27
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "?? ??? ??? ???? ???"
-              },
-              {
-                "id": "B",
-                "text": "?? ???? ??? ???"
-              },
-              {
-                "id": "C",
-                "text": "?? ??? ???? ???"
-              },
-              {
-                "id": "D",
-                "text": "?? ??? ?? ???"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s10",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 28,
-                "end": 33
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ?? ?? ?? ??? ??? ???"
-              },
-              {
-                "id": "B",
-                "text": "??? ??? ?? ??? ?? ???"
-              },
-              {
-                "id": "C",
-                "text": "??? ??? ?? ??? ??? ???"
-              },
-              {
-                "id": "D",
-                "text": "??? ??? ?? ???? ???"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s11",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 34,
-                "end": 38
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "?? ??? ??? ??? ??? ????"
-              },
-              {
-                "id": "B",
-                "text": "?? ??? ??? ? ???? ?????"
-              },
-              {
-                "id": "C",
-                "text": "?? ??? ???? ??? ?????"
-              },
-              {
-                "id": "D",
-                "text": "?? ??? ??? ???? ??"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -526,26 +403,149 @@
             "choices": [
               {
                 "id": "A",
-                "text": "??? ?? ?? ?? ??? ??? ??? ?? ??"
+                "text": "내가 그와 불러"
               },
               {
                 "id": "B",
-                "text": "??? ??? ??? ?? ???? ???? ????"
+                "text": "불러 주기의 핵심"
               },
               {
                 "id": "C",
-                "text": "??? ??? ??? ????? ????"
+                "text": "몸짓의 핵심"
               },
               {
                 "id": "D",
-                "text": "???? ??? ? ????? ????"
+                "text": "지나지 않았다의 핵심"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 20,
+                "end": 30
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나에게의 핵심"
+              },
+              {
+                "id": "B",
+                "text": "불러 주기의 핵심"
+              },
+              {
+                "id": "C",
+                "text": "몸짓의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "지나지 않았다의 핵심"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 20,
+                "end": 38
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "와서 꽃의 핵심"
+              },
+              {
+                "id": "B",
+                "text": "불러 주기의 핵심"
+              },
+              {
+                "id": "C",
+                "text": "몸짓의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "지나지 않았다의 핵심"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 31,
+                "end": 38
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "되었다의 핵심"
+              },
+              {
+                "id": "B",
+                "text": "불러 주기의 핵심"
+              },
+              {
+                "id": "C",
+                "text": "몸짓의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "지나지 않았다의 핵심"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -558,7 +558,7 @@
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 23
+                "end": 35
               }
             ]
           },
@@ -567,154 +567,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "??? ??? ??? ??? ?? ?? ???"
+                "text": "내가 그와 불러"
               },
               {
                 "id": "B",
-                "text": "??? ?? ??? ???"
+                "text": "불러 주기의 핵심"
               },
               {
                 "id": "C",
-                "text": "??? ???? ?? ?? ?? ???"
+                "text": "몸짓의 핵심"
               },
               {
                 "id": "D",
-                "text": "??? ?? ?? ?? ???"
+                "text": "지나지 않았다의 핵심"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s14",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 24,
-                "end": 38
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ??? ?? ?? ?? ?? ??"
-              },
-              {
-                "id": "B",
-                "text": "??? ???? ???? ?? ??"
-              },
-              {
-                "id": "C",
-                "text": "??? ?? ?? ?? ?? ?? ??"
-              },
-              {
-                "id": "D",
-                "text": "??? ?? ?? ??? ?? ??"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s15",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 39,
-                "end": 52
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ?? ??? ?? ??? ???"
-              },
-              {
-                "id": "B",
-                "text": "??? ????? ???? ???"
-              },
-              {
-                "id": "C",
-                "text": "??? ???? ??? ???"
-              },
-              {
-                "id": "D",
-                "text": "??? ???? ??? ???"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s16",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 53,
-                "end": 76
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ?? ?? ?? ?? ??? ???"
-              },
-              {
-                "id": "B",
-                "text": "??? ?? ?? ?? ??? ??? ???"
-              },
-              {
-                "id": "C",
-                "text": "??? ?? ?? ?? ??? ??? ???"
-              },
-              {
-                "id": "D",
-                "text": "??? ?? ?? ?? ??? ???"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s17",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -731,26 +608,149 @@
             "choices": [
               {
                 "id": "A",
-                "text": "??? ??? ????? ??? ??? ?? ???"
+                "text": "빛깔과 향기와 내가 그"
               },
               {
                 "id": "B",
-                "text": "??? ????? ???? ??? ???"
+                "text": "불러 주기의 핵심"
               },
               {
                 "id": "C",
-                "text": "??? ?? ?? ??? ???"
+                "text": "몸짓의 핵심"
               },
               {
                 "id": "D",
-                "text": "??? ??? ??? ???? ????"
+                "text": "지나지 않았다의 핵심"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 19,
+                "end": 52
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "빛깔과 향기와 알맞"
+              },
+              {
+                "id": "B",
+                "text": "불러 주기의 핵심"
+              },
+              {
+                "id": "C",
+                "text": "몸짓의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "지나지 않았다의 핵심"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 36,
+                "end": 52
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나의 이름와 불러 다오"
+              },
+              {
+                "id": "B",
+                "text": "불러 주기의 핵심"
+              },
+              {
+                "id": "C",
+                "text": "몸짓의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "지나지 않았다의 핵심"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 53,
+                "end": 76
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그에게로 가서와 나도 그"
+              },
+              {
+                "id": "B",
+                "text": "불러 주기의 핵심"
+              },
+              {
+                "id": "C",
+                "text": "몸짓의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "지나지 않았다의 핵심"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -772,195 +772,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "??? ??? ?? ? ? ??? ??? ?????"
+                "text": "우리들와 모두"
               },
               {
                 "id": "B",
-                "text": "??? ??? ??? ??? ??? ????"
+                "text": "불러 주기의 핵심"
               },
               {
                 "id": "C",
-                "text": "??? ???? ??? ? ????? ????"
+                "text": "몸짓의 핵심"
               },
               {
                 "id": "D",
-                "text": "??? ??? ??? ???? ?? ??? ????"
+                "text": "지나지 않았다의 핵심"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s19",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 8,
-                "end": 18
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "?? ??? ?? ?? ??? ?? ?? ??"
-              },
-              {
-                "id": "B",
-                "text": "?? ??? ??? ??? ?? ?? ??"
-              },
-              {
-                "id": "C",
-                "text": "?? ??? ?? ?? ?? ?? ??"
-              },
-              {
-                "id": "D",
-                "text": "?? ??? ?? ?? ?? ?? ?? ??"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s20",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 19,
-                "end": 28
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "???? ??? ?? ??? ?? ?? ??"
-              },
-              {
-                "id": "B",
-                "text": "???? ???? ???? ?? ?? ??"
-              },
-              {
-                "id": "C",
-                "text": "???? ??? ??? ?? ??"
-              },
-              {
-                "id": "D",
-                "text": "???? ?? ?? ?? ?? ?? ??"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s21",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 29,
-                "end": 37
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "? ?? ??? ???? ??? ??? ???"
-              },
-              {
-                "id": "B",
-                "text": "? ?? ???? ??? ? ??? ???"
-              },
-              {
-                "id": "C",
-                "text": "? ?? ?? ?? ?? ?? ????"
-              },
-              {
-                "id": "D",
-                "text": "? ?? ???? ??? ? ???"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s22",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 38,
-                "end": 55
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ??? ???? ?? ?? ??? ????"
-              },
-              {
-                "id": "B",
-                "text": "??? ??? ?? ?? ?? ????"
-              },
-              {
-                "id": "C",
-                "text": "??? ??? ??? ???? ????"
-              },
-              {
-                "id": "D",
-                "text": "??? ??? ??? ???? ????"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s23",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -977,26 +813,190 @@
             "choices": [
               {
                 "id": "A",
-                "text": "?? ??? ?? ? ? ??? ???? ??"
+                "text": "모두와 되고"
               },
               {
                 "id": "B",
-                "text": "?? ?? ?? ?? ??? ??"
+                "text": "불러 주기의 핵심"
               },
               {
                 "id": "C",
-                "text": "?? ???? ??? ???? ??"
+                "text": "몸짓의 핵심"
               },
               {
                 "id": "D",
-                "text": "?? ?? ?? ??? ? ??? ??"
+                "text": "지나지 않았다의 핵심"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 8,
+                "end": 18
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "되고의 핵심"
+              },
+              {
+                "id": "B",
+                "text": "불러 주기의 핵심"
+              },
+              {
+                "id": "C",
+                "text": "몸짓의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "지나지 않았다의 핵심"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s21",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 19,
+                "end": 32
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서로를 향한 의미"
+              },
+              {
+                "id": "B",
+                "text": "불러 주기의 핵심"
+              },
+              {
+                "id": "C",
+                "text": "몸짓의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "지나지 않았다의 핵심"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s22",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 19,
+                "end": 55
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "너에게와 잊혀지지"
+              },
+              {
+                "id": "B",
+                "text": "불러 주기의 핵심"
+              },
+              {
+                "id": "C",
+                "text": "몸짓의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "지나지 않았다의 핵심"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s23",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 33,
+                "end": 55
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "않는 하나와 되고"
+              },
+              {
+                "id": "B",
+                "text": "불러 주기의 핵심"
+              },
+              {
+                "id": "C",
+                "text": "몸짓의 핵심"
+              },
+              {
+                "id": "D",
+                "text": "지나지 않았다의 핵심"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         }

@@ -67,7 +67,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 25
+                "end": 26
               }
             ]
           },
@@ -105,47 +105,8 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 27,
-                "end": 84
-              }
-            ]
-          },
-          "question": {
-            "prompt": "글을 쓰게 된 까닭은 무엇인가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "환경에도 좋지 않고 보기에도 심해서"
-              },
-              {
-                "id": "B",
-                "text": "친구들이 모두 반대해서"
-              },
-              {
-                "id": "C",
-                "text": "조리실이 좁아서"
-              },
-              {
-                "id": "D",
-                "text": "급식이 늘 부족해서"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s3",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
                 "start": 0,
-                "end": 84
+                "end": 85
               }
             ]
           },
@@ -178,13 +139,52 @@
           }
         },
         {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 27,
+                "end": 85
+              }
+            ]
+          },
+          "question": {
+            "prompt": "글을 쓰게 된 까닭은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "환경에도 좋지 않고 보기에도 심해서"
+              },
+              {
+                "id": "B",
+                "text": "친구들이 모두 반대해서"
+              },
+              {
+                "id": "C",
+                "text": "조리실이 좁아서"
+              },
+              {
+                "id": "D",
+                "text": "급식이 늘 부족해서"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 78
+                "end": 79
               }
             ]
           },
@@ -223,7 +223,7 @@
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 78
+                "end": 79
               }
             ]
           },
@@ -262,7 +262,7 @@
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 86
+                "end": 87
               }
             ]
           },
@@ -301,7 +301,7 @@
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 86
+                "end": 87
               }
             ]
           },
@@ -340,7 +340,7 @@
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 83
+                "end": 84
               }
             ]
           },
@@ -379,7 +379,7 @@
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 83
+                "end": 84
               }
             ]
           },
@@ -418,7 +418,7 @@
               {
                 "paragraphId": "p5",
                 "start": 0,
-                "end": 85
+                "end": 86
               }
             ]
           },
@@ -457,7 +457,7 @@
               {
                 "paragraphId": "p5",
                 "start": 0,
-                "end": 85
+                "end": 86
               }
             ]
           },
@@ -496,7 +496,7 @@
               {
                 "paragraphId": "p6",
                 "start": 0,
-                "end": 66
+                "end": 67
               }
             ]
           },
@@ -535,7 +535,7 @@
               {
                 "paragraphId": "p6",
                 "start": 0,
-                "end": 66
+                "end": 67
               }
             ]
           },
@@ -610,12 +610,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "?? ??? ???? ?? ??? ?? ?? ??? ?? ??? ??????",
+          "prompt": "'잔반'은 무엇인가요?",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 85
+              "start": 4,
+              "end": 6
             }
           ],
           "scoring": {
@@ -623,16 +623,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "잔반"
         },
         {
           "id": "q2",
-          "prompt": "?? ??? ??? ??? ?? ??? ???? ????? ??????",
+          "prompt": "'퇴식구'는 무엇인가요?",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 79
+              "start": 11,
+              "end": 14
             }
           ],
           "scoring": {
@@ -640,33 +641,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "퇴식구"
         },
         {
           "id": "q3",
-          "prompt": "?? ??? ??? ??? ?? ???? ??? ?? ??? ?? ?? ? ??? ???? ?? ????",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 87
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q4",
-          "prompt": "?? ??? ??? ?? ??? ?? ?? ??? ??? ?????",
+          "prompt": "'배식량'은 무엇인가요?",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 84
+              "start": 4,
+              "end": 7
             }
           ],
           "scoring": {
@@ -674,16 +659,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "배식량"
         },
         {
-          "id": "q5",
-          "prompt": "??? ??? ? ??? ??? ??? ??? ?? ?? ???? ??????",
+          "id": "q4",
+          "prompt": "'조리실'은 무엇인가요?",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 86
+              "start": 38,
+              "end": 41
             }
           ],
           "scoring": {
@@ -691,16 +677,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "조리실"
         },
         {
-          "id": "q6",
-          "prompt": "??? ??? ???? ?? ??? ?????? ? ??? ?? ??? ?? ??? ???????",
+          "id": "q5",
+          "prompt": "'초고'는 무엇인가요?",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 67
+              "start": 41,
+              "end": 43
             }
           ],
           "scoring": {
@@ -708,7 +695,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "초고"
         }
       ]
     }

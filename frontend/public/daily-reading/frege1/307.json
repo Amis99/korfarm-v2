@@ -100,6 +100,47 @@
         {
           "stepId": "s2",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 161
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "피노키오는 집으로 돌아와 착하게 달라졌다"
+              },
+              {
+                "id": "B",
+                "text": "피노키오는 돌아와도 전처럼 말썽만 부렸다"
+              },
+              {
+                "id": "C",
+                "text": "피노키오는 혼자 살며 공부를 그만두었다"
+              },
+              {
+                "id": "D",
+                "text": "피노키오는 다시 모험만 떠나기로 했다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -139,7 +180,7 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -180,7 +221,7 @@
           }
         },
         {
-          "stepId": "s4",
+          "stepId": "s5",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -210,47 +251,6 @@
               {
                 "id": "D",
                 "text": "피노키오는 책을 버리고 달아났다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s5",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 161
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "피노키오는 집으로 돌아와 착하게 달라졌다"
-              },
-              {
-                "id": "B",
-                "text": "피노키오는 돌아와도 전처럼 말썽만 부렸다"
-              },
-              {
-                "id": "C",
-                "text": "피노키오는 혼자 살며 공부를 그만두었다"
-              },
-              {
-                "id": "D",
-                "text": "피노키오는 다시 모험만 떠나기로 했다"
               }
             ],
             "answerId": "A",
@@ -305,129 +305,6 @@
         {
           "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 40,
-                "end": 118
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "요정은 이제 나무 인형이 아니라고 말했다"
-              },
-              {
-                "id": "B",
-                "text": "요정은 다시 나무가 되라고 말했다"
-              },
-              {
-                "id": "C",
-                "text": "요정은 금화를 더 찾으라고 말했다"
-              },
-              {
-                "id": "D",
-                "text": "요정은 학교를 그만두라고 말했다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 119,
-                "end": 133
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "요정이 지팡이를 흔들자 빛이 몸을 감쌌다"
-              },
-              {
-                "id": "B",
-                "text": "요정이 지팡이를 버리자 방이 어두워졌다"
-              },
-              {
-                "id": "C",
-                "text": "요정이 손뼉을 치자 상어가 나타났다"
-              },
-              {
-                "id": "D",
-                "text": "요정이 문을 닫자 꿈이 끝나 버렸다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s9",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 134,
-                "end": 166
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "나무 몸이 따뜻한 살결로 변했다"
-              },
-              {
-                "id": "B",
-                "text": "따뜻한 살결이 다시 나무로 변했다"
-              },
-              {
-                "id": "C",
-                "text": "나무 몸이 더 딱딱한 돌로 변했다"
-              },
-              {
-                "id": "D",
-                "text": "피노키오 몸이 바람처럼 사라졌다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s10",
-          "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
             "ranges": [
@@ -467,376 +344,7 @@
           }
         },
         {
-          "stepId": "s11",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 28
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "피노키오는 거울을 보고 크게 외쳤다"
-              },
-              {
-                "id": "B",
-                "text": "피노키오는 거울을 보고 다시 잠들었다"
-              },
-              {
-                "id": "C",
-                "text": "피노키오는 거울을 깨뜨리고 울었다"
-              },
-              {
-                "id": "D",
-                "text": "피노키오는 거울을 버리고 나갔다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 29,
-                "end": 92
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무슨 일이 있었나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "피노키오는 진짜 사람이 되었다고 말했다"
-              },
-              {
-                "id": "B",
-                "text": "피노키오는 다시 인형이 되었다고 말했다"
-              },
-              {
-                "id": "C",
-                "text": "피노키오는 상어를 이겼다고 말했다"
-              },
-              {
-                "id": "D",
-                "text": "피노키오는 학교를 그만두겠다고 말했다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s13",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 93,
-                "end": 146
-              }
-            ]
-          },
-          "question": {
-            "prompt": "어떻게 움직이나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "할아버지는 눈물 흘리며 꼭 안아 주었다"
-              },
-              {
-                "id": "B",
-                "text": "할아버지는 춤추며 문밖으로 달려갔다"
-              },
-              {
-                "id": "C",
-                "text": "할아버지는 요정을 다시 불러 세웠다"
-              },
-              {
-                "id": "D",
-                "text": "할아버지는 새 옷을 바로 사 왔다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s14",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 146
-              }
-            ]
-          },
-          "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "피노키오가 사람이 되자 할아버지도 크게 기뻐했다"
-              },
-              {
-                "id": "B",
-                "text": "피노키오가 사람이 되어도 할아버지는 화를 냈다"
-              },
-              {
-                "id": "C",
-                "text": "피노키오는 사람이 되자 바로 집을 떠났다"
-              },
-              {
-                "id": "D",
-                "text": "피노키오는 사람이 되어도 아무도 몰랐다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s15",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 37
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "그 뒤 두 사람은 오래오래 행복하게 살았다"
-              },
-              {
-                "id": "B",
-                "text": "그 뒤 두 사람은 다시 멀리 헤어졌다"
-              },
-              {
-                "id": "C",
-                "text": "그 뒤 피노키오는 혼자 바다로 떠났다"
-              },
-              {
-                "id": "D",
-                "text": "그 뒤 제페토는 피노키오를 잊어버렸다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s16",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 38,
-                "end": 81
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "피노키오는 예전 말썽 시절을 웃으며 떠올렸다"
-              },
-              {
-                "id": "B",
-                "text": "피노키오는 예전 일을 모두 미워하며 지웠다"
-              },
-              {
-                "id": "C",
-                "text": "피노키오는 예전처럼 거짓말을 즐겨 했다"
-              },
-              {
-                "id": "D",
-                "text": "피노키오는 예전 일을 아무것도 기억 못 했다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s17",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 82,
-                "end": 126
-              }
-            ]
-          },
-          "question": {
-            "prompt": "왜 그런가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "실수와 후회가 지금의 착한 피노키오를 만들었기 때문이다"
-              },
-              {
-                "id": "B",
-                "text": "실수와 후회가 피노키오를 더 게으르게 만들었기 때문이다"
-              },
-              {
-                "id": "C",
-                "text": "실수와 후회 덕분에 학교를 안 가도 되었기 때문이다"
-              },
-              {
-                "id": "D",
-                "text": "실수와 후회가 제페토를 떠나게 했기 때문이다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s18",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 127,
-                "end": 158
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "사랑과 용기가 진짜 심장을 선물했다"
-              },
-              {
-                "id": "B",
-                "text": "금화와 장난이 진짜 심장을 선물했다"
-              },
-              {
-                "id": "C",
-                "text": "상어와 바다가 진짜 심장을 선물했다"
-              },
-              {
-                "id": "D",
-                "text": "거짓말과 욕심이 진짜 심장을 선물했다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s19",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 158
-              }
-            ]
-          },
-          "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "피노키오는 사랑과 용기로 진짜 사람이 되었다"
-              },
-              {
-                "id": "B",
-                "text": "피노키오는 금화 덕분에 진짜 사람이 되었다"
-              },
-              {
-                "id": "C",
-                "text": "피노키오는 실수 없이 늘 완벽해서 사람이 되었다"
-              },
-              {
-                "id": "D",
-                "text": "피노키오는 다시 나무 인형으로 돌아가 행복했다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s20",
+          "stepId": "s8",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -877,7 +385,212 @@
           }
         },
         {
-          "stepId": "s21",
+          "stepId": "s9",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 40,
+                "end": 118
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "요정은 이제 나무 인형이 아니라고 말했다"
+              },
+              {
+                "id": "B",
+                "text": "요정은 다시 나무가 되라고 말했다"
+              },
+              {
+                "id": "C",
+                "text": "요정은 금화를 더 찾으라고 말했다"
+              },
+              {
+                "id": "D",
+                "text": "요정은 학교를 그만두라고 말했다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 119,
+                "end": 133
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "요정이 지팡이를 흔들자 빛이 몸을 감쌌다"
+              },
+              {
+                "id": "B",
+                "text": "요정이 지팡이를 버리자 방이 어두워졌다"
+              },
+              {
+                "id": "C",
+                "text": "요정이 손뼉을 치자 상어가 나타났다"
+              },
+              {
+                "id": "D",
+                "text": "요정이 문을 닫자 꿈이 끝나 버렸다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 134,
+                "end": 166
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나무 몸이 따뜻한 살결로 변했다"
+              },
+              {
+                "id": "B",
+                "text": "따뜻한 살결이 다시 나무로 변했다"
+              },
+              {
+                "id": "C",
+                "text": "나무 몸이 더 딱딱한 돌로 변했다"
+              },
+              {
+                "id": "D",
+                "text": "피노키오 몸이 바람처럼 사라졌다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 28
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "피노키오는 거울을 보고 크게 외쳤다"
+              },
+              {
+                "id": "B",
+                "text": "피노키오는 거울을 보고 다시 잠들었다"
+              },
+              {
+                "id": "C",
+                "text": "피노키오는 거울을 깨뜨리고 울었다"
+              },
+              {
+                "id": "D",
+                "text": "피노키오는 거울을 버리고 나갔다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 146
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "피노키오가 사람이 되자 할아버지도 크게 기뻐했다"
+              },
+              {
+                "id": "B",
+                "text": "피노키오가 사람이 되어도 할아버지는 화를 냈다"
+              },
+              {
+                "id": "C",
+                "text": "피노키오는 사람이 되자 바로 집을 떠났다"
+              },
+              {
+                "id": "D",
+                "text": "피노키오는 사람이 되어도 아무도 몰랐다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s14",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -907,6 +620,293 @@
               {
                 "id": "D",
                 "text": "새 옷을 바로 사 왔다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 29,
+                "end": 92
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무슨 일이 있었나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "피노키오는 진짜 사람이 되었다고 말했다"
+              },
+              {
+                "id": "B",
+                "text": "피노키오는 다시 인형이 되었다고 말했다"
+              },
+              {
+                "id": "C",
+                "text": "피노키오는 상어를 이겼다고 말했다"
+              },
+              {
+                "id": "D",
+                "text": "피노키오는 학교를 그만두겠다고 말했다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 93,
+                "end": 146
+              }
+            ]
+          },
+          "question": {
+            "prompt": "어떻게 움직이나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "할아버지는 눈물 흘리며 꼭 안아 주었다"
+              },
+              {
+                "id": "B",
+                "text": "할아버지는 춤추며 문밖으로 달려갔다"
+              },
+              {
+                "id": "C",
+                "text": "할아버지는 요정을 다시 불러 세웠다"
+              },
+              {
+                "id": "D",
+                "text": "할아버지는 새 옷을 바로 사 왔다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 37
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그 뒤 두 사람은 오래오래 행복하게 살았다"
+              },
+              {
+                "id": "B",
+                "text": "그 뒤 두 사람은 다시 멀리 헤어졌다"
+              },
+              {
+                "id": "C",
+                "text": "그 뒤 피노키오는 혼자 바다로 떠났다"
+              },
+              {
+                "id": "D",
+                "text": "그 뒤 제페토는 피노키오를 잊어버렸다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 158
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "피노키오는 사랑과 용기로 진짜 사람이 되었다"
+              },
+              {
+                "id": "B",
+                "text": "피노키오는 금화 덕분에 진짜 사람이 되었다"
+              },
+              {
+                "id": "C",
+                "text": "피노키오는 실수 없이 늘 완벽해서 사람이 되었다"
+              },
+              {
+                "id": "D",
+                "text": "피노키오는 다시 나무 인형으로 돌아가 행복했다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 38,
+                "end": 81
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "피노키오는 예전 말썽 시절을 웃으며 떠올렸다"
+              },
+              {
+                "id": "B",
+                "text": "피노키오는 예전 일을 모두 미워하며 지웠다"
+              },
+              {
+                "id": "C",
+                "text": "피노키오는 예전처럼 거짓말을 즐겨 했다"
+              },
+              {
+                "id": "D",
+                "text": "피노키오는 예전 일을 아무것도 기억 못 했다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 82,
+                "end": 126
+              }
+            ]
+          },
+          "question": {
+            "prompt": "왜 그런가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "실수와 후회가 지금의 착한 피노키오를 만들었기 때문이다"
+              },
+              {
+                "id": "B",
+                "text": "실수와 후회가 피노키오를 더 게으르게 만들었기 때문이다"
+              },
+              {
+                "id": "C",
+                "text": "실수와 후회 덕분에 학교를 안 가도 되었기 때문이다"
+              },
+              {
+                "id": "D",
+                "text": "실수와 후회가 제페토를 떠나게 했기 때문이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s21",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 127,
+                "end": 158
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사랑과 용기가 진짜 심장을 선물했다"
+              },
+              {
+                "id": "B",
+                "text": "금화와 장난이 진짜 심장을 선물했다"
+              },
+              {
+                "id": "C",
+                "text": "상어와 바다가 진짜 심장을 선물했다"
+              },
+              {
+                "id": "D",
+                "text": "거짓말과 욕심이 진짜 심장을 선물했다"
               }
             ],
             "answerId": "A",

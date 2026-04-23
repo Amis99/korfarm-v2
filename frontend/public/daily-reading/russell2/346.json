@@ -67,7 +67,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 53
+                "end": 54
               }
             ]
           },
@@ -105,86 +105,8 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 55,
-                "end": 85
-              }
-            ]
-          },
-          "question": {
-            "prompt": "한 과정에서 무엇이 반복해서 적용되나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "같은 규칙"
-              },
-              {
-                "id": "B",
-                "text": "다른 결과"
-              },
-              {
-                "id": "C",
-                "text": "새로운 문제"
-              },
-              {
-                "id": "D",
-                "text": "정답의 순서"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s3",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 87,
-                "end": 134
-              }
-            ]
-          },
-          "question": {
-            "prompt": "재귀를 이해할 때 먼저 봐야 할 것은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "문제를 나누는 구조"
-              },
-              {
-                "id": "B",
-                "text": "겉으로 보이는 반복"
-              },
-              {
-                "id": "C",
-                "text": "계산 결과만"
-              },
-              {
-                "id": "D",
-                "text": "문제의 길이"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "p1sum",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
                 "start": 0,
-                "end": 134
+                "end": 135
               }
             ]
           },
@@ -217,13 +139,91 @@
           }
         },
         {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 55,
+                "end": 86
+              }
+            ]
+          },
+          "question": {
+            "prompt": "한 과정에서 무엇이 반복해서 적용되나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "같은 규칙"
+              },
+              {
+                "id": "B",
+                "text": "다른 결과"
+              },
+              {
+                "id": "C",
+                "text": "새로운 문제"
+              },
+              {
+                "id": "D",
+                "text": "정답의 순서"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 87,
+                "end": 135
+              }
+            ]
+          },
+          "question": {
+            "prompt": "재귀를 이해할 때 먼저 봐야 할 것은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문제를 나누는 구조"
+              },
+              {
+                "id": "B",
+                "text": "겉으로 보이는 반복"
+              },
+              {
+                "id": "C",
+                "text": "계산 결과만"
+              },
+              {
+                "id": "D",
+                "text": "문제의 길이"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 28
+                "end": 29
               }
             ]
           },
@@ -256,130 +256,13 @@
           }
         },
         {
-          "stepId": "s5",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 30,
-                "end": 80
-              }
-            ]
-          },
-          "question": {
-            "prompt": "앞 수까지의 합을 알고 있으면 무엇만 더하면 되나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "마지막 수 하나"
-              },
-              {
-                "id": "B",
-                "text": "처음 수 둘"
-              },
-              {
-                "id": "C",
-                "text": "모든 수를 다시"
-              },
-              {
-                "id": "D",
-                "text": "새로운 식 전체"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
           "stepId": "s6",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 82,
-                "end": 132
-              }
-            ]
-          },
-          "question": {
-            "prompt": "재귀적 생각이 가능해지는 조건은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "큰 문제를 작은 문제 하나와 연결해 나타낼 수 있을 때"
-              },
-              {
-                "id": "B",
-                "text": "문제를 길게 설명할 때"
-              },
-              {
-                "id": "C",
-                "text": "답을 먼저 적어 둘 때"
-              },
-              {
-                "id": "D",
-                "text": "숫자를 크게 만들 때"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 134,
-                "end": 169
-              }
-            ]
-          },
-          "question": {
-            "prompt": "재귀의 출발점으로 제시한 것은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "같은 규칙을 한 단계씩 적용할 수 있다는 점"
-              },
-              {
-                "id": "B",
-                "text": "결과를 먼저 모두 안다는 점"
-              },
-              {
-                "id": "C",
-                "text": "문제를 나누지 않는다는 점"
-              },
-              {
-                "id": "D",
-                "text": "한 번에 끝낸다는 점"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "p2sum",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
                 "start": 0,
-                "end": 169
+                "end": 170
               }
             ]
           },
@@ -412,13 +295,130 @@
           }
         },
         {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 30,
+                "end": 81
+              }
+            ]
+          },
+          "question": {
+            "prompt": "앞 수까지의 합을 알고 있으면 무엇만 더하면 되나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "마지막 수 하나"
+              },
+              {
+                "id": "B",
+                "text": "처음 수 둘"
+              },
+              {
+                "id": "C",
+                "text": "모든 수를 다시"
+              },
+              {
+                "id": "D",
+                "text": "새로운 식 전체"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 82,
+                "end": 133
+              }
+            ]
+          },
+          "question": {
+            "prompt": "재귀적 생각이 가능해지는 조건은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "큰 문제를 작은 문제 하나와 연결해 나타낼 수 있을 때"
+              },
+              {
+                "id": "B",
+                "text": "문제를 길게 설명할 때"
+              },
+              {
+                "id": "C",
+                "text": "답을 먼저 적어 둘 때"
+              },
+              {
+                "id": "D",
+                "text": "숫자를 크게 만들 때"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 134,
+                "end": 170
+              }
+            ]
+          },
+          "question": {
+            "prompt": "재귀의 출발점으로 제시한 것은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "같은 규칙을 한 단계씩 적용할 수 있다는 점"
+              },
+              {
+                "id": "B",
+                "text": "결과를 먼저 모두 안다는 점"
+              },
+              {
+                "id": "C",
+                "text": "문제를 나누지 않는다는 점"
+              },
+              {
+                "id": "D",
+                "text": "한 번에 끝낸다는 점"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 22
+                "end": 23
               }
             ]
           },
@@ -451,130 +451,13 @@
           }
         },
         {
-          "stepId": "s9",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 24,
-                "end": 74
-              }
-            ]
-          },
-          "question": {
-            "prompt": "멈추는 기준이 없으면 어떤 일이 벌어지나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "같은 과정이 끝없이 이어진다"
-              },
-              {
-                "id": "B",
-                "text": "문제가 바로 끝난다"
-              },
-              {
-                "id": "C",
-                "text": "답이 자동으로 생긴다"
-              },
-              {
-                "id": "D",
-                "text": "문제가 더 커진다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s10",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 76,
-                "end": 120
-              }
-            ]
-          },
-          "question": {
-            "prompt": "재귀에서는 어떤 경우를 먼저 정해 두나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "더 이상 나눌 수 없는 가장 작은 경우"
-              },
-              {
-                "id": "B",
-                "text": "가장 큰 경우"
-              },
-              {
-                "id": "C",
-                "text": "가장 늦은 경우"
-              },
-              {
-                "id": "D",
-                "text": "무작위 경우"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
           "stepId": "s11",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 122,
-                "end": 140
-              }
-            ]
-          },
-          "question": {
-            "prompt": "더 이상 나눌 수 없는 가장 작은 경우를 무엇이라고 하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "바탕 조건"
-              },
-              {
-                "id": "B",
-                "text": "호출 구조"
-              },
-              {
-                "id": "C",
-                "text": "분할 정복"
-              },
-              {
-                "id": "D",
-                "text": "설명력"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "p3sum",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
                 "start": 0,
-                "end": 140
+                "end": 141
               }
             ]
           },
@@ -611,9 +494,126 @@
           "highlight": {
             "ranges": [
               {
+                "paragraphId": "p3",
+                "start": 24,
+                "end": 75
+              }
+            ]
+          },
+          "question": {
+            "prompt": "멈추는 기준이 없으면 어떤 일이 벌어지나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "같은 과정이 끝없이 이어진다"
+              },
+              {
+                "id": "B",
+                "text": "문제가 바로 끝난다"
+              },
+              {
+                "id": "C",
+                "text": "답이 자동으로 생긴다"
+              },
+              {
+                "id": "D",
+                "text": "문제가 더 커진다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 76,
+                "end": 121
+              }
+            ]
+          },
+          "question": {
+            "prompt": "재귀에서는 어떤 경우를 먼저 정해 두나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "더 이상 나눌 수 없는 가장 작은 경우"
+              },
+              {
+                "id": "B",
+                "text": "가장 큰 경우"
+              },
+              {
+                "id": "C",
+                "text": "가장 늦은 경우"
+              },
+              {
+                "id": "D",
+                "text": "무작위 경우"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 122,
+                "end": 141
+              }
+            ]
+          },
+          "question": {
+            "prompt": "더 이상 나눌 수 없는 가장 작은 경우를 무엇이라고 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "바탕 조건"
+              },
+              {
+                "id": "B",
+                "text": "호출 구조"
+              },
+              {
+                "id": "C",
+                "text": "분할 정복"
+              },
+              {
+                "id": "D",
+                "text": "설명력"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": [
+              {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 38
+                "end": 39
               }
             ]
           },
@@ -646,169 +646,13 @@
           }
         },
         {
-          "stepId": "s13",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 40,
-                "end": 53
-              }
-            ]
-          },
-          "question": {
-            "prompt": "함수가 자기 자신을 다시 부르는 모습을 무엇이라고 하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "호출 구조"
-              },
-              {
-                "id": "B",
-                "text": "출력 구조"
-              },
-              {
-                "id": "C",
-                "text": "결합 구조"
-              },
-              {
-                "id": "D",
-                "text": "종결 구조"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s14",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 55,
-                "end": 121
-              }
-            ]
-          },
-          "question": {
-            "prompt": "흐름을 이해하기 쉽게 만드는 생각은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "호출이 내려갔다가 다시 올라온다고 보는 생각"
-              },
-              {
-                "id": "B",
-                "text": "결과만 외우는 생각"
-              },
-              {
-                "id": "C",
-                "text": "문제를 지우는 생각"
-              },
-              {
-                "id": "D",
-                "text": "숫자만 세는 생각"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s15",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 123,
-                "end": 157
-              }
-            ]
-          },
-          "question": {
-            "prompt": "내려갈 때와 올라올 때 하는 일은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "내려갈 때는 나누고 올라올 때는 합친다"
-              },
-              {
-                "id": "B",
-                "text": "내려갈 때는 합치고 올라올 때는 나눈다"
-              },
-              {
-                "id": "C",
-                "text": "두 때 모두 멈춘다"
-              },
-              {
-                "id": "D",
-                "text": "두 때 모두 외운다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
           "stepId": "s16",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
-                "start": 159,
-                "end": 210
-              }
-            ]
-          },
-          "question": {
-            "prompt": "그림처럼 떠올려 보면 좋은 것은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "호출 순서"
-              },
-              {
-                "id": "B",
-                "text": "정답의 색"
-              },
-              {
-                "id": "C",
-                "text": "문장의 길이"
-              },
-              {
-                "id": "D",
-                "text": "문제의 이름"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "p4sum",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
                 "start": 0,
-                "end": 210
+                "end": 211
               }
             ]
           },
@@ -845,9 +689,165 @@
           "highlight": {
             "ranges": [
               {
+                "paragraphId": "p4",
+                "start": 40,
+                "end": 54
+              }
+            ]
+          },
+          "question": {
+            "prompt": "함수가 자기 자신을 다시 부르는 모습을 무엇이라고 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "호출 구조"
+              },
+              {
+                "id": "B",
+                "text": "출력 구조"
+              },
+              {
+                "id": "C",
+                "text": "결합 구조"
+              },
+              {
+                "id": "D",
+                "text": "종결 구조"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 55,
+                "end": 122
+              }
+            ]
+          },
+          "question": {
+            "prompt": "흐름을 이해하기 쉽게 만드는 생각은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "호출이 내려갔다가 다시 올라온다고 보는 생각"
+              },
+              {
+                "id": "B",
+                "text": "결과만 외우는 생각"
+              },
+              {
+                "id": "C",
+                "text": "문제를 지우는 생각"
+              },
+              {
+                "id": "D",
+                "text": "숫자만 세는 생각"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 123,
+                "end": 158
+              }
+            ]
+          },
+          "question": {
+            "prompt": "내려갈 때와 올라올 때 하는 일은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "내려갈 때는 나누고 올라올 때는 합친다"
+              },
+              {
+                "id": "B",
+                "text": "내려갈 때는 합치고 올라올 때는 나눈다"
+              },
+              {
+                "id": "C",
+                "text": "두 때 모두 멈춘다"
+              },
+              {
+                "id": "D",
+                "text": "두 때 모두 외운다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 159,
+                "end": 211
+              }
+            ]
+          },
+          "question": {
+            "prompt": "그림처럼 떠올려 보면 좋은 것은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "호출 순서"
+              },
+              {
+                "id": "B",
+                "text": "정답의 색"
+              },
+              {
+                "id": "C",
+                "text": "문장의 길이"
+              },
+              {
+                "id": "D",
+                "text": "문제의 이름"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": {
+            "ranges": [
+              {
                 "paragraphId": "p5",
                 "start": 0,
-                "end": 66
+                "end": 67
               }
             ]
           },
@@ -880,91 +880,13 @@
           }
         },
         {
-          "stepId": "s18",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p5",
-                "start": 68,
-                "end": 123
-              }
-            ]
-          },
-          "question": {
-            "prompt": "재귀가 항상 가장 좋은 방법이 아닌 까닭은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "같은 계산을 되풀이하면 비효율적일 수 있어서"
-              },
-              {
-                "id": "B",
-                "text": "문제가 너무 짧아서"
-              },
-              {
-                "id": "C",
-                "text": "답이 하나가 아니라서"
-              },
-              {
-                "id": "D",
-                "text": "그림을 쓸 수 없어서"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s19",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p5",
-                "start": 125,
-                "end": 160
-              }
-            ]
-          },
-          "question": {
-            "prompt": "재귀를 쓰기 전에 먼저 따져야 할 것은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "문제 구조가 재귀적으로 나뉘는지"
-              },
-              {
-                "id": "B",
-                "text": "문제가 얼마나 길게 적혔는지"
-              },
-              {
-                "id": "C",
-                "text": "기호가 몇 개인지"
-              },
-              {
-                "id": "D",
-                "text": "결과를 이미 아는지"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "p5sum",
+          "stepId": "s22",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p5",
                 "start": 0,
-                "end": 160
+                "end": 161
               }
             ]
           },
@@ -997,13 +919,91 @@
           }
         },
         {
-          "stepId": "s20",
+          "stepId": "s23",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 68,
+                "end": 124
+              }
+            ]
+          },
+          "question": {
+            "prompt": "재귀가 항상 가장 좋은 방법이 아닌 까닭은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "같은 계산을 되풀이하면 비효율적일 수 있어서"
+              },
+              {
+                "id": "B",
+                "text": "문제가 너무 짧아서"
+              },
+              {
+                "id": "C",
+                "text": "답이 하나가 아니라서"
+              },
+              {
+                "id": "D",
+                "text": "그림을 쓸 수 없어서"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s24",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 125,
+                "end": 161
+              }
+            ]
+          },
+          "question": {
+            "prompt": "재귀를 쓰기 전에 먼저 따져야 할 것은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문제 구조가 재귀적으로 나뉘는지"
+              },
+              {
+                "id": "B",
+                "text": "문제가 얼마나 길게 적혔는지"
+              },
+              {
+                "id": "C",
+                "text": "기호가 몇 개인지"
+              },
+              {
+                "id": "D",
+                "text": "결과를 이미 아는지"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s25",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p6",
                 "start": 0,
-                "end": 64
+                "end": 65
               }
             ]
           },
@@ -1036,13 +1036,52 @@
           }
         },
         {
-          "stepId": "s21",
+          "stepId": "s26",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 207
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 결론은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "재귀는 구조와 멈추는 지점을 함께 봐야 제대로 이해된다"
+              },
+              {
+                "id": "B",
+                "text": "재귀는 반복과 완전히 같다고 볼 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "재귀는 설명력이 약하다고 볼 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "재귀는 구조를 따질 필요가 없다고 볼 수 있다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s27",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p6",
                 "start": 66,
-                "end": 132
+                "end": 133
               }
             ]
           },
@@ -1075,13 +1114,13 @@
           }
         },
         {
-          "stepId": "s22",
+          "stepId": "s28",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p6",
                 "start": 134,
-                "end": 164
+                "end": 165
               }
             ]
           },
@@ -1114,13 +1153,13 @@
           }
         },
         {
-          "stepId": "s23",
+          "stepId": "s29",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p6",
                 "start": 166,
-                "end": 206
+                "end": 207
               }
             ]
           },
@@ -1142,45 +1181,6 @@
               {
                 "id": "D",
                 "text": "숫자가 아주 작을 때"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "p6sum",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p6",
-                "start": 0,
-                "end": 206
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 결론은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "재귀는 구조와 멈추는 지점을 함께 봐야 제대로 이해된다"
-              },
-              {
-                "id": "B",
-                "text": "재귀는 반복과 완전히 같다고 볼 수 있다"
-              },
-              {
-                "id": "C",
-                "text": "재귀는 설명력이 약하다고 볼 수 있다"
-              },
-              {
-                "id": "D",
-                "text": "재귀는 구조를 따질 필요가 없다고 볼 수 있다"
               }
             ],
             "answerId": "A",
@@ -1240,6 +1240,76 @@
               "paragraphId": "p1",
               "start": 0,
               "end": 2
+            },
+            {
+              "paragraphId": "p1",
+              "start": 91,
+              "end": 93
+            },
+            {
+              "paragraphId": "p2",
+              "start": 119,
+              "end": 121
+            },
+            {
+              "paragraphId": "p2",
+              "start": 160,
+              "end": 162
+            },
+            {
+              "paragraphId": "p3",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "paragraphId": "p3",
+              "start": 80,
+              "end": 82
+            },
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p4",
+              "start": 163,
+              "end": 165
+            },
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p5",
+              "start": 103,
+              "end": 105
+            },
+            {
+              "paragraphId": "p5",
+              "start": 133,
+              "end": 135
+            },
+            {
+              "paragraphId": "p6",
+              "start": 5,
+              "end": 7
+            },
+            {
+              "paragraphId": "p6",
+              "start": 66,
+              "end": 68
+            },
+            {
+              "paragraphId": "p6",
+              "start": 138,
+              "end": 140
+            },
+            {
+              "paragraphId": "p6",
+              "start": 188,
+              "end": 190
             }
           ],
           "scoring": {
@@ -1247,7 +1317,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "재귀"
         },
         {
           "id": "q2",
@@ -1257,6 +1328,11 @@
               "paragraphId": "p3",
               "start": 125,
               "end": 130
+            },
+            {
+              "paragraphId": "p6",
+              "start": 46,
+              "end": 51
             }
           ],
           "scoring": {
@@ -1264,7 +1340,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "바탕 조건"
         },
         {
           "id": "q3",
@@ -1274,6 +1351,11 @@
               "paragraphId": "p4",
               "start": 43,
               "end": 48
+            },
+            {
+              "paragraphId": "p6",
+              "start": 53,
+              "end": 58
             }
           ],
           "scoring": {
@@ -1281,7 +1363,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "호출 구조"
         },
         {
           "id": "q4",
@@ -1298,7 +1381,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "분할 정복"
         },
         {
           "id": "q5",
@@ -1315,7 +1399,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "설명력"
         }
       ]
     }

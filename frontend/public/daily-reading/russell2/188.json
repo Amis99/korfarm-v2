@@ -105,6 +105,45 @@
             "ranges": [
               {
                 "paragraphId": "p1",
+                "start": 0,
+                "end": 171
+              }
+            ]
+          },
+          "question": {
+            "prompt": "두 비용을 구별해야 하는 까닭은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "선택에는 드러난 지출뿐 아니라 포기한 대안의 가치도 포함된다"
+              },
+              {
+                "id": "B",
+                "text": "선택은 언제나 돈만 보면 된다"
+              },
+              {
+                "id": "C",
+                "text": "기회비용은 존재하지 않는다"
+              },
+              {
+                "id": "D",
+                "text": "자원은 무한하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
                 "start": 24,
                 "end": 65
               }
@@ -139,7 +178,7 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
@@ -178,7 +217,7 @@
           }
         },
         {
-          "stepId": "s4a",
+          "stepId": "s5",
           "highlight": {
             "ranges": [
               {
@@ -217,46 +256,7 @@
           }
         },
         {
-          "stepId": "s4",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 171
-              }
-            ]
-          },
-          "question": {
-            "prompt": "두 비용을 구별해야 하는 까닭은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "선택에는 드러난 지출뿐 아니라 포기한 대안의 가치도 포함된다"
-              },
-              {
-                "id": "B",
-                "text": "선택은 언제나 돈만 보면 된다"
-              },
-              {
-                "id": "C",
-                "text": "기회비용은 존재하지 않는다"
-              },
-              {
-                "id": "D",
-                "text": "자원은 무한하다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s5",
+          "stepId": "s6",
           "highlight": {
             "ranges": [
               {
@@ -295,124 +295,7 @@
           }
         },
         {
-          "stepId": "s6",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 48,
-                "end": 83
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 경우 가장 중요한 것이 되는 것은 무엇인가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "기회비용"
-              },
-              {
-                "id": "B",
-                "text": "매몰비용"
-              },
-              {
-                "id": "C",
-                "text": "세금"
-              },
-              {
-                "id": "D",
-                "text": "이익"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
           "stepId": "s7",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 84,
-                "end": 134
-              }
-            ]
-          },
-          "question": {
-            "prompt": "기회비용은 무엇을 묻는 개념인가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "무엇을 포기했는가"
-              },
-              {
-                "id": "B",
-                "text": "무엇을 샀는가"
-              },
-              {
-                "id": "C",
-                "text": "무엇을 남겼는가"
-              },
-              {
-                "id": "D",
-                "text": "무엇이 쉬웠는가"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 135,
-                "end": 174
-              }
-            ]
-          },
-          "question": {
-            "prompt": "겉보기에는 돈을 쓰지 않은 선택도 왜 비용이 큰가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "다른 기회를 포기했기 때문이다"
-              },
-              {
-                "id": "B",
-                "text": "아무것도 포기하지 않기 때문이다"
-              },
-              {
-                "id": "C",
-                "text": "돈을 더 벌기 때문이다"
-              },
-              {
-                "id": "D",
-                "text": "항상 이익만 남기 때문이다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s9",
           "highlight": {
             "ranges": [
               {
@@ -451,7 +334,124 @@
           }
         },
         {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 48,
+                "end": 83
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 경우 가장 중요한 것이 되는 것은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기회비용"
+              },
+              {
+                "id": "B",
+                "text": "매몰비용"
+              },
+              {
+                "id": "C",
+                "text": "세금"
+              },
+              {
+                "id": "D",
+                "text": "이익"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 84,
+                "end": 134
+              }
+            ]
+          },
+          "question": {
+            "prompt": "기회비용은 무엇을 묻는 개념인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "무엇을 포기했는가"
+              },
+              {
+                "id": "B",
+                "text": "무엇을 샀는가"
+              },
+              {
+                "id": "C",
+                "text": "무엇을 남겼는가"
+              },
+              {
+                "id": "D",
+                "text": "무엇이 쉬웠는가"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 135,
+                "end": 174
+              }
+            ]
+          },
+          "question": {
+            "prompt": "겉보기에는 돈을 쓰지 않은 선택도 왜 비용이 큰가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다른 기회를 포기했기 때문이다"
+              },
+              {
+                "id": "B",
+                "text": "아무것도 포기하지 않기 때문이다"
+              },
+              {
+                "id": "C",
+                "text": "돈을 더 벌기 때문이다"
+              },
+              {
+                "id": "D",
+                "text": "항상 이익만 남기 때문이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
           "highlight": {
             "ranges": [
               {
@@ -490,124 +490,7 @@
           }
         },
         {
-          "stepId": "s11",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 35,
-                "end": 98
-              }
-            ]
-          },
-          "question": {
-            "prompt": "매몰비용의 예로 든 것은 무엇인가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "영화 표, 등록금, 되돌릴 수 없는 준비 비용"
-              },
-              {
-                "id": "B",
-                "text": "아직 사지 않은 책"
-              },
-              {
-                "id": "C",
-                "text": "앞으로 받을 상금"
-              },
-              {
-                "id": "D",
-                "text": "선택의 기대효과"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
           "stepId": "s12",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 99,
-                "end": 153
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이미 지나간 비용은 앞으로의 선택에서 어떻게 다루어야 하는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "원칙적으로 기준이 되어서는 안 된다"
-              },
-              {
-                "id": "B",
-                "text": "가장 중요한 기준이 된다"
-              },
-              {
-                "id": "C",
-                "text": "무조건 더해진다"
-              },
-              {
-                "id": "D",
-                "text": "항상 이익이 된다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s13",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 154,
-                "end": 186
-              }
-            ]
-          },
-          "question": {
-            "prompt": "중요한 것은 무엇이라고 정리하는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "앞으로의 이익과 앞으로 새로 들어갈 비용"
-              },
-              {
-                "id": "B",
-                "text": "과거의 감정"
-              },
-              {
-                "id": "C",
-                "text": "이미 끝난 선택"
-              },
-              {
-                "id": "D",
-                "text": "포기한 대안의 수"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s14",
           "highlight": {
             "ranges": [
               {
@@ -646,7 +529,124 @@
           }
         },
         {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 35,
+                "end": 98
+              }
+            ]
+          },
+          "question": {
+            "prompt": "매몰비용의 예로 든 것은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "영화 표, 등록금, 되돌릴 수 없는 준비 비용"
+              },
+              {
+                "id": "B",
+                "text": "아직 사지 않은 책"
+              },
+              {
+                "id": "C",
+                "text": "앞으로 받을 상금"
+              },
+              {
+                "id": "D",
+                "text": "선택의 기대효과"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 99,
+                "end": 153
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이미 지나간 비용은 앞으로의 선택에서 어떻게 다루어야 하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "원칙적으로 기준이 되어서는 안 된다"
+              },
+              {
+                "id": "B",
+                "text": "가장 중요한 기준이 된다"
+              },
+              {
+                "id": "C",
+                "text": "무조건 더해진다"
+              },
+              {
+                "id": "D",
+                "text": "항상 이익이 된다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s15",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 154,
+                "end": 186
+              }
+            ]
+          },
+          "question": {
+            "prompt": "중요한 것은 무엇이라고 정리하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "앞으로의 이익과 앞으로 새로 들어갈 비용"
+              },
+              {
+                "id": "B",
+                "text": "과거의 감정"
+              },
+              {
+                "id": "C",
+                "text": "이미 끝난 선택"
+              },
+              {
+                "id": "D",
+                "text": "포기한 대안의 수"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s16",
           "highlight": {
             "ranges": [
               {
@@ -685,124 +685,7 @@
           }
         },
         {
-          "stepId": "s16",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 23,
-                "end": 83
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이미 많이 썼다는 이유로 어떤 선택을 하게 되는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "손해를 줄이기보다 더 나쁜 선택을 이어 간다"
-              },
-              {
-                "id": "B",
-                "text": "곧바로 중단한다"
-              },
-              {
-                "id": "C",
-                "text": "아무 판단도 하지 않는다"
-              },
-              {
-                "id": "D",
-                "text": "항상 더 좋은 선택을 한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
           "stepId": "s17",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 84,
-                "end": 101
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이런 판단을 무엇이라고 하는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "매몰비용의 오류"
-              },
-              {
-                "id": "B",
-                "text": "기회비용의 기준"
-              },
-              {
-                "id": "C",
-                "text": "합리적 선택"
-              },
-              {
-                "id": "D",
-                "text": "참고 비용"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s18",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 102,
-                "end": 148
-              }
-            ]
-          },
-          "question": {
-            "prompt": "더 이상 도움이 되지 않는 활동을 어떤 이유로 계속한다고 보는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "여기까지 투자했으니 그만둘 수 없다"
-              },
-              {
-                "id": "B",
-                "text": "처음부터 손해가 없다"
-              },
-              {
-                "id": "C",
-                "text": "미래를 먼저 본다"
-              },
-              {
-                "id": "D",
-                "text": "아무 이유가 없다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s19",
           "highlight": {
             "ranges": [
               {
@@ -841,7 +724,163 @@
           }
         },
         {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 186
+              }
+            ]
+          },
+          "question": {
+            "prompt": "매몰비용의 오류는 어떤 선택으로 드러나나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이미 쓴 돈과 시간에 끌려 더 나쁜 선택을 이어 가는 경우"
+              },
+              {
+                "id": "B",
+                "text": "포기한 대안을 가장 먼저 비교하는 경우"
+              },
+              {
+                "id": "C",
+                "text": "앞으로의 이익과 비용을 따지는 경우"
+              },
+              {
+                "id": "D",
+                "text": "기회비용만 보고 판단하는 경우"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 23,
+                "end": 83
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이미 많이 썼다는 이유로 어떤 선택을 하게 되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "손해를 줄이기보다 더 나쁜 선택을 이어 간다"
+              },
+              {
+                "id": "B",
+                "text": "곧바로 중단한다"
+              },
+              {
+                "id": "C",
+                "text": "아무 판단도 하지 않는다"
+              },
+              {
+                "id": "D",
+                "text": "항상 더 좋은 선택을 한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s20",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 84,
+                "end": 101
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이런 판단을 무엇이라고 하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "매몰비용의 오류"
+              },
+              {
+                "id": "B",
+                "text": "기회비용의 기준"
+              },
+              {
+                "id": "C",
+                "text": "합리적 선택"
+              },
+              {
+                "id": "D",
+                "text": "참고 비용"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 102,
+                "end": 149
+              }
+            ]
+          },
+          "question": {
+            "prompt": "더 이상 도움이 되지 않는 활동을 어떤 이유로 계속한다고 보는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "여기까지 투자했으니 그만둘 수 없다"
+              },
+              {
+                "id": "B",
+                "text": "처음부터 손해가 없다"
+              },
+              {
+                "id": "C",
+                "text": "미래를 먼저 본다"
+              },
+              {
+                "id": "D",
+                "text": "아무 이유가 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s22",
           "highlight": {
             "ranges": [
               {
@@ -869,84 +908,6 @@
               {
                 "id": "D",
                 "text": "둘 다 감정만 본다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s21",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p5",
-                "start": 41,
-                "end": 112
-              }
-            ]
-          },
-          "question": {
-            "prompt": "기회비용과 매몰비용은 각각 무엇을 하게 하는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "포기할 대안을 따지고 이미 지난 비용에 끌리지 않게 경계한다"
-              },
-              {
-                "id": "B",
-                "text": "둘 다 과거만 보게 한다"
-              },
-              {
-                "id": "C",
-                "text": "둘 다 미래를 무시하게 한다"
-              },
-              {
-                "id": "D",
-                "text": "둘 다 문장을 길게 만든다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s22",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p5",
-                "start": 113,
-                "end": 172
-              }
-            ]
-          },
-          "question": {
-            "prompt": "합리적인 선택을 하려면 무엇을 중심으로 판단해야 하는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "현재 남아 있는 대안들의 가치와 앞으로 생길 결과"
-              },
-              {
-                "id": "B",
-                "text": "이미 끝난 비용의 크기"
-              },
-              {
-                "id": "C",
-                "text": "과거에 쓴 돈만"
-              },
-              {
-                "id": "D",
-                "text": "남이 한 선택만"
               }
             ],
             "answerId": "A",
@@ -1001,9 +962,87 @@
           "highlight": {
             "ranges": [
               {
+                "paragraphId": "p5",
+                "start": 41,
+                "end": 112
+              }
+            ]
+          },
+          "question": {
+            "prompt": "기회비용과 매몰비용은 각각 무엇을 하게 하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "포기할 대안을 따지고 이미 지난 비용에 끌리지 않게 경계한다"
+              },
+              {
+                "id": "B",
+                "text": "둘 다 과거만 보게 한다"
+              },
+              {
+                "id": "C",
+                "text": "둘 다 미래를 무시하게 한다"
+              },
+              {
+                "id": "D",
+                "text": "둘 다 문장을 길게 만든다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s25",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 113,
+                "end": 172
+              }
+            ]
+          },
+          "question": {
+            "prompt": "합리적인 선택을 하려면 무엇을 중심으로 판단해야 하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "현재 남아 있는 대안들의 가치와 앞으로 생길 결과"
+              },
+              {
+                "id": "B",
+                "text": "이미 끝난 비용의 크기"
+              },
+              {
+                "id": "C",
+                "text": "과거에 쓴 돈만"
+              },
+              {
+                "id": "D",
+                "text": "남이 한 선택만"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s26",
+          "highlight": {
+            "ranges": [
+              {
                 "paragraphId": "p6",
                 "start": 0,
-                "end": 70
+                "end": 116
               }
             ]
           },
@@ -1025,84 +1064,6 @@
               {
                 "id": "D",
                 "text": "과거에만 존재하는 감정"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s25",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p6",
-                "start": 71,
-                "end": 114
-              }
-            ]
-          },
-          "question": {
-            "prompt": "기회비용과 매몰비용은 각각 어떤 기준이 되는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "기회비용은 현재적 기준, 매몰비용은 미래 기준이 아님"
-              },
-              {
-                "id": "B",
-                "text": "둘 다 미래 기준"
-              },
-              {
-                "id": "C",
-                "text": "둘 다 현재 기준이 아님"
-              },
-              {
-                "id": "D",
-                "text": "둘 다 같은 기준"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s26",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p6",
-                "start": 115,
-                "end": 176
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 둘을 구별하면 무엇을 더 분명하게 읽을 수 있는가?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "어떤 선택이 합리적이고 어떤 선택이 감정에 끌린 판단인지"
-              },
-              {
-                "id": "B",
-                "text": "문장의 글자 수"
-              },
-              {
-                "id": "C",
-                "text": "가격표의 모양"
-              },
-              {
-                "id": "D",
-                "text": "시험 문제의 개수"
               }
             ],
             "answerId": "A",
@@ -1157,30 +1118,69 @@
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 186
+                "paragraphId": "p6",
+                "start": 66,
+                "end": 116
               }
             ]
           },
           "question": {
-            "prompt": "매몰비용의 오류는 어떤 선택으로 드러나나요?",
+            "prompt": "기회비용과 매몰비용은 각각 어떤 기준이 되는가?",
             "choices": [
               {
                 "id": "A",
-                "text": "이미 쓴 돈과 시간에 끌려 더 나쁜 선택을 이어 가는 경우"
+                "text": "기회비용은 현재적 기준, 매몰비용은 미래 기준이 아님"
               },
               {
                 "id": "B",
-                "text": "포기한 대안을 가장 먼저 비교하는 경우"
+                "text": "둘 다 미래 기준"
               },
               {
                 "id": "C",
-                "text": "앞으로의 이익과 비용을 따지는 경우"
+                "text": "둘 다 현재 기준이 아님"
               },
               {
                 "id": "D",
-                "text": "기회비용만 보고 판단하는 경우"
+                "text": "둘 다 같은 기준"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s29",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 66,
+                "end": 176
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 둘을 구별하면 무엇을 더 분명하게 읽을 수 있는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "어떤 선택이 합리적이고 어떤 선택이 감정에 끌린 판단인지"
+              },
+              {
+                "id": "B",
+                "text": "문장의 글자 수"
+              },
+              {
+                "id": "C",
+                "text": "가격표의 모양"
+              },
+              {
+                "id": "D",
+                "text": "시험 문제의 개수"
               }
             ],
             "answerId": "A",
@@ -1237,9 +1237,39 @@
           "prompt": "선택에서 포기한 가장 큰 대안의 가치는?",
           "answerRanges": [
             {
-              "end": 106,
               "paragraphId": "p1",
-              "start": 103
+              "start": 103,
+              "end": 106
+            },
+            {
+              "paragraphId": "p2",
+              "start": 74,
+              "end": 77
+            },
+            {
+              "paragraphId": "p2",
+              "start": 88,
+              "end": 91
+            },
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 3
+            },
+            {
+              "paragraphId": "p5",
+              "start": 41,
+              "end": 44
+            },
+            {
+              "paragraphId": "p6",
+              "start": 5,
+              "end": 8
+            },
+            {
+              "paragraphId": "p6",
+              "start": 66,
+              "end": 69
             }
           ],
           "scoring": {
@@ -1247,16 +1277,47 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "기회비"
         },
         {
           "id": "q2",
           "prompt": "이미 써서 되돌릴 수 없는 비용은?",
           "answerRanges": [
             {
-              "end": 6,
               "paragraphId": "p3",
-              "start": 3
+              "start": 3,
+              "end": 6
+            },
+            {
+              "paragraphId": "p4",
+              "start": 9,
+              "end": 12
+            },
+            {
+              "paragraphId": "p4",
+              "start": 87,
+              "end": 90
+            },
+            {
+              "paragraphId": "p5",
+              "start": 6,
+              "end": 9
+            },
+            {
+              "paragraphId": "p5",
+              "start": 72,
+              "end": 75
+            },
+            {
+              "paragraphId": "p6",
+              "start": 37,
+              "end": 40
+            },
+            {
+              "paragraphId": "p6",
+              "start": 89,
+              "end": 92
             }
           ],
           "scoring": {
@@ -1264,16 +1325,82 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "매몰비"
         },
         {
           "id": "q3",
           "prompt": "여러 가능성 가운데 하나를 고르는 일은?",
           "answerRanges": [
             {
-              "end": 7,
               "paragraphId": "p1",
-              "start": 6
+              "start": 6,
+              "end": 7
+            },
+            {
+              "paragraphId": "p1",
+              "start": 72,
+              "end": 73
+            },
+            {
+              "paragraphId": "p1",
+              "start": 136,
+              "end": 137
+            },
+            {
+              "paragraphId": "p2",
+              "start": 57,
+              "end": 58
+            },
+            {
+              "paragraphId": "p2",
+              "start": 154,
+              "end": 155
+            },
+            {
+              "paragraphId": "p3",
+              "start": 124,
+              "end": 125
+            },
+            {
+              "paragraphId": "p4",
+              "start": 66,
+              "end": 67
+            },
+            {
+              "paragraphId": "p5",
+              "start": 15,
+              "end": 16
+            },
+            {
+              "paragraphId": "p5",
+              "start": 122,
+              "end": 123
+            },
+            {
+              "paragraphId": "p6",
+              "start": 11,
+              "end": 12
+            },
+            {
+              "paragraphId": "p6",
+              "start": 72,
+              "end": 73
+            },
+            {
+              "paragraphId": "p6",
+              "start": 98,
+              "end": 99
+            },
+            {
+              "paragraphId": "p6",
+              "start": 132,
+              "end": 133
+            },
+            {
+              "paragraphId": "p6",
+              "start": 145,
+              "end": 146
             }
           ],
           "scoring": {
@@ -1281,16 +1408,32 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "선"
         },
         {
           "id": "q4",
           "prompt": "선택 대신 생각해 볼 수 있는 다른 가능성은?",
           "answerRanges": [
             {
-              "end": 54,
+              "paragraphId": "p1",
+              "start": 84,
+              "end": 85
+            },
+            {
               "paragraphId": "p5",
-              "start": 53
+              "start": 53,
+              "end": 54
+            },
+            {
+              "paragraphId": "p5",
+              "start": 139,
+              "end": 140
+            },
+            {
+              "paragraphId": "p6",
+              "start": 27,
+              "end": 28
             }
           ],
           "scoring": {
@@ -1298,16 +1441,32 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "대"
         },
         {
           "id": "q5",
           "prompt": "여러 가능성을 따져 결정을 내리는 일은?",
           "answerRanges": [
             {
-              "end": 176,
               "paragraphId": "p4",
-              "start": 175
+              "start": 175,
+              "end": 176
+            },
+            {
+              "paragraphId": "p5",
+              "start": 95,
+              "end": 96
+            },
+            {
+              "paragraphId": "p5",
+              "start": 164,
+              "end": 165
+            },
+            {
+              "paragraphId": "p6",
+              "start": 156,
+              "end": 157
             }
           ],
           "scoring": {
@@ -1315,7 +1474,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "판"
         }
       ]
     }

@@ -74,113 +74,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "?? ?? ??? ??? ??? ???"
+                "text": "오늘 점심시간와 학생 자치회"
               },
               {
                 "id": "B",
-                "text": "?? ??? ??? ????? ???"
+                "text": "회장들과 서기들와 학급 회장들"
               },
               {
                 "id": "C",
-                "text": "?? ??? ??? ??? ???"
+                "text": "실태와 친구들와 사회자의 진행"
               },
               {
                 "id": "D",
-                "text": "?? ??? ??? ???? ???"
+                "text": "회장들과 서기들와 실태와 친구들"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s2",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 64,
-                "end": 145
-              }
-            ]
-          },
-          "question": {
-            "prompt": "어떤 문제가 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "?? ?? ??? ??? ??? ???"
-              },
-              {
-                "id": "B",
-                "text": "??? ??? ??? ??? ???"
-              },
-              {
-                "id": "C",
-                "text": "???? ?? ??? ?????"
-              },
-              {
-                "id": "D",
-                "text": "????? ??? ??? ???"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s3",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 146,
-                "end": 217
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "?? ??? ??? ?? ???? ???"
-              },
-              {
-                "id": "B",
-                "text": "??? ?? ??? ??? ??"
-              },
-              {
-                "id": "C",
-                "text": "???? ?? ??? ????"
-              },
-              {
-                "id": "D",
-                "text": "?? ??? ? ??? ???"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s4",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -197,26 +115,108 @@
             "choices": [
               {
                 "id": "A",
-                "text": "?? ?? ?? ??? ???? ??? ???"
+                "text": "회장들과 서기들와 실태와 친구들"
               },
               {
                 "id": "B",
-                "text": "?? ?? ??? ?? ?? ????"
+                "text": "오늘 점심시간와 학생 자치회"
               },
               {
                 "id": "C",
-                "text": "?? ??? ??? ?? ????"
+                "text": "회장들과 서기들와 학급 회장들"
               },
               {
                 "id": "D",
-                "text": "???? ???? ?? ????"
+                "text": "실태와 친구들와 사회자의 진행"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 64,
+                "end": 145
+              }
+            ]
+          },
+          "question": {
+            "prompt": "어떤 문제가 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "회장들과 서기들와 학급 회장들"
+              },
+              {
+                "id": "B",
+                "text": "오늘 점심시간와 학생 자치회"
+              },
+              {
+                "id": "C",
+                "text": "실태와 친구들와 사회자의 진행"
+              },
+              {
+                "id": "D",
+                "text": "회장들과 서기들와 실태와 친구들"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 146,
+                "end": 217
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "실태와 친구들와 사회자의 진행"
+              },
+              {
+                "id": "B",
+                "text": "오늘 점심시간와 학생 자치회"
+              },
+              {
+                "id": "C",
+                "text": "회장들과 서기들와 학급 회장들"
+              },
+              {
+                "id": "D",
+                "text": "회장들과 서기들와 실태와 친구들"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -238,113 +238,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "??? ?? ??? ?? ??? ???"
+                "text": "학급 대표와 회의 결"
               },
               {
                 "id": "B",
-                "text": "??? ?? ?? ?? ??? ???"
+                "text": "오늘 점심시간와 학생 자치회"
               },
               {
                 "id": "C",
-                "text": "?? ??? ?? ?? ???"
+                "text": "회장들과 서기들와 학급 회장들"
               },
               {
                 "id": "D",
-                "text": "?? ??? ??? ??? ???"
+                "text": "실태와 친구들와 사회자의 진행"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s6",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 95,
-                "end": 176
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 건의하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ??? ?? ??? ???? ??"
-              },
-              {
-                "id": "B",
-                "text": "?? ??? ?? ????? ??"
-              },
-              {
-                "id": "C",
-                "text": "?? ??? ??? ??? ???? ??"
-              },
-              {
-                "id": "D",
-                "text": "???? ??? ??? ??"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 177,
-                "end": 236
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무슨 일이 있었나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "?? ??? ??? ??? ??? ????"
-              },
-              {
-                "id": "B",
-                "text": "??? ??? ????? ? ????"
-              },
-              {
-                "id": "C",
-                "text": "??? ??? ?? ??? ????"
-              },
-              {
-                "id": "D",
-                "text": "?? ??? ???? ?? ??"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s8",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -361,26 +279,108 @@
             "choices": [
               {
                 "id": "A",
-                "text": "?? ???? ??? ??? ?? ????"
+                "text": "유익함과 사생활와 학급 대표"
               },
               {
                 "id": "B",
-                "text": "?? ??? ???? ??? ????"
+                "text": "오늘 점심시간와 학생 자치회"
               },
               {
                 "id": "C",
-                "text": "??? ?? ???? ??? ????"
+                "text": "회장들과 서기들와 학급 회장들"
               },
               {
                 "id": "D",
-                "text": "?? ?? ??? ???? ????"
+                "text": "실태와 친구들와 사회자의 진행"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 95,
+                "end": 176
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 건의하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이에 대해와 전면 공개"
+              },
+              {
+                "id": "B",
+                "text": "오늘 점심시간와 학생 자치회"
+              },
+              {
+                "id": "C",
+                "text": "회장들과 서기들와 학급 회장들"
+              },
+              {
+                "id": "D",
+                "text": "실태와 친구들와 사회자의 진행"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 177,
+                "end": 236
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무슨 일이 있었나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "유익함과 사생활와 정보"
+              },
+              {
+                "id": "B",
+                "text": "오늘 점심시간와 학생 자치회"
+              },
+              {
+                "id": "C",
+                "text": "회장들과 서기들와 학급 회장들"
+              },
+              {
+                "id": "D",
+                "text": "실태와 친구들와 사회자의 진행"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -402,154 +402,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "?? ??? ????? ????"
+                "text": "다음과 같와 이어진 대책"
               },
               {
                 "id": "B",
-                "text": "??? ?? ?? ???? ??"
+                "text": "오늘 점심시간와 학생 자치회"
               },
               {
                 "id": "C",
-                "text": "?? ?? ?? ??? ???"
+                "text": "회장들과 서기들와 학급 회장들"
               },
               {
                 "id": "D",
-                "text": "?? ??? ??? ???"
+                "text": "실태와 친구들와 사회자의 진행"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s10",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 38,
-                "end": 106
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무슨 일이 있었나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "?? ???? ???? ????? ???? ??"
-              },
-              {
-                "id": "B",
-                "text": "???? ?? ? ?? ???? ??"
-              },
-              {
-                "id": "C",
-                "text": "???? ??? ????? ??"
-              },
-              {
-                "id": "D",
-                "text": "???? ?? ??? ??"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s11",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 107,
-                "end": 177
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "?? ?? ??? ? ?? ? ? ??? ??"
-              },
-              {
-                "id": "B",
-                "text": "??? ? ? ?? ?? ??? ??"
-              },
-              {
-                "id": "C",
-                "text": "??? ?? ????? ??"
-              },
-              {
-                "id": "D",
-                "text": "??? ????? ??? ??"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 178,
-                "end": 237
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ??? ???? ??? ????? ??"
-              },
-              {
-                "id": "B",
-                "text": "???? ?? ???? ??"
-              },
-              {
-                "id": "C",
-                "text": "???? ???? ??? ??"
-              },
-              {
-                "id": "D",
-                "text": "?????? ????? ??"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s13",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -566,26 +443,149 @@
             "choices": [
               {
                 "id": "A",
-                "text": "?? ??? ?? ?? ??? ?? ???"
+                "text": "다음과 같와 발언과 결정"
               },
               {
                 "id": "B",
-                "text": "??? ?? ??? ???? ??"
+                "text": "오늘 점심시간와 학생 자치회"
               },
               {
                 "id": "C",
-                "text": "??? ??? ?? ???? ??"
+                "text": "회장들과 서기들와 학급 회장들"
               },
               {
                 "id": "D",
-                "text": "?? ??? ? ??? ??? ??"
+                "text": "실태와 친구들와 사회자의 진행"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 38,
+                "end": 106
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무슨 일이 있었나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "발언과 결정와 게시판과 홈페이지"
+              },
+              {
+                "id": "B",
+                "text": "오늘 점심시간와 학생 자치회"
+              },
+              {
+                "id": "C",
+                "text": "회장들과 서기들와 학급 회장들"
+              },
+              {
+                "id": "D",
+                "text": "실태와 친구들와 사회자의 진행"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 107,
+                "end": 177
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "번은 누구나와 자유롭게 참관할"
+              },
+              {
+                "id": "B",
+                "text": "오늘 점심시간와 학생 자치회"
+              },
+              {
+                "id": "C",
+                "text": "회장들과 서기들와 학급 회장들"
+              },
+              {
+                "id": "D",
+                "text": "실태와 친구들와 사회자의 진행"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 178,
+                "end": 237
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "보존과 공유와 학교 측"
+              },
+              {
+                "id": "B",
+                "text": "오늘 점심시간와 학생 자치회"
+              },
+              {
+                "id": "C",
+                "text": "회장들과 서기들와 학급 회장들"
+              },
+              {
+                "id": "D",
+                "text": "실태와 친구들와 사회자의 진행"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
@@ -607,154 +607,31 @@
             "choices": [
               {
                 "id": "A",
-                "text": "? ??? ?? ??? ?? ??? ????"
+                "text": "이번 토와 스스"
               },
               {
                 "id": "B",
-                "text": "?? ??? ????? ????"
+                "text": "오늘 점심시간와 학생 자치회"
               },
               {
                 "id": "C",
-                "text": "??? ???? ?? ????"
+                "text": "회장들과 서기들와 학급 회장들"
               },
               {
                 "id": "D",
-                "text": "????? ???? ?????"
+                "text": "실태와 친구들와 사회자의 진행"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         },
         {
           "stepId": "s15",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 74,
-                "end": 153
-              }
-            ]
-          },
-          "question": {
-            "prompt": "어떤 결과인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "??? ???? ?? ???? ???"
-              },
-              {
-                "id": "B",
-                "text": "??? ??? ??? ? ????"
-              },
-              {
-                "id": "C",
-                "text": "??? ???? ??? ???"
-              },
-              {
-                "id": "D",
-                "text": "???? ??? ??? ??? ???"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s16",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 154,
-                "end": 217
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 이끌었나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "???????? ??? ??? ???? ??"
-              },
-              {
-                "id": "B",
-                "text": "??? ??? ?? ????? ??"
-              },
-              {
-                "id": "C",
-                "text": "?? ??? ?? ???? ???? ??"
-              },
-              {
-                "id": "D",
-                "text": "?? ??? ?? ??? ??"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s17",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 218,
-                "end": 257
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "?? ?? ??? ?? ????? ???"
-              },
-              {
-                "id": "B",
-                "text": "??? ?? ????? ???"
-              },
-              {
-                "id": "C",
-                "text": "?? ? ??? ??? ?????"
-              },
-              {
-                "id": "D",
-                "text": "??? ??? ????? ???"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s18",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -771,26 +648,149 @@
             "choices": [
               {
                 "id": "A",
-                "text": "?? ??? ?? ??? ?? ??? ???? ???"
+                "text": "이번 토와 스스"
               },
               {
                 "id": "B",
-                "text": "???? ??? ??? ???"
+                "text": "오늘 점심시간와 학생 자치회"
               },
               {
                 "id": "C",
-                "text": "?? ??? ???? ???"
+                "text": "회장들과 서기들와 학급 회장들"
               },
               {
                 "id": "D",
-                "text": "?? ??? ??? ???"
+                "text": "실태와 친구들와 사회자의 진행"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 74,
+                "end": 153
+              }
+            ]
+          },
+          "question": {
+            "prompt": "어떤 결과인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "단순히 결와 그치지 않고"
+              },
+              {
+                "id": "B",
+                "text": "오늘 점심시간와 학생 자치회"
+              },
+              {
+                "id": "C",
+                "text": "회장들과 서기들와 학급 회장들"
+              },
+              {
+                "id": "D",
+                "text": "실태와 친구들와 사회자의 진행"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 154,
+                "end": 217
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 이끌었나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결정된 사항들와 학교운영위원회에 보고"
+              },
+              {
+                "id": "B",
+                "text": "오늘 점심시간와 학생 자치회"
+              },
+              {
+                "id": "C",
+                "text": "회장들과 서기들와 학급 회장들"
+              },
+              {
+                "id": "D",
+                "text": "실태와 친구들와 사회자의 진행"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 218,
+                "end": 257
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "깨어 있와 우리들의 대화"
+              },
+              {
+                "id": "B",
+                "text": "오늘 점심시간와 학생 자치회"
+              },
+              {
+                "id": "C",
+                "text": "회장들과 서기들와 학급 회장들"
+              },
+              {
+                "id": "D",
+                "text": "실태와 친구들와 사회자의 진행"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
             }
           }
         }

@@ -66,8 +66,8 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 4,
-                "end": 10
+                "start": 0,
+                "end": 55
               }
             ]
           },
@@ -106,7 +106,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 54
+                "end": 55
               }
             ]
           },
@@ -144,8 +144,8 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 8,
-                "end": 14
+                "start": 0,
+                "end": 77
               }
             ]
           },
@@ -184,7 +184,7 @@
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 76
+                "end": 77
               }
             ]
           },
@@ -222,8 +222,8 @@
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 32,
-                "end": 44
+                "start": 0,
+                "end": 65
               }
             ]
           },
@@ -262,7 +262,7 @@
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 64
+                "end": 65
               }
             ]
           },
@@ -300,8 +300,8 @@
             "ranges": [
               {
                 "paragraphId": "p4",
-                "start": 15,
-                "end": 26
+                "start": 0,
+                "end": 54
               }
             ]
           },
@@ -340,7 +340,7 @@
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 53
+                "end": 54
               }
             ]
           },
@@ -378,8 +378,8 @@
             "ranges": [
               {
                 "paragraphId": "p5",
-                "start": 37,
-                "end": 64
+                "start": 0,
+                "end": 66
               }
             ]
           },
@@ -418,7 +418,7 @@
               {
                 "paragraphId": "p5",
                 "start": 0,
-                "end": 65
+                "end": 66
               }
             ]
           },
@@ -456,8 +456,8 @@
             "ranges": [
               {
                 "paragraphId": "p6",
-                "start": 18,
-                "end": 37
+                "start": 0,
+                "end": 51
               }
             ]
           },
@@ -496,7 +496,7 @@
               {
                 "paragraphId": "p6",
                 "start": 0,
-                "end": 50
+                "end": 51
               }
             ]
           },
@@ -571,12 +571,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "?? ???? ??? ?? ??? ?? ?? ??? ??? ?? ??????",
+          "prompt": "조건은 무슨 뜻인가요?",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 55
+              "start": 43,
+              "end": 45
+            },
+            {
+              "paragraphId": "p6",
+              "start": 29,
+              "end": 31
             }
           ],
           "scoring": {
@@ -584,16 +589,22 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "조건"
         },
         {
           "id": "q2",
-          "prompt": "?? ??? ??? ?? ??? ??? ??? ?? ??? ?? ?? ?? ???? ??????",
+          "prompt": "소품은 무슨 뜻인가요?",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 77
+              "start": 8,
+              "end": 10
+            },
+            {
+              "paragraphId": "p5",
+              "start": 37,
+              "end": 39
             }
           ],
           "scoring": {
@@ -601,16 +612,22 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "소품"
         },
         {
           "id": "q3",
-          "prompt": "?? ??? ??? ?? ??? ???? ???? ??? ?? ????? ??? ????",
+          "prompt": "준비 시간은 무슨 뜻인가요?",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 65
+              "paragraphId": "p2",
+              "start": 57,
+              "end": 62
+            },
+            {
+              "paragraphId": "p4",
+              "start": 15,
+              "end": 20
             }
           ],
           "scoring": {
@@ -618,16 +635,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "준비 시간"
         },
         {
           "id": "q4",
-          "prompt": "?? ??? ??? ? ??? ??? ?? ?? ?? ???? ??????",
+          "prompt": "마이크 점검은 무슨 뜻인가요?",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 54
+              "paragraphId": "p3",
+              "start": 32,
+              "end": 38
             }
           ],
           "scoring": {
@@ -635,33 +653,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "마이크 점검"
         },
         {
           "id": "q5",
-          "prompt": "??? ??? ??? ??? ??? ??? ?? ??? ??? ?? ??? ???? ?? ??????",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 66
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q6",
-          "prompt": "??? ??? ??? ?? ????? ??? ?? ??? ??? ?????? ????",
+          "prompt": "실제 조건은 무슨 뜻인가요?",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 51
+              "start": 26,
+              "end": 31
             }
           ],
           "scoring": {
@@ -669,7 +671,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "실제 조건"
         }
       ]
     }

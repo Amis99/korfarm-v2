@@ -58,7 +58,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 45
+                "end": 46
               }
             ]
           },
@@ -96,8 +96,47 @@
             "ranges": [
               {
                 "paragraphId": "p1",
+                "start": 0,
+                "end": 129
+              }
+            ]
+          },
+          "question": {
+            "prompt": "첫 번째 문단은 6월이 어떤 달인지 어떻게 설명하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나라를 지킨 분들을 기억하는 호국보훈의 달"
+              },
+              {
+                "id": "B",
+                "text": "시원한 바다로 여름휴가를 떠나는 달"
+              },
+              {
+                "id": "C",
+                "text": "가족과 함께 새해를 축하하는 달"
+              },
+              {
+                "id": "D",
+                "text": "단풍을 구경하러 산에 올라가는 달"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
                 "start": 47,
-                "end": 82
+                "end": 84
               }
             ]
           },
@@ -130,12 +169,12 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 84,
+                "start": 85,
                 "end": 129
               }
             ]
@@ -158,45 +197,6 @@
               {
                 "id": "D",
                 "text": "아끼던 장난감"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s4",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 129
-              }
-            ]
-          },
-          "question": {
-            "prompt": "첫 번째 문단은 6월이 어떤 달인지 어떻게 설명하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "나라를 지킨 분들을 기억하는 호국보훈의 달"
-              },
-              {
-                "id": "B",
-                "text": "시원한 바다로 여름휴가를 떠나는 달"
-              },
-              {
-                "id": "C",
-                "text": "가족과 함께 새해를 축하하는 달"
-              },
-              {
-                "id": "D",
-                "text": "단풍을 구경하러 산에 올라가는 달"
               }
             ],
             "answerId": "A",
@@ -252,84 +252,6 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 37,
-                "end": 93
-              }
-            ]
-          },
-          "question": {
-            "prompt": "현충일 아침에는 슬픈 마음을 담아 태극기를 평소보다 어떻게 달아야 하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "조금 내려서 다는 '조기'를 담"
-              },
-              {
-                "id": "B",
-                "text": "가장 높이 올려서 펄럭이게 담"
-              },
-              {
-                "id": "C",
-                "text": "태극기를 달지 않고 가만히 둠"
-              },
-              {
-                "id": "D",
-                "text": "다른 나라의 국기와 함께 나란히 담"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 95,
-                "end": 147
-              }
-            ]
-          },
-          "question": {
-            "prompt": "오전 10시가 되면 사이렌 소리에 맞추어 다 함께 어떻게 하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "고개를 숙이고 조용히 묵념을 함"
-              },
-              {
-                "id": "B",
-                "text": "큰 소리로 신나게 애국가를 부름"
-              },
-              {
-                "id": "C",
-                "text": "운동장으로 나가 달리기 시합을 함"
-              },
-              {
-                "id": "D",
-                "text": "친구들과 모여서 재미있는 놀이를 함"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
                 "start": 0,
                 "end": 147
               }
@@ -364,13 +286,91 @@
           }
         },
         {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 36,
+                "end": 93
+              }
+            ]
+          },
+          "question": {
+            "prompt": "현충일 아침에는 슬픈 마음을 담아 태극기를 평소보다 어떻게 달아야 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "조금 내려서 다는 '조기'를 담"
+              },
+              {
+                "id": "B",
+                "text": "가장 높이 올려서 펄럭이게 담"
+              },
+              {
+                "id": "C",
+                "text": "태극기를 달지 않고 가만히 둠"
+              },
+              {
+                "id": "D",
+                "text": "다른 나라의 국기와 함께 나란히 담"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 94,
+                "end": 147
+              }
+            ]
+          },
+          "question": {
+            "prompt": "오전 10시가 되면 사이렌 소리에 맞추어 다 함께 어떻게 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "고개를 숙이고 조용히 묵념을 함"
+              },
+              {
+                "id": "B",
+                "text": "큰 소리로 신나게 애국가를 부름"
+              },
+              {
+                "id": "C",
+                "text": "운동장으로 나가 달리기 시합을 함"
+              },
+              {
+                "id": "D",
+                "text": "친구들과 모여서 재미있는 놀이를 함"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s9",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 45
+                "end": 46
               }
             ]
           },
@@ -408,8 +408,47 @@
             "ranges": [
               {
                 "paragraphId": "p3",
+                "start": 0,
+                "end": 142
+              }
+            ]
+          },
+          "question": {
+            "prompt": "세 번째 문단이 우리에게 알려 주는 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전쟁을 기억하며 나라를 지켜주신 분들께 감사하는 마음"
+              },
+              {
+                "id": "B",
+                "text": "군인들이 훈련소에서 매일 운동하는 순서"
+              },
+              {
+                "id": "C",
+                "text": "남한과 북한이 친하게 지내는 놀이 방법"
+              },
+              {
+                "id": "D",
+                "text": "할아버지께 멋진 편지를 써서 보내는 요령"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
                 "start": 47,
-                "end": 99
+                "end": 100
               }
             ]
           },
@@ -442,7 +481,7 @@
           }
         },
         {
-          "stepId": "s11",
+          "stepId": "s12",
           "highlight": {
             "ranges": [
               {
@@ -470,45 +509,6 @@
               {
                 "id": "D",
                 "text": "아무 일 없이 쉬고 싶은 마음"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 142
-              }
-            ]
-          },
-          "question": {
-            "prompt": "세 번째 문단이 우리에게 알려 주는 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "전쟁을 기억하며 나라를 지켜주신 분들께 감사하는 마음"
-              },
-              {
-                "id": "B",
-                "text": "군인들이 훈련소에서 매일 운동하는 순서"
-              },
-              {
-                "id": "C",
-                "text": "남한과 북한이 친하게 지내는 놀이 방법"
-              },
-              {
-                "id": "D",
-                "text": "할아버지께 멋진 편지를 써서 보내는 요령"
               }
             ],
             "answerId": "A",
@@ -568,8 +568,8 @@
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 33,
-              "end": 37
+              "start": 34,
+              "end": 38
             },
             {
               "paragraphId": "p3",
@@ -591,8 +591,8 @@
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 139,
-              "end": 141
+              "start": 138,
+              "end": 140
             }
           ],
           "scoring": {

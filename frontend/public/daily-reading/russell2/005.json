@@ -105,47 +105,8 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 12,
-                "end": 62
-              }
-            ]
-          },
-          "question": {
-            "prompt": "왜 복도 분리수거통을 늘려야 하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "오래전부터 꽤 불편했기 때문"
-              },
-              {
-                "id": "B",
-                "text": "너무 가까워서"
-              },
-              {
-                "id": "C",
-                "text": "쓰레기가 적어서"
-              },
-              {
-                "id": "D",
-                "text": "시간이 남아서"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s3",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
                 "start": 0,
-                "end": 62
+                "end": 63
               }
             ]
           },
@@ -178,13 +139,52 @@
           }
         },
         {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 12,
+                "end": 63
+              }
+            ]
+          },
+          "question": {
+            "prompt": "왜 복도 분리수거통을 늘려야 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "오래전부터 꽤 불편했기 때문"
+              },
+              {
+                "id": "B",
+                "text": "너무 가까워서"
+              },
+              {
+                "id": "C",
+                "text": "쓰레기가 적어서"
+              },
+              {
+                "id": "D",
+                "text": "시간이 남아서"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 30
+                "end": 81
               }
             ]
           },
@@ -223,7 +223,7 @@
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 80
+                "end": 81
               }
             ]
           },
@@ -262,7 +262,7 @@
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 35
+                "end": 78
               }
             ]
           },
@@ -301,7 +301,7 @@
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 77
+                "end": 78
               }
             ]
           },
@@ -340,7 +340,7 @@
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 30
+                "end": 77
               }
             ]
           },
@@ -379,7 +379,7 @@
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 76
+                "end": 77
               }
             ]
           },
@@ -418,7 +418,7 @@
               {
                 "paragraphId": "p5",
                 "start": 0,
-                "end": 40
+                "end": 85
               }
             ]
           },
@@ -457,7 +457,7 @@
               {
                 "paragraphId": "p5",
                 "start": 0,
-                "end": 84
+                "end": 85
               }
             ]
           },
@@ -496,7 +496,7 @@
               {
                 "paragraphId": "p6",
                 "start": 0,
-                "end": 30
+                "end": 58
               }
             ]
           },
@@ -535,7 +535,7 @@
               {
                 "paragraphId": "p6",
                 "start": 0,
-                "end": 57
+                "end": 58
               }
             ]
           },
@@ -610,12 +610,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "?? ??? ???? ???? ??? ???? ?? ????? ??????",
+          "prompt": "이 글은 누구에게 무엇을 건의하나요?",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 63
+              "end": 62
             }
           ],
           "scoring": {
@@ -623,16 +623,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "학생회에 건의합니다. 저는 복도 분리수거통을 늘려야 된다고 생각했는데 이 문제는 아무튼 예전부터 꽤 불편했습니다"
         },
         {
           "id": "q2",
-          "prompt": "?? ??? ?????? ??? ? ??? ?? ??? ?? ???? ?? ????",
+          "prompt": "복도 분리수거통이 필요한 이유는 무엇인가요?",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 81
+              "end": 80
             }
           ],
           "scoring": {
@@ -640,31 +641,15 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "점심시간마다 수거함이 멀어서 친구들이 캔이나 플라스틱 컵을 그냥 일반 쓰레기통에 넣는 모습을 자주 보았고 저도 몇 번 그냥 지나친 적이 있습니다"
         },
         {
           "id": "q3",
-          "prompt": "?? ??? ?????? ?? ??? ?? ?? ???? ??????",
+          "prompt": "색깔과 분위기에 대해 무엇을 제안하나요?",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 78
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q4",
-          "prompt": "?? ??? ??? ??????? ?? ??? ??? ????? ????",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
               "start": 0,
               "end": 77
             }
@@ -674,16 +659,35 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "그리고 분리수거통 색깔이 초록색이면 보기에도 더 좋을 것 같고 학교 분위기도 훨씬 산뜻해질 테니 그런 부분도 같이 생각해 주시면 좋겠습니다"
+        },
+        {
+          "id": "q4",
+          "prompt": "설치 순서는 어떻게 하자고 하나요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 76
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "복도 끝마다 통을 두면 되는데 어느 학년부터 먼저 둘지 누가 비울지 같은 일은 나중에 정해도 되니까 우선 설치부터 서둘러 주셨으면 합니다"
         },
         {
           "id": "q5",
-          "prompt": "??? ??? ?????? ??? ? ???? ??? ?? ???? ??????",
+          "prompt": "통이 늘어나면 어떤 변화가 생기나요?",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 0,
-              "end": 85
+              "end": 84
             }
           ],
           "scoring": {
@@ -691,24 +695,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q6",
-          "prompt": "??? ??? ????? ? ??? ?? ??? ??? ??? ????",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 58
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "만약 통이 늘어나면 학생들이 규칙을 더 잘 지킬 수 있고 학교가 깨끗해질 수 있으며 환경 보호에도 도움이 되고 선생님들께서도 지도하시기 편해질 것입니다"
         }
       ]
     }

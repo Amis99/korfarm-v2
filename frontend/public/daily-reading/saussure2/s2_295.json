@@ -58,7 +58,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 38
+                "end": 40
               }
             ]
           },
@@ -96,8 +96,47 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 40,
-                "end": 97
+                "start": 0,
+                "end": 144
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "공자의 어린 시절과 훌륭한 학자가 된 이야기"
+              },
+              {
+                "id": "B",
+                "text": "중국으로 즐거운 여행을 떠난 사람"
+              },
+              {
+                "id": "C",
+                "text": "책을 빠르게 읽는 특별한 기술"
+              },
+              {
+                "id": "D",
+                "text": "어려운 수학 문제를 푸는 방법"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 41,
+                "end": 99
               }
             ]
           },
@@ -130,13 +169,13 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 99,
-                "end": 143
+                "start": 100,
+                "end": 144
               }
             ]
           },
@@ -158,45 +197,6 @@
               {
                 "id": "D",
                 "text": "칼과 활을 쓰는 무술"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s4",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 143
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 주요 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "공자의 어린 시절과 훌륭한 학자가 된 이야기"
-              },
-              {
-                "id": "B",
-                "text": "중국으로 즐거운 여행을 떠난 사람"
-              },
-              {
-                "id": "C",
-                "text": "책을 빠르게 읽는 특별한 기술"
-              },
-              {
-                "id": "D",
-                "text": "어려운 수학 문제를 푸는 방법"
               }
             ],
             "answerId": "A",
@@ -252,86 +252,8 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 37,
-                "end": 97
-              }
-            ]
-          },
-          "question": {
-            "prompt": "부모님을 사랑하고 어려운 이웃을 도와주는 것을 공자는 무엇이라고 말했나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "바른 행동"
-              },
-              {
-                "id": "B",
-                "text": "쉬운 장난"
-              },
-              {
-                "id": "C",
-                "text": "이상한 습관"
-              },
-              {
-                "id": "D",
-                "text": "어려운 숙제"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 99,
-                "end": 140
-              }
-            ]
-          },
-          "question": {
-            "prompt": "공자의 따뜻한 가르침을 듣기 위해 누가 먼 곳에서 찾아왔나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "수많은 제자"
-              },
-              {
-                "id": "B",
-                "text": "무서운 호랑이"
-              },
-              {
-                "id": "C",
-                "text": "다른 나라의 왕"
-              },
-              {
-                "id": "D",
-                "text": "하늘의 선녀"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
                 "start": 0,
-                "end": 140
+                "end": 137
               }
             ]
           },
@@ -364,13 +286,91 @@
           }
         },
         {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 36,
+                "end": 96
+              }
+            ]
+          },
+          "question": {
+            "prompt": "부모님을 사랑하고 어려운 이웃을 도와주는 것을 공자는 무엇이라고 말했나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "바른 행동"
+              },
+              {
+                "id": "B",
+                "text": "쉬운 장난"
+              },
+              {
+                "id": "C",
+                "text": "이상한 습관"
+              },
+              {
+                "id": "D",
+                "text": "어려운 숙제"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 97,
+                "end": 137
+              }
+            ]
+          },
+          "question": {
+            "prompt": "공자의 따뜻한 가르침을 듣기 위해 누가 먼 곳에서 찾아왔나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "수많은 제자"
+              },
+              {
+                "id": "B",
+                "text": "무서운 호랑이"
+              },
+              {
+                "id": "C",
+                "text": "다른 나라의 왕"
+              },
+              {
+                "id": "D",
+                "text": "하늘의 선녀"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s9",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 58
+                "end": 59
               }
             ]
           },
@@ -404,6 +404,45 @@
         },
         {
           "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 143
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "제자들이 만든 책 '논어'와 공자의 가르침"
+              },
+              {
+                "id": "B",
+                "text": "세상을 떠난 사람을 기리는 축제"
+              },
+              {
+                "id": "C",
+                "text": "도서관에서 책을 조용히 읽는 예절"
+              },
+              {
+                "id": "D",
+                "text": "제자들이 함께 모여 집을 짓는 이야기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
           "highlight": {
             "ranges": [
               {
@@ -442,13 +481,13 @@
           }
         },
         {
-          "stepId": "s11",
+          "stepId": "s12",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 102,
-                "end": 145
+                "start": 101,
+                "end": 143
               }
             ]
           },
@@ -470,45 +509,6 @@
               {
                 "id": "D",
                 "text": "그림을 잘 그리는 방법"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 145
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 주요 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "제자들이 만든 책 '논어'와 공자의 가르침"
-              },
-              {
-                "id": "B",
-                "text": "세상을 떠난 사람을 기리는 축제"
-              },
-              {
-                "id": "C",
-                "text": "도서관에서 책을 조용히 읽는 예절"
-              },
-              {
-                "id": "D",
-                "text": "제자들이 함께 모여 집을 짓는 이야기"
               }
             ],
             "answerId": "A",
@@ -569,7 +569,37 @@
             {
               "paragraphId": "p1",
               "start": 20,
+              "end": 22
+            },
+            {
+              "paragraphId": "p1",
+              "start": 41,
+              "end": 43
+            },
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p2",
+              "start": 97,
+              "end": 99
+            },
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p3",
+              "start": 19,
               "end": 21
+            },
+            {
+              "paragraphId": "p3",
+              "start": 105,
+              "end": 107
             }
           ],
           "scoring": {
@@ -588,7 +618,12 @@
             {
               "paragraphId": "p2",
               "start": 11,
-              "end": 12
+              "end": 13
+            },
+            {
+              "paragraphId": "p2",
+              "start": 41,
+              "end": 43
             }
           ],
           "scoring": {
@@ -606,8 +641,13 @@
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 122,
-              "end": 123
+              "start": 120,
+              "end": 122
+            },
+            {
+              "paragraphId": "p3",
+              "start": 14,
+              "end": 16
             }
           ],
           "scoring": {
@@ -625,8 +665,8 @@
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 43,
-              "end": 44
+              "start": 44,
+              "end": 46
             }
           ],
           "scoring": {

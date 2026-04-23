@@ -571,12 +571,27 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1??? '트랜지스터 스위칭은 트랜지스터를 이용해 전류의 흐름을 켜고 끄는 동작을 말한다. 전자 회로에서는 어떤 신호가 들어오면 전류가 흐르게 하고, 신호가 없으면 흐름을 막아야 하는 경우가 많은데, 이때 트랜지스터가 전기적 스위치처럼 작동한다. 디지털 회로의 기본 동작도 이 원리에 기대고 있다.'?? ??? ??? ?? ????",
+          "prompt": "무엇은 트랜지스터를 이용해 전류의 흐름을 켜고 끄는 동작을 말한다?",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 160
+              "end": 9
+            },
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 9
+            },
+            {
+              "paragraphId": "p6",
+              "start": 3,
+              "end": 12
+            },
+            {
+              "paragraphId": "p6",
+              "start": 136,
+              "end": 145
             }
           ],
           "scoring": {
@@ -584,16 +599,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "트랜지스터 스위칭"
         },
         {
           "id": "q2",
-          "prompt": "2??? '스위칭 동작에서 중요한 것은 입력 신호와 출력 상태의 대응 관계이다. 작은 입력 전압이나 전류가 가해지면 트랜지스터 내부 상태가 바뀌고, 그 결과 더 큰 전류의 흐름을 허용하거나 차단한다. 즉 트랜지스터는 약한 신호로 강한 전류 경로를 제어하는 장치라고 볼 수 있다.'?? ??? ??? ?? ????",
+          "prompt": "작은 입력 전압이나 무엇 내부 상태가 바뀌고, 그 결과 더 큰 전류의 흐름을 허용하거나 차단한다?",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 149
+              "start": 50,
+              "end": 64
             }
           ],
           "scoring": {
@@ -601,16 +617,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "전류가 가해지면 트랜지스터"
         },
         {
           "id": "q3",
-          "prompt": "3??? '이때 트랜지스터는 중간값보다 두 가지 상태가 분명할 때 스위치로 쓰기 좋다. 전류가 거의 흐르지 않는 차단 상태와 충분히 흐르는 도통 상태가 뚜렷해야 회로가 안정적으로 켜짐과 꺼짐을 구분할 수 있기 때문이다. 디지털 장치가 0과 1의 두 상태를 바탕으로 작동하는 것도 이와 관련이 있다.'?? ??? ??? ?? ????",
+          "prompt": "무엇보다 두 가지 상태가 분명할 때 스위치로 쓰기 좋다?",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 160
+              "end": 13
             }
           ],
           "scoring": {
@@ -618,16 +635,32 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "이때 트랜지스터는 중간값"
         },
         {
           "id": "q4",
-          "prompt": "4??? '트랜지스터 스위칭은 단순한 전등 제어를 넘어 계산 장치와 통신 장치에도 널리 쓰인다. 논리 회로에서는 스위칭 결과가 곧 계산의 기본 단위가 되고, 센서 회로에서는 특정 조건이 충족되었을 때만 신호를 보내도록 만들 수 있다. 그래서 스위칭은 전자공학의 가장 기본적인 기능 가운데 하나이다.'?? ??? ??? ?? ????",
+          "prompt": "무엇은 단순한 전등 제어를 넘어 계산 장치와 통신 장치에도 널리 쓰인다?",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 9
+            },
             {
               "paragraphId": "p4",
               "start": 0,
-              "end": 160
+              "end": 9
+            },
+            {
+              "paragraphId": "p6",
+              "start": 3,
+              "end": 12
+            },
+            {
+              "paragraphId": "p6",
+              "start": 136,
+              "end": 145
             }
           ],
           "scoring": {
@@ -635,16 +668,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "트랜지스터 스위칭"
         },
         {
           "id": "q5",
-          "prompt": "5??? '다만 스위칭은 이상적으로 순간에 일어나는 것이 아니라 아주 짧은 시간이 필요하다. 켜지는 과정과 꺼지는 과정에서 미세한 지연이 생기며, 이 지연이 커지면 고속 회로의 성능에 영향을 준다. 따라서 전자공학에서는 스위칭 속도와 안정성을 함께 고려해 회로를 설계한다.'?? ??? ??? ?? ????",
+          "prompt": "무엇 속도와 안정성을 함께 고려해 회로를 설계한다?",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 146
+              "start": 105,
+              "end": 120
             }
           ],
           "scoring": {
@@ -652,16 +686,32 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "따라서 전자공학에서는 스위칭"
         },
         {
           "id": "q6",
-          "prompt": "6??? '결국 트랜지스터 스위칭은 작은 입력 신호로 전류 흐름을 선택적으로 제어하는 개념이다. 이 원리를 이해하면 디지털 회로가 어떻게 동작하는지, 왜 전자 장치가 빠르고 정확하게 반응하는지를 설명할 수 있다. 현대 전자 장치의 기본 구조를 이해하려면 트랜지스터 스위칭의 원리를 먼저 알아야 한다.'?? ??? ??? ?? ????",
+          "prompt": "결국 무엇은 작은 입력 신호로 전류 흐름을 선택적으로 제어하는 개념이다?",
           "answerRanges": [
             {
-              "paragraphId": "p6",
+              "paragraphId": "p1",
               "start": 0,
-              "end": 161
+              "end": 9
+            },
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 9
+            },
+            {
+              "paragraphId": "p6",
+              "start": 3,
+              "end": 12
+            },
+            {
+              "paragraphId": "p6",
+              "start": 136,
+              "end": 145
             }
           ],
           "scoring": {
@@ -669,7 +719,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "트랜지스터 스위칭"
         }
       ]
     }

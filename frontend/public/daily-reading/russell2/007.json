@@ -66,8 +66,8 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 65,
-                "end": 82
+                "start": 0,
+                "end": 84
               }
             ]
           },
@@ -106,7 +106,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 83
+                "end": 84
               }
             ]
           },
@@ -144,8 +144,8 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 33,
-                "end": 34
+                "start": 0,
+                "end": 75
               }
             ]
           },
@@ -184,7 +184,7 @@
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 74
+                "end": 75
               }
             ]
           },
@@ -222,8 +222,8 @@
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 15,
-                "end": 33
+                "start": 0,
+                "end": 72
               }
             ]
           },
@@ -262,7 +262,7 @@
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 71
+                "end": 72
               }
             ]
           },
@@ -300,8 +300,8 @@
             "ranges": [
               {
                 "paragraphId": "p4",
-                "start": 48,
-                "end": 54
+                "start": 0,
+                "end": 76
               }
             ]
           },
@@ -340,7 +340,7 @@
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 75
+                "end": 76
               }
             ]
           },
@@ -378,8 +378,8 @@
             "ranges": [
               {
                 "paragraphId": "p5",
-                "start": 21,
-                "end": 48
+                "start": 0,
+                "end": 77
               }
             ]
           },
@@ -418,7 +418,7 @@
               {
                 "paragraphId": "p5",
                 "start": 0,
-                "end": 76
+                "end": 77
               }
             ]
           },
@@ -456,8 +456,8 @@
             "ranges": [
               {
                 "paragraphId": "p6",
-                "start": 29,
-                "end": 41
+                "start": 0,
+                "end": 72
               }
             ]
           },
@@ -496,7 +496,7 @@
               {
                 "paragraphId": "p6",
                 "start": 0,
-                "end": 71
+                "end": 72
               }
             ]
           },
@@ -570,76 +570,129 @@
     "confirm": {
       "questions": [
         {
-          "id": "q1",
-          "prompt": "?? ??? ?? ??? ??? ?? ??? ??? ??? ???? ??????",
+          "prompt": "품사를 구별할 때 살피는 핵심은 무엇인가?",
+          "choices": [
+            {
+              "id": "A",
+              "text": "맡은 기능과 성격"
+            },
+            {
+              "id": "B",
+              "text": "소리의 크기"
+            },
+            {
+              "id": "C",
+              "text": "글자 수"
+            },
+            {
+              "id": "D",
+              "text": "문장 길이"
+            }
+          ],
+          "answerId": "A",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 84
+              "start": 65,
+              "end": 82
             }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "answerText": "맡은 기능과 성격을 살피는 일이",
           "answerMatchMode": "ANY"
         },
         {
-          "id": "q2",
-          "prompt": "?? ??? ?????????? ?? ?? ??? ??? ?? ???? ????",
+          "prompt": "명사와 대명사와 수사는 어떤 품사인가?",
+          "choices": [
+            {
+              "id": "A",
+              "text": "체언"
+            },
+            {
+              "id": "B",
+              "text": "용언"
+            },
+            {
+              "id": "C",
+              "text": "부사"
+            },
+            {
+              "id": "D",
+              "text": "감탄사"
+            }
+          ],
+          "answerId": "A",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 75
+              "start": 33,
+              "end": 34
+            },
+            {
+              "paragraphId": "p4",
+              "start": 48,
+              "end": 49
+            },
+            {
+              "paragraphId": "p4",
+              "start": 69,
+              "end": 70
             }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "answerText": "체",
           "answerMatchMode": "ANY"
         },
         {
-          "id": "q3",
-          "prompt": "?? ??? ??? ???? ???? ?? ??? ?? ??? ??????",
+          "prompt": "동사와 형용사의 공통점은 무엇인가?",
+          "choices": [
+            {
+              "id": "A",
+              "text": "활용을 하며 서술어가 될 수 있다"
+            },
+            {
+              "id": "B",
+              "text": "조사와 결합한다"
+            },
+            {
+              "id": "C",
+              "text": "체언을 꾸민다"
+            },
+            {
+              "id": "D",
+              "text": "느낌을 바로 나타낸다"
+            }
+          ],
+          "answerId": "A",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 72
+              "start": 15,
+              "end": 33
             }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "answerText": "활용을 하며 서술어가 될 수 있지",
           "answerMatchMode": "ANY"
         },
         {
-          "id": "q4",
-          "prompt": "?? ??? ???? ??? ??? ??? ??? ?? ???? ?? ????",
-          "answerRanges": [
+          "prompt": "조사와 감탄사는 각각 무엇을 드러내는가?",
+          "choices": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 76
+              "id": "A",
+              "text": "관계와 느낌"
+            },
+            {
+              "id": "B",
+              "text": "주어와 목적어"
+            },
+            {
+              "id": "C",
+              "text": "활용과 서술어"
+            },
+            {
+              "id": "D",
+              "text": "체언과 용언"
             }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q5",
-          "prompt": "??? ??? ??? ???? ?? ??? ???? ??? ??? ??????",
+          "answerId": "A",
           "answerRanges": [
             {
               "paragraphId": "p5",
@@ -647,28 +700,38 @@
               "end": 77
             }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "answerText": "조사는 앞말에 붙어 관계를 드러내고, 감탄사는 놀람이나 부름 같은 느낌을 바로 나타내므로 다른 품사와 달리 독립적으로 쓰이는 경우가 많다.",
           "answerMatchMode": "ANY"
         },
         {
-          "id": "q6",
-          "prompt": "??? ??? ??? ??? ??? ?? ? ?? ???? ?? ??? ??? ??????",
+          "prompt": "품사를 바르게 가리려면 무엇을 함께 살펴야 하는가?",
+          "choices": [
+            {
+              "id": "A",
+              "text": "문장에서 어떻게 쓰였는지"
+            },
+            {
+              "id": "B",
+              "text": "글자의 모양"
+            },
+            {
+              "id": "C",
+              "text": "문장의 길이"
+            },
+            {
+              "id": "D",
+              "text": "소리의 크기"
+            }
+          ],
+          "answerId": "A",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 72
+              "start": 29,
+              "end": 41
             }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "answerText": "문장에서 어떻게 쓰였는",
           "answerMatchMode": "ANY"
         }
       ]

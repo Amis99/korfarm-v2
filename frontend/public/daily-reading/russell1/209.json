@@ -59,7 +59,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 86
+                "end": 159
               }
             ]
           },
@@ -97,8 +97,47 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 86,
-                "end": 164
+                "start": 0,
+                "end": 255
+              }
+            ]
+          },
+          "question": {
+            "prompt": "앞 내용을 한마디로 정리하면 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "추천 결과를 이해하려면 뒤에 숨은 자료와 판단 기준까지 함께 보아야 한다"
+              },
+              {
+                "id": "B",
+                "text": "추천 결과는 대체로 우연이라 기준을 따질 필요가 없다"
+              },
+              {
+                "id": "C",
+                "text": "인공지능은 사람이 본 기록보다 제작자 취향을 더 따른다"
+              },
+              {
+                "id": "D",
+                "text": "편향은 추천 목록보다 검색 결과에서만 나타난다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 82,
+                "end": 221
               }
             ]
           },
@@ -131,13 +170,13 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 164,
-                "end": 233
+                "start": 160,
+                "end": 255
               }
             ]
           },
@@ -170,12 +209,12 @@
           }
         },
         {
-          "stepId": "s4",
+          "stepId": "s5",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 233,
+                "start": 222,
                 "end": 255
               }
             ]
@@ -198,45 +237,6 @@
               {
                 "id": "D",
                 "text": "편향은 기준이 아니라 기계 성능에서만 생긴다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s5",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 255
-              }
-            ]
-          },
-          "question": {
-            "prompt": "앞 내용을 한마디로 정리하면 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "추천 결과를 이해하려면 뒤에 숨은 자료와 판단 기준까지 함께 보아야 한다"
-              },
-              {
-                "id": "B",
-                "text": "추천 결과는 대체로 우연이라 기준을 따질 필요가 없다"
-              },
-              {
-                "id": "C",
-                "text": "인공지능은 사람이 본 기록보다 제작자 취향을 더 따른다"
-              },
-              {
-                "id": "D",
-                "text": "편향은 추천 목록보다 검색 결과에서만 나타난다"
               }
             ],
             "answerId": "A",
@@ -292,162 +292,6 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 39,
-                "end": 103
-              }
-            ]
-          },
-          "question": {
-            "prompt": "충분히 다양한 자료가 주어지면 인공지능은 무엇을 하려 하나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "반복되는 특징을 찾아 새로운 상황에 적용하려 한다"
-              },
-              {
-                "id": "B",
-                "text": "자료를 외우는 데 그치고 새로운 상황에는 적용하지 못한다"
-              },
-              {
-                "id": "C",
-                "text": "자료 차이를 모두 지우고 같은 결과만 낸다"
-              },
-              {
-                "id": "D",
-                "text": "특징보다 우연한 요소를 먼저 고정해 둔다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 103,
-                "end": 164
-              }
-            ]
-          },
-          "question": {
-            "prompt": "자료가 한쪽으로 치우치거나 예시가 적을 때 생길 수 있는 문제는 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "우연한 특징을 중요한 규칙으로 잘못 받아들일 수 있다"
-              },
-              {
-                "id": "B",
-                "text": "정확도는 더 높아지고 편향은 줄어든다"
-              },
-              {
-                "id": "C",
-                "text": "학습 속도만 느려질 뿐 결과에는 영향이 없다"
-              },
-              {
-                "id": "D",
-                "text": "인공지능은 자료 치우침과 상관없이 같은 판단을 유지한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s9",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 164,
-                "end": 215
-              }
-            ]
-          },
-          "question": {
-            "prompt": "특정 조건 사진만 많이 학습한 사례는 무엇을 보여 주나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "학습 자료의 치우침이 다른 조건에서 낮은 정확도로 이어질 수 있음을 보여 주기 위해서이다"
-              },
-              {
-                "id": "B",
-                "text": "사진 학습은 다른 자료보다 편향이 전혀 없음을 보이기 위해서이다"
-              },
-              {
-                "id": "C",
-                "text": "조건이 달라도 정확도는 그대로 유지된다는 점을 보이기 위해서이다"
-              },
-              {
-                "id": "D",
-                "text": "정확도보다 속도만 중요하다는 점을 보이기 위해서이다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s10",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 215,
-                "end": 258
-              }
-            ]
-          },
-          "question": {
-            "prompt": "앞의 사례를 통해 함께 살펴야 한다고 정리한 것은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "결과만이 아니라 학습 자료의 성격까지 함께 살펴야 한다"
-              },
-              {
-                "id": "B",
-                "text": "자료보다 결과 화면만 보면 편향을 충분히 알 수 있다"
-              },
-              {
-                "id": "C",
-                "text": "정확도 차이는 자료보다 기계 성능으로만 설명된다"
-              },
-              {
-                "id": "D",
-                "text": "학습 자료는 인공지능 이해와 거의 관련이 없다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s11",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
                 "start": 0,
                 "end": 258
               }
@@ -482,13 +326,169 @@
           }
         },
         {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 40,
+                "end": 155
+              }
+            ]
+          },
+          "question": {
+            "prompt": "충분히 다양한 자료가 주어지면 인공지능은 무엇을 하려 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반복되는 특징을 찾아 새로운 상황에 적용하려 한다"
+              },
+              {
+                "id": "B",
+                "text": "자료를 외우는 데 그치고 새로운 상황에는 적용하지 못한다"
+              },
+              {
+                "id": "C",
+                "text": "자료 차이를 모두 지우고 같은 결과만 낸다"
+              },
+              {
+                "id": "D",
+                "text": "특징보다 우연한 요소를 먼저 고정해 둔다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 92,
+                "end": 208
+              }
+            ]
+          },
+          "question": {
+            "prompt": "자료가 한쪽으로 치우치거나 예시가 적을 때 생길 수 있는 문제는 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "우연한 특징을 중요한 규칙으로 잘못 받아들일 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "정확도는 더 높아지고 편향은 줄어든다"
+              },
+              {
+                "id": "C",
+                "text": "학습 속도만 느려질 뿐 결과에는 영향이 없다"
+              },
+              {
+                "id": "D",
+                "text": "인공지능은 자료 치우침과 상관없이 같은 판단을 유지한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 156,
+                "end": 258
+              }
+            ]
+          },
+          "question": {
+            "prompt": "특정 조건 사진만 많이 학습한 사례는 무엇을 보여 주나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "학습 자료의 치우침이 다른 조건에서 낮은 정확도로 이어질 수 있음을 보여 주기 위해서이다"
+              },
+              {
+                "id": "B",
+                "text": "사진 학습은 다른 자료보다 편향이 전혀 없음을 보이기 위해서이다"
+              },
+              {
+                "id": "C",
+                "text": "조건이 달라도 정확도는 그대로 유지된다는 점을 보이기 위해서이다"
+              },
+              {
+                "id": "D",
+                "text": "정확도보다 속도만 중요하다는 점을 보이기 위해서이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 209,
+                "end": 258
+              }
+            ]
+          },
+          "question": {
+            "prompt": "앞의 사례를 통해 함께 살펴야 한다고 정리한 것은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결과만이 아니라 학습 자료의 성격까지 함께 살펴야 한다"
+              },
+              {
+                "id": "B",
+                "text": "자료보다 결과 화면만 보면 편향을 충분히 알 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "정확도 차이는 자료보다 기계 성능으로만 설명된다"
+              },
+              {
+                "id": "D",
+                "text": "학습 자료는 인공지능 이해와 거의 관련이 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s12",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 63
+                "end": 117
               }
             ]
           },
@@ -522,123 +522,6 @@
         },
         {
           "stepId": "s13",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 63,
-                "end": 141
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 맞히게 할지, 어떤 자료를 넣을지 정하는 것은 누구의 역할인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "인공지능의 방향은 처음부터 사람이 세운 목표와 설계에 크게 좌우된다"
-              },
-              {
-                "id": "B",
-                "text": "사람은 자료만 넣고 이후 판단 기준은 전혀 정하지 않는다"
-              },
-              {
-                "id": "C",
-                "text": "목표와 자료는 결과보다 중요하지 않다"
-              },
-              {
-                "id": "D",
-                "text": "오류를 줄이는 일은 인공지능이 홀로 처리한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s14",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 141,
-                "end": 184
-              }
-            ]
-          },
-          "question": {
-            "prompt": "인공지능 판단을 바라보는 태도로 무엇이 제시되나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "무조건 객관적이라고만 볼 수는 없다"
-              },
-              {
-                "id": "B",
-                "text": "사람 개입이 있어도 판단은 언제나 완전한 객관성을 가진다"
-              },
-              {
-                "id": "C",
-                "text": "객관성은 자료보다 화면 구성에 의해 정해진다"
-              },
-              {
-                "id": "D",
-                "text": "인공지능 답은 결국 모두 믿을 수 없다고만 봐야 한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s15",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 184,
-                "end": 215
-              }
-            ]
-          },
-          "question": {
-            "prompt": "사례 분석에서 함께 묻게 되는 것은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "어디까지 믿을 수 있고 어떤 점은 사람이 다시 검토해야 하는가"
-              },
-              {
-                "id": "B",
-                "text": "추천 결과가 빠르기만 하면 무엇이든 믿어도 되는가"
-              },
-              {
-                "id": "C",
-                "text": "사람 개입을 없애야만 결과가 가치 있는가"
-              },
-              {
-                "id": "D",
-                "text": "편향보다 흥미로운 제목을 우선해야 하는가"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s16",
           "highlight": {
             "ranges": [
               {
@@ -677,13 +560,130 @@
           }
         },
         {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 60,
+                "end": 152
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 맞히게 할지, 어떤 자료를 넣을지 정하는 것은 누구의 역할인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인공지능의 방향은 처음부터 사람이 세운 목표와 설계에 크게 좌우된다"
+              },
+              {
+                "id": "B",
+                "text": "사람은 자료만 넣고 이후 판단 기준은 전혀 정하지 않는다"
+              },
+              {
+                "id": "C",
+                "text": "목표와 자료는 결과보다 중요하지 않다"
+              },
+              {
+                "id": "D",
+                "text": "오류를 줄이는 일은 인공지능이 홀로 처리한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 118,
+                "end": 215
+              }
+            ]
+          },
+          "question": {
+            "prompt": "인공지능 판단을 바라보는 태도로 무엇이 제시되나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "무조건 객관적이라고만 볼 수는 없다"
+              },
+              {
+                "id": "B",
+                "text": "사람 개입이 있어도 판단은 언제나 완전한 객관성을 가진다"
+              },
+              {
+                "id": "C",
+                "text": "객관성은 자료보다 화면 구성에 의해 정해진다"
+              },
+              {
+                "id": "D",
+                "text": "인공지능 답은 결국 모두 믿을 수 없다고만 봐야 한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 153,
+                "end": 215
+              }
+            ]
+          },
+          "question": {
+            "prompt": "사례 분석에서 함께 묻게 되는 것은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "어디까지 믿을 수 있고 어떤 점은 사람이 다시 검토해야 하는가"
+              },
+              {
+                "id": "B",
+                "text": "추천 결과가 빠르기만 하면 무엇이든 믿어도 되는가"
+              },
+              {
+                "id": "C",
+                "text": "사람 개입을 없애야만 결과가 가치 있는가"
+              },
+              {
+                "id": "D",
+                "text": "편향보다 흥미로운 제목을 우선해야 하는가"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s17",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 43
+                "end": 100
               }
             ]
           },
@@ -721,8 +721,47 @@
             "ranges": [
               {
                 "paragraphId": "p4",
-                "start": 43,
-                "end": 102
+                "start": 0,
+                "end": 267
+              }
+            ]
+          },
+          "question": {
+            "prompt": "추천 알고리즘과 편향을 함께 읽는 까닭은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "추천 알고리즘은 자료와 목표, 검토 과정을 함께 보아야 제대로 이해할 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "추천 알고리즘은 편리하기만 하면 편향을 따질 필요가 없다"
+              },
+              {
+                "id": "C",
+                "text": "학습 자료보다 결과 화면의 배열이 더 중요하다는 점이 중심이다"
+              },
+              {
+                "id": "D",
+                "text": "인공지능은 사람 판단과 무관한 순수한 계산이라는 점이 중심이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 42,
+                "end": 191
               }
             ]
           },
@@ -755,13 +794,13 @@
           }
         },
         {
-          "stepId": "s19",
+          "stepId": "s20",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
-                "start": 102,
-                "end": 205
+                "start": 101,
+                "end": 267
               }
             ]
           },
@@ -794,12 +833,12 @@
           }
         },
         {
-          "stepId": "s20",
+          "stepId": "s21",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
-                "start": 205,
+                "start": 192,
                 "end": 267
               }
             ]
@@ -822,45 +861,6 @@
               {
                 "id": "D",
                 "text": "추천 기술은 편향보다 속도를 먼저 읽어야 한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s21",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 267
-              }
-            ]
-          },
-          "question": {
-            "prompt": "추천 알고리즘과 편향을 함께 읽는 까닭은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "추천 알고리즘은 자료와 목표, 검토 과정을 함께 보아야 제대로 이해할 수 있다"
-              },
-              {
-                "id": "B",
-                "text": "추천 알고리즘은 편리하기만 하면 편향을 따질 필요가 없다"
-              },
-              {
-                "id": "C",
-                "text": "학습 자료보다 결과 화면의 배열이 더 중요하다는 점이 중심이다"
-              },
-              {
-                "id": "D",
-                "text": "인공지능은 사람 판단과 무관한 순수한 계산이라는 점이 중심이다"
               }
             ],
             "answerId": "A",
@@ -917,9 +917,14 @@
           "prompt": "알고리즘은 무슨 뜻인가요?",
           "answerRanges": [
             {
-              "end": 6,
               "paragraphId": "p1",
-              "start": 3
+              "start": 3,
+              "end": 7
+            },
+            {
+              "paragraphId": "p4",
+              "start": 6,
+              "end": 10
             }
           ],
           "scoring": {
@@ -927,16 +932,22 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "알고리즘"
         },
         {
           "id": "q2",
           "prompt": "편향은 무슨 뜻인가요?",
           "answerRanges": [
             {
-              "end": 10,
               "paragraphId": "p1",
-              "start": 9
+              "start": 9,
+              "end": 11
+            },
+            {
+              "paragraphId": "p4",
+              "start": 12,
+              "end": 14
             }
           ],
           "scoring": {
@@ -944,16 +955,27 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "편향"
         },
         {
           "id": "q3",
           "prompt": "기준은 무슨 뜻인가요?",
           "answerRanges": [
             {
-              "end": 133,
               "paragraphId": "p1",
-              "start": 132
+              "start": 132,
+              "end": 134
+            },
+            {
+              "paragraphId": "p1",
+              "start": 242,
+              "end": 244
+            },
+            {
+              "paragraphId": "p3",
+              "start": 44,
+              "end": 46
             }
           ],
           "scoring": {
@@ -961,16 +983,22 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "기준"
         },
         {
           "id": "q4",
           "prompt": "목표는 무슨 뜻인가요?",
           "answerRanges": [
             {
-              "end": 41,
               "paragraphId": "p3",
-              "start": 40
+              "start": 40,
+              "end": 42
+            },
+            {
+              "paragraphId": "p4",
+              "start": 154,
+              "end": 156
             }
           ],
           "scoring": {
@@ -978,16 +1006,22 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "목표"
         },
         {
           "id": "q5",
           "prompt": "검토는 무슨 뜻인가요?",
           "answerRanges": [
             {
-              "end": 198,
               "paragraphId": "p3",
-              "start": 197
+              "start": 197,
+              "end": 199
+            },
+            {
+              "paragraphId": "p4",
+              "start": 53,
+              "end": 55
             }
           ],
           "scoring": {
@@ -995,7 +1029,8 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ANY",
+          "answerText": "검토"
         }
       ]
     }

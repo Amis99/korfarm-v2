@@ -100,6 +100,88 @@
         {
           "stepId": "s2",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 173
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "제페토는 상어 뱃속에서 깊이 절망하고 있었다"
+              },
+              {
+                "id": "B",
+                "text": "제페토는 곧 탈출할 거라 신나 있었다"
+              },
+              {
+                "id": "C",
+                "text": "제페토는 금화를 찾느라 바빴다"
+              },
+              {
+                "id": "D",
+                "text": "제페토는 상어 밖에서 길을 찾고 있었다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 173
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "절망"
+              },
+              {
+                "id": "B",
+                "text": "분노"
+              },
+              {
+                "id": "C",
+                "text": "장난기"
+              },
+              {
+                "id": "D",
+                "text": "안도"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -139,7 +221,7 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s5",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -180,7 +262,7 @@
           }
         },
         {
-          "stepId": "s4",
+          "stepId": "s6",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -221,7 +303,7 @@
           }
         },
         {
-          "stepId": "s5",
+          "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -262,48 +344,7 @@
           }
         },
         {
-          "stepId": "s6",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 173
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "제페토는 상어 뱃속에서 깊이 절망하고 있었다"
-              },
-              {
-                "id": "B",
-                "text": "제페토는 곧 탈출할 거라 신나 있었다"
-              },
-              {
-                "id": "C",
-                "text": "제페토는 금화를 찾느라 바빴다"
-              },
-              {
-                "id": "D",
-                "text": "제페토는 상어 밖에서 길을 찾고 있었다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s7",
+          "stepId": "s8",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -344,171 +385,7 @@
           }
         },
         {
-          "stepId": "s8",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 22,
-                "end": 34
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "피노키오는 꼭 밖으로 모시겠다고 말했다"
-              },
-              {
-                "id": "B",
-                "text": "피노키오는 여기서 기다리자고 말했다"
-              },
-              {
-                "id": "C",
-                "text": "피노키오는 상어를 깨우자고 말했다"
-              },
-              {
-                "id": "D",
-                "text": "피노키오는 혼자 먼저 나가겠다고 말했다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
           "stepId": "s9",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 35,
-                "end": 43
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "피노키오는 손을 잡고 식도로 걸어갔다"
-              },
-              {
-                "id": "B",
-                "text": "피노키오는 할아버지를 두고 뒤로 물러섰다"
-              },
-              {
-                "id": "C",
-                "text": "피노키오는 입구에서 바로 잠이 들었다"
-              },
-              {
-                "id": "D",
-                "text": "피노키오는 상어 등을 타고 달렸다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s10",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 44,
-                "end": 108
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "몸은 떨렸지만 눈빛은 단단했다"
-              },
-              {
-                "id": "B",
-                "text": "몸은 떨리지 않았고 졸려 보였다"
-              },
-              {
-                "id": "C",
-                "text": "몸은 가벼웠지만 눈빛은 흐릿했다"
-              },
-              {
-                "id": "D",
-                "text": "몸은 무거웠고 금화만 찾고 있었다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s11",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 109,
-                "end": 157
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "피노키오는 무서워도 용감하게 나아갔다"
-              },
-              {
-                "id": "B",
-                "text": "피노키오는 위험해서 곧 포기하려 했다"
-              },
-              {
-                "id": "C",
-                "text": "피노키오는 할아버지를 밀어 두고 숨었다"
-              },
-              {
-                "id": "D",
-                "text": "피노키오는 상어와 장난치며 웃었다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -549,7 +426,212 @@
           }
         },
         {
+          "stepId": "s10",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 157
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "손을 잡고 식도로 걸어갔다"
+              },
+              {
+                "id": "B",
+                "text": "업고 바로 물 밖으로 뛰었다"
+              },
+              {
+                "id": "C",
+                "text": "입구 앞에서 숨어 버렸다"
+              },
+              {
+                "id": "D",
+                "text": "상어를 깨우며 소리쳤다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 22,
+                "end": 34
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "피노키오는 꼭 밖으로 모시겠다고 말했다"
+              },
+              {
+                "id": "B",
+                "text": "피노키오는 여기서 기다리자고 말했다"
+              },
+              {
+                "id": "C",
+                "text": "피노키오는 상어를 깨우자고 말했다"
+              },
+              {
+                "id": "D",
+                "text": "피노키오는 혼자 먼저 나가겠다고 말했다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 35,
+                "end": 43
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "피노키오는 손을 잡고 식도로 걸어갔다"
+              },
+              {
+                "id": "B",
+                "text": "피노키오는 할아버지를 두고 뒤로 물러섰다"
+              },
+              {
+                "id": "C",
+                "text": "피노키오는 입구에서 바로 잠이 들었다"
+              },
+              {
+                "id": "D",
+                "text": "피노키오는 상어 등을 타고 달렸다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
           "stepId": "s13",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 44,
+                "end": 108
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "몸은 떨렸지만 눈빛은 단단했다"
+              },
+              {
+                "id": "B",
+                "text": "몸은 떨리지 않았고 졸려 보였다"
+              },
+              {
+                "id": "C",
+                "text": "몸은 가벼웠지만 눈빛은 흐릿했다"
+              },
+              {
+                "id": "D",
+                "text": "몸은 무거웠고 금화만 찾고 있었다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 109,
+                "end": 157
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "피노키오는 무서워도 용감하게 나아갔다"
+              },
+              {
+                "id": "B",
+                "text": "피노키오는 위험해서 곧 포기하려 했다"
+              },
+              {
+                "id": "C",
+                "text": "피노키오는 할아버지를 밀어 두고 숨었다"
+              },
+              {
+                "id": "D",
+                "text": "피노키오는 상어와 장난치며 웃었다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s15",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -590,130 +672,7 @@
           }
         },
         {
-          "stepId": "s14",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 25,
-                "end": 61
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "상어는 입을 벌린 채 깊이 잠들어 있었다"
-              },
-              {
-                "id": "B",
-                "text": "상어는 눈을 뜨고 둘을 노려보고 있었다"
-              },
-              {
-                "id": "C",
-                "text": "상어는 물 밖으로 뛰어오르고 있었다"
-              },
-              {
-                "id": "D",
-                "text": "상어는 입을 닫은 채 노래하고 있었다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s15",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 62,
-                "end": 75
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "피노키오는 잠든 틈에 이빨 사이로 나가자고 했다"
-              },
-              {
-                "id": "B",
-                "text": "피노키오는 상어를 깨우고 달리자고 했다"
-              },
-              {
-                "id": "C",
-                "text": "피노키오는 다시 배 속으로 돌아가자고 했다"
-              },
-              {
-                "id": "D",
-                "text": "피노키오는 이빨을 하나씩 뽑자고 했다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
           "stepId": "s16",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 76,
-                "end": 162
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "피노키오는 업고 혀를 밟으며 나아갔다"
-              },
-              {
-                "id": "B",
-                "text": "피노키오는 할아버지를 내려놓고 쉬었다"
-              },
-              {
-                "id": "C",
-                "text": "피노키오는 상어 코를 붙잡고 매달렸다"
-              },
-              {
-                "id": "D",
-                "text": "피노키오는 물속으로 거꾸로 미끄러졌다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s17",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -754,7 +713,171 @@
           }
         },
         {
+          "stepId": "s17",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 162
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "할아버지를 업고 혀를 밟았다"
+              },
+              {
+                "id": "B",
+                "text": "할아버지를 두고 먼저 달아났다"
+              },
+              {
+                "id": "C",
+                "text": "지느러미를 붙잡고 떠올랐다"
+              },
+              {
+                "id": "D",
+                "text": "상어의 꼬리를 밀어냈다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
           "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 25,
+                "end": 61
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "상어는 입을 벌린 채 깊이 잠들어 있었다"
+              },
+              {
+                "id": "B",
+                "text": "상어는 눈을 뜨고 둘을 노려보고 있었다"
+              },
+              {
+                "id": "C",
+                "text": "상어는 물 밖으로 뛰어오르고 있었다"
+              },
+              {
+                "id": "D",
+                "text": "상어는 입을 닫은 채 노래하고 있었다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 62,
+                "end": 75
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "피노키오는 잠든 틈에 이빨 사이로 나가자고 했다"
+              },
+              {
+                "id": "B",
+                "text": "피노키오는 상어를 깨우고 달리자고 했다"
+              },
+              {
+                "id": "C",
+                "text": "피노키오는 다시 배 속으로 돌아가자고 했다"
+              },
+              {
+                "id": "D",
+                "text": "피노키오는 이빨을 하나씩 뽑자고 했다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 76,
+                "end": 162
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "피노키오는 업고 혀를 밟으며 나아갔다"
+              },
+              {
+                "id": "B",
+                "text": "피노키오는 할아버지를 내려놓고 쉬었다"
+              },
+              {
+                "id": "C",
+                "text": "피노키오는 상어 코를 붙잡고 매달렸다"
+              },
+              {
+                "id": "D",
+                "text": "피노키오는 물속으로 거꾸로 미끄러졌다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s21",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -784,129 +907,6 @@
               {
                 "id": "D",
                 "text": "입구에서 촛불이 다시 켜졌다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s19",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 35,
-                "end": 73
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무슨 일이 있었나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "거센 바람에 다시 굴러떨어질 뻔했다"
-              },
-              {
-                "id": "B",
-                "text": "거센 바람이 둘을 바로 집에 데려갔다"
-              },
-              {
-                "id": "C",
-                "text": "잔잔한 바람에 더 쉽게 걸어 나갔다"
-              },
-              {
-                "id": "D",
-                "text": "바람이 멈춰 둘은 잠시 쉬었다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s20",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 74,
-                "end": 104
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "피노키오는 이빨을 붙잡고 버텼다"
-              },
-              {
-                "id": "B",
-                "text": "피노키오는 할아버지 손을 놓고 도망쳤다"
-              },
-              {
-                "id": "C",
-                "text": "피노키오는 상어를 깨우며 소리쳤다"
-              },
-              {
-                "id": "D",
-                "text": "피노키오는 바람에 몸을 맡겼다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s21",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 105,
-                "end": 173
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "피노키오는 끝까지 버티며 탈출을 이끌었다"
-              },
-              {
-                "id": "B",
-                "text": "피노키오는 마지막에 다시 포기했다"
-              },
-              {
-                "id": "C",
-                "text": "피노키오는 혼자만 먼저 도망쳤다"
-              },
-              {
-                "id": "D",
-                "text": "피노키오는 바다 대신 배 위에 올랐다"
               }
             ],
             "answerId": "A",
@@ -965,129 +965,6 @@
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 173
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "절망"
-              },
-              {
-                "id": "B",
-                "text": "분노"
-              },
-              {
-                "id": "C",
-                "text": "장난기"
-              },
-              {
-                "id": "D",
-                "text": "안도"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s24",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 157
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "손을 잡고 식도로 걸어갔다"
-              },
-              {
-                "id": "B",
-                "text": "업고 바로 물 밖으로 뛰었다"
-              },
-              {
-                "id": "C",
-                "text": "입구 앞에서 숨어 버렸다"
-              },
-              {
-                "id": "D",
-                "text": "상어를 깨우며 소리쳤다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s25",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 162
-              }
-            ]
-          },
-          "question": {
-            "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "할아버지를 업고 혀를 밟았다"
-              },
-              {
-                "id": "B",
-                "text": "할아버지를 두고 먼저 달아났다"
-              },
-              {
-                "id": "C",
-                "text": "지느러미를 붙잡고 떠올랐다"
-              },
-              {
-                "id": "D",
-                "text": "상어의 꼬리를 밀어냈다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s26",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
-          "highlight": {
-            "ranges": [
-              {
                 "paragraphId": "p4",
                 "start": 0,
                 "end": 173
@@ -1112,6 +989,129 @@
               {
                 "id": "D",
                 "text": "작은 배 위"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s24",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 35,
+                "end": 73
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무슨 일이 있었나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "거센 바람에 다시 굴러떨어질 뻔했다"
+              },
+              {
+                "id": "B",
+                "text": "거센 바람이 둘을 바로 집에 데려갔다"
+              },
+              {
+                "id": "C",
+                "text": "잔잔한 바람에 더 쉽게 걸어 나갔다"
+              },
+              {
+                "id": "D",
+                "text": "바람이 멈춰 둘은 잠시 쉬었다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s25",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 74,
+                "end": 104
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "피노키오는 이빨을 붙잡고 버텼다"
+              },
+              {
+                "id": "B",
+                "text": "피노키오는 할아버지 손을 놓고 도망쳤다"
+              },
+              {
+                "id": "C",
+                "text": "피노키오는 상어를 깨우며 소리쳤다"
+              },
+              {
+                "id": "D",
+                "text": "피노키오는 바람에 몸을 맡겼다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s26",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 105,
+                "end": 173
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "피노키오는 끝까지 버티며 탈출을 이끌었다"
+              },
+              {
+                "id": "B",
+                "text": "피노키오는 마지막에 다시 포기했다"
+              },
+              {
+                "id": "C",
+                "text": "피노키오는 혼자만 먼저 도망쳤다"
+              },
+              {
+                "id": "D",
+                "text": "피노키오는 바다 대신 배 위에 올랐다"
               }
             ],
             "answerId": "A",

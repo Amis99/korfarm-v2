@@ -99,6 +99,47 @@
         {
           "stepId": "s2",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 123
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "재난 문자는 위험을 빨리 알려 안전을 돕는다"
+              },
+              {
+                "id": "B",
+                "text": "재난 문자는 평소 뉴스만 전하는 문자다"
+              },
+              {
+                "id": "C",
+                "text": "재난 문자는 놀이 소식을 모아 보내 준다"
+              },
+              {
+                "id": "D",
+                "text": "재난 문자는 위험과 상관없는 문자다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -138,7 +179,7 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s4",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -179,7 +220,7 @@
           }
         },
         {
-          "stepId": "s4",
+          "stepId": "s5",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -209,47 +250,6 @@
               {
                 "id": "D",
                 "text": "재난 문자는 휴대 전화를 줄인다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s5",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 123
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "재난 문자는 위험을 빨리 알려 안전을 돕는다"
-              },
-              {
-                "id": "B",
-                "text": "재난 문자는 평소 뉴스만 전하는 문자다"
-              },
-              {
-                "id": "C",
-                "text": "재난 문자는 놀이 소식을 모아 보내 준다"
-              },
-              {
-                "id": "D",
-                "text": "재난 문자는 위험과 상관없는 문자다"
               }
             ],
             "answerId": "A",
@@ -304,6 +304,47 @@
         {
           "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 110
+              }
+            ]
+          },
+          "question": {
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "위급 재난 문자는 가장 심각할 때 강하게 알린다"
+              },
+              {
+                "id": "B",
+                "text": "위급 재난 문자는 조용히 지나가는 문자다"
+              },
+              {
+                "id": "C",
+                "text": "위급 재난 문자는 행사 안내용 문자다"
+              },
+              {
+                "id": "D",
+                "text": "위급 재난 문자는 평소엔 늘 같은 소리다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -343,7 +384,7 @@
           }
         },
         {
-          "stepId": "s8",
+          "stepId": "s9",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -384,7 +425,7 @@
           }
         },
         {
-          "stepId": "s9",
+          "stepId": "s10",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -414,47 +455,6 @@
               {
                 "id": "D",
                 "text": "새벽 인사용으로 발송된다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s10",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 110
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "위급 재난 문자는 가장 심각할 때 강하게 알린다"
-              },
-              {
-                "id": "B",
-                "text": "위급 재난 문자는 조용히 지나가는 문자다"
-              },
-              {
-                "id": "C",
-                "text": "위급 재난 문자는 행사 안내용 문자다"
-              },
-              {
-                "id": "D",
-                "text": "위급 재난 문자는 평소엔 늘 같은 소리다"
               }
             ],
             "answerId": "A",
@@ -509,6 +509,47 @@
         {
           "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 110
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "긴급 재난 문자는 큰 피해에 대비하게 돕는다"
+              },
+              {
+                "id": "B",
+                "text": "긴급 재난 문자는 평소 생활만 안내한다"
+              },
+              {
+                "id": "C",
+                "text": "긴급 재난 문자는 소리 없이 참고만 한다"
+              },
+              {
+                "id": "D",
+                "text": "긴급 재난 문자는 약속 문자에 가깝다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -548,7 +589,7 @@
           }
         },
         {
-          "stepId": "s13",
+          "stepId": "s14",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -589,7 +630,7 @@
           }
         },
         {
-          "stepId": "s14",
+          "stepId": "s15",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -619,47 +660,6 @@
               {
                 "id": "D",
                 "text": "문자를 보면 휴대 전화를 끄게 된다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s15",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 110
-              }
-            ]
-          },
-          "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "긴급 재난 문자는 큰 피해에 대비하게 돕는다"
-              },
-              {
-                "id": "B",
-                "text": "긴급 재난 문자는 평소 생활만 안내한다"
-              },
-              {
-                "id": "C",
-                "text": "긴급 재난 문자는 소리 없이 참고만 한다"
-              },
-              {
-                "id": "D",
-                "text": "긴급 재난 문자는 약속 문자에 가깝다"
               }
             ],
             "answerId": "A",
@@ -714,6 +714,47 @@
         {
           "stepId": "s17",
           "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "안전 안내 문자까지 재난 문자는 생명을 돕는다"
+              },
+              {
+                "id": "B",
+                "text": "안전 안내 문자는 위험과 상관없는 알림이다"
+              },
+              {
+                "id": "C",
+                "text": "재난 문자는 위급 문자 하나만 있으면 된다"
+              },
+              {
+                "id": "D",
+                "text": "재난 문자는 소리 없이 와야 더 좋다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
             "ranges": [
@@ -753,7 +794,7 @@
           }
         },
         {
-          "stepId": "s18",
+          "stepId": "s19",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -794,7 +835,7 @@
           }
         },
         {
-          "stepId": "s19",
+          "stepId": "s20",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -824,47 +865,6 @@
               {
                 "id": "D",
                 "text": "재난 문자는 행사장만 지킨다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s20",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 106
-              }
-            ]
-          },
-          "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "안전 안내 문자까지 재난 문자는 생명을 돕는다"
-              },
-              {
-                "id": "B",
-                "text": "안전 안내 문자는 위험과 상관없는 알림이다"
-              },
-              {
-                "id": "C",
-                "text": "재난 문자는 위급 문자 하나만 있으면 된다"
-              },
-              {
-                "id": "D",
-                "text": "재난 문자는 소리 없이 와야 더 좋다"
               }
             ],
             "answerId": "A",
