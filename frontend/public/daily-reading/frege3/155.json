@@ -142,6 +142,47 @@
           }
         },
         {
+          "stepId": "s2",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 238
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사르트르는 자유로운 선택의 인간을 말했다"
+              },
+              {
+                "id": "B",
+                "text": "사르트르는 삶이 선택의 연속이라고 보았다"
+              },
+              {
+                "id": "C",
+                "text": "인간은 스스로 결정하고 책임지는 존재다"
+              },
+              {
+                "id": "D",
+                "text": "실존주의는 정해진 운명 없이 던져진 인간에서 출발한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
           "stepId": "s4",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
@@ -257,47 +298,6 @@
               }
             ],
             "answerId": "D",
-            "scoring": {
-              "correctDeltaSec": 10,
-              "wrongDeltaSec": -5,
-              "eliminateWrongChoice": false
-            }
-          }
-        },
-        {
-          "stepId": "s2",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 238
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "사르트르는 자유로운 선택의 인간을 말했다"
-              },
-              {
-                "id": "B",
-                "text": "사르트르는 삶이 선택의 연속이라고 보았다"
-              },
-              {
-                "id": "C",
-                "text": "인간은 스스로 결정하고 책임지는 존재다"
-              },
-              {
-                "id": "D",
-                "text": "실존주의는 정해진 운명 없이 던져진 인간에서 출발한다"
-              }
-            ],
-            "answerId": "A",
             "scoring": {
               "correctDeltaSec": 10,
               "wrongDeltaSec": -5,

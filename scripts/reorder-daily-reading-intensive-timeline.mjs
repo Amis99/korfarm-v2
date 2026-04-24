@@ -168,28 +168,14 @@ function normalizeHighlightRanges(step) {
   return [];
 }
 
-// 단락 전체를 강조하는 '문단 중심 내용' 질문인지 판정.
-// (1) highlight 구조가 단락 전체를 가리키는 경우 (mode=PARAGRAPH 또는 paragraphIds 기반)
-// (2) prompt가 [문단/단락] + [중심/주제/핵심] 조합인 경우 — 변형 표현 모두 포함
-function isCenterQuestion(step, paragraphsLen = null) {
+// 사용자 정의: 한 문단 안에서 하이라이트 범위(end-start span)가 가장 넓은 step이
+// 그 문단의 마지막에 와야 함. 즉 prompt 텍스트가 아닌 highlight 폭으로 식별.
+// 이 함수는 호환을 위해 남겨두지만 더 이상 정렬에 사용하지 않음.
+function isCenterQuestion(step) {
   const h = step?.highlight || {};
-  // 명시적 단락 모드
   if (h.mode === 'PARAGRAPH') return true;
   if (Array.isArray(h.paragraphIds) && h.paragraphIds.length) return true;
-  // ranges가 단일 단락의 0부터 끝까지를 덮으면 단락 전체로 간주
-  if (Array.isArray(h.ranges) && h.ranges.length === 1) {
-    const r = h.ranges[0];
-    if (r && Number(r.start) === 0 && (paragraphsLen == null || Number(r.end) >= 1e6)) {
-      // start=0, end가 매우 크면 단락 전체. 또는 paragraphsLen 정보 없으면 시그널만으로는 부족하므로 prompt도 체크.
-    }
-  }
-  // prompt 기반: 단락 단위어 + 중심/주제/핵심 표현
-  const prompt = String(step?.question?.prompt || '');
-  const UNITS = [PARAGRAPH, '단락']; // 문단 / 단락
-  const TOPICS = [CENTER, '주제', '핵심']; // 중심 / 주제 / 핵심
-  const hasUnit = UNITS.some((u) => prompt.includes(u));
-  const hasTopic = TOPICS.some((t) => prompt.includes(t));
-  return hasUnit && hasTopic;
+  return false;
 }
 
 function stepSortInfo(step, originalIndex, pOrder) {
@@ -197,30 +183,59 @@ function stepSortInfo(step, originalIndex, pOrder) {
   const firstRange = ranges[0] || {};
   const paragraphId = firstRange.paragraphId || '';
   const paragraphOrder = pOrder.has(paragraphId) ? pOrder.get(paragraphId) : Number.MAX_SAFE_INTEGER;
-  const starts = ranges
-    .filter((range) => range.paragraphId === paragraphId && Number.isFinite(range.start))
-    .map((range) => range.start);
-  const ends = ranges
-    .filter((range) => range.paragraphId === paragraphId && Number.isFinite(range.end))
-    .map((range) => range.end);
+  const sameP = ranges.filter((r) => r.paragraphId === paragraphId);
+  const starts = sameP.filter((r) => Number.isFinite(r.start)).map((r) => r.start);
+  const ends = sameP.filter((r) => Number.isFinite(r.end)).map((r) => r.end);
+  const start = starts.length ? Math.min(...starts) : Number.MAX_SAFE_INTEGER;
+  const end = ends.length ? Math.max(...ends) : Number.MAX_SAFE_INTEGER;
+  let span = 0;
+  if (Number.isFinite(start) && Number.isFinite(end) && start !== Number.MAX_SAFE_INTEGER) {
+    span = Math.max(0, end - start);
+  }
   return {
     originalIndex,
     stepId: step?.stepId || null,
     paragraphId,
     paragraphOrder,
-    center: isCenterQuestion(step),
-    start: starts.length ? Math.min(...starts) : Number.MAX_SAFE_INTEGER,
-    end: ends.length ? Math.max(...ends) : Number.MAX_SAFE_INTEGER,
+    isWidest: false, // 채워질 자리: 같은 문단 안에서 span이 max인 step 1개만 true
+    span,
+    start,
+    end,
     prompt: step?.question?.prompt || '',
   };
 }
 
+// 사용자 정의 정렬:
+//   1) paragraphOrder ASC  (P1 → P2 → P3 ...)
+//   2) 같은 문단 내에서 isWidest=true가 마지막
+//   3) 좁은 step끼리는 start ASC
+//   4) start tie면 end ASC
+//   5) 그 외 originalIndex
 function compareStepInfo(a, b) {
   if (a.paragraphOrder !== b.paragraphOrder) return a.paragraphOrder - b.paragraphOrder;
-  if (a.center !== b.center) return a.center ? 1 : -1;
-  if (!a.center && a.start !== b.start) return a.start - b.start;
-  if (!a.center && a.end !== b.end) return a.end - b.end;
+  if (a.isWidest !== b.isWidest) return a.isWidest ? 1 : -1;
+  if (a.start !== b.start) return a.start - b.start;
+  if (a.end !== b.end) return a.end - b.end;
   return a.originalIndex - b.originalIndex;
+}
+
+// 같은 문단 내에서 span이 strict max인 step 1개에 isWidest=true. tie면 마킹하지 않음.
+function markWidest(infos) {
+  const byPara = new Map();
+  for (const info of infos) {
+    if (!info.paragraphId) continue;
+    if (!byPara.has(info.paragraphId)) byPara.set(info.paragraphId, []);
+    byPara.get(info.paragraphId).push(info);
+  }
+  for (const list of byPara.values()) {
+    if (list.length < 2) continue; // 단독 step은 widest 마킹 불필요
+    const maxSpan = Math.max(...list.map((i) => i.span));
+    const candidates = list.filter((i) => i.span === maxSpan);
+    if (candidates.length === 1) {
+      candidates[0].isWidest = true;
+    }
+    // tie면 마킹 없음 — 단순 start ASC로 정렬됨
+  }
 }
 
 function repairDoc(doc) {
@@ -230,6 +245,7 @@ function repairDoc(doc) {
   }
   const pOrder = paragraphOrderMap(doc);
   const before = timeline.map((step, index) => stepSortInfo(step, index, pOrder));
+  markWidest(before);
   const after = [...before].sort(compareStepInfo);
   const changed = after.some((info, idx) => info.originalIndex !== idx);
   if (!changed) return { changed: false, before, after, timeline };
@@ -238,23 +254,46 @@ function repairDoc(doc) {
   return { changed: true, before, after, timeline: nextTimeline };
 }
 
+// 정렬 위반 issue:
+//   같은 문단의 isWidest=true step보다 같은 문단의 좁은 step이 timeline에서 뒤에 나오면 issue
+//   문단 역행도 issue (P2 step 후에 P1 step)
 function findOrderIssues(doc) {
   const pOrder = paragraphOrderMap(doc);
   const infos = timelineOf(doc).map((step, index) => stepSortInfo(step, index, pOrder));
+  markWidest(infos);
   const issues = [];
-  const centers = infos.filter((info) => info.center);
-  for (const center of centers) {
+
+  // 1) 문단 역행
+  let lastP = -1;
+  for (const info of infos) {
+    if (info.paragraphOrder === Number.MAX_SAFE_INTEGER) continue;
+    if (info.paragraphOrder < lastP) {
+      issues.push({
+        kind: 'paragraph_backward',
+        paragraphId: info.paragraphId,
+        stepId: info.stepId,
+        index: info.originalIndex + 1,
+        paragraphOrder: info.paragraphOrder,
+        priorMax: lastP,
+      });
+    }
+    if (info.paragraphOrder > lastP) lastP = info.paragraphOrder;
+  }
+
+  // 2) widest가 같은 문단의 좁은 step보다 앞에 옴
+  for (const widest of infos.filter((i) => i.isWidest)) {
     for (const info of infos) {
-      if (info.center) continue;
-      if (info.paragraphId !== center.paragraphId) continue;
-      if (info.originalIndex > center.originalIndex) {
+      if (info === widest) continue;
+      if (info.paragraphId !== widest.paragraphId) continue;
+      if (info.isWidest) continue;
+      if (info.originalIndex > widest.originalIndex) {
         issues.push({
-          paragraphId: center.paragraphId,
-          centerStepId: center.stepId,
-          centerIndex: center.originalIndex + 1,
-          laterStepId: info.stepId,
-          laterIndex: info.originalIndex + 1,
-          laterStart: info.start,
+          kind: 'widest_before_narrow',
+          paragraphId: widest.paragraphId,
+          widestStepId: widest.stepId,
+          widestIndex: widest.originalIndex + 1,
+          narrowStepId: info.stepId,
+          narrowIndex: info.originalIndex + 1,
         });
       }
     }

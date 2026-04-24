@@ -296,6 +296,50 @@
           }
         },
         {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 197
+              },
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 234
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단 전체의 중심 내용으로 가장 적절한 것은",
+            "choices": [
+              {
+                "id": "A",
+                "text": "같은 내용이라도 직접 인용과 간접 인용은 옮기는 방식이 다르다"
+              },
+              {
+                "id": "B",
+                "text": "직접 인용은 설명이 길어질수록 더 좋은 방법이다"
+              },
+              {
+                "id": "C",
+                "text": "간접 인용은 문장 구조를 전혀 바꾸지 않는다"
+              },
+              {
+                "id": "D",
+                "text": "인용 방식의 차이는 글의 내용보다 어조에만 있다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s8",
           "highlight": {
             "ranges": [
@@ -384,14 +428,48 @@
           }
         },
         {
-          "stepId": "s7",
+          "stepId": "s10",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p2",
+                "paragraphId": "p3",
                 "start": 0,
-                "end": 197
+                "end": 234
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 핵심으로 가장 적절한 것은",
+            "choices": [
+              {
+                "id": "A",
+                "text": "간접 인용은 원문을 그대로 옮기는 것이 아니라 의미에 맞게 재구성하는 일이다"
               },
+              {
+                "id": "B",
+                "text": "간접 인용은 따옴표를 없애기만 하면 된다"
+              },
+              {
+                "id": "C",
+                "text": "간접 인용은 원래 문장과 완전히 똑같아야 한다"
+              },
+              {
+                "id": "D",
+                "text": "간접 인용은 짧게 줄이는 데만 목적이 있다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
@@ -404,19 +482,19 @@
             "choices": [
               {
                 "id": "A",
-                "text": "같은 내용이라도 직접 인용과 간접 인용은 옮기는 방식이 다르다"
+                "text": "간접 인용은 문장의 종류와 표현을 고려해 재구성해야 한다"
               },
               {
                 "id": "B",
-                "text": "직접 인용은 설명이 길어질수록 더 좋은 방법이다"
+                "text": "간접 인용은 어떤 문장도 같은 방식으로 옮겨도 된다"
               },
               {
                 "id": "C",
-                "text": "간접 인용은 문장 구조를 전혀 바꾸지 않는다"
+                "text": "간접 인용은 문장 끝만 바꾸면 충분하다"
               },
               {
                 "id": "D",
-                "text": "인용 방식의 차이는 글의 내용보다 어조에만 있다"
+                "text": "간접 인용은 직접 인용보다 문법 규칙이 적다"
               }
             ],
             "answerId": "A",
@@ -584,84 +662,6 @@
           }
         },
         {
-          "stepId": "s10",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 234
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 핵심으로 가장 적절한 것은",
-            "choices": [
-              {
-                "id": "A",
-                "text": "간접 인용은 원문을 그대로 옮기는 것이 아니라 의미에 맞게 재구성하는 일이다"
-              },
-              {
-                "id": "B",
-                "text": "간접 인용은 따옴표를 없애기만 하면 된다"
-              },
-              {
-                "id": "C",
-                "text": "간접 인용은 원래 문장과 완전히 똑같아야 한다"
-              },
-              {
-                "id": "D",
-                "text": "간접 인용은 짧게 줄이는 데만 목적이 있다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s11",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 234
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단 전체의 중심 내용으로 가장 적절한 것은",
-            "choices": [
-              {
-                "id": "A",
-                "text": "간접 인용은 문장의 종류와 표현을 고려해 재구성해야 한다"
-              },
-              {
-                "id": "B",
-                "text": "간접 인용은 어떤 문장도 같은 방식으로 옮겨도 된다"
-              },
-              {
-                "id": "C",
-                "text": "간접 인용은 문장 끝만 바꾸면 충분하다"
-              },
-              {
-                "id": "D",
-                "text": "간접 인용은 직접 인용보다 문법 규칙이 적다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
           "stepId": "s16",
           "highlight": {
             "ranges": [
@@ -734,6 +734,45 @@
               {
                 "id": "D",
                 "text": "인용 방식의 차이는 띄어쓰기에서만 드러난다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 234
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단 전체의 중심 내용으로 가장 적절한 것은",
+            "choices": [
+              {
+                "id": "A",
+                "text": "직접 인용과 간접 인용은 목적과 효과가 다르므로 상황에 맞게 선택해야 한다"
+              },
+              {
+                "id": "B",
+                "text": "직접 인용은 언제나 글을 더 길게 만든다"
+              },
+              {
+                "id": "C",
+                "text": "간접 인용은 인물의 특징을 드러내는 데 가장 적합하다"
+              },
+              {
+                "id": "D",
+                "text": "인용 방식의 차이는 표기만으로 충분히 설명된다"
               }
             ],
             "answerId": "A",
@@ -890,45 +929,6 @@
               {
                 "id": "D",
                 "text": "두 방식의 차이는 문장 길이뿐이다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s17",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 234
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단 전체의 중심 내용으로 가장 적절한 것은",
-            "choices": [
-              {
-                "id": "A",
-                "text": "직접 인용과 간접 인용은 목적과 효과가 다르므로 상황에 맞게 선택해야 한다"
-              },
-              {
-                "id": "B",
-                "text": "직접 인용은 언제나 글을 더 길게 만든다"
-              },
-              {
-                "id": "C",
-                "text": "간접 인용은 인물의 특징을 드러내는 데 가장 적합하다"
-              },
-              {
-                "id": "D",
-                "text": "인용 방식의 차이는 표기만으로 충분히 설명된다"
               }
             ],
             "answerId": "A",
