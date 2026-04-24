@@ -224,7 +224,15 @@ function StartPage() {
     navigate(`${path}${sep}${params.join("&")}`);
   };
   const learningStartDate = profile?.learning_start_date || profile?.learningStartDate || null;
-  const dayOfYear = calcDayIndex(learningStartDate);
+  const autoDayOfYear = calcDayIndex(learningStartDate);
+  // 관리자가 일자 입력란에 1~365 입력 시 카드 라벨도 즉시 그 일차로 갱신
+  const dayOfYear = (() => {
+    if (isAdmin && adminDayOverride) {
+      const n = parseInt(adminDayOverride, 10);
+      if (Number.isFinite(n) && n >= 1 && n <= 365) return n;
+    }
+    return autoDayOfYear;
+  })();
 
   // 부모용 자녀 정보
   const childLevelId = childProfile?.level_id || childProfile?.levelId;
@@ -564,14 +572,38 @@ function StartPage() {
                       if (v === "") { setAdminDayOverride(""); return; }
                       const n = parseInt(v, 10);
                       if (!Number.isFinite(n)) return;
-                      // 1~365 범위 강제
                       const clamped = Math.max(1, Math.min(365, n));
                       setAdminDayOverride(String(clamped));
                     }}
-                    placeholder={`일차 (오늘 ${dayOfYear})`}
-                    title="1~365일 차 (비워두면 오늘)"
+                    onKeyDown={(e) => {
+                      // Enter 시 일일 퀴즈로 즉시 이동
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        navWithLevel("/daily-quiz");
+                      }
+                    }}
+                    placeholder={`일차 (오늘 ${autoDayOfYear})`}
+                    title="1~365일 차 입력 후 Enter 또는 우측 버튼 클릭. 비워두면 오늘."
                     style={{ width: 130 }}
                   />
+                  <button
+                    type="button"
+                    className="start-sub-btn start-sub-btn--sm"
+                    onClick={() => navWithLevel("/daily-quiz")}
+                    title={`현재 설정으로 일일 퀴즈 (${dayOfYear}일차) 이동`}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: 14 }}>quiz</span>
+                    퀴즈 {dayOfYear}일
+                  </button>
+                  <button
+                    type="button"
+                    className="start-sub-btn start-sub-btn--sm"
+                    onClick={() => navWithLevel("/daily-reading")}
+                    title={`현재 설정으로 일일 독해 (${dayOfYear}일차) 이동`}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: 14 }}>auto_stories</span>
+                    독해 {dayOfYear}일
+                  </button>
                   <button
                     type="button"
                     className="start-sub-btn start-sub-btn--sm"
