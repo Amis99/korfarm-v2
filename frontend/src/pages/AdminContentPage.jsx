@@ -10,72 +10,13 @@ import {
   LEVEL_SHORT, getLevelShort,
   LEVEL_LABEL_MAP, getLevelLabel, DAILY_LEVELS,
   TABS, TAB_OPTIONS, CATEGORY_TO_TABS, getCategoryTabs, isManageableContent,
+  resolveModuleKeyForContentType,
 } from "../constants/contentTypes";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/admin-detail.css";
 
 const CONTENTS = [];
 const PER_PAGE = 20;
-
-/* 카테고리 → EngineShell moduleKey 변환 (다중 분류 호환)
- * 사용 가능한 moduleKey: worksheet_quiz, reading_training, choice_analysis,
- * phoneme_change, word_formation, sentence_structure, study_content, answer_key,
- * background_knowledge, logic_reasoning, daily_quiz, morpheme_analysis (총 12개)
- *
- * 새 카테고리 + 옛 카테고리 alias 모두 지원.
- */
-const CONTENT_TYPE_TO_MODULE = {
-  // 새 카테고리
-  VOCAB: "worksheet_quiz",
-  READING: "reading_training",
-  STORY: "reading_training",
-  CLASSIC: "reading_training",
-  GRAMMAR_WORD_FORMATION: "word_formation",
-  GRAMMAR_SENTENCE_STRUCTURE: "sentence_structure",
-  GRAMMAR_PHONEME_CHANGE: "phoneme_change",
-  GRAMMAR_POS: "morpheme_analysis",
-  BACKGROUND: "background_knowledge",
-  CONCEPT: "worksheet_quiz",
-  LOGIC: "logic_reasoning",
-  CHOICE_ANALYSIS: "choice_analysis",
-  DAILY_QUIZ: "daily_quiz",
-  DAILY_READING: "reading_training",
-  PRO_READING: "reading_training",
-  PRO_VOCAB: "worksheet_quiz",
-  PRO_BACKGROUND: "background_knowledge",
-  PRO_LOGIC: "logic_reasoning",
-  STUDY_CONTENT: "study_content",
-  WRITING: "worksheet_quiz",
-  PRO_TEST: "worksheet_quiz",
-  PRO_ANSWER: "answer_key",
-
-  // 옛 카테고리 alias (호환성)
-  VOCAB_BASIC: "worksheet_quiz",
-  READING_NONFICTION: "reading_training",
-  READING_LITERATURE: "reading_training",
-  CONTENT_PDF: "study_content",
-  CONTENT_PDF_QUIZ: "study_content",
-  CHOICE_JUDGEMENT: "choice_analysis",
-  MORPHEME_ANALYSIS: "morpheme_analysis",
-  BACKGROUND_KNOWLEDGE: "background_knowledge",
-  BACKGROUND_KNOWLEDGE_QUIZ: "background_knowledge",
-  LANGUAGE_CONCEPT: "worksheet_quiz",
-  LANGUAGE_CONCEPT_QUIZ: "worksheet_quiz",
-  LOGIC_REASONING: "logic_reasoning",
-  LOGIC_REASONING_QUIZ: "worksheet_quiz",
-  WRITING_DESCRIPTIVE: "worksheet_quiz",
-  PRO_MANUSCRIPT: "answer_key",
-};
-const resolveModuleKey = (contentType, fallback) => {
-  if (fallback) return fallback;
-  // contentType이 array면 첫 항목으로 매핑
-  const primaryType = Array.isArray(contentType) ? contentType[0] : contentType;
-  const mapped = CONTENT_TYPE_TO_MODULE[primaryType];
-  if (!mapped) {
-    console.warn(`[AdminContentPage] 알 수 없는 contentType="${primaryType}" → worksheet_quiz fallback`);
-  }
-  return mapped || "worksheet_quiz";
-};
 
 /* static JSON 콘텐츠 목록
  * 일일 학습/농장 모드 정적 콘텐츠는 모두 DB로 마이그레이션 또는 폐기됨.
@@ -384,7 +325,7 @@ function AdminContentPage() {
         if (!res.ok) throw new Error(`정적 파일 로드 실패: ${res.status}`);
         const fileData = await res.json();
         previewData = fileData;
-        moduleKey = resolveModuleKey(fileData.contentType, content.moduleKey);
+        moduleKey = resolveModuleKeyForContentType(fileData.contentType, content.moduleKey);
       } else {
         const preview = await apiGet(`/v1/admin/content/${content.id}/preview`);
         // contentType은 이제 array (다중 분류). string으로 와도 wrap.
@@ -405,7 +346,10 @@ function AdminContentPage() {
           assets: rawContent.assets,
           payload: innerPayload,
         };
-        moduleKey = resolveModuleKey(ct, preview.moduleKey || preview.module_key);
+        moduleKey = resolveModuleKeyForContentType(
+          [...ct, rawContent.contentType || rawContent.content_type].filter(Boolean),
+          preview.moduleKey || preview.module_key
+        );
       }
       localStorage.setItem("korfarm_preview_content", JSON.stringify(previewData));
       localStorage.setItem("korfarm_preview_module", moduleKey);

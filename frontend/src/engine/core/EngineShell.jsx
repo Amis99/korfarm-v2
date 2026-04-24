@@ -7,6 +7,7 @@ import PrintLayout from "./PrintLayout";
 import { MODULES } from "../modules";
 import { apiPost } from "../../utils/api";
 import { useAuth } from "../../hooks/useAuth";
+import { normalizeModuleKey } from "../../constants/contentTypes";
 import "../../styles/learning-engine.css";
 
 /** 인쇄/PDF 저장 시 파일명을 학생명_레벨명_학습명으로 설정.
@@ -158,7 +159,8 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
   const [headerHeight, setHeaderHeight] = useState(0);
   const [pageProgress, setPageProgress] = useState(null);
 
-  const Module = MODULES[moduleKey];
+  const effectiveModuleKey = normalizeModuleKey(moduleKey) || "worksheet_quiz";
+  const Module = MODULES[effectiveModuleKey];
 
   // 현재 씨앗 종류 결정 (contentType 기반)
   const currentSeedType = useMemo(() => {
@@ -269,7 +271,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
   const printPageGroups = useMemo(() => {
     const payload = content?.payload;
     if (!payload) return [];
-    // worksheet_quiz, choice_judgement 등
+    // worksheet_quiz, choice_analysis 등
     if (payload.questions) {
       const qs = payload.questions.filter(Boolean);
       if (!qs.length) return [];
@@ -306,6 +308,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
     const guess = {
       worksheet_quiz: worksheetTotal,
       reading_training: readingTrainingTotal,
+      choice_analysis: payload.questions?.length,
       choice_judgement: payload.questions?.length,
       phoneme_change: (payload.words || []).reduce((sum, w) => sum + (w.steps?.length || 0), 0),
       word_formation: payload.items?.length,
@@ -314,29 +317,29 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
       logic_reasoning: passagesTotal > 0 ? passagesTotal : worksheetTotal,
       background_knowledge: passagesTotal > 0 ? passagesTotal : worksheetTotal,
     };
-    return guess[moduleKey] || 0;
-  }, [content, moduleKey]);
+    return guess[effectiveModuleKey] || 0;
+  }, [content, effectiveModuleKey]);
 
   const progressTotal = useMemo(() => {
-    if (moduleKey === "reading_training") {
+    if (effectiveModuleKey === "reading_training") {
       const extraWrong = records.filter(
         (entry) => entry.stage === "INTENSIVE" && entry.correct === false
       ).length;
       return baseProgressTotal + extraWrong;
     }
     return baseProgressTotal;
-  }, [baseProgressTotal, moduleKey, records]);
+  }, [baseProgressTotal, effectiveModuleKey, records]);
   const progressCurrent = useMemo(() => {
     if (!records.length) return 0;
     const unique = new Set(records.map((entry) => entry.stepId || entry.id));
-    if (moduleKey === "reading_training") {
+    if (effectiveModuleKey === "reading_training") {
       const extraWrong = records.filter(
         (entry) => entry.stage === "INTENSIVE" && entry.correct === false
       ).length;
       return unique.size + extraWrong;
     }
     return unique.size;
-  }, [records, moduleKey]);
+  }, [records, effectiveModuleKey]);
 
   const adjustTime = (delta) => {
     setTimeLeft((prev) => Math.max(0, Math.min(timeLimit, prev + delta)));
@@ -384,7 +387,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
           earnedSeed *= 2;
         }
         // 선택지 판별: 씨앗 무조건 기본의 3배 지급
-        if (moduleKey === "choice_judgement") {
+        if (effectiveModuleKey === "choice_analysis") {
           earnedSeed *= 3;
         }
         normalizedSuccess = true;
@@ -422,7 +425,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
       contentId: content?.contentId,
       contentType: content?.contentType,
       title: content?.title,
-      moduleKey,
+      moduleKey: effectiveModuleKey,
       startedAt,
       endedAt,
       records: latestRecords,
@@ -589,7 +592,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
     };
   }, [shellStyle]);
 
-  const isExam = moduleKey === "exam";
+  const isExam = effectiveModuleKey === "exam";
   const examFormatTime = (sec) => {
     const m = Math.floor(sec / 60);
     const s = sec % 60;
@@ -657,14 +660,14 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
             <div className="engine-stage-inner engine-scale">
               <main
                 className={`engine-body ${
-                  (content?.payload?.pageStack && moduleKey === "worksheet_quiz") ||
-                  moduleKey === "study_content" ||
-                  moduleKey === "choice_judgement" ||
-                  moduleKey === "sentence_structure" ||
-                  moduleKey === "word_formation" ||
-                  moduleKey === "phoneme_change" ||
-                  moduleKey === "background_knowledge" ||
-                  moduleKey === "logic_reasoning" ||
+                  (content?.payload?.pageStack && effectiveModuleKey === "worksheet_quiz") ||
+                  effectiveModuleKey === "study_content" ||
+                  effectiveModuleKey === "choice_analysis" ||
+                  effectiveModuleKey === "sentence_structure" ||
+                  effectiveModuleKey === "word_formation" ||
+                  effectiveModuleKey === "phoneme_change" ||
+                  effectiveModuleKey === "background_knowledge" ||
+                  effectiveModuleKey === "logic_reasoning" ||
                   isExam
                     ? "stack"
                     : ""
@@ -674,7 +677,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
               </main>
 
               {/* 인쇄 전용 — 시험 모드에선 미사용 */}
-              {!isExam && <PrintLayout moduleKey={moduleKey} content={content} />}
+              {!isExam && <PrintLayout moduleKey={effectiveModuleKey} content={content} />}
 
               {isExam ? (
                 /* ── 시험 모드 푸터: 시험 종료 버튼만 ── */
@@ -689,7 +692,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
                   <button type="button" className="engine-exit" onClick={onExit}>
                     학습 종료
                   </button>
-                  {moduleKey !== "study_content" && moduleKey !== "answer_key" && (
+                  {effectiveModuleKey !== "study_content" && effectiveModuleKey !== "answer_key" && (
                     <button type="button" className="engine-print" onClick={handlePrint}>
                       인쇄
                     </button>
@@ -717,7 +720,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
             </div>
           </div>
         </div>
-            {summary ? <ResultSummary summary={summary} onExit={onExit} moduleKey={moduleKey} onPrint={handlePrint} /> : null}
+            {summary ? <ResultSummary summary={summary} onExit={onExit} moduleKey={effectiveModuleKey} onPrint={handlePrint} /> : null}
       </div>
     </EngineContext.Provider>
   );

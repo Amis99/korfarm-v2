@@ -3,7 +3,13 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { apiGet, apiPost, apiPut } from "../utils/adminApi";
 import { API_BASE, apiUploadFile } from "../utils/api";
 import { LEARNING_TEMPLATES } from "../data/learning/learningTemplates";
-import { TYPE_LABEL, getLevelLabel, DAILY_LEVELS, levelToFolder } from "../constants/contentTypes";
+import {
+  TYPE_LABEL,
+  getLevelLabel,
+  DAILY_LEVELS,
+  levelToFolder,
+  resolveModuleKeyForContentType,
+} from "../constants/contentTypes";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/admin-detail.css";
 
@@ -54,7 +60,7 @@ const MODULE_GROUPS = [
       { value: "farm:grammar_ss:sentence_structure", label: "문법 - 문장 짜임", contentType: ["GRAMMAR_SENTENCE_STRUCTURE"] },
       { value: "farm:grammar_pc:phoneme_change", label: "문법 - 음운 변동", contentType: ["GRAMMAR_PHONEME_CHANGE"] },
       { value: "farm:grammar_pos:worksheet_quiz", label: "문법 - 품사", contentType: ["GRAMMAR_POS"] },
-      { value: "farm:background:worksheet_quiz", label: "배경지식", contentType: ["BACKGROUND"] },
+      { value: "farm:background:background_knowledge", label: "배경지식", contentType: ["BACKGROUND"] },
       { value: "farm:concept:worksheet_quiz", label: "국어 개념", contentType: ["CONCEPT"] },
       { value: "farm:logic:logic_reasoning", label: "논리사고력", contentType: ["LOGIC"] },
       { value: "farm:choice:choice_analysis", label: "선택지 분석", contentType: ["CHOICE_ANALYSIS"] },
@@ -65,7 +71,7 @@ const MODULE_GROUPS = [
     items: [
       { value: "pro:reading:reading_training", label: "프로 독해", contentType: ["PRO_READING", "READING"] },
       { value: "pro:vocab:worksheet_quiz", label: "프로 어휘", contentType: ["PRO_VOCAB", "VOCAB"] },
-      { value: "pro:background:worksheet_quiz", label: "프로 배경지식", contentType: ["PRO_BACKGROUND", "BACKGROUND"] },
+      { value: "pro:background:background_knowledge", label: "프로 배경지식", contentType: ["PRO_BACKGROUND", "BACKGROUND"] },
       { value: "pro:logic:logic_reasoning", label: "프로 논리사고력", contentType: ["PRO_LOGIC", "LOGIC"] },
     ],
   },
@@ -78,8 +84,6 @@ const normalizeContentTypeToArray = (raw) => {
   return [];
 };
 
-const extractModuleKey = (v) => v.split(":").pop();
-
 /* 드롭다운 value → 템플릿 ID: "group:subtype:moduleKey" → "group_subtype" */
 const extractTemplateId = (v) => {
   const parts = v.split(":");
@@ -87,7 +91,7 @@ const extractTemplateId = (v) => {
 };
 
 /* 내용 숙지 농장 모듈 값 */
-const CONTENT_PDF_MODULE = "farm:content:reading_training";
+const CONTENT_PDF_MODULE = "farm:content:study_content";
 
 function AdminContentUploadPage() {
   const navigate = useNavigate();
@@ -132,8 +136,7 @@ function AdminContentUploadPage() {
   const [jsonError, setJsonError] = useState("");
 
   /* 모듈 선택 (신규 업로드) */
-  const [selectedModule, setSelectedModule] = useState("dailyQuiz:quiz:worksheet_quiz");
-  const moduleKey = extractModuleKey(selectedModule);
+  const [selectedModule, setSelectedModule] = useState("dailyQuiz:quiz:daily_quiz");
   const templateId = extractTemplateId(selectedModule);
   const currentTemplate = LEARNING_TEMPLATES.find((t) => t.id === templateId);
 
@@ -180,6 +183,7 @@ function AdminContentUploadPage() {
               id: editId,
               title: data.title || editId,
               type: data.contentType || data.content_type || "",
+              moduleKey: data.moduleKey || data.module_key || "",
               jsonPath: "",
             });
             setJsonText(JSON.stringify(data.content || data, null, 2));
@@ -287,7 +291,10 @@ function AdminContentUploadPage() {
         return;
       }
       localStorage.setItem("korfarm_preview_content", JSON.stringify(parsed));
-      localStorage.setItem("korfarm_preview_module", moduleKey);
+      localStorage.setItem(
+        "korfarm_preview_module",
+        resolveModuleKeyForContentType(parsed.contentType, parsed.moduleKey)
+      );
       navigate("/admin/content/preview");
     } catch (err) {
       setPreviewError(`JSON 파싱 실패: ${err.message}`);
@@ -313,6 +320,7 @@ function AdminContentUploadPage() {
         setPreviewError("contentType이 비어있습니다 (string 또는 array).");
         return;
       }
+      const resolvedModuleKey = resolveModuleKeyForContentType(ctArray, parsed.moduleKey);
       setImportLoading(true);
       await apiPost("/v1/admin/content/import", {
         contentType: ctArray,
@@ -321,7 +329,7 @@ function AdminContentUploadPage() {
         area: parsed.area || undefined,
         subArea: parsed.subArea || undefined,
         dayIndex: parsed.dayIndex || undefined,
-        moduleKey: parsed.moduleKey || undefined,
+        moduleKey: resolvedModuleKey,
         videoUrl: videoUrl || undefined,
         schemaVersion: parsed.schemaVersion || "1.0",
         content: parsed.payload,
@@ -363,13 +371,17 @@ function AdminContentUploadPage() {
           setBatchLoading(false);
           return;
         }
+        const resolvedModuleKey = resolveModuleKeyForContentType(
+          ctArray,
+          parsed.moduleKey
+        );
         items.push({
           contentType: ctArray,
           levelId: parsed.levelId || undefined,
           area: parsed.area || undefined,
           subArea: parsed.subArea || undefined,
           dayIndex: parsed.dayIndex ?? undefined,
-          moduleKey: parsed.moduleKey || extractModuleKey(selectedModule),
+          moduleKey: resolvedModuleKey,
           schemaVersion: parsed.schemaVersion || "1.0",
           content: parsed.payload || parsed,
         });
@@ -415,7 +427,11 @@ function AdminContentUploadPage() {
       };
       localStorage.setItem("korfarm_preview_content", JSON.stringify(previewData));
       // moduleKey는 contentType이 아니라 실제 모듈 키여야 함
-      const mk = preview.moduleKey || preview.module_key || "worksheet_quiz";
+      const ctForModule = [
+        ...(Array.isArray(ct) ? ct : [ct]),
+        rawContent.contentType || rawContent.content_type,
+      ].filter(Boolean);
+      const mk = resolveModuleKeyForContentType(ctForModule, preview.moduleKey || preview.module_key);
       localStorage.setItem("korfarm_preview_module", mk);
       navigate("/admin/content/preview");
     } catch (err) {
@@ -445,6 +461,9 @@ function AdminContentUploadPage() {
         setPreviewError("contentType이 비어있습니다 (string 또는 array).");
         return;
       }
+      const resolvedModuleKey = parsed.moduleKey
+        ? resolveModuleKeyForContentType(ctArray, parsed.moduleKey)
+        : undefined;
       setUpdateLoading(true);
       await apiPut(`/v1/admin/content/${editId}`, {
         contentType: ctArray,
@@ -453,7 +472,7 @@ function AdminContentUploadPage() {
         area: parsed.area || undefined,
         subArea: parsed.subArea || undefined,
         dayIndex: parsed.dayIndex || undefined,
-        moduleKey: parsed.moduleKey || undefined,
+        moduleKey: resolvedModuleKey,
         videoUrl: videoUrl || undefined,
         schemaVersion: parsed.schemaVersion || "1.0",
         content: parsed.payload,

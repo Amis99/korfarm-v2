@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { apiGet, apiPost, apiPut } from "../utils/adminApi";
 import { API_BASE } from "../utils/api";
 import AdminLayout from "../components/AdminLayout";
+import { resolveModuleKeyForContentType } from "../constants/contentTypes";
 import "../styles/admin-pro.css";
 
 /* ─── 상수 ─── */
@@ -34,17 +35,6 @@ const ANSWER_TEMPLATE = JSON.stringify({
     }],
   }],
 }, null, 2);
-
-const CONTENT_TYPE_TO_MODULE = {
-  PRO_READING: "reading_training",
-  PRO_BACKGROUND: "worksheet_quiz",
-  PRO_VOCAB: "worksheet_quiz",
-  PRO_LOGIC: "logic_reasoning",
-  PRO_ANSWER: "answer_key",
-  PRO_TEST: "worksheet_quiz",
-};
-const resolveModuleKey = (ct, fallback) =>
-  fallback || CONTENT_TYPE_TO_MODULE[ct] || "worksheet_quiz";
 
 /* ─────────────────────── 컴포넌트 ─────────────────────── */
 function AdminProPage() {
@@ -226,7 +216,11 @@ function AdminProPage() {
       const ct = preview.contentType || preview.content_type || "";
       const rawContent = preview.content || {};
       const previewData = { ...rawContent, contentType: ct };
-      const moduleKey = resolveModuleKey(ct, preview.moduleKey || preview.module_key);
+      const ctForModule = [
+        ...(Array.isArray(ct) ? ct : [ct]),
+        rawContent.contentType || rawContent.content_type,
+      ].filter(Boolean);
+      const moduleKey = resolveModuleKeyForContentType(ctForModule, preview.moduleKey || preview.module_key);
       localStorage.setItem("korfarm_preview_content", JSON.stringify(previewData));
       localStorage.setItem("korfarm_preview_module", moduleKey);
       navigate("/admin/content/preview?from=/admin/pro");

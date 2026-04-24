@@ -41,7 +41,7 @@ export const TYPE_LABEL = {
   VOCAB_BASIC: "어휘",
   READING_NONFICTION: "독해",
   READING_LITERATURE: "독해 (문학)",
-  MORPHEME_ANALYSIS: "문법 - 단어 형성",
+  MORPHEME_ANALYSIS: "문법 - 형태소 분석",
   CONTENT_PDF: "내용 숙지",
   CONTENT_PDF_QUIZ: "내용 숙지",
   BACKGROUND_KNOWLEDGE: "배경지식",
@@ -123,6 +123,88 @@ export const FARM_TO_CATEGORIES = {
 /** 농장 ID → categories 배열 (없으면 빈 배열) */
 export const getCategoriesForFarm = (farmId) => FARM_TO_CATEGORIES[farmId] || [];
 
+/* 카테고리 → EngineShell moduleKey 공용 매핑
+   - 여러 화면에서 중복 선언하던 fallback 매핑을 이곳으로 통합한다.
+   - DB에 구체적인 moduleKey가 있으면 우선하되, worksheet_quiz 같은 범용 fallback은
+     카테고리 전용 모듈이 있을 때 전용 모듈로 보정한다. */
+export const MODULE_KEY_BY_CONTENT_TYPE = {
+  // 새 카테고리
+  DAILY_QUIZ: "daily_quiz",
+  DAILY_READING: "reading_training",
+  VOCAB: "worksheet_quiz",
+  READING: "reading_training",
+  STORY: "reading_training",
+  CLASSIC: "reading_training",
+  GRAMMAR_WORD_FORMATION: "word_formation",
+  GRAMMAR_SENTENCE_STRUCTURE: "sentence_structure",
+  GRAMMAR_PHONEME_CHANGE: "phoneme_change",
+  GRAMMAR_POS: "worksheet_quiz",
+  BACKGROUND: "background_knowledge",
+  CONCEPT: "worksheet_quiz",
+  LOGIC: "logic_reasoning",
+  CHOICE_ANALYSIS: "choice_analysis",
+  STUDY_CONTENT: "study_content",
+  WRITING: "worksheet_quiz",
+  PRO_TEST: "worksheet_quiz",
+  PRO_ANSWER: "answer_key",
+  PRO_READING: "reading_training",
+  PRO_VOCAB: "worksheet_quiz",
+  PRO_BACKGROUND: "background_knowledge",
+  PRO_LOGIC: "logic_reasoning",
+
+  // 옛 카테고리 alias
+  VOCAB_BASIC: "worksheet_quiz",
+  VOCAB_DICTIONARY: "worksheet_quiz",
+  READING_NONFICTION: "reading_training",
+  READING_LITERATURE: "reading_training",
+  CONTENT_PDF: "study_content",
+  CONTENT_PDF_QUIZ: "study_content",
+  CHOICE_JUDGEMENT: "choice_analysis",
+  MORPHEME_ANALYSIS: "morpheme_analysis",
+  BACKGROUND_KNOWLEDGE: "background_knowledge",
+  BACKGROUND_KNOWLEDGE_QUIZ: "background_knowledge",
+  LANGUAGE_CONCEPT: "worksheet_quiz",
+  LANGUAGE_CONCEPT_QUIZ: "worksheet_quiz",
+  LOGIC_REASONING: "logic_reasoning",
+  LOGIC_REASONING_QUIZ: "worksheet_quiz",
+  WRITING_DESCRIPTIVE: "worksheet_quiz",
+  PRO_MANUSCRIPT: "answer_key",
+};
+
+const GENERIC_MODULE_KEYS = new Set(["worksheet_quiz"]);
+
+export const normalizeModuleKey = (moduleKey) => {
+  if (!moduleKey) return null;
+  const normalized = String(moduleKey).trim();
+  if (!normalized) return null;
+  if (normalized === "choice_judgement") return "choice_analysis";
+  return normalized;
+};
+
+const normalizeContentTypeKeys = (contentType) => {
+  const raw = Array.isArray(contentType) ? contentType : [contentType];
+  return raw
+    .filter((v) => v != null && String(v).trim().length > 0)
+    .map((v) => String(v).trim().toUpperCase());
+};
+
+export const resolveModuleKeyForContentType = (contentType, fallback) => {
+  const explicit = normalizeModuleKey(fallback);
+  const mappedCandidates = normalizeContentTypeKeys(contentType)
+    .map((type) => MODULE_KEY_BY_CONTENT_TYPE[type])
+    .filter(Boolean);
+  const mapped =
+    mappedCandidates.find((key) => !GENERIC_MODULE_KEYS.has(key)) ||
+    mappedCandidates[0];
+
+  if (explicit) {
+    if (!mapped || explicit === mapped) return explicit;
+    if (GENERIC_MODULE_KEYS.has(mapped) && !GENERIC_MODULE_KEYS.has(explicit)) return explicit;
+    return mapped;
+  }
+  return mapped || explicit || "worksheet_quiz";
+};
+
 /* 카테고리 → 어느 탭에 속하는지 (다중 가능). 콘텐츠 관리에 안 보이는 카테고리는 매핑 없음 */
 export const CATEGORY_TO_TABS = {
   // 일일 학습
@@ -142,6 +224,19 @@ export const CATEGORY_TO_TABS = {
   CONCEPT: ["farm"],
   LOGIC: ["farm"],
   CHOICE_ANALYSIS: ["farm"],
+
+  // 옛 alias (호환성)
+  VOCAB_BASIC: ["farm"],
+  READING_NONFICTION: ["farm"],
+  READING_LITERATURE: ["farm"],
+  MORPHEME_ANALYSIS: ["farm"],
+  BACKGROUND_KNOWLEDGE: ["farm"],
+  BACKGROUND_KNOWLEDGE_QUIZ: ["farm"],
+  LANGUAGE_CONCEPT: ["farm"],
+  LANGUAGE_CONCEPT_QUIZ: ["farm"],
+  LOGIC_REASONING: ["farm"],
+  LOGIC_REASONING_QUIZ: ["farm"],
+  CHOICE_JUDGEMENT: ["farm"],
 
   // 프로 모드
   PRO_READING: ["pro"],
@@ -201,7 +296,7 @@ export const TYPE_SHORT = {
   VOCAB_BASIC: { label: "어휘", group: "vocab" },
   READING_NONFICTION: { label: "독해", group: "reading" },
   READING_LITERATURE: { label: "문학", group: "reading" },
-  MORPHEME_ANALYSIS: { label: "단어형성", group: "grammar" },
+  MORPHEME_ANALYSIS: { label: "형태소", group: "grammar" },
   BACKGROUND_KNOWLEDGE: { label: "배경", group: "knowledge" },
   BACKGROUND_KNOWLEDGE_QUIZ: { label: "배경", group: "knowledge" },
   LANGUAGE_CONCEPT: { label: "개념", group: "knowledge" },

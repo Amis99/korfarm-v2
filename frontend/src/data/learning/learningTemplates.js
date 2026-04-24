@@ -32,7 +32,7 @@ export const LEARNING_TEMPLATES = [
   { id: "farm_grammar_ss", contentType: ["GRAMMAR_SENTENCE_STRUCTURE"], title: "문법 - 문장 짜임", moduleKey: "sentence_structure", content: farmGrammarSs },
   { id: "farm_grammar_pc", contentType: ["GRAMMAR_PHONEME_CHANGE"], title: "문법 - 음운 변동", moduleKey: "phoneme_change", content: farmGrammarPc },
   { id: "farm_grammar_pos", contentType: ["GRAMMAR_POS"], title: "문법 - 품사", moduleKey: "worksheet_quiz", content: farmGrammarPos },
-  { id: "farm_background", contentType: ["BACKGROUND"], title: "배경지식", moduleKey: "worksheet_quiz", content: backgroundQuiz },
+  { id: "farm_background", contentType: ["BACKGROUND"], title: "배경지식", moduleKey: "background_knowledge", content: backgroundQuiz },
   { id: "farm_concept", contentType: ["CONCEPT"], title: "국어 개념", moduleKey: "worksheet_quiz", content: farmConcept },
   { id: "farm_logic", contentType: ["LOGIC"], title: "논리사고력", moduleKey: "logic_reasoning", content: farmLogic },
   { id: "farm_choice_analysis", contentType: ["CHOICE_ANALYSIS"], title: "선택지 분석", moduleKey: "choice_analysis", content: farmChoiceAnalysis },
@@ -40,6 +40,6 @@ export const LEARNING_TEMPLATES = [
   // 프로 모드 — 농장별 학습에도 자동 노출
   { id: "pro_reading", contentType: ["PRO_READING", "READING"], title: "프로 독해", moduleKey: "reading_training", content: readingTraining },
   { id: "pro_vocab", contentType: ["PRO_VOCAB", "VOCAB"], title: "프로 어휘", moduleKey: "worksheet_quiz", content: vocabTraining },
-  { id: "pro_background", contentType: ["PRO_BACKGROUND", "BACKGROUND"], title: "프로 배경지식", moduleKey: "worksheet_quiz", content: backgroundQuiz },
+  { id: "pro_background", contentType: ["PRO_BACKGROUND", "BACKGROUND"], title: "프로 배경지식", moduleKey: "background_knowledge", content: backgroundQuiz },
   { id: "pro_logic", contentType: ["PRO_LOGIC", "LOGIC"], title: "프로 논리사고력", moduleKey: "logic_reasoning", content: farmLogic },
 ];
