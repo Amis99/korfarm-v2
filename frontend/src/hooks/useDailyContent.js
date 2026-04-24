@@ -40,6 +40,13 @@ export default function useDailyContent({ folder, contentType, errorLabel }) {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const overrideLevel = searchParams.get("level");
+  const overrideDayRaw = searchParams.get("day");
+  const overrideDay = (() => {
+    const n = parseInt(overrideDayRaw || "", 10);
+    if (!Number.isFinite(n)) return null;
+    if (n < 1 || n > 365) return null;
+    return n;
+  })();
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -70,7 +77,10 @@ export default function useDailyContent({ folder, contentType, errorLabel }) {
         const levelFolder = LEVEL_FOLDER_MAP[level] || "saussure1";
         const learningStartDate = profile.learning_start_date || profile.learningStartDate || null;
         let dayIndex;
-        if (learningStartDate) {
+        // URL ?day= 우선 (관리자 임의 날짜 미리보기). 없으면 학습시작일 또는 오늘 기반.
+        if (overrideDay) {
+          dayIndex = overrideDay;
+        } else if (learningStartDate) {
           const start = new Date(learningStartDate);
           const now = new Date();
           start.setHours(0, 0, 0, 0);
@@ -147,7 +157,7 @@ export default function useDailyContent({ folder, contentType, errorLabel }) {
 
     load();
     return () => { cancelled = true; };
-  }, [navigate, folder, contentType, errorLabel, overrideLevel]);
+  }, [navigate, folder, contentType, errorLabel, overrideLevel, overrideDay]);
 
   return { content, loading, error, farmLogId, dailySeedStatus };
 }

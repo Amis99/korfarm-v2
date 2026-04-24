@@ -60,6 +60,7 @@ function StartPage() {
   const [subActive, setSubActive] = useState(false);
   const [subLoading, setSubLoading] = useState(true);
   const [adminLevelOverride, setAdminLevelOverride] = useState("");
+  const [adminDayOverride, setAdminDayOverride] = useState("");
 
   // 부모용 상태
   const [linkedChildren, setLinkedChildren] = useState([]);
@@ -200,15 +201,27 @@ function StartPage() {
   const displayLevel = levelId || "LV.1";
   const levelLabel = LEVEL_LABEL_MAP[levelId] || levelId || "";
 
-  // 관리자 레벨 오버라이드 또는 명시적 levelId가 있을 때 후속 페이지에 query string으로 전달
-  // 후속 페이지(useDailyContent / ProModePage / FarmListPage)는 ?level=...을 프로필보다 우선 적용
+  // 관리자 레벨/날짜 오버라이드를 후속 페이지에 query string으로 전달
+  // 후속 페이지(useDailyContent / ProModePage / FarmListPage)는 ?level=, ?day= 를 프로필보다 우선 적용
   const navWithLevel = (path) => {
-    if (isAdmin && adminLevelOverride && LEVEL_LABEL_MAP[adminLevelOverride]) {
-      const sep = path.includes("?") ? "&" : "?";
-      navigate(`${path}${sep}level=${adminLevelOverride}`);
-    } else {
+    if (!isAdmin) {
       navigate(path);
+      return;
     }
+    const params = [];
+    if (adminLevelOverride && LEVEL_LABEL_MAP[adminLevelOverride]) {
+      params.push(`level=${adminLevelOverride}`);
+    }
+    const dayNum = parseInt(adminDayOverride, 10);
+    if (Number.isFinite(dayNum) && dayNum >= 1 && dayNum <= 365) {
+      params.push(`day=${dayNum}`);
+    }
+    if (params.length === 0) {
+      navigate(path);
+      return;
+    }
+    const sep = path.includes("?") ? "&" : "?";
+    navigate(`${path}${sep}${params.join("&")}`);
   };
   const learningStartDate = profile?.learning_start_date || profile?.learningStartDate || null;
   const dayOfYear = calcDayIndex(learningStartDate);
@@ -540,6 +553,25 @@ function StartPage() {
                       <option key={key} value={key}>{label}</option>
                     ))}
                   </select>
+                  <input
+                    type="number"
+                    className="start-select"
+                    min="1"
+                    max="365"
+                    value={adminDayOverride}
+                    onChange={(e) => {
+                      const v = e.target.value;
+                      if (v === "") { setAdminDayOverride(""); return; }
+                      const n = parseInt(v, 10);
+                      if (!Number.isFinite(n)) return;
+                      // 1~365 범위 강제
+                      const clamped = Math.max(1, Math.min(365, n));
+                      setAdminDayOverride(String(clamped));
+                    }}
+                    placeholder={`일차 (오늘 ${dayOfYear})`}
+                    title="1~365일 차 (비워두면 오늘)"
+                    style={{ width: 130 }}
+                  />
                   <button
                     type="button"
                     className="start-sub-btn start-sub-btn--sm"
