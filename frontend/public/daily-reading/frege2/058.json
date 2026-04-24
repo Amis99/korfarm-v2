@@ -10,8 +10,8 @@
     "min": 5,
     "max": 6
   },
-  "area": "국어",
-  "subArea": "독해",
+  "area": "문학",
+  "subArea": "현대시",
   "competencies": [
     "사실적 이해",
     "추론적 이해",
@@ -72,47 +72,6 @@
           },
           "question": {
             "prompt": "어떤 마음인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "우리 교실와 창문 너머"
-              },
-              {
-                "id": "B",
-                "text": "커다란 바다와 출렁이고 있어"
-              },
-              {
-                "id": "C",
-                "text": "파란 물결와 넘실거릴"
-              },
-              {
-                "id": "D",
-                "text": "마음도 함께와 춤을 추지"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s2",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 61
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -263,6 +222,47 @@
           }
         },
         {
+          "stepId": "s2",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 61
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "우리 교실와 창문 너머"
+              },
+              {
+                "id": "B",
+                "text": "커다란 바다와 출렁이고 있어"
+              },
+              {
+                "id": "C",
+                "text": "파란 물결와 넘실거릴"
+              },
+              {
+                "id": "D",
+                "text": "마음도 함께와 춤을 추지"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s6",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
@@ -322,47 +322,6 @@
               {
                 "id": "A",
                 "text": "보면 창밖의 핵심"
-              },
-              {
-                "id": "B",
-                "text": "우리 교실와 창문 너머"
-              },
-              {
-                "id": "C",
-                "text": "커다란 바다와 출렁이고 있어"
-              },
-              {
-                "id": "D",
-                "text": "파란 물결와 넘실거릴"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 61
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "수업 시간와 멍하니"
               },
               {
                 "id": "B",
@@ -550,24 +509,24 @@
           }
         },
         {
-          "stepId": "s13",
+          "stepId": "s8",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p3",
+                "paragraphId": "p2",
                 "start": 0,
-                "end": 14
+                "end": 61
               }
             ]
           },
           "question": {
-            "prompt": "무엇을 알 수 있나요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "우리에게와 고래"
+                "text": "수업 시간와 멍하니"
               },
               {
                 "id": "B",
@@ -591,24 +550,24 @@
           }
         },
         {
-          "stepId": "s14",
+          "stepId": "s13",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 62
+                "end": 14
               }
             ]
           },
           "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "우리에게와 힘찬 꼬리짓"
+                "text": "우리에게와 고래"
               },
               {
                 "id": "B",
@@ -837,24 +796,24 @@
           }
         },
         {
-          "stepId": "s20",
+          "stepId": "s14",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p4",
+                "paragraphId": "p3",
                 "start": 0,
-                "end": 14
+                "end": 62
               }
             ]
           },
           "question": {
-            "prompt": "무엇을 알 수 있나요?",
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "상상 속와 고래"
+                "text": "우리에게와 힘찬 꼬리짓"
               },
               {
                 "id": "B",
@@ -878,24 +837,24 @@
           }
         },
         {
-          "stepId": "s21",
+          "stepId": "s20",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 64
+                "end": 14
               }
             ]
           },
           "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "상상 속와 고래지만 괜찮아"
+                "text": "상상 속와 고래"
               },
               {
                 "id": "B",
@@ -1101,6 +1060,47 @@
               {
                 "id": "A",
                 "text": "세상으로 헤엄쳐의 핵심"
+              },
+              {
+                "id": "B",
+                "text": "우리 교실와 창문 너머"
+              },
+              {
+                "id": "C",
+                "text": "커다란 바다와 출렁이고 있어"
+              },
+              {
+                "id": "D",
+                "text": "파란 물결와 넘실거릴"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s21",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 64
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "상상 속와 고래지만 괜찮아"
               },
               {
                 "id": "B",

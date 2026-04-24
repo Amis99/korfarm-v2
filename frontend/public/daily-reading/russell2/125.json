@@ -10,8 +10,8 @@
     "min": 8,
     "max": 9
   },
-  "area": "READING",
-  "subArea": "NONFICTION",
+  "area": "비문학",
+  "subArea": "의약학",
   "competencies": [
     "READING"
   ],
@@ -60,45 +60,6 @@
     },
     "intensive": {
       "timeline": [
-        {
-          "stepId": "s1",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 32
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 글의 첫 문단에서 중심적으로 설명하려는 내용으로 가장 적절한 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "DNA가 유전 현상을 설명하는 핵심 물질이라는 점"
-              },
-              {
-                "id": "B",
-                "text": "생물의 크기가 모두 같다는 점"
-              },
-              {
-                "id": "C",
-                "text": "단백질의 종류가 무작위로 결정된다는 점"
-              },
-              {
-                "id": "D",
-                "text": "환경이 유전보다 항상 우선한다는 점"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
         {
           "stepId": "s2",
           "type": "summary",
@@ -249,6 +210,45 @@
               }
             ],
             "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 32
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 글의 첫 문단에서 중심적으로 설명하려는 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "DNA가 유전 현상을 설명하는 핵심 물질이라는 점"
+              },
+              {
+                "id": "B",
+                "text": "생물의 크기가 모두 같다는 점"
+              },
+              {
+                "id": "C",
+                "text": "단백질의 종류가 무작위로 결정된다는 점"
+              },
+              {
+                "id": "D",
+                "text": "환경이 유전보다 항상 우선한다는 점"
+              }
+            ],
+            "answerId": "A",
             "scoring": {
               "correctDeltaSec": 20,
               "wrongDeltaSec": -40,

@@ -10,8 +10,8 @@
     "min": 5,
     "max": 5
   },
-  "area": "국어",
-  "subArea": "독해",
+  "area": "비문학",
+  "subArea": "논리학",
   "competencies": [
     "사실적 이해",
     "추론적 이해",
@@ -72,47 +72,6 @@
           },
           "question": {
             "prompt": "어떤 특징이 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "구조와 성질와 분석하"
-              },
-              {
-                "id": "B",
-                "text": "단순히와 겉모습"
-              },
-              {
-                "id": "C",
-                "text": "지식와 체계화하고 정보"
-              },
-              {
-                "id": "D",
-                "text": "이러한 사유와 학문적인"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s2",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 308
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -304,6 +263,47 @@
           }
         },
         {
+          "stepId": "s2",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 308
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "구조와 성질와 분석하"
+              },
+              {
+                "id": "B",
+                "text": "단순히와 겉모습"
+              },
+              {
+                "id": "C",
+                "text": "지식와 체계화하고 정보"
+              },
+              {
+                "id": "D",
+                "text": "이러한 사유와 학문적인"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
@@ -322,47 +322,6 @@
               {
                 "id": "A",
                 "text": "효과적인 분석와 위해서는 대상"
-              },
-              {
-                "id": "B",
-                "text": "구조와 성질와 분석하"
-              },
-              {
-                "id": "C",
-                "text": "단순히와 겉모습"
-              },
-              {
-                "id": "D",
-                "text": "지식와 체계화하고 정보"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 303
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "호흡과 같와 가치와 전체"
               },
               {
                 "id": "B",
@@ -550,24 +509,24 @@
           }
         },
         {
-          "stepId": "s13",
+          "stepId": "s8",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p3",
+                "paragraphId": "p2",
                 "start": 0,
-                "end": 42
+                "end": 303
               }
             ]
           },
           "question": {
-            "prompt": "무엇을 알 수 있나요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "독해와 작문와 분석하기 기법"
+                "text": "호흡과 같와 가치와 전체"
               },
               {
                 "id": "B",
@@ -591,20 +550,20 @@
           }
         },
         {
-          "stepId": "s14",
+          "stepId": "s13",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 308
+                "end": 42
               }
             ]
           },
           "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
@@ -837,24 +796,24 @@
           }
         },
         {
-          "stepId": "s20",
+          "stepId": "s14",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p4",
+                "paragraphId": "p3",
                 "start": 0,
-                "end": 58
+                "end": 308
               }
             ]
           },
           "question": {
-            "prompt": "무엇을 알 수 있나요?",
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "결론적으로 대상와 정보"
+                "text": "독해와 작문와 분석하기 기법"
               },
               {
                 "id": "B",
@@ -878,20 +837,20 @@
           }
         },
         {
-          "stepId": "s21",
+          "stepId": "s20",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 281
+                "end": 58
               }
             ]
           },
           "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
@@ -1060,6 +1019,47 @@
               {
                 "id": "A",
                 "text": "나누와 완성하"
+              },
+              {
+                "id": "B",
+                "text": "구조와 성질와 분석하"
+              },
+              {
+                "id": "C",
+                "text": "단순히와 겉모습"
+              },
+              {
+                "id": "D",
+                "text": "지식와 체계화하고 정보"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s21",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 281
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결론적으로 대상와 정보"
               },
               {
                 "id": "B",

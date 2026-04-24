@@ -10,8 +10,8 @@
     "min": 5,
     "max": 5
   },
-  "area": "국어",
-  "subArea": "독해",
+  "area": "비문학",
+  "subArea": "논리학",
   "competencies": [
     "사실적 이해",
     "추론적 이해",
@@ -72,47 +72,6 @@
           },
           "question": {
             "prompt": "무슨 원인인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "원인과 결와 인과 추론"
-              },
-              {
-                "id": "B",
-                "text": "일상와 수많은 인"
-              },
-              {
-                "id": "C",
-                "text": "과학적이고 객관적인와 인과 추론"
-              },
-              {
-                "id": "D",
-                "text": "인과 추론와 이해하"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s2",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 286
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -304,6 +263,47 @@
           }
         },
         {
+          "stepId": "s2",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 286
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "원인과 결와 인과 추론"
+              },
+              {
+                "id": "B",
+                "text": "일상와 수많은 인"
+              },
+              {
+                "id": "C",
+                "text": "과학적이고 객관적인와 인과 추론"
+              },
+              {
+                "id": "D",
+                "text": "인과 추론와 이해하"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
@@ -322,47 +322,6 @@
               {
                 "id": "A",
                 "text": "인과 관계와 증명하기 위한"
-              },
-              {
-                "id": "B",
-                "text": "원인과 결와 인과 추론"
-              },
-              {
-                "id": "C",
-                "text": "일상와 수많은 인"
-              },
-              {
-                "id": "D",
-                "text": "과학적이고 객관적인와 인과 추론"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 283
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "집단과 통제와 인과 관계"
               },
               {
                 "id": "B",
@@ -509,24 +468,24 @@
           }
         },
         {
-          "stepId": "s12",
+          "stepId": "s8",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p3",
+                "paragraphId": "p2",
                 "start": 0,
-                "end": 67
+                "end": 283
               }
             ]
           },
           "question": {
-            "prompt": "왜 그런가요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "하지만 현실와 세계의 데이터"
+                "text": "집단과 통제와 인과 관계"
               },
               {
                 "id": "B",
@@ -550,24 +509,24 @@
           }
         },
         {
-          "stepId": "s13",
+          "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 299
+                "end": 67
               }
             ]
           },
           "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "prompt": "왜 그런가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "역인과성이란와 원인과 결"
+                "text": "하지만 현실와 세계의 데이터"
               },
               {
                 "id": "B",
@@ -755,24 +714,24 @@
           }
         },
         {
-          "stepId": "s18",
+          "stepId": "s13",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p4",
+                "paragraphId": "p3",
                 "start": 0,
-                "end": 50
+                "end": 299
               }
             ]
           },
           "question": {
-            "prompt": "어떤 방법인가요?",
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "진실과 허구와 결론적으로 인"
+                "text": "역인과성이란와 원인과 결"
               },
               {
                 "id": "B",
@@ -796,24 +755,24 @@
           }
         },
         {
-          "stepId": "s19",
+          "stepId": "s18",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 275
+                "end": 50
               }
             ]
           },
           "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "prompt": "어떤 방법인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "진실과 허구와 정책과 의사"
+                "text": "진실과 허구와 결론적으로 인"
               },
               {
                 "id": "B",
@@ -978,6 +937,47 @@
               {
                 "id": "A",
                 "text": "논리적와 통해"
+              },
+              {
+                "id": "B",
+                "text": "원인과 결와 인과 추론"
+              },
+              {
+                "id": "C",
+                "text": "일상와 수많은 인"
+              },
+              {
+                "id": "D",
+                "text": "과학적이고 객관적인와 인과 추론"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 275
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "진실과 허구와 정책과 의사"
               },
               {
                 "id": "B",

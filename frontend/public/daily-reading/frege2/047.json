@@ -10,8 +10,8 @@
     "min": 5,
     "max": 6
   },
-  "area": "국어",
-  "subArea": "독해",
+  "area": "문학",
+  "subArea": "현대시",
   "competencies": [
     "사실적 이해",
     "추론적 이해",
@@ -72,47 +72,6 @@
           },
           "question": {
             "prompt": "무엇이 멈추나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "삭막한 도시와 지하 기계실"
-              },
-              {
-                "id": "B",
-                "text": "매미와 화려한 울음소리"
-              },
-              {
-                "id": "C",
-                "text": "우리에게 진정한와 울림이란 어디"
-              },
-              {
-                "id": "D",
-                "text": "시의 전반부와 존재"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s2",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 329
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -263,6 +222,47 @@
           }
         },
         {
+          "stepId": "s2",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 329
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "삭막한 도시와 지하 기계실"
+              },
+              {
+                "id": "B",
+                "text": "매미와 화려한 울음소리"
+              },
+              {
+                "id": "C",
+                "text": "우리에게 진정한와 울림이란 어디"
+              },
+              {
+                "id": "D",
+                "text": "시의 전반부와 존재"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s6",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
@@ -277,47 +277,6 @@
           },
           "question": {
             "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "시의 전반부와 존재"
-              },
-              {
-                "id": "B",
-                "text": "삭막한 도시와 지하 기계실"
-              },
-              {
-                "id": "C",
-                "text": "매미와 화려한 울음소리"
-              },
-              {
-                "id": "D",
-                "text": "우리에게 진정한와 울림이란 어디"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 319
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -509,24 +468,24 @@
           }
         },
         {
-          "stepId": "s12",
+          "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p3",
+                "paragraphId": "p2",
                 "start": 0,
-                "end": 45
+                "end": 319
               }
             ]
           },
           "question": {
-            "prompt": "무엇을 알 수 있나요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "깊어지와 귀뚜라미의 소리"
+                "text": "시의 전반부와 존재"
               },
               {
                 "id": "B",
@@ -550,24 +509,24 @@
           }
         },
         {
-          "stepId": "s13",
+          "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 309
+                "end": 45
               }
             ]
           },
           "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "타인과 연결되는지와 깊어지"
+                "text": "깊어지와 귀뚜라미의 소리"
               },
               {
                 "id": "B",
@@ -755,24 +714,24 @@
           }
         },
         {
-          "stepId": "s18",
+          "stepId": "s13",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p4",
+                "paragraphId": "p3",
                 "start": 0,
-                "end": 75
+                "end": 309
               }
             ]
           },
           "question": {
-            "prompt": "무엇을 알 수 있나요?",
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "오늘날 우리에게와 에서 묵묵히"
+                "text": "타인과 연결되는지와 깊어지"
               },
               {
                 "id": "B",
@@ -796,24 +755,24 @@
           }
         },
         {
-          "stepId": "s19",
+          "stepId": "s18",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 310
+                "end": 75
               }
             ]
           },
           "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "성공과 화려함와 오늘날 우리에게"
+                "text": "오늘날 우리에게와 에서 묵묵히"
               },
               {
                 "id": "B",
@@ -978,6 +937,47 @@
               {
                 "id": "A",
                 "text": "소외된와 존재들의 가슴속"
+              },
+              {
+                "id": "B",
+                "text": "삭막한 도시와 지하 기계실"
+              },
+              {
+                "id": "C",
+                "text": "매미와 화려한 울음소리"
+              },
+              {
+                "id": "D",
+                "text": "우리에게 진정한와 울림이란 어디"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 310
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "성공과 화려함와 오늘날 우리에게"
               },
               {
                 "id": "B",

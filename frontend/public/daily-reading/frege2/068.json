@@ -10,8 +10,8 @@
     "min": 5,
     "max": 5
   },
-  "area": "국어",
-  "subArea": "독해",
+  "area": "문학",
+  "subArea": "현대소설",
   "competencies": [
     "사실적 이해",
     "추론적 이해",
@@ -72,47 +72,6 @@
           },
           "question": {
             "prompt": "어떤 문제가 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "빅토르 위고와 수녀원에서 나"
-              },
-              {
-                "id": "B",
-                "text": "코제트와 세상으로부터 보호하기"
-              },
-              {
-                "id": "C",
-                "text": "혁명와 청년들"
-              },
-              {
-                "id": "D",
-                "text": "프랑스 파리와 공화정 수립"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s2",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 299
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -263,6 +222,47 @@
           }
         },
         {
+          "stepId": "s2",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 299
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "빅토르 위고와 수녀원에서 나"
+              },
+              {
+                "id": "B",
+                "text": "코제트와 세상으로부터 보호하기"
+              },
+              {
+                "id": "C",
+                "text": "혁명와 청년들"
+              },
+              {
+                "id": "D",
+                "text": "프랑스 파리와 공화정 수립"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s6",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
@@ -281,47 +281,6 @@
               {
                 "id": "A",
                 "text": "프랑스 파리와 공화정 수립"
-              },
-              {
-                "id": "B",
-                "text": "빅토르 위고와 수녀원에서 나"
-              },
-              {
-                "id": "C",
-                "text": "코제트와 세상으로부터 보호하기"
-              },
-              {
-                "id": "D",
-                "text": "혁명와 청년들"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 284
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "마리우스와 그와 프랑스 파리"
               },
               {
                 "id": "B",
@@ -509,24 +468,24 @@
           }
         },
         {
-          "stepId": "s12",
+          "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p3",
+                "paragraphId": "p2",
                 "start": 0,
-                "end": 84
+                "end": 284
               }
             ]
           },
           "question": {
-            "prompt": "무엇을 알 수 있나요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "치열한 전투와 끝에 바리케이드"
+                "text": "마리우스와 그와 프랑스 파리"
               },
               {
                 "id": "B",
@@ -550,20 +509,20 @@
           }
         },
         {
-          "stepId": "s13",
+          "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 285
+                "end": 84
               }
             ]
           },
           "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
@@ -714,24 +673,24 @@
           }
         },
         {
-          "stepId": "s17",
+          "stepId": "s13",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p4",
+                "paragraphId": "p3",
                 "start": 0,
-                "end": 59
+                "end": 285
               }
             ]
           },
           "question": {
-            "prompt": "무엇을 알 수 있나요?",
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "사랑과 혁명와 부는 사랑"
+                "text": "치열한 전투와 끝에 바리케이드"
               },
               {
                 "id": "B",
@@ -755,24 +714,24 @@
           }
         },
         {
-          "stepId": "s18",
+          "stepId": "s17",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 281
+                "end": 59
               }
             ]
           },
           "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "사랑과 혁명와 하수도와 바리케이드라"
+                "text": "사랑과 혁명와 부는 사랑"
               },
               {
                 "id": "B",
@@ -896,6 +855,47 @@
               {
                 "id": "A",
                 "text": "정의와 사랑와 부의 전개"
+              },
+              {
+                "id": "B",
+                "text": "빅토르 위고와 수녀원에서 나"
+              },
+              {
+                "id": "C",
+                "text": "코제트와 세상으로부터 보호하기"
+              },
+              {
+                "id": "D",
+                "text": "혁명와 청년들"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 281
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사랑과 혁명와 하수도와 바리케이드라"
               },
               {
                 "id": "B",

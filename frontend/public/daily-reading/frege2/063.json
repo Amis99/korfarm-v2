@@ -10,8 +10,8 @@
     "min": 5,
     "max": 5
   },
-  "area": "국어",
-  "subArea": "독해",
+  "area": "비문학",
+  "subArea": "경제학",
   "competencies": [
     "사실적 이해",
     "추론적 이해",
@@ -72,47 +72,6 @@
           },
           "question": {
             "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "수준과 관계없와 학교 현장"
-              },
-              {
-                "id": "B",
-                "text": "헌법와 의무"
-              },
-              {
-                "id": "C",
-                "text": "무상 급식와 찬성 측"
-              },
-              {
-                "id": "D",
-                "text": "단순히와 해결하"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s2",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 261
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -263,6 +222,47 @@
           }
         },
         {
+          "stepId": "s2",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 261
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "수준과 관계없와 학교 현장"
+              },
+              {
+                "id": "B",
+                "text": "헌법와 의무"
+              },
+              {
+                "id": "C",
+                "text": "무상 급식와 찬성 측"
+              },
+              {
+                "id": "D",
+                "text": "단순히와 해결하"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s6",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
@@ -277,47 +277,6 @@
           },
           "question": {
             "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "반면 무상와 급식에 대해"
-              },
-              {
-                "id": "B",
-                "text": "수준과 관계없와 학교 현장"
-              },
-              {
-                "id": "C",
-                "text": "헌법와 의무"
-              },
-              {
-                "id": "D",
-                "text": "무상 급식와 찬성 측"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 276
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -468,24 +427,24 @@
           }
         },
         {
-          "stepId": "s11",
+          "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p3",
+                "paragraphId": "p2",
                 "start": 0,
-                "end": 58
+                "end": 276
               }
             ]
           },
           "question": {
-            "prompt": "어떤 문제가 있나요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "무상 급식와 둘러싼 논쟁"
+                "text": "반면 무상와 급식에 대해"
               },
               {
                 "id": "B",
@@ -509,24 +468,24 @@
           }
         },
         {
-          "stepId": "s12",
+          "stepId": "s11",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 282
+                "end": 58
               }
             ]
           },
           "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "prompt": "어떤 문제가 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "지원과 책임와 토론과 합"
+                "text": "무상 급식와 둘러싼 논쟁"
               },
               {
                 "id": "B",
@@ -714,24 +673,24 @@
           }
         },
         {
-          "stepId": "s17",
+          "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p4",
+                "paragraphId": "p3",
                 "start": 0,
-                "end": 63
+                "end": 282
               }
             ]
           },
           "question": {
-            "prompt": "무엇을 알 수 있나요?",
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "보장과 국와 결론적으로 무상"
+                "text": "지원과 책임와 토론과 합"
               },
               {
                 "id": "B",
@@ -755,24 +714,24 @@
           }
         },
         {
-          "stepId": "s18",
+          "stepId": "s17",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 277
+                "end": 63
               }
             ]
           },
           "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "보장과 국와 유지와 급식실"
+                "text": "보장과 국와 결론적으로 무상"
               },
               {
                 "id": "B",
@@ -896,6 +855,47 @@
               {
                 "id": "A",
                 "text": "건강한 급식와 민주적"
+              },
+              {
+                "id": "B",
+                "text": "수준과 관계없와 학교 현장"
+              },
+              {
+                "id": "C",
+                "text": "헌법와 의무"
+              },
+              {
+                "id": "D",
+                "text": "무상 급식와 찬성 측"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 277
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "보장과 국와 유지와 급식실"
               },
               {
                 "id": "B",

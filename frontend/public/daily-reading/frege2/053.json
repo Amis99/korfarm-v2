@@ -10,8 +10,8 @@
     "min": 5,
     "max": 6
   },
-  "area": "국어",
-  "subArea": "독해",
+  "area": "비문학",
+  "subArea": "법학",
   "competencies": [
     "사실적 이해",
     "추론적 이해",
@@ -72,47 +72,6 @@
           },
           "question": {
             "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "반려동물 인구와 천만 시대"
-              },
-              {
-                "id": "B",
-                "text": "생명의 평생와 중대한"
-              },
-              {
-                "id": "C",
-                "text": "유기와 동물 보호소"
-              },
-              {
-                "id": "D",
-                "text": "입양 제와 동물의 복지"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s2",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 345
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -304,6 +263,47 @@
           }
         },
         {
+          "stepId": "s2",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 345
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반려동물 인구와 천만 시대"
+              },
+              {
+                "id": "B",
+                "text": "생명의 평생와 중대한"
+              },
+              {
+                "id": "C",
+                "text": "유기와 동물 보호소"
+              },
+              {
+                "id": "D",
+                "text": "입양 제와 동물의 복지"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
@@ -322,47 +322,6 @@
               {
                 "id": "A",
                 "text": "체계적인 입양와 예비"
-              },
-              {
-                "id": "B",
-                "text": "반려동물 인구와 천만 시대"
-              },
-              {
-                "id": "C",
-                "text": "생명의 평생와 중대한"
-              },
-              {
-                "id": "D",
-                "text": "유기와 동물 보호소"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 292
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "인간과 동물와 체계적인 입양"
               },
               {
                 "id": "B",
@@ -550,24 +509,24 @@
           }
         },
         {
-          "stepId": "s13",
+          "stepId": "s8",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p3",
+                "paragraphId": "p2",
                 "start": 0,
-                "end": 43
+                "end": 292
               }
             ]
           },
           "question": {
-            "prompt": "무엇을 알 수 있나요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "입양한와 동물"
+                "text": "인간과 동물와 체계적인 입양"
               },
               {
                 "id": "B",
@@ -591,24 +550,24 @@
           }
         },
         {
-          "stepId": "s14",
+          "stepId": "s13",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 282
+                "end": 43
               }
             ]
           },
           "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "검진과 예방와 운동과 사회화"
+                "text": "입양한와 동물"
               },
               {
                 "id": "B",
@@ -796,24 +755,24 @@
           }
         },
         {
-          "stepId": "s19",
+          "stepId": "s14",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p4",
+                "paragraphId": "p3",
                 "start": 0,
-                "end": 49
+                "end": 282
               }
             ]
           },
           "question": {
-            "prompt": "무엇을 알 수 있나요?",
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "결국 반려동물와 입양 제"
+                "text": "검진과 예방와 운동과 사회화"
               },
               {
                 "id": "B",
@@ -837,24 +796,24 @@
           }
         },
         {
-          "stepId": "s20",
+          "stepId": "s19",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 314
+                "end": 49
               }
             ]
           },
           "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "타자와 조화롭게와 결국 반려동물"
+                "text": "결국 반려동물와 입양 제"
               },
               {
                 "id": "B",
@@ -1060,6 +1019,47 @@
               {
                 "id": "A",
                 "text": "향한와 책임감 있"
+              },
+              {
+                "id": "B",
+                "text": "반려동물 인구와 천만 시대"
+              },
+              {
+                "id": "C",
+                "text": "생명의 평생와 중대한"
+              },
+              {
+                "id": "D",
+                "text": "유기와 동물 보호소"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 314
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "타자와 조화롭게와 결국 반려동물"
               },
               {
                 "id": "B",

@@ -10,8 +10,8 @@
     "min": 5,
     "max": 5
   },
-  "area": "국어",
-  "subArea": "독해",
+  "area": "비문학",
+  "subArea": "법학",
   "competencies": [
     "사실적 이해",
     "추론적 이해",
@@ -72,47 +72,6 @@
           },
           "question": {
             "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "흉포화와 지능화와 최근 소년"
-              },
-              {
-                "id": "B",
-                "text": "촉법소년이란 범행의 의미"
-              },
-              {
-                "id": "C",
-                "text": "제도 도입와 어린"
-              },
-              {
-                "id": "D",
-                "text": "실효성과 피해자와 연령 하향"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s2",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 279
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -263,6 +222,47 @@
           }
         },
         {
+          "stepId": "s2",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 279
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "흉포화와 지능화와 최근 소년"
+              },
+              {
+                "id": "B",
+                "text": "촉법소년이란 범행의 의미"
+              },
+              {
+                "id": "C",
+                "text": "제도 도입와 어린"
+              },
+              {
+                "id": "D",
+                "text": "실효성과 피해자와 연령 하향"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s6",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
@@ -277,47 +277,6 @@
           },
           "question": {
             "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "실효성과 피해자와 연령 하향"
-              },
-              {
-                "id": "B",
-                "text": "흉포화와 지능화와 최근 소년"
-              },
-              {
-                "id": "C",
-                "text": "촉법소년이란 범행의 의미"
-              },
-              {
-                "id": "D",
-                "text": "제도 도입와 어린"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 265
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -468,24 +427,24 @@
           }
         },
         {
-          "stepId": "s11",
+          "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p3",
+                "paragraphId": "p2",
                 "start": 0,
-                "end": 64
+                "end": 265
               }
             ]
           },
           "question": {
-            "prompt": "무슨 원인인가요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "해결과 교화와 반면 연령"
+                "text": "실효성과 피해자와 연령 하향"
               },
               {
                 "id": "B",
@@ -509,24 +468,24 @@
           }
         },
         {
-          "stepId": "s12",
+          "stepId": "s11",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 296
+                "end": 64
               }
             ]
           },
           "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "prompt": "무슨 원인인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "해결과 교화와 교육과 치료"
+                "text": "해결과 교화와 반면 연령"
               },
               {
                 "id": "B",
@@ -673,24 +632,24 @@
           }
         },
         {
-          "stepId": "s16",
+          "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p4",
+                "paragraphId": "p3",
                 "start": 0,
-                "end": 65
+                "end": 296
               }
             ]
           },
           "question": {
-            "prompt": "어떤 문제가 있나요?",
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "정의와 회복적와 결론적으로 촉법소년"
+                "text": "해결과 교화와 교육과 치료"
               },
               {
                 "id": "B",
@@ -714,24 +673,24 @@
           }
         },
         {
-          "stepId": "s17",
+          "stepId": "s16",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 280
+                "end": 65
               }
             ]
           },
           "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "prompt": "어떤 문제가 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "정의와 회복적와 정부와 시민"
+                "text": "정의와 회복적와 결론적으로 촉법소년"
               },
               {
                 "id": "B",
@@ -855,6 +814,47 @@
               {
                 "id": "A",
                 "text": "단편적인와 처벌 강화"
+              },
+              {
+                "id": "B",
+                "text": "흉포화와 지능화와 최근 소년"
+              },
+              {
+                "id": "C",
+                "text": "촉법소년이란 범행의 의미"
+              },
+              {
+                "id": "D",
+                "text": "제도 도입와 어린"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 280
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "정의와 회복적와 정부와 시민"
               },
               {
                 "id": "B",

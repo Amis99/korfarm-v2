@@ -10,8 +10,8 @@
     "min": 5,
     "max": 5
   },
-  "area": "국어",
-  "subArea": "독해",
+  "area": "비문학",
+  "subArea": "경제학",
   "competencies": [
     "사실적 이해",
     "추론적 이해",
@@ -72,47 +72,6 @@
           },
           "question": {
             "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "저출산과 고령화와 고령화로 인한"
-              },
-              {
-                "id": "B",
-                "text": "출산율의 하락와 미래의 생산"
-              },
-              {
-                "id": "C",
-                "text": "이러한 변화와 노동력 부족"
-              },
-              {
-                "id": "D",
-                "text": "특히 우리나라와 세계에서 가장"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s2",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 267
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -263,6 +222,47 @@
           }
         },
         {
+          "stepId": "s2",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 267
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "저출산과 고령화와 고령화로 인한"
+              },
+              {
+                "id": "B",
+                "text": "출산율의 하락와 미래의 생산"
+              },
+              {
+                "id": "C",
+                "text": "이러한 변화와 노동력 부족"
+              },
+              {
+                "id": "D",
+                "text": "특히 우리나라와 세계에서 가장"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s6",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
@@ -277,47 +277,6 @@
           },
           "question": {
             "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "감소와 소비와 인구 구조"
-              },
-              {
-                "id": "B",
-                "text": "저출산과 고령화와 고령화로 인한"
-              },
-              {
-                "id": "C",
-                "text": "출산율의 하락와 미래의 생산"
-              },
-              {
-                "id": "D",
-                "text": "이러한 변화와 노동력 부족"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 262
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -509,24 +468,24 @@
           }
         },
         {
-          "stepId": "s12",
+          "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p3",
+                "paragraphId": "p2",
                 "start": 0,
-                "end": 47
+                "end": 262
               }
             ]
           },
           "question": {
-            "prompt": "어떤 문제가 있나요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "갈등과 사회와 인구 구조"
+                "text": "감소와 소비와 인구 구조"
               },
               {
                 "id": "B",
@@ -550,24 +509,24 @@
           }
         },
         {
-          "stepId": "s13",
+          "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 263
+                "end": 47
               }
             ]
           },
           "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "prompt": "어떤 문제가 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "갈등과 사회와 논란과 갈등"
+                "text": "갈등과 사회와 인구 구조"
               },
               {
                 "id": "B",
@@ -714,24 +673,24 @@
           }
         },
         {
-          "stepId": "s17",
+          "stepId": "s13",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p4",
+                "paragraphId": "p3",
                 "start": 0,
-                "end": 68
+                "end": 263
               }
             ]
           },
           "question": {
-            "prompt": "어떤 문제가 있나요?",
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "결론적으로 인구와 구조 변화"
+                "text": "갈등과 사회와 논란과 갈등"
               },
               {
                 "id": "B",
@@ -755,24 +714,24 @@
           }
         },
         {
-          "stepId": "s18",
+          "stepId": "s17",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 295
+                "end": 68
               }
             ]
           },
           "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "prompt": "어떤 문제가 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "계획과 산업와 계발과 노후"
+                "text": "결론적으로 인구와 구조 변화"
               },
               {
                 "id": "B",
@@ -937,6 +896,47 @@
               {
                 "id": "A",
                 "text": "인구는 국와 결정짓"
+              },
+              {
+                "id": "B",
+                "text": "저출산과 고령화와 고령화로 인한"
+              },
+              {
+                "id": "C",
+                "text": "출산율의 하락와 미래의 생산"
+              },
+              {
+                "id": "D",
+                "text": "이러한 변화와 노동력 부족"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 295
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "계획과 산업와 계발과 노후"
               },
               {
                 "id": "B",

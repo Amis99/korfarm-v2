@@ -10,8 +10,8 @@
     "min": 5,
     "max": 5
   },
-  "area": "국어",
-  "subArea": "독해",
+  "area": "기타",
+  "subArea": "작문",
   "competencies": [
     "사실적 이해",
     "추론적 이해",
@@ -72,47 +72,6 @@
           },
           "question": {
             "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "독자에게와 특정 대상이나"
-              },
-              {
-                "id": "B",
-                "text": "이러한 글와 복잡한"
-              },
-              {
-                "id": "C",
-                "text": "심화 구조란와 단순히 사실"
-              },
-              {
-                "id": "D",
-                "text": "짜임새 있와 독자"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s2",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 298
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -304,6 +263,47 @@
           }
         },
         {
+          "stepId": "s2",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 298
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "독자에게와 특정 대상이나"
+              },
+              {
+                "id": "B",
+                "text": "이러한 글와 복잡한"
+              },
+              {
+                "id": "C",
+                "text": "심화 구조란와 단순히 사실"
+              },
+              {
+                "id": "D",
+                "text": "짜임새 있와 독자"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
@@ -318,47 +318,6 @@
           },
           "question": {
             "prompt": "무슨 원인인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "비교와 대조와 원인과 결"
-              },
-              {
-                "id": "B",
-                "text": "독자에게와 특정 대상이나"
-              },
-              {
-                "id": "C",
-                "text": "이러한 글와 복잡한"
-              },
-              {
-                "id": "D",
-                "text": "심화 구조란와 단순히 사실"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 278
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -550,24 +509,24 @@
           }
         },
         {
-          "stepId": "s13",
+          "stepId": "s8",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p3",
+                "paragraphId": "p2",
                 "start": 0,
-                "end": 74
+                "end": 278
               }
             ]
           },
           "question": {
-            "prompt": "어떤 효과가 있나요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "효과적인 정보와 위해서"
+                "text": "비교와 대조와 원인과 결"
               },
               {
                 "id": "B",
@@ -591,24 +550,24 @@
           }
         },
         {
-          "stepId": "s14",
+          "stepId": "s13",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 288
+                "end": 74
               }
             ]
           },
           "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "prompt": "어떤 효과가 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "문단과 문단와 효과적인 정보"
+                "text": "효과적인 정보와 위해서"
               },
               {
                 "id": "B",
@@ -796,24 +755,24 @@
           }
         },
         {
-          "stepId": "s19",
+          "stepId": "s14",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p4",
+                "paragraphId": "p3",
                 "start": 0,
-                "end": 64
+                "end": 288
               }
             ]
           },
           "question": {
-            "prompt": "무엇을 알 수 있나요?",
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "결론적으로 설명문와 심화 구조"
+                "text": "문단과 문단와 효과적인 정보"
               },
               {
                 "id": "B",
@@ -837,20 +796,20 @@
           }
         },
         {
-          "stepId": "s20",
+          "stepId": "s19",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 284
+                "end": 64
               }
             ]
           },
           "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
@@ -1019,6 +978,47 @@
               {
                 "id": "A",
                 "text": "설계하와 것은 지식"
+              },
+              {
+                "id": "B",
+                "text": "독자에게와 특정 대상이나"
+              },
+              {
+                "id": "C",
+                "text": "이러한 글와 복잡한"
+              },
+              {
+                "id": "D",
+                "text": "심화 구조란와 단순히 사실"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 284
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결론적으로 설명문와 심화 구조"
               },
               {
                 "id": "B",

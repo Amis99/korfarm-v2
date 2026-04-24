@@ -10,8 +10,8 @@
     "min": 5,
     "max": 5
   },
-  "area": "국어",
-  "subArea": "독해",
+  "area": "기타",
+  "subArea": "매체",
   "competencies": [
     "사실적 이해",
     "추론적 이해",
@@ -72,47 +72,6 @@
           },
           "question": {
             "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "철학과 복지와 학교 무상"
-              },
-              {
-                "id": "B",
-                "text": "무상 급식와 찬성 측"
-              },
-              {
-                "id": "C",
-                "text": "학교라와 공동체 안"
-              },
-              {
-                "id": "D",
-                "text": "효율성과 책임감와 반면 재정"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s2",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 261
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -263,6 +222,47 @@
           }
         },
         {
+          "stepId": "s2",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 261
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "철학과 복지와 학교 무상"
+              },
+              {
+                "id": "B",
+                "text": "무상 급식와 찬성 측"
+              },
+              {
+                "id": "C",
+                "text": "학교라와 공동체 안"
+              },
+              {
+                "id": "D",
+                "text": "효율성과 책임감와 반면 재정"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s6",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
@@ -281,47 +281,6 @@
               {
                 "id": "A",
                 "text": "효율성과 책임감와 반면 재정"
-              },
-              {
-                "id": "B",
-                "text": "철학과 복지와 학교 무상"
-              },
-              {
-                "id": "C",
-                "text": "무상 급식와 찬성 측"
-              },
-              {
-                "id": "D",
-                "text": "학교라와 공동체 안"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s7",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 266
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "효율성과 책임감와 데이터와 효율성"
               },
               {
                 "id": "B",
@@ -468,24 +427,24 @@
           }
         },
         {
-          "stepId": "s11",
+          "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p3",
+                "paragraphId": "p2",
                 "start": 0,
-                "end": 57
+                "end": 266
               }
             ]
           },
           "question": {
-            "prompt": "무엇을 알 수 있나요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "이러한 서와 다른 생각"
+                "text": "효율성과 책임감와 데이터와 효율성"
               },
               {
                 "id": "B",
@@ -509,20 +468,20 @@
           }
         },
         {
-          "stepId": "s12",
+          "stepId": "s11",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 278
+                "end": 57
               }
             ]
           },
           "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
@@ -714,24 +673,24 @@
           }
         },
         {
-          "stepId": "s17",
+          "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p4",
+                "paragraphId": "p3",
                 "start": 0,
-                "end": 58
+                "end": 278
               }
             ]
           },
           "question": {
-            "prompt": "무엇을 알 수 있나요?",
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "성장통과 같다와 결론적으로 무상"
+                "text": "이러한 서와 다른 생각"
               },
               {
                 "id": "B",
@@ -755,24 +714,24 @@
           }
         },
         {
-          "stepId": "s18",
+          "stepId": "s17",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 265
+                "end": 58
               }
             ]
           },
           "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "성장통과 같다와 행복과 교육"
+                "text": "성장통과 같다와 결론적으로 무상"
               },
               {
                 "id": "B",
@@ -896,6 +855,47 @@
               {
                 "id": "A",
                 "text": "서로의 다름와 인정하고 대화"
+              },
+              {
+                "id": "B",
+                "text": "철학과 복지와 학교 무상"
+              },
+              {
+                "id": "C",
+                "text": "무상 급식와 찬성 측"
+              },
+              {
+                "id": "D",
+                "text": "학교라와 공동체 안"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 265
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "성장통과 같다와 행복과 교육"
               },
               {
                 "id": "B",

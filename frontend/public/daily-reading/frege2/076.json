@@ -10,8 +10,8 @@
     "min": 5,
     "max": 5
   },
-  "area": "국어",
-  "subArea": "독해",
+  "area": "문학",
+  "subArea": "현대소설",
   "competencies": [
     "사실적 이해",
     "추론적 이해",
@@ -72,47 +72,6 @@
           },
           "question": {
             "prompt": "무엇을 알 수 있나요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "결심과 실행와 정세와 공화주의자들"
-              },
-              {
-                "id": "B",
-                "text": "주인공 마리우스와 코제트와의 사랑"
-              },
-              {
-                "id": "C",
-                "text": "불만과 자유와 당시 파리"
-              },
-              {
-                "id": "D",
-                "text": "마리우스의 이러한와 개인적인"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s2",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 311
-              }
-            ]
-          },
-          "question": {
-            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -304,6 +263,47 @@
           }
         },
         {
+          "stepId": "s2",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 311
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결심과 실행와 정세와 공화주의자들"
+              },
+              {
+                "id": "B",
+                "text": "주인공 마리우스와 코제트와의 사랑"
+              },
+              {
+                "id": "C",
+                "text": "불만과 자유와 당시 파리"
+              },
+              {
+                "id": "D",
+                "text": "마리우스의 이러한와 개인적인"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
           "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
@@ -322,47 +322,6 @@
               {
                 "id": "A",
                 "text": "마리우스와 코제트에게 보낸"
-              },
-              {
-                "id": "B",
-                "text": "결심과 실행와 정세와 공화주의자들"
-              },
-              {
-                "id": "C",
-                "text": "주인공 마리우스와 코제트와의 사랑"
-              },
-              {
-                "id": "D",
-                "text": "불만과 자유와 당시 파리"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s8",
-          "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 286
-              }
-            ]
-          },
-          "question": {
-            "prompt": "2문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "질투와 원망와 마리우스"
               },
               {
                 "id": "B",
@@ -509,24 +468,24 @@
           }
         },
         {
-          "stepId": "s12",
+          "stepId": "s8",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p3",
+                "paragraphId": "p2",
                 "start": 0,
-                "end": 57
+                "end": 286
               }
             ]
           },
           "question": {
-            "prompt": "무엇을 알 수 있나요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "희생과 동료애와 혁명의 전장인"
+                "text": "질투와 원망와 마리우스"
               },
               {
                 "id": "B",
@@ -550,24 +509,24 @@
           }
         },
         {
-          "stepId": "s13",
+          "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 294
+                "end": 57
               }
             ]
           },
           "question": {
-            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "희생과 동료애와 자유와 평등"
+                "text": "희생과 동료애와 혁명의 전장인"
               },
               {
                 "id": "B",
@@ -755,24 +714,24 @@
           }
         },
         {
-          "stepId": "s18",
+          "stepId": "s13",
           "type": "MULTIPLE_CHOICE",
-          "condition": "DETAIL",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p4",
+                "paragraphId": "p3",
                 "start": 0,
-                "end": 59
+                "end": 294
               }
             ]
           },
           "question": {
-            "prompt": "무엇을 알 수 있나요?",
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "의지와 선택와 부는 극한"
+                "text": "희생과 동료애와 자유와 평등"
               },
               {
                 "id": "B",
@@ -796,24 +755,24 @@
           }
         },
         {
-          "stepId": "s19",
+          "stepId": "s18",
           "type": "MULTIPLE_CHOICE",
-          "condition": "SUMMARY",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p4",
                 "start": 0,
-                "end": 304
+                "end": 59
               }
             ]
           },
           "question": {
-            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "의지와 선택와 투쟁과 장발장"
+                "text": "의지와 선택와 부는 극한"
               },
               {
                 "id": "B",
@@ -978,6 +937,47 @@
               {
                 "id": "A",
                 "text": "부의 격렬한와 독자"
+              },
+              {
+                "id": "B",
+                "text": "결심과 실행와 정세와 공화주의자들"
+              },
+              {
+                "id": "C",
+                "text": "주인공 마리우스와 코제트와의 사랑"
+              },
+              {
+                "id": "D",
+                "text": "불만과 자유와 당시 파리"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 304
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "의지와 선택와 투쟁과 장발장"
               },
               {
                 "id": "B",
