@@ -199,6 +199,17 @@ function StartPage() {
   const levelId = (isAdmin && adminLevelOverride) ? adminLevelOverride : baseLevelId;
   const displayLevel = levelId || "LV.1";
   const levelLabel = LEVEL_LABEL_MAP[levelId] || levelId || "";
+
+  // 관리자 레벨 오버라이드 또는 명시적 levelId가 있을 때 후속 페이지에 query string으로 전달
+  // 후속 페이지(useDailyContent / ProModePage / FarmListPage)는 ?level=...을 프로필보다 우선 적용
+  const navWithLevel = (path) => {
+    if (isAdmin && adminLevelOverride && LEVEL_LABEL_MAP[adminLevelOverride]) {
+      const sep = path.includes("?") ? "&" : "?";
+      navigate(`${path}${sep}level=${adminLevelOverride}`);
+    } else {
+      navigate(path);
+    }
+  };
   const learningStartDate = profile?.learning_start_date || profile?.learningStartDate || null;
   const dayOfYear = calcDayIndex(learningStartDate);
 
@@ -601,7 +612,7 @@ function StartPage() {
             오늘의 무료 학습
           </h2>
           <div className="start-free-row">
-            <div className="start-free-card" onClick={() => navigate("/daily-quiz")}>
+            <div className="start-free-card" onClick={() => navWithLevel("/daily-quiz")}>
               <div className="start-free-card-icon quiz">
                 <span className="material-symbols-outlined">quiz</span>
               </div>
@@ -612,7 +623,7 @@ function StartPage() {
                 <p className="start-card-notice">반복 가능 · 하루 씨앗 10개</p>
               </div>
             </div>
-            <div className="start-free-card" onClick={() => navigate("/daily-reading")}>
+            <div className="start-free-card" onClick={() => navWithLevel("/daily-reading")}>
               <div className="start-free-card-icon reading">
                 <span className="material-symbols-outlined">auto_stories</span>
               </div>
@@ -663,14 +674,14 @@ function StartPage() {
             학습 메뉴
           </h2>
           <div className="start-learn-grid">
-            <div className={`start-learn-card${!hasSub ? " --locked" : ""}`} onClick={() => navigate(hasSub ? "/pro-mode" : "/subscription")}>
+            <div className={`start-learn-card${!hasSub ? " --locked" : ""}`} onClick={() => hasSub ? navWithLevel("/pro-mode") : navigate("/subscription")}>
               <span className="material-symbols-outlined">military_tech</span>
               <h3>프로 모드</h3>
               <p>12레벨 심화 학습</p>
               {!hasSub && <span className="start-lock-badge">구독 필요</span>}
               {isAdmin && <span className="start-card-admin-badge">테스트 재응시 가능</span>}
             </div>
-            <div className={`start-learn-card${!hasSub ? " --locked" : ""}`} onClick={() => navigate(hasSub ? "/farm-mode" : "/subscription")}>
+            <div className={`start-learn-card${!hasSub ? " --locked" : ""}`} onClick={() => hasSub ? navWithLevel("/farm-mode") : navigate("/subscription")}>
               <span className="material-symbols-outlined">agriculture</span>
               <h3>농장별 모드</h3>
               <p>영역별 집중 학습</p>

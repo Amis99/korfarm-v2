@@ -19,6 +19,7 @@ import SentenceStructureForm from "./form/SentenceStructureForm";
 import ContentPdfForm from "./form/ContentPdfForm";
 import BackgroundPreview from "./preview/BackgroundPreview";
 import BackgroundForm from "./form/BackgroundForm";
+import { resolveModuleKeyForContentType } from "../../constants/contentTypes";
 import "../../styles/content-editor.css";
 
 const TYPE_LABEL = {
@@ -411,7 +412,43 @@ export default function EditorShell({ contentId, staticInfo }) {
         /* 좌우 분할 (비주얼 편집) */
         <div className="ce-split">
           <div className="ce-preview-pane">
-            <div className="ce-preview-label">미리보기</div>
+            <div className="ce-preview-label">
+              미리보기
+              <button
+                type="button"
+                className="ce-btn ce-btn-secondary"
+                style={{ marginLeft: 12, padding: "2px 10px", fontSize: 12 }}
+                onClick={() => {
+                  // 현재 편집 중인 content를 학생 화면(EngineShell)으로 미리보기
+                  // 학생 모듈 변경(클릭 트리거 모달, 매핑 정규화)이 자동 반영됨
+                  if (!content) return;
+                  const ctRaw = meta?.contentType ?? "";
+                  const ct = Array.isArray(ctRaw) ? ctRaw : (ctRaw ? [ctRaw] : []);
+                  const previewData = {
+                    contentType: ct,
+                    targetLevel: meta?.targetLevel || meta?.levelId || "",
+                    area: meta?.area || "",
+                    subArea: meta?.subArea || "",
+                    title: meta?.title || "",
+                    timeLimitSec: content?.timeLimitSec ?? content?.time_limit_sec,
+                    seedReward: content?.seedReward || content?.seed_reward,
+                    assets: content?.assets,
+                    payload: content,
+                  };
+                  const moduleKey = resolveModuleKeyForContentType(ct, meta?.moduleKey);
+                  try {
+                    localStorage.setItem("korfarm_preview_content", JSON.stringify(previewData));
+                    localStorage.setItem("korfarm_preview_module", moduleKey);
+                    const fromHere = encodeURIComponent(window.location.pathname + window.location.search);
+                    navigate(`/admin/content/preview?from=${fromHere}`);
+                  } catch (err) {
+                    alert("미리보기 데이터 저장 실패: " + err.message);
+                  }
+                }}
+              >
+                학생 화면으로 미리보기 ↗
+              </button>
+            </div>
             {editorType === "reading" && (
               <ReadingPreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
             )}

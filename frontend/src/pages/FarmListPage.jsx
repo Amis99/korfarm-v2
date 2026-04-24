@@ -37,10 +37,14 @@ function FarmListPage() {
   const [searchParams] = useSearchParams();
   const farm = getFarmById(farmId);
 
-  // URL query param 또는 프로필 서버로 초기값 설정
+  // URL query param(server 또는 level) 또는 프로필 서버로 초기값 설정
+  // level=saussure1 등으로 들어오면 server로 변환해서 사용 (StartPage 관리자 레벨 오버라이드 연계)
   const urlServer = searchParams.get("server") || "";
-  const [serverFilter, setServerFilter] = useState(urlServer);
-  const [profileLevelApplied, setProfileLevelApplied] = useState(Boolean(urlServer));
+  const urlLevel = searchParams.get("level") || "";
+  const urlLevelServer = urlLevel ? profileLevelToServer(urlLevel) : "";
+  const initialServer = urlServer || (SERVERS.includes(urlLevelServer) ? urlLevelServer : "");
+  const [serverFilter, setServerFilter] = useState(initialServer);
+  const [profileLevelApplied, setProfileLevelApplied] = useState(Boolean(initialServer));
   const [subAreaFilter, setSubAreaFilter] = useState("");
   const [contentTypeFilter, setContentTypeFilter] = useState("");
   const [searchText, setSearchText] = useState("");

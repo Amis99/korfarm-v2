@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { apiGet, apiPost } from "../utils/api";
 import { LEVEL_FOLDER_MAP, GRADE_TO_LEVEL } from "../constants/levels";
 
@@ -38,6 +38,8 @@ const LEVEL_FOLDER_TO_BACKEND_ID = {
  */
 export default function useDailyContent({ folder, contentType, errorLabel }) {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const overrideLevel = searchParams.get("level");
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -55,7 +57,10 @@ export default function useDailyContent({ folder, contentType, errorLabel }) {
           return;
         }
 
-        let level = profile.level_id || profile.levelId;
+        // URL ?level= 우선(StartPage 관리자 레벨 오버라이드 등). 없으면 프로필.
+        let level = (overrideLevel && LEVEL_FOLDER_MAP[overrideLevel])
+          ? overrideLevel
+          : (profile.level_id || profile.levelId);
         if (!level || !LEVEL_FOLDER_MAP[level]) {
           const gradeLabel = (profile.grade_label || profile.gradeLabel || "")?.trim();
           const gradeNum = gradeLabel?.replace(/[^0-9]/g, "");
@@ -142,7 +147,7 @@ export default function useDailyContent({ folder, contentType, errorLabel }) {
 
     load();
     return () => { cancelled = true; };
-  }, [navigate, folder, contentType, errorLabel]);
+  }, [navigate, folder, contentType, errorLabel, overrideLevel]);
 
   return { content, loading, error, farmLogId, dailySeedStatus };
 }

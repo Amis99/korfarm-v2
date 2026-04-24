@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet, isPaymentRequired } from "../utils/api";
 import VideoModal from "../components/VideoModal";
@@ -9,6 +9,8 @@ import "../styles/video-modal.css";
 function ProModePage() {
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const overrideLevel = searchParams.get("level");
   const [chapters, setChapters] = useState([]);
   const [userLevel, setUserLevel] = useState("");
   const [loading, setLoading] = useState(true);
@@ -18,12 +20,17 @@ function ProModePage() {
   useEffect(() => {
     if (!isLoggedIn) return;
     setLoading(true);
+    // ?level= 가 있으면 챕터 목록도 그 레벨로 조회 (관리자 레벨 오버라이드 지원)
+    const chaptersUrl = overrideLevel
+      ? `/v1/pro/chapters?levelId=${encodeURIComponent(overrideLevel)}`
+      : "/v1/pro/chapters";
     Promise.all([
       apiGet("/v1/auth/me"),
-      apiGet("/v1/pro/chapters"),
+      apiGet(chaptersUrl),
     ])
       .then(([me, chaps]) => {
-        setUserLevel(me?.levelId || "");
+        // URL ?level= 우선, 없으면 프로필 levelId
+        setUserLevel(overrideLevel || me?.levelId || "");
         setChapters(chaps || []);
       })
       .catch((e) => {
@@ -34,7 +41,7 @@ function ProModePage() {
         }
       })
       .finally(() => setLoading(false));
-  }, [isLoggedIn]);
+  }, [isLoggedIn, overrideLevel]);
 
 
   if (!isLoggedIn) {
