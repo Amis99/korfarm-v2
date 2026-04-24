@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { apiGet, apiPost } from "../utils/api";
+import { apiGet, apiPost, isPaymentRequired } from "../utils/api";
 import { LEVEL_FOLDER_MAP, GRADE_TO_LEVEL } from "../constants/levels";
 
 const BASE = import.meta.env.BASE_URL || "/";
@@ -144,6 +144,12 @@ export default function useDailyContent({ folder, contentType, errorLabel }) {
           })
             .then((r) => { if (!cancelled) setFarmLogId(r.log_id ?? r.logId); })
             .catch((e) => {
+              // 구독 필요(402) 에러는 silent — 콘텐츠 자체는 표시되며 학습 기록만 안 됨.
+              // 관리자가 ?level=, ?day=로 임의 콘텐츠 미리보기 시 구독 없이도 화면 진입 가능해야 함.
+              if (isPaymentRequired(e)) {
+                console.warn("학습 시작 기록 생략 (구독 필요):", e.message || e);
+                return;
+              }
               console.error("학습 시작 기록 실패:", e);
               if (!cancelled) setError("학습 기록을 시작할 수 없습니다. 다시 시도해주세요.");
             });
