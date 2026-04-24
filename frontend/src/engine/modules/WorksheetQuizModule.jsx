@@ -47,6 +47,30 @@ const renderTemplatePlain = (template, blanks) => {
 
 const renderHighlightedText = (text, highlight) => {
   if (!highlight) return <RichText>{text}</RichText>;
+  if (Array.isArray(highlight.ranges) && highlight.ranges.length > 0) {
+    const sorted = [...highlight.ranges].sort((a, b) => (a.start ?? 0) - (b.start ?? 0));
+    const parts = [];
+    let cursor = 0;
+    sorted.forEach((range, idx) => {
+      const start = Math.max(cursor, Math.max(0, Math.min(text.length, range.start ?? 0)));
+      const end = Math.max(start, Math.min(text.length, range.end ?? 0));
+      if (start > cursor) {
+        parts.push(<RichText key={`r-before-${idx}`}>{text.slice(cursor, start)}</RichText>);
+      }
+      if (end > start) {
+        parts.push(
+          <span key={`r-hl-${idx}`} className="worksheet-highlight">
+            <RichText>{text.slice(start, end)}</RichText>
+          </span>
+        );
+      }
+      cursor = end;
+    });
+    if (cursor < text.length) {
+      parts.push(<RichText key="r-after">{text.slice(cursor)}</RichText>);
+    }
+    return parts;
+  }
   if (highlight.range) {
     const before = text.slice(0, highlight.range.start);
     const target = text.slice(highlight.range.start, highlight.range.end);
@@ -140,6 +164,7 @@ function WorksheetQuizModule({ content }) {
   const [statusMap, setStatusMap] = useState({});
   const [itemHeights, setItemHeights] = useState([]);
   const [anchorRect, setAnchorRect] = useState(null);
+  const [modalKey, setModalKey] = useState(null);
   const measureRef = useRef(null);
   const itemRefs = useRef({});
   const advanceTimerRef = useRef(null);
@@ -174,6 +199,12 @@ function WorksheetQuizModule({ content }) {
   const filled = blanks.map((blank) => blankAnswers[blank.id]);
   const isManuscript =
     normalizedQuestion?.render === "MANUSCRIPT" || content?.contentType === "WRITING_DESCRIPTIVE";
+  const activeModalKey = normalizedQuestion ? `${normalizedQuestion.id}-${blankIndex}` : null;
+  const modalOpen = modalKey === activeModalKey;
+  const activeQuestionHasHighlight = Boolean(normalizedQuestion?.highlight || isFillBlanks);
+  const modalInstruction = activeQuestionHasHighlight
+    ? "하이라이트된 부분을 다 읽고 난 후 클릭하여 질문에 답하세요."
+    : "문제를 읽고 클릭하면 답안을 입력할 수 있습니다.";
 
   const renderDictionaryCard = (question, options = {}) => {
     const {
@@ -293,6 +324,7 @@ function WorksheetQuizModule({ content }) {
     setBlankAnswers({});
     setBlankResultMap({});
     setLastResult(null);
+    setModalKey(null);
   };
 
   // 다음 진행 예약. delay 만큼 기다린 후 nextAction 실행 + lastResult 초기화
@@ -421,6 +453,34 @@ function WorksheetQuizModule({ content }) {
     });
   }, [currentIndex, pages.length]);
 
+  const openActiveModal = () => {
+    if (!normalizedQuestion) return;
+    if (normalizedQuestion.type === "FILL_BLANKS" && !blanks[blankIndex]) return;
+    if (normalizedQuestion.type !== "FILL_BLANKS" && !(normalizedQuestion.choices || []).length) return;
+    setModalKey(activeModalKey);
+  };
+
+  const handleActiveItemClick = (event, idx) => {
+    if (idx !== currentIndex || !normalizedQuestion) return;
+    const target = event.target;
+    const highlightSelector = ".worksheet-highlight, .worksheet-blank.active";
+    const hasHighlight = Boolean(event.currentTarget.querySelector(highlightSelector));
+    if (hasHighlight) {
+      if (target.closest?.(highlightSelector)) openActiveModal();
+      return;
+    }
+    if (target.closest?.(".worksheet-item-text")) {
+      openActiveModal();
+    }
+  };
+
+  const handleActiveItemKeyDown = (event, idx) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    if (idx !== currentIndex || !normalizedQuestion) return;
+    event.preventDefault();
+    openActiveModal();
+  };
+
   useEffect(
     () => () => {
       if (advanceTimerRef.current) {
@@ -450,6 +510,7 @@ function WorksheetQuizModule({ content }) {
         </div>
       ) : (
         <>
+          <div className="learning-modal-instruction">{modalInstruction}</div>
           <div className="worksheet-sheet">
             <div className="worksheet-stem">
               <div className="worksheet-pages">
@@ -510,7 +571,12 @@ function WorksheetQuizModule({ content }) {
                                 }}
                                 className={`worksheet-item ${isActive ? "active" : ""} ${
                                   status ? `done ${status}` : ""
-                                } ${isDictionary ? "dict" : ""} ${question.passage ? "has-passage" : ""}`}
+                                } ${isDictionary ? "dict" : ""} ${question.passage ? "has-passage" : ""} ${
+                                  isActive ? "modal-trigger-ready" : ""
+                                }`}
+                                onClick={(event) => handleActiveItemClick(event, idx)}
+                                onKeyDown={(event) => handleActiveItemKeyDown(event, idx)}
+                                tabIndex={isActive ? 0 : undefined}
                               >
                                 <span className="worksheet-item-number">
                                   {idx + 1}.
@@ -578,7 +644,12 @@ function WorksheetQuizModule({ content }) {
                                 }}
                                 className={`worksheet-item ${isActive ? "active" : ""} ${
                                   status ? `done ${status}` : ""
-                                } ${isDictionary ? "dict" : ""} ${question.passage ? "has-passage" : ""}`}
+                                } ${isDictionary ? "dict" : ""} ${question.passage ? "has-passage" : ""} ${
+                                  isActive ? "modal-trigger-ready" : ""
+                                }`}
+                                onClick={(event) => handleActiveItemClick(event, idx)}
+                                onKeyDown={(event) => handleActiveItemKeyDown(event, idx)}
+                                tabIndex={isActive ? 0 : undefined}
                               >
                                 <span className="worksheet-item-number">
                                   {idx + 1}.
@@ -627,12 +698,13 @@ function WorksheetQuizModule({ content }) {
               <span>{currentIndex + 1} / {questions.length}</span>
             </div>
           </div>
-          {normalizedQuestion && normalizedQuestion.type !== "FILL_BLANKS" ? (
+          {modalOpen && normalizedQuestion && normalizedQuestion.type !== "FILL_BLANKS" ? (
             <QuestionModal
               title="문제"
               prompt={normalizedQuestion.prompt || normalizedQuestion.stem}
               choices={normalizedQuestion.choices || []}
               onSelect={handleChoice}
+              onClose={() => setModalKey(null)}
               anchorRect={anchorRect}
               mark={lastResult}
               shuffleKey={normalizedQuestion.id}
@@ -642,12 +714,13 @@ function WorksheetQuizModule({ content }) {
             />
           ) : null}
 
-          {isFillBlanks ? (
+          {modalOpen && isFillBlanks ? (
             <QuestionModal
               title="빈칸 채우기"
               prompt={`${blankIndex + 1}번째 빈칸을 선택하세요.`}
               choices={blanks[blankIndex]?.choices || []}
               onSelect={handleBlankChoice}
+              onClose={() => setModalKey(null)}
               anchorRect={anchorRect}
               mark={lastResult}
               shuffleKey={`${normalizedQuestion?.id || "blank"}-${blankIndex}`}

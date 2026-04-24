@@ -144,6 +144,7 @@ function LogicModule({ content }) {
           </div>
           <PassageMarkdown className="logic-passage-text">{currentPassage.text}</PassageMarkdown>
         </div>
+        <div className="learning-modal-instruction">문제를 읽고 클릭하면 답안을 입력할 수 있습니다.</div>
         <div className="logic-question-area cum-stack" ref={scrollRef}>
           {visibleQuestions.map((q, idx) => (
             <CumulativeQuestionCard
@@ -173,6 +174,7 @@ function LogicModule({ content }) {
             문제 {legacyIndex + 1} / {legacyQuestions.length}
           </span>
         </div>
+        <div className="learning-modal-instruction">문제를 읽고 클릭하면 답안을 입력할 수 있습니다.</div>
         <div className="cum-stack" ref={legacyScrollRef}>
           {visibleQuestions.map((q, idx) => (
             <CumulativeQuestionCard

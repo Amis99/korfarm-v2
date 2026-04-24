@@ -60,7 +60,7 @@ const resolveAnswerRanges = (question, passage) => {
 /* ──────────── FILL_BLANKS 카드 (시험지 스타일) ──────────── */
 
 /** FILL_BLANKS: 발문 + 지문 + template(빈칸) — 활성 시 모달에서 선택, 완료 후 첨삭 */
-function FillBlanksCard({ question, idx, total, completion, isActive, blankIndex, blankAnswers }) {
+function FillBlanksCard({ question, idx, total, completion, isActive, blankIndex, onActivate }) {
   const blanks = question.blanks || [];
   const template = question.template || "";
   const parts = template.split("____");
@@ -94,11 +94,28 @@ function FillBlanksCard({ question, idx, total, completion, isActive, blankIndex
     );
   };
 
+  const handleCardClick = (event) => {
+    if (!isActive || completion) return;
+    if (event.target.closest?.(".worksheet-blank.active")) {
+      onActivate?.();
+    }
+  };
+
+  const handleCardKeyDown = (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    if (!isActive || completion) return;
+    event.preventDefault();
+    onActivate?.();
+  };
+
   return (
     <div
       className={`cum-card ${completion ? "completed" : ""} ${isActive ? "active" : ""} ${
         completion?.isCorrect ? "correct" : completion ? "wrong" : ""
-      }`}
+      } ${isActive && !completion ? "modal-trigger-ready" : ""}`}
+      onClick={handleCardClick}
+      onKeyDown={handleCardKeyDown}
+      tabIndex={isActive && !completion ? 0 : undefined}
     >
       <div className="cum-card-header">
         <span className="cum-card-num">
@@ -244,6 +261,7 @@ function DailyQuizModule({ content }) {
   const [blankIndex, setBlankIndex] = useState(0);
   const [blankAnswers, setBlankAnswers] = useState({});
   const [blankResultMap, setBlankResultMap] = useState({});
+  const [fillModalKey, setFillModalKey] = useState(null);
 
   // TEXT_SELECT 진행 상태
   const [confirmedRangeKeys, setConfirmedRangeKeys] = useState([]);
@@ -258,6 +276,12 @@ function DailyQuizModule({ content }) {
 
   const currentQuestion = questions[currentIndex];
   const questionType = currentQuestion?.type;
+  const activeFillModalKey = currentQuestion ? `${currentQuestion.id}-${blankIndex}` : null;
+  const fillModalOpen = fillModalKey === activeFillModalKey;
+  const modalInstruction =
+    questionType === "FILL_BLANKS" || questionType === "TEXT_SELECT"
+      ? "하이라이트된 부분을 다 읽고 난 후 클릭하여 질문에 답하세요."
+      : "문제를 읽고 클릭하면 답안을 입력할 수 있습니다.";
 
   // FILL_BLANKS 파생
   const blanks = currentQuestion?.blanks || [];
@@ -307,7 +331,7 @@ function DailyQuizModule({ content }) {
     // 새 활성 카드 상단을 화면 상단으로 자동 스크롤
     try {
       activeEl.scrollIntoView({ behavior: "smooth", block: "start" });
-    } catch (e) {
+    } catch {
       activeEl.scrollIntoView();
     }
     const measure = () => {
@@ -333,6 +357,7 @@ function DailyQuizModule({ content }) {
     setBlankIndex(0);
     setBlankAnswers({});
     setBlankResultMap({});
+    setFillModalKey(null);
     setConfirmedRangeKeys([]);
     setRevealRanges([]);
     setLastResult(null);
@@ -497,6 +522,7 @@ function DailyQuizModule({ content }) {
 
   return (
     <div className="daily-quiz-module">
+      <div className="learning-modal-instruction">{modalInstruction}</div>
       <div className="cum-stack" ref={scrollRef}>
         {visibleQuestions.map((q, idx) => {
           const completion = completedMap[q.id];
@@ -511,7 +537,7 @@ function DailyQuizModule({ content }) {
                 completion={completion}
                 isActive={isActive}
                 blankIndex={blankIndex}
-                blankAnswers={blankAnswers}
+                onActivate={() => setFillModalKey(activeFillModalKey)}
               />
             );
           }
@@ -573,7 +599,7 @@ function DailyQuizModule({ content }) {
               </div>
             );
           }
-          // MULTI_CHOICE (default) — CumulativeQuestionCard 사용 (자동 모달)
+          // MULTI_CHOICE (default) — CumulativeQuestionCard 사용 (클릭 시 모달)
           return (
             <CumulativeQuestionCard
               key={q.id}
@@ -590,12 +616,13 @@ function DailyQuizModule({ content }) {
         })}
       </div>
       {/* FILL_BLANKS 활성 시 빈칸 모달 — 활성 카드 옆/아래에 떠있는 포스트잇 */}
-      {questionType === "FILL_BLANKS" && currentQuestion && !completedMap[currentQuestion.id] && (
+      {fillModalOpen && questionType === "FILL_BLANKS" && currentQuestion && !completedMap[currentQuestion.id] && (
         <QuestionModal
           title="빈칸 채우기"
           prompt={`${blankIndex + 1}번째 빈칸을 선택하세요.`}
           choices={blanks[blankIndex]?.choices || []}
           onSelect={handleBlankChoice}
+          onClose={() => setFillModalKey(null)}
           mark={lastResult}
           shuffleKey={`${currentQuestion.id}-${blankIndex}`}
           correctChoiceId={blanks[blankIndex]?.answerId}

@@ -9,7 +9,7 @@ import { FEEDBACK } from "./feedbackTimings";
  *
  * 동작:
  *   - 활성(isActive && !completion) → 시험지에 [번호+발문 → 지문 → 보기]만 노출,
- *     자동으로 QuestionModal을 띄워 거기서 선택지 풀이
+ *     하이라이트/문제 영역 클릭 시 QuestionModal에서 선택지 풀이
  *   - 완료(completion 있음) → 시험지에 [선택지 + 빨간 첨삭 ○/✗ + 해설(Gaegu)]까지 누적
  *
  * Props:
@@ -17,14 +17,14 @@ import { FEEDBACK } from "./feedbackTimings";
  *   idx: 0부터 시작하는 인덱스
  *   total: 전체 문제 수
  *   completion: { selectedId, isCorrect } | undefined — 푼 문제는 정답·해설 표시
- *   isActive: 현재 활성 문제이면 모달 자동 노출
+ *   isActive: 현재 활성 문제이면 클릭 가능한 문제로 표시
  *   onSelect(choiceId): 선택지 클릭 콜백 (모달 또는 카드 내부)
  *   variant: "default" | "wide"
  *   modalTitle: 모달 제목 (기본 "문제")
  *   lastResult: "correct" | "wrong" | null — 모달 mark 표시
  *   feedbackDuration: 모달 피드백 지속 시간 (ms)
  *   anchorRect: 모달 위치 앵커 (옵션)
- *   showModal: 활성 시 모달 자동 노출 여부 (기본 true). false면 카드 안에 선택지 표시(레거시)
+ *   showModal: 클릭 시 모달 노출 여부 (기본 true). false면 카드 안에 선택지 표시(레거시)
  */
 export default function CumulativeQuestionCard({
   question,
@@ -40,6 +40,7 @@ export default function CumulativeQuestionCard({
   showModal = true,
 }) {
   const cardRef = useRef(null);
+  const [modalKey, setModalKey] = useState(null);
   // 카드의 .engine-body 내부 좌표 — 활성 시 한 번 측정해서 모달 첫 위치 anchor로 사용.
   // 사용자가 드래그하면 그 위치 유지. 카드가 스크롤되어도 모달은 그 자리.
   const [cardAnchorRect, setCardAnchorRect] = useState(null);
@@ -50,7 +51,7 @@ export default function CumulativeQuestionCard({
     // 활성 카드 상단을 화면 상단으로 자동 스크롤 (이후 수동 스크롤 가능)
     try {
       card.scrollIntoView({ behavior: "smooth", block: "start" });
-    } catch (e) {
+    } catch {
       // 일부 구형 브라우저 fallback
       card.scrollIntoView();
     }
@@ -72,12 +73,11 @@ export default function CumulativeQuestionCard({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive, question?.id]);
 
-  if (!question) return null;
-  const choices = question.choices || [];
-  const answerId = question.answerId;
-  const stem = question.stem || "";
-  const passage = question.passage;
-  const prompt = question.prompt;
+  const choices = question?.choices || [];
+  const answerId = question?.answerId;
+  const stem = question?.stem || "";
+  const passage = question?.passage;
+  const prompt = question?.prompt;
 
   // 셔플된 선택지 — question.id 기준 useMemo로 한 번만 셔플하여 모달과 카드 인쇄 영역에 동일 순서 공유
   const shuffledChoices = useMemo(() => {
@@ -114,6 +114,41 @@ export default function CumulativeQuestionCard({
     if (lastResult === "wrong") return FEEDBACK.A_WRONG_ADVANCE_MS;
     return FEEDBACK.A_CORRECT_ADVANCE_MS;
   }, [feedbackDuration, lastResult]);
+  const currentModalKey = question?.id ?? `question-${idx}`;
+  const modalOpen = modalKey === currentModalKey;
+  const canOpenModal = showModal && isActive && !completion && choices.length > 0;
+
+  const openModal = () => {
+    if (!canOpenModal) return;
+    setModalKey(currentModalKey);
+  };
+
+  const handleCardClick = (event) => {
+    if (!canOpenModal) return;
+    const target = event.target;
+    const highlightSelector = ".worksheet-highlight, .morpheme-chip.active, .morpheme-sentence-highlight";
+    const hasHighlight = Boolean(cardRef.current?.querySelector(highlightSelector));
+    if (hasHighlight) {
+      if (target.closest?.(highlightSelector)) openModal();
+      return;
+    }
+    if (
+      target.closest?.(
+        ".cum-card-stem, .cum-card-passage, .cum-card-prompt, .cum-card-boki, .cum-card-choices, .cum-choice"
+      )
+    ) {
+      openModal();
+    }
+  };
+
+  const handleCardKeyDown = (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    if (!canOpenModal) return;
+    event.preventDefault();
+    openModal();
+  };
+
+  if (!question) return null;
 
   return (
     <div
@@ -122,7 +157,10 @@ export default function CumulativeQuestionCard({
         completion ? "completed" : ""
       } ${isActive ? "active" : ""} ${
         completion?.isCorrect === true ? "correct" : completion?.isCorrect === false ? "wrong" : ""
-      }`}
+      } ${canOpenModal ? "modal-trigger-ready" : ""}`}
+      onClick={handleCardClick}
+      onKeyDown={handleCardKeyDown}
+      tabIndex={canOpenModal ? 0 : undefined}
     >
       <div className="cum-card-header">
         <span className="cum-card-num">
@@ -213,13 +251,14 @@ export default function CumulativeQuestionCard({
       )}
 
       {/* 활성 시 떠있는 포스트잇 모달 — 셔플은 카드와 동일 (preShuffled), 첫 위치 카드 옆/아래 */}
-      {isActive && !completion && showModal && choices.length > 0 && (
+      {isActive && !completion && showModal && modalOpen && choices.length > 0 && (
         <QuestionModal
           title={modalTitle}
           prompt={stem}
           choices={shuffledChoices}
           preShuffled
           onSelect={onSelect}
+          onClose={() => setModalKey(null)}
           mark={lastResult}
           shuffleKey={question.id}
           correctChoiceId={answerId}

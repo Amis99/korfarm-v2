@@ -174,6 +174,7 @@ function BackgroundModule({ content }) {
           <span className="bg-phase-label">문제 풀기</span>
         </div>
         {/* 지문 요약 — 접힌 상태로 위에 둠 */}
+        <div className="learning-modal-instruction">문제를 읽고 클릭하면 답안을 입력할 수 있습니다.</div>
         <details className="bg-passage-collapse">
           <summary>지문 다시 보기</summary>
           <div className="bg-passage-collapse-body">
@@ -209,6 +210,7 @@ function BackgroundModule({ content }) {
             문제 {legacyIndex + 1} / {legacyQuestions.length}
           </span>
         </div>
+        <div className="learning-modal-instruction">문제를 읽고 클릭하면 답안을 입력할 수 있습니다.</div>
         <div className="cum-stack" ref={legacyScrollRef}>
           {visibleQuestions.map((q, idx) => (
             <CumulativeQuestionCard

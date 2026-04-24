@@ -168,6 +168,7 @@ function ReadingTrainingModule({ content }) {
   const [removedChoices, setRemovedChoices] = useState({});
   const [intensiveResult, setIntensiveResult] = useState(null);
   const [modalMark, setModalMark] = useState(null);
+  const [intensiveModalKey, setIntensiveModalKey] = useState(null);
 
   const [topSlots, setTopSlots] = useState([]);
   const [poolOrder, setPoolOrder] = useState([]);
@@ -210,6 +211,12 @@ function ReadingTrainingModule({ content }) {
   }, [step, stepQuestion, removedChoices]);
 
   const anchorRect = useHighlightAnchor(moduleRef, ".worksheet-highlight", [stepIndex, stage]);
+  const activeIntensiveModalKey =
+    stage === "INTENSIVE" && stepQuestion ? `${stepQuestion.id || step.stepId || stepIndex}` : null;
+  const intensiveModalOpen = intensiveModalKey === activeIntensiveModalKey;
+  const intensiveInstruction = stepHighlightRanges.length
+    ? "하이라이트된 부분을 다 읽고 난 후 클릭하여 질문에 답하세요."
+    : "문제를 읽고 클릭하면 답안을 입력할 수 있습니다.";
 
   const recallCards = recall.cards || [];
   const recallCorrectOrder = recall.correctOrder?.length
@@ -261,6 +268,7 @@ function ReadingTrainingModule({ content }) {
     setRemovedChoices({});
     setIntensiveResult(null);
     setModalMark(null);
+    setIntensiveModalKey(null);
     setConfirmIndex(0);
     setConfirmResult(null);
     setRevealRanges([]);
@@ -437,6 +445,20 @@ function ReadingTrainingModule({ content }) {
       }
       advanceStage("INTENSIVE");
     }, finalDelay);
+  };
+
+  const handleIntensivePassageClick = (event) => {
+    if (stage !== "INTENSIVE" || !stepQuestion) return;
+    const target = event.target;
+    if (stepHighlightRanges.length > 0) {
+      if (target.closest?.(".worksheet-highlight")) {
+        setIntensiveModalKey(activeIntensiveModalKey);
+      }
+      return;
+    }
+    if (target.closest?.(".reading-passage")) {
+      setIntensiveModalKey(activeIntensiveModalKey);
+    }
   };
 
   const handleDragStart = (id, from, slotIndex = null) => (event) => {
@@ -699,7 +721,8 @@ function ReadingTrainingModule({ content }) {
     <div className="reading-training-module" ref={moduleRef}>
       {stage === "INTENSIVE" ? (
         <>
-          <div className="reading-passage">
+          <div className="learning-modal-instruction">{intensiveInstruction}</div>
+          <div className="reading-passage modal-trigger-ready" onClick={handleIntensivePassageClick}>
             {(passage.paragraphs || []).map((paragraph) => {
               const ranges = stepHighlightRanges.filter(
                 (range) => range.paragraphId === paragraph.id
@@ -718,12 +741,13 @@ function ReadingTrainingModule({ content }) {
               {stepIndex + 1} / {steps.length || 0}
             </span>
           </div>
-          {stepQuestion ? (
+          {stepQuestion && intensiveModalOpen ? (
             <QuestionModal
               title="Question"
               prompt={stepQuestion.prompt}
               choices={stepChoices}
               onSelect={handleIntensiveAnswer}
+              onClose={() => setIntensiveModalKey(null)}
               anchorRect={anchorRect}
               mark={modalMark}
               shuffleKey={step.stepId || stepIndex}
