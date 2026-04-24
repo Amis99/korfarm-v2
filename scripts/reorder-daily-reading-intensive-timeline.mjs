@@ -168,9 +168,28 @@ function normalizeHighlightRanges(step) {
   return [];
 }
 
-function isCenterQuestion(step) {
+// 단락 전체를 강조하는 '문단 중심 내용' 질문인지 판정.
+// (1) highlight 구조가 단락 전체를 가리키는 경우 (mode=PARAGRAPH 또는 paragraphIds 기반)
+// (2) prompt가 [문단/단락] + [중심/주제/핵심] 조합인 경우 — 변형 표현 모두 포함
+function isCenterQuestion(step, paragraphsLen = null) {
+  const h = step?.highlight || {};
+  // 명시적 단락 모드
+  if (h.mode === 'PARAGRAPH') return true;
+  if (Array.isArray(h.paragraphIds) && h.paragraphIds.length) return true;
+  // ranges가 단일 단락의 0부터 끝까지를 덮으면 단락 전체로 간주
+  if (Array.isArray(h.ranges) && h.ranges.length === 1) {
+    const r = h.ranges[0];
+    if (r && Number(r.start) === 0 && (paragraphsLen == null || Number(r.end) >= 1e6)) {
+      // start=0, end가 매우 크면 단락 전체. 또는 paragraphsLen 정보 없으면 시그널만으로는 부족하므로 prompt도 체크.
+    }
+  }
+  // prompt 기반: 단락 단위어 + 중심/주제/핵심 표현
   const prompt = String(step?.question?.prompt || '');
-  return prompt.includes(PARAGRAPH) && prompt.includes(CENTER) && prompt.includes(CONTENT);
+  const UNITS = [PARAGRAPH, '단락']; // 문단 / 단락
+  const TOPICS = [CENTER, '주제', '핵심']; // 중심 / 주제 / 핵심
+  const hasUnit = UNITS.some((u) => prompt.includes(u));
+  const hasTopic = TOPICS.some((t) => prompt.includes(t));
+  return hasUnit && hasTopic;
 }
 
 function stepSortInfo(step, originalIndex, pOrder) {
