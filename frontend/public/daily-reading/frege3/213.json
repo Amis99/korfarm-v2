@@ -1098,7 +1098,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "글에서 주목한 차세대 동력원은 무엇인가요?",
+          "prompt": "글에서 가장 강력한 차세대 동력원으로 주목한 것을 찾으시오.",
           "answerText": "수소 연료 전지(Hydrogen Fuel Cell)",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1116,38 +1116,13 @@
         },
         {
           "id": "q2",
-          "prompt": "수소와 산소가 반응한 뒤 남는 부산물은 무엇인가요?",
-          "answerText": "물",
+          "prompt": "수소 연료 전지가 전기를 만드는 방식을 설명한 부분을 찾으시오.",
+          "answerText": "수소와 산소가 만나는 화학 반응을 통해 전기를 '직접 만들어 내는' 작은 발전소",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 276,
-              "end": 277
-            },
-            {
-              "paragraphId": "p2",
-              "start": 24,
-              "end": 25
-            },
-            {
-              "paragraphId": "p2",
-              "start": 51,
-              "end": 52
-            },
-            {
-              "paragraphId": "p2",
-              "start": 125,
-              "end": 126
-            },
-            {
-              "paragraphId": "p2",
-              "start": 132,
-              "end": 133
-            },
-            {
-              "paragraphId": "p2",
-              "start": 235,
+              "start": 192,
               "end": 236
             }
           ],
@@ -1159,14 +1134,28 @@
         },
         {
           "id": "q3",
-          "prompt": "수소 연료 전지가 특히 강점을 보이는 운송 수단의 예시는 무엇인가요?",
-          "answerText": "대형 트럭",
-          "answerMatchMode": "ANY",
+          "prompt": "수소 연료 전지가 강점을 보이는 중장비 모빌리티를 모두 찾으시오.",
+          "answerTexts": [
+            "대형 트럭",
+            "선박",
+            "기차"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 35,
               "end": 40
+            },
+            {
+              "paragraphId": "p3",
+              "start": 42,
+              "end": 44
+            },
+            {
+              "paragraphId": "p3",
+              "start": 50,
+              "end": 52
             }
           ],
           "scoring": {
@@ -1177,9 +1166,12 @@
         },
         {
           "id": "q4",
-          "prompt": "비용을 높이는 핵심 촉매 금속은 무엇인가요?",
-          "answerText": "백금",
-          "answerMatchMode": "ANY",
+          "prompt": "수소 연료 전지가 넘어야 할 경제적·기술적 문제를 모두 찾으시오.",
+          "answerTexts": [
+            "백금",
+            "수소 충전소 인프라"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
@@ -1190,6 +1182,11 @@
               "paragraphId": "p5",
               "start": 77,
               "end": 79
+            },
+            {
+              "paragraphId": "p4",
+              "start": 213,
+              "end": 223
             }
           ],
           "scoring": {
@@ -1200,7 +1197,7 @@
         },
         {
           "id": "q5",
-          "prompt": "미래 생태계 구축의 핵심으로 제시한 수소는 무엇인가요?",
+          "prompt": "미래 생태계 구축의 핵심으로 제시한 수소를 찾으시오.",
           "answerText": "그린 수소",
           "answerMatchMode": "ANY",
           "answerRanges": [

@@ -474,30 +474,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "눈부신 무엇을 막았나요?",
-          "answerText": "햇빛",
-          "answerMatchMode": "EXACT",
+          "prompt": "무더운 여름날 밖으로 나갈 때 햇빛을 막아주고 머리와 얼굴을 보호하기 위해 쓰는 것은 무엇인지 찾아 써 보세요",
+          "answerText": "모자",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 18,
-              "end": 20
-            },
-            {
-              "paragraphId": "p2",
-              "start": 16,
-              "end": 18
-            },
-            {
-              "paragraphId": "p2",
-              "start": 47,
-              "end": 49
-            },
-            {
-              "paragraphId": "p2",
-              "start": 118,
-              "end": 120
-            }
+            {"paragraphId": "p1", "start": 27, "end": 29},
+            {"paragraphId": "p1", "start": 43, "end": 45},
+            {"paragraphId": "p1", "start": 89, "end": 91},
+            {"paragraphId": "p1", "start": 134, "end": 136},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 43, "end": 45},
+            {"paragraphId": "p2", "start": 60, "end": 62},
+            {"paragraphId": "p2", "start": 97, "end": 99},
+            {"paragraphId": "p2", "start": 146, "end": 148}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -508,55 +497,12 @@
         },
         {
           "id": "q2",
-          "prompt": "머리에 쓰는 무엇인가요?",
-          "answerText": "모자",
-          "answerMatchMode": "EXACT",
+          "prompt": "햇빛을 반사하는 모자 색깔과 열을 더 많이 흡수하는 모자 색깔은 각각 무엇인지 두 단어를 모두 찾아 써 보세요",
+          "answerText": "하얀색 검은색",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 27,
-              "end": 29
-            },
-            {
-              "paragraphId": "p1",
-              "start": 43,
-              "end": 45
-            },
-            {
-              "paragraphId": "p1",
-              "start": 89,
-              "end": 91
-            },
-            {
-              "paragraphId": "p1",
-              "start": 134,
-              "end": 136
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 43,
-              "end": 45
-            },
-            {
-              "paragraphId": "p2",
-              "start": 60,
-              "end": 62
-            },
-            {
-              "paragraphId": "p2",
-              "start": 97,
-              "end": 99
-            },
-            {
-              "paragraphId": "p2",
-              "start": 146,
-              "end": 148
-            }
+            {"paragraphId": "p2", "start": 39, "end": 42},
+            {"paragraphId": "p2", "start": 56, "end": 59}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -567,15 +513,26 @@
         },
         {
           "id": "q3",
-          "prompt": "무더운 무엇날에인가요?",
-          "answerText": "여름",
-          "answerMatchMode": "EXACT",
+          "prompt": "모자가 뜨거운 햇볕으로부터 우리의 머리와 함께 안전하게 보호해 준다고 한 신체 부위는 무엇인지 찾아 써 보세요",
+          "answerText": "얼굴",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 4,
-              "end": 6
-            }
+            {"paragraphId": "p1", "start": 65, "end": 67}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "햇빛 아래에서도 외출 전 항상 모자를 챙기는 습관을 가져야 하는 까닭은 무엇을 지키기 위해서라고 했는지 찾아 써 보세요",
+          "answerText": "건강",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 127, "end": 129}
           ],
           "scoring": {
             "correctDeltaSec": 10,

@@ -913,7 +913,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "나라의 문을 열고 외국과 교류를 시작한 것을 무엇이라고 하나요?",
+          "prompt": "나라의 문을 열고 외국과 교류를 시작한 것을 가리키는 단어를 지문에서 찾으시오.",
           "answerText": "개항",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -946,14 +946,22 @@
         },
         {
           "id": "q2",
-          "prompt": "개항 이후 밤거리를 비추었다고 한 시설 가운데 하나는 무엇인가요?",
-          "answerText": "가스등",
-          "answerMatchMode": "ANY",
+          "prompt": "서양에서 들어와 사람들이 입기 시작한 두 가지 옷차림을 모두 찾으시오.",
+          "answerTexts": [
+            "양복",
+            "모자"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 81,
-              "end": 84
+              "start": 38,
+              "end": 40
+            },
+            {
+              "paragraphId": "p2",
+              "start": 42,
+              "end": 44
             }
           ],
           "scoring": {
@@ -964,14 +972,22 @@
         },
         {
           "id": "q3",
-          "prompt": "사람들을 빠르게 실어 날랐다고 한 기차는 무엇인가요?",
-          "answerText": "전차",
-          "answerMatchMode": "ANY",
+          "prompt": "밤이 되면 어두웠던 거리에 설치되어 밤거리를 비춘 두 시설을 모두 찾으시오.",
+          "answerTexts": [
+            "가스등",
+            "전등"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 35,
-              "end": 37
+              "paragraphId": "p2",
+              "start": 81,
+              "end": 84
+            },
+            {
+              "paragraphId": "p2",
+              "start": 86,
+              "end": 88
             }
           ],
           "scoring": {
@@ -982,14 +998,14 @@
         },
         {
           "id": "q4",
-          "prompt": "멀리 떨어진 사람과 소식을 주고받게 해 준 기술 가운데 하나는 무엇인가요?",
-          "answerText": "전신",
+          "prompt": "이런 기술 덕분에 사람들은 예전보다 어떻게 생활할 수 있었는지 나타내는 표현을 찾으시오.",
+          "answerText": "편하고 빠르게",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 91,
-              "end": 93
+              "start": 127,
+              "end": 134
             }
           ],
           "scoring": {
@@ -1000,14 +1016,14 @@
         },
         {
           "id": "q5",
-          "prompt": "개항이 조선이 어떤 모습으로 변하는 출발점이 되었다고 했나요?",
-          "answerText": "근대적인 모습",
+          "prompt": "강한 무기를 가진 외국들이 조선에 한 부정적인 일을 나타내는 표현을 찾으시오.",
+          "answerText": "조선의 소중한 자원을 빼앗아 가기도 했습니다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 133,
-              "end": 140
+              "start": 52,
+              "end": 76
             }
           ],
           "scoring": {

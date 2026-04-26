@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "땅에서 솟아 나오는 맑은 물을 무엇이라 하나요?",
+          "prompt": "지문에서 사람들이 마신 물을 가리키는 표현은 무엇인가요?",
           "answerText": "샘물을",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -581,14 +581,14 @@
         },
         {
           "id": "q2",
-          "prompt": "분수에 넘치게 탐내는 마음을 뜻하는 말은 무엇인가요?",
-          "answerText": "욕심은",
-          "answerMatchMode": "EXACT",
+          "prompt": "할머니가 할아버지를 알아보고 기뻐하게 만든 것은 무엇인가요?",
+          "answerText": "다정한 목소리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 3,
-              "end": 6
+              "paragraphId": "p1",
+              "start": 70,
+              "end": 77
             }
           ],
           "scoring": {
@@ -600,14 +600,33 @@
         },
         {
           "id": "q3",
-          "prompt": "이야기를 통해 얻는 가르침이나 깨달음을 뜻하는 말은?",
-          "answerText": "교훈을",
-          "answerMatchMode": "EXACT",
+          "prompt": "욕심쟁이 할아버지가 샘물을 마신 방식을 나타내는 표현은 무엇인가요?",
+          "answerText": "쉬지 않고 계속",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 29,
+              "end": 37
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "우리가 살겠다고 다짐한 삶은 어떤 삶인가요?",
+          "answerText": "작은 것에도 만족하며 이웃과 나누는 삶",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 25,
-              "end": 28
+              "start": 92,
+              "end": 113
             }
           ],
           "scoring": {

@@ -562,107 +562,42 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리 주변에서 볼 수 있는 단단하고 반짝반짝 빛나는 재료로, 튼튼한 물건을 만들 때 꼭 필요한 것은 무엇인가요?",
-          "answerText": "금속",
-          "answerMatchMode": "EXACT",
+          "prompt": "금속이 어떤 재료인지 설명한 부분을 지문에서 찾으시오.",
+          "answerText": "흙이나 돌처럼 자연에서 얻을 수 있는 특별한 재료예요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 48,
-              "end": 50
-            },
-            {
-              "paragraphId": "p1",
-              "start": 63,
-              "end": 65
-            },
-            {
-              "paragraphId": "p1",
-              "start": 98,
-              "end": 100
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 66,
-              "end": 68
-            },
-            {
-              "paragraphId": "p2",
-              "start": 80,
-              "end": 82
-            },
-            {
-              "paragraphId": "p3",
-              "start": 45,
-              "end": 47
-            },
-            {
-              "paragraphId": "p3",
-              "start": 56,
-              "end": 58
-            },
-            {
-              "paragraphId": "p3",
-              "start": 95,
-              "end": 97
+              "start": 67,
+              "end": 96
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "음식을 요리할 때 열을 잘 전달하기 위해 금속으로 만드는 이 주방 도구는 무엇인가요?",
-          "answerText": "냄비",
-          "answerMatchMode": "EXACT",
+          "prompt": "금속이 아주 잘 전달한다고 한 것을 모두 찾으시오.",
+          "answerText": "뜨거운 열 / 전기",
+          "answerTexts": [
+            "뜨거운 열",
+            "전기"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 52,
-              "end": 54
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "밥을 먹을 때 손에 쥐고 사용하는 도구로, 금속으로 만들어진 이것들은 무엇인가요?",
-          "answerText": "숟가락과 젓가락",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
+              "start": 4,
+              "end": 9
+            },
             {
-              "paragraphId": "p3",
-              "start": 35,
-              "end": 43
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "금속은 텔레비전이나 냉장고가 움직이게 해주는 눈에 보이지 않는 이것을 아주 잘 전달해요. 무엇인가요?",
-          "answerText": "전기",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
+              "paragraphId": "p2",
+              "start": 87,
+              "end": 92
+            },
             {
               "paragraphId": "p2",
               "start": 12,
@@ -670,9 +605,65 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "금속으로 만드는 물건의 예를 모두 찾으시오.",
+          "answerText": "냄비 / 전깃줄 / 자동차와 자전거 / 숟가락과 젓가락",
+          "answerTexts": [
+            "냄비",
+            "전깃줄",
+            "자동차와 자전거",
+            "숟가락과 젓가락"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 54
+            },
+            {
+              "paragraphId": "p2",
+              "start": 56,
+              "end": 59
+            },
+            {
+              "paragraphId": "p3",
+              "start": 10,
+              "end": 18
+            },
+            {
+              "paragraphId": "p3",
+              "start": 35,
+              "end": 43
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "다 쓴 금속 물건을 쓰레기통에 함부로 버리면 안 되는 이유를 지문에서 찾으시오.",
+          "answerText": "다시 녹여서 새로운 물건으로 만들 수 있으니",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 102,
+              "end": 126
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         }

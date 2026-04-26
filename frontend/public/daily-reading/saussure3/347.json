@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "강아지 ( )는 촉촉해야 해요.",
-          "answerText": "코",
-          "answerMatchMode": "EXACT",
+          "prompt": "강아지의 코가 건강하려면 어떤 상태로 젖어 있어야 하는지 지문에서 찾으시오.",
+          "answerText": "촉촉하게",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 30,
-              "end": 31
+              "start": 36,
+              "end": 40
             }
           ],
           "scoring": {
@@ -869,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "오른쪽 꼬리는 ( )운 뜻임.",
-          "answerText": "반갑",
-          "answerMatchMode": "EXACT",
+          "prompt": "귀의 모양에 따라 바뀌는 것을 지문에서 찾으시오.",
+          "answerText": "소리를 듣는 방향",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 42,
-              "end": 44
+              "paragraphId": "p1",
+              "start": 63,
+              "end": 72
             }
           ],
           "scoring": {
@@ -888,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "동물과 ( )하는 보람을 느껴요.",
-          "answerText": "소통",
-          "answerMatchMode": "EXACT",
+          "prompt": "꼬리를 다리 사이에 넣으면 어떤 중인지 지문에서 찾으시오.",
+          "answerText": "무서워하는 중",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 73
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "관찰한 내용을 무엇과 함께 기록했는지 지문에서 찾으시오.",
+          "answerText": "그림과 함께",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 105,
-              "end": 107
+              "start": 8,
+              "end": 14
             }
           ],
           "scoring": {

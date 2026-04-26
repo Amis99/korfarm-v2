@@ -561,97 +561,82 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "배우들이 무대 위에서 노래와 춤이 어우러진 멋진 공연을 하며 재미있는 이야기를 들려주는 것은 무엇인가요?",
-          "answerText": "뮤지컬",
-          "answerMatchMode": "EXACT",
+          "prompt": "뮤지컬이 어떤 공연인지 설명한 부분을 지문에서 찾으시오.",
+          "answerText": "노래와 춤이 어우러진 멋진 공연",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p1",
-              "start": 93,
-              "end": 96
-            },
-            {
-              "paragraphId": "p2",
-              "start": 7,
-              "end": 10
-            },
-            {
-              "paragraphId": "p3",
-              "start": 9,
-              "end": 12
+              "start": 5,
+              "end": 22
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "'라이온 킹'에서 아프리카 초원을 배경으로 훌륭한 왕으로 자라나는 아기 사자의 이름은 무엇인가요?",
-          "answerText": "심바",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에 나온 유명한 뮤지컬 제목을 따옴표까지 포함하여 모두 찾으시오.",
+          "answerText": "'라이온 킹', '마틸다'",
+          "answerTexts": [
+            "'라이온 킹'",
+            "'마틸다'"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 49,
-              "end": 51
+              "start": 17,
+              "end": 24
+            },
+            {
+              "paragraphId": "p3",
+              "start": 15,
+              "end": 20
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "책 읽기를 좋아하고 나쁜 어른들에게 당당하게 맞서는 똑똑한 소녀 주인공의 이름은 무엇인가요?",
-          "answerText": "마틸다",
-          "answerMatchMode": "EXACT",
+          "prompt": "'라이온 킹'에서 배우들이 동물 가면을 쓰고 나와서 어떻게 보여 주는지 지문에서 찾으시오.",
+          "answerText": "진짜 동물들이 움직이는 것처럼 생생하게 보여 준답니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 16,
-              "end": 19
-            },
-            {
-              "paragraphId": "p3",
-              "start": 48,
-              "end": 51
+              "paragraphId": "p2",
+              "start": 95,
+              "end": 124
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "라이온 킹에서 배우들이 진짜 동물들이 움직이는 것처럼 생생하게 보여주기 위해 얼굴에 쓰는 것은 무엇인가요?",
-          "answerText": "가면",
-          "answerMatchMode": "EXACT",
+          "prompt": "'마틸다'가 어떤 이야기인지 설명한 부분을 지문에서 찾으시오.",
+          "answerText": "책 읽기를 좋아하는 아주 똑똑한 소녀 마틸다가 나쁜 어른들에게 당당하게 맞서는 이야기예요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 84,
-              "end": 86
+              "paragraphId": "p3",
+              "start": 27,
+              "end": 76
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         }

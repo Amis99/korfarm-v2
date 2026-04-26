@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단의 내용으로 가장 적절한 것은?",
+          "prompt": "경제 전체에서 나타나는 변화를 설명하는 학문을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 204
+              "end": 5
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "거시경제학은 국민 소득, 이자율, 물가처럼 경제 전체에서 나타나는 변화를 설명하기 위해 여러 분석 모형을 사용한다. 그중 IS-LM 모형과 IS-MP 모형은 총수요와 통화정책이 경기 변동에 어떤 방식으로 작용하는지를 설명하는 대표적 틀이다. 두 모형은 모두 이자율과 국민 소득의 관계를 다루지만, 중앙은행이 금리를 어떻게 결정한다고 보는지에서 중요한 차이를 보인다."
+          "answerText": "거시경제학"
         },
         {
           "id": "q2",
-          "prompt": "2문단의 내용으로 가장 적절한 것은?",
+          "prompt": "두 모형이 모두 다루는 관계를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 216
+              "paragraphId": "p1",
+              "start": 144,
+              "end": 158
             }
           ],
           "scoring": {
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "IS-LM 모형에서 IS 곡선은 상품 시장의 균형을 나타내고, LM 곡선은 화폐 시장의 균형을 나타낸다. 여기서 핵심 가정은 중앙은행이 공급하는 통화량이 외생적으로 주어진다는 점이다. 국민 소득이 늘어나면 거래 수요가 커져 화폐 수요가 증가하고, 통화량이 고정되어 있다면 이자율이 상승하면서 다시 균형이 맞춰진다. 즉 이 모형에서는 통화량이 먼저 주어지고, 이자율은 그 결과로 조정된다."
+          "answerText": "이자율과 국민 소득의 관계"
         },
         {
           "id": "q3",
-          "prompt": "3문단의 내용으로 가장 적절한 것은?",
+          "prompt": "IS 곡선과 LM 곡선이 각각 나타내는 균형을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 212
+              "paragraphId": "p2",
+              "start": 18,
+              "end": 27
+            },
+            {
+              "paragraphId": "p2",
+              "start": 42,
+              "end": 51
             }
           ],
           "scoring": {
@@ -620,17 +625,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 구조에서는 재정지출 확대처럼 총수요를 키우는 요인이 나타나면 IS 곡선이 이동하고, 그에 따라 국민 소득과 이자율이 함께 변한다. 소득이 늘어날수록 화폐 수요가 커지므로, LM 곡선 위에서는 더 높은 이자율이 요구된다. 따라서 IS-LM 모형은 총수요 변화가 화폐 수요를 거쳐 이자율을 움직이고, 그 이자율 변화가 다시 소비와 투자에 영향을 주는 흐름을 설명하는 데 적합하다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "상품 시장의 균형",
+            "화폐 시장의 균형"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단의 내용으로 가장 적절한 것은?",
+          "prompt": "국민 소득이 늘어나면 커지는 수요를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 210
+              "paragraphId": "p2",
+              "start": 115,
+              "end": 120
             }
           ],
           "scoring": {
@@ -639,16 +647,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "반면 IS-MP 모형은 현대 경제에서 중앙은행이 통화량보다 기준금리를 직접 정책 수단으로 활용한다는 현실을 더 적극적으로 반영한다. 여기서 MP 곡선은 중앙은행이 물가와 경기 상황을 고려해 어느 수준의 금리를 선택하는지를 보여 준다. 소득이 커지거나 물가 상승 압력이 높아지면 중앙은행은 과열을 막기 위해 기준금리를 올리고, 경기가 둔화되면 금리를 낮춰 수요를 떠받치려 한다."
+          "answerText": "거래 수요"
         },
         {
           "id": "q5",
-          "prompt": "5문단의 내용으로 가장 적절한 것은?",
+          "prompt": "이자율 변화나 향후 금리 경로 예상이 영향을 주는 대상을 찾으시오.",
           "answerRanges": [
             {
+              "paragraphId": "p3",
+              "start": 181,
+              "end": 187
+            },
+            {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 212
+              "start": 151,
+              "end": 157
             }
           ],
           "scoring": {
@@ -657,16 +670,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 차이 때문에 통화정책의 전달 방식도 다르게 설명된다. IS-LM 모형에서는 고정된 통화량이 먼저 주어지고 이자율이 뒤따라 조정되지만, IS-MP 모형에서는 중앙은행의 금리 결정이 경기와 기대에 바로 반응한다. 특히 경제 주체들이 향후 금리 경로를 어떻게 예상하느냐가 소비와 투자에 영향을 준다는 점에서, IS-MP 모형은 정책 신뢰성과 예측 가능성의 중요성을 함께 보여 준다."
+          "answerText": "소비와 투자"
         },
         {
           "id": "q6",
-          "prompt": "6문단의 내용으로 가장 적절한 것은?",
+          "prompt": "MP 곡선이 보여 주는 내용을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 228
+              "paragraphId": "p4",
+              "start": 85,
+              "end": 122
             }
           ],
           "scoring": {
@@ -675,7 +688,59 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 두 모형은 서로 경쟁하기보다, 통화정책이 작동하는 방식을 설명하는 초점이 다르다고 볼 수 있다. 화폐 수요와 통화량의 관계를 간단히 파악하려면 IS-LM 모형이 유용하고, 기준금리 중심의 현대 통화정책과 기대의 역할을 이해하려면 IS-MP 모형이 더 적절하다. 따라서 거시경제 지문을 읽을 때는 두 모형이 모두 이자율과 국민 소득을 다루지만, 금리를 무엇이 결정한다고 보는지부터 구분하는 것이 핵심이다."
+          "answerText": "중앙은행이 물가와 경기 상황을 고려해 어느 수준의 금리를 선택하는지"
+        },
+        {
+          "id": "q7",
+          "prompt": "소득·물가 상황과 경기 둔화에 따른 중앙은행의 대응을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 171,
+              "end": 180
+            },
+            {
+              "paragraphId": "p4",
+              "start": 191,
+              "end": 209
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "기준금리를 올리고",
+            "금리를 낮춰 수요를 떠받치려 한다"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "두 모형을 이해할 때 각각 파악하거나 이해해야 할 대상을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 57,
+              "end": 71
+            },
+            {
+              "paragraphId": "p6",
+              "start": 99,
+              "end": 123
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "화폐 수요와 통화량의 관계",
+            "기준금리 중심의 현대 통화정책과 기대의 역할"
+          ]
         }
       ]
     }

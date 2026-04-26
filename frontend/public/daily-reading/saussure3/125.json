@@ -557,14 +557,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지구의 평균 기온이 점차 올라가 생태계에 큰 문제를 일으키는 현상은?",
-          "answerText": "온난화",
-          "answerMatchMode": "EXACT",
+          "prompt": "지구가 병들어가는 원인으로 제시된 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "온난화",
+            "쓰레기 문제"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 11,
               "end": 14
+            },
+            {
+              "paragraphId": "p1",
+              "start": 16,
+              "end": 22
             }
           ],
           "scoring": {
@@ -576,14 +584,14 @@
         },
         {
           "id": "q2",
-          "prompt": "재활용이 가능한 쓰레기를 종류별로 나누어 버리는 올바른 배출 방법은?",
-          "answerText": "분리배출",
-          "answerMatchMode": "EXACT",
+          "prompt": "학교 주변의 어디를 산책하며 관찰했는지 찾으시오.",
+          "answerText": "공원",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 60,
-              "end": 64
+              "paragraphId": "p1",
+              "start": 50,
+              "end": 52
             }
           ],
           "scoring": {
@@ -595,14 +603,41 @@
         },
         {
           "id": "q3",
-          "prompt": "관찰한 사실을 정리하여 다른 사람들에게 알리기 위해 작성하는 글의 형식은?",
-          "answerText": "관찰 보고서",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리가 시작하기로 한 작은 실천 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "쓰레기를 줍고",
+            "분리배출을 철저히"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 59
+            },
+            {
+              "paragraphId": "p2",
+              "start": 60,
+              "end": 69
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "푸른 지구를 누구에게 물려주려 했는지 찾으시오.",
+          "answerText": "다음 세대",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 4,
-              "end": 10
+              "start": 95,
+              "end": 100
             }
           ],
           "scoring": {

@@ -850,14 +850,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "깨끗한 ( )과 포근한 이불.",
-          "answerText": "잠옷",
-          "answerMatchMode": "EXACT",
+          "prompt": "잠을 자기 위한 준비물 중 깨끗한 것과 포근한 것은 무엇입니까? 모두 찾으시오.",
+          "answerTexts": [
+            "잠옷",
+            "이불"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 31,
               "end": 33
+            },
+            {
+              "paragraphId": "p1",
+              "start": 39,
+              "end": 41
             }
           ],
           "scoring": {
@@ -869,14 +877,14 @@
         },
         {
           "id": "q2",
-          "prompt": "부모님께 밤 ( )를 드려요.",
-          "answerText": "인사",
-          "answerMatchMode": "EXACT",
+          "prompt": "방 안에서 적당하게 맞추어야 하는 것은 무엇입니까?",
+          "answerText": "온도",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 79,
-              "end": 81
+              "paragraphId": "p1",
+              "start": 58,
+              "end": 60
             }
           ],
           "scoring": {
@@ -888,14 +896,41 @@
         },
         {
           "id": "q3",
-          "prompt": "( )한 꿈나라로 떠나요.",
-          "answerText": "행복",
-          "answerMatchMode": "EXACT",
+          "prompt": "양치질을 한 뒤 깨끗이 씻는 신체 부위는 무엇입니까? 모두 찾으시오.",
+          "answerTexts": [
+            "손",
+            "발"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 32,
+              "end": 33
+            },
+            {
+              "paragraphId": "p2",
+              "start": 35,
+              "end": 36
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "매일매일 실천해야 할 것은 무엇입니까?",
+          "answerText": "스스로 정리한 수칙",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 81,
-              "end": 83
+              "start": 24,
+              "end": 34
             }
           ],
           "scoring": {

@@ -1039,189 +1039,8 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "행동 대상이나 상대방을 높이는 표현은?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p1",
-              "start": 103,
-              "end": 108
-            },
-            {
-              "paragraphId": "p3",
-              "start": 4,
-              "end": 9
-            },
-            {
-              "paragraphId": "p3",
-              "start": 156,
-              "end": 161
-            },
-            {
-              "paragraphId": "p4",
-              "start": 47,
-              "end": 52
-            },
-            {
-              "paragraphId": "p4",
-              "start": 98,
-              "end": 103
-            },
-            {
-              "paragraphId": "p5",
-              "start": 133,
-              "end": 138
-            },
-            {
-              "paragraphId": "p6",
-              "start": 5,
-              "end": 10
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "객체 높임"
-        },
-        {
-          "id": "q2",
-          "prompt": "높여야 할 대상 앞에 쓰는 부사격 조사는?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 55,
-              "end": 56
-            },
-            {
-              "paragraphId": "p1",
-              "start": 91,
-              "end": 92
-            },
-            {
-              "paragraphId": "p1",
-              "start": 147,
-              "end": 148
-            },
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 5
-            },
-            {
-              "paragraphId": "p2",
-              "start": 41,
-              "end": 42
-            },
-            {
-              "paragraphId": "p2",
-              "start": 79,
-              "end": 80
-            },
-            {
-              "paragraphId": "p2",
-              "start": 94,
-              "end": 95
-            },
-            {
-              "paragraphId": "p3",
-              "start": 94,
-              "end": 95
-            },
-            {
-              "paragraphId": "p4",
-              "start": 63,
-              "end": 64
-            },
-            {
-              "paragraphId": "p4",
-              "start": 117,
-              "end": 118
-            },
-            {
-              "paragraphId": "p5",
-              "start": 4,
-              "end": 5
-            },
-            {
-              "paragraphId": "p6",
-              "start": 16,
-              "end": 17
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "께"
-        },
-        {
-          "id": "q3",
-          "prompt": "낮추는 쪽의 행위로 상대를 높이는 말은?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 69,
-              "end": 74
-            },
-            {
-              "paragraphId": "p3",
-              "start": 52,
-              "end": 57
-            },
-            {
-              "paragraphId": "p3",
-              "start": 145,
-              "end": 150
-            },
-            {
-              "paragraphId": "p5",
-              "start": 62,
-              "end": 67
-            },
-            {
-              "paragraphId": "p6",
-              "start": 20,
-              "end": 25
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "특수 어휘"
-        },
-        {
-          "id": "q4",
-          "prompt": "문장의 주체를 높이는 표현은?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 40,
-              "end": 45
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "주체 높임"
-        },
-        {
-          "id": "q5",
-          "prompt": "말이나 글이 놓인 앞뒤 관계는?",
+          "prompt": "말이나 글이 놓인 앞뒤 사정과 흐름을 가리키는 말을 찾으시오",
+          "answerText": "문맥",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
@@ -1231,11 +1050,126 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "문맥"
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "말하는 사람을 가리키는 말을 찾으시오",
+          "answerText": "화자",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 118,
+              "end": 120
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "어떤 두 가지 사이의 차이를 나누어 알아보는 일을 가리키는 말을 찾으시오",
+          "answerText": "구별",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 157,
+              "end": 159
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글에서 특수 어휘로 든 보기 세 가지를 모두 찾으시오",
+          "answerText": "드리다 / 여쭙다 / 모시다",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 30,
+              "end": 33
+            },
+            {
+              "paragraphId": "p3",
+              "start": 37,
+              "end": 40
+            },
+            {
+              "paragraphId": "p3",
+              "start": 44,
+              "end": 47
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "'께'가 쓰였더라도 서술어가 일반 어휘일 때 일어나는 결과를 모두 찾으시오",
+          "answerText": "약해지거나 / 어색해질",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 124,
+              "end": 129
+            },
+            {
+              "paragraphId": "p3",
+              "start": 130,
+              "end": 134
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "'께'와 '-시-'가 각각 어떤 쪽을 높이는지 두 짝을 모두 찾으시오",
+          "answerText": "'께'는 객체 쪽 / '-시-'는 주체 쪽",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 116,
+              "end": 126
+            },
+            {
+              "paragraphId": "p4",
+              "start": 128,
+              "end": 140
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

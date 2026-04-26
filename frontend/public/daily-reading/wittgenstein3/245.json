@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 문법 현상을 어떤 배경이나 문제의식에서 제시하는가?",
+          "prompt": "국어에서 유의어는 어떤 말로 설명됩니까?",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 222
+              "start": 10,
+              "end": 18
             }
           ],
           "scoring": {
@@ -585,16 +585,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "국어에서 유의어는 뜻이 비슷한 말로 설명되지만, 실제 문장 속에서는 언제나 자유롭게 바꾸어 쓸 수 있는 것은 아니다. 교과서나 문제집에서 '비슷한 뜻'이라는 설명만 익히면, 낱말의 사전적 의미가 가깝다는 이유만으로 아무 문맥에서나 치환이 가능하다고 오해하기 쉽다. 그러나 고3 수준의 어휘 문법에서는 유의어 사이에도 결합 제약, 의미 범위, 사용 맥락의 차이가 있다는 점을 정확히 읽어 내야 한다."
+          "answerText": "뜻이 비슷한 말"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 판별 기준이나 기본 원리를 어떻게 설명하는가?",
+          "prompt": "고3 수준의 어휘 문법에서 유의어 사이에 있다고 읽어 내야 하는 차이를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 213
+              "paragraphId": "p1",
+              "start": 177,
+              "end": 182
+            },
+            {
+              "paragraphId": "p1",
+              "start": 184,
+              "end": 189
+            },
+            {
+              "paragraphId": "p1",
+              "start": 191,
+              "end": 200
             }
           ],
           "scoring": {
@@ -602,17 +612,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "첫째로, 유의어는 공통 의미를 공유하더라도 적용 범위가 다를 수 있다. 예를 들어 '보다'와 '관찰하다'는 모두 시각적 인식을 나타내지만, 뒤의 말은 대상을 의식적으로 주의 깊게 살핀다는 뜻을 포함한다. 따라서 단순히 창밖을 본 상황에서는 '관찰하다'가 과도하게 느껴질 수 있고, 과학 실험처럼 체계적 시선을 전제하는 맥락에서는 오히려 '보다'가 정보량이 부족하게 느껴질 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "결합 제약",
+            "의미 범위",
+            "사용 맥락의 차이"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단은 해당 현상의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "'관찰하다'가 '보다'와 달리 포함하는 뜻을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 218
+              "paragraphId": "p2",
+              "start": 84,
+              "end": 106
             }
           ],
           "scoring": {
@@ -621,16 +635,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "둘째로, 유의어는 화자의 태도와 평가를 함께 담는 경우가 많다. '고집스럽다'와 '소신 있다'는 모두 쉽게 뜻을 굽히지 않는 태도를 가리키지만, 전자는 부정적 평가가, 후자는 긍정적 평가가 실리기 쉽다. 그래서 서술 대상의 행동이 같더라도 문장 전체의 논조가 달라지면 적절한 낱말 선택도 바뀐다. 유의어 판별은 대상의 행위만이 아니라 화자의 정서적 거리까지 살펴야 하는 이유가 여기에 있다."
+          "answerText": "대상을 의식적으로 주의 깊게 살핀다는 뜻"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 구별점이나 추가 조건을 어떤 방향으로 드러내는가?",
+          "prompt": "2문단에서 '관찰하다'와 '보다'가 각각 과도하거나 부족하게 느껴질 수 있는 맥락을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 213
+              "paragraphId": "p2",
+              "start": 118,
+              "end": 130
+            },
+            {
+              "paragraphId": "p2",
+              "start": 157,
+              "end": 180
             }
           ],
           "scoring": {
@@ -638,17 +657,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "셋째로, 일부 유의어는 함께 어울리는 말이 달라 치환이 제한된다. '깊은 잠'은 자연스럽지만 '짙은 잠'은 어색하고, '짙은 안개'는 가능하지만 '깊은 안개'는 일반적이지 않다. 이는 개별 낱말이 단독으로 의미를 갖는 데서 끝나지 않고, 오랫동안 관습적으로 결합해 온 표현 환경 속에서 쓰이기 때문이다. 결국 유의어의 적절성은 사전 풀이보다 실제 결합 양상에서 더 분명히 드러난다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "단순히 창밖을 본 상황",
+            "과학 실험처럼 체계적 시선을 전제하는 맥락"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단은 해석상의 주의점이나 적용 효과를 어떻게 설명하는가?",
+          "prompt": "3문단에서 '고집스럽다'와 '소신 있다'에 실리기 쉬운 평가를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 207
+              "paragraphId": "p3",
+              "start": 85,
+              "end": 91
+            },
+            {
+              "paragraphId": "p3",
+              "start": 98,
+              "end": 104
             }
           ],
           "scoring": {
@@ -656,17 +683,72 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "시험에서는 이런 차이를 이용해 겉보기에 모두 비슷해 보이는 어휘 가운데 문맥에 맞지 않는 것을 고르게 하거나, 특정 낱말을 다른 말로 바꾸었을 때 뉘앙스가 어떻게 달라지는지를 묻는다. 이때 단어 뜻을 하나하나 외우는 것만으로는 부족하다. 해당 낱말이 어떤 대상과 잘 어울리는지, 어떤 평가를 동반하는지, 문장 안에서 정보의 세기가 어떻게 달라지는지를 함께 판단해야 한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "부정적 평가",
+            "긍정적 평가"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 이 문법 주제를 어떤 관점에서 정리하는가?",
+          "prompt": "4문단에서 자연스럽거나 가능한 표현을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 37,
+              "end": 43
+            },
+            {
+              "paragraphId": "p4",
+              "start": 66,
+              "end": 73
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'깊은 잠'",
+            "'짙은 안개'"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "시험에서 유의어의 차이를 이용해 묻는 두 방식을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 40,
+              "end": 60
+            },
+            {
+              "paragraphId": "p5",
+              "start": 62,
+              "end": 101
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "문맥에 맞지 않는 것을 고르게 하거나",
+            "특정 낱말을 다른 말로 바꾸었을 때 뉘앙스가 어떻게 달라지는지를 묻는다"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "유의어의 교체 가능성을 판별한다는 것은 어떤 능력이라고 했습니까?",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 198
+              "start": 179,
+              "end": 187
             }
           ],
           "scoring": {
@@ -675,7 +757,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "따라서 유의어의 문법적 이해는 '뜻이 비슷하다'는 수준에서 멈추지 않는다. 실제 독해와 작문에서는 유의어 사이의 미세한 차이를 읽어 내야 문장의 의도와 어조를 정확히 파악할 수 있다. 결국 유의어의 교체 가능성을 판별한다는 것은 사전적 뜻을 맞추는 일이 아니라, 그 낱말이 놓인 문맥 전체와 결합 환경을 함께 읽어 내는 의미 해석 능력이라고 할 수 있다."
+          "answerText": "의미 해석 능력"
         }
       ]
     }

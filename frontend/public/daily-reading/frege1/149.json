@@ -913,14 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "학생들이 먹고 남긴 음식이 쌓이는 곳은 무엇인가요?",
-          "answerText": "잔반통",
+          "prompt": "음식물 쓰레기가 많이 쌓인 모습을 비유한 표현을 찾으시오.",
+          "answerText": "산더미처럼 수북하게",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 100,
-              "end": 103
+              "start": 44,
+              "end": 54
             }
           ],
           "scoring": {
@@ -931,7 +931,33 @@
         },
         {
           "id": "q2",
-          "prompt": "음식이 버려질 때 많이 발생한다고 한 기체는 무엇인가요?",
+          "prompt": "잔반을 규칙으로 줄여야 한다고 주장하는 사람들이 가장 먼저 강조한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "환경 보호",
+            "자원 절약"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 32,
+              "end": 37
+            },
+            {
+              "paragraphId": "p2",
+              "start": 39,
+              "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "버려진 음식을 처리하는 과정에서 지구를 병들게 한다고 한 기체를 찾으시오.",
           "answerText": "온실가스",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -948,33 +974,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "엄격한 규칙으로 기르도록 이끌어야 한다고 한 것은 무엇인가요?",
-          "answerText": "식습관",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 240,
-              "end": 243
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q4",
-          "prompt": "강요보다 더 현명한 방법이라고 한 배식 방식은 무엇인가요?",
-          "answerText": "자율 배식",
+          "prompt": "반대하는 사람들이 지적한 위험성을 그대로 찾으시오.",
+          "answerText": "억지로 먹이는 것의 위험성",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 238,
-              "end": 243
+              "start": 40,
+              "end": 54
             }
           ],
           "scoring": {
@@ -985,13 +993,13 @@
         },
         {
           "id": "q5",
-          "prompt": "학생 스스로 음식의 소중함을 깨닫게 돕는 무엇이 필요하다고 했나요?",
-          "answerText": "교육",
+          "prompt": "강압적인 규칙보다 더 필요하다고 한 교육을 찾으시오.",
+          "answerText": "따뜻한 교육",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 239,
+              "start": 235,
               "end": 241
             }
           ],

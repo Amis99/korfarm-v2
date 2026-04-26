@@ -1039,163 +1039,73 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "여럿이 함께 벌이는 활동은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 32,
-              "end": 34
-            },
-            {
-              "paragraphId": "p1",
-              "start": 42,
-              "end": 44
-            },
-            {
-              "paragraphId": "p1",
-              "start": 92,
-              "end": 94
-            },
-            {
-              "paragraphId": "p1",
-              "start": 103,
-              "end": 105
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 98,
-              "end": 100
-            },
-            {
-              "paragraphId": "p3",
-              "start": 2,
-              "end": 4
-            },
-            {
-              "paragraphId": "p3",
-              "start": 121,
-              "end": 123
-            },
-            {
-              "paragraphId": "p3",
-              "start": 140,
-              "end": 142
-            },
-            {
-              "paragraphId": "p4",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p4",
-              "start": 140,
-              "end": 142
-            },
-            {
-              "paragraphId": "p5",
-              "start": 9,
-              "end": 11
-            },
-            {
-              "paragraphId": "p6",
-              "start": 11,
-              "end": 13
-            },
-            {
-              "paragraphId": "p6",
-              "start": 23,
-              "end": 25
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "도서관에서 다 읽은 책을 가져오면 다른 사람의 책과 바꾸어 읽게 하는 행사의 이름을 찾으시오",
+          "answerText": "책 교환 행사",
           "answerMatchMode": "ANY",
-          "answerText": "행사"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 27, "end": 34},
+            {"paragraphId": "p6", "start": 6, "end": 13}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "책을 바꿀 수 있게 받는 표는?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 79,
-              "end": 82
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "책 상태를 확인한 담당자가 참여자에게 주는 표를 찾으시오",
+          "answerText": "교환표",
           "answerMatchMode": "ANY",
-          "answerText": "교환표"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 79, "end": 82}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "망가지거나 상한 상태를 이르는 말은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 120,
-              "end": 122
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "단순히 물건을 바꾸는 행사가 아니라 무엇을 넓히는 행사라고 볼 수 있는지 찾으시오",
+          "answerText": "독서 경험",
           "answerMatchMode": "ANY",
-          "answerText": "훼손"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 129, "end": 134}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "일을 해 나가는 차례는?",
+          "prompt": "교환 대상에서 제외되는 책의 예 두 가지를 모두 찾으시오",
+          "answerText": "훼손이 심한 책 / 참고서처럼 사용 기간이 지난 책",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 25,
-              "end": 27
-            },
-            {
-              "paragraphId": "p6",
-              "start": 33,
-              "end": 35
-            }
+            {"paragraphId": "p2", "start": 120, "end": 128},
+            {"paragraphId": "p2", "start": 131, "end": 148}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "절차"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "글이나 일의 중요한 목적은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 143,
-              "end": 145
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글쓴이가 초고에서 중심 문장이 흐릿하다고 본 결과로 독자가 어떻게 된다고 했는지 찾으시오",
+          "answerText": "필요한 정보를 빨리 찾기 어려울 수도 있다",
           "answerMatchMode": "ANY",
-          "answerText": "취지"
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 95, "end": 118}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "지역 책 교환 행사 소개 글에 분명한 순서로 보여 줘야 할 세 가지를 모두 찾으시오",
+          "answerText": "행사 목적 / 참여 절차 / 기대 효과",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p6", "start": 23, "end": 28},
+            {"paragraphId": "p6", "start": 30, "end": 35},
+            {"paragraphId": "p6", "start": 37, "end": 42}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

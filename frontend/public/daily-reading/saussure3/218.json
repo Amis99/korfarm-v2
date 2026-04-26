@@ -587,14 +587,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "자신을 높게 보는 마음은?",
-          "answerText": "자만심에",
-          "answerMatchMode": "EXACT",
+          "prompt": "토끼가 보인 행동과 태도를 모두 찾으시오.",
+          "answerTexts": [
+            "나무 그늘 아래에서 낮잠",
+            "자만심에 빠져"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
+              "start": 35,
+              "end": 48
+            },
+            {
+              "paragraphId": "p1",
               "start": 62,
-              "end": 66
+              "end": 69
             }
           ],
           "scoring": {
@@ -606,14 +614,14 @@
         },
         {
           "id": "q2",
-          "prompt": "경주가 끝나는 지점은?",
-          "answerText": "결승선에",
-          "answerMatchMode": "EXACT",
+          "prompt": "거북이가 뜨거운 햇볕 아래에서도 한 일을 찾으시오.",
+          "answerText": "멈추지 않고 걷습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 31,
-              "end": 35
+              "start": 18,
+              "end": 29
             }
           ],
           "scoring": {
@@ -625,14 +633,41 @@
         },
         {
           "id": "q3",
-          "prompt": "정성을 다해 일하는 태도는?",
-          "answerText": "성실함의",
-          "answerMatchMode": "EXACT",
+          "prompt": "눈에 보이는 듯하다고 상상한 두 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "결승선",
+            "땀방울"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 31,
+              "end": 34
+            },
+            {
+              "paragraphId": "p2",
+              "start": 46,
+              "end": 49
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "거북이가 승리하는 반전을 만든 태도를 찾으시오.",
+          "answerText": "끝까지 포기하지 않은 거북이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 72,
-              "end": 76
+              "start": 30,
+              "end": 45
             }
           ],
           "scoring": {

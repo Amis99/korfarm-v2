@@ -587,24 +587,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "인물이 되어 표현하는 놀이는?",
-          "answerText": "역할놀이",
-          "answerMatchMode": "EXACT",
+          "prompt": "내가 맡은 호랑이 역할의 목소리와 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "무서운 목소리",
+            "오누이를 쫓는 호랑이"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 21,
-              "end": 25
+              "start": 33,
+              "end": 40
             },
             {
-              "paragraphId": "p2",
-              "start": 60,
-              "end": 64
-            },
-            {
-              "paragraphId": "p3",
-              "start": 75,
-              "end": 79
+              "paragraphId": "p1",
+              "start": 42,
+              "end": 53
             }
           ],
           "scoring": {
@@ -616,14 +614,14 @@
         },
         {
           "id": "q2",
-          "prompt": "위험하고 급한 상황은?",
-          "answerText": "위기를",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구들이 맡은 역할을 찾으시오.",
+          "answerText": "위기를 넘기는 오누이 역할",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 72,
-              "end": 75
+              "end": 86
             }
           ],
           "scoring": {
@@ -635,14 +633,49 @@
         },
         {
           "id": "q3",
-          "prompt": "굵게 꼰 밧줄은?",
-          "answerText": "동아줄을",
-          "answerMatchMode": "EXACT",
+          "prompt": "오누이가 올라가는 장면과 표현한 마음을 모두 찾으시오.",
+          "answerTexts": [
+            "동아줄을 잡고 올라가는 장면",
+            "인물들의 다급한 마음"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 5,
-              "end": 9
+              "end": 20
+            },
+            {
+              "paragraphId": "p2",
+              "start": 33,
+              "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "연극을 마친 뒤 배운 용기와 느낀 기쁨을 모두 찾으시오.",
+          "answerTexts": [
+            "헤쳐나갈 용기",
+            "협동의 기쁨"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 17,
+              "end": 24
+            },
+            {
+              "paragraphId": "p3",
+              "start": 46,
+              "end": 52
             }
           ],
           "scoring": {

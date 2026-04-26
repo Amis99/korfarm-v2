@@ -474,25 +474,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "일이 일어난 무엇을 말하나요?",
+          "prompt": "어떤 일이 왜 일어났는지 설명할 때 사용하며 친구와 오해를 풀거나 부탁할 때도 중요한 이 말은 무엇을 나타내는 말이라고 했는지 찾아 써 보세요",
           "answerText": "까닭",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 24,
-              "end": 26
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 112,
-              "end": 114
-            }
+            {"paragraphId": "p1", "start": 24, "end": 26},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 112, "end": 114}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -503,25 +491,14 @@
         },
         {
           "id": "q2",
-          "prompt": "정확한 무엇를 설명하나요?",
-          "answerText": "이유",
-          "answerMatchMode": "EXACT",
+          "prompt": "이유를 명확하게 밝혀주는 까닭을 나타내는 말의 두 가지 예로 든 표현은 무엇인지 두 단어를 모두 찾아 써 보세요",
+          "answerText": "왜냐하면 때문",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 68,
-              "end": 70
-            },
-            {
-              "paragraphId": "p2",
-              "start": 61,
-              "end": 63
-            },
-            {
-              "paragraphId": "p2",
-              "start": 136,
-              "end": 138
-            }
+            {"paragraphId": "p1", "start": 44, "end": 48},
+            {"paragraphId": "p1", "start": 100, "end": 104},
+            {"paragraphId": "p1", "start": 55, "end": 57},
+            {"paragraphId": "p1", "start": 115, "end": 117}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -532,15 +509,26 @@
         },
         {
           "id": "q3",
-          "prompt": "바르게 말하는 무엇인가요?",
-          "answerText": "습관",
-          "answerMatchMode": "EXACT",
+          "prompt": "까닭을 나타내는 표현을 사용하면 자신의 생각을 어떻게 전달할 수 있다고 했는지 찾아 써 보세요",
+          "answerText": "논리적",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 144,
-              "end": 146
-            }
+            {"paragraphId": "p1", "start": 156, "end": 159}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "정확한 이유를 말하는 습관은 어떤 것의 시작이 된다고 했는지 한 단어를 찾아 써 보세요",
+          "answerText": "대화",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 151, "end": 153}
           ],
           "scoring": {
             "correctDeltaSec": 10,

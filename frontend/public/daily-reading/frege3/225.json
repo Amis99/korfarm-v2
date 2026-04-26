@@ -975,7 +975,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "여러 예술 요소가 결합한 장르를 무엇이라고 하나요?",
+          "prompt": "모든 예술적 요소가 녹아들어 하나의 감동을 빚어내는 장르를 찾으시오.",
           "answerText": "총체 예술(Gesamtkunstwerk)",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -993,14 +993,14 @@
         },
         {
           "id": "q2",
-          "prompt": "감정을 폭발적으로 드러내는 독창곡은 무엇인가요?",
-          "answerText": "아리아(Aria)",
+          "prompt": "아리아의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "주인공이 자신의 슬픔이나 기쁨, 분노 같은 감정을 폭발적으로 터뜨리는 아름답고 화려한 독창곡",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 18,
-              "end": 27
+              "start": 61,
+              "end": 112
             }
           ],
           "scoring": {
@@ -1011,14 +1011,14 @@
         },
         {
           "id": "q3",
-          "prompt": "대화처럼 부르는 노래는 무엇인가요?",
-          "answerText": "레치타티보(Recitativo)",
+          "prompt": "레치타티보가 맡는 역할을 설명한 부분을 찾으시오.",
+          "answerText": "복잡한 줄거리를 빠르게 진행시키고 다음 사건을 설명하는 징검다리 역할",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 31,
-              "end": 48
+              "start": 206,
+              "end": 244
             }
           ],
           "scoring": {
@@ -1029,14 +1029,14 @@
         },
         {
           "id": "q4",
-          "prompt": "총체 예술의 완성자로 언급한 작곡가는 누구인가요?",
-          "answerText": "리하르트 바그너(Richard Wagner)",
+          "prompt": "바그너가 자신의 작품을 오페라 대신 부른 이름을 찾으시오.",
+          "answerText": "악극(Musikdrama)",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 17,
-              "end": 41
+              "start": 203,
+              "end": 217
             }
           ],
           "scoring": {
@@ -1047,14 +1047,22 @@
         },
         {
           "id": "q5",
-          "prompt": "바그너가 자신의 작품을 부른 이름은 무엇인가요?",
-          "answerText": "악극(Musikdrama)",
-          "answerMatchMode": "ANY",
+          "prompt": "오페라 감상을 어렵게 만드는 장벽을 모두 찾으시오.",
+          "answerTexts": [
+            "비싼 관람료",
+            "어려운 외국어 가사"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 203,
-              "end": 217
+              "paragraphId": "p5",
+              "start": 186,
+              "end": 192
+            },
+            {
+              "paragraphId": "p5",
+              "start": 194,
+              "end": 204
             }
           ],
           "scoring": {

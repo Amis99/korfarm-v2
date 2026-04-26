@@ -1156,83 +1156,81 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "서연은 어떤 일을 맡아 보자고 하나요?",
+          "prompt": "본문 대화에서 반별 자율 봉사 시간에 맡자고 제안된 활동을 가리키는 말을 찾으시오",
+          "answerText": "계단 청소",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 28,
-              "end": 62
-            }
+            {"paragraphId": "p1", "start": 45, "end": 50},
+            {"paragraphId": "p1", "start": 67, "end": 72},
+            {"paragraphId": "p4", "start": 15, "end": 20},
+            {"paragraphId": "p6", "start": 13, "end": 18}
           ],
-          "acceptedAnswers": [
-            "나는 우리 반이 이번에는 본관 계단 청소를 맡아 보면 좋겠어"
-          ],
-          "answerText": "나는 우리 반이 이번에는 본관 계단 청소를 맡아 보면 좋겠어.",
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "서연이 말한 계단의 문제는 무엇인가요?",
+          "prompt": "이 대화에 등장하는 인물 세 명의 이름을 모두 찾으시오",
+          "answerText": "서연, 지훈, 민석",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 50
-            }
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p1", "start": 63, "end": 65},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p3", "start": 0, "end": 2},
+            {"paragraphId": "p3", "start": 76, "end": 78},
+            {"paragraphId": "p4", "start": 0, "end": 2},
+            {"paragraphId": "p5", "start": 0, "end": 2},
+            {"paragraphId": "p5", "start": 106, "end": 108},
+            {"paragraphId": "p6", "start": 0, "end": 2},
+            {"paragraphId": "p6", "start": 82, "end": 84}
           ],
-          "acceptedAnswers": [
-            "서연: 지난주 비 온 뒤에 계단 모서리에 흙이 많이 남아 있었고, 미끄럽다는 말도 나왔어."
-          ],
-          "answerText": "서연: 지난주 비 온 뒤에 계단 모서리에 흙이 많이 남아 있었고, 미끄럽다는 말도 나왔어.",
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "서연이 제시한 부담 완화 방법은 무엇인가요?",
+          "prompt": "서연이 계단 청소가 필요하다고 말하며 든 구체적 근거를 본문에서 찾으시오",
+          "answerText": "계단 모서리에 흙이 많이 남아 있었고, 미끄럽다는 말도 나왔어",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 76,
-              "end": 116
-            }
+            {"paragraphId": "p2", "start": 15, "end": 49}
           ],
-          "acceptedAnswers": [
-            "서연: 그래서 한 번에 전부 하자는 게 아니라 층을 나누어 맡자는 거야."
-          ],
-          "answerText": "서연: 그래서 한 번에 전부 하자는 게 아니라 층을 나누어 맡자는 거야.",
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "민석이 미리 챙기자고 한 준비물은 무엇인가요?",
+          "prompt": "지훈이 시간 부족을 우려하자 서연이 내놓은 부담 완화 방안을 본문에서 찾으시오",
+          "answerText": "한 번에 전부 하자는 게 아니라 층을 나누어 맡자는 거야",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 91,
-              "end": 128
-            }
+            {"paragraphId": "p3", "start": 84, "end": 115}
           ],
-          "acceptedAnswers": [
-            "다만 물걸레랑 빗자루를 같이 써야 하니까 준비물을 미리 챙겨야 해."
-          ],
-          "answerText": "다만 물걸레랑 빗자루를 같이 써야 하니까 준비물을 미리 챙겨야 해.",
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "서연이 함께 말하자고 한 점은 무엇인가요?",
+          "prompt": "민석이 미리 챙겨야 한다고 짚은 준비물 두 가지를 본문에서 찾으시오",
+          "answerText": "물걸레랑 빗자루",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 114,
-              "end": 166
-            }
+            {"paragraphId": "p4", "start": 94, "end": 102}
           ],
-          "acceptedAnswers": [
-            "단순히 힘든 일이라서 피하기보다, 이용이 많은 곳이라 우선순위가 높다는 점을 같이 말해 보자."
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "민석이 정리한 결론으로, 친구들에게 제안할 두 가지 핵심 내용을 본문에서 찾으시오",
+          "answerText": "필요성과 효과를 먼저 설명하고, 층을 나누어 맡는 방식으로 부담을 줄인다",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p6", "start": 20, "end": 60}
           ],
-          "answerText": "단순히 힘든 일이라서 피하기보다, 이용이 많은 곳이라 우선순위가 높다는 점을 같이 말해 보자.",
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

@@ -571,12 +571,43 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "prompt": "밝음과 어둠이 함께 제시된 표현을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 61
+              "end": 10
+            },
+            {
+              "paragraphId": "p5",
+              "start": 35,
+              "end": 45
+            },
+            {
+              "paragraphId": "p1",
+              "start": 44,
+              "end": 53
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "밝고도 어두운 것이",
+            "밝고 어두운 것이"
+          ]
+        },
+        {
+          "id": "q2",
+          "prompt": "화자를 끌어당기는 길의 끝을 나타낸 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 32,
+              "end": 43
             }
           ],
           "scoring": {
@@ -585,15 +616,38 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "밝고도 어두운 것이 무엇이었더라 명암리에 머무는 눈길이여 길 끝이 나를 당긴다 밝고 어두운 것이 빛만이 아니다"
+          "answerText": "길 끝이 나를 당긴다"
         },
         {
-          "id": "q2",
-          "prompt": "둘째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "id": "q3",
+          "prompt": "명암리가 화자에게 어떤 작용을 하는지 보여 주는 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
+              "start": 13,
+              "end": 25
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "명암리는 나를 부추기듯"
+        },
+        {
+          "id": "q4",
+          "prompt": "길이 새롭고 낯설다는 성격을 드러내는 구절을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 41,
+              "end": 52
+            },
+            {
+              "paragraphId": "p2",
+              "start": 53,
               "end": 66
             }
           ],
@@ -602,53 +656,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "내 안의 샛길들 뒷길들 명암리는 나를 부추기듯 마음의 구석까지 뭉클해진다 길은 모를수록 새롭고 새 길은 새로워서 낯설다"
-        },
-        {
-          "id": "q3",
-          "prompt": "셋째 연은 어떤 장면이나 정서를 보여 주는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 69
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "낯설게 만나는 바람소리 물소리 그 소리 기막히다 새삼 놀란다 내 눈길 나에게서 멀어지지 않는다 모르는 길이 발끝까지 따라온다"
-        },
-        {
-          "id": "q4",
-          "prompt": "넷째 연은 어떤 장면이나 정서를 보여 주는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 84
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "나는 생의 명암을 다시 비춘다 비추다가 낯선 길 오래 바라본다 오늘도 길은 밝았다 어두웠다 하였다 다 늦은 저녁에야 마음의 능선 너머 다른 길에 머문다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "길은 모를수록 새롭고",
+            "새 길은 새로워서 낯설다"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "다섯째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "prompt": "청각적 이미지를 나열한 표현을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 64
+              "paragraphId": "p3",
+              "start": 8,
+              "end": 21
             }
           ],
           "scoring": {
@@ -657,16 +678,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "언제나 알 수 없는 길 속의 길 우린 헤어지고 또 만나야 한다 밝고도 어두운 것이 빛뿐일까 소리치며 바람이 지나간다"
+          "answerText": "바람소리 물소리 그 소리"
         },
         {
           "id": "q6",
-          "prompt": "마지막 연은 앞선 흐름이 어디에 이르고 있음을 보여 주는가?",
+          "prompt": "화자의 눈길이 자신에게서 멀어지지 않음을 나타낸 문장을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 30
+              "paragraphId": "p3",
+              "start": 34,
+              "end": 52
             }
           ],
           "scoring": {
@@ -675,7 +696,48 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "언제부터 내 안에서 웅크린 길 명암리에 가서 풀어놓는다"
+          "answerText": "내 눈길 나에게서 멀어지지 않는다"
+        },
+        {
+          "id": "q7",
+          "prompt": "길의 상태를 대조적으로 반복한 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 42,
+              "end": 50
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "밝았다 어두웠다"
+        },
+        {
+          "id": "q8",
+          "prompt": "화자가 웅크린 길을 풀어놓는 장소를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 18,
+              "end": 22
+            },
+            {
+              "paragraphId": "p6",
+              "start": 17,
+              "end": 21
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "명암리에"
         }
       ]
     }

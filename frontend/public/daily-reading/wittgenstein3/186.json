@@ -569,114 +569,158 @@
     },
     "confirm": {
       "questions": [
-        {
-          "id": "q1",
-          "prompt": "1문단은 회의의 출발 문제를 어떻게 제시하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 217
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q1",
+              "prompt":  "말이나 글의 앞부분을 뜻하는 단어를 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  172,
+                                       "end":  174
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "서두"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학생회장: 오늘 회의는 다음 주 공청회 발표 순서를 확정하려고 열었습니다. 안건은 교내 휴대전화 보관함 도입인데, 지난번 예비 발표에서는 학생들이 보관함 설치 자체보다 강제 수거냐 자율 보관이냐를 먼저 물었습니다. 그래서 이번에는 우리가 무엇을 제안하는지 처음부터 분명하게 말해야 합니다. 발표 담당: 네, 서두가 길어지면 의도가 또 흐려질 것 같아서 순서를 다시 잡아야 할 것 같습니다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 첫 제안이나 우려를 어떤 이유와 함께 내놓는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 218
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q2",
+              "prompt":  "첫 문장에서 핵심 표현으로 써야 한다고 한 어구를 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  34,
+                                       "end":  52
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "수업 시간 자율 보관 선택권 확대"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "정책국장: 제 생각에는 첫 문장에서 '일괄 수거'가 아니라 '수업 시간 자율 보관 선택권 확대'를 핵심 표현으로 써야 합니다. 지난번에는 집중력 향상을 강조하다 보니 학생들이 통제 강화로 받아들였습니다. 홍보부원: 맞아요. 듣는 입장에서는 왜 갑자기 보관함 이야기가 나오는지보다, 결국 휴대전화를 더 못 쓰게 하는지부터 궁금해하더라고요. 그러니 목적보다 오해를 먼저 막는 구성이 필요합니다."
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단은 논의를 어떤 대안이나 조정안으로 이어 가는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 214
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q3",
+              "prompt":  "지난번 발표에서 학생들이 제안을 통제 강화로 받아들인 이유를 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  77,
+                                       "end":  92
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "집중력 향상을 강조하다 보니"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "발표 담당: 그러면 도입은 이렇게 해 보겠습니다. '현재 반별 수거 방식은 분실 책임과 반발이 커서 운영이 어렵다. 학생회는 강제 수거를 늘리려는 것이 아니라, 자율적으로 맡길 수 있는 보관함을 설치해 선택지를 만들자고 제안한다.' 이 정도면 괜찮을까요? 학생회장: 좋습니다. 다만 바로 다음 문장에서 왜 이런 제안을 하게 되었는지, 설문 결과를 짧게 붙이면 더 설득력이 있겠습니다."
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단은 예상 질문이나 진행 기준을 어떻게 준비하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 196
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q4",
+              "prompt":  "의도 오해에서 나온 질문은 누구에게 답하게 하자고 했는지 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  69,
+                                       "end":  72
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "회장님"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "정책국장: 중간 순서도 손봐야 합니다. 예산 설명을 너무 앞에 두면 청중은 '돈부터 쓰겠다는 얘기'로 받아들일 수 있습니다. 먼저 필요성, 그다음 운영 방식, 마지막에 예산과 시범 운영 계획을 넣는 편이 낫습니다. 발표 담당: 그럼 1번 문제 상황, 2번 설문 결과, 3번 운영 방식, 4번 예산과 시범 운영, 5번 예상 질문 대응 순으로 가겠습니다."
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단은 세부 운영 방식이나 보완 이유를 어떻게 구체화하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 233
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q5",
+              "prompt":  "홍보부원이 자료를 보고 답할 수 있다고 한 운영 질문을 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  91,
+                                       "end":  108
+                                   },
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  112,
+                                       "end":  129
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "보관함이 부족하면 어떻게 하느냐",
+                                  "분실 시 책임은 누구에게 있느냐"
+                              ]
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "홍보부원: 예상 질문도 나눠 놓아야 합니다. '왜 휴대전화 사용 자체를 줄이려 하느냐'는 질문은 의도 오해에서 나온 것이니 회장님이 답하는 게 좋겠습니다. 반면 '보관함이 부족하면 어떻게 하느냐', '분실 시 책임은 누구에게 있느냐' 같은 운영 질문은 제가 자료를 보고 답할 수 있습니다. 학생회장: 좋아요. 다만 반대 의견이 나와도 바로 설득하려 들지 말고, 먼저 질문 의도를 확인한 뒤 답변하자는 원칙을 넣읍시다."
-        },
-        {
-          "id": "q6",
-          "prompt": "6문단은 최종 합의를 어떤 실행 계획으로 정리하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 225
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q6",
+              "prompt":  "발표 순서에서 예산과 시범 운영 바로 앞에 두기로 한 항목을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p4",
+                                       "start":  150,
+                                       "end":  158
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "3번 운영 방식"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "발표 담당: 정리하면, 이번 발표의 핵심 의도는 통제 강화가 아니라 선택 가능한 보관 방식을 만드는 데 있다는 점을 첫머리에서 밝힌다. 발표 순서는 문제 상황, 설문 결과, 운영 방식, 예산, 질의응답으로 정리하고, 답변자는 질문 성격에 따라 나눠 맡는다. 학생회장: 그렇게 하죠. 오늘 수정한 순서대로 대본을 다시 써서 내일까지 공유하고, 모의 질의응답은 금요일 점심시간에 한 번 더 맞춰 보겠습니다."
-        }
+          {
+              "id":  "q7",
+              "prompt":  "반대 의견이 나와도 바로 설득하려 들지 말고 먼저 하기로 한 일을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  205,
+                                       "end":  214
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "질문 의도를 확인"
+          },
+          {
+              "id":  "q8",
+              "prompt":  "모의 질의응답은 언제 맞춰 보기로 했는지 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  200,
+                                       "end":  208
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "금요일 점심시간"
+          }
       ]
     }
   }

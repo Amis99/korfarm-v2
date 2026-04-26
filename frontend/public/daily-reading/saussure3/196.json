@@ -587,24 +587,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "인물이 되어 행동하는 놀이는?",
-          "answerText": "역할놀이",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리 모둠이 연극으로 한 목표와 활동을 모두 찾으시오.",
+          "answerTexts": [
+            "토끼의 간",
+            "역할놀이 연극"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
+              "start": 7,
+              "end": 12
+            },
+            {
+              "paragraphId": "p1",
               "start": 21,
-              "end": 25
-            },
-            {
-              "paragraphId": "p2",
-              "start": 18,
-              "end": 22
-            },
-            {
-              "paragraphId": "p3",
-              "start": 46,
-              "end": 50
+              "end": 28
             }
           ],
           "scoring": {
@@ -616,14 +614,22 @@
         },
         {
           "id": "q2",
-          "prompt": "위험하고 급한 상황은?",
-          "answerText": "위기를",
-          "answerMatchMode": "EXACT",
+          "prompt": "내가 맡은 역할과 친구가 맡은 역할을 모두 찾으시오.",
+          "answerTexts": [
+            "꾀 많은 토끼 역할",
+            "충성스러운 거북이"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 9,
-              "end": 12
+              "paragraphId": "p1",
+              "start": 39,
+              "end": 49
+            },
+            {
+              "paragraphId": "p1",
+              "start": 70,
+              "end": 79
             }
           ],
           "scoring": {
@@ -635,14 +641,33 @@
         },
         {
           "id": "q3",
-          "prompt": "남을 속이기 위해 낸 생각은?",
-          "answerText": "꾀",
-          "answerMatchMode": "EXACT",
+          "prompt": "토끼가 용왕님을 속이는 장면에서 표현한 마음을 찾으시오.",
+          "answerText": "인물의 다급한 마음",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 39,
-              "end": 40
+              "paragraphId": "p2",
+              "start": 37,
+              "end": 47
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "연극을 마친 뒤 다시 깨달은 것을 찾으시오.",
+          "answerText": "위기를 넘기는 지혜",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 9,
+              "end": 19
             }
           ],
           "scoring": {

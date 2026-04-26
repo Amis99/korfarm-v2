@@ -587,19 +587,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "순서를 지키는 상태를 뜻하는 말은?",
-          "answerText": "질서를",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구와 함께 놀이기구를 탈 때 지켜야 하는 것을 본문에서 찾으시오.",
+          "answerText": "질서",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 18,
-              "end": 21
+              "end": 20
             },
             {
               "paragraphId": "p3",
               "start": 60,
-              "end": 63
+              "end": 62
             }
           ],
           "scoring": {
@@ -611,14 +611,14 @@
         },
         {
           "id": "q2",
-          "prompt": "내 차례를 남에게 내어주는 마음은?",
-          "answerText": "양보하는",
-          "answerMatchMode": "EXACT",
+          "prompt": "줄을 서서 무엇을 기다리는지 본문에서 찾으시오.",
+          "answerText": "내 차례가 올 때까지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 30,
-              "end": 34
+              "paragraphId": "p1",
+              "start": 43,
+              "end": 54
             }
           ],
           "scoring": {
@@ -630,14 +630,33 @@
         },
         {
           "id": "q3",
-          "prompt": "순서대로 하나씩 행동하는 모양은?",
-          "answerText": "차례차례",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구와 더 사이좋게 지내기 위해 가져야 하는 마음을 본문에서 찾으시오.",
+          "answerText": "양보하는 마음",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 38,
-              "end": 42
+              "paragraphId": "p2",
+              "start": 30,
+              "end": 37
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "기다림이 어떤 약속인지 설명하는 표현을 본문에서 찾으시오.",
+          "answerText": "서로를 존중하는 소중한 약속",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 65,
+              "end": 80
             }
           ],
           "scoring": {

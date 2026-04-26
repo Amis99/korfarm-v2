@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "조각을 붙이는 미술?",
+          "prompt": "여러 가지 색깔의 작은 조각들을 붙여서 하나의 큰 그림을 완성하는 미술 기법의 이름을 본문에서 찾아 네 글자로 써 보세요",
           "answerText": "모자이크",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -420,19 +420,14 @@
         },
         {
           "id": "q2",
-          "prompt": "색깔이 있는 종이 조각?",
-          "answerText": "색종이",
-          "answerMatchMode": "EXACT",
+          "prompt": "색종이 조각을 만들 때 손으로 직접 찢는 방법 외에 본문에서 든 또 다른 도구의 예시 이름을 찾아 두 글자로 써 보세요",
+          "answerText": "가위",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 53,
-              "end": 56
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
+              "start": 69,
+              "end": 71
             }
           ],
           "scoring": {
@@ -444,34 +439,38 @@
         },
         {
           "id": "q3",
-          "prompt": "나누어진 작은 부분?",
-          "answerText": "조각",
-          "answerMatchMode": "EXACT",
+          "prompt": "조각의 크기와 모양에 따라 그림의 느낌이 달라지기 때문에 우리는 무엇을 마음껏 표현할 수 있다고 했는지 본문에서 찾아 두 글자로 써 보세요",
+          "answerText": "개성",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 19,
-              "end": 21
-            },
+              "start": 144,
+              "end": 146
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "색종이 모자이크에서 색깔을 어떻게 붙이면 어떤 느낌이 드는지 본문에서 짝지어 든 두 가지 결과를 모두 찾아 써 보세요",
+          "answerText": "부드러운, 화려",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 108,
-              "end": 110
+              "paragraphId": "p2",
+              "start": 70,
+              "end": 74
             },
             {
               "paragraphId": "p2",
-              "start": 15,
-              "end": 17
-            },
-            {
-              "paragraphId": "p2",
-              "start": 123,
-              "end": 125
-            },
-            {
-              "paragraphId": "p2",
-              "start": 128,
-              "end": 130
+              "start": 100,
+              "end": 102
             }
           ],
           "scoring": {

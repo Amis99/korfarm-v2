@@ -884,24 +884,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "학생들이 더 넓혀 달라고 요구하는 것은 무엇인가요?",
-          "answerText": "선택권",
+          "prompt": "현재 대부분의 학교가 학생들에게 하게 하는 일을 찾으시오.",
+          "answerText": "정해진 몇 가지 프로그램 중에서 하나를 고르도록",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 32,
-              "end": 35
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p3",
-              "start": 4,
-              "end": 7
+              "start": 73,
+              "end": 99
             }
           ],
           "scoring": {
@@ -912,31 +902,13 @@
         },
         {
           "id": "q2",
-          "prompt": "학교 측이 선택권 확대를 두고 내세운 이유는 무엇인가요?",
-          "answerText": "현실적인 어려움",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 167,
-              "end": 175
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "선택권 확대를 주장하는 사람들이 강조한 것은 무엇인가요?",
-          "answerText": "적성과 흥미",
+          "prompt": "선택권 확대를 주장하는 사람들이 강조한 것을 찾으시오.",
+          "answerText": "학생들의 적성과 흥미",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 29,
+              "start": 24,
               "end": 35
             }
           ],
@@ -947,11 +919,19 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "관심 있던 분야를 체험했을 때 높게 나타난 것은 무엇인가요?",
-          "answerText": "만족도",
-          "answerMatchMode": "ANY",
+          "id": "q3",
+          "prompt": "관심 있던 분야를 체험했을 때 높게 나타난 것을 모두 찾으시오.",
+          "answerTexts": [
+            "학습 효과",
+            "만족도"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 131,
+              "end": 136
+            },
             {
               "paragraphId": "p2",
               "start": 138,
@@ -965,15 +945,49 @@
           "revealOnWrong": true
         },
         {
+          "id": "q4",
+          "prompt": "선택권 확대에 반대하는 가장 큰 문제를 모두 찾으시오.",
+          "answerTexts": [
+            "체험처를 확보하기 어렵고",
+            "학생들의 안전을 관리하기 힘들다는 점"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 37,
+              "end": 50
+            },
+            {
+              "paragraphId": "p3",
+              "start": 51,
+              "end": 71
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q5",
-          "prompt": "체험처를 늘리는 방법의 예로 제시된 도움은 누구의 도움인가요?",
-          "answerText": "학부모",
-          "answerMatchMode": "ANY",
+          "prompt": "체험처를 늘리는 방법으로 고려할 수 있다고 한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "지역 사회의 여러 기관",
+            "학부모의 도움"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
+              "start": 102,
+              "end": 114
+            },
+            {
+              "paragraphId": "p4",
               "start": 131,
-              "end": 134
+              "end": 138
             }
           ],
           "scoring": {

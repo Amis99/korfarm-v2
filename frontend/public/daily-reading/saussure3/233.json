@@ -587,14 +587,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "건강을 위한 깨끗한 관리는?",
-          "answerText": "위생",
-          "answerMatchMode": "EXACT",
+          "prompt": "야외 활동 중에 묻은 것과 해야 하는 일을 모두 찾으시오.",
+          "answerTexts": [
+            "미세먼지와 꽃가루",
+            "깨끗이 씻어야 함"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 20,
-              "end": 22
+              "start": 46,
+              "end": 55
+            },
+            {
+              "paragraphId": "p1",
+              "start": 57,
+              "end": 66
             }
           ],
           "scoring": {
@@ -606,14 +614,22 @@
         },
         {
           "id": "q2",
-          "prompt": "맑고 깨끗한 상태를 뜻함?",
-          "answerText": "청결을",
-          "answerMatchMode": "EXACT",
+          "prompt": "현관에서 한 일을 모두 찾으시오.",
+          "answerTexts": [
+            "옷을 털고",
+            "손발을 씻었습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 70,
-              "end": 73
+              "paragraphId": "p1",
+              "start": 77,
+              "end": 82
+            },
+            {
+              "paragraphId": "p1",
+              "start": 83,
+              "end": 92
             }
           ],
           "scoring": {
@@ -625,14 +641,41 @@
         },
         {
           "id": "q3",
-          "prompt": "지켜야 할 행동 방식은?",
-          "answerText": "수칙을",
-          "answerMatchMode": "EXACT",
+          "prompt": "손을 꼼꼼하게 씻기 위해 사용하는 것과 씻는 방법을 모두 찾으시오.",
+          "answerTexts": [
+            "비누를 사용하여",
+            "손가락 사이사이까지 꼼꼼하게 씻는 습관"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 33,
+              "end": 41
+            },
+            {
+              "paragraphId": "p2",
+              "start": 42,
+              "end": 63
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "깨끗하게 씻는 행동은 무엇인지 찾으시오.",
+          "answerText": "우리 몸을 보호하는 좋은 방법",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 10,
-              "end": 13
+              "start": 43,
+              "end": 59
             }
           ],
           "scoring": {

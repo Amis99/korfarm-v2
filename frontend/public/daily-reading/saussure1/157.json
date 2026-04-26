@@ -474,19 +474,29 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "아침에 맺히는 것은?",
-          "answerText": "이슬",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 글에서 이름이 드러난 동물 두 종류를 모두 찾아보세요",
+          "answerText": "토끼, 파랑새",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 17,
-              "end": 19
+              "start": 0,
+              "end": 2
             },
             {
               "paragraphId": "p1",
-              "start": 53,
-              "end": 55
+              "start": 70,
+              "end": 72
+            },
+            {
+              "paragraphId": "p2",
+              "start": 119,
+              "end": 121
+            },
+            {
+              "paragraphId": "p2",
+              "start": 3,
+              "end": 6
             }
           ],
           "scoring": {
@@ -498,9 +508,28 @@
         },
         {
           "id": "q2",
-          "prompt": "일곱 빛깔 무엇가 뜸인가요?",
+          "prompt": "갑자기 세차게 내렸다가 그치는 비를 가리키는 낱말을 찾아보세요",
+          "answerText": "소나기",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 45,
+              "end": 48
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "비구름이 물러간 뒤에 하늘에 일곱 빛깔로 떠오른 것을 찾아보세요",
           "answerText": "무지개",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -521,10 +550,10 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "친구가 발견한 곳은?",
+          "id": "q4",
+          "prompt": "무지개 끝이 가리킨 곳에서 반짝이며 발견된 작은 물웅덩이를 찾아보세요",
           "answerText": "연못",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",

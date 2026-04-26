@@ -1034,12 +1034,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "1문단에서 '포스터 속에'가 들어간 시행을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 70
+              "end": 11
+            },
+            {
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 51
             }
           ],
           "scoring": {
@@ -1047,17 +1052,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "포스터 속에 들어앉아\n비둘기는 자꾸만 곁눈질을 하고 있다.\n포스터 속에 오래 들어앉아 있으면\n비둘기의 습성도 웬만치는 변한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "포스터 속에 들어앉아",
+            "포스터 속에 오래 들어앉아 있으면"
+          ]
         },
         {
           "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "포스터 속 비둘기의 행동을 나타내는 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 76
+              "paragraphId": "p1",
+              "start": 17,
+              "end": 31
             }
           ],
           "scoring": {
@@ -1066,16 +1074,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "비둘기가 노닐던 한때의 지붕마루를\n나는 알고 있는데\n정말이지 알고 있는데\n지금은 비어 버린 집 통만\n비바람에 털럭이며 삭고 있을 뿐이다."
+          "answerText": "자꾸만 곁눈질을 하고 있다"
         },
         {
           "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "prompt": "비둘기가 노닐던 곳을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 38
+              "paragraphId": "p2",
+              "start": 9,
+              "end": 17
             }
           ],
           "scoring": {
@@ -1084,16 +1092,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "포스터 속에는\n비둘기가 날아 볼 하늘이 없다.\n마셔 볼 공기가 없다."
+          "answerText": "한때의 지붕마루"
         },
         {
           "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
+          "prompt": "화자가 알고 있다고 반복하는 표현을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 25
+              "paragraphId": "p2",
+              "start": 19,
+              "end": 28
+            },
+            {
+              "paragraphId": "p2",
+              "start": 29,
+              "end": 40
             }
           ],
           "scoring": {
@@ -1101,17 +1114,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "답답하면 주리도 틀어 보지만\n그저 열없는 일."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "나는 알고 있는데",
+            "정말이지 알고 있는데"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "포스터 속에 없다고 반복되는 것을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 64
+              "paragraphId": "p3",
+              "start": 8,
+              "end": 24
+            },
+            {
+              "paragraphId": "p3",
+              "start": 26,
+              "end": 37
             }
           ],
           "scoring": {
@@ -1119,17 +1140,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그의 몸을 짓구겨\n누가 찢어 보아도\n피 한 방울 나지 않는다.\n불 속에 던져 살라 보아도\n잿가루 하나 남지 않는다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "비둘기가 날아 볼 하늘이 없다",
+            "마셔 볼 공기가 없다"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "답답할 때 해 보는 행동을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 59
+              "paragraphId": "p4",
+              "start": 5,
+              "end": 15
             }
           ],
           "scoring": {
@@ -1138,7 +1162,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그는 찍어 낸 포스터\n수많은 복사 속에\n다친 데 하나 없이 들어앉아 있으니\n차라리 죽지 못해 그는 탈이다."
+          "answerText": "주리도 틀어 보지만"
+        },
+        {
+          "id": "q7",
+          "prompt": "비둘기가 살아 있는 존재가 아님을 드러내는 결과를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 20,
+              "end": 33
+            },
+            {
+              "paragraphId": "p5",
+              "start": 50,
+              "end": 63
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "피 한 방울 나지 않는다",
+            "잿가루 하나 남지 않는다"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "비둘기가 죽지 못해 탈인 이유를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 22,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "다친 데 하나 없이 들어앉아 있으니"
         }
       ]
     }

@@ -392,19 +392,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "화자에게 먼저 말을 건네는 존재는 무엇인가요?",
-          "answerText": "바람",
+          "prompt": "화자에게 먼저 말을 건네는 행을 찾으시오.",
+          "answerText": "바람이 먼저 묻는다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 9,
-              "end": 11
-            },
-            {
-              "paragraphId": "p3",
-              "start": 32,
-              "end": 34
+              "end": 19
             }
           ],
           "scoring": {
@@ -415,13 +410,13 @@
         },
         {
           "id": "q2",
-          "prompt": "화자가 대답 대신 바라보는 것은 무엇인가요?",
-          "answerText": "나뭇잎",
+          "prompt": "화자가 대답 대신 바라보는 대상을 찾으시오.",
+          "answerText": "흔들리는 나뭇잎",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 34,
+              "start": 29,
               "end": 37
             }
           ],
@@ -433,14 +428,22 @@
         },
         {
           "id": "q3",
-          "prompt": "천천히 가르쳐 준다고 한 길은 언제의 길인가요?",
-          "answerText": "저녁 길",
-          "answerMatchMode": "ANY",
+          "prompt": "2문단에서 서로 대조되는 사람을 모두 찾으시오.",
+          "answerTexts": [
+            "갈 곳을 아는 사람",
+            "망설이며 걷는 사람"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 42,
-              "end": 46
+              "start": 0,
+              "end": 10
+            },
+            {
+              "paragraphId": "p2",
+              "start": 13,
+              "end": 23
             }
           ],
           "scoring": {
@@ -451,14 +454,22 @@
         },
         {
           "id": "q4",
-          "prompt": "한 번도 붙잡지 못했다고 한 것은 무엇인가요?",
-          "answerText": "이름들",
-          "answerMatchMode": "ANY",
+          "prompt": "바람 속에서 스쳐 지나가는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "한 번도 붙잡지 못한 이름들",
+            "끝내 말하지 못한 마음들"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 12,
+              "start": 0,
               "end": 15
+            },
+            {
+              "paragraphId": "p3",
+              "start": 17,
+              "end": 30
             }
           ],
           "scoring": {
@@ -469,39 +480,14 @@
         },
         {
           "id": "q5",
-          "prompt": "걷는 동안 화자가 가까워지는 대상은 누구인가요?",
-          "answerText": "나",
+          "prompt": "걷는 동안 화자가 자신에게 가까워진다는 뜻의 행을 찾으시오.",
+          "answerText": "나는 조금씩 나에게 가까워진다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 20,
-              "end": 21
-            },
-            {
-              "paragraphId": "p1",
-              "start": 34,
-              "end": 35
-            },
-            {
-              "paragraphId": "p3",
-              "start": 47,
-              "end": 48
-            },
-            {
-              "paragraphId": "p3",
-              "start": 51,
-              "end": 52
-            },
-            {
               "paragraphId": "p4",
               "start": 40,
-              "end": 41
-            },
-            {
-              "paragraphId": "p4",
-              "start": 47,
-              "end": 48
+              "end": 56
             }
           ],
           "scoring": {

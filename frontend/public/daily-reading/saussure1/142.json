@@ -552,19 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "올바르게 버려야 할 것.",
-          "answerText": "쓰레기",
-          "answerMatchMode": "EXACT",
+          "prompt": "분리배출을 할 때 가장 먼저 용기 안에서 깨끗하게 비워야 하는 것이 무엇인지 한 단어로 찾아 써 보세요",
+          "answerText": "내용물",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 11,
-              "end": 14
-            },
-            {
-              "paragraphId": "p2",
-              "start": 112,
-              "end": 115
+              "start": 47,
+              "end": 50
             }
           ],
           "scoring": {
@@ -576,14 +571,19 @@
         },
         {
           "id": "q2",
-          "prompt": "깨끗이 비우고 무엇하나요?",
-          "answerText": "재활용",
-          "answerMatchMode": "EXACT",
+          "prompt": "용기에 붙어 있어 깔끔하게 떼어내야 할 것 두 가지를 모두 지문에서 찾아 써 보세요",
+          "answerText": "비닐, 상표",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 77,
-              "end": 80
+              "paragraphId": "p2",
+              "start": 12,
+              "end": 14
+            },
+            {
+              "paragraphId": "p2",
+              "start": 17,
+              "end": 19
             }
           ],
           "scoring": {
@@ -595,9 +595,43 @@
         },
         {
           "id": "q3",
-          "prompt": "쓰레기가 새로운 무엇인가요?",
+          "prompt": "재질에 따라 따로 나누어 차곡차곡 쌓는 두 가지를 지문에서 찾아 써 보세요",
+          "answerText": "종이, 플라스틱",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 68
+            },
+            {
+              "paragraphId": "p2",
+              "start": 70,
+              "end": 72
+            },
+            {
+              "paragraphId": "p2",
+              "start": 75,
+              "end": 79
+            },
+            {
+              "paragraphId": "p2",
+              "start": 81,
+              "end": 85
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "분리배출의 순서를 잘 지키면 쓰레기가 무엇으로 변한다고 했는지 한 단어로 찾아 써 보세요",
           "answerText": "자원",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",

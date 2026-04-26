@@ -996,188 +996,73 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '전제'를 모두 찾으시오.",
+          "prompt": "글 속 주장과 근거가 어떤 방향으로 이어지는지를 보여 주는 논리학의 두 기본 개념을 모두 찾으시오",
+          "answerText": "전제, 결론",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 15,
-              "end": 17
-            },
-            {
-              "paragraphId": "p2",
-              "start": 49,
-              "end": 51
-            },
-            {
-              "paragraphId": "p5",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p5",
-              "start": 52,
-              "end": 54
-            }
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p1", "start": 4, "end": 6}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "전제"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '결론'을 모두 찾으시오.",
+          "prompt": "같은 결론이라도 서로 다를 수 있는 근거의 두 가지 종류로 함께 든 것을 모두 찾으시오",
+          "answerText": "통계, 사례",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p1",
-              "start": 63,
-              "end": 65
-            },
-            {
-              "paragraphId": "p1",
-              "start": 74,
-              "end": 76
-            },
-            {
-              "paragraphId": "p1",
-              "start": 127,
-              "end": 129
-            },
-            {
-              "paragraphId": "p1",
-              "start": 254,
-              "end": 256
-            },
-            {
-              "paragraphId": "p2",
-              "start": 19,
-              "end": 21
-            },
-            {
-              "paragraphId": "p2",
-              "start": 65,
-              "end": 67
-            },
-            {
-              "paragraphId": "p2",
-              "start": 124,
-              "end": 126
-            },
-            {
-              "paragraphId": "p2",
-              "start": 214,
-              "end": 216
-            },
-            {
-              "paragraphId": "p3",
-              "start": 17,
-              "end": 19
-            },
-            {
-              "paragraphId": "p3",
-              "start": 148,
-              "end": 150
-            },
-            {
-              "paragraphId": "p4",
-              "start": 11,
-              "end": 13
-            },
-            {
-              "paragraphId": "p4",
-              "start": 55,
-              "end": 57
-            },
-            {
-              "paragraphId": "p5",
-              "start": 7,
-              "end": 9
-            },
-            {
-              "paragraphId": "p5",
-              "start": 48,
-              "end": 50
-            }
+            {"paragraphId": "p3", "start": 62, "end": 64},
+            {"paragraphId": "p3", "start": 86, "end": 88}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "결론"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '예외'를 모두 찾으시오.",
+          "prompt": "글이 결론을 서둘러 내릴 때의 잘못으로 함께 든, 흔한 상황에 어긋나는 경우와 그것을 무리하게 보편화하는 방식을 모두 찾으시오",
+          "answerText": "예외, 일반화",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 147,
-              "end": 149
-            },
-            {
-              "paragraphId": "p5",
-              "start": 56,
-              "end": 58
-            }
+            {"paragraphId": "p2", "start": 147, "end": 149},
+            {"paragraphId": "p2", "start": 158, "end": 161}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "예외"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '기준'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 167,
-              "end": 169
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "근거가 결론과 알맞게 연결될 때 더 커진다고 한, 주장의 힘을 가리키는 말을 모두 찾으시오",
+          "answerText": "설득력",
           "answerMatchMode": "ANY",
-          "answerText": "기준"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 115, "end": 118},
+            {"paragraphId": "p4", "start": 76, "end": 79}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '질서'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 91,
-              "end": 93
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "논리학 자료가 시험 형식이 아니라 실제 생활에서 주장을 분별하는 무엇이 된다고 하였는지 찾으시오",
+          "answerText": "기준",
           "answerMatchMode": "ANY",
-          "answerText": "질서"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 167, "end": 169}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "전제와 결론을 구별하는 일은 주장과 근거의 관계를 눈에 보이게 만드는 무엇이라고 하였는지 찾으시오",
+          "answerText": "훈련",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 42, "end": 44}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

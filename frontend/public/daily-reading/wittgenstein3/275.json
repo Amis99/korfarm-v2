@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "prompt": "1연에서 화물 열차의 문이 잠긴 모습을 나타낸 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 66
+              "start": 16,
+              "end": 31
             }
           ],
           "scoring": {
@@ -585,16 +585,31 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "무엇을 실었느냐 화물 열차의\n검은 문들은 탄탄히 잠겨졌다\n바람 속을 달리는 화물 열차의 지붕 우에\n우리 제각기 드러누워"
+          "answerText": "검은 문들은 탄탄히 잠겨졌다"
         },
         {
           "id": "q2",
-          "prompt": "2연은 그 정서를 어떤 이미지나 흐름으로 이어 가는가?",
+          "prompt": "시에서 반복되는 화물 열차 지붕 위 장면의 구절을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 50
+              "paragraphId": "p1",
+              "start": 32,
+              "end": 54
+            },
+            {
+              "paragraphId": "p6",
+              "start": 65,
+              "end": 87
+            },
+            {
+              "paragraphId": "p1",
+              "start": 55,
+              "end": 66
+            },
+            {
+              "paragraphId": "p6",
+              "start": 88,
+              "end": 99
             }
           ],
           "scoring": {
@@ -602,70 +617,24 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "한결같이 쳐다보는 하나씩의 별\n\n두만강 저쪽에서 온다는 사람들과\n자무스에서 온다는 사람들과"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "바람 속을 달리는 화물 열차의 지붕 우에",
+            "우리 제각기 드러누워"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
+          "prompt": "시에서 사람들이 한결같이 쳐다보는 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 62
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "험한 땅에서 험한 변 치르고\n눈보라 치기 전에 고향으로 돌아간다는\n남도 사람들과\n북어 쪼가리 초담배 밀가루떡이랑"
-        },
-        {
-          "id": "q4",
-          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 74
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "나눠서 요기하며 내사 서울이 그리워\n고향과는 딴 방향으로 흔들려 간다\n\n푸르른 바다와 거리 거리를\n설움 많은 이민 열차의 흐린 창으로"
-        },
-        {
-          "id": "q5",
-          "prompt": "5연은 앞선 흐름에 어떤 긴장이나 전환을 더하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 60
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그저 서러이 내다보던 골짝 골짝을\n갈 때와 마찬가지로\n헐벗은 채 돌아오는 이 사람들과\n마찬가지로 헐벗은 나요"
-        },
-        {
-          "id": "q6",
-          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
-          "answerRanges": [
+              "paragraphId": "p2",
+              "start": 10,
+              "end": 16
+            },
             {
               "paragraphId": "p6",
-              "start": 0,
+              "start": 110,
               "end": 116
             }
           ],
@@ -675,7 +644,113 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "나라에 기쁜 일 많아\n울지를 못하는 함경도 사내\n\n총을 안고 뿔가의 노래를 부르던\n슬라브의 늙은 병정은 잠이 들었나\n바람 속을 달리는 화물 열차의 지붕 우에\n우리 제각기 드러누워\n한결같이 쳐다보는 하나씩의 별"
+          "answerText": "하나씩의 별"
+        },
+        {
+          "id": "q4",
+          "prompt": "2연에서 사람들이 온다고 한 두 곳을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 18,
+              "end": 24
+            },
+            {
+              "paragraphId": "p2",
+              "start": 36,
+              "end": 39
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "두만강 저쪽",
+            "자무스"
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "3연에서 남도 사람들이 돌아간다고 한 곳을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 26,
+              "end": 30
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "고향으로"
+        },
+        {
+          "id": "q6",
+          "prompt": "4연에서 화자가 고향과 다른 방향으로 가고 있음을 드러내는 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 20,
+              "end": 38
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "고향과는 딴 방향으로 흔들려 간다"
+        },
+        {
+          "id": "q7",
+          "prompt": "5연에서 화자가 자신과 마찬가지라고 말한 사람들을 가리키는 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 30,
+              "end": 46
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "헐벗은 채 돌아오는 이 사람들"
+        },
+        {
+          "id": "q8",
+          "prompt": "6연에서 등장하는 두 인물을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 20,
+              "end": 26
+            },
+            {
+              "paragraphId": "p6",
+              "start": 46,
+              "end": 56
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "함경도 사내",
+            "슬라브의 늙은 병정"
+          ]
         }
       ]
     }

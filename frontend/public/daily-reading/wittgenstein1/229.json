@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리 학교 진로 체험 주간은 지난 무엇이 다양한 직업을 직접 체험했다?",
+          "prompt": "우리 학교 진로 체험 주간이 열린 때를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 19,
-              "end": 31
+              "start": 16,
+              "end": 22
             }
           ],
           "scoring": {
@@ -585,11 +585,11 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "금요일에 열렸고 학생들"
+          "answerText": "지난 금요일"
         },
         {
           "id": "q2",
-          "prompt": "핵심 개념은 무엇인가요?",
+          "prompt": "근거 보완 뒤 쓰거나 다른 말로 바꾸어야 한다고 한 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -612,12 +612,12 @@
         },
         {
           "id": "q3",
-          "prompt": "이 문장은 체험의 분위기를 전하는 데는 도움이 되는데, 누가 어떤 상황에서 무엇 않다?",
+          "prompt": "그 표현의 근거를 보완해야 하는 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 92,
-              "end": 106
+              "paragraphId": "p2",
+              "start": 70,
+              "end": 100
             }
           ],
           "scoring": {
@@ -626,16 +626,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그렇게 말했는지가 분명하지"
+          "answerText": "실제로 몇 명이 참여했는지 수치를 아직 확인하지 못했다"
         },
         {
           "id": "q4",
-          "prompt": "또 무엇에 나뉘어 있었는데 이동 시간이 길어 준비가 늦어진 조도 있었다?",
+          "prompt": "학생 반응 문장에서 분명하지 않은 내용을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 2,
-              "end": 15
+              "paragraphId": "p3",
+              "start": 81,
+              "end": 100
             }
           ],
           "scoring": {
@@ -644,16 +644,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "행사장은 과학실과 체육관"
+          "answerText": "누가 어떤 상황에서 그렇게 말했는지"
         },
         {
           "id": "q5",
-          "prompt": "무엇 행사에서 개선할 점을 간단히 적고 싶다?",
+          "prompt": "인터뷰 내용을 더 넣으면 독자가 떠올릴 수 있는 것을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 12
+              "paragraphId": "p3",
+              "start": 142,
+              "end": 149
             }
           ],
           "scoring": {
@@ -662,16 +662,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "기사의 끝부분에는 다음"
+          "answerText": "구체적인 장면"
         },
         {
           "id": "q6",
-          "prompt": "제목도 아직 '무엇'처럼 너무 막연하므로 활동의 특징이 드러나게 다시 다듬을 필요가 있다?",
+          "prompt": "불편했던 점은 무엇을 설명한 뒤에 배치하는 편이 자연스럽다고 했는가?",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 75,
-              "end": 86
+              "paragraphId": "p4",
+              "start": 111,
+              "end": 128
             }
           ],
           "scoring": {
@@ -680,7 +680,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "재미있었던 진로 체험"
+          "answerText": "체험의 목적과 성과를 설명한 뒤"
+        },
+        {
+          "id": "q7",
+          "prompt": "초고에서 또렷하게 구분되지 않은 두 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 129,
+              "end": 134
+            },
+            {
+              "paragraphId": "p5",
+              "start": 141,
+              "end": 147
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "사실 정보",
+            "필자의 판단"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "다음 고쳐쓰기에서 분명히 세우겠다고 한 순서를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 138,
+              "end": 170
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "행사 목적, 대표 프로그램, 학생 반응, 개선 제안의 순서"
         }
       ]
     }

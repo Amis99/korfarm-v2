@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "많은 책과 자료를 갖추어 두고 사람들이 읽거나 공부하게 하는 장소는?",
+          "prompt": "글에서 책을 읽고 공부하는 조용한 공간으로 제시된 장소 이름을 찾으시오.",
           "answerText": "도서관",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -596,14 +596,14 @@
         },
         {
           "id": "q2",
-          "prompt": "정신을 한곳으로 모아 다른 잡생각이 들지 않게 하는 상태를 뜻하는 말은?",
-          "answerText": "집중을",
-          "answerMatchMode": "EXACT",
+          "prompt": "책이 더러워지지 않게 하려고 책을 만지기 전에 한 행동을 찾으시오.",
+          "answerText": "손을 깨끗하게 씻어",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 35,
-              "end": 38
+              "paragraphId": "p1",
+              "start": 51,
+              "end": 61
             }
           ],
           "scoring": {
@@ -615,14 +615,33 @@
         },
         {
           "id": "q3",
-          "prompt": "중요한 약속이나 정보를 사람들에게 알리기 위해 벽에 붙이는 큰 종이는?",
-          "answerText": "포스터로",
-          "answerMatchMode": "EXACT",
+          "prompt": "다 읽은 책을 어떻게 했는지 나타내는 표현을 찾으시오.",
+          "answerText": "제자리에 꽂아두고",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 59,
+              "end": 68
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "작은 실천들이 모여 만든 독서 환경을 나타내는 표현을 찾으시오.",
+          "answerText": "행복한 독서 환경",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 25,
-              "end": 29
+              "start": 73,
+              "end": 82
             }
           ],
           "scoring": {

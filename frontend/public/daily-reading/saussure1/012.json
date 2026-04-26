@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "컵에 물을 ( )서 써요.",
-          "answerText": "받아",
-          "answerMatchMode": "EXACT",
+          "prompt": "물이 우리에게 어떤 존재라고 했는지 지문에서 찾아 보세요.",
+          "answerText": "물은 우리 생명에 꼭 필요한 소중한 자원입니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 42,
-              "end": 44
+              "start": 0,
+              "end": 25
             }
           ],
           "scoring": {
@@ -571,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "깨끗한 물을 ( ) 수 있어요.",
-          "answerText": "지킬",
-          "answerMatchMode": "EXACT",
+          "prompt": "양치를 할 때 어떻게 한다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "양치를 할 때는 컵에 물을 받아서 써요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 91,
-              "end": 93
+              "start": 27,
+              "end": 48
             }
           ],
           "scoring": {
@@ -590,14 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "물 ( )을 막을 수 있어요.",
-          "answerText": "부족",
-          "answerMatchMode": "EXACT",
+          "prompt": "수도꼭지를 계속 틀어 놓으면 어떻게 된다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "수도꼭지를 계속 틀어 놓으면 물이 낭비됩니다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 50,
+              "end": 74
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "세수를 할 때 비누칠 동안 어떻게 한다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "세수를 할 때도 비누칠 동안은 물을 잠가요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 110,
-              "end": 112
+              "start": 0,
+              "end": 23
             }
           ],
           "scoring": {

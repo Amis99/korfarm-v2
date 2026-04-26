@@ -913,84 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "글을 읽고 난 뒤 생기는 여러 가지 물음은 무엇이라고 하나요?",
-          "answerText": "질문",
+          "prompt": "질문은 독해력을 기르는 어떤 것으로 설명되나요?",
+          "answerText": "좋은 도구",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 21,
-              "end": 23
-            },
-            {
-              "paragraphId": "p1",
-              "start": 75,
-              "end": 77
-            },
-            {
-              "paragraphId": "p1",
-              "start": 93,
-              "end": 95
-            },
-            {
-              "paragraphId": "p1",
-              "start": 133,
-              "end": 135
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 55,
-              "end": 57
-            },
-            {
-              "paragraphId": "p2",
-              "start": 95,
-              "end": 97
-            },
-            {
-              "paragraphId": "p2",
-              "start": 134,
-              "end": 136
-            },
-            {
-              "paragraphId": "p3",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p3",
-              "start": 63,
-              "end": 65
-            },
-            {
-              "paragraphId": "p3",
-              "start": 101,
-              "end": 103
-            },
-            {
-              "paragraphId": "p3",
-              "start": 144,
-              "end": 146
-            },
-            {
-              "paragraphId": "p4",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p4",
-              "start": 103,
-              "end": 105
-            },
-            {
-              "paragraphId": "p4",
-              "start": 127,
-              "end": 129
+              "start": 34,
+              "end": 39
             }
           ],
           "scoring": {
@@ -1001,14 +931,14 @@
         },
         {
           "id": "q2",
-          "prompt": "글에 직접 드러난 사실을 묻는 질문은 무엇인가요?",
-          "answerText": "사실적 질문",
+          "prompt": "독자는 글쓴이의 생각에 어떻게 하면서 질문을 떠올리나요?",
+          "answerText": "공감하거나 반대하면서",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 51,
-              "end": 57
+              "paragraphId": "p1",
+              "start": 53,
+              "end": 64
             }
           ],
           "scoring": {
@@ -1019,28 +949,24 @@
         },
         {
           "id": "q3",
-          "prompt": "숨겨진 의미를 추측하는 질문은 무엇인가요?",
-          "answerText": "추론적 질문",
-          "answerMatchMode": "ANY",
+          "prompt": "질문의 세 가지 종류를 모두 찾으시오.",
+          "answerTexts": [
+            "사실적 질문",
+            "추론적 질문",
+            "비판적 질문"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 51,
+              "end": 57
+            },
             {
               "paragraphId": "p2",
               "start": 91,
               "end": 97
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "글의 내용이나 주장을 평가해 보는 질문은 무엇인가요?",
-          "answerText": "비판적 질문",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+            },
             {
               "paragraphId": "p2",
               "start": 130,
@@ -1054,15 +980,33 @@
           "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "글쓴이에게 직접 질문을 전달해 보는 방법 가운데 하나는 무엇인가요?",
-          "answerText": "이메일",
+          "id": "q4",
+          "prompt": "답을 찾기 위해 다른 책이나 자료를 찾아보면 무엇이 확장되나요?",
+          "answerText": "학습의 범위",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 95,
-              "end": 98
+              "start": 67,
+              "end": 73
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "질문하는 습관은 우리를 어떤 독자로 성장시킨다고 하나요?",
+          "answerText": "지혜로운 독자",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 140,
+              "end": 147
             }
           ],
           "scoring": {

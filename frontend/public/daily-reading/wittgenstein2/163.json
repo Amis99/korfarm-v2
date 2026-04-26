@@ -571,12 +571,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단의 내용으로 가장 적절한 것은?",
+          "prompt": "화자가 좋다고 말하며 반복하는 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 56
+              "start": 6,
+              "end": 19
+            },
+            {
+              "paragraphId": "p6",
+              "start": 37,
+              "end": 50
             }
           ],
           "scoring": {
@@ -585,16 +590,44 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "당신……, 당신이라는 말 참 좋지요, 그래서 불러봅니다 킥킥거리며 한때 적요로움의 울음이 있었던 때,"
+          "answerText": "당신이라는 말 참 좋지요"
         },
         {
           "id": "q2",
-          "prompt": "2문단의 내용으로 가장 적절한 것은?",
+          "prompt": "웃음소리를 나타내며 반복되는 '-거리며' 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 31,
+              "end": 36
+            },
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 5
+            },
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 5
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "킥킥거리며"
+        },
+        {
+          "id": "q3",
+          "prompt": "슬픔이 이어지는 모습을 문을 여닫는 동작으로 표현한 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 63
+              "end": 28
             }
           ],
           "scoring": {
@@ -603,34 +636,31 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "한 슬픔이 문을 닫으면 또 한 슬픔이 문을 여는 것을 이만큼 살아옴의 상처에 기대, 나 킥킥……, 당신을 부릅니다"
+          "answerText": "한 슬픔이 문을 닫으면 또 한 슬픔이 문을 여는 것"
         },
         {
-          "id": "q3",
-          "prompt": "3문단의 내용으로 가장 적절한 것은?",
+          "id": "q4",
+          "prompt": "3문단에서 자연물을 통해 당신을 환기하는 표현을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 55
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "단풍의 손바닥, 은행의 두 갈래 그리고 합침 저 개망초의 시름, 밟힌 풀의 흙으로 돌아감 당신……,"
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단의 내용으로 가장 적절한 것은?",
-          "answerRanges": [
+              "end": 7
+            },
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 69
+              "paragraphId": "p3",
+              "start": 9,
+              "end": 17
+            },
+            {
+              "paragraphId": "p3",
+              "start": 27,
+              "end": 34
+            },
+            {
+              "paragraphId": "p3",
+              "start": 36,
+              "end": 49
             }
           ],
           "scoring": {
@@ -638,17 +668,22 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "킥킥거리며 세월에 대해 혹은 사랑과 상처, 상처의 몸이 나에게 기대와 저를 부빌 때 당신……, 그대라는 자연의 달과 별……,"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "단풍의 손바닥",
+            "은행의 두 갈래",
+            "개망초의 시름",
+            "밟힌 풀의 흙으로 돌아감"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단의 내용으로 가장 적절한 것은?",
+          "prompt": "상처의 몸이 기대는 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 86
+              "paragraphId": "p4",
+              "start": 31,
+              "end": 34
             }
           ],
           "scoring": {
@@ -657,16 +692,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "킥킥거리며 당신이라고……, 금방 울 것 같은 사내의 아름다움 그 아름다움에 기대 마음의 무덤에 나 벌초하러 진설 음식도 없이 맨 술 한 병 차고 병자처럼,"
+          "answerText": "나에게"
         },
         {
           "id": "q6",
-          "prompt": "6문단의 내용으로 가장 적절한 것은?",
+          "prompt": "그대를 자연물로 비유한 표현을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 96
+              "paragraphId": "p4",
+              "start": 58,
+              "end": 66
             }
           ],
           "scoring": {
@@ -675,7 +710,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그러나 치병과 환후는 각각 따로인 것을 킥킥 당신 이쁜 당신……, 당신이라는 말 참 좋지요, 내가 아니라서 끝내 버릴 수 없는, 무를 수도 없는 참혹……, 그러나 킥킥 당신"
+          "answerText": "자연의 달과 별"
+        },
+        {
+          "id": "q7",
+          "prompt": "화자가 당신이라고 부를 때 함께 떠올리는 사내의 모습을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 15,
+              "end": 33
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "금방 울 것 같은 사내의 아름다움"
+        },
+        {
+          "id": "q8",
+          "prompt": "치료와 앓고 난 뒤의 상태가 따로임을 드러낸 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 4,
+              "end": 20
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "치병과 환후는 각각 따로인 것"
         }
       ]
     }

@@ -557,14 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "암탉인 잎싹이 숲속에서 발견하여 자신의 아기로 정성껏 키우게 된 동물은?",
-          "answerText": "아기 오리",
-          "answerMatchMode": "EXACT",
+          "prompt": "잎싹이 숲속에서 우연히 발견한 것을 지문에서 찾으시오.",
+          "answerText": "오리 알",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 102,
-              "end": 107
+              "start": 27,
+              "end": 31
             }
           ],
           "scoring": {
@@ -576,14 +576,22 @@
         },
         {
           "id": "q2",
-          "prompt": "무리를 지키고 위험을 알리는 역할을 하는 용감한 오리를 뜻하는 말은?",
-          "answerText": "파수꾼",
-          "answerMatchMode": "EXACT",
+          "prompt": "잎싹이 초록이에게 가르친 두 가지 법을 모두 찾으시오.",
+          "answerTexts": [
+            "헤엄치는 법",
+            "숲에서 살아남는 법"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 12,
-              "end": 15
+              "paragraphId": "p2",
+              "start": 55,
+              "end": 61
+            },
+            {
+              "paragraphId": "p2",
+              "start": 63,
+              "end": 73
             }
           ],
           "scoring": {
@@ -595,14 +603,33 @@
         },
         {
           "id": "q3",
-          "prompt": "잎싹이 초록이를 위해 자신의 모든 것을 바쳐 보살피는 숭고한 마음은?",
-          "answerText": "위대한 사랑",
-          "answerMatchMode": "EXACT",
+          "prompt": "초록이가 어느덧 된 존재를 지문에서 찾으시오.",
+          "answerText": "파수꾼 오리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 94,
-              "end": 100
+              "start": 12,
+              "end": 18
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "어머니의 위대한 사랑이 아들에게 되어 준 것을 지문에서 찾으시오.",
+          "answerText": "날개",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 121,
+              "end": 123
             }
           ],
           "scoring": {

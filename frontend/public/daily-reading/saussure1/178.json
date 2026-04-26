@@ -474,25 +474,15 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "비밀이 담긴 무엇인가요?",
-          "answerText": "연못",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구들과 함께 지도를 따라 비밀의 연못에 도착하여 가장 깊은 파도 소리를 찾아낸 주인공 소년의 이름은 무엇인지 찾아 써 보세요",
+          "answerText": "바다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 32,
-              "end": 34
-            },
-            {
-              "paragraphId": "p1",
-              "start": 44,
-              "end": 46
-            },
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 6
-            }
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p1", "start": 89, "end": 91},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 105, "end": 107},
+            {"paragraphId": "p2", "start": 138, "end": 140}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -503,20 +493,11 @@
         },
         {
           "id": "q2",
-          "prompt": "철썩이는 무엇 소리인가요?",
-          "answerText": "파도",
-          "answerMatchMode": "EXACT",
+          "prompt": "연못 주위에 가득 피어 딸랑딸랑 맑은 소리를 내고 있던 꽃은 무엇인지 찾아 써 보세요",
+          "answerText": "은방울꽃",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 113,
-              "end": 115
-            },
-            {
-              "paragraphId": "p2",
-              "start": 145,
-              "end": 147
-            }
+            {"paragraphId": "p1", "start": 52, "end": 56}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -527,35 +508,27 @@
         },
         {
           "id": "q3",
-          "prompt": "주인공 소년의 이름?",
-          "answerText": "바다",
-          "answerMatchMode": "EXACT",
+          "prompt": "등대 주인 할아버지가 바다의 용기를 칭찬하며 선물한 멋진 물건은 무엇인지 두 단어를 모두 찾아 써 보세요",
+          "answerText": "소라 껍데기",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 89,
-              "end": 91
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 105,
-              "end": 107
-            },
-            {
-              "paragraphId": "p2",
-              "start": 138,
-              "end": 140
-            }
+            {"paragraphId": "p2", "start": 121, "end": 123},
+            {"paragraphId": "p2", "start": 124, "end": 127}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "바다가 이제 파도 소리뿐만 아니라 친구들에게서 소중히 모으게 된 또 하나의 소리는 무엇인지 찾아 써 보세요",
+          "answerText": "웃음소리",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 162, "end": 166}
           ],
           "scoring": {
             "correctDeltaSec": 10,

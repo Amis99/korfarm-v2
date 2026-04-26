@@ -396,19 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지구촌의 모든 지역?",
-          "answerText": "세계",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서 '한 지역의 평균적인 날씨 상태'를 뜻하는 두 글자 낱말을 찾아 적어 보세요",
+          "answerText": "기후",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 127,
-              "end": 129
+              "start": 20,
+              "end": 22
             }
           ],
           "scoring": {
@@ -420,19 +415,14 @@
         },
         {
           "id": "q2",
-          "prompt": "국민과 영토가 있는 집단?",
-          "answerText": "나라",
-          "answerMatchMode": "EXACT",
+          "prompt": "추운 북극 지역에서 얼음을 쌓아 만든 집을 무엇이라고 하는지 글에서 찾아 적어 보세요",
+          "answerText": "이글루",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 6,
-              "end": 8
-            },
-            {
-              "paragraphId": "p2",
-              "start": 107,
-              "end": 109
+              "start": 135,
+              "end": 138
             }
           ],
           "scoring": {
@@ -444,14 +434,33 @@
         },
         {
           "id": "q3",
-          "prompt": "슬기롭고 명철한 마음?",
-          "answerText": "지혜",
-          "answerMatchMode": "EXACT",
+          "prompt": "사막 지역에서 흙으로 벽을 두껍게 쌓는 까닭이 무엇인지 글에서 찾아 적어 보세요",
+          "answerText": "뜨거운 햇빛을 막기 위해",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 192,
-              "end": 194
+              "start": 74,
+              "end": 87
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "이동하기 편리하게 천막으로 만든 집의 이름이 무엇인지 글에서 찾아 적어 보세요",
+          "answerText": "게르",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 86,
+              "end": 88
             }
           ],
           "scoring": {

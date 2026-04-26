@@ -1327,19 +1327,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "외부 자극과 경험에 따라 뇌가 바뀌는 성질은 무엇인가요?",
-          "answerText": "뇌 가소성",
+          "prompt": "뇌 가소성의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "뇌가 외부 자극이나 경험에 반응하여 구조와 기능을 바꾸는 성질",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 5
+              "start": 7,
+              "end": 41
             }
           ],
           "scoring": {
@@ -1350,14 +1345,14 @@
         },
         {
           "id": "q2",
-          "prompt": "악기 연주나 운동을 배울 때 촘촘해지는 것은 무엇인가요?",
-          "answerText": "신경망",
+          "prompt": "새로운 것을 배울 때 뇌에서 일어나는 변화를 찾으시오.",
+          "answerText": "새로운 것을 배우면 뇌 세포 사이의 연결이 더 단단해지거나 새롭게 생겨납니다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 59,
-              "end": 62
+              "paragraphId": "p1",
+              "start": 120,
+              "end": 162
             }
           ],
           "scoring": {
@@ -1368,14 +1363,28 @@
         },
         {
           "id": "q3",
-          "prompt": "손상된 기능 회복을 돕는 중요한 과정은 무엇인가요?",
-          "answerText": "재활 훈련",
-          "answerMatchMode": "ANY",
+          "prompt": "새로운 기술을 습득할 때 관련된 예와 변화를 모두 찾으시오.",
+          "answerTexts": [
+            "악기 연주나 운동",
+            "신경망",
+            "자주 쓰는 연결은 강화됩니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 89,
-              "end": 94
+              "paragraphId": "p3",
+              "start": 37,
+              "end": 46
+            },
+            {
+              "paragraphId": "p3",
+              "start": 59,
+              "end": 62
+            },
+            {
+              "paragraphId": "p3",
+              "start": 132,
+              "end": 147
             }
           ],
           "scoring": {
@@ -1386,14 +1395,22 @@
         },
         {
           "id": "q4",
-          "prompt": "뇌 건강을 유지하는 생활 습관의 예로 제시된 활동은 무엇인가요?",
-          "answerText": "독서",
-          "answerMatchMode": "ANY",
+          "prompt": "손상된 기능 회복 과정에서 필요한 훈련과 그 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "끊임없는 재활 훈련",
+            "뇌의 새로운 경로"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 35,
-              "end": 37
+              "paragraphId": "p4",
+              "start": 84,
+              "end": 94
+            },
+            {
+              "paragraphId": "p4",
+              "start": 96,
+              "end": 105
             }
           ],
           "scoring": {
@@ -1404,10 +1421,18 @@
         },
         {
           "id": "q5",
-          "prompt": "노화에 따른 인지 기능 저하를 막는 데 도움이 된다고 한 것은 무엇인가요?",
-          "answerText": "퀴즈 풀이",
-          "answerMatchMode": "ANY",
+          "prompt": "뇌 건강을 유지하는 활동의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "독서",
+            "퀴즈 풀이"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 35,
+              "end": 37
+            },
             {
               "paragraphId": "p5",
               "start": 39,

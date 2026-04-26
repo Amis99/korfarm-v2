@@ -552,24 +552,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "중앙 ( )대 옆에 모이에요.",
-          "answerText": "분수",
-          "answerMatchMode": "EXACT",
+          "prompt": "꼬마 탐정단의 대장 이름을 지문에서 찾아 보세요.",
+          "answerText": "민수",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 6,
-              "end": 8
-            },
-            {
-              "paragraphId": "p1",
-              "start": 90,
-              "end": 92
+              "start": 63,
+              "end": 65
             },
             {
               "paragraphId": "p2",
-              "start": 4,
-              "end": 6
+              "start": 0,
+              "end": 2
             }
           ],
           "scoring": {
@@ -581,9 +576,9 @@
         },
         {
           "id": "q2",
-          "prompt": "민수는 ( )를 들었습니다.",
+          "prompt": "탐정 대장이 들고 다니며 살피는 도구의 이름을 지문에서 찾아 보세요.",
           "answerText": "돋보기",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -605,14 +600,33 @@
         },
         {
           "id": "q3",
-          "prompt": "( )한 그늘 아래.",
-          "answerText": "시원",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구들이 분수대 물줄기 사이로 발견한 자연 현상을 지문에서 찾아 보세요.",
+          "answerText": "무지개",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 102,
+              "end": 105
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "젖은 종이 쪽지에 적힌 문구를 지문에서 찾아 보세요.",
+          "answerText": "시원한 그늘 아래",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 36,
-              "end": 38
+              "end": 45
             }
           ],
           "scoring": {

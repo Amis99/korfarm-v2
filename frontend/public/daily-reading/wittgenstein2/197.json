@@ -571,30 +571,32 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "오늘날 예술 작품에서 여러 매체의 영향 관계를 분석하는 개념을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 187
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "오늘날 예술 작품은 문자, 이미지, 소리처럼 서로 다른 매체가 분리된 채 존재하기보다 한 작품 안에서 뒤섞여 나타나는 경우가 많다. 이런 현상을 설명할 때 쓰이는 개념이 상호 매체성이다. 상호 매체성은 단순히 여러 표현 수단이 함께 등장한다는 뜻이 아니라, 각 매체가 어떤 방식으로 서로 영향을 주고받는지를 분석하는 관점까지 포함한다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단의 내용을 바탕으로 알 수 있는 것은?",
-          "answerRanges": [
+              "start": 95,
+              "end": 101
+            },
+            {
+              "paragraphId": "p1",
+              "start": 105,
+              "end": 111
+            },
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 202
+              "end": 6
+            },
+            {
+              "paragraphId": "p5",
+              "start": 160,
+              "end": 166
+            },
+            {
+              "paragraphId": "p6",
+              "start": 4,
+              "end": 10
             }
           ],
           "scoring": {
@@ -603,16 +605,39 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "상호 매체성을 이해하는 첫 번째 관점은 매체를 문학, 음악, 회화 같은 예술 형식과 거의 같은 것으로 보는 입장이다. 이 관점에서는 서로 다른 매체가 섞여 하나의 작품으로 통합되는 과정 자체가 중요하다. 오페라나 영화처럼 소리, 문자, 이미지가 결합하는 작품이 대표적인 사례이며, 각각의 예술 형식이 하나의 전체로 만나는 상태를 예술의 이상으로 바라보기도 한다."
+          "answerText": "상호 매체성"
+        },
+        {
+          "id": "q2",
+          "prompt": "1문단에서 상호 매체성이 포함한다고 설명한 분석 관점을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 144,
+              "end": 179
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "각 매체가 어떤 방식으로 서로 영향을 주고받는지를 분석하는 관점"
         },
         {
           "id": "q3",
-          "prompt": "3문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "2문단에서 소리, 문자, 이미지가 결합하는 대표적인 사례 두 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 224
+              "paragraphId": "p2",
+              "start": 114,
+              "end": 117
+            },
+            {
+              "paragraphId": "p2",
+              "start": 119,
+              "end": 121
             }
           ],
           "scoring": {
@@ -620,17 +645,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 통합 중심 관점은 오늘날 복합 매체 작품을 설명하는 데 분명한 장점이 있다. 서로 다른 표현 수단이 하나의 작품 안에서 어떤 효과를 내는지 큰 흐름을 파악하기 쉽기 때문이다. 다만 이 입장만으로는 각각의 매체가 어떤 방식으로 기능하는지 세밀하게 분석하기 어렵다. 매체와 예술 형식이 거의 같은 뜻으로 취급되면, 무엇이 형식이고 무엇이 그것을 가능하게 하는 기술적 조건인지 구분이 흐려지기 때문이다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "오페라",
+            "영화"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "3문단에서 통합 중심 관점이 큰 흐름을 파악하기 쉬운 이유가 되는 내용을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 187
+              "paragraphId": "p3",
+              "start": 45,
+              "end": 79
             }
           ],
           "scoring": {
@@ -639,16 +667,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이에 비해 두 번째 관점은 매체를 정보를 저장하고 전달하고 처리하는 방식으로 본다. 여기서는 문학이나 회화 같은 예술 형식과, 문자나 캔버스, 카메라처럼 그 형식을 가능하게 하는 매체를 구분한다. 문학이 하나의 예술 형식이라면 문자는 그 형식을 조직하는 핵심 매체가 되고, 사진이라는 형식은 또 다른 작품에서는 매체로 기능할 수 있다."
+          "answerText": "서로 다른 표현 수단이 하나의 작품 안에서 어떤 효과를 내는지"
         },
         {
           "id": "q5",
-          "prompt": "5문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "4문단에서 두 번째 관점이 매체를 보는 방식으로 제시한 어구를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 239
+              "paragraphId": "p4",
+              "start": 19,
+              "end": 40
             }
           ],
           "scoring": {
@@ -657,16 +685,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이처럼 매체의 특수한 작동 방식에 주목하면, 서로 다른 예술 형식이 만나는 지점을 더 구체적으로 읽어 낼 수 있다. 예를 들어 한 문학 작품에 사진 이미지나 음향 요소가 개입했다면, 그것이 단순한 장식인지 아니면 문자만으로는 만들기 어려운 효과를 새롭게 만들어 내는지 분석할 수 있다. 상호 매체성이란 결국 여러 매체가 한자리에 모였다는 사실보다, 각 매체가 가진 처리 방식이 작품 구조를 어떻게 바꾸는지 살피는 일과 연결된다."
+          "answerText": "정보를 저장하고 전달하고 처리하는 방식"
         },
         {
           "id": "q6",
-          "prompt": "6문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "4문단에서 문학이라는 예술 형식과 문자의 관계를 설명한 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 218
+              "paragraphId": "p4",
+              "start": 127,
+              "end": 147
             }
           ],
           "scoring": {
@@ -675,7 +703,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "따라서 상호 매체성을 제대로 이해하려면 두 관점을 함께 볼 필요가 있다. 통합 관점은 복합 예술이 왜 하나의 전체로 경험되는지를 설명해 주고, 매체 특수성 관점은 그 전체가 어떤 기술적 조건과 작동 방식 위에서 구성되는지를 드러낸다. 결국 현대 예술에서 중요한 것은 경계가 무너졌다는 선언 자체가 아니라, 무너진 경계 안에서도 각각의 매체가 어떤 역할을 맡는지 구체적으로 읽어 내는 태도다."
+          "answerText": "문자는 그 형식을 조직하는 핵심 매체"
+        },
+        {
+          "id": "q7",
+          "prompt": "6문단에서 매체 특수성 관점이 드러낸다고 한 내용을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 91,
+              "end": 123
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "그 전체가 어떤 기술적 조건과 작동 방식 위에서 구성되는지"
+        },
+        {
+          "id": "q8",
+          "prompt": "6문단에서 현대 예술을 읽을 때 중요하다고 한 태도를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 171,
+              "end": 216
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "무너진 경계 안에서도 각각의 매체가 어떤 역할을 맡는지 구체적으로 읽어 내는 태도"
         }
       ]
     }

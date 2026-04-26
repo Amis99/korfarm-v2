@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "prompt": "언어 철학에서 오래된 문제로 제시된 것은 무엇인가?",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 180
+              "start": 8,
+              "end": 41
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "언어 철학에서 같은 대상을 가리키는 두 표현이 왜 서로 다른 정보를 주는지는 오래된 문제였다. ‘샛별은 개밥바라기이다’와 ‘샛별은 샛별이다’는 모두 동일한 대상을 전제하는 문장처럼 보이지만, 두 문장을 들을 때 우리가 얻는 인식의 양은 분명히 다르다. 이 차이를 설명하려는 시도에서 프레게와 러셀은 서로 다른 길을 택했다."
+          "answerText": "같은 대상을 가리키는 두 표현이 왜 서로 다른 정보를 주는지"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 핵심 원리나 기준을 어떻게 설명하는가?",
+          "prompt": "동일한 대상을 전제하는 문장처럼 보이는 두 예를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 185
+              "paragraphId": "p1",
+              "start": 54,
+              "end": 65
+            },
+            {
+              "paragraphId": "p1",
+              "start": 69,
+              "end": 77
             }
           ],
           "scoring": {
@@ -602,17 +607,40 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "프레게는 이름을 이해할 때 지시체만으로는 충분하지 않다고 보았다. 그는 하나의 표현이 대상을 제시하는 방식까지 함께 고려해야 한다고 보고 이를 뜻이라 불렀다. 같은 금성을 가리키더라도 ‘샛별’과 ‘개밥바라기’는 서로 다른 방식으로 대상을 제시하므로, 두 표현이 결합한 통일성 명제는 단순 반복문보다 더 많은 정보를 전달할 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "샛별은 개밥바라기이다",
+            "샛별은 샛별이다"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단은 그 원리의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "프레게가 표현이 대상을 제시하는 방식이라고 부른 것은 무엇인가?",
           "answerRanges": [
             {
+              "paragraphId": "p2",
+              "start": 80,
+              "end": 81
+            },
+            {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 178
+              "start": 33,
+              "end": 34
+            },
+            {
+              "paragraphId": "p3",
+              "start": 98,
+              "end": 99
+            },
+            {
+              "paragraphId": "p4",
+              "start": 8,
+              "end": 9
+            },
+            {
+              "paragraphId": "p6",
+              "start": 47,
+              "end": 48
             }
           ],
           "scoring": {
@@ -621,16 +649,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 관점에서 통일성 명제의 정보 차이는 지시체의 동일성보다 뜻의 차이에서 생긴다. ‘a=a’는 같은 표현이 반복되기 때문에 새로운 인식이 거의 없지만, ‘a=b’는 서로 다른 뜻이 실제로 하나의 대상에 모인다는 사실을 보여 준다. 프레게는 이런 설명을 통해 통일성 명제가 왜 인식적 가치의 차이를 갖는지 밝히고자 했다."
+          "answerText": "뜻"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
+          "prompt": "프레게의 관점에서 통일성 명제의 정보 차이는 어디에서 생기는가?",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 199
+              "paragraphId": "p3",
+              "start": 33,
+              "end": 38
             }
           ],
           "scoring": {
@@ -639,16 +667,36 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그러나 러셀은 뜻이라는 중간 항을 세우는 방식에 만족하지 않았다. 그는 지시체가 없는 표현에 의미를 인정하기 어렵다고 보고, 문제의 핵심을 문장의 표면 형태가 아니라 논리적 구조에서 찾아야 한다고 생각했다. 그래서 겉보기에는 이름처럼 보이지만 실제로는 기술구를 압축한 표현을 위장된 이름으로 보고, 이를 분석 가능한 형식으로 풀어내는 기술 이론을 제시했다."
+          "answerText": "뜻의 차이"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 이 주제의 효과나 쟁점을 어떤 방향으로 확장하는가?",
+          "prompt": "뜻이라는 중간 항을 세우는 방식에 만족하지 않은 사람은 누구인가?",
           "answerRanges": [
             {
+              "paragraphId": "p1",
+              "start": 163,
+              "end": 165
+            },
+            {
+              "paragraphId": "p4",
+              "start": 4,
+              "end": 6
+            },
+            {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 215
+              "start": 124,
+              "end": 126
+            },
+            {
+              "paragraphId": "p6",
+              "start": 8,
+              "end": 10
+            },
+            {
+              "paragraphId": "p6",
+              "start": 81,
+              "end": 83
             }
           ],
           "scoring": {
@@ -657,16 +705,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "기술 이론의 강점은 부정 존재문을 다룰 때 선명하게 드러난다. 예를 들어 ‘현재 프랑스의 왕은 존재하지 않는다’ 같은 문장을 그대로 이름과 대상의 관계로 보면, 존재하지 않는 대상에 대해 말하는 셈이 되어 난점이 생긴다. 러셀은 이를 하나의 이름에 대한 판단으로 보지 않고, ‘현재 프랑스의 왕이라는 조건을 만족하는 대상이 없다’는 존재와 유일성의 부정으로 분석함으로써 모순을 피했다."
+          "answerText": "러셀"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 앞선 논의를 어떤 의미로 정리하는가?",
+          "prompt": "러셀이 문제의 핵심을 찾으려 한 곳은 어디인가?",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 221
+              "paragraphId": "p4",
+              "start": 78,
+              "end": 99
             }
           ],
           "scoring": {
@@ -675,7 +723,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 프레게와 러셀은 모두 언어가 제공하는 정보의 차이를 설명하려 했지만, 프레게는 뜻과 지시체의 구별로 통일성 명제의 인식적 가치를 설명했고, 러셀은 기술구 분석으로 통일성 명제와 부정 존재문을 함께 해명하려 했다. 전자는 표현이 대상을 어떻게 제시하는지에 주목하고, 후자는 문장의 논리적 구조를 드러내는 데 초점을 둔다. 이 차이는 오늘날 의미론과 분석 철학의 출발점을 이해하는 핵심이 된다."
+          "answerText": "문장의 표면 형태가 아니라 논리적 구조"
+        },
+        {
+          "id": "q7",
+          "prompt": "러셀이 이름처럼 보이는 기술구 압축 표현을 무엇으로 보았는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 154,
+              "end": 160
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "위장된 이름"
+        },
+        {
+          "id": "q8",
+          "prompt": "프레게와 러셀이 각각 주목하거나 초점을 둔 대상을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 126,
+              "end": 143
+            },
+            {
+              "paragraphId": "p6",
+              "start": 155,
+              "end": 165
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "표현이 대상을 어떻게 제시하는지",
+            "문장의 논리적 구조"
+          ]
         }
       ]
     }

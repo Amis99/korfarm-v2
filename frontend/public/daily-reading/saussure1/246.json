@@ -396,29 +396,34 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "밤하늘의 밝은 주인?",
-          "answerText": "달님",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 이야기의 주인공인 작은 생쥐의 이름이 무엇인지 본문에서 찾아보세요",
+          "answerText": "몽이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 50,
-              "end": 52
+              "start": 19,
+              "end": 21
             },
             {
               "paragraphId": "p1",
-              "start": 95,
-              "end": 97
+              "start": 80,
+              "end": 82
+            },
+            {
+              "paragraphId": "p1",
+              "start": 125,
+              "end": 127
             },
             {
               "paragraphId": "p2",
-              "start": 6,
-              "end": 8
+              "start": 54,
+              "end": 56
             },
             {
               "paragraphId": "p2",
-              "start": 58,
-              "end": 60
+              "start": 122,
+              "end": 124
             }
           ],
           "scoring": {
@@ -430,9 +435,9 @@
         },
         {
           "id": "q2",
-          "prompt": "목에 거는 장식품?",
+          "prompt": "달님이 잃어버려서 몽이가 찾아 주려고 하는 물건이 무엇인지 본문에서 찾아보세요",
           "answerText": "목걸이",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -449,19 +454,33 @@
         },
         {
           "id": "q3",
-          "prompt": "짧은 글을 적은 종이?",
-          "answerText": "쪽지",
-          "answerMatchMode": "EXACT",
+          "prompt": "바람이 부는 모습을 마치 살아 있는 사람처럼 가볍게 부는 흉내말로 표현했는데, 그 흉내말을 본문에서 찾아보세요",
+          "answerText": "살랑",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 118,
-              "end": 120
-            },
+              "start": 108,
+              "end": 110
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "몽이가 달님을 도와주기로 마음먹은 행동을 무엇이라고 표현했는지 본문에서 찾아보세요",
+          "answerText": "결심",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 2
+              "start": 79,
+              "end": 81
             }
           ],
           "scoring": {

@@ -557,34 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리가 편리하게 사용하는 전기와 수돗물 등 낭비하면 금방 바닥나게 되는 소중한 자원은 무엇인가요?",
-          "answerText": "에너지",
-          "answerMatchMode": "EXACT",
+          "prompt": "전기와 수돗물이 모두 어떤 에너지라고 했는지 지문에서 찾으시오.",
+          "answerText": "소중한 에너지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 34,
+              "start": 30,
               "end": 37
-            },
-            {
-              "paragraphId": "p1",
-              "start": 42,
-              "end": 45
-            },
-            {
-              "paragraphId": "p1",
-              "start": 94,
-              "end": 97
-            },
-            {
-              "paragraphId": "p2",
-              "start": 103,
-              "end": 106
-            },
-            {
-              "paragraphId": "p3",
-              "start": 82,
-              "end": 85
             }
           ],
           "scoring": {
@@ -596,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "가전제품을 사용하지 않을 때에도 조금씩 전기가 새어 나가는 것을 막기 위해 콘센트에서 뽑아야 하는 것은?",
-          "answerText": "플러그",
-          "answerMatchMode": "EXACT",
+          "prompt": "전기를 절약하려면 가전제품의 전원을 끄고 무엇을 해야 하는지 지문에서 찾으시오.",
+          "answerText": "플러그를 뽑아야 합니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 23,
-              "end": 26
+              "end": 35
             }
           ],
           "scoring": {
@@ -615,14 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "세수를 할 때 수돗물을 낭비하지 않기 위해 물을 틀어두지 말고 이곳에 직접 받아 써야 합니다. 어디인가요?",
-          "answerText": "세면대",
-          "answerMatchMode": "EXACT",
+          "prompt": "텔레비전이나 컴퓨터를 사용하지 않을 때도 전기를 아껴야 하는 까닭을 지문에서 찾으시오.",
+          "answerText": "전기가 조금씩 새어 나가기 때문입니다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 60,
+              "end": 80
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "에너지 절약은 어떤 작은 행동에서 출발한다고 했는지 지문에서 찾으시오.",
+          "answerText": "새는 것을 막는 작은 행동",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 59,
-              "end": 62
+              "start": 94,
+              "end": 108
             }
           ],
           "scoring": {

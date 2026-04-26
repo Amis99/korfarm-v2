@@ -474,19 +474,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리가 견학 간 곳은?",
-          "answerText": "과학관",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 어제 학교 친구들과 함께 견학을 다녀온 곳은 어디인가요? 지문에서 일곱 글자로 찾아 보세요",
+          "answerText": "어린이 과학관",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 18,
+              "start": 14,
               "end": 21
-            },
-            {
-              "paragraphId": "p2",
-              "start": 77,
-              "end": 80
             }
           ],
           "scoring": {
@@ -498,9 +493,9 @@
         },
         {
           "id": "q2",
-          "prompt": "입구에서 만난 친구는?",
+          "prompt": "과학관 입구에서 우리를 반갑게 맞이해 준 것은 누구인가요? 지문에서 한 단어로 찾아 보세요",
           "answerText": "로봇",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -517,19 +512,43 @@
         },
         {
           "id": "q3",
-          "prompt": "속에 들어가 본 것은?",
-          "answerText": "비눗방울",
-          "answerMatchMode": "EXACT",
+          "prompt": "커다란 비눗방울이 몸을 감싸자 글쓴이는 마치 무엇이 된 기분이라고 표현했나요? 지문에서 한 단어로 찾아 보세요",
+          "answerText": "마법사",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 16,
-              "end": 20
+              "start": 62,
+              "end": 65
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글쓴이가 우주 전시실에서 본 두 가지는 무엇인가요? 지문에서 캄캄한 밤하늘을 수놓은 것들을 모두 찾아 보세요",
+          "answerText": "별,행성",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 97,
+              "end": 98
             },
             {
-              "paragraphId": "p2",
-              "start": 44,
-              "end": 48
+              "paragraphId": "p1",
+              "start": 100,
+              "end": 102
+            },
+            {
+              "paragraphId": "p1",
+              "start": 130,
+              "end": 131
             }
           ],
           "scoring": {

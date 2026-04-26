@@ -552,59 +552,47 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "분홍색 ( )가 예쁨.",
-          "answerText": "진달래",
-          "answerMatchMode": "EXACT",
+          "prompt": "음식이 매우 달고 맛있다는 뜻으로 쓰는 단어를 지문에서 찾아 보세요.",
+          "answerText": "꿀맛",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 45,
-              "end": 48
-            }
+            {"paragraphId": "p1", "start": 82, "end": 84}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "친구들과 ( )하니 즐거움.",
+          "prompt": "여러 사람이 마음과 힘을 합쳐 함께 일하는 것을 뜻하는 단어를 지문에서 찾아 보세요.",
           "answerText": "협동",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 18,
-              "end": 20
-            }
+            {"paragraphId": "p2", "start": 18, "end": 20}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "( )장에 추억을 적습니다.",
-          "answerText": "일기",
-          "answerMatchMode": "EXACT",
+          "prompt": "산길에서 본 꽃과 돗자리에서 먹은 음식 두 가지를 모두 찾아 보세요.",
+          "answerText": "진달래, 김밥",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 107,
-              "end": 109
-            }
+            {"paragraphId": "p1", "start": 45, "end": 48},
+            {"paragraphId": "p1", "start": 75, "end": 77}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "지난 일을 떠올려 적은 글이 담기는 책을 가리키는 단어를 지문에서 찾아 보세요.",
+          "answerText": "일기장",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 107, "end": 110}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         }
       ]

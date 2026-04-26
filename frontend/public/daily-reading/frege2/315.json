@@ -884,14 +884,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "능동적 독서의 핵심으로 제시된 것은 무엇인가요?",
-          "answerText": "질문을 설계하는 것",
+          "prompt": "능동적인 독서가 어떤 과정인지 설명한 부분을 찾으시오.",
+          "answerText": "글과 소통하는 과정",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 91,
-              "end": 101
+              "start": 9,
+              "end": 19
             }
           ],
           "scoring": {
@@ -902,7 +902,7 @@
         },
         {
           "id": "q2",
-          "prompt": "읽기 전 질문을 만들 때 먼저 살펴보는 것은 무엇인가요?",
+          "prompt": "읽기 전 질문을 만들 때 먼저 살펴보는 것을 찾으시오.",
           "answerText": "제목과 소제목",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -920,7 +920,7 @@
         },
         {
           "id": "q3",
-          "prompt": "읽기 전 질문이 분명하게 설정하도록 돕는 것은 무엇인가요?",
+          "prompt": "읽기 전 질문이 분명하게 설정하도록 돕는 것을 찾으시오.",
           "answerText": "독서의 목적",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -938,14 +938,28 @@
         },
         {
           "id": "q4",
-          "prompt": "읽는 중에 따져 보아야 하는 것은 무엇인가요?",
-          "answerText": "타당성과 의미",
-          "answerMatchMode": "ANY",
+          "prompt": "읽는 중에 질문해야 할 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "내용의 타당성과 의미",
+            "글쓴이의 주장이 논리적인지",
+            "근거가 확실한지"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 11,
+              "start": 7,
               "end": 18
+            },
+            {
+              "paragraphId": "p3",
+              "start": 29,
+              "end": 43
+            },
+            {
+              "paragraphId": "p3",
+              "start": 45,
+              "end": 53
             }
           ],
           "scoring": {
@@ -956,14 +970,14 @@
         },
         {
           "id": "q5",
-          "prompt": "읽은 뒤 알게 된 정보를 어디에 적용할지 고민해 보라고 했나요?",
-          "answerText": "실생활",
+          "prompt": "읽은 뒤 알게 된 정보를 어떻게 할지 고민하라고 했는지 찾으시오.",
+          "answerText": "실생활에 어떻게 적용할지",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 75,
-              "end": 78
+              "end": 88
             }
           ],
           "scoring": {

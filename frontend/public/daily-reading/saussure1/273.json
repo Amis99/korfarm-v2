@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "털로 만든 필기 도구?",
+          "prompt": "그림을 그리거나 글씨를 쓸 때 사용하며 털의 양과 모양에 따라 굵기가 다른 도구가 무엇인지 본문에서 한 단어로 찾아 보세요",
           "answerText": "붓",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -440,9 +440,9 @@
         },
         {
           "id": "q2",
-          "prompt": "두껍고 얇은 정도?",
+          "prompt": "붓의 두껍고 얇은 정도를 가리키며 털의 양과 모양에 따라 달라지는 것이 무엇인지 본문에서 한 단어로 찾아 보세요",
           "answerText": "굵기",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -474,9 +474,9 @@
         },
         {
           "id": "q3",
-          "prompt": "선과 색으로 그린 것?",
+          "prompt": "붓의 굵기를 적절하게 선택하여 사용하면 무엇의 느낌을 훨씬 더 생생하게 살릴 수 있다고 했는지 본문에서 한 단어로 찾아 보세요",
           "answerText": "그림",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -487,6 +487,25 @@
               "paragraphId": "p2",
               "start": 22,
               "end": 24
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "각도에 따라 선의 굵기가 달라지므로 멋진 작품을 위해 꾸준히 무엇이 필요하다고 했는지 본문에서 한 단어로 찾아 보세요",
+          "answerText": "연습",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 89,
+              "end": 91
             }
           ],
           "scoring": {

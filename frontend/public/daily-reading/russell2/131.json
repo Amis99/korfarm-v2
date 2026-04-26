@@ -1039,7 +1039,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "필요한 것을 마련해 두는 일은?",
+          "prompt": "글에서 필요한 시간을 따로 마련하는 일을 무엇이라 하였는지 찾으시오",
+          "answerText": "확보",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -1048,34 +1050,17 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "확보"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "주의 깊게 자세히 살펴볼 일은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 117,
-              "end": 121
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "빠짐없이 자세하고 차분한 모양을 가리키는 말을 찾으시오",
+          "answerText": "꼼꼼히",
           "answerMatchMode": "ANY",
-          "answerText": "눈여겨볼"
-        },
-        {
-          "id": "q3",
-          "prompt": "빈틈없이 자세하게 하는 모양은?",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -1084,53 +1069,92 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "꼼꼼히"
+          "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "가장 중요한 부분만은?",
+          "id": "q3",
+          "prompt": "글에서 가장 중요한 알맹이가 되는 부분을 무엇이라 하였는지 찾으시오",
+          "answerText": "핵심",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 60,
-              "end": 63
+              "end": 62
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "어떤 일을 자세히 따져서 살피는 행동을 가리키는 말을 찾으시오",
+          "answerText": "검토",
           "answerMatchMode": "ANY",
-          "answerText": "핵심만"
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 133,
+              "end": 135
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "가운데가 되는 가장 중요한 부분은?",
+          "prompt": "글에서 발표가 보고서를 더 꼼꼼히 정리하게 만드는 까닭에 해당하는 말을 모두 찾으시오",
+          "answerText": "무엇이 가장 중요했고 / 어떤 순서로 말해야 할지",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 16,
-              "end": 18
+              "paragraphId": "p3",
+              "start": 53,
+              "end": 64
             },
             {
-              "paragraphId": "p5",
-              "start": 141,
-              "end": 143
+              "paragraphId": "p3",
+              "start": 65,
+              "end": 78
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "글쓴이가 학교에 바라는 일에 해당하는 표현을 찾으시오",
+          "answerText": "검토해 보기를 바란다",
           "answerMatchMode": "ANY",
-          "answerText": "중심"
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 133,
+              "end": 144
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

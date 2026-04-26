@@ -562,19 +562,23 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "입에서 부드러워진 음식물이 주르륵 미끄러져 들어가는 긴 통로의 이름은 무엇인가요?",
-          "answerText": "식도",
-          "answerMatchMode": "EXACT",
+          "prompt": "음식을 입에 넣고 씹으면 음식물이 무엇과 섞이고 어떤 상태가 되는지 지문에서 모두 찾으시오.",
+          "answerText": "침과 섞여, 부드러워져요",
+          "answerTexts": [
+            "침과 섞여",
+            "부드러워져요"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 57,
-              "end": 59
+              "start": 31,
+              "end": 36
             },
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
+              "paragraphId": "p1",
+              "start": 37,
+              "end": 43
             }
           ],
           "scoring": {
@@ -586,19 +590,14 @@
         },
         {
           "id": "q2",
-          "prompt": "식도를 지나 도착하는 곳으로, 음식물을 주물럭주물럭 섞어서 죽처럼 부드럽게 만드는 주머니 모양의 기관은 어디인가요?",
-          "answerText": "위",
-          "answerMatchMode": "EXACT",
+          "prompt": "부드러워진 음식물이 우리 몸속으로 들어갈 때 지나가는 긴 통로를 지문에서 찾으시오.",
+          "answerText": "'식도'라는 긴 통로",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 23,
-              "end": 24
-            },
-            {
-              "paragraphId": "p2",
-              "start": 29,
-              "end": 30
+              "paragraphId": "p1",
+              "start": 56,
+              "end": 67
             }
           ],
           "scoring": {
@@ -610,14 +609,14 @@
         },
         {
           "id": "q3",
-          "prompt": "구불구불하고 긴 통로이며, 우리 몸에 필요한 영양분을 쏙쏙 빨아들이는 곳은 어디인가요?",
-          "answerText": "소장",
-          "answerMatchMode": "EXACT",
+          "prompt": "위는 음식물을 주물럭주물럭 섞어서 어떻게 만드는지 지문에서 찾으시오.",
+          "answerText": "죽처럼 아주 부드럽게 만들어요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 86,
-              "end": 88
+              "start": 48,
+              "end": 64
             }
           ],
           "scoring": {
@@ -629,19 +628,23 @@
         },
         {
           "id": "q4",
-          "prompt": "대장에서는 음식물에 남아 있는 이것을 쫙 빨아들여요. 이것은 무엇인가요?",
-          "answerText": "물기",
-          "answerMatchMode": "EXACT",
+          "prompt": "소장과 대장이 각각 빨아들이는 대상을 지문 표현 그대로 모두 찾으시오.",
+          "answerText": "우리 몸에 필요한 영양분, 음식물에 남아 있는 물기",
+          "answerTexts": [
+            "우리 몸에 필요한 영양분",
+            "음식물에 남아 있는 물기"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 50,
-              "end": 52
+              "paragraphId": "p2",
+              "start": 104,
+              "end": 117
             },
             {
               "paragraphId": "p3",
-              "start": 63,
-              "end": 65
+              "start": 39,
+              "end": 52
             }
           ],
           "scoring": {

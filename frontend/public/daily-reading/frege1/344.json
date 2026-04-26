@@ -913,19 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "하늘의 교통경찰이라고 부르는 사람들은 누구인가요?",
-          "answerText": "항공 관제사",
+          "prompt": "하늘을 나는 비행기들이 서로 부딪히지 않는 이유를 설명하는 구절을 찾으시오.",
+          "answerText": "누군가 길을 안내해 주기 때문입니다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 130,
-              "end": 136
-            },
-            {
-              "paragraphId": "p4",
-              "start": 148,
-              "end": 154
+              "start": 35,
+              "end": 54
             }
           ],
           "scoring": {
@@ -936,7 +931,25 @@
         },
         {
           "id": "q2",
-          "prompt": "관제사들이 비행기의 위치와 높이를 확인하는 것은 무엇인가요?",
+          "prompt": "땅의 신호등처럼 하늘에도 있다고 한 것을 찾으시오.",
+          "answerText": "보이지 않는 길",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 76,
+              "end": 84
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "관제사들이 비행기의 위치와 높이를 확인할 때 보는 것을 찾으시오.",
           "answerText": "레이더 화면",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -958,38 +971,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "비행기의 길을 안내받는 사람은 누구인가요?",
-          "answerText": "조종사",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 70,
-              "end": 73
-            },
-            {
-              "paragraphId": "p3",
-              "start": 111,
-              "end": 114
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q4",
-          "prompt": "관제사에게 필요한 것 가운데 항상 화면에서 눈을 떼지 않게 하는 것은 무엇인가요?",
-          "answerText": "집중력",
+          "prompt": "조금이라도 실수를 하면 생길 수 있다고 한 결과를 찾으시오.",
+          "answerText": "비행기끼리 부딪히는 사고",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 153,
-              "end": 156
+              "start": 59,
+              "end": 72
             }
           ],
           "scoring": {
@@ -1000,13 +990,13 @@
         },
         {
           "id": "q5",
-          "prompt": "항공 관제사가 하늘길의 안전을 책임지는 무엇이라고 했나요?",
-          "answerText": "지킴이",
+          "prompt": "항공 관제사가 하늘길의 안전을 책임지는 어떤 존재라고 했는지 찾으시오.",
+          "answerText": "든든한 지킴이",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 174,
+              "start": 170,
               "end": 177
             }
           ],

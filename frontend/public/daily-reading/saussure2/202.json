@@ -559,14 +559,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "칠월에 비가 며칠 동안 쉬지 않고 내리는 시기를 무엇이라고 하나요?",
-          "answerText": "장마철",
-          "answerMatchMode": "EXACT",
+          "prompt": "한국의 여름이 어떤 계절인지 설명한 어구를 찾으시오.",
+          "answerText": "몹시 덥고 습한 날씨가 계속 이어지는 계절",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 42,
-              "end": 45
+              "start": 8,
+              "end": 31
             }
           ],
           "scoring": {
@@ -578,14 +578,14 @@
         },
         {
           "id": "q2",
-          "prompt": "시원한 물에 뛰어들어 이것을 하면 더위가 싹 달아나요. 이것은 무엇일까요?",
-          "answerText": "수영",
-          "answerMatchMode": "EXACT",
+          "prompt": "사람들이 무더위를 피해 여름휴가를 떠나는 곳은 어디인가요?",
+          "answerText": "바다나 산속 계곡",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 48,
-              "end": 50
+              "start": 13,
+              "end": 22
             }
           ],
           "scoring": {
@@ -597,14 +597,33 @@
         },
         {
           "id": "q3",
-          "prompt": "강한 바람과 함께 많은 비를 뿌리며 찾아오는 것은 무엇인가요?",
-          "answerText": "태풍",
-          "answerMatchMode": "EXACT",
+          "prompt": "여름을 건강하게 보내기 위해 먹는 시원한 과일의 예시가 담긴 어구를 찾으시오.",
+          "answerText": "수박이나 참외 같은 시원한 과일",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 77,
+              "end": 94
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "비 피해가 없도록 여름에 잘 들어야 하는 것은 무엇인가요?",
+          "answerText": "일기 예보",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 59,
-              "end": 61
+              "start": 84,
+              "end": 89
             }
           ],
           "scoring": {

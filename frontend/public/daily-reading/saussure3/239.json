@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "살아 있는 모든 것은?",
-          "answerText": "생명을",
-          "answerMatchMode": "EXACT",
+          "prompt": "갯벌에 가서 잡은 것을 지문에서 찾으시오.",
+          "answerText": "조개",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 37,
-              "end": 40
+              "paragraphId": "p1",
+              "start": 14,
+              "end": 16
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "애쓴 보람이 있고 흐뭇함?",
-          "answerText": "뿌듯합니다",
-          "answerMatchMode": "EXACT",
+          "prompt": "작은 게들이 어디로 들어갔는지 나타내는 표현을 찾으시오.",
+          "answerText": "구멍 속으로",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 54,
-              "end": 59
+              "paragraphId": "p2",
+              "start": 7,
+              "end": 13
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "경험하여 알게 된 일은?",
-          "answerText": "체험을",
-          "answerMatchMode": "EXACT",
+          "prompt": "생명을 소중히 여기며 약속한 행동을 지문에서 찾으시오.",
+          "answerText": "함부로 잡지 않기로",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 49,
+              "end": 59
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "갯벌의 추억을 무엇과 함께 일기에 적었는지 찾으시오.",
+          "answerText": "그림과 함께",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 76,
-              "end": 79
+              "start": 16,
+              "end": 22
             }
           ],
           "scoring": {

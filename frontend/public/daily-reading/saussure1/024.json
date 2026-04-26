@@ -552,44 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "양쪽 모양이 같은 ( ).",
-          "answerText": "대칭",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 대칭의 정의를 찾아 보세요.",
+          "answerText": "왼쪽과 오른쪽 모양이 같은 것을 대칭이라고 합니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 46,
-              "end": 48
-            },
-            {
-              "paragraphId": "p1",
-              "start": 70,
-              "end": 72
-            },
-            {
-              "paragraphId": "p1",
-              "start": 83,
-              "end": 85
-            },
-            {
-              "paragraphId": "p1",
-              "start": 116,
-              "end": 118
-            },
-            {
-              "paragraphId": "p2",
-              "start": 19,
-              "end": 21
-            },
-            {
-              "paragraphId": "p2",
-              "start": 81,
-              "end": 83
-            },
-            {
-              "paragraphId": "p2",
-              "start": 114,
-              "end": 116
+              "start": 28,
+              "end": 55
             }
           ],
           "scoring": {
@@ -601,14 +571,19 @@
         },
         {
           "id": "q2",
-          "prompt": "안정적이고 ( )이 잡힘.",
-          "answerText": "균형",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 대칭을 이루는 생물의 예시를 모두 찾아 보세요.",
+          "answerText": "나비 날개, 우리 몸",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 100,
-              "end": 102
+              "start": 57,
+              "end": 62
+            },
+            {
+              "paragraphId": "p1",
+              "start": 64,
+              "end": 68
             }
           ],
           "scoring": {
@@ -620,44 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "( ) 원리를 배워 보아요.",
-          "answerText": "대칭",
-          "answerMatchMode": "EXACT",
+          "prompt": "대칭 무늬가 어떻게 보이는지 지문에서 찾아 보세요.",
+          "answerText": "보기에 안정적이고 균형이 잡혔습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 46,
-              "end": 48
-            },
-            {
-              "paragraphId": "p1",
-              "start": 70,
-              "end": 72
-            },
-            {
-              "paragraphId": "p1",
-              "start": 83,
-              "end": 85
-            },
-            {
-              "paragraphId": "p1",
-              "start": 116,
-              "end": 118
-            },
-            {
-              "paragraphId": "p2",
-              "start": 19,
-              "end": 21
-            },
+              "start": 90,
+              "end": 109
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "물감으로 무엇을 그리면 대칭이 된다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "데칼코마니",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 81,
-              "end": 83
-            },
-            {
-              "paragraphId": "p2",
-              "start": 114,
-              "end": 116
+              "start": 5,
+              "end": 10
             }
           ],
           "scoring": {

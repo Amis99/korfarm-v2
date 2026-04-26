@@ -396,40 +396,16 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "글의 핵심 내용을 담은 문장?",
+          "prompt": "한 문단에서 글쓴이가 가장 전하고 싶은 핵심 내용을 담은 문장을 무엇이라고 할까요?",
           "answerText": "주제문",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 36,
-              "end": 39
-            },
-            {
-              "paragraphId": "p1",
-              "start": 48,
-              "end": 51
-            },
-            {
-              "paragraphId": "p1",
-              "start": 151,
-              "end": 154
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p2",
-              "start": 61,
-              "end": 64
-            },
-            {
-              "paragraphId": "p2",
-              "start": 111,
-              "end": 114
-            }
+            {"paragraphId": "p1", "start": 36, "end": 39},
+            {"paragraphId": "p1", "start": 48, "end": 51},
+            {"paragraphId": "p1", "start": 151, "end": 154},
+            {"paragraphId": "p2", "start": 0, "end": 3},
+            {"paragraphId": "p2", "start": 61, "end": 64},
+            {"paragraphId": "p2", "start": 111, "end": 114}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -440,25 +416,13 @@
         },
         {
           "id": "q2",
-          "prompt": "주제를 돕고 보충함?",
-          "answerText": "뒷받침",
-          "answerMatchMode": "EXACT",
+          "prompt": "주제문의 내용을 더 구체적으로 설명하거나 증거를 들어 주는 문장을 무엇이라고 할까요?",
+          "answerText": "뒷받침 문장",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 38,
-              "end": 41
-            },
-            {
-              "paragraphId": "p2",
-              "start": 53,
-              "end": 56
-            },
-            {
-              "paragraphId": "p2",
-              "start": 116,
-              "end": 119
-            }
+            {"paragraphId": "p2", "start": 38, "end": 44},
+            {"paragraphId": "p2", "start": 53, "end": 59},
+            {"paragraphId": "p2", "start": 116, "end": 122}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -469,30 +433,28 @@
         },
         {
           "id": "q3",
-          "prompt": "생각을 담은 한 마디?",
-          "answerText": "문장",
-          "answerMatchMode": "EXACT",
+          "prompt": "주제문이 보통 위치하는 문단 속 두 자리를 모두 찾아 적어 보세요",
+          "answerText": "앞부분, 뒷부분",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 32,
-              "end": 34
-            },
-            {
-              "paragraphId": "p2",
-              "start": 42,
-              "end": 44
-            },
-            {
-              "paragraphId": "p2",
-              "start": 57,
-              "end": 59
-            },
-            {
-              "paragraphId": "p2",
-              "start": 120,
-              "end": 122
-            }
+            {"paragraphId": "p1", "start": 60, "end": 63},
+            {"paragraphId": "p1", "start": 66, "end": 69}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "뒷받침 문장이 글의 설득력을 높이기 위해 풍성하게 덧붙이는 두 가지를 모두 찾아 적어 보세요",
+          "answerText": "예시, 이유",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 77, "end": 79},
+            {"paragraphId": "p2", "start": 81, "end": 83}
           ],
           "scoring": {
             "correctDeltaSec": 10,

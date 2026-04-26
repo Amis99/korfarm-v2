@@ -587,14 +587,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "의사에게 몸을 보여줌은?",
-          "answerText": "진료를",
-          "answerMatchMode": "EXACT",
+          "prompt": "강아지가 아프면 가야 할 곳과 받아야 할 일을 모두 찾으시오.",
+          "answerTexts": [
+            "동물 병원",
+            "진료를 받아야 합니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
+              "start": 9,
+              "end": 14
+            },
+            {
+              "paragraphId": "p1",
               "start": 19,
-              "end": 22
+              "end": 30
             }
           ],
           "scoring": {
@@ -606,14 +614,22 @@
         },
         {
           "id": "q2",
-          "prompt": "질서 있고 조용한 상태는?",
-          "answerText": "정숙한",
-          "answerMatchMode": "EXACT",
+          "prompt": "병원에서 기다리는 방식과 우리가 유지한 태도를 모두 찾으시오.",
+          "answerTexts": [
+            "차례차례 순서",
+            "정숙한 태도"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
+              "start": 46,
+              "end": 53
+            },
+            {
+              "paragraphId": "p1",
               "start": 77,
-              "end": 80
+              "end": 83
             }
           ],
           "scoring": {
@@ -625,14 +641,41 @@
         },
         {
           "id": "q3",
-          "prompt": "지켜야 할 행동 방식은?",
-          "answerText": "수칙을",
-          "answerMatchMode": "EXACT",
+          "prompt": "먼저 진찰을 받고 싶어도 예의인 것과 가진 마음을 모두 찾으시오.",
+          "answerTexts": [
+            "질서를 지키는 것",
+            "양보하는 마음"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 11,
-              "end": 14
+              "paragraphId": "p2",
+              "start": 14,
+              "end": 23
+            },
+            {
+              "paragraphId": "p2",
+              "start": 45,
+              "end": 52
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "기다리는 동안 강아지에게 한 일을 찾으시오.",
+          "answerText": "강아지를 차분하게 달래주며",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 69,
+              "end": 83
             }
           ],
           "scoring": {

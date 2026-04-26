@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "prompt": "사실과 다른 상태를 일정한 목적 아래 법적으로 인정하는 경우를 무엇이라고 한다고 설명한 문장을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 234
+              "start": 75,
+              "end": 89
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "법은 현실의 사실을 그대로 반영하는 체계처럼 보이지만, 실제로는 사실과 다른 상태를 일정한 목적 아래 법적으로 인정하는 경우가 있다. 이를 법적 의제라고 한다. 법적 의제는 실제로는 성립하지 않은 상태를 마치 성립한 것처럼 취급하거나, 반대로 실제와 다른 법적 효과를 고정함으로써 일정한 법질서를 유지하게 한다. 따라서 법적 의제는 진실의 단순 기록이 아니라, 법이 필요에 따라 현실을 재구성하는 장치라고 할 수 있다."
+          "answerText": "이를 법적 의제라고 한다."
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 핵심 원리나 기준을 어떻게 설명하는가?",
+          "prompt": "법적 의제가 유지하게 하는 것은 무엇입니까?",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 233
+              "paragraphId": "p1",
+              "start": 157,
+              "end": 164
             }
           ],
           "scoring": {
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이러한 장치는 흔히 거짓을 제도화한 것처럼 보일 수 있다. 실제와 다른 내용을 사실인 것처럼 다루기 때문이다. 그래서 법적 의제는 법이 사실에 충실해야 한다는 관점에서는 부자연스럽고 위험한 것으로 비판받아 왔다. 그러나 모든 법 규범이 현실을 기계적으로 복제하는 데 그치는 것은 아니며, 제도 운영의 안정성과 예측 가능성을 위해 일정한 가정이 필요할 때도 있다. 이 점에서 법적 의제는 단순한 왜곡으로만 볼 수 없다."
+          "answerText": "일정한 법질서"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 그 원리의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "법적 의제가 사실에 충실해야 한다는 관점에서 비판받은 두 성격을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 236
+              "paragraphId": "p2",
+              "start": 95,
+              "end": 101
+            },
+            {
+              "paragraphId": "p2",
+              "start": 102,
+              "end": 107
             }
           ],
           "scoring": {
@@ -620,17 +625,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "법적 의제의 옹호 논리는 주로 사회 변화와 법질서의 간극을 메우는 기능에 주목한다. 사회는 빠르게 변하는데 법이 즉시 그 변화에 맞추어 개정되기 어려운 경우, 법적 의제는 기존 법체계를 크게 흔들지 않으면서도 새로운 필요를 수용하게 한다. 다시 말해, 겉으로는 법이 유지되는 것처럼 보이지만 실제 작용은 변화된 현실에 맞추어 조정되는 셈이다. 이런 점에서 법적 의제는 법과 사회의 충돌을 완화하는 임시적 조정 장치가 된다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "부자연스럽고",
+            "위험한 것"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
+          "prompt": "법적 의제의 옹호 논리가 주목하는 기능을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 234
+              "paragraphId": "p3",
+              "start": 17,
+              "end": 39
             }
           ],
           "scoring": {
@@ -639,16 +647,31 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "메인의 관점에서 보면 법적 의제는 좁은 의미와 넓은 의미로 나누어 생각할 수 있다. 좁은 의미에서는 사실이 아닌 것을 법적으로 사실처럼 다루는 직접적 가정이 중심이 된다. 넓은 의미에서는 법 규칙의 문언은 유지되지만, 실제 작용이 달라졌다는 사실을 가리는 여러 장치까지 포함된다. 이처럼 넓게 보면 법적 의제는 단순한 거짓말이 아니라, 제도 변화의 흔적을 감추면서 법체계의 연속성을 유지하려는 역사적 방식으로 이해된다."
+          "answerText": "사회 변화와 법질서의 간극을 메우는 기능"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 이 주제의 효과나 쟁점을 어떤 방향으로 확장하는가?",
+          "prompt": "메인의 관점에서 법적 의제를 나누는 두 의미를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 217
+              "paragraphId": "p4",
+              "start": 19,
+              "end": 24
+            },
+            {
+              "paragraphId": "p4",
+              "start": 47,
+              "end": 52
+            },
+            {
+              "paragraphId": "p4",
+              "start": 26,
+              "end": 31
+            },
+            {
+              "paragraphId": "p4",
+              "start": 96,
+              "end": 101
             }
           ],
           "scoring": {
@@ -656,17 +679,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "하지만 법적 의제가 언제나 바람직한 것은 아니다. 사회가 성숙하고 법체계가 정교해질수록, 개념은 더 명확하게 분류되고 규범은 더 직접적으로 설계될 필요가 있다. 그런데 법적 의제가 계속 사용되면 같은 개념이 상황에 따라 전혀 다른 효과를 내거나, 법의 실제 구조가 표면상 문언과 어긋나는 일이 생긴다. 그러면 법을 해석하고 적용하는 기준이 흐려지고, 체계 전체의 정합성이 약해질 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "좁은 의미",
+            "넓은 의미"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 앞선 논의를 어떤 의미로 정리하는가?",
+          "prompt": "넓은 의미에서 법적 의제가 가린다고 한 사실을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 275
+              "paragraphId": "p4",
+              "start": 122,
+              "end": 137
             }
           ],
           "scoring": {
@@ -675,7 +701,59 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 법적 의제는 법의 미성숙을 보여 주는 흔적이면서도, 동시에 법이 변화하는 현실에 대응해 온 역사적 기술이라고 할 수 있다. 초기 단계에서는 유용한 완충 장치가 될 수 있지만, 그것이 지나치게 축적되면 오히려 법체계의 투명성과 설명력을 해칠 수 있다. 따라서 중요한 것은 법적 의제를 무조건 배제하거나 무조건 옹호하는 데 있지 않다. 어떤 경우에 그것이 사회적 필요를 합리적으로 반영하는지, 또 어느 시점부터는 보다 직접적이고 명료한 규범으로 대체해야 하는지를 구분하는 일이 더 중요하다."
+          "answerText": "실제 작용이 달라졌다는 사실"
+        },
+        {
+          "id": "q7",
+          "prompt": "법적 의제가 계속 사용되면 생길 수 있는 두 문제를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 109,
+              "end": 136
+            },
+            {
+              "paragraphId": "p5",
+              "start": 138,
+              "end": 162
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "같은 개념이 상황에 따라 전혀 다른 효과를 내거나",
+            "법의 실제 구조가 표면상 문언과 어긋나는 일"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "법적 의제를 판단할 때 구분해야 하는 두 기준을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 189,
+              "end": 219
+            },
+            {
+              "paragraphId": "p6",
+              "start": 223,
+              "end": 258
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "어떤 경우에 그것이 사회적 필요를 합리적으로 반영하는지",
+            "어느 시점부터는 보다 직접적이고 명료한 규범으로 대체해야 하는지"
+          ]
         }
       ]
     }

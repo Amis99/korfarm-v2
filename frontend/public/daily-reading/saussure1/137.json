@@ -552,24 +552,29 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "일곱 색깔 무엇 연필인가요?",
-          "answerText": "무지개",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 이야기의 주인공이 누구인지 이름을 지문에서 찾아 써 보세요",
+          "answerText": "민수",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 4,
-              "end": 7
+              "start": 0,
+              "end": 2
             },
             {
               "paragraphId": "p1",
+              "start": 148,
+              "end": 150
+            },
+            {
+              "paragraphId": "p2",
               "start": 44,
-              "end": 47
+              "end": 46
             },
             {
-              "paragraphId": "p1",
-              "start": 130,
-              "end": 133
+              "paragraphId": "p2",
+              "start": 158,
+              "end": 160
             }
           ],
           "scoring": {
@@ -581,24 +586,14 @@
         },
         {
           "id": "q2",
-          "prompt": "연필이 내는 무엇 정답인가요?",
-          "answerText": "퀴즈",
-          "answerMatchMode": "EXACT",
+          "prompt": "두 번째 힌트인 '밤하늘에 떠 있는 은색 쟁반 같은 것'의 정답으로 민수가 적은 말을 지문에서 찾아 써 보세요",
+          "answerText": "달님",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 20,
-              "end": 22
-            },
-            {
-              "paragraphId": "p1",
-              "start": 166,
-              "end": 168
-            },
-            {
               "paragraphId": "p2",
-              "start": 179,
-              "end": 181
+              "start": 87,
+              "end": 89
             }
           ],
           "scoring": {
@@ -610,19 +605,33 @@
         },
         {
           "id": "q3",
-          "prompt": "무엇 속 학용품 소동인가요?",
-          "answerText": "필통",
-          "answerMatchMode": "EXACT",
+          "prompt": "지우개와 자가 깜짝 놀라 굴러다니는 모습을 흉내 낸 말을 지문에서 찾아 써 보세요",
+          "answerText": "이리저리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 77,
-              "end": 79
-            },
+              "start": 100,
+              "end": 104
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "학용품들이 노래를 부르며 방 안이 시끄러워진 모습을 흉내 낸 말을 지문에서 찾아 써 보세요",
+          "answerText": "시끌벅적",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 118,
-              "end": 120
+              "start": 148,
+              "end": 152
             }
           ],
           "scoring": {

@@ -1331,34 +1331,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "유전 정보가 형질로 나타나는 과정을 무엇이라고 하나요?",
-          "answerText": "유전자 발현",
+          "prompt": "유전자 발현의 정의를 설명한 부분을 찾으시오.",
+          "answerText": "유전 정보가 생명체의 형질로 나타나는 복잡한 과정",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 6
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 6
-            },
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 6
-            },
-            {
-              "paragraphId": "p5",
-              "start": 92,
-              "end": 98
-            },
-            {
-              "paragraphId": "p5",
-              "start": 146,
-              "end": 152
+              "start": 8,
+              "end": 35
             }
           ],
           "scoring": {
@@ -1369,9 +1349,12 @@
         },
         {
           "id": "q2",
-          "prompt": "DNA의 정보가 RNA로 복사되는 단계는 무엇인가요?",
-          "answerText": "전사",
-          "answerMatchMode": "ANY",
+          "prompt": "유전자 발현의 두 단계를 모두 찾으시오.",
+          "answerTexts": [
+            "전사",
+            "번역"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -1380,26 +1363,13 @@
             },
             {
               "paragraphId": "p2",
-              "start": 29,
-              "end": 31
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "RNA 정보에 따라 단백질이 합성되는 단계는 무엇인가요?",
-          "answerText": "번역",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
               "start": 11,
               "end": 13
+            },
+            {
+              "paragraphId": "p2",
+              "start": 29,
+              "end": 31
             },
             {
               "paragraphId": "p3",
@@ -1414,14 +1384,32 @@
           "revealOnWrong": true
         },
         {
+          "id": "q3",
+          "prompt": "전사가 어떤 단계인지 설명한 부분을 찾으시오.",
+          "answerText": "DNA의 유전 정보가 RNA로 복사되는 단계",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 33,
+              "end": 57
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q4",
-          "prompt": "단백질 합성이 이루어지는 기관은 무엇인가요?",
-          "answerText": "리보솜",
+          "prompt": "단백질 합성이 이루어지는 기관을 위치와 함께 찾으시오.",
+          "answerText": "세포질에 위치한 리보솜",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 42,
+              "start": 33,
               "end": 45
             }
           ],
@@ -1433,14 +1421,14 @@
         },
         {
           "id": "q5",
-          "prompt": "유전자 발현 조절이 고장 날 때 생길 수 있는 질병의 예시는 무엇인가요?",
-          "answerText": "암",
+          "prompt": "유전자 발현 오류의 대표적인 사례를 찾으시오.",
+          "answerText": "암이나 대사 질환",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 74,
-              "end": 75
+              "end": 83
             }
           ],
           "scoring": {

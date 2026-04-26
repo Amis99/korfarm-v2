@@ -1312,7 +1312,8 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "선생님 뜻으로 본다면 무엇인가?",
+          "prompt": "민서가 처음에 선생님 말을 어떤 뜻으로 들었는지 본문에서 찾으시오",
+          "answerText": "발표 전체를 짧게 줄이라는 뜻",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
@@ -1322,69 +1323,92 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "발표 전체를 짧게 줄이라는 뜻"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "슬라이드를 겹친다는 말의 뜻은?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 74,
-              "end": 91
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "시간보다 순서를 다시 보라는 뜻"
-        },
-        {
-          "id": "q3",
-          "prompt": "실험 장면을 남기라는 말의 뜻은?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 60,
-              "end": 82
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "실험 자체를 빼라는 뜻은 아니라는 거잖아"
-        },
-        {
-          "id": "q4",
-          "prompt": "뒤에서 꼭 확보하자고 한 것은?",
+          "prompt": "도윤이 선생님 말을 어떤 뜻으로 보았는지 본문에서 찾으시오",
+          "answerText": "실험 원리 설명은 남기고 앞부분 배경만 덜어 내라는 뜻",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 132,
-              "end": 153
+              "start": 86,
+              "end": 116
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "질문 시간을 꼭 확보하자고도 하셨으니까"
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "선생님이 슬라이드 3장이 겹친다고 표현한 말을 본문에서 찾으시오",
+          "answerText": "같은 내용을 세 번 말하는 느낌이 있다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 43,
+              "end": 64
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "서윤이 답하기로 한 예상 질문을 본문에서 찾으시오",
+          "answerText": "왜 이 시간대에만 측정했느냐",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 20,
+              "end": 35
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "결국 무엇을 남겨야 한다는 뜻인가?",
+          "prompt": "도윤이 실험 조건으로 답하기로 한 예상 질문을 본문에서 찾으시오",
+          "answerText": "오차가 커 보이는데 신뢰할 수 있느냐",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 54,
+              "end": 74
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "도윤이 정리한 선생님 말의 진짜 의미를 본문에서 찾으시오",
+          "answerText": "겹치는 설명을 줄이고 질문 시간을 남겨라",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
@@ -1394,11 +1418,11 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "겹치는 설명을 줄이고 질문 시간을 남겨라"
+          "revealOnWrong": true
         }
       ]
     }

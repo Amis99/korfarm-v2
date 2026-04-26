@@ -1122,19 +1122,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "디지털 기술과 예술이 결합된 형태를 무엇이라고 하나요?",
-          "answerText": "미디어아트",
+          "prompt": "미디어아트의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "디지털 기술과 예술이 결합된 형태",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 5
+              "start": 7,
+              "end": 25
             }
           ],
           "scoring": {
@@ -1145,14 +1140,22 @@
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '상호작용'을 모두 찾으세요.",
-          "answerText": "상호작용",
-          "answerMatchMode": "ANY",
+          "prompt": "인터랙션의 뜻과 작품 완성에 필요한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "관객과 작품 사이의 상호작용",
+            "관객의 참여"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 17,
+              "start": 6,
               "end": 21
+            },
+            {
+              "paragraphId": "p2",
+              "start": 29,
+              "end": 35
             }
           ],
           "scoring": {
@@ -1163,14 +1166,22 @@
         },
         {
           "id": "q3",
-          "prompt": "관객의 움직임이나 소리를 포착하는 핵심 기술은 무엇인가요?",
-          "answerText": "센서 기술",
-          "answerMatchMode": "ANY",
+          "prompt": "센서 기술이 포착하거나 반응하는 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "관객의 움직임이나 소리",
+            "입력된 신호"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 5
+              "start": 26,
+              "end": 38
+            },
+            {
+              "paragraphId": "p3",
+              "start": 52,
+              "end": 58
             }
           ],
           "scoring": {
@@ -1181,14 +1192,34 @@
         },
         {
           "id": "q4",
-          "prompt": "관객을 가상의 공간으로 완전히 초대하는 기술은 무엇인가요?",
-          "answerText": "가상현실",
-          "answerMatchMode": "ANY",
+          "prompt": "예술과 융합되는 기술과 그 효과를 모두 찾으시오.",
+          "answerTexts": [
+            "가상현실",
+            "증강현실",
+            "가상의 공간",
+            "현실 세계 위에 예술적 이미지를"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 0,
               "end": 4
+            },
+            {
+              "paragraphId": "p4",
+              "start": 6,
+              "end": 10
+            },
+            {
+              "paragraphId": "p4",
+              "start": 34,
+              "end": 40
+            },
+            {
+              "paragraphId": "p4",
+              "start": 58,
+              "end": 75
             }
           ],
           "scoring": {
@@ -1199,14 +1230,28 @@
         },
         {
           "id": "q5",
-          "prompt": "미디어아트가 관객에게 선사하는 강한 체험의 이름은 무엇인가요?",
-          "answerText": "몰입감",
-          "answerMatchMode": "ANY",
+          "prompt": "미디어아트가 관객에게 주는 경험과 변화를 모두 찾으시오.",
+          "answerTexts": [
+            "새로운 미적 경험",
+            "몰입감",
+            "관점의 전환"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 12,
+              "end": 21
+            },
             {
               "paragraphId": "p5",
               "start": 44,
               "end": 47
+            },
+            {
+              "paragraphId": "p5",
+              "start": 65,
+              "end": 71
             }
           ],
           "scoring": {

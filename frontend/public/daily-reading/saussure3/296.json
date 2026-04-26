@@ -850,39 +850,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "영리한 ( ) 이야기를 기억하나요?",
-          "answerText": "까마귀",
-          "answerMatchMode": "EXACT",
+          "prompt": "이야기 속 까마귀의 상태와 특징을 모두 찾으시오.",
+          "answerTexts": [
+            "목이 무척 말랐던",
+            "영리한 까마귀"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 14,
-              "end": 17
+              "start": 0,
+              "end": 9
             },
             {
               "paragraphId": "p1",
-              "start": 30,
-              "end": 33
-            },
-            {
-              "paragraphId": "p2",
-              "start": 11,
-              "end": 14
-            },
-            {
-              "paragraphId": "p2",
-              "start": 39,
-              "end": 42
-            },
-            {
-              "paragraphId": "p2",
-              "start": 94,
-              "end": 97
-            },
-            {
-              "paragraphId": "p3",
-              "start": 29,
-              "end": 32
+              "start": 10,
+              "end": 17
             }
           ],
           "scoring": {
@@ -894,18 +877,13 @@
         },
         {
           "id": "q2",
-          "prompt": "작은 ( )을 하나씩 물어 왔습니다.",
-          "answerText": "조약돌",
-          "answerMatchMode": "EXACT",
+          "prompt": "까마귀가 물을 마시기 위해 한 행동을 본문에서 찾으시오.",
+          "answerText": "작은 조약돌을 하나씩 물어 왔음",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 74,
-              "end": 77
-            },
-            {
-              "paragraphId": "p2",
-              "start": 85,
+              "start": 71,
               "end": 88
             }
           ],
@@ -918,14 +896,41 @@
         },
         {
           "id": "q3",
-          "prompt": "서로에게 아낌없는 ( )를 보냅니다.",
-          "answerText": "박수",
-          "answerMatchMode": "EXACT",
+          "prompt": "까마귀가 목을 축일 수 있었던 태도와 이유를 모두 찾으시오.",
+          "answerTexts": [
+            "포기하지 않고",
+            "지혜를 짜낸 덕분"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 105,
-              "end": 107
+              "paragraphId": "p1",
+              "start": 119,
+              "end": 126
+            },
+            {
+              "paragraphId": "p1",
+              "start": 127,
+              "end": 136
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "역할놀이에서 다른 친구가 맡은 역할을 본문에서 찾으시오.",
+          "answerText": "물이 담긴 커다란 물병 역할",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 64,
+              "end": 79
             }
           ],
           "scoring": {

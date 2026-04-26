@@ -1031,68 +1031,33 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '분리배출함'을 모두 찾으시오.",
+          "prompt": "고치기 전, 처음 써 놓은 글의 원본을 가리키는 낱말을 찾으시오",
+          "answerText": "초고",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 44,
-              "end": 49
-            },
-            {
-              "paragraphId": "p2",
-              "start": 139,
-              "end": 144
+              "start": 17,
+              "end": 19
             },
             {
               "paragraphId": "p3",
-              "start": 145,
-              "end": 150
-            },
-            {
-              "paragraphId": "p4",
-              "start": 97,
-              "end": 102
+              "start": 30,
+              "end": 32
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "분리배출함"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '실천'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 161,
-              "end": 163
-            },
-            {
-              "paragraphId": "p2",
-              "start": 73,
-              "end": 75
-            },
-            {
-              "paragraphId": "p2",
-              "start": 208,
-              "end": 210
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "실천"
-        },
-        {
-          "id": "q3",
-          "prompt": "지문에서 '추상적'을 모두 찾으시오.",
+          "prompt": "구체적이지 않고 막연하여 손에 잡히지 않는 성질을 가리키는 낱말을 찾으시오",
+          "answerText": "추상적",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -1101,53 +1066,112 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "추상적"
+          "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "지문에서 '반복'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 185,
-              "end": 187
-            },
-            {
-              "paragraphId": "p3",
-              "start": 44,
-              "end": 46
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "반복"
-        },
-        {
-          "id": "q5",
-          "prompt": "지문에서 '설계'를 모두 찾으시오.",
+          "id": "q3",
+          "prompt": "낱말의 적힘을 정해진 표준 규칙에 맞게 쓰는 일과 관련된 낱말을 찾으시오",
+          "answerText": "맞춤법",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 345,
-              "end": 347
+              "start": 170,
+              "end": 173
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "지문에서 글을 고쳐 쓴 학생의 이름을 모두 찾으시오",
+          "answerText": "서연",
           "answerMatchMode": "ALL",
-          "answerText": "설계"
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p1",
+              "start": 195,
+              "end": 197
+            },
+            {
+              "paragraphId": "p2",
+              "start": 48,
+              "end": 50
+            },
+            {
+              "paragraphId": "p3",
+              "start": 25,
+              "end": 27
+            },
+            {
+              "paragraphId": "p3",
+              "start": 132,
+              "end": 134
+            },
+            {
+              "paragraphId": "p4",
+              "start": 6,
+              "end": 8
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "글쓴이가 마지막에 밝힌 '고쳐쓰기'의 정의를 담은 문장을 찾으시오",
+          "answerText": "글의 흐름, 문단의 역할, 문장의 분명함을 함께 점검하며 읽는 사람이 더 잘 이해하도록 다시 설계하는 과정이다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 293,
+              "end": 354
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "주어가 분명하지 않은 문장의 사례로 든 예시를 담은 문장을 찾으시오",
+          "answerText": "예를 들어 ‘그래서 이것이 잘되지 않는다’라는 문장은 무엇이 잘되지 않는지 바로 알기 어려웠다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 78,
+              "end": 130
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

@@ -562,19 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "어떤 모임에 오라고 다른 사람을 손님으로 부르는 일은?",
-          "answerText": "초대",
+          "prompt": "여우가 두루미에게 대접한 음식이 무엇인지 지문에서 찾으시오.",
+          "answerText": "맛있는 수프",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 53,
-              "end": 55
-            },
-            {
-              "paragraphId": "p2",
-              "start": 35,
-              "end": 37
+              "start": 57,
+              "end": 63
             }
           ],
           "scoring": {
@@ -585,19 +580,50 @@
         },
         {
           "id": "q2",
-          "prompt": "입구가 좁고 목이 길며 배가 불룩하게 나온 병은?",
-          "answerText": "호리병",
+          "prompt": "여우가 수프를 담아 준 그릇은 무엇인지 지문에서 찾으시오.",
+          "answerText": "아주 납작한 접시",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 80,
+              "end": 89
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "두루미가 여우에게 대접한 음식이 무엇인지 지문에서 찾으시오.",
+          "answerText": "맛있는 고기 요리",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 100,
-              "end": 103
-            },
+              "start": 62,
+              "end": 71
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "여우가 나중에 뉘우친 장난은 무엇인지 지문에서 찾으시오.",
+          "answerText": "자신이 두루미에게 했던 얄미운 장난",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 15,
-              "end": 18
+              "start": 52,
+              "end": 71
             }
           ],
           "scoring": {

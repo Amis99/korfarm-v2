@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "중심 대상은 무엇인가요?",
+          "prompt": "가을의 모습을 빗대는 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 11
+              "start": 6,
+              "end": 12
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "여기저기서 단풍잎 같"
+          "answerText": "단풍잎 같은"
         },
         {
           "id": "q2",
-          "prompt": "단풍잎 떨어져 나온 무엇 놓고?",
+          "prompt": "단풍잎 떨어져 나온 자리마다 마련해 놓은 것을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 27,
-              "end": 38
+              "start": 32,
+              "end": 33
             }
           ],
           "scoring": {
@@ -603,15 +603,15 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "자리마다 봄을 마련해"
+          "answerText": "봄"
         },
         {
           "id": "q3",
-          "prompt": "주요 소재는 무엇인가요?",
+          "prompt": "나뭇가지 위에 펼쳐 있는 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
+              "start": 8,
               "end": 17
             }
           ],
@@ -621,34 +621,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "나뭇가지 위에 하늘이 펼쳐 있다"
+          "answerText": "하늘이 펼쳐 있다"
         },
         {
           "id": "q4",
-          "prompt": "무엇 보려면 눈썹에 파란 물감이 든다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 11
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "가만히 하늘을 들여다"
-        },
-        {
-          "id": "q5",
-          "prompt": "글에서 설명한 것은 무엇인가요?",
+          "prompt": "5문단에서 반복되는 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 11
+              "start": 21,
+              "end": 31
+            },
+            {
+              "paragraphId": "p5",
+              "start": 33,
+              "end": 43
             }
           ],
           "scoring": {
@@ -657,16 +644,78 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "다시 손바닥을 들여다"
+          "answerText": "맑은 강물이 흐르고"
+        },
+        {
+          "id": "q5",
+          "prompt": "파란 물감과 연결된 신체 표현을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 16,
+              "end": 19
+            },
+            {
+              "paragraphId": "p4",
+              "start": 50,
+              "end": 55
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "눈썹에",
+            "손바닥에도"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "무엇은 황홀히 눈을 감아 본다?",
+          "prompt": "소년이 본 얼굴을 꾸미는 표현을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 38,
-              "end": 40
+              "start": 7,
+              "end": 17
+            },
+            {
+              "paragraphId": "p6",
+              "start": 20,
+              "end": 31
+            },
+            {
+              "paragraphId": "p6",
+              "start": 70,
+              "end": 80
+            },
+            {
+              "paragraphId": "p6",
+              "start": 83,
+              "end": 94
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "사랑처럼 슬픈 얼굴",
+            "아름다운 순이의 얼굴"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "소년이 황홀히 감아 보는 대상을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 46,
+              "end": 48
             }
           ],
           "scoring": {
@@ -675,7 +724,35 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "소년"
+          "answerText": "눈을"
+        },
+        {
+          "id": "q8",
+          "prompt": "그래도 계속 흐르는 것을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 21,
+              "end": 26
+            },
+            {
+              "paragraphId": "p5",
+              "start": 33,
+              "end": 38
+            },
+            {
+              "paragraphId": "p6",
+              "start": 60,
+              "end": 65
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "맑은 강물"
         }
       ]
     }

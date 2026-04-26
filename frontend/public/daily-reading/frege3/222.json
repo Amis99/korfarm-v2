@@ -1139,7 +1139,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사실과 거짓이 뒤섞인 정보를 무엇이라고 하나요?",
+          "prompt": "사실과 교묘하게 뒤섞여 사람들을 속이는 거짓 정보를 찾으시오.",
           "answerText": "가짜 뉴스(Fake News)",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1157,7 +1157,7 @@
         },
         {
           "id": "q2",
-          "prompt": "자신이 믿고 싶은 정보만 받아들이는 경향은 무엇인가요?",
+          "prompt": "자신이 믿고 싶은 정보만 받아들이게 하는 심리적 취약성을 찾으시오.",
           "answerText": "확증 편향(Confirmation Bias)",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1175,7 +1175,7 @@
         },
         {
           "id": "q3",
-          "prompt": "플랫폼이 자극적 콘텐츠를 추천하는 도구는 무엇인가요?",
+          "prompt": "가짜 뉴스의 확산에 날개를 달아주는 공범으로 제시된 것을 찾으시오.",
           "answerText": "알고리즘(Algorithm)",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1193,14 +1193,22 @@
         },
         {
           "id": "q4",
-          "prompt": "비슷한 생각만 보게 되는 현상은 무엇인가요?",
-          "answerText": "필터 버블(Filter Bubble)",
-          "answerMatchMode": "ANY",
+          "prompt": "조작된 가짜 뉴스와 거짓 정보가 낳을 수 있는 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "부적절한 지도자가 선출되는 결과",
+            "끔찍한 폭력 사태나 사회적 분열"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 170,
-              "end": 190
+              "paragraphId": "p4",
+              "start": 100,
+              "end": 117
+            },
+            {
+              "paragraphId": "p4",
+              "start": 159,
+              "end": 176
             }
           ],
           "scoring": {
@@ -1211,14 +1219,28 @@
         },
         {
           "id": "q5",
-          "prompt": "가짜 뉴스를 막기 위해 필요한 역량은 무엇인가요?",
-          "answerText": "미디어 리터러시(Media Literacy)",
-          "answerMatchMode": "ANY",
+          "prompt": "가짜 뉴스의 범람을 막기 위해 필요한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "정부의 법적 규제",
+            "기업의 윤리적 책임",
+            "시민 개개인의 성숙한 '미디어 리터러시(Media Literacy)' 역량"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 70,
-              "end": 94
+              "start": 25,
+              "end": 34
+            },
+            {
+              "paragraphId": "p5",
+              "start": 36,
+              "end": 46
+            },
+            {
+              "paragraphId": "p5",
+              "start": 57,
+              "end": 98
             }
           ],
           "scoring": {

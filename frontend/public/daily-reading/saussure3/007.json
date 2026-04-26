@@ -557,24 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "런던의 한 주택가 열린 창문을 넘어와 아이들의 꿈을 훔쳐보았던 어른이 되지 않는 영원한 소년은 누구인가요?",
-          "answerText": "피터 팬",
-          "answerMatchMode": "EXACT",
+          "prompt": "웬디의 방에 밤마다 찾아온 대상을 나타내는 표현을 지문에서 찾으시오.",
+          "answerText": "신비로운 그림자",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 70,
-              "end": 74
-            },
-            {
-              "paragraphId": "p1",
-              "start": 81,
-              "end": 85
-            },
-            {
-              "paragraphId": "p2",
-              "start": 5,
-              "end": 9
+              "start": 26,
+              "end": 34
             }
           ],
           "scoring": {
@@ -586,39 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "피터 팬이 보모 개에게 들켜 도망치다 방바닥에 떨어뜨린 것으로, 웬디가 발끝에 꼼꼼히 꿰매어 준 것은 무엇인가요?",
-          "answerText": "그림자",
-          "answerMatchMode": "EXACT",
+          "prompt": "그림자의 주인인 피터 팬을 설명하는 표현을 지문에서 찾으시오.",
+          "answerText": "어른이 되지 않는 영원한 소년",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 31,
-              "end": 34
-            },
-            {
-              "paragraphId": "p1",
-              "start": 44,
-              "end": 47
-            },
-            {
-              "paragraphId": "p2",
-              "start": 25,
-              "end": 28
-            },
-            {
-              "paragraphId": "p2",
-              "start": 49,
-              "end": 52
-            },
-            {
-              "paragraphId": "p2",
-              "start": 66,
+              "start": 53,
               "end": 69
-            },
-            {
-              "paragraphId": "p3",
-              "start": 23,
-              "end": 26
             }
           ],
           "scoring": {
@@ -630,9 +595,28 @@
         },
         {
           "id": "q3",
-          "prompt": "어른이 존재하지 않는 환상의 섬으로 피터 팬이 요정 팅커벨과 함께 살다가 런던으로 날아온 곳의 이름은?",
+          "prompt": "피터가 그림자를 발에 붙이지 못했을 때 보인 행동을 나타내는 표현을 지문에서 찾으시오.",
+          "answerText": "엉엉 울었습니다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 81,
+              "end": 89
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "피터가 왔다고 말한 환상의 섬 이름과 웬디가 이야기에 빠져든 그 섬 이름을 지문에서 모두 찾으시오.",
           "answerText": "네버랜드",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",

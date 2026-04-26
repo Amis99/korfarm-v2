@@ -850,24 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "눈에 안 보이는 ( )이 많습니다.",
-          "answerText": "병균",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리 손에 많은 보이지 않는 것을 본문에서 찾으시오.",
+          "answerText": "눈에 보이지 않는 작은 병균들",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 48,
-              "end": 50
-            },
-            {
-              "paragraphId": "p1",
-              "start": 67,
-              "end": 69
-            },
-            {
-              "paragraphId": "p2",
-              "start": 122,
-              "end": 124
+              "start": 35,
+              "end": 51
             }
           ],
           "scoring": {
@@ -879,19 +869,22 @@
         },
         {
           "id": "q2",
-          "prompt": "비누 ( )을 내어 싹싹 비벼요.",
-          "answerText": "거품",
-          "answerMatchMode": "EXACT",
+          "prompt": "손을 씻지 않고 음식을 먹으면 생기는 일을 모두 찾으시오.",
+          "answerTexts": [
+            "손을 씻지 않고 음식을 먹으면",
+            "배가 아플 수 있음"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 3,
-              "end": 5
+              "paragraphId": "p1",
+              "start": 86,
+              "end": 102
             },
             {
-              "paragraphId": "p2",
-              "start": 61,
-              "end": 63
+              "paragraphId": "p1",
+              "start": 103,
+              "end": 113
             }
           ],
           "scoring": {
@@ -903,14 +896,41 @@
         },
         {
           "id": "q3",
-          "prompt": "깨끗한 손으로 먹으니 ( )도 좋아요.",
-          "answerText": "기분",
-          "answerMatchMode": "EXACT",
+          "prompt": "비누 거품으로 손을 씻을 때 하는 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "비누 거품을 내어",
+            "손바닥과 손등을 싹싹 비빔"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 9
+            },
+            {
+              "paragraphId": "p2",
+              "start": 10,
+              "end": 24
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "식사 예절의 시작이 무엇인지 본문에서 찾으시오.",
+          "answerText": "깨끗한 손 씻기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 16,
-              "end": 18
+              "start": 41,
+              "end": 49
             }
           ],
           "scoring": {

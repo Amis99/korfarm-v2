@@ -1368,10 +1368,18 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "교실의 절대 권력자로 묘사된 인물은 누구인가요?",
-          "answerText": "최기표",
-          "answerMatchMode": "ANY",
+          "prompt": "반의 질서를 세우려 한 반장과 교실의 절대 권력자를 모두 찾으시오.",
+          "answerTexts": [
+            "반장 임형도",
+            "최기표"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 45,
+              "end": 51
+            },
             {
               "paragraphId": "p1",
               "start": 94,
@@ -1386,32 +1394,34 @@
         },
         {
           "id": "q2",
-          "prompt": "반의 질서를 세우려 한 반장은 누구인가요?",
-          "answerText": "임형도",
-          "answerMatchMode": "ANY",
+          "prompt": "담임 선생님이 기표를 약화하려고 쓴 전략의 요소를 모두 찾으시오.",
+          "answerTexts": [
+            "기표를 힘으로 누르는 대신",
+            "우상",
+            "어려운 가정 형편",
+            "동정 여론"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 48,
-              "end": 51
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "담임 선생님이 기표를 치켜세우며 만든 이름은 무엇인가요?",
-          "answerText": "우상",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+              "paragraphId": "p2",
+              "start": 39,
+              "end": 53
+            },
             {
               "paragraphId": "p2",
               "start": 62,
               "end": 64
+            },
+            {
+              "paragraphId": "p2",
+              "start": 88,
+              "end": 97
+            },
+            {
+              "paragraphId": "p2",
+              "start": 112,
+              "end": 117
             },
             {
               "paragraphId": "p3",
@@ -1431,15 +1441,67 @@
           "revealOnWrong": true
         },
         {
+          "id": "q3",
+          "prompt": "기표가 동정의 대상이 된 뒤 겪은 일과 감정을 모두 찾으시오.",
+          "answerTexts": [
+            "모금 운동",
+            "큰 모욕감",
+            "가식적인 친절",
+            "구경거리"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 26,
+              "end": 31
+            },
+            {
+              "paragraphId": "p3",
+              "start": 66,
+              "end": 71
+            },
+            {
+              "paragraphId": "p3",
+              "start": 105,
+              "end": 112
+            },
+            {
+              "paragraphId": "p3",
+              "start": 157,
+              "end": 161
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q4",
-          "prompt": "기표가 남긴 편지에 적힌 가장 짧은 말은 무엇인가요?",
-          "answerText": "무섭다",
-          "answerMatchMode": "ANY",
+          "prompt": "기표의 편지 문장과 그를 무섭게 만든 것들을 모두 찾으시오.",
+          "answerTexts": [
+            "무섭다. 무서워서 살 수가 없다",
+            "위선적 친절",
+            "보이지 않는 사회적 압력"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 48,
-              "end": 51
+              "end": 65
+            },
+            {
+              "paragraphId": "p4",
+              "start": 118,
+              "end": 124
+            },
+            {
+              "paragraphId": "p4",
+              "start": 143,
+              "end": 156
             }
           ],
           "scoring": {
@@ -1450,33 +1512,21 @@
         },
         {
           "id": "q5",
-          "prompt": "소설이 끝내 비판하는 보이지 않는 폭력의 성격은 무엇인가요?",
-          "answerText": "위선",
-          "answerMatchMode": "ANY",
+          "prompt": "이 소설이 비판하거나 마주하게 한다고 한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "보이지 않는 폭력",
+            "가식과 위선"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 24,
-              "end": 26
-            },
-            {
-              "paragraphId": "p4",
-              "start": 118,
-              "end": 120
-            },
-            {
-              "paragraphId": "p4",
-              "start": 185,
-              "end": 187
+              "paragraphId": "p5",
+              "start": 18,
+              "end": 27
             },
             {
               "paragraphId": "p5",
-              "start": 97,
-              "end": 99
-            },
-            {
-              "paragraphId": "p5",
-              "start": 153,
+              "start": 149,
               "end": 155
             }
           ],

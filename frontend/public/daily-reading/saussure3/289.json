@@ -850,14 +850,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "차례를 꼭 ( )니다.",
-          "answerText": "지킵",
-          "answerMatchMode": "EXACT",
+          "prompt": "줄을 서서 기다릴 때 해야 할 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "줄을 서서 기다릴 때는",
+            "차례를 꼭 지킵니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 46,
-              "end": 48
+              "start": 27,
+              "end": 39
+            },
+            {
+              "paragraphId": "p1",
+              "start": 40,
+              "end": 50
             }
           ],
           "scoring": {
@@ -869,14 +877,22 @@
         },
         {
           "id": "q2",
-          "prompt": "물건을 ( )에 둡니다.",
-          "answerText": "제자리",
-          "answerMatchMode": "EXACT",
+          "prompt": "줄을 기다릴 때 하지 말아야 할 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "앞 친구를 밀치거나",
+            "새치기를 하지 않도록 함"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 71,
-              "end": 74
+              "paragraphId": "p1",
+              "start": 52,
+              "end": 62
+            },
+            {
+              "paragraphId": "p1",
+              "start": 63,
+              "end": 76
             }
           ],
           "scoring": {
@@ -888,19 +904,49 @@
         },
         {
           "id": "q3",
-          "prompt": "( )한 추억을 쌓았습니다.",
-          "answerText": "소중",
-          "answerMatchMode": "EXACT",
+          "prompt": "행사 기구나 장난감을 사용할 때 하지 말아야 할 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "장난감을 함부로 던지거나",
+            "망가뜨리지 않습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 14,
-              "end": 16
+              "start": 27,
+              "end": 40
             },
             {
-              "paragraphId": "p3",
-              "start": 37,
-              "end": 39
+              "paragraphId": "p2",
+              "start": 41,
+              "end": 51
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "쓰레기를 처리하는 방법을 모두 찾으시오.",
+          "answerTexts": [
+            "쓰레기는 가방에 넣거나",
+            "쓰레기통에 쏙 넣음"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 79,
+              "end": 91
+            },
+            {
+              "paragraphId": "p2",
+              "start": 92,
+              "end": 102
             }
           ],
           "scoring": {

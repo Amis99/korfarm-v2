@@ -571,12 +571,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 문법 현상을 어떤 배경이나 문제의식에서 제시하는가?",
+          "prompt": "겹받침에 대해 자주 생기는 오해를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 211
+              "start": 41,
+              "end": 50
+            },
+            {
+              "paragraphId": "p1",
+              "start": 51,
+              "end": 65
             }
           ],
           "scoring": {
@@ -584,17 +589,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "겹받침을 배울 때 가장 자주 생기는 오해는, 받침 두 개가 있으면 언제나 둘 다 살아남거나 늘 같은 자음이 선택된다고 생각하는 것이다. 하지만 표준 발음에서는 음절 끝에서 실현되는 자음이 제한되므로, 겹받침은 환경에 따라 하나만 남거나 다음 음절로 넘어가며 다르게 발음된다. 그중에서도 'ㅄ·ㄽ·ㄾ'은 모양이 비슷해 보여도 실제 발음 방식이 같지 않아 따로 구분해 보아야 한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "둘 다 살아남거나",
+            "늘 같은 자음이 선택된다고"
+          ]
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 판별 기준이나 기본 원리를 어떻게 설명하는가?",
+          "prompt": "겹받침이 다르게 발음되는 이유로 제시된 표준 발음의 조건을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 190
+              "paragraphId": "p1",
+              "start": 89,
+              "end": 110
             }
           ],
           "scoring": {
@@ -603,16 +611,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "먼저 'ㅄ'은 자음 앞이나 어말에서는 보통 앞의 ㅂ이 남아 대표음으로 실현된다. 그래서 '값'은 [갑], '없다'는 [업따], '없고'는 [업꼬]처럼 발음된다. 여기서 중요한 점은 종성에서 ㅅ이 독립적으로 살아남는 것이 아니라는 사실이다. 즉 'ㅄ'은 표기상 두 자음이지만, 음절 끝에서는 대체로 ㅂ 계열의 소리로 정리된다고 이해해야 한다."
+          "answerText": "음절 끝에서 실현되는 자음이 제한되므로"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 해당 현상의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "'ㅄ'이 자음 앞이나 어말에서 어떻게 발음되는지 보여 주는 예를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 220
+              "paragraphId": "p2",
+              "start": 49,
+              "end": 57
+            },
+            {
+              "paragraphId": "p2",
+              "start": 59,
+              "end": 69
+            },
+            {
+              "paragraphId": "p2",
+              "start": 71,
+              "end": 81
             }
           ],
           "scoring": {
@@ -620,17 +638,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그러나 'ㅄ' 뒤에 모음으로 시작하는 형식 형태소가 오면 연음 과정이 일어나고, 이때는 뒤의 ㅅ이 다음 음절 첫머리로 이어지는 경우가 나타난다. 대표적으로 '값이'는 [갑씨], '없어'는 [업써]처럼 실현된다. 종성에서는 ㅂ이 남지만, 뒤에 모음이 오면 ㅅ이 다음 음절로 넘어가 된소리되기와 결합한 형태가 드러나는 것이다. 따라서 'ㅄ'은 종성 대표음과 연음 결과를 따로 나누어 기억해야 한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'값'은 [갑]",
+            "'없다'는 [업따]",
+            "'없고'는 [업꼬]"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단은 구별점이나 추가 조건을 어떤 방향으로 드러내는가?",
+          "prompt": "'ㅄ'에서 종성에서 독립적으로 살아남지 않는 자음을 설명한 부분을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 238
+              "paragraphId": "p2",
+              "start": 101,
+              "end": 130
             }
           ],
           "scoring": {
@@ -639,16 +661,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "다음으로 'ㄽ'은 어말이나 자음 앞에서 대체로 ㄹ이 남는 경우가 기준이 된다. 그래서 '외곬'처럼 예외를 떠올리기 쉽지만, '곬' 계열을 제외하면 'ㄽ'은 끝소리에서 ㅅ보다 ㄹ 쪽이 유지되는 방향으로 이해하는 것이 기본적이다. 연음 환경에서는 뒤의 ㅅ이 다음 음절로 이어질 수 있으므로, 종성에서는 ㄹ이 남더라도 모음 앞에서는 표기상 뒤 자음의 존재가 다시 드러난다. 즉 'ㄽ'은 음절 끝 기준과 연음 기준이 다르게 작동한다."
+          "answerText": "종성에서 ㅅ이 독립적으로 살아남는 것이 아니라는 사실"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 해석상의 주의점이나 적용 효과를 어떻게 설명하는가?",
+          "prompt": "'ㅄ' 뒤에 모음으로 시작하는 형식 형태소가 올 때의 예를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 244
+              "paragraphId": "p3",
+              "start": 87,
+              "end": 97
+            },
+            {
+              "paragraphId": "p3",
+              "start": 99,
+              "end": 109
             }
           ],
           "scoring": {
@@ -656,17 +683,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "마지막으로 'ㄾ'은 표준 발음에서 특히 ㅌ의 개입이 두드러진다. 자음 앞에서는 '핥다'가 [할따]처럼 발음되어, 종성에서는 ㄹ이 남고 뒤의 ㅌ은 뒤따르는 자음과 결합해 거센소리나 된소리 현상에 영향을 준다. 또 모음 앞에서는 '핥아'가 [할타]처럼 발음되어, 종성에 남아 있던 ㄹ과 다음 음절로 이어지는 ㅌ이 각각 다른 위치에서 실현된다. 이처럼 'ㄾ'은 ㄹ이 종성 자리에 남고 ㅌ은 뒤 음절 초성으로 이동하는 구조를 분명히 보여 준다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'값이'는 [갑씨]",
+            "'없어'는 [업써]"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 이 문법 주제를 어떤 관점에서 정리하는가?",
+          "prompt": "'ㄽ'에서 기본적으로 ㄹ 쪽이 유지된다고 보는 조건을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 294
+              "paragraphId": "p4",
+              "start": 69,
+              "end": 81
             }
           ],
           "scoring": {
@@ -675,7 +705,59 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 'ㅄ·ㄽ·ㄾ'의 발음을 구별하는 핵심은 두 가지이다. 첫째, 자음 앞과 어말에서는 어떤 자음이 종성 대표음으로 남는가를 따져야 하고, 둘째, 모음 앞에서는 연음 과정에서 어느 자음이 다음 음절 초성으로 넘어가는가를 살펴야 한다. 'ㅄ'은 종성에서 ㅂ이 남고 연음에서 ㅅ이 드러나며, 'ㄽ'은 종성에서 ㄹ이 중심이 되고 연음에서 ㅅ이 이어질 수 있고, 'ㄾ'은 종성의 ㄹ과 연음되는 ㅌ의 분리가 뚜렷하다. 따라서 겹받침 발음은 단순 암기가 아니라 환경에 따라 남는 자음과 이동하는 자음을 함께 보는 방식으로 이해해야 한다."
+          "answerText": "'곬' 계열을 제외하면"
+        },
+        {
+          "id": "q7",
+          "prompt": "'ㄾ'이 자음 앞과 모음 앞에서 실현되는 예를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 44,
+              "end": 54
+            },
+            {
+              "paragraphId": "p5",
+              "start": 126,
+              "end": 136
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'핥다'가 [할따]",
+            "'핥아'가 [할타]"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "겹받침 발음을 구별하는 두 핵심 기준을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 49,
+              "end": 68
+            },
+            {
+              "paragraphId": "p6",
+              "start": 98,
+              "end": 121
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "어떤 자음이 종성 대표음으로 남는가",
+            "어느 자음이 다음 음절 초성으로 넘어가는가"
+          ]
         }
       ]
     }

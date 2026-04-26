@@ -914,7 +914,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "톰이 토요일 내내 하라는 벌을 받은 일은 무엇인가요?",
+          "prompt": "톰이 벌로 받은 일을 찾으시오.",
           "answerText": "긴 담벼락에 페인트칠",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -932,14 +932,28 @@
         },
         {
           "id": "q2",
-          "prompt": "톰이 붓을 들었을 때 마음은 어떠했나요?",
-          "answerText": "무거운 마음",
-          "answerMatchMode": "ANY",
+          "prompt": "톰이 벤을 속이기 위해 한 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "즐거운 일을 하는 것처럼 연기하기 시작했다",
+            "예술가처럼 정성스럽게 붓질",
+            "벤의 호기심"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 114,
-              "end": 120
+              "paragraphId": "p2",
+              "start": 57,
+              "end": 80
+            },
+            {
+              "paragraphId": "p2",
+              "start": 85,
+              "end": 99
+            },
+            {
+              "paragraphId": "p2",
+              "start": 104,
+              "end": 110
             }
           ],
           "scoring": {
@@ -950,21 +964,16 @@
         },
         {
           "id": "q3",
-          "prompt": "벤이 아삭거리며 들고 온 것은 무엇인가요?",
-          "answerText": "사과",
-          "answerMatchMode": "ANY",
+          "prompt": "벤이 페인트칠을 어떻게 믿게 되었는지 찾으시오.",
+          "answerText": "대단히 특별한 놀이",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 9,
-              "end": 11
-            },
-            {
-              "paragraphId": "p3",
-              "start": 58,
-              "end": 60
+              "start": 137,
+              "end": 147
             }
           ],
+          "answerMatchMode": "ANY",
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -973,14 +982,22 @@
         },
         {
           "id": "q4",
-          "prompt": "벤이 페인트칠을 어떻게 여기게 되었나요?",
-          "answerText": "대단히 특별한 놀이라고",
-          "answerMatchMode": "ANY",
+          "prompt": "벤이 제안한 것과 톰이 지켜본 모습을 모두 찾으시오.",
+          "answerTexts": [
+            "아끼는 사과",
+            "벤이 땀 흘리며 일하는 모습"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 137,
-              "end": 149
+              "paragraphId": "p3",
+              "start": 54,
+              "end": 60
+            },
+            {
+              "paragraphId": "p3",
+              "start": 106,
+              "end": 121
             }
           ],
           "scoring": {
@@ -991,10 +1008,24 @@
         },
         {
           "id": "q5",
-          "prompt": "톰이 벌을 받으며 함께 얻은 것은 무엇인가요?",
-          "answerText": "큰 수익과 여유",
-          "answerMatchMode": "ANY",
+          "prompt": "톰이 친구들에게서 챙긴 것과 얻은 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "연날리기용 줄",
+            "유리구슬 조각",
+            "큰 수익과 여유"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 72,
+              "end": 79
+            },
+            {
+              "paragraphId": "p4",
+              "start": 81,
+              "end": 88
+            },
             {
               "paragraphId": "p4",
               "start": 142,

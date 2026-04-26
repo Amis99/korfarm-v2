@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지난달 학생회는 점심시간 도서관 이용 실태를 알아보기 위해 전교생 무엇?",
+          "prompt": "학생회가 이용 실태를 알아보기 위해 조사한 대상과 수를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 37,
-              "end": 52
+              "start": 33,
+              "end": 46
             }
           ],
           "scoring": {
@@ -585,31 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "가운데 186명을 조사하였다"
+          "answerText": "전교생 가운데 186명을"
         },
         {
           "id": "q2",
-          "prompt": "설문에 따르면 점심시간에 도서관을 한 주에 세 번 이상 간다고 답한 학생은 42%무엇?",
+          "prompt": "이번 조사를 한 이유를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 50,
-              "end": 52
-            },
-            {
-              "paragraphId": "p2",
-              "start": 45,
-              "end": 47
-            },
-            {
-              "paragraphId": "p2",
-              "start": 79,
-              "end": 81
-            },
-            {
-              "paragraphId": "p3",
-              "start": 56,
-              "end": 58
+              "start": 61,
+              "end": 98
             }
           ],
           "scoring": {
@@ -618,51 +603,20 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "였다"
+          "answerText": "이용 학생이 늘었다는 말이 많아서 실제로도 그런지 보려고 한 것이다"
         },
         {
           "id": "q3",
-          "prompt": "가장 많은 응답은 '무엇'였고 그다음은 '과제를 하려고'였다?",
+          "prompt": "도서관을 한 주에 세 번 이상 간다는 학생 비율과 거의 가지 않는다는 학생 수·비율을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 34,
-              "end": 38
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "조용해서"
-        },
-        {
-          "id": "q4",
-          "prompt": "특히 3학년의 이용률이 낮은 이유는 공부할 무엇 쉽다?",
-          "answerRanges": [
+              "paragraphId": "p2",
+              "start": 42,
+              "end": 45
+            },
             {
-              "paragraphId": "p4",
-              "start": 24,
-              "end": 38
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "시간이 없어서라고 단정하기"
-        },
-        {
-          "id": "q5",
-          "prompt": "또 무엇 시간이 길다는 의견이 있어서, 도서관 앞 복도 정리도 필요하다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 67,
+              "paragraphId": "p2",
+              "start": 70,
               "end": 79
             }
           ],
@@ -671,17 +625,130 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "점심시간이 짧은데 이동"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "42%",
+            "38명으로 29%"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "학년별 이용률 차이를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 139,
+              "end": 147
+            },
+            {
+              "paragraphId": "p2",
+              "start": 149,
+              "end": 157
+            },
+            {
+              "paragraphId": "p2",
+              "start": 159,
+              "end": 167
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "1학년은 51%",
+            "2학년은 37%",
+            "3학년은 19%"
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "도서관에 가는 가장 많은 응답과 그다음 응답을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 33,
+              "end": 39
+            },
+            {
+              "paragraphId": "p3",
+              "start": 47,
+              "end": 56
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "‘조용해서’",
+            "‘과제를 하려고’"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "이 무엇도와도 관련이 크다?",
+          "prompt": "3학년의 낮은 이용률을 단순히 공부 시간 문제로만 볼 수 없는 근거를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 55,
+              "end": 75
+            },
+            {
+              "paragraphId": "p4",
+              "start": 81,
+              "end": 96
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "자리 배치가 불편하다는 의견도 17건",
+            "참고서가 오래되었다는 응답도"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "학생회가 검토하는 두 개선 방안을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 8,
+              "end": 30
+            },
+            {
+              "paragraphId": "p5",
+              "start": 40,
+              "end": 54
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "창가 쪽 긴 책상을 모둠용 자리로 바꾸고",
+            "최신 참고서를 들이는 방안"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "조사 결과가 도서관에 대해 보여 준 점을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 182,
-              "end": 193
+              "start": 10,
+              "end": 35
             }
           ],
           "scoring": {
@@ -690,7 +757,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결과는 학교생활 만족"
+          "answerText": "도서관이 단순히 책을 빌리는 곳이 아니라는 점"
         }
       ]
     }

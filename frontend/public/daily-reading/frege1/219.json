@@ -913,34 +913,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "공원에 설치해 달라고 건의한 것은 무엇인가요?",
-          "answerText": "안내판",
-          "answerMatchMode": "ANY",
+          "prompt": "공원 산책에서 이웃 다툼을 일으키는 문제를 모두 찾으시오.",
+          "answerTexts": [
+            "강아지가 목줄을 하지 않고 달려들거나",
+            "주인이 배설물을 치우지 않고 가는 경우"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 27,
-              "end": 30
+              "paragraphId": "p1",
+              "start": 81,
+              "end": 101
             },
             {
-              "paragraphId": "p2",
-              "start": 47,
-              "end": 50
-            },
-            {
-              "paragraphId": "p2",
-              "start": 129,
-              "end": 132
-            },
-            {
-              "paragraphId": "p2",
-              "start": 148,
-              "end": 151
-            },
-            {
-              "paragraphId": "p4",
-              "start": 48,
-              "end": 51
+              "paragraphId": "p1",
+              "start": 102,
+              "end": 123
             }
           ],
           "scoring": {
@@ -951,14 +939,28 @@
         },
         {
           "id": "q2",
-          "prompt": "안내판에 함께 적자고 한 규칙 가운데 하나는 무엇인가요?",
-          "answerText": "목줄 착용",
-          "answerMatchMode": "ANY",
+          "prompt": "산책 예절 안내판에 대해 건의한 내용과 적을 규칙을 모두 찾으시오.",
+          "answerTexts": [
+            "산책 예절 안내판을 설치해 주시길 건의합니다",
+            "목줄 착용과 배설물 수거 같은 기본적인 규칙",
+            "공원 입구와 산책로 중간"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
+              "start": 21,
+              "end": 45
+            },
+            {
+              "paragraphId": "p2",
               "start": 53,
-              "end": 58
+              "end": 77
+            },
+            {
+              "paragraphId": "p2",
+              "start": 114,
+              "end": 127
             }
           ],
           "scoring": {
@@ -969,19 +971,22 @@
         },
         {
           "id": "q3",
-          "prompt": "배설물을 치울 수 있도록 마련해 달라고 한 것은 무엇인가요?",
-          "answerText": "위생 봉투함",
-          "answerMatchMode": "ANY",
+          "prompt": "배설물 문제를 예방하기 위해 마련하자고 한 것과 설치 위치를 모두 찾으시오.",
+          "answerTexts": [
+            "배설물을 치울 수 있는 위생 봉투함",
+            "쓰레기통 옆에 작은 봉투함을 설치해 두면"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 16,
+              "start": 3,
               "end": 22
             },
             {
-              "paragraphId": "p4",
-              "start": 53,
-              "end": 59
+              "paragraphId": "p3",
+              "start": 90,
+              "end": 112
             }
           ],
           "scoring": {
@@ -992,14 +997,14 @@
         },
         {
           "id": "q4",
-          "prompt": "봉투함을 어디 옆에 설치하자고 했나요?",
-          "answerText": "쓰레기통",
+          "prompt": "작은 봉투 하나가 공원에 줄 수 있는 효과를 찾으시오.",
+          "answerText": "우리 공원을 훨씬 깨끗하게 만들어 줄 수 있습니다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 90,
-              "end": 94
+              "start": 145,
+              "end": 172
             }
           ],
           "scoring": {
@@ -1010,13 +1015,21 @@
         },
         {
           "id": "q5",
-          "prompt": "우리 동네 공원이 모두에게 어떤 곳이 되길 바랐나요?",
-          "answerText": "휴식처",
-          "answerMatchMode": "ANY",
+          "prompt": "안내판과 위생 봉투함이 설치되면 행복해질 사람들과 공원의 모습을 모두 찾으시오.",
+          "answerTexts": [
+            "반려동물을 키우는 사람과 그렇지 않은 사람 모두",
+            "안전하고 깨끗한 휴식처"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 130,
+              "start": 67,
+              "end": 93
+            },
+            {
+              "paragraphId": "p4",
+              "start": 121,
               "end": 133
             }
           ],

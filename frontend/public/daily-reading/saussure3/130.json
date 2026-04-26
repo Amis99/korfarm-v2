@@ -557,14 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "회의에서 논의할 주요한 내용이나 문제를 뜻하는 말은 무엇인가요?",
-          "answerText": "안건",
-          "answerMatchMode": "EXACT",
+          "prompt": "농촌 체험 학습으로 진행할 활동은 무엇인가요?",
+          "answerText": "모내기 활동",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 86,
-              "end": 88
+              "start": 21,
+              "end": 27
             }
           ],
           "scoring": {
@@ -576,14 +576,22 @@
         },
         {
           "id": "q2",
-          "prompt": "회의를 이끌어가며 질서를 유지하고 발언권을 주는 진행자는?",
-          "answerText": "의장님",
-          "answerMatchMode": "EXACT",
+          "prompt": "모내기 때 필요한 것과 논에서 주의할 규칙을 모두 찾으시오.",
+          "answerTexts": [
+            "준비물",
+            "안전 수칙"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 98,
-              "end": 101
+              "start": 60,
+              "end": 63
+            },
+            {
+              "paragraphId": "p1",
+              "start": 76,
+              "end": 81
             }
           ],
           "scoring": {
@@ -595,14 +603,33 @@
         },
         {
           "id": "q3",
-          "prompt": "위험하지 않도록 미리 조심하고 몸을 보호하기 위해 지켜야 할 규칙은?",
-          "answerText": "안전 수칙",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구들이 꼭 챙겨야 한다고 강조한 것은 무엇인가요?",
+          "answerText": "여벌 옷과 장화",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 76,
-              "end": 81
+              "paragraphId": "p2",
+              "start": 5,
+              "end": 13
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "논바닥이 미끄러울 때 따르기로 약속한 것은 무엇인가요?",
+          "answerText": "선생님의 지시",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 70,
+              "end": 77
             }
           ],
           "scoring": {

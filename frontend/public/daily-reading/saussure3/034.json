@@ -557,29 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "배추흰나비의 알에서 깨어나 주변의 잎사귀와 똑같은 초록색을 띠고, 허물을 벗으며 자라는 것은?",
-          "answerText": "애벌레",
-          "answerMatchMode": "EXACT",
+          "prompt": "애벌레가 배춧잎을 갉아 먹으며 어떻게 자란다고 했는지 지문에서 찾으시오.",
+          "answerText": "쑥쑥 자라",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 17,
-              "end": 20
-            },
-            {
-              "paragraphId": "p1",
-              "start": 35,
-              "end": 38
-            },
-            {
-              "paragraphId": "p1",
-              "start": 74,
-              "end": 77
-            },
-            {
-              "paragraphId": "p2",
-              "start": 7,
-              "end": 10
+              "start": 52,
+              "end": 57
             }
           ],
           "scoring": {
@@ -591,29 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "몸집이 커진 애벌레가 안전한 곳에 자리 잡아 단단해진 상태로, 그 안에서 나비가 되기 위한 준비를 하는 것은?",
-          "answerText": "번데기",
-          "answerMatchMode": "EXACT",
+          "prompt": "애벌레가 눈에 띄지 않으려고 띠는 색을 지문에서 찾으시오.",
+          "answerText": "초록색",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 26,
-              "end": 29
-            },
-            {
-              "paragraphId": "p2",
-              "start": 36,
-              "end": 39
-            },
-            {
-              "paragraphId": "p2",
-              "start": 86,
-              "end": 89
-            },
-            {
-              "paragraphId": "p3",
-              "start": 4,
-              "end": 7
+              "paragraphId": "p1",
+              "start": 101,
+              "end": 104
             }
           ],
           "scoring": {
@@ -625,14 +595,41 @@
         },
         {
           "id": "q3",
-          "prompt": "번데기 껍질을 갈라치고 나온 어른 나비가 하늘로 날아올라 달콤하게 빨아 먹는 맛있는 양식은 무엇인가요?",
-          "answerText": "꿀",
-          "answerMatchMode": "EXACT",
+          "prompt": "번데기 안에서 일어나는 변화가 무엇이 되기 위한 것인지 포함된 표현을 지문에서 찾으시오.",
+          "answerText": "나비가 되기 위한 놀라운 변화",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 53,
+              "end": 69
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "어른 나비가 밖으로 나온 뒤 하는 일을 나타내는 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "꽃을 찾아 하늘로 날아오릅니다",
+            "꿀을 빨아 먹고 다시 잎에 알을 낳으며 새로운 생명을 이어갑니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
+              "start": 58,
+              "end": 74
+            },
+            {
+              "paragraphId": "p3",
               "start": 80,
-              "end": 81
+              "end": 115
             }
           ],
           "scoring": {

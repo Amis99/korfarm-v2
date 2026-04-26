@@ -610,103 +610,74 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '안내문'을 모두 찾으시오.",
+          "prompt": "지문에서 '안내문'을 모두 찾으시오",
           "answerText": "안내문",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 7,
-              "end": 10
-            },
-            {
-              "paragraphId": "p6",
-              "start": 38,
-              "end": 41
-            }
+            {"paragraphId": "p1", "start": 7, "end": 10},
+            {"paragraphId": "p6", "start": 38, "end": 41}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '차례'를 모두 찾으시오.",
-          "answerText": "차례",
+          "prompt": "지문에서 '분위기'를 모두 찾으시오",
+          "answerText": "분위기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 30,
-              "end": 32
-            }
+            {"paragraphId": "p1", "start": 55, "end": 58},
+            {"paragraphId": "p5", "start": 23, "end": 26}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '분위기'를 모두 찾으시오.",
-          "answerText": "분위기",
+          "prompt": "지문에서 '질서'를 찾으시오",
+          "answerText": "질서",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 55,
-              "end": 58
-            },
-            {
-              "paragraphId": "p5",
-              "start": 23,
-              "end": 26
-            }
+            {"paragraphId": "p6", "start": 11, "end": 13}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '간격'을 모두 찾으시오.",
-          "answerText": "간격",
+          "prompt": "안내문을 쓰는 두 가지 뜻을 모두 찾으시오",
+          "answerText": "모두가 차례를 잘 지키게 하려는 뜻 / 전반적인 분위기를 좋게 만들려는 마음",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 17,
-              "end": 19
-            }
+            {"paragraphId": "p1", "start": 26, "end": 45},
+            {"paragraphId": "p1", "start": 50, "end": 70}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '질서'를 모두 찾으시오.",
-          "answerText": "질서",
+          "prompt": "줄을 설 때 지키도록 부탁한 두 가지 태도를 모두 찾으시오",
+          "answerText": "앞사람과 간격을 조금 두고 / 큰 소리로 오래 이야기하지 않도록",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 11,
-              "end": 13
-            }
+            {"paragraphId": "p3", "start": 12, "end": 26},
+            {"paragraphId": "p3", "start": 27, "end": 45}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "권한 대로 지키면 생긴다는 두 가지 결과를 모두 찾으시오",
+          "answerText": "줄이 더 빨리 줄어들고 / 식사 분위기도 차분해질 수 있어서",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 7, "end": 19},
+            {"paragraphId": "p5", "start": 20, "end": 38}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

@@ -914,7 +914,25 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "글에서 만들고자 한 매점의 모습은 무엇인가요?",
+          "prompt": "매점 간식 문제가 학생 건강에 부정적 영향을 미치는 이유를 찾으시오.",
+          "answerText": "당분과 지방 함량이 높은 가공식품에 치우쳐 있어",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 97,
+              "end": 123
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "글쓴이가 만들고자 한 매점의 모습을 찾으시오.",
           "answerText": "건강한 매점",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -931,32 +949,22 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "신선 식품의 예로 제시한 메뉴는 무엇인가요?",
-          "answerText": "컵 과일",
-          "answerMatchMode": "ANY",
+          "id": "q3",
+          "prompt": "건의한 메뉴 구성 방향과 예를 모두 찾으시오.",
+          "answerTexts": [
+            "신선 식품과 저당 제품",
+            "컵 과일, 견과류, 무가당 유제품"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 21,
+              "end": 33
+            },
             {
               "paragraphId": "p2",
               "start": 75,
-              "end": 79
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "저당 제품의 예로 제시한 것은 무엇인가요?",
-          "answerText": "무가당 유제품",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 86,
               "end": 93
             }
           ],
@@ -968,14 +976,22 @@
         },
         {
           "id": "q4",
-          "prompt": "학생들이 한눈에 보기 쉽게 표시해 달라고 한 것은 무엇인가요?",
-          "answerText": "영양 성분 정보",
-          "answerMatchMode": "ANY",
+          "prompt": "영양 성분 정보를 표시하자고 한 방법을 모두 찾으시오.",
+          "answerTexts": [
+            "한눈에 보기 쉽게 표시",
+            "칼로리와 주요 영양소 함량을 인포그래픽 형태로 게시"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 9,
-              "end": 17
+              "start": 24,
+              "end": 36
+            },
+            {
+              "paragraphId": "p3",
+              "start": 87,
+              "end": 115
             }
           ],
           "scoring": {
@@ -986,14 +1002,14 @@
         },
         {
           "id": "q5",
-          "prompt": "칼로리와 영양소 함량을 어떤 형태로 게시하자고 했나요?",
-          "answerText": "인포그래픽",
+          "prompt": "제안이 실천되면 매점이 어떤 곳이 되는지 찾으시오.",
+          "answerText": "학생들의 건강과 행복을 가꾸는 든든한 요람",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 103,
-              "end": 108
+              "paragraphId": "p4",
+              "start": 41,
+              "end": 64
             }
           ],
           "scoring": {

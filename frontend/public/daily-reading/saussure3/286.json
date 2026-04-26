@@ -850,19 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "입구에서 ( )을 확인해요.",
-          "answerText": "티켓",
-          "answerMatchMode": "EXACT",
+          "prompt": "모두가 즐겁게 감상하기 위해 지켜야 한다고 한 것을 지문에서 찾아 클릭하세요.",
+          "answerText": "공공예절",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 36,
-              "end": 38
-            },
-            {
-              "paragraphId": "p3",
-              "start": 112,
-              "end": 114
+              "start": 134,
+              "end": 138
             }
           ],
           "scoring": {
@@ -874,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "옆 친구와 ( ) 거리지 마요.",
-          "answerText": "소곤소곤",
-          "answerMatchMode": "EXACT",
+          "prompt": "영화가 상영되는 중에는 어떻게 관람해야 한다고 했는지 지문에서 찾아 클릭하세요.",
+          "answerText": "조용히 관람해야 합니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 33,
-              "end": 37
+              "start": 13,
+              "end": 25
             }
           ],
           "scoring": {
@@ -893,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "바른 ( )을 지키는 어린이.",
-          "answerText": "에티켓",
-          "answerMatchMode": "EXACT",
+          "prompt": "팝콘을 먹을 때 어떻게 조심하라고 했는지 지문에서 찾아 클릭하세요.",
+          "answerText": "소리가 나지 않게",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 90,
+              "end": 99
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "다음 사람을 위해 어떻게 해야 하는지 지문에서 찾아 클릭하세요.",
+          "answerText": "자리를 깨끗이 정돈하고",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 111,
-              "end": 114
+              "start": 62,
+              "end": 74
             }
           ],
           "scoring": {

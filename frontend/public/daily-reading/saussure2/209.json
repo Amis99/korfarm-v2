@@ -559,14 +559,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "강은 바다로 가기 전까지 수많은 생물에게 소중한 이것이 된답니다. 이것은 무엇일까요?",
-          "answerText": "보금자리",
-          "answerMatchMode": "EXACT",
+          "prompt": "강이 어떤 곳이라고 설명되는지 지문에서 찾아 쓰시오.",
+          "answerText": "산에서 시작된 맑은 물이 모여 흘러가는 곳",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 61,
-              "end": 65
+              "start": 0,
+              "end": 23
             }
           ],
           "scoring": {
@@ -578,14 +578,14 @@
         },
         {
           "id": "q2",
-          "prompt": "강바닥 돌 틈에는 이것과 다슬기가 숨어서 먹이를 찾느라 바쁘답니다. 이것은 무엇일까요?",
-          "answerText": "가재",
-          "answerMatchMode": "EXACT",
+          "prompt": "강은 수많은 생물에게 어떤 소중한 것이 되는지 지문에서 찾아 쓰시오.",
+          "answerText": "소중한 보금자리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 48,
-              "end": 50
+              "paragraphId": "p1",
+              "start": 57,
+              "end": 65
             }
           ],
           "scoring": {
@@ -597,14 +597,33 @@
         },
         {
           "id": "q3",
-          "prompt": "키가 큰 갈대와 이것은 동물들에게 훌륭한 숨을 곳을 만들어 주지요. 이것은 무엇일까요?",
-          "answerText": "수양버들",
-          "answerMatchMode": "EXACT",
+          "prompt": "강바닥 돌 틈에서 숨어서 먹이를 찾는 생물은 무엇인지 지문에서 찾아 쓰시오.",
+          "answerText": "가재와 다슬기",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 48,
+              "end": 55
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "키가 큰 갈대와 수양버들은 동물들에게 무엇을 만들어 주는지 지문에서 찾아 쓰시오.",
+          "answerText": "훌륭한 숨을 곳",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 47,
-              "end": 51
+              "start": 59,
+              "end": 67
             }
           ],
           "scoring": {

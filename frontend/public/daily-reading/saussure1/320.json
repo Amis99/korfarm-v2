@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "눈 위에서 하는 놀이?",
+          "prompt": "겨울 방학 체험으로 친구들과 함께한 즐거운 놀이의 이름은 무엇인가요?",
           "answerText": "눈놀이",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -420,14 +420,19 @@
         },
         {
           "id": "q2",
-          "prompt": "눈으로 뭉쳐 만든 것?",
-          "answerText": "눈사람",
-          "answerMatchMode": "EXACT",
+          "prompt": "눈놀이에서 \"친구들과 만든 것\"과 \"가파른 언덕에서 탄 것\" 두 가지를 모두 찾아보세요",
+          "answerText": "눈사람, 썰매",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 68,
               "end": 71
+            },
+            {
+              "paragraphId": "p1",
+              "start": 131,
+              "end": 133
             }
           ],
           "scoring": {
@@ -439,14 +444,38 @@
         },
         {
           "id": "q3",
-          "prompt": "눈 위를 달리는 기구?",
-          "answerText": "썰매",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구들과 함께 웃고 떠드니 시려운 손과 달리 마음만은 어떠했는지 살펴보세요",
+          "answerText": "따뜻",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 113,
+              "end": 115
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "눈사람을 함께 만들고 웃으며 떠든 사람들은 누구인지 살펴보세요",
+          "answerText": "친구",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 131,
-              "end": 133
+              "start": 56,
+              "end": 58
+            },
+            {
+              "paragraphId": "p2",
+              "start": 88,
+              "end": 90
             }
           ],
           "scoring": {

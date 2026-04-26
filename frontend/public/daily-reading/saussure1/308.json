@@ -396,44 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "노는 데 쓰는 도구?",
-          "answerText": "장난감",
-          "answerMatchMode": "EXACT",
+          "prompt": "할아버지가 흐뭇한 표정을 지을 때 입가에 짓는 가벼운 웃음을 뜻하는 두 글자 낱말을 글에서 찾아 적어 보세요",
+          "answerText": "미소",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 6,
-              "end": 9
-            },
-            {
-              "paragraphId": "p1",
-              "start": 102,
-              "end": 105
-            },
-            {
-              "paragraphId": "p1",
-              "start": 163,
-              "end": 166
-            },
-            {
               "paragraphId": "p2",
-              "start": 11,
-              "end": 14
-            },
-            {
-              "paragraphId": "p2",
-              "start": 72,
-              "end": 75
-            },
-            {
-              "paragraphId": "p2",
-              "start": 112,
-              "end": 115
-            },
-            {
-              "paragraphId": "p2",
-              "start": 136,
-              "end": 139
+              "start": 104,
+              "end": 106
             }
           ],
           "scoring": {
@@ -445,24 +415,29 @@
         },
         {
           "id": "q2",
-          "prompt": "고치는 일을 하는 곳?",
-          "answerText": "수리소",
-          "answerMatchMode": "EXACT",
+          "prompt": "장난감들에게 반짝이는 태엽을 하나씩 나누어 준 인물이 누구인지 글에서 찾아 적어 보세요",
+          "answerText": "할아버지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 71,
-              "end": 74
+              "start": 17,
+              "end": 21
             },
             {
-              "paragraphId": "p2",
-              "start": 65,
-              "end": 68
+              "paragraphId": "p1",
+              "start": 91,
+              "end": 95
             },
             {
-              "paragraphId": "p2",
+              "paragraphId": "p1",
               "start": 140,
-              "end": 143
+              "end": 144
+            },
+            {
+              "paragraphId": "p2",
+              "start": 94,
+              "end": 98
             }
           ],
           "scoring": {
@@ -474,24 +449,33 @@
         },
         {
           "id": "q3",
-          "prompt": "기계의 회전용 부품?",
-          "answerText": "태엽",
-          "answerMatchMode": "EXACT",
+          "prompt": "장난감들이 사람처럼 웃고 행동하는 모습이 드러난 부분을 한 군데 찾아 적어 보세요",
+          "answerText": "다시 예전처럼 밝게 웃으며 작동하기 시작",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 125,
-              "end": 127
-            },
-            {
-              "paragraphId": "p1",
-              "start": 158,
-              "end": 160
-            },
+              "paragraphId": "p2",
+              "start": 17,
+              "end": 39
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "행복의 태엽을 감자 장난감들이 어떻게 변했는지 두 가지를 모두 적어 보세요",
+          "answerText": "다시 예전처럼 밝게 웃으며 작동했고 서로를 배려하며 차례대로 줄을 섬",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 4,
-              "end": 6
+              "start": 17,
+              "end": 60
             }
           ],
           "scoring": {

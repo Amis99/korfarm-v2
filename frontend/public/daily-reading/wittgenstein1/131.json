@@ -571,12 +571,32 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 글쓴이가 어떤 문제의식으로 이 글을 시작하는가?",
+          "prompt": "'먹고 남은 음식'을 뜻하는 말을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 148
+              "start": 13,
+              "end": 15
+            },
+            {
+              "paragraphId": "p1",
+              "start": 71,
+              "end": 73
+            },
+            {
+              "paragraphId": "p3",
+              "start": 13,
+              "end": 15
+            },
+            {
+              "paragraphId": "p5",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "paragraphId": "p6",
+              "start": 77,
+              "end": 79
             }
           ],
           "scoring": {
@@ -585,16 +605,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "우리 학교에서는 급식실 잔반 문제를 줄이기 위해 학생들에게 협조를 요청하는 안내문을 새로 만들 필요가 있다. 그런데 지금까지는 잔반을 줄이자는 말만 반복되었고, 왜 그런 행동이 필요한지와 학생들이 실제로 무엇을 하면 되는지가 함께 드러나지 않아 효과가 크지 않았다."
+          "answerText": "잔반"
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 이 초고를 어떤 근거로 보강해야 한다고 보는가?",
+          "prompt": "지금까지 안내문에서 함께 드러나지 않았던 두 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 187
+              "paragraphId": "p1",
+              "start": 90,
+              "end": 103
+            },
+            {
+              "paragraphId": "p1",
+              "start": 105,
+              "end": 124
             }
           ],
           "scoring": {
@@ -602,17 +627,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "특히 점심시간이 짧은 날에는 학생들이 급하게 식판을 받고 남긴 음식을 그대로 버리는 일이 잦다. 어떤 학생은 양 조절을 미리 요청할 수 있다는 사실을 잘 모르고, 어떤 학생은 줄을 빨리 빠져나가야 한다는 생각 때문에 먹을 수 없는 반찬도 일단 받아 가는 편이다. 이런 상황을 설명하지 않고 단순히 남기지 말라고만 쓰면 설득력이 약하다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "왜 그런 행동이 필요한지",
+            "학생들이 실제로 무엇을 하면 되는지"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 이 초고를 어떤 근거로 보강해야 한다고 보는가?",
+          "prompt": "새 안내문은 누구에게 협조를 요청하려는 것인지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 175
+              "paragraphId": "p1",
+              "start": 27,
+              "end": 32
             }
           ],
           "scoring": {
@@ -621,16 +649,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그래서 안내문에는 먼저 잔반이 많아질수록 음식물 처리 비용이 늘고 조리 인력의 부담도 커진다는 점을 알려야 한다. 다음으로는 학생들이 실제로 실천할 수 있는 행동을 제시해야 한다. 예를 들면 배식 전에 양을 미리 말하기, 먹기 어려운 메뉴는 적게 받기, 추가 반찬은 다 먹은 뒤에 받기 같은 순서가 포함되면 좋다."
+          "answerText": "학생들에게"
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 주장을 설득력 있게 만들기 위해 어떤 점을 보완해야 한다고 말하는가?",
+          "prompt": "잔반이 많아질수록 늘거나 커지는 것을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 167
+              "paragraphId": "p3",
+              "start": 23,
+              "end": 32
+            },
+            {
+              "paragraphId": "p3",
+              "start": 37,
+              "end": 46
             }
           ],
           "scoring": {
@@ -638,17 +671,30 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "또 안내문은 급식실 앞 게시판에 붙이기만 하면 충분하다고 생각할 수도 있다. 하지만 게시판만으로는 눈에 잘 띄지 않으므로, 점심시간 방송 문구와 함께 배식대 앞 짧은 표지로 연결하는 방안도 필요하다. 다만 이 부분은 안내문 본문보다 나중에 넣어야 할 수도 있어서 배치가 조금 더 정리될 필요가 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "음식물 처리 비용",
+            "조리 인력의 부담"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 이 초고를 어떤 근거로 보강해야 한다고 보는가?",
+          "prompt": "학생들이 실제로 실천할 수 있는 행동 예시 세 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 169
+              "paragraphId": "p3",
+              "start": 107,
+              "end": 122
+            },
+            {
+              "paragraphId": "p3",
+              "start": 124,
+              "end": 140
+            },
+            {
+              "paragraphId": "p3",
+              "start": 142,
+              "end": 159
             }
           ],
           "scoring": {
@@ -656,17 +702,47 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "무조건 잔반을 남기지 말라고 강조하면 오히려 학생들이 부담을 느낄 수 있으므로 표현도 조정해야 한다. 남기지 않는 것이 목표라고 쓰기보다, 먹을 수 있는 만큼 받고 남은 양을 줄이자고 쓰는 편이 자연스럽다. 이런 표현 차이는 작아 보여도 안내문의 태도를 부드럽게 만들어 실제 참여를 높일 가능성이 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "배식 전에 양을 미리 말하기",
+            "먹기 어려운 메뉴는 적게 받기",
+            "추가 반찬은 다 먹은 뒤에 받기"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 글의 독자와 요청, 또는 결론을 어떻게 정리해야 한다고 말하는가?",
+          "prompt": "게시판만으로 충분하지 않을 때 함께 연결해야 하는 게시 방식을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 131
+              "paragraphId": "p4",
+              "start": 69,
+              "end": 79
+            },
+            {
+              "paragraphId": "p4",
+              "start": 84,
+              "end": 95
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "점심시간 방송 문구",
+            "배식대 앞 짧은 표지"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "학생들의 부담을 줄이는 자연스러운 표현으로 제시된 말을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 78,
+              "end": 102
             }
           ],
           "scoring": {
@@ -675,7 +751,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "따라서 안내문 초고는 문제 상황, 원인, 실천 방법, 게시 방식이 자연스럽게 이어지도록 문단 순서를 다시 다듬어야 한다. 그래야 학생들이 잔반 문제를 단지 훈계로 받아들이지 않고, 자신이 당장 실천할 수 있는 행동으로 이해할 수 있다."
+          "answerText": "먹을 수 있는 만큼 받고 남은 양을 줄이자고"
+        },
+        {
+          "id": "q8",
+          "prompt": "학생들이 잔반 문제를 무엇으로 이해할 수 있다고 했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 101,
+              "end": 119
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "자신이 당장 실천할 수 있는 행동"
         }
       ]
     }

@@ -610,93 +610,132 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이 글은 누구에게 무엇을 건의하나요?",
+          "prompt": "이 글이 건의문을 보내는 학교 안 기관의 이름을 본문에서 찾으시오",
+          "answerText": "학생회",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 62
+              "end": 3
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학생회에 건의합니다. 저는 복도 분리수거통을 늘려야 된다고 생각했는데 이 문제는 아무튼 예전부터 꽤 불편했습니다"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "복도 분리수거통이 필요한 이유는 무엇인가요?",
+          "prompt": "글쓴이가 늘려야 한다고 주장하는 시설을 본문에서 찾으시오",
+          "answerText": "복도 분리수거통",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 80
+              "paragraphId": "p1",
+              "start": 15,
+              "end": 23
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "점심시간마다 수거함이 멀어서 친구들이 캔이나 플라스틱 컵을 그냥 일반 쓰레기통에 넣는 모습을 자주 보았고 저도 몇 번 그냥 지나친 적이 있습니다"
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "색깔과 분위기에 대해 무엇을 제안하나요?",
+          "prompt": "친구들이 캔이나 플라스틱 컵을 일반 쓰레기통에 넣게 된 원인을 본문에서 찾으시오",
+          "answerText": "수거함이 멀어서",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 77
+              "paragraphId": "p2",
+              "start": 7,
+              "end": 15
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그리고 분리수거통 색깔이 초록색이면 보기에도 더 좋을 것 같고 학교 분위기도 훨씬 산뜻해질 테니 그런 부분도 같이 생각해 주시면 좋겠습니다"
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "설치 순서는 어떻게 하자고 하나요?",
+          "prompt": "글쓴이가 분리수거통 색깔로 제안한 색을 본문에서 찾으시오",
+          "answerText": "초록색",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 76
+              "paragraphId": "p3",
+              "start": 14,
+              "end": 17
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "복도 끝마다 통을 두면 되는데 어느 학년부터 먼저 둘지 누가 비울지 같은 일은 나중에 정해도 되니까 우선 설치부터 서둘러 주셨으면 합니다"
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "통이 늘어나면 어떤 변화가 생기나요?",
+          "prompt": "통이 늘어나면 좋아진다고 든 결과 네 가지를 본문에서 모두 찾으시오",
+          "answerText": "학생들이 규칙을 더 잘 지킬 수 있고 / 학교가 깨끗해질 수 있으며 / 환경 보호에도 도움이 되고 / 선생님들께서도 지도하시기 편해질",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 84
+              "start": 11,
+              "end": 31
+            },
+            {
+              "paragraphId": "p5",
+              "start": 32,
+              "end": 46
+            },
+            {
+              "paragraphId": "p5",
+              "start": 47,
+              "end": 61
+            },
+            {
+              "paragraphId": "p5",
+              "start": 62,
+              "end": 79
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "글 끝에서 빨리 처리해 달라며 글쓴이가 든 추측의 근거를 본문에서 찾으시오",
+          "answerText": "다들 좋아할 것 같아서",
           "answerMatchMode": "ANY",
-          "answerText": "만약 통이 늘어나면 학생들이 규칙을 더 잘 지킬 수 있고 학교가 깨끗해질 수 있으며 환경 보호에도 도움이 되고 선생님들께서도 지도하시기 편해질 것입니다"
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 32,
+              "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

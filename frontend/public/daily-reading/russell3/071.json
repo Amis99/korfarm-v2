@@ -571,43 +571,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"모두가 한자리에 모여 계약서를 썼다는 뜻은 아니다\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 215
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "사회계약론은 국가와 정치 권력이 어떻게 정당화되는지를 설명하려는 철학적 이론이다. 이 관점에서는 사람들 사이의 약속이나 합의가 정치 질서의 근거가 된다고 본다. 실제 역사에서 모두가 한자리에 모여 계약서를 썼다는 뜻은 아니지만, 왜 개인이 일정한 자유를 제한받으면서도 국가 질서를 받아들여야 하는지를 설명하는 모형으로 작동한다. 따라서 사회계약은 권력의 출발점을 묻는 질문과 연결된다."
-        },
-        {
-          "id": "q2",
-          "prompt": "\"자연 상태는 법과 제도가 없는 상태, 시민 사회는 공동 규칙과 권력이 있는 상태\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 237
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 이론에서 중요한 전제는 자연 상태와 시민 사회의 구분이다. 자연 상태는 법과 제도가 없는 상태를 가정한 것이고, 시민 사회는 사람들이 공동 규칙을 만들고 권력을 세운 상태를 뜻한다. 어떤 사상가는 자연 상태를 불안과 충돌의 공간으로 보았고, 다른 사상가는 일정한 자유와 평등이 존재하는 상태로 보았다. 그러나 공통점은 정치 질서가 아무 근거 없이 생긴 것이 아니라, 인간의 필요와 선택 속에서 형성되었다고 본다는 점이다."
-        },
-        {
-          "id": "q3",
-          "prompt": "\"인간이 스스로 판단하고 선택할 수 있는 능력\"에 해당하는 부분은 어디인가요?",
+          "prompt": "자유의지의 뜻을 풀이한 부분을 찾으시오",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -616,66 +580,108 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
           "answerText": "인간이 스스로 판단하고 선택할 수 있는 능력"
         },
         {
+          "id": "q2",
+          "prompt": "자연 상태와 시민 사회를 어떻게 구분하는지 설명한 부분을 모두 찾으시오",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 35,
+              "end": 102
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": ["자연 상태는 법과 제도가 없는 상태를 가정한 것이고, 시민 사회는 사람들이 공동 규칙을 만들고 권력을 세운 상태를 뜻한다"]
+        },
+        {
+          "id": "q3",
+          "prompt": "자유의지 문제가 윤리학과 법철학에서 중요한 이유를 밝힌 부분을 찾으시오",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 134,
+              "end": 196
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "사람을 처벌하거나 칭찬할 수 있으려면 그 행위가 어느 정도는 스스로의 선택에서 비롯되었다고 보아야 하기 때문이다"
+        },
+        {
           "id": "q4",
-          "prompt": "\"선택과 동의의 능력을 가진 존재\"에 해당하는 부분은 어디인가요?",
+          "prompt": "사회계약론이 사람을 어떤 존재로 전제하는지 밝힌 부분을 찾으시오",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 84,
-              "end": 101
+              "start": 64,
+              "end": 115
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "선택과 동의의 능력을 가진 존재"
+          "answerText": "그들이 단순히 끌려간 존재가 아니라 선택과 동의의 능력을 가진 존재라고 전제하는 경우가 많다"
         },
         {
           "id": "q5",
-          "prompt": "\"계약의 정당성, 자유로운 동의, 공동의 이익과 개인 권리의 조화\"에 해당하는 부분은 어디인가요?",
+          "prompt": "자유의지가 있어도 권력의 정당성과 별도로 따져야 할 문제들을 모두 찾으시오",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 231
+              "start": 48,
+              "end": 120
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "물론 자유의지가 있다는 이유만으로 모든 국가 권력이 자동으로 정당해지는 것은 아니다. 어떤 계약이 정당한지, 동의가 실제로 자유롭게 이루어졌는지, 공동의 이익과 개인의 권리가 어떻게 조화되는지는 별도의 문제로 남는다. 그래서 사회계약론은 권력 정당화의 출발점을 제시하지만, 동시에 정치 질서가 개인의 자유를 어디까지 제한할 수 있는지 계속 따져 보게 만든다. 자유의지 개념은 그 한계를 판단하는 기준으로도 쓰인다."
+          "answerMatchMode": "ALL",
+          "answerTexts": ["어떤 계약이 정당한지, 동의가 실제로 자유롭게 이루어졌는지, 공동의 이익과 개인의 권리가 어떻게 조화되는지는 별도의 문제로 남는다"]
         },
         {
           "id": "q6",
-          "prompt": "\"사회계약은 정치 질서의 근거, 자유의지는 선택 가능성\"에 해당하는 부분은 어디인가요?",
+          "prompt": "사회계약과 자유의지가 각각 무엇을 설명하는 개념인지 정리한 부분을 모두 찾으시오",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 183
+              "start": 5,
+              "end": 75
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "정리하면 사회계약은 정치 질서의 정당한 근거를 설명하는 틀이고, 자유의지는 그 질서를 받아들이는 인간의 선택 가능성을 설명하는 개념이다. 전자는 국가의 출발점을, 후자는 개인 책임과 동의의 가능성을 묻는다. 따라서 사회계약과 자유의지를 함께 보면, 개인의 자유와 공동체의 질서가 어떻게 맞물리는지를 더 분명하게 이해할 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": ["사회계약은 정치 질서의 정당한 근거를 설명하는 틀이고, 자유의지는 그 질서를 받아들이는 인간의 선택 가능성을 설명하는 개념이다"]
         }
       ]
     }

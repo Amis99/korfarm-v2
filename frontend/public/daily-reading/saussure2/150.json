@@ -561,14 +561,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "무엇이 이루어지기를 마음속으로 간절히 바라는 것은?",
-          "answerText": "소원",
+          "prompt": "할아버지가 인형을 만들기 위해 깎은 재료를 지문에서 찾으시오.",
+          "answerText": "나무",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 103,
-              "end": 105
+              "start": 32,
+              "end": 34
             }
           ],
           "scoring": {
@@ -579,14 +579,50 @@
         },
         {
           "id": "q2",
-          "prompt": "사람이나 동물이 살아서 숨 쉬고 활동하게 하는 힘은?",
-          "answerText": "생명",
+          "prompt": "그날 밤 피노키오에게 생명을 불어넣어 준 존재를 지문에서 찾으시오.",
+          "answerText": "착한 푸른 요정",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 26,
-              "end": 28
+              "start": 5,
+              "end": 13
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "요정이 피노키오에게 되어야 한다고 말한 아이의 모습을 지문에서 찾으시오.",
+          "answerText": "거짓말을 하지 않는 착한 아이",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 68
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "호기심 많은 피노키오가 학교 대신 간 곳을 지문에서 찾으시오.",
+          "answerText": "신기한 인형극 구경",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 104,
+              "end": 114
             }
           ],
           "scoring": {

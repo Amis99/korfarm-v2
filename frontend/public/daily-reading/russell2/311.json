@@ -1039,128 +1039,77 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "연결 관계를 나타내는 자료를 뜻하는 말은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 103,
-              "end": 105
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p6",
-              "start": 5,
-              "end": 7
-            },
-            {
-              "paragraphId": "p6",
-              "start": 65,
-              "end": 67
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "여러 대상의 연결 관계를 점과 선으로 나타내는 자료 구조를 뜻하는 말을 찾으시오",
+          "answerText": "그래프",
           "answerMatchMode": "ANY",
-          "answerText": "그래"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 0, "end": 3},
+            {"paragraphId": "p1", "start": 103, "end": 106},
+            {"paragraphId": "p2", "start": 0, "end": 3},
+            {"paragraphId": "p6", "start": 5, "end": 8},
+            {"paragraphId": "p6", "start": 65, "end": 68}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "이미 지나간 점을 따로 적어 두는 것을 뜻하는 말은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 112,
-              "end": 116
-            },
-            {
-              "paragraphId": "p6",
-              "start": 43,
-              "end": 47
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "출발점에서 시작해 연결된 점들을 차례로 방문하며 정보를 찾는 과정을 뜻하는 말을 찾으시오",
+          "answerText": "그래프 탐색",
           "answerMatchMode": "ANY",
-          "answerText": "방문 기"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 0, "end": 6},
+            {"paragraphId": "p6", "start": 5, "end": 11}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "가까운 곳부터 넓혀 가며 살피는 방법을 뜻하는 말은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 16,
-              "end": 23
-            },
-            {
-              "paragraphId": "p5",
-              "start": 58,
-              "end": 65
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "출발점과 가까운 곳부터 한 층씩 넓혀 가며 살피는 대표적인 그래프 탐색 방법을 찾으시오",
+          "answerText": "너비 우선 탐색",
           "answerMatchMode": "ANY",
-          "answerText": "너비 우선 탐"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 16, "end": 24},
+            {"paragraphId": "p5", "start": 58, "end": 66}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "한 갈래를 끝까지 따라가는 방법을 뜻하는 말은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 10,
-              "end": 17
-            },
-            {
-              "paragraphId": "p5",
-              "start": 102,
-              "end": 109
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "한 갈래를 끝까지 따라가다가 막히면 되돌아와 다른 갈래를 찾는 그래프 탐색 방법을 찾으시오",
+          "answerText": "깊이 우선 탐색",
           "answerMatchMode": "ANY",
-          "answerText": "깊이 우선 탐"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 10, "end": 18},
+            {"paragraphId": "p5", "start": 102, "end": 110}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "탐색 방식을 달라지게 하는 기준을 뜻하는 말은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 126,
-              "end": 131
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "이미 지나간 점을 다시 반복하지 않도록 따로 적어 두어 같은 곳을 되풀이하지 않게 해 주는 장치를 뜻하는 말을 찾으시오",
+          "answerText": "방문 기록",
           "answerMatchMode": "ANY",
-          "answerText": "문제의 목"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 112, "end": 117},
+            {"paragraphId": "p6", "start": 43, "end": 48}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "두 탐색 방법 가운데 어느 것을 쓸지를 달라지게 하는, 문제의 무엇인지를 찾으시오",
+          "answerText": "목적",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 130, "end": 132}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"경기 순환은 생산과 소비, 투자, 고용이 서로 얽혀 경제 전체가 확장과 둔화, 침체와 회복을 반복하는 현상이다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "경기 순환의 뜻을 설명한 부분을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 135
+              "start": 8,
+              "end": 65
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "경기 순환이란 한 나라의 경제 활동 수준이 일정한 속도로만 움직이지 않고, 확장과 둔화, 침체와 회복을 반복하는 현상을 말한다. 생산, 소비, 투자, 고용 같은 지표는 서로 연결되어 움직이기 때문에 경제 전체도 오르내리는 흐름을 보이게 된다."
+          "answerText": "한 나라의 경제 활동 수준이 일정한 속도로만 움직이지 않고, 확장과 둔화, 침체와 회복을 반복하는 현상"
         },
         {
           "id": "q2",
-          "prompt": "\"경기 확장기에는 생산과 고용, 소비가 함께 늘고 투자 기대도 커지는 경향이 있다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "서로 연결되어 움직인다고 한 경제 지표들을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 136
+              "paragraphId": "p1",
+              "start": 72,
+              "end": 92
             }
           ],
           "scoring": {
@@ -603,16 +603,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "경기가 확장될 때에는 기업 생산이 늘고 고용이 증가하며 소비도 활발해지는 경향이 있다. 소득이 늘어나면 사람들은 물건을 더 사고, 기업은 그 수요에 맞추어 설비와 고용을 확대한다. 이 과정에서는 자산 가격이 오르거나 투자 기대가 커지기도 한다."
+          "answerText": "생산, 소비, 투자, 고용 같은 지표"
         },
         {
           "id": "q3",
-          "prompt": "\"확장이 계속되면 물가와 비용 부담, 금리 인상 등으로 생산과 소비가 둔화되어 하강 국면으로 넘어갈 수 있다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "경기가 확장될 때 나타나는 경향 세 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 138
+              "paragraphId": "p2",
+              "start": 12,
+              "end": 21
+            },
+            {
+              "paragraphId": "p2",
+              "start": 22,
+              "end": 30
+            },
+            {
+              "paragraphId": "p2",
+              "start": 31,
+              "end": 47
             }
           ],
           "scoring": {
@@ -620,17 +630,31 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "하지만 확장이 계속되면 물가 상승, 원자재 가격 부담, 금리 인상 같은 요소가 나타날 수 있다. 기업은 비용 부담을 느끼고 가계는 지출을 줄이기 시작한다. 그러면 생산과 소비가 함께 둔화되면서 경기는 정점을 지난 뒤 하강 국면으로 들어갈 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "기업 생산이 늘고",
+            "고용이 증가하며",
+            "소비도 활발해지는 경향이 있다"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "\"침체기에는 투자와 소비 감소, 실업 증가가 겹치며 수요 축소의 악순환이 커질 수 있다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "확장이 계속되면 나타날 수 있는 요소 세 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 142
+              "paragraphId": "p3",
+              "start": 13,
+              "end": 18
+            },
+            {
+              "paragraphId": "p3",
+              "start": 20,
+              "end": 29
+            },
+            {
+              "paragraphId": "p3",
+              "start": 31,
+              "end": 36
             }
           ],
           "scoring": {
@@ -638,17 +662,26 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "침체 국면에서는 투자와 소비가 줄어들고 실업이 늘어나기 쉽다. 기업은 판매가 부진해 생산량을 줄이고, 가계는 소득 불안 때문에 지출을 더 조심하게 된다. 이렇게 되면 수요가 더 줄어드는 악순환이 생길 수 있어, 경기 하강은 사회 전체에 큰 영향을 미친다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "물가 상승",
+            "원자재 가격 부담",
+            "금리 인상"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "\"회복은 금리 조정과 재정 지출, 수출 증가, 새 산업 투자 같은 계기로 수요와 생산, 고용이 다시 살아나는 과정이다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "침체 국면에서 나타나기 쉬운 현상 두 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 142
+              "paragraphId": "p4",
+              "start": 9,
+              "end": 21
+            },
+            {
+              "paragraphId": "p4",
+              "start": 22,
+              "end": 33
             }
           ],
           "scoring": {
@@ -656,17 +689,30 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "회복은 보통 금리 조정, 재정 지출 확대, 수출 증가, 새로운 산업 투자 같은 계기를 통해 시작된다. 수요가 조금씩 살아나면 기업 생산이 다시 늘고 고용이 회복되며, 이는 소비 증가로 이어진다. 경제 주체들의 기대 심리도 이 과정에서 중요한 역할을 한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "투자와 소비가 줄어들고",
+            "실업이 늘어나기 쉽다"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "\"경기 순환을 이해해야 경제가 어느 국면에 있는지 읽고 기업과 가계, 정부가 판단 시점을 조절할 수 있다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "경기 순환을 이해하면 기업, 가계, 정부가 할 수 있는 일을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 173
+              "start": 74,
+              "end": 89
+            },
+            {
+              "paragraphId": "p6",
+              "start": 91,
+              "end": 105
+            },
+            {
+              "paragraphId": "p6",
+              "start": 107,
+              "end": 127
             }
           ],
           "scoring": {
@@ -674,8 +720,12 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "경기 순환을 이해하는 이유는 단순히 경제가 좋다, 나쁘다를 말하기 위해서가 아니다. 현재 경제가 순환의 어느 지점에 있는지 파악해야 기업은 투자 시점을 조정하고, 가계는 지출 계획을 세우며, 정부는 적절한 정책을 선택할 수 있다. 경제의 움직임을 시간의 흐름 속에서 읽는 힘이 바로 경기 순환 이해의 핵심이다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "기업은 투자 시점을 조정하고",
+            "가계는 지출 계획을 세우며",
+            "정부는 적절한 정책을 선택할 수 있다"
+          ]
         }
       ]
     }

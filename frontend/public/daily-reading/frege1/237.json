@@ -913,14 +913,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "창문을 두드리며 찾아온 것은 무엇인가요?",
-          "answerText": "봄바람",
-          "answerMatchMode": "ANY",
+          "prompt": "이 시에서 바람의 움직임을 소리처럼 나타낸 말과 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "살랑살랑",
+            "창문을 두드리며 찾아왔네"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 5,
-              "end": 8
+              "start": 0,
+              "end": 4
+            },
+            {
+              "paragraphId": "p1",
+              "start": 10,
+              "end": 23
             }
           ],
           "scoring": {
@@ -931,14 +939,22 @@
         },
         {
           "id": "q2",
-          "prompt": "바람이 전한 편지를 듣고 깨어나기 시작한 것은 무엇인가요?",
-          "answerText": "온 세상",
-          "answerMatchMode": "ANY",
+          "prompt": "바람이 사람처럼 하는 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "반가운 인사를 건네네",
+            "따뜻한 편지를 읽어주네"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 95,
-              "end": 99
+              "paragraphId": "p1",
+              "start": 65,
+              "end": 76
+            },
+            {
+              "paragraphId": "p1",
+              "start": 92,
+              "end": 104
             }
           ],
           "scoring": {
@@ -949,14 +965,22 @@
         },
         {
           "id": "q3",
-          "prompt": "활짝 웃으며 봄의 노래를 부르는 꽃은 무엇인가요?",
-          "answerText": "개나리",
-          "answerMatchMode": "ANY",
+          "prompt": "봄이 오자 자연이 깨어나는 모습을 모두 찾으시오.",
+          "answerTexts": [
+            "활짝 웃으며 봄의 노래를 부르네",
+            "기지개를 켜며 졸졸 흐르네"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 32,
-              "end": 35
+              "start": 37,
+              "end": 54
+            },
+            {
+              "paragraphId": "p2",
+              "start": 68,
+              "end": 82
             }
           ],
           "scoring": {
@@ -967,14 +991,22 @@
         },
         {
           "id": "q4",
-          "prompt": "화자가 힘차게 달려가는 곳은 어디인가요?",
-          "answerText": "민들레 언덕",
-          "answerMatchMode": "ANY",
+          "prompt": "바람의 편지 속 희망과 위로의 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "어제보다 더 눈부신 내일이 우리를 기다린다고 하네",
+            "슬프고 힘들었던 일들은 모두 멀리 날려 보내라 하네"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 10,
-              "end": 16
+              "paragraphId": "p3",
+              "start": 30,
+              "end": 57
+            },
+            {
+              "paragraphId": "p3",
+              "start": 59,
+              "end": 87
             }
           ],
           "scoring": {
@@ -985,19 +1017,28 @@
         },
         {
           "id": "q5",
-          "prompt": "바람이 전해준 편지가 화자 마음속에서 무엇이 된다고 했나요?",
-          "answerText": "씨앗",
-          "answerMatchMode": "ANY",
+          "prompt": "화자의 꿈과 바람의 편지가 자라나는 모습을 모두 찾으시오.",
+          "answerTexts": [
+            "나의 소중한 꿈을 실어 보내네",
+            "작은 씨앗이 되네",
+            "예쁜 꽃으로 피어나겠지"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 82,
-              "end": 84
+              "start": 42,
+              "end": 58
             },
             {
               "paragraphId": "p4",
-              "start": 92,
-              "end": 94
+              "start": 79,
+              "end": 88
+            },
+            {
+              "paragraphId": "p4",
+              "start": 105,
+              "end": 117
             }
           ],
           "scoring": {

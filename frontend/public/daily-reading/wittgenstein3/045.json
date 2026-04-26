@@ -571,12 +571,42 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 디지털 읽기의 하이퍼텍스트와 인지적 부담라는 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "prompt": "디지털 읽기 환경에 한꺼번에 개입한다고 한 요소를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 202
+              "start": 29,
+              "end": 31
+            },
+            {
+              "paragraphId": "p4",
+              "start": 3,
+              "end": 5
+            },
+            {
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 35
+            },
+            {
+              "paragraphId": "p2",
+              "start": 56,
+              "end": 58
+            },
+            {
+              "paragraphId": "p5",
+              "start": 59,
+              "end": 61
+            },
+            {
+              "paragraphId": "p1",
+              "start": 37,
+              "end": 42
+            },
+            {
+              "paragraphId": "p1",
+              "start": 44,
+              "end": 49
             }
           ],
           "scoring": {
@@ -584,17 +614,22 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "디지털 읽기는 종이 위의 글을 따라가는 읽기와 달리 화면, 링크, 검색 기능, 영상 자료가 한꺼번에 개입하는 환경에서 이루어진다. 독자는 텍스트만 읽는 것이 아니라 스크롤을 내리고, 선택지를 고르고, 필요한 정보를 찾기 위해 이동한다. 이처럼 디지털 읽기는 읽기 행위 자체에 기기 조작과 정보 선택이 강하게 결합되어 있다는 점에서 출발부터 인쇄물 읽기와 다르다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "화면",
+            "링크",
+            "검색 기능",
+            "영상 자료"
+          ]
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 핵심 기준이나 원리를 어떻게 설명하는가?",
+          "prompt": "디지털 읽기가 인쇄물 읽기와 출발부터 다른 이유를 나타낸 어구를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 197
+              "paragraphId": "p1",
+              "start": 154,
+              "end": 174
             }
           ],
           "scoring": {
@@ -603,16 +638,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "특히 디지털 텍스트는 하이퍼텍스트 구조를 이루는 경우가 많다. 하이퍼텍스트에서는 한 문서를 읽다가도 링크를 통해 다른 문서로 곧바로 넘어갈 수 있고, 검색을 통해 관련 자료를 추가로 불러올 수도 있다. 그래서 독자는 한 편의 글 안에 머물기보다 여러 문서를 오가며 의미를 구성하게 되는데, 이런 읽기는 편리한 동시에 초점이 쉽게 분산되는 특징을 지닌다."
+          "answerText": "기기 조작과 정보 선택이 강하게 결합"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 이어지는 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "하이퍼텍스트에서 다른 문서와 관련 자료로 이동하는 방식을 설명한 부분을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 190
+              "paragraphId": "p2",
+              "start": 56,
+              "end": 111
             }
           ],
           "scoring": {
@@ -621,33 +656,15 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 과정에서 디지털 읽기는 다문서 읽기로 확장되기 쉽다. 하나의 주제를 이해하려고 시작했더라도 배경 설명, 통계 자료, 기사, 영상 요약문을 차례로 열어 보게 되기 때문이다. 서로 다른 문서를 연결해 읽는 능력은 분명 유용하지만, 각 문서의 핵심과 관계를 계속 정리해야 하므로 독자에게는 단일 텍스트를 읽을 때보다 더 많은 판단이 요구된다."
+          "answerText": "링크를 통해 다른 문서로 곧바로 넘어갈 수 있고, 검색을 통해 관련 자료를 추가로 불러올 수도 있다"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
+          "prompt": "하이퍼텍스트 읽기가 지닌 분산 관련 특징을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 179
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "또한 화면 읽기에서는 스크롤 방식이 자주 활용된다. 이때 독자는 처음부터 끝까지 차분히 읽기보다 제목, 첫 문장, 굵은 표시를 중심으로 빠르게 훑어보는 경향을 보인다. 이런 방식은 읽을 가치가 있는 자료를 신속하게 가려내는 데는 유리하지만, 문장 사이의 논리적 연결이나 세부 근거를 꼼꼼히 확인하는 데는 불리할 수 있다."
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단은 이 주제가 낳는 효과나 쟁점을 어떤 방향으로 확장하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
+              "paragraphId": "p2",
+              "start": 177,
               "end": 191
             }
           ],
@@ -657,16 +674,86 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "하이퍼텍스트와 스크롤 방식이 결합하면 인지적 부담은 더 커진다. 독자는 지금 읽는 정보가 중요한지, 다른 링크를 눌러야 하는지, 방금 본 자료와 어떤 관련이 있는지를 계속 결정해야 한다. 여기에 영상, 광고, 알림처럼 읽기와 직접 관계없는 요소까지 끼어들면 작업 기억은 더 빨리 소모되고, 읽기의 정확성은 속도에 비해 낮아질 가능성이 커진다."
+          "answerText": "초점이 쉽게 분산되는 특징"
+        },
+        {
+          "id": "q5",
+          "prompt": "하나의 주제를 이해하려다 차례로 열어 보게 된다고 한 자료를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 53,
+              "end": 58
+            },
+            {
+              "paragraphId": "p3",
+              "start": 60,
+              "end": 65
+            },
+            {
+              "paragraphId": "p3",
+              "start": 67,
+              "end": 69
+            },
+            {
+              "paragraphId": "p3",
+              "start": 71,
+              "end": 77
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "배경 설명",
+            "통계 자료",
+            "기사",
+            "영상 요약문"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 디지털 읽기의 하이퍼텍스트와 인지적 부담라는 주제의 의미를 어떤 관점에서 정리하는가?",
+          "prompt": "화면 읽기에서 독자가 중심으로 빠르게 훑어보는 요소를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 210
+              "paragraphId": "p4",
+              "start": 54,
+              "end": 56
+            },
+            {
+              "paragraphId": "p4",
+              "start": 58,
+              "end": 62
+            },
+            {
+              "paragraphId": "p4",
+              "start": 64,
+              "end": 69
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "제목",
+            "첫 문장",
+            "굵은 표시"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "하이퍼텍스트와 스크롤 방식이 결합할 때 독자가 계속 결정해야 하는 내용을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 40,
+              "end": 98
             }
           ],
           "scoring": {
@@ -675,7 +762,39 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 디지털 읽기의 핵심 문제는 정보가 많다는 사실 자체보다, 그 많은 정보 사이에서 주의를 어떻게 유지하고 연결할 것인가에 있다. 하이퍼텍스트는 탐색을 쉽게 만들지만, 동시에 독자에게 선택과 비교의 부담을 넘겨준다. 따라서 디지털 환경에서 깊이 있는 이해에 도달하려면 필요한 자료를 선별하고, 읽는 순서를 조절하며, 중간중간 핵심을 묶어 정리하는 읽기 전략이 함께 요구된다."
+          "answerText": "지금 읽는 정보가 중요한지, 다른 링크를 눌러야 하는지, 방금 본 자료와 어떤 관련이 있는지를 계속 결정"
+        },
+        {
+          "id": "q8",
+          "prompt": "깊이 있는 이해에 도달하기 위해 요구되는 읽기 전략을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 151,
+              "end": 163
+            },
+            {
+              "paragraphId": "p6",
+              "start": 165,
+              "end": 176
+            },
+            {
+              "paragraphId": "p6",
+              "start": 178,
+              "end": 200
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "필요한 자료를 선별하고",
+            "읽는 순서를 조절하며",
+            "중간중간 핵심을 묶어 정리하는 읽기 전략"
+          ]
         }
       ]
     }

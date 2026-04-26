@@ -396,19 +396,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "남을 도와주거나 보살핌?",
-          "answerText": "배려",
-          "answerMatchMode": "EXACT",
+          "prompt": "배려하는 말을 할 때 상대방에 대해 먼저 생각해야 할 두 가지를 모두 찾아 적어 보세요",
+          "answerText": "기분, 입장",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 2
+              "start": 13,
+              "end": 15
             },
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
+              "paragraphId": "p1",
+              "start": 17,
+              "end": 19
             }
           ],
           "scoring": {
@@ -420,14 +420,24 @@
         },
         {
           "id": "q2",
-          "prompt": "거짓 없는 참된 마음?",
-          "answerText": "진심",
-          "answerMatchMode": "EXACT",
+          "prompt": "본문에서 다정한 표현의 예로 든 세 가지 말을 모두 찾아 적어 보세요",
+          "answerText": "고마워, 괜찮아, 내가 도와줄게",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 33,
-              "end": 35
+              "start": 59,
+              "end": 62
+            },
+            {
+              "paragraphId": "p1",
+              "start": 66,
+              "end": 69
+            },
+            {
+              "paragraphId": "p1",
+              "start": 73,
+              "end": 80
             }
           ],
           "scoring": {
@@ -439,14 +449,38 @@
         },
         {
           "id": "q3",
-          "prompt": "남의 감정에 동의함?",
-          "answerText": "공감",
-          "answerMatchMode": "EXACT",
+          "prompt": "배려하는 말을 잘하기 위해 다른 사람의 말에 평소 가져야 할 두 가지 태도를 모두 찾아 적어 보세요",
+          "answerText": "귀를 기울이고, 공감",
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 34,
+              "end": 41
+            },
             {
               "paragraphId": "p2",
               "start": 42,
               "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "따뜻한 말 한마디로 무엇을 어떻게 가꾸어 나가야 한다고 했는지 본문에서 찾아 적어 보세요",
+          "answerText": "세상을 더 아름답게",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 137,
+              "end": 147
             }
           ],
           "scoring": {

@@ -571,47 +571,11 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 교내 다회용 컵 대여 운영 결과를 정리한 기사 초고와 관련해 글을 쓰게 된 문제의식을 어떻게 밝히는가?",
+          "prompt": "이번 다회용 컵 대여 운영에 대해 글쓴이가 대체로 내린 평가를 나타내는 단어를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 202
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "우리 학교는 지난달 축제 기간 동안 일회용 컵을 줄이기 위해 다회용 컵 대여 부스를 운영했다. 이번 운영은 학생회와 환경 동아리가 함께 준비했고 예상보다 참여가 많았다고 볼 수 있다. 그래서 이번 기사에서는 운영 결과를 정리하고 어떤 점이 좋았고 또 부족했는지 쓰려고 한다. 다만 축제 전체 성과와 연결되는 부분은 아직 더 확인이 필요하지만 대체로 긍정적이었다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 현재 상황이나 조사 내용을 어떤 방향으로 제시하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 191
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학생회가 집계한 자료에 따르면 축제 이틀 동안 다회용 컵 대여 횟수는 1,200회를 넘었다. 또 매점 앞 쓰레기통에 버려진 일회용 컵 수는 작년 같은 기간보다 줄어든 것으로 보인다. 정확히 몇 퍼센트가 줄었는지는 자료마다 조금 다르게 적혀 있었지만 아무튼 감소한 것은 분명하다. 이런 수치만 보면 다회용 컵 운영은 성공적이었다고 할 수 있다."
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단은 첫 개선안이나 핵심 근거를 무엇으로 설명하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
+              "start": 195,
               "end": 198
             }
           ],
@@ -621,16 +585,60 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "하지만 현장 설문에서는 불편하다는 의견도 꽤 나왔다. 가장 많이 나온 의견은 컵 반납 장소가 멀어서 다시 오기 귀찮았다는 점이었고, 보증금 환급 절차가 생각보다 오래 걸린다는 응답도 있었다. 특히 점심시간 이후에는 줄이 길어져서 그냥 컵을 들고 다닌 학생도 있었다고 한다. 그러므로 단순히 대여 횟수만 가지고 성과를 판단하는 것은 조금 성급할 수도 있다."
+          "answerText": "긍정적"
+        },
+        {
+          "id": "q2",
+          "prompt": "축제 이틀 동안 다회용 컵 대여 횟수를 나타낸 수치를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 39,
+              "end": 45
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "1,200회"
+        },
+        {
+          "id": "q3",
+          "prompt": "대여 횟수만으로 성과를 판단하기 성급하다고 볼 수 있는 불편 의견 두 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 43,
+              "end": 69
+            },
+            {
+              "paragraphId": "p3",
+              "start": 74,
+              "end": 100
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerTexts": [
+            "컵 반납 장소가 멀어서 다시 오기 귀찮았다는 점",
+            "보증금 환급 절차가 생각보다 오래 걸린다는 응답"
+          ],
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 추가 제안이나 고려할 점을 어떤 이유와 함께 내놓는가?",
+          "prompt": "부스 운영에 환경 교육 효과가 있었다고 말한 대상을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 0,
-              "end": 220
+              "end": 10
             }
           ],
           "scoring": {
@@ -639,16 +647,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "환경 동아리 학생들은 부스 운영이 환경 교육 효과도 있었다고 말했다. 실제로 현장 안내문을 읽고 처음으로 보증금제나 재사용 컵 시스템을 알게 되었다는 학생도 있었다. 그런데 인터뷰 내용을 보면 학생들이 환경 보호의 필요성을 느꼈다는 말과, 그냥 줄이 짧아서 참여했다는 말이 같이 나와서 동기가 하나로 정리되지는 않았다. 이 부분은 기사에서 조금 더 구분해서 써야 하는데 아직 정리가 덜 되었다."
+          "answerText": "환경 동아리 학생들"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 실행 과정의 조건이나 우려를 어떻게 따져 보는가?",
+          "prompt": "학생들의 참여 동기가 하나로 정리되지 않았음을 보여 주는 두 말을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 250
+              "paragraphId": "p4",
+              "start": 113,
+              "end": 131
+            },
+            {
+              "paragraphId": "p4",
+              "start": 134,
+              "end": 151
             }
           ],
           "scoring": {
@@ -656,17 +669,30 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "운영상의 문제는 반납 동선이 한곳에 몰린 점, 컵 세척을 담당한 인원이 부족했던 점, 홍보 문구가 복잡해서 처음 보는 학생이 이해하기 어려웠던 점으로 정리할 수 있다. 또 비가 온 시간대에는 부스 앞 바닥이 미끄러워 안전 문제도 생길 수 있었는데 이 부분은 실제로 큰 사고는 없었으나 대비가 충분했다고 보기는 어렵다. 다음에 다시 한다면 반납대를 늘리고 환급 절차를 더 빨리해야 할 것이다. 그리고 처음부터 안내판 문장을 짧게 쓰는 것이 필요하다."
+          "answerTexts": [
+            "환경 보호의 필요성을 느꼈다는 말",
+            "그냥 줄이 짧아서 참여했다는 말"
+          ],
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 이 글의 결론과 요청을 어떻게 마무리하는가?",
+          "prompt": "운영상의 문제로 정리된 세 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 259
+              "paragraphId": "p5",
+              "start": 9,
+              "end": 24
+            },
+            {
+              "paragraphId": "p5",
+              "start": 26,
+              "end": 46
+            },
+            {
+              "paragraphId": "p5",
+              "start": 48,
+              "end": 81
             }
           ],
           "scoring": {
@@ -674,8 +700,64 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "종합하면 이번 다회용 컵 대여 운영은 쓰레기 감소와 학생 참여를 이끌어 냈다는 점에서 의미가 있었다. 하지만 반납 불편과 안내 부족 문제도 함께 드러났기 때문에 다음 행사에서는 운영 인력을 늘리고 부스 위치를 나누는 개선이 있어야 한다. 또 설문 결과와 실제 쓰레기 감소 자료를 더 정확히 비교하면 기사 내용이 더 설득력 있어질 것 같다. 이번 시도는 완벽하지는 않았지만 앞으로 계속하면 학교 축제 문화가 조금씩 바뀔 수 있다는 점에서 중요한 출발이라고 생각한다."
+          "answerTexts": [
+            "반납 동선이 한곳에 몰린 점",
+            "컵 세척을 담당한 인원이 부족했던 점",
+            "홍보 문구가 복잡해서 처음 보는 학생이 이해하기 어려웠던 점"
+          ],
+          "answerMatchMode": "ALL"
+        },
+        {
+          "id": "q7",
+          "prompt": "다음에 다시 운영한다면 해야 할 개선 두 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 189,
+              "end": 197
+            },
+            {
+              "paragraphId": "p5",
+              "start": 198,
+              "end": 217
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerTexts": [
+            "반납대를 늘리고",
+            "환급 절차를 더 빨리해야 할 것이다"
+          ],
+          "answerMatchMode": "ALL"
+        },
+        {
+          "id": "q8",
+          "prompt": "기사 내용을 더 설득력 있게 하기 위해 비교해야 한다고 한 두 자료를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 135,
+              "end": 140
+            },
+            {
+              "paragraphId": "p6",
+              "start": 142,
+              "end": 154
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerTexts": [
+            "설문 결과",
+            "실제 쓰레기 감소 자료"
+          ],
+          "answerMatchMode": "ALL"
         }
       ]
     }

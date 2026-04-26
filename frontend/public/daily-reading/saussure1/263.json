@@ -396,24 +396,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "오르내리는 승강기?",
-          "answerText": "엘리베이터",
-          "answerMatchMode": "EXACT",
+          "prompt": "엘리베이터의 문이 열리고 닫힐 때 끼우지 않도록 주의해야 한다고 본문에서 함께 든 우리 몸의 두 부분 예시를 모두 찾아 써 보세요",
+          "answerText": "손, 발",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 5
+              "start": 73,
+              "end": 74
             },
             {
               "paragraphId": "p1",
-              "start": 152,
-              "end": 157
-            },
-            {
-              "paragraphId": "p2",
-              "start": 3,
-              "end": 8
+              "start": 77,
+              "end": 78
             }
           ],
           "scoring": {
@@ -425,24 +420,14 @@
         },
         {
           "id": "q2",
-          "prompt": "위험 없는 평안한 상태?",
-          "answerText": "안전",
-          "answerMatchMode": "EXACT",
+          "prompt": "엘리베이터 안에서 절대 해서는 안 되는 행동으로 본문에서 든 것을 찾아 두 글자로 써 보세요",
+          "answerText": "장난",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 45,
-              "end": 47
-            },
-            {
-              "paragraphId": "p2",
-              "start": 106,
-              "end": 108
-            },
-            {
-              "paragraphId": "p2",
-              "start": 116,
-              "end": 118
+              "start": 100,
+              "end": 102
             }
           ],
           "scoring": {
@@ -454,14 +439,33 @@
         },
         {
           "id": "q3",
-          "prompt": "지켜야 할 여러 약속?",
-          "answerText": "규칙",
-          "answerMatchMode": "EXACT",
+          "prompt": "엘리베이터가 갑자기 멈추었을 때 도움을 요청하기 위해 눌러야 한다고 한 것은 어떤 버튼인지 본문에서 찾아 두 글자로 써 보세요",
+          "answerText": "비상",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 132,
-              "end": 134
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 29
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "엘리베이터가 멈춘 뒤 억지로 문을 열려고 힘을 쓰기보다 차분하게 기다리며 누구의 안내를 따르는 것이 가장 안전하다고 했는지 본문에서 찾아 다섯 글자로 써 보세요",
+          "answerText": "구조 대원",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 81,
+              "end": 86
             }
           ],
           "scoring": {

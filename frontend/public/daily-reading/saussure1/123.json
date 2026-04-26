@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "책의 얼굴이라 불리는 것은?",
+          "prompt": "책이나 글의 이름으로, 그 책의 내용을 짧게 잘 나타내 주는 것을 무엇이라고 하나요? 지문에서 찾아 보세요",
           "answerText": "제목",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -616,19 +616,19 @@
         },
         {
           "id": "q2",
-          "prompt": "이야기의 무엇을 나타냅니나요?",
-          "answerText": "내용",
-          "answerMatchMode": "EXACT",
+          "prompt": "그림책의 제목을 만들 때 넣을 수 있는 두 가지 예를 모두 찾아 적어 보세요",
+          "answerText": "낱말, 주인공의 이름",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 25,
-              "end": 27
+              "paragraphId": "p2",
+              "start": 47,
+              "end": 49
             },
             {
-              "paragraphId": "p1",
-              "start": 54,
-              "end": 56
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 59
             }
           ],
           "scoring": {
@@ -640,14 +640,33 @@
         },
         {
           "id": "q3",
-          "prompt": "나만의 무엇력을 발휘해 보았나요?",
-          "answerText": "창의",
-          "answerMatchMode": "EXACT",
+          "prompt": "재미있는 제목이 사람들의 무엇을 자극해서 책을 읽고 싶게 만든다고 했나요? 지문에서 찾아 보세요",
+          "answerText": "호기심",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 89,
+              "end": 92
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "남들이 생각하지 못한 새롭고 특별한 것을 떠올려 만들어 내는 능력을 세 글자로 무엇이라고 하나요? 지문에서 찾아 보세요",
+          "answerText": "창의력",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 95,
-              "end": 97
+              "end": 98
             }
           ],
           "scoring": {

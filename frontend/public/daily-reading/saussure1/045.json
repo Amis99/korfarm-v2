@@ -552,14 +552,24 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "문장을 ( )하게 연결해요.",
-          "answerText": "자연스럽",
-          "answerMatchMode": "EXACT",
+          "prompt": "문장과 문장 사이를 매끄럽게 연결해 주는 낱말을 무엇이라고 하는지 지문에서 찾아 보세요.",
+          "answerText": "이어 주는 말",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 8,
-              "end": 12
+              "start": 21,
+              "end": 28
+            },
+            {
+              "paragraphId": "p1",
+              "start": 96,
+              "end": 103
+            },
+            {
+              "paragraphId": "p2",
+              "start": 43,
+              "end": 50
             }
           ],
           "scoring": {
@@ -571,14 +581,19 @@
         },
         {
           "id": "q2",
-          "prompt": "( ) 낱말이 예이에요.",
-          "answerText": "대표적인",
-          "answerMatchMode": "EXACT",
+          "prompt": "이어 주는 말의 대표적인 예로 소개된 낱말 두 가지를 모두 찾아 보세요.",
+          "answerText": "그리고 / 그래서",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 54,
-              "end": 58
+              "start": 35,
+              "end": 38
+            },
+            {
+              "paragraphId": "p1",
+              "start": 42,
+              "end": 45
             }
           ],
           "scoring": {
@@ -590,14 +605,38 @@
         },
         {
           "id": "q3",
-          "prompt": "우리말을 ( )게 써요.",
-          "answerText": "바르",
-          "answerMatchMode": "EXACT",
+          "prompt": "반대되는 내용을 말할 때 쓰는 이어 주는 말 두 가지를 모두 찾아 보세요.",
+          "answerText": "하지만 / 그래도",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 137,
-              "end": 139
+              "start": 16,
+              "end": 19
+            },
+            {
+              "paragraphId": "p2",
+              "start": 24,
+              "end": 27
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "이어 주는 말을 잘 사용했을 때 훌륭해진다고 한 것을 지문에서 찾아 보세요.",
+          "answerText": "글솜씨",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 112,
+              "end": 115
             }
           ],
           "scoring": {

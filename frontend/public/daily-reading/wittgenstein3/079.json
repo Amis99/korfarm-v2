@@ -571,30 +571,35 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "prompt": "'홀로'의 느낌을 길게 드러낸 시어를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 27,
+              "end": 30
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "호올로"
+        },
+        {
+          "id": "q2",
+          "prompt": "처음과 끝에서 반복되어 등불 이미지를 만드는 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 44
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "차단—한 등불이 하나 비인 하늘에 걸려 있다\n내 호올로 어델 가라는 슬픈 신호냐"
-        },
-        {
-          "id": "q2",
-          "prompt": "2연은 그 장면이나 정서를 어떻게 이어 가는가?",
-          "answerRanges": [
+              "end": 18
+            },
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 41
+              "paragraphId": "p6",
+              "start": 21,
+              "end": 39
             }
           ],
           "scoring": {
@@ -603,16 +608,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "긴— 여름 해 황망히 나래를 접고\n늘어선 고층 창백한 묘석같이 황혼에 젖어"
+          "answerText": "차단—한 등불이 하나 비인 하늘에"
         },
         {
           "id": "q3",
-          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
+          "prompt": "고층을 묘석에 빗댄 표현을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 40
+              "paragraphId": "p2",
+              "start": 26,
+              "end": 34
             }
           ],
           "scoring": {
@@ -621,15 +626,33 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "찬란한 야경 무성한 잡초인 양 헝클어진 채\n사념 벙어리 되어 입을 다물다"
+          "answerText": "창백한 묘석같이"
         },
         {
           "id": "q4",
-          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
+          "prompt": "야경을 잡초에 빗댄 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 7,
+              "end": 16
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "무성한 잡초인 양"
+        },
+        {
+          "id": "q5",
+          "prompt": "낯선 거리의 소리 뒤에 이어지는 화자의 정서를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
+              "start": 37,
               "end": 42
             }
           ],
@@ -639,16 +662,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "피부의 바깥에 스미는 어둠\n낯설은 거리의 아우성 소리\n까닭도 없이 눈물겹고나"
+          "answerText": "눈물겹고나"
         },
         {
-          "id": "q5",
-          "prompt": "5연은 앞선 흐름을 어떤 긴장이나 전환으로 끌고 가는가?",
+          "id": "q6",
+          "prompt": "화자가 섞여 들어간 대상을 나타낸 어구를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 0,
-              "end": 59
+              "end": 10
             }
           ],
           "scoring": {
@@ -657,16 +680,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "공허한 군중의 행렬에 섞이어\n내 어디서 그리 무거운 비애를 지니고 왔기에\n길—게 늘인 그림자 이다지 어두워"
+          "answerText": "공허한 군중의 행렬"
         },
         {
-          "id": "q6",
-          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
+          "id": "q7",
+          "prompt": "'내 어디'로 시작해 화자의 방향 상실을 드러내는 구절을 모두 찾으시오.",
           "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 16,
+              "end": 40
+            },
             {
               "paragraphId": "p6",
               "start": 0,
-              "end": 46
+              "end": 20
             }
           ],
           "scoring": {
@@ -674,8 +702,37 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "내 어디로 어떻게 가라는 슬픈 신호기\n차단—한 등불이 하나 비인 하늘에 걸리어 있다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "내 어디서 그리 무거운 비애를 지니고 왔기에",
+            "내 어디로 어떻게 가라는 슬픈 신호기"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "소리나 시간을 길게 늘이는 줄표가 들어간 시어를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p5",
+              "start": 41,
+              "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "긴—",
+            "길—게"
+          ]
         }
       ]
     }

@@ -1327,39 +1327,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "반도체의 기초가 되는 얇고 둥근 판은 무엇인가요?",
-          "answerText": "웨이퍼",
+          "prompt": "반도체의 정의에 해당하는 문장을 찾으시오.",
+          "answerText": "반도체는 전기가 통하기도 하고 안 통하기도 하는 특별한 물질입니다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 15,
-              "end": 18
-            },
-            {
-              "paragraphId": "p2",
-              "start": 26,
-              "end": 29
-            },
-            {
-              "paragraphId": "p2",
-              "start": 75,
-              "end": 78
-            },
-            {
-              "paragraphId": "p2",
-              "start": 119,
-              "end": 122
-            },
-            {
-              "paragraphId": "p3",
-              "start": 8,
-              "end": 11
-            },
-            {
-              "paragraphId": "p3",
-              "start": 126,
-              "end": 129
+              "paragraphId": "p1",
+              "start": 38,
+              "end": 74
             }
           ],
           "scoring": {
@@ -1370,14 +1345,14 @@
         },
         {
           "id": "q2",
-          "prompt": "웨이퍼를 만드는 데 쓰이는 모래에서 추출한 물질은 무엇인가요?",
-          "answerText": "규소",
+          "prompt": "반도체 공정에서 가장 먼저 하는 일을 찾으시오.",
+          "answerText": "가장 먼저 얇고 둥근 판인 웨이퍼를 만듭니다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 40,
-              "end": 42
+              "start": 0,
+              "end": 24
             }
           ],
           "scoring": {
@@ -1388,19 +1363,14 @@
         },
         {
           "id": "q3",
-          "prompt": "빛을 받으면 성질이 변하는 액체는 무엇인가요?",
-          "answerText": "감광액",
+          "prompt": "감광액의 정의에 해당하는 부분을 찾으시오.",
+          "answerText": "빛을 받으면 성질이 변하는 독특한 액체",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 16,
-              "end": 19
-            },
-            {
-              "paragraphId": "p3",
-              "start": 33,
-              "end": 36
+              "start": 38,
+              "end": 59
             }
           ],
           "scoring": {
@@ -1411,13 +1381,13 @@
         },
         {
           "id": "q4",
-          "prompt": "회로 모양을 제외한 나머지 부분을 벗겨내는 과정은 무엇인가요?",
-          "answerText": "식각 공정",
+          "prompt": "불필요한 부분을 깎아내는 공정을 찾으시오.",
+          "answerText": "불필요한 부분을 깎아내는 식각 공정",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 24,
+              "start": 10,
               "end": 29
             }
           ],
@@ -1429,10 +1399,18 @@
         },
         {
           "id": "q5",
-          "prompt": "포장이 반도체를 지켜 주는 외부 요소 가운데 하나는 무엇인가요?",
-          "answerText": "습기",
-          "answerMatchMode": "ANY",
+          "prompt": "포장이 반도체를 지켜 주는 외부 요소를 모두 찾으시오.",
+          "answerTexts": [
+            "외부의 충격",
+            "습기"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 74,
+              "end": 80
+            },
             {
               "paragraphId": "p5",
               "start": 83,

@@ -396,19 +396,34 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "등껍질 있는 느린 동물?",
-          "answerText": "달팽이",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 글에 등장하는 달팽이 주인공의 이름을 지문에서 찾아 적어 보세요",
+          "answerText": "느릿이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 23,
-              "end": 26
+              "start": 27,
+              "end": 30
+            },
+            {
+              "paragraphId": "p1",
+              "start": 53,
+              "end": 56
+            },
+            {
+              "paragraphId": "p1",
+              "start": 122,
+              "end": 125
             },
             {
               "paragraphId": "p2",
-              "start": 151,
-              "end": 154
+              "start": 31,
+              "end": 34
+            },
+            {
+              "paragraphId": "p2",
+              "start": 68,
+              "end": 71
             }
           ],
           "scoring": {
@@ -420,24 +435,19 @@
         },
         {
           "id": "q2",
-          "prompt": "천천히 걸으며 구경함?",
-          "answerText": "산책",
-          "answerMatchMode": "EXACT",
+          "prompt": "느릿이가 빗방울이 맺힌 채 온몸으로 느낀 두 가지를 1문단에서 모두 찾아 적어 보세요",
+          "answerText": "꽃잎, 풀 향기",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 38,
-              "end": 40
+              "start": 83,
+              "end": 85
             },
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 74,
-              "end": 76
+              "paragraphId": "p1",
+              "start": 87,
+              "end": 91
             }
           ],
           "scoring": {
@@ -449,14 +459,33 @@
         },
         {
           "id": "q3",
-          "prompt": "주의 깊게 살펴보는 일?",
-          "answerText": "관찰",
-          "answerMatchMode": "EXACT",
+          "prompt": "달팽이가 천천히 기어가는 모습을 흉내 내어 표현한 말을 2문단에서 찾아 적어 보세요",
+          "answerText": "느릿느릿",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 105,
-              "end": 107
+              "start": 141,
+              "end": 145
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "2문단 끝에서 달팽이의 모습을 세상에서 가장 무엇처럼 보였다고 비유했는지 찾아 적어 보세요",
+          "answerText": "여유로운 여행가",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 171,
+              "end": 179
             }
           ],
           "scoring": {

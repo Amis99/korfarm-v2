@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "소중한 무엇을 아껴야 하나요?",
+          "prompt": "음식을 남기지 않아야 하는 첫 번째 까닭으로, 우리가 아껴야 할 것을 한 단어로 찾아 써 보세요",
           "answerText": "자원",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -571,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "정성껏 키워 주신 무엇들인가요?",
-          "answerText": "농부",
-          "answerMatchMode": "EXACT",
+          "prompt": "쌀이나 채소를 정성껏 오랫동안 키운 사람이 누구인지 지문에서 찾아 써 보세요",
+          "answerText": "농부들",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 95,
-              "end": 97
+              "end": 98
             }
           ],
           "scoring": {
@@ -590,19 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "음식물 무엇가 발생하나요?",
-          "answerText": "쓰레기",
-          "answerMatchMode": "EXACT",
+          "prompt": "음식을 버리면 모든 노력과 함께 무엇이 낭비된다고 했는지 한 단어로 찾아 써 보세요",
+          "answerText": "에너지",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 140,
+              "end": 143
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "쓰레기를 처리할 때 나쁜 가스가 나와 일으키는 일을 지문에서 찾아 써 보세요",
+          "answerText": "지구 온난화",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 22,
-              "end": 25
-            },
-            {
-              "paragraphId": "p2",
-              "start": 40,
-              "end": 43
+              "start": 65,
+              "end": 71
             }
           ],
           "scoring": {

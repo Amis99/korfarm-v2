@@ -884,19 +884,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "스마트폰을 활용해 재난 정보를 알려 주는 도구를 무엇이라고 하나요?",
-          "answerText": "재난 대응 앱",
-          "answerMatchMode": "ANY",
+          "prompt": "재난이 발생했을 때 생명을 구하는 열쇠가 된다고 한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "빠르고 정확한 정보",
+            "생명을 구하는 열쇠"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 104,
-              "end": 111
+              "start": 62,
+              "end": 72
             },
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 7
+              "paragraphId": "p1",
+              "start": 74,
+              "end": 84
             }
           ],
           "scoring": {
@@ -907,10 +910,18 @@
         },
         {
           "id": "q2",
-          "prompt": "재난이 발생했을 때 지도에 표시해 주는 곳은 어디인가요?",
-          "answerText": "대피해야 할 장소",
-          "answerMatchMode": "ANY",
+          "prompt": "재난 대응 앱이 지도에 표시해 주는 정보를 모두 찾으시오.",
+          "answerTexts": [
+            "재난이 발생한 위치",
+            "대피해야 할 장소"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 34,
+              "end": 44
+            },
             {
               "paragraphId": "p2",
               "start": 46,
@@ -925,14 +936,22 @@
         },
         {
           "id": "q3",
-          "prompt": "앱이 쉽게 찾게 해 준다고 한 의료 시설은 무엇인가요?",
-          "answerText": "병원",
-          "answerMatchMode": "ANY",
+          "prompt": "재난 대응 앱으로 쉽게 찾을 수 있다고 한 장소를 모두 찾으시오.",
+          "answerTexts": [
+            "가까운 병원",
+            "대피소의 위치"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 76,
+              "start": 72,
               "end": 78
+            },
+            {
+              "paragraphId": "p2",
+              "start": 81,
+              "end": 88
             }
           ],
           "scoring": {
@@ -943,10 +962,18 @@
         },
         {
           "id": "q4",
-          "prompt": "평소에 미리 배울 수 있다고 한 것은 무엇인가요?",
-          "answerText": "응급 처치 요령",
-          "answerMatchMode": "ANY",
+          "prompt": "이 앱을 통해 평소에 미리 배울 수 있다고 한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "재난에 대비하는 방법",
+            "응급 처치 요령"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 25,
+              "end": 36
+            },
             {
               "paragraphId": "p3",
               "start": 38,
@@ -961,14 +988,14 @@
         },
         {
           "id": "q5",
-          "prompt": "바로 도움을 받을 수 있게 해 주는 기능은 무엇인가요?",
-          "answerText": "긴급 구조 요청 버튼",
+          "prompt": "스마트폰에 익숙하지 않은 사람들을 위해 필요한 노력을 찾으시오.",
+          "answerText": "화면을 단순하게 만드는 노력",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 65,
-              "end": 76
+              "paragraphId": "p4",
+              "start": 96,
+              "end": 111
             }
           ],
           "scoring": {

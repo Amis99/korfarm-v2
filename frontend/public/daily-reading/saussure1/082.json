@@ -552,79 +552,50 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "( )봉오리가 활짝 핌.",
-          "answerText": "꽃",
-          "answerMatchMode": "EXACT",
+          "prompt": "꽃이 아직 피지 않고 봉긋하게 맺힌 모양을 가리키는 단어를 지문에서 찾아 보세요.",
+          "answerText": "꽃봉오리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 9,
-              "end": 10
-            },
-            {
-              "paragraphId": "p1",
-              "start": 28,
-              "end": 29
-            },
-            {
-              "paragraphId": "p1",
-              "start": 64,
-              "end": 65
-            },
-            {
-              "paragraphId": "p1",
-              "start": 108,
-              "end": 109
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 1
-            }
+            {"paragraphId": "p1", "start": 9, "end": 13}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "꽃가루가 ( )로 옮겨짐.",
-          "answerText": "암술",
-          "answerMatchMode": "EXACT",
+          "prompt": "꽃의 향기를 맡으러 다녀가는 곤충 두 종류를 모두 찾아 보세요.",
+          "answerText": "벌, 나비",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 69,
-              "end": 71
-            }
+            {"paragraphId": "p1", "start": 40, "end": 41},
+            {"paragraphId": "p1", "start": 52, "end": 53},
+            {"paragraphId": "p1", "start": 43, "end": 45},
+            {"paragraphId": "p1", "start": 55, "end": 57}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "자연의 ( )비를 느껴요.",
-          "answerText": "신비",
-          "answerMatchMode": "EXACT",
+          "prompt": "꽃에서 옮겨가는 가루와 그 가루가 옮겨지는 곳 두 가지를 모두 찾아 보세요.",
+          "answerText": "꽃가루, 암술",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 100,
-              "end": 102
-            }
+            {"paragraphId": "p1", "start": 64, "end": 67},
+            {"paragraphId": "p1", "start": 69, "end": 71}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "자기와 같은 종류의 후손을 가리키는 단어를 지문에서 찾아 보세요.",
+          "answerText": "자손",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 115, "end": 117}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         }
       ]

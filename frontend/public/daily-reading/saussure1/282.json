@@ -396,99 +396,51 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리나라 전통 종이?",
+          "prompt": "닥나무 껍질로 만든 우리나라 전통 종이의 이름을 지문에서 찾아보세요",
           "answerText": "한지",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 30,
-              "end": 32
-            },
-            {
-              "paragraphId": "p1",
-              "start": 60,
-              "end": 62
-            },
-            {
-              "paragraphId": "p1",
-              "start": 148,
-              "end": 150
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 117,
-              "end": 119
-            }
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p1", "start": 30, "end": 32},
+            {"paragraphId": "p1", "start": 60, "end": 62},
+            {"paragraphId": "p1", "start": 148, "end": 150},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 117, "end": 119}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "솜씨로 만드는 예술?",
-          "answerText": "공예",
-          "answerMatchMode": "EXACT",
+          "prompt": "한지를 만들 때 사용되는 자연에서 얻은 본래의 재료는 무엇인지 지문에서 찾아보세요",
+          "answerText": "닥나무 껍질",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p2",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p2",
-              "start": 120,
-              "end": 122
-            }
+            {"paragraphId": "p1", "start": 7, "end": 13}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "물건 만드는 바탕 물질?",
-          "answerText": "재료",
-          "answerMatchMode": "EXACT",
+          "prompt": "한지 공예품 속 은은한 멋과 정교한 솜씨를 남긴 사람은 누구인지 지문에서 찾아보세요",
+          "answerText": "조상들",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 108,
-              "end": 110
-            },
-            {
-              "paragraphId": "p2",
-              "start": 64,
-              "end": 66
-            }
+            {"paragraphId": "p2", "start": 18, "end": 21}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "한지 공예품을 사용할수록 더해지는 느낌은 어떤 느낌인지 지문에서 찾아보세요",
+          "answerText": "고풍스러운 느낌",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 85, "end": 93}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         }
       ]

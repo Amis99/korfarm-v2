@@ -557,14 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "제페토 할아버지가 숲에서 주워 온 신기한 나무 조각을 정성껏 깎아서 입, 코, 눈 등을 만들어 준 인형은?",
-          "answerText": "꼭두각시 인형",
-          "answerMatchMode": "EXACT",
+          "prompt": "제페토 할아버지가 꼭두각시 인형을 만들 때 사용한 재료를 지문에서 찾으시오.",
+          "answerText": "숲에서 주워 온 신기한 나무 조각",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 31,
-              "end": 38
+              "start": 10,
+              "end": 28
             }
           ],
           "scoring": {
@@ -576,44 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "할아버지가 예쁜 이름을 지어 주었지만 완성되자마자 말을 듣지 않고 제멋대로 밖으로 도망친 주인공은?",
-          "answerText": "피노키오",
-          "answerMatchMode": "EXACT",
+          "prompt": "인형이 갑자기 어떤 말로 장난을 쳤는지 지문에서 찾으시오.",
+          "answerText": "메롱",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 107,
-              "end": 111
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 4
-            },
-            {
-              "paragraphId": "p2",
-              "start": 39,
-              "end": 43
-            },
-            {
-              "paragraphId": "p2",
-              "start": 88,
-              "end": 92
-            },
-            {
-              "paragraphId": "p3",
-              "start": 20,
-              "end": 24
-            },
-            {
-              "paragraphId": "p3",
-              "start": 45,
-              "end": 49
-            },
-            {
-              "paragraphId": "p3",
-              "start": 98,
-              "end": 102
+              "start": 72,
+              "end": 74
             }
           ],
           "scoring": {
@@ -625,14 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "할아버지가 경찰에게 붙잡히고 혼자 빈집에 남아 배가 고파진 피노키오가 발을 올린 채로 잠이 든 곳은?",
-          "answerText": "난로",
-          "answerMatchMode": "EXACT",
+          "prompt": "말썽꾸러기 피노키오가 거리를 어떻게 돌아다녔는지 지문에서 찾으시오.",
+          "answerText": "제멋대로",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 68,
+              "end": 72
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "불꽃이 옮겨붙은 뒤 피노키오의 나무 다리가 어떻게 되었는지 지문 끝부분에서 찾으시오.",
+          "answerText": "나무 다리가 타버리고 말았습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 51,
-              "end": 53
+              "start": 104,
+              "end": 121
             }
           ],
           "scoring": {

@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 사회자가 논의의 목적이나 초점을 어떻게 설정하는가?",
+          "prompt": "오늘 토론의 논제를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 132
+              "start": 16,
+              "end": 46
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "사회자: 오늘 토론의 논제는 '학교 축제 운영 시간을 밤 9시까지 연장해야 한다.'입니다. 먼저 찬성 측의 입론을 듣겠습니다. 찬성 측은 연장 운영이 축제의 참여 기회를 넓히고 동아리 활동의 성과를 충분히 보여 줄 수 있다고 주장합니다."
+          "answerText": "'학교 축제 운영 시간을 밤 9시까지 연장해야 한다.'"
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 찬성 측이 어떤 의견이나 판단을 제시하는가?",
+          "prompt": "찬성 측이 주요 프로그램을 놓치기 쉽다고 본 대상을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 188
+              "start": 51,
+              "end": 54
+            },
+            {
+              "paragraphId": "p2",
+              "start": 56,
+              "end": 59
             }
           ],
           "scoring": {
@@ -602,17 +607,30 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "찬성 측: 현재 축제는 오후 늦게 막을 내리기 때문에, 수업이 끝난 뒤에야 참여할 수 있는 학부모와 졸업생은 주요 프로그램을 놓치기 쉽습니다. 운영 시간을 두 시간 정도 늘리면 공연과 전시를 더 많은 사람이 볼 수 있고, 부스 운영 수익도 안정적으로 확보할 수 있습니다. 인원 분산 효과가 생겨 혼잡도 완화될 수 있다는 점도 장점입니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "학부모",
+            "졸업생"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 반대 측이 무엇을 제안하거나 요청하는가?",
+          "prompt": "운영 시간을 늘렸을 때 찬성 측이 제시한 장점을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 167
+              "paragraphId": "p2",
+              "start": 99,
+              "end": 122
+            },
+            {
+              "paragraphId": "p2",
+              "start": 124,
+              "end": 150
+            },
+            {
+              "paragraphId": "p2",
+              "start": 165,
+              "end": 180
             }
           ],
           "scoring": {
@@ -620,17 +638,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "반대 측: 그러나 운영 시간이 길어진다고 참여 기회가 반드시 넓어지는 것은 아닙니다. 밤 시간대에는 안전 관리 인력이 더 필요하고, 학생 자치회와 동아리 구성원의 피로가 커져 오히려 운영의 질이 떨어질 수 있습니다. 축제의 목적이 무조건 오래 여는 데 있는 것은 아니라는 점을 먼저 생각해야 합니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "공연과 전시를 더 많은 사람이 볼 수 있고",
+            "부스 운영 수익도 안정적으로 확보할 수 있습니다",
+            "혼잡도 완화될 수 있다는 점"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 찬성 측 반박이 논의의 핵심을 어떻게 정리하는가?",
+          "prompt": "반대 측이 밤 시간대에 더 필요하다고 한 것을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 177
+              "paragraphId": "p3",
+              "start": 56,
+              "end": 72
             }
           ],
           "scoring": {
@@ -639,16 +661,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "찬성 측 반박: 방금 반대 측은 피로가 커진다고 했지만, 그 점만으로 연장 운영 자체를 막기는 어렵습니다. 인력을 교대로 배치하면 피로 문제는 조정할 수 있고, 안전 관리도 사전 계획을 세우면 해결 가능합니다. 따라서 반대 측의 우려는 연장 운영의 단점을 말한 것이지, 연장 운영이 불가능하다는 근거는 되지 않습니다."
+          "answerText": "안전 관리 인력이 더 필요하고"
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 반대 측 반박이 어떤 의견이나 판단을 제시하는가?",
+          "prompt": "반대 측이 피로가 커진다고 한 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 191
+              "paragraphId": "p3",
+              "start": 74,
+              "end": 89
             }
           ],
           "scoring": {
@@ -657,16 +679,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "반대 측 반박: 찬성 측은 인력 교대와 사전 계획을 말했지만, 실제로 그 계획을 누가 어떻게 맡을지 제시하지 않았습니다. 더구나 수익이 늘 수 있다고 하면서도 추가 조명비와 안전 인력 비용은 따로 계산하지 않았습니다. 결국 찬성 측은 기대 효과를 말했을 뿐, 연장 운영이 실제로 순이익과 참여 확대를 보장한다는 근거는 아직 충분하지 않습니다."
+          "answerText": "학생 자치회와 동아리 구성원"
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 사회자가 논의의 핵심을 어떻게 정리하는가?",
+          "prompt": "찬성 측 반박에서 피로 문제와 안전 관리를 해결하는 방법을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 185
+              "paragraphId": "p4",
+              "start": 60,
+              "end": 70
+            },
+            {
+              "paragraphId": "p4",
+              "start": 97,
+              "end": 107
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "인력을 교대로 배치",
+            "사전 계획을 세우면"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "반대 측 반박에서 찬성 측이 제시하지 않았다고 한 계획의 내용을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 39,
+              "end": 55
             }
           ],
           "scoring": {
@@ -675,7 +723,33 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "사회자: 두 입장을 정리하면, 찬성 측은 참여 확대와 혼잡 완화를, 반대 측은 안전과 운영 부담을 핵심 쟁점으로 제시했습니다. 특히 반박 단계에서는 상대 주장 속 근거의 충분성과 실행 가능성이 중요한 판단 기준으로 떠올랐습니다. 이제 청중은 각 반박이 상대의 주장 핵심을 제대로 겨냥했는지 살피면서 토론의 타당성을 판단하면 됩니다."
+          "answerText": "그 계획을 누가 어떻게 맡을지"
+        },
+        {
+          "id": "q8",
+          "prompt": "사회자가 반박 단계의 중요한 판단 기준으로 제시한 두 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 91,
+              "end": 98
+            },
+            {
+              "paragraphId": "p6",
+              "start": 100,
+              "end": 106
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "근거의 충분성",
+            "실행 가능성"
+          ]
         }
       ]
     }

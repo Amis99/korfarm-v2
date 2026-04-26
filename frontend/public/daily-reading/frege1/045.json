@@ -914,34 +914,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "여러 사람에게 사실을 알리려고 쓴 글은 무엇인가요?",
-          "answerText": "안내문",
-          "answerMatchMode": "ANY",
+          "prompt": "안내문과 사용 설명서의 정의를 모두 찾으시오.",
+          "answerTexts": [
+            "어떤 사실을 여러 사람에게 알리기 위해 작성한 글",
+            "물건의 사용법이나 주의 사항을 적은 글"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 15,
-              "end": 18
+              "start": 38,
+              "end": 65
             },
             {
               "paragraphId": "p1",
-              "start": 33,
-              "end": 36
-            },
-            {
-              "paragraphId": "p2",
-              "start": 3,
-              "end": 6
-            },
-            {
-              "paragraphId": "p2",
-              "start": 31,
-              "end": 34
-            },
-            {
-              "paragraphId": "p4",
-              "start": 102,
-              "end": 105
+              "start": 77,
+              "end": 98
             }
           ],
           "scoring": {
@@ -952,31 +940,16 @@
         },
         {
           "id": "q2",
-          "prompt": "물건의 사용법과 주의점을 적은 글은 무엇인가요?",
-          "answerText": "사용 설명서",
-          "answerMatchMode": "ANY",
+          "prompt": "안내문과 사용 설명서의 공통 목적을 찾으시오.",
+          "answerText": "정확한 정보를 쉽고 빠르게 전달하는 것",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 20,
-              "end": 26
-            },
-            {
-              "paragraphId": "p1",
-              "start": 69,
-              "end": 75
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 6
-            },
-            {
-              "paragraphId": "p3",
-              "start": 139,
-              "end": 145
+              "start": 109,
+              "end": 130
             }
           ],
+          "answerMatchMode": "ANY",
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -985,9 +958,9 @@
         },
         {
           "id": "q3",
-          "prompt": "행사 안내문에 또렷하게 표시해야 할 정보 묶음은 무엇인가요?",
+          "prompt": "행사 안내문에 명확히 표시해야 할 정보를 찾으시오.",
           "answerText": "일시, 장소, 대상, 준비물",
-          "answerMatchMode": "ALL",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -1003,19 +976,22 @@
         },
         {
           "id": "q4",
-          "prompt": "위험한 상황을 막기 위해 반드시 넣어야 하는 부분은 무엇인가요?",
-          "answerText": "주의 사항",
-          "answerMatchMode": "ANY",
+          "prompt": "사용 설명서가 이해를 돕고 순서를 설명할 때 활용하는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "그림이나 도표",
+            "기계의 명칭이나 작동 순서"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 87,
-              "end": 92
+              "paragraphId": "p3",
+              "start": 8,
+              "end": 15
             },
             {
               "paragraphId": "p3",
-              "start": 84,
-              "end": 89
+              "start": 31,
+              "end": 45
             }
           ],
           "scoring": {
@@ -1026,14 +1002,22 @@
         },
         {
           "id": "q5",
-          "prompt": "실용문을 빨리 읽을 때 먼저 훑어볼 부분은 무엇인가요?",
-          "answerText": "제목과 항목 위주로",
-          "answerMatchMode": "ANY",
+          "prompt": "실용문을 읽을 때 빠르게 찾아야 할 읽기 방법과 능력을 모두 찾으시오.",
+          "answerTexts": [
+            "제목과 항목 위주로",
+            "정확한 정보 파악 능력"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 64,
               "end": 74
+            },
+            {
+              "paragraphId": "p4",
+              "start": 132,
+              "end": 144
             }
           ],
           "scoring": {

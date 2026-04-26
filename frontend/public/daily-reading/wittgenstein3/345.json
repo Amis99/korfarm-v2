@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "prompt": "품질이 좋다는 뜻의 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 7
+              "end": 4
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "질 좋은 잣이"
+          "answerText": "질 좋은"
         },
         {
           "id": "q2",
-          "prompt": "2연은 그 정서를 어떤 이미지나 흐름으로 이어 가는가?",
+          "prompt": "가을에 잣이 어떻게 되지 않았는지 나타내는 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 17
+              "start": 4,
+              "end": 16
             }
           ],
           "scoring": {
@@ -603,16 +603,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "가을에 말라 떨어지지 아니하매,"
+          "answerText": "말라 떨어지지 아니하매"
         },
         {
           "id": "q3",
-          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
+          "prompt": "누구를 중히 여겨 가겠다고 했는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 38
+              "end": 2
             }
           ],
           "scoring": {
@@ -621,16 +621,65 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "너를 중히 여겨 가겠다 하신 것과는 달리\n낯이 변해 버리신 겨울에여."
+          "answerText": "너를"
         },
         {
           "id": "q4",
-          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
+          "prompt": "앞말과 실제가 어긋남을 드러내는 대조 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 16,
+              "end": 22
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "것과는 달리"
+        },
+        {
+          "id": "q5",
+          "prompt": "대상을 부르거나 탄식하듯 끝나는 표현을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 33,
+              "end": 37
+            },
+            {
+              "paragraphId": "p6",
+              "start": 15,
+              "end": 18
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "겨울에여",
+            "처지여"
+          ]
+        },
+        {
+          "id": "q6",
+          "prompt": "4연에서 자연 이미지가 드러나는 구절을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 0,
-              "end": 32
+              "end": 14
+            },
+            {
+              "paragraphId": "p4",
+              "start": 15,
+              "end": 31
             }
           ],
           "scoring": {
@@ -638,12 +687,15 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "달이 그림자 내린 연못 갓\n지나가는 물결에 대한 모래로다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "달이 그림자 내린 연못 갓",
+            "지나가는 물결에 대한 모래로다"
+          ]
         },
         {
-          "id": "q5",
-          "prompt": "5연은 앞선 흐름에 어떤 긴장이나 전환을 더하는가?",
+          "id": "q7",
+          "prompt": "보는 행위는 가능하지만 거리감이 남는 태도를 드러내는 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
@@ -660,8 +712,8 @@
           "answerText": "모습이야 바라보지만"
         },
         {
-          "id": "q6",
-          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
+          "id": "q8",
+          "prompt": "세상 모든 것을 떠나보낸 처지를 말하는 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",

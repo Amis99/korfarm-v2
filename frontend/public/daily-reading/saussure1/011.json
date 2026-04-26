@@ -552,19 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "빨강과 노랑을 섞으면 ( )색이에요.",
-          "answerText": "주황",
-          "answerMatchMode": "EXACT",
+          "prompt": "빨간색과 노란색을 섞으면 어떻게 된다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "빨간색과 노란색 물감을 섞으면 주황색이 나옵니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 17,
-              "end": 19
-            },
-            {
-              "paragraphId": "p1",
-              "start": 77,
-              "end": 79
+              "start": 0,
+              "end": 26
             }
           ],
           "scoring": {
@@ -576,14 +571,19 @@
         },
         {
           "id": "q2",
-          "prompt": "파랑과 노랑은 ( )색이 됨.",
-          "answerText": "초록",
-          "answerMatchMode": "EXACT",
+          "prompt": "주황색을 닮았다고 한 사물의 예시를 모두 찾아 보세요.",
+          "answerText": "귤, 노을",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 14,
-              "end": 16
+              "paragraphId": "p1",
+              "start": 87,
+              "end": 88
+            },
+            {
+              "paragraphId": "p1",
+              "start": 91,
+              "end": 93
             }
           ],
           "scoring": {
@@ -595,14 +595,38 @@
         },
         {
           "id": "q3",
-          "prompt": "나만의 ( )색을 찾아 봅시다.",
-          "answerText": "예쁜",
-          "answerMatchMode": "EXACT",
+          "prompt": "파란색과 노란색을 섞으면 어떻게 된다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "파란색과 노란색을 섞으면 초록색으로 변합니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 79,
-              "end": 81
+              "start": 0,
+              "end": 24
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "초록색을 닮았다고 한 사물의 예시를 모두 찾아 보세요.",
+          "answerText": "풀밭, 나무 잎사귀",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 26,
+              "end": 28
+            },
+            {
+              "paragraphId": "p2",
+              "start": 35,
+              "end": 41
             }
           ],
           "scoring": {

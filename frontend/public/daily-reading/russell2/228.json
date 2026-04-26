@@ -1235,98 +1235,73 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "여러 경우를 하나로 보는 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 90,
-              "end": 93
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "‘공기 중에 떠다니는 매우 작은 먼지’를 가리키는 네 글자 단어를 지문에서 찾으시오",
+          "answerText": "미세먼지",
           "answerMatchMode": "ANY",
-          "answerText": "일반화"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 31, "end": 35},
+            {"paragraphId": "p6", "start": 8, "end": 12}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "바탕이 되는 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 156,
-              "end": 158
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "‘부분 사례를 바탕으로 모든 경우에 들어맞는다고 결론짓는 일’을 뜻하는 세 글자 단어를 지문에서 찾으시오",
+          "answerText": "일반화",
           "answerMatchMode": "ANY",
-          "answerText": "기초"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 90, "end": 93}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "판단할 때 기준이 되는 것은?",
+          "prompt": "발표자가 ‘이번 측정의 한계’로 함께 든 두 가지(센서 사용량과 측정 기간)를 모두 지문에서 찾으시오(센서는 ‘∼는 ∼ 대만’ 형태, 기간은 ‘∼주’ 형태)",
+          "answerText": "한 대만, 2주",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 189,
-              "end": 191
-            }
+            {"paragraphId": "p4", "start": 25, "end": 29},
+            {"paragraphId": "p4", "start": 43, "end": 45}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "기준"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "귀를 기울여 잘 듣는 것은?",
+          "prompt": "발표자가 ‘오전 시간대에 수치를 더 주의해서 보아야 한다’고 한 까닭과 연결되는, 그 시간대에 세울 계획 두 가지를 모두 지문에서 찾으시오",
+          "answerText": "환기, 야외 활동",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 131,
-              "end": 133
-            }
+            {"paragraphId": "p5", "start": 43, "end": 45},
+            {"paragraphId": "p5", "start": 47, "end": 52}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "경청"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "자주 그렇게 되는 성향은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 45,
-              "end": 47
-            },
-            {
-              "paragraphId": "p6",
-              "start": 38,
-              "end": 40
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "맑은 날과 비가 온 날의 수치 차이가 ‘더 크게 보이는’ 까닭으로, 어떤 날일수록 그 차이가 더 크게 보였다고 했는지 한 단어(두 글자)로 지문에서 찾으시오",
+          "answerText": "바람",
           "answerMatchMode": "ANY",
-          "answerText": "경향"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 118, "end": 120}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "발표자가 앞으로 ‘더 안정적인 자료를 모으기 위해’ 보완하겠다고 한 두 가지 측정 조건을 모두 지문에서 찾으시오(‘∼ 기간’과 ‘∼소’ 형태)",
+          "answerText": "측정 기간, 장소",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p6", "start": 91, "end": 96},
+            {"paragraphId": "p6", "start": 102, "end": 104}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

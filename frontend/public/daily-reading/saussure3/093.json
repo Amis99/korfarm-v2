@@ -557,24 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "산이나 바다와 같이 우리를 둘러싸고 있는 주변의 지형과 날씨 상태는 무엇인가요?",
-          "answerText": "자연환경",
-          "answerMatchMode": "EXACT",
+          "prompt": "산이 많은 마을에서는 어떤 땅을 깎아 밭을 만드는지 지문에서 찾으시오.",
+          "answerText": "경사진 땅",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 15,
-              "end": 19
-            },
-            {
-              "paragraphId": "p1",
-              "start": 91,
-              "end": 95
-            },
-            {
-              "paragraphId": "p3",
-              "start": 40,
-              "end": 44
+              "start": 50,
+              "end": 55
             }
           ],
           "scoring": {
@@ -586,14 +576,22 @@
         },
         {
           "id": "q2",
-          "prompt": "배를 타고 바다로 나가서 그물이나 낚시로 물고기를 잡는 사람을 부르는 말은?",
-          "answerText": "어부",
-          "answerMatchMode": "EXACT",
+          "prompt": "갯벌이 있는 곳에서 캐거나 만드는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "조개",
+            "소금"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 29,
-              "end": 31
+              "start": 49,
+              "end": 51
+            },
+            {
+              "paragraphId": "p2",
+              "start": 57,
+              "end": 59
             }
           ],
           "scoring": {
@@ -605,14 +603,41 @@
         },
         {
           "id": "q3",
-          "prompt": "자연이 사람들에게 무상으로 제공하는 소중한 자원들을 비유적으로 표현한 말은?",
-          "answerText": "선물",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리가 관찰한 내용을 바탕으로 정리한 것은 무엇인지 지문에서 찾으시오.",
+          "answerText": "고장의 특징",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 72,
-              "end": 74
+              "paragraphId": "p3",
+              "start": 17,
+              "end": 23
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "자연환경을 잘 보존해야 사람들이 어떻게 살 수 있다고 했는지 모두 찾으시오.",
+          "answerTexts": [
+            "건강하고",
+            "행복하게"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 58,
+              "end": 62
+            },
+            {
+              "paragraphId": "p3",
+              "start": 63,
+              "end": 67
             }
           ],
           "scoring": {

@@ -911,14 +911,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "인물이나 동물에게 고유한 성격과 모습을 부여하는 작업을 무엇이라고 하나요?",
-          "answerText": "캐릭터 디자인",
+          "prompt": "캐릭터 디자인의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "인물이나 동물에게 고유한 성격과 모습을 부여하는 작업",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 7
+              "start": 9,
+              "end": 38
             }
           ],
           "scoring": {
@@ -929,14 +929,14 @@
         },
         {
           "id": "q2",
-          "prompt": "친근하고 다정한 성격을 나타낼 때 쓰는 형태는 무엇인가요?",
-          "answerText": "둥글고 부드러운 형태",
+          "prompt": "캐릭터의 성격을 짐작하게 하는 이유를 찾으시오.",
+          "answerText": "색상과 형태가 주는 느낌",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 11
+              "paragraphId": "p1",
+              "start": 111,
+              "end": 124
             }
           ],
           "scoring": {
@@ -947,14 +947,22 @@
         },
         {
           "id": "q3",
-          "prompt": "악당이나 예민한 성격을 표현할 때 쓰는 선의 특징은 무엇인가요?",
-          "answerText": "날카롭고 뾰족한 선",
-          "answerMatchMode": "ANY",
+          "prompt": "형태와 선이 나타내는 성격을 모두 찾으시오.",
+          "answerTexts": [
+            "친근하고 다정한 성격",
+            "악당이나 예민한 성격"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 38,
-              "end": 48
+              "start": 16,
+              "end": 27
+            },
+            {
+              "paragraphId": "p2",
+              "start": 50,
+              "end": 61
             }
           ],
           "scoring": {
@@ -965,14 +973,22 @@
         },
         {
           "id": "q4",
-          "prompt": "열정이나 분노를 상징하는 색은 무엇인가요?",
-          "answerText": "붉은색",
-          "answerMatchMode": "ANY",
+          "prompt": "캐릭터 색상이 상징하는 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "열정이나 분노",
+            "차분함이나 냉철함"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 29,
-              "end": 32
+              "start": 34,
+              "end": 41
+            },
+            {
+              "paragraphId": "p3",
+              "start": 49,
+              "end": 58
             }
           ],
           "scoring": {
@@ -983,14 +999,14 @@
         },
         {
           "id": "q5",
-          "prompt": "잘 만들어진 캐릭터가 사람들에게 끌어내는 반응은 무엇인가요?",
-          "answerText": "공감",
+          "prompt": "잘 만들어진 캐릭터가 사람들에게 끌어내는 반응을 찾으시오.",
+          "answerText": "공감을 이끌어낸다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 26,
-              "end": 28
+              "end": 35
             }
           ],
           "scoring": {

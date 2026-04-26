@@ -571,12 +571,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 '허구 문장의 의미론적 내용과 사용상의 내용'의 기본 개념이나 출발점을 어떻게 설명하는가?",
+          "prompt": "허구 문장을 이해할 때 구분해야 할 두 내용을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 222
+              "start": 14,
+              "end": 28
+            },
+            {
+              "paragraphId": "p1",
+              "start": 31,
+              "end": 57
             }
           ],
           "scoring": {
@@ -584,17 +589,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "허구 문장을 이해할 때는 문장 자체가 표현하는 내용과, 그것이 특정 맥락에서 실제로 어떤 역할을 하는지를 구분할 필요가 있다. 전자는 의미론적 내용이고 후자는 사용상의 내용이다. 의미론적 내용은 문장이 가리키는 명제 자체를 뜻하며, 사용상의 내용은 화자 의도와 맥락 속에서 독자가 실제로 받아들이는 기능을 가리킨다. 허구 이론의 핵심 쟁점은 허구 문장이 이 둘 가운데 무엇을 어떻게 갖는지에 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "문장 자체가 표현하는 내용",
+            "그것이 특정 맥락에서 실제로 어떤 역할을 하는지"
+          ]
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 '허구 문장의 의미론적 내용과 사용상의 내용'과 관련한 원리나 기준을 어떤 관계로 설명하는가?",
+          "prompt": "의미론적 내용이 뜻하는 것을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 211
+              "paragraphId": "p1",
+              "start": 109,
+              "end": 123
             }
           ],
           "scoring": {
@@ -603,16 +611,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "월턴은 허구를 믿는 체하기 놀이로 본다. 이 관점에서 허구 문장은 현실에 대한 참·거짓을 가리는 명제라기보다, 놀이를 작동시키는 소품에 가깝다. 독자는 허구가 실제가 아니라는 사실을 알면서도, 작품 내부 규칙 안에서는 그것을 사실처럼 받아들이며 반응한다. 따라서 이 입장에서는 허구 문장의 사용상의 내용이 중심이 되고, 의미론적 내용은 작품 감상에서 비활성화된 것으로 이해된다."
+          "answerText": "문장이 가리키는 명제 자체"
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 앞의 설명을 어떤 예시나 사례로 구체화하는가?",
+          "prompt": "사용상의 내용이 가리키는 것을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 189
+              "paragraphId": "p1",
+              "start": 139,
+              "end": 169
             }
           ],
           "scoring": {
@@ -621,16 +629,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 설명은 왜 관객이 허구임을 알면서도 울고 두려워하는지를 잘 보여 준다. 연극 속 외침이 현실의 사실 보고가 아니라는 것을 알면서도 관객이 긴장하는 것은, 그 발화를 거짓말로 읽지 않고 놀이 안의 규칙으로 수용하기 때문이다. 다시 말해 허구 문장은 실제 세계의 사실 판단보다 작품 내부의 상황 구성과 감정 유도를 더 직접적으로 담당한다."
+          "answerText": "화자 의도와 맥락 속에서 독자가 실제로 받아들이는 기능"
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 '허구 문장의 의미론적 내용과 사용상의 내용'을 앞선 논의와 이어 어떤 적용 장면이나 전개로 보여 주는가?",
+          "prompt": "월턴이 허구를 무엇으로 보는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 191
+              "paragraphId": "p2",
+              "start": 8,
+              "end": 17
             }
           ],
           "scoring": {
@@ -639,16 +647,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "반면 불완전 명제 이론은 허구 문장도 의미론적 내용을 가진다고 본다. 다만 그 내용은 완전히 채워진 명제가 아니라, 허구적 이름이나 대상이 놓일 자리가 비어 있는 불완전한 형태라는 것이다. 이런 관점에서는 허구 문장이 단지 분위기를 만드는 소품에 그치지 않고, 독자가 인식하고 추론할 수 있는 내용적 구조를 실제로 제공한다고 설명할 수 있다."
+          "answerText": "믿는 체하기 놀이"
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 '허구 문장의 의미론적 내용과 사용상의 내용'을 이해할 때 왜 이 관점이 중요하다고 말하는가?",
+          "prompt": "월턴의 관점에서 허구 문장이 가까운 것과 중심이 되는 내용을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 204
+              "paragraphId": "p2",
+              "start": 62,
+              "end": 74
+            },
+            {
+              "paragraphId": "p2",
+              "start": 155,
+              "end": 169
             }
           ],
           "scoring": {
@@ -656,17 +669,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 입장의 장점은 허구에 대한 인식 반응을 더 정교하게 설명한다는 데 있다. 독자가 슬퍼하거나 놀라는 것은 단순히 놀이 규칙에 따르는 것만이 아니라, 허구 문장이 제시하는 내용 구조를 파악하기 때문이라고 볼 수 있다. 또 어떤 문장이 허구적 이름을 포함하더라도, 그 문장에 담긴 판단이 참인지 거짓인지 다른 문장과의 관계 속에서 검토될 수 있다는 설명도 가능해진다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "놀이를 작동시키는 소품",
+            "허구 문장의 사용상의 내용"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 '허구 문장의 의미론적 내용과 사용상의 내용'을 어떻게 정리하며 무엇을 강조하는가?",
+          "prompt": "관객이 허구임을 알면서도 긴장하는 까닭을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 201
+              "paragraphId": "p3",
+              "start": 88,
+              "end": 125
             }
           ],
           "scoring": {
@@ -675,7 +691,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 두 입장은 허구 문장을 보는 초점이 다르다. 하나는 허구 문장의 기능과 수용 태도, 다른 하나는 허구 문장의 내용 구조를 강조한다. 허구 독해에서는 실제 감상 경험을 설명하는 사용상의 내용과, 작품 내부의 추론과 판단을 가능하게 하는 의미론적 내용을 함께 고려해야 한다. 그래야 허구 문장이 왜 감정과 인식을 동시에 움직이는지 더 온전히 설명할 수 있다."
+          "answerText": "그 발화를 거짓말로 읽지 않고 놀이 안의 규칙으로 수용하기 때문이다"
+        },
+        {
+          "id": "q7",
+          "prompt": "불완전 명제 이론이 허구 문장에 대해 보는 내용을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 14,
+              "end": 37
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "허구 문장도 의미론적 내용을 가진다고 본다"
+        },
+        {
+          "id": "q8",
+          "prompt": "두 입장이 강조하는 초점을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 32,
+              "end": 48
+            },
+            {
+              "paragraphId": "p6",
+              "start": 57,
+              "end": 69
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "허구 문장의 기능과 수용 태도",
+            "허구 문장의 내용 구조"
+          ]
         }
       ]
     }

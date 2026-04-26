@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 -겠-과 -더-를 마음대로 바꿔 쓸 수 없는 이유를 무엇과 연결하는가?",
+          "prompt": "선어말 어미가 놓이는 위치를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 146
+              "start": 8,
+              "end": 23
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "선어말 어미는 용언 어간과 어말 어미 사이에 놓여 시제, 높임, 양태 같은 문법 의미를 덧붙인다. 이 가운데 '-겠-'과 '-더-'는 모두 사건을 말하는 사람의 태도와 관련되지만, 가리키는 시점과 정보의 근거가 달라 같은 자리에 마음대로 바꾸어 넣을 수는 없다."
+          "answerText": "용언 어간과 어말 어미 사이"
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 -겠-이 미래 외에도 어떤 추정과 의지의 태도를 나타낸다고 설명하는가?",
+          "prompt": "'-겠-'과 '-더-'를 마음대로 바꾸어 넣을 수 없는 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 205
+              "paragraphId": "p1",
+              "start": 101,
+              "end": 120
             }
           ],
           "scoring": {
@@ -603,16 +603,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "'-겠-'은 대표적으로 미래의 일이나 화자의 의지를 나타낼 때 쓰이지만, 실제 문장에서는 추정과 판단의 의미도 자주 드러낸다. '곧 비가 오겠다'에서는 앞으로 일어날 일을 예측하는 뜻이 강하고, '제가 먼저 하겠습니다'에서는 화자의 결심이나 의지가 드러난다. 따라서 '-겠-'은 아직 확정되지 않은 일을 내다보거나 화자의 태도를 앞세우는 기능을 가진다고 볼 수 있다."
+          "answerText": "가리키는 시점과 정보의 근거가 달라"
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 -더-에 어떤 경험 회상의 느낌이 함께 실린다고 말하는가?",
+          "prompt": "두 어미가 같은 자리에 들어갈 수 없다는 결과를 나타낸 표현을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 163
+              "paragraphId": "p1",
+              "start": 121,
+              "end": 145
             }
           ],
           "scoring": {
@@ -621,34 +621,48 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "반면 '-더-'은 화자가 직접 겪은 사실을 뒤돌아보며 말할 때 쓰인다. '밖에 눈이 오더라'라고 하면 말하는 이는 어떤 시점에 실제로 눈 오는 장면을 보고 그것을 회상하는 셈이다. 그래서 '-더-'에는 단순한 과거 시제만이 아니라, 경험을 바탕으로 뒤늦게 떠올리는 인식의 느낌이 함께 실린다."
+          "answerText": "같은 자리에 마음대로 바꾸어 넣을 수는 없다"
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 -겠-과 -더-의 차이를 정보의 근거 측면에서 어떻게 설명하는가?",
+          "prompt": "'-겠-'이 나타내는 의미와 기능을 모두 찾으시오.",
+          "answerTexts": [
+            "미래의 일",
+            "화자의 의지",
+            "추정과 판단"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 194
+              "paragraphId": "p2",
+              "start": 13,
+              "end": 18
+            },
+            {
+              "paragraphId": "p2",
+              "start": 21,
+              "end": 27
+            },
+            {
+              "paragraphId": "p2",
+              "start": 50,
+              "end": 56
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 차이는 정보의 근거를 묻는 장면에서 더 분명해진다. '-겠-'은 보거나 들은 단서를 바탕으로 추론한 결과에도 붙을 수 있지만, '-더-'은 말하는 사람이 직접 지각하거나 경험한 사실과 결합하는 경향이 강하다. 예를 들어 멀리서 먹구름을 보고 '비가 오겠다'라고 말할 수는 있지만, 아직 보지 못한 일을 두고 '비가 오더라'라고 말할 수는 없다."
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 두 어미가 서술 태도에서 어떤 다른 색채를 만든다고 하는가?",
+          "prompt": "'제가 먼저 하겠습니다'에서 드러나는 화자의 태도를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 182
+              "paragraphId": "p2",
+              "start": 126,
+              "end": 137
             }
           ],
           "scoring": {
@@ -657,16 +671,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "또 두 어미는 서술 태도에서도 차이를 보인다. '-겠-'은 화자가 사건에 개입해 판단을 내리거나 의사를 드러내는 색채가 짙고, '-더-'은 이미 지나간 경험을 관찰 결과처럼 제시하는 느낌이 강하다. 그래서 같은 사실을 말하더라도 '-겠-'을 쓰면 전망이나 의지의 색이 살아나고, '-더-'을 쓰면 회상과 발견의 색이 살아난다."
+          "answerText": "화자의 결심이나 의지"
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 -겠-과 -더-를 이해할 때 무엇을 함께 살펴야 한다고 정리하는가?",
+          "prompt": "'-더-'이 쓰이는 경우를 정의한 부분을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 196
+              "paragraphId": "p3",
+              "start": 10,
+              "end": 34
             }
           ],
           "scoring": {
@@ -675,7 +689,59 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 '-겠-'과 '-더-'는 모두 사건을 현재의 화자 입장에서 다시 조직하게 하지만, 하나는 아직 오지 않았거나 확정되지 않은 일을 향하고 다른 하나는 이미 겪은 일을 돌아본다는 점에서 다르다. 문장을 정확히 이해하려면 단순히 '미래'와 '과거'로만 외우기보다, 화자가 정보를 어디에서 얻었는지와 어떤 태도로 말하고 있는지까지 함께 살펴보아야 한다."
+          "answerText": "화자가 직접 겪은 사실을 뒤돌아보며 말할 때"
+        },
+        {
+          "id": "q7",
+          "prompt": "정보의 근거를 묻는 장면에서 '-겠-'과 '-더-'의 근거 차이를 모두 찾으시오.",
+          "answerTexts": [
+            "보거나 들은 단서",
+            "직접 지각하거나 경험한 사실"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 38,
+              "end": 47
+            },
+            {
+              "paragraphId": "p4",
+              "start": 88,
+              "end": 103
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q8",
+          "prompt": "문장을 정확히 이해하기 위해 함께 살필 것을 모두 찾으시오.",
+          "answerTexts": [
+            "화자가 정보를 어디에서 얻었는지",
+            "어떤 태도로 말하고 있는지"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 148,
+              "end": 165
+            },
+            {
+              "paragraphId": "p6",
+              "start": 167,
+              "end": 181
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
         }
       ]
     }

@@ -966,11 +966,65 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "prompt": "첫 연에서 화자가 서 있는 장소를 나타내는 부분을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
+              "end": 15
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "파란 녹이 낀 구리거울 속에"
+        },
+        {
+          "id": "q2",
+          "prompt": "거울 속에 남아 있는 것을 나타낸 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 16,
+              "end": 30
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "내 얼굴이 남아 있는 것은"
+        },
+        {
+          "id": "q3",
+          "prompt": "오래되고 낡은 정조를 드러내는 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 31,
+              "end": 43
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "어느 왕조의 유물이기에"
+        },
+        {
+          "id": "q4",
+          "prompt": "첫 연의 마지막 의문 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 44,
               "end": 53
             }
           ],
@@ -980,11 +1034,11 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "파란 녹이 낀 구리거울 속에\n내 얼굴이 남아 있는 것은\n어느 왕조의 유물이기에\n이다지도 욕될까."
+          "answerText": "이다지도 욕될까."
         },
         {
-          "id": "q2",
-          "prompt": "2연은 그 장면이나 정서를 어떻게 이어 가는가?",
+          "id": "q5",
+          "prompt": "화자가 자신의 참회록을 어떻게 하겠다고 하는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -1001,31 +1055,13 @@
           "answerText": "나는 나의 참회의 글을 한 줄에 줄이자."
         },
         {
-          "id": "q3",
-          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 32
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "— 만 이십사 년 일 개월을\n무슨 기쁨을 바라 살아왔던가."
-        },
-        {
-          "id": "q4",
-          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
+          "id": "q6",
+          "prompt": "미래의 어느 날 해야 할 일을 나타낸 부분을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 74
+              "start": 21,
+              "end": 42
             }
           ],
           "scoring": {
@@ -1034,16 +1070,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "내일이나 모레나 그 어느 즐거운 날에\n나는 또 한 줄의 참회록을 써야 한다.\n— 그때 그 젊은 나이에\n왜 그런 부끄런 고백을 했던가."
+          "answerText": "나는 또 한 줄의 참회록을 써야 한다."
         },
         {
-          "id": "q5",
-          "prompt": "5연은 앞선 흐름을 어떤 긴장이나 전환으로 끌고 가는가?",
+          "id": "q7",
+          "prompt": "반복되는 시간 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 0,
-              "end": 33
+              "end": 14
             }
           ],
           "scoring": {
@@ -1052,15 +1088,15 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "밤이면 밤마다 나의 거울을\n손바닥으로 발바닥으로 닦아 보자."
+          "answerText": "밤이면 밤마다 나의 거울을"
         },
         {
-          "id": "q6",
-          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
+          "id": "q8",
+          "prompt": "마지막에 거울 속에 무엇이 나타나는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
+              "start": 34,
               "end": 47
             }
           ],
@@ -1070,7 +1106,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그러면 어느 운석 밑으로 홀로 걸어가는\n슬픈 사람의 뒷모양이\n거울 속에 나타나 온다."
+          "answerText": "거울 속에 나타나 온다."
         }
       ]
     }

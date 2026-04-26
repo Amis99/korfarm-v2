@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "책의 ( )와 지은이를 확인.",
-          "answerText": "제목",
-          "answerMatchMode": "EXACT",
+          "prompt": "책을 정리할 때 먼저 꼼꼼히 확인하는 두 가지가 드러난 어구를 찾으시오.",
+          "answerText": "책의 제목과 지은이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 29,
-              "end": 31
+              "start": 26,
+              "end": 36
             }
           ],
           "scoring": {
@@ -869,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "단어의 ( )를 정확히 알아요.",
-          "answerText": "의미",
-          "answerMatchMode": "EXACT",
+          "prompt": "핵심을 찾을 때 무엇을 머릿속으로 떠올리는지 드러난 어구를 찾으시오.",
+          "answerText": "줄거리를 머릿속으로 떠올리며",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 53,
-              "end": 55
+              "paragraphId": "p1",
+              "start": 52,
+              "end": 67
             }
           ],
           "scoring": {
@@ -888,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "독서 ( )을 기르기로 해요.",
-          "answerText": "습관",
-          "answerMatchMode": "EXACT",
+          "prompt": "무엇이 무척 즐겁다고 했는지 드러난 어구를 찾으시오.",
+          "answerText": "스스로 지식을 가꾸는 과정",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 75,
+              "end": 89
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "무엇이 내 마음을 쑥쑥 키워 준다고 했는지 드러난 어구를 찾으시오.",
+          "answerText": "책이 주는 지혜",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 75,
-              "end": 77
+              "start": 24,
+              "end": 32
             }
           ],
           "scoring": {

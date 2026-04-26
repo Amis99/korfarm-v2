@@ -561,19 +561,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사실이 아닌 것을 사실인 것처럼 꾸며서 남을 속이는 말은?",
-          "answerText": "거짓말",
+          "prompt": "피노키오가 자는 동안 금화를 모두 파내어 도망간 이는 누구인지 지문에서 찾으시오.",
+          "answerText": "여우와 고양이",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 56,
-              "end": 59
-            },
-            {
-              "paragraphId": "p3",
-              "start": 15,
-              "end": 18
+              "paragraphId": "p1",
+              "start": 34,
+              "end": 41
             }
           ],
           "scoring": {
@@ -584,19 +579,50 @@
         },
         {
           "id": "q2",
-          "prompt": "다른 사람과 앞으로 어떻게 할 것인지 미리 정하여 두는 일은?",
-          "answerText": "약속",
+          "prompt": "피노키오가 깨달은 내용은 무엇인지 지문에서 찾으시오.",
+          "answerText": "자신이 악당들에게 속았다는 것",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 83,
+              "end": 99
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "피노키오가 학교에 대해 한 거짓말을 지문에서 찾으시오.",
+          "answerText": "학교에 갔었다고",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 47,
+              "end": 55
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "집으로 돌아가던 피노키오가 만난 친구는 어떤 친구인지 지문에서 찾으시오.",
+          "answerText": "장난감 나라로 가는 친구",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 31,
-              "end": 33
-            },
-            {
-              "paragraphId": "p3",
-              "start": 114,
-              "end": 116
+              "start": 63,
+              "end": 76
             }
           ],
           "scoring": {

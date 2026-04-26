@@ -603,29 +603,24 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "동식물이 자라나는 데 꼭 필요한 밥 같은 성분은?",
-          "answerText": "영양분",
+          "prompt": "식물이 자신에게 필요한 밥을 만드는 과정을 무엇이라고 부르나요?",
+          "answerText": "광합성",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 46,
-              "end": 49
+              "start": 92,
+              "end": 95
             },
             {
-              "paragraphId": "p2",
-              "start": 84,
-              "end": 87
-            },
-            {
-              "paragraphId": "p2",
-              "start": 110,
-              "end": 113
+              "paragraphId": "p1",
+              "start": 104,
+              "end": 107
             },
             {
               "paragraphId": "p3",
-              "start": 14,
-              "end": 17
+              "start": 0,
+              "end": 3
             }
           ],
           "scoring": {
@@ -636,7 +631,7 @@
         },
         {
           "id": "q2",
-          "prompt": "빛을 받아들여 식물의 밥을 만드는 작은 공장은?",
+          "prompt": "빛을 흡수하는 작은 공장인 것은 무엇인가요?",
           "answerText": "엽록체",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -654,14 +649,32 @@
         },
         {
           "id": "q3",
-          "prompt": "우리가 숨을 쉴 때 들이마시는 투명한 기체는?",
-          "answerText": "산소",
+          "prompt": "광합성이 일어나면 식물이 영양분과 함께 뿜어내는 것은 무엇인가요?",
+          "answerText": "깨끗한 산소",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 44,
+              "start": 40,
               "end": 46
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "식물이 열심히 밥을 만들어 먹는 덕분에 깨끗해지는 것을 지문에서 찾으시오.",
+          "answerText": "우리 지구의 공기",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 76,
+              "end": 85
             }
           ],
           "scoring": {

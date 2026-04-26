@@ -914,7 +914,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "무엇은 사실관계와 규칙을 맞추어 결론을 이끄는 법학의 기본 개념이다?",
+          "prompt": "사실관계와 규칙을 맞추어 결론을 이끄는 법학의 기본 개념을 가리키는 말을 지문에서 모두 찾으시오",
+          "answerText": "법 삼단논법",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -928,71 +930,111 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "법 삼단논법"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "핵심 개념은 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 56,
-              "end": 69
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "법 삼단논법이 무엇인지 한 문장으로 정의한 부분을 지문에서 찾으시오",
+          "answerText": "법 삼단논법은 사실관계와 규칙을 맞추어 결론을 이끄는 법학의 기본 개념이다",
           "answerMatchMode": "ANY",
-          "answerText": "규칙이 들어맞는지 살핀다"
-        },
-        {
-          "id": "q3",
-          "prompt": "주요 소재는 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 141,
-              "end": 153
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그런 결론에 이르렀는지"
-        },
-        {
-          "id": "q4",
-          "prompt": "중요한 기준은 무엇인가요?",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 6
-            },
-            {
-              "paragraphId": "p4",
-              "start": 3,
-              "end": 9
+              "end": 41
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "사실관계를 먼저 따져야 한다는 점을 보이려고 지문이 든 구체적인 예 부분을 지문에서 찾으시오",
+          "answerText": "빌린 물건을 망가뜨린 경우라면 누가 언제 어떻게 사용했는지, 허락받은 범위를 넘었는지 같은 사실을 먼저 따져야 한다",
           "answerMatchMode": "ANY",
-          "answerText": "법 삼단논법"
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 82,
+              "end": 146
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "절차를 지키지 않으면 결론이 흔들릴 수 있다는 까닭이 드러난 부분을 지문에서 찾으시오",
+          "answerText": "증거를 확인하고, 서로 다른 주장을 차례로 듣고, 왜 그런 결론에 이르렀는지 설명하는 과정이 빠지면 결론은 쉽게 흔들릴 수 있다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 111,
+              "end": 182
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "법이 결론에 이르기 위해 따라야 할, 일을 진행하는 순서나 방법을 가리키는 낱말을 지문에서 찾으시오",
+          "answerText": "절차",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 94,
+              "end": 96
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "법을 사람에 따라 치우치지 않게 다룰 때 쓰이는, 누구에게나 두루 통하는 잣대를 가리키는 말을 지문에서 모두 찾으시오",
+          "answerText": "공통 기준",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 142,
+              "end": 147
+            },
+            {
+              "paragraphId": "p4",
+              "start": 146,
+              "end": 151
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

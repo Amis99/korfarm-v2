@@ -557,24 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "공주가 왕자를 살리고 인어로 돌아가지 못했을 때, 아침 햇살과 함께 변하게 되는 덧없는 존재는?",
-          "answerText": "물거품",
-          "answerMatchMode": "EXACT",
+          "prompt": "공주가 다음 날 아침이면 변해 사라질 운명을 찾으시오.",
+          "answerText": "차가운 물거품",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 60,
+              "start": 56,
               "end": 63
-            },
-            {
-              "paragraphId": "p3",
-              "start": 28,
-              "end": 31
-            },
-            {
-              "paragraphId": "p3",
-              "start": 57,
-              "end": 60
             }
           ],
           "scoring": {
@@ -586,24 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "언니들이 마녀에게서 얻어 온 것으로, 왕자를 찌르면 공주가 살 수 있게 해 주는 무기는?",
-          "answerText": "단검",
-          "answerMatchMode": "EXACT",
+          "prompt": "언니들이 마녀에게 받아 공주에게 건네준 것을 찾으시오.",
+          "answerText": "은빛 단검",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 111,
-              "end": 113
-            },
-            {
-              "paragraphId": "p2",
-              "start": 13,
-              "end": 15
-            },
-            {
-              "paragraphId": "p2",
               "start": 108,
-              "end": 110
+              "end": 113
             }
           ],
           "scoring": {
@@ -615,14 +595,49 @@
         },
         {
           "id": "q3",
-          "prompt": "인어공주가 비록 몸은 사라졌지만 영혼이 되어 함께 하늘로 올라가게 된 신비로운 존재들은?",
-          "answerText": "공기의 정령들",
-          "answerMatchMode": "EXACT",
+          "prompt": "왕자의 심장을 단검으로 찌르면 공주에게 일어난다고 한 일을 모두 찾으시오.",
+          "answerTexts": [
+            "다시 인어로 변해",
+            "살 수 있다고"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 74,
-              "end": 81
+              "paragraphId": "p2",
+              "start": 26,
+              "end": 35
+            },
+            {
+              "paragraphId": "p2",
+              "start": 36,
+              "end": 43
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "공주가 왕자를 해칠 수 없어 한 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "눈물을 흘리며",
+            "단검을 깊은 바닷속으로 던져 버렸습니다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 100,
+              "end": 107
+            },
+            {
+              "paragraphId": "p2",
+              "start": 108,
+              "end": 129
             }
           ],
           "scoring": {

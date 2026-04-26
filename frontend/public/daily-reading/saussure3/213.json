@@ -587,19 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "남을 대하는 바른 태도는?",
-          "answerText": "예절이",
-          "answerMatchMode": "EXACT",
+          "prompt": "실내에서 에어컨을 켤 때 꼭 닫아야 하는 것을 지문에서 찾으시오.",
+          "answerText": "문",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 20,
-              "end": 23
-            },
-            {
-              "paragraphId": "p3",
-              "start": 70,
-              "end": 73
+              "start": 46,
+              "end": 47
             }
           ],
           "scoring": {
@@ -611,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "여러 사람이 이용하는 곳은?",
-          "answerText": "공공장소에서",
-          "answerMatchMode": "EXACT",
+          "prompt": "공공장소에서 너무 큰 소리로 떠들면 힘들어지는 사람을 지문에서 찾으시오.",
+          "answerText": "주변 사람",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 6
+              "start": 20,
+              "end": 25
             }
           ],
           "scoring": {
@@ -630,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "남을 도와주거나 살피는 마음?",
-          "answerText": "배려하며",
-          "answerMatchMode": "EXACT",
+          "prompt": "건강한 여름을 나기 위해 잘 지켜야 하는 것을 지문에서 찾으시오.",
+          "answerText": "위생 규칙",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 47,
-              "end": 51
+              "paragraphId": "p3",
+              "start": 14,
+              "end": 19
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "음식을 나누어 먹을 때 사용하는 것이 예의인 물건을 지문에서 찾으시오.",
+          "answerText": "개인 접시",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 43,
+              "end": 48
             }
           ],
           "scoring": {

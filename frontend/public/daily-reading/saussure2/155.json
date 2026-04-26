@@ -561,14 +561,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "쓰거나 이용하기에 쉽고 편하여 좋은 것은?",
-          "answerText": "편리",
+          "prompt": "공공기관은 어떤 곳인지 지문에서 찾으시오.",
+          "answerText": "나라에서 세운 곳",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 13,
-              "end": 15
+              "start": 29,
+              "end": 38
             }
           ],
           "scoring": {
@@ -579,14 +579,50 @@
         },
         {
           "id": "q2",
-          "prompt": "물건이나 편지 등을 정해진 곳으로 가져다주는 일은?",
-          "answerText": "배달",
+          "prompt": "경찰관이 하는 일을 지문에서 찾으시오.",
+          "answerText": "도둑을 잡고 교통 정리를 하며",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 70,
+              "end": 86
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "소방관이 하는 일을 지문에서 찾으시오.",
+          "answerText": "불을 끄고 위험에 빠진 사람을 구해요",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 106,
-              "end": 108
+              "start": 49,
+              "end": 69
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "주민 센터가 떼어 주는 것을 지문에서 찾으시오.",
+          "answerText": "필요한 서류",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 46,
+              "end": 52
             }
           ],
           "scoring": {

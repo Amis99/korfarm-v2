@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "둘 이상의 차이를 견줌?",
+          "prompt": "글에서 '두 가지 물건의 공통점이나 차이점을 설명할 때 쓰는 말'을 가리키는 두 글자 낱말을 찾아 써 보세요",
           "answerText": "비교",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -435,9 +435,9 @@
         },
         {
           "id": "q2",
-          "prompt": "머릿속으로 하는 고찰?",
+          "prompt": "비교하는 말을 잘 사용하면 다른 사람에게 무엇을 더 정확하게 전달할 수 있다고 하였는지 두 글자로 써 보세요",
           "answerText": "생각",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -454,19 +454,58 @@
         },
         {
           "id": "q3",
-          "prompt": "자세히 풀어서 말함?",
-          "answerText": "설명",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서 비교할 때 쓰면 물건의 크기나 높이를 다른 것과 쉽게 견줄 수 있다고 예로 든 두 가지 말을 모두 찾아 써 보세요",
+          "answerText": "더, 가장",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 24,
-              "end": 26
+              "start": 46,
+              "end": 47
+            },
+            {
+              "paragraphId": "p1",
+              "start": 112,
+              "end": 113
+            },
+            {
+              "paragraphId": "p1",
+              "start": 51,
+              "end": 53
             },
             {
               "paragraphId": "p2",
-              "start": 77,
-              "end": 79
+              "start": 29,
+              "end": 30
+            },
+            {
+              "paragraphId": "p2",
+              "start": 54,
+              "end": 55
+            },
+            {
+              "paragraphId": "p2",
+              "start": 70,
+              "end": 71
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글쓴이는 비교하는 말을 누구를 깎아내리기 위해 쓰기보다는 서로의 무엇을 찾기 위해 노력해야 한다고 하였는지 네 글자로 써 보세요",
+          "answerText": "좋은 점",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 135,
+              "end": 139
             }
           ],
           "scoring": {

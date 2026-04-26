@@ -720,19 +720,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "나무에게 먼저 말을 건 존재는 무엇인가요?",
-          "answerText": "바람",
+          "prompt": "바람이 나무에게 먼저 말을 거는 행을 찾으시오.",
+          "answerText": "바람이 나무에게 살며시 다가와 물었어",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 54,
-              "end": 56
+              "end": 20
             }
           ],
           "scoring": {
@@ -743,14 +738,22 @@
         },
         {
           "id": "q2",
-          "prompt": "나무가 깊게 내리고 있다고 한 것은 무엇인가요?",
-          "answerText": "뿌리",
-          "answerMatchMode": "ANY",
+          "prompt": "나무가 자신이 제자리에 서 있는 이유로 말한 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "뿌리를 깊게 내리고",
+            "지구를 안고 있어"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 26,
-              "end": 28
+              "end": 36
+            },
+            {
+              "paragraphId": "p2",
+              "start": 37,
+              "end": 46
             }
           ],
           "scoring": {
@@ -761,14 +764,14 @@
         },
         {
           "id": "q3",
-          "prompt": "비가 나무를 걱정하며 토닥여 준 곳은 어디인가요?",
-          "answerText": "어깨",
+          "prompt": "나무가 들을 수 있다고 한 것을 찾으시오.",
+          "answerText": "세상의 모든 이야기를 들을 수 있단다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 58,
-              "end": 60
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 72
             }
           ],
           "scoring": {
@@ -779,14 +782,14 @@
         },
         {
           "id": "q4",
-          "prompt": "나무가 빗방울로 틔운다고 한 것은 무엇인가요?",
-          "answerText": "새싹",
+          "prompt": "비가 나무를 걱정하며 한 행동이 드러난 행을 찾으시오.",
+          "answerText": "추워 보인다고 비가 어깨를 토닥여 주었어",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 30,
-              "end": 32
+              "paragraphId": "p3",
+              "start": 47,
+              "end": 69
             }
           ],
           "scoring": {
@@ -797,24 +800,22 @@
         },
         {
           "id": "q5",
-          "prompt": "나무가 매일 자라난다고 말한 이유는 누구의 다정함 덕분인가요?",
-          "answerText": "너",
-          "answerMatchMode": "ANY",
+          "prompt": "나무가 비가 준 물로 만들겠다고 한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "새싹",
+            "꽃"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 22,
-              "end": 23
-            },
-            {
-              "paragraphId": "p3",
-              "start": 21,
-              "end": 22
+              "paragraphId": "p4",
+              "start": 30,
+              "end": 32
             },
             {
               "paragraphId": "p4",
-              "start": 51,
-              "end": 52
+              "start": 38,
+              "end": 39
             }
           ],
           "scoring": {

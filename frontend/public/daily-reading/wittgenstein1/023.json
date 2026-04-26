@@ -571,7 +571,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "prompt": "1연에서 화자의 망설임을 드러내는 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -589,7 +589,7 @@
         },
         {
           "id": "q2",
-          "prompt": "둘째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "prompt": "2연과 5연에서 임을 따르겠다는 결심을 드러내는 같은 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -612,11 +612,29 @@
         },
         {
           "id": "q3",
-          "prompt": "셋째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "prompt": "3연에서 하루보다 앞에 나열된 날들을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 0,
+              "end": 23
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "오늘 가고 내일 가고 모레 가고 글피 가고"
+        },
+        {
+          "id": "q4",
+          "prompt": "3연에서 여드레로 헤아린 시간을 나타낸 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 24,
               "end": 43
             }
           ],
@@ -626,16 +644,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "오늘 가고 내일 가고 모레 가고 글피 가고 하루 이틀 사흘 나흘 곱잡아 여드레"
+          "answerText": "하루 이틀 사흘 나흘 곱잡아 여드레"
         },
         {
-          "id": "q4",
-          "prompt": "넷째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "id": "q5",
+          "prompt": "4연에서 다 가지 못할 수도 있다고 한 거리를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 0,
-              "end": 31
+              "end": 14
             }
           ],
           "scoring": {
@@ -644,16 +662,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "팔십 리를 다 못 갈지라도 임을 따라서 아니 갈 수 없네"
+          "answerText": "팔십 리를 다 못 갈지라도"
         },
         {
-          "id": "q5",
-          "prompt": "다섯째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "id": "q6",
+          "prompt": "5연에서 위협적인 사물들을 나열한 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 0,
-              "end": 43
+              "end": 18
             }
           ],
           "scoring": {
@@ -662,15 +680,33 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "천가지 만가지 창과 칼, 도끼까지 닥친다 할지라도 임을 따라 아니 갈 수 없네"
+          "answerText": "천가지 만가지 창과 칼, 도끼까지"
         },
         {
-          "id": "q6",
-          "prompt": "마지막 연은 앞선 흐름이 어디에 이르고 있음을 보여 주는가?",
+          "id": "q7",
+          "prompt": "6연에서 짝을 이루어 서 있음을 반복적으로 보여 주는 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
+              "start": 19,
+              "end": 24
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "마주 섰고"
+        },
+        {
+          "id": "q8",
+          "prompt": "6연에서 임이 없어 살 수 없다는 한탄을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 80,
               "end": 91
             }
           ],
@@ -680,7 +716,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "나무라도 은행나무는 음양을 분하여 마주 섰고 돌이라도 망부석은 암수를 따라서 마주 섰는데 이 내 팔자는 왜 그리 주책없어 간 곳마다 있어야 할 임 없어나 못 살겠네"
+          "answerText": "임 없어나 못 살겠네"
         }
       ]
     }

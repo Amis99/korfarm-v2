@@ -552,28 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "붉은색 ( )를 타고 출동.",
-          "answerText": "소방차",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 44,
-              "end": 47
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "아픈 분은 ( )를 탑니다.",
+          "prompt": "아픈 사람을 병원으로 데려다 주는 차라는 뜻의 단어를 지문에서 찾아 보세요.",
           "answerText": "구급차",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -589,20 +570,68 @@
           "revealOnWrong": true
         },
         {
+          "id": "q2",
+          "prompt": "지문에서 소방서가 불이 나지 않도록 하는 활동을 찾아 보세요.",
+          "answerText": "예방 교육",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 50,
+              "end": 55
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q3",
-          "prompt": "동네 ( ) 지킴이 소방서.",
-          "answerText": "안전",
-          "answerMatchMode": "EXACT",
+          "prompt": "소방관들이 불길 속에서 어떤 모습이라고 했는지 지문에서 찾아 보세요.",
+          "answerText": "용감하게 일하시는 모습",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 94,
-              "end": 96
+              "start": 71,
+              "end": 83
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "우리 동네 안전 지킴이는 누구인지 지문에서 모두 찾아 보세요.",
+          "answerText": "소방서",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 3
+            },
+            {
+              "paragraphId": "p1",
+              "start": 119,
+              "end": 122
             },
             {
               "paragraphId": "p2",
-              "start": 95,
-              "end": 97
+              "start": 33,
+              "end": 36
+            },
+            {
+              "paragraphId": "p2",
+              "start": 103,
+              "end": 106
             }
           ],
           "scoring": {

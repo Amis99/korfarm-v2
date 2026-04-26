@@ -889,7 +889,51 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "입양 기준 강화를 찬성하는 측이 최우선으로 내세운 것은 무엇인가요?",
+          "prompt": "입양 기준 강화가 막으려는 문제를 찾으시오.",
+          "answerText": "무책임한 파양과 유기",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 100,
+              "end": 111
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "동물권 보호 단체가 입양 희망자에게 심사하자고 한 조건을 모두 찾으시오.",
+          "answerTexts": [
+            "경제적 능력",
+            "거주 환경"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 127,
+              "end": 133
+            },
+            {
+              "paragraphId": "p1",
+              "start": 135,
+              "end": 140
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "입양 기준 강화 찬성 측이 최우선으로 내세운 것을 찾으시오.",
           "answerText": "동물의 생명권 보호",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -906,51 +950,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "기준 강화가 막으려는 무책임한 결과는 무엇인가요?",
-          "answerText": "파양",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 105,
-              "end": 107
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "반대 측이 지나친 기준을 무엇의 침해라고 보았나요?",
-          "answerText": "보편적 권리의 침해",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 21,
-              "end": 31
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q4",
-          "prompt": "입양 문턱이 높아질 때 생길 수 있다고 한 역효과는 무엇인가요?",
-          "answerText": "풍선 효과",
+          "prompt": "반대 측이 지나친 기준을 무엇이라고 반박했는지 찾으시오.",
+          "answerText": "'보편적 권리의 침해'",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 264,
-              "end": 269
+              "start": 20,
+              "end": 32
             }
           ],
           "scoring": {
@@ -961,14 +969,22 @@
         },
         {
           "id": "q5",
-          "prompt": "글이 마지막에 제안한 지원 방식 중 하나는 무엇인가요?",
-          "answerText": "의료비 지원",
-          "answerMatchMode": "ANY",
+          "prompt": "글 마지막에서 제안한 대안을 모두 찾으시오.",
+          "answerTexts": [
+            "의료비 지원",
+            "공공 훈련 프로그램"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 200,
               "end": 206
+            },
+            {
+              "paragraphId": "p4",
+              "start": 209,
+              "end": 219
             }
           ],
           "scoring": {

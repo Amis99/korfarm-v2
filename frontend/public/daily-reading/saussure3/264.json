@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "생물이 사는 곳을 뜻함?",
-          "answerText": "서식지를",
-          "answerMatchMode": "EXACT",
+          "prompt": "개구리가 잡아먹는 대상을 지문에서 찾으시오.",
+          "answerText": "해로운 곤충",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 74,
-              "end": 78
+              "start": 33,
+              "end": 39
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "살아 있는 모든 것은?",
-          "answerText": "생명은",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리가 깨끗하게 보호해야 할 것을 지문에서 찾으시오.",
+          "answerText": "개구리의 서식지를",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 38,
-              "end": 41
+              "paragraphId": "p1",
+              "start": 69,
+              "end": 78
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "생물의 생활 환경은?",
-          "answerText": "생태계를",
-          "answerMatchMode": "EXACT",
+          "prompt": "모든 생명이 각자의 자리에서 갖는 것을 지문에서 찾으시오.",
+          "answerText": "살아갈 권리",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 51,
+              "end": 57
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "지구를 건강하게 만드는 행동을 지문에서 찾으시오.",
+          "answerText": "작은 생명을 소중히 여기는 행동",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 67,
-              "end": 71
+              "start": 35,
+              "end": 52
             }
           ],
           "scoring": {

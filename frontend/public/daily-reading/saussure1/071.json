@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "따뜻한 ( )의 말을 건넴.",
+          "prompt": "아픈 친구의 마음을 따뜻하게 어루만져 주는 말을 가리키는 단어로, 슬프거나 힘든 사람을 달래주는 일을 뜻하는 단어를 찾아 보세요.",
           "answerText": "위로",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -571,9 +571,28 @@
         },
         {
           "id": "q2",
-          "prompt": "( ) 내용을 알려줍니다.",
+          "prompt": "지문에서 학교에 아픈 친구가 갈 수 있도록 같이 가준다고 한 장소를 가리키는 단어를 찾아 보세요.",
+          "answerText": "보건실",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 32,
+              "end": 35
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "친구가 결석했을 때 나중에 알려주는 것으로, 그날 학교에서 있었던 일이나 숙제를 적은 공책을 가리키는 단어를 찾아 보세요.",
           "answerText": "알림장",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -589,15 +608,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "우정을 ( ) 깊게 만듦.",
-          "answerText": "더욱",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "지문에 따르면 따뜻한 배려가 친구들 사이에서 더욱 깊어지게 만든다고 한 것을 가리키는 단어를 찾아 보세요.",
+          "answerText": "우정",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 110,
-              "end": 112
+              "start": 106,
+              "end": 108
             }
           ],
           "scoring": {

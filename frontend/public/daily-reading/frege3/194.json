@@ -888,24 +888,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "인간이 태어날 때부터 가진 것은 무엇인가요?",
-          "answerText": "본성",
+          "prompt": "인간이 태어날 때 가지고 나온다고 한 본성은 무엇인가요?",
+          "answerText": "생물학적 본성",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 15,
+              "start": 10,
               "end": 17
-            },
-            {
-              "paragraphId": "p1",
-              "start": 34,
-              "end": 36
-            },
-            {
-              "paragraphId": "p5",
-              "start": 13,
-              "end": 15
             }
           ],
           "scoring": {
@@ -916,34 +906,14 @@
         },
         {
           "id": "q2",
-          "prompt": "사회의 규범과 가치를 배우는 과정은 무엇인가요?",
-          "answerText": "사회화",
+          "prompt": "사회화 과정을 통해 학습한다고 한 것은 무엇인가요?",
+          "answerText": "사회의 규범과 가치",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 4,
-              "end": 7
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p4",
-              "start": 9,
-              "end": 12
-            },
-            {
-              "paragraphId": "p5",
-              "start": 17,
-              "end": 20
-            },
-            {
-              "paragraphId": "p5",
-              "start": 80,
-              "end": 83
+              "start": 15,
+              "end": 25
             }
           ],
           "scoring": {
@@ -954,10 +924,24 @@
         },
         {
           "id": "q3",
-          "prompt": "사회화에 개입하는 주체의 예로 든 것은 무엇인가요?",
-          "answerText": "대중매체",
-          "answerMatchMode": "ANY",
+          "prompt": "사회화 과정에 개입하는 주체들을 모두 찾으시오.",
+          "answerTexts": [
+            "부모",
+            "학교",
+            "대중매체"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 33,
+              "end": 35
+            },
+            {
+              "paragraphId": "p2",
+              "start": 37,
+              "end": 39
+            },
             {
               "paragraphId": "p2",
               "start": 41,
@@ -972,14 +956,22 @@
         },
         {
           "id": "q4",
-          "prompt": "사회가 진보하려면 요구된 태도는 무엇인가요?",
-          "answerText": "주체적인 태도",
-          "answerMatchMode": "ANY",
+          "prompt": "사회화가 다음 세대에 무비판적으로 전달하기도 한다고 한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "불평등한 사회 구조",
+            "편견"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 19,
-              "end": 26
+              "paragraphId": "p3",
+              "start": 35,
+              "end": 45
+            },
+            {
+              "paragraphId": "p3",
+              "start": 47,
+              "end": 49
             }
           ],
           "scoring": {
@@ -990,14 +982,14 @@
         },
         {
           "id": "q5",
-          "prompt": "결론에서 인간의 삶을 무엇의 과정이라고 했나요?",
-          "answerText": "상호작용",
+          "prompt": "수동적인 사회화에서 벗어나 요구된 태도는 무엇인가요?",
+          "answerText": "주체적인 태도",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 27,
-              "end": 31
+              "paragraphId": "p4",
+              "start": 19,
+              "end": 26
             }
           ],
           "scoring": {

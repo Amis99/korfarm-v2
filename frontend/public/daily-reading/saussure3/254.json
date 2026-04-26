@@ -850,14 +850,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "은빛 ( )을 조심조심 밟아요.",
-          "answerText": "계단",
-          "answerMatchMode": "EXACT",
+          "prompt": "미끄럼틀에 올라갈 때 밟은 것과 그 모습을 모두 찾으시오.",
+          "answerTexts": [
+            "은빛 계단",
+            "조심조심 밟고"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 32,
+              "start": 29,
               "end": 34
+            },
+            {
+              "paragraphId": "p1",
+              "start": 40,
+              "end": 47
             }
           ],
           "scoring": {
@@ -869,14 +877,22 @@
         },
         {
           "id": "q2",
-          "prompt": "옷에 묻은 먼지를 툭툭 ( ).",
-          "answerText": "텁니다",
-          "answerMatchMode": "EXACT",
+          "prompt": "미끄럼틀을 탈 때 안전한 자세와 내려오는 모습을 모두 찾으시오.",
+          "answerTexts": [
+            "엉덩이를 바닥에 딱 붙이고",
+            "슈웅 소리를 내며 내려옵니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 53,
-              "end": 56
+              "paragraphId": "p1",
+              "start": 85,
+              "end": 99
+            },
+            {
+              "paragraphId": "p1",
+              "start": 100,
+              "end": 115
             }
           ],
           "scoring": {
@@ -888,14 +904,61 @@
         },
         {
           "id": "q3",
-          "prompt": "휴지는 ( )에 쏙 넣습니다.",
-          "answerText": "쓰레기통",
-          "answerMatchMode": "EXACT",
+          "prompt": "놀이가 끝난 뒤 정리하는 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "스스로 정리를 해야 함",
+            "옷에 묻은 먼지를 툭툭 텁니다",
+            "작은 모래알도 탈탈 비워 냅니다",
+            "공과 인형도 챙깁니다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 15,
+              "end": 27
+            },
+            {
+              "paragraphId": "p2",
+              "start": 40,
+              "end": 56
+            },
+            {
+              "paragraphId": "p2",
+              "start": 68,
+              "end": 85
+            },
+            {
+              "paragraphId": "p2",
+              "start": 102,
+              "end": 113
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "놀이터를 깨끗하게 쓰기 위해 하지 않을 일과 아껴 주는 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "낙서를 하지 않고",
+            "소중히 아껴 줍니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 75,
-              "end": 79
+              "start": 37,
+              "end": 46
+            },
+            {
+              "paragraphId": "p3",
+              "start": 47,
+              "end": 57
             }
           ],
           "scoring": {

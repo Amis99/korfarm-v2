@@ -850,14 +850,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "베짱이는 나무 ( )에서 놀았어요.",
-          "answerText": "그늘",
-          "answerMatchMode": "EXACT",
+          "prompt": "개미들이 겨울을 위해 한 일을 모두 찾으시오.",
+          "answerTexts": [
+            "겨울에 먹을 양식",
+            "구슬땀을 흘림"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 67,
-              "end": 69
+              "start": 29,
+              "end": 38
+            },
+            {
+              "paragraphId": "p1",
+              "start": 47,
+              "end": 54
             }
           ],
           "scoring": {
@@ -869,14 +877,22 @@
         },
         {
           "id": "q2",
-          "prompt": "개미는 베짱이를 ( ) 맞이함.",
-          "answerText": "따뜻하게",
-          "answerMatchMode": "EXACT",
+          "prompt": "베짱이가 여름에 한 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "나무 그늘에서",
+            "노래만 불렀습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 14,
-              "end": 18
+              "paragraphId": "p1",
+              "start": 64,
+              "end": 71
+            },
+            {
+              "paragraphId": "p1",
+              "start": 72,
+              "end": 81
             }
           ],
           "scoring": {
@@ -888,14 +904,41 @@
         },
         {
           "id": "q3",
-          "prompt": "베짱이는 지난 일을 ( )함.",
-          "answerText": "후회",
-          "answerMatchMode": "EXACT",
+          "prompt": "배고파진 베짱이가 한 일과 후회한 일을 모두 찾으시오.",
+          "answerTexts": [
+            "개미네 집 문을 두드린 베짱이",
+            "지난여름에 일하지 않은 것"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 75,
-              "end": 77
+              "start": 37,
+              "end": 53
+            },
+            {
+              "paragraphId": "p2",
+              "start": 56,
+              "end": 70
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "개미들이 배고픈 베짱이를 어떻게 맞아 주었는지 본문에서 찾으시오.",
+          "answerText": "따뜻하게 맞아 주었습니다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 14,
+              "end": 27
             }
           ],
           "scoring": {

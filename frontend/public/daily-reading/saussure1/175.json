@@ -474,25 +474,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "밖으로 나가는 무엇인가요?",
+          "prompt": "갑작스러운 사고나 불이 났을 때 안전하게 밖으로 나가는 행동을 무엇이라고 했는지 찾아 써 보세요",
           "answerText": "대피",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 35,
-              "end": 37
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 137,
-              "end": 139
-            }
+            {"paragraphId": "p1", "start": 35, "end": 37},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 137, "end": 139}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -503,15 +491,11 @@
         },
         {
           "id": "q2",
-          "prompt": "걸어 내려가는 곳?",
-          "answerText": "계단",
-          "answerMatchMode": "EXACT",
+          "prompt": "건물 밖으로 나갈 때 절대 타지 말아야 한다고 한 것은 무엇인지 찾아 써 보세요",
+          "answerText": "엘리베이터",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 107,
-              "end": 109
-            }
+            {"paragraphId": "p1", "start": 116, "end": 121}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -522,20 +506,27 @@
         },
         {
           "id": "q3",
-          "prompt": "위험 없는 무엇한 곳인가요?",
-          "answerText": "안전",
-          "answerMatchMode": "EXACT",
+          "prompt": "코와 입을 막고 자세를 낮추어 이동할 때 사용하라고 한 물건은 무엇인지 찾아 써 보세요",
+          "answerText": "젖은 수건",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 19,
-              "end": 21
-            },
-            {
-              "paragraphId": "p2",
-              "start": 103,
-              "end": 105
-            }
+            {"paragraphId": "p1", "start": 135, "end": 137},
+            {"paragraphId": "p1", "start": 138, "end": 140}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "학교나 공공장소에서 대피할 때 미리 확인해 두는 습관을 길러야 한다고 한 표시는 무엇인지 찾아 써 보세요",
+          "answerText": "비상구",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 54, "end": 57}
           ],
           "scoring": {
             "correctDeltaSec": 10,

@@ -571,12 +571,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "시장 전체의 효율성을 떨어뜨릴 수 있다고 한 정보 차이를 가리키는 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 215
+              "start": 173,
+              "end": 179
+            },
+            {
+              "paragraphId": "p2",
+              "start": 128,
+              "end": 134
+            },
+            {
+              "paragraphId": "p6",
+              "start": 18,
+              "end": 24
             }
           ],
           "scoring": {
@@ -585,16 +595,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "시장 거래 이론은 종종 거래 당사자가 필요한 정보를 충분히 알고 있다고 가정하지만, 현실에서는 정보 취득 비용과 전문성의 차이 때문에 한쪽이 더 많은 정보를 가진 경우가 흔하다. 판매자는 상품의 질을 더 잘 알고, 보험 가입자는 자신의 건강 상태를 더 잘 알며, 구직자는 자신의 능력을 더 정확히 안다. 이런 정보 비대칭은 단순한 불편을 넘어서 시장 전체의 효율성을 떨어뜨릴 수 있다."
+          "answerText": "정보 비대칭"
         },
         {
           "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "1문단에서 한쪽이 더 많은 정보를 가진 경우의 예를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 183
+              "paragraphId": "p1",
+              "start": 100,
+              "end": 118
+            },
+            {
+              "paragraphId": "p1",
+              "start": 120,
+              "end": 145
+            },
+            {
+              "paragraphId": "p1",
+              "start": 147,
+              "end": 168
             }
           ],
           "scoring": {
@@ -602,17 +622,26 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "정보가 부족한 쪽은 상대의 질을 정확히 판별하지 못하므로 평균적인 조건을 기준으로 거래하게 된다. 이때 우수한 상대는 자신이 정당한 평가를 받지 못한다고 느껴 시장에서 이탈하고, 상대적으로 불리한 유형이 더 많이 남는다. 이렇게 정보 비대칭 때문에 바람직하지 않은 상대가 거래에 더 많이 참여하게 되는 현상을 역선택이라고 한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "판매자는 상품의 질을 더 잘 알고",
+            "보험 가입자는 자신의 건강 상태를 더 잘 알며",
+            "구직자는 자신의 능력을 더 정확히 안다"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "prompt": "바람직하지 않은 상대가 거래에 더 많이 참여하게 되는 현상을 가리키는 말을 찾으시오.",
           "answerRanges": [
             {
+              "paragraphId": "p2",
+              "start": 173,
+              "end": 176
+            },
+            {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 183
+              "start": 7,
+              "end": 10
             }
           ],
           "scoring": {
@@ -621,16 +650,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "보험 시장은 역선택을 설명할 때 자주 거론된다. 보험사가 가입자의 위험 수준을 구별하지 못하고 평균 위험을 바탕으로 보험료를 책정하면, 건강한 가입자는 보험료가 지나치게 높다고 느껴 빠져나가기 쉽다. 반대로 위험이 큰 가입자는 계속 남게 되어 보험사의 실제 손해율이 높아지고, 결국 보험료가 다시 오르는 악순환이 생길 수 있다."
+          "answerText": "역선택"
         },
         {
           "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
+          "prompt": "보험 시장에서 평균 위험으로 보험료를 책정할 때 나타나는 두 결과를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 189
+              "paragraphId": "p3",
+              "start": 76,
+              "end": 110
+            },
+            {
+              "paragraphId": "p3",
+              "start": 116,
+              "end": 153
             }
           ],
           "scoring": {
@@ -638,17 +672,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 문제를 줄이는 첫 번째 방법이 신호 발송이다. 정보를 더 많이 가진 쪽이 자신의 우수한 특성을 상대에게 보여 주기 위해 일정한 비용을 감수하며 단서를 제공하는 방식이다. 학위, 자격증, 품질 보증 기간, 환불 제도처럼 모방 비용이 큰 신호는 좋은 유형에게는 유리하고 나쁜 유형에게는 부담이 되므로, 시장에서 구별의 기준이 될 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "건강한 가입자는 보험료가 지나치게 높다고 느껴 빠져나가기 쉽다",
+            "위험이 큰 가입자는 계속 남게 되어 보험사의 실제 손해율이 높아지고"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "정보를 더 많이 가진 쪽이 비용을 감수하며 단서를 제공하는 방법의 이름을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 193
+              "paragraphId": "p4",
+              "start": 19,
+              "end": 24
+            },
+            {
+              "paragraphId": "p6",
+              "start": 128,
+              "end": 133
             }
           ],
           "scoring": {
@@ -657,16 +699,59 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "두 번째 방법은 선별이다. 이번에는 정보가 부족한 쪽이 여러 조건의 상품이나 계약을 설계해 상대가 스스로 유형을 드러내게 만든다. 보험사가 보장 범위와 자기 부담금을 달리한 상품을 여러 개 제시하거나, 통신사가 사용량에 따라 요금제를 나누는 것이 대표적이다. 상대는 자신에게 유리한 상품을 고르는 과정에서 자신의 특성을 간접적으로 드러내게 된다."
+          "answerText": "신호 발송"
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "4문단에서 모방 비용이 큰 신호의 예를 모두 찾으시오.",
           "answerRanges": [
             {
+              "paragraphId": "p4",
+              "start": 97,
+              "end": 99
+            },
+            {
+              "paragraphId": "p4",
+              "start": 101,
+              "end": 104
+            },
+            {
+              "paragraphId": "p4",
+              "start": 106,
+              "end": 114
+            },
+            {
+              "paragraphId": "p4",
+              "start": 116,
+              "end": 121
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "학위",
+            "자격증",
+            "품질 보증 기간",
+            "환불 제도"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "정보가 부족한 쪽이 조건을 설계해 상대가 스스로 유형을 드러내게 만드는 방법의 이름을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 9,
+              "end": 11
+            },
+            {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 178
+              "start": 135,
+              "end": 137
             }
           ],
           "scoring": {
@@ -675,7 +760,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "오늘날에는 평판과 리뷰 시스템도 정보 비대칭을 완화하는 장치로 기능한다. 과거 거래의 평가가 축적되면 처음 만나는 상대에 대해서도 일정 수준의 정보를 추정할 수 있기 때문이다. 결국 시장이 안정적으로 작동하려면 가격만이 아니라, 신호 발송과 선별, 평판 형성처럼 정보 격차를 줄이는 제도적 장치가 함께 마련되어야 한다."
+          "answerText": "선별"
+        },
+        {
+          "id": "q8",
+          "prompt": "처음 만나는 상대에 대해서도 일정 수준의 정보를 추정할 수 있는 이유를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 41,
+              "end": 97
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "과거 거래의 평가가 축적되면 처음 만나는 상대에 대해서도 일정 수준의 정보를 추정할 수 있기 때문이다"
         }
       ]
     }

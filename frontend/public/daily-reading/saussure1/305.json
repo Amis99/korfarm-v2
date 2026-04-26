@@ -396,29 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "글의 알맹이를 간추림?",
-          "answerText": "요약",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서 가장 중심이 되는 알맹이를 뜻하는 두 글자 낱말을 찾아 적어 보세요",
+          "answerText": "핵심",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 31,
-              "end": 33
-            },
-            {
-              "paragraphId": "p1",
-              "start": 43,
-              "end": 45
-            },
-            {
-              "paragraphId": "p2",
-              "start": 6,
-              "end": 8
-            },
-            {
-              "paragraphId": "p2",
-              "start": 131,
-              "end": 133
+              "start": 11,
+              "end": 13
             }
           ],
           "scoring": {
@@ -430,19 +415,19 @@
         },
         {
           "id": "q2",
-          "prompt": "글이 담고 있는 정보?",
-          "answerText": "내용",
-          "answerMatchMode": "EXACT",
+          "prompt": "긴 글을 읽고 핵심 내용만을 간추려 정리하는 일을 무엇이라고 하는지 글에서 찾아 적어 보세요",
+          "answerText": "요약하기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 14,
-              "end": 16
+              "start": 31,
+              "end": 35
             },
             {
-              "paragraphId": "p2",
-              "start": 61,
-              "end": 63
+              "paragraphId": "p1",
+              "start": 43,
+              "end": 47
             }
           ],
           "scoring": {
@@ -454,19 +439,33 @@
         },
         {
           "id": "q3",
-          "prompt": "생각을 담은 글 마디?",
-          "answerText": "문장",
-          "answerMatchMode": "EXACT",
+          "prompt": "글을 읽고 그 뜻을 알아내는 능력을 뜻하는 두 글자 낱말을 글에서 찾아 적어 보세요",
+          "answerText": "독해",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 92,
+              "end": 94
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "요약하기를 잘하면 어떤 좋은 점이 있다고 글에서 말했는지 한 가지 적어 보세요",
+          "answerText": "글쓴이가 전하려는 가장 중요한 생각이 무엇인지 명확하게 파악할 수 있음",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 103,
-              "end": 105
-            },
-            {
-              "paragraphId": "p2",
-              "start": 28,
-              "end": 30
+              "start": 53,
+              "end": 91
             }
           ],
           "scoring": {

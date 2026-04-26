@@ -747,29 +747,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "국가나 기업의 기후 대응 책임을 묻는 재판을 무엇이라고 하나요?",
-          "answerText": "기후 소송",
+          "prompt": "기후 소송의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "국가나 기업이 기후 위기에 제대로 대응하지 않는다며 책임을 묻는 재판",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p2",
-              "start": 8,
-              "end": 13
-            },
-            {
-              "paragraphId": "p3",
-              "start": 22,
-              "end": 27
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 5
+              "start": 7,
+              "end": 45
             }
           ],
           "scoring": {
@@ -780,36 +765,21 @@
         },
         {
           "id": "q2",
-          "prompt": "사람들이 부족하다고 주장한 감축 목표의 대상은 무엇인가요?",
-          "answerText": "온실가스",
-          "answerMatchMode": "ANY",
+          "prompt": "사람들이 부족하다고 주장한 목표와 위협받는 권리를 모두 찾으시오.",
+          "answerTexts": [
+            "온실가스 감축 목표",
+            "미래 세대의 생명권"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 54,
-              "end": 58
+              "end": 64
             },
             {
-              "paragraphId": "p2",
-              "start": 50,
-              "end": 54
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "기후 위기로 위협받는다고 한 미래 세대의 권리는 무엇인가요?",
-          "answerText": "생명권",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
               "paragraphId": "p1",
-              "start": 77,
+              "start": 70,
               "end": 80
             }
           ],
@@ -820,15 +790,33 @@
           "revealOnWrong": true
         },
         {
+          "id": "q3",
+          "prompt": "네덜란드 판결이 인정한 국가의 의무를 찾으시오.",
+          "answerText": "시민의 건강과 안전을 보호할 국가의 의무",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 76,
+              "end": 98
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q4",
-          "prompt": "우리나라 청소년들이 기후 소송을 제기한 기관은 어디인가요?",
-          "answerText": "헌법 재판소",
+          "prompt": "우리나라 청소년들이 기후 소송을 제기한 이유를 찾으시오.",
+          "answerText": "미래를 살아갈 자신들의 기본권이 침해당하고 있다는 이유",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 14,
-              "end": 20
+              "start": 35,
+              "end": 65
             }
           ],
           "scoring": {
@@ -839,14 +827,14 @@
         },
         {
           "id": "q5",
-          "prompt": "청소년들이 침해당한다고 주장한 자신의 권리는 무엇인가요?",
-          "answerText": "기본권",
+          "prompt": "기후 소송의 목적을 찾으시오.",
+          "answerText": "정책을 바꾸고 실질적인 행동을 이끌어내려는 목적",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 48,
-              "end": 51
+              "paragraphId": "p4",
+              "start": 37,
+              "end": 63
             }
           ],
           "scoring": {

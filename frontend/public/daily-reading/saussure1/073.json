@@ -552,43 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "신선한 ( )가 필요해요.",
-          "answerText": "공기",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 13,
-              "end": 15
-            },
-            {
-              "paragraphId": "p1",
-              "start": 56,
-              "end": 58
-            },
-            {
-              "paragraphId": "p1",
-              "start": 71,
-              "end": 73
-            },
-            {
-              "paragraphId": "p2",
-              "start": 123,
-              "end": 125
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "( )를 위해 창문 엶.",
+          "prompt": "지문에서 창문을 열어 나쁜 공기를 내보내고 맑은 공기를 들이는 일을 가리키는 단어를 찾아 보세요.",
           "answerText": "환기",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -609,10 +575,48 @@
           "revealOnWrong": true
         },
         {
+          "id": "q2",
+          "prompt": "기분이 깨끗하고 시원해지는 느낌을 가리키는 단어를 지문에서 찾아 보세요.",
+          "answerText": "상쾌",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 80,
+              "end": 82
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q3",
-          "prompt": "( )한 환경을 만들어요.",
+          "prompt": "지문에 따르면 환기를 잘하면 머리가 어떻게 된다고 했나요? 그 결과를 나타내는 표현을 찾아 보세요.",
+          "answerText": "맑아져서",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 94,
+              "end": 98
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "모두가 즐겁게 생활할 수 있는 환경을 표현한 단어로, '편안하고 기분 좋다'는 뜻의 단어를 지문에서 찾아 보세요.",
           "answerText": "쾌적",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",

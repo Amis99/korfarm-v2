@@ -396,35 +396,15 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "주인공 작은 곰의 이름?",
+          "prompt": "케이크를 배달하기 위해 숲속을 누비는 작은 곰의 이름을 찾아보세요",
           "answerText": "포근이",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 22,
-              "end": 25
-            },
-            {
-              "paragraphId": "p1",
-              "start": 121,
-              "end": 124
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p2",
-              "start": 92,
-              "end": 95
-            },
-            {
-              "paragraphId": "p2",
-              "start": 131,
-              "end": 134
-            }
+            {"paragraphId": "p1", "start": 22, "end": 25},
+            {"paragraphId": "p1", "start": 121, "end": 124},
+            {"paragraphId": "p2", "start": 0, "end": 3},
+            {"paragraphId": "p2", "start": 92, "end": 95},
+            {"paragraphId": "p2", "start": 131, "end": 134}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -435,30 +415,12 @@
         },
         {
           "id": "q2",
-          "prompt": "맛있고 달콤한 빵?",
-          "answerText": "케이크",
-          "answerMatchMode": "EXACT",
+          "prompt": "어떤 일을 풀어 가는 데 도움이 되는 실마리를 가리키는 두 글자 낱말을 찾아보세요",
+          "answerText": "힌트",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 43,
-              "end": 46
-            },
-            {
-              "paragraphId": "p1",
-              "start": 56,
-              "end": 59
-            },
-            {
-              "paragraphId": "p1",
-              "start": 126,
-              "end": 129
-            },
-            {
-              "paragraphId": "p2",
-              "start": 153,
-              "end": 156
-            }
+            {"paragraphId": "p1", "start": 146, "end": 148},
+            {"paragraphId": "p2", "start": 104, "end": 106}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -469,25 +431,27 @@
         },
         {
           "id": "q3",
-          "prompt": "귀가 긴 숲속 동물?",
-          "answerText": "토끼",
-          "answerMatchMode": "EXACT",
+          "prompt": "포근이가 토끼들을 발견할 때 나온 흉내 내는 말 두 가지(코로 냄새 맡는 ◯◯거리며, 토끼들이 잠자는 ◯◯거리는)를 모두 찾아보세요",
+          "answerText": "킁킁, 쌔근",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 50,
-              "end": 52
-            },
-            {
-              "paragraphId": "p2",
-              "start": 65,
-              "end": 67
-            },
-            {
-              "paragraphId": "p2",
-              "start": 136,
-              "end": 138
-            }
+            {"paragraphId": "p2", "start": 5, "end": 7},
+            {"paragraphId": "p2", "start": 70, "end": 72}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "쪽지가 가리킨 '가장 따뜻한 ◯◯이 느껴지는 곳'에서 빈칸에 들어갈 두 글자 낱말을 찾아보세요",
+          "answerText": "숨결",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 79, "end": 81}
           ],
           "scoring": {
             "correctDeltaSec": 10,

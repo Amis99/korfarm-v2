@@ -569,114 +569,188 @@
     },
     "confirm": {
       "questions": [
-        {
-          "id": "q1",
-          "prompt": "중심 대상은 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 75,
-              "end": 87
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q1",
+              "prompt":  "독서 주간은 어떤 행사라고 설명되는가?",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  34,
+                                       "end":  59
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "학생들이 책을 더 가까이 느끼도록 하려는 행사"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "유익한 행사라서 누구나"
-        },
-        {
-          "id": "q2",
-          "prompt": "무엇까지 진행되며 첫째 날에는 작가 강연이 열린다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 13
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q2",
+              "prompt":  "독서 주간을 과하게 긍정적으로 평가한 표현은 무엇인가? 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  63,
+                                       "end":  69
+                                   },
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  70,
+                                       "end":  74
+                                   },
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  75,
+                                       "end":  78
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "매우 뜻깊고",
+                                  "재미있고",
+                                  "유익한"
+                              ]
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "행사는 월요일부터 금요일"
-        },
-        {
-          "id": "q3",
-          "prompt": "둘째 날에는 책 교환 장터가 열리는데, 사용하지 않는 책을 무엇 수 있다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 33,
-              "end": 45
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q3",
+              "prompt":  "작가 강연이 열릴 수 있는 장소 표현은 무엇인가? 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  51,
+                                       "end":  56
+                                   },
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  66,
+                                       "end":  72
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "체육관에서",
+                                  "시청각실에서"
+                              ]
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "가져오지 않아도 참여할"
-        },
-        {
-          "id": "q4",
-          "prompt": "수요일 독서 퀴즈는 전 무엇로 학년별 문제 수준 차이는 크게 두지 않으려 한다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 13,
-              "end": 25
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q4",
+              "prompt":  "좌석 수가 많지 않을 때 적용될 수 있는 입장 방식은 무엇인가?",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  145,
+                                       "end":  148
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "선착순"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학년이 동시에 참여하므"
-        },
-        {
-          "id": "q5",
-          "prompt": "글에서 설명한 것은 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 34,
-              "end": 47
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q5",
+              "prompt":  "책을 가져오지 않은 학생은 무엇을 먼저 할 수 있는가?",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p3",
+                                       "start":  64,
+                                       "end":  82
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "다른 학생의 책을 먼저 살펴본 뒤"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "정해지지 않았으므로 중앙"
-        },
-        {
-          "id": "q6",
-          "prompt": "이번 독서 주간은 책 읽기의 즐거움을 알리는 무엇에도 도움이 될 수 있다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 25,
-              "end": 42
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q6",
+              "prompt":  "전 학년이 동시에 참여하므로 크게 두지 않으려는 것은 무엇인가?",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p4",
+                                       "start":  27,
+                                       "end":  39
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "학년별 문제 수준 차이"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "행사이면서 동시에 학교생활기록부"
-        }
+          {
+              "id":  "q7",
+              "prompt":  "정답 개수가 같을 때 우선할지 검토하는 기준 후보는 무엇인가? 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p4",
+                                       "start":  133,
+                                       "end":  152
+                                   },
+                                   {
+                                       "paragraphId":  "p4",
+                                       "start":  160,
+                                       "end":  176
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "독서 감상문을 더 성실하게 쓴 학급",
+                                  "제한 시간을 더 짧게 쓴 개인"
+                              ]
+          },
+          {
+              "id":  "q8",
+              "prompt":  "학급별 서평 전시 장소 후보는 무엇인가? 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  45,
+                                       "end":  50
+                                   },
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  53,
+                                       "end":  59
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "중앙 현관",
+                                  "도서관 복도"
+                              ]
+          }
       ]
     }
   }

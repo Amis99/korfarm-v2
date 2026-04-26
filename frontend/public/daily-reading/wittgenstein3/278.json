@@ -571,12 +571,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 글을 쓰게 된 문제의식이나 제안 배경을 어떻게 밝히는가?",
+          "prompt": "독서 토론회를 함께 여는 주체를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 246
+              "start": 14,
+              "end": 20
+            },
+            {
+              "paragraphId": "p1",
+              "start": 22,
+              "end": 25
             }
           ],
           "scoring": {
@@ -584,17 +589,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "다음 달 우리 학교에서는 학생 자치회와 도서부가 함께 여는 독서 토론회가 처음으로 열릴 예정이다. 이번 행사는 단순히 책을 읽고 감상을 말하는 자리가 아니라, 한 권의 책을 두고 서로 다른 해석을 비교해 보는 방식으로 진행된다고 한다. 학교가 이런 토론회를 여는 이유는 학생들이 발표력과 읽기 능력을 같이 키울 수 있기 때문이라고 설명했다. 그런데 준비 과정에서 운영 방식에 대한 의견이 조금 나뉘고 있어서 아직 정리가 덜 된 부분도 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "학생 자치회",
+            "도서부"
+          ]
         },
         {
           "id": "q2",
-          "prompt": "2문단은 현재 상황이나 조사 내용을 어떤 방향으로 제시하는가?",
+          "prompt": "이번 행사가 감상 말하기가 아니라 어떤 방식으로 진행된다고 했는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 229
+              "paragraphId": "p1",
+              "start": 89,
+              "end": 119
             }
           ],
           "scoring": {
@@ -603,16 +611,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "현재 나온 기본안은 학년 구분 없이 참가자를 모집한 뒤, 같은 책을 읽은 학생들을 한 모둠으로 묶는 방식이다. 모둠마다 사회자 한 명과 기록 담당 한 명을 두고, 남은 학생들이 순서대로 발언하는 구조를 생각하고 있다. 다만 이 방식은 처음 참가하는 학생들에게는 발언 부담이 너무 클 수 있다는 말도 있었다. 그래서 사회자가 먼저 질문을 던지고 학생들이 짧게 답하는 방식으로 시작하자는 의견도 같이 나오고 있다."
+          "answerText": "한 권의 책을 두고 서로 다른 해석을 비교해 보는 방식"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 첫 개선안이나 핵심 근거를 무엇으로 설명하는가?",
+          "prompt": "학교가 이런 토론회를 여는 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 239
+              "paragraphId": "p1",
+              "start": 151,
+              "end": 181
             }
           ],
           "scoring": {
@@ -621,16 +629,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "토론 도서는 아직 두 권 후보가 남아 있다. 하나는 비교적 읽기 쉬운 청소년 소설이고, 다른 하나는 조금 더 어려운 사회 비평서인데, 담당 교사는 후자가 토론할 거리가 많다고 보았다. 그런데 학생들 쪽에서는 첫 행사인데 책이 너무 어렵다면 참여율이 떨어질 수 있다는 말을 했다. 그래서 도서를 한 권으로 정하기보다 모둠별로 선택하게 하는 방법도 잠깐 나왔지만, 그러면 진행이 복잡해질 것 같아서 이 부분은 다시 논의한다고 했다."
+          "answerText": "학생들이 발표력과 읽기 능력을 같이 키울 수 있기 때문"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 추가 제안이나 고려할 점을 어떤 이유와 함께 내놓는가?",
+          "prompt": "현재 나온 기본안에서 참가자를 모둠으로 묶는 방식을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 221
+              "paragraphId": "p2",
+              "start": 32,
+              "end": 58
             }
           ],
           "scoring": {
@@ -639,16 +647,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "운영 시간도 확정은 아니지만 지금은 점심시간과 방과 후를 나누어 생각하는 중이다. 점심시간에 하면 참여 문턱은 낮지만 토론이 충분히 이어지기 어렵고, 방과 후에 하면 깊이 있는 대화는 가능하지만 남는 학생만 참여하게 될 수 있다. 이 문제는 생각보다 중요한데도 아직 결론이 분명하지 않다. 한편 장소는 도서관 열람실 옆 세미나실이 유력한데, 공간이 좁아서 모둠 수를 많이 늘리기는 어려워 보인다."
+          "answerText": "같은 책을 읽은 학생들을 한 모둠으로 묶는 방식"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 실행 조건이나 예상되는 우려를 어떻게 따져 보는가?",
+          "prompt": "모둠마다 두기로 한 역할을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 224
+              "paragraphId": "p2",
+              "start": 67,
+              "end": 74
+            },
+            {
+              "paragraphId": "p2",
+              "start": 76,
+              "end": 85
             }
           ],
           "scoring": {
@@ -656,17 +669,82 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "행사를 더 원활하게 진행하려면 사전 질문지를 받는 방법도 필요해 보인다. 학생들이 책을 읽고 미리 인상 깊은 장면이나 논쟁이 될 만한 질문을 적어 내면, 사회자가 그것을 바탕으로 토론 순서를 짤 수 있기 때문이다. 그런데 이렇게 하면 자발성이 줄어든다는 반론도 있다. 또 기록 담당 학생이 토론 내용을 정리해 교내 신문이나 게시판에 간단히 공유하자는 계획도 있는데, 아직 누가 맡을지는 정하지 못했다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "사회자 한 명",
+            "기록 담당 한 명"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 결론과 요청을 어떤 방향으로 마무리하는가?",
+          "prompt": "토론 도서 후보로 남아 있는 두 종류를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 259
+              "paragraphId": "p3",
+              "start": 29,
+              "end": 45
+            },
+            {
+              "paragraphId": "p3",
+              "start": 56,
+              "end": 71
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "비교적 읽기 쉬운 청소년 소설",
+            "조금 더 어려운 사회 비평서"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "운영 시간 후보로 나누어 생각하는 때를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 20,
+              "end": 24
+            },
+            {
+              "paragraphId": "p4",
+              "start": 46,
+              "end": 50
+            },
+            {
+              "paragraphId": "p4",
+              "start": 26,
+              "end": 30
+            },
+            {
+              "paragraphId": "p4",
+              "start": 84,
+              "end": 88
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "점심시간",
+            "방과 후"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "사전 질문지를 받으면 사회자가 할 수 있다고 한 일을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 100,
+              "end": 116
             }
           ],
           "scoring": {
@@ -675,7 +753,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이번 독서 토론회는 아직 세부 운영안이 완전히 마무리된 것은 아니지만, 학교 안에서 읽기를 말하기와 연결해 보려는 시도라는 점에서 의미가 있다. 특히 발표를 잘하는 학생만 중심이 되는 행사가 아니라, 질문을 만들고 다른 사람의 해석을 듣는 경험까지 포함해야 한다는 의견이 많았다. 앞으로는 도서 선정, 시간 배치, 모둠 운영 방식이 더 정리되어야 할 것 같다. 첫 행사인 만큼 조금 미숙한 부분이 있더라도 실제 진행을 해 보면서 다음 방식도 고칠 수 있을 것이다."
+          "answerText": "토론 순서를 짤 수 있기 때문"
         }
       ]
     }

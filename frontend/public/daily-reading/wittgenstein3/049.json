@@ -571,12 +571,82 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 가획과 병서에 드러난 훈민정음 자음 체계라는 문법 주제를 어떤 배경에서 꺼내는가?",
+          "prompt": "1문단에서 중요한 개념으로 제시된 두 용어를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
+              "start": 144,
+              "end": 146
+            },
+            {
+              "paragraphId": "p2",
               "start": 0,
-              "end": 153
+              "end": 2
+            },
+            {
+              "paragraphId": "p2",
+              "start": 155,
+              "end": 157
+            },
+            {
+              "paragraphId": "p3",
+              "start": 38,
+              "end": 40
+            },
+            {
+              "paragraphId": "p3",
+              "start": 154,
+              "end": 156
+            },
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p5",
+              "start": 57,
+              "end": 59
+            },
+            {
+              "paragraphId": "p6",
+              "start": 80,
+              "end": 82
+            },
+            {
+              "paragraphId": "p1",
+              "start": 148,
+              "end": 150
+            },
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p4",
+              "start": 101,
+              "end": 103
+            },
+            {
+              "paragraphId": "p4",
+              "start": 128,
+              "end": 130
+            },
+            {
+              "paragraphId": "p5",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "paragraphId": "p5",
+              "start": 97,
+              "end": 99
+            },
+            {
+              "paragraphId": "p6",
+              "start": 101,
+              "end": 103
             }
           ],
           "scoring": {
@@ -584,17 +654,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "훈민정음의 자음 체계를 이해할 때 흔히 제자 원리를 한 번에 묶어 설명하지만, 실제로는 기본자와 그것을 확장하는 방식이 구분되어 있다. 특히 자음 체계를 세밀하게 파악하려면 기본자에서 어떤 원리로 다른 글자가 파생되는지 살펴보아야 한다. 이때 중요한 개념이 가획과 병서이다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "가획",
+            "병서"
+          ]
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 판별 기준이나 기본 원리를 어떻게 설명하는가?",
+          "prompt": "가획의 뜻을 설명한 문장을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 190
+              "end": 32
             }
           ],
           "scoring": {
@@ -603,16 +676,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "가획은 기본자에 획을 더해 새로운 자음을 만드는 방식이다. 예를 들어 ㄱ, ㄷ, ㅂ, ㅈ과 같은 기본자에 획이 더해져 ㅋ, ㅌ, ㅍ, ㅊ이 만들어진다. 여기서 획을 더한다는 것은 단순한 모양 변화가 아니라, 소리의 성질이 더 강해지는 차이를 문자 체계 안에 반영한 것이다. 즉 가획은 음성적 차이를 시각적으로 조직하는 장치라고 볼 수 있다."
+          "answerText": "가획은 기본자에 획을 더해 새로운 자음을 만드는 방식이다."
         },
         {
           "id": "q3",
-          "prompt": "3문단은 해당 문법 현상의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "획이 더해져 만들어지는 자음의 예시 묶음을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 201
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 76
             }
           ],
           "scoring": {
@@ -621,16 +694,34 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 체계에서 기본자는 발음 기관의 본뜬 모양이라는 설명과 연결되고, 가획자는 그 기본적인 조음 위치는 유지한 채 다른 음성 특징을 더하는 방식으로 이해된다. 따라서 ㄱ과 ㅋ, ㄷ과 ㅌ은 서로 전혀 다른 계열의 소리가 아니라, 같은 계열 안에서 성질이 확장된 관계로 파악된다. 가획은 훈민정음이 자음을 낱낱이 나열한 것이 아니라 체계적으로 배열했음을 보여 준다."
+          "answerText": "ㅋ, ㅌ, ㅍ, ㅊ"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 구별점이나 추가 조건을 어떻게 드러내는가?",
+          "prompt": "ㄱ과 ㅋ, ㄷ과 ㅌ의 관계를 설명한 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 126,
+              "end": 146
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "같은 계열 안에서 성질이 확장된 관계"
+        },
+        {
+          "id": "q5",
+          "prompt": "병서의 뜻을 설명한 문장을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 0,
-              "end": 179
+              "end": 55
             }
           ],
           "scoring": {
@@ -639,34 +730,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "병서는 같은 자음을 나란히 쓰거나 서로 관련된 자음을 겹쳐 써서 새로운 소릿값을 나타내는 방식이다. 현대국어의 된소리 표기인 ㄲ, ㄸ, ㅃ, ㅆ, ㅉ을 떠올리기 쉽지만, 중세국어의 병서는 지금보다 더 넓은 기능을 가졌다. 그래서 병서를 단순히 '쌍자음 표기'로만 이해하면 당시 문자 운용의 범위를 충분히 설명하지 못한다."
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단은 해석상의 주의점이나 효과를 어떤 방향으로 설명하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 194
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "가획과 병서는 모두 기본자를 바탕으로 자음 체계를 넓혀 간다는 공통점이 있지만, 작동 방식은 다르다. 가획은 획을 덧붙여 계열 내부의 소리 차이를 드러내는 데 초점이 있고, 병서는 자음의 결합이나 중첩을 통해 다른 음성적 효과를 표지하는 데 무게가 있다. 따라서 같은 확장 방식처럼 보여도 둘은 문자 형성과 음운 해석에서 서로 다른 층위를 가진다."
+          "answerText": "병서는 같은 자음을 나란히 쓰거나 서로 관련된 자음을 겹쳐 써서 새로운 소릿값을 나타내는 방식이다."
         },
         {
           "id": "q6",
-          "prompt": "6문단은 가획과 병서에 드러난 훈민정음 자음 체계라는 문법 주제의 의미를 어떤 관점에서 정리하는가?",
+          "prompt": "현대국어의 된소리 표기 예시 묶음을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 194
+              "paragraphId": "p4",
+              "start": 70,
+              "end": 83
             }
           ],
           "scoring": {
@@ -675,7 +748,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 훈민정음 자음 체계의 정교함은 기본자 몇 개를 만든 데 있지 않고, 그 기본자를 어떻게 확장해 서로 관련된 소리들을 묶어 냈는가에 있다. 가획은 자음 계열의 질서를 드러내고, 병서는 자음 운용의 또 다른 가능성을 보여 준다. 이 둘을 구분해서 보면 훈민정음은 단순한 글자 목록이 아니라 음성 구조를 분석해 반영한 문자 체계로 이해할 수 있다."
+          "answerText": "ㄲ, ㄸ, ㅃ, ㅆ, ㅉ"
+        },
+        {
+          "id": "q7",
+          "prompt": "가획과 병서의 작동 방식 차이를 보여 주는 핵심 표현을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 61,
+              "end": 67
+            },
+            {
+              "paragraphId": "p5",
+              "start": 101,
+              "end": 112
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "획을 덧붙여",
+            "자음의 결합이나 중첩"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "훈민정음을 어떻게 이해할 수 있다고 결론짓는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 163,
+              "end": 183
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "음성 구조를 분석해 반영한 문자 체계"
         }
       ]
     }

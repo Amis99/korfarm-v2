@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"인플레이션과 감가상각의 실질 가치\"에 해당하는 부분은 어디인가요?",
+          "prompt": "법인세가 기준으로 삼는 금액은 무엇인가요?",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 168
+              "start": 20,
+              "end": 33
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "법인세는 기업이 일정 기간 벌어들인 수입에서 비용을 뺀 금액을 기준으로 부과된다. 이때 감가상각은 기계나 설비처럼 오래 쓰는 자산의 가치 감소분을 비용으로 나누어 반영하는 절차다. 감가상각이 비용으로 인정되면 과세 대상 소득이 줄어들기 때문에, 기업이 실제로 부담하는 세금 규모에도 직접 영향을 준다."
+          "answerText": "수입에서 비용을 뺀 금액"
         },
         {
           "id": "q2",
-          "prompt": "\"인플레이션과 감가상각의 실질 가치\"에 해당하는 부분은 어디인가요?",
+          "prompt": "감가상각의 뜻에 해당하는 부분을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 173
+              "paragraphId": "p1",
+              "start": 64,
+              "end": 98
             }
           ],
           "scoring": {
@@ -603,16 +603,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "문제는 세법상 감가상각이 대개 자산을 처음 취득할 때의 가격, 곧 역사적 비용을 기준으로 계산된다는 점이다. 물가가 안정적이라면 이 방식이 큰 문제를 일으키지 않을 수 있다. 그러나 시간이 지나 자산의 대체 가격이 크게 오르면, 과거 가격을 기준으로 잡은 감가상각은 현재 가치 감소분을 충분히 반영하지 못한다."
+          "answerText": "오래 쓰는 자산의 가치 감소분을 비용으로 나누어 반영하는 절차"
         },
         {
           "id": "q3",
-          "prompt": "이 경우 장부상 비용은 잡히지만, 무엇 하락을 충분히 따라가지 못한다?",
+          "prompt": "감가상각이 비용으로 인정되면 무엇이 줄어드나요?",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 152,
-              "end": 164
+              "paragraphId": "p1",
+              "start": 117,
+              "end": 131
             }
           ],
           "scoring": {
@@ -621,16 +621,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "실질적으로는 설비 가치"
+          "answerText": "과세 대상 소득이 줄어들기"
         },
         {
           "id": "q4",
-          "prompt": "\"인플레이션과 감가상각의 실질 가치\"에 해당하는 부분은 어디인가요?",
+          "prompt": "세법상 감가상각이 대개 기준으로 삼는 것을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 145
+              "paragraphId": "p2",
+              "start": 17,
+              "end": 43
             }
           ],
           "scoring": {
@@ -639,16 +639,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이처럼 인플레이션이 진행되면 감가상각의 실질 가치가 줄어든다. 비용으로 인정되는 금액이 현실보다 작아지므로 과세 대상 소득은 실제보다 더 크게 계산될 수 있다. 결국 기업은 명목상으로는 같은 규칙을 적용받더라도, 실질적으로는 더 무거운 세금 부담을 지게 된다."
+          "answerText": "자산을 처음 취득할 때의 가격, 곧 역사적 비용"
         },
         {
           "id": "q5",
-          "prompt": "\"인플레이션과 감가상각의 실질 가치\"에 해당하는 부분은 어디인가요?",
+          "prompt": "설비 예시에서 과거 가격과 현재 다시 살 때 드는 금액을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 180
+              "paragraphId": "p3",
+              "start": 22,
+              "end": 30
+            },
+            {
+              "paragraphId": "p3",
+              "start": 49,
+              "end": 58
             }
           ],
           "scoring": {
@@ -656,17 +661,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 현상은 기업의 투자 판단에도 영향을 준다. 세후 이익이 기대보다 줄어들면 기업은 새로운 설비 투자에 소극적이 될 수 있고, 오래된 설비를 제때 교체하지 못할 가능성도 커진다. 그래서 정부는 인플레이션이 큰 시기에는 감가상각 허용 폭을 넓히거나, 세법상 내용 연수를 조정하는 방식으로 실질 부담을 완화하려고 하기도 한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "1억 원이었는데",
+            "1억 5천만 원이"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "\"인플레이션과 감가상각의 실질 가치\"에 해당하는 부분은 어디인가요?",
+          "prompt": "인플레이션 때 과세 대상 소득이 실제보다 더 크게 계산될 수 있는 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 181
+              "paragraphId": "p4",
+              "start": 35,
+              "end": 59
             }
           ],
           "scoring": {
@@ -675,7 +683,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정리하면 인플레이션은 단순히 물가만 올리는 것이 아니라 법인세의 실질 부담 구조도 바꾼다. 감가상각이 역사적 비용에 묶여 있을수록 그 차이는 커지고, 기업은 실제보다 높은 과세 대상 소득을 떠안을 수 있다. 따라서 인플레이션 상황에서 감가상각 제도를 어떻게 설계하느냐는 세금의 형평성과 투자 유인 모두에 중요한 문제가 된다."
+          "answerText": "비용으로 인정되는 금액이 현실보다 작아지므로"
+        },
+        {
+          "id": "q7",
+          "prompt": "세후 이익이 기대보다 줄어들면 기업은 무엇에 소극적이 될 수 있나요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 47,
+              "end": 56
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "새로운 설비 투자"
+        },
+        {
+          "id": "q8",
+          "prompt": "인플레이션 상황의 감가상각 제도 설계가 중요한 두 대상을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 151,
+              "end": 158
+            },
+            {
+              "paragraphId": "p6",
+              "start": 160,
+              "end": 165
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "세금의 형평성",
+            "투자 유인"
+          ]
         }
       ]
     }

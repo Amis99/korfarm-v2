@@ -583,19 +583,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "역사적 사실을 그림으로 남긴 것을 무엇이라고 하나요?",
-          "answerText": "기록화",
+          "prompt": "기록화가 글자만으로는 알기 힘든 무엇을 보여준다고 했나요?",
+          "answerText": "당시의 모습",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 3
+              "start": 39,
+              "end": 45
             }
           ],
           "scoring": {
@@ -606,14 +601,22 @@
         },
         {
           "id": "q2",
-          "prompt": "기록화가 주로 담아낸 대상 가운데 하나는 무엇인가요?",
-          "answerText": "왕실의 행사",
-          "answerMatchMode": "ANY",
+          "prompt": "기록화가 주로 담은 두 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "왕실의 행사",
+            "전쟁의 장면"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
               "end": 6
+            },
+            {
+              "paragraphId": "p2",
+              "start": 8,
+              "end": 14
             }
           ],
           "scoring": {
@@ -624,10 +627,18 @@
         },
         {
           "id": "q3",
-          "prompt": "기록화에서 참석자의 위치와 함께 자세히 표현한 것은 무엇인가요?",
-          "answerText": "복장",
-          "answerMatchMode": "ANY",
+          "prompt": "기록화에서 상세히 표현한 참석자 관련 요소를 모두 찾으시오.",
+          "answerTexts": [
+            "참석자의 위치",
+            "복장"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 24,
+              "end": 31
+            },
             {
               "paragraphId": "p2",
               "start": 33,
@@ -642,13 +653,13 @@
         },
         {
           "id": "q4",
-          "prompt": "후대에 중요한 자료가 된다고 한 기록화의 가치는 무엇인가요?",
-          "answerText": "역사적 자료",
+          "prompt": "이러한 그림은 후대에 어떤 자료가 된다고 했나요?",
+          "answerText": "중요한 역사적 자료",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 16,
+              "start": 12,
               "end": 22
             }
           ],
@@ -660,14 +671,14 @@
         },
         {
           "id": "q5",
-          "prompt": "기록화가 전달하려고 한 대상은 어떤 사실인가요?",
-          "answerText": "객관적인 사실",
+          "prompt": "기록화에서 화가의 개인적인 감정이 배제되는 이유를 나타내는 문장을 찾으시오.",
+          "answerText": "객관적인 사실을 있는 그대로 전달하기 위함이다.",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 25,
-              "end": 32
+              "end": 51
             }
           ],
           "scoring": {

@@ -559,55 +559,48 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "열심히 의학을 공부한 허준은 마침내 이곳에 들어가 임금님의 병을 고치는 의원이 되었어요. 이곳은 어디일까요?",
-          "answerText": "궁궐",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 84,
-              "end": 86
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 5,
-            "wrongDeltaSec": -2,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
+        "prompt": "허준이 어릴 때부터 가졌던 마음을 지문에서 찾으시오.",
+        "answerText": "아픈 사람들을 돕고 싶은 마음",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p1",
+            "start": 43,
+            "end": 59
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
         },
-        {
-          "id": "q2",
-          "prompt": "허준은 가난한 백성들이 산과 들에서 쉽게 구할 수 있는 이것으로 병을 치료하기를 바랐어요. 이것은 무엇일까요?",
-          "answerText": "약초",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 79,
-              "end": 81
-            },
-            {
-              "paragraphId": "p2",
-              "start": 115,
-              "end": 117
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 5,
-            "wrongDeltaSec": -2,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
+        "revealOnWrong": true
+      },
+      {
+        "id": "q2",
+        "prompt": "허준이 가난한 백성들이 무엇으로 병을 치료하기를 바랐는지 지문에서 찾으시오.",
+        "answerText": "가난한 백성들이 산과 들에서 쉽게 구할 수 있는 약초",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p2",
+            "start": 52,
+            "end": 81
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
         },
-        {
-          "id": "q3",
-          "prompt": "허준이 완성한 책으로 여러 가지 병의 증상과 치료법이 알기 쉽게 적혀 있는 훌륭한 의학 책의 이름은 무엇인가요?",
-          "answerText": "동의보감",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
+        "revealOnWrong": true
+      },
+      {
+        "id": "q3",
+        "prompt": "허준이 완성한 우리나라의 훌륭한 의학 책 이름을 지문에서 찾으시오.",
+        "answerText": "동의보감",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p3",
               "start": 30,
               "end": 34
             },
@@ -616,14 +609,31 @@
               "start": 39,
               "end": 43
             }
-          ],
-          "scoring": {
-            "correctDeltaSec": 5,
-            "wrongDeltaSec": -2,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
+        },
+        "revealOnWrong": true
+      },
+      {
+        "id": "q4",
+        "prompt": "동의보감에 적힌 내용을 지문에서 찾으시오.",
+        "answerText": "여러 가지 병의 증상과 치료법",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p3",
+            "start": 46,
+            "end": 62
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
+        },
+        "revealOnWrong": true
+      }
       ]
     }
   }

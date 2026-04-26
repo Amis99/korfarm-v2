@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "집과 ( )은 비슷한 뜻이에요.",
-          "answerText": "댁",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 비슷한말이 무엇인지 설명한 부분을 찾아 보세요.",
+          "answerText": "우리말에는 소리는 달라도 뜻이 비슷한 말이 있습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 36,
-              "end": 37
+              "start": 0,
+              "end": 28
             }
           ],
           "scoring": {
@@ -571,14 +571,29 @@
         },
         {
           "id": "q2",
-          "prompt": "생각을 ( )하게 나타냄.",
-          "answerText": "풍부",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 비슷한말의 예시로 든 낱말을 모두 찾아 보세요.",
+          "answerText": "집, 댁, 가르치다, 일깨워 주다",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 111,
-              "end": 113
+              "start": 31,
+              "end": 32
+            },
+            {
+              "paragraphId": "p1",
+              "start": 36,
+              "end": 37
+            },
+            {
+              "paragraphId": "p2",
+              "start": 1,
+              "end": 5
+            },
+            {
+              "paragraphId": "p2",
+              "start": 9,
+              "end": 15
             }
           ],
           "scoring": {
@@ -590,24 +605,38 @@
         },
         {
           "id": "q3",
-          "prompt": "문맥에 어울리는 ( ) 선택.",
-          "answerText": "낱말",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 비슷한말을 많이 알면 좋은 점을 모두 찾아 보세요.",
+          "answerText": "비슷한말을 많이 알수록 생각을 풍부하게 나타내요, 국어 실력이 쑥쑥 자라며 글쓰기가 훨씬 쉬워집니다",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 94,
+              "end": 120
+            },
+            {
+              "paragraphId": "p2",
+              "start": 64,
+              "end": 91
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글의 앞뒤 흐름을 가리키는 뜻의 단어를 지문에서 찾아 보세요.",
+          "answerText": "문맥",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 44,
-              "end": 46
-            },
-            {
-              "paragraphId": "p2",
-              "start": 113,
-              "end": 115
-            },
-            {
-              "paragraphId": "p2",
-              "start": 126,
-              "end": 128
+              "start": 35,
+              "end": 37
             }
           ],
           "scoring": {

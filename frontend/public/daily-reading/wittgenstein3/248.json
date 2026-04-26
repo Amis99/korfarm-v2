@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "prompt": "동선의 뜻을 설명한 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 208
+              "start": 120,
+              "end": 138
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "건축물은 단순히 사람을 비나 더위로부터 보호하는 구조물이 아니다. 사람은 건축물 안에서 어디로 들어오고, 어디에 멈추며, 어떤 시선을 갖게 되는지를 따라 공간을 경험한다. 이때 중요한 것이 동선과 경계이다. 동선은 사람이 공간을 통과하는 길의 흐름을 뜻하고, 경계는 공간과 공간을 나누면서도 연결하는 장치이다. 건축은 이 둘을 조절함으로써 이용자의 감정과 행동을 조직한다."
+          "answerText": "사람이 공간을 통과하는 길의 흐름"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 핵심 원리나 기준을 어떻게 설명하는가?",
+          "prompt": "경계의 뜻을 설명한 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 224
+              "paragraphId": "p1",
+              "start": 149,
+              "end": 170
             }
           ],
           "scoring": {
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "동선은 단순한 이동 경로가 아니라 공간 사용의 질서를 만드는 장치다. 복도, 계단, 출입구, 시선이 열리는 방향은 이용자가 어느 순서로 공간을 인식할지를 미리 설정한다. 예를 들어 긴 진입 통로를 지나 넓은 로비에 도달하게 하면 개방감이 강조되고, 여러 번 꺾이는 동선을 두면 긴장이나 집중이 유도된다. 같은 면적의 건물이라도 동선을 어떻게 설계하느냐에 따라 이용자는 전혀 다른 공간 리듬을 경험한다."
+          "answerText": "공간과 공간을 나누면서도 연결하는 장치"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 그 원리의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "공간 리듬을 다르게 만드는 동선 설계 예시를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 220
+              "paragraphId": "p2",
+              "start": 101,
+              "end": 127
+            },
+            {
+              "paragraphId": "p2",
+              "start": 139,
+              "end": 150
             }
           ],
           "scoring": {
@@ -620,17 +625,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "경계 역시 벽처럼 공간을 막는 요소로만 이해해서는 부족하다. 경계는 안과 밖, 공적 공간과 사적 공간, 머무는 곳과 지나가는 곳을 구분하면서도 그 관계를 조절한다. 투명한 유리벽은 시각적 개방성을 주어 경계를 약하게 만들고, 낮은 단차나 기둥열은 완전히 닫지 않으면서 영역감을 부여한다. 즉 경계는 차단만 수행하는 것이 아니라, 어느 정도의 접근과 노출을 허용할지 정하는 조절 장치이기도 하다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "긴 진입 통로를 지나 넓은 로비에 도달하게 하면",
+            "여러 번 꺾이는 동선"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
+          "prompt": "긴 진입 통로 뒤 넓은 로비에 도달하게 할 때 강조되는 효과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 242
+              "paragraphId": "p2",
+              "start": 128,
+              "end": 137
             }
           ],
           "scoring": {
@@ -639,16 +647,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이런 점에서 건축 공간은 물리적으로만 존재하는 것이 아니라 사회적으로도 생산된다. 설계자는 법규와 기능, 관리의 편의에 따라 공간을 개념적으로 짜지만, 실제 이용자는 그 공간을 걸어 다니고 머물며 다른 방식으로 경험한다. 출입 통제를 강화한 로비는 관리자에게는 질서 있는 공간일 수 있지만, 이용자에게는 위축감을 주는 공간일 수 있다. 반대로 열린 중정이나 완만한 경계는 사람들 사이의 우연한 접촉을 늘려 소통의 장소가 되기도 한다."
+          "answerText": "개방감이 강조되고"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 이 주제의 효과나 쟁점을 어떤 방향으로 확장하는가?",
+          "prompt": "경계가 구분한다고 한 공간 관계를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 251
+              "paragraphId": "p3",
+              "start": 38,
+              "end": 42
+            },
+            {
+              "paragraphId": "p3",
+              "start": 44,
+              "end": 56
+            },
+            {
+              "paragraphId": "p3",
+              "start": 58,
+              "end": 71
             }
           ],
           "scoring": {
@@ -656,17 +674,26 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "건축물의 동선과 경계는 결국 권력과 경험의 관계를 드러낸다. 누가 쉽게 들어갈 수 있고, 누가 돌아서 가야 하며, 어디에서 오래 머물 수 있는가는 설계 속에서 이미 어느 정도 결정된다. 공공청사, 학교, 미술관 같은 공간에서 주 출입구의 위치, 대기 공간의 배치, 내부로 이어지는 시선의 방향은 이용자를 환대할 수도 있고 통제할 수도 있다. 그래서 건축은 중립적 배경이 아니라 사람의 움직임과 관계 맺는 방식을 조직하는 사회적 장치라고 볼 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "안과 밖",
+            "공적 공간과 사적 공간",
+            "머무는 곳과 지나가는 곳"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 앞선 논의를 어떤 의미로 정리하는가?",
+          "prompt": "유리벽과 낮은 단차나 기둥열이 경계에 주는 효과를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 250
+              "paragraphId": "p3",
+              "start": 113,
+              "end": 124
+            },
+            {
+              "paragraphId": "p3",
+              "start": 150,
+              "end": 159
             }
           ],
           "scoring": {
@@ -674,8 +701,63 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "좋은 건축은 동선과 경계를 통해 기능만 해결하는 데 그치지 않고, 이용자가 공간을 어떻게 느끼고 해석할지까지 고려한다. 너무 닫힌 경계는 공간을 경직되게 만들고, 지나치게 열린 동선은 방향 감각을 흐릴 수 있다. 따라서 설계자는 구조와 재료의 문제와 함께, 어떤 순서로 공간을 만나게 할지, 어떤 경계를 통해 관계를 만들지 고민해야 한다. 건축물의 공간 경험은 결국 벽 그 자체보다, 그 벽이 사람의 움직임과 시선을 어떻게 조직하느냐에서 결정된다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "경계를 약하게 만들고",
+            "영역감을 부여한다"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "출입 통제를 강화한 로비가 관리자와 이용자에게 각각 어떤 공간이 될 수 있는지 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 146,
+              "end": 154
+            },
+            {
+              "paragraphId": "p4",
+              "start": 170,
+              "end": 180
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "질서 있는 공간",
+            "위축감을 주는 공간"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "설계자가 구조와 재료의 문제와 함께 고민해야 할 내용을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 144,
+              "end": 161
+            },
+            {
+              "paragraphId": "p6",
+              "start": 163,
+              "end": 180
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "어떤 순서로 공간을 만나게 할지",
+            "어떤 경계를 통해 관계를 만들지"
+          ]
         }
       ]
     }

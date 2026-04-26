@@ -559,9 +559,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "돈이 없어서 물건을 서로 바꾸는 것을 무엇이라고 하나요?",
+          "prompt": "옛날에 돈이 없어서 물건을 서로 바꾸는 일을 지문에서 무엇이라고 했나요?",
           "answerText": "물물교환",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -578,9 +578,28 @@
         },
         {
           "id": "q2",
+          "prompt": "곡식이나 옷감을 돈처럼 사용하기 불편했던 이유를 지문에서 찾아 쓰세요.",
+          "answerText": "무겁고 상하기 쉬워서",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 67,
+              "end": 78
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
           "prompt": "조선 시대에 만들어진 동전으로, 둥근 모양에 네모난 구멍이 뚫려 있는 것은 무엇인가요?",
           "answerText": "상평통보",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -596,10 +615,10 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
+          "id": "q4",
           "prompt": "오늘날 동전뿐만 아니라 종이로 만들어 사용하는 돈을 무엇이라고 하나요?",
           "answerText": "지폐",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",

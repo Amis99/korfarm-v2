@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "중심 대상은 무엇인가요?",
+          "prompt": "조화옹이 낙은암 깊은 골을 누구를 위해 만들었다고 했나요?",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 45,
-              "end": 58
+              "start": 29,
+              "end": 34
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "빼어나고 경치도 뛰어나다"
+          "answerText": "날 위하여"
         },
         {
           "id": "q2",
-          "prompt": "핵심 개념은 무엇인가요?",
+          "prompt": "세속을 뜻하는 한자어를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 37,
-              "end": 49
+              "paragraphId": "p1",
+              "start": 81,
+              "end": 87
             }
           ],
           "scoring": {
@@ -603,15 +603,69 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "성인의 밝은 가르침이요"
+          "answerText": "진세(塵世)"
         },
         {
           "id": "q3",
-          "prompt": "주요 소재는 무엇인가요?",
+          "prompt": "성인의 밝은 가르침과 깊은 경계로 제시된 말을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 25,
+              "end": 35
+            },
+            {
+              "paragraphId": "p2",
+              "start": 50,
+              "end": 60
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "소장진퇴(消長進退)",
+            "낙천지명(樂天知命)"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "화자가 상대를 부르는 호명 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 56,
+              "start": 70,
+              "end": 72
+            },
+            {
+              "paragraphId": "p4",
+              "start": 15,
+              "end": 17
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "자네"
+        },
+        {
+          "id": "q5",
+          "prompt": "부귀를 좇는 사람들이 여름과 겨울에 하는 행동을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 44,
+              "end": 48
+            },
+            {
+              "paragraphId": "p3",
+              "start": 65,
               "end": 69
             }
           ],
@@ -620,53 +674,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "새벽에 대루원에 서성이니"
-        },
-        {
-          "id": "q4",
-          "prompt": "중요한 기준은 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 57,
-              "end": 68
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "펴고 누웠으니 편안한"
-        },
-        {
-          "id": "q5",
-          "prompt": "동지 밤눈 온 후에 더운 방에 이불 덮고 목침을 돋워 베고 해 돋도록 잠을 자니 무엇이 있을쏘냐?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 45,
-              "end": 57
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "편함도 편할시고 고단함"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "분주하며",
+            "서성이니"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "문단의 초점은 무엇인가요?",
+          "prompt": "편안한 거동을 아무도 겨룰 수 없다는 뜻의 반문을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 31,
-              "end": 44
+              "paragraphId": "p4",
+              "start": 75,
+              "end": 84
             }
           ],
           "scoring": {
@@ -675,7 +696,63 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "비기려면 만금인들 당할쏜"
+          "answerText": "그 누가 겨룰쏘냐"
+        },
+        {
+          "id": "q7",
+          "prompt": "동지 밤눈 온 뒤의 생활에 고단함이 없다는 뜻의 반문을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 54,
+              "end": 63
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "고단함이 있을쏘냐"
+        },
+        {
+          "id": "q8",
+          "prompt": "소박한 삶과 부귀한 삶을 대비하는 소재를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 46,
+              "end": 49
+            },
+            {
+              "paragraphId": "p6",
+              "start": 55,
+              "end": 58
+            },
+            {
+              "paragraphId": "p6",
+              "start": 66,
+              "end": 70
+            },
+            {
+              "paragraphId": "p6",
+              "start": 76,
+              "end": 78
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "보리밥",
+            "팔진미",
+            "헌 베옷",
+            "비단"
+          ]
         }
       ]
     }

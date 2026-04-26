@@ -598,64 +598,74 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "겨울잠 전에 몸속에 가득 채우는 것은?",
-          "answerText": "영양분",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
+        "prompt": "추운 겨울이 오면 동물들이 겨울잠에 빠지는 까닭을 지문에서 찾으시오.",
+        "answerText": "먹이를 구하기 힘들어진",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p1",
+            "start": 10,
+            "end": 22
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
+        },
+        "revealOnWrong": true
+      },
+      {
+        "id": "q2",
+        "prompt": "겨울잠을 자기 전에 동물들이 몸속에 가득 채워 두는 것을 지문에서 찾으시오.",
+        "answerText": "영양분",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p1",
               "start": 84,
               "end": 87
             }
-          ],
-          "scoring": {
-            "correctDeltaSec": 5,
-            "wrongDeltaSec": -2,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
         },
-        {
-          "id": "q2",
-          "prompt": "개구리와 뱀이 깊이 잠들며 낮추는 것은?",
-          "answerText": "체온",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 90,
-              "end": 92
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 5,
-            "wrongDeltaSec": -2,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
+        "revealOnWrong": true
+      },
+      {
+        "id": "q3",
+        "prompt": "개구리나 뱀이 죽은 듯이 깊은 잠에 빠질 때 어떻게 하는지 지문에서 찾으시오.",
+        "answerText": "체온을 낮춘 채",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p2",
+            "start": 90,
+            "end": 98
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
         },
-        {
-          "id": "q3",
-          "prompt": "다람쥐가 굴속에 모아두고 까먹는 것은?",
-          "answerText": "도토리",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 59,
-              "end": 62
-            },
-            {
-              "paragraphId": "p3",
-              "start": 63,
-              "end": 66
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 5,
-            "wrongDeltaSec": -2,
-            "eliminateWrongChoice": false
-          },
+        "revealOnWrong": true
+      },
+      {
+        "id": "q4",
+        "prompt": "다람쥐가 겨울잠을 자기 전에 굴속에 해 두는 일을 지문에서 찾으시오.",
+        "answerText": "먹이를 넉넉하게 모아 두고",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p3",
+            "start": 9,
+            "end": 23
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
+        },
           "revealOnWrong": true
         }
       ]

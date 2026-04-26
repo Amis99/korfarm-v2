@@ -1298,14 +1298,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "외삼촌이 어머니께 꺼낸 이야기는 무엇인가요?",
-          "answerText": "재혼",
+          "prompt": "외삼촌이 어머니께 꺼낸 이야기를 찾으시오.",
+          "answerText": "재혼에 대한 이야기",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 21,
-              "end": 23
+              "end": 31
             }
           ],
           "scoring": {
@@ -1316,13 +1316,13 @@
         },
         {
           "id": "q2",
-          "prompt": "어머니는 어떤 다짐을 하셨나요?",
-          "answerText": "평생 혼자 살겠다고",
+          "prompt": "어머니가 재혼 이야기를 거절하며 한 다짐을 찾으시오.",
+          "answerText": "돌아가신 아버지와 나를 위해서라도 평생 혼자 살겠다고",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 136,
+              "start": 117,
               "end": 146
             }
           ],
@@ -1334,24 +1334,14 @@
         },
         {
           "id": "q3",
-          "prompt": "그날 밤 어머니가 흘리신 것은 무엇인가요?",
-          "answerText": "눈물",
+          "prompt": "어머니의 눈물 속에 담긴 것으로 보였던 것을 찾으시오.",
+          "answerText": "많은 고민과 슬픔",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 29,
-              "end": 31
-            },
-            {
-              "paragraphId": "p3",
-              "start": 79,
-              "end": 81
-            },
-            {
-              "paragraphId": "p4",
-              "start": 8,
-              "end": 10
+              "start": 86,
+              "end": 95
             }
           ],
           "scoring": {
@@ -1362,14 +1352,14 @@
         },
         {
           "id": "q4",
-          "prompt": "어머니가 밤늦게까지 몰두한 일은 무엇인가요?",
-          "answerText": "바느질",
+          "prompt": "아저씨가 어머니의 눈물 이야기를 듣고 보인 반응을 찾으시오.",
+          "answerText": "몹시 당황하며 굳은 표정",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 83,
-              "end": 86
+              "paragraphId": "p4",
+              "start": 84,
+              "end": 97
             }
           ],
           "scoring": {
@@ -1380,24 +1370,22 @@
         },
         {
           "id": "q5",
-          "prompt": "두 사람을 이어 주던 공간으로 반복해서 언급되는 곳은 어디인가요?",
-          "answerText": "사랑방",
-          "answerMatchMode": "ANY",
+          "prompt": "어머니가 아저씨와 거리를 두며 멈춘 것과 열중한 일을 모두 찾으시오.",
+          "answerTexts": [
+            "반찬 심부름",
+            "바느질에만 열중"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 3
+              "paragraphId": "p5",
+              "start": 20,
+              "end": 26
             },
             {
-              "paragraphId": "p4",
-              "start": 33,
-              "end": 36
-            },
-            {
-              "paragraphId": "p4",
-              "start": 143,
-              "end": 146
+              "paragraphId": "p5",
+              "start": 83,
+              "end": 91
             }
           ],
           "scoring": {

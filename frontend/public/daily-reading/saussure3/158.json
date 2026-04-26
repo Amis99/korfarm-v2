@@ -557,14 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "자신이 잘났다고 생각하여 남을 얕보는 마음을 무엇이라 하나요?",
-          "answerText": "자만심이",
-          "answerMatchMode": "EXACT",
+          "prompt": "거북이가 목표를 향해 어떻게 나아간다고 했는지 찾으시오.",
+          "answerText": "한 걸음씩",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 25,
-              "end": 29
+              "paragraphId": "p1",
+              "start": 64,
+              "end": 69
             }
           ],
           "scoring": {
@@ -576,14 +576,22 @@
         },
         {
           "id": "q2",
-          "prompt": "싸움을 멈추고 다시 좋게 지내는 상태를 뜻하는 말은?",
-          "answerText": "화해하는",
-          "answerMatchMode": "EXACT",
+          "prompt": "토끼가 기회를 놓치게 된 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "남을 무시하고",
+            "방심하다가"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 30,
-              "end": 34
+              "paragraphId": "p2",
+              "start": 46,
+              "end": 53
+            },
+            {
+              "paragraphId": "p2",
+              "start": 54,
+              "end": 59
             }
           ],
           "scoring": {
@@ -595,14 +603,33 @@
         },
         {
           "id": "q3",
-          "prompt": "사람의 인격이나 의견을 소중하게 여기고 받드러 주는 마음은?",
-          "answerText": "존중하는",
-          "answerMatchMode": "EXACT",
+          "prompt": "글의 주제를 이해하는 제일 좋은 방법이라고 한 것을 찾으시오.",
+          "answerText": "인물의 마음을 읽는 것",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 94,
+              "end": 106
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "경주가 끝난 뒤 토끼와 거북이가 서로 무엇을 하며 화해했는지 찾으시오.",
+          "answerText": "악수하며",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 72,
-              "end": 76
+              "start": 25,
+              "end": 29
             }
           ],
           "scoring": {

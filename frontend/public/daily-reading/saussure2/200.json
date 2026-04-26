@@ -559,9 +559,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "위험한 동물이 나타나면 서로를 끝까지 지켜 주기로 굳게 한 것은 무엇인가요?",
+          "prompt": "두 사냥꾼이 위험한 동물이 나타나면 서로를 지켜 주기로 굳게 한 것은 무엇인가요?",
           "answerText": "약속",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -583,19 +583,14 @@
         },
         {
           "id": "q2",
-          "prompt": "곰을 보자마자 약속을 까맣게 잊고 한 사냥꾼이 혼자 재빨리 올라가 숨은 곳은 어디인가요?",
-          "answerText": "나무",
-          "answerMatchMode": "EXACT",
+          "prompt": "한 사냥꾼이 곰을 보자마자 혼자 올라가 숨은 곳은 어디인가요?",
+          "answerText": "높은 나무 위",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 70,
-              "end": 72
-            },
-            {
-              "paragraphId": "p3",
-              "start": 42,
-              "end": 44
+              "start": 67,
+              "end": 74
             }
           ],
           "scoring": {
@@ -607,14 +602,33 @@
         },
         {
           "id": "q3",
-          "prompt": "곰이 쓰러진 사냥꾼에게 다가와 킁킁 맡은 것은 무엇인가요?",
-          "answerText": "냄새",
-          "answerMatchMode": "EXACT",
+          "prompt": "혼자 남은 다른 사냥꾼은 도망칠 곳이 없자 어떤 행동을 했나요?",
+          "answerText": "땅에 엎드려 죽은 척을 했지요",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 110,
+              "end": 126
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "사냥꾼은 어떤 사람과 어울리지 말라고 대답했나요?",
+          "answerText": "위험할 때 친구를 버리고 혼자 도망가는 사람",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 17,
-              "end": 19
+              "start": 85,
+              "end": 109
             }
           ],
           "scoring": {

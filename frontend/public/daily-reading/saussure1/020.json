@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "책장을 보니 ( )거려요.",
-          "answerText": "두근",
-          "answerMatchMode": "EXACT",
+          "prompt": "어제 다녀온 곳이 어디인지 지문에서 찾아 보세요.",
+          "answerText": "마을 도서관",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 50,
-              "end": 52
+              "start": 7,
+              "end": 13
             }
           ],
           "scoring": {
@@ -571,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "( )에 관한 책을 읽었어요.",
-          "answerText": "우주",
-          "answerMatchMode": "EXACT",
+          "prompt": "내가 평소 궁금해서 어떤 책을 골랐는지 지문에서 찾아 보세요.",
+          "answerText": "우주에 관한 책",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 68,
-              "end": 70
+              "end": 76
             }
           ],
           "scoring": {
@@ -590,14 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "몸도 마음도 ( )해짐.",
-          "answerText": "씩씩",
-          "answerMatchMode": "EXACT",
+          "prompt": "수많은 책이 꽂힌 책장을 보니 어떻게 됐다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "마음이 두근거려요",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 46,
+              "end": 55
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "보람찬 하루를 보낸 결과 몸과 마음이 어떻게 됐다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "몸도 마음도 씩씩해졌어요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 134,
-              "end": 136
+              "start": 127,
+              "end": 140
             }
           ],
           "scoring": {

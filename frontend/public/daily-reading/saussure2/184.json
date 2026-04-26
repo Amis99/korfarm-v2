@@ -559,14 +559,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "겨울에 채소를 보관하는 지혜에서 나온 한국의 음식은?",
-          "answerText": "김치",
-          "answerMatchMode": "EXACT",
+          "prompt": "1문단에서 음식이 담고 있다고 한 나라의 두 가지를 나타내는 어구를 찾으시오.",
+          "answerText": "기후와 역사",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 55,
-              "end": 57
+              "start": 8,
+              "end": 14
             }
           ],
           "scoring": {
@@ -577,9 +577,27 @@
         },
         {
           "id": "q2",
-          "prompt": "밀과 토마토가 잘 자라서 피자와 파스타가 유명한 나라는?",
+          "prompt": "1문단에서 한국의 김치가 나온 바탕으로 제시된 어구를 찾으시오.",
+          "answerText": "겨울에 채소를 보관하려는 지혜",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 59,
+              "end": 75
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "2문단에서 피자와 파스타가 유명하다고 한 나라 이름을 찾으시오.",
           "answerText": "이탈리아",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -594,10 +612,10 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "더운 날씨에 음식이 상하는 것을 막기 위해 인도가 많이 쓴 재료는?",
+          "id": "q4",
+          "prompt": "3문단에서 인도의 카레에 많이 넣는 재료를 찾으시오.",
           "answerText": "향신료",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",

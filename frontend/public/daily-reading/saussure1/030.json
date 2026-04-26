@@ -552,24 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "귀여운 ( )들을 보았습니다.",
-          "answerText": "새싹",
-          "answerMatchMode": "EXACT",
+          "prompt": "어디에서 새싹들을 보았는지 지문에서 찾아 보세요.",
+          "answerText": "학교 텃밭",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 41,
-              "end": 43
-            },
-            {
-              "paragraphId": "p1",
-              "start": 113,
-              "end": 115
-            },
-            {
-              "paragraphId": "p2",
-              "start": 37,
-              "end": 39
+              "start": 29,
+              "end": 34
             }
           ],
           "scoring": {
@@ -581,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "잎이 ( )을 받아 반짝이에요.",
-          "answerText": "햇빛",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 새싹의 모습을 묘사한 부분을 찾아 보세요.",
+          "answerText": "연두색 작은 잎이 햇빛을 받아 반짝이고 있습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 89,
-              "end": 91
+              "start": 79,
+              "end": 105
             }
           ],
           "scoring": {
@@ -600,9 +590,28 @@
         },
         {
           "id": "q3",
-          "prompt": "마음을 ( )하게 해 줍니다.",
+          "prompt": "자연과 함께하는 시간이 마음에 어떤 영향을 주는지 지문에서 찾아 보세요.",
+          "answerText": "자연과 함께하는 시간은 마음을 평온하게 해 주어요",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 54,
+              "end": 81
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "걱정 없이 조용하고 안온하다는 뜻의 단어를 지문에서 찾아 보세요.",
           "answerText": "평온",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",

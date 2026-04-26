@@ -474,9 +474,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "생명을 지키는 띠?",
+          "prompt": "차가 갑자기 멈추거나 사고가 났을 때 우리 몸을 튼튼하게 지켜 주는 띠의 이름을 찾아보세요",
           "answerText": "안전벨트",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -508,19 +508,19 @@
         },
         {
           "id": "q2",
-          "prompt": "조심하지 않으면 무엇하나요?",
-          "answerText": "위험",
-          "answerMatchMode": "EXACT",
+          "prompt": "안전벨트가 몸에 딱 맞게 가로지르도록 조절해야 하는 두 신체 부위를 모두 찾아보세요",
+          "answerText": "어깨, 가슴",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 62,
-              "end": 64
+              "paragraphId": "p1",
+              "start": 136,
+              "end": 138
             },
             {
-              "paragraphId": "p2",
-              "start": 127,
-              "end": 129
+              "paragraphId": "p1",
+              "start": 140,
+              "end": 142
             }
           ],
           "scoring": {
@@ -532,14 +532,38 @@
         },
         {
           "id": "q3",
-          "prompt": "매일 확인하는 무엇인가요?",
-          "answerText": "습관",
-          "answerMatchMode": "EXACT",
+          "prompt": "벨트가 너무 느슨하거나 목에 닿지는 않는지 확인을 받아야 할 사람을 찾아보세요",
+          "answerText": "부모님",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 165,
-              "end": 167
+              "start": 72,
+              "end": 75
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "안전벨트를 매지 않으면 차 밖으로 튕겨 나가거나 크게 다칠 수 있어서 어떻다고 말하는지 찾아보세요",
+          "answerText": "위험",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 62,
+              "end": 64
+            },
+            {
+              "paragraphId": "p2",
+              "start": 127,
+              "end": 129
             }
           ],
           "scoring": {

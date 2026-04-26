@@ -557,58 +557,95 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "모든 책의 글자가 사라질 위기에 처하자, 포포가 악당의 저주를 풀 유일한 주문을 찾아낸 오래된 물건은 무엇인가요?",
-          "answerText": "마법 책",
-          "answerMatchMode": "EXACT",
+          "prompt": "포포가 책의 글자가 사라질 위기에서 찾아간 곳을 지문에서 찾으시오.",
+          "answerText": "무척 오래된 비밀 금고",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 58,
-              "end": 62
+              "start": 23,
+              "end": 35
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "포포가 마법 책을 해독하여 알아낸 것으로, 저주를 풀기 위해 도서관 곳곳에서 찾아야 하는 세 개의 물건은 무엇인가요?",
-          "answerText": "은빛 깃털",
-          "answerMatchMode": "EXACT",
+          "prompt": "마법 책의 첫 장에 적혀 있던 내용을 지문에서 찾으시오.",
+          "answerText": "악당의 저주를 풀 수 있는 유일한 주문",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 31,
-              "end": 36
+              "paragraphId": "p1",
+              "start": 93,
+              "end": 114
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "작은 책벌레 포포가 거대한 독거미 등 괴물들에 맞서 자신을 방어하기 위해 종이 클립으로 단단하게 만든 도구는 무엇인가요?",
-          "answerText": "방패",
-          "answerMatchMode": "EXACT",
+          "prompt": "세 개의 은빛 깃털이 숨겨진 곳을 모두 찾으시오.",
+          "answerTexts": [
+            "높이 솟은 역사책 책장의 꼭대기에",
+            "거미줄 숲에",
+            "마법의 거울 너머에"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 18,
-              "end": 20
+              "paragraphId": "p2",
+              "start": 59,
+              "end": 77
+            },
+            {
+              "paragraphId": "p2",
+              "start": 95,
+              "end": 101
+            },
+            {
+              "paragraphId": "p2",
+              "start": 109,
+              "end": 119
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "포포가 모험을 떠나기 전 준비한 일을 모두 찾으시오.",
+          "answerTexts": [
+            "종이 클립으로 방패를 만들고",
+            "실로 허리띠를 단단히 졸라맸습니다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 10,
+              "end": 25
+            },
+            {
+              "paragraphId": "p3",
+              "start": 26,
+              "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         }

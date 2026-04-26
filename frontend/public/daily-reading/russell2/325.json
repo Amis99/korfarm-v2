@@ -1000,7 +1000,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "해야 할 주의를 다하지 못한 상태를 무엇이라고 하나요?",
+          "prompt": "해야 할 주의를 다하지 못한 상태를 뜻하는 두 글자 단어를 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -1044,8 +1044,9 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
@@ -1053,86 +1054,88 @@
         },
         {
           "id": "q2",
-          "prompt": "사고에서 보통 기대되는 조심의 정도를 무엇이라고 하나요?",
+          "prompt": "어떤 결과가 일어날 가능성을 미리 헤아려 짐작함을 뜻하는 두 글자 단어를 지문에서 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 61,
-              "end": 63
+              "paragraphId": "p3",
+              "start": 76,
+              "end": 78
             },
-            {
-              "paragraphId": "p1",
-              "start": 109,
-              "end": 111
-            },
-            {
-              "paragraphId": "p2",
-              "start": 116,
-              "end": 118
-            },
-            {
-              "paragraphId": "p4",
-              "start": 68,
-              "end": 70
-            },
-            {
-              "paragraphId": "p6",
-              "start": 30,
-              "end": 32
-            },
-            {
-              "paragraphId": "p6",
-              "start": 127,
-              "end": 129
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "주의"
-        },
-        {
-          "id": "q3",
-          "prompt": "결과가 일어날 가능성을 미리 헤아리는 것을 무엇이라고 하나요?",
-          "answerRanges": [
             {
               "paragraphId": "p6",
               "start": 119,
-              "end": 125
+              "end": 121
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "예측 가능성"
+          "answerText": "예측"
         },
         {
-          "id": "q4",
-          "prompt": "법적으로 지켜야 할 조심의 의무를 무엇이라고 하나요?",
+          "id": "q3",
+          "prompt": "사물을 자기 생각이나 입장에 치우치지 않고 있는 그대로 보는 것을 뜻하는 두 글자 단어를 지문에서 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 127,
+              "paragraphId": "p5",
+              "start": 130,
               "end": 132
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "주의 의무"
+          "answerText": "객관"
+        },
+        {
+          "id": "q4",
+          "prompt": "지문에서 법적 책임 판단이 단순히 '도덕'이 아닌 무엇과 다른지를 가리키는 두 글자 단어를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 144,
+              "end": 146
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "비난"
         },
         {
           "id": "q5",
-          "prompt": "법적 결과를 따지는 문제를 무엇이라고 하나요?",
+          "prompt": "지문에서 같은 사고라도 결과를 달리할 수 있다고 한 사전 조치를 뜻하는 두 글자 단어를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 57,
+              "end": 59
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "예방"
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 '책임'이 쓰인 위치를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -1166,11 +1169,12 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
+          "answerMatchMode": "ALL",
           "answerText": "책임"
         }
       ]

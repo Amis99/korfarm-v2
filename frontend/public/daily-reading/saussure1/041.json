@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "검은 ( )가 생깁니다.",
+          "prompt": "햇빛이 물체에 가려서 생기는 검은 모양이라는 뜻의 단어를 지문에서 모두 찾아 보세요.",
           "answerText": "그림자",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -606,19 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "해가 ( )게 있으면 길어짐.",
-          "answerText": "낮",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 그림자가 만들어지는 원리를 찾아 보세요.",
+          "answerText": "빛과 물체가 만나서",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 65,
-              "end": 66
-            },
-            {
               "paragraphId": "p2",
-              "start": 43,
-              "end": 44
+              "start": 63,
+              "end": 73
             }
           ],
           "scoring": {
@@ -630,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "신기한 ( )의 원리에요.",
-          "answerText": "과학",
-          "answerMatchMode": "EXACT",
+          "prompt": "아침에 해가 낮게 있으면 그림자가 어떻게 된다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "무척 길어집니다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 77,
+              "end": 85
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "정오에 해가 머리 위 높이 뜨면 그림자가 어떻게 된다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "짧아져요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 82,
-              "end": 84
+              "start": 24,
+              "end": 28
             }
           ],
           "scoring": {

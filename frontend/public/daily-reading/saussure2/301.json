@@ -564,19 +564,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "가을이 되면 잎이 노랗게 변하고, 산길에 줄지어 서서 노란 길을 내어준 이 나무의 이름은 무엇인가요?",
-          "answerText": "은행나무",
-          "answerMatchMode": "EXACT",
+          "prompt": "가을 바람이 불어오는 곳을 지문에서 찾으시오.",
+          "answerText": "고요한 산길",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 21,
-              "end": 25
-            },
-            {
-              "paragraphId": "p3",
-              "start": 33,
-              "end": 37
+              "start": 11,
+              "end": 17
             }
           ],
           "scoring": {
@@ -588,19 +583,14 @@
         },
         {
           "id": "q2",
-          "prompt": "가을 바람이 불어오고 노란 은행나무가 줄지어 서 있는 이 장소는 어디인가요?",
-          "answerText": "산길",
-          "answerMatchMode": "EXACT",
+          "prompt": "발맞춰 걸으면 들리는 소리를 지문에서 찾으시오.",
+          "answerText": "바스락바스락 가을 걷는 소리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 15,
-              "end": 17
-            },
-            {
-              "paragraphId": "p3",
-              "start": 48,
-              "end": 50
+              "paragraphId": "p2",
+              "start": 18,
+              "end": 33
             }
           ],
           "scoring": {
@@ -612,14 +602,14 @@
         },
         {
           "id": "q3",
-          "prompt": "은행나무 잎이 쌓인 길을 걸을 때 잎이 밟히며 나는 소리를 표현한 말은 무엇인가요?",
-          "answerText": "바스락바스락",
-          "answerMatchMode": "EXACT",
+          "prompt": "잎사귀가 어떤 모양인지 나타내는 표현을 지문에서 찾으시오.",
+          "answerText": "부채 모양",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 18,
-              "end": 24
+              "start": 34,
+              "end": 39
             }
           ],
           "scoring": {
@@ -631,14 +621,22 @@
         },
         {
           "id": "q4",
-          "prompt": "은행나무 잎사귀는 바람을 일으킬 때 쓰는 어떤 물건의 모양과 닮았나요?",
-          "answerText": "부채",
-          "answerMatchMode": "EXACT",
+          "prompt": "노란빛 길을 따라 가며 가을의 시간과 내 마음이 어떻게 변하는지 나타낸 표현 두 가지를 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "가을의 시간도 깊어만 가네",
+            "내 마음도 어느새 노랗게 물드네"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 34,
-              "end": 36
+              "paragraphId": "p3",
+              "start": 18,
+              "end": 32
+            },
+            {
+              "paragraphId": "p3",
+              "start": 51,
+              "end": 68
             }
           ],
           "scoring": {

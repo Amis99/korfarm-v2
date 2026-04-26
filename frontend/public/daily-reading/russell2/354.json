@@ -1117,35 +1117,27 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '동선'을 모두 찾으시오.",
+          "prompt": "여러 사람이나 사물이 한곳에 모여 매우 어수선하게 들끓는 상태를 가리키는 두 글자 단어를 지문에서 찾으시오.",
+          "answerText": "혼잡",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 24,
-              "end": 26
-            },
-            {
-              "paragraphId": "p3",
-              "start": 91,
-              "end": 93
-            },
-            {
-              "paragraphId": "p6",
-              "start": 132,
-              "end": 134
+              "paragraphId": "p2",
+              "start": 40,
+              "end": 42
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "동선"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '체험형'을 모두 찾으시오.",
+          "prompt": "체육관 안쪽에 두기로 한 부스의 종류 이름을 지문에서 모두 찾으시오.",
+          "answerText": "체험형",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
@@ -1155,39 +1147,27 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "체험형"
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '안내 문구'를 모두 찾으시오.",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 8,
-              "end": 13
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "안내 문구"
-        },
-        {
-          "id": "q4",
-          "prompt": "지문에서 '입장 시간'을 모두 찾으시오.",
-          "answerMatchMode": "ANY",
+          "prompt": "한꺼번에 몰릴 수 있는 문제를 줄이기 위해 학년별로 차이를 두기로 한 항목 두 가지를 지문에서 모두 찾으시오.",
+          "answerText": "입장 시간 / 5분",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 99,
               "end": 104
+            },
+            {
+              "paragraphId": "p2",
+              "start": 106,
+              "end": 108
             },
             {
               "paragraphId": "p3",
@@ -1201,29 +1181,78 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "입장 시간"
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "체육관 입장 전 입구가 금방 막히는 일을 막기 위해 함께 적어 두어야 하는 안내 항목을 지문에서 찾으시오.",
+          "answerText": "우산 보관 위치",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 109,
+              "end": 117
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '수정본'을 모두 찾으시오.",
+          "prompt": "마지막 발언에서 이동 화살표와 우산 보관 안내를 추가하겠다고 말한 사람이 누구인지 찾으시오.",
+          "answerText": "운영부 학생",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 6
+            },
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 6
+            },
+            {
+              "paragraphId": "p6",
+              "start": 41,
+              "end": 47
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "회의를 마무리하며 내일 아침에 체육관 입구에서 점검하기로 한 대상이 무엇인지 지문에서 찾으시오.",
+          "answerText": "실제 동선",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 95,
-              "end": 98
+              "start": 129,
+              "end": 134
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "수정본"
+          "revealOnWrong": true
         }
       ]
     }

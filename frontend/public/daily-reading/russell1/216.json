@@ -996,93 +996,74 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '과정'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 208,
-              "end": 210
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글이나 그림, 기록이 남겨진 시대와 목적을 함께 살펴 의미를 읽는 역사학의 핵심 개념을 모두 찾으시오",
+          "answerText": "사료",
           "answerMatchMode": "ANY",
-          "answerText": "과정"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p5", "start": 3, "end": 5}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '기준'을 모두 찾으시오.",
+          "prompt": "전쟁을 기록한 글에서 강조 부분이 다를 수 있는 두 주체를 모두 찾으시오",
+          "answerText": "왕실, 백성",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 24,
-              "end": 26
-            }
+            {"paragraphId": "p1", "start": 143, "end": 145},
+            {"paragraphId": "p1", "start": 155, "end": 157}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "기준"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '형태'를 모두 찾으시오.",
+          "prompt": "여러 자료를 비교해 읽을 때 정리의 기준 삼아야 한다고 한 두 가지를 모두 찾으시오",
+          "answerText": "공통점, 차이점",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 29,
-              "end": 31
-            }
+            {"paragraphId": "p3", "start": 14, "end": 17},
+            {"paragraphId": "p3", "start": 19, "end": 22}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "형태"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '배경'을 모두 찾으시오.",
+          "prompt": "역사 자료가 글이 아닌 형태로 제시되는 세 가지 예를 모두 찾으시오",
+          "answerText": "숫자, 지도, 연표",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 43,
-              "end": 45
-            }
+            {"paragraphId": "p4", "start": 10, "end": 12},
+            {"paragraphId": "p4", "start": 14, "end": 16},
+            {"paragraphId": "p4", "start": 18, "end": 20}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "배경"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '관계'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 62,
-              "end": 64
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "서로 다른 자료가 각기 무엇을 보여 주는지 따져 보면 당시의 상황을 어떻게 이해할 수 있다고 하였는지 찾으시오",
+          "answerText": "입체적",
           "answerMatchMode": "ANY",
-          "answerText": "관계"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 174, "end": 177}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "역사 읽기는 오래된 정보를 받아들이는 일이 아니라 여러 자료를 근거로 과거의 모습을 해석하는 무엇이라고 하였는지 찾으시오",
+          "answerText": "훈련",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 164, "end": 166}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

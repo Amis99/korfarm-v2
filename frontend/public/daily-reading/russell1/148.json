@@ -1070,93 +1070,137 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '생략'을 모두 찾으시오.",
+          "prompt": "어떤 결론이 따라 나오기 위해 미리 놓여 있어야 하는 바탕을 가리키는 낱말을 지문에서 모두 찾으시오",
+          "answerText": "전제",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 76,
-              "end": 78
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p1",
+              "start": 173,
+              "end": 175
+            },
+            {
+              "paragraphId": "p2",
+              "start": 172,
+              "end": 174
+            },
+            {
+              "paragraphId": "p4",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "paragraphId": "p4",
+              "start": 135,
+              "end": 137
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "생략"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '사례'를 모두 찾으시오.",
+          "prompt": "전제와 결론이 무엇인지 한 문장으로 정의한 부분을 지문에서 찾으시오",
+          "answerText": "전제와 결론은 복잡한 말을 몇 개의 분명한 관계로 바꾸어 이해하게 하는 논리학의 기본 개념이다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 10,
-              "end": 12
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 52
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "사례"
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '범위'를 모두 찾으시오.",
+          "prompt": "전제와 결론의 관계를 보여 주려고 지문이 직접 든 예문을 찾으시오",
+          "answerText": "'비가 오면 운동장을 쓰지 못한다. 오늘은 운동장을 쓸 수 없다. 그러므로 비가 왔다.'",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 172,
-              "end": 174
+              "paragraphId": "p2",
+              "start": 6,
+              "end": 55
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "범위"
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '태도'를 모두 찾으시오.",
+          "prompt": "예문의 마지막 결론이 곧바로 따라오지 않는 까닭이 드러난 부분을 지문에서 찾으시오",
+          "answerText": "운동장을 못 쓰는 이유가 비 말고도 공사나 행사 때문일 수 있기 때문이다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 97,
-              "end": 99
+              "paragraphId": "p2",
+              "start": 114,
+              "end": 154
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "태도"
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '도구'를 모두 찾으시오.",
+          "prompt": "범위를 넓게 잡을수록 생기기 쉽다고 한, 일정한 규칙이나 주장에서 벗어난 경우를 가리키는 낱말을 지문에서 찾으시오",
+          "answerText": "예외",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 246,
-              "end": 248
+              "paragraphId": "p3",
+              "start": 184,
+              "end": 186
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "도구"
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "지문이 마지막에 논리를 어떤 도구라고 정리했는지 그 결론 문장을 지문에서 찾으시오",
+          "answerText": "논리는 어렵고 딱딱한 규칙 모음이 아니라, 헷갈리는 말을 분명한 생각으로 바꾸어 문제를 푸는 도구라는 점에서 생활과도 가까이 닿아 있다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 194,
+              "end": 269
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

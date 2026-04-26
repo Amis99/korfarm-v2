@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 오존층 파괴를 어떤 균형 붕괴의 문제로 설명하는가?",
+          "prompt": "오존층이 흡수하는 태양 빛의 해로운 부분을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 204
+              "start": 27,
+              "end": 41
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "오존층은 성층권에 주로 분포하며, 태양에서 오는 자외선 가운데 해로운 부분을 흡수해 지구 생명체를 보호한다. 성층권에서는 오존이 계속 생성되기도 하고 자연적으로 분해되기도 하는데, 두 과정이 대체로 균형을 이룰 때 오존 농도는 일정하게 유지된다. 따라서 오존층 파괴 문제는 오존이 아예 사라지는 현상이라기보다 생성과 분해의 균형이 무너지는 현상으로 이해할 수 있다."
+          "answerText": "자외선 가운데 해로운 부분"
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 CFC의 안정성이 왜 뒤늦게 문제가 되었다고 말하는가?",
+          "prompt": "오존층 파괴 문제를 어떤 현상으로 이해할 수 있는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 173
+              "paragraphId": "p1",
+              "start": 173,
+              "end": 192
             }
           ],
           "scoring": {
@@ -603,16 +603,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "염화 플루오린화 탄소, 즉 CFC는 처음 널리 사용될 때만 해도 안정적이고 반응성이 낮은 물질로 알려졌다. 그래서 냉매, 스프레이 추진제, 발포제 등 여러 산업 분야에서 활용되었다. 하지만 바로 그 안정성 때문에 대기 중에서 쉽게 분해되지 않고 성층권 상층부까지 올라갈 수 있다는 점이 뒤늦게 문제로 드러났다."
+          "answerText": "생성과 분해의 균형이 무너지는 현상"
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 성층권에서 나온 염소 원자가 어떤 촉매 역할을 한다고 설명하는가?",
+          "prompt": "처음 널리 사용될 때 CFC가 어떤 물질로 알려졌는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 181
+              "paragraphId": "p2",
+              "start": 36,
+              "end": 52
             }
           ],
           "scoring": {
@@ -621,34 +621,48 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "성층권 상층부에 도달한 CFC는 강한 자외선을 받아 분해되며 염소 원자를 내놓는다. 이 염소 원자는 오존 분자와 반응하여 산소 분자를 만들고, 다시 다른 반응을 거치며 원래의 염소 원자로 되돌아갈 수 있다. 이런 점에서 염소 원자는 한 번 쓰이고 사라지는 것이 아니라 여러 차례 오존 분해 반응을 매개하는 촉매처럼 작용한다."
+          "answerText": "안정적이고 반응성이 낮은 물질"
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 오존 파괴 반응이 왜 연속적으로 이어질 수 있다고 하는가?",
+          "prompt": "CFC가 활용된 산업 분야의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "냉매",
+            "스프레이 추진제",
+            "발포제"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 174
+              "paragraphId": "p2",
+              "start": 64,
+              "end": 66
+            },
+            {
+              "paragraphId": "p2",
+              "start": 68,
+              "end": 76
+            },
+            {
+              "paragraphId": "p2",
+              "start": 78,
+              "end": 81
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "문제는 이 과정에서 생겨난 염소 관련 화합물들이 다시 분해되어 반응성이 큰 염소 원자를 공급할 수 있다는 데 있다. 즉 오존 파괴 반응은 한 차례로 끝나는 것이 아니라, 성층권 안에서 연속적으로 이어질 조건을 스스로 만들어 낸다. 그래서 대기 전체에서 CFC의 양이 많아질수록 오존층은 더 큰 압박을 받게 된다."
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 오존 구멍 발견이 어떤 국제적 대응의 계기가 되었다고 말하는가?",
+          "prompt": "CFC의 안정성이 뒤늦게 문제가 된 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 190
+              "paragraphId": "p2",
+              "start": 119,
+              "end": 158
             }
           ],
           "scoring": {
@@ -657,16 +671,48 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이런 이론은 한동안 경고에 머물렀지만, 남극 상공에서 봄철마다 오존 농도가 크게 낮아지는 현상이 관측되면서 현실 문제로 받아들여졌다. 이른바 오존 구멍의 발견은 CFC 사용이 지구 규모의 환경 변화를 일으킬 수 있음을 보여 주었다. 이후 국제 사회는 CFC 사용을 줄이기 위한 협약을 마련했고, 오존층 회복을 위한 장기적 대응이 시작되었다."
+          "answerText": "대기 중에서 쉽게 분해되지 않고 성층권 상층부까지 올라갈 수 있다는 점"
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 CFC 사례가 과학 이해와 환경 정책의 어떤 연결을 보여 준다고 정리하는가?",
+          "prompt": "성층권 상층부에서 CFC가 오존을 분해하는 과정의 핵심 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "염소 원자를 내놓는다",
+            "오존 분자와 반응하여",
+            "산소 분자를 만들고"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 195
+              "paragraphId": "p3",
+              "start": 34,
+              "end": 45
+            },
+            {
+              "paragraphId": "p3",
+              "start": 56,
+              "end": 67
+            },
+            {
+              "paragraphId": "p3",
+              "start": 68,
+              "end": 78
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q7",
+          "prompt": "염소 원자가 오존 분해 반응에서 어떤 역할을 하는지 나타낸 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 171,
+              "end": 180
             }
           ],
           "scoring": {
@@ -675,7 +721,39 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "CFC와 오존층 파괴의 사례는 한 물질의 편리함만 보고 그 환경적 결과를 뒤늦게 깨달을 수 있음을 보여 준다. 또한 대기처럼 규모가 큰 체계에서는 작은 화학 반응 하나가 장기적으로 커다란 변화를 누적시킬 수 있다는 점도 드러낸다. 결국 이 문제는 화학 반응의 원리를 이해하는 일과 환경 정책을 조정하는 일이 서로 분리될 수 없다는 사실을 말해 준다."
+          "answerText": "촉매처럼 작용한다"
+        },
+        {
+          "id": "q8",
+          "prompt": "오존 구멍 발견 뒤 국제 사회의 대응과 관련된 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "오존 구멍",
+            "CFC 사용을 줄이기 위한 협약",
+            "오존층 회복을 위한 장기적 대응"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 79,
+              "end": 84
+            },
+            {
+              "paragraphId": "p5",
+              "start": 140,
+              "end": 157
+            },
+            {
+              "paragraphId": "p5",
+              "start": 165,
+              "end": 182
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
         }
       ]
     }

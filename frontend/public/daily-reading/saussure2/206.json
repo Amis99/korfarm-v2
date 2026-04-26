@@ -676,14 +676,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "동수가 안 먹어도 된다고 하자마자, 배에서 이 소리가 났습니다. 무슨 소리일까요?",
-          "answerText": "꼬르륵",
-          "answerMatchMode": "EXACT",
+          "prompt": "김 아주머니는 작은 주먹밥 두 개 중 하나를 누구에게 건넸나요? 지문에서 그대로 찾으시오.",
+          "answerText": "곁의 어린아이를 안은 여자에게",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 337,
-              "end": 340
+              "start": 230,
+              "end": 246
             }
           ],
           "scoring": {
@@ -695,14 +695,14 @@
         },
         {
           "id": "q2",
-          "prompt": "헛간 밖에서는 사람들의 작은 울음소리와 이 소리가 들렸습니다. 무슨 소리일까요?",
-          "answerText": "기침",
-          "answerMatchMode": "EXACT",
+          "prompt": "김 아주머니가 남은 주먹밥을 다시 나누려 하자, 영이는 뭐라고 말했나요? 지문에서 그대로 찾으시오.",
+          "answerText": "조금씩만 먹어요.",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 343,
-              "end": 345
+              "paragraphId": "p1",
+              "start": 432,
+              "end": 441
             }
           ],
           "scoring": {
@@ -714,14 +714,33 @@
         },
         {
           "id": "q3",
-          "prompt": "아침에 아주머니 자리가 비어 있었고, 바닥에는 작은 이것이 놓여 있었습니다. 이것은 무엇일까요?",
-          "answerText": "천 조각",
-          "answerMatchMode": "EXACT",
+          "prompt": "분이는 손바닥에 아주 조금 남은 밥을 어떻게 하자고 말했나요? 지문에서 그대로 찾으시오.",
+          "answerText": "이건 아침에 먹자.",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 238,
+              "end": 248
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "아주머니가 떠나기 전 남기고 간 말처럼 보인 문장은 무엇인가요? 지문에서 그대로 찾으시오.",
+          "answerText": "같이 가는 아이를 놓치지 마라.",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 457,
-              "end": 461
+              "start": 477,
+              "end": 494
             }
           ],
           "scoring": {

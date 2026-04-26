@@ -556,7 +556,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "설문 결과를 읽을 때 먼저 살펴야 할 조사 요소 가운데 하나는 무엇인가요?",
+          "prompt": "설문 결과를 읽을 때 먼저 확인해야 할 요소를 찾으시오.",
           "answerText": "질문 문항의 표현 방식",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -574,14 +574,22 @@
         },
         {
           "id": "q2",
-          "prompt": "특정 답을 끌어내도록 짜인 질문을 글에서는 어떤 표현이 들어간 경우로 설명하나요?",
-          "answerText": "특정 답을 유도하는 표현",
-          "answerMatchMode": "ANY",
+          "prompt": "응답을 왜곡할 수 있는 질문 방식을 모두 찾으시오.",
+          "answerTexts": [
+            "특정 답을 유도하는 표현",
+            "두 가지 내용을 한 문장에 함께 묶어 묻는다면"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 33,
               "end": 46
+            },
+            {
+              "paragraphId": "p2",
+              "start": 57,
+              "end": 82
             }
           ],
           "scoring": {
@@ -592,14 +600,14 @@
         },
         {
           "id": "q3",
-          "prompt": "응답자의 수와 구성이 어떤 역할을 한다고 했나요?",
-          "answerText": "결과 해석에 직접적인 영향을 준다",
+          "prompt": "결과 해석에 직접적인 영향을 주는 요소를 찾으시오.",
+          "answerText": "응답자의 수와 구성",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 12,
-              "end": 30
+              "start": 0,
+              "end": 10
             }
           ],
           "scoring": {
@@ -610,14 +618,14 @@
         },
         {
           "id": "q4",
-          "prompt": "여러 항목을 합한 비율이 100퍼센트를 넘는 이유로 제시된 것은 무엇인가요?",
-          "answerText": "다중 응답",
+          "prompt": "설문 결과를 크게 바꿀 수 있는 조사 조건을 찾으시오.",
+          "answerText": "어떤 질문을 누구에게, 어떤 방식으로 던졌는지",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 121,
-              "end": 126
+              "paragraphId": "p1",
+              "start": 91,
+              "end": 116
             }
           ],
           "scoring": {
@@ -628,7 +636,7 @@
         },
         {
           "id": "q5",
-          "prompt": "설문 결과 읽기를 글은 무엇을 함께 해석하는 일이라고 설명하나요?",
+          "prompt": "설문 결과 읽기가 함께 해석하는 대상이라고 설명한 부분을 찾으시오.",
           "answerText": "자료가 만들어진 과정과 맥락",
           "answerMatchMode": "ANY",
           "answerRanges": [

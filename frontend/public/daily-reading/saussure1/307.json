@@ -396,34 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "노는 데 쓰는 물건?",
-          "answerText": "장난감",
-          "answerMatchMode": "EXACT",
+          "prompt": "수리소 안이 어수선하고 어지러운 상태가 되었음을 나타내는 세 글자 낱말을 글에서 찾아 적어 보세요",
+          "answerText": "난장판",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 48,
-              "end": 51
-            },
-            {
-              "paragraphId": "p1",
-              "start": 86,
-              "end": 89
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p2",
-              "start": 84,
-              "end": 87
-            },
-            {
-              "paragraphId": "p2",
-              "start": 105,
-              "end": 108
+              "start": 178,
+              "end": 181
             }
           ],
           "scoring": {
@@ -435,19 +415,34 @@
         },
         {
           "id": "q2",
-          "prompt": "길을 그린 안내 종이?",
-          "answerText": "지도",
-          "answerMatchMode": "EXACT",
+          "prompt": "장난감들의 소동을 진정시키려 애쓴 인물이 누구인지 글에서 찾아 적어 보세요",
+          "answerText": "할아버지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 9,
-              "end": 11
+              "start": 0,
+              "end": 4
+            },
+            {
+              "paragraphId": "p1",
+              "start": 111,
+              "end": 115
             },
             {
               "paragraphId": "p2",
-              "start": 50,
-              "end": 52
+              "start": 40,
+              "end": 44
+            },
+            {
+              "paragraphId": "p2",
+              "start": 78,
+              "end": 82
+            },
+            {
+              "paragraphId": "p2",
+              "start": 142,
+              "end": 146
             }
           ],
           "scoring": {
@@ -459,19 +454,33 @@
         },
         {
           "id": "q3",
-          "prompt": "시끄럽고 소란한 일?",
-          "answerText": "소동",
-          "answerMatchMode": "EXACT",
+          "prompt": "장난감들이 사람처럼 말하고 행동하는 모습을 보여 주는 부분을 한 군데 찾아 적어 보세요",
+          "answerText": "자기가 더 많이 아프다며 큰 소리로 외쳤",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 56,
-              "end": 58
-            },
+              "paragraphId": "p2",
+              "start": 9,
+              "end": 31
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "예상치 못한 소동의 결과로 할아버지의 일이 어떻게 되었는지 글에서 찾아 적어 보세요",
+          "answerText": "비밀 임무가 시작부터 큰 위기에 빠짐",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 137,
-              "end": 139
+              "start": 148,
+              "end": 172
             }
           ],
           "scoring": {

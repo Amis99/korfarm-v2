@@ -571,12 +571,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "전극에 저장되는 전기의 양을 가리키는 말을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 178
+              "start": 46,
+              "end": 49
+            },
+            {
+              "paragraphId": "p5",
+              "start": 100,
+              "end": 103
             }
           ],
           "scoring": {
@@ -585,34 +590,31 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정전용량형 습도 센서는 공기 중의 물 분자가 늘어나거나 줄어들 때 전극에 저장되는 전하량이 어떻게 달라지는지를 이용해 습도 변화를 읽어 내는 장치다. 버튼을 직접 누르지 않아도 반응하는 위생 설비나 자동 제어 장치에 널리 쓰이는 이유도, 물리적 접촉 없이 주변 환경의 변화를 빠르게 전기 신호로 바꿀 수 있기 때문이다."
+          "answerText": "전하량"
         },
         {
           "id": "q2",
-          "prompt": "2문단의 내용을 바탕으로 알 수 있는 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 195
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 센서의 핵심에는 축전기 구조가 있다. 위아래에 놓인 두 전극 사이에 전기가 통하지 않는 수분 유지 기판이 끼워져 있고, 바깥쪽 전극은 공기 중의 수분이 안쪽으로 드나들 수 있도록 얇고 투습성 있는 소재로 만들어진다. 기판 표면에는 물 분자를 잘 붙잡는 박막 물질이 입혀져 있어서, 외부 습도 변화가 생기면 그 변화가 곧바로 내부 구조에 반영된다."
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "부도체 내부에서 전하 분포가 치우치는 현상을 무엇이라고 하는지 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 215
+              "start": 167,
+              "end": 169
+            },
+            {
+              "paragraphId": "p3",
+              "start": 179,
+              "end": 181
+            },
+            {
+              "paragraphId": "p4",
+              "start": 120,
+              "end": 122
+            },
+            {
+              "paragraphId": "p5",
+              "start": 74,
+              "end": 76
             }
           ],
           "scoring": {
@@ -621,16 +623,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "전원이 공급되면 두 전극 사이에는 전기장이 형성된다. 이때 기판 자체에는 전류가 흐르지 않지만, 기판을 이루는 분자 내부에서는 전자와 원자핵의 상대적 위치가 조금씩 달라지면서 한쪽 표면에는 음전하, 다른 쪽 표면에는 양전하가 두드러지게 나타난다. 이렇게 부도체 내부에서 전하 분포가 치우치는 현상을 분극이라고 하며, 이 분극 덕분에 전극은 처음보다 더 많은 전하를 붙잡아 둘 수 있다."
+          "answerText": "분극"
+        },
+        {
+          "id": "q3",
+          "prompt": "축전기 구조에서 위아래에 놓인 구성과 그 사이에 끼워진 구성을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 23,
+              "end": 35
+            },
+            {
+              "paragraphId": "p2",
+              "start": 51,
+              "end": 59
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "위아래에 놓인 두 전극",
+            "수분 유지 기판"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "습도가 높아질수록 센서가 읽어 내는 정전용량 값이 어떻게 되는지 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 199
+              "start": 192,
+              "end": 198
             }
           ],
           "scoring": {
@@ -639,16 +667,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "센서가 물 분자를 감지하는 과정은 여기에서 시작된다. 공기 중의 수분이 상부 전극을 지나 기판에 흡착되면, 물 분자는 원래 기판보다 전기장에 더 민감하게 반응한다. 다시 말해 물 분자가 달라붙은 뒤에는 기판 전체의 분극이 더 쉽게 일어나고, 그 결과 전극에 쌓이는 전하의 양도 늘어난다. 결국 센서가 읽어 내는 정전용량 값은 습도가 높아질수록 커지게 된다."
+          "answerText": "커지게 된다"
         },
         {
           "id": "q5",
-          "prompt": "5문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "센서가 한 번 반응한 뒤 곧바로 다음 변화까지 다시 측정할 수 있는 이유를 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 170
+              "start": 74,
+              "end": 119
             }
           ],
           "scoring": {
@@ -657,16 +685,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "회로는 이 정전용량이 기준값을 넘는 순간을 감지해 장치를 작동시킨다. 반대로 시간이 지나 기판에 붙어 있던 물 분자가 떨어져 나가면 분극의 정도도 다시 낮아지고, 전극에 저장되는 전하량 역시 원래 수준으로 돌아간다. 센서가 한 번 반응한 뒤 곧바로 다음 변화까지 다시 측정할 수 있는 이유가 여기에 있다."
+          "answerText": "분극의 정도도 다시 낮아지고, 전극에 저장되는 전하량 역시 원래 수준으로 돌아간다"
         },
         {
           "id": "q6",
-          "prompt": "6문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "정전용량형 습도 센서의 성능이 무엇과 밀접한지 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 220
+              "start": 21,
+              "end": 56
             }
           ],
           "scoring": {
@@ -675,7 +703,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "따라서 정전용량형 습도 센서의 성능은 물 분자를 얼마나 잘 붙잡고 또 얼마나 빨리 떼어 낼 수 있는지와 밀접하다. 흡착이 일어날 때는 정전용량을 충분히 키워 확실한 신호를 만들어야 하고, 탈착이 일어날 때는 기본값으로 빠르게 되돌아가야 연속적인 환경 변화에도 민감하게 반응할 수 있다. 같은 원리의 센서라도 기판 재료와 구조가 다른 이유는 바로 이 민감도와 복원 속도를 함께 조절하기 위해서다."
+          "answerText": "물 분자를 얼마나 잘 붙잡고 또 얼마나 빨리 떼어 낼 수 있는지"
+        },
+        {
+          "id": "q7",
+          "prompt": "수분이 드나들 수 있는 성질을 나타낸 말을 지문에서 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 105,
+              "end": 108
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "투습성"
+        },
+        {
+          "id": "q8",
+          "prompt": "성능 조건으로 대비되는 두 경우를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 64,
+              "end": 73
+            },
+            {
+              "paragraphId": "p6",
+              "start": 105,
+              "end": 114
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "흡착이 일어날 때",
+            "탈착이 일어날 때"
+          ]
         }
       ]
     }

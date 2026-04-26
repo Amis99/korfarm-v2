@@ -552,9 +552,28 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "반짝이는 무엇을 보았었나요?",
+          "prompt": "박물관 입구에 커다랗게 서 있어 멋졌던 것이 무엇인지 글에서 찾아 써 보세요",
+          "answerText": "돌탑",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 43,
+              "end": 45
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "반짝이고 신기하며 아름다웠던 옛날 물건의 이름을 글에서 찾아 써 보세요",
           "answerText": "금관",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -570,15 +589,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "알록달록한 무엇을 입었습니나요?",
-          "answerText": "한복",
-          "answerMatchMode": "EXACT",
+          "id": "q3",
+          "prompt": "알록달록한 한복을 입고 거울을 본 글쓴이는 무엇이 된 기분이었는지 찾아 써 보세요",
+          "answerText": "왕자",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 44,
-              "end": 46
+              "start": 60,
+              "end": 62
             }
           ],
           "scoring": {
@@ -589,10 +608,10 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "박물관 무엇을 다녀왔었나요?",
+          "id": "q4",
+          "prompt": "글쓴이는 박물관 무엇을 통해 우리 역사를 더 사랑하게 되었는지 찾아 써 보세요",
           "answerText": "견학",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",

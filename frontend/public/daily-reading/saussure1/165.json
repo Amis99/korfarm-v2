@@ -474,55 +474,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리가 듣는 것은?",
+          "prompt": "물체가 세게 떨릴수록 크기가 달라지는 것은 무엇인지 찾아보세요",
           "answerText": "소리",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 12,
-              "end": 14
-            },
-            {
-              "paragraphId": "p1",
-              "start": 33,
-              "end": 35
-            },
-            {
-              "paragraphId": "p1",
-              "start": 64,
-              "end": 66
-            },
-            {
-              "paragraphId": "p1",
-              "start": 81,
-              "end": 83
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 42,
-              "end": 44
-            },
-            {
-              "paragraphId": "p2",
-              "start": 76,
-              "end": 78
-            },
-            {
-              "paragraphId": "p2",
-              "start": 100,
-              "end": 102
-            },
-            {
-              "paragraphId": "p2",
-              "start": 110,
-              "end": 112
-            }
+            {"paragraphId": "p1", "start": 12, "end": 14},
+            {"paragraphId": "p1", "start": 33, "end": 35},
+            {"paragraphId": "p1", "start": 64, "end": 66},
+            {"paragraphId": "p1", "start": 81, "end": 83},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 42, "end": 44},
+            {"paragraphId": "p2", "start": 76, "end": 78},
+            {"paragraphId": "p2", "start": 100, "end": 102},
+            {"paragraphId": "p2", "start": 110, "end": 112}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -533,15 +497,12 @@
         },
         {
           "id": "q2",
-          "prompt": "살랑살랑 부는 무엇 소리인가요?",
-          "answerText": "바람",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서 작은 소리의 예와 큰 소리의 예로 든 자연의 두 가지를 모두 찾아보세요",
+          "answerText": "바람, 천둥",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 30,
-              "end": 32
-            }
+            {"paragraphId": "p1", "start": 30, "end": 32},
+            {"paragraphId": "p1", "start": 61, "end": 63}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -552,15 +513,27 @@
         },
         {
           "id": "q3",
-          "prompt": "쾅쾅 울리는 무엇 소리인가요?",
-          "answerText": "천둥",
-          "answerMatchMode": "EXACT",
+          "prompt": "상황에 맞게 우리가 조절해서 말해야 하는 것은 무엇인지 찾아보세요",
+          "answerText": "목소리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 61,
-              "end": 63
-            }
+            {"paragraphId": "p2", "start": 41, "end": 44}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "큰 소리와 작은 소리를 구분해서 써야 하는 두 장소를 모두 찾아보세요",
+          "answerText": "도서관, 운동장",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 66, "end": 69},
+            {"paragraphId": "p2", "start": 91, "end": 94}
           ],
           "scoring": {
             "correctDeltaSec": 10,

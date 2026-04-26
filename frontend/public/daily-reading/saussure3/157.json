@@ -557,14 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "상식적으로는 생각할 수 없는 신비롭고 놀라운 일을 뜻하는 말은?",
-          "answerText": "기적을",
-          "answerMatchMode": "EXACT",
+          "prompt": "우렁각시가 누구를 위해 몰래 밥을 차려주었는지 지문에서 찾으시오.",
+          "answerText": "가난한 총각",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 27,
-              "end": 30
+              "paragraphId": "p1",
+              "start": 6,
+              "end": 12
             }
           ],
           "scoring": {
@@ -576,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "마음을 다하여 깊이 빠져들어 있는 상태를 뜻하는 말은?",
-          "answerText": "몰입하니",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 맡은 역할을 나타내는 구절을 지문에서 찾으시오.",
+          "answerText": "우렁이 속에서 나온 예쁜 각시 역할",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 73,
-              "end": 77
+              "paragraphId": "p1",
+              "start": 55,
+              "end": 74
             }
           ],
           "scoring": {
@@ -595,14 +595,41 @@
         },
         {
           "id": "q3",
-          "prompt": "착하고 좋은 일을 베푸는 행위를 뜻하는 말은 무엇인가요?",
-          "answerText": "선행을",
-          "answerMatchMode": "EXACT",
+          "prompt": "역할에 몰입할 때 흉내 낸 인물의 두 가지를 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "말투",
+            "표정"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 55,
+              "end": 57
+            },
+            {
+              "paragraphId": "p2",
+              "start": 59,
+              "end": 61
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "연극을 마친 뒤 우리가 나눈 교훈을 나타내는 구절을 지문에서 찾으시오.",
+          "answerText": "남을 돕는 따뜻한 마음이 기적을 만든다는 교훈",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 66,
-              "end": 69
+              "start": 13,
+              "end": 38
             }
           ],
           "scoring": {

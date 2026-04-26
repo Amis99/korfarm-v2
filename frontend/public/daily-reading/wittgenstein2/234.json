@@ -571,12 +571,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "전통 형이상학이 더 높은 것으로 여긴 대상을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 161
+              "start": 38,
+              "end": 44
+            },
+            {
+              "paragraphId": "p1",
+              "start": 46,
+              "end": 51
             }
           ],
           "scoring": {
@@ -584,17 +589,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "전통 형이상학은 현실 세계를 불완전한 것으로 보고, 그 너머에 있는 초월적 가치나 참된 세계를 더 높은 것으로 여겨 왔다. 이 관점에서는 현실의 삶이 스스로 목적이 되기보다, 외부의 절대적 기준에 맞추어 평가받는 대상이 된다. 니체는 바로 이 점이 삶을 거꾸로 이해하게 만든다고 비판했다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "초월적 가치",
+            "참된 세계"
+          ]
         },
         {
           "id": "q2",
-          "prompt": "2문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "니체가 삶을 거꾸로 이해하게 만든다고 비판한 점을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 160
+              "paragraphId": "p1",
+              "start": 77,
+              "end": 125
             }
           ],
           "scoring": {
@@ -603,15 +611,87 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "니체에게 중요한 것은 삶 바깥의 가치가 아니라 삶 자체였다. 그는 가치가 삶을 더 강하게 만들고 성장시키는가를 기준으로 평가되어야 한다고 보았다. 따라서 초월적 도덕이나 고정된 선을 앞세워 현실의 욕망과 충동을 무조건 억압하는 태도는, 삶을 수단으로 전락시키는 전도된 사고 방식이 된다."
+          "answerText": "현실의 삶이 스스로 목적이 되기보다, 외부의 절대적 기준에 맞추어 평가받는 대상이 된다"
         },
         {
           "id": "q3",
-          "prompt": "3문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "니체에게 중요한 것이 무엇인지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 12,
+              "end": 30
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "삶 바깥의 가치가 아니라 삶 자체"
+        },
+        {
+          "id": "q4",
+          "prompt": "힘에의 의지가 뜻하는 것을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
+              "start": 50,
+              "end": 84
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "현재의 자신을 넘어 더 높은 단계로 나아가려는 내적 상승의 힘"
+        },
+        {
+          "id": "q5",
+          "prompt": "힘에의 의지가 사회적 관계 속에서 드러나는 방식 가운데 하나를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 35,
+              "end": 43
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "아곤, 곧 경쟁"
+        },
+        {
+          "id": "q6",
+          "prompt": "경쟁자가 어떤 존재인지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 39,
+              "end": 58
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "나를 자극하고 성장하게 만드는 존재"
+        },
+        {
+          "id": "q7",
+          "prompt": "고통과 긴장이 어떻게 받아들여진다고 했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 143,
               "end": 162
             }
           ],
@@ -621,52 +701,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 맥락에서 제시되는 개념이 힘에의 의지다. 이는 단순히 남을 지배하려는 욕망이 아니라, 현재의 자신을 넘어 더 높은 단계로 나아가려는 내적 상승의 힘을 뜻한다. 니체는 삶이 본래 이런 자기 극복의 운동을 품고 있다고 보았고, 새로운 가치는 바로 이 의지의 작동 속에서 생겨난다고 생각했다."
+          "answerText": "더 높은 힘으로 나아가기 위한 자극"
         },
         {
-          "id": "q4",
-          "prompt": "4문단의 내용을 바탕으로 알 수 있는 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 173
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "힘에의 의지가 사회적 관계 속에서 드러나는 방식 가운데 하나가 아곤, 곧 경쟁이다. 여기서 경쟁은 상대를 제거하기 위한 싸움이라기보다, 더 강한 상대와 겨루며 자신의 힘을 시험하고 확장하는 과정으로 이해된다. 따라서 중요한 것은 승패 자체보다 경쟁을 통해 자신이 어디까지 나아갈 수 있는지를 확인하는 데 있다."
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단의 내용을 바탕으로 알 수 있는 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 172
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "니체의 경쟁 개념이 단순한 적대와 다른 이유도 여기에 있다. 경쟁자는 나를 자극하고 성장하게 만드는 존재이며, 그래서 강자와 상대적 약자 사이에도 단순한 지배 관계만이 아니라 일정한 상호 인정이 성립할 수 있다. 고통과 긴장은 제거해야 할 장애물이 아니라 더 높은 힘으로 나아가기 위한 자극으로 받아들여진다."
-        },
-        {
-          "id": "q6",
-          "prompt": "6문단의 내용을 바탕으로 알 수 있는 것은?",
+          "id": "q8",
+          "prompt": "니체 철학의 핵심을 보여 주는 두 개념이 묶인 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 186
+              "start": 104,
+              "end": 118
             }
           ],
           "scoring": {
@@ -675,7 +719,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 니체는 삶을 긍정한다는 것이 현실의 어려움을 지워 버리는 일이라고 보지 않았다. 오히려 삶이 던지는 갈등과 경쟁을 통과하면서 자신을 넘어서는 태도가 삶의 긍정이라고 보았다. 그래서 힘에의 의지와 아곤의 경쟁은, 외부의 절대 기준에 복종하는 대신 자신의 삶을 스스로 가치 평가의 출발점으로 삼으려는 니체 철학의 핵심을 보여 준다."
+          "answerText": "힘에의 의지와 아곤의 경쟁"
         }
       ]
     }

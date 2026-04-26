@@ -1074,93 +1074,83 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '정의'를 모두 찾으시오.",
+          "prompt": "설명문 작문에서 내용을 읽기 쉬운 순서로 배열하는 작업을 가리키는 두 글자 낱말을 찾으시오",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 30,
-              "end": 32
-            }
+            {"paragraphId": "p1", "start": 4, "end": 6},
+            {"paragraphId": "p1", "start": 138, "end": 140},
+            {"paragraphId": "p1", "start": 205, "end": 207},
+            {"paragraphId": "p2", "start": 5, "end": 7},
+            {"paragraphId": "p2", "start": 160, "end": 162},
+            {"paragraphId": "p2", "start": 206, "end": 208},
+            {"paragraphId": "p3", "start": 4, "end": 6},
+            {"paragraphId": "p4", "start": 11, "end": 13},
+            {"paragraphId": "p5", "start": 7, "end": 9},
+            {"paragraphId": "p5", "start": 56, "end": 58},
+            {"paragraphId": "p5", "start": 166, "end": 168}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정의"
+          "answerText": "조직"
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '특징'을 모두 찾으시오.",
+          "prompt": "둘 이상의 대상을 비교할 때 살펴 보여 주는 두 가지 요소를 모두 찾으시오",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 36,
-              "end": 38
-            }
+            {"paragraphId": "p2", "start": 122, "end": 125},
+            {"paragraphId": "p2", "start": 127, "end": 130}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "특징"
+          "answerMatchMode": "ALL",
+          "answerText": "공통점, 차이점"
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '비교'를 모두 찾으시오.",
+          "prompt": "한 문단이 끝나고 다음 문단이 시작될 때 흐름을 매끄럽게 이어 주는 표현을 가리키는 두 글자 낱말을 찾으시오",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 117,
-              "end": 119
-            }
+            {"paragraphId": "p3", "start": 25, "end": 27},
+            {"paragraphId": "p3", "start": 137, "end": 139}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "비교"
+          "answerText": "연결"
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '예시'를 모두 찾으시오.",
+          "prompt": "설명문을 쓴 뒤 조직이 알맞은지 다시 살피는 일을 가리키는 두 글자 낱말을 찾으시오",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 49,
-              "end": 51
-            }
+            {"paragraphId": "p4", "start": 23, "end": 25},
+            {"paragraphId": "p4", "start": 159, "end": 161}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "예시"
+          "answerText": "점검"
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '질서'를 모두 찾으시오.",
+          "prompt": "설명문 조직이 글의 내용을 어떤 상태로 배치하여 이해를 돕는다고 했는지 두 글자 낱말을 찾으시오",
           "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 18,
-              "end": 20
-            }
+            {"paragraphId": "p5", "start": 18, "end": 20}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
           "answerText": "질서"
+        },
+        {
+          "id": "q6",
+          "prompt": "설명을 짜는 방식 가운데 사건의 까닭과 그 까닭에서 비롯된 일의 흐름을 짝지어 가리키는 두 낱말을 모두 찾으시오",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 51, "end": 53},
+            {"paragraphId": "p2", "start": 55, "end": 57}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerText": "원인, 결과"
         }
       ]
     }

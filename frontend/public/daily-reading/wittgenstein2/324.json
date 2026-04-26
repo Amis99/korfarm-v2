@@ -571,11 +571,11 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "갈밭 속을 간다.`무엇`n가노라면`n나는 혼자였다.`n누구나?",
+          "prompt": "화자가 갈밭 속을 갈 때 함께한 존재가 드러난 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 10,
+              "start": 11,
               "end": 20
             }
           ],
@@ -585,21 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "n젊은 시인과 함께"
+          "answerText": "젊은 시인과 함께"
         },
         {
           "id": "q2",
-          "prompt": "핵심 개념은 무엇인가요?",
+          "prompt": "갈밭 속에서 일쑤 잃기 마련인 것을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 26,
-              "end": 29
-            },
-            {
-              "paragraphId": "p2",
-              "start": 34,
-              "end": 37
+              "start": 12,
+              "end": 14
             }
           ],
           "scoring": {
@@ -608,21 +603,44 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "n성형"
+          "answerText": "동행"
         },
         {
           "id": "q3",
-          "prompt": "무엇,`n이미 나는`n갈대 안에 있었다.`n바람이 부는 것도 아닌데`n갈밭은?",
+          "prompt": "반복되어 부르는 호명을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 33
+            },
+            {
+              "paragraphId": "p2",
+              "start": 35,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "성형(成兄)"
+        },
+        {
+          "id": "q4",
+          "prompt": "나의 음성이 되돌아오는 방향을 지문 표현 그대로 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 10
+              "end": 4
             },
             {
               "paragraphId": "p5",
               "start": 30,
-              "end": 40
+              "end": 34
             }
           ],
           "scoring": {
@@ -631,34 +649,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "내면으로 되돌아오고"
-        },
-        {
-          "id": "q4",
-          "prompt": "어석어석 흔들린다.`무엇`n백발에는 백발의 바람.`n젊은 시인은`n저편 강기슭에서 나를 부른다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 11,
-              "end": 23
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "n갈잎에는 갈잎의 바람"
+          "answerText": "내면으로"
         },
         {
           "id": "q5",
-          "prompt": "하지만 이미`n나는 응답할 수 없다.`n나의 음성은`무엇?",
+          "prompt": "화자가 이미 있었다고 한 장소를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 29,
-              "end": 40
+              "paragraphId": "p3",
+              "start": 20,
+              "end": 24
             }
           ],
           "scoring": {
@@ -667,16 +667,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "n내면으로 되돌아오고"
+          "answerText": "갈대 안"
         },
         {
           "id": "q6",
-          "prompt": "문단의 초점은 무엇인가요?",
+          "prompt": "갈잎과 백발에 각각 붙은 바람 구절을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 16
+              "paragraphId": "p4",
+              "start": 12,
+              "end": 23
+            },
+            {
+              "paragraphId": "p4",
+              "start": 25,
+              "end": 36
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "갈잎에는 갈잎의 바람",
+            "백발에는 백발의 바람"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "젊은 시인이 나를 부르는 장소를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 47,
+              "end": 53
             }
           ],
           "scoring": {
@@ -685,7 +711,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "어쩔 수 없이 나도`n흔들리고"
+          "answerText": "저편 강기슭"
+        },
+        {
+          "id": "q8",
+          "prompt": "마지막에 화자도 처한 상태를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 12,
+              "end": 20
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "흔들리고 있었다"
         }
       ]
     }

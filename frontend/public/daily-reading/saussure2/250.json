@@ -559,70 +559,85 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "덥고 햇빛이 쨍쨍 내리쬐는 계절은?",
-          "answerText": "여름",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 18,
-              "end": 20
-            }
-          ],
-          "scoring": {
+        "prompt": "이 시에서 대상을 반복해서 부르는 표현을 모두 찾으시오.",
+        "answerText": "바람아 바람아 / 산아 산아 / 가을아 가을아",
+        "answerTexts": [
+          "바람아 바람아",
+          "산아 산아",
+          "가을아 가을아"
+        ],
+        "answerMatchMode": "ALL",
+        "answerRanges": [
+          {
+            "paragraphId": "p1",
+            "start": 131,
+            "end": 138
+          },
+          {
+            "paragraphId": "p2",
+            "start": 158,
+            "end": 163
+          },
+          {
+            "paragraphId": "p3",
+            "start": 170,
+            "end": 177
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
+        },
+        "revealOnWrong": true
+      },
+      {
+        "id": "q2",
+        "prompt": "바람이 뺨에 닿는 느낌을 나타낸 부분을 지문에서 찾으시오.",
+        "answerText": "솔솔 뺨을 간지럽히며 불어오네",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p1",
+            "start": 47,
+            "end": 63
+          }
+        ],
+        "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "가을에 나무에서 떨어지는 마른 잎은?",
-          "answerText": "낙엽",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 84,
-              "end": 86
-            }
-          ],
-          "scoring": {
+        "revealOnWrong": true
+      },
+      {
+        "id": "q3",
+        "prompt": "코스모스가 사람처럼 움직이는 모습을 나타낸 부분을 지문에서 찾으시오.",
+        "answerText": "바람결에 살랑살랑 예쁘게 춤을 추네",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p1",
+            "start": 110,
+            "end": 129
+          }
+        ],
+        "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "비싸고 귀하며 반짝이는 누런 금속은?",
-          "answerText": "황금",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 79,
-              "end": 81
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "골짜기에서 흘러내리는 작은 물줄기는?",
-          "answerText": "시냇물",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 116,
-              "end": 119
-            }
-          ],
+        "revealOnWrong": true
+      },
+      {
+        "id": "q4",
+        "prompt": "가을바람을 친구처럼 표현한 부분을 지문에서 찾으시오.",
+        "answerText": "넉넉한 웃음꽃을 피워 주는 착한 내 친구네",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p3",
+            "start": 145,
+            "end": 168
+          }
+        ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45

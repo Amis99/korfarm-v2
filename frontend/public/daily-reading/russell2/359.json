@@ -844,93 +844,127 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "셈없이 다니는 것은 무엇인가요?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 28,
-              "end": 30
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "젊은"
-        },
-        {
-          "id": "q2",
-          "prompt": "주인님 말씀을 듣지 않았는지 묻는 말은 무엇인가요?",
+          "prompt": "화자가 자신을 가리켜 말한 표현, 즉 다른 곳에서 와 늙은 종임을 드러낸 표현을 지문에서 찾으시오.",
+          "answerText": "외방의 늙은 종",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 6
+              "start": 28,
+              "end": 40
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "주인님 말씀"
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "화자가 청자를 직접 부르며 주의를 끌기 위해 사용한 영탄법 표현 두 가지를 지문에서 모두 찾으시오.",
+          "answerText": "아아 / 저 양반아",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p1",
+              "start": 4,
+              "end": 9
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "많은 종이 남아 있다는 말은 무엇인가요?",
+          "prompt": "집안에 먹고 입는 데 드는 종이 얼마나 남았다고 했는지 그 인원을 지문에서 찾으시오.",
+          "answerText": "백여구",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 41,
-              "end": 43
+              "end": 44
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "백여"
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "밭을 놀려 두었다는 뜻으로 말한 것은 무엇인가요?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 9,
-              "end": 10
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "텃"
-        },
-        {
-          "id": "q5",
-          "prompt": "집안일을 바로잡을 때 무엇을 믿으라고 하나요?",
+          "prompt": "집일을 고치기 위한 단계로 화자가 마지막에 믿으라고 한 대상을 지문에서 찾으시오.",
+          "answerText": "어른 종",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p6",
               "start": 52,
-              "end": 54
+              "end": 56
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "어른"
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "종들을 휘어잡으려면 무엇을 밝혀야 한다고 했는지 지문에서 모두 찾으시오.",
+          "answerText": "상과 벌",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 31,
+              "end": 35
+            },
+            {
+              "paragraphId": "p6",
+              "start": 42,
+              "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "젊은 손이 묵힌 채로 두었다고 화자가 책망한 공간을 지문에서 찾으시오.",
+          "answerText": "텃밭",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 9,
+              "end": 11
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

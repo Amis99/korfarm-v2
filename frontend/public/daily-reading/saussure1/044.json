@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "왼쪽 가죽은 ( )이에요.",
-          "answerText": "궁편",
-          "answerMatchMode": "EXACT",
+          "prompt": "음악을 연주할 때 쓰는 도구라는 뜻의 단어를 지문에서 찾아 보세요.",
+          "answerText": "악기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 36,
-              "end": 38
+              "start": 10,
+              "end": 12
             }
           ],
           "scoring": {
@@ -571,14 +571,19 @@
         },
         {
           "id": "q2",
-          "prompt": "장구를 ( )면 박자가 남.",
-          "answerText": "두드리",
-          "answerMatchMode": "EXACT",
+          "prompt": "장구의 왼쪽 가죽과 오른쪽 가죽을 부르는 이름 두 가지를 모두 찾아 보세요.",
+          "answerText": "궁편 / 채편",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 73,
-              "end": 76
+              "start": 36,
+              "end": 38
+            },
+            {
+              "paragraphId": "p1",
+              "start": 50,
+              "end": 52
             }
           ],
           "scoring": {
@@ -590,14 +595,53 @@
         },
         {
           "id": "q3",
-          "prompt": "어깨가 ( )거려요.",
-          "answerText": "들썩",
-          "answerMatchMode": "EXACT",
+          "prompt": "'덩' 하고 울리는 소리를 들으면 가슴이 어떻게 되는지 설명하는 표현을 찾아 보세요.",
+          "answerText": "시원하게",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
+              "paragraphId": "p1",
+              "start": 109,
+              "end": 113
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "신명 나는 소리를 내는 우리 전통 악기의 이름을 지문에서 찾아 보세요.",
+          "answerText": "장구",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p1",
+              "start": 69,
+              "end": 71
+            },
+            {
+              "paragraphId": "p1",
+              "start": 129,
+              "end": 131
+            },
+            {
               "paragraphId": "p2",
-              "start": 88,
-              "end": 90
+              "start": 36,
+              "end": 38
+            },
+            {
+              "paragraphId": "p2",
+              "start": 108,
+              "end": 110
             }
           ],
           "scoring": {

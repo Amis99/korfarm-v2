@@ -571,12 +571,48 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "prompt": "반복되는 색채어와 색채를 더 강하게 만든 표현을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 7,
+              "end": 14
+            },
+            {
+              "paragraphId": "p5",
+              "start": 21,
+              "end": 28
+            },
+            {
+              "paragraphId": "p1",
+              "start": 22,
+              "end": 26
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "노랗게 노랗게",
+            "샛노랗게"
+          ]
+        },
+        {
+          "id": "q2",
+          "prompt": "아주 작은 민들레를 가리키는 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 32
+              "end": 6
+            },
+            {
+              "paragraphId": "p5",
+              "start": 50,
+              "end": 56
             }
           ],
           "scoring": {
@@ -585,15 +621,85 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "쬐그만 것이\n노랗게 노랗게\n전력을 다해 샛노랗게 피어 있다"
+          "answerText": "쬐그만 것이"
         },
         {
-          "id": "q2",
-          "prompt": "2연은 그 정서를 어떤 이미지나 흐름으로 이어 가는가?",
+          "id": "q3",
+          "prompt": "주어진 한계 안에서 끝까지 머무는 태도를 드러내는 표현을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
+              "end": 13
+            },
+            {
+              "paragraphId": "p2",
+              "start": 38,
+              "end": 52
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "아무 곳도 넘보지 않는다",
+            "한 치의 틈도 없이 끝까지"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "민들레가 자기 자리로 받아들이는 곳을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 19,
+              "end": 29
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "씨 뿌려진 그 자리"
+        },
+        {
+          "id": "q5",
+          "prompt": "실뿌리와 떡잎을 살아 움직이는 존재처럼 그린 행을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 13
+            },
+            {
+              "paragraphId": "p4",
+              "start": 14,
+              "end": 28
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "물을 길어 올리는 실뿌리",
+            "어둠을 힘껏 밀어내는 떡잎"
+          ]
+        },
+        {
+          "id": "q6",
+          "prompt": "4연에서 같은 말을 반복해 노력을 강조하는 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 45,
               "end": 52
             }
           ],
@@ -603,51 +709,15 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "아무 곳도 넘보지 않는다\n다만 혼자\n주어진 한계 그 안에서 아슬아슬\n한 치의 틈도 없이 끝까지"
+          "answerText": "열심히 열심히"
         },
         {
-          "id": "q3",
-          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 44
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "바위 새를 비집거나 잡초 속이거나\n씨 뿌려진 그 자리가 바로 내 자리\n터를 잡고"
-        },
-        {
-          "id": "q4",
-          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 57
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "물을 길어 올리는 실뿌리\n어둠을 힘껏 밀어내는 떡잎\n그리고 그것들이 한데 어울려\n열심히 열심히 한 댓새"
-        },
-        {
-          "id": "q5",
-          "prompt": "5연은 앞선 흐름에 어떤 긴장이나 전환을 더하는가?",
+          "id": "q7",
+          "prompt": "작지만 그 크기를 잴 수 없다는 역설적 인식을 드러내는 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
+              "start": 50,
               "end": 79
             }
           ],
@@ -657,16 +727,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "세상에 그밖에는 할 일이 없어서\n아주 노랗게 노랗게만 피는 꽃\n피어선 질 수밖에 없는 꽃\n쬐그만 것이지만 그 크기는\n어떤 자로서도 잴 수 없다"
+          "answerText": "쬐그만 것이지만 그 크기는\n어떤 자로서도 잴 수 없다"
         },
         {
-          "id": "q6",
-          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
+          "id": "q8",
+          "prompt": "민들레의 꿈을 낮추어 보면서도 긍정하는 표현을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 78
+              "start": 22,
+              "end": 26
+            },
+            {
+              "paragraphId": "p6",
+              "start": 31,
+              "end": 40
             }
           ],
           "scoring": {
@@ -674,8 +749,11 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "아 민들레!\n그래 봤자\n혼자 가는 자의 헛된 꿈\n하지만 헛되어도 좋은 꿈 아니냐\n한 댓새를 짐짓 영원인 양하고\n보라 저기 민들레는 피어 있다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "헛된 꿈",
+            "헛되어도 좋은 꿈"
+          ]
         }
       ]
     }

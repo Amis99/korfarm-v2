@@ -843,14 +843,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "재판이 엉망이 되자 먼저 사형을 집행하라고 외친 인물은 누구인가요?",
-          "answerText": "하트 여왕",
+          "prompt": "하트 여왕이 재판에서 외친 말의 내용을 찾으시오.",
+          "answerText": "판결을 내리기도 전에 사형부터 집행하라고",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 22,
-              "end": 27
+              "start": 29,
+              "end": 51
             }
           ],
           "scoring": {
@@ -861,13 +861,13 @@
         },
         {
           "id": "q2",
-          "prompt": "앨리스가 상대를 향해 던진 말에서 그들이 무엇일 뿐이라고 했나요?",
-          "answerText": "트럼프 카드",
+          "prompt": "앨리스가 상대들을 가리켜 그저 무엇일 뿐이라고 했는지 찾으시오.",
+          "answerText": "한 벌의 트럼프 카드",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 14,
+              "start": 9,
               "end": 20
             }
           ],
@@ -879,14 +879,14 @@
         },
         {
           "id": "q3",
-          "prompt": "눈을 뜬 앨리스가 누워 있던 곳은 어디인가요?",
-          "answerText": "강둑",
+          "prompt": "카드 병정들이 쏟아져 내리는 모습을 비유한 표현을 찾으시오.",
+          "answerText": "성난 파도처럼",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 12,
-              "end": 14
+              "paragraphId": "p2",
+              "start": 63,
+              "end": 70
             }
           ],
           "scoring": {
@@ -897,14 +897,14 @@
         },
         {
           "id": "q4",
-          "prompt": "얼굴 위로 떨어지던 것은 실제로 무엇이었나요?",
-          "answerText": "나뭇잎",
+          "prompt": "얼굴 위로 떨어지던 것이 실제로 무엇이었는지 찾으시오.",
+          "answerText": "나뭇잎들",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 60,
-              "end": 63
+              "end": 64
             }
           ],
           "scoring": {
@@ -915,14 +915,22 @@
         },
         {
           "id": "q5",
-          "prompt": "언니가 상상한 이상한 나라의 존재 가운데 하나는 무엇인가요?",
-          "answerText": "흰 토끼",
-          "answerMatchMode": "ANY",
+          "prompt": "언니가 상상한 이상한 나라의 존재를 모두 찾으시오.",
+          "answerTexts": [
+            "흰 토끼",
+            "미소 짓는 고양이"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 45,
               "end": 49
+            },
+            {
+              "paragraphId": "p4",
+              "start": 51,
+              "end": 60
             }
           ],
           "scoring": {

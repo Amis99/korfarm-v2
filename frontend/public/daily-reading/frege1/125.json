@@ -1094,14 +1094,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 독서의 문을 여는 열쇠라고 한 것은 무엇인가요?",
-          "answerText": "호기심",
+          "prompt": "눈으로만 글자를 따라가는 독서 방식을 지문에서는 무엇이라고 했나요?",
+          "answerText": "수동적인 독서",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 163,
-              "end": 166
+              "start": 25,
+              "end": 32
             }
           ],
           "scoring": {
@@ -1112,14 +1112,14 @@
         },
         {
           "id": "q2",
-          "prompt": "읽는 중간에 던지는 질문들이 맡는 역할은 무엇인가요?",
-          "answerText": "안내선",
+          "prompt": "진짜 독서가 어떤 과정이어야 한다고 했는지 지문에서 찾아 쓰세요.",
+          "answerText": "책과 대화하며 자신의 생각을 넓히는 적극적인 과정",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 215,
-              "end": 218
+              "paragraphId": "p1",
+              "start": 43,
+              "end": 70
             }
           ],
           "scoring": {
@@ -1130,7 +1130,25 @@
         },
         {
           "id": "q3",
-          "prompt": "정답이 없는 질문을 만들어 보면 깊어진다고 한 것은 무엇인가요?",
+          "prompt": "글을 읽는 중간에 스스로 질문을 던져야 하는 때를 지문에서 찾아 쓰세요.",
+          "answerText": "모르는 단어가 나오거나 인물의 행동이 이해되지 않을 때",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 140,
+              "end": 170
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "책의 내용을 나의 삶과 연결 짓는 질문들은 무엇을 깊게 해준다고 했나요?",
           "answerText": "사고력",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1147,33 +1165,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "질문을 만들며 읽는 습관은 우리를 어떤 독자로 성장시킨다고 했나요?",
-          "answerText": "능동적이고 창의적인 독자",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 25,
-              "end": 38
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q5",
-          "prompt": "책 속에 숨겨진 보물을 찾는 존재에 비유한 말은 무엇인가요?",
-          "answerText": "탐험가",
+          "prompt": "진정한 배움이 일어나는 과정을 지문에서 찾아 쓰세요.",
+          "answerText": "나만의 질문을 던지고 스스로 답을 찾아가는 과정",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 192,
-              "end": 195
+              "start": 68,
+              "end": 94
             }
           ],
           "scoring": {

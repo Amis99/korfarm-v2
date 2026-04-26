@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "1문단에서 화자의 목숨을 비유한 대상을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 73
+              "start": 8,
+              "end": 16
             }
           ],
           "scoring": {
@@ -585,15 +585,72 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "목숨이란 마치 깨어진 배 조각\n여기저기 흩어져 마을이 구죽죽한 어촌보담 어설프고\n삶의 티끌만 오래 묵은 포범(布帆)처럼 달아 매었다"
+          "answerText": "깨어진 배 조각"
         },
         {
           "id": "q2",
-          "prompt": "2문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "1문단에서 목숨과 삶을 빗댄 표현 두 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 8,
+              "end": 16
+            },
+            {
+              "paragraphId": "p1",
+              "start": 52,
+              "end": 64
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "깨어진 배 조각",
+            "오래 묵은 포범(布帆)"
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "2문단에서 남들과 화자의 상황을 대조하는 두 표현을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
+              "end": 17
+            },
+            {
+              "paragraphId": "p2",
+              "start": 22,
+              "end": 38
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "남들은 기뻤다는 젊은 날이었건만",
+            "내 꿈은 서해를 밀항하는 쩡크"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "2문단에서 내 꿈이 어떤 상태가 되었는지 두 구절을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 43,
+              "end": 49
+            },
+            {
+              "paragraphId": "p2",
+              "start": 50,
               "end": 65
             }
           ],
@@ -602,53 +659,64 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "남들은 기뻤다는 젊은 날이었건만\n밤마다 내 꿈은 서해를 밀항하는 쩡크와 같아\n소금에 절고 조수(潮水)에 부풀어 올랐다"
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 75
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "항상 흐렷한 밤 암초를 벗어나면 태풍과 싸워 가고\n전설에 읽어 본 산호도(珊瑚島)는 구경도 못 하는\n그곳은 남십자성이 비쳐 주도 않았다"
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 54
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "쫓기는 마음 지친 몸이길래\n그리운 지평선을 한숨에 기오르면\n시궁치는 열대 식물처럼 발목을 오여쌌다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "소금에 절고",
+            "조수(潮水)에 부풀어 올랐다"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "3문단에서 화자가 벗어나거나 싸워 가는 대상을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 9,
+              "end": 11
+            },
+            {
+              "paragraphId": "p3",
+              "start": 18,
+              "end": 20
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "암초",
+            "태풍"
+          ]
+        },
+        {
+          "id": "q6",
+          "prompt": "3문단에서 끝내 구경도 못 하는 대상을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 37,
+              "end": 45
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "산호도(珊瑚島)"
+        },
+        {
+          "id": "q7",
+          "prompt": "5문단에서 화자가 자신을 빗댄 존재를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 0,
-              "end": 39
+              "end": 13
             }
           ],
           "scoring": {
@@ -657,16 +725,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "새벽 밀물에 밀려온 거미이냐\n다 삭아 빠진 소라 껍질에 나는 붙어 왔다"
+          "answerText": "새벽 밀물에 밀려온 거미"
         },
         {
-          "id": "q6",
-          "prompt": "6문단을 이해한 내용으로 가장 적절한 것은?",
+          "id": "q8",
+          "prompt": "마지막 행에서 화자가 들여다보는 대상을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 27
+              "start": 14,
+              "end": 20
             }
           ],
           "scoring": {
@@ -675,7 +743,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "먼 항구의 노정(路程)에 흘러간 생활을 들여다보며"
+          "answerText": "흘러간 생활"
         }
       ]
     }

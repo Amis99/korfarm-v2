@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "( ) 크기만큼 치약 짬.",
-          "answerText": "완두콩",
-          "answerMatchMode": "EXACT",
+          "prompt": "치약을 짤 때 어느 정도 크기만큼 짜라고 했는지 지문에서 찾아 보세요.",
+          "answerText": "완두콩 크기만큼",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 30,
-              "end": 33
+              "end": 38
             }
           ],
           "scoring": {
@@ -571,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "입안을 여러 번 ( ) 냅니다.",
-          "answerText": "헹구어",
-          "answerMatchMode": "EXACT",
+          "prompt": "양치를 잘하면 입안이 어떻게 된다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "입안이 시원하고 상쾌해집니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 69,
-              "end": 72
+              "start": 8,
+              "end": 23
             }
           ],
           "scoring": {
@@ -590,14 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "소중한 이를 ( ) 관리해요.",
-          "answerText": "스스로",
-          "answerMatchMode": "EXACT",
+          "prompt": "양치를 잘하면 나쁜 벌레들과 이가 어떻게 된다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "나쁜 벌레들이 도망가서 이가 아프지 않아요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 115,
-              "end": 118
+              "start": 25,
+              "end": 48
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "튼튼한 이를 위해 하루에 몇 번 양치 약속을 지키자고 했는지 지문에서 찾아 보세요.",
+          "answerText": "하루 세 번",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 117,
+              "end": 123
             }
           ],
           "scoring": {

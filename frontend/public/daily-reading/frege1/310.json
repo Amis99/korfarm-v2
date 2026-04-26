@@ -914,19 +914,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "글쓴이가 한숨부터 나온다고 한 것은 무엇인가요?",
-          "answerText": "안내판",
+          "prompt": "안내판에 가득 차 있다고 한 것을 찾으시오.",
+          "answerText": "하지 말라는 규칙들",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 19,
-              "end": 22
-            },
-            {
-              "paragraphId": "p1",
-              "start": 38,
-              "end": 41
+              "start": 47,
+              "end": 57
             }
           ],
           "scoring": {
@@ -937,19 +932,14 @@
         },
         {
           "id": "q2",
-          "prompt": "과도한 규칙이 빼앗는다고 한 것은 무엇인가요?",
-          "answerText": "즐거움",
+          "prompt": "글쓴이가 생각하는 놀이터의 모습을 찾으시오.",
+          "answerText": "아이들이 눈치를 보지 않고 자유롭게 놀 수 있는 유일한 공간",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 33,
-              "end": 36
-            },
-            {
-              "paragraphId": "p2",
-              "start": 153,
-              "end": 156
+              "paragraphId": "p1",
+              "start": 128,
+              "end": 161
             }
           ],
           "scoring": {
@@ -960,14 +950,15 @@
         },
         {
           "id": "q3",
-          "prompt": "약간의 위험을 무릅쓰며 아이들이 몸으로 깨닫는 것은 무엇인가요?",
-          "answerText": "판단",
+          "prompt": "글쓴이가 과도한 규칙을 반대하는 첫 번째 까닭을 찾으시오.",
+          "answerText": "과도한 규칙이 놀이의 즐거움을 빼앗기 때문입니다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 133,
-              "end": 135
+              "paragraphId": "p2",
+              "start": 21,
+              "end": 47
             }
           ],
           "scoring": {
@@ -978,14 +969,22 @@
         },
         {
           "id": "q4",
-          "prompt": "글쓴이가 우리에게 필요하다고 한 놀이터는 어떤 놀이터인가요?",
-          "answerText": "자유로운 놀이터",
-          "answerMatchMode": "ANY",
+          "prompt": "아이들이 스스로 배워야 한다고 본 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "어디까지가 안전하고 어디부터가 위험한지",
+            "스스로 판단하고 대처하는 능력"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 156,
-              "end": 164
+              "paragraphId": "p3",
+              "start": 70,
+              "end": 91
+            },
+            {
+              "paragraphId": "p3",
+              "start": 129,
+              "end": 145
             }
           ],
           "scoring": {
@@ -996,14 +995,22 @@
         },
         {
           "id": "q5",
-          "prompt": "글쓴이가 막아야 한다고 인정한 것은 어떤 장난인가요?",
-          "answerText": "위험한 장난",
-          "answerMatchMode": "ANY",
+          "prompt": "글쓴이가 어른들에게 바라는 태도를 모두 찾으시오.",
+          "answerTexts": [
+            "믿고",
+            "멀리서 지켜봐"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 14,
-              "end": 20
+              "start": 84,
+              "end": 86
+            },
+            {
+              "paragraphId": "p4",
+              "start": 91,
+              "end": 98
             }
           ],
           "scoring": {

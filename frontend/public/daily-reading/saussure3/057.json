@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "옥수수밭의 장대에 매달려 있었으며, 자신에게 생각할 수 있는 뇌가 없다고 슬퍼한 존재는?",
+          "prompt": "도로시가 옥수수밭에서 만난 존재를 지문에서 찾으시오.",
           "answerText": "허수아비",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -591,19 +591,19 @@
         },
         {
           "id": "q2",
-          "prompt": "비에 맞아 온몸이 녹슬어 숲에서 멈춰 있었지만, 도로시가 기름을 쳐 주어 다시 움직인 인물은?",
-          "answerText": "양철 나무꾼",
-          "answerMatchMode": "EXACT",
+          "prompt": "허수아비가 없다고 슬퍼한 것을 지문에서 찾으시오.",
+          "answerText": "뇌",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 32,
-              "end": 38
+              "paragraphId": "p1",
+              "start": 69,
+              "end": 70
             },
             {
-              "paragraphId": "p3",
-              "start": 11,
-              "end": 17
+              "paragraphId": "p1",
+              "start": 99,
+              "end": 100
             }
           ],
           "scoring": {
@@ -615,14 +615,33 @@
         },
         {
           "id": "q3",
-          "prompt": "도로시와 친구들이 목적지를 향해 계속 따라 걸었던 반짝이는 길의 이름은 무엇인가요?",
-          "answerText": "노란 벽돌 길",
-          "answerMatchMode": "EXACT",
+          "prompt": "도로시가 양철 나무꾼의 관절에 쳐 준 것을 지문에서 찾으시오.",
+          "answerText": "기름",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 57,
+              "end": 59
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "도로시 일행 앞에 나타난 것을 지문에서 찾으시오.",
+          "answerText": "에메랄드 시의 성벽",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 22,
-              "end": 29
+              "start": 106,
+              "end": 116
             }
           ],
           "scoring": {

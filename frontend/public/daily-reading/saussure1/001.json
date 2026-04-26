@@ -552,34 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "( )과 모음이 만나 글자가 됩니다.",
-          "answerText": "자음",
-          "answerMatchMode": "EXACT",
+          "prompt": "한글이 어떻게 만들어지는지 설명한 부분을 지문에서 찾아 보세요.",
+          "answerText": "한글은 자음과 모음이 만나서 만들어집니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p1",
-              "start": 41,
-              "end": 43
-            },
-            {
-              "paragraphId": "p1",
-              "start": 80,
-              "end": 82
-            },
-            {
-              "paragraphId": "p2",
               "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 25,
-              "end": 27
+              "end": 22
             }
           ],
           "scoring": {
@@ -591,14 +571,19 @@
         },
         {
           "id": "q2",
-          "prompt": "글자에는 신기한 ( )이 숨어 있어요.",
-          "answerText": "비밀",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 자음의 예시로 든 글자를 모두 찾아 보세요.",
+          "answerText": "ㄱ, ㄴ",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 122,
-              "end": 124
+              "start": 25,
+              "end": 26
+            },
+            {
+              "paragraphId": "p1",
+              "start": 31,
+              "end": 32
             }
           ],
           "scoring": {
@@ -610,9 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "( )님께 감사하는 마음을 가져요.",
+          "prompt": "지문에서 모음의 예시로 든 글자를 모두 찾아 보세요.",
+          "answerText": "ㅏ, ㅓ",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 53,
+              "end": 54
+            },
+            {
+              "paragraphId": "p1",
+              "start": 58,
+              "end": 59
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "한글을 만들어 주신 분이 누구인지 지문에서 찾아 보세요.",
           "answerText": "세종대왕",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",

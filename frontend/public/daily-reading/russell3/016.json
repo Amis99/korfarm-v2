@@ -571,121 +571,153 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"달을 불러 소망을 드러낼 분위기를 연다\"에 해당하는 부분은 어디인가요?",
+          "prompt": "1행에서 화자가 부르는 대상(돈호법이 쓰인 시어)을 찾으시오",
+          "answerText": "달하",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 10
+              "end": 2
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "달하 노피곰 도다샤"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "\"달빛으로 멀리까지 환히 비추어 달라는 것\"에 해당하는 부분은 어디인가요?",
+          "prompt": "1행에서 '높이'에 해당하는 옛말을 찾으시오",
+          "answerText": "노피곰",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 3,
+              "end": 6
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "2행에서 '멀리'에 해당하는 옛말을 찾으시오",
+          "answerText": "머리곰",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 4,
+              "end": 7
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "이 노래에서 반복되는 여음구 '어긔야'를 모두 찾으시오",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 13
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "어긔야 머리곰 비취오시라"
-        },
-        {
-          "id": "q3",
-          "prompt": "\"노래의 리듬감을 살리고 정서를 이어 준다\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
+              "end": 3
+            },
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 8
+              "end": 3
+            },
+            {
+              "paragraphId": "p5",
+              "start": 10,
+              "end": 13
+            },
+            {
+              "paragraphId": "p6",
+              "start": 10,
+              "end": 13
             },
             {
               "paragraphId": "p6",
               "start": 29,
+              "end": 32
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true,
+          "answerTexts": [
+            "어긔야"
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "이 노래에서 반복되는 여음구 '어강됴리'를 모두 찾으시오",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 4,
+              "end": 8
+            },
+            {
+              "paragraphId": "p6",
+              "start": 33,
               "end": 37
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "어긔야 어강됴리"
+          "answerTexts": [
+            "어강됴리"
+          ]
         },
         {
-          "id": "q4",
-          "prompt": "\"앞의 여음구와 이어지는 또 하나의 후렴구\"에 해당하는 부분은 어디인가요?",
+          "id": "q6",
+          "prompt": "이 노래에서 반복되는 여음구 '다롱디리'를 모두 찾으시오",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
+              "start": 3,
               "end": 7
             },
             {
               "paragraphId": "p6",
-              "start": 38,
+              "start": 41,
               "end": 45
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "아으 다롱디리"
-        },
-        {
-          "id": "q5",
-          "prompt": "\"저자에 간 임이 험한 곳을 디딜까 하는 일\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 25
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "전져재 녀러신고요 어긔야 즌ᄃᆡ를 드ᄃᆡ욜셰라"
-        },
-        {
-          "id": "q6",
-          "prompt": "\"임에 대한 걱정을 반복해 화자의 사랑을 강조한다\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 45
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "어느이다 노코시라 어긔야 내 가논ᄃᆡ 점그ᄅᆞᆯ셰라 어긔야 어강됴리 아으 다롱디리"
+          "answerTexts": [
+            "다롱디리"
+          ]
         }
       ]
     }

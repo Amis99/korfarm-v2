@@ -552,19 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "숲속 ( )장 소식을 쓴다.",
-          "answerText": "캠핑",
-          "answerMatchMode": "EXACT",
+          "prompt": "어제 가족들과 커다랗게 쳤다고 한 것을 두 글자로 적어 보세요",
+          "answerText": "텐트",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 10,
-              "end": 12
-            },
-            {
-              "paragraphId": "p2",
-              "start": 70,
-              "end": 72
+              "start": 38,
+              "end": 40
             }
           ],
           "scoring": {
@@ -576,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "( ) 소리가 듣기 좋았습니다.",
-          "answerText": "장작",
-          "answerMatchMode": "EXACT",
+          "prompt": "아빠와 함께 나무를 주워 피웠다고 한 것을 세 글자로 적어 보세요",
+          "answerText": "모닥불",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 112,
-              "end": 114
+              "start": 92,
+              "end": 95
             }
           ],
           "scoring": {
@@ -595,9 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "구운 ( )가 무척 달콤해요.",
+          "prompt": "밤하늘에 반짝이며 무척 많이 보였다고 한 것을 한 글자로 적어 보세요",
+          "answerText": "별",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 10,
+              "end": 11
+            },
+            {
+              "paragraphId": "p2",
+              "start": 32,
+              "end": 33
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "마당에서 구워 먹었더니 달콤하고 맛있었다고 한 것을 세 글자로 적어 보세요",
           "answerText": "고구마",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",

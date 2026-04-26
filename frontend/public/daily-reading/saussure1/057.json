@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "커다란 ( )나무 아래.",
+          "prompt": "탐정단이 숲속에서 도착한 커다란 나무의 이름을 지문에서 찾아 보세요.",
           "answerText": "느티나무",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -571,9 +571,28 @@
         },
         {
           "id": "q2",
-          "prompt": "( ) 소리를 내는 고양이.",
+          "prompt": "덤불 속에서 나타나 민수의 발치를 맴돈 동물을 지문에서 찾아 보세요.",
+          "answerText": "아기 고양이",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 20,
+              "end": 26
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "고양이가 내는 소리를 흉내 낸 말을 지문에서 찾아 보세요.",
           "answerText": "갸르릉",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -589,15 +608,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "보물 찾기가 ( )해짐.",
-          "answerText": "흥미진진",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "탐정단의 가슴이 뛰는 모양을 흉내 낸 말을 지문에서 찾아 보세요.",
+          "answerText": "콩닥콩닥",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 134,
-              "end": 138
+              "paragraphId": "p1",
+              "start": 136,
+              "end": 140
             }
           ],
           "scoring": {

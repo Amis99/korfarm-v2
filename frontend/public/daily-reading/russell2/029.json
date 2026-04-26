@@ -1039,93 +1039,72 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "흡수는 무슨 뜻인가요?",
-          "answerText": "약이 투여된 자리에서 혈액이나 조직으로 들어가는 과정",
+          "prompt": "지문에서 '효소'를 모두 찾으시오",
+          "answerText": "효소",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 33
-            }
+            {"paragraphId": "p3", "start": 73, "end": 75},
+            {"paragraphId": "p5", "start": 136, "end": 138}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "투여는 무슨 뜻인가요?",
-          "answerText": "흡수는 약이 투여된 자리에서 혈액이나 조직으로 들어가는 과정을 말한다.",
+          "prompt": "지문에서 '의약학'을 찾으시오",
+          "answerText": "의약학",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 39
-            }
+            {"paragraphId": "p6", "start": 117, "end": 120}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "효소는 무슨 뜻인가요?",
-          "answerText": "이렇게 몸속 효소 작용으로 약의 성질이 달라지는 과정을 대사라고 한다.",
+          "prompt": "'흡수'의 정의에 해당하는 표현을 찾으시오",
+          "answerText": "약이 투여된 자리에서 혈액이나 조직으로 들어가는 과정",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 66,
-              "end": 105
-            }
+            {"paragraphId": "p2", "start": 4, "end": 33}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "대사는 무슨 뜻인가요?",
-          "answerText": "이렇게 몸속 효소 작용으로 약의 성질이 달라지는 과정을 대사라고 한다.",
+          "prompt": "'대사'의 정의에 해당하는 표현을 찾으시오",
+          "answerText": "몸속 효소 작용으로 약의 성질이 달라지는 과정",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 66,
-              "end": 105
-            }
+            {"paragraphId": "p3", "start": 70, "end": 95}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "용량은 무슨 뜻인가요?",
-          "answerText": "그래서 같은 성분이라도 먹는 약과 주사 약의 용량이 다르게 정해지기도 한다.",
+          "prompt": "두 과정을 함께 이해해야 더 정확히 읽을 수 있는 세 가지를 모두 찾으시오",
+          "answerText": "복용량 / 투여 방법 / 부작용",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 59,
-              "end": 101
-            }
+            {"paragraphId": "p6", "start": 139, "end": 142},
+            {"paragraphId": "p6", "start": 144, "end": 149},
+            {"paragraphId": "p6", "start": 151, "end": 154}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "흡수 경로에 따라 효과가 달라지는 까닭으로 든 표현을 찾으시오",
+          "answerText": "어떤 경로로 투여하느냐에 따라 흡수 속도와 효과가 달라질 수 있다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 114, "end": 150}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

@@ -396,53 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리가 쓰는 고유 언어?",
-          "answerText": "우리말",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 15,
-              "end": 18
-            },
-            {
-              "paragraphId": "p1",
-              "start": 101,
-              "end": 104
-            },
-            {
-              "paragraphId": "p2",
-              "start": 5,
-              "end": 8
-            },
-            {
-              "paragraphId": "p2",
-              "start": 34,
-              "end": 37
-            },
-            {
-              "paragraphId": "p2",
-              "start": 83,
-              "end": 86
-            },
-            {
-              "paragraphId": "p2",
-              "start": 133,
-              "end": 136
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "밖에서 들어온 단어?",
+          "prompt": "다른 나라에서 들어와 우리말처럼 쓰이는 말을 무엇이라고 하는지 지문에서 찾아 적어 보세요",
           "answerText": "외래어",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -463,15 +419,63 @@
           "revealOnWrong": true
         },
         {
+          "id": "q2",
+          "prompt": "1문단에서 외래어의 예로 든 낱말 세 가지를 모두 찾아 적어 보세요",
+          "answerText": "버스, 텔레비전, 컴퓨터",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 60,
+              "end": 62
+            },
+            {
+              "paragraphId": "p1",
+              "start": 64,
+              "end": 68
+            },
+            {
+              "paragraphId": "p1",
+              "start": 72,
+              "end": 75
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q3",
-          "prompt": "사물의 쓸모나 중요성?",
-          "answerText": "가치",
-          "answerMatchMode": "EXACT",
+          "prompt": "1문단에서 외래어가 새로운 물건이나 지식을 전할 때 우리에게 주는 좋은 점을 찾아 적어 보세요",
+          "answerText": "편리함",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 145,
+              "end": 148
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "2문단에서 우리말의 가치를 깨닫고 올바르게 사용하는 습관을 통해 지켜 나가야 할 것을 찾아 적어 보세요",
+          "answerText": "우리 문화",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 138,
-              "end": 140
+              "start": 163,
+              "end": 168
             }
           ],
           "scoring": {

@@ -557,44 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "산이나 들에서 길을 잃었을 때, 바늘이 일정한 방향을 가리켜서 동서남북을 쉽게 찾도록 도와주는 발명품은?",
-          "answerText": "나침반",
-          "answerMatchMode": "EXACT",
+          "prompt": "나침반이 정확하게 알 수 있게 해 준다고 한 네 방향을 뜻하는 표현을 찾으시오.",
+          "answerText": "동서남북",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 44,
-              "end": 47
-            },
-            {
-              "paragraphId": "p1",
-              "start": 52,
-              "end": 55
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p2",
-              "start": 51,
-              "end": 54
-            },
-            {
-              "paragraphId": "p3",
-              "start": 4,
-              "end": 7
-            },
-            {
-              "paragraphId": "p3",
-              "start": 60,
-              "end": 63
-            },
-            {
-              "paragraphId": "p3",
-              "start": 95,
-              "end": 98
+              "start": 86,
+              "end": 90
             }
           ],
           "scoring": {
@@ -606,19 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "나침반 바늘이 늘 같은 쪽을 향하는 이유는, 지구 전체가 하나로 이루어진 거대한 이것의 성질을 갖기 때문입니다.",
-          "answerText": "자석",
-          "answerMatchMode": "EXACT",
+          "prompt": "나침반 바늘이 늘 같은 쪽을 가리키는 이유가 되는 문장을 찾으시오.",
+          "answerText": "지구 전체가 하나의 거대한 자석이기 때문입니다.",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 39,
-              "end": 41
-            },
-            {
-              "paragraphId": "p3",
-              "start": 14,
-              "end": 16
+              "start": 24,
+              "end": 50
             }
           ],
           "scoring": {
@@ -630,13 +595,32 @@
         },
         {
           "id": "q3",
-          "prompt": "나침반을 사용할 때 주의할 점으로, 바늘이 엉뚱한 곳을 가리키지 않도록 이것을 멀리 떨어뜨려 놓아야 합니다.",
-          "answerText": "쇠붙이",
-          "answerMatchMode": "EXACT",
+          "prompt": "나침반의 빨간 바늘인 N극이 향해 돌아간다고 한 곳을 찾으시오.",
+          "answerText": "지구의 북쪽 끝",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 67,
+              "end": 75
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "나침반을 쓸 때 멀리 떨어뜨려 놓아야 한다고 한 대상을 찾으시오.",
+          "answerText": "자석이나 쇠붙이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 19,
+              "start": 14,
               "end": 22
             }
           ],

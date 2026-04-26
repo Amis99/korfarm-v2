@@ -1065,153 +1065,90 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '주어'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 144,
-              "end": 146
-            },
-            {
-              "paragraphId": "p3",
-              "start": 33,
-              "end": 35
-            },
-            {
-              "paragraphId": "p4",
-              "start": 75,
-              "end": 77
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '문장 성분'을 모두 찾으시오.",
+          "answerText": "문장 성분",
           "answerMatchMode": "ANY",
-          "answerText": "주어"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 0, "end": 5},
+            {"paragraphId": "p1", "start": 231, "end": 236},
+            {"paragraphId": "p2", "start": 0, "end": 5},
+            {"paragraphId": "p2", "start": 211, "end": 216},
+            {"paragraphId": "p3", "start": 2, "end": 7},
+            {"paragraphId": "p3", "start": 110, "end": 115},
+            {"paragraphId": "p4", "start": 0, "end": 5},
+            {"paragraphId": "p4", "start": 136, "end": 141},
+            {"paragraphId": "p5", "start": 3, "end": 8},
+            {"paragraphId": "p5", "start": 117, "end": 122}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
           "prompt": "지문에서 '목적어'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 154,
-              "end": 157
-            },
-            {
-              "paragraphId": "p2",
-              "start": 38,
-              "end": 41
-            },
-            {
-              "paragraphId": "p2",
-              "start": 138,
-              "end": 141
-            },
-            {
-              "paragraphId": "p3",
-              "start": 45,
-              "end": 48
-            },
-            {
-              "paragraphId": "p4",
-              "start": 86,
-              "end": 89
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "answerText": "목적어",
           "answerMatchMode": "ANY",
-          "answerText": "목적어"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 154, "end": 157},
+            {"paragraphId": "p2", "start": 38, "end": 41},
+            {"paragraphId": "p2", "start": 138, "end": 141},
+            {"paragraphId": "p3", "start": 45, "end": 48},
+            {"paragraphId": "p4", "start": 86, "end": 89}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
           "prompt": "지문에서 '서술어'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 166,
-              "end": 169
-            },
-            {
-              "paragraphId": "p2",
-              "start": 104,
-              "end": 107
-            },
-            {
-              "paragraphId": "p2",
-              "start": 183,
-              "end": 186
-            },
-            {
-              "paragraphId": "p4",
-              "start": 102,
-              "end": 105
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "answerText": "서술어",
           "answerMatchMode": "ANY",
-          "answerText": "서술어"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 166, "end": 169},
+            {"paragraphId": "p2", "start": 104, "end": 107},
+            {"paragraphId": "p2", "start": 183, "end": 186},
+            {"paragraphId": "p4", "start": 102, "end": 105}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '부사어'를 모두 찾으시오.",
+          "prompt": "지문에서 자주 헷갈린다고 든 두 짝(부사어와 관형어, 보어와 목적어)에 해당하는 네 가지 성분을 모두 찾으시오.",
+          "answerText": "부사어와 관형어, 보어와 목적어",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 24,
-              "end": 27
-            },
-            {
-              "paragraphId": "p2",
-              "start": 51,
-              "end": 54
-            },
-            {
-              "paragraphId": "p3",
-              "start": 68,
-              "end": 71
-            }
+            {"paragraphId": "p2", "start": 24, "end": 41}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "부사어"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '관형어'를 모두 찾으시오.",
+          "prompt": "예문 '민지가 책을 읽는다'에서 주어와 목적어, 서술어에 해당하는 세 낱말을 모두 찾으시오.",
+          "answerText": "민지가, 책을, 읽는다",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 29,
-              "end": 32
-            },
-            {
-              "paragraphId": "p2",
-              "start": 84,
-              "end": 87
-            }
+            {"paragraphId": "p1", "start": 123, "end": 126},
+            {"paragraphId": "p1", "start": 127, "end": 129},
+            {"paragraphId": "p1", "start": 130, "end": 133},
+            {"paragraphId": "p1", "start": 138, "end": 141},
+            {"paragraphId": "p1", "start": 149, "end": 151},
+            {"paragraphId": "p1", "start": 160, "end": 163}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "보어가 문장의 뜻을 완성하게 한다고 한 까닭으로 든 부분을 찾으시오.",
+          "answerText": "서술어가 요구하는 자리를 채워 문장의 뜻을 완성하게",
           "answerMatchMode": "ANY",
-          "answerText": "관형어"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 104, "end": 132}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

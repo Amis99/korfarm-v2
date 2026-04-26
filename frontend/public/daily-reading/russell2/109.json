@@ -1039,108 +1039,75 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다른 학교로 옮겨 다니게 되는 일은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 12,
-              "end": 14
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "전학 갈 수도 있다는 소식을 듣고 고민을 털어놓는 인물을 찾으시오",
+          "answerText": "지안",
           "answerMatchMode": "ANY",
-          "answerText": "전학"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p3", "start": 0, "end": 2},
+            {"paragraphId": "p5", "start": 0, "end": 2}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "더 바뀌지 않게 분명히 정하는 일은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 31,
-              "end": 33
-            },
-            {
-              "paragraphId": "p2",
-              "start": 17,
-              "end": 19
-            },
-            {
-              "paragraphId": "p6",
-              "start": 15,
-              "end": 17
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지안의 이야기를 듣고 마음을 헤아려 주며 답하는 인물을 찾으시오",
+          "answerText": "서후",
           "answerMatchMode": "ANY",
-          "answerText": "확정"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p4", "start": 0, "end": 2},
+            {"paragraphId": "p6", "start": 0, "end": 2}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "마음이 편하지 않고 걱정되는 상태는?",
+          "prompt": "지안이 친구들과 헤어지는 일이 더 크게 느껴지는 까닭으로 든 두 가지를 모두 찾으시오",
+          "answerText": "같이 준비하던 축제 / 동아리",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 54,
-              "end": 56
-            },
-            {
-              "paragraphId": "p6",
-              "start": 78,
-              "end": 80
-            }
+            {"paragraphId": "p3", "start": 60, "end": 70},
+            {"paragraphId": "p3", "start": 75, "end": 78}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "불안"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "못마땅하다며 떼쓰듯 말하는 일은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 83,
-              "end": 85
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "서후가 지안의 아쉬움을 투정이 아니라 무엇으로 풀이했는지 찾으시오",
+          "answerText": "그만큼 소중하게 지냈다는 뜻",
           "answerMatchMode": "ANY",
-          "answerText": "투정"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 91, "end": 106}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "차례대로 정한 흐름은?",
+          "prompt": "서후가 알려 준 말씀드리는 차례 두 단계를 모두 찾으시오",
+          "answerText": "집에서 일정이 확정되는지부터 듣고 / 그다음에 담임선생님께 말씀드리는",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 45,
-              "end": 47
-            }
+            {"paragraphId": "p6", "start": 7, "end": 25},
+            {"paragraphId": "p6", "start": 27, "end": 44}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "서후가 지안에게 결과와 상관없이 먼저 기억해 두기를 바란 점을 찾으시오",
+          "answerText": "지금 느끼는 마음은 이상한 게 아니라는 걸",
           "answerMatchMode": "ANY",
-          "answerText": "순서"
+          "answerRanges": [
+            {"paragraphId": "p6", "start": 112, "end": 135}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

@@ -571,111 +571,183 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 문법 현상을 어떤 배경이나 문제의식에서 제시하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 196
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "눈으로 대상을 지각하는 ‘보다’를 가리키는 말을 찾으시오.",
+          "answerText": "본용언 ‘보다’",
           "answerMatchMode": "ANY",
-          "answerText": "국어에서 ‘보다’는 매우 자주 쓰이지만, 언제나 같은 기능을 하는 것은 아니다. 어떤 문장에서는 눈으로 대상을 지각하는 본용언으로 쓰이고, 다른 문장에서는 어떤 행위를 시험 삼아 하거나 경험해 본다는 뜻을 더하는 보조 용언으로 쓰인다. 이 차이는 단순한 의미 구별에 그치지 않고 띄어쓰기에도 영향을 주므로, 문장 속 기능을 정확히 판별할 필요가 있다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 첫 판별 기준이나 기본 원리를 어떻게 설명하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 212
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "보조 용언 ‘-어 보다’는 앞말의 행위를 실제로 시도해 보거나 경험해 본다는 뜻을 덧붙인다. 예를 들어 ‘읽어 보다’, ‘먹어 보다’, ‘물어 보다’에서 ‘보다’는 앞의 동작을 눈으로 본다는 뜻이 아니라, 그 행동을 해 봄으로써 결과를 확인한다는 의미를 나타낸다. 이런 경우 ‘보다’는 독립적인 서술 내용을 이루기보다 앞 용언에 기대어 새로운 문법적 의미를 보태는 성격이 강하다."
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단은 해당 현상의 작동 방식이나 예시를 무엇으로 보여 주는가?",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 205
+              "start": 3,
+              "end": 11
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "보조 용언 ‘-어 보다’가 앞말에 덧붙이는 뜻을 찾으시오.",
+          "answerText": "앞말의 행위를 실제로 시도해 보거나 경험해 본다는 뜻",
           "answerMatchMode": "ANY",
-          "answerText": "반면 본용언 ‘보다’는 스스로 구체적인 어휘 의미를 가진다. ‘창밖을 보다’, ‘친구의 표정을 보다’, ‘영화를 보다’처럼 지각의 대상이 직접 이어지고, ‘보다’ 하나만으로도 무엇을 하는지 설명이 가능하다. 이때 ‘보다’는 앞 용언에 붙어 그 의미를 보충하는 것이 아니라, 문장의 중심 서술어로 기능한다. 따라서 앞말과 결합 양상도 보조 용언일 때와 다르게 나타난다."
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 15,
+              "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "보조 용언 ‘-어 보다’의 예로 제시된 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "‘읽어 보다’",
+            "‘먹어 보다’",
+            "‘물어 보다’"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 58,
+              "end": 65
+            },
+            {
+              "paragraphId": "p2",
+              "start": 67,
+              "end": 74
+            },
+            {
+              "paragraphId": "p2",
+              "start": 76,
+              "end": 83
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "4문단은 구별점이나 추가 조건을 어떤 방향으로 드러내는가?",
+          "prompt": "본용언 ‘보다’에서 지각의 대상이 직접 이어지는 예를 모두 찾으시오.",
+          "answerTexts": [
+            "‘창밖을 보다’",
+            "‘친구의 표정을 보다’",
+            "‘영화를 보다’"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 212
+              "paragraphId": "p3",
+              "start": 34,
+              "end": 42
+            },
+            {
+              "paragraphId": "p3",
+              "start": 44,
+              "end": 56
+            },
+            {
+              "paragraphId": "p3",
+              "start": 58,
+              "end": 66
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "띄어쓰기에서는 원칙적으로 보조 용언은 앞말과 띄어 쓰는 것이 기본이다. 그래서 ‘한번 읽어 보다’, ‘직접 물어 보다’처럼 적는 것이 원칙에 맞다. 다만 실제 언어생활에서는 보조 용언이 앞말과 매우 밀접하게 결합해 하나의 단위처럼 인식되기도 하므로, 일부는 붙여 쓰는 것도 허용된다. 그렇다고 해서 언제나 붙일 수 있는 것은 아니며, 먼저 그것이 보조 용언인지부터 판별해야 한다."
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "5문단은 해석상의 주의점이나 적용 효과를 어떻게 설명하는가?",
+          "prompt": "보조 용언 띄어쓰기의 기본 원칙을 설명하는 어구를 찾으시오.",
+          "answerText": "앞말과 띄어 쓰는 것이 기본",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 223
+              "paragraphId": "p4",
+              "start": 21,
+              "end": 36
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "판별의 핵심은 ‘보다’가 독립적인 지각 의미를 유지하는지, 아니면 앞 행위의 시도·경험 의미만 더하는지 살피는 데 있다. ‘문제를 풀어 보다’는 문제를 푼 뒤 그 결과를 시험해 본다는 뜻이므로 보조 용언이다. 그러나 ‘문제를 풀어 보는 학생’에서 문맥에 따라 ‘푸는 모습을 본다’는 뜻이라면 본용언이 된다. 결국 표면 형태가 같아 보여도, 뒤 문맥과 의미 관계를 함께 따져야 정확한 분석이 가능하다."
+          "revealOnWrong": true
         },
         {
           "id": "q6",
-          "prompt": "6문단은 이 문법 주제를 어떤 관점에서 정리하는가?",
+          "prompt": "보조 용언을 붙여 쓰는 것도 허용되는 이유를 찾으시오.",
+          "answerText": "앞말과 매우 밀접하게 결합해 하나의 단위처럼 인식되기도 하므로",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 264
+              "paragraphId": "p4",
+              "start": 104,
+              "end": 138
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q7",
+          "prompt": "‘보다’ 판별에서 살펴야 할 두 의미를 모두 찾으시오.",
+          "answerTexts": [
+            "독립적인 지각 의미",
+            "앞 행위의 시도·경험 의미"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 14,
+              "end": 24
+            },
+            {
+              "paragraphId": "p5",
+              "start": 37,
+              "end": 51
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q8",
+          "prompt": "보조 용언일 가능성이 크다고 보는 조건을 찾으시오.",
+          "answerText": "그 치환이 자연스러우면",
           "answerMatchMode": "ANY",
-          "answerText": "실제 문장에서 헷갈릴 때에는 ‘보다’를 ‘시험 삼아 해 보다’, ‘경험해 보다’로 바꾸어 읽어 보는 방법이 유용하다. 그 치환이 자연스러우면 보조 용언일 가능성이 크고, ‘시선으로 본다’의 의미가 살아 있으면 본용언일 가능성이 크다. 따라서 ‘-어 보다’의 띄어쓰기는 단순 암기 문제가 아니라, 용언의 기능과 의미 구조를 판별하는 문제로 이해해야 한다. 국어 문법에서는 이처럼 형태가 비슷한 표현이라도 실제 문장 안에서 어떤 역할을 하는지 세밀하게 살피는 태도가 중요하다."
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 66,
+              "end": 78
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
         }
       ]
     }

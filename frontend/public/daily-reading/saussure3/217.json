@@ -587,14 +587,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "도움을 준 정성에 대가는?",
-          "answerText": "보답으로",
-          "answerMatchMode": "EXACT",
+          "prompt": "흥부가 도운 대상과 한 일을 모두 찾으시오.",
+          "answerTexts": [
+            "다친 제비",
+            "정성껏 치료해 줌"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 35,
-              "end": 39
+              "start": 13,
+              "end": 18
+            },
+            {
+              "paragraphId": "p1",
+              "start": 20,
+              "end": 29
             }
           ],
           "scoring": {
@@ -606,14 +614,14 @@
         },
         {
           "id": "q2",
-          "prompt": "남을 도와주거나 살핌은?",
-          "answerText": "배려를",
-          "answerMatchMode": "EXACT",
+          "prompt": "제비가 보답으로 흥부에게 준 것을 찾으시오.",
+          "answerText": "박 씨",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 12,
-              "end": 15
+              "paragraphId": "p1",
+              "start": 40,
+              "end": 43
             }
           ],
           "scoring": {
@@ -625,14 +633,49 @@
         },
         {
           "id": "q3",
-          "prompt": "가르침을 주는 내용은?",
-          "answerText": "교훈을",
-          "answerMatchMode": "EXACT",
+          "prompt": "놀부가 한 나쁜 행동과 그 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "제비 다리를 부러뜨림",
+            "박 속에서 벌을 받았습니다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 17,
+              "end": 28
+            },
+            {
+              "paragraphId": "p2",
+              "start": 43,
+              "end": 57
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "우리가 흥부를 보며 얻은 교훈의 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "나눔과 배려",
+            "우애를 지키고"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 19,
-              "end": 22
+              "start": 8,
+              "end": 14
+            },
+            {
+              "paragraphId": "p3",
+              "start": 37,
+              "end": 44
             }
           ],
           "scoring": {

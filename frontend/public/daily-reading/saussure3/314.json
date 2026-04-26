@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "발바닥의 ( )한 살 덕에 조용해요.",
-          "answerText": "푹신한",
-          "answerMatchMode": "EXACT",
+          "prompt": "고양이가 소리 없이 걷게 하는 발바닥의 부분을 지문에서 찾으시오.",
+          "answerText": "푹신한 살",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 36,
-              "end": 39
+              "end": 41
             }
           ],
           "scoring": {
@@ -869,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "빛에 따라 ( )가 바뀝니다.",
-          "answerText": "눈동자",
-          "answerMatchMode": "EXACT",
+          "prompt": "고양이의 눈동자 모양은 무엇에 따라 계속 바뀌는지 지문에서 찾으시오.",
+          "answerText": "빛에 따라",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 88,
-              "end": 91
+              "start": 93,
+              "end": 98
             }
           ],
           "scoring": {
@@ -888,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "수첩에 ( ) 기록을 남깁니다.",
-          "answerText": "꼼꼼히",
-          "answerMatchMode": "EXACT",
+          "prompt": "꼬리를 높이 세우면 고양이의 기분이 어떻다는 뜻인지 지문에서 찾으시오.",
+          "answerText": "무척 좋다는 뜻",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 42,
+              "end": 50
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "관찰한 고양이의 모습을 어떻게 기록했는지 지문에서 찾으시오.",
+          "answerText": "수첩에 꼼꼼히 기록함",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 17,
-              "end": 20
+              "start": 13,
+              "end": 24
             }
           ],
           "scoring": {

@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "박물관 안은 ( )했습니다.",
-          "answerText": "조용",
-          "answerMatchMode": "EXACT",
+          "prompt": "주말에 부모님과 함께 간 장소를 찾으시오.",
+          "answerText": "국립 중앙 박물관",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 114,
-              "end": 116
+              "start": 12,
+              "end": 21
             }
           ],
           "scoring": {
@@ -869,14 +869,22 @@
         },
         {
           "id": "q2",
-          "prompt": "( ) 토기를 관찰했습니다.",
-          "answerText": "빗살무늬",
-          "answerMatchMode": "EXACT",
+          "prompt": "박물관에서 본 옛날 물건과 금관이 드러난 부분을 모두 찾으시오.",
+          "answerTexts": [
+            "옛날 조상들이 쓰던 신기한 물건들",
+            "반짝이는 금관"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 27,
-              "end": 31
+              "paragraphId": "p1",
+              "start": 54,
+              "end": 72
+            },
+            {
+              "paragraphId": "p1",
+              "start": 81,
+              "end": 88
             }
           ],
           "scoring": {
@@ -888,14 +896,41 @@
         },
         {
           "id": "q3",
-          "prompt": "우리 ( )을 소중히 아껴요.",
-          "answerText": "문화유산",
-          "answerMatchMode": "EXACT",
+          "prompt": "자세히 관찰한 토기와 조상들의 지혜가 담긴 도구를 모두 찾으시오.",
+          "answerTexts": [
+            "빗살무늬 토기의 모양",
+            "조상들의 지혜가 담긴 도구들"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 38
+            },
+            {
+              "paragraphId": "p2",
+              "start": 55,
+              "end": 70
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "우리 문화유산에 대해 어떤 다짐을 했는지 찾으시오.",
+          "answerText": "우리 문화유산을 소중히 아끼겠다는 다짐",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 86,
-              "end": 90
+              "start": 83,
+              "end": 104
             }
           ],
           "scoring": {

@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "물건을 ( ) 아껴야 합니다.",
-          "answerText": "소중히",
-          "answerMatchMode": "EXACT",
+          "prompt": "공공기물을 어떻게 여기는 마음인지 나타낸 문장을 찾으시오.",
+          "answerText": "공공기물을 내 물건처럼 귀하게 여기는 마음임",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 15,
-              "end": 18
+              "start": 81,
+              "end": 105
             }
           ],
           "scoring": {
@@ -869,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "테이블에 ( )를 하지 않아요.",
-          "answerText": "낙서",
-          "answerMatchMode": "EXACT",
+          "prompt": "음식을 쏟았을 때 해야 하는 행동을 찾으시오.",
+          "answerText": "도움을 청함",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 13,
-              "end": 15
+              "start": 72,
+              "end": 78
             }
           ],
           "scoring": {
@@ -888,14 +888,41 @@
         },
         {
           "id": "q3",
-          "prompt": "바른 ( )을 지키는 어린이.",
-          "answerText": "에티켓",
-          "answerMatchMode": "EXACT",
+          "prompt": "식당 분위기를 좋게 만드는 모습과 관련된 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "주변을 배려하는 작은 행동",
+            "질서 있는 모습"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 80,
+              "end": 94
+            },
+            {
+              "paragraphId": "p2",
+              "start": 107,
+              "end": 115
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "예절을 잘 지키는 어린이는 어디서나 어떤 결과를 얻는지 찾으시오.",
+          "answerText": "사랑받음",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 108,
-              "end": 111
+              "start": 20,
+              "end": 24
             }
           ],
           "scoring": {

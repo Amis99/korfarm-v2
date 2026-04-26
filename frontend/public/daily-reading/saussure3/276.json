@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "얼굴이 ( )지는 샘물입니다.",
-          "answerText": "젊어",
-          "answerMatchMode": "EXACT",
+          "prompt": "산속 샘물의 특별한 특징을 본문에서 찾으시오.",
+          "answerText": "얼굴이 무척 젊어지는 샘물",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 45,
-              "end": 47
+              "start": 38,
+              "end": 52
             }
           ],
           "scoring": {
@@ -869,24 +869,22 @@
         },
         {
           "id": "q2",
-          "prompt": "과한 ( )을 부리면 안 돼요.",
-          "answerText": "욕심",
-          "answerMatchMode": "EXACT",
+          "prompt": "욕심 많은 할아버지가 한 행동과 그 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "샘물을 너무 많이 마셔서",
+            "갓난아기가 됨"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 57,
-              "end": 59
+              "start": 83,
+              "end": 96
             },
             {
-              "paragraphId": "p2",
-              "start": 44,
-              "end": 46
-            },
-            {
-              "paragraphId": "p3",
-              "start": 54,
-              "end": 56
+              "paragraphId": "p1",
+              "start": 100,
+              "end": 107
             }
           ],
           "scoring": {
@@ -898,14 +896,41 @@
         },
         {
           "id": "q3",
-          "prompt": "( )을 실천하는 게 예뻐요.",
-          "answerText": "나눔",
-          "answerMatchMode": "EXACT",
+          "prompt": "이야기 속 할아버지가 한 욕심스러운 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "가진 것에 만족하지 않고",
+            "과한 욕심을 부림"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 40
+            },
+            {
+              "paragraphId": "p2",
+              "start": 41,
+              "end": 50
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "지혜로운 어린이가 실천하는 예쁜 모습을 본문에서 찾으시오.",
+          "answerText": "욕심 대신 나눔을 실천하는 모습",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 60,
-              "end": 62
+              "start": 54,
+              "end": 71
             }
           ],
           "scoring": {

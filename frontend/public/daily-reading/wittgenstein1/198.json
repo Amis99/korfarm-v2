@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "무엇 시선을 허공에 던져둔 채로 말없이 그의 곁에 서 있을 뿐이었다?",
+          "prompt": "어머니가 그의 곁에 어떤 모습으로 서 있었는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 12,
-              "end": 23
+              "end": 58
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "어머니는 멍하니 풀린"
+          "answerText": "어머니는 멍하니 풀린 시선을 허공에 던져둔 채로 말없이 그의 곁에 서 있을 뿐이었다"
         },
         {
           "id": "q2",
-          "prompt": "무엇 건물들이 길게 줄을 이어 펼쳐져 있었다?",
+          "prompt": "그가 갈피를 잡지 못하고 허둥대며 한 행동을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 47,
-              "end": 60
+              "start": 7,
+              "end": 15
             }
           ],
           "scoring": {
@@ -603,16 +603,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "눈앞으로는 거대한 아파트"
+          "answerText": "언 발을 구르며"
         },
         {
           "id": "q3",
-          "prompt": "주요 소재는 무엇인가요?",
+          "prompt": "그가 결코 환상이 아니라고 확인한 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 61,
-              "end": 73
+              "paragraphId": "p2",
+              "start": 139,
+              "end": 160
             }
           ],
           "scoring": {
@@ -621,16 +621,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "세상은 온통 은빛이었다"
+          "answerText": "거기 눈앞에 우뚝 서 있는 십 층 건물"
         },
         {
           "id": "q4",
-          "prompt": "중요한 기준은 무엇인가요?",
+          "prompt": "눈 덮인 거리와 가지의 모습을 비유적으로 표현한 부분을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 120,
-              "end": 135
+              "paragraphId": "p3",
+              "start": 116,
+              "end": 133
             }
           ],
           "scoring": {
@@ -639,16 +639,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "비록 비좁고 흙먼지투성이이던"
+          "answerText": "두툼한 솜옷을 껴입은 듯한 모습"
         },
         {
           "id": "q5",
-          "prompt": "글에서 설명한 것은 무엇인가요?",
+          "prompt": "잣고개 쪽을 손가락질해 준 사람을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 110,
-              "end": 124
+              "paragraphId": "p4",
+              "start": 36,
+              "end": 50
             }
           ],
           "scoring": {
@@ -657,16 +657,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "곳으로부터도 논둑길을 따라"
+          "answerText": "근처의 구멍가게 주인 남자"
         },
         {
           "id": "q6",
-          "prompt": "무엇는 생각에 그는 부근의 다방으로 들어가 난로 가까운 자리에 어머니를 앉으시도록 했다?",
+          "prompt": "그가 잣고개를 보고 느낀 몸의 변화를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 35,
-              "end": 47
+              "paragraphId": "p4",
+              "start": 91,
+              "end": 115
             }
           ],
           "scoring": {
@@ -675,7 +675,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "우선 추위를 피해야겠다"
+          "answerText": "삽시간에 온몸의 힘이 쭈욱 빠져 버리는 느낌"
+        },
+        {
+          "id": "q7",
+          "prompt": "그의 기억 속 풍경과 달라진 산비탈 동네의 모습을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 141,
+              "end": 169
+            },
+            {
+              "paragraphId": "p5",
+              "start": 206,
+              "end": 232
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "산비탈 동네가 번드르르한 고급 주택가로 변해 있었고",
+            "공동묘지 자리엔 아파트가 여러 채 들어서 있었다"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "그가 어머니에게 기다리라고 직접 말한 문장을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 95,
+              "end": 117
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "잠깐만 여기서 기다리고 계세요, 어머니."
         }
       ]
     }

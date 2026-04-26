@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "돈을 관리하는 금융 기관?",
+          "prompt": "돈을 안전하게 보관해 주거나 빌려주는 금융 기관은 무엇이라 하나요?",
           "answerText": "은행",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -435,19 +435,19 @@
         },
         {
           "id": "q2",
-          "prompt": "돈을 아껴 모으는 일?",
-          "answerText": "저축",
-          "answerMatchMode": "EXACT",
+          "prompt": "은행에서 돈을 편리하게 주고받기 위해 만들거나 사용하는 두 가지를 모두 찾아보세요",
+          "answerText": "통장, 카드",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 68,
-              "end": 70
+              "start": 118,
+              "end": 120
             },
             {
-              "paragraphId": "p2",
-              "start": 73,
-              "end": 75
+              "paragraphId": "p1",
+              "start": 127,
+              "end": 129
             }
           ],
           "scoring": {
@@ -459,44 +459,33 @@
         },
         {
           "id": "q3",
-          "prompt": "재화나 물건의 값어치?",
-          "answerText": "돈",
-          "answerMatchMode": "EXACT",
+          "prompt": "저축 습관을 기르는 것은 미래의 무엇을 이루기 위한 준비인지 살펴보세요",
+          "answerText": "꿈",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 17,
-              "end": 18
-            },
-            {
-              "paragraphId": "p1",
-              "start": 81,
-              "end": 82
-            },
-            {
-              "paragraphId": "p1",
-              "start": 144,
-              "end": 145
-            },
+              "paragraphId": "p2",
+              "start": 91,
+              "end": 92
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "함께 은행을 방문하여 경제 활동을 체험할 사람은 누구인가요?",
+          "answerText": "부모님",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 22,
-              "end": 23
-            },
-            {
-              "paragraphId": "p2",
-              "start": 28,
-              "end": 29
-            },
-            {
-              "paragraphId": "p2",
-              "start": 53,
-              "end": 54
-            },
-            {
-              "paragraphId": "p2",
-              "start": 146,
-              "end": 147
+              "start": 111,
+              "end": 114
             }
           ],
           "scoring": {

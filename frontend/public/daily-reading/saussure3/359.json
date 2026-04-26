@@ -850,29 +850,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "안전 ( )을 아껴야 합니다.",
-          "answerText": "시설",
-          "answerMatchMode": "EXACT",
+          "prompt": "복도와 대피 통로에서 보호하거나 주의해야 할 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "복도에 비치된 구조 손등이나 헬멧",
+            "대피 통로에 물건을 쌓아두지 않게 주의합니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 10,
-              "end": 12
+              "start": 26,
+              "end": 44
             },
             {
               "paragraphId": "p1",
-              "start": 88,
-              "end": 90
-            },
-            {
-              "paragraphId": "p3",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p3",
-              "start": 111,
-              "end": 113
+              "start": 51,
+              "end": 75
             }
           ],
           "scoring": {
@@ -884,14 +877,14 @@
         },
         {
           "id": "q2",
-          "prompt": "대피 ( )를 비워 둡니다.",
-          "answerText": "통로",
-          "answerMatchMode": "EXACT",
+          "prompt": "시설물을 어떻게 여기는 마음인지 찾으시오.",
+          "answerText": "모두의 안전을 위해 시설물을 귀하게 여기는 마음임",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 54,
-              "end": 56
+              "start": 77,
+              "end": 104
             }
           ],
           "scoring": {
@@ -903,14 +896,41 @@
         },
         {
           "id": "q3",
-          "prompt": "물건 아끼는 ( )을 가져요.",
-          "answerText": "습관",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구와 공공 물건에 대해 지켜야 할 태도를 모두 찾으시오.",
+          "answerTexts": [
+            "친구와 장난치며 기구를 망가뜨리지 않도록 함",
+            "공공의 물건을 아끼는 습관"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 65,
+              "start": 27,
+              "end": 51
+            },
+            {
+              "paragraphId": "p2",
+              "start": 53,
               "end": 67
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "어떤 어린이가 되겠다고 했는지 찾으시오.",
+          "answerText": "규칙을 지키며 물건을 아끼는 어린이",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 53,
+              "end": 72
             }
           ],
           "scoring": {

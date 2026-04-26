@@ -1074,108 +1074,89 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '혈통'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 11,
-              "end": 13
-            },
-            {
-              "paragraphId": "p5",
-              "start": 9,
-              "end": 11
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "한 가문이나 혈통이 왕위를 이어 가며 나라를 다스리는 체제를 가리키는 말을 찾으시오",
+          "answerText": "왕조",
           "answerMatchMode": "ANY",
-          "answerText": "혈통"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p1", "start": 61, "end": 63},
+            {"paragraphId": "p1", "start": 68, "end": 70},
+            {"paragraphId": "p1", "start": 154, "end": 156},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 85, "end": 87},
+            {"paragraphId": "p2", "start": 169, "end": 171},
+            {"paragraphId": "p3", "start": 5, "end": 7},
+            {"paragraphId": "p3", "start": 72, "end": 74},
+            {"paragraphId": "p3", "start": 126, "end": 128},
+            {"paragraphId": "p3", "start": 172, "end": 174},
+            {"paragraphId": "p4", "start": 2, "end": 4},
+            {"paragraphId": "p4", "start": 153, "end": 155},
+            {"paragraphId": "p5", "start": 3, "end": 5},
+            {"paragraphId": "p5", "start": 126, "end": 128},
+            {"paragraphId": "p5", "start": 192, "end": 194}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '원칙'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 17,
-              "end": 19
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "왕조에서 같은 집안 안에서 이어지는 것은 무엇인지 찾으시오",
+          "answerText": "왕위",
           "answerMatchMode": "ANY",
-          "answerText": "원칙"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 15, "end": 17},
+            {"paragraphId": "p1", "start": 121, "end": 123},
+            {"paragraphId": "p2", "start": 10, "end": 12},
+            {"paragraphId": "p2", "start": 119, "end": 121},
+            {"paragraphId": "p5", "start": 13, "end": 15}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '구조'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 49,
-              "end": 51
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "왕조가 유지되기 위해 분명해야 하는 것이 무엇인지 찾으시오",
+          "answerText": "원칙",
           "answerMatchMode": "ANY",
-          "answerText": "구조"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 17, "end": 19}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '안정'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 173,
-              "end": 175
-            },
-            {
-              "paragraphId": "p4",
-              "start": 15,
-              "end": 17
-            },
-            {
-              "paragraphId": "p5",
-              "start": 198,
-              "end": 200
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "후계자를 둘러싸고 벌어지는 일로, 커지면 나라 전체를 흔들 수 있는 것을 찾으시오",
+          "answerText": "다툼",
           "answerMatchMode": "ANY",
-          "answerText": "안정"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 51, "end": 53},
+            {"paragraphId": "p4", "start": 76, "end": 78}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '연속성'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 139,
-              "end": 142
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "한 왕조가 일어나고 망하는 흐름을 한 단어로 무엇이라 하는지 찾으시오",
+          "answerText": "흥망",
           "answerMatchMode": "ANY",
-          "answerText": "연속성"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 157, "end": 159}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "왕조가 역사에서 설명하는 것으로, 정치가 끊이지 않고 이어지는 성질을 뜻하는 말을 찾으시오",
+          "answerText": "연속성",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 139, "end": 142}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

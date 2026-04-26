@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "일정한 ( )를 유지합니다.",
-          "answerText": "거리",
-          "answerMatchMode": "EXACT",
+          "prompt": "작품을 감상할 때 유지해야 하는 것을 포함한 어구를 지문에서 찾으시오.",
+          "answerText": "일정한 거리를 유지함",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 41,
-              "end": 43
+              "start": 37,
+              "end": 48
             }
           ],
           "scoring": {
@@ -869,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "작품의 ( )을 관찰합니다.",
-          "answerText": "색",
-          "answerMatchMode": "EXACT",
+          "prompt": "그림을 손으로 만지지 않고 어떻게 보아야 하는지 지문에서 찾으시오.",
+          "answerText": "눈으로만 봅니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 91,
-              "end": 92
+              "start": 65,
+              "end": 73
             }
           ],
           "scoring": {
@@ -888,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "나의 ( )력을 키웠습니다.",
-          "answerText": "상상",
-          "answerMatchMode": "EXACT",
+          "prompt": "다른 사람들이 집중할 수 있도록 해야 하는 행동을 지문에서 찾으시오.",
+          "answerText": "다른 사람들이 집중할 수 있게 배려하는 중임",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 51
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "예의를 지키며 감상한 뒤 마음이 어떻게 되었는지 지문에서 찾으시오.",
+          "answerText": "마음이 무척 풍성함",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 10,
-              "end": 12
+              "start": 62,
+              "end": 72
             }
           ],
           "scoring": {

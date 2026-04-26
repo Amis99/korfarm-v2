@@ -884,14 +884,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "홍길동전을 쓴 작가의 이름은 무엇인가요?",
-          "answerText": "허균",
+          "prompt": "홍길동전이 어떤 소설인지 설명한 부분을 찾으시오.",
+          "answerText": "우리나라 최초의 한글 소설",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 6,
-              "end": 8
+              "start": 13,
+              "end": 27
             }
           ],
           "scoring": {
@@ -902,19 +902,14 @@
         },
         {
           "id": "q2",
-          "prompt": "작품이 날카롭게 비판하는 조선 사회의 문제는 무엇인가요?",
-          "answerText": "신분 차별",
+          "prompt": "이 작품이 날카롭게 비판한다고 한 것을 찾으시오.",
+          "answerText": "조선 사회의 모순",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 65,
-              "end": 70
-            },
-            {
-              "paragraphId": "p2",
-              "start": 48,
-              "end": 53
+              "start": 40,
+              "end": 49
             }
           ],
           "scoring": {
@@ -925,14 +920,14 @@
         },
         {
           "id": "q3",
-          "prompt": "길동의 선택 가운데 흥미롭다고 한 것은 새로운 어디를 찾아 떠나는 일이었나요?",
-          "answerText": "땅",
+          "prompt": "고통받는 서얼들에게 있는 것으로 생생하게 그린 것을 찾으시오.",
+          "answerText": "서얼들의 아픔",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 87,
-              "end": 88
+              "paragraphId": "p1",
+              "start": 77,
+              "end": 84
             }
           ],
           "scoring": {
@@ -943,14 +938,22 @@
         },
         {
           "id": "q4",
-          "prompt": "길동이 꿈꾼 나라의 이름은 무엇인가요?",
-          "answerText": "율도국",
-          "answerMatchMode": "ANY",
+          "prompt": "길동이 갈등한 두 감정을 모두 찾으시오.",
+          "answerTexts": [
+            "가족에 대한 사랑",
+            "신분 차별에 대한 분노"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 43,
+              "paragraphId": "p2",
+              "start": 37,
               "end": 46
+            },
+            {
+              "paragraphId": "p2",
+              "start": 48,
+              "end": 60
             }
           ],
           "scoring": {
@@ -961,14 +964,14 @@
         },
         {
           "id": "q5",
-          "prompt": "홍길동전이 과거를 통해 현재를 돌아보게 하는 무엇이라고 했나요?",
-          "answerText": "거울",
+          "prompt": "지금도 큰 울림을 준다고 한 외침을 찾으시오.",
+          "answerText": "평등한 세상을 향한 외침",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 123,
-              "end": 125
+              "paragraphId": "p3",
+              "start": 114,
+              "end": 127
             }
           ],
           "scoring": {

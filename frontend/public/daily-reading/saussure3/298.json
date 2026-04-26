@@ -850,19 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "욕심 많은 ( ) 형제 이야기입니다.",
-          "answerText": "놀부",
-          "answerMatchMode": "EXACT",
+          "prompt": "흥부가 정성껏 치료해 준 동물을 본문에서 찾으시오.",
+          "answerText": "다리를 다친 제비",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 17,
-              "end": 19
-            },
-            {
-              "paragraphId": "p2",
-              "start": 85,
-              "end": 87
+              "start": 29,
+              "end": 38
             }
           ],
           "scoring": {
@@ -874,39 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "커다란 박에서 ( )이 열렸습니다.",
-          "answerText": "박",
-          "answerMatchMode": "EXACT",
+          "prompt": "박을 타자 쏟아져 나온 것을 본문에서 찾으시오.",
+          "answerText": "보물과 쌀",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 64,
-              "end": 65
-            },
-            {
-              "paragraphId": "p1",
-              "start": 75,
-              "end": 76
-            },
-            {
-              "paragraphId": "p1",
-              "start": 85,
-              "end": 86
-            },
-            {
-              "paragraphId": "p2",
-              "start": 13,
-              "end": 14
-            },
-            {
-              "paragraphId": "p2",
-              "start": 89,
-              "end": 90
-            },
-            {
-              "paragraphId": "p3",
-              "start": 33,
-              "end": 34
+              "start": 91,
+              "end": 96
             }
           ],
           "scoring": {
@@ -918,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "친구들의 ( )을 서로 칭찬합니다.",
-          "answerText": "창의력",
-          "answerMatchMode": "EXACT",
+          "prompt": "박 속에 들어 있으면 좋겠다고 한 맛있는 먹을거리를 본문에서 찾으시오.",
+          "answerText": "맛있는 사탕",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 102,
-              "end": 105
+              "paragraphId": "p2",
+              "start": 56,
+              "end": 62
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "박 속에서 나올지도 모른다고 한 날 수 있는 물건을 본문에서 찾으시오.",
+          "answerText": "하늘을 나는 신발",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 65,
+              "end": 74
             }
           ],
           "scoring": {

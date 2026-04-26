@@ -913,24 +913,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "고체에서 열이 물체를 따라 이동하는 현상을 무엇이라고 하나요?",
-          "answerText": "전도",
-          "answerMatchMode": "ANY",
+          "prompt": "열이 이동하는 방향과 계속되는 때를 모두 찾으시오.",
+          "answerTexts": [
+            "온도가 높은 곳에서 낮은 곳으로 이동하는 성질",
+            "두 물체의 온도가 같아질 때까지"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 21,
-              "end": 23
+              "paragraphId": "p1",
+              "start": 69,
+              "end": 94
             },
             {
-              "paragraphId": "p2",
-              "start": 60,
-              "end": 62
-            },
-            {
-              "paragraphId": "p4",
-              "start": 118,
-              "end": 120
+              "paragraphId": "p1",
+              "start": 102,
+              "end": 119
             }
           ],
           "scoring": {
@@ -941,61 +939,27 @@
         },
         {
           "id": "q2",
-          "prompt": "액체나 기체에서 물질이 직접 움직이며 열을 전달하는 현상은 무엇인가요?",
-          "answerText": "대류",
-          "answerMatchMode": "ANY",
+          "prompt": "전도의 뜻과 전도와 관련된 재질의 차이를 모두 찾으시오.",
+          "answerTexts": [
+            "고체에서는 열이 물체를 따라 이동하는 전도",
+            "금속은 나무나 플라스틱보다 열을 더 잘 전달합니다",
+            "열이 잘 안 통하는 재질"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 21,
+              "paragraphId": "p2",
+              "start": 0,
               "end": 23
             },
             {
-              "paragraphId": "p3",
-              "start": 107,
-              "end": 109
+              "paragraphId": "p2",
+              "start": 70,
+              "end": 97
             },
             {
-              "paragraphId": "p3",
-              "start": 145,
-              "end": 147
-            },
-            {
-              "paragraphId": "p4",
-              "start": 122,
-              "end": 124
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "열이 물질을 거치지 않고 직접 전달되는 것을 무엇이라고 하나요?",
-          "answerText": "복사",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 25,
-              "end": 27
-            },
-            {
-              "paragraphId": "p4",
-              "start": 65,
-              "end": 67
-            },
-            {
-              "paragraphId": "p4",
-              "start": 103,
-              "end": 105
-            },
-            {
-              "paragraphId": "p4",
-              "start": 126,
+              "paragraphId": "p2",
+              "start": 115,
               "end": 128
             }
           ],
@@ -1006,15 +970,47 @@
           "revealOnWrong": true
         },
         {
+          "id": "q3",
+          "prompt": "대류의 뜻과 대류 현상의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "액체나 기체에서는 열이 직접 이동하는 대류",
+            "물질이 직접 움직이며 열을 전달하는 것",
+            "따뜻한 공기가 퍼지는 것"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 23
+            },
+            {
+              "paragraphId": "p3",
+              "start": 84,
+              "end": 105
+            },
+            {
+              "paragraphId": "p3",
+              "start": 130,
+              "end": 143
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q4",
-          "prompt": "열을 더 잘 전달한다고 한 재료는 무엇인가요?",
-          "answerText": "금속",
+          "prompt": "복사의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "열이 물질을 거치지 않고 직접 전달되는 것",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 70,
-              "end": 72
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 23
             }
           ],
           "scoring": {
@@ -1025,14 +1021,14 @@
         },
         {
           "id": "q5",
-          "prompt": "복사의 대표적인 예로 든 것은 무엇의 열인가요?",
-          "answerText": "태양의 열",
+          "prompt": "복사의 대표적인 예를 찾으시오.",
+          "answerText": "태양의 열이 텅 빈 우주를 지나 지구로 전달되는 것",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 35,
-              "end": 40
+              "end": 63
             }
           ],
           "scoring": {

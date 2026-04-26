@@ -396,9 +396,38 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "철길 위를 가는 기계?",
+          "prompt": "방 한구석에 있던 빨간 장난감 기차가 움직이는 모습을 모른 채 환하게 웃은 인물이 누구인지 본문에서 찾아 보세요",
+          "answerText": "준이",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 17,
+              "end": 19
+            },
+            {
+              "paragraphId": "p1",
+              "start": 143,
+              "end": 145
+            },
+            {
+              "paragraphId": "p2",
+              "start": 123,
+              "end": 125
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "준이의 방에서 칙칙폭폭 소리를 내며 파란 레일을 따라 달린 빨간 장난감이 무엇인지 본문에서 한 단어로 찾아 보세요",
           "answerText": "기차",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -444,10 +473,10 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "사람 모양의 장난감?",
+          "id": "q3",
+          "prompt": "기차에 올라타 창밖 풍경을 보며 즐겁게 노래를 부른 곰과 토끼가 무엇인지 본문에서 한 단어로 찾아 보세요",
           "answerText": "인형",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -473,15 +502,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "눈앞에 보이는 광경?",
-          "answerText": "풍경",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "기차가 천천히 달리는 모습을 빗대어 무엇 여행을 떠나듯 달렸다고 표현했는지 본문에서 한 단어로 찾아 보세요",
+          "answerText": "은하수",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 149,
-              "end": 151
+              "start": 91,
+              "end": 94
             }
           ],
           "scoring": {

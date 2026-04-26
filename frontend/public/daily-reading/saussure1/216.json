@@ -396,29 +396,34 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "얼굴 비춰보는 것?",
-          "answerText": "거울",
-          "answerMatchMode": "EXACT",
+          "prompt": "동굴 안으로 들어와 거울 앞에서 왕관을 쓰고 모래성 나라를 만난 주인공 이름을 글에서 찾아보세요",
+          "answerText": "민수",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 29,
-              "end": 31
+              "start": 15,
+              "end": 17
             },
             {
               "paragraphId": "p1",
-              "start": 52,
-              "end": 54
-            },
-            {
-              "paragraphId": "p1",
-              "start": 106,
-              "end": 108
+              "start": 85,
+              "end": 87
             },
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 2
+              "start": 14,
+              "end": 16
+            },
+            {
+              "paragraphId": "p2",
+              "start": 48,
+              "end": 50
+            },
+            {
+              "paragraphId": "p2",
+              "start": 112,
+              "end": 114
             }
           ],
           "scoring": {
@@ -430,9 +435,28 @@
         },
         {
           "id": "q2",
-          "prompt": "꽃과 나무가 있는 곳?",
+          "prompt": "거울 속 요정들이 민수에게 고마운 마음을 담아 선물한 것이 무엇인지 글에서 찾아보세요",
+          "answerText": "조개 목걸이",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 33,
+              "end": 39
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "민수가 찾던 진짜 모래성 나라는 거울 속에 비친 무엇이라고 했는지 한 단어로 찾아보세요",
           "answerText": "정원",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -448,15 +472,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "신기한 일을 겪음?",
-          "answerText": "모험",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "민수의 마음속에 남은 모험을 무엇처럼 반짝인다고 빗대어 표현했는지 글에서 찾아보세요",
+          "answerText": "보석",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 108,
-              "end": 110
+              "start": 126,
+              "end": 128
             }
           ],
           "scoring": {

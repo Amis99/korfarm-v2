@@ -562,34 +562,27 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "아침 일찍 일어나 한 바퀴 도는 우리가 사는 이곳은 어디인가요?",
-          "answerText": "동네",
-          "answerMatchMode": "EXACT",
+          "prompt": "같이 돌자고 권하는 표현을 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "다 같이 돌자",
+            "바둑이도 같이 돌자"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 8,
+              "start": 0,
+              "end": 7
+            },
+            {
+              "paragraphId": "p3",
+              "start": 0,
               "end": 10
             },
             {
-              "paragraphId": "p1",
-              "start": 26,
-              "end": 28
-            },
-            {
-              "paragraphId": "p2",
-              "start": 25,
-              "end": 27
-            },
-            {
               "paragraphId": "p3",
-              "start": 11,
-              "end": 13
-            },
-            {
-              "paragraphId": "p3",
-              "start": 27,
-              "end": 29
+              "start": 19,
+              "end": 26
             }
           ],
           "scoring": {
@@ -601,14 +594,14 @@
         },
         {
           "id": "q2",
-          "prompt": "아침 일찍 일어나 우리를 보고 활짝 피어 인사하는 예쁜 꽃은 무엇인가요?",
-          "answerText": "나팔꽃",
-          "answerMatchMode": "EXACT",
+          "prompt": "아침에 어떤 행동을 한 뒤 동네 한 바퀴를 도는지 지문에서 찾으시오.",
+          "answerText": "아침 일찍 일어나",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 6,
-              "end": 9
+              "paragraphId": "p1",
+              "start": 16,
+              "end": 25
             }
           ],
           "scoring": {
@@ -620,19 +613,22 @@
         },
         {
           "id": "q3",
-          "prompt": "우리를 보는 나팔꽃을 향해 우리도 하는 이것은 무엇인가요?",
-          "answerText": "인사",
-          "answerMatchMode": "EXACT",
+          "prompt": "나팔꽃과 우리가 서로 인사하는 표현을 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "인사합니다",
+            "인사하며"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 10,
-              "end": 12
+              "end": 15
             },
             {
               "paragraphId": "p2",
               "start": 20,
-              "end": 22
+              "end": 24
             }
           ],
           "scoring": {
@@ -644,9 +640,9 @@
         },
         {
           "id": "q4",
-          "prompt": "동네를 돌 때 다 같이 돌자고 곁으로 부른 얼룩덜룩한 무늬의 강아지 이름은 무엇인가요?",
+          "prompt": "동네 한 바퀴를 같이 돌자고 부르는 대상을 지문에서 찾으시오.",
           "answerText": "바둑이",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",

@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "CPU만으로 효율을 내기 어려워진 대상인, 병렬로 반복되는 계산을 가리키는 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 208
+              "start": 163,
+              "end": 171
             }
           ],
           "scoring": {
@@ -585,16 +585,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "최근의 연산 환경에서는 문서 작성이나 웹 탐색처럼 명령의 종류가 자주 바뀌는 작업만큼이나, 같은 연산을 대량의 데이터에 반복 적용해야 하는 작업이 중요해졌다. 인공 지능 학습, 고해상도 영상 처리, 과학 계산처럼 동일한 계산이 연속적으로 수행되는 작업이 늘어나면서, 복잡한 제어에는 강하지만 병렬 반복 연산에는 한계가 있는 CPU만으로는 효율을 내기 어려운 상황이 생겼다."
+          "answerText": "병렬 반복 연산"
         },
         {
           "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "동일한 계산이 연속적으로 수행되는 작업의 예를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 190
+              "paragraphId": "p1",
+              "start": 89,
+              "end": 97
+            },
+            {
+              "paragraphId": "p1",
+              "start": 99,
+              "end": 109
+            },
+            {
+              "paragraphId": "p1",
+              "start": 111,
+              "end": 116
             }
           ],
           "scoring": {
@@ -602,17 +612,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이때 주목받는 장치가 GPU이다. GPU는 원래 그래픽 처리를 위해 만들어졌지만, 같은 명령을 많은 데이터에 동시에 적용하는 구조를 갖추고 있어 병렬 연산에 적합하다. 수백 개에서 수천 개의 단순 연산 코어가 한꺼번에 움직이기 때문에, 행렬 계산이나 픽셀 처리처럼 계산 패턴이 반복되는 작업에서는 CPU보다 훨씬 빠르게 결과를 낼 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "인공 지능 학습",
+            "고해상도 영상 처리",
+            "과학 계산"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "prompt": "GPU가 병렬 연산에 적합한 이유가 되는 구조를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 229
+              "paragraphId": "p2",
+              "start": 46,
+              "end": 72
             }
           ],
           "scoring": {
@@ -621,16 +635,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "GPU 내부에서는 스레드가 기본 실행 단위로 움직이고, 여러 스레드는 스레드 블록으로 묶여 연산 유닛에 배치된다. 스케줄러는 블록을 여러 연산 유닛에 나누어 보내 병렬 처리가 끊기지 않게 한다. 그런데 블록마다 맡은 연산량이 고르지 않으면, 어떤 유닛은 이미 일을 마쳤는데도 다른 유닛이 끝날 때까지 기다려야 한다. 그래서 GPU의 성능은 코어 수만이 아니라 작업을 얼마나 균등하게 나누느냐에도 크게 좌우된다."
+          "answerText": "같은 명령을 많은 데이터에 동시에 적용하는 구조"
         },
         {
           "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
+          "prompt": "여러 스레드가 묶이는 형태를 나타내는 어구를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 225
+              "paragraphId": "p3",
+              "start": 39,
+              "end": 47
             }
           ],
           "scoring": {
@@ -639,16 +653,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "GPU의 효율은 메모리 구조와도 깊게 연결된다. 모든 스레드가 접근할 수 있는 전역 메모리는 용량이 크지만 속도가 느려, 연산 중간값을 계속 두기에는 불리하다. 반면 레지스터는 매우 빠르지만 개별 스레드만 쓸 수 있고, 공유 메모리는 같은 스레드 블록 안에서만 함께 쓸 수 있지만 전역 메모리보다 훨씬 빠르다. 따라서 어떤 데이터를 어디에 두고 읽게 할지 결정하는 일 자체가 성능 최적화의 핵심이 된다."
+          "answerText": "스레드 블록으로"
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "블록마다 맡은 연산량이 고르지 않을 때 어떤 유닛이 겪는 결과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 218
+              "paragraphId": "p3",
+              "start": 154,
+              "end": 175
             }
           ],
           "scoring": {
@@ -657,16 +671,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "GPU가 항상 높은 효율을 내는 것은 아니다. 스레드 블록 안의 스레드들이 서로 다른 조건문 경로를 따라가야 하면, 일부 스레드는 자기 차례가 올 때까지 대기하게 된다. 같은 명령을 일괄 적용하는 GPU의 장점이 사라지는 것이다. 이 때문에 조건 분기가 잦고 제어 흐름이 복잡한 작업은 GPU보다 CPU가 더 잘 처리하는 경우도 있으며, 병렬성이 높은 작업만 GPU에 맡기는 편이 유리하다."
+          "answerText": "다른 유닛이 끝날 때까지 기다려야 한다"
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "전역 메모리와 레지스터의 상반된 특징을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 216
+              "paragraphId": "p4",
+              "start": 52,
+              "end": 66
+            },
+            {
+              "paragraphId": "p4",
+              "start": 99,
+              "end": 121
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "용량이 크지만 속도가 느려",
+            "매우 빠르지만 개별 스레드만 쓸 수 있고"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "스레드들이 서로 다른 조건문 경로를 따라가야 할 때 일부 스레드가 겪는 일을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 73,
+              "end": 93
             }
           ],
           "scoring": {
@@ -675,7 +715,33 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 현대의 연산 환경은 CPU와 GPU의 우열을 가르는 방향으로 발전하지 않는다. 복잡한 제어와 순차적 판단은 CPU가 맡고, 반복적 대량 연산은 GPU가 담당하는 식으로 역할을 분담하는 쪽이 더 효율적이다. 그래서 좋은 시스템 설계란 단순히 강한 장치를 고르는 일이 아니라, 작업의 성격을 분석해 스레드 배치와 메모리 사용 방식, 장치 간 분업을 함께 조정하는 일이라고 할 수 있다."
+          "answerText": "자기 차례가 올 때까지 대기하게 된다"
+        },
+        {
+          "id": "q8",
+          "prompt": "CPU와 GPU가 각각 맡는 역할을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 47,
+              "end": 61
+            },
+            {
+              "paragraphId": "p6",
+              "start": 72,
+              "end": 81
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "복잡한 제어와 순차적 판단",
+            "반복적 대량 연산"
+          ]
         }
       ]
     }

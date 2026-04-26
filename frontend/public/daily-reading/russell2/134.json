@@ -33,78 +33,8 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "몸을 보호하기 위해 위험을 알려 주는 신호 체계는?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 137,
-              "end": 142
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "경고 체계"
-        },
-        {
-          "id": "q2",
-          "prompt": "통증을 줄이기 위해 쓰는 약은?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 60,
-              "end": 63
-            },
-            {
-              "paragraphId": "p2",
-              "start": 70,
-              "end": 73
-            },
-            {
-              "paragraphId": "p3",
-              "start": 20,
-              "end": 23
-            },
-            {
-              "paragraphId": "p3",
-              "start": 105,
-              "end": 108
-            },
-            {
-              "paragraphId": "p4",
-              "start": 34,
-              "end": 37
-            },
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p6",
-              "start": 77,
-              "end": 80
-            },
-            {
-              "paragraphId": "p6",
-              "start": 146,
-              "end": 149
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "진통제"
-        },
-        {
-          "id": "q3",
-          "prompt": "몸에 붓고 아픈 반응이 생긴 상태는?",
+          "prompt": "몸에 붓거나 열이 나며 아픈 반응이 생긴 상태를 가리키는 말을 모두 찾으시오",
+          "answerText": "염증",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
@@ -119,15 +49,16 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "염증"
+          "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "자꾸 써서 그것에 기대게 되는 성질은?",
+          "id": "q2",
+          "prompt": "자꾸 써서 그것에 기대게 되는 성질을 가리키는 말을 찾으시오",
+          "answerText": "의존성",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
@@ -137,34 +68,102 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "의존성"
+          "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "원하지 않게 덧붙어 나타나는 해로운 효과는?",
+          "id": "q3",
+          "prompt": "어떤 작용을 못 하도록 누르거나 막는 일을 가리키는 말을 찾으시오",
+          "answerText": "억제",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 109,
-              "end": 112
-            },
-            {
-              "paragraphId": "p5",
-              "start": 183,
-              "end": 186
+              "paragraphId": "p3",
+              "start": 116,
+              "end": 118
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "부작용"
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글에서 통증을 어떻게 정의하였는지 그 표현을 찾으시오",
+          "answerText": "몸을 보호하기 위한 경고 체계",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 126,
+              "end": 142
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "강한 진통제가 효과가 큰 만큼 일으킬 수 있는 세 가지 문제를 모두 찾으시오",
+          "answerText": "졸림 / 어지러움 / 의존성",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 106,
+              "end": 108
+            },
+            {
+              "paragraphId": "p4",
+              "start": 110,
+              "end": 114
+            },
+            {
+              "paragraphId": "p4",
+              "start": 116,
+              "end": 119
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "강한 통증에 쓰이는 진통제가 통증 신호의 전달 방식을 바꾸는 부위 두 곳을 모두 찾으시오",
+          "answerText": "뇌 / 척수",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 54,
+              "end": 55
+            },
+            {
+              "paragraphId": "p4",
+              "start": 57,
+              "end": 59
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     },

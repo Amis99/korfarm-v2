@@ -1078,166 +1078,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "일정한 순간의 전기 사용 빠르기를 뜻하는 말은 무엇인가요?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 17,
-              "end": 19
-            },
-            {
-              "paragraphId": "p1",
-              "start": 26,
-              "end": 28
-            },
-            {
-              "paragraphId": "p1",
-              "start": 73,
-              "end": 75
-            },
-            {
-              "paragraphId": "p1",
-              "start": 115,
-              "end": 117
-            },
-            {
-              "paragraphId": "p1",
-              "start": 122,
-              "end": 124
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 47,
-              "end": 49
-            },
-            {
-              "paragraphId": "p2",
-              "start": 87,
-              "end": 89
-            },
-            {
-              "paragraphId": "p2",
-              "start": 128,
-              "end": 130
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p3",
-              "start": 5,
-              "end": 7
-            },
-            {
-              "paragraphId": "p3",
-              "start": 29,
-              "end": 31
-            },
-            {
-              "paragraphId": "p3",
-              "start": 50,
-              "end": 52
-            },
-            {
-              "paragraphId": "p3",
-              "start": 70,
-              "end": 72
-            },
-            {
-              "paragraphId": "p3",
-              "start": 90,
-              "end": 92
-            },
-            {
-              "paragraphId": "p3",
-              "start": 126,
-              "end": 128
-            },
-            {
-              "paragraphId": "p3",
-              "start": 144,
-              "end": 146
-            },
-            {
-              "paragraphId": "p4",
-              "start": 41,
-              "end": 43
-            },
-            {
-              "paragraphId": "p4",
-              "start": 110,
-              "end": 112
-            },
-            {
-              "paragraphId": "p4",
-              "start": 165,
-              "end": 167
-            },
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p5",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p5",
-              "start": 35,
-              "end": 37
-            },
-            {
-              "paragraphId": "p5",
-              "start": 83,
-              "end": 85
-            },
-            {
-              "paragraphId": "p5",
-              "start": 102,
-              "end": 104
-            },
-            {
-              "paragraphId": "p6",
-              "start": 5,
-              "end": 7
-            },
-            {
-              "paragraphId": "p6",
-              "start": 22,
-              "end": 24
-            },
-            {
-              "paragraphId": "p6",
-              "start": 48,
-              "end": 50
-            },
-            {
-              "paragraphId": "p6",
-              "start": 75,
-              "end": 77
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "전력"
-        },
-        {
-          "id": "q2",
-          "prompt": "일정 시간 동안 사용된 양을 뜻하는 말은 무엇인가요?",
-          "answerMatchMode": "ANY",
+          "prompt": "전력에 사용 시간을 곱해 생각할 수 있는, 일정 기간 동안 누적된 전기 사용량을 가리키는 말을 찾으시오",
+          "answerText": "전력량",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -1301,16 +1144,17 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "전력량"
+          "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "전력의 단위는 무엇인가요?",
-          "answerMatchMode": "ANY",
+          "id": "q2",
+          "prompt": "전력을 나타내는 단위를 찾으시오",
+          "answerText": "와트",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -1334,15 +1178,54 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "와트"
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "짧은 시간에 많은 열을 내야 하므로 전력이 큰 편이라고 본문에서 든 기구를 찾으시오",
+          "answerText": "드라이어",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 61,
+              "end": 65
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "쓰지 않아도 조금씩 전기를 쓰는 상태는 무엇인가요?",
+          "prompt": "순간 전력이 큰 기구를 동시에 여러 개 쓰면 내려갈 위험이 커진다고 한 안전 장치를 찾으시오",
+          "answerText": "차단기",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 58,
+              "end": 61
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "작아 보여도 장시간 켜 두면 낭비가 커질 수 있다고 한, 사용하지 않을 때도 흐르는 전력을 가리키는 말을 찾으시오",
+          "answerText": "대기 전력",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
@@ -1352,29 +1235,35 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "대기 전력"
+          "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "쌓여서 더해진 전력 사용량을 뜻하는 말은 무엇인가요?",
-          "answerMatchMode": "ANY",
+          "id": "q6",
+          "prompt": "전기 요금을 따질 때 순간 전력보다 더 중요하다고 본문이 강조한, 전력과 시간을 곱해 누적된 양은 어떤 점에서 의미가 있는지 그 비교 대상이 되는 짧은 단어로, 전력이 시간과 만나 쌓인 결과를 비유한 말을 찾으시오",
+          "answerText": "속도",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 140,
-              "end": 147
+              "paragraphId": "p6",
+              "start": 16,
+              "end": 18
+            },
+            {
+              "paragraphId": "p6",
+              "start": 29,
+              "end": 31
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "누적된 전력량"
+          "revealOnWrong": true
         }
       ]
     }

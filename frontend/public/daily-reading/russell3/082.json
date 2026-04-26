@@ -571,111 +571,73 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"우리 동네 하천 정화 활동에 참여하자는 권유\"에 해당하는 부분은 어디인가요?",
+          "prompt": "이 글에서 정화 활동의 대상이 되는 장소를 가리키는 단어가 본문에 등장하는 위치를 모두 찾으시오",
+          "answerTexts": ["하천"],
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 24
-            }
+            {"paragraphId": "p1", "start": 10, "end": 12},
+            {"paragraphId": "p2", "start": 14, "end": 16},
+            {"paragraphId": "p3", "start": 9, "end": 11},
+            {"paragraphId": "p4", "start": 11, "end": 13}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "제목: 우리 동네 하천 정화 활동에 참여하자"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "\"행사 안내, 참여 필요성, 준비물 안내가 함께 있어 초점이 흔들리기 때문\"에 해당하는 부분은 어디인가요?",
+          "prompt": "초고가 제목으로 앞세웠다고 본 내용을 가리키는 표현을 본문에서 모두 찾으시오",
+          "answerTexts": ["참여 권유"],
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 198
-            }
+            {"paragraphId": "p2", "start": 73, "end": 78},
+            {"paragraphId": "p6", "start": 55, "end": 60}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "나는 이번 주말에 열리는 하천 정화 활동에 학생들이 많이 참여했으면 좋겠다고 생각한다. 그런데 지금 초고 제목은 활동의 목적보다는 참여 권유만 앞세우고 있어서, 글 전체의 중심이 잘 드러나는지 다시 생각해 볼 필요가 있다. 실제로 이 글은 행사 안내도 하고, 참여의 필요성도 말하고, 준비물도 적어 두고 있어서 어느 점을 앞에 세울지 아직 분명하지 않다."
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "\"본문의 흔들리는 초점을 제목도 그대로 드러내기 때문\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 213
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "셋째 문단에서 본문 마지막에 안내했다는 준비물의 구체적인 예시 두 가지를 함께 가리키는 표현을 찾으시오",
+          "answerText": "장갑과 집게",
           "answerMatchMode": "ANY",
-          "answerText": "본문에서는 먼저 하천 주변에 쓰레기가 자주 쌓여 산책하는 주민들이 불편을 겪는다고 적었다. 이어서 학생 자원봉사 시간이 인정된다는 점도 넣었고, 마지막에는 장갑과 집게를 준비하라는 안내를 덧붙였다. 내용 자체는 모두 필요하지만, 이 초고를 읽으면 환경 보호 글인지, 봉사 활동 홍보 글인지, 준비물 안내문인지 초점이 조금 흔들린다. 제목도 그 흔들림을 그대로 따라가고 있는 셈이다."
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 87, "end": 93}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "\"왜 참여해야 하는지까지는 드러내지 못하기 때문\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 175
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글의 중심을 정할 때 환경 보호와 함께 후보로 제시된, 학생을 향한 다른 한 가지 방향을 가리키는 표현을 찾으시오",
+          "answerText": "학생 참여 독려",
           "answerMatchMode": "ANY",
-          "answerText": "만약 글의 중심을 '하천 환경 보호'에 둔다면 제목도 그 목적을 드러내는 쪽이 좋다. 반대로 중심을 '학생 참여 독려'에 두고 싶다면 제목에서 대상과 행동을 더 선명하게 보여 주어야 한다. 지금 제목은 참여를 권하지만 왜 참여해야 하는지까지는 드러내지 못하고 있어, 본문 첫 단락과 완전히 맞물린다고 보기 어렵다."
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 57, "end": 65}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "\"글이 실제로 무엇을 중심으로 움직이는지 점검하는 일\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 159,
-              "end": 187
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "다섯째 문단에서 제목 붙이기를 멋진 말 고르는 일이 아니라 무슨 일에 가깝다고 정의했는지 그 표현을 찾으시오",
+          "answerText": "글이 실제로 무엇을 중심으로 움직이는지 점검하는 일",
           "answerMatchMode": "ANY",
-          "answerText": "글이 실제로 무엇을 중심으로 움직이는지 점검하는 일"
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 159, "end": 187}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q6",
-          "prompt": "\"제목이 본문 첫 단락과 같은 방향을 가리키도록 다듬는 것이 효과적이다\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 156
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "여섯째 문단에서 제목과 본문의 중심을 함께 정할 때 가장 먼저 후보로 든 선택지를 가리키는 표현을 찾으시오",
+          "answerText": "환경 보호를 앞세울지",
           "answerMatchMode": "ANY",
-          "answerText": "그래서 이 초고는 제목을 다시 고를 때 본문의 중심을 함께 조정해야 한다. 환경 보호를 앞세울지, 참여 권유를 앞세울지, 행사 안내를 앞세울지를 먼저 정해야 제목도 자연스럽게 정리된다. 최종 글에서는 제목이 본문 첫 단락과 같은 방향을 가리키도록 다듬는 편이 더 효과적일 것이다."
+          "answerRanges": [
+            {"paragraphId": "p6", "start": 42, "end": 53}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

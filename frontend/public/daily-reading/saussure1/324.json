@@ -396,15 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "생각이나 감정의 밑바탕?",
-          "answerText": "마음",
-          "answerMatchMode": "EXACT",
+          "prompt": "생각이나 느낌을 말이나 글로 나타내는 것을 무엇이라고 하는지 찾아보세요",
+          "answerText": "표현",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 19,
-              "end": 21
-            }
+            {"paragraphId": "p1", "start": 57, "end": 59},
+            {"paragraphId": "p1", "start": 150, "end": 152},
+            {"paragraphId": "p2", "start": 6, "end": 8},
+            {"paragraphId": "p2", "start": 144, "end": 146}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -415,30 +414,11 @@
         },
         {
           "id": "q2",
-          "prompt": "생각이나 느낌을 나타냄?",
-          "answerText": "표현",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서 '부릉부릉', '쫄쫄쫄'처럼 사물의 소리나 모습을 따라 한 말을 무엇이라고 부르는지 찾아보세요",
+          "answerText": "흉내 내는 말",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 57,
-              "end": 59
-            },
-            {
-              "paragraphId": "p1",
-              "start": 150,
-              "end": 152
-            },
-            {
-              "paragraphId": "p2",
-              "start": 6,
-              "end": 8
-            },
-            {
-              "paragraphId": "p2",
-              "start": 144,
-              "end": 146
-            }
+            {"paragraphId": "p1", "start": 31, "end": 38}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -449,15 +429,26 @@
         },
         {
           "id": "q3",
-          "prompt": "주의 깊게 살펴보는 일?",
-          "answerText": "관찰",
-          "answerMatchMode": "EXACT",
+          "prompt": "흉내 내는 말을 사용하면 문장이 어떻게 된다고 하는지 찾아보세요",
+          "answerText": "재미있고 풍성하게",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 135,
-              "end": 137
-            }
+            {"paragraphId": "p1", "start": 161, "end": 170}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "풍부한 표현력을 가지려면 다양한 낱말을 익히고 주변의 소리와 모양을 어떻게 해야 한다고 하는지 찾아보세요",
+          "answerText": "관찰",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 135, "end": 137}
           ],
           "scoring": {
             "correctDeltaSec": 10,

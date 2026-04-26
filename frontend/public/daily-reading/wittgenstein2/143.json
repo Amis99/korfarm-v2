@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단의 내용으로 가장 적절한 것은?",
+          "prompt": "소리를 일정한 간격으로 나누어 수치로 저장한 결과물은 무엇인가?",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 239
+              "end": 6
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "디지털 음원은 소리를 일정한 간격으로 나누어 수치로 저장한 결과물이다. 이때 소리의 크기와 파형 변화가 비트열로 바뀌기 때문에, 원음에 가까운 정보를 남기려면 많은 데이터가 필요하다. 문제는 이렇게 만들어진 오디오 파일이 저장 공간을 많이 차지하고 전송 시간도 길게 만든다는 점이다. 그래서 현대의 오디오 기술은 원음을 모두 보존하는 대신, 사람이 실제로 듣는 데 꼭 필요한 부분을 중심으로 신호를 줄이는 방향으로 발전해 왔다."
+          "answerText": "디지털 음원"
         },
         {
           "id": "q2",
-          "prompt": "2문단의 내용으로 가장 적절한 것은?",
+          "prompt": "원음에 가까운 정보를 남기려면 무엇이 필요한가?",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 189
+              "paragraphId": "p1",
+              "start": 89,
+              "end": 95
             }
           ],
           "scoring": {
@@ -603,16 +603,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "압축 전 오디오 신호는 보통 각 소리 구간에 비슷한 양의 비트를 배정한다. 하지만 모든 소리가 같은 정도로 중요하게 들리는 것은 아니다. 어떤 구간은 매우 작은 차이도 귀에 잘 들어오지만, 어떤 구간은 큰 변화가 있어도 거의 느껴지지 않는다. 따라서 모든 부분을 똑같이 정밀하게 저장하는 방식은 음질보다 데이터 낭비를 먼저 키울 수 있다."
+          "answerText": "많은 데이터"
         },
         {
           "id": "q3",
-          "prompt": "3문단의 내용으로 가장 적절한 것은?",
+          "prompt": "오디오 파일이 저장 공간을 많이 차지하면서 무엇도 길게 만드는가?",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 198
+              "paragraphId": "p1",
+              "start": 139,
+              "end": 144
             }
           ],
           "scoring": {
@@ -621,16 +621,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "지각부호화는 이런 점을 이용한다. 사람의 귀는 주파수마다 들을 수 있는 최소 세기가 다르므로, 어떤 소리는 애초에 너무 작아서 감지되지 않는다. 또 조용한 환경에서 겨우 들리는 소리라도, 더 큰 소리가 가까운 주파수 대역에서 함께 나면 거의 묻혀 버린다. 압축 기술은 바로 이 '못 듣는 소리'와 '들려도 구분하기 어려운 소리'를 찾아내는 데서 출발한다."
+          "answerText": "전송 시간"
         },
         {
           "id": "q4",
-          "prompt": "4문단의 내용으로 가장 적절한 것은?",
+          "prompt": "압축 기술이 찾아내는 두 종류의 소리를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 225
+              "paragraphId": "p3",
+              "start": 156,
+              "end": 163
+            },
+            {
+              "paragraphId": "p3",
+              "start": 167,
+              "end": 182
             }
           ],
           "scoring": {
@@ -638,17 +643,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "특히 중요한 개념이 차폐와 차폐 문턱값이다. 큰 소리가 주변의 작은 소리를 가리면, 작은 소리는 실제 신호에 포함되어 있어도 청자는 그것을 별도로 느끼지 못한다. 이때 차폐가 일어나는 범위는 모든 주파수에서 같은 폭으로 나타나지 않는다. 어떤 대역에서는 좁게, 어떤 대역에서는 넓게 퍼지므로, 압축 장치는 먼저 소리를 여러 대역으로 나눈 뒤 각 대역에서 어느 수준 이하의 소리를 버려도 되는지 계산한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "못 듣는 소리",
+            "들려도 구분하기 어려운 소리"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단의 내용으로 가장 적절한 것은?",
+          "prompt": "특히 중요한 개념이라고 제시된 두 용어가 묶인 표현은 무엇인가?",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 207
+              "paragraphId": "p4",
+              "start": 11,
+              "end": 21
             }
           ],
           "scoring": {
@@ -657,16 +665,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그 결과 차폐 문턱값보다 훨씬 큰 소리에는 더 많은 비트를 주고, 문턱값 아래에 머무는 소리는 과감히 줄이거나 제거할 수 있다. 이렇게 하면 데이터 양은 줄어들지만, 청자가 체감하는 음질 손실은 상대적으로 작게 유지된다. 다시 말해 지각부호화의 핵심은 '모든 소리를 줄이는 것'이 아니라 '잘 들리는 소리와 잘 안 들리는 소리를 구별해 비트를 차등 배정하는 것'에 있다."
+          "answerText": "차폐와 차폐 문턱값"
         },
         {
           "id": "q6",
-          "prompt": "6문단의 내용으로 가장 적절한 것은?",
+          "prompt": "차폐 문턱값보다 훨씬 큰 소리에는 무엇을 주는가?",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 206
+              "paragraphId": "p5",
+              "start": 24,
+              "end": 31
             }
           ],
           "scoring": {
@@ -675,7 +683,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "따라서 오디오 압축의 성능은 단순한 압축률만으로 판단하기 어렵다. 압축률이 높아도 귀가 민감한 대역을 잘 보존하면 자연스럽게 들릴 수 있고, 반대로 데이터가 많이 남아도 중요한 대역의 정보를 잘못 줄이면 거칠고 부자연스럽게 들린다. 지각부호화는 인간 청각의 한계를 약점이 아니라 기준으로 삼아, 제한된 비트 안에서 들리는 품질을 최대화하려는 기술이라고 정리할 수 있다."
+          "answerText": "더 많은 비트"
+        },
+        {
+          "id": "q7",
+          "prompt": "데이터 양이 줄어도 상대적으로 작게 유지되는 것은 무엇인가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 93,
+              "end": 107
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "청자가 체감하는 음질 손실"
+        },
+        {
+          "id": "q8",
+          "prompt": "지각부호화는 인간 청각의 한계를 무엇으로 삼는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 148,
+              "end": 158
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "약점이 아니라 기준"
         }
       ]
     }

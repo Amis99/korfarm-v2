@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "음식이 에너지로 변함?",
+          "prompt": "음식물이 몸속에서 에너지로 바뀌는 과정을 무엇이라고 하는지 본문에서 찾아 적어 보세요",
           "answerText": "소화",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -430,9 +430,9 @@
         },
         {
           "id": "q2",
-          "prompt": "입으로 먹는 물질?",
+          "prompt": "입안에서 이로 잘게 부수는 대상이 무엇인지 본문에서 한 단어로 찾아 보세요",
           "answerText": "음식",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -459,14 +459,33 @@
         },
         {
           "id": "q3",
-          "prompt": "생물의 성장 바탕?",
+          "prompt": "소화가 잘되어야 우리 몸에 골고루 전달되는 것이 무엇인지 본문에서 찾아 보세요",
           "answerText": "영양분",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 120,
               "end": 123
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "천천히 꼭꼭 씹어 먹는 습관은 소화 과정의 무엇이라고 하는지 본문에서 찾아 보세요",
+          "answerText": "첫걸음",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 28,
+              "end": 31
             }
           ],
           "scoring": {

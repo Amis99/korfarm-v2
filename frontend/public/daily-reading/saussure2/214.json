@@ -559,14 +559,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이 강은 이곳의 깊은 산골짜기에서 시작되어 서해 바다로 흘러갑니다. 이곳은 어디일까요?",
-          "answerText": "강원도",
-          "answerMatchMode": "EXACT",
+          "prompt": "한강은 어떤 강이라고 설명했나요?",
+          "answerText": "아주 길고 큰 강",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 45,
-              "end": 48
+              "start": 26,
+              "end": 35
             }
           ],
           "scoring": {
@@ -578,9 +578,43 @@
         },
         {
           "id": "q2",
-          "prompt": "우리가 매일 쓰는 물은 한강에서 이곳을 거쳐 깨끗하게 배달됩니다. 이곳은 어디일까요?",
+          "prompt": "한강은 어디에서 시작되어 어디를 지나 어디로 흘러간다고 했나요? 모두 찾으시오.",
+          "answerText": "강원도의 깊은 산골짜기, 서울, 서해 바다",
+          "answerTexts": [
+            "강원도의 깊은 산골짜기",
+            "서울",
+            "서해 바다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 45,
+              "end": 57
+            },
+            {
+              "paragraphId": "p1",
+              "start": 65,
+              "end": 67
+            },
+            {
+              "paragraphId": "p1",
+              "start": 72,
+              "end": 77
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "우리가 매일 마시고 씻는 물은 한강에서 어디를 거쳐 깨끗하게 배달된다고 했나요?",
           "answerText": "정수장",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -596,14 +630,14 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "밤이 되면 다리마다 화려한 이것이 켜져서 야경이 무척 아름답습니다. 이것은 무엇일까요?",
-          "answerText": "불빛",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "밤이 되면 다리마다 무엇이 켜져서 한강의 야경이 아름답다고 했나요?",
+          "answerText": "화려한 불빛",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 99,
+              "start": 95,
               "end": 101
             }
           ],

@@ -583,14 +583,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "마을 사람들이 노인에 대해 떠올린 상태는 어떠했나요?",
-          "answerText": "운이 다했다",
+          "prompt": "노인이 며칠째 잡지 못한 대상은 무엇인가요?",
+          "answerText": "물고기",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 38,
-              "end": 44
+              "start": 8,
+              "end": 11
             }
           ],
           "scoring": {
@@ -601,14 +601,14 @@
         },
         {
           "id": "q2",
-          "prompt": "노인이 포기하지 않고 배를 저어 간 곳은 어디인가요?",
-          "answerText": "더 깊은 곳",
+          "prompt": "노인이 포기하지 않고 향한 곳은 어디인가요?",
+          "answerText": "먼 바다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 32,
-              "end": 38
+              "start": 16,
+              "end": 20
             }
           ],
           "scoring": {
@@ -619,14 +619,14 @@
         },
         {
           "id": "q3",
-          "prompt": "갑자기 강하게 팽팽해지기 시작한 것은 무엇인가요?",
-          "answerText": "낚싯줄",
+          "prompt": "낚싯줄이 갑자기 어떻게 변했나요?",
+          "answerText": "강하게 팽팽해지기 시작했다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 4,
-              "end": 7
+              "start": 9,
+              "end": 23
             }
           ],
           "scoring": {
@@ -637,14 +637,14 @@
         },
         {
           "id": "q4",
-          "prompt": "노인이 맞닥뜨린 존재는 무엇이라고 표현되나요?",
-          "answerText": "새로운 상대",
+          "prompt": "미끼를 문 존재는 어떤 대상이라고 표현되나요?",
+          "answerText": "거대한 무언가",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 24,
-              "end": 30
+              "paragraphId": "p3",
+              "start": 25,
+              "end": 32
             }
           ],
           "scoring": {
@@ -655,14 +655,22 @@
         },
         {
           "id": "q5",
-          "prompt": "노인이 상대와 맞서 견딘 방식은 어떠했나요?",
-          "answerText": "온몸",
-          "answerMatchMode": "ANY",
+          "prompt": "새로운 상대와의 싸움은 어떤 모습으로 표현되었나요? 두 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "길고",
+            "험난한"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 10,
-              "end": 12
+              "start": 33,
+              "end": 35
+            },
+            {
+              "paragraphId": "p4",
+              "start": 36,
+              "end": 39
             }
           ],
           "scoring": {

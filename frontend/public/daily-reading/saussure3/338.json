@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사자가 ( )에서 풀려났음.",
-          "answerText": "그물",
-          "answerMatchMode": "EXACT",
+          "prompt": "사자가 처음에 비웃었던 대상을 나타내는 구절을 찾으시오.",
+          "answerText": "작고 약한 생쥐",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 35,
-              "end": 37
+              "start": 0,
+              "end": 8
             }
           ],
           "scoring": {
@@ -869,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "작은 힘도 ( )이 되었습니다.",
-          "answerText": "보탬",
-          "answerMatchMode": "EXACT",
+          "prompt": "생쥐 덕분에 어떤 사자가 되었는지 나타내는 구절을 찾으시오.",
+          "answerText": "그물에서 풀려난 사자",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 64,
-              "end": 66
+              "paragraphId": "p1",
+              "start": 35,
+              "end": 46
             }
           ],
           "scoring": {
@@ -888,19 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "따뜻한 ( )을 꿈꾸며 자요.",
-          "answerText": "우정",
-          "answerMatchMode": "EXACT",
+          "prompt": "생쥐가 약속을 지키기 위해 한 행동을 찾으시오.",
+          "answerText": "용기를 냄",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 124,
-              "end": 126
-            },
+              "start": 49,
+              "end": 54
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "무척 중요하다는 결론으로 제시된 마음을 찾으시오.",
+          "answerText": "서로 돕고 배려하는 마음",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 114,
-              "end": 116
+              "start": 27,
+              "end": 40
             }
           ],
           "scoring": {

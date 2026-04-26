@@ -1053,7 +1053,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "회의에서 가장 큰 원인으로 지목된 현행 제도의 문제는 무엇인가요?",
+          "prompt": "동물 보호 단체가 유기 동물 문제의 가장 큰 원인으로 본 것을 찾으시오.",
           "answerText": "생명을 돈을 주고 너무 쉽게 살 수 있는 현행 제도",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1071,14 +1071,22 @@
         },
         {
           "id": "q2",
-          "prompt": "동물 보호 단체가 강제하자고 한 최소 교육 시간은 얼마인가요?",
-          "answerText": "최소 10시간",
-          "answerMatchMode": "ANY",
+          "prompt": "동물 보호 단체가 입양 조건으로 강화하자고 한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "최소 10시간 이상의 동물 양육 필수 교육",
+            "일정한 경제적 능력"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 115,
-              "end": 122
+              "end": 138
+            },
+            {
+              "paragraphId": "p2",
+              "start": 146,
+              "end": 156
             }
           ],
           "scoring": {
@@ -1089,14 +1097,22 @@
         },
         {
           "id": "q3",
-          "prompt": "시민 대표가 대안으로 강조한 방식은 무엇인가요?",
-          "answerText": "사후 관리",
-          "answerMatchMode": "ANY",
+          "prompt": "동물 보호 단체가 단속하거나 금지하자고 한 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "불법 강아지 번식장",
+            "펫숍 전시 판매"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 221,
-              "end": 226
+              "paragraphId": "p2",
+              "start": 202,
+              "end": 212
+            },
+            {
+              "paragraphId": "p2",
+              "start": 225,
+              "end": 233
             }
           ],
           "scoring": {
@@ -1107,14 +1123,22 @@
         },
         {
           "id": "q4",
-          "prompt": "수의사가 100% 의무화해야 한다고 한 제도는 무엇인가요?",
-          "answerText": "반려동물 등록제",
-          "answerMatchMode": "ANY",
+          "prompt": "수의사가 동시에 이루어져야 한다고 한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "사전 예방",
+            "사후 처벌"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 110,
-              "end": 118
+              "start": 34,
+              "end": 39
+            },
+            {
+              "paragraphId": "p4",
+              "start": 48,
+              "end": 53
             }
           ],
           "scoring": {
@@ -1125,14 +1149,14 @@
         },
         {
           "id": "q5",
-          "prompt": "등록제에서 동물 몸에 심는 것은 무엇인가요?",
-          "answerText": "마이크로칩",
+          "prompt": "수의사가 100% 의무화해야 한다고 한 제도를 찾으시오.",
+          "answerText": "'반려동물 등록제'",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 99,
-              "end": 104
+              "start": 109,
+              "end": 119
             }
           ],
           "scoring": {

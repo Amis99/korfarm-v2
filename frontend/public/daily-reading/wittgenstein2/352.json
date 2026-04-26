@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "화물 열차의 검은 문들이 어떤 상태였는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 83
+              "start": 23,
+              "end": 31
             }
           ],
           "scoring": {
@@ -585,16 +585,63 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "무엇을 실었느냐 화물 열차의\n검은 문들은 탄탄히 잠겨졌다\n바람 속을 달리는 화물 열차의 지붕 우에\n우리 제각기 드러누워\n한결같이 쳐다보는 하나씩의 별"
+          "answerText": "탄탄히 잠겨졌다"
         },
         {
           "id": "q2",
-          "prompt": "2문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "1문단과 6문단에서 반복되는 행을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 32,
+              "end": 54
+            },
+            {
+              "paragraphId": "p6",
+              "start": 70,
+              "end": 92
+            },
+            {
+              "paragraphId": "p1",
+              "start": 55,
+              "end": 66
+            },
+            {
+              "paragraphId": "p6",
+              "start": 93,
+              "end": 104
+            },
+            {
+              "paragraphId": "p1",
+              "start": 67,
+              "end": 83
+            },
+            {
+              "paragraphId": "p6",
+              "start": 105,
+              "end": 121
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "바람 속을 달리는 화물 열차의 지붕 우에",
+            "우리 제각기 드러누워",
+            "한결같이 쳐다보는 하나씩의 별"
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "두만강 저쪽에서 온다고 한 대상을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 69
+              "end": 16
             }
           ],
           "scoring": {
@@ -603,34 +650,66 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "두만강 저쪽에서 온다는 사람들과\n자무스(중국의 쑹화강 상류에 있는, 러시아와의 국경 가까이에 있는 도시)에서 온다는 사람들과"
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 44
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "험한 땅에서 험한 변 치르고\n눈보라 치기 전에 고향으로 돌아간다는\n남도 사람들과"
+          "answerText": "두만강 저쪽에서 온다는 사람들"
         },
         {
           "id": "q4",
-          "prompt": "4문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "남도 사람들이 눈보라 치기 전에 돌아간다는 곳을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 26,
+              "end": 30
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "고향으로"
+        },
+        {
+          "id": "q5",
+          "prompt": "4문단에서 '나눠서 요기하며' 앞에 열거된 대상을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 0,
-              "end": 56
+              "end": 6
+            },
+            {
+              "paragraphId": "p4",
+              "start": 7,
+              "end": 10
+            },
+            {
+              "paragraphId": "p4",
+              "start": 11,
+              "end": 15
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "북어 쪼가리",
+            "초담배",
+            "밀가루떡"
+          ]
+        },
+        {
+          "id": "q6",
+          "prompt": "화자가 그리워한다고 말한 곳을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 30,
+              "end": 32
             }
           ],
           "scoring": {
@@ -639,15 +718,15 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "북어 쪼가리 초담배 밀가루떡이랑\n나눠서 요기하며 내사 서울이 그리워\n고향과는 딴 방향으로 흔들려 간다"
+          "answerText": "서울"
         },
         {
-          "id": "q5",
-          "prompt": "5문단을 이해한 내용으로 가장 적절한 것은?",
+          "id": "q7",
+          "prompt": "5문단에서 화자가 자신을 가리킨 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
+              "start": 116,
               "end": 122
             }
           ],
@@ -657,16 +736,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "푸르른 바다와 거리 거리를\n설움 많은 이민 열차의 흐린 창으로\n그저 서러이 내다보던 골짝 골짝을\n갈 때와 마찬가지로\n헐벗은 채 돌아오는 이 사람들과\n마찬가지로 헐벗은 나요\n나라에 기쁜 일 많아\n울지를 못하는 함경도 사내"
+          "answerText": "함경도 사내"
         },
         {
-          "id": "q6",
-          "prompt": "6문단을 이해한 내용으로 가장 적절한 것은?",
+          "id": "q8",
+          "prompt": "6문단에서 잠이 들었는지 묻는 대상이 누구인지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 121
+              "start": 51,
+              "end": 61
             }
           ],
           "scoring": {
@@ -675,7 +754,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "총을 안고 뿔가(폴카(polka). 보헤미아 지방의 경쾌한 무곡(舞曲).)의 노래를 부르던\n슬라브의 늙은 병정은 잠이 들었나\n바람 속을 달리는 화물 열차의 지붕 우에\n우리 제각기 드러누워\n한결같이 쳐다보는 하나씩의 별"
+          "answerText": "슬라브의 늙은 병정"
         }
       ]
     }

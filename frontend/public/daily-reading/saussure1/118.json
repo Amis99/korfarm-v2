@@ -552,29 +552,24 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "가방에서 꺼내 펼치는 것은?",
-          "answerText": "우산",
-          "answerMatchMode": "EXACT",
+          "prompt": "아이들이 펼친 우산의 색깔 세 가지를 모두 찾아 적어 보세요",
+          "answerText": "빨간색, 노란색, 파란색",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 41,
-              "end": 43
+              "start": 54,
+              "end": 57
             },
             {
               "paragraphId": "p1",
-              "start": 68,
-              "end": 70
-            },
-            {
-              "paragraphId": "p2",
-              "start": 31,
-              "end": 33
-            },
-            {
-              "paragraphId": "p2",
               "start": 59,
-              "end": 61
+              "end": 62
+            },
+            {
+              "paragraphId": "p1",
+              "start": 64,
+              "end": 67
             }
           ],
           "scoring": {
@@ -586,9 +581,28 @@
         },
         {
           "id": "q2",
-          "prompt": "발에 신고 걷는 것은?",
+          "prompt": "'우산들이 □처럼 피어납니다'에서 알록달록 펼쳐진 우산을 무엇에 빗대어 표현했나요? 한 글자로 적어 보세요",
+          "answerText": "꽃",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 73,
+              "end": 74
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "비가 오거나 땅이 젖었을 때 발에 신어서 발을 보호해 주는 긴 신을 무엇이라고 하나요?",
           "answerText": "장화",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -604,15 +618,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "물 웅덩이 밟는 소리는?",
-          "answerText": "첨벙첨벙",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "알록달록한 우산들이 모이자 거리가 어떻게 변했다고 했나요? 지문에서 핵심 단어를 찾아 보세요",
+          "answerText": "화사",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 12,
-              "end": 16
+              "paragraphId": "p1",
+              "start": 101,
+              "end": 103
             }
           ],
           "scoring": {

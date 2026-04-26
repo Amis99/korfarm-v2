@@ -557,14 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "공을 쳐서 작은 문을 통과시키는 운동으로, 여왕이 앨리스에게 제안한 경기는?",
-          "answerText": "크로케",
-          "answerMatchMode": "EXACT",
+          "prompt": "카드 병정들이 빨간색으로 칠하던 장미의 원래 색은 무엇입니까?",
+          "answerText": "하얀 장미",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 28,
-              "end": 31
+              "paragraphId": "p1",
+              "start": 25,
+              "end": 30
             }
           ],
           "scoring": {
@@ -576,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "다른 사람의 말이나 행동에 크게 꾸짖거나 무섭게 소리를 지르는 행위는?",
-          "answerText": "호통",
-          "answerMatchMode": "EXACT",
+          "prompt": "여왕이 크로케 경기에 이용하자고 한 두 동물은 무엇입니까?",
+          "answerText": "고슴도치와 홍학",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 108,
-              "end": 110
+              "start": 10,
+              "end": 18
             }
           ],
           "scoring": {
@@ -595,14 +595,41 @@
         },
         {
           "id": "q3",
-          "prompt": "사실이 아니거나 이치에 맞지 않고 무척 엉망인 상태를 뜻하는 말은?",
-          "answerText": "엉터리",
-          "answerMatchMode": "EXACT",
+          "prompt": "크로케 경기가 희한했던 이유를 보여 주는 표현 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "규칙도 없고",
+            "마음대로 움직이는 경기장"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 48,
+              "end": 54
+            },
+            {
+              "paragraphId": "p2",
+              "start": 55,
+              "end": 68
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "앨리스가 여왕이 잡으려 할 때 이들을 무엇일 뿐이라고 소리쳤습니까?",
+          "answerText": "카드일 뿐",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 22,
-              "end": 25
+              "start": 81,
+              "end": 86
             }
           ],
           "scoring": {

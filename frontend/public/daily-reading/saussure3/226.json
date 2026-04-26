@@ -587,14 +587,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "부모님을 정성껏 모심은?",
-          "answerText": "효심이",
-          "answerMatchMode": "EXACT",
+          "prompt": "나무꾼이 살게 된 곳과 다시 내려온 곳을 모두 찾으시오.",
+          "answerTexts": [
+            "하늘나라로 올라가",
+            "다시 지상에 내려왔습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 71,
-              "end": 74
+              "start": 9,
+              "end": 18
+            },
+            {
+              "paragraphId": "p1",
+              "start": 48,
+              "end": 61
             }
           ],
           "scoring": {
@@ -606,19 +614,14 @@
         },
         {
           "id": "q2",
-          "prompt": "지키기로 한 말이나 일은?",
-          "answerText": "약속을",
-          "answerMatchMode": "EXACT",
+          "prompt": "나무꾼의 발길을 돌린 마음을 찾으시오.",
+          "answerText": "어머니를 향한 효심",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 17,
-              "end": 20
-            },
-            {
-              "paragraphId": "p2",
+              "paragraphId": "p1",
               "start": 63,
-              "end": 66
+              "end": 73
             }
           ],
           "scoring": {
@@ -630,14 +633,41 @@
         },
         {
           "id": "q3",
-          "prompt": "어떤 일을 간절히 바람은?",
-          "answerText": "소망을",
-          "answerMatchMode": "EXACT",
+          "prompt": "나무꾼이 지켜야 했던 약속과 일어난 사고를 모두 찾으시오.",
+          "answerTexts": [
+            "말에서 내리지 말라는 약속",
+            "말에서 떨어지는 사고"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 5,
+              "end": 19
+            },
+            {
+              "paragraphId": "p2",
+              "start": 47,
+              "end": 58
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "나무꾼의 간절한 마음이 바란 것을 찾으시오.",
+          "answerText": "가족과 함께하고 싶은 소망",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 48,
-              "end": 51
+              "start": 36,
+              "end": 50
             }
           ],
           "scoring": {

@@ -1115,96 +1115,12 @@
     },
     "confirm": {
       "questions": [
-        {
-          "id": "q1",
-          "prompt": "이 대화는 발표회 순서 조정을 무엇에서부터 시작하나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 160
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지우: 이번 동아리 발표회 순서를 다시 조정해야 할 것 같아. 과학 동아리가 실험 준비 시간이 더 필요하다고 했고, 연극부는 뒤쪽 순서가 되면 퇴장 시간이 너무 늦어진다고 하더라. 하윤: 그러면 각 동아리 사정을 먼저 듣고, 전체 진행 시간 안에서 바꿀 수 있는지 같이 계산해 봐야겠네."
-        },
-        {
-          "id": "q2",
-          "prompt": "과학 동아리는 왜 중간 순서를 더 낫다고 보나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 159
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "민석: 일단 과학 동아리는 무대 위 장비 설치에 시간이 많이 걸리니까 맨 앞보다는 중간이 낫다고 했어. 시작 직후에는 관객도 아직 자리 정리가 끝나지 않아서 실험 집중도가 떨어질 수 있다는 이유도 있었어. 지우: 그 말은 준비 시간뿐 아니라 발표 효과까지 함께 고려해야 한다는 뜻이네."
-        },
-        {
-          "id": "q3",
-          "prompt": "연극부는 어떤 조건을 함께 따져 순서를 정하려 하나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 150
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "하윤: 반면 연극부는 배우들이 갈아입을 시간이 필요해서 너무 앞 순서도 어렵다고 했지? 민석: 맞아. 그런데 너무 뒤가 되면 보호자 관람 시간과도 겹쳐서 부담스럽다고 했어. 그래서 중간 뒤쪽 정도를 원한다고 했는데, 과학 동아리와 자리가 겹칠 수 있어서 조정이 필요해."
-        },
-        {
-          "id": "q4",
-          "prompt": "발표 순서는 어떤 배치로 제안되었나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 161
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지우: 그럼 첫 순서는 준비가 간단한 합창부로 두고, 둘째와 셋째 사이에 과학 동아리를 넣는 건 어때? 그 사이에 장비를 옮길 수 있도록 쉬는 시간을 짧게 두면 무리 없이 이어질 것 같아. 하윤: 그러면 연극부는 뒤에서 두 번째쯤 배치하면 너무 늦지도 않고 준비 시간도 확보할 수 있겠다."
-        },
-        {
-          "id": "q5",
-          "prompt": "마무리로 무엇을 언제까지 하자고 하나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 118
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지우: 정리할게. 첫 순서는 합창부, 중간에는 과학 동아리, 뒤에서 두 번째는 연극부로 조정하는 안을 먼저 제안한다. 오늘 안에 각 동아리 의견을 다시 확인하고, 내일 점심시간 전에 최종 순서를 안내문에 올리자."
-        }
+        {"id":"q1","prompt":"이 대화에 참여한 학생 세 명의 이름을 모두 찾으시오","answerText":"지우, 하윤, 민석","answerMatchMode":"ALL","answerRanges":[{"paragraphId":"p1","start":0,"end":2},{"paragraphId":"p1","start":101,"end":103},{"paragraphId":"p2","start":0,"end":2}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q2","prompt":"각 동아리가 모여 무대에서 차례로 공연하는 행사를 가리키는 말을 찾으시오","answerText":"발표회","answerMatchMode":"ANY","answerRanges":[{"paragraphId":"p1","start":11,"end":14}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q3","prompt":"발표 순서 조정을 시작할 때 함께 살펴야 한다고 한 두 가지를 모두 찾으시오","answerText":"각 동아리 사정, 전체 진행 시간","answerMatchMode":"ALL","answerRanges":[{"paragraphId":"p1","start":109,"end":117},{"paragraphId":"p1","start":126,"end":134}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q4","prompt":"첫 순서로 두기로 한 동아리의 이름을 찾으시오","answerText":"합창부","answerMatchMode":"ANY","answerRanges":[{"paragraphId":"p4","start":21,"end":24},{"paragraphId":"p6","start":16,"end":19}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q5","prompt":"학생이 공연 전후에 옷을 갈아입거나 머무를 수 있는 방을 가리키는 말을 찾으시오","answerText":"대기실","answerMatchMode":"ANY","answerRanges":[{"paragraphId":"p5","start":67,"end":70}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q6","prompt":"각 동아리에 수정된 순서를 알려 답을 받아 본 뒤 무엇에 올리자고 했는지 찾으시오","answerText":"안내문","answerMatchMode":"ANY","answerRanges":[{"paragraphId":"p6","start":109,"end":112}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true}
       ]
     }
   }

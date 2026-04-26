@@ -1133,168 +1133,80 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '정렬'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 7,
-              "end": 9
-            },
-            {
-              "paragraphId": "p1",
-              "start": 177,
-              "end": 179
-            },
-            {
-              "paragraphId": "p4",
-              "start": 65,
-              "end": 67
-            },
-            {
-              "paragraphId": "p4",
-              "start": 167,
-              "end": 169
-            },
-            {
-              "paragraphId": "p5",
-              "start": 10,
-              "end": 12
-            },
-            {
-              "paragraphId": "p5",
-              "start": 73,
-              "end": 75
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "정렬되어 있는 데이터에서 가운데를 기준으로 범위를 절반씩 줄여 가며 원하는 값을 찾는 방법을 가리키는 다섯 글자 표현을 모두 찾으시오",
+          "answerText": "이진 탐색",
           "answerMatchMode": "ANY",
-          "answerText": "정렬"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 0, "end": 5},
+            {"paragraphId": "p1", "start": 161, "end": 166},
+            {"paragraphId": "p2", "start": 73, "end": 78},
+            {"paragraphId": "p3", "start": 0, "end": 5},
+            {"paragraphId": "p3", "start": 78, "end": 83},
+            {"paragraphId": "p3", "start": 176, "end": 181},
+            {"paragraphId": "p4", "start": 4, "end": 9},
+            {"paragraphId": "p4", "start": 160, "end": 165},
+            {"paragraphId": "p5", "start": 3, "end": 8},
+            {"paragraphId": "p5", "start": 134, "end": 139}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '범위'를 모두 찾으시오.",
+          "prompt": "이진 탐색이 가능하려면 데이터가 어떤 두 가지 기준으로 정렬되어 있어야 하는지 모두 찾으시오",
+          "answerText": "오름차순, 내림차순",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 66,
-              "end": 68
-            },
-            {
-              "paragraphId": "p2",
-              "start": 147,
-              "end": 149
-            },
-            {
-              "paragraphId": "p2",
-              "start": 188,
-              "end": 190
-            },
-            {
-              "paragraphId": "p3",
-              "start": 19,
-              "end": 21
-            },
-            {
-              "paragraphId": "p5",
-              "start": 32,
-              "end": 34
-            }
+            {"paragraphId": "p4", "start": 42, "end": 46},
+            {"paragraphId": "p4", "start": 49, "end": 53}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "범위"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '비교'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 95,
-              "end": 97
-            },
-            {
-              "paragraphId": "p2",
-              "start": 161,
-              "end": 163
-            },
-            {
-              "paragraphId": "p3",
-              "start": 94,
-              "end": 96
-            },
-            {
-              "paragraphId": "p4",
-              "start": 82,
-              "end": 84
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "값이 어디에 있는지 몰라서 처음부터 하나씩 차례로 확인해야 하는 방식을 가리키는 다섯 글자 표현을 찾으시오",
+          "answerText": "순차 탐색",
           "answerMatchMode": "ANY",
-          "answerText": "비교"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 38, "end": 43}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '효율'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 183,
-              "end": 185
-            },
-            {
-              "paragraphId": "p5",
-              "start": 151,
-              "end": 153
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "이진 탐색이 빠른 까닭은 무엇을 한꺼번에 버리기 때문이라고 하였는지 그 일곱 글자 표현을 찾으시오",
+          "answerText": "불필요한 범위",
           "answerMatchMode": "ANY",
-          "answerText": "효율"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 14, "end": 21}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '기준'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 61,
-              "end": 63
-            },
-            {
-              "paragraphId": "p4",
-              "start": 60,
-              "end": 62
-            },
-            {
-              "paragraphId": "p5",
-              "start": 27,
-              "end": 29
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "이진 탐색이 속하는 학문 영역을 가리키는 일곱 글자 표현을 모두 찾으시오",
+          "answerText": "데이터알고리즘",
           "answerMatchMode": "ANY",
-          "answerText": "기준"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 35, "end": 42},
+            {"paragraphId": "p5", "start": 141, "end": 148}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "이진 탐색은 효율을 설명할 때 자주 쓰이는 무엇이 된다고 하였는지 그 여섯 글자 표현을 찾으시오",
+          "answerText": "대표 알고리즘",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 200, "end": 207}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

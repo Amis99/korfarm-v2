@@ -1098,7 +1098,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이 건의문이 강력히 요구한 법안의 방향은 무엇인가요?",
+          "prompt": "이 건의문이 강력히 요구한 법안의 방향을 찾으시오.",
           "answerText": "동물권 보호를 위한 통합적 법안 마련",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1116,14 +1116,27 @@
         },
         {
           "id": "q2",
-          "prompt": "민법에서 동물을 무엇으로 규정하지 말아야 한다고 했나요?",
-          "answerText": "생명체",
-          "answerMatchMode": "ANY",
+          "prompt": "동물의 법적 지위를 설명할 때 대비된 두 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "물건",
+            "생명체"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 12,
+              "end": 14
+            },
             {
               "paragraphId": "p2",
               "start": 20,
               "end": 23
+            },
+            {
+              "paragraphId": "p2",
+              "start": 89,
+              "end": 91
             },
             {
               "paragraphId": "p2",
@@ -1139,14 +1152,22 @@
         },
         {
           "id": "q3",
-          "prompt": "단계적으로 폐지하자고 한 축산 방식은 무엇인가요?",
-          "answerText": "공장식 축산업의 단계적 폐지",
-          "answerMatchMode": "ANY",
+          "prompt": "공장식 사육 방식의 예로 나온 시설을 모두 찾으시오.",
+          "answerTexts": [
+            "배터리 케이지",
+            "스톨"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 33,
-              "end": 48
+              "start": 71,
+              "end": 78
+            },
+            {
+              "paragraphId": "p3",
+              "start": 82,
+              "end": 84
             }
           ],
           "scoring": {
@@ -1157,7 +1178,7 @@
         },
         {
           "id": "q4",
-          "prompt": "세제 혜택과 지원금을 제공하자고 한 농장 형태는 무엇인가요?",
+          "prompt": "세제 혜택과 지원금을 제공하자고 한 농장 형태를 찾으시오.",
           "answerText": "동물 복지 인증 농장",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1175,14 +1196,22 @@
         },
         {
           "id": "q5",
-          "prompt": "셋째 제안으로 촉구한 것은 무엇인가요?",
-          "answerText": "동물 실험의 축소와 대체 기술 지원",
-          "answerMatchMode": "ANY",
+          "prompt": "동물의 희생을 대체할 수 있는 첨단 과학 기술을 모두 찾으시오.",
+          "answerTexts": [
+            "컴퓨터 시뮬레이션",
+            "인공 세포 배양 기술"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 19,
-              "end": 38
+              "start": 125,
+              "end": 134
+            },
+            {
+              "paragraphId": "p4",
+              "start": 137,
+              "end": 148
             }
           ],
           "scoring": {

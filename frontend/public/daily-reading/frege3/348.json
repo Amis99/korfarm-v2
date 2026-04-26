@@ -1122,14 +1122,28 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "허생이 섬에서 생산한 농산물을 팔아 막대한 부를 얻은 나라는 어디인가요?",
-          "answerText": "일본",
-          "answerMatchMode": "ANY",
+          "prompt": "허생이 부를 쌓은 방식과 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "일본",
+            "해외 무역",
+            "막대한 부"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 17,
               "end": 19
+            },
+            {
+              "paragraphId": "p1",
+              "start": 28,
+              "end": 33
+            },
+            {
+              "paragraphId": "p1",
+              "start": 44,
+              "end": 49
             }
           ],
           "scoring": {
@@ -1140,24 +1154,40 @@
         },
         {
           "id": "q2",
-          "prompt": "허생이 돈을 돌려주러 다시 찾아간 사람은 누구인가요?",
-          "answerText": "변씨",
-          "answerMatchMode": "ANY",
+          "prompt": "허생이 재물을 대하는 태도와 나눈 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "재물 자체가 목적이 아님",
+            "번 돈의 절반",
+            "가난한 이들",
+            "재물이 너무 많으면 화가 된다고",
+            "바다에 던지며 마음을 다스리기도"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
+              "paragraphId": "p1",
+              "start": 62,
+              "end": 75
+            },
+            {
+              "paragraphId": "p1",
+              "start": 90,
+              "end": 97
+            },
+            {
+              "paragraphId": "p1",
+              "start": 99,
+              "end": 105
+            },
+            {
               "paragraphId": "p2",
-              "start": 74,
-              "end": 76
-            },
-            {
-              "paragraphId": "p3",
               "start": 0,
-              "end": 2
+              "end": 17
             },
             {
-              "paragraphId": "p3",
-              "start": 31,
-              "end": 33
+              "paragraphId": "p2",
+              "start": 36,
+              "end": 53
             }
           ],
           "scoring": {
@@ -1168,9 +1198,41 @@
         },
         {
           "id": "q3",
-          "prompt": "허생이 나라 문제를 두고 만난 인물은 누구인가요?",
-          "answerText": "이완 대장",
-          "answerMatchMode": "ANY",
+          "prompt": "허생이 변씨에게 돈을 돌려준 방식과 관심을 둔 문제를 모두 찾으시오.",
+          "answerTexts": [
+            "이자를 보태어 돈을 돌려주었습니다",
+            "세상의 현실적인 문제"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 11,
+              "end": 29
+            },
+            {
+              "paragraphId": "p3",
+              "start": 71,
+              "end": 82
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "허생이 이완 대장에게 제안한 내용과 거절 이유를 모두 찾으시오.",
+          "answerTexts": [
+            "이완 대장",
+            "세 가지",
+            "훌륭한 인재",
+            "실리",
+            "명분과 격식"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -1184,26 +1246,28 @@
             },
             {
               "paragraphId": "p4",
-              "start": 66,
-              "end": 71
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "허생이 이완 대장에게 제안한 나라를 구할 방책의 수는 몇 가지인가요?",
-          "answerText": "세 가지",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
               "start": 19,
               "end": 23
+            },
+            {
+              "paragraphId": "p4",
+              "start": 33,
+              "end": 39
+            },
+            {
+              "paragraphId": "p4",
+              "start": 44,
+              "end": 46
+            },
+            {
+              "paragraphId": "p4",
+              "start": 66,
+              "end": 71
+            },
+            {
+              "paragraphId": "p4",
+              "start": 73,
+              "end": 79
             }
           ],
           "scoring": {
@@ -1214,10 +1278,30 @@
         },
         {
           "id": "q5",
-          "prompt": "허생의 이야기가 끝내 남게 된 모습은 무엇인가요?",
-          "answerText": "미완의 개혁",
-          "answerMatchMode": "ANY",
+          "prompt": "허생이 꾸짖은 태도와 마지막 행적, 남은 의미를 모두 찾으시오.",
+          "answerTexts": [
+            "실천하지 않는 지식인의 태도",
+            "사회의 폐쇄성",
+            "홀연히 사라졌습니다",
+            "미완의 개혁"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 97,
+              "end": 112
+            },
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 7
+            },
+            {
+              "paragraphId": "p5",
+              "start": 17,
+              "end": 27
+            },
             {
               "paragraphId": "p5",
               "start": 97,

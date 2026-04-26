@@ -557,14 +557,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "식물에 해를 입히거나 모양을 망가뜨리는 행위를 뜻하는 말은?",
-          "answerText": "훼손된",
-          "answerMatchMode": "EXACT",
+          "prompt": "지난주에 다녀온 장소와 그곳에 가득했던 것을 모두 찾으시오.",
+          "answerTexts": [
+            "열대 식물원",
+            "희귀한 식물들"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 60,
-              "end": 63
+              "paragraphId": "p1",
+              "start": 9,
+              "end": 15
+            },
+            {
+              "paragraphId": "p1",
+              "start": 17,
+              "end": 24
             }
           ],
           "scoring": {
@@ -576,14 +584,22 @@
         },
         {
           "id": "q2",
-          "prompt": "여러 사람이 조금씩 돈을 모아 어떤 목적을 위해 사용하는 활동은?",
-          "answerText": "모금",
-          "answerMatchMode": "EXACT",
+          "prompt": "식물들을 아프게 한 방문객들의 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "잎을 함부로 만지거나",
+            "꺾는 방문객들"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 74,
-              "end": 76
+              "paragraphId": "p1",
+              "start": 60,
+              "end": 71
+            },
+            {
+              "paragraphId": "p1",
+              "start": 72,
+              "end": 79
             }
           ],
           "scoring": {
@@ -595,14 +611,55 @@
         },
         {
           "id": "q3",
-          "prompt": "자극에 대해 무척 민감하게 반응하는 열대 식물의 상태를 나타내는 말은?",
-          "answerText": "예민해서",
-          "answerMatchMode": "EXACT",
+          "prompt": "열대 식물이 사람의 손길 때문에 겪을 수 있는 일을 모두 찾으시오.",
+          "answerTexts": [
+            "환경 변화에 예민해서",
+            "성장이 멈출 수 있습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 14,
+              "start": 7,
               "end": 18
+            },
+            {
+              "paragraphId": "p2",
+              "start": 39,
+              "end": 52
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "식물 보호를 위해 제안한 방법을 모두 찾으시오.",
+          "answerTexts": [
+            "눈으로만 보세요",
+            "교육 영상",
+            "모금 활동"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 9,
+              "end": 17
+            },
+            {
+              "paragraphId": "p3",
+              "start": 36,
+              "end": 41
+            },
+            {
+              "paragraphId": "p3",
+              "start": 74,
+              "end": 79
             }
           ],
           "scoring": {

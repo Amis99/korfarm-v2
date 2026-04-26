@@ -993,12 +993,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "작년 축제 때 심했던 문제를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 156
+              "start": 27,
+              "end": 32
             }
           ],
           "scoring": {
@@ -1007,16 +1007,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "민주: 작년 축제 때 외부인 확인 줄이 길어져서 입장 지연이 심했잖아요. 올해는 안전 문제도 있어서 출입 통제안을 오늘 안에 정해야 해요. 준호: 특히 공연 시작 직전에 사람이 몰리면 통로 관리가 어려워져서, 단순히 빨리 들여보내는 것보다 확인 절차를 어떻게 나눌지가 중요합니다."
+          "answerText": "입장 지연"
         },
         {
           "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "공연 시작 직전에 사람이 몰리면 어려워진다고 한 일을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 149
+              "paragraphId": "p1",
+              "start": 103,
+              "end": 108
             }
           ],
           "scoring": {
@@ -1025,16 +1025,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "서현: 저는 외부인 출입구를 한 곳으로 줄이고 손목띠를 현장에서 배부하는 안이 낫다고 봐요. 확인 절차가 느려져도 기준이 분명하면 사고 위험은 줄일 수 있거든요. 민주: 장점은 분명한데, 줄이 너무 길어지면 공연 관람을 포기하는 사람도 생길 수 있다는 걱정이 있어요."
+          "answerText": "통로 관리"
         },
         {
           "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "prompt": "서현이 처음 제안한 방안을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 162
+              "paragraphId": "p2",
+              "start": 7,
+              "end": 25
+            },
+            {
+              "paragraphId": "p2",
+              "start": 26,
+              "end": 42
             }
           ],
           "scoring": {
@@ -1042,17 +1047,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "준호: 외부인을 한 줄로만 세우면 대기 시간이 길어져 혼잡이 더 심해질 수 있습니다. 차라리 사전 신청 명단이 있는 사람과 현장 신청 사람을 나누는 게 낫지 않을까요. 서현: 그렇게 나누면 운영은 편해질 수 있지만, 현장 인력이 더 많이 필요해요. 확인 인원 배치까지 같이 계산해야 합니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "외부인 출입구를 한 곳으로 줄이고",
+            "손목띠를 현장에서 배부하는 안"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
+          "prompt": "줄이 너무 길어질 때 생길 수 있다고 민주가 걱정한 일을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 141
+              "paragraphId": "p2",
+              "start": 116,
+              "end": 143
             }
           ],
           "scoring": {
@@ -1061,16 +1069,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "민주: 그럼 목표를 다시 확인해 봅시다. 우리는 외부인 자체를 줄이려는 게 아니라, 안전을 지키면서도 이동 흐름을 막지 않는 방식을 찾는 거예요. 준호: 맞아요. 그러면 출입구 수보다 먼저 사전 신청과 현장 확인을 어떻게 구분할지 정하는 게 순서겠네요."
+          "answerText": "공연 관람을 포기하는 사람도 생길 수 있다는 걱정"
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "준호가 나누자고 제안한 두 부류를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 177
+              "paragraphId": "p3",
+              "start": 52,
+              "end": 67
+            },
+            {
+              "paragraphId": "p3",
+              "start": 69,
+              "end": 77
             }
           ],
           "scoring": {
@@ -1078,17 +1091,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "서현: 절충안으로 출입구는 두 곳을 유지하고, 외부인은 QR 사전 신청 명단과 신분 확인 후 손목띠를 주는 방식은 어떨까요. 민주: 재학생은 학생증 확인만 하고 바로 입장하게 하면 동선이 덜 섞일 것 같아요. 준호: 공연 시작 한 시간 전에는 안내 요원을 추가 배치하면 줄이 길어져도 어느 정도 흡수할 수 있겠습니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "사전 신청 명단이 있는 사람",
+            "현장 신청 사람"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "운영은 편해질 수 있지만 더 많이 필요하다고 서현이 말한 것을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 171
+              "paragraphId": "p3",
+              "start": 121,
+              "end": 126
             }
           ],
           "scoring": {
@@ -1097,7 +1113,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "민주: 좋습니다. 정리하면 출입구 두 곳 유지, 외부인은 사전 신청과 신분 확인 후 손목띠 배부, 재학생은 학생증 확인만 진행하는 걸로 하죠. 서현: 저는 손목띠 배부 절차를 문서로 정리하겠습니다. 준호: 저는 안내 문구와 대기 동선 표지를 맡을게요. 이 기준으로 최종 운영안을 오늘 저녁까지 올리겠습니다."
+          "answerText": "현장 인력"
+        },
+        {
+          "id": "q7",
+          "prompt": "민주가 다시 확인한 목표를 드러내는 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 47,
+              "end": 72
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "안전을 지키면서도 이동 흐름을 막지 않는 방식"
+        },
+        {
+          "id": "q8",
+          "prompt": "최종 정리에서 외부인과 재학생 처리 방식을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 27,
+              "end": 53
+            },
+            {
+              "paragraphId": "p6",
+              "start": 55,
+              "end": 70
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "외부인은 사전 신청과 신분 확인 후 손목띠 배부",
+            "재학생은 학생증 확인만 진행"
+          ]
         }
       ]
     }

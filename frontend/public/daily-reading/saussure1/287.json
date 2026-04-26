@@ -396,25 +396,15 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "노란 잎이 열리는 나무?",
-          "answerText": "은행나무",
-          "answerMatchMode": "EXACT",
+          "prompt": "마을 어귀의 은행나무 밑에서 작은 상자를 발견한 인물의 이름이 무엇인지 찾아 적어 보세요",
+          "answerText": "준이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 16,
-              "end": 20
-            },
-            {
-              "paragraphId": "p1",
-              "start": 153,
-              "end": 157
-            },
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 8
-            }
+            {"paragraphId": "p1", "start": 28, "end": 30},
+            {"paragraphId": "p1", "start": 139, "end": 141},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 102, "end": 104},
+            {"paragraphId": "p2", "start": 128, "end": 130}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -425,25 +415,11 @@
         },
         {
           "id": "q2",
-          "prompt": "시간이 담긴 신비한 틀?",
-          "answerText": "시간상자",
-          "answerMatchMode": "EXACT",
+          "prompt": "비밀 번호를 풀 수 있도록 도와주는 실마리를 가리키는 외래어가 무엇인지 찾아 적어 보세요",
+          "answerText": "힌트",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 72,
-              "end": 76
-            },
-            {
-              "paragraphId": "p2",
-              "start": 76,
-              "end": 80
-            },
-            {
-              "paragraphId": "p2",
-              "start": 136,
-              "end": 140
-            }
+            {"paragraphId": "p2", "start": 90, "end": 92}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -454,15 +430,27 @@
         },
         {
           "id": "q3",
-          "prompt": "비밀을 푸는 실마리?",
-          "answerText": "힌트",
-          "answerMatchMode": "EXACT",
+          "prompt": "준이가 황금색 잎사귀 뒤에서 찾아낸 첫 번째 힌트가 무엇이었는지 찾아 적어 보세요",
+          "answerText": "세 자리 숫자",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 90,
-              "end": 92
-            }
+            {"paragraphId": "p2", "start": 53, "end": 60}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "준이가 첫 번째 힌트를 들고 달려간 단짝 친구의 이름이 무엇인지 찾아 적어 보세요",
+          "answerText": "민수",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 113, "end": 115},
+            {"paragraphId": "p2", "start": 132, "end": 134}
           ],
           "scoring": {
             "correctDeltaSec": 10,

@@ -1031,103 +1031,75 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '문장 덧붙이기'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 7
-            },
-            {
-              "paragraphId": "p1",
-              "start": 249,
-              "end": 256
-            },
-            {
-              "paragraphId": "p4",
-              "start": 3,
-              "end": 10
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글을 읽는 사람을 가리키는 두 글자 단어를 찾으시오",
+          "answerText": "독자",
           "answerMatchMode": "ANY",
-          "answerText": "문장 덧붙이기"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 281, "end": 283},
+            {"paragraphId": "p4", "start": 49, "end": 51}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '중심 내용'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 258,
-              "end": 263
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "좋은 덧붙이기를 글의 장식이 아니라 무엇이라고 비유했는지 다섯 글자로 찾으시오",
+          "answerText": "보조 장치",
           "answerMatchMode": "ANY",
-          "answerText": "중심 내용"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 273, "end": 278}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '빠진 정보'를 모두 찾으시오.",
+          "prompt": "문장이 부족할 때 보태야 할 세 가지 내용 요소를 모두 찾으시오",
+          "answerText": "대상, 까닭, 결과",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 271,
-              "end": 276
-            }
+            {"paragraphId": "p2", "start": 38, "end": 40},
+            {"paragraphId": "p2", "start": 51, "end": 53},
+            {"paragraphId": "p2", "start": 63, "end": 65},
+            {"paragraphId": "p2", "start": 81, "end": 83},
+            {"paragraphId": "p2", "start": 89, "end": 91},
+            {"paragraphId": "p3", "start": 140, "end": 142}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "빠진 정보"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '되풀이'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 259,
-              "end": 262
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글을 고칠 때 가장 먼저 찾아야 한다고 한 다섯 글자 표현을 찾으시오",
+          "answerText": "중심 문장",
           "answerMatchMode": "ANY",
-          "answerText": "되풀이"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 114, "end": 119}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '보조 장치'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 273,
-              "end": 278
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글을 고치는 데 좋다고 한 행동, 빠진 정보가 있는지 확인하는 행동을 두 글자로 찾으시오",
+          "answerText": "점검",
           "answerMatchMode": "ANY",
-          "answerText": "보조 장치"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 112, "end": 114}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "‘학교 앞 길이 복잡하다’ 문장에 ‘등교 시간마다’를 보탤 때 더해 주는 종류의 정보를 다섯 글자로 찾으시오",
+          "answerText": "시간 정보",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 180, "end": 185}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

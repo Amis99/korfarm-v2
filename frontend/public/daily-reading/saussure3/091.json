@@ -557,14 +557,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "부모님을 대신하여 할아버지나 할머니가 손자, 손녀를 키우며 함께 사는 가족은?",
-          "answerText": "우리가 사는 마을에는 여러 형태의 가족이 살고 있습니다.",
-          "answerMatchMode": "EXACT",
+          "prompt": "마을에서 볼 수 있는 가족의 형태 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "부모님과 자녀가 함께 사는 가족",
+            "할아버지와 할머니가 손주를 돌보며 사는 가족"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 31
+              "start": 32,
+              "end": 49
+            },
+            {
+              "paragraphId": "p1",
+              "start": 55,
+              "end": 79
             }
           ],
           "scoring": {
@@ -576,10 +584,18 @@
         },
         {
           "id": "q2",
-          "prompt": "우리나라 사람과 외국인이 만나 가정을 이루어 서로의 문화를 나누는 가족은?",
-          "answerText": "다문화 가족",
-          "answerMatchMode": "EXACT",
+          "prompt": "2문단에 나온 다른 가족의 모습 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "엄마나 아빠 중 한 분과 자녀",
+            "다문화 가족"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 6,
+              "end": 22
+            },
             {
               "paragraphId": "p2",
               "start": 56,
@@ -595,14 +611,41 @@
         },
         {
           "id": "q3",
-          "prompt": "가족이 어려움에 처했을 때 서로 돕고 보호해 주는 따뜻한 역할을 비유한 말은?",
-          "answerText": "울타리",
-          "answerMatchMode": "EXACT",
+          "prompt": "가족의 모양이 서로 달라도 똑같다고 한 마음을 찾으시오.",
+          "answerText": "서로를 아끼는 마음",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 100,
+              "end": 110
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "가족이 든든한 울타리인 이유가 되는 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "서로를 도와주고",
+            "함께 웃어주는"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 78,
-              "end": 81
+              "start": 52,
+              "end": 60
+            },
+            {
+              "paragraphId": "p3",
+              "start": 66,
+              "end": 73
             }
           ],
           "scoring": {

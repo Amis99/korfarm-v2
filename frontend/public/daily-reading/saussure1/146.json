@@ -552,38 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "하늘에 뜬 하얀 열차?",
-          "answerText": "구름열차",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 57,
-              "end": 61
-            },
-            {
-              "paragraphId": "p1",
-              "start": 161,
-              "end": 165
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 4
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "여행의 주인공 이름?",
+          "prompt": "구름열차에 올라타고 하늘 나라 여행을 떠난 주인공의 이름은 무엇인가요? 지문에서 찾아 보세요",
           "answerText": "민서",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -624,20 +595,63 @@
           "revealOnWrong": true
         },
         {
+          "id": "q2",
+          "prompt": "글쓴이는 하얀 구름열차의 모양을 무엇에 빗대어 표현했나요? 지문에서 한 단어로 찾아 보세요",
+          "answerText": "솜사탕",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 48,
+              "end": 51
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q3",
-          "prompt": "일곱 빛깔 반짝이는 곳.",
-          "answerText": "무지개",
-          "answerMatchMode": "EXACT",
+          "prompt": "쪽지에 적힌 첫 번째 힌트는 가장 먼저 어디를 건너야 한다고 했나요? 지문에서 찾아 보세요",
+          "answerText": "무지개 다리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 53,
-              "end": 56
+              "end": 59
             },
             {
               "paragraphId": "p2",
               "start": 96,
-              "end": 99
+              "end": 102
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "민서는 일곱 빛깔로 반짝이는 커다란 다리가 보이자 무엇이 시작되었다는 것을 깨달았나요? 지문에서 그대로 찾아 보세요",
+          "answerText": "하늘 나라 여행",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 128,
+              "end": 136
+            },
+            {
+              "paragraphId": "p2",
+              "start": 171,
+              "end": 179
             }
           ],
           "scoring": {

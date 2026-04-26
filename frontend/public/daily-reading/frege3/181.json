@@ -1016,7 +1016,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다수결의 한계를 극복하기 위해 제시된 민주주의 개념은 무엇인가요?",
+          "prompt": "다수결의 한계를 극복하기 위해 제시된 민주주의 개념을 찾으시오.",
           "answerText": "숙의 민주주의(Deliberative Democracy)",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1034,7 +1034,25 @@
         },
         {
           "id": "q2",
-          "prompt": "숙의 민주주의의 핵심으로 제시된 것은 무엇인가요?",
+          "prompt": "숙의 민주주의가 중요하게 여기는 정치 과정을 찾으시오.",
+          "answerText": "시민들이 서로 토론하고 설득하며 타협하는 '과정'",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 236,
+              "end": 263
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "숙의 민주주의의 핵심으로 제시된 토론을 찾으시오.",
           "answerText": "합리적인 토론",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1051,38 +1069,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "현실 제도로 제시된 것 가운데 하나는 무엇인가요?",
-          "answerText": "공론화 위원회",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 38,
-              "end": 45
-            },
-            {
-              "paragraphId": "p3",
-              "start": 216,
-              "end": 223
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q4",
-          "prompt": "숙의가 찾아가야 하는 것은 무엇인가요?",
-          "answerText": "공공의 선",
+          "prompt": "숙의 과정에서 참가자들이 가져야 할 태도를 찾으시오.",
+          "answerText": "상대방의 의견을 경청하고 타당한 논리가 있다면 자신의 생각을 기꺼이 수정할 수 있는 열린 태도",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 257,
-              "end": 262
+              "start": 102,
+              "end": 154
             }
           ],
           "scoring": {
@@ -1093,14 +1088,27 @@
         },
         {
           "id": "q5",
-          "prompt": "마지막에 숙의의 시간이 맺는 것으로 비유한 것은 무엇인가요?",
-          "answerText": "합의의 열매",
-          "answerMatchMode": "ANY",
+          "prompt": "숙의 민주주의를 현실에 구현하기 위한 대표 제도를 모두 찾으시오.",
+          "answerTexts": [
+            "공론화 위원회",
+            "시민 배심원제"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 264,
-              "end": 270
+              "paragraphId": "p3",
+              "start": 38,
+              "end": 45
+            },
+            {
+              "paragraphId": "p3",
+              "start": 216,
+              "end": 223
+            },
+            {
+              "paragraphId": "p3",
+              "start": 49,
+              "end": 56
             }
           ],
           "scoring": {

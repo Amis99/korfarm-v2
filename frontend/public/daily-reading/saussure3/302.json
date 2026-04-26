@@ -850,14 +850,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "빨갛게 물든 ( )나무가 반깁니다.",
-          "answerText": "단풍",
-          "answerMatchMode": "EXACT",
+          "prompt": "소풍 장소에 도착했을 때 해야 할 일과 지켜야 할 것을 모두 찾으시오.",
+          "answerTexts": [
+            "정해진 구역에 짐을 놓음",
+            "안전 수칙을 꼭 지킵시다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 66,
-              "end": 68
+              "start": 95,
+              "end": 108
+            },
+            {
+              "paragraphId": "p1",
+              "start": 125,
+              "end": 138
             }
           ],
           "scoring": {
@@ -869,14 +877,22 @@
         },
         {
           "id": "q2",
-          "prompt": "나무가지를 꺾는 건 절대 ( )임.",
-          "answerText": "금지",
-          "answerMatchMode": "EXACT",
+          "prompt": "공원과 산에서 하지 말아야 할 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "꽃을 꺾거나",
+            "나무가지를 꺾는 행동"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 50,
-              "end": 52
+              "start": 27,
+              "end": 33
+            },
+            {
+              "paragraphId": "p2",
+              "start": 34,
+              "end": 45
             }
           ],
           "scoring": {
@@ -888,14 +904,49 @@
         },
         {
           "id": "q3",
-          "prompt": "가져온 휴지는 ( )에 쏙 넣어요.",
-          "answerText": "가방",
-          "answerMatchMode": "EXACT",
+          "prompt": "예쁜 풍경을 어떻게 감상해야 하는지 모두 찾으시오.",
+          "answerTexts": [
+            "예쁜 풍경을 눈으로만 감상하고",
+            "마음속에 담습니다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 55,
+              "end": 71
+            },
+            {
+              "paragraphId": "p2",
+              "start": 72,
+              "end": 81
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "소풍이 끝난 뒤 쓰레기를 정리하는 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "쓰레기를 깨끗이 정리합니다",
+            "휴지와 빈 병은 가방에 쏙 넣음"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 44,
-              "end": 46
+              "start": 12,
+              "end": 26
+            },
+            {
+              "paragraphId": "p3",
+              "start": 35,
+              "end": 52
             }
           ],
           "scoring": {

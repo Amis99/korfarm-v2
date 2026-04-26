@@ -421,36 +421,18 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이 시에서 함께 살자고 한 곳은 어디인가요?",
-          "answerText": "강변",
+          "prompt": "이 시에서 반복되는 문장을 찾으시오.",
+          "answerText": "엄마야 누나야 강변 살자.",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 8,
-              "end": 10
+              "start": 0,
+              "end": 14
             },
             {
               "paragraphId": "p4",
-              "start": 8,
-              "end": 10
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "뜰에 반짝이는 빛은 무엇인가요?",
-          "answerText": "금모래 빛",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 9,
+              "start": 0,
               "end": 14
             }
           ],
@@ -461,8 +443,26 @@
           "revealOnWrong": true
         },
         {
+          "id": "q2",
+          "prompt": "뜰의 모습을 나타낸 구절을 찾으시오.",
+          "answerText": "뜰에는 반짝이는 금모래 빛.",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 15
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q3",
-          "prompt": "뒷문 밖에서 들린다고 한 것은 무엇인가요?",
+          "prompt": "갈잎을 노래하는 것처럼 표현한 부분을 찾으시오.",
           "answerText": "갈잎의 노래",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -480,9 +480,12 @@
         },
         {
           "id": "q4",
-          "prompt": "강변 살자고 부른 가족 가운데 한 사람은 누구인가요?",
-          "answerText": "엄마야",
-          "answerMatchMode": "ANY",
+          "prompt": "화자가 부르는 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "엄마야",
+            "누나야"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -490,9 +493,19 @@
               "end": 3
             },
             {
+              "paragraphId": "p1",
+              "start": 4,
+              "end": 7
+            },
+            {
               "paragraphId": "p4",
               "start": 0,
               "end": 3
+            },
+            {
+              "paragraphId": "p4",
+              "start": 4,
+              "end": 7
             }
           ],
           "scoring": {
@@ -503,19 +516,19 @@
         },
         {
           "id": "q5",
-          "prompt": "강변 살자고 함께 부른 또 다른 가족은 누구인가요?",
-          "answerText": "누나야",
+          "prompt": "함께 살자고 청하는 표현을 찾으시오.",
+          "answerText": "강변 살자",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 4,
-              "end": 7
+              "start": 8,
+              "end": 13
             },
             {
               "paragraphId": "p4",
-              "start": 4,
-              "end": 7
+              "start": 8,
+              "end": 13
             }
           ],
           "scoring": {

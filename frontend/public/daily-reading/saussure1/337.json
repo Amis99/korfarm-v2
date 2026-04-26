@@ -396,30 +396,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "눈으로 만든 우체국?",
-          "answerText": "눈사람",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구들 앞에서 진정한 보물의 의미를 차근차근 설명한 주인공의 이름을 찾아보세요",
+          "answerText": "몽이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 108,
-              "end": 111
-            },
-            {
-              "paragraphId": "p1",
-              "start": 167,
-              "end": 170
-            },
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 7
-            },
-            {
-              "paragraphId": "p2",
-              "start": 130,
-              "end": 133
-            }
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p1", "start": 71, "end": 73},
+            {"paragraphId": "p2", "start": 62, "end": 64}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -430,25 +413,11 @@
         },
         {
           "id": "q2",
-          "prompt": "편지를 부치는 장소?",
-          "answerText": "우체국",
-          "answerMatchMode": "EXACT",
+          "prompt": "사실과 다르게 잘못 알아듣거나 잘못 생각한 것을 가리키는 두 글자 낱말을 찾아보세요",
+          "answerText": "오해",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 171,
-              "end": 174
-            },
-            {
-              "paragraphId": "p2",
-              "start": 8,
-              "end": 11
-            },
-            {
-              "paragraphId": "p2",
-              "start": 134,
-              "end": 137
-            }
+            {"paragraphId": "p1", "start": 136, "end": 138}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -459,15 +428,27 @@
         },
         {
           "id": "q3",
-          "prompt": "생각이나 감정의 밑바탕?",
-          "answerText": "마음",
-          "answerMatchMode": "EXACT",
+          "prompt": "몽이가 깨달은 진정한 보물 두 가지(따뜻한 ◯◯, 함께 나누는 ◯◯)를 모두 찾아보세요",
+          "answerText": "마음, 행복",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 49,
-              "end": 51
-            }
+            {"paragraphId": "p1", "start": 49, "end": 51},
+            {"paragraphId": "p2", "start": 100, "end": 102}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "고요한 밤하늘 아래 눈사람 우체국이 별빛을 받으며 친구들의 무엇을 지켜 주었는지 한 글자로 찾아보세요",
+          "answerText": "꿈",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 161, "end": 162}
           ],
           "scoring": {
             "correctDeltaSec": 10,

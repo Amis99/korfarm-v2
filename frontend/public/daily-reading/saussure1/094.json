@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "솔직하게 ( )를 합니다.",
+          "prompt": "실수로 친구를 아프게 했을 때 어떻게 한다고 했는지 두 글자로 적어 보세요",
           "answerText": "사과",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -571,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "우정의 ( )는 배려입니다.",
-          "answerText": "기초",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서 즐거운 우정의 기초라고 말한 마음은 무엇인지 두 글자로 적어 보세요",
+          "answerText": "배려",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 120,
-              "end": 122
+              "start": 103,
+              "end": 105
             }
           ],
           "scoring": {
@@ -590,14 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "( )를 지키는 어린이가 됨.",
-          "answerText": "질서",
-          "answerMatchMode": "EXACT",
+          "prompt": "놀이터에서 잘 지키기로 한 것을 두 글자로 적어 보세요",
+          "answerText": "차례",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 37,
-              "end": 39
+              "start": 11,
+              "end": 13
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "스스로 정리한 규칙을 매일 어떻게 하는 것이 좋다고 했는지 두 글자로 적어 보세요",
+          "answerText": "실천",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 92,
+              "end": 94
             }
           ],
           "scoring": {

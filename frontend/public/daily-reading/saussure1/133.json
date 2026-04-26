@@ -552,79 +552,49 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "가족과 즐기는 무엇놀이예요인가요?",
-          "answerText": "윷",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리나라에서 가족들이 함께 모이는 큰 명절 두 가지를 글에서 모두 찾아 써 보세요",
+          "answerText": "설, 추석",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 70,
-              "end": 71
-            },
-            {
-              "paragraphId": "p1",
-              "start": 82,
-              "end": 83
-            },
-            {
-              "paragraphId": "p1",
-              "start": 105,
-              "end": 106
-            }
+            {"paragraphId": "p1", "start": 6, "end": 7},
+            {"paragraphId": "p1", "start": 10, "end": 12}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "밖에서 차는 무엇차기 놀이인가요?",
-          "answerText": "제기",
-          "answerMatchMode": "EXACT",
+          "prompt": "편을 나누어 윷가락을 던지며 말을 움직이는 명절 놀이가 무엇인지 글에서 찾아 써 보세요",
+          "answerText": "윷놀이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 8,
-              "end": 10
-            },
-            {
-              "paragraphId": "p2",
-              "start": 38,
-              "end": 40
-            }
+            {"paragraphId": "p1", "start": 70, "end": 73}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "우리 무엇들의 지혜가 담김인가요?",
-          "answerText": "조상",
-          "answerMatchMode": "EXACT",
+          "prompt": "밖으로 나가서 할 수 있는 민속놀이 두 가지를 글에서 모두 찾아 써 보세요",
+          "answerText": "제기차기, 팽이치기",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 40,
-              "end": 42
-            },
-            {
-              "paragraphId": "p2",
-              "start": 129,
-              "end": 131
-            }
+            {"paragraphId": "p2", "start": 8, "end": 12},
+            {"paragraphId": "p2", "start": 14, "end": 18}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "명절 놀이에는 우리 누구의 지혜와 즐거움이 가득 담겨 있다고 했는지 글에서 찾아 써 보세요",
+          "answerText": "조상",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 40, "end": 42},
+            {"paragraphId": "p2", "start": 129, "end": 131}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         }
       ]

@@ -807,14 +807,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "글쓴이가 강력히 건의한 해결 방향은 무엇인가요?",
-          "answerText": "공간 분리 및 규칙 개편",
+          "prompt": "도서관에서 불만과 다툼이 생긴 원인을 찾으시오.",
+          "answerText": "발소리조차 내지 못하게 하는 낡은 규칙",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 242,
-              "end": 255
+              "start": 73,
+              "end": 94
             }
           ],
           "scoring": {
@@ -825,14 +825,22 @@
         },
         {
           "id": "q2",
-          "prompt": "작게 대화가 허용되는 공간 이름으로 제안한 것은 무엇인가요?",
-          "answerText": "자유 열람실",
-          "answerMatchMode": "ANY",
+          "prompt": "도서관 이용 문제에서 생각이 충돌한 두 부류의 사람들을 모두 찾으시오.",
+          "answerTexts": [
+            "쥐죽은 듯 조용히 책을 읽고 싶은 사람들",
+            "부모님과 작게 이야기를 나누거나 편안하게 책을 즐기고 싶은 사람들"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 108,
-              "end": 114
+              "paragraphId": "p1",
+              "start": 134,
+              "end": 156
+            },
+            {
+              "paragraphId": "p1",
+              "start": 159,
+              "end": 195
             }
           ],
           "scoring": {
@@ -843,14 +851,22 @@
         },
         {
           "id": "q3",
-          "prompt": "집중해서 공부하거나 책에 빠지고 싶은 사람들을 위한 공간은 무엇인가요?",
-          "answerText": "집중 열람실",
-          "answerMatchMode": "ANY",
+          "prompt": "글쓴이가 나누어 운영하자고 한 두 열람실의 모습을 모두 찾으시오.",
+          "answerTexts": [
+            "잔잔한 음악이 흐르고 작게 소곤거리는 대화가 허용되는 '자유 열람실'",
+            "집중해서 공부하거나 책에 푹 빠지고 싶은 분들을 위해 아주 조용한 '집중 열람실'"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 178,
-              "end": 184
+              "start": 77,
+              "end": 115
+            },
+            {
+              "paragraphId": "p2",
+              "start": 140,
+              "end": 185
             }
           ],
           "scoring": {
@@ -861,14 +877,28 @@
         },
         {
           "id": "q4",
-          "prompt": "아이들을 위해 만들자고 한 특별한 방은 무엇인가요?",
-          "answerText": "이야기 방",
-          "answerMatchMode": "ANY",
+          "prompt": "아이들을 위한 이야기 방이 필요한 이유와 효과를 모두 찾으시오.",
+          "answerTexts": [
+            "책을 소리 내어 읽거나 궁금한 것을 어른에게 물어보면서 상상력을 키워나갑니다",
+            "마음껏 이야기꽃을 피울 수 있는 방",
+            "도서관은 아이들에게 세상에서 가장 가고 싶은 놀이터가 될 것입니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 53,
-              "end": 58
+              "start": 81,
+              "end": 123
+            },
+            {
+              "paragraphId": "p3",
+              "start": 152,
+              "end": 171
+            },
+            {
+              "paragraphId": "p3",
+              "start": 178,
+              "end": 214
             }
           ],
           "scoring": {
@@ -879,13 +909,27 @@
         },
         {
           "id": "q5",
-          "prompt": "우리 동네 도서관이 새롭게 태어나길 바란 장소는 무엇인가요?",
-          "answerText": "문화 놀이터",
-          "answerMatchMode": "ANY",
+          "prompt": "글쓴이가 바라는 규칙과 그 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "서로의 읽는 방식을 배려하는 규칙",
+            "조용함을 원하는 사람과 즐거운 독서를 원하는 사람 모두가 함박웃음을 짓게 될 것입니다",
+            "주민 모두에게 사랑받는 행복한 문화 놀이터"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 193,
+              "start": 90,
+              "end": 108
+            },
+            {
+              "paragraphId": "p4",
+              "start": 116,
+              "end": 163
+            },
+            {
+              "paragraphId": "p4",
+              "start": 176,
               "end": 199
             }
           ],

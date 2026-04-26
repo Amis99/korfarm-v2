@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "학생회장: 다음 안건은 학교 축제 기간에 일회용품 무엇?",
+          "prompt": "학생회장이 제시한 다음 안건은 무엇인가요?",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 28,
-              "end": 42
+              "start": 13,
+              "end": 39
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "사용을 줄이는 운영안입니다"
+          "answerText": "학교 축제 기간에 일회용품 사용을 줄이는 운영안"
         },
         {
           "id": "q2",
-          "prompt": "환경 동아리 대표: 작년 축제 때는 음료 컵과 플라스틱 무엇 재활용이 거의 되지 않았습니다?",
+          "prompt": "올해 쓰레기량이 함께 늘 가능성이 큰 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 31,
-              "end": 43
+              "paragraphId": "p1",
+              "start": 48,
+              "end": 62
             }
           ],
           "scoring": {
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "포장재가 뒤섞여 버려져"
+          "answerText": "먹거리 부스가 늘어날 예정"
         },
         {
           "id": "q3",
-          "prompt": "운영 인원과 회수 무엇 설득력이 생깁니다?",
+          "prompt": "학생회가 함께 운영하자고 제안한 두 방안을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 103,
-              "end": 118
+              "paragraphId": "p1",
+              "start": 95,
+              "end": 106
+            },
+            {
+              "paragraphId": "p1",
+              "start": 108,
+              "end": 116
             }
           ],
           "scoring": {
@@ -620,17 +625,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "방식이 구체적으로 준비되어야"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "다회용 컵 대여 부스",
+            "분리배출 안내판"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "줄이 길어지면 일회용 컵을 허용하는 예외 시간도 두지 않고, 안내 인력을 먼저 무엇?",
+          "prompt": "작년 축제 때 음료 컵과 플라스틱 포장재가 뒤섞여 버려진 결과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 164,
-              "end": 177
+              "paragraphId": "p2",
+              "start": 44,
+              "end": 60
             }
           ],
           "scoring": {
@@ -639,16 +647,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "늘려 불편을 줄이겠습니다"
+          "answerText": "재활용이 거의 되지 않았습니다"
         },
         {
           "id": "q5",
-          "prompt": "지도 교사: 학생들이 왜 이 무엇 이유를 분명히 설명하는 것이 필요합니다?",
+          "prompt": "2학년 대의원이 우려한 문제 두 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 16,
-              "end": 28
+              "paragraphId": "p3",
+              "start": 42,
+              "end": 55
+            },
+            {
+              "paragraphId": "p3",
+              "start": 68,
+              "end": 91
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "줄이 길어질 수 있습니다",
+            "번거롭다고 느끼는 학생도 있을 것 같습니다"
+          ]
+        },
+        {
+          "id": "q6",
+          "prompt": "학생회장은 컵 반납을 어떤 방식으로 하려 하나요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 27,
+              "end": 40
             }
           ],
           "scoring": {
@@ -657,15 +691,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "제도에 참여해야 하는지"
+          "answerText": "모바일 스티커 확인 방식"
         },
         {
-          "id": "q6",
-          "prompt": "또 안내문에는 '무엇'는 세 단계만 크게 제시해 참여 방법을 단순화하겠습니다?",
+          "id": "q7",
+          "prompt": "지도 교사가 구호보다 함께 제시하라고 한 내용을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 72,
+              "end": 102
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "축제 뒤 정리 시간과 비용을 실제로 줄일 수 있다는 점"
+        },
+        {
+          "id": "q8",
+          "prompt": "안내문에 크게 제시할 참여 방법의 세 단계를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
               "start": 73,
+              "end": 76
+            },
+            {
+              "paragraphId": "p6",
+              "start": 77,
+              "end": 81
+            },
+            {
+              "paragraphId": "p6",
+              "start": 82,
               "end": 86
             }
           ],
@@ -674,8 +736,12 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "빌리고-사용하고-반납한다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "빌리고",
+            "사용하고",
+            "반납한다"
+          ]
         }
       ]
     }

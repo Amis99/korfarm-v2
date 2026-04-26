@@ -563,19 +563,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리말에는 '낫다'와 '낳다'처럼 입으로 내는 이것은 비슷하지만 뜻이 다른 낱말이 있어요. 물체가 내거나 사람이 말할 때 나오는 이것은 무엇인가요?",
-          "answerText": "소리",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리말에는 소리는 비슷하지만 무엇이 완전히 다른 낱말들이 있다고 했나요? 지문에서 해당 구절을 찾으시오.",
+          "answerText": "소리는 비슷하지만 뜻과 쓰임새가 완전히 다른 낱말들",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 6,
-              "end": 8
-            },
-            {
-              "paragraphId": "p1",
-              "start": 119,
-              "end": 121
+              "end": 34
             }
           ],
           "scoring": {
@@ -587,19 +582,14 @@
         },
         {
           "id": "q2",
-          "prompt": "아팠던 병이 다 나아서 예전처럼 건강해졌을 때 쓰는 알맞은 낱말은 무엇인가요?",
-          "answerText": "낫다",
-          "answerMatchMode": "EXACT",
+          "prompt": "글을 읽거나 쓸 때 이런 낱말들을 주의해야 하는 이유에 해당하는 표현을 찾으시오.",
+          "answerText": "헷갈리기 쉬워서",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 16,
-              "end": 18
-            },
-            {
-              "paragraphId": "p2",
-              "start": 51,
-              "end": 53
+              "paragraphId": "p1",
+              "start": 60,
+              "end": 68
             }
           ],
           "scoring": {
@@ -611,14 +601,33 @@
         },
         {
           "id": "q3",
-          "prompt": "선생님이 우리가 모르는 새로운 것을 알게 하거나 지식을 깨닫게 해주실 때 쓰는 알맞은 낱말은 무엇인가요?",
-          "answerText": "가르치다",
-          "answerMatchMode": "EXACT",
+          "prompt": "병이 다 나아서 건강해졌을 때 쓰는 낱말과, 닭이 알을 낳거나 아기를 낳을 때 쓰는 낱말을 모두 찾으시오.",
+          "answerText": "'낫다', '낳다'",
+          "answerTexts": [
+            "'낫다'",
+            "'낳다'"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 116,
-              "end": 120
+              "start": 15,
+              "end": 19
+            },
+            {
+              "paragraphId": "p2",
+              "start": 21,
+              "end": 25
+            },
+            {
+              "paragraphId": "p2",
+              "start": 50,
+              "end": 54
+            },
+            {
+              "paragraphId": "p2",
+              "start": 80,
+              "end": 84
             }
           ],
           "scoring": {
@@ -630,19 +639,33 @@
         },
         {
           "id": "q4",
-          "prompt": "\"꼭 틀림없이 하겠다\"는 뜻으로 굳게 약속이나 다짐을 할 때 쓰는 알맞은 낱말은 무엇인가요?",
-          "answerText": "반드시",
-          "answerMatchMode": "EXACT",
+          "prompt": "\"꼭 틀림없이 하겠다\"는 뜻일 때 쓰는 낱말과, 선이나 자세가 비뚤어지지 않고 바를 때 적는 낱말을 모두 찾으시오.",
+          "answerText": "'반드시', '반듯이'",
+          "answerTexts": [
+            "'반드시'",
+            "'반듯이'"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 1,
-              "end": 4
+              "start": 0,
+              "end": 5
             },
             {
               "paragraphId": "p3",
-              "start": 53,
-              "end": 56
+              "start": 7,
+              "end": 12
+            },
+            {
+              "paragraphId": "p3",
+              "start": 52,
+              "end": 57
+            },
+            {
+              "paragraphId": "p3",
+              "start": 86,
+              "end": 91
             }
           ],
           "scoring": {

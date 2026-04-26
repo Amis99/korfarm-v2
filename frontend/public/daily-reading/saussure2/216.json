@@ -443,9 +443,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "놀이터 빈 그네에 앉아 있으니 누구의 얼굴이 동동 떠오르나요?",
+          "prompt": "화자가 놀이터 빈 그네에 혼자 앉아 있을 때 떠올린 대상은 누구인지 지문에서 찾으시오.",
           "answerText": "단짝 친구",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -462,14 +462,14 @@
         },
         {
           "id": "q2",
-          "prompt": "어제는 이것, 오늘은 노란 색연필을 매일매일 사이좋게 나누어 썼어요. 이것은 무엇일까요?",
-          "answerText": "지우개",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 시에서 친구와 날마다 사이좋게 지낸 모습을 드러내는 반복 표현을 지문에서 찾으시오.",
+          "answerText": "매일매일",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 4,
-              "end": 7
+              "start": 19,
+              "end": 23
             }
           ],
           "scoring": {
@@ -481,14 +481,42 @@
         },
         {
           "id": "q3",
-          "prompt": "학교에 가서 제일 먼저 다가가 어떻게 웃으면서 인사할 건가요?",
-          "answerText": "환하게",
-          "answerMatchMode": "EXACT",
+          "prompt": "2연에서 친구와 나누어 쓴 물건을 모두 찾으시오.",
+          "answerText": "지우개, 노란 색연필",
+          "answerTexts": [
+            "지우개",
+            "노란 색연필"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 4,
+              "end": 7
+            },
+            {
+              "paragraphId": "p2",
+              "start": 12,
+              "end": 18
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "화자가 내일 친구에게 먼저 다가가 어떤 모습으로 인사하려 하는지 나타내는 표현을 지문에서 찾으시오.",
+          "answerText": "환하게 웃으면서",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 20,
-              "end": 23
+              "end": 28
             }
           ],
           "scoring": {

@@ -1327,7 +1327,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이번 회의에서 도입 적절성을 논의한 대상은 무엇인가요?",
+          "prompt": "이번 회의에서 도입 적절성을 논의한 대상을 찾으시오.",
           "answerText": "공공장소 내 얼굴인식 시스템",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1345,14 +1345,22 @@
         },
         {
           "id": "q2",
-          "prompt": "찬성 측이 가장 앞세운 가치는 무엇인가요?",
-          "answerText": "공공의 안전",
-          "answerMatchMode": "ANY",
+          "prompt": "찬성 측이 주요 근거로 내세운 것을 모두 찾으시오.",
+          "answerTexts": [
+            "공공의 안전",
+            "범죄 예방"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 6,
               "end": 12
+            },
+            {
+              "paragraphId": "p2",
+              "start": 14,
+              "end": 19
             }
           ],
           "scoring": {
@@ -1363,14 +1371,28 @@
         },
         {
           "id": "q3",
-          "prompt": "반대 측이 가장 먼저 지적한 위험은 무엇인가요?",
-          "answerText": "사생활 침해",
-          "answerMatchMode": "ANY",
+          "prompt": "반대 측이 지적한 위험을 모두 찾으시오.",
+          "answerTexts": [
+            "사생활 침해",
+            "정보 오남용",
+            "시스템 오류로 무고한 시민이 범죄자로 오인받을 가능성"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 6,
               "end": 12
+            },
+            {
+              "paragraphId": "p3",
+              "start": 14,
+              "end": 20
+            },
+            {
+              "paragraphId": "p3",
+              "start": 85,
+              "end": 114
             }
           ],
           "scoring": {
@@ -1381,7 +1403,7 @@
         },
         {
           "id": "q4",
-          "prompt": "양측이 먼저 세우자고 한 절충안은 무엇인가요?",
+          "prompt": "양측이 먼저 세우자고 한 절충안을 찾으시오.",
           "answerText": "가이드라인",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1404,14 +1426,28 @@
         },
         {
           "id": "q5",
-          "prompt": "정보 수집 과정에서 시민에게 보장하기로 한 권리는 무엇인가요?",
-          "answerText": "거부권",
-          "answerMatchMode": "ANY",
+          "prompt": "가이드라인에 넣기로 한 정보 관리 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "거부권",
+            "정보의 파기 시점",
+            "관리 주체"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 99,
               "end": 102
+            },
+            {
+              "paragraphId": "p4",
+              "start": 129,
+              "end": 138
+            },
+            {
+              "paragraphId": "p4",
+              "start": 140,
+              "end": 145
             }
           ],
           "scoring": {

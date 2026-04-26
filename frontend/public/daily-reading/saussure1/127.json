@@ -552,79 +552,49 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "폭신폭신한 무엇을 구워요인가요?",
+          "prompt": "어머니께서 우리를 위해 폭신폭신하게 구워 주신 빵의 이름이 무엇인지 글에서 찾아 써 보세요",
           "answerText": "구름빵",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 49,
-              "end": 52
-            },
-            {
-              "paragraphId": "p2",
-              "start": 17,
-              "end": 20
-            },
-            {
-              "paragraphId": "p2",
-              "start": 148,
-              "end": 151
-            }
+            {"paragraphId": "p1", "start": 49, "end": 52},
+            {"paragraphId": "p2", "start": 17, "end": 20},
+            {"paragraphId": "p2", "start": 148, "end": 151}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "입안 가득 무엇한 향기인가요?",
-          "answerText": "달콤",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 글에서는 갓 구워낸 빵이 하얗고 부드러운 모습을 무엇처럼 같다고 빗대어 표현했는지 글에서 찾아 써 보세요",
+          "answerText": "솜사탕",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 10,
-              "end": 12
-            },
-            {
-              "paragraphId": "p2",
-              "start": 48,
-              "end": 50
-            }
+            {"paragraphId": "p1", "start": 142, "end": 145}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "맛있게 구워 주신 무엇께 감사인가요?",
+          "prompt": "맛있는 빵을 정성껏 만들어 주셔서 감사 인사를 드린 사람이 누구인지 글에서 찾아 써 보세요",
           "answerText": "어머니",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 30,
-              "end": 33
-            },
-            {
-              "paragraphId": "p2",
-              "start": 119,
-              "end": 122
-            }
+            {"paragraphId": "p1", "start": 30, "end": 33},
+            {"paragraphId": "p2", "start": 119, "end": 122}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "동생과 함께 우유를 마시며 빵을 먹었을 때 정말 무엇이라고 표현했는지 글에서 찾아 써 보세요",
+          "answerText": "꿀맛",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 92, "end": 94}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         }
       ]

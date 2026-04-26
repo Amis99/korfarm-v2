@@ -916,19 +916,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "식물이 빛 에너지로 유기물을 만드는 과정은 무엇인가요?",
-          "answerText": "광합성",
+          "prompt": "광합성의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "빛 에너지를 이용하여 유기물을 합성하는 과정",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p5",
-              "start": 77,
-              "end": 80
+              "start": 9,
+              "end": 33
             }
           ],
           "scoring": {
@@ -939,14 +934,22 @@
         },
         {
           "id": "q2",
-          "prompt": "빛이 필요한 단계는 무엇이라고 하나요?",
-          "answerText": "명반응",
-          "answerMatchMode": "ANY",
+          "prompt": "광합성 과정의 두 단계를 모두 찾으시오.",
+          "answerTexts": [
+            "명반응",
+            "암반응"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 51,
               "end": 54
+            },
+            {
+              "paragraphId": "p1",
+              "start": 63,
+              "end": 66
             },
             {
               "paragraphId": "p1",
@@ -957,6 +960,11 @@
               "paragraphId": "p2",
               "start": 0,
               "end": 3
+            },
+            {
+              "paragraphId": "p5",
+              "start": 60,
+              "end": 63
             }
           ],
           "scoring": {
@@ -967,9 +975,12 @@
         },
         {
           "id": "q3",
-          "prompt": "명반응의 중심에 있는 빛 흡수 체계 중 하나는 무엇인가요?",
-          "answerText": "광계 II",
-          "answerMatchMode": "ANY",
+          "prompt": "명반응의 중심에 있는 빛 흡수 체계를 모두 찾으시오.",
+          "answerTexts": [
+            "광계 II",
+            "광계 I"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -977,9 +988,24 @@
               "end": 23
             },
             {
+              "paragraphId": "p2",
+              "start": 18,
+              "end": 22
+            },
+            {
+              "paragraphId": "p2",
+              "start": 25,
+              "end": 29
+            },
+            {
               "paragraphId": "p4",
               "start": 0,
               "end": 5
+            },
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 4
             }
           ],
           "scoring": {
@@ -990,10 +1016,18 @@
         },
         {
           "id": "q4",
-          "prompt": "전자의 흐름으로 저장되는 에너지 화합물은 무엇인가요?",
-          "answerText": "ATP",
-          "answerMatchMode": "ANY",
+          "prompt": "전자의 흐름이 형성하는 것과 저장되는 화합물을 모두 찾으시오.",
+          "answerTexts": [
+            "양성자 농도 기울기",
+            "ATP"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 8,
+              "end": 18
+            },
             {
               "paragraphId": "p3",
               "start": 44,
@@ -1008,10 +1042,18 @@
         },
         {
           "id": "q5",
-          "prompt": "물의 광분해로 대기 중에 배출되는 것은 무엇인가요?",
-          "answerText": "산소",
-          "answerMatchMode": "ANY",
+          "prompt": "물의 광분해와 관련된 변화와 배출 물질을 모두 찾으시오.",
+          "answerTexts": [
+            "물 분자가 분해",
+            "산소"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 24,
+              "end": 32
+            },
             {
               "paragraphId": "p4",
               "start": 40,

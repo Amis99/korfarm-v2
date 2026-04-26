@@ -1156,25 +1156,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "북쪽 변방의 고장 이름으로 나온 말은 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "온성"
-        },
-        {
-          "id": "q2",
-          "prompt": "관청을 이르던 말을 무엇이라고 하나요?",
+          "prompt": "예전에 관청이나 관아를 이르던 두 글자 단어를 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -1183,16 +1165,17 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
           "answerText": "관가"
         },
         {
-          "id": "q3",
-          "prompt": "고을을 맡아 다스리던 벼슬아치를 무엇이라고 하나요?",
+          "id": "q2",
+          "prompt": "고을을 맡아 다스리던 벼슬아치를 뜻하는 두 글자 단어를 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -1201,16 +1184,17 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
           "answerText": "태수"
         },
         {
-          "id": "q4",
-          "prompt": "몹시 지쳐 축 늘어진 모습을 무엇이라고 하나요?",
+          "id": "q3",
+          "prompt": "추위에 얼어붙어 굳어 버린 모습을 빗대어 가리키는 두 글자 단어를 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
@@ -1219,16 +1203,55 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
           "answerText": "동태"
         },
         {
+          "id": "q4",
+          "prompt": "지문에서 화자가 사람을 직접 부르며 말을 건네는 표현을 세 글자로 그대로 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 7,
+              "end": 10
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "부사야"
+        },
+        {
           "id": "q5",
-          "prompt": "이어져 내려가는 연줄의 흐름을 뜻하는 말은 무엇인가요?",
+          "prompt": "지문에서 화자가 종성으로 가는 길에서 옷을 적시는 까닭이 된 자연 현상을 두 글자로 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 57,
+              "end": 59
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "얼음"
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 '줄맥'이 쓰인 위치를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
@@ -1242,11 +1265,12 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
+          "answerMatchMode": "ALL",
           "answerText": "줄맥"
         }
       ]

@@ -552,14 +552,29 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "상대방을 ( )하는 마습니다.",
-          "answerText": "존중",
-          "answerMatchMode": "EXACT",
+          "prompt": "어른께 말씀을 드릴 때 쓰는 정중한 말이라는 뜻의 단어를 지문에서 모두 찾아 보세요.",
+          "answerText": "높임말",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 65,
-              "end": 67
+              "start": 15,
+              "end": 18
+            },
+            {
+              "paragraphId": "p1",
+              "start": 74,
+              "end": 77
+            },
+            {
+              "paragraphId": "p1",
+              "start": 129,
+              "end": 132
+            },
+            {
+              "paragraphId": "p2",
+              "start": 62,
+              "end": 65
             }
           ],
           "scoring": {
@@ -571,14 +586,14 @@
         },
         {
           "id": "q2",
-          "prompt": "예의 바르게 ( )를 드려요.",
-          "answerText": "인사",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 '밥'의 높임말을 찾아 보세요.",
+          "answerText": "진지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 50,
-              "end": 52
+              "paragraphId": "p1",
+              "start": 36,
+              "end": 38
             }
           ],
           "scoring": {
@@ -590,14 +605,33 @@
         },
         {
           "id": "q3",
-          "prompt": "소중한 ( )을 지킵시다.",
-          "answerText": "규칙",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 예의 바르게 인사를 드릴 대상이 누구인지 찾아 보세요.",
+          "answerText": "가족이나 선생님",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 102,
-              "end": 104
+              "start": 33,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "높임말을 잘 사용하면 어떤 어린이가 된다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "훌륭한 어린이",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 74,
+              "end": 81
             }
           ],
           "scoring": {

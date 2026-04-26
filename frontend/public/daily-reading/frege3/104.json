@@ -1298,12 +1298,15 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "0에서 1 사이의 값으로 소득 불평등을 나타내는 대표 지표는 무엇인가요?",
-          "answerText": "지니계수",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
+      "prompt": "대표적인 불평등 측정 지표를 모두 찾으시오.",
+      "answerTexts": [
+        "지니계수",
+        "소득 5분위 배율"
+      ],
+      "answerMatchMode": "ALL",
+      "answerRanges": [
+        {
+          "paragraphId": "p1",
               "start": 117,
               "end": 121
             },
@@ -1327,12 +1330,27 @@
               "start": 25,
               "end": 29
             },
-            {
-              "paragraphId": "p5",
-              "start": 46,
-              "end": 50
-            }
-          ],
+        {
+          "paragraphId": "p5",
+          "start": 46,
+          "end": 50
+        },
+        {
+          "paragraphId": "p1",
+          "start": 123,
+          "end": 132
+        },
+        {
+          "paragraphId": "p3",
+          "start": 0,
+          "end": 9
+        },
+        {
+          "paragraphId": "p4",
+          "start": 68,
+          "end": 77
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1341,16 +1359,16 @@
         },
         {
           "id": "q2",
-          "prompt": "지니계수 계산의 바탕이 되는 곡선은 무엇인가요?",
-          "answerText": "로렌츠 곡선",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 120,
-              "end": 126
-            }
-          ],
+      "prompt": "지니계수가 무엇을 나타내는지 찾으시오.",
+      "answerText": "0에서 1 사이의 값으로 소득 불평등을 나타낸다",
+      "answerMatchMode": "ANY",
+      "answerRanges": [
+        {
+          "paragraphId": "p2",
+          "start": 6,
+          "end": 32
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1359,26 +1377,16 @@
         },
         {
           "id": "q3",
-          "prompt": "최상위 20%의 소득을 최하위 20%의 소득으로 나눈 값은 무엇인가요?",
-          "answerText": "소득 5분위 배율",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 123,
-              "end": 132
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 9
-            },
-            {
-              "paragraphId": "p4",
-              "start": 68,
-              "end": 77
-            }
-          ],
+      "prompt": "소득 5분위 배율의 정의에 해당하는 부분을 찾으시오.",
+      "answerText": "최상위 20%의 소득을 최하위 20%의 소득으로 나눈 값",
+      "answerMatchMode": "ANY",
+      "answerRanges": [
+        {
+          "paragraphId": "p3",
+          "start": 61,
+          "end": 92
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1387,16 +1395,30 @@
         },
         {
           "id": "q4",
-          "prompt": "보다 정확한 측정을 위해 함께 분석할 필요가 있다고 한 자산 관련 지표는 무엇인가요?",
-          "answerText": "자산 지니계수",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 43,
-              "end": 50
-            }
-          ],
+      "prompt": "불평등 지표들의 한계를 모두 찾으시오.",
+      "answerTexts": [
+        "소득 계층의 미세한 변화를 민감하게 포착하지 못하는 단점",
+        "중간 계층의 소득 변화를 반영하지 못한다",
+        "자산이나 부채 등 소득 이외의 경제적 요소"
+      ],
+      "answerMatchMode": "ALL",
+      "answerRanges": [
+        {
+          "paragraphId": "p4",
+          "start": 31,
+          "end": 62
+        },
+        {
+          "paragraphId": "p4",
+          "start": 79,
+          "end": 101
+        },
+        {
+          "paragraphId": "p4",
+          "start": 106,
+          "end": 129
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1405,13 +1427,21 @@
         },
         {
           "id": "q5",
-          "prompt": "보다 정확한 측정을 위해 함께 보자고 한 빈곤 관련 지표는 무엇인가요?",
-          "answerText": "상대적 빈곤율",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 52,
+      "prompt": "보다 정확한 측정을 위해 함께 분석할 필요가 있는 지표를 모두 찾으시오.",
+      "answerTexts": [
+        "자산 지니계수",
+        "상대적 빈곤율"
+      ],
+      "answerMatchMode": "ALL",
+      "answerRanges": [
+        {
+          "paragraphId": "p5",
+          "start": 43,
+          "end": 50
+        },
+        {
+          "paragraphId": "p5",
+          "start": 52,
               "end": 59
             }
           ],

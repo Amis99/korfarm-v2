@@ -996,93 +996,81 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '밑그림'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 182,
-              "end": 185
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글을 쓰기 전에 하고 싶은 말을 순서 있게 정리하는 작문 과정의 이름을 모두 찾으시오",
+          "answerText": "개요",
           "answerMatchMode": "ANY",
-          "answerText": "밑그림"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p1", "start": 169, "end": 171},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 193, "end": 195},
+            {"paragraphId": "p3", "start": 2, "end": 4},
+            {"paragraphId": "p3", "start": 190, "end": 192},
+            {"paragraphId": "p4", "start": 0, "end": 2},
+            {"paragraphId": "p4", "start": 149, "end": 151},
+            {"paragraphId": "p5", "start": 3, "end": 5},
+            {"paragraphId": "p5", "start": 68, "end": 70},
+            {"paragraphId": "p5", "start": 118, "end": 120}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '구분'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 23,
-              "end": 25
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "개요는 글을 쓰기 전 글 전체의 흐름을 미리 점검하게 해 주는 무엇이라고 하였는지 찾으시오",
+          "answerText": "밑그림",
           "answerMatchMode": "ANY",
-          "answerText": "구분"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 182, "end": 185}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '설명문'을 모두 찾으시오.",
+          "prompt": "독서의 장점을 설명하는 글의 예에서 '생각이 넓어진다' 같은 큰 생각과 그 아래에 들어갈 작은 내용을 가리키는 두 용어를 모두 찾으시오",
+          "answerText": "중심 생각, 세부 내용",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 100,
-              "end": 103
-            }
+            {"paragraphId": "p2", "start": 9, "end": 14},
+            {"paragraphId": "p2", "start": 16, "end": 21}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "설명문"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '설계도'를 모두 찾으시오.",
+          "prompt": "읽는 사람이 자연스럽게 따라올 수 있도록 쉬운 내용에서 어려운 내용으로 짜는 경우가 많다고 한 두 갈래의 글 종류를 모두 찾으시오",
+          "answerText": "설명문, 주장문",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 185,
-              "end": 188
-            }
+            {"paragraphId": "p3", "start": 100, "end": 103},
+            {"paragraphId": "p3", "start": 106, "end": 109}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "설계도"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '장치'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 174,
-              "end": 176
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "개요는 한 번 적고 끝내는 메모가 아니라 쓰기 직전까지 다듬는 무엇에 가깝다고 하였는지 찾으시오",
+          "answerText": "설계도",
           "answerMatchMode": "ANY",
-          "answerText": "장치"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 185, "end": 188}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "개요가 글의 흐름을 안정시키고 읽는 사람이 중심을 놓치지 않게 돕는 중요한 무엇이라고 하였는지 찾으시오",
+          "answerText": "장치",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 174, "end": 176}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

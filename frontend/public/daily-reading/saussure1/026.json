@@ -552,29 +552,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "노란 ( )를 신어요.",
-          "answerText": "장화",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 시에서 직유법(~처럼)이 사용된 부분을 모두 찾아 보세요.",
+          "answerText": "첨벙첨벙 소리가 노래처럼 들려요, 내 마음도 장화처럼 노랗게 물들어요",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 10,
-              "end": 12
-            },
-            {
-              "paragraphId": "p1",
-              "start": 75,
-              "end": 77
+              "start": 37,
+              "end": 54
             },
             {
               "paragraphId": "p2",
-              "start": 5,
-              "end": 7
-            },
-            {
-              "paragraphId": "p2",
-              "start": 65,
-              "end": 67
+              "start": 59,
+              "end": 78
             }
           ],
           "scoring": {
@@ -586,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "소리가 ( )처럼 들려요.",
-          "answerText": "노래",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 시에서 의인법(사물을 사람처럼 표현)이 사용된 부분을 지문에서 찾아 보세요.",
+          "answerText": "장화 속 발가락이 간질간질 웃어요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 46,
-              "end": 48
+              "start": 75,
+              "end": 93
             }
           ],
           "scoring": {
@@ -605,14 +595,38 @@
         },
         {
           "id": "q3",
-          "prompt": "빗소리 들으며 ( )을 춤.",
-          "answerText": "춤",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 시에서 의성어(소리를 흉내 낸 말)를 모두 찾아 보세요.",
+          "answerText": "첨벙첨벙, 톡톡",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
+              "paragraphId": "p1",
+              "start": 37,
+              "end": 41
+            },
+            {
               "paragraphId": "p2",
-              "start": 91,
-              "end": 92
+              "start": 11,
+              "end": 13
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "비가 와서 물이 고여 있는 작은 곳을 가리키는 뜻의 단어를 지문에서 찾아 보세요.",
+          "answerText": "웅덩이",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 55,
+              "end": 58
             }
           ],
           "scoring": {

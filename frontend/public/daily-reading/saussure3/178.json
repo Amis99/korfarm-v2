@@ -557,14 +557,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "정성스럽고 참되어 부지런한 상태를 뜻하는 말은 무엇인가요?",
-          "answerText": "성실한",
-          "answerMatchMode": "EXACT",
+          "prompt": "내가 맡은 역할이 나르는 것과 그 역할을 모두 찾으시오.",
+          "answerTexts": [
+            "무거운 먹이",
+            "성실한 개미 역할"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
+              "start": 62,
+              "end": 68
+            },
+            {
+              "paragraphId": "p1",
               "start": 74,
-              "end": 77
+              "end": 83
             }
           ],
           "scoring": {
@@ -576,14 +584,22 @@
         },
         {
           "id": "q2",
-          "prompt": "이야기 속 인물이 처한 형편이나 사정을 뜻하는 말은?",
-          "answerText": "처지가",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구가 베짱이 역할을 하며 한 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "기타를 치며",
+            "노래하는 베짱이"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 105,
-              "end": 108
+              "paragraphId": "p1",
+              "start": 112,
+              "end": 118
+            },
+            {
+              "paragraphId": "p1",
+              "start": 119,
+              "end": 127
             }
           ],
           "scoring": {
@@ -595,14 +611,41 @@
         },
         {
           "id": "q3",
-          "prompt": "지나간 일이나 사람을 잊지 않고 마음속에 간직하고 있는 생각은?",
-          "answerText": "추억을",
-          "answerMatchMode": "EXACT",
+          "prompt": "추운 겨울이 오자 베짱이가 연기한 장면을 찾으시오.",
+          "answerText": "도움을 청하는 장면",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 23,
+              "end": 33
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "연극이 끝난 뒤 토론한 두 가지 가치를 모두 찾으시오.",
+          "answerTexts": [
+            "성실함",
+            "예술의 가치"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 112,
-              "end": 115
+              "start": 16,
+              "end": 19
+            },
+            {
+              "paragraphId": "p3",
+              "start": 21,
+              "end": 27
             }
           ],
           "scoring": {

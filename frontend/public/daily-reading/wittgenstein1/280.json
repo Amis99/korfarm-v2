@@ -571,7 +571,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"선어말 어미\"에 해당하는 부분은 어디인가요?",
+          "prompt": "어간과 어말 어미 사이에 놓여 문법 정보를 덧붙이는 요소를 가리키는 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -594,17 +594,22 @@
         },
         {
           "id": "q2",
-          "prompt": "\"선어말 어미\"에 해당하는 부분은 어디인가요?",
+          "prompt": "선어말 어미가 덧붙이는 문법 정보의 예시를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 6
+              "start": 25,
+              "end": 28
             },
             {
-              "paragraphId": "p6",
-              "start": 136,
-              "end": 142
+              "paragraphId": "p1",
+              "start": 29,
+              "end": 32
+            },
+            {
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 35
             }
           ],
           "scoring": {
@@ -612,52 +617,26 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "선어말 어미"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "시제,",
+            "높임,",
+            "서법"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "또 '무엇'은 예측이나 가능성 판단을 나타내기도 한다?",
+          "prompt": "'-겠-'이 두 예문에서 드러내는 의미를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 61,
-              "end": 64
+              "paragraphId": "p2",
+              "start": 48,
+              "end": 61
             },
             {
               "paragraphId": "p2",
-              "start": 1,
-              "end": 4
-            },
-            {
-              "paragraphId": "p2",
-              "start": 112,
-              "end": 115
-            },
-            {
-              "paragraphId": "p3",
-              "start": 3,
-              "end": 6
-            },
-            {
-              "paragraphId": "p3",
-              "start": 109,
-              "end": 112
-            },
-            {
-              "paragraphId": "p5",
-              "start": 111,
-              "end": 114
-            },
-            {
-              "paragraphId": "p5",
-              "start": 153,
-              "end": 156
-            },
-            {
-              "paragraphId": "p6",
-              "start": 5,
-              "end": 8
+              "start": 84,
+              "end": 99
             }
           ],
           "scoring": {
@@ -665,22 +644,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "-겠-"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "행위에 대한 화자의 의지",
+            "현재 정황을 근거로 한 추측"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "\"선어말 어미\"에 해당하는 부분은 어디인가요?",
+          "prompt": "'-겠-'을 볼 때 구분해야 하는 두 경우를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 6
+              "paragraphId": "p2",
+              "start": 123,
+              "end": 143
             },
             {
-              "paragraphId": "p6",
-              "start": 136,
-              "end": 142
+              "paragraphId": "p2",
+              "start": 149,
+              "end": 174
             }
           ],
           "scoring": {
@@ -688,22 +670,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "선어말 어미"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "화자가 스스로 행동을 선택하고 있는지",
+            "눈앞의 단서를 바탕으로 사태를 짐작하고 있는지"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "\"선어말 어미\"에 해당하는 부분은 어디인가요?",
+          "prompt": "직접 보지 못한 상황을 추정하는 데 쓰인 예문을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 6
-            },
-            {
-              "paragraphId": "p6",
-              "start": 136,
-              "end": 142
+              "paragraphId": "p3",
+              "start": 61,
+              "end": 72
             }
           ],
           "scoring": {
@@ -712,21 +692,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "선어말 어미"
+          "answerText": "'지금쯤 도착했겠지'"
         },
         {
           "id": "q6",
-          "prompt": "\"선어말 어미\"에 해당하는 부분은 어디인가요?",
+          "prompt": "'-더-'을 이해할 때 가장 중요한 판단 기준을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 6
-            },
-            {
-              "paragraphId": "p6",
-              "start": 136,
-              "end": 142
+              "paragraphId": "p4",
+              "start": 174,
+              "end": 183
             }
           ],
           "scoring": {
@@ -735,7 +710,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "선어말 어미"
+          "answerText": "화자의 체험 여부"
+        },
+        {
+          "id": "q7",
+          "prompt": "'-겠-'과 '-더-'의 중심 기능을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 159,
+              "end": 165
+            },
+            {
+              "paragraphId": "p5",
+              "start": 174,
+              "end": 183
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "판단과 의지",
+            "회상과 직접 경험"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "'-겠-'과 '-더-'를 구별할 때 더 정확하다고 한 방식을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 41,
+              "end": 58
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "화자의 인식 경로를 따지는 방식"
         }
       ]
     }

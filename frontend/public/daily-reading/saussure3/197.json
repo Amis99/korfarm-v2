@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "신비롭고 놀라운 일은?",
-          "answerText": "기적을",
-          "answerMatchMode": "EXACT",
+          "prompt": "콩쥐를 돕는 존재를 지문에서 찾아 쓰시오.",
+          "answerText": "동물 친구들",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 68,
-              "end": 71
+              "paragraphId": "p1",
+              "start": 11,
+              "end": 17
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "실감 나게 다시 보여줌은?",
-          "answerText": "재현하며",
-          "answerMatchMode": "EXACT",
+          "prompt": "두꺼비가 한 행동을 지문에서 찾아 쓰시오.",
+          "answerText": "독을 막고",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 18,
-              "end": 22
+              "paragraphId": "p1",
+              "start": 35,
+              "end": 40
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "머릿속으로 그려보는 능력은?",
-          "answerText": "상상력은",
-          "answerMatchMode": "EXACT",
+          "prompt": "동물들이 콩쥐를 응원하는 목소리를 어떻게 만드는지 지문에서 찾아 쓰시오.",
+          "answerText": "대화로 만듭니다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 19,
+              "end": 27
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "친구들과 역할을 나누며 배운 것을 지문에서 찾아 쓰시오.",
+          "answerText": "협동의 소중함",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 59,
-              "end": 63
+              "start": 43,
+              "end": 50
             }
           ],
           "scoring": {

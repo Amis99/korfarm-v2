@@ -562,34 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사람이나 무거운 화물을 안전하고 훨씬 빠르게 먼 곳으로 옮겨 주는 도구는?",
-          "answerText": "교통수단",
-          "answerMatchMode": "EXACT",
+          "prompt": "하늘을 나는 교통수단을 지문에서 찾으시오.",
+          "answerText": "비행기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 49,
-              "end": 53
-            },
-            {
-              "paragraphId": "p1",
-              "start": 111,
-              "end": 115
-            },
-            {
-              "paragraphId": "p1",
-              "start": 139,
-              "end": 143
-            },
-            {
-              "paragraphId": "p1",
-              "start": 160,
-              "end": 164
-            },
-            {
-              "paragraphId": "p3",
-              "start": 72,
-              "end": 76
+              "start": 76,
+              "end": 79
             }
           ],
           "scoring": {
@@ -601,19 +581,14 @@
         },
         {
           "id": "q2",
-          "prompt": "말이나 소의 힘을 빌려서 짐을 싣고 사람의 발걸음으로 천천히 끌었던 것은?",
-          "answerText": "수레",
-          "answerMatchMode": "EXACT",
+          "prompt": "오늘날의 자동차가 돌리는 것을 지문에서 찾으시오.",
+          "answerText": "시끄러운 엔진",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 50,
-              "end": 52
-            },
-            {
-              "paragraphId": "p2",
-              "start": 132,
-              "end": 134
+              "start": 75,
+              "end": 82
             }
           ],
           "scoring": {
@@ -625,14 +600,49 @@
         },
         {
           "id": "q3",
-          "prompt": "오늘날의 자동차가 무척 빠른 속도로 도로를 달리기 위해 꿀꺽꿀꺽 마시는 것은?",
-          "answerText": "석유",
-          "answerMatchMode": "EXACT",
+          "prompt": "옛날 수레와 오늘날 자동차가 각각 사용한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "자연의 힘",
+            "석유 에너지"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
+              "start": 136,
+              "end": 141
+            },
+            {
+              "paragraphId": "p2",
               "start": 157,
-              "end": 159
+              "end": 163
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "서로 비교하며 읽는 방법이 한눈에 들어오게 만드는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "다양한 장점",
+            "단점"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 159,
+              "end": 165
+            },
+            {
+              "paragraphId": "p3",
+              "start": 167,
+              "end": 169
             }
           ],
           "scoring": {

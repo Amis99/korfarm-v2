@@ -396,25 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "매우 귀하고 소중한 것?",
-          "answerText": "보물",
-          "answerMatchMode": "EXACT",
+          "prompt": "용기를 내어 장미 덤불 깊숙한 곳에서 보물 상자의 열쇠를 찾아낸 인물이 누구인지 찾아보세요",
+          "answerText": "또또",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 44,
-              "end": 46
-            },
-            {
-              "paragraphId": "p1",
-              "start": 67,
-              "end": 69
-            },
-            {
-              "paragraphId": "p2",
-              "start": 174,
-              "end": 176
-            }
+            {"paragraphId": "p1", "start": 16, "end": 18},
+            {"paragraphId": "p1", "start": 63, "end": 65},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 150, "end": 152}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -425,20 +414,11 @@
         },
         {
           "id": "q2",
-          "prompt": "붉은 산열매 이름?",
-          "answerText": "산딸기",
-          "answerMatchMode": "EXACT",
+          "prompt": "또또는 보물이 어떻게 할 때 진짜 가치가 있다고 친구들에게 이야기했는지 찾아보세요",
+          "answerText": "함께 나눌 때",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 64,
-              "end": 67
-            },
-            {
-              "paragraphId": "p2",
-              "start": 82,
-              "end": 85
-            }
+            {"paragraphId": "p1", "start": 93, "end": 100}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -449,15 +429,26 @@
         },
         {
           "id": "q3",
-          "prompt": "꽃과 나무가 있는 뜰?",
-          "answerText": "정원",
-          "answerMatchMode": "EXACT",
+          "prompt": "또또와 친구들이 보물 상자를 열자 그 안에는 무엇이 가득했는지 찾아보세요",
+          "answerText": "산딸기 씨앗",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 112,
-              "end": 114
-            }
+            {"paragraphId": "p2", "start": 64, "end": 70}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "모두가 함께 씨앗을 심고 가꾸게 된 산딸기 언덕이 어떤 곳이 되었는지 찾아보세요",
+          "answerText": "정원",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 112, "end": 114}
           ],
           "scoring": {
             "correctDeltaSec": 10,

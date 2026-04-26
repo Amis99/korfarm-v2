@@ -552,74 +552,49 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "커다란 무엇가 서 있나요?",
+          "prompt": "학교 운동장 구석에 커다랗게 서 있는 나무 종류를 글에서 찾아 써 보세요",
           "answerText": "느티나무",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 16,
-              "end": 20
-            },
-            {
-              "paragraphId": "p1",
-              "start": 87,
-              "end": 91
-            },
-            {
-              "paragraphId": "p2",
-              "start": 142,
-              "end": 146
-            }
+            {"paragraphId": "p1", "start": 16, "end": 20},
+            {"paragraphId": "p1", "start": 87, "end": 91},
+            {"paragraphId": "p2", "start": 142, "end": 146}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "나무가 시원한 무엇을 만듦인가요?",
-          "answerText": "그늘",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 글에서는 나무 벤치를 사람처럼 표현하여 우리에게 편안한 휴식을 주는 무엇이라고 부르는지 글에서 찾아 써 보세요",
+          "answerText": "고마운 친구",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 97,
-              "end": 99
-            },
-            {
-              "paragraphId": "p1",
-              "start": 147,
-              "end": 149
-            }
+            {"paragraphId": "p2", "start": 128, "end": 134}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "우리에게 편안한 무엇을 줌인가요?",
-          "answerText": "휴식",
-          "answerMatchMode": "EXACT",
+          "prompt": "여름 햇살이 뜨거운 날 느티나무가 우리에게 만들어 주는 시원한 것이 무엇인지 글에서 찾아 써 보세요",
+          "answerText": "그늘",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 121,
-              "end": 123
-            }
+            {"paragraphId": "p1", "start": 97, "end": 99},
+            {"paragraphId": "p1", "start": 147, "end": 149}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "벤치에 앉아 있을 때 나무 위에서 노래하는 소리를 들려주는 동물이 무엇인지 글에서 찾아 써 보세요",
+          "answerText": "새",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 86, "end": 87}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         }
       ]

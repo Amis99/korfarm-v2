@@ -1039,158 +1039,98 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "둘 이상의 절이 이어진 문장은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 119,
-              "end": 121
-            },
-            {
-              "paragraphId": "p3",
-              "start": 126,
-              "end": 128
-            },
-            {
-              "paragraphId": "p4",
-              "start": 96,
-              "end": 98
-            },
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p6",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p6",
-              "start": 124,
-              "end": 126
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "둘 이상의 절이 이어져 단문보다 호응이 무너지기 쉽다고 한 문장의 종류를 두 글자로 찾으시오",
+          "answerText": "복문",
           "answerMatchMode": "ANY",
-          "answerText": "복문"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p1", "start": 119, "end": 121},
+            {"paragraphId": "p3", "start": 126, "end": 128},
+            {"paragraphId": "p4", "start": 96, "end": 98},
+            {"paragraphId": "p5", "start": 0, "end": 2},
+            {"paragraphId": "p6", "start": 3, "end": 5},
+            {"paragraphId": "p6", "start": 124, "end": 126}
+          ],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "주어와 서술어가 서로 맞는 관계는?",
+          "prompt": "주어가 어느 절에 속하는지 분명히 살펴야 한다고 본문이 따로 든 두 종류의 절을 모두 찾으시오",
+          "answerText": "관형절, 부사절",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 38,
-              "end": 40
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p4",
-              "start": 100,
-              "end": 102
-            },
-            {
-              "paragraphId": "p5",
-              "start": 99,
-              "end": 101
-            },
-            {
-              "paragraphId": "p6",
-              "start": 9,
-              "end": 11
-            },
-            {
-              "paragraphId": "p6",
-              "start": 104,
-              "end": 106
-            }
+            {"paragraphId": "p3", "start": 3, "end": 6},
+            {"paragraphId": "p3", "start": 8, "end": 11}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "호응"
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "명사를 꾸며 주는 절은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 3,
-              "end": 6
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "본문이 호응 문제가 생기는 가장 흔한 까닭으로 든, 절이 길어지면서 무엇을 놓치기 때문이라고 한 것을 다섯 글자로 찾으시오",
+          "answerText": "중심 주어",
           "answerMatchMode": "ANY",
-          "answerText": "관형절"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 30, "end": 35}
+          ],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "일의 중심이 되어 움직이는 쪽은?",
+          "prompt": "연결 어미가 붙은 절들이 이어질 때 나타낼 수 있는 의미 관계 네 가지를 모두 찾으시오",
+          "answerText": "원인, 조건, 양보, 나열",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 139,
-              "end": 141
-            }
+            {"paragraphId": "p4", "start": 24, "end": 26},
+            {"paragraphId": "p4", "start": 28, "end": 30},
+            {"paragraphId": "p4", "start": 32, "end": 34},
+            {"paragraphId": "p4", "start": 36, "end": 38}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "주체"
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "여러 요소가 짜여 이룬 틀은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 134,
-              "end": 136
-            },
-            {
-              "paragraphId": "p3",
-              "start": 139,
-              "end": 141
-            },
-            {
-              "paragraphId": "p6",
-              "start": 38,
-              "end": 40
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "복문을 고칠 때 효과적인 방법으로 본문이 권한 단위, 곧 긴 문장을 무엇 단위로 나누어 보라고 했는지 한 글자로 찾으시오",
+          "answerText": "절",
           "answerMatchMode": "ANY",
-          "answerText": "구조"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 10, "end": 11},
+            {"paragraphId": "p1", "start": 52, "end": 53},
+            {"paragraphId": "p1", "start": 56, "end": 57},
+            {"paragraphId": "p1", "start": 93, "end": 94},
+            {"paragraphId": "p1", "start": 134, "end": 135},
+            {"paragraphId": "p2", "start": 21, "end": 22},
+            {"paragraphId": "p3", "start": 5, "end": 6},
+            {"paragraphId": "p3", "start": 10, "end": 11},
+            {"paragraphId": "p3", "start": 36, "end": 37},
+            {"paragraphId": "p3", "start": 56, "end": 57},
+            {"paragraphId": "p3", "start": 64, "end": 65},
+            {"paragraphId": "p3", "start": 84, "end": 85},
+            {"paragraphId": "p3", "start": 132, "end": 133},
+            {"paragraphId": "p4", "start": 45, "end": 46},
+            {"paragraphId": "p4", "start": 132, "end": 133},
+            {"paragraphId": "p5", "start": 26, "end": 27},
+            {"paragraphId": "p5", "start": 51, "end": 52},
+            {"paragraphId": "p5", "start": 77, "end": 78},
+            {"paragraphId": "p6", "start": 36, "end": 37},
+            {"paragraphId": "p6", "start": 62, "end": 63}
+          ],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "복문에서 호응 문제가 생기는 진짜 이유는 문장이 길어서가 아니라 무엇을 제대로 관리하지 못해서라고 결론지었는지 네 글자로 찾으시오",
+          "answerText": "절 구조",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p6", "start": 36, "end": 40}
+          ],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true
         }
       ]
     }

@@ -956,29 +956,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "학생들이 민주주의를 경험하고 규칙을 정하는 장은 무엇인가요?",
-          "answerText": "학급 회의",
+          "prompt": "학급이 학생들이 무엇을 경험하고 익히는 가장 작은 단위의 사회라고 했는지 찾아 쓰시오.",
+          "answerText": "민주주의",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 65,
-              "end": 70
-            },
-            {
-              "paragraphId": "p1",
-              "start": 93,
-              "end": 98
-            },
-            {
-              "paragraphId": "p1",
-              "start": 253,
-              "end": 258
+              "start": 9,
+              "end": 13
             },
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 5
+              "start": 306,
+              "end": 310
             }
           ],
           "scoring": {
@@ -989,28 +979,18 @@
         },
         {
           "id": "q2",
-          "prompt": "전면 공개를 지지하는 측이 가장 먼저 내세운 가치는 무엇인가요?",
-          "answerText": "민주적 투명성",
-          "answerMatchMode": "ANY",
+          "prompt": "전면 공개를 지지하는 측이 강력히 주장하는 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "민주적 투명성",
+            "참여의 확대"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 16,
               "end": 23
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "공개를 통해 더 넓어질 수 있다고 본 것은 무엇인가요?",
-          "answerText": "참여의 확대",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+            },
             {
               "paragraphId": "p2",
               "start": 27,
@@ -1024,15 +1004,41 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "제한적 공개를 주장하는 쪽이 걱정한 부작용 가운데 하나는 무엇인가요?",
-          "answerText": "발언의 자유 위축",
+          "id": "q3",
+          "prompt": "회의에 직접 참석하지 못한 친구들도 무엇을 정확히 파악할 수 있게 해야 한다고 했는지 찾아 쓰시오.",
+          "answerText": "어떤 논의가 오갔는지",
           "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 114,
+              "end": 125
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "제한적 공개나 신중한 접근을 강조하는 측이 우려하는 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "발언의 자유 위축",
+            "개인 정보 보호"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 28,
               "end": 37
+            },
+            {
+              "paragraphId": "p3",
+              "start": 41,
+              "end": 49
             }
           ],
           "scoring": {
@@ -1043,14 +1049,14 @@
         },
         {
           "id": "q5",
-          "prompt": "글에서 공개의 범위와 절차를 정하기 위해 마련하자고 한 것은 무엇인가요?",
-          "answerText": "가이드라인",
+          "prompt": "학급 회의 공개 방식에 대한 논쟁은 결국 무엇과 직결된다고 했는지 찾아 쓰시오.",
+          "answerText": "우리가 어떤 소통 문화를 지향하느냐의 문제",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 158,
-              "end": 163
+              "start": 23,
+              "end": 46
             }
           ],
           "scoring": {

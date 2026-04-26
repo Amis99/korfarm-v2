@@ -600,14 +600,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "물건의 길이를 잴 수 있도록 자에 그어 놓은 선은?",
-          "answerText": "눈금",
+          "prompt": "길이를 잴 때 무엇을 사용하는지 지문에서 찾아 쓰시오.",
+          "answerText": "자를 사용해요",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 29,
-              "end": 31
+              "start": 13,
+              "end": 20
             }
           ],
           "scoring": {
@@ -618,24 +618,50 @@
         },
         {
           "id": "q2",
-          "prompt": "길이나 무게 등을 잴 때 기준이 되는 것은?",
-          "answerText": "단위",
+          "prompt": "자에 적혀 있는 것을 지문에서 찾아 쓰시오.",
+          "answerText": "작은 눈금과 숫자",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 26,
+              "end": 35
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "몇 센티미터가 모이면 일 미터가 되는지 지문에서 찾아 쓰시오.",
+          "answerText": "백 센티미터",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 11,
-              "end": 13
-            },
+              "start": 24,
+              "end": 30
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "단위를 잘못 고르면 어떻게 되는지 지문에서 찾아 쓰시오.",
+          "answerText": "숫자가 커져서 불편해요",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 11,
-              "end": 13
-            },
-            {
-              "paragraphId": "p3",
-              "start": 25,
-              "end": 27
+              "start": 36,
+              "end": 48
             }
           ],
           "scoring": {

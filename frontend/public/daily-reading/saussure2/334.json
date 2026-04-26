@@ -562,107 +562,88 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "나무나 고무 같은 판에 그림을 새기고 물감을 묻혀 도장처럼 종이에 찍어내는 이 그림을 무엇이라고 하나요?",
-          "answerText": "판화",
-          "answerMatchMode": "EXACT",
+          "prompt": "판화가 무엇인지 설명한 부분을 지문에서 찾으시오.",
+          "answerText": "나무나 고무 같은 평평한 판에 밑그림을 그리고 조각칼로 판을 파낸 뒤, 물감을 묻혀 종이에 도장처럼 찍어내는 그림이에요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 31,
-              "end": 33
-            },
-            {
-              "paragraphId": "p1",
-              "start": 63,
-              "end": 65
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 2
+              "start": 67,
+              "end": 133
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "판화를 만들 때 판에 그려진 밑그림을 따라 판을 조심조심 파내는 뾰족한 이 도구는 무엇인가요?",
-          "answerText": "조각칼",
-          "answerMatchMode": "EXACT",
+          "prompt": "판화를 만드는 과정을 순서대로 설명한 부분을 모두 찾으시오.",
+          "answerText": "먼저 뾰족한 조각칼로 판을 조심조심 파내어 그림의 모양을 만들어요 / 그다음 판 위에 롤러를 굴려 예쁜 색깔의 물감을 골고루 묻혀 주지요 / 마지막으로 그 위에 깨끗한 종이를 덮고 손이나 도구로 문지른 뒤 떼어내면 그림이 짠 하고 나타난답니다",
+          "answerTexts": [
+            "먼저 뾰족한 조각칼로 판을 조심조심 파내어 그림의 모양을 만들어요",
+            "그다음 판 위에 롤러를 굴려 예쁜 색깔의 물감을 골고루 묻혀 주지요",
+            "마지막으로 그 위에 깨끗한 종이를 덮고 손이나 도구로 문지른 뒤 떼어내면 그림이 짠 하고 나타난답니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 93,
-              "end": 96
+              "paragraphId": "p2",
+              "start": 22,
+              "end": 58
             },
             {
               "paragraphId": "p2",
-              "start": 29,
-              "end": 32
+              "start": 60,
+              "end": 97
+            },
+            {
+              "paragraphId": "p2",
+              "start": 99,
+              "end": 155
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "조각칼로 파낸 판 위에 예쁜 색깔의 물감을 골고루 묻히기 위해 둥글게 굴리는 이 도구는 무엇인가요?",
-          "answerText": "롤러",
-          "answerMatchMode": "EXACT",
+          "prompt": "판화의 특별한 특징을 설명한 부분을 지문에서 찾으시오.",
+          "answerText": "같은 그림을 여러 장 똑같이 찍어낼 수 있다는 점이에요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 69,
-              "end": 71
+              "paragraphId": "p3",
+              "start": 27,
+              "end": 57
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "물감을 묻힌 판 위에 깨끗한 이것을 덮고 문지른 뒤 떼어내면 그림이 짠 하고 나타납니다. 글씨를 쓰거나 그림을 그리는 이것은 무엇인가요?",
-          "answerText": "종이",
-          "answerMatchMode": "EXACT",
+          "prompt": "판화에서 오른쪽과 왼쪽이 어떻게 된다고 했는지 지문에서 찾으시오.",
+          "answerText": "판에 새겨진 그림과 종이에 찍힌 그림의 오른쪽과 왼쪽이 거울처럼 반대로 바뀌어 나오는",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 114,
-              "end": 116
-            },
-            {
-              "paragraphId": "p2",
-              "start": 114,
-              "end": 116
-            },
-            {
               "paragraphId": "p3",
-              "start": 109,
-              "end": 111
+              "start": 98,
+              "end": 145
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         }

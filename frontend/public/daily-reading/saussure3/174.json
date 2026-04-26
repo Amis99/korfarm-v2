@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "실제로 있지 않은 일을 머릿속으로 그려보는 능력은 무엇인가요?",
+          "prompt": "장난감이 키워주는 것으로 지문에 나온 말을 찾으시오.",
           "answerText": "상상력을",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -576,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "물건을 잘 보살피고 다루어 유지하는 일을 뜻하는 말은?",
-          "answerText": "관리했습니다",
-          "answerMatchMode": "EXACT",
+          "prompt": "놀이가 끝난 뒤 장난감을 어디에 정리했는지 지문에서 찾으시오.",
+          "answerText": "제자리에",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 110,
-              "end": 116
+              "paragraphId": "p1",
+              "start": 57,
+              "end": 61
             }
           ],
           "scoring": {
@@ -595,14 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "물질적으로나 정신적으로 무척 넉넉하고 넉넉한 상태는?",
-          "answerText": "풍요롭게",
-          "answerMatchMode": "EXACT",
+          "prompt": "장난감을 아끼는 행동은 무엇의 시작이라고 했는지 지문에서 찾으시오.",
+          "answerText": "올바른 생활 습관의 시작",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 68,
+              "end": 81
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "더 이상 놀지 않는 장난감을 누구에게 나누기로 했는지 지문에서 찾으시오.",
+          "answerText": "필요한 이웃에게",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 112,
-              "end": 116
+              "start": 27,
+              "end": 35
             }
           ],
           "scoring": {

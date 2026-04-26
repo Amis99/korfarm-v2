@@ -421,41 +421,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "나무에서 톡 하고 떨어져 여행을 떠나는 것은 무엇인가요?",
-          "answerText": "사과",
+          "prompt": "사과가 여행을 떠나기 전 모습을 찾으시오.",
+          "answerText": "새빨갛게 익은 사과 한 알\n나무에서 톡 하고 떨어져",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 20,
-              "end": 22
-            },
-            {
-              "paragraphId": "p3",
-              "start": 52,
-              "end": 54
-            },
-            {
-              "paragraphId": "p4",
-              "start": 62,
-              "end": 64
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "사과가 몸을 싣고 즐거워한 것은 무엇인가요?",
-          "answerText": "물살",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 38,
+              "start": 12,
               "end": 40
             }
           ],
@@ -466,15 +438,41 @@
           "revealOnWrong": true
         },
         {
+          "id": "q2",
+          "prompt": "이 시에서 움직임이나 물소리를 흉내 낸 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "데굴데굴",
+            "졸졸졸"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 4
+            },
+            {
+              "paragraphId": "p2",
+              "start": 16,
+              "end": 19
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q3",
-          "prompt": "사과가 숲속에서 만난 존재는 무엇인가요?",
-          "answerText": "동물 친구들",
+          "prompt": "사과가 물살을 타고 즐거워하는 모습을 찾으시오.",
+          "answerText": "시원한 물살에 몸을 싣고\n어디로 가는지 몰라도 즐거워요",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 6,
-              "end": 12
+              "paragraphId": "p2",
+              "start": 34,
+              "end": 64
             }
           ],
           "scoring": {
@@ -485,14 +483,22 @@
         },
         {
           "id": "q4",
-          "prompt": "사과가 손바닥에 안긴 존재는 누구인가요?",
-          "answerText": "아이",
-          "answerMatchMode": "ANY",
+          "prompt": "사과가 사람처럼 행동하는 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "반갑게 인사하며 미소를 지어요",
+            "사과도 춤을 추며 끄덕여요"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 18,
-              "end": 20
+              "paragraphId": "p3",
+              "start": 17,
+              "end": 33
+            },
+            {
+              "paragraphId": "p3",
+              "start": 52,
+              "end": 66
             }
           ],
           "scoring": {
@@ -503,14 +509,28 @@
         },
         {
           "id": "q5",
-          "prompt": "사과가 마음을 달래 준다고 한 것은 무엇인가요?",
-          "answerText": "향기",
-          "answerMatchMode": "ANY",
+          "prompt": "사과의 여행이 끝나는 모습과 마음을 달래는 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "작은 아이의 손바닥에 안겼어요",
+            "달콤한 향기로 마음을 달래주는",
+            "나는야 세상에서 행복한 사과"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 36,
-              "end": 38
+              "start": 15,
+              "end": 31
+            },
+            {
+              "paragraphId": "p4",
+              "start": 32,
+              "end": 48
+            },
+            {
+              "paragraphId": "p4",
+              "start": 49,
+              "end": 64
             }
           ],
           "scoring": {

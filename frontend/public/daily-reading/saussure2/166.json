@@ -562,7 +562,25 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "뺄셈에서 윗자리로부터 수를 빌려 내려와 계산하는 방법은?",
+          "prompt": "일의 자리 숫자끼리 뺄 수 없을 때 무엇을 해야 하는지 나타낸 어구를 지문에서 찾으시오.",
+          "answerText": "십의 자리에서 수를 빌려와야",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 39,
+              "end": 54
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "십의 자리에서 수를 빌려와서 빼는 방법을 부르는 말을 지문에서 찾으시오.",
           "answerText": "받아내림",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -584,15 +602,33 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "문제에 대한 바르고 정확한 답을 뜻하는 말은?",
-          "answerText": "정답",
+          "id": "q3",
+          "prompt": "두 자리 수를 뺄 때 계산 순서를 알려 주는 어구를 지문에서 찾으시오.",
+          "answerText": "항상 일의 자리부터 먼저 계산해야",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 13,
+              "end": 31
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "32 빼기 15의 정답으로 제시된 숫자를 지문에서 찾으시오.",
+          "answerText": "17",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 115,
-              "end": 117
+              "start": 119,
+              "end": 121
             }
           ],
           "scoring": {

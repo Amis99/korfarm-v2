@@ -1152,93 +1152,98 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '핵심'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 45,
-              "end": 47
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 모델이 규칙을 익히는 재료로 직접 사용한다고 한 자료를 가리키는 낱말을 모두 찾으시오",
+          "answerText": "훈련 데이터",
           "answerMatchMode": "ANY",
-          "answerText": "핵심"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 0, "end": 6},
+            {"paragraphId": "p1", "start": 110, "end": 116},
+            {"paragraphId": "p1", "start": 127, "end": 133},
+            {"paragraphId": "p2", "start": 0, "end": 6},
+            {"paragraphId": "p2", "start": 64, "end": 70},
+            {"paragraphId": "p3", "start": 50, "end": 56},
+            {"paragraphId": "p4", "start": 0, "end": 6},
+            {"paragraphId": "p5", "start": 3, "end": 9},
+            {"paragraphId": "p5", "start": 56, "end": 62}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '별도의'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 207,
-              "end": 210
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 훈련에 쓰지 않은 별도의 자료로, 학습한 모델이 새로운 자료에서도 잘 작동하는지 확인할 때 쓰는 자료를 가리키는 낱말을 모두 찾으시오",
+          "answerText": "검증 데이터",
           "answerMatchMode": "ANY",
-          "answerText": "별도의"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 8, "end": 14},
+            {"paragraphId": "p1", "start": 227, "end": 233},
+            {"paragraphId": "p3", "start": 0, "end": 6},
+            {"paragraphId": "p3", "start": 75, "end": 81},
+            {"paragraphId": "p4", "start": 8, "end": 14},
+            {"paragraphId": "p5", "start": 11, "end": 17},
+            {"paragraphId": "p5", "start": 76, "end": 82}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '고르게'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 151,
-              "end": 154
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 데이터를 바탕으로 입력과 출력의 관계를 익히는 학습의 주체를 가리키는 낱말을 모두 찾으시오",
+          "answerText": "모델",
           "answerMatchMode": "ANY",
-          "answerText": "고르게"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 59, "end": 61},
+            {"paragraphId": "p1", "start": 147, "end": 149},
+            {"paragraphId": "p2", "start": 8, "end": 10},
+            {"paragraphId": "p2", "start": 78, "end": 80},
+            {"paragraphId": "p2", "start": 199, "end": 201},
+            {"paragraphId": "p3", "start": 15, "end": 17},
+            {"paragraphId": "p3", "start": 96, "end": 98},
+            {"paragraphId": "p4", "start": 87, "end": 89},
+            {"paragraphId": "p4", "start": 207, "end": 209},
+            {"paragraphId": "p5", "start": 208, "end": 210}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '과적합'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 152,
-              "end": 155
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 훈련 데이터에는 정답률이 높은데 검증 데이터에서 성능이 크게 떨어지는 경우를 가리키는 낱말을 찾으시오",
+          "answerText": "과적합",
           "answerMatchMode": "ANY",
-          "answerText": "과적합"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 152, "end": 155}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '공정한'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 24,
-              "end": 27
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 모델이 잘 작동하는지 보는 잣대로, 훈련 데이터의 정답률만으로는 충분히 알 수 없다고 한 평가 결과를 가리키는 낱말을 모두 찾으시오",
+          "answerText": "성능",
           "answerMatchMode": "ANY",
-          "answerText": "공정한"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 137, "end": 139},
+            {"paragraphId": "p3", "start": 84, "end": 86},
+            {"paragraphId": "p4", "start": 114, "end": 116},
+            {"paragraphId": "p5", "start": 133, "end": 135}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 모델이 입력과 출력의 관계를 익히는 활동이자, 평가와 분리해서 다루어야 한다고 한 과정을 가리키는 낱말을 모두 찾으시오",
+          "answerText": "학습",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 26, "end": 28},
+            {"paragraphId": "p1", "start": 94, "end": 96},
+            {"paragraphId": "p1", "start": 258, "end": 260},
+            {"paragraphId": "p4", "start": 106, "end": 108}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

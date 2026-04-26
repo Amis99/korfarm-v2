@@ -584,7 +584,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "신문, 텔레비전, 인터넷처럼 정보를 얻는 여러 가지 것은 무엇인가요?",
+          "prompt": "신문, 텔레비전, 인터넷처럼 정보를 얻는 여러 가지 것을 묶어 말한 표현을 찾으시오.",
           "answerText": "매체 자료",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -602,14 +602,22 @@
         },
         {
           "id": "q2",
-          "prompt": "글과 사진으로 정보를 제공하는 매체는 무엇인가요?",
-          "answerText": "인쇄 매체",
-          "answerMatchMode": "ANY",
+          "prompt": "각 매체마다 서로 다르다고 한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "정보를 전달하는 방식",
+            "특징"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 10,
-              "end": 15
+              "paragraphId": "p1",
+              "start": 49,
+              "end": 60
+            },
+            {
+              "paragraphId": "p1",
+              "start": 62,
+              "end": 64
             }
           ],
           "scoring": {
@@ -620,14 +628,14 @@
         },
         {
           "id": "q3",
-          "prompt": "방송 매체가 정보를 생생하게 전할 때 함께 쓰는 두 가지는 무엇인가요?",
-          "answerText": "소리와 영상",
+          "prompt": "인쇄 매체가 정보를 제공하는 방식을 찾으시오.",
+          "answerText": "글과 사진으로",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 21,
-              "end": 27
+              "paragraphId": "p2",
+              "start": 17,
+              "end": 24
             }
           ],
           "scoring": {
@@ -638,14 +646,14 @@
         },
         {
           "id": "q4",
-          "prompt": "여러 사람에게 동시에 빠르고 실감 나게 소식을 알리는 매체는 무엇인가요?",
-          "answerText": "방송 매체",
+          "prompt": "방송 매체가 소식을 알릴 수 있는 장점을 설명한 부분을 찾으시오.",
+          "answerText": "여러 사람에게 동시에 빠르고 실감 나게 소식을 알릴 수 있다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 14,
-              "end": 19
+              "start": 45,
+              "end": 78
             }
           ],
           "scoring": {
@@ -656,14 +664,22 @@
         },
         {
           "id": "q5",
-          "prompt": "정보 검색과 공유가 자유로워 가장 빠르게 필요한 정보를 찾을 수 있는 매체는 무엇인가요?",
-          "answerText": "인터넷 매체",
-          "answerMatchMode": "ANY",
+          "prompt": "인터넷 매체에서 자유롭다고 한 활동을 모두 찾으시오.",
+          "answerTexts": [
+            "정보 검색",
+            "공유"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 6
+              "start": 21,
+              "end": 26
+            },
+            {
+              "paragraphId": "p4",
+              "start": 28,
+              "end": 30
             }
           ],
           "scoring": {

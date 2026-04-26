@@ -788,19 +788,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "건의문을 받는 사람은 누구인가요?",
-          "answerText": "시장님",
+          "prompt": "글쓴이는 자신을 어떤 사람이라고 밝혔나요?",
+          "answerText": "우리 시에 거주하는 시민",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p4",
-              "start": 74,
-              "end": 77
+              "start": 16,
+              "end": 29
             }
           ],
           "scoring": {
@@ -811,14 +806,22 @@
         },
         {
           "id": "q2",
-          "prompt": "플라스틱 컵이 자연에서 분해되는 데 걸린다고 한 시간 표현은 무엇인가요?",
-          "answerText": "수백 년",
-          "answerMatchMode": "ANY",
+          "prompt": "이로 인해 무엇이 훼손되고 무엇이 발생하나요? 모두 찾으시오.",
+          "answerTexts": [
+            "도시의 미관",
+            "악취"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 21,
-              "end": 25
+              "paragraphId": "p1",
+              "start": 77,
+              "end": 83
+            },
+            {
+              "paragraphId": "p1",
+              "start": 93,
+              "end": 95
             }
           ],
           "scoring": {
@@ -829,7 +832,25 @@
         },
         {
           "id": "q3",
-          "prompt": "글쓴이가 제안한 해결 제도의 이름은 무엇인가요?",
+          "prompt": "플라스틱 컵을 소각할 때 무엇이 나온다고 했나요?",
+          "answerText": "유해 물질",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 40,
+              "end": 45
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "이 문제를 해결하기 위해 제안한 제도는 무엇인가요?",
           "answerText": "다회용 컵 보증금 제도",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -846,43 +867,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "컵을 반납하면 다시 돌려받게 된다고 한 돈은 무엇인가요?",
-          "answerText": "보증금",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 20,
-              "end": 23
-            },
-            {
-              "paragraphId": "p3",
-              "start": 48,
-              "end": 51
-            },
-            {
-              "paragraphId": "p3",
-              "start": 83,
-              "end": 86
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q5",
-          "prompt": "글쓴이가 바라는 거리의 모습은 무엇인가요?",
-          "answerText": "깨끗한 거리",
+          "prompt": "이 제도가 시행되면 무엇을 획기적으로 줄일 수 있나요?",
+          "answerText": "일회용품 쓰레기",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 38,
-              "end": 44
+              "start": 11,
+              "end": 19
             }
           ],
           "scoring": {

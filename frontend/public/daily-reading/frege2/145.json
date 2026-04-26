@@ -848,19 +848,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "전 세계 인터넷 데이터를 실어 나르는 바닷속 선은 무엇인가요?",
-          "answerText": "해저 데이터 케이블",
+          "prompt": "깊은 바닷속을 지나는 '보이지 않는 끈'의 정체로 제시된 이름은 무엇인가요?",
+          "answerText": "해저 데이터 케이블(Submarine Communications Cable)",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 106,
-              "end": 116
-            },
-            {
-              "paragraphId": "p4",
-              "start": 6,
-              "end": 16
+              "end": 148
             }
           ],
           "scoring": {
@@ -871,19 +866,14 @@
         },
         {
           "id": "q2",
-          "prompt": "해저 케이블의 핵심 재료인 얇은 유리 섬유는 무엇인가요?",
-          "answerText": "광케이블",
+          "prompt": "유리 섬유를 통해 전달될 때 데이터는 무엇으로 바뀌나요?",
+          "answerText": "빛의 신호",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 29,
-              "end": 33
-            },
-            {
-              "paragraphId": "p2",
-              "start": 166,
-              "end": 170
+              "start": 68,
+              "end": 73
             }
           ],
           "scoring": {
@@ -894,7 +884,33 @@
         },
         {
           "id": "q3",
-          "prompt": "케이블 설치에 동원된 바닷속 기계는 무엇인가요?",
+          "prompt": "케이블을 훼손할 수 있는 위험 요소 중 동물과 배와 관련된 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "상어의 공격",
+            "고기잡이 배의 닻"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 104,
+              "end": 110
+            },
+            {
+              "paragraphId": "p2",
+              "start": 117,
+              "end": 126
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "바다 밑바닥의 흙을 파내고 케이블을 묻어 고정하는 바닷속 기계는 무엇인가요?",
           "answerText": "무인 로봇",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -911,33 +927,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "끊어진 케이블을 다시 잇기 위해 출동하는 배는 무엇인가요?",
-          "answerText": "수리선",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 142,
-              "end": 145
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q5",
-          "prompt": "글에서 해저 케이블을 비유한 말은 무엇인가요?",
-          "answerText": "정보의 핏줄",
+          "prompt": "눈에 보이지 않지만 세상을 연결해 주는 선을 마법에 빗댄 표현은 무엇인가요?",
+          "answerText": "바닷속의 마법 같은 선",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 267,
-              "end": 273
+              "paragraphId": "p4",
+              "start": 156,
+              "end": 168
             }
           ],
           "scoring": {

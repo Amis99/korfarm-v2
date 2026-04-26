@@ -557,19 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "맑고 깨끗한 밤하늘의 빛나는 별과 행성을 자세히 관찰할 수 있도록 커다란 망원경을 갖춘 시설은?",
-          "answerText": "천문대",
-          "answerMatchMode": "EXACT",
+          "prompt": "천문대가 어떤 장소인지 설명한 부분을 찾으시오.",
+          "answerText": "커다란 망원경으로 별과 행성을 관찰할 수 있는 멋진 장소",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 35,
-              "end": 38
-            },
-            {
-              "paragraphId": "p1",
-              "start": 46,
-              "end": 49
+              "start": 51,
+              "end": 82
             }
           ],
           "scoring": {
@@ -581,14 +576,22 @@
         },
         {
           "id": "q2",
-          "prompt": "해설사 선생님이 사자자리, 오리온자리 등 밤하늘의 별을 이어서 만든 신기한 그림에 관해 들려준 이야기는?",
-          "answerText": "별자리 이야기",
-          "answerMatchMode": "EXACT",
+          "prompt": "해설사 선생님이 들려준 별자리의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "사자자리",
+            "오리온자리"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 59,
-              "end": 66
+              "start": 41,
+              "end": 45
+            },
+            {
+              "paragraphId": "p2",
+              "start": 47,
+              "end": 52
             }
           ],
           "scoring": {
@@ -600,19 +603,49 @@
         },
         {
           "id": "q3",
-          "prompt": "별을 관찰한 후 우주의 신비로움과 망원경으로 처음 별을 보았을 때의 떨림을 글쓴이가 글로 적은 것은?",
-          "answerText": "감상문",
-          "answerMatchMode": "EXACT",
+          "prompt": "망원경 속 별들의 모습과 글쓴이가 밤하늘의 별들을 보고 느낀 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "보석처럼 반짝이고 있었습니다",
+            "아름다운 그림 같다고"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 15,
+              "end": 30
+            },
+            {
+              "paragraphId": "p2",
+              "start": 102,
+              "end": 113
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "감상문에 적은 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "별자리와 우주의 신비로움",
+            "망원경으로 처음 별을 보았을 때의 떨림"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 30,
-              "end": 33
+              "start": 12,
+              "end": 25
             },
             {
               "paragraphId": "p3",
-              "start": 41,
-              "end": 44
+              "start": 47,
+              "end": 68
             }
           ],
           "scoring": {

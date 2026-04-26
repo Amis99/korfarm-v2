@@ -557,14 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "신라 시대에 별을 관찰하기 위해 정성껏 돌을 쌓아 만든 동양에서 제일 오래된 천문대는?",
-          "answerText": "첨성대",
-          "answerMatchMode": "EXACT",
+          "prompt": "가족이 탐방하러 떠난 장소를 찾으시오.",
+          "answerText": "경주 역사 유적지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 10,
-              "end": 13
+              "paragraphId": "p1",
+              "start": 21,
+              "end": 30
             }
           ],
           "scoring": {
@@ -576,14 +576,22 @@
         },
         {
           "id": "q2",
-          "prompt": "조상들의 지혜와 역사가 담겨 있어 우리가 아끼고 보호해야 할 소중한 보물들은?",
-          "answerText": "문화유산",
-          "answerMatchMode": "EXACT",
+          "prompt": "1문단에 나온 역사 유적의 이름을 모두 찾으시오.",
+          "answerTexts": [
+            "불국사의 다보탑",
+            "석가탑"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 54,
-              "end": 58
+              "paragraphId": "p1",
+              "start": 44,
+              "end": 52
+            },
+            {
+              "paragraphId": "p1",
+              "start": 94,
+              "end": 97
             }
           ],
           "scoring": {
@@ -595,19 +603,49 @@
         },
         {
           "id": "q3",
-          "prompt": "여행지에서 직접 보고 들은 사실과 그곳에서 느낀 점을 기록한 글의 형식은?",
-          "answerText": "기행문",
-          "answerMatchMode": "EXACT",
+          "prompt": "첨성대에서 상상한 모습과 수첩에 적은 설명을 모두 찾으시오.",
+          "answerTexts": [
+            "별을 관측하던 모습",
+            "가이드 선생님의 설명"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 37
+            },
+            {
+              "paragraphId": "p2",
+              "start": 92,
+              "end": 103
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "기행문에 담은 보호 대상과 마음가짐을 모두 찾으시오.",
+          "answerTexts": [
+            "우리 문화유산",
+            "굳은 결심"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 31,
-              "end": 34
+              "start": 51,
+              "end": 58
             },
             {
               "paragraphId": "p3",
-              "start": 45,
-              "end": 48
+              "start": 74,
+              "end": 79
             }
           ],
           "scoring": {

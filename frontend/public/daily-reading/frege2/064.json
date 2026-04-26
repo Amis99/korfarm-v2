@@ -1079,19 +1079,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "정보들 사이의 논리적 연관성을 조직하는 설명 방식은 무엇인가요?",
-          "answerText": "설명문의 심화 구조",
+          "prompt": "설명문의 정의를 찾으시오.",
+          "answerText": "독자에게 특정 대상이나 사실에 대한 정보를 객관적이고 체계적으로 전달하는 글의 양식",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 106,
-              "end": 116
-            },
-            {
-              "paragraphId": "p4",
-              "start": 6,
-              "end": 16
+              "start": 5,
+              "end": 51
             }
           ],
           "scoring": {
@@ -1102,19 +1097,14 @@
         },
         {
           "id": "q2",
-          "prompt": "두 대상의 공통점과 차이점을 드러내는 설명 구조는 무엇인가요?",
-          "answerText": "비교와 대조",
+          "prompt": "심화 구조의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "정보들 사이의 논리적 연관성을 분석하고 이를 효과적인 틀로 조직하는 것",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 13,
-              "end": 19
-            },
-            {
-              "paragraphId": "p2",
-              "start": 44,
-              "end": 50
+              "paragraphId": "p1",
+              "start": 162,
+              "end": 201
             }
           ],
           "scoring": {
@@ -1125,10 +1115,24 @@
         },
         {
           "id": "q3",
-          "prompt": "현상의 발생 근거와 영향을 따라가는 구조는 무엇인가요?",
-          "answerText": "원인과 결과",
-          "answerMatchMode": "ANY",
+          "prompt": "대표적인 설명 구조를 모두 찾으시오.",
+          "answerTexts": [
+            "비교와 대조",
+            "원인과 결과",
+            "분류와 분석"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 13,
+              "end": 19
+            },
+            {
+              "paragraphId": "p2",
+              "start": 44,
+              "end": 50
+            },
             {
               "paragraphId": "p2",
               "start": 21,
@@ -1138,6 +1142,16 @@
               "paragraphId": "p2",
               "start": 99,
               "end": 105
+            },
+            {
+              "paragraphId": "p2",
+              "start": 29,
+              "end": 35
+            },
+            {
+              "paragraphId": "p2",
+              "start": 176,
+              "end": 182
             }
           ],
           "scoring": {
@@ -1148,19 +1162,28 @@
         },
         {
           "id": "q4",
-          "prompt": "문단 사이의 논리적 길을 안내하는 표현은 무엇인가요?",
-          "answerText": "표지어",
-          "answerMatchMode": "ANY",
+          "prompt": "글에서 표지어의 예로 든 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "첫째",
+            "반면에",
+            "결과적으로"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 109,
-              "end": 112
+              "start": 130,
+              "end": 132
             },
             {
               "paragraphId": "p3",
-              "start": 154,
-              "end": 157
+              "start": 136,
+              "end": 139
+            },
+            {
+              "paragraphId": "p3",
+              "start": 143,
+              "end": 148
             }
           ],
           "scoring": {
@@ -1171,14 +1194,14 @@
         },
         {
           "id": "q5",
-          "prompt": "정보의 구조적 질서를 읽어낼 때 완성된다고 한 능력은 무엇인가요?",
-          "answerText": "문해력",
+          "prompt": "표지어가 독자에게 하는 역할을 찾으시오.",
+          "answerText": "글의 이정표 역할",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 110,
-              "end": 113
+              "paragraphId": "p3",
+              "start": 164,
+              "end": 173
             }
           ],
           "scoring": {

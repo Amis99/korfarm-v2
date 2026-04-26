@@ -396,34 +396,39 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "동물의 몸 뒤에 달린 것?",
-          "answerText": "꼬리",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 글에 등장하는 강아지의 이름이 무엇인지 한 군데 찾아 보세요",
+          "answerText": "멍뭉이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 25,
-              "end": 27
+              "start": 9,
+              "end": 12
             },
             {
               "paragraphId": "p1",
-              "start": 107,
-              "end": 109
+              "start": 66,
+              "end": 69
+            },
+            {
+              "paragraphId": "p1",
+              "start": 102,
+              "end": 105
             },
             {
               "paragraphId": "p2",
-              "start": 8,
-              "end": 10
+              "start": 3,
+              "end": 6
             },
             {
               "paragraphId": "p2",
-              "start": 55,
-              "end": 57
+              "start": 66,
+              "end": 69
             },
             {
               "paragraphId": "p2",
-              "start": 120,
-              "end": 122
+              "start": 132,
+              "end": 135
             }
           ],
           "scoring": {
@@ -435,14 +440,14 @@
         },
         {
           "id": "q2",
-          "prompt": "반갑게 전하는 말이나 몸짓?",
-          "answerText": "인사",
-          "answerMatchMode": "EXACT",
+          "prompt": "멍뭉이가 기분이 좋을 때 꼬리를 어떻게 흔드는지 흉내 내는 말을 찾아 보세요",
+          "answerText": "살랑살랑",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 38,
-              "end": 40
+              "start": 29,
+              "end": 33
             }
           ],
           "scoring": {
@@ -454,14 +459,38 @@
         },
         {
           "id": "q3",
-          "prompt": "생각이나 감정의 밑바탕?",
-          "answerText": "마음",
-          "answerMatchMode": "EXACT",
+          "prompt": "멍뭉이가 꼬리를 다리 사이로 쏙 집어넣을 때의 마음을 찾아 보세요",
+          "answerText": "무섭거나 겁이 난다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 124,
-              "end": 126
+              "start": 37,
+              "end": 47
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "꼬리의 모양을 보면 멍뭉이의 무엇과 무엇을 알 수 있는지 두 가지를 모두 찾아 보세요",
+          "answerText": "무슨 생각을 하는지, 기분이 어떤지",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 74,
+              "end": 84
+            },
+            {
+              "paragraphId": "p2",
+              "start": 88,
+              "end": 95
             }
           ],
           "scoring": {

@@ -396,30 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "차례나 절차의 앞뒤?",
+          "prompt": "사건의 흐름에 따라 어떻게 말하는 습관이 중요하다고 했는지, 그 차례를 가리키는 두 글자 말을 찾아보세요",
           "answerText": "순서",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 48,
-              "end": 50
-            },
-            {
-              "paragraphId": "p1",
-              "start": 140,
-              "end": 142
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 122,
-              "end": 124
-            }
+            {"paragraphId": "p1", "start": 48, "end": 50},
+            {"paragraphId": "p1", "start": 140, "end": 142},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 122, "end": 124}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -430,15 +414,13 @@
         },
         {
           "id": "q2",
-          "prompt": "들려주는 재미난 말?",
-          "answerText": "이야기",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서 차례를 나타내는 말의 예시로 든 세 가지 표현을 모두 찾아보세요",
+          "answerText": "먼저, 그다음, 마지막으로",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 157,
-              "end": 160
-            }
+            {"paragraphId": "p1", "start": 69, "end": 71},
+            {"paragraphId": "p1", "start": 75, "end": 78},
+            {"paragraphId": "p1", "start": 82, "end": 87}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -449,15 +431,26 @@
         },
         {
           "id": "q3",
-          "prompt": "생각이나 느낌을 나타냄?",
-          "answerText": "표현",
-          "answerMatchMode": "EXACT",
+          "prompt": "순서가 뒤섞이지 않게 차분하게 이야기를 풀어나가는 연습은 어떤 사고력을 키워 준다고 했는지 찾아보세요",
+          "answerText": "논리적인 사고력",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 35,
-              "end": 37
-            }
+            {"paragraphId": "p1", "start": 172, "end": 180}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "어떤 일을 겪었을 때 무엇을 머릿속으로 먼저 정리한 뒤에 입 밖으로 내뱉는 훈련이 필요하다고 했는지 찾아보세요",
+          "answerText": "시간의 흐름",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 59, "end": 65}
           ],
           "scoring": {
             "correctDeltaSec": 10,

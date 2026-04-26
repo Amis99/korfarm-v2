@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "서로를 ( )합시다.",
+          "prompt": "다른 사람의 의견이나 생각을 높게 받아들이고 소중히 여긴다는 뜻의 단어를 지문에서 찾아 보세요.",
           "answerText": "존중",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -571,19 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "고운 ( )을 사용해요.",
-          "answerText": "말",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 정해진 규칙을 어디에 붙여 두라고 했는지, 그 장소를 가리키는 단어를 찾아 보세요.",
+          "answerText": "게시판",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 35,
-              "end": 36
-            },
-            {
-              "paragraphId": "p1",
-              "start": 73,
-              "end": 74
+              "paragraphId": "p2",
+              "start": 11,
+              "end": 14
             }
           ],
           "scoring": {
@@ -595,14 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "교실 ( )에 붙이에요.",
-          "answerText": "게시판",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에 따르면 규칙을 잘 지키면 교실 분위기가 어떻게 된다고 했는지, 그 결과를 나타내는 단어를 찾아 보세요.",
+          "answerText": "평화",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 11,
-              "end": 14
+              "start": 49,
+              "end": 51
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "지문에서 좋은 의견들을 모으기 위해 거치는 방식으로, 여러 사람이 모여 생각을 나누는 자리를 가리키는 단어를 찾아 보세요.",
+          "answerText": "회의",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 127,
+              "end": 129
             }
           ],
           "scoring": {

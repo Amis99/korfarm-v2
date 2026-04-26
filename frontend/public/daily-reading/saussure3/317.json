@@ -850,19 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "거북이는 ( )하지 않았습니다.",
-          "answerText": "포기",
-          "answerMatchMode": "EXACT",
+          "prompt": "거북이가 느렸지만 어떻게 했는지 보여 주는 어구를 지문에서 찾으시오.",
+          "answerText": "느렸지만 포기하지 않고 끝까지 걸었습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 39,
-              "end": 41
-            },
-            {
-              "paragraphId": "p2",
-              "start": 52,
-              "end": 54
+              "start": 34,
+              "end": 56
             }
           ],
           "scoring": {
@@ -874,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "토끼는 중간에 ( )을 잤습니다.",
-          "answerText": "잠",
-          "answerMatchMode": "EXACT",
+          "prompt": "토끼가 자신의 실력만 믿고 한 일을 나타내는 어구를 지문에서 찾으시오.",
+          "answerText": "중간에 잠을 잤음",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 77,
-              "end": 78
+              "start": 73,
+              "end": 82
             }
           ],
           "scoring": {
@@ -893,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "인내와 ( )를 찾아봅시다.",
-          "answerText": "끈기",
-          "answerMatchMode": "EXACT",
+          "prompt": "무엇이 승리를 만든다고 배웠는지 나타내는 구절을 지문에서 찾으시오.",
+          "answerText": "포기하지 않는 용기가 승리를 만든다는 것을",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 14,
-              "end": 16
+              "start": 52,
+              "end": 75
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "친구들과 선의의 경쟁을 하며 어떤 태도를 보였는지 나타내는 어구를 지문에서 찾으시오.",
+          "answerText": "서로를 응원함",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 69,
+              "end": 76
             }
           ],
           "scoring": {

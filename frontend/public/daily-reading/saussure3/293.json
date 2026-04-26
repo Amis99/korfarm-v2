@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "그림들을 ( ) 정리해 봄.",
-          "answerText": "차근차근",
-          "answerMatchMode": "EXACT",
+          "prompt": "작품 속에서 찾아보는 중인 것을 지문에서 찾아 클릭하시오.",
+          "answerText": "숨겨진 이야기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 13,
-              "end": 17
+              "start": 79,
+              "end": 86
             }
           ],
           "scoring": {
@@ -869,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "( )가 살아있는 느낌임.",
-          "answerText": "붓 터치",
-          "answerMatchMode": "EXACT",
+          "prompt": "떠올랐다고 한 단어를 지문에서 찾아 클릭하시오.",
+          "answerText": "즐거움과 평화로움",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 23,
-              "end": 27
+              "start": 73,
+              "end": 82
             }
           ],
           "scoring": {
@@ -888,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "창의력을 ( ) 키웁니다.",
-          "answerText": "쑥쑥",
-          "answerMatchMode": "EXACT",
+          "prompt": "발견하는 눈을 가진다고 한 대상을 지문에서 찾아 클릭하시오.",
+          "answerText": "세상의 아름다움",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 16,
-              "end": 18
+              "start": 47,
+              "end": 55
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "일상을 칠해 보자고 한 색을 지문에서 찾아 클릭하시오.",
+          "answerText": "더 밝은 색",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 99,
+              "end": 105
             }
           ],
           "scoring": {

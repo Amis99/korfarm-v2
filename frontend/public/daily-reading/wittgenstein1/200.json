@@ -571,7 +571,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사회자: 지금부터 과학 동아리의 '무엇' 발표를 마치고 질의응답을 진행하겠습니다?",
+          "prompt": "과학 동아리가 마친 발표의 제목을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -589,12 +589,64 @@
         },
         {
           "id": "q2",
-          "prompt": "두 방식의 가장 큰 차이를 한 무엇?",
+          "prompt": "사회자가 질문자에게 안내한 질문 규칙을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 67,
+              "end": 76
+            },
+            {
+              "paragraphId": "p1",
+              "start": 78,
+              "end": 96
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "손을 들어 주시고",
+            "한 번에 한 가지씩만 물어 주시면"
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "발표자가 설명한 기존 백신과 mRNA 백신의 차이를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 65,
-              "end": 80
+              "start": 87,
+              "end": 124
+            },
+            {
+              "paragraphId": "p2",
+              "start": 126,
+              "end": 163
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "기존 백신은 항원 자체나 약화된 병원체를 몸에 제시하는 방식이 많고",
+            "mRNA 백신은 우리 세포가 항원을 만들도록 설계도를 잠시 전달한다"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "청중 2가 mRNA 설계도에 대해 우려한 내용을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 31,
+              "end": 57
             }
           ],
           "scoring": {
@@ -603,34 +655,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "문장으로 정리하면 무엇인가요"
+          "answerText": "유전 정보 자체가 바뀌는 것처럼 들리기도 합니다"
         },
         {
-          "id": "q3",
-          "prompt": "발표자: 오늘 발표에서 설명했듯이 무엇 합성에만 쓰이고 비교적 빨리 분해됩니다?",
+          "id": "q5",
+          "prompt": "발표자가 mRNA와 핵 속 DNA의 차이를 설명한 부분을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 101,
-              "end": 116
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "mRNA는 세포질에서 단백질"
-        },
-        {
-          "id": "q4",
-          "prompt": "중요한 기준은 무엇인가요?",
-          "answerRanges": [
+              "end": 125
+            },
             {
-              "paragraphId": "p4",
-              "start": 130,
-              "end": 145
+              "paragraphId": "p3",
+              "start": 140,
+              "end": 173
             }
           ],
           "scoring": {
@@ -638,35 +677,46 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그러면 순서를 정리하겠습니다"
-        },
-        {
-          "id": "q5",
-          "prompt": "그래서 지질 입자에 싸서 전달하고, 유통 과정에서는 낮은 온도를 유지해 분해를 무엇?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 156,
-              "end": 169
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "늦추는 관리가 중요합니다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "mRNA는 세포질에서 단백질 합성에만 쓰이고",
+            "핵 속 DNA에 끼어들어 유전 정보를 바꾸는 과정과는 다르다"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "문단의 초점은 무엇인가요?",
+          "prompt": "사회자가 앞선 두 질문을 나눈 기준을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 25,
-              "end": 32
+              "paragraphId": "p4",
+              "start": 12,
+              "end": 24
+            },
+            {
+              "paragraphId": "p4",
+              "start": 26,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "원리 차이를 묻는 질문",
+            "안전성 우려를 확인하는 질문"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "어떤 mRNA 백신을 매우 낮은 온도에서 보관해야 하는 이유를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 63,
+              "end": 110
             }
           ],
           "scoring": {
@@ -675,7 +725,39 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "어떻게 작동하"
+          "answerText": "mRNA 분자는 단백질처럼 비교적 불안정해서 열과 효소의 영향을 받기 쉽기 때문입니다"
+        },
+        {
+          "id": "q8",
+          "prompt": "사회자가 정리한 청중의 궁금증 세 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 24,
+              "end": 35
+            },
+            {
+              "paragraphId": "p6",
+              "start": 37,
+              "end": 54
+            },
+            {
+              "paragraphId": "p6",
+              "start": 56,
+              "end": 72
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'어떻게 작동하는가'",
+            "'유전 정보와 혼동해도 되는가'",
+            "'왜 보관 조건이 까다로운가'"
+          ]
         }
       ]
     }

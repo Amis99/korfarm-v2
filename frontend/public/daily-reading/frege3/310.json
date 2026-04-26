@@ -916,44 +916,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "글쓴이가 더 포용적인 자세로 대하자고 한 대상은 누구인가요?",
-          "answerText": "난민",
-          "answerMatchMode": "ANY",
+          "prompt": "글쓴이가 난민을 설명할 때 아니라고 한 대상과 실제 대상를 모두 찾으시오.",
+          "answerTexts": [
+            "스스로 원해서 고향을 떠난 사람들",
+            "생존을 위해 도망친 이들"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 4,
-              "end": 6
+              "start": 52,
+              "end": 70
             },
             {
               "paragraphId": "p1",
-              "start": 48,
-              "end": 50
-            },
-            {
-              "paragraphId": "p2",
-              "start": 14,
-              "end": 16
-            },
-            {
-              "paragraphId": "p3",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p4",
-              "start": 69,
-              "end": 71
-            },
-            {
-              "paragraphId": "p4",
-              "start": 111,
-              "end": 113
-            },
-            {
-              "paragraphId": "p5",
-              "start": 6,
-              "end": 8
+              "start": 76,
+              "end": 89
             }
           ],
           "scoring": {
@@ -964,49 +942,21 @@
         },
         {
           "id": "q2",
-          "prompt": "난민 수용을 뒷받침하는 차원으로 가장 먼저 제시된 것은 무엇인가요?",
-          "answerText": "인도주의적",
-          "answerMatchMode": "ANY",
+          "prompt": "모든 인간에게 있다고 한 두 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "존엄",
+            "안전하게 살 권리"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 3,
-              "end": 8
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "난민 수용이 높일 수 있다고 한 사회의 힘은 무엇인가요?",
-          "answerText": "다양성",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+              "start": 48,
+              "end": 50
+            },
             {
-              "paragraphId": "p3",
-              "start": 17,
-              "end": 20
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "불안을 줄이기 위해 정부가 엄격히 구축해야 한다고 한 것은 무엇인가요?",
-          "answerText": "심사 시스템",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 56,
+              "paragraphId": "p2",
+              "start": 53,
               "end": 62
             }
           ],
@@ -1017,15 +967,67 @@
           "revealOnWrong": true
         },
         {
+          "id": "q3",
+          "prompt": "난민 수용이 우리 사회에 줄 수 있는 두 효과를 모두 찾으시오.",
+          "answerTexts": [
+            "다양성을 높이고",
+            "역동성을 불어넣는"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 17,
+              "end": 25
+            },
+            {
+              "paragraphId": "p3",
+              "start": 26,
+              "end": 35
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "정부가 난민 관리를 위해 해야 한다고 한 일을 모두 찾으시오.",
+          "answerTexts": [
+            "엄격한 심사 시스템을 구축하고",
+            "교육해야"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 52,
+              "end": 68
+            },
+            {
+              "paragraphId": "p4",
+              "start": 86,
+              "end": 90
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q5",
-          "prompt": "글쓴이가 난민 수용을 통해 이루려는 삶의 방식은 무엇인가요?",
-          "answerText": "공존",
+          "prompt": "난민 수용이 단순한 자선이 아니라 무엇이라고 했는지 찾으시오.",
+          "answerText": "공존을 위한 선택",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 25,
-              "end": 27
+              "end": 34
             }
           ],
           "scoring": {

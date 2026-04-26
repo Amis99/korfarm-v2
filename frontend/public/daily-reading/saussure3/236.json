@@ -587,19 +587,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "남을 도와주거나 살핌은?",
-          "answerText": "배려",
-          "answerMatchMode": "EXACT",
+          "prompt": "여우가 음식을 대접한 그릇과 한 일을 모두 찾으시오.",
+          "answerTexts": [
+            "얕은 접시",
+            "음식을 대접했습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 68,
-              "end": 70
+              "start": 13,
+              "end": 18
             },
             {
-              "paragraphId": "p3",
-              "start": 17,
-              "end": 19
+              "paragraphId": "p1",
+              "start": 20,
+              "end": 30
             }
           ],
           "scoring": {
@@ -611,14 +614,22 @@
         },
         {
           "id": "q2",
-          "prompt": "처해 있는 형편이나 형국은?",
-          "answerText": "처지를",
-          "answerMatchMode": "EXACT",
+          "prompt": "두루미가 음식을 먹지 못한 이유와 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "부리가 긴 두루미",
+            "하나도 먹지 못해"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 70,
-              "end": 73
+              "paragraphId": "p1",
+              "start": 32,
+              "end": 41
+            },
+            {
+              "paragraphId": "p1",
+              "start": 47,
+              "end": 56
             }
           ],
           "scoring": {
@@ -630,14 +641,49 @@
         },
         {
           "id": "q3",
-          "prompt": "친구 사이의 정이나 믿음?",
-          "answerText": "우정의",
-          "answerMatchMode": "EXACT",
+          "prompt": "두루미가 여우에게 음식을 담아 준 그릇과 여우가 먹을 수 없었던 이유를 모두 찾으시오.",
+          "answerTexts": [
+            "호리병",
+            "입구가 좁은 병"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 17,
+              "end": 20
+            },
+            {
+              "paragraphId": "p2",
+              "start": 33,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "우리가 가져야 할 두 마음을 모두 찾으시오.",
+          "answerTexts": [
+            "차이를 인정하고",
+            "배려하는 마음"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 75,
-              "end": 78
+              "start": 8,
+              "end": 16
+            },
+            {
+              "paragraphId": "p3",
+              "start": 17,
+              "end": 24
             }
           ],
           "scoring": {

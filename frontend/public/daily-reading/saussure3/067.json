@@ -557,34 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "윌버가 삼촌네 농장에서 만난 단짝 친구로, 위기에 처한 윌버를 돕기 위해 지혜를 발휘한 거미는?",
-          "answerText": "샬롯",
-          "answerMatchMode": "EXACT",
+          "prompt": "샬롯이 어떤 색의 거미인지 나타내는 말을 지문에서 찾으시오.",
+          "answerText": "회색",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 33,
-              "end": 35
-            },
-            {
-              "paragraphId": "p1",
-              "start": 52,
-              "end": 54
-            },
-            {
-              "paragraphId": "p1",
-              "start": 95,
-              "end": 97
-            },
-            {
-              "paragraphId": "p2",
-              "start": 67,
-              "end": 69
-            },
-            {
-              "paragraphId": "p2",
-              "start": 94,
-              "end": 96
+              "start": 27,
+              "end": 29
             }
           ],
           "scoring": {
@@ -596,24 +576,22 @@
         },
         {
           "id": "q2",
-          "prompt": "샬롯이 윌버를 구하기 위해 밤새도록 정성껏 짜서 글자를 새겨 넣은 도구는 무엇인가요?",
-          "answerText": "거미줄",
-          "answerMatchMode": "EXACT",
+          "prompt": "농장 주인의 계획을 드러내는 두 어구를 모두 찾으시오.",
+          "answerTexts": [
+            "윌버를 잡아",
+            "고기를 만들"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 103,
-              "end": 106
+              "start": 19,
+              "end": 25
             },
             {
-              "paragraphId": "p3",
-              "start": 28,
-              "end": 31
-            },
-            {
-              "paragraphId": "p3",
-              "start": 46,
-              "end": 49
+              "paragraphId": "p2",
+              "start": 26,
+              "end": 32
             }
           ],
           "scoring": {
@@ -625,14 +603,33 @@
         },
         {
           "id": "q3",
-          "prompt": "거미줄에 적힌 신기한 문구를 보고 마을 사람들이 윌버를 일컫게 된 수식어는 무엇인가요?",
-          "answerText": "특별한 돼지",
-          "answerMatchMode": "EXACT",
+          "prompt": "샬롯이 윌버를 반드시 구해주겠다고 한 행동을 나타내는 말을 찾으시오.",
+          "answerText": "약속했습니다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 86,
+              "end": 92
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "거미줄에 적혀 있던 글자를 지문에서 찾으시오.",
+          "answerText": "대단한 돼지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 101,
-              "end": 107
+              "start": 52,
+              "end": 58
             }
           ],
           "scoring": {

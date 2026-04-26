@@ -587,19 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사실이 아닌 꾸민 말은?",
-          "answerText": "거짓",
-          "answerMatchMode": "EXACT",
+          "prompt": "나무꾼이 연못에 빠뜨린 것을 지문에서 찾아 보세요.",
+          "answerText": "빠뜨린 도끼를",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 10,
-              "end": 12
-            },
-            {
-              "paragraphId": "p3",
-              "start": 31,
-              "end": 33
+              "paragraphId": "p1",
+              "start": 9,
+              "end": 16
             }
           ],
           "scoring": {
@@ -611,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "사람의 성격이나 바탕은?",
-          "answerText": "성품이",
-          "answerMatchMode": "EXACT",
+          "prompt": "산신령이 나무꾼에게 보여준 것을 지문에서 찾아 보세요.",
+          "answerText": "금도끼를",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 72,
-              "end": 75
+              "start": 36,
+              "end": 40
             }
           ],
           "scoring": {
@@ -630,14 +625,53 @@
         },
         {
           "id": "q3",
-          "prompt": "굳게 믿고 의지하는 마음?",
-          "answerText": "신뢰를",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 '정직'이 들어간 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "정직한 성품",
+            "정직함",
+            "정직한 태도",
+            "정직한 마음"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 68,
+              "end": 74
+            },
+            {
+              "paragraphId": "p2",
+              "start": 32,
+              "end": 35
+            },
+            {
+              "paragraphId": "p2",
+              "start": 71,
+              "end": 77
+            },
+            {
+              "paragraphId": "p3",
+              "start": 60,
+              "end": 66
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "거짓 없는 삶이 우리를 어떻게 만들어 준다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "더 당당하게",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 74,
-              "end": 77
+              "start": 44,
+              "end": 50
             }
           ],
           "scoring": {

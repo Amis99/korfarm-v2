@@ -992,93 +992,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '상관관'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 7
-            },
-            {
-              "paragraphId": "p2",
-              "start": 46,
-              "end": 49
-            },
-            {
-              "paragraphId": "p2",
-              "start": 223,
-              "end": 226
-            },
-            {
-              "paragraphId": "p4",
-              "start": 3,
-              "end": 6
-            },
-            {
-              "paragraphId": "p4",
-              "start": 184,
-              "end": 187
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '두 현상의 관계 뒤에 숨어 있어 결과에 함께 영향을 미치는 다른 요인'을 가리키는 낱말을 찾으시오",
+          "answerText": "변수",
           "answerMatchMode": "ANY",
-          "answerText": "상관관"
-        },
-        {
-          "id": "q2",
-          "prompt": "지문에서 '인과관'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 6,
-              "end": 9
-            },
-            {
-              "paragraphId": "p2",
-              "start": 10,
-              "end": 13
-            },
-            {
-              "paragraphId": "p2",
-              "start": 72,
-              "end": 75
-            },
-            {
-              "paragraphId": "p3",
-              "start": 19,
-              "end": 22
-            },
-            {
-              "paragraphId": "p4",
-              "start": 9,
-              "end": 12
-            },
-            {
-              "paragraphId": "p4",
-              "start": 190,
-              "end": 193
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "인과관"
-        },
-        {
-          "id": "q3",
-          "prompt": "지문에서 '변수'를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -1087,68 +1003,131 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "지문에서 '상관관계'의 정의에 해당하는 부분을 찾으시오",
+          "answerText": "두 현상이 함께 움직이는 모습",
           "answerMatchMode": "ANY",
-          "answerText": "변수"
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 68
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "지문에서 '인과관계'의 정의에 해당하는 부분을 찾으시오",
+          "answerText": "한 현상이 다른 현상을 실제로 낳는 관계",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 78,
+              "end": 100
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '원인'을 모두 찾으시오.",
+          "prompt": "지문에서 아이스크림 판매와 물놀이 사고가 함께 늘어나는 까닭으로 제시된 공통 조건을 모두 찾으시오",
+          "answerText": "더위 / 휴가 / 물가 방문",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
+              "start": 202,
+              "end": 204
+            },
+            {
+              "paragraphId": "p1",
+              "start": 206,
+              "end": 208
+            },
+            {
+              "paragraphId": "p1",
+              "start": 210,
+              "end": 215
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "지문에서 불이 붙으려면 반드시 있어야 하는 필요조건의 예로 제시된 낱말을 찾으시오",
+          "answerText": "산소",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 159,
+              "end": 161
+            },
+            {
+              "paragraphId": "p3",
+              "start": 170,
+              "end": 172
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 키가 큰 학생일수록 운동을 잘하는 까닭이 될 수 있다고 한 다른 요인을 모두 찾으시오",
+          "answerText": "훈련 시간 / 체력 / 경험",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 170,
+              "end": 175
+            },
+            {
+              "paragraphId": "p2",
               "start": 177,
               "end": 179
             },
             {
-              "paragraphId": "p1",
-              "start": 267,
-              "end": 269
-            },
-            {
-              "paragraphId": "p3",
-              "start": 76,
-              "end": 78
+              "paragraphId": "p2",
+              "start": 181,
+              "end": 183
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "원인"
-        },
-        {
-          "id": "q5",
-          "prompt": "지문에서 '논리'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 33,
-              "end": 35
-            },
-            {
-              "paragraphId": "p1",
-              "start": 243,
-              "end": 245
-            },
-            {
-              "paragraphId": "p4",
-              "start": 235,
-              "end": 237
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "논리"
+          "revealOnWrong": true
         }
       ]
     }

@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "글자 ( )에는 받침이 있습니다.",
-          "answerText": "아래",
-          "answerMatchMode": "EXACT",
+          "prompt": "받침이 어떤 역할을 하는지 지문에서 찾아 보세요.",
+          "answerText": "받침은 글자의 소리를 더 분명하게 만듭니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 41,
-              "end": 43
+              "start": 55,
+              "end": 78
             }
           ],
           "scoring": {
@@ -571,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "받침은 뜻을 ( )하게 해 줘요.",
-          "answerText": "분명",
-          "answerMatchMode": "EXACT",
+          "prompt": "받침이 들어가면 글자 모양이 어떻게 된다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "받침이 들어가면 글자의 모양이 듬직해져요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 69,
-              "end": 71
+              "start": 80,
+              "end": 102
             }
           ],
           "scoring": {
@@ -590,19 +590,48 @@
         },
         {
           "id": "q3",
-          "prompt": "받침 ( )를 찾으며 놀아 보아요.",
-          "answerText": "낱말",
-          "answerMatchMode": "EXACT",
+          "prompt": "받침 하나로 뜻이 달라지는 예시 글자를 지문에서 모두 찾아 보세요.",
+          "answerText": "곰, 공",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 12,
-              "end": 14
+              "paragraphId": "p2",
+              "start": 26,
+              "end": 27
             },
             {
               "paragraphId": "p2",
-              "start": 110,
-              "end": 112
+              "start": 31,
+              "end": 32
+            },
+            {
+              "paragraphId": "p2",
+              "start": 79,
+              "end": 80
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "받침이 들어간 글자 예시로 든 두 글자를 지문에서 모두 찾아 보세요.",
+          "answerText": "산, 강",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 26,
+              "end": 27
+            },
+            {
+              "paragraphId": "p1",
+              "start": 32,
+              "end": 33
             }
           ],
           "scoring": {

@@ -474,35 +474,11 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "푸른 물이 가득한?",
-          "answerText": "바다",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 이 편지를 보내고 있는 친구의 이름은 무엇인가요",
+          "answerText": "지우",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 25,
-              "end": 27
-            },
-            {
-              "paragraphId": "p1",
-              "start": 52,
-              "end": 54
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 50,
-              "end": 52
-            },
-            {
-              "paragraphId": "p2",
-              "start": 96,
-              "end": 98
-            }
+            {"paragraphId": "p1", "start": 4, "end": 6}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -513,15 +489,15 @@
         },
         {
           "id": "q2",
-          "prompt": "철썩이는 무엇 소리인가요?",
-          "answerText": "파도",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 방학 동안 머물고 있는, 할머니 댁이 있는 마을의 종류는 무엇인가요",
+          "answerText": "바다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 110,
-              "end": 112
-            }
+            {"paragraphId": "p1", "start": 25, "end": 27},
+            {"paragraphId": "p1", "start": 52, "end": 54},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 50, "end": 52},
+            {"paragraphId": "p2", "start": 96, "end": 98}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -532,25 +508,27 @@
         },
         {
           "id": "q3",
-          "prompt": "학교 쉬는 기간?",
-          "answerText": "방학",
-          "answerMatchMode": "EXACT",
+          "prompt": "모래사장에 커다랗게 쌓았지만 파도가 밀려와 금방 무너졌다고 한 것은 무엇인가요",
+          "answerText": "모래성",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 37,
-              "end": 39
-            },
-            {
-              "paragraphId": "p2",
-              "start": 76,
-              "end": 78
-            },
-            {
-              "paragraphId": "p2",
-              "start": 125,
-              "end": 127
-            }
+            {"paragraphId": "p1", "start": 100, "end": 103},
+            {"paragraphId": "p1", "start": 130, "end": 133}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "방학이 끝나고 학교에서 만나면 친구에게 선물로 주려는, 바다에서 주운 반짝이는 것은 무엇인가요",
+          "answerText": "돌멩이",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 109, "end": 112}
           ],
           "scoring": {
             "correctDeltaSec": 10,

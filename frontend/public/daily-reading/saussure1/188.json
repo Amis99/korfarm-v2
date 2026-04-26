@@ -474,65 +474,68 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "상자 속 귀한 물건?",
-          "answerText": "보물",
+          "prompt": "보물 상자를 발견하고 모험을 마친, 이 이야기 주인공 소년의 이름은 무엇인가요",
+          "answerText": "민수",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 32,
-              "end": 34
-            },
-            {
-              "paragraphId": "p2",
-              "start": 20,
-              "end": 22
-            }
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p1", "start": 98, "end": 100},
+            {"paragraphId": "p2", "start": 12, "end": 14},
+            {"paragraphId": "p2", "start": 106, "end": 108},
+            {"paragraphId": "p2", "start": 143, "end": 145}
           ],
           "scoring": {
             "correctDeltaSec": 10,
             "wrongDeltaSec": -5,
             "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "반짝 빛나는 무엇인가요?",
-          "answerText": "보석",
+          "prompt": "민수가 숲의 한가운데 커다란 바위 아래에서 발견한, 보물이 가득 들어 있던 것은 무엇인가요",
+          "answerText": "상자",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 123,
-              "end": 125
-            }
+            {"paragraphId": "p1", "start": 35, "end": 37},
+            {"paragraphId": "p1", "start": 47, "end": 49}
           ],
           "scoring": {
             "correctDeltaSec": 10,
             "wrongDeltaSec": -5,
             "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지난 일의 무엇인가요?",
-          "answerText": "추억",
+          "prompt": "보물 상자 안에 가득 들어 있던, 바다 냄새가 나는 예쁜 물건은 무엇인가요",
+          "answerText": "조개껍데기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 83,
-              "end": 85
-            }
+            {"paragraphId": "p1", "start": 73, "end": 78}
           ],
           "scoring": {
             "correctDeltaSec": 10,
             "wrongDeltaSec": -5,
             "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "할머니께서 민수의 용기를 칭찬하며 한 사발 대접해 주신 시원한 음료는 무엇인가요",
+          "answerText": "식혜",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 123, "end": 125}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

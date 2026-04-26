@@ -557,103 +557,101 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "최근 유행에 맞추어 빠르고 싸게 만들어 낸 후, 금방 버려져 심각한 환경 오염과 쓰레기 문제를 일으키는 옷은?",
-          "answerText": "패스트 패션",
-          "answerMatchMode": "EXACT",
+          "prompt": "패스트 패션이 무엇인지 설명한 부분을 지문에서 찾으시오.",
+          "answerText": "유행에 맞추어 싸게 만들고 금방 버리는 옷",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 66,
-              "end": 72
+              "start": 41,
+              "end": 64
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "버려진 옷 쓰레기가 썩을 때나 옷을 공장에서 처음 만들 때 사용되어 맑은 물과 공기를 심하게 더럽히는 원인은?",
-          "answerText": "화학 물질",
-          "answerMatchMode": "EXACT",
+          "prompt": "패스트 패션 옷들이 자연에 주는 나쁜 영향을 지문에서 찾으시오.",
+          "answerText": "금방 낡아 쓰레기가 되며 자연을 병들게 합니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 24,
-              "end": 29
+              "paragraphId": "p1",
+              "start": 88,
+              "end": 113
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "우리가 환경과 지구를 소중히 보호하기 위해 함부로 버리지 말고, 작아지면 물려주거나 예쁘게 고쳐 입어야 하는 것은?",
-          "answerText": "옷",
-          "answerMatchMode": "EXACT",
+          "prompt": "옷을 만들거나 버릴 때 생기는 환경 문제를 모두 찾으시오.",
+          "answerTexts": [
+            "무척 많은 물과 나쁜 화학 물질이 사용됩니다",
+            "수백 년이라는 엄청난 시간이 걸립니다",
+            "공기를 더럽히는 원인"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 14,
-              "end": 15
-            },
-            {
-              "paragraphId": "p1",
-              "start": 63,
-              "end": 64
-            },
-            {
-              "paragraphId": "p1",
-              "start": 84,
-              "end": 85
+              "paragraphId": "p2",
+              "start": 12,
+              "end": 36
             },
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 1
+              "start": 56,
+              "end": 76
             },
             {
               "paragraphId": "p2",
-              "start": 46,
-              "end": 47
-            },
-            {
-              "paragraphId": "p2",
-              "start": 85,
-              "end": 86
-            },
-            {
-              "paragraphId": "p3",
-              "start": 10,
-              "end": 11
-            },
-            {
-              "paragraphId": "p3",
-              "start": 41,
-              "end": 42
-            },
-            {
-              "paragraphId": "p3",
-              "start": 58,
-              "end": 59
-            },
-            {
-              "paragraphId": "p3",
-              "start": 84,
-              "end": 85
+              "start": 101,
+              "end": 112
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "환경을 보호하기 위해 옷을 어떻게 해야 하는지 모두 찾으시오.",
+          "answerTexts": [
+            "옷을 쉽게 사거나 함부로 버리지 말아야 합니다",
+            "작아진 옷은 동생에게 물려주고",
+            "찢어진 옷은 예쁘게 고쳐 입는"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 10,
+              "end": 35
+            },
+            {
+              "paragraphId": "p3",
+              "start": 37,
+              "end": 53
+            },
+            {
+              "paragraphId": "p3",
+              "start": 54,
+              "end": 70
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         }

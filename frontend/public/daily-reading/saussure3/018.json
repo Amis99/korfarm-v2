@@ -557,49 +557,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "미국 캔자스 초원에 살던 주인공으로, 어느 날 회오리바람에 집이 휩쓸려 먼 곳으로 날아간 소녀는?",
-          "answerText": "도로시",
-          "answerMatchMode": "EXACT",
+          "prompt": "도로시가 함께 지낸 강아지의 이름을 지문에서 찾으시오.",
+          "answerText": "토토",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 11,
-              "end": 14
+              "start": 20,
+              "end": 22
             },
             {
               "paragraphId": "p1",
-              "start": 54,
-              "end": 57
-            },
-            {
-              "paragraphId": "p2",
-              "start": 11,
-              "end": 14
-            },
-            {
-              "paragraphId": "p2",
-              "start": 41,
-              "end": 44
-            },
-            {
-              "paragraphId": "p2",
-              "start": 85,
-              "end": 88
-            },
-            {
-              "paragraphId": "p3",
-              "start": 8,
-              "end": 11
-            },
-            {
-              "paragraphId": "p3",
-              "start": 49,
-              "end": 52
-            },
-            {
-              "paragraphId": "p3",
-              "start": 79,
-              "end": 82
+              "start": 59,
+              "end": 61
             }
           ],
           "scoring": {
@@ -611,14 +581,14 @@
         },
         {
           "id": "q2",
-          "prompt": "도로시의 집이 낯선 나라의 땅에 쿵 떨어질 때, 무거운 집에 깔려서 죽고 만 나쁜 인물은?",
-          "answerText": "동쪽 마녀",
-          "answerMatchMode": "EXACT",
+          "prompt": "어느 날 불어와 도로시와 토토가 있는 집을 집어삼킨 것을 지문에서 찾으시오.",
+          "answerText": "거대한 회오리바람",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 55,
-              "end": 60
+              "paragraphId": "p1",
+              "start": 39,
+              "end": 48
             }
           ],
           "scoring": {
@@ -630,14 +600,46 @@
         },
         {
           "id": "q3",
-          "prompt": "캔자스로 다시 돌아가는 방법을 알기 위해, 도로시가 노란 벽돌 길을 따라 찾아 나선 위대한 인물은?",
-          "answerText": "오즈의 마법사",
-          "answerMatchMode": "EXACT",
+          "prompt": "도로시에게 감사의 표시로 은구두를 선물한 인물을 지문에서 찾으시오.",
+          "answerText": "북쪽 마녀",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 78,
+              "end": 83
+            },
+            {
+              "paragraphId": "p3",
+              "start": 42,
+              "end": 47
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "도로시가 오즈의 마법사를 찾아가려고 따라간 길과 향한 장소를 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "노란 벽돌 길",
+            "에메랄드 시"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 55,
-              "end": 62
+              "start": 84,
+              "end": 91
+            },
+            {
+              "paragraphId": "p3",
+              "start": 96,
+              "end": 102
             }
           ],
           "scoring": {

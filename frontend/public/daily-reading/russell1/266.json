@@ -1074,123 +1074,73 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '공용'을 모두 찾으시오.",
+          "prompt": "지문에서 표준어가 정해 두는 두 가지 기준을 모두 찾으시오",
+          "answerText": "발음 / 어휘",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 101,
-              "end": 103
-            },
-            {
-              "paragraphId": "p4",
-              "start": 121,
-              "end": 123
-            }
+            {"paragraphId": "p1", "start": 109, "end": 111},
+            {"paragraphId": "p1", "start": 113, "end": 115},
+            {"paragraphId": "p4", "start": 10, "end": 12},
+            {"paragraphId": "p4", "start": 14, "end": 16}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "공용"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '짜임'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 70,
-              "end": 72
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 표준어가 어색하다고 곧 단정할 수 없을 때 가리키는 부정 표현을 찾으시오",
+          "answerText": "비표준어",
           "answerMatchMode": "ANY",
-          "answerText": "짜임"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 175, "end": 179}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '통일성'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 164,
-              "end": 167
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 맞춤법의 정의를 직접 풀이한 표현을 찾으시오",
+          "answerText": "말을 적을 때 어떤 형태로 적어야 하는지 정해 주는 규범",
           "answerMatchMode": "ANY",
-          "answerText": "통일성"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 52, "end": 83}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '공통'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 73,
-              "end": 75
-            },
-            {
-              "paragraphId": "p4",
-              "start": 18,
-              "end": 20
-            },
-            {
-              "paragraphId": "p4",
-              "start": 193,
-              "end": 195
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 표준어의 정의를 직접 풀이한 표현을 찾으시오",
+          "answerText": "공용으로 삼는 발음과 어휘의 기준을 정한 것",
           "answerMatchMode": "ANY",
-          "answerText": "공통"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 101, "end": 125}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '판단'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 207,
-              "end": 209
-            },
-            {
-              "paragraphId": "p3",
-              "start": 101,
-              "end": 103
-            },
-            {
-              "paragraphId": "p4",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p5",
-              "start": 132,
-              "end": 134
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 맞춤법이 소리와 다르더라도 같은 형태를 유지해 적는 까닭을 풀이한 표현을 찾으시오",
+          "answerText": "낱말의 짜임과 뜻을 더 잘 드러내기 위해서",
           "answerMatchMode": "ANY",
-          "answerText": "판단"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 66, "end": 89}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 표준어가 특히 요구되는 두 가지 사용 영역을 모두 찾으시오",
+          "answerText": "공적인 글쓰기 / 교육",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 63, "end": 70},
+            {"paragraphId": "p4", "start": 72, "end": 74}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

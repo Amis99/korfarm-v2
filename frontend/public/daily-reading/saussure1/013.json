@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "글자 ( )은 같아도 뜻이 다릅니다.",
-          "answerText": "모양",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리말의 어떤 특징을 설명한 부분을 지문에서 찾아 보세요.",
+          "answerText": "우리말에는 소리는 같지만 뜻이 다른 말이 있어요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 59,
-              "end": 61
+              "start": 0,
+              "end": 26
             }
           ],
           "scoring": {
@@ -571,19 +571,19 @@
         },
         {
           "id": "q2",
-          "prompt": "하늘에서 내리는 ( )도 있어요.",
-          "answerText": "눈",
-          "answerMatchMode": "EXACT",
+          "prompt": "1문단에서 '배'의 두 가지 뜻 예시를 모두 찾아 보세요.",
+          "answerText": "먹는 '배', 바다에 떠 있는 '배'",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 5,
-              "end": 6
+              "paragraphId": "p1",
+              "start": 28,
+              "end": 34
             },
             {
-              "paragraphId": "p2",
-              "start": 19,
-              "end": 20
+              "paragraphId": "p1",
+              "start": 36,
+              "end": 48
             }
           ],
           "scoring": {
@@ -595,14 +595,38 @@
         },
         {
           "id": "q3",
-          "prompt": "국어 ( )을 보며 공부해요.",
-          "answerText": "사전",
-          "answerMatchMode": "EXACT",
+          "prompt": "정확한 뜻을 알려면 어떻게 해야 한다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "앞뒤 문장을 잘 읽어야 정확한 뜻을 압니다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 80,
+              "end": 103
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "2문단에서 '눈'의 두 가지 뜻 예시를 모두 찾아 보세요.",
+          "answerText": "사람의 '눈', 하늘에서 내리는 '눈'",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 86,
-              "end": 88
+              "start": 0,
+              "end": 7
+            },
+            {
+              "paragraphId": "p2",
+              "start": 9,
+              "end": 21
             }
           ],
           "scoring": {

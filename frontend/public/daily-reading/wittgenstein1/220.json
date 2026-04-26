@@ -571,12 +571,37 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"동형암호의 부트스트래핑과 연산 지속성\"에 해당하는 부분은 어디인가요?",
+          "prompt": "데이터를 복호화하지 않은 채 일정한 연산을 수행하게 하는 암호 방식을 가리키는 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 171
+              "end": 4
+            },
+            {
+              "paragraphId": "p2",
+              "start": 4,
+              "end": 8
+            },
+            {
+              "paragraphId": "p2",
+              "start": 103,
+              "end": 107
+            },
+            {
+              "paragraphId": "p3",
+              "start": 142,
+              "end": 146
+            },
+            {
+              "paragraphId": "p6",
+              "start": 3,
+              "end": 7
+            },
+            {
+              "paragraphId": "p6",
+              "start": 120,
+              "end": 124
             }
           ],
           "scoring": {
@@ -585,16 +610,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "동형암호는 데이터를 복호화하지 않은 채로 일정한 연산을 수행할 수 있게 하는 암호 방식이다. 이 방식이 주목받는 이유는 원격 서버에 데이터를 맡겨 계산하더라도 평문을 직접 드러내지 않을 수 있기 때문이다. 즉 계산을 위해 비밀을 한 번 열어 보여 주어야 한다는 기존 한계를 줄이려는 기술이라고 할 수 있다."
+          "answerText": "동형암호"
         },
         {
           "id": "q2",
-          "prompt": "\"동형암호의 부트스트래핑과 연산 지속성\"에 해당하는 부분은 어디인가요?",
+          "prompt": "동형암호가 주목받는 이유를 설명한 부분을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 167
+              "paragraphId": "p1",
+              "start": 67,
+              "end": 111
             }
           ],
           "scoring": {
@@ -603,15 +628,15 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그러나 동형암호에서 암호문은 연산을 거칠수록 내부 잡음이 누적된다. 덧셈이나 곱셈을 반복하면 잡음이 커져 어느 순간에는 원래 의도한 결과를 정확히 복원할 수 없게 된다. 그래서 초기의 동형암호는 일부 연산만 제한적으로 처리할 수 있었고, 복잡한 계산을 장시간 이어 가는 데에는 뚜렷한 한계가 있었다."
+          "answerText": "원격 서버에 데이터를 맡겨 계산하더라도 평문을 직접 드러내지 않을 수 있기 때문"
         },
         {
           "id": "q3",
-          "prompt": "이 문제를 해결하기 위해 무엇?",
+          "prompt": "동형암호에서 연산을 거칠수록 암호문에 누적되는 것을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 14,
+              "paragraphId": "p2",
+              "start": 25,
               "end": 30
             }
           ],
@@ -621,16 +646,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "등장한 절차가 부트스트래핑이다"
+          "answerText": "내부 잡음"
         },
         {
           "id": "q4",
-          "prompt": "\"동형암호의 부트스트래핑과 연산 지속성\"에 해당하는 부분은 어디인가요?",
+          "prompt": "덧셈이나 곱셈을 반복하면 잡음에 어떤 변화가 생기는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 199
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 58
             }
           ],
           "scoring": {
@@ -639,16 +664,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "부트스트래핑은 흔히 '암호문을 새로 고쳐 쓰는 연산'으로 비유된다. 계산 도중 낡아진 암호문을 그대로 두면 잡음 때문에 이후 연산이 무너질 수 있지만, 적절한 시점에 부트스트래핑을 수행하면 남은 연산을 이어 갈 여유가 생긴다. 그래서 연산 지속성은 단순히 암호 알고리즘의 안전성만이 아니라, 언제 어떤 비용으로 부트스트래핑을 실행할 수 있는가와도 연결된다."
+          "answerText": "잡음이 커져"
         },
         {
           "id": "q5",
-          "prompt": "\"동형암호의 부트스트래핑과 연산 지속성\"에 해당하는 부분은 어디인가요?",
+          "prompt": "부트스트래핑의 정의를 설명한 문장을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 179
+              "paragraphId": "p3",
+              "start": 40,
+              "end": 84
             }
           ],
           "scoring": {
@@ -657,16 +682,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "문제는 부트스트래핑이 매우 무거운 계산이라는 점이다. 암호문 하나를 다시 정비하는 데에도 시간이 오래 걸리고, 메모리와 연산 자원이 많이 든다. 따라서 실제 응용에서는 무조건 자주 부트스트래핑을 하는 것이 아니라, 필요한 최소 횟수로 연산 깊이를 관리하거나 암호문 구조를 조정해 잡음 증가를 늦추는 전략이 함께 요구된다."
+          "answerText": "이미 잡음이 커진 암호문을 다시 정리해, 잡음이 작은 새 암호문으로 바꾸는 과정"
         },
         {
           "id": "q6",
-          "prompt": "\"동형암호의 부트스트래핑과 연산 지속성\"에 해당하는 부분은 어디인가요?",
+          "prompt": "부트스트래핑이 흔히 무엇으로 비유되는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 176
+              "paragraphId": "p4",
+              "start": 11,
+              "end": 29
             }
           ],
           "scoring": {
@@ -675,7 +700,59 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 동형암호의 실용성은 '얼마나 안전한가'만으로 정해지지 않는다. 암호문이 얼마나 오래 연산을 견딜 수 있는지, 그리고 그 과정에서 부트스트래핑을 얼마나 효율적으로 수행할 수 있는지가 함께 중요하다. 이런 이유로 동형암호 연구는 보안 원리 자체뿐 아니라 잡음 관리와 연산 지속성을 높이는 방법을 함께 다루게 된다."
+          "answerText": "'암호문을 새로 고쳐 쓰는 연산'"
+        },
+        {
+          "id": "q7",
+          "prompt": "부트스트래핑이 무거운 계산이라는 점을 보여 주는 두 비용 양상을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 50,
+              "end": 60
+            },
+            {
+              "paragraphId": "p5",
+              "start": 62,
+              "end": 79
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "시간이 오래 걸리고",
+            "메모리와 연산 자원이 많이 든다"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "동형암호의 실용성에서 안전성 외에 함께 중요하다고 한 두 기준을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 38,
+              "end": 62
+            },
+            {
+              "paragraphId": "p6",
+              "start": 75,
+              "end": 102
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "암호문이 얼마나 오래 연산을 견딜 수 있는지",
+            "부트스트래핑을 얼마나 효율적으로 수행할 수 있는지"
+          ]
         }
       ]
     }

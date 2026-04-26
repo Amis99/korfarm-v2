@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "prompt": "조화옹이 낙은암 깊은 골을 누구를 위해 만들었다고 했는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 102
+              "start": 29,
+              "end": 34
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "헌사한 조화옹이 산천을 빚어낼 때 낙은암 깊은 골을 날 위하여 만드시니 봉우리도 빼어나고 경치도 뛰어나다 어와 주인옹이 명리(名利)에 뜻이 없어 진세(塵世)를 하직하고 산속에 깃들이니"
+          "answerText": "날 위하여"
         },
         {
           "id": "q2",
-          "prompt": "둘째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "prompt": "명리(名利)에 뜻이 없다고 한 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 95
+              "paragraphId": "p1",
+              "start": 62,
+              "end": 65
             }
           ],
           "scoring": {
@@ -603,16 +603,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "내 생애 담백한들 내 분수이니 관계하랴 농환재 맑은 창가에서 주역(周易)을 점검하니 소장진퇴(消長進退)는 성인의 밝은 가르침이요 낙천지명(樂天知命)은 성인의 깊은 경계로다"
+          "answerText": "주인옹"
         },
         {
           "id": "q3",
-          "prompt": "셋째 연은 어떤 장면의 변화나 분위기를 보여 주는가?",
+          "prompt": "성인의 밝은 가르침과 깊은 경계로 제시된 말을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 47,
+              "end": 57
+            },
+            {
+              "paragraphId": "p2",
+              "start": 72,
+              "end": 82
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "소장진퇴(消長進退)",
+            "낙천지명(樂天知命)"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "부귀를 자랑하지 말라고 부르는 대상을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 89
+              "end": 13
             }
           ],
           "scoring": {
@@ -621,15 +647,15 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "주육(酒肉)에 빠진 분들 부귀를 자랑 마오 여름날 더운 길의 홍진간(紅塵間)에 분주하며 겨울밤 추운 새벽에 대루원에 서성이니 자네는 좋다하나 내 보기엔 괴롭구나"
+          "answerText": "주육(酒肉)에 빠진 분들"
         },
         {
-          "id": "q4",
-          "prompt": "넷째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "id": "q5",
+          "prompt": "편안한 거동을 강조하는 의문형 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
+              "start": 75,
               "end": 84
             }
           ],
@@ -639,15 +665,33 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "어저 내 신세를 내 이르니 자네 듣소 삼복에 날 더우면 백우선 높이 들고 바람 부는 창가에 기대 다리 펴고 누웠으니 편안한 이 거동을 그 누가 겨룰쏘냐"
+          "answerText": "그 누가 겨룰쏘냐"
         },
         {
-          "id": "q5",
-          "prompt": "다섯째 연은 어떤 장면의 변화나 분위기를 보여 주는가?",
+          "id": "q6",
+          "prompt": "고단함이 없음을 드러내는 의문형 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
+              "start": 54,
+              "end": 63
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "고단함이 있을쏘냐"
+        },
+        {
+          "id": "q7",
+          "prompt": "삼공(三公)이 귀하다고 해도 바꾸지 않겠다는 태도를 드러낸 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 79,
               "end": 89
             }
           ],
@@ -657,16 +701,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "동지 밤눈 온 후에 더운 방에 이불 덮고 목침을 돋워 베고 해 돋도록 잠을 자니 편함도 편할시고 고단함이 있을쏘냐 삼공(三公)이 귀하다 하나 나는 아니 바꾸리라"
+          "answerText": "나는 아니 바꾸리라"
         },
         {
-          "id": "q6",
-          "prompt": "마지막 연은 앞선 흐름이 어디에 이르고 있음을 보여 주는가?",
+          "id": "q8",
+          "prompt": "보리밥과 헌 베옷에 대비해 언급한 귀한 음식과 옷감을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 61
+              "start": 29,
+              "end": 32
+            },
+            {
+              "paragraphId": "p6",
+              "start": 50,
+              "end": 52
             }
           ],
           "scoring": {
@@ -674,8 +723,11 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "값을 쳐 비기려면 만금인들 당할쏜가 보리밥 맛들이니 팔진미를 부러워하며 헌 베옷 알맞으니 비단 가져 무엇 할꼬"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "팔진미",
+            "비단"
+          ]
         }
       ]
     }

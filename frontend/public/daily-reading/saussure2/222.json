@@ -559,14 +559,29 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "장영실은 신분이 낮았지만 이것이 아주 뛰어나고 지혜로웠답니다. 이것은 무엇일까요?",
-          "answerText": "손재주",
-          "answerMatchMode": "EXACT",
+          "prompt": "조선 시대에 훌륭한 발명가로 소개된 사람은 누구인지 지문에서 찾으시오.",
+          "answerText": "장영실",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 43,
-              "end": 46
+              "start": 7,
+              "end": 10
+            },
+            {
+              "paragraphId": "p1",
+              "start": 29,
+              "end": 32
+            },
+            {
+              "paragraphId": "p1",
+              "start": 71,
+              "end": 74
+            },
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 3
             }
           ],
           "scoring": {
@@ -578,19 +593,14 @@
         },
         {
           "id": "q2",
-          "prompt": "옛날에는 비가 얼마나 내렸는지 정확히 아는 것이 이것을 짓는 데 무척 중요했어요. 이것은 무엇일까요?",
-          "answerText": "농사",
-          "answerMatchMode": "EXACT",
+          "prompt": "측우기 덕분에 누가 농사를 훨씬 더 잘 지을 수 있게 되었는지 지문에서 찾으시오.",
+          "answerText": "백성들은",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 27,
-              "end": 29
-            },
-            {
               "paragraphId": "p3",
-              "start": 103,
-              "end": 105
+              "start": 98,
+              "end": 102
             }
           ],
           "scoring": {
@@ -602,9 +612,33 @@
         },
         {
           "id": "q3",
-          "prompt": "장영실은 세종대왕의 뜻을 받들어 비의 양을 정확히 재는 이것을 발명했어요. 이것은 무엇일까요?",
+          "prompt": "옛날에 비가 얼마나 내렸는지 정확히 아는 것이 무엇을 짓는 데 중요했는지 지문에서 찾으시오.",
+          "answerText": "농사를",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 30
+            },
+            {
+              "paragraphId": "p3",
+              "start": 103,
+              "end": 106
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "장영실이 세종대왕의 뜻을 받들어 발명한 기구가 무엇인지 지문에서 찾으시오.",
           "answerText": "측우기",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",

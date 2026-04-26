@@ -914,7 +914,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사건이 이어지는 순서를 가장 잘 보여 주는 흐름은 무엇인가요?",
+          "prompt": "사건들은 대개 무엇의 흐름에 따라 순서대로 일어난다고 했나요?",
           "answerText": "시간의 흐름",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -937,14 +937,34 @@
         },
         {
           "id": "q2",
-          "prompt": "사건 순서를 알 수 있게 도와주는 말은 무엇인가요?",
-          "answerText": "이어주는 말",
-          "answerMatchMode": "ANY",
+          "prompt": "사건의 전개 과정을 명확히 보여 주는 이어주는 말 네 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "처음에",
+            "그다음에",
+            "그러고 나서",
+            "마지막으로"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 21,
-              "end": 27
+              "start": 40,
+              "end": 43
+            },
+            {
+              "paragraphId": "p2",
+              "start": 47,
+              "end": 51
+            },
+            {
+              "paragraphId": "p2",
+              "start": 55,
+              "end": 61
+            },
+            {
+              "paragraphId": "p2",
+              "start": 65,
+              "end": 70
             }
           ],
           "scoring": {
@@ -955,14 +975,14 @@
         },
         {
           "id": "q3",
-          "prompt": "사건을 깊이 읽으려면 함께 살펴야 할 관계는 무엇인가요?",
-          "answerText": "원인과 결과의 관계",
+          "prompt": "이어주는 단어들은 앞뒤 문장을 무엇처럼 연결한다고 했나요?",
+          "answerText": "고리처럼",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 13,
-              "end": 23
+              "paragraphId": "p2",
+              "start": 112,
+              "end": 116
             }
           ],
           "scoring": {
@@ -973,14 +993,22 @@
         },
         {
           "id": "q4",
-          "prompt": "인과 관계를 파악하면 더 깊이 읽어낼 수 있는 것은 무엇인가요?",
-          "answerText": "글쓴이의 의도",
-          "answerMatchMode": "ANY",
+          "prompt": "이야기의 맥락은 어떤 두 내용을 연결하면 완성된다고 했나요? 모두 찾으시오.",
+          "answerTexts": [
+            "어떤 사건이 왜 일어났는지",
+            "그로 인해 어떤 변화가 생겼는지"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 141,
-              "end": 148
+              "start": 38,
+              "end": 52
+            },
+            {
+              "paragraphId": "p3",
+              "start": 54,
+              "end": 71
             }
           ],
           "scoring": {
@@ -991,14 +1019,14 @@
         },
         {
           "id": "q5",
-          "prompt": "사건 순서를 정리하는 힘이 나중에 도움이 되는 때는 언제인가요?",
-          "answerText": "글을 쓰거나 발표할 때",
+          "prompt": "사건의 순서를 요약하며 읽는 훈련은 무엇을 기르는 데 효과적인가요?",
+          "answerText": "사고력",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 86,
-              "end": 98
+              "start": 20,
+              "end": 23
             }
           ],
           "scoring": {

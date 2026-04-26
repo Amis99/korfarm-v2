@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 회의의 출발 문제를 어떻게 제시하는가?",
+          "prompt": "회의를 하게 된 직접적인 이유는 무엇인가? 해당 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 248
+              "start": 81,
+              "end": 101
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "민재: “내일 동아리 발표회 순서를 다시 맞춰 봐야 할 것 같아. 원래는 제가 바로 첫 순서 공지를 하고 지윤이 발표로 넘어가기로 했는데, 앞에 영상 재생 시간이 생각보다 길어졌거든.” 지윤: “그럼 제 발표 도입이 너무 늦어지지 않을까요? 저는 첫 장면 설명이 중요한데, 집중력이 떨어진 뒤에 시작하면 반응이 약할까 봐 걱정돼요.” 민재: “그 부분 알아. 그래서 오늘은 사회 멘트를 줄일지, 발표 순서를 조금 바꿀지 결정하려고 모인 거야.”"
+          "answerText": "영상 재생 시간이 생각보다 길어졌거든"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 제안이나 우려를 어떤 이유와 함께 내놓는가?",
+          "prompt": "지윤이 발표 도입이 늦어질 때 걱정한 이유는 무엇인가? 해당 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 237
+              "paragraphId": "p1",
+              "start": 153,
+              "end": 179
             }
           ],
           "scoring": {
@@ -603,15 +603,41 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "서연: “사회자 입장에서는 관객이 발표 목적을 먼저 알아야 질문도 잘 나올 것 같아요. 그런데 멘트가 길면 발표 시간이 줄어들겠죠.” 지윤: “저는 사회 멘트를 완전히 빼기보다 한두 문장으로만 남기면 좋겠어요. 저희 동아리 활동이 단순 전시가 아니라 실험 결과 발표라는 점은 처음에 짚어 줘야 하니까요.” 민재: “좋아, 그러면 소개는 남기되 세부 활동 설명은 내가 하지 않고 발표자가 직접 이어받는 방식으로 연결해 보자.”"
+          "answerText": "집중력이 떨어진 뒤에 시작하면 반응이 약할까 봐"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 논의를 어떤 대안이나 조정안으로 이어 가는가?",
+          "prompt": "서연이 사회 멘트와 관련해 함께 고려한 점은 무엇인가? 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
+              "paragraphId": "p2",
+              "start": 15,
+              "end": 43
+            },
+            {
+              "paragraphId": "p2",
+              "start": 53,
+              "end": 72
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "관객이 발표 목적을 먼저 알아야 질문도 잘 나올 것",
+            "멘트가 길면 발표 시간이 줄어들겠죠"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "사회 멘트와 발표자 설명을 연결하는 방식은 무엇인가? 해당 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 184,
               "end": 226
             }
           ],
@@ -621,34 +647,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "현우: “질의응답도 미리 나눠야 해요. 작년에는 질문이 한 사람에게 몰려서 답변 시간이 길어졌잖아요.” 지윤: “맞아요. 실험 과정 질문은 제가 답하고, 예산이나 준비 과정은 현우가 답하는 게 더 자연스러워요.” 민재: “그럼 저는 질문을 받은 뒤 바로 사람을 지정하진 않고, 먼저 질문을 짧게 정리해서 ‘이건 실험 방법에 대한 질문이라 지윤이 답하겠습니다.’처럼 넘길게. 그래야 흐름이 덜 끊길 거야.”"
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단은 예상 질문이나 진행 기준을 어떻게 준비하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 225
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "서연: “혹시 질문이 너무 길어지면 사회자가 끊어도 되나요?” 민재: “아예 끊기보다 요지를 다시 말해 주는 쪽이 좋겠어. ‘정리하면 이런 뜻으로 이해해도 될까요?’ 하고 확인한 뒤 발표자에게 넘기면 덜 공격적으로 들릴 거야.” 지윤: “그 표현 좋네요. 또 질문이 두 개 섞여 있으면 하나씩 나눠서 받는다고 먼저 말해 주세요. 제가 한꺼번에 답하려고 하면 설명이 길어져서 핵심이 흐려질 수 있거든요.”"
+          "answerText": "소개는 남기되 세부 활동 설명은 내가 하지 않고 발표자가 직접 이어받는 방식"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 세부 운영 방식이나 보완 이유를 어떻게 구체화하는가?",
+          "prompt": "질의응답에서 지윤과 현우가 맡기로 한 질문 범위는 무엇인가? 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 250
+              "paragraphId": "p3",
+              "start": 68,
+              "end": 84
+            },
+            {
+              "paragraphId": "p3",
+              "start": 86,
+              "end": 107
             }
           ],
           "scoring": {
@@ -656,17 +669,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "현우: “발표 순서 자체는 그대로 두고, 마지막 소감 부분만 줄이는 건 어때요? 관객은 결과와 의미를 먼저 듣고 싶어 하지, 준비하면서 힘들었던 점까지 길게 듣고 싶어 하진 않을 수도 있어요.” 지윤: “그건 맞는데, 소감 부분을 너무 줄이면 왜 이 주제를 택했는지가 약해질 것 같아요. 대신 사례 하나를 빼고 결론을 더 짧게 말하겠습니다.” 민재: “좋아. 그럼 사회 순서는 유지하고, 발표 안에서 사례를 줄여 시간을 확보하는 쪽으로 정리하자.”"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "실험 과정 질문은 제가 답하고",
+            "예산이나 준비 과정은 현우가 답하는 게"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 최종 합의를 어떤 실행 계획으로 정리하는가?",
+          "prompt": "질문이 너무 길어질 때 민재가 좋다고 한 처리 방식은 무엇인가? 해당 어구를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 244
+              "paragraphId": "p4",
+              "start": 48,
+              "end": 62
             }
           ],
           "scoring": {
@@ -675,7 +691,57 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "민재: “최종적으로 정리할게. 내가 첫 멘트에서 발표 취지와 순서만 짧게 안내하고, 지윤이 발표를 시작한다. 질의응답 때는 질문을 내가 한 번 정리한 뒤 실험은 지윤, 준비 과정과 운영은 현우가 맡는다. 질문이 길어지면 요지만 재확인하고, 두 가지가 섞이면 나눠서 답한다.” 지윤: “네, 저는 결론 부분을 다듬어서 발표 시간을 1분 정도 줄여 볼게요.” 서연: “저는 옆에서 시간 체크하고, 예상 질문 두세 개는 종이에 적어 둘게요.”"
+          "answerText": "요지를 다시 말해 주는 쪽"
+        },
+        {
+          "id": "q7",
+          "prompt": "두 질문이 섞여 있을 때 지윤이 부탁한 진행 방식은 무엇인가? 해당 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 160,
+              "end": 182
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "하나씩 나눠서 받는다고 먼저 말해 주세요"
+        },
+        {
+          "id": "q8",
+          "prompt": "최종 합의에서 각자가 맡은 실행 과제는 무엇인가? 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 27,
+              "end": 43
+            },
+            {
+              "paragraphId": "p6",
+              "start": 165,
+              "end": 192
+            },
+            {
+              "paragraphId": "p6",
+              "start": 211,
+              "end": 238
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "발표 취지와 순서만 짧게 안내",
+            "결론 부분을 다듬어서 발표 시간을 1분 정도 줄여",
+            "시간 체크하고, 예상 질문 두세 개는 종이에 적어"
+          ]
         }
       ]
     }

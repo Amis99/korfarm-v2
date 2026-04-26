@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우선 어떤 일이 무엇 보면 좋겠어?",
+          "prompt": "학생이 정리해 보려고 왔다고 한 갈등의 내용을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 61,
-              "end": 73
+              "start": 11,
+              "end": 34
             }
           ],
           "scoring": {
@@ -585,16 +585,52 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "있었는지 순서대로 말해"
+          "answerText": "방송 동아리 축제 준비 과정에서 생긴 갈등"
         },
         {
           "id": "q2",
-          "prompt": "핵심 개념은 무엇인가요?",
+          "prompt": "학생이 맡았던 역할을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 92,
+              "end": 97
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "영상 편집"
+        },
+        {
+          "id": "q3",
+          "prompt": "학생이 답답했다고 말한 이유를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 105,
+              "end": 139
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "부장이 회의할 때마다 제 역할을 바꾸고 마감도 갑자기 앞당겨서"
+        },
+        {
+          "id": "q4",
+          "prompt": "부장이 학생에게 추가 일을 맡기며 한 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 79,
-              "end": 96
+              "end": 99
             }
           ],
           "scoring": {
@@ -603,52 +639,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "시간 없으니까 네가 이 일도 같"
-        },
-        {
-          "id": "q3",
-          "prompt": "주요 소재는 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 66,
-              "end": 78
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "의견도 충분히 다뤄지지"
-        },
-        {
-          "id": "q4",
-          "prompt": "그런데 회의록 정리나 장비 점검처럼 제가 이미 하고 있던 일은 거의 일로 무엇?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 141,
-              "end": 155
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "인정하지 않는 분위기였어요"
+          "answerText": "시간 없으니까 네가 이 일도 같이 해"
         },
         {
           "id": "q5",
-          "prompt": "글에서 설명한 것은 무엇인가요?",
+          "prompt": "상담 교사가 정리한 학생의 불만 내용을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 16,
-              "end": 24
+              "paragraphId": "p3",
+              "start": 42,
+              "end": 62
+            },
+            {
+              "paragraphId": "p3",
+              "start": 64,
+              "end": 83
             }
           ],
           "scoring": {
@@ -656,17 +661,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "일을 덜 하겠다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "네가 맡은 일의 기준이 계속 흔들리고",
+            "네 의견도 충분히 다뤄지지 않았다고"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "무엇 말고, 제 말을 다시 정리해서 분명하게 꺼내 보겠습니다?",
+          "prompt": "부장이 역할을 늘린 이유로 든 말을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 140,
-              "end": 153
+              "paragraphId": "p4",
+              "start": 30,
+              "end": 52
             }
           ],
           "scoring": {
@@ -675,7 +683,56 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그냥 서운하다고만 말하지"
+          "answerText": "전체 일정이 급해서 그럴 수밖에 없었다고"
+        },
+        {
+          "id": "q7",
+          "prompt": "학생이 이미 하고 있던 일을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 104,
+              "end": 110
+            },
+            {
+              "paragraphId": "p4",
+              "start": 112,
+              "end": 117
+            },
+            {
+              "paragraphId": "p6",
+              "start": 52,
+              "end": 57
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "회의록 정리",
+            "장비 점검"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "상담 교사가 제안한 말하기 방식을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 92,
+              "end": 129
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "상대 입장을 인정한 뒤 네가 이해받고 싶은 핵심을 다시 세우는 방식"
         }
       ]
     }

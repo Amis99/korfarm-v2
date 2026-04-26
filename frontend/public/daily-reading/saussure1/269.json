@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "물건을 사고파는 거리?",
+          "prompt": "글쓴이가 엄마와 함께 우리 동네에서 가장 큰 전통 무엇에 구경을 갔는지 본문에서 한 단어로 찾아 보세요",
           "answerText": "시장",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -435,9 +435,33 @@
         },
         {
           "id": "q2",
-          "prompt": "붕어 모양의 팥 빵?",
+          "prompt": "오늘 글쓴이가 시장 구경에 함께 다녀온 인물이 누구인지 본문에서 찾아 보세요",
+          "answerText": "엄마",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "paragraphId": "p2",
+              "start": 86,
+              "end": 88
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "시장 구경에서 가장 신났던 순간으로 한 입 먹었던 갓 구운 음식이 무엇인지 본문에서 한 단어로 찾아 보세요",
           "answerText": "붕어빵",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -458,15 +482,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "과거를 되새기는 마음?",
-          "answerText": "추억",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "달콤한 팥이 들어있어 붕어빵의 맛이 정말 어떻다고 표현했는지 본문에서 한 단어로 찾아 보세요",
+          "answerText": "꿀맛",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 124,
-              "end": 126
+              "start": 77,
+              "end": 79
             }
           ],
           "scoring": {

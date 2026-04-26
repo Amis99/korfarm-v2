@@ -1039,93 +1039,74 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이 글은 주어와 서술어의 무엇을 설명하나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 147
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "이 글에서 주어와 서술어가 의미상 어울리는 관계를 가리키는 핵심 용어를 찾으시오",
+          "answerText": "호응",
           "answerMatchMode": "ANY",
-          "answerText": "주어와 서술어의 호응은 단순히 조사와 어미가 맞는지만 따지는 문제가 아니다. 문장에서 주어가 가리키는 대상의 성격과 서술어가 요구하는 의미 자질이 어울려야 비로소 자연스러운 문장이 된다. 그래서 문장 호응을 볼 때는 형태뿐 아니라 의미 호응을 함께 점검해야 한다."
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 9, "end": 11},
+            {"paragraphId": "p1", "start": 112, "end": 114},
+            {"paragraphId": "p1", "start": 132, "end": 134},
+            {"paragraphId": "p5", "start": 100, "end": 102},
+            {"paragraphId": "p6", "start": 15, "end": 17},
+            {"paragraphId": "p6", "start": 132, "end": 134}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "의견이 달린다 같은 표현은 왜 부자연스러운가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 159
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "본문이 자연스러운 문장이 되기 위한 조건으로 제시한 부분을 찾으시오",
+          "answerText": "주어가 가리키는 대상의 성격과 서술어가 요구하는 의미 자질이 어울려야",
           "answerMatchMode": "ANY",
-          "answerText": "예를 들어 '의견이 달린다'는 문장은 문법적으로 완전히 깨진 것은 아니어도 의미상 부자연스럽다. '달리다'는 보통 사람이 이동하거나 사물이 빠르게 움직이는 상황과 잘 어울리기 때문이다. 이런 경우에는 '의견이 갈린다'나 '의견이 나뉜다'처럼 주어의 성격에 맞는 서술어로 바꾸어야 한다."
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 48, "end": 86}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "서술어 선택은 주어에 따라 어떻게 제한되나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 150
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "본문이 의미상 부자연스러운 예로 든 문장을 찾으시오",
+          "answerText": "'의견이 달린다'",
           "answerMatchMode": "ANY",
-          "answerText": "반대로 같은 서술어도 주어가 달라지면 자연스러움이 달라진다. '학생들이 달린다'는 자연스럽지만 '계획이 달린다'는 이상하게 들린다. 즉 서술어는 아무 명사와나 결합하는 것이 아니라, 움직일 수 있는 존재인지, 상태를 지닐 수 있는 추상 개념인지에 따라 선택이 제한된다."
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 6, "end": 15}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "추상 명사와 동사가 만날 때는 무엇이 더 적절한가요?",
+          "prompt": "본문이 '의견이 달린다'를 고치자고 제시한 두 가지 대안 표현을 모두 찾으시오",
+          "answerText": "'의견이 갈린다'나 '의견이 나뉜다'",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 160
-            }
+            {"paragraphId": "p2", "start": 112, "end": 132}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이런 의미 제약은 추상 명사와 심리·행위 동사가 만날 때 특히 잘 드러난다. '기대가 웃는다', '정책이 고민한다'처럼 문장을 만들면 주어가 실제 행위 주체일 수 없기 때문에 어색해진다. 따라서 추상 명사가 주어일 때는 상태 변화나 성립 여부를 나타내는 서술어가 더 적절한 경우가 많다."
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "문장 호응은 어떤 문제로 보아야 하나요?",
+          "prompt": "추상 명사가 행위 주체가 될 수 없어 어색해지는 예 두 가지를 본문에서 모두 찾으시오",
+          "answerText": "'기대가 웃는다', '정책이 고민한다'",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 169
-            }
+            {"paragraphId": "p4", "start": 43, "end": 64}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "글쓴이가 결론에서 문장 자연스러움의 핵심 기준이라고 못 박은 부분을 찾으시오",
+          "answerText": "주어와 서술어의 의미 호응은 문장 자연스러움의 핵심 기준",
           "answerMatchMode": "ANY",
-          "answerText": "결국 주어와 서술어의 의미 호응은 문장 자연스러움의 핵심 기준이다. 같은 뜻을 전달하고 싶더라도 주어의 성격에 맞는 서술어를 골라야 하고, 서술어를 유지하고 싶다면 그에 어울리는 주어로 문장을 다시 짜야 한다. 이런 점을 이해해야 문장 호응을 단순한 형식 문제가 아니라 의미 선택의 문제로 볼 수 있다."
+          "answerRanges": [
+            {"paragraphId": "p6", "start": 3, "end": 34}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

@@ -552,9 +552,33 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "수많은 무엇들이 반짝였인가요?",
+          "prompt": "이 이야기에 등장하는 두 인물(또는 동물)을 모두 찾아 적어 보세요",
+          "answerText": "부엉이 할아버지, 멍멍이",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 8
+            },
+            {
+              "paragraphId": "p1",
+              "start": 17,
+              "end": 20
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "'친구들을 사랑하는 마음이 예쁜 □이 되어 빛납니다'에서 글쓴이는 '마음'을 무엇에 빗대어 표현했나요?",
           "answerText": "별",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -595,15 +619,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "서로의 무엇을 잡고 노래하나요?",
-          "answerText": "손",
-          "answerMatchMode": "EXACT",
+          "id": "q3",
+          "prompt": "친구 사이의 가까운 마음, 즉 친구끼리 나누는 정을 두 글자로 무엇이라고 하나요?",
+          "answerText": "우정",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 61,
-              "end": 62
+              "start": 105,
+              "end": 107
             }
           ],
           "scoring": {
@@ -614,15 +638,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "소중한 무엇을 나누었습니나요?",
-          "answerText": "우정",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "멍멍이가 눈을 감자 그 결과 마음속에서 어떤 일이 일어났나요? 지문에서 핵심 단어를 찾아 보세요",
+          "answerText": "반짝",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 105,
-              "end": 107
+              "paragraphId": "p1",
+              "start": 49,
+              "end": 51
             }
           ],
           "scoring": {

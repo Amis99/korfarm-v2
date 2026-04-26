@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "반드시 무엇를 이용하나요?",
+          "prompt": "길을 건널 때 반드시 이용해야 하는 곳을 글에서 찾아 써 보세요",
           "answerText": "횡단보도",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -581,29 +581,19 @@
         },
         {
           "id": "q2",
-          "prompt": "번쩍 들고 무엇를 보내요인가요?",
-          "answerText": "신호",
-          "answerMatchMode": "EXACT",
+          "prompt": "횡단보도 앞에서 멈춰 서서 보아야 하는 것이 무엇인지 찾아 써 보세요",
+          "answerText": "신호등",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 47,
-              "end": 49
-            },
-            {
-              "paragraphId": "p1",
-              "start": 109,
-              "end": 111
+              "end": 50
             },
             {
               "paragraphId": "p2",
               "start": 55,
-              "end": 57
-            },
-            {
-              "paragraphId": "p2",
-              "start": 70,
-              "end": 72
+              "end": 58
             }
           ],
           "scoring": {
@@ -615,9 +605,28 @@
         },
         {
           "id": "q3",
-          "prompt": "우리의 무엇을 위해 지켜요인가요?",
+          "prompt": "장난을 치거나 한눈을 팔면 어떤 일이 생기는지 글에서 찾아 써 보세요",
+          "answerText": "위험",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 48,
+              "end": 50
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "교통 규칙을 지켜야 하는 까닭이 우리의 무엇 때문인지 찾아 모두 써 보세요",
           "answerText": "안전",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",

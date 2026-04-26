@@ -571,12 +571,38 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "달빛이 밝게 비치는 공간을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 38
+              "end": 3
+            },
+            {
+              "paragraphId": "p1",
+              "start": 5,
+              "end": 8
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "온 산",
+            "골짜기"
+          ]
+        },
+        {
+          "id": "q2",
+          "prompt": "달빛이 밝아 셀 만하다고 한 대상을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 28,
+              "end": 30
             }
           ],
           "scoring": {
@@ -585,15 +611,20 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "온 산과 골짜기에 달빛이 밝으니\n단대의 늙은 솔이 가지를 셀 만하다."
+          "answerText": "가지"
         },
         {
-          "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "id": "q3",
+          "prompt": "화자가 달을 바라보는 시간의 시작과 끝을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
+              "start": 12,
+              "end": 16
+            },
+            {
+              "paragraphId": "p2",
+              "start": 34,
               "end": 45
             }
           ],
@@ -602,17 +633,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "성긴 주렴 다시 걷고 깊은 밤 앉았으니\n동쪽 봉에 돋은 달이 서쪽 고개 질 때까지"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "깊은 밤",
+            "서쪽 고개 질 때까지"
+          ]
         },
         {
-          "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "id": "q4",
+          "prompt": "달빛을 받고 다 맑아지는 것을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 42
+              "start": 21,
+              "end": 22
             }
           ],
           "scoring": {
@@ -621,16 +655,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "처마 난간 다 비추어 잠자리에 쏘이니\n넋이 다 맑아지니 자나 깨나 잊을쏘냐."
+          "answerText": "넋"
         },
         {
-          "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
+          "id": "q5",
+          "prompt": "감탄을 드러내는 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 0,
-              "end": 43
+              "end": 2
             }
           ],
           "scoring": {
@@ -639,16 +673,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "어와, 이 맑은 경치 값이 있다 하면\n적막하게 닫은 문에 내 분수로 들여오랴."
+          "answerText": "어와"
         },
         {
-          "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "id": "q6",
+          "prompt": "달빛이 사사롭지 않음을 드러내는 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 0,
-              "end": 44
+              "end": 11
             }
           ],
           "scoring": {
@@ -657,16 +691,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "사사로이 비추지 않음이 거짓말 아니로다.\n멋집을 비추는 빛이 궁궐인들 다를쏘냐."
+          "answerText": "사사로이 비추지 않음"
         },
         {
-          "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "id": "q7",
+          "prompt": "달빛이 다르지 않게 비춘다고 제시된 두 대상을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 23,
+              "end": 25
+            },
+            {
+              "paragraphId": "p5",
+              "start": 34,
+              "end": 36
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "멋집",
+            "궁궐"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "술을 기울이며 날 듯하다고 표현한 흥취를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 61
+              "start": 43,
+              "end": 49
             }
           ],
           "scoring": {
@@ -675,7 +735,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "맑은 술통 바삐 열고 큰 잔에 가득 부어\n죽엽 맑은 술을 달빛 좋아 기울이니\n표연한 흥취가 웬만하면 날겠구나."
+          "answerText": "표연한 흥취"
         }
       ]
     }

@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "문을 두드려 ( )해요.",
+          "prompt": "화장실을 사용하기 전에 문을 가볍게 두드리는 행동을 무엇이라고 하는지 지문에서 찾아 보세요.",
           "answerText": "노크",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -571,9 +571,9 @@
         },
         {
           "id": "q2",
-          "prompt": "( )를 아껴서 써요.",
+          "prompt": "필요한 만큼만 아껴서 사용해야 하는 물건을 지문에서 찾아 보세요.",
           "answerText": "휴지",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -590,14 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "비누로 ( )을 씻어요.",
+          "prompt": "화장실을 나오기 전에 비누로 깨끗이 씻어야 하는 곳을 지문에서 찾아 보세요.",
           "answerText": "손",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 17,
               "end": 18
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "거울을 보며 다듬어야 한다고 한 것을 지문에서 찾아 보세요.",
+          "answerText": "매뭇새",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 65,
+              "end": 68
             }
           ],
           "scoring": {

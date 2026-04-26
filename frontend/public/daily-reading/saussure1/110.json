@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "아주 큰 공룡 무엇가 있었인가요?",
-          "answerText": "뼈",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 박물관 이야기를 들려주고 싶어 편지를 쓴 친구의 이름을 글에서 찾아 써 보세요",
+          "answerText": "민수",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 59,
-              "end": 60
+              "start": 3,
+              "end": 5
             }
           ],
           "scoring": {
@@ -571,9 +571,53 @@
         },
         {
           "id": "q2",
-          "prompt": "예쁜 공룡 무엇를 샀단나요?",
+          "prompt": "박물관에 전시되어 있어 글쓴이의 가슴을 두근거리게 한 동물 이름을 글에서 찾아 모두 써 보세요",
+          "answerText": "공룡",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 56,
+              "end": 58
+            },
+            {
+              "paragraphId": "p1",
+              "start": 85,
+              "end": 87
+            },
+            {
+              "paragraphId": "p2",
+              "start": 20,
+              "end": 22
+            },
+            {
+              "paragraphId": "p2",
+              "start": 49,
+              "end": 51
+            },
+            {
+              "paragraphId": "p2",
+              "start": 86,
+              "end": 88
+            },
+            {
+              "paragraphId": "p2",
+              "start": 113,
+              "end": 115
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "기념품점에서 친구를 위해 예쁘게 산 물건이 무엇인지 글에서 찾아 모두 써 보세요",
           "answerText": "스티커",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -599,10 +643,10 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "너를 생각하며 무엇를 쓴나요?",
+          "id": "q4",
+          "prompt": "글쓴이가 민수에게 자신의 마음을 전하기 위해 쓴 글의 종류가 무엇인지 찾아 모두 써 보세요",
           "answerText": "편지",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",

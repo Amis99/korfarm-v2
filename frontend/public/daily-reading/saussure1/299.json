@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "여럿이 모여 의논함?",
+          "prompt": "여러 사람이 모여 의견을 나누고 의논하는 모임을 무엇이라고 하는지 지문에서 찾아 적어 보세요",
           "answerText": "회의",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -420,24 +420,19 @@
         },
         {
           "id": "q2",
-          "prompt": "여러 사람이 즐기는 것?",
-          "answerText": "놀이",
-          "answerMatchMode": "EXACT",
+          "prompt": "1문단에서 우리 모둠이 담당하기로 한 전통 놀이 두 가지를 모두 찾아 적어 보세요",
+          "answerText": "널뛰기, 제기차기",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 18,
-              "end": 20
+              "start": 111,
+              "end": 114
             },
             {
               "paragraphId": "p1",
-              "start": 61,
-              "end": 63
-            },
-            {
-              "paragraphId": "p2",
-              "start": 139,
-              "end": 141
+              "start": 116,
+              "end": 120
             }
           ],
           "scoring": {
@@ -449,29 +444,43 @@
         },
         {
           "id": "q3",
-          "prompt": "미리 마련하여 갖춤?",
-          "answerText": "준비",
-          "answerMatchMode": "EXACT",
+          "prompt": "1문단에서 모둠 회의 때 의견을 나눈 두 가지 항목을 모두 찾아 적어 보세요",
+          "answerText": "준비물, 규칙",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 28,
-              "end": 30
+              "start": 76,
+              "end": 79
             },
             {
               "paragraphId": "p1",
-              "start": 76,
-              "end": 78
+              "start": 81,
+              "end": 83
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "2문단에서 회의 도중 의견 차이가 생겼을 때 친구들이 보인 두 가지 태도를 모두 찾아 적어 보세요",
+          "answerText": "경청, 양보",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 30,
+              "end": 32
             },
             {
               "paragraphId": "p2",
-              "start": 73,
-              "end": 75
-            },
-            {
-              "paragraphId": "p2",
-              "start": 129,
-              "end": 131
+              "start": 35,
+              "end": 37
             }
           ],
           "scoring": {

@@ -474,25 +474,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "볼이 빨간 동물?",
+          "prompt": "보물 지도가 그려진 나뭇잎을 들고 이리저리 도망친 동물은 무엇인가요",
           "answerText": "다람쥐",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 62,
-              "end": 65
-            },
-            {
-              "paragraphId": "p1",
-              "start": 101,
-              "end": 104
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            }
+            {"paragraphId": "p1", "start": 62, "end": 65},
+            {"paragraphId": "p1", "start": 101, "end": 104},
+            {"paragraphId": "p2", "start": 0, "end": 3}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -503,25 +491,13 @@
         },
         {
           "id": "q2",
-          "prompt": "길을 알려주는 무엇인가요?",
+          "prompt": "다람쥐들이 들고 도망친 나뭇잎에 그려져 있던, 보물의 위치를 알려 주는 그림은 무엇인가요",
           "answerText": "지도",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 110,
-              "end": 112
-            },
-            {
-              "paragraphId": "p1",
-              "start": 143,
-              "end": 145
-            },
-            {
-              "paragraphId": "p2",
-              "start": 74,
-              "end": 76
-            }
+            {"paragraphId": "p1", "start": 110, "end": 112},
+            {"paragraphId": "p1", "start": 143, "end": 145},
+            {"paragraphId": "p2", "start": 74, "end": 76}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -532,20 +508,27 @@
         },
         {
           "id": "q3",
-          "prompt": "숲에 가득한 무엇인가요?",
-          "answerText": "나무",
-          "answerMatchMode": "EXACT",
+          "prompt": "민수가 다람쥐들을 쫓아가다가 무엇에 발이 걸려 그만 바닥에 넘어졌나요",
+          "answerText": "덩굴",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 55,
-              "end": 57
-            },
-            {
-              "paragraphId": "p1",
-              "start": 162,
-              "end": 164
-            }
+            {"paragraphId": "p2", "start": 15, "end": 17}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "넘어진 민수에게 잃어버린 나뭇잎을 부리로 물어다 준, 요정처럼 생긴 동물은 무엇인가요",
+          "answerText": "새",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 67, "end": 68},
+            {"paragraphId": "p2", "start": 109, "end": 110}
           ],
           "scoring": {
             "correctDeltaSec": 10,

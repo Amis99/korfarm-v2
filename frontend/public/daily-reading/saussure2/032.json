@@ -486,53 +486,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "입 안에 있어 음식을 씹어 먹는 하얀 뼈는?",
-          "answerText": "이빨",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 22,
-              "end": 24
-            },
-            {
-              "paragraphId": "p2",
-              "start": 70,
-              "end": 72
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "작아서 눈에 안 보이고 병을 일으키는 것은?",
-          "answerText": "세균",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 60,
-              "end": 62
-            },
-            {
-              "paragraphId": "p2",
-              "start": 120,
-              "end": 122
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "이가 까맣게 썩어서 무척 아파지는 병은?",
+          "prompt": "이가 나쁘게 썩어 들어가서 무척 아파지는 병을 무엇이라고 부르는지 찾아보세요.",
           "answerText": "충치",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -553,14 +507,15 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "이를 깨끗이 닦고 헹구어 병을 막는 일은?",
+          "id": "q2",
+          "prompt": "음식을 먹은 뒤에 입속을 깨끗이 닦아 충치를 막는 일을 가리키는 낱말을 찾아보세요.",
           "answerText": "양치질",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -581,8 +536,61 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "양치질할 때 칫솔로 닦거나 쓸어내려야 하는 입속 부위 세 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "이빨 구석구석",
+            "어금니의 씹는 면",
+            "혓바닥"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 70,
+              "end": 77
+            },
+            {
+              "paragraphId": "p2",
+              "start": 87,
+              "end": 96
+            },
+            {
+              "paragraphId": "p2",
+              "start": 105,
+              "end": 108
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "입을 깨끗하게 헹굴 때 사용하는 두 글자 표현을 찾아보세요.",
+          "answerText": "물 컵",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 49,
+              "end": 52
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         }

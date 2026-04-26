@@ -829,12 +829,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 '하디-바인베르크 평형의 성립 조건과 활용'의 기본 개념이나 출발점을 어떻게 설명하는가?",
+          "prompt": "집단 안의 대립 유전자 빈도가 세대를 거쳐도 일정하게 유지되는 이상적 상태를 가리키는 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 215
+              "end": 11
+            },
+            {
+              "paragraphId": "p6",
+              "start": 11,
+              "end": 22
             }
           ],
           "scoring": {
@@ -843,16 +848,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "하디-바인베르크 평형은 집단 안의 대립 유전자 빈도가 세대를 거쳐도 일정하게 유지되는 이상적 상태를 설명하는 모델이다. 이 모델은 실제 생물 집단이 언제나 완전히 평형 상태에 있다는 뜻이 아니라, 어떤 조건이 유지될 때 유전자 빈도가 크게 흔들리지 않는지를 보여 주는 기준점을 제공한다. 따라서 연구자는 실제 자료를 이 기준과 비교해 어떤 힘이 집단에 작용하고 있는지 추정할 수 있다."
+          "answerText": "하디-바인베르크 평형"
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 '하디-바인베르크 평형의 성립 조건과 활용'과 관련한 원리나 기준을 어떤 관계로 설명하는가?",
+          "prompt": "이 모델이 어떤 조건에서 유전자 빈도가 흔들리지 않는지 보여 주며 제공하는 것을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 166
+              "paragraphId": "p1",
+              "start": 150,
+              "end": 159
             }
           ],
           "scoring": {
@@ -861,16 +866,70 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 평형이 성립하려면 먼저 집단의 규모가 충분히 커야 한다. 집단이 너무 작으면 우연한 번식 결과만으로도 특정 대립 유전자의 비율이 크게 흔들릴 수 있기 때문이다. 또 교배가 무작위로 이루어져야 하며, 특정 형질을 가진 개체끼리 선택적으로 짝을 이루면 유전자형의 분포가 예상과 다르게 바뀌게 된다."
+          "answerText": "기준점을 제공한다"
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 앞의 설명을 어떤 예시나 사례로 구체화하는가?",
+          "prompt": "이 평형이 성립하려면 필요한 조건 두 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 15,
+              "end": 32
+            },
+            {
+              "paragraphId": "p2",
+              "start": 94,
+              "end": 108
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "집단의 규모가 충분히 커야 한다",
+            "교배가 무작위로 이루어져야"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "집단이 너무 작으면 특정 대립 유전자의 비율이 크게 흔들릴 수 있는 이유를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 45,
+              "end": 90
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "우연한 번식 결과만으로도 특정 대립 유전자의 비율이 크게 흔들릴 수 있기 때문이다"
+        },
+        {
+          "id": "q5",
+          "prompt": "3문단에서 평형을 깨거나 대립 유전자 빈도를 바꾸는 요인을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 192
+              "end": 17
+            },
+            {
+              "paragraphId": "p3",
+              "start": 18,
+              "end": 42
+            },
+            {
+              "paragraphId": "p3",
+              "start": 126,
+              "end": 138
             }
           ],
           "scoring": {
@@ -878,17 +937,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "새로운 돌연변이가 계속 생기거나 외부 집단의 개체가 대량으로 들어오고 나가도 평형은 깨진다. 돌연변이는 기존에 없던 대립 유전자를 추가하고, 이주는 집단 바깥의 유전자 구성을 안으로 들여오거나 밖으로 빼내기 때문이다. 여기에 자연 선택까지 작용하면 특정 대립 유전자가 생존과 번식에서 더 유리해져, 세대가 지날수록 그 빈도가 누적적으로 변한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "새로운 돌연변이가 계속 생기거나",
+            "외부 집단의 개체가 대량으로 들어오고 나가도",
+            "자연 선택까지 작용하면"
+          ]
         },
         {
-          "id": "q4",
-          "prompt": "넷째 문단은 '하디-바인베르크 평형의 성립 조건과 활용'을 앞선 논의와 이어 어떤 적용 장면이나 전개로 보여 주는가?",
+          "id": "q6",
+          "prompt": "돌연변이가 추가한다고 한 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 200
+              "paragraphId": "p3",
+              "start": 58,
+              "end": 71
             }
           ],
           "scoring": {
@@ -897,16 +960,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 법칙의 의미는 단지 수식을 세우는 데 있지 않다. 어떤 질환이 열성 유전자 두 개를 가질 때만 나타난다면, 겉으로 드러난 환자 비율을 바탕으로 보인자의 비율까지 추정할 수 있다. 즉 집단 전체의 유전자 빈도를 알면 아직 증상이 없는 사람들 중에서도 관련 유전자를 어느 정도가 지니고 있을지 계산할 수 있어, 의학적 상담이나 집단 연구의 기초 자료가 된다."
+          "answerText": "기존에 없던 대립 유전자"
         },
         {
-          "id": "q5",
-          "prompt": "다섯째 문단은 '하디-바인베르크 평형의 성립 조건과 활용'을 이해할 때 왜 이 관점이 중요하다고 말하는가?",
+          "id": "q7",
+          "prompt": "이 모델이 기준점으로 활용되는 분야를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 0,
-              "end": 198
+              "end": 6
+            },
+            {
+              "paragraphId": "p5",
+              "start": 8,
+              "end": 11
+            },
+            {
+              "paragraphId": "p5",
+              "start": 119,
+              "end": 122
             }
           ],
           "scoring": {
@@ -914,17 +987,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "보존 생물학과 법의학에서도 이 모델은 기준점으로 활용된다. 멸종 위기 종의 개체군을 조사할 때에는 특정 유전자 구성이 갑자기 줄거나 늘어 평형에서 벗어났는지 확인해 유전적 다양성의 변화 방향을 읽을 수 있다. 또 법의학에서는 DNA 표지의 빈도를 추정해, 어떤 유전자형 일치가 단순한 우연으로 나타날 가능성이 얼마나 낮은지 계산하는 데 이 원리가 쓰인다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "보존 생물학",
+            "법의학"
+          ]
         },
         {
-          "id": "q6",
-          "prompt": "여섯째 문단은 '하디-바인베르크 평형의 성립 조건과 활용'을 어떻게 정리하며 무엇을 강조하는가?",
+          "id": "q8",
+          "prompt": "이 법칙이 중요한 이유로, 실제 자료 해석에서 하게 만드는 일을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 183
+              "start": 60,
+              "end": 108
             }
           ],
           "scoring": {
@@ -933,7 +1009,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "물론 현실의 집단은 하디-바인베르크 평형 조건을 완벽히 충족하지 않는다. 그럼에도 이 법칙이 중요한 이유는 실제 자료를 해석할 때 무엇이 변화를 일으켰는지 질문하게 만드는 출발점이 되기 때문이다. 다시 말해 평형 자체보다도, 평형이 유지되지 않는 까닭을 추적하게 해 준다는 점에서 이 모델은 집단 유전학의 기본 언어로 기능한다."
+          "answerText": "실제 자료를 해석할 때 무엇이 변화를 일으켰는지 질문하게 만드는 출발점이 되기 때문이다"
         }
       ]
     }

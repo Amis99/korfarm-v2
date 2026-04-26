@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "뒷마당에 하얀 무엇이 피었인가요?",
+          "prompt": "학교 뒷마당에 하얗게 가득 피었던 꽃의 이름을 글에서 찾아 모두 써 보세요",
           "answerText": "토끼풀",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -586,14 +586,14 @@
         },
         {
           "id": "q2",
-          "prompt": "솜사탕 같은 무엇가 예뻐요인가요?",
-          "answerText": "꽃송이",
-          "answerMatchMode": "EXACT",
+          "prompt": "꽃송이가 동글동글한 모습을 무엇에 빗대어 표현했는지 찾아 써 보세요",
+          "answerText": "솜사탕",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 64,
-              "end": 67
+              "start": 52,
+              "end": 55
             }
           ],
           "scoring": {
@@ -605,14 +605,33 @@
         },
         {
           "id": "q3",
-          "prompt": "즐겁게 무엇을 하며 놀았나요?",
+          "prompt": "친구들과 토끼풀 밭에서 즐겁게 한 놀이가 무엇인지 글에서 찾아 써 보세요",
           "answerText": "숨바꼭질",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 16,
               "end": 20
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "숨바꼭질에서 술래가 된 친구의 이름을 글에서 찾아 써 보세요",
+          "answerText": "영수",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 89,
+              "end": 91
             }
           ],
           "scoring": {

@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "경험하여 알게 된 일은?",
-          "answerText": "체험의",
-          "answerMatchMode": "EXACT",
+          "prompt": "편지에 쓰려 한 체험의 즐거움을 본문에서 찾으시오.",
+          "answerText": "갯벌 체험의 즐거움",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 14,
-              "end": 17
+              "start": 11,
+              "end": 21
             }
           ],
           "scoring": {
@@ -606,14 +606,22 @@
         },
         {
           "id": "q2",
-          "prompt": "어떤 일을 간절히 바람은?",
-          "answerText": "소망을",
-          "answerMatchMode": "EXACT",
+          "prompt": "갯벌 체험에서 기억에 남은 관찰과 순간을 모두 찾으시오.",
+          "answerTexts": [
+            "작은 게들을 관찰하며",
+            "신기해했던 순간들"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 57,
-              "end": 60
+              "paragraphId": "p1",
+              "start": 35,
+              "end": 46
+            },
+            {
+              "paragraphId": "p1",
+              "start": 47,
+              "end": 56
             }
           ],
           "scoring": {
@@ -625,14 +633,49 @@
         },
         {
           "id": "q3",
-          "prompt": "참되고 정성스러운 마음?",
-          "answerText": "진심이",
-          "answerMatchMode": "EXACT",
+          "prompt": "편지에 담은 우스운 일과 전하고 싶은 소망을 모두 찾으시오.",
+          "answerTexts": [
+            "우스운 장면",
+            "친구들과 함께 뛰어놀고 싶은 소망"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 18,
+              "end": 24
+            },
+            {
+              "paragraphId": "p2",
+              "start": 41,
+              "end": 59
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "편지 마지막에 남긴 약속과 전해지기를 바란 마음을 모두 찾으시오.",
+          "answerTexts": [
+            "다음에 꼭 같이 가자는 약속",
+            "내 진심이 전해져"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 41,
-              "end": 44
+              "start": 9,
+              "end": 24
+            },
+            {
+              "paragraphId": "p3",
+              "start": 39,
+              "end": 48
             }
           ],
           "scoring": {

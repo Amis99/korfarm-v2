@@ -1031,98 +1031,212 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '핵심'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 38,
-              "end": 40
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '힘과 에너지 전환'을 핵심 개념으로 다루는 학문 분야를 가리키는 낱말을 찾으시오",
+          "answerText": "물리학",
           "answerMatchMode": "ANY",
-          "answerText": "핵심"
-        },
-        {
-          "id": "q2",
-          "prompt": "지문에서 '조건'을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 134,
-              "end": 136
+              "start": 33,
+              "end": 36
             },
             {
               "paragraphId": "p1",
-              "start": 191,
-              "end": 193
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "조건"
-        },
-        {
-          "id": "q3",
-          "prompt": "지문에서 '관점'을 모두 찾으시오.",
-          "answerRanges": [
+              "start": 146,
+              "end": 149
+            },
+            {
+              "paragraphId": "p2",
+              "start": 162,
+              "end": 165
+            },
             {
               "paragraphId": "p3",
-              "start": 5,
-              "end": 7
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "관점"
-        },
-        {
-          "id": "q4",
-          "prompt": "지문에서 '흐름'을 모두 찾으시오.",
-          "answerRanges": [
+              "start": 142,
+              "end": 145
+            },
             {
               "paragraphId": "p4",
-              "start": 157,
-              "end": 159
+              "start": 173,
+              "end": 176
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "흐름"
+          "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "지문에서 '출발점'을 모두 찾으시오.",
+          "id": "q2",
+          "prompt": "지문에서 굴러가던 공이 점점 느려지는 까닭으로 제시된 낱말을 찾으시오",
+          "answerText": "마찰",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 255,
-              "end": 258
+              "start": 123,
+              "end": 125
+            },
+            {
+              "paragraphId": "p2",
+              "start": 98,
+              "end": 100
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "지문에서 높은 곳에 있던 물체가 아래로 떨어질 때 전환된다고 한 두 에너지를 모두 찾으시오",
+          "answerText": "위치 에너지 / 운동 에너지",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 54,
+              "end": 60
+            },
+            {
+              "paragraphId": "p3",
+              "start": 62,
+              "end": 68
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "지문에서 전기 주전자에서 물이 뜨거워질 때 전환되는 두 에너지를 모두 찾으시오",
+          "answerText": "전기 에너지 / 열에너지",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 96,
+              "end": 102
+            },
+            {
+              "paragraphId": "p3",
+              "start": 104,
+              "end": 108
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "지문에서 자전거가 앞으로 나아가는 일을 이해하기 위해 함께 살펴야 한다고 한 요소를 모두 찾으시오",
+          "answerText": "페달을 밟는 힘 / 바퀴의 회전 운동 / 마찰력 / 에너지 전환",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 79,
+              "end": 87
+            },
+            {
+              "paragraphId": "p4",
+              "start": 89,
+              "end": 98
+            },
+            {
+              "paragraphId": "p4",
+              "start": 100,
+              "end": 103
+            },
+            {
+              "paragraphId": "p4",
+              "start": 105,
+              "end": 111
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 운동의 변화를 설명할 때 가장 자주 쓰이는 원인을 가리키는 낱말을 찾으시오",
+          "answerText": "힘",
           "answerMatchMode": "ANY",
-          "answerText": "출발점"
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 1
+            },
+            {
+              "paragraphId": "p1",
+              "start": 91,
+              "end": 92
+            },
+            {
+              "paragraphId": "p1",
+              "start": 216,
+              "end": 217
+            },
+            {
+              "paragraphId": "p2",
+              "start": 28,
+              "end": 29
+            },
+            {
+              "paragraphId": "p2",
+              "start": 128,
+              "end": 129
+            },
+            {
+              "paragraphId": "p2",
+              "start": 199,
+              "end": 200
+            },
+            {
+              "paragraphId": "p2",
+              "start": 223,
+              "end": 224
+            },
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 1
+            },
+            {
+              "paragraphId": "p4",
+              "start": 86,
+              "end": 87
+            },
+            {
+              "paragraphId": "p4",
+              "start": 194,
+              "end": 195
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

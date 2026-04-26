@@ -406,14 +406,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "바람에 ( ) 춤을 춥니다.",
-          "answerText": "흔들흔들",
-          "answerMatchMode": "EXACT",
+          "prompt": "공기가 움직이는 흐름이라는 뜻의 단어를 지문에서 찾아 보세요.",
+          "answerText": "바람",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 17,
-              "end": 21
+              "start": 8,
+              "end": 10
             }
           ],
           "scoring": {
@@ -425,14 +425,19 @@
         },
         {
           "id": "q2",
-          "prompt": "( )들이 날개를 팔랑이에요.",
-          "answerText": "잠자리",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 시에서 의인법이 사용된 부분을 모두 찾아 보세요.",
+          "answerText": "종이배가 흔들흔들 춤을 춰요 / 소동을 구경하러 온 잠자리들이 날개를 팔랑입니다",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
+              "paragraphId": "p1",
+              "start": 12,
+              "end": 27
+            },
+            {
               "paragraphId": "p2",
-              "start": 40,
-              "end": 43
+              "start": 29,
+              "end": 55
             }
           ],
           "scoring": {
@@ -444,14 +449,33 @@
         },
         {
           "id": "q3",
-          "prompt": "용감한 ( )가 시작됨.",
-          "answerText": "항해",
-          "answerMatchMode": "EXACT",
+          "prompt": "종이배 주위로 모여든 친구가 누구인지 지문에서 찾아 보세요.",
+          "answerText": "물고기들",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 68,
+              "end": 72
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "용감한 항해가 어떻게 되었다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "모두의 시선을 사로잡았어요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 66,
-              "end": 68
+              "start": 70,
+              "end": 84
             }
           ],
           "scoring": {

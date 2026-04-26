@@ -562,14 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "세상의 모든 시간을 되돌리거나 멈출 수 있는 전설 속의 마법 물건으로, 숲의 낡은 나무 기둥 속에 숨겨져 있던 것은?",
-          "answerText": "달빛 시계",
-          "answerMatchMode": "EXACT",
+          "prompt": "민우와 요정 별이가 마법 지도를 펼치고 들어간 숲을 찾으시오.",
+          "answerText": "어두운 그림자 숲",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 74,
-              "end": 79
+              "paragraphId": "p1",
+              "start": 22,
+              "end": 31
             }
           ],
           "scoring": {
@@ -581,14 +581,22 @@
         },
         {
           "id": "q2",
-          "prompt": "민우가 시계를 덮고 있던 덩굴을 걷어내려 하자 튀어나온 뾰족한 가시를 가진 무서운 괴물 파수꾼은?",
-          "answerText": "가시덤불 괴물",
-          "answerMatchMode": "EXACT",
+          "prompt": "숲이 낮에도 캄캄하고 무서웠던 까닭과 상태를 모두 찾으시오.",
+          "answerTexts": [
+            "낮에도 태양 빛이 전혀 들지 않아",
+            "무척 캄캄하고 무서웠습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 23,
-              "end": 30
+              "paragraphId": "p1",
+              "start": 45,
+              "end": 63
+            },
+            {
+              "paragraphId": "p1",
+              "start": 64,
+              "end": 78
             }
           ],
           "scoring": {
@@ -600,14 +608,41 @@
         },
         {
           "id": "q3",
-          "prompt": "시계를 빼앗기지 않기 위해 비밀스럽게 파수꾼을 숨겨놓고 세상을 지배하려는 나쁜 악당은?",
-          "answerText": "어둠의 마왕",
-          "answerMatchMode": "EXACT",
+          "prompt": "모든 시간을 마음대로 다룰 수 있는 시계의 이름을 찾으시오.",
+          "answerText": "마법 달빛 시계",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 71,
+              "end": 79
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "가시덤불 괴물과 맞서기 전, 별이와 민우가 한 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "별이는 마법 지팡이를 꺼내 들었고",
+            "민우는 괴물과 싸울 준비를 마쳤습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 41,
-              "end": 47
+              "start": 84,
+              "end": 102
+            },
+            {
+              "paragraphId": "p3",
+              "start": 103,
+              "end": 123
             }
           ],
           "scoring": {

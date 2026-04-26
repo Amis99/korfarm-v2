@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "학생들이 편하게 이용할 수 있다고 한 장소를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 160
+              "paragraphId": "p2",
+              "start": 125,
+              "end": 131
             }
           ],
           "scoring": {
@@ -585,15 +585,129 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "우리 학교 학생회는 주말에도 도서관을 개방해 주기를 건의하고자 합니다. 시험 기간이 아니어도 수행평가나 모둠 과제를 준비해야 하는 학생이 많고, 집에서는 집중이 잘 안 되는 학생도 적지 않기 때문입니다. 그래서 학교가 학생들의 공부를 돕기 위해 도서관을 토요일에도 열어 주었으면 합니다."
+          "answerText": "학교 도서관"
         },
         {
           "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "집에서 공부하기 어려운 이유로 제시된 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 81,
+              "end": 96
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "집에서는 집중이 잘 안 되는"
+        },
+        {
+          "id": "q3",
+          "prompt": "주말에 공부할 수 있는 장소가 부족한 이유를 모두 찾으시오.",
+          "answerTexts": [
+            "집이 멀거나 집안 사정 때문에 조용한 공간을 구하기 어려운 경우",
+            "동네 도서관은 자리가 부족해 들어가지 못하는 경우"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
+              "start": 39,
+              "end": 74
+            },
+            {
+              "paragraphId": "p2",
+              "start": 80,
+              "end": 107
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "주말 도서관 개방이 늘리는 데 도움이 되는 학습을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 14,
+              "end": 21
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "자기주도 학습"
+        },
+        {
+          "id": "q5",
+          "prompt": "도서관이 열리면 나타난다고 반복해 제시한 효과를 모두 찾으시오.",
+          "answerTexts": [
+            "학생들이 공부를 더 열심히 할 수 있습니다",
+            "학습 분위기가 좋아지고 공부를 더 열심히 할 수 있다는 점"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 92,
+              "end": 115
+            },
+            {
+              "paragraphId": "p3",
+              "start": 126,
+              "end": 158
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "안전과 관리 문제를 해결하기 위한 방안을 모두 찾으시오.",
+          "answerTexts": [
+            "출입 명단을 작성하고",
+            "학생 자치 봉사 인력을 배치하면"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 37,
+              "end": 48
+            },
+            {
+              "paragraphId": "p4",
+              "start": 49,
+              "end": 66
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q7",
+          "prompt": "구체적인 비용을 확인하지 못해 적은 수준을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 172,
               "end": 179
             }
           ],
@@ -603,79 +717,33 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "현재 학생들이 주말에 공부할 수 있는 장소는 생각보다 많지 않습니다. 집이 멀거나 집안 사정 때문에 조용한 공간을 구하기 어려운 경우도 있고, 동네 도서관은 자리가 부족해 들어가지 못하는 경우도 자주 있습니다. 이런 점에서 학교 도서관을 열면 학생들이 편하게 이용할 수 있고, 실제로 많은 학생들이 필요로 하고 있습니다."
+          "answerText": "대략적인 수준"
         },
         {
-          "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 173
-            }
+          "id": "q8",
+          "prompt": "시범 운영 결과를 바탕으로 다시 조정할 항목을 모두 찾으시오.",
+          "answerTexts": [
+            "운영 시간",
+            "대상 학년"
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "특히 주말 도서관 개방은 자기주도 학습을 늘리는 데 도움이 됩니다. 학생들이 학교 자료를 바로 찾아볼 수 있고 참고서를 이용하기도 편합니다. 그리고 도서관이 열리면 학생들이 공부를 더 열심히 할 수 있습니다. 도서관이 열리면 학습 분위기가 좋아지고 공부를 더 열심히 할 수 있다는 점도 다시 강조하고 싶습니다."
-        },
-        {
-          "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 183
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "물론 주말 개방에는 안전과 관리 문제가 있을 수 있습니다. 하지만 출입 명단을 작성하고 학생 자치 봉사 인력을 배치하면 어느 정도 해결될 수 있을 것입니다. 또 자료실과 일반 열람 구역을 구분해서 일부 공간만 먼저 개방하는 방법도 있습니다. 다만 어떤 인력을 몇 명 둘지에 대해서는 학교와 학생회가 더 의논하면 될 것 같습니다."
-        },
-        {
-          "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 187
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "예산 문제도 아주 크지는 않을 것으로 생각합니다. 전기료와 냉난방비가 들겠지만 토요일 하루만 운영하면 부담이 크지 않을 수 있습니다. 게다가 도서관을 관리하는 데 필요한 비용은 이미 학교에 있는 시설을 활용하면 줄일 수 있고, 인건비도 많이 들지 않을 것입니다. 그러나 구체적인 비용은 아직 확인하지 못해서 대략적인 수준만 적었습니다."
-        },
-        {
-          "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 170
+              "start": 73,
+              "end": 78
+            },
+            {
+              "paragraphId": "p6",
+              "start": 80,
+              "end": 85
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이에 학생회는 학교가 우선 한 달 정도 시범 운영을 해 본 뒤 실제 이용률을 확인해 주기를 요청합니다. 시범 운영 결과를 바탕으로 운영 시간과 대상 학년을 다시 조정하면 더 현실적인 제도를 만들 수 있을 것입니다. 학생들의 학습 환경을 개선하기 위해 학교가 이 제안을 긍정적으로 검토해 주시기를 바랍니다."
+          "revealOnWrong": true
         }
       ]
     }

@@ -749,7 +749,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "한지를 만드는 데 이용한 나무는 무엇인가요?",
+          "prompt": "한지를 만들 때 이용하는 나무를 지문에서 찾으시오.",
           "answerText": "닥나무",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -767,49 +767,14 @@
         },
         {
           "id": "q2",
-          "prompt": "천 년이 지나도 변하지 않는다고 알려진 전통 종이는 무엇인가요?",
-          "answerText": "한지",
+          "prompt": "한지가 변하지 않는다고 알려진 기간을 지문에서 찾으시오.",
+          "answerText": "천 년",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 8,
-              "end": 10
-            },
-            {
-              "paragraphId": "p2",
-              "start": 50,
-              "end": 52
-            },
-            {
-              "paragraphId": "p2",
-              "start": 92,
-              "end": 94
-            },
-            {
-              "paragraphId": "p3",
-              "start": 13,
-              "end": 15
-            },
-            {
-              "paragraphId": "p3",
-              "start": 41,
-              "end": 43
-            },
-            {
-              "paragraphId": "p4",
-              "start": 6,
-              "end": 8
-            },
-            {
-              "paragraphId": "p4",
-              "start": 94,
-              "end": 96
+              "start": 56,
+              "end": 59
             }
           ],
           "scoring": {
@@ -820,7 +785,33 @@
         },
         {
           "id": "q3",
-          "prompt": "옛날 사람들은 찬 바람을 막기 위해 어디에 한지를 발랐나요?",
+          "prompt": "옛날 사람들이 한지에 쓰거나 그린 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "글씨",
+            "그림"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 12,
+              "end": 14
+            },
+            {
+              "paragraphId": "p2",
+              "start": 19,
+              "end": 21
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "한지를 발라 찬 바람을 막은 곳을 나타내는 어구를 지문에서 찾으시오.",
           "answerText": "문과 창문",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -837,33 +828,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "한지를 여러 겹 겹쳐 만든 생활용품 가운데 하나는 무엇인가요?",
-          "answerText": "부채",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 58,
-              "end": 60
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q5",
-          "prompt": "오늘날 한지가 사용되는 것 가운데 집 안 벽을 꾸미는 것은 무엇인가요?",
-          "answerText": "벽지",
+          "prompt": "오늘날에도 한지가 널리 사랑받는 이유를 지문에서 찾으시오.",
+          "answerText": "특유의 아름다움과 우수한 품질",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 50,
-              "end": 52
+              "start": 10,
+              "end": 26
             }
           ],
           "scoring": {

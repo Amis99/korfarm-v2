@@ -552,64 +552,49 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "가방 ( )물을 적었습니다.",
-          "answerText": "준비",
-          "answerMatchMode": "EXACT",
+          "prompt": "어떤 일을 결정하기 위해 여럿이 함께 의논하는 것을 뜻하는 단어를 지문에서 찾아 보세요.",
+          "answerText": "토의",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 136,
-              "end": 138
-            },
-            {
-              "paragraphId": "p2",
-              "start": 70,
-              "end": 72
-            }
+            {"paragraphId": "p1", "start": 53, "end": 55}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "더 ( )지는 봄소풍.",
-          "answerText": "기다려",
-          "answerMatchMode": "EXACT",
+          "prompt": "소풍 갈 때 미리 챙겨야 할 물건을 가리키는 단어를 지문에서 찾아 보세요.",
+          "answerText": "준비물",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 84,
-              "end": 87
-            }
+            {"paragraphId": "p1", "start": 136, "end": 139}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "( )인 방법으로 회의.",
-          "answerText": "민주적",
-          "answerMatchMode": "EXACT",
+          "prompt": "회의에서 의견을 정리한 사람과 칠판에 적은 사람의 역할 두 가지를 모두 찾아 보세요.",
+          "answerText": "진행자, 기록자",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 92,
-              "end": 95
-            }
+            {"paragraphId": "p1", "start": 92, "end": 95},
+            {"paragraphId": "p1", "start": 121, "end": 124}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "친구들이 봄소풍 장소로 의논한 두 곳을 모두 찾아 보세요.",
+          "answerText": "산, 공원",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 29, "end": 30},
+            {"paragraphId": "p1", "start": 70, "end": 71},
+            {"paragraphId": "p1", "start": 36, "end": 38}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         }
       ]

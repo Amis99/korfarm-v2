@@ -1000,93 +1000,69 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "항생제와 내성은 어떤 관계로 설명되나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 29
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "본문이 항생제를 어떤 약이라고 정의하는지 그 부분을 찾으시오",
+          "answerText": "세균의 증식을 막거나 세균을 죽이는 약",
           "answerMatchMode": "ANY",
-          "answerText": "항생제는 세균의 증식을 막거나 세균을 죽이는 약이다."
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 5, "end": 26}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "항생제는 어떤 병에 쓰는 약이라고 먼저 알아야 하나요?",
+          "prompt": "항생제가 방해하는 세균의 생존 과정 세 가지를 본문에서 모두 찾으시오",
+          "answerText": "세균의 세포벽 합성, 단백질 합성, 유전 정보 복제",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 29
-            }
+            {"paragraphId": "p2", "start": 5, "end": 33}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "항생제는 세균의 증식을 막거나 세균을 죽이는 약이다."
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "내성은 왜 생기기 쉬운가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 46
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "본문에서 '항생제 내성'이 무엇인지 정의한 부분을 찾으시오",
+          "answerText": "항생제가 잘 듣지 않게 되는 현상",
           "answerMatchMode": "ANY",
-          "answerText": "문제는 세균이 항생제에 반복해서 노출되면 살아남는 방식이 달라질 수 있다는 점이다."
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 107, "end": 125}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "내성이 심해지면 치료와 병원 대응은 어떻게 달라지나요?",
+          "prompt": "내성이 더 커지는 두 가지 원인을 본문에서 모두 찾으시오",
+          "answerText": "항생제를 꼭 필요한 경우에만 쓰지 않거나, 정해진 기간을 지키지 않고 중간에 복용을 멈출 때",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 66
-            }
+            {"paragraphId": "p4", "start": 4, "end": 55}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "내성은 항생제를 꼭 필요한 경우에만 쓰지 않거나, 정해진 기간을 지키지 않고 중간에 복용을 멈출 때 더 커질 수 있다."
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "항생제를 쓸 때 무엇을 지켜야 하며, 마지막에는 무엇의 개념이라고 정리하나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 80,
-              "end": 156
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "내성을 가진 세균이 다른 사람에게 퍼졌을 때 일어나는 결과를 본문에서 찾으시오",
+          "answerText": "내성을 가진 세균이 다른 사람에게 퍼지면 같은 병이라도 예전보다 치료가 복잡해질 수 있다",
           "answerMatchMode": "ANY",
-          "answerText": "그래서 의료 현장에서는 감염 원인을 정확히 가려 적절한 약을 선택하고, 환자에게는 정해진 용법과 기간을 지키도록 안내하는 일이 중요하다."
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 29, "end": 78}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "내성 확산을 막기 위해 의료 현장이 해야 한다고 본문이 든 두 가지 일을 모두 찾으시오",
+          "answerText": "감염 원인을 정확히 가려 적절한 약을 선택하고, 환자에게는 정해진 용법과 기간을 지키도록 안내하는 일이 중요하다",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 93, "end": 155}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

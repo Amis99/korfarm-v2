@@ -1329,36 +1329,16 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지구의 겉면이 여러 개의 판으로 나뉘어 움직인다는 이론은 무엇인가요?",
-          "answerText": "판 구조론",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 15,
-              "end": 20
-            },
-            {
-              "paragraphId": "p1",
-              "start": 89,
-              "end": 94
-            },
-            {
-              "paragraphId": "p1",
-              "start": 305,
-              "end": 310
-            },
-            {
-              "paragraphId": "p5",
-              "start": 6,
-              "end": 11
-            },
-            {
-              "paragraphId": "p5",
-              "start": 123,
-              "end": 128
-            }
-          ],
+      "prompt": "판 구조론의 정의에 해당하는 부분을 찾으시오.",
+      "answerText": "지구의 겉면이 거대한 암석 덩어리인 여러 개의 '판'으로 나누어져 있으며, 이들이 끊임없이 이동하고 있다는 이론",
+      "answerMatchMode": "ANY",
+      "answerRanges": [
+        {
+          "paragraphId": "p1",
+          "start": 23,
+          "end": 85
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1367,21 +1347,30 @@
         },
         {
           "id": "q2",
-          "prompt": "판이 이동하는 원동력은 무엇인가요?",
-          "answerText": "맨틀 대류",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 141,
-              "end": 146
-            },
-            {
-              "paragraphId": "p2",
-              "start": 26,
-              "end": 31
-            }
-          ],
+      "prompt": "판 구조론의 바탕이 되거나 결합한 이론을 모두 찾으시오.",
+      "answerTexts": [
+        "대륙 이동설",
+        "해저 확장설",
+        "맨틀 대류설"
+      ],
+      "answerMatchMode": "ALL",
+      "answerRanges": [
+        {
+          "paragraphId": "p1",
+          "start": 118,
+          "end": 124
+        },
+        {
+          "paragraphId": "p1",
+          "start": 133,
+          "end": 139
+        },
+        {
+          "paragraphId": "p1",
+          "start": 141,
+          "end": 147
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1390,21 +1379,55 @@
         },
         {
           "id": "q3",
-          "prompt": "새로운 지각이 형성되는 경계는 무엇인가요?",
-          "answerText": "발산형 경계",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
+      "prompt": "판과 판이 만나는 경계의 세 가지 유형을 모두 찾으시오.",
+      "answerTexts": [
+        "발산형 경계",
+        "수렴형 경계",
+        "보존형 경계"
+      ],
+      "answerMatchMode": "ALL",
+      "answerRanges": [
+        {
+          "paragraphId": "p2",
               "start": 139,
               "end": 145
             },
-            {
-              "paragraphId": "p2",
-              "start": 214,
-              "end": 220
-            }
-          ],
+        {
+          "paragraphId": "p2",
+          "start": 214,
+          "end": 220
+        },
+        {
+          "paragraphId": "p2",
+          "start": 171,
+          "end": 177
+        },
+        {
+          "paragraphId": "p3",
+          "start": 0,
+          "end": 6
+        },
+        {
+          "paragraphId": "p3",
+          "start": 218,
+          "end": 224
+        },
+        {
+          "paragraphId": "p2",
+          "start": 199,
+          "end": 205
+        },
+        {
+          "paragraphId": "p4",
+          "start": 0,
+          "end": 6
+        },
+        {
+          "paragraphId": "p4",
+          "start": 238,
+          "end": 244
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1413,16 +1436,16 @@
         },
         {
           "id": "q4",
-          "prompt": "대륙판끼리 충돌해 생긴 대표적 산맥은 무엇인가요?",
-          "answerText": "히말라야 산맥",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 69,
-              "end": 76
-            }
-          ],
+      "prompt": "수렴형 경계가 형성하는 지형을 찾으시오.",
+      "answerText": "거대한 산맥이나 깊은 해구",
+      "answerMatchMode": "ANY",
+      "answerRanges": [
+        {
+          "paragraphId": "p3",
+          "start": 8,
+          "end": 22
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1431,16 +1454,16 @@
         },
         {
           "id": "q5",
-          "prompt": "보존형 경계의 대표적 사례는 무엇인가요?",
-          "answerText": "산 안드레아스 단층",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 67,
-              "end": 77
-            }
-          ],
+      "prompt": "보존형 경계의 정의에 해당하는 부분을 찾으시오.",
+      "answerText": "지각의 생성이나 소멸 없이 판들이 수평적으로 어긋나며 마찰을 일으키는 지역",
+      "answerMatchMode": "ANY",
+      "answerRanges": [
+        {
+          "paragraphId": "p4",
+          "start": 8,
+          "end": 49
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45

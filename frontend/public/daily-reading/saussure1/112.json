@@ -552,19 +552,44 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "소식을 널리 무엇기 위해 만듦인가요?",
-          "answerText": "알리",
-          "answerMatchMode": "EXACT",
+          "prompt": "물건이나 소식을 널리 알리기 위해 만든 글의 종류가 무엇인지 글에서 찾아 모두 써 보세요",
+          "answerText": "광고문",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 17,
-              "end": 19
+              "start": 0,
+              "end": 3
+            },
+            {
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 36
+            },
+            {
+              "paragraphId": "p1",
+              "start": 145,
+              "end": 148
             },
             {
               "paragraphId": "p2",
-              "start": 15,
-              "end": 17
+              "start": 0,
+              "end": 3
+            },
+            {
+              "paragraphId": "p2",
+              "start": 81,
+              "end": 84
+            },
+            {
+              "paragraphId": "p2",
+              "start": 115,
+              "end": 118
+            },
+            {
+              "paragraphId": "p2",
+              "start": 155,
+              "end": 158
             }
           ],
           "scoring": {
@@ -576,9 +601,33 @@
         },
         {
           "id": "q2",
-          "prompt": "전하고자 하는 무엇 내용인가요?",
+          "prompt": "광고문에서 짧은 문장과 함께 사람들의 눈길을 끄는 시각 자료가 무엇인지 찾아 모두 써 보세요",
+          "answerText": "그림",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 54,
+              "end": 56
+            },
+            {
+              "paragraphId": "p2",
+              "start": 39,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "광고문이 짧지만 전하고자 하는 무엇 내용이 정확히 담겨 있는지 글에서 찾아 써 보세요",
           "answerText": "핵심",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -594,15 +643,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "유익한 무엇판과 같습니나요?",
-          "answerText": "안내",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "광고문이 우리 생활을 편리하게 도와주는 유익한 무엇과 같다고 했는지 글에서 찾아 써 보세요",
+          "answerText": "안내판",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 141,
-              "end": 143
+              "end": 144
             }
           ],
           "scoring": {

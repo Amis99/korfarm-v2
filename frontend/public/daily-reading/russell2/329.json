@@ -1039,7 +1039,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "어간에 접사가 붙어 만들어지는 피동을 뜻하는 말은?",
+          "prompt": "용언 어간에 접사가 붙어 만들어지는 피동 표현을 뜻하는 다섯 글자 단어를 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -1073,8 +1073,9 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
@@ -1082,50 +1083,7 @@
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '-어지다'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 54,
-              "end": 58
-            },
-            {
-              "paragraphId": "p3",
-              "start": 7,
-              "end": 11
-            },
-            {
-              "paragraphId": "p3",
-              "start": 83,
-              "end": 87
-            },
-            {
-              "paragraphId": "p4",
-              "start": 3,
-              "end": 7
-            },
-            {
-              "paragraphId": "p4",
-              "start": 114,
-              "end": 118
-            },
-            {
-              "paragraphId": "p6",
-              "start": 59,
-              "end": 63
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "-어지다"
-        },
-        {
-          "id": "q3",
-          "prompt": "이미 피동형인데 다시 피동을 얹은 표현을 뜻하는 말은?",
+          "prompt": "이미 피동형인 말 위에 다시 피동을 얹어 만든 표현을 뜻하는 다섯 글자 단어를 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -1139,53 +1097,129 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
           "answerText": "이중 피동"
         },
         {
-          "id": "q4",
-          "prompt": "말을 실제로 자연스럽게 쓰는 습관을 뜻하는 말은?",
+          "id": "q3",
+          "prompt": "주어가 다른 대상에 직접 작용을 미치는 동사를 뜻하는 세 글자 단어를 지문에서 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 25,
-              "end": 30
+              "paragraphId": "p2",
+              "start": 101,
+              "end": 104
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "어휘 관습"
+          "answerText": "타동사"
         },
         {
-          "id": "q5",
-          "prompt": "어떤 대상의 성질이나 상태가 바뀌는 것을 뜻하는 말은?",
+          "id": "q4",
+          "prompt": "사물의 성질이나 상태를 나타내는 말로 '문이 넓어졌다'와 결합된다고 한 세 글자 단어를 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 21,
-              "end": 26
-            },
-            {
-              "paragraphId": "p6",
-              "start": 71,
-              "end": 76
+              "start": 56,
+              "end": 59
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "상태 변화"
+          "answerText": "형용사"
+        },
+        {
+          "id": "q5",
+          "prompt": "지문에서 '잡다-잡히다', '읽다-읽히다'와 같이 짝이 굳어 있다고 한 피동의 종류를 다섯 글자로 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 38,
+              "end": 43
+            },
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 5
+            },
+            {
+              "paragraphId": "p2",
+              "start": 80,
+              "end": 85
+            },
+            {
+              "paragraphId": "p3",
+              "start": 60,
+              "end": 65
+            },
+            {
+              "paragraphId": "p6",
+              "start": 3,
+              "end": 8
+            },
+            {
+              "paragraphId": "p6",
+              "start": 44,
+              "end": 49
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "파생 피동"
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 '통사 피동'이 쓰인 위치를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 64,
+              "end": 69
+            },
+            {
+              "paragraphId": "p3",
+              "start": 143,
+              "end": 148
+            },
+            {
+              "paragraphId": "p5",
+              "start": 116,
+              "end": 121
+            },
+            {
+              "paragraphId": "p6",
+              "start": 10,
+              "end": 15
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerText": "통사 피동"
         }
       ]
     }

@@ -571,7 +571,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "중심 대상은 무엇인가요?",
+          "prompt": "글 초고에 붙여 둔 현재 제목을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -589,12 +589,17 @@
         },
         {
           "id": "q2",
-          "prompt": "핵심 개념은 무엇인가요?",
+          "prompt": "이번 프로그램을 함께 마련한 주체를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 35,
-              "end": 49
+              "start": 9,
+              "end": 19
+            },
+            {
+              "paragraphId": "p2",
+              "start": 21,
+              "end": 24
             }
           ],
           "scoring": {
@@ -602,12 +607,67 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "수요일 점심시간마다 학생들"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "학교 앞 작은 서점",
+            "학생회"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "주요 소재는 무엇인가요?",
+          "prompt": "학생들이 책을 읽을 수 있게 한 때와 장소를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 35,
+              "end": 45
+            },
+            {
+              "paragraphId": "p2",
+              "start": 51,
+              "end": 67
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "수요일 점심시간마다",
+            "서점 한쪽 공간이나 복도 책상"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "참여 학생의 구체적 반응 두 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 26,
+              "end": 53
+            },
+            {
+              "paragraphId": "p3",
+              "start": 62,
+              "end": 86
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "짧은 시집을 읽고 바로 친구에게 같은 책을 권했고",
+            "시험이 끝나면 읽을 소설을 미리 골라 두었다"
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "글쓴이가 여러 번 되풀이했다고 한 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -624,13 +684,13 @@
           "answerText": "학생들이 좋아했다"
         },
         {
-          "id": "q4",
-          "prompt": "장점과 한계를 나누어 정리하거나, 무엇 주는 문장이 필요해 보인다?",
+          "id": "q6",
+          "prompt": "장소가 넓지 않아서 늦게 온 학생이 해야 했던 일을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 155,
-              "end": 169
+              "start": 32,
+              "end": 44
             }
           ],
           "scoring": {
@@ -639,11 +699,11 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "개선점으로 자연스럽게 이어"
+          "answerText": "서서 책을 골라야 했고"
         },
         {
-          "id": "q5",
-          "prompt": "마지막 문단에는 '무엇'고만 적어 두었는데, 이 문장은 기사답기보다 개인적인 바람에 가깝다?",
+          "id": "q7",
+          "prompt": "기사답기보다 개인적인 바람에 가깝다고 본 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
@@ -660,13 +720,13 @@
           "answerText": "앞으로도 계속했으면 좋겠다"
         },
         {
-          "id": "q6",
-          "prompt": "문단의 초점은 무엇인가요?",
+          "id": "q8",
+          "prompt": "내용을 다시 묶을 순서로 제시된 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 59,
-              "end": 72
+              "start": 111,
+              "end": 130
             }
           ],
           "scoring": {
@@ -675,7 +735,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "바뀌었고 학생들이 자발적"
+          "answerText": "행사 소개, 변화, 한계, 제안 순"
         }
       ]
     }

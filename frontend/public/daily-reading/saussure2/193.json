@@ -593,14 +593,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "직사각형 모양에 가운데에 둥근 구멍이 뚫려 있는 연은 무엇인가요?",
-          "answerText": "방패연",
-          "answerMatchMode": "EXACT",
+          "prompt": "방패연의 모양과 구멍에 대한 설명을 지문에서 찾으시오.",
+          "answerText": "직사각형 모양에 가운데에 둥근 구멍이 뚫려 있어",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 78,
-              "end": 81
+              "start": 84,
+              "end": 110
             }
           ],
           "scoring": {
@@ -612,14 +612,14 @@
         },
         {
           "id": "q2",
-          "prompt": "서로의 연줄을 비비고 당겨 상대방의 연줄을 끊는 놀이는 무엇인가요?",
-          "answerText": "연싸움",
-          "answerMatchMode": "EXACT",
+          "prompt": "가오리연이 하늘에서 보여주는 모습을 지문에서 찾으시오.",
+          "answerText": "흔들흔들 멋진 몸짓",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 14,
-              "end": 17
+              "paragraphId": "p1",
+              "start": 167,
+              "end": 177
             }
           ],
           "scoring": {
@@ -631,14 +631,33 @@
         },
         {
           "id": "q3",
-          "prompt": "소원을 적은 종이를 연에 매달아 날려 보내는 풍습은 무엇인가요?",
-          "answerText": "액막이 연날리기",
-          "answerMatchMode": "EXACT",
+          "prompt": "연싸움에서 연줄이 끊기면 연이 어떻게 되는지 지문에서 찾으시오.",
+          "answerText": "바람에 실려 먼 곳까지 날아가 버리고",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 130,
+              "end": 150
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "액막이 연날리기가 멀리 날려 보낸다고 한 대상을 지문에서 찾으시오.",
+          "answerText": "한 해의 나쁜 기운",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 48,
-              "end": 56
+              "start": 74,
+              "end": 84
             }
           ],
           "scoring": {

@@ -474,30 +474,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리가 탄 탈것은?",
+          "prompt": "친구들과 공원에서 즐거운 체험 학습 시간을 보내며 회의 때 약속한 대로 헬멧을 쓰고 탔던 탈것은 무엇인지 찾아 써 보세요",
           "answerText": "자전거",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 13,
-              "end": 16
-            },
-            {
-              "paragraphId": "p1",
-              "start": 135,
-              "end": 138
-            },
-            {
-              "paragraphId": "p2",
-              "start": 98,
-              "end": 101
-            },
-            {
-              "paragraphId": "p2",
-              "start": 154,
-              "end": 157
-            }
+            {"paragraphId": "p1", "start": 13, "end": 16},
+            {"paragraphId": "p1", "start": 135, "end": 138},
+            {"paragraphId": "p2", "start": 98, "end": 101},
+            {"paragraphId": "p2", "start": 154, "end": 157}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -508,20 +492,11 @@
         },
         {
           "id": "q2",
-          "prompt": "연습을 한 장소는?",
-          "answerText": "공원",
-          "answerMatchMode": "EXACT",
+          "prompt": "안전 헬멧을 쓰고 조심스럽게 발로 밟았던 자전거의 부분은 무엇인지 찾아 써 보세요",
+          "answerText": "페달",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 8,
-              "end": 10
-            },
-            {
-              "paragraphId": "p1",
-              "start": 143,
-              "end": 145
-            }
+            {"paragraphId": "p1", "start": 77, "end": 79}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -532,20 +507,26 @@
         },
         {
           "id": "q3",
-          "prompt": "잘 지켜야 할 무엇 수칙인가요?",
-          "answerText": "안전",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구들과 함께 힘을 합쳐 다리가 조금 아팠지만 포기하지 않고 끝까지 올라갔던 길은 어떤 길인지 찾아 써 보세요",
+          "answerText": "언덕길",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 61,
-              "end": 63
-            },
-            {
-              "paragraphId": "p2",
-              "start": 141,
-              "end": 143
-            }
+            {"paragraphId": "p2", "start": 27, "end": 30}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "자전거 타기 과정에서 서로 응원하며 더욱 깊어진 친구들과의 사이를 무엇이라고 했는지 찾아 써 보세요",
+          "answerText": "우정",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 117, "end": 119}
           ],
           "scoring": {
             "correctDeltaSec": 10,

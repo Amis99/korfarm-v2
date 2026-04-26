@@ -1327,34 +1327,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "배출되는 탄소를 대기 중으로 퍼지기 전에 잡아내는 기술은 무엇인가요?",
-          "answerText": "탄소포집기술",
+          "prompt": "탄소포집기술이 무엇인지 설명한 부분을 찾으시오.",
+          "answerText": "배출되는 탄소를 대기 중으로 퍼지기 전에 잡아내는 탄소포집기술",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 141,
+              "start": 113,
               "end": 147
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 6
-            },
-            {
-              "paragraphId": "p4",
-              "start": 168,
-              "end": 174
-            },
-            {
-              "paragraphId": "p5",
-              "start": 4,
-              "end": 10
-            },
-            {
-              "paragraphId": "p5",
-              "start": 189,
-              "end": 195
             }
           ],
           "scoring": {
@@ -1365,14 +1345,14 @@
         },
         {
           "id": "q2",
-          "prompt": "화석 연료를 태운 뒤 배기가스에서 이산화탄소를 걸러내는 방식은 무엇인가요?",
-          "answerText": "연소 후 포집",
+          "prompt": "탄소를 포집하는 세 가지 방식이 나열된 부분을 찾으시오.",
+          "answerText": "연소 전, 연소 후, 순산소 연소",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 47,
-              "end": 54
+              "start": 16,
+              "end": 34
             }
           ],
           "scoring": {
@@ -1383,19 +1363,14 @@
         },
         {
           "id": "q3",
-          "prompt": "공기 대신 순수한 산소만을 사용해 연료를 태우는 방식은 무엇인가요?",
-          "answerText": "순산소 연소",
+          "prompt": "저장 기술이 모은 탄소를 어떻게 처리하는지 설명한 부분을 찾으시오.",
+          "answerText": "모은 탄소를 압축하여 액체 상태로 만든 뒤 지하 깊은 곳에 묻는 방식",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 28,
-              "end": 34
-            },
-            {
-              "paragraphId": "p2",
-              "start": 162,
-              "end": 168
+              "paragraphId": "p3",
+              "start": 56,
+              "end": 94
             }
           ],
           "scoring": {
@@ -1406,14 +1381,14 @@
         },
         {
           "id": "q4",
-          "prompt": "포집한 탄소를 유용한 자원으로 바꾸는 것은 무엇인가요?",
-          "answerText": "재활용 기술",
+          "prompt": "재활용 기술이 포집한 탄소를 어떻게 바꾸는지 설명한 부분을 찾으시오.",
+          "answerText": "포집한 탄소를 화학 공정을 거쳐 유용한 플라스틱이나 친환경 연료로 변환하는 것",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 98,
-              "end": 104
+              "start": 106,
+              "end": 149
             }
           ],
           "scoring": {
@@ -1424,14 +1399,22 @@
         },
         {
           "id": "q5",
-          "prompt": "전문가들이 이 기술을 탄소 중립으로 가는 무엇이라고 강조했나요?",
-          "answerText": "징검다리",
-          "answerMatchMode": "ANY",
+          "prompt": "저장과 재활용에서 여전히 해결해야 할 과제를 모두 찾으시오.",
+          "answerTexts": [
+            "저장 공간의 한계",
+            "높은 변환 비용"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 201,
-              "end": 205
+              "paragraphId": "p3",
+              "start": 207,
+              "end": 216
+            },
+            {
+              "paragraphId": "p3",
+              "start": 218,
+              "end": 226
             }
           ],
           "scoring": {

@@ -571,7 +571,25 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "목숨이란 마치 깨어진 배 조각 여기저기 흩어져 무엇 어설프고?",
+          "prompt": "화자는 목숨을 무엇에 비유하고 있나요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 8,
+              "end": 16
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "깨어진 배 조각"
+        },
+        {
+          "id": "q2",
+          "prompt": "목숨이 여기저기 흩어져 무엇보다 어설프다고 했나요?",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -588,13 +606,13 @@
           "answerText": "마을이 구죽죽한 어촌보담"
         },
         {
-          "id": "q2",
-          "prompt": "삶의 티끌만 오래 묵은 포범(布帆)처럼 달아 매었다 무엇은 날이었건만?",
+          "id": "q3",
+          "prompt": "오래 묵은 포범(布帆)처럼 달아 매었다고 한 것은 무엇인가요?",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 29,
-              "end": 39
+              "start": 0,
+              "end": 5
             }
           ],
           "scoring": {
@@ -603,32 +621,32 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "남들은 기뻤다는 젊"
-        },
-        {
-          "id": "q3",
-          "prompt": "밤마다 내 무엇는 쩡크와 같아 소금에 절고 조수(潮水)에 부풀어 올랐다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 6,
-              "end": 16
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "꿈은 서해를 밀항하"
+          "answerText": "삶의 티끌"
         },
         {
           "id": "q4",
-          "prompt": "중요한 기준은 무엇인가요?",
+          "prompt": "남들이 기뻤다고 한 시기를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
+              "paragraphId": "p2",
+              "start": 38,
+              "end": 42
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "젊은 날"
+        },
+        {
+          "id": "q5",
+          "prompt": "화자의 꿈은 무엇과 같다고 표현되었나요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
               "start": 9,
               "end": 20
             }
@@ -639,34 +657,48 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "암초를 벗어나면 태풍"
-        },
-        {
-          "id": "q5",
-          "prompt": "쫓기는 마음 지친 무엇을 한숨에 기오르면 시궁치는 열대 식물처럼 발목을 오여쌌다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 14
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "쫓기는 마음 지친 몸이길래"
+          "answerText": "서해를 밀항하는 쩡크"
         },
         {
           "id": "q6",
-          "prompt": "문단의 초점은 무엇인가요?",
+          "prompt": "암초를 벗어난 뒤 화자가 겪거나 얻지 못한 것을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 54,
-              "end": 67
+              "paragraphId": "p4",
+              "start": 18,
+              "end": 27
+            },
+            {
+              "paragraphId": "p4",
+              "start": 37,
+              "end": 55
+            },
+            {
+              "paragraphId": "p4",
+              "start": 60,
+              "end": 75
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "태풍과 싸워 가고",
+            "산호도(珊瑚島)는 구경도 못 하는",
+            "남십자성이 비쳐 주도 않았다"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "시궁치는 무엇처럼 발목을 오여쌌나요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 38,
+              "end": 45
             }
           ],
           "scoring": {
@@ -675,7 +707,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "흘러간 생활을 들여다보며"
+          "answerText": "열대 식물처럼"
+        },
+        {
+          "id": "q8",
+          "prompt": "화자는 무엇에 붙어 왔다고 했나요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 16,
+              "end": 29
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "다 삭아 빠진 소라 껍질"
         }
       ]
     }

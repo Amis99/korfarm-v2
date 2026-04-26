@@ -913,39 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "액체 상태의 물이 변해 공기 중으로 날아가는 기체는 무엇인가요?",
-          "answerText": "수증기",
+          "prompt": "증발의 정의를 찾으시오.",
+          "answerText": "액체 상태의 물이 주변의 열을 흡수하여 기체 상태인 수증기로 확 바뀌는 현상",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 158,
-              "end": 161
-            },
-            {
-              "paragraphId": "p1",
-              "start": 219,
-              "end": 222
-            },
-            {
-              "paragraphId": "p3",
-              "start": 205,
-              "end": 208
-            },
-            {
-              "paragraphId": "p3",
-              "start": 250,
-              "end": 253
-            },
-            {
-              "paragraphId": "p4",
-              "start": 107,
-              "end": 110
-            },
-            {
-              "paragraphId": "p4",
-              "start": 152,
-              "end": 155
+              "start": 190,
+              "end": 232
             }
           ],
           "scoring": {
@@ -956,66 +931,27 @@
         },
         {
           "id": "q2",
-          "prompt": "물이 열을 흡수해 수증기로 바뀌는 현상을 무엇이라고 하나요?",
-          "answerText": "증발",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 238,
-              "end": 240
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 184,
-              "end": 186
-            },
-            {
-              "paragraphId": "p2",
-              "start": 246,
-              "end": 248
-            },
-            {
-              "paragraphId": "p2",
-              "start": 269,
-              "end": 271
-            },
-            {
-              "paragraphId": "p4",
-              "start": 9,
-              "end": 11
-            },
-            {
-              "paragraphId": "p4",
-              "start": 148,
-              "end": 150
-            },
-            {
-              "paragraphId": "p4",
-              "start": 218,
-              "end": 220
-            }
+          "prompt": "일상에서 볼 수 있는 증발의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "옷에 있던 물기가 공기 중으로 싹 날아가며 옷이 뽀송뽀송하게 잘 마릅니다",
+            "땀이 피부의 열을 뺏으며 증발하기 때문에 몸이 시원하고 상쾌해지는 기분",
+            "바닷물을 넓은 밭에 가두어 햇볕에 물을 모조리 증발시키고 소금만 하얗게 얻어내는 염전"
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "바닷물에서 소금을 얻는 데 이용한 조상들의 지혜로운 장소는 무엇인가요?",
-          "answerText": "염전",
-          "answerMatchMode": "ANY",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 265,
+              "start": 102,
+              "end": 142
+            },
+            {
+              "paragraphId": "p2",
+              "start": 170,
+              "end": 209
+            },
+            {
+              "paragraphId": "p2",
+              "start": 220,
               "end": 267
             }
           ],
@@ -1026,35 +962,33 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "수증기가 차가워져 다시 물방울로 바뀌는 현상은 무엇인가요?",
-          "answerText": "응결",
+          "id": "q3",
+          "prompt": "컵 겉면의 물방울이 생긴 까닭을 찾으시오.",
+          "answerText": "공기 중에 둥둥 떠다니던 가벼운 수증기가 차가운 컵 표면을 만나 액체인 물로 변한 것",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 301,
-              "end": 303
-            },
+              "start": 187,
+              "end": 234
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "응결의 정의를 찾으시오.",
+          "answerText": "기체 상태인 수증기가 열을 뺏기고 차가워져서 다시 액체인 물방울로 변신하는 훌륭하고 멋진 현상",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p4",
-              "start": 112,
-              "end": 114
-            },
-            {
-              "paragraphId": "p4",
-              "start": 175,
-              "end": 177
-            },
-            {
-              "paragraphId": "p4",
-              "start": 222,
-              "end": 224
+              "paragraphId": "p3",
+              "start": 243,
+              "end": 295
             }
           ],
           "scoring": {
@@ -1065,14 +999,22 @@
         },
         {
           "id": "q5",
-          "prompt": "밤사이에 수증기가 응결되어 풀잎 끝에 맺힌 것은 무엇인가요?",
-          "answerText": "이슬",
-          "answerMatchMode": "ANY",
+          "prompt": "응결이 자연에서 나타나는 예를 모두 찾으시오.",
+          "answerTexts": [
+            "밤사이에 공기가 차가워지며 수증기가 응결된 것",
+            "하늘 높이 차가운 곳으로 올라가 응결되면서 작은 물방울로 뭉친 결과물"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 88,
-              "end": 90
+              "start": 92,
+              "end": 117
+            },
+            {
+              "paragraphId": "p4",
+              "start": 157,
+              "end": 195
             }
           ],
           "scoring": {

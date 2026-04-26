@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "중심 대상은 무엇인가요?",
+          "prompt": "정당방위와 긴급피난의 공통점을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 10
+              "start": 85,
+              "end": 102
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정당방위와 긴급피난"
+          "answerText": "위험한 상황에 대응한다는 공통점"
         },
         {
           "id": "q2",
-          "prompt": "무엇 침해를 막기 위해 상당한 범위에서 대응하는 경우를 말한다?",
+          "prompt": "정당방위가 막으려는 침해를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 13
+              "start": 6,
+              "end": 16
             }
           ],
           "scoring": {
@@ -603,20 +603,33 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정당방위는 현재의 부당한"
+          "answerText": "현재의 부당한 침해"
         },
         {
           "id": "q3",
-          "prompt": "주요 소재는 무엇인가요?",
+          "prompt": "긴급피난이 보호하려는 위험의 예를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 26,
-              "end": 39
-            },
+              "start": 21,
+              "end": 32
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "재난이나 급박한 위험"
+        },
+        {
+          "id": "q4",
+          "prompt": "두 개념 모두에서 함께 따져야 하는 것을 찾으시오.",
+          "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 34,
+              "paragraphId": "p4",
+              "start": 29,
               "end": 47
             }
           ],
@@ -626,34 +639,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "급박한 위험으로부터 법익"
-        },
-        {
-          "id": "q4",
-          "prompt": "법은 위험에 맞선 행동을 이해하되, 그 무엇도 함께 살핀다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 114,
-              "end": 127
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "대응이 지나치지 않았는지"
+          "answerText": "위험의 정도와 대응 수단의 상당성"
         },
         {
           "id": "q5",
-          "prompt": "위험이 이미 끝났거나 아직 매우 멀리 있다면, 그 무엇으로 보기 어렵다?",
+          "prompt": "실제 판단에서 중요하다고 한 것을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 52,
-              "end": 66
+              "start": 9,
+              "end": 16
             }
           ],
           "scoring": {
@@ -662,16 +657,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "행위를 정당방위나 긴급피난"
+          "answerText": "상황의 급박성"
         },
         {
           "id": "q6",
-          "prompt": "문단의 초점은 무엇인가요?",
+          "prompt": "긴급피난을 정리한 어구를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 14
+              "start": 34,
+              "end": 64
             }
           ],
           "scoring": {
@@ -680,7 +675,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정리하면 정당방위는 부당한"
+          "answerText": "급박한 위험으로부터 법익을 보호하기 위한 불가피한 대응"
         }
       ]
     }

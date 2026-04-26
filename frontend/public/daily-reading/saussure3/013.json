@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지구 내부의 에너지가 한꺼번에 분출되면서 땅이 갑자기 심하게 흔들리고 건물이 무너지는 현상은?",
+          "prompt": "지구 내부의 거대한 에너지가 분출되어 땅이 흔들리는 현상을 무엇이라고 하는지 지문에서 찾아 쓰시오.",
           "answerText": "지진",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -591,34 +591,22 @@
         },
         {
           "id": "q2",
-          "prompt": "지구 안의 뜨거운 에너지가 땅을 뚫고 뿜어져 나와 뜨거운 용암이 흘러내리게 되는 자연 현상은?",
-          "answerText": "화산",
-          "answerMatchMode": "EXACT",
+          "prompt": "화산이 폭발하면 주변 숲과 마을을 뒤덮는 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "뜨거운 용암",
+            "화산재"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 29,
-              "end": 31
-            },
-            {
-              "paragraphId": "p2",
-              "start": 41,
-              "end": 43
+              "start": 50,
+              "end": 56
             },
             {
               "paragraphId": "p2",
               "start": 58,
-              "end": 60
-            },
-            {
-              "paragraphId": "p2",
-              "start": 93,
-              "end": 95
-            },
-            {
-              "paragraphId": "p3",
-              "start": 99,
-              "end": 101
+              "end": 61
             }
           ],
           "scoring": {
@@ -630,9 +618,9 @@
         },
         {
           "id": "q3",
-          "prompt": "비문학 글을 읽을 때 문단이 우리에게 전달하고자 하는 제일 중요하고 핵심이 되는 뜻은?",
+          "prompt": "비문학 글을 읽을 때 문단이 전달하는 제일 중요한 것으로 찾아야 하는 것을 지문에서 찾아 쓰시오.",
           "answerText": "중심 내용",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -653,6 +641,25 @@
               "paragraphId": "p3",
               "start": 45,
               "end": 50
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "지진과 화산 같은 재난에 대해 어떤 태도를 기를 수 있는지 지문에서 찾아 쓰시오.",
+          "answerText": "재난에 대비하는 태도",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 105,
+              "end": 116
             }
           ],
           "scoring": {

@@ -1113,93 +1113,72 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "문맥상 수요곡선은 무엇을 뜻하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 13,
-              "end": 53
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 수요곡선의 정의를 찾으시오.",
+          "answerText": "수요곡선은 어떤 물건의 가격이 달라질 때 사람들이 얼마나 사고 싶어 하는지를 그림으로 나타낸 것이다",
           "answerMatchMode": "ANY",
-          "answerText": "가격이 달라질 때 사람들이 얼마나 사고 싶어 하는지를 그림으로 나타낸 것"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 0, "end": 55}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "문맥상 기울기는 무엇을 뜻하는가?",
+          "prompt": "수요곡선을 그릴 때 가로축과 세로축에 놓는 것을 모두 찾으시오.",
+          "answerText": "가로축에 수량을·세로축에 가격을",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 183,
-              "end": 217
-            }
+            {"paragraphId": "p2", "start": 15, "end": 23},
+            {"paragraphId": "p2", "start": 25, "end": 33}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "따라서 수요곡선의 기울기에는 소비자의 선택 방향이 담겨 있다."
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "문맥상 일반화는 무엇을 뜻하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 47,
-              "end": 108
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "수요곡선이 오른쪽 아래로 기울어지는 까닭을 뜻하는 부분을 찾으시오.",
+          "answerText": "가격이 낮을수록 수요량이 늘어나는 경향",
           "answerMatchMode": "ANY",
-          "answerText": "값이 내려가면 원래 사지 않으려던 사람도 물건을 살 수 있고, 이미 사려던 사람도 더 많이 사려 할 수 있다."
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 155, "end": 176}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "문맥상 이동은 무엇을 뜻하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 123,
-              "end": 176
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "수요곡선이 아래로 내려가는 핵심 이유를 찾으시오.",
+          "answerText": "같은 돈으로 더 많이 살 수 있게 되기 때문",
           "answerMatchMode": "ANY",
-          "answerText": "이런 경우에는 곡선 위의 점이 움직이는 것이 아니라 수요곡선 자체가 옆으로 이동한다고 설명한다."
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 19, "end": 43}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "문맥상 출발점은 무엇을 뜻하는가?",
+          "prompt": "같은 가격에서도 수요량을 달라지게 하는 조건의 예시를 모두 찾으시오.",
+          "answerText": "소득이 늘거나·유행이 바뀌거나·다른 물건의 가격이 크게 변하면",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 172,
-              "end": 249
-            }
+            {"paragraphId": "p4", "start": 63, "end": 70},
+            {"paragraphId": "p4", "start": 71, "end": 79},
+            {"paragraphId": "p4", "start": 81, "end": 98}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "다른 조건이 변할 때 수요곡선에 어떤 변화가 일어나는지 찾으시오.",
+          "answerText": "수요곡선 자체가 옆으로 이동한다",
           "answerMatchMode": "ANY",
-          "answerText": "그래서 수요곡선은 경제학에서 소비자의 선택을 설명하는 출발점이자, 가격과 수량의 관계를 시각적으로 보여 주는 핵심 개념이라고 할 수 있다."
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 152, "end": 169}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

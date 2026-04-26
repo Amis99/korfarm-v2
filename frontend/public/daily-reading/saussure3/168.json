@@ -557,19 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "쉽게 포기하지 않고 끝까지 견디어 나가는 마음은 무엇인가요?",
-          "answerText": "끈기",
-          "answerMatchMode": "EXACT",
+          "prompt": "첫 번째 문단에서 까마귀가 발견한 것은 무엇인가요?",
+          "answerText": "물이 조금 남은 병",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 104,
-              "end": 106
-            },
-            {
-              "paragraphId": "p3",
-              "start": 90,
-              "end": 92
+              "start": 9,
+              "end": 19
             }
           ],
           "scoring": {
@@ -581,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "작고 단단한 돌멩이를 뜻하는 말은 무엇인가요?",
-          "answerText": "자갈을",
-          "answerMatchMode": "EXACT",
+          "prompt": "첫 번째 문단에서 까마귀가 짜내어 해결책을 찾은 것은 무엇인가요?",
+          "answerText": "지혜를",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
+              "paragraphId": "p1",
+              "start": 75,
+              "end": 78
             }
           ],
           "scoring": {
@@ -600,14 +595,41 @@
         },
         {
           "id": "q3",
-          "prompt": "이루고자 하는 마지막 지점이나 목적을 뜻하는 말은?",
-          "answerText": "목표에",
-          "answerMatchMode": "EXACT",
+          "prompt": "두 번째 문단에서 까마귀가 느꼈을 것으로 상상한 두 가지 마음을 모두 찾으시오.",
+          "answerTexts": [
+            "간절함",
+            "희망"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 32,
+              "end": 35
+            },
+            {
+              "paragraphId": "p2",
+              "start": 37,
+              "end": 39
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "세 번째 문단에서 힘든 일을 어떻게 해결하면 목표에 도달할 수 있다고 했나요?",
+          "answerText": "조금씩 나누어 해결하면",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 68,
-              "end": 71
+              "start": 51,
+              "end": 63
             }
           ],
           "scoring": {

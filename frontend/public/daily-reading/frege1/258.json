@@ -584,14 +584,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "앤이 산딸기 주스인 줄 알고 다이애나에게 준 것은 무엇인가요?",
-          "answerText": "포도주",
+          "prompt": "다과회를 열었던 날 앤에게 일어난 일을 요약한 표현을 찾으시오.",
+          "answerText": "큰 실수를 저질렀다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 55,
-              "end": 58
+              "start": 28,
+              "end": 38
             }
           ],
           "scoring": {
@@ -602,61 +602,7 @@
         },
         {
           "id": "q2",
-          "prompt": "두 사람이 만나는 것을 금지한 사람은 누구인가요?",
-          "answerText": "다이애나의 어머니",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 9
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "갑자기 무서운 병에 걸린 사람은 누구인가요?",
-          "answerText": "어린 동생",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 11,
-              "end": 16
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "앤이 아픈 아이들을 돌본 경험을 쌓았던 곳은 어디인가요?",
-          "answerText": "고아원",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 3,
-              "end": 6
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q5",
-          "prompt": "밤새 아이를 간호한 뒤 풀리게 된 것은 무엇인가요?",
+          "prompt": "사실과 다르게 잘못 이해한 상태를 뜻하는 단어를 찾으시오.",
           "answerText": "오해",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -669,6 +615,68 @@
               "paragraphId": "p4",
               "start": 62,
               "end": 64
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "다이애나가 앤에게 급히 달려온 까닭이 된 사건을 나타내는 문장을 찾으시오.",
+          "answerText": "다이애나의 어린 동생이 갑자기 무서운 병에 걸려 목숨이 위태로워졌다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 5,
+              "end": 42
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "어른들이 모두 외출한 뒤 다이애나가 앤에게 한 행동을 나타내는 어구를 찾으시오.",
+          "answerText": "울면서 앤에게 단숨에 달려왔다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 66,
+              "end": 82
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "앤이 아이를 간호하는 데 활용한 경험과 간호한 방식을 나타내는 어구를 모두 찾으시오.",
+          "answerTexts": [
+            "아픈 아이들을 돌봤던 경험",
+            "밤새도록 정성껏"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 9,
+              "end": 23
+            },
+            {
+              "paragraphId": "p4",
+              "start": 28,
+              "end": 36
             }
           ],
           "scoring": {

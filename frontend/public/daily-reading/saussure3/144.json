@@ -557,29 +557,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "땅속의 바위층이 끊어져서 서로 어긋나 있는 상태를 무엇이라 하나요?",
-          "answerText": "단층",
-          "answerMatchMode": "EXACT",
+          "prompt": "지진이 발생하는 과정을 설명한 부분을 모두 찾으시오.",
+          "answerTexts": [
+            "바위층이 힘을 견디지 못하고",
+            "끊어지며 발생합니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 56,
-              "end": 58
+              "start": 12,
+              "end": 27
             },
             {
-              "paragraphId": "p2",
-              "start": 23,
-              "end": 25
-            },
-            {
-              "paragraphId": "p2",
-              "start": 100,
-              "end": 102
-            },
-            {
-              "paragraphId": "p3",
-              "start": 11,
-              "end": 13
+              "paragraphId": "p1",
+              "start": 28,
+              "end": 38
             }
           ],
           "scoring": {
@@ -591,14 +584,22 @@
         },
         {
           "id": "q2",
-          "prompt": "물체가 떨리는 힘이 주변으로 퍼져 나가는 현상은 무엇인가요?",
-          "answerText": "진동",
-          "answerMatchMode": "EXACT",
+          "prompt": "단층의 뜻과 단층이 지진에서 차지하는 관계를 모두 찾으시오.",
+          "answerTexts": [
+            "끊어져 어긋난 부분",
+            "직접적인 원인"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 56,
-              "end": 58
+              "paragraphId": "p1",
+              "start": 44,
+              "end": 54
+            },
+            {
+              "paragraphId": "p1",
+              "start": 70,
+              "end": 77
             }
           ],
           "scoring": {
@@ -610,14 +611,49 @@
         },
         {
           "id": "q3",
-          "prompt": "지구의 겉면을 이루고 있는 거대하고 단단한 바위 판을 부르는 말은?",
-          "answerText": "지각판",
-          "answerMatchMode": "EXACT",
+          "prompt": "지각판의 힘 때문에 단층에 일어나는 일과 그 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "단층이 갑자기 어긋나며",
+            "에너지를 뿜어냅니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 3
+              "start": 23,
+              "end": 35
+            },
+            {
+              "paragraphId": "p2",
+              "start": 36,
+              "end": 46
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "지진으로 느끼는 흔들림이 어떻게 전달되는지 모두 찾으시오.",
+          "answerTexts": [
+            "진동",
+            "지표면까지 전달되어"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 56,
+              "end": 58
+            },
+            {
+              "paragraphId": "p2",
+              "start": 60,
+              "end": 70
             }
           ],
           "scoring": {

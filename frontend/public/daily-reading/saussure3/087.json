@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "앨리스가 버섯 위에 앉아 있는 것을 발견했으며, 몸집을 조절하는 비밀을 알려준 동물은?",
+          "prompt": "앨리스에게 몸집을 조절하는 비밀을 알려준 대상을 찾으시오.",
           "answerText": "파란 애벌레",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -576,19 +576,22 @@
         },
         {
           "id": "q2",
-          "prompt": "갑자기 사라지기도 하며, 얼굴에 커다란 미소만 남긴 채 앨리스에게 길을 안내해 준 동물은?",
-          "answerText": "체셔 고양이",
-          "answerMatchMode": "EXACT",
+          "prompt": "파란 애벌레가 앨리스에게 알려준 비밀과 앨리스가 먹은 부분을 모두 찾으시오.",
+          "answerTexts": [
+            "몸집을 키우거나 줄이는 비밀",
+            "버섯의 양쪽 끝"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 9,
-              "end": 15
+              "paragraphId": "p1",
+              "start": 65,
+              "end": 80
             },
             {
-              "paragraphId": "p2",
-              "start": 49,
-              "end": 55
+              "paragraphId": "p1",
+              "start": 96,
+              "end": 104
             }
           ],
           "scoring": {
@@ -600,14 +603,54 @@
         },
         {
           "id": "q3",
-          "prompt": "하얀 장미를 빨간색으로 칠하던 병정들을 부리는 인물로, 참 화를 잘 내는 무서운 통치자는?",
-          "answerText": "하트 여왕",
-          "answerMatchMode": "EXACT",
+          "prompt": "체셔 고양이가 알려준 길의 목적지와 앨리스가 향한 곳을 모두 찾으시오.",
+          "answerTexts": [
+            "공작 부인의 집",
+            "여왕의 정원"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 23,
+              "end": 31
+            },
+            {
+              "paragraphId": "p2",
+              "start": 111,
+              "end": 117
+            },
+            {
+              "paragraphId": "p3",
+              "start": 3,
+              "end": 9
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "카드 병정들이 칠하던 것과 칠할 때 사용한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "하얀 장미",
+            "빨간색 물감"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 5
+              "start": 24,
+              "end": 29
+            },
+            {
+              "paragraphId": "p3",
+              "start": 31,
+              "end": 37
             }
           ],
           "scoring": {

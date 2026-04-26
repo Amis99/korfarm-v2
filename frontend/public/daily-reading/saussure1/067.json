@@ -416,14 +416,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "베란다 작은 ( )분.",
-          "answerText": "화",
-          "answerMatchMode": "EXACT",
+          "prompt": "토마토가 빨리 자라는 모습을 흉내 내는 말로 표현한 단어를 시에서 찾아 보세요.",
+          "answerText": "쑥쑥",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 7,
-              "end": 8
+              "start": 47,
+              "end": 49
             }
           ],
           "scoring": {
@@ -435,14 +435,14 @@
         },
         {
           "id": "q2",
-          "prompt": "하늘 향해 ( )을 뻗습니다.",
-          "answerText": "손",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 시에서 토마토 줄기를 사람처럼 표현한 부분을 찾아 보세요. 줄기가 하늘 향해 무엇을 한다고 했나요?",
+          "answerText": "손을 뻗어요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 65,
-              "end": 66
+              "end": 71
             }
           ],
           "scoring": {
@@ -454,14 +454,33 @@
         },
         {
           "id": "q3",
-          "prompt": "( )색 열매가 열림.",
+          "prompt": "지문에서 토마토 열매가 익기 전 처음 나타난 색깔을 가리키는 단어를 찾아 보세요.",
           "answerText": "초록",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 10,
               "end": 12
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "토마토를 정성껏 키운 뒤 누구와 함께 먹는다고 했는지, 그 대상을 시에서 찾아 보세요.",
+          "answerText": "가족",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 58,
+              "end": 60
             }
           ],
           "scoring": {

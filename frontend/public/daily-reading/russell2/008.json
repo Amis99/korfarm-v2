@@ -844,93 +844,167 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이 시는 어떤 장면에서 시작하나요?",
+          "prompt": "이 글이 구별하려는 두 가지 논리 개념의 이름을 본문에서 모두 찾으시오",
+          "answerText": "필요조건 / 충분조건",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 84
+              "end": 4
+            },
+            {
+              "paragraphId": "p1",
+              "start": 6,
+              "end": 10
+            },
+            {
+              "paragraphId": "p3",
+              "start": 76,
+              "end": 80
+            },
+            {
+              "paragraphId": "p6",
+              "start": 3,
+              "end": 7
+            },
+            {
+              "paragraphId": "p6",
+              "start": 9,
+              "end": 13
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "필요조건과 충분조건은 어떤 결론이 성립하려면 무엇이 반드시 있어야 하는지, 또 무엇이 있으면 그 결론이 이루어졌다고 말할 수 있는지를 구별하는 개념이다"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "화자는 왜 토끼처럼 둘러리를 돈다고 하나요?",
+          "prompt": "본문이 두 조건을 설명하기 위해 사용한 수의 종류를 본문에서 모두 찾으시오",
+          "answerText": "4의 배수 / 짝수",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 90
+              "start": 6,
+              "end": 11
+            },
+            {
+              "paragraphId": "p2",
+              "start": 14,
+              "end": 16
+            },
+            {
+              "paragraphId": "p2",
+              "start": 23,
+              "end": 25
+            },
+            {
+              "paragraphId": "p2",
+              "start": 28,
+              "end": 33
+            },
+            {
+              "paragraphId": "p2",
+              "start": 59,
+              "end": 61
+            },
+            {
+              "paragraphId": "p2",
+              "start": 70,
+              "end": 75
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "어떤 수가 4의 배수라면 짝수라는 말에서 짝수임은 4의 배수가 되기 위해 꼭 갖추어야 하므로 필요하지만, 짝수라고 해서 모두 4의 배수는 아니므로 충분하지는 않다"
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "독수리에게 말을 건네는 장면은 무엇을 드러내나요?",
+          "prompt": "학생들이 자주 헷갈린다고 한 두 표현을 본문에서 모두 찾으시오",
+          "answerText": "없으면 안 된다는 말 / 있으면 된다는 말",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 85
+              "paragraphId": "p4",
+              "start": 17,
+              "end": 28
+            },
+            {
+              "paragraphId": "p4",
+              "start": 30,
+              "end": 39
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "반대로 4의 배수임은 짝수라는 결론을 이루기에 모자람이 없으므로 충분하지만, 짝수라는 결론에 꼭 그 조건만 필요한 것은 아니어서 유일한 필요조건은 아니다"
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "거북이와 용궁의 유혹은 어떤 태도를 보여 주나요?",
+          "prompt": "어떤 조건을 볼 때 가장 먼저 확인해야 한다고 한 점을 본문에서 찾으시오",
+          "answerText": "그 조건이 빠지면 결론이 무너지는지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 87
+              "start": 17,
+              "end": 36
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그래서 어떤 조건을 볼 때에는 그 조건이 빠지면 결론이 무너지는지 먼저 확인해 보고, 이어서 그 조건이 들어오면 결론이 곧바로 성립하는지도 따로 살펴야 한다"
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "푸로메테우스의 모습은 무엇을 상징하나요?",
+          "prompt": "이어서 따로 살펴야 한다고 한 점을 본문에서 찾으시오",
+          "answerText": "그 조건이 들어오면 결론이 곧바로 성립하는지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 84
+              "paragraphId": "p5",
+              "start": 52,
+              "end": 76
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "결국 두 조건을 구별한다는 것이 무엇을 따지는 일이라고 했는지 본문에서 찾으시오",
+          "answerText": "논리의 흐름을 정확히 따지는 일",
           "answerMatchMode": "ANY",
-          "answerText": "결국 필요조건과 충분조건을 구별한다는 것은 말의 겉모양을 외우는 일이 아니라, 조건과 결론이 어느 방향으로 묶이는지 논리의 흐름을 정확히 따지는 일이다"
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 65,
+              "end": 82
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

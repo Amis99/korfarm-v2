@@ -1113,223 +1113,82 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '제목'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 40,
-              "end": 42
-            },
-            {
-              "paragraphId": "p1",
-              "start": 116,
-              "end": 118
-            },
-            {
-              "paragraphId": "p1",
-              "start": 182,
-              "end": 184
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 14,
-              "end": 16
-            },
-            {
-              "paragraphId": "p2",
-              "start": 24,
-              "end": 26
-            },
-            {
-              "paragraphId": "p2",
-              "start": 49,
-              "end": 51
-            },
-            {
-              "paragraphId": "p2",
-              "start": 104,
-              "end": 106
-            },
-            {
-              "paragraphId": "p2",
-              "start": 201,
-              "end": 203
-            },
-            {
-              "paragraphId": "p3",
-              "start": 13,
-              "end": 15
-            },
-            {
-              "paragraphId": "p3",
-              "start": 100,
-              "end": 102
-            },
-            {
-              "paragraphId": "p3",
-              "start": 156,
-              "end": 158
-            },
-            {
-              "paragraphId": "p3",
-              "start": 180,
-              "end": 182
-            },
-            {
-              "paragraphId": "p4",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p4",
-              "start": 25,
-              "end": 27
-            },
-            {
-              "paragraphId": "p4",
-              "start": 109,
-              "end": 111
-            },
-            {
-              "paragraphId": "p4",
-              "start": 150,
-              "end": 152
-            },
-            {
-              "paragraphId": "p5",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p5",
-              "start": 96,
-              "end": 98
-            },
-            {
-              "paragraphId": "p5",
-              "start": 109,
-              "end": 111
-            },
-            {
-              "paragraphId": "p5",
-              "start": 173,
-              "end": 175
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 글의 본 내용을 가리키는 낱말을 모두 찾으시오",
+          "answerText": "본문",
           "answerMatchMode": "ANY",
-          "answerText": "제목"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 7, "end": 9},
+            {"paragraphId": "p4", "start": 36, "end": 38},
+            {"paragraphId": "p4", "start": 154, "end": 156},
+            {"paragraphId": "p5", "start": 145, "end": 147}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '내용 중심 제목'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 8,
-              "end": 16
-            },
-            {
-              "paragraphId": "p2",
-              "start": 43,
-              "end": 51
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 글을 읽는 사람을 뜻하는 낱말을 모두 찾으시오",
+          "answerText": "독자",
           "answerMatchMode": "ANY",
-          "answerText": "내용 중심 제목"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 72, "end": 74},
+            {"paragraphId": "p2", "start": 108, "end": 110},
+            {"paragraphId": "p2", "start": 165, "end": 167},
+            {"paragraphId": "p2", "start": 231, "end": 233},
+            {"paragraphId": "p3", "start": 30, "end": 32},
+            {"paragraphId": "p4", "start": 127, "end": 129},
+            {"paragraphId": "p4", "start": 168, "end": 170},
+            {"paragraphId": "p5", "start": 62, "end": 64}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '흥미 유발 제목'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 18,
-              "end": 26
-            },
-            {
-              "paragraphId": "p2",
-              "start": 98,
-              "end": 106
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 제목의 정의를 직접 풀이한 표현을 찾으시오",
+          "answerText": "글의 중심 내용을 가장 짧게 드러내는 표현",
           "answerMatchMode": "ANY",
-          "answerText": "흥미 유발 제목"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 44, "end": 67}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '본문'을 모두 찾으시오.",
+          "prompt": "지문에서 제목의 두 가지 방식이 무엇인지 함께 든 표현을 모두 찾으시오",
+          "answerText": "내용 중심 제목 / 흥미 유발 제목",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 7,
-              "end": 9
-            },
-            {
-              "paragraphId": "p4",
-              "start": 36,
-              "end": 38
-            },
-            {
-              "paragraphId": "p4",
-              "start": 154,
-              "end": 156
-            },
-            {
-              "paragraphId": "p5",
-              "start": 145,
-              "end": 147
-            }
+            {"paragraphId": "p2", "start": 8, "end": 16},
+            {"paragraphId": "p2", "start": 18, "end": 26},
+            {"paragraphId": "p2", "start": 43, "end": 51},
+            {"paragraphId": "p2", "start": 98, "end": 106}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "본문"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '작문 과정'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 237,
-              "end": 242
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 제목이 본문 전체를 대표하는 한편 독자에게 글의 방향까지 일러 준다는 효과를 풀이한 표현을 찾으시오",
+          "answerText": "본문 전체를 대표하면서도 독자가 글의 방향을 짐작하게 한다",
           "answerMatchMode": "ANY",
-          "answerText": "작문 과정"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 154, "end": 186}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 설명문 사례로 든 글의 주제를 가리키는 표현을 찾으시오",
+          "answerText": "재활용 분리배출",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 52, "end": 60}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

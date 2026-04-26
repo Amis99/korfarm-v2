@@ -559,13 +559,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "갯벌은 작은 흙과 이것이 쌓인 땅입니다. 이것은 무엇일까요?",
-          "answerText": "모래",
-          "answerMatchMode": "EXACT",
+          "prompt": "갯벌은 무엇이 쌓여서 만들어진 특별한 땅인지 지문에서 찾으시오.",
+          "answerText": "아주 작은 흙과 모래",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 81,
+              "start": 72,
               "end": 83
             }
           ],
@@ -578,14 +578,14 @@
         },
         {
           "id": "q2",
-          "prompt": "생물들은 진흙 속 이것을 먹고 갯벌을 청소해요. 이것은 무엇일까요?",
-          "answerText": "영양분",
-          "answerMatchMode": "EXACT",
+          "prompt": "구멍 속에서 재빠르게 숨는 게와 함께, 바닷물을 뿜어내는 생물은 무엇인지 지문에서 찾으시오.",
+          "answerText": "조개",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 134,
-              "end": 137
+              "start": 82,
+              "end": 84
             }
           ],
           "scoring": {
@@ -597,14 +597,33 @@
         },
         {
           "id": "q3",
-          "prompt": "사람들은 갯벌에서 이것과 해산물을 얻어요. 이것은 무엇일까요?",
-          "answerText": "소금",
-          "answerMatchMode": "EXACT",
+          "prompt": "갯벌의 생물들이 진흙 속 영양분을 먹으며 하는 역할을 지문에서 찾으시오.",
+          "answerText": "갯벌을 깨끗하게 청소해 주는 소중한 역할",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 143,
+              "end": 165
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "갯벌이 멀리서 날아오는 철새들에게 제공하는 것을 지문에서 찾으시오.",
+          "answerText": "편안한 쉼터와 맛있는 먹이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 74,
-              "end": 76
+              "start": 36,
+              "end": 50
             }
           ],
           "scoring": {

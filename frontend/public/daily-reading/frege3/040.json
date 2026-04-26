@@ -1082,14 +1082,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이번 토의가 열린 장소는 어디인가요?",
-          "answerText": "학생 자치회 회의실",
-          "answerMatchMode": "ANY",
+          "prompt": "이번 회의에 참석한 사람들을 모두 찾으시오.",
+          "answerTexts": [
+            "각 학급의 경제 위원들",
+            "학생회 임원들"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 9,
-              "end": 19
+              "start": 79,
+              "end": 91
+            },
+            {
+              "paragraphId": "p1",
+              "start": 93,
+              "end": 100
             }
           ],
           "scoring": {
@@ -1100,14 +1108,14 @@
         },
         {
           "id": "q2",
-          "prompt": "시범 운영에 합의한 제도는 무엇인가요?",
-          "answerText": "사회 출발 기본소득",
+          "prompt": "민준이가 말한 소득 원천의 한계를 찾으시오.",
+          "answerText": "기계가 노동을 대신하는 시대에 소득의 원천을 노동에서만 찾는 것은 한계가 있다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 70,
-              "end": 80
+              "paragraphId": "p2",
+              "start": 12,
+              "end": 55
             }
           ],
           "scoring": {
@@ -1118,14 +1126,14 @@
         },
         {
           "id": "q3",
-          "prompt": "기본소득 재원으로 부과하자고 한 것은 무엇인가요?",
-          "answerText": "로봇세",
+          "prompt": "하윤이가 우려한 세금 인상의 결과를 찾으시오.",
+          "answerText": "막대한 재원 마련을 위해 세금이 인상될 경우 경제 전체의 활력이 떨어질 수 있다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 153,
-              "end": 156
+              "paragraphId": "p2",
+              "start": 106,
+              "end": 150
             }
           ],
           "scoring": {
@@ -1136,10 +1144,24 @@
         },
         {
           "id": "q4",
-          "prompt": "기본소득 도입과 함께 강화하기로 한 프로그램은 무엇인가요?",
-          "answerText": "평생 교육 프로그램",
-          "answerMatchMode": "ANY",
+          "prompt": "이어진 대책 논의에서 도출한 합의안을 모두 찾으시오.",
+          "answerTexts": [
+            "사회 출발 기본소득",
+            "로봇세",
+            "평생 교육 프로그램"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 70,
+              "end": 80
+            },
+            {
+              "paragraphId": "p3",
+              "start": 153,
+              "end": 156
+            },
             {
               "paragraphId": "p3",
               "start": 241,
@@ -1154,14 +1176,22 @@
         },
         {
           "id": "q5",
-          "prompt": "토의 내용을 게시하기로 한 곳은 어디인가요?",
-          "answerText": "학교 홈페이지",
-          "answerMatchMode": "ANY",
+          "prompt": "토의 내용을 전달하거나 게시하기로 한 곳을 모두 찾으시오.",
+          "answerTexts": [
+            "학교 홈페이지",
+            "교육청의 청소년 정책 제안함"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 158,
               "end": 165
+            },
+            {
+              "paragraphId": "p5",
+              "start": 172,
+              "end": 187
             }
           ],
           "scoring": {

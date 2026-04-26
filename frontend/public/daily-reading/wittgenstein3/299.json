@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 글을 쓰게 된 문제의식이나 제안 배경을 어떻게 밝히는가?",
+          "prompt": "올해 학교 축제가 진행된 기간을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 196
+              "start": 10,
+              "end": 24
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "올해 학교 축제는 5월 12일부터 13일까지 이틀 동안 진행되었고, 학생회 집계에 따르면 전체 방문 인원은 누적 2,480명 정도였다. 이는 작년보다 약 300명 늘어난 수치라고 한다. 특히 첫날 오후 공연 시간대에 체육관과 중앙마당에 인원이 몰렸고, 둘째 날에는 체험 부스 이용이 더 많았는데, 이런 차이는 날씨와 공연 순서 영향도 있었던 것 같다."
+          "answerText": "5월 12일부터 13일까지"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 현재 상황이나 조사 내용을 어떤 방향으로 제시하는가?",
+          "prompt": "전체 방문 인원이 작년보다 얼마나 늘었다고 하는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 229
+              "paragraphId": "p1",
+              "start": 84,
+              "end": 90
             }
           ],
           "scoring": {
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생회가 행사 종료 후 배포한 온라인 설문에는 총 612명이 응답했다. 응답자 가운데 가장 많은 비율은 2학년이었고, 전반적 만족도는 5점 만점에 4.1점으로 집계되었다. 다만 이 수치만 보면 축제가 전체적으로 성공적이었다고 볼 수도 있지만, 항목별 점수를 보면 차이가 꽤 있었다. 먹거리 가격 만족도는 3.2점으로 가장 낮았고, 공연 관람 동선은 3.4점, 체험 부스 다양성은 4.3점으로 상대적으로 높았다."
+          "answerText": "약 300명"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 첫 개선안이나 핵심 근거를 무엇으로 설명하는가?",
+          "prompt": "첫날 오후와 둘째 날에 각각 인원이 몰리거나 이용이 많았던 대상을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 235
+              "paragraphId": "p1",
+              "start": 121,
+              "end": 130
+            },
+            {
+              "paragraphId": "p1",
+              "start": 148,
+              "end": 156
             }
           ],
           "scoring": {
@@ -620,17 +625,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "실제 현장 반응도 설문 결과와 비슷했다. 체험 부스는 대기 줄이 길어도 학생들이 계속 참여했고, 사진 인화 부스와 학급별 게임 부스는 두 날 모두 가장 빨리 마감되었다. 반면 먹거리 부스는 줄이 길 뿐 아니라 가격이 예상보다 높다는 말이 많았고, 몇몇 부스는 결제 방식이 달라 혼선이 생겼다. 기사에서는 이 부분을 단순 불만으로만 적지 않고, 운영 방식 차이 때문에 생긴 문제였다는 설명도 같이 넣을 필요가 있어 보인다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "체육관과 중앙마당",
+            "체험 부스 이용"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단은 추가 제안이나 고려할 점을 어떤 이유와 함께 내놓는가?",
+          "prompt": "온라인 설문에 응답한 인원을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 223
+              "paragraphId": "p2",
+              "start": 26,
+              "end": 32
             }
           ],
           "scoring": {
@@ -639,16 +647,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "설문 서술형 문항에서는 개선 요구가 몇 가지로 반복되었다. 가장 많이 나온 의견은 휴식 공간 부족과 이동 통로 혼잡이었다. 중앙마당 의자 수가 부족해 바닥에 앉는 학생이 많았고, 공연 시작 직전에는 체육관 입구가 한쪽으로만 열려 있어서 줄이 겹친다는 의견도 있었다. 그러나 일부 응답은 단순히 '복잡했다' 정도로만 적혀 있어서 기사에서 원인을 정리할 때는 현장 관찰과 함께 묶어 주어야 할 것 같다."
+          "answerText": "총 612명"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 실행 조건이나 예상되는 우려를 어떻게 따져 보는가?",
+          "prompt": "항목별 점수로 제시된 세 항목을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 247
+              "paragraphId": "p2",
+              "start": 158,
+              "end": 174
+            },
+            {
+              "paragraphId": "p2",
+              "start": 185,
+              "end": 199
+            },
+            {
+              "paragraphId": "p2",
+              "start": 201,
+              "end": 216
             }
           ],
           "scoring": {
@@ -656,17 +674,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "긍정적인 의견도 분명 있었다. 학급별 부스의 개성이 작년보다 뚜렷했고, 동아리 공연의 완성도가 높아져 축제 분위기가 더 살아났다는 반응이 많았다. 학생회 집계에 따르면 공연 프로그램 만족도는 4.4점으로 가장 높았고, 특히 밴드부와 댄스 동아리 무대가 좋았다는 응답이 많았다. 다만 공연 만족도가 높았던 만큼 음향 지연이나 관람 구역 배치 문제는 더 아쉽게 느껴졌다는 의견도 함께 있어서, 기사 후반부에서 같이 다루는 것이 자연스러울 듯하다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "먹거리 가격 만족도는 3.2점",
+            "공연 관람 동선은 3.4점",
+            "체험 부스 다양성은 4.3점"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 결론과 요청을 어떤 방향으로 마무리하는가?",
+          "prompt": "먹거리 부스에서 혼선이 생긴 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 245
+              "paragraphId": "p3",
+              "start": 138,
+              "end": 154
             }
           ],
           "scoring": {
@@ -675,7 +697,65 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "종합하면 이번 축제는 참여 규모와 프로그램 완성도 면에서는 분명한 성과를 보였지만, 가격 체계와 동선 관리, 휴식 공간 확보에서는 개선 과제가 남았다. 학생회도 다음 회의에서 먹거리 부스 가격 상한 협의, 체육관 입구 분산 운영, 쉼터 확대를 우선 검토하겠다고 밝혔다. 이 기사는 축제의 성공 여부를 한 문장으로 단정하기보다, 만족도 평균과 세부 불만 사항이 함께 존재했다는 점을 보여 주는 방향으로 정리하면 더 균형 있게 보일 것 같다."
+          "answerText": "몇몇 부스는 결제 방식이 달라"
+        },
+        {
+          "id": "q7",
+          "prompt": "설문 서술형 문항에서 가장 많이 나온 개선 요구를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 46,
+              "end": 54
+            },
+            {
+              "paragraphId": "p4",
+              "start": 56,
+              "end": 64
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "휴식 공간 부족",
+            "이동 통로 혼잡"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "학생회가 다음 회의에서 우선 검토하겠다고 밝힌 사항을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 98,
+              "end": 113
+            },
+            {
+              "paragraphId": "p6",
+              "start": 115,
+              "end": 127
+            },
+            {
+              "paragraphId": "p6",
+              "start": 129,
+              "end": 134
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "먹거리 부스 가격 상한 협의",
+            "체육관 입구 분산 운영",
+            "쉼터 확대"
+          ]
         }
       ]
     }

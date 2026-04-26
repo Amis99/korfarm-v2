@@ -1327,19 +1327,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "K팝의 기획부터 마케팅까지 전체를 지휘하는 사람은 누구인가요?",
-          "answerText": "프로듀서",
+          "prompt": "프로듀싱이 하는 일을 설명한 부분을 찾으시오.",
+          "answerText": "기획부터 마케팅까지 모든 단계를 관리하는 일",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 69,
-              "end": 73
-            },
-            {
-              "paragraphId": "p3",
-              "start": 30,
-              "end": 34
+              "start": 108,
+              "end": 132
             }
           ],
           "scoring": {
@@ -1350,14 +1345,22 @@
         },
         {
           "id": "q2",
-          "prompt": "여러 작가가 협동해 곡을 검토하고 만드는 과정을 무엇이라고 하나요?",
-          "answerText": "송 캠프",
-          "answerMatchMode": "ANY",
+          "prompt": "최상의 결과물을 만들기 위해 설정하거나 분석하는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "아티스트의 정체성",
+            "대중의 취향"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 126,
-              "end": 130
+              "paragraphId": "p1",
+              "start": 137,
+              "end": 146
+            },
+            {
+              "paragraphId": "p1",
+              "start": 153,
+              "end": 159
             }
           ],
           "scoring": {
@@ -1368,14 +1371,22 @@
         },
         {
           "id": "q3",
-          "prompt": "녹음된 소리를 조화롭게 섞는 작업은 무엇인가요?",
-          "answerText": "믹싱",
-          "answerMatchMode": "ANY",
+          "prompt": "콘셉트에서 결정하는 두 요소를 모두 찾으시오.",
+          "answerTexts": [
+            "시각적 이미지",
+            "음악적 색깔"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 132,
-              "end": 134
+              "paragraphId": "p2",
+              "start": 56,
+              "end": 63
+            },
+            {
+              "paragraphId": "p2",
+              "start": 65,
+              "end": 71
             }
           ],
           "scoring": {
@@ -1386,10 +1397,18 @@
         },
         {
           "id": "q4",
-          "prompt": "음질을 최종적으로 균형 있게 다듬는 작업은 무엇인가요?",
-          "answerText": "마스터링",
-          "answerMatchMode": "ANY",
+          "prompt": "음원이 완성되기까지 거치는 작업을 모두 찾으시오.",
+          "answerTexts": [
+            "믹싱 작업",
+            "마스터링"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 132,
+              "end": 137
+            },
             {
               "paragraphId": "p3",
               "start": 165,
@@ -1404,14 +1423,22 @@
         },
         {
           "id": "q5",
-          "prompt": "제작 완료 후 홍보 전략에서 먼저 공개하는 영상은 무엇인가요?",
-          "answerText": "티저 영상",
-          "answerMatchMode": "ANY",
+          "prompt": "홍보 전략에서 결정하는 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "티저 영상 공개 일정",
+            "소셜 미디어를 활용한 소통 방식"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 40,
-              "end": 45
+              "end": 51
+            },
+            {
+              "paragraphId": "p5",
+              "start": 54,
+              "end": 71
             }
           ],
           "scoring": {

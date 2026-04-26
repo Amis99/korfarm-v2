@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "prompt": "거시적인 물질에서 양자 역학의 효과를 뚜렷하게 관찰하기 어려운 이유를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 204
+              "start": 39,
+              "end": 67
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "거시적인 물질에서 양자 역학의 효과를 뚜렷하게 관찰하기 어려운 이유는 주변 환경과의 에너지 교환이 너무 활발하기 때문이다. 온도가 높으면 입자들은 수많은 에너지 준위에 넓게 퍼져 분포하고, 개별 준위의 불연속성은 거시적 평균 속에 묻혀 버린다. 반대로 온도를 매우 낮추면 열적 교란이 줄어들어, 평소에는 감춰져 있던 양자 상태의 질서가 큰 규모에서 드러날 수 있다."
+          "answerText": "주변 환경과의 에너지 교환이 너무 활발하기 때문이다"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 핵심 원리나 기준을 어떻게 설명하는가?",
+          "prompt": "온도가 높을 때 입자들이 에너지 준위에 어떻게 분포하는지 나타낸 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 198
+              "paragraphId": "p1",
+              "start": 77,
+              "end": 104
             }
           ],
           "scoring": {
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "초전도 현상은 이런 조건에서 나타나는 대표적인 예이다. 보통 금속에서는 전자가 이동할 때 결정 격자의 진동이나 불순물에 부딪혀 저항이 생긴다. 그런데 어떤 물질은 임계 온도 아래로 내려가면 저항이 조금씩 줄어드는 것이 아니라 특정 지점에서 갑자기 0이 된다. 이는 단순한 냉각의 결과가 아니라, 전자들의 운동 방식 자체가 새로운 상으로 바뀌었음을 뜻한다."
+          "answerText": "입자들은 수많은 에너지 준위에 넓게 퍼져 분포하고"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 그 원리의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "어떤 물질에서 저항이 갑자기 0이 되는 기준 온도를 가리키는 말을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 205
+              "paragraphId": "p2",
+              "start": 91,
+              "end": 96
+            },
+            {
+              "paragraphId": "p6",
+              "start": 43,
+              "end": 48
             }
           ],
           "scoring": {
@@ -621,16 +626,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "초전도체의 발견 과정에서 중요한 점은 온도를 충분히 낮추는 기술과 실험 재료의 선택이었다. 헬륨을 액화할 수 있게 되자 이전보다 훨씬 낮은 온도에 도달할 수 있었고, 그 덕분에 수은 같은 금속에서 급격한 저항 소멸이 관측되었다. 특히 액체 상태로 다루기 쉬운 수은은 불순물 영향을 줄이기에 유리했고, 이 선택이 거시적 양자 현상을 역사상 처음 포착하는 계기가 되었다."
+          "answerText": "임계 온도"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
+          "prompt": "보통 금속에서 전자가 이동할 때 저항이 생기는 원인을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 193
+              "paragraphId": "p2",
+              "start": 50,
+              "end": 59
+            },
+            {
+              "paragraphId": "p2",
+              "start": 62,
+              "end": 70
             }
           ],
           "scoring": {
@@ -638,17 +648,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "한편 헬륨은 거의 절대 영도에 가까워져도 쉽게 고체가 되지 않는다. 그 이유는 헬륨 원자가 매우 가볍고, 원자들 사이의 끌어당김도 약하기 때문이다. 양자 역학에서는 입자가 절대 영도에서도 완전히 멈추지 못하는데, 이를 영점 운동이라고 한다. 헬륨은 이 영점 운동의 효과가 커서, 원자 사이 인력만으로는 입자들의 움직임을 충분히 묶어 두지 못한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "결정 격자의 진동",
+            "불순물에 부딪혀"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단은 이 주제의 효과나 쟁점을 어떤 방향으로 확장하는가?",
+          "prompt": "수은에서 급격한 저항 소멸이 관측될 수 있었던 직접적 계기를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 225
+              "paragraphId": "p3",
+              "start": 51,
+              "end": 91
             }
           ],
           "scoring": {
@@ -657,16 +670,47 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "헬륨을 더 냉각하면 어느 온도 부근에서 밀도나 비열 같은 물리량이 급격히 변하는 전이점이 나타난다. 이 지점 아래의 액체 헬륨은 단순히 더 차가운 액체가 아니라 점성이 사실상 사라진 새로운 상이 된다. 그래서 아주 좁은 틈을 마찰 없이 흐르거나 용기 벽을 타고 번지는 특이한 거동을 보이며, 이러한 상태를 초유체라고 부른다. 초전도체에서 전기 저항이 사라지듯, 초유체에서는 유동 저항이 사라지는 셈이다."
+          "answerText": "헬륨을 액화할 수 있게 되자 이전보다 훨씬 낮은 온도에 도달할 수 있었고"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 앞선 논의를 어떤 의미로 정리하는가?",
+          "prompt": "헬륨이 거의 절대 영도에서도 쉽게 고체가 되지 않는 이유를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 222
+              "paragraphId": "p4",
+              "start": 44,
+              "end": 57
+            },
+            {
+              "paragraphId": "p4",
+              "start": 59,
+              "end": 81
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "헬륨 원자가 매우 가볍고",
+            "원자들 사이의 끌어당김도 약하기 때문이다"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "입자가 절대 영도에서도 완전히 멈추지 못하는 현상을 가리키는 말을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 122,
+              "end": 127
+            },
+            {
+              "paragraphId": "p4",
+              "start": 141,
+              "end": 146
             }
           ],
           "scoring": {
@@ -675,7 +719,33 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "초전도체와 초유체는 서로 다른 물질에서 나타나지만 공통점이 뚜렷하다. 둘 다 임계 온도를 경계로 물질의 거시적 성질이 불연속적으로 바뀌며, 많은 입자들이 하나의 질서 있는 양자 상태를 공유하게 된다. 결국 극저온에서는 미시적인 양자 규칙이 거시적 물질 전체의 행동을 지배할 수 있다는 사실이 드러난다. 이 점에서 두 현상은 거시 세계와 양자 세계가 단절되어 있지 않음을 보여 주는 대표적 사례이다."
+          "answerText": "영점 운동"
+        },
+        {
+          "id": "q8",
+          "prompt": "초전도체와 초유체의 공통점을 설명한 부분을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 43,
+              "end": 76
+            },
+            {
+              "paragraphId": "p6",
+              "start": 78,
+              "end": 110
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "임계 온도를 경계로 물질의 거시적 성질이 불연속적으로 바뀌며",
+            "많은 입자들이 하나의 질서 있는 양자 상태를 공유하게 된다"
+          ]
         }
       ]
     }

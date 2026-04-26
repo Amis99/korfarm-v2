@@ -559,14 +559,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "뼈는 몸의 형태를 유지하게 해 주고 똑바로 설 수 있도록 무슨 역할을 한답니다.",
-          "answerText": "기둥",
-          "answerMatchMode": "EXACT",
+          "prompt": "뼈가 몸의 형태를 유지하게 해 주고 똑바로 설 수 있도록 하는 것은 무슨 역할인가요?",
+          "answerText": "기둥 역할",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 58,
-              "end": 60
+              "end": 63
             }
           ],
           "scoring": {
@@ -578,14 +578,14 @@
         },
         {
           "id": "q2",
-          "prompt": "근육은 이것처럼 늘어났다가 줄어드는 성질이 있어서 우리 몸이 움직일 수 있게 도와주지요.",
-          "answerText": "고무줄",
-          "answerMatchMode": "EXACT",
+          "prompt": "뇌나 심장처럼 몸속에 있는 부드러운 기관들을 어떻게 해 준다고 했나요?",
+          "answerText": "안전하게 보호",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 40,
-              "end": 43
+              "paragraphId": "p1",
+              "start": 100,
+              "end": 107
             }
           ],
           "scoring": {
@@ -597,16 +597,35 @@
         },
         {
           "id": "q3",
-          "prompt": "뼈를 튼튼하게 해 주는 멸치와 함께 먹으면 좋은 음식은 무엇인가요?",
-          "answerText": "우유",
-          "answerMatchMode": "EXACT",
+          "prompt": "근육이 우리 몸이 움직일 수 있게 도와주는 까닭이 되는 성질은 무엇인가요?",
+          "answerText": "고무줄처럼 늘어났다가 줄어드는 성질",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 102,
-              "end": 104
+              "paragraphId": "p2",
+              "start": 40,
+              "end": 59
             }
           ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+        "prompt": "뼈를 튼튼하게 해 주는 음식으로 든 부분을 지문에서 찾으시오.",
+        "answerText": "우유와 멸치 같은 음식",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p3",
+            "start": 102,
+            "end": 114
+          }
+        ],
           "scoring": {
             "correctDeltaSec": 5,
             "wrongDeltaSec": -2,

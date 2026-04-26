@@ -552,69 +552,49 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "알맞은 무엇도 바뀌어야 하나요?",
+          "prompt": "계절에 따라 알맞게 바뀌는 우리의 차림새를 무엇이라고 하는지 글에서 찾아 써 보세요",
           "answerText": "옷차림",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 20,
-              "end": 23
-            },
-            {
-              "paragraphId": "p2",
-              "start": 124,
-              "end": 127
-            }
+            {"paragraphId": "p1", "start": 20, "end": 23},
+            {"paragraphId": "p2", "start": 124, "end": 127}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "더운 무엇에는 반팔을 입인가요?",
-          "answerText": "여름",
-          "answerMatchMode": "EXACT",
+          "prompt": "겨울에 몸을 따뜻하게 보호하기 위해 챙기는 물건 세 가지를 글에서 모두 찾아 써 보세요",
+          "answerText": "외투, 목도리, 장갑",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 75,
-              "end": 77
-            },
-            {
-              "paragraphId": "p1",
-              "start": 129,
-              "end": 131
-            }
+            {"paragraphId": "p2", "start": 50, "end": 52},
+            {"paragraphId": "p2", "start": 54, "end": 57},
+            {"paragraphId": "p2", "start": 59, "end": 61}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "추운 무엇에는 따뜻한 보호인가요?",
-          "answerText": "겨울",
-          "answerMatchMode": "EXACT",
+          "prompt": "날씨에 맞는 옷차림이 예방해 주는 것이 무엇인지 글에서 찾아 써 보세요",
+          "answerText": "감기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 41,
-              "end": 43
-            }
+            {"paragraphId": "p2", "start": 129, "end": 131}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "알맞은 옷을 입기 위해 날마다 무엇을 확인하는 습관을 길러야 하는지 글에서 찾아 써 보세요",
+          "answerText": "일기예보",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 158, "end": 162}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         }
       ]

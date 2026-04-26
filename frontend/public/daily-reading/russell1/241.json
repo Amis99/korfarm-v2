@@ -918,183 +918,75 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '정렬'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 13,
-              "end": 15
-            },
-            {
-              "paragraphId": "p3",
-              "start": 12,
-              "end": 14
-            },
-            {
-              "paragraphId": "p3",
-              "start": 51,
-              "end": 53
-            },
-            {
-              "paragraphId": "p3",
-              "start": 105,
-              "end": 107
-            },
-            {
-              "paragraphId": "p5",
-              "start": 3,
-              "end": 5
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '알고리즘'이 쓰인 곳을 모두 찾으시오.",
+          "answerText": "알고리즘",
           "answerMatchMode": "ANY",
-          "answerText": "정렬"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 60, "end": 64},
+            {"paragraphId": "p1", "start": 97, "end": 101},
+            {"paragraphId": "p2", "start": 18, "end": 22},
+            {"paragraphId": "p2", "start": 159, "end": 163},
+            {"paragraphId": "p3", "start": 3, "end": 7},
+            {"paragraphId": "p4", "start": 61, "end": 65},
+            {"paragraphId": "p5", "start": 137, "end": 141}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '탐색'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p5",
-              "start": 7,
-              "end": 9
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "데이터의 정의를 설명한 부분을 찾으시오.",
+          "answerText": "데이터는 문제를 풀기 위해 모아 둔 정보이고",
           "answerMatchMode": "ANY",
-          "answerText": "탐색"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 71, "end": 95}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '알고리즘'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 60,
-              "end": 64
-            },
-            {
-              "paragraphId": "p1",
-              "start": 97,
-              "end": 101
-            },
-            {
-              "paragraphId": "p2",
-              "start": 18,
-              "end": 22
-            },
-            {
-              "paragraphId": "p2",
-              "start": 159,
-              "end": 163
-            },
-            {
-              "paragraphId": "p3",
-              "start": 3,
-              "end": 7
-            },
-            {
-              "paragraphId": "p4",
-              "start": 61,
-              "end": 65
-            },
-            {
-              "paragraphId": "p5",
-              "start": 137,
-              "end": 141
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "알고리즘의 정의를 설명한 부분을 찾으시오.",
+          "answerText": "그 정보를 일정한 순서로 처리하는 방법이다",
           "answerMatchMode": "ANY",
-          "answerText": "알고리즘"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 103, "end": 126}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '기준'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 162,
-              "end": 164
-            },
-            {
-              "paragraphId": "p3",
-              "start": 27,
-              "end": 29
-            },
-            {
-              "paragraphId": "p4",
-              "start": 40,
-              "end": 42
-            },
-            {
-              "paragraphId": "p4",
-              "start": 183,
-              "end": 185
-            },
-            {
-              "paragraphId": "p5",
-              "start": 112,
-              "end": 114
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "어느 알고리즘이 무조건 더 좋다고 단정하면 안 되는 까닭을 찾으시오.",
+          "answerText": "처리 속도는 빠르지만 기억 공간을 많이 쓰는 경우도 있고, 정확도는 높지만 준비 과정이 오래 걸리는 경우도 있기 때문이다",
           "answerMatchMode": "ANY",
-          "answerText": "기준"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 88, "end": 155}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '비교'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 29,
-              "end": 31
-            },
-            {
-              "paragraphId": "p4",
-              "start": 194,
-              "end": 196
-            },
-            {
-              "paragraphId": "p5",
-              "start": 109,
-              "end": 111
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "정렬된 자료에서 더 빠를 수 있는 검색 방식의 예를 찾으시오.",
+          "answerText": "범위를 절반씩 줄여 가며 찾는 방법",
           "answerMatchMode": "ANY",
-          "answerText": "비교"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 115, "end": 134}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "자료 해석의 본질을 설명한 부분을 찾으시오.",
+          "answerText": "기준 사이의 관계를 비교하는 일",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 183, "end": 200}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

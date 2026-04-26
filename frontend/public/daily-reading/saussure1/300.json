@@ -396,47 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "놀이를 하는 넓은 마당?",
-          "answerText": "놀이마당",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 6,
-              "end": 10
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "슬기롭고 명철한 지각?",
-          "answerText": "지혜",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 24,
-              "end": 26
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "전해 내려오는 고유 문화?",
+          "prompt": "옛날부터 이어져 내려오는 우리 고유의 것을 무엇이라고 하는지 지문에서 찾아 적어 보세요",
           "answerText": "전통",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -452,6 +414,68 @@
               "paragraphId": "p2",
               "start": 150,
               "end": 152
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "1문단에서 친구들과 함께 즐긴 전통 놀이 두 가지를 모두 찾아 적어 보세요",
+          "answerText": "팽이, 투호",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 81,
+              "end": 83
+            },
+            {
+              "paragraphId": "p1",
+              "start": 89,
+              "end": 91
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "1문단에서 줄 위에서 자유롭게 춤추는 모습이 가장 인상 깊었던 인물을 찾아 적어 보세요",
+          "answerText": "광대 아저씨",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 148,
+              "end": 154
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "1문단에서 친구들과 함께 보낸 시간을 무엇처럼 마음속에 남았다고 비유했는지 찾아 적어 보세요",
+          "answerText": "한 폭의 그림",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 107,
+              "end": 114
             }
           ],
           "scoring": {

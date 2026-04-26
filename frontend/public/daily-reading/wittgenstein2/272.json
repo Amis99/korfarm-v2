@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "샤딩의 뜻을 설명한 부분을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 202
+              "paragraphId": "p2",
+              "start": 19,
+              "end": 52
             }
           ],
           "scoring": {
@@ -585,15 +585,38 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "대규모 서비스는 한 대의 서버에 모든 데이터를 몰아넣으면 저장 용량도 부족해지고, 요청이 몰릴 때 처리 속도도 급격히 떨어진다. 그래서 분산 시스템은 데이터를 여러 기계에 나누어 저장하는 방식을 택한다. 이때 중요한 것은 단순히 나누어 보관하는 데 그치지 않고, 어떤 요청이 어느 기계로 가야 하는지를 일관되게 결정해 전체 성능과 안정성을 함께 확보하는 일이다."
+          "answerText": "데이터를 여러 샤드로 분할해 각각 다른 노드에 저장하는 방식"
         },
         {
           "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "사용자의 요청이 들어오면 라우터가 하는 일을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
+              "start": 70,
+              "end": 99
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "라우터가 기준 키를 보고 적절한 샤드로 요청을 보낸다"
+        },
+        {
+          "id": "q3",
+          "prompt": "샤딩 구조를 쓰면 얻을 수 있는 효과를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 139,
+              "end": 158
+            },
+            {
+              "paragraphId": "p2",
+              "start": 160,
               "end": 188
             }
           ],
@@ -602,35 +625,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "샤딩은 이런 문제를 해결하기 위해 데이터를 여러 샤드로 분할해 각각 다른 노드에 저장하는 방식이다. 사용자의 요청이 들어오면 라우터가 기준 키를 보고 적절한 샤드로 요청을 보낸다. 이 구조를 쓰면 전체 데이터를 한 장비가 모두 떠안지 않아도 되므로 저장 공간을 유연하게 늘릴 수 있고, 읽기와 쓰기 부하도 여러 장비에 분산시킬 수 있다."
-        },
-        {
-          "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 219
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "하지만 샤딩은 아무 기준으로나 나누면 오히려 성능 병목을 만들 수 있다. 함께 조회되거나 함께 계산되는 데이터가 서로 다른 샤드에 흩어져 있으면, 처리 과정마다 여러 노드가 통신해야 하기 때문이다. 이렇게 되면 각 노드의 계산보다 네트워크 왕복 시간이 더 큰 부담이 될 수 있다. 그래서 자주 함께 접근되는 데이터를 가능한 한 가까운 샤드에 두는 데이터 지역성이 중요한 설계 원리로 강조된다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "저장 공간을 유연하게 늘릴 수 있고",
+            "읽기와 쓰기 부하도 여러 장비에 분산시킬 수 있다."
+          ]
         },
         {
           "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
+          "prompt": "샤딩을 아무 기준으로나 나누면 생길 수 있는 문제를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 204
+              "paragraphId": "p3",
+              "start": 25,
+              "end": 30
             }
           ],
           "scoring": {
@@ -639,16 +647,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "샤딩의 또 다른 약점은 장애 허용성이 자동으로 확보되지 않는다는 점이다. 어떤 샤드가 담당하는 데이터가 한 노드에만 있으면 그 노드가 고장 날 때 해당 데이터는 곧바로 사용할 수 없게 된다. 이를 보완하기 위해 분산 시스템은 같은 샤드 내용을 다른 노드에 한 번 더 저장하는 복제 방식을 결합한다. 복제는 특정 노드가 멈춰도 다른 사본이 서비스를 이어받게 해 준다."
+          "answerText": "성능 병목"
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "함께 조회되거나 계산되는 데이터가 서로 다른 샤드에 흩어질 때 생기는 결과를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 196
+              "paragraphId": "p3",
+              "start": 82,
+              "end": 109
+            },
+            {
+              "paragraphId": "p3",
+              "start": 118,
+              "end": 155
             }
           ],
           "scoring": {
@@ -656,17 +669,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그러나 복제를 붙이면 성능과 일관성에서 새로운 문제가 생긴다. 데이터를 바꿀 때마다 사본에도 같은 변경을 전달해야 하므로 쓰기 비용이 증가하고, 전파가 늦어지면 노드마다 잠시 다른 값을 보여 줄 수 있다. 즉 샤딩은 확장성을, 복제는 복구성과 가용성을 높이지만, 두 방식을 함께 쓸수록 시스템은 성능, 장애 허용성, 일관성 사이에서 절충을 요구받는다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "처리 과정마다 여러 노드가 통신해야 하기 때문이다",
+            "각 노드의 계산보다 네트워크 왕복 시간이 더 큰 부담이 될 수 있다"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "장애 허용성을 보완하기 위해 결합하는 방식을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 235
+              "paragraphId": "p4",
+              "start": 154,
+              "end": 159
             }
           ],
           "scoring": {
@@ -675,7 +691,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 분산 저장 설계의 핵심은 데이터를 얼마나 잘게 쪼갤 것인가보다, 어떤 데이터가 함께 움직여야 하는지와 장애가 났을 때 어느 수준의 지연을 받아들일 것인가를 함께 판단하는 데 있다. 샤딩의 데이터 지역성을 잘 설계하면 불필요한 노드 간 통신을 줄일 수 있고, 복제를 적절히 결합하면 장애에도 서비스를 유지할 수 있다. 분산 시스템은 이 두 장치를 조합해 병목을 줄이면서도 멈추지 않는 구조를 만드는 방향으로 운영된다."
+          "answerText": "복제 방식"
+        },
+        {
+          "id": "q7",
+          "prompt": "복제가 특정 노드의 장애 때 해 주는 역할을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 171,
+              "end": 203
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "특정 노드가 멈춰도 다른 사본이 서비스를 이어받게 해 준다"
+        },
+        {
+          "id": "q8",
+          "prompt": "샤딩과 복제가 각각 높이는 것을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 117,
+              "end": 125
+            },
+            {
+              "paragraphId": "p5",
+              "start": 127,
+              "end": 140
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "샤딩은 확장성을",
+            "복제는 복구성과 가용성을"
+          ]
         }
       ]
     }

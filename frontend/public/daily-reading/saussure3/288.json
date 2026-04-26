@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "손 씻기는 ( ) 예방입니다.",
-          "answerText": "병균",
-          "answerMatchMode": "EXACT",
+          "prompt": "밥을 먹기 전에 먼저 무엇을 해야 하는지 지문에서 찾으시오.",
+          "answerText": "손을 깨끗하게 씻어야 함",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 33,
-              "end": 35
+              "start": 12,
+              "end": 25
             }
           ],
           "scoring": {
@@ -869,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "반찬을 ( )지 않습니다.",
-          "answerText": "뒤적거리",
-          "answerMatchMode": "EXACT",
+          "prompt": "어른들께서 먼저 무엇을 하신 뒤에 식사를 하는지 지문에서 찾으시오.",
+          "answerText": "숟가락을 드신 뒤",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 56,
-              "end": 60
+              "paragraphId": "p1",
+              "start": 64,
+              "end": 73
             }
           ],
           "scoring": {
@@ -888,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "의자에 바른 ( )로 앉아요.",
-          "answerText": "자세",
-          "answerMatchMode": "EXACT",
+          "prompt": "음식을 씹을 때 어떤 태도로 먹는지 지문에서 찾으시오.",
+          "answerText": "입을 다물고 조용히",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 85,
-              "end": 87
+              "paragraphId": "p2",
+              "start": 10,
+              "end": 20
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "다 먹은 뒤에 숟가락과 젓가락을 어떻게 놓는지 지문에서 찾으시오.",
+          "answerText": "숟가락과 젓가락을 가지런히",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 25,
+              "end": 39
             }
           ],
           "scoring": {

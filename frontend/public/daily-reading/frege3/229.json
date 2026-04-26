@@ -975,7 +975,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "청소년의 정치적 참여 권리를 무엇이라고 하나요?",
+          "prompt": "청소년의 정치적 참여 권리를 지문에서 무엇이라고 부르나요?",
           "answerText": "참정권(Suffrage)",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -993,7 +993,7 @@
         },
         {
           "id": "q2",
-          "prompt": "찬성 측이 내세운 핵심 논리는 무엇인가요?",
+          "prompt": "찬성 측이 핵심 논리로 내세운 표현을 찾으시오.",
           "answerText": "정치적 주체로서의 기본권 보장",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1011,10 +1011,18 @@
         },
         {
           "id": "q3",
-          "prompt": "반대 측이 가장 크게 걱정하는 학교 현상은 무엇인가요?",
-          "answerText": "교실의 정치화",
-          "answerMatchMode": "ANY",
+          "prompt": "반대 측이 심각한 문제로 지적한 두 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "정치적 미성숙",
+            "교실의 정치화"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 34,
+              "end": 41
+            },
             {
               "paragraphId": "p3",
               "start": 45,
@@ -1029,14 +1037,22 @@
         },
         {
           "id": "q4",
-          "prompt": "투표 연령을 16세로 낮춘 나라의 예시는 어디인가요?",
-          "answerText": "오스트리아",
-          "answerMatchMode": "ANY",
+          "prompt": "투표 연령을 16세로 낮춘 유럽 국가 이름을 모두 찾으시오.",
+          "answerTexts": [
+            "오스트리아",
+            "스코틀랜드"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 156,
               "end": 161
+            },
+            {
+              "paragraphId": "p4",
+              "start": 163,
+              "end": 168
             }
           ],
           "scoring": {
@@ -1047,7 +1063,7 @@
         },
         {
           "id": "q5",
-          "prompt": "참정권 확대와 함께 필요하다고 한 교육은 무엇인가요?",
+          "prompt": "서로 다른 의견을 존중하고 토론하는 훈련을 지문에서는 어떤 교육이라고 했나요?",
           "answerText": "정치 교육",
           "answerMatchMode": "ANY",
           "answerRanges": [

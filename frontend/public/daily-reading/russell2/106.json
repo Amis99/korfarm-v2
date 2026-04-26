@@ -1039,138 +1039,79 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "여러 사례에서 공통 규칙을 이끌어 내는 사고는?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 122,
-              "end": 124
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p4",
-              "start": 5,
-              "end": 7
-            },
-            {
-              "paragraphId": "p4",
-              "start": 42,
-              "end": 44
-            },
-            {
-              "paragraphId": "p4",
-              "start": 89,
-              "end": 91
-            },
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p6",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p6",
-              "start": 103,
-              "end": 105
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "여러 개별 사례를 살펴 공통된 규칙을 이끌어 내는 사고 방식을 가리키는 말을 찾으시오",
+          "answerText": "귀납",
           "answerMatchMode": "ANY",
-          "answerText": "귀납"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p1", "start": 122, "end": 124},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p4", "start": 5, "end": 7},
+            {"paragraphId": "p4", "start": 42, "end": 44},
+            {"paragraphId": "p4", "start": 89, "end": 91},
+            {"paragraphId": "p5", "start": 0, "end": 2},
+            {"paragraphId": "p6", "start": 3, "end": 5},
+            {"paragraphId": "p6", "start": 103, "end": 105}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "어떤 주장에 옳은 까닭을 대는 일은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 43,
-              "end": 46
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글에서 매일 떠올랐다고 들며 귀납 문제를 설명하는 데 쓰인 자연 현상을 찾으시오",
+          "answerText": "해가 매일 떠올랐다",
           "answerMatchMode": "ANY",
-          "answerText": "정당화"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 60, "end": 70}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "두 대상 사이의 떨어진 거리는?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 27,
-              "end": 29
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글에서 모든 백조가 흰색이라고 단정할 수 없음을 보이려고 든 예를 찾으시오",
+          "answerText": "흰 백조",
           "answerMatchMode": "ANY",
-          "answerText": "간격"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 40, "end": 44}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "그럴듯하게 성립할 가능성은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 110,
-              "end": 113
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "귀납의 결론을 절대적 확실성 대신 어느 수준으로 받아들여야 한다고 했는지 찾으시오",
+          "answerText": "높은 개연성",
           "answerMatchMode": "ANY",
-          "answerText": "개연성"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 107, "end": 113}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "더 나아갈 수 없는 범위는?",
+          "prompt": "성급한 일반화를 막기 위해 함께 필요하다고 한 세 가지를 모두 찾으시오",
+          "answerText": "충분한 사례 / 다양한 조건 / 예외 검토",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 21,
-              "end": 23
-            },
-            {
-              "paragraphId": "p6",
-              "start": 127,
-              "end": 129
-            }
+            {"paragraphId": "p5", "start": 100, "end": 106},
+            {"paragraphId": "p5", "start": 108, "end": 114},
+            {"paragraphId": "p5", "start": 116, "end": 121}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "이미 본 사례를 보지 못한 사례까지 확장할 때 남는 한계를 가리키는 말을 찾으시오",
+          "answerText": "논리적 비약",
           "answerMatchMode": "ANY",
-          "answerText": "한계"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 131, "end": 137}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

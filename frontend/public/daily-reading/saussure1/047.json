@@ -416,19 +416,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "( )색 나무가 보여요.",
-          "answerText": "초록",
-          "answerMatchMode": "EXACT",
+          "prompt": "해에서 비치는 빛이라는 뜻의 단어를 지문에서 찾아 보세요.",
+          "answerText": "햇살",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 10,
-              "end": 12
-            },
-            {
-              "paragraphId": "p2",
-              "start": 24,
-              "end": 26
+              "start": 48,
+              "end": 50
             }
           ],
           "scoring": {
@@ -440,14 +435,14 @@
         },
         {
           "id": "q2",
-          "prompt": "책상 위로 ( )을 옴.",
-          "answerText": "소풍",
-          "answerMatchMode": "EXACT",
+          "prompt": "바람이 살랑 불어오면 일어나는 결과를 표현한 시 행을 찾아 보세요.",
+          "answerText": "나뭇잎들이 손을 흔듭니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 65,
-              "end": 67
+              "start": 34,
+              "end": 47
             }
           ],
           "scoring": {
@@ -459,14 +454,38 @@
         },
         {
           "id": "q3",
-          "prompt": "숲속 ( )가 들어와요.",
-          "answerText": "향기",
-          "answerMatchMode": "EXACT",
+          "prompt": "사람이 아닌 사물(나뭇잎과 햇살)을 사람처럼 표현한 시 행 두 군데를 모두 찾아 보세요.",
+          "answerText": "나뭇잎들이 손을 흔듭니다 / 책상 위로 소풍을 왔어요",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 34,
+              "end": 47
+            },
+            {
+              "paragraphId": "p1",
+              "start": 59,
+              "end": 72
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "창밖의 새들이 즐겁게 부르고 있는 것을 지문에서 찾아 보세요.",
+          "answerText": "노래",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 31,
-              "end": 33
+              "start": 15,
+              "end": 17
             }
           ],
           "scoring": {

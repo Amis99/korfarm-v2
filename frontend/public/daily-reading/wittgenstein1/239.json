@@ -571,12 +571,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"정보 비대칭과 역선택\"에 해당하는 부분은 어디인가요?",
+          "prompt": "거래 당사자들이 서로 다른 양의 정보를 가지는 상태를 가리키는 말을 찾으시오.",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 168,
+              "end": 174
+            },
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 6
+            },
             {
               "paragraphId": "p6",
               "start": 3,
-              "end": 14
+              "end": 9
             }
           ],
           "scoring": {
@@ -585,16 +595,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정보 비대칭과 역선택"
+          "answerText": "정보 비대칭"
         },
         {
           "id": "q2",
-          "prompt": "\"정보 비대칭과 역선택\"에 해당하는 부분은 어디인가요?",
+          "prompt": "1문단에서 현실에서 정확히 알기 어려운 것 중 계약 뒤와 관련된 항목을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 3,
-              "end": 14
+              "paragraphId": "p1",
+              "start": 81,
+              "end": 90
             }
           ],
           "scoring": {
@@ -603,16 +613,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정보 비대칭과 역선택"
+          "answerText": "계약 이후의 행동"
         },
         {
           "id": "q3",
-          "prompt": "주요 소재는 무엇인가요?",
+          "prompt": "2문단에서 정보 비대칭이 문제가 되는 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 112,
-              "end": 126
+              "paragraphId": "p2",
+              "start": 19,
+              "end": 61
             }
           ],
           "scoring": {
@@ -621,16 +631,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "시장에서 빠져나가려는 유인"
+          "answerText": "정보를 적게 가진 쪽이 상대적으로 불리한 선택을 할 가능성이 커지기 때문이다"
         },
         {
           "id": "q4",
-          "prompt": "\"정보 비대칭과 역선택\"에 해당하는 부분은 어디인가요?",
+          "prompt": "2문단에서 보험 예시의 결과 더 많이 남게 되는 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 3,
-              "end": 14
+              "paragraphId": "p2",
+              "start": 184,
+              "end": 194
             }
           ],
           "scoring": {
@@ -639,15 +649,30 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정보 비대칭과 역선택"
+          "answerText": "위험이 높은 가입자"
         },
         {
           "id": "q5",
-          "prompt": "\"정보 비대칭과 역선택\"에 해당하는 부분은 어디인가요?",
+          "prompt": "정보가 부족한 쪽이 가장 바람직하지 않은 상대와 거래하게 되는 현상을 가리키는 말을 찾으시오.",
           "answerRanges": [
             {
+              "paragraphId": "p3",
+              "start": 43,
+              "end": 46
+            },
+            {
+              "paragraphId": "p3",
+              "start": 54,
+              "end": 57
+            },
+            {
+              "paragraphId": "p4",
+              "start": 6,
+              "end": 9
+            },
+            {
               "paragraphId": "p6",
-              "start": 3,
+              "start": 11,
               "end": 14
             }
           ],
@@ -657,16 +682,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정보 비대칭과 역선택"
+          "answerText": "역선택"
         },
         {
           "id": "q6",
-          "prompt": "\"정보 비대칭과 역선택\"에 해당하는 부분은 어디인가요?",
+          "prompt": "4문단에서 시장이 역선택을 줄이기 위해 활용한다고 한 방법을 찾으시오.",
           "answerRanges": [
             {
+              "paragraphId": "p4",
+              "start": 18,
+              "end": 23
+            },
+            {
               "paragraphId": "p6",
-              "start": 3,
-              "end": 14
+              "start": 97,
+              "end": 102
             }
           ],
           "scoring": {
@@ -675,7 +705,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정보 비대칭과 역선택"
+          "answerText": "신호 발송"
+        },
+        {
+          "id": "q7",
+          "prompt": "4문단에서 정보를 더 많이 가진 쪽이 신호를 보내는 이유를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 50,
+              "end": 68
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "자신의 우수한 특성을 알리기 위해"
+        },
+        {
+          "id": "q8",
+          "prompt": "5문단에서 정보를 적게 가진 쪽이 쓸 수 있다고 한 전략을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 17,
+              "end": 22
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "선별 전략"
         }
       ]
     }

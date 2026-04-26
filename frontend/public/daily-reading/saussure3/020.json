@@ -557,49 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "주말에 서해안에서 썰물로 바닷물이 빠지면서 모습을 드러낸 진흙이 쌓인 넓은 공간은?",
-          "answerText": "갯벌",
-          "answerMatchMode": "EXACT",
+          "prompt": "갯벌이 어떤 공간인지 설명한 부분을 찾으시오.",
+          "answerText": "바닷물이 들어오고 나가는 곳에 진흙이 쌓여 만들어진 독특한 공간",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 24,
-              "end": 26
-            },
-            {
-              "paragraphId": "p1",
-              "start": 36,
-              "end": 38
-            },
-            {
-              "paragraphId": "p1",
-              "start": 98,
-              "end": 100
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 76,
-              "end": 78
-            },
-            {
-              "paragraphId": "p3",
-              "start": 7,
-              "end": 9
-            },
-            {
-              "paragraphId": "p3",
-              "start": 51,
-              "end": 53
-            },
-            {
-              "paragraphId": "p3",
-              "start": 85,
-              "end": 87
+              "start": 40,
+              "end": 75
             }
           ],
           "scoring": {
@@ -611,14 +576,22 @@
         },
         {
           "id": "q2",
-          "prompt": "글쓴이가 표면에 수없이 뚫린 작은 구멍을 삽으로 살짝 파냈을 때 조개들과 함께 나타난 생물은?",
-          "answerText": "칠게",
-          "answerMatchMode": "EXACT",
+          "prompt": "삽으로 진흙을 살짝 파내자 모습을 보인 생물을 모두 찾으시오.",
+          "answerTexts": [
+            "칠게",
+            "조개들이"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 50,
               "end": 52
+            },
+            {
+              "paragraphId": "p2",
+              "start": 54,
+              "end": 58
             }
           ],
           "scoring": {
@@ -630,19 +603,49 @@
         },
         {
           "id": "q3",
-          "prompt": "체험을 마친 후 갯벌에서 본 생물들의 모양이나 생태계의 중요성 등을 자세하게 기록한 글은?",
-          "answerText": "보고서",
-          "answerMatchMode": "EXACT",
+          "prompt": "갯벌이 바다와 생물에게 해 주는 좋은 역할을 모두 찾으시오.",
+          "answerTexts": [
+            "바다 생물들의 훌륭한 집",
+            "바닷물을 깨끗하게 해 주는 곳"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 80,
+              "end": 93
+            },
+            {
+              "paragraphId": "p2",
+              "start": 96,
+              "end": 112
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "보고서에 자세히 적은 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "생물들의 모양",
+            "갯벌이 자연에 주는 중요성"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 25,
-              "end": 28
+              "start": 42,
+              "end": 49
             },
             {
               "paragraphId": "p3",
-              "start": 36,
-              "end": 39
+              "start": 51,
+              "end": 65
             }
           ],
           "scoring": {

@@ -552,9 +552,38 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "되풀이되는 부분을 무엇이라고 하나요?",
+          "prompt": "옛날부터 전해 내려오는 우리 노래를 두 글자로 무엇이라고 하는지 적어 보세요",
+          "answerText": "민요",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p1",
+              "start": 27,
+              "end": 29
+            },
+            {
+              "paragraphId": "p2",
+              "start": 118,
+              "end": 120
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "노래 마디 사이에 되풀이되는 부분을 가리키는 말을 두 글자로 적어 보세요",
           "answerText": "후렴",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -595,10 +624,10 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "무엇 노래의 후렴이 유명하나요?",
+          "id": "q3",
+          "prompt": "후렴이 유명한 예시 노래로 글에 나온 작품을 세 글자로 적어 보세요",
           "answerText": "아리랑",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -619,15 +648,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "함께 부르면 무척 무엇이 나요인가요?",
-          "answerText": "신",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "후렴은 같은 가사와 무엇이 반복되는 특징이 있다고 했는지 두 글자로 적어 보세요",
+          "answerText": "가락",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 124,
-              "end": 125
+              "paragraphId": "p2",
+              "start": 11,
+              "end": 13
             }
           ],
           "scoring": {

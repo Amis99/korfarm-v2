@@ -557,34 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "반장과 서기가 앞에 나가 여러 사람이 모여 학급의 중요한 일을 결정하기 위해 의견을 나누는 모임은?",
-          "answerText": "회의",
-          "answerMatchMode": "EXACT",
+          "prompt": "회의 목적은 무엇을 정하는 것이었는지 지문에서 찾으시오.",
+          "answerText": "모둠 활동 주제",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 29,
-              "end": 31
-            },
-            {
-              "paragraphId": "p1",
-              "start": 40,
-              "end": 42
-            },
-            {
-              "paragraphId": "p1",
-              "start": 84,
-              "end": 86
-            },
-            {
-              "paragraphId": "p3",
-              "start": 87,
-              "end": 89
-            },
-            {
-              "paragraphId": "p3",
-              "start": 107,
-              "end": 109
+              "start": 47,
+              "end": 55
             }
           ],
           "scoring": {
@@ -596,14 +576,22 @@
         },
         {
           "id": "q2",
-          "prompt": "윤서가 제안한 의견으로 수목원에 피어 있는 희귀한 식물의 종류와 이름 등을 찾기 위해 챙겨갈 책은?",
-          "answerText": "식물도감",
-          "answerMatchMode": "EXACT",
+          "prompt": "지훈이와 수아의 역할을 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "반장",
+            "서기"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 49,
-              "end": 53
+              "paragraphId": "p1",
+              "start": 69,
+              "end": 71
+            },
+            {
+              "paragraphId": "p1",
+              "start": 94,
+              "end": 96
             }
           ],
           "scoring": {
@@ -615,14 +603,33 @@
         },
         {
           "id": "q3",
-          "prompt": "회의가 모두 끝난 후 친구들이 칠판에 적힌 결정 사항을 나중에도 잊지 않기 위해 옮겨 적는 문서는?",
-          "answerText": "회의록",
-          "answerMatchMode": "EXACT",
+          "prompt": "민준이가 숲속에서 관찰하자고 제안한 대상을 지문에서 찾으시오.",
+          "answerText": "다양한 곤충",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 20,
+              "end": 26
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "선생님께서 다치지 않도록 지키는 것이 제일 먼저라고 한 것을 지문에서 찾으시오.",
+          "answerText": "안전 수칙",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 107,
-              "end": 110
+              "start": 58,
+              "end": 63
             }
           ],
           "scoring": {

@@ -552,24 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "기기를 보면 ( )이 피곤해요.",
-          "answerText": "눈",
-          "answerMatchMode": "EXACT",
+          "prompt": "스마트폰이나 태블릿을 오래 보면 어떻게 된다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "스마트폰이나 태블릿을 오래 보면 눈이 무척 피곤해져요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 18,
-              "end": 19
-            },
-            {
-              "paragraphId": "p1",
-              "start": 74,
-              "end": 75
-            },
-            {
-              "paragraphId": "p1",
-              "start": 138,
-              "end": 139
+              "start": 0,
+              "end": 29
             }
           ],
           "scoring": {
@@ -581,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "중간중간 ( ) 시간을 가짐.",
-          "answerText": "쉬는",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 눈을 쉬게 하는 방법을 찾아 보세요.",
+          "answerText": "먼 곳을 바라보거나 눈을 감고 휴식을 취해 보아요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 47,
-              "end": 49
+              "start": 63,
+              "end": 90
             }
           ],
           "scoring": {
@@ -600,14 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "마음이 ( )해집니다.",
-          "answerText": "뿌듯",
-          "answerMatchMode": "EXACT",
+          "prompt": "게임이나 영상을 본 뒤에 어떻게 하라고 했는지 지문에서 찾아 보세요.",
+          "answerText": "밖으로 나가 몸을 움직여요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 116,
-              "end": 118
+              "start": 15,
+              "end": 29
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "스스로 약속한 시간을 지키면 어떻게 된다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "마음이 뿌듯해집니다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 112,
+              "end": 122
             }
           ],
           "scoring": {

@@ -561,14 +561,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "여럿이 모여서 어수선하게 떠들거나 밀고 당기며 시끄럽게 하는 일은?",
-          "answerText": "소동",
+          "prompt": "피노키오를 알아보고 반갑게 소리친 이들을 지문에서 찾으시오.",
+          "answerText": "무대 위 인형들",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 60,
-              "end": 62
+              "start": 17,
+              "end": 25
             }
           ],
           "scoring": {
@@ -579,19 +579,55 @@
         },
         {
           "id": "q2",
-          "prompt": "나쁜 짓을 일삼는 무리나 그런 짓을 하는 나쁜 사람은?",
-          "answerText": "악당",
+          "prompt": "극장 주인이 피노키오에게 준 것을 지문에서 찾으시오.",
+          "answerText": "금화 다섯 닢",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 119,
+              "end": 126
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "피노키오가 집으로 돌아가다가 만난 이들을 지문에서 찾으시오.",
+          "answerText": "절름발이 여우와 눈먼 고양이",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 54,
-              "end": 56
+              "start": 24,
+              "end": 39
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "금화를 심으면 금화가 열리는 나무가 자란다고 속인 장소를 지문에서 찾으시오.",
+          "answerText": "기적의 들판",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 87,
+              "end": 93
             },
             {
               "paragraphId": "p3",
-              "start": 35,
-              "end": 37
+              "start": 55,
+              "end": 61
             }
           ],
           "scoring": {

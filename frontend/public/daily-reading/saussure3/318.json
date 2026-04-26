@@ -850,18 +850,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "고운 마음의 ( )가 되었습니다.",
-          "answerText": "흥부",
-          "answerMatchMode": "EXACT",
+          "prompt": "한 친구가 되어 연기한, 마음씨가 고운 인물을 지문에서 찾으시오.",
+          "answerText": "마음씨 고운 흥부",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 6,
-              "end": 8
-            },
-            {
-              "paragraphId": "p1",
-              "start": 40,
+              "start": 33,
               "end": 42
             }
           ],
@@ -874,19 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "톱질하는 ( )을 표현해요.",
-          "answerText": "장면",
-          "answerMatchMode": "EXACT",
+          "prompt": "제비 역할의 친구가 흉내 낸 행동을 지문에서 찾으시오.",
+          "answerText": "날개짓을 흉내 냄",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 115,
-              "end": 117
-            },
-            {
-              "paragraphId": "p2",
-              "start": 10,
-              "end": 12
+              "start": 68,
+              "end": 77
             }
           ],
           "scoring": {
@@ -898,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "친구들과 ( )을 쌓았습니다.",
-          "answerText": "우정",
-          "answerMatchMode": "EXACT",
+          "prompt": "박을 타는 장면에서 입으로 낸 소리를 지문에서 찾으시오.",
+          "answerText": "슬근슬근 톱질하는 소리",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 39
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "마음이 잘 이해되게 한 행동을 지문에서 찾으시오.",
+          "answerText": "다른 사람의 입장이 되어",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 61,
-              "end": 63
+              "start": 26,
+              "end": 39
             }
           ],
           "scoring": {

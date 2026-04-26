@@ -832,7 +832,25 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "새어머니가 콩쥐에게 채우라고 한 것은 무엇인가요?",
+          "prompt": "콩쥐가 어떤 성품을 가진 인물인지 나타내는 말을 지문에서 찾으시오.",
+          "answerText": "마음씨 착한",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 10,
+              "end": 16
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "새어머니가 콩쥐에게 물을 채우라고 한 대상을 지문에서 찾으시오.",
           "answerText": "밑 빠진 독",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -854,33 +872,29 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "독의 구멍을 막아 준 동물은 무엇인가요?",
-          "answerText": "두꺼비",
-          "answerMatchMode": "ANY",
+          "id": "q3",
+          "prompt": "콩쥐 앞에 나타나 도움을 준 존재를 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "두꺼비",
+            "참새",
+            "선녀"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 33,
               "end": 36
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "콩쥐가 시냇가에서 잃어버린 것은 무엇인가요?",
-          "answerText": "꽃신 한 짝",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+            },
             {
-              "paragraphId": "p3",
-              "start": 26,
-              "end": 32
+              "paragraphId": "p2",
+              "start": 81,
+              "end": 83
+            },
+            {
+              "paragraphId": "p2",
+              "start": 113,
+              "end": 115
             }
           ],
           "scoring": {
@@ -891,14 +905,14 @@
         },
         {
           "id": "q4",
-          "prompt": "꽃신의 주인을 찾기로 한 사람은 누구인가요?",
-          "answerText": "감사 사또",
+          "prompt": "감사 사또가 발견한 물건을 지문에서 찾으시오.",
+          "answerText": "반짝이는 꽃신",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 56,
-              "end": 61
+              "start": 63,
+              "end": 70
             }
           ],
           "scoring": {
@@ -909,7 +923,7 @@
         },
         {
           "id": "q5",
-          "prompt": "이야기 끝에서 참된 아름다움의 바탕이라고 한 것은 무엇인가요?",
+          "prompt": "진정한 아름다움이 나온다고 한 곳을 지문에서 찾으시오.",
           "answerText": "내면의 정직함",
           "answerMatchMode": "ANY",
           "answerRanges": [

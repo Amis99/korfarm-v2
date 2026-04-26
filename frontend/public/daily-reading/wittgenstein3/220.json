@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "prompt": "컴퓨터의 중심 연산 장치가 무엇이었는지 말한 문장을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 212
+              "end": 26
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "오랫동안 컴퓨터의 중심 연산 장치는 CPU였다. CPU는 명령어 종류가 다양하고 실행 순서가 자주 바뀌는 작업을 정밀하게 통제하도록 설계되어, 운영 체제 처리나 문서 작성 같은 범용 작업에 적합했다. 그러나 인공 지능 학습, 영상 렌더링, 과학 계산처럼 같은 연산을 막대한 데이터에 반복 적용하는 환경이 늘어나면서, 복잡한 제어보다 대량 병렬 처리에 특화된 구조가 더 중요해졌다."
+          "answerText": "오랫동안 컴퓨터의 중심 연산 장치는 CPU였다."
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 핵심 원리나 기준을 어떻게 설명하는가?",
+          "prompt": "GPU가 그래픽 장치를 넘어 어떤 장치로 활용되기 시작했는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 212
+              "start": 25,
+              "end": 36
             }
           ],
           "scoring": {
@@ -603,16 +603,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 변화 속에서 GPU는 그래픽 장치를 넘어 범용 병렬 연산 장치로 활용되기 시작했다. GPU는 적은 수의 복잡한 코어 대신 수많은 단순 연산 코어를 한 칩에 집적해 두고, 동일한 명령을 여러 데이터에 동시에 적용하는 데 유리한 구조를 갖춘다. 따라서 행렬 곱셈, 픽셀 처리, 대규모 수치 시뮬레이션처럼 연산 형태가 반복적인 작업에서는 CPU보다 훨씬 높은 처리량을 낼 수 있다."
+          "answerText": "범용 병렬 연산 장치"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 그 원리의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "GPU가 높은 처리량을 낼 수 있는 반복적 작업의 예를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 211
+              "paragraphId": "p2",
+              "start": 141,
+              "end": 146
+            },
+            {
+              "paragraphId": "p2",
+              "start": 148,
+              "end": 153
+            },
+            {
+              "paragraphId": "p2",
+              "start": 155,
+              "end": 167
             }
           ],
           "scoring": {
@@ -620,17 +630,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "GPU 내부의 연산은 스레드라는 최소 실행 단위를 중심으로 이루어지며, 여러 스레드는 다시 스레드 블록으로 묶여 관리된다. 스케줄러는 명령어를 해석한 뒤 이 블록들을 여러 연산 유닛에 배분한다. 여기서 중요한 것은 연산량이 고르게 분배되어야 한다는 점이다. 어떤 유닛에는 많은 블록이 몰리고 다른 유닛은 빨리 일을 마치면, 일부 자원은 대기 상태에 놓여 전체 병렬성이 떨어진다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "행렬 곱셈",
+            "픽셀 처리",
+            "대규모 수치 시뮬레이션"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
+          "prompt": "GPU 내부 연산의 최소 실행 단위를 설명한 어구를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 240
+              "paragraphId": "p3",
+              "start": 12,
+              "end": 26
             }
           ],
           "scoring": {
@@ -639,16 +653,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "GPU의 성능은 코어 수만으로 결정되지 않는다. 데이터를 어디에 저장하고 어떤 경로로 접근하느냐도 큰 영향을 미친다. 전역 메모리는 용량이 크고 모든 스레드가 접근할 수 있지만 상대적으로 느리다. 반면 레지스터는 매우 빠르지만 각 스레드가 제한된 양만 사용할 수 있고, 공유 메모리는 같은 블록 안의 스레드들이 빠르게 정보를 주고받는 데 유리하다. 결국 빠른 메모리를 적절히 활용할수록 동일한 코어 구조에서도 성능 차이가 커진다."
+          "answerText": "스레드라는 최소 실행 단위"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 이 주제의 효과나 쟁점을 어떤 방향으로 확장하는가?",
+          "prompt": "여러 스레드가 어떻게 묶여 관리되는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 229
+              "paragraphId": "p3",
+              "start": 51,
+              "end": 67
             }
           ],
           "scoring": {
@@ -657,16 +671,48 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "하지만 GPU가 언제나 효율적인 것은 아니다. 스레드들이 기본적으로 같은 명령 흐름을 따라갈 것을 전제로 설계되어 있기 때문에, 조건문이 자주 등장해 실행 경로가 갈라지면 일부 스레드는 다른 스레드가 끝날 때까지 기다려야 한다. 이른바 분기 발산이 심해지면 병렬 처리 장점이 약해진다. 따라서 GPU에 맞는 프로그램은 단순히 계산량이 많기만 한 것이 아니라, 연산 패턴이 얼마나 균질한지도 함께 고려해야 한다."
+          "answerText": "스레드 블록으로 묶여 관리된다"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 앞선 논의를 어떤 의미로 정리하는가?",
+          "prompt": "4문단에서 구분한 메모리 세 종류를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 234
+              "paragraphId": "p4",
+              "start": 66,
+              "end": 72
+            },
+            {
+              "paragraphId": "p4",
+              "start": 113,
+              "end": 117
+            },
+            {
+              "paragraphId": "p4",
+              "start": 151,
+              "end": 157
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "전역 메모리",
+            "레지스터",
+            "공유 메모리"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "분기 발산이 심해지면 어떤 장점이 약해지는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 144,
+              "end": 152
             }
           ],
           "scoring": {
@@ -675,7 +721,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "오늘날의 컴퓨팅은 CPU와 GPU 가운데 하나를 고르는 방식으로 발전하지 않는다. 제어 흐름이 복잡하고 순차적 판단이 많은 부분은 CPU가 맡고, 반복적 대규모 계산은 GPU가 맡는 식으로 역할을 나누는 방향이 일반적이다. 결국 중요한 것은 더 강한 장치를 찾는 일이 아니라, 작업의 성격에 맞게 연산 구조와 메모리 구조를 함께 설계하는 일이다. GPU의 가치는 바로 이런 이질적 협업 체계 속에서 가장 크게 드러난다."
+          "answerText": "병렬 처리 장점"
+        },
+        {
+          "id": "q8",
+          "prompt": "오늘날 CPU와 GPU가 역할을 나누는 방향을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 46,
+              "end": 116
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "제어 흐름이 복잡하고 순차적 판단이 많은 부분은 CPU가 맡고, 반복적 대규모 계산은 GPU가 맡는 식으로 역할을 나누는 방향"
         }
       ]
     }

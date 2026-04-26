@@ -396,14 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "눈 위에서 즐기는 놀이?",
-          "answerText": "눈놀이",
-          "answerMatchMode": "EXACT",
+          "prompt": "지나간 일을 마음속에 떠올리는 일을 뜻하는 두 글자 낱말을 글에서 찾아 적어 보세요",
+          "answerText": "추억",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 3,
-              "end": 6
+              "start": 146,
+              "end": 148
             }
           ],
           "scoring": {
@@ -415,9 +415,9 @@
         },
         {
           "id": "q2",
-          "prompt": "눈으로 만든 사람 모양?",
+          "prompt": "눈을 뭉쳐 사람 모양으로 만든 것을 부르는 이름을 글에서 찾아 적어 보세요",
           "answerText": "눈사람",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -434,14 +434,33 @@
         },
         {
           "id": "q3",
-          "prompt": "눈 위를 달리는 판?",
-          "answerText": "썰매",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이와 함께 밖으로 나가 눈을 뭉치며 논 가족이 누구인지 글에서 찾아 적어 보세요",
+          "answerText": "동생",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 44,
+              "end": 46
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "오늘 눈놀이에서 글쓴이가 가장 신났다고 한 순간이 어떤 순간이었는지 글에서 찾아 적어 보세요",
+          "answerText": "가파른 언덕에서 썰매를 타고 쌩쌩 내려왔을 때",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 29,
-              "end": 31
+              "start": 20,
+              "end": 45
             }
           ],
           "scoring": {

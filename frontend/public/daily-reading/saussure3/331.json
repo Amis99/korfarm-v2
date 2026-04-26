@@ -850,13 +850,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "뛰어난 ( )으로 냄새를 맡아요.",
-          "answerText": "후각",
-          "answerMatchMode": "EXACT",
+          "prompt": "냄새를 무척 잘 맡게 해 주는 강아지의 감각을 지문에서 찾으시오.",
+          "answerText": "뛰어난 후각",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 37,
+              "start": 33,
               "end": 39
             }
           ],
@@ -869,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "( )에게 허락을 먼저 구해요.",
-          "answerText": "주인",
-          "answerMatchMode": "EXACT",
+          "prompt": "모르는 강아지에게 하지 않도록 한 행동을 지문에서 찾으시오.",
+          "answerText": "갑자기 손을 내밀지 않도록 함",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 55,
-              "end": 57
+              "start": 37,
+              "end": 53
             }
           ],
           "scoring": {
@@ -888,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "부드럽게 ( )으며 친해집니다.",
-          "answerText": "쓰다듬",
-          "answerMatchMode": "EXACT",
+          "prompt": "누구에게 먼저 인사를 하고 만져도 되는지 묻는다고 했는지 지문에서 찾으시오.",
+          "answerText": "주인에게",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 55,
+              "end": 59
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "생명을 아끼는 작은 습관이 만드는 세상을 지문에서 찾으시오.",
+          "answerText": "평화로운 세상",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 46,
-              "end": 49
+              "start": 93,
+              "end": 100
             }
           ],
           "scoring": {

@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "세수할 때 쓰는 세정제?",
+          "prompt": "글에서 '때를 씻어내는 데 쓰는 세정제'를 뜻하는 두 글자 낱말을 찾아 적어 보세요",
           "answerText": "비누",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -435,44 +435,14 @@
         },
         {
           "id": "q2",
-          "prompt": "액체에서 생긴 기체 방울?",
-          "answerText": "거품",
-          "answerMatchMode": "EXACT",
+          "prompt": "거품이 햇빛을 받아 무지개색으로 반짝이는 까닭이 무엇인지 글에서 찾아 적어 보세요",
+          "answerText": "빛이 거품의 얇은 막에서 반사되기 때문",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p1",
-              "start": 29,
-              "end": 31
-            },
-            {
-              "paragraphId": "p1",
-              "start": 116,
-              "end": 118
-            },
-            {
-              "paragraphId": "p1",
-              "start": 147,
-              "end": 149
-            },
-            {
-              "paragraphId": "p2",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p2",
-              "start": 93,
-              "end": 95
-            },
-            {
-              "paragraphId": "p2",
-              "start": 140,
-              "end": 142
+              "start": 144,
+              "end": 165
             }
           ],
           "scoring": {
@@ -484,9 +454,28 @@
         },
         {
           "id": "q3",
-          "prompt": "사물의 이치를 배우는 학문?",
+          "prompt": "더 크고 단단한 거품을 만들기 위해 섞는 두 가지 재료가 무엇인지 글에서 찾아 적어 보세요",
+          "answerText": "설탕이나 글리세린",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 75
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글에서 '사물의 이치를 연구하는 학문'을 뜻하는 두 글자 낱말을 찾아 적어 보세요",
           "answerText": "과학",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",

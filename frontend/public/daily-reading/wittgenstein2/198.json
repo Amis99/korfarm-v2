@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "1문단에서 화자가 누군가 부르면 보여 주겠다고 한 대상을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 42
+              "start": 23,
+              "end": 41
             }
           ],
           "scoring": {
@@ -585,15 +585,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "누가 와서 나를 부른다면\n내 보여 주리라\n저 얼은 들판 위에 내리는 달빛을."
+          "answerText": "저 얼은 들판 위에 내리는 달빛을"
         },
         {
           "id": "q2",
-          "prompt": "2문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "1문단에서 조건을 드러내는 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 13
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "누가 와서 나를 부른다면"
+        },
+        {
+          "id": "q3",
+          "prompt": "2문단에서 얼은 들판을 걸어가는 대상을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
+              "start": 12,
+              "end": 17
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "한 그림자"
+        },
+        {
+          "id": "q4",
+          "prompt": "2문단에서 화자의 성찰이 물음으로 드러난 문장을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 19,
               "end": 43
             }
           ],
@@ -603,34 +639,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "얼은 들판을 걸어가는 한 그림자를\n지금까지 내 생각해 온 것은 모두 무엇인가."
+          "answerText": "지금까지 내 생각해 온 것은 모두 무엇인가."
         },
         {
-          "id": "q3",
-          "prompt": "3문단의 내용을 바탕으로 알 수 있는 것은?",
+          "id": "q5",
+          "prompt": "3문단에서 같은 말을 되풀이한 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 52
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "친구 몇몇 친구 몇몇 그들에게는\n이제 내 것 가운데 그중 외로움이 아닌 길을\n보여 주게 되리."
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단의 내용을 바탕으로 알 수 있는 것은?",
-          "answerRanges": [
+              "end": 5
+            },
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 27
+              "paragraphId": "p3",
+              "start": 6,
+              "end": 11
             }
           ],
           "scoring": {
@@ -639,34 +662,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "오랫동안 네 여며온 고의춤에 남은 것은 무엇인가."
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단의 내용을 바탕으로 알 수 있는 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 34
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "두 팔 들고 얼음을 밟으며\n갑자기 구름 개인 들판을 걸어갈 때"
+          "answerText": "친구 몇몇"
         },
         {
           "id": "q6",
-          "prompt": "6문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "3문단에서 화자가 그들에게 보여 주려는 길을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 19
+              "paragraphId": "p3",
+              "start": 32,
+              "end": 41
             }
           ],
           "scoring": {
@@ -675,7 +680,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "헐벗은 옷 가득히 받는 달빛 달빛."
+          "answerText": "외로움이 아닌 길"
+        },
+        {
+          "id": "q7",
+          "prompt": "4문단에서 오랫동안 여며 온 옷의 부분을 가리키는 말을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 11,
+              "end": 14
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "고의춤"
+        },
+        {
+          "id": "q8",
+          "prompt": "6문단에서 시어를 반복해 강조한 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 13,
+              "end": 18
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "달빛 달빛"
         }
       ]
     }

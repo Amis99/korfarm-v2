@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "합성어와 파생어를 구별할 때 함께 살펴야 하는 것으로 가장 알맞은 것은?",
+          "prompt": "단어 분석에서 형태소 종류만 세는 것으로 부족하다는 내용을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 178
+              "start": 10,
+              "end": 41
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "단어를 분석할 때 형태소의 종류만 세는 것으로는 충분하지 않은 경우가 많다. 특히 합성어와 파생어는 겉모습이 비슷해 보여도 단어 형성 방식이 다르기 때문에, 어근과 접사를 어떻게 판별하는지가 중요하다. 두 유형을 구별하려면 각 성분이 독립적인 의미를 지니는지, 그리고 문법적으로 어떤 기능을 하는지를 함께 살펴야 한다."
+          "answerText": "형태소의 종류만 세는 것으로는 충분하지 않은 경우가 많다"
         },
         {
           "id": "q2",
-          "prompt": "이 문단의 예시 설명으로 가장 알맞은 것은?",
+          "prompt": "합성어와 파생어 구별에서 중요하다고 한 기준을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 135
+              "paragraphId": "p1",
+              "start": 88,
+              "end": 105
             }
           ],
           "scoring": {
@@ -603,16 +603,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "합성어는 둘 이상의 어근이 결합하여 만들어진 단어다. 이때 각 어근은 원칙적으로 스스로 의미를 가지며, 다른 단어 형성의 재료가 될 수 있다. 예를 들어 두 성분이 각각 사물이나 성질, 동작의 뜻을 지닌 채 결합한다면 합성어일 가능성이 높다."
+          "answerText": "어근과 접사를 어떻게 판별하는지"
         },
         {
           "id": "q3",
-          "prompt": "어떤 성분을 접사로 보는 것이 타당하다고 한 이유로 가장 알맞은 것은?",
+          "prompt": "합성어의 정의를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 155
+              "paragraphId": "p2",
+              "start": 5,
+              "end": 27
             }
           ],
           "scoring": {
@@ -621,16 +621,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "파생어는 어근에 접사가 붙어 형성된다. 접사는 단독으로 실질적 의미를 이루기 어렵고, 어근에 결합해 품사를 바꾸거나 의미를 더하는 기능을 한다. 따라서 어떤 성분이 독립적으로 쓰이지 않고 일정한 문법적 기능만 반복해서 수행한다면, 그 성분은 어근보다 접사로 보는 편이 타당하다."
+          "answerText": "둘 이상의 어근이 결합하여 만들어진 단어"
         },
         {
           "id": "q4",
-          "prompt": "단어 분석에서 확인해야 할 것으로 가장 알맞은 것은?",
+          "prompt": "합성어일 가능성이 높다고 든 예시 조건을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 191
+              "paragraphId": "p2",
+              "start": 92,
+              "end": 118
             }
           ],
           "scoring": {
@@ -639,16 +639,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "문제가 되는 것은 경계가 분명하지 않은 경우다. 어떤 요소는 역사적으로는 본래 어근이었지만 현대어에서는 독립성이 약해져 접사처럼 느껴질 수 있다. 반대로 자주 결합하는 요소라도 여전히 고유한 의미와 자립성을 유지하면 접사로 단정하기 어렵다. 그래서 단어 분석에서는 현재 언어 체계 안에서 그 요소가 실제로 어떤 분포를 보이는지 확인해야 한다."
+          "answerText": "각각 사물이나 성질, 동작의 뜻을 지닌 채 결합"
         },
         {
           "id": "q5",
-          "prompt": "합성어 쪽으로 해석할 가능성이 커지는 경우로 가장 알맞은 것은?",
+          "prompt": "파생어가 형성되는 방식을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 186
+              "paragraphId": "p3",
+              "start": 5,
+              "end": 18
             }
           ],
           "scoring": {
@@ -657,16 +657,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "품사 변화도 중요한 기준이 된다. 접사가 붙어 명사가 동사나 형용사로 바뀌거나, 부정의 뜻·사동의 뜻 같은 문법적 의미가 추가된다면 파생어 분석이 설득력을 가진다. 반면 결합 후에도 각 성분의 기본 뜻이 비교적 또렷하게 살아 있고, 두 어근이 대등하거나 수식 관계를 이루며 새 의미를 형성한다면 합성어 쪽으로 해석할 가능성이 커진다."
+          "answerText": "어근에 접사가 붙어 형성"
         },
         {
           "id": "q6",
-          "prompt": "문법 학습에서 중요하다고 한 과정으로 가장 알맞은 것은?",
+          "prompt": "접사가 어근과 결합해 하는 기능을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 200
+              "paragraphId": "p3",
+              "start": 56,
+              "end": 64
+            },
+            {
+              "paragraphId": "p3",
+              "start": 65,
+              "end": 72
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "품사를 바꾸거나",
+            "의미를 더하는"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "단어 분석에서 현재 언어 체계 안에서 확인해야 할 기준을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 161,
+              "end": 182
             }
           ],
           "scoring": {
@@ -675,7 +701,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 합성어와 파생어의 구별은 단어를 잘게 쪼개는 기술 문제가 아니라, 각 성분의 자립성·의미 기능·품사 변화 가능성을 종합적으로 따지는 분석 문제다. 어근과 접사를 정확히 판별해야 단어 형성 원리를 이해할 수 있고, 형태소 분석 결과도 일관되게 설명할 수 있다. 그래서 문법 학습에서는 단순 암기보다 실제 단어를 여러 기준으로 비교해 보는 과정이 중요하다."
+          "answerText": "그 요소가 실제로 어떤 분포를 보이는지"
+        },
+        {
+          "id": "q8",
+          "prompt": "문법 학습에서 중요하다고 한 과정을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 169,
+              "end": 193
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "실제 단어를 여러 기준으로 비교해 보는 과정"
         }
       ]
     }

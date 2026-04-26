@@ -1156,89 +1156,73 @@
     "confirm": {
       "questions": [
         {
-          "prompt": "직접 인용을 표시할 때 자주 쓰는 것은?",
+          "id": "q1",
+          "prompt": "지문에서 '인용된 부분의 범위를 분명하게 드러내기 위해 사용하는 문장 부호'를 가리키는 세 글자 표현을 찾으시오",
           "answerText": "따옴표",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 44,
-              "end": 47
-            },
-            {
-              "paragraphId": "p2",
-              "start": 68,
-              "end": 71
-            },
-            {
-              "paragraphId": "p3",
-              "start": 49,
-              "end": 52
-            },
-            {
-              "paragraphId": "p6",
-              "start": 100,
-              "end": 103
-            }
+            {"paragraphId": "p1", "start": 44, "end": 47},
+            {"paragraphId": "p2", "start": 68, "end": 71},
+            {"paragraphId": "p3", "start": 49, "end": 52},
+            {"paragraphId": "p6", "start": 100, "end": 103}
           ],
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
-          "prompt": "문장에서 명령문이 바뀔 때 나타나는 표현은?",
+          "id": "q2",
+          "prompt": "직접 인용의 가장 큰 특징이 무엇인지 지문에서 찾으시오",
+          "answerText": "말하는 사람의 어조나 표현 방식이 그대로 살아난다는 점",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 79, "end": 109}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "지문에서 간접 인용으로 바꿀 때 '명령문'이 어떤 표현으로 바뀐다고 하였는지 세 글자 표현을 찾으시오",
           "answerText": "서술형",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 74,
-              "end": 77
-            }
+            {"paragraphId": "p4", "start": 74, "end": 77}
           ],
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
-          "prompt": "직접 인용에서 살아날 수 있는 것은?",
+          "id": "q4",
+          "prompt": "지문에서 '말이 실제로 일어나고 있는 듯한 생생한 느낌'을 뜻하는 세 글자 표현을 찾으시오",
           "answerText": "현장감",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 10,
-              "end": 13
-            }
+            {"paragraphId": "p5", "start": 10, "end": 13}
           ],
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
-          "prompt": "어떤 방식을 고를지는 무엇에 따라 달라지나?",
-          "answerText": "문맥",
+          "id": "q5",
+          "prompt": "직접 인용과 간접 인용의 차이가 무엇에 있다고 하였는지 지문에서 찾으시오",
+          "answerText": "내용이 아니라 표현 방식에 있다",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 97,
-              "end": 99
-            },
-            {
-              "paragraphId": "p5",
-              "start": 100,
-              "end": 102
-            }
+            {"paragraphId": "p4", "start": 128, "end": 145}
           ],
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
-          "prompt": "간접 인용에서 바뀌는 틀은?",
-          "answerText": "문장 구조",
+          "id": "q6",
+          "prompt": "인용 표현을 읽을 때 따옴표의 유무 외에 함께 살펴야 한다고 한 두 가지를 지문에서 찾으시오",
+          "answerText": "말투와 문장 구조",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 56,
-              "end": 61
-            },
-            {
-              "paragraphId": "p6",
-              "start": 119,
-              "end": 124
-            }
+            {"paragraphId": "p6", "start": 115, "end": 124}
           ],
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

@@ -884,7 +884,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "실물 형태 없이 전자적 신호로만 존재하는 화폐는 무엇인가요?",
+          "prompt": "‘실물 형태 없이 전자적 신호로만 존재하는 화폐’에 해당하는 말을 지문에서 찾으시오.",
           "answerText": "디지털 화폐",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -922,14 +922,14 @@
         },
         {
           "id": "q2",
-          "prompt": "디지털 화폐가 크게 높여 준 것은 무엇인가요?",
-          "answerText": "거래의 편의성",
+          "prompt": "디지털 화폐가 절감할 수 있다고 한 비용을 지문에서 찾으시오.",
+          "answerText": "지폐를 인쇄하고 유통하는 비용",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 114,
-              "end": 121
+              "paragraphId": "p2",
+              "start": 11,
+              "end": 27
             }
           ],
           "scoring": {
@@ -940,14 +940,22 @@
         },
         {
           "id": "q3",
-          "prompt": "디지털 화폐 확산의 부작용으로 제시된 위험은 무엇인가요?",
-          "answerText": "해킹",
-          "answerMatchMode": "ANY",
+          "prompt": "거래 내역이 투명하게 기록되어 방지할 수 있다고 한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "세금 탈루",
+            "불법 자금 세탁"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 39,
-              "end": 41
+              "paragraphId": "p2",
+              "start": 56,
+              "end": 61
+            },
+            {
+              "paragraphId": "p2",
+              "start": 63,
+              "end": 71
             }
           ],
           "scoring": {
@@ -958,19 +966,22 @@
         },
         {
           "id": "q4",
-          "prompt": "결제에 더 큰 어려움을 겪을 수 있다고 한 사람들은 누구인가요?",
-          "answerText": "정보 소외 계층",
-          "answerMatchMode": "ANY",
+          "prompt": "정보 소외 계층의 예로 제시된 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "노년층",
+            "저소득층"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 98,
-              "end": 106
+              "start": 85,
+              "end": 88
             },
             {
-              "paragraphId": "p4",
-              "start": 51,
-              "end": 59
+              "paragraphId": "p3",
+              "start": 91,
+              "end": 95
             }
           ],
           "scoring": {
@@ -981,14 +992,14 @@
         },
         {
           "id": "q5",
-          "prompt": "성공적인 디지털 화폐 시대를 위해 먼저 갖춰야 할 것은 무엇인가요?",
-          "answerText": "보안 시스템",
+          "prompt": "기술의 발달이 모두에게 혜택으로 돌아가도록 만들어야 할 환경을 지문에서 찾으시오.",
+          "answerText": "포용적인 금융 환경",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 26,
-              "end": 32
+              "start": 108,
+              "end": 118
             }
           ],
           "scoring": {

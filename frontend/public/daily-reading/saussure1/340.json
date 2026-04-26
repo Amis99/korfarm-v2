@@ -396,20 +396,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "어머니의 친정집 이름?",
-          "answerText": "외갓집",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 외갓집에서 함께 활동하거나 만난 두 분(◯◯◯◯와 함께 텃밭, ◯◯◯가 쪄주신 고구마)을 모두 찾아보세요",
+          "answerText": "할아버지, 할머니",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 6,
-              "end": 9
-            },
-            {
-              "paragraphId": "p2",
-              "start": 140,
-              "end": 143
-            }
+            {"paragraphId": "p1", "start": 57, "end": 61},
+            {"paragraphId": "p1", "start": 136, "end": 139}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -420,20 +412,11 @@
         },
         {
           "id": "q2",
-          "prompt": "땅속에서 자라는 열매?",
-          "answerText": "고구마",
-          "answerMatchMode": "EXACT",
+          "prompt": "마음껏 충분히 누리는 것을 가리키는 두 글자 낱말을 찾아보세요",
+          "answerText": "만끽",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 77,
-              "end": 80
-            },
-            {
-              "paragraphId": "p1",
-              "start": 153,
-              "end": 156
-            }
+            {"paragraphId": "p2", "start": 46, "end": 48}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -444,15 +427,27 @@
         },
         {
           "id": "q3",
-          "prompt": "산, 강 등 모든 형상?",
-          "answerText": "자연",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 도시에서는 느끼지 못했다고 한 시골의 두 가지(◯◯◯◯과 ◯◯)를 모두 찾아보세요",
+          "answerText": "평화로움, 여유",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 18,
-              "end": 20
-            }
+            {"paragraphId": "p2", "start": 33, "end": 37},
+            {"paragraphId": "p2", "start": 39, "end": 41}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "외갓집 방문이 더욱 안전하고 보람찬 나들이가 될 수 있었던 까닭은 가족과 함께 무엇하며 정성껏 준비했기 때문입니다. 빈칸에 들어갈 두 글자 낱말을 찾아보세요",
+          "answerText": "회의",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 66, "end": 68}
           ],
           "scoring": {
             "correctDeltaSec": 10,

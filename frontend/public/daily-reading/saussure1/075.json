@@ -552,59 +552,47 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "( )으로 차례로 탑니다.",
-          "answerText": "앞문",
-          "answerMatchMode": "EXACT",
+          "prompt": "버스를 타려고 사람들이 줄을 서서 기다리는 곳을 뜻하는 단어를 지문에서 찾아 보세요.",
+          "answerText": "정류장",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 43,
-              "end": 45
-            }
+            {"paragraphId": "p1", "start": 9, "end": 12}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "미리 ( )을 눌러요.",
-          "answerText": "벨",
-          "answerMatchMode": "EXACT",
+          "prompt": "버스 카드를 대면 요금이 자동으로 결제되는 기계를 뜻하는 단어를 지문에서 찾아 보세요.",
+          "answerText": "단말기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 9,
-              "end": 10
-            }
+            {"paragraphId": "p1", "start": 65, "end": 68}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "( )교통 이용 규칙.",
-          "answerText": "대중",
-          "answerMatchMode": "EXACT",
+          "prompt": "버스를 탈 때 사용하는 문과 내릴 때 사용하는 문 두 가지를 모두 찾아 보세요.",
+          "answerText": "앞문, 뒷문",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 89,
-              "end": 91
-            }
+            {"paragraphId": "p1", "start": 43, "end": 45},
+            {"paragraphId": "p2", "start": 30, "end": 32}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "여러 사람이 함께 이용하는 버스 같은 교통수단을 가리키는 말을 지문에서 찾아 보세요.",
+          "answerText": "대중교통",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 89, "end": 93}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         }
       ]

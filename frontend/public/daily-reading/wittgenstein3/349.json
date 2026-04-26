@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "prompt": "허구 수용이 단순한 착각이 아니라 어떤 활동인지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 161
+              "start": 123,
+              "end": 153
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "허구 이야기를 읽을 때 독자는 등장인물과 사건이 실제라고 믿지 않는다. 그럼에도 우리는 이야기 속 세계를 따라가며 슬퍼하거나 긴장하고, 다음 장면을 예측하기도 한다. 이때 중요한 것은 허구 수용이 단순한 착각이 아니라, 어떤 규칙 아래에서 허구를 받아들이는 특수한 인지 활동이라는 점이다."
+          "answerText": "어떤 규칙 아래에서 허구를 받아들이는 특수한 인지 활동"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 핵심 원리나 기준을 어떻게 설명하는가?",
+          "prompt": "믿는 체하기 놀이에서 독자가 서사를 따라가는 방식을 설명한 문장을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 192
+              "start": 33,
+              "end": 128
             }
           ],
           "scoring": {
@@ -603,16 +603,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 활동을 설명하는 한 방식이 믿는 체하기 놀이다. 여기서 독자는 현실의 사실 판단을 중지한 채, 작품이 제시하는 단서에 따라 '이 인물이 실제로 존재한다면', '이 사건이 그 세계에서 일어났다면' 하고 가정하며 서사를 따라간다. 즉 허구 읽기는 거짓을 참이라고 오인하는 일이 아니라, 정해진 틀 안에서 상상적 참여를 수행하는 행위로 이해된다."
+          "answerText": "독자는 현실의 사실 판단을 중지한 채, 작품이 제시하는 단서에 따라 '이 인물이 실제로 존재한다면', '이 사건이 그 세계에서 일어났다면' 하고 가정하며 서사를 따라간다."
         },
         {
           "id": "q3",
-          "prompt": "3문단은 그 원리의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "허구 읽기나 이해가 아니라고 한 일을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 190
+              "paragraphId": "p2",
+              "start": 138,
+              "end": 153
+            },
+            {
+              "paragraphId": "p6",
+              "start": 20,
+              "end": 36
+            },
+            {
+              "paragraphId": "p6",
+              "start": 39,
+              "end": 60
             }
           ],
           "scoring": {
@@ -620,17 +630,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그런데 허구 문장을 모두 보통의 사실 명제처럼 다루면 문제가 생긴다. 소설 속 문장에는 인물의 성격, 세계의 규칙, 사건의 원인처럼 직접 다 밝혀지지 않은 부분이 많기 때문이다. 작품은 독자에게 일부 정보만 제시하고, 나머지는 맥락과 관습을 통해 메우게 한다. 이 점에서 허구 문장은 완결된 사실 보고라기보다 해석을 기다리는 구조를 가진다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "거짓을 참이라고 오인하는 일",
+            "명백한 거짓말을 속아 믿는 일",
+            "모든 내용을 사실 명제처럼 판정하는 일"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
+          "prompt": "허구 문장을 사실 명제처럼 다루면 문제가 생기는 이유 문장을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 190
+              "paragraphId": "p3",
+              "start": 39,
+              "end": 99
             }
           ],
           "scoring": {
@@ -639,16 +653,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "바로 여기서 불완전 명제라는 생각이 개입한다. 허구 속 진술은 문장 자체만으로는 충분한 진리 조건을 갖추지 못한 채, 작품 전체의 배경과 독자의 보완적 추론에 기대어 의미가 채워진다는 것이다. 예를 들어 '그는 두려워했다'라는 문장은 무엇을, 왜, 어느 정도 두려워하는지 모두 직접 밝히지 않아도 이야기의 앞뒤 맥락 속에서 기능할 수 있다."
+          "answerText": "소설 속 문장에는 인물의 성격, 세계의 규칙, 사건의 원인처럼 직접 다 밝혀지지 않은 부분이 많기 때문이다."
         },
         {
           "id": "q5",
-          "prompt": "5문단은 이 주제의 효과나 쟁점을 어떤 방향으로 확장하는가?",
+          "prompt": "소설 속 문장에서 직접 다 밝혀지지 않은 부분의 예를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 222
+              "paragraphId": "p3",
+              "start": 49,
+              "end": 55
+            },
+            {
+              "paragraphId": "p3",
+              "start": 57,
+              "end": 63
+            },
+            {
+              "paragraphId": "p3",
+              "start": 65,
+              "end": 71
             }
           ],
           "scoring": {
@@ -656,17 +680,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "믿는 체하기 놀이는 이런 불완전성을 처리하는 방식으로 작동한다. 독자는 작품이 열어 둔 빈자리를 임의로 채우는 것이 아니라, 장르 규칙과 서사 맥락이 허용하는 범위 안에서 상상한다. 따라서 허구 읽기에서는 상상이 자유롭지만 아무 방향으로나 흩어지지는 않는다. 불완전 명제가 남긴 여백을 믿는 체하기 놀이가 규칙적으로 메우기 때문에, 독자들은 같은 작품에 대해 대체로 비슷한 세계를 떠올릴 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "인물의 성격",
+            "세계의 규칙",
+            "사건의 원인"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 앞선 논의를 어떤 의미로 정리하는가?",
+          "prompt": "불완전 명제의 의미가 무엇에 기대어 채워지는지 설명한 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 197
+              "paragraphId": "p4",
+              "start": 66,
+              "end": 101
             }
           ],
           "scoring": {
@@ -675,7 +703,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 허구 이야기를 이해한다는 것은 명백한 거짓말을 속아 믿는 일도, 모든 내용을 사실 명제처럼 판정하는 일도 아니다. 독자는 작품이 제시한 불완전한 진술들을 바탕으로 일정한 방식의 믿는 체하기 놀이를 수행하며 허구 세계를 구성한다. 이 관점은 허구가 왜 현실과 다른 방식으로 의미를 가지면서도 여전히 논의와 해석의 대상이 될 수 있는지를 설명해 준다."
+          "answerText": "작품 전체의 배경과 독자의 보완적 추론에 기대어 의미가 채워진다"
+        },
+        {
+          "id": "q7",
+          "prompt": "독자가 빈자리를 상상하는 허용 범위를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 70,
+              "end": 93
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "장르 규칙과 서사 맥락이 허용하는 범위 안"
+        },
+        {
+          "id": "q8",
+          "prompt": "규칙적인 메우기 때문에 독자들이 떠올릴 수 있는 세계를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 201,
+              "end": 211
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "대체로 비슷한 세계"
         }
       ]
     }

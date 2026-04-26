@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"글은 점심시간 뒤 복도 소음 문제를 설문 자료로 다루려는 학생회 건의문 초고임을 밝힌다.\"에 해당하는 부분은 어디인가요?",
+    "prompt": "학생 설문 자료를 바탕으로 정리하려는 것을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 124
+        "start": 78,
+        "end": 97
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "우리 학교는 점심시간 뒤에 복도 소음이 크다는 의견이 많아서 쉬는 시간 이용 방식을 다시 생각해야 한다. 그래서 학생 설문 자료를 바탕으로 복도 이용 규칙을 정리해 보려 한다. 아래 내용은 학생회에 제출하려고 쓴 초안이다."
+    "answerText": "복도 이용 규칙을 정리해 보려 한다"
         },
         {
           "id": "q2",
-          "prompt": "\"초고는 소음 불편과 복도 이용 불편 수치를 함께 제시한 뒤 모두가 조용한 복도를 원한다고 해석하려 한다.\"에 해당하는 부분은 어디인가요?",
+    "prompt": "설문에서 나온 두 가지 응답 결과를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 140
+        "start": 8,
+        "end": 42
+      },
+      {
+        "paragraphId": "p2",
+        "start": 46,
+        "end": 97
             }
           ],
           "scoring": {
@@ -602,17 +607,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "설문에 따르면 전체 학생의 62퍼센트가 점심시간 뒤 복도가 시끄럽다고 답했다. 또 48퍼센트는 쉬는 시간에 교실 밖에서 친구를 만나야 해서 복도 이용을 줄이면 불편하다고 했다. 이 두 결과를 보면 학생들이 모두 조용한 복도를 원한다고 해석할 수 있다."
+    "answerMatchMode": "ALL",
+    "answerTexts": [
+      "전체 학생의 62퍼센트가 점심시간 뒤 복도가 시끄럽다고 답했다",
+      "48퍼센트는 쉬는 시간에 교실 밖에서 친구를 만나야 해서 복도 이용을 줄이면 불편하다고 했다"
+    ]
         },
         {
           "id": "q3",
-          "prompt": "\"학년별 차이를 소개하지만, 초고는 차이가 크지 않다며 같은 규칙을 한 번에 적용해도 된다고 본다.\"에 해당하는 부분은 어디인가요?",
+    "prompt": "1학년과 3학년의 의견 차이를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 143
+        "start": 3,
+        "end": 47
+      },
+      {
+        "paragraphId": "p3",
+        "start": 57,
+        "end": 94
             }
           ],
           "scoring": {
@@ -620,17 +633,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "특히 1학년은 복도 이동이 많아서 줄 세우기나 일방 통행 같은 규칙이 필요하다는 의견이 있었다. 반면 3학년은 교실에서 공부하는 시간이 많으니 소음만 줄이면 된다고 했다. 그런데 학년별 차이는 크지 않으므로 같은 규칙을 한 번에 적용해도 괜찮다고 생각한다."
+    "answerMatchMode": "ALL",
+    "answerTexts": [
+      "1학년은 복도 이동이 많아서 줄 세우기나 일방 통행 같은 규칙이 필요하다는 의견",
+      "3학년은 교실에서 공부하는 시간이 많으니 소음만 줄이면 된다고 했다"
+    ]
         },
         {
           "id": "q4",
-          "prompt": "\"초고는 방송 안내와 이동 구역 지정 같은 대책을 내지만, 공간과 추가 소음 문제는 아직 검토하지 못했다고 밝힌다.\"에 해당하는 부분은 어디인가요?",
+    "prompt": "체육관 앞으로 이동하게 하는 대책에서 아직 확인하지 못한 내용을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 139
+        "start": 88,
+        "end": 99
+      },
+      {
+        "paragraphId": "p4",
+        "start": 101,
+        "end": 122
             }
           ],
           "scoring": {
@@ -638,17 +659,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "나는 쉬는 시간마다 방송으로 조용히 하라고 안내하면 대부분 해결될 것이라고 본다. 또 복도에 서서 이야기하는 학생은 체육관 앞으로 이동하게 하면 된다. 다만 이동 공간이 충분한지, 체육관 앞에서도 소음이 커지지 않는지는 아직 자료를 더 보지 못했다."
+    "answerMatchMode": "ALL",
+    "answerTexts": [
+      "이동 공간이 충분한지",
+      "체육관 앞에서도 소음이 커지지 않는지는"
+    ]
         },
         {
           "id": "q5",
-          "prompt": "\"초고는 빠른 대책 필요성을 말하면서도, 설문 정보 부족 속에서 규칙을 먼저 공지하자는 태도를 보인다.\"에 해당하는 부분은 어디인가요?",
+    "prompt": "설문에서 함께 나와 있지 않았던 정보를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 134
+        "start": 46,
+        "end": 57
+      },
+      {
+        "paragraphId": "p5",
+        "start": 59,
+        "end": 76
             }
           ],
           "scoring": {
@@ -656,17 +685,30 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "복도 소음은 수업 집중과 연결되므로 빠르게 대책을 세워야 한다. 그런데 설문에서는 몇 학급이 참여했는지와 특정 시간대에 불편이 더 큰지도 같이 나와 있지 않았다. 그래도 우선 규칙을 공지한 뒤 반응을 보면 필요한 조정을 할 수 있을 것이다."
+    "answerMatchMode": "ALL",
+    "answerTexts": [
+      "몇 학급이 참여했는지",
+      "특정 시간대에 불편이 더 큰지도"
+    ]
         },
         {
           "id": "q6",
-          "prompt": "\"결론은 규칙 강화를 주장하지만, 마지막 문단 스스로 설문 수치와 대책 연결을 더 다듬어야 함을 드러낸다.\"에 해당하는 부분은 어디인가요?",
+    "prompt": "한 번에 실시하자고 한 복도 소음 대책을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 157
+        "start": 47,
+        "end": 52
+      },
+      {
+        "paragraphId": "p6",
+        "start": 54,
+        "end": 62
+      },
+      {
+        "paragraphId": "p6",
+        "start": 64,
+        "end": 75
             }
           ],
           "scoring": {
@@ -674,8 +716,12 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "결론적으로 학생들이 조용한 환경을 원하므로 복도 이용 규칙을 곧바로 강화해야 한다. 방송 안내, 이동 구역 지정, 학년 공통 규칙 적용을 한 번에 실시하면 학교가 더 차분해질 것이다. 다만 설문 수치와 실제 대책의 연결이 자연스럽게 보이도록 마지막 문단은 다시 다듬을 필요가 있다."
+    "answerMatchMode": "ALL",
+    "answerTexts": [
+      "방송 안내",
+      "이동 구역 지정",
+      "학년 공통 규칙 적용"
+    ]
         }
       ]
     }

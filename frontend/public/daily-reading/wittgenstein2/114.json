@@ -571,7 +571,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "화자가 저승길에 하겠다고 한 일을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -589,12 +589,70 @@
         },
         {
           "id": "q2",
-          "prompt": "2문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "낙타가 보았거나 보게 되는 대상들을 지문에서 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 64
+              "end": 1
+            },
+            {
+              "paragraphId": "p2",
+              "start": 3,
+              "end": 4
+            },
+            {
+              "paragraphId": "p2",
+              "start": 6,
+              "end": 7
+            },
+            {
+              "paragraphId": "p2",
+              "start": 9,
+              "end": 11
+            },
+            {
+              "paragraphId": "p4",
+              "start": 38,
+              "end": 39
+            },
+            {
+              "paragraphId": "p4",
+              "start": 41,
+              "end": 42
+            },
+            {
+              "paragraphId": "p4",
+              "start": 44,
+              "end": 45
+            },
+            {
+              "paragraphId": "p4",
+              "start": 47,
+              "end": 49
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "별",
+            "달",
+            "해",
+            "모래"
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "세상사를 물었을 때 짐짓 보이는 태도를 지문에서 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 42,
+              "end": 63
             }
           ],
           "scoring": {
@@ -603,34 +661,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "별과 달과 해와 모래밖에 본 일이 없는 낙타를 타고.\n세상사 물으면 짐짓, 아무것도 못 본 체\n손 저어 대답하면서,"
+          "answerText": "아무것도 못 본 체\n손 저어 대답하면서"
         },
         {
-          "id": "q3",
-          "prompt": "3문단을 이해한 내용으로 가장 적절한 것은?",
+          "id": "q4",
+          "prompt": "화자가 잊었다는 듯이 표현한 감정을 지문에서 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 19
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "슬픔도 아픔도 까맣게 잊었다는 듯."
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
+              "end": 2
+            },
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 58
+              "paragraphId": "p3",
+              "start": 4,
+              "end": 6
             }
           ],
           "scoring": {
@@ -638,17 +683,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "누군가 있어 다시 세상에 나가란다면\n낙타가 되어 가겠다 대답하리라.\n별과 달과 해와 모래만 보고 살다가,"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "슬픔",
+            "아픔"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "다시 세상에 나가라고 할 때 무엇이 되어 가겠다고 했는지 지문에서 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 38
+              "paragraphId": "p4",
+              "start": 20,
+              "end": 26
             }
           ],
           "scoring": {
@@ -657,16 +705,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "돌아올 때는 세상에서 가장 어리석은 사람 하나 등에 업고 오겠노라고."
+          "answerText": "낙타가 되어"
         },
         {
           "id": "q6",
-          "prompt": "6문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "다시 세상에서 보겠다고 반복되는 대상만 나타낸 표현을 지문에서 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 45
+              "paragraphId": "p4",
+              "start": 38,
+              "end": 50
             }
           ],
           "scoring": {
@@ -675,7 +723,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "무슨 재미로 세상을 살았는지도 모르는\n가장 가엾은 사람 하나 골라\n길동무 되어서."
+          "answerText": "별과 달과 해와 모래만"
+        },
+        {
+          "id": "q7",
+          "prompt": "돌아올 때 등에 업고 오겠다는 대상을 지문에서 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 7,
+              "end": 25
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "세상에서 가장 어리석은 사람 하나"
+        },
+        {
+          "id": "q8",
+          "prompt": "길동무로 고를 대상을 지문에서 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 21,
+              "end": 33
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "가장 가엾은 사람 하나"
         }
       ]
     }

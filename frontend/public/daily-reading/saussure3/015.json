@@ -557,19 +557,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "빛이 공기를 통과해 나아가다가 거울이나 표면이 매끄러운 물체에 닿아 일정한 방향으로 튕겨 나오는 것은?",
-          "answerText": "반사",
-          "answerMatchMode": "EXACT",
+          "prompt": "거울이 사물을 그대로 보여주는 이유는 빛의 어떤 원리를 이용하기 때문인지 지문에서 찾으시오.",
+          "answerText": "빛의 반사 원리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 63,
-              "end": 65
+              "start": 60,
+              "end": 68
             },
             {
               "paragraphId": "p3",
-              "start": 93,
-              "end": 95
+              "start": 90,
+              "end": 98
             }
           ],
           "scoring": {
@@ -581,34 +581,14 @@
         },
         {
           "id": "q2",
-          "prompt": "종이나 나무처럼 표면이 거칠지 않고, 눈에 보이지 않을 만큼 참 매끄럽게 다듬어져 빛을 비춰주는 도구는?",
-          "answerText": "거울",
-          "answerMatchMode": "EXACT",
+          "prompt": "거울의 표면은 벽과 달리 어느 정도로 매끄럽다고 설명되는지 지문에서 찾으시오.",
+          "answerText": "눈에 보이지 않을 만큼 참 매끄럽습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 29,
-              "end": 31
-            },
-            {
-              "paragraphId": "p1",
-              "start": 39,
-              "end": 41
-            },
-            {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 57,
-              "end": 59
-            },
-            {
-              "paragraphId": "p2",
-              "start": 113,
-              "end": 115
+              "start": 19,
+              "end": 40
             }
           ],
           "scoring": {
@@ -620,19 +600,33 @@
         },
         {
           "id": "q3",
-          "prompt": "거울에서 튕겨 나온 빛이 다시 우리의 신체 중 이곳으로 들어오기 때문에 사물의 모습을 생생하게 볼 수 있습니다.",
-          "answerText": "눈",
-          "answerMatchMode": "EXACT",
+          "prompt": "거칠고 울퉁불퉁한 표면에 빛이 닿으면 빛이 어떻게 흩어지는지 지문에서 찾으시오.",
+          "answerText": "사방으로 불규칙하게",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 19,
-              "end": 20
-            },
+              "paragraphId": "p3",
+              "start": 25,
+              "end": 35
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "빛의 반사 원리를 활용해 만들 수 있는 유용한 도구의 예를 지문에서 찾으시오.",
+          "answerText": "후사경",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
-              "paragraphId": "p2",
+              "paragraphId": "p3",
               "start": 105,
-              "end": 106
+              "end": 108
             }
           ],
           "scoring": {

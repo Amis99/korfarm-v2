@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "허리를 ( )게 펴야 해요.",
-          "answerText": "곧게",
-          "answerMatchMode": "EXACT",
+          "prompt": "책상 앞에 앉을 때 허리를 어떻게 해야 한다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "허리를 곧게 펴야 해요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 16,
-              "end": 18
+              "start": 12,
+              "end": 24
             }
           ],
           "scoring": {
@@ -571,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "의자 ( )이 앉습니다.",
-          "answerText": "깊숙이",
-          "answerMatchMode": "EXACT",
+          "prompt": "고개를 너무 숙이면 어떻게 된다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "목과 어깨가 아플 수 있어요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 34,
-              "end": 37
+              "start": 62,
+              "end": 77
             }
           ],
           "scoring": {
@@ -590,14 +590,38 @@
         },
         {
           "id": "q3",
-          "prompt": "키가 ( ) 자라게 됨.",
-          "answerText": "쑥쑥",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 올바른 자세의 효과를 모두 찾아 보세요.",
+          "answerText": "우리 몸을 건강하게 지켜 줍니다, 키가 쑥쑥 자라게 됩니다",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 87,
+              "end": 104
+            },
+            {
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 79
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "발을 앞으로 옮겨 디딘다는 뜻의 단어를 지문에서 찾아 보세요.",
+          "answerText": "내딛습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 69,
-              "end": 71
+              "start": 20,
+              "end": 25
             }
           ],
           "scoring": {

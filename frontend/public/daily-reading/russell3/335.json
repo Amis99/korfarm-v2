@@ -571,30 +571,27 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"DNA 복제는 세포 분열 전에 유전 정보를 정확히 복제하는 과정이다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "유전 정보를 먼저 정확히 복제하는 과정을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 122
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "세포가 분열하여 새로운 세포를 만들려면 유전 정보를 먼저 정확히 복제해야 한다. 이 과정이 DNA 복제이다. DNA는 생명체의 유전 정보를 담고 있기 때문에, 복제가 잘못되면 이후 세포 기능에도 큰 영향을 줄 수 있다."
-        },
-        {
-          "id": "q2",
-          "prompt": "\"DNA는 이중 나선이 풀리며 두 가닥이 주형 역할을 한다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
+              "start": 51,
+              "end": 57
+            },
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 112
+              "end": 6
+            },
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 6
+            },
+            {
+              "paragraphId": "p6",
+              "start": 3,
+              "end": 9
             }
           ],
           "scoring": {
@@ -603,33 +600,33 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "DNA 복제는 이중 나선 구조가 풀리면서 시작된다. 두 가닥이 벌어지면 각각의 가닥은 새 가닥을 만드는 주형 역할을 한다. 염기쌍 규칙에 따라 맞는 염기가 붙으면서 원래와 같은 정보가 다시 만들어진다."
+          "answerText": "DNA 복제"
+        },
+        {
+          "id": "q2",
+          "prompt": "벌어진 두 가닥이 새 가닥을 만들 때 하는 역할을 지문에서 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 58,
+              "end": 63
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "주형 역할"
         },
         {
           "id": "q3",
-          "prompt": "\"단백질 합성은 전사와 번역 과정을 거쳐 이루어진다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "DNA가 단백질을 직접 만드는 것이 아니라 한다고 한 역할을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 160
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이렇게 복제된 DNA 정보는 단백질 합성에도 사용된다. 단백질 합성은 먼저 DNA의 일부 정보가 RNA로 옮겨 적히는 전사 과정을 거치고, 이어서 RNA 정보를 바탕으로 아미노산이 연결되는 번역 과정으로 이어진다. 따라서 DNA는 직접 단백질을 만드는 것이 아니라, 설계도 역할을 한다."
-        },
-        {
-          "id": "q4",
-          "prompt": "\"리보솜은 RNA를 읽어 아미노산 순서를 결정한다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
+              "start": 149,
               "end": 155
             }
           ],
@@ -639,16 +636,34 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "전사에서는 필요한 유전자 부분만 선택되어 RNA로 복사되고, 번역에서는 세포질의 리보솜이 RNA의 염기 배열을 읽어 아미노산 순서를 결정한다. 이렇게 만들어진 아미노산 사슬은 접히고 변형되어 기능을 가진 단백질이 된다. 세포의 구조와 기능 대부분은 이런 단백질에 크게 의존한다."
+          "answerText": "설계도 역할"
+        },
+        {
+          "id": "q4",
+          "prompt": "RNA의 염기 배열을 읽는 세포질의 구조를 지문에서 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 45,
+              "end": 48
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "리보솜"
         },
         {
           "id": "q5",
-          "prompt": "\"복제는 정보 보존, 단백질 합성은 정보 실행에 해당한다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "복제가 초점을 두는 일을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 158
+              "start": 45,
+              "end": 67
             }
           ],
           "scoring": {
@@ -657,16 +672,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "DNA 복제와 단백질 합성은 서로 다른 과정이지만 긴밀하게 이어져 있다. 복제는 유전 정보 자체를 다음 세대 세포에 전달하는 데 초점이 있고, 단백질 합성은 그 정보를 실제 생명 활동에 쓰이는 물질로 바꾸는 과정이다. 하나는 정보의 보존, 다른 하나는 정보의 실행이라고 볼 수 있다."
+          "answerText": "유전 정보 자체를 다음 세대 세포에 전달"
         },
         {
           "id": "q6",
-          "prompt": "\"유전 정보의 유지와 발현을 함께 봐야 세포 기능을 이해할 수 있다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "DNA 복제와 단백질 합성을 함께 보아야 이해할 수 있는 것을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 147
+              "start": 37,
+              "end": 47
             }
           ],
           "scoring": {
@@ -675,7 +690,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 DNA 복제와 단백질 합성을 함께 보아야 유전 정보가 어떻게 유지되고 발현되는지 이해할 수 있다. 세포는 정보를 저장하는 데서 그치지 않고, 필요할 때 꺼내어 실제 기능으로 연결한다. 생명 현상을 설명할 때 이 두 과정이 핵심 축이 되는 이유가 여기에 있다."
+          "answerText": "유지되고 발현되는지"
         }
       ]
     }

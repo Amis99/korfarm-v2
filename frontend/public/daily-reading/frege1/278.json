@@ -913,14 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "짐 일행이 마침내 도착한 곳은 어디인가요?",
-          "answerText": "보물섬",
+          "prompt": "실버를 따르던 해적들이 반란을 일으킨 모습을 찾으시오.",
+          "answerText": "숨겨둔 칼과 총을 꺼내 들며 반란을 일으켰습니다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 17,
-              "end": 20
+              "start": 55,
+              "end": 81
             }
           ],
           "scoring": {
@@ -931,13 +931,13 @@
         },
         {
           "id": "q2",
-          "prompt": "짐 일행이 피신한 튼튼한 장소는 무엇인가요?",
-          "answerText": "통나무 요새",
+          "prompt": "섬에 상륙한 짐 일행이 발견하고 피신한 곳을 찾으시오.",
+          "answerText": "튼튼한 통나무 요새",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 30,
+              "start": 26,
               "end": 36
             }
           ],
@@ -949,14 +949,22 @@
         },
         {
           "id": "q3",
-          "prompt": "짐이 두려움을 누르고 나르며 싸움을 도운 것은 무엇인가요?",
-          "answerText": "총알",
-          "answerMatchMode": "ANY",
+          "prompt": "해적들이 공격할 때 요새 주변에서 벌어진 일을 모두 찾으시오.",
+          "answerTexts": [
+            "총소리가 숲을 울리고",
+            "짙은 화약 연기가 요새를 가득 채웠습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 147,
-              "end": 149
+              "paragraphId": "p3",
+              "start": 40,
+              "end": 51
+            },
+            {
+              "paragraphId": "p3",
+              "start": 52,
+              "end": 74
             }
           ],
           "scoring": {
@@ -967,14 +975,14 @@
         },
         {
           "id": "q4",
-          "prompt": "전투 중 요새를 가득 채웠다고 한 것은 무엇인가요?",
-          "answerText": "화약 연기",
+          "prompt": "짐 일행이 해적들의 공격을 어떻게 막아냈는지 찾으시오.",
+          "answerText": "용감하게 막아냈지만",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 55,
-              "end": 60
+              "start": 91,
+              "end": 101
             }
           ],
           "scoring": {
@@ -985,14 +993,22 @@
         },
         {
           "id": "q5",
-          "prompt": "짐이 보물을 향한 욕심이 불러온다고 깨달은 것은 무엇인가요?",
-          "answerText": "비극",
-          "answerMatchMode": "ANY",
+          "prompt": "보물을 향한 욕심이 일으킨다고 깨달은 일을 모두 찾으시오.",
+          "answerTexts": [
+            "많은 생명을 앗아가고",
+            "비극을 부르는지"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
+              "start": 57,
+              "end": 68
+            },
+            {
+              "paragraphId": "p4",
               "start": 69,
-              "end": 71
+              "end": 77
             }
           ],
           "scoring": {

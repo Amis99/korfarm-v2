@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 회의의 출발 문제를 어떻게 제시하는가?",
+          "prompt": "전체 시간이 7분이라서 먼저 정해야 한다고 한 것을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 224
+              "start": 34,
+              "end": 39
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "사회자: 내일 봉사 활동 결과 발표는 전체 시간이 7분이라서 사례 순서를 먼저 정해야 할 것 같아. 지금 초안은 급식실 잔반 줄이기 활동, 독거 어르신 말벗 봉사, 하천 정화 활동 순서인데, 발표 의도가 무엇인지부터 다시 확인하자. 발표자: 저는 단순히 활동을 나열하는 것보다 우리 동아리가 왜 지역 연계 봉사를 계속해야 하는지 설득하고 싶어요. 그래서 변화가 눈에 띄는 사례를 앞에 두고 싶었습니다."
+          "answerText": "사례 순서"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 제안이나 우려를 어떤 이유와 함께 내놓는가?",
+          "prompt": "발표자가 단순한 활동 나열보다 설득하고 싶다고 한 내용을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 205
+              "paragraphId": "p1",
+              "start": 155,
+              "end": 183
             }
           ],
           "scoring": {
@@ -603,16 +603,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "사회자: 그러면 청중이 처음부터 성과를 바로 보게 하는 구성이 필요하겠네. 그런데 급식실 활동은 학교 안 사례라 익숙하긴 해도 지역 연계라는 발표 주제와는 조금 거리가 있어 보여. 발표자: 맞아요. 대신 하천 정화 활동을 첫 사례로 두면 지역성과 참여 인원이 함께 드러나서 주제에는 더 잘 맞아요. 다만 사진 설명이 길어질까 봐 처음에 너무 무거워 보일까 걱정됐어요."
+          "answerText": "우리 동아리가 왜 지역 연계 봉사를 계속해야 하는지"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 논의를 어떤 대안이나 조정안으로 이어 가는가?",
+          "prompt": "하천 정화 활동을 첫 사례로 두면 함께 드러난다고 한 내용을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 188
+              "paragraphId": "p2",
+              "start": 133,
+              "end": 152
             }
           ],
           "scoring": {
@@ -621,16 +621,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "사회자: 첫 사례는 하천 정화로 가고, 두 번째에 독거 어르신 말벗 봉사를 넣는 건 어때? 앞에서는 가시적인 변화, 뒤에서는 참여자의 인식 변화를 보여 주는 식으로 대비가 되잖아. 발표자: 그 순서면 흐름은 좋아요. 그러면 급식실 잔반 줄이기 활동은 마지막에 짧게 넣고, 학교 안 실천이 지역 봉사로 이어졌다는 연결 문장으로 묶겠습니다."
+          "answerText": "지역성과 참여 인원이 함께 드러나서"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 예상 질문이나 진행 기준을 어떻게 준비하는가?",
+          "prompt": "앞 사례와 뒤 사례가 보여 주는 대비 내용을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 181
+              "paragraphId": "p3",
+              "start": 56,
+              "end": 63
+            },
+            {
+              "paragraphId": "p3",
+              "start": 70,
+              "end": 80
             }
           ],
           "scoring": {
@@ -638,17 +643,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "사회자: 시간 배분도 손보자. 전체 7분이면 도입 1분, 첫 사례 2분 30초, 두 번째 사례 2분, 마지막 짧은 사례 1분, 마무리 30초 정도가 적당해 보여. 발표자: 제가 지금 원고를 읽어 보니 하천 정화 부분이 사진 설명 때문에 3분이 넘더라고요. 사진은 두 장만 쓰고, 수거량 수치는 표로 넘겨서 말은 줄이겠습니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "가시적인 변화",
+            "참여자의 인식 변화"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단은 세부 운영 방식이나 보완 이유를 어떻게 구체화하는가?",
+          "prompt": "하천 정화 부분의 말 시간을 줄이기 위해 발표자가 하겠다고 한 조치를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 174
+              "paragraphId": "p4",
+              "start": 143,
+              "end": 154
+            },
+            {
+              "paragraphId": "p4",
+              "start": 156,
+              "end": 180
             }
           ],
           "scoring": {
@@ -656,17 +669,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "사회자: 질문 대응도 준비해야 해. 선생님들이 봉사 시간이 많았느냐보다 활동의 지속 가능성을 먼저 물을 가능성이 커. 발표자: 그 질문이 나오면 참여 인원을 늘리는 것보다 정기성을 확보하는 게 중요하다고 답하겠습니다. 또 예산 문제를 물으면 별도 물품 구매보다 지역 단체 협조를 받아 비용을 줄였다고 설명할게요."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "사진은 두 장만 쓰고",
+            "수거량 수치는 표로 넘겨서 말은 줄이겠습니다"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 최종 합의를 어떤 실행 계획으로 정리하는가?",
+          "prompt": "선생님들이 봉사 시간보다 먼저 물을 가능성이 크다고 한 것을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 220
+              "paragraphId": "p5",
+              "start": 40,
+              "end": 50
             }
           ],
           "scoring": {
@@ -675,7 +691,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "사회자: 좋아. 그럼 최종 구성은 하천 정화 활동, 독거 어르신 말벗 봉사, 급식실 잔반 줄이기 순서로 가고, 마지막에는 학교 안 실천과 지역 연계가 이어진다는 메시지로 묶자. 발표자: 네, 사회 멘트도 그 흐름에 맞춰 수정해 주세요. 저는 질문이 들어오면 성과 수치보다 활동이 이어진 방식에 초점을 두고 답하겠습니다. 사회자: 알겠어. 오늘 안으로 원고랑 슬라이드 순서 다시 맞춰서 공유할게."
+          "answerText": "활동의 지속 가능성"
+        },
+        {
+          "id": "q7",
+          "prompt": "예산 문제에 대해 비용을 줄인 방법으로 설명하겠다고 한 내용을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 146,
+              "end": 167
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "지역 단체 협조를 받아 비용을 줄였다고"
+        },
+        {
+          "id": "q8",
+          "prompt": "사회자가 오늘 안으로 다시 맞춰 공유하겠다고 한 대상을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 196,
+              "end": 199
+            },
+            {
+              "paragraphId": "p6",
+              "start": 200,
+              "end": 207
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "원고랑",
+            "슬라이드 순서"
+          ]
         }
       ]
     }

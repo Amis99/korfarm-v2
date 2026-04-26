@@ -1273,111 +1273,145 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"판 운동을 알아야 지진의 배경을 이해할 수 있다\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 200
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '판 경계'를 어떻게 정의했는지 그 부분을 찾으시오",
+          "answerText": "판과 판이 만나는 곳",
           "answerMatchMode": "ANY",
-          "answerText": "지구의 겉 부분은 여러 개의 단단한 판으로 이루어져 있고, 이 판들은 맨틀 위를 아주 천천히 움직인다. 이 움직임은 눈에 잘 띄지 않을 만큼 느리지만, 오랜 시간 동안 누적되면 산맥이 만들어지거나 바다가 넓어지고 줄어드는 큰 변화를 일으킨다. 지진도 이런 판 운동과 깊게 연결되어 있다. 따라서 지진을 이해하려면 먼저 판이 어떻게 움직이는지부터 알아야 한다."
-        },
-        {
-          "id": "q2",
-          "prompt": "\"판 경계의 종류에 따라 일어나는 지각 변화와 지진 양상이 다르다\"에 해당하는 부분은 어디인가요?",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 203
+              "end": 11
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "판 경계의 세 가지 종류를 모두 찾으시오",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 31,
+              "end": 41
+            },
+            {
+              "paragraphId": "p2",
+              "start": 43,
+              "end": 53
+            },
+            {
+              "paragraphId": "p2",
+              "start": 55,
+              "end": 71
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "판과 판이 만나는 곳을 판 경계라고 한다. 판 경계에는 서로 멀어지는 경계, 서로 충돌하는 경계, 옆으로 어긋나며 지나가는 경계가 있다. 서로 멀어지는 곳에서는 새로운 지각이 만들어지고, 충돌하는 곳에서는 한쪽 판이 다른 판 아래로 들어가거나 지각이 심하게 구겨질 수 있다. 옆으로 미끄러지는 경계에서는 큰 마찰이 쌓였다가 한순간에 풀리며 지진이 발생하기도 한다."
+          "answerTexts": [
+            "서로 멀어지는 경계",
+            "서로 충돌하는 경계",
+            "옆으로 어긋나며 지나가는 경계"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "\"지진은 마찰로 쌓인 응력이 갑자기 풀리며 생긴다\"에 해당하는 부분은 어디인가요?",
+          "prompt": "글쓴이가 지진을 결국 어떤 과정이라고 정의했는지 찾으시오",
+          "answerText": "오래 쌓인 응력이 갑자기 해소되는 과정",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 219
+              "start": 187,
+              "end": 208
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지진은 판이 계속 움직이려 하지만 암석이 마찰 때문에 쉽게 미끄러지지 못할 때 잘 일어난다. 이때 암석 내부에는 힘이 점점 축적되다가, 어느 순간 버티지 못하고 갑자기 끊기거나 미끄러지면서 에너지가 방출된다. 이 에너지가 파동의 형태로 퍼져 나가면 우리가 흔히 말하는 지진이 된다. 따라서 지진은 단순히 땅이 흔들리는 현상이 아니라, 오래 쌓인 응력이 갑자기 해소되는 과정이라고 볼 수 있다."
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "\"판 경계는 응력이 쌓이기 쉬워 큰 지진과 화산 활동과 밀접하다\"에 해당하는 부분은 어디인가요?",
+          "prompt": "판 경계에서 응력이 쉽게 쌓이는 이유로 설명한 부분을 찾으시오",
+          "answerText": "직접 맞닿아 있는 곳이기 때문",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 204
+              "start": 60,
+              "end": 76
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "판 경계에서 지진이 자주 일어나는 이유도 여기에 있다. 판 경계는 서로 다른 방향과 속도로 움직이는 판들이 직접 맞닿아 있는 곳이기 때문에, 응력이 쉽게 쌓인다. 물론 판 내부에서도 지진이 일어날 수 있지만, 일반적으로 큰 규모의 지진과 화산 활동은 판 경계와 더 밀접한 관련을 가진다. 그래서 지진대와 화산대의 분포를 함께 보면 판 경계의 위치를 짐작할 수 있다."
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "\"판 경계 종류에 따라 지진의 깊이와 양상이 달라진다\"에 해당하는 부분은 어디인가요?",
+          "prompt": "수렴 경계, 변환 경계, 발산 경계에서 일어난다고 한 지진의 특징을 모두 찾으시오",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 224
+              "start": 50,
+              "end": 70
+            },
+            {
+              "paragraphId": "p5",
+              "start": 81,
+              "end": 98
+            },
+            {
+              "paragraphId": "p5",
+              "start": 137,
+              "end": 155
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "모든 판 경계가 똑같은 지진 양상을 보이는 것은 아니다. 섭입이 일어나는 수렴 경계에서는 깊은 곳에서도 지진이 발생할 수 있고, 변환 경계에서는 얕지만 큰 흔들림을 만드는 지진이 자주 나타날 수 있다. 발산 경계에서는 상대적으로 규모가 작더라도 판이 갈라지는 과정과 연결된 지진이 일어난다. 따라서 지진을 볼 때는 단지 세기만이 아니라, 어떤 판 경계에서 일어난 것인지까지 함께 살피는 것이 중요하다."
+          "answerTexts": [
+            "깊은 곳에서도 지진이 발생할 수 있고",
+            "얕지만 큰 흔들림을 만드는 지진",
+            "판이 갈라지는 과정과 연결된 지진"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "\"지진은 판 구조와 응력 방출을 함께 봐야 제대로 이해된다\"에 해당하는 부분은 어디인가요?",
+          "prompt": "결론에서 판 경계가 어떤 곳이라고 정리했는지 찾으시오",
+          "answerText": "지구의 큰 구조 운동이 집중되는 곳",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 220
+              "start": 11,
+              "end": 30
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "정리하면 판 경계는 지구의 큰 구조 운동이 집중되는 곳이며, 지진은 그 과정에서 축적된 응력이 갑자기 방출되며 생긴다. 판의 종류와 움직임 방향에 따라 지진의 깊이와 양상도 달라질 수 있다. 그래서 지진을 이해하는 일은 한 번의 흔들림만 보는 것이 아니라, 그 뒤에 있는 판 구조와 응력 축적 과정을 함께 읽는 일에 가깝다. 지구과학에서 판 경계와 지진을 함께 배우는 이유도 바로 여기에 있다."
+          "revealOnWrong": true
         }
       ]
     }

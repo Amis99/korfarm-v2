@@ -914,14 +914,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "인물의 마음을 잘 알면 더 깊이 이해할 수 있는 것은 무엇인가요?",
-          "answerText": "이야기의 흐름",
-          "answerMatchMode": "ANY",
+          "prompt": "작가가 인물의 감정을 보여 주는 방법을 모두 찾으시오.",
+          "answerTexts": [
+            "인물의 감정을 직접 말해주기도",
+            "여러 가지 단서"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 60,
-              "end": 67
+              "start": 91,
+              "end": 107
+            },
+            {
+              "paragraphId": "p1",
+              "start": 116,
+              "end": 124
             }
           ],
           "scoring": {
@@ -932,14 +940,34 @@
         },
         {
           "id": "q2",
-          "prompt": "가장 직접적인 단서가 되는 두 가지는 무엇인가요?",
-          "answerText": "'말'과 '행동'",
-          "answerMatchMode": "ANY",
+          "prompt": "인물의 감정을 담는 말과 행동의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "기쁠 때 지르는 환호성",
+            "슬플 때 흘리는 눈물",
+            "주먹을 꽉 쥐거나",
+            "긴장해서 손을 떠는 행동"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 4,
-              "end": 13
+              "start": 31,
+              "end": 43
+            },
+            {
+              "paragraphId": "p2",
+              "start": 46,
+              "end": 57
+            },
+            {
+              "paragraphId": "p2",
+              "start": 88,
+              "end": 97
+            },
+            {
+              "paragraphId": "p2",
+              "start": 99,
+              "end": 112
             }
           ],
           "scoring": {
@@ -950,14 +978,22 @@
         },
         {
           "id": "q3",
-          "prompt": "표정 묘사가 잘 보여 주는 것은 무엇인가요?",
-          "answerText": "인물의 심리 상태",
-          "answerMatchMode": "ANY",
+          "prompt": "표정이나 모습 묘사의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "얼굴이 발그레해졌다",
+            "눈썹을 찌푸렸다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 66,
-              "end": 75
+              "start": 36,
+              "end": 46
+            },
+            {
+              "paragraphId": "p3",
+              "start": 51,
+              "end": 59
             }
           ],
           "scoring": {
@@ -968,7 +1004,7 @@
         },
         {
           "id": "q4",
-          "prompt": "이런 읽기 습관이 길러 주는 능력은 무엇인가요?",
+          "prompt": "인물의 마음을 짐작하며 읽는 습관이 기르는 능력을 찾으시오.",
           "answerText": "공감 능력",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -986,7 +1022,7 @@
         },
         {
           "id": "q5",
-          "prompt": "일상에서 타인을 더 잘 이해하게 하는 힘은 무엇인가요?",
+          "prompt": "일상생활에서 길러 준다고 한 힘을 찾으시오.",
           "answerText": "타인을 이해하는 힘",
           "answerMatchMode": "ANY",
           "answerRanges": [

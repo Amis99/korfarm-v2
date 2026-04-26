@@ -396,40 +396,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사람이 만든 커다란 건물?",
-          "answerText": "건축물",
-          "answerMatchMode": "EXACT",
+          "prompt": "건축물의 겉모양에 담긴 두 가지 미적 원리(◯◯과 ◯◯)를 모두 찾아보세요",
+          "answerText": "대칭, 균형",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 11,
-              "end": 14
-            },
-            {
-              "paragraphId": "p1",
-              "start": 88,
-              "end": 91
-            },
-            {
-              "paragraphId": "p1",
-              "start": 123,
-              "end": 126
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p2",
-              "start": 63,
-              "end": 66
-            },
-            {
-              "paragraphId": "p2",
-              "start": 149,
-              "end": 152
-            }
+            {"paragraphId": "p1", "start": 145, "end": 147},
+            {"paragraphId": "p1", "start": 149, "end": 151}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -440,25 +412,12 @@
         },
         {
           "id": "q2",
-          "prompt": "사물의 생김새나 형상?",
-          "answerText": "모양",
-          "answerMatchMode": "EXACT",
+          "prompt": "건축물을 살필 때 위치를 봐야 할 부분과 모양을 봐야 할 부분 두 가지(◯◯과 ◯◯)를 모두 찾아보세요",
+          "answerText": "창문, 지붕",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 42,
-              "end": 44
-            },
-            {
-              "paragraphId": "p1",
-              "start": 129,
-              "end": 131
-            },
-            {
-              "paragraphId": "p2",
-              "start": 33,
-              "end": 35
-            }
+            {"paragraphId": "p2", "start": 18, "end": 20},
+            {"paragraphId": "p2", "start": 29, "end": 31}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -469,15 +428,26 @@
         },
         {
           "id": "q3",
-          "prompt": "사물의 근본적인 법칙?",
-          "answerText": "원리",
-          "answerMatchMode": "EXACT",
+          "prompt": "물건의 표면에서 손이나 눈으로 느껴지는 성질을 가리키는 두 글자 낱말을 찾아보세요",
+          "answerText": "질감",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 153,
-              "end": 155
-            }
+            {"paragraphId": "p2", "start": 14, "end": 16}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "예술 작품과 같은 건축물을 만들어 남기는 사람을 가리키는 세 글자 낱말을 찾아보세요",
+          "answerText": "건축가",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 133, "end": 136}
           ],
           "scoring": {
             "correctDeltaSec": 10,

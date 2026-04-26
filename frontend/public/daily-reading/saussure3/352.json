@@ -632,44 +632,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "막내에게 ( )가 남겨졌습니다.",
-          "answerText": "고양이",
-          "answerMatchMode": "EXACT",
+          "prompt": "고양이는 무엇을 주면 부자로 만들어 주겠다고 했습니까?",
+          "answerText": "장화와 자루",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 11,
-              "end": 14
-            },
-            {
-              "paragraphId": "p1",
-              "start": 29,
-              "end": 32
-            },
-            {
-              "paragraphId": "p1",
-              "start": 65,
-              "end": 68
-            },
-            {
-              "paragraphId": "p1",
-              "start": 94,
-              "end": 97
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p2",
-              "start": 87,
-              "end": 90
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 3
+              "start": 34,
+              "end": 40
             }
           ],
           "scoring": {
@@ -681,14 +651,14 @@
         },
         {
           "id": "q2",
-          "prompt": "가짜 이름은 ( ) 후작입니다.",
-          "answerText": "카라바스",
-          "answerMatchMode": "EXACT",
+          "prompt": "고양이가 임금님께 선물로 바친 것은 무엇입니까?",
+          "answerText": "사냥한 짐승",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 33,
-              "end": 37
+              "start": 5,
+              "end": 11
             }
           ],
           "scoring": {
@@ -700,14 +670,33 @@
         },
         {
           "id": "q3",
-          "prompt": "거인을 ( )로 변하게 했습니다.",
-          "answerText": "생쥐",
-          "answerMatchMode": "EXACT",
+          "prompt": "고양이는 주인의 선물이라고 무엇을 했습니까?",
+          "answerText": "거짓말",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 48,
+              "end": 51
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "어려운 상황에서도 무엇을 발휘하면 복을 받게 된다고 했습니까?",
+          "answerText": "지혜를",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 16,
-              "end": 18
+              "start": 90,
+              "end": 93
             }
           ],
           "scoring": {

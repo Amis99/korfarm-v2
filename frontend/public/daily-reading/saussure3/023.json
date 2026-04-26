@@ -557,34 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리가 매일 사용하는 전기나 물처럼 무한하지 않아 함부로 낭비하지 않고 소중히 다뤄야 하는 것은 무엇인가요?",
-          "answerText": "에너지",
-          "answerMatchMode": "EXACT",
+          "prompt": "전기와 물은 어떤 에너지라고 설명했는지 지문에서 찾으시오.",
+          "answerText": "소중한 에너지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 23,
+              "start": 19,
               "end": 26
-            },
-            {
-              "paragraphId": "p1",
-              "start": 35,
-              "end": 38
-            },
-            {
-              "paragraphId": "p1",
-              "start": 84,
-              "end": 87
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 3
             }
           ],
           "scoring": {
@@ -596,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "낮에는 텔레비전을 보지 않을 때 대기 전력이 소모되지 않도록 전기 콘센트에서 빼놓아야 하는 것은 무엇인가요?",
-          "answerText": "코드",
-          "answerMatchMode": "EXACT",
+          "prompt": "생활 속에서 어떤 습관이 참 중요하다고 했는지 지문에서 찾으시오.",
+          "answerText": "생활 속에서 에너지를 아껴 쓰는 습관",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 80,
-              "end": 82
+              "paragraphId": "p1",
+              "start": 77,
+              "end": 97
             }
           ],
           "scoring": {
@@ -615,13 +595,32 @@
         },
         {
           "id": "q3",
-          "prompt": "작은 절약 행동들이 모여 오랫동안 지킬 수 있는 것으로, 지구가 우리에게 제공하는 소중한 에너지 요소들을 이르는 말은?",
-          "answerText": "자원",
-          "answerMatchMode": "EXACT",
+          "prompt": "에너지를 절약하는 제일 쉬운 방법은 무엇인지 지문에서 찾으시오.",
+          "answerText": "쓰지 않는 방의 불을 끄는 것",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 20,
+              "end": 36
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "이런 습관들이 모이면 무엇을 오랫동안 지킬 수 있다고 했는지 지문에서 찾으시오.",
+          "answerText": "소중한 지구의 자원",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 99,
+              "start": 91,
               "end": 101
             }
           ],

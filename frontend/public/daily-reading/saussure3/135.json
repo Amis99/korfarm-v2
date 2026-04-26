@@ -557,39 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "물건을 사고팔기 위해 상인과 손님이 모여 거래가 이루어지는 곳은?",
-          "answerText": "시장",
-          "answerMatchMode": "EXACT",
+          "prompt": "시장은 자유롭게 거래를 하는 무엇이라고 했나요?",
+          "answerText": "장소",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 96,
-              "end": 98
-            },
-            {
-              "paragraphId": "p2",
-              "start": 79,
-              "end": 81
-            },
-            {
-              "paragraphId": "p2",
-              "start": 114,
-              "end": 116
-            },
-            {
-              "paragraphId": "p3",
-              "start": 7,
-              "end": 9
-            },
-            {
-              "paragraphId": "p3",
-              "start": 67,
-              "end": 69
+              "start": 37,
+              "end": 39
             }
           ],
           "scoring": {
@@ -601,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "사람들이 어떤 물건을 사고 싶어 하는 욕구나 정도를 뜻하는 말은?",
-          "answerText": "수요",
-          "answerMatchMode": "EXACT",
+          "prompt": "시장 가격을 조절하는 법칙은 무엇인가요?",
+          "answerText": "수요와 공급의 법칙",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 67,
-              "end": 69
+              "end": 77
             }
           ],
           "scoring": {
@@ -620,14 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "시장에서 물건을 팔기 위해 내놓은 물건의 양을 뜻하는 말은?",
-          "answerText": "공급",
-          "answerMatchMode": "EXACT",
+          "prompt": "수요와 공급의 법칙은 시장의 가격을 조절하는 어떤 역할을 하나요?",
+          "answerText": "보이지 않는 손",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 71,
-              "end": 73
+              "start": 92,
+              "end": 100
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "무엇이 시장을 건강하게 만든다는 사실을 배웠나요?",
+          "answerText": "정직한 거래와 합리적인 선택",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 50,
+              "end": 65
             }
           ],
           "scoring": {

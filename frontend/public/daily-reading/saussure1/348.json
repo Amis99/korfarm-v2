@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "입에서 나오는 따뜻한 기운?",
+          "prompt": "글에서 '입에서 나오는 따뜻한 기운'을 뜻하는 두 글자 낱말을 찾아 적어 보세요",
           "answerText": "입김",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -430,9 +430,47 @@
         },
         {
           "id": "q2",
-          "prompt": "창문에 끼우는 투명한 판?",
+          "prompt": "유리창에 만들어지는 풍경을 무엇에 빗대었는지 글에서 찾아 적어 보세요",
+          "answerText": "마법 같은",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 79,
+              "end": 84
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "내가 손가락 끝으로 유리창 위에 그린 두 가지가 무엇인지 글에서 찾아 적어 보세요",
+          "answerText": "동그란 해님과 웃고 있는 구름",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 79,
+              "end": 95
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글에서 '창문에 끼운 투명한 판'을 뜻하는 세 글자 낱말을 찾아 적어 보세요",
           "answerText": "유리창",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -448,30 +486,6 @@
               "paragraphId": "p2",
               "start": 55,
               "end": 58
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "선과 색으로 나타낸 것?",
-          "answerText": "그림",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 119,
-              "end": 121
-            },
-            {
-              "paragraphId": "p2",
-              "start": 130,
-              "end": 132
             }
           ],
           "scoring": {

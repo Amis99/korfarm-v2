@@ -571,66 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 이 글의 주제를 어떤 관점에서 소개하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 247
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "음악이나 음성은 원래 시간에 따라 연속적으로 변하는 파동이지만, 오늘날 저장과 전송은 대부분 디지털 방식으로 이루어진다. 연속적인 소리를 일정한 간격으로 끊어 수치로 바꾸면 컴퓨터가 다룰 수 있는 오디오 신호가 된다. 문제는 이렇게 바뀐 신호의 양이 매우 크다는 점이다. 원음에 가깝게 저장하려면 많은 비트가 필요하고, 그만큼 파일의 크기도 커진다. 그래서 실제 서비스 환경에서는 품질을 유지하면서 데이터 양을 줄이는 압축 기술이 중요해진다."
-        },
-        {
-          "id": "q2",
-          "prompt": "둘째 문단은 왜 중요하거나 어떤 이유로 문제 되는지 설명하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 228
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "디지털 오디오는 처음부터 모든 소리 구간에 똑같은 수의 비트를 나누어 주는 방식으로 기록된다. 각 순간의 소리 크기를 일정한 비트 수로 표현하면 계산과 저장은 단순해지지만, 사람이 실제로 듣는 방식까지 그대로 반영하지는 못한다. 모든 소리가 똑같이 중요한 것은 아니기 때문이다. 저장 공간을 아끼려면 사람이 잘 듣지 못하는 부분이나, 다른 소리 때문에 사실상 구별되지 않는 부분을 줄이는 방법을 찾아야 한다."
-        },
-        {
-          "id": "q3",
-          "prompt": "셋째 문단은 어떤 조건을 설명하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 219
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이때 활용되는 생각이 지각부호화이다. 지각부호화는 인간의 청각 특성을 기준으로, 들리지 않거나 거의 구별되지 않는 신호를 과감히 줄여 전체 데이터를 압축하는 방식이다. 핵심은 기계가 모든 소리를 똑같이 다루지 않는다는 데 있다. 사람의 귀는 주파수에 따라 민감도가 다르고, 큰 소리가 존재하면 그 근처의 작은 소리를 놓치기도 한다. 압축 기술은 바로 이 불균등한 지각 특성을 계산에 반영한다."
-        },
-        {
-          "id": "q4",
-          "prompt": "넷째 문단은 왜 중요하거나 어떤 이유로 문제 되는지 설명하는가?",
+          "prompt": "사람이 겨우 들을 수 있는 최소한의 소리 크기를 뜻하는 용어는 무엇인가?",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 226
+              "start": 21,
+              "end": 27
             }
           ],
           "scoring": {
@@ -639,16 +585,70 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "가장 기본이 되는 기준 가운데 하나는 최소가청강도이다. 이는 조용한 상태에서 사람이 겨우 들을 수 있는 최소한의 소리 크기를 뜻하는데, 주파수에 따라 값이 다르다. 어떤 주파수 대역은 아주 작은 소리도 민감하게 들리지만, 다른 대역은 훨씬 큰 소리여야 감지된다. 따라서 동일한 세기의 신호라도 어느 대역에 놓였는지에 따라 실제 청취 가능성은 달라진다. 압축은 이런 차이를 이용해 덜 중요한 신호를 줄인다."
+          "answerText": "최소가청강도"
+        },
+        {
+          "id": "q2",
+          "prompt": "연속적인 소리를 일정한 간격으로 끊어 수치로 바꾸면 무엇이 되는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 97,
+              "end": 116
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "컴퓨터가 다룰 수 있는 오디오 신호"
+        },
+        {
+          "id": "q3",
+          "prompt": "실제 서비스 환경에서 압축 기술이 중요해지는 이유는 무엇인가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 152,
+              "end": 194
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "원음에 가깝게 저장하려면 많은 비트가 필요하고, 그만큼 파일의 크기도 커진다"
+        },
+        {
+          "id": "q4",
+          "prompt": "디지털 오디오는 처음부터 무엇에 똑같은 수의 비트를 나누어 주는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 14,
+              "end": 22
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "모든 소리 구간"
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 어떤 생각이나 관계를 보여 주는가?",
+          "prompt": "지각부호화가 전체 데이터를 압축할 때 기준으로 삼는 것은 무엇인가?",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 230
+              "paragraphId": "p3",
+              "start": 28,
+              "end": 37
             }
           ],
           "scoring": {
@@ -657,16 +657,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "또 하나의 핵심은 차폐이다. 큰 소리가 존재하면 주파수가 비슷한 주변의 작은 소리는 실제로 잘 들리지 않는데, 이때 큰 소리가 차폐음이 된다. 차폐가 일어날 수 있는 주파수 구간은 임계대역으로 설명할 수 있으며, 이 구간 안에서는 작은 신호가 있어도 청취자는 그 존재를 분명히 구별하지 못할 수 있다. 그래서 압축 과정에서는 차폐 문턱값을 계산해, 그보다 작은 신호는 과감히 제거하거나 더 적은 비트로 처리한다."
+          "answerText": "인간의 청각 특성"
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 글의 핵심을 어떻게 정리하는가?",
+          "prompt": "사람의 귀가 보이는 두 가지 지각 특성을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 217
+              "paragraphId": "p3",
+              "start": 135,
+              "end": 151
+            },
+            {
+              "paragraphId": "p3",
+              "start": 153,
+              "end": 184
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "주파수에 따라 민감도가 다르고",
+            "큰 소리가 존재하면 그 근처의 작은 소리를 놓치기도 한다"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "차폐 과정에서 주변의 작은 소리를 가리는 큰 소리는 무엇이 되는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 71,
+              "end": 74
             }
           ],
           "scoring": {
@@ -675,7 +701,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 지각부호화는 모든 소리에 균등하게 비트를 배분하는 대신, 실제로 잘 들리는 신호에 더 많은 비트를 주고 덜 들리는 신호는 줄이는 전략이다. 이 방식은 일부 정보를 버리더라도 체감 음질 저하를 크게 만들지 않으면서 파일 크기를 낮출 수 있게 한다. 오디오 신호 압축이 단순한 삭제 작업이 아니라 인간 청각의 작동 원리를 이용한 선택적 배분 과정으로 이해되어야 하는 이유가 여기에 있다."
+          "answerText": "차폐음"
+        },
+        {
+          "id": "q8",
+          "prompt": "지각부호화는 덜 들리는 신호를 어떻게 하는 전략인가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 61,
+              "end": 77
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "덜 들리는 신호는 줄이는 전략"
         }
       ]
     }

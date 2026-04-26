@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 회의의 출발 문제를 어떻게 제시하는가?",
+          "prompt": "이번 교지 특집의 제목을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 234
+              "start": 15,
+              "end": 26
             }
           ],
           "scoring": {
@@ -585,70 +585,54 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "민정: \"이번 교지 특집이 '고3 이후의 선택'이잖아. 그래서 우리 학교 졸업생 중에서 재수 대신 바로 취업 준비를 한 선배를 인터뷰하기로 한 건데, 오늘은 질문 순서랑 핵심 정보를 정리하자.\" 서후: \"지금까지 나온 질문이 너무 많아. 학교생활 이야기, 진로 결정, 부모님 반응, 준비 과정까지 다 넣으면 인터뷰 시간이 부족할 것 같아.\" 지우: \"맞아. 핵심은 기사 주제에 맞는 정보가 무엇인지 먼저 정하는 거야.\""
+          "answerText": "'고3 이후의 선택'"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 제안이나 우려를 어떤 이유와 함께 내놓는가?",
+          "prompt": "인터뷰 시간이 부족할 수 있다고 하며 열거한 질문 범위를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 133,
+              "end": 165
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "학교생활 이야기, 진로 결정, 부모님 반응, 준비 과정까지"
+        },
+        {
+          "id": "q3",
+          "prompt": "대학 진학 대신 다른 진로를 택한 이유를 첫 질문으로 하자고 한 사람을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 223
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "하린: \"나는 첫 질문을 왜 대학 진학 대신 다른 진로를 택했는지로 시작하면 좋겠어. 독자들이 제일 궁금해할 부분이기도 하고.\" 민정: \"좋긴 한데, 바로 그렇게 들어가면 너무 무거울 수도 있어. 먼저 학교 다닐 때 어떤 고민을 했는지 물은 다음에 선택 이유로 넘어가면 답변도 자연스럽지 않을까?\" 서후: \"그 순서가 더 좋다. 선택 자체보다 고민의 맥락을 먼저 잡아 주면 기사 도입도 쓰기 쉬워.\""
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단은 논의를 어떤 대안이나 조정안으로 이어 가는가?",
-          "answerRanges": [
+              "end": 2
+            },
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 226
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지우: \"그다음에는 준비 과정 질문을 넣자. 자격증 공부를 어떻게 시작했는지, 하루 일정은 어땠는지 같은 거.\" 하린: \"근데 그 질문은 너무 정보 나열처럼 들릴 수 있어. 선배가 실제로 가장 힘들었던 순간이 뭔지 같이 물어보면 더 생생한 답이 나오지 않을까?\" 민정: \"좋아. 그러면 준비 과정 질문 뒤에 바로 어려움과 극복 방식으로 이어 가자. 기사에서 독자들이 참고할 만한 부분도 그쪽일 것 같아.\""
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단은 예상 질문이나 진행 기준을 어떻게 준비하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 220
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "서후: \"부모님이나 친구들 반응을 묻는 건 꼭 필요해? 개인적인 부분이라 선배가 답하기 불편할 수도 있잖아.\" 지우: \"그래도 진로 선택에서 주변 시선이 영향을 주는 경우가 많으니까 한 번은 물어봐야 해.\" 민정: \"대신 직접적으로 '반대했나요?'라고 묻지 말고, '주변 사람들과 의견이 달랐을 때 어떻게 설명했는지' 정도로 완화해서 묻자. 그러면 부담은 줄이고 필요한 정보는 얻을 수 있어.\""
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단은 세부 운영 방식이나 보완 이유를 어떻게 구체화하는가?",
-          "answerRanges": [
+              "start": 63,
+              "end": 65
+            },
             {
               "paragraphId": "p5",
               "start": 0,
-              "end": 231
+              "end": 2
+            },
+            {
+              "paragraphId": "p6",
+              "start": 111,
+              "end": 113
+            },
+            {
+              "paragraphId": "p6",
+              "start": 241,
+              "end": 243
             }
           ],
           "scoring": {
@@ -657,16 +641,52 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "하린: \"마지막 질문은 후배들에게 해 주고 싶은 말로 끝내면 될까?\" 서후: \"괜찮은데 너무 뻔한 답이 나올 수도 있어. 차라리 지금 돌아보면 고3 때 꼭 알았으면 하는 점이 있었는지 물어보자.\" 지우: \"그 질문이 더 구체적이네. 후배들에게 주는 조언도 자연스럽게 포함될 것 같아.\" 민정: \"좋아, 그러면 마무리는 '그때의 자신에게 해 주고 싶은 말'이나 '지금 후배들이 놓치지 말아야 할 점'으로 정리하자.\""
+          "answerText": "하린"
+        },
+        {
+          "id": "q4",
+          "prompt": "선택 이유로 넘어가기 전에 먼저 물어보자고 한 내용을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 113,
+              "end": 131
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "학교 다닐 때 어떤 고민을 했는지"
+        },
+        {
+          "id": "q5",
+          "prompt": "준비 과정 질문을 보완하려고 함께 묻자고 한 내용을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 97,
+              "end": 119
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "선배가 실제로 가장 힘들었던 순간이 뭔지"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 최종 합의를 어떤 실행 계획으로 정리하는가?",
+          "prompt": "주변 반응을 직접적으로 묻지 말자고 한 표현을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 274
+              "paragraphId": "p4",
+              "start": 130,
+              "end": 138
             }
           ],
           "scoring": {
@@ -675,7 +695,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "민정: \"정리할게. 질문 순서는 고3 때 고민, 진로 선택 이유, 준비 과정, 어려움과 극복, 주변과의 소통, 후배에게 전하고 싶은 말로 간다. 서후는 도입 질문, 지우는 준비 과정과 정보성 질문, 하린은 감정선이 드러나는 질문을 맡아 줘.\" 서후: \"인터뷰 들어가기 전에 답변 시간이 짧으면 어떤 부분부터 줄일지도 정해 두자.\" 지우: \"그럼 주변 반응 질문은 상황 봐서 빼고, 핵심은 선택 이유랑 준비 과정은 꼭 묻는 걸로.\" 하린: \"좋아. 그 기준이면 기사 방향도 흔들리지 않겠다.\""
+          "answerText": "'반대했나요?'"
+        },
+        {
+          "id": "q7",
+          "prompt": "완화된 질문 표현으로 얻을 수 있는 두 효과를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 195,
+              "end": 202
+            },
+            {
+              "paragraphId": "p4",
+              "start": 203,
+              "end": 218
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "부담은 줄이고",
+            "필요한 정보는 얻을 수 있어"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "하린이 맡기로 한 질문의 성격을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 115,
+              "end": 127
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "감정선이 드러나는 질문"
         }
       ]
     }

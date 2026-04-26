@@ -829,12 +829,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "모든 자음이 아무 자리에나 올 수 없는 제한을 가리키는 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 172
+              "start": 64,
+              "end": 72
+            },
+            {
+              "paragraphId": "p5",
+              "start": 12,
+              "end": 20
+            },
+            {
+              "paragraphId": "p6",
+              "start": 116,
+              "end": 124
             }
           ],
           "scoring": {
@@ -843,16 +853,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "한국어의 음절은 초성, 중성, 종성으로 짜이지만 모든 자음이 아무 자리에나 올 수 있는 것은 아니다. 이런 제한을 음소 배열 제약이라고 한다. 특히 한국어 고유어에서는 음절 첫머리에 두 자음이 바로 겹쳐 오는 어두 자음군이 거의 허용되지 않으며, 받침 자리에서도 실현될 수 있는 자음의 범위가 크게 줄어든다."
+          "answerText": "음소 배열 제약"
         },
         {
           "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "1문단에서 한국어 고유어에 나타나는 제약 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "음절 첫머리에 두 자음이 바로 겹쳐 오는 어두 자음군이 거의 허용되지 않으며",
+            "받침 자리에서도 실현될 수 있는 자음의 범위가 크게 줄어든다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 94,
+              "end": 136
+            },
+            {
+              "paragraphId": "p1",
+              "start": 138,
+              "end": 171
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "외래어의 자음군을 한국어 음절 구조에 맞추기 위해 자주 나타나는 방식을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 206
+              "start": 107,
+              "end": 128
             }
           ],
           "scoring": {
@@ -861,15 +897,15 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "어두 자음군 제약은 외래어가 들어올 때 더욱 뚜렷하게 드러난다. 영어처럼 단어 첫머리에 둘 이상의 자음이 연달아 오는 형태는 한국어 음절 구조에 바로 맞지 않으므로, 실제 발음이나 표기에서는 사이에 모음을 넣어 자음을 나누는 방식이 자주 나타난다. 이는 낯선 소리를 단순화하는 임시 처리라기보다, 한국어가 허용하는 음절 배열 안으로 소리를 다시 조직하는 과정에 가깝다."
+          "answerText": "사이에 모음을 넣어 자음을 나누는 방식"
         },
         {
-          "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "id": "q4",
+          "prompt": "외래어 소리 처리가 임시 처리보다 무엇에 가깝다고 했는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
+              "paragraphId": "p2",
+              "start": 166,
               "end": 200
             }
           ],
@@ -879,52 +915,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "종성에서도 제약은 강하게 작동한다. 표기상 받침 자리에 여러 자음이 올 수 있어 보여도 실제 발음에서는 자음 대립이 크게 축소되어, 한국어는 제한된 종성 체계로 소리를 실현한다. 그래서 같은 자음이라도 초성에서의 모습과 종성에서의 모습이 다를 수 있고, 겹받침 역시 모든 자음값이 그대로 살아나는 것이 아니라 뒤에 어떤 소리가 오느냐에 따라 발음이 달라진다."
-        },
-        {
-          "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 202
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 제약은 단순히 발음 편의만 설명하는 것이 아니다. 왜 어떤 단어는 받침 뒤에 모음이 오면 연음되고, 또 어떤 경우에는 된소리되기나 비음화가 뒤따르는지 이해하려면 먼저 한국어가 음절 끝에서 어떤 자음 배열을 허용하는지 알아야 한다. 즉 음운 변동은 무질서하게 일어나는 변화가 아니라, 허용된 음절 구조를 벗어나지 않도록 소리를 재배치하는 방식으로 볼 수 있다."
+          "answerText": "한국어가 허용하는 음절 배열 안으로 소리를 다시 조직하는 과정"
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "3문단에서 같은 자음과 겹받침의 발음이 달라질 수 있음을 보여 주는 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "초성에서의 모습과 종성에서의 모습이 다를 수 있고",
+            "뒤에 어떤 소리가 오느냐에 따라 발음이 달라진다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 189
+              "paragraphId": "p3",
+              "start": 113,
+              "end": 140
+            },
+            {
+              "paragraphId": "p3",
+              "start": 173,
+              "end": 199
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "형태소가 결합할 때도 음소 배열 제약은 중요한 기준이 된다. 두 형태소가 만나는 경계에서 표기상으로는 자음이 연속되더라도, 실제 발음에서는 한국어 음절 구조에 맞도록 자리가 다시 나뉘거나 한쪽 자음의 실현이 약화된다. 따라서 표기만 보고 음운 구조를 판단하면 오류가 생기기 쉽고, 음절 단위로 다시 분석해야 변동의 방향을 설명할 수 있다."
+          "revealOnWrong": true
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "연음·된소리되기·비음화를 이해하려면 먼저 알아야 하는 내용을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 195
+              "paragraphId": "p4",
+              "start": 95,
+              "end": 122
             }
           ],
           "scoring": {
@@ -933,7 +959,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 어두 자음군 금지와 종성 제약은 한국어가 선호하는 음절 틀을 보여 주는 핵심 규칙이다. 이 규칙을 이해하면 외래어 적응, 연음, 겹받침 발음, 여러 음운 변동을 하나의 원리 아래에서 묶어 볼 수 있다. 음소 배열 제약은 개별 예외를 외우게 하는 규정이 아니라, 한국어 소리가 어떤 구조 안에서 허용되고 조정되는지를 드러내는 기본 원리인 셈이다."
+          "answerText": "한국어가 음절 끝에서 어떤 자음 배열을 허용하는지"
+        },
+        {
+          "id": "q7",
+          "prompt": "표기만 보고 음운 구조를 판단할 때 생기기 쉬운 결과를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 145,
+              "end": 155
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "오류가 생기기 쉽고"
+        },
+        {
+          "id": "q8",
+          "prompt": "이 규칙을 이해하면 하나의 원리 아래에서 묶어 볼 수 있는 현상들을 나열한 부분을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 63,
+              "end": 91
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "외래어 적응, 연음, 겹받침 발음, 여러 음운 변동"
         }
       ]
     }

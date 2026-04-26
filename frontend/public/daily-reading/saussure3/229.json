@@ -587,13 +587,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "썰매를 밀어주신 아빠의 마음?",
-          "answerText": "정성이",
-          "answerMatchMode": "EXACT",
+          "prompt": "썰매를 밀어주신 일로 기억에 남은 것은 무엇인지 지문에서 찾으시오.",
+          "answerText": "아빠의 정성이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 47,
+              "start": 43,
               "end": 50
             }
           ],
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "꾸밈이 없는 참된 마음은?",
-          "answerText": "진심을",
-          "answerMatchMode": "EXACT",
+          "prompt": "가족이 함께 웃는 시간은 세상에서 무엇이라고 했는지 지문에서 찾으시오.",
+          "answerText": "큰 선물",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 69,
-              "end": 72
+              "start": 51,
+              "end": 55
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "마음이 따뜻한 상태는?",
-          "answerText": "훈훈함",
-          "answerMatchMode": "EXACT",
+          "prompt": "편지를 통해 전하고 싶어 한 것은 무엇인지 지문에서 찾으시오.",
+          "answerText": "내 진심",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 67,
+              "end": 71
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글을 쓰며 되살아난 것은 무엇인지 지문에서 찾으시오.",
+          "answerText": "어제의 기쁨",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 53,
-              "end": 56
+              "start": 36,
+              "end": 42
             }
           ],
           "scoring": {

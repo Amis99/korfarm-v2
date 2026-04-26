@@ -571,111 +571,77 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"맞춤법은 적는 방식, 표준어는 기준이 되는 말의 형태\"에 해당하는 부분은 어디인가요?",
+          "prompt": "이 글에서 말을 글자로 적는 규칙을 가리키는 단어가 본문에 등장하는 위치를 모두 찾으시오",
+          "answerTexts": ["맞춤법"],
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 179
-            }
+            {"paragraphId": "p1", "start": 0, "end": 3},
+            {"paragraphId": "p1", "start": 54, "end": 57},
+            {"paragraphId": "p2", "start": 0, "end": 3},
+            {"paragraphId": "p2", "start": 144, "end": 147},
+            {"paragraphId": "p4", "start": 51, "end": 54},
+            {"paragraphId": "p4", "start": 124, "end": 127},
+            {"paragraphId": "p5", "start": 0, "end": 3},
+            {"paragraphId": "p5", "start": 86, "end": 89},
+            {"paragraphId": "p6", "start": 5, "end": 8}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "맞춤법과 표준어는 모두 국어 생활에서 바른 표현을 위한 기준이지만, 다루는 대상은 서로 다르다. 맞춤법은 말을 글자로 적는 규칙을 중심으로 하고, 표준어는 여러 발음과 형태 가운데 공적인 상황에서 기준으로 삼는 말을 가리킨다. 따라서 하나는 적는 방식의 규칙이고, 다른 하나는 기준이 되는 말의 형태라는 점에서 구분된다."
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "\"아니고, 형태와 어원을 고려해 적는다\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 190
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "둘째 문단에서 소리는 달라져도 기본형을 떠올려야 한다고 든 예시 영역의 이름을 찾으시오",
+          "answerText": "용언 활용",
           "answerMatchMode": "ANY",
-          "answerText": "맞춤법은 소리 나는 대로만 적지 않고, 형태와 어원을 고려해 글자를 적도록 만든 규범이다. 그래서 발음만 따르면 비슷하게 들리는 말도 실제 표기는 다를 수 있다. 예를 들어 용언 활용에서 소리는 달라져도 기본형을 떠올리면 표기를 더 정확히 판단할 수 있다. 맞춤법은 글을 읽는 사람에게 뜻을 안정적으로 전달하기 위한 약속이라고 볼 수 있다."
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 97, "end": 102}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "\"지역이나 세대, 집단에 따라 다르게 쓰일 수 있는 표현\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 179
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "셋째 문단에서 표준어가 여러 표현 가운데 무엇으로 삼는 말인지 그 정의 표현을 찾으시오",
+          "answerText": "공용 기준",
           "answerMatchMode": "ANY",
-          "answerText": "표준어는 지역이나 세대, 집단에 따라 서로 다르게 쓰일 수 있는 표현 가운데 공용 기준으로 삼는 말을 정한 것이다. 이는 어떤 말을 우열로 나누려는 것이 아니라, 공식적 소통에서 혼란을 줄이기 위한 공통 기준을 마련하려는 목적을 가진다. 따라서 표준어 규정은 실제 언어 현실과 전통, 사용 범위를 함께 고려해 만들어진다."
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 43, "end": 48}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "\"표준어로 정해져야 그 말을 글로 적을 때 맞춤법도 적용할 수 있다\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 204
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "넷째 문단에서 실제 문제를 풀 때 첫 번째로 던져야 한다고 한 질문 표현을 찾으시오",
+          "answerText": "기준이 되는 말인가",
           "answerMatchMode": "ANY",
-          "answerText": "두 규정은 서로 연결되기도 한다. 어떤 말이 표준어로 정해져 있어야 그 말을 글로 적을 때 맞춤법 규칙도 적용할 수 있기 때문이다. 반대로 표준어라고 해서 모든 활용형을 자동으로 바르게 적는 것은 아니므로, 표준어 판단과 맞춤법 판단은 별도로 이루어질 때가 많다. 실제 문제에서는 '이 말이 기준이 되는 말인가'와 '그 말을 어떻게 적는가'를 나누어 생각해야 한다."
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 163, "end": 173}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "\"왜 그런 기준이 적용되는지 구조를 이해한다\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 194
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "다섯째 문단에서 표준어가 아닌 까닭으로 틀린 표현을 가리킬 때 쓴 단어를 찾으시오",
+          "answerText": "지역어",
           "answerMatchMode": "ANY",
-          "answerText": "맞춤법과 표준어를 혼동하면 오류의 원인을 잘못 짚게 된다. 어떤 표현이 틀린 이유가 발음이 달라서인지, 표준어가 아닌 지역어를 써서인지, 아니면 표준어를 맞춤법에 맞게 적지 못해서인지를 구분해야 정확히 고칠 수 있다. 그래서 국어 규범을 공부할 때는 틀린 표현을 단순 암기로 외우기보다, 왜 그런 기준이 적용되는지 구조를 이해하는 편이 효과적이다."
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 66, "end": 69}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q6",
-          "prompt": "\"맞춤법은 표기 방법, 표준어는 표현의 기준형\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 156
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "마지막 문단에서 맞춤법이 다루는 영역을 한마디로 정리한 표현을 찾으시오",
+          "answerText": "표기 방법",
           "answerMatchMode": "ANY",
-          "answerText": "정리하면 맞춤법은 말을 글자로 적는 규칙이고, 표준어는 공적 소통에서 기준이 되는 말의 형태다. 전자는 표기 방법을, 후자는 표현의 기준형을 다룬다. 따라서 바른 국어생활을 위해서는 이 둘을 함께 알아야 하지만, 실제 판단에서는 무엇이 문제인지 먼저 구분해 보는 태도가 필요하다."
+          "answerRanges": [
+            {"paragraphId": "p6", "start": 58, "end": 63}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

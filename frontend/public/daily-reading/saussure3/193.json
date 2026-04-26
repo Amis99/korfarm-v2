@@ -587,10 +587,18 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "주의 깊게 살펴보는 행동은?",
-          "answerText": "관찰했습니다",
-          "answerMatchMode": "EXACT",
+          "prompt": "놀기 전에 확인한 것과 한 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "놀이기구가 튼튼한지",
+            "관찰했습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 36,
+              "end": 46
+            },
             {
               "paragraphId": "p1",
               "start": 47,
@@ -606,14 +614,22 @@
         },
         {
           "id": "q2",
-          "prompt": "위험이 없도록 보호하는 상태는?",
-          "answerText": "안전을",
-          "answerMatchMode": "EXACT",
+          "prompt": "살핀 두 가지 안전 요소를 모두 찾으시오.",
+          "answerTexts": [
+            "그네 줄이 낡지 않았는지",
+            "바닥은 안전한지"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 55,
-              "end": 58
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 13
+            },
+            {
+              "paragraphId": "p2",
+              "start": 14,
+              "end": 22
             }
           ],
           "scoring": {
@@ -625,14 +641,41 @@
         },
         {
           "id": "q3",
-          "prompt": "사고를 미리 막는 방법은?",
-          "answerText": "예방하는",
-          "answerMatchMode": "EXACT",
+          "prompt": "미리 찾아낸 것과 그 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "위험한 요소",
+            "안심하고 놉니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 73,
-              "end": 77
+              "start": 29,
+              "end": 35
+            },
+            {
+              "paragraphId": "p2",
+              "start": 45,
+              "end": 53
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "주의 깊게 살피는 태도는 무엇인지 찾으시오.",
+          "answerText": "사고를 예방하는 방법",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 69,
+              "end": 80
             }
           ],
           "scoring": {

@@ -561,14 +561,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "가벼운 기분으로 바람을 쐬며 걷는 일은?",
-          "answerText": "산책",
+          "prompt": "미국 뉴욕에 있는 큰 공원의 이름을 지문에서 찾으시오.",
+          "answerText": "센트럴 파크라는 큰 공원",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 68,
-              "end": 70
+              "start": 8,
+              "end": 21
             }
           ],
           "scoring": {
@@ -579,14 +579,50 @@
         },
         {
           "id": "q2",
-          "prompt": "경치 좋은 곳에 가서 놀며 즐기는 일은?",
-          "answerText": "소풍",
+          "prompt": "센트럴 파크에서 사람들이 하며 쉬는 일을 지문에서 찾으시오.",
+          "answerText": "산책하거나 자전거를 타며",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 68,
+              "end": 81
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "하이드 파크의 커다란 호수에서 헤엄치는 동물을 지문에서 찾으시오.",
+          "answerText": "백조와 오리",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 81,
-              "end": 83
+              "start": 40,
+              "end": 46
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "구엘 공원에서 반겨주는 동상을 지문에서 찾으시오.",
+          "answerText": "알록달록한 타일로 만든 예쁜 도마뱀 동상",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 29,
+              "end": 51
             }
           ],
           "scoring": {

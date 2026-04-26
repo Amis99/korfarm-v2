@@ -587,14 +587,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "남을 대하는 바른 태도는?",
-          "answerText": "예절이",
-          "answerMatchMode": "EXACT",
+          "prompt": "미끄럼틀을 탈 때 필요하다고 한 바른 태도를 본문에서 찾아 쓰세요",
+          "answerText": "예절",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 23,
-              "end": 26
+              "end": 25
+            },
+            {
+              "paragraphId": "p3",
+              "start": 65,
+              "end": 67
             }
           ],
           "scoring": {
@@ -606,14 +611,14 @@
         },
         {
           "id": "q2",
-          "prompt": "길이나 차례를 내어줌?",
-          "answerText": "양보하고",
-          "answerMatchMode": "EXACT",
+          "prompt": "엎드려 타거나 서서 내려오면 무엇이 날 위험이 크다고 했는지 찾아 쓰세요",
+          "answerText": "사고",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 62,
-              "end": 66
+              "paragraphId": "p1",
+              "start": 50,
+              "end": 52
             }
           ],
           "scoring": {
@@ -625,14 +630,41 @@
         },
         {
           "id": "q3",
-          "prompt": "지켜야 할 행동 방식은?",
-          "answerText": "규칙을",
-          "answerMatchMode": "EXACT",
+          "prompt": "미끄럼틀에서 사고 위험을 높이는 행동 두 가지를 본문에서 모두 찾으시오",
+          "answerTexts": [
+            "엎드려 타거나",
+            "서서 내려오면"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 34,
+              "end": 41
+            },
+            {
+              "paragraphId": "p1",
+              "start": 42,
+              "end": 49
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "친구들과 지키기로 다짐한 것을 본문에서 찾아 쓰세요",
+          "answerText": "미끄럼틀 이용 규칙",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 12,
-              "end": 15
+              "start": 4,
+              "end": 14
             }
           ],
           "scoring": {

@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "점이 모여 ( )가 됩니다.",
-          "answerText": "선",
-          "answerMatchMode": "EXACT",
+          "prompt": "점들이 모이면 어떻게 된다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "점들이 모여서 재미있는 선이 됩니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 36,
-              "end": 37
+              "start": 23,
+              "end": 42
             }
           ],
           "scoring": {
@@ -571,29 +571,19 @@
         },
         {
           "id": "q2",
-          "prompt": "순서대로 놓이면 ( )가 됨.",
-          "answerText": "무늬",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 무늬를 만들 때 반복해서 그리는 모양의 예시를 모두 찾아 보세요.",
+          "answerText": "동그라미, 세모",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 104,
-              "end": 106
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 4
             },
             {
               "paragraphId": "p2",
-              "start": 43,
-              "end": 45
-            },
-            {
-              "paragraphId": "p2",
-              "start": 90,
-              "end": 92
-            },
-            {
-              "paragraphId": "p2",
-              "start": 106,
-              "end": 108
+              "start": 6,
+              "end": 8
             }
           ],
           "scoring": {
@@ -605,14 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "마음을 ( )하게 해 줍니다.",
-          "answerText": "편안",
-          "answerMatchMode": "EXACT",
+          "prompt": "여러 가지 색을 칠한 모양을 흉내 낸 말을 지문에서 찾아 보세요.",
+          "answerText": "알록달록",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 114,
-              "end": 116
+              "start": 51,
+              "end": 55
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "규칙적인 무늬가 우리 마음을 어떻게 해 준다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "규칙적인 무늬는 마음을 편안하게 해 주어요",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 101,
+              "end": 124
             }
           ],
           "scoring": {

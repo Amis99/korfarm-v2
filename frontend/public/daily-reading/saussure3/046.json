@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "진정 어머니가 일찍 돌아가신 뒤, 질투심 많고 마음씨가 참 차가운 새 왕비를 맞이하게 된 아름다운 공주는?",
+          "prompt": "피부가 눈처럼 하얗고 입술이 앵두처럼 붉은 인물을 지문에서 찾아 쓰시오.",
           "answerText": "백설공주",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -586,9 +586,9 @@
         },
         {
           "id": "q2",
-          "prompt": "세상의 모든 것을 알고 있어 왕비가 매일매일 누가 제일 아름다운지 질문을 던졌던 신비한 물건은 무엇인가요?",
+          "prompt": "새 왕비에게 있었던 신비한 물건을 지문에서 찾아 쓰시오.",
           "answerText": "마법 거울",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -605,13 +605,40 @@
         },
         {
           "id": "q3",
-          "prompt": "백설공주가 자신보다 더 아름답다는 거울의 말을 듣고, 화가 머리끝까지 난 왕비가 몰래 성으로 부른 사람은?",
-          "answerText": "사냥꾼",
-          "answerMatchMode": "EXACT",
+          "prompt": "새 왕비의 마음씨와 질투심을 나타낸 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "참 차갑고",
+            "질투심이 많았습니다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 107,
+              "end": 112
+            },
+            {
+              "paragraphId": "p1",
+              "start": 113,
+              "end": 123
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "화가 머리끝까지 난 왕비가 조용히 부른 사람을 지문에서 찾아 쓰시오.",
+          "answerText": "무서운 사냥꾼",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 105,
+              "start": 101,
               "end": 108
             }
           ],

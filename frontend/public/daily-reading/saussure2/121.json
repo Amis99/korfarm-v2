@@ -561,19 +561,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "마음에 거짓이나 꾸밈이 없이 바르고 곧은 상태는?",
-          "answerText": "정직",
+          "prompt": "나무꾼이 나무를 하다가 도끼를 빠뜨린 곳을 지문에서 찾으시오.",
+          "answerText": "연못가",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 51,
-              "end": 53
-            },
-            {
-              "paragraphId": "p3",
-              "start": 51,
-              "end": 53
+              "paragraphId": "p1",
+              "start": 29,
+              "end": 32
             }
           ],
           "scoring": {
@@ -584,14 +579,50 @@
         },
         {
           "id": "q2",
-          "prompt": "재물이 많아서 살림이 아주 넉넉하고 부유한 사람은?",
-          "answerText": "부자",
+          "prompt": "산신령이 물속에서 처음 들고 나온 번쩍이는 도끼를 지문에서 찾으시오.",
+          "answerText": "금도끼",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 20,
+              "end": 23
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "산신령이 마침내 꺼낸 나무꾼의 진짜 도끼를 지문에서 찾으시오.",
+          "answerText": "낡은 쇠도끼",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 94,
-              "end": 96
+              "start": 9,
+              "end": 15
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "산신령이 감동한 나무꾼의 마음을 나타낸 어구를 지문에서 찾으시오.",
+          "answerText": "정직한 마음",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 51,
+              "end": 57
             }
           ],
           "scoring": {

@@ -766,19 +766,28 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "바다로 흘러간 플라스틱이 잘게 부서져 생긴 작은 조각을 무엇이라고 하나요?",
-          "answerText": "미세 플라스틱",
-          "answerMatchMode": "ANY",
+          "prompt": "플라스틱이 바다에서 문제를 일으키는 과정을 모두 찾으시오.",
+          "answerTexts": [
+            "썩지 않는 성질 때문에 심각한 환경 문제를 일으킨다",
+            "파도에 잘게 부서져 '미세 플라스틱'이 된다",
+            "먹이로 착각되어 바다 생물들의 생명을 위협한다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 91,
-              "end": 98
+              "start": 23,
+              "end": 51
             },
             {
-              "paragraphId": "p2",
-              "start": 8,
-              "end": 15
+              "paragraphId": "p1",
+              "start": 79,
+              "end": 103
+            },
+            {
+              "paragraphId": "p1",
+              "start": 128,
+              "end": 153
             }
           ],
           "scoring": {
@@ -789,14 +798,28 @@
         },
         {
           "id": "q2",
-          "prompt": "미세 플라스틱이 결국 우리의 식탁으로 올라오게 되는 흐름은 무엇인가요?",
-          "answerText": "먹이 사슬",
-          "answerMatchMode": "ANY",
+          "prompt": "미세 플라스틱이 생물과 사람에게 주는 피해를 모두 찾으시오.",
+          "answerTexts": [
+            "소화 기관이 막혀 영양분을 섭취하지 못하고 결국 죽게 된다",
+            "먹이 사슬을 타고 돌고 돌아 결국 우리의 식탁 위로 다시 올라온다는 점",
+            "우리의 건강을 해치고 있는 것"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
+              "start": 21,
+              "end": 53
+            },
+            {
+              "paragraphId": "p2",
               "start": 73,
-              "end": 78
+              "end": 112
+            },
+            {
+              "paragraphId": "p2",
+              "start": 138,
+              "end": 154
             }
           ],
           "scoring": {
@@ -807,14 +830,34 @@
         },
         {
           "id": "q3",
-          "prompt": "카페에서 플라스틱 빨대 대신 사용하는 것은 무엇인가요?",
-          "answerText": "종이 빨대",
-          "answerMatchMode": "ANY",
+          "prompt": "세계 여러 나라의 플라스틱 줄이기 노력을 모두 찾으시오.",
+          "answerTexts": [
+            "일회용 플라스틱 사용을 줄이려는 노력",
+            "플라스틱 빨대 대신 종이 빨대",
+            "비닐봉지 대신 장바구니",
+            "법으로 강력하게 규제"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 74,
+              "start": 28,
+              "end": 48
+            },
+            {
+              "paragraphId": "p3",
+              "start": 63,
               "end": 79
+            },
+            {
+              "paragraphId": "p3",
+              "start": 93,
+              "end": 105
+            },
+            {
+              "paragraphId": "p3",
+              "start": 139,
+              "end": 150
             }
           ],
           "scoring": {
@@ -825,14 +868,22 @@
         },
         {
           "id": "q4",
-          "prompt": "마트에서 비닐봉지 대신 권장하는 것은 무엇인가요?",
-          "answerText": "장바구니",
-          "answerMatchMode": "ANY",
+          "prompt": "푸른 바다를 지키기 위한 작은 실천을 모두 찾으시오.",
+          "answerTexts": [
+            "플라스틱 제품의 사용을 줄이고",
+            "재활용을 생활화하는 작은 실천"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 101,
-              "end": 105
+              "paragraphId": "p4",
+              "start": 32,
+              "end": 48
+            },
+            {
+              "paragraphId": "p4",
+              "start": 49,
+              "end": 65
             }
           ],
           "scoring": {
@@ -843,14 +894,14 @@
         },
         {
           "id": "q5",
-          "prompt": "푸른 바다를 지키기 위해 생활화해야 한다고 한 것은 무엇인가요?",
-          "answerText": "재활용",
+          "prompt": "우리가 다음 세대에게 져야 할 책임을 찾으시오.",
+          "answerText": "다음 세대에게 깨끗하고 생명이 넘치는 바다를 물려주어야 할 책임",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 49,
-              "end": 52
+              "start": 90,
+              "end": 125
             }
           ],
           "scoring": {

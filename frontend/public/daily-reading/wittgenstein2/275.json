@@ -571,30 +571,40 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1행에서 화자가 '내 호올로 어델 가라는 슬픈 신호냐'라고 한 이유로 가장 적절한 것을 고르시오.",
+          "prompt": "처음과 끝에서 반복되는 등불 이미지를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 18
+            },
+            {
+              "paragraphId": "p6",
+              "start": 21,
+              "end": 39
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "차단—한 등불이 하나 비인 하늘에"
+        },
+        {
+          "id": "q2",
+          "prompt": "화자의 길 찾기 질문에 해당하는 표현을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 25,
               "end": 44
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "내 호올로 어델 가라는 슬픈 신호냐"
-        },
-        {
-          "id": "q2",
-          "prompt": "2행에서 '고층'을 '창백한 묘석같이' 비유한 효과로 가장 적절한 것을 고르시오.",
-          "answerRanges": [
+            },
             {
-              "paragraphId": "p2",
-              "start": 23,
-              "end": 25
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 20
             }
           ],
           "scoring": {
@@ -602,12 +612,51 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "고층"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "내 호올로 어델 가라는 슬픈 신호냐",
+            "내 어디로 어떻게 가라는 슬픈 신호기"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3행의 '사념 벙어리 되어 입을 다물다'를 통해 드러나는 화자의 상태로 가장 적절한 것을 고르시오.",
+          "prompt": "2행에서 시간의 늘어짐을 드러내는 긴 줄표가 붙은 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 7
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "긴— 여름 해"
+        },
+        {
+          "id": "q4",
+          "prompt": "2행에서 고층을 무엇에 비유했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 26,
+              "end": 32
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "창백한 묘석"
+        },
+        {
+          "id": "q5",
+          "prompt": "사념이 말을 할 수 없는 상태처럼 제시된 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -624,8 +673,8 @@
           "answerText": "사념 벙어리 되어 입을 다물다"
         },
         {
-          "id": "q4",
-          "prompt": "4행에서 '까닭도 없이 눈물겹고나'에 담긴 정서로 가장 적절한 것을 고르시오.",
+          "id": "q6",
+          "prompt": "거리의 소리에 대해 화자가 느낀 정서를 드러내는 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
@@ -642,31 +691,36 @@
           "answerText": "까닭도 없이 눈물겹고나"
         },
         {
-          "id": "q5",
-          "prompt": "5행에서 '무거운 비애'와 '길게 늘인 그림자'의 관계로 가장 적절한 것을 고르시오.",
+          "id": "q7",
+          "prompt": "화자가 섞여 들어간 대상을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 10
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "공허한 군중의 행렬"
+        },
+        {
+          "id": "q8",
+          "prompt": "화자가 지닌 어두운 정서를 나타내는 표현을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 25,
               "end": 31
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "무거운 비애"
-        },
-        {
-          "id": "q6",
-          "prompt": "6행까지 읽은 뒤 이 시의 전체 정조를 가장 잘 설명한 것을 고르시오.",
-          "answerRanges": [
+            },
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 46
+              "paragraphId": "p5",
+              "start": 41,
+              "end": 59
             }
           ],
           "scoring": {
@@ -674,8 +728,11 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "내 어디로 어떻게 가라는 슬픈 신호기 차단—한 등불이 하나 비인 하늘에 걸리어 있다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "무거운 비애",
+            "길—게 늘인 그림자 이다지 어두워"
+          ]
         }
       ]
     }

@@ -571,111 +571,185 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 보조사 은/는과 주격 조사 이/가를 왜 같은 표지로만 볼 수 없다고 설명하는가?",
+          "prompt": "'이/가'와 '은/는'의 주요 기능 설명을 모두 찾으시오.",
+          "answerTexts": [
+            "문장의 주어를 표시하는 주격 조사",
+            "앞말을 화제로 삼거나 다른 대상과 대조하는 보조사"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 189
+              "start": 56,
+              "end": 74
+            },
+            {
+              "paragraphId": "p1",
+              "start": 95,
+              "end": 122
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "국어에서 '은/는'과 '이/가'는 모두 명사 뒤에 붙지만 기능은 완전히 겹치지 않는다. '이/가'는 문장의 주어를 표시하는 주격 조사로 쓰이는 경우가 많고, '은/는'은 앞말을 화제로 삼거나 다른 대상과 대조하는 보조사로 쓰이는 경우가 많다. 따라서 두 형식을 단순히 서로 바꾸어 쓸 수 있는 표지로 보면 문장의 정보 구조를 놓치게 된다."
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 은/는이 어떤 화제 기능을 한다고 말하는가?",
+          "prompt": "두 조사를 단순히 바꾸어 쓸 수 있는 표지로 볼 때 놓치는 것을 찾으시오.",
+          "answerText": "문장의 정보 구조",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 206
+              "paragraphId": "p1",
+              "start": 171,
+              "end": 180
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "화제란 말하는 이가 앞으로 설명하려는 대상으로 앞세운 성분을 뜻한다. '민수는 오늘 도서관에 갔다'에서 화자는 민수라는 대상을 먼저 세우고 그에 대한 정보를 뒤에서 덧붙인다. 이때 '는'은 민수가 어떤 행동을 했는지에 초점을 맞추기보다, 이야기의 중심 대상을 제시하는 기능을 한다. 그래서 앞문맥에 이미 등장한 대상을 이어 받을 때 '은/는'이 자연스러운 경우가 많다."
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 이/가가 어떤 새 정보와 초점 효과를 드러낸다고 설명하는가?",
+          "prompt": "화제의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "말하는 이가 앞으로 설명하려는 대상으로 앞세운 성분",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 176
+              "paragraphId": "p2",
+              "start": 4,
+              "end": 32
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "반면 '이/가'는 어떤 성분을 새롭게 부각하거나 서술의 초점을 그 성분에 모으는 효과를 낼 수 있다. '누가 문을 열었니?'라는 질문에 '민수가 문을 열었어요'라고 답할 때, 여기서 중요한 정보는 민수라는 행위자이다. 이처럼 '이/가'는 이미 알려진 배경보다 새로 제시되는 정보를 선명하게 드러내는 데 자주 쓰인다."
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 은/는이 대조의 의미를 어떻게 만들어 낸다고 말하는가?",
+          "prompt": "'는'이 이야기에서 하는 기능을 찾으시오.",
+          "answerText": "이야기의 중심 대상을 제시하는 기능",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 218
+              "paragraphId": "p2",
+              "start": 133,
+              "end": 152
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "대조의 의미도 '은/는'을 이해할 때 중요하다. '민수는 갔지만 지수는 남았다'처럼 둘 이상의 대상을 나누어 비교할 때 '은/는'은 서로 다른 항목을 대비시키는 장치가 된다. 이런 경우 '은/는'은 단순한 주제 표지를 넘어서, 화자가 무엇을 기준으로 차이를 보이려 하는지 드러낸다. 따라서 같은 문장이라도 어떤 성분에 '은/는'을 붙이느냐에 따라 화자의 의도와 비교 기준이 달라질 수 있다."
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 비가 온다와 비는 온다의 차이를 어떤 정보 구조로 설명하는가?",
+          "prompt": "'이/가'가 낼 수 있는 효과를 찾으시오.",
+          "answerText": "새롭게 부각하거나 서술의 초점을 그 성분에 모으는 효과",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 215
+              "paragraphId": "p3",
+              "start": 17,
+              "end": 47
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "실제 문장에서는 '은/는'과 '이/가'가 문맥에 따라 교체되기도 하지만, 그 결과는 의미 차이를 만든다. 예를 들어 '비가 온다'는 현상을 새롭게 보고하는 느낌이 강하고, '비는 온다'는 다른 기대와 대비하거나 비라는 요소를 화제로 삼아 설명을 이어 가는 느낌이 강하다. 이 차이는 조사 자체의 의미보다, 문장 안에서 어떤 정보를 이미 공유하고 무엇을 새로 제시하는지에 의해 결정된다."
+          "revealOnWrong": true
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 은/는과 이/가를 구별할 때 무엇까지 함께 살펴야 한다고 정리하는가?",
+          "prompt": "대조 예문에서 나누어 비교되는 두 항목을 모두 찾으시오.",
+          "answerTexts": [
+            "민수는 갔지만",
+            "지수는 남았다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 189
+              "paragraphId": "p4",
+              "start": 28,
+              "end": 35
+            },
+            {
+              "paragraphId": "p4",
+              "start": 36,
+              "end": 43
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "결국 '은/는'과 '이/가'의 구별은 문장 성분 표시만으로 설명되지 않는다. 두 조사는 화제와 초점, 대조와 배경, 새 정보와 옛 정보의 관계를 조정하면서 문장의 해석 방향을 세운다. 그래서 국어 문장을 분석할 때는 겉으로 같은 주어 자리라는 이유만으로 두 조사를 같은 기능으로 처리하지 말고, 앞문맥과 화자의 의도까지 함께 살펴야 한다."
+          "revealOnWrong": true
+        },
+        {
+          "id": "q7",
+          "prompt": "'비가 온다'와 '비는 온다'가 주는 느낌을 모두 찾으시오.",
+          "answerTexts": [
+            "현상을 새롭게 보고하는 느낌",
+            "다른 기대와 대비하거나 비라는 요소를 화제로 삼아 설명을 이어 가는 느낌"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 74,
+              "end": 89
+            },
+            {
+              "paragraphId": "p5",
+              "start": 105,
+              "end": 145
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q8",
+          "prompt": "두 조사가 조정하는 정보 관계를 모두 찾으시오.",
+          "answerTexts": [
+            "화제와 초점",
+            "대조와 배경",
+            "새 정보와 옛 정보의 관계"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 49,
+              "end": 55
+            },
+            {
+              "paragraphId": "p6",
+              "start": 57,
+              "end": 63
+            },
+            {
+              "paragraphId": "p6",
+              "start": 65,
+              "end": 79
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
         }
       ]
     }

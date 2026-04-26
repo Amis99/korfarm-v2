@@ -557,49 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리가 낯선 곳에 갈 때, 하늘에서 땅을 내려다본 넓은 모습을 일정한 비율로 작게 줄여서 나타낸 그림은 무엇인가요?",
-          "answerText": "지도",
-          "answerMatchMode": "EXACT",
+          "prompt": "지도는 무엇을 일정한 비율로 줄여서 그린 그림이라고 했나요?",
+          "answerText": "하늘에서 땅을 내려다본 모습",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 15,
-              "end": 17
-            },
-            {
-              "paragraphId": "p1",
-              "start": 31,
-              "end": 33
-            },
-            {
-              "paragraphId": "p1",
-              "start": 74,
-              "end": 76
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 37,
-              "end": 39
-            },
-            {
-              "paragraphId": "p2",
-              "start": 88,
-              "end": 90
-            },
-            {
-              "paragraphId": "p3",
-              "start": 56,
-              "end": 58
-            },
-            {
-              "paragraphId": "p3",
-              "start": 91,
-              "end": 93
+              "start": 35,
+              "end": 50
             }
           ],
           "scoring": {
@@ -611,9 +576,28 @@
         },
         {
           "id": "q2",
-          "prompt": "지도를 볼 때 목적지의 방향을 파악하기 위해 동쪽, 서쪽, 남쪽, 북쪽을 십자 모양으로 표시해 둔 중요한 기호는 무엇인가요?",
+          "prompt": "지도에 있는 여러 가지 정보는 무엇으로 알기 쉽게 표시되어 있나요?",
+          "answerText": "기호와 색깔",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 89,
+              "end": 95
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "지도를 볼 때 제일 먼저 확인해야 할 것은 무엇인가요?",
           "answerText": "방위표",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -649,20 +633,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "지도에 방위표가 따로 그려져 있지 않을 때, 기본적으로 지도의 제일 위쪽은 동서남북 중에서 어느 방향을 뜻하게 되나요?",
-          "answerText": "북쪽",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "방위표가 없으면 지도에서 위쪽과 오른쪽은 각각 어떤 방향이 된다고 했나요?",
+          "answerText": "지도 위쪽이 북쪽, 오른쪽이 동쪽",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 54,
-              "end": 56
-            },
-            {
-              "paragraphId": "p2",
-              "start": 95,
-              "end": 97
+              "start": 88,
+              "end": 106
             }
           ],
           "scoring": {

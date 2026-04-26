@@ -552,19 +552,29 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리가 구경한 곳은?",
-          "answerText": "동물원",
-          "answerMatchMode": "EXACT",
+          "prompt": "동물원에서 글쓴이가 본 동물 네 가지를 모두 지문에서 찾아 써 보세요",
+          "answerText": "코끼리, 기린, 원숭이, 물개",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 15,
-              "end": 18
+              "start": 57,
+              "end": 60
+            },
+            {
+              "paragraphId": "p1",
+              "start": 90,
+              "end": 92
+            },
+            {
+              "paragraphId": "p1",
+              "start": 125,
+              "end": 128
             },
             {
               "paragraphId": "p2",
-              "start": 131,
-              "end": 134
+              "start": 64,
+              "end": 66
             }
           ],
           "scoring": {
@@ -576,14 +586,14 @@
         },
         {
           "id": "q2",
-          "prompt": "아주 긴 목을 가진 동물?",
-          "answerText": "기린",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구들과 나누어 먹은 도시락이 매우 맛있다는 뜻을 한 단어로 표현했어요. 그 말을 지문에서 찾아 써 보세요",
+          "answerText": "꿀맛",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 90,
-              "end": 92
+              "paragraphId": "p2",
+              "start": 123,
+              "end": 125
             }
           ],
           "scoring": {
@@ -595,14 +605,33 @@
         },
         {
           "id": "q3",
-          "prompt": "나누어 먹은 무엇은 꿀맛!인가요?",
-          "answerText": "도시락",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 동물원에 다음에는 누구와 다시 오고 싶다고 했는지 지문에서 찾아 써 보세요",
+          "answerText": "가족들",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 106,
-              "end": 109
+              "start": 145,
+              "end": 148
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "원숭이들이 나무 사이를 빠르게 날아다니는 모습을 흉내 낸 말을 지문에서 찾아 써 보세요",
+          "answerText": "휙휙",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 138,
+              "end": 140
             }
           ],
           "scoring": {

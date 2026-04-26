@@ -916,14 +916,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "작품 내용을 국가나 단체가 통제하는 행위는 무엇인가요?",
-          "answerText": "예술 검열",
+          "prompt": "예술 검열의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "작품의 내용을 국가나 단체가 통제하는 것",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 5
+              "start": 7,
+              "end": 29
             }
           ],
           "scoring": {
@@ -934,14 +934,22 @@
         },
         {
           "id": "q2",
-          "prompt": "검열 반대 측이 지키려는 핵심 가치는 무엇인가요?",
-          "answerText": "표현의 자유",
-          "answerMatchMode": "ANY",
+          "prompt": "예술 검열에서 충돌하는 가치를 모두 찾으시오.",
+          "answerTexts": [
+            "표현의 자유",
+            "사회적 질서"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 34,
               "end": 40
+            },
+            {
+              "paragraphId": "p1",
+              "start": 42,
+              "end": 48
             },
             {
               "paragraphId": "p3",
@@ -957,14 +965,34 @@
         },
         {
           "id": "q3",
-          "prompt": "검열 찬성 측이 제한의 근거로 내세운 것은 무엇인가요?",
-          "answerText": "사회적 유해성",
-          "answerMatchMode": "ANY",
+          "prompt": "검열 찬성 측이 강조하거나 우려한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "사회적 유해성",
+            "폭력적이거나 선정적인 표현",
+            "모방 범죄",
+            "공동체의 도덕"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 12,
               "end": 19
+            },
+            {
+              "paragraphId": "p2",
+              "start": 28,
+              "end": 42
+            },
+            {
+              "paragraphId": "p2",
+              "start": 44,
+              "end": 49
+            },
+            {
+              "paragraphId": "p2",
+              "start": 62,
+              "end": 69
             }
           ],
           "scoring": {
@@ -975,14 +1003,28 @@
         },
         {
           "id": "q4",
-          "prompt": "창작과 공유를 더욱 자유롭게 만든 매체 환경은 무엇인가요?",
-          "answerText": "디지털 매체",
-          "answerMatchMode": "ANY",
+          "prompt": "검열 반대 측이 우려하거나 요구한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "예술의 자율성",
+            "창의성",
+            "스스로 비판하며 수용해야 한다는 입장"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 32,
-              "end": 38
+              "paragraphId": "p3",
+              "start": 30,
+              "end": 37
+            },
+            {
+              "paragraphId": "p3",
+              "start": 44,
+              "end": 47
+            },
+            {
+              "paragraphId": "p3",
+              "start": 67,
+              "end": 87
             }
           ],
           "scoring": {
@@ -993,10 +1035,30 @@
         },
         {
           "id": "q5",
-          "prompt": "마지막에 서로 존중하며 찾아야 한다고 한 것은 무엇인가요?",
-          "answerText": "균형점",
-          "answerMatchMode": "ANY",
+          "prompt": "현대 예술 검열 논쟁에서 필요하거나 찾아야 할 것을 모두 찾으시오.",
+          "answerTexts": [
+            "디지털 매체",
+            "창작과 공유",
+            "논의와 합의",
+            "균형점"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 32,
+              "end": 38
+            },
+            {
+              "paragraphId": "p4",
+              "start": 44,
+              "end": 50
+            },
+            {
+              "paragraphId": "p4",
+              "start": 73,
+              "end": 79
+            },
             {
               "paragraphId": "p5",
               "start": 70,

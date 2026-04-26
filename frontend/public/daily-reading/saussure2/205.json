@@ -680,19 +680,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "추워하는 분이를 위해 영이가 목에서 풀어 어깨에 걸쳐 준 것은 무엇인가요?",
-          "answerText": "수건",
-          "answerMatchMode": "EXACT",
+          "prompt": "김 아주머니가 서두르지 말라고 한 까닭에 해당하는 말을 지문에서 찾으시오.",
+          "answerText": "발 헛디디면 큰일 난다.",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 331,
-              "end": 333
-            },
-            {
-              "paragraphId": "p3",
-              "start": 107,
-              "end": 109
+              "start": 189,
+              "end": 202
             }
           ],
           "scoring": {
@@ -704,14 +699,14 @@
         },
         {
           "id": "q2",
-          "prompt": "떠내려가는 신발을 붙잡기 위해 영이가 재빨리 집어 든 것은 무엇인가요?",
-          "answerText": "나뭇가지",
-          "answerMatchMode": "EXACT",
+          "prompt": "분이가 추워하자 영이가 자기 목에서 풀어 분이 어깨에 걸쳐 준 것은 무엇인가요?",
+          "answerText": "얇은 수건",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 440,
-              "end": 444
+              "paragraphId": "p1",
+              "start": 328,
+              "end": 333
             }
           ],
           "scoring": {
@@ -723,14 +718,33 @@
         },
         {
           "id": "q3",
-          "prompt": "살짝 까져 있어서 영이가 조심조심 묶어 준 분이의 발 부위는 어디인가요?",
-          "answerText": "발뒤꿈치",
-          "answerMatchMode": "EXACT",
+          "prompt": "강을 건널 때 영이가 분이를 어떻게 이끌었는지 나타난 문장을 찾으시오.",
+          "answerText": "분이 손을 잡고 한 걸음씩 옮겼습니다.",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 167,
+              "end": 188
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "김 아주머니가 아이들에게 오늘 밤 함께 있으라고 당부한 말을 찾으시오.",
+          "answerText": "셋이 같이 있어라.",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 81,
-              "end": 85
+              "start": 283,
+              "end": 293
             }
           ],
           "scoring": {

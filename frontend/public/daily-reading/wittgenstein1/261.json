@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "꽃이 피면 마음 무엇 김제 봄들 건너는데 몸 건너기가 너무 힘겹다?",
+          "prompt": "꽃이 피면 마음의 무엇이 한층 촘촘해지는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 9,
-              "end": 20
+              "end": 12
             }
           ],
           "scoring": {
@@ -585,15 +585,15 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "간격들 한층 촘촘해져"
+          "answerText": "간격들"
         },
         {
           "id": "q2",
-          "prompt": "무엇 져내리는 그 꽃잎 부리러 이 배는 신포 어디쯤에 닿아 헤맨다?",
+          "prompt": "피기도 전에 져내리는 꽃잎의 상태를 나타내는 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
+              "start": 7,
               "end": 11
             }
           ],
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "피기도 전에 봉오리째"
+          "answerText": "봉오리째"
         },
         {
           "id": "q3",
-          "prompt": "저 망해 다 쓸고 온 무엇는 듯 몸 속에 곤두서는 봄 밖의 봄바람!?",
+          "prompt": "1문단에서 '건너는' 움직임이 드러난 표현 두 곳을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 12,
-              "end": 21
+              "paragraphId": "p1",
+              "start": 21,
+              "end": 31
+            },
+            {
+              "paragraphId": "p1",
+              "start": 32,
+              "end": 38
             }
           ],
           "scoring": {
@@ -620,17 +625,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "꽃샘바람 거기 부"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "김제 봄들 건너는데",
+            "몸 건너기가"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "중요한 기준은 무엇인가요?",
+          "prompt": "몸 속에 곤두서는 것으로 표현된 바람을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 12
+              "paragraphId": "p3",
+              "start": 35,
+              "end": 43
             }
           ],
           "scoring": {
@@ -639,16 +647,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "골짜기 비집고 빠져나오"
+          "answerText": "봄 밖의 봄바람"
         },
         {
           "id": "q5",
-          "prompt": "지평도 뿌우연 황산길 타박거리며 간다 마음은 곁가지로 펄럭거리며 덜 핀 무엇 하지만?",
+          "prompt": "4문단에서 화자가 마주친 염소 관련 대상 두 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 20
+              "paragraphId": "p4",
+              "start": 14,
+              "end": 18
+            },
+            {
+              "paragraphId": "p4",
+              "start": 66,
+              "end": 76
             }
           ],
           "scoring": {
@@ -656,17 +669,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지평도 뿌우연 황산길 타박거리며 간다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "염소 떼",
+            "새끼 염소 한 마리"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "무엇은 아지랑이 너머 끝내 닿을 수 없는 항구 몇 개는 더 지워야 한다고 닻이 끊긴 배 한 척,?",
+          "prompt": "새끼 염소가 향하는 듯한 곳으로 제시된 방향을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 12
+              "paragraphId": "p4",
+              "start": 52,
+              "end": 57
             }
           ],
           "scoring": {
@@ -675,7 +691,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "남몰래 출렁거리는 상심"
+          "answerText": "만경 저쪽"
+        },
+        {
+          "id": "q7",
+          "prompt": "마음이 멈칫거리려 하는 대상이 되는 나무를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 36,
+              "end": 43
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "덜 핀 꽃나무"
+        },
+        {
+          "id": "q8",
+          "prompt": "끝내 닿을 수 없다고 한 대상을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 33,
+              "end": 39
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "항구 몇 개"
         }
       ]
     }

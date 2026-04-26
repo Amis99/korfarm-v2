@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "강아지가 ( ) 짖는 소리.",
+          "prompt": "강아지가 짖는 소리를 흉내 낸 말을 지문에서 찾아 보세요.",
           "answerText": "멍멍",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -571,14 +571,19 @@
         },
         {
           "id": "q2",
-          "prompt": "시냇물은 ( ) 흐릅니다.",
-          "answerText": "졸졸",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 모양을 흉내 낸 말의 예시를 모두 찾아 보세요.",
+          "answerText": "훨훨, 반짝반짝",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
+              "paragraphId": "p1",
+              "start": 59,
+              "end": 61
+            },
+            {
               "paragraphId": "p2",
-              "start": 16,
-              "end": 18
+              "start": 1,
+              "end": 5
             }
           ],
           "scoring": {
@@ -590,19 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "말의 ( )를 느껴 보아요.",
-          "answerText": "재미",
-          "answerMatchMode": "EXACT",
+          "prompt": "흉내 내는 말을 쓰면 글이 어떻게 변한다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "글이 생기 있게 변해요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 107,
-              "end": 109
-            },
+              "start": 93,
+              "end": 105
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "말의 재미를 알면 무엇이 기다려진다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "국어 시간이 기다려져요",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 115,
-              "end": 117
+              "start": 122,
+              "end": 134
             }
           ],
           "scoring": {

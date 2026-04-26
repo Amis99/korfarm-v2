@@ -680,71 +680,76 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "길가에서 크게 울던 아이의 곁에는 이 사람이 보이지 않았습니다. 누구일까요?",
-          "answerText": "어른",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 204,
-              "end": 206
-            },
-            {
-              "paragraphId": "p3",
-              "start": 367,
-              "end": 369
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 5,
-            "wrongDeltaSec": -2,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
+        "prompt": "길가에서 크게 울던 아이 곁에 어떤 사람이 보이지 않았는지 지문에서 찾으시오.",
+        "answerText": "그 아이 곁에는 어른이 보이지 않았습니다",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p1",
+            "start": 195,
+            "end": 217
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
         },
-        {
-          "id": "q2",
-          "prompt": "영이와 동수가 분이를 찾으며 뛰어갈 때 사람들 발 사이로 이것이 올라왔습니다. 이것은 무엇일까요?",
-          "answerText": "먼지",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 279,
-              "end": 281
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 5,
-            "wrongDeltaSec": -2,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
+        "revealOnWrong": true
+      },
+      {
+        "id": "q2",
+        "prompt": "분이가 낯선 아이를 보고 한 행동을 지문에서 찾으시오.",
+        "answerText": "분이는 걸음을 멈췄습니다",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p1",
+            "start": 254,
+            "end": 267
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
         },
-        {
-          "id": "q3",
-          "prompt": "분이가 낯선 아이에게 자기의 이것을 안겨 주고 있었습니다. 이것은 무엇일까요?",
-          "answerText": "인형",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 116,
-              "end": 118
-            },
-            {
-              "paragraphId": "p3",
-              "start": 115,
-              "end": 117
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 5,
-            "wrongDeltaSec": -2,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        }
+        "revealOnWrong": true
+      },
+      {
+        "id": "q3",
+        "prompt": "분이가 낯선 아이에게 무엇을 해 주고 있었는지 지문에서 찾으시오.",
+        "answerText": "분이는 자기 인형을 그 아이에게 안겨 주고 있었습니다",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p3",
+            "start": 108,
+            "end": 137
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
+        },
+        "revealOnWrong": true
+      },
+      {
+        "id": "q4",
+        "prompt": "세 아이가 다시 길을 걸을 때 이번에는 어떻게 했는지 지문에서 찾으시오.",
+        "answerText": "이번에는 손을 꼭 잡았습니다",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p4",
+            "start": 267,
+            "end": 282
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
+        },
+        "revealOnWrong": true
+      }
       ]
     }
   }

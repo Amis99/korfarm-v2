@@ -1078,143 +1078,88 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "문장 성분이 자연스럽게 서로 이어지는 관계는?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 3,
-              "end": 4
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 1
-            },
-            {
-              "paragraphId": "p3",
-              "start": 17,
-              "end": 18
-            },
-            {
-              "paragraphId": "p4",
-              "start": 11,
-              "end": 12
-            },
-            {
-              "paragraphId": "p5",
-              "start": 3,
-              "end": 4
-            },
-            {
-              "paragraphId": "p6",
-              "start": 8,
-              "end": 9
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "문장 안의 말들이 문법적·의미적으로 자연스럽게 이어지는 관계를 가리키는 두 글자 단어를 찾으시오",
+          "answerText": "호응",
           "answerMatchMode": "ANY",
-          "answerText": "호"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 3, "end": 5},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p3", "start": 17, "end": 19},
+            {"paragraphId": "p4", "start": 11, "end": 13},
+            {"paragraphId": "p5", "start": 3, "end": 5},
+            {"paragraphId": "p6", "start": 8, "end": 10}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "앞뒤 절의 관계를 이어 주는 말은?",
+          "prompt": "문장에서 행동이나 상태의 주체가 되는 성분을 가리키는 두 글자 단어를 모두 찾으시오",
+          "answerText": "주어",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 103,
-              "end": 107
-            },
-            {
-              "paragraphId": "p5",
-              "start": 108,
-              "end": 112
-            },
-            {
-              "paragraphId": "p6",
-              "start": 68,
-              "end": 72
-            }
+            {"paragraphId": "p1", "start": 47, "end": 49},
+            {"paragraphId": "p2", "start": 18, "end": 20},
+            {"paragraphId": "p2", "start": 48, "end": 50},
+            {"paragraphId": "p2", "start": 100, "end": 102},
+            {"paragraphId": "p5", "start": 44, "end": 46},
+            {"paragraphId": "p5", "start": 56, "end": 58},
+            {"paragraphId": "p6", "start": 59, "end": 61}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "연결 표"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "일이 언제 일어나는지를 나타내는 문법 요소는?",
+          "prompt": "주어가 어떠하다 또는 무엇을 한다는 뜻을 풀어 주는 문장 성분을 가리키는 세 글자 단어를 모두 찾으시오",
+          "answerText": "서술어",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 1
-            },
-            {
-              "paragraphId": "p4",
-              "start": 57,
-              "end": 58
-            },
-            {
-              "paragraphId": "p5",
-              "start": 120,
-              "end": 121
-            },
-            {
-              "paragraphId": "p6",
-              "start": 75,
-              "end": 76
-            }
+            {"paragraphId": "p1", "start": 51, "end": 54},
+            {"paragraphId": "p2", "start": 22, "end": 25},
+            {"paragraphId": "p2", "start": 68, "end": 71},
+            {"paragraphId": "p2", "start": 110, "end": 113},
+            {"paragraphId": "p5", "start": 66, "end": 69},
+            {"paragraphId": "p6", "start": 63, "end": 66}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "시"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "상대나 대상을 높여 드러내는 말은?",
+          "prompt": "행동이나 상태가 일어난 시간이 과거인지 현재인지를 나타내는 두 글자 단어를 모두 찾으시오",
+          "answerText": "시제",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 4,
-              "end": 8
-            }
+            {"paragraphId": "p4", "start": 0, "end": 2},
+            {"paragraphId": "p6", "start": 75, "end": 77}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "높임 표"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "문장의 기본 짜임을 가리키는 말은?",
+          "prompt": "상대를 공경하는 태도를 문장 표현에 드러내는 두 글자 단어를 모두 찾으시오",
+          "answerText": "높임",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 26,
-              "end": 30
-            }
+            {"paragraphId": "p4", "start": 4, "end": 6},
+            {"paragraphId": "p4", "start": 96, "end": 98},
+            {"paragraphId": "p6", "start": 79, "end": 81}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "문장 호응을 점검할 때 가장 먼저 찾으라고 한, 문장의 중심 골격을 가리키는 두 글자 단어를 찾으시오",
+          "answerText": "뼈대",
           "answerMatchMode": "ANY",
-          "answerText": "중심 뼈"
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 29, "end": 31}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

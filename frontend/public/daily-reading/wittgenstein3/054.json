@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 학생회 축제 예산 발표 질의응답 순서 조정 회의와 관련한 회의의 출발 문제를 어떻게 제시하는가?",
+          "prompt": "1문단에서, 학생회장이 아직 정리하지 못했다고 한 사항을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 224
+              "start": 30,
+              "end": 47
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생회장: \"축제 예산 발표 자료는 거의 완성됐는데, 질의응답 순서를 어떻게 배치할지가 아직 정리되지 않았습니다. 지난번 공청회에서는 질문이 초반에 몰려서 뒤쪽 항목 설명이 끊겼으니, 이번에는 발표 흐름을 해치지 않으면서도 질문을 충분히 받는 방식으로 정해야 합니다.\" 총무부장: \"특히 무대 설치비와 초청 공연비는 학생들이 가장 민감하게 보는 항목이라 그 부분 질문을 예상하고 순서를 짜야 합니다.\""
+          "answerText": "질의응답 순서를 어떻게 배치할지"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 제안이나 우려를 어떤 이유와 함께 내놓는가?",
+          "prompt": "1문단에서, 총무부원이 학생들이 가장 민감하게 본다고 한 두 항목을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 201
+              "paragraphId": "p1",
+              "start": 161,
+              "end": 167
+            },
+            {
+              "paragraphId": "p1",
+              "start": 169,
+              "end": 175
             }
           ],
           "scoring": {
@@ -602,17 +607,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "홍보부원: \"저는 발표를 다 끝낸 뒤 질문을 한꺼번에 받는 편이 낫다고 생각합니다. 중간에 질문을 받기 시작하면 시간 관리가 어려워지고, 발표자가 같은 설명을 반복하게 될 수도 있습니다.\" 2학년 대표: \"그런데 예산표 숫자가 많아서 한 번에 끝까지 들으면 앞부분을 잊어버릴 수 있어요. 항목별로 짧게 끊어서 질문을 받아야 청중도 따라오기 쉬울 것 같습니다.\""
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "무대 설치비",
+            "초청 공연비"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단은 논의를 어떤 대안이나 조정안으로 이어 가는가?",
+          "prompt": "2문단에서, 홍보부원이 제안한 질문 배치 방식을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 217
+              "paragraphId": "p2",
+              "start": 10,
+              "end": 34
             }
           ],
           "scoring": {
@@ -621,16 +629,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "총무부장: \"그럼 큰 항목을 세 부분으로 나누는 건 어떨까요? 첫째는 수입 구조, 둘째는 무대와 안전 예산, 셋째는 체험 부스와 홍보 예산으로 묶고, 각 부분 설명 뒤에 질문을 두 개씩 받는 겁니다.\" 학생회장: \"그 방식이면 관심이 큰 예산 항목에서 바로 설명을 보완할 수 있겠네요. 다만 질문이 길어지면 뒤 항목이 줄어들 수 있으니, 사회자가 질문 시간을 끊어 줄 기준도 필요합니다.\""
+          "answerText": "발표를 다 끝낸 뒤 질문을 한꺼번에 받는 편"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 예상 질문·반론·진행 기준을 어떤 방식으로 준비하는가?",
+          "prompt": "2문단에서, 2학년 대표가 예산 숫자가 많아 생길 수 있다고 걱정한 결과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 216
+              "paragraphId": "p2",
+              "start": 144,
+              "end": 155
             }
           ],
           "scoring": {
@@ -639,16 +647,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "방송부장: \"사회 멘트도 미리 정해 두면 좋겠습니다. 질문이 길어질 때는 '핵심 쟁점을 중심으로 다시 말씀해 주시면 답변을 연결하겠습니다'처럼 정중하게 정리하는 문장을 써야 분위기가 거칠어지지 않습니다.\" 생활안전부원: \"예상 질문도 따로 준비해야 합니다. 왜 안전 인력 예산이 작년보다 늘었는지, 공연비를 줄이면 다른 항목을 더 늘릴 수 없는지 같은 질문은 거의 반드시 나올 겁니다.\""
+          "answerText": "앞부분을 잊어버릴 수"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 세부 운영 방안이나 보완 이유를 어떻게 구체화하는가?",
+          "prompt": "3문단에서, 총무부원이 나누자고 한 세 부분을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 225
+              "paragraphId": "p3",
+              "start": 39,
+              "end": 44
+            },
+            {
+              "paragraphId": "p3",
+              "start": 50,
+              "end": 59
+            },
+            {
+              "paragraphId": "p3",
+              "start": 65,
+              "end": 77
             }
           ],
           "scoring": {
@@ -656,17 +674,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학생회장: \"좋습니다. 그럼 발표 자료에는 단순 총액만 넣지 말고, 증가한 항목 옆에 이유를 한 줄씩 붙입시다. 그래야 질문이 들어와도 '설치비 상승' 같은 말만 반복하지 않고 구체적으로 답할 수 있습니다.\" 1학년 대표: \"그리고 학생들이 숫자만 보면 체감이 안 되니까, 작년 대비 증감표를 마지막에 다시 보여 주면 좋겠습니다. 그 표를 질의응답 직전에 띄우면 질문 정리에도 도움이 될 것 같습니다.\""
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "수입 구조",
+            "무대와 안전 예산",
+            "체험 부스와 홍보 예산"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 학생회 축제 예산 발표 질의응답 순서 조정 회의와 관련한 최종 합의를 어떤 실행 계획으로 정리하는가?",
+          "prompt": "4문단에서, 방송부원이 사회 멘트에 넣자고 한 정중한 정리 문장을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 213
+              "paragraphId": "p4",
+              "start": 42,
+              "end": 76
             }
           ],
           "scoring": {
@@ -675,7 +697,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "총무부장: \"정리하면, 발표는 세 부분으로 나누고 각 부분 뒤에 질문 두 개씩 받습니다. 사회자는 질문 시간을 조정하는 멘트를 미리 준비하고, 우리는 안전 예산과 공연비 관련 예상 질문 답변을 따로 적어 두겠습니다.\" 학생회장: \"네, 그 안으로 가겠습니다. 오늘 안에 발표 자료 순서와 사회자 대본을 다시 정리해서 공유하고, 내일은 실제 질의응답처럼 한 번 리허설해 보겠습니다.\""
+          "answerText": "핵심 쟁점을 중심으로 다시 말씀해 주시면 답변을 연결하겠습니다"
+        },
+        {
+          "id": "q7",
+          "prompt": "5문단에서, 발표 자료의 증가 항목 옆에 붙이자고 한 내용을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 48,
+              "end": 56
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "이유를 한 줄씩"
+        },
+        {
+          "id": "q8",
+          "prompt": "6문단에서, 학생회장이 내일까지 실제 질의응답처럼 하겠다고 한 일을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 197,
+              "end": 205
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "한 번 리허설해"
         }
       ]
     }

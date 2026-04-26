@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "마음이 평온하고 조용함?",
-          "answerText": "평화로운",
-          "answerMatchMode": "EXACT",
+          "prompt": "시골 쥐가 서울 쥐의 초대를 받아 도착한 곳을 지문에서 찾으시오.",
+          "answerText": "화려한 도시",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 86,
-              "end": 90
+              "start": 19,
+              "end": 25
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "위험을 이겨내고 견딤은?",
-          "answerText": "무릅쓰고",
-          "answerMatchMode": "EXACT",
+          "prompt": "불안한 마음으로 먹는 진찬보다 시골 쥐가 그리워한 것을 지문에서 찾으시오.",
+          "answerText": "평화로운 일상",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 13,
-              "end": 17
+              "paragraphId": "p1",
+              "start": 86,
+              "end": 93
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "모자람 없이 넉넉한 마음?",
-          "answerText": "만족하며",
-          "answerMatchMode": "EXACT",
+          "prompt": "화려함 뒤에 숨겨진 감정 중 하나로, 긴장과 관련된 말을 지문에서 찾으시오.",
+          "answerText": "긴장감",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 48,
+              "end": 51
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "각자의 자리에서 어떻게 살아가는 지혜를 배웠는지 나타내는 어구를 지문에서 찾으시오.",
+          "answerText": "만족하며 살아가는",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 74,
-              "end": 78
+              "end": 83
             }
           ],
           "scoring": {

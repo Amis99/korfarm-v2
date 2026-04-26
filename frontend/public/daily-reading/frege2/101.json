@@ -556,24 +556,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "어린이의 출입을 제한하는 업소를 무엇이라고 하나요?",
-          "answerText": "노키즈존",
+          "prompt": "노키즈존의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "어린이의 출입을 제한하는 업소",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 4
-            },
-            {
-              "paragraphId": "p1",
-              "start": 47,
-              "end": 51
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 4
+              "start": 6,
+              "end": 22
             }
           ],
           "scoring": {
@@ -584,7 +574,7 @@
         },
         {
           "id": "q2",
-          "prompt": "업주가 노키즈존을 운영하는 이유로 제시한 것은 무엇인가요?",
+          "prompt": "업주가 노키즈존을 운영하는 이유를 찾으시오.",
           "answerText": "조용한 환경",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -602,7 +592,7 @@
         },
         {
           "id": "q3",
-          "prompt": "반대 시각에서 노키즈존을 무엇으로 보나요?",
+          "prompt": "반대 시각에서 노키즈존을 무엇으로 보는지 찾으시오.",
           "answerText": "차별",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -620,14 +610,14 @@
         },
         {
           "id": "q4",
-          "prompt": "노키즈존 논란이 보여 주는 충돌은 무엇과 무엇 사이의 갈등인가요?",
-          "answerText": "배려와 권리의 충돌",
+          "prompt": "노키즈존을 차별로 보는 이유를 찾으시오.",
+          "answerText": "모든 어린이가 소란을 피우는 것은 아니기 때문",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 8,
-              "end": 18
+              "paragraphId": "p2",
+              "start": 23,
+              "end": 48
             }
           ],
           "scoring": {
@@ -638,14 +628,22 @@
         },
         {
           "id": "q5",
-          "prompt": "글에서 문제 해결을 위해 필요하다고 한 것은 무엇인가요?",
-          "answerText": "사회적 대화",
-          "answerMatchMode": "ANY",
+          "prompt": "노키즈존 문제 해결에 필요한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "사회적 대화",
+            "배려를 바탕으로 한 타협점"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 15,
               "end": 21
+            },
+            {
+              "paragraphId": "p4",
+              "start": 30,
+              "end": 44
             }
           ],
           "scoring": {

@@ -557,29 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리가 살고 있는 고장에 무척 오랜 옛날부터 사람들의 입에서 입으로 재미있게 전해 내려오는 것은 무엇인가요?",
-          "answerText": "옛이야기",
-          "answerMatchMode": "EXACT",
+          "prompt": "이야기들이 사람들의 입에서 입으로 전해지며 담고 있는 것을 지문에서 찾으시오.",
+          "answerText": "고장의 특징",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 90,
-              "end": 94
-            },
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 8
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 4
-            },
-            {
-              "paragraphId": "p3",
-              "start": 47,
-              "end": 51
+              "start": 69,
+              "end": 75
             }
           ],
           "scoring": {
@@ -591,9 +576,9 @@
         },
         {
           "id": "q2",
-          "prompt": "고장의 옛이야기가 지명, 바위, 나무 등과 관련되어 사람들에게 더욱 흥미를 끌고 특별하게 만들어 주는 것은 어떤 환경인가요?",
+          "prompt": "고장의 옛이야기가 지명이나 바위, 나무 같은 것과 관련된 경우가 많다고 한 환경을 지문에서 찾으시오.",
           "answerText": "자연환경",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -610,14 +595,41 @@
         },
         {
           "id": "q3",
-          "prompt": "우리 고장에 얽힌 옛이야기를 잘 알고 문화를 배우게 되면 우리 고장에 대해 스스로 자랑스럽게 여기는 마음인 무엇이 커지게 되나요?",
-          "answerText": "자부심",
-          "answerMatchMode": "EXACT",
+          "prompt": "산에 있다고 예로 든 전설의 내용을 지문에서 찾으시오.",
+          "answerText": "호랑이가 나타나 사람을 구했다는 전설",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 51,
+              "end": 71
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "우리가 고장의 옛이야기에 해야 할 일을 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "잘 보존하고",
+            "다음 세대에게 전달해야 합니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 19,
-              "end": 22
+              "start": 53,
+              "end": 59
+            },
+            {
+              "paragraphId": "p3",
+              "start": 60,
+              "end": 76
             }
           ],
           "scoring": {

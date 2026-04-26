@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "무엇 가을이 뚝뚝 떨어진다?",
+          "prompt": "가을을 단풍잎에 빗댄 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 15
+              "start": 6,
+              "end": 18
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "여기저기서 단풍잎 같은 슬픈"
+          "answerText": "단풍잎 같은 슬픈 가을"
         },
         {
           "id": "q2",
-          "prompt": "단풍잎 떨어져 나온 무엇 놓고 나뭇가지 위에 하늘이 펼쳐 있다?",
+          "prompt": "단풍잎 떨어져 나온 자리와 나뭇가지 위의 모습을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 11,
-              "end": 22
+              "start": 16,
+              "end": 25
+            },
+            {
+              "paragraphId": "p2",
+              "start": 34,
+              "end": 43
             }
           ],
           "scoring": {
@@ -602,17 +607,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "자리마다 봄을 마련해"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "봄을 마련해 놓고",
+            "하늘이 펼쳐 있다"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "무엇 보려면 눈썹에 파란 물감이 든다?",
+          "prompt": "눈썹과 손바닥에 든다고 반복되는 색채 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 11
+              "start": 20,
+              "end": 25
+            },
+            {
+              "paragraphId": "p3",
+              "start": 56,
+              "end": 61
             }
           ],
           "scoring": {
@@ -621,16 +634,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "가만히 하늘을 들여다"
+          "answerText": "파란 물감"
         },
         {
           "id": "q4",
-          "prompt": "중요한 기준은 무엇인가요?",
+          "prompt": "손금에 흐른다고 반복되는 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 11
+              "start": 21,
+              "end": 31
+            },
+            {
+              "paragraphId": "p4",
+              "start": 33,
+              "end": 43
             }
           ],
           "scoring": {
@@ -639,11 +657,11 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "다시 손바닥을 들여다"
+          "answerText": "맑은 강물이 흐르고"
         },
         {
           "id": "q5",
-          "prompt": "강물 속에는 사랑처럼 슬픈 얼굴 ― 무엇이 어린다?",
+          "prompt": "강물 속에 어린 얼굴은 누구의 얼굴인지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
@@ -666,12 +684,12 @@
         },
         {
           "id": "q6",
-          "prompt": "무엇은 황홀히 눈을 감아 본다?",
+          "prompt": "소년이 마지막에 하는 행동을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 2
+              "start": 4,
+              "end": 16
             }
           ],
           "scoring": {
@@ -680,7 +698,48 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "소년"
+          "answerText": "황홀히 눈을 감아 본다"
+        },
+        {
+          "id": "q7",
+          "prompt": "얼굴을 사랑에 빗댄 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 7,
+              "end": 17
+            },
+            {
+              "paragraphId": "p6",
+              "start": 32,
+              "end": 42
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "사랑처럼 슬픈 얼굴"
+        },
+        {
+          "id": "q8",
+          "prompt": "6문단에서 그래도 흘러간다고 한 대상과 움직임을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 22,
+              "end": 31
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "맑은 강물은 흘러"
         }
       ]
     }

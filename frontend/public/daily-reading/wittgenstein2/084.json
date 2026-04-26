@@ -571,12 +571,42 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "본용언 뒤에서 앞말의 뜻을 보태는 말을 무엇이라고 하는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 176
+              "end": 5
+            },
+            {
+              "paragraphId": "p2",
+              "start": 15,
+              "end": 20
+            },
+            {
+              "paragraphId": "p3",
+              "start": 31,
+              "end": 36
+            },
+            {
+              "paragraphId": "p4",
+              "start": 38,
+              "end": 43
+            },
+            {
+              "paragraphId": "p5",
+              "start": 172,
+              "end": 177
+            },
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 5
+            },
+            {
+              "paragraphId": "p6",
+              "start": 117,
+              "end": 122
             }
           ],
           "scoring": {
@@ -585,16 +615,31 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "보조 용언은 본용언 뒤에서 앞말의 뜻을 보충하며 가능, 시도, 완료, 지속 같은 문법적 의미를 덧붙이는 용언이다. '읽어 보다', '적어 두다', '잡아 주다'에서 뒤 요소가 바로 그 예다. 겉으로는 두 용언이 나란히 놓인 것처럼 보이지만, 실제로는 앞말의 동작이나 상태를 더 구체적으로 조정해 주는 기능을 맡는다."
+          "answerText": "보조 용언"
         },
         {
           "id": "q2",
-          "prompt": "2문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "1문단에 제시된 보조 용언 예시를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 156
+              "paragraphId": "p1",
+              "start": 64,
+              "end": 71
+            },
+            {
+              "paragraphId": "p5",
+              "start": 38,
+              "end": 45
+            },
+            {
+              "paragraphId": "p1",
+              "start": 73,
+              "end": 80
+            },
+            {
+              "paragraphId": "p1",
+              "start": 82,
+              "end": 89
             }
           ],
           "scoring": {
@@ -602,17 +647,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "한글 맞춤법에서는 본용언과 보조 용언을 띄어 쓰는 것을 원칙으로 삼는다. 따라서 '먹어 보다', '정리해 두다', '도와 주다'처럼 적는 형태가 기본형이다. 이렇게 띄어 쓰면 앞말이 독립적인 서술 의미를 지니고 있고, 뒷말이 그 의미를 보조한다는 구조가 비교적 분명하게 드러난다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'읽어 보다'",
+            "'적어 두다'",
+            "'잡아 주다'"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "본용언과 보조 용언을 어떻게 쓰는 것이 원칙인지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 170
+              "paragraphId": "p2",
+              "start": 22,
+              "end": 33
             }
           ],
           "scoring": {
@@ -621,16 +670,66 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "다만 모든 경우에 반드시 띄어 써야 하는 것은 아니다. 보조 용언은 앞말과 결합이 매우 굳어지면 붙여쓰기도 허용된다. 그래서 '먹어보다', '정리해두다', '도와주다'처럼 적은 형태도 규범상 허용될 수 있다. 이때 핵심은 띄어쓰기가 기본이라는 점이며, 붙여쓰기는 예외적 허용이라는 점을 잊지 않는 것이다."
+          "answerText": "띄어 쓰는 것을 원칙"
         },
         {
           "id": "q4",
-          "prompt": "4문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "2문단에 제시된 기본형 예시를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 45,
+              "end": 52
+            },
+            {
+              "paragraphId": "p2",
+              "start": 54,
+              "end": 62
+            },
+            {
+              "paragraphId": "p2",
+              "start": 64,
+              "end": 71
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'먹어 보다'",
+            "'정리해 두다'",
+            "'도와 주다'"
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "결합이 매우 굳어지면 허용되는 표기 방식을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 54,
+              "end": 64
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "붙여쓰기도 허용된다"
+        },
+        {
+          "id": "q6",
+          "prompt": "붙여쓰기 허용과 무엇을 구별해야 한다고 했는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 0,
-              "end": 199
+              "end": 24
             }
           ],
           "scoring": {
@@ -639,16 +738,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "붙여쓰기 허용과 단일어 여부는 구별해야 한다. 어떤 표현은 본용언과 보조 용언의 결합으로 보이지만, 실제로는 사전에 한 낱말로 굳어 올라 독립된 단어처럼 다뤄지기도 한다. 이런 경우에는 단순히 '띄어쓰기 예외'로 보기보다, 앞말과 뒷말이 결합해 새로운 어휘가 형성된 것으로 판단해야 한다. 결국 표기는 문장 속 기능과 사전적 굳어짐을 함께 고려해 결정된다."
+          "answerText": "붙여쓰기 허용과 단일어 여부는 구별해야 한다"
         },
         {
-          "id": "q5",
-          "prompt": "5문단을 이해한 내용으로 가장 적절한 것은?",
+          "id": "q7",
+          "prompt": "실제 글쓰기 예시로 든 두 표현을 모두 찾으시오.",
           "answerRanges": [
             {
+              "paragraphId": "p1",
+              "start": 64,
+              "end": 71
+            },
+            {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 212
+              "start": 38,
+              "end": 45
+            },
+            {
+              "paragraphId": "p5",
+              "start": 76,
+              "end": 82
             }
           ],
           "scoring": {
@@ -656,17 +765,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "실제 글쓰기에서는 의미 구분을 위해 띄어쓰기를 택하는 경우가 많다. '읽어 보다'라고 쓰면 실제로 시도해 본다는 보조 의미가 살아나고, '살펴보다'처럼 이미 굳어진 단어는 하나의 본용언으로 읽히기 쉽다. 따라서 표기를 정할 때는 단순히 소리의 자연스러움만 볼 것이 아니라, 뒤 요소가 앞말의 의미를 보충하는 보조 용언인지, 아니면 하나의 어휘로 굳은 본용언인지 따져 보아야 한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'읽어 보다'",
+            "'살펴보다'"
+          ]
         },
         {
-          "id": "q6",
-          "prompt": "6문단을 이해한 내용으로 가장 적절한 것은?",
+          "id": "q8",
+          "prompt": "보조 용언 표기를 따질 때 함께 살펴야 하는 세 요소를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 195
+              "start": 158,
+              "end": 183
             }
           ],
           "scoring": {
@@ -675,7 +787,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "보조 용언의 표기는 한국어 문장에서 의미 층위를 드러내는 중요한 장치다. 띄어쓰기를 원칙으로 하면서도 붙여쓰기를 허용하는 이유는 실제 언어생활에서 결합의 긴밀함 정도가 다양하기 때문이다. 따라서 국어 문법에서 보조 용언을 다룰 때는 '무조건 붙인다'거나 '무조건 띄운다'가 아니라, 기본 원칙과 허용 조건, 그리고 단일어화 여부를 함께 살펴야 한다."
+          "answerText": "기본 원칙과 허용 조건, 그리고 단일어화 여부"
         }
       ]
     }

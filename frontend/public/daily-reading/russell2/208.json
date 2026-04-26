@@ -1039,188 +1039,81 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "대상을 차례로 풀어 밝히는 글은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 42,
-              "end": 44
-            },
-            {
-              "paragraphId": "p2",
-              "start": 53,
-              "end": 55
-            },
-            {
-              "paragraphId": "p3",
-              "start": 80,
-              "end": 82
-            },
-            {
-              "paragraphId": "p4",
-              "start": 116,
-              "end": 118
-            },
-            {
-              "paragraphId": "p6",
-              "start": 150,
-              "end": 152
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "처음 쓴 뒤 아직 다듬지 않은 글을 가리키는 말을 본문에서 찾으시오",
+          "answerText": "초고",
           "answerMatchMode": "ANY",
-          "answerText": "설명"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 3, "end": 5},
+            {"paragraphId": "p5", "start": 3, "end": 5},
+            {"paragraphId": "p6", "start": 79, "end": 81}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '이동하'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 17,
-              "end": 20
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "대상을 풀어 밝혀 알리려고 쓴 글을 가리키는 말을 본문에서 찾으시오",
+          "answerText": "설명문",
           "answerMatchMode": "ANY",
-          "answerText": "이동하"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 42, "end": 45},
+            {"paragraphId": "p6", "start": 150, "end": 153}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "체험한 내용을 적는 표는?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 16,
-              "end": 18
-            },
-            {
-              "paragraphId": "p1",
-              "start": 87,
-              "end": 89
-            },
-            {
-              "paragraphId": "p2",
-              "start": 42,
-              "end": 44
-            },
-            {
-              "paragraphId": "p3",
-              "start": 28,
-              "end": 30
-            },
-            {
-              "paragraphId": "p3",
-              "start": 122,
-              "end": 124
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p4",
-              "start": 131,
-              "end": 133
-            },
-            {
-              "paragraphId": "p5",
-              "start": 17,
-              "end": 19
-            },
-            {
-              "paragraphId": "p5",
-              "start": 90,
-              "end": 92
-            },
-            {
-              "paragraphId": "p6",
-              "start": 11,
-              "end": 13
-            },
-            {
-              "paragraphId": "p6",
-              "start": 27,
-              "end": 29
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "사람이 오가거나 움직이는 길의 흐름을 가리키는 말을 본문에서 찾으시오",
+          "answerText": "동선",
           "answerMatchMode": "ANY",
-          "answerText": "체험"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 38, "end": 40}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "장치를 손으로 움직여 다루는 일은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 6,
-              "end": 7
-            },
-            {
-              "paragraphId": "p3",
-              "start": 56,
-              "end": 57
-            },
-            {
-              "paragraphId": "p4",
-              "start": 11,
-              "end": 12
-            },
-            {
-              "paragraphId": "p5",
-              "start": 21,
-              "end": 22
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "전시장 안에 마련된 작은 전시 공간이나 칸을 가리키는 말을 본문에서 찾으시오",
+          "answerText": "부스",
           "answerMatchMode": "ANY",
-          "answerText": "조"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 90, "end": 92},
+            {"paragraphId": "p2", "start": 93, "end": 95},
+            {"paragraphId": "p3", "start": 24, "end": 26},
+            {"paragraphId": "p3", "start": 38, "end": 40},
+            {"paragraphId": "p3", "start": 73, "end": 75},
+            {"paragraphId": "p4", "start": 25, "end": 27},
+            {"paragraphId": "p5", "start": 14, "end": 16},
+            {"paragraphId": "p5", "start": 93, "end": 95}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "처음 다듬기 전의 글은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 3,
-              "end": 4
-            },
-            {
-              "paragraphId": "p5",
-              "start": 3,
-              "end": 4
-            },
-            {
-              "paragraphId": "p6",
-              "start": 79,
-              "end": 80
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "학생들이 강당에 모여 가장 먼저 들은 것을 본문에서 찾으시오",
+          "answerText": "전체 안내",
           "answerMatchMode": "ANY",
-          "answerText": "초"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 15, "end": 20}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "과학 전시 체험 소개 글이 갖추어야 할 세 단계를 본문에서 찾으시오",
+          "answerText": "준비 단계, 체험 단계, 발표 단계",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p6", "start": 20, "end": 25},
+            {"paragraphId": "p6", "start": 27, "end": 32},
+            {"paragraphId": "p6", "start": 34, "end": 39}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

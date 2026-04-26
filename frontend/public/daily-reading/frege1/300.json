@@ -913,14 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "회의를 진행한 반장의 이름은 무엇인가요?",
-          "answerText": "김지수",
+          "prompt": "회의의 목적을 설명한 부분을 찾으시오.",
+          "answerText": "모두가 즐겁고 안전하게 체험학습을 다녀오는 것",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 51,
-              "end": 54
+              "start": 141,
+              "end": 166
             }
           ],
           "scoring": {
@@ -931,14 +931,14 @@
         },
         {
           "id": "q2",
-          "prompt": "친한 친구들과 함께 모둠을 만들면 더 즐거울 것이라고 주장한 학생은 누구인가요?",
-          "answerText": "이민호",
+          "prompt": "먼저 나온 모둠 편성 의견을 찾으시오.",
+          "answerText": "스스로 모둠을 정하자는 의견",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 28,
-              "end": 31
+              "start": 4,
+              "end": 19
             }
           ],
           "scoring": {
@@ -949,14 +949,15 @@
         },
         {
           "id": "q3",
-          "prompt": "친한 친구들끼리만 모이면 소외되는 친구가 생길까 걱정된다고 말한 학생은 누구인가요?",
-          "answerText": "정우진",
+          "prompt": "관심사가 비슷한 친구들끼리 모일 때 쉬워진다고 한 것을 찾으시오.",
+          "answerText": "활동 계획을 세우기 쉬울 것",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 36,
-              "end": 39
+              "paragraphId": "p2",
+              "start": 110,
+              "end": 125
             }
           ],
           "scoring": {
@@ -967,14 +968,22 @@
         },
         {
           "id": "q4",
-          "prompt": "반장이 두 가지 장점을 섞어 제안한 해결책은 무엇이라고 할 수 있나요?",
-          "answerText": "절충안",
-          "answerMatchMode": "ANY",
+          "prompt": "선생님이 정해주는 모둠을 유지하자는 쪽의 이유를 모두 찾으시오.",
+          "answerTexts": [
+            "소외되는 친구가 생길까 봐",
+            "새롭게 친해질 좋은 기회"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 119,
-              "end": 122
+              "paragraphId": "p3",
+              "start": 58,
+              "end": 72
+            },
+            {
+              "paragraphId": "p3",
+              "start": 108,
+              "end": 121
             }
           ],
           "scoring": {
@@ -985,14 +994,22 @@
         },
         {
           "id": "q5",
-          "prompt": "학생들이 이번 회의를 통해 배웠다고 한 과정은 어떤 과정인가요?",
-          "answerText": "민주적인 과정",
-          "answerMatchMode": "ANY",
+          "prompt": "반장이 제안한 절충안의 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "모둠을 스스로 구성하되",
+            "선생님과 함께 최종 모둠을 확인하자는 것"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 184,
-              "end": 191
+              "start": 49,
+              "end": 61
+            },
+            {
+              "paragraphId": "p4",
+              "start": 83,
+              "end": 105
             }
           ],
           "scoring": {

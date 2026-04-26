@@ -913,24 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "일어난 차례에 맞추어 글을 쓰거나 말하는 방법을 무엇이라고 하나요?",
-          "answerText": "시간 순서 설명",
+          "prompt": "시간 순서 설명의 뜻을 찾으시오.",
+          "answerText": "일어난 순서에 맞추어 글을 쓰거나 말하는 방법",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 248,
-              "end": 256
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 8
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 8
+              "start": 221,
+              "end": 246
             }
           ],
           "scoring": {
@@ -941,19 +931,28 @@
         },
         {
           "id": "q2",
-          "prompt": "글의 흐름을 알려주는 표지판 같은 말을 무엇이라고 했나요?",
-          "answerText": "시간 표현 단어",
-          "answerMatchMode": "ANY",
+          "prompt": "하루의 시간을 나타내는 말의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "아침 일찍",
+            "점심을 먹고 난 후",
+            "해가 지는 저녁 무렵"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 44,
-              "end": 52
+              "start": 78,
+              "end": 83
             },
             {
               "paragraphId": "p2",
-              "start": 234,
-              "end": 242
+              "start": 85,
+              "end": 95
+            },
+            {
+              "paragraphId": "p2",
+              "start": 97,
+              "end": 108
             }
           ],
           "scoring": {
@@ -964,19 +963,14 @@
         },
         {
           "id": "q3",
-          "prompt": "라면이나 종이접기 방법을 알려주는 글을 지문에서는 무엇이라고 했나요?",
-          "answerText": "설명서",
+          "prompt": "차례를 나타내는 이어 주는 말을 한꺼번에 보여 주는 부분을 찾으시오.",
+          "answerText": "먼저, 그다음에는, 마지막으로",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 84,
-              "end": 87
-            },
-            {
-              "paragraphId": "p3",
-              "start": 229,
-              "end": 232
+              "paragraphId": "p2",
+              "start": 147,
+              "end": 163
             }
           ],
           "scoring": {
@@ -987,13 +981,27 @@
         },
         {
           "id": "q4",
-          "prompt": "현장 체험 학습을 다녀와서 쓰는 글의 예로 든 것은 무엇인가요?",
-          "answerText": "보고서",
-          "answerMatchMode": "ANY",
+          "prompt": "생활 속 시간 순서 글의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "맛있는 라면을 끓이거나 예쁜 종이접기를 하는 방법을 적은 설명서",
+            "하루 동안 겪은 일과 느낀 점을 기록하는 일기장",
+            "현장 체험 학습을 다녀와서 쓰는 보고서"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 189,
+              "start": 52,
+              "end": 87
+            },
+            {
+              "paragraphId": "p3",
+              "start": 142,
+              "end": 168
+            },
+            {
+              "paragraphId": "p3",
+              "start": 171,
               "end": 192
             }
           ],
@@ -1005,14 +1013,22 @@
         },
         {
           "id": "q5",
-          "prompt": "시간 순서대로 쓰는 훈련을 하면 커진다고 한 능력은 무엇인가요?",
-          "answerText": "능력",
-          "answerMatchMode": "ANY",
+          "prompt": "시간 순서대로 쓰는 훈련이 주는 도움을 모두 찾으시오.",
+          "answerTexts": [
+            "머릿속에 뒤엉킨 복잡한 생각과 기억들을 깔끔하게 정리하는 똑똑한 능력이 커집니다",
+            "내가 빠뜨린 중요한 정보가 무엇인지도 금방 쉽게 찾아낼 수 있습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 72,
-              "end": 74
+              "start": 36,
+              "end": 80
+            },
+            {
+              "paragraphId": "p4",
+              "start": 107,
+              "end": 144
             }
           ],
           "scoring": {

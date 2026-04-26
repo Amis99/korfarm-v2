@@ -1039,7 +1039,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "처음으로 써 본 글은?",
+          "prompt": "정식으로 다듬기 전에 처음으로 써 본 원고를 가리키는 말을 찾으시오",
+          "answerText": "초고",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -1058,16 +1060,17 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "초고"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "사람이 오가며 움직이는 길은?",
+          "prompt": "사람이나 사물이 움직여 지나가는 길을 뜻하는 말을 찾으시오",
+          "answerText": "동선",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -1076,44 +1079,17 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "동선"
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "마음에 흡족한 정도는?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 30,
-              "end": 33
-            },
-            {
-              "paragraphId": "p3",
-              "start": 54,
-              "end": 57
-            },
-            {
-              "paragraphId": "p3",
-              "start": 103,
-              "end": 106
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글의 뜻이나 자료의 의미를 풀어서 이해하는 일을 가리키는 말을 찾으시오",
+          "answerText": "해석",
           "answerMatchMode": "ANY",
-          "answerText": "만족도"
-        },
-        {
-          "id": "q4",
-          "prompt": "뜻을 풀어 이해하는 일은?",
           "answerRanges": [
             {
               "paragraphId": "p4",
@@ -1127,30 +1103,78 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "해석"
+          "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "여러 부분이 짜여 있는 전체 틀은?",
+          "id": "q4",
+          "prompt": "내용에서 가장 중요하고 중심이 되는 부분을 가리키는 말을 찾으시오",
+          "answerText": "핵심",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 96,
-              "end": 98
+              "paragraphId": "p4",
+              "start": 170,
+              "end": 172
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "행사 운영 시간 동안 학생회가 맡았던 두 가지 일에 해당하는 표현을 모두 찾으시오",
+          "answerText": "동선 정리 / 안내 방송",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 72,
+              "end": 77
+            },
+            {
+              "paragraphId": "p2",
+              "start": 79,
+              "end": 84
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "행사가 끝난 뒤 참여 학생을 대상으로 만족도 설문을 받은 주체를 찾으시오",
+          "answerText": "학생회",
           "answerMatchMode": "ANY",
-          "answerText": "구조"
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 67,
+              "end": 70
+            },
+            {
+              "paragraphId": "p3",
+              "start": 9,
+              "end": 12
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

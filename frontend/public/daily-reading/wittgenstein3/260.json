@@ -571,12 +571,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "prompt": "허구 이야기를 읽을 때 독자가 사실이 아님을 알면서도 보이는 감정 반응을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 185
+              "start": 36,
+              "end": 40
+            },
+            {
+              "paragraphId": "p1",
+              "start": 41,
+              "end": 45
+            },
+            {
+              "paragraphId": "p1",
+              "start": 46,
+              "end": 58
             }
           ],
           "scoring": {
@@ -584,17 +594,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "허구 이야기를 읽을 때 독자는 그 내용이 사실이 아님을 알면서도 슬퍼하고 긴장하며 인물의 운명을 걱정한다. 이 현상은 허구를 단순한 거짓말로 볼 수 없게 만든다. 왜 실제로 존재하지 않는 사건과 인물에 대해 우리는 진지한 감정 반응을 보이는가라는 질문은, 허구 문장이 어떤 방식으로 의미를 전달하는지에 대한 철학적 논의로 이어진다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "슬퍼하고",
+            "긴장하며",
+            "인물의 운명을 걱정한다"
+          ]
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 핵심 원리나 기준을 어떻게 설명하는가?",
+          "prompt": "허구를 단순한 거짓말로 볼 수 없게 만드는 독자의 반응을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 233
+              "paragraphId": "p1",
+              "start": 17,
+              "end": 58
             }
           ],
           "scoring": {
@@ -603,16 +617,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "월턴은 허구를 '믿는 체하기 놀이'로 해석한다. 이 관점에서 소설이나 연극 속 문장은 참이나 거짓을 판정하는 진술이라기보다, 독자가 특정한 상상 놀이에 참여하도록 만드는 소품에 가깝다. 독자는 문장이 현실을 보고한다고 믿는 것이 아니라, 그 문장을 놀이 규칙 안에서 사실인 것처럼 받아들이며 반응한다. 그래서 허구 감상은 속아 넘어가는 일이 아니라, 사실이 아님을 알면서도 일정한 방식으로 수용하는 참여 행위가 된다."
+          "answerText": "그 내용이 사실이 아님을 알면서도 슬퍼하고 긴장하며 인물의 운명을 걱정한다"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 그 원리의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "월턴이 허구를 어떻게 해석하는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 198
+              "paragraphId": "p2",
+              "start": 8,
+              "end": 19
             }
           ],
           "scoring": {
@@ -621,16 +635,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 설명은 왜 관객이 배우의 외침에 실제 위험이 없다는 것을 알면서도 긴장하는지 잘 보여 준다. 독자는 허구 속 내용을 현실 명제처럼 단정하지 않지만, 놀이의 규칙이 허용하는 범위 안에서 그 상황을 따라가며 슬픔이나 공포를 느낀다. 즉 감정 반응의 직접적 계기는 현실 믿음이 아니라, '지금은 그렇게 받아들이며 따라가야 한다'는 가상적 수용 태도에 있다."
+          "answerText": "'믿는 체하기 놀이'"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
+          "prompt": "월턴 관점에서 소설이나 연극 속 문장은 무엇에 가깝다고 했는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 238
+              "paragraphId": "p2",
+              "start": 70,
+              "end": 97
             }
           ],
           "scoring": {
@@ -639,16 +653,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "반면 불완전 명제 이론은 허구 문장도 아무 의미가 없는 소품이 아니라, 비록 일부 자리가 비어 있더라도 일정한 의미론적 내용을 담는다고 본다. 허구 이름이 현실 대상을 정확히 가리키지 못하더라도 문장 전체는 불완전한 명제의 형태로 이해될 수 있으며, 독자는 바로 그 불완전한 내용을 인식하기 때문에 감정적으로 반응할 수 있다는 것이다. 이 입장은 허구 감상의 출발점에 상상 놀이뿐 아니라 인식 가능한 내용 구조가 있다고 본다."
+          "answerText": "독자가 특정한 상상 놀이에 참여하도록 만드는 소품"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 이 주제의 효과나 쟁점을 어떤 방향으로 확장하는가?",
+          "prompt": "3문단에서 감정 반응의 직접적 계기로 대비되는 두 항목을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 213
+              "paragraphId": "p3",
+              "start": 147,
+              "end": 152
+            },
+            {
+              "paragraphId": "p3",
+              "start": 159,
+              "end": 193
             }
           ],
           "scoring": {
@@ -656,17 +675,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "두 입장은 서로 대립하지만 완전히 무관하지는 않다. 믿는 체하기 놀이 이론은 허구 수용의 태도, 즉 독자가 어떤 방식으로 허구에 참여하는지를 잘 설명하고, 불완전 명제 이론은 그 참여가 무엇을 대상으로 이루어지는지를 설명하려 한다. 전자는 허구가 현실 판단과 다른 규칙을 가진다는 점을 강조하고, 후자는 허구 문장에도 감정과 이해를 촉발할 만한 내용적 골격이 남아 있음을 강조한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "현실 믿음",
+            "'지금은 그렇게 받아들이며 따라가야 한다'는 가상적 수용 태도"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 앞선 논의를 어떤 의미로 정리하는가?",
+          "prompt": "불완전 명제 이론이 허구 문장에 담긴다고 보는 것을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 254
+              "paragraphId": "p4",
+              "start": 58,
+              "end": 69
             }
           ],
           "scoring": {
@@ -675,7 +697,59 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 허구 이야기의 이해는 '놀이냐 명제냐'의 단순한 선택으로 끝나지 않는다. 독자는 허구 문장을 현실 보고로 받아들이지는 않지만, 그렇다고 완전히 무의미한 신호로 대하지도 않는다. 허구 감상은 한편으로는 믿는 체하기의 규칙 속에 참여하는 행위이며, 다른 한편으로는 불완전하더라도 어떤 상황과 관계를 파악하는 인식 행위이기도 하다. 이 두 관점을 함께 놓고 볼 때, 허구가 왜 거짓말과 다르면서도 강한 정서적 힘을 가지는지 더 입체적으로 이해할 수 있다."
+          "answerText": "일정한 의미론적 내용"
+        },
+        {
+          "id": "q7",
+          "prompt": "5문단에서 전자와 후자가 각각 강조하는 내용을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 134,
+              "end": 158
+            },
+            {
+              "paragraphId": "p5",
+              "start": 170,
+              "end": 206
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "허구가 현실 판단과 다른 규칙을 가진다는 점",
+            "허구 문장에도 감정과 이해를 촉발할 만한 내용적 골격이 남아 있음"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "허구 감상이 한편으로는 무엇이고 다른 한편으로는 무엇인지 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 115,
+              "end": 136
+            },
+            {
+              "paragraphId": "p6",
+              "start": 149,
+              "end": 178
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "믿는 체하기의 규칙 속에 참여하는 행위",
+            "불완전하더라도 어떤 상황과 관계를 파악하는 인식 행위"
+          ]
         }
       ]
     }

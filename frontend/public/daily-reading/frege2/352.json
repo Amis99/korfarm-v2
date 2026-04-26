@@ -884,7 +884,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "바다 생태계를 지키기 위해 특별히 지정된 곳은 어디인가요?",
+          "prompt": "'바다 생태계를 지키기 위해 특별히 지정된 곳'을 뜻하는 표현을 찾으시오.",
           "answerText": "해양 보호 구역",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -912,14 +912,22 @@
         },
         {
           "id": "q2",
-          "prompt": "해양 보호 구역에서 엄격히 제한되는 활동은 무엇인가요?",
-          "answerText": "낚시",
-          "answerMatchMode": "ANY",
+          "prompt": "해양 보호 구역에서 제한되거나 금지되는 행위를 모두 찾으시오.",
+          "answerTexts": [
+            "낚시나 그물로 물고기를 잡는 활동",
+            "쓰레기를 버리거나 바다 환경을 오염시키는 행위"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 44,
-              "end": 46
+              "end": 62
+            },
+            {
+              "paragraphId": "p1",
+              "start": 77,
+              "end": 102
             }
           ],
           "scoring": {
@@ -930,14 +938,14 @@
         },
         {
           "id": "q3",
-          "prompt": "해양 보호 구역이 안전한 번식과 성장을 돕는 것은 무엇인가요?",
-          "answerText": "바다 생물",
+          "prompt": "해양 보호 구역이 바다 생물에게 어떤 역할을 하는지 나타낸 문장을 찾으시오.",
+          "answerText": "해양 보호 구역은 바다 생물의 안전한 번식과 성장을 돕는 역할을 한다.",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 10,
-              "end": 15
+              "start": 0,
+              "end": 39
             }
           ],
           "scoring": {
@@ -948,19 +956,14 @@
         },
         {
           "id": "q4",
-          "prompt": "보호 구역 지정이 장기적으로 이익을 가져다준다고 한 사람들은 누구인가요?",
-          "answerText": "어민들",
+          "prompt": "보호 구역 밖에서 어민들이 잡을 수 있는 물고기가 많아지는 이유를 찾으시오.",
+          "answerText": "보호 구역 안에서 늘어난 물고기들이 주변 바다로 이동하기 때문이다.",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 17,
-              "end": 20
-            },
-            {
-              "paragraphId": "p3",
-              "start": 91,
-              "end": 94
+              "start": 37,
+              "end": 74
             }
           ],
           "scoring": {
@@ -971,14 +974,28 @@
         },
         {
           "id": "q5",
-          "prompt": "감시 활동으로 막아야 한다고 한 사람들은 누구인가요?",
-          "answerText": "불법으로 고기를 잡는 사람들",
-          "answerMatchMode": "ANY",
+          "prompt": "보호 구역을 제대로 관리하려면 필요하다고 제시된 요소를 모두 찾으시오.",
+          "answerTexts": [
+            "지속적인 관심",
+            "감시 활동",
+            "바다 생태계의 중요성을 알리는 교육"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 46,
-              "end": 61
+              "start": 21,
+              "end": 28
+            },
+            {
+              "paragraphId": "p4",
+              "start": 36,
+              "end": 41
+            },
+            {
+              "paragraphId": "p4",
+              "start": 76,
+              "end": 95
             }
           ],
           "scoring": {

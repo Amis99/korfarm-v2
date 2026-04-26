@@ -396,24 +396,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "그림과 글로 된 책?",
-          "answerText": "만화",
-          "answerMatchMode": "EXACT",
+          "prompt": "각 칸 그림의 순서를 따라가면 자연스럽게 이해할 수 있는 두 가지를 모두 찾아 적어 보세요",
+          "answerText": "등장인물의 움직임, 사건의 흐름",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 2
+              "start": 75,
+              "end": 84
             },
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 118,
-              "end": 120
+              "paragraphId": "p1",
+              "start": 86,
+              "end": 92
             }
           ],
           "scoring": {
@@ -425,24 +420,14 @@
         },
         {
           "id": "q2",
-          "prompt": "선과 색으로 나타낸 것?",
-          "answerText": "그림",
-          "answerMatchMode": "EXACT",
+          "prompt": "칸과 칸 사이의 빈 공간이 마법 같은 힘으로 자극하는 것이 무엇인지 본문에서 찾아 적어 보세요",
+          "answerText": "상상력",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p1",
-              "start": 53,
-              "end": 55
-            },
-            {
-              "paragraphId": "p2",
-              "start": 56,
-              "end": 58
+              "start": 132,
+              "end": 135
             }
           ],
           "scoring": {
@@ -454,24 +439,43 @@
         },
         {
           "id": "q3",
-          "prompt": "들려주는 재미난 말?",
-          "answerText": "이야기",
-          "answerMatchMode": "EXACT",
+          "prompt": "만화 칸을 읽을 때 꼼꼼하게 살펴야 할 세 가지를 모두 찾아 적어 보세요",
+          "answerText": "표정, 배경, 말풍선 속의 대화",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 20,
-              "end": 23
-            },
-            {
-              "paragraphId": "p1",
-              "start": 142,
-              "end": 145
+              "paragraphId": "p2",
+              "start": 16,
+              "end": 18
             },
             {
               "paragraphId": "p2",
-              "start": 153,
-              "end": 156
+              "start": 20,
+              "end": 22
+            },
+            {
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 36
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "그림 속 작은 단서들을 찾아 앞뒤 상황을 연결해 보는 과정이 무엇을 키운다고 했는지 적어 보세요",
+          "answerText": "사고력",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 97,
+              "end": 100
             }
           ],
           "scoring": {

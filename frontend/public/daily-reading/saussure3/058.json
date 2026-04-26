@@ -557,59 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "벨기에의 가난한 마을에서 우유 배달을 하며 성실하게 살아가는 어린 소년의 이름은?",
-          "answerText": "네로",
-          "answerMatchMode": "EXACT",
+          "prompt": "네로와 그의 할아버지가 살던 곳을 지문에서 찾으시오.",
+          "answerText": "벨기에의 가난한 마을",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 14,
-              "end": 16
-            },
-            {
-              "paragraphId": "p1",
-              "start": 39,
-              "end": 41
-            },
-            {
-              "paragraphId": "p1",
-              "start": 81,
-              "end": 83
-            },
-            {
-              "paragraphId": "p2",
               "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 26,
-              "end": 28
-            },
-            {
-              "paragraphId": "p2",
-              "start": 59,
-              "end": 61
-            },
-            {
-              "paragraphId": "p2",
-              "start": 100,
-              "end": 102
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p3",
-              "start": 66,
-              "end": 68
-            },
-            {
-              "paragraphId": "p3",
-              "start": 97,
-              "end": 99
+              "end": 11
             }
           ],
           "scoring": {
@@ -621,39 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "길가에 쓰러져 있다가 네로의 정성 어린 간호를 받고 건강을 회복한 충성스러운 개의 이름은?",
-          "answerText": "파트라슈",
-          "answerMatchMode": "EXACT",
+          "prompt": "네로가 길가에서 발견한 파트라슈를 설명하는 표현을 찾으시오.",
+          "answerText": "버려진 늙은 개",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 67,
-              "end": 71
-            },
-            {
-              "paragraphId": "p1",
-              "start": 93,
-              "end": 97
-            },
-            {
-              "paragraphId": "p2",
-              "start": 20,
-              "end": 24
-            },
-            {
-              "paragraphId": "p2",
-              "start": 47,
-              "end": 51
-            },
-            {
-              "paragraphId": "p2",
-              "start": 104,
-              "end": 108
-            },
-            {
-              "paragraphId": "p3",
-              "start": 83,
-              "end": 87
+              "start": 58,
+              "end": 66
             }
           ],
           "scoring": {
@@ -665,19 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "화가를 꿈꾸는 네로가 평소에 마음속으로 제일 깊이 존경하며 닮고 싶어 했던 인물은?",
-          "answerText": "루벤스",
-          "answerMatchMode": "EXACT",
+          "prompt": "파트라슈가 네로와 함께 끌며 우유 배달을 도왔던 것을 찾으시오.",
+          "answerText": "무거운 우유 수레",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 75
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "네로의 간절한 소원이 무엇이었는지 지문에서 찾으시오.",
+          "answerText": "성당에 있는 루벤스의 그림을 보는 것",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 27,
-              "end": 30
-            },
-            {
-              "paragraphId": "p3",
-              "start": 51,
-              "end": 54
+              "start": 44,
+              "end": 64
             }
           ],
           "scoring": {

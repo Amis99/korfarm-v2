@@ -396,19 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "여럿이 모여 의논함?",
-          "answerText": "회의",
-          "answerMatchMode": "EXACT",
+          "prompt": "다가올 가을 숲길 체험 학습을 더욱 즐겁게 보내기 위해 학급 회의에서 사회를 본 반장의 이름을 본문에서 찾아 두 글자로 써 보세요",
+          "answerText": "민호",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 38,
-              "end": 40
-            },
-            {
-              "paragraphId": "p2",
-              "start": 86,
-              "end": 88
+              "start": 53,
+              "end": 55
             }
           ],
           "scoring": {
@@ -420,14 +415,19 @@
         },
         {
           "id": "q2",
-          "prompt": "마음속에 있는 생각?",
-          "answerText": "의견",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구들이 숲길에서 관찰하고 싶다고 발표한 자연 대상의 두 가지 예를 본문에서 모두 찾아 써 보세요",
+          "answerText": "식물, 곤충",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 98,
-              "end": 100
+              "start": 83,
+              "end": 85
+            },
+            {
+              "paragraphId": "p1",
+              "start": 87,
+              "end": 89
             }
           ],
           "scoring": {
@@ -439,14 +439,33 @@
         },
         {
           "id": "q3",
-          "prompt": "매듭을 지어 정함?",
-          "answerText": "결정",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구들은 무엇을 통해 화려한 단풍잎을 관찰하고 숲속 생물들의 소리를 녹음해 보기로 최종 결정했는지 본문에서 찾아 두 글자로 써 보세요",
+          "answerText": "투표",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 157,
-              "end": 159
+              "start": 113,
+              "end": 115
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "회의가 화기애애하게 마무리될 수 있었던 까닭은 친구들이 서로의 생각을 존중하며 어떤 태도를 보였기 때문인지 본문에서 찾아 두 글자로 써 보세요",
+          "answerText": "경청",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 69,
+              "end": 71
             }
           ],
           "scoring": {

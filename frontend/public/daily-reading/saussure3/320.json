@@ -850,24 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "푸른 ( )가 우리를 반깁니다.",
-          "answerText": "파도",
-          "answerMatchMode": "EXACT",
+          "prompt": "모래사장 위를 맨발로 뛰었을 때 발바닥이 어떠했는지 지문에서 찾으시오.",
+          "answerText": "간지러움",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 30,
-              "end": 32
-            },
-            {
-              "paragraphId": "p2",
-              "start": 7,
-              "end": 9
-            },
-            {
-              "paragraphId": "p3",
-              "start": 28,
-              "end": 30
+              "start": 74,
+              "end": 78
             }
           ],
           "scoring": {
@@ -879,13 +869,13 @@
         },
         {
           "id": "q2",
-          "prompt": "튜브를 타니 기분이 ( )함.",
-          "answerText": "상쾌함",
-          "answerMatchMode": "EXACT",
+          "prompt": "튜브를 타고 둥둥 떠다니니 기분이 어떠했는지 지문에서 찾으시오.",
+          "answerText": "무척 상쾌함",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 48,
+              "start": 45,
               "end": 51
             }
           ],
@@ -898,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "모래성을 예쁘게 ( )해요.",
-          "answerText": "장식",
-          "answerMatchMode": "EXACT",
+          "prompt": "성을 예쁘게 장식하기 위해 무엇을 주웠는지 지문에서 찾으시오.",
+          "answerText": "조개껍데기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 97,
-              "end": 99
+              "start": 80,
+              "end": 85
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "가족과 함께 보낸 시간은 무엇이라고 했는지 지문에서 찾으시오.",
+          "answerText": "소중한 선물",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 75,
+              "end": 81
             }
           ],
           "scoring": {

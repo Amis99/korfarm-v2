@@ -474,45 +474,11 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "푸른 물이 가득한?",
-          "answerText": "바다",
-          "answerMatchMode": "EXACT",
+          "prompt": "이른 아침부터 배를 타고 바다로 나가 싱싱한 물고기를 잡는 사람을 무엇이라고 부르나요",
+          "answerText": "어부",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 14,
-              "end": 16
-            },
-            {
-              "paragraphId": "p1",
-              "start": 57,
-              "end": 59
-            },
-            {
-              "paragraphId": "p1",
-              "start": 126,
-              "end": 128
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 60,
-              "end": 62
-            },
-            {
-              "paragraphId": "p2",
-              "start": 161,
-              "end": 163
-            }
+            {"paragraphId": "p1", "start": 38, "end": 40}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -523,20 +489,12 @@
         },
         {
           "id": "q2",
-          "prompt": "헤엄치는 생물?",
+          "prompt": "어부들이 바다에서 잡아 시장에 팔거나 음식을 만드는 재료가 되는 것은 무엇인가요",
           "answerText": "물고기",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 68,
-              "end": 71
-            },
-            {
-              "paragraphId": "p1",
-              "start": 81,
-              "end": 84
-            }
+            {"paragraphId": "p1", "start": 68, "end": 71},
+            {"paragraphId": "p1", "start": 81, "end": 84}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -547,15 +505,26 @@
         },
         {
           "id": "q3",
-          "prompt": "물건 파는 곳?",
-          "answerText": "시장",
-          "answerMatchMode": "EXACT",
+          "prompt": "바다 마을의 집들이 강한 바닷바람을 막기 위해 튼튼하게 쌓아 만든 것은 무엇인가요",
+          "answerText": "돌담",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 89,
-              "end": 91
-            }
+            {"paragraphId": "p2", "start": 30, "end": 32}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "여름이 되면 조용한 마을에 활기를 불어넣어 주는, 바다 마을을 찾아 오는 사람들을 무엇이라고 부르나요",
+          "answerText": "관광객",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 107, "end": 110}
           ],
           "scoring": {
             "correctDeltaSec": 10,

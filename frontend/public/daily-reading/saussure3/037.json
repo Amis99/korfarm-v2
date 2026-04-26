@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "모험을 떠난 토끼와 요정이 달빛 시계의 두 번째 바늘을 찾기 위해 도착한, 거울처럼 맑은 곳은 어디인가요?",
+          "prompt": "토끼와 요정이 두 번째 바늘을 찾으러 간 곳을 지문에서 찾으시오.",
           "answerText": "유리 호수",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -581,19 +581,14 @@
         },
         {
           "id": "q2",
-          "prompt": "호수를 가로막고 나타나서, 호수의 물을 이용해 어려운 수수께끼 세 가지를 낸 거대한 괴물은 누구인가요?",
-          "answerText": "물의 정령",
-          "answerMatchMode": "EXACT",
+          "prompt": "유리 호수의 맑음을 빗댄 표현을 지문에서 찾으시오.",
+          "answerText": "거울처럼",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 15,
-              "end": 20
-            },
-            {
-              "paragraphId": "p2",
-              "start": 38,
-              "end": 43
+              "paragraphId": "p1",
+              "start": 56,
+              "end": 60
             }
           ],
           "scoring": {
@@ -605,24 +600,41 @@
         },
         {
           "id": "q3",
-          "prompt": "정령이 수수께끼를 맞힌 토끼의 지혜를 칭찬하며 피워 준 것으로, 그 안에 두 번째 바늘이 들어있던 꽃은?",
-          "answerText": "연꽃",
-          "answerMatchMode": "EXACT",
+          "prompt": "물의 정령이 낸 수수께끼의 개수를 나타내는 표현을 지문에서 찾으시오.",
+          "answerText": "세 가지나",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 104,
-              "end": 106
+              "paragraphId": "p2",
+              "start": 65,
+              "end": 70
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "정령이 칭찬한 것과 연꽃 안에 있던 것을 모두 찾으시오.",
+          "answerTexts": [
+            "토끼의 지혜",
+            "달빛 시계의 두 번째 바늘"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 4,
+              "end": 10
             },
             {
               "paragraphId": "p3",
-              "start": 30,
-              "end": 32
-            },
-            {
-              "paragraphId": "p3",
-              "start": 44,
-              "end": 46
+              "start": 51,
+              "end": 65
             }
           ],
           "scoring": {

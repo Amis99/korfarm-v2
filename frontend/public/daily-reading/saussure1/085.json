@@ -552,19 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "꼬리가 긴 ( )가 됨.",
-          "answerText": "올챙이",
-          "answerMatchMode": "EXACT",
+          "prompt": "변하는 모습이 매우 다양하고 많다는 뜻을 가진 단어를 지문에서 찾아 보세요.",
+          "answerText": "변화무쌍",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 40,
-              "end": 43
-            },
-            {
-              "paragraphId": "p1",
-              "start": 50,
-              "end": 53
+              "start": 102,
+              "end": 106
             }
           ],
           "scoring": {
@@ -576,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "( )로 숨을 쉬게 됨.",
-          "answerText": "폐",
-          "answerMatchMode": "EXACT",
+          "prompt": "올챙이가 물속에서 숨을 쉴 때 사용하는 기관을 지문에서 찾아 보세요.",
+          "answerText": "아가미",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 31,
-              "end": 32
+              "paragraphId": "p1",
+              "start": 55,
+              "end": 58
             }
           ],
           "scoring": {
@@ -595,14 +590,78 @@
         },
         {
           "id": "q3",
-          "prompt": "( ) 뛰어오름.",
-          "answerText": "폴짝",
-          "answerMatchMode": "EXACT",
+          "prompt": "개구리가 자라는 동안 거치는 모습을 지문에 나온 순서대로 모두 찾아 보세요.",
+          "answerText": "알, 올챙이, 개구리",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 14,
+              "end": 15
+            },
+            {
+              "paragraphId": "p1",
+              "start": 25,
+              "end": 26
+            },
+            {
+              "paragraphId": "p1",
+              "start": 40,
+              "end": 43
+            },
+            {
+              "paragraphId": "p1",
+              "start": 50,
+              "end": 53
+            },
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 3
+            },
+            {
+              "paragraphId": "p1",
+              "start": 108,
+              "end": 111
+            },
+            {
+              "paragraphId": "p2",
+              "start": 17,
+              "end": 20
+            },
+            {
+              "paragraphId": "p2",
+              "start": 83,
+              "end": 86
+            },
+            {
+              "paragraphId": "p2",
+              "start": 122,
+              "end": 125
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "땅 위로 올라온 개구리가 폴짝 뛰며 잡아먹는 두 가지 곤충을 모두 찾아 보세요.",
+          "answerText": "파리, 모기",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 57,
-              "end": 59
+              "start": 67,
+              "end": 69
+            },
+            {
+              "paragraphId": "p2",
+              "start": 71,
+              "end": 73
             }
           ],
           "scoring": {

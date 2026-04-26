@@ -1180,66 +1180,16 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "한 나라 안에서 일정 기간 생산된 모든 최종 생산물의 시장 가치를 합산한 지표는 무엇인가요?",
-          "answerText": "GDP",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 11,
-              "end": 14
-            },
-            {
-              "paragraphId": "p1",
-              "start": 138,
-              "end": 141
-            },
-            {
-              "paragraphId": "p1",
-              "start": 208,
-              "end": 211
-            },
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 7
-            },
-            {
-              "paragraphId": "p2",
-              "start": 95,
-              "end": 98
-            },
-            {
-              "paragraphId": "p3",
-              "start": 3,
-              "end": 6
-            },
-            {
-              "paragraphId": "p3",
-              "start": 134,
-              "end": 137
-            },
-            {
-              "paragraphId": "p3",
-              "start": 249,
-              "end": 252
-            },
-            {
-              "paragraphId": "p4",
-              "start": 15,
-              "end": 18
-            },
-            {
-              "paragraphId": "p4",
-              "start": 148,
-              "end": 151
-            },
-            {
-              "paragraphId": "p5",
-              "start": 10,
-              "end": 13
-            }
-          ],
+      "prompt": "GDP의 정의에 해당하는 부분을 찾으시오.",
+      "answerText": "한 나라의 국경 안에서 일정 기간 동안 생산된 모든 최종 생산물의 시장 가치를 합산한 경제 지표",
+      "answerMatchMode": "ANY",
+      "answerRanges": [
+        {
+          "paragraphId": "p1",
+          "start": 24,
+          "end": 77
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1248,8 +1198,8 @@
         },
         {
           "id": "q2",
-          "prompt": "GDP가 반영하지 못하는 삶의 질 요소로 지적된 것은 무엇인가요?",
-          "answerText": "분배의 공정성",
+      "prompt": "GDP가 반영하지 못하는 삶의 질 요소를 찾으시오.",
+      "answerText": "분배의 공정성",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
@@ -1266,16 +1216,24 @@
         },
         {
           "id": "q3",
-          "prompt": "GDP 계산에서 완전히 배제된 가치 있는 활동으로 제시된 것은 무엇인가요?",
-          "answerText": "가사 노동",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 70,
-              "end": 75
-            }
-          ],
+      "prompt": "GDP 계산에서 배제되는 가치 있는 활동을 모두 찾으시오.",
+      "answerTexts": [
+        "가사 노동",
+        "자원봉사 활동"
+      ],
+      "answerMatchMode": "ALL",
+      "answerRanges": [
+        {
+          "paragraphId": "p3",
+          "start": 70,
+          "end": 75
+        },
+        {
+          "paragraphId": "p3",
+          "start": 86,
+          "end": 93
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1284,16 +1242,24 @@
         },
         {
           "id": "q4",
-          "prompt": "본문이 대안 지표로 소개한 것 가운데 하나인 개발 지수는 무엇인가요?",
-          "answerText": "인간 개발 지수(HDI)",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 141,
-              "end": 154
-            }
-          ],
+      "prompt": "GDP 수치를 역설적으로 끌어올리는 상황을 모두 찾으시오.",
+      "answerTexts": [
+        "범죄율이 높아져 감옥을 짓거나 질병이 유행하여 의료비 지출이 급증하는 상황",
+        "자연재해로 부서진 건물을 복구하는 비용"
+      ],
+      "answerMatchMode": "ALL",
+      "answerRanges": [
+        {
+          "paragraphId": "p3",
+          "start": 156,
+          "end": 197
+        },
+        {
+          "paragraphId": "p3",
+          "start": 203,
+          "end": 224
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1302,13 +1268,21 @@
         },
         {
           "id": "q5",
-          "prompt": "본문이 대안 지표로 소개한 행복 지수는 무엇인가요?",
-          "answerText": "국민 행복 지수(GNH)",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 158,
+      "prompt": "국제 사회에서 논의하는 대안 지표를 모두 찾으시오.",
+      "answerTexts": [
+        "인간 개발 지수(HDI)",
+        "국민 행복 지수(GNH)"
+      ],
+      "answerMatchMode": "ALL",
+      "answerRanges": [
+        {
+          "paragraphId": "p5",
+          "start": 141,
+          "end": 154
+        },
+        {
+          "paragraphId": "p5",
+          "start": 158,
               "end": 171
             }
           ],

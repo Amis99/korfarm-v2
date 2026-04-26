@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "높게 지은 현대식 집?",
-          "answerText": "아파트",
-          "answerMatchMode": "EXACT",
+          "prompt": "오늘날 가장 흔히 볼 수 있는 집의 모양과 우리나라의 전통적인 집을 모두 찾아 보세요",
+          "answerText": "아파트, 한옥",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -414,21 +414,7 @@
               "paragraphId": "p2",
               "start": 101,
               "end": 104
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "한국 전통의 집 이름?",
-          "answerText": "한옥",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
+            },
             {
               "paragraphId": "p2",
               "start": 0,
@@ -448,15 +434,58 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "삶의 슬기와 명철함?",
-          "answerText": "지혜",
-          "answerMatchMode": "EXACT",
+          "id": "q2",
+          "prompt": "한옥에 담겨 있는 것이 무엇인지 한 군데만 찾아 보세요",
+          "answerText": "전통적인 멋과 지혜",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 18,
+              "start": 10,
               "end": 20
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "아파트에서 높은 층도 편하게 오갈 수 있는 까닭이 되는 시설을 찾아 보세요",
+          "answerText": "엘리베이터",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 90,
+              "end": 95
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "한옥이 겨울에는 따뜻하고 여름에는 시원한 까닭이 되는 두 가지 시설을 모두 찾아 보세요",
+          "answerText": "온돌, 대청마루",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 67,
+              "end": 69
+            },
+            {
+              "paragraphId": "p2",
+              "start": 85,
+              "end": 89
             }
           ],
           "scoring": {

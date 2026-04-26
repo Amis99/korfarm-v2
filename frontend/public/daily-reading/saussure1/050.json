@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "케이크 ( )을 끄던 너.",
+          "prompt": "초에 붙은 작은 불이라는 뜻의 단어를 지문에서 찾아 보세요.",
           "answerText": "촛불",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -571,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "( )한 어린이가 되렴.",
-          "answerText": "씩씩",
-          "answerMatchMode": "EXACT",
+          "prompt": "생일잔치에서 작은 선물들을 정성껏 준비해 준 등장인물을 지문에서 찾아 보세요.",
+          "answerText": "친구들",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 61,
-              "end": 63
+              "paragraphId": "p1",
+              "start": 90,
+              "end": 93
             }
           ],
           "scoring": {
@@ -590,14 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "학교 ( )에서 만나자.",
-          "answerText": "운동장",
-          "answerMatchMode": "EXACT",
+          "prompt": "지난 일을 잊지 않고 마음속에 떠올리는 것이라는 뜻의 단어를 지문에서 찾아 보세요.",
+          "answerText": "추억",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 116,
-              "end": 119
+              "start": 21,
+              "end": 23
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글쓴이가 편지를 받는 친구에게 어떤 어린이가 되길 바란다고 했는지 그 모습을 찾아 보세요.",
+          "answerText": "건강하고 씩씩한",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 56,
+              "end": 64
             }
           ],
           "scoring": {

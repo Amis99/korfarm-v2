@@ -474,34 +474,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "알리는 그림판?",
-          "answerText": "포스터",
-          "answerMatchMode": "EXACT",
+          "prompt": "포스터는 전하고 싶은 내용을 무엇과 무엇으로 나타내어 알리는 글이라고 하는지 두 가지를 모두 찾아보세요",
+          "answerText": "그림과 글자",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p2",
-              "start": 31,
-              "end": 34
-            },
-            {
-              "paragraphId": "p2",
-              "start": 50,
-              "end": 53
-            },
-            {
-              "paragraphId": "p2",
-              "start": 93,
-              "end": 96
-            },
-            {
-              "paragraphId": "p2",
-              "start": 137,
-              "end": 140
+              "start": 16,
+              "end": 22
             }
           ],
           "scoring": {
@@ -513,39 +493,14 @@
         },
         {
           "id": "q2",
-          "prompt": "봄, 여름 같은 때?",
-          "answerText": "계절",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서 포스터를 만들 때 고를 수 있는 사계절을 모두 찾아보세요",
+          "answerText": "봄, 여름, 가을, 겨울",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 49,
-              "end": 51
-            },
-            {
-              "paragraphId": "p1",
-              "start": 68,
-              "end": 70
-            },
-            {
-              "paragraphId": "p1",
-              "start": 98,
-              "end": 100
-            },
-            {
-              "paragraphId": "p1",
-              "start": 143,
-              "end": 145
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 110,
-              "end": 112
+              "start": 82,
+              "end": 95
             }
           ],
           "scoring": {
@@ -557,14 +512,33 @@
         },
         {
           "id": "q3",
-          "prompt": "도화지에 그린 것?",
-          "answerText": "그림",
-          "answerMatchMode": "EXACT",
+          "prompt": "겨울 포스터의 예시로 글에서 든 그림 소재를 찾아보세요",
+          "answerText": "하얀 눈사람",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 16,
-              "end": 18
+              "paragraphId": "p2",
+              "start": 56,
+              "end": 62
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "정성껏 만든 포스터가 무엇을 밝고 화사하게 만들어 줄 거라고 했는지 글에서 찾아보세요",
+          "answerText": "교실 분위기",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 142,
+              "end": 148
             }
           ],
           "scoring": {

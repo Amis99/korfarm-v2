@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "비 올 때 쓰는 도구는?",
+          "prompt": "비를 막으려고 펴서 머리 위로 쓰는 도구를 글에서 찾아보세요",
           "answerText": "우산",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -571,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "비 오는 날의 무엇 수칙인가요?",
-          "answerText": "안전",
-          "answerMatchMode": "EXACT",
+          "prompt": "비에 젖지 않도록 발에 신는 신발을 글에서 찾아보세요",
+          "answerText": "장화",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 114,
-              "end": 116
+              "paragraphId": "p1",
+              "start": 75,
+              "end": 77
             }
           ],
           "scoring": {
@@ -590,14 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "발이 안 젖게 신는 신발.",
-          "answerText": "장화",
-          "answerMatchMode": "EXACT",
+          "prompt": "안전 수칙을 잘 지키면 미리 막을 수 있는 것을 글에서 찾아보세요",
+          "answerText": "사고",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 127,
+              "end": 129
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "하늘에 끼어 비를 내리게 하는 검은 구름을 무엇이라 하는지 찾아보세요",
+          "answerText": "먹구름",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 75,
-              "end": 77
+              "start": 4,
+              "end": 7
             }
           ],
           "scoring": {

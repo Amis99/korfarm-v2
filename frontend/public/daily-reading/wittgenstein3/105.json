@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 합성어와 파생어의 경계에서 어근과 접사를 판별하는 기준라는 문법 주제를 어떤 배경에서 꺼내는가?",
+          "prompt": "단어의 짜임을 분석할 때 가장 먼저 부딪히는 문제를 설명한 부분을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 158
+              "start": 29,
+              "end": 80
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "단어의 짜임을 분석할 때 가장 먼저 부딪히는 문제는 하나의 형식이 독립된 어근인지, 아니면 다른 형식에 붙어 의미를 더하는 접사인지 구별하는 일이다. 특히 합성어와 파생어의 경계에서는 겉모양이 비슷해 보여도 형성 방식이 다를 수 있어, 단순히 뜻만 보고 판단하면 오류가 생기기 쉽다."
+          "answerText": "하나의 형식이 독립된 어근인지, 아니면 다른 형식에 붙어 의미를 더하는 접사인지 구별하는 일"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 판별 기준이나 기본 원리를 어떻게 설명하는가?",
+          "prompt": "합성어와 파생어의 형성 방식을 설명한 부분을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 194
+              "start": 5,
+              "end": 26
+            },
+            {
+              "paragraphId": "p2",
+              "start": 70,
+              "end": 83
             }
           ],
           "scoring": {
@@ -602,17 +607,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "합성어는 둘 이상의 어근이 결합해 이루어진 단어이므로, 구성 성분 각각이 일정한 어휘적 자립성을 가져야 한다. 반면 파생어는 어근에 접사가 붙어 형성되는데, 접사는 대체로 홀로 쓰이지 못하고 특정 의미나 문법 기능을 덧붙인다. 따라서 어떤 요소가 단독으로 쓰일 수 있는지, 또 다른 단어 형성에서 반복적으로 나타나는지가 첫 번째 판별 기준이 된다."
+          "answerTexts": [
+            "둘 이상의 어근이 결합해 이루어진 단어",
+            "어근에 접사가 붙어 형성"
+          ],
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 해당 문법 현상의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "첫 번째 판별 기준이 되는 두 내용을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 165
+              "paragraphId": "p2",
+              "start": 138,
+              "end": 151
+            },
+            {
+              "paragraphId": "p2",
+              "start": 155,
+              "end": 177
             }
           ],
           "scoring": {
@@ -620,17 +633,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "예를 들어 앞말이나 뒷말이 독립된 단어로 폭넓게 쓰인다면 합성어일 가능성이 크다. 그러나 어떤 요소가 스스로는 쓰이지 않고 여러 어근에 붙어 공통된 의미를 더한다면 접사로 보아야 한다. 이때 중요한 것은 사전에 실렸는가만이 아니라, 실제 언어생활에서 그 형식이 하나의 어휘 단위로 기능하는가이다."
+          "answerTexts": [
+            "단독으로 쓰일 수 있는지",
+            "다른 단어 형성에서 반복적으로 나타나는지"
+          ],
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 구별점이나 추가 조건을 어떻게 드러내는가?",
+          "prompt": "합성어일 가능성이 큰 예로 든 두 요소를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 181
+              "paragraphId": "p3",
+              "start": 6,
+              "end": 8
+            },
+            {
+              "paragraphId": "p3",
+              "start": 11,
+              "end": 13
             }
           ],
           "scoring": {
@@ -638,17 +659,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "의미 관계도 판단에 도움을 준다. 합성어는 두 어근의 의미가 비교적 대등하게 결합하여 전체 뜻을 이루는 경우가 많지만, 파생어는 중심이 되는 어근에 접사가 부가적 의미를 더하는 구조를 보인다. 다만 의미만으로 결론을 내리면 위험하다. 어떤 형식은 뜻이 비교적 뚜렷해 보여도 형태론적으로는 접사로 굳어 있을 수 있기 때문이다."
+          "answerTexts": [
+            "앞말",
+            "뒷말"
+          ],
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 해석상의 주의점이나 효과를 어떤 방향으로 설명하는가?",
+          "prompt": "어떤 요소를 접사로 보아야 한다고 한 조건을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 186
+              "paragraphId": "p3",
+              "start": 57,
+              "end": 91
             }
           ],
           "scoring": {
@@ -657,16 +681,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "품사 변화 여부 역시 중요한 기준이다. 접사가 붙으면 원래 어근의 품사가 바뀌거나 문법적 성격이 달라지는 일이 잦다. 반면 합성어는 각 성분의 결합으로 새 단어가 만들어지더라도, 품사 변화보다 의미 결합이 중심이 되는 경우가 많다. 그래서 분석할 때는 구성 성분의 자립성, 반복성, 의미 기능, 품사 변화 가능성을 함께 살펴야 한다."
+          "answerText": "스스로는 쓰이지 않고 여러 어근에 붙어 공통된 의미를 더한다면"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 합성어와 파생어의 경계에서 어근과 접사를 판별하는 기준라는 문법 주제의 의미를 어떤 관점에서 정리하는가?",
+          "prompt": "의미만으로 결론을 내리면 위험하다고 한 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 203
+              "paragraphId": "p4",
+              "start": 131,
+              "end": 178
             }
           ],
           "scoring": {
@@ -675,7 +699,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 합성어와 파생어의 구별은 하나의 단서만으로 끝나는 문제가 아니라 여러 기준을 교차해 판단해야 하는 문제다. 겉모양이 비슷하더라도 어떤 요소가 독립된 어근인지, 생산적으로 쓰이는 접사인지를 따져 보면 단어 형성의 원리가 드러난다. 형태소 분석은 낱말을 잘게 나누는 작업이 아니라, 각 요소가 단어 안에서 어떤 자격으로 참여하는지 밝히는 과정이라고 할 수 있다."
+          "answerText": "어떤 형식은 뜻이 비교적 뚜렷해 보여도 형태론적으로는 접사로 굳어 있을 수 있기 때문"
+        },
+        {
+          "id": "q7",
+          "prompt": "접사가 붙으면 원래 어근에 생길 수 있는 두 변화를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 30,
+              "end": 45
+            },
+            {
+              "paragraphId": "p5",
+              "start": 46,
+              "end": 60
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerTexts": [
+            "원래 어근의 품사가 바뀌거나",
+            "문법적 성격이 달라지는 일"
+          ],
+          "answerMatchMode": "ALL"
+        },
+        {
+          "id": "q8",
+          "prompt": "형태소 분석이 무엇을 밝히는 과정인지 설명한 부분을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 159,
+              "end": 192
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "각 요소가 단어 안에서 어떤 자격으로 참여하는지 밝히는 과정"
         }
       ]
     }

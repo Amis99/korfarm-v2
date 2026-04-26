@@ -1328,59 +1328,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "평문을 복잡한 암호문으로 바꾸는 과정은 무엇인가요?",
-          "answerText": "암호화",
+          "prompt": "누구나 읽을 수 있는 문장을 가리키는 단어를 찾으시오.",
+          "answerText": "평문",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 26,
-              "end": 29
+              "start": 58,
+              "end": 60
             },
             {
               "paragraphId": "p1",
-              "start": 41,
-              "end": 44
-            },
-            {
-              "paragraphId": "p1",
-              "start": 125,
-              "end": 128
-            },
-            {
-              "paragraphId": "p2",
-              "start": 51,
-              "end": 54
-            },
-            {
-              "paragraphId": "p2",
-              "start": 194,
-              "end": 197
-            },
-            {
-              "paragraphId": "p3",
-              "start": 19,
-              "end": 22
-            },
-            {
-              "paragraphId": "p3",
-              "start": 76,
-              "end": 79
-            },
-            {
-              "paragraphId": "p4",
-              "start": 4,
-              "end": 7
-            },
-            {
-              "paragraphId": "p5",
-              "start": 8,
-              "end": 11
-            },
-            {
-              "paragraphId": "p5",
-              "start": 112,
-              "end": 115
+              "start": 96,
+              "end": 98
             }
           ],
           "scoring": {
@@ -1391,19 +1351,19 @@
         },
         {
           "id": "q2",
-          "prompt": "암호화하고 복호화하는 데 필요한 특별한 규칙은 무엇인가요?",
-          "answerText": "암호 키",
+          "prompt": "암호문을 원래의 평문으로 되돌리는 과정을 찾으시오.",
+          "answerText": "복호화",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 151,
-              "end": 155
+              "start": 110,
+              "end": 113
             },
             {
               "paragraphId": "p1",
-              "start": 163,
-              "end": 167
+              "start": 131,
+              "end": 134
             }
           ],
           "scoring": {
@@ -1414,14 +1374,22 @@
         },
         {
           "id": "q3",
-          "prompt": "과거에 두 사람이 같은 비밀 키를 나누어 쓰던 방식은 무엇인가요?",
-          "answerText": "대칭키 암호화",
-          "answerMatchMode": "ANY",
+          "prompt": "대칭키 암호화의 장점과 키 전달 과정의 위험을 모두 찾으시오.",
+          "answerTexts": [
+            "계산 속도가 빠르다는 장점",
+            "누군가 키를 훔쳐갈 위험"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 47,
-              "end": 54
+              "start": 61,
+              "end": 75
+            },
+            {
+              "paragraphId": "p2",
+              "start": 146,
+              "end": 159
             }
           ],
           "scoring": {
@@ -1432,29 +1400,19 @@
         },
         {
           "id": "q4",
-          "prompt": "암호화할 때는 공개된 키를, 복호화할 때는 개인키를 쓰는 기술은 무엇인가요?",
-          "answerText": "공개키",
+          "prompt": "암호를 풀 때 쓰며 자신만이 안전하게 따로 보관하는 키를 찾으시오.",
+          "answerText": "개인키",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 15,
-              "end": 18
-            },
-            {
-              "paragraphId": "p3",
-              "start": 99,
-              "end": 102
+              "start": 126,
+              "end": 129
             },
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p5",
-              "start": 4,
-              "end": 7
+              "start": 140,
+              "end": 143
             }
           ],
           "scoring": {
@@ -1465,7 +1423,7 @@
         },
         {
           "id": "q5",
-          "prompt": "공개키 암호화가 주로 바탕으로 삼는 수학 원리는 무엇인가요?",
+          "prompt": "큰 소수를 곱하고 다시 쪼개기 어려운 성질과 관련된 수학 원리를 찾으시오.",
           "answerText": "소인수분해",
           "answerMatchMode": "ANY",
           "answerRanges": [

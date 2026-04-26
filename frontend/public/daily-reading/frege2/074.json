@@ -1038,14 +1038,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "두 사건이 함께 나타나는 관계를 글에서는 무엇이라고 하나요?",
-          "answerText": "상관관계",
+          "prompt": "인과 추론이 논리적으로 규명하는 대상은 무엇인가요?",
+          "answerText": "원인과 결과 사이의 관계",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 155,
-              "end": 159
+              "start": 21,
+              "end": 34
             }
           ],
           "scoring": {
@@ -1056,10 +1056,18 @@
         },
         {
           "id": "q2",
-          "prompt": "원인과 결과의 연결이 실제로 성립하는 관계는 무엇인가요?",
-          "answerText": "인과관계",
-          "answerMatchMode": "ANY",
+          "prompt": "과학적이고 객관적인 인과 추론을 위해 엄격히 구분해야 할 두 관계를 모두 찾으시오.",
+          "answerTexts": [
+            "상관관계",
+            "인과관계"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 155,
+              "end": 159
+            },
             {
               "paragraphId": "p1",
               "start": 163,
@@ -1074,19 +1082,14 @@
         },
         {
           "id": "q3",
-          "prompt": "여러 사례에서 공통으로 나타나는 유일한 요인을 원인으로 보는 방법은 무엇인가요?",
-          "answerText": "일치법",
+          "prompt": "일치법은 어떤 요인을 원인으로 지목하는 방식인가요?",
+          "answerText": "공통적으로 나타나는 유일한 요인",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 41,
-              "end": 44
-            },
-            {
-              "paragraphId": "p2",
-              "start": 56,
-              "end": 59
+              "start": 69,
+              "end": 86
             }
           ],
           "scoring": {
@@ -1097,19 +1100,14 @@
         },
         {
           "id": "q4",
-          "prompt": "특정 요인의 유무에 따라 결과 차이를 확인하는 방법은 무엇인가요?",
-          "answerText": "차이법",
+          "prompt": "무작위 대조 실험은 무엇을 최소화하고 인과 관계를 명확히 입증하나요?",
+          "answerText": "외부 요인의 개입",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 48,
-              "end": 51
-            },
-            {
-              "paragraphId": "p2",
-              "start": 104,
-              "end": 107
+              "start": 246,
+              "end": 255
             }
           ],
           "scoring": {
@@ -1120,24 +1118,14 @@
         },
         {
           "id": "q5",
-          "prompt": "원인과 결과 모두에 영향을 미치는 제3의 변수는 무엇인가요?",
-          "answerText": "혼란 변수",
+          "prompt": "아이스크림 판매량과 익사 사고 발생률의 예에서 두 현상 모두에 영향을 미친 변수로 제시된 표현은 무엇인가요?",
+          "answerText": "'여름철 기온 상승'",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 45,
-              "end": 50
-            },
-            {
-              "paragraphId": "p3",
-              "start": 100,
-              "end": 105
-            },
-            {
-              "paragraphId": "p3",
-              "start": 219,
-              "end": 224
+              "start": 204,
+              "end": 215
             }
           ],
           "scoring": {

@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "운동회 ( )을 전해요.",
-          "answerText": "소식",
-          "answerMatchMode": "EXACT",
+          "prompt": "기다리는 날이 빨리 오기를 바라며 날을 세어 본다는 뜻의 단어를 지문에서 찾아 보세요.",
+          "answerText": "손꼽아",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 15,
-              "end": 17
+              "paragraphId": "p2",
+              "start": 82,
+              "end": 85
             }
           ],
           "scoring": {
@@ -571,19 +571,19 @@
         },
         {
           "id": "q2",
-          "prompt": "달리기 ( ) 등을 해요.",
-          "answerText": "일",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 이 편지를 보내는 사람이 누구인지 지문에서 찾아 보세요.",
+          "answerText": "친구",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 80,
-              "end": 81
+              "start": 6,
+              "end": 8
             },
             {
               "paragraphId": "p2",
-              "start": 67,
-              "end": 68
+              "start": 47,
+              "end": 49
             }
           ],
           "scoring": {
@@ -595,14 +595,38 @@
         },
         {
           "id": "q3",
-          "prompt": "손꼽아 ( )리는 날.",
-          "answerText": "기다",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 무척 기뻤던 까닭은 어떤 시합에서 몇 등을 했기 때문인지 지문에서 모두 찾아 보세요.",
+          "answerText": "달리기, 일 등",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 76,
+              "end": 79
+            },
+            {
+              "paragraphId": "p1",
+              "start": 80,
+              "end": 83
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글쓴이가 다음에 가족들과 함께 넓은 운동장에서 하자고 제안한 운동이 무엇인지 지문에서 찾아 보세요.",
+          "answerText": "축구",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 86,
-              "end": 88
+              "start": 31,
+              "end": 33
             }
           ],
           "scoring": {

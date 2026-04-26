@@ -913,19 +913,28 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이번 회의에서 줄이기 위해 의논한 문제는 무엇인가요?",
-          "answerText": "음식물 쓰레기",
-          "answerMatchMode": "ANY",
+          "prompt": "회의의 주제, 일시, 참석자를 모두 찾으시오.",
+          "answerTexts": [
+            "회의 주제: 우리 학교 급식실의 음식물 쓰레기(잔반) 줄이기 실천 방안",
+            "일시: 2024년 6월 15일 수요일 점심시간",
+            "참석자: 학생회장 김민준, 부회장 이수진, 각 반 반장 10명"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 18,
-              "end": 25
+              "start": 0,
+              "end": 39
             },
             {
               "paragraphId": "p1",
-              "start": 163,
-              "end": 170
+              "start": 40,
+              "end": 65
+            },
+            {
+              "paragraphId": "p1",
+              "start": 66,
+              "end": 100
             }
           ],
           "scoring": {
@@ -936,14 +945,28 @@
         },
         {
           "id": "q2",
-          "prompt": "잔반 없는 날의 이름으로 제안된 것은 무엇인가요?",
-          "answerText": "잔반 없는 수다 날",
-          "answerMatchMode": "ANY",
+          "prompt": "이수진 부회장이 말한 가장 큰 문제와 제안을 모두 찾으시오.",
+          "answerTexts": [
+            "자기가 안 좋아하는 반찬을 처음부터 아예 먹지 않고 버리는 것입니다",
+            "매주 금요일을 잔반 없는 수다 날로 정하고",
+            "급식 스티커를 나누어"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 77,
-              "end": 87
+              "start": 23,
+              "end": 60
+            },
+            {
+              "paragraphId": "p2",
+              "start": 69,
+              "end": 92
+            },
+            {
+              "paragraphId": "p2",
+              "start": 109,
+              "end": 120
             }
           ],
           "scoring": {
@@ -954,14 +977,22 @@
         },
         {
           "id": "q3",
-          "prompt": "배식할 때 양을 줄여 달라는 뜻으로 만들자고 한 것은 무엇인가요?",
-          "answerText": "한입만 스티커",
-          "answerMatchMode": "ANY",
+          "prompt": "박지훈 반장이 찬성한 의견과 제안한 보상을 모두 찾으시오.",
+          "answerTexts": [
+            "수진 부회장의 의견에 찬성합니다",
+            "아이스크림이나 간식 같은 작은 상"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 101,
-              "end": 108
+              "paragraphId": "p2",
+              "start": 145,
+              "end": 162
+            },
+            {
+              "paragraphId": "p2",
+              "start": 180,
+              "end": 198
             }
           ],
           "scoring": {
@@ -972,19 +1003,22 @@
         },
         {
           "id": "q4",
-          "prompt": "학생들이 좋아하는 메뉴를 내기 위해 두자고 한 상자는 무엇인가요?",
-          "answerText": "급식 신청함",
-          "answerMatchMode": "ANY",
+          "prompt": "최유리 반장이 걱정한 점과 해결 도구를 모두 찾으시오.",
+          "answerTexts": [
+            "친구들이 급식 시간을 스트레스로 느낄 수 있습니다",
+            "한입만 스티커나 작은 팻말"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 61,
-              "end": 67
+              "paragraphId": "p3",
+              "start": 42,
+              "end": 69
             },
             {
-              "paragraphId": "p4",
-              "start": 157,
-              "end": 163
+              "paragraphId": "p3",
+              "start": 101,
+              "end": 115
             }
           ],
           "scoring": {
@@ -995,14 +1029,34 @@
         },
         {
           "id": "q5",
-          "prompt": "학생회가 내일 올리겠다고 한 문서는 무엇인가요?",
-          "answerText": "건의서",
-          "answerMatchMode": "ANY",
+          "prompt": "회의에서 모아 정식으로 건의하기로 한 아이디어와 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "잔반 없는 날 스티커 제도",
+            "배식량 조절 팻말",
+            "급식 신청함 아이디어",
+            "교장 선생님과 영양사 선생님"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 198,
-              "end": 201
+              "start": 130,
+              "end": 144
+            },
+            {
+              "paragraphId": "p4",
+              "start": 146,
+              "end": 155
+            },
+            {
+              "paragraphId": "p4",
+              "start": 157,
+              "end": 168
+            },
+            {
+              "paragraphId": "p4",
+              "start": 176,
+              "end": 191
             }
           ],
           "scoring": {

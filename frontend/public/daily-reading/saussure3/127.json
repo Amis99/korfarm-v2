@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지키고 보호해 주는 사람이나 대상을 뜻하는 말은 무엇인가요?",
+          "prompt": "포포가 도서관의 모든 책을 지키는 어떤 존재가 되었는지 지문에서 찾으시오.",
           "answerText": "수호자",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -576,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "괴로움이나 슬픔을 겪는 사람에게 따뜻한 말이나 행동으로 힘을 주는 것은?",
-          "answerText": "위로",
-          "answerMatchMode": "EXACT",
+          "prompt": "포포가 찢어진 곳은 없는지 어떤 태도로 살피는지 지문에서 찾으시오.",
+          "answerText": "꼼꼼하게",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 59,
-              "end": 61
+              "paragraphId": "p1",
+              "start": 83,
+              "end": 87
             }
           ],
           "scoring": {
@@ -595,14 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "끊임없이 솟아나오는 물처럼, 무언가 계속해서 생겨나는 근원을 비유한 말은?",
-          "answerText": "샘물",
-          "answerMatchMode": "EXACT",
+          "prompt": "아이가 남기고 간 편지에 담겨 있었다고 한 것은 무엇인지 지문에서 찾으시오.",
+          "answerText": "진심",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 72,
+              "end": 74
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "포포가 앞으로도 도서관에서 무엇으로 남기로 했는지 지문에서 찾으시오.",
+          "answerText": "도서관의 책벌레",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 119,
-              "end": 121
+              "start": 9,
+              "end": 17
             }
           ],
           "scoring": {

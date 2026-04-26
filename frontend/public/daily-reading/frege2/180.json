@@ -829,7 +829,25 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "토의에서 시민 대표가 찬성한 제도의 이름은 무엇인가요?",
+          "prompt": "토의의 주제로 제시된 문제를 나타내는 어구를 지문에서 찾으시오.",
+          "answerText": "일회용 플라스틱 컵 사용 문제",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 16,
+              "end": 32
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "시민 대표가 도입에 찬성한 제도의 이름을 지문에서 찾으시오.",
           "answerText": "다회용 컵 보증금 제도",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -846,33 +864,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "컵 세척과 관리의 부담을 말한 사람은 누구인가요?",
-          "answerText": "카페 사장",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 5
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q3",
-          "prompt": "카페 사장이 시에 부탁한 지원 가운데 하나는 무엇인가요?",
-          "answerText": "세척",
+          "prompt": "보증금을 내면 어떤 결과가 생길 것이라고 했는지 지문에서 찾으시오.",
+          "answerText": "사람들이 컵을 반납할 확률이 높아질 것입니다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 82,
-              "end": 84
+              "paragraphId": "p2",
+              "start": 47,
+              "end": 71
             }
           ],
           "scoring": {
@@ -883,19 +883,22 @@
         },
         {
           "id": "q4",
-          "prompt": "보증금 제도의 효과로 줄일 수 있다고 한 것은 무엇인가요?",
-          "answerText": "쓰레기",
-          "answerMatchMode": "ANY",
+          "prompt": "카페 사장이 시에서 지원해 주기를 바란 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "세척",
+            "수거"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 62,
-              "end": 65
+              "paragraphId": "p3",
+              "start": 82,
+              "end": 84
             },
             {
-              "paragraphId": "p2",
-              "start": 92,
-              "end": 95
+              "paragraphId": "p3",
+              "start": 87,
+              "end": 89
             }
           ],
           "scoring": {
@@ -906,13 +909,13 @@
         },
         {
           "id": "q5",
-          "prompt": "다음 회의에서 더 논의하기로 한 것은 무엇인가요?",
-          "answerText": "지원 방안",
+          "prompt": "진행자가 다음 회의에서 논의하겠다고 한 대상을 지문에서 찾으시오.",
+          "answerText": "구체적인 지원 방안",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 91,
+              "start": 86,
               "end": 96
             }
           ],

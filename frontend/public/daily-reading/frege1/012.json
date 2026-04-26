@@ -913,7 +913,25 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "실제로 일어난 일이나 인정되는 내용을 무엇이라고 하나요?",
+          "prompt": "글 속에 섞여 있다고 한 것을 지문에서 찾으시오.",
+          "answerText": "다양한 정보",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 13,
+              "end": 19
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "실제로 일어난 일이나 누구나 인정하는 내용이라고 한 말을 지문에서 찾으시오.",
           "answerText": "사실",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -965,72 +983,14 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "글쓴이의 생각이나 주장을 무엇이라고 하나요?",
-          "answerText": "의견",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 96,
-              "end": 98
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p3",
-              "start": 67,
-              "end": 69
-            },
-            {
-              "paragraphId": "p3",
-              "start": 73,
-              "end": 75
-            },
-            {
-              "paragraphId": "p3",
-              "start": 134,
-              "end": 136
-            },
-            {
-              "paragraphId": "p4",
-              "start": 12,
-              "end": 14
-            },
-            {
-              "paragraphId": "p4",
-              "start": 40,
-              "end": 42
-            },
-            {
-              "paragraphId": "p4",
-              "start": 51,
-              "end": 53
-            },
-            {
-              "paragraphId": "p4",
-              "start": 81,
-              "end": 83
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q3",
-          "prompt": "사실은 어떤 정보라고 설명했나요?",
-          "answerText": "객관적인 정보",
+          "prompt": "사실이 어떤 정보인지 설명한 어구를 지문에서 찾으시오.",
+          "answerText": "증명할 수 있는 객관적인 정보",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 13,
+              "start": 4,
               "end": 20
             }
           ],
@@ -1042,14 +1002,22 @@
         },
         {
           "id": "q4",
-          "prompt": "글쓴이의 개성 있는 생각이 잘 드러나는 글의 예시는 무엇인가요?",
-          "answerText": "논설문",
-          "answerMatchMode": "ANY",
+          "prompt": "의견이 담긴 글이 하려는 일을 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "독자를 설득하거나",
+            "자신의 마음을 표현하려"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 110,
-              "end": 113
+              "start": 83,
+              "end": 92
+            },
+            {
+              "paragraphId": "p3",
+              "start": 93,
+              "end": 105
             }
           ],
           "scoring": {
@@ -1060,14 +1028,14 @@
         },
         {
           "id": "q5",
-          "prompt": "글을 읽을 때 필요한 태도는 무엇인가요?",
-          "answerText": "비판적으로",
+          "prompt": "글을 읽을 때 지녀야 한다고 한 습관을 지문에서 찾으시오.",
+          "answerText": "사실과 의견을 구분하는 습관",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 90,
-              "end": 95
+              "start": 8,
+              "end": 23
             }
           ],
           "scoring": {

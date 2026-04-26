@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "미리 막아 방지함은?",
-          "answerText": "예방하기",
-          "answerMatchMode": "EXACT",
+          "prompt": "기구를 이용할 때 주변을 어떻게 해야 하는지 찾으시오.",
+          "answerText": "주변을 살피며",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 39,
-              "end": 43
+              "paragraphId": "p1",
+              "start": 17,
+              "end": 24
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "남을 도와주거나 살핌은?",
-          "answerText": "배려하는",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구들과 부딪치지 않도록 어떻게 이동해야 하는지 찾으시오.",
+          "answerText": "앞을 잘 보고",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 77,
-              "end": 81
+              "paragraphId": "p1",
+              "start": 48,
+              "end": 55
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "지켜야 할 행동 방식은?",
-          "answerText": "수칙을",
-          "answerMatchMode": "EXACT",
+          "prompt": "그네 근처를 지나갈 때 어떻게 간다고 했는지 찾으시오.",
+          "answerText": "멀리 돌아갑니다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 22,
+              "end": 30
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "모두의 즐거움을 보호해 주는 행동을 찾으시오.",
+          "answerText": "바른 자세로 걷는 행동",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 14,
-              "end": 17
+              "start": 31,
+              "end": 43
             }
           ],
           "scoring": {

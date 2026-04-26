@@ -557,14 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "물체의 표면에서 빛이 한 방향으로 가지런하게 반사되는 현상은?",
-          "answerText": "정반사가",
-          "answerMatchMode": "EXACT",
+          "prompt": "거울이 사물의 모습을 보여줄 때 이용하는 원리를 찾으시오.",
+          "answerText": "반사 원리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 33,
-              "end": 37
+              "paragraphId": "p1",
+              "start": 7,
+              "end": 12
             }
           ],
           "scoring": {
@@ -576,14 +576,22 @@
         },
         {
           "id": "q2",
-          "prompt": "물체의 표면이 울퉁불퉁하여 빛이 여러 방향으로 흩어져 반사되는 현상은?",
-          "answerText": "난반사가",
-          "answerMatchMode": "EXACT",
+          "prompt": "정반사가 일어나게 하는 표면의 특징과 그 현상을 모두 찾으시오.",
+          "answerTexts": [
+            "매끄러운 표면",
+            "정반사"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 81,
-              "end": 85
+              "start": 0,
+              "end": 7
+            },
+            {
+              "paragraphId": "p2",
+              "start": 33,
+              "end": 36
             }
           ],
           "scoring": {
@@ -595,13 +603,48 @@
         },
         {
           "id": "q3",
-          "prompt": "자동차 운전석 옆에 달려 뒤쪽을 볼 수 있게 만든 거울은?",
-          "answerText": "백미러",
-          "answerMatchMode": "EXACT",
+          "prompt": "난반사가 일어나게 하는 물체와 그 현상을 모두 찾으시오.",
+          "answerTexts": [
+            "울퉁불퉁한 종이",
+            "난반사"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 48,
+              "end": 56
+            },
+            {
+              "paragraphId": "p2",
+              "start": 81,
+              "end": 84
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "거울의 활용법으로 조사한 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "잠수함의 망원경",
+            "자동차의 백미러"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 20,
+              "start": 4,
+              "end": 12
+            },
+            {
+              "paragraphId": "p3",
+              "start": 15,
               "end": 23
             }
           ],

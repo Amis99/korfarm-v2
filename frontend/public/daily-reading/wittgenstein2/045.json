@@ -571,17 +571,32 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "'샛별은 샛별이다'와 '샛별은 개밥바라기이다'의 차이를 설명하는 말로 가장 적절한 것은?",
+          "prompt": "정보의 양이 다르다고 설명되는 두 동일성 명제를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 51,
-              "end": 59
+              "start": 50,
+              "end": 60
             },
             {
               "paragraphId": "p3",
-              "start": 59,
-              "end": 67
+              "start": 58,
+              "end": 68
+            },
+            {
+              "paragraphId": "p1",
+              "start": 62,
+              "end": 75
+            },
+            {
+              "paragraphId": "p3",
+              "start": 89,
+              "end": 102
+            },
+            {
+              "paragraphId": "p4",
+              "start": 151,
+              "end": 164
             }
           ],
           "scoring": {
@@ -589,37 +604,30 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "샛별은 샛별이다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'샛별은 샛별이다'",
+            "'샛별은 개밥바라기이다'"
+          ]
         },
         {
           "id": "q2",
-          "prompt": "이 문단에서 '지시체'와 '뜻'의 관계를 가장 잘 설명한 것은?",
+          "prompt": "프레게가 이름의 의미를 나누어 설명한 두 요소를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 29,
-              "end": 32
-            },
-            {
-              "paragraphId": "p2",
-              "start": 41,
-              "end": 44
-            },
-            {
-              "paragraphId": "p2",
-              "start": 123,
-              "end": 126
-            },
-            {
-              "paragraphId": "p3",
-              "start": 126,
-              "end": 129
+              "start": 23,
+              "end": 26
             },
             {
               "paragraphId": "p4",
-              "start": 140,
-              "end": 143
+              "start": 11,
+              "end": 14
+            },
+            {
+              "paragraphId": "p2",
+              "start": 28,
+              "end": 33
             }
           ],
           "scoring": {
@@ -627,17 +635,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지시체"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'뜻'",
+            "'지시체'"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "프레게가 뜻을 바라본 방식으로 가장 알맞은 것은?",
+          "prompt": "지시체의 뜻을 설명한 부분을 지문에서 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 252
+              "paragraphId": "p2",
+              "start": 46,
+              "end": 61
             }
           ],
           "scoring": {
@@ -646,16 +657,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 설명을 따르면 'a=a'와 'a=b'가 같은 참값을 지닌다고 해도 정보량이 동일하다고 볼 수 없다. '샛별은 샛별이다'는 하나의 표현을 되풀이한 것이지만, '샛별은 개밥바라기이다'는 서로 다른 뜻을 가진 두 표현이 동일한 지시체를 가진다는 사실을 알려 준다. 프레게는 뜻을 개인의 머릿속 심상이 아니라, 언어 공동체 안에서 비교 가능한 객관적 제시 방식으로 보았다. 그래서 뜻의 차이를 통해 동일성 명제의 정보 차이를 설명할 수 있다고 본 것이다."
+          "answerText": "표현이 실제로 가리키는 대상"
         },
         {
           "id": "q4",
-          "prompt": "이 문단에서 러셀이 다시 부딪힌 난점으로 가장 알맞은 것은?",
+          "prompt": "뜻의 뜻을 설명한 부분을 지문에서 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 211
+              "paragraphId": "p2",
+              "start": 68,
+              "end": 87
             }
           ],
           "scoring": {
@@ -664,16 +675,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "러셀은 이 설명에서 '뜻'이라는 항목이 지나치게 많아졌다고 비판했다. 그에게 중요한 것은 문장의 논리적 구조를 드러내는 일이었지, 이름 옆에 새로운 의미 층위를 하나 더 세우는 일이 아니었다. 그러나 러셀도 곧 같은 난점에 부딪혔다. 만약 의미를 곧 지시체라고만 보면, '샛별은 개밥바라기이다' 역시 같은 대상에 대한 반복처럼 처리되어 정보 차이를 설명하기 어려워지기 때문이다."
+          "answerText": "그 대상을 어떤 방식으로 제시하는지"
         },
         {
           "id": "q5",
-          "prompt": "러셀의 분석에서 동일성 명제는 어떤 성격을 띠게 되는가?",
+          "prompt": "'샛별'과 '개밥바라기'가 모두 가리키는 대상을 지문에서 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 222
+              "paragraphId": "p2",
+              "start": 113,
+              "end": 115
             }
           ],
           "scoring": {
@@ -682,16 +693,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이를 해결하기 위해 러셀은 기술 이론을 제시했다. 그는 '샛별'과 '개밥바라기'를 그 자체로 완성된 고유명이라기보다, 각각 '새벽에 보이는 특정한 행성', '저녁에 보이는 특정한 행성'이라는 한정 기술구가 줄어든 표현으로 분석했다. 이렇게 보면 동일성 명제는 단순히 이름 두 개를 맞바꾸는 문장이 아니라, 서로 다른 기술 내용을 가진 두 표현이 같은 대상을 가리킨다는 사실을 드러내는 문장이 된다."
+          "answerText": "금성"
         },
         {
           "id": "q6",
-          "prompt": "이 글의 결론으로 가장 알맞은 것은?",
+          "prompt": "러셀이 프레게의 설명을 비판한 이유를 지문에서 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 195
+              "paragraphId": "p4",
+              "start": 11,
+              "end": 32
             }
           ],
           "scoring": {
@@ -700,7 +711,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 프레게와 러셀은 모두 동일성 명제의 정보 차이를 설명하려 했지만, 접근 방식은 달랐다. 프레게는 제시 방식의 차이를 뜻이라는 개념으로 설명했고, 러셀은 표현을 한정 기술구로 풀어 논리 구조를 다시 세움으로써 문제를 해결하려 했다. 두 이론은 모두 언어의 표면적 형태만으로는 문장이 전달하는 정보 구조를 충분히 설명할 수 없다는 점을 보여 준다."
+          "answerText": "'뜻'이라는 항목이 지나치게 많아졌다고"
+        },
+        {
+          "id": "q7",
+          "prompt": "러셀이 문제를 해결하기 위해 제시한 이론을 지문에서 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 15,
+              "end": 20
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "기술 이론"
+        },
+        {
+          "id": "q8",
+          "prompt": "러셀이 '샛별'과 '개밥바라기'를 분석한 한정 기술구를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 69,
+              "end": 85
+            },
+            {
+              "paragraphId": "p5",
+              "start": 87,
+              "end": 103
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'새벽에 보이는 특정한 행성'",
+            "'저녁에 보이는 특정한 행성'"
+          ]
         }
       ]
     }

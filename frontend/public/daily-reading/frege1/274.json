@@ -913,14 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "책을 비슷한 내용끼리 모아 나누어 정리하는 방법을 무엇이라고 하나요?",
-          "answerText": "도서관 분류법",
+          "prompt": "책들이 어떻게 꽂혀 있으면 원하는 책을 찾기 어려울 것이라고 했나요?",
+          "answerText": "아무렇게나 꽂혀 있다면",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 129,
-              "end": 136
+              "start": 31,
+              "end": 43
             }
           ],
           "scoring": {
@@ -931,14 +931,14 @@
         },
         {
           "id": "q2",
-          "prompt": "우리나라 도서관에서 주로 사용하는 분류법은 무엇인가요?",
-          "answerText": "한국십진분류법",
+          "prompt": "한국십진분류법이 세상의 모든 지식을 나누는 기준을 나타낸 어구를 찾으시오.",
+          "answerText": "열 가지 큰 주제",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 15,
-              "end": 22
+              "start": 46,
+              "end": 55
             }
           ],
           "scoring": {
@@ -949,19 +949,14 @@
         },
         {
           "id": "q3",
-          "prompt": "책이 꽂혀 있는 정확한 위치를 알려 주는 것은 무엇인가요?",
-          "answerText": "청구 기호",
+          "prompt": "각각의 주제에 붙는 세 자리 숫자의 범위를 나타낸 어구를 찾으시오.",
+          "answerText": "0번부터 900번까지",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 43,
-              "end": 48
-            },
-            {
-              "paragraphId": "p3",
-              "start": 87,
-              "end": 92
+              "paragraphId": "p2",
+              "start": 88,
+              "end": 99
             }
           ],
           "scoring": {
@@ -972,14 +967,22 @@
         },
         {
           "id": "q4",
-          "prompt": "청구 기호를 따라가면 원하는 책을 쉽게 발견하게 되는 곳은 어디인가요?",
-          "answerText": "서가",
-          "answerMatchMode": "ANY",
+          "prompt": "청구 기호에 섞여 있는 정보를 모두 찾으시오.",
+          "answerTexts": [
+            "주제를 나타내는 숫자",
+            "작가의 이름"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 139,
-              "end": 141
+              "start": 95,
+              "end": 106
+            },
+            {
+              "paragraphId": "p3",
+              "start": 108,
+              "end": 114
             }
           ],
           "scoring": {
@@ -990,19 +993,14 @@
         },
         {
           "id": "q5",
-          "prompt": "글에서 청구 기호를 무엇과 같다고 설명했나요?",
-          "answerText": "주소",
+          "prompt": "책의 주소를 확인하며 찾는 연습이 무엇이 된다고 했나요?",
+          "answerText": "즐거운 독서 생활의 첫걸음",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 77,
-              "end": 79
-            },
-            {
               "paragraphId": "p4",
-              "start": 114,
-              "end": 116
+              "start": 148,
+              "end": 162
             }
           ],
           "scoring": {

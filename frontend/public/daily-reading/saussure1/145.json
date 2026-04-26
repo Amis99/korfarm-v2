@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "일곱 색깔 무엇는 예뻐요인가요?",
+          "prompt": "비가 그친 뒤 하늘에 일곱 색깔로 나타나는 알록달록한 것은 무엇인가요? 지문에서 한 단어로 찾아 보세요",
           "answerText": "무지개",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -601,33 +601,9 @@
         },
         {
           "id": "q2",
-          "prompt": "작은 무엇들이 모여요인가요?",
-          "answerText": "물방울",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 55,
-              "end": 58
-            },
-            {
-              "paragraphId": "p1",
-              "start": 79,
-              "end": 82
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "물방울이 무엇을 받았나요?",
+          "prompt": "공기 중에 떠 있는 작은 물방울들이 무엇을 받아 무지개가 생긴다고 했나요? 지문에서 한 단어로 찾아 보세요",
           "answerText": "햇빛",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -643,6 +619,94 @@
               "paragraphId": "p2",
               "start": 99,
               "end": 101
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "무지개의 일곱 색깔에는 어떤 것들이 있나요? 지문에서 빨간색·주황색을 빼고 나머지 다섯 가지를 모두 찾아 보세요",
+          "answerText": "노란색,초록색,파란색,남색,보라색",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 42,
+              "end": 45
+            },
+            {
+              "paragraphId": "p2",
+              "start": 47,
+              "end": 50
+            },
+            {
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 55
+            },
+            {
+              "paragraphId": "p2",
+              "start": 57,
+              "end": 59
+            },
+            {
+              "paragraphId": "p2",
+              "start": 61,
+              "end": 64
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "우리가 분무기로 물을 뿌리며 등 뒤로 햇빛을 받으면 무엇을 만들 수 있다고 했나요? 지문에서 한 단어로 찾아 보세요",
+          "answerText": "무지개",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 22,
+              "end": 25
+            },
+            {
+              "paragraphId": "p1",
+              "start": 36,
+              "end": 39
+            },
+            {
+              "paragraphId": "p1",
+              "start": 133,
+              "end": 136
+            },
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 3
+            },
+            {
+              "paragraphId": "p2",
+              "start": 110,
+              "end": 113
+            },
+            {
+              "paragraphId": "p2",
+              "start": 141,
+              "end": 144
+            },
+            {
+              "paragraphId": "p2",
+              "start": 171,
+              "end": 174
             }
           ],
           "scoring": {

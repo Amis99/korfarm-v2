@@ -571,30 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 어떤 상황이나 장면을 보여 주는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 74
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그 노인이 눈물을 흘리며 왈\n“사십 후에 한 자식을 두었다가 갑자년 난중에 잃었나이다.”\n진옥이 왈\n“그 자식의 이름을 아시나이까?”"
-        },
-        {
-          "id": "q2",
-          "prompt": "둘째 문단은 어떤 상황이나 장면을 보여 주는가?",
+          "prompt": "노인이 말한 자식의 이름을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 119
+              "start": 18,
+              "end": 21
             }
           ],
           "scoring": {
@@ -603,16 +585,39 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "노인이 답왈\n“내 자식의 이름은 김진옥이거니와 화초암에서 공부하다가 이별하였더니 지금 사생존망을 모르나이다.”\n하거늘 원수가 그제야 부친인 줄 알고 그 노인을 붙들고 ㉠대성통곡 왈\n“소자의 이름이 진옥이로소이다.”"
+          "answerText": "김진옥"
+        },
+        {
+          "id": "q2",
+          "prompt": "노인이 자식을 잃었다고 한 때를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 34,
+              "end": 40
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "갑자년 난중"
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 어떤 상황이나 장면을 보여 주는가?",
+          "prompt": "부자가 서로를 알아보는 장면에서 반복되는 표현을 찾으시오.",
           "answerRanges": [
             {
+              "paragraphId": "p2",
+              "start": 94,
+              "end": 98
+            },
+            {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 136
+              "start": 21,
+              "end": 25
             }
           ],
           "scoring": {
@@ -621,16 +626,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "하니 그 노인이 진옥이란 말을 듣고 ㉡대성통곡하고 기절하고 엎어지니 진옥이 눈물을 그치고 부친을 위로하며 전후사를 낱낱이 설화하더라. 그런 뒤에 배를 타고 만경창파에 떠서 고국으로 향하더니 한곳에 다다르니 바람결에 청아한 ⓐ옥피리 소리 들리거늘"
+          "answerText": "대성통곡"
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 어떤 상황이나 장면을 보여 주는가?",
+          "prompt": "동자가 김 원수에게 배를 멈추라고 한 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 98
+              "start": 50,
+              "end": 67
             }
           ],
           "scoring": {
@@ -639,16 +644,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "살펴보니 일위 동자가 청의를 입고 머리에 화관을 쓰고 ⓑ일엽편주를 타고 살같이 오며 왈\n“김 원수는 배를 잠시 멈추소서.”\n하며 급히 불러 왈\n“수부 왕이 청하시니 가사이다.”"
+          "answerText": "김 원수는 배를 잠시 멈추소서."
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 어떤 상황이나 장면을 보여 주는가?",
+          "prompt": "동자가 김 원수를 청한다고 한 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 131
+              "paragraphId": "p4",
+              "start": 81,
+              "end": 85
             }
           ],
           "scoring": {
@@ -657,16 +662,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "하거늘 원수가 대왈\n“용왕은 수부 용신이요, 진옥은 진세지인이라. 용궁과 인세가 길이 다르니 어찌 서로 미치리오?”\n원수가 부친께 고하여 왈\n“어찌 하오리까?”\n하니 그 부친이 왈\n“용왕이 청하시니 어찌 거역하리오. 아모케든 가리라.”"
+          "answerText": "수부 왕"
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 어떤 상황이나 장면을 보여 주는가?",
+          "prompt": "원수가 서로 길이 다르다고 대비한 두 공간을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 123
+              "paragraphId": "p5",
+              "start": 37,
+              "end": 39
+            },
+            {
+              "paragraphId": "p5",
+              "start": 41,
+              "end": 43
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "용궁",
+            "인세"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "용왕의 청을 거역하지 않겠다는 부친의 말을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 102,
+              "end": 130
             }
           ],
           "scoring": {
@@ -675,7 +706,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "하시니 원수가 동자를 따라 수부에 이르니 일월이 명랑하고 천지가 광활하고 주궁이 장려하고 위의가 거룩하더라. 이때 용왕이 원수를 맞아 ⓒ백옥상에 좌정한 후 왈\n“원수의 존명을 들은 지 오래더니 오늘에서야 처음 보는도다.”"
+          "answerText": "용왕이 청하시니 어찌 거역하리오. 아모케든 가리라."
+        },
+        {
+          "id": "q8",
+          "prompt": "용왕이 원수를 맞아 앉힌 자리를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 76,
+              "end": 79
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "백옥상"
         }
       ]
     }

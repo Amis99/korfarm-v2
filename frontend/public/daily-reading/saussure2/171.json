@@ -562,7 +562,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "덧셈이나 곱셈에서 아랫자리의 계산 결과가 10 이상일 때 윗자리로 넘기는 것은?",
+          "prompt": "두 자리 수의 덧셈에서 중요한 계산 방법을 지문에서 찾으시오.",
           "answerText": "받아올림",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -590,14 +590,50 @@
         },
         {
           "id": "q2",
-          "prompt": "어떤 문제의 바르고 정확한 답을 뜻하는 말은?",
-          "answerText": "정답",
+          "prompt": "두 자리 수를 더할 때 먼저 계산해야 하는 자리를 지문에서 찾으시오.",
+          "answerText": "일의 자리부터 먼저 계산해야 해요",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 14,
+              "end": 32
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "12에서 10을 어떻게 해야 하는지 지문에서 찾으시오.",
+          "answerText": "12에서 10은 십의 자리로 올려 보내고",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 64,
+              "end": 86
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "27 더하기 15의 정답을 지문에서 찾으시오.",
+          "answerText": "42",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 102,
-              "end": 104
+              "start": 106,
+              "end": 108
             }
           ],
           "scoring": {

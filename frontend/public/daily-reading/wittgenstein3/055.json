@@ -571,12 +571,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 교내 우산 대여함 운영 개선 제안문 초고와 관련해 글을 쓰게 된 문제의식을 어떻게 밝히는가?",
+          "prompt": "1문단에서, 글쓴이가 자주 본 학생들의 문제를 보여 주는 두 상황을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 178
+              "start": 60,
+              "end": 77
+            },
+            {
+              "paragraphId": "p1",
+              "start": 83,
+              "end": 105
             }
           ],
           "scoring": {
@@ -584,17 +589,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "비 오는 날 아침마다 학교 현관에는 우산이 없어 난처해하는 학생들이 자주 보인다. 갑자기 비가 오는 날에는 집에서 우산을 챙기지 못한 학생도 있고, 등교길에 우산이 망가져 곤란을 겪는 학생도 있다. 이런 문제를 줄이기 위해 현재 설치된 우산 대여함을 조금 더 실용적으로 운영할 필요가 있다고 생각해서 이 제안문을 쓴다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "집에서 우산을 챙기지 못한 학생",
+            "등교길에 우산이 망가져 곤란을 겪는 학생"
+          ]
         },
         {
           "id": "q2",
-          "prompt": "2문단은 현재 상황이나 조사 내용을 어떤 방향으로 제시하는가?",
+          "prompt": "2문단에서, 지금의 우산 대여함에서 분명하지 않다고 지적한 것을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 181
+              "start": 31,
+              "end": 36
             }
           ],
           "scoring": {
@@ -603,16 +611,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "지금의 우산 대여함은 존재 자체를 모르는 학생이 많고, 사용 방법도 분명하지 않다. 실제로 우리 반 학생들에게 물어보니 대여 위치를 정확히 안다고 답한 학생이 절반도 되지 않았다. 또 반납 시간을 모르겠어서 아예 이용하지 않았다는 답도 있었는데, 이런 부분은 안내문이 작아서 눈에 잘 안 띄는 문제와도 관계가 있는 것 같다."
+          "answerText": "사용 방법"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 첫 개선안이나 핵심 근거를 무엇으로 설명하는가?",
+          "prompt": "3문단에서, 우산 대여함 위치를 옮기거나 표시해야 할 곳을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 196
+              "start": 25,
+              "end": 40
             }
           ],
           "scoring": {
@@ -621,16 +629,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "우선 대여함 위치를 현관 안쪽 구석이 아니라 출입구 옆 안내 게시판 근처로 옮기거나, 지금 위치를 유지하더라도 바닥 스티커나 화살표 표시를 추가해야 한다. 학생들은 급하게 이동하면서 물건을 찾기 때문에, 글씨만 붙여 두는 것보다 시선에 바로 들어오는 표시가 더 효과적일 것이다. 그리고 대여 기준도 지금보다 간단히 적어야 학생들이 덜 망설일 수 있다."
+          "answerText": "출입구 옆 안내 게시판 근처"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 추가 제안이나 고려할 점을 어떤 이유와 함께 내놓는가?",
+          "prompt": "3문단에서, 글쓴이가 글씨만 붙여 놓는 것보다 더 효과적이라고 한 것을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 190
+              "paragraphId": "p3",
+              "start": 128,
+              "end": 142
             }
           ],
           "scoring": {
@@ -639,16 +647,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "또한 반납 규정도 조금 조정할 필요가 있다. 현재는 언제까지 반납해야 하는지 애매해서 며칠씩 가져가는 사례가 생길 수 있는데, 사용 당일이나 다음 날 오전까지 반납하도록 분명히 적는 편이 좋다. 다만 장마철에는 예외를 둘 수도 있을 것 같다. 이 부분은 너무 엄격하게만 쓰면 오히려 이용률이 떨어질 수 있어서 표현을 조금 더 조절해야 한다."
+          "answerText": "시선에 바로 들어오는 표시"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 실행 과정의 조건이나 우려를 어떻게 따져 보는가?",
+          "prompt": "4문단에서, 반납 기한을 어떻게 분명히 적는 것이 좋다고 했는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 198
+              "paragraphId": "p4",
+              "start": 71,
+              "end": 91
             }
           ],
           "scoring": {
@@ -657,16 +665,47 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "운영 방식에서는 학생회나 생활안전부가 한 달에 한 번 정도 대여함 상태를 점검하면 좋겠다. 우산 개수가 얼마나 남아 있는지, 고장 난 우산이 섞여 있지는 않은지 확인하지 않으면 제도가 있어도 실제로는 잘 굴러가지 않는다. 그리고 분실을 막기 위해 학번을 적게 하는 방법도 생각해 보았는데, 이 방식은 번거롭다는 의견이 나올 수 있어서 더 검토가 필요하다."
+          "answerText": "사용 당일이나 다음 날 오전까지 반납"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 이 글의 결론과 요청을 어떻게 마무리하는가?",
+          "prompt": "5문단에서, 대여함 상태를 점검할 주체를 모두 찾으시오.",
           "answerRanges": [
             {
+              "paragraphId": "p5",
+              "start": 9,
+              "end": 12
+            },
+            {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 205
+              "start": 186,
+              "end": 189
+            },
+            {
+              "paragraphId": "p5",
+              "start": 14,
+              "end": 19
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "학생회",
+            "생활안전부"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "5문단에서, 분실을 막기 위한 방법이 검토가 필요한 이유를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 168,
+              "end": 182
             }
           ],
           "scoring": {
@@ -675,7 +714,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "우산 대여함은 큰 비용이 드는 시설이 아니지만 학생들이 바로 체감할 수 있는 생활 지원 제도라는 점에서 의미가 있다. 지금처럼 있는 사람만 알고 쓰는 방식에서 벗어나 안내, 반납 기준, 점검 방법을 함께 손보면 훨씬 효율적으로 운영될 수 있다. 학교가 이런 작은 불편을 먼저 줄여 주면 학생 만족도도 높아질 것이고, 이 제안이 다음 학생회 회의에서 논의되었으면 한다."
+          "answerText": "번거롭다는 의견이 나올 수"
+        },
+        {
+          "id": "q8",
+          "prompt": "6문단에서, 안내, 반납 기준, 점검 방법을 함께 손보면 대여함을 어떻게 운영할 수 있다고 했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 118,
+              "end": 135
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "훨씬 효율적으로 운영될 수 있다"
         }
       ]
     }

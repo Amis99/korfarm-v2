@@ -571,111 +571,73 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"가격 조정으로 부담이 옮겨 갈 수 있기 때문\"에 해당하는 부분은 어디인가요?",
+          "prompt": "이 글에서 부담이 누구에게 돌아가는지를 설명하는 경제학 개념의 이름이 본문에 등장하는 위치를 모두 찾으시오",
+          "answerTexts": ["조세 전가"],
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 186
-            }
+            {"paragraphId": "p1", "start": 0, "end": 5},
+            {"paragraphId": "p1", "start": 142, "end": 147},
+            {"paragraphId": "p4", "start": 0, "end": 5},
+            {"paragraphId": "p6", "start": 5, "end": 10}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "조세 전가는 세금을 법적으로 누가 내느냐와 별개로, 실제 부담이 누구에게 돌아가느냐를 설명하는 경제학 개념이다. 어떤 상품에 세금을 부과하면 겉으로는 판매자가 세금을 납부할 수 있지만, 가격 조정을 통해 소비자가 그 일부를 더 부담할 수도 있다. 따라서 조세 전가는 세금의 명목상 부담자와 실질적 부담자가 다를 수 있음을 보여 준다."
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "\"가격 인상으로 세금을 더 넘길 수 있다\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 204
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "둘째 문단에서 세금 부담의 분배를 좌우한다고 한 핵심 기준의 이름을 찾으시오",
+          "answerText": "가격 탄력성",
           "answerMatchMode": "ANY",
-          "answerText": "이때 중요한 기준은 수요와 공급의 가격 탄력성이다. 소비자가 가격이 조금만 올라가도 구매를 크게 줄이는 상품이라면 판매자는 세금만큼 가격을 올리기 어렵다. 반대로 소비자가 가격 변화에 둔감하면 가격 인상을 통해 세금을 더 많이 넘길 수 있다. 공급 측도 마찬가지로, 생산자가 물량을 쉽게 줄이거나 다른 시장으로 이동할 수 있느냐에 따라 세금 부담의 분배가 달라진다."
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 19, "end": 25}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "\"경제 활동이 확장과 수축을 반복하는 흐름\"에 해당하는 부분은 어디인가요?",
+          "prompt": "경기 순환의 두 국면을 한꺼번에 가리키는 표현이 본문에 등장하는 위치를 모두 찾으시오",
+          "answerTexts": ["확장과 수축"],
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 211
-            }
+            {"paragraphId": "p3", "start": 14, "end": 20},
+            {"paragraphId": "p6", "start": 60, "end": 66}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "경기 순환은 경제 활동이 확장과 수축을 반복하는 현상을 말한다. 생산과 소비, 고용, 투자 같은 지표가 일정 시기에는 늘어나고, 또 다른 시기에는 줄어드는 흐름이 반복해서 나타난다. 보통 경기가 좋아질 때는 수요가 늘고 기업의 투자도 활발해지지만, 경기 둔화기에는 소비와 투자가 함께 위축되기 쉽다. 따라서 같은 세금 정책이라도 경기 국면에 따라 효과가 다르게 나타날 수 있다."
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "\"소비 심리가 강하고 판매량을 유지하기 쉬워서\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 211
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "넷째 문단에서 경기 침체기에 세금 전가가 어려워질 때 그 부담이 결국 어떤 형태로 나타날 수 있는지 그 결과 표현을 찾으시오",
+          "answerText": "기업 이윤 감소",
           "answerMatchMode": "ANY",
-          "answerText": "조세 전가와 경기 순환은 서로 연결된다. 경기가 좋을 때는 소비 심리가 강하고 기업도 판매량을 유지하기 쉬워 세금 인상분을 가격에 반영하기가 상대적으로 쉬울 수 있다. 반대로 경기 침체기에는 수요가 약해져 가격을 조금만 올려도 판매량이 크게 줄 수 있으므로, 판매자가 세금을 온전히 전가하기 어려워질 수 있다. 이 경우 세금 부담은 기업 이윤 감소로 더 많이 나타날 수도 있다."
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 186, "end": 194}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "\"경기와 시장 반응도 함께 건드리기 때문\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 202
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "다섯째 문단에서 같은 세금이라도 전가 양상이 달라진다고 든 두 시장의 예시를 함께 가리키는 표현을 찾으시오",
+          "answerText": "필수재 시장과 사치재 시장",
           "answerMatchMode": "ANY",
-          "answerText": "그래서 정부가 세금 정책을 설계할 때는 세율만 볼 것이 아니라, 어떤 시장에 부과하는지와 현재 경제가 어느 국면에 있는지를 함께 살펴야 한다. 같은 세금이라도 필수재 시장과 사치재 시장에서 전가 양상이 다르고, 확장기와 침체기에서 부담 배분이 달라질 수 있기 때문이다. 세금 정책은 세수 확보 수단이면서 동시에 경기와 시장 반응을 건드리는 정책 수단이기도 하다."
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 89, "end": 103}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q6",
-          "prompt": "\"전자는 세금 부담의 분배, 후자는 경제 환경의 변화\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 184
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "첫 문단에서 세금을 실제로 부담하는 사람을 가리키는 용어를 찾으시오",
+          "answerText": "실질적 부담자",
           "answerMatchMode": "ANY",
-          "answerText": "정리하면 조세 전가는 세금 부담이 실제로 누구에게 이전되는지를 설명하는 개념이고, 경기 순환은 경제 활동의 확장과 수축이 반복되는 흐름을 가리킨다. 전자는 세금 부담의 분배를, 후자는 경제 환경의 변화를 보여 준다. 따라서 두 개념을 함께 보면 세금 정책이 시장 참가자에게 어떤 방식으로 작용하는지 더 구체적으로 이해할 수 있다."
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 162, "end": 169}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

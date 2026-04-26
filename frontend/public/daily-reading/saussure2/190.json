@@ -559,41 +559,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "어떤 모임에 오라고 사람을 부르는 것은?",
-          "answerText": "초대",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이의 생일이 언제인지 알려 주는 문장을 지문에서 찾으시오.",
+          "answerText": "내일은 나의 여덟 번째 생일이에요.",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 33,
-              "end": 35
-            },
-            {
-              "paragraphId": "p2",
               "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p3",
-              "start": 4,
-              "end": 6
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "어떤 일이 일어나는 곳은?",
-          "answerText": "장소",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 17,
               "end": 19
             }
           ],
@@ -604,14 +576,50 @@
           "revealOnWrong": true
         },
         {
+          "id": "q2",
+          "prompt": "친구들을 부르기 위해 만든 물건을 나타내는 어구를 지문에서 찾으시오.",
+          "answerText": "친구들을 집으로 초대하는 카드",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 24,
+              "end": 40
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q3",
-          "prompt": "앞으로 어떻게 하겠다고 다짐하는 것은?",
-          "answerText": "약속",
-          "answerMatchMode": "EXACT",
+          "prompt": "초대장에 쓴 파티 정보 두 가지를 묶은 어구를 지문에서 찾으시오.",
+          "answerText": "날짜와 장소",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 13,
+              "end": 19
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "친구들이 오겠다고 다짐한 행동을 나타내는 어구를 지문에서 찾으시오.",
+          "answerText": "꼭 오겠다고 약속",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 52,
+              "start": 45,
               "end": 54
             }
           ],

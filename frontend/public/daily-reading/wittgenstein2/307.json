@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "해양 온도차 발전이 이용하는 온도 차이를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 159
+              "start": 11,
+              "end": 26
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "해양 온도차 발전은 표층수와 심층수의 온도 차이를 이용해 전력을 생산하는 방식이다. 태양열을 많이 흡수한 표층수는 비교적 따뜻하고, 깊은 곳의 심층수는 낮은 온도를 유지한다. 이 차이가 충분할 때 냉매는 가열과 냉각을 반복하며 순환할 수 있고, 그 과정에서 전기를 만들어 낼 수 있다."
+          "answerText": "표층수와 심층수의 온도 차이"
         },
         {
           "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "비교적 따뜻하다고 설명된 물을 가리키는 표현을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 155
+              "paragraphId": "p1",
+              "start": 47,
+              "end": 62
             }
           ],
           "scoring": {
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "설비의 핵심은 냉매 펌프, 기화기, 노즐, 터빈, 응축기이다. 냉매 펌프는 액체 상태의 냉매를 기화기로 밀어 보내고, 기화기에서는 따뜻한 표층수가 냉매에 열을 전달한다. 냉매는 배관을 따라 이동하면서 액체와 기체가 섞인 상태가 되고, 뒤이어 압력 변화를 일으키는 장치로 향한다."
+          "answerText": "태양열을 많이 흡수한 표층수"
         },
         {
           "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "prompt": "냉매가 더 빨리 가열되는 조건을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 131
+              "start": 41,
+              "end": 49
+            },
+            {
+              "paragraphId": "p3",
+              "start": 50,
+              "end": 66
             }
           ],
           "scoring": {
@@ -620,17 +625,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "기화기에서 중요한 것은 표층수와 냉매 사이의 열전달이다. 두 유체 사이의 온도 차가 크고 열을 주고받는 면적이 넓을수록 냉매는 더 빨리 가열된다. 이때 표층수는 열을 넘겨준 뒤 배출되고, 냉매는 끓는점 부근에 이른 채 노즐로 이동한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "온도 차가 크고",
+            "열을 주고받는 면적이 넓을수록"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
+          "prompt": "노즐을 지나는 순간 낮아지는 것을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 154
+              "start": 24,
+              "end": 29
             }
           ],
           "scoring": {
@@ -639,16 +647,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "노즐을 지나는 순간 냉매의 속도는 빨라지고 내부 압력은 낮아진다. 압력이 낮아지면 냉매의 끓는점도 함께 내려가므로, 앞서 충분히 가열된 냉매는 완전히 기체 상태가 되어 터빈으로 들어간다. 결국 표층수의 열은 냉매의 상변화를 거쳐 터빈을 움직일 수 있는 조건으로 바뀌는 셈이다."
+          "answerText": "내부 압력"
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "압력이 낮아지면 함께 내려가는 것을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 166
+              "paragraphId": "p4",
+              "start": 46,
+              "end": 53
             }
           ],
           "scoring": {
@@ -657,16 +665,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "터빈 안으로 들어간 냉매 기체는 팽창하면서 회전 날개를 밀고, 이 회전이 발전기로 전달되어 전기가 생산된다. 에너지를 일부 내준 냉매는 온도가 떨어진 채 응축기로 이동한다. 응축기에서는 저온의 심층수가 냉매의 열을 흡수하므로 냉매가 다시 액체 상태로 바뀌고, 이후 펌프를 거쳐 기화기로 되돌아간다."
+          "answerText": "냉매의 끓는점"
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "터빈의 회전이 발전기로 전달되어 생기는 결과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 178
+              "paragraphId": "p5",
+              "start": 51,
+              "end": 59
             }
           ],
           "scoring": {
@@ -675,7 +683,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "해양 온도차 발전은 연료를 태우지 않고 바닷물의 온도 차를 이용하므로 오염 부담이 적다. 다만 안정적인 발전을 위해서는 표층수와 심층수의 온도 차가 충분하고, 깊은 곳의 차가운 바닷물을 끌어올릴 수 있는 해역 조건이 필요하다. 이런 점에서 수심이 깊고 해수 조건이 유리한 지역은 해양 온도차 발전의 활용 가능성이 높다."
+          "answerText": "전기가 생산된다"
+        },
+        {
+          "id": "q7",
+          "prompt": "안정적인 발전을 위해 필요한 조건을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 67,
+              "end": 87
+            },
+            {
+              "paragraphId": "p6",
+              "start": 89,
+              "end": 119
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "표층수와 심층수의 온도 차가 충분하고",
+            "깊은 곳의 차가운 바닷물을 끌어올릴 수 있는 해역 조건"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "응축기에서 냉매의 열을 흡수하는 대상을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 104,
+              "end": 111
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "저온의 심층수"
         }
       ]
     }

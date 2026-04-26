@@ -884,14 +884,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "제루샤가 같은 방을 쓰게 된 두 친구의 이름은 무엇인가요?",
-          "answerText": "줄리아와 샐리",
+          "prompt": "대학에 도착한 제루샤가 낯설게 느낀 상황을 나타내는 문장을 찾으시오.",
+          "answerText": "대학에 도착한 제루샤는 모든 것이 신기하고 낯설었다.",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 63,
-              "end": 70
+              "start": 0,
+              "end": 29
             }
           ],
           "scoring": {
@@ -902,14 +902,14 @@
         },
         {
           "id": "q2",
-          "prompt": "제루샤가 친구들에게 숨기기로 한 것은 무엇인가요?",
-          "answerText": "과거",
+          "prompt": "제루샤가 자신의 과거에 대해 내린 결심을 나타내는 어구를 찾으시오.",
+          "answerText": "자신의 과거를 숨기기로 결심했다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 9,
-              "end": 11
+              "start": 5,
+              "end": 22
             }
           ],
           "scoring": {
@@ -920,14 +920,22 @@
         },
         {
           "id": "q3",
-          "prompt": "제루샤가 매달 편지를 보낸 대상은 누구인가요?",
-          "answerText": "키다리 아저씨",
-          "answerMatchMode": "ANY",
+          "prompt": "제루샤와 같은 방을 쓰게 된 두 친구의 이름을 모두 찾으시오.",
+          "answerTexts": [
+            "줄리아",
+            "샐리"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 12,
-              "end": 19
+              "paragraphId": "p1",
+              "start": 63,
+              "end": 66
+            },
+            {
+              "paragraphId": "p1",
+              "start": 68,
+              "end": 70
             }
           ],
           "scoring": {
@@ -938,14 +946,14 @@
         },
         {
           "id": "q4",
-          "prompt": "답장은 오지 않았지만 제루샤에게 큰 위안이 된 것은 무엇인가요?",
-          "answerText": "편지 쓰기",
+          "prompt": "제루샤가 기뻐한 사실을 나타내는 표현을 찾으시오.",
+          "answerText": "누군가 자신의 이야기를 들어준다는 사실",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 79,
-              "end": 84
+              "start": 97,
+              "end": 118
             }
           ],
           "scoring": {
@@ -956,14 +964,14 @@
         },
         {
           "id": "q5",
-          "prompt": "제루샤의 내면을 단단하게 만든 것은 무엇인가요?",
-          "answerText": "지식과 경험",
+          "prompt": "학기가 지나며 제루샤의 내면이 어떻게 변하고 있었는지 나타내는 구절을 찾으시오.",
+          "answerText": "지식과 경험으로 단단해지고 있었다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 75,
-              "end": 81
+              "end": 93
             }
           ],
           "scoring": {

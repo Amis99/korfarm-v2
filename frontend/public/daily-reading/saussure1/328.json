@@ -396,20 +396,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "눈을 뭉쳐 만든 우체국?",
-          "answerText": "눈사람",
-          "answerMatchMode": "EXACT",
+          "prompt": "편지를 부치러 와서 눈사람의 장갑 사이에서 반짝이는 하얀 쪽지를 발견한 인물이 누구인지 찾아보세요",
+          "answerText": "몽이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 28,
-              "end": 31
-            },
-            {
-              "paragraphId": "p1",
-              "start": 70,
-              "end": 73
-            }
+            {"paragraphId": "p1", "start": 66, "end": 68},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 112, "end": 114}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -420,15 +413,11 @@
         },
         {
           "id": "q2",
-          "prompt": "편지를 부치는 공공기관?",
-          "answerText": "우체국",
-          "answerMatchMode": "EXACT",
+          "prompt": "마을 공원 한복판에 아이들이 정성껏 만든 커다란 무엇이 서 있다고 했는지 찾아보세요",
+          "answerText": "눈사람 우체국",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 32,
-              "end": 35
-            }
+            {"paragraphId": "p1", "start": 28, "end": 35}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -439,15 +428,28 @@
         },
         {
           "id": "q3",
-          "prompt": "비밀을 푸는 실마리?",
-          "answerText": "힌트",
-          "answerMatchMode": "EXACT",
+          "prompt": "몽이는 쪽지의 첫 번째 힌트를 풀기 위해 마을 뒤편에 있는 어디로 발걸음을 옮겼는지 찾아보세요",
+          "answerText": "미끄럼틀 산",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 13,
-              "end": 15
-            }
+            {"paragraphId": "p2", "start": 33, "end": 39},
+            {"paragraphId": "p2", "start": 59, "end": 65}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "미끄럼틀 산 꼭대기에는 마을 전체를 내려다볼 수 있는 무엇이 놓여 있었는지 찾아보세요",
+          "answerText": "망원경",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 92, "end": 95},
+            {"paragraphId": "p2", "start": 116, "end": 119}
           ],
           "scoring": {
             "correctDeltaSec": 10,

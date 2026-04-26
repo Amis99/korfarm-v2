@@ -562,19 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "진정 하늘로 날아오를 것처럼 생긴 거대한 모형과 신기한 우주복이 있었던 장소는?",
-          "answerText": "과학관",
-          "answerMatchMode": "EXACT",
+          "prompt": "부모님과 함께 방문한 곳을 지문에서 찾아 쓰시오.",
+          "answerText": "커다란 어린이 과학관",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 40,
+              "start": 32,
               "end": 43
-            },
-            {
-              "paragraphId": "p3",
-              "start": 133,
-              "end": 136
             }
           ],
           "scoring": {
@@ -586,14 +581,14 @@
         },
         {
           "id": "q2",
-          "prompt": "우주 공간을 힘차게 날아가는 놀라운 원리를 자세하고 친절하게 설명해 주신 분은 누구인가요?",
-          "answerText": "안내원",
-          "answerMatchMode": "EXACT",
+          "prompt": "1층 전시실에 서 있었던 모형을 지문에서 찾아 쓰시오.",
+          "answerText": "거대한 우주선 모형",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 62,
-              "end": 65
+              "paragraphId": "p1",
+              "start": 85,
+              "end": 95
             }
           ],
           "scoring": {
@@ -605,19 +600,33 @@
         },
         {
           "id": "q3",
-          "prompt": "우주선 모형의 무척 섬세한 생김새와 재미있는 특징을 하나하나 잊지 않고 메모한 작은 노트는?",
-          "answerText": "수첩",
-          "answerMatchMode": "EXACT",
+          "prompt": "보고서에 기록한 우주선 모형의 날개 색과 부위를 지문에서 찾아 쓰시오.",
+          "answerText": "은빛 날개",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 149,
-              "end": 151
-            },
+              "paragraphId": "p2",
+              "start": 14,
+              "end": 19
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "이번 체험이 중요성을 깨닫게 해 준 습관을 지문에서 찾아 쓰시오.",
+          "answerText": "관찰하고 기록하는 멋진 습관",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 73,
-              "end": 75
+              "start": 145,
+              "end": 160
             }
           ],
           "scoring": {

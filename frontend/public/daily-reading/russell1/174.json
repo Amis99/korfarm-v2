@@ -914,153 +914,78 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '학습'을 모두 찾으시오.",
+          "prompt": "한쪽으로 자료가 치우친 상태를 가리키며 자료의 질에서 경계해야 한다고 한 두 글자를 지문에서 찾으시오",
+          "answerText": "편향",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 25,
-              "end": 27
-            },
-            {
-              "paragraphId": "p2",
-              "start": 75,
-              "end": 77
-            },
-            {
-              "paragraphId": "p2",
-              "start": 130,
-              "end": 132
-            },
-            {
-              "paragraphId": "p4",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p4",
-              "start": 29,
-              "end": 31
-            },
-            {
-              "paragraphId": "p4",
-              "start": 222,
-              "end": 224
-            }
+            {"paragraphId": "p4", "start": 55, "end": 57}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "학습"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '예측'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 29,
-              "end": 31
-            },
-            {
-              "paragraphId": "p2",
-              "start": 105,
-              "end": 107
-            },
-            {
-              "paragraphId": "p2",
-              "start": 147,
-              "end": 149
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "새로운 자료에 답을 내놓는 단계를 가리키는 두 글자를 지문에서 찾으시오",
+          "answerText": "예측",
           "answerMatchMode": "ALL",
-          "answerText": "예측"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 29, "end": 31},
+            {"paragraphId": "p2", "start": 105, "end": 107},
+            {"paragraphId": "p2", "start": 147, "end": 149}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '규칙'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 22,
-              "end": 24
-            },
-            {
-              "paragraphId": "p3",
-              "start": 50,
-              "end": 52
-            },
-            {
-              "paragraphId": "p3",
-              "start": 97,
-              "end": 99
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "인공지능이 처음 보는 자료에서도 비슷하게 판단할 수 있는지를 설명하는 핵심 두 가지 개념을 지문에서 찾으시오",
+          "answerText": "학습 데이터, 일반화",
           "answerMatchMode": "ALL",
-          "answerText": "규칙"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 0, "end": 6},
+            {"paragraphId": "p1", "start": 8, "end": 11},
+            {"paragraphId": "p4", "start": 3, "end": 9},
+            {"paragraphId": "p4", "start": 11, "end": 14},
+            {"paragraphId": "p4", "start": 222, "end": 228},
+            {"paragraphId": "p4", "start": 230, "end": 233}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '정답률'을 모두 찾으시오.",
+          "prompt": "수많은 사진을 비교해 공통 특징을 익히는 인공지능이 구분하려는 대상을 지문에서 찾으시오",
+          "answerText": "동물의 종류",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 216,
-              "end": 219
-            },
-            {
-              "paragraphId": "p4",
-              "start": 90,
-              "end": 93
-            }
+            {"paragraphId": "p1", "start": 86, "end": 92}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "정답률"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '근거'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 169,
-              "end": 171
-            },
-            {
-              "paragraphId": "p4",
-              "start": 262,
-              "end": 264
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "인공지능이 문제를 해결하는 과정에서 함께 살펴보아야 한다고 한 세 가지를 지문에서 찾으시오",
+          "answerText": "입력, 학습, 예측",
           "answerMatchMode": "ALL",
-          "answerText": "근거"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 21, "end": 23},
+            {"paragraphId": "p2", "start": 25, "end": 27},
+            {"paragraphId": "p2", "start": 29, "end": 31}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "검토 없이 정답률만 믿으면 실제 상황에서 무엇이 생길 수 있다고 결과로 정리하였는지 지문에서 찾으시오",
+          "answerText": "뜻밖의 실수",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 107, "end": 113}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "첫여름을 밝힌 것으로 제시된 꽃은 무엇인가?",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 57
+              "end": 5
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "오동나무꽃으로 불 밝힌 이곳 첫여름이 그립지 아니한가?\n어린 나그네 꿈이 시시로 파랑새가 되어 오려니."
+          "answerText": "오동나무꽃"
         },
         {
           "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "첫 행에서 그리움을 묻는 의문형 표현은 무엇인가?",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 51
+              "paragraphId": "p1",
+              "start": 21,
+              "end": 30
             }
           ],
           "scoring": {
@@ -603,16 +603,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "나무 밑으로 가나 책상 턱에 이마를 고일 때나,\n네가 남기고 간 기억만이 소곤소곤거리는구나."
+          "answerText": "그립지 아니한가?"
         },
         {
           "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "prompt": "나무 밑이나 책상 턱에서 무엇만이 소곤소곤거리는가?",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 51
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 40
             }
           ],
           "scoring": {
@@ -621,15 +621,15 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "모처럼 만에 날아온 소식에 반가운 마음이 울렁거리어\n가여운 글자마다 먼 황해가 남실거리나니."
+          "answerText": "네가 남기고 간 기억만이"
         },
         {
           "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
+          "prompt": "모처럼 날아온 소식에 마음은 어떻게 움직이는가?",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
+              "paragraphId": "p3",
+              "start": 15,
               "end": 28
             }
           ],
@@ -639,16 +639,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "……나는 갈매기 같은 종선을 한창 치달리고 있다……"
+          "answerText": "반가운 마음이 울렁거리어"
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "시적 화자가 비유하거나 변화시켜 나타낸 이미지 표현을 모두 찾으시오.",
           "answerRanges": [
             {
+              "paragraphId": "p4",
+              "start": 5,
+              "end": 14
+            },
+            {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 67
+              "start": 20,
+              "end": 22
             }
           ],
           "scoring": {
@@ -656,17 +661,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "쾌활한 오월 넥타이가 내처 난데없는 순풍이 되어,\n하늘과 딱 닿은 푸른 물결 우에 솟은,\n외따른 섬 로맨틱을 찾아갈까나."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "갈매기 같은 종선",
+            "순풍"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "외따른 섬 로맨틱이 솟아 있다고 한 곳은 어디인가?",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 109
+              "paragraphId": "p5",
+              "start": 28,
+              "end": 44
             }
           ],
           "scoring": {
@@ -675,7 +683,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "일본 말과 아라비아 글씨를 가르치러 간\n쬐그만 이 페스탈로치야, 꾀꼬리 같은 선생님이야,\n날마다 밤마다 섬 둘레가 근심스런 풍랑에 씹히는가 하노니,\n은은히 밀려오는 듯 머얼리 우는 오르간 소리……"
+          "answerText": "하늘과 딱 닿은 푸른 물결 우"
+        },
+        {
+          "id": "q7",
+          "prompt": "마지막 문단에서 부르는 대상의 두 호칭을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 22,
+              "end": 34
+            },
+            {
+              "paragraphId": "p6",
+              "start": 36,
+              "end": 48
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "쬐그만 이 페스탈로치야",
+            "꾀꼬리 같은 선생님이야"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "반복되어 지속적인 시간을 나타내는 표현은 무엇인가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 50,
+              "end": 57
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "날마다 밤마다"
         }
       ]
     }

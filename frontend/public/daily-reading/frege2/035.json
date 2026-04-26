@@ -1079,49 +1079,28 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "한 명의 소리꾼이 긴 이야기를 엮어가는 우리 고유의 서사 예술은 무엇인가요?",
-          "answerText": "판소리",
-          "answerMatchMode": "ANY",
+          "prompt": "판소리가 긴 이야기를 엮어 갈 때 쓰는 표현 방식 세 가지는 무엇인가요? 모두 찾으시오.",
+          "answerTexts": [
+            "노래(소리)",
+            "말(아니리)",
+            "몸짓(발림)"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 3
+              "start": 27,
+              "end": 33
             },
             {
               "paragraphId": "p1",
-              "start": 112,
-              "end": 115
+              "start": 35,
+              "end": 41
             },
             {
               "paragraphId": "p1",
-              "start": 219,
-              "end": 222
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p2",
-              "start": 121,
-              "end": 124
-            },
-            {
-              "paragraphId": "p2",
-              "start": 247,
-              "end": 250
-            },
-            {
-              "paragraphId": "p3",
-              "start": 249,
-              "end": 252
-            },
-            {
-              "paragraphId": "p4",
-              "start": 4,
-              "end": 7
+              "start": 43,
+              "end": 49
             }
           ],
           "scoring": {
@@ -1132,7 +1111,7 @@
         },
         {
           "id": "q2",
-          "prompt": "소리꾼이 읊는 가사 전체를 무엇이라고 부르나요?",
+          "prompt": "소리꾼이 읊는 가사 전체를 무엇이라고 부르나요? 지문에서 찾으시오.",
           "answerText": "사설",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1200,28 +1179,18 @@
         },
         {
           "id": "q3",
-          "prompt": "판소리 사설의 특징으로 제시된 구성 방식은 무엇인가요?",
-          "answerText": "적층적 구성",
-          "answerMatchMode": "ANY",
+          "prompt": "판소리 사설의 가장 큰 특징으로 제시된 두 가지는 무엇인가요? 모두 찾으시오.",
+          "answerTexts": [
+            "적층적 구성",
+            "이중적 언어"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 18,
               "end": 24
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "고상한 표현과 비속어가 공존하는 언어 사용을 무엇이라고 했나요?",
-          "answerText": "이중적 언어",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+            },
             {
               "paragraphId": "p2",
               "start": 28,
@@ -1235,15 +1204,41 @@
           "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "장면을 극대화하기 위해 자주 쓰인 기법은 무엇인가요?",
-          "answerText": "확장적 묘사",
+          "id": "q4",
+          "prompt": "슬픈 장면에서도 웃음을 유발하는 반전의 묘미가 보여 준 조상들의 성향은 무엇인가요? 지문에서 찾으시오.",
+          "answerText": "낙천적인 기상",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
+              "paragraphId": "p2",
+              "start": 232,
+              "end": 239
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "중요한 대목에서 세밀하고 화려하게 열거하는 두 대상은 무엇인가요? 모두 찾으시오.",
+          "answerTexts": [
+            "사물의 모양",
+            "인물의 감정"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
               "paragraphId": "p3",
-              "start": 20,
-              "end": 26
+              "start": 67,
+              "end": 73
+            },
+            {
+              "paragraphId": "p3",
+              "start": 76,
+              "end": 82
             }
           ],
           "scoring": {

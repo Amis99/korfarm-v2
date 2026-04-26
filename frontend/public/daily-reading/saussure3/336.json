@@ -850,29 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우는 ( )를 잡아먹으려 했어요.",
-          "answerText": "아기",
-          "answerMatchMode": "EXACT",
+          "prompt": "호랑이가 우는 아기를 잡아먹으려고 어디에서 엿보았는지 지문에서 찾으시오.",
+          "answerText": "집 안에서",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 36,
-              "end": 38
-            },
-            {
-              "paragraphId": "p1",
-              "start": 64,
-              "end": 66
-            },
-            {
-              "paragraphId": "p1",
-              "start": 95,
-              "end": 97
-            },
-            {
-              "paragraphId": "p2",
-              "start": 62,
-              "end": 64
+              "start": 27,
+              "end": 32
             }
           ],
           "scoring": {
@@ -884,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "호랑이는 겁에 ( )었습니다.",
-          "answerText": "배가 고픈 무서운 호랑이가 마을로 내려왔습니다.",
-          "answerMatchMode": "EXACT",
+          "prompt": "아기가 울음을 그치게 한 말이 무엇인지 지문에서 찾으시오.",
+          "answerText": "곶감이다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 26
+              "start": 84,
+              "end": 88
             }
           ],
           "scoring": {
@@ -903,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "소 ( )을 곶감으로 착각함.",
-          "answerText": "도둑",
-          "answerMatchMode": "EXACT",
+          "prompt": "호랑이가 세상에서 자기가 어떤 줄 알았다고 했는지 지문에서 찾으시오.",
+          "answerText": "무척 센 줄",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 36,
+              "end": 42
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "앞이 잘 보이지 않아 소 도둑을 곶감으로 착각한 까닭을 지문에서 찾으시오.",
+          "answerText": "캄캄한 밤이라",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 7,
-              "end": 9
+              "start": 27,
+              "end": 34
             }
           ],
           "scoring": {

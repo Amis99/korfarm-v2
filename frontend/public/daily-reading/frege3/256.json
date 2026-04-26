@@ -1327,39 +1327,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "성북동에서 내가 만난 인물은 누구인가요?",
-          "answerText": "황수건",
+          "prompt": "황수건의 성격을 설명한 부분을 찾으시오.",
+          "answerText": "말솜씨가 서투르고 행동이 어수룩하지만 마음은 참 맑습니다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 15,
-              "end": 18
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p3",
-              "start": 3,
-              "end": 6
-            },
-            {
-              "paragraphId": "p4",
-              "start": 18,
-              "end": 21
-            },
-            {
-              "paragraphId": "p5",
-              "start": 4,
-              "end": 7
-            },
-            {
-              "paragraphId": "p5",
-              "start": 124,
-              "end": 127
+              "start": 64,
+              "end": 95
             }
           ],
           "scoring": {
@@ -1370,14 +1345,28 @@
         },
         {
           "id": "q2",
-          "prompt": "황수건이 처음 꿈꾸던 일자리는 무엇이었나요?",
-          "answerText": "정식 배달원",
-          "answerMatchMode": "ANY",
+          "prompt": "황수건이 거쳐 갔거나 꿈꾸던 일자리를 모두 찾으시오.",
+          "answerTexts": [
+            "보조 신문 배달원",
+            "정식 배달원",
+            "학교 급사"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 8,
+              "end": 17
+            },
             {
               "paragraphId": "p2",
               "start": 24,
               "end": 30
+            },
+            {
+              "paragraphId": "p2",
+              "start": 79,
+              "end": 84
             }
           ],
           "scoring": {
@@ -1388,14 +1377,14 @@
         },
         {
           "id": "q3",
-          "prompt": "내가 황수건에게 대준 장사의 밑천은 무엇을 위한 것이었나요?",
-          "answerText": "참외 장사",
+          "prompt": "내가 황수건에게 대준 것을 찾으시오.",
+          "answerText": "참외 장사 밑천",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 24,
-              "end": 29
+              "end": 32
             }
           ],
           "scoring": {
@@ -1406,7 +1395,7 @@
         },
         {
           "id": "q4",
-          "prompt": "달밤에 황수건이 품에 안고 있던 것은 무엇인가요?",
+          "prompt": "달밤에 황수건이 품에 안고 있던 것을 찾으시오.",
           "answerText": "포도 한 송이",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1424,19 +1413,22 @@
         },
         {
           "id": "q5",
-          "prompt": "결말에서 그의 삶을 비추는 유일한 위로는 무엇인가요?",
-          "answerText": "달빛",
-          "answerMatchMode": "ANY",
+          "prompt": "작가가 황수건을 통해 보여 주는 것과 독자가 경험하는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "소외된 인간에 대한 애정",
+            "인간적인 연민"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 50,
-              "end": 52
+              "paragraphId": "p5",
+              "start": 12,
+              "end": 25
             },
             {
               "paragraphId": "p5",
-              "start": 156,
-              "end": 158
+              "start": 137,
+              "end": 144
             }
           ],
           "scoring": {

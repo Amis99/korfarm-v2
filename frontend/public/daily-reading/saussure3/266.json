@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사실이 아닌 꾸민 말은?",
-          "answerText": "거짓말을",
-          "answerMatchMode": "EXACT",
+          "prompt": "도깨비를 만나 혹을 뗀 인물을 설명하는 어구를 지문에서 찾으시오.",
+          "answerText": "노래를 잘 부르는 혹부리 영감",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 16,
-              "end": 20
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 16
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "가르침을 주는 내용은?",
-          "answerText": "교훈을",
-          "answerMatchMode": "EXACT",
+          "prompt": "정직하고 순수한 마음이 가져온 것은 무엇인지 지문에서 찾으시오.",
+          "answerText": "뜻밖의 복을",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 85,
-              "end": 88
+              "start": 45,
+              "end": 51
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "사물의 이치를 밝히는 능력?",
-          "answerText": "지혜를",
-          "answerMatchMode": "EXACT",
+          "prompt": "남을 속이려는 나쁜 마음은 결국 누구에게 해가 된다고 했는지 지문에서 찾으시오.",
+          "answerText": "자신에게",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 56
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "우리를 더 당당하고 행복하게 만들어 주는 삶을 지문에서 찾으시오.",
+          "answerText": "거짓 없는 삶",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 76,
-              "end": 79
+              "start": 31,
+              "end": 38
             }
           ],
           "scoring": {

@@ -571,30 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 155
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "신문 광고나 행사 포스터를 볼 때 우리는 그 표면에 적힌 정보만 읽었다고 생각하기 쉽다. 그러나 어떤 이미지와 문장이 반복적으로 묶이면 그것은 단순한 안내를 넘어 특정한 가치관을 자연스러운 것으로 느끼게 만든다. 바르트는 이런 작동 방식을 기호의 두 층위를 통해 설명하려 했다."
-        },
-        {
-          "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "1차적인 기호 작용에서 눈에 보이거나 들리는 표현이 되는 어구를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 154
+              "start": 37,
+              "end": 43
             }
           ],
           "scoring": {
@@ -603,16 +585,44 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그에 따르면 1차적인 기호 작용에서는 눈에 보이거나 들리는 표현이 기표가 되고, 그 표현이 가리키는 개념이 기의가 된다. 예를 들어 한 장의 사진, 한 단어, 한 상징은 먼저 일정한 대상을 지시하는 기호로 이해된다. 이 단계까지만 보면 기호는 정보를 전달하는 표지처럼 보인다."
+          "answerText": "기표가 되고"
+        },
+        {
+          "id": "q2",
+          "prompt": "표현이 가리키는 개념이 되는 어구를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 60,
+              "end": 66
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "기의가 된다"
         },
         {
           "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "prompt": "1차 기호로 이해되는 예를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 173
+              "paragraphId": "p2",
+              "start": 74,
+              "end": 81
+            },
+            {
+              "paragraphId": "p2",
+              "start": 83,
+              "end": 87
+            },
+            {
+              "paragraphId": "p2",
+              "start": 89,
+              "end": 93
             }
           ],
           "scoring": {
@@ -620,17 +630,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "하지만 1차 기호가 완성되면 그 전체가 다시 하나의 기표가 되어 더 큰 의미 체계 속으로 들어간다. 바르트는 이 2차 기호 작용에서 형성되는 의미를 신화라고 불렀다. 여기서 신화는 허황된 전설이라는 뜻이 아니라, 역사적으로 만들어진 가치나 질서를 마치 원래부터 그랬던 것처럼 보이게 하는 의미 작용을 가리킨다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "한 장의 사진",
+            "한 단어",
+            "한 상징"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
+          "prompt": "이미지와 문장이 반복적으로 묶이면 일어나는 효과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 168
+              "paragraphId": "p1",
+              "start": 91,
+              "end": 117
             }
           ],
           "scoring": {
@@ -639,16 +653,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 때문에 신화는 사회적 선택의 결과를 자연의 질서처럼 꾸민다. 특정한 생활 방식이 건전함의 표준처럼 보이거나, 어떤 소비 습관이 세련됨의 증거처럼 보이는 경우가 그렇다. 실제로는 시대와 집단의 이해관계가 반영된 해석인데도, 2차 기호 체계 안에서는 그것이 논쟁의 대상이 아니라 상식처럼 받아들여진다."
+          "answerText": "특정한 가치관을 자연스러운 것으로 느끼게 만든다"
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "지문에서 말하는 신화의 뜻을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 202
+              "paragraphId": "p3",
+              "start": 119,
+              "end": 166
             }
           ],
           "scoring": {
@@ -657,16 +671,74 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "예를 들어 학교 홍보물에서 같은 색채, 표정, 문구가 반복되면 그 학교가 추구하는 이상적 학생상이 하나의 자연스러운 모델처럼 제시될 수 있다. 지역 특산품 광고에서도 전통, 정직, 건강 같은 단어가 특정 이미지와 결합하면 상품 설명을 넘어 특정한 삶의 태도까지 함께 판매하게 된다. 이때 소비자는 사실을 읽는 동시에 이미 짜인 가치 판단도 함께 받아들이게 된다."
+          "answerText": "역사적으로 만들어진 가치나 질서를 마치 원래부터 그랬던 것처럼 보이게 하는 의미 작용"
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "신화가 사회적 선택의 결과를 자연의 질서처럼 꾸미는 예를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 36,
+              "end": 61
+            },
+            {
+              "paragraphId": "p4",
+              "start": 63,
+              "end": 89
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "특정한 생활 방식이 건전함의 표준처럼 보이거나",
+            "어떤 소비 습관이 세련됨의 증거처럼 보이는 경우"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "학교 홍보물에서 반복되는 요소를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 15,
+              "end": 20
+            },
+            {
+              "paragraphId": "p5",
+              "start": 22,
+              "end": 24
+            },
+            {
+              "paragraphId": "p5",
+              "start": 26,
+              "end": 28
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "같은 색채",
+            "표정",
+            "문구"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "기호를 읽을 때 겉내용 외에 살펴봐야 하는 것을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 170
+              "start": 77,
+              "end": 118
             }
           ],
           "scoring": {
@@ -675,7 +747,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "따라서 바르트의 논의는 기호를 읽을 때 겉으로 드러난 내용만 확인해서는 충분하지 않다고 말한다. 어떤 표현이 무엇을 가리키는지뿐 아니라, 그 표현 전체가 다시 어떤 가치와 질서를 자연화하고 있는지도 살펴봐야 한다. 그래야 익숙한 이미지와 문장이 어떻게 사회적 의미를 굳히는지 비판적으로 읽어 낼 수 있다."
+          "answerText": "그 표현 전체가 다시 어떤 가치와 질서를 자연화하고 있는지도 살펴봐야 한다"
         }
       ]
     }

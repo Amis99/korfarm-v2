@@ -571,12 +571,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "prompt": "산과 골짜기의 움직임을 비유적으로 나타낸 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 109
+              "end": 4
+            },
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 4
             }
           ],
           "scoring": {
@@ -585,16 +590,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "해일처럼 굽이치는 백색의 산들,\n제설차 한 대 올 리 없는\n깊은 백색의 골짜기를 메우며\n굵은 눈발은 휘몰아치고,\n쪼그마한 숯덩이만 한 게 짧은 날개를 파닥이며……\n굴뚝새가 눈보라 속으로 날아간다."
+          "answerText": "해일처럼"
         },
         {
           "id": "q2",
-          "prompt": "2연은 그 장면이나 정서를 어떻게 이어 가는가?",
+          "prompt": "눈보라가 지배하는 상황을 압박감 있게 나타낸 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 97
+              "start": 89,
+              "end": 96
+            },
+            {
+              "paragraphId": "p6",
+              "start": 31,
+              "end": 38
             }
           ],
           "scoring": {
@@ -603,16 +613,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "길 잃은 등산객들 있을 듯\n외딴 두메 마을 길 끊어 놓을 듯\n은하수가 펑펑 쏟아져 날아오듯 덤벼드는 눈,\n다투어 몰려오는 힘찬 눈보라의 군단,\n눈보라가 내리는 백색의 계엄령."
+          "answerText": "백색의 계엄령"
         },
         {
           "id": "q3",
-          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
+          "prompt": "1연에서 굴뚝새가 눈보라 속으로 하는 행동을 나타낸 말을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 57
+              "paragraphId": "p1",
+              "start": 104,
+              "end": 108
             }
           ],
           "scoring": {
@@ -621,11 +631,57 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "쪼그마한 숯덩이만 한 게 짧은 날개를 파닥이며……\n날아온다 꺼칠한 굴뚝새가\n서둘러 뒷간에 몸을 감춘다."
+          "answerText": "날아간다"
         },
         {
           "id": "q4",
-          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
+          "prompt": "눈보라의 세력을 군대처럼 나타낸 반복 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 59,
+              "end": 78
+            },
+            {
+              "paragraphId": "p5",
+              "start": 45,
+              "end": 64
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "다투어 몰려오는 힘찬 눈보라의 군단"
+        },
+        {
+          "id": "q5",
+          "prompt": "뒷간에 몸을 감추는 대상을 가리키는 말을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 91,
+              "end": 94
+            },
+            {
+              "paragraphId": "p3",
+              "start": 37,
+              "end": 40
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "굴뚝새"
+        },
+        {
+          "id": "q6",
+          "prompt": "보이지 않는 위협에 대한 의문을 드러내는 문장을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
@@ -642,13 +698,36 @@
           "answerText": "그 어디에 부리부리한 솔개라도 도사리고 있다는 것일까."
         },
         {
-          "id": "q5",
-          "prompt": "5연은 앞선 흐름을 어떤 긴장이나 전환으로 끌고 가는가?",
+          "id": "q7",
+          "prompt": "굴뚝새의 작고 검은 모습을 나타낸 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 63,
+              "end": 76
+            },
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 13
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "쪼그마한 숯덩이만 한 게"
+        },
+        {
+          "id": "q8",
+          "prompt": "소나무 가지들이 부러질 듯한 원인을 나타내는 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 85
+              "start": 20,
+              "end": 28
             }
           ],
           "scoring": {
@@ -657,25 +736,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "길 잃고 굶주리는 산짐승들 있을 듯\n눈 더미의 무게로 소나무 가지들이 부러질 듯\n다투어 몰려오는 힘찬 눈보라의 군단,\n때죽나무와 때 끓이는 외딴집 굴뚝에"
-        },
-        {
-          "id": "q6",
-          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 39
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "해일처럼 굽이치는 백색의 산과 골짜기에\n눈보라가 내리는\n백색의 계엄령."
+          "answerText": "눈 더미의 무게"
         }
       ]
     }

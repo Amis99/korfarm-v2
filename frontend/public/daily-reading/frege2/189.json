@@ -788,24 +788,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "학교에 추가 설치할지를 두고 논의 중인 장치는 무엇인가요?",
-          "answerText": "CCTV",
-          "answerMatchMode": "ANY",
+          "prompt": "CCTV 설치에 찬성하는 이유와 반대하는 이유를 모두 찾으시오.",
+          "answerTexts": [
+            "학교 폭력을 예방하고 학생들의 안전을 지키기 위해",
+            "학생들의 사생활을 침해할 수 있다며"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 21,
-              "end": 25
+              "start": 53,
+              "end": 80
             },
             {
-              "paragraphId": "p2",
-              "start": 10,
-              "end": 14
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 4
+              "paragraphId": "p1",
+              "start": 102,
+              "end": 121
             }
           ],
           "scoring": {
@@ -816,13 +814,13 @@
         },
         {
           "id": "q2",
-          "prompt": "찬성하는 학생들이 CCTV를 무엇에 비유했나요?",
-          "answerText": "보호막",
+          "prompt": "찬성하는 학생들이 CCTV를 무엇이라고 주장하는지 찾으시오.",
+          "answerText": "범죄나 사고를 막는 든든한 보호막",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 31,
+              "start": 16,
               "end": 34
             }
           ],
@@ -834,14 +832,22 @@
         },
         {
           "id": "q3",
-          "prompt": "반대하는 학생들이 침해될 수 있다고 걱정한 것은 무엇인가요?",
-          "answerText": "사생활",
-          "answerMatchMode": "ANY",
+          "prompt": "CCTV가 사고 해결에 도움이 되는 이유를 모두 찾으시오.",
+          "answerTexts": [
+            "정확한 원인을 파악하고",
+            "공정하게 해결하는 데 중요한 증거"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 107,
-              "end": 110
+              "paragraphId": "p2",
+              "start": 103,
+              "end": 115
+            },
+            {
+              "paragraphId": "p2",
+              "start": 116,
+              "end": 134
             }
           ],
           "scoring": {
@@ -852,14 +858,14 @@
         },
         {
           "id": "q4",
-          "prompt": "카메라가 보이지 않아 문제가 생길 수 있다고 한 곳은 어디인가요?",
-          "answerText": "사각지대",
+          "prompt": "반대하는 학생들이 학교가 되어서는 안 된다고 한 공간을 찾으시오.",
+          "answerText": "누군가에게 감시당하는 공간",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 110,
-              "end": 114
+              "start": 14,
+              "end": 28
             }
           ],
           "scoring": {
@@ -870,14 +876,22 @@
         },
         {
           "id": "q5",
-          "prompt": "글에서 찾아야 한다고 한 해결 방향은 무엇인가요?",
-          "answerText": "타협점",
-          "answerMatchMode": "ANY",
+          "prompt": "CCTV 설치 규칙으로 마련해야 할 것을 모두 찾으시오.",
+          "answerTexts": [
+            "설치 장소를 최소화하거나",
+            "녹화 영상의 열람 기준을 엄격하게 정하는"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 69,
-              "end": 72
+              "start": 82,
+              "end": 95
+            },
+            {
+              "paragraphId": "p4",
+              "start": 96,
+              "end": 118
             }
           ],
           "scoring": {

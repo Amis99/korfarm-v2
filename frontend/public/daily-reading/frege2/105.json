@@ -556,19 +556,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "대중이 공유하는 공간에 설치된 미술 작품은 무엇인가요?",
-          "answerText": "공공미술",
+          "prompt": "공공미술이 설치된 곳을 나타내는 어구를 찾으시오.",
+          "answerText": "대중이 공유하는 공간",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 4
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 4
+              "start": 6,
+              "end": 17
             }
           ],
           "scoring": {
@@ -579,14 +574,14 @@
         },
         {
           "id": "q2",
-          "prompt": "공공미술이 도시 환경에 주는 긍정적 변화는 무엇인가요?",
-          "answerText": "활력",
+          "prompt": "공공미술이 도시 환경을 어떻게 만든다고 했는지 그 표현을 찾으시오.",
+          "answerText": "아름답게 꾸민다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 13,
-              "end": 15
+              "paragraphId": "p1",
+              "start": 42,
+              "end": 50
             }
           ],
           "scoring": {
@@ -597,7 +592,7 @@
         },
         {
           "id": "q3",
-          "prompt": "공공미술이 시민들에게 제공한다고 한 감정적 효과는 무엇인가요?",
+          "prompt": "단순히 감상하는 것을 넘어 시민들에게 제공한다고 한 것을 찾으시오.",
           "answerText": "휴식",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -615,13 +610,21 @@
         },
         {
           "id": "q4",
-          "prompt": "공공미술이 담아내기도 하는 공동체의 요소는 무엇인가요?",
-          "answerText": "지역의 역사와 정체성",
-          "answerMatchMode": "ANY",
+          "prompt": "공공미술이 담아내기도 한다고 한 두 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "지역의 역사",
+            "정체성"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 4,
+              "end": 10
+            },
+            {
+              "paragraphId": "p3",
+              "start": 12,
               "end": 15
             }
           ],
@@ -633,14 +636,14 @@
         },
         {
           "id": "q5",
-          "prompt": "공공미술이 시민들에게 높여 준다고 한 감정은 무엇인가요?",
-          "answerText": "자긍심",
+          "prompt": "공공미술은 예술과 일상이 만나는 무엇이라고 했는지 찾으시오.",
+          "answerText": "중요한 매개체",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 35,
-              "end": 38
+              "paragraphId": "p4",
+              "start": 36,
+              "end": 43
             }
           ],
           "scoring": {

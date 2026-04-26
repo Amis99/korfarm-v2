@@ -571,111 +571,72 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"둘 다 참이라고 여기지만 조건과 무게는 같지 않다\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 188
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "믿음과 지식이 공통점과 차이점에서 어떻게 정리되는지 찾으시오",
+          "answerText": "둘은 모두 어떤 내용을 참이라고 여기는 태도이지만, 조건과 무게는 같지 않다",
           "answerMatchMode": "ANY",
-          "answerText": "우리는 일상에서 어떤 내용을 사실이라고 받아들이면서도, 그 상태를 모두 같은 수준으로 여기지는 않는다. 막연히 그렇다고 여기는 경우도 있고, 충분한 이유가 있다고 판단하여 확신하는 경우도 있다. 철학에서는 이 차이를 설명하기 위해 믿음과 지식을 구별해 왔다. 둘은 모두 어떤 내용을 참이라고 여기는 태도이지만, 조건과 무게는 같지 않다."
+          "answerRanges": [
+            { "paragraphId": "p1", "start": 145, "end": 187 }
+          ],
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "\"어떤 명제가 참이라고 받아들이는 정신적 태도이다\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 173
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글에서 '믿음'을 어떻게 정의하고 있는지 찾으시오",
+          "answerText": "믿음은 어떤 명제가 참이라고 받아들이는 정신적 태도를 가리킨다",
           "answerMatchMode": "ANY",
-          "answerText": "믿음은 어떤 명제가 참이라고 받아들이는 정신적 태도를 가리킨다. 예를 들어 내일 비가 올 것이라고 생각하거나, 어떤 친구가 약속을 지킬 것이라고 여기는 것 모두 믿음에 속한다. 믿음은 참일 수도 있고 거짓일 수도 있다. 또한 충분한 근거를 갖춘 믿음도 있고, 단지 느낌이나 습관에 기대는 믿음도 있을 수 있다."
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 0, "end": 34 }
+          ],
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "\"실제로 참이어야 하고 믿어야 하며 타당한 근거가 있어야 한다\"에 해당하는 부분은 어디인가요?",
+          "prompt": "전통적으로 어떤 내용을 '안다'고 말하기 위한 세 가지 조건을 모두 찾으시오",
+          "answerTexts": [" 내용이 실제로 참이어야 하고","그 사람도 그것을 믿어야 하며","그 믿음에 타당한 근거가 있어야 한다"],
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 168
-            }
+            { "paragraphId": "p3", "start": 75, "end": 91 },
+            { "paragraphId": "p3", "start": 93, "end": 109 },
+            { "paragraphId": "p3", "start": 111, "end": 131 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "전통적으로 지식은 단순한 믿음보다 더 엄격한 조건을 요구하는 것으로 설명되어 왔다. 흔히 어떤 사람이 어떤 내용을 안다고 말하려면, 그 내용이 실제로 참이어야 하고, 그 사람도 그것을 믿어야 하며, 그 믿음에 타당한 근거가 있어야 한다고 본다. 그래서 지식은 흔히 '정당화된 참된 믿음'으로 설명된다."
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "\"우연히 맞힌 경우는 지식이라고 부르기 어렵기 때문이다\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 166
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "참인 믿음이라도 지식이 되지 않는 사례로 든 경우를 찾으시오",
+          "answerText": "우연히 맞힌 경우에는 참일 수는 있어도 지식이라고 부르기 어렵다",
           "answerMatchMode": "ANY",
-          "answerText": "이 설명에 따르면 참인 믿음이라고 해서 모두 지식이 되지는 않는다. 우연히 맞힌 경우에는 참일 수는 있어도 지식이라고 부르기 어렵다. 시험 문제 답을 찍었는데 맞았다고 해서 그 답을 안다고 말하기 어려운 것과 같다. 반대로 정당한 이유가 있다고 생각했더라도 사실이 틀렸다면 그 역시 지식은 아니다."
+          "answerRanges": [
+            { "paragraphId": "p4", "start": 38, "end": 73 }
+          ],
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "\"정당화가 어떤 방식이어야 하는지이다\"에 해당하는 부분은 어디인가요?",
+          "prompt": "철학에서 지식과 관련해 계속 논의해 온 두 가지 물음을 모두 찾으시오",
+          "answerTexts": ["정당화가 어떤 방식이어야 하는지","우연을 배제하려면 무엇이 더 필요한지"],
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 185
-            }
+            { "paragraphId": "p5", "start": 135, "end": 152 },
+            { "paragraphId": "p5", "start": 154, "end": 174 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "문제는 정당한 근거를 가진 참된 믿음이어도, 그것이 정말 지식인지 의심되는 사례가 있다는 점이다. 어떤 사람은 잘못된 이유를 통해 우연히 참에 도달할 수도 있고, 겉보기에는 충분해 보이는 근거가 실제로는 흔들릴 수도 있다. 그래서 철학에서는 정당화가 어떤 방식이어야 하는지, 우연을 배제하려면 무엇이 더 필요한지 계속 논의해 왔다."
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q6",
-          "prompt": "\"결론뿐 아니라 근거와 우연의 가능성까지 점검하는 일이다\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 209
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글쓴이가 말하는 '지식을 논한다는 것'의 의미를 찾으시오",
+          "answerText": "단순히 결론을 말하는 데서 멈추지 않고, 그 결론에 이르는 근거와 우연의 가능성까지 점검하는 일",
           "answerMatchMode": "ANY",
-          "answerText": "결국 지식과 믿음의 구별은 '무엇을 참이라고 여기는가'만이 아니라 '왜 그렇게 여기는가'를 함께 묻는 문제로 이어진다. 믿음은 인간이 세계를 이해하는 출발점이지만, 지식은 그 믿음이 참이며 근거까지 갖추었는지를 따져 본 결과이다. 그래서 지식을 논한다는 것은 단순히 결론을 말하는 데서 멈추지 않고, 그 결론에 이르는 근거와 우연의 가능성까지 점검하는 일이라고 할 수 있다."
+          "answerRanges": [
+            { "paragraphId": "p6", "start": 145, "end": 198 }
+          ],
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         }
       ]
     }

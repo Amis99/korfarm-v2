@@ -571,12 +571,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "이번 축제에서 처음 시행한 제도의 이름을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 155
+              "start": 15,
+              "end": 24
+            },
+            {
+              "paragraphId": "p6",
+              "start": 9,
+              "end": 18
             }
           ],
           "scoring": {
@@ -585,16 +590,31 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이번 축제에서 처음 시행한 다회용 컵 대여제는 예상보다 훨씬 성공적이었다. 작년보다 확실히 더 친환경적인 분위기가 만들어졌고, 학생들의 참여 태도도 전체적으로 좋았다. 특히 행사장 곳곳에서 컵을 들고 이동하는 모습이 많아서 이번 제도가 축제 문화를 바꿨다고 말해도 될 것 같다."
+          "answerText": "다회용 컵 대여제"
         },
         {
           "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "제도의 효과를 입증하는 수치 근거를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 160
+              "start": 25,
+              "end": 31
+            },
+            {
+              "paragraphId": "p2",
+              "start": 50,
+              "end": 63
+            },
+            {
+              "paragraphId": "p2",
+              "start": 88,
+              "end": 95
+            },
+            {
+              "paragraphId": "p2",
+              "start": 103,
+              "end": 107
             }
           ],
           "scoring": {
@@ -602,17 +622,22 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "운영본부 집계에 따르면 대여 컵은 이틀 동안 1,240개 정도가 사용되었고 반납률은 거의 92퍼센트에서 96퍼센트쯤 나온 것으로 보인다. 쓰레기봉투 사용량도 작년 38봉지에서 이번에는 24리터 정도로 줄었다고 들었다. 이 수치만 봐도 제도가 효과적이었다는 점은 어느 정도 입증된 셈이다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "1,240개",
+            "92퍼센트에서 96퍼센트",
+            "작년 38봉지",
+            "24리터"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "prompt": "학생 인터뷰의 반응을 대체로 어떠했다고 했는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 189
+              "start": 19,
+              "end": 22
             }
           ],
           "scoring": {
@@ -621,16 +646,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생 인터뷰를 보면 반응은 대체로 긍정적이었다. 한 학생은 '처음엔 귀찮을 줄 알았는데 오히려 축제 굿즈처럼 들고 다녀서 재밌었다'고 말했다. 반면 어떤 학생은 '반납 장소가 한쪽에 몰려 있어서 그냥 들고 있다가 늦게 갔다, 근데 그래도 이런 건 계속 해야죠'라고 말했는데, 이런 의견도 결국 제도의 취지를 이해한다는 뜻으로 볼 수 있다."
+          "answerText": "긍정적"
         },
         {
           "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
+          "prompt": "학생 인터뷰에 직접 인용된 두 반응을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 163
+              "paragraphId": "p3",
+              "start": 34,
+              "end": 72
+            },
+            {
+              "paragraphId": "p3",
+              "start": 91,
+              "end": 144
             }
           ],
           "scoring": {
@@ -638,17 +668,35 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "물론 운영 과정에서 문제도 있었다. 세척 인력이 중간 시간대에 부족해서 대기 시간이 생겼고, 반납함 앞 안내문이 작아 처음 이용하는 사람은 절차를 바로 알기 어려웠다. 또 분실 컵이 생각보다 있었고, 일부 부스에서는 보증금 설명을 충분히 하지 않아 학생들이 잠깐 혼란을 겪었다는 점도 있었다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "처음엔 귀찮을 줄 알았는데 오히려 축제 굿즈처럼 들고 다녀서 재밌었다",
+            "반납 장소가 한쪽에 몰려 있어서 그냥 들고 있다가 늦게 갔다, 근데 그래도 이런 건 계속 해야죠"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "운영 과정에서 나타난 문제를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 163
+              "paragraphId": "p4",
+              "start": 20,
+              "end": 50
+            },
+            {
+              "paragraphId": "p4",
+              "start": 52,
+              "end": 92
+            },
+            {
+              "paragraphId": "p4",
+              "start": 96,
+              "end": 110
+            },
+            {
+              "paragraphId": "p4",
+              "start": 121,
+              "end": 154
             }
           ],
           "scoring": {
@@ -656,17 +704,22 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "하지만 이런 불편은 새로운 제도를 처음 실시했기 때문에 당연히 나타날 수 있는 수준이다. 오히려 이번 운영은 학생들이 환경 문제를 실감하게 했고, 일회용품을 줄이는 생활 습관 교육에도 상당한 도움이 되었을 것이다. 쓰레기가 줄어든 사실은 곧바로 환경 의식의 성장으로도 이어진다고 볼 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "세척 인력이 중간 시간대에 부족해서 대기 시간이 생겼고",
+            "반납함 앞 안내문이 작아 처음 이용하는 사람은 절차를 바로 알기 어려웠다",
+            "분실 컵이 생각보다 있었고",
+            "보증금 설명을 충분히 하지 않아 학생들이 잠깐 혼란을 겪었다"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "불편이 당연히 나타날 수 있다고 본 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 172
+              "paragraphId": "p5",
+              "start": 11,
+              "end": 30
             }
           ],
           "scoring": {
@@ -675,7 +728,57 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "따라서 내년에는 다회용 컵 대여제를 더 넓게 확대해야 한다. 음료 부스뿐 아니라 간식 부스에도 같은 방식을 적용하고, 컵 디자인도 여러 종류로 늘리면 참여율이 더 높아질 수 있다. 여기에 보증금 액수 조정, 세척 인력 보강, 반납 부스 위치 재배치도 함께 검토하면 더 완성도 높은 운영이 될 것으로 생각된다."
+          "answerText": "새로운 제도를 처음 실시했기 때문에"
+        },
+        {
+          "id": "q7",
+          "prompt": "쓰레기가 줄어든 사실이 무엇으로 이어진다고 했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 137,
+              "end": 146
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "환경 의식의 성장"
+        },
+        {
+          "id": "q8",
+          "prompt": "더 완성도 높은 운영을 위해 함께 검토하자고 한 보완책을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 105,
+              "end": 114
+            },
+            {
+              "paragraphId": "p6",
+              "start": 116,
+              "end": 124
+            },
+            {
+              "paragraphId": "p6",
+              "start": 126,
+              "end": 138
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "보증금 액수 조정",
+            "세척 인력 보강",
+            "반납 부스 위치 재배치"
+          ]
         }
       ]
     }

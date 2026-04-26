@@ -474,9 +474,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "물건이 있는 무엇인가요?",
+          "prompt": "물건이 놓여 있거나 우리가 가야 할 곳을 가리키는 낱말을 글에서 찾아보세요",
           "answerText": "장소",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -498,9 +498,9 @@
         },
         {
           "id": "q2",
-          "prompt": "정확한 무엇를 알려줌인가요?",
+          "prompt": "장소를 알리는 말이 정확히 알려 주는, 물건이 어디에 있는지를 뜻하는 낱말을 찾아보세요",
           "answerText": "위치",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -527,19 +527,38 @@
         },
         {
           "id": "q3",
-          "prompt": "마음을 전하는 무엇인가요?",
-          "answerText": "표현",
-          "answerMatchMode": "EXACT",
+          "prompt": "글의 예에서 책상 위에 있다고 한 물건과 의자 아래에 있다고 한 물건을 모두 찾아보세요",
+          "answerText": "연필, 가방",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 103,
+              "end": 105
+            },
+            {
+              "paragraphId": "p1",
+              "start": 117,
+              "end": 119
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "정확한 표현은 서로의 마음을 잘 전달하고 무엇을 줄이는 데 도움을 준다고 했는지 찾아보세요",
+          "answerText": "오해",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 105,
-              "end": 107
-            },
-            {
-              "paragraphId": "p2",
-              "start": 139,
-              "end": 141
+              "start": 158,
+              "end": 160
             }
           ],
           "scoring": {

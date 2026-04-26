@@ -561,7 +561,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "음악을 연주할 수 있도록 여러 가지 기호로 그려 놓은 그림은?",
+          "prompt": "음악을 연주할 수 있도록 기호로 그려 놓은 그림을 지문에서 찾으시오.",
           "answerText": "악보",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -584,7 +584,7 @@
         },
         {
           "id": "q2",
-          "prompt": "악보에서 음의 높낮이를 나타내기 위해 가로로 그은 다섯 개의 줄은?",
+          "prompt": "줄이 다섯 개 그어져 있는 것을 지문에서 찾으시오.",
           "answerText": "오선",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -602,6 +602,42 @@
               "paragraphId": "p2",
               "start": 0,
               "end": 2
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "높은 소리를 내는 음자리표의 이름을 지문에서 찾으시오.",
+          "answerText": "높은음자리표",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 40,
+              "end": 46
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "까맣게 색칠된 사분음표가 소리를 내는 시간을 지문에서 찾으시오.",
+          "answerText": "한 박자 동안",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 44,
+              "end": 51
             }
           ],
           "scoring": {

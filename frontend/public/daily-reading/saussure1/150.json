@@ -474,24 +474,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리가 견학 간 곳은?",
-          "answerText": "과학관",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 어제 다녀온 과학관 이야기를 들려주려고 편지를 쓴 친구의 이름은 무엇인가요? 지문에서 찾아 보세요",
+          "answerText": "민수",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 19,
-              "end": 22
-            },
-            {
-              "paragraphId": "p1",
-              "start": 54,
-              "end": 57
-            },
-            {
-              "paragraphId": "p2",
-              "start": 6,
-              "end": 9
+              "start": 3,
+              "end": 5
             }
           ],
           "scoring": {
@@ -503,19 +493,14 @@
         },
         {
           "id": "q2",
-          "prompt": "하늘을 나는 무엇의 원리인가요?",
-          "answerText": "비행기",
-          "answerMatchMode": "EXACT",
+          "prompt": "비행기의 커다란 날개 위로 무엇이 흐르면서 비행기를 공중으로 띄워 준다고 했나요? 지문에서 한 단어로 찾아 보세요",
+          "answerText": "공기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 67,
-              "end": 70
-            },
-            {
-              "paragraphId": "p1",
-              "start": 108,
-              "end": 111
+              "start": 99,
+              "end": 101
             }
           ],
           "scoring": {
@@ -527,24 +512,38 @@
         },
         {
           "id": "q3",
-          "prompt": "별빛을 보는 무엇인가요?",
-          "answerText": "망원경",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 친구를 위해 과학관 기념품점에서 산 신기한 선물은 무엇인가요? 지문에서 다섯 글자로 찾아 보세요",
+          "answerText": "별빛 망원경",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 30,
+              "start": 27,
               "end": 33
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글쓴이가 망원경을 사면서 떠올린 친구의 모습은 무엇의 꿈을 키우는 모습이었나요? 지문에서 한 단어로 찾아 보세요",
+          "answerText": "우주",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 58,
+              "end": 60
             },
             {
               "paragraphId": "p2",
-              "start": 42,
-              "end": 45
-            },
-            {
-              "paragraphId": "p2",
-              "start": 124,
-              "end": 127
+              "start": 140,
+              "end": 142
             }
           ],
           "scoring": {

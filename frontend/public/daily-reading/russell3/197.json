@@ -571,111 +571,136 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"지구 내부의 마그마가 지표 가까이 올라와 분출하거나 굳는 과정과 관련된다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 190
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "두 판이 서로 멀어지면서 맨틀 물질이 위로 상승해 마그마가 생기는 판 경계의 종류를 가리키는 표현을 찾으시오.",
+          "answerText": "발산형 판 경계",
           "answerMatchMode": "ANY",
-          "answerText": "화산 활동은 지구 내부의 마그마가 지표 가까이 올라와 분출하거나 굳는 과정과 관련된다. 마그마는 맨틀이나 하부 지각의 물질이 높은 온도와 압력 변화 때문에 부분적으로 녹으면서 만들어진다. 따라서 화산이 어디에서 잘 나타나는지를 이해하려면, 지구 내부 물질이 어떤 조건에서 녹기 쉬운지와 판이 어떤 방식으로 움직이는지를 함께 살펴보아야 한다."
-        },
-        {
-          "id": "q2",
-          "prompt": "\"두 판이 서로 멀어지면서 아래의 맨틀 물질이 위로 상승한다.\"에 해당하는 부분은 어디인가요?",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 12,
-              "end": 45
+              "start": 0,
+              "end": 8
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "두 판이 서로 멀어지면서 아래의 맨틀 물질이 위로 상승한다."
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "발산형 판 경계에서 마그마가 만들어지는 원인으로 든 현상을 가리키는 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "감압 용융"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 135,
+              "end": 140
+            },
+            {
+              "paragraphId": "p6",
+              "start": 86,
+              "end": 91
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "\"한 판이 다른 판 아래로 섭입할 수 있다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "한 판이 다른 판 아래로 섭입하며 폭발적인 화산 활동으로 이어지기 쉬운 판 경계의 종류를 찾으시오.",
+          "answerText": "수렴형 판 경계",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 12,
-              "end": 35
+              "start": 0,
+              "end": 8
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "한 판이 다른 판 아래로 섭입할 수 있다."
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "\"서로 어긋나 미끄러지는 곳에서는 강한 지진은 자주 일어나지만, 일반적으로 화산 활동은 두드러지지 않는다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "두 판이 서로 어긋나 미끄러져 강한 지진은 잦지만 화산 활동은 두드러지지 않는 판 경계의 종류를 찾으시오.",
+          "answerText": "보존형 판 경계",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 195
+              "start": 3,
+              "end": 11
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "반면 보존형 판 경계처럼 두 판이 서로 어긋나 미끄러지는 곳에서는 강한 지진은 자주 일어나지만, 일반적으로 화산 활동은 두드러지지 않는다. 이는 판이 옆으로 스치는 과정만으로는 마그마가 만들어질 조건이 충분히 갖추어지지 않기 때문이다. 즉 판 경계라고 해서 언제나 화산이 나타나는 것은 아니며, 어떤 종류의 판 운동이 일어나는지가 핵심 기준이 된다."
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "\"나타날 수 있는데, 이를 설명할 때 자주 쓰는 개념이 열점이다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "판 경계가 아닌 곳에서 화산이 나타나는 까닭을 설명할 때 자주 쓰는 개념을 가리키는 말을 모두 찾으시오.",
+          "answerTexts": [
+            "열점"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 14,
-              "end": 49
+              "start": 44,
+              "end": 46
+            },
+            {
+              "paragraphId": "p5",
+              "start": 50,
+              "end": 52
+            },
+            {
+              "paragraphId": "p6",
+              "start": 114,
+              "end": 116
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "나타날 수 있는데, 이를 설명할 때 자주 쓰는 개념이 열점이다."
+          "revealOnWrong": true
         },
         {
           "id": "q6",
-          "prompt": "\"단순히 뜨거운 물질이 솟는 현상이라기보다, 판 운동과 맨틀의 상태 변화가 결합해 드러나는 지구 내부 작용의 결과이다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "오래된 화산섬과 새로운 화산섬이 띠 모양으로 이어지는 사례로 든 지역의 이름을 찾으시오.",
+          "answerText": "하와이 제도",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 206
+              "paragraphId": "p5",
+              "start": 129,
+              "end": 135
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "결국 화산 활동은 단순히 뜨거운 물질이 솟는 현상이라기보다, 판 운동과 맨틀의 상태 변화가 결합해 드러나는 지구 내부 작용의 결과이다. 발산형 경계에서는 감압 용융, 수렴형 경계에서는 섭입에 따른 용융, 열점에서는 국지적 상승류가 핵심 원인이 된다. 따라서 화산 분포를 읽는다는 것은 곧 판 경계의 성격과 지구 내부 에너지 이동 방식을 함께 읽는 일이라고 할 수 있다."
+          "revealOnWrong": true
         }
       ]
     }

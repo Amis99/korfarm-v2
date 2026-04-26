@@ -875,103 +875,73 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '저만치'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 12,
-              "end": 15
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 멀리 떨어져 있다는 뜻을 가진 낱말을 찾으시오",
+          "answerText": "저만치",
           "answerMatchMode": "ANY",
-          "answerText": "저만치"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 12, "end": 15}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '혼자서'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 16,
-              "end": 19
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 다른 사람 없이 홀로라는 뜻을 가진 낱말을 찾으시오",
+          "answerText": "혼자서",
           "answerMatchMode": "ANY",
-          "answerText": "혼자서"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 16, "end": 19}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '우는'을 모두 찾으시오.",
+          "prompt": "지문에서 '꽃이 피네'와 '꽃이 지네'처럼 같은 표현을 되풀이해 운율을 만드는 표현법의 사례를 모두 찾으시오",
+          "answerText": "꽃이 피네 / 꽃이 지네",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 4,
-              "end": 6
-            }
+            {"paragraphId": "p1", "start": 9, "end": 14},
+            {"paragraphId": "p1", "start": 25, "end": 30},
+            {"paragraphId": "p4", "start": 9, "end": 14},
+            {"paragraphId": "p4", "start": 25, "end": 30}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "우는"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '좋아'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 16,
-              "end": 18
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 산속에 홀로 피어 있는 외로운 분위기를 보여 주는 시구를 찾으시오",
+          "answerText": "저만치 혼자서 피어 있네",
           "answerMatchMode": "ANY",
-          "answerText": "좋아"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 12, "end": 25}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '지네'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 6,
-              "end": 8
-            },
-            {
-              "paragraphId": "p4",
-              "start": 12,
-              "end": 14
-            },
-            {
-              "paragraphId": "p4",
-              "start": 28,
-              "end": 30
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 작은 새가 산을 떠나지 않고 머무르는 까닭을 보여 주는 시구를 찾으시오",
+          "answerText": "꽃이 좋아",
           "answerMatchMode": "ANY",
-          "answerText": "지네"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 13, "end": 18}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 산에서 꽃과 함께 살아가는 자연물을 모두 찾으시오",
+          "answerText": "작은 새",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 7, "end": 11},
+            {"paragraphId": "p3", "start": 26, "end": 30}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

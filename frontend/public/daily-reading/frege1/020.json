@@ -749,7 +749,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "오늘 토의의 주제는 무엇이었나요?",
+          "prompt": "오늘 학급 토의에서 주제로 삼은 규칙의 이름을 지문에서 찾으시오.",
           "answerText": "교실 내 휴대전화 사용 규칙",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -767,10 +767,36 @@
         },
         {
           "id": "q2",
-          "prompt": "찬성 측이 근거로 든 편리함은 무엇인가요?",
-          "answerText": "학습 편의성",
+          "prompt": "사회자의 진행에 따라 먼저 공유한 내용을 지문에서 찾으시오.",
+          "answerText": "현재의 문제점",
           "answerMatchMode": "ANY",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 62,
+              "end": 69
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "찬성 측 친구들이 근거로 든 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "개인의 자유",
+            "학습 편의성"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 10,
+              "end": 16
+            },
             {
               "paragraphId": "p2",
               "start": 18,
@@ -784,32 +810,14 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "반대 측이 문제로 든 중독은 무엇인가요?",
-          "answerText": "게임 중독",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 106,
-              "end": 111
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q4",
-          "prompt": "절충안에서 수업 시간에 넣기로 한 곳은 어디인가요?",
-          "answerText": "보관함",
+          "prompt": "절충안에서 수업 시간에 휴대전화를 넣기로 한 곳을 지문에서 찾으시오.",
+          "answerText": "약속된 보관함",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 39,
+              "start": 35,
               "end": 42
             }
           ],
@@ -821,14 +829,14 @@
         },
         {
           "id": "q5",
-          "prompt": "이번 회의로 경험한 과정은 무엇인가요?",
-          "answerText": "민주적인 의사 결정 과정",
+          "prompt": "앞으로 학급의 문제를 풀어나갈 방법을 지문에서 찾으시오.",
+          "answerText": "직접 대화",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 32,
-              "end": 45
+              "start": 114,
+              "end": 119
             }
           ],
           "scoring": {

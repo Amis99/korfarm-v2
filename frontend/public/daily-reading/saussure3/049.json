@@ -557,14 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "주말에 가족과 함께 놀러 간 곳으로, 커다란 로봇과 신기한 발명품이 가득했던 장소는 어디인가요?",
-          "answerText": "어린이 과학관",
-          "answerMatchMode": "EXACT",
+          "prompt": "과학관 입구에서 사람들을 반갑게 맞이해 준 것을 지문에서 찾아 쓰시오.",
+          "answerText": "커다란 로봇 모형",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 24,
-              "end": 31
+              "start": 48,
+              "end": 57
             }
           ],
           "scoring": {
@@ -576,19 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "체험실에 들어가서 글쓴이가 직접 조종석에 앉아 비행사가 된 기분을 느껴 본 모형은 무엇인가요?",
-          "answerText": "우주선",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 조종석에 앉아 화면을 보며 느낀 기분을 지문에서 찾아 쓰시오.",
+          "answerText": "우주 비행사가 된 기분",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 9,
-              "end": 12
-            },
-            {
-              "paragraphId": "p3",
-              "start": 60,
-              "end": 63
+              "start": 58,
+              "end": 70
             }
           ],
           "scoring": {
@@ -600,19 +595,41 @@
         },
         {
           "id": "q3",
-          "prompt": "여행을 마친 후 보고 느낀 점을 솔직하게 기록하며 훌륭한 과학자가 되겠다는 꿈을 담아 쓴 글은?",
-          "answerText": "기행문",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 여러 가지 실험 기구를 만지며 재미있게 배운 것을 지문에서 찾아 쓰시오.",
+          "answerText": "과학의 원리",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 99,
+              "end": 105
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "기행문에 담은 두 가지 내용을 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "우주선 체험",
+            "과학의 신비로움"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 31,
-              "end": 34
+              "start": 60,
+              "end": 66
             },
             {
               "paragraphId": "p3",
-              "start": 43,
-              "end": 46
+              "start": 68,
+              "end": 76
             }
           ],
           "scoring": {

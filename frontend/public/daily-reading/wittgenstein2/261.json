@@ -952,12 +952,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "화자가 기억한 외당숙의 이름을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 121
+              "start": 14,
+              "end": 17
             }
           ],
           "scoring": {
@@ -966,16 +966,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "내 기억으론 내 외당숙이 조성구였지만 그가 조정구라니 조정구가 틀림없다 싶었다. 그가 설사 내 딸 연이가 현이라고 했다면 아마 내 딸은 현이였음에 틀림없을 것이다. 나는 그 앞에 그렇게 무력했고 그는 그렇게 전능했다."
+          "answerText": "조성구"
         },
         {
           "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "화자와 그를 대비해 드러낸 말을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 126
+              "paragraphId": "p1",
+              "start": 104,
+              "end": 108
+            },
+            {
+              "paragraphId": "p1",
+              "start": 116,
+              "end": 120
             }
           ],
           "scoring": {
@@ -983,17 +988,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그는 내가 완전히 허탈 상태에 빠진 것을 확인한 후 비로소 엄숙히 선언했다. 6·25 때 의용군으로 나간 오빠가 이북에서 밀봉교육을 받고 곧 남파되리라는 것이었다. 먼저 남파됐다 가 체포된 간첩에 의해 확인된 정확한 정보란다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "무력했고",
+            "전능했다"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "prompt": "6·25 때 의용군으로 나갔다고 언급된 인물을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 146
+              "paragraphId": "p2",
+              "start": 59,
+              "end": 61
             }
           ],
           "scoring": {
@@ -1002,16 +1010,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그로부터 대문 소리에 가슴이 내려앉는 날이 시작되었다. 어머니는 말끝을 흐리고 눈물을 닦는다. 그러나 나는 다음 말을 알고 있다. 나도 방금 그런 생각을 하고 있었으니까. 어머니보다 훨씬 진작부터 그런 생각을 하고 있었으니까. 넘어오다 차라리 사살되었으면 하고."
+          "answerText": "오빠"
         },
         {
           "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
+          "prompt": "그로부터 시작된 불안한 날을 나타내는 표현을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 197
+              "paragraphId": "p3",
+              "start": 5,
+              "end": 22
             }
           ],
           "scoring": {
@@ -1020,16 +1028,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그 틀니는 해 넣은 지가 삼 년은 되었고, 몸에 닿는 것에 좀 지나칠 정도의 결벽성을 가진 나는 실상 내 경제 사정으론 분수에 넘칠 만큼 고가로 한 것으로 일류 치과에서 해 넣은 것이어서 처음부터 크게 불편한 줄 몰랐으나 어찌 된 영문인지 가끔 마음이 울적하다든가 몸이 불편할 때에는 이 틀니가 쑤셨다. 아니 정확히 말해서 틀니가 얹힌 턱뼈가 쑤신달까."
+          "answerText": "대문 소리에 가슴이 내려앉는 날"
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "화자가 통증을 덜기 위해 해 본 행동을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 234
+              "start": 41,
+              "end": 54
+            },
+            {
+              "paragraphId": "p5",
+              "start": 56,
+              "end": 66
+            },
+            {
+              "paragraphId": "p5",
+              "start": 79,
+              "end": 108
             }
           ],
           "scoring": {
@@ -1037,17 +1055,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "틀니가 천근의 무게로 턱뼈를 눌러 꼭 턱이 떨어지고 말 것 같았다. 나는 손으로 턱을 받쳐도 보고, 슬슬 주물러도 보고, 더위 먹은 짐승처럼 턱을 축 늘어뜨려 입을 헤벌리고 침을 흘려도 보았으나, 턱뼈가 부서질 듯한 동통은 조금도 덜어지지 않았다. 몸의 온갖 신경이 턱뼈를 중심으로 방사선으로 전신에 퍼진 듯, 중압감에 수반한 동통은 턱뼈에서 목 구멍으로, 귓속으로 골로 퍼져 내 두상은 완전히 틀니의 횡포가 지배했다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "손으로 턱을 받쳐도 보고",
+            "슬슬 주물러도 보고",
+            "턱을 축 늘어뜨려 입을 헤벌리고 침을 흘려도 보았으나"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "틀니의 무게를 과장해 나타낸 표현을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 172
+              "paragraphId": "p5",
+              "start": 4,
+              "end": 10
             }
           ],
           "scoring": {
@@ -1056,7 +1078,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "나는 비로소 깨닫는다. 여태껏 얼마나 교묘하게 스스로를 이중 삼중으로 기만하고 있었나를. 내 아픔은 결코 틀니에서 기인한 아픔이 아니었던 것이다. 나는 설희 엄마가 부러워서, 이 나라와 이 나라의 풍토가 주는 온갖 제약으로부터 자유로워진 그녀가 부러워서, 그녀에의 선망과 질투로 그렇게도 몹시 아팠던 것이다."
+          "answerText": "천근의 무게"
+        },
+        {
+          "id": "q7",
+          "prompt": "화자가 깨달은 아픔의 실제 원인을 드러내는 말을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 143,
+              "end": 154
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "그녀에의 선망과 질투"
+        },
+        {
+          "id": "q8",
+          "prompt": "화자가 부러워한 대상과 그 대상이 자유로워진 배경을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 85,
+              "end": 90
+            },
+            {
+              "paragraphId": "p6",
+              "start": 98,
+              "end": 135
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "설희 엄마",
+            "이 나라와 이 나라의 풍토가 주는 온갖 제약으로부터 자유로워진 그녀"
+          ]
         }
       ]
     }

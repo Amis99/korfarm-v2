@@ -474,50 +474,18 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "어둡게 나타나는 것?",
+          "prompt": "빛이 물체에 가로막혀서 뒤쪽에 어둡게 나타나는 것이 무엇인지 찾아보세요",
           "answerText": "그림자",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 28,
-              "end": 31
-            },
-            {
-              "paragraphId": "p1",
-              "start": 39,
-              "end": 42
-            },
-            {
-              "paragraphId": "p1",
-              "start": 88,
-              "end": 91
-            },
-            {
-              "paragraphId": "p1",
-              "start": 140,
-              "end": 143
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p2",
-              "start": 45,
-              "end": 48
-            },
-            {
-              "paragraphId": "p2",
-              "start": 79,
-              "end": 82
-            },
-            {
-              "paragraphId": "p2",
-              "start": 119,
-              "end": 122
-            }
+            {"paragraphId": "p1", "start": 28, "end": 31},
+            {"paragraphId": "p1", "start": 39, "end": 42},
+            {"paragraphId": "p1", "start": 88, "end": 91},
+            {"paragraphId": "p1", "start": 140, "end": 143},
+            {"paragraphId": "p2", "start": 0, "end": 3},
+            {"paragraphId": "p2", "start": 45, "end": 48},
+            {"paragraphId": "p2", "start": 79, "end": 82},
+            {"paragraphId": "p2", "start": 119, "end": 122}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -528,25 +496,12 @@
         },
         {
           "id": "q2",
-          "prompt": "물체에 따른 겉모습?",
-          "answerText": "모양",
-          "answerMatchMode": "EXACT",
+          "prompt": "손가락을 움직여서 벽에 만들 수 있다고 한 그림자 모양 두 가지 동물을 모두 찾아보세요",
+          "answerText": "나비, 토끼",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 81,
-              "end": 83
-            },
-            {
-              "paragraphId": "p1",
-              "start": 93,
-              "end": 95
-            },
-            {
-              "paragraphId": "p1",
-              "start": 136,
-              "end": 138
-            }
+            {"paragraphId": "p1", "start": 129, "end": 131},
+            {"paragraphId": "p1", "start": 133, "end": 135}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -557,15 +512,27 @@
         },
         {
           "id": "q3",
-          "prompt": "하늘에 뜬 뜨거운 것?",
-          "answerText": "태양",
-          "answerMatchMode": "EXACT",
+          "prompt": "그림자의 길이가 길게 늘어나는 시간 두 가지를 모두 찾아보세요",
+          "answerText": "아침, 저녁",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 5,
-              "end": 7
-            }
+            {"paragraphId": "p2", "start": 36, "end": 38},
+            {"paragraphId": "p2", "start": 40, "end": 42}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "그림자가 길어지고 짧아지는 까닭은 위치가 바뀌는 무엇 때문인지 두 글자 말을 찾아보세요",
+          "answerText": "태양",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 5, "end": 7}
           ],
           "scoring": {
             "correctDeltaSec": 10,

@@ -593,14 +593,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리나라 전체 땅의 약 70퍼센트를 차지하는 지형은 무엇인가요?",
-          "answerText": "산지",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리나라 평야가 주로 넓게 펼쳐져 있는 곳을 지문에서 찾으시오.",
+          "answerText": "서쪽과 남쪽 바닷가 주변",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 44,
-              "end": 46
+              "start": 65,
+              "end": 78
             }
           ],
           "scoring": {
@@ -612,9 +612,28 @@
         },
         {
           "id": "q2",
-          "prompt": "우리나라 최대의 평야로 쌀이 가장 많이 생산되는 곳은 어디인가요?",
+          "prompt": "동쪽에서 평야를 찾아보기 어려운 이유를 지문에서 찾으시오.",
+          "answerText": "산이 높고 험해서",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 96,
+              "end": 105
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "지문에서 우리나라 최대의 평야로 제시한 이름을 찾으시오.",
           "answerText": "호남 평야",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -630,15 +649,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "평평한 땅 덕분에 만들기 쉽고 이동하기 편리하게 해주는 것은 무엇인가요?",
-          "answerText": "도로와 철도",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "평야 지역에서 크게 발달할 수 있었던 대상을 지문에서 찾으시오.",
+          "answerText": "농업과 산업",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 43,
-              "end": 49
+              "start": 97,
+              "end": 103
             }
           ],
           "scoring": {

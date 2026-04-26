@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "회의가 마련된 이유를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 138
+              "start": 17,
+              "end": 41
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생회 복지부장: 오늘 회의는 등교 직후 아침을 거르는 학생이 많다는 의견 때문에 마련했습니다. 매점 아침 간편식 판매 시간을 조금 앞당길 수 있는지, 또 어떤 조건이 필요할지 같이 정해 보려고 합니다. 매점 사장님과 2학년 대표도 의견을 주세요."
+          "answerText": "등교 직후 아침을 거르는 학생이 많다는 의견"
         },
         {
           "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "설문에서 학생들이 첫 수업 전에 필요하다고 한 것을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 168
+              "start": 34,
+              "end": 55
             }
           ],
           "scoring": {
@@ -603,16 +603,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생회 복지부장: 지난주 설문에서 응답 학생의 절반 가까이가 등교 후 첫 수업 전에 간단히 먹을 것이 필요하다고 했습니다. 특히 김밥, 우유, 샌드위치 선호가 높았고, 원하는 판매 시작 시각은 현재보다 20분 이른 시간에 몰렸습니다. 그래서 전면 확대가 아니라도 일정 범위의 조정은 필요하다고 봅니다."
+          "answerText": "등교 후 첫 수업 전에 간단히 먹을 것"
         },
         {
           "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "prompt": "설문에서 선호가 높았던 품목을 묶은 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 156
+              "paragraphId": "p2",
+              "start": 72,
+              "end": 84
             }
           ],
           "scoring": {
@@ -621,16 +621,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "매점 사장: 필요성은 이해하지만 바로 시간을 넓히면 부담이 큽니다. 지금도 준비 인력이 빠듯해서 더 일찍 열면 인건비가 늘고, 아침 판매량이 예상보다 적으면 남는 재고 손실도 생깁니다. 특히 조리 시간이 필요한 품목은 무리라서 단순히 문만 일찍 여는 방식으로는 해결되지 않습니다."
+          "answerText": "김밥, 우유, 샌드위치"
         },
         {
           "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
+          "prompt": "매점 사장이 바로 시간을 넓히기 어렵다고 든 부담을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 156
+              "paragraphId": "p3",
+              "start": 62,
+              "end": 69
+            },
+            {
+              "paragraphId": "p3",
+              "start": 91,
+              "end": 102
             }
           ],
           "scoring": {
@@ -638,17 +643,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "2학년 대표: 그러면 처음부터 전면 확대하지 말고 시범 운영을 해 보면 어떨까요. 주 3일만 먼저 해 보고, 품목도 회전이 빠른 김밥·샌드위치·우유 정도로 제한하면 부담이 덜할 것 같습니다. 학생회가 사전 예약 수요를 받아 전달하면 준비량도 어느 정도 예측할 수 있을 것 같아요."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "인건비가 늘고",
+            "재고 손실도 생깁니다"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "2학년 대표가 제안한 시범 운영 빈도를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 175
+              "paragraphId": "p4",
+              "start": 46,
+              "end": 54
             }
           ],
           "scoring": {
@@ -657,16 +665,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "매점 사장: 사전 예약이 있으면 재고 부담은 줄일 수 있겠네요. 다만 판매 시작 시각은 너무 이르면 어렵고, 기존보다 15분 앞당기는 선이면 검토할 수 있습니다. 학생회 복지부장: 그 대신 학생회가 예약 안내와 홍보를 맡고, 남은 상품은 쉬는 시간 전에 할인 판매하는 방식으로 손실을 줄이는 안을 같이 넣겠습니다."
+          "answerText": "주 3일만 먼저"
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "사전 예약 수요를 전달하면 예측할 수 있다고 한 것을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 176
+              "paragraphId": "p4",
+              "start": 130,
+              "end": 133
             }
           ],
           "scoring": {
@@ -675,7 +683,63 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생회 복지부장: 그럼 정리하겠습니다. 다음 달부터 2주 동안 주 3일 시범 운영을 하고, 품목은 김밥·샌드위치·우유로 한정합니다. 판매 시작 시각은 현재보다 15분 앞당기고, 학생회는 예약 접수와 홍보를 맡으며 매점은 판매량 자료를 기록합니다. 운영 결과를 보고 정식 확대 여부를 다시 협의하는 것으로 하겠습니다."
+          "answerText": "준비량"
+        },
+        {
+          "id": "q7",
+          "prompt": "손실을 줄이기 위해 넣기로 한 방식을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 126,
+              "end": 152
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "남은 상품은 쉬는 시간 전에 할인 판매하는 방식"
+        },
+        {
+          "id": "q8",
+          "prompt": "최종 정리에서 정한 운영 조건을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 29,
+              "end": 45
+            },
+            {
+              "paragraphId": "p6",
+              "start": 51,
+              "end": 72
+            },
+            {
+              "paragraphId": "p6",
+              "start": 74,
+              "end": 97
+            },
+            {
+              "paragraphId": "p6",
+              "start": 99,
+              "end": 118
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "2주 동안 주 3일 시범 운영",
+            "품목은 김밥·샌드위치·우유로 한정합니다",
+            "판매 시작 시각은 현재보다 15분 앞당기고",
+            "학생회는 예약 접수와 홍보를 맡으며"
+          ]
         }
       ]
     }

@@ -474,44 +474,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "쇠붙이 당기는 물건?",
-          "answerText": "자석",
-          "answerMatchMode": "EXACT",
+          "prompt": "자석은 무엇으로 된 물건을 끌어당기는지 한 글자로 찾아보세요",
+          "answerText": "철",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 36,
-              "end": 38
-            },
-            {
-              "paragraphId": "p1",
-              "start": 72,
-              "end": 74
-            },
-            {
-              "paragraphId": "p2",
-              "start": 8,
-              "end": 10
-            },
-            {
-              "paragraphId": "p2",
-              "start": 62,
-              "end": 64
-            },
-            {
-              "paragraphId": "p2",
-              "start": 82,
-              "end": 84
-            },
-            {
-              "paragraphId": "p2",
-              "start": 144,
-              "end": 146
+              "start": 4,
+              "end": 5
             }
           ],
           "scoring": {
@@ -523,14 +493,19 @@
         },
         {
           "id": "q2",
-          "prompt": "물체가 가진 특징?",
-          "answerText": "성질",
-          "answerMatchMode": "EXACT",
+          "prompt": "자석의 두 극은 무엇과 무엇으로 나누어진다고 했는지 두 가지를 모두 찾아보세요",
+          "answerText": "엔(N)극, 에스(S)극",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 148,
-              "end": 150
+              "paragraphId": "p1",
+              "start": 79,
+              "end": 84
+            },
+            {
+              "paragraphId": "p1",
+              "start": 86,
+              "end": 92
             }
           ],
           "scoring": {
@@ -542,14 +517,33 @@
         },
         {
           "id": "q3",
-          "prompt": "쓰기 편한 상태?",
-          "answerText": "편리",
-          "answerMatchMode": "EXACT",
+          "prompt": "나침반의 바늘이 항상 가리키는 두 방향 중 북쪽이 아닌 다른 한 곳은 어디인지 찾아보세요",
+          "answerText": "남쪽",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 134,
-              "end": 136
+              "start": 100,
+              "end": 102
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "냉장고 문에 붙이는 무엇에 자석이 들어 있다고 했는지 찾아보세요",
+          "answerText": "장식품",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 47,
+              "end": 50
             }
           ],
           "scoring": {

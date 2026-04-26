@@ -562,19 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "노래를 부를 때 곡조에 맞추어 부르기 위해 지은 글이나 말은?",
-          "answerText": "가사",
+          "prompt": "1절 설명에서 개나리를 어떤 꽃으로 소개하는 어구를 찾으시오.",
+          "answerText": "봄에 피는 개나리",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 71,
-              "end": 73
-            },
-            {
-              "paragraphId": "p2",
-              "start": 53,
-              "end": 55
+              "start": 78,
+              "end": 87
             }
           ],
           "scoring": {
@@ -585,19 +580,50 @@
         },
         {
           "id": "q2",
-          "prompt": "어떤 물건을 담거나 싸서 꾸린 뭉치를 뜻하는 말은?",
-          "answerText": "보따리",
+          "prompt": "1절 설명에서 댑싸리와 소쿠리를 어떤 것으로 묶어 설명한 어구를 찾으시오.",
+          "answerText": "옛날 도구인 댑싸리와 소쿠리",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 21,
-              "end": 24
-            },
+              "start": 100,
+              "end": 115
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "2절 설명에서 울타리를 어떤 것으로 설명한 어구를 찾으시오.",
+          "answerText": "집의 경계를 나누는 울타리",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 95,
-              "end": 98
+              "paragraphId": "p2",
+              "start": 101,
+              "end": 115
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "이 동요가 어떤 노래인지 설명한 문장을 찾으시오.",
+          "answerText": "이 동요는 같은 글자로 끝나는 낱말을 찾아 부르는 말놀이 노래입니다.",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 38
             }
           ],
           "scoring": {

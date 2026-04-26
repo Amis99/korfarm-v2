@@ -1256,56 +1256,16 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "데이터가 발생하는 단말기 가까운 곳에서 즉각적으로 처리하는 기술은 무엇인가요?",
-          "answerText": "에지 컴퓨팅",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 92,
-              "end": 98
-            },
-            {
-              "paragraphId": "p1",
-              "start": 119,
-              "end": 125
-            },
-            {
-              "paragraphId": "p2",
-              "start": 165,
-              "end": 171
-            },
-            {
-              "paragraphId": "p2",
-              "start": 255,
-              "end": 261
-            },
-            {
-              "paragraphId": "p3",
-              "start": 3,
-              "end": 9
-            },
-            {
-              "paragraphId": "p3",
-              "start": 133,
-              "end": 139
-            },
-            {
-              "paragraphId": "p4",
-              "start": 10,
-              "end": 16
-            },
-            {
-              "paragraphId": "p4",
-              "start": 52,
-              "end": 58
-            },
-            {
-              "paragraphId": "p5",
-              "start": 6,
-              "end": 12
-            }
-          ],
+      "prompt": "에지 컴퓨팅의 정의에 해당하는 부분을 찾으시오.",
+      "answerText": "데이터를 멀리 떨어진 중앙 센터로 보내지 않고, 데이터가 발생하는 단말기(스마트폰, 자율주행차, IoT 센서 등) 근처의 '가장자리(Edge)'에서 즉각적으로 처리하는 기술",
+      "answerMatchMode": "ANY",
+      "answerRanges": [
+        {
+          "paragraphId": "p1",
+          "start": 127,
+          "end": 223
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1314,16 +1274,24 @@
         },
         {
           "id": "q2",
-          "prompt": "에지 컴퓨팅의 핵심 장점으로 제시된 것은 무엇인가요?",
-          "answerText": "초저지연(Ultra-low Latency)",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 19,
-              "end": 42
-            }
-          ],
+      "prompt": "에지 컴퓨팅이 해소하거나 높이는 것을 모두 찾으시오.",
+      "answerTexts": [
+        "클라우드로 향하는 데이터의 병목 현상",
+        "시스템의 반응 속도"
+      ],
+      "answerMatchMode": "ALL",
+      "answerRanges": [
+        {
+          "paragraphId": "p1",
+          "start": 230,
+          "end": 250
+        },
+        {
+          "paragraphId": "p1",
+          "start": 257,
+          "end": 267
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1332,16 +1300,16 @@
         },
         {
           "id": "q3",
-          "prompt": "에지 컴퓨팅이 모두 중앙으로 보내지 않고 현장에서 걸러내는 데이터는 무엇인가요?",
-          "answerText": "Raw Data",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 84,
-              "end": 92
-            }
-          ],
+      "prompt": "에지 컴퓨팅의 가장 핵심적인 장점을 찾으시오.",
+      "answerText": "초저지연(Ultra-low Latency)",
+      "answerMatchMode": "ANY",
+      "answerRanges": [
+        {
+          "paragraphId": "p2",
+          "start": 19,
+          "end": 42
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1350,16 +1318,16 @@
         },
         {
           "id": "q4",
-          "prompt": "에지 컴퓨팅을 현장의 빠른 대처를 맡는 무엇에 비유했나요?",
-          "answerText": "행동 대장",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 89,
-              "end": 94
-            }
-          ],
+      "prompt": "자율주행 자동차에서 에지 컴퓨팅이 생명을 구하게 되는 과정을 찾으시오.",
+      "answerText": "차 자체나 인근 기지국에서 데이터를 즉시 분석하여 브레이크를 작동시킴",
+      "answerMatchMode": "ANY",
+      "answerRanges": [
+        {
+          "paragraphId": "p2",
+          "start": 178,
+          "end": 216
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1368,16 +1336,24 @@
         },
         {
           "id": "q5",
-          "prompt": "마지막에 데이터 권력이 분산되는 현상을 무엇이라고 표현했나요?",
-          "answerText": "기술적 민주화 현상",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 183,
-              "end": 193
-            }
-          ],
+      "prompt": "클라우드 컴퓨팅과 에지 컴퓨팅의 역할 비유를 모두 찾으시오.",
+      "answerTexts": [
+        "행동 대장",
+        "사령부"
+      ],
+      "answerMatchMode": "ALL",
+      "answerRanges": [
+        {
+          "paragraphId": "p4",
+          "start": 89,
+          "end": 94
+        },
+        {
+          "paragraphId": "p4",
+          "start": 162,
+          "end": 165
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45

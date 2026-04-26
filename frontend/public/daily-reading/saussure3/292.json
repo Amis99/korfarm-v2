@@ -850,19 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "화려한 ( )와 모양을 봐요.",
-          "answerText": "무늬",
-          "answerMatchMode": "EXACT",
+          "prompt": "금관에서 다시 떠올린 내용을 나타내는 어구를 지문에서 찾으시오.",
+          "answerText": "금관의 화려한 무늬와 모양",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 35,
-              "end": 37
-            },
-            {
-              "paragraphId": "p2",
-              "start": 25,
-              "end": 27
+              "start": 27,
+              "end": 41
             }
           ],
           "scoring": {
@@ -874,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "유물을 ( )하니 역사 공부 됨.",
-          "answerText": "분류",
-          "answerMatchMode": "EXACT",
+          "prompt": "음식을 저장하는 데 쓰였다고 한 유물을 지문에서 찾으시오.",
+          "answerText": "빗살무늬 토기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 76,
-              "end": 78
+              "start": 23,
+              "end": 30
             }
           ],
           "scoring": {
@@ -893,18 +888,32 @@
         },
         {
           "id": "q3",
-          "prompt": "우리 ( )을 소중히 아껴요.",
-          "answerText": "역사",
-          "answerMatchMode": "EXACT",
+          "prompt": "석탑을 쌓을 때 담았다고 한 마음을 지문에서 찾으시오.",
+          "answerText": "정성스러운 마음",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 81,
-              "end": 83
-            },
+              "start": 52,
+              "end": 60
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "앞으로도 소중히 아끼기로 한 대상을 지문에서 찾으시오.",
+          "answerText": "우리 역사",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 82,
+              "start": 79,
               "end": 84
             }
           ],

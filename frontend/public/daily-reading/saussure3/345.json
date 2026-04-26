@@ -886,14 +886,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "골목길에서는 ( )를 기울여요.",
-          "answerText": "주의",
-          "answerMatchMode": "EXACT",
+          "prompt": "좁은 골목길에서 조심해야 할 차를 찾으시오.",
+          "answerText": "갑자기 튀어나오는 차",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 17,
-              "end": 19
+              "start": 33,
+              "end": 44
             }
           ],
           "scoring": {
@@ -905,14 +905,14 @@
         },
         {
           "id": "q2",
-          "prompt": "( )를 조심히 살피며 걸어요.",
-          "answerText": "요리조리",
-          "answerMatchMode": "EXACT",
+          "prompt": "걸을 때 하지 말아야 할 행동을 찾으시오.",
+          "answerText": "이어폰을 끼거나 핸드폰을 보며 걷지 않습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 69,
-              "end": 73
+              "paragraphId": "p1",
+              "start": 51,
+              "end": 75
             }
           ],
           "scoring": {
@@ -924,14 +924,41 @@
         },
         {
           "id": "q3",
-          "prompt": "( ) 보행으로 집에 왔습니다.",
-          "answerText": "안전한",
-          "answerMatchMode": "EXACT",
+          "prompt": "주차된 차 근처에서 지켜야 할 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "주차된 차 사이에서 갑자기 나가지 않도록 함",
+            "운전자가 나를 볼 수 있는 넓은 곳으로 다닙니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
+              "paragraphId": "p2",
               "start": 0,
-              "end": 3
+              "end": 24
+            },
+            {
+              "paragraphId": "p2",
+              "start": 26,
+              "end": 52
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "무엇이 무척 중요하다고 했는지 찾으시오.",
+          "answerText": "서두르지 않고 천천히 걷는 습관",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 104,
+              "end": 121
             }
           ],
           "scoring": {

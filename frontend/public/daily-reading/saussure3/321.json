@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우산을 펼 땐 ( )을 살펴요.",
-          "answerText": "주변",
-          "answerMatchMode": "EXACT",
+          "prompt": "우산을 펼 때 살펴야 할 내용을 본문에서 찾으시오.",
+          "answerText": "주변에 사람이 있는지 살핍니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 36,
-              "end": 38
+              "end": 52
             }
           ],
           "scoring": {
@@ -869,14 +869,22 @@
         },
         {
           "id": "q2",
-          "prompt": "우산에 ( )을 확인합니다.",
-          "answerText": "이름",
-          "answerMatchMode": "EXACT",
+          "prompt": "우산 끝 때문에 조심해야 할 대상과 이유를 모두 찾으시오.",
+          "answerTexts": [
+            "뾰족한 우산 끝에",
+            "친구가 다치지 않게 주의함"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 92,
-              "end": 94
+              "paragraphId": "p1",
+              "start": 54,
+              "end": 63
+            },
+            {
+              "paragraphId": "p1",
+              "start": 64,
+              "end": 78
             }
           ],
           "scoring": {
@@ -888,14 +896,41 @@
         },
         {
           "id": "q3",
-          "prompt": "집중이 ( ) 잘되었습니다.",
-          "answerText": "무척",
-          "answerMatchMode": "EXACT",
+          "prompt": "학교에 도착하면 우산을 어떻게 정리해야 하는지 모두 찾으시오.",
+          "answerTexts": [
+            "우산의 물기를 탈탈 텁니다",
+            "젖은 우산을 우산꽂이에 가지런히 꽂아 둡니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 73,
-              "end": 75
+              "paragraphId": "p2",
+              "start": 9,
+              "end": 23
+            },
+            {
+              "paragraphId": "p2",
+              "start": 25,
+              "end": 49
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "친구의 우산과 바뀌지 않도록 확인해야 할 것을 본문에서 찾으시오.",
+          "answerText": "이름을 확인함",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 92,
+              "end": 99
             }
           ],
           "scoring": {

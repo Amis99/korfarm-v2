@@ -557,19 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이야기 속 인물이 되어 그 상황을 직접 행동으로 표현하며 노는 활동은?",
-          "answerText": "역할놀이",
-          "answerMatchMode": "EXACT",
+          "prompt": "나는 샘물을 마시고 어떤 역할을 맡았는지 지문에서 찾으시오.",
+          "answerText": "젊어진 할머니 역할",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 87,
-              "end": 91
-            },
-            {
-              "paragraphId": "p3",
-              "start": 106,
-              "end": 110
+              "paragraphId": "p1",
+              "start": 65,
+              "end": 75
             }
           ],
           "scoring": {
@@ -581,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "이야기 속에 나오는 사람이나 동물을 무엇이라 하나요?",
-          "answerText": "인물",
-          "answerMatchMode": "EXACT",
+          "prompt": "대사를 외우고 몸짓을 맞추는 동안 우리는 누구의 마음을 깊이 이해했는지 지문에서 찾으시오.",
+          "answerText": "이야기 속 인물들",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 67,
-              "end": 69
+              "start": 61,
+              "end": 70
             }
           ],
           "scoring": {
@@ -600,14 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "배우가 맡은 역할을 수행하기 위해 말하는 내용을 무엇이라 하나요?",
-          "answerText": "대사",
-          "answerMatchMode": "EXACT",
+          "prompt": "역할놀이는 글자로만 읽던 이야기를 무엇으로 바꾸어 주었는지 지문에서 찾으시오.",
+          "answerText": "생생한 체험",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 42,
-              "end": 44
+              "start": 106,
+              "end": 112
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "연극이 끝나자 우리 모둠의 연기에 큰 박수를 보내 준 대상을 찾으시오.",
+          "answerText": "선생님과 친구들",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 8,
+              "end": 16
             }
           ],
           "scoring": {

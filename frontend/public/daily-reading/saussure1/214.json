@@ -396,19 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "멀고 가까운 법?",
-          "answerText": "원근",
-          "answerMatchMode": "EXACT",
+          "prompt": "가까운 것은 크게 멀리 있는 것은 작게 그려서 거리감을 나타내는 그림 기법을 무엇이라고 하나요? 글에서 찾아보세요",
+          "answerText": "원근법",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 97,
-              "end": 99
-            },
-            {
-              "paragraphId": "p2",
-              "start": 85,
-              "end": 87
+              "end": 100
             }
           ],
           "scoring": {
@@ -420,19 +415,14 @@
         },
         {
           "id": "q2",
-          "prompt": "도화지에 그린 것?",
-          "answerText": "그림",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서 가까운 곳을 칠할 때 사용하는 색깔의 특징 두 가지를 모두 찾아보세요",
+          "answerText": "진하고 선명한",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 109,
-              "end": 111
-            },
-            {
               "paragraphId": "p2",
-              "start": 107,
-              "end": 109
+              "start": 40,
+              "end": 47
             }
           ],
           "scoring": {
@@ -444,19 +434,33 @@
         },
         {
           "id": "q3",
-          "prompt": "해 나가는 길?",
-          "answerText": "방법",
-          "answerMatchMode": "EXACT",
+          "prompt": "원근법을 사용하면 그림이 어떻게 된다고 하는지 글에서 찾아보세요",
+          "answerText": "더 생생하게 만들어",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 37,
-              "end": 39
-            },
+              "start": 113,
+              "end": 123
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "원근을 생각하며 그리면 어떤 느낌이 살아나는 그림이 완성된다고 하는지 한 단어로 찾아보세요",
+          "answerText": "입체감",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 23,
-              "end": 25
+              "start": 94,
+              "end": 97
             }
           ],
           "scoring": {

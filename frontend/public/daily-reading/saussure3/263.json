@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "순서를 지키는 상태는?",
-          "answerText": "질서 있게",
-          "answerMatchMode": "EXACT",
+          "prompt": "떠나기 전에 숙지해야 하는 것을 지문에서 찾아 클릭하시오.",
+          "answerText": "안전 규칙",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 83,
-              "end": 88
+              "start": 19,
+              "end": 24
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "남을 도와주거나 살핌은?",
-          "answerText": "배려하는",
-          "answerMatchMode": "EXACT",
+          "prompt": "버스에서 매야 하는 것을 지문에서 찾아 클릭하시오.",
+          "answerText": "안전벨트",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 67,
-              "end": 71
+              "paragraphId": "p1",
+              "start": 39,
+              "end": 43
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "도움이 되고 이로움은?",
-          "answerText": "유익한",
-          "answerMatchMode": "EXACT",
+          "prompt": "야외 활동 중 벗어나지 않도록 주의해야 하는 곳을 지문에서 찾아 클릭하시오.",
+          "answerText": "지정된 장소",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 81,
-              "end": 84
+              "start": 10,
+              "end": 16
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "추억을 더 아름답게 만들어 주는 것을 지문에서 찾아 클릭하시오.",
+          "answerText": "바른 행동",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 32,
+              "end": 37
             }
           ],
           "scoring": {

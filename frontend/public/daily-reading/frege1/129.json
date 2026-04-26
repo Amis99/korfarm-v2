@@ -913,14 +913,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "공원에서 자전거와 갈등이 자주 일어나는 길은 어디인가요?",
-          "answerText": "산책로",
-          "answerMatchMode": "ANY",
+          "prompt": "공원 자전거 속도 제한을 둘러싼 서로 다른 주장을 모두 찾으시오.",
+          "answerTexts": [
+            "자전거의 속도를 엄격하게 제한해야 한다",
+            "지나친 속도 제한은 너무 답답하다는 반론"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 127,
-              "end": 130
+              "start": 149,
+              "end": 170
+            },
+            {
+              "paragraphId": "p1",
+              "start": 234,
+              "end": 256
             }
           ],
           "scoring": {
@@ -931,14 +939,28 @@
         },
         {
           "id": "q2",
-          "prompt": "속도 제한 찬성 쪽이 가장 먼저 생각해야 한다고 한 대상은 누구인가요?",
-          "answerText": "어린아이들과 노약자",
-          "answerMatchMode": "ANY",
+          "prompt": "속도 제한 찬성 쪽이 말한 이유를 모두 찾으시오.",
+          "answerTexts": [
+            "어린아이들과 노약자의 안전을 최우선으로 생각해야 한다",
+            "큰 사고로 이어질 위험이 높습니다",
+            "무서운 공포감과 불쾌감을 줍니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 31,
-              "end": 41
+              "end": 60
+            },
+            {
+              "paragraphId": "p2",
+              "start": 118,
+              "end": 136
+            },
+            {
+              "paragraphId": "p2",
+              "start": 184,
+              "end": 201
             }
           ],
           "scoring": {
@@ -949,14 +971,22 @@
         },
         {
           "id": "q3",
-          "prompt": "빠른 자전거가 산책하러 온 시민들에게 준다고 한 감정은 무엇인가요?",
-          "answerText": "공포감",
-          "answerMatchMode": "ANY",
+          "prompt": "찬성 쪽이 제안한 공원 내 자전거 이용 규칙을 모두 찾으시오.",
+          "answerTexts": [
+            "자전거 속도를 줄이거나",
+            "아예 내려서 끌고 가도록"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 188,
-              "end": 191
+              "start": 231,
+              "end": 243
+            },
+            {
+              "paragraphId": "p2",
+              "start": 244,
+              "end": 257
             }
           ],
           "scoring": {
@@ -967,14 +997,22 @@
         },
         {
           "id": "q4",
-          "prompt": "속도 제한 반대 쪽이 먼저 필요하다고 한 환경 개선은 무엇인가요?",
-          "answerText": "자전거 전용 도로",
-          "answerMatchMode": "ANY",
+          "prompt": "속도 제한 반대 쪽이 내세운 권리와 대안을 모두 찾으시오.",
+          "answerTexts": [
+            "중요한 스트레스 해소법이자 권리",
+            "자전거 전용 도로를 보행로와 확실하게 분리"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
+              "start": 121,
+              "end": 138
+            },
+            {
+              "paragraphId": "p3",
               "start": 163,
-              "end": 172
+              "end": 186
             }
           ],
           "scoring": {
@@ -985,13 +1023,27 @@
         },
         {
           "id": "q5",
-          "prompt": "서로를 배려하며 꼭 찾아야 한다고 한 것은 무엇인가요?",
-          "answerText": "타협점",
-          "answerMatchMode": "ANY",
+          "prompt": "글쓴이가 제시한 해결 방향을 모두 찾으시오.",
+          "answerTexts": [
+            "조금씩 양보하며 조화롭게 공간을 나누어 써야",
+            "속도를 스스로 줄이는",
+            "서로를 배려하는 지혜로운 타협점"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 256,
+              "start": 160,
+              "end": 184
+            },
+            {
+              "paragraphId": "p4",
+              "start": 228,
+              "end": 239
+            },
+            {
+              "paragraphId": "p4",
+              "start": 242,
               "end": 259
             }
           ],

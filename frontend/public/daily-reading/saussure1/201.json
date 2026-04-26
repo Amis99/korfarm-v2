@@ -474,29 +474,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리가 사는 마을?",
-          "answerText": "동네",
-          "answerMatchMode": "EXACT",
+          "prompt": "동네를 안전하게 지켜주시는 분의 직업은 무엇인지 찾아보세요",
+          "answerText": "경찰관",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p1",
-              "start": 46,
-              "end": 48
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 107,
-              "end": 109
+              "start": 37,
+              "end": 40
             }
           ],
           "scoring": {
@@ -508,14 +493,14 @@
         },
         {
           "id": "q2",
-          "prompt": "사회가 하는 일?",
-          "answerText": "직업",
-          "answerMatchMode": "EXACT",
+          "prompt": "불을 꺼주시는 분의 직업은 무엇인지 찾아보세요",
+          "answerText": "소방관",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 114,
-              "end": 116
+              "paragraphId": "p1",
+              "start": 61,
+              "end": 64
             }
           ],
           "scoring": {
@@ -527,14 +512,43 @@
         },
         {
           "id": "q3",
-          "prompt": "고마워하는 마음?",
-          "answerText": "감사",
-          "answerMatchMode": "EXACT",
+          "prompt": "소중한 편지를 배달해주시는 분이 일하시는 곳은 어디인지 찾아보세요",
+          "answerText": "우체국",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 79,
+              "end": 82
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "2문단에서 아픈 사람을 치료해주시는 분과 가르침을 주시는 분의 직업 두 가지를 모두 찾아보세요",
+          "answerText": "의사, 선생님",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 129,
-              "end": 131
+              "start": 66,
+              "end": 68
+            },
+            {
+              "paragraphId": "p2",
+              "start": 69,
+              "end": 72
+            },
+            {
+              "paragraphId": "p2",
+              "start": 86,
+              "end": 89
             }
           ],
           "scoring": {

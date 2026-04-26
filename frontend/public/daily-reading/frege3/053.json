@@ -1329,31 +1329,16 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사용자 취향을 분석해 맞춤형 정보를 제공하는 기술은 무엇인가요?",
-          "answerText": "추천 알고리즘",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 110,
-              "end": 117
-            },
-            {
-              "paragraphId": "p1",
-              "start": 126,
-              "end": 133
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 7
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 7
-            }
-          ],
+      "prompt": "추천 알고리즘의 정의에 해당하는 부분을 찾으시오.",
+      "answerText": "사용자의 취향을 분석하여 맞춤형 정보를 제공하는",
+      "answerMatchMode": "ANY",
+      "answerRanges": [
+        {
+          "paragraphId": "p1",
+          "start": 82,
+          "end": 108
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1362,21 +1347,34 @@
         },
         {
           "id": "q2",
-          "prompt": "비슷한 취향의 다른 사용자가 좋아한 콘텐츠를 추천하는 방식은 무엇인가요?",
-          "answerText": "협업 필터링",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
+      "prompt": "추천 알고리즘의 핵심적인 방식을 모두 찾으시오.",
+      "answerTexts": [
+        "협업 필터링",
+        "콘텐츠 기반 필터링"
+      ],
+      "answerMatchMode": "ALL",
+      "answerRanges": [
+        {
+          "paragraphId": "p2",
               "start": 22,
               "end": 28
             },
-            {
-              "paragraphId": "p2",
-              "start": 47,
-              "end": 53
-            }
-          ],
+        {
+          "paragraphId": "p2",
+          "start": 47,
+          "end": 53
+        },
+        {
+          "paragraphId": "p2",
+          "start": 32,
+          "end": 42
+        },
+        {
+          "paragraphId": "p2",
+          "start": 106,
+          "end": 116
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1385,21 +1383,16 @@
         },
         {
           "id": "q3",
-          "prompt": "과거에 즐겨 본 콘텐츠의 속성을 분석하는 방식은 무엇인가요?",
-          "answerText": "콘텐츠 기반 필터링",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 32,
-              "end": 42
-            },
-            {
-              "paragraphId": "p2",
-              "start": 106,
-              "end": 116
-            }
-          ],
+      "prompt": "추천 알고리즘이 플랫폼에 기여하는 내용을 찾으시오.",
+      "answerText": "플랫폼의 체류 시간을 극대화하여 기업의 수익을 높이는 데 결정적인 기여",
+      "answerMatchMode": "ANY",
+      "answerRanges": [
+        {
+          "paragraphId": "p3",
+          "start": 9,
+          "end": 48
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1408,16 +1401,24 @@
         },
         {
           "id": "q4",
-          "prompt": "플랫폼 체류 시간을 늘리게 만드는 구조를 무엇이라고 하나요?",
-          "answerText": "도파민 루프",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 114,
-              "end": 120
-            }
-          ],
+      "prompt": "추천 알고리즘의 심각한 부작용을 모두 찾으시오.",
+      "answerTexts": [
+        "확증 편향",
+        "필터 버블"
+      ],
+      "answerMatchMode": "ALL",
+      "answerRanges": [
+        {
+          "paragraphId": "p4",
+          "start": 24,
+          "end": 29
+        },
+        {
+          "paragraphId": "p4",
+          "start": 33,
+          "end": 38
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1426,16 +1427,16 @@
         },
         {
           "id": "q5",
-          "prompt": "추천 알고리즘의 심각한 부작용 가운데 하나는 무엇인가요?",
-          "answerText": "필터 버블",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 33,
-              "end": 38
-            }
-          ],
+      "prompt": "알고리즘이 권하는 대로만 소비하지 않기 위해 필요한 태도를 찾으시오.",
+      "answerText": "의도적으로 낯선 장르를 탐색하거나 상반된 의견을 찾아보는 능동적인 태도",
+      "answerMatchMode": "ANY",
+      "answerRanges": [
+        {
+          "paragraphId": "p5",
+          "start": 75,
+          "end": 114
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45

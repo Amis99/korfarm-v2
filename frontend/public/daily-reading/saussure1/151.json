@@ -474,53 +474,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "하늘에 뜬 하얀 것?",
-          "answerText": "구름",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 17,
-              "end": 19
-            },
-            {
-              "paragraphId": "p1",
-              "start": 116,
-              "end": 118
-            },
-            {
-              "paragraphId": "p1",
-              "start": 129,
-              "end": 131
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 108,
-              "end": 110
-            },
-            {
-              "paragraphId": "p2",
-              "start": 147,
-              "end": 149
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "물이 변한 기체의 이름?",
+          "prompt": "강물이나 바닷물이 따뜻한 햇볕을 받으면 무엇이 되어 하늘로 올라간다고 했나요? 지문에서 한 단어로 찾아 보세요",
           "answerText": "수증기",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -541,15 +497,68 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "구름 속의 작은 무엇들인가요?",
-          "answerText": "물방울",
-          "answerMatchMode": "EXACT",
+          "id": "q2",
+          "prompt": "구름 속의 물방울들이 점점 많아져서 무거워지면 아래로 떨어지게 되는데 이것을 무엇이라고 하나요? 지문에서 한 글자로 찾아 보세요",
+          "answerText": "비",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 6,
-              "end": 9
+              "start": 46,
+              "end": 47
+            },
+            {
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 53
+            },
+            {
+              "paragraphId": "p2",
+              "start": 151,
+              "end": 152
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "비는 메마른 땅을 적셔 주고 무엇이 쑥쑥 자라날 수 있게 도와준다고 했나요? 지문에서 한 단어로 찾아 보세요",
+          "answerText": "식물",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 67,
+              "end": 69
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "햇볕을 받아 수증기가 되어 하늘로 올라가는 두 가지 물은 무엇인가요? 지문에서 둘 다 찾아 보세요",
+          "answerText": "강물,바닷물",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 37,
+              "end": 39
+            },
+            {
+              "paragraphId": "p1",
+              "start": 42,
+              "end": 45
             }
           ],
           "scoring": {

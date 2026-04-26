@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "독점시장을 정의한 문장을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 213
+              "end": 44
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "독점시장은 어떤 재화를 사실상 한 기업이 단독으로 공급하는 시장 구조를 말한다. 이 시장에서는 소비자가 선택할 수 있는 대체재가 충분하지 않거나, 기술과 자본, 제도적 진입장벽 때문에 다른 기업이 쉽게 들어오지 못한다. 따라서 독점기업은 완전경쟁시장의 기업과 달리 가격을 주어진 것으로 받아들이는 가격수용자가 아니라, 생산량 조절을 통해 가격에 영향을 미칠 수 있는 위치에 놓인다."
+          "answerText": "독점시장은 어떤 재화를 사실상 한 기업이 단독으로 공급하는 시장 구조를 말한다."
         },
         {
           "id": "q2",
-          "prompt": "2문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "소비자 선택과 기업 진입을 제한하는 원인을 지문에서 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 179
+              "paragraphId": "p1",
+              "start": 67,
+              "end": 80
+            },
+            {
+              "paragraphId": "p1",
+              "start": 82,
+              "end": 98
             }
           ],
           "scoring": {
@@ -602,16 +607,19 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "완전경쟁시장에서는 기업이 시장가격에 따라 원하는 만큼 판매할 수 있으므로 추가로 한 단위를 팔 때 얻는 한계수입이 가격과 같다. 그러나 독점기업은 사정이 다르다. 더 많은 수량을 팔려면 가격을 낮춰야 하기 때문이다. 이때 가격 인하는 새로 파는 한 단위에만 적용되는 것이 아니라, 이미 팔고 있던 물량에도 함께 적용된다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "대체재가 충분하지 않거나",
+            "기술과 자본, 제도적 진입장벽"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "가격을 주어진 것으로 받아들이는 기업을 가리키는 말을 지문에서 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
+              "paragraphId": "p1",
+              "start": 166,
               "end": 171
             }
           ],
@@ -621,16 +629,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "예를 들어 한 단위를 100에 팔던 기업이 두 단위를 팔기 위해 가격을 90으로 낮췄다고 하자. 총수입은 100에서 180으로 늘어나지만, 추가 한 단위 판매로 늘어난 수입은 80에 그친다. 가격은 90인데 한계수입은 80이 되는 셈이다. 이런 이유로 독점시장에서 한계수입은 언제나 가격보다 낮게 나타난다."
+          "answerText": "가격수용자"
         },
         {
           "id": "q4",
-          "prompt": "4문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "독점기업이 더 많은 수량을 팔려면 해야 하는 일을 지문에서 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 185
+              "paragraphId": "p2",
+              "start": 104,
+              "end": 111
             }
           ],
           "scoring": {
@@ -639,16 +647,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "독점기업은 이윤을 극대화하기 위해 한계수입과 한계비용을 비교한다. 한계수입이 한계비용보다 크면 한 단위를 더 생산해도 이윤이 늘어나므로 생산량을 확대할 유인이 있다. 반대로 한계수입이 한계비용보다 작으면 추가 생산이 오히려 이윤을 줄이므로 생산량을 줄이는 편이 낫다. 결국 기업은 두 값이 같아지는 지점에서 최적 생산량을 선택한다."
+          "answerText": "가격을 낮춰야"
         },
         {
           "id": "q5",
-          "prompt": "5문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "가격 인하가 새로 파는 한 단위 말고도 적용되는 대상을 지문에서 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 191
+              "paragraphId": "p2",
+              "start": 157,
+              "end": 173
             }
           ],
           "scoring": {
@@ -657,16 +665,47 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그다음 독점기업은 그 생산량을 판매할 수 있는 최고가격을 수요곡선에서 찾는다. 즉 생산량은 한계수입과 한계비용의 일치 조건으로 정하고, 가격은 그 생산량에서 소비자가 실제로 지불할 수 있는 수준으로 결정하는 것이다. 이 때문에 독점기업은 경쟁시장보다 생산량을 적게 하고 가격을 높게 설정할 수 있으며, 그 결과 시장지배력을 이윤으로 연결한다."
+          "answerText": "이미 팔고 있던 물량에도 함께"
         },
         {
           "id": "q6",
-          "prompt": "6문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "예시에서 가격과 한계수입의 수치를 지문에서 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 202
+              "paragraphId": "p3",
+              "start": 107,
+              "end": 113
+            },
+            {
+              "paragraphId": "p3",
+              "start": 116,
+              "end": 124
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "가격은 90",
+            "한계수입은 80"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "독점기업이 이윤 극대화를 위해 비교하는 두 개념이 함께 나온 어구를 지문에서 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 19,
+              "end": 29
+            },
+            {
+              "paragraphId": "p5",
+              "start": 51,
+              "end": 61
             }
           ],
           "scoring": {
@@ -675,7 +714,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 구조는 소비자와 시장 전체에 비효율을 가져올 수 있다. 가격이 높아지면 원래 거래가 가능했던 일부 수요가 시장에서 배제되고, 사회 전체의 거래량도 줄어든다. 그래서 독점시장의 핵심을 이해하려면 단순히 '한 기업이 하나의 시장을 지배한다'는 사실을 넘어서, 왜 한계수입이 가격보다 낮아지고 그 결과 어떤 방식으로 이윤 극대화가 이루어지는지를 함께 보아야 한다."
+          "answerText": "한계수입과 한계비용"
+        },
+        {
+          "id": "q8",
+          "prompt": "가격이 높아지면 시장에서 배제되는 대상을 지문에서 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 42,
+              "end": 59
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "원래 거래가 가능했던 일부 수요"
         }
       ]
     }

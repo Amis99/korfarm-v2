@@ -908,12 +908,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "prompt": "그리움을 의문형으로 드러낸 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 57
+              "start": 21,
+              "end": 30
             }
           ],
           "scoring": {
@@ -922,16 +922,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "오동나무꽃으로 불 밝힌 이곳 첫여름이 그립지 아니한가?\n어린 나그네 꿈이 시시로 파랑새가 되어 오려니."
+          "answerText": "그립지 아니한가?"
         },
         {
           "id": "q2",
-          "prompt": "2연은 그 장면이나 정서를 어떻게 이어 가는가?",
+          "prompt": "어린 나그네의 꿈이 되어 온다고 한 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 51
+              "paragraphId": "p1",
+              "start": 45,
+              "end": 48
             }
           ],
           "scoring": {
@@ -940,16 +940,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "나무 밑으로 가나 책상 턱에 이마를 고일 때나,\n네가 남기고 간 기억만이 소곤소곤거리는구나."
+          "answerText": "파랑새"
         },
         {
           "id": "q3",
-          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
+          "prompt": "화자 곁에서 소곤거리는 것으로 제시된 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 51
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 38
             }
           ],
           "scoring": {
@@ -958,11 +958,29 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "모처럼 만에 날아온 소식에 반가운 마음이 울렁거리어\n가여운 글자마다 먼 황해가 남실거리나니."
+          "answerText": "네가 남기고 간 기억"
         },
         {
           "id": "q4",
-          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
+          "prompt": "소식에 대한 화자의 반가운 반응을 드러낸 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 15,
+              "end": 28
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "반가운 마음이 울렁거리어"
+        },
+        {
+          "id": "q5",
+          "prompt": "말줄임표로 둘러싸인 상상 장면을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
@@ -979,13 +997,13 @@
           "answerText": "……나는 갈매기 같은 종선을 한창 치달리고 있다……"
         },
         {
-          "id": "q5",
-          "prompt": "5연은 앞선 흐름을 어떤 긴장이나 전환으로 끌고 가는가?",
+          "id": "q6",
+          "prompt": "오월의 활기가 순풍으로 바뀌는 표현의 주체를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 0,
-              "end": 67
+              "end": 10
             }
           ],
           "scoring": {
@@ -994,16 +1012,39 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "쾌활한 오월 넥타이가 내처 난데없는 순풍이 되어,\n하늘과 딱 닿은 푸른 물결 우에 솟은,\n외따른 섬 로맨틱을 찾아갈까나."
+          "answerText": "쾌활한 오월 넥타이"
         },
         {
-          "id": "q6",
-          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
+          "id": "q7",
+          "prompt": "홀로 떨어져 있다는 뜻을 담은 말을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 50,
+              "end": 53
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "외따른"
+        },
+        {
+          "id": "q8",
+          "prompt": "6연에서 상대를 부르는 표현 두 가지를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 109
+              "start": 22,
+              "end": 34
+            },
+            {
+              "paragraphId": "p6",
+              "start": 36,
+              "end": 48
             }
           ],
           "scoring": {
@@ -1011,8 +1052,11 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "일본 말과 아라비아 글씨를 가르치러 간\n쬐그만 이 페스탈로치야, 꾀꼬리 같은 선생님이야,\n날마다 밤마다 섬 둘레가 근심스런 풍랑에 씹히는가 하노니,\n은은히 밀려오는 듯 머얼리 우는 오르간 소리……"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "쬐그만 이 페스탈로치야",
+            "꾀꼬리 같은 선생님이야"
+          ]
         }
       ]
     }

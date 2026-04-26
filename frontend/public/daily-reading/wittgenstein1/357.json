@@ -583,12 +583,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 '음소 배열 제약과 음절 끝소리 규칙의 관계'의 기본 개념이나 출발점을 어떻게 설명하는가?",
+          "prompt": "음소 배열 제약이 무엇을 제한하는 규칙인지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 136
+              "start": 10,
+              "end": 43
             }
           ],
           "scoring": {
@@ -597,16 +597,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "음소 배열 제약은 어떤 음소가 어떤 자리에서 실현될 수 있는지를 제한하는 규칙이다. 국어에서는 특히 음절 끝 자리에 올 수 있는 자음의 실현이 제한되므로, 표기에 나타나는 자음 수와 실제 발음에서 드러나는 자음 수가 일치하지 않는 경우가 많다."
+          "answerText": "어떤 음소가 어떤 자리에서 실현될 수 있는지를 제한하는 규칙"
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 '음소 배열 제약과 음절 끝소리 규칙의 관계'과 관련한 원리나 기준을 어떤 관계로 설명하는가?",
+          "prompt": "표기에 나타나는 자음 수와 실제 발음에서 드러나는 자음 수가 일치하지 않는 경우가 많은 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 123
+              "paragraphId": "p1",
+              "start": 56,
+              "end": 85
             }
           ],
           "scoring": {
@@ -615,16 +615,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "대표적으로 음절 끝에서는 다양한 자음이 적혀 있더라도 발음에서는 몇 개의 자음으로만 중화된다. 받침 위치에서 [ㄱ], [ㄴ], [ㄷ], [ㄹ], [ㅁ], [ㅂ], [ㅇ]만 안정적으로 실현되는 것이 표면적인 배열 제약이다."
+          "answerText": "음절 끝 자리에 올 수 있는 자음의 실현이 제한되므로"
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 앞의 설명을 어떤 예시나 사례로 구체화하는가?",
+          "prompt": "표면적인 배열 제약으로 설명한 받침 위치의 실현 범위를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 144
+              "paragraphId": "p2",
+              "start": 53,
+              "end": 120
             }
           ],
           "scoring": {
@@ -633,16 +633,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "음절 끝소리 규칙은 이러한 제한이 실제 발음에서 어떻게 구현되는지를 설명하는 음운 규칙이다. 예를 들어 '부엌'의 받침 'ㅋ'은 [ㄱ]으로, '밭'의 받침 'ㅌ'은 [ㄷ]으로, '앞'의 받침 'ㅍ'은 [ㅂ]으로 실현되어 음절 끝의 허용 범위 안으로 조정된다."
+          "answerText": "받침 위치에서 [ㄱ], [ㄴ], [ㄷ], [ㄹ], [ㅁ], [ㅂ], [ㅇ]만 안정적으로 실현되는 것이 표면적인 배열 제약"
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 '음소 배열 제약과 음절 끝소리 규칙의 관계'을 앞선 논의와 이어 어떤 적용 장면이나 전개로 보여 주는가?",
+          "prompt": "음절 끝소리 규칙의 예에서 실제로 실현되는 소리를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 139
+              "paragraphId": "p3",
+              "start": 72,
+              "end": 77
+            },
+            {
+              "paragraphId": "p3",
+              "start": 92,
+              "end": 97
+            },
+            {
+              "paragraphId": "p3",
+              "start": 112,
+              "end": 117
             }
           ],
           "scoring": {
@@ -650,17 +660,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "중요한 점은 음소 배열 제약과 음절 끝소리 규칙이 같은 현상을 다른 층위에서 설명한다는 것이다. 배열 제약은 음절 끝에 어떤 소리가 놓일 수 있는지를 말하고, 음절 끝소리 규칙은 실제로 허용되지 않는 자음이 허용되는 소리로 바뀌는 과정을 보여 준다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "[ㄱ]으로",
+            "[ㄷ]으로",
+            "[ㅂ]으로"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 '음소 배열 제약과 음절 끝소리 규칙의 관계'을 이해할 때 왜 이 관점이 중요하다고 말하는가?",
+          "prompt": "'밭에'에서 받침 'ㅌ'이 이어지는 위치를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 144
+              "start": 65,
+              "end": 73
             }
           ],
           "scoring": {
@@ -669,16 +683,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 관계는 활용형이나 연음형에서 더욱 분명해진다. '밭'은 홀로 발음될 때 [받]이지만 '밭에'에서는 받침 'ㅌ'이 다음 음절 초성으로 이어져 [바테]가 되므로, 기본 표기 속 자질이 완전히 사라진 것이 아니라 음절 끝 환경에서만 중화된 것임을 알 수 있다."
+          "answerText": "다음 음절 초성"
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 '음소 배열 제약과 음절 끝소리 규칙의 관계'을 어떻게 정리하며 무엇을 강조하는가?",
+          "prompt": "기본 표기 속 자질이 완전히 사라진 것이 아니라 어디에서만 중화된다고 했는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 139
+              "paragraphId": "p5",
+              "start": 118,
+              "end": 125
             }
           ],
           "scoring": {
@@ -687,7 +701,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "따라서 받침 발음을 분석할 때는 표기와 발음의 차이를 단순 암기로 처리하면 안 된다. 어떤 소리가 그 자리에 올 수 있는지라는 제약의 수준과, 실제 발음에서 어떤 변환이 일어나는지라는 규칙의 수준을 구분해야 국어 음운 체계를 정확히 이해할 수 있다."
+          "answerText": "음절 끝 환경"
+        },
+        {
+          "id": "q7",
+          "prompt": "음소 배열 제약과 음절 끝소리 규칙이 같은 현상을 어떻게 설명한다고 했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 28,
+              "end": 47
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "같은 현상을 다른 층위에서 설명한다"
+        },
+        {
+          "id": "q8",
+          "prompt": "받침 발음을 분석할 때 구분해야 할 두 수준을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 48,
+              "end": 77
+            },
+            {
+              "paragraphId": "p6",
+              "start": 80,
+              "end": 109
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "어떤 소리가 그 자리에 올 수 있는지라는 제약의 수준",
+            "실제 발음에서 어떤 변환이 일어나는지라는 규칙의 수준"
+          ]
         }
       ]
     }

@@ -406,24 +406,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "예쁜 ( )를 잃어버렸습니다.",
-          "answerText": "바람개비",
-          "answerMatchMode": "EXACT",
+          "prompt": "토끼가 잃어버린 것이 무엇인지 지문에서 찾아 보세요.",
+          "answerText": "예쁜 바람개비를 잃어버렸습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 13,
-              "end": 17
-            },
-            {
-              "paragraphId": "p1",
-              "start": 28,
-              "end": 32
-            },
-            {
-              "paragraphId": "p2",
-              "start": 27,
-              "end": 31
+              "start": 10,
+              "end": 26
             }
           ],
           "scoring": {
@@ -435,14 +425,19 @@
         },
         {
           "id": "q2",
-          "prompt": "노란 ( )으로 가보라는 힌트.",
-          "answerText": "꽃밭",
-          "answerMatchMode": "EXACT",
+          "prompt": "토끼가 나무 아래에서 만난 동물이 누구인지 지문에서 찾아 보세요.",
+          "answerText": "다람쥐",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
+              "paragraphId": "p1",
+              "start": 62,
+              "end": 65
+            },
+            {
               "paragraphId": "p2",
-              "start": 59,
-              "end": 61
+              "start": 0,
+              "end": 3
             }
           ],
           "scoring": {
@@ -454,14 +449,33 @@
         },
         {
           "id": "q3",
-          "prompt": "소중한 ( )가 담겨 있었어요.",
-          "answerText": "힌트",
-          "answerMatchMode": "EXACT",
+          "prompt": "토끼가 바람개비 위치를 묻자 다람쥐가 무엇을 주었는지 지문에서 찾아 보세요.",
+          "answerText": "작은 쪽지 하나를 주었습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 73,
-              "end": 75
+              "start": 39,
+              "end": 54
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "쪽지에 담긴 힌트가 어디로 가보라고 했는지 지문에서 찾아 보세요.",
+          "answerText": "노란 꽃밭으로 가보라는",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 56,
+              "end": 68
             }
           ],
           "scoring": {

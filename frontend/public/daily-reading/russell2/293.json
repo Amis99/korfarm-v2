@@ -1116,124 +1116,83 @@
     "confirm": {
       "questions": [
         {
-          "prompt": "수요량과 공급량이 같아지는 상태는?",
-          "answerText": "시장 균형",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p2",
-              "start": 127,
-              "end": 132
-            },
-            {
-              "paragraphId": "p5",
-              "start": 7,
-              "end": 12
-            },
-            {
-              "paragraphId": "p6",
-              "start": 5,
-              "end": 10
-            }
-          ],
-          "answerMatchMode": "ANY"
-        },
-        {
-          "prompt": "그때의 가격을 가리키는 말은?",
+          "id": "q1",
+          "prompt": "수요량과 공급량이 같아지는 상태에서의 가격을 가리키는 말을 지문에서 찾으시오 (다섯 글자)",
           "answerText": "균형 가격",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 47,
-              "end": 52
-            },
-            {
-              "paragraphId": "p3",
-              "start": 4,
-              "end": 9
-            },
-            {
-              "paragraphId": "p4",
-              "start": 8,
-              "end": 13
-            },
-            {
-              "paragraphId": "p5",
-              "start": 116,
-              "end": 121
-            }
+            {"paragraphId": "p1", "start": 47, "end": 52},
+            {"paragraphId": "p3", "start": 4, "end": 9},
+            {"paragraphId": "p4", "start": 8, "end": 13},
+            {"paragraphId": "p5", "start": 116, "end": 121}
           ],
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
-          "prompt": "가격이 낮아 물건이 모자라는 상태는?",
+          "id": "q2",
+          "prompt": "사려는 양이 팔려는 양보다 많아 가격을 올리는 힘이 되는 상태를 지문에서 찾으시오 (다섯 글자)",
           "answerText": "초과 수요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 20,
-              "end": 25
-            },
-            {
-              "paragraphId": "p3",
-              "start": 32,
-              "end": 37
-            },
-            {
-              "paragraphId": "p6",
-              "start": 30,
-              "end": 35
-            },
-            {
-              "paragraphId": "p6",
-              "start": 73,
-              "end": 78
-            }
+            {"paragraphId": "p3", "start": 20, "end": 25},
+            {"paragraphId": "p3", "start": 32, "end": 37},
+            {"paragraphId": "p6", "start": 30, "end": 35},
+            {"paragraphId": "p6", "start": 73, "end": 78}
           ],
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
-          "prompt": "가격이 높아 물건이 남는 상태는?",
+          "id": "q3",
+          "prompt": "팔려는 양이 사려는 양보다 많아 가격을 내리는 힘이 되는 상태를 지문에서 찾으시오 (다섯 글자)",
           "answerText": "초과 공급",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 20,
-              "end": 25
-            },
-            {
-              "paragraphId": "p4",
-              "start": 33,
-              "end": 38
-            },
-            {
-              "paragraphId": "p6",
-              "start": 37,
-              "end": 42
-            },
-            {
-              "paragraphId": "p6",
-              "start": 95,
-              "end": 100
-            }
+            {"paragraphId": "p4", "start": 20, "end": 25},
+            {"paragraphId": "p4", "start": 33, "end": 38},
+            {"paragraphId": "p6", "start": 37, "end": 42},
+            {"paragraphId": "p6", "start": 95, "end": 100}
           ],
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
-          "prompt": "곡선을 움직이게 할 수 있는 생산 쪽 비용은?",
-          "answerText": "생산 비용",
+          "id": "q4",
+          "prompt": "초과 수요가 가격에 일으키는 작용을 가리키는 두 글자 단어를 지문에서 찾으시오",
+          "answerText": "올리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 54,
-              "end": 59
-            }
+            {"paragraphId": "p3", "start": 143, "end": 145},
+            {"paragraphId": "p6", "start": 84, "end": 86}
           ],
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "수요와 공급에 영향을 주는 조건이 바뀌면 무엇 자체가 움직인다고 했는지 두 글자로 지문에서 찾으시오",
+          "answerText": "곡선",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 66, "end": 68},
+            {"paragraphId": "p2", "start": 88, "end": 90},
+            {"paragraphId": "p2", "start": 112, "end": 114},
+            {"paragraphId": "p5", "start": 93, "end": 95}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "초과 공급 상태에서 가격을 낮추거나 조건을 바꾸어 구매자를 끌어들이려 하는 사람의 명칭을 지문에서 찾으시오 (세 글자)",
+          "answerText": "판매자",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 75, "end": 78}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

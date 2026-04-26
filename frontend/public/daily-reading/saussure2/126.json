@@ -561,14 +561,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "어떤 일을 서로 차례대로 바꾸어 가면서 하는 모습은?",
-          "answerText": "번갈아",
+          "prompt": "야구가 어떤 운동이라고 설명되어 있는지 지문에서 어구를 찾으시오.",
+          "answerText": "점수를 내는 즐거운 운동",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 17,
-              "end": 20
+              "start": 24,
+              "end": 37
             }
           ],
           "scoring": {
@@ -579,14 +579,50 @@
         },
         {
           "id": "q2",
-          "prompt": "태도나 처지가 속임수 없이 바르고 떳떳한 모습은?",
-          "answerText": "정정당당",
+          "prompt": "공을 친 타자가 거쳐야 하는 세 곳을 지문에서 찾으시오.",
+          "answerText": "1루, 2루, 3루",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 86,
+              "end": 96
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "수비수가 날아가는 공을 어떻게 잡으면 타자가 아웃이 되는지 지문에서 어구를 찾으시오.",
+          "answerText": "땅에 떨어지기 전에 훅 잡으면",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 56,
+              "end": 72
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "구 회까지 경기를 진행했을 때 어떤 팀이 이기는지 지문에서 찾으시오.",
+          "answerText": "더 많은 점수를 낸 팀",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 56,
-              "end": 60
+              "start": 22,
+              "end": 34
             }
           ],
           "scoring": {

@@ -913,89 +913,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "글을 내용에 따라 나눈 기본 단위는 무엇인가요?",
-          "answerText": "문단",
-          "answerMatchMode": "ANY",
+          "prompt": "문단의 정의와 문단에 담겨야 할 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "글을 내용에 따라 나눈 기본 단위",
+            "하나의 중심 생각"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 9,
-              "end": 11
+              "start": 34,
+              "end": 52
             },
             {
               "paragraphId": "p1",
-              "start": 30,
-              "end": 32
-            },
-            {
-              "paragraphId": "p1",
-              "start": 57,
-              "end": 59
-            },
-            {
-              "paragraphId": "p1",
-              "start": 85,
-              "end": 87
-            },
-            {
-              "paragraphId": "p1",
-              "start": 108,
-              "end": 110
-            },
-            {
-              "paragraphId": "p1",
-              "start": 123,
-              "end": 125
-            },
-            {
-              "paragraphId": "p2",
-              "start": 2,
-              "end": 4
-            },
-            {
-              "paragraphId": "p2",
-              "start": 38,
-              "end": 40
-            },
-            {
-              "paragraphId": "p2",
-              "start": 151,
-              "end": 153
-            },
-            {
-              "paragraphId": "p3",
-              "start": 11,
-              "end": 13
-            },
-            {
-              "paragraphId": "p3",
-              "start": 28,
-              "end": 30
-            },
-            {
-              "paragraphId": "p3",
-              "start": 72,
-              "end": 74
-            },
-            {
-              "paragraphId": "p4",
-              "start": 10,
-              "end": 12
-            },
-            {
-              "paragraphId": "p4",
-              "start": 39,
-              "end": 41
-            },
-            {
-              "paragraphId": "p4",
-              "start": 95,
-              "end": 97
-            },
-            {
-              "paragraphId": "p4",
-              "start": 129,
-              "end": 131
+              "start": 62,
+              "end": 71
             }
           ],
           "scoring": {
@@ -1006,9 +939,12 @@
         },
         {
           "id": "q2",
-          "prompt": "문단에서 핵심 내용을 담는 문장은 무엇인가요?",
-          "answerText": "중심 문장",
-          "answerMatchMode": "ANY",
+          "prompt": "한 문단을 구성하는 문장을 모두 찾으시오.",
+          "answerTexts": [
+            "중심 문장",
+            "뒷받침 문장"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -1034,20 +970,7 @@
               "paragraphId": "p3",
               "start": 119,
               "end": 124
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "중심 문장을 자세히 도와주는 문장은 무엇인가요?",
-          "answerText": "뒷받침 문장",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+            },
             {
               "paragraphId": "p2",
               "start": 16,
@@ -1066,15 +989,55 @@
           "revealOnWrong": true
         },
         {
+          "id": "q3",
+          "prompt": "중심 문장과 뒷받침 문장의 역할을 모두 찾으시오.",
+          "answerTexts": [
+            "핵심 내용을 담고 있는 가장 중요한 문장",
+            "더 자세히 설명하거나",
+            "구체적인 예"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 51,
+              "end": 73
+            },
+            {
+              "paragraphId": "p2",
+              "start": 95,
+              "end": 106
+            },
+            {
+              "paragraphId": "p2",
+              "start": 107,
+              "end": 113
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q4",
-          "prompt": "중심 문장이 대개 놓이는 첫 위치는 어디인가요?",
-          "answerText": "맨 앞부분",
-          "answerMatchMode": "ANY",
+          "prompt": "중심 문장이 놓일 수 있는 위치를 모두 찾으시오.",
+          "answerTexts": [
+            "문단의 맨 앞부분",
+            "문단의 끝부분"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 32,
+              "start": 28,
               "end": 37
+            },
+            {
+              "paragraphId": "p3",
+              "start": 72,
+              "end": 79
             }
           ],
           "scoring": {
@@ -1085,14 +1048,28 @@
         },
         {
           "id": "q5",
-          "prompt": "글을 잘 읽으려면 어떤 연습이 필요하다고 했나요?",
-          "answerText": "요약하는 연습",
-          "answerMatchMode": "ANY",
+          "prompt": "글 읽기와 글쓰기에서 문단 짜임이 주는 도움을 모두 찾으시오.",
+          "answerTexts": [
+            "중심 생각을 요약하는 연습",
+            "전체 글의 흐름",
+            "설득력을 높여 준다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 22,
+              "start": 15,
               "end": 29
+            },
+            {
+              "paragraphId": "p4",
+              "start": 52,
+              "end": 60
+            },
+            {
+              "paragraphId": "p4",
+              "start": 102,
+              "end": 112
             }
           ],
           "scoring": {

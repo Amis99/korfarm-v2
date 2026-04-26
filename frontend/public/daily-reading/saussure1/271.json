@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "단어와 같은 뜻의 말?",
+          "prompt": "단어들을 모아 두는 것을 무엇 꾸러미 만들기라고 한다고 했는지 본문에서 한 단어로 찾아 보세요",
           "answerText": "낱말",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -445,9 +445,9 @@
         },
         {
           "id": "q2",
-          "prompt": "물건을 묶어 담은 것?",
+          "prompt": "공책이나 작은 상자에 낱말 카드를 만들어 보관하는 묶음을 무엇이라 부르는지 본문에서 한 단어로 찾아 보세요",
           "answerText": "꾸러미",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -479,14 +479,33 @@
         },
         {
           "id": "q3",
-          "prompt": "매우 귀한 소장물?",
-          "answerText": "보물",
-          "answerMatchMode": "EXACT",
+          "prompt": "낱말을 꾸준히 모으다 보면 문장을 만드는 힘이 길러지고 무엇이 쑥쑥 자라난다고 했는지 본문에서 찾아 보세요",
+          "answerText": "표현력",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 103,
-              "end": 105
+              "start": 146,
+              "end": 149
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "친구들과 서로의 꾸러미를 보여주며 함께 풀어보면 좋다고 한 재미있는 낱말 활동이 무엇인지 본문에서 찾아 보세요",
+          "answerText": "퀴즈",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 88,
+              "end": 90
             }
           ],
           "scoring": {

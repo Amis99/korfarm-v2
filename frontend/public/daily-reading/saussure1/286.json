@@ -396,35 +396,15 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "해의 따뜻한 빛?",
-          "answerText": "햇살",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 글의 주인공으로 햇살과 함께 행복한 시간을 보낸 곤충은 누구인지 찾아 적어 보세요",
+          "answerText": "나비",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p1",
-              "start": 62,
-              "end": 64
-            },
-            {
-              "paragraphId": "p1",
-              "start": 102,
-              "end": 104
-            },
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p2",
-              "start": 105,
-              "end": 107
-            }
+            {"paragraphId": "p1", "start": 25, "end": 27},
+            {"paragraphId": "p1", "start": 43, "end": 45},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 54, "end": 56},
+            {"paragraphId": "p2", "start": 118, "end": 120}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -435,35 +415,11 @@
         },
         {
           "id": "q2",
-          "prompt": "날개 달린 곤충?",
-          "answerText": "나비",
-          "answerMatchMode": "EXACT",
+          "prompt": "1문단에서 햇살을 마치 마실 수 있는 음료처럼 비유하여 표현한 부분을 찾아 적어 보세요",
+          "answerText": "햇살 한 모금",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 25,
-              "end": 27
-            },
-            {
-              "paragraphId": "p1",
-              "start": 43,
-              "end": 45
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 54,
-              "end": 56
-            },
-            {
-              "paragraphId": "p2",
-              "start": 118,
-              "end": 120
-            }
+            {"paragraphId": "p1", "start": 62, "end": 69}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -474,15 +430,27 @@
         },
         {
           "id": "q3",
-          "prompt": "눈앞에 보이는 모습?",
-          "answerText": "풍경",
-          "answerMatchMode": "EXACT",
+          "prompt": "1문단에서 황금빛 풍경을 무엇과 같다고 비유하여 표현했는지 찾아 적어 보세요",
+          "answerText": "마법 같은 풍경",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 144,
-              "end": 146
-            }
+            {"paragraphId": "p1", "start": 138, "end": 146}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "나비에게 햇살과 함께하는 시간이 세상에서 가장 어떤 순간이었는지 두 낱말을 모두 찾아 적어 보세요",
+          "answerText": "행복, 포근",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 131, "end": 133},
+            {"paragraphId": "p2", "start": 136, "end": 138}
           ],
           "scoring": {
             "correctDeltaSec": 10,

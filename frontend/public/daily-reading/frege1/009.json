@@ -749,34 +749,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "교실에서 둘러싼 논쟁의 중심이 되는 물건은 무엇인가요?",
-          "answerText": "휴대전화",
+          "prompt": "교실에서 흔히 볼 수 있다고 한 학생들의 모습을 지문에서 찾으시오.",
+          "answerText": "휴대전화를 사용하는 학생들",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 26,
-              "end": 30
-            },
-            {
-              "paragraphId": "p1",
-              "start": 96,
-              "end": 100
-            },
-            {
-              "paragraphId": "p2",
-              "start": 16,
-              "end": 20
-            },
-            {
-              "paragraphId": "p2",
-              "start": 109,
-              "end": 113
-            },
-            {
-              "paragraphId": "p3",
-              "start": 37,
-              "end": 41
+              "end": 40
             }
           ],
           "scoring": {
@@ -787,13 +767,13 @@
         },
         {
           "id": "q2",
-          "prompt": "허용 측이 휴대전화를 무엇이라고 보나요?",
-          "answerText": "필수품",
+          "prompt": "사용을 허용해야 한다는 측은 휴대전화가 무엇임을 강조하는지 찾으시오.",
+          "answerText": "현대인의 필수품",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 27,
+              "start": 22,
               "end": 30
             }
           ],
@@ -805,14 +785,14 @@
         },
         {
           "id": "q3",
-          "prompt": "급한 일이 생겼을 때 먼저 연락할 대상으로 제시한 사람들은 누구인가요?",
-          "answerText": "가족",
+          "prompt": "급한 일이 생겼을 때 할 수 있다고 든 일을 지문에서 찾으시오.",
+          "answerText": "가족과 연락할 수 있고",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 51,
-              "end": 53
+              "end": 63
             }
           ],
           "scoring": {
@@ -823,7 +803,7 @@
         },
         {
           "id": "q4",
-          "prompt": "제한 측이 휴대전화 때문에 해치기 쉽다고 본 것은 무엇인가요?",
+          "prompt": "휴대전화 알람이나 몰래 사용이 해치기 쉽다고 한 것을 찾으시오.",
           "answerText": "학습 분위기",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -841,10 +821,18 @@
         },
         {
           "id": "q5",
-          "prompt": "마지막에 균형을 잡아야 한다고 한 것은 무엇인가요?",
-          "answerText": "현실 생활",
-          "answerMatchMode": "ANY",
+          "prompt": "균형을 어떻게 잡을 것인지가 중요하다고 한 두 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "디지털 기기",
+            "현실 생활"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 77,
+              "end": 83
+            },
             {
               "paragraphId": "p4",
               "start": 85,

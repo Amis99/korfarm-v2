@@ -474,30 +474,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "놀이터에 가득한?",
+          "prompt": "이 글에서 다룬, 옷이나 머리카락 사이에 잘 숨어드는 작은 알갱이는 무엇인가요",
           "answerText": "모래",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 42,
-              "end": 44
-            },
-            {
-              "paragraphId": "p1",
-              "start": 96,
-              "end": 98
-            },
-            {
-              "paragraphId": "p2",
-              "start": 56,
-              "end": 58
-            }
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p1", "start": 42, "end": 44},
+            {"paragraphId": "p1", "start": 96, "end": 98},
+            {"paragraphId": "p2", "start": 56, "end": 58}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -508,20 +492,11 @@
         },
         {
           "id": "q2",
-          "prompt": "우리 몸의 겉부분?",
-          "answerText": "피부",
-          "answerMatchMode": "EXACT",
+          "prompt": "씻을 때 손가락 사이와 발가락 끝까지 꼼꼼하게 거품을 내며 사용하는 것은 무엇인가요",
+          "answerText": "비누",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 151,
-              "end": 153
-            },
-            {
-              "paragraphId": "p2",
-              "start": 105,
-              "end": 107
-            }
+            {"paragraphId": "p2", "start": 33, "end": 35}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -532,20 +507,27 @@
         },
         {
           "id": "q3",
-          "prompt": "물로 닦아내는 무엇인가요?",
-          "answerText": "씻는",
-          "answerMatchMode": "EXACT",
+          "prompt": "씻을 때 차갑지 않게 어떤 온도의 물을 사용해야 한다고 했나요",
+          "answerText": "따뜻한",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 25,
-              "end": 27
-            },
-            {
-              "paragraphId": "p2",
-              "start": 170,
-              "end": 172
-            }
+            {"paragraphId": "p2", "start": 0, "end": 3}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "깨끗하게 씻고 나면 보송보송해진다고 한, 우리 몸의 겉부분은 무엇인가요",
+          "answerText": "피부",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 151, "end": 153},
+            {"paragraphId": "p2", "start": 105, "end": 107}
           ],
           "scoring": {
             "correctDeltaSec": 10,

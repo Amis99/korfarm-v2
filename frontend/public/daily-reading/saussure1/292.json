@@ -396,30 +396,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "그림 그리는 털 도구?",
-          "answerText": "붓",
-          "answerMatchMode": "EXACT",
+          "prompt": "동양화에서 붓에 묻혀 선을 긋는 데 사용하는 검은 물을 무엇이라고 할까요?",
+          "answerText": "먹물",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 24,
-              "end": 25
-            },
-            {
-              "paragraphId": "p1",
-              "start": 52,
-              "end": 53
-            },
-            {
-              "paragraphId": "p2",
-              "start": 55,
-              "end": 56
-            },
-            {
-              "paragraphId": "p2",
-              "start": 73,
-              "end": 74
-            }
+            {"paragraphId": "p1", "start": 27, "end": 29},
+            {"paragraphId": "p1", "start": 58, "end": 60}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -430,20 +412,12 @@
         },
         {
           "id": "q2",
-          "prompt": "붓에 묻히는 검은 물?",
-          "answerText": "먹물",
-          "answerMatchMode": "EXACT",
+          "prompt": "먹 선의 굵기와 진하기를 결정짓는 두 가지를 모두 찾아 적어 보세요",
+          "answerText": "먹물의 양, 손의 힘 조절",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 27,
-              "end": 29
-            },
-            {
-              "paragraphId": "p1",
-              "start": 58,
-              "end": 60
-            }
+            {"paragraphId": "p1", "start": 58, "end": 63},
+            {"paragraphId": "p1", "start": 65, "end": 72}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -454,20 +428,28 @@
         },
         {
           "id": "q3",
-          "prompt": "지극하고 참된 마음?",
-          "answerText": "정성",
-          "answerMatchMode": "EXACT",
+          "prompt": "먹 선 긋기 연습을 반복하면 차분해지고 높아지게 되는 두 가지를 모두 찾아 적어 보세요",
+          "answerText": "마음, 집중력",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 41,
-              "end": 43
-            },
-            {
-              "paragraphId": "p2",
-              "start": 138,
-              "end": 140
-            }
+            {"paragraphId": "p1", "start": 146, "end": 148},
+            {"paragraphId": "p1", "start": 156, "end": 159}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "사물의 생동감을 살리기 위해 먹 선을 긋는 두 가지 방법을 모두 찾아 적어 보세요",
+          "answerText": "뾰족한 끝, 면을 채우는",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 61, "end": 66},
+            {"paragraphId": "p2", "start": 79, "end": 85}
           ],
           "scoring": {
             "correctDeltaSec": 10,

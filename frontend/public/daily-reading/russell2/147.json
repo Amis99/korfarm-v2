@@ -1195,7 +1195,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "남의 작용을 받는 관계는?",
+          "prompt": "주어가 어떤 동작을 직접 하는 것이 아니라 그 동작을 당하는 관계를 드러내는 표현을 가리키는 두 글자 단어를 모두 찾으시오",
+          "answerText": "피동",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -1254,16 +1256,17 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "피동"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "남에게 어떤 행동을 하게 하는 관계는?",
+          "prompt": "주어가 다른 대상에게 어떤 행동을 하게 만드는 관계를 나타내는 표현을 가리키는 두 글자 단어를 모두 찾으시오",
+          "answerText": "사동",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -1312,16 +1315,17 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "사동"
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "행동이나 작용을 일으키는 쪽은?",
+          "prompt": "피동문에서 행위의 결과를 받은 대상보다 덜 주목된다고 한, 행동을 일으키는 쪽을 가리키는 두 글자 단어를 모두 찾으시오",
+          "answerText": "주체",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -1335,16 +1339,17 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "주체"
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "말 뒤에 붙어 뜻을 더하는 부분은?",
+          "prompt": "피동·사동을 만들 때 '이, 히, 리, 기' 등으로 붙는다고 한, 말 뒤에 붙어 뜻을 더하는 부분을 가리키는 단어를 모두 찾으시오",
+          "answerText": "접미사",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -1363,16 +1368,17 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "접미사"
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "여럿 가운데 중요하게 맞추는 중심은?",
+          "prompt": "차이를 이해하면 글에서 어디에 놓였는지 분명히 파악할 수 있다고 한, 여럿 가운데 중요하게 맞추는 중심을 가리키는 두 글자 단어를 찾으시오",
+          "answerText": "초점",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p6",
@@ -1381,12 +1387,30 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "사동을 만들 때 접미사 외에 '하게 하다'처럼 쓰인다고 한, 본용언을 도와 뜻을 보태는 용언을 가리키는 표현을 찾으시오",
+          "answerText": "보조 용언",
           "answerMatchMode": "ANY",
-          "answerText": "초점"
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 161,
+              "end": 166
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

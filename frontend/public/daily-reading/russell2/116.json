@@ -1045,113 +1045,152 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "직접 해 보며 겪는 일은?",
+          "prompt": "이 질의응답에서 발표자의 이름을 본문에서 모두 찾으시오",
+          "answerText": "예린",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 30,
-              "end": 32
+              "start": 4,
+              "end": 6
+            },
+            {
+              "paragraphId": "p2",
+              "start": 74,
+              "end": 76
             },
             {
               "paragraphId": "p3",
-              "start": 64,
-              "end": 66
+              "start": 60,
+              "end": 62
+            },
+            {
+              "paragraphId": "p4",
+              "start": 54,
+              "end": 56
             },
             {
               "paragraphId": "p5",
-              "start": 58,
-              "end": 60
+              "start": 93,
+              "end": 95
             },
             {
               "paragraphId": "p6",
-              "start": 91,
-              "end": 93
+              "start": 69,
+              "end": 71
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "체험"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "가장 중심이 되는 중요한 부분은?",
+          "prompt": "발표자에게 질문한 청중 세 명의 이름을 본문에서 모두 찾으시오",
+          "answerText": "민호, 수빈, 도현",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 3,
+              "end": 5
+            },
+            {
+              "paragraphId": "p3",
+              "start": 3,
+              "end": 5
+            },
+            {
+              "paragraphId": "p4",
+              "start": 3,
+              "end": 5
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "취재 전에 질문을 어떻게 준비하라고 했는지, 그 방식을 p2에서 찾으시오",
+          "answerText": "핵심 주제와 꼭 확인해야 할 사실을 중심으로 준비",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 101,
-              "end": 103
+              "end": 128
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "핵심"
-        },
-        {
-          "id": "q3",
-          "prompt": "흐트러진 것을 모아 가지런히 하는 일은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 90,
-              "end": 92
-            },
-            {
-              "paragraphId": "p5",
-              "start": 134,
-              "end": 136
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "정리"
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "서로 말을 주고받는 일은?",
+          "prompt": "마감 시간이 부족할 때 체험 기자가 어떤 순서로 일을 처리한다고 했는지 p3에서 찾으시오",
+          "answerText": "사실 확인이 끝난 부분부터 정리하고, 제목이나 표현 다듬기는 가장 마지막으로 미룬다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 116,
-              "end": 118
+              "paragraphId": "p3",
+              "start": 75,
+              "end": 121
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "대화"
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "조사하거나 살핀 내용을 정리해 알리는 글은?",
+          "prompt": "취재 대상이 짧게 답할 때 어떻게 대화를 이어 간다고 하였는지 p4에서 찾으시오",
+          "answerText": "상황을 구체적으로 물어보거나 앞서 나온 말을 다시 확인하는 식",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 94,
-              "end": 97
+              "paragraphId": "p4",
+              "start": 79,
+              "end": 113
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "발표자가 체험에서 가장 크게 배운 점은 글을 잘 쓰는 일도 중요하지만 그보다 더 기본이라고 한 일은 무엇인지 p5에서 찾으시오",
+          "answerText": "사실을 정확히 모으고 정리하는 일",
           "answerMatchMode": "ANY",
-          "answerText": "보고서"
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 122,
+              "end": 140
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 교내 토론회 안내문 초고의 목적과 현재 문제를 무엇이라고 짚는가?",
+          "prompt": "참가자를 모집하는 글의 아직 완성 전 원고를 가리키는 어구를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 159
+              "start": 39,
+              "end": 45
             }
           ],
           "scoring": {
@@ -585,34 +585,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생 자치회는 다음 달에 열릴 교내 토론회를 앞두고 참가자를 모집하는 안내문 초고를 작성했다. 이 글의 목적은 토론회 취지를 분명히 알리고 신청 방법을 안내하는 데 있다. 그러나 초고에는 공지문과 홍보문이 섞여 있어 무엇을 가장 먼저 전달해야 하는지가 선명하지 않은 부분이 남아 있다."
+          "answerText": "안내문 초고"
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 행사 주제를 소개하면서 초고 첫머리의 어떤 한계를 지적하는가?",
+          "prompt": "이 글의 목적에 해당하는 두 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "토론회 취지를 분명히 알리고",
+            "신청 방법을 안내하는"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 179
+              "paragraphId": "p1",
+              "start": 62,
+              "end": 77
+            },
+            {
+              "paragraphId": "p1",
+              "start": 78,
+              "end": 89
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이번 토론회 주제는 '교내 휴대 전화 보관함 운영을 확대해야 하는가'이다. 학생들은 평소 학교생활에서 체감하는 문제를 바탕으로 의견을 나눌 수 있으며, 찬성과 반대 어느 쪽이든 신청할 수 있다. 그런데 초고의 첫머리에서는 주제 소개보다 '많은 관심 부탁드립니다'라는 표현이 먼저 나와 행사 성격을 바로 파악하기가 어렵다."
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 일정과 신청 방식을 제시하면서 무엇이 아직 불분명하다고 말하는가?",
+          "prompt": "이번 토론회의 주제를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 198
+              "paragraphId": "p2",
+              "start": 12,
+              "end": 37
             }
           ],
           "scoring": {
@@ -621,16 +629,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "행사는 5월 18일 수요일 오후 4시에 시청각실에서 진행될 예정이고, 참가 신청은 5월 10일까지 학급 회장에게 제출하면 된다. 또한 예선이 필요한 경우에는 신청 인원을 보고 추후에 안내한다고 적어 두었다. 하지만 '추후에 안내'라는 표현만으로는 신청 학생이 무엇을 준비해야 하는지 알기 어렵고, 제출 방식도 종이 신청서인지 전자 설문인지 분명하지 않다."
+          "answerText": "교내 휴대 전화 보관함 운영을 확대해야 하는가"
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 참가 학생이 얻을 점을 강조한 문단의 어떤 불균형을 지적하는가?",
+          "prompt": "참가 신청이 가능한 입장 범위를 나타낸 어구를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 185
+              "paragraphId": "p2",
+              "start": 85,
+              "end": 98
             }
           ],
           "scoring": {
@@ -639,16 +647,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "초고는 참가 학생이 얻을 수 있는 점도 함께 강조하려고 했다. 그래서 논리적으로 말하는 힘을 기를 수 있고, 다른 사람의 의견을 듣는 경험도 쌓을 수 있으며, 생활기록부 관련 활동으로도 도움이 될 수 있다고 적었다. 그런데 이 문단은 정보 제공보다 홍보 문구가 길어지면서 앞 문단의 핵심 일정 정보와 균형이 맞지 않는 문제가 있다."
+          "answerText": "찬성과 반대 어느 쪽이든"
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 행사 취지 설명과 실제 안내 정보 사이에 어떤 공백이 있다고 보는가?",
+          "prompt": "초고 첫머리에서 행사 성격 파악을 어렵게 하는 표현 배치의 근거를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 189
+              "paragraphId": "p2",
+              "start": 132,
+              "end": 158
             }
           ],
           "scoring": {
@@ -657,16 +665,86 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "또한 초고 후반에는 '토론은 서로를 이기기 위한 것이 아니라 더 나은 해결책을 찾기 위한 과정입니다'라는 문장을 넣어 행사 취지를 설명했다. 이 문장은 의미는 좋지만 앞에서 이미 '의견을 나눈다'고 한 내용과 다소 겹친다. 반대로 실제 토론 규칙인 발언 시간, 반론 방식, 준비 자료 제출 여부는 빠져 있어 안내문으로서는 아쉬움이 남는다."
+          "answerText": "'많은 관심 부탁드립니다'라는 표현이 먼저 나와"
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 안내문을 다듬을 때 어떤 배열 원칙이 필요하다고 정리하는가?",
+          "prompt": "행사 일정과 신청 안내에서 필요한 정보를 모두 찾으시오.",
+          "answerTexts": [
+            "5월 18일 수요일 오후 4시",
+            "시청각실",
+            "5월 10일까지",
+            "학급 회장에게"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 4,
+              "end": 20
+            },
+            {
+              "paragraphId": "p3",
+              "start": 22,
+              "end": 26
+            },
+            {
+              "paragraphId": "p3",
+              "start": 46,
+              "end": 54
+            },
+            {
+              "paragraphId": "p3",
+              "start": 55,
+              "end": 62
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q7",
+          "prompt": "다섯째 문단에서 빠져 있다고 한 실제 토론 규칙을 모두 찾으시오.",
+          "answerTexts": [
+            "발언 시간",
+            "반론 방식",
+            "준비 자료 제출 여부"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 139,
+              "end": 144
+            },
+            {
+              "paragraphId": "p5",
+              "start": 146,
+              "end": 151
+            },
+            {
+              "paragraphId": "p5",
+              "start": 153,
+              "end": 164
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q8",
+          "prompt": "지금 초고가 어떤 상태라고 볼 수 있는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 190
+              "start": 153,
+              "end": 180
             }
           ],
           "scoring": {
@@ -675,7 +753,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "따라서 이 초고를 다듬을 때는 신청 대상과 일정, 신청 방법을 먼저 정리한 뒤 토론회 취지와 기대 효과를 뒤에 배치하는 편이 자연스럽다. 또 홍보 표현이 필요한 부분과 공지 정보가 필요한 부분을 구분해야 독자가 혼란을 덜 느낄 수 있다. 지금 초고는 내용이 부족하다기보다, 무엇을 우선해 전달할지를 다시 배열해야 하는 상태라고 볼 수 있다."
+          "answerText": "무엇을 우선해 전달할지를 다시 배열해야 하는 상태"
         }
       ]
     }

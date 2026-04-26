@@ -571,7 +571,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "처음과 마지막에 반복되어 화자의 바람을 드러내는 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -594,12 +594,12 @@
         },
         {
           "id": "q2",
-          "prompt": "2문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "머나먼 행렬을 이루며 흘러가는 대상으로 제시된 것을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 47
+              "start": 13,
+              "end": 21
             }
           ],
           "scoring": {
@@ -608,16 +608,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "머나먼 행렬을 이루면서 밝은 연등 불빛 흘러가는\n그 조용한 눈물의 제의를\n보고 싶다."
+          "answerText": "밝은 연등 불빛"
         },
         {
           "id": "q3",
-          "prompt": "3문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "화자가 보고 싶다고 한 제의를 꾸미는 표현을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 54
+              "paragraphId": "p2",
+              "start": 29,
+              "end": 39
+            },
+            {
+              "paragraphId": "p6",
+              "start": 89,
+              "end": 103
             }
           ],
           "scoring": {
@@ -625,17 +630,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "나도 함께 따라갈 수 있다면\n얼마나 더 좋으랴.\n세상의 온갖 설움을 푼 몸이 두둥실\n물 위에 떠서"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "조용한 눈물의 제의",
+            "눈물 글썽이는 축복의 제의"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "화자가 함께 따라갈 수 있다면 어떻겠다고 말했는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 53
+              "paragraphId": "p3",
+              "start": 16,
+              "end": 25
             }
           ],
           "scoring": {
@@ -644,16 +652,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "한 줌씩 불빛 던지며 어둠을 헤치고 흘러가면\n마침내 닿을 그곳이 불귀의 하늘이어도\n나는 좋으리."
+          "answerText": "얼마나 더 좋으랴"
         },
         {
           "id": "q5",
-          "prompt": "5문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "몸이나 등불이 떠 있는 곳을 나타내는 반복 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 99
+              "paragraphId": "p3",
+              "start": 47,
+              "end": 54
+            },
+            {
+              "paragraphId": "p6",
+              "start": 54,
+              "end": 61
             }
           ],
           "scoring": {
@@ -662,16 +675,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "길가엔\n깨끗이 옷을 차려입은 사람들\n멀어져 가는 점점의 등불을 바라보며\n차마 돌아서지 못하는 발걸음, 섰던 자리에 묶여\n두 손 모아 간절히 비나니\n부디 저 길이 극락에 이르소서."
+          "answerText": "물 위에 떠서"
         },
         {
           "id": "q6",
-          "prompt": "6문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "흘러가면 마침내 닿을 곳으로 제시된 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 114
+              "paragraphId": "p4",
+              "start": 36,
+              "end": 42
             }
           ],
           "scoring": {
@@ -680,7 +693,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "유등제를 한번 보고 싶다.\n해 저문 강가로 나아가\n수천, 수만 개의 연꽃 등불 밤하늘 별빛인 양\n물 위에 떠서\n아득히 행렬을 이루면서 어둠 속으로 흘러가는\n그 눈물 글썽이는 축복의 제의를\n나는\n보고 싶다."
+          "answerText": "불귀의 하늘"
+        },
+        {
+          "id": "q7",
+          "prompt": "멀어져 가는 등불을 바라보는 사람들이 어떤 모습인지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 4,
+              "end": 19
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "깨끗이 옷을 차려입은 사람들"
+        },
+        {
+          "id": "q8",
+          "prompt": "두 손 모아 간절히 비는 내용을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 82,
+              "end": 98
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "부디 저 길이 극락에 이르소서"
         }
       ]
     }

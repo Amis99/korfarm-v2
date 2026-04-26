@@ -571,12 +571,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "겉으로 모두 '데'로 들리지만 서로 다른 문법적 성격을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 200
+              "start": 119,
+              "end": 132
+            },
+            {
+              "paragraphId": "p1",
+              "start": 142,
+              "end": 156
             }
           ],
           "scoring": {
@@ -584,17 +589,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "국어에서는 소리가 비슷해 보여도 문법적 성격이 전혀 다른 형식이 적지 않다. 그 가운데 학습자들이 자주 혼동하는 것이 의존 명사 '데'와 연결 어미 '-ㄴ데/-는데'이다. 겉으로는 모두 '데'로 들리지만, 하나는 앞말의 수식을 받는 명사이고 다른 하나는 절과 절을 이어 주는 어미이므로 문장 안에서의 기능과 띄어쓰기, 뒤에 올 수 있는 말의 범위가 달라진다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "앞말의 수식을 받는 명사",
+            "절과 절을 이어 주는 어미"
+          ]
         },
         {
           "id": "q2",
-          "prompt": "2문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "의존 명사 '데'가 나타내는 뜻을 나열한 부분을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 183
+              "start": 25,
+              "end": 39
             }
           ],
           "scoring": {
@@ -603,16 +611,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "의존 명사 '데'는 앞의 관형어 수식을 받아 장소, 경우, 상황, 처지를 나타낸다. 그래서 '갈 데가 없다', '공부하는 데 시간이 오래 걸린다', '비가 오는 데도 출발했다'처럼 쓰인다. 이때의 '데'는 명사이므로 앞에 관형사형 어미가 온 절이 수식어 구실을 하고, 문장 안에서는 주어나 목적어, 부사어의 일부가 될 수 있다."
+          "answerText": "장소, 경우, 상황, 처지"
         },
         {
           "id": "q3",
-          "prompt": "3문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "의존 명사 판단에 도움이 되는 조사 예시를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 186
+              "start": 85,
+              "end": 88
+            },
+            {
+              "paragraphId": "p3",
+              "start": 90,
+              "end": 93
+            },
+            {
+              "paragraphId": "p3",
+              "start": 95,
+              "end": 98
             }
           ],
           "scoring": {
@@ -620,17 +638,31 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "의존 명사인지 판단할 때는 조사 결합 가능성을 살피면 도움이 된다. '갈 데는 많다', '읽는 데에 방해가 된다', '먹는 데도 순서가 있다'처럼 뒤에 '는', '에', '도' 같은 조사가 붙을 수 있으면 명사일 가능성이 크다. 또 문맥에 따라 '곳', '일', '경우'와 같은 말로 바꾸어 볼 수 있다는 점도 의존 명사의 특징이다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'는'",
+            "'에'",
+            "'도'"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "의존 명사 '데'와 바꾸어 볼 수 있는 말을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 222
+              "paragraphId": "p3",
+              "start": 137,
+              "end": 140
+            },
+            {
+              "paragraphId": "p3",
+              "start": 142,
+              "end": 145
+            },
+            {
+              "paragraphId": "p3",
+              "start": 147,
+              "end": 151
             }
           ],
           "scoring": {
@@ -638,17 +670,41 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "반면 연결 어미 '-ㄴ데/-는데'는 뒤 절을 이어 주면서 배경 설명, 대조, 화제 제시, 상대 반응 유도 같은 기능을 한다. '비가 오는데 우산이 없다', '나는 찬성했는데 그는 반대했다', '이 부분은 이해가 되는데 다음 설명이 어렵다'에서의 '는데'가 그 예이다. 이때 '는데'는 앞 절을 끝맺지 않고 뒤 절과의 관계를 만드는 어미이므로, 조사처럼 다른 말을 바로 붙여 형태를 확장할 수 없다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'곳'",
+            "'일'",
+            "'경우'"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "연결 어미 '-ㄴ데/-는데'의 기능을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 204
+              "paragraphId": "p4",
+              "start": 32,
+              "end": 37
+            },
+            {
+              "paragraphId": "p4",
+              "start": 39,
+              "end": 41
+            },
+            {
+              "paragraphId": "p6",
+              "start": 115,
+              "end": 117
+            },
+            {
+              "paragraphId": "p4",
+              "start": 43,
+              "end": 48
+            },
+            {
+              "paragraphId": "p4",
+              "start": 50,
+              "end": 58
             }
           ],
           "scoring": {
@@ -656,17 +712,22 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "따라서 두 형식은 띄어쓰기에서도 구별된다. '책을 읽는 데 시간이 걸린다'에서는 '데'가 의존 명사이므로 앞말과 띄어 쓰지만, '책을 읽는데 모르는 단어가 많다'에서는 '는데'가 연결 어미이므로 붙여 쓴다. 앞 문장은 읽는 행위가 이루어지는 상황이나 경우를 명사화한 것이고, 뒤 문장은 '읽다'라는 사건을 배경으로 뒤 사실을 덧붙이는 구조라는 점에서 기능이 다르다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "배경 설명",
+            "대조",
+            "화제 제시",
+            "상대 반응 유도"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "연결 어미는 조사처럼 무엇을 할 수 없다고 했는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 180
+              "paragraphId": "p4",
+              "start": 197,
+              "end": 221
             }
           ],
           "scoring": {
@@ -675,7 +736,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 '데'가 명사인지 어미인지 가리려면 의미만 보지 말고 통사적 자리를 함께 확인해야 한다. 조사 결합이 가능하고 앞 절이 관형어처럼 기능하면 의존 명사 '데'이고, 앞 절을 뒤 절에 연결하면서 배경이나 대조를 만들면 연결 어미 '-ㄴ데/-는데'이다. 이 구별이 분명해야 띄어쓰기뿐 아니라 문장 구조 해석까지 정확해진다."
+          "answerText": "다른 말을 바로 붙여 형태를 확장할 수 없다"
+        },
+        {
+          "id": "q7",
+          "prompt": "띄어쓰기에서 두 형식의 처리 방식을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 45,
+              "end": 69
+            },
+            {
+              "paragraphId": "p5",
+              "start": 94,
+              "end": 114
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'데'가 의존 명사이므로 앞말과 띄어 쓰지만",
+            "'는데'가 연결 어미이므로 붙여 쓴다"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "문장 구조 해석까지 정확해지는 조건을 설명한 부분을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 142,
+              "end": 179
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "이 구별이 분명해야 띄어쓰기뿐 아니라 문장 구조 해석까지 정확해진다"
         }
       ]
     }

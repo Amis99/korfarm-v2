@@ -557,39 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "항상 북쪽과 남쪽을 가리키는 바늘이 있어, 우리가 모르는 길에서도 방향을 찾게 해 주는 도구는?",
-          "answerText": "나침반",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리가 모르는 길에서도 찾을 수 있다고 한 대상을 지문에서 찾으시오.",
+          "answerText": "방향을 정확하게",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 4,
-              "end": 7
-            },
-            {
-              "paragraphId": "p1",
-              "start": 42,
-              "end": 45
-            },
-            {
-              "paragraphId": "p2",
-              "start": 49,
-              "end": 52
-            },
-            {
-              "paragraphId": "p2",
-              "start": 73,
-              "end": 76
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p3",
-              "start": 83,
-              "end": 86
+              "start": 22,
+              "end": 30
             }
           ],
           "scoring": {
@@ -601,24 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "나침반 바늘이 항상 일정한 방향을 향하는 근본적인 원인은 지구가 거대한 이것이기 때문입니다.",
-          "answerText": "자석",
-          "answerMatchMode": "EXACT",
+          "prompt": "나침반의 빨간 바늘이 멈출 때 하는 일을 지문에서 찾으시오.",
+          "answerText": "북쪽을 가리키며",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 100,
-              "end": 102
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 38,
-              "end": 40
+              "start": 57,
+              "end": 65
             }
           ],
           "scoring": {
@@ -630,19 +595,41 @@
         },
         {
           "id": "q3",
-          "prompt": "나침반을 사용할 때 바늘을 끌어당겨 방향을 틀리게 만들 수 있으므로 멀리해야 하는 재질은?",
-          "answerText": "철",
-          "answerMatchMode": "EXACT",
+          "prompt": "2문단에서 지구의 북극이 무엇과 같고 무엇을 끌어당기는지에 해당하는 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "자석의 S극",
+            "나침반 바늘의 N극"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 38,
+              "end": 44
+            },
+            {
+              "paragraphId": "p2",
+              "start": 49,
+              "end": 59
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "나침반을 사용할 때 주변에 두지 말아야 한다고 한 물건을 지문에서 찾으시오.",
+          "answerText": "철로 된 물건",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 16,
-              "end": 17
-            },
-            {
-              "paragraphId": "p3",
-              "start": 42,
-              "end": 43
+              "end": 23
             }
           ],
           "scoring": {

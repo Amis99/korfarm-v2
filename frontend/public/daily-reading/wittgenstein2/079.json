@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "Find what puts out a yellow face when winter weather turns mild.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 73
+              "start": 22,
+              "end": 25
             }
           ],
           "scoring": {
@@ -585,15 +585,38 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "동짓달에도 날씨가 며칠 푸근하면\n철없는 개나리는 노란 얼굴 내민다\n봄이 오면 꽃샘추위 아랑곳없이\n진달래는 곳곳에 소담스럽게 피어난다"
+          "answerText": "개나리"
         },
         {
           "id": "q2",
-          "prompt": "2문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "Find what blooms despite the late spring cold.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 54,
+              "end": 57
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "진달래"
+        },
+        {
+          "id": "q3",
+          "prompt": "Find the repeated interrogative ending in the second stanza.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
+              "start": 24,
+              "end": 29
+            },
+            {
+              "paragraphId": "p2",
+              "start": 68,
               "end": 73
             }
           ],
@@ -603,34 +626,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "피어나는 꽃의 마음을\n가냘프다고 / 억누를 수 있느냐\n어두운 땅속으로 뻗어나가는 뿌리의 힘을\n보이지 않는다고 / 업신여길 수 있느냐"
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 49
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "땅에 깊숙이 뿌리내리고\n하늘로 피어오르는 꿈을\n드높은 가지 끝에 품은\n나무처럼 젊은이들도"
+          "answerText": "수 있느냐"
         },
         {
           "id": "q4",
-          "prompt": "4문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "Find the force that should not be belittled just because it is unseen.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 53
+              "paragraphId": "p2",
+              "start": 45,
+              "end": 51
             }
           ],
           "scoring": {
@@ -639,16 +644,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "힘차게 위로 솟아오르고\n조용히 아래로 깊어지며\n밝고 넓게 퍼져 나가기를\n그러나 행여 잊지 말기를"
+          "answerText": "뿌리의 힘을"
         },
         {
           "id": "q5",
-          "prompt": "5문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "Find the simile used for young people.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 81
+              "paragraphId": "p3",
+              "start": 39,
+              "end": 43
             }
           ],
           "scoring": {
@@ -657,16 +662,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "아무리 높다란 나뭇가지 끝에서\n저 들판 너머를 볼 수 있어도\n뿌리는 언제나 땅속에 있고 / 지하수가 수액이 되어\n남모르게 줄기 속을 흐르지 않으면"
+          "answerText": "나무처럼"
         },
         {
           "id": "q6",
-          "prompt": "6문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "Find the two direction words for rising and deepening. 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 42
+              "paragraphId": "p4",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "paragraphId": "p4",
+              "start": 17,
+              "end": 20
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "위로",
+            "아래로"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "Find the place that can be seen from the high branch tip.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 17,
+              "end": 24
             }
           ],
           "scoring": {
@@ -675,7 +706,33 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "바람결에 멀리 향냄새 풍기는\n아카시아도 라일락도 / 절대로 피어날 수 없음을"
+          "answerText": "저 들판 너머"
+        },
+        {
+          "id": "q8",
+          "prompt": "Find the two flowers whose scent travels on the wind. 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 16,
+              "end": 20
+            },
+            {
+              "paragraphId": "p6",
+              "start": 22,
+              "end": 25
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "아카시아",
+            "라일락"
+          ]
         }
       ]
     }

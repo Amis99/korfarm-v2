@@ -571,12 +571,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이런 작업은 연산 간 의존성이 커서, 여러 개의 고성능 코어가 복잡한 흐름을 무엇가 유리하다?",
+          "prompt": "초기의 개인용 컴퓨터가 주로 처리한 작업의 예를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 110,
-              "end": 123
+              "start": 13,
+              "end": 21
+            },
+            {
+              "paragraphId": "p1",
+              "start": 23,
+              "end": 28
             }
           ],
           "scoring": {
@@ -584,17 +589,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "세밀하게 조율하는 CPU"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "운영 체제 제어",
+            "문서 작성"
+          ]
         },
         {
           "id": "q2",
-          "prompt": "핵심 개념은 무엇인가요?",
+          "prompt": "이런 작업에서 CPU가 유리한 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 31,
-              "end": 43
+              "paragraphId": "p1",
+              "start": 74,
+              "end": 86
             }
           ],
           "scoring": {
@@ -603,16 +611,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그래픽 처리에서는 수많"
+          "answerText": "연산 간 의존성이 커서"
         },
         {
           "id": "q3",
-          "prompt": "주요 소재는 무엇인가요?",
+          "prompt": "GPU가 맞추어 발전한 작업을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 111,
-              "end": 124
+              "paragraphId": "p2",
+              "start": 8,
+              "end": 16
             }
           ],
           "scoring": {
@@ -621,33 +629,15 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "레지스터처럼 성격이 다른"
+          "answerText": "이런 병렬 작업"
         },
         {
           "id": "q4",
-          "prompt": "그래서 CPU와 GPU는 무엇 유형을 나누어 맡는 관계에 가깝다?",
+          "prompt": "GPU가 제어 기능보다 중시하는 것을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 159,
-              "end": 172
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "서로 대체재라기보다 작업"
-        },
-        {
-          "id": "q5",
-          "prompt": "NPU는 합성곱, 행렬 곱셈, 벡터 연산처럼 신경망에서 자주 반복되는 계산을 무엇?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 81,
+              "paragraphId": "p2",
+              "start": 82,
               "end": 94
             }
           ],
@@ -657,16 +647,48 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "중심으로 회로를 구성한다"
+          "answerText": "동일 연산의 반복 수행"
+        },
+        {
+          "id": "q5",
+          "prompt": "GPU가 구분해 쓰는 저장 공간을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 95,
+              "end": 101
+            },
+            {
+              "paragraphId": "p3",
+              "start": 103,
+              "end": 109
+            },
+            {
+              "paragraphId": "p3",
+              "start": 111,
+              "end": 115
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "전역 메모리",
+            "공유 메모리",
+            "레지스터"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "결국 CPU, GPU, NPU의 차이는 무엇을 무엇 설계 철학의 차이로 볼 수 있다?",
+          "prompt": "스레드마다 다른 조건 분기를 자주 만나면 생기는 결과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 26,
-              "end": 39
+              "paragraphId": "p4",
+              "start": 77,
+              "end": 85
             }
           ],
           "scoring": {
@@ -675,7 +697,71 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "얼마나 반복하느냐에 대한"
+          "answerText": "병렬성이 깨진다"
+        },
+        {
+          "id": "q7",
+          "prompt": "NPU가 중심으로 삼는 반복 계산을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 43,
+              "end": 46
+            },
+            {
+              "paragraphId": "p5",
+              "start": 48,
+              "end": 53
+            },
+            {
+              "paragraphId": "p5",
+              "start": 55,
+              "end": 60
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "합성곱",
+            "행렬 곱셈",
+            "벡터 연산"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "CPU, GPU, NPU가 각각 강한 대상을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 64,
+              "end": 70
+            },
+            {
+              "paragraphId": "p6",
+              "start": 78,
+              "end": 87
+            },
+            {
+              "paragraphId": "p6",
+              "start": 95,
+              "end": 104
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "복잡한 제어",
+            "대규모 병렬 계산",
+            "신경망 특화 연산"
+          ]
         }
       ]
     }

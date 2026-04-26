@@ -584,34 +584,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "옛날 사람들이 집안을 장식하거나 소원을 빌기 위해 그린 그림을 무엇이라고 하나요?",
-          "answerText": "민화",
-          "answerMatchMode": "ANY",
+          "prompt": "옛날 사람들이 그림을 그린 목적을 모두 찾으시오.",
+          "answerTexts": [
+            "집안을 장식하거나",
+            "소원을 빌기 위해"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 41,
-              "end": 43
+              "start": 8,
+              "end": 17
             },
             {
               "paragraphId": "p1",
-              "start": 50,
-              "end": 52
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 64,
-              "end": 66
-            },
-            {
-              "paragraphId": "p4",
-              "start": 44,
-              "end": 46
+              "start": 18,
+              "end": 27
             }
           ],
           "scoring": {
@@ -622,14 +610,14 @@
         },
         {
           "id": "q2",
-          "prompt": "나쁜 기운을 막아주고 좋은 소식을 가져다준다는 동물들은 무엇인가요?",
-          "answerText": "호랑이와 까치",
+          "prompt": "민화에 담겨 있다고 한 평범한 사람들의 바람을 찾으시오.",
+          "answerText": "여러 가지 소망",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 12,
-              "end": 19
+              "paragraphId": "p1",
+              "start": 64,
+              "end": 72
             }
           ],
           "scoring": {
@@ -640,14 +628,14 @@
         },
         {
           "id": "q3",
-          "prompt": "책과 붓, 연적 같은 것을 한데 모아 그린 그림은 무엇인가요?",
-          "answerText": "책거리",
+          "prompt": "호랑이와 까치가 가진 의미를 설명한 부분을 찾으시오.",
+          "answerText": "나쁜 기운을 막아주고 좋은 소식을 가져다준다는 의미",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 3
+              "paragraphId": "p2",
+              "start": 21,
+              "end": 49
             }
           ],
           "scoring": {
@@ -658,14 +646,14 @@
         },
         {
           "id": "q4",
-          "prompt": "책거리에 함께 그려지는 물건들은 무엇인가요?",
-          "answerText": "학용품",
+          "prompt": "책거리에 나오는 학용품의 예를 묶어 말한 부분을 찾으시오.",
+          "answerText": "책과 붓, 연적",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 23,
-              "end": 26
+              "start": 5,
+              "end": 13
             }
           ],
           "scoring": {
@@ -676,14 +664,22 @@
         },
         {
           "id": "q5",
-          "prompt": "부귀와 가정의 화목을 상징하는 그림은 무엇인가요?",
-          "answerText": "화조도",
-          "answerMatchMode": "ANY",
+          "prompt": "화조도가 상징하는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "부귀",
+            "가정의 화목"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 17,
-              "end": 20
+              "start": 22,
+              "end": 24
+            },
+            {
+              "paragraphId": "p4",
+              "start": 26,
+              "end": 32
             }
           ],
           "scoring": {

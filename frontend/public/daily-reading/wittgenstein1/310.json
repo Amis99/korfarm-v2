@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1수는 눈 덮인 원근의 산과 마을을 어떤 특별한 세상으로 그려 내는가?",
+          "prompt": "긴 하늘과 넓은 들에 날리는 것을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 124
+              "start": 32,
+              "end": 36
             }
           ],
           "scoring": {
@@ -585,52 +585,68 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "가을이 다 지나고 북풍이 높이 부니\n긴 하늘, 넓은 들에 저녁 눈이 날리더니\n이윽고 촌락들이 특별한 세상 되어\n원근의 산봉우리 백옥으로 묶었고\n시골집과 강마을을 흰 구슬로 꾸몄으니\n조물주 야단스러운 줄 이제야 다 알겠구나."
+          "answerText": "저녁 눈"
         },
         {
           "id": "q2",
-          "prompt": "2수는 추운 날씨 속 매화와 소나무를 어떤 절개의 상징으로 드러내는가?",
+          "prompt": "눈으로 희게 꾸며진 산과 마을 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "원근의 산봉우리",
+            "시골집과 강마을"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 107
+              "paragraphId": "p1",
+              "start": 62,
+              "end": 70
+            },
+            {
+              "paragraphId": "p1",
+              "start": 80,
+              "end": 88
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "날씨가 몹시 추워 빙설이 쌓였으니\n성 밖의 초목은 다 시들어 말랐거늘\n창밖에 심은 매화 그윽한 향기 머금었고\n고개 위에 서 있는 솔, 푸른빛이 변함없으니\n본래 지닌 절개가 날이 춥다 변할쏘냐."
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "3수는 향을 피운 실내에서 어떤 한가로운 흥과 잡념의 멎음을 보여 주는가?",
+          "prompt": "추위 속에서도 향기와 푸른빛을 지닌 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "매화",
+            "솔"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 97
+              "paragraphId": "p2",
+              "start": 46,
+              "end": 48
+            },
+            {
+              "paragraphId": "p2",
+              "start": 72,
+              "end": 73
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "앞산의 짙은 안개 햇빛을 가리니\n대숲에 뿌려진 서리 미처 못 녹았구나.\n향로를 내어 켜고 창을 닫고 앉아\n한 심지 맑은 향에 잡념이 그쳤으니\n가난하게 산다고 흥이야 없겠는가."
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "4수는 산 아래 마을과 기러기 장면으로 어떤 저녁 풍경을 펼쳐 보이는가?",
+          "prompt": "매화와 솔이 변하지 않는 이유로 제시된 성품을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 138
+              "paragraphId": "p2",
+              "start": 86,
+              "end": 94
             }
           ],
           "scoring": {
@@ -639,16 +655,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "내 건너 산 아래 황량한 마을 두세 집이\n고목 사립문에 성긴 연기 비꼈으니\n어렴풋한 울타리 그림 속 같구나.\n소와 양이 내려오니 오늘도 저물었다.\n높은 석문봉에 석양이 붉었는데\n울며 가는 기러기 가는 듯 돌아오니\n형양은 아니지만 회안봉이 여기로다."
+          "answerText": "본래 지닌 절개"
         },
         {
           "id": "q5",
-          "prompt": "5수는 포구와 절의 풍경 속에서 무엇을 향한 관조를 드러내는가?",
+          "prompt": "가난하게 살아도 흥이 있음을 드러내는 설의적 표현을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 99
+              "paragraphId": "p3",
+              "start": 88,
+              "end": 96
             }
           ],
           "scoring": {
@@ -657,16 +673,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "포구 긴 다리에 오며 가며 하는 행인\n어디를 향하여 바쁘게 가느냐.\n용산 외로운 절 언제부터 있었던가.\n풍경 맑은 소리 바람 섞여 지나가니\n알겠구나, 늙은 중이 예불할 때로구나."
+          "answerText": "흥이야 없겠는가"
         },
         {
           "id": "q6",
-          "prompt": "6수는 겨울 강가에서 달을 기다리다 마침내 어떤 맑은 순간을 맞는가?",
+          "prompt": "마을 풍경을 그림처럼 보이게 하는 표현을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 152
+              "paragraphId": "p4",
+              "start": 42,
+              "end": 59
             }
           ],
           "scoring": {
@@ -675,7 +691,57 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "강가 차가운 다리에 저녁 빛이 가득하니\n까마귀는 날아들고 푸른 산이 멀리 뵌다.\n시름을 못 이기어 휘파람을 길게 불고\n긴 대에 기대어서 달빛을 기다리니\n심술궂은 구름이 가릴 것은 무슨 일인가.\n바람이 야단스러워 하늘을 깨끗이 쓰니\n한 조각 겨울달은 맑은 빛이 예와 같구나."
+          "answerText": "어렴풋한 울타리 그림 속 같구나"
+        },
+        {
+          "id": "q7",
+          "prompt": "늙은 중이 예불할 때임을 알게 하는 소리를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 58,
+              "end": 66
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "풍경 맑은 소리"
+        },
+        {
+          "id": "q8",
+          "prompt": "달빛을 기다리는 장면에서 가림, 걷힘, 드러난 달을 나타내는 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "심술궂은 구름",
+            "바람이 야단스러워",
+            "한 조각 겨울달"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 85,
+              "end": 92
+            },
+            {
+              "paragraphId": "p6",
+              "start": 108,
+              "end": 117
+            },
+            {
+              "paragraphId": "p6",
+              "start": 129,
+              "end": 137
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
         }
       ]
     }

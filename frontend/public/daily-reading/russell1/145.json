@@ -875,7 +875,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '서론'을 모두 찾으시오.",
+          "prompt": "글에서 무엇에 대해 말하려는지 알리는 자리를 가리키는 낱말을 지문에서 모두 찾으시오",
+          "answerText": "서론",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -904,135 +906,103 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "서론"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '본론'을 모두 찾으시오.",
+          "prompt": "지문에서 서론, 본론, 결론 각각이 어떤 자리인지 한 문장으로 정의한 부분을 찾으시오",
+          "answerText": "서론은 무엇에 대해 말하려는지 알리는 자리이고, 본론은 그 생각을 뒷받침하는 자리이며, 결론은 앞의 내용을 다시 묶어 글의 뜻을 선명하게 남기는 자리다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 11,
-              "end": 13
-            },
-            {
-              "paragraphId": "p1",
-              "start": 123,
-              "end": 125
-            },
-            {
-              "paragraphId": "p2",
-              "start": 115,
-              "end": 117
-            },
-            {
-              "paragraphId": "p2",
-              "start": 183,
-              "end": 185
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p3",
-              "start": 190,
-              "end": 192
-            },
-            {
-              "paragraphId": "p4",
-              "start": 6,
-              "end": 8
-            },
-            {
-              "paragraphId": "p4",
-              "start": 185,
-              "end": 187
+              "start": 96,
+              "end": 180
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "본론"
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '결론'을 모두 찾으시오.",
+          "prompt": "본론에서 한쪽에 치우치지 않게 주장을 뒷받침하기 위해 쓸 수 있는 자료의 예를 지문에서 모두 찾으시오",
+          "answerText": "컵 사용량 조사 결과 / 쓰레기 처리 비용 / 다회용 컵을 도입한 다른 학교 사례",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 15,
-              "end": 17
+              "paragraphId": "p3",
+              "start": 33,
+              "end": 44
             },
             {
-              "paragraphId": "p1",
-              "start": 145,
-              "end": 147
+              "paragraphId": "p3",
+              "start": 46,
+              "end": 55
             },
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p4",
-              "start": 189,
-              "end": 191
+              "paragraphId": "p3",
+              "start": 57,
+              "end": 76
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "결론"
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '주장'을 모두 찾으시오.",
+          "prompt": "결론에서 본론의 근거를 처음부터 되풀이하지 말라고 한 까닭이 드러나는 부분을 지문에서 찾으시오",
+          "answerText": "앞에서 살핀 내용을 한데 묶어 무엇을 실천해야 하는지 분명하게 적는 편이 좋다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 94,
-              "end": 96
-            },
-            {
-              "paragraphId": "p3",
-              "start": 6,
-              "end": 8
-            },
-            {
-              "paragraphId": "p3",
-              "start": 97,
-              "end": 99
-            },
-            {
               "paragraphId": "p4",
-              "start": 266,
-              "end": 268
+              "start": 30,
+              "end": 73
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "주장"
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '근거'를 모두 찾으시오.",
+          "prompt": "글의 짜임을 가리켜 서론, 본론, 결론이 무엇이라고 정리한 마지막 결론 문장을 지문에서 찾으시오",
+          "answerText": "서론, 본론, 결론은 글을 세 조각으로 자르는 틀이 아니라, 생각을 읽기 좋게 조직하는 기본 구조라고 할 수 있다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 181,
+              "end": 244
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "주장을 뒷받침하기 위해 본론에 놓는, 사실이나 자료에 바탕한 까닭을 가리키는 낱말을 지문에서 모두 찾으시오",
+          "answerText": "근거",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -1056,12 +1026,11 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "근거"
+          "revealOnWrong": true
         }
       ]
     }

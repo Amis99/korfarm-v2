@@ -914,168 +914,86 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '목적'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p1",
-              "start": 169,
-              "end": 171
-            },
-            {
-              "paragraphId": "p2",
-              "start": 8,
-              "end": 10
-            },
-            {
-              "paragraphId": "p2",
-              "start": 119,
-              "end": 121
-            },
-            {
-              "paragraphId": "p2",
-              "start": 210,
-              "end": 212
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p3",
-              "start": 185,
-              "end": 187
-            },
-            {
-              "paragraphId": "p4",
-              "start": 6,
-              "end": 8
-            },
-            {
-              "paragraphId": "p4",
-              "start": 60,
-              "end": 62
-            },
-            {
-              "paragraphId": "p4",
-              "start": 125,
-              "end": 127
-            },
-            {
-              "paragraphId": "p4",
-              "start": 230,
-              "end": 232
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '목적'이라는 낱말이 쓰인 곳을 모두 찾으시오.",
+          "answerText": "목적",
           "answerMatchMode": "ANY",
-          "answerText": "목적"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 3, "end": 5},
+            {"paragraphId": "p1", "start": 169, "end": 171},
+            {"paragraphId": "p2", "start": 8, "end": 10},
+            {"paragraphId": "p2", "start": 119, "end": 121},
+            {"paragraphId": "p2", "start": 210, "end": 212},
+            {"paragraphId": "p3", "start": 0, "end": 2},
+            {"paragraphId": "p3", "start": 185, "end": 187},
+            {"paragraphId": "p4", "start": 6, "end": 8},
+            {"paragraphId": "p4", "start": 60, "end": 62},
+            {"paragraphId": "p4", "start": 125, "end": 127},
+            {"paragraphId": "p4", "start": 230, "end": 232}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '설명'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 100,
-              "end": 102
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p3",
-              "start": 36,
-              "end": 38
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '작문'이라는 낱말이 쓰인 곳을 모두 찾으시오.",
+          "answerText": "작문",
           "answerMatchMode": "ANY",
-          "answerText": "설명"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 164, "end": 166},
+            {"paragraphId": "p4", "start": 153, "end": 155}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '주장'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 78,
-              "end": 80
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '중심'이라는 낱말이 쓰인 곳을 모두 찾으시오.",
+          "answerText": "중심",
           "answerMatchMode": "ANY",
-          "answerText": "주장"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 195, "end": 197},
+            {"paragraphId": "p2", "start": 219, "end": 221},
+            {"paragraphId": "p3", "start": 90, "end": 92},
+            {"paragraphId": "p4", "start": 47, "end": 49}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '경험'을 모두 찾으시오.",
+          "prompt": "지문에서 글의 종류로 든 세 가지 '설명', '설득', '경험'을 모두 찾으시오.",
+          "answerText": "설명, 설득, 경험",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 122,
-              "end": 124
-            },
-            {
-              "paragraphId": "p2",
-              "start": 149,
-              "end": 151
-            },
-            {
-              "paragraphId": "p2",
-              "start": 178,
-              "end": 180
-            }
+            {"paragraphId": "p1", "start": 100, "end": 102},
+            {"paragraphId": "p1", "start": 111, "end": 113},
+            {"paragraphId": "p1", "start": 122, "end": 124}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "경험"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '기준'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 236,
-              "end": 238
-            },
-            {
-              "paragraphId": "p3",
-              "start": 212,
-              "end": 214
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '글의 목적을 정한다는 것'의 뜻을 풀이한 문장을 찾으시오.",
+          "answerText": "결국 글의 목적을 정한다는 것은 내용을 제한하는 일이 아니라, 내용이 흩어지지 않게 중심을 세우는 일이다",
           "answerMatchMode": "ANY",
-          "answerText": "기준"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 0, "end": 58}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 목적이 분명하지 않을 때 한 글에 뒤섞이기 쉽다고 든 두 가지 행위 '설명'과 '설득'을 모두 찾으시오.",
+          "answerText": "설명, 설득",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 36, "end": 38},
+            {"paragraphId": "p3", "start": 46, "end": 48}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

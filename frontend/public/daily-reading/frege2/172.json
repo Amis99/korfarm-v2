@@ -747,14 +747,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "광고가 소비자의 시선을 끌기 위해 많이 쓰는 색의 특징은 무엇인가요?",
-          "answerText": "강렬한 색상",
+          "prompt": "현대 사회에서 광고는 우리 삶에서 무엇이 되었다고 했나요?",
+          "answerText": "우리 삶의 일부",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 29,
-              "end": 35
+              "paragraphId": "p1",
+              "start": 12,
+              "end": 20
             }
           ],
           "scoring": {
@@ -765,10 +765,36 @@
         },
         {
           "id": "q2",
-          "prompt": "광고 이미지가 시선을 끌기 위해 함께 활용하는 배치 방식은 무엇인가요?",
-          "answerText": "독특한 구도",
+          "prompt": "광고 이미지들이 담고 있다고 한 것은 무엇인가요?",
+          "answerText": "특정한 메시지",
           "answerMatchMode": "ANY",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 66,
+              "end": 73
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "광고 이미지가 소비자의 시선을 끌기 위해 주로 사용하는 두 요소를 모두 찾으시오.",
+          "answerTexts": [
+            "강렬한 색상",
+            "독특한 구도"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 29,
+              "end": 35
+            },
             {
               "paragraphId": "p2",
               "start": 37,
@@ -782,33 +808,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "행복한 표정의 모델이 전달하려는 이미지는 무엇인가요?",
-          "answerText": "긍정적 이미지",
+          "id": "q4",
+          "prompt": "소비자는 광고 이미지가 불러일으킨 감정을 어떻게 여긴다고 했나요?",
+          "answerText": "제품과 동일하게",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 44,
-              "end": 51
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "광고 이미지를 읽을 때 꼭 가져야 한다고 한 태도는 무엇인가요?",
-          "answerText": "비판적으로",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 12,
-              "end": 17
+              "start": 69,
+              "end": 77
             }
           ],
           "scoring": {
@@ -819,14 +827,14 @@
         },
         {
           "id": "q5",
-          "prompt": "광고의 의도를 파악하면 내릴 수 있다고 한 소비 판단은 무엇인가요?",
-          "answerText": "합리적인 소비 결정",
+          "prompt": "광고 이미지를 비판적으로 읽어 의도를 파악하면 얻을 수 있는 결과는 무엇인가요?",
+          "answerText": "합리적인 소비 결정을 내릴 수 있다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 64,
-              "end": 74
+              "end": 83
             }
           ],
           "scoring": {

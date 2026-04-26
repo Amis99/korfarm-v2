@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"CFC와 오존층 파괴\"에 해당하는 부분은 어디인가요?",
+          "prompt": "성층권에 모여 있다고 한 오존의 범위를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 124,
-              "end": 135
+              "paragraphId": "p1",
+              "start": 6,
+              "end": 19
             }
           ],
           "scoring": {
@@ -585,16 +585,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "CFC와 오존층 파괴"
+          "answerText": "지구 전체 오존의 대부분"
         },
         {
           "id": "q2",
-          "prompt": "\"CFC와 오존층 파괴\"에 해당하는 부분은 어디인가요?",
+          "prompt": "성층권에서 오존이 만들어지고 분해되는 과정을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 124,
-              "end": 135
+              "paragraphId": "p1",
+              "start": 34,
+              "end": 81
+            },
+            {
+              "paragraphId": "p1",
+              "start": 86,
+              "end": 110
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "자외선을 받은 산소 분자가 쪼개지고, 다시 다른 산소 분자와 결합해 오존이 만들어진다",
+            "오존은 빛을 흡수하면서 다시 분해되기도 한다"
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "오존층이 중요한 이유를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 13,
+              "end": 37
             }
           ],
           "scoring": {
@@ -603,15 +629,41 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "CFC와 오존층 파괴"
+          "answerText": "자외선을 흡수해 지표 생명체를 보호하기 때문"
         },
         {
-          "id": "q3",
-          "prompt": "문제를 일으킨 물질 무엇?",
+          "id": "q4",
+          "prompt": "오존이 위치에 따라 달라지는 성격을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 168,
+              "end": 180
+            },
+            {
+              "paragraphId": "p2",
+              "start": 181,
+              "end": 203
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "성층권에서는 유익하지만",
+            "지표 부근에서는 오염 물질이 될 수 있다"
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "문제를 일으킨 물질 가운데 하나를 밝힌 문장을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 11,
+              "start": 0,
               "end": 24
             }
           ],
@@ -621,52 +673,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "가운데 하나가 CFC이다"
-        },
-        {
-          "id": "q4",
-          "prompt": "\"CFC와 오존층 파괴\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 124,
-              "end": 135
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "CFC와 오존층 파괴"
-        },
-        {
-          "id": "q5",
-          "prompt": "\"CFC와 오존층 파괴\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 124,
-              "end": 135
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "CFC와 오존층 파괴"
+          "answerText": "문제를 일으킨 물질 가운데 하나가 CFC이다"
         },
         {
           "id": "q6",
-          "prompt": "\"CFC와 오존층 파괴\"에 해당하는 부분은 어디인가요?",
+          "prompt": "CFC가 대기 하층에서 쉽게 사라지지 않았던 성질을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 124,
-              "end": 135
+              "paragraphId": "p3",
+              "start": 61,
+              "end": 80
             }
           ],
           "scoring": {
@@ -675,7 +691,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "CFC와 오존층 파괴"
+          "answerText": "반응성이 낮고 쉽게 분해되지 않았다"
+        },
+        {
+          "id": "q7",
+          "prompt": "염소 원자가 오존 분해를 촉진하는 촉매처럼 기능하는 이유를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 108,
+              "end": 157
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "염소가 한 번 반응하고 사라지는 것이 아니라 되살아나며 여러 차례 반응을 이어 간다는 것"
+        },
+        {
+          "id": "q8",
+          "prompt": "오존층의 완전한 회복에 긴 시간이 필요한 이유를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 72,
+              "end": 83
+            },
+            {
+              "paragraphId": "p6",
+              "start": 84,
+              "end": 99
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "대기 규모가 방대하고",
+            "반응에 관여하는 요인도 많아"
+          ]
         }
       ]
     }

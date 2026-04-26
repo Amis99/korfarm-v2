@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "부모님을 대신하여 할아버지, 할머니가 직접 귀여운 손자, 손녀를 키우며 서로 도와 함께 사는 가족 형태는?",
+          "prompt": "할아버지, 할머니가 손자, 손녀를 직접 키우며 함께 사는 가족을 지문에서 찾아 쓰시오.",
           "answerText": "조손 가족",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -576,9 +576,9 @@
         },
         {
           "id": "q2",
-          "prompt": "우리나라 사람과 다른 나라 사람이 서로 만나 결혼하여, 다양한 문화와 음식을 나누며 풍부한 경험을 하는 가족은?",
+          "prompt": "우리나라 사람과 외국인이 결혼해 이루어진 가족을 지문에서 찾아 쓰시오.",
           "answerText": "다문화 가족",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -600,9 +600,28 @@
         },
         {
           "id": "q3",
-          "prompt": "결혼하지 않거나 부모님과 떨어져서 오직 혼자 스스로 생활을 책임지며 참 독립적으로 살아가는 형태는?",
+          "prompt": "다문화 가족이 서로 다른 나라의 무엇을 나누며 풍부한 경험을 한다고 했는지 지문에서 찾아 쓰시오.",
+          "answerText": "문화와 음식",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 65,
+              "end": 71
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "결혼을 하지 않거나 부모님과 떨어져 혼자 살아가는 가족을 지문에서 찾아 쓰시오.",
           "answerText": "1인 가족",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",

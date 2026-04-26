@@ -435,15 +435,11 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "편지를 받는 친구?",
+          "prompt": "글쓴이가 이 편지를 보내는 친구의 이름이 무엇인지 찾아 적어 보세요",
           "answerText": "예나",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 5,
-              "end": 7
-            }
+            {"paragraphId": "p1", "start": 5, "end": 7}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -454,30 +450,11 @@
         },
         {
           "id": "q2",
-          "prompt": "여러 사람이 즐기는 것?",
-          "answerText": "놀이",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 놀이마당에서 처음으로 해 본 전통 놀이가 무엇인지 찾아 적어 보세요",
+          "answerText": "널뛰기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 31,
-              "end": 33
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 64,
-              "end": 66
-            },
-            {
-              "paragraphId": "p2",
-              "start": 125,
-              "end": 127
-            }
+            {"paragraphId": "p1", "start": 76, "end": 79}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -488,20 +465,26 @@
         },
         {
           "id": "q3",
-          "prompt": "예부터 전해 오는 것?",
-          "answerText": "전통",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 놀이마당에서 먹은 달콤한 떡의 이름이 무엇인지 찾아 적어 보세요",
+          "answerText": "인절미",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 28,
-              "end": 30
-            },
-            {
-              "paragraphId": "p2",
-              "start": 122,
-              "end": 124
-            }
+            {"paragraphId": "p2", "start": 15, "end": 18}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "옛날에 살았던 우리의 어른들로, 전통 놀이를 즐겼던 분들을 무엇이라고 했는지 찾아 적어 보세요",
+          "answerText": "조상",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 55, "end": 57}
           ],
           "scoring": {
             "correctDeltaSec": 10,

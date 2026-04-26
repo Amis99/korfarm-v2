@@ -571,11 +571,16 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "prompt": "1연에서 반복되어 중심 이미지를 만드는 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
+              "end": 8
+            },
+            {
+              "paragraphId": "p1",
+              "start": 35,
               "end": 43
             }
           ],
@@ -585,16 +590,48 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "멀리 있는 것은\n아름답다.\n무지개나 별이나 벼랑에 피는 꽃이나\n멀리 있는 것은"
+          "answerText": "멀리 있는 것은"
         },
         {
           "id": "q2",
-          "prompt": "2연은 그 정서를 어떤 이미지나 흐름으로 이어 가는가?",
+          "prompt": "1연에서 멀리 있는 아름다운 대상으로 제시된 예를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 15,
+              "end": 19
+            },
+            {
+              "paragraphId": "p1",
+              "start": 20,
+              "end": 23
+            },
+            {
+              "paragraphId": "p1",
+              "start": 24,
+              "end": 34
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "무지개나",
+            "별이나",
+            "벼랑에 피는 꽃이나"
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "대상이 아름다운 이유를 나타낸 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 44
+              "end": 14
             }
           ],
           "scoring": {
@@ -603,51 +640,15 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "손에 닿을 수 없는 까닭에\n아름답다.\n사랑하는 사람아,\n이별을 서러워하지 마라,"
-        },
-        {
-          "id": "q3",
-          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 38
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "내 나이의 이별이란\n헤어지는 일이 아니라 단지\n멀어지는 일일 뿐이다."
+          "answerText": "손에 닿을 수 없는 까닭에"
         },
         {
           "id": "q4",
-          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
+          "prompt": "화자가 직접 부르는 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 36
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "네가 보낸 마지막 편지를 읽기 위해선\n이제\n돋보기가 필요한 나이,"
-        },
-        {
-          "id": "q5",
-          "prompt": "5연은 앞선 흐름에 어떤 긴장이나 전환을 더하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
+              "paragraphId": "p2",
+              "start": 21,
               "end": 29
             }
           ],
@@ -657,16 +658,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "늙는다는 것은\n사랑하는 사람을 멀리 보낸다는\n것이다."
+          "answerText": "사랑하는 사람아"
+        },
+        {
+          "id": "q5",
+          "prompt": "3연에서 이별의 뜻을 대조적으로 설명하는 부분을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 11,
+              "end": 22
+            },
+            {
+              "paragraphId": "p3",
+              "start": 26,
+              "end": 37
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "헤어지는 일이 아니라",
+            "멀어지는 일일 뿐이다"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
+          "prompt": "화자가 읽기 위해 돋보기가 필요하다고 한 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
+              "paragraphId": "p4",
               "start": 0,
-              "end": 20
+              "end": 12
             }
           ],
           "scoring": {
@@ -675,7 +702,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "머얼리서 바라볼 줄을\n안다는 것이다."
+          "answerText": "네가 보낸 마지막 편지"
+        },
+        {
+          "id": "q7",
+          "prompt": "늙는다는 것의 뜻을 설명한 부분을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 8,
+              "end": 29
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "사랑하는 사람을 멀리 보낸다는\n것이다."
+        },
+        {
+          "id": "q8",
+          "prompt": "6연에서 거리를 길게 느끼게 하는 표기 방식을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 4
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "머얼리서"
         }
       ]
     }

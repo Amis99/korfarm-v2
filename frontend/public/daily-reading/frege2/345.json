@@ -884,14 +884,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "인터넷에서 흔히 접하는 맞춤형 정보 제공 기술은 무엇인가요?",
-          "answerText": "추천 알고리즘",
+          "prompt": "추천 알고리즘의 정의에 해당하는 부분을 찾으시오.",
+          "answerText": "사용자의 과거 기록을 분석해 맞춤형 정보를 제공하는 기술",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 23,
-              "end": 30
+              "start": 34,
+              "end": 65
             }
           ],
           "scoring": {
@@ -902,14 +902,14 @@
         },
         {
           "id": "q2",
-          "prompt": "추천 알고리즘이 맞춤형 정보를 제공할 때 분석하는 것은 무엇인가요?",
-          "answerText": "과거 기록",
+          "prompt": "기술이 핵심으로 삼는 능력을 찾으시오.",
+          "answerText": "데이터를 모으고 분석하는 능력",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 39,
-              "end": 44
+              "paragraphId": "p2",
+              "start": 10,
+              "end": 26
             }
           ],
           "scoring": {
@@ -920,14 +920,22 @@
         },
         {
           "id": "q3",
-          "prompt": "이 기술의 핵심으로 제시된 것은 무엇인가요?",
-          "answerText": "데이터",
-          "answerMatchMode": "ANY",
+          "prompt": "추천 알고리즘이 파악하는 사용자의 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "어떤 글을 오래 읽었는지",
+            "어떤 상품을 검색했는지"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 10,
-              "end": 13
+              "start": 35,
+              "end": 48
+            },
+            {
+              "paragraphId": "p2",
+              "start": 50,
+              "end": 62
             }
           ],
           "scoring": {
@@ -938,14 +946,14 @@
         },
         {
           "id": "q4",
-          "prompt": "추천 알고리즘의 부작용으로 나타날 수 있는 것은 무엇인가요?",
-          "answerText": "확증 편향",
+          "prompt": "확증 편향이라는 부작용이 생기는 이유를 찾으시오.",
+          "answerText": "자신이 좋아하는 정보만 반복해서 보게 되기 때문",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 10,
-              "end": 15
+              "start": 33,
+              "end": 59
             }
           ],
           "scoring": {
@@ -956,14 +964,14 @@
         },
         {
           "id": "q5",
-          "prompt": "알고리즘에 끌려가지 않기 위해 필요한 태도는 무엇인가요?",
-          "answerText": "주체적인 태도",
+          "prompt": "기술의 편리함을 누리되 잃지 말아야 한다고 한 것을 찾으시오.",
+          "answerText": "비판적인 사고력",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 18,
-              "end": 25
+              "start": 82,
+              "end": 90
             }
           ],
           "scoring": {

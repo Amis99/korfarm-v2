@@ -557,19 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "반장과 서기가 주도하여 학급의 중요한 일을 결정하기 위해 의견을 나누는 자리는?",
-          "answerText": "학급 회의",
-          "answerMatchMode": "EXACT",
+          "prompt": "회의 목적에서 알리려고 한 것은 무엇인가요?",
+          "answerText": "갯벌 보호",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 30,
-              "end": 35
-            },
-            {
-              "paragraphId": "p3",
-              "start": 107,
-              "end": 112
+              "start": 51,
+              "end": 56
             }
           ],
           "scoring": {
@@ -581,10 +576,42 @@
         },
         {
           "id": "q2",
-          "prompt": "서연이가 갯벌의 소중함을 시각적으로 알리기 위해 제안한 구체적인 행사는 무엇인가요?",
-          "answerText": "사진 전시회",
-          "answerMatchMode": "EXACT",
+          "prompt": "현우가 갯벌 입구에 세우자고 제안한 것은 무엇인가요?",
+          "answerText": "커다란 안내판",
+          "answerMatchMode": "ANY",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 11,
+              "end": 18
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "투표 결과 갯벌을 지키기 위해 함께 하기로 결정한 두 가지를 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "안내판",
+            "사진 전시회"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 15,
+              "end": 18
+            },
+            {
+              "paragraphId": "p3",
+              "start": 6,
+              "end": 9
+            },
             {
               "paragraphId": "p3",
               "start": 15,
@@ -599,10 +626,10 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "회의가 끝난 후, 결정된 사항을 잊지 않기 위해 서기가 정성껏 기록해 둔 문서는?",
+          "id": "q4",
+          "prompt": "서기가 회의 내용을 정리하여 기록한 문서는 무엇인가요?",
           "answerText": "학급 회의록",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",

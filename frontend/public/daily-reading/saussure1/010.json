@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "도서관 ( )을 편지로 씁니다.",
-          "answerText": "소식",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 어제 다녀온 마을 도서관이 어땠는지 지문에서 찾아 보세요.",
+          "answerText": "어제 다녀온 마을 도서관은 무척 크고 넓었어요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 14,
-              "end": 16
+              "start": 27,
+              "end": 52
             }
           ],
           "scoring": {
@@ -571,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "재미있는 ( )과 그림책.",
-          "answerText": "만화책",
-          "answerMatchMode": "EXACT",
+          "prompt": "조명 아래 책들이 어땠는지 지문에서 찾아 보세요.",
+          "answerText": "반짝이는 조명 아래 예쁜 책들이 무척 많았습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 33,
-              "end": 36
+              "paragraphId": "p1",
+              "start": 54,
+              "end": 80
             }
           ],
           "scoring": {
@@ -590,14 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "학교에서 ( ) 들려줄게.",
-          "answerText": "자세히",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 친구와 다음에 무엇을 하기로 했는지 지문에서 찾아 보세요.",
+          "answerText": "다음에 우리 꼭 도서관에 같이 가서 놀기로 해요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 134,
-              "end": 137
+              "start": 0,
+              "end": 26
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "도서관 예절을 지키며 독서하면 어떻겠다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "도서관 예절을 지키며 즐겁게 독서하면 참 좋겠어요",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 57,
+              "end": 84
             }
           ],
           "scoring": {

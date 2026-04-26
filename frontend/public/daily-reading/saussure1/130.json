@@ -552,84 +552,48 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "목이 아주 긴 동물은?",
-          "answerText": "기린",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 동물원에 다녀온 이야기를 들려주려고 편지를 쓴 친구의 이름이 무엇인지 글에서 찾아 써 보세요",
+          "answerText": "영수",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 57,
-              "end": 59
-            },
-            {
-              "paragraphId": "p1",
-              "start": 76,
-              "end": 78
-            }
+            {"paragraphId": "p1", "start": 3, "end": 5}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "영수를 닮은 무엇 인형인가요?",
-          "answerText": "호랑이",
-          "answerMatchMode": "EXACT",
+          "prompt": "동물원에서 본 목이 아주 긴 동물로, 높은 나무에 있는 잎을 냠냠 먹는 모습이 멋졌던 동물이 무엇인지 글에서 찾아 써 보세요",
+          "answerText": "기린",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 21,
-              "end": 24
-            },
-            {
-              "paragraphId": "p2",
-              "start": 45,
-              "end": 48
-            }
+            {"paragraphId": "p1", "start": 57, "end": 59},
+            {"paragraphId": "p1", "start": 76, "end": 78}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "너에게 줄 무엇을 샀어인가요?",
-          "answerText": "인형",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 동물원 기념품점에서 영수에게 주려고 산 귀여운 인형이 어떤 동물 인형인지 글에서 찾아 써 보세요",
+          "answerText": "호랑이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 25,
-              "end": 27
-            },
-            {
-              "paragraphId": "p2",
-              "start": 49,
-              "end": 51
-            },
-            {
-              "paragraphId": "p2",
-              "start": 95,
-              "end": 97
-            },
-            {
-              "paragraphId": "p2",
-              "start": 119,
-              "end": 121
-            }
+            {"paragraphId": "p2", "start": 21, "end": 24},
+            {"paragraphId": "p2", "start": 45, "end": 48}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글쓴이가 영수에게 인형을 전해 줄 곳이 어디라고 했는지 글에서 찾아 써 보세요",
+          "answerText": "학교",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 81, "end": 83}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         }
       ]

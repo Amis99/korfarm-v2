@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "화학 반응은 분자들이 무엇는 것이 아니라 일정한 활성화 에너지를 넘어야 진행된다?",
+          "prompt": "화학 반응에서 촉매가 낮추는 장벽을 가리키는 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 12,
-              "end": 25
+              "start": 38,
+              "end": 45
             }
           ],
           "scoring": {
@@ -585,70 +585,103 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "충돌한다고 곧바로 일어나"
+          "answerText": "활성화 에너지"
         },
         {
           "id": "q2",
-          "prompt": "핵심 개념은 무엇인가요?",
+          "prompt": "고체 촉매에서 보통 함께 작동하는 요소를 모두 찾으시오.",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 141,
+              "end": 146
+            },
+            {
+              "paragraphId": "p1",
+              "start": 148,
+              "end": 151
+            },
+            {
+              "paragraphId": "p1",
+              "start": 153,
+              "end": 156
+            },
             {
               "paragraphId": "p2",
-              "start": 78,
-              "end": 92
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "마지막으로 생성물이 떨어져"
-        },
-        {
-          "id": "q3",
-          "prompt": "이때 흡착 세기는 무엇 강해도 문제이다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 10,
-              "end": 23
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "약해도 문제이고 지나치게"
-        },
-        {
-          "id": "q4",
-          "prompt": "그런데 금속 입자는 무엇 큰 덩어리가 되기 쉬운데, 이를 소결이라 한다?",
-          "answerRanges": [
+              "start": 0,
+              "end": 5
+            },
             {
               "paragraphId": "p4",
-              "start": 51,
-              "end": 63
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "고온에서 서로 달라붙어"
-        },
-        {
-          "id": "q5",
-          "prompt": "같은 금속을 써도 무엇 조합하느냐에 따라 반응 속도와 안정성이 크게 달라지는 이유가 여기에 있다?",
-          "answerRanges": [
+              "start": 111,
+              "end": 116
+            },
+            {
+              "paragraphId": "p4",
+              "start": 168,
+              "end": 171
+            },
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 3
+            },
+            {
+              "paragraphId": "p5",
+              "start": 39,
+              "end": 42
+            },
+            {
+              "paragraphId": "p5",
+              "start": 70,
+              "end": 73
+            },
             {
               "paragraphId": "p5",
               "start": 119,
-              "end": 132
+              "end": 122
+            },
+            {
+              "paragraphId": "p5",
+              "start": 124,
+              "end": 127
+            },
+            {
+              "paragraphId": "p6",
+              "start": 32,
+              "end": 37
+            },
+            {
+              "paragraphId": "p6",
+              "start": 52,
+              "end": 55
+            },
+            {
+              "paragraphId": "p6",
+              "start": 75,
+              "end": 78
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "활성 성분",
+            "지지체",
+            "증진제"
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "활성 성분이 제공하는 것을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 7,
+              "end": 19
             }
           ],
           "scoring": {
@@ -657,16 +690,66 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "지지체와 증진제를 어떻게"
+          "answerText": "반응물이 달라붙는 표면"
+        },
+        {
+          "id": "q4",
+          "prompt": "반응물이 표면에서 거치는 과정과 결과를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 41,
+              "end": 45
+            },
+            {
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 67
+            },
+            {
+              "paragraphId": "p2",
+              "start": 68,
+              "end": 76
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "흡착되고",
+            "결합이 끊기거나 재배열된 뒤",
+            "생성물로 바뀐다"
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "반응물이 너무 약하게 붙으면 생기는 결과를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 64,
+              "end": 78
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "반응이 잘 일어나지 않는다"
         },
         {
           "id": "q6",
-          "prompt": "결국 고체 촉매의 성능은 한 무엇?",
+          "prompt": "소결이 무엇인지 보여 주는 설명을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 16,
-              "end": 30
+              "paragraphId": "p4",
+              "start": 44,
+              "end": 77
             }
           ],
           "scoring": {
@@ -675,7 +758,57 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "요소만으로 설명되지 않는다"
+          "answerText": "금속 입자는 고온에서 서로 달라붙어 큰 덩어리가 되기 쉬운데"
+        },
+        {
+          "id": "q7",
+          "prompt": "소결이 일어나면 줄어드는 것을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 100,
+              "end": 106
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "전체 표면적"
+        },
+        {
+          "id": "q8",
+          "prompt": "활성 성분, 지지체, 증진제가 맡는 역할을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 39,
+              "end": 50
+            },
+            {
+              "paragraphId": "p6",
+              "start": 57,
+              "end": 73
+            },
+            {
+              "paragraphId": "p6",
+              "start": 80,
+              "end": 95
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "반응을 직접 담당하고",
+            "그 활성을 오래 유지하게 하며",
+            "세기와 구조를 미세 조절한다"
+          ]
         }
       ]
     }

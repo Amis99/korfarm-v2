@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "총무부가 걱정하고 있는 것으로 학생회장이 언급한 비용 관련 부담을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 182
+              "start": 114,
+              "end": 119
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생회장: 이번 회의는 축제 준비 과정에서 플라스틱 현수막 사용을 줄이고 천 현수막으로 바꾸는 방안을 협의하려고 마련했습니다. 학생회는 정문과 운동장 메인 무대 쪽 현수막부터 바꾸자는 입장이고, 총무부는 예산 부담을 걱정하고 있는 것으로 압니다. 오늘은 어느 구역까지 바꿀지와 추가 비용을 어떻게 감당할지를 정리했으면 합니다."
+          "answerText": "예산 부담"
         },
         {
           "id": "q2",
-          "prompt": "2문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "학생회가 먼저 바꾸자는 입장을 보인 현수막의 위치를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 187
+              "paragraphId": "p1",
+              "start": 76,
+              "end": 95
             }
           ],
           "scoring": {
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "환경동아리 대표: 저희가 조사해 보니 작년 축제 때 사용한 일회용 현수막이 생각보다 많았습니다. 특히 사진 촬영 구역과 동아리 홍보 구역에 짧게 쓰고 버리는 현수막이 많았는데, 이런 방식은 올해부터 줄이는 게 좋겠습니다. 다만 모든 현수막을 한꺼번에 바꾸자는 뜻은 아니고, 반복 사용이 가능한 큰 현수막부터 우선 전환하자는 제안입니다."
+          "answerText": "정문과 운동장 메인 무대 쪽 현수막"
         },
         {
           "id": "q3",
-          "prompt": "3문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "환경동아리 대표가 짧게 쓰고 버리는 현수막이 많았다고 한 구역을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 179
+              "paragraphId": "p2",
+              "start": 57,
+              "end": 65
+            },
+            {
+              "paragraphId": "p2",
+              "start": 67,
+              "end": 76
             }
           ],
           "scoring": {
@@ -620,17 +625,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "총무부장: 취지는 이해하지만 예산이 문제입니다. 업체 견적을 받아 보니 천 현수막은 제작 단가가 높고, 보관과 세탁 비용도 따로 들어갑니다. 게다가 학생회 창고가 넉넉하지 않아서 사용 후 관리까지 고려해야 합니다. 그래서 저희는 올해는 일부 구역만 시범 운영하고, 내년 확대 여부를 다시 검토하는 편이 안전하다고 봅니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "사진 촬영 구역",
+            "동아리 홍보 구역"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "총무부장이 천 현수막의 예산 문제로 든 비용 항목을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 176
+              "paragraphId": "p3",
+              "start": 47,
+              "end": 56
+            },
+            {
+              "paragraphId": "p3",
+              "start": 58,
+              "end": 77
             }
           ],
           "scoring": {
@@ -638,17 +651,30 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학생회장: 그럼 범위를 조정해 보겠습니다. 정문 환영 현수막, 무대 뒤 배경막, 그리고 내년에도 문구를 바꿔 쓸 수 있는 안내 현수막 정도만 천으로 하고, 하루만 쓰는 동아리 부스 홍보막은 종이나 재사용 판넬로 대체하는 안은 어떨까요? 이렇게 하면 상징성이 큰 곳은 바꾸되 비용이 과도하게 늘지는 않을 것 같습니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "제작 단가가 높고",
+            "보관과 세탁 비용도 따로 들어갑니다"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "학생회장이 천으로 하자고 범위를 조정한 현수막을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 169
+              "paragraphId": "p4",
+              "start": 24,
+              "end": 33
+            },
+            {
+              "paragraphId": "p4",
+              "start": 35,
+              "end": 43
+            },
+            {
+              "paragraphId": "p4",
+              "start": 49,
+              "end": 74
             }
           ],
           "scoring": {
@@ -656,17 +682,47 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "환경동아리 대표: 그 안이면 저희도 수용 가능합니다. 대신 시범 운영이라고만 두면 흐지부지될 수 있으니, 사용 후 만족도와 실제 비용을 기록해 두는 절차가 필요합니다. 총무부가 견적과 지출을 정리하고, 저희는 보관 상태와 재사용 가능 여부를 점검해서 축제 뒤에 공동 보고서를 만드는 방식이면 좋겠습니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "정문 환영 현수막",
+            "무대 뒤 배경막",
+            "내년에도 문구를 바꿔 쓸 수 있는 안내 현수막"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "하루만 쓰는 동아리 부스 홍보막을 대신할 수단을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 187
+              "paragraphId": "p4",
+              "start": 106,
+              "end": 108
+            },
+            {
+              "paragraphId": "p4",
+              "start": 110,
+              "end": 116
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "종이",
+            "재사용 판넬"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "환경동아리 대표가 자신들이 점검하겠다고 한 대상을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 117,
+              "end": 133
             }
           ],
           "scoring": {
@@ -675,7 +731,39 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "총무부장: 좋습니다. 올해는 정문, 메인 무대, 재사용 가능한 안내 현수막만 천으로 제작하고, 나머지는 저비용 대체 수단을 쓰는 것으로 합의하겠습니다. 추가 예산은 학생회 예비비에서 일부 쓰되, 부족분은 무대 장식 예산을 조정하는 방안으로 검토하겠습니다. 회의록에는 시범 운영 범위, 비용 기록, 사후 평가 일정까지 함께 남기겠습니다."
+          "answerText": "보관 상태와 재사용 가능 여부"
+        },
+        {
+          "id": "q8",
+          "prompt": "회의록에 함께 남기기로 한 항목을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 149,
+              "end": 157
+            },
+            {
+              "paragraphId": "p6",
+              "start": 159,
+              "end": 164
+            },
+            {
+              "paragraphId": "p6",
+              "start": 166,
+              "end": 174
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "시범 운영 범위",
+            "비용 기록",
+            "사후 평가 일정"
+          ]
         }
       ]
     }

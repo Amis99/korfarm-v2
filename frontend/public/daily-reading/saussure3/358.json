@@ -850,13 +850,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "횡단보도 ( )을 낙서하지 마요.",
-          "answerText": "선",
-          "answerMatchMode": "EXACT",
+          "prompt": "길 위에서 낙서로 더럽히지 않아야 하는 것을 찾으시오.",
+          "answerText": "길 위의 하얀 선",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 34,
+              "start": 26,
               "end": 35
             }
           ],
@@ -869,14 +869,27 @@
         },
         {
           "id": "q2",
-          "prompt": "교통 ( )을 소중히 다룹니다.",
-          "answerText": "표지판",
-          "answerMatchMode": "EXACT",
+          "prompt": "소중하게 다루어야 할 교통 시설을 모두 찾으시오.",
+          "answerTexts": [
+            "교통 표지판",
+            "신호등"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 56,
+              "start": 53,
               "end": 59
+            },
+            {
+              "paragraphId": "p1",
+              "start": 62,
+              "end": 65
+            },
+            {
+              "paragraphId": "p3",
+              "start": 42,
+              "end": 45
             }
           ],
           "scoring": {
@@ -888,14 +901,41 @@
         },
         {
           "id": "q3",
-          "prompt": "( ) 있는 거리를 만듭시다.",
-          "answerText": "안전한",
-          "answerMatchMode": "EXACT",
+          "prompt": "안전한 거리를 만드는 마음을 찾으시오.",
+          "answerText": "공공기물을 아끼는 마음",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 92,
-              "end": 95
+              "start": 78,
+              "end": 90
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "버리지 말아야 할 것과 집에 가져간 것을 모두 찾으시오.",
+          "answerTexts": [
+            "쓰레기를 버리지 말아야 합니다",
+            "내가 가져온 휴지"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 9,
+              "end": 25
+            },
+            {
+              "paragraphId": "p2",
+              "start": 53,
+              "end": 62
             }
           ],
           "scoring": {

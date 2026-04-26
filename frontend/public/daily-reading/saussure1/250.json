@@ -435,9 +435,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "편지를 받는 친구?",
+          "prompt": "글쓴이가 편지를 보내는 친구의 이름이 무엇인지 본문에서 찾아보세요",
           "answerText": "민지",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -454,19 +454,14 @@
         },
         {
           "id": "q2",
-          "prompt": "나무가 많은 체험 장소?",
-          "answerText": "숲길",
-          "answerMatchMode": "EXACT",
+          "prompt": "숲길에서 도토리를 물고 가는 모습을 본 동물은 무엇인지 본문에서 찾아보세요",
+          "answerText": "다람쥐",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 41,
-              "end": 43
-            },
-            {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 2
+              "start": 8,
+              "end": 11
             }
           ],
           "scoring": {
@@ -478,14 +473,33 @@
         },
         {
           "id": "q3",
-          "prompt": "말린 잎이나 떨어진 잎?",
-          "answerText": "낙엽",
-          "answerMatchMode": "EXACT",
+          "prompt": "나무들이 색색의 옷으로 갈아입은 모습을 흉내말로 어떻게 표현했는지 본문에서 찾아보세요",
+          "answerText": "알록달록",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 102,
-              "end": 104
+              "start": 85,
+              "end": 89
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "낙엽이 길가에 정말 많이 쌓여 있는 모습을 흉내말로 어떻게 표현했는지 본문에서 찾아보세요",
+          "answerText": "수북이",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 111,
+              "end": 114
             }
           ],
           "scoring": {

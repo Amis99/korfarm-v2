@@ -571,11 +571,150 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 민수가 논의의 목적이나 초점을 어떻게 설정하는가?",
+          "prompt": "민수가 발표 준비를 미루는 이유로 처음 말한 부분을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
+              "start": 45,
+              "end": 64
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "어디서부터 정리해야 할지 모르겠어서"
+        },
+        {
+          "id": "q2",
+          "prompt": "지현이 민수의 상태를 요약한 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 19,
+              "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "자료는 있는데 시작 지점을 못 잡고 있다는 말"
+        },
+        {
+          "id": "q3",
+          "prompt": "민수가 발표 시간이 짧아서 고민하는 두 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 20,
+              "end": 24
+            },
+            {
+              "paragraphId": "p3",
+              "start": 25,
+              "end": 33
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "뭘 빼고",
+            "뭘 살려야 할지"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "민수가 중요한 것을 놓칠까 봐 하지 못하는 행동을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 79,
+              "end": 89
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "시작을 안 하게 돼"
+        },
+        {
+          "id": "q5",
+          "prompt": "지현이 자료 전체 대신 먼저 적어 보라고 한 것을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 69,
+              "end": 86
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "발표 목적에 맞는 핵심만 세 줄"
+        },
+        {
+          "id": "q6",
+          "prompt": "지현이 민수의 가장 큰 부담으로 짚은 점을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 133,
+              "end": 142
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "기준이 없다는 점"
+        },
+        {
+          "id": "q7",
+          "prompt": "민수가 더 큰 문제였다고 깨달은 것을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 56,
+              "end": 72
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "발표 기준을 먼저 못 세운 게"
+        },
+        {
+          "id": "q8",
+          "prompt": "지현이 옆에서 도와주겠다고 한 두 경우를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 62,
+              "end": 72
+            },
+            {
+              "paragraphId": "p6",
+              "start": 73,
               "end": 79
             }
           ],
@@ -584,98 +723,11 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "민수: 요즘 발표가 다가오는데 자꾸 준비를 미루게 돼. 자료를 모아 놓긴 했는데 어디서부터 정리해야 할지 모르겠어서 그냥 손을 못 대고 있어."
-        },
-        {
-          "id": "q2",
-          "prompt": "둘째 문단은 지현이 어떤 의견이나 판단을 제시하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 103
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지현: 준비를 안 한 게 아니라, 자료는 있는데 시작 지점을 못 잡고 있다는 말이네. 해야 한다는 건 알지만 막상 손을 대려면 더 복잡하게 느껴져서 미루게 되는 것 같다는 뜻으로 들려."
-        },
-        {
-          "id": "q3",
-          "prompt": "셋째 문단은 민수가 어떤 의견이나 판단을 제시하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 90
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "민수: 맞아. 발표 시간이 짧으니까 뭘 빼고 뭘 살려야 할지도 모르겠고, 괜히 정리했다가 중요한 걸 놓칠까 봐 더 손이 안 가. 그래서 아예 시작을 안 하게 돼."
-        },
-        {
-          "id": "q4",
-          "prompt": "넷째 문단은 지현이 어떤 점을 묻고 있는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 149
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지현: 중요한 걸 놓칠까 봐 시작 자체를 망설이고 있는 거구나. 그러면 자료를 전부 완성본으로 정리하려고 하지 말고, 먼저 발표 목적에 맞는 핵심만 세 줄로 적어 보는 건 어때? 네가 지금 가장 부담스러워하는 건 내용이 부족해서가 아니라 기준이 없다는 점인 것 같아."
-        },
-        {
-          "id": "q5",
-          "prompt": "다섯째 문단은 민수가 어떤 의견이나 판단을 제시하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 129
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "민수: 그렇게 들으니까 좀 정리가 된다. 지금은 자료가 너무 많아서 막막하다고만 생각했는데, 사실은 발표 기준을 먼저 못 세운 게 더 큰 문제였던 것 같아. 핵심을 먼저 쓰고 자료를 거기에 맞춰 골라 보면 시작할 수 있을 것 같아."
-        },
-        {
-          "id": "q6",
-          "prompt": "여섯째 문단은 지현이 어떤 의견이나 판단을 제시하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 95
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지현: 좋아. 그럼 오늘은 자료를 다듬는 것보다 핵심 문장 세 개를 먼저 정해 보자. 내가 옆에서 들어 보면서 내용이 너무 넓거나 겹치는 부분이 있으면 같이 정리해 줄게."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "내용이 너무 넓거나",
+            "겹치는 부분"
+          ]
         }
       ]
     }

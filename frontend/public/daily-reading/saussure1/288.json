@@ -396,20 +396,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "노란 잎이 예쁜 나무?",
-          "answerText": "은행나무",
-          "answerMatchMode": "EXACT",
+          "prompt": "민수에게 비밀 번호를 알려주어 학교 전체에 소문이 퍼지게 한 인물은 누구인지 찾아 적어 보세요",
+          "answerText": "준이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 71,
-              "end": 75
-            },
-            {
-              "paragraphId": "p2",
-              "start": 36,
-              "end": 40
-            }
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 67, "end": 69}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -420,20 +412,12 @@
         },
         {
           "id": "q2",
-          "prompt": "시끄럽고 어지러운 일?",
+          "prompt": "여러 사람이 모여 시끄럽고 어지럽게 일어난 일을 무엇이라고 할까요?",
           "answerText": "소동",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 157,
-              "end": 159
-            },
-            {
-              "paragraphId": "p2",
-              "start": 128,
-              "end": 130
-            }
+            {"paragraphId": "p1", "start": 157, "end": 159},
+            {"paragraphId": "p2", "start": 128, "end": 130}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -444,15 +428,26 @@
         },
         {
           "id": "q3",
-          "prompt": "시간이 담긴 신비한 틀?",
-          "answerText": "시간상자",
-          "answerMatchMode": "EXACT",
+          "prompt": "누군가 억지로 상자를 열려고 가져온 것이 무엇인지 찾아 적어 보세요",
+          "answerText": "도구",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 133,
-              "end": 137
-            }
+            {"paragraphId": "p2", "start": 16, "end": 18}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "아이들의 다툼 때문에 은행나무의 연약한 잎들에게 일어난 일이 무엇인지 찾아 적어 보세요",
+          "answerText": "바닥으로 우수수 떨어졌습니다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 50, "end": 65}
           ],
           "scoring": {
             "correctDeltaSec": 10,

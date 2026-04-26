@@ -552,9 +552,58 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "저마다 맡은 무엇이 있나요?",
+          "prompt": "함께 모여 사는 소중한 사람들을 가리키는 말이 무엇인지 글에서 찾아 모두 써 보세요",
+          "answerText": "가족",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p1",
+              "start": 28,
+              "end": 30
+            },
+            {
+              "paragraphId": "p1",
+              "start": 56,
+              "end": 58
+            },
+            {
+              "paragraphId": "p1",
+              "start": 110,
+              "end": 112
+            },
+            {
+              "paragraphId": "p2",
+              "start": 6,
+              "end": 8
+            },
+            {
+              "paragraphId": "p2",
+              "start": 85,
+              "end": 87
+            },
+            {
+              "paragraphId": "p2",
+              "start": 133,
+              "end": 135
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "우리 가족이 저마다 맡고 있는 것이 무엇인지 글에서 찾아 써 보세요",
           "answerText": "역할",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -570,30 +619,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "할 수 있는 무엇이 있습니나요?",
-          "answerText": "일",
-          "answerMatchMode": "EXACT",
+          "id": "q3",
+          "prompt": "우리 가족을 위해 회사에서 열심히 일하시는 분이 누구인지 글에서 찾아 써 보세요",
+          "answerText": "아버지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 72,
-              "end": 73
-            },
-            {
-              "paragraphId": "p1",
-              "start": 101,
-              "end": 102
-            },
-            {
-              "paragraphId": "p2",
-              "start": 20,
-              "end": 21
-            },
-            {
-              "paragraphId": "p2",
-              "start": 101,
-              "end": 102
+              "start": 48,
+              "end": 51
             }
           ],
           "scoring": {
@@ -604,15 +638,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "서로 무엇고 돕는 가족이에요인가요?",
-          "answerText": "아끼",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "내가 심부름을 잘하면 누가 무척 기뻐하시는지 글에서 찾아 써 보세요",
+          "answerText": "부모님",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 122,
-              "end": 124
+              "start": 67,
+              "end": 70
             }
           ],
           "scoring": {

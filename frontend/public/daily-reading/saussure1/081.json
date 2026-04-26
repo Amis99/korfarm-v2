@@ -552,59 +552,49 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "단단한 ( )을 뚫고 나옴.",
+          "prompt": "씨앗을 둘러싸고 있는 단단한 겉을 가리키는 단어를 지문에서 찾아 보세요.",
           "answerText": "껍질",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 63,
-              "end": 65
-            }
+            {"paragraphId": "p1", "start": 63, "end": 65}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "하늘 향해 ( )게 뻗습니다.",
-          "answerText": "곧게",
-          "answerMatchMode": "EXACT",
+          "prompt": "잎이 햇빛을 받아 만들어 내는, 식물이 자라는 데 필요한 것을 가리키는 단어를 지문에서 찾아 보세요.",
+          "answerText": "영양분",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 38,
-              "end": 40
-            }
+            {"paragraphId": "p2", "start": 65, "end": 68}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "( )분을 만드는 잎.",
-          "answerText": "영양",
-          "answerMatchMode": "EXACT",
+          "prompt": "싹이 자라면서 새로 생기는 식물의 부분 두 가지를 모두 찾아 보세요.",
+          "answerText": "줄기, 잎",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 65,
-              "end": 67
-            }
+            {"paragraphId": "p2", "start": 12, "end": 14},
+            {"paragraphId": "p2", "start": 24, "end": 26},
+            {"paragraphId": "p2", "start": 16, "end": 17},
+            {"paragraphId": "p2", "start": 55, "end": 56}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "어떤 일을 자세히 살펴보는 것을 뜻하는 단어를 지문에서 찾아 보세요.",
+          "answerText": "관찰",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 123, "end": 125}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         }
       ]

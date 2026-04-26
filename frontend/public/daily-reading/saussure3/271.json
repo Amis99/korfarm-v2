@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "주의 깊게 잘 들음은?",
-          "answerText": "경청했습니다",
-          "answerMatchMode": "EXACT",
+          "prompt": "조부모님 댁에 방문했을 때도 필요하다고 한 예절을 지문에서 찾으시오.",
+          "answerText": "차례를 지키는 예절",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 88,
-              "end": 94
+              "start": 16,
+              "end": 26
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "어른을 공손히 모심은?",
-          "answerText": "공경의",
-          "answerMatchMode": "EXACT",
+          "prompt": "식사를 하거나 선물을 받을 때 먼저 해야 할 일을 지문에서 찾으시오.",
+          "answerText": "어른을 먼저 모셔야 합니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
+              "paragraphId": "p1",
               "start": 50,
-              "end": 53
+              "end": 64
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "남을 대하는 바른 태도는?",
-          "answerText": "예의를",
-          "answerMatchMode": "EXACT",
+          "prompt": "먼저 하고 싶은 마음이 들어도 아름답다고 한 태도를 지문에서 찾으시오.",
+          "answerText": "양보하는 태도",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 71,
-              "end": 74
+              "start": 17,
+              "end": 24
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "우리를 성장시킨다고 한 습관을 지문에서 찾으시오.",
+          "answerText": "질서를 지키며 어른을 존중하는 습관",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 32,
+              "end": 51
             }
           ],
           "scoring": {

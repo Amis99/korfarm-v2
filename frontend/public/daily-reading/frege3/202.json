@@ -1098,7 +1098,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첨단 농업 시스템의 이름은 무엇인가요?",
+          "prompt": "혁신적인 대안으로 떠오른 첨단 농업 시스템을 찾으시오.",
           "answerText": "수직 농장(Vertical Farm)",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1116,19 +1116,14 @@
         },
         {
           "id": "q2",
-          "prompt": "실내 재배에 쓰는 빛은 무엇인가요?",
-          "answerText": "인공조명",
+          "prompt": "수직 농장의 재배 공간을 설명한 부분을 찾으시오.",
+          "answerText": "도심의 고층 빌딩이나 실내 공간에 층층이 밭을 만들어",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 178,
-              "end": 182
-            },
-            {
-              "paragraphId": "p4",
-              "start": 133,
-              "end": 137
+              "start": 129,
+              "end": 158
             }
           ],
           "scoring": {
@@ -1139,14 +1134,44 @@
         },
         {
           "id": "q3",
-          "prompt": "수직 농장의 가장 큰 무기로 설명한 말은 무엇인가요?",
-          "answerText": "극한의 효율성",
-          "answerMatchMode": "ANY",
+          "prompt": "컴퓨터 시스템과 인공지능이 식물 생장에 맞춰 자동 공급하는 요소를 모두 찾으시오.",
+          "answerTexts": [
+            "빛",
+            "온도",
+            "습도",
+            "영양분"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
+              "paragraphId": "p1",
+              "start": 165,
+              "end": 166
+            },
+            {
               "paragraphId": "p2",
-              "start": 37,
-              "end": 44
+              "start": 81,
+              "end": 82
+            },
+            {
+              "paragraphId": "p2",
+              "start": 84,
+              "end": 86
+            },
+            {
+              "paragraphId": "p4",
+              "start": 139,
+              "end": 141
+            },
+            {
+              "paragraphId": "p2",
+              "start": 88,
+              "end": 90
+            },
+            {
+              "paragraphId": "p2",
+              "start": 92,
+              "end": 95
             }
           ],
           "scoring": {
@@ -1157,7 +1182,7 @@
         },
         {
           "id": "q4",
-          "prompt": "소비자에게 공급하는 채소를 어떻게 표현했나요?",
+          "prompt": "소비자에게 공급할 수 있다고 한 채소를 찾으시오.",
           "answerText": "무농약 청정 채소",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1175,14 +1200,22 @@
         },
         {
           "id": "q5",
-          "prompt": "물 사용량을 얼마나 절약할 수 있다고 했나요?",
-          "answerText": "90%",
-          "answerMatchMode": "ANY",
+          "prompt": "수직 농장의 경제적 장벽을 모두 찾으시오.",
+          "answerTexts": [
+            "초기 투자 비용",
+            "막대한 전기 요금"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 110,
-              "end": 113
+              "paragraphId": "p4",
+              "start": 99,
+              "end": 107
+            },
+            {
+              "paragraphId": "p4",
+              "start": 156,
+              "end": 165
             }
           ],
           "scoring": {

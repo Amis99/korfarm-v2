@@ -552,19 +552,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "보물 찾기 ( )을 해요.",
-          "answerText": "게임",
-          "answerMatchMode": "EXACT",
+          "prompt": "회의에서 후보로 나와 토의한 두 가지 놀이 이름을 모두 지문에서 찾아 보세요.",
+          "answerText": "보물 찾기, 노래 부르기",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 32,
-              "end": 34
+              "start": 59,
+              "end": 64
             },
             {
-              "paragraphId": "p2",
-              "start": 12,
-              "end": 14
+              "paragraphId": "p1",
+              "start": 66,
+              "end": 72
             }
           ],
           "scoring": {
@@ -576,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "역할 ( )을 정했습니다.",
-          "answerText": "분담",
-          "answerMatchMode": "EXACT",
+          "prompt": "발표 순서를 정해 주어 회의가 평화롭게 흘러가게 한 사람을 지문에서 찾아 보세요.",
+          "answerText": "회의 진행자",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 34,
-              "end": 36
+              "paragraphId": "p1",
+              "start": 89,
+              "end": 95
             }
           ],
           "scoring": {
@@ -595,14 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "눈이 ( )처럼 반짝이에요.",
-          "answerText": "보석",
-          "answerMatchMode": "EXACT",
+          "prompt": "결정된 내용들을 칠판에 꼼꼼하게 적은 사람을 지문에서 찾아 보세요.",
+          "answerText": "기록자",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 118,
+              "end": 121
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "최종적으로 가장 먼저 하기로 한 놀이 이름을 지문에서 찾아 보세요.",
+          "answerText": "보물 찾기 게임",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 133,
-              "end": 135
+              "start": 6,
+              "end": 14
             }
           ],
           "scoring": {

@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "하늘에 ( )가 펄럭이에요.",
-          "answerText": "만국기",
-          "answerMatchMode": "EXACT",
+          "prompt": "여러 사람이 마음과 힘을 하나로 합쳐서 일하는 것을 뜻하는 단어를 지문에서 찾아 보세요.",
+          "answerText": "협동",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 59,
-              "end": 62
+              "paragraphId": "p2",
+              "start": 77,
+              "end": 79
             }
           ],
           "scoring": {
@@ -571,14 +571,19 @@
         },
         {
           "id": "q2",
-          "prompt": "( ) 함성 소리가 남.",
-          "answerText": "기운찬",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 운동회에서 한 두 가지 시합을 모두 찾아 보세요.",
+          "answerText": "달리기, 줄다리기",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 102,
-              "end": 105
+              "start": 85,
+              "end": 88
+            },
+            {
+              "paragraphId": "p2",
+              "start": 13,
+              "end": 17
             }
           ],
           "scoring": {
@@ -590,14 +595,38 @@
         },
         {
           "id": "q3",
-          "prompt": "( )의 소중함을 느낌.",
-          "answerText": "협동",
-          "answerMatchMode": "EXACT",
+          "prompt": "운동회에서 응원할 때 나뉘어진 두 팀의 이름을 모두 찾아 보세요.",
+          "answerText": "청군, 백군",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 26,
+              "end": 28
+            },
+            {
+              "paragraphId": "p1",
+              "start": 30,
+              "end": 32
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "오후에 글쓴이가 줄다리기를 함께 한 사람이 누구인지 지문에서 찾아 보세요.",
+          "answerText": "부모님",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 77,
-              "end": 79
+              "start": 5,
+              "end": 8
             }
           ],
           "scoring": {

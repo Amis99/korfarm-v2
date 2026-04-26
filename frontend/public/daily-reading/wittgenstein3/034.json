@@ -1315,114 +1315,190 @@
     },
     "confirm": {
       "questions": [
-        {
-          "id": "q1",
-          "prompt": "1문단은 정보 비대칭과 역선택라는 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 214
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q1",
+              "prompt":  "정보 비대칭이 생기는 조건을 지문에서 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  119,
+                                       "end":  147
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "거래에 필요한 정보의 양과 질이 당사자마다 다를 때"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "시장 거래를 설명하는 이론은 흔히 거래 당사자들이 필요한 정보를 충분히 안다고 가정한다. 그러나 실제 시장에서는 정보를 얻는 데 시간과 비용이 들기 때문에 누군가는 더 많이 알고, 누군가는 덜 알게 된다. 이렇게 거래에 필요한 정보의 양과 질이 당사자마다 다를 때 정보 비대칭이 생긴다. 이 차이는 단순한 불편이 아니라 거래 상대를 잘못 고르게 만드는 구조적 문제로 이어질 수 있다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 첫 핵심 기준이나 원리를 어떻게 설명하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 220
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q2",
+              "prompt":  "보험사가 완벽하게 파악하기 어려운 가입자 관련 정보를 지문에서 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  76,
+                                       "end":  94
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "가입자의 건강 상태나 사고 가능성"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "정보 비대칭이 특히 심각해지는 경우는 한쪽이 상품의 품질이나 상대방의 위험 수준을 제대로 모를 때이다. 보험 시장을 예로 들면 보험사는 가입자의 건강 상태나 사고 가능성을 완벽하게 파악하기 어렵다. 그래서 평균적 위험을 기준으로 보험료를 책정하면 위험이 낮은 사람에게는 비싸고 위험이 높은 사람에게는 상대적으로 싸게 느껴진다. 그 결과 위험이 큰 사람만 더 적극적으로 몰리는 역선택이 발생한다."
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단은 이어지는 작동 방식이나 예시를 무엇으로 보여 주는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 201
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q3",
+              "prompt":  "평균적 위험을 기준으로 보험료를 책정한 결과 발생하는 현상을 지문에서 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  188,
+                                       "end":  213
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "위험이 큰 사람만 더 적극적으로 몰리는 역선택"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "역선택이 반복되면 시장은 점점 불리한 방향으로 움직인다. 품질이 좋거나 위험이 낮은 쪽은 거래 조건이 자신에게 불리하다고 느껴 시장을 떠나고, 반대로 품질이 낮거나 위험이 높은 쪽은 시장에 남으려는 유인이 커진다. 그러면 평균 조건은 다시 나빠지고 가격이나 보험료는 더 오르게 된다. 결국 정보 부족 때문에 거래가 줄거나 시장 전체의 효율이 무너질 수도 있다."
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 218
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q4",
+              "prompt":  "역선택이 반복될 때 시장을 떠나는 쪽과 남으려는 쪽의 특성을 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p3",
+                                       "start":  32,
+                                       "end":  48
+                                   },
+                                   {
+                                       "paragraphId":  "p3",
+                                       "start":  84,
+                                       "end":  100
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "품질이 좋거나 위험이 낮은 쪽",
+                                  "품질이 낮거나 위험이 높은 쪽"
+                              ]
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 문제를 줄이기 위해 정보를 많이 가진 쪽은 신호를 보낼 수 있다. 노동 시장에서 학위나 자격증이 생산성을 알리는 신호로 쓰이는 것이 대표적이다. 다만 아무 신호나 의미를 가지는 것은 아니다. 정말 우수한 사람일수록 그 신호를 보내는 비용이 낮고, 그렇지 않은 사람은 쉽게 모방하기 어려워야 신호가 구별 기능을 할 수 있다. 상품 시장에서 긴 품질 보증이 신뢰를 주는 것도 같은 원리이다."
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단은 이 주제가 낳는 효과나 쟁점을 어떤 방향으로 확장하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 219
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q5",
+              "prompt":  "정보를 많이 가진 쪽이 보낼 수 있는 신호의 예를 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p4",
+                                       "start":  47,
+                                       "end":  54
+                                   },
+                                   {
+                                       "paragraphId":  "p4",
+                                       "start":  191,
+                                       "end":  198
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "학위나 자격증",
+                                  "긴 품질 보증"
+                              ]
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "반대로 정보를 적게 가진 쪽은 상대가 스스로 특성을 드러내도록 선택지를 설계할 수 있다. 이를 선별이라고 한다. 보험사가 보장 범위와 보험료가 다른 여러 상품을 제시하면, 가입자는 자신의 위험 수준에 더 맞는 상품을 고르게 되고 그 선택 자체가 정보가 된다. 여기서 핵심은 질문만 많이 던지는 것이 아니라, 상대가 어떤 선택을 하느냐에 따라 숨겨진 특성이 드러나도록 제도를 설계하는 데 있다."
-        },
-        {
-          "id": "q6",
-          "prompt": "6문단은 정보 비대칭과 역선택라는 주제의 의미를 어떤 관점에서 정리하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 228
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q6",
+              "prompt":  "상대가 스스로 특성을 드러내도록 선택지를 설계하는 방식을 지문에서 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  53,
+                                       "end":  55
+                                   },
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  194,
+                                       "end":  196
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "선별"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "반복 거래에서는 평판도 중요한 장치가 된다. 온라인 거래의 후기와 평점은 판매자의 품질과 신뢰도를 간접적으로 보여 주어 정보 비대칭을 완화한다. 물론 평판이 항상 정확한 것은 아니지만, 거래가 누적될수록 시장 참가자들은 이전 기록을 근거로 상대를 더 잘 가려낼 수 있다. 결국 정보 비대칭과 역선택의 문제는 완전히 사라지지 않더라도, 신호 발송과 선별, 평판 구축 같은 장치를 통해 상당 부분 줄일 수 있다."
-        }
+          {
+              "id":  "q7",
+              "prompt":  "선별에서 핵심이 되는 제도 설계 방향을 지문에서 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  172,
+                                       "end":  204
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "상대가 어떤 선택을 하느냐에 따라 숨겨진 특성이 드러나도록"
+          },
+          {
+              "id":  "q8",
+              "prompt":  "정보 비대칭과 역선택의 문제를 줄이는 장치를 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  187,
+                                       "end":  192
+                                   },
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  53,
+                                       "end":  55
+                                   },
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  194,
+                                       "end":  196
+                                   },
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  198,
+                                       "end":  203
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "신호 발송",
+                                  "선별",
+                                  "평판 구축"
+                              ]
+          }
       ]
     }
   }

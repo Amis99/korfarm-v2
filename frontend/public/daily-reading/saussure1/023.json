@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "길다의 반대말은 ( )이에요.",
+          "prompt": "지문에서 '길다'의 반대말이 무엇이라고 했는지 찾아 보세요.",
           "answerText": "짧다",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -571,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "어휘력이 ( ) 자라납니다.",
-          "answerText": "쑥쑥",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 '가볍다'의 반대말이 무엇이라고 했는지 찾아 보세요.",
+          "answerText": "무겁다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 46,
-              "end": 48
+              "start": 13,
+              "end": 16
             }
           ],
           "scoring": {
@@ -590,14 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "뜻이 ( )해집니다.",
-          "answerText": "분명",
-          "answerMatchMode": "EXACT",
+          "prompt": "반대말 공부를 하면 어휘력이 어떻게 된다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "어휘력이 쑥쑥 자라게 됩니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 79,
-              "end": 81
+              "start": 41,
+              "end": 56
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "낱말의 관계를 배우면 무엇이 더 즐거워진다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "책 읽기가 더 즐거워요",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 123,
+              "end": 135
             }
           ],
           "scoring": {

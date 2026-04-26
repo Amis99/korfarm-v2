@@ -571,7 +571,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "본문에서 '길 끝이 나를 당긴다'를 모두 찾으시오.",
+          "prompt": "명암리에 머물 때 길의 빛이 화자에게 어떻게 작용했는지 나타내는 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -589,11 +589,29 @@
         },
         {
           "id": "q2",
-          "prompt": "2연 전체에서 명암리가 화자에게 주는 작용으로 가장 알맞은 것은?",
+          "prompt": "밝고 어두운 것이 단순한 빛만은 아니라고 말하는 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
+              "start": 10,
+              "end": 17
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "빛만이 아니다"
+        },
+        {
+          "id": "q3",
+          "prompt": "명암리가 마음 깊은 곳까지 일으키는 변화를 나타내는 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 44,
               "end": 58
             }
           ],
@@ -603,34 +621,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "밝고 어두운 것이 빛만이 아니다\n내 안의 샛길들 뒷길들\n명암리는 나를 부추기듯 마음의 구석까지 뭉클해진다"
-        },
-        {
-          "id": "q3",
-          "prompt": "3연의 바람소리와 물소리가 드러내는 효과로 가장 알맞은 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 59
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "길은 모를수록 새롭고\n새 길은 새로워서 낯설다\n낯설게 만나는 바람소리 물소리\n그 소리 기막히다 새삼 놀란다"
+          "answerText": "마음의 구석까지 뭉클해진다"
         },
         {
           "id": "q4",
-          "prompt": "본문에서 '비추다가 낯선 길 오래 바라본다'를 모두 찾으시오.",
+          "prompt": "새로운 길에서 낯설게 만나는 두 소리를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 53,
-              "end": 70
+              "paragraphId": "p3",
+              "start": 34,
+              "end": 38
+            },
+            {
+              "paragraphId": "p3",
+              "start": 39,
+              "end": 42
             }
           ],
           "scoring": {
@@ -638,17 +643,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "비추다가 낯선 길 오래 바라본다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "바람소리",
+            "물소리"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5연의 '길 속의 길'에 대한 이해로 가장 알맞은 것은?",
+          "prompt": "모르는 길이 어디까지 이어지는지 나타내는 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 61,
-              "end": 67
+              "paragraphId": "p4",
+              "start": 26,
+              "end": 35
             }
           ],
           "scoring": {
@@ -657,15 +665,59 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "길 속의 길"
+          "answerText": "발끝까지 따라온다"
         },
         {
           "id": "q6",
-          "prompt": "6연 전체에서 화자의 태도로 가장 알맞은 것은?",
+          "prompt": "빛이 서 있는 위치를 나타내는 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 58,
+              "end": 65
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "낯선 길 오래"
+        },
+        {
+          "id": "q7",
+          "prompt": "길 속에서 사람들의 관계가 어떻게 된다고 했는지 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 71,
+              "end": 75
+            },
+            {
+              "paragraphId": "p5",
+              "start": 78,
+              "end": 84
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "헤어지고",
+            "만나야 한다"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "화자가 명암리에 가서 무엇을 한다고 했는지 나타내는 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
+              "start": 52,
               "end": 60
             }
           ],
@@ -675,7 +727,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "밝고도 어두운 것이 빛뿐일까\n소리치며 바람이 지나간다\n언제부터 내 안에서 웅크린 길\n명암리에 가서 풀어놓는다"
+          "answerText": "가서 풀어놓는다"
         }
       ]
     }

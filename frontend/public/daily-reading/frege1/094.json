@@ -913,14 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "도심 온도가 주변보다 높아지는 현상은 무엇인가요?",
-          "answerText": "도시 열섬 현상",
+          "prompt": "도시 열섬 현상의 정의를 찾으시오.",
+          "answerText": "높은 건물과 자동차가 꽉 찬 도심 한가운데의 온도가 주변 지역보다 펄펄 끓는 것처럼 더 높게 나타나는 것",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 138,
-              "end": 146
+              "start": 78,
+              "end": 136
             }
           ],
           "scoring": {
@@ -931,13 +931,13 @@
         },
         {
           "id": "q2",
-          "prompt": "도시를 뜨겁게 만드는 큰 원인으로 든 시설은 무엇인가요?",
-          "answerText": "아스팔트 도로와 단단한 콘크리트 건물",
+          "prompt": "도시가 뜨거운 섬으로 변하는 가장 큰 원인을 찾으시오.",
+          "answerText": "시커먼 아스팔트 도로와 단단한 콘크리트 건물",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 44,
+              "start": 40,
               "end": 64
             }
           ],
@@ -949,14 +949,22 @@
         },
         {
           "id": "q3",
-          "prompt": "자동차와 건물에서 나오는 뜨거운 열을 무엇이라고 했나요?",
-          "answerText": "인공 열",
-          "answerMatchMode": "ANY",
+          "prompt": "아스팔트와 콘크리트가 열을 머금고 내보내는 과정을 모두 찾으시오.",
+          "answerTexts": [
+            "태양의 뜨거운 열을 스펀지처럼 잔뜩 빨아들여 몸속에 깊이 가두어 버린다",
+            "난로처럼 밖으로 훅훅 계속 뿜어내어 밤에도 푹푹 찌게 만든다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 40,
-              "end": 44
+              "paragraphId": "p2",
+              "start": 145,
+              "end": 184
+            },
+            {
+              "paragraphId": "p2",
+              "start": 213,
+              "end": 246
             }
           ],
           "scoring": {
@@ -967,14 +975,22 @@
         },
         {
           "id": "q4",
-          "prompt": "도시를 식히기 위한 방법으로 든 정원은 무엇인가요?",
-          "answerText": "옥상 정원",
-          "answerMatchMode": "ANY",
+          "prompt": "인공 열을 내뿜는 원인을 모두 찾으시오.",
+          "answerTexts": [
+            "에어컨 실외기",
+            "자동차 엔진에서 나오는 뜨거운 배기가스"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
+              "paragraphId": "p3",
               "start": 82,
-              "end": 87
+              "end": 89
+            },
+            {
+              "paragraphId": "p3",
+              "start": 135,
+              "end": 156
             }
           ],
           "scoring": {
@@ -985,14 +1001,34 @@
         },
         {
           "id": "q5",
-          "prompt": "가까운 거리에서 타자고 한 이동 수단은 무엇인가요?",
-          "answerText": "자전거",
-          "answerMatchMode": "ANY",
+          "prompt": "열섬 현상을 해결하기 위한 실천을 모두 찾으시오.",
+          "answerTexts": [
+            "옥상 정원",
+            "물이 잘 스며드는 특별하고 시원한 도로",
+            "에어컨 온도를 조금 올리고",
+            "가까운 거리는 자전거를 타는 작은 실천들"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 158,
-              "end": 161
+              "start": 82,
+              "end": 87
+            },
+            {
+              "paragraphId": "p4",
+              "start": 101,
+              "end": 122
+            },
+            {
+              "paragraphId": "p4",
+              "start": 135,
+              "end": 149
+            },
+            {
+              "paragraphId": "p4",
+              "start": 150,
+              "end": 172
             }
           ],
           "scoring": {

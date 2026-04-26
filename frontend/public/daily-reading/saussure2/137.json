@@ -561,19 +561,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "어떤 일을 할 때 지켜야 할 앞뒤의 차례나 과정은?",
-          "answerText": "순서",
+          "prompt": "먼저 바닥에 흩어진 무엇을 제자리에 정리하는지 지문에서 찾으시오.",
+          "answerText": "장난감과 책",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 16,
-              "end": 18
-            },
-            {
-              "paragraphId": "p3",
-              "start": 62,
-              "end": 64
+              "start": 37,
+              "end": 43
             }
           ],
           "scoring": {
@@ -584,14 +579,50 @@
         },
         {
           "id": "q2",
-          "prompt": "탁한 공기를 밖으로 빼내고 맑은 공기로 바꾸어 채우는 일은?",
-          "answerText": "환기",
+          "prompt": "물티슈를 뽑아서 무엇을 깨끗하게 닦는지 지문에서 찾으시오.",
+          "answerText": "책상 위",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 14,
+              "end": 18
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "지우개 가루와 먼지가 사라지면 책상이 어떻게 된다고 했는지 지문에서 찾으시오.",
+          "answerText": "아주 반짝거려요",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 51,
+              "end": 59
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "창문을 활짝 열고 어떤 공기가 들어오게 하는지 지문에서 찾으시오.",
+          "answerText": "맑은 공기",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 56,
-              "end": 58
+              "start": 41,
+              "end": 46
             }
           ],
           "scoring": {

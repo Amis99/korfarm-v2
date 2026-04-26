@@ -557,19 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "암탉 잎싹이 정성껏 품어 부화시킨 알에서 태어난 아기 동물의 종류는?",
-          "answerText": "아기 오리",
-          "answerMatchMode": "EXACT",
+          "prompt": "잎싹이 알을 깨고 나온 아기 오리를 만난 장소를 지문에서 찾으시오.",
+          "answerText": "숲속",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 39,
-              "end": 44
-            },
-            {
-              "paragraphId": "p1",
-              "start": 57,
-              "end": 62
+              "start": 0,
+              "end": 2
             }
           ],
           "scoring": {
@@ -581,9 +576,9 @@
         },
         {
           "id": "q2",
-          "prompt": "잎싹이 아들에게 지어 준 이름으로, 머리 깃털의 특징을 따서 만든 명칭은?",
+          "prompt": "잎싹이 아기 오리에게 지어 준 예쁜 이름을 지문에서 찾으시오.",
           "answerText": "초록머리",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -630,14 +625,41 @@
         },
         {
           "id": "q3",
-          "prompt": "겨울이 되어 숲을 방문한 무리로, 초록머리가 자신의 동족임을 깨닫게 해 준 동물들은?",
-          "answerText": "청둥오리 떼",
-          "answerMatchMode": "EXACT",
+          "prompt": "초록머리가 자라면서 깨닫고 고민하기 시작한 두 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "오리라는 사실",
+            "정체성"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 22,
+              "end": 29
+            },
+            {
+              "paragraphId": "p2",
+              "start": 35,
+              "end": 38
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "잎싹과 초록머리가 이별을 맞이하며 확인한 것을 지문에서 찾으시오.",
+          "answerText": "서로의 사랑",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 7,
-              "end": 13
+              "start": 98,
+              "end": 104
             }
           ],
           "scoring": {

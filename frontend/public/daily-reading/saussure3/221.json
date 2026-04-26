@@ -587,9 +587,28 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "병을 일으키는 작은 생물은?",
+          "prompt": "음식을 먹기 전에 해야 할 일을 나타낸 어구를 지문에서 찾으시오.",
+          "answerText": "손을 깨끗하게 씻어야 합니다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 16,
+              "end": 31
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "손에 묻은 것 중 없애야 한다고 한 대상을 지문에서 찾으시오.",
           "answerText": "세균을",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -605,15 +624,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "맑고 깨끗한 상태를 뜻함?",
-          "answerText": "청결을",
-          "answerMatchMode": "EXACT",
+          "id": "q3",
+          "prompt": "청결을 유지하는 행동이 무엇의 첫걸음인지 지문에서 찾으시오.",
+          "answerText": "식사 예절",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 31,
-              "end": 34
+              "start": 44,
+              "end": 49
             }
           ],
           "scoring": {
@@ -624,15 +643,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "지켜야 할 행동 방식은?",
-          "answerText": "규칙을",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "즐거운 식사 시간을 만드는 예절을 지문에서 찾으시오.",
+          "answerText": "배려하는 예절",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 11,
-              "end": 14
+              "start": 60,
+              "end": 67
             }
           ],
           "scoring": {

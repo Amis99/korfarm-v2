@@ -571,12 +571,38 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "중심 대상은 무엇인가요?",
+          "prompt": "화자의 정성을 과장해 드러내는 행동을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 6,
-              "end": 16
+              "start": 19,
+              "end": 32
+            },
+            {
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "심간(心肝)을 떼어 내고",
+            "뼈를 온통 다 갈아도"
+          ]
+        },
+        {
+          "id": "q2",
+          "prompt": "깊은 정성에도 늦어 간다고 한 대상을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 10,
+              "end": 12
             }
           ],
           "scoring": {
@@ -585,11 +611,11 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "기울여 말씀을 드릴"
+          "answerText": "가약"
         },
         {
-          "id": "q2",
-          "prompt": "이렇듯 깊은 정성 가약이 늦어 가니 이팔 청춘 고운 무엇 비단 잠옷 옥침병에 향내가 점점 적다?",
+          "id": "q3",
+          "prompt": "청춘이 쇠해 가는 모습을 나타낸 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -606,13 +632,18 @@
           "answerText": "눈썹 반이나 바래었네"
         },
         {
-          "id": "q3",
-          "prompt": "주요 소재는 무엇인가요?",
+          "id": "q4",
+          "prompt": "세밑의 근심 속에서 시들거나 늙어 가는 대상을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 10
+              "start": 17,
+              "end": 24
+            },
+            {
+              "paragraphId": "p3",
+              "start": 25,
+              "end": 34
             }
           ],
           "scoring": {
@@ -620,16 +651,24 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "하물며 세밑에 근심"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "초목이 시들고",
+            "미인도 늙어 가니"
+          ]
         },
         {
-          "id": "q4",
-          "prompt": "중요한 기준은 무엇인가요?",
+          "id": "q5",
+          "prompt": "거문고로 타는 곡명과 연주 방식을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 23,
+              "start": 17,
+              "end": 25
+            },
+            {
+              "paragraphId": "p4",
+              "start": 27,
               "end": 33
             }
           ],
@@ -638,35 +677,46 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "곡조를 우조로 슬피"
-        },
-        {
-          "id": "q5",
-          "prompt": "글에서 설명한 것은 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 49,
-              "end": 61
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "위에 부디부디 느끼시리"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "장상사 한 곡조",
+            "우조로 슬피"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "문단의 초점은 무엇인가요?",
+          "prompt": "'-듯'을 써서 소리를 비유한 표현을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 53,
-              "end": 65
+              "paragraphId": "p4",
+              "start": 37,
+              "end": 46
+            },
+            {
+              "paragraphId": "p4",
+              "start": 47,
+              "end": 58
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "쌍봉이 넘노는 듯",
+            "고학이 울고 가는 듯"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "장풍이 임 계신 데 돌아가면 임이 느끼기를 바라는 장소를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 42,
+              "end": 51
             }
           ],
           "scoring": {
@@ -675,7 +725,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "되어 수홍하며 기다리려"
+          "answerText": "한밤중 베개 위에"
+        },
+        {
+          "id": "q8",
+          "prompt": "평생 우러르는 대상의 비유적 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 13,
+              "end": 22
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "하늘 같은 내 님"
         }
       ]
     }

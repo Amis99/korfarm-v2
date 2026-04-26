@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "남을 도와 정성을 다함?",
-          "answerText": "정성이",
-          "answerMatchMode": "EXACT",
+          "prompt": "운동회 날 큰 소리로 응원해 준 사람을 가리키는 말을 찾으시오.",
+          "answerText": "어머니",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 48,
-              "end": 51
+              "start": 43,
+              "end": 46
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "보석 같은 귀한 물건은?",
-          "answerText": "보물임",
-          "answerMatchMode": "EXACT",
+          "prompt": "편지에 정성껏 적은 순간들을 나타내는 어구를 찾으시오.",
+          "answerText": "행복했던 순간들",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 54,
-              "end": 57
+              "paragraphId": "p1",
+              "start": 65,
+              "end": 73
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "지켜야 할 약속이나 마음?",
-          "answerText": "다짐을",
-          "answerMatchMode": "EXACT",
+          "prompt": "편지를 통해 전하고 싶었던 마음을 나타내는 어구를 찾으시오.",
+          "answerText": "고마운 마음",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 72
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "우리 집을 더 밝고 건강하게 만드는 것을 나타내는 어구를 찾으시오.",
+          "answerText": "가족 사랑",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 22,
-              "end": 25
+              "start": 61,
+              "end": 66
             }
           ],
           "scoring": {

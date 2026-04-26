@@ -571,12 +571,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 기자가 논의의 목적이나 초점을 어떻게 설정하는가?",
+          "prompt": "올해 복지 예산 가운데 가장 큰 비중을 차지한 항목을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 207
+              "start": 123,
+              "end": 132
+            },
+            {
+              "paragraphId": "p2",
+              "start": 48,
+              "end": 57
             }
           ],
           "scoring": {
@@ -585,16 +590,31 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "기자: 오늘은 학생회 복지부장 민재 학생을 만나 올해 복지 예산이 어디에 쓰였는지 들어보겠습니다. 먼저 올해 복지 예산 가운데 가장 큰 비중을 차지한 항목이 무엇인지 설명해 주세요. 민재: 전체 예산에서 가장 큰 비중은 학습실 환경 개선에 배정됐습니다. 의자 교체와 조명 보강, 콘센트 확충에 예산이 집중되었고, 나머지는 보건용품과 휴게 공간 정비에 나누어 사용했습니다."
+          "answerText": "학습실 환경 개선"
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 기자가 어떤 점을 묻고 있는가?",
+          "prompt": "학습실 환경 개선에 예산이 집중된 세 항목을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 236
+              "paragraphId": "p1",
+              "start": 142,
+              "end": 147
+            },
+            {
+              "paragraphId": "p1",
+              "start": 149,
+              "end": 154
+            },
+            {
+              "paragraphId": "p1",
+              "start": 156,
+              "end": 162
+            },
+            {
+              "paragraphId": "p4",
+              "start": 148,
+              "end": 153
             }
           ],
           "scoring": {
@@ -602,17 +622,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "기자: 학생들 사이에서는 학습실보다 휴게 공간을 먼저 손봐야 한다는 의견도 있었는데, 학습실 환경 개선을 우선순위로 둔 이유가 있습니까? 민재: 설문 조사에서 가장 많은 불만이 나온 곳이 학습실이었기 때문입니다. 특히 오래 앉아 있으면 허리가 아프다는 의견과 좌석마다 전원 사용이 어렵다는 의견이 반복해서 나왔습니다. 그래서 여러 항목을 한꺼번에 조금씩 바꾸기보다, 불편이 가장 큰 곳을 먼저 정비하는 방향으로 정했습니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "의자 교체",
+            "조명 보강",
+            "콘센트 확충"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 기자가 어떤 점을 묻고 있는가?",
+          "prompt": "학습실 환경 개선을 우선순위로 둔 이유를 나타낸 문장을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 219
+              "paragraphId": "p2",
+              "start": 81,
+              "end": 118
             }
           ],
           "scoring": {
@@ -621,16 +645,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "기자: 그렇다면 예산이 특정 공간에 치우쳤다는 비판에는 어떻게 답하겠습니까? 민재: 그 비판이 완전히 틀렸다고 생각하지는 않습니다. 다만 이번 배정은 모든 공간을 동시에 만족시키기 어려운 상황에서 우선순위를 정한 결과였습니다. 학생회는 설문 결과와 이용 빈도, 안전 문제를 함께 검토했고, 다음 학기에는 휴게 공간과 체육 관련 시설을 별도 안건으로 다시 논의하겠다는 계획도 함께 공개했습니다."
+          "answerText": "설문 조사에서 가장 많은 불만이 나온 곳이 학습실이었기 때문입니다."
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 기자가 어떤 점을 묻고 있는가?",
+          "prompt": "설문에서 반복해서 나온 두 의견을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 204
+              "paragraphId": "p2",
+              "start": 122,
+              "end": 143
+            },
+            {
+              "paragraphId": "p2",
+              "start": 145,
+              "end": 164
             }
           ],
           "scoring": {
@@ -638,17 +667,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "기자: 실제 집행 이후에 학생들이 체감하는 변화도 있었나요? 민재: 가장 큰 변화는 학습실 체류 시간이 늘었다는 점입니다. 예전에는 조명이 어둡고 자리마다 불편이 달라서 짧게만 이용하는 학생이 많았는데, 지금은 저녁 자율 학습 때도 자리가 더 오래 유지됩니다. 또 의자 교체 후 허리 통증 민원이 줄었고, 충전 문제 때문에 자리를 옮기는 경우도 확실히 감소했습니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "오래 앉아 있으면 허리가 아프다는 의견",
+            "좌석마다 전원 사용이 어렵다는 의견"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 기자가 어떤 점을 묻고 있는가?",
+          "prompt": "예산이 특정 공간에 치우쳤다는 비판에 대해 민재가 먼저 밝힌 입장을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 207
+              "paragraphId": "p3",
+              "start": 47,
+              "end": 73
             }
           ],
           "scoring": {
@@ -657,16 +689,48 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "기자: 아직 해결되지 않은 점도 있을 것 같습니다. 민재: 맞습니다. 학습실 안에서도 창가 쪽 소음 문제는 여전히 남아 있고, 휴게 공간은 좌석 배치가 불편하다는 의견이 많습니다. 그래서 다음 설문에서는 단순 만족도만 묻지 않고, 공간별 문제를 더 구체적으로 적게 하려고 합니다. 그래야 예산을 배정할 때 학생들이 왜 그런 요구를 하는지까지 함께 읽을 수 있다고 봅니다."
+          "answerText": "그 비판이 완전히 틀렸다고 생각하지는 않습니다."
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 기자가 어떤 점을 묻고 있는가?",
+          "prompt": "학생회가 우선순위를 정할 때 함께 검토한 기준을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 234
+              "paragraphId": "p3",
+              "start": 132,
+              "end": 137
+            },
+            {
+              "paragraphId": "p3",
+              "start": 139,
+              "end": 144
+            },
+            {
+              "paragraphId": "p3",
+              "start": 146,
+              "end": 151
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "설문 결과",
+            "이용 빈도",
+            "안전 문제"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "실제 집행 이후 가장 큰 변화로 제시된 내용을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 47,
+              "end": 64
             }
           ],
           "scoring": {
@@ -675,7 +739,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "기자: 마지막으로 학생들에게 전하고 싶은 말이 있다면요? 민재: 예산은 결국 학생들의 요구를 얼마나 정확히 모으느냐에 따라 쓰임이 달라집니다. 결과만 보고 만족이나 불만을 말하는 것도 중요하지만, 그 전에 어떤 문제가 가장 시급한지 의견을 구체적으로 남겨 주면 다음 배정이 더 정교해질 수 있습니다. 학생회도 집행 결과를 공개하는 데서 그치지 않고, 왜 그런 선택을 했는지 설명하는 방식까지 더 분명하게 보완하겠습니다."
+          "answerText": "학습실 체류 시간이 늘었다는 점"
+        },
+        {
+          "id": "q8",
+          "prompt": "다음 배정이 더 정교해질 수 있는 조건을 나타낸 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 115,
+              "end": 145
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "어떤 문제가 가장 시급한지 의견을 구체적으로 남겨 주면"
         }
       ]
     }

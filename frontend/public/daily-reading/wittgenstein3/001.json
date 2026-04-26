@@ -1122,12 +1122,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "시민 불복종의 핵심이 위법성 자체가 아니라 더 높은 차원의 정의를 호소하려는 목적에 있다고 밝힌 부분은 어디인가?",
+          "prompt": "시민 불복종은 어떤 법이나 정책이 어떠하다고 판단할 때 하는 행위인지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 116,
-              "end": 177
+              "start": 55,
+              "end": 66
             }
           ],
           "scoring": {
@@ -1136,16 +1136,75 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "따라서 시민 불복종의 핵심은 위법성 자체가 아니라, 위법을 통해 더 높은 차원의 정의를 호소하려는 목적에 있다"
+          "answerText": "부당하다고 판단할 때"
         },
         {
           "id": "q2",
-          "prompt": "정당화 조건으로 공적 문제와의 관련성, 상위 규범에 대한 신념을 함께 제시한 부분은 어디인가?",
+          "prompt": "시민 불복종의 목적은 부당함을 어디에 드러내고 무엇을 요구하는 것인지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 70,
+              "end": 95
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "부당함을 사회에 드러내고 시정을 요구하기 위해"
+        },
+        {
+          "id": "q3",
+          "prompt": "불복종의 이유가 개인적 편의나 사익이 아니라 무엇과 연결되어 있어야 한다고 했는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 29,
-              "end": 143
+              "start": 57,
+              "end": 75
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "공적 문제와 연결되어 있어야 한다"
+        },
+        {
+          "id": "q4",
+          "prompt": "법을 어기는 사람이 자신의 행동을 무엇에 비추어 부당하다고 믿어야 한다고 했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 105,
+              "end": 128
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "보편적 도덕, 기본권 보장 같은 상위 규범"
+        },
+        {
+          "id": "q5",
+          "prompt": "시민 불복종이 동반하는 두 가지 성격을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 11,
+              "end": 14
+            },
+            {
+              "paragraphId": "p3",
+              "start": 16,
+              "end": 21
             }
           ],
           "scoring": {
@@ -1154,34 +1213,19 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ALL",
-          "answerText": "먼저 불복종의 이유가 개인적 편의나 사익이 아니라 공적 문제와 연결되어 있어야 한다. 또 법을 어긴 사람이 자신의 행동이 헌법적 원리나 보편적 도덕, 기본권 보장 같은 상위 규범에 부합한다고 믿어야 한다."
+          "answerTexts": [
+            "공개성",
+            "책임 수용"
+          ]
         },
         {
-          "id": "q3",
-          "prompt": "처벌까지 감수하는 태도가 공동체 전체의 법질서를 부정하는 것이 아님을 보여 준다고 설명한 부분은 어디인가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 42,
-              "end": 138
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "자신의 행동을 숨기지 않고, 그 결과로 주어지는 처벌까지 감수하겠다는 태도는 자신이 공동체 전체의 법질서를 부정하는 것이 아니라 특정한 부정의를 문제 삼고 있음을 보여 준다"
-        },
-        {
-          "id": "q4",
-          "prompt": "민주 사회에 정책을 바꾸기 위한 합법적 통로가 존재한다고 밝힌 부분은 어디인가?",
+          "id": "q6",
+          "prompt": "민주 사회에서 정책을 바꾸기 위한 합법적 통로의 예로 제시된 네 가지를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 38,
-              "end": 90
+              "start": 46,
+              "end": 64
             }
           ],
           "scoring": {
@@ -1190,34 +1234,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "민주 사회에는 선거, 청원, 공론장, 언론 보도처럼 정책을 바꾸기 위한 합법적 통로가 존재한다"
+          "answerText": "선거, 청원, 공론장, 언론 보도"
         },
         {
-          "id": "q5",
-          "prompt": "소수자나 정치적 약자가 지속적으로 배제될 수 있으며, 그 경우 불복종이 마지막 수단이 될 수 있다고 설명한 부분은 어디인가?",
+          "id": "q7",
+          "prompt": "옹호 입장에서 지속적으로 배제될 수 있다고 지적한 집단을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 76,
-              "end": 207
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "특히 소수자나 정치적으로 힘이 약한 집단은 형식적인 절차가 열려 있어도 지속적으로 배제될 수 있다. 이 경우 불복종은 민주주의의 파괴가 아니라, 오히려 민주주의가 스스로 놓치고 있는 불평등과 침묵을 드러내는 마지막 수단이 될 수 있다."
-        },
-        {
-          "id": "q6",
-          "prompt": "정당화 가능성을 판단하려면 위반의 목적과 수단, 공공성, 대체 가능한 합법적 통로의 존재를 함께 따져야 한다고 설명한 부분은 어디인가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 123,
-              "end": 249
+              "end": 98
             }
           ],
           "scoring": {
@@ -1226,7 +1252,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "따라서 시민 불복종은 무조건 허용되거나 무조건 금지될 수 있는 문제가 아니라, 위반의 목적, 수단의 성격, 공공성의 정도, 대체 가능한 합법적 통로의 존재 여부를 함께 따져 정당화 가능성을 판단해야 하는 실천적 딜레마로 남는다"
+          "answerText": "특히 소수자나 정치적으로 힘이 약한 집단"
+        },
+        {
+          "id": "q8",
+          "prompt": "시민 불복종의 정당화 가능성을 판단할 때 함께 따져야 하는 요소들을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 167,
+              "end": 212
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "위반의 목적, 수단의 성격, 공공성의 정도, 대체 가능한 합법적 통로의 존재 여부"
         }
       ]
     }

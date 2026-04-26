@@ -571,111 +571,125 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"교내 휴식 공간을 늘려야 한다는 의견문 초고를 써 보려고 한다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 3,
-              "end": 38
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "'갈피를 잡을 수 없게 아득함'을 뜻하는 단어를 찾으시오.",
+          "answerText": "막연",
           "answerMatchMode": "ANY",
-          "answerText": "교내 휴식 공간을 늘려야 한다는 의견문 초고를 써 보려고 한다."
-        },
-        {
-          "id": "q2",
-          "prompt": "\"가장 많이 몰리는 곳은 급식실 앞 복도와 도서관 입구 근처이다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 8,
-              "end": 43
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "가장 많이 몰리는 곳은 급식실 앞 복도와 도서관 입구 근처이다."
-        },
-        {
-          "id": "q3",
-          "prompt": "\"만들 방법으로는 빈 교실 활용, 복도 벤치 추가, 야외 쉼터 정비가 있다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 184
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "휴식 공간을 만들 방법으로는 빈 교실 활용, 복도 벤치 추가, 야외 쉼터 정비가 있다. 그런데 이 문단은 아직 순서가 조금 어수선하다. 어떤 방법이 비용이 적게 드는지, 어떤 방법이 바로 시행 가능한지 구분하지 않고 한꺼번에 적어 두었기 때문이다. 독자가 읽을 때 우선순위를 바로 파악하기 어렵다는 점을 나중에 손볼 필요가 있다."
-        },
-        {
-          "id": "q4",
-          "prompt": "\"또 이 초고에서는 근거가 반복되는 부분도 있다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 26
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "또 이 초고에서는 근거가 반복되는 부분도 있다."
-        },
-        {
-          "id": "q5",
-          "prompt": "\"휴식 공간이 있으면 학교가 더 좋아질 것이다\"에 해당하는 부분은 어디인가요?",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 13,
-              "end": 37
+              "start": 61,
+              "end": 63
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "학생들이 가장 많이 몰리는 두 장소가 모두 드러난 부분을 찾으시오.",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 3,
+              "end": 42
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
+          "answerTexts": [
+            "학생들이 가장 많이 몰리는 곳은 급식실 앞 복도와 도서관 입구 근처이다"
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "통행 공간이 휴식 공간처럼 쓰이는 까닭이 드러난 부분을 찾으시오.",
+          "answerText": "학생들이 잠깐 쉬거나 친구와 대화할 곳이 없으니 자연히 통행 공간이 휴식 공간처럼 쓰이는 셈이다",
           "answerMatchMode": "ANY",
-          "answerText": "휴식 공간이 있으면 학교가 더 좋아질 것이다"
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 77,
+              "end": 130
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "휴식 공간을 만들기 위해 글쓴이가 떠올린 세 가지 방법이 모두 드러난 부분을 찾으시오.",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 16,
+              "end": 47
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true,
+          "answerTexts": [
+            "빈 교실 활용, 복도 벤치 추가, 야외 쉼터 정비가 있다"
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "결론에서 다시 묶어 보여 주어야 할 점이 모두 드러난 부분을 찾으시오.",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 67,
+              "end": 135
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true,
+          "answerTexts": [
+            "학생들이 왜 쉬어야 하는지, 수업 집중과 어떤 관련이 있는지, 안전 문제와는 어떻게 연결되는지를 다시 묶어 줄 필요가 있다"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "\"한 문단에서 분명히 제시하고, 둘째 해결 방안을 우선순위에 따라 나누며, 셋째 자료를 근거 위치에 맞게 넣고, 마지막으로 결론을 구체적으로 고쳐야 한다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "초고를 다듬을 때 따라야 할 네 가지 방향이 모두 드러난 부분을 찾으시오.",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 172
+              "start": 17,
+              "end": 111
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "따라서 이 초고를 다듬을 때는 첫째 문제 상황을 한 문단에서 분명히 제시하고, 둘째 해결 방안을 우선순위에 따라 나누며, 셋째 자료를 근거 위치에 맞게 넣고, 마지막으로 결론을 구체적으로 고쳐야 한다. 지금 초고는 주장 자체는 분명하지만, 배열과 근거 제시가 더 정리되면 훨씬 설득력 있는 글이 될 수 있다."
+          "answerTexts": [
+            "첫째 문제 상황을 한 문단에서 분명히 제시하고, 둘째 해결 방안을 우선순위에 따라 나누며, 셋째 자료를 근거 위치에 맞게 넣고, 마지막으로 결론을 구체적으로 고쳐야 한다"
+          ]
         }
       ]
     }

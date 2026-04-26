@@ -557,24 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "배추흰나비의 알에서 깨어나 잎을 갉아 먹으며 쑥쑥 자라나는 어린 생물은 무엇인가요?",
-          "answerText": "애벌레",
-          "answerMatchMode": "EXACT",
+          "prompt": "배추흰나비가 나비가 되기까지 거치는 것은 무엇인가요?",
+          "answerText": "여러 단계",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 51,
-              "end": 54
-            },
-            {
-              "paragraphId": "p1",
-              "start": 82,
-              "end": 85
-            },
-            {
-              "paragraphId": "p2",
-              "start": 11,
-              "end": 14
+              "start": 24,
+              "end": 29
             }
           ],
           "scoring": {
@@ -586,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "애벌레가 성장하며 더 큰 몸집이 되기 위해 껍질을 벗어 던지는 과정을 무엇이라고 하나요?",
-          "answerText": "허물",
-          "answerMatchMode": "EXACT",
+          "prompt": "번데기 안에서 만들어지는 나비의 부분은 무엇인가요?",
+          "answerText": "날개와 다리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 92,
-              "end": 94
+              "paragraphId": "p2",
+              "start": 51,
+              "end": 57
             }
           ],
           "scoring": {
@@ -605,14 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "알, 애벌레, 번데기, 나비의 단계를 거치며 일생을 살아가는 과정을 뜻하는 말은?",
-          "answerText": "한살이",
-          "answerMatchMode": "EXACT",
+          "prompt": "번데기 껍질이 어떻게 되면 곧 나비가 나올 준비가 된 것인가요?",
+          "answerText": "투명해지면",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 95,
+              "end": 100
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "나비가 먹고 다시 잎에 알을 낳아 생명을 이어 가는 것은 무엇인가요?",
+          "answerText": "꽃의 달콤한 꿀",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 92,
-              "end": 95
+              "start": 48,
+              "end": 56
             }
           ],
           "scoring": {

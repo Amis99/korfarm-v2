@@ -571,47 +571,159 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"미적 수반과 미적 판단\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 189
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "어떤 작품을 두고 아름답다거나 거칠다고 판단할 때, 우리는 그 판단이 작품 자체의 무엇에 기대는지 묻게 된다. 이때 미적 수반이라는 개념은 미적 성질이 비미적 성질 위에서 성립한다는 생각을 가리킨다. 다시 말해 색채 배치, 선의 방향, 리듬, 재료의 질감 같은 비미적 요소가 달라지지 않았다면 미적 성질만 따로 달라질 수 없다는 입장이다."
-        },
-        {
-          "id": "q2",
-          "prompt": "\"미적 수반과 미적 판단\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 221
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 관점은 미적 판단을 단순한 기분의 분출로 보지 않으면서도, 그렇다고 미적 성질을 물리적 성질과 완전히 같은 층위의 사실로 취급하지도 않는다. 작품의 구조와 배열이 미적 판단의 근거가 되기는 하지만, 그 근거가 곧바로 한 줄짜리 공식처럼 환원되지는 않는다는 점이 중요하다. 그래서 수반 관계는 '무엇에 기대는가'를 설명하지만 '어떻게 반드시 하나의 판단으로 결정되는가'까지 단순화하지는 않는다."
-        },
-        {
-          "id": "q3",
-          "prompt": "미적 수반은 이런 식으로 미적 판단이 근거 없는 선언이 아니라 작품의 구성 무엇 설명한다?",
+          "prompt": "‘바탕으로’라는 뜻으로 지문에 쓰인 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 186,
+              "start": 129,
+              "end": 132
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "토대로"
+        },
+        {
+          "id": "q2",
+          "prompt": "미적 수반이라는 개념이 가리키는 생각을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 78,
+              "end": 104
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "미적 성질이 비미적 성질 위에서 성립한다는 생각"
+        },
+        {
+          "id": "q3",
+          "prompt": "긴장감을 파악하게 하는 비미적 조건을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 96,
+              "end": 101
+            },
+            {
+              "paragraphId": "p3",
+              "start": 103,
+              "end": 108
+            },
+            {
+              "paragraphId": "p3",
+              "start": 110,
+              "end": 117
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "색의 대비",
+            "선의 교차",
+            "화면의 비대칭"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "수반 관계가 설명하지만 단순화하지는 않는 두 물음을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 166,
+              "end": 174
+            },
+            {
+              "paragraphId": "p2",
+              "start": 184,
+              "end": 206
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "무엇에 기대는가",
+            "어떻게 반드시 하나의 판단으로 결정되는가"
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "같은 작품 안에서도 미적 판단이 달라질 수 있는 조건을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 167,
+              "end": 181
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "무엇을 중심 근거로 삼느냐"
+        },
+        {
+          "id": "q6",
+          "prompt": "비미적 특징을 충분히 짚지 않은 채 판단을 내리면 어떤 결과가 생기는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 118,
+              "end": 132
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "그 판단은 설득력을 잃는다"
+        },
+        {
+          "id": "q7",
+          "prompt": "미적 수반은 불일치를 모두 제거하는 이론이라기보다 무엇에 가깝다고 했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 44,
+              "end": 70
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "불일치가 어디까지 허용되는지 따져 보게 하는 틀"
+        },
+        {
+          "id": "q8",
+          "prompt": "미적 판단이 어떤 영역이 된다고 했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 183,
               "end": 201
             }
           ],
@@ -621,61 +733,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "요소를 바탕으로 이루어진다고"
-        },
-        {
-          "id": "q4",
-          "prompt": "\"미적 수반과 미적 판단\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 195
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그렇다고 같은 작품을 본 모든 사람이 언제나 같은 미적 판단을 내린다는 뜻은 아니다. 어떤 감상자는 화면의 명암 대비를 먼저 보고, 다른 감상자는 주제의 상징적 맥락을 먼저 읽어 낼 수 있다. 미적 판단의 차이는 작품 밖의 전혀 다른 사실을 끌어오는 데서만 생기는 것이 아니라, 같은 작품 안에서도 무엇을 중심 근거로 삼느냐에 따라 달라질 수 있다."
-        },
-        {
-          "id": "q5",
-          "prompt": "\"미적 수반과 미적 판단\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 200
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 점 때문에 미적 수반은 미적 판단의 불일치를 모두 제거하는 이론이라기보다, 불일치가 어디까지 허용되는지 따져 보게 하는 틀에 가깝다. 어떤 감상자가 작품의 비미적 특징을 충분히 짚지 않은 채 판단을 내렸다면 그 판단은 설득력을 잃는다. 반대로 비미적 특징을 비슷하게 파악하고도 강조점이 다르면, 그 차이는 감상 능력과 해석 관점의 차이로 설명될 수 있다."
-        },
-        {
-          "id": "q6",
-          "prompt": "\"미적 수반과 미적 판단\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 206
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "결국 미적 수반은 미적 판단을 근거 있는 말로 만들되, 그 근거를 기계적인 공식으로 축소하지 않으려는 시도라고 볼 수 있다. 우리는 작품의 색, 구도, 재료, 리듬 같은 요소를 살펴야만 미적 판단을 논의할 수 있다. 그러나 그 요소들을 어떻게 묶어 하나의 인상으로 읽어 내는지는 여전히 해석의 문제로 남기 때문에, 미적 판단은 근거와 해석이 함께 작동하는 영역이 된다."
+          "answerText": "근거와 해석이 함께 작동하는 영역"
         }
       ]
     }

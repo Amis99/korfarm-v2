@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "절반 모양의 하얀 달?",
+          "prompt": "어스름한 저녁이 되자 텅 빈 학교 운동장 위로 떠올라 미끄럼틀과 그네를 은은하게 비추었다고 한 것의 이름을 본문에서 찾아 두 글자로 써 보세요",
           "answerText": "반달",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -440,34 +440,14 @@
         },
         {
           "id": "q2",
-          "prompt": "학교의 넓은 놀이 마당?",
-          "answerText": "운동장",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이는 반달이 학교를 지키는 모습을 무엇처럼 보인다고 빗대어 표현했는지 본문에서 찾아 세 글자로 써 보세요",
+          "answerText": "파수꾼",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 30,
-              "end": 33
-            },
-            {
-              "paragraphId": "p1",
-              "start": 71,
-              "end": 74
-            },
-            {
-              "paragraphId": "p1",
-              "start": 147,
-              "end": 150
-            },
-            {
-              "paragraphId": "p2",
-              "start": 82,
-              "end": 85
-            },
-            {
-              "paragraphId": "p2",
-              "start": 121,
-              "end": 124
+              "start": 130,
+              "end": 133
             }
           ],
           "scoring": {
@@ -479,14 +459,33 @@
         },
         {
           "id": "q3",
-          "prompt": "눈앞에 보이는 광경?",
-          "answerText": "풍경",
-          "answerMatchMode": "EXACT",
+          "prompt": "시원한 밤바람이 미끄럼틀을 스쳐 지나가자 반달이 빙그레 웃으며 누구에게 속삭이는 듯했다고 했는지 본문에서 찾아 두 글자로 써 보세요",
+          "answerText": "별들",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 152,
-              "end": 154
+              "start": 39,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글쓴이는 반달이 걸린 운동장의 평화로운 풍경을 마치 무엇 속의 한 장면 같다고 비유했는지 본문에서 찾아 두 글자로 써 보세요",
+          "answerText": "동화",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 129,
+              "end": 131
             }
           ],
           "scoring": {

@@ -1117,7 +1117,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '항상성'을 모두 찾으시오.",
+          "prompt": "지문에서 생물이 내부 상태를 일정한 범위에서 유지하려는 성질을 가리키는 세 글자 단어를 모두 찾으시오.",
+          "answerText": "항상성",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -1151,110 +1153,79 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "항상성"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '세포막'을 모두 찾으시오.",
+          "prompt": "지문에서 세포가 에너지 생성 과정에서 만들어 밖으로 내보내는 찌꺼기를 가리키는 세 글자 단어를 찾으시오.",
+          "answerText": "노폐물",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 3,
-              "end": 6
-            },
-            {
-              "paragraphId": "p2",
-              "start": 34,
-              "end": 37
-            },
-            {
-              "paragraphId": "p2",
-              "start": 95,
-              "end": 98
-            },
-            {
               "paragraphId": "p3",
-              "start": 127,
-              "end": 130
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p5",
-              "start": 3,
-              "end": 6
-            },
-            {
-              "paragraphId": "p6",
-              "start": 3,
-              "end": 6
-            },
-            {
-              "paragraphId": "p6",
-              "start": 72,
-              "end": 75
-            },
-            {
-              "paragraphId": "p6",
-              "start": 112,
-              "end": 115
+              "start": 52,
+              "end": 55
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "세포막"
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '농도 차이'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 19,
-              "end": 24
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 전기를 띤 입자를 가리키는 두 글자 단어를 찾으시오.",
+          "answerText": "이온",
           "answerMatchMode": "ANY",
-          "answerText": "농도 차이"
-        },
-        {
-          "id": "q4",
-          "prompt": "지문에서 '이온 농도'를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 39,
-              "end": 44
+              "end": 41
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이온 농도"
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "지문에서 세포가 에너지를 만들기 위해 받아들이는 두 가지 물질을 모두 찾으시오.",
+          "answerText": "산소 / 영양소",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 10,
+              "end": 12
+            },
+            {
+              "paragraphId": "p3",
+              "start": 14,
+              "end": 17
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '선택적 투과성'을 모두 찾으시오.",
+          "prompt": "지문에서 세포막이 특정 물질만 골라 통과시키는 성질을 가리키는 일곱 글자 표현을 찾으시오.",
+          "answerText": "선택적 투과성",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p6",
@@ -1263,12 +1234,30 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 세포막을 통한 물질 이동을 돕는 통로의 재료를 가리키는 세 글자 단어를 찾으시오.",
+          "answerText": "단백질",
           "answerMatchMode": "ANY",
-          "answerText": "선택적 투과성"
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 82,
+              "end": 85
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

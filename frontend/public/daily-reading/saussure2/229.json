@@ -521,14 +521,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "책상 위 밀린 일기장을 보며 바짝 타들어 가는 곳은 얼굴 중 어디인가요?",
-          "answerText": "아랫입술",
-          "answerMatchMode": "EXACT",
+          "prompt": "개학날이 코앞으로 다가온 때는 언제인가요?",
+          "answerText": "저녁",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 48,
-              "end": 52
+              "start": 14,
+              "end": 16
             }
           ],
           "scoring": {
@@ -540,14 +540,14 @@
         },
         {
           "id": "q2",
-          "prompt": "도무지 생각나지 않는 어제 일들에 시무룩하게 팔 자로 꺾이는 곳은 어디인가요?",
-          "answerText": "눈썹",
-          "answerMatchMode": "EXACT",
+          "prompt": "책상 위에서 화자가 보고 있는 대상은 무엇인가요?",
+          "answerText": "밀린 일기장",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 56,
-              "end": 58
+              "paragraphId": "p1",
+              "start": 23,
+              "end": 29
             }
           ],
           "scoring": {
@@ -559,14 +559,33 @@
         },
         {
           "id": "q3",
-          "prompt": "밤늦게 겨우 마침표를 찍고 나서야 잔뜩 찌푸렸던 이곳이 스르르 풀려요. 두 눈썹 사이를 뜻하는 이곳은 어디일까요?",
-          "answerText": "미간",
-          "answerMatchMode": "EXACT",
+          "prompt": "어제 일들이 도무지 생각나지 않을 때 눈썹은 어떤 모양으로 꺾입니까?",
+          "answerText": "팔 자",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 69
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "마침표를 찍고 나서 나타난 입꼬리의 변화는 무엇인가요?",
+          "answerText": "입꼬리가 배시시 올라갑니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 27,
-              "end": 29
+              "start": 58,
+              "end": 72
             }
           ],
           "scoring": {

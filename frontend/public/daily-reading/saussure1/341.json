@@ -396,30 +396,11 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "산속에 있는 굽은 마을?",
-          "answerText": "산골",
-          "answerMatchMode": "EXACT",
+          "prompt": "삶의 바탕이 되는 자리를 가리키는 두 글자 낱말을 찾아보세요",
+          "answerText": "터전",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 18,
-              "end": 20
-            },
-            {
-              "paragraphId": "p1",
-              "start": 129,
-              "end": 131
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 138,
-              "end": 140
-            }
+            {"paragraphId": "p1", "start": 52, "end": 54}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -430,30 +411,12 @@
         },
         {
           "id": "q2",
-          "prompt": "사람들이 모여 사는 곳?",
-          "answerText": "마을",
-          "answerMatchMode": "EXACT",
+          "prompt": "산골 마을 사람들이 계절에 따라 캐거나 모은다고 한 두 가지(◯◯◯, ◯◯)를 모두 찾아보세요",
+          "answerText": "산나물, 땔감",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 21,
-              "end": 23
-            },
-            {
-              "paragraphId": "p1",
-              "start": 59,
-              "end": 61
-            },
-            {
-              "paragraphId": "p2",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p2",
-              "start": 141,
-              "end": 143
-            }
+            {"paragraphId": "p1", "start": 89, "end": 92},
+            {"paragraphId": "p1", "start": 98, "end": 100}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -464,15 +427,26 @@
         },
         {
           "id": "q3",
-          "prompt": "고마운 마음의 표현물?",
-          "answerText": "선물",
-          "answerMatchMode": "EXACT",
+          "prompt": "이웃끼리 서로 돕고 함께 어울려 살아가는 사회 집단을 가리키는 세 글자 낱말을 찾아보세요",
+          "answerText": "공동체",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 171,
-              "end": 173
-            }
+            {"paragraphId": "p2", "start": 28, "end": 31}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글쓴이는 산골 마을 사람들의 삶을 통해 진정한 무엇을 배워 보자고 했는지 두 글자 낱말을 찾아보세요",
+          "answerText": "여유",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 159, "end": 161}
           ],
           "scoring": {
             "correctDeltaSec": 10,

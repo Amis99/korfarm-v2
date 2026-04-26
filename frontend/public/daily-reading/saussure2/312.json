@@ -563,24 +563,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "할아버지가 즐겨 들으시고, 아침마다 신나는 노래와 재미있는 이야기가 흘러나오는 기계는 무엇인가요?",
-          "answerText": "라디오",
-          "answerMatchMode": "EXACT",
+          "prompt": "할아버지가 즐겨 들으시는 물건을 꾸며 주는 말까지 지문에서 찾으시오.",
+          "answerText": "낡은 라디오",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 52,
+              "start": 49,
               "end": 55
-            },
-            {
-              "paragraphId": "p1",
-              "start": 62,
-              "end": 65
-            },
-            {
-              "paragraphId": "p1",
-              "start": 105,
-              "end": 108
             }
           ],
           "scoring": {
@@ -592,19 +582,14 @@
         },
         {
           "id": "q2",
-          "prompt": "냄비에서 보글보글 끓고 있으며, 호호 불면서 먹는 꼬불꼬불하고 맛있는 이 음식은 무엇인가요?",
-          "answerText": "라면",
-          "answerMatchMode": "EXACT",
+          "prompt": "라디오에서 아침마다 흘러나오는 것을 이어진 어구로 지문에서 찾으시오.",
+          "answerText": "신나는 노래와 재미있는 이야기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 59,
-              "end": 61
-            },
-            {
-              "paragraphId": "p2",
-              "start": 111,
-              "end": 113
+              "paragraphId": "p1",
+              "start": 74,
+              "end": 90
             }
           ],
           "scoring": {
@@ -616,14 +601,14 @@
         },
         {
           "id": "q3",
-          "prompt": "봄이 되면 피는 보랏빛 꽃으로, 주변에 향기로운 냄새를 풍기는 이 꽃의 이름은 무엇인가요?",
-          "answerText": "라일락",
-          "answerMatchMode": "EXACT",
+          "prompt": "라면을 어떻게 먹으면 정말 꿀맛이라고 했는지 지문에서 찾으시오.",
+          "answerText": "호호 불면서 후루룩 먹으면",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 57,
-              "end": 60
+              "paragraphId": "p2",
+              "start": 68,
+              "end": 82
             }
           ],
           "scoring": {
@@ -635,13 +620,21 @@
         },
         {
           "id": "q4",
-          "prompt": "동물원에 살고 있으며, 목이 길고 몸에 난 털이 복슬복슬한 이 귀여운 동물의 이름은 무엇인가요?",
-          "answerText": "라마",
-          "answerMatchMode": "EXACT",
+          "prompt": "봄에 피는 꽃을 설명한 어구와 동물원에 있는 동물을 설명한 어구를 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "향기로운 냄새가 나는 보랏빛 라일락꽃",
+            "목이 길고 복슬복슬한 귀여운 동물 라마"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 97,
+              "start": 41,
+              "end": 61
+            },
+            {
+              "paragraphId": "p3",
+              "start": 78,
               "end": 99
             }
           ],

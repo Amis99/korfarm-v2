@@ -1035,98 +1035,70 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '모호함'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 216,
-              "end": 219
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "분명하지 않고 흐릿하다는 뜻의 단어를 찾으시오.",
+          "answerText": "모호함",
           "answerMatchMode": "ANY",
-          "answerText": "모호함"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 216, "end": 219}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '출발'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 207,
-              "end": 209
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "소크라테스 문답법의 정의를 찾으시오.",
+          "answerText": "소크라테스의 문답법은 상대에게 곧바로 답을 가르쳐 주기보다, 질문을 이어 가며 스스로 생각하게 만드는 방법이다",
           "answerMatchMode": "ANY",
-          "answerText": "출발"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 0, "end": 61}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '예외'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 116,
-              "end": 118
-            },
-            {
-              "paragraphId": "p5",
-              "start": 24,
-              "end": 26
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '예외'라는 단어를 모두 찾으시오.",
+          "answerText": "예외",
           "answerMatchMode": "ANY",
-          "answerText": "예외"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 116, "end": 118},
+            {"paragraphId": "p5", "start": 24, "end": 26}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '인정'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 153,
-              "end": 155
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "소크라테스가 본 진짜 앎의 정의를 찾으시오.",
+          "answerText": "진짜 앎은 아는 척하는 태도보다 모르는 점을 인정하는 데서 시작된다",
           "answerMatchMode": "ANY",
-          "answerText": "인정"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 128, "end": 165}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '학습'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 183,
-              "end": 185
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "다시 되묻는 일을 가리키는 단어를 찾으시오.",
+          "answerText": "반문",
           "answerMatchMode": "ANY",
-          "answerText": "학습"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 175, "end": 177}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "문답법이 속한 학문 분야를 가리키는 단어를 찾으시오.",
+          "answerText": "서양철학",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 167, "end": 171}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

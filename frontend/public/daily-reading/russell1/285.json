@@ -1074,108 +1074,86 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '뼈대'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 212,
-              "end": 214
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "한 문단이나 한 글에서 가장 중요한 생각을 드러내는 문장을 가리키는 다섯 글자 낱말을 지문에서 모두 찾으시오",
+          "answerText": "중심 문장",
           "answerMatchMode": "ANY",
-          "answerText": "뼈대"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 0, "end": 5},
+            {"paragraphId": "p1", "start": 46, "end": 51},
+            {"paragraphId": "p1", "start": 118, "end": 123},
+            {"paragraphId": "p1", "start": 166, "end": 171},
+            {"paragraphId": "p1", "start": 202, "end": 207},
+            {"paragraphId": "p2", "start": 3, "end": 8},
+            {"paragraphId": "p2", "start": 145, "end": 150},
+            {"paragraphId": "p3", "start": 0, "end": 5},
+            {"paragraphId": "p3", "start": 187, "end": 192},
+            {"paragraphId": "p4", "start": 3, "end": 8},
+            {"paragraphId": "p4", "start": 162, "end": 167},
+            {"paragraphId": "p5", "start": 3, "end": 8},
+            {"paragraphId": "p5", "start": 90, "end": 95},
+            {"paragraphId": "p5", "start": 145, "end": 150},
+            {"paragraphId": "p5", "start": 172, "end": 177}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '가치'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 97,
-              "end": 99
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글 속에서 중심 문장이 맡는 역할을 비유로 드러낸, 두 글자 낱말을 지문에서 찾으시오",
+          "answerText": "뼈대",
           "answerMatchMode": "ANY",
-          "answerText": "가치"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 212, "end": 214}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '범위'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 170,
-              "end": 172
-            },
-            {
-              "paragraphId": "p3",
-              "start": 198,
-              "end": 200
-            },
-            {
-              "paragraphId": "p5",
-              "start": 208,
-              "end": 210
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "학교 텃밭 활동 사례에서 세부 정보보다 먼저 드러나야 한다고 한, 활동의 핵심을 가리키는 두 글자 낱말을 지문에서 찾으시오",
+          "answerText": "가치",
           "answerMatchMode": "ANY",
-          "answerText": "범위"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 97, "end": 99}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '위치'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 26,
-              "end": 28
-            },
-            {
-              "paragraphId": "p4",
-              "start": 113,
-              "end": 115
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "중심 문장을 너무 넓거나 좁게 잡지 말라고 한 까닭에서 등장하는, 문단이 다루는 영역을 가리키는 두 글자 낱말을 지문에서 모두 찾으시오",
+          "answerText": "범위",
           "answerMatchMode": "ANY",
-          "answerText": "위치"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 170, "end": 172},
+            {"paragraphId": "p3", "start": 198, "end": 200},
+            {"paragraphId": "p5", "start": 208, "end": 210}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '설계'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 41,
-              "end": 43
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "중심 문장을 문단 첫머리 또는 마지막 어디에 둘지 정해야 한다고 한, 그 자리를 가리키는 두 글자 낱말을 지문에서 모두 찾으시오",
+          "answerText": "위치",
           "answerMatchMode": "ANY",
-          "answerText": "설계"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 26, "end": 28},
+            {"paragraphId": "p4", "start": 113, "end": 115}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "중심 문장 세우기를 문단 전체를 짜는 일이라고 한, 그 일을 가리키는 두 글자 낱말을 지문에서 찾으시오",
+          "answerText": "설계",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 41, "end": 43}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

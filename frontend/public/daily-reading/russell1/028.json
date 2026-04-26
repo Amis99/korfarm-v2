@@ -953,92 +953,91 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "주어는 무슨 뜻인가요?",
-          "answerText": "가장 중심이 되는 성분은 주어와 서술어이다.",
+          "prompt": "지문에서 '문장'을 모두 찾으시오.",
+          "answerText": "문장",
           "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 24
-            }
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p1", "start": 29, "end": 31},
+            {"paragraphId": "p1", "start": 43, "end": 45},
+            {"paragraphId": "p1", "start": 82, "end": 84},
+            {"paragraphId": "p1", "start": 126, "end": 128},
+            {"paragraphId": "p2", "start": 29, "end": 31},
+            {"paragraphId": "p2", "start": 135, "end": 137},
+            {"paragraphId": "p2", "start": 153, "end": 155},
+            {"paragraphId": "p3", "start": 4, "end": 6},
+            {"paragraphId": "p3", "start": 142, "end": 144},
+            {"paragraphId": "p4", "start": 0, "end": 2},
+            {"paragraphId": "p4", "start": 96, "end": 98},
+            {"paragraphId": "p4", "start": 152, "end": 154},
+            {"paragraphId": "p4", "start": 188, "end": 190}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "서술어는 무슨 뜻인가요?",
-          "answerText": "가장 중심이 되는 성분은 주어와 서술어이다.",
-          "answerMatchMode": "ANY",
+          "prompt": "지문에서 '주어'와 '서술어'를 모두 찾으시오.",
+          "answerText": "주어/서술어",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 24
-            }
+            {"paragraphId": "p2", "start": 14, "end": 16},
+            {"paragraphId": "p2", "start": 18, "end": 21},
+            {"paragraphId": "p2", "start": 25, "end": 27},
+            {"paragraphId": "p2", "start": 54, "end": 57},
+            {"paragraphId": "p2", "start": 61, "end": 63},
+            {"paragraphId": "p2", "start": 107, "end": 109},
+            {"paragraphId": "p2", "start": 119, "end": 122},
+            {"paragraphId": "p3", "start": 8, "end": 10},
+            {"paragraphId": "p3", "start": 12, "end": 15}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "목적어는 무슨 뜻인가요?",
-          "answerText": "목적어는 동작이 미치는 대상을 나타내고, 보어는 부족한 뜻을 보충하며, 관형어와 부사어는 다른 성분을 꾸며 준다.",
+          "prompt": "지문에서 인물 이름 '민지'를 모두 찾으시오.",
+          "answerText": "민지",
           "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 28,
-              "end": 91
-            }
+            {"paragraphId": "p2", "start": 88, "end": 90},
+            {"paragraphId": "p2", "start": 101, "end": 103},
+            {"paragraphId": "p3", "start": 93, "end": 95}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "부사어는 무슨 뜻인가요?",
-          "answerText": "목적어는 동작이 미치는 대상을 나타내고, 보어는 부족한 뜻을 보충하며, 관형어와 부사어는 다른 성분을 꾸며 준다.",
-          "answerMatchMode": "ANY",
+          "prompt": "주어와 서술어가 문장의 중심임을 밝힌 문장을 찾으시오.",
+          "answerText": "가장 중심이 되는 성분은 주어와 서술어이다",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 28,
-              "end": 91
-            }
+            {"paragraphId": "p2", "start": 0, "end": 23}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "맥락은 무슨 뜻인가요?",
-          "answerText": "또한 어떤 문장은 성분이 드러나지 않더라도 맥락 속에서 생략된 부분을 짐작해야 올바르게 이해할 수 있다.",
-          "answerMatchMode": "ANY",
+          "prompt": "목적어·보어·관형어·부사어의 정의가 함께 제시된 문장을 찾으시오.",
+          "answerText": "목적어는 동작이 미치는 대상을 나타내고, 보어는 부족한 뜻을 보충하며, 관형어와 부사어는 다른 성분을 꾸며 준다",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 90,
-              "end": 148
-            }
+            {"paragraphId": "p3", "start": 28, "end": 90}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "주어와 서술어 예시 문장이 든 부분을 찾으시오.",
+          "answerText": "민지가 웃는다",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 88, "end": 95}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         }
       ]

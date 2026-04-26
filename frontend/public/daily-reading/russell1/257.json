@@ -1113,7 +1113,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '예시'를 모두 찾으시오.",
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "prompt": "지문에서 앞 문장의 내용을 구체적으로 풀어 주는 새 문장의 종류를 가리키는 두 글자 단어를 모두 찾으시오",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -1126,17 +1133,18 @@
               "end": 182
             }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
           "answerText": "예시"
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '다리'를 모두 찾으시오.",
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "prompt": "앞뒤 문장이 너무 갑자기 이어질 때 그 사이에서 관계를 분명히 해 주는 역할을 비유한 두 글자 단어를 찾으시오",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -1144,72 +1152,83 @@
               "end": 27
             }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
           "answerText": "다리"
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '반복'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 11,
-              "end": 13
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "반복"
-        },
-        {
-          "id": "q4",
-          "prompt": "지문에서 '빈자리'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 19,
-              "end": 22
-            }
-          ],
+          "prompt": "문장 덧붙이기를 이미 있는 글 사이에 아무 문장이나 끼워 넣는 일이 아니라고 정의한 부분을 찾으시오",
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "빈자리"
-        },
-        {
-          "id": "q5",
-          "prompt": "지문에서 '중심'을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 203,
-              "end": 205
-            },
-            {
-              "paragraphId": "p5",
-              "start": 107,
-              "end": 109
+              "start": 9,
+              "end": 41
             }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "answerText": "이미 있는 글 사이에 아무 문장이나 끼워 넣는 일이 아니다"
+        },
+        {
+          "id": "q4",
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "중심"
+          "prompt": "예시 문장을 덧붙일 때 예시가 엉뚱하면 글이 어떻게 된다고 한 부분을 찾으시오",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 180,
+              "end": 201
+            }
+          ],
+          "answerText": "예시가 엉뚱하면 글은 오히려 산만해진다"
+        },
+        {
+          "id": "q5",
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "prompt": "문장이 알맞게 들어가면 글의 흐름과 중심 생각이 어떻게 된다고 한 결과 부분을 찾으시오",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 174,
+              "end": 215
+            }
+          ],
+          "answerText": "문장이 알맞게 들어가면 글의 흐름은 더 매끄러워지고 중심 생각도 또렷해진다"
+        },
+        {
+          "id": "q6",
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "prompt": "지문에서 새 문장이 들어갈 자리를 찾을 흐름을 정확히 읽어 내는 사람을 가리키는, 글을 읽는 사람을 뜻하는 두 글자 단어를 찾으시오",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 134,
+              "end": 136
+            }
+          ],
+          "answerText": "독자"
         }
       ]
     }

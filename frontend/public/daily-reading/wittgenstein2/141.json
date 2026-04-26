@@ -571,12 +571,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단의 내용으로 가장 적절한 것은?",
+          "prompt": "화학 반응을 전류 변화로 바꾸어 읽는 장치는 무엇인가?",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 194
+              "end": 11
+            },
+            {
+              "paragraphId": "p6",
+              "start": 4,
+              "end": 15
+            },
+            {
+              "paragraphId": "p6",
+              "start": 138,
+              "end": 149
             }
           ],
           "scoring": {
@@ -585,16 +595,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "전기화학식 가스 센서는 특정 기체가 전극 표면에서 일으키는 화학 반응을 전류 변화로 바꾸어 읽는 장치다. 겉으로는 작은 센서처럼 보이지만, 내부에서는 기체의 선택적 통과, 전극 반응, 전류 비교가 차례로 일어난다. 그래서 이 장치는 단순히 공기 중 가스를 맡는 기계가 아니라, 반응량을 전기 신호로 변환하는 일종의 화학 측정 장치라고 볼 수 있다."
+          "answerText": "전기화학식 가스 센서"
         },
         {
           "id": "q2",
-          "prompt": "2문단의 내용으로 가장 적절한 것은?",
+          "prompt": "센서 앞부분에서 걸러지거나 줄여지는 대상을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 200
+              "start": 34,
+              "end": 51
+            },
+            {
+              "paragraphId": "p2",
+              "start": 62,
+              "end": 80
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "먼지나 물방울 같은 비기체 입자",
+            "목표 가스의 검지를 방해하는 기체"
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "감지부에 갑자기 많은 기체가 몰리면 무엇이 불안정해질 수 있는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 171,
+              "end": 182
             }
           ],
           "scoring": {
@@ -603,15 +639,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "센서의 앞부분은 아무 기체나 그대로 들이지 않도록 설계된다. 먼지나 물방울 같은 비기체 입자는 먼저 걸러지고, 목표 가스의 검지를 방해하는 기체는 간섭 필터 단계에서 최대한 줄여진다. 그다음 남은 기체는 분리막을 지나 감지부로 천천히 들어간다. 이 과정이 필요한 이유는 감지부에 갑자기 많은 기체가 몰리면 반응 속도와 전류 값이 불안정해질 수 있기 때문이다."
+          "answerText": "반응 속도와 전류 값"
         },
         {
-          "id": "q3",
-          "prompt": "3문단의 내용으로 가장 적절한 것은?",
+          "id": "q4",
+          "prompt": "감지부 안에 전해질과 함께 놓인 세 전극을 묶어 제시한 부분은 무엇인가?",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
+              "start": 8,
+              "end": 27
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "작용 전극, 대응 전극, 기준 전극"
+        },
+        {
+          "id": "q5",
+          "prompt": "목표 가스가 어디에 도달하면 산화 반응이 일어나는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 51,
+              "end": 62
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "작용 전극에 도달하면"
+        },
+        {
+          "id": "q6",
+          "prompt": "목표 가스 농도가 높아질수록 무엇도 함께 커지는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 176,
               "end": 181
             }
           ],
@@ -621,34 +693,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "감지부 안에는 작용 전극, 대응 전극, 기준 전극이 전해질과 함께 놓여 있다. 목표 가스가 작용 전극에 도달하면 산화 반응이 일어나 전자와 이온이 생긴다. 이때 전해질은 이온의 이동을 돕고, 전자는 외부 회로를 따라 흐르며 전류를 만든다. 센서가 반응을 읽는 핵심은 바로 이 전자 흐름의 크기를 안정적으로 포착하는 데 있다."
+          "answerText": "측정 전류"
         },
         {
-          "id": "q4",
-          "prompt": "4문단의 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 190
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "작용 전극에서 빠져나온 전자는 대응 전극 쪽 반응과 연결된다. 대응 전극에서는 대개 산소가 환원 반응에 참여해 전체 전하 균형이 맞춰진다. 결국 센서는 한쪽 전극에서의 산화와 다른 쪽 전극에서의 환원을 짝지어 하나의 전류 신호를 만든다. 일반적으로 목표 가스 농도가 높아질수록 반응에 참여하는 전자 수가 늘어나므로 측정 전류도 함께 커진다."
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단의 내용으로 가장 적절한 것은?",
+          "id": "q7",
+          "prompt": "센서 뒷부분은 만들어진 전류를 무엇과 비교하는가?",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 214
+              "start": 21,
+              "end": 28
             }
           ],
           "scoring": {
@@ -657,16 +711,31 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "센서 뒷부분은 이렇게 만들어진 전류가 평상시 기준값과 얼마나 다른지 비교한다. 평소에도 기준 전극과 회로에는 일정한 상태 신호가 유지되므로, 장치는 새로 발생한 전류가 그 기준을 얼마나 넘는지 보고 가스 누출 여부를 판단한다. 어떤 현장에서는 기준치만 넘으면 즉시 경보를 울리고, 어떤 현장에서는 짧은 시간 동안 농도가 계속 유지될 때만 경보를 내어 일시적인 오작동을 줄이기도 한다."
+          "answerText": "평상시 기준값"
         },
         {
-          "id": "q6",
-          "prompt": "6문단의 내용으로 가장 적절한 것은?",
+          "id": "q8",
+          "prompt": "전기화학식 가스 센서를 이해할 때 이어지는 연속 과정의 요소를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 219
+              "start": 163,
+              "end": 169
+            },
+            {
+              "paragraphId": "p6",
+              "start": 171,
+              "end": 179
+            },
+            {
+              "paragraphId": "p1",
+              "start": 103,
+              "end": 108
+            },
+            {
+              "paragraphId": "p6",
+              "start": 181,
+              "end": 186
             }
           ],
           "scoring": {
@@ -674,8 +743,12 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "따라서 전기화학식 가스 센서의 성능은 단순히 전극 재료 하나로만 결정되지 않는다. 어떤 가스를 통과시키고 어떤 가스를 걸러내는지, 전극 표면에서 반응이 얼마나 잘 일어나는지, 기준 전류와 새 전류를 얼마나 정확히 구분하는지가 함께 작동해야 한다. 전기화학식 가스 센서를 이해한다는 것은 결국 선택적 유입, 산화·환원 반응, 전류 비교가 하나의 연속 과정으로 이어진다는 점을 읽어 내는 일이다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "선택적 유입",
+            "산화·환원 반응",
+            "전류 비교"
+          ]
         }
       ]
     }

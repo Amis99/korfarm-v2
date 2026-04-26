@@ -552,39 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "하얀 ( ) 뭉치가 생김.",
-          "answerText": "씨앗",
-          "answerMatchMode": "EXACT",
+          "prompt": "놀랍고 신기해서 감탄할 만하다는 뜻을 가진 단어를 지문에서 찾아 보세요.",
+          "answerText": "경이롭습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 16,
-              "end": 18
-            },
-            {
-              "paragraphId": "p1",
-              "start": 29,
-              "end": 31
-            },
-            {
-              "paragraphId": "p1",
-              "start": 65,
-              "end": 67
-            },
-            {
-              "paragraphId": "p1",
-              "start": 119,
-              "end": 121
-            },
-            {
               "paragraphId": "p2",
-              "start": 7,
-              "end": 9
-            },
-            {
-              "paragraphId": "p2",
-              "start": 86,
-              "end": 88
+              "start": 75,
+              "end": 81
             }
           ],
           "scoring": {
@@ -596,14 +571,19 @@
         },
         {
           "id": "q2",
-          "prompt": "부드러운 ( )이 달렸어요.",
-          "answerText": "솜털",
-          "answerMatchMode": "EXACT",
+          "prompt": "씨앗마다 달린 하얀 솜털의 두 가지 특징을 지문에서 모두 찾아 보세요.",
+          "answerText": "부드럽고, 가벼워요",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 40,
-              "end": 42
+              "start": 47,
+              "end": 51
+            },
+            {
+              "paragraphId": "p1",
+              "start": 52,
+              "end": 56
             }
           ],
           "scoring": {
@@ -615,14 +595,48 @@
         },
         {
           "id": "q3",
-          "prompt": "( )처럼 바람을 타요.",
-          "answerText": "낙하산",
-          "answerMatchMode": "EXACT",
+          "prompt": "멀리 날아간 씨앗이 새로운 땅에서 자라며 피우게 되는 두 가지 모습을 지문에서 모두 찾아 보세요.",
+          "answerText": "싹, 꽃",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 26,
+              "end": 27
+            },
+            {
+              "paragraphId": "p2",
+              "start": 39,
+              "end": 40
+            },
+            {
+              "paragraphId": "p1",
+              "start": 7,
+              "end": 8
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "씨앗이 하늘로 둥실 떠올라 멀리 날 수 있는 까닭이 무엇 때문인지 지문에서 찾아 보세요.",
+          "answerText": "바람",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 84,
-              "end": 87
+              "start": 58,
+              "end": 60
+            },
+            {
+              "paragraphId": "p1",
+              "start": 90,
+              "end": 92
             }
           ],
           "scoring": {

@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "작은 ( )함이 생겼습니다.",
-          "answerText": "비밀",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 보물함이 무엇인지 설명한 부분을 찾아 보세요.",
+          "answerText": "우리 반 친구들이 함께 만든 보물함이에요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 14,
-              "end": 16
+              "start": 26,
+              "end": 48
             }
           ],
           "scoring": {
@@ -571,24 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "함 안에 ( )를 넣어 둠.",
-          "answerText": "힌트",
-          "answerMatchMode": "EXACT",
+          "prompt": "함 안에서 종이를 발견한 인물이 누구인지 지문에서 찾아 보세요.",
+          "answerText": "민수",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 93,
-              "end": 95
-            },
-            {
               "paragraphId": "p2",
-              "start": 46,
-              "end": 48
-            },
-            {
-              "paragraphId": "p2",
-              "start": 116,
-              "end": 118
+              "start": 0,
+              "end": 2
             }
           ],
           "scoring": {
@@ -600,14 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "아이들의 눈이 ( )해요.",
-          "answerText": "초롱초롱",
-          "answerMatchMode": "EXACT",
+          "prompt": "종이에 적힌 힌트가 무엇인지 지문에서 찾아 보세요.",
+          "answerText": "무척 큰 나무 아래",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 32,
+              "end": 42
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글이나 글자 한 줄이라는 뜻의 단어를 지문에서 찾아 보세요.",
+          "answerText": "글귀",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 123,
-              "end": 127
+              "start": 67,
+              "end": 69
             }
           ],
           "scoring": {

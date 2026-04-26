@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "중심 대상은 무엇인가요?",
+          "prompt": "오늘 인터뷰를 마련한 목적을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 19,
-              "end": 29
+              "start": 52,
+              "end": 64
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "체험 주간에 참여한"
+          "answerText": "기사 방향을 잡기 위해"
         },
         {
           "id": "q2",
-          "prompt": "학생 대표: 저는 드론 촬영 무엇?",
+          "prompt": "학생 대표가 가장 기억에 남았다고 한 활동을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 16,
-              "end": 29
+              "start": 10,
+              "end": 18
             }
           ],
           "scoring": {
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "실습이 기억에 남았습니다"
+          "answerText": "드론 촬영 실습"
         },
         {
           "id": "q3",
-          "prompt": "면담 진행자: 체험 전에 기대한 내용과 실제 활동 무엇는 말로 들립니다?",
+          "prompt": "드론 촬영 실습에서 학생이 해야 했던 일을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 28,
-              "end": 39
+              "paragraphId": "p2",
+              "start": 60,
+              "end": 75
+            },
+            {
+              "paragraphId": "p2",
+              "start": 76,
+              "end": 95
             }
           ],
           "scoring": {
@@ -620,12 +625,15 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "사이에 차이가 있었다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "안전 점검표를 먼저 확인하고",
+            "비행 경로를 직접 조정해야 했습니다"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "학생 대표: 설명 시간이 짧아서 무엇 어려웠습니다?",
+          "prompt": "설명 시간이 짧아서 어려웠던 부분을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
@@ -643,12 +651,12 @@
         },
         {
           "id": "q5",
-          "prompt": "글에서 설명한 것은 무엇인가요?",
+          "prompt": "실습 뒤 질문 시간을 더 받았을 때 가능했던 결과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 21,
-              "end": 26
+              "paragraphId": "p4",
+              "start": 121,
+              "end": 148
             }
           ],
           "scoring": {
@@ -657,16 +665,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "재미있었다"
+          "answerText": "활동의 순서를 훨씬 분명하게 이해할 수 있었습니다"
         },
         {
           "id": "q6",
-          "prompt": "문단의 초점은 무엇인가요?",
+          "prompt": "담당 교사가 기사에 함께 넣자고 한 내용을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 39,
+              "end": 44
+            },
+            {
+              "paragraphId": "p5",
+              "start": 46,
+              "end": 60
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "준비 과정",
+            "질문 시간이 왜 중요했는지"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "학생 기자가 기사 첫머리에 넣겠다고 한 점을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 7,
-              "end": 17
+              "start": 20,
+              "end": 49
             }
           ],
           "scoring": {
@@ -675,7 +709,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그러면 기사 첫머리"
+          "answerText": "드론 촬영이 흥미보다 준비 절차를 먼저 요구했다는 점"
+        },
+        {
+          "id": "q8",
+          "prompt": "마지막에 정리하겠다고 한 제안을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 90,
+              "end": 115
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "다음 체험 때 용어 안내 자료를 미리 제공하자"
         }
       ]
     }

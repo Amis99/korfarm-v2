@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"파동 간섭과 회절\"에 해당하는 부분은 어디인가요?",
+          "prompt": "간섭을 설명하는 부분을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 9
+              "paragraphId": "p1",
+              "start": 49,
+              "end": 92
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "파동 간섭과 회절"
+          "answerText": "둘 이상의 파동이 같은 곳에 도달하면 서로를 밀어내기보다 겹쳐진 결과를 만든다"
         },
         {
           "id": "q2",
-          "prompt": "\"파동 간섭과 회절\"에 해당하는 부분은 어디인가요?",
+          "prompt": "실제로 관측되는 진폭이 무엇으로 결정되는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 9
+              "paragraphId": "p1",
+              "start": 123,
+              "end": 150
             }
           ],
           "scoring": {
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "파동 간섭과 회절"
+          "answerText": "각 파동이 그 지점에 만들어 내는 변위를 합한 값"
         },
         {
           "id": "q3",
-          "prompt": "주요 소재는 무엇인가요?",
+          "prompt": "보강 간섭과 상쇄 간섭의 조건을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 185,
-              "end": 198
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 35
+            },
+            {
+              "paragraphId": "p2",
+              "start": 65,
+              "end": 93
             }
           ],
           "scoring": {
@@ -620,17 +625,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "간섭이 공간적으로 드러나"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "두 파동의 마루가 같은 시각에 겹치거나 골이 같은 시각에 겹치면",
+            "한쪽의 마루와 다른 쪽의 골이 만나 서로를 상쇄하면"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "\"파동 간섭과 회절\"에 해당하는 부분은 어디인가요?",
+          "prompt": "위상 차가 무엇을 뜻하는지 풀이한 부분을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 9
+              "paragraphId": "p2",
+              "start": 139,
+              "end": 161
             }
           ],
           "scoring": {
@@ -639,16 +647,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "파동 간섭과 회절"
+          "answerText": "두 파동이 얼마나 어긋난 상태로 만나는가"
         },
         {
           "id": "q5",
-          "prompt": "\"파동 간섭과 회절\"에 해당하는 부분은 어디인가요?",
+          "prompt": "회절의 뜻을 설명한 부분을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 9
+              "paragraphId": "p3",
+              "start": 4,
+              "end": 54
             }
           ],
           "scoring": {
@@ -657,16 +665,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "파동 간섭과 회절"
+          "answerText": "파동이 좁은 틈을 지나거나 장애물의 가장자리를 지날 때 직진만 하지 않고 퍼져 나가는 현상"
         },
         {
           "id": "q6",
-          "prompt": "\"파동 간섭과 회절\"에 해당하는 부분은 어디인가요?",
+          "prompt": "파동이 더 크게 휘어 퍼지는 조건을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 9
+              "paragraphId": "p3",
+              "start": 87,
+              "end": 104
             }
           ],
           "scoring": {
@@ -675,7 +683,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "파동 간섭과 회절"
+          "answerText": "틈의 크기가 파장에 가까워질수록"
+        },
+        {
+          "id": "q7",
+          "prompt": "스크린에 밝고 어두운 줄무늬가 나타나는 까닭을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 49,
+              "end": 91
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "회절된 빛들이 서로 다른 경로를 따라 이동한 뒤 보강과 상쇄를 반복하기 때문"
+        },
+        {
+          "id": "q8",
+          "prompt": "파동 현상에서 함께 보아야 할 관계를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 182,
+              "end": 192
+            },
+            {
+              "paragraphId": "p6",
+              "start": 194,
+              "end": 207
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "위상 차와 경로 차",
+            "틈의 크기와 파장의 관계"
+          ]
         }
       ]
     }

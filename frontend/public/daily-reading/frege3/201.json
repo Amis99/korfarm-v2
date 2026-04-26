@@ -1139,7 +1139,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "태양의 에너지 원리로 설명한 기술은 무엇인가요?",
+          "prompt": "태양을 비롯한 별들의 에너지 원리로 설명한 것을 찾으시오.",
           "answerText": "핵융합(Nuclear Fusion)",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1157,14 +1157,14 @@
         },
         {
           "id": "q2",
-          "prompt": "1억 도가 넘는 초고온 상태를 가리키는 말은 무엇인가요?",
-          "answerText": "플라스마(Plasma)",
+          "prompt": "핵융합에서 원자핵들이 합쳐지는 조건과 결과를 설명한 부분을 찾으시오.",
+          "answerText": "수소처럼 가벼운 원자핵들이 극도로 높은 온도와 압력 상태에서 서로 충돌하여 헬륨이라는 더 무거운 원자핵으로 합쳐질",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 100,
-              "end": 112
+              "paragraphId": "p1",
+              "start": 67,
+              "end": 130
             }
           ],
           "scoring": {
@@ -1175,10 +1175,18 @@
         },
         {
           "id": "q3",
-          "prompt": "플라스마를 가두기 위해 만든 도넛 모양 장치는 무엇인가요?",
-          "answerText": "토카막(Tokamak)",
-          "answerMatchMode": "ANY",
+          "prompt": "플라스마를 공중에 띄워 가두기 위해 쓰는 것과 장치를 모두 찾으시오.",
+          "answerTexts": [
+            "강력한 자기장(자석의 힘)",
+            "토카막(Tokamak)"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 196,
+              "end": 210
+            },
             {
               "paragraphId": "p2",
               "start": 234,
@@ -1193,14 +1201,22 @@
         },
         {
           "id": "q4",
-          "prompt": "세계 주요 국가들이 함께 건설 중인 실험로는 무엇인가요?",
-          "answerText": "국제열핵융합실험로(ITER)",
-          "answerMatchMode": "ANY",
+          "prompt": "핵융합 발전의 장점으로 제시된 배출하지 않는 물질을 모두 찾으시오.",
+          "answerTexts": [
+            "이산화탄소 같은 온실가스",
+            "미세먼지"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 184,
-              "end": 199
+              "paragraphId": "p3",
+              "start": 105,
+              "end": 118
+            },
+            {
+              "paragraphId": "p3",
+              "start": 120,
+              "end": 124
             }
           ],
           "scoring": {
@@ -1211,24 +1227,14 @@
         },
         {
           "id": "q5",
-          "prompt": "글에서 인류의 궁극적인 에너지원으로 삼으려는 발전 방식은 무엇인가요?",
-          "answerText": "핵융합 발전",
+          "prompt": "세계 주요 국가들이 함께 건설 중인 실험로를 찾으시오.",
+          "answerText": "국제열핵융합실험로(ITER)",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 238,
-              "end": 244
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 6
-            },
-            {
-              "paragraphId": "p3",
-              "start": 20,
-              "end": 26
+              "paragraphId": "p4",
+              "start": 184,
+              "end": 199
             }
           ],
           "scoring": {

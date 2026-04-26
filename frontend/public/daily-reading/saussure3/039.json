@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "주말에 글쓴이가 가족과 함께 여행을 떠나 푹신하고 부드러운 진흙의 감촉을 느꼈던 곳은 어디인가요?",
+          "prompt": "글쓴이 가족이 주말에 여행을 떠난 곳을 지문에서 찾으시오.",
           "answerText": "갯벌 생태 공원",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -576,19 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "조개나 갯지렁이 등과 함께 갯벌에 살고 있으며, 사람이 가까이 다가가면 갯벌 구멍으로 숨어버리는 동물은?",
-          "answerText": "칠게",
-          "answerMatchMode": "EXACT",
+          "prompt": "갯벌에 살고 있던 생물로 제시된 세 가지를 이어 쓴 표현을 지문에서 찾으시오.",
+          "answerText": "조개, 칠게, 갯지렁이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 9,
-              "end": 11
-            },
-            {
-              "paragraphId": "p2",
-              "start": 39,
-              "end": 41
+              "start": 5,
+              "end": 17
             }
           ],
           "scoring": {
@@ -600,19 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "여행을 다녀온 후 처음 발을 디뎠을 때의 설렘과 자연을 보호해야겠다는 다짐을 담아 정리해서 쓴 글은?",
-          "answerText": "기행문",
-          "answerMatchMode": "EXACT",
+          "prompt": "갯벌을 생물들의 집이자 바닷물을 깨끗하게 걸러 주는 무엇이라고 했는지 지문에서 찾으시오.",
+          "answerText": "자연의 정수기",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 106,
+              "end": 113
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "이번 여행으로 글쓴이가 가지게 된 마음을 지문에서 찾으시오.",
+          "answerText": "자연을 아끼고 보호해야겠다는 마음",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 28,
-              "end": 31
-            },
-            {
-              "paragraphId": "p3",
-              "start": 40,
-              "end": 43
+              "start": 94,
+              "end": 112
             }
           ],
           "scoring": {

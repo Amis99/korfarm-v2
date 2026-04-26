@@ -474,9 +474,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "층을 잇는 통로?",
+          "prompt": "글에 나온 '층과 층 사이를 오르내릴 수 있도록 만들어진 편리한 통로'를 뜻하는 낱말을 찾아 써 보세요",
           "answerText": "계단",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -518,19 +518,14 @@
         },
         {
           "id": "q2",
-          "prompt": "위험 없는 상태?",
-          "answerText": "안전",
-          "answerMatchMode": "EXACT",
+          "prompt": "계단을 오르내릴 때 손으로 꽉 잡고 이동해야 한다고 한 손잡이를 글에서 찾아 써 보세요",
+          "answerText": "난간",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 160,
-              "end": 162
-            },
-            {
-              "paragraphId": "p2",
-              "start": 135,
-              "end": 137
+              "start": 93,
+              "end": 95
             }
           ],
           "scoring": {
@@ -542,14 +537,33 @@
         },
         {
           "id": "q3",
-          "prompt": "몸을 가누는 모양?",
-          "answerText": "자세",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서 계단을 오르내리는 활동이 다리 근육을 튼튼하게 해 주는 무엇이 된다고 하였는지 써 보세요",
+          "answerText": "운동",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 60,
-              "end": 62
+              "start": 33,
+              "end": 35
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글쓴이가 계단에서 장난을 치거나 뛰어다니면 크게 어떻게 될 수 있다고 주의를 주었는지 두 글자로 써 보세요",
+          "answerText": "다칠",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 69,
+              "end": 71
             }
           ],
           "scoring": {

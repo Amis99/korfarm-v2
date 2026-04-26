@@ -1066,7 +1066,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "여럿을 한꺼번에 모아 처리하는 것은?",
+          "prompt": "여럿을 한꺼번에 모아 처리하는 모양을 가리키는 말을 찾으시오",
+          "answerText": "일괄",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -1075,67 +1077,17 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "일괄"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "한곳에 몰려 복잡하고 어수선한 상태는?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 49,
-              "end": 51
-            },
-            {
-              "paragraphId": "p5",
-              "start": 63,
-              "end": 65
-            },
-            {
-              "paragraphId": "p6",
-              "start": 90,
-              "end": 92
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "딱딱하지 않고 상황에 맞게 부드럽게 대응하는 모양을 가리키는 말을 찾으시오",
+          "answerText": "유연하게",
           "answerMatchMode": "ANY",
-          "answerText": "혼잡"
-        },
-        {
-          "id": "q3",
-          "prompt": "서로 소식이나 뜻을 주고받는 일은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 19,
-              "end": 21
-            },
-            {
-              "paragraphId": "p5",
-              "start": 70,
-              "end": 72
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "연락"
-        },
-        {
-          "id": "q4",
-          "prompt": "상황에 맞게 딱딱하지 않게 바꾸어 가며 하는 모양은?",
           "answerRanges": [
             {
               "paragraphId": "p6",
@@ -1144,30 +1096,102 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "유연하게"
+          "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "판단하거나 정할 때 바탕으로 삼는 것은?",
+          "id": "q3",
+          "prompt": "낱낱이 살펴서 이상이 있는지 확인하는 일을 가리키는 말을 찾으시오",
+          "answerText": "점검",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 150,
-              "end": 152
+              "paragraphId": "p6",
+              "start": 128,
+              "end": 130
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글쓴이가 이 글에서 내세운 중심 주장을 그대로 옮긴 표현을 찾으시오",
+          "answerText": "수거 시점을 조정하자",
           "answerMatchMode": "ANY",
-          "answerText": "기준"
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 34,
+              "end": 45
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "초고에서 한꺼번에 나와서 중심을 흐리게 만든 세 가지 항목을 모두 찾으시오",
+          "answerText": "혼잡 문제 / 연락 문제 / 대안 제시",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 63,
+              "end": 68
+            },
+            {
+              "paragraphId": "p5",
+              "start": 70,
+              "end": 75
+            },
+            {
+              "paragraphId": "p5",
+              "start": 77,
+              "end": 82
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "운영 시간만 조정해도 줄어들 수 있다고 본 두 가지 결과를 모두 찾으시오",
+          "answerText": "교실의 혼잡 / 불편",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 86,
+              "end": 92
+            },
+            {
+              "paragraphId": "p6",
+              "start": 94,
+              "end": 96
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

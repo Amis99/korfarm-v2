@@ -913,24 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "해마다 지역에서 여는 행사로 그 고장의 특별한 문화를 알리는 것은 무엇인가요?",
-          "answerText": "지역 축제",
+          "prompt": "지역 축제가 어떤 행사인지 설명한 부분을 찾으시오.",
+          "answerText": "그 고장의 특별한 문화를 알리는 행사",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 19,
-              "end": 24
-            },
-            {
-              "paragraphId": "p1",
-              "start": 31,
-              "end": 36
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 5
+              "start": 38,
+              "end": 58
             }
           ],
           "scoring": {
@@ -941,19 +931,22 @@
         },
         {
           "id": "q2",
-          "prompt": "축제를 보기 위해 다른 곳에서 찾아오는 사람들은 누구인가요?",
-          "answerText": "관광객",
-          "answerMatchMode": "ANY",
+          "prompt": "사람들이 축제를 즐기며 하는 일을 모두 찾으시오.",
+          "answerTexts": [
+            "다양한 체험",
+            "음식을 먹습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 46,
-              "end": 49
+              "paragraphId": "p1",
+              "start": 76,
+              "end": 82
             },
             {
-              "paragraphId": "p2",
-              "start": 65,
-              "end": 68
+              "paragraphId": "p1",
+              "start": 87,
+              "end": 95
             }
           ],
           "scoring": {
@@ -964,14 +957,22 @@
         },
         {
           "id": "q3",
-          "prompt": "관광객들의 소비 덕분에 늘어나는 것은 무엇인가요?",
-          "answerText": "수입",
-          "answerMatchMode": "ANY",
+          "prompt": "관광객들이 지역에서 소비하는 활동을 모두 찾으시오.",
+          "answerTexts": [
+            "관광객들은 축제장에서 물건을 사고",
+            "식당에서 밥을 먹습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 116,
-              "end": 118
+              "start": 65,
+              "end": 83
+            },
+            {
+              "paragraphId": "p2",
+              "start": 84,
+              "end": 96
             }
           ],
           "scoring": {
@@ -982,14 +983,14 @@
         },
         {
           "id": "q4",
-          "prompt": "축제를 준비하면서 많이 생겨나는 것은 무엇인가요?",
-          "answerText": "일자리",
+          "prompt": "축제를 준비하면서 생겨나는 경제 효과를 찾으시오.",
+          "answerText": "새로운 일자리가 많이 생겨납니다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 17,
-              "end": 20
+              "start": 13,
+              "end": 30
             }
           ],
           "scoring": {
@@ -1000,14 +1001,22 @@
         },
         {
           "id": "q5",
-          "prompt": "방문객들이 불편하지 않도록 잘 관리해야 하는 것 가운데 하나는 무엇인가요?",
-          "answerText": "교통",
-          "answerMatchMode": "ANY",
+          "prompt": "방문객들이 불편하지 않도록 잘 관리해야 하는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "교통",
+            "화장실"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 48,
               "end": 50
+            },
+            {
+              "paragraphId": "p4",
+              "start": 52,
+              "end": 55
             }
           ],
           "scoring": {

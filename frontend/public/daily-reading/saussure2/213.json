@@ -559,24 +559,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "아주 옛날 중국에서 위, 촉, 오 세 나라가 서로 힘을 겨루던 이 사람들의 이야기입니다. 이 사람들은 누구일까요?",
-          "answerText": "영웅",
-          "answerMatchMode": "EXACT",
+          "prompt": "삼국지는 아주 옛날 중국에서 어떤 세 나라가 서로 힘을 겨루던 영웅들의 이야기인가요? 지문에서 세 나라 이름을 찾으시오.",
+          "answerText": "위, 촉, 오",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 40,
-              "end": 42
-            },
-            {
-              "paragraphId": "p2",
-              "start": 26,
-              "end": 28
-            },
-            {
-              "paragraphId": "p3",
-              "start": 57,
-              "end": 59
+              "start": 16,
+              "end": 23
             }
           ],
           "scoring": {
@@ -588,9 +578,9 @@
         },
         {
           "id": "q2",
-          "prompt": "세 사람이 복숭아나무 밭에서 평생을 함께하며 백성들을 구하자고 굳게 맺은 약속은 무엇인가요?",
+          "prompt": "유비, 관우, 장비가 복숭아나무 밭에서 백성들을 구하자고 맺은 굳은 약속은 무엇인가요?",
           "answerText": "도원결의",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -607,14 +597,33 @@
         },
         {
           "id": "q3",
-          "prompt": "바람의 방향까지 바꾸는 천재적인 인물로 놀라운 지혜를 보여준 사람은 누구인가요?",
-          "answerText": "제갈량",
-          "answerMatchMode": "EXACT",
+          "prompt": "세 사람은 누구처럼 서로를 끝까지 굳게 믿고 도왔나요? 지문에서 그 표현을 찾으시오.",
+          "answerText": "피를 나눈 진짜 형제처럼",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 95,
+              "end": 108
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "사람들이 삼국지를 즐겨 읽는 이유를 나타내는 어구를 지문에서 찾으시오.",
+          "answerText": "세상을 살아가는 훌륭한 지혜를 얻기 위해",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 21,
-              "end": 24
+              "start": 106,
+              "end": 128
             }
           ],
           "scoring": {

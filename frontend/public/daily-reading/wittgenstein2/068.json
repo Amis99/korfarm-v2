@@ -570,114 +570,194 @@
     "confirm": {
       "questions": [
         {
-          "id": "q1",
-          "prompt": "1문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 226
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "[초고] 이번 축제에서 우리 반은 일회용 컵을 줄이기 위해 다회용 컵 대여 부스를 운영하였다. 이 활동은 환경 보호를 위해서도 필요했고 학생들이 직접 실천할 수 있는 방법이라서 의미가 있었다. 그래서 시범 운영 결과를 보고서로 정리해 다음 행사에도 이어지게 하려 한다. 다만 초고의 목적이 운영 성과 보고인지, 제도 확대 제안인지가 아직 분명하게 나뉘지 않아 서두의 방향을 더 또렷하게 잡을 필요가 있다."
+                "id": "q1",
+                "prompt": "다회용 컵 대여 부스를 운영한 목적을 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p1",
+                                "start": 19,
+                                "end": 32
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "일회용 컵을 줄이기 위해"
         },
         {
-          "id": "q2",
-          "prompt": "2문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 247
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "운영은 오전 10시부터 오후 4시까지 진행했고, 컵을 빌려 갈 때 보증금 천 원을 받고 반납하면 돌려주는 방식으로 하였다. 처음에는 줄이 길지 않았지만 점심시간 전후로 이용자가 갑자기 늘어 관리가 바빠졌다. 대여와 반납 기록은 수기로 적었는데, 같은 이름이 여러 번 나오거나 반납 시간 표시가 빠진 경우가 있어서 정확한 집계가 조금 어렵다. 그런데 바로 다음 문단에서 정확한 수치를 단정적으로 제시하고 있어 자료 처리 방식이 앞뒤로 어긋난다."
+                "id": "q2",
+                "prompt": "초고에서 아직 분명하게 나뉘지 않은 두 방향을 모두 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p1",
+                                "start": 162,
+                                "end": 170
+                        },
+                        {
+                                "paragraphId": "p1",
+                                "start": 174,
+                                "end": 182
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ALL",
+                "answerTexts": [
+                        "운영 성과 보고",
+                        "제도 확대 제안"
+                ]
         },
         {
-          "id": "q3",
-          "prompt": "3문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 216
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "대여 컵은 총 180개를 준비했고, 실제 이용 횟수는 대략 230회 정도였다고 본다. 반납률은 높았지만 세척 공간이 좁아 처리 속도가 느려졌고, 이 때문에 기다리는 학생들의 불만이 있었다. 또 보증금이 귀찮아서 이용하지 않았다는 의견도 있었는데, 같은 이유로 오히려 분실이 줄었다는 해석도 가능하다. 이런 상반된 반응을 한 문단에 섞어 두어서 무엇이 핵심 문제인지 바로 드러나지 않는다."
+                "id": "q3",
+                "prompt": "다회용 컵 대여 부스의 운영 시간을 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p2",
+                                "start": 4,
+                                "end": 20
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "오전 10시부터 오후 4시까지"
         },
         {
-          "id": "q4",
-          "prompt": "4문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 200
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학생 만족도는 대체로 높았다고 적을 수 있다. 실제로 친구들은 환경에 도움이 된다고 말했고, 사진을 찍을 때 플라스틱 컵보다 보기 좋다는 말도 했다. 그러나 이 부분은 구체적인 설문 문항이나 응답 수가 없이 인상 비평처럼 적혀 있어 보고서 근거로는 약하다. 만족도를 넣으려면 응답 인원, 긍정 응답 비율, 자주 나온 의견을 구분해 정리하는 편이 더 정확하다."
+                "id": "q4",
+                "prompt": "수기 대여와 반납 기록에서 나타난 문제를 모두 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p2",
+                                "start": 137,
+                                "end": 153
+                        },
+                        {
+                                "paragraphId": "p2",
+                                "start": 154,
+                                "end": 169
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ALL",
+                "answerTexts": [
+                        "같은 이름이 여러 번 나오거나",
+                        "반납 시간 표시가 빠진 경우"
+                ]
         },
         {
-          "id": "q5",
-          "prompt": "5문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 224
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "개선 방안으로는 반납대와 세척대를 분리하고, 전자 명단을 이용해 대여 기록을 남기자는 제안을 넣으려 한다. 또한 보증금을 낮추거나 학생증으로 대체하면 참여율이 높아질 수도 있다. 그런데 현재 초고에서는 운영 결과와 개선 방안이 뚜렷이 구분되지 않아 읽는 사람이 어느 부분이 관찰이고 어느 부분이 제안인지 헷갈릴 수 있다. 결과 정리 뒤에 개선안을 따로 묶어 배치하면 논리 흐름이 훨씬 분명해질 것이다."
+                "id": "q5",
+                "prompt": "기다리는 학생들의 불만이 생긴 이유를 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p3",
+                                "start": 58,
+                                "end": 79
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "세척 공간이 좁아 처리 속도가 느려졌고"
         },
         {
-          "id": "q6",
-          "prompt": "6문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 226
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "종합하면 이번 시범 운영은 다회용 컵 제도가 실제로 작동할 수 있다는 가능성을 보여 주었다. 다만 기록 방식, 세척 동선, 보증금 기준처럼 다시 설계해야 할 부분도 많았다. 보고서의 결론은 단순히 좋았다고 끝나는 것이 아니라, 어떤 조건이 갖추어지면 다음 행사에서 확대 운영이 가능한지까지 제시해야 한다. 그래서 최종본에서는 운영 목적, 실제 결과, 문제점, 확대 조건을 분리해 다시 정리할 필요가 있다."
+                "id": "q6",
+                "prompt": "학생 만족도 부분이 보고서 근거로 약한 이유를 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p4",
+                                "start": 94,
+                                "end": 115
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "구체적인 설문 문항이나 응답 수가 없이"
+        },
+        {
+                "id": "q7",
+                "prompt": "개선 방안으로 제시된 기록·동선 관련 제안을 모두 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p5",
+                                "start": 9,
+                                "end": 23
+                        },
+                        {
+                                "paragraphId": "p5",
+                                "start": 25,
+                                "end": 46
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ALL",
+                "answerTexts": [
+                        "반납대와 세척대를 분리하고",
+                        "전자 명단을 이용해 대여 기록을 남기자"
+                ]
+        },
+        {
+                "id": "q8",
+                "prompt": "최종본에서 분리해 다시 정리해야 할 항목을 모두 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p6",
+                                "start": 182,
+                                "end": 187
+                        },
+                        {
+                                "paragraphId": "p6",
+                                "start": 189,
+                                "end": 194
+                        },
+                        {
+                                "paragraphId": "p6",
+                                "start": 196,
+                                "end": 199
+                        },
+                        {
+                                "paragraphId": "p6",
+                                "start": 201,
+                                "end": 206
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ALL",
+                "answerTexts": [
+                        "운영 목적",
+                        "실제 결과",
+                        "문제점",
+                        "확대 조건"
+                ]
         }
-      ]
+]
     }
   }
 }

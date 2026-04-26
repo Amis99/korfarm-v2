@@ -564,7 +564,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "손잡이를 잡고 줄을 돌려가며 뛰어넘는 재미있는 운동은?",
+          "prompt": "특별한 도구나 넓은 운동장이 없어도 누구나 쉽게 시작할 수 있고, 좁은 마당이나 공터에서도 즐겁게 뛸 수 있는 운동의 이름이 무엇인지 알아보세요",
           "answerText": "줄넘기",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -590,64 +590,77 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "학교 밖에서 체육을 하거나 신나게 마음껏 뛰노는 넓은 마당은?",
-          "answerText": "운동장",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 85,
-              "end": 88
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "피를 온몸으로 힘차게 뿜어 돌게 만드는 가장 중요한 몸속 기관은?",
-          "answerText": "심장",
+          "prompt": "줄넘기를 꾸준히 하면 어떤 두 기관이 튼튼해진다고 했는지 찾아보세요",
+          "answerText": "심장과 폐",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 12,
-              "end": 14
+              "end": 17
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "줄넘기가 어디를 자극해서 키가 쑥쑥 자라는 데에 도움을 준다고 했는지 표현을 찾아보세요",
+          "answerText": "뼈를 자극해서",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 72,
+              "end": 79
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "허벅지와 종아리를 이어 주어 다리를 앞뒤로 굽히고 펴는 관절은?",
-          "answerText": "무릎",
-          "answerMatchMode": "ANY",
+          "prompt": "글에 따르면 무릎을 다치지 않으려면 아스팔트보다 어떤 두 가지 바닥에서 뛰어야 한다고 했는지 모두 찾으시오.",
+          "answerText": "흙바닥, 부드러운 우레탄 바닥",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 71,
-              "end": 73
+              "start": 45,
+              "end": 48
+            },
+            {
+              "paragraphId": "p3",
+              "start": 51,
+              "end": 62
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true
+          "revealOnWrong": true,
+          "answerTexts": [
+            "흙바닥",
+            "부드러운 우레탄 바닥"
+          ]
         }
       ]
     }

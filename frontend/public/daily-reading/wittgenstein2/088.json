@@ -571,12 +571,62 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "지난 초안에서 순서가 겹쳐 보인 항목들을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 157
+              "start": 44,
+              "end": 49
+            },
+            {
+              "paragraphId": "p1",
+              "start": 51,
+              "end": 56
+            },
+            {
+              "paragraphId": "p1",
+              "start": 58,
+              "end": 60
+            },
+            {
+              "paragraphId": "p3",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "paragraphId": "p3",
+              "start": 23,
+              "end": 25
+            },
+            {
+              "paragraphId": "p3",
+              "start": 98,
+              "end": 100
+            },
+            {
+              "paragraphId": "p3",
+              "start": 105,
+              "end": 107
+            },
+            {
+              "paragraphId": "p6",
+              "start": 56,
+              "end": 58
+            },
+            {
+              "paragraphId": "p1",
+              "start": 62,
+              "end": 64
+            },
+            {
+              "paragraphId": "p4",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "paragraphId": "p6",
+              "start": 84,
+              "end": 86
             }
           ],
           "scoring": {
@@ -584,17 +634,22 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "준호: 다음 주 학생 자치법정 공개 운영 순서를 다시 정해야 해. 지난 초안은 판사 입장, 사건 소개, 진술, 평결 순서가 겹쳐 보여서 관객이 흐름을 놓칠 수 있겠더라.\n서윤: 맞아. 특히 사회자가 사건 배경을 길게 설명하면 학생 판사가 직접 사건을 요약하는 부분과 겹칠 수 있어."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "판사 입장",
+            "사건 소개",
+            "진술",
+            "평결"
+          ]
         },
         {
           "id": "q2",
-          "prompt": "2문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "민아가 사회자에게 맡기자고 한 내용을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 141
+              "start": 13,
+              "end": 34
             }
           ],
           "scoring": {
@@ -603,16 +658,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "민아: 그러면 사회자는 행사의 목적과 유의 사항만 짧게 말하고, 사건 개요는 판사가 맡는 게 어떨까? 그래야 역할이 분명해져.\n준호: 좋은데, 관객 입장에서는 피고와 원고가 누구인지 먼저 알아야 하니까 소개 문장은 사회자가 한 줄 정도 넣는 게 좋겠어."
+          "answerText": "행사의 목적과 유의 사항만 짧게 말하고"
         },
         {
           "id": "q3",
-          "prompt": "3문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "사건 개요를 누가 맡는 게 어떠냐고 했는지 드러나는 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 143
+              "paragraphId": "p2",
+              "start": 36,
+              "end": 51
             }
           ],
           "scoring": {
@@ -621,16 +676,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "서윤: 진술 순서도 바꾸자. 지금은 원고 진술 뒤에 바로 방청객 질문이 들어가는데, 그러면 피고 입장이 충분히 나오기 전에 분위기가 한쪽으로 쏠릴 수 있어.\n민아: 그럼 원고 진술, 피고 진술, 상호 반박까지 끝낸 다음에 질문을 받는 방식이 더 공정하겠네."
+          "answerText": "사건 개요는 판사가 맡는 게"
         },
         {
           "id": "q4",
-          "prompt": "4문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "사건 개요를 판사가 맡으면 생기는 효과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 172
+              "paragraphId": "p2",
+              "start": 61,
+              "end": 69
             }
           ],
           "scoring": {
@@ -639,16 +694,31 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "준호: 평결 전에 판사단 협의 시간을 따로 둬야 하지 않을까?\n서윤: 필요해. 대신 무대가 조용해지면 분위기가 끊기니까 그 시간에는 사회자가 관객에게 판단 기준을 다시 정리해 주면 좋겠어.\n민아: 그러면 협의 시간이 단순한 대기처럼 보이지 않고, 관객도 무엇을 근거로 판단해야 하는지 다시 생각할 수 있겠다."
+          "answerText": "역할이 분명해져"
         },
         {
           "id": "q5",
-          "prompt": "5문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "질문을 받기 전에 끝내기로 한 진술 절차를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 141
+              "paragraphId": "p3",
+              "start": 20,
+              "end": 25
+            },
+            {
+              "paragraphId": "p3",
+              "start": 95,
+              "end": 100
+            },
+            {
+              "paragraphId": "p3",
+              "start": 102,
+              "end": 107
+            },
+            {
+              "paragraphId": "p3",
+              "start": 109,
+              "end": 114
             }
           ],
           "scoring": {
@@ -656,17 +726,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "서윤: 마지막 순서는 판결문 낭독, 판사단 총평, 관객 소감 순으로 두자. 소감을 먼저 받으면 총평이 반복 설명처럼 느껴질 수 있어.\n준호: 맞아. 그리고 끝에 생활 규정 안내를 너무 길게 넣지 말고, 자치법정 취지만 다시 짚는 한 문장으로 마무리하자."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "원고 진술",
+            "피고 진술",
+            "상호 반박"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "평결 전에 따로 두자고 한 시간을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 143
+              "paragraphId": "p4",
+              "start": 10,
+              "end": 19
             }
           ],
           "scoring": {
@@ -675,7 +749,57 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "민아: 정리하면 사회자는 목적과 유의 사항, 사건 인물 소개만 맡고, 사건 개요는 판사가 설명한다. 진술은 원고와 피고를 모두 들은 뒤 질문을 받고, 평결 전 협의 시간에는 판단 기준을 다시 안내한다. 이 순서대로 대본을 다시 정리해서 오늘 안에 공유할게."
+          "answerText": "판사단 협의 시간"
+        },
+        {
+          "id": "q7",
+          "prompt": "협의 시간에 사회자가 관객에게 해 주면 좋겠다고 한 일을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 84,
+              "end": 97
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "판단 기준을 다시 정리해"
+        },
+        {
+          "id": "q8",
+          "prompt": "마지막 순서로 정한 세 항목을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 12,
+              "end": 18
+            },
+            {
+              "paragraphId": "p5",
+              "start": 20,
+              "end": 26
+            },
+            {
+              "paragraphId": "p5",
+              "start": 28,
+              "end": 33
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "판결문 낭독",
+            "판사단 총평",
+            "관객 소감"
+          ]
         }
       ]
     }

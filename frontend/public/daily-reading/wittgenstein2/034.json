@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "경제 현상을 이해할 때 함께 살펴야 한다고 한 요소로 가장 적절한 것은?",
+          "prompt": "복잡계 경제학이 경제를 어떤 체계로 보는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 199
+              "start": 32,
+              "end": 59
             }
           ],
           "scoring": {
@@ -585,16 +585,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "복잡계 경제학은 경제를 완전한 균형 상태로 설명하기보다, 서로 다른 주체들이 끊임없이 반응하며 바뀌는 체계로 본다. 이 관점에서는 소비자, 기업, 정부가 모두 제한된 정보 속에서 움직이고, 그 결과도 미리 정해진 하나의 경로로 수렴하지 않는다. 따라서 경제 현상을 이해하려면 개별 주체의 선택만이 아니라, 주체들 사이의 연결과 피드백까지 함께 살펴야 한다."
+          "answerText": "서로 다른 주체들이 끊임없이 반응하며 바뀌는 체계"
         },
         {
           "id": "q2",
-          "prompt": "한 번 표준이 된 방식이 잘 바뀌지 않는 이유로 가장 알맞은 것은?",
+          "prompt": "제한된 정보 속에서 움직인다고 제시된 주체를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 181
+              "paragraphId": "p1",
+              "start": 73,
+              "end": 76
+            },
+            {
+              "paragraphId": "p1",
+              "start": 78,
+              "end": 80
+            },
+            {
+              "paragraphId": "p1",
+              "start": 82,
+              "end": 84
             }
           ],
           "scoring": {
@@ -602,17 +612,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이때 중요한 개념 가운데 하나가 경로 의존성이다. 어떤 기술이나 제도가 초기에 선택되면 이후의 선택은 그 출발점을 쉽게 벗어나지 못하는데, 이를 경로 의존성이라고 한다. 한 번 표준이 된 방식은 사용자 습관, 교육 비용, 관련 장비와 규칙의 축적 때문에 계속 유지되기 쉬우며, 더 나은 대안이 등장해도 즉시 교체되지 않는다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "소비자",
+            "기업",
+            "정부"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "시장에서 장기 경쟁 구조를 바꾸는 요인으로 이 글이 든 것은?",
+          "prompt": "경로 의존성의 뜻을 설명하는 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 177
+              "paragraphId": "p2",
+              "start": 28,
+              "end": 76
             }
           ],
           "scoring": {
@@ -621,16 +635,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "경로 의존성이 강해지면 경로 고착이 일어난다. 기존 방식을 계속 쓰는 편이 학습 비용을 덜 들이고, 이미 많은 사람이 같은 방식을 쓰고 있을수록 네트워크 효과도 커지기 때문이다. 그래서 시장에서는 효율성만으로 결과가 결정되지 않고, 초기에 누가 얼마나 빨리 확산되었는가가 장기 경쟁 구조를 바꾸는 요인이 되기도 한다."
+          "answerText": "어떤 기술이나 제도가 초기에 선택되면 이후의 선택은 그 출발점을 쉽게 벗어나지 못하는데"
         },
         {
           "id": "q4",
-          "prompt": "창발의 예로 이 글에 제시된 내용으로 가장 알맞은 것은?",
+          "prompt": "표준이 된 방식이 계속 유지되기 쉬운 이유를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 183
+              "paragraphId": "p2",
+              "start": 109,
+              "end": 115
+            },
+            {
+              "paragraphId": "p2",
+              "start": 117,
+              "end": 122
+            },
+            {
+              "paragraphId": "p2",
+              "start": 124,
+              "end": 137
             }
           ],
           "scoring": {
@@ -638,17 +662,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "복잡계 경제학은 또 창발이라는 개념을 중시한다. 창발은 각 참여자의 행동을 따로 볼 때는 드러나지 않던 질서가 전체 수준에서 새롭게 나타나는 현상이다. 시장 가격의 급격한 변동, 특정 플랫폼의 급속한 우위, 예상 밖의 군집 행동은 개별 선택의 단순한 합으로만 설명하기 어렵고, 상호작용이 만든 전체 효과로 보아야 할 때가 많다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "사용자 습관",
+            "교육 비용",
+            "관련 장비와 규칙의 축적"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "복잡계 경제학이 자기 조직화 능력을 중요하게 보는 이유로 가장 알맞은 것은?",
+          "prompt": "경로 의존성이 강해지면 일어나는 현상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 185
+              "paragraphId": "p3",
+              "start": 13,
+              "end": 18
             }
           ],
           "scoring": {
@@ -657,16 +685,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이런 관점에서 경제는 외부 명령만으로 움직이는 기계가 아니라, 내부의 반응과 피드백으로 스스로 질서를 다시 만드는 체계로 이해된다. 주체들은 새로운 정보를 얻으면 전략을 바꾸고, 그 전략 변화가 다시 시장 구조를 바꾸며, 바뀐 구조는 다음 선택에 영향을 준다. 복잡계 경제학이 자기 조직화 능력을 중요하게 보는 이유도 여기에 있다."
+          "answerText": "경로 고착"
         },
         {
           "id": "q6",
-          "prompt": "이 글이 경제 정책 설계에서 함께 고려해야 한다고 한 점으로 가장 알맞은 것은?",
+          "prompt": "이미 많은 사람이 같은 방식을 쓸수록 커지는 효과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 191
+              "paragraphId": "p3",
+              "start": 81,
+              "end": 88
             }
           ],
           "scoring": {
@@ -675,7 +703,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 복잡계 경제학의 핵심은 경제를 단순화된 계산 결과로만 보지 않는 데 있다. 경로 의존성은 과거의 선택이 현재를 묶는 방식을 설명하고, 창발은 상호작용 속에서 예상 밖의 질서가 생겨나는 방식을 보여 준다. 따라서 이 관점은 경제 정책을 설계할 때도 단일한 정답을 고정하기보다, 불확실성과 적응 가능성을 함께 고려해야 한다는 점을 시사한다."
+          "answerText": "네트워크 효과"
+        },
+        {
+          "id": "q7",
+          "prompt": "창발의 뜻을 설명하는 문장을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 31,
+              "end": 81
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "각 참여자의 행동을 따로 볼 때는 드러나지 않던 질서가 전체 수준에서 새롭게 나타나는 현상"
+        },
+        {
+          "id": "q8",
+          "prompt": "경제 정책을 설계할 때 함께 고려해야 할 것을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 157,
+              "end": 161
+            },
+            {
+              "paragraphId": "p6",
+              "start": 163,
+              "end": 169
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "불확실성",
+            "적응 가능성"
+          ]
         }
       ]
     }

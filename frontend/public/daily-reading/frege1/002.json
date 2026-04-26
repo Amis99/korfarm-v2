@@ -872,39 +872,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "문단 전체의 주제를 담는 문장은 무엇인가요?",
-          "answerText": "중심 문장",
+          "prompt": "설명문이 어떤 글인지 찾으시오.",
+          "answerText": "정보를 전달하는 글",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 66,
-              "end": 71
-            },
-            {
-              "paragraphId": "p1",
-              "start": 79,
-              "end": 84
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p3",
-              "start": 70,
-              "end": 75
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 5
+              "start": 5,
+              "end": 15
             }
           ],
           "scoring": {
@@ -915,24 +890,22 @@
         },
         {
           "id": "q2",
-          "prompt": "중심 문장을 자세히 설명하는 문장은 무엇인가요?",
-          "answerText": "뒷받침 문장",
-          "answerMatchMode": "ANY",
+          "prompt": "중심 문장을 설명한 부분을 모두 찾으시오.",
+          "answerTexts": [
+            "가장 핵심이 되는 문장",
+            "문단 전체의 주제"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 18,
-              "end": 24
+              "paragraphId": "p1",
+              "start": 52,
+              "end": 64
             },
             {
-              "paragraphId": "p3",
-              "start": 32,
-              "end": 38
-            },
-            {
-              "paragraphId": "p3",
-              "start": 77,
-              "end": 83
+              "paragraphId": "p1",
+              "start": 86,
+              "end": 95
             }
           ],
           "scoring": {
@@ -943,14 +916,34 @@
         },
         {
           "id": "q3",
-          "prompt": "중심 문장이 자주 놓이는 첫 위치는 어디인가요?",
-          "answerText": "맨 앞",
-          "answerMatchMode": "ANY",
+          "prompt": "중심 문장을 찾을 때 볼 위치와 단서를 모두 찾으시오.",
+          "answerTexts": [
+            "문단의 맨 앞",
+            "맨 뒤",
+            "포괄적인 문장",
+            "핵심 어구"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 27,
+              "start": 23,
               "end": 30
+            },
+            {
+              "paragraphId": "p2",
+              "start": 33,
+              "end": 36
+            },
+            {
+              "paragraphId": "p2",
+              "start": 63,
+              "end": 70
+            },
+            {
+              "paragraphId": "p2",
+              "start": 91,
+              "end": 96
             }
           ],
           "scoring": {
@@ -961,14 +954,22 @@
         },
         {
           "id": "q4",
-          "prompt": "중심 문장이 자주 놓이는 다른 위치는 어디인가요?",
-          "answerText": "맨 뒤",
-          "answerMatchMode": "ANY",
+          "prompt": "뒷받침 문장이 드는 것과 하는 역할을 모두 찾으시오.",
+          "answerTexts": [
+            "구체적인 예시나 이유",
+            "주제를 상세히 설명한다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 33,
-              "end": 36
+              "paragraphId": "p3",
+              "start": 40,
+              "end": 51
+            },
+            {
+              "paragraphId": "p3",
+              "start": 56,
+              "end": 68
             }
           ],
           "scoring": {
@@ -979,14 +980,14 @@
         },
         {
           "id": "q5",
-          "prompt": "반복적으로 확인하면 도움이 되는 것은 무엇인가요?",
-          "answerText": "핵심 어구",
+          "prompt": "중심 문장과 뒷받침 문장의 관계를 이해하면 알 수 있는 것을 찾으시오.",
+          "answerText": "글의 짜임을 쉽게 알 수 있다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 91,
-              "end": 96
+              "paragraphId": "p3",
+              "start": 94,
+              "end": 110
             }
           ],
           "scoring": {

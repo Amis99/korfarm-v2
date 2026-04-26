@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 문법 현상을 어떤 배경이나 문제의식에서 제시하는가?",
+          "prompt": "두 형식이 나타낼 수 있는 한정의 뜻을 풀이한 어구를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 164
+              "start": 84,
+              "end": 93
             }
           ],
           "scoring": {
@@ -585,16 +585,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "보조사 '만'과 '뿐'은 모두 어떤 대상을 한정한다는 점에서 비슷해 보이지만, 실제 문장에서는 쓰임과 호응 방식이 완전히 같지 않다. 두 형식 모두 '오직 그것에 한함'이라는 뜻을 나타낼 수 있지만, 문장 안에서 결합하는 위치와 뒤따르는 표현의 제약을 살피면 서로 다른 문법적 성격이 드러난다."
+          "answerText": "오직 그것에 한함"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 판별 기준이나 기본 원리를 어떻게 설명하는가?",
+          "prompt": "'만'이 직접 붙을 수 있는 자리를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 168
+              "start": 8,
+              "end": 10
+            },
+            {
+              "paragraphId": "p2",
+              "start": 12,
+              "end": 14
+            },
+            {
+              "paragraphId": "p2",
+              "start": 16,
+              "end": 20
             }
           ],
           "scoring": {
@@ -602,17 +612,26 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "먼저 '만'은 체언, 부사, 조사 뒤 등 비교적 다양한 자리에서 직접 붙어 제한의 뜻을 표시하는 보조사이다. 그래서 '민수만 왔다', '오늘만 쉰다', '집에서만 공부했다'처럼 여러 성분에 결합할 수 있다. 이때 '만'은 다른 가능성을 배제하고 특정 대상이나 범위만을 남긴다는 의미를 분명하게 만든다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "체언",
+            "부사",
+            "조사 뒤"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단은 해당 현상의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "사람과 장소 성분에 '만'이 붙은 예를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 226
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 72
+            },
+            {
+              "paragraphId": "p2",
+              "start": 86,
+              "end": 95
             }
           ],
           "scoring": {
@@ -620,17 +639,30 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "반면 '뿐'은 표면상 비슷한 한정 의미를 가지지만, 단독으로 끝나는 경우보다 '-뿐이다', '-뿐만 아니라', '-ㄹ 뿐'처럼 일정한 구성을 이루며 쓰이는 일이 많다. 예를 들어 '학생일 뿐이다', '기다릴 뿐이다'처럼 서술어와 함께 문장을 마무리하거나, '친절할 뿐만 아니라 책임감도 있다'처럼 뒤 절과 호응하는 형식으로 나타난다. 따라서 '뿐'은 한정 의미와 함께 뒤 표현과의 결속을 강하게 요구한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "민수만 왔다",
+            "집에서만 공부했다"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단은 구별점이나 추가 조건을 어떤 방향으로 드러내는가?",
+          "prompt": "'뿐'이 이루며 쓰이는 일정한 구성을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 210
+              "paragraphId": "p3",
+              "start": 44,
+              "end": 48
+            },
+            {
+              "paragraphId": "p3",
+              "start": 52,
+              "end": 59
+            },
+            {
+              "paragraphId": "p3",
+              "start": 63,
+              "end": 67
             }
           ],
           "scoring": {
@@ -638,17 +670,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "의미 차이도 미묘하다. '만'은 배제의 초점이 강해서 다른 대상이 빠졌다는 느낌을 선명하게 준다. 그래서 '세 명만 통과했다'라고 하면 통과 인원이 적다는 인상과 함께 제한성이 크게 드러난다. 반면 '뿐'은 어떤 사실을 축약해 제시하거나 판단을 정리하는 느낌이 강하다. '그는 웃을 뿐이었다'에서는 배제 의미도 있지만, 행위가 그 정도에 그친다는 진술적 뉘앙스가 더 살아난다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "-뿐이다",
+            "-뿐만 아니라",
+            "-ㄹ 뿐"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단은 해석상의 주의점이나 적용 효과를 어떻게 설명하는가?",
+          "prompt": "'만'이 만드는 의미를 설명한 부분을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 244
+              "paragraphId": "p2",
+              "start": 124,
+              "end": 157
             }
           ],
           "scoring": {
@@ -657,16 +693,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "호응 표현의 제약에서도 차이가 분명하다. '뿐'은 '뿐이다', '뿐만 아니라', 'ㄹ 뿐(이다)'처럼 이어지는 형식이 자연스럽지만, '만'은 그런 호응을 그대로 대신하지 못한다. 예를 들어 '공부할 뿐만 아니라 운동도 한다'는 자연스럽지만 '공부할 만 아니라'는 성립하지 않는다. 반대로 '오늘만 쉰다'는 가능하지만 '오늘뿐 쉰다'는 일반적인 문장으로 쓰기 어렵다. 이는 두 형식이 뜻만 비슷할 뿐 통사적 지위가 같지 않음을 보여 준다."
+          "answerText": "다른 가능성을 배제하고 특정 대상이나 범위만을 남긴다는 의미"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 이 문법 주제를 어떤 관점에서 정리하는가?",
+          "prompt": "'뿐'이 뒤 표현과 맺는 관계를 설명한 부분을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 209
+              "paragraphId": "p3",
+              "start": 206,
+              "end": 225
             }
           ],
           "scoring": {
@@ -675,7 +711,59 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 '만'과 '뿐'을 구별할 때는 단순히 둘 다 한정 표현이라는 사실만 기억해서는 부족하다. '만'은 다양한 성분에 직접 붙어 배제 범위를 표시하는 보조사이고, '뿐'은 한정 의미를 가지면서도 서술 표현이나 연결 구성과 결합하는 경향이 강하다. 실제 문장에서는 무엇을 제한하는지뿐 아니라 뒤에 어떤 표현이 이어지는지까지 함께 보아야 자연스러운 호응 관계를 판단할 수 있다."
+          "answerText": "뒤 표현과의 결속을 강하게 요구한다"
+        },
+        {
+          "id": "q7",
+          "prompt": "자연스러운 예와 성립하지 않는 예를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 107,
+              "end": 124
+            },
+            {
+              "paragraphId": "p5",
+              "start": 135,
+              "end": 144
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "공부할 뿐만 아니라 운동도 한다",
+            "공부할 만 아니라"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "실제 문장에서 함께 보아야 할 두 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 147,
+              "end": 156
+            },
+            {
+              "paragraphId": "p6",
+              "start": 162,
+              "end": 177
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "무엇을 제한하는지",
+            "뒤에 어떤 표현이 이어지는지"
+          ]
         }
       ]
     }

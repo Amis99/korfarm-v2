@@ -559,9 +559,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "초록색이었던 나뭇잎이 빨갛고 노랗게 변하는 것을 바로 이것이라고 부른답니다. 이것은 무엇일까요?",
+          "prompt": "초록색이었던 나뭇잎이 빨갛고 노랗게 변하는 것을 무엇이라고 부른다고 했나요?",
           "answerText": "단풍",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -588,29 +588,14 @@
         },
         {
           "id": "q2",
-          "prompt": "가을이 되어 날씨가 추워지면 이 색이 사라지고 빨간색과 노란색이 나타나요. 이 색은 무슨 색일까요?",
-          "answerText": "초록색",
-          "answerMatchMode": "EXACT",
+          "prompt": "나뭇잎 속에는 원래 초록색 말고도 무엇이 숨어 있다고 했나요?",
+          "answerText": "여러 가지 색깔",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 30,
-              "end": 33
-            },
-            {
               "paragraphId": "p2",
-              "start": 33,
-              "end": 36
-            },
-            {
-              "paragraphId": "p2",
-              "start": 75,
-              "end": 78
-            },
-            {
-              "paragraphId": "p2",
-              "start": 114,
-              "end": 117
+              "start": 41,
+              "end": 49
             }
           ],
           "scoring": {
@@ -622,14 +607,33 @@
         },
         {
           "id": "q3",
-          "prompt": "단풍이 들어 바싹 말라 땅에 떨어진 나뭇잎을 우리는 이것이라고 부르지요. 이것은 무엇일까요?",
-          "answerText": "낙엽",
-          "answerMatchMode": "EXACT",
+          "prompt": "여름에 초록색이 가장 강하게 나타나는 이유로, 무엇을 많이 받는다고 했나요?",
+          "answerText": "햇빛",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 56,
-              "end": 58
+              "paragraphId": "p2",
+              "start": 64,
+              "end": 66
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "가을이 되어 날씨가 추워지면 꽁꽁 숨어 있던 무엇이 나타난다고 했나요?",
+          "answerText": "빨간색과 노란색",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 133,
+              "end": 141
             }
           ],
           "scoring": {

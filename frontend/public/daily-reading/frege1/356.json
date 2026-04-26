@@ -421,19 +421,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "창가를 넘어오는 것은 무엇인가요?",
-          "answerText": "햇살",
-          "answerMatchMode": "ANY",
+          "prompt": "햇살이 사람처럼 낮잠을 자는 모습을 모두 찾으시오.",
+          "answerTexts": [
+            "따스한 햇살이 창가를 넘고",
+            "마루에 누워 낮잠을 자요"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 4,
-              "end": 6
+              "start": 0,
+              "end": 14
             },
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 2
+              "paragraphId": "p1",
+              "start": 15,
+              "end": 28
             }
           ],
           "scoring": {
@@ -444,19 +447,14 @@
         },
         {
           "id": "q2",
-          "prompt": "바람결에 살랑살랑 흔들리는 것은 무엇인가요?",
-          "answerText": "그림자",
+          "prompt": "그림자가 흔들리는 모습을 나타낸 반복 표현을 찾으시오.",
+          "answerText": "살랑살랑",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 24,
-              "end": 27
-            },
-            {
-              "paragraphId": "p3",
-              "start": 12,
-              "end": 15
+              "start": 14,
+              "end": 18
             }
           ],
           "scoring": {
@@ -467,14 +465,22 @@
         },
         {
           "id": "q3",
-          "prompt": "그림자를 흔들리게 하는 것은 무엇인가요?",
-          "answerText": "바람결",
-          "answerMatchMode": "ANY",
+          "prompt": "햇살과 그림자가 사람처럼 행동하는 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "햇살은 방긋방긋 웃고",
+            "그림자는 조용히 춤을 춰요"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 9,
-              "end": 12
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 11
+            },
+            {
+              "paragraphId": "p3",
+              "start": 12,
+              "end": 26
             }
           ],
           "scoring": {
@@ -485,14 +491,14 @@
         },
         {
           "id": "q4",
-          "prompt": "햇살과 그림자가 잡고 있는 것은 무엇인가요?",
-          "answerText": "손",
+          "prompt": "햇살과 그림자가 서로 손을 잡은 것처럼 표현한 부분을 찾으시오.",
+          "answerText": "둘은 서로 손을 잡은 채",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 6,
-              "end": 7
+              "start": 0,
+              "end": 13
             }
           ],
           "scoring": {
@@ -503,14 +509,14 @@
         },
         {
           "id": "q5",
-          "prompt": "햇살과 그림자가 함께 노는 시간은 언제인가요?",
-          "answerText": "하루 종일",
+          "prompt": "햇살과 그림자가 함께 노는 시간을 나타낸 부분을 찾으시오.",
+          "answerText": "하루 종일 함께 놀아요",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 14,
-              "end": 19
+              "end": 26
             }
           ],
           "scoring": {

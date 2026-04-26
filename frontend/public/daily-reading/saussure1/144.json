@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "공기 바꾸는 일의 이름?",
+          "prompt": "나쁜 공기를 밖으로 보내고 맑은 공기를 들이는 일을 무엇이라고 하나요? 지문에서 한 단어로 찾아 보세요",
           "answerText": "환기",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -591,44 +591,24 @@
         },
         {
           "id": "q2",
-          "prompt": "깨끗하게 유지할 것.",
-          "answerText": "공기",
-          "answerMatchMode": "EXACT",
+          "prompt": "방 안의 더러워진 공기를 갈아 주려면 무엇을 활짝 열어야 할까요? 지문에서 답을 찾아 보세요",
+          "answerText": "창문",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 3,
-              "end": 5
+              "start": 33,
+              "end": 35
             },
             {
               "paragraphId": "p1",
-              "start": 49,
-              "end": 51
-            },
-            {
-              "paragraphId": "p1",
-              "start": 74,
-              "end": 76
-            },
-            {
-              "paragraphId": "p1",
-              "start": 89,
-              "end": 91
-            },
-            {
-              "paragraphId": "p1",
-              "start": 128,
-              "end": 130
-            },
-            {
-              "paragraphId": "p1",
-              "start": 137,
-              "end": 139
+              "start": 114,
+              "end": 116
             },
             {
               "paragraphId": "p2",
-              "start": 57,
-              "end": 59
+              "start": 12,
+              "end": 14
             }
           ],
           "scoring": {
@@ -640,14 +620,33 @@
         },
         {
           "id": "q3",
-          "prompt": "음식을 만드는 활동?",
-          "answerText": "요리",
-          "answerMatchMode": "EXACT",
+          "prompt": "공기가 깨끗해지면 우리 머리는 어떻게 된다고 했나요? 지문에서 그대로 찾아 보세요",
+          "answerText": "맑아지고",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 151,
+              "end": 155
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글쓴이는 누구의 건강을 위해 환기를 잊지 말자고 했나요? 지문에서 한 단어로 찾아 보세요",
+          "answerText": "가족",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 106,
-              "end": 108
+              "start": 144,
+              "end": 146
             }
           ],
           "scoring": {

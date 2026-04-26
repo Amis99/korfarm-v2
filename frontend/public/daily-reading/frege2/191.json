@@ -583,14 +583,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "대한민국 산업화를 요약하는 표현으로 제시된 말은 무엇인가요?",
-          "answerText": "한강의 기적",
+          "prompt": "대한민국 산업화가 어떤 변화였는지 설명한 부분을 찾으시오.",
+          "answerText": "전쟁 이후 폐허에 가까웠던 사회를 짧은 시간 안에 공업 국가로 바꾸어 놓은 거대한 변화",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 179,
-              "end": 185
+              "start": 11,
+              "end": 59
             }
           ],
           "scoring": {
@@ -601,14 +601,14 @@
         },
         {
           "id": "q2",
-          "prompt": "산업화 초기에 수출 중심으로 기반을 닦은 산업은 무엇인가요?",
-          "answerText": "경공업",
+          "prompt": "정부가 추진한 경제 개발 계획의 방향을 찾으시오.",
+          "answerText": "수출을 중심으로 한 경제 개발 계획",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 19,
-              "end": 22
+              "paragraphId": "p1",
+              "start": 77,
+              "end": 96
             }
           ],
           "scoring": {
@@ -619,13 +619,21 @@
         },
         {
           "id": "q3",
-          "prompt": "이후 본격적으로 육성된 산업 분야는 무엇인가요?",
-          "answerText": "중화학 공업",
-          "answerMatchMode": "ANY",
+          "prompt": "산업화 과정에서 육성된 산업을 모두 찾으시오.",
+          "answerTexts": [
+            "섬유나 의류 같은 경공업 제품",
+            "조선, 철강, 자동차, 전자 산업 같은 중화학 공업"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 70,
+              "start": 9,
+              "end": 25
+            },
+            {
+              "paragraphId": "p2",
+              "start": 48,
               "end": 76
             }
           ],
@@ -637,14 +645,28 @@
         },
         {
           "id": "q4",
-          "prompt": "성장 뒤에 놓인 희생을 보여 주는 집단 가운데 하나는 누구인가요?",
-          "answerText": "노동자",
-          "answerMatchMode": "ANY",
+          "prompt": "산업화 성장 뒤에 놓인 희생의 모습을 모두 찾으시오.",
+          "answerTexts": [
+            "긴 노동 시간",
+            "낮은 임금",
+            "열악한 작업 환경"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 13,
-              "end": 16
+              "start": 50,
+              "end": 57
+            },
+            {
+              "paragraphId": "p3",
+              "start": 59,
+              "end": 64
+            },
+            {
+              "paragraphId": "p3",
+              "start": 66,
+              "end": 75
             }
           ],
           "scoring": {
@@ -655,14 +677,28 @@
         },
         {
           "id": "q5",
-          "prompt": "산업화가 드러낸 새로운 과제 중 자연과 관련된 것은 무엇인가요?",
-          "answerText": "환경 오염",
-          "answerMatchMode": "ANY",
+          "prompt": "산업화가 진행되면서 드러난 새로운 과제를 모두 찾으시오.",
+          "answerTexts": [
+            "도시와 농촌의 격차",
+            "환경 오염",
+            "노동 문제"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 14,
+              "end": 24
+            },
             {
               "paragraphId": "p4",
               "start": 26,
               "end": 31
+            },
+            {
+              "paragraphId": "p4",
+              "start": 33,
+              "end": 38
             }
           ],
           "scoring": {

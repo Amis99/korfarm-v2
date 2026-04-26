@@ -552,14 +552,24 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "푸른색 ( )을 입으심.",
-          "answerText": "제복",
-          "answerMatchMode": "EXACT",
+          "prompt": "마을의 질서와 안전을 지켜 주는 곳이라는 뜻의 단어를 지문에서 모두 찾아 보세요.",
+          "answerText": "경찰서",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 46,
-              "end": 48
+              "start": 0,
+              "end": 3
+            },
+            {
+              "paragraphId": "p1",
+              "start": 124,
+              "end": 127
+            },
+            {
+              "paragraphId": "p2",
+              "start": 32,
+              "end": 35
             }
           ],
           "scoring": {
@@ -571,9 +581,28 @@
         },
         {
           "id": "q2",
-          "prompt": "위급할 땐 ( ) 번호이에요.",
+          "prompt": "지문에서 경찰관이 입는 옷을 찾아 보세요.",
+          "answerText": "푸른색 제복",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 42,
+              "end": 48
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "위급한 일이 생기면 어떤 번호로 전화를 걸어 도움을 청한다고 했는지 지문에서 찾아 보세요.",
           "answerText": "112",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -589,15 +618,20 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "안전한 ( )를 만드심.",
-          "answerText": "사회",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "도로에서 수신호를 하시는 분이 누구인지 지문에서 모두 찾아 보세요.",
+          "answerText": "경찰관",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
+              "paragraphId": "p1",
+              "start": 32,
+              "end": 35
+            },
+            {
               "paragraphId": "p2",
-              "start": 132,
-              "end": 134
+              "start": 102,
+              "end": 105
             }
           ],
           "scoring": {

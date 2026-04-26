@@ -559,13 +559,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다치거나 위험하지 않고 편안한 상태는?",
-          "answerText": "안전",
-          "answerMatchMode": "EXACT",
+          "prompt": "1문단에서 경찰관이 지켜 준다고 한 어구를 찾아 쓰시오.",
+          "answerText": "우리의 안전",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 9,
+              "start": 5,
               "end": 11
             }
           ],
@@ -577,14 +577,14 @@
         },
         {
           "id": "q2",
-          "prompt": "차나 사람이 다니기 위해 만들어 놓은 길은?",
-          "answerText": "도로",
-          "answerMatchMode": "EXACT",
+          "prompt": "1문단에서 경찰관이 잡아서 벌을 받게 한다고 한 대상을 찾아 쓰시오.",
+          "answerText": "도둑",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
+              "paragraphId": "p1",
+              "start": 20,
+              "end": 22
             }
           ],
           "scoring": {
@@ -595,9 +595,27 @@
         },
         {
           "id": "q3",
-          "prompt": "나쁜 사람이 나타났을 때 도움을 요청하는 전화번호는?",
+          "prompt": "2문단에서 도로에서 경찰이 정리한다고 한 것을 찾아 쓰시오.",
+          "answerText": "교통",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 5,
+              "end": 7
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "3문단에서 위험한 일이 생기면 전화하라고 한 번호를 찾아 쓰시오.",
           "answerText": "112번",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",

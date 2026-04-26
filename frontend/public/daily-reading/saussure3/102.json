@@ -557,9 +557,28 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지구 내부의 거대한 에너지가 갑자기 밖으로 나오면서 땅이 심하게 흔들리는 현상은?",
+          "prompt": "지구 내부에서 소용돌이치고 있다고 한 것을 지문에서 찾으시오.",
+          "answerText": "거대한 에너지",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 25,
+              "end": 32
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "땅이 흔들리는 현상으로 제시된 말을 지문에서 찾으시오.",
           "answerText": "지진",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -585,15 +604,23 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "지하 깊은 곳에서 암석이 녹아 만들어진 뜨거운 액체 상태의 물질은 무엇인가요?",
-          "answerText": "마그마",
-          "answerMatchMode": "EXACT",
+          "id": "q3",
+          "prompt": "화산이 폭발하면 흘러나오는 것과 나중에 땅을 비옥하게 만드는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "시뻘건 용암",
+            "화산재"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 17,
-              "end": 20
+              "start": 54,
+              "end": 60
+            },
+            {
+              "paragraphId": "p2",
+              "start": 93,
+              "end": 96
             }
           ],
           "scoring": {
@@ -604,15 +631,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "화산 폭발 후 땅에 쌓여 시간이 지나면 땅을 거름지게 만들어 주는 가루 형태의 물질은?",
-          "answerText": "화산재",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "자연의 변화를 이해하면 위험한 상황에서도 어떻게 행동할 수 있는지 지문에서 찾으시오.",
+          "answerText": "침착하게",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 93,
-              "end": 96
+              "paragraphId": "p3",
+              "start": 105,
+              "end": 109
             }
           ],
           "scoring": {

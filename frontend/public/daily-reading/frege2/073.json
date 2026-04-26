@@ -915,24 +915,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "형사 처벌 대신 보호 처분을 받는 만 10세 이상 14세 미만 아이들을 무엇이라고 하나요?",
-          "answerText": "촉법소년",
-          "answerMatchMode": "ANY",
+          "prompt": "최근 소년 범죄의 어떤 변화로 인해 촉법소년 연령 하향 논쟁이 달아올랐는지 지문의 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "흉포화",
+            "지능화"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 24,
-              "end": 28
+              "start": 10,
+              "end": 13
             },
             {
               "paragraphId": "p1",
-              "start": 60,
-              "end": 64
-            },
-            {
-              "paragraphId": "p4",
-              "start": 6,
-              "end": 10
+              "start": 15,
+              "end": 18
             }
           ],
           "scoring": {
@@ -943,10 +941,36 @@
         },
         {
           "id": "q2",
-          "prompt": "연령 하향 찬성 측이 최우선으로 내세운 가치 가운데 하나는 무엇인가요?",
-          "answerText": "피해자 보호",
+          "prompt": "촉법소년의 정의에서 범행 당시 나이 범위를 나타내는 어구를 찾으시오.",
+          "answerText": "만 10세 이상 14세 미만",
           "answerMatchMode": "ANY",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 73,
+              "end": 88
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "연령 하향 찬성 측이 최우선으로 내세우는 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "범죄 예방의 실효성",
+            "피해자 보호"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 15,
+              "end": 25
+            },
             {
               "paragraphId": "p2",
               "start": 27,
@@ -960,33 +984,23 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "가벼운 처벌이 피해자에게 준다고 본 추가적 고통은 무엇인가요?",
-          "answerText": "2차 가해",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 187,
-              "end": 192
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q4",
-          "prompt": "반대 측이 예산을 더 투입해야 한다고 본 프로그램은 무엇인가요?",
-          "answerText": "재사회화 프로그램",
-          "answerMatchMode": "ANY",
+          "prompt": "연령 하향에 반대하거나 신중해야 한다는 측이 강조하는 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "소년 범죄의 근본적인 원인 해결",
+            "교화 시스템의 개선"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 225,
-              "end": 234
+              "start": 28,
+              "end": 45
+            },
+            {
+              "paragraphId": "p3",
+              "start": 47,
+              "end": 57
             }
           ],
           "scoring": {
@@ -997,14 +1011,14 @@
         },
         {
           "id": "q5",
-          "prompt": "결론에서 우리 사회가 선택해야 할 가치 중 하나로 제시된 것은 무엇인가요?",
-          "answerText": "회복적 정의",
+          "prompt": "단편적인 처벌 강화보다 구축해야 한다고 한 것은 무엇인가요?",
+          "answerText": "촘촘한 안전망",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 26,
-              "end": 32
+              "start": 253,
+              "end": 260
             }
           ],
           "scoring": {

@@ -850,14 +850,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "줄을 서서 ( ) 기다립니다.",
-          "answerText": "차례차례",
-          "answerMatchMode": "EXACT",
+          "prompt": "버스 정류장에서 기다리는 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "버스 정류장에서 줄을 서서",
+            "차례차례 기다림"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
+              "start": 28,
+              "end": 42
+            },
+            {
+              "paragraphId": "p1",
               "start": 43,
-              "end": 47
+              "end": 51
             }
           ],
           "scoring": {
@@ -869,14 +877,22 @@
         },
         {
           "id": "q2",
-          "prompt": "자리에 앉아 ( )를 매요.",
-          "answerText": "안전벨트",
-          "answerMatchMode": "EXACT",
+          "prompt": "버스에 탈 때 지켜야 할 일을 모두 찾으시오.",
+          "answerTexts": [
+            "완전히 멈춘 뒤에",
+            "앞문으로 승차합니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 35,
-              "end": 39
+              "paragraphId": "p1",
+              "start": 57,
+              "end": 66
+            },
+            {
+              "paragraphId": "p1",
+              "start": 67,
+              "end": 77
             }
           ],
           "scoring": {
@@ -888,14 +904,49 @@
         },
         {
           "id": "q3",
-          "prompt": "내릴 땐 ( ) 근처에서 기다려요.",
-          "answerText": "뒷문",
-          "answerMatchMode": "EXACT",
+          "prompt": "버스 안에서 자리에 앉으면 해야 할 일을 모두 찾으시오.",
+          "answerTexts": [
+            "안전벨트를 꼭 매고",
+            "손잡이를 잡음"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 6,
-              "end": 8
+              "paragraphId": "p2",
+              "start": 35,
+              "end": 45
+            },
+            {
+              "paragraphId": "p2",
+              "start": 46,
+              "end": 53
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "달리는 버스에서 하지 말아야 할 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "일어나거나",
+            "장난치지 않습니다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 64,
+              "end": 69
+            },
+            {
+              "paragraphId": "p2",
+              "start": 70,
+              "end": 79
             }
           ],
           "scoring": {

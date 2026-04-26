@@ -684,114 +684,47 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '눕는다'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 3,
-              "end": 6
-            },
-            {
-              "paragraphId": "p2",
-              "start": 3,
-              "end": 6
-            },
-            {
-              "paragraphId": "p2",
-              "start": 19,
-              "end": 22
-            },
-            {
-              "paragraphId": "p3",
-              "start": 10,
-              "end": 13
-            },
-            {
-              "paragraphId": "p3",
-              "start": 25,
-              "end": 28
-            },
-            {
-              "paragraphId": "p5",
-              "start": 12,
-              "end": 15
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "다리와 발이 만나는 잘록한 부분을 가리키는 두 글자 단어를 찾으시오.",
+          "answerText": "발목",
           "answerMatchMode": "ANY",
-          "answerText": "눕는다"
-        },
-        {
-          "id": "q2",
-          "prompt": "지문에서 '비바람'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 17,
-              "end": 20
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "비바람"
-        },
-        {
-          "id": "q3",
-          "prompt": "지문에서 '먼저'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 43,
-              "end": 45
-            },
-            {
-              "paragraphId": "p4",
-              "start": 17,
-              "end": 19
-            },
-            {
-              "paragraphId": "p4",
-              "start": 42,
-              "end": 44
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "먼저"
-        },
-        {
-          "id": "q4",
-          "prompt": "지문에서 '발목까지'를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 15,
-              "end": 19
+              "end": 17
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "발목까지"
+          "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "지문에서 '풀뿌리'를 모두 찾으시오.",
+          "id": "q2",
+          "prompt": "발이 닿는 바닥 가까운 곳을 가리키는 두 글자 단어를 찾으시오.",
+          "answerText": "발밑",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 20,
+              "end": 22
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "땅속에 박혀 풀을 떠받치는 뿌리를 가리키는 세 글자 단어를 찾으시오.",
+          "answerText": "풀뿌리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p5",
@@ -800,12 +733,78 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "풀을 사람처럼 표현해 의인법이 가장 또렷이 드러나는 세 글자 시어를 찾으시오.",
+          "answerText": "웃는다",
           "answerMatchMode": "ANY",
-          "answerText": "풀뿌리"
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 45,
+              "end": 48
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "풀과 바람을 견주어 풀의 빠른 움직임을 강조하는 다섯 글자 시구를 모두 찾으시오.",
+          "answerText": "바람보다도",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 8,
+              "end": 13
+            },
+            {
+              "paragraphId": "p2",
+              "start": 24,
+              "end": 29
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "마지막 연들에서 후렴처럼 반복되어 어두운 분위기를 만드는 여섯 글자 시구를 모두 찾으시오.",
+          "answerText": "날이 흐리고",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 6
+            },
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 6
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

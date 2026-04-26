@@ -474,19 +474,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "노래 적힌 종이?",
-          "answerText": "악보",
-          "answerMatchMode": "EXACT",
+          "prompt": "초롱이가 오두막 문을 열고 마침내 발견한 전설의 물건은 무엇인지 찾아보세요",
+          "answerText": "빛의 악보",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 37,
+              "start": 34,
               "end": 39
-            },
-            {
-              "paragraphId": "p1",
-              "start": 50,
-              "end": 52
             }
           ],
           "scoring": {
@@ -498,19 +493,19 @@
         },
         {
           "id": "q2",
-          "prompt": "즐겁게 부르는 것?",
-          "answerText": "노래",
-          "answerMatchMode": "EXACT",
+          "prompt": "악보를 펼치자 하나둘 모여들어 신비로운 합창을 시작한 친구들은 누구인지 찾아보세요",
+          "answerText": "반딧불이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 105,
-              "end": 107
+              "start": 58,
+              "end": 62
             },
             {
-              "paragraphId": "p1",
-              "start": 168,
-              "end": 170
+              "paragraphId": "p2",
+              "start": 49,
+              "end": 53
             }
           ],
           "scoring": {
@@ -522,14 +517,33 @@
         },
         {
           "id": "q3",
-          "prompt": "가장 귀한 물건?",
-          "answerText": "보물",
-          "answerMatchMode": "EXACT",
+          "prompt": "초롱이가 깨달은 숲의 보물은 친구들과 함께 부르는 무엇인지 찾아보세요",
+          "answerText": "즐거운 노래",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 145,
-              "end": 147
+              "start": 164,
+              "end": 170
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "초롱이가 오늘 숲에서 겪은 신비로운 일을 어디에 기록했는지 찾아보세요",
+          "answerText": "일기장",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 122,
+              "end": 125
             }
           ],
           "scoring": {

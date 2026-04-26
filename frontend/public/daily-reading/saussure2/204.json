@@ -1027,14 +1027,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "누군가 급히 챙기다 놓고 간 이것 하나만 바닥에 남아 있었습니다. 이것은 무엇일까요?",
-          "answerText": "단추",
-          "answerMatchMode": "EXACT",
+          "prompt": "원장 선생님은 무서워도 아이들이 어떻게 하면 안 된다고 말했나요? 지문에서 그대로 찾으시오.",
+          "answerText": "서로 떨어지면 안 된다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 306,
-              "end": 308
+              "start": 161,
+              "end": 173
             }
           ],
           "scoring": {
@@ -1046,24 +1046,14 @@
         },
         {
           "id": "q2",
-          "prompt": "한쪽 눈이 떨어져 나간 오래된 이것이 분이의 손에 들려 있었습니다. 이것은 무엇일까요?",
-          "answerText": "인형",
-          "answerMatchMode": "EXACT",
+          "prompt": "분이의 손에는 무엇이 들려 있었나요? 지문에서 그대로 찾으시오.",
+          "answerText": "헝겊 인형 하나",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 31,
-              "end": 33
-            },
-            {
-              "paragraphId": "p2",
-              "start": 65,
-              "end": 67
-            },
-            {
-              "paragraphId": "p2",
-              "start": 150,
-              "end": 152
+              "start": 28,
+              "end": 36
             }
           ],
           "scoring": {
@@ -1075,14 +1065,33 @@
         },
         {
           "id": "q3",
-          "prompt": "아이들이 걸어가는 길가에는 자꾸 이것이 일었습니다. 이것은 무엇일까요?",
-          "answerText": "먼지",
-          "answerMatchMode": "EXACT",
+          "prompt": "김 아주머니는 분이의 손을 누구 손에 얹어 주었나요? 지문에서 그대로 찾으시오.",
+          "answerText": "영이 손에",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 364,
-              "end": 366
+              "start": 125,
+              "end": 130
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "분이가 자꾸 뒤를 돌아본 까닭은 무엇인가요? 지문에서 그대로 찾으시오.",
+          "answerText": "우리 집이 저쪽이었을까 봐",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 268,
+              "end": 282
             }
           ],
           "scoring": {

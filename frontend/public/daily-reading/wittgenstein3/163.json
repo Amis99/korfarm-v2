@@ -569,114 +569,180 @@
     },
     "confirm": {
       "questions": [
-        {
-          "id": "q1",
-          "prompt": "1문단은 이야기를 어떤 상황이나 분위기에서 시작하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 102
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q1",
+              "prompt":  "1문단에서 \u0027힘이 없고 활기가 없다\u0027는 뜻의 낱말을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  98,
+                                       "end":  101
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "맥없다"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "한 개의 기쁨을 찾아, 구보는 남대문을 안에서 밖으로 나가 보기로 한다. 그러나 그곳에는 불어 드는 바람도 없이, 양옆에 웅숭그리고 앉아 있는 서너 명의 지게꾼들의 그 모양이 맥없다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 인물이나 사건의 모습을 어떻게 드러내는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 116
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q2",
+              "prompt":  "2문단에서 구보가 가고 싶다고 생각한 곳을 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  13,
+                                       "end":  21
+                                   },
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  25,
+                                       "end":  39
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "사람들 있는 곳",
+                                  "약동하는 무리들이 있는 곳"
+                              ]
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "구보는 고독을 느끼고, 사람들 있는 곳으로, 약동하는 무리들이 있는 곳으로, 가고 싶다 생각한다. 그는 눈앞에 경성역을 본다. 그곳에는 마땅히 인생이 있을 게다. 이 낡은 서울의 호흡과 또 감정이 있을 게다."
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단은 정서나 갈등을 어떤 장면으로 심화하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 97
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q3",
+              "prompt":  "2문단에서 구보의 기대를 반복적으로 드러내는 표현을 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  80,
+                                       "end":  89
+                                   },
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  106,
+                                       "end":  115
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "인생이 있을 게다",
+                                  "감정이 있을 게다"
+                              ]
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "도회의 소설가는 모름지기 이 도회의 항구와 친하여야 한다. 그러나 물론 그러한 직업의식은 어떻든 좋았다. 다만 구보는 고독을 삼등 대합실 군중 속에 피할 수 있으면 그만이다."
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단은 시선이나 상황을 어떤 방향으로 전환하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 293
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q4",
+              "prompt":  "3문단에서 구보가 군중 속에 피하고자 한 것을 드러내는 문장을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p3",
+                                       "start":  59,
+                                       "end":  97
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "다만 구보는 고독을 삼등 대합실 군중 속에 피할 수 있으면 그만이다."
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그러나 오히려 고독은 그곳에 있었다. 구보가 한옆에 끼여 앉을 수도 없게시리 사람들은 그곳에 빽빽하게 모여 있어도, 그들의 누구에게서도 인간 본래의 온정을 찾을 수는 없었다. 그네들은 거의 옆엣사람에게 한 마디 말을 건네는 일도 없이, 오직 자기네들 사무에 바빴고, 그리고 간혹 말을 건네도, 그것은 자기네가 타고 갈 열차의 시각이나 그러한 것에 지나지 않았다. 그네들의 동료가 아닌 사람에게 그네들은 변소에 다녀올 동안의 그네들 짐을 부탁하는 일조차 없었다. 남을 결코 믿지 않는 그네들의 눈은 보기에 딱하고 또 가엾었다."
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단은 인물의 반응이나 분위기를 어떻게 부각하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 484
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q5",
+              "prompt":  "4문단에서 빽빽한 군중 속에서도 찾을 수 없던 것을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p4",
+                                       "start":  76,
+                                       "end":  85
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "인간 본래의 온정"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "구보는 한구석에 가 서서, 그의 앞에 앉아 있는 노파를 본다. 그는 뉘 집에 드난을 살다가 이제 늙고 또 쇠잔한 몸을 이끌어, 결코 넉넉하지 못한 어느 시골, 딸네 집이라도 찾아가는지 모른다. 이미 굳어 버린 그의 안면 근육은 어떠한 다행한 일에도 펴질 턱 없고, 그리고 그의 몽롱한 두 눈은 비록 그의 딸의 그지없는 효양을 가지고도 감동시킬 수 없을지 모른다. 노파 옆에 앉은 중년의 시골 신사는 그의 시골서 조그만 백화점을 경영하고 있을 게다. 그의 점포에는 마땅히 주단포목도 있고, 일용 잡화도 있고, 또 흔히 쓰이는 약품도 갖추어 있을 게다. 그는 이제 그의 옆에 놓인 물품을 들고 자랑스러이 차에 오를 게다. 구보는 그 시골 신사가 노파와 사이에 되도록 간격을 가지려고 노력하는 것을 발견하고, 그리고 그를 업신여겼다. 만약 그에게 옅은 지혜와 또 약간의 용기를 주면 그는 삼등 승차권을 주머니 속에 간수하고 일이등 대합실에 오만하게 자리 잡고 앉을 게다."
-        },
-        {
-          "id": "q6",
-          "prompt": "6문단은 앞선 이야기를 어떤 의미로 묶어 내는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 396
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q6",
+              "prompt":  "4문단에서 사람들의 단절된 태도를 보여 주는 행동을 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p4",
+                                       "start":  113,
+                                       "end":  130
+                                   },
+                                   {
+                                       "paragraphId":  "p4",
+                                       "start":  132,
+                                       "end":  147
+                                   },
+                                   {
+                                       "paragraphId":  "p4",
+                                       "start":  241,
+                                       "end":  256
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "한 마디 말을 건네는 일도 없이",
+                                  "오직 자기네들 사무에 바빴고",
+                                  "짐을 부탁하는 일조차 없었다"
+                              ]
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "문득 구보는 그의 얼굴에 부종을 발견하고 그의 앞을 떠났다. 신장염. 그뿐만 아니라, 구보는 자기 자신의 만성 위 확장을 새삼스러이 생각해 내지 않으면 안 되었다. 그러나 구보가 매점 옆에까지 갔었을 때, 그는 그곳에서도 역시 병자를 보지 않으면 안 되었다. 사십여 세의 노동자. 전경부의 광범한 팽륭. 돌출한 안구. 또 손의 경미한 진동. 분명한 바제도씨병. 그것은 누구에게든 결코 깨끗한 느낌을 주지는 못한다. 그의 좌우에는 좌석이 비어 있어도 사람들은 그곳에 앉으려 들지 않는다. 그에게서 두 칸통 떨어진 곳에 있던 아이 업은 젊은 아낙네가 그의 바스켓 속에서 꺼내다 잘못하여 시멘트 바닥에 떨어뜨린 한 개의 복숭아가 굴러 병자의 발 앞에까지 왔을 때, 여인은 그것을 쫓아와 집기를 단념하기조차 하였다."
-        }
+          {
+              "id":  "q7",
+              "prompt":  "5문단에서 노파와 거리를 두려는 시골 신사에 대한 구보의 반응을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  398,
+                                       "end":  406
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "그를 업신여겼다"
+          },
+          {
+              "id":  "q8",
+              "prompt":  "6문단에서 복숭아가 굴러간 곳을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  352,
+                                       "end":  359
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "병자의 발 앞"
+          }
       ]
     }
   }

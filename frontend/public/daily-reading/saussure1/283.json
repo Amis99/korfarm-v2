@@ -396,79 +396,49 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "책이 많은 공부 장소?",
+          "prompt": "많은 사람이 함께 책을 읽고 공부하므로 정해진 예절을 반드시 지켜야 하는 소중한 장소를 지문에서 찾아보세요",
           "answerText": "도서관",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p2",
-              "start": 57,
-              "end": 60
-            },
-            {
-              "paragraphId": "p2",
-              "start": 118,
-              "end": 121
-            },
-            {
-              "paragraphId": "p2",
-              "start": 140,
-              "end": 143
-            }
+            {"paragraphId": "p1", "start": 0, "end": 3},
+            {"paragraphId": "p2", "start": 57, "end": 60},
+            {"paragraphId": "p2", "start": 118, "end": 121},
+            {"paragraphId": "p2", "start": 140, "end": 143}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지켜야 할 바른 태도?",
-          "answerText": "예절",
-          "answerMatchMode": "EXACT",
+          "prompt": "다른 사람의 독서를 방해하지 않도록 모두가 쾌적한 환경에서 책을 즐기기 위해 필요한 마음을 지문에서 찾아보세요",
+          "answerText": "배려하는 마음",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 40,
-              "end": 42
-            },
-            {
-              "paragraphId": "p2",
-              "start": 122,
-              "end": 124
-            }
+            {"paragraphId": "p1", "start": 157, "end": 164}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "남을 생각하는 마음?",
-          "answerText": "배려",
-          "answerMatchMode": "EXACT",
+          "prompt": "도서관의 물건을 깨끗하게 사용하는 기본 약속을 실천해야 하는 사람은 누구인지 지문에서 찾아보세요",
+          "answerText": "어린이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 157,
-              "end": 159
-            }
+            {"paragraphId": "p2", "start": 92, "end": 95}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "우리가 도서관 예절을 잘 지킬 때 더욱 행복한 공간이 되는 도서관을 부르는 별명을 지문에서 찾아보세요",
+          "answerText": "지혜의 샘",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 133, "end": 138}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         }
       ]

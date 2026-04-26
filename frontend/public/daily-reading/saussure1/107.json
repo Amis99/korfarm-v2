@@ -552,28 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "까만 무엇늘에 별이 나타남인가요?",
-          "answerText": "밤하",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 3,
-              "end": 5
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "꼬마 강아지 무엇이는 별을 봐요인가요?",
+          "prompt": "마당에 앉아 별을 본 꼬마 강아지의 이름을 글에서 찾아 모두 써 보세요",
           "answerText": "멍멍",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -604,20 +585,58 @@
           "revealOnWrong": true
         },
         {
+          "id": "q2",
+          "prompt": "별들이 예쁘게 빛나는 모습을 무엇에 빗대어 표현했는지 글에서 찾아 써 보세요",
+          "answerText": "보석",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 55,
+              "end": 57
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q3",
-          "prompt": "신기한 무엇리가 들려요인가요?",
-          "answerText": "목소",
-          "answerMatchMode": "EXACT",
+          "prompt": "별을 세던 멍멍이에게 갑자기 무엇이 들려왔는지 찾아 모두 써 보세요",
+          "answerText": "목소리",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 17,
-              "end": 19
+              "end": 20
             },
             {
               "paragraphId": "p2",
               "start": 52,
-              "end": 54
+              "end": 55
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "보이지 않는 별을 찾기 위한 첫 번째 무엇이 시작되었는지 찾아 써 보세요",
+          "answerText": "힌트",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 123,
+              "end": 125
             }
           ],
           "scoring": {

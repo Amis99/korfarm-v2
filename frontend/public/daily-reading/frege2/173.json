@@ -747,14 +747,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "스마트 시티가 도시 문제를 해결할 때 활용하는 기술은 무엇인가요?",
-          "answerText": "정보통신기술",
+          "prompt": "스마트 시티가 도시 문제를 해결하는 방법을 찾으시오.",
+          "answerText": "정보통신기술을 활용해 도시 문제를 해결한다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 8,
-              "end": 14
+              "end": 31
             }
           ],
           "scoring": {
@@ -765,14 +765,14 @@
         },
         {
           "id": "q2",
-          "prompt": "도시 곳곳에서 데이터를 모으는 장치는 무엇인가요?",
-          "answerText": "센서",
+          "prompt": "스마트 시티가 관리하는 방식을 설명한 부분을 찾으시오.",
+          "answerText": "도시의 인프라와 데이터를 연결하여 관리하는 곳",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 11,
-              "end": 13
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 58
             }
           ],
           "scoring": {
@@ -783,14 +783,14 @@
         },
         {
           "id": "q3",
-          "prompt": "수집된 데이터가 분석을 위해 보내지는 곳은 어디인가요?",
-          "answerText": "중앙 시스템",
+          "prompt": "스마트 시티의 목적을 찾으시오.",
+          "answerText": "시민들의 삶의 질을 높이는 것",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 69,
-              "end": 75
+              "paragraphId": "p1",
+              "start": 68,
+              "end": 84
             }
           ],
           "scoring": {
@@ -801,14 +801,22 @@
         },
         {
           "id": "q4",
-          "prompt": "에너지를 절약하기 위해 밝기를 조절한다고 한 시설은 무엇인가요?",
-          "answerText": "가로등",
-          "answerMatchMode": "ANY",
+          "prompt": "분석된 데이터로 교통과 에너지를 관리하는 예를 모두 찾으시오.",
+          "answerTexts": [
+            "막히는 도로의 신호를 조절하여",
+            "가로등의 밝기를 조절하여"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
+              "start": 31,
+              "end": 47
+            },
+            {
+              "paragraphId": "p3",
               "start": 60,
-              "end": 63
+              "end": 73
             }
           ],
           "scoring": {
@@ -819,14 +827,14 @@
         },
         {
           "id": "q5",
-          "prompt": "글에서 스마트 시티를 어떤 도시 모델이라고 평가하나요?",
-          "answerText": "지속 가능한 미래 도시",
+          "prompt": "교통 관리의 결과로 줄어드는 것을 찾으시오.",
+          "answerText": "교통 체증을 줄인다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 60,
-              "end": 72
+              "paragraphId": "p3",
+              "start": 48,
+              "end": 58
             }
           ],
           "scoring": {

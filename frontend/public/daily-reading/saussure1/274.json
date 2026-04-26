@@ -396,94 +396,52 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "물건 겉의 예쁜 무늬?",
+          "prompt": "물건 겉면을 꾸민 그림이나 무늬를 무엇이라고 하는지 지문에서 찾아보세요",
           "answerText": "문양",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 9,
-              "end": 11
-            },
-            {
-              "paragraphId": "p1",
-              "start": 72,
-              "end": 74
-            },
-            {
-              "paragraphId": "p1",
-              "start": 145,
-              "end": 147
-            },
-            {
-              "paragraphId": "p2",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p2",
-              "start": 57,
-              "end": 59
-            },
-            {
-              "paragraphId": "p2",
-              "start": 117,
-              "end": 119
-            }
+            {"paragraphId": "p1", "start": 9, "end": 11},
+            {"paragraphId": "p1", "start": 72, "end": 74},
+            {"paragraphId": "p1", "start": 145, "end": 147},
+            {"paragraphId": "p2", "start": 3, "end": 5},
+            {"paragraphId": "p2", "start": 57, "end": 59},
+            {"paragraphId": "p2", "start": 117, "end": 119}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "예부터 전해 오는 것?",
-          "answerText": "전통",
-          "answerMatchMode": "EXACT",
+          "prompt": "조상들이 문양에 담은 간절한 바람은 무엇이었는지 지문에서 찾아보세요",
+          "answerText": "복을 바라고 나쁜 기운을 막아내려는",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 6,
-              "end": 8
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 114,
-              "end": 116
-            }
+            {"paragraphId": "p1", "start": 77, "end": 96}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "슬기롭고 똑똑한 마음?",
-          "answerText": "지혜",
-          "answerMatchMode": "EXACT",
+          "prompt": "문양들을 가만히 관찰하다 보면 무엇을 느낄 수 있는지 지문에서 찾아보세요",
+          "answerText": "미적 감각",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 134,
-              "end": 136
-            }
+            {"paragraphId": "p2", "start": 82, "end": 87}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "문양 속에 자신들의 바람과 지혜를 담아낸 사람은 누구인지 지문에서 찾아보세요",
+          "answerText": "조상들",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 97, "end": 100},
+            {"paragraphId": "p2", "start": 73, "end": 76}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         }
       ]

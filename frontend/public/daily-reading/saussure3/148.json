@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "수수 대를 묶어 세워 놓은 더미로, 소년과 소녀가 비를 피한 곳은?",
+          "prompt": "소년과 소녀가 소나기를 피해 몸을 숨긴 곳을 찾으시오.",
           "answerText": "수수단",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -581,14 +581,22 @@
         },
         {
           "id": "q2",
-          "prompt": "죽기 전에 남기는 마지막 말이나 부탁을 뜻하는 단어는 무엇인가요?",
-          "answerText": "유언",
-          "answerMatchMode": "EXACT",
+          "prompt": "수수단 안에서 두 사람이 들은 것과 느낀 것을 모두 찾으시오.",
+          "answerTexts": [
+            "소나기 소리",
+            "서로의 온기"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 38,
-              "end": 40
+              "paragraphId": "p1",
+              "start": 61,
+              "end": 67
+            },
+            {
+              "paragraphId": "p1",
+              "start": 73,
+              "end": 79
             }
           ],
           "scoring": {
@@ -600,14 +608,49 @@
         },
         {
           "id": "q3",
-          "prompt": "참 세고 강한 느낌을 주는 상태를 뜻하는 말은 무엇인가요?",
-          "answerText": "강렬했습니다",
-          "answerMatchMode": "EXACT",
+          "prompt": "소나기를 맞은 뒤 소녀에게 일어난 일을 모두 찾으시오.",
+          "answerTexts": [
+            "병이 깊어져",
+            "학교에 나오지 못했습니다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 69,
+              "end": 75
+            },
+            {
+              "paragraphId": "p2",
+              "start": 76,
+              "end": 89
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "소녀가 남긴 부탁과 간직하고 싶었던 기억을 모두 찾으시오.",
+          "answerTexts": [
+            "유언",
+            "소나기 내리던 날의 기억"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 122,
-              "end": 128
+              "start": 38,
+              "end": 40
+            },
+            {
+              "paragraphId": "p3",
+              "start": 60,
+              "end": 73
             }
           ],
           "scoring": {

@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "무엇 나는가 내려놓을 것이 있다는 듯 부려야 할 몸이 무겁다는 듯?",
+          "prompt": "1연에서 나비가 낮게 나는 이유처럼 제시된 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 11
+              "start": 16,
+              "end": 29
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "가을엔 나비조차 낮게"
+          "answerText": "내려놓을 것이 있다는 듯"
         },
         {
           "id": "q2",
-          "prompt": "핵심 개념은 무엇인가요?",
+          "prompt": "사과나무가 열매를 내려놓은 뒤에도 어떤 상태인지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 12
+              "start": 41,
+              "end": 60
             }
           ],
           "scoring": {
@@ -603,15 +603,38 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "가지가 휘어지도록 열매"
+          "answerText": "그 휘어진 빈 가지는 펴지지 않는다"
         },
         {
           "id": "q3",
-          "prompt": "주요 소재는 무엇인가요?",
+          "prompt": "열매의 자리가 비어 있음을 나타내는 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 68,
+              "start": 4,
+              "end": 6
+            },
+            {
+              "paragraphId": "p3",
+              "start": 24,
+              "end": 26
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "허공"
+        },
+        {
+          "id": "q4",
+          "prompt": "나비가 빈 가지에 앉았다 날아간 뒤 눈앞에 생기는 변화를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 73,
               "end": 81
             }
           ],
@@ -621,34 +644,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "축복처럼 눈앞이 환해진다"
-        },
-        {
-          "id": "q4",
-          "prompt": "아, 네가, 네가, 무엇 그렇지 않다면 이토록 사과나무 그늘이 환해질 수 있을까?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 11,
-              "end": 25
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "어디선가 나를 내려놓았구나"
+          "answerText": "눈앞이 환해진다"
         },
         {
           "id": "q5",
-          "prompt": "꿰맨 자국 하나 없는 나비의 날개보다 오늘은 내 백결(무수히 꿰매 누더기가 된 옷)의 무엇?",
+          "prompt": "4연에서 반복되어 호명되는 말을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 48,
-              "end": 59
+              "paragraphId": "p4",
+              "start": 3,
+              "end": 5
+            },
+            {
+              "paragraphId": "p4",
+              "start": 7,
+              "end": 9
             }
           ],
           "scoring": {
@@ -657,16 +667,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "옷이 한결 가볍겠구나"
+          "answerText": "네가"
         },
         {
           "id": "q6",
-          "prompt": "무엇 툭, 떨어지는 사과 한 알 사과 한 알을 내려놓는 데 오 년이 걸렸다?",
+          "prompt": "5연에서 가벼움을 대비하는 두 대상을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 6
+              "paragraphId": "p5",
+              "start": 12,
+              "end": 18
+            },
+            {
+              "paragraphId": "p5",
+              "start": 25,
+              "end": 49
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "나비의 날개",
+            "내 백결(무수히 꿰매 누더기가 된 옷)의 옷"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "괄호 안에서 '백결'의 뜻을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 30,
+              "end": 45
             }
           ],
           "scoring": {
@@ -675,7 +711,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "아주 뒤늦게"
+          "answerText": "무수히 꿰매 누더기가 된 옷"
+        },
+        {
+          "id": "q8",
+          "prompt": "사과 한 알을 내려놓는 데 걸린 시간을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 38,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "오 년"
         }
       ]
     }

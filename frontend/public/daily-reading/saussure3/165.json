@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지구의 온도를 높이는 주된 원인이 되는 기체는 무엇인가요?",
+          "prompt": "대기 중에서 열을 가두어 지구의 온도를 올리는 것은 무엇인가요?",
           "answerText": "온실가스가",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -576,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "바다 표면의 높이를 뜻하며, 빙하가 녹으면 상승하는 것은?",
-          "answerText": "해수면이",
-          "answerMatchMode": "EXACT",
+          "prompt": "온난화로 인해 북극에서 녹는 것은 무엇인가요?",
+          "answerText": "빙하",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 64,
-              "end": 68
+              "start": 57,
+              "end": 59
             }
           ],
           "scoring": {
@@ -595,14 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "석탄, 석유처럼 무척 먼 옛날 생물들이 변하여 만들어진 에너지는?",
-          "answerText": "화석 연료를",
-          "answerMatchMode": "EXACT",
+          "prompt": "석탄이나 석유 같은 연료를 지문에서는 무엇이라고 부르나요?",
+          "answerText": "화석 연료",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 11,
-              "end": 17
+              "end": 16
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "환경 오염의 원인을 정확히 알면 찾을 수 있다고 한 것은 무엇인가요?",
+          "answerText": "해결 방법",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 65,
+              "end": 70
             }
           ],
           "scoring": {

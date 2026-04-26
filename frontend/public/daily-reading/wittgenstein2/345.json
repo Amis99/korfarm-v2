@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "가을에 말라 떨어지지 않는 대상으로 제시된 것을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 28
+              "end": 9
             }
           ],
           "scoring": {
@@ -585,16 +585,34 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "질(質) 좋은 잣이\n가을에 말라 떨어지지 아니하매,"
+          "answerText": "질(質) 좋은 잣"
         },
         {
           "id": "q2",
-          "prompt": "2문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "그 잣이 가을에 어떻게 되지 않는다고 했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 15,
+              "end": 27
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "말라 떨어지지 아니하매"
+        },
+        {
+          "id": "q3",
+          "prompt": "'중(重)히 여겨 가겠다'고 한 대상을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 41
+              "end": 2
             }
           ],
           "scoring": {
@@ -603,11 +621,55 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "너를 중(重)히 여겨 가겠다 하신 것과는 달리\n낯이 변해 버리신 겨울에여."
+          "answerText": "너를"
         },
         {
-          "id": "q3",
-          "prompt": "3문단을 이해한 내용으로 가장 적절한 것은?",
+          "id": "q4",
+          "prompt": "기대와 달라졌음을 드러내는 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 19,
+              "end": 25
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "것과는 달리"
+        },
+        {
+          "id": "q5",
+          "prompt": "호명의 어미 '-여'가 쓰인 표현을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 36,
+              "end": 40
+            },
+            {
+              "paragraphId": "p6",
+              "start": 15,
+              "end": 22
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "겨울에여",
+            "처지(處地)여"
+          ]
+        },
+        {
+          "id": "q6",
+          "prompt": "연못 주변의 배경을 나타내는 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -624,13 +686,13 @@
           "answerText": "달이 그림자 내린 연못 갓"
         },
         {
-          "id": "q4",
-          "prompt": "4문단을 이해한 내용으로 가장 적절한 것은?",
+          "id": "q7",
+          "prompt": "지나가는 물결을 무엇에 빗대었는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 17
+              "start": 12,
+              "end": 16
             }
           ],
           "scoring": {
@@ -639,34 +701,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "지나가는 물결에 대한 모래로다."
+          "answerText": "모래로다"
         },
         {
-          "id": "q5",
-          "prompt": "5문단을 이해한 내용으로 가장 적절한 것은?",
+          "id": "q8",
+          "prompt": "화자의 제한된 시선과 처지를 드러내는 구절을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 0,
               "end": 10
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "모습이야 바라보지만"
-        },
-        {
-          "id": "q6",
-          "prompt": "6문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
+            },
             {
               "paragraphId": "p6",
               "start": 0,
-              "end": 23
+              "end": 22
             }
           ],
           "scoring": {
@@ -674,8 +723,11 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "세상 모든 것 여희여 버린 처지(處地)여."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "모습이야 바라보지만",
+            "세상 모든 것 여희여 버린 처지(處地)여"
+          ]
         }
       ]
     }

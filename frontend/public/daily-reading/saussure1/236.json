@@ -396,29 +396,54 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "꽃과 나무가 있는 뜰?",
-          "answerText": "정원",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 이야기에 등장하는 두 인물의 이름을 모두 찾아 보세요",
+          "answerText": "하양이, 나무 할아버지",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 47,
-              "end": 49
+              "start": 0,
+              "end": 3
             },
             {
               "paragraphId": "p1",
-              "start": 59,
-              "end": 61
+              "start": 90,
+              "end": 93
             },
             {
-              "paragraphId": "p2",
-              "start": 57,
-              "end": 59
-            },
-            {
-              "paragraphId": "p2",
+              "paragraphId": "p1",
               "start": 106,
-              "end": 108
+              "end": 109
+            },
+            {
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 30
+            },
+            {
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 69
+            },
+            {
+              "paragraphId": "p2",
+              "start": 98,
+              "end": 101
+            },
+            {
+              "paragraphId": "p1",
+              "start": 73,
+              "end": 80
+            },
+            {
+              "paragraphId": "p1",
+              "start": 138,
+              "end": 145
+            },
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 7
             }
           ],
           "scoring": {
@@ -430,24 +455,14 @@
         },
         {
           "id": "q2",
-          "prompt": "작고 반짝이는 돌?",
-          "answerText": "조약돌",
-          "answerMatchMode": "EXACT",
+          "prompt": "나무 할아버지가 크게 웃는 모습을 흉내 낸 표현을 한 군데 찾아 보세요",
+          "answerText": "껄껄",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 130,
-              "end": 133
-            },
-            {
               "paragraphId": "p2",
-              "start": 9,
-              "end": 12
-            },
-            {
-              "paragraphId": "p2",
-              "start": 52,
-              "end": 55
+              "start": 20,
+              "end": 22
             }
           ],
           "scoring": {
@@ -459,14 +474,33 @@
         },
         {
           "id": "q3",
-          "prompt": "오라고 청하는 글?",
+          "prompt": "조약돌의 진짜 정체가 무엇이었는지 찾아 보세요",
           "answerText": "초대장",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 86,
               "end": 89
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "나무 할아버지가 하양이에게 칭찬해 준 점이 무엇인지 찾아 보세요",
+          "answerText": "용기",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 32,
+              "end": 34
             }
           ],
           "scoring": {

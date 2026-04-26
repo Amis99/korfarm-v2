@@ -1195,93 +1195,73 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '혼연일체'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 93,
-              "end": 97
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '혼연일체'를 찾으시오",
+          "answerText": "혼연일체",
           "answerMatchMode": "ANY",
-          "answerText": "혼연일체"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 93, "end": 97}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '신명'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 72,
-              "end": 74
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '금단'을 찾으시오",
+          "answerText": "금단",
           "answerMatchMode": "ANY",
-          "answerText": "신명"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 32, "end": 34}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '금단'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 32,
-              "end": 34
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '무명'을 찾으시오",
+          "answerText": "무명",
           "answerMatchMode": "ANY",
-          "answerText": "금단"
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 20, "end": 22}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '도박'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 30,
-              "end": 32
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "담을 두 가지 상반된 의미로 빗댄 표현을 찾으시오",
+          "answerText": "도박이자 도반",
           "answerMatchMode": "ANY",
-          "answerText": "도박"
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 30, "end": 37}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '도반'을 모두 찾으시오.",
+          "prompt": "수양 가지 외에 담을 넘는 식물의 가지로 나열된 네 가지를 모두 찾으시오",
+          "answerText": "목련 가지 / 감나무 가지 / 줄장미 가지 / 담쟁이 줄기",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 35,
-              "end": 37
-            }
+            {"paragraphId": "p4", "start": 5, "end": 10},
+            {"paragraphId": "p4", "start": 14, "end": 20},
+            {"paragraphId": "p4", "start": 24, "end": 30},
+            {"paragraphId": "p4", "start": 34, "end": 40}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "도반"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "담을 넘는 일을 어렵게 만든 자연 조건 두 가지를 모두 찾으시오",
+          "answerText": "한 닷새 내리고 내리던 고집 센 비 / 밤새 정분만 쌓던 도리 없는 폭설",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 0, "end": 19},
+            {"paragraphId": "p2", "start": 27, "end": 45}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

@@ -557,14 +557,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사용하지 않는 전기 기구의 전기를 완전히 차단하기 위해 뽑아야 하는 것은?",
-          "answerText": "플러그",
-          "answerMatchMode": "EXACT",
+          "prompt": "전기를 만드는 데 쓰이는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "화석 연료",
+            "자연의 힘"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 19,
-              "end": 22
+              "paragraphId": "p1",
+              "start": 16,
+              "end": 21
+            },
+            {
+              "paragraphId": "p1",
+              "start": 28,
+              "end": 33
             }
           ],
           "scoring": {
@@ -576,14 +584,22 @@
         },
         {
           "id": "q2",
-          "prompt": "사람들에게 널리 알리고 참여를 유도하기 위해 벌이는 조직적인 활동은?",
-          "answerText": "캠페인",
-          "answerMatchMode": "EXACT",
+          "prompt": "집에서 에너지를 아끼는 작은 습관을 모두 찾으시오.",
+          "answerTexts": [
+            "전등을 끄고",
+            "가전제품의 플러그를 뽑는"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 16,
-              "end": 19
+              "paragraphId": "p2",
+              "start": 6,
+              "end": 12
+            },
+            {
+              "paragraphId": "p2",
+              "start": 13,
+              "end": 26
             }
           ],
           "scoring": {
@@ -595,14 +611,49 @@
         },
         {
           "id": "q3",
-          "prompt": "추운 북극 지방에서 볼 수 있는 거대한 얼음 덩어리로, 북극곰의 삶의 터전은?",
-          "answerText": "빙하",
-          "answerMatchMode": "EXACT",
+          "prompt": "가까운 거리를 이동할 때 기름을 아끼고 환경 오염을 줄이는 방법을 모두 찾으시오.",
+          "answerTexts": [
+            "걷거나 자전거를 타면",
+            "환경 오염도 줄일 수 있습니다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 57,
+              "end": 68
+            },
+            {
+              "paragraphId": "p2",
+              "start": 77,
+              "end": 93
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "학교 캠페인에서 친구들에게 보여준 것과 전기를 아끼면 늦출 수 있는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "홍보 포스터",
+            "빙하가 녹는 속도"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
+              "start": 30,
+              "end": 36
+            },
+            {
+              "paragraphId": "p3",
               "start": 63,
-              "end": 65
+              "end": 72
             }
           ],
           "scoring": {

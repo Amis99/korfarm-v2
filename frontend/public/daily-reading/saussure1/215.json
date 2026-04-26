@@ -396,29 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "교실 밖 길?",
-          "answerText": "복도",
-          "answerMatchMode": "EXACT",
+          "prompt": "여러 사람이 함께 이용하는 장소를 무엇이라고 부르는지 글에서 찾아보세요",
+          "answerText": "공공장소",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p1",
-              "start": 48,
-              "end": 50
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 99,
-              "end": 101
+              "start": 22,
+              "end": 26
             }
           ],
           "scoring": {
@@ -430,14 +415,14 @@
         },
         {
           "id": "q2",
-          "prompt": "지켜야 할 약속?",
-          "answerText": "규칙",
-          "answerMatchMode": "EXACT",
+          "prompt": "복도에서는 어느 쪽으로 어떻게 걷는 습관을 가져야 한다고 하는지 두 가지를 모두 찾아보세요",
+          "answerText": "오른쪽으로 천천히",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 33,
-              "end": 35
+              "start": 57,
+              "end": 66
             }
           ],
           "scoring": {
@@ -449,19 +434,33 @@
         },
         {
           "id": "q3",
-          "prompt": "위험 없는 상태?",
-          "answerText": "안전",
-          "answerMatchMode": "EXACT",
+          "prompt": "복도에서 큰 소리로 떠들거나 장난을 치면 다른 반 친구들에게 어떤 일이 생긴다고 하는지 한 단어로 찾아보세요",
+          "answerText": "방해",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 30,
-              "end": 32
-            },
+              "start": 120,
+              "end": 122
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "계단을 오르내릴 때 무엇을 잡고 한 칸씩 차례로 이동해야 한다고 하는지 한 단어로 찾아보세요",
+          "answerText": "난간",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 77,
-              "end": 79
+              "start": 55,
+              "end": 57
             }
           ],
           "scoring": {

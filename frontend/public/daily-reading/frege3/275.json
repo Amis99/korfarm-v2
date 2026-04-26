@@ -1328,14 +1328,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "문화재 복원에서 처음 모습에 대한 존중을 가리키는 원칙은 무엇인가요?",
-          "answerText": "원형 유지",
+          "prompt": "문화재 복원의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "시간의 흐름에 따라 훼손된 문화유산의 가치를 회복하는 중요한 작업",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 18,
-              "end": 23
+              "paragraphId": "p1",
+              "start": 8,
+              "end": 44
             }
           ],
           "scoring": {
@@ -1346,10 +1346,18 @@
         },
         {
           "id": "q2",
-          "prompt": "꼭 필요한 경우가 아니면 손대지 말아야 한다는 원칙은 무엇인가요?",
-          "answerText": "최소 개입",
-          "answerMatchMode": "ANY",
+          "prompt": "복원의 기본 원칙을 모두 찾으시오.",
+          "answerTexts": [
+            "원형 유지",
+            "최소 개입"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 18,
+              "end": 23
+            },
             {
               "paragraphId": "p2",
               "start": 25,
@@ -1364,19 +1372,14 @@
         },
         {
           "id": "q3",
-          "prompt": "나중에 복원 부분을 되돌릴 수 있어야 한다는 기준은 무엇인가요?",
-          "answerText": "가역성",
+          "prompt": "가역성의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "나중에 더 발전된 기술이 나왔을 때 복원된 부분을 다시 원래대로 되돌릴 수 있어야 함",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p3",
-              "start": 29,
-              "end": 32
+              "start": 35,
+              "end": 82
             }
           ],
           "scoring": {
@@ -1387,24 +1390,22 @@
         },
         {
           "id": "q4",
-          "prompt": "복원 과정 전체를 투명하게 남겨야 하는 것은 무엇인가요?",
-          "answerText": "기록",
-          "answerMatchMode": "ANY",
+          "prompt": "복원 과정에서 상세히 남겨야 할 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "어떤 재료를 썼는지",
+            "어느 부분을 어떻게 손보았는지"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 15,
-              "end": 17
+              "start": 36,
+              "end": 46
             },
             {
               "paragraphId": "p4",
-              "start": 82,
-              "end": 84
-            },
-            {
-              "paragraphId": "p4",
-              "start": 171,
-              "end": 173
+              "start": 48,
+              "end": 64
             }
           ],
           "scoring": {
@@ -1415,14 +1416,22 @@
         },
         {
           "id": "q5",
-          "prompt": "문화재 복원이 엄격히 구분되어야 하는 행위는 무엇인가요?",
-          "answerText": "창조",
-          "answerMatchMode": "ANY",
+          "prompt": "복원이 창조가 되지 않도록 지켜야 할 것과 피해야 할 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "유물의 진정성",
+            "가짜 유물"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 8,
-              "end": 10
+              "start": 58,
+              "end": 65
+            },
+            {
+              "paragraphId": "p5",
+              "start": 93,
+              "end": 98
             }
           ],
           "scoring": {

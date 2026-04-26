@@ -571,111 +571,167 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"그래프는 대상과 관계를 점과 선으로 나타내 데이터 사이 연결을 구조적으로 보여 준다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "글에서 정의한 그래프의 의미를 찾으시오",
+          "answerText": "여러 대상을 점으로 나타내고, 그 관계를 선으로 연결해 표현한 구조",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 156
+              "start": 5,
+              "end": 42
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그래프는 여러 대상을 점으로 나타내고, 그 관계를 선으로 연결해 표현한 구조이다. 지하철 노선도에서 역이 점이 되고 노선이 선이 되듯이, 서로 이어진 대상들을 다룰 때 그래프는 매우 유용하다. 데이터 자체보다 데이터 사이의 연결이 중요할 때 그래프는 문제를 구조적으로 보여 준다."
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "\"그래프 탐색은 연결 구조 속 도달 가능성과 연결 순서를 살피며 방문한 점을 기록해야 한다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "그래프의 예시로 든 일상생활 속 대상을 찾으시오",
+          "answerText": "지하철 노선도",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 210
+              "paragraphId": "p1",
+              "start": 46,
+              "end": 53
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그래프 탐색은 이런 구조 안에서 어떤 점에 도달할 수 있는지, 또는 어떤 순서로 연결되어 있는지를 살피는 과정이다. 탐색을 시작할 때에는 이미 확인한 점을 따로 기록해 두어 같은 곳을 반복해서 돌지 않게 해야 한다. 한 방향으로 깊게 들어가며 살피는 깊이 우선 탐색은 막다른 곳까지 갔다가 되돌아오는 방식에 가깝고, 너비 우선 탐색은 가까운 점부터 차례로 넓혀 가며 확인한다."
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "\"DFS는 끝까지 들어가며, BFS는 가까운 점부터 넓혀 가며 살핀다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "둘째 문단에서 그래프 탐색의 두 방식 이름을 모두 찾으시오",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
+              "paragraphId": "p2",
+              "start": 140,
+              "end": 148
+            },
+            {
+              "paragraphId": "p2",
+              "start": 177,
+              "end": 185
+            },
+            {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 200
+              "start": 18,
+              "end": 26
+            },
+            {
+              "paragraphId": "p3",
+              "start": 58,
+              "end": 66
+            },
+            {
+              "paragraphId": "p3",
+              "start": 140,
+              "end": 148
+            },
+            {
+              "paragraphId": "p5",
+              "start": 13,
+              "end": 21
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "두 탐색 방식은 쓰임이 다르다. 깊이 우선 탐색은 가능한 경우를 끝까지 따라가야 하는 문제에 적합하고, 너비 우선 탐색은 출발점에서 가까운 순서를 파악할 때 유리하다. 예를 들어 환승 횟수가 모두 같은 지하철 노선에서 가장 적은 정거장 수를 찾는다면 너비 우선 탐색이 자연스럽다. 따라서 어떤 정보를 먼저 알고 싶은지에 따라 탐색 방법을 달리 선택해야 한다."
+          "answerTexts": [
+            "깊이 우선 탐색",
+            "너비 우선 탐색"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "\"최단 경로는 단순 도달이 아니라 가장 짧은 길의 기준을 먼저 정해야 한다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "글에서 정의한 최단 경로 문제의 초점을 찾으시오",
+          "answerText": "여러 길 가운데 가장 짧은 길을 찾는 데 초점",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 215
+              "start": 31,
+              "end": 56
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "최단 경로 문제는 그래프 탐색보다 한 걸음 더 나아가, 여러 길 가운데 가장 짧은 길을 찾는 데 초점을 둔다. 여기서 짧다는 말은 단순히 지나가는 점의 수가 적다는 뜻일 수도 있고, 거리나 시간처럼 비용의 합이 가장 작다는 뜻일 수도 있다. 그래서 문제를 풀기 전에 무엇을 길이의 기준으로 삼는지부터 정해야 한다. 기준이 달라지면 같은 그래프에서도 최단 경로의 결과가 달라질 수 있다."
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "\"간선 비용이 같을 때는 BFS가, 다를 때는 다익스트라가 유리하다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "최단 경로에서 짧다는 말이 가질 수 있는 두 가지 의미를 모두 찾으시오",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 218
+              "paragraphId": "p4",
+              "start": 77,
+              "end": 93
+            },
+            {
+              "paragraphId": "p4",
+              "start": 102,
+              "end": 126
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "간선마다 비용이 같다면 너비 우선 탐색으로도 가장 적은 단계의 경로를 찾을 수 있다. 그러나 길마다 거리나 시간이 다르면, 지금까지 확인한 비용을 비교하며 더 작은 값을 남기는 방식이 필요하다. 다익스트라 알고리즘이 대표적인데, 매번 현재까지 비용이 가장 작은 지점을 기준으로 주변 경로를 다시 계산해 나간다. 이렇게 하면 이미 찾은 경로보다 더 짧은 우회로가 있는지 계속 점검할 수 있다."
+          "answerTexts": [
+            "지나가는 점의 수가 적다는 뜻",
+            "거리나 시간처럼 비용의 합이 가장 작다는 뜻"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "\"탐색은 연결 구조 파악, 최단 경로는 가장 효율적 이동 방법 찾기에 쓰인다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "그래프 탐색과 최단 경로가 함께 쓰이는 분야 세 가지를 모두 찾으시오",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 236
+              "start": 15,
+              "end": 21
+            },
+            {
+              "paragraphId": "p6",
+              "start": 23,
+              "end": 30
+            },
+            {
+              "paragraphId": "p6",
+              "start": 32,
+              "end": 45
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그래프 탐색과 최단 경로는 지도 서비스, 네트워크 전달, 게임 속 이동 경로 계산처럼 다양한 분야에서 함께 쓰인다. 탐색이 연결 구조 자체를 파악하는 일이라면, 최단 경로는 그 구조 안에서 가장 효율적인 이동 방법을 찾는 일이라고 할 수 있다. 어떤 문제는 도달 가능성만 알면 충분하지만, 어떤 문제는 반드시 가장 적은 비용의 경로를 요구한다. 따라서 두 개념의 차이를 이해해야 실제 문제에 맞는 알고리즘을 고를 수 있다."
+          "answerTexts": [
+            "지도 서비스",
+            "네트워크 전달",
+            "게임 속 이동 경로 계산"
+          ]
         }
       ]
     }

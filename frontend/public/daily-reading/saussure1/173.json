@@ -474,50 +474,18 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "소리 내는 도구?",
+          "prompt": "내는 방법과 재료에 따라 소리가 서로 다르게 나는 것이 무엇인지 두 글자 말을 찾아보세요",
           "answerText": "악기",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 11,
-              "end": 13
-            },
-            {
-              "paragraphId": "p1",
-              "start": 18,
-              "end": 20
-            },
-            {
-              "paragraphId": "p1",
-              "start": 60,
-              "end": 62
-            },
-            {
-              "paragraphId": "p1",
-              "start": 110,
-              "end": 112
-            },
-            {
-              "paragraphId": "p1",
-              "start": 131,
-              "end": 133
-            },
-            {
-              "paragraphId": "p2",
-              "start": 25,
-              "end": 27
-            },
-            {
-              "paragraphId": "p2",
-              "start": 94,
-              "end": 96
-            },
-            {
-              "paragraphId": "p2",
-              "start": 141,
-              "end": 143
-            }
+            {"paragraphId": "p1", "start": 11, "end": 13},
+            {"paragraphId": "p1", "start": 18, "end": 20},
+            {"paragraphId": "p1", "start": 60, "end": 62},
+            {"paragraphId": "p1", "start": 110, "end": 112},
+            {"paragraphId": "p1", "start": 131, "end": 133},
+            {"paragraphId": "p2", "start": 25, "end": 27},
+            {"paragraphId": "p2", "start": 94, "end": 96},
+            {"paragraphId": "p2", "start": 141, "end": 143}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -528,15 +496,12 @@
         },
         {
           "id": "q2",
-          "prompt": "두드려 소리 내는 것?",
-          "answerText": "북",
-          "answerMatchMode": "EXACT",
+          "prompt": "1문단에서 두드려서 웅장한 소리를 내는 악기로 든 두 가지 예를 모두 찾아보세요",
+          "answerText": "북, 장구",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 39,
-              "end": 40
-            }
+            {"paragraphId": "p1", "start": 39, "end": 40},
+            {"paragraphId": "p1", "start": 43, "end": 45}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -547,15 +512,27 @@
         },
         {
           "id": "q3",
-          "prompt": "어우러져 완성된 무엇인가요?",
-          "answerText": "음악",
-          "answerMatchMode": "EXACT",
+          "prompt": "2문단에서 줄을 켜서 소리를 내는 악기로 든 두 가지 예를 모두 찾아보세요",
+          "answerText": "바이올린, 첼로",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 122,
-              "end": 124
-            }
+            {"paragraphId": "p2", "start": 0, "end": 4},
+            {"paragraphId": "p2", "start": 7, "end": 9}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "여러 악기가 함께 연주하여 어우러진 소리가 무엇으로 완성된다고 했는지 두 글자 말을 찾아보세요",
+          "answerText": "음악",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 122, "end": 124}
           ],
           "scoring": {
             "correctDeltaSec": 10,

@@ -396,24 +396,24 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "몸으로 겪는 기운?",
-          "answerText": "느낌",
-          "answerMatchMode": "EXACT",
+          "prompt": "느낌을 살리는 말의 또 다른 이름과 같은 의미로 쓰인 두 표현을 모두 찾아 보세요",
+          "answerText": "흉내 내는 말, 느낌을 살리는 말",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 24,
-              "end": 26
+              "start": 49,
+              "end": 56
             },
             {
               "paragraphId": "p1",
               "start": 62,
-              "end": 64
+              "end": 71
             },
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 2
+              "end": 9
             }
           ],
           "scoring": {
@@ -425,14 +425,19 @@
         },
         {
           "id": "q2",
-          "prompt": "생각을 담은 글 마디?",
-          "answerText": "문장",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서 예시로 든 흉내 내는 말 두 가지를 모두 찾아 보세요",
+          "answerText": "반짝반짝, 몽글몽글",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 139,
-              "end": 141
+              "start": 82,
+              "end": 86
+            },
+            {
+              "paragraphId": "p1",
+              "start": 91,
+              "end": 95
             }
           ],
           "scoring": {
@@ -444,13 +449,32 @@
         },
         {
           "id": "q3",
-          "prompt": "남의 감정에 동의함?",
-          "answerText": "공감",
-          "answerMatchMode": "EXACT",
+          "prompt": "느낌을 살리는 말이 문장에 어떤 힘을 주는지 한 군데 찾아 보세요",
+          "answerText": "문장을 더 풍성하고 재미있게",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 139,
+              "end": 154
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "알맞은 말을 골라 쓰면 듣는 사람에게 어떤 일이 생기는지 찾아 보세요",
+          "answerText": "듣는 사람도 내 감정에 더 깊이 공감",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 106,
+              "start": 88,
               "end": 108
             }
           ],

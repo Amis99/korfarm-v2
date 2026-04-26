@@ -632,24 +632,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "( )은 물속에서 하는 운동임.",
-          "answerText": "수영",
-          "answerMatchMode": "EXACT",
+          "prompt": "영법을 배우면 무엇을 할 수 있다고 했는지 지문에서 찾으시오.",
+          "answerText": "물살을 가르고 앞으로 나아갈 수 있음",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 29,
-              "end": 31
-            },
-            {
-              "paragraphId": "p1",
-              "start": 49,
-              "end": 51
+              "start": 60,
+              "end": 80
             }
           ],
           "scoring": {
@@ -661,14 +651,14 @@
         },
         {
           "id": "q2",
-          "prompt": "기초가 되는 영법은 ( )임.",
-          "answerText": "자유형",
-          "answerMatchMode": "EXACT",
+          "prompt": "자유형에서 팔을 어떻게 움직이는지 지문에서 찾으시오.",
+          "answerText": "팔을 번갈아 돌리고",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 3
+              "start": 20,
+              "end": 30
             }
           ],
           "scoring": {
@@ -680,14 +670,33 @@
         },
         {
           "id": "q3",
-          "prompt": "누워서 하는 영법은 ( )임.",
-          "answerText": "배영",
-          "answerMatchMode": "EXACT",
+          "prompt": "개구리처럼 헤엄치는 영법을 지문에서 찾으시오.",
+          "answerText": "개구리처럼 헤엄치는 평영",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 50,
+              "end": 63
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "수영이 기르는 데 도움이 되는 것을 지문에서 찾으시오.",
+          "answerText": "건강한 몸과 마음",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 13,
-              "end": 15
+              "start": 78,
+              "end": 87
             }
           ],
           "scoring": {

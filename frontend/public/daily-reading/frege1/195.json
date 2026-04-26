@@ -913,44 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "스마트폰으로 읽는 만화를 무엇이라고 하나요?",
-          "answerText": "웹툰",
+          "prompt": "웹툰의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "스마트폰으로 읽는 만화",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 14,
-              "end": 16
-            },
-            {
-              "paragraphId": "p1",
-              "start": 26,
-              "end": 28
-            },
-            {
-              "paragraphId": "p2",
-              "start": 68,
-              "end": 70
-            },
-            {
-              "paragraphId": "p3",
               "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p3",
-              "start": 120,
-              "end": 122
-            },
-            {
-              "paragraphId": "p4",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p4",
-              "start": 84,
-              "end": 86
+              "end": 12
             }
           ],
           "scoring": {
@@ -961,19 +931,14 @@
         },
         {
           "id": "q2",
-          "prompt": "웹툰을 읽을 때 화면을 위에서 아래로 움직이는 방식은 무엇인가요?",
-          "answerText": "스크롤",
+          "prompt": "웹툰이 종이 만화책과 다르게 읽히는 방식을 찾으시오.",
+          "answerText": "위에서 아래로 스크롤하며 읽습니다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 50,
-              "end": 53
-            },
-            {
-              "paragraphId": "p3",
-              "start": 7,
-              "end": 10
+              "start": 42,
+              "end": 60
             }
           ],
           "scoring": {
@@ -984,14 +949,22 @@
         },
         {
           "id": "q3",
-          "prompt": "중요한 장면 전 긴장감을 만들기 위해 길게 두는 것은 무엇인가요?",
-          "answerText": "빈 공간",
-          "answerMatchMode": "ANY",
+          "prompt": "종이 만화와 웹툰에서 컷을 보여 주는 차이를 모두 찾으시오.",
+          "answerTexts": [
+            "한 페이지에 여러 개의 컷을 모아서 보여줍니다",
+            "한 번에 한두 개의 컷만 화면에 나타납니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 50,
-              "end": 54
+              "paragraphId": "p2",
+              "start": 7,
+              "end": 32
+            },
+            {
+              "paragraphId": "p2",
+              "start": 72,
+              "end": 95
             }
           ],
           "scoring": {
@@ -1002,14 +975,22 @@
         },
         {
           "id": "q4",
-          "prompt": "웹툰이 컷을 길게 그릴 수 있는 기기의 특징은 무엇인가요?",
-          "answerText": "스마트폰의 화면 비율",
-          "answerMatchMode": "ANY",
+          "prompt": "웹툰 작가가 스크롤 시간을 활용해 긴장감을 만드는 방법을 모두 찾으시오.",
+          "answerTexts": [
+            "중요한 장면이 나오기 전에 빈 공간을 길게 둡니다",
+            "독자가 화면을 내리는 동안 마음이 조마조마해지게 만드는 것"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 7,
-              "end": 18
+              "paragraphId": "p3",
+              "start": 35,
+              "end": 62
+            },
+            {
+              "paragraphId": "p3",
+              "start": 64,
+              "end": 96
             }
           ],
           "scoring": {
@@ -1020,29 +1001,22 @@
         },
         {
           "id": "q5",
-          "prompt": "웹툰이 보여 준다고 한 새롭고 다양한 것은 무엇인가요?",
-          "answerText": "연출",
-          "answerMatchMode": "ANY",
+          "prompt": "웹툰이 스마트폰 화면 비율과 기기 특징을 활용하는 부분을 모두 찾으시오.",
+          "answerTexts": [
+            "하늘에서 떨어지거나 깊은 바다로 들어가는 장면",
+            "기기의 특징을 활용하여 새롭고 다양한 연출"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 76,
-              "end": 78
-            },
-            {
-              "paragraphId": "p1",
-              "start": 113,
-              "end": 115
+              "paragraphId": "p4",
+              "start": 40,
+              "end": 65
             },
             {
               "paragraphId": "p4",
-              "start": 109,
+              "start": 88,
               "end": 111
-            },
-            {
-              "paragraphId": "p4",
-              "start": 132,
-              "end": 134
             }
           ],
           "scoring": {

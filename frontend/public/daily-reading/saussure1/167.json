@@ -474,25 +474,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사건이 일어난 장소?",
-          "answerText": "공원",
-          "answerMatchMode": "EXACT",
+          "prompt": "공원에서 붕 떠올라 키키를 골탕 먹인 물건이 무엇인지 찾아보세요",
+          "answerText": "모자",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 22,
-              "end": 24
-            },
-            {
-              "paragraphId": "p1",
-              "start": 106,
-              "end": 108
-            },
-            {
-              "paragraphId": "p2",
-              "start": 118,
-              "end": 120
-            }
+            {"paragraphId": "p1", "start": 43, "end": 45},
+            {"paragraphId": "p1", "start": 82, "end": 84},
+            {"paragraphId": "p1", "start": 132, "end": 134},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 45, "end": 47},
+            {"paragraphId": "p2", "start": 90, "end": 92},
+            {"paragraphId": "p2", "start": 127, "end": 129}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -503,45 +495,11 @@
         },
         {
           "id": "q2",
-          "prompt": "날아다니는 무엇를 잡았나요?",
-          "answerText": "모자",
-          "answerMatchMode": "EXACT",
+          "prompt": "팔랑팔랑 날아가는 모자를 무엇에 빗대어 표현했는지 두 글자 동물을 찾아보세요",
+          "answerText": "나비",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 43,
-              "end": 45
-            },
-            {
-              "paragraphId": "p1",
-              "start": 82,
-              "end": 84
-            },
-            {
-              "paragraphId": "p1",
-              "start": 132,
-              "end": 134
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 45,
-              "end": 47
-            },
-            {
-              "paragraphId": "p2",
-              "start": 90,
-              "end": 92
-            },
-            {
-              "paragraphId": "p2",
-              "start": 127,
-              "end": 129
-            }
+            {"paragraphId": "p1", "start": 55, "end": 57}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -552,35 +510,27 @@
         },
         {
           "id": "q3",
-          "prompt": "주인공 고양이 이름?",
-          "answerText": "키키",
-          "answerMatchMode": "EXACT",
+          "prompt": "모자가 숨거나 멈춘 자연 속 두 곳을 모두 찾아보세요",
+          "answerText": "꽃밭, 연못",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 78,
-              "end": 80
-            },
-            {
-              "paragraphId": "p1",
-              "start": 125,
-              "end": 127
-            },
-            {
-              "paragraphId": "p2",
-              "start": 27,
-              "end": 29
-            },
-            {
-              "paragraphId": "p2",
-              "start": 41,
-              "end": 43
-            }
+            {"paragraphId": "p2", "start": 16, "end": 18},
+            {"paragraphId": "p2", "start": 84, "end": 86}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "키키와 함께 모자를 신나게 쫓아간 동물이 무엇인지 찾아보세요",
+          "answerText": "강아지",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 113, "end": 116}
           ],
           "scoring": {
             "correctDeltaSec": 10,

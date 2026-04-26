@@ -474,45 +474,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "마을을 그린 그림은?",
+          "prompt": "땅의 모양과 건물 위치를 한눈에 보여주는 것은 무엇인지 찾아보세요",
           "answerText": "지도",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 30,
-              "end": 32
-            },
-            {
-              "paragraphId": "p1",
-              "start": 40,
-              "end": 42
-            },
-            {
-              "paragraphId": "p1",
-              "start": 116,
-              "end": 118
-            },
-            {
-              "paragraphId": "p1",
-              "start": 134,
-              "end": 136
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 91,
-              "end": 93
-            },
-            {
-              "paragraphId": "p2",
-              "start": 153,
-              "end": 155
-            }
+            {"paragraphId": "p1", "start": 30, "end": 32},
+            {"paragraphId": "p1", "start": 40, "end": 42},
+            {"paragraphId": "p1", "start": 116, "end": 118},
+            {"paragraphId": "p1", "start": 134, "end": 136},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 91, "end": 93},
+            {"paragraphId": "p2", "start": 153, "end": 155}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -523,20 +495,12 @@
         },
         {
           "id": "q2",
-          "prompt": "약속된 모양인 무엇인가요?",
+          "prompt": "지도에서 장소를 간단히 표시할 때 쓰는 약속된 모양은 무엇인지 찾아보세요",
           "answerText": "기호",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 18,
-              "end": 20
-            },
-            {
-              "paragraphId": "p2",
-              "start": 78,
-              "end": 80
-            }
+            {"paragraphId": "p2", "start": 18, "end": 20},
+            {"paragraphId": "p2", "start": 78, "end": 80}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -547,25 +511,30 @@
         },
         {
           "id": "q3",
-          "prompt": "우리가 사는 무엇인가요?",
-          "answerText": "고장",
-          "answerMatchMode": "EXACT",
+          "prompt": "지도에 서로 다른 모양 기호로 그려진 중요한 기관 세 가지를 모두 찾아보세요",
+          "answerText": "우체국, 병원, 소방서",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 146,
-              "end": 148
-            },
-            {
-              "paragraphId": "p2",
-              "start": 101,
-              "end": 103
-            },
-            {
-              "paragraphId": "p2",
-              "start": 150,
-              "end": 152
-            }
+            {"paragraphId": "p2", "start": 43, "end": 46},
+            {"paragraphId": "p2", "start": 48, "end": 50},
+            {"paragraphId": "p2", "start": 52, "end": 55}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "지도를 보며 탐험할 수 있는 우리 동네를 가리키는 두 글자 말을 찾아보세요",
+          "answerText": "고장",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 146, "end": 148},
+            {"paragraphId": "p2", "start": 101, "end": 103},
+            {"paragraphId": "p2", "start": 150, "end": 152}
           ],
           "scoring": {
             "correctDeltaSec": 10,

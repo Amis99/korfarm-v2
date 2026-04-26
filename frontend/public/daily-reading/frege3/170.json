@@ -1098,7 +1098,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "글쓴이가 전적으로 찬성한다고 밝힌 것은 무엇인가요?",
+          "prompt": "글쓴이가 전적으로 찬성한다고 밝힌 것을 찾으시오.",
           "answerText": "동물권 강화",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1116,14 +1116,14 @@
         },
         {
           "id": "q2",
-          "prompt": "글쓴이가 가장 먼저 비판한 산업 구조는 무엇인가요?",
-          "answerText": "공장식 축산업",
+          "prompt": "글쓴이가 동물권 확대를 주장하는 가장 핵심적인 이유를 찾으시오.",
+          "answerText": "현대 공장식 축산업이 자행하는 반생명적이고 비윤리적인 폭력성",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 31,
-              "end": 38
+              "start": 28,
+              "end": 61
             }
           ],
           "scoring": {
@@ -1134,14 +1134,22 @@
         },
         {
           "id": "q3",
-          "prompt": "동물 실험을 대신할 대안으로 제시한 것 가운데 하나는 무엇인가요?",
-          "answerText": "대체 기술",
-          "answerMatchMode": "ANY",
+          "prompt": "동물 실험을 대신할 대체 기술의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "인간의 세포를 배양한 인공 장기",
+            "고도화된 컴퓨터 시뮬레이션"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 204,
-              "end": 209
+              "start": 141,
+              "end": 158
+            },
+            {
+              "paragraphId": "p3",
+              "start": 160,
+              "end": 174
             }
           ],
           "scoring": {
@@ -1152,14 +1160,22 @@
         },
         {
           "id": "q4",
-          "prompt": "합리적인 대안으로 확대하자고 한 농장은 무엇인가요?",
-          "answerText": "동물 복지 농장",
-          "answerMatchMode": "ANY",
+          "prompt": "합리적이고 윤리적인 대안으로 제시한 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "동물 복지 농장",
+            "대체육 개발"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 213,
               "end": 221
+            },
+            {
+              "paragraphId": "p4",
+              "start": 230,
+              "end": 236
             }
           ],
           "scoring": {
@@ -1170,14 +1186,22 @@
         },
         {
           "id": "q5",
-          "prompt": "정부가 개정해야 한다고 한 낡은 법은 무엇인가요?",
-          "answerText": "민법",
-          "answerMatchMode": "ANY",
+          "prompt": "정부가 해야 할 일을 모두 찾으시오.",
+          "answerTexts": [
+            "동물을 물건으로 취급하는 낡은 민법",
+            "잔혹한 동물 학대에 대한 처벌 수위"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 187,
+              "start": 170,
               "end": 189
+            },
+            {
+              "paragraphId": "p5",
+              "start": 197,
+              "end": 216
             }
           ],
           "scoring": {

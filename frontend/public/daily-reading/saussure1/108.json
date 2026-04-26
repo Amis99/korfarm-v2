@@ -552,14 +552,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "모여서 큰 소리로 무엇을 하나요?",
-          "answerText": "토론",
-          "answerMatchMode": "EXACT",
+          "prompt": "별은 땅속에 숨었을 거라고 소리친 친구의 이름을 글에서 찾아 모두 써 보세요",
+          "answerText": "다람쥐",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 75,
-              "end": 77
+              "start": 56,
+              "end": 59
+            },
+            {
+              "paragraphId": "p1",
+              "start": 101,
+              "end": 104
             }
           ],
           "scoring": {
@@ -571,9 +576,9 @@
         },
         {
           "id": "q2",
-          "prompt": "친구들로 무엇하나요?",
+          "prompt": "숲속이 친구들로 가득 찬 모습을 나타낸 흉내 내는 말을 글에서 찾아 써 보세요",
           "answerText": "북적북적",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -590,9 +595,9 @@
         },
         {
           "id": "q3",
-          "prompt": "갑자기 큰 무엇이가 나타남인가요?",
+          "prompt": "소란스러운 친구들을 모두 진정시킨 인물의 이름을 글에서 찾아 모두 써 보세요",
           "answerText": "부엉이",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -603,6 +608,25 @@
               "paragraphId": "p2",
               "start": 119,
               "end": 122
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "부엉이는 보이지 않는 별을 무엇으로 보는 것이라고 말했는지 찾아 써 보세요",
+          "answerText": "마음",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 91,
+              "end": 93
             }
           ],
           "scoring": {

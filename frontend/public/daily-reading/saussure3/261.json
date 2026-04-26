@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "미리 막아 방지함은?",
-          "answerText": "예방하고",
-          "answerMatchMode": "EXACT",
+          "prompt": "집안일을 할 때 잘 지켜야 하는 것을 본문에서 찾으시오.",
+          "answerText": "정해진 규칙",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 50,
-              "end": 54
+              "paragraphId": "p1",
+              "start": 18,
+              "end": 24
             }
           ],
           "scoring": {
@@ -606,14 +606,22 @@
         },
         {
           "id": "q2",
-          "prompt": "남을 도와주거나 살핌은?",
-          "answerText": "배려하며",
-          "answerMatchMode": "EXACT",
+          "prompt": "도구를 다룰 때 중요하다고 한 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "도구를 안전하게 사용하고",
+            "제자리에 두는 것"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 71,
-              "end": 75
+              "paragraphId": "p1",
+              "start": 35,
+              "end": 48
+            },
+            {
+              "paragraphId": "p1",
+              "start": 49,
+              "end": 58
             }
           ],
           "scoring": {
@@ -625,14 +633,41 @@
         },
         {
           "id": "q3",
-          "prompt": "부모님을 정성껏 모심?",
-          "answerText": "효도하는",
-          "answerMatchMode": "EXACT",
+          "prompt": "질서를 지키는 태도의 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "사고를 예방하고",
+            "효율을 높여 줍니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 79,
-              "end": 83
+              "paragraphId": "p2",
+              "start": 46,
+              "end": 54
+            },
+            {
+              "paragraphId": "p2",
+              "start": 55,
+              "end": 65
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "가족을 배려하며 돕는 행동의 결과를 본문에서 찾으시오.",
+          "answerText": "집안을 깨끗하게 만듭니다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 83,
+              "end": 96
             }
           ],
           "scoring": {

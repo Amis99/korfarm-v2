@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "마트 ( )를 다녀왔습니다.",
-          "answerText": "나들이",
-          "answerMatchMode": "EXACT",
+          "prompt": "마트 입구에서 기분이 좋았던 까닭이 된 말을 지문에서 찾아 클릭하세요.",
+          "answerText": "시원한 에어컨 바람",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 17,
-              "end": 20
+              "start": 34,
+              "end": 44
             }
           ],
           "scoring": {
@@ -869,9 +869,28 @@
         },
         {
           "id": "q2",
-          "prompt": "( )에서 신나게 놀았습니다.",
+          "prompt": "카트를 밀어보고 싶어 부탁을 드린 대상을 지문에서 찾아 클릭하세요.",
+          "answerText": "아빠",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 93,
+              "end": 95
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "헤엄치며 신나게 논 장소를 지문에서 찾아 클릭하세요.",
           "answerText": "볼풀장",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -887,20 +906,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "주말이 ( ) 알찼습니다.",
-          "answerText": "무척",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "다음 주말에도 하고 싶은 일을 나타내는 어구를 지문에서 찾아 클릭하세요.",
+          "answerText": "가족과 함께 외출",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 123,
-              "end": 125
-            },
-            {
               "paragraphId": "p3",
-              "start": 72,
-              "end": 74
+              "start": 114,
+              "end": 123
             }
           ],
           "scoring": {

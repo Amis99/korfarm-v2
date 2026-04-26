@@ -556,14 +556,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우주 개발에 꼭 필요하다고 한 방식은 무엇인가요?",
-          "answerText": "국제 협력",
-          "answerMatchMode": "ANY",
+          "prompt": "우주 개발에 필요하다고 한 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "막대한 자본",
+            "첨단 기술"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 27,
-              "end": 32
+              "start": 7,
+              "end": 13
+            },
+            {
+              "paragraphId": "p1",
+              "start": 15,
+              "end": 20
             }
           ],
           "scoring": {
@@ -574,31 +582,13 @@
         },
         {
           "id": "q2",
-          "prompt": "다국적 우주 협력의 대표 사례로 제시된 시설은 무엇인가요?",
-          "answerText": "국제우주정거장",
+          "prompt": "대표적인 다국적 우주 협력 사례로 꼽히는 것을 찾으시오.",
+          "answerText": "국제우주정거장 건설",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 7
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "새로운 국제 연합이 탐사하려는 대상은 어디인가요?",
-          "answerText": "달과 화성",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 5,
               "end": 10
             }
           ],
@@ -609,20 +599,33 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "각국이 서로 공유한다고 한 것은 무엇인가요?",
-          "answerText": "기술",
+          "id": "q3",
+          "prompt": "이곳에서 다양한 우주 실험을 수행하는 사람들을 찾으시오.",
+          "answerText": "과학자들",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 18,
-              "end": 20
-            },
+              "paragraphId": "p2",
+              "start": 41,
+              "end": 45
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "새로운 국제 연합이 결성된 목적을 나타내는 구절을 찾으시오.",
+          "answerText": "달과 화성을 탐사하기 위한",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 47,
-              "end": 49
+              "start": 5,
+              "end": 19
             }
           ],
           "scoring": {
@@ -633,14 +636,14 @@
         },
         {
           "id": "q5",
-          "prompt": "글의 마지막에서 계속되어야 한다고 한 우주 이용의 방향은 무엇인가요?",
-          "answerText": "평화적인 우주 이용",
+          "prompt": "국제 우주 협력이 달성하는 데 중요한 열쇠가 되는 목표를 찾으시오.",
+          "answerText": "인류 공동의 목표",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 36,
-              "end": 46
+              "start": 10,
+              "end": 19
             }
           ],
           "scoring": {

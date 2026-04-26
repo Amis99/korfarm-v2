@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 사이시옷 표기와 된소리되기의 조건라는 문법 주제를 어떤 배경에서 꺼내는가?",
+          "prompt": "사이시옷이 자주 혼동되는 이유를 나타내는 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 218
+              "start": 21,
+              "end": 34
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "합성 명사 사이에 들어가는 사이시옷은 표기와 발음이 함께 얽혀 있어 자주 혼동된다. 겉보기에는 두 명사를 이어 주는 단순한 표시처럼 보이지만, 실제로는 어떤 단어에서만 적고 어떤 단어에서는 적지 않는지에 대한 규범적 판단이 필요하다. 따라서 사이시옷을 이해하려면 먼저 모든 합성어에 자유롭게 넣는 표지가 아니라, 특정한 어휘 조건과 음운 환경에서만 허용되는 표기라는 점을 분명히 해야 한다."
+          "answerText": "표기와 발음이 함께 얽혀"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 판별 기준이나 기본 원리를 어떻게 설명하는가?",
+          "prompt": "사이시옷이 허용되는 두 조건을 묶어 나타낸 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 241
+              "paragraphId": "p1",
+              "start": 175,
+              "end": 191
             }
           ],
           "scoring": {
@@ -603,16 +603,31 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "사이시옷은 우리말 고유어가 결합한 합성 명사에서 주로 나타난다. 예를 들어 '나무+가지'가 '나뭇가지'가 되고, '초+불'이 '촛불'이 되는 식이다. 이때 사이에 적힌 ㅅ은 실제로 독립된 뜻을 지닌 형태소로 기능하지 않지만, 뒷말이 예사소리로 시작할 때 발음상 된소리되기나 [ㄴ] 첨가와 같은 현상을 유발하는 단서가 되기도 한다. 그래서 표기상의 ㅅ은 눈에 보이는 글자이면서 동시에 뒤 음운 변화를 조직하는 장치로 이해할 수 있다."
+          "answerText": "특정한 어휘 조건과 음운 환경"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 해당 문법 현상의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "2문단에서 사이시옷 표기의 예로 든 네 표현을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 219
+              "paragraphId": "p2",
+              "start": 42,
+              "end": 49
+            },
+            {
+              "paragraphId": "p2",
+              "start": 51,
+              "end": 57
+            },
+            {
+              "paragraphId": "p2",
+              "start": 63,
+              "end": 68
+            },
+            {
+              "paragraphId": "p2",
+              "start": 70,
+              "end": 74
             }
           ],
           "scoring": {
@@ -620,17 +635,22 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그러나 된소리되기가 일어난다고 해서 언제나 사이시옷을 적는 것은 아니다. '불고기'의 [불꼬기], '물고기'의 [물꼬기]처럼 발음상 된소리되기가 나타나더라도 표기에는 사이시옷이 쓰이지 않는다. 즉 발음 결과만 보고 표기를 정할 수는 없으며, 해당 단어가 관습적으로 사이시옷을 취하는 어휘인지가 더 중요하다. 이 점 때문에 사이시옷 문제는 음운 규칙의 적용과 별개로 어휘 규범을 함께 요구한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'나무+가지'",
+            "'나뭇가지'",
+            "'초+불'",
+            "'촛불'"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단은 구별점이나 추가 조건을 어떻게 드러내는가?",
+          "prompt": "표기상의 ㅅ이 동시에 이해될 수 있는 장치를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 225
+              "paragraphId": "p2",
+              "start": 214,
+              "end": 230
             }
           ],
           "scoring": {
@@ -639,16 +659,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "사이시옷이 나타날 때 뒤 요소에서 일어나는 대표적인 음운 현상은 두 가지이다. 하나는 예사소리가 된소리로 바뀌는 현상이고, 다른 하나는 '이, 야, 여, 요, 유' 계열 모음 앞에서 [ㄴ]이 덧나는 현상이다. 그래서 '아랫니'는 [아랜니], '깻잎'은 [깬닙]으로 발음된다. 이처럼 표기된 ㅅ이 실제 음성에서는 [ㅅ]으로 남지 않고 다른 음운 변화의 조건으로 작동한다는 점이 사이시옷의 중요한 특징이다."
+          "answerText": "뒤 음운 변화를 조직하는 장치"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 해석상의 주의점이나 효과를 어떤 방향으로 설명하는가?",
+          "prompt": "된소리되기가 나타나도 사이시옷을 적지 않는 예를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 210
+              "paragraphId": "p3",
+              "start": 41,
+              "end": 46
+            },
+            {
+              "paragraphId": "p3",
+              "start": 55,
+              "end": 60
             }
           ],
           "scoring": {
@@ -656,17 +681,46 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "한자어 결합에서는 원칙적으로 사이시옷을 적지 않는다는 점도 자주 출제된다. 다만 일부 단어는 이미 널리 굳어 예외적으로 인정되므로 무조건 배제할 수는 없다. 또 외래어가 포함된 합성 명사에는 일반적으로 사이시옷을 쓰지 않는다. 결국 사이시옷 표기는 '두 명사가 결합했는가'만으로 결정되지 않고, 고유어인지 한자어인지, 그리고 관습적으로 굳어진 단어인지까지 함께 검토해야 한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'불고기'",
+            "'물고기'"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 사이시옷 표기와 된소리되기의 조건라는 문법 주제의 의미를 어떤 관점에서 정리하는가?",
+          "prompt": "사이시옷이 나타날 때 뒤 요소에서 일어나는 대표적 음운 현상 두 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 238
+              "paragraphId": "p4",
+              "start": 48,
+              "end": 65
+            },
+            {
+              "paragraphId": "p4",
+              "start": 76,
+              "end": 113
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "예사소리가 된소리로 바뀌는 현상",
+            "'이, 야, 여, 요, 유' 계열 모음 앞에서 [ㄴ]이 덧나는 현상"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "한자어 결합에서 사이시옷 표기에 대한 원칙을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 10,
+              "end": 31
             }
           ],
           "scoring": {
@@ -675,7 +729,44 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "따라서 사이시옷 표기와 된소리되기의 관계를 정확히 이해하려면 표기와 발음을 같은 층위로 섞어 보지 말아야 한다. 된소리되기는 음운 현상이고, 사이시옷은 그 현상과 연결되기도 하지만 결국 표준어 규정에 따라 적는 표기이다. 어떤 합성어에서 [ㄲ], [ㄸ], [ㅃ] 같은 거센 소리 변화가 들린다고 해도 곧바로 ㅅ을 넣을 수는 없다. 규범 문법은 발음 결과, 어휘의 성격, 관용적 굳어짐을 함께 따져서 사이시옷의 유무를 판단한다."
+          "answerText": "원칙적으로 사이시옷을 적지 않는다는 점"
+        },
+        {
+          "id": "q8",
+          "prompt": "규범 문법이 사이시옷 유무 판단에 함께 따진다고 한 세 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 110,
+              "end": 115
+            },
+            {
+              "paragraphId": "p6",
+              "start": 192,
+              "end": 197
+            },
+            {
+              "paragraphId": "p6",
+              "start": 199,
+              "end": 205
+            },
+            {
+              "paragraphId": "p6",
+              "start": 207,
+              "end": 214
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "발음 결과",
+            "어휘의 성격",
+            "관용적 굳어짐"
+          ]
         }
       ]
     }

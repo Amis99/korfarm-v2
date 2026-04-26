@@ -571,11 +571,31 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "중심 대상은 무엇인가요?",
+          "prompt": "진영이 비탈길을 돌아 올라간 곳을 지문에서 찾으시오.",
+          "answerText": "산으로",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 22,
+              "start": 12,
+              "end": 15
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "진영이 올라가면서 보인 행동을 나타낸 구절을 찾으시오.",
+          "answerText": "이리저리 기웃거린다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 28,
               "end": 38
             }
           ],
@@ -583,49 +603,85 @@
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "올라가면서 이리저리 기웃거린다"
-        },
-        {
-          "id": "q2",
-          "prompt": "한참 만에 그는 무엇을 꺼내어 사진에다 불을 그어 댄다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 9,
-              "end": 20
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "호주머니 속에서 성냥"
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "무엇 가늘어진다?",
+          "prompt": "진영이 주저앉은 장소를 설명하는 구절을 찾으시오.",
+          "answerText": "어느 커다란 바위 뒤에 눈이 없는 마른 잔디 옆",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 15,
-              "end": 27
+              "paragraphId": "p1",
+              "start": 40,
+              "end": 66
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "노르스름한 연기가 차차"
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "진영은 연기가 바람에 날려 없어지는 것을 무엇?",
+          "prompt": "진영이 놓고 물끄러미 내려다본 대상을 찾으시오.",
+          "answerText": "문수의 사진과 위패",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 94,
+              "end": 104
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "사진에 다시 불이 붙도록 진영이 사진 위에 놓은 것을 찾으시오.",
+          "answerText": "휴지",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 91,
+              "end": 93
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "사진이 어떻게 되었는지 나타낸 구절을 찾으시오.",
+          "answerText": "말끔히 타 버렸다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 4,
+              "end": 13
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q7",
+          "prompt": "연기가 없어지는 것을 바라보는 진영의 지속적 행동을 나타낸 구절을 찾으시오.",
+          "answerText": "언제까지나 쳐다보고 있었다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
@@ -637,50 +693,33 @@
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "언제까지나 쳐다보고 있었다"
+          "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "\"내게는 다만 쓰라린 무엇을 뿐이다?",
+          "id": "q8",
+          "prompt": "진영에게 남아 있다고 반복되는 두 추억의 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "쓰라린 추억",
+            "무참히 죽어 버린 추억"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 12,
-              "end": 20
+              "start": 8,
+              "end": 14
             },
             {
               "paragraphId": "p5",
-              "start": 37,
-              "end": 45
+              "start": 27,
+              "end": 39
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "추억이 남아 있"
-        },
-        {
-          "id": "q6",
-          "prompt": "진영의 깎은 듯 고요한 얼굴 위에 두 무엇 있었다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 21,
-              "end": 33
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "줄기 눈물이 흘러내리고"
+          "revealOnWrong": true
         }
       ]
     }

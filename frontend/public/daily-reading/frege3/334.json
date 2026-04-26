@@ -1326,14 +1326,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "구도심이 활성화되며 임대료가 오르는 현상은 무엇인가요?",
-          "answerText": "젠트리피케이션",
+          "prompt": "젠트리피케이션의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "낙후된 구도심이 활성화되면서 임대료가 오르는 현상",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 7
+              "start": 9,
+              "end": 36
             }
           ],
           "scoring": {
@@ -1344,14 +1344,22 @@
         },
         {
           "id": "q2",
-          "prompt": "이 현상이 시작될 때 저렴한 작업실을 찾아 먼저 모여드는 사람들은 누구인가요?",
-          "answerText": "예술가들",
-          "answerMatchMode": "ANY",
+          "prompt": "젠트리피케이션으로 떠나는 이들과 그 이유를 모두 찾으시오.",
+          "answerTexts": [
+            "원래 살던 원주민이나 상인들이",
+            "높은 비용을 견디지 못하고 떠나게 됩니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 9,
-              "end": 13
+              "paragraphId": "p1",
+              "start": 41,
+              "end": 57
+            },
+            {
+              "paragraphId": "p1",
+              "start": 58,
+              "end": 80
             }
           ],
           "scoring": {
@@ -1362,19 +1370,22 @@
         },
         {
           "id": "q3",
-          "prompt": "임대료 상승으로 결국 동네를 떠나는 기존 거주자는 누구인가요?",
-          "answerText": "원주민",
-          "answerMatchMode": "ANY",
+          "prompt": "동네가 유명해진 뒤 나타난 변화와 부작용을 모두 찾으시오.",
+          "answerTexts": [
+            "대형 프랜차이즈 가게들이",
+            "지역 고유의 분위기가 사라지는 부작용"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 47,
-              "end": 50
+              "start": 93,
+              "end": 106
             },
             {
-              "paragraphId": "p5",
-              "start": 74,
-              "end": 77
+              "paragraphId": "p1",
+              "start": 120,
+              "end": 140
             }
           ],
           "scoring": {
@@ -1385,14 +1396,28 @@
         },
         {
           "id": "q4",
-          "prompt": "문제 해결책으로 논의되는 제도 중 하나는 무엇인가요?",
-          "answerText": "임대료 상한제",
-          "answerMatchMode": "ANY",
+          "prompt": "문제 해결을 위해 논의되거나 조성하는 제도를 모두 찾으시오.",
+          "answerTexts": [
+            "상생 협약",
+            "임대료 상한제",
+            "공공 임대 상가"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 12,
+              "end": 17
+            },
             {
               "paragraphId": "p4",
               "start": 20,
               "end": 27
+            },
+            {
+              "paragraphId": "p4",
+              "start": 82,
+              "end": 90
             }
           ],
           "scoring": {
@@ -1403,14 +1428,22 @@
         },
         {
           "id": "q5",
-          "prompt": "지속 가능한 도시 재생이 끝내 실현하려는 가치는 무엇인가요?",
-          "answerText": "공존",
-          "answerMatchMode": "ANY",
+          "prompt": "지속 가능한 도시 재생에서 찾아야 하거나 지켜야 할 것을 모두 찾으시오.",
+          "answerTexts": [
+            "개발과 보존의 균형",
+            "역사와 문화를"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 145,
-              "end": 147
+              "start": 14,
+              "end": 24
+            },
+            {
+              "paragraphId": "p5",
+              "start": 57,
+              "end": 64
             }
           ],
           "scoring": {

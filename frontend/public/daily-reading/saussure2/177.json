@@ -562,34 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "어떤 사물이나 상태를 변화시키거나 일으키게 하는 근본이 되는 일은?",
-          "answerText": "원인",
+          "prompt": "지문에서 '원인'이라고 하는 것이 무엇인지 해당 어구를 찾으시오.",
+          "answerText": "어떤 일이 일어나게 된 까닭",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 41,
-              "end": 43
-            },
-            {
-              "paragraphId": "p1",
-              "start": 114,
-              "end": 116
-            },
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p2",
-              "start": 67,
-              "end": 69
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 2
+              "start": 23,
+              "end": 38
             }
           ],
           "scoring": {
@@ -600,34 +580,50 @@
         },
         {
           "id": "q2",
-          "prompt": "어떤 원인으로 인하여 맺어지는 상태나 일은?",
-          "answerText": "결과",
+          "prompt": "지문에서 '결과'라고 하는 것이 무엇인지 해당 어구를 찾으시오.",
+          "answerText": "그 때문에 생긴 일",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 65,
-              "end": 67
-            },
-            {
-              "paragraphId": "p1",
-              "start": 131,
-              "end": 133
-            },
+              "start": 52,
+              "end": 62
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "글에서 원인과 결과를 쉽게 찾으려면 무엇을 잘 살펴보면 되는지 지문에서 찾으시오.",
+          "answerText": "이어주는 말을",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 8,
-              "end": 10
-            },
-            {
-              "paragraphId": "p2",
-              "start": 71,
-              "end": 73
-            },
+              "start": 20,
+              "end": 27
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "원인과 결과를 생각하며 글을 읽으면 무엇을 훨씬 쉽고 정확하게 이해할 수 있는지 지문에서 찾으시오.",
+          "answerText": "이야기의 내용을",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 4,
-              "end": 6
+              "start": 20,
+              "end": 28
             }
           ],
           "scoring": {

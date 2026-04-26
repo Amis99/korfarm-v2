@@ -557,14 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "회의에서 나온 생각이나 주장을 무엇이라 하나요?",
-          "answerText": "의견을",
-          "answerMatchMode": "EXACT",
+          "prompt": "가족이 생일 파티 준비 회의를 하기 위해 모인 장소를 지문에서 찾아 쓰시오.",
+          "answerText": "거실에",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 102,
-              "end": 105
+              "start": 32,
+              "end": 35
             }
           ],
           "scoring": {
@@ -576,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "여러 사람의 의견을 물어 더 많은 사람이 원하는 쪽으로 정하는 법은?",
-          "answerText": "투표",
-          "answerMatchMode": "EXACT",
+          "prompt": "동생이 좋아하는 것 중 가족이 물어본 대상을 지문에서 찾아 쓰시오.",
+          "answerText": "음식",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 52,
-              "end": 54
+              "paragraphId": "p1",
+              "start": 58,
+              "end": 60
             }
           ],
           "scoring": {
@@ -595,14 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "어떤 일을 하기 위해 미리 생각하여 정한 절차나 방법은?",
-          "answerText": "계획이",
-          "answerMatchMode": "EXACT",
+          "prompt": "아빠가 고기를 굽자고 한 장소를 지문에서 찾아 쓰시오.",
+          "answerText": "마당에서",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 73,
-              "end": 76
+              "paragraphId": "p2",
+              "start": 4,
+              "end": 8
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "집에서 가족끼리 어떤 분위기로 파티를 열기로 했는지 지문에서 찾아 쓰시오.",
+          "answerText": "오붓하게",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 67,
+              "end": 71
             }
           ],
           "scoring": {

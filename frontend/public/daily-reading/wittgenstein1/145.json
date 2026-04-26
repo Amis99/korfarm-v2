@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 글쓴이가 어떤 문제의식으로 이 글을 시작하는가?",
+          "prompt": "글쓴이가 비교하려는 기준을 드러낸 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 172
+              "start": 140,
+              "end": 154
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "전자책과 종이책은 모두 책을 읽는 데 쓰이지만 읽는 방식과 장점이 조금 다르다. 전자책은 기기만 있으면 언제든지 여러 권을 들고 다닐 수 있고, 종이책은 실제 책장을 넘기는 느낌이 있어 읽는 맛이 있다. 그래서 둘 중 무엇이 더 좋다고 단정하기보다는 어떤 상황에서 더 적절한지 비교해 보는 글을 쓰려고 한다."
+          "answerText": "어떤 상황에서 더 적절한지"
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 주장을 설득력 있게 만들기 위해 어떤 점을 보완해야 한다고 말하는가?",
+          "prompt": "전자책의 장점을 한마디로 제시한 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 199
+              "start": 8,
+              "end": 15
             }
           ],
           "scoring": {
@@ -603,16 +603,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "먼저 전자책은 휴대성이 좋다. 한 기기에 여러 권을 저장할 수 있어서 가방이 무거워지지 않고, 검색 기능이나 글자 크기 조절도 가능하다. 이런 점은 시험 기간처럼 참고할 책이 많은 학생에게 편리하다. 그런데 여기서 갑자기 전자책 시장이 커지고 있다는 말까지 넣으면 비교 기준이 흐려질 수 있으므로, 편의성이라는 관점에 맞추어 설명을 더 정리할 필요가 있다."
+          "answerText": "휴대성이 좋다"
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 주장을 설득력 있게 만들기 위해 어떤 점을 보완해야 한다고 말하는가?",
+          "prompt": "전자책의 편리한 기능으로 제시된 내용을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 195
+              "paragraphId": "p2",
+              "start": 23,
+              "end": 31
+            },
+            {
+              "paragraphId": "p2",
+              "start": 53,
+              "end": 58
+            },
+            {
+              "paragraphId": "p2",
+              "start": 61,
+              "end": 69
             }
           ],
           "scoring": {
@@ -620,17 +630,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "반면 종이책은 눈의 피로가 덜하고, 밑줄을 긋거나 메모를 남길 때 집중이 잘된다는 의견이 많다. 또 책의 두께와 종이 질감이 읽는 경험에 영향을 준다는 점도 무시하기 어렵다. 다만 이런 장점을 말하면서 종이책이 무조건 더 깊이 있는 독서를 가능하게 한다고 단정하면 근거가 약해 보일 수 있다. 체험적 장점과 일반화된 주장 사이를 구분할 필요가 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "여러 권을 저장",
+            "검색 기능",
+            "글자 크기 조절"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 주장을 설득력 있게 만들기 위해 어떤 점을 보완해야 한다고 말하는가?",
+          "prompt": "전자책 시장 이야기를 넣으면 생기는 문제를 나타낸 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 194
+              "paragraphId": "p2",
+              "start": 148,
+              "end": 165
             }
           ],
           "scoring": {
@@ -639,16 +653,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "가격 면에서는 전자책이 더 경제적일 때가 많지만, 종이책은 중고 거래가 가능하다는 차이가 있다. 그런데 이 문단은 비용 문제를 다루다가 갑자기 소장 가치 이야기를 붙여 놓아서 비교 기준이 섞여 있다. 가격, 소장 가치, 재판매 가능성은 연결될 수 있지만 서로 다른 기준이므로 한 문단 안에서 순서를 더 분명하게 잡아야 읽는 사람이 헷갈리지 않는다."
+          "answerText": "비교 기준이 흐려질 수 있으므로"
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 이 초고를 어떤 근거로 보강해야 한다고 보는가?",
+          "prompt": "종이책의 장점으로 제시된 두 표현을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 200
+              "paragraphId": "p3",
+              "start": 8,
+              "end": 18
+            },
+            {
+              "paragraphId": "p3",
+              "start": 37,
+              "end": 48
             }
           ],
           "scoring": {
@@ -656,17 +675,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "읽는 환경도 비교할 수 있다. 전자책은 밤에 조명이 어두운 곳에서도 읽기 쉽지만, 배터리가 없으면 사용할 수 없고 화면 밝기에 따라 눈이 피로할 수 있다. 종이책은 충전이 필요 없지만, 여러 권을 한꺼번에 들고 다니기는 불편하다. 이 부분은 전자책의 장점과 종이책의 한계를 먼저 말한 뒤, 다음 문장에서 순서를 바꾸어 다시 설명해서 약간 중복된 느낌이 난다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "눈의 피로가 덜하고",
+            "집중이 잘된다는 의견"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 글의 독자와 요청, 또는 결론을 어떻게 정리해야 한다고 말하는가?",
+          "prompt": "종이책에 대한 주장과 관련해 구분해야 한다고 한 두 대상을 포함한 어구를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 209
+              "paragraphId": "p3",
+              "start": 164,
+              "end": 182
             }
           ],
           "scoring": {
@@ -675,7 +697,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정리하면 전자책은 이동성과 기능성에서, 종이책은 감각적 경험과 몰입감에서 강점을 가진다고 볼 수 있다. 하지만 지금 초고는 편의성, 비용, 독서 경험이라는 비교 기준이 고르게 드러나지 않고, 같은 내용을 다른 문장에서 반복하는 부분도 있다. 따라서 최종 글에서는 비교 기준을 먼저 제시하고, 각 기준마다 전자책과 종이책을 대응시켜 설명하는 방식으로 다시 배열해야 할 것이다."
+          "answerText": "체험적 장점과 일반화된 주장 사이"
+        },
+        {
+          "id": "q7",
+          "prompt": "한 문단 안에서 순서를 분명히 해야 할 세 기준이 이어진 부분을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 112,
+              "end": 130
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "가격, 소장 가치, 재판매 가능성"
+        },
+        {
+          "id": "q8",
+          "prompt": "최종 글에서 다시 배열해야 할 방식을 설명한 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 147,
+              "end": 192
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "비교 기준을 먼저 제시하고, 각 기준마다 전자책과 종이책을 대응시켜 설명하는 방식"
         }
       ]
     }

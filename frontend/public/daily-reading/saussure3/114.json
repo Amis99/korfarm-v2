@@ -557,14 +557,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "부모님을 정성껏 잘 모시는 착한 성품을 뜻하는 말은 무엇인가요?",
-          "answerText": "효성",
-          "answerMatchMode": "EXACT",
+          "prompt": "옛이야기들이 설명해 주는 두 가지 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "고장의 이름이 어떻게 지어졌는지",
+            "왜 이런 모양이 생겼는지"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 9,
-              "end": 11
+              "paragraphId": "p1",
+              "start": 54,
+              "end": 71
+            },
+            {
+              "paragraphId": "p1",
+              "start": 73,
+              "end": 86
             }
           ],
           "scoring": {
@@ -576,14 +584,22 @@
         },
         {
           "id": "q2",
-          "prompt": "사물이나 장소의 이름이 생겨나게 된 역사적인 배경이나 원인을 뜻하는 말은?",
-          "answerText": "우리 고장의 산과 바위에는 오래전 조상들이 만든 신비로운 이야기가 숨어 있습니다.",
-          "answerMatchMode": "EXACT",
+          "prompt": "옛이야기 속에 등장하는 본받을 만한 인물의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "효성이 지극한 아들",
+            "지혜로운 촌장님"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 45
+              "paragraphId": "p2",
+              "start": 9,
+              "end": 19
+            },
+            {
+              "paragraphId": "p2",
+              "start": 22,
+              "end": 30
             }
           ],
           "scoring": {
@@ -595,14 +611,33 @@
         },
         {
           "id": "q3",
-          "prompt": "자신이 속한 단체나 고장에 대해 스스로 떳떳하게 여기는 마음은?",
-          "answerText": "자부심",
-          "answerMatchMode": "EXACT",
+          "prompt": "그들이 어려운 상황에서도 잃지 않은 것은 무엇인가요?",
+          "answerText": "용기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 118,
-              "end": 121
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 68
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "고장의 이야기를 아끼는 마음은 무엇의 시작이라고 했나요?",
+          "answerText": "고장을 사랑하는 마음",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 104,
+              "end": 115
             }
           ],
           "scoring": {

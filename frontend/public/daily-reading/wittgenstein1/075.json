@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 '쉬는 시간 휴대전화 사용 조정 논설문 초고'와 관련해 어떤 문제의식으로 주장하는가?",
+          "prompt": "글쓴이가 다시 생각할 필요가 있다고 본 현재 방식을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 170
+              "start": 38,
+              "end": 72
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "우리 학교는 쉬는 시간마다 복도가 시끄럽고 이동도 복잡한 편이어서, 휴대 전화를 쉬는 시간마다 모두 자유롭게 쓰게 하는 현재 방식은 다시 생각할 필요가 있다. 나는 사용 시간을 어느 정도 줄이는 쪽이 더 낫다고 본다. 왜냐하면 편하긴 하지만 편하다는 이유만으로 그대로 두기에는 문제도 적지 않기 때문이다."
+          "answerText": "휴대 전화를 쉬는 시간마다 모두 자유롭게 쓰게 하는 현재 방식"
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 '쉬는 시간 휴대전화 사용 조정 논설문 초고'와 관련해 어떤 근거로 보강해야 한다고 보는가?",
+          "prompt": "휴대 전화 사용 시간에 대한 글쓴이의 주장을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 181
+              "paragraphId": "p1",
+              "start": 92,
+              "end": 116
             }
           ],
           "scoring": {
@@ -603,15 +603,133 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "우선 쉬는 시간의 원래 기능이 약해지고 있다. 쉬는 시간은 다음 수업을 준비하거나 친구와 짧게 대화하면서 머리를 정리하는 시간인데, 요즘은 대부분 자리에 앉자마자 화면부터 보는 경우가 많다. 물론 잠깐 보는 것 자체가 전부 나쁘다고 단정할 수는 없지만, 거의 매번 그렇게 되면 쉬는 시간의 성격도 조금은 달라진다고 생각한다."
+          "answerText": "사용 시간을 어느 정도 줄이는 쪽이 더 낫다"
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 주장을 설득력 있게 만들기 위해 어떤 점을 보완해야 한다고 보는가?",
+          "prompt": "쉬는 시간의 원래 기능을 설명한 부분을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 33,
+              "end": 70
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "다음 수업을 준비하거나 친구와 짧게 대화하면서 머리를 정리하는 시간"
+        },
+        {
+          "id": "q4",
+          "prompt": "화면을 보고 있을 때 생길 수 있는 문제를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
+              "start": 13,
+              "end": 32
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "이동 방송이나 준비물을 놓치는 경우"
+        },
+        {
+          "id": "q5",
+          "prompt": "문제를 모두 개인의 부주의라고만 하기 어려운 이유를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 131,
+              "end": 163
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "주변에서 다 같이 보고 있으면 나도 그냥 보게 되는 분위기"
+        },
+        {
+          "id": "q6",
+          "prompt": "휴대 전화 사용을 줄이면 불편하다는 의견의 근거를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 36,
+              "end": 53
+            },
+            {
+              "paragraphId": "p4",
+              "start": 59,
+              "end": 83
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "급한 연락을 확인해야 하는 경우",
+            "사전 앱이나 시간표를 보는 데 도움이 될 때"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "글쓴이가 제시한 사용 조정 방식의 예를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 6,
+              "end": 30
+            },
+            {
+              "paragraphId": "p5",
+              "start": 32,
+              "end": 53
+            },
+            {
+              "paragraphId": "p5",
+              "start": 64,
+              "end": 87
+            },
+            {
+              "paragraphId": "p5",
+              "start": 89,
+              "end": 105
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "쉬는 시간 초반 몇 분은 이동과 준비에 쓰고",
+            "그 뒤에만 자율적으로 확인하게 하는 식",
+            "복도 이동 구간에서는 사용하지 않도록 하고",
+            "교실 안에서는 짧게 확인하도록"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "글쓴이가 마지막에 더 좋다고 한 규칙 만드는 방식을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 141,
               "end": 173
             }
           ],
@@ -621,61 +739,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "또 화면을 보고 있으면 이동 방송이나 준비물을 놓치는 경우도 생긴다. 지난주에도 방송 내용을 뒤늦게 알아서 교실을 다시 오간 학생이 있었는데, 이런 일은 자주 있는 편이다. 그런데 이런 문제를 모두 개인의 부주의라고만 하기는 어렵다. 주변에서 다 같이 보고 있으면 나도 그냥 보게 되는 분위기가 있기 때문이다."
-        },
-        {
-          "id": "q4",
-          "prompt": "넷째 문단은 주장을 설득력 있게 만들기 위해 어떤 점을 보완해야 한다고 보는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 187
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "반대로 휴대 전화 사용을 줄이면 불편하다는 의견도 있을 것이다. 급한 연락을 확인해야 하는 경우도 있고, 사전 앱이나 시간표를 보는 데 도움이 될 때도 있다. 그래서 아예 못 쓰게 하자는 식으로 말하면 반발이 클 수 있다. 하지만 전면 허용과 전면 금지 사이에는 다른 방법도 있을 텐데 그 부분은 지금 규칙에서 좀 비어 있는 것 같다."
-        },
-        {
-          "id": "q5",
-          "prompt": "다섯째 문단은 주장을 설득력 있게 만들기 위해 어떤 점을 보완해야 한다고 보는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 209
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "예를 들면 쉬는 시간 초반 몇 분은 이동과 준비에 쓰고, 그 뒤에만 자율적으로 확인하게 하는 식도 가능하다. 또는 복도 이동 구간에서는 사용하지 않도록 하고, 교실 안에서는 짧게 확인하도록 할 수도 있다. 나는 이런 방식이 현실적이라고 생각한다. 그런데 어떤 기준이 제일 좋은지는 더 이야기해 봐야 하고, 반마다 조금 다를 수도 있어서 완전히 같게 할 필요는 없다고도 본다."
-        },
-        {
-          "id": "q6",
-          "prompt": "여섯째 문단은 글의 독자와 요청을 어떻게 정리해야 한다고 말하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 196
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "결국 중요한 것은 휴대 전화가 편리하다는 사실만 보는 것이 아니라, 쉬는 시간이 학교생활에서 어떤 역할을 하는지도 같이 보는 일이다. 지금처럼 계속 자유롭게 두는 방식은 다시 검토할 필요가 있고, 그렇다고 너무 강하게 막는 것도 조심해야 한다. 그래서 학생 의견을 먼저 모은 뒤 단계적으로 시간을 조정하는 규칙을 만드는 편이 더 좋다고 나는 생각한다."
+          "answerText": "학생 의견을 먼저 모은 뒤 단계적으로 시간을 조정하는 규칙"
         }
       ]
     }

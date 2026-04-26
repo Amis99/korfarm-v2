@@ -571,48 +571,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "prompt": "1연과 3연에 반복되어 화자의 상황을 드러내는 행을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 72
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "혁명은 안 되고 나는 방만 바꾸어 버렸다\n그 방의 벽에는 싸우라 싸우라 싸우라는 말이\n헛소리처럼 아직도 어둠을 지키고 있을 것이다"
-        },
-        {
-          "id": "q2",
-          "prompt": "2연은 그 정서를 어떤 이미지나 흐름으로 이어 가는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 150
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "나는 모든 노래를 그 방에 함께 남기고 왔을 게다\n그렇듯 이제 나의 가슴은 이유 없이 메말랐다\n그 방의 벽은 나의 가슴이고 나의 사지일까\n일하라 일하라 일하라는 말이\n헛소리처럼 아직도 나의 가슴을 울리고 있지만\n나는 그 노래도 그 전의 노래도 함께 다 잊어버리고 말았다"
-        },
-        {
-          "id": "q3",
-          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
-          "answerRanges": [
+              "end": 22
+            },
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 106
+              "end": 22
             }
           ],
           "scoring": {
@@ -621,16 +590,86 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "혁명은 안 되고 나는 방만 바꾸어 버렸다\n나는 인제 녹슬은 펜과 뼈와 광기—\n실망의 가벼움을 재산으로 삼을 줄 안다\n이 가벼움 혹시나 역사일지도 모르는\n이 가벼움을 나는 나의 재산으로 삼았다"
+          "answerText": "혁명은 안 되고 나는 방만 바꾸어 버렸다"
+        },
+        {
+          "id": "q2",
+          "prompt": "1연과 2연에서 명령형이 세 번 반복되는 표현을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 32,
+              "end": 46
+            },
+            {
+              "paragraphId": "p2",
+              "start": 77,
+              "end": 91
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "싸우라 싸우라 싸우라는 말",
+            "일하라 일하라 일하라는 말"
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "2연에서 화자가 그 방에 함께 남기고 왔다고 한 대상을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 3,
+              "end": 8
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "모든 노래"
         },
         {
           "id": "q4",
-          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
+          "prompt": "2연과 6연에서 나의 가슴 상태를 대조적으로 나타내는 말을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 65
+              "paragraphId": "p2",
+              "start": 48,
+              "end": 52
+            },
+            {
+              "paragraphId": "p6",
+              "start": 32,
+              "end": 36
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "메말랐다",
+            "풍성하다"
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "3연에서 화자가 재산으로 삼을 줄 안다고 한 것을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 43,
+              "end": 50
             }
           ],
           "scoring": {
@@ -639,15 +678,53 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "혁명은 안 되고 나는 방만 바꾸었지만\n나의 입속에는 달콤한 의지의 잔재 대신에\n다시 쓰디쓴 담뱃진 냄새만 되살아났지만"
+          "answerText": "실망의 가벼움"
         },
         {
-          "id": "q5",
-          "prompt": "5연은 앞선 흐름에 어떤 긴장이나 전환을 더하는가?",
+          "id": "q6",
+          "prompt": "4연에서 달콤한 의지의 잔재 대신 되살아났다고 한 감각적 대상을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 47,
+              "end": 57
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "쓰디쓴 담뱃진 냄새"
+        },
+        {
+          "id": "q7",
+          "prompt": "5연에서 잃는 대상으로 제시된 표현을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 0,
+              "end": 5
+            },
+            {
+              "paragraphId": "p5",
+              "start": 6,
+              "end": 12
+            },
+            {
+              "paragraphId": "p5",
+              "start": 13,
+              "end": 19
+            },
+            {
+              "paragraphId": "p5",
+              "start": 20,
+              "end": 26
+            },
+            {
+              "paragraphId": "p5",
+              "start": 27,
               "end": 36
             }
           ],
@@ -656,17 +733,23 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "방을 잃고 낙서를 잃고 기대를 잃고\n노래를 잃고 가벼움마저 잃어도"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "방을 잃고",
+            "낙서를 잃고",
+            "기대를 잃고",
+            "노래를 잃고",
+            "가벼움마저 잃어도"
+          ]
         },
         {
-          "id": "q6",
-          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
+          "id": "q8",
+          "prompt": "6연에서 화자가 무엇인지 모르게 느끼는 감정을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 36
+              "start": 15,
+              "end": 18
             }
           ],
           "scoring": {
@@ -675,7 +758,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이제 나는 무엇인지 모르게 기쁘고\n나의 가슴은 이유 없이 풍성하다"
+          "answerText": "기쁘고"
         }
       ]
     }

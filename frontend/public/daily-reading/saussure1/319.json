@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "여럿이 모여 의논함?",
+          "prompt": "겨울 눈놀이 체험을 알차게 보내려고 학급에서 열었던 모임은 무엇이라 하나요?",
           "answerText": "회의",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -420,19 +420,24 @@
         },
         {
           "id": "q2",
-          "prompt": "눈 위에서 즐기는 놀이?",
-          "answerText": "눈놀이",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구들이 회의에서 의논한 \"○○○ 규칙과 ○○○ 꾸미기\"의 두 놀이를 모두 찾아보세요",
+          "answerText": "눈싸움, 눈사람",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 14,
-              "end": 17
+              "start": 71,
+              "end": 74
             },
             {
-              "paragraphId": "p2",
-              "start": 147,
-              "end": 150
+              "paragraphId": "p1",
+              "start": 79,
+              "end": 82
+            },
+            {
+              "paragraphId": "p1",
+              "start": 126,
+              "end": 129
             }
           ],
           "scoring": {
@@ -444,19 +449,33 @@
         },
         {
           "id": "q3",
-          "prompt": "위험 없는 평안한 상태?",
-          "answerText": "안전",
-          "answerMatchMode": "EXACT",
+          "prompt": "회의에서 사회를 맡은 반장의 이름은 무엇인지 살펴보세요",
+          "answerText": "지우",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 121,
-              "end": 123
-            },
+              "start": 54,
+              "end": 56
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "친구들이 서로 존중한 덕분에 회의가 어떤 분위기에서 마무리됐는지 살펴보세요",
+          "answerText": "화기애애",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 34,
-              "end": 36
+              "start": 100,
+              "end": 104
             }
           ],
           "scoring": {

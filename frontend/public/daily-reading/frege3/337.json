@@ -506,14 +506,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사랑을 받는 것보다 더 행복하다고 한 것은 무엇인가요?",
-          "answerText": "사랑하는 것은",
-          "answerMatchMode": "ANY",
+          "prompt": "사랑을 받는 것과 비교한 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "사랑하는 것은",
+            "사랑을 받느니보다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
               "end": 7
+            },
+            {
+              "paragraphId": "p1",
+              "start": 8,
+              "end": 17
             }
           ],
           "scoring": {
@@ -524,7 +532,7 @@
         },
         {
           "id": "q2",
-          "prompt": "그 마음이 어떻다고 말하고 있나요?",
+          "prompt": "사랑하는 마음이 어떻다고 말하는 표현을 찾으시오.",
           "answerText": "행복하나니라",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -542,10 +550,18 @@
         },
         {
           "id": "q3",
-          "prompt": "화자가 서 있는 곳은 어디인가요?",
-          "answerText": "우체국 창문 앞",
-          "answerMatchMode": "ANY",
+          "prompt": "화자가 보는 하늘과 서 있는 곳을 모두 찾으시오.",
+          "answerTexts": [
+            "에메랄드 빛 하늘이 환히 내여다뵈는",
+            "우체국 창문 앞"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 7,
+              "end": 26
+            },
             {
               "paragraphId": "p2",
               "start": 27,
@@ -560,14 +576,14 @@
         },
         {
           "id": "q4",
-          "prompt": "화자가 바라본 하늘은 어떤 빛인가요?",
-          "answerText": "에메랄드 빛 하늘",
+          "prompt": "화자가 너에게 하는 행동을 찾으시오.",
+          "answerText": "너에게 편지를 쓴다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 7,
-              "end": 16
+              "start": 40,
+              "end": 50
             }
           ],
           "scoring": {
@@ -578,14 +594,28 @@
         },
         {
           "id": "q5",
-          "prompt": "화자가 너에게 쓰는 것은 무엇인가요?",
-          "answerText": "편지",
-          "answerMatchMode": "ANY",
+          "prompt": "이 시에서 화자의 현재 상황이 드러난 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "오늘도 나는",
+            "우체국 창문 앞",
+            "너에게 편지를 쓴다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 44,
-              "end": 46
+              "start": 0,
+              "end": 6
+            },
+            {
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 35
+            },
+            {
+              "paragraphId": "p2",
+              "start": 40,
+              "end": 50
             }
           ],
           "scoring": {

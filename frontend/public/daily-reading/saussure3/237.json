@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "위험하고 급한 상황은?",
-          "answerText": "위기의",
-          "answerMatchMode": "EXACT",
+          "prompt": "오누이가 하늘로 올라가게 된 이유를 나타내는 표현을 찾으시오.",
+          "answerText": "위협을 피해",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 38,
-              "end": 41
+              "start": 5,
+              "end": 11
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "가르침을 주는 내용은?",
-          "answerText": "교훈을",
-          "answerMatchMode": "EXACT",
+          "prompt": "위기의 순간에도 오누이가 보인 침착한 태도를 나타내는 표현을 찾으시오.",
+          "answerText": "당황하지 않고",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 80,
-              "end": 83
+              "paragraphId": "p1",
+              "start": 47,
+              "end": 54
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "형제 사이의 사랑과 정?",
-          "answerText": "우애가",
-          "answerMatchMode": "EXACT",
+          "prompt": "자신에게 해가 돌아오는 원인으로 제시된 마음을 찾으시오.",
+          "answerText": "나쁜 마음",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 30,
+              "end": 35
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "하늘에 닿은 것으로 제시된 형제 관계의 표현을 찾으시오.",
+          "answerText": "서로를 아끼는 형제의 우애",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 45,
-              "end": 48
+              "start": 33,
+              "end": 47
             }
           ],
           "scoring": {

@@ -955,14 +955,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "물질을 크게 나누는 두 성질 가운데 하나는 무엇인가요?",
-          "answerText": "산성",
-          "answerMatchMode": "ANY",
+          "prompt": "과학자들이 물질을 크게 분류한 두 성질을 모두 찾으시오.",
+          "answerTexts": [
+            "산성",
+            "염기성"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 62,
               "end": 64
+            },
+            {
+              "paragraphId": "p1",
+              "start": 68,
+              "end": 71
             },
             {
               "paragraphId": "p2",
@@ -990,65 +998,6 @@
               "end": 136
             },
             {
-              "paragraphId": "p4",
-              "start": 4,
-              "end": 6
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "산성 물질의 대표적인 맛은 무엇인가요?",
-          "answerText": "신맛",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 10,
-              "end": 12
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "음식물 소화를 돕는 몸속 산성 물질은 무엇인가요?",
-          "answerText": "위액",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 101,
-              "end": 103
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "비누나 세제가 지닌 성질은 무엇인가요?",
-          "answerText": "염기성",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 68,
-              "end": 71
-            },
-            {
               "paragraphId": "p3",
               "start": 0,
               "end": 3
@@ -1070,6 +1019,11 @@
             },
             {
               "paragraphId": "p4",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "paragraphId": "p4",
               "start": 9,
               "end": 12
             }
@@ -1081,25 +1035,93 @@
           "revealOnWrong": true
         },
         {
+          "id": "q2",
+          "prompt": "산성 물질의 특징과 대표적인 예를 모두 찾으시오.",
+          "answerTexts": [
+            "신맛이 나는 특징",
+            "레몬이나 식초"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 10,
+              "end": 19
+            },
+            {
+              "paragraphId": "p2",
+              "start": 25,
+              "end": 32
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "산성이 지닌 강한 성질을 모두 찾으시오.",
+          "answerTexts": [
+            "금속을 부식시키거나",
+            "달걀 껍데기를 녹이는 강한 성질"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 62
+            },
+            {
+              "paragraphId": "p2",
+              "start": 63,
+              "end": 80
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "염기성 물질의 특징을 모두 찾으시오.",
+          "answerTexts": [
+            "쓴맛이 나고",
+            "손으로 만지면 미끈거리는 느낌"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 8,
+              "end": 14
+            },
+            {
+              "paragraphId": "p3",
+              "start": 15,
+              "end": 31
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q5",
-          "prompt": "산성인지 염기성인지 확인할 때 쓰는 것은 무엇인가요?",
-          "answerText": "지시약",
+          "prompt": "산성인지 염기성인지 확인하기 위해 사용하는 지시약의 예를 찾으시오.",
+          "answerText": "리트머스 종이나 자주색 양배추 지시약",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 24,
-              "end": 27
-            },
-            {
-              "paragraphId": "p4",
-              "start": 53,
+              "start": 36,
               "end": 56
-            },
-            {
-              "paragraphId": "p4",
-              "start": 84,
-              "end": 87
             }
           ],
           "scoring": {

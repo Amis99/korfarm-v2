@@ -587,14 +587,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지켜야 할 행동 방식은?",
-          "answerText": "수칙을",
-          "answerMatchMode": "EXACT",
+          "prompt": "엘리베이터를 이용할 때 지키는 두 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "문에 기대지 않고",
+            "질서를 지킵니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 7,
-              "end": 10
+              "paragraphId": "p1",
+              "start": 39,
+              "end": 48
+            },
+            {
+              "paragraphId": "p1",
+              "start": 49,
+              "end": 57
             }
           ],
           "scoring": {
@@ -606,14 +614,14 @@
         },
         {
           "id": "q2",
-          "prompt": "기계가 잘못 작동하는 것은?",
-          "answerText": "오작동이",
-          "answerMatchMode": "EXACT",
+          "prompt": "문이 열리면 내리는 사람을 위해 하는 행동을 찾으시오.",
+          "answerText": "길을 비켜줍니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 45,
-              "end": 49
+              "start": 18,
+              "end": 26
             }
           ],
           "scoring": {
@@ -625,14 +633,47 @@
         },
         {
           "id": "q3",
-          "prompt": "순서나 차례를 뜻하는 말은?",
-          "answerText": "질서를",
-          "answerMatchMode": "EXACT",
+          "prompt": "오작동이 일어나게 하는 행동과 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "버튼을 장난으로 누르거나",
+            "뛰면",
+            "오작동이 일어납니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 49,
-              "end": 52
+              "paragraphId": "p2",
+              "start": 28,
+              "end": 41
+            },
+            {
+              "paragraphId": "p2",
+              "start": 42,
+              "end": 44
+            },
+            {
+              "paragraphId": "p2",
+              "start": 45,
+              "end": 55
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "올바른 이용 태도는 무엇인지 찾으시오.",
+          "answerText": "이웃을 배려하는 모습",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 68,
+              "end": 79
             }
           ],
           "scoring": {

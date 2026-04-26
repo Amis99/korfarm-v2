@@ -571,11 +571,127 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "기본자가 본떠 만든 대상을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
+              "start": 97,
+              "end": 112
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "발음 기관의 모양이나 움직임"
+        },
+        {
+          "id": "q2",
+          "prompt": "기본자가 기능하는 출발점을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 34,
+              "end": 60
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "조음 위치나 발음 기관의 형태를 상징하는 출발점"
+        },
+        {
+          "id": "q3",
+          "prompt": "가획이 기본자에 적용되는 방식을 보여 주는 부분을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 4,
+              "end": 18
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "이런 기본자에 획을 덧붙여"
+        },
+        {
+          "id": "q4",
+          "prompt": "가획의 원리만 보아도 자음 체계의 핵심이 드러나는 이유를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 92,
+              "end": 166
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "기본자는 발음 기관의 모양이나 움직임을 본떠 만들고, 그 기본자에 획을 더해 같은 계열 안의 다른 소리를 나타내는 방식이 쓰였기 때문"
+        },
+        {
+          "id": "q5",
+          "prompt": "사용자가 자음들을 어떻게 이해할 수 있다고 했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 119,
+              "end": 133
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "체계적으로 이해할 수 있다"
+        },
+        {
+          "id": "q6",
+          "prompt": "가획이 동시에 맡는 두 역할을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 145,
+              "end": 151
+            },
+            {
+              "paragraphId": "p3",
+              "start": 157,
+              "end": 166
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "자형의 확장",
+            "음운 분류의 표지"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "가획 문자를 볼 때 현대 음가보다 먼저 살펴야 할 것을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 140,
               "end": 169
             }
           ],
@@ -585,88 +701,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "훈민정음의 자음 체계를 설명할 때 흔히 제자 원리 전체를 한꺼번에 다루지만, 실제로는 기본자에 획을 더하는 가획의 원리만 따로 보아도 자음 체계의 핵심이 드러난다. 기본자는 발음 기관의 모양이나 움직임을 본떠 만들고, 그 기본자에 획을 더해 같은 계열 안의 다른 소리를 나타내는 방식이 쓰였기 때문이다."
+          "answerText": "창제 당시 음운 체계 안에서 왜 같은 계열로 묶였는지"
         },
         {
-          "id": "q2",
-          "prompt": "2문단의 내용을 바탕으로 알 수 있는 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 176
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 체계에서는 먼저 몇 개의 기본자가 중심이 된다. 기본자는 조음 위치나 발음 기관의 형태를 상징하는 출발점으로 기능한다. 여기서 중요한 것은 글자가 단순히 외형만 닮았다는 점이 아니라, 같은 계열의 소리들을 하나의 묶음으로 사고했다는 점이다. 즉 문자 모양의 유사성은 음운 체계의 계열성을 드러내기 위한 장치였다."
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단의 내용을 바탕으로 알 수 있는 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 174
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "가획은 이런 기본자에 획을 덧붙여 같은 계열 안에서 더 센 소리나 다른 성질의 소리를 표시하는 방식이다. 이를 통해 사용자는 서로 관련된 자음들을 따로 외우기보다, 어느 글자가 어느 기본자에서 파생되었는지를 통해 체계적으로 이해할 수 있다. 다시 말해 가획은 자형의 확장인 동시에 음운 분류의 표지 역할을 한다."
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단의 내용을 바탕으로 알 수 있는 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 170
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "가획의 장점은 소리의 계통을 한눈에 보여 준다는 데 있다. 예를 들어 어떤 글자가 특정 기본자에 획 하나를 더한 모습이라면, 두 글자가 전혀 무관한 소리가 아니라 같은 계열 안에서 대응한다는 점을 직관적으로 알 수 있다. 이 때문에 훈민정음 자음자는 낱글자들의 목록이라기보다 관계망으로 읽을 필요가 있다."
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단의 내용을 바탕으로 알 수 있는 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 178
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "다만 현대국어의 발음 체계를 기준으로 이 관계를 그대로 옮겨 이해하면 혼동이 생길 수 있다. 오늘날의 된소리 체계나 음가와 훈민정음 창제 당시의 계열 구분은 완전히 일치하지 않기 때문이다. 따라서 가획 문자를 볼 때는 현대 음가를 먼저 대입하기보다, 창제 당시 음운 체계 안에서 왜 같은 계열로 묶였는지를 살펴야 한다."
-        },
-        {
-          "id": "q6",
-          "prompt": "6문단의 내용을 바탕으로 알 수 있는 것은?",
+          "id": "q8",
+          "prompt": "자음 체계를 읽을 때 개별 글자보다 주목해야 할 관계를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 211
+              "start": 184,
+              "end": 201
             }
           ],
           "scoring": {
@@ -675,7 +719,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 훈민정음 자음자의 가획 원리는 글자 모양을 늘려 간 기교가 아니라, 소리의 친연성을 문자 속에 드러내려는 설계라고 볼 수 있다. 기본자와 가획자의 관계를 이해하면 훈민정음이 단순히 소리를 적는 도구가 아니라 음운을 분류하고 설명하는 체계적 문자였다는 점이 분명해진다. 그래서 훈민정음의 자음 체계를 읽을 때는 개별 글자보다 그들 사이의 계열성과 파생 관계에 주목해야 한다."
+          "answerText": "그들 사이의 계열성과 파생 관계"
         }
       ]
     }

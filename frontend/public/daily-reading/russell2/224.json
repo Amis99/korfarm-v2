@@ -961,168 +961,73 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "주어를 높이는 선어말 어미는 무엇인가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 43,
-              "end": 46
-            },
-            {
-              "paragraphId": "p1",
-              "start": 52,
-              "end": 55
-            },
-            {
-              "paragraphId": "p2",
-              "start": 20,
-              "end": 23
-            },
-            {
-              "paragraphId": "p2",
-              "start": 62,
-              "end": 65
-            },
-            {
-              "paragraphId": "p2",
-              "start": 105,
-              "end": 108
-            },
-            {
-              "paragraphId": "p3",
-              "start": 8,
-              "end": 11
-            },
-            {
-              "paragraphId": "p4",
-              "start": 8,
-              "end": 11
-            },
-            {
-              "paragraphId": "p4",
-              "start": 112,
-              "end": 115
-            },
-            {
-              "paragraphId": "p5",
-              "start": 119,
-              "end": 122
-            },
-            {
-              "paragraphId": "p6",
-              "start": 14,
-              "end": 17
-            },
-            {
-              "paragraphId": "p6",
-              "start": 116,
-              "end": 119
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "‘다른 것으로 바꾸어 놓음’을 뜻하는 두 글자 단어를 지문에서 찾으시오",
+          "answerText": "치환",
           "answerMatchMode": "ANY",
-          "answerText": "-시-"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 134, "end": 136}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "높임 뜻이 들어간 어휘를 무엇이라고 하나?",
+          "prompt": "‘있다/먹다/자다’의 높임 어휘 짝으로 지문에 제시된 세 단어를 모두 찾으시오",
+          "answerText": "계시다, 드시다, 주무시다",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 14,
-              "end": 19
-            },
-            {
-              "paragraphId": "p4",
-              "start": 75,
-              "end": 80
-            },
-            {
-              "paragraphId": "p5",
-              "start": 128,
-              "end": 133
-            },
-            {
-              "paragraphId": "p6",
-              "start": 54,
-              "end": 59
-            },
-            {
-              "paragraphId": "p6",
-              "start": 131,
-              "end": 136
-            }
+            {"paragraphId": "p3", "start": 30, "end": 33},
+            {"paragraphId": "p3", "start": 40, "end": 43},
+            {"paragraphId": "p3", "start": 50, "end": 54}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "높임 어휘"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "서로 어울리는 관계를 무엇이라고 하나?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 183,
-              "end": 185
-            },
-            {
-              "paragraphId": "p5",
-              "start": 2,
-              "end": 4
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "주체 높임이 어긋나면 문장이 ‘부자연스러워지는’ 까닭으로, 글이 제시한 두 가지 잘못 사례에서 잘못 쓰인 높임 어휘를 모두 지문에서 찾으시오",
+          "answerText": "주무시다",
           "answerMatchMode": "ANY",
-          "answerText": "호응"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 50, "end": 54},
+            {"paragraphId": "p5", "start": 40, "end": 44}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "호응이 어긋나면 문장은 어떤 상태가 되나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 15,
-              "end": 23
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글쓴이가 말한 ‘-시-’ 사용 여부를 좌우하는 것은 주어의 사회적 위치보다 무엇이라고 했는지, 한 단어(두 글자)로 지문에서 찾으시오",
+          "answerText": "화자",
           "answerMatchMode": "ANY",
-          "answerText": "부자연스러워진다"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 131, "end": 133}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "주체 높임 표현을 제대로 이해할 때 무엇을 살펴야 하나?",
+          "prompt": "주체 높임 표현을 정확히 이해하기 위해 살펴야 할 두 가지 ‘서로 어울리는지’의 대상(주어의 성격, 그리고 또 무엇)을 지문에서 모두 찾으시오",
+          "answerText": "주어의 성격, 높임 어휘의 선택",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 75,
-              "end": 77
-            }
+            {"paragraphId": "p6", "start": 46, "end": 52},
+            {"paragraphId": "p6", "start": 54, "end": 63}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "‘-시-’와 높임 어휘를 함께 사용한 예문으로 글에 제시된 문장을 지문에서 그대로 찾으시오",
+          "answerText": "할아버지께서 계신다",
           "answerMatchMode": "ANY",
-          "answerText": "판단"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 44, "end": 54}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

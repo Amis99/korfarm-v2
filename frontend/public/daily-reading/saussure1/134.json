@@ -552,39 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "말랑말랑한 무엇으로 만들었나요?",
-          "answerText": "찰흙",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서 '조몰락거리면'이라는 말이 나와요. 이 말과 가장 비슷한 뜻을 지문에서 찾아 써 보세요",
+          "answerText": "주물러서",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 18,
-              "end": 20
-            },
-            {
-              "paragraphId": "p1",
-              "start": 41,
-              "end": 43
-            },
-            {
-              "paragraphId": "p1",
-              "start": 86,
-              "end": 88
-            },
-            {
-              "paragraphId": "p2",
-              "start": 81,
-              "end": 83
-            },
-            {
-              "paragraphId": "p2",
-              "start": 118,
-              "end": 120
+              "start": 94,
+              "end": 98
             }
           ],
           "scoring": {
@@ -596,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "손가락의 무엇이 세져요인가요?",
-          "answerText": "힘",
-          "answerMatchMode": "EXACT",
+          "prompt": "1문단에서 찰흙 빚기를 무엇이라고 정의하고 있는지 한 단어로 찾아 써 보세요",
+          "answerText": "활동",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 61,
-              "end": 62
+              "start": 34,
+              "end": 36
             }
           ],
           "scoring": {
@@ -615,24 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "멋진 무엇이 탄생하나요?",
-          "answerText": "작품",
-          "answerMatchMode": "EXACT",
+          "prompt": "찰흙을 햇빛에 갑자기 말리면 어떤 일이 생기는지 지문에서 찾아 써 보세요",
+          "answerText": "겉면이 갈라질 수 있으니",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 174,
-              "end": 176
-            },
+              "paragraphId": "p2",
+              "start": 49,
+              "end": 62
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "다 만든 찰흙 인형을 단단하게 만들려면 어디에서 말려야 하는지 한 단어로 찾아 써 보세요",
+          "answerText": "그늘에서",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 168,
-              "end": 170
+              "start": 13,
+              "end": 17
             }
           ],
           "scoring": {

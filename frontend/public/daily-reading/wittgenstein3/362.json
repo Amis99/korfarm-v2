@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 글을 쓰게 된 문제의식이나 제안 배경을 어떻게 밝히는가?",
+          "prompt": "관심을 보인다는 뜻으로 쓰인 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 215
+              "start": 144,
+              "end": 149
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "다음 달 우리 학교에서는 철학 강연회가 열린다. 이번 강연회는 단순히 대학 전공을 소개하는 자리가 아니라, 학생들이 평소에 당연하게 여겼던 생각을 다시 질문해 보는 시간을 만들기 위해 마련되었다. 그래서 소개 글의 제목도 너무 딱딱하기보다 학생들이 한 번쯤 눈길을 줄 만한 방향으로 잡을 필요가 있다. 아직 제목을 확정하지는 못했지만, 강연의 성격이 잘 드러나야 한다는 점은 분명하다."
+          "answerText": "눈길을 줄"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 현재 상황이나 조사 내용을 어떤 방향으로 제시하는가?",
+          "prompt": "현재 생각해 본 제목 후보 두 가지를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 236
+              "start": 29,
+              "end": 47
+            },
+            {
+              "paragraphId": "p2",
+              "start": 60,
+              "end": 78
             }
           ],
           "scoring": {
@@ -602,17 +607,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "현재 생각해 본 제목은 크게 두 가지이다. 하나는 \"우리가 믿는 것을 왜 다시 묻는가\"이고, 다른 하나는 \"질문하는 힘을 배우는 철학 강연회\"이다. 첫 번째 제목은 호기심을 불러일으키는 데는 좋지만 강연회 안내문이라는 점이 조금 늦게 드러난다. 반대로 두 번째 제목은 내용은 분명하지만 다소 평범하게 느껴질 수 있다. 그래서 어떤 제목이 더 적절한지는 강연의 핵심이 사고의 전환인지, 행사 안내인지에 따라 달라질 것 같다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "우리가 믿는 것을 왜 다시 묻는가",
+            "질문하는 힘을 배우는 철학 강연회"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단은 첫 개선안이나 핵심 근거를 무엇으로 설명하는가?",
+          "prompt": "첫 번째 제목의 장점과 한계를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 241
+              "paragraphId": "p2",
+              "start": 92,
+              "end": 110
+            },
+            {
+              "paragraphId": "p2",
+              "start": 111,
+              "end": 135
             }
           ],
           "scoring": {
@@ -620,17 +633,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "도입 부분도 아직 정리가 덜 되었다. 처음에는 \"철학은 시험에 나오지 않는 쓸모없는 과목이 아니라\"로 시작해 보려고 했는데, 이렇게 쓰면 독자를 너무 단정적으로 몰아가는 느낌이 있다. 그렇다고 너무 무난하게 \"우리 학교 철학 강연회를 소개합니다\"라고 시작하면 흥미가 떨어진다. 그래서 학생들이 일상에서 이미 철학적인 질문을 하고 있다는 점을 먼저 보여 주는 도입이 더 낫지 않을까 생각했지만, 이 부분은 문장을 다시 다듬어야 한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "호기심을 불러일으키는 데는 좋지만",
+            "강연회 안내문이라는 점이 조금 늦게 드러난다"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단은 추가 제안이나 고려할 점을 어떤 이유와 함께 내놓는가?",
+          "prompt": "처음 생각한 도입 문장이 문제가 되는 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 261
+              "paragraphId": "p3",
+              "start": 77,
+              "end": 97
             }
           ],
           "scoring": {
@@ -639,16 +655,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "예를 들면 스마트폰 사용 규칙, 인공지능의 답변을 믿어도 되는지, 친구와의 약속에서 공정함이 무엇인지 같은 문제는 모두 학생들에게 익숙한 고민이다. 이런 사례를 먼저 제시하면 강연 내용이 추상적인 철학 이론이 아니라 실제 생활과 연결된다는 점을 자연스럽게 드러낼 수 있다. 다만 사례가 너무 많아지면 도입이 길어지고, 무엇보다 강연 안내문인데 본론보다 예시가 앞서 나가는 문제도 생긴다. 이 점 때문에 사례를 두 개만 남길지, 한 문장으로 묶을지 아직 정하지 못했다."
+          "answerText": "독자를 너무 단정적으로 몰아가는 느낌"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 실행 조건이나 예상되는 우려를 어떻게 따져 보는가?",
+          "prompt": "학생들에게 익숙한 고민으로 제시된 사례를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 261
+              "paragraphId": "p4",
+              "start": 6,
+              "end": 16
+            },
+            {
+              "paragraphId": "p4",
+              "start": 18,
+              "end": 35
+            },
+            {
+              "paragraphId": "p4",
+              "start": 37,
+              "end": 56
             }
           ],
           "scoring": {
@@ -656,17 +682,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "강연자는 대학에서 윤리학과 정치철학을 연구하는 교수로, 이번 강연에서는 질문을 만드는 방법과 서로 다른 입장을 비교해 생각하는 법을 다룰 예정이라고 한다. 이 정보는 소개 글의 앞부분에 넣는 것이 좋을지, 뒤로 보내는 것이 좋을지 조금 애매하다. 처음부터 강연자 소개를 쓰면 안내문처럼 안정적이지만 흥미는 약해질 수 있고, 반대로 너무 뒤에 두면 독자가 강연의 신뢰도를 늦게 확인하게 된다. 그래서 도입 다음 문단쯤에 넣는 편이 좋겠다고 생각하지만 아직 확신은 없다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "스마트폰 사용 규칙",
+            "인공지능의 답변을 믿어도 되는지",
+            "친구와의 약속에서 공정함이 무엇인지"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 결론과 요청을 어떤 방향으로 마무리하는가?",
+          "prompt": "강연자가 어떤 사람인지 설명하는 어구를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 272
+              "paragraphId": "p5",
+              "start": 5,
+              "end": 28
             }
           ],
           "scoring": {
@@ -675,7 +705,65 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정리하면 이 소개 글은 제목에서 학생들의 관심을 끌고, 도입에서는 철학이 우리와 멀지 않다는 점을 보여 주면서도, 강연 안내에 필요한 핵심 정보는 놓치지 않아야 한다. 지금 초고는 제목 후보와 도입 방향이 함께 섞여 있어서 읽는 사람이 조금 어수선하게 느낄 수 있다. 그래서 다음 수정에서는 제목을 하나로 정하고, 도입 사례를 줄인 뒤, 강연 일시와 장소 같은 정보도 더 자연스럽게 연결해야 할 것 같다. 그래야 단순 안내문이 아니라 읽고 싶어지는 강연회 소개 글이 될 수 있을 것이다."
+          "answerText": "대학에서 윤리학과 정치철학을 연구하는 교수"
+        },
+        {
+          "id": "q7",
+          "prompt": "강연자 소개를 처음부터 쓸 때의 효과와 우려를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 154,
+              "end": 163
+            },
+            {
+              "paragraphId": "p5",
+              "start": 167,
+              "end": 179
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "안내문처럼 안정적",
+            "흥미는 약해질 수 있고"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "다음 수정에서 해야 할 일을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 163,
+              "end": 174
+            },
+            {
+              "paragraphId": "p6",
+              "start": 176,
+              "end": 187
+            },
+            {
+              "paragraphId": "p6",
+              "start": 189,
+              "end": 216
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "제목을 하나로 정하고",
+            "도입 사례를 줄인 뒤",
+            "강연 일시와 장소 같은 정보도 더 자연스럽게 연결"
+          ]
         }
       ]
     }

@@ -474,44 +474,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "길게 흐르는 물?",
-          "answerText": "강",
-          "answerMatchMode": "EXACT",
+          "prompt": "톡 쏘는 짠맛이 강하게 느껴지는 물을 무엇이라고 했는지 찾아보세요",
+          "answerText": "바닷물",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 19,
-              "end": 20
-            },
-            {
-              "paragraphId": "p1",
-              "start": 48,
-              "end": 49
-            },
-            {
-              "paragraphId": "p1",
-              "start": 125,
-              "end": 126
-            },
-            {
-              "paragraphId": "p1",
-              "start": 136,
-              "end": 137
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 1
-            },
-            {
-              "paragraphId": "p2",
-              "start": 47,
-              "end": 48
-            },
-            {
-              "paragraphId": "p2",
-              "start": 135,
-              "end": 136
+              "start": 94,
+              "end": 97
             }
           ],
           "scoring": {
@@ -523,34 +493,19 @@
         },
         {
           "id": "q2",
-          "prompt": "푸른 물이 가득한?",
-          "answerText": "바다",
-          "answerMatchMode": "EXACT",
+          "prompt": "강에 사는 민물 물고기 두 가지를 모두 찾아보세요",
+          "answerText": "붕어, 메기",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 22,
-              "end": 24
-            },
-            {
-              "paragraphId": "p1",
-              "start": 158,
-              "end": 160
+              "paragraphId": "p2",
+              "start": 51,
+              "end": 53
             },
             {
               "paragraphId": "p2",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p2",
-              "start": 90,
-              "end": 92
-            },
-            {
-              "paragraphId": "p2",
-              "start": 138,
-              "end": 140
+              "start": 55,
+              "end": 57
             }
           ],
           "scoring": {
@@ -562,14 +517,38 @@
         },
         {
           "id": "q3",
-          "prompt": "헤엄치는 생물?",
-          "answerText": "물고기",
-          "answerMatchMode": "EXACT",
+          "prompt": "바다에 사는 거대한 생물 두 가지를 모두 찾아보세요",
+          "answerText": "고래, 상어",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 68,
-              "end": 71
+              "start": 99,
+              "end": 101
+            },
+            {
+              "paragraphId": "p2",
+              "start": 103,
+              "end": 105
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "강물이 짠맛이 나지 않는 까닭은 무엇이 모여 만들어졌기 때문일까요",
+          "answerText": "빗물",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 52,
+              "end": 54
             }
           ],
           "scoring": {

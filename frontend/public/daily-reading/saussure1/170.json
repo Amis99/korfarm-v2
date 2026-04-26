@@ -474,30 +474,11 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리가 타는 탈것은?",
-          "answerText": "자전거",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 편지를 보내고 있는 친구의 이름을 찾아보세요",
+          "answerText": "지우",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 21,
-              "end": 24
-            },
-            {
-              "paragraphId": "p1",
-              "start": 103,
-              "end": 106
-            },
-            {
-              "paragraphId": "p2",
-              "start": 22,
-              "end": 25
-            },
-            {
-              "paragraphId": "p2",
-              "start": 47,
-              "end": 50
-            }
+            {"paragraphId": "p1", "start": 3, "end": 5}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -508,25 +489,14 @@
         },
         {
           "id": "q2",
-          "prompt": "연습을 한 장소는?",
-          "answerText": "공원",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 혼자 타게 되어 자랑한 탈것이 무엇인지 찾아보세요",
+          "answerText": "자전거",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 34,
-              "end": 36
-            },
-            {
-              "paragraphId": "p1",
-              "start": 111,
-              "end": 113
-            },
-            {
-              "paragraphId": "p2",
-              "start": 10,
-              "end": 12
-            }
+            {"paragraphId": "p1", "start": 21, "end": 24},
+            {"paragraphId": "p1", "start": 103, "end": 106},
+            {"paragraphId": "p2", "start": 22, "end": 25},
+            {"paragraphId": "p2", "start": 47, "end": 50}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -537,15 +507,28 @@
         },
         {
           "id": "q3",
-          "prompt": "시원하게 부는 무엇인가요?",
-          "answerText": "바람",
-          "answerMatchMode": "EXACT",
+          "prompt": "다음 주말에 친구와 만나기로 한 장소를 찾아보세요",
+          "answerText": "공원",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 81,
-              "end": 83
-            }
+            {"paragraphId": "p1", "start": 34, "end": 36},
+            {"paragraphId": "p1", "start": 111, "end": 113},
+            {"paragraphId": "p2", "start": 10, "end": 12}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "친구를 만나면 함께 하자고 제안한 신나는 활동이 무엇인지 두 글자 말을 찾아보세요",
+          "answerText": "경주",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 93, "end": 95}
           ],
           "scoring": {
             "correctDeltaSec": 10,

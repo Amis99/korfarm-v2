@@ -1031,25 +1031,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '원리'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 288,
-              "end": 290
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "회전을 부드럽게 하기 위해 넣는다고 한 부품의 이름을 찾으시오",
+          "answerText": "베어링",
           "answerMatchMode": "ANY",
-          "answerText": "원리"
-        },
-        {
-          "id": "q2",
-          "prompt": "지문에서 '베어링'을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -1058,16 +1042,17 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "베어링"
+          "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "지문에서 '윤활유'를 모두 찾으시오.",
+          "id": "q2",
+          "prompt": "마찰을 줄이려고 사용한다고 한 물질을 찾으시오",
+          "answerText": "윤활유",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -1076,48 +1061,92 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "기어의 크기와 톱니 수가 바꾼다고 한 두 가지 결과를 모두 찾으시오",
+          "answerText": "회전 속도와 힘",
           "answerMatchMode": "ANY",
-          "answerText": "윤활유"
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 160,
+              "end": 168
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '손실'을 모두 찾으시오.",
+          "prompt": "마찰이 지나치게 크면 입력된 힘이 새어 나간다고 한 두 가지 형태를 찾으시오",
+          "answerText": "열이나 소음",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 107,
-              "end": 109
+              "paragraphId": "p3",
+              "start": 62,
+              "end": 68
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "손실"
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '고정'을 모두 찾으시오.",
+          "prompt": "접촉면 상태가 바뀌면서 함께 바뀐다고 한 두 가지 결과를 모두 찾으시오",
+          "answerText": "운동 효율, 부품 수명",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 168,
-              "end": 170
+              "paragraphId": "p3",
+              "start": 203,
+              "end": 208
+            },
+            {
+              "paragraphId": "p3",
+              "start": 210,
+              "end": 215
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "큰 기어가 작은 기어를 돌릴 때 나타난다고 한 결과를 드러낸 표현을 찾으시오",
+          "answerText": "회전 속도는 빨라지지만",
           "answerMatchMode": "ANY",
-          "answerText": "고정"
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 113,
+              "end": 125
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

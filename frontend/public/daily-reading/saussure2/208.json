@@ -793,14 +793,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "한쪽에서는 큰 솥에 죽을 끓이고 있었고, 다른 쪽에서는 이것을 나누어 주고 있었습니다. 이것은 무엇일까요?",
-          "answerText": "마른 담요",
-          "answerMatchMode": "EXACT",
+          "prompt": "동수는 누구 앞을 막듯이 서 있다가 자기 차례가 되자 말했나요? 지문에서 찾으시오.",
+          "answerText": "분이와 영이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 282,
-              "end": 287
+              "start": 117,
+              "end": 123
             }
           ],
           "scoring": {
@@ -812,24 +812,14 @@
         },
         {
           "id": "q2",
-          "prompt": "영이는 체할지도 모르니 어떻게 먹으라고 했나요?",
-          "answerText": "천천히",
-          "answerMatchMode": "EXACT",
+          "prompt": "영이는 동수에게 죽을 어떻게 먹으라고 말했나요? 지문에서 찾으시오.",
+          "answerText": "천천히 먹어. 체할지도 몰라.",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 145,
-              "end": 148
-            },
-            {
-              "paragraphId": "p2",
               "start": 164,
-              "end": 167
-            },
-            {
-              "paragraphId": "p3",
-              "start": 549,
-              "end": 552
+              "end": 180
             }
           ],
           "scoring": {
@@ -841,14 +831,33 @@
         },
         {
           "id": "q3",
-          "prompt": "아이들이 누운 자리에는 하루 동안 처음으로 숨을 고를 만한 이것이 있었습니다. 이것은 무엇일까요?",
-          "answerText": "조용함",
-          "answerMatchMode": "EXACT",
+          "prompt": "분이는 다시 길을 떠나도 어떻게 하자고 말했나요? 지문에서 찾으시오.",
+          "answerText": "다시 길 떠나도 같이 가자.",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 536,
+              "end": 551
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "영이는 어떤 경우에 조금 참아진다고 말했나요? 지문에서 찾으시오.",
+          "answerText": "누가 옆에 있으면, 조금 참아져.",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 392,
-              "end": 395
+              "start": 176,
+              "end": 194
             }
           ],
           "scoring": {

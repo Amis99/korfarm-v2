@@ -571,12 +571,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "prompt": "병원체는 공격하면서도 인체 세포에는 큰 손상을 주지 않는 성질을 가리키는 용어를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 187
+              "start": 58,
+              "end": 63
+            },
+            {
+              "paragraphId": "p5",
+              "start": 183,
+              "end": 188
+            },
+            {
+              "paragraphId": "p6",
+              "start": 213,
+              "end": 218
             }
           ],
           "scoring": {
@@ -585,16 +595,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "항생제가 유용하려면 병원체는 공격하면서도 인체 세포에는 큰 손상을 주지 않아야 한다. 이런 성질을 흔히 선택 독성이라고 부르는데, 페니실린은 그 대표적인 사례로 꼽힌다. 페니실린이 특별한 이유는 세균과 사람 세포의 차이를 무작위로 이용하는 것이 아니라, 세균에게는 꼭 필요하지만 사람 세포에는 없는 구조를 정밀하게 겨냥한다는 데 있다."
+          "answerText": "선택 독성"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 핵심 원리나 기준을 어떻게 설명하는가?",
+          "prompt": "페니실린이 겨냥하는 구조의 조건을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 197
+              "paragraphId": "p1",
+              "start": 142,
+              "end": 155
+            },
+            {
+              "paragraphId": "p1",
+              "start": 156,
+              "end": 166
             }
           ],
           "scoring": {
@@ -602,17 +617,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "세균은 외부 환경의 압력 변화 속에서도 형태를 유지해야 하므로 세포막 바깥에 단단한 세포벽을 지닌다. 이 세포벽의 핵심 재료 가운데 하나가 펩티도글리칸이며, 세균은 이를 계속 합성하고 연결해 벽의 강도를 유지한다. 반면 사람을 비롯한 동물 세포는 세포막은 있지만 세균과 같은 세포벽을 갖지 않는다. 이 차이가 페니실린의 선택성을 설명하는 출발점이 된다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "세균에게는 꼭 필요하지만",
+            "사람 세포에는 없는"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단은 그 원리의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "세균이 형태를 유지하기 위해 세포막 바깥에 지니는 구조를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 188
+              "paragraphId": "p2",
+              "start": 43,
+              "end": 50
             }
           ],
           "scoring": {
@@ -621,16 +639,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "페니실린은 세균의 세포벽 형성 과정 가운데 특히 펩티도글리칸 사슬을 교차 결합하는 단계에 개입한다. 이때 중요한 역할을 하는 효소가 트랜스펩티데이스인데, 페니실린은 자신의 구조 일부를 이용해 이 효소와 결합함으로써 정상적인 반응을 막는다. 세균은 새 세포벽을 튼튼하게 이어 붙이지 못하고, 결과적으로 벽의 기계적 안정성을 잃기 시작한다."
+          "answerText": "단단한 세포벽"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
+          "prompt": "세포벽의 핵심 재료 가운데 하나로, 세균이 계속 합성하고 연결하는 물질을 찾으시오.",
           "answerRanges": [
             {
+              "paragraphId": "p2",
+              "start": 78,
+              "end": 84
+            },
+            {
+              "paragraphId": "p3",
+              "start": 27,
+              "end": 33
+            },
+            {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 235
+              "start": 69,
+              "end": 75
             }
           ],
           "scoring": {
@@ -639,16 +667,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "세포벽이 약해지면 세균은 내부와 외부의 삼투압 차이를 견디기 어려워진다. 정상적인 세포벽은 세포 안의 압력을 버텨 주지만, 펩티도글리칸 합성이 억제된 세균은 점차 벽이 허술해지고 결국 터질 수 있다. 이처럼 페니실린은 세균의 대사를 마비시키는 방식이라기보다, 세균이 스스로를 보호하는 구조를 불완전하게 만들어 죽음에 이르게 한다. 따라서 활발하게 증식하며 세포벽을 새로 만들어야 하는 세균일수록 영향이 더 크게 나타난다."
+          "answerText": "펩티도글리칸"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 이 주제의 효과나 쟁점을 어떤 방향으로 확장하는가?",
+          "prompt": "페니실린이 개입하는 단계와 결합하는 효소를 모두 찾으시오.",
           "answerRanges": [
             {
+              "paragraphId": "p3",
+              "start": 27,
+              "end": 48
+            },
+            {
+              "paragraphId": "p3",
+              "start": 74,
+              "end": 82
+            },
+            {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 221
+              "start": 66,
+              "end": 74
             }
           ],
           "scoring": {
@@ -656,17 +694,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "사람 세포가 페니실린에 직접적인 손상을 덜 받는 이유도 여기에 있다. 사람 세포에는 세균식 세포벽도, 그 벽을 만드는 트랜스펩티데이스도 없기 때문에 페니실린이 겨냥할 표적 자체가 없다. 즉 페니실린의 독성은 절대적으로 약해서가 아니라, 작용 지점이 사람 세포에 거의 존재하지 않기 때문에 상대적으로 선택적으로 드러나는 것이다. 선택 독성은 약이 약하다는 뜻이 아니라 표적이 다르다는 뜻에 가깝다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "펩티도글리칸 사슬을 교차 결합하는 단계",
+            "트랜스펩티데이스"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 앞선 논의를 어떤 의미로 정리하는가?",
+          "prompt": "펩티도글리칸 합성이 억제된 세균이 결국 어떻게 될 수 있는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 246
+              "paragraphId": "p4",
+              "start": 91,
+              "end": 110
             }
           ],
           "scoring": {
@@ -675,7 +716,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "다만 모든 세균이 페니실린에 똑같이 취약한 것은 아니다. 어떤 세균은 바깥막 구조나 효소 분해 기작으로 약물이 표적에 도달하는 것을 막거나, 세포벽 관련 단백질의 성질이 달라 약효가 약하게 나타나기도 한다. 그럼에도 페니실린의 기본 원리는 분명하다. 사람 세포와 세균의 구조적 차이를 이용해 세균의 세포벽 합성을 방해하고, 그 결과 세균만 선택적으로 무너뜨린다는 점에서 페니실린은 선택 독성의 고전적 원리를 보여 주는 항생제라 할 수 있다."
+          "answerText": "벽이 허술해지고 결국 터질 수 있다"
+        },
+        {
+          "id": "q7",
+          "prompt": "사람 세포가 페니실린에 직접적인 손상을 덜 받는 이유를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 39,
+              "end": 82
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "사람 세포에는 세균식 세포벽도, 그 벽을 만드는 트랜스펩티데이스도 없기 때문에"
+        },
+        {
+          "id": "q8",
+          "prompt": "페니실린의 약효가 약하게 나타나기도 하는 세균의 조건을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 39,
+              "end": 77
+            },
+            {
+              "paragraphId": "p6",
+              "start": 79,
+              "end": 97
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "바깥막 구조나 효소 분해 기작으로 약물이 표적에 도달하는 것을 막거나",
+            "세포벽 관련 단백질의 성질이 달라"
+          ]
         }
       ]
     }

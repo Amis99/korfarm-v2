@@ -850,19 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "붉고 노란 ( )이 반깁니다.",
-          "answerText": "잎",
-          "answerMatchMode": "EXACT",
+          "prompt": "산 입구부터 우리를 반긴 것을 설명한 어구를 찾으시오.",
+          "answerText": "붉고 노란 잎들",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 40,
-              "end": 41
-            },
-            {
-              "paragraphId": "p3",
               "start": 34,
-              "end": 35
+              "end": 42
             }
           ],
           "scoring": {
@@ -874,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "산에서 먹는 ( )은 꿀맛임.",
-          "answerText": "김밥",
-          "answerMatchMode": "EXACT",
+          "prompt": "발걸음을 가볍게 한 소리를 나타낸 어구를 찾으시오.",
+          "answerText": "바스락거리는 낙엽 소리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 88,
-              "end": 90
+              "paragraphId": "p1",
+              "start": 80,
+              "end": 92
             }
           ],
           "scoring": {
@@ -893,19 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "그림 ( )를 정성껏 남겨요.",
-          "answerText": "일기",
-          "answerMatchMode": "EXACT",
+          "prompt": "돗자리를 펴고 앉아 먹은 도시락을 꾸며 주는 말까지 포함해 찾으시오.",
+          "answerText": "정성 가득한 도시락",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 65,
+              "end": 75
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "그림일기에 그려 넣은 두 대상을 묶어 나타낸 어구를 찾으시오.",
+          "answerText": "단풍잎과 다람쥐",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 14,
-              "end": 16
-            },
-            {
-              "paragraphId": "p3",
-              "start": 91,
-              "end": 93
+              "start": 32,
+              "end": 40
             }
           ],
           "scoring": {

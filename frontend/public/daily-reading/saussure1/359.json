@@ -396,14 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "여럿이 모여 의논함?",
-          "answerText": "회의",
-          "answerMatchMode": "EXACT",
+          "prompt": "가족 회의에서 사회를 보신 분이 누구인지 본문에서 찾아 적어 보세요",
+          "answerText": "아빠",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 40,
-              "end": 42
+              "start": 51,
+              "end": 53
             }
           ],
           "scoring": {
@@ -415,29 +415,19 @@
         },
         {
           "id": "q2",
-          "prompt": "그림을 모아 보여주는 곳?",
-          "answerText": "미술관",
-          "answerMatchMode": "EXACT",
+          "prompt": "엄마와 내가 각각 챙기기로 한 두 가지 준비물을 모두 찾아 적어 보세요",
+          "answerText": "시원한 물, 작은 수첩",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 18,
-              "end": 21
-            },
-            {
-              "paragraphId": "p1",
-              "start": 66,
-              "end": 69
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 57
             },
             {
               "paragraphId": "p2",
-              "start": 3,
-              "end": 6
-            },
-            {
-              "paragraphId": "p2",
-              "start": 126,
-              "end": 129
+              "start": 81,
+              "end": 86
             }
           ],
           "scoring": {
@@ -449,14 +439,33 @@
         },
         {
           "id": "q3",
-          "prompt": "마음속에 있는 생각?",
-          "answerText": "의견",
-          "answerMatchMode": "EXACT",
+          "prompt": "전시장에 들어가기 전에 먼저 구경하기로 한 것이 무엇인지 적어 보세요",
+          "answerText": "정원에 있는 조각상",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 100,
-              "end": 102
+              "start": 115,
+              "end": 125
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "서로의 생각을 존중하며 준비한 미술관 나들이가 어떤 것이 될 거라고 했는지 적어 보세요",
+          "answerText": "행복한 추억",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 138,
+              "end": 144
             }
           ],
           "scoring": {

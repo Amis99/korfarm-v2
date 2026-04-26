@@ -1079,7 +1079,25 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "플랫폼 기업들이 시장을 장악해 가진 힘은 무엇인가요?",
+          "prompt": "플랫폼의 영향력이 커진 사례로 제시된 대상은 무엇인가요?",
+          "answerText": "배달 앱이나 온라인 쇼핑몰",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 47
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "플랫폼 시장을 장악한 기업들이 수익을 늘리려 이용하는 것은 무엇인가요?",
           "answerText": "독점적 지위",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1096,33 +1114,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "수수료 인상으로 부담이 커진 대상으로 글에서 지목한 이들은 누구인가요?",
-          "answerText": "영세 자영업자",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 128,
-              "end": 135
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q3",
-          "prompt": "가격 인상으로 위축될 수 있는 소비자의 태도는 무엇인가요?",
-          "answerText": "소비 심리",
+          "prompt": "수수료 인상이 결국 이어질 가능성이 큰 결과는 무엇인가요?",
+          "answerText": "소비자 물가 상승",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 94,
-              "end": 99
+              "start": 11,
+              "end": 20
             }
           ],
           "scoring": {
@@ -1133,14 +1133,22 @@
         },
         {
           "id": "q4",
-          "prompt": "플랫폼 기업이 수수료 인상의 이유로 내세운 것은 무엇인가요?",
-          "answerText": "서비스 품질 개선",
-          "answerMatchMode": "ANY",
+          "prompt": "플랫폼 기업들이 막대한 비용이 든다고 설명한 항목을 모두 찾으시오.",
+          "answerTexts": [
+            "서버 유지",
+            "새로운 기술 개발"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 9,
-              "end": 18
+              "start": 44,
+              "end": 49
+            },
+            {
+              "paragraphId": "p3",
+              "start": 51,
+              "end": 60
             }
           ],
           "scoring": {
@@ -1151,14 +1159,14 @@
         },
         {
           "id": "q5",
-          "prompt": "플랫폼 기업과 입점 업체 사이에 구축해야 한다고 한 관계는 무엇인가요?",
-          "answerText": "상생 모델",
+          "prompt": "정부가 플랫폼 기업의 독점적 남용을 막기 위해 마련해야 할 것은 무엇인가요?",
+          "answerText": "규제 방안",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 98,
-              "end": 103
+              "start": 60,
+              "end": 65
             }
           ],
           "scoring": {

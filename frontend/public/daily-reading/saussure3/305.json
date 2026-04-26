@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "알에서 ( ) 과정을 거칩니다.",
-          "answerText": "올챙이",
-          "answerMatchMode": "EXACT",
+          "prompt": "개구리가 알에서 깨어난 뒤 거치는 과정을 지문에서 찾아 클릭하세요.",
+          "answerText": "올챙이 과정",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 39,
-              "end": 42
+              "end": 45
             }
           ],
           "scoring": {
@@ -869,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "목에 있는 ( )에서 소리가 나요.",
-          "answerText": "주머니",
-          "answerMatchMode": "EXACT",
+          "prompt": "개구리가 살아가며 오가는 두 곳을 지문에서 찾아 클릭하세요.",
+          "answerText": "물속과 땅 위",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 17,
-              "end": 20
+              "paragraphId": "p1",
+              "start": 78,
+              "end": 85
             }
           ],
           "scoring": {
@@ -888,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "친구들을 ( ) 보호하며 지냅시다.",
-          "answerText": "소중히",
-          "answerMatchMode": "EXACT",
+          "prompt": "개구리에게 물기가 무척 중요한 까닭을 지문에서 찾아 클릭하세요.",
+          "answerText": "피부로 숨을 쉬기 때문에",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 40
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "개구리의 울음소리가 무엇을 하는 소리인지 지문에서 찾아 클릭하세요.",
+          "answerText": "친구들을 부르는 소리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 121,
-              "end": 124
+              "start": 37,
+              "end": 48
             }
           ],
           "scoring": {

@@ -557,54 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "자신이 낳은 알을 직접 품어 예쁜 병아리를 보는 것을 꿈꾸며 양계장을 탈출하고 싶어 한 암탉의 이름은?",
-          "answerText": "잎싹",
-          "answerMatchMode": "EXACT",
+          "prompt": "양계장에 갇힌 잎싹이 매일 낳던 것은 지문에서 어떤 표현으로 나옵니까?",
+          "answerText": "알만",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 20,
-              "end": 22
-            },
-            {
-              "paragraphId": "p1",
-              "start": 42,
-              "end": 44
-            },
-            {
-              "paragraphId": "p1",
-              "start": 84,
-              "end": 86
-            },
-            {
-              "paragraphId": "p2",
-              "start": 8,
-              "end": 10
-            },
-            {
-              "paragraphId": "p2",
-              "start": 65,
-              "end": 67
-            },
-            {
-              "paragraphId": "p2",
-              "start": 83,
-              "end": 85
-            },
-            {
-              "paragraphId": "p3",
-              "start": 5,
-              "end": 7
-            },
-            {
-              "paragraphId": "p3",
-              "start": 40,
-              "end": 42
-            },
-            {
-              "paragraphId": "p3",
-              "start": 87,
-              "end": 89
+              "start": 11,
+              "end": 13
             }
           ],
           "scoring": {
@@ -616,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "몸이 약해져 마당으로 쫓겨난 잎싹을 잡아먹으려 했으나 용감한 오리의 방해로 실패한 무서운 동물은?",
-          "answerText": "족제비",
-          "answerMatchMode": "EXACT",
+          "prompt": "잎싹은 자신이 낳은 알을 직접 품어 무엇을 보고 싶었습니까?",
+          "answerText": "예쁜 병아리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 16,
-              "end": 19
+              "paragraphId": "p1",
+              "start": 66,
+              "end": 72
             }
           ],
           "scoring": {
@@ -635,19 +595,41 @@
         },
         {
           "id": "q3",
-          "prompt": "족제비의 위협으로부터 약한 잎싹의 목숨을 구해 주고, 잎싹이 고마움을 느끼며 숲으로 향하게 도운 이는?",
-          "answerText": "나그네",
-          "answerMatchMode": "EXACT",
+          "prompt": "마당으로 나온 잎싹이 겪은 일과 잎싹의 목숨을 구해 준 존재를 모두 찾으시오.",
+          "answerTexts": [
+            "큰 위기",
+            "용감한 청둥오리 나그네"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 56,
-              "end": 59
+              "start": 30,
+              "end": 34
             },
             {
               "paragraphId": "p2",
-              "start": 96,
-              "end": 99
+              "start": 47,
+              "end": 59
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "숲속에서 잎싹이 발견하고 조심스럽게 품은 것은 무엇입니까?",
+          "answerText": "버려진 하얀 알 하나",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 9,
+              "end": 20
             }
           ],
           "scoring": {

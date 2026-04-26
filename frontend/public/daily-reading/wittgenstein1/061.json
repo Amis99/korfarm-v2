@@ -571,30 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 '휴대전화 일괄 수거 반박문 초고'와 관련해 어떤 문제의식으로 주장하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 133
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학생 자치회 반박문 초고\n상대 측은 학교 휴대전화 수거 제도가 수업 집중도를 높인다고 주장했다. 그러나 나는 이 주장이 모든 학생에게 동일하게 적용된다고 보기 어렵다고 생각한다. 그래서 이 글에서는 상대 측 주장의 한계를 반박하려고 한다."
-        },
-        {
-          "id": "q2",
-          "prompt": "둘째 문단은 주장을 설득력 있게 만들기 위해 어떤 점을 보완해야 한다고 보는가?",
+          "prompt": "수업 중 다른 일을 하는 것을 가리키는 단어를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 182
+              "start": 34,
+              "end": 36
             }
           ],
           "scoring": {
@@ -603,16 +585,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "먼저 상대 측은 휴대전화를 아예 걷어 가면 학생들이 수업 중 딴짓을 하지 못한다고 했다. 하지만 집중력 저하는 휴대전화만의 문제는 아니다. 학생이 수업 내용을 어렵게 느끼거나 참여 활동이 부족하면 다른 방식으로도 주의가 흐트러질 수 있다. 그런데 이 부분에서 나는 아직 수업 방식과 학생 참여의 관계를 충분히 설명하지 못했다."
+          "answerText": "딴짓"
         },
         {
-          "id": "q3",
-          "prompt": "셋째 문단은 '휴대전화 일괄 수거 반박문 초고'와 관련해 어떤 근거로 보강해야 한다고 보는가?",
+          "id": "q2",
+          "prompt": "휴대전화가 필요한 상황으로 든 예를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 198
+              "start": 92,
+              "end": 102
+            },
+            {
+              "paragraphId": "p3",
+              "start": 104,
+              "end": 110
+            },
+            {
+              "paragraphId": "p3",
+              "start": 112,
+              "end": 120
             }
           ],
           "scoring": {
@@ -620,17 +612,52 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "또 상대 측은 규칙을 한 번에 적용해야 관리가 쉽다고 주장했는데, 편의성만으로 학생의 사용 권한을 넓게 제한하는 것은 타당한지 더 따져 볼 필요가 있다. 예를 들어 방과 후 일정 확인, 보호자 연락, 긴급 공지 수신처럼 휴대전화가 필요한 상황도 존재한다. 이 문단에서는 '편의성'과 '권리 제한'을 비교하는 기준이 조금 더 분명하게 드러나야 할 것 같다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "방과 후 일정 확인",
+            "보호자 연락",
+            "긴급 공지 수신"
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "이 문단에서 비교 기준으로 제시된 두 표현을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 37,
+              "end": 40
+            },
+            {
+              "paragraphId": "p3",
+              "start": 152,
+              "end": 155
+            },
+            {
+              "paragraphId": "p3",
+              "start": 159,
+              "end": 164
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "편의성",
+            "권리 제한"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 '휴대전화 일괄 수거 반박문 초고'와 관련해 어떤 근거로 보강해야 한다고 보는가?",
+          "prompt": "수업 내용을 어렵게 느끼거나 참여 활동이 부족할 때 나타날 수 있는 결과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 179
+              "paragraphId": "p2",
+              "start": 119,
+              "end": 132
             }
           ],
           "scoring": {
@@ -639,16 +666,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "상대 측의 논리에는 효과를 입증하는 근거도 부족하다. 휴대전화를 걷은 뒤 성적이 올랐다는 사례를 들더라도, 그 변화가 수거 제도 때문인지 다른 요인 때문인지는 바로 알기 어렵다. 학습 시간 증가, 평가 방식 변화, 학급 분위기 같은 요소도 함께 검토해야 하는데 지금 초고에서는 그런 조건들을 충분히 언급하지 못하고 있다."
+          "answerText": "주의가 흐트러질 수 있다"
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 글의 독자와 요청을 어떻게 정리해야 한다고 말하는가?",
+          "prompt": "상대 측이 휴대전화 수거 제도로 높인다고 주장한 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 210
+              "paragraphId": "p1",
+              "start": 35,
+              "end": 41
             }
           ],
           "scoring": {
@@ -657,16 +684,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "따라서 모든 학생에게 동일한 방식으로 휴대전화를 수거하는 것보다, 수업 시간 사용 규칙을 구체화하고 위반 상황에만 단계적으로 대응하는 편이 더 적절하다고 본다. 필요할 때는 교사가 보관함을 활용하고, 평소에는 전원을 끄거나 가방에 넣어 두게 하는 방법도 가능하다. 그런데 이 대안이 왜 상대 측 주장보다 더 현실적인지 마지막에 한 번 더 정리하면 글이 더 설득력 있을 것이다."
+          "answerText": "수업 집중도"
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 글의 독자와 요청을 어떻게 정리해야 한다고 말하는가?",
+          "prompt": "상대 측 논리에 부족하다고 지적한 근거를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 194
+              "paragraphId": "p4",
+              "start": 11,
+              "end": 22
             }
           ],
           "scoring": {
@@ -675,7 +702,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결론적으로 상대 측은 관리의 편리함과 일부 사례를 근거로 전면 수거를 정당화했지만, 학생의 실제 사용 상황과 효과 검증 문제를 충분히 설명하지 못했다. 그래서 나는 휴대전화 수거 제도가 무조건 옳다는 주장에 동의하기 어렵다. 다만 글을 다시 다듬을 때는 반박 기준을 앞부분에서 더 또렷하게 제시하고, 대안의 장점도 한 문단에서 정리할 필요가 있다."
+          "answerText": "효과를 입증하는 근거"
+        },
+        {
+          "id": "q7",
+          "prompt": "글쓴이가 모든 학생에게 동일한 수거를 하는 것보다 더 적절하다고 본 방안을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 37,
+              "end": 76
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "수업 시간 사용 규칙을 구체화하고 위반 상황에만 단계적으로 대응하는 편"
+        },
+        {
+          "id": "q8",
+          "prompt": "글쓴이가 동의하기 어렵다고 한 주장을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 92,
+              "end": 114
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "휴대전화 수거 제도가 무조건 옳다는 주장"
         }
       ]
     }

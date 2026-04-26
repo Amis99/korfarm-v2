@@ -1039,71 +1039,104 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이미 피동 의미가 겹쳐 쓰인 표현을 무엇이라고 하나요?",
+          "prompt": "이미 피동 의미를 가진 표현 위에 다시 피동 형식을 얹는 경우를 가리키는 다섯 글자 표현을 지문에서 모두 찾으시오.",
+          "answerText": "이중 피동",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 24,
-              "end": 32
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "이중 피동 표현"
-        },
-        {
-          "id": "q2",
-          "prompt": "사동 의미가 불필요하게 더해져 문제 되는 표현은 무엇인가요?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+              "end": 29
+            },
             {
-              "paragraphId": "p1",
-              "start": 34,
-              "end": 44
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 5
             },
             {
               "paragraphId": "p6",
-              "start": 10,
-              "end": 20
+              "start": 3,
+              "end": 8
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "불필요한 사동 표현"
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "이중 피동의 대표적인 예로 글쓴이가 든 두 표현을 지문에서 모두 찾으시오.",
+          "answerText": "보여지다 / 읽혀지다",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 49,
+              "end": 53
+            },
+            {
+              "paragraphId": "p2",
+              "start": 57,
+              "end": 61
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "앉게 하다, 먹게 하다처럼 문장 구조만으로 이루어지는 사동을 무엇이라고 하나요?",
-          "answerMatchMode": "ANY",
+          "prompt": "통사 사동만으로 충분하다고 글쓴이가 든 두 가지 예를 지문에서 모두 찾으시오.",
+          "answerText": "앉게 하다 / 먹게 하다",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 32,
-              "end": 37
+              "start": 14,
+              "end": 19
             },
             {
-              "paragraphId": "p5",
-              "start": 94,
-              "end": 99
+              "paragraphId": "p4",
+              "start": 23,
+              "end": 28
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "통사 사동"
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "문장 구조를 흐리게 만드는 문제를 무엇이라고 하나요?",
+          "prompt": "이중 피동 표현이 생기는 까닭을 글쓴이가 무엇 때문이라고 설명했는지 지문에서 찾으시오.",
+          "answerText": "피동을 강조하려는 심리",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 15,
+              "end": 27
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "이중 피동과 불필요한 사동 표현의 문제가 무엇과 관련된다고 결론에서 정리했는지 지문에서 찾으시오.",
+          "answerText": "호응 오류",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
@@ -1113,34 +1146,30 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "호응 오류"
+          "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "뜻이 더 정확해지기보다 덧붙여지는 불필요한 부분을 무엇이라고 하나요?",
+          "id": "q6",
+          "prompt": "피동과 사동을 판단할 때 형식이 몇 개 붙었는지가 아니라 무엇을 보아야 한다고 했는지 지문에서 찾으시오.",
+          "answerText": "의미가 실제로 몇 번 실현되는지",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 137,
-              "end": 141
-            },
-            {
-              "paragraphId": "p6",
-              "start": 143,
-              "end": 147
+              "paragraphId": "p5",
+              "start": 37,
+              "end": 54
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "군더더기"
+          "revealOnWrong": true
         }
       ]
     }

@@ -562,14 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "질병이나 사고 따위가 일어나지 않도록 미리 막는 것은?",
-          "answerText": "예방",
+          "prompt": "무더운 여름에 음식을 잘못 먹으면 걸리기 쉬운 병을 설명한 어구를 지문에서 찾으시오.",
+          "answerText": "배가 아픈 식중독",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 5,
-              "end": 7
+              "paragraphId": "p1",
+              "start": 19,
+              "end": 28
             }
           ],
           "scoring": {
@@ -580,19 +580,50 @@
         },
         {
           "id": "q2",
-          "prompt": "병을 일으키거나 옮기는 아주 작은 벌레나 균을 뜻하는 말은?",
-          "answerText": "병균",
+          "prompt": "나쁜 병균이 음식에서 아주 빠르게 늘어나는 까닭을 나타낸 어구를 지문에서 찾으시오.",
+          "answerText": "몹시 덥고 습해서",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 61,
-              "end": 63
-            },
+              "start": 48,
+              "end": 57
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "밥을 먹기 전이나 화장실에 다녀온 뒤 비누를 사용해서 어떻게 해야 하는지 나타낸 어구를 지문에서 찾으시오.",
+          "answerText": "손을 구석구석 꼼꼼히 닦아야",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 97,
-              "end": 99
+              "start": 65,
+              "end": 80
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "고기나 생선 같은 음식은 어떻게 먹어야 식중독을 막을 수 있는지 나타낸 어구를 지문에서 찾으시오.",
+          "answerText": "불에 속까지 푹 익혀서",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 98,
+              "end": 110
             }
           ],
           "scoring": {

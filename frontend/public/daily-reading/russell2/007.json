@@ -570,169 +570,133 @@
     "confirm": {
       "questions": [
         {
-          "prompt": "품사를 구별할 때 살피는 핵심은 무엇인가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "맡은 기능과 성격"
-            },
-            {
-              "id": "B",
-              "text": "소리의 크기"
-            },
-            {
-              "id": "C",
-              "text": "글자 수"
-            },
-            {
-              "id": "D",
-              "text": "문장 길이"
-            }
-          ],
-          "answerId": "A",
+          "id": "q1",
+          "prompt": "이 글이 다루는 문법 단위의 이름을 본문에서 모두 찾으시오",
+          "answerText": "품사",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 65,
-              "end": 82
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p5",
+              "start": 53,
+              "end": 55
+            },
+            {
+              "paragraphId": "p6",
+              "start": 4,
+              "end": 6
             }
           ],
-          "answerText": "맡은 기능과 성격을 살피는 일이",
-          "answerMatchMode": "ANY"
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
-          "prompt": "명사와 대명사와 수사는 어떤 품사인가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "체언"
-            },
-            {
-              "id": "B",
-              "text": "용언"
-            },
-            {
-              "id": "C",
-              "text": "부사"
-            },
-            {
-              "id": "D",
-              "text": "감탄사"
-            }
-          ],
-          "answerId": "A",
+          "id": "q2",
+          "prompt": "조사와 결합해 자리를 잡는 체언에 속하는 세 품사의 이름을 본문에서 찾으시오",
+          "answerText": "명사와 대명사와 수사",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 33,
-              "end": 34
-            },
-            {
-              "paragraphId": "p4",
-              "start": 48,
-              "end": 49
-            },
-            {
-              "paragraphId": "p4",
-              "start": 69,
-              "end": 70
+              "start": 0,
+              "end": 11
             }
           ],
-          "answerText": "체",
-          "answerMatchMode": "ANY"
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
-          "prompt": "동사와 형용사의 공통점은 무엇인가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "활용을 하며 서술어가 될 수 있다"
-            },
-            {
-              "id": "B",
-              "text": "조사와 결합한다"
-            },
-            {
-              "id": "C",
-              "text": "체언을 꾸민다"
-            },
-            {
-              "id": "D",
-              "text": "느낌을 바로 나타낸다"
-            }
-          ],
-          "answerId": "A",
+          "id": "q3",
+          "prompt": "활용을 하며 서술어가 될 수 있는 용언 두 품사의 이름을 본문에서 찾으시오",
+          "answerText": "동사와 형용사",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 15,
-              "end": 33
+              "start": 0,
+              "end": 7
             }
           ],
-          "answerText": "활용을 하며 서술어가 될 수 있지",
-          "answerMatchMode": "ANY"
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
-          "prompt": "조사와 감탄사는 각각 무엇을 드러내는가?",
-          "choices": [
+          "id": "q4",
+          "prompt": "관형사와 부사가 각각 꾸미는 대상을 본문에서 모두 찾으시오",
+          "answerText": "체언을 꾸미고 / 용언이나 문장 전체를 꾸민다",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
             {
-              "id": "A",
-              "text": "관계와 느낌"
+              "paragraphId": "p4",
+              "start": 48,
+              "end": 55
             },
             {
-              "id": "B",
-              "text": "주어와 목적어"
-            },
-            {
-              "id": "C",
-              "text": "활용과 서술어"
-            },
-            {
-              "id": "D",
-              "text": "체언과 용언"
+              "paragraphId": "p4",
+              "start": 60,
+              "end": 75
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "감탄사가 바로 나타낸다고 한 두 가지 느낌을 본문에서 찾으시오",
+          "answerText": "놀람이나 부름 같은 느낌",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 77
+              "start": 26,
+              "end": 39
             }
           ],
-          "answerText": "조사는 앞말에 붙어 관계를 드러내고, 감탄사는 놀람이나 부름 같은 느낌을 바로 나타내므로 다른 품사와 달리 독립적으로 쓰이는 경우가 많다.",
-          "answerMatchMode": "ANY"
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
-          "prompt": "품사를 바르게 가리려면 무엇을 함께 살펴야 하는가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "문장에서 어떻게 쓰였는지"
-            },
-            {
-              "id": "B",
-              "text": "글자의 모양"
-            },
-            {
-              "id": "C",
-              "text": "문장의 길이"
-            },
-            {
-              "id": "D",
-              "text": "소리의 크기"
-            }
-          ],
-          "answerId": "A",
+          "id": "q6",
+          "prompt": "조사가 어떤 일을 한다고 설명하는지 본문에서 찾으시오",
+          "answerText": "앞말에 붙어 관계를 드러내고",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 29,
-              "end": 41
+              "paragraphId": "p5",
+              "start": 4,
+              "end": 19
             }
           ],
-          "answerText": "문장에서 어떻게 쓰였는",
-          "answerMatchMode": "ANY"
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

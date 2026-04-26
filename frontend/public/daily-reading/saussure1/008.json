@@ -406,42 +406,18 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "연못가 ( )에서 개구리 봄.",
-          "answerText": "한복판",
-          "answerMatchMode": "EXACT",
+          "prompt": "연못가에서 바람개비를 돌리던 동물이 누구인지 지문에서 찾아 보세요.",
+          "answerText": "개구리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 4,
-              "end": 7
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "( )를 토끼에게 주었어요.",
-          "answerText": "바람개비",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 15,
-              "end": 19
+              "start": 10,
+              "end": 13
             },
             {
               "paragraphId": "p1",
-              "start": 64,
-              "end": 68
-            },
-            {
-              "paragraphId": "p2",
-              "start": 54,
+              "start": 55,
               "end": 58
             }
           ],
@@ -453,15 +429,58 @@
           "revealOnWrong": true
         },
         {
+          "id": "q2",
+          "prompt": "바람개비가 도는 모습이 어땠는지 지문에서 찾아 보세요.",
+          "answerText": "무척이나 신기하고 예뻤습니다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 38,
+              "end": 53
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q3",
-          "prompt": "행복한 ( )를 열기로 해요.",
-          "answerText": "파티",
-          "answerMatchMode": "EXACT",
+          "prompt": "동물 친구들이 모여서 무엇을 하기로 했는지 지문에서 찾아 보세요.",
+          "answerText": "행복한 파티를 열기로 했어요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 41,
-              "end": 43
+              "start": 37,
+              "end": 52
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "이 시에서 흉내내는 말이 사용된 부분을 모두 찾아 보세요.",
+          "answerText": "뱅글뱅글, 하하 호호",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 26,
+              "end": 30
+            },
+            {
+              "paragraphId": "p2",
+              "start": 9,
+              "end": 14
             }
           ],
           "scoring": {

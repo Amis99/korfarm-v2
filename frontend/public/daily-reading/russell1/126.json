@@ -992,7 +992,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '문법'을 모두 찾으시오.",
+          "prompt": "주어와 서술어의 호응을 살피는 분야를 가리키는 말을 모두 찾으시오",
+          "answerText": "문법",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -1006,114 +1008,151 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "문법"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '의미'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 7,
-              "end": 9
-            },
-            {
-              "paragraphId": "p2",
-              "start": 203,
-              "end": 205
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "서술어가 대상에 대해 밝혀 준다고 한 세 가지를 모두 찾으시오",
+          "answerText": "동작, 상태, 성질",
           "answerMatchMode": "ALL",
-          "answerText": "의미"
-        },
-        {
-          "id": "q3",
-          "prompt": "지문에서 '높임'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p3",
-              "start": 52,
-              "end": 54
-            },
-            {
-              "paragraphId": "p3",
-              "start": 105,
-              "end": 107
-            },
-            {
-              "paragraphId": "p3",
-              "start": 149,
-              "end": 151
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "높임"
-        },
-        {
-          "id": "q4",
-          "prompt": "지문에서 '태도'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 163,
-              "end": 165
-            },
-            {
-              "paragraphId": "p3",
-              "start": 216,
-              "end": 218
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "태도"
-        },
-        {
-          "id": "q5",
-          "prompt": "지문에서 '관계'를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 25,
-              "end": 27
+              "start": 90,
+              "end": 92
             },
             {
-              "paragraphId": "p2",
-              "start": 10,
-              "end": 12
+              "paragraphId": "p1",
+              "start": 94,
+              "end": 96
+            },
+            {
+              "paragraphId": "p1",
+              "start": 98,
+              "end": 100
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "주어의 성격과 맞지 않아 뜻이 흔들리는 예로 든 문장을 찾으시오",
+          "answerText": "책상이 웃는다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 91,
+              "end": 98
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "높임이 끊겨 어색하게 느껴지는 예로 든 문장을 찾으시오",
+          "answerText": "할머니께서 온다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 90,
+              "end": 98
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "호응을 살필 때 함께 보아야 한다고 한 문장의 두 성분을 모두 찾으시오",
+          "answerText": "주어, 서술어",
           "answerMatchMode": "ALL",
-          "answerText": "관계"
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 5,
+              "end": 7
+            },
+            {
+              "paragraphId": "p1",
+              "start": 51,
+              "end": 53
+            },
+            {
+              "paragraphId": "p1",
+              "start": 162,
+              "end": 164
+            },
+            {
+              "paragraphId": "p1",
+              "start": 205,
+              "end": 207
+            },
+            {
+              "paragraphId": "p1",
+              "start": 9,
+              "end": 12
+            },
+            {
+              "paragraphId": "p1",
+              "start": 79,
+              "end": 82
+            },
+            {
+              "paragraphId": "p1",
+              "start": 175,
+              "end": 178
+            },
+            {
+              "paragraphId": "p1",
+              "start": 209,
+              "end": 212
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "긴 문장에서 호응 문제를 쉽게 발견하기 위해 가장 먼저 해야 할 일을 찾으시오",
+          "answerText": "먼저 서술어를 찾고",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 129,
+              "end": 139
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

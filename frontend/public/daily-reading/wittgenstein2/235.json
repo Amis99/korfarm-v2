@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단을 통해 알 수 있는 것은?",
+          "prompt": "다회용 컵 보증금제를 제안하려는 쪽을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 186
+              "start": 30,
+              "end": 35
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "서연: 축제 때 일회용 컵 쓰레기가 너무 많이 나와서 학생회에서 다회용 컵 보증금제를 제안하려고 해요. 그런데 매점 운영 입장에서는 회수와 보관 문제가 클 수 있으니까, 오늘은 서로 가능한 수준을 먼저 맞춰 보려고 합니다. 민호: 취지는 이해하지만, 컵이 제대로 돌아오지 않으면 매점 쪽 부담이 커질 수 있다는 점도 꼭 봐야 합니다."
+          "answerText": "학생회에서"
         },
         {
           "id": "q2",
-          "prompt": "2문단을 통해 알 수 있는 것은?",
+          "prompt": "민호가 매점 쪽 부담이 커질 수 있다고 본 조건을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 189
+              "paragraphId": "p1",
+              "start": 140,
+              "end": 155
             }
           ],
           "scoring": {
@@ -603,16 +603,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "지후: 학생회 안은 음료 한 잔당 보증금 천 원을 추가로 받고, 반납하면 전액 돌려주는 방식이에요. 다만 천 원이 너무 높으면 구매 자체를 꺼리는 학생이 생길 수 있어서 금액 조정은 열어 두려고 합니다. 민호: 금액보다도 반납 창구가 한곳이면 줄이 길어질 것 같아요. 매점 계산대에서 판매와 반납을 같이 처리하는 건 현실적으로 어렵습니다."
+          "answerText": "컵이 제대로 돌아오지 않으면"
         },
         {
           "id": "q3",
-          "prompt": "3문단을 통해 알 수 있는 것은?",
+          "prompt": "학생회 안에서 한 잔당 추가로 받으려 한 보증금을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 160
+              "paragraphId": "p2",
+              "start": 19,
+              "end": 26
             }
           ],
           "scoring": {
@@ -621,16 +621,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "서연: 그 부분은 학생회가 별도 반납 부스를 맡으면 어떨까요? 매점은 판매만 하고, 반납 확인과 보증금 환급은 학생회 자원봉사자가 맡는 식으로요. 민호: 그렇게 역할을 나누면 훨씬 낫습니다. 대신 컵 수량이 부족해지지 않게 반납된 컵을 중간중간 세척 장소로 옮기는 사람도 있어야 합니다."
+          "answerText": "보증금 천 원"
         },
         {
           "id": "q4",
-          "prompt": "4문단을 통해 알 수 있는 것은?",
+          "prompt": "천 원이 너무 높을 때 생길 수 있는 일을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 163
+              "paragraphId": "p2",
+              "start": 71,
+              "end": 94
             }
           ],
           "scoring": {
@@ -639,16 +639,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "지후: 세척은 급식실 뒤편 공간을 빌릴 수 있는지 알아보겠습니다. 또 반납률을 높이려면 방송으로만 알리는 것보다, 컵에 반납 위치 스티커를 붙이는 편이 더 효과적일 것 같아요. 민호: 좋습니다. 다만 스티커 문구가 너무 길면 잘 안 읽히니, 보증금 금액과 반납 장소만 크게 보이게 해 주세요."
+          "answerText": "구매 자체를 꺼리는 학생이 생길 수 있어서"
         },
         {
           "id": "q5",
-          "prompt": "5문단을 통해 알 수 있는 것은?",
+          "prompt": "역할을 나누는 방안에서 매점과 학생회가 맡는 일을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 170
+              "paragraphId": "p3",
+              "start": 39,
+              "end": 42
+            },
+            {
+              "paragraphId": "p3",
+              "start": 47,
+              "end": 60
             }
           ],
           "scoring": {
@@ -656,17 +661,46 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "서연: 그럼 보증금은 처음 제안보다 낮춰서 오백 원으로 해 보는 게 어떨까요? 학생들 부담은 줄이고, 대신 미반납 컵이 많아지면 다음날부터 금액을 조정할 수 있게 두는 거예요. 민호: 오백 원이면 시작해 볼 만합니다. 대신 첫날 반납률을 보고 둘째 날 운영 방식을 다시 협의한다는 조건은 꼭 넣어 주세요."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "판매만",
+            "반납 확인과 보증금 환급"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단을 통해 알 수 있는 것은?",
+          "prompt": "스티커 문구에서 크게 보이게 해야 할 내용을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 185
+              "paragraphId": "p4",
+              "start": 135,
+              "end": 141
+            },
+            {
+              "paragraphId": "p4",
+              "start": 143,
+              "end": 148
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "보증금 금액",
+            "반납 장소"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "민호가 시작해 볼 만하다고 한 조건 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 103,
+              "end": 109
             }
           ],
           "scoring": {
@@ -675,7 +709,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "지후: 정리하면 매점은 판매 담당, 학생회는 반납 부스와 환급 담당, 세척 이동 인력은 학생회가 별도로 배치하는 쪽으로 가네요. 서연: 네, 그리고 보증금은 오백 원으로 시작하고 첫날 결과를 본 뒤 조정 여부를 다시 논의하겠습니다. 민호: 그 정도면 매점도 협조할 수 있어요. 실행안 문서로 정리해서 내일까지 한 번 더 확인합시다."
+          "answerText": "오백 원이면"
+        },
+        {
+          "id": "q8",
+          "prompt": "민호가 마지막에 정리하라고 한 대상을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 155,
+              "end": 161
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "실행안 문서"
         }
       ]
     }

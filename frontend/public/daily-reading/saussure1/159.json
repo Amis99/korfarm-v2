@@ -474,24 +474,24 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리가 견학 갈 곳은?",
-          "answerText": "과학관",
-          "answerMatchMode": "EXACT",
+          "prompt": "회의에서 의견을 낸 두 친구의 이름을 모두 찾아보세요",
+          "answerText": "민수, 영희",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 9,
-              "end": 12
+              "start": 84,
+              "end": 86
             },
             {
               "paragraphId": "p1",
-              "start": 48,
-              "end": 51
+              "start": 129,
+              "end": 131
             },
             {
               "paragraphId": "p2",
-              "start": 41,
-              "end": 44
+              "start": 4,
+              "end": 6
             }
           ],
           "scoring": {
@@ -503,19 +503,24 @@
         },
         {
           "id": "q2",
-          "prompt": "처음 의견을 낸 친구?",
-          "answerText": "민수",
-          "answerMatchMode": "EXACT",
+          "prompt": "여러 사람이 모여 의견을 나누고 결정하는 자리를 가리키는 낱말을 찾아보세요",
+          "answerText": "회의",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 84,
-              "end": 86
+              "start": 28,
+              "end": 30
             },
             {
               "paragraphId": "p1",
-              "start": 129,
-              "end": 131
+              "start": 39,
+              "end": 41
+            },
+            {
+              "paragraphId": "p2",
+              "start": 84,
+              "end": 86
             }
           ],
           "scoring": {
@@ -527,14 +532,38 @@
         },
         {
           "id": "q3",
-          "prompt": "규칙을 적어 둔 곳?",
+          "prompt": "결정된 규칙들을 꼼꼼하게 기록한 곳을 글에서 찾아보세요",
           "answerText": "수첩",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 100,
               "end": 102
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "영희가 줄 잘 서기와 장난 금지를 제안한 까닭은 누구를 잃어버릴 수 있기 때문인지 찾아보세요",
+          "answerText": "친구",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 124,
+              "end": 126
+            },
+            {
+              "paragraphId": "p2",
+              "start": 59,
+              "end": 61
             }
           ],
           "scoring": {

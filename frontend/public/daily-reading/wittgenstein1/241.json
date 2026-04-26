@@ -571,12 +571,32 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"유추 해석과 죄형 법정주의\"에 해당하는 부분은 어디인가요?",
+          "prompt": "조문이 직접 규정하지 않은 사안에 구조가 비슷한 다른 규범을 끌어와 해결 근거를 마련하는 방식을 가리키는 말은?",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 7,
+              "end": 9
+            },
+            {
+              "paragraphId": "p2",
+              "start": 178,
+              "end": 180
+            },
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p4",
+              "start": 131,
+              "end": 133
+            },
             {
               "paragraphId": "p6",
               "start": 81,
-              "end": 95
+              "end": 83
             }
           ],
           "scoring": {
@@ -585,16 +605,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "유추 해석과 죄형 법정주의"
+          "answerText": "유추"
         },
         {
           "id": "q2",
-          "prompt": "\"유추 해석과 죄형 법정주의\"에 해당하는 부분은 어디인가요?",
+          "prompt": "죄형 법정주의는 무엇을 막으려는 장치인가요?",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 81,
-              "end": 95
+              "paragraphId": "p2",
+              "start": 29,
+              "end": 61
             }
           ],
           "scoring": {
@@ -603,16 +623,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "유추 해석과 죄형 법정주의"
+          "answerText": "범죄와 형벌을 사후적으로 만들거나 넓게 끌어다 적용하는 일"
         },
         {
           "id": "q3",
-          "prompt": "주요 소재는 무엇인가요?",
+          "prompt": "시민은 법률 문언을 보고 무엇을 예측할 수 있어야 하나요?",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 102,
-              "end": 116
+              "paragraphId": "p2",
+              "start": 87,
+              "end": 104
             }
           ],
           "scoring": {
@@ -621,16 +641,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "비슷하다는 이유만으로 다른"
+          "answerText": "어떤 행위가 허용되고 금지되는지"
         },
         {
           "id": "q4",
-          "prompt": "\"유추 해석과 죄형 법정주의\"에 해당하는 부분은 어디인가요?",
+          "prompt": "유추 해석이 문제 되는 까닭은 무엇인가요?",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 81,
-              "end": 95
+              "paragraphId": "p3",
+              "start": 17,
+              "end": 47
             }
           ],
           "scoring": {
@@ -639,16 +659,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "유추 해석과 죄형 법정주의"
+          "answerText": "조문 밖의 사정을 근거로 처벌 범위를 넓히기 쉽기 때문"
         },
         {
           "id": "q5",
-          "prompt": "\"유추 해석과 죄형 법정주의\"에 해당하는 부분은 어디인가요?",
+          "prompt": "예시에서 같은 조문으로 연결되는 두 행위를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 81,
-              "end": 95
+              "paragraphId": "p3",
+              "start": 65,
+              "end": 78
+            },
+            {
+              "paragraphId": "p3",
+              "start": 114,
+              "end": 127
             }
           ],
           "scoring": {
@@ -656,17 +681,46 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "유추 해석과 죄형 법정주의"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "특정 도구를 이용한 행위",
+            "다른 도구를 이용한 행위"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "\"유추 해석과 죄형 법정주의\"에 해당하는 부분은 어디인가요?",
+          "prompt": "형벌 법규 해석에서 유추라고 부르지 않는 일을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 81,
-              "end": 95
+              "paragraphId": "p4",
+              "start": 43,
+              "end": 84
+            },
+            {
+              "paragraphId": "p4",
+              "start": 89,
+              "end": 125
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "법문에 포함된 개념이 통상적인 의미 범위 안에서 구체적 사안에 적용되는 일",
+            "입법 목적과 문맥을 고려해 조문의 통상적 의미를 분명하게 하는 일"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "민사나 행정의 일부 영역에서 규범의 공백을 메우기 위해 참조하는 것은?",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 59,
+              "end": 65
             }
           ],
           "scoring": {
@@ -675,7 +729,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "유추 해석과 죄형 법정주의"
+          "answerText": "유사한 제도"
+        },
+        {
+          "id": "q8",
+          "prompt": "형사법이 한계 밖에 있는 사안에 요구하는 해결 방식은?",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 193,
+              "end": 206
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "입법으로 해결하라는 태도"
         }
       ]
     }

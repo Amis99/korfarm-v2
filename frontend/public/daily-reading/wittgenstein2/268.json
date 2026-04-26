@@ -583,12 +583,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "님이 계신 궁궐을 가리키는 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 110
+              "end": 4
             }
           ],
           "scoring": {
@@ -597,34 +597,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "구중궁궐 님 계시니 만날 길이 요원하다 많고 많은 온갖 일들로 소의간식하시니 건강은 어떠신지 얼굴빛도 파리하다 정성으로 겨울 기러기 따라 석양 햇빛 잠깐 뜨니 사랑하는 겨울 햇빛 찬 근심을 녹여낸다"
+          "answerText": "구중궁궐"
         },
         {
           "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "화자가 님의 상태를 걱정하며 떠올린 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "건강은 어떠신지",
+            "얼굴빛도 파리하다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 97
+              "paragraphId": "p1",
+              "start": 43,
+              "end": 51
+            },
+            {
+              "paragraphId": "p1",
+              "start": 52,
+              "end": 61
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이웃의 칠실녀 손짓하여 불러 와서 대바구니 옆에 끼고 미나리 캐어 보니 살지고 연한 맛을 님에게 드리고져 받들고 바라보니 천리에 뉘 전할고 싸고 다시 싸서 베개 맡에 놓아두고"
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "prompt": "화자가 님에게 드리고자 캔 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 96
+              "paragraphId": "p2",
+              "start": 30,
+              "end": 33
             }
           ],
           "scoring": {
@@ -633,16 +641,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "사창 지는 달에 첫잠을 잠깐 드니 나비가 청조되어 인도해서 가고 가니 옥루 높은 곳에 화촉이 찬란한데 옥안을 잠깐 열어 너로구나 웃으실새 평생 생각던 얼굴 정말 이러하시던가"
+          "answerText": "미나리"
         },
         {
           "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
+          "prompt": "화자가 님에게 전할 사람이 없음을 드러낸 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 205
+              "paragraphId": "p2",
+              "start": 68,
+              "end": 77
             }
           ],
           "scoring": {
@@ -651,34 +659,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정성을 다 기울여 말씀을 드릴 제 심간을 떼어 내고 뼈를 온통 다 갈아도 아픈 줄 전혀 몰라 무진무진 더 하였네 이렇듯 깊은 정성 가약이 늦어 가니 이팔 청춘 고운 눈썹 반이나 바래었네 비단 잠옷 옥침병에 향내가 점점 적다 하물며 세밑에 근심 더욱 깊어 초목이 시들고 미인도 늙어 가니 젊은 날 못 만나고 늙은 후에 서로 본들 가슴 속 쌓인 정을 어느 결에 다 펼칠까"
+          "answerText": "천리에 뉘 전할고"
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "꿈속에서 화자를 님에게 이끄는 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "나비가 청조되어",
+            "인도해서 가고 가니"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 143
+              "paragraphId": "p3",
+              "start": 19,
+              "end": 27
+            },
+            {
+              "paragraphId": "p3",
+              "start": 28,
+              "end": 38
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "거문고를 무릎 위에 빗겨 놓고 장상사 한 곡조를 우조로 슬피 타니 쌍봉이 넘노는 듯 고학이 울고 가는 듯 강은 깊고 달이 높으니 하늘도 점점 높다 줄줄이 슬픈 소리 내 마음 일렁인다 장풍이 슬쩍 불어 임 계신 데 돌아가면 한밤중 베개 위에 부디부디 느끼시리"
+          "revealOnWrong": true
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "정성이 끝없이 더해짐을 나타내는 반복 표현을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 109
+              "paragraphId": "p4",
+              "start": 52,
+              "end": 56
             }
           ],
           "scoring": {
@@ -687,7 +703,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "답답하고 그리운 때 하늘을 바라보니 넓고도 높은 기상 이 아니 님이신가 평생에 우러름이 진실로 하늘 같은 내 님이라 두어라 천명과 천시 정한 때 있으니 추당에 만부용 되어 수홍하며 기다리려 하노라"
+          "answerText": "무진무진"
+        },
+        {
+          "id": "q7",
+          "prompt": "거문고 연주에서 곡조와 연주 방식을 모두 찾으시오.",
+          "answerTexts": [
+            "장상사 한 곡조",
+            "우조로 슬피"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 17,
+              "end": 25
+            },
+            {
+              "paragraphId": "p5",
+              "start": 27,
+              "end": 33
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q8",
+          "prompt": "님을 하늘에 비유한 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 49,
+              "end": 62
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "진실로 하늘 같은 내 님"
         }
       ]
     }

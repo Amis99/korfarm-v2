@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "몸의 무엇을 부드럽게 풀었나요?",
+          "prompt": "준비 운동이 부드럽게 풀어 준다고 한 우리 몸의 부분을 두 글자로 적어 보세요",
           "answerText": "근육",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -571,9 +571,9 @@
         },
         {
           "id": "q2",
-          "prompt": "손목과 무엇을 돌리며 운동하나요?",
+          "prompt": "손목과 함께 돌리며 천천히 몸을 깨운다고 한 부위를 두 글자로 적어 보세요",
           "answerText": "발목",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -590,14 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "몸이 무엇해지고 기운이 나요인가요?",
-          "answerText": "따뜻",
-          "answerMatchMode": "EXACT",
+          "prompt": "준비 운동을 하면 운동하기 좋게 규칙적으로 뛰기 시작하는 신체 기관을 두 글자로 적어 보세요",
+          "answerText": "심장",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 13,
-              "end": 15
+              "start": 28,
+              "end": 30
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "갑자기 움직이면 몸이 놀라서 어떻게 될 수 있다고 했는지 두 글자로 적어 보세요",
+          "answerText": "다칠",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 78,
+              "end": 80
             }
           ],
           "scoring": {

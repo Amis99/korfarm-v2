@@ -924,13 +924,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "어른들이 수남이에게 하라고 부추긴 행동은 무엇인가요?",
-          "answerText": "도망치라고",
+          "prompt": "어른들이 수남이에게 하라고 부추긴 행동을 찾으시오.",
+          "answerText": "자전거를 그냥 들고 도망치라고",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 153,
+              "start": 142,
               "end": 158
             }
           ],
@@ -942,7 +942,7 @@
         },
         {
           "id": "q2",
-          "prompt": "수남이가 떠올린 시골 아버지의 가르침에 어긋나는 행위는 무엇인가요?",
+          "prompt": "수남이가 아버지의 가르침에 어긋난다고 본 행위를 찾으시오.",
           "answerText": "도둑질",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -960,13 +960,21 @@
         },
         {
           "id": "q3",
-          "prompt": "수남이 마음속에서 충돌한 두 가지 가운데 옳음을 지키려는 마음은 무엇인가요?",
-          "answerText": "도덕심",
-          "answerMatchMode": "ANY",
+          "prompt": "수남이 마음속에서 충돌한 두 가지 마음을 모두 찾으시오.",
+          "answerTexts": [
+            "주인의 매질에 대한 두려움",
+            "양심을 지키고자 하는 도덕심"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 159,
+              "start": 131,
+              "end": 145
+            },
+            {
+              "paragraphId": "p2",
+              "start": 147,
               "end": 162
             }
           ],
@@ -978,29 +986,14 @@
         },
         {
           "id": "q4",
-          "prompt": "수남이가 결국 번쩍 들어 올려 도망친 것은 무엇인가요?",
-          "answerText": "자전거",
+          "prompt": "수남이가 눈을 감고 번쩍 들어 올린 대상을 찾으시오.",
+          "answerText": "자물쇠가 채워진 자전거",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 142,
-              "end": 145
-            },
-            {
               "paragraphId": "p3",
-              "start": 65,
-              "end": 68
-            },
-            {
-              "paragraphId": "p3",
-              "start": 152,
+              "start": 143,
               "end": 155
-            },
-            {
-              "paragraphId": "p4",
-              "start": 82,
-              "end": 85
             }
           ],
           "scoring": {
@@ -1011,14 +1004,14 @@
         },
         {
           "id": "q5",
-          "prompt": "주인 영감이 수남이의 행동을 어떻게 평가했나요?",
-          "answerText": "영악하고 쓸만한 녀석",
+          "prompt": "도덕이 붕괴된 도시에서 어른들이 수남이를 어떻게 키우고 있다고 했는지 찾으시오.",
+          "answerText": "어른들은 모두 수남이를 도둑으로 키우고 있었다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 96,
-              "end": 107
+              "start": 221,
+              "end": 246
             }
           ],
           "scoring": {

@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "먹고 먹히는 연결 관계?",
+          "prompt": "생물들이 서로 먹고 먹히는 관계가 사슬처럼 연결된 것을 무엇이라고 하는지 지문에서 찾아 적어 보세요",
           "answerText": "먹이사슬",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -420,29 +420,14 @@
         },
         {
           "id": "q2",
-          "prompt": "살아 움직이는 모든 것?",
-          "answerText": "생물",
-          "answerMatchMode": "EXACT",
+          "prompt": "1문단에서 식물을 먹고 사는 곤충의 이름을 찾아 적어 보세요",
+          "answerText": "메뚜기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 6,
-              "end": 8
-            },
-            {
-              "paragraphId": "p2",
-              "start": 48,
-              "end": 50
-            },
-            {
-              "paragraphId": "p2",
-              "start": 73,
-              "end": 75
-            },
-            {
-              "paragraphId": "p2",
-              "start": 105,
-              "end": 107
+              "start": 78,
+              "end": 81
             }
           ],
           "scoring": {
@@ -454,19 +439,48 @@
         },
         {
           "id": "q3",
-          "prompt": "풀과 나무를 통틀어?",
-          "answerText": "식물",
-          "answerMatchMode": "EXACT",
+          "prompt": "1문단의 먹이사슬에 등장하는 동물을 모두 찾아 적어 보세요",
+          "answerText": "메뚜기, 개구리, 뱀",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 54,
-              "end": 56
+              "start": 78,
+              "end": 81
             },
             {
               "paragraphId": "p1",
-              "start": 91,
-              "end": 93
+              "start": 109,
+              "end": 112
+            },
+            {
+              "paragraphId": "p1",
+              "start": 124,
+              "end": 127
+            },
+            {
+              "paragraphId": "p1",
+              "start": 121,
+              "end": 122
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "한 생물이 갑자기 사라지거나 너무 많아지면 전체 생물들의 무엇이 위태로워지는지 2문단에서 한 단어로 적어 보세요",
+          "answerText": "생활",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 78,
+              "end": 80
             }
           ],
           "scoring": {

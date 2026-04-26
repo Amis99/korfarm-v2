@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "커다란 망원경을 통해 밤하늘의 수많은 별과 신비로운 행성들을 자세히 볼 수 있는 장소는?",
+          "prompt": "가족이 반짝이는 별들을 더 자세히 보려고 방문한 곳을 지문에서 찾으시오.",
           "answerText": "천문대",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -576,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "망원경으로 관찰했을 때, 표면이 매끄럽지 않고 울퉁불퉁하게 보였던 밤하늘의 위성은 무엇인가요?",
-          "answerText": "달",
-          "answerMatchMode": "EXACT",
+          "prompt": "관측실 지붕이 열리는 모습이 꼭 무엇 같았는지 지문에서 찾으시오.",
+          "answerText": "우주선",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 15,
-              "end": 16
+              "paragraphId": "p1",
+              "start": 90,
+              "end": 93
             }
           ],
           "scoring": {
@@ -595,19 +595,41 @@
         },
         {
           "id": "q3",
-          "prompt": "여행을 다녀온 뒤 신비로웠던 우주 관측 경험과 자신의 꿈을 담아 정성껏 써 내려간 글은?",
-          "answerText": "기행문",
-          "answerMatchMode": "EXACT",
+          "prompt": "망원경에 눈을 대자 눈앞에 나타난 두 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "달의 울퉁불퉁한 표면",
+            "밝게 빛나는 목성"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 15,
+              "end": 26
+            },
+            {
+              "paragraphId": "p2",
+              "start": 28,
+              "end": 37
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "이번 여행이 키워 주었다고 한 나의 꿈을 지문에서 찾으시오.",
+          "answerText": "우주 과학자가 되고 싶은 나의 꿈",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 34,
-              "end": 37
-            },
-            {
-              "paragraphId": "p3",
-              "start": 46,
-              "end": 49
+              "start": 102,
+              "end": 120
             }
           ],
           "scoring": {

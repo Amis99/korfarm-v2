@@ -571,12 +571,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"페이지 교체 알고리즘과 페이지 부재\"에 해당하는 부분은 어디인가요?",
+          "prompt": "주기억 장치의 용량 제한 문제를 보완하기 위해 고안된 운영 체제의 관리 방식을 뜻하는 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 206
+              "end": 6
+            },
+            {
+              "paragraphId": "p6",
+              "start": 3,
+              "end": 9
+            },
+            {
+              "paragraphId": "p6",
+              "start": 192,
+              "end": 198
             }
           ],
           "scoring": {
@@ -585,16 +595,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "가상 메모리는 주기억 장치의 용량이 제한되어 있다는 문제를 보완하기 위해 고안된 운영 체제의 관리 방식이다. 프로그램 전체를 한꺼번에 메모리에 올리는 대신, 지금 실행에 꼭 필요한 부분만 주기억 장치에 두고 나머지는 보조 기억 장치에 남겨 둔다. 이렇게 하면 실제 물리 메모리보다 더 큰 프로그램도 실행할 수 있고, 여러 프로세스를 동시에 다루는 일도 한결 수월해진다."
+          "answerText": "가상 메모리"
         },
         {
           "id": "q2",
-          "prompt": "\"페이지 교체 알고리즘과 페이지 부재\"에 해당하는 부분은 어디인가요?",
+          "prompt": "페이지의 정의에 해당하는 어구를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 219
+              "start": 3,
+              "end": 25
             }
           ],
           "scoring": {
@@ -603,16 +613,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이때 프로그램을 일정한 크기의 단위로 나눈 것을 페이지라고 하고, 주기억 장치에서 페이지가 들어가는 자리를 페이지 프레임이라고 한다. 운영 체제는 각 프로세스마다 페이지 테이블을 두어 어떤 페이지가 어느 프레임에 적재되어 있는지를 관리한다. 그래서 중앙 처리 장치는 논리 주소를 직접 읽는 것이 아니라, 페이지 번호와 변위를 바탕으로 실제 물리 주소를 다시 찾아가며 필요한 데이터를 불러온다."
+          "answerText": "프로그램을 일정한 크기의 단위로 나눈 것"
         },
         {
           "id": "q3",
-          "prompt": "무엇가 주기억 장치 안에 없을 때 생긴다?",
+          "prompt": "페이지 프레임이 무엇인지 설명한 어구를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 13
+              "paragraphId": "p2",
+              "start": 37,
+              "end": 58
             }
           ],
           "scoring": {
@@ -621,16 +631,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "문제는 실행하려는 페이지"
+          "answerText": "주기억 장치에서 페이지가 들어가는 자리"
         },
         {
           "id": "q4",
-          "prompt": "\"페이지 교체 알고리즘과 페이지 부재\"에 해당하는 부분은 어디인가요?",
+          "prompt": "페이지 부재가 생겼을 때 운영 체제가 처리하는 방법을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 250
+              "paragraphId": "p3",
+              "start": 73,
+              "end": 99
+            },
+            {
+              "paragraphId": "p3",
+              "start": 112,
+              "end": 145
             }
           ],
           "scoring": {
@@ -638,17 +653,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "가장 단순한 방식은 FIFO이다. FIFO는 먼저 들어온 페이지를 먼저 내보내므로 구현은 쉽지만, 오래 머물렀다는 이유만으로 아직 자주 쓰이는 페이지를 제거할 수 있다. LRU는 가장 오랫동안 참조되지 않은 페이지를 교체하므로 최근 사용 기록을 중시한다는 점에서 지역성 원리와 잘 맞는다. LFU는 참조 횟수가 가장 적은 페이지를 내보내는 방식인데, 과거에 많이 쓰였지만 이제는 거의 필요하지 않은 페이지가 계속 남을 수 있다는 점이 약점이 된다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "필요한 페이지를 읽어 와 빈 프레임에 적재하거나",
+            "기존 페이지 하나를 내보낸 뒤 그 자리에 새 페이지를 넣는다"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "\"페이지 교체 알고리즘과 페이지 부재\"에 해당하는 부분은 어디인가요?",
+          "prompt": "페이지 부재가 자주 일어날 때 나타나는 결과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 223
+              "paragraphId": "p3",
+              "start": 166,
+              "end": 199
             }
           ],
           "scoring": {
@@ -657,16 +675,48 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그래서 페이지 교체 알고리즘을 평가할 때는 단순히 규칙이 얼마나 쉬운지가 아니라, 페이지 부재율을 얼마나 낮추는지까지 함께 보아야 한다. 프로그램은 보통 짧은 시간 동안 비슷한 명령어와 데이터를 반복해서 참조하는 경향이 있는데, 이 특성을 지역성이라고 한다. 최근에 사용한 페이지가 다시 필요할 가능성이 높다면 LRU 계열이 유리하고, 접근 패턴이 일정하지 않다면 다른 방식이 더 적절할 수도 있다."
+          "answerText": "디스크 접근 횟수가 늘어나 전체 실행 속도가 크게 떨어지므로"
         },
         {
           "id": "q6",
-          "prompt": "\"페이지 교체 알고리즘과 페이지 부재\"에 해당하는 부분은 어디인가요?",
+          "prompt": "FIFO, LRU, LFU의 페이지 교체 기준을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 227
+              "paragraphId": "p4",
+              "start": 25,
+              "end": 45
+            },
+            {
+              "paragraphId": "p4",
+              "start": 100,
+              "end": 126
+            },
+            {
+              "paragraphId": "p4",
+              "start": 167,
+              "end": 192
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "먼저 들어온 페이지를 먼저 내보내므로",
+            "가장 오랫동안 참조되지 않은 페이지를 교체하므로",
+            "참조 횟수가 가장 적은 페이지를 내보내는 방식"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "지역성의 뜻을 설명한 어구를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 86,
+              "end": 121
             }
           ],
           "scoring": {
@@ -675,7 +725,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 가상 메모리의 성능은 페이지 부재를 완전히 없애는 데서가 아니라, 피할 수 없는 부재를 얼마나 덜 치명적으로 만들 것인가에서 갈린다. 페이지 테이블로 위치를 정확히 찾고, 페이지 부재가 생기면 적절한 교체 알고리즘으로 덜 중요한 페이지를 내보내는 과정이 매끄럽게 이어져야 한다. 따라서 페이지 교체 알고리즘은 단순한 부가 기능이 아니라, 가상 메모리 체계의 효율을 결정하는 중심 요소라고 볼 수 있다."
+          "answerText": "짧은 시간 동안 비슷한 명령어와 데이터를 반복해서 참조하는 경향"
+        },
+        {
+          "id": "q8",
+          "prompt": "글에서 페이지 교체 알고리즘을 단순한 부가 기능이 아니라 무엇이라고 보는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 192,
+              "end": 217
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "가상 메모리 체계의 효율을 결정하는 중심 요소"
         }
       ]
     }

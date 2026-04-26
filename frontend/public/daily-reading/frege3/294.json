@@ -1324,44 +1324,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "막대한 전력을 소비하는 거대한 시설은 무엇인가요?",
-          "answerText": "데이터센터",
+          "prompt": "데이터센터의 특징을 설명한 부분을 찾으시오.",
+          "answerText": "막대한 양의 전력을 소비하는 거대한 시설",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 14,
-              "end": 19
-            },
-            {
-              "paragraphId": "p1",
-              "start": 33,
-              "end": 38
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p3",
-              "start": 133,
-              "end": 138
-            },
-            {
-              "paragraphId": "p4",
-              "start": 15,
-              "end": 20
-            },
-            {
-              "paragraphId": "p4",
-              "start": 146,
-              "end": 151
-            },
-            {
-              "paragraphId": "p5",
-              "start": 4,
-              "end": 9
+              "start": 40,
+              "end": 62
             }
           ],
           "scoring": {
@@ -1372,13 +1342,13 @@
         },
         {
           "id": "q2",
-          "prompt": "서버 열을 식히며 전력 소비의 큰 비중을 차지하는 장치는 무엇인가요?",
-          "answerText": "냉각 장치",
+          "prompt": "전력 소비의 주범으로 제시된 장치를 찾으시오.",
+          "answerText": "서버를 가동하고 열을 식히는 냉각 장치",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 82,
+              "start": 66,
               "end": 87
             }
           ],
@@ -1390,19 +1360,14 @@
         },
         {
           "id": "q3",
-          "prompt": "전력 소비 효율을 나타내는 지표는 무엇인가요?",
-          "answerText": "PUE",
+          "prompt": "PUE의 계산 방식을 설명한 부분을 찾으시오.",
+          "answerText": "전체 전력량을 서버 가동 전력량으로 나눈 값",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 19,
-              "end": 22
-            },
-            {
-              "paragraphId": "p3",
-              "start": 108,
-              "end": 111
+              "start": 32,
+              "end": 56
             }
           ],
           "scoring": {
@@ -1413,14 +1378,22 @@
         },
         {
           "id": "q4",
-          "prompt": "재생에너지를 직접 생산하는 예로 든 설비는 무엇인가요?",
-          "answerText": "태양광 판넬",
-          "answerMatchMode": "ANY",
+          "prompt": "데이터센터에 재생에너지를 공급하는 방식의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "태양광 판넬",
+            "인근 풍력 단지"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 38,
               "end": 44
+            },
+            {
+              "paragraphId": "p4",
+              "start": 52,
+              "end": 60
             }
           ],
           "scoring": {
@@ -1431,14 +1404,28 @@
         },
         {
           "id": "q5",
-          "prompt": "정부가 해결하려는 데이터센터의 집중 현상은 무엇인가요?",
-          "answerText": "수도권 집중",
-          "answerMatchMode": "ANY",
+          "prompt": "데이터센터 지방 분산으로 기대할 수 있는 효과를 모두 찾으시오.",
+          "answerTexts": [
+            "전력 수급의 불균형",
+            "지역 경제 활성화",
+            "에너지 분산"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 11,
-              "end": 17
+              "start": 43,
+              "end": 53
+            },
+            {
+              "paragraphId": "p5",
+              "start": 65,
+              "end": 74
+            },
+            {
+              "paragraphId": "p5",
+              "start": 76,
+              "end": 82
             }
           ],
           "scoring": {

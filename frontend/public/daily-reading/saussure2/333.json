@@ -562,39 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "구수한 냄새가 나며, 노란 콩으로 메주를 만들어 발효시킨 우리나라 전통 음식은 무엇인가요?",
-          "answerText": "된장",
-          "answerMatchMode": "EXACT",
+          "prompt": "노란 콩을 푹 삶아서 찧은 다음, 네모난 모양으로 빚어 만들어야 하는 것을 지문에서 찾으시오.",
+          "answerText": "'메주'",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 59,
-              "end": 61
-            },
-            {
-              "paragraphId": "p1",
-              "start": 67,
-              "end": 69
-            },
-            {
-              "paragraphId": "p2",
-              "start": 83,
-              "end": 85
-            },
-            {
-              "paragraphId": "p2",
-              "start": 141,
-              "end": 143
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p3",
-              "start": 86,
-              "end": 88
+              "start": 114,
+              "end": 118
             }
           ],
           "scoring": {
@@ -606,43 +581,9 @@
         },
         {
           "id": "q2",
-          "prompt": "된장을 만들기 위해 노란 콩을 푹 삶아 찧은 다음, 네모난 모양으로 빚어 만든 덩어리는 무엇인가요?",
-          "answerText": "메주",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 115,
-              "end": 117
-            },
-            {
-              "paragraphId": "p1",
-              "start": 133,
-              "end": 135
-            },
-            {
-              "paragraphId": "p2",
-              "start": 5,
-              "end": 7
-            },
-            {
-              "paragraphId": "p2",
-              "start": 64,
-              "end": 66
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "잘 마른 메주를 커다란 항아리에 넣고 이것과 함께 오랫동안 숙성시킵니다. 짠맛이 나는 이 물은 무엇인가요?",
+          "prompt": "잘 마른 메주를 커다란 항아리에 넣을 때 함께 넣는 것을 지문에서 찾으시오.",
           "answerText": "소금물",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -658,20 +599,43 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "된장을 물에 풀고 여러 가지 재료를 넣어 보글보글 끓여 먹는 국물 요리는 무엇인가요?",
-          "answerText": "찌개",
-          "answerMatchMode": "EXACT",
+          "id": "q3",
+          "prompt": "시간이 지날수록 메주가 어떤 맛을 내는 된장으로 변신하는지 그 맛 표현을 지문에서 찾으시오.",
+          "answerText": "짭짤하고 구수한 맛",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 12,
-              "end": 14
+              "paragraphId": "p2",
+              "start": 68,
+              "end": 78
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "된장이 우리 몸에 좋은 이유를 보여 주는 표현 두 가지를 모두 찾으시오.",
+          "answerText": "몸을 튼튼하게 해주는 영양소 / 나쁜 병균을 막아주는 역할",
+          "answerTexts": [
+            "몸을 튼튼하게 해주는 영양소",
+            "나쁜 병균을 막아주는 역할"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 38,
+              "end": 53
             },
             {
               "paragraphId": "p3",
-              "start": 96,
-              "end": 98
+              "start": 65,
+              "end": 79
             }
           ],
           "scoring": {

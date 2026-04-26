@@ -1098,14 +1098,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째로 건의한 법 개정은 무엇인가요?",
-          "answerText": "노동관계법 전면 개정",
+          "prompt": "플랫폼 기업들이 노동자를 어떻게 분류한다고 했는지 찾으시오.",
+          "answerText": "근로자가 아닌 개인 사업자",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 30,
-              "end": 41
+              "paragraphId": "p1",
+              "start": 163,
+              "end": 177
             }
           ],
           "scoring": {
@@ -1116,7 +1116,39 @@
         },
         {
           "id": "q2",
-          "prompt": "둘째로 제안한 의무화 조치는 무엇인가요?",
+          "prompt": "노동자로 인정하여 보장해야 한다고 한 기본적인 권리를 모두 찾으시오.",
+          "answerTexts": [
+            "최저임금",
+            "주휴수당",
+            "퇴직금"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 140,
+              "end": 144
+            },
+            {
+              "paragraphId": "p2",
+              "start": 146,
+              "end": 150
+            },
+            {
+              "paragraphId": "p2",
+              "start": 152,
+              "end": 155
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "플랫폼 노동자의 생존을 위해 제안한 의무화 조치를 찾으시오.",
           "answerText": "산재 및 고용 보험의 전면 의무화",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1133,33 +1165,29 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "셋째로 촉구한 내용은 무엇인가요?",
-          "answerText": "알고리즘의 투명성 확보와 알 권리 보장",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 16,
-              "end": 37
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q4",
-          "prompt": "노동자가 기계의 결정에 항변할 수 있게 마련되어야 하는 것은 무엇인가요?",
-          "answerText": "절차적 정당성",
-          "answerMatchMode": "ANY",
+          "prompt": "플랫폼 기업이 공개해야 할 핵심 알고리즘 정보를 모두 찾으시오.",
+          "answerTexts": [
+            "수수료율 산정 방식",
+            "배차 기준",
+            "페널티 부과 요건"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 276,
-              "end": 283
+              "start": 155,
+              "end": 165
+            },
+            {
+              "paragraphId": "p4",
+              "start": 167,
+              "end": 172
+            },
+            {
+              "paragraphId": "p4",
+              "start": 174,
+              "end": 183
             }
           ],
           "scoring": {
@@ -1170,7 +1198,7 @@
         },
         {
           "id": "q5",
-          "prompt": "마지막에 결단력 있는 정책 실행을 다시 건의한 주체는 누구인가요?",
+          "prompt": "결단력 있는 정책 실행을 해야 할 주체를 찾으시오.",
           "answerText": "입법부와 행정부",
           "answerMatchMode": "ANY",
           "answerRanges": [

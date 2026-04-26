@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "하늘에 ( )이 떠 있습니다.",
-          "answerText": "풍선",
-          "answerMatchMode": "EXACT",
+          "prompt": "어린이날 행사가 어디에서 열렸는지 본문에서 찾으시오.",
+          "answerText": "운동장에서",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 33,
-              "end": 35
+              "start": 14,
+              "end": 19
             }
           ],
           "scoring": {
@@ -869,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "그림 ( ) 대회에서 상 받음.",
-          "answerText": "그리기",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구들과 함께 하며 땀을 흘린 활동을 본문에서 찾으시오.",
+          "answerText": "달리기 경주",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 56,
-              "end": 59
+              "paragraphId": "p1",
+              "start": 63,
+              "end": 69
             }
           ],
           "scoring": {
@@ -888,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "감사의 ( )을 가졌습니다.",
-          "answerText": "마음",
-          "answerMatchMode": "EXACT",
+          "prompt": "상을 받은 일이 있었던 대회를 본문에서 찾으시오.",
+          "answerText": "그림 그리기 대회",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 53,
+              "end": 62
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "일기에 적은 다짐을 본문에서 찾으시오.",
+          "answerText": "건강하고 씩씩하게 자라겠다는 다짐",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 70,
-              "end": 72
+              "start": 25,
+              "end": 43
             }
           ],
           "scoring": {

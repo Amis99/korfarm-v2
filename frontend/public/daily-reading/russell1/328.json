@@ -1152,40 +1152,66 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '수요의 가격 탄력성'을 모두 찾으시오.",
+          "prompt": "수요의 가격 탄력성이 설명하는 핵심 내용을 찾으시오",
+          "answerText": "소비자가 얼마나 민감하게 반응하는지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 10
-            },
-            {
-              "paragraphId": "p1",
-              "start": 192,
-              "end": 202
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 10
-            },
-            {
               "paragraphId": "p5",
-              "start": 3,
-              "end": 13
+              "start": 22,
+              "end": 41
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "수요의 가격 탄력성"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '대체재'를 모두 찾으시오.",
+          "prompt": "탄력성이 큰 예로 든 물건을 찾으시오",
+          "answerText": "간식이나 취미용 물건",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 77
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "탄력성이 작은 예로 든 물건을 찾으시오",
+          "answerText": "생활에 꼭 필요한 물건",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 125,
+              "end": 137
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "탄력성에 영향을 주는 첫 번째 조건으로 든 낱말을 찾으시오",
+          "answerText": "대체재",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -1194,66 +1220,49 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "대체재"
-        },
-        {
-          "id": "q3",
-          "prompt": "지문에서 '선택품'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 137,
-              "end": 140
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "선택품"
-        },
-        {
-          "id": "q4",
-          "prompt": "지문에서 '짧은 기간'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 170,
-              "end": 175
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "짧은 기간"
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '긴 기간'을 모두 찾으시오.",
+          "prompt": "시간이 지나면 소비를 바꿀 수 있다는 예로 든 두 가지를 찾으시오",
+          "answerText": "교통비나 연료비",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 177,
-              "end": 181
+              "start": 96,
+              "end": 104
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "탄력성이 단순한 숫자가 아니라 함께 보여 준다고 한 것을 찾으시오",
+          "answerText": "소비자의 선택 조건",
           "answerMatchMode": "ANY",
-          "answerText": "긴 기간"
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 213,
+              "end": 223
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

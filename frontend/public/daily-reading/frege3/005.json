@@ -1206,7 +1206,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "아리스토텔레스가 남긴 고전 비평서의 이름은 무엇인가요?",
+          "prompt": "서구 문학 비평의 역사에서 가장 중요한 위치를 차지하는 고전 중의 고전으로 설명된 책 이름을 지문에서 찾으시오.",
           "answerText": "시학",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1239,30 +1239,7 @@
         },
         {
           "id": "q2",
-          "prompt": "아리스토텔레스가 모든 예술을 무엇의 산물로 보았나요?",
-          "answerText": "모방",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 158,
-              "end": 160
-            },
-            {
-              "paragraphId": "p1",
-              "start": 202,
-              "end": 204
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "비극이 관객에게 주는 핵심 효과는 무엇인가요?",
+          "prompt": "비극이 관객에게 미치는 가장 핵심적인 효과를 지문에서 찾으시오.",
           "answerText": "카타르시스",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1289,15 +1266,41 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "비극의 영혼이라고 강조한 요소는 무엇인가요?",
-          "answerText": "플롯(구성)",
+          "id": "q3",
+          "prompt": "카타르시스가 의미하는 심리적 치유 과정을 지문에서 그대로 찾으시오.",
+          "answerText": "자신의 내면에 쌓여 있던 억눌린 감정들을 정화하고 배설하는 심리적 치유 과정",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
+              "paragraphId": "p2",
+              "start": 102,
+              "end": 144
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "플롯의 긴장감을 극대화하는 핵심 장치를 모두 찾으시오.",
+          "answerTexts": [
+            "발견",
+            "급전"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
               "paragraphId": "p3",
-              "start": 28,
-              "end": 34
+              "start": 136,
+              "end": 138
+            },
+            {
+              "paragraphId": "p3",
+              "start": 155,
+              "end": 157
             }
           ],
           "scoring": {
@@ -1308,7 +1311,7 @@
         },
         {
           "id": "q5",
-          "prompt": "비극의 주인공은 어떤 인물이어야 한다고 보았나요?",
+          "prompt": "비극의 주인공은 도덕적으로 완벽한 성인도 악당도 아닌 어떤 인물이어야 하는지 지문에서 찾으시오.",
           "answerText": "결함이 있는 인물",
           "answerMatchMode": "ANY",
           "answerRanges": [

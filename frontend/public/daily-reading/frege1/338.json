@@ -626,19 +626,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "글쓴이가 작고 예쁜 배를 만드는 재료는 무엇인가요?",
-          "answerText": "단풍잎",
+          "prompt": "가을바람이 부는 모습을 나타낸 말을 찾으시오.",
+          "answerText": "살랑",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 17,
-              "end": 20
-            },
-            {
-              "paragraphId": "p1",
-              "start": 38,
-              "end": 41
+              "start": 6,
+              "end": 8
             }
           ],
           "scoring": {
@@ -649,30 +644,12 @@
         },
         {
           "id": "q2",
-          "prompt": "나뭇잎 배에서 훌륭한 선장이 된 것은 무엇인가요?",
-          "answerText": "개미",
+          "prompt": "단풍잎을 주울 때 조심스러운 모습을 반복해 나타낸 말을 찾으시오.",
+          "answerText": "조심조심",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 3,
-              "end": 5
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "씩씩한 선원이 된 벌레는 무엇인가요?",
-          "answerText": "무당벌레",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
+              "paragraphId": "p1",
               "start": 33,
               "end": 37
             }
@@ -684,15 +661,41 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "밤이 오면 나뭇잎 배의 등대가 되어 주는 것은 무엇인가요?",
-          "answerText": "별빛",
+          "id": "q3",
+          "prompt": "작은 개미가 배에 오르는 동작을 나타낸 말을 찾으시오.",
+          "answerText": "폴짝 뛰어올라",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 11,
-              "end": 13
+              "paragraphId": "p2",
+              "start": 12,
+              "end": 19
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "개미와 무당벌레에게 붙은 역할 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "훌륭한 선장",
+            "씩씩한 선원"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 20,
+              "end": 26
+            },
+            {
+              "paragraphId": "p2",
+              "start": 49,
+              "end": 55
             }
           ],
           "scoring": {
@@ -703,14 +706,22 @@
         },
         {
           "id": "q5",
-          "prompt": "내일 아침 나뭇잎 배가 도착할 것이라고 한 곳은 어디인가요?",
-          "answerText": "꿈의 섬",
-          "answerMatchMode": "ANY",
+          "prompt": "나뭇잎 배가 무엇을 따르며 나아가는지 나타내는 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "바람이 부는 대로",
+            "물결이 흐르는 대로"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 52,
-              "end": 56
+              "start": 0,
+              "end": 9
+            },
+            {
+              "paragraphId": "p4",
+              "start": 10,
+              "end": 20
             }
           ],
           "scoring": {

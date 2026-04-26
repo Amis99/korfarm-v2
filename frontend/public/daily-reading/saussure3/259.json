@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "의견을 나누는 모임은?",
-          "answerText": "가족회의를",
-          "answerMatchMode": "EXACT",
+          "prompt": "동물원 나들이를 위해 가족이 연 모임을 본문에서 찾으시오.",
+          "answerText": "가족회의",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 22,
-              "end": 27
+              "end": 26
             }
           ],
           "scoring": {
@@ -606,14 +606,22 @@
         },
         {
           "id": "q2",
-          "prompt": "남을 도와주거나 살핌은?",
-          "answerText": "배려하는",
-          "answerMatchMode": "EXACT",
+          "prompt": "동물원에서 지켜야 할 것으로 종이에 적은 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "안전 수칙",
+            "준비물"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 43,
-              "end": 47
+              "paragraphId": "p1",
+              "start": 47,
+              "end": 52
+            },
+            {
+              "paragraphId": "p1",
+              "start": 54,
+              "end": 57
             }
           ],
           "scoring": {
@@ -625,14 +633,49 @@
         },
         {
           "id": "q3",
-          "prompt": "도움이 되고 이로움은?",
-          "answerText": "유익한",
-          "answerMatchMode": "EXACT",
+          "prompt": "동물원에서 하지 않기로 굳게 약속한 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "동물을 함부로 만지거나",
+            "간식을 주지 않기로"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 66,
-              "end": 69
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 12
+            },
+            {
+              "paragraphId": "p2",
+              "start": 13,
+              "end": 23
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "동물의 건강을 생각하는 마음과 관람객의 자세를 모두 찾으시오.",
+          "answerTexts": [
+            "동물의 건강을 배려하는 마음",
+            "성숙한 관람객의 자세"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 35,
+              "end": 50
+            },
+            {
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 63
             }
           ],
           "scoring": {

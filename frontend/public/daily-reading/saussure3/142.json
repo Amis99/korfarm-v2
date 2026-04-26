@@ -557,24 +557,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "빛이 사물의 표면에 부딪혀서 다시 튕겨 나가는 현상을 무엇이라 하나요?",
-          "answerText": "반사",
-          "answerMatchMode": "EXACT",
+          "prompt": "거울은 빛이 표면에 부딪혀 튕겨 나가는 어떤 원리를 이용한 도구인지 지문에서 찾아 쓰시오.",
+          "answerText": "반사 원리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 22,
-              "end": 24
+              "end": 27
             },
             {
               "paragraphId": "p2",
               "start": 94,
-              "end": 96
-            },
-            {
-              "paragraphId": "p3",
-              "start": 49,
-              "end": 51
+              "end": 99
             }
           ],
           "scoring": {
@@ -586,14 +581,14 @@
         },
         {
           "id": "q2",
-          "prompt": "안쪽으로 굽어 있어 빛을 한 점으로 모으는 성질을 가진 거울은?",
-          "answerText": "오목 거울",
-          "answerMatchMode": "EXACT",
+          "prompt": "물체의 좌우가 바뀌어 보이지만 크기와 모양은 실제와 똑같다고 설명한 거울을 지문에서 찾아 쓰시오.",
+          "answerText": "평면 거울",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 46,
-              "end": 51
+              "start": 0,
+              "end": 5
             }
           ],
           "scoring": {
@@ -605,14 +600,41 @@
         },
         {
           "id": "q3",
-          "prompt": "바깥쪽으로 불룩하게 튀어나와 빛을 넓게 퍼뜨리는 성질을 가진 거울은?",
-          "answerText": "볼록 거울",
-          "answerMatchMode": "EXACT",
+          "prompt": "오목 거울이나 볼록 거울에서 모습이 변하는 기준을 설명하는 두 어구를 모두 찾으시오.",
+          "answerTexts": [
+            "빛이 모이거나",
+            "퍼지는 정도"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 54,
-              "end": 59
+              "start": 61,
+              "end": 68
+            },
+            {
+              "paragraphId": "p2",
+              "start": 69,
+              "end": 75
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "거울 두 개를 마주 보게 하여 만든 것을 지문에서 찾아 쓰시오.",
+          "answerText": "끝없이 이어지는 신기한 터널",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 21,
+              "end": 36
             }
           ],
           "scoring": {

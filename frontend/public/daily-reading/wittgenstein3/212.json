@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "prompt": "1연에서 매화나무 가지에 맺히는 것을 비유한 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 68
+              "start": 19,
+              "end": 28
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "죽은 줄 알았던 매화나무 가지에, 구슬 같은 꽃방울을 맺혀 주는 쇠잔한 눈 위에, 가만히 오는 봄기운은 아름답기도 합니다."
+          "answerText": "구슬 같은 꽃방울"
         },
         {
           "id": "q2",
-          "prompt": "2연은 그 정서를 어떤 이미지나 흐름으로 이어 가는가?",
+          "prompt": "1연에서 봄기운이 오는 방식을 나타내는 말을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 67
+              "paragraphId": "p1",
+              "start": 46,
+              "end": 49
             }
           ],
           "scoring": {
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그러나 그밖에 다른 하늘에서 오는 알 수 없는 향기는, 모든 꽃의 죽음을 가지고 다니는 쇠잔한 눈이 주는 줄을 아십니까."
+          "answerText": "가만히"
         },
         {
           "id": "q3",
-          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
+          "prompt": "2연과 4연에서 반복되는 의문형 표현을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 57
+              "paragraphId": "p2",
+              "start": 56,
+              "end": 66
+            },
+            {
+              "paragraphId": "p4",
+              "start": 83,
+              "end": 93
             }
           ],
           "scoring": {
@@ -621,16 +626,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "구름은 가늘고 시냇물은 옅고 가을 산은 비었는데, 파리한 바위 사이에 실컷 붉은 단풍은 곱기도 합니다."
+          "answerText": "주는 줄을 아십니까"
         },
         {
           "id": "q4",
-          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
+          "prompt": "3연에서 구름, 시냇물, 가을 산의 상태를 나타내는 표현을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 94
+              "paragraphId": "p3",
+              "start": 4,
+              "end": 7
+            },
+            {
+              "paragraphId": "p3",
+              "start": 13,
+              "end": 15
+            },
+            {
+              "paragraphId": "p3",
+              "start": 22,
+              "end": 26
             }
           ],
           "scoring": {
@@ -638,17 +653,26 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그러나 단풍은 노래도 부르고 울음도 웁니다. 그러한 ‘자연의 인생’은 가을바람의 꿈을 따라 사라지고 기억에만 남아 있는, 지난여름의 무르녹은 녹음이 주는 줄을 아십니까."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "가늘고",
+            "옅고",
+            "비었는데"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5연은 앞선 흐름에 어떤 긴장이나 전환을 더하는가?",
+          "prompt": "4연에서 단풍에 사람처럼 부여된 행동을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 57
+              "paragraphId": "p4",
+              "start": 8,
+              "end": 15
+            },
+            {
+              "paragraphId": "p4",
+              "start": 16,
+              "end": 23
             }
           ],
           "scoring": {
@@ -656,17 +680,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "일경초가 장륙금신이 되고, 장륙금신이 일경초가 됩니다. 천지는 한 보금자리요, 만유는 같은 소조입니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "노래도 부르고",
+            "울음도 웁니다"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
+          "prompt": "4연에서 자연을 인생에 빗댄 표현을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 74
+              "paragraphId": "p4",
+              "start": 29,
+              "end": 37
             }
           ],
           "scoring": {
@@ -675,7 +702,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "나는 자연의 거울에 인생을 비춰 보았습니다. 고통의 가시덤불 뒤에, 환희의 낙원을 건설하기 위하여 님을 떠난, 나는 아아 행복입니다."
+          "answerText": "‘자연의 인생’"
+        },
+        {
+          "id": "q7",
+          "prompt": "5연에서 천지와 만유의 관계를 나타내는 두 표현을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 35,
+              "end": 41
+            },
+            {
+              "paragraphId": "p5",
+              "start": 48,
+              "end": 53
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "한 보금자리",
+            "같은 소조"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "6연에서 고통의 가시덤불 뒤에 건설하려는 대상을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 38,
+              "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "환희의 낙원"
         }
       ]
     }

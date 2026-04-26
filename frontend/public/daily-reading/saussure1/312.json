@@ -396,49 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "관으로 된 전통 악기?",
-          "answerText": "피리",
-          "answerMatchMode": "EXACT",
+          "prompt": "관에 입으로 바람을 불어넣어 소리를 내는 악기를 가리키는 세 글자 낱말을 글에서 찾아 적어 보세요",
+          "answerText": "관악기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 55,
-              "end": 57
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 20,
-              "end": 22
-            },
-            {
-              "paragraphId": "p2",
-              "start": 25,
-              "end": 27
-            },
-            {
-              "paragraphId": "p2",
-              "start": 30,
-              "end": 32
-            },
-            {
-              "paragraphId": "p2",
-              "start": 64,
-              "end": 66
-            },
-            {
-              "paragraphId": "p2",
-              "start": 137,
-              "end": 139
+              "start": 47,
+              "end": 50
             }
           ],
           "scoring": {
@@ -450,24 +415,14 @@
         },
         {
           "id": "q2",
-          "prompt": "귀로 듣는 울림 현상?",
-          "answerText": "소리",
-          "answerMatchMode": "EXACT",
+          "prompt": "악기마다 가진 서로 다른 소리의 빛깔을 뜻하는 두 글자 낱말을 글에서 찾아 적어 보세요",
+          "answerText": "음색",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 31,
-              "end": 33
-            },
-            {
-              "paragraphId": "p1",
-              "start": 59,
-              "end": 61
-            },
-            {
               "paragraphId": "p2",
-              "start": 140,
-              "end": 142
+              "start": 57,
+              "end": 59
             }
           ],
           "scoring": {
@@ -479,14 +434,33 @@
         },
         {
           "id": "q3",
-          "prompt": "여러 악기가 어우러짐?",
-          "answerText": "합주",
-          "answerMatchMode": "EXACT",
+          "prompt": "재료와 크기에 따라 나뉘는 피리의 종류 세 가지를 모두 적어 보세요",
+          "answerText": "향피리, 세피리, 당피리",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 19,
+              "end": 32
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "손가락으로 구멍을 막거나 열면서 공기의 흐름을 조절하면 어떤 결과가 나타난다고 글에서 말했는지 적어 보세요",
+          "answerText": "맑고 고운 가락이 울려 퍼짐",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 85,
-              "end": 87
+              "start": 150,
+              "end": 165
             }
           ],
           "scoring": {

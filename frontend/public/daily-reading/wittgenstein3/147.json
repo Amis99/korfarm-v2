@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 ㅎ 탈락과 거센소리되기의 적용 조건라는 문법 주제를 어떤 배경에서 꺼내는가?",
+          "prompt": "'간단하게 만드는 것'이라는 뜻으로 1문단에 쓰인 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 210
+              "start": 164,
+              "end": 169
             }
           ],
           "scoring": {
@@ -585,16 +585,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "국어의 표준 발음을 공부할 때 '좋다, 많고, 닳지'처럼 ㅎ이 들어간 형태는 같은 방식으로 소리 난다고 생각하기 쉽다. 그러나 실제 발음에서는 ㅎ이 그대로 실현되기도 하고, 사라지기도 하며, 뒤의 자음을 거센소리로 바꾸는 역할만 남기기도 한다. 따라서 ㅎ과 관련된 발음 변화는 하나의 규칙으로 단순화하기보다, 어떤 음운 환경에서 어떤 결과가 나타나는지를 구분해 이해해야 한다."
+          "answerText": "단순화하기"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 판별 기준이나 기본 원리를 어떻게 설명하는가?",
+          "prompt": "1문단에서 ㅎ이 들어간 형태의 예로 든 단어를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 164
+              "paragraphId": "p1",
+              "start": 18,
+              "end": 20
+            },
+            {
+              "paragraphId": "p1",
+              "start": 22,
+              "end": 24
+            },
+            {
+              "paragraphId": "p1",
+              "start": 26,
+              "end": 28
             }
           ],
           "scoring": {
@@ -602,17 +612,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "먼저 ㅎ은 앞말의 받침으로 올 때 뒤에 예사소리 자음이 이어지면 그 자음을 거센소리로 만드는 경우가 많다. '좋고'가 [조코], '쌓지'가 [싸치]처럼 발음되는 것이 이에 해당한다. 이때 중요한 점은 ㅎ이 독립된 소리로 또렷하게 남기보다, 뒤의 자음을 거세게 만드는 기능으로 나타난다는 것이다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "좋다",
+            "많고",
+            "닳지"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단은 해당 문법 현상의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "받침 ㅎ 뒤에 어떤 자음이 이어지면 그 자음을 거센소리로 만드는 경우가 많다고 했는가?",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 185
+              "paragraphId": "p2",
+              "start": 22,
+              "end": 29
             }
           ],
           "scoring": {
@@ -621,16 +635,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "반면 뒤에 오는 소리가 이미 거센소리이거나 ㅎ과 직접 결합하기 어려운 환경에서는 ㅎ이 약화되거나 탈락한 것처럼 실현되기도 한다. 예를 들어 '놓는'은 [논는]처럼 발음되어 ㅎ의 흔적이 직접 드러나지 않는다. 이는 ㅎ이 항상 뒤 소리를 거세게 만드는 것이 아니라, 결합하는 음운의 종류에 따라 실현 방식이 달라진다는 점을 보여 준다."
+          "answerText": "예사소리 자음"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 구별점이나 추가 조건을 어떻게 드러내는가?",
+          "prompt": "2문단에서 거센소리되기의 예로 든 발음 표기를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 191
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 70
+            },
+            {
+              "paragraphId": "p2",
+              "start": 78,
+              "end": 82
             }
           ],
           "scoring": {
@@ -638,17 +657,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "또한 어간 끝 ㅎ이 활용 과정에서 탈락하는 현상은 용언 활용과도 연결된다. '까맣다'가 '까만', '하얗다'가 '하얀'으로 나타나는 경우에는 단순한 발음의 문제가 아니라 형태 변화와 음운 변화가 함께 일어난다. 이런 경우 학습자는 표면형만 보고 별개의 형태로 오해하기 쉽지만, 실제로는 ㅎ이 약화되거나 사라지는 규칙적 변화로 이해할 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "[조코]",
+            "[싸치]"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단은 해석상의 주의점이나 효과를 어떤 방향으로 설명하는가?",
+          "prompt": "'놓는'은 어떻게 발음된다고 했는가?",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 194
+              "paragraphId": "p3",
+              "start": 84,
+              "end": 88
             }
           ],
           "scoring": {
@@ -657,16 +679,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 규칙을 적용할 때는 ㅎ이 어느 위치에 있는지와 뒤에 어떤 소리가 오는지를 함께 봐야 한다. 받침 ㅎ 뒤에 ㄱ, ㄷ, ㅈ 같은 예사소리가 오면 거센소리되기가 잘 나타나지만, 비음이나 유음이 오면 같은 결과가 생기지 않는다. 또 활용형인지 합성 환경인지에 따라서도 표준 발음의 설명 방식이 달라질 수 있으므로 단어 내부 구조를 함께 파악해야 한다."
+          "answerText": "[논는]"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 ㅎ 탈락과 거센소리되기의 적용 조건라는 문법 주제의 의미를 어떤 관점에서 정리하는가?",
+          "prompt": "ㅎ의 실현 방식은 무엇에 따라 달라진다고 했는가?",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 220
+              "paragraphId": "p3",
+              "start": 147,
+              "end": 158
             }
           ],
           "scoring": {
@@ -675,7 +697,65 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 ㅎ 탈락과 거센소리되기는 같은 자료에서 함께 나타나더라도 서로 다른 조건을 가진 변화이다. 어떤 경우에는 ㅎ이 뒤 자음을 거세게 만들고, 어떤 경우에는 소리값을 잃은 채 탈락하며, 또 어떤 경우에는 활용형에서 형태 변화처럼 보이기도 한다. 그래서 ㅎ 관련 표준 발음을 정확히 이해하려면 결과만 외우기보다, ㅎ의 위치와 뒤 음운의 성격, 그리고 형태 구조를 함께 따져 보는 태도가 필요하다."
+          "answerText": "결합하는 음운의 종류"
+        },
+        {
+          "id": "q7",
+          "prompt": "'까맣다'와 '하얗다'가 활용되어 나타나는 형태를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 50,
+              "end": 52
+            },
+            {
+              "paragraphId": "p4",
+              "start": 63,
+              "end": 65
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "까만",
+            "하얀"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "ㅎ 관련 표준 발음을 정확히 이해하려면 함께 따져 보아야 할 세 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 174,
+              "end": 179
+            },
+            {
+              "paragraphId": "p6",
+              "start": 181,
+              "end": 189
+            },
+            {
+              "paragraphId": "p6",
+              "start": 195,
+              "end": 200
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "ㅎ의 위치",
+            "뒤 음운의 성격",
+            "형태 구조"
+          ]
         }
       ]
     }

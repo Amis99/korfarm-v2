@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "동형암호가 암호화된 데이터에 대해 가능하게 해 주는 일을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 194
+              "start": 165,
+              "end": 193
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "개인정보를 인터넷 서버에 저장할 때는 보통 암호화가 먼저 이루어진다. 문제는 이렇게 암호화된 데이터를 분석하거나 통계 처리하려면 원래는 복호화를 거친 뒤 다시 연산해야 한다는 점이다. 이 과정에서는 민감한 정보가 평문 상태로 노출될 위험이 생긴다. 동형암호는 바로 이 지점을 해결하려는 기술로, 암호화된 상태를 유지한 채 연산을 수행하게 해 준다."
+          "answerText": "암호화된 상태를 유지한 채 연산을 수행하게 해 준다"
         },
         {
           "id": "q2",
-          "prompt": "2문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "동형암호의 핵심이라고 제시된 성질의 이름을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 174
+              "start": 10,
+              "end": 13
+            },
+            {
+              "paragraphId": "p6",
+              "start": 140,
+              "end": 143
             }
           ],
           "scoring": {
@@ -603,16 +608,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "동형암호의 핵심은 동형성이다. 이는 암호문끼리 특정 연산을 했을 때 얻은 결과가, 원문끼리 같은 연산을 한 뒤 암호화했을 때의 결과와 일치하는 성질을 뜻한다. 이 성질 덕분에 서버는 데이터를 직접 읽지 않고도 필요한 계산을 처리할 수 있다. 따라서 데이터 분석과 보안이 서로 충돌하지 않도록 만드는 기반이 된다."
+          "answerText": "동형성"
         },
         {
           "id": "q3",
-          "prompt": "3문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "동형성이 무엇을 뜻하는지 설명한 문장 부분을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 168
+              "paragraphId": "p2",
+              "start": 20,
+              "end": 82
             }
           ],
           "scoring": {
@@ -621,16 +626,36 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "동형암호는 허용되는 연산 범위에 따라 부분 동형암호, 제한적 동형암호, 완전 동형암호로 나눌 수 있다. 이 가운데 완전 동형암호는 덧셈과 곱셈을 반복적으로 수행할 수 있어 범용 계산에 더 가깝다. 하지만 실제 구현에서는 암호문에 누적되는 오차값 때문에 연산을 무한정 이어 갈 수 없다는 문제가 생긴다."
+          "answerText": "암호문끼리 특정 연산을 했을 때 얻은 결과가, 원문끼리 같은 연산을 한 뒤 암호화했을 때의 결과와 일치하는 성질"
         },
         {
           "id": "q4",
-          "prompt": "4문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "허용되는 연산 범위에 따라 나뉘는 동형암호의 세 종류를 모두 찾으시오.",
           "answerRanges": [
             {
+              "paragraphId": "p3",
+              "start": 21,
+              "end": 28
+            },
+            {
+              "paragraphId": "p3",
+              "start": 30,
+              "end": 38
+            },
+            {
+              "paragraphId": "p3",
+              "start": 40,
+              "end": 47
+            },
+            {
+              "paragraphId": "p3",
+              "start": 64,
+              "end": 71
+            },
+            {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 178
+              "start": 123,
+              "end": 130
             }
           ],
           "scoring": {
@@ -638,17 +663,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "특히 격자 기반 방식처럼 암호문에 무작위 오차를 섞어 안전성을 높이는 구조에서는, 연산이 거듭될수록 그 오차가 커진다. 덧셈보다 곱셈에서 오차가 더 빠르게 불어나기 때문에 일정 수준을 넘으면 원문 복원이 어려워진다. 즉 완전 동형암호는 이론적으로는 연산 자유도가 크지만, 실제로는 오차 관리가 가능성의 한계를 결정한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "부분 동형암호",
+            "제한적 동형암호",
+            "완전 동형암호"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "실제 구현에서 연산을 무한정 이어 갈 수 없게 만드는 원인을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 188
+              "paragraphId": "p3",
+              "start": 123,
+              "end": 136
             }
           ],
           "scoring": {
@@ -657,16 +686,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 문제를 해결하는 대표적 절차가 부트스트래핑이다. 부트스트래핑은 누적된 오차가 큰 암호문을 다시 정리해, 연산 가능한 상태의 새 암호문으로 바꾸는 과정이다. 쉽게 말해 연산 중간에 암호문을 한 번 세탁해 주는 절차라고 볼 수 있다. 이 과정을 거치면 오차가 줄어들어 추가 연산을 이어 갈 수 있지만, 계산량이 커져 속도 부담이 생긴다."
+          "answerText": "암호문에 누적되는 오차값"
         },
         {
           "id": "q6",
-          "prompt": "6문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "덧셈보다 곱셈에서 어떤 일이 더 빠르게 일어난다고 했는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 186
+              "paragraphId": "p4",
+              "start": 77,
+              "end": 91
             }
           ],
           "scoring": {
@@ -675,7 +704,63 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "따라서 동형암호의 실용성은 단순히 보안 수준만으로 결정되지 않는다. 암호문 크기, 연산 속도, 부트스트래핑 빈도, 병렬 처리 가능성까지 함께 고려해야 한다. 동형암호가 주목받는 이유는 복호화 없이도 계산이 가능하다는 점이지만, 실제 서비스에 쓰이려면 동형성과 부트스트래핑 사이의 균형을 얼마나 효율적으로 맞추는지가 핵심 과제가 된다."
+          "answerText": "오차가 더 빠르게 불어나기"
+        },
+        {
+          "id": "q7",
+          "prompt": "부트스트래핑이 무엇인지 설명한 문장 부분을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 37,
+              "end": 85
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "누적된 오차가 큰 암호문을 다시 정리해, 연산 가능한 상태의 새 암호문으로 바꾸는 과정"
+        },
+        {
+          "id": "q8",
+          "prompt": "동형암호의 실용성을 판단할 때 함께 고려해야 할 네 요소를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 38,
+              "end": 44
+            },
+            {
+              "paragraphId": "p6",
+              "start": 46,
+              "end": 51
+            },
+            {
+              "paragraphId": "p6",
+              "start": 53,
+              "end": 62
+            },
+            {
+              "paragraphId": "p6",
+              "start": 64,
+              "end": 73
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "암호문 크기",
+            "연산 속도",
+            "부트스트래핑 빈도",
+            "병렬 처리 가능성"
+          ]
         }
       ]
     }

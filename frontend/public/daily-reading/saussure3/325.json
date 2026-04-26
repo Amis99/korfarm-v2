@@ -850,24 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "칫솔질을 할 때도 ( ) 수칙.",
-          "answerText": "안전",
-          "answerMatchMode": "EXACT",
+          "prompt": "칫솔질할 때 금지된 행동을 지문에서 찾으시오.",
+          "answerText": "입에 물고 뛰어다니는 행동",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 10,
-              "end": 12
-            },
-            {
-              "paragraphId": "p1",
-              "start": 104,
-              "end": 106
-            },
-            {
-              "paragraphId": "p3",
-              "start": 102,
-              "end": 104
+              "start": 30,
+              "end": 44
             }
           ],
           "scoring": {
@@ -879,19 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "양치 ( )을 사용하여 물 아껴요.",
-          "answerText": "컵",
-          "answerMatchMode": "EXACT",
+          "prompt": "치약을 얼마나 짜야 하는지 나타내는 말을 지문에서 찾으시오.",
+          "answerText": "적당한 양만큼만",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 53,
-              "end": 54
-            },
-            {
-              "paragraphId": "p2",
-              "start": 74,
-              "end": 75
+              "start": 4,
+              "end": 12
             }
           ],
           "scoring": {
@@ -903,19 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "감전 ( )를 예방해야 합니다.",
-          "answerText": "사고",
-          "answerMatchMode": "EXACT",
+          "prompt": "컵이 깨지지 않게 잡는 방법을 지문에서 찾으시오.",
+          "answerText": "두 손으로 조심조심",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 109,
-              "end": 111
-            },
+              "start": 84,
+              "end": 94
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "젖은 손으로 만지지 말아야 할 대상을 지문에서 찾으시오.",
+          "answerText": "전등 스위치",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 54,
-              "end": 56
+              "start": 32,
+              "end": 38
             }
           ],
           "scoring": {

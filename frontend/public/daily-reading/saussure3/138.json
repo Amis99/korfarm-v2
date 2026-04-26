@@ -557,14 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "재빨리 상황을 판단하고 기발한 방법을 생각해 내는 영리한 태도를 뜻하는 말은?",
-          "answerText": "영리한",
-          "answerMatchMode": "EXACT",
+          "prompt": "제페토 할아버지가 피노키오를 찾으러 갈 때 탄 것은 무엇인가요?",
+          "answerText": "작은 배",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 49,
-              "end": 52
+              "paragraphId": "p1",
+              "start": 28,
+              "end": 32
             }
           ],
           "scoring": {
@@ -576,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "코가 간질거려 갑자기 공기를 세게 내뿜는 고래의 행동은 무엇인가요?",
-          "answerText": "재채기",
-          "answerMatchMode": "EXACT",
+          "prompt": "피노키오가 고래의 입속에서 한 행동은 무엇인가요?",
+          "answerText": "불을 피워",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 78,
-              "end": 81
+              "start": 68,
+              "end": 73
             }
           ],
           "scoring": {
@@ -595,14 +595,41 @@
         },
         {
           "id": "q3",
-          "prompt": "거짓이나 꾸밈이 없는 참된 마음을 뜻하는 말은 무엇인가요?",
-          "answerText": "진심",
-          "answerMatchMode": "EXACT",
+          "prompt": "피노키오가 약속한 내용을 나타내는 어구를 모두 찾으시오.",
+          "answerTexts": [
+            "거짓말을 하지 않고",
+            "착한 아이가 되겠다고"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 59,
-              "end": 61
+              "start": 22,
+              "end": 32
+            },
+            {
+              "paragraphId": "p3",
+              "start": 33,
+              "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "요정님은 피노키오를 무엇으로 만들어 주었나요?",
+          "answerText": "진정 소년",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 81,
+              "end": 86
             }
           ],
           "scoring": {

@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "( )를 죽여 조용히 걸습니다.",
-          "answerText": "발소리",
-          "answerMatchMode": "EXACT",
+          "prompt": "도서관에서 책을 빌릴 때 사용하는 증명 카드를 가리키는 단어를 지문에서 찾아 보세요.",
+          "answerText": "대출증",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 42,
-              "end": 45
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 3
             }
           ],
           "scoring": {
@@ -571,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "( )을 지키면 즐거움.",
-          "answerText": "예절",
-          "answerMatchMode": "EXACT",
+          "prompt": "도서관 이용 방법을 안내해 주는 등장인물을 지문에서 찾아 보세요.",
+          "answerText": "도서관 선생님",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 124,
-              "end": 126
+              "paragraphId": "p2",
+              "start": 61,
+              "end": 68
             }
           ],
           "scoring": {
@@ -590,14 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "반납 ( )를 기억해요.",
-          "answerText": "날짜",
-          "answerMatchMode": "EXACT",
+          "prompt": "도서관 예절을 지키면 일어나는 결과를 지문에서 찾아 보세요.",
+          "answerText": "모두가 즐겁게 독서해요",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 132,
+              "end": 144
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "책과 친해지면 일어나는 결과를 설명한 부분을 지문에서 찾아 보세요.",
+          "answerText": "지혜가 쑥쑥 자라 훌륭한 어린이가 돼요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 45,
-              "end": 47
+              "start": 98,
+              "end": 119
             }
           ],
           "scoring": {

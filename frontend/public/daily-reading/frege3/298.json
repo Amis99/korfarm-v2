@@ -504,19 +504,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "마을 어귀에 서 있는 오래된 공간은 무엇인가요?",
-          "answerText": "낡은 집",
+          "prompt": "낡은 집이 있는 마을의 자리를 찾으시오.",
+          "answerText": "마을 어귀",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 7,
-              "end": 11
-            },
-            {
-              "paragraphId": "p5",
-              "start": 4,
-              "end": 8
+              "start": 0,
+              "end": 5
             }
           ],
           "scoring": {
@@ -527,13 +522,13 @@
         },
         {
           "id": "q2",
-          "prompt": "무너져 가는 기와보다 먼저 집이 품고 있던 것은 무엇인가요?",
-          "answerText": "온기",
+          "prompt": "낡은 집이 무너져 가는 기와보다 먼저 품고 있던 것을 찾으시오.",
+          "answerText": "사람이 살던 시간의 온기",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 39,
+              "start": 28,
               "end": 41
             }
           ],
@@ -545,14 +540,22 @@
         },
         {
           "id": "q3",
-          "prompt": "쉽게 지워지지 않고 먼지처럼 떠오르는 것은 무엇인가요?",
-          "answerText": "목소리",
-          "answerMatchMode": "ANY",
+          "prompt": "바람이 드나들던 사이에 놓인 두 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "삐걱이는 마루",
+            "기운 기둥"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 46,
-              "end": 49
+              "start": 0,
+              "end": 7
+            },
+            {
+              "paragraphId": "p2",
+              "start": 9,
+              "end": 14
             }
           ],
           "scoring": {
@@ -563,14 +566,14 @@
         },
         {
           "id": "q4",
-          "prompt": "밥 냄새와 웃음이 모였을 자리에 오래 앉아 있는 것은 무엇인가요?",
-          "answerText": "햇빛",
+          "prompt": "문고리의 녹과 금 간 창문이 말해 주는 듯한 시간을 찾으시오.",
+          "answerText": "버려진 세월",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 28,
-              "end": 30
+              "paragraphId": "p3",
+              "start": 16,
+              "end": 22
             }
           ],
           "scoring": {
@@ -581,7 +584,7 @@
         },
         {
           "id": "q5",
-          "prompt": "시가 붙잡으려는 사라질 수 있는 것은 무엇인가요?",
+          "prompt": "돌아보지 않으면 사라지는 것을 찾으시오.",
           "answerText": "기억",
           "answerMatchMode": "ANY",
           "answerRanges": [

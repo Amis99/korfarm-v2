@@ -564,30 +564,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "길을 안전하게 건너도록 만든 선은?",
-          "answerText": "횡단보도",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 4
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 4
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "빛으로 길을 건널 때를 알려주는 것은?",
+          "prompt": "길을 건널 때 반드시 확인해야 하는, 빛깔이 바뀌면서 가도 되는지 멈추어야 하는지 알려 주는 신호 장치의 이름이 무엇인지 알아보세요",
           "answerText": "신호등",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -598,46 +575,91 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "손에 들고 다니는 똑똑한 전화기는?",
-          "answerText": "스마트폰",
-          "answerMatchMode": "ANY",
+          "id": "q2",
+          "prompt": "글에 따르면 횡단보도를 건너는 동안 하지 말아야 할 두 가지 행동이 무엇인지 모두 찾으시오.",
+          "answerText": "스마트폰을 보거나, 뛰지",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 15,
+              "end": 24
+            },
+            {
+              "paragraphId": "p2",
+              "start": 25,
+              "end": 27
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true,
+          "answerTexts": [
+            "스마트폰을 보거나",
+            "뛰지"
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "어두운 밤이나 비 오는 날에 길을 건널 때 사람을 발견하기 어려운 까닭이 누가 잘 보지 못하기 때문이라고 했는지, 그 사람이 누구인지 찾아보세요",
+          "answerText": "운전자",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 86,
+              "end": 89
+            },
+            {
+              "paragraphId": "p3",
+              "start": 16,
               "end": 19
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "차나 배를 타고 오고 가는 일은?",
-          "answerText": "교통",
-          "answerMatchMode": "ANY",
+          "prompt": "어두운 밤에 눈에 잘 띄려면 어떤 두 가지를 입거나 지녀야 한다고 했는지, 모두 찾으시오.",
+          "answerText": "밝은 색 옷, 야광 반사 소재",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 78,
-              "end": 80
+              "start": 38,
+              "end": 44
+            },
+            {
+              "paragraphId": "p3",
+              "start": 47,
+              "end": 55
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true
+          "revealOnWrong": true,
+          "answerTexts": [
+            "밝은 색 옷",
+            "야광 반사 소재"
+          ]
         }
       ]
     }

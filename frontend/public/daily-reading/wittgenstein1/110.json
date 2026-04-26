@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 글쓴이가 어떤 문제의식으로 이 글을 시작하는가?",
+          "prompt": "초고에서 글쓴이가 내세운 핵심 주장을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 172
+              "start": 12,
+              "end": 36
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "[초고] 우리 학교는 시험 기간에 도서관 운영 시간을 늘려야 한다. 학생들이 시험 준비를 할 공간이 부족한 것도 사실이고, 조용한 장소가 더 있으면 좋다는 의견도 많다. 그런데 지금 글의 첫머리는 왜 시간을 늘려야 하는지보다 그냥 필요하다는 인상부터 앞세우고 있어서 주장과 근거의 관계가 아직 선명하지 않다."
+          "answerText": "시험 기간에 도서관 운영 시간을 늘려야 한다"
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 이 초고를 어떤 근거로 보강해야 한다고 보는가?",
+          "prompt": "첫머리에서 주장과 근거의 연결이 어떠하다고 평가한 부분을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 161
+              "paragraphId": "p1",
+              "start": 149,
+              "end": 171
             }
           ],
           "scoring": {
@@ -603,16 +603,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "지난 설문에서 응답 학생의 다수가 오후 자습 공간이 부족하다고 답했다. 또 복도 벤치나 빈 교실에서 공부하다가 집중이 깨진다는 의견도 여러 번 나왔다. 이런 자료는 운영 시간 확대의 근거가 될 수 있는데, 초고에서는 수치와 사례가 흩어져 있어 무엇이 핵심 근거인지 곧바로 드러나지 않는다."
+          "answerText": "주장과 근거의 관계가 아직 선명하지 않다"
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 주장을 설득력 있게 만들기 위해 어떤 점을 보완해야 한다고 말하는가?",
+          "prompt": "운영 시간 확대의 근거가 될 수 있는 설문 결과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 175
+              "paragraphId": "p2",
+              "start": 8,
+              "end": 38
             }
           ],
           "scoring": {
@@ -621,16 +621,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "한편 도서관 운영 시간을 늘리면 안전 관리 인력과 전기 사용 문제가 함께 제기될 수 있다. 그런데 초고는 이 반론을 다루기도 전에 \"학생들이 더 열심히 공부할 것이다\"라는 기대를 먼저 길게 적어 놓았다. 주장에 힘을 실으려면 기대 효과를 앞세우기보다, 공간 부족이라는 직접 근거를 먼저 분명히 제시하는 편이 낫다."
+          "answerText": "응답 학생의 다수가 오후 자습 공간이 부족하다고 답했다"
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 이 초고를 어떤 근거로 보강해야 한다고 보는가?",
+          "prompt": "학생들이 공부하다가 집중이 깨진다고 한 장소를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 153
+              "paragraphId": "p2",
+              "start": 42,
+              "end": 47
+            },
+            {
+              "paragraphId": "p2",
+              "start": 49,
+              "end": 53
             }
           ],
           "scoring": {
@@ -638,17 +643,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "또 현재 원고는 \"운영 시간을 늘리면 좋다\"와 \"시험 기간만 한정해 늘리자\"는 말이 번갈아 나와 범위가 흔들린다. 정책을 제안하는 글이라면 상시 확대인지 시험 기간 한정인지부터 분명히 해야 한다. 그래야 인력 배치나 예산 문제를 다루는 문장도 같은 방향으로 정리될 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "복도 벤치",
+            "빈 교실"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 주장을 설득력 있게 만들기 위해 어떤 점을 보완해야 한다고 말하는가?",
+          "prompt": "도서관 운영 시간을 늘릴 때 함께 제기될 수 있는 문제를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 168
+              "paragraphId": "p3",
+              "start": 18,
+              "end": 26
+            },
+            {
+              "paragraphId": "p3",
+              "start": 28,
+              "end": 36
             }
           ],
           "scoring": {
@@ -656,17 +669,46 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "초고 뒤쪽에는 도서부 학생이 자원 봉사를 할 수 있다는 문장과 학부모 동의를 받아야 한다는 문장이 함께 적혀 있다. 하지만 이 내용은 운영 확대의 보조 방안이지, 시간을 늘려야 하는 본근거는 아니다. 지금처럼 근거와 실행 방안이 뒤섞이면 글을 읽는 사람은 무엇을 먼저 받아들여야 하는지 헷갈리게 된다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "안전 관리 인력",
+            "전기 사용 문제"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 글의 독자와 요청, 또는 결론을 어떻게 정리해야 한다고 말하는가?",
+          "prompt": "현재 원고에서 제안 범위가 흔들리게 만드는 두 말을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 163
+              "paragraphId": "p4",
+              "start": 9,
+              "end": 24
+            },
+            {
+              "paragraphId": "p4",
+              "start": 26,
+              "end": 42
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "\"운영 시간을 늘리면 좋다\"",
+            "\"시험 기간만 한정해 늘리자\""
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "도서부 학생 봉사와 학부모 동의가 본근거가 아니라 무엇이라고 한 부분을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 75,
+              "end": 87
             }
           ],
           "scoring": {
@@ -675,7 +717,39 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "따라서 이 글은 먼저 공간 부족과 설문 결과를 중심 근거로 세우고, 그다음에 시험 기간 한정 확대라는 제안 범위를 분명히 한 뒤, 마지막에 봉사 인력과 관리 방안을 덧붙이는 쪽으로 배열을 다시 짜야 한다. 지금 초고는 주장 자체보다 근거의 순서와 무게가 정리되지 않아 설득력이 약해진 상태다."
+          "answerText": "운영 확대의 보조 방안"
+        },
+        {
+          "id": "q8",
+          "prompt": "마지막 문단이 제시한 글의 재배열 순서를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 12,
+              "end": 24
+            },
+            {
+              "paragraphId": "p6",
+              "start": 43,
+              "end": 54
+            },
+            {
+              "paragraphId": "p6",
+              "start": 78,
+              "end": 90
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "공간 부족과 설문 결과",
+            "시험 기간 한정 확대",
+            "봉사 인력과 관리 방안"
+          ]
         }
       ]
     }

@@ -884,7 +884,25 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "탐구 발표문은 크게 어떤 세 부분으로 나뉘나요?",
+          "prompt": "탐구 발표문이 어떤 글인지 설명한 부분을 찾으시오.",
+          "answerText": "연구 결과를 체계적으로 알리는 글",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 8,
+              "end": 26
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "발표문이 크게 나뉘는 세 부분을 나타낸 표현을 찾으시오.",
           "answerText": "서론, 본론, 결론",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -901,14 +919,14 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "서론에서 밝혀야 하는 것은 무엇인가요?",
-          "answerText": "동기와 목적",
+          "id": "q3",
+          "prompt": "서론에서 밝혀야 하는 것을 찾으시오.",
+          "answerText": "탐구의 동기와 목적",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 10,
+              "start": 6,
               "end": 16
             }
           ],
@@ -919,26 +937,8 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "본론에서 이해를 돕기 위해 활용하면 좋은 것은 무엇인가요?",
-          "answerText": "시각 매체",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 94,
-              "end": 99
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q4",
-          "prompt": "본론의 내용은 무엇을 바탕으로 작성해야 하나요?",
+          "prompt": "본론의 내용이 바탕으로 삼아야 하는 것을 찾으시오.",
           "answerText": "객관적인 사실",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -956,13 +956,13 @@
         },
         {
           "id": "q5",
-          "prompt": "결론에서 덧붙이면 발표의 완성도를 높일 수 있다고 한 것은 무엇인가요?",
-          "answerText": "한계점",
+          "prompt": "결론에서 언급하면 발표의 완성도를 높일 수 있다고 한 것을 찾으시오.",
+          "answerText": "앞으로의 과제나 한계점",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 68,
+              "start": 59,
               "end": 71
             }
           ],

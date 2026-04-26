@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리 몸에서 필요 없게 되어 밖으로 내보내는 찌꺼기나 물질을 무엇이라 하나요?",
+          "prompt": "화장실은 우리 몸의 무엇을 배설하는 장소인가요?",
           "answerText": "노폐물",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -576,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "남을 생각하여 도와주거나 마음을 쓰는 따뜻한 태도는 무엇인가요?",
-          "answerText": "배려하는",
-          "answerMatchMode": "EXACT",
+          "prompt": "화장실을 사용한 뒤 어디에 물기가 남지 않게 닦았나요?",
+          "answerText": "세면대 주변",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 65,
-              "end": 69
+              "paragraphId": "p1",
+              "start": 47,
+              "end": 53
             }
           ],
           "scoring": {
@@ -595,14 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "더러움이 없이 무척 맑고 깨끗한 상태를 뜻하는 말은 무엇인가요?",
-          "answerText": "청결하게",
-          "answerMatchMode": "EXACT",
+          "prompt": "물을 내리기 전에 닫은 것은 무엇인가요?",
+          "answerText": "변기 뚜껑",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 18,
+              "end": 23
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "화장실 청소 당번은 무엇을 반짝이게 닦았나요?",
+          "answerText": "거울과 바닥",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 112,
-              "end": 116
+              "start": 18,
+              "end": 24
             }
           ],
           "scoring": {

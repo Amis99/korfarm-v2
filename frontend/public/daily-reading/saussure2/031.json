@@ -603,76 +603,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "시간을 정확하게 알려 주는 기계는?",
-          "answerText": "시계",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 37,
-              "end": 39
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p3",
-              "start": 88,
-              "end": 90
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "모자라거나 남지 않고 딱 맞는 시간은?",
-          "answerText": "정각",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 41,
-              "end": 43
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "친구와 언제 만나기로 미리 정한 것은?",
-          "answerText": "약속",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 54,
-              "end": 56
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "정해진 시간보다 더 늦게 도착하는 것은?",
+          "prompt": "정해진 시간보다 늦게 도착하는 것을 뜻하는 낱말을 찾아보세요.",
           "answerText": "지각",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -683,8 +614,74 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "친구와 만나기로 미리 정한 것을 가리키는 낱말을 찾아보세요.",
+          "answerText": "약속",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 54,
+              "end": 56
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "긴바늘이 6을 가리킬 때 30분이 지난 것이라 읽는 표현을 찾아보세요.",
+          "answerText": "3시 반",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 116,
+              "end": 120
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "시계를 볼 줄 알 때 생활에서 얻는 좋은 점 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "아침에 제시간에 일어나고 학교에도 지각하지 않게 돼요",
+            "친구들과 만나기로 한 약속 시간도 정확하게 지킬 수 있어요"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 11,
+              "end": 40
+            },
+            {
+              "paragraphId": "p3",
+              "start": 42,
+              "end": 74
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         }

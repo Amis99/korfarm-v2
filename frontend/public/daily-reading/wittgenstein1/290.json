@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"역선택과 신호 발송\"에 해당하는 부분은 어디인가요?",
+          "prompt": "정보 비대칭이 생기는 시장 상황을 설명한 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 208
+              "start": 10,
+              "end": 38
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "현실의 시장에서는 거래 당사자가 같은 양의 정보를 가지지 못하는 경우가 많다. 상품의 품질이나 상대방의 특성을 한쪽만 더 잘 알고 있으면 정보 비대칭이 생긴다. 이때 정보가 부족한 쪽은 겉으로 드러나지 않는 위험을 정확히 판단하기 어렵고, 거래는 처음부터 불리한 조건에서 이루어질 수 있다. 경제학은 이러한 정보 격차가 가격과 선택, 시장 구조를 어떻게 바꾸는지 분석한다."
+          "answerText": "거래 당사자가 같은 양의 정보를 가지지 못하는 경우"
         },
         {
           "id": "q2",
-          "prompt": "\"역선택과 신호 발송\"에 해당하는 부분은 어디인가요?",
+          "prompt": "정보 비대칭이 생기는 조건을 나타낸 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 205
+              "paragraphId": "p1",
+              "start": 44,
+              "end": 76
             }
           ],
           "scoring": {
@@ -603,16 +603,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "역선택은 정보 비대칭이 낳는 대표적 문제다. 보험 시장을 예로 들면, 보험사는 가입자의 위험 수준을 정확히 알기 어렵다. 그래서 평균적인 위험을 기준으로 보험료를 책정하면, 건강한 사람에게는 보험료가 비싸고 위험이 큰 사람에게는 보험료가 상대적으로 싸게 느껴진다. 그 결과 위험이 낮은 사람은 시장을 떠나고, 위험이 높은 사람만 남는 방향으로 거래가 왜곡될 수 있다."
+          "answerText": "상품의 품질이나 상대방의 특성을 한쪽만 더 잘 알고 있으면"
         },
         {
           "id": "q3",
-          "prompt": "무엇 위해 보험료를 다시 올리고, 그럴수록 위험이 낮은 가입자는 더 빠르게 이탈한다?",
+          "prompt": "역선택이 무엇인지 설명한 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 25,
-              "end": 37
+              "paragraphId": "p2",
+              "start": 5,
+              "end": 22
             }
           ],
           "scoring": {
@@ -621,16 +621,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "보험사는 손해를 메우기"
+          "answerText": "정보 비대칭이 낳는 대표적 문제"
         },
         {
           "id": "q4",
-          "prompt": "\"역선택과 신호 발송\"에 해당하는 부분은 어디인가요?",
+          "prompt": "평균적인 위험 기준으로 보험료를 책정할 때 두 집단이 보험료를 다르게 느끼는 내용을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 231
+              "paragraphId": "p2",
+              "start": 97,
+              "end": 115
+            },
+            {
+              "paragraphId": "p2",
+              "start": 116,
+              "end": 146
             }
           ],
           "scoring": {
@@ -638,17 +643,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 문제를 줄이는 한 방법이 신호 발송이다. 정보를 더 많이 가진 쪽이 비용을 들여 자신의 특성을 드러내는 방식이다. 예를 들어 생산성이 높은 구직자가 일정 수준의 학력이나 자격을 획득해 자신의 능력을 알리는 것이 여기에 해당한다. 이때 신호가 효과를 가지려면 우수한 특성을 가진 쪽일수록 그 신호를 보내는 비용이 상대적으로 낮아야 한다. 그렇지 않으면 누구나 쉽게 모방할 수 있어 신호로서의 힘을 잃기 때문이다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "건강한 사람에게는 보험료가 비싸고",
+            "위험이 큰 사람에게는 보험료가 상대적으로 싸게 느껴진다"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "\"역선택과 신호 발송\"에 해당하는 부분은 어디인가요?",
+          "prompt": "역선택 과정이 반복될 때 시장에 나타나는 결과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 234
+              "paragraphId": "p3",
+              "start": 11,
+              "end": 23
             }
           ],
           "scoring": {
@@ -657,16 +665,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정보가 부족한 쪽은 선별 전략으로 대응할 수도 있다. 상대에게 여러 선택지를 제시해 그가 스스로 자신의 특성을 드러내게 만드는 것이다. 보험 회사가 보장 범위와 보험료가 다른 상품을 함께 제시하면, 가입자는 자신의 위험 수준에 따라 상품을 고르게 되고 회사는 그 선택 결과를 통해 정보를 얻는다. 신호 발송이 정보를 가진 쪽의 적극적 공개라면, 선별은 정보를 덜 가진 쪽이 설계한 장치를 통해 정보를 끌어내는 방식이다."
+          "answerText": "시장은 악순환에 빠진다"
         },
         {
           "id": "q6",
-          "prompt": "\"역선택과 신호 발송\"에 해당하는 부분은 어디인가요?",
+          "prompt": "신호 발송이 무엇인지 설명한 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 255
+              "paragraphId": "p4",
+              "start": 25,
+              "end": 62
             }
           ],
           "scoring": {
@@ -675,7 +683,82 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "평판 역시 역선택을 완화하는 중요한 장치다. 반복 거래에서 좋은 평가와 리뷰가 누적되면, 상대방은 직접 모든 정보를 알지 못해도 일정한 판단 근거를 가질 수 있다. 결국 정보 비대칭 시장은 정보를 완전히 없애는 방향으로 움직이지 않는다. 대신 신호 발송, 선별, 평판 같은 메커니즘을 통해 불완전한 정보 속에서도 거래가 성립하도록 조정된다. 역선택을 이해한다는 것은 시장이 가격만으로 움직이지 않고 정보 구조에 따라 달라진다는 점을 이해하는 일이기도 하다."
+          "answerText": "정보를 더 많이 가진 쪽이 비용을 들여 자신의 특성을 드러내는 방식"
+        },
+        {
+          "id": "q7",
+          "prompt": "신호가 효과를 가지기 위한 비용 조건을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 146,
+              "end": 188
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "우수한 특성을 가진 쪽일수록 그 신호를 보내는 비용이 상대적으로 낮아야 한다"
+        },
+        {
+          "id": "q8",
+          "prompt": "정보 비대칭 시장에서 거래가 성립하도록 조정하는 메커니즘을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 16,
+              "end": 21
+            },
+            {
+              "paragraphId": "p5",
+              "start": 166,
+              "end": 171
+            },
+            {
+              "paragraphId": "p6",
+              "start": 136,
+              "end": 141
+            },
+            {
+              "paragraphId": "p5",
+              "start": 11,
+              "end": 13
+            },
+            {
+              "paragraphId": "p5",
+              "start": 193,
+              "end": 195
+            },
+            {
+              "paragraphId": "p6",
+              "start": 143,
+              "end": 145
+            },
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p6",
+              "start": 147,
+              "end": 149
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "신호 발송",
+            "선별",
+            "평판"
+          ]
         }
       ]
     }

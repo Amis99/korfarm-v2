@@ -557,14 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사람이 지켜야 할 바른 태도나 예의를 뜻하는 말은 무엇인가요?",
-          "answerText": "예절을",
-          "answerMatchMode": "EXACT",
+          "prompt": "해바라기가 무엇을 향해 고개를 들고 자란다고 했는지 지문에서 찾으시오.",
+          "answerText": "태양",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 70,
-              "end": 73
+              "start": 6,
+              "end": 8
             }
           ],
           "scoring": {
@@ -576,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "식물이나 동물 등 살아있는 모든 것들이 가진 힘은?",
-          "answerText": "생명이",
-          "answerMatchMode": "EXACT",
+          "prompt": "해바라기를 관찰하며 무엇을 지키기로 했는지 지문에서 찾으시오.",
+          "answerText": "자연에 대한 바른 예절",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 7
+              "paragraphId": "p1",
+              "start": 60,
+              "end": 72
             }
           ],
           "scoring": {
@@ -595,14 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "어떤 일을 하고 나서 느끼는 기쁘고 뿌듯한 마음은?",
-          "answerText": "보람을",
-          "answerMatchMode": "EXACT",
+          "prompt": "식물도 생명이 있기에 우리가 어떻게 해야 한다고 했는지 지문에서 찾으시오.",
+          "answerText": "아껴주고 존중해야 할",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 16,
+              "end": 27
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "올바른 예절이 필요하다고 한 대상을 지문에서 찾으시오.",
+          "answerText": "사람뿐만 아니라 자연의 모든 생명에게도",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 31,
-              "end": 34
+              "start": 50,
+              "end": 71
             }
           ],
           "scoring": {

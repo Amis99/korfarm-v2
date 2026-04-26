@@ -571,111 +571,95 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "prompt": "1연에서 가을 뒤에 부는 바람을 찾으시오.",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 61
-            }
+            { "paragraphId": "p1", "start": 10, "end": 12 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "가을이 다 지나고 북풍이 높이 부니\n긴 하늘, 넓은 들에 저녁 눈이 날리더니\n이윽고 촌락들이 특별한 세상 되어"
+          "answerText": "북풍"
         },
         {
           "id": "q2",
-          "prompt": "2연은 그 정서를 어떤 이미지나 흐름으로 이어 가는가?",
+          "prompt": "1연에서 눈이 내린 뒤 촌락들이 변한 모습으로 제시된 표현을 찾으시오.",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 62
-            }
+            { "paragraphId": "p1", "start": 52, "end": 61 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "원근의 산봉우리 백옥으로 묶었고\n시골집과 강마을을 흰 구슬로 꾸몄으니\n조물주 야단스러운 줄 이제야 다 알겠구나."
+          "answerText": "특별한 세상 되어"
         },
         {
           "id": "q3",
-          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
+          "prompt": "2연에서 산봉우리와 마을을 꾸민 흰 사물을 모두 찾으시오.",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 107
-            }
+            { "paragraphId": "p2", "start": 9, "end": 11 },
+            { "paragraphId": "p2", "start": 28, "end": 32 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "날씨가 몹시 추워 빙설이 쌓였으니\n성 밖의 초목은 다 시들어 말랐거늘\n창밖에 심은 매화 그윽한 향기 머금었고\n고개 위에 서 있는 솔, 푸른빛이 변함없으니\n본래 지닌 절개가 날이 춥다 변할쏘냐."
+          "answerMatchMode": "ALL",
+          "answerTexts": ["백옥", "흰 구슬"]
         },
         {
           "id": "q4",
-          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
+          "prompt": "3연에서 추위 속에서도 향기와 빛을 지닌 자연물을 모두 찾으시오.",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 97
-            }
+            { "paragraphId": "p3", "start": 46, "end": 48 },
+            { "paragraphId": "p3", "start": 72, "end": 73 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "앞산의 짙은 안개 햇빛을 가리니\n대숲에 뿌려진 서리 미처 못 녹았구나.\n향로를 내어 켜고 창을 닫고 앉아\n한 심지 맑은 향에 잡념이 그쳤으니\n가난하게 산다고 흥이야 없겠는가."
+          "answerMatchMode": "ALL",
+          "answerTexts": ["매화", "솔"]
         },
         {
           "id": "q5",
-          "prompt": "5연은 앞선 흐름에 어떤 긴장이나 전환을 더하는가?",
+          "prompt": "‘지조나 신념을 굽히지 않는 태도’를 뜻하는 말을 찾으시오.",
           "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 81
-            }
+            { "paragraphId": "p3", "start": 92, "end": 94 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "내 건너 산 아래 황량한 마을 두세 집이\n고목 사립문에 성긴 연기 비꼈으니\n어렴풋한 울타리 그림 속 같구나.\n소와 양이 내려오니 오늘도 저물었다."
+          "answerText": "절개"
         },
         {
           "id": "q6",
-          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
+          "prompt": "4연에서 가난하더라도 흥이 있음을 드러내는 설의적 표현을 찾으시오.",
           "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 156
-            }
+            { "paragraphId": "p4", "start": 79, "end": 96 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "높은 석문봉에 석양이 붉었는데\n울며 가는 기러기 가는 듯 돌아오니\n형양은 아니지만 회안봉이 여기로다.\n포구 긴 다리에 오며 가며 하는 행인\n어디를 향하여 바쁘게 가느냐.\n용산 외로운 절 언제부터 있었던가.\n풍경 맑은 소리 바람 섞여 지나가니\n알겠구나, 늙은 중이 예불할 때로구나."
+          "answerText": "가난하게 산다고 흥이야 없겠는가"
+        },
+        {
+          "id": "q7",
+          "prompt": "5연에서 저녁이 되었음을 알려 주는 대상을 찾으시오.",
+          "answerRanges": [
+            { "paragraphId": "p5", "start": 61, "end": 65 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "소와 양"
+        },
+        {
+          "id": "q8",
+          "prompt": "6연에서 화자가 질문하거나 깨달음을 드러내는 문장을 모두 찾으시오.",
+          "answerRanges": [
+            { "paragraphId": "p6", "start": 78, "end": 94 },
+            { "paragraphId": "p6", "start": 95, "end": 114 },
+            { "paragraphId": "p6", "start": 135, "end": 156 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": ["어디를 향하여 바쁘게 가느냐.", "용산 외로운 절 언제부터 있었던가.", "알겠구나, 늙은 중이 예불할 때로구나."]
         }
       ]
     }

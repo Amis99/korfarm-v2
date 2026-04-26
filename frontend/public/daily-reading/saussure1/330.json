@@ -435,15 +435,11 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "편지를 받는 친구 이름?",
+          "prompt": "글쓴이가 시골 외갓집에 다녀온 이야기를 편지로 들려주는 친구의 이름이 무엇인지 찾아보세요",
           "answerText": "영희",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 5,
-              "end": 7
-            }
+            {"paragraphId": "p1", "start": 5, "end": 7}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -454,15 +450,11 @@
         },
         {
           "id": "q2",
-          "prompt": "어머니의 친정집 명칭?",
-          "answerText": "외갓집",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 외갓집에서 함께 텃밭 가꾸기와 고구마 캐기를 한 가족이 누구인지 찾아보세요",
+          "answerText": "할아버지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 23,
-              "end": 26
-            }
+            {"paragraphId": "p1", "start": 68, "end": 72}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -473,15 +465,26 @@
         },
         {
           "id": "q3",
-          "prompt": "들려주는 재미난 말?",
-          "answerText": "이야기",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 지금까지 먹어본 것 중에 최고로 맛있었다고 한 달콤한 고구마를 직접 구워주신 분이 누구인지 찾아보세요",
+          "answerText": "할머니",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 51,
-              "end": 54
-            }
+            {"paragraphId": "p2", "start": 3, "end": 6}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "별이 쏟아질 것처럼 반짝여서 친구 생각이 많이 났다고 한 곳이 어디인지 찾아보세요",
+          "answerText": "시골의 밤하늘",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 49, "end": 56}
           ],
           "scoring": {
             "correctDeltaSec": 10,

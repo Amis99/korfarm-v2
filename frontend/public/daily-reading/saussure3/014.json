@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리가 일상생활에서 필요한 물건을 사거나 자신이 만든 물건을 팔기 위해 사람들이 모이는 장소는?",
+          "prompt": "사람들이 필요한 물건을 사거나 팔기 위해 모이는 장소를 무엇이라고 부릅니까?",
           "answerText": "시장",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -586,49 +586,14 @@
         },
         {
           "id": "q2",
-          "prompt": "시장 상인과 소비자가 자유롭게 합의하여 물건의 가치를 돈으로 매겨 숫자로 나타낸 것은?",
-          "answerText": "가격",
-          "answerMatchMode": "EXACT",
+          "prompt": "가격은 물건의 가치를 무엇으로 매겨 숫자로 나타낸 것입니까?",
+          "answerText": "돈으로",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 69,
-              "end": 71
-            },
-            {
-              "paragraphId": "p1",
-              "start": 83,
-              "end": 85
-            },
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p2",
-              "start": 74,
-              "end": 76
-            },
-            {
-              "paragraphId": "p2",
-              "start": 114,
-              "end": 116
-            },
-            {
-              "paragraphId": "p3",
-              "start": 33,
-              "end": 35
-            },
-            {
-              "paragraphId": "p3",
-              "start": 76,
-              "end": 78
-            },
-            {
-              "paragraphId": "p3",
-              "start": 108,
-              "end": 110
+              "start": 95,
+              "end": 98
             }
           ],
           "scoring": {
@@ -640,14 +605,41 @@
         },
         {
           "id": "q3",
-          "prompt": "물건의 가격은 사려는 소비자의 수와 시장에서 그 물건을 팔기 위해 나선 누구의 수에 따라 자연스럽게 바뀌나요?",
-          "answerText": "상인",
-          "answerMatchMode": "EXACT",
+          "prompt": "물건의 가격은 무엇에 따라 자연스럽게 바뀐다고 했습니까?",
+          "answerText": "사려는 사람과 팔려는 사람의 수",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 95,
-              "end": 97
+              "start": 8,
+              "end": 25
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "가격이 크게 오르는 경우의 두 조건을 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "사고 싶은 사람은 많은데",
+            "물건이 적다면"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 42,
+              "end": 55
+            },
+            {
+              "paragraphId": "p2",
+              "start": 56,
+              "end": 63
             }
           ],
           "scoring": {

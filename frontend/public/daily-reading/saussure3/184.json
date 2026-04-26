@@ -562,39 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "더 많은 수의 사람들이 찬성하는 의견으로 중요한 문제를 빠르게 결정하는 방법은?",
-          "answerText": "다수결",
-          "answerMatchMode": "EXACT",
+          "prompt": "사람들의 의견이 서로 달라 하나로 통일하기 어려울 때 사용하는 원칙은 무엇입니까?",
+          "answerText": "공평한 다수결의 원칙",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 99,
-              "end": 102
-            },
-            {
-              "paragraphId": "p1",
-              "start": 115,
-              "end": 118
-            },
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 7
-            },
-            {
-              "paragraphId": "p2",
-              "start": 128,
-              "end": 131
-            },
-            {
-              "paragraphId": "p3",
-              "start": 11,
-              "end": 14
-            },
-            {
-              "paragraphId": "p3",
-              "start": 140,
-              "end": 143
+              "start": 95,
+              "end": 106
             }
           ],
           "scoring": {
@@ -606,19 +581,14 @@
         },
         {
           "id": "q2",
-          "prompt": "다수결로 결정을 내리기 전에 모든 사람들이 모여 자신의 의견을 자유롭게 말하는 것은?",
-          "answerText": "토론",
-          "answerMatchMode": "EXACT",
+          "prompt": "다수결은 어떤 의견으로 중요한 문제를 빠르게 결정하는 방법입니까?",
+          "answerText": "더 많은 수의 사람들이 찬성하는 의견",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 179,
-              "end": 181
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 2
+              "paragraphId": "p1",
+              "start": 120,
+              "end": 140
             }
           ],
           "scoring": {
@@ -630,14 +600,33 @@
         },
         {
           "id": "q3",
-          "prompt": "결정을 깨끗하게 따르면서도 소수의 친구들이 낸 의견을 함부로 무시하지 않고 꼭 해 주는 것은?",
-          "answerText": "존중",
-          "answerMatchMode": "EXACT",
+          "prompt": "다수결로 최종 결정을 내리기 전에는 어떤 토론을 거쳐야 합니까?",
+          "answerText": "자신의 의견을 자유롭게 말하는 토론",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 162,
+              "end": 181
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "다수의 의견을 따르면서도 소수의 친구들이 낸 의견에는 어떤 태도가 필요합니까?",
+          "answerText": "함부로 무시하지 않고 끝까지 존중해 주는 태도",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 122,
-              "end": 124
+              "start": 106,
+              "end": 131
             }
           ],
           "scoring": {

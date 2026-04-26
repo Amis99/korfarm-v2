@@ -474,9 +474,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "주인공 요정 이름?",
+          "prompt": "여름밤 숲속에서 반딧불 친구들을 만난 꼬마 요정의 이름을 찾아보세요",
           "answerText": "초롱이",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -508,29 +508,24 @@
         },
         {
           "id": "q2",
-          "prompt": "깜빡이는 곤충?",
-          "answerText": "반딧불",
-          "answerMatchMode": "EXACT",
+          "prompt": "엉덩이에서 노란 불빛을 깜빡이며 노래를 부른 친구들을 무엇이라고 했나요",
+          "answerText": "반딧불이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 29,
-              "end": 32
-            },
-            {
-              "paragraphId": "p1",
               "start": 45,
-              "end": 48
+              "end": 49
             },
             {
               "paragraphId": "p2",
               "start": 20,
-              "end": 23
+              "end": 24
             },
             {
               "paragraphId": "p2",
               "start": 59,
-              "end": 62
+              "end": 63
             }
           ],
           "scoring": {
@@ -542,18 +537,37 @@
         },
         {
           "id": "q3",
-          "prompt": "문제를 푸는 무엇인가요?",
-          "answerText": "힌트",
-          "answerMatchMode": "EXACT",
+          "prompt": "보물 상자 안의 힌트는 무엇을 따라오라고 했는지 찾아보세요",
+          "answerText": "빛의 길",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 173,
-              "end": 175
+              "start": 158,
+              "end": 162
             },
             {
               "paragraphId": "p2",
-              "start": 10,
+              "start": 32,
+              "end": 36
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "초롱이가 빛의 길을 걷기 시작한 까닭은 무엇을 풀기 위해서인가요",
+          "answerText": "첫 번째 힌트",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 5,
               "end": 12
             }
           ],

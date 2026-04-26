@@ -1113,7 +1113,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '창피함'을 모두 찾으시오.",
+          "prompt": "실수했을 때 부끄럽고 떳떳하지 못해 얼굴이 화끈해지는 감정을 가리키는 세 글자 단어를 찾으시오.",
+          "answerText": "창피함",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -1122,52 +1124,17 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "창피함"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '실망감'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 67,
-              "end": 70
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "남의 말에 덩달아 호응하거나 동의하는 일을 가리키는 세 글자 단어를 찾으시오.",
+          "answerText": "맞장구",
           "answerMatchMode": "ANY",
-          "answerText": "실망감"
-        },
-        {
-          "id": "q3",
-          "prompt": "지문에서 '억울함'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 72,
-              "end": 75
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "억울함"
-        },
-        {
-          "id": "q4",
-          "prompt": "지문에서 '맞장구'를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -1176,35 +1143,102 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "맞장구"
+          "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "지문에서 '정리'를 모두 찾으시오.",
+          "id": "q3",
+          "prompt": "상대가 한 말을 짧게 짚어 다시 묻는 행동을 가리키는 세 글자 단어를 모두 찾으시오.",
+          "answerText": "되묻기",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 16,
-              "end": 18
+              "start": 11,
+              "end": 14
             },
             {
               "paragraphId": "p4",
-              "start": 103,
-              "end": 105
+              "start": 116,
+              "end": 119
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "공감하며 듣기가 구별하게 만든다고 한 두 가지 태도를 가리키는 두 단어를 모두 찾으시오.",
+          "answerText": "동의 / 이해",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 150,
+              "end": 152
+            },
+            {
+              "paragraphId": "p3",
+              "start": 171,
+              "end": 173
+            },
+            {
+              "paragraphId": "p3",
+              "start": 175,
+              "end": 177
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "공감의 핵심은 무엇을 미루고 상대를 이해하려는 데 있다고 했는지 두 글자 단어를 찾으시오.",
+          "answerText": "판단",
           "answerMatchMode": "ANY",
-          "answerText": "정리"
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 119,
+              "end": 121
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "공감의 목적은 무엇을 서둘러 주는 데 있지 않다고 했는지 두 글자 단어를 찾으시오.",
+          "answerText": "조언",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 183,
+              "end": 185
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

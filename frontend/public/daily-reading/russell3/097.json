@@ -571,111 +571,70 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"도체와 부도체의 중간 성질을 보이는 물질\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 186
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "반도체가 어떤 물질인지 찾으시오",
+          "answerText": "반도체는 전기가 아주 잘 통하는 도체와 거의 통하지 않는 부도체의 중간 성질을 보이는 물질이다",
           "answerMatchMode": "ANY",
-          "answerText": "반도체는 전기가 아주 잘 통하는 도체와 거의 통하지 않는 부도체의 중간 성질을 보이는 물질이다. 대표적인 물질인 규소는 평소에는 자유롭게 움직일 수 있는 전하가 많지 않아서 전류가 크게 흐르지 않지만, 온도나 불순물 첨가에 따라 전하의 수가 달라지면 전기적 성질도 크게 바뀐다. 바로 이 조절 가능성이 반도체의 가장 중요한 특징이다."
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 0, "end": 52}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "\"전자를 하나 더 내놓기 쉬운 원소를 넣는다\"에 해당하는 부분은 어디인가요?",
+          "prompt": "n형 반도체와 p형 반도체가 각각 어떻게 만들어지는지 모두 찾으시오",
+          "answerTexts": ["인처럼 전자를 하나 더 내놓기 쉬운 원소를 넣으면 자유 전자가 많아져 n형 반도체가 되고","붕소처럼 전자가 하나 부족한 원소를 넣으면 전자가 비어 있는 자리인 정공이 많아져 p형 반도체가 된다"],
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 200
-            }
+            {"paragraphId": "p2", "start": 42, "end": 91},
+            {"paragraphId": "p2", "start": 93, "end": 149}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "규소 결정에 다른 원소를 아주 적은 양만 섞어도 전하의 움직임은 달라진다. 인처럼 전자를 하나 더 내놓기 쉬운 원소를 넣으면 자유 전자가 많아져 n형 반도체가 되고, 붕소처럼 전자가 하나 부족한 원소를 넣으면 전자가 비어 있는 자리인 정공이 많아져 p형 반도체가 된다. 이렇게 반도체는 같은 규소라도 어떤 불순물을 넣느냐에 따라 주된 전하 운반자가 달라진다."
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "\"전하의 자유로운 이동을 막는 장벽처럼 작용한다\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 81,
-              "end": 106
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "p형과 n형 반도체를 맞붙였을 때 접합 부근에 공핍층이 생기는 까닭을 찾으시오",
+          "answerText": "p형과 n형 반도체를 맞붙이면 접합 부근에서 전자와 정공이 서로 만나 사라지고, 그 자리에 전하가 거의 움직이지 않는 공핍층이 생긴다",
           "answerMatchMode": "ANY",
-          "answerText": "전하의 자유로운 이동을 막는 장벽처럼 작용한다"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 0, "end": 74}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "\"공핍층이 더 두꺼워져 전류가 거의 흐르지 않는다\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 140,
-              "end": 166
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "역방향 바이어스를 걸면 전류가 거의 흐르지 않는 까닭을 찾으시오",
+          "answerText": "n형 쪽을 높은 전위에 두는 역방향 바이어스를 걸면 공핍층이 더 두꺼워져 전류가 거의 흐르지 않는다",
           "answerMatchMode": "ANY",
-          "answerText": "공핍층이 더 두꺼워져 전류가 거의 흐르지 않는다"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 111, "end": 166}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "\"역방향 전류를 막고 순방향 전류만 통과시키기 때문이다\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 79,
-              "end": 108
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "다이오드가 정류 회로에 쓰이는 까닭을 찾으시오",
+          "answerText": "역방향 전류를 막고 순방향 전류만 통과시키기 때문이다",
           "answerMatchMode": "ANY",
-          "answerText": "역방향 전류를 막고 순방향 전류만 통과시키기 때문이다"
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 79, "end": 108}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q6",
-          "prompt": "\"물질의 내부 전하를 어떻게 조절하느냐를 이해하는 일\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 23,
-              "end": 51
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "반도체가 금속선과 달리 전류 흐름을 섬세하게 제어할 수 있는 까닭을 찾으시오",
+          "answerText": "반도체는 접합 구조와 전압 조건에 따라 흐름을 선택적으로 바꿀 수 있다",
           "answerMatchMode": "ANY",
-          "answerText": "물질의 내부 전하를 어떻게 조절하느냐를 이해하는 일"
+          "answerRanges": [
+            {"paragraphId": "p6", "start": 116, "end": 155}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

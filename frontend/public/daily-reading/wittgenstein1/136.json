@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 이 글의 중심 개념을 어떤 원리나 관점에서 소개하는가?",
+          "prompt": "경제학에서 소비자가 어떤 방향으로 행동한다고 보는지 나타낸 문장을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 210
+              "end": 55
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "경제학에서는 소비자가 여러 선택지 가운데 자신의 만족을 가장 크게 만드는 방향으로 행동한다고 본다. 여기서 만족은 객관적인 무게나 길이처럼 직접 재기보다, 어떤 재화를 소비했을 때 느끼는 주관적 기쁨이나 선호의 크기로 설명된다. 이런 만족의 크기를 가리키는 개념이 효용이며, 소비 이론은 제한된 예산 안에서 효용을 어떻게 크게 만들 수 있는지를 밝히려는 시도라고 할 수 있다."
+          "answerText": "경제학에서는 소비자가 여러 선택지 가운데 자신의 만족을 가장 크게 만드는 방향으로 행동한다고 본다."
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 왜 중요하거나 어떤 이유로 문제 되는지 설명하는가?",
+          "prompt": "만족을 설명할 때 제시한 두 기준을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 194
+              "paragraphId": "p1",
+              "start": 105,
+              "end": 111
+            },
+            {
+              "paragraphId": "p1",
+              "start": 114,
+              "end": 120
             }
           ],
           "scoring": {
@@ -602,17 +607,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "효용 이론에서 중요한 개념은 한계 효용이다. 한계 효용은 재화를 한 단위 더 소비할 때 추가로 늘어나는 만족을 뜻한다. 그런데 같은 재화를 계속 소비하면 처음 얻을 때보다 나중에 얻는 만족이 작아지는 경우가 많다. 이처럼 소비량이 늘수록 추가 만족이 점차 줄어드는 경향을 한계 효용 체감이라고 하며, 경제학자는 이를 소비 선택의 기본 원리로 본다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "주관적 기쁨",
+            "선호의 크기"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 예시를 통해 중심 개념의 어떤 특징이나 작동 방식을 보여 주는가?",
+          "prompt": "한계 효용의 뜻을 설명한 문장을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 221
+              "paragraphId": "p2",
+              "start": 25,
+              "end": 66
             }
           ],
           "scoring": {
@@ -621,52 +629,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "예를 들어 가격이 같은 튀김과 초밥이 있고, 소비자가 두 음식에 쓰는 예산이 한정되어 있다고 하자. 처음 한두 개를 먹을 때는 튀김에서 얻는 만족이 클 수 있지만, 계속 같은 음식을 먹으면 추가 만족은 빠르게 줄어든다. 반면 초밥은 처음 만족이 크지 않더라도 몇 개까지는 비교적 고르게 만족을 줄 수 있다. 이때 소비자는 전체 만족을 크게 만들기 위해 두 음식의 추가 만족을 계속 비교하게 된다."
+          "answerText": "한계 효용은 재화를 한 단위 더 소비할 때 추가로 늘어나는 만족을 뜻한다."
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 글의 핵심을 어떻게 정리하는가?",
+          "prompt": "소비량이 늘수록 추가 만족이 점차 줄어드는 경향을 가리키는 말을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 217
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "경제학자는 이런 비교가 돈 1단위당 얻는 한계 효용을 같게 만드는 방향으로 이루어진다고 설명한다. 어떤 재화에서 얻는 한계 효용이 다른 재화보다 더 크다면, 그 재화에 예산을 조금 더 쓰는 편이 전체 효용을 늘리는 데 유리하기 때문이다. 결국 예산을 다 썼을 때 각 선택지의 화폐 단위당 한계 효용이 비슷해지는 지점이 효용 극대화의 기준이 되며, 이를 한계 효용 균등의 법칙이라고 부른다."
-        },
-        {
-          "id": "q5",
-          "prompt": "다섯째 문단은 어떤 생각이나 관계를 보여 주는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 245
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "다만 이 법칙은 모든 사람에게 같은 소비표를 제시하는 공식은 아니다. 한계 효용의 크기는 개인의 취향, 필요, 상황에 따라 달라지기 때문이다. 같은 돈을 쓰더라도 배가 매우 고픈 사람과 이미 충분히 먹은 사람이 느끼는 만족은 같지 않고, 같은 음식이라도 선호가 다른 사람에게서는 전혀 다른 결과가 나올 수 있다. 그래서 효용 이론은 객관적 정답을 제시한다기보다, 제한된 자원 아래에서 선택이 어떤 원리로 이루어지는지 설명하는 틀에 가깝다."
-        },
-        {
-          "id": "q6",
-          "prompt": "여섯째 문단은 글의 핵심을 어떻게 정리하는가?",
-          "answerRanges": [
+              "paragraphId": "p2",
+              "start": 152,
+              "end": 160
+            },
             {
               "paragraphId": "p6",
               "start": 0,
-              "end": 236
+              "end": 8
             }
           ],
           "scoring": {
@@ -675,7 +652,97 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "한계 효용 체감의 생각은 개인 소비를 넘어 분배 정책을 설명하는 데에도 활용된다. 추가 소득 1만 원이 이미 많은 소득을 가진 사람에게 주는 만족보다, 소득이 적은 사람에게 주는 만족이 더 클 수 있기 때문이다. 이런 판단은 누진세나 이전 지출처럼 소득 재분배를 정당화하는 근거로 이어진다. 결국 효용 이론은 소비 선택의 문제를 설명하는 동시에, 사회 전체의 만족을 어떻게 높일 것인가를 묻는 경제 정책 논의와도 연결된다."
+          "answerText": "한계 효용 체감"
+        },
+        {
+          "id": "q5",
+          "prompt": "예시에서 소비자가 예산을 쓰는 두 음식을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 13,
+              "end": 15
+            },
+            {
+              "paragraphId": "p3",
+              "start": 17,
+              "end": 19
+            },
+            {
+              "paragraphId": "p3",
+              "start": 71,
+              "end": 73
+            },
+            {
+              "paragraphId": "p3",
+              "start": 126,
+              "end": 128
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "튀김",
+            "초밥"
+          ]
+        },
+        {
+          "id": "q6",
+          "prompt": "튀김을 계속 먹으면 추가 만족이 어떻게 된다고 했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 106,
+              "end": 122
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "추가 만족은 빠르게 줄어든다."
+        },
+        {
+          "id": "q7",
+          "prompt": "효용 극대화의 기준이 되는 지점을 나타낸 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 147,
+              "end": 176
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "각 선택지의 화폐 단위당 한계 효용이 비슷해지는 지점"
+        },
+        {
+          "id": "q8",
+          "prompt": "추가 소득 1만 원이 더 큰 만족을 줄 수 있는 대상은 누구인지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 85,
+              "end": 94
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "소득이 적은 사람"
         }
       ]
     }

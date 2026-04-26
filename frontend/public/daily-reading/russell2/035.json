@@ -1039,7 +1039,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "문장에서 동작이나 상태의 주체가 되는 말은 무엇인가?",
+          "prompt": "지문에서 문장에서 무엇에 대해 말하는지 그 대상을 세우는 기본 성분을 가리키는 단어를 모두 찾으시오",
           "answerText": "주어",
           "answerRanges": [
             {
@@ -1107,7 +1107,7 @@
         },
         {
           "id": "q2",
-          "prompt": "주어의 동작이나 상태를 설명하는 말은 무엇인가?",
+          "prompt": "지문에서 주어가 가리키는 대상이 어떠한지 또는 무엇을 하는지 드러내는 기본 성분을 가리키는 단어를 모두 찾으시오",
           "answerText": "서술어",
           "answerRanges": [
             {
@@ -1175,7 +1175,7 @@
         },
         {
           "id": "q3",
-          "prompt": "문장 안의 요소들이 서로 자연스럽게 어울리는 관계를 뜻하는 말은 무엇인가?",
+          "prompt": "지문에서 주어의 수나 의미나 문장 구조에 맞게 서술어가 자연스럽게 연결되는 관계를 가리키는 두 글자 단어를 모두 찾으시오",
           "answerText": "호응",
           "answerRanges": [
             {
@@ -1223,39 +1223,37 @@
         },
         {
           "id": "q4",
-          "prompt": "여러 사람에게 함께 알릴 내용을 적은 글을 뜻하는 말은 무엇인가?",
-          "answerText": "공지문",
+          "prompt": "지문에서 긴 문장에서 주어와 서술어 사이에 많이 끼어들어 호응을 흔드는 두 종류의 꾸미는 말을 모두 찾으시오",
+          "answerText": "관형어, 부사어",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 26,
-              "end": 29
-            }
+            {"paragraphId": "p5", "start": 23, "end": 26},
+            {"paragraphId": "p5", "start": 28, "end": 31}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "반복해서 익히며 능력을 기르는 일을 뜻하는 말은 무엇인가?",
-          "answerText": "훈련",
+          "prompt": "지문에서 학교 축제를 준비하다가 호응이 어긋난 공지문을 남긴 주체를 찾으시오",
+          "answerText": "학생회",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 167,
-              "end": 169
-            }
+            {"paragraphId": "p4", "start": 18, "end": 21}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 호응을 점검하는 일이 어느 분야의 정확한 문장 쓰기 훈련이 된다고 하는지 두 글자로 찾으시오",
+          "answerText": "문법",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p6", "start": 130, "end": 132}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

@@ -916,19 +916,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첨단 기술로 도시 문제를 해결하려는 도시는 무엇인가요?",
-          "answerText": "스마트시티",
+          "prompt": "스마트시티가 도시 문제를 해결하는 방식을 찾으시오.",
+          "answerText": "첨단 기술을 활용하여 도시 문제를 해결합니다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p2",
-              "start": 13,
-              "end": 18
+              "start": 7,
+              "end": 31
             }
           ],
           "scoring": {
@@ -939,10 +934,18 @@
         },
         {
           "id": "q2",
-          "prompt": "스마트시티의 핵심 기반 기술 중 하나는 무엇인가요?",
-          "answerText": "사물 인터넷",
-          "answerMatchMode": "ANY",
+          "prompt": "스마트시티의 핵심 기반을 모두 찾으시오.",
+          "answerTexts": [
+            "정보 통신 기술",
+            "사물 인터넷"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 41
+            },
             {
               "paragraphId": "p1",
               "start": 43,
@@ -957,14 +960,28 @@
         },
         {
           "id": "q3",
-          "prompt": "전력 소모를 최적화하기 위해 실시간 분석하는 분야는 무엇인가요?",
-          "answerText": "에너지 관리",
-          "answerMatchMode": "ANY",
+          "prompt": "에너지 관리에서 분석하거나 줄이는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "실시간 데이터 분석",
+            "전력 소모",
+            "탄소 배출"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 5,
-              "end": 11
+              "start": 30,
+              "end": 40
+            },
+            {
+              "paragraphId": "p2",
+              "start": 43,
+              "end": 48
+            },
+            {
+              "paragraphId": "p2",
+              "start": 61,
+              "end": 66
             }
           ],
           "scoring": {
@@ -975,14 +992,34 @@
         },
         {
           "id": "q4",
-          "prompt": "교통 흐름을 원활하게 하는 체계는 무엇인가요?",
-          "answerText": "지능형 교통 시스템",
-          "answerMatchMode": "ANY",
+          "prompt": "지능형 교통 시스템이 분석하거나 조절하는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "지능형 교통 시스템",
+            "교통량",
+            "신호 체계",
+            "운전자의 대기 시간"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 0,
               "end": 10
+            },
+            {
+              "paragraphId": "p3",
+              "start": 30,
+              "end": 33
+            },
+            {
+              "paragraphId": "p3",
+              "start": 40,
+              "end": 45
+            },
+            {
+              "paragraphId": "p3",
+              "start": 59,
+              "end": 69
             }
           ],
           "scoring": {
@@ -993,14 +1030,34 @@
         },
         {
           "id": "q5",
-          "prompt": "시민이 민원을 제기하고 정책을 제안하는 통로는 무엇인가요?",
-          "answerText": "모바일 앱",
-          "answerMatchMode": "ANY",
+          "prompt": "시민 참여형 서비스에서 활용하거나 제기하고 제안하는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "시민 참여형 서비스",
+            "모바일 앱",
+            "민원",
+            "정책"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 10
+            },
             {
               "paragraphId": "p4",
               "start": 30,
               "end": 35
+            },
+            {
+              "paragraphId": "p4",
+              "start": 40,
+              "end": 42
+            },
+            {
+              "paragraphId": "p4",
+              "start": 49,
+              "end": 51
             }
           ],
           "scoring": {

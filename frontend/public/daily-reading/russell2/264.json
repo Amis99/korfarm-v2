@@ -1039,93 +1039,80 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이 홍보문은 무엇을 알리기 위해 쓴 초고인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 152
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 어떤 사실이나 행사를 널리 알리기 위해 쓴 글을 가리키는 낱말을 모두 찾으시오",
+          "answerText": "홍보문",
           "answerMatchMode": "ANY",
-          "answerText": "체육대회 응원 구역을 알리는 홍보문 초고를 먼저 써 보았다. 이번 행사는 반별 응원 자리가 정해져 있는데, 작년에는 응원 구역이 헷갈려 이동이 늦어지고 통로가 자주 막혔다. 그래서 올해는 학생들이 응원 자리를 더 빨리 찾을 수 있도록 구역 안내를 분명하게 적어 두려 한다."
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 16, "end": 19},
+            {"paragraphId": "p5", "start": 6, "end": 9},
+            {"paragraphId": "p6", "start": 46, "end": 49}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "운동장 관람석의 학년 구역과 자리 순서는 어떻게 안내해야 하나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 149
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 정식으로 다듬기 전 처음 작성한 글을 가리키는 낱말을 모두 찾으시오",
+          "answerText": "초고",
           "answerMatchMode": "ANY",
-          "answerText": "우선 운동장 관람석은 학년별로 크게 세 구역으로 나뉜다. 2학년은 중앙 계단 기준 왼쪽 두 줄을 사용하고, 각 반은 번호 순서대로 앞줄부터 자리를 채우게 된다. 이 내용을 학생들이 한눈에 이해할 수 있도록 학년 구역과 반별 자리 순서를 함께 적어 주는 것이 필요하다."
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 20, "end": 22},
+            {"paragraphId": "p3", "start": 50, "end": 52},
+            {"paragraphId": "p4", "start": 50, "end": 52},
+            {"paragraphId": "p5", "start": 2, "end": 4},
+            {"paragraphId": "p6", "start": 7, "end": 9}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "응원 도구를 가져오는 학생의 동선 안내는 왜 따로 나누어 적어야 하나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 167
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 학생들이 체육대회 때 자기 반을 응원하는 자리를 가리키는 낱말을 모두 찾으시오",
+          "answerText": "응원 구역",
           "answerMatchMode": "ANY",
-          "answerText": "또 응원 도구를 가져오는 학생은 일반 입장 줄과 다른 통로를 이용해야 한다. 그런데 지금 초고에서는 이 중요한 안내가 중간 문장에 짧게만 들어 있어 눈에 잘 띄지 않는다. 나중에 다듬을 때에는 준비물 이동 학생, 일반 관람 학생, 응원단 대표의 동선을 따로 나누어 더 분명하게 적어 둘 필요가 있다."
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 5, "end": 10},
+            {"paragraphId": "p1", "start": 65, "end": 70},
+            {"paragraphId": "p4", "start": 59, "end": 64},
+            {"paragraphId": "p6", "start": 16, "end": 21}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "비가 올 경우의 예외 상황은 어떻게 정리해야 하나요?",
+          "prompt": "지문에서 동선을 따로 나누어 적어야 할 사람들을 모두 찾으시오",
+          "answerText": "준비물 이동 학생, 일반 관람 학생, 응원단 대표",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 162
-            }
+            {"paragraphId": "p3", "start": 108, "end": 117},
+            {"paragraphId": "p3", "start": 119, "end": 127},
+            {"paragraphId": "p3", "start": 129, "end": 135}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "비가 올 경우 실내 체육관으로 장소가 바뀐다는 예외 상황도 함께 적어야 한다. 다만 현재 초고에서는 야외 응원 구역 설명과 실내 변경 안내가 같은 문단에 붙어 있어 읽는 사람이 순서를 바로 파악하기 어렵다. 상황별 안내를 구분하면 읽는 사람이 필요한 정보를 더 빠르게 찾을 수 있을 것이다."
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "이 홍보문은 어떤 순서와 배치로 다듬어야 한다고 마무리하나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 169
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 작년에 어떤 문제가 있었는지 그 결과에 해당하는 부분을 찾으시오",
+          "answerText": "응원 구역이 헷갈려 이동이 늦어지고 통로가 자주 막혔다",
           "answerMatchMode": "ANY",
-          "answerText": "정리하면 이 초고는 체육대회 응원 구역, 이동 통로, 예외 상황을 함께 안내하려는 홍보문이다. 아직은 구역 설명과 예외 안내의 순서가 덜 정리되어 있고, 강조해야 할 문장이 묻히는 부분도 있다. 수정할 때에는 구역 안내를 먼저, 이동 규칙과 변경 상황을 뒤에 두는 방식으로 더 또렷하게 다듬을 생각이다."
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 65, "end": 95}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 상황별 안내를 구분하면 어떤 효과가 있다고 했는지 그 결과를 찾으시오",
+          "answerText": "읽는 사람이 필요한 정보를 더 빠르게 찾을 수 있을 것이다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 129, "end": 161}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

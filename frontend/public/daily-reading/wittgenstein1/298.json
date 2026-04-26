@@ -571,29 +571,159 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 오늘 축제 부스 배치 토의의 두 안건을 어떻게 제시하는가?",
+          "prompt": "사회자 선우가 처음 제시한 두 가지 안건을 모두 찾으시오.",
+          "answerTexts": [
+            "먹거리 부스를 운동장 쪽으로 옮길지",
+            "체험 부스를 중앙 통로 가까이 둘지"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 142
+              "start": 64,
+              "end": 83
+            },
+            {
+              "paragraphId": "p1",
+              "start": 89,
+              "end": 108
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "사회자 선우: 오늘은 학교 축제 부스 배치를 다시 조정하기 위해 의견을 모으겠습니다. 먼저 안건은 두 가지입니다. 먹거리 부스를 운동장 쪽으로 옮길지, 아니면 체험 부스를 중앙 통로 가까이 둘지입니다. 발언은 순서대로 하고, 서로의 말을 끊지 않겠습니다."
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 먹거리 부스를 바깥쪽으로 옮기자는 의견을 어떤 안전 이유로 설명하는가?",
+          "prompt": "사회자 선우가 제시한 발언 규칙을 모두 찾으시오.",
+          "answerTexts": [
+            "발언은 순서대로 하고",
+            "서로의 말을 끊지 않겠습니다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 113,
+              "end": 124
+            },
+            {
+              "paragraphId": "p1",
+              "start": 126,
+              "end": 141
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "민우가 먹거리 부스를 바깥쪽으로 빼야 한다고 본 이유를 찾으시오.",
+          "answerText": "줄이 길어질 가능성이 크기 때문에",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
+              "start": 113,
+              "end": 131
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "현재 초안에서 먹거리 부스가 어떻게 배치되어 있는지 찾으시오.",
+          "answerText": "먹거리 부스가 중앙 통로에 몰려 있습니다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 17,
+              "end": 39
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "사회자 선우가 서연의 발언을 어떤 제안으로 정리했는지 찾으시오.",
+          "answerText": "어떤 부스가 중앙에 더 적합한지 기준을 다시 세우자는 제안",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 133,
+              "end": 165
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "서연이 나눈 부스 배치 기준 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "대기 줄이 길어지는 부스는 바깥쪽",
+            "짧게 체험하고 이동하는 부스는 중앙 쪽"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 28,
+              "end": 46
+            },
+            {
+              "paragraphId": "p5",
+              "start": 48,
+              "end": 69
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q7",
+          "prompt": "사회자 선우가 배치 기준으로 묶은 세 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "‘대기 시간’",
+            "‘소음’",
+            "‘접근성’"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 148,
+              "end": 155
+            },
+            {
+              "paragraphId": "p5",
+              "start": 157,
+              "end": 161
+            },
+            {
+              "paragraphId": "p5",
+              "start": 163,
               "end": 168
             }
           ],
@@ -601,81 +731,33 @@
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "기록자 지현: 현재 초안에서는 먹거리 부스가 중앙 통로에 몰려 있습니다. 그래서 점심시간에는 이동이 막힐 수 있다는 의견이 나왔습니다.  \n민우: 저는 먹거리 부스를 바깥쪽으로 빼는 게 맞다고 봅니다. 줄이 길어질 가능성이 크기 때문에, 사람 흐름이 가장 많은 중앙 통로를 비워 두는 편이 안전합니다."
+          "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "셋째 문단은 중앙 통로 배치 논의에서 어떤 새로운 기준을 세우자고 제안하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 180
-            }
+          "id": "q8",
+          "prompt": "마지막 정리에서 가장 지지를 받은 배치안을 모두 찾으시오.",
+          "answerTexts": [
+            "먹거리 부스는 운동장 쪽으로 옮기고",
+            "홍보·체험 부스는 중앙 통로 쪽에 두되 무대에서 한 칸 떨어뜨리는 안"
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "서연: 그런데 체험 부스를 바깥쪽에 두면 학생들이 지나가다 참여하기 어렵지 않을까요? 특히 홍보 동아리나 과학 체험 부스는 접근성이 중요합니다.  \n사회자 선우: 지금 서연의 발언은 중앙 통로를 비워야 한다는 의견에 반대하는 게 아니라, 어떤 부스가 중앙에 더 적합한지 기준을 다시 세우자는 제안으로 정리할 수 있겠습니다."
-        },
-        {
-          "id": "q4",
-          "prompt": "넷째 문단은 먹거리 부스와 체험 부스의 배치를 어떤 작년 기록과 함께 구분하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 175
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "민우: 맞아요. 저는 먹거리 부스만 옮기자는 쪽이고, 체험 부스는 오히려 중앙에 있어야 한다고 생각합니다. 체험 부스는 멈춰 서는 시간이 짧고, 설명을 듣고 바로 이동하는 구조라 통로를 완전히 막지는 않을 겁니다.  \n지현: 작년 기록을 보면 먹거리 줄은 길었고, 체험 부스는 대기 줄보다 순환 인원이 많았습니다."
-        },
-        {
-          "id": "q5",
-          "prompt": "다섯째 문단은 배치 기준을 어떤 세 가지 요소로 묶어 정리하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 184
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "서연: 그러면 기준을 두 가지로 나누면 되겠네요. 대기 줄이 길어지는 부스는 바깥쪽, 짧게 체험하고 이동하는 부스는 중앙 쪽. 다만 무대 소음이 큰 구역과 설명이 필요한 부스가 너무 가까워지면 안 됩니다.  \n사회자 선우: 좋은 보완입니다. 지금부터는 배치 기준을 ‘대기 시간’, ‘소음’, ‘접근성’ 세 가지로 묶어 보겠습니다."
-        },
-        {
-          "id": "q6",
-          "prompt": "여섯째 문단은 최종 합의안을 어떤 배치와 추가 조건으로 마무리하는가?",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 240
+              "start": 9,
+              "end": 28
+            },
+            {
+              "paragraphId": "p6",
+              "start": 30,
+              "end": 68
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지현: 정리하면 먹거리 부스는 운동장 쪽으로 옮기고, 홍보·체험 부스는 중앙 통로 쪽에 두되 무대에서 한 칸 떨어뜨리는 안이 가장 지지를 받고 있습니다.  \n민우: 그 안이면 안전 문제와 참여 유도 문제를 함께 반영할 수 있겠습니다.  \n서연: 동의합니다. 다만 최종 도면에는 전기 사용 부스와 물 사용 부스를 따로 표시해 주세요.  \n사회자 선우: 좋습니다. 오늘 합의한 기준과 배치안을 기록해 내일 운영부 회의에 올리겠습니다."
+          "revealOnWrong": true
         }
       ]
     }

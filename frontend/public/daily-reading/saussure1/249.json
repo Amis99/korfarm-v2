@@ -396,19 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "나무가 많은 좁은 길?",
-          "answerText": "숲길",
-          "answerMatchMode": "EXACT",
+          "prompt": "가을이 되어 나무에서 떨어진 잎을 무엇이라고 하는지 본문에서 찾아보세요",
+          "answerText": "낙엽",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 29,
-              "end": 31
-            },
-            {
-              "paragraphId": "p2",
-              "start": 3,
-              "end": 5
+              "start": 66,
+              "end": 68
             }
           ],
           "scoring": {
@@ -420,9 +415,9 @@
         },
         {
           "id": "q2",
-          "prompt": "참나무의 둥근 열매?",
+          "prompt": "가을 숲길에서 글쓴이가 바위 틈에서 발견하고 가장 신났던 열매는 무엇인지 본문에서 찾아보세요",
           "answerText": "도토리",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -444,19 +439,33 @@
         },
         {
           "id": "q3",
-          "prompt": "가을에 붉게 변한 잎?",
-          "answerText": "단풍",
-          "answerMatchMode": "EXACT",
+          "prompt": "단풍이 든 모습을 색깔이 알록달록 섞인 흉내말로 어떻게 표현했는지 본문에서 찾아보세요",
+          "answerText": "울긋불긋",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 20,
-              "end": 22
-            },
+              "start": 15,
+              "end": 19
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "친구들과 정답게 이야기를 나누는 모습을 흉내말로 어떻게 표현했는지 본문에서 찾아보세요",
+          "answerText": "도란도란",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 152,
-              "end": 154
+              "paragraphId": "p1",
+              "start": 139,
+              "end": 143
             }
           ],
           "scoring": {

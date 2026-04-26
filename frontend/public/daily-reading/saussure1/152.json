@@ -474,9 +474,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "물이 사라지는 현상은?",
+          "prompt": "물이 공기 중으로 사라져서 보이지 않게 되는 현상을 무엇이라고 하나요? 지문에서 한 단어로 찾아 보세요",
           "answerText": "증발",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -508,14 +508,14 @@
         },
         {
           "id": "q2",
-          "prompt": "따뜻하게 비추는 무엇인가요?",
-          "answerText": "햇볕",
-          "answerMatchMode": "EXACT",
+          "prompt": "빨래에 남아 있던 물이 따뜻한 열을 받으면 무엇으로 변해 하늘로 날아간다고 했나요? 지문에서 한 단어로 찾아 보세요",
+          "answerText": "기체",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 47,
-              "end": 49
+              "start": 108,
+              "end": 110
             }
           ],
           "scoring": {
@@ -527,14 +527,33 @@
         },
         {
           "id": "q3",
-          "prompt": "지구의 물이 무엇하나요?",
-          "answerText": "순환",
-          "answerMatchMode": "EXACT",
+          "prompt": "바닥에 고인 빗물이 해가 뜨면 금방 사라지는 까닭은 무엇이 높을수록 증발이 더 잘 일어나기 때문인가요? 지문에서 한 단어로 찾아 보세요",
+          "answerText": "온도",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 99,
-              "end": 101
+              "start": 24,
+              "end": 26
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "증발은 지구의 물이 순환하며 생명체들에게 무엇을 공급하는 중요한 역할을 하나요? 지문에서 한 단어로 찾아 보세요",
+          "answerText": "수분",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 115,
+              "end": 117
             }
           ],
           "scoring": {

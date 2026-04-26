@@ -474,35 +474,15 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "질퍽한 바다 근처 땅?",
+          "prompt": "바닷물이 빠져나가면 넓게 펼쳐지는, 신기한 생물들이 살아가는 보금자리는 어디인가요",
           "answerText": "갯벌",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 19,
-              "end": 21
-            },
-            {
-              "paragraphId": "p1",
-              "start": 141,
-              "end": 143
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 99,
-              "end": 101
-            },
-            {
-              "paragraphId": "p2",
-              "start": 133,
-              "end": 135
-            }
+            {"paragraphId": "p1", "start": 19, "end": 21},
+            {"paragraphId": "p1", "start": 141, "end": 143},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 99, "end": 101},
+            {"paragraphId": "p2", "start": 133, "end": 135}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -513,20 +493,11 @@
         },
         {
           "id": "q2",
-          "prompt": "살아 움직이는 것?",
-          "answerText": "생물",
-          "answerMatchMode": "EXACT",
+          "prompt": "구멍 속을 쏙 들어갔다 나오기를 반복한다고 한 갯벌 생물의 이름은 무엇인가요",
+          "answerText": "달랑게",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 28,
-              "end": 30
-            },
-            {
-              "paragraphId": "p2",
-              "start": 136,
-              "end": 138
-            }
+            {"paragraphId": "p1", "start": 65, "end": 68}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -537,15 +508,26 @@
         },
         {
           "id": "q3",
-          "prompt": "푸른 물이 가득한?",
-          "answerText": "바다",
-          "answerMatchMode": "EXACT",
+          "prompt": "옆으로 기어간다고 한, 갯벌에 사는 귀여운 생물의 이름은 무엇인가요",
+          "answerText": "농게",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 149,
-              "end": 151
-            }
+            {"paragraphId": "p1", "start": 83, "end": 85}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "갯벌이 오염된 바닷물을 깨끗하게 만들어 주는 고마운 역할을 무엇이라고 부르나요",
+          "answerText": "정화",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 18, "end": 20}
           ],
           "scoring": {
             "correctDeltaSec": 10,

@@ -474,30 +474,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "놀이터에 가득한?",
-          "answerText": "모래",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 글에서 모래 위에 자신의 발자국을 찍은 소년의 이름을 찾아 보세요",
+          "answerText": "민수",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 16,
-              "end": 18
-            },
-            {
-              "paragraphId": "p1",
-              "start": 121,
-              "end": 123
-            },
-            {
-              "paragraphId": "p2",
-              "start": 14,
-              "end": 16
-            },
-            {
-              "paragraphId": "p2",
-              "start": 82,
-              "end": 84
-            }
+            {"paragraphId": "p2", "start": 41, "end": 43},
+            {"paragraphId": "p2", "start": 78, "end": 80}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -508,45 +490,11 @@
         },
         {
           "id": "q2",
-          "prompt": "발이 남긴 흔적?",
-          "answerText": "발자국",
-          "answerMatchMode": "EXACT",
+          "prompt": "발자국을 지우는 바람의 모습을 무엇처럼 비유하여 표현했는지 글에서 찾아 보세요",
+          "answerText": "지우개",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 26,
-              "end": 29
-            },
-            {
-              "paragraphId": "p1",
-              "start": 66,
-              "end": 69
-            },
-            {
-              "paragraphId": "p1",
-              "start": 104,
-              "end": 107
-            },
-            {
-              "paragraphId": "p2",
-              "start": 20,
-              "end": 23
-            },
-            {
-              "paragraphId": "p2",
-              "start": 51,
-              "end": 54
-            },
-            {
-              "paragraphId": "p2",
-              "start": 92,
-              "end": 95
-            },
-            {
-              "paragraphId": "p2",
-              "start": 140,
-              "end": 143
-            }
+            {"paragraphId": "p2", "start": 45, "end": 48}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -557,25 +505,27 @@
         },
         {
           "id": "q3",
-          "prompt": "뛰어노는 넓은 땅?",
-          "answerText": "운동장",
-          "answerMatchMode": "EXACT",
+          "prompt": "동물 친구들이 모래 위에 남긴 발자국을 비유하여 부른 두 글자 낱말을 찾아 보세요",
+          "answerText": "편지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 12,
-              "end": 15
-            },
-            {
-              "paragraphId": "p1",
-              "start": 117,
-              "end": 120
-            },
-            {
-              "paragraphId": "p2",
-              "start": 123,
-              "end": 126
-            }
+            {"paragraphId": "p1", "start": 139, "end": 141}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "모래 위의 발자국이 조금씩 흐려진 까닭이 된 자연 현상의 이름을 찾아 보세요",
+          "answerText": "바람",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 60, "end": 62}
           ],
           "scoring": {
             "correctDeltaSec": 10,

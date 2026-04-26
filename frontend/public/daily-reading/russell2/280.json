@@ -1036,111 +1036,12 @@
     },
     "confirm": {
       "questions": [
-        {
-          "id": "q1",
-          "prompt": "관형사와 형용사가 쉽게 혼동되는 이유는 무엇인가?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 44
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "관형사와 형용사는 모두 체언 앞에서 관형어 구실을 할 수 있어서 쉽게 혼동된다."
-        },
-        {
-          "id": "q2",
-          "prompt": "관형사는 문장 속에서 무엇이 될 수 없는가?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 70,
-              "end": 73
-            },
-            {
-              "paragraphId": "p3",
-              "start": 131,
-              "end": 134
-            },
-            {
-              "paragraphId": "p4",
-              "start": 46,
-              "end": 49
-            },
-            {
-              "paragraphId": "p6",
-              "start": 95,
-              "end": 98
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "서술어"
-        },
-        {
-          "id": "q3",
-          "prompt": "형용사는 관형어로 쓰일 때 어떤 형태로 나타나는가?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 38,
-              "end": 43
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "'크다',"
-        },
-        {
-          "id": "q4",
-          "prompt": "첫째 기준에서 보는 것은 무엇인가?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 29,
-              "end": 63
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "첫째, 기본형 '-다'를 붙여 서술어로 쓸 수 있는가를 본다."
-        },
-        {
-          "id": "q5",
-          "prompt": "관형사와 형용사의 구별은 무엇보다 어디에 달려 있는가?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 3,
-              "end": 15
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "관형사와 형용사의 구별"
-        }
+        {"id":"q1","prompt":"체언만 꾸미는 독립 품사로, 활용하지 않는 말의 종류를 찾으시오","answerText":"관형사","answerMatchMode":"ANY","answerRanges":[{"paragraphId":"p1","start":0,"end":3},{"paragraphId":"p1","start":49,"end":52},{"paragraphId":"p2","start":0,"end":3},{"paragraphId":"p4","start":0,"end":3},{"paragraphId":"p4","start":123,"end":126},{"paragraphId":"p5","start":43,"end":46},{"paragraphId":"p6","start":3,"end":6},{"paragraphId":"p6","start":88,"end":91}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q2","prompt":"상태나 성질을 서술하는 용언으로, 활용하여 관형형으로도 쓰이는 말의 종류를 찾으시오","answerText":"형용사","answerMatchMode":"ANY","answerRanges":[{"paragraphId":"p1","start":5,"end":8},{"paragraphId":"p1","start":74,"end":77},{"paragraphId":"p2","start":111,"end":114},{"paragraphId":"p3","start":0,"end":3},{"paragraphId":"p3","start":144,"end":147},{"paragraphId":"p4","start":5,"end":8},{"paragraphId":"p4","start":154,"end":157},{"paragraphId":"p5","start":66,"end":69},{"paragraphId":"p6","start":8,"end":11},{"paragraphId":"p6","start":124,"end":127}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q3","prompt":"관형사는 문장 속에서 무엇이 될 수 없는지 찾으시오","answerText":"서술어","answerMatchMode":"ANY","answerRanges":[{"paragraphId":"p2","start":70,"end":73},{"paragraphId":"p3","start":131,"end":134},{"paragraphId":"p4","start":46,"end":49},{"paragraphId":"p6","start":95,"end":98}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q4","prompt":"본문에서 든 관형사와 형용사를 구분하는 두 가지 실제 기준을 모두 찾으시오","answerText":"기본형 '-다'를 붙여 서술어로 쓸 수 있는가, 시제나 다른 어미에 따라 형태가 달라지는가","answerMatchMode":"ALL","answerRanges":[{"paragraphId":"p4","start":33,"end":62},{"paragraphId":"p4","start":68,"end":95}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q5","prompt":"체언이 아니라 동사나 형용사처럼 활용하는 말의 갈래를 가리키는 한 글자 한자어 두 음절을 찾으시오","answerText":"용언","answerMatchMode":"ANY","answerRanges":[{"paragraphId":"p1","start":89,"end":91},{"paragraphId":"p3","start":21,"end":23},{"paragraphId":"p6","start":107,"end":109}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q6","prompt":"관형사와 형용사가 모두 꾸밀 수 있는, 명사·대명사·수사를 통틀어 가리키는 말을 찾으시오","answerText":"체언","answerMatchMode":"ANY","answerRanges":[{"paragraphId":"p1","start":13,"end":15},{"paragraphId":"p1","start":57,"end":59},{"paragraphId":"p2","start":93,"end":95},{"paragraphId":"p3","start":110,"end":112},{"paragraphId":"p6","start":17,"end":19},{"paragraphId":"p6","start":80,"end":82}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true}
       ]
     }
   }

@@ -872,39 +872,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "움직이는 영상을 활용해 만든 예술 작품을 무엇이라고 하나요?",
-          "answerText": "미디어아트",
+          "prompt": "텔레비전이나 컴퓨터 같은 것을 가리키는 단어를 지문에서 찾으시오.",
+          "answerText": "매체",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 46,
-              "end": 51
-            },
-            {
-              "paragraphId": "p1",
-              "start": 60,
-              "end": 65
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p3",
-              "start": 4,
-              "end": 9
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p4",
-              "start": 111,
-              "end": 116
+              "start": 81,
+              "end": 83
             }
           ],
           "scoring": {
@@ -915,7 +890,25 @@
         },
         {
           "id": "q2",
-          "prompt": "사람의 움직임을 인식해 영상이 변하게 하는 장치는 무엇인가요?",
+          "prompt": "미디어아트의 특징으로 관람객이 할 수 있다고 한 일을 나타낸 구절을 찾으시오.",
+          "answerText": "관람객이 작품에 직접 참여할 수 있는",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 7,
+              "end": 27
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "사람의 움직임을 인식하여 화면 속 영상이 변하게 만드는 장치를 찾으시오.",
           "answerText": "센서",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -932,8 +925,8 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "건물 외벽에 영상을 비추는 작품을 무엇이라고 하나요?",
+          "id": "q4",
+          "prompt": "건물 외벽에 영상을 비추는 대표적인 예를 찾으시오.",
           "answerText": "미디어 파사드",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -950,33 +943,23 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "앞으로 미디어아트에 더해질 수 있다고 한 기술 가운데 하나는 무엇인가요?",
-          "answerText": "가상 현실",
-          "answerMatchMode": "ANY",
+          "id": "q5",
+          "prompt": "미디어아트에 더해질 수 있다고 한 기술 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "가상 현실",
+            "인공지능"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 44,
               "end": 49
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q5",
-          "prompt": "미디어아트가 사람들에게 선물한다고 한 것 가운데 하나는 무엇인가요?",
-          "answerText": "즐거움",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+            },
             {
               "paragraphId": "p4",
-              "start": 134,
-              "end": 137
+              "start": 52,
+              "end": 56
             }
           ],
           "scoring": {

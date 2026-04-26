@@ -706,12 +706,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 이 대화가 어떤 점검 과제나 조정 문제에서 시작되는가?",
+          "prompt": "우천 예보 때문에 먼저 열지 정해야 하는 대상을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 93
+              "start": 38,
+              "end": 54
             }
           ],
           "scoring": {
@@ -720,16 +720,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생회장: 내일 봉사 부스가 세 시에 시작인데, 우천 예보가 있어서 체험 부스를 먼저 열어야 할지 다시 정해야 해. 과학 동아리 쪽에서 순서를 바꾸자고 연락이 왔거든."
+          "answerText": "체험 부스를 먼저 열어야 할지"
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 첫 번째 사례를 통해 어떤 문제점이나 조정 필요를 짚는가?",
+          "prompt": "순서를 바꾸자고 연락한 쪽을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 108
+              "paragraphId": "p1",
+              "start": 65,
+              "end": 73
             }
           ],
           "scoring": {
@@ -738,16 +738,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "부회장: 아까 과학 동아리 대표가 온 이유가 그거였구나. 야외 부스를 뒤로 미루면 전기 연결은 괜찮은데, 반대로 실내 부스를 먼저 열면 대기 줄이 한꺼번에 몰릴 수 있다는 걱정도 같이 하더라고."
+          "answerText": "과학 동아리 쪽"
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 다른 의견이나 응답을 통해 어떤 기준과 보완점을 더하는가?",
+          "prompt": "야외 부스를 뒤로 미룰 때의 장점과 실내 부스를 먼저 열 때의 걱정을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 117
+              "paragraphId": "p2",
+              "start": 46,
+              "end": 57
+            },
+            {
+              "paragraphId": "p2",
+              "start": 76,
+              "end": 98
             }
           ],
           "scoring": {
@@ -755,17 +760,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학생회장: 맞아. 그래서 나는 순서를 완전히 뒤집기보다는, 개막 직후 삼십 분만 실내 체험을 먼저 진행하고 날씨를 보면서 야외 부스를 여는 쪽이 현실적이라고 봐. 과학 동아리도 그 정도 조정이면 수용 가능하대."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "전기 연결은 괜찮은데",
+            "대기 줄이 한꺼번에 몰릴 수 있다는 걱정"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 앞선 흐름 속에서 무엇을 다시 조정하거나 비교하게 만드는가?",
+          "prompt": "순서를 완전히 뒤집지 않고 제한적으로 조정하려는 시간을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 113
+              "paragraphId": "p3",
+              "start": 33,
+              "end": 44
             }
           ],
           "scoring": {
@@ -774,16 +782,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "총무: 그러면 안내 멘트도 바꿔야 해. 지금 포스터에는 야외 부스부터 차례대로 돈다고 적혀 있어서, 순서가 달라지면 현장에서 혼란이 생길 수 있어. 특히 봉사 확인 도장 받는 위치도 같이 공지해야 하고."
+          "answerText": "개막 직후 삼십 분만"
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 논의를 모아 어떤 해결 방향이나 기준을 정리하는가?",
+          "prompt": "부회장이 나눈 역할 세 가지를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 125
+              "start": 8,
+              "end": 26
+            },
+            {
+              "paragraphId": "p5",
+              "start": 28,
+              "end": 53
+            },
+            {
+              "paragraphId": "p5",
+              "start": 59,
+              "end": 124
             }
           ],
           "scoring": {
@@ -791,17 +809,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "부회장: 그럼 내가 방송부에 수정 대본을 보내고, 총무는 도장 부스 위치 안내판만 새로 붙여 줘. 회장, 너는 과학 동아리 대표한테 우리가 완전히 취소하는 게 아니라 기상 상황에 맞춰 순서를 조정하는 거라고 분명히 말해 줘."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "내가 방송부에 수정 대본을 보내고",
+            "총무는 도장 부스 위치 안내판만 새로 붙여 줘",
+            "너는 과학 동아리 대표한테 우리가 완전히 취소하는 게 아니라 기상 상황에 맞춰 순서를 조정하는 거라고 분명히 말해 줘"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 이 대화를 어떤 실천 계획이나 최종 판단으로 마무리하는가?",
+          "prompt": "순서가 달라질 때 현장에서 생길 수 있는 결과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 93
+              "paragraphId": "p4",
+              "start": 65,
+              "end": 81
             }
           ],
           "scoring": {
@@ -810,7 +832,57 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생회장: 알겠어. 공지는 '실내 체험 선운영, 야외 부스 순차 개방'으로 정리할게. 그리고 내일 시작 십 분 전에 다시 모여서 비가 오면 바로 수정 방송을 내보내자."
+          "answerText": "현장에서 혼란이 생길 수 있어"
+        },
+        {
+          "id": "q7",
+          "prompt": "학생회장이 최종 공지로 정리하겠다고 한 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 15,
+              "end": 39
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "'실내 체험 선운영, 야외 부스 순차 개방'"
+        },
+        {
+          "id": "q8",
+          "prompt": "내일 시작 직전의 대응에서 시간, 조건, 조치를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 52,
+              "end": 71
+            },
+            {
+              "paragraphId": "p6",
+              "start": 72,
+              "end": 77
+            },
+            {
+              "paragraphId": "p6",
+              "start": 78,
+              "end": 92
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "내일 시작 십 분 전에 다시 모여서",
+            "비가 오면",
+            "바로 수정 방송을 내보내자"
+          ]
         }
       ]
     }

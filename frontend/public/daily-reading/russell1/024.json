@@ -1191,93 +1191,88 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫 문단은 무엇을 소개하나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 194
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '도르래'를 모두 찾으시오.",
+          "answerText": "도르래",
           "answerMatchMode": "ANY",
-          "answerText": "도르래는 줄과 바퀴를 이용해 무거운 물체를 더 쉽게 들어 올리도록 돕는 장치다. 겉보기에는 단순한 바퀴 하나처럼 보이지만, 힘의 방향을 바꾸거나 필요한 힘의 크기를 줄이는 데 큰 역할을 한다. 그래서 도르래는 기계공학에서 힘을 전달하는 기본 장치로 자주 다루어진다. 크레인이나 엘리베이터처럼 큰 기계 속에도 도르래의 원리가 숨어 있는 경우가 많다."
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 0, "end": 3},
+            {"paragraphId": "p1", "start": 112, "end": 115},
+            {"paragraphId": "p1", "start": 172, "end": 175},
+            {"paragraphId": "p2", "start": 7, "end": 10},
+            {"paragraphId": "p2", "start": 15, "end": 18},
+            {"paragraphId": "p2", "start": 25, "end": 28},
+            {"paragraphId": "p2", "start": 97, "end": 100},
+            {"paragraphId": "p3", "start": 6, "end": 9},
+            {"paragraphId": "p3", "start": 15, "end": 18},
+            {"paragraphId": "p3", "start": 143, "end": 146},
+            {"paragraphId": "p4", "start": 12, "end": 15},
+            {"paragraphId": "p4", "start": 20, "end": 23},
+            {"paragraphId": "p4", "start": 163, "end": 166},
+            {"paragraphId": "p5", "start": 3, "end": 6},
+            {"paragraphId": "p5", "start": 57, "end": 60},
+            {"paragraphId": "p5", "start": 65, "end": 68},
+            {"paragraphId": "p5", "start": 122, "end": 125},
+            {"paragraphId": "p5", "start": 191, "end": 194},
+            {"paragraphId": "p5", "start": 245, "end": 248}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 무엇을 설명하나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 193
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '마찰'을 모두 찾으시오.",
+          "answerText": "마찰",
           "answerMatchMode": "ANY",
-          "answerText": "가장 단순한 도르래는 고정 도르래이다. 고정 도르래는 높은 곳에 바퀴를 매달아 두고 줄을 걸어 사용한다. 이때 사람은 아래로 줄을 당기지만, 물체는 위로 올라간다. 즉 고정 도르래는 힘의 방향을 바꾸어 주는 장치라고 볼 수 있다. 무게 자체가 가벼워지는 것은 아니지만, 사람이 힘을 쓰기 더 편한 방향으로 바꿀 수 있다는 점에서 큰 장점이 있다."
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 145, "end": 147},
+            {"paragraphId": "p4", "start": 193, "end": 195}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 무엇을 알려 주나요?",
+          "prompt": "도르래의 정의가 드러난 문장을 찾으시오.",
+          "answerText": "도르래는 줄과 바퀴를 이용해 무거운 물체를 더 쉽게 들어 올리도록 돕는 장치다",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 185
-            }
+            {"paragraphId": "p1", "start": 0, "end": 43}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "반면 움직 도르래는 물체에 도르래가 함께 매달려 올라가는 방식이다. 이 경우에는 줄의 여러 부분이 물체의 무게를 나누어 받기 때문에, 한 사람이 당겨야 하는 힘의 크기가 더 줄어든다. 대신 줄을 더 길게 당겨야 같은 높이만큼 물체가 올라간다. 따라서 움직 도르래는 힘을 줄이는 대신 움직이는 거리를 늘리는 장치라고 이해할 수 있다."
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 무엇을 강조하나요?",
+          "prompt": "고정 도르래의 기능이 정의된 문장을 찾으시오.",
+          "answerText": "고정 도르래는 힘의 방향을 바꾸어 주는 장치라고 볼 수 있다",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 208
-            }
+            {"paragraphId": "p2", "start": 94, "end": 127}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "실제 기계에서는 고정 도르래와 움직 도르래를 함께 쓰는 경우가 많다. 이런 조합을 이용하면 힘의 방향을 바꾸면서도 필요한 힘을 더 줄일 수 있다. 다만 힘이 줄어든다고 해서 일을 하지 않아도 되는 것은 아니다. 줄을 더 많이 당겨야 하거나 장치 자체의 무게와 마찰을 고려해야 하기 때문이다. 도르래를 이해할 때는 힘의 크기만 보지 말고, 거리와 마찰까지 함께 살펴야 한다."
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 무엇으로 정리되나요?",
+          "prompt": "움직 도르래의 기능이 정의된 문장을 찾으시오.",
+          "answerText": "움직 도르래는 힘을 줄이는 대신 움직이는 거리를 늘리는 장치라고 이해할 수 있다",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 273
-            }
+            {"paragraphId": "p3", "start": 140, "end": 184}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "결국 도르래는 줄과 바퀴를 이용해 힘의 방향을 바꾸거나 힘의 크기를 줄이도록 돕는 기계 장치다. 고정 도르래와 움직 도르래의 차이를 알면 왜 같은 무게의 물체도 더 쉽게 들어 올릴 수 있는지 이해하기 쉬워진다. 그래서 도르래는 기계공학에서 힘과 일의 관계를 설명하는 대표적인 단순 기계 개념이라고 할 수 있다. 또한 실제 장치를 볼 때 어떤 도르래가 어떻게 묶였는지 살피면 기계가 힘을 줄이는 원리도 함께 읽어 낼 수 있다. 이런 까닭에 도르래는 단순하지만 매우 실용적인 장치로 여겨진다."
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "도르래의 원리가 숨어 있는 사례를 든 부분을 찾으시오.",
+          "answerText": "크레인이나 엘리베이터",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 149, "end": 160}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

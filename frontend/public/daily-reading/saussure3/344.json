@@ -850,9 +850,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "계단은 ( ) 줄을 서서 가요.",
+          "prompt": "계단을 올라갈 때 어떻게 줄을 서야 하는지 지문에서 찾으시오.",
           "answerText": "차례차례",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -869,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "친구를 빨리 ( )하지 않아요.",
-          "answerText": "재촉",
-          "answerMatchMode": "EXACT",
+          "prompt": "미끄럼틀 위에 서서 장난을 치면 어떤 결과가 되는지 지문에서 찾으시오.",
+          "answerText": "무척 위험합니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 72,
-              "end": 74
+              "start": 99,
+              "end": 107
             }
           ],
           "scoring": {
@@ -888,19 +888,41 @@
         },
         {
           "id": "q3",
-          "prompt": "안전 ( )을 지키는 어린이.",
-          "answerText": "수칙",
-          "answerMatchMode": "EXACT",
+          "prompt": "출발하기 전에 무엇을 확인해야 하는지 지문에서 찾으시오.",
+          "answerText": "아래에 친구가 있는지",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 63
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "안전 수칙을 지켰을 때 이어진 좋은 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "즐거운 놀이가 계속됩니다",
+            "친구들과 더 신나게 놀았음"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 112,
-              "end": 114
+              "start": 120,
+              "end": 133
             },
             {
               "paragraphId": "p3",
-              "start": 114,
-              "end": 116
+              "start": 10,
+              "end": 24
             }
           ],
           "scoring": {

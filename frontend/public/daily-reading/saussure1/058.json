@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "반짝이는 ( ) 스티커.",
-          "answerText": "별 모양",
-          "answerMatchMode": "EXACT",
+          "prompt": "아기 고양이가 가리킨 곳에 있던 물건을 지문에서 찾아 보세요.",
+          "answerText": "낡은 나무 상자",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 43,
-              "end": 47
+              "start": 15,
+              "end": 23
             }
           ],
           "scoring": {
@@ -571,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "시원한 ( )기가 솟습니다.",
-          "answerText": "물줄",
-          "answerMatchMode": "EXACT",
+          "prompt": "상자를 열어보니 가득 들어 있던 반짝이는 물건을 지문에서 찾아 보세요.",
+          "answerText": "별 모양 스티커",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 107,
-              "end": 109
+              "paragraphId": "p1",
+              "start": 43,
+              "end": 51
             }
           ],
           "scoring": {
@@ -590,13 +590,32 @@
         },
         {
           "id": "q3",
-          "prompt": "( )이 보물보다 소중해요.",
-          "answerText": "우정",
-          "answerMatchMode": "EXACT",
+          "prompt": "고생한 탐정들을 위해 깜짝 선물을 준비해 주신 분을 지문에서 찾아 보세요.",
+          "answerText": "선생님",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 71,
+              "end": 74
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "보물보다 더 소중하다는 것을 깨달은 대상을 지문에서 찾아 보세요.",
+          "answerText": "친구들과의 우정",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 125,
+              "start": 119,
               "end": 127
             }
           ],

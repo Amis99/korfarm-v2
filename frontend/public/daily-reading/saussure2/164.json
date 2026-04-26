@@ -562,14 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "미처 찾아내지 못했거나 아직 알려지지 않은 것을 찾아내는 일은?",
-          "answerText": "발견",
+          "prompt": "추운 겨울에 찰리의 가족에게 부족했던 것을 지문에서 찾으시오.",
+          "answerText": "먹을 것",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 77,
-              "end": 79
+              "start": 20,
+              "end": 24
             }
           ],
           "scoring": {
@@ -580,14 +580,50 @@
         },
         {
           "id": "q2",
-          "prompt": "갑자기 가볍고 높게 뛰어오르는 모양을 나타내는 말은?",
-          "answerText": "펄쩍",
+          "prompt": "찰리가 차가운 눈 속에서 발견한 반짝이는 물건을 지문에서 찾으시오.",
+          "answerText": "반짝이는 동전",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 68,
+              "end": 75
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "찰리가 종이 포장지를 벗기자 그 안에서 나온 눈부신 물건을 지문에서 찾으시오.",
+          "answerText": "눈부신 황금 티켓",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 64,
+              "end": 73
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "찰리가 꿈에 그리던 곳으로, 드디어 내일 들어가게 되는 곳을 지문에서 찾으시오.",
+          "answerText": "초콜릿 공장",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 78,
-              "end": 80
+              "start": 110,
+              "end": 116
             }
           ],
           "scoring": {

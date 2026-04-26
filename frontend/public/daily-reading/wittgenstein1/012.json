@@ -570,114 +570,150 @@
     "confirm": {
       "questions": [
         {
-          "id": "q1",
-          "prompt": "제목은 이 글이 무엇을 제안하려는 글인지 보여 주는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 28
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "제목: 학교 아침 독서 시간 확대에 대한 제안 초고"
+                "id": "q1",
+                "prompt": "1문단의 제목을 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p1",
+                                "start": 4,
+                                "end": 28
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "학교 아침 독서 시간 확대에 대한 제안 초고"
         },
         {
-          "id": "q2",
-          "prompt": "둘째 문단은 주장을 설득력 있게 만들기 위해 어떤 점을 보완해야 한다고 보는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 283
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "자료 1에 따르면 우리 학교 학생 설문에서 아침 독서 시간이 더 길어졌으면 좋겠다고 답한 학생이 절반을 넘었다고 한다. 또 자료 2에서는 짧은 독서 습관이 집중력 향상과도 관련이 있다고 소개하고 있다. 그래서 나는 아침 독서 시간을 지금보다 늘리는 방안을 제안하는 글을 써 보려고 했다. 그런데 두 자료를 그냥 이어 붙이듯 소개하다 보니, 어느 자료가 여론을 보여 주고 어느 자료가 효과를 설명하는지 구분이 분명하지 않은 상태가 되었다. 자료의 성격이 다른데도 한 덩어리처럼 적은 탓에 논지가 퍼져 보인다."
+                "id": "q2",
+                "prompt": "2문단에서 자료 1이 보여 주는 학생 설문 결과를 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p2",
+                                "start": 24,
+                                "end": 61
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "아침 독서 시간이 더 길어졌으면 좋겠다고 답한 학생이 절반을 넘었다"
         },
         {
-          "id": "q3",
-          "prompt": "셋째 문단은 주장을 설득력 있게 만들기 위해 어떤 점을 보완해야 한다고 보는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 235
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "초고의 첫 부분에서는 학생들이 실제로 얼마나 원하고 있는지를 먼저 보여 주려고 했다. 하지만 그다음 문단에서 바로 독서의 일반적 장점으로 넘어가 버려, 학교 현실에 대한 문제 제기와 자료 해석이 충분히 연결되지 못했다. 설문 결과를 제시했다면 왜 그런 응답이 나왔는지 학교의 현재 운영 방식과 연결해 설명해야 하는데, 지금 글은 자료를 옮겨 적는 데서 그치는 부분이 있다. 자료 통합이라기보다 자료 나열에 가까운 셈이다."
+                "id": "q3",
+                "prompt": "2문단에서 자료 2가 소개한 독서 습관의 효과를 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p2",
+                                "start": 77,
+                                "end": 102
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "짧은 독서 습관이 집중력 향상과도 관련이 있다"
         },
         {
-          "id": "q4",
-          "prompt": "넷째 문단은 주장을 설득력 있게 만들기 위해 어떤 점을 보완해야 한다고 보는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 229
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "또 자료 2는 독서 시간이 길수록 무조건 성적이 오른다고 단정하는 자료가 아니라, 규칙적인 읽기 습관이 집중에 도움을 줄 수 있다는 방향을 제시한다. 그런데 초고에서는 그 차이를 충분히 구분하지 않고, 마치 독서 시간만 늘리면 바로 성적 향상으로 이어지는 것처럼 적어 두었다. 이렇게 쓰면 자료의 의미를 과장한 인상을 줄 수 있다. 자료에서 말하는 범위와 내가 주장하고 싶은 범위를 맞추는 작업이 더 필요하다."
+                "id": "q4",
+                "prompt": "2문단에서 자료를 단순히 이어 붙였을 때 생긴 문제의 원인을 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p2",
+                                "start": 245,
+                                "end": 271
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "자료의 성격이 다른데도 한 덩어리처럼 적은 탓에"
         },
         {
-          "id": "q5",
-          "prompt": "다섯째 문단은 '아침 독서 시간 확대 제안 초고'와 관련해 어떤 근거로 보강해야 한다고 보는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 243
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "해결 방안을 제시하는 부분도 조금 더 다듬어야 한다. 지금은 단순히 시간을 늘리자고만 적혀 있어서, 언제 얼마나 늘릴 것인지와 수업 시작에 어떤 영향이 있는지가 빠져 있다. 자료 1이 학생 의견을 보여 준다면, 자료 2는 독서 활동이 의미 있으려면 짧더라도 꾸준해야 한다는 점을 강조하는 쪽으로 활용할 수 있을 것이다. 그렇게 하면 '길게 늘리자'는 주장보다 '현재 시간에 몇 분을 더해 꾸준히 운영하자'는 제안으로 구체화할 수 있다."
+                "id": "q5",
+                "prompt": "3문단에서 초고가 충분히 연결하지 못했다고 지적한 두 요소를 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p3",
+                                "start": 85,
+                                "end": 121
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "학교 현실에 대한 문제 제기와 자료 해석이 충분히 연결되지 못했다"
         },
         {
-          "id": "q6",
-          "prompt": "여섯째 문단은 글의 독자와 요청을 어떻게 정리해야 한다고 말하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 359
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "따라서 이 초고는 자료 1을 학교 현실과 학생 요구를 보여 주는 근거로, 자료 2를 독서 시간 확대의 교육적 의미를 보충하는 근거로 역할을 나누어 다시 써야 한다. 그래야 서로 다른 성격의 자료가 한 주장 안에서 자연스럽게 연결된다. 지금처럼 두 자료를 한 문단에 섞어 두면 무엇이 사실 확인이고 무엇이 해석인지 흐려질 수 있다. 자료를 통합한다는 것은 여러 자료를 많이 넣는 일이 아니라, 각각의 자료가 어떤 자리에 놓여야 하는지 분명하게 정리하는 일이라는 점을 드러내야 한다. 자료마다 맡을 기능을 먼저 정해야 글의 순서도 안정된다. 그래야 독자가 자료의 관계를 한 번에 이해할 수 있다. 초고의 개요는 그 배치를 미리 보여 주어야 한다."
+                "id": "q6",
+                "prompt": "4문단에서 자료 2가 제시하는 방향을 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p4",
+                                "start": 46,
+                                "end": 76
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "규칙적인 읽기 습관이 집중에 도움을 줄 수 있다는 방향"
+        },
+        {
+                "id": "q7",
+                "prompt": "5문단에서 해결 방안에 빠져 있다고 지적한 내용을 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p5",
+                                "start": 56,
+                                "end": 95
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "언제 얼마나 늘릴 것인지와 수업 시작에 어떤 영향이 있는지가 빠져 있다"
+        },
+        {
+                "id": "q8",
+                "prompt": "6문단에서 글의 순서를 안정시키기 위해 먼저 해야 할 일을 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p6",
+                                "start": 269,
+                                "end": 299
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "자료마다 맡을 기능을 먼저 정해야 글의 순서도 안정된다"
         }
-      ]
+]
     }
   }
 }

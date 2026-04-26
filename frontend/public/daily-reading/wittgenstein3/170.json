@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "prompt": "1연에서 뜨는 대상으로 제시된 것을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 58
+              "end": 8
             }
           ],
           "scoring": {
@@ -585,16 +585,34 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "누룩 한 덩이가\n뜨는 까닭을 알겠느냐\n지 혼자 무력함에 부대끼고 부대끼다가\n어디 한군데로 나자빠져 있다가"
+          "answerText": "누룩 한 덩이가"
         },
         {
           "id": "q2",
-          "prompt": "2연은 그 정서를 어떤 이미지나 흐름으로 이어 가는가?",
+          "prompt": "무력함 속에서 같은 말을 반복해 고통을 드러낸 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 31,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "부대끼고 부대끼다가"
+        },
+        {
+          "id": "q3",
+          "prompt": "누룩이 만난 대상으로 제시된 자연물을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 30
+              "end": 6
             }
           ],
           "scoring": {
@@ -603,34 +621,31 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "알맞은 바람 만나\n살며시 더운 가슴\n그 사랑을 알겠느냐"
-        },
-        {
-          "id": "q3",
-          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 56
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "오가는 발길들 여기 멈추어\n밤새도록 우는 울음을 들었느냐\n지 혼자서 찾는 길이\n여럿이서도 찾는 길임을"
+          "answerText": "알맞은 바람"
         },
         {
           "id": "q4",
-          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
+          "prompt": "상대에게 깨달음을 요구하듯 반복되는 의문형 표현을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 44
+              "paragraphId": "p1",
+              "start": 16,
+              "end": 20
+            },
+            {
+              "paragraphId": "p2",
+              "start": 26,
+              "end": 30
+            },
+            {
+              "paragraphId": "p6",
+              "start": 44,
+              "end": 48
+            },
+            {
+              "paragraphId": "p6",
+              "start": 78,
+              "end": 82
             }
           ],
           "scoring": {
@@ -639,16 +654,60 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "엄동설한 칼별은 알고 있나니\n무르팍 으깨져도 꽃피는 가슴\n그 가슴 울림 들었느냐"
+          "answerText": "알겠느냐"
         },
         {
           "id": "q5",
-          "prompt": "5연은 앞선 흐름에 어떤 긴장이나 전환을 더하는가?",
+          "prompt": "3연에서 혼자 찾는 길과 여럿이서 찾는 길을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 32,
+              "end": 42
+            },
+            {
+              "paragraphId": "p3",
+              "start": 44,
+              "end": 54
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "지 혼자서 찾는 길",
+            "여럿이서도 찾는 길"
+          ]
+        },
+        {
+          "id": "q6",
+          "prompt": "4연에서 무릎을 가리키는 시어를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 16,
+              "end": 19
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "무르팍"
+        },
+        {
+          "id": "q7",
+          "prompt": "삭고 부서지는 과정 앞에 쌓인 것으로 제시된 것을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 0,
-              "end": 30
+              "end": 12
             }
           ],
           "scoring": {
@@ -657,16 +716,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "속 깊이 쌓이는 기다림\n삭고 삭아 부서지는 일 보았느냐"
+          "answerText": "속 깊이 쌓이는 기다림"
         },
         {
-          "id": "q6",
-          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
+          "id": "q8",
+          "prompt": "죽음이 되는 것으로 제시된 세 가지를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 106
+              "start": 49,
+              "end": 50
+            },
+            {
+              "paragraphId": "p6",
+              "start": 55,
+              "end": 57
+            },
+            {
+              "paragraphId": "p6",
+              "start": 62,
+              "end": 69
             }
           ],
           "scoring": {
@@ -674,8 +743,12 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지가 죽어 썩어 문드러져\n우리 고향 좋은 물 만나면\n덩달아서 함께 끓는 마음을 알겠느냐\n춤도 되고 기쁨도 되고\n해 솟는 얼굴도 되는 죽음을 알겠느냐\n아 지금 감춰둔 누룩 뜨나니\n냄새 퍼지나니"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "춤",
+            "기쁨",
+            "해 솟는 얼굴"
+          ]
         }
       ]
     }

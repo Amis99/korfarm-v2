@@ -554,66 +554,76 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "식사 예절은 서로를 배려하기 위해 지켜야 하는 아름다운 이것이에요. 이것은 무엇일까요?",
-          "answerText": "약속",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 50,
-              "end": 52
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 5,
-            "wrongDeltaSec": -2,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
+        "prompt": "식사 예절을 지켜야 하는 까닭을 지문에서 찾으시오.",
+        "answerText": "서로를 배려하기 위해",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p1",
+            "start": 26,
+            "end": 37
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
         },
-        {
-          "id": "q2",
-          "prompt": "숟가락이나 이것이 그릇에 부딪혀서 시끄러운 소리가 나지 않게 주의해야 해요. 이것은 무엇일까요?",
-          "answerText": "젓가락",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 48,
-              "end": 51
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 5,
-            "wrongDeltaSec": -2,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
+        "revealOnWrong": true
+      },
+      {
+        "id": "q2",
+        "prompt": "음식을 먹기 전에 해야 할 일을 지문에서 찾으시오.",
+        "answerText": "손을 깨끗하게 씻고",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p1",
+            "start": 68,
+            "end": 78
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
         },
-        {
-          "id": "q3",
-          "prompt": "다 먹은 빈 그릇을 모아 두고, \"잘 먹었습니다\"라고 씩씩하게 이것을 해야 한답니다. 이것은 무엇일까요?",
-          "answerText": "인사",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 131,
-              "end": 133
-            },
-            {
-              "paragraphId": "p3",
-              "start": 96,
-              "end": 98
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 5,
-            "wrongDeltaSec": -2,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        }
+        "revealOnWrong": true
+      },
+      {
+        "id": "q3",
+        "prompt": "밥을 먹을 때 입에 음식이 있으면 조심해야 할 일을 지문에서 찾으시오.",
+        "answerText": "음식을 입에 넣고 큰 소리로 말하지 않도록",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p2",
+            "start": 9,
+            "end": 32
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
+        },
+        "revealOnWrong": true
+      },
+      {
+        "id": "q4",
+        "prompt": "식사를 다 마친 후 바른 예절로 해야 할 기다림을 지문에서 찾으시오.",
+        "answerText": "어른들이 먼저 자리에서 일어날 때까지 기다리는 것",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p3",
+            "start": 13,
+            "end": 40
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
+        },
+        "revealOnWrong": true
+      }
       ]
     }
   }

@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리가 살고 있는 마을 주변의 산, 들, 바다와 같은 자연적인 여건을 무엇이라고 하나요?",
+          "prompt": "고장의 자연적인 여건을 뜻하는 말을 찾으시오.",
           "answerText": "자연환경",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -586,14 +586,22 @@
         },
         {
           "id": "q2",
-          "prompt": "땅이 평평한 넓은 들 지역에 사는 사람들이 기계를 사용하여 주로 짓는 농사는?",
-          "answerText": "벼농사",
-          "answerMatchMode": "EXACT",
+          "prompt": "산이 많은 곳에서 사람들이 하는 일을 모두 찾으시오.",
+          "answerTexts": [
+            "계단식 밭을 만들어",
+            "산나물을 캡니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 110,
-              "end": 113
+              "start": 55,
+              "end": 65
+            },
+            {
+              "paragraphId": "p1",
+              "start": 77,
+              "end": 85
             }
           ],
           "scoring": {
@@ -605,14 +613,55 @@
         },
         {
           "id": "q3",
-          "prompt": "바다 지역 사람들이 배를 타고 나가서 그물이나 낚시로 얻는 해산물은 무엇인가요?",
-          "answerText": "물고기",
-          "answerMatchMode": "EXACT",
+          "prompt": "바다와 가까운 곳에 사는 사람들이 자연의 선물을 이용하는 일을 모두 찾으시오.",
+          "answerTexts": [
+            "물고기를 잡으며",
+            "조개를 캐거나",
+            "소금을 만들며"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 28,
-              "end": 31
+              "end": 36
+            },
+            {
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 59
+            },
+            {
+              "paragraphId": "p2",
+              "start": 65,
+              "end": 72
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "자연이 병들면 생기는 일과 그래서 중요한 일을 모두 찾으시오.",
+          "answerTexts": [
+            "사람들의 생활도 힘들어지기",
+            "환경 보호를 실천하는 것"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 53,
+              "end": 67
+            },
+            {
+              "paragraphId": "p3",
+              "start": 72,
+              "end": 85
             }
           ],
           "scoring": {

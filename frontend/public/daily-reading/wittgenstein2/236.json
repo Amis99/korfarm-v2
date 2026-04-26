@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "곧바로 판단해 정하기 어렵다는 뜻으로 쓰인 어구를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 157
+              "start": 147,
+              "end": 156
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생회가 시험 기간에 자습 공간을 늘리자는 의견을 받으면서, 도서관을 밤까지 여는 방안과 빈 교실을 자습실로 돌리는 방안을 비교해 보려 한다. 두 방안은 모두 공부할 자리를 늘린다는 점에서는 같지만, 이용 방식과 필요한 준비가 달라서 어느 쪽이 더 적절한지 바로 단정하기는 어렵다."
+          "answerText": "단정하기는 어렵다"
         },
         {
           "id": "q2",
-          "prompt": "2문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "도서관 야간 개방안의 장점을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 141
+              "start": 16,
+              "end": 23
+            },
+            {
+              "paragraphId": "p2",
+              "start": 25,
+              "end": 31
             }
           ],
           "scoring": {
@@ -602,17 +607,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "도서관 야간 개방안의 장점은 조용한 분위기와 자료 접근성이다. 참고서를 바로 꺼내 볼 수 있고, 컴퓨터와 검색대도 같이 쓸 수 있어서 과제와 시험 공부를 한곳에서 해결하기 쉽다. 또 기존에 학습 공간으로 쓰이던 장소라서 학생들이 규칙을 이해하기도 쉽다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "조용한 분위기",
+            "자료 접근성"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "빈 교실 자습실의 장점을 설명한 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 149
+              "start": 14,
+              "end": 33
             }
           ],
           "scoring": {
@@ -621,16 +629,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "반대로 빈 교실 자습실은 이동이 편하고 인원을 분산하기 좋다. 각 층에서 가까운 교실을 쓰면 쉬는 시간마다 짐을 들고 먼 곳까지 가지 않아도 되고, 학급별이나 학년별로 나누어 쓰는 방법도 가능하다. 그래서 운영만 잘하면 더 많은 학생이 빠르게 자리를 확보할 수 있다."
+          "answerText": "이동이 편하고 인원을 분산하기 좋다"
         },
         {
           "id": "q4",
-          "prompt": "4문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "도서관을 밤까지 열면 커지는 문제를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 159
+              "start": 16,
+              "end": 25
+            },
+            {
+              "paragraphId": "p4",
+              "start": 27,
+              "end": 35
             }
           ],
           "scoring": {
@@ -638,17 +651,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "하지만 도서관을 밤까지 열면 사서 교사의 근무와 출입 관리 문제가 커진다. 자습이 길어질수록 냉난방비도 더 들고, 대출 반납 시간을 어떻게 정할지도 다시 정해야 한다. 빈 교실 자습실도 쉬운 것은 아니어서, 감독이 약하면 대화가 많아지고 책상 정리나 쓰레기 문제도 금방 생길 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "사서 교사의 근무",
+            "출입 관리 문제"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "감독이 약하면 생길 수 있는 결과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 199
+              "paragraphId": "p4",
+              "start": 124,
+              "end": 158
             }
           ],
           "scoring": {
@@ -657,16 +673,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "개인적으로는 도서관이 더 공부다운 분위기를 만든다는 점에서 우선 검토할 만하다고 본다. 그런데 좌석 수만 생각하면 빈 교실 자습실이 더 현실적이기도 해서, 어느 한쪽만 택하기보다 요일마다 달리 운영하는 방법도 괜찮을 것 같다. 앞에서 말한 장점을 보면 학생들이 가장 만족할 방법은 도서관 중심 운영일 듯하지만, 교실 자습실도 거의 같은 효과를 낼 수 있다."
+          "answerText": "대화가 많아지고 책상 정리나 쓰레기 문제도 금방 생길 수 있다"
         },
         {
           "id": "q6",
-          "prompt": "6문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "글쓴이가 도서관을 우선 검토할 만하다고 보는 근거를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 152
+              "paragraphId": "p5",
+              "start": 7,
+              "end": 30
             }
           ],
           "scoring": {
@@ -675,7 +691,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "따라서 학교는 두 방안 중 하나를 급히 정하기보다 시험 기간 2주 정도 시범 운영을 하면서 이용률과 만족도를 함께 비교할 필요가 있다. 이 글은 두 방안을 정리하려는 초고이므로, 이후에는 비용 차이와 관리 인력 문제를 더 분명하게 적고 결론도 한쪽으로 정리할 필요가 있다."
+          "answerText": "도서관이 더 공부다운 분위기를 만든다는 점"
+        },
+        {
+          "id": "q7",
+          "prompt": "어느 한쪽만 택하기보다 제안한 운영 방법을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 100,
+              "end": 115
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "요일마다 달리 운영하는 방법"
+        },
+        {
+          "id": "q8",
+          "prompt": "이후 초고에서 더 분명하게 적어야 할 항목을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 105,
+              "end": 110
+            },
+            {
+              "paragraphId": "p6",
+              "start": 112,
+              "end": 120
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "비용 차이",
+            "관리 인력 문제"
+          ]
         }
       ]
     }

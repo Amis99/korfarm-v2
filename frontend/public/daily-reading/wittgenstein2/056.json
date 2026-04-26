@@ -569,114 +569,195 @@
     },
     "confirm": {
       "questions": [
-        {
-          "id": "q1",
-          "prompt": "1문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 212
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "관형사형 어미는 용언이 뒤의 명사를 꾸미게 하면서 사건이 어떤 시점과 양상으로 파악되는지도 함께 드러낸다. 특히 '-는', '-ㄴ', '-던'은 모두 체언 앞에서 쓰이지만, 화자가 사건을 완료된 것으로 보는지, 진행 중이거나 일반적인 사실로 보는지, 과거의 미완이나 회상을 드러내는지에 따라 기능이 달라진다. 그래서 이들은 단순히 현재·과거를 기계적으로 대응시키는 어미가 아니다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 244
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "동사 뒤의 '-는'은 대체로 현재 진행 중인 사건이나 반복되는 성질을 나타낸다. '지금 읽는 책', '매일 운동하는 사람'에서처럼 화자는 그 행위를 완결된 결과보다 진행 과정이나 습관으로 파악한다. 따라서 '-는'은 발화 시점과 직접 맞닿은 현재만이 아니라, 일반적 사실이나 상시적 성향을 나타낼 때도 자연스럽게 쓰인다. 어떤 대상을 설명할 때도 그 대상이 지금 수행하는 기능이나 되풀이되는 행위를 보여 주고 싶다면 '-는'이 선택된다."
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 217
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "반면 '-ㄴ'은 동사와 결합할 때 이미 끝난 사건의 결과를 내세우는 경우가 많다. '어제 읽은 책', '문을 닫은 사람'에서는 행위가 먼저 일어나고 그 결과 상태가 뒤의 명사를 한정한다. 그러나 형용사와 결합한 '-ㄴ'은 완료라기보다 현재의 속성을 드러낸다. '맑은 하늘', '작은 방'에서 형용사의 의미는 이미 상태를 나타내므로, '-ㄴ'은 과거라기보다 지금 성립하는 성질을 꾸며 준다."
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 282
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 때문에 '-는'과 '-ㄴ'의 차이는 품사 성격과 상의 차이를 함께 고려해야 정확히 설명된다. 동사에서는 진행·반복의 관점이 두드러지면 '-는'이, 완료된 행위의 결과를 앞세우면 '-ㄴ'이 선택되기 쉽다. 형용사에서는 현재의 속성을 꾸미는 일이 기본이므로 '-는'보다 '-ㄴ'이 일반적이다. 다만 '있다'처럼 존재를 나타내는 용언은 '있는 사람'처럼 '-는'형이 널리 쓰여, 품사 구분만으로는 설명이 끝나지 않음을 보여 준다. 곧 같은 관형사형이라도 무엇을 꾸미느냐에 따라 사건을 보는 관점이 달라진다."
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 214
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "'-던'은 과거 어느 시점에 진행 중이었거나 반복되었지만 아직 완결 여부가 분명하지 않은 일을 회상적으로 가리킬 때 쓰인다. '내가 읽던 책'은 읽기가 끝났는지보다 과거의 읽는 과정이 떠오르는 표현이고, '자주 가던 길'은 반복 경험이 회상 속에서 재구성된 예다. 여기에 선어말 어미 '-었-'이 결합한 '-었던'은 과거에 존재했고 현재는 끝났거나 달라졌다는 느낌을 더 강하게 준다."
-        },
-        {
-          "id": "q6",
-          "prompt": "6문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 289
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "결국 '-는'은 진행·반복, '-ㄴ'은 완료 결과나 현재 속성, '-던'은 과거의 미완·회상을 중심으로 구별된다. 하지만 실제 문장에서는 용언의 의미, 발화 상황, 뒤 명사가 어떤 정보를 요구하는지가 함께 작용해 선택이 결정된다. 같은 사건이라도 결과를 강조하면 '-ㄴ'이, 장면의 진행을 살리면 '-는'이, 지나간 체험을 떠올리면 '-던'이 더 자연스럽다. 따라서 관형사형 어미를 이해할 때는 겉으로 보이는 시제 표지만 볼 것이 아니라, 화자가 사건을 어떤 국면으로 잘라 명사를 꾸미고 있는지까지 함께 살펴야 한다."
-        }
+              {
+                      "id": "q1",
+                      "prompt": "지문에서 뒤의 명사를 꾸미게 하는 용언 어미를 가리키는 말을 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p1",
+                                      "start": 0,
+                                      "end": 7
+                              },
+                              {
+                                      "paragraphId": "p6",
+                                      "start": 205,
+                                      "end": 212
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ANY",
+                      "answerText": "관형사형 어미"
+              },
+              {
+                      "id": "q2",
+                      "prompt": "'-는'이 쓰인 예시 두 가지를 모두 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p2",
+                                      "start": 45,
+                                      "end": 54
+                              },
+                              {
+                                      "paragraphId": "p2",
+                                      "start": 56,
+                                      "end": 68
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ALL",
+                      "answerTexts": [
+                              "'지금 읽는 책'",
+                              "'매일 운동하는 사람'"
+                      ]
+              },
+              {
+                      "id": "q3",
+                      "prompt": "'지금 읽는 책' 등에서 화자가 행위를 무엇으로 파악한다고 했는지 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p2",
+                                      "start": 92,
+                                      "end": 102
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ANY",
+                      "answerText": "진행 과정이나 습관"
+              },
+              {
+                      "id": "q4",
+                      "prompt": "동사와 결합한 '-ㄴ'이 내세우는 것을 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p3",
+                                      "start": 19,
+                                      "end": 31
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ANY",
+                      "answerText": "이미 끝난 사건의 결과"
+              },
+              {
+                      "id": "q5",
+                      "prompt": "형용사와 결합한 '-ㄴ'이 드러낸다고 한 것을 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p3",
+                                      "start": 131,
+                                      "end": 137
+                              },
+                              {
+                                      "paragraphId": "p4",
+                                      "start": 123,
+                                      "end": 129
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ANY",
+                      "answerText": "현재의 속성"
+              },
+              {
+                      "id": "q6",
+                      "prompt": "'-는'과 '-ㄴ'의 차이를 정확히 설명하려면 함께 고려해야 하는 두 가지를 모두 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p4",
+                                      "start": 22,
+                                      "end": 27
+                              },
+                              {
+                                      "paragraphId": "p4",
+                                      "start": 29,
+                                      "end": 34
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ALL",
+                      "answerTexts": [
+                              "품사 성격",
+                              "상의 차이"
+                      ]
+              },
+              {
+                      "id": "q7",
+                      "prompt": "'-던'이 회상적으로 가리키는 일을 설명한 구절을 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p5",
+                                      "start": 6,
+                                      "end": 51
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ANY",
+                      "answerText": "과거 어느 시점에 진행 중이었거나 반복되었지만 아직 완결 여부가 분명하지 않은 일"
+              },
+              {
+                      "id": "q8",
+                      "prompt": "결국 세 관형사형 어미를 구별하는 중심 의미를 모두 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p4",
+                                      "start": 60,
+                                      "end": 65
+                              },
+                              {
+                                      "paragraphId": "p6",
+                                      "start": 9,
+                                      "end": 14
+                              },
+                              {
+                                      "paragraphId": "p6",
+                                      "start": 22,
+                                      "end": 34
+                              },
+                              {
+                                      "paragraphId": "p6",
+                                      "start": 42,
+                                      "end": 51
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ALL",
+                      "answerTexts": [
+                              "진행·반복",
+                              "완료 결과나 현재 속성",
+                              "과거의 미완·회상"
+                      ]
+              }
       ]
     }
   }

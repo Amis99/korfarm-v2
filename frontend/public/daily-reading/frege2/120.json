@@ -884,24 +884,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "회의의 주제가 된 동네 공간 운영 문제는 무엇인가요?",
-          "answerText": "노키즈존",
+          "prompt": "이번 회의의 주제를 설명한 부분을 찾으시오.",
+          "answerText": "동네 식당과 카페에 늘어나고 있는 노키즈존 문제",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 65,
-              "end": 69
-            },
-            {
-              "paragraphId": "p2",
-              "start": 8,
-              "end": 12
-            },
-            {
-              "paragraphId": "p3",
-              "start": 11,
-              "end": 15
+              "start": 46,
+              "end": 72
             }
           ],
           "scoring": {
@@ -912,14 +902,22 @@
         },
         {
           "id": "q2",
-          "prompt": "찬성 측이 특히 우려한 위험은 무엇인가요?",
-          "answerText": "안전사고",
-          "answerMatchMode": "ANY",
+          "prompt": "노키즈존에 대해 의견을 낸 두 주민의 이름을 모두 찾으시오.",
+          "answerTexts": [
+            "이철수 주민",
+            "박영희 주민"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 105,
-              "end": 109
+              "start": 0,
+              "end": 6
+            },
+            {
+              "paragraphId": "p3",
+              "start": 3,
+              "end": 9
             }
           ],
           "scoring": {
@@ -930,14 +928,14 @@
         },
         {
           "id": "q3",
-          "prompt": "반대 측이 모든 아이의 출입을 막는 것을 무엇이라고 말했나요?",
-          "answerText": "차별",
+          "prompt": "이철수 주민이 노키즈존 찬성 이유로 든 피해를 찾으시오.",
+          "answerText": "다른 손님들이 불편을 겪는다고",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 67,
-              "end": 69
+              "paragraphId": "p2",
+              "start": 60,
+              "end": 76
             }
           ],
           "scoring": {
@@ -948,14 +946,14 @@
         },
         {
           "id": "q4",
-          "prompt": "절충안으로 한쪽에 따로 마련하자고 한 자리는 무엇인가요?",
-          "answerText": "가족석",
+          "prompt": "이철수 주민이 노키즈존 찬성 이유로 든 위험을 찾으시오.",
+          "answerText": "안전사고가 발생할 위험도 크다고",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 53,
-              "end": 56
+              "paragraphId": "p2",
+              "start": 105,
+              "end": 122
             }
           ],
           "scoring": {
@@ -966,14 +964,14 @@
         },
         {
           "id": "q5",
-          "prompt": "주민들이 함께 만들어가기로 뜻을 모은 공간은 무엇인가요?",
-          "answerText": "예스키즈존",
+          "prompt": "주민들이 뜻을 모은 결론을 찾으시오.",
+          "answerText": "서로 배려하며 예스키즈존을 만들어가기로",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 150,
-              "end": 155
+              "start": 142,
+              "end": 163
             }
           ],
           "scoring": {

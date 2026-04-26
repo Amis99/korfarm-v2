@@ -557,19 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "적의 침입을 막기 위해 산의 지형을 이용하여 쌓은 오래된 성곽은?",
-          "answerText": "산성",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 무엇이 되어 이 건의문을 쓴다고 했는지 지문에서 찾으시오.",
+          "answerText": "수호자가",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 22,
-              "end": 24
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 2
+              "start": 78,
+              "end": 82
             }
           ],
           "scoring": {
@@ -581,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "금속이나 돌 등이 삭아서 변하는 현상을 뜻하는 과학적인 단어는?",
-          "answerText": "부식되고",
-          "answerMatchMode": "EXACT",
+          "prompt": "환경 보호가 무엇의 제일 기초적인 첫걸음이라고 했는지 지문에서 찾으시오.",
+          "answerText": "문화재 보존",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 21,
-              "end": 25
+              "start": 99,
+              "end": 105
             }
           ],
           "scoring": {
@@ -600,14 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "조상들이 남겨주신 가치 있는 정신적, 물질적 자산을 통틀어 이르는 말은?",
-          "answerText": "유산",
-          "answerMatchMode": "EXACT",
+          "prompt": "산성 입구에 세우자고 건의한 것을 지문에서 찾으시오.",
+          "answerText": "환경 보호 안내판",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 107,
-              "end": 109
+              "paragraphId": "p3",
+              "start": 7,
+              "end": 16
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "우리 고장의 역사를 지키는 힘이라고 한 것을 지문에서 찾으시오.",
+          "answerText": "작은 관심",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 98,
+              "end": 103
             }
           ],
           "scoring": {

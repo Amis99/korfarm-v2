@@ -552,84 +552,53 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "일이 일어난 ( )를 말해요.",
+          "prompt": "일이 일어난 시간의 차례를 뜻하는 단어를 지문에서 찾아 보세요.",
           "answerText": "순서",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 7,
-              "end": 9
-            },
-            {
-              "paragraphId": "p1",
-              "start": 73,
-              "end": 75
-            },
-            {
-              "paragraphId": "p2",
-              "start": 35,
-              "end": 37
-            },
-            {
-              "paragraphId": "p2",
-              "start": 92,
-              "end": 94
-            }
+            {"paragraphId": "p1", "start": 7, "end": 9},
+            {"paragraphId": "p1", "start": 73, "end": 75},
+            {"paragraphId": "p2", "start": 35, "end": 37},
+            {"paragraphId": "p2", "start": 92, "end": 94}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "( )를 나타내는 말.",
+          "prompt": "어떤 일을 하는 정해진 순서를 뜻하는 단어를 지문에서 찾아 보세요.",
           "answerText": "차례",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 17,
-              "end": 19
-            },
-            {
-              "paragraphId": "p1",
-              "start": 96,
-              "end": 98
-            },
-            {
-              "paragraphId": "p2",
-              "start": 123,
-              "end": 125
-            }
+            {"paragraphId": "p1", "start": 17, "end": 19},
+            {"paragraphId": "p1", "start": 96, "end": 98},
+            {"paragraphId": "p2", "start": 123, "end": 125}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "글의 ( )이 매끄러움.",
-          "answerText": "흐름",
-          "answerMatchMode": "EXACT",
+          "prompt": "차례를 나타낼 때 처음과 그 뒤에 이어서 쓰는 낱말 두 가지를 모두 찾아 보세요.",
+          "answerText": "먼저, 다음으로",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 64,
-              "end": 66
-            }
+            {"paragraphId": "p1", "start": 34, "end": 36},
+            {"paragraphId": "p1", "start": 40, "end": 44}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "마지막 단계에서 사용하는 말 두 가지를 모두 찾아 보세요.",
+          "answerText": "끝으로, 마지막에",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 11, "end": 14},
+            {"paragraphId": "p2", "start": 18, "end": 22}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         }
       ]

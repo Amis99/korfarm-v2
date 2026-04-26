@@ -1035,155 +1035,82 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '가격'을 모두 찾으시오.",
+          "prompt": "어떤 물건을 사고팔 때 매겨진 값을 가리키는 두 글자 낱말을 찾으시오",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 58,
-              "end": 60
-            },
-            {
-              "paragraphId": "p1",
-              "start": 139,
-              "end": 141
-            },
-            {
-              "paragraphId": "p2",
-              "start": 139,
-              "end": 141
-            },
-            {
-              "paragraphId": "p3",
-              "start": 37,
-              "end": 39
-            },
-            {
-              "paragraphId": "p4",
-              "start": 89,
-              "end": 91
-            },
-            {
-              "paragraphId": "p5",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p5",
-              "start": 46,
-              "end": 48
-            }
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p1", "start": 58, "end": 60},
+            {"paragraphId": "p1", "start": 139, "end": 141},
+            {"paragraphId": "p2", "start": 139, "end": 141},
+            {"paragraphId": "p3", "start": 37, "end": 39},
+            {"paragraphId": "p4", "start": 89, "end": 91},
+            {"paragraphId": "p5", "start": 3, "end": 5},
+            {"paragraphId": "p5", "start": 46, "end": 48}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
           "answerText": "가격"
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '수요'를 모두 찾으시오.",
+          "prompt": "p1에서 단순한 수치처럼 보이지만 변화의 근거가 되는 경제 자료의 예로 든 네 가지 항목을 모두 찾으시오",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p1",
-              "start": 62,
-              "end": 64
-            },
-            {
-              "paragraphId": "p1",
-              "start": 191,
-              "end": 193
-            },
-            {
-              "paragraphId": "p5",
-              "start": 7,
-              "end": 9
-            }
+            {"paragraphId": "p1", "start": 58, "end": 60},
+            {"paragraphId": "p1", "start": 62, "end": 64},
+            {"paragraphId": "p1", "start": 66, "end": 68},
+            {"paragraphId": "p1", "start": 70, "end": 72}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "수요"
+          "answerMatchMode": "ALL",
+          "answerText": "가격, 수요, 공급, 비용"
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '이익'을 모두 찾으시오.",
+          "prompt": "p3에서 같은 가격 변화라도 달리 나타날 수 있는 까닭으로 든 네 가지를 모두 찾으시오",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 102,
-              "end": 104
-            },
-            {
-              "paragraphId": "p5",
-              "start": 58,
-              "end": 60
-            }
+            {"paragraphId": "p3", "start": 45, "end": 47},
+            {"paragraphId": "p3", "start": 49, "end": 51},
+            {"paragraphId": "p3", "start": 53, "end": 56},
+            {"paragraphId": "p3", "start": 58, "end": 65}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerText": "계절, 날씨, 생산량, 사람들의 선호"
+        },
+        {
+          "id": "q4",
+          "prompt": "장사를 해서 들어오는 돈에서 빠져나간 돈을 빼고 남은 몫을 가리키는 두 글자 낱말을 찾으시오",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 102, "end": 104},
+            {"paragraphId": "p5", "start": 58, "end": 60}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
           "answerText": "이익"
         },
         {
-          "id": "q4",
-          "prompt": "지문에서 '원인'을 모두 찾으시오.",
+          "id": "q5",
+          "prompt": "표나 그래프를 볼 때 단순히 늘었다 줄었다를 말하는 데 그치지 않고 따져 보아야 할, 변화를 일으킨 까닭을 가리키는 두 글자 낱말을 찾으시오",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 18,
-              "end": 20
-            },
-            {
-              "paragraphId": "p3",
-              "start": 68,
-              "end": 70
-            },
-            {
-              "paragraphId": "p5",
-              "start": 62,
-              "end": 64
-            }
+            {"paragraphId": "p3", "start": 18, "end": 20},
+            {"paragraphId": "p3", "start": 68, "end": 70},
+            {"paragraphId": "p5", "start": 62, "end": 64}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
           "answerText": "원인"
         },
         {
-          "id": "q5",
-          "prompt": "지문에서 '범위'를 모두 찾으시오.",
+          "id": "q6",
+          "prompt": "어떤 자료가 보여 주는 값들이 어디서 어디까지 묶여 있는지를 가리키는 두 글자 낱말을 찾으시오",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 155,
-              "end": 157
-            }
+            {"paragraphId": "p4", "start": 155, "end": 157}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
           "answerText": "범위"

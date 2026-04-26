@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "prompt": "누가 와서 부른다면 화자가 보여 주겠다고 한 대상은 무엇입니까?",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 42
+              "start": 23,
+              "end": 40
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "누가 와서 나를 부른다면\n내 보여 주리라\n저 얼은 들판 위에 내리는 달빛을."
+          "answerText": "저 얼은 들판 위에 내리는 달빛"
         },
         {
           "id": "q2",
-          "prompt": "2연은 그 정서를 어떤 이미지나 흐름으로 이어 가는가?",
+          "prompt": "얼은 들판을 걸어가는 대상은 무엇입니까?",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 44
+              "start": 12,
+              "end": 17
             }
           ],
           "scoring": {
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "얼은 들판을 걸어가는 한 그림자를.\n지금까지 내 생각해 온 것은 모두 무엇인가."
+          "answerText": "한 그림자"
         },
         {
           "id": "q3",
-          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
+          "prompt": "3연에서 반복되는 대상 호명 어구는 무엇입니까?",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 42
+              "end": 5
+            },
+            {
+              "paragraphId": "p3",
+              "start": 6,
+              "end": 11
             }
           ],
           "scoring": {
@@ -621,15 +626,38 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "친구 몇몇 친구 몇몇 그들에게는\n이제 내 것 가운데 그중 외로움이 아닌 길을"
+          "answerText": "친구 몇몇"
         },
         {
           "id": "q4",
-          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
+          "prompt": "화자가 그들에게 보여 주게 될 길은 어떤 길입니까?",
           "answerRanges": [
             {
+              "paragraphId": "p3",
+              "start": 32,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "외로움이 아닌 길"
+        },
+        {
+          "id": "q5",
+          "prompt": "의문형으로 끝난 두 구절을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 20,
+              "end": 44
+            },
+            {
               "paragraphId": "p4",
-              "start": 0,
+              "start": 10,
               "end": 37
             }
           ],
@@ -638,35 +666,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "보여 주게 되리.\n오랫동안 네 여며온 고의춤에 남은 것은 무엇인가."
-        },
-        {
-          "id": "q5",
-          "prompt": "5연은 앞선 흐름에 어떤 긴장이나 전환을 더하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 34
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "두 팔 들고 얼음을 밟으며\n갑자기 구름 개인 들판을 걸어갈 때"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "지금까지 내 생각해 온 것은 모두 무엇인가.",
+            "오랫동안 네 여며온 고의춤에 남은 것은 무엇인가."
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
+          "prompt": "5연에서 화자는 두 팔 들고 무엇을 밟습니까?",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 19
+              "paragraphId": "p5",
+              "start": 7,
+              "end": 9
             }
           ],
           "scoring": {
@@ -675,7 +688,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "헐벗은 옷 가득히 받는 달빛 달빛."
+          "answerText": "얼음"
+        },
+        {
+          "id": "q7",
+          "prompt": "갑자기 어떤 들판을 걸어갈 때라고 했습니까?",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 19,
+              "end": 27
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "구름 개인 들판"
+        },
+        {
+          "id": "q8",
+          "prompt": "6연에서 반복을 통해 강조한 마지막 어구는 무엇입니까?",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 13,
+              "end": 18
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "달빛 달빛"
         }
       ]
     }

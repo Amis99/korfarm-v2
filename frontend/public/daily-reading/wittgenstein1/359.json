@@ -1198,12 +1198,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 연은 작품의 첫 장면이나 정서를 어떻게 불러오는가?",
+          "prompt": "화자와 함께 가거나 저편에서 화자를 부르는 존재를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
+              "start": 10,
+              "end": 15
+            },
+            {
+              "paragraphId": "p5",
               "start": 0,
-              "end": 33
+              "end": 5
             }
           ],
           "scoring": {
@@ -1212,15 +1217,38 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "갈밭 속을 간다.\n젊은 시인과 함께\n가노라면\n나는 혼자였다."
+          "answerText": "젊은 시인"
         },
         {
           "id": "q2",
-          "prompt": "둘째 연은 앞선 흐름에 무엇을 덧붙이며 작품 속 생각이나 상황을 어떻게 드러내는가?",
+          "prompt": "갈밭 속에서 잃기 마련이라고 한 것을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
+              "start": 15,
+              "end": 17
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "동행"
+        },
+        {
+          "id": "q3",
+          "prompt": "둘째 연에서 반복되어 부르는 호명을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 29,
+              "end": 35
+            },
+            {
+              "paragraphId": "p2",
+              "start": 36,
               "end": 42
             }
           ],
@@ -1230,16 +1258,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "누구나\n갈밭 속에서는 일쑤\n동행을 잃기 마련이었다.\n성형(成兄)\n성형(成兄)"
+          "answerText": "성형(成兄)"
         },
         {
-          "id": "q3",
-          "prompt": "셋째 연은 시선이나 감정이 어떤 방향으로 이어지는가?",
+          "id": "q4",
+          "prompt": "그를 불러도 화자의 음성이 되돌아오는 방향을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 48
+              "start": 20,
+              "end": 30
+            },
+            {
+              "paragraphId": "p6",
+              "start": 7,
+              "end": 17
             }
           ],
           "scoring": {
@@ -1248,16 +1281,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "㉠ 아무리 그를 불러도\n나의 음성은\n내면으로 되돌아오고,\n이미 나는\n갈대 안에 있었다."
+          "answerText": "내면으로 되돌아오고"
         },
         {
-          "id": "q4",
-          "prompt": "넷째 연은 앞선 흐름과 비교할 때 어떤 전환이나 강조를 보여 주는가?",
+          "id": "q5",
+          "prompt": "넷째 연에서 같은 구조로 반복되는 두 구절을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 29,
+              "end": 40
+            },
+            {
+              "paragraphId": "p4",
+              "start": 41,
+              "end": 52
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "갈잎에는 갈잎의 바람",
+            "백발에는 백발의 바람"
+          ]
+        },
+        {
+          "id": "q6",
+          "prompt": "바람이 실제로 부는 것이 아니라고 나타낸 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 0,
-              "end": 53
+              "end": 13
             }
           ],
           "scoring": {
@@ -1266,16 +1325,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "바람이 부는 것도 아닌데\n갈밭은\n어석어석 흔들린다.\n갈잎에는 갈잎의 바람\n백발에는 백발의 바람."
+          "answerText": "바람이 부는 것도 아닌데"
         },
         {
-          "id": "q5",
-          "prompt": "다섯째 연은 작품 속 마음이나 판단을 어떻게 더 분명하게 만드는가?",
+          "id": "q7",
+          "prompt": "젊은 시인이 화자를 부르는 장소를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 45
+              "start": 7,
+              "end": 13
             }
           ],
           "scoring": {
@@ -1284,16 +1343,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "젊은 시인은\n저편 강기슭에서 나를 부른다.\n㉡ 하지만 이미\n나는 응답할 수 없다."
+          "answerText": "저편 강기슭"
         },
         {
-          "id": "q6",
-          "prompt": "여섯째 연은 작품 전체에 어떤 여운이나 마무리 의미를 남기는가?",
+          "id": "q8",
+          "prompt": "화자가 끝내 할 수 없다고 한 일을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 38
+              "paragraphId": "p5",
+              "start": 33,
+              "end": 44
             }
           ],
           "scoring": {
@@ -1302,7 +1361,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "나의 음성은\n내면으로 되돌아오고\n어쩔 수 없이 나도\n흔들리고 있었다."
+          "answerText": "나는 응답할 수 없다"
         }
       ]
     }

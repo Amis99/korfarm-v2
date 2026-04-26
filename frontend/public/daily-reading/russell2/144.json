@@ -1078,7 +1078,8 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "선생님들이 일하는 방은?",
+          "prompt": "예전에는 학생들이 분실물을 찾기 위해 여러 곳을 돌아다녔다고 한, 선생님들이 일하는 방을 가리키는 두 글자 단어를 찾으시오",
+          "answerText": "교무실",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
@@ -1088,15 +1089,40 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "교무실"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "날짜와 장소를 적어 두는 표는?",
+          "prompt": "분실물 보관함이 놓인 자리이자 개인정보 관련 물건을 따로 보관하는 방을 가리키는 두 글자 단어를 모두 찾으시오",
+          "answerText": "상담실",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 25,
+              "end": 28
+            },
+            {
+              "paragraphId": "p4",
+              "start": 57,
+              "end": 60
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "물건을 보관함에 넣기 전에 날짜와 장소를 적도록 한 표를 가리키는 단어를 찾으시오",
+          "answerText": "기록표",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
@@ -1106,15 +1132,16 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "기록표"
+          "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "낮에 밥을 먹는 때는?",
+          "id": "q4",
+          "prompt": "보관함을 확인할 수 있는 때로 안내된 두 시간대 가운데, 낮에 밥을 먹는 때를 가리키는 단어를 찾으시오",
+          "answerText": "점심시간",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
@@ -1124,15 +1151,16 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "점심시간"
+          "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "개인을 알아볼 수 있는 정보는?",
+          "id": "q5",
+          "prompt": "전자기기나 지갑 같은 물건을 따로 보관하는 까닭으로 든, 개인을 알아볼 수 있는 정보를 가리키는 단어를 찾으시오",
+          "answerText": "개인정보",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
@@ -1142,29 +1170,55 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "개인정보"
+          "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "물건을 맡겨 두는 일정한 기간은?",
-          "answerMatchMode": "ANY",
+          "id": "q6",
+          "prompt": "분실물을 모아 두기 위해 학년별 칸으로 나누어 마련했다고 안내한, 잃은 물건을 한자리에 모아 두는 시설을 가리키는 단어를 모두 찾으시오",
+          "answerText": "보관함",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
+              "paragraphId": "p1",
+              "start": 24,
+              "end": 27
+            },
+            {
+              "paragraphId": "p2",
+              "start": 31,
+              "end": 34
+            },
+            {
+              "paragraphId": "p2",
+              "start": 49,
+              "end": 52
+            },
+            {
+              "paragraphId": "p3",
+              "start": 38,
+              "end": 41
+            },
+            {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 5
+              "start": 145,
+              "end": 148
+            },
+            {
+              "paragraphId": "p6",
+              "start": 15,
+              "end": 18
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "보관 기간"
+          "revealOnWrong": true
         }
       ]
     }

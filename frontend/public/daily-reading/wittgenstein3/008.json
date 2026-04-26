@@ -1161,12 +1161,37 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 IS-LM 모형과 IS-MP 모형의 통화정책 전달 차이라는 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "prompt": "거시 경제 모형이 설명하려는 경제 전체의 변화를 보여 주는 예를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 195
+              "start": 10,
+              "end": 15
+            },
+            {
+              "paragraphId": "p2",
+              "start": 46,
+              "end": 51
+            },
+            {
+              "paragraphId": "p6",
+              "start": 89,
+              "end": 94
+            },
+            {
+              "paragraphId": "p1",
+              "start": 17,
+              "end": 19
+            },
+            {
+              "paragraphId": "p5",
+              "start": 57,
+              "end": 59
+            },
+            {
+              "paragraphId": "p1",
+              "start": 21,
+              "end": 23
             }
           ],
           "scoring": {
@@ -1174,17 +1199,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "거시 경제 모형은 국민 소득, 물가, 고용처럼 경제 전체에서 나타나는 변화를 한눈에 설명하기 위해 만들어진다. 고전학파는 시장이 스스로 균형을 회복한다고 보았지만, 대공황은 총수요 부족이 장기 침체와 실업을 낳을 수 있다는 사실을 드러냈다. 이 문제의식 속에서 케인스 경제학이 등장했고, 이후 이를 체계화한 분석틀 가운데 하나가 IS-LM 모형이다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "국민 소득",
+            "물가",
+            "고용"
+          ]
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 핵심 기준이나 원리를 어떻게 설명하는가?",
+          "prompt": "대공황이 드러낸 사실을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 204
+              "paragraphId": "p1",
+              "start": 97,
+              "end": 127
             }
           ],
           "scoring": {
@@ -1193,16 +1222,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "IS-LM 모형은 상품 시장과 화폐 시장이 동시에 균형을 이루는 지점을 통해 단기 국민 소득을 설명한다. 이 모형에서 IS 곡선은 이자율이 변할 때 투자와 총수요가 어떻게 움직이는지를 나타내고, LM 곡선은 통화량이 주어졌을 때 소득과 이자율이 어떤 관계를 맺는지를 보여 준다. 여기서 중요한 점은 중앙은행이 통화량을 외생적으로 정해 놓는 주체로 가정된다는 것이다."
+          "answerText": "총수요 부족이 장기 침체와 실업을 낳을 수 있다는 사실"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 이어지는 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "IS-LM 모형이 단기 국민 소득을 설명하는 근거가 되는 지점을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 203
+              "paragraphId": "p2",
+              "start": 10,
+              "end": 38
             }
           ],
           "scoring": {
@@ -1211,16 +1240,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 때문에 IS-LM 모형에서 통화정책은 통화량을 바꾸어 LM 곡선을 이동시키는 방식으로 전달된다. 중앙은행이 통화 공급을 늘리면 시중 유동성이 많아져 같은 소득 수준에서 더 낮은 이자율이 형성되고, 이는 투자와 소비를 자극해 총수요를 키운다. 반대로 통화량을 줄이면 이자율이 오르고 총수요가 위축된다. 즉 정책의 출발점은 금리 자체가 아니라 통화량 조정에 있다."
+          "answerText": "상품 시장과 화폐 시장이 동시에 균형을 이루는 지점"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
+          "prompt": "IS 곡선이 나타내는 내용을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 212
+              "paragraphId": "p2",
+              "start": 73,
+              "end": 101
             }
           ],
           "scoring": {
@@ -1229,16 +1258,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "하지만 현대 경제에서는 중앙은행이 실제로 통화량보다 기준 금리를 직접 정책 수단으로 삼는 경우가 많다. 금융 시장이 복잡해지고 자본 이동이 활발해지면서 통화량만으로 유동성을 정밀하게 조절하기 어려워졌기 때문이다. 이런 현실을 더 잘 설명하기 위해 등장한 것이 IS-MP 모형이다. 이 모형은 IS 곡선을 유지하되, LM 대신 중앙은행의 금리 반응을 나타내는 MP 곡선을 사용한다."
+          "answerText": "이자율이 변할 때 투자와 총수요가 어떻게 움직이는지"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 이 주제가 낳는 효과나 쟁점을 어떤 방향으로 확장하는가?",
+          "prompt": "IS-LM 모형에서 통화정책이 전달되는 방식을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 215
+              "paragraphId": "p3",
+              "start": 23,
+              "end": 47
             }
           ],
           "scoring": {
@@ -1247,16 +1276,31 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "IS-MP 모형에서 통화정책은 경제 상황에 따라 기준 금리를 조정하는 방식으로 전달된다. 소득이 늘고 물가 상승 압력이 커지면 중앙은행은 기준 금리를 인상해 소비와 투자를 식히고, 경기 침체가 심해지면 금리를 낮춰 총수요를 떠받친다. 따라서 금리 변화는 더 이상 외부에서 주어진 결과가 아니라, 경제 내부의 변화에 반응하는 정책 작용으로 나타난다. 이것이 IS-LM과 가장 큰 차이다."
+          "answerText": "통화량을 바꾸어 LM 곡선을 이동시키는 방식"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 IS-LM 모형과 IS-MP 모형의 통화정책 전달 차이라는 주제의 의미를 어떤 관점에서 정리하는가?",
+          "prompt": "현대 경제에서 중앙은행이 직접 정책 수단으로 삼는 것을 찾으시오.",
           "answerRanges": [
             {
+              "paragraphId": "p4",
+              "start": 29,
+              "end": 34
+            },
+            {
+              "paragraphId": "p5",
+              "start": 27,
+              "end": 32
+            },
+            {
+              "paragraphId": "p5",
+              "start": 77,
+              "end": 82
+            },
+            {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 243
+              "start": 173,
+              "end": 178
             }
           ],
           "scoring": {
@@ -1265,7 +1309,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 두 모형은 모두 이자율이 생산과 총수요에 중요하다고 보지만, 정책이 경제에 스며드는 경로는 다르게 그린다. IS-LM이 통화량 조정에서 금리 변화를 거쳐 국민 소득으로 이어지는 과정을 강조한다면, IS-MP는 중앙은행의 금리 결정 자체를 핵심에 둔다. 그래서 오늘날의 통화정책을 이해할 때에는 중앙은행의 기준 금리 조정과 그에 대한 경제 주체의 기대 형성까지 함께 다루는 IS-MP 모형이 더 현실적인 설명력을 갖는다고 평가된다."
+          "answerText": "기준 금리"
+        },
+        {
+          "id": "q7",
+          "prompt": "IS-MP 모형에서 통화정책이 전달되는 방식을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 17,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "경제 상황에 따라 기준 금리를 조정하는 방식"
+        },
+        {
+          "id": "q8",
+          "prompt": "두 모형의 정책 전달 경로 차이를 보여 주는 핵심 표현을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 70,
+              "end": 104
+            },
+            {
+              "paragraphId": "p6",
+              "start": 120,
+              "end": 134
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "통화량 조정에서 금리 변화를 거쳐 국민 소득으로 이어지는 과정",
+            "중앙은행의 금리 결정 자체"
+          ]
         }
       ]
     }

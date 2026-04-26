@@ -1152,103 +1152,75 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '자격'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 78,
-              "end": 80
-            },
-            {
-              "paragraphId": "p2",
-              "start": 30,
-              "end": 32
-            },
-            {
-              "paragraphId": "p2",
-              "start": 148,
-              "end": 150
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "권리와 의무를 가질 수 있는 본인을 가리키며, 권리 능력의 정의에 쓰인 두 글자 단어를 지문에서 찾으시오",
+          "answerText": "주체",
           "answerMatchMode": "ANY",
-          "answerText": "자격"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 67, "end": 69},
+            {"paragraphId": "p1", "start": 171, "end": 173},
+            {"paragraphId": "p2", "start": 61, "end": 63},
+            {"paragraphId": "p2", "start": 130, "end": 132},
+            {"paragraphId": "p4", "start": 167, "end": 169},
+            {"paragraphId": "p5", "start": 24, "end": 26}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '출발점'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 139,
-              "end": 142
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "다른 사람의 의견에 찬성하여 따름을 뜻하며, 미성년자가 법률행위를 할 때 법정대리인에게 받아야 한다고 한 두 글자 단어를 지문에서 찾으시오",
+          "answerText": "동의",
           "answerMatchMode": "ANY",
-          "answerText": "출발점"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 142, "end": 144}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '미성년자'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 136,
-              "end": 140
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "어느 한쪽으로 기울지 않고 고름을 뜻하며, 법학이 자유와 보호 사이에서 찾는 두 글자 단어를 지문에서 찾으시오",
+          "answerText": "균형",
           "answerMatchMode": "ANY",
-          "answerText": "미성년자"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 217, "end": 219}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '법정대리인'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 135,
-              "end": 140
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "법으로 정해진 보호자로서 본인을 대신해 법률행위를 할 수 있는 사람을 가리키는 다섯 글자 표현을 지문에서 찾으시오",
+          "answerText": "법정대리인",
           "answerMatchMode": "ANY",
-          "answerText": "법정대리인"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 135, "end": 140}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '행사'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 209,
-              "end": 211
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "권리 능력은 있지만 행위 능력은 제한될 수 있는 사람의 예로 든 네 글자 표현을 지문에서 찾으시오",
+          "answerText": "미성년자",
           "answerMatchMode": "ANY",
-          "answerText": "행사"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 136, "end": 140}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "행위 능력의 적용을 받는 두 가지 대표 행위(계약, 재산)를 모두 찾으시오",
+          "answerText": "계약/재산",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 24, "end": 26},
+            {"paragraphId": "p3", "start": 32, "end": 34}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

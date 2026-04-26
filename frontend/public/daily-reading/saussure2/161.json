@@ -562,19 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "바닷가에 배가 안전하게 머물며 사람이나 짐을 싣고 내리는 곳은?",
-          "answerText": "항구",
+          "prompt": "부산이 우리나라의 어디에 있는지 지문에서 해당 어구를 찾으시오.",
+          "answerText": "남쪽 끝",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 24,
-              "end": 26
-            },
-            {
-              "paragraphId": "p1",
-              "start": 33,
-              "end": 35
+              "start": 10,
+              "end": 14
             }
           ],
           "scoring": {
@@ -585,14 +580,50 @@
         },
         {
           "id": "q2",
-          "prompt": "바다에서 나는 생선, 조개, 미역 같은 물건을 통틀어 이르는 말은?",
-          "answerText": "해산물",
+          "prompt": "항구에서 바다를 건너와 사람과 물건을 내리고 싣는 것을 지문에서 찾으시오.",
+          "answerText": "커다란 배들이",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 37,
+              "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "넓고 푸른 모래사장이 있다고 한 해수욕장 이름을 지문에서 찾으시오.",
+          "answerText": "해운대 해수욕장",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 20,
+              "end": 28
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "부산에서 아주 유명한 간식으로 제시된 어구를 지문에서 찾으시오.",
+          "answerText": "맛있는 어묵과 씨앗호떡",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 23,
-              "end": 26
+              "start": 41,
+              "end": 53
             }
           ],
           "scoring": {

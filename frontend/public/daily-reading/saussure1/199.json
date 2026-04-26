@@ -515,24 +515,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "푸른 물이 가득한?",
-          "answerText": "바다",
-          "answerMatchMode": "EXACT",
+          "prompt": "물에 들어가기 전 반드시 준비 운동을 해야 한다고 처음 말한 친구는 누구인지 찾아보세요",
+          "answerText": "지우",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 25,
-              "end": 27
+              "start": 97,
+              "end": 99
             },
             {
               "paragraphId": "p1",
-              "start": 67,
-              "end": 69
-            },
-            {
-              "paragraphId": "p2",
-              "start": 160,
-              "end": 162
+              "start": 149,
+              "end": 151
             }
           ],
           "scoring": {
@@ -544,19 +539,14 @@
         },
         {
           "id": "q2",
-          "prompt": "의견 나누는 시간?",
-          "answerText": "회의",
-          "answerMatchMode": "EXACT",
+          "prompt": "깊은 물에는 어른들과 함께 들어가야 한다고 제안한 친구는 누구인지 찾아보세요",
+          "answerText": "민수",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 84,
-              "end": 86
-            },
-            {
               "paragraphId": "p2",
-              "start": 57,
-              "end": 59
+              "start": 4,
+              "end": 6
             }
           ],
           "scoring": {
@@ -568,19 +558,38 @@
         },
         {
           "id": "q3",
-          "prompt": "잘 지켜야 할 무엇인가요?",
-          "answerText": "약속",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구들이 교실에 모여서 정한 회의 주제는 무엇이었는지 찾아보세요",
+          "answerText": "바다에서 지킬 약속",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 75,
+              "start": 67,
               "end": 77
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "회의에서 다짐한 두 가지는 무엇을 꼭 착용하기와 무엇을 함부로 버리지 않기인가요",
+          "answerText": "구명조끼, 쓰레기",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 64,
+              "end": 68
             },
             {
               "paragraphId": "p2",
-              "start": 121,
-              "end": 123
+              "start": 77,
+              "end": 80
             }
           ],
           "scoring": {

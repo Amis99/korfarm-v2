@@ -1344,7 +1344,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "오늘 토론회가 다루는 주제는 무엇인가요?",
+          "prompt": "오늘 토론회가 다루는 주제를 찾으시오.",
           "answerText": "청소년 참정권 확대",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1367,19 +1367,14 @@
         },
         {
           "id": "q2",
-          "prompt": "참정권 확대를 기본적 인권 회복이라고 본 쪽은 누구인가요?",
-          "answerText": "인권 단체",
+          "prompt": "인권 단체가 청소년 참정권 확대를 무엇이라고 보았는지 찾으시오.",
+          "answerText": "가장 기본적인 인권의 회복",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 269,
-              "end": 274
-            },
-            {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 5
+              "start": 27,
+              "end": 41
             }
           ],
           "scoring": {
@@ -1390,18 +1385,21 @@
         },
         {
           "id": "q3",
-          "prompt": "교육 단체가 크게 우려한 학교 문제는 무엇인가요?",
-          "answerText": "정치적 편향성",
-          "answerMatchMode": "ANY",
+          "prompt": "교육 단체가 청소년 참정권 확대의 위험으로 든 것을 모두 찾으시오.",
+          "answerTexts": [
+            "주변의 휩쓸림",
+            "특정 교사의 정치적 편향성"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 187,
-              "end": 194
+              "paragraphId": "p3",
+              "start": 113,
+              "end": 120
             },
             {
               "paragraphId": "p3",
-              "start": 130,
+              "start": 123,
               "end": 137
             }
           ],
@@ -1413,7 +1411,7 @@
         },
         {
           "id": "q4",
-          "prompt": "정치 학자가 가장 먼저 보완해야 한다고 한 것은 무엇인가요?",
+          "prompt": "정치 학자가 우리가 놓치고 있다고 한 핵심을 찾으시오.",
           "answerText": "정치 교육",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1431,13 +1429,21 @@
         },
         {
           "id": "q5",
-          "prompt": "사회자가 학교 현장이 되어야 한다고 한 곳은 무엇인가요?",
-          "answerText": "민주주의의 훈련장",
-          "answerMatchMode": "ANY",
+          "prompt": "사회자가 마지막에 제시한 청소년과 학교 현장의 모습을 모두 찾으시오.",
+          "answerTexts": [
+            "주체적인 시민",
+            "건강한 민주주의의 훈련장"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 164,
+              "start": 75,
+              "end": 82
+            },
+            {
+              "paragraphId": "p5",
+              "start": 160,
               "end": 173
             }
           ],

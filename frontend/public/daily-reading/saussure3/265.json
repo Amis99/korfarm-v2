@@ -587,9 +587,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "건강을 위한 깨끗한 관리는?",
+          "prompt": "복도를 다닐 때 생각해야 한다고 한 것을 찾으시오.",
           "answerText": "위생을",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "맑고 깨끗한 상태를 뜻함?",
-          "answerText": "청결을",
-          "answerMatchMode": "EXACT",
+          "prompt": "복도 바닥에 버리지 말아야 한다고 한 것을 찾으시오.",
+          "answerText": "쓰레기를",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 68,
-              "end": 71
+              "paragraphId": "p1",
+              "start": 48,
+              "end": 52
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "지켜야 할 행동 방식은?",
-          "answerText": "수칙을",
-          "answerMatchMode": "EXACT",
+          "prompt": "화장실 이용 뒤 복도로 나오기 전에 해야 하는 일을 찾으시오.",
+          "answerText": "손을 씻어야 함",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 23,
+              "end": 31
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "깨끗한 환경이 도움을 준다고 한 활동을 찾으시오.",
+          "answerText": "공부에 집중하게 함",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 10,
-              "end": 13
+              "start": 54,
+              "end": 64
             }
           ],
           "scoring": {

@@ -570,114 +570,176 @@
     "confirm": {
       "questions": [
         {
-          "id": "q1",
-          "prompt": "1문단의 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 215
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "디지털 오디오 파일은 소리를 일정한 수치 정보로 바꾸어 저장하므로 편리하지만, 원음을 그대로 담으려면 데이터 양이 매우 커진다. 그래서 실제 저장과 전송에서는 불필요한 정보를 줄이는 압축 과정이 중요하다. 이때 널리 쓰이는 방법이 지각부호화인데, 이는 소리 자체를 기계적으로 줄이는 방식이 아니라 사람의 청각이 잘 느끼지 못하는 부분을 계산해 제거하거나 덜 정밀하게 저장하는 기술이다."
+                "id": "q1",
+                "prompt": "지각부호화가 어떤 기술인지 설명한 부분을 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p1",
+                                "start": 166,
+                                "end": 212
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "사람의 청각이 잘 느끼지 못하는 부분을 계산해 제거하거나 덜 정밀하게 저장하는 기술"
         },
         {
-          "id": "q2",
-          "prompt": "2문단의 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 186
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지각부호화가 성립하려면 먼저 사람이 어떤 소리를 들을 수 있는지에 대한 기준이 필요하다. 그 기준 가운데 하나가 최소가청강도다. 이는 아무 방해가 없는 조용한 환경에서 사람이 겨우 감지할 수 있는 최소한의 소리 크기를 뜻한다. 어떤 소리가 이 기준보다 작다면, 그 소리는 존재하더라도 사실상 들리지 않으므로 저장 우선순위가 낮아진다."
+                "id": "q2",
+                "prompt": "사람이 겨우 감지할 수 있는 최소한의 소리 크기를 가리키는 용어를 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p2",
+                                "start": 63,
+                                "end": 69
+                        },
+                        {
+                                "paragraphId": "p4",
+                                "start": 33,
+                                "end": 39
+                        },
+                        {
+                                "paragraphId": "p6",
+                                "start": 88,
+                                "end": 94
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "최소가청강도"
         },
         {
-          "id": "q3",
-          "prompt": "3문단의 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 215
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그러나 실제 청취 상황에서는 다른 큰 소리가 주변의 작은 소리를 가려 버리는 차폐 현상이 함께 작용한다. 특히 주파수가 가까운 소리끼리는 이런 가려짐이 더 쉽게 나타난다. 큰 소리 주변에서는 원래라면 들릴 수 있던 작은 소리도 들리지 않게 되는데, 지각부호화는 바로 이 점을 이용한다. 즉 모든 소리를 똑같이 다루지 않고, 차폐 때문에 청자가 거의 알아차리지 못할 성분을 우선 줄인다."
+                "id": "q3",
+                "prompt": "최소가청강도의 뜻을 설명한 부분을 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p2",
+                                "start": 75,
+                                "end": 120
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "아무 방해가 없는 조용한 환경에서 사람이 겨우 감지할 수 있는 최소한의 소리 크기"
         },
         {
-          "id": "q4",
-          "prompt": "4문단의 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 169
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 과정에서 중요한 기준이 차폐 문턱값이다. 차폐 문턱값은 최소가청강도에 차폐 효과까지 반영해, 실제로 들을 수 있는 소리의 하한선을 다시 계산한 값이다. 어떤 소리가 이 문턱값보다 작으면 사람은 그 소리를 거의 인지하지 못한다. 따라서 압축 과정에서는 그런 성분을 제거하거나 아주 적은 정보만 남긴다."
+                "id": "q4",
+                "prompt": "큰 소리가 주변의 작은 소리를 가리는 현상을 설명한 부분을 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p3",
+                                "start": 16,
+                                "end": 48
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "다른 큰 소리가 주변의 작은 소리를 가려 버리는 차폐 현상"
         },
         {
-          "id": "q5",
-          "prompt": "5문단의 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 218
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "반대로 차폐 문턱값보다 충분히 큰 소리는 청각적으로 더 잘 드러나므로, 더 많은 비트를 배정해 정밀하게 저장할 필요가 있다. 여기서 핵심은 절대적인 소리 크기만이 아니라, 그 소리가 자신이 속한 대역에서 차폐 문턱값과 얼마나 차이가 나는가이다. 두 소리의 실제 크기가 비슷해도, 한쪽은 주변 차폐 때문에 덜 중요해질 수 있고 다른 쪽은 더 또렷하게 들려 더 많은 비트를 받아야 할 수 있다."
+                "id": "q5",
+                "prompt": "지각부호화가 차폐 현상을 이용해 우선 줄이는 대상을 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p3",
+                                "start": 181,
+                                "end": 206
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "차폐 때문에 청자가 거의 알아차리지 못할 성분"
         },
         {
-          "id": "q6",
-          "prompt": "6문단의 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 235
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "결국 지각부호화의 비트 할당은 '모든 소리에 똑같이 나누어 주는 방식'이 아니라 '청자가 실제로 더 잘 듣는 소리에 우선권을 주는 방식'이라고 할 수 있다. 최소가청강도와 차폐 문턱값은 그 우선순위를 정하는 기준이 되고, 이를 통해 데이터 양을 줄이면서도 체감 음질의 손실을 최소화한다. 그래서 오디오 압축을 이해할 때는 비트 수의 많고 적음만 보기보다, 그 배정이 어떤 청각 기준에 따라 달라지는지를 함께 살펴야 한다."
+                "id": "q6",
+                "prompt": "차폐 문턱값의 뜻을 설명한 부분을 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p4",
+                                "start": 33,
+                                "end": 83
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "최소가청강도에 차폐 효과까지 반영해, 실제로 들을 수 있는 소리의 하한선을 다시 계산한 값"
+        },
+        {
+                "id": "q7",
+                "prompt": "문턱값보다 작은 성분을 압축 과정에서 처리하는 방식을 모두 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p4",
+                                "start": 142,
+                                "end": 154
+                        },
+                        {
+                                "paragraphId": "p4",
+                                "start": 155,
+                                "end": 168
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ALL",
+                "answerTexts": [
+                        "그런 성분을 제거하거나",
+                        "아주 적은 정보만 남긴다"
+                ]
+        },
+        {
+                "id": "q8",
+                "prompt": "지각부호화의 비트 할당이 아닌 방식과 실제 방식을 모두 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p6",
+                                "start": 18,
+                                "end": 38
+                        },
+                        {
+                                "paragraphId": "p6",
+                                "start": 46,
+                                "end": 75
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ALL",
+                "answerTexts": [
+                        "모든 소리에 똑같이 나누어 주는 방식",
+                        "청자가 실제로 더 잘 듣는 소리에 우선권을 주는 방식"
+                ]
         }
-      ]
+]
     }
   }
 }

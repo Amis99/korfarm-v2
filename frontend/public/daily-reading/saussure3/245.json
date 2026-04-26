@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "물건을 질서 있게 치움?",
-          "answerText": "정리해야",
-          "answerMatchMode": "EXACT",
+          "prompt": "동생과 놀고 난 뒤 스스로 해야 할 일을 본문에서 찾으시오.",
+          "answerText": "주변을 스스로 정리해야 함",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 25,
-              "end": 29
+              "start": 17,
+              "end": 31
             }
           ],
           "scoring": {
@@ -606,19 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "주변을 깨끗이 치움은?",
-          "answerText": "정돈하는",
-          "answerMatchMode": "EXACT",
+          "prompt": "동생이 물건을 삼키지 않도록 먼저 치우는 것을 본문에서 찾으시오.",
+          "answerText": "작은 장난감부터 치웁니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 68,
-              "end": 72
-            },
-            {
-              "paragraphId": "p2",
-              "start": 69,
-              "end": 73
+              "start": 49,
+              "end": 62
             }
           ],
           "scoring": {
@@ -630,14 +625,49 @@
         },
         {
           "id": "q3",
-          "prompt": "맡은 일을 잘 해내는 마음?",
-          "answerText": "책임감을",
-          "answerMatchMode": "EXACT",
+          "prompt": "사용한 도구들을 제자리에 두는 행동과 그 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "사용한 도구들을 제자리에 두면",
+            "동생도 안전하게 쉴 수 있음"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 78,
-              "end": 82
+              "start": 0,
+              "end": 16
+            },
+            {
+              "paragraphId": "p2",
+              "start": 17,
+              "end": 32
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "주변을 치우고 정리하는 습관이나 마음을 모두 찾으시오.",
+          "answerTexts": [
+            "주변을 정돈하는 습관",
+            "스스로 정리하는 마음"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 65,
+              "end": 76
+            },
+            {
+              "paragraphId": "p3",
+              "start": 63,
+              "end": 74
             }
           ],
           "scoring": {

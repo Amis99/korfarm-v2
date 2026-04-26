@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 발표자가 논의의 목적이나 초점을 어떻게 설정하는가?",
+          "prompt": "발표자가 누구를 대표해 조사 결과를 발표하는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 151
+              "start": 15,
+              "end": 26
             }
           ],
           "scoring": {
@@ -585,16 +585,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "발표자: 안녕하세요. 저는 학생자치회 생활안전부를 대표해 학교 주변 교통 안전 조사 결과를 발표하겠습니다. 이번 발표에서는 등교 시간대 위험 지점이 어디인지, 학생들이 어떤 상황에서 불안을 느끼는지, 그리고 바로 실천 가능한 개선 방안이 무엇인지 차례로 말씀드리겠습니다."
+          "answerText": "학생자치회 생활안전부"
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 발표자가 어떤 의견이나 판단을 제시하는가?",
+          "prompt": "이번 발표에서 차례로 말하겠다고 한 내용을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 167
+              "paragraphId": "p1",
+              "start": 69,
+              "end": 87
+            },
+            {
+              "paragraphId": "p1",
+              "start": 89,
+              "end": 110
+            },
+            {
+              "paragraphId": "p1",
+              "start": 116,
+              "end": 137
             }
           ],
           "scoring": {
@@ -602,17 +612,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "발표자: 먼저 조사 방법입니다. 저희는 지난 2주 동안 아침 7시 50분부터 8시 20분까지 정문, 후문, 횡단보도 앞 세 구역을 나누어 관찰했고, 학생 68명을 대상으로 설문도 실시했습니다. 또 교통지도 봉사에 참여한 학부모 두 분과 짧은 면담을 진행해 현장에서 반복되는 문제를 함께 확인했습니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "등교 시간대 위험 지점이 어디인지",
+            "학생들이 어떤 상황에서 불안을 느끼는지",
+            "바로 실천 가능한 개선 방안이 무엇인지"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 발표자가 어떤 의견이나 판단을 제시하는가?",
+          "prompt": "관찰이 이루어진 기간과 시간을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 194
+              "paragraphId": "p2",
+              "start": 22,
+              "end": 51
             }
           ],
           "scoring": {
@@ -621,16 +635,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "발표자: 조사 결과 가장 위험하다고 지적된 곳은 후문 앞 횡단보도였습니다. 학생들은 신호가 바뀌기 직전에 차량이 속도를 줄이지 않고 지나가는 경우가 많다고 답했고, 실제 관찰에서도 보행 신호가 켜진 뒤 3초 안에 진입을 멈추지 않은 차량이 여러 차례 확인되었습니다. 특히 비 오는 날에는 우산 때문에 시야가 좁아져 학생들의 불안감이 더 커졌습니다."
+          "answerText": "지난 2주 동안 아침 7시 50분부터 8시 20분까지"
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 발표자가 어떤 점을 묻고 있는가?",
+          "prompt": "설문 대상으로 제시된 사람들을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 210
+              "paragraphId": "p2",
+              "start": 83,
+              "end": 89
             }
           ],
           "scoring": {
@@ -639,16 +653,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "발표자: 다음으로 왜 이런 문제가 반복되는지 원인을 살펴보겠습니다. 첫째, 후문 쪽은 학원 차량과 출근 차량이 한꺼번에 몰리는 시간대가 학생 등교 시간과 겹칩니다. 둘째, 일부 학생이 신호가 바뀌기 전에 서둘러 건너려 하고, 그 모습이 운전자와 보행자 모두에게 혼란을 줍니다. 셋째, 정문에 비해 후문 쪽 안전 안내 표지가 눈에 잘 띄지 않아 경계심을 높이는 효과가 약합니다."
+          "answerText": "학생 68명"
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 발표자가 무엇을 제안하거나 요청하는가?",
+          "prompt": "조사 결과 가장 위험하다고 지적된 곳을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 204
+              "paragraphId": "p3",
+              "start": 27,
+              "end": 36
             }
           ],
           "scoring": {
@@ -657,16 +671,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "발표자: 그래서 저희는 세 가지 개선안을 제안합니다. 먼저 후문 앞 바닥 신호등 점검을 학교와 지자체에 함께 요청하겠습니다. 다음으로 학생회와 학급 임원단이 일주일 동안 등교 시간 안전 캠페인을 운영해, 보행 신호가 켜진 뒤에만 건너는 행동을 집중 안내하겠습니다. 마지막으로 학부모회와 협의해 차량 정차 위치를 정문 쪽과 후문 쪽으로 분산하는 방안을 논의하겠습니다."
+          "answerText": "후문 앞 횡단보도"
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 발표자가 논의의 핵심을 어떻게 정리하는가?",
+          "prompt": "비 오는 날 학생들의 불안감이 더 커진 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 184
+              "paragraphId": "p3",
+              "start": 161,
+              "end": 175
             }
           ],
           "scoring": {
@@ -675,7 +689,65 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "발표자: 정리하면, 이번 조사는 막연한 불안이 아니라 반복적으로 나타나는 위험 지점을 확인했다는 데 의미가 있습니다. 학생들이 규칙을 지키는 일과 학교 밖 교통 환경을 함께 바꾸는 일이 동시에 이뤄져야 실제 변화가 생깁니다. 이상으로 발표를 마치겠습니다. 질문이 있으시면 조사 방법이나 제안한 개선안 순서에 대해 답변드리겠습니다."
+          "answerText": "우산 때문에 시야가 좁아져"
+        },
+        {
+          "id": "q7",
+          "prompt": "발표자가 제시한 문제가 반복되는 세 가지 원인을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 42,
+              "end": 90
+            },
+            {
+              "paragraphId": "p4",
+              "start": 96,
+              "end": 153
+            },
+            {
+              "paragraphId": "p4",
+              "start": 159,
+              "end": 209
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "후문 쪽은 학원 차량과 출근 차량이 한꺼번에 몰리는 시간대가 학생 등교 시간과 겹칩니다",
+            "일부 학생이 신호가 바뀌기 전에 서둘러 건너려 하고, 그 모습이 운전자와 보행자 모두에게 혼란을 줍니다",
+            "정문에 비해 후문 쪽 안전 안내 표지가 눈에 잘 띄지 않아 경계심을 높이는 효과가 약합니다"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "실제 변화가 생기려면 동시에 이뤄져야 한다고 한 두 일을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 66,
+              "end": 80
+            },
+            {
+              "paragraphId": "p6",
+              "start": 82,
+              "end": 102
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "학생들이 규칙을 지키는 일",
+            "학교 밖 교통 환경을 함께 바꾸는 일"
+          ]
         }
       ]
     }

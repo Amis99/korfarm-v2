@@ -569,114 +569,209 @@
     },
     "confirm": {
       "questions": [
-        {
-          "id": "q1",
-          "prompt": "1문단은 이 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 220
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q1",
+              "prompt":  "태양에서 오는 자외선을 흡수해 지표 생명체를 보호하는 대상을 지문에서 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  0,
+                                       "end":  7
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "성층권의 오존"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "성층권의 오존은 태양에서 오는 자외선을 흡수해 지표 생명체를 보호한다. 원래 성층권에서는 오존이 생성되는 과정과 분해되는 과정이 함께 일어나지만, 두 과정이 대체로 균형을 이루기 때문에 전체 농도는 일정한 범위 안에서 유지된다. 따라서 오존층의 급격한 감소를 설명하려면 단순히 오존이 분해된다는 사실만이 아니라, 특정 시기와 특정 지역에서 그 분해가 왜 갑자기 빨라지는지를 함께 살펴봐야 한다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 첫 핵심 원리나 기준을 어떻게 설명하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 192
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q2",
+              "prompt":  "성층권에서 함께 일어나 전체 농도의 균형을 이루는 두 과정을 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  50,
+                                       "end":  61
+                                   },
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  63,
+                                       "end":  70
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "오존이 생성되는 과정",
+                                  "분해되는 과정"
+                              ]
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "남극 오존 구멍이 특히 주목받는 이유는 오존 감소가 연중 일정하게 나타나는 것이 아니라 계절적으로 집중되기 때문이다. 남극의 겨울 동안에는 햇빛이 거의 닿지 않아 성층권이 매우 차가워지고, 강한 극소용돌이가 형성되어 남극 상공의 공기를 바깥과 잘 섞이지 않게 가둔다. 이렇게 고립된 찬 공기층은 화학 반응이 일어나기 쉬운 특수한 환경을 만든다."
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단은 그 원리의 작동 방식이나 예시를 무엇으로 보여 주는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 189
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q3",
+              "prompt":  "남극 오존 구멍이 특히 주목받는 이유를 설명한 부분을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  22,
+                                       "end":  64
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "오존 감소가 연중 일정하게 나타나는 것이 아니라 계절적으로 집중되기 때문이다"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이때 중요한 역할을 하는 것이 극성 성층권 구름이다. 이 구름은 성층권 기온이 매우 낮아졌을 때에만 형성되며, 얼음이나 질산을 포함한 미세 입자로 이루어진다. 문제는 이 구름이 단순한 배경 현상이 아니라, 평소에는 비교적 덜 반응적인 형태로 묶여 있던 염소 성분을 더 활발하게 반응할 수 있는 상태로 바꾸는 반응 장소를 제공한다는 점이다."
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 217
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q4",
+              "prompt":  "성층권 기온이 매우 낮아졌을 때에만 형성되는 구름의 이름을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p3",
+                                       "start":  17,
+                                       "end":  26
+                                   },
+                                   {
+                                       "paragraphId":  "p4",
+                                       "start":  6,
+                                       "end":  15
+                                   },
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  62,
+                                       "end":  71
+                                   },
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  128,
+                                       "end":  137
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "극성 성층권 구름"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "겨울 동안 극성 성층권 구름 표면에서 준비된 염소 성분은 햇빛이 없는 동안에는 대규모 오존 파괴를 곧바로 일으키지 않는다. 하지만 남극의 봄이 시작되어 햇빛이 다시 들어오면 사정이 달라진다. 자외선은 이 활성화된 염소 화합물을 분해해 자유 라디칼 염소를 만들어 내고, 이 염소는 촉매처럼 반복적으로 오존 분해 반응에 참여한다. 그 결과 짧은 기간 안에 오존 농도가 급격히 낮아질 수 있다."
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단은 이 주제의 효과나 쟁점을 어떤 방향으로 확장하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 234
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q5",
+              "prompt":  "극성 성층권 구름이 염소 성분에 대해 만드는 상태와 제공하는 장소를 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p3",
+                                       "start":  148,
+                                       "end":  166
+                                   },
+                                   {
+                                       "paragraphId":  "p3",
+                                       "start":  172,
+                                       "end":  177
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "더 활발하게 반응할 수 있는 상태",
+                                  "반응 장소"
+                              ]
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "남극 오존 구멍이 봄철에 두드러지는 것은 바로 이 두 조건이 순서대로 맞물리기 때문이다. 먼저 겨울의 극저온이 극성 성층권 구름을 만들고, 이어 봄의 햇빛이 활성화된 염소를 본격적으로 작동시킨다. 반대로 기온이 충분히 낮지 않거나 공기 고립이 약하면 같은 정도의 반응이 일어나기 어렵다. 즉 오존 구멍은 CFC 유래 염소의 존재만으로 설명되지 않고, 계절과 대기역학, 구름 형성 조건이 함께 결합해야 나타나는 현상이다."
-        },
-        {
-          "id": "q6",
-          "prompt": "6문단은 앞선 논의를 어떤 의미로 정리하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 254
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q6",
+              "prompt":  "자외선이 활성화된 염소 화합물을 분해해 만들어 내는 것을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p4",
+                                       "start":  131,
+                                       "end":  140
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "자유 라디칼 염소"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 관점에서 보면 남극 오존 구멍은 단순한 오염 결과가 아니라 화학 반응과 대기 순환이 결합된 계절적 사건이다. CFC는 장기적으로 문제의 원인을 제공하지만, 실제 대규모 오존 손실은 겨울의 냉각, 극소용돌이에 의한 공기 고립, 극성 성층권 구름의 형성, 봄철 햇빛의 재등장이라는 연쇄 조건 속에서 집중적으로 나타난다. 따라서 오존층 회복을 이해하려면 규제 정책의 효과뿐 아니라, 이런 계절적 메커니즘이 어떻게 약화되거나 강화되는지도 함께 살펴봐야 한다."
-        }
+          {
+              "id":  "q7",
+              "prompt":  "남극 오존 구멍이 봄철에 두드러지게 하는 두 조건을 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  53,
+                                       "end":  60
+                                   },
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  81,
+                                       "end":  86
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "겨울의 극저온",
+                                  "봄의 햇빛"
+                              ]
+          },
+          {
+              "id":  "q8",
+              "prompt":  "실제 대규모 오존 손실이 집중적으로 나타나는 연쇄 조건을 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  103,
+                                       "end":  109
+                                   },
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  111,
+                                       "end":  126
+                                   },
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  128,
+                                       "end":  141
+                                   },
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  143,
+                                       "end":  153
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "겨울의 냉각",
+                                  "극소용돌이에 의한 공기 고립",
+                                  "극성 성층권 구름의 형성",
+                                  "봄철 햇빛의 재등장"
+                              ]
+          }
       ]
     }
   }

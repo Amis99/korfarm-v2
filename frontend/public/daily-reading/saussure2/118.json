@@ -678,14 +678,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "어떤 일이 오랜 시간을 거쳐 드디어 일어남을 뜻하는 말은?",
-          "answerText": "마침내",
+          "prompt": "여우가 찾고 있던 것을 지문에서 찾으시오.",
+          "answerText": "먹을 것",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 46,
-              "end": 49
+              "start": 27,
+              "end": 31
             }
           ],
           "scoring": {
@@ -696,14 +696,50 @@
         },
         {
           "id": "q2",
-          "prompt": "내 잘못을 감추려고 다른 이유를 꾸며서 대는 말은?",
-          "answerText": "핑계",
+          "prompt": "여우가 발견한 것을 지문에서 찾으시오.",
+          "answerText": "커다란 포도나무 한 그루",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 50,
+              "end": 63
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "포기하지 않은 여우가 한 행동을 지문에서 찾으시오.",
+          "answerText": "여러 번 점프했어요",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 61,
+              "end": 71
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "여우가 자기 못 하는 일을 무엇 탓으로 돌렸는지 지문에서 찾으시오.",
+          "answerText": "과일 탓",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 16,
-              "end": 18
+              "start": 94,
+              "end": 98
             }
           ],
           "scoring": {

@@ -325,93 +325,100 @@
       "questions": [
         {
           "id": "q1",
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "prompt": "지문에서 '동냥'을 모두 찾으시오.",
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "prompt": "지문에서 '흥부'를 모두 찾으시오",
+          "answerText": "흥부",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 175,
-              "end": 177
-            }
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p1", "start": 106, "end": 108},
+            {"paragraphId": "p2", "start": 206, "end": 208},
+            {"paragraphId": "p2", "start": 280, "end": 282},
+            {"paragraphId": "p2", "start": 283, "end": 285},
+            {"paragraphId": "p3", "start": 333, "end": 335}
           ],
-          "answerText": "동냥"
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "prompt": "지문에서 '호령'을 모두 찾으시오.",
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "prompt": "지문에서 '놀부'를 모두 찾으시오",
+          "answerText": "놀부",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 31,
-              "end": 33
-            }
+            {"paragraphId": "p2", "start": 217, "end": 219},
+            {"paragraphId": "p3", "start": 6, "end": 8}
           ],
-          "answerText": "호령"
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "prompt": "지문에서 '구박'을 모두 찾으시오.",
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "prompt": "흥부가 ᄊᆞᆯ이나 벼를 얻으러 찾아간, 음식 끝을 보면 사촌도 몰라본다고 한 인물의 이름을 찾으시오",
+          "answerText": "놀부",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 238,
-              "end": 240
-            }
+            {"paragraphId": "p2", "start": 217, "end": 219},
+            {"paragraphId": "p3", "start": 6, "end": 8}
           ],
-          "answerText": "구박"
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "revealOnWrong": true,
+          "prompt": "놀부가 흥부를 대하는 태도를 한 낱말로 드러낸 말을 찾으시오",
+          "answerText": "구박",
           "answerMatchMode": "ANY",
-          "prompt": "지문에서 '방약무인'을 모두 찾으시오.",
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 424,
-              "end": 428
-            }
+            {"paragraphId": "p2", "start": 238, "end": 240}
           ],
-          "answerText": "방약무인"
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "revealOnWrong": true,
+          "prompt": "놀부가 흥부를 매질하는 모습을 과장되게 비유한 표현을 찾으시오",
+          "answerText": "손ᄌᆡ승의메질ᄒᆞ듯원화상의법고치듯",
           "answerMatchMode": "ANY",
-          "prompt": "지문에서 '지극악'을 모두 찾으시오.",
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 466,
-              "end": 469
-            }
+            {"paragraphId": "p3", "start": 377, "end": 395}
           ],
-          "answerText": "지극악"
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "흥부가 청렴을 이야기하며 견주어 든 옛 인물의 이름을 찾으시오",
+          "answerText": "ᄇᆡᆨ이슉졔",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 42, "end": 48}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

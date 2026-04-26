@@ -913,14 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "큰 병에 걸린 용궁의 임금은 누구인가요?",
-          "answerText": "용왕님",
+          "prompt": "어떤 처방도 효과가 없었다는 뜻을 나타내는 구절을 찾으시오.",
+          "answerText": "어떤 약도 소용이 없자",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 11,
-              "end": 14
+              "start": 26,
+              "end": 38
             }
           ],
           "scoring": {
@@ -931,14 +931,22 @@
         },
         {
           "id": "q2",
-          "prompt": "유일한 약으로 알려진 것은 무엇인가요?",
-          "answerText": "토끼의 간",
-          "answerMatchMode": "ANY",
+          "prompt": "별주부가 토끼를 유혹하며 말한 보상을 모두 찾으시오.",
+          "answerTexts": [
+            "높은 벼슬",
+            "맛있는 음식"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 50,
-              "end": 55
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 32
+            },
+            {
+              "paragraphId": "p2",
+              "start": 34,
+              "end": 40
             }
           ],
           "scoring": {
@@ -949,39 +957,14 @@
         },
         {
           "id": "q3",
-          "prompt": "육지로 나가 토끼를 데려오겠다고 한 거북이는 누구인가요?",
-          "answerText": "별주부",
+          "prompt": "토끼가 묶이고 간을 내놓으라는 명령을 받은 때를 나타내는 구절을 찾으시오.",
+          "answerText": "바닷속에 도착하자마자",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 119,
-              "end": 122
-            },
-            {
               "paragraphId": "p2",
-              "start": 8,
-              "end": 11
-            },
-            {
-              "paragraphId": "p2",
-              "start": 72,
-              "end": 75
-            },
-            {
-              "paragraphId": "p3",
-              "start": 78,
-              "end": 81
-            },
-            {
-              "paragraphId": "p3",
-              "start": 118,
-              "end": 121
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 3
+              "start": 103,
+              "end": 114
             }
           ],
           "scoring": {
@@ -992,14 +975,14 @@
         },
         {
           "id": "q4",
-          "prompt": "별주부가 토끼를 유혹할 때 약속한 지위는 무엇인가요?",
-          "answerText": "높은 벼슬",
+          "prompt": "토끼가 간을 두고 왔다고 말한 장소를 찾으시오.",
+          "answerText": "육지의 서늘한 곳",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 27,
-              "end": 32
+              "paragraphId": "p3",
+              "start": 32,
+              "end": 41
             }
           ],
           "scoring": {
@@ -1010,14 +993,14 @@
         },
         {
           "id": "q5",
-          "prompt": "토끼가 마지막에 달아난 곳은 어디인가요?",
-          "answerText": "숲속",
+          "prompt": "이 이야기가 주는 교훈의 핵심 내용을 나타내는 문장을 찾으시오.",
+          "answerText": "위기의 순간에도 침착하게 지혜를 짜내면 살아날 길이 있다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 130,
-              "end": 132
+              "paragraphId": "p4",
+              "start": 58,
+              "end": 89
             }
           ],
           "scoring": {

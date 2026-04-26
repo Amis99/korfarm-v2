@@ -396,48 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "줄기와 잎이 있는 식물?",
-          "answerText": "나무",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 21,
-              "end": 23
-            },
-            {
-              "paragraphId": "p1",
-              "start": 113,
-              "end": 115
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 83,
-              "end": 85
-            },
-            {
-              "paragraphId": "p2",
-              "start": 122,
-              "end": 124
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "빛이 가려져 생긴 어둠?",
+          "prompt": "여름날 나무가 만들어 주는 시원한 휴식의 장소를 무엇이라 하나요?",
           "answerText": "그늘",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -468,15 +429,63 @@
           "revealOnWrong": true
         },
         {
+          "id": "q2",
+          "prompt": "나무 그늘이 쉼터가 되어 주는 \"작은 ○들과 ○○들\" 두 친구를 모두 찾아보세요",
+          "answerText": "새, 곤충",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 19,
+              "end": 20
+            },
+            {
+              "paragraphId": "p2",
+              "start": 23,
+              "end": 25
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q3",
-          "prompt": "편안히 몸을 쉼?",
-          "answerText": "휴식",
-          "answerMatchMode": "EXACT",
+          "prompt": "나무 그늘이 새와 곤충들에게 되어 주는 \"○○○○와 ○○\" 두 가지를 모두 찾아보세요",
+          "answerText": "보금자리, 쉼터",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 34,
+              "end": 38
+            },
+            {
+              "paragraphId": "p2",
+              "start": 40,
+              "end": 42
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "그늘 밑의 온도가 주변보다 낮고 쾌적한 까닭은 무엇이 햇빛을 가려주기 때문인지 살펴보세요",
+          "answerText": "나뭇잎",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 44,
-              "end": 46
+              "start": 68,
+              "end": 71
             }
           ],
           "scoring": {

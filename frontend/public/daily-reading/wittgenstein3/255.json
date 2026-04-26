@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "prompt": "암석이 지구 자기장과 관련해 어떤 장치가 된다고 했는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 207
+              "start": 188,
+              "end": 202
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "지구 자기장은 오랜 지질 시간 동안 항상 같은 방향을 유지한 것이 아니라 여러 차례 뒤집힌 것으로 알려져 있다. 이런 사실은 과거의 암석에 남아 있는 잔류 지자기를 조사하는 과정에서 드러났다. 용암이나 마그마가 식어 굳을 때 자성 광물은 당시 지구 자기장의 방향에 맞추어 정렬되는데, 그 배열이 굳어진 뒤에도 남기 때문에 암석은 일종의 '과거 자기장 기록 장치'가 된다."
+          "answerText": "'과거 자기장 기록 장치'"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 핵심 원리나 기준을 어떻게 설명하는가?",
+          "prompt": "자성 광물이 당시 지구 자기장 방향에 맞추어 정렬되는 때를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 228
+              "paragraphId": "p1",
+              "start": 108,
+              "end": 125
             }
           ],
           "scoring": {
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "처음 연구자들은 잔류 지자기의 방향 차이를 두고 지구 자극이 이동했거나 대륙이 움직였을 가능성을 함께 검토했다. 그러나 서로 다른 대륙과 시기의 암석을 비교한 결과 단순한 자극 이동만으로는 설명하기 어려운 패턴이 드러났고, 결국 지구 자기장 자체가 정상 상태와 역전 상태를 오가며 변해 왔다는 해석이 힘을 얻었다. 이로써 잔류 지자기는 단순한 광물의 성질이 아니라 지구 물리적 변화를 복원하는 증거가 되었다."
+          "answerText": "용암이나 마그마가 식어 굳을 때"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 그 원리의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "처음 연구자들이 함께 검토한 가능성을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 217
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 39
+            },
+            {
+              "paragraphId": "p2",
+              "start": 40,
+              "end": 52
             }
           ],
           "scoring": {
@@ -620,17 +625,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 개념은 해저 탐사 기술이 발달하면서 결정적인 전환점을 맞는다. 배 뒤에 자기계를 끌며 해령 주변의 해저 현무암을 조사해 보니, 해령을 중심으로 양쪽에 정상 자화 구역과 역전 자화 구역이 띠처럼 번갈아 나타났다. 더 중요한 점은 이 줄무늬 배열이 해령을 기준으로 거의 대칭적이었다는 사실이다. 이는 해령에서 새 지각이 만들어진 뒤 양쪽으로 벌어져 나갔다는 해석과 자연스럽게 맞아떨어졌다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "지구 자극이 이동했거나",
+            "대륙이 움직였을 가능성"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
+          "prompt": "단순한 자극 이동만으로 설명하기 어려웠던 것을 가리키는 어구를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 246
+              "paragraphId": "p2",
+              "start": 92,
+              "end": 117
             }
           ],
           "scoring": {
@@ -639,16 +647,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "대칭 줄무늬가 해저 확장의 증거가 되는 이유는 새 현무암이 형성될 때마다 당시의 지구 자기장 방향을 그대로 기록하기 때문이다. 만약 해령에서 용암이 분출한 뒤 양옆으로 조금씩 이동했다면, 어떤 시기에는 정상 자화 띠가, 다음 역전 시기에는 반대 방향의 띠가 생겼을 것이다. 이런 형성이 반복되면 해령을 축으로 좌우에 같은 순서의 줄무늬가 남게 된다. 즉 줄무늬의 대칭성은 해령에서 지각이 연속적으로 생성되었다는 과정을 시각적으로 보여 준다."
+          "answerText": "단순한 자극 이동만으로는 설명하기 어려운 패턴"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 이 주제의 효과나 쟁점을 어떤 방향으로 확장하는가?",
+          "prompt": "해령 양쪽에 번갈아 나타난 두 자화 구역을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 228
+              "paragraphId": "p3",
+              "start": 86,
+              "end": 94
+            },
+            {
+              "paragraphId": "p3",
+              "start": 96,
+              "end": 104
             }
           ],
           "scoring": {
@@ -656,17 +669,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "여기서 지자기 역전 시간표가 확보되면 해저 확장 속도도 추정할 수 있다. 예를 들어 특정 역전 시기에 해당하는 줄무늬가 해령에서 얼마나 떨어져 있는지 측정하고, 그 역전이 현재로부터 몇 년 전에 일어났는지 알면 거리와 시간을 이용해 평균 이동 속도를 계산할 수 있다. 여기에 포타슘-아르곤 연대 측정처럼 암석의 생성 시기를 추정하는 방법이 결합되면, 줄무늬 하나하나를 더 정확한 지질 연대와 연결할 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "정상 자화 구역",
+            "역전 자화 구역"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 앞선 논의를 어떤 의미로 정리하는가?",
+          "prompt": "줄무늬 배열에서 더 중요한 점으로 제시된 사실을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 241
+              "paragraphId": "p3",
+              "start": 139,
+              "end": 161
             }
           ],
           "scoring": {
@@ -675,7 +691,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 지자기 역전 연구는 단순히 자기장의 변화를 밝히는 데서 끝나지 않았다. 암석 속 미약한 자화 흔적과 해저의 대칭 줄무늬는 대륙과 해양 지각이 정지해 있지 않다는 사실을 드러냈고, 해령에서 지각이 생성되어 퍼져 나간다는 동적인 지구상을 뒷받침했다. 보이지 않는 자기장의 반전 기록이 해저 확장의 속도까지 계산하게 만들었다는 점에서, 고지자기 연구는 지구 과학의 공간적 상상력을 시간적 증거와 연결한 대표적 사례라고 할 수 있다."
+          "answerText": "해령을 기준으로 거의 대칭적이었다는 사실"
+        },
+        {
+          "id": "q7",
+          "prompt": "대칭 줄무늬가 해저 확장의 증거가 되는 이유를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 26,
+              "end": 67
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "새 현무암이 형성될 때마다 당시의 지구 자기장 방향을 그대로 기록하기 때문"
+        },
+        {
+          "id": "q8",
+          "prompt": "평균 이동 속도를 계산하기 위해 알아야 할 두 정보를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 47,
+              "end": 83
+            },
+            {
+              "paragraphId": "p5",
+              "start": 90,
+              "end": 114
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "특정 역전 시기에 해당하는 줄무늬가 해령에서 얼마나 떨어져 있는지",
+            "그 역전이 현재로부터 몇 년 전에 일어났는지"
+          ]
         }
       ]
     }

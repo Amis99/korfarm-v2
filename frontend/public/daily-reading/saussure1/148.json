@@ -552,13 +552,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "열차가 멈춘 곳은?",
-          "answerText": "정거장",
-          "answerMatchMode": "EXACT",
+          "prompt": "구름열차가 마침내 도착한 곳의 이름은 무엇인가요? 지문에서 일곱 글자로 찾아 보세요",
+          "answerText": "하늘 나라 정거장",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 29,
+              "start": 23,
               "end": 32
             }
           ],
@@ -571,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "민서를 반겨준 것은?",
-          "answerText": "꽃",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이는 하늘 나라에서 보낸 시간이 마치 무엇처럼 느껴진다고 표현했나요? 지문에서 한 단어로 찾아 보세요",
+          "answerText": "마법",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 85,
-              "end": 86
+              "start": 171,
+              "end": 173
             }
           ],
           "scoring": {
@@ -590,24 +590,48 @@
         },
         {
           "id": "q3",
-          "prompt": "밤마다 꾸고 싶은 것?",
-          "answerText": "꿈",
-          "answerMatchMode": "EXACT",
+          "prompt": "민서가 책상 위 종이에 정성껏 그린 두 가지는 무엇인가요? 지문에서 둘 다 찾아 보세요",
+          "answerText": "무지개,구름열차",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 123,
-              "end": 124
+              "start": 4,
+              "end": 8
             },
             {
               "paragraphId": "p2",
-              "start": 92,
-              "end": 93
+              "start": 98,
+              "end": 102
             },
             {
               "paragraphId": "p2",
-              "start": 172,
-              "end": 173
+              "start": 135,
+              "end": 138
+            },
+            {
+              "paragraphId": "p2",
+              "start": 140,
+              "end": 144
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "민서가 잠에서 깨어 미소를 지은 까닭은 비록 꿈이었지만 구름열차와 함께한 무엇이 소중했기 때문인가요? 지문에서 한 단어로 찾아 보세요",
+          "answerText": "모험",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 108,
+              "end": 110
             }
           ],
           "scoring": {

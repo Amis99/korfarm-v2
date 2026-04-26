@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사람 외의 모든 짐승?",
+          "prompt": "계절의 변화에 따라 저마다의 방식으로 환경에 적응하며 살아가는 대상이 무엇인지 본문에서 한 단어로 찾아 보세요",
           "answerText": "동물",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -425,9 +425,9 @@
         },
         {
           "id": "q2",
-          "prompt": "봄, 여름, 가을, 겨울?",
+          "prompt": "봄, 여름, 가을, 겨울처럼 변화에 따라 동물의 생활이 달라지는 시기를 무엇이라 부르는지 본문에서 한 단어로 찾아 보세요",
           "answerText": "계절",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -449,9 +449,28 @@
         },
         {
           "id": "q3",
-          "prompt": "주의 깊게 살펴보는 일?",
+          "prompt": "추운 겨울에 곰이 굴속에서 깊이 잠을 자며 추위를 피하는 행동을 무엇이라 부르는지 본문에서 한 단어로 찾아 보세요",
+          "answerText": "겨울잠",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 15,
+              "end": 18
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "계절마다 달라지는 동물의 생활 모습을 무엇하면 자연의 신비로운 질서를 느낄 수 있다고 했는지 본문에서 한 단어로 찾아 보세요",
           "answerText": "관찰",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",

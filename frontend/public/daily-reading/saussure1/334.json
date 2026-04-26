@@ -396,35 +396,15 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "잎과 뿌리 사이의 몸통?",
+          "prompt": "뿌리에서 빨아올린 물과 영양분을 잎까지 나르는 부분을 찾아보세요",
           "answerText": "줄기",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p1",
-              "start": 73,
-              "end": 75
-            },
-            {
-              "paragraphId": "p2",
-              "start": 10,
-              "end": 12
-            },
-            {
-              "paragraphId": "p2",
-              "start": 57,
-              "end": 59
-            },
-            {
-              "paragraphId": "p2",
-              "start": 112,
-              "end": 114
-            }
+            {"paragraphId": "p1", "start": 4, "end": 6},
+            {"paragraphId": "p1", "start": 73, "end": 75},
+            {"paragraphId": "p2", "start": 10, "end": 12},
+            {"paragraphId": "p2", "start": 57, "end": 59},
+            {"paragraphId": "p2", "start": 112, "end": 114}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -435,25 +415,13 @@
         },
         {
           "id": "q2",
-          "prompt": "나무 겉면을 덮은 것?",
+          "prompt": "나무 겉면을 덮어 몸속을 외부로부터 지켜 주는 부분을 찾아보세요",
           "answerText": "나무껍질",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 88,
-              "end": 92
-            },
-            {
-              "paragraphId": "p1",
-              "start": 139,
-              "end": 143
-            },
-            {
-              "paragraphId": "p2",
-              "start": 19,
-              "end": 23
-            }
+            {"paragraphId": "p1", "start": 88, "end": 92},
+            {"paragraphId": "p1", "start": 139, "end": 143},
+            {"paragraphId": "p2", "start": 19, "end": 23}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -464,15 +432,31 @@
         },
         {
           "id": "q3",
-          "prompt": "위험 없는 평안한 상태?",
-          "answerText": "안전",
-          "answerMatchMode": "EXACT",
+          "prompt": "나무가 오랫동안 튼튼하게 살아가려면 어디가 건강해야 하는지 찾아보세요",
+          "answerText": "줄기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 125,
-              "end": 127
-            }
+            {"paragraphId": "p1", "start": 4, "end": 6},
+            {"paragraphId": "p1", "start": 73, "end": 75},
+            {"paragraphId": "p2", "start": 10, "end": 12},
+            {"paragraphId": "p2", "start": 57, "end": 59},
+            {"paragraphId": "p2", "start": 112, "end": 114}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "나무껍질이 나무 몸속을 보호해 주는 외부 위협 두 가지를 모두 찾아보세요",
+          "answerText": "추위, 벌레",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 115, "end": 117},
+            {"paragraphId": "p1", "start": 119, "end": 121}
           ],
           "scoring": {
             "correctDeltaSec": 10,

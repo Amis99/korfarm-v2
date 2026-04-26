@@ -914,14 +914,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "용왕의 병을 고칠 유일한 약이라고 한 것은 무엇인가요?",
-          "answerText": "토끼의 간",
+          "prompt": "신령스러운 의원이 약의 성격을 설명한 표현을 지문에서 찾으시오.",
+          "answerText": "유일한 약",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 53,
-              "end": 58
+              "start": 60,
+              "end": 65
             }
           ],
           "scoring": {
@@ -932,28 +932,18 @@
         },
         {
           "id": "q2",
-          "prompt": "토끼를 잡아오겠다고 나선 존재는 누구인가요?",
-          "answerText": "별주부 거북이",
-          "answerMatchMode": "ANY",
+          "prompt": "별주부가 용궁에 가면 있다고 하며 토끼를 유혹한 것을 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "높은 벼슬",
+            "산해진미"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 125,
-              "end": 132
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "별주부가 토끼를 유혹할 때 내세운 것은 무엇인가요?",
-          "answerText": "산해진미",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 32
+            },
             {
               "paragraphId": "p2",
               "start": 34,
@@ -967,15 +957,33 @@
           "revealOnWrong": true
         },
         {
+          "id": "q3",
+          "prompt": "토끼가 별주부의 말을 믿고 한 행동을 지문에서 찾으시오.",
+          "answerText": "그의 등에 올라타 바닷속으로 향했다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 81,
+              "end": 100
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q4",
-          "prompt": "토끼가 간을 두고 왔다고 한 곳은 어디인가요?",
-          "answerText": "육지의 서늘한 곳",
+          "prompt": "토끼가 죽음의 위기 앞에서 낸 것을 지문에서 찾으시오.",
+          "answerText": "기발한 꾀",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 34,
-              "end": 43
+              "start": 15,
+              "end": 20
             }
           ],
           "scoring": {
@@ -986,14 +994,14 @@
         },
         {
           "id": "q5",
-          "prompt": "이 작품이 경계하라고 한 것은 무엇인가요?",
-          "answerText": "달콤한 유혹",
+          "prompt": "남의 달콤한 유혹에 넘어가기 전에 해야 할 일을 지문에서 찾으시오.",
+          "answerText": "상황을 꼼꼼히 따져봐야 한다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 101,
-              "end": 107
+              "start": 117,
+              "end": 132
             }
           ],
           "scoring": {

@@ -571,30 +571,32 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 특별 공공 행정 조직의 유형과 법인격, 독립성라는 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "prompt": "현대 행정에서 특정 기능을 집중적으로 수행하는 조직의 이름을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 184
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "현대 행정은 국가가 모든 업무를 직접 처리하는 방식만으로 운영되기 어렵다. 행정 수요가 세분화되고 전문성이 요구되는 영역이 늘어나면서, 특정 기능을 집중적으로 수행하는 조직이 필요해졌다. 이런 배경에서 등장한 것이 특별 공공 행정 조직이다. 이 조직은 일반 행정 부처와는 다른 법적 지위와 운영 원리를 통해 공공 목적을 수행한다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 첫 핵심 기준이나 원리를 어떻게 설명하는가?",
-          "answerRanges": [
+              "start": 120,
+              "end": 131
+            },
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 195
+              "end": 11
+            },
+            {
+              "paragraphId": "p4",
+              "start": 3,
+              "end": 14
+            },
+            {
+              "paragraphId": "p6",
+              "start": 3,
+              "end": 14
+            },
+            {
+              "paragraphId": "p6",
+              "start": 132,
+              "end": 143
             }
           ],
           "scoring": {
@@ -603,33 +605,46 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "특별 공공 행정 조직은 국가가 직접 담당하기 어려운 영역을 보완하거나, 정치적 중립성과 기능적 효율성이 특히 필요한 업무를 맡는다. 그래서 어떤 조직은 국가 기관의 형태를 띠고, 어떤 조직은 공공 단체의 형태로 설립된다. 중요한 점은 이들이 모두 같은 틀에 묶이지 않는다는 사실이다. 조직의 설립 근거와 수행 기능에 따라 법적 성격도 서로 달라진다."
+          "answerText": "특별 공공 행정 조직"
+        },
+        {
+          "id": "q2",
+          "prompt": "특별 공공 행정 조직이 맡는 두 가지 업무 성격을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 13,
+              "end": 31
+            },
+            {
+              "paragraphId": "p2",
+              "start": 40,
+              "end": 67
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "국가가 직접 담당하기 어려운 영역",
+            "정치적 중립성과 기능적 효율성이 특히 필요한 업무"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단은 이어지는 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "조직의 법적 성격이 달라지는 기준 두 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 180
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 가운데 선거 관리 위원회나 감사원처럼 헌법적 근거를 가진 기관은 특정 권력 기관으로부터 독립해 업무를 수행해야 한다. 이런 기관의 핵심은 행정 편의보다 독립성과 공정성에 있다. 단순히 전문 기관이라는 이유만으로 특별한 것이 아니라, 권력 분립과 견제라는 헌법 질서를 실제로 유지하는 역할을 맡는다는 점에서 의미가 크다."
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
-          "answerRanges": [
+              "paragraphId": "p2",
+              "start": 159,
+              "end": 168
+            },
             {
-              "paragraphId": "p4",
-              "start": 0,
+              "paragraphId": "p2",
+              "start": 170,
               "end": 175
             }
           ],
@@ -638,17 +653,46 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "반면 특별 공공 행정 조직 중에는 법인격을 가진 공법상 법인도 있다. 법인격을 지닌 조직은 법률상 독립된 주체로서 계약을 맺고 재산을 보유하며 소송의 당사자가 될 수 있다. 국민연금공단이나 국민건강보험공단 같은 조직은 공공 목적을 위해 존재하지만, 국가 자체와는 구별되는 독립 주체로 움직인다는 점에서 특징적이다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "조직의 설립 근거",
+            "수행 기능"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "헌법적 근거를 가진 기관의 예를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 6,
+              "end": 15
+            },
+            {
+              "paragraphId": "p3",
+              "start": 17,
+              "end": 20
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "선거 관리 위원회",
+            "감사원"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단은 이 주제가 낳는 효과나 쟁점을 어떤 방향으로 확장하는가?",
+          "prompt": "헌법적 근거를 가진 기관의 핵심 가치를 나타낸 어구를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 210
+              "paragraphId": "p3",
+              "start": 87,
+              "end": 95
             }
           ],
           "scoring": {
@@ -657,16 +701,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "공공 단체 형태의 조직도 성격에 따라 나뉜다. 일정한 구성원의 결합을 바탕으로 하는 공공 조합은 인적 결합이 중심이 되고, 공공 목적을 위해 출연된 재산을 바탕으로 하는 공법상 재단은 재산적 기초가 중심이 된다. 여기에 특별법으로 설립된 대학 법인처럼 교육과 연구 분야에서 자율성을 크게 인정받는 형태도 있다. 같은 공공 조직이라도 설립 구조와 운영 논리가 같지 않은 셈이다."
+          "answerText": "독립성과 공정성"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 특별 공공 행정 조직의 유형과 법인격, 독립성라는 주제의 의미를 어떤 관점에서 정리하는가?",
+          "prompt": "법인격을 지닌 조직이 할 수 있는 일을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 213
+              "paragraphId": "p4",
+              "start": 64,
+              "end": 70
+            },
+            {
+              "paragraphId": "p4",
+              "start": 71,
+              "end": 79
+            },
+            {
+              "paragraphId": "p4",
+              "start": 80,
+              "end": 95
             }
           ],
           "scoring": {
@@ -674,8 +728,96 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "결국 특별 공공 행정 조직을 이해하려면 이름보다 법적 근거, 법인격 유무, 기능, 재정 구조를 함께 봐야 한다. 어떤 조직은 공공성을 강화하기 위해 정부 예산에 의존하고, 어떤 조직은 서비스 제공을 통해 재정 유연성을 확보한다. 이처럼 특별 공공 행정 조직은 공공성, 전문성, 효율성, 자율성을 조정하려는 제도적 장치이며, 현대 행정이 분화된 방식으로 작동한다는 사실을 보여 준다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "계약을 맺고",
+            "재산을 보유하며",
+            "소송의 당사자가 될 수 있다"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "공공 조합과 공법상 재단의 중심 기준을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 54,
+              "end": 59
+            },
+            {
+              "paragraphId": "p5",
+              "start": 103,
+              "end": 109
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "인적 결합",
+            "재산적 기초"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "특별 공공 행정 조직을 이해하려면 함께 보아야 할 요소를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 24,
+              "end": 29
+            },
+            {
+              "paragraphId": "p6",
+              "start": 27,
+              "end": 32
+            },
+            {
+              "paragraphId": "p6",
+              "start": 34,
+              "end": 40
+            },
+            {
+              "paragraphId": "p1",
+              "start": 79,
+              "end": 81
+            },
+            {
+              "paragraphId": "p2",
+              "start": 49,
+              "end": 51
+            },
+            {
+              "paragraphId": "p2",
+              "start": 173,
+              "end": 175
+            },
+            {
+              "paragraphId": "p6",
+              "start": 42,
+              "end": 44
+            },
+            {
+              "paragraphId": "p6",
+              "start": 46,
+              "end": 51
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "법적 근거",
+            "법인격 유무",
+            "기능",
+            "재정 구조"
+          ]
         }
       ]
     }

@@ -557,14 +557,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "남에게 베푼 소중한 도움이나 덕택을 뜻하는 말은 무엇인가요?",
-          "answerText": "은인",
-          "answerMatchMode": "EXACT",
+          "prompt": "인어공주가 왕자님을 살리기 위해 마녀에게 내어준 것과 얻은 것을 모두 찾으시오.",
+          "answerTexts": [
+            "목소리",
+            "두 다리"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 122,
-              "end": 124
+              "start": 23,
+              "end": 26
+            },
+            {
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 37
             }
           ],
           "scoring": {
@@ -576,14 +584,22 @@
         },
         {
           "id": "q2",
-          "prompt": "길이가 짧은 칼로, 언니들이 왕자를 찌르라고 공주에게 준 무기는?",
-          "answerText": "단검",
-          "answerMatchMode": "EXACT",
+          "prompt": "공주가 걸을 때마다 느낀 고통과 왕자님 곁에 있을 수 있어 느낀 감정을 모두 찾으시오.",
+          "answerTexts": [
+            "칼에 찔리는 듯한 통증",
+            "행복했습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 63,
-              "end": 65
+              "paragraphId": "p1",
+              "start": 57,
+              "end": 69
+            },
+            {
+              "paragraphId": "p1",
+              "start": 91,
+              "end": 97
             }
           ],
           "scoring": {
@@ -595,14 +611,49 @@
         },
         {
           "id": "q3",
-          "prompt": "인어공주가 마지막에 바다에 던져져 변하게 된 하얀 물질은?",
-          "answerText": "거품",
-          "answerMatchMode": "EXACT",
+          "prompt": "공주의 언니들이 말한 행동과 그 행동의 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "왕자를 찌르면",
+            "다시 인어가 될 수 있다고"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 68,
+              "end": 75
+            },
+            {
+              "paragraphId": "p2",
+              "start": 76,
+              "end": 90
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "인어공주의 몸이 변한 것과 영혼이 된 존재를 모두 찾으시오.",
+          "answerTexts": [
+            "하얀 거품",
+            "공기의 요정"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 12,
+              "start": 9,
               "end": 14
+            },
+            {
+              "paragraphId": "p3",
+              "start": 33,
+              "end": 39
             }
           ],
           "scoring": {

@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "꼬리를 흔드는 ( )가 반겼습니다.",
-          "answerText": "누렁이",
-          "answerMatchMode": "EXACT",
+          "prompt": "마당에 들어섰을 때 누가 어떻게 맞아 주었는지 나타내는 구절을 찾으시오.",
+          "answerText": "할머니께서 반갑게 맞아 주셨습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 70,
-              "end": 73
+              "start": 37,
+              "end": 55
             }
           ],
           "scoring": {
@@ -869,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "시골 ( )은 꿀맛이었습니다.",
-          "answerText": "밥상",
-          "answerMatchMode": "EXACT",
+          "prompt": "채소를 직접 수확할 때 한 행동을 나타내는 구절을 찾으시오.",
+          "answerText": "흙을 밟으며 채소를 직접 수확하니",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 72,
-              "end": 74
+              "start": 27,
+              "end": 45
             }
           ],
           "scoring": {
@@ -888,19 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "수많은 ( )을 보며 소원을 빌어요.",
-          "answerText": "별",
-          "answerMatchMode": "EXACT",
+          "prompt": "할머니께서 들려주신 것은 무엇인지 지문에서 찾으시오.",
+          "answerText": "옛날이야기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 125,
-              "end": 126
-            },
+              "start": 93,
+              "end": 98
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "기분이 뿌듯해진 이유가 된 일을 지문에서 찾으시오.",
+          "answerText": "할머니를 도와드린 일",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 41,
-              "end": 42
+              "start": 54,
+              "end": 65
             }
           ],
           "scoring": {

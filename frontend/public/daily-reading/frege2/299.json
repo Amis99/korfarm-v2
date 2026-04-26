@@ -884,14 +884,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "건의문을 쓴 학생 대표의 직책은 무엇인가요?",
-          "answerText": "학생회장",
+          "prompt": "건의문을 쓴 학생 대표의 직책과 이름을 찾으시오.",
+          "answerText": "학생회장 김민수",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 18,
-              "end": 22
+              "end": 26
             }
           ],
           "scoring": {
@@ -902,49 +902,14 @@
         },
         {
           "id": "q2",
-          "prompt": "학생들의 불안감을 높인 최근 사고는 무엇과 관련된 일이었나요?",
-          "answerText": "알레르기",
+          "prompt": "최근 우리 학교에서 발생한 안타까운 사고를 찾으시오.",
+          "answerText": "응급실에 가는 안타까운 사고",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 49,
-              "end": 53
-            },
-            {
-              "paragraphId": "p1",
-              "start": 161,
-              "end": 165
-            },
-            {
-              "paragraphId": "p2",
-              "start": 19,
-              "end": 23
-            },
-            {
-              "paragraphId": "p2",
-              "start": 130,
-              "end": 134
-            },
-            {
-              "paragraphId": "p2",
-              "start": 173,
-              "end": 177
-            },
-            {
-              "paragraphId": "p3",
-              "start": 57,
-              "end": 61
-            },
-            {
-              "paragraphId": "p3",
-              "start": 100,
-              "end": 104
-            },
-            {
-              "paragraphId": "p4",
-              "start": 55,
-              "end": 59
+              "start": 69,
+              "end": 84
             }
           ],
           "scoring": {
@@ -955,19 +920,14 @@
         },
         {
           "id": "q3",
-          "prompt": "배식대 앞에 크게 안내하자고 한 것은 무엇인가요?",
-          "answerText": "알레르기 유발 식품",
+          "prompt": "현재 급식 식단표에서 알레르기 유발 식품이 표시되는 방식을 찾으시오.",
+          "answerText": "숫자로 표시",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 19,
-              "end": 29
-            },
-            {
-              "paragraphId": "p3",
-              "start": 57,
-              "end": 67
+              "start": 31,
+              "end": 37
             }
           ],
           "scoring": {
@@ -978,14 +938,22 @@
         },
         {
           "id": "q4",
-          "prompt": "음식 이름표에 붙이자고 한 것은 어떤 색상의 표시인가요?",
-          "answerText": "스티커",
-          "answerMatchMode": "ANY",
+          "prompt": "주요 알레르기 유발 식품을 안내할 때 쓰자고 한 요소를 모두 찾으시오.",
+          "answerTexts": [
+            "큰 글씨",
+            "그림"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 145,
-              "end": 148
+              "start": 69,
+              "end": 73
+            },
+            {
+              "paragraphId": "p3",
+              "start": 75,
+              "end": 77
             }
           ],
           "scoring": {
@@ -996,14 +964,22 @@
         },
         {
           "id": "q5",
-          "prompt": "글의 마지막에서 급식실 변화가 지켜 줄 대상으로 제시한 것은 무엇인가요?",
-          "answerText": "생명",
-          "answerMatchMode": "ANY",
+          "prompt": "음식 이름표 스티커 색상의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "빨간색",
+            "노란색"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
+              "paragraphId": "p3",
               "start": 123,
-              "end": 125
+              "end": 126
+            },
+            {
+              "paragraphId": "p3",
+              "start": 129,
+              "end": 132
             }
           ],
           "scoring": {

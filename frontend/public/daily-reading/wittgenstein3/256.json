@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 회의의 출발 문제를 어떻게 제시하는가?",
+          "prompt": "신청서상 과학 동아리와 미술 동아리가 각각 필요하다고 적은 인원 수를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 221
+              "start": 76,
+              "end": 80
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생회장: 오늘 회의는 축제 체험 부스 운영 인력 배치를 최종 조정하려고 마련했습니다. 신청서상으로는 과학 동아리와 미술 동아리가 각각 네 명씩 필요하다고 적었는데, 전체 자원봉사 인원이 예상보다 적게 모였습니다. 그래서 한 부스에 인력이 몰리고 다른 부스가 비는 상황은 막아야 합니다. 과학 동아리 부장: 저희도 그 점은 알고 있지만, 실험 부스는 안전 문제 때문에 최소 인원이 꼭 필요합니다."
+          "answerText": "네 명씩"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 제안이나 우려를 어떤 이유와 함께 내놓는가?",
+          "prompt": "인력이 몰리고 다른 부스가 비는 상황을 막아야 하는 이유가 된 전체 자원봉사 인원 상황을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 237
+              "paragraphId": "p1",
+              "start": 93,
+              "end": 118
             }
           ],
           "scoring": {
@@ -603,16 +603,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "미술 동아리 대표: 저희는 체험자가 계속 들어오면 안내, 재료 배부, 작품 정리까지 동시에 해야 해서 세 명으로는 버티기 어렵습니다. 특히 오후 시간대에는 신청 인원이 많아서 대기줄이 길어질 가능성이 큽니다. 학생회 기획부장: 그런데 오전 시간은 상대적으로 한산할 수도 있으니 시간대별로 인력을 다르게 두는 방법을 먼저 검토하는 게 좋겠습니다. 한 번 정한 인원을 하루 종일 고정하는 방식이 꼭 필요한지는 다시 봐야 합니다."
+          "answerText": "전체 자원봉사 인원이 예상보다 적게 모였습니다"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 논의를 어떤 대안이나 조정안으로 이어 가는가?",
+          "prompt": "미술 동아리 대표가 세 명으로는 어렵다고 한 동시 업무를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 231
+              "paragraphId": "p2",
+              "start": 28,
+              "end": 30
+            },
+            {
+              "paragraphId": "p2",
+              "start": 32,
+              "end": 37
+            },
+            {
+              "paragraphId": "p2",
+              "start": 39,
+              "end": 44
             }
           ],
           "scoring": {
@@ -620,17 +630,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "과학 동아리 부장: 저희 부스는 오전에 설치 점검이 많아서 시작 직후에 사람이 더 필요합니다. 약품 설명과 보호 장비 확인을 한 사람이 맡고, 체험 진행을 다른 사람이 맡아야 해서 초반 두 시간은 네 명이 있어야 안전합니다. 학생회장: 그러면 오전에는 과학 동아리에 네 명을 두고, 점심 이후에는 세 명으로 줄이는 안을 생각해 볼 수 있겠네요. 대신 줄어든 한 명을 다른 부스로 돌리는 식으로 조정하면 어떻습니까."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "안내",
+            "재료 배부",
+            "작품 정리"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단은 예상 질문이나 진행 기준을 어떻게 준비하는가?",
+          "prompt": "학생회 기획부장이 먼저 검토하자고 한 인력 운영 방법을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 243
+              "paragraphId": "p2",
+              "start": 155,
+              "end": 174
             }
           ],
           "scoring": {
@@ -639,16 +653,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "미술 동아리 대표: 그 안이라면 저희는 오후에 네 명을 확보하는 조건이면 수용할 수 있습니다. 오전에는 체험 재료 정리와 시범 작품 전시가 중심이라 세 명으로도 가능하지만, 오후에는 만들기 체험이 본격적으로 진행돼서 설명 인원이 더 필요합니다. 학생회 기획부장: 좋습니다. 그러면 오전에는 과학 네 명, 미술 세 명, 오후에는 과학 세 명, 미술 네 명으로 우선 배치하고, 남는 두 명은 공용 지원 인력으로 두는 안을 적어 보겠습니다."
+          "answerText": "시간대별로 인력을 다르게 두는 방법"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 세부 운영 방식이나 보완 이유를 어떻게 구체화하는가?",
+          "prompt": "과학 동아리 부스에서 초반 두 시간 네 명이 필요한 이유가 되는 업무를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 250
+              "paragraphId": "p3",
+              "start": 53,
+              "end": 68
+            },
+            {
+              "paragraphId": "p3",
+              "start": 80,
+              "end": 85
             }
           ],
           "scoring": {
@@ -656,17 +675,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학생회 총무: 다만 공용 지원 인력은 쉬는 시간 보장도 고려해야 합니다. 작년에는 부스 운영이 길어지면서 담당 학생들이 식사를 늦게 하거나 아예 못 한 경우도 있었습니다. 과학 동아리 부장: 그 부분은 저희도 걱정입니다. 공용 인력이 단순 대기만 하는 게 아니라 교대 시간을 정해서 들어오면 좋겠습니다. 미술 동아리 대표: 맞아요. 체험자가 몰리는 시간만 도와주는 방식보다, 아예 한 시간 단위 교대표를 짜 두는 편이 더 혼란이 적을 것 같습니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "약품 설명과 보호 장비 확인",
+            "체험 진행"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 최종 합의를 어떤 실행 계획으로 정리하는가?",
+          "prompt": "미술 동아리 대표가 오후 네 명 확보를 조건으로 수용할 수 있다고 한 까닭을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 226
+              "paragraphId": "p4",
+              "start": 97,
+              "end": 135
             }
           ],
           "scoring": {
@@ -675,7 +697,59 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생회장: 정리하겠습니다. 오전에는 과학 동아리 네 명, 미술 동아리 세 명, 오후에는 과학 세 명, 미술 네 명으로 배치합니다. 공용 지원 인력 두 명은 교대표에 따라 점심시간과 혼잡 시간대 지원을 맡고, 세부 시간표는 오늘 안으로 다시 공유하겠습니다. 두 동아리는 부스별 필수 업무를 문서로 정리해서 학생회에 보내 주세요. 그러면 학생회가 최종 운영표를 만들어 내일 전체 준비 회의에서 확정하겠습니다."
+          "answerText": "오후에는 만들기 체험이 본격적으로 진행돼서 설명 인원이 더 필요합니다"
+        },
+        {
+          "id": "q7",
+          "prompt": "우선 배치안에서 오전에 배치할 두 동아리 인원을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 162,
+              "end": 168
+            },
+            {
+              "paragraphId": "p4",
+              "start": 170,
+              "end": 176
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "과학 네 명",
+            "미술 세 명"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "공용 지원 인력 두 명이 교대표에 따라 지원할 두 시간대를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 95,
+              "end": 99
+            },
+            {
+              "paragraphId": "p6",
+              "start": 101,
+              "end": 107
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "점심시간",
+            "혼잡 시간대"
+          ]
         }
       ]
     }

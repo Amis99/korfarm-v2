@@ -474,9 +474,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "하늘의 뜨거운 불덩이?",
+          "prompt": "지구에게 따뜻하고 소중한 열을 나누어주는 것은 무엇인지 찾아보세요",
           "answerText": "태양",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -523,19 +523,14 @@
         },
         {
           "id": "q2",
-          "prompt": "우리가 사는 푸른 별?",
-          "answerText": "지구",
-          "answerMatchMode": "EXACT",
+          "prompt": "태양 열은 환경을 오염시키지 않는 어떠한 에너지라고 했는지 찾아보세요",
+          "answerText": "깨끗한",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 18,
-              "end": 20
-            },
-            {
-              "paragraphId": "p1",
-              "start": 145,
-              "end": 147
+              "paragraphId": "p2",
+              "start": 67,
+              "end": 70
             }
           ],
           "scoring": {
@@ -547,34 +542,38 @@
         },
         {
           "id": "q3",
-          "prompt": "뜨거운 에너지?",
-          "answerText": "열",
-          "answerMatchMode": "EXACT",
+          "prompt": "한여름에 태양 열이 너무 강해서 무엇이 탈 수 있다고 했는지 찾아보세요",
+          "answerText": "피부",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 35,
-              "end": 36
-            },
+              "paragraphId": "p2",
+              "start": 108,
+              "end": 110
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "사람들이 태양 열을 이용해 만들거나 데우는 것 두 가지를 모두 찾아보세요",
+          "answerText": "전기, 따뜻한 물",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 49,
-              "end": 50
+              "paragraphId": "p2",
+              "start": 19,
+              "end": 21
             },
             {
               "paragraphId": "p2",
-              "start": 11,
-              "end": 12
-            },
-            {
-              "paragraphId": "p2",
-              "start": 51,
-              "end": 52
-            },
-            {
-              "paragraphId": "p2",
-              "start": 98,
-              "end": 99
+              "start": 28,
+              "end": 33
             }
           ],
           "scoring": {

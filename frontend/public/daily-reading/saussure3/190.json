@@ -562,9 +562,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "무척 오랜 세월이 흘렀음에도 자비롭고 온화한 미소를 지으며 마을 전체를 내려다보고 있는 것은?",
+          "prompt": "무척 오랜 세월이 흘렀음에도 자비롭고 온화한 미소를 지으며 마을 전체를 내려다보고 있던 것은 무엇인지 지문에서 찾으시오.",
           "answerText": "불상",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -606,9 +606,9 @@
         },
         {
           "id": "q2",
-          "prompt": "불상을 만들 때 사용된 거칠고 무거운 돌의 종류와 재질을 크고 자세하게 들여다본 도구는?",
+          "prompt": "불상을 만들 때 사용된 돌의 종류와 재질까지 들여다본 도구는 무엇인지 지문에서 찾으시오.",
           "answerText": "돋보기",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -625,14 +625,41 @@
         },
         {
           "id": "q3",
-          "prompt": "이 불상이 언제 왜 세워졌는지를 알기 위해 문화재 옆에 서 있는 설명이 가득한 것을 읽은 곳은?",
-          "answerText": "안내판",
-          "answerMatchMode": "EXACT",
+          "prompt": "집에 돌아와 무엇과 함께 무엇을 완성했는지 모두 찾으시오.",
+          "answerTexts": [
+            "사진",
+            "관찰 보고서"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 146,
-              "end": 149
+              "paragraphId": "p3",
+              "start": 7,
+              "end": 9
+            },
+            {
+              "paragraphId": "p3",
+              "start": 14,
+              "end": 20
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "새로운 것을 보게 되면 어떤 태도를 가질 것이라고 했는지 지문에서 찾으시오.",
+          "answerText": "수첩에 하나하나 기록하며 관찰하는 올바른 태도",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 154,
+              "end": 179
             }
           ],
           "scoring": {

@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "어린 나그네 꿈이 무엇 오려니?",
+          "prompt": "첫여름에 대한 그리움을 직접 묻는 문장을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 41,
-              "end": 52
+              "start": 13,
+              "end": 30
             }
           ],
           "scoring": {
@@ -585,16 +585,34 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "시시로 파랑새가 되어"
+          "answerText": "이곳 첫여름이 그립지 아니한가?"
         },
         {
           "id": "q2",
-          "prompt": "나무 밑으로 가나 책상 턱에 이마를 고일 때나, 네가 남기고 간 무엇?",
+          "prompt": "어린 나그네 꿈이 되어 온다고 한 대상을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 45,
+              "end": 48
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "파랑새"
+        },
+        {
+          "id": "q3",
+          "prompt": "네가 남기고 간 대상을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 36,
-              "end": 50
+              "end": 38
             }
           ],
           "scoring": {
@@ -603,15 +621,15 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "기억만이 소곤소곤거리는구나"
+          "answerText": "기억"
         },
         {
-          "id": "q3",
-          "prompt": "모처럼 만에 날아온 소식에 반가운 마음이 무엇 먼 황해가 남실거리나니?",
+          "id": "q4",
+          "prompt": "소식에 반가운 마음의 움직임을 나타낸 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
+              "start": 23,
               "end": 28
             }
           ],
@@ -621,34 +639,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "모처럼 만에 날아온 소식에 반가운 마음이 울렁거리어"
-        },
-        {
-          "id": "q4",
-          "prompt": "무엇 치달리고 있다……?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 18
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "……나는 갈매기 같은 종선을 한창"
+          "answerText": "울렁거리어"
         },
         {
           "id": "q5",
-          "prompt": "글에서 설명한 것은 무엇인가요?",
+          "prompt": "배를 갈매기에 빗댄 표현을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 9
+              "paragraphId": "p4",
+              "start": 5,
+              "end": 14
             }
           ],
           "scoring": {
@@ -657,12 +657,49 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "쾌활한 오월 넥타"
+          "answerText": "갈매기 같은 종선"
         },
         {
           "id": "q6",
-          "prompt": "문단의 초점은 무엇인가요?",
+          "prompt": "5문단에서 바다와 항해 이미지를 이루는 소재를 모두 찾으시오.",
           "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 20,
+              "end": 22
+            },
+            {
+              "paragraphId": "p5",
+              "start": 37,
+              "end": 42
+            },
+            {
+              "paragraphId": "p5",
+              "start": 50,
+              "end": 55
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "순풍",
+            "푸른 물결",
+            "외따른 섬"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "6문단에서 상대를 부르는 표현을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 22,
+              "end": 34
+            },
             {
               "paragraphId": "p6",
               "start": 36,
@@ -674,8 +711,29 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "쬐그만 이 페스탈로치야",
+            "꾀꼬리 같은 선생님이야"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "마지막에 머얼리 우는 소리로 제시된 대상을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 101,
+              "end": 107
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "꾀꼬리 같은 선생님이야"
+          "answerText": "오르간 소리"
         }
       ]
     }

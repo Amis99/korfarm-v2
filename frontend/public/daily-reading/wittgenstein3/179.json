@@ -571,11 +571,29 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 회의의 출발 문제를 어떻게 제시하는가?",
+          "prompt": "1문단에서 참여 팀이 많아 뒤로 밀릴 수 있다고 우려한 시간을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
+              "start": 34,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "질의응답 시간"
+        },
+        {
+          "id": "q2",
+          "prompt": "1문단에서 실시간 송출 때문에 중간 진행의 매끄러움을 걱정한 발언을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 134,
               "end": 185
             }
           ],
@@ -585,34 +603,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생회장: \"이번 동아리 발표회는 작년보다 참여 팀이 많아서 질의응답 시간이 뒤로 밀리면 끝까지 듣지 못하는 팀이 생길 수 있습니다. 오늘은 발표 순서 자체보다, 질문을 언제 받고 사회자가 어떤 식으로 멘트를 할지 먼저 정하고 싶습니다.\" 방송부장: \"실시간 송출도 있어서 중간이 매끄럽지 않으면 현장 분위기가 바로 끊길 겁니다.\""
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 첫 제안이나 우려를 어떤 이유와 함께 내놓는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 189
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "과학 동아리 대표: \"저는 발표가 끝난 뒤 바로 질문을 받는 쪽이 좋다고 생각합니다. 그래야 그래프나 실험 사진이 화면에 남아 있을 때 답할 수 있어서 설명하기 편합니다.\" 문예부 대표: \"그런데 팀마다 바로 질문을 받으면 시간이 들쭉날쭉해져서 뒤 팀이 불리할 수도 있어요. 발표를 다 듣고 마지막에 묶어서 받는 방법도 고려해야 합니다.\""
+          "answerText": "방송부장: \"실시간 송출도 있어서 중간이 매끄럽지 않으면 현장 분위기가 바로 끊길 겁니다.\""
         },
         {
           "id": "q3",
-          "prompt": "3문단은 논의를 어떤 대안이나 조정안으로 이어 가는가?",
+          "prompt": "2문단에서 과학 동아리 대표가 발표 직후 질문을 선호한 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 177
+              "paragraphId": "p2",
+              "start": 48,
+              "end": 94
             }
           ],
           "scoring": {
@@ -621,16 +621,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "사회자 역할을 맡은 학생: \"작년에는 질문이 없는 팀도 있었는데, 그때마다 제가 잠깐 멘트를 하느라 흐름이 늘어졌습니다. 이번에는 사전 질문을 한 개씩 받아 두고, 현장 질문은 시간이 허락하는 범위에서 추가하는 방식이면 공백이 줄 것 같습니다.\" 학생회장: \"그 안이면 질문이 아예 끊기는 순간은 막을 수 있겠네요.\""
+          "answerText": "그래야 그래프나 실험 사진이 화면에 남아 있을 때 답할 수 있어서 설명하기 편합니다"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 예상 질문이나 진행 기준을 어떻게 준비하는가?",
+          "prompt": "2문단에서 문예부 대표가 팀마다 바로 질문을 받을 때 우려한 결과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 219
+              "paragraphId": "p2",
+              "start": 125,
+              "end": 152
             }
           ],
           "scoring": {
@@ -639,16 +639,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "방송부장: \"다만 사전 질문만 읽으면 현장감이 떨어질 수 있습니다. 발표자가 청중과 대화하는 느낌이 있어야 분위기가 삽니다.\" 과학 동아리 대표: \"그럼 발표 직후에 사회자가 사전 질문 한 개를 먼저 읽고, 손을 든 학생이 있으면 현장 질문 한 개를 더 받는 식으로 두 단계로 나누면 어떨까요?\" 문예부 대표: \"그 방식이면 발표마다 최소 질문 수는 보장되면서도 너무 길어지지는 않겠습니다.\""
+          "answerText": "시간이 들쭉날쭉해져서 뒤 팀이 불리할 수도 있어요"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 세부 운영 방식이나 보완 이유를 어떻게 구체화하는가?",
+          "prompt": "3문단에서 사회자 역할을 맡은 학생이 공백을 줄이기 위해 제안한 두 요소를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 249
+              "paragraphId": "p3",
+              "start": 73,
+              "end": 90
+            },
+            {
+              "paragraphId": "p3",
+              "start": 92,
+              "end": 120
             }
           ],
           "scoring": {
@@ -656,17 +661,46 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학생회장: \"좋습니다. 그 대신 사회자 멘트는 길지 않아야 합니다. '지금부터 질문을 받겠습니다' 같은 반복 문장만 쓰지 말고, 발표 특징을 한마디 짚어 주면서 자연스럽게 넘겨 주세요.\" 사회자 역할 학생: \"예를 들면 '방금 실험 결과를 정리한 발표였는데, 관련 질문 있으시면 받겠습니다'처럼 연결하겠습니다.\" 방송부장: \"질문이 없을 때는 '사전 질문으로 넘어가겠습니다'라고 바로 전환하는 문장을 넣으면 화면도 자연스럽게 넘길 수 있습니다.\""
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "사전 질문을 한 개씩 받아 두고",
+            "현장 질문은 시간이 허락하는 범위에서 추가하는 방식"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 최종 합의를 어떤 실행 계획으로 정리하는가?",
+          "prompt": "4문단에서 발표 직후 두 단계 진행 방식의 내용을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 228
+              "paragraphId": "p4",
+              "start": 93,
+              "end": 114
+            },
+            {
+              "paragraphId": "p4",
+              "start": 129,
+              "end": 146
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "사회자가 사전 질문 한 개를 먼저 읽고",
+            "현장 질문 한 개를 더 받는 식"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "5문단에서 반복 문장 대신 사회자 멘트를 어떻게 하라고 했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 72,
+              "end": 102
             }
           ],
           "scoring": {
@@ -675,7 +709,39 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생회장: \"정리하겠습니다. 발표 직후 사회자가 짧은 연결 멘트를 하고, 사전 질문 한 개를 먼저 제시한 뒤 현장 질문 한 개를 추가로 받는 방식으로 가겠습니다. 질문이 없으면 곧바로 사전 질문으로 전환하고, 전체 시간은 팀당 발표 4분, 질의응답 2분으로 맞춥니다.\" 문예부 대표: \"그러면 뒤 팀도 시간을 예측할 수 있겠네요.\" 방송부장: \"오늘 안으로 순서표와 사회자 멘트 초안을 같이 배포하겠습니다.\""
+          "answerText": "발표 특징을 한마디 짚어 주면서 자연스럽게 넘겨 주세요"
+        },
+        {
+          "id": "q8",
+          "prompt": "6문단에서 최종 합의한 시간 배정과 배포할 자료를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 124,
+              "end": 132
+            },
+            {
+              "paragraphId": "p6",
+              "start": 134,
+              "end": 141
+            },
+            {
+              "paragraphId": "p6",
+              "start": 200,
+              "end": 214
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "팀당 발표 4분",
+            "질의응답 2분",
+            "순서표와 사회자 멘트 초안"
+          ]
         }
       ]
     }

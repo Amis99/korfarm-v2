@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "용기 있는 ( )이 인상 깊음.",
-          "answerText": "행동",
-          "answerMatchMode": "EXACT",
+          "prompt": "주인공이 무엇을 어떻게 했는지 떠올렸는지 나타내는 구절을 찾으시오.",
+          "answerText": "위기를 어떻게 넘겼는지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 54,
-              "end": 56
+              "start": 28,
+              "end": 40
             }
           ],
           "scoring": {
@@ -869,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "영화의 배경 ( )이 예뻐요.",
-          "answerText": "음악",
-          "answerMatchMode": "EXACT",
+          "prompt": "영화가 주는 것으로 머릿속에 담았다고 한 대상을 찾으시오.",
+          "answerText": "교훈",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 52,
-              "end": 54
+              "paragraphId": "p1",
+              "start": 78,
+              "end": 80
             }
           ],
           "scoring": {
@@ -888,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "나만의 영화 ( )가 된 기분.",
-          "answerText": "평론가",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구들과 어떤 장면을 기록했는지 나타내는 구절을 찾으시오.",
+          "answerText": "친구들과 함께 웃었던 장면",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 99,
-              "end": 102
+              "start": 24,
+              "end": 38
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "칭찬한 대상이 어떻게 관람한 누구인지 나타내는 구절을 찾으시오.",
+          "answerText": "예절을 지키며 관람한 나",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 73,
+              "end": 86
             }
           ],
           "scoring": {

@@ -396,29 +396,24 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "꽃과 나무를 심은 곳?",
-          "answerText": "화단",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 이야기에서 화단을 청소하다가 반짝이는 노란색 꽃잎 모양의 종이를 발견한 인물의 이름을 본문에서 찾아 두 글자로 써 보세요",
+          "answerText": "준이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 27,
-              "end": 29
-            },
-            {
-              "paragraphId": "p1",
-              "start": 60,
-              "end": 62
+              "start": 56,
+              "end": 58
             },
             {
               "paragraphId": "p2",
-              "start": 86,
-              "end": 88
+              "start": 0,
+              "end": 2
             },
             {
               "paragraphId": "p2",
-              "start": 140,
-              "end": 142
+              "start": 124,
+              "end": 126
             }
           ],
           "scoring": {
@@ -430,24 +425,19 @@
         },
         {
           "id": "q2",
-          "prompt": "남몰래 간직한 사실?",
-          "answerText": "비밀",
-          "answerMatchMode": "EXACT",
+          "prompt": "준이가 이 신비로운 메시지의 비밀을 살짝 알려준 단짝 친구의 이름을 본문에서 찾아 두 글자로 써 보세요",
+          "answerText": "지혜",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 24,
-              "end": 26
+              "paragraphId": "p2",
+              "start": 41,
+              "end": 43
             },
             {
               "paragraphId": "p2",
-              "start": 49,
-              "end": 51
-            },
-            {
-              "paragraphId": "p2",
-              "start": 137,
-              "end": 139
+              "start": 128,
+              "end": 130
             }
           ],
           "scoring": {
@@ -459,9 +449,28 @@
         },
         {
           "id": "q3",
-          "prompt": "매우 귀중한 물건?",
+          "prompt": "준이가 화단 구석에서 발견한 노란색 꽃잎 모양의 종이 뒷면에 적혀 있던 신비로운 글을 가리키는 말을 본문에서 찾아 세 글자로 써 보세요",
+          "answerText": "메시지",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 11,
+              "end": 14
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "두 친구가 다음 날부터 아무도 모르게 화단을 가꾸기로 약속한 까닭은 화단의 무엇을 찾기 위한 모험을 시작하려고 했기 때문인지 본문에서 찾아 두 글자로 써 보세요",
           "answerText": "보물",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",

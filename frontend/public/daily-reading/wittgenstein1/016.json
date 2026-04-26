@@ -766,12 +766,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "prompt": "바닷가의 바위 위에 펴서 말리려는 대상을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 30
+              "start": 16,
+              "end": 20
             }
           ],
           "scoring": {
@@ -780,16 +780,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "바닷가 햇빛 바른 바위 위에\n습한 간을 펴서 말리우자,"
+          "answerText": "습한 간"
         },
         {
           "id": "q2",
-          "prompt": "둘째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "prompt": "둘러리를 빙빙 도는 모습을 비유한 동물을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 39
+              "start": 16,
+              "end": 20
             }
           ],
           "scoring": {
@@ -798,16 +798,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "코카서스 산중에서 도망해 온 토끼처럼\n둘러리를 빙빙 돌며 간을 지키자,"
+          "answerText": "토끼처럼"
         },
         {
           "id": "q3",
-          "prompt": "셋째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "prompt": "화자가 부르는 대상의 호명 표현을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 34
+              "start": 13,
+              "end": 17
             }
           ],
           "scoring": {
@@ -816,16 +816,34 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "내가 오래 기르던 여윈 독수리야!\n와서 뜯어 먹어라, 시름없이"
+          "answerText": "독수리야"
         },
         {
           "id": "q4",
-          "prompt": "넷째 연은 어떤 태도나 정서의 방향을 드러내는가?",
+          "prompt": "독수리에게 내리는 명령형 표현을 지문에서 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 19,
+              "end": 28
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "와서 뜯어 먹어라"
+        },
+        {
+          "id": "q5",
+          "prompt": "서로 반대되는 상태를 나란히 드러낸 구절을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 0,
-              "end": 21
+              "end": 15
             }
           ],
           "scoring": {
@@ -834,16 +852,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "너는 살찌고\n나는 여위어야지, 그러나,"
+          "answerText": "너는 살찌고\n나는 여위어야지"
         },
         {
-          "id": "q5",
-          "prompt": "다섯째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "id": "q6",
+          "prompt": "화자가 부르는 또 다른 대상의 호명 표현을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 0,
-              "end": 25
+              "end": 4
             }
           ],
           "scoring": {
@@ -852,16 +870,44 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "거북이야!\n다시는 용궁의 유혹에 안 떨어진다."
+          "answerText": "거북이야"
         },
         {
-          "id": "q6",
-          "prompt": "마지막 연은 앞선 흐름이 어디에 이르고 있음을 보여 주는가?",
+          "id": "q7",
+          "prompt": "화자가 다시는 빠지지 않겠다고 한 대상을 지문에서 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 10,
+              "end": 16
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "용궁의 유혹"
+        },
+        {
+          "id": "q8",
+          "prompt": "마지막 연에서 반복되는 인물 이름을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
               "start": 0,
-              "end": 53
+              "end": 6
+            },
+            {
+              "paragraphId": "p6",
+              "start": 11,
+              "end": 17
+            },
+            {
+              "paragraphId": "p6",
+              "start": 46,
+              "end": 52
             }
           ],
           "scoring": {
@@ -870,7 +916,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "프로메테우스 불쌍한 프로메테우스\n불 도적한 죄로 목에 맷돌을 달고\n끝없이 침전하는 프로메테우스."
+          "answerText": "프로메테우스"
         }
       ]
     }

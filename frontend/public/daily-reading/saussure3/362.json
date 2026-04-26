@@ -850,14 +850,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지하의 ( )가 밖으로 나와요.",
-          "answerText": "마그마",
-          "answerMatchMode": "EXACT",
+          "prompt": "지진과 화산의 설명을 모두 찾으시오.",
+          "answerTexts": [
+            "땅속의 거대한 힘이 지면을 흔드는 것",
+            "지하의 마그마가 밖으로 분출되는 현상"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 61,
-              "end": 64
+              "start": 26,
+              "end": 46
+            },
+            {
+              "paragraphId": "p1",
+              "start": 57,
+              "end": 77
             }
           ],
           "scoring": {
@@ -869,13 +877,13 @@
         },
         {
           "id": "q2",
-          "prompt": "자연의 강력한 ( )지입니다.",
-          "answerText": "에너지",
-          "answerMatchMode": "EXACT",
+          "prompt": "지형을 변화시키기도 하는 것을 찾으시오.",
+          "answerText": "자연의 강력한 에너지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 88,
+              "start": 80,
               "end": 91
             }
           ],
@@ -888,14 +896,41 @@
         },
         {
           "id": "q3",
-          "prompt": "땅을 ( )하게 만드는 화산재.",
-          "answerText": "비옥",
-          "answerMatchMode": "EXACT",
+          "prompt": "지진과 화산이 삶에 주는 영향을 모두 찾으시오.",
+          "answerTexts": [
+            "갑작스러운 흔들림은 건물을 무너뜨릴 수 있어 위험함",
+            "화산재는 땅을 비옥하게 만드는 도움도 줌"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 70,
-              "end": 72
+              "start": 28,
+              "end": 56
+            },
+            {
+              "paragraphId": "p2",
+              "start": 62,
+              "end": 84
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "다시 한번 새긴 마음가짐을 찾으시오.",
+          "answerText": "재난에 대비하는 마음가짐",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 27,
+              "end": 40
             }
           ],
           "scoring": {

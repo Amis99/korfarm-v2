@@ -406,14 +406,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "노란 ( )에 도착했습니다.",
-          "answerText": "꽃밭",
-          "answerMatchMode": "EXACT",
+          "prompt": "토끼가 힌트를 따라 도착한 곳이 어디인지 지문에서 찾아 보세요.",
+          "answerText": "노란 꽃밭에 도착했습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 14,
-              "end": 16
+              "start": 11,
+              "end": 24
             }
           ],
           "scoring": {
@@ -425,19 +425,14 @@
         },
         {
           "id": "q2",
-          "prompt": "시끄러운 ( )으로 가보자 해요.",
-          "answerText": "연못",
-          "answerMatchMode": "EXACT",
+          "prompt": "토끼가 꽃밭에서 바람개비 대신 만난 동물이 누구인지 지문에서 찾아 보세요.",
+          "answerText": "커다란 곰을 만나게 되었습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 16,
-              "end": 18
-            },
-            {
-              "paragraphId": "p2",
-              "start": 31,
-              "end": 33
+              "paragraphId": "p1",
+              "start": 65,
+              "end": 81
             }
           ],
           "scoring": {
@@ -449,14 +444,33 @@
         },
         {
           "id": "q3",
-          "prompt": "소동이 ( )로 커졌습니다.",
-          "answerText": "숲속 전체",
-          "answerMatchMode": "EXACT",
+          "prompt": "곰이 토끼에게 어디로 가보라고 했는지 지문에서 찾아 보세요.",
+          "answerText": "시끄러운 연못으로 가보라고 했어요",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 11,
+              "end": 29
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "바람개비 소동이 어떻게 커지고 있었는지 지문에서 찾아 보세요.",
+          "answerText": "숲속 전체로 커지고 있었어요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 69,
-              "end": 74
+              "end": 84
             }
           ],
           "scoring": {

@@ -396,28 +396,28 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "언어의 가장 작은 단위?",
-          "answerText": "낱말",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서 가장 중요한 의미를 담고 있는 것이 무엇인지 본문에서 찾아 적어 보세요",
+          "answerText": "핵심 낱말",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 33,
+              "start": 30,
               "end": 35
             },
             {
               "paragraphId": "p1",
-              "start": 78,
+              "start": 75,
               "end": 80
             },
             {
               "paragraphId": "p2",
-              "start": 3,
+              "start": 0,
               "end": 5
             },
             {
               "paragraphId": "p2",
-              "start": 128,
+              "start": 125,
               "end": 130
             }
           ],
@@ -430,19 +430,19 @@
         },
         {
           "id": "q2",
-          "prompt": "나타내어 보임?",
-          "answerText": "표시",
-          "answerMatchMode": "EXACT",
+          "prompt": "글을 읽으며 표시할 때 연필로 사용하는 두 가지 방법을 모두 찾아 적어 보세요",
+          "answerText": "동그라미, 밑줄",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 40,
-              "end": 42
+              "start": 142,
+              "end": 146
             },
             {
-              "paragraphId": "p2",
-              "start": 135,
-              "end": 137
+              "paragraphId": "p1",
+              "start": 152,
+              "end": 154
             }
           ],
           "scoring": {
@@ -454,14 +454,38 @@
         },
         {
           "id": "q3",
-          "prompt": "책을 읽는 활동?",
-          "answerText": "독서",
-          "answerMatchMode": "EXACT",
+          "prompt": "독해 실력을 키우기 위해 문맥을 살피며 찾아내야 할 두 가지 단어를 모두 찾아 적어 보세요",
+          "answerText": "반복해서 등장, 특별히 강조된 단어",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 152,
-              "end": 154
+              "start": 58,
+              "end": 65
+            },
+            {
+              "paragraphId": "p2",
+              "start": 69,
+              "end": 79
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "지혜로운 독서가가 되기 위해 매일 들여야 할 행동이 무엇인지 본문에서 찾아 적어 보세요",
+          "answerText": "나만의 핵심 낱말을 찾아 표시하는 습관",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 121,
+              "end": 142
             }
           ],
           "scoring": {

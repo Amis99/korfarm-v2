@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "다음 철학 강연회에서 꼭 더 늘려야 한다고 한 시간을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 139
+              "start": 13,
+              "end": 20
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "다음 철학 강연회에서는 질의응답 시간을 꼭 더 늘려야 한다. 지난주 열린 강연회는 전체적으로 의미가 있었지만 질문을 충분히 받지 못해서 아쉬움이 컸다. 그래서 이번 기사에서는 강연 내용보다도 다음 행사에서 무엇을 먼저 고쳐야 하는지부터 말하고 싶다."
+          "answerText": "질의응답 시간"
         },
         {
           "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "이번 강연회를 공동으로 준비한 두 주체를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 162
+              "start": 8,
+              "end": 14
+            },
+            {
+              "paragraphId": "p2",
+              "start": 16,
+              "end": 19
             }
           ],
           "scoring": {
@@ -602,17 +607,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이번 강연회는 철학 동아리와 도서부가 공동으로 준비했고, 금요일 방과 후 시청각실에서 열렸다. 사전 신청자는 70명이었지만 현장 참여 학생까지 포함하면 실제 참석자는 90명 안팎으로 보였다. 예상보다 학생이 많이 와서 자리가 조금 부족했고, 뒤늦게 온 학생들은 옆 통로에 서서 듣기도 했다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "철학 동아리",
+            "도서부"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "prompt": "현장 참여 학생까지 포함한 실제 참석자 규모를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 188
+              "paragraphId": "p2",
+              "start": 93,
+              "end": 99
             }
           ],
           "scoring": {
@@ -621,16 +629,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "강연 주제는 자유 의지와 책임, 그리고 기술 발전이 인간의 판단에 어떤 영향을 주는가였다. 강연자는 우리가 선택한다고 느끼는 순간에도 환경과 습관이 작용할 수 있다고 설명했고, 인공 지능이 추천한 판단을 그대로 따를 때 책임을 누구에게 물을 것인지도 질문으로 던졌다. 학생들은 이 부분에서 특히 집중했고 중간중간 메모하는 모습도 많았다."
+          "answerText": "90명 안팎"
         },
         {
           "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
+          "prompt": "강연 주제를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 168
+              "paragraphId": "p3",
+              "start": 7,
+              "end": 16
+            },
+            {
+              "paragraphId": "p3",
+              "start": 22,
+              "end": 47
             }
           ],
           "scoring": {
@@ -638,17 +651,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "운영 면에서는 아쉬운 점이 여러 개 드러났다. 시작 시간이 안내보다 8분 정도 늦었고, 마이크 음량이 작아서 뒤쪽 학생들이 몇 차례 내용을 놓쳤다. 또 강연 자료를 바로 넘기지 못해 설명과 화면이 어긋난 부분도 있었다. 이런 점은 강연 자체가 좋았다는 평가와 별개로 꼭 기사에서 적어 둘 필요가 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "자유 의지와 책임",
+            "기술 발전이 인간의 판단에 어떤 영향을 주는가"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "뒤쪽 학생들이 몇 차례 내용을 놓친 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 192
+              "paragraphId": "p4",
+              "start": 49,
+              "end": 60
             }
           ],
           "scoring": {
@@ -657,16 +673,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "행사 뒤 설문에서는 만족한다는 답이 많았지만, 동시에 질문 시간이 짧았다는 의견도 반복되었다. 특히 학생들은 철학 이야기가 어렵기만 할 줄 알았는데 사례가 많아서 흥미로웠다고 적었고, 또 어떤 학생은 질문을 적어 내는 방식이 있었으면 좋았겠다고 말했다. 질문을 적어 내는 방식이 있었으면 좋았겠다는 말은 여러 번 나와서 기사에서도 다시 적는다."
+          "answerText": "마이크 음량이 작아서"
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "설문에서 여러 번 나온 질문 제출 방식을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 201
+              "paragraphId": "p5",
+              "start": 112,
+              "end": 124
+            },
+            {
+              "paragraphId": "p5",
+              "start": 142,
+              "end": 154
             }
           ],
           "scoring": {
@@ -675,7 +696,57 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "다음 강연회에서는 사전 신청 안내를 더 분명히 하고, 좌석 배치를 미리 나누고, 마이크 점검을 일찍 해야 한다. 또 질문은 현장 손들기만 하지 말고 종이나 온라인 폼으로도 받아서 분류하면 더 많은 학생이 참여할 수 있을 것이다. 이번 강연회는 내용은 좋았고 운영은 조금 아쉬웠다고 정리할 수 있는데, 그래서 다음 행사에서는 내용과 운영이 함께 좋아졌으면 한다."
+          "answerText": "질문을 적어 내는 방식"
+        },
+        {
+          "id": "q7",
+          "prompt": "다음 강연회에서 운영상 먼저 해야 할 일을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 10,
+              "end": 28
+            },
+            {
+              "paragraphId": "p6",
+              "start": 30,
+              "end": 43
+            },
+            {
+              "paragraphId": "p6",
+              "start": 45,
+              "end": 61
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "사전 신청 안내를 더 분명히 하고",
+            "좌석 배치를 미리 나누고",
+            "마이크 점검을 일찍 해야 한다"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "이번 강연회를 어떻게 정리할 수 있는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 136,
+              "end": 155
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "내용은 좋았고 운영은 조금 아쉬웠다"
         }
       ]
     }

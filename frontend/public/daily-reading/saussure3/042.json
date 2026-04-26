@@ -557,24 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "자연환경이 잘 보존된 촌락과 높은 건물이 많은 도시가 서로 필요한 것을 주고받기 위해 활발하게 나누는 활동은?",
-          "answerText": "교류",
-          "answerMatchMode": "EXACT",
+          "prompt": "촌락과 도시는 서로 가진 무엇이 다르기 때문에 혼자서는 살아가기 어렵다고 했나요?",
+          "answerText": "자원과 환경",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 125,
-              "end": 127
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p3",
-              "start": 102,
-              "end": 104
+              "start": 61,
+              "end": 67
             }
           ],
           "scoring": {
@@ -586,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "촌락 사람들이 도시 사람들의 건강한 식탁을 차릴 수 있도록 제공해 주는 싱싱한 채소, 과일, 고기 등의 먹거리는?",
-          "answerText": "농산물",
-          "answerMatchMode": "EXACT",
+          "prompt": "교류란 무엇이 서로 오가는 것을 말하나요?",
+          "answerText": "사람들이나 물건, 정보",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 103,
-              "end": 106
+              "start": 4,
+              "end": 16
             }
           ],
           "scoring": {
@@ -605,14 +595,55 @@
         },
         {
           "id": "q3",
-          "prompt": "반대로 도시 사람들이 촌락 사람들의 생활과 농사를 돕기 위해 옷, 약품 등과 함께 보내는 편리한 물건은 무엇인가요?",
-          "answerText": "기계",
-          "answerMatchMode": "EXACT",
+          "prompt": "촌락 사람들은 도시 사람들에게 어떤 먹거리를 제공한다고 했나요? 모두 찾으시오.",
+          "answerTexts": [
+            "싱싱한 채소나 과일",
+            "고기 같은 먹거리"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 51,
+              "end": 61
+            },
+            {
+              "paragraphId": "p2",
+              "start": 63,
+              "end": 72
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "도시 사람들은 촌락 사람들에게 생활에 필요한 무엇을 보낸다고 했나요? 모두 찾으시오.",
+          "answerTexts": [
+            "기계",
+            "다양한 옷",
+            "약품"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 29,
               "end": 31
+            },
+            {
+              "paragraphId": "p3",
+              "start": 33,
+              "end": 38
+            },
+            {
+              "paragraphId": "p3",
+              "start": 40,
+              "end": 42
             }
           ],
           "scoring": {

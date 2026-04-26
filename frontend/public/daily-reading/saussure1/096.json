@@ -552,19 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "작은 나비 ( )을 상상해요.",
-          "answerText": "알",
-          "answerMatchMode": "EXACT",
+          "prompt": "알을 깨고 나와 잎을 갉아 먹으며 자란다고 한 것을 세 글자로 적어 보세요",
+          "answerText": "애벌레",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 17,
-              "end": 18
-            },
-            {
-              "paragraphId": "p1",
-              "start": 29,
-              "end": 30
+              "start": 38,
+              "end": 41
             }
           ],
           "scoring": {
@@ -576,9 +571,9 @@
         },
         {
           "id": "q2",
-          "prompt": "단단한 ( )로 변합니다.",
+          "prompt": "가지에 매달려 단단한 모습으로 변한다고 한 것을 세 글자로 적어 보세요",
           "answerText": "번데기",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -600,14 +595,43 @@
         },
         {
           "id": "q3",
-          "prompt": "푸른 ( )로 날아갑니다.",
-          "answerText": "하늘",
-          "answerMatchMode": "EXACT",
+          "prompt": "애벌레가 자라는 모습을 흉내 내는 말로 표현했어요 어떤 두 글자 말로 표현했는지 적어 보세요",
+          "answerText": "쑥쑥",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
+              "paragraphId": "p1",
+              "start": 53,
+              "end": 55
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "꽃들 사이를 누비며 춤을 추는 모습으로 그려진 동물은 무엇인가요 두 글자로 적어 보세요",
+          "answerText": "나비",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 14,
+              "end": 16
+            },
+            {
               "paragraphId": "p2",
-              "start": 63,
-              "end": 65
+              "start": 47,
+              "end": 49
+            },
+            {
+              "paragraphId": "p2",
+              "start": 107,
+              "end": 109
             }
           ],
           "scoring": {

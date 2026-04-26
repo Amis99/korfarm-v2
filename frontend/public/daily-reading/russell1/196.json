@@ -914,7 +914,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '체언'을 모두 찾으시오.",
+          "prompt": "첫째 문단에서 사람, 사물, 장소, 생각처럼 이름을 붙일 수 있는 대상을 가리키는 말의 두 글자 이름을 찾으시오",
+          "answerText": "체언",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -978,16 +980,17 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "체언"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '수식언'을 모두 찾으시오.",
+          "prompt": "첫째 문단에서 다른 말을 꾸며 그 뜻을 더 분명하게 만드는 말을 가리키는 세 글자 이름을 찾으시오",
+          "answerText": "수식언",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -1026,16 +1029,17 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "수식언"
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '명사'를 모두 찾으시오.",
+          "prompt": "둘째 문단에서 체언에 속한다고 소개한 세 가지 품사 이름을 모두 찾으시오",
+          "answerText": "명사, 대명사, 수사",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -1044,21 +1048,56 @@
             },
             {
               "paragraphId": "p2",
-              "start": 10,
+              "start": 9,
               "end": 12
+            },
+            {
+              "paragraphId": "p2",
+              "start": 14,
+              "end": 16
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "명사"
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '관형사'를 모두 찾으시오.",
+          "prompt": "둘째 문단에서 체언이 문장 안에서 쓰이는 자리로 제시한 세 가지를 모두 찾으시오",
+          "answerText": "주어, 목적어, 부사어",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 54
+            },
+            {
+              "paragraphId": "p2",
+              "start": 56,
+              "end": 59
+            },
+            {
+              "paragraphId": "p2",
+              "start": 61,
+              "end": 64
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "둘째 문단에서 주로 체언을 꾸민다고 소개된 수식언 품사의 이름을 찾으시오",
+          "answerText": "관형사",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -1067,40 +1106,35 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "관형사"
+          "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "지문에서 '부사'를 모두 찾으시오.",
+          "id": "q6",
+          "prompt": "넷째 문단에서 체언과 수식언의 관계를 비유하여 가져온 두 가지 신체 비유어를 모두 찾으시오",
+          "answerText": "뼈대, 살",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 61,
-              "end": 63
+              "paragraphId": "p4",
+              "start": 24,
+              "end": 26
             },
             {
-              "paragraphId": "p2",
-              "start": 180,
-              "end": 182
-            },
-            {
-              "paragraphId": "p2",
-              "start": 195,
-              "end": 197
+              "paragraphId": "p4",
+              "start": 28,
+              "end": 29
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "부사"
+          "revealOnWrong": true
         }
       ]
     }

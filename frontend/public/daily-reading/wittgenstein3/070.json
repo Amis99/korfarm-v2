@@ -570,124 +570,209 @@
     "confirm": {
       "questions": [
         {
-          "id": "q1",
-          "prompt": "1문단은 지시사 '이·그·저'의 현장지시와 담화지시의 구별라는 문법 주제를 어떤 배경에서 꺼내는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 51,
-              "end": 56
-            },
-            {
-              "paragraphId": "p6",
-              "start": 4,
-              "end": 9
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이·그·저"
+                "id": "q1",
+                "prompt": "이 글에서 다루는 지시 관련 표현을 모두 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p1",
+                                "start": 50,
+                                "end": 57
+                        },
+                        {
+                                "paragraphId": "p6",
+                                "start": 3,
+                                "end": 10
+                        },
+                        {
+                                "paragraphId": "p1",
+                                "start": 0,
+                                "end": 5
+                        },
+                        {
+                                "paragraphId": "p5",
+                                "start": 6,
+                                "end": 11
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ALL",
+                "answerTexts": [
+                        "'이·그·저'",
+                        "지시 표현"
+                ]
         },
         {
-          "id": "q2",
-          "prompt": "2문단은 첫 판별 기준이나 기본 원리를 어떻게 설명하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 189
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "가장 기본적인 것은 현장지시다. 현장지시는 발화가 이루어지는 자리에서 실제로 보이거나 가리킬 수 있는 대상을 지시하는 방식이다. 이때 '이'는 보통 화자 쪽에 가까운 대상을, '저'는 화자와 청자 모두에게 먼 대상을 가리킨다. '그'는 눈앞에 있는 대상을 가리키기보다 이미 청자에게 알려진 대상을 가리키는 경우가 많아 기능이 다소 다르다."
+                "id": "q2",
+                "prompt": "가장 기본적인 지시 방식의 이름을 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p2",
+                                "start": 11,
+                                "end": 15
+                        },
+                        {
+                                "paragraphId": "p2",
+                                "start": 18,
+                                "end": 22
+                        },
+                        {
+                                "paragraphId": "p5",
+                                "start": 170,
+                                "end": 174
+                        },
+                        {
+                                "paragraphId": "p6",
+                                "start": 64,
+                                "end": 68
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "현장지시"
         },
         {
-          "id": "q3",
-          "prompt": "3문단은 해당 문법 현상의 작동 방식이나 예시를 무엇으로 보여 주는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 191
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "반면 담화지시는 말하는 현장이 아니라 대화나 글 속에서 이미 제시된 내용을 다시 가리키는 방식이다. 앞 문장에서 언급한 사건이나 인물을 이어서 말할 때 '그'가 자주 쓰이는 이유가 여기에 있다. 즉 '그 책', '그 문제'라고 할 때는 실제 거리를 재는 것이 아니라, 앞서 언급되어 청자가 떠올릴 수 있는 정보를 다시 묶어 주는 역할을 한다."
+                "id": "q3",
+                "prompt": "현장지시가 가리키는 대상을 설명한 부분을 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p2",
+                                "start": 24,
+                                "end": 59
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "발화가 이루어지는 자리에서 실제로 보이거나 가리킬 수 있는 대상"
         },
         {
-          "id": "q4",
-          "prompt": "4문단은 구별점이나 추가 조건을 어떻게 드러내는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 200
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "여기에 관념지시까지 더해지면 구별은 더 섬세해진다. '저 사람'이 반드시 멀리 있는 사람만을 뜻하는 것은 아니며, 화자와 심리적으로 거리를 두거나 낯설게 바라보는 태도를 담기도 한다. 마찬가지로 '그때', '그 일' 같은 표현은 물리적 거리와 무관하게 이미 공유된 경험을 지시하는 경우가 많다. 따라서 지시사의 의미는 공간 정보와 담화 정보가 함께 결정한다."
+                "id": "q4",
+                "prompt": "대화나 글 속의 내용을 다시 가리키는 지시 방식의 이름을 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p3",
+                                "start": 3,
+                                "end": 7
+                        },
+                        {
+                                "paragraphId": "p5",
+                                "start": 119,
+                                "end": 123
+                        },
+                        {
+                                "paragraphId": "p6",
+                                "start": 70,
+                                "end": 74
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "담화지시"
         },
         {
-          "id": "q5",
-          "prompt": "5문단은 해석상의 주의점이나 효과를 어떤 방향으로 설명하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 186
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 때문에 지시 표현을 해석할 때는 단어 하나만 떼어 볼 수 없다. 발화 장면이 보이는지, 앞 문맥에 선행 정보가 있는지, 화자와 청자가 같은 대상을 알고 있는지를 함께 살펴야 한다. 예컨대 서술문에서는 '그'가 담화지시로 기능하는 일이 많고, 실제 대화에서는 손짓이나 시선 같은 비언어적 단서가 더해져 현장지시가 분명해지기도 한다."
+                "id": "q5",
+                "prompt": "담화지시의 뜻을 설명한 부분을 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p3",
+                                "start": 21,
+                                "end": 52
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "대화나 글 속에서 이미 제시된 내용을 다시 가리키는 방식"
         },
         {
-          "id": "q6",
-          "prompt": "6문단은 지시사 '이·그·저'의 현장지시와 담화지시의 구별라는 문법 주제의 의미를 어떤 관점에서 정리하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 51,
-              "end": 56
-            },
-            {
-              "paragraphId": "p6",
-              "start": 4,
-              "end": 9
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이·그·저"
+                "id": "q6",
+                "prompt": "앞에서 언급된 정보를 다시 묶어 주는 예시 표현을 모두 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p3",
+                                "start": 111,
+                                "end": 116
+                        },
+                        {
+                                "paragraphId": "p3",
+                                "start": 118,
+                                "end": 124
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ALL",
+                "answerTexts": [
+                        "'그 책'",
+                        "'그 문제'"
+                ]
+        },
+        {
+                "id": "q7",
+                "prompt": "지시사의 의미를 함께 결정한다고 한 두 정보를 모두 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p4",
+                                "start": 178,
+                                "end": 183
+                        },
+                        {
+                                "paragraphId": "p4",
+                                "start": 185,
+                                "end": 190
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ALL",
+                "answerTexts": [
+                        "공간 정보",
+                        "담화 정보"
+                ]
+        },
+        {
+                "id": "q8",
+                "prompt": "지시사를 정확히 이해하기 위해 마지막에 강조한 분석 태도를 찾으시오.",
+                "answerRanges": [
+                        {
+                                "paragraphId": "p6",
+                                "start": 137,
+                                "end": 192
+                        }
+                ],
+                "scoring": {
+                        "correctDeltaSec": 30,
+                        "wrongDeltaSec": -45
+                },
+                "revealOnWrong": true,
+                "answerMatchMode": "ANY",
+                "answerText": "형태를 암기하는 데서 멈추지 말고, 그것이 어떤 장면과 문맥 속에서 쓰였는지까지 함께 분석해야 한다"
         }
-      ]
+]
     }
   }
 }

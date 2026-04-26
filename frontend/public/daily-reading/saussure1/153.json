@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "나누어 버릴 물건들은?",
+          "prompt": "다시 사용할 수 있는 물건들을 종류별로 모아서 정해진 장소에 배출하는 것을 무엇이라고 하나요? 지문에서 네 글자로 찾아 보세요",
           "answerText": "재활용품",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -576,9 +576,33 @@
         },
         {
           "id": "q2",
-          "prompt": "분류하면 소중한 무엇인가요?",
+          "prompt": "정해진 통에 나누어 넣어야 하는 두 가지 재활용품은 무엇과 무엇인가요? 지문에서 둘 다 찾아 보세요",
+          "answerText": "플라스틱,비닐",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 33,
+              "end": 37
+            },
+            {
+              "paragraphId": "p2",
+              "start": 39,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "쓰레기를 그냥 버리지 않고 분류하면 무엇이 된다고 했나요? 지문에서 한 단어로 찾아 보세요",
           "answerText": "자원",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -594,15 +618,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "우리가 지킬 무엇의 환경인가요?",
-          "answerText": "지구",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "글쓴이는 부모님을 도와 재활용품을 정리하면서 무엇을 보호하는 것을 실천해 보자고 했나요? 지문에서 한 단어로 찾아 보세요",
+          "answerText": "환경",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 143,
-              "end": 145
+              "paragraphId": "p2",
+              "start": 115,
+              "end": 117
             }
           ],
           "scoring": {

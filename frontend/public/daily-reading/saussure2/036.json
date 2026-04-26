@@ -561,47 +561,105 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "옛날부터 오랜 시간 전해 내려오는 것은?",
-          "answerText": "전통",
+          "prompt": "우리나라의 아름다운 전통 옷을 무엇이라고 부르는지 찾아보세요.",
+          "answerText": "한복",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 15,
-              "end": 17
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p1",
+              "start": 65,
+              "end": 67
+            },
+            {
+              "paragraphId": "p2",
+              "start": 3,
+              "end": 5
+            },
+            {
+              "paragraphId": "p2",
+              "start": 33,
+              "end": 35
             },
             {
               "paragraphId": "p3",
-              "start": 42,
-              "end": 44
-            },
-            {
-              "paragraphId": "p3",
-              "start": 69,
-              "end": 71
+              "start": 0,
+              "end": 2
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "모양이나 옷차림이 아주 바른 모습은?",
-          "answerText": "단정",
+          "prompt": "남자 한복이 무엇으로 이루어져 있는지 나타낸 표현을 그대로 찾아보세요.",
+          "answerText": "넉넉한 바지와 저고리",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 17,
-              "end": 19
+              "paragraphId": "p2",
+              "start": 7,
+              "end": 18
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "여자 한복을 설명한 옷차림 표현을 그대로 찾아보세요.",
+          "answerText": "넓은 치마와 저고리",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 37,
+              "end": 47
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "한복을 더 멋지게 입을 때 함께 더하면 좋은 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "복주머니",
+            "전통 신발"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 33,
+              "end": 37
+            },
+            {
+              "paragraphId": "p3",
+              "start": 42,
+              "end": 47
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         }

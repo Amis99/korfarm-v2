@@ -474,35 +474,15 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "물을 쏘는 장난감?",
+          "prompt": "여름철에 시원하게 물을 쏘면서 즐기는 놀이 도구의 이름은 무엇인가요",
           "answerText": "물총",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 8,
-              "end": 10
-            },
-            {
-              "paragraphId": "p1",
-              "start": 56,
-              "end": 58
-            },
-            {
-              "paragraphId": "p1",
-              "start": 142,
-              "end": 144
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 48,
-              "end": 50
-            }
+            {"paragraphId": "p1", "start": 8, "end": 10},
+            {"paragraphId": "p1", "start": 56, "end": 58},
+            {"paragraphId": "p1", "start": 142, "end": 144},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 48, "end": 50}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -513,25 +493,12 @@
         },
         {
           "id": "q2",
-          "prompt": "위험 없는 무엇 수칙인가요?",
-          "answerText": "안전",
-          "answerMatchMode": "EXACT",
+          "prompt": "다치지 않으려고 잘 지켜야 하는 안전 약속을 무엇이라고 부르나요",
+          "answerText": "수칙",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 20,
-              "end": 22
-            },
-            {
-              "paragraphId": "p1",
-              "start": 126,
-              "end": 128
-            },
-            {
-              "paragraphId": "p2",
-              "start": 123,
-              "end": 125
-            }
+            {"paragraphId": "p1", "start": 23, "end": 25},
+            {"paragraphId": "p2", "start": 126, "end": 128}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -542,15 +509,26 @@
         },
         {
           "id": "q3",
-          "prompt": "깨끗하게 무엇하기인가요?",
-          "answerText": "정리",
-          "answerMatchMode": "EXACT",
+          "prompt": "물총 놀이가 끝난 뒤 감기에 걸리지 않도록 갈아입어야 하는 것은 무엇인가요",
+          "answerText": "옷",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 105,
-              "end": 107
-            }
+            {"paragraphId": "p2", "start": 14, "end": 15}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "사용한 물총을 깨끗한 물로 씻은 뒤 어디에 잘 말려 두면 좋다고 하나요",
+          "answerText": "햇볕",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 62, "end": 64}
           ],
           "scoring": {
             "correctDeltaSec": 10,

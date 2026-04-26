@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "꾸준히 ( )한 거북이가 이겼습니다.",
-          "answerText": "노력",
-          "answerMatchMode": "EXACT",
+          "prompt": "토끼가 거북이를 보고 어떤 마음이 되었는지 본문에서 찾으시오.",
+          "answerText": "마음이 놓였습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 133,
-              "end": 135
+              "start": 48,
+              "end": 57
             }
           ],
           "scoring": {
@@ -869,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "반전이 있는 ( )을 만들면 재밌어요.",
-          "answerText": "결말",
-          "answerMatchMode": "EXACT",
+          "prompt": "경주에서 이긴 쪽을 설명하는 말을 본문에서 찾으시오.",
+          "answerText": "꾸준히 노력한 거북이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 124,
-              "end": 126
+              "paragraphId": "p1",
+              "start": 129,
+              "end": 140
             }
           ],
           "scoring": {
@@ -888,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "칭찬을 나누며 ( )이 자라납니다.",
-          "answerText": "자신감",
-          "answerMatchMode": "EXACT",
+          "prompt": "이야기를 풍성히 하려고 넣은 새로운 인물을 본문에서 찾으시오.",
+          "answerText": "여우 심판",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 95,
+              "end": 100
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "이야기 하나로 넓어지는 것을 본문에서 찾으시오.",
+          "answerText": "우리 모두의 상상력",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 98,
-              "end": 101
+              "start": 121,
+              "end": 131
             }
           ],
           "scoring": {

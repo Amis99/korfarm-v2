@@ -571,66 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단의 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 108
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지난주 금요일 본교 중앙 현관 앞에서 학생회가 주관한 플리마켓이 열렸다. 이번 행사는 쓰지 않는 물건을 나누고 판매 수익을 기부하기 위해 마련되었고 많은 학생들이 쉬는 시간마다 부스를 찾아왔다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단의 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 124
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학생회는 행사 시작 전에 각 반에서 판매할 책, 문구, 생활용품을 미리 모았고, 당일에는 학년별로 부스를 나누어 운영하였다. 특히 점심시간에는 예상보다 많은 학생이 몰려 판매대 앞이 혼잡해져 줄이 서로 겹치는 일이 생겼다."
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단의 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 120
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "행사 수익금은 전액 지역 복지관에 전달할 예정이고 남은 물품은 다음 행사에 다시 쓰기로 했다. 그런데 홍보가 충분히 이루어지지 않아서 어떤 학생들은 행사가 끝난 뒤에야 플리마켓이 열렸던 사실을 알게 되었다고 말했다."
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단의 내용으로 가장 적절한 것은?",
+          "prompt": "어느 쪽에서 판매가 이루어지는지 몰라 한참 주변을 살핀 행동을 나타내는 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 118
+              "start": 73,
+              "end": 79
             }
           ],
           "scoring": {
@@ -639,16 +585,94 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "운영 과정에서 아쉬운 점도 있었다. 부스 위치를 알리는 안내 표지가 적어서 처음 온 학생들이 어느 쪽에서 판매가 이루어지는지 한참 두리번거렸고, 가격표가 부스마다 제각각이여서 물건 값을 물어보는 일이 반복되었다."
+          "answerText": "두리번거렸고"
+        },
+        {
+          "id": "q2",
+          "prompt": "학생회가 행사 전에 각 반에서 미리 모은 판매 물품을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 24,
+              "end": 25
+            },
+            {
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 29
+            },
+            {
+              "paragraphId": "p2",
+              "start": 31,
+              "end": 35
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "책",
+            "문구",
+            "생활용품"
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "이번 행사를 주관한 주체를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 21,
+              "end": 24
+            },
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 3
+            },
+            {
+              "paragraphId": "p5",
+              "start": 2,
+              "end": 5
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "학생회"
+        },
+        {
+          "id": "q4",
+          "prompt": "점심시간에 판매대 앞이 혼잡해져 줄이 서로 겹친 이유를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 80,
+              "end": 94
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "예상보다 많은 학생이 몰려"
         },
         {
           "id": "q5",
-          "prompt": "5문단의 내용으로 가장 적절한 것은?",
+          "prompt": "행사 수익금이 전달될 곳을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 118
+              "paragraphId": "p3",
+              "start": 11,
+              "end": 17
             }
           ],
           "scoring": {
@@ -657,16 +681,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "또 학생회는 행사 목적이 자원 순환과 기부에 있다고 설명했지만, 현장 진행에서는 판매 속도에만 신경을 쓰는 모습도 보였다. 그래서 다음에는 판매뿐 아니라 물건을 다시 사용하는 의미도 같이 소개하면 좋을 것 같다."
+          "answerText": "지역 복지관"
         },
         {
           "id": "q6",
-          "prompt": "6문단의 내용으로 가장 적절한 것은?",
+          "prompt": "어떤 학생들이 행사가 끝난 뒤에야 플리마켓 사실을 알게 된 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 117
+              "paragraphId": "p3",
+              "start": 57,
+              "end": 74
             }
           ],
           "scoring": {
@@ -675,7 +699,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이번 플리마켓은 학생들이 직접 물건을 정리하고 판매하며 나눔의 의미를 체험했다는 점에서 뜻깊었다. 다만 홍보 시기와 현장 안내를 조금만 더 세심하게 준비했다면 더 많은 학생들이 편하게 참여할 수 있었을 것이다."
+          "answerText": "홍보가 충분히 이루어지지 않아서"
+        },
+        {
+          "id": "q7",
+          "prompt": "처음 온 학생들이 불편을 겪게 한 현장 안내 문제 두 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 31,
+              "end": 36
+            },
+            {
+              "paragraphId": "p4",
+              "start": 81,
+              "end": 84
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "안내 표지",
+            "가격표"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "홍보 시기와 현장 안내를 세심하게 준비했다면 기대된 결과를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 89,
+              "end": 116
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "더 많은 학생들이 편하게 참여할 수 있었을 것이다"
         }
       ]
     }

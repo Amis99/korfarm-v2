@@ -1204,113 +1204,75 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '유전 형질'을 모두 찾으시오.",
+          "prompt": "본문이 유전 형질의 보기로 든 신체 특징 세 가지를 모두 찾으시오",
+          "answerText": "눈동자 색, 머리카락의 형태, 특정 질병에 대한 경향",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p4",
-              "start": 151,
-              "end": 156
-            },
-            {
-              "paragraphId": "p5",
-              "start": 74,
-              "end": 79
-            },
-            {
-              "paragraphId": "p6",
-              "start": 3,
-              "end": 8
-            }
+            {"paragraphId": "p1", "start": 33, "end": 38},
+            {"paragraphId": "p1", "start": 40, "end": 48},
+            {"paragraphId": "p1", "start": 50, "end": 62}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "유전 형질"
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "DNA는 세포 안에서 어떤 역할을 하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 207
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "DNA 가운데 단백질 형성과 관련된 정보를 담아 형질을 드러내는 정보 단위의 이름을 세 글자로 찾으시오",
+          "answerText": "유전자",
           "answerMatchMode": "ANY",
-          "answerText": "DNA는 세포 속에 들어 있는 유전 정보의 저장 장치로 볼 수 있다. 이 분자 안에는 생물이 어떤 단백질을 만들고 어떤 형질을 드러낼지와 관련된 정보가 일정한 순서로 담겨 있다. 따라서 DNA는 단순한 세포 성분이 아니라, 생물의 특징을 유지하고 전달하는 데 핵심 역할을 한다. 세포가 분열할 때 DNA가 함께 복제되는 까닭도 같은 정보를 다음 세포에 넘기기 위해서이다."
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 71, "end": 74},
+            {"paragraphId": "p3", "start": 82, "end": 85}
+          ],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "유전자는 형질과 어떤 관계가 있는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 194
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "같은 유전 정보를 가져도 형질이 드러나는 정도가 달라질 수 있는 까닭으로 본문이 든 요인을 두 글자로 찾으시오",
+          "answerText": "환경",
           "answerMatchMode": "ANY",
-          "answerText": "유전 형질은 DNA 전체가 한 번에 작용해서 생기기보다, 그 가운데 특정한 정보 단위들이 작용하며 나타난다. 이런 정보 단위를 유전자라고 부른다. 유전자는 단백질 형성과 관련된 정보를 담고 있으며, 그 결과가 몸의 구조나 기능에 영향을 주어 형질로 드러난다. 즉 형질은 DNA에 적힌 정보가 실제 생물의 몸 안에서 발현된 결과라고 이해할 수 있다."
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 65, "end": 67},
+            {"paragraphId": "p4", "start": 132, "end": 134},
+            {"paragraphId": "p4", "start": 175, "end": 177}
+          ],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "같은 유전 정보라도 형질의 정도가 달라질 수 있는 이유는 무엇인가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 197
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "본문이 환경과의 상호작용 사례로 든, 유전 정보가 중요하지만 영양 상태와 생활 환경도 함께 영향을 준다고 한 신체 특징을 한 글자로 찾으시오",
+          "answerText": "키",
           "answerMatchMode": "ANY",
-          "answerText": "하지만 DNA에 정보가 있다고 해서 모든 형질이 항상 똑같이 나타나는 것은 아니다. 같은 유전 정보를 가지고 있어도 환경 조건에 따라 드러나는 정도가 달라질 수 있다. 예를 들어 키의 성장에는 유전 정보가 중요하지만, 영양 상태와 생활 환경도 함께 영향을 준다. 그래서 유전 형질을 설명할 때는 DNA만이 아니라 환경과의 상호작용도 함께 고려해야 한다."
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 100, "end": 101}
+          ],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "글 전체에서 DNA와 형질의 관계를 어떻게 정리할 수 있는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 183
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "세포가 분열할 때 같은 정보를 다음 세포에 넘기기 위해 DNA가 거치는 과정을 두 글자로 찾으시오",
+          "answerText": "복제",
           "answerMatchMode": "ANY",
-          "answerText": "결국 유전 형질과 DNA의 관계를 이해한다는 것은 생물의 특징이 우연히 생기는 것이 아니라 정보의 저장, 전달, 발현 과정을 거쳐 나타난다는 점을 이해하는 일이다. DNA는 형질을 설명하는 출발점이고, 형질은 그 정보가 실제 생물에서 드러난 결과이다. 그래서 생명과학은 DNA를 통해 생물의 공통성과 차이를 함께 설명하려 한다."
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 174, "end": 176}
+          ],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "자식이 부모와 닮으면서도 똑같지 않은 까닭은 부모의 유전 정보가 어떤 과정을 거쳐 자식에게 전달되기 때문인지 두 글자로 찾으시오",
+          "answerText": "조합",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 133, "end": 135},
+            {"paragraphId": "p5", "start": 194, "end": 196}
+          ],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true
         }
       ]
     }

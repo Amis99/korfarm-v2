@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "'가을'을 단풍잎에 빗댄 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 28
+              "start": 6,
+              "end": 18
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "여기저기서 단풍잎 같은 슬픈 가을이 뚝뚝 떨어진다."
+          "answerText": "단풍잎 같은 슬픈 가을"
         },
         {
           "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "가을이 떨어지는 모습을 반복적인 말로 나타낸 부분을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 44
+              "paragraphId": "p1",
+              "start": 20,
+              "end": 22
             }
           ],
           "scoring": {
@@ -603,34 +603,39 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "단풍잎 떨어져 나온 자리마다 봄을 마련해 놓고\n나뭇가지 위에 하늘이 펼쳐 있다."
+          "answerText": "뚝뚝"
         },
         {
           "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "prompt": "단풍잎 떨어져 나온 자리마다 마련해 놓은 것을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 16,
+              "end": 17
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "봄"
+        },
+        {
+          "id": "q4",
+          "prompt": "하늘을 들여다보려는 조건과 그 결과를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 30
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "가만히 하늘을 들여다 보려면\n눈썹에 파란 물감이 든다."
-        },
-        {
-          "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
-          "answerRanges": [
+              "end": 15
+            },
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 38
+              "paragraphId": "p3",
+              "start": 16,
+              "end": 29
             }
           ],
           "scoring": {
@@ -638,17 +643,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "두 손으로 따뜻한 볼을 씃어 보면\n손바닥에도 파란 물감이 묻어 난다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "가만히 하늘을 들여다 보려면",
+            "눈썹에 파란 물감이 든다"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "파란 물감이 묻어 난다고 한 대상을 포함한 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 44
+              "paragraphId": "p4",
+              "start": 19,
+              "end": 37
             }
           ],
           "scoring": {
@@ -657,16 +665,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "다시 손바닥을 들여다 본다.\n손금에는 맑은 강물이 흐르고, 맑은 강물이 흐르고,"
+          "answerText": "손바닥에도 파란 물감이 묻어 난다"
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "손금에서 반복되어 나타나는 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 96
+              "paragraphId": "p5",
+              "start": 21,
+              "end": 31
+            },
+            {
+              "paragraphId": "p5",
+              "start": 33,
+              "end": 43
             }
           ],
           "scoring": {
@@ -675,7 +688,61 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "강물 속에는 사랑처럼 슬픈 얼굴\n아름다운 순이의 얼굴이 어린다.\n소년은 황홀히 눈을 감아 본다.\n그래도 맑은 강물은 흘러 사랑처럼 슬픈 얼굴\n아름다운 순이의 얼굴은 어린다."
+          "answerText": "맑은 강물이 흐르고"
+        },
+        {
+          "id": "q7",
+          "prompt": "강물 속과 뒤이은 장면에 거듭 어리는 얼굴 표현을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 7,
+              "end": 17
+            },
+            {
+              "paragraphId": "p6",
+              "start": 68,
+              "end": 78
+            },
+            {
+              "paragraphId": "p6",
+              "start": 18,
+              "end": 29
+            },
+            {
+              "paragraphId": "p6",
+              "start": 79,
+              "end": 90
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "사랑처럼 슬픈 얼굴",
+            "아름다운 순이의 얼굴"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "소년이 순이를 떠올린 뒤 한 행동을 나타낸 문장을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 36,
+              "end": 52
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "소년은 황홀히 눈을 감아 본다"
         }
       ]
     }

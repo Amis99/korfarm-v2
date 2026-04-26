@@ -884,24 +884,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지역 주민이 함께 즐기는 행사를 무엇이라고 하나요?",
-          "answerText": "지역 문화 축제",
-          "answerMatchMode": "ANY",
+          "prompt": "지역 문화 축제가 사람들에게 알리는 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "고유한 전통",
+            "역사"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 8
+              "start": 47,
+              "end": 53
             },
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 8
-            },
-            {
-              "paragraphId": "p4",
-              "start": 118,
-              "end": 126
+              "paragraphId": "p1",
+              "start": 55,
+              "end": 57
             }
           ],
           "scoring": {
@@ -912,10 +910,18 @@
         },
         {
           "id": "q2",
-          "prompt": "축제에서 경험한다고 한 것은 어떤 놀이인가요?",
-          "answerText": "전통 놀이",
-          "answerMatchMode": "ANY",
+          "prompt": "사람들이 축제에서 맛보고 경험하는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "다양한 음식",
+            "전통 놀이"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 80,
+              "end": 86
+            },
             {
               "paragraphId": "p1",
               "start": 92,
@@ -930,31 +936,13 @@
         },
         {
           "id": "q3",
-          "prompt": "관광객이 늘어나면 활기를 띠는 것은 무엇인가요?",
-          "answerText": "지역 상권",
+          "prompt": "다른 지역의 사람들이 축제가 열리는 곳을 방문하게 되는 목적을 나타내는 표현을 찾으시오.",
+          "answerText": "관광을 위해",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 92,
-              "end": 97
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "축제 준비 과정에서 생기는 문제로 제시된 것은 무엇인가요?",
-          "answerText": "교통 체증",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 56,
+              "start": 55,
               "end": 61
             }
           ],
@@ -965,15 +953,33 @@
           "revealOnWrong": true
         },
         {
+          "id": "q4",
+          "prompt": "밤늦게까지 이어지는 행사로 인해 나타나기도 하는 피해를 찾으시오.",
+          "answerText": "소음 피해",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 93,
+              "end": 98
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q5",
-          "prompt": "서로 배려할 때 지역 문화 축제가 되는 곳은 무엇인가요?",
-          "answerText": "화합의 장",
+          "prompt": "주민과 방문객이 갖춰야 할 태도를 지문에서 찾으시오.",
+          "answerText": "질서를 지키고 환경을 아끼는 태도",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 132,
-              "end": 137
+              "start": 81,
+              "end": 99
             }
           ],
           "scoring": {

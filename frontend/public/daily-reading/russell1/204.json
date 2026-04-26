@@ -953,138 +953,87 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '증상'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 15,
-              "end": 17
-            },
-            {
-              "paragraphId": "p1",
-              "start": 188,
-              "end": 190
-            },
-            {
-              "paragraphId": "p2",
-              "start": 32,
-              "end": 34
-            },
-            {
-              "paragraphId": "p4",
-              "start": 44,
-              "end": 46
-            },
-            {
-              "paragraphId": "p4",
-              "start": 147,
-              "end": 149
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '의약학'을 모두 찾으시오.",
+          "answerText": "의약학",
           "answerMatchMode": "ANY",
-          "answerText": "증상"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 63, "end": 66},
+            {"paragraphId": "p1", "start": 175, "end": 178},
+            {"paragraphId": "p2", "start": 160, "end": 163},
+            {"paragraphId": "p3", "start": 2, "end": 5},
+            {"paragraphId": "p3", "start": 215, "end": 218},
+            {"paragraphId": "p4", "start": 188, "end": 191}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '예방'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 13,
-              "end": 15
-            },
-            {
-              "paragraphId": "p2",
-              "start": 90,
-              "end": 92
-            },
-            {
-              "paragraphId": "p2",
-              "start": 104,
-              "end": 106
-            },
-            {
-              "paragraphId": "p4",
-              "start": 52,
-              "end": 54
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '부작용'을 모두 찾으시오.",
+          "answerText": "부작용",
           "answerMatchMode": "ANY",
-          "answerText": "예방"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 7, "end": 10},
+            {"paragraphId": "p3", "start": 201, "end": 204},
+            {"paragraphId": "p4", "start": 10, "end": 13}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '배출'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 83,
-              "end": 85
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '증상'을 모두 찾으시오.",
+          "answerText": "증상",
           "answerMatchMode": "ANY",
-          "answerText": "배출"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 15, "end": 17},
+            {"paragraphId": "p1", "start": 188, "end": 190},
+            {"paragraphId": "p2", "start": 32, "end": 34},
+            {"paragraphId": "p4", "start": 44, "end": 46},
+            {"paragraphId": "p4", "start": 147, "end": 149}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '반응'을 모두 찾으시오.",
+          "prompt": "지문에서 '치료'와 '예방'을 모두 찾으시오.",
+          "answerText": "치료, 예방",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 139,
-              "end": 141
-            },
-            {
-              "paragraphId": "p3",
-              "start": 131,
-              "end": 133
-            },
-            {
-              "paragraphId": "p4",
-              "start": 108,
-              "end": 110
-            }
+            {"paragraphId": "p2", "start": 9, "end": 11},
+            {"paragraphId": "p2", "start": 13, "end": 15},
+            {"paragraphId": "p2", "start": 58, "end": 60},
+            {"paragraphId": "p2", "start": 90, "end": 92},
+            {"paragraphId": "p2", "start": 104, "end": 106},
+            {"paragraphId": "p4", "start": 52, "end": 54},
+            {"paragraphId": "p4", "start": 56, "end": 58}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "반응"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '조건'을 모두 찾으시오.",
+          "prompt": "열이 났을 때 원인이 될 수 있는 두 가지 종류의 병원체로 지문에 든 예를 모두 찾으시오.",
+          "answerText": "세균, 바이러스",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 112,
-              "end": 114
-            }
+            {"paragraphId": "p1", "start": 113, "end": 115},
+            {"paragraphId": "p1", "start": 118, "end": 122}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "약을 함부로 많이 먹거나 정해진 방법을 무시하면 어떤 결과가 따른다고 한 부분을 찾으시오.",
+          "answerText": "기대한 효과를 얻기 어렵고 오히려 부작용이 생길 수 있다",
           "answerMatchMode": "ANY",
-          "answerText": "조건"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 182, "end": 213}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

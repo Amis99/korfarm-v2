@@ -748,103 +748,70 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "나 무엇 때에는 말없이 고이 보내 드리우리다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 9
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 9
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "나 보기가 역겨워"
+          "prompt": "이 시에서 화자가 떠나는 임을 위해 영변 약산에서 따다 가실 길에 뿌리겠다고 한 꽃의 이름을 찾으시오",
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 7, "end": 11}
+          ],
+          "answerText": "진달래꽃"
         },
         {
           "id": "q2",
-          "prompt": "무엇 가실 길에 뿌리우리다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 30
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "영변에 약산\n진달래꽃\n아름 따다 가실 길에 뿌리우리다."
+          "prompt": "이 시에서 화자가 진달래꽃을 따 오는 장소로 든 산의 이름을 찾으시오",
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 4, "end": 6}
+          ],
+          "answerText": "약산"
         },
         {
           "id": "q3",
-          "prompt": "무엇 놓인 그 꽃을 사뿐히 즈려 밟고 가시옵소서?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 9
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "가시는 걸음 걸음"
-        },
-        {
-          "id": "q4",
-          "prompt": "중요한 기준은 무엇인가요?",
+          "answerMatchMode": "ALL",
+          "prompt": "1연과 4연에서 똑같이 반복되어 시상의 수미 상관 구조를 이루는 두 행을 모두 찾으시오",
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 16
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 16
-            }
+            {"paragraphId": "p1", "start": 0, "end": 16},
+            {"paragraphId": "p4", "start": 0, "end": 16}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
           "answerText": "나 보기가 역겨워\n가실 때에는"
         },
         {
-          "id": "q5",
-          "prompt": "글에서 설명한 것은 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 15
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "id": "q4",
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
+          "prompt": "마지막 연에서 속마음과 반대로 말함으로써 슬픔을 더 강조한 반어법이 쓰인 행을 찾으시오",
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 0, "end": 15}
+          ],
           "answerText": "죽어도 아니 눈물 흘리우리다"
+        },
+        {
+          "id": "q5",
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "prompt": "꽃을 밟고 가는 행위를 부드럽고 가볍게 표현하여 자기희생적 사랑을 드러낸 형용 모순의 시구를 찾으시오",
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 18, "end": 33}
+          ],
+          "answerText": "사뿐히 즈려 밟고 가시옵소서"
+        },
+        {
+          "id": "q6",
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "prompt": "임이 떠날 때 말없이 고이 보내 드리겠다는, 화자의 체념적 사랑을 직접 드러낸 행을 찾으시오",
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 17, "end": 32}
+          ],
+          "answerText": "말없이 고이 보내 드리우리다"
         }
       ]
     }

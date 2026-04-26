@@ -559,14 +559,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "자판에 있는 버튼을 누르면 컴퓨터의 이것에 글자가 나타납니다. 이것은 무엇일까요?",
-          "answerText": "화면",
-          "answerMatchMode": "EXACT",
+          "prompt": "글자를 입력할 때 사용하는 중요한 장치로 설명된 대상은 무엇인가요?",
+          "answerText": "컴퓨터 자판",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 100,
-              "end": 102
+              "start": 0,
+              "end": 6
             }
           ],
           "scoring": {
@@ -578,14 +578,14 @@
         },
         {
           "id": "q2",
-          "prompt": "글자와 글자 사이를 띄어 쓸 수 있게 해 주는 버튼의 이름은 무엇인가요?",
-          "answerText": "스페이스바",
-          "answerMatchMode": "EXACT",
+          "prompt": "자판에는 한글과 알파벳 그리고 숫자가 적힌 무엇이 모여 있나요?",
+          "answerText": "여러 개의 작은 버튼",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 33,
-              "end": 38
+              "paragraphId": "p1",
+              "start": 57,
+              "end": 68
             }
           ],
           "scoring": {
@@ -597,14 +597,33 @@
         },
         {
           "id": "q3",
-          "prompt": "자판을 칠 때는 이것을 곧게 펴고 바른 자세로 앉아야 해요. 이것은 무엇일까요?",
-          "answerText": "허리",
-          "answerMatchMode": "EXACT",
+          "prompt": "스페이스바를 누르면 어떤 일을 할 수 있나요?",
+          "answerText": "글자와 글자 사이를 띄어 쓸 수 있어요",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 44,
+              "end": 65
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "꾸준히 연습하면 누구든 어떤 결과를 얻을 수 있나요?",
+          "answerText": "빠르고 정확하게 타자를 칠 수 있어요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 9,
-              "end": 11
+              "start": 85,
+              "end": 105
             }
           ],
           "scoring": {

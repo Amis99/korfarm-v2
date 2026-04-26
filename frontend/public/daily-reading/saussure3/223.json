@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지켜야 할 행동 방식은?",
-          "answerText": "규칙이",
-          "answerMatchMode": "EXACT",
+          "prompt": "해바라기를 돌볼 때 무엇이 있다고 했는지, '지켜야 할'과 이어지는 표현을 지문에서 찾으시오.",
+          "answerText": "지켜야 할 규칙",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 51,
-              "end": 54
+              "start": 45,
+              "end": 53
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "차례를 지키는 상태는?",
-          "answerText": "질서를",
-          "answerMatchMode": "EXACT",
+          "prompt": "꽃을 꺾거나 잎을 만지지 않는 것이 무엇이라고 했는지 지문에서 찾으시오.",
+          "answerText": "소중한 약속",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 29,
-              "end": 32
+              "paragraphId": "p1",
+              "start": 81,
+              "end": 87
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "꽃을 심어 가꾸는 곳은?",
-          "answerText": "꽃밭을",
-          "answerMatchMode": "EXACT",
+          "prompt": "물을 줄 때 해야 하는 행동을 지문에서 찾으시오.",
+          "answerText": "차례를 기다려야",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 15,
+              "end": 23
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "무엇이 우리를 성장시킨다고 했는지 지문에서 찾으시오.",
+          "answerText": "자연을 아끼고 돌보는 행동",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 71,
-              "end": 74
+              "start": 32,
+              "end": 46
             }
           ],
           "scoring": {

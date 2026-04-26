@@ -587,14 +587,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "끈질기게 버티는 기운은?",
-          "answerText": "끈기와",
-          "answerMatchMode": "EXACT",
+          "prompt": "까치가 목이 말랐을 때 보인 태도와 찾아낸 것을 모두 찾으시오.",
+          "answerTexts": [
+            "포기하지 않고",
+            "방법을 찾아냈습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 64,
-              "end": 67
+              "start": 44,
+              "end": 51
+            },
+            {
+              "paragraphId": "p1",
+              "start": 52,
+              "end": 62
             }
           ],
           "scoring": {
@@ -606,14 +614,22 @@
         },
         {
           "id": "q2",
-          "prompt": "사물의 이치를 밝히는 능력?",
-          "answerText": "지혜를",
-          "answerMatchMode": "EXACT",
+          "prompt": "어려운 상황을 이겨내는 힘이 된 것을 모두 찾으시오.",
+          "answerTexts": [
+            "끈기와 지혜",
+            "어려운 상황을 이겨내는 힘"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 43,
-              "end": 46
+              "paragraphId": "p1",
+              "start": 64,
+              "end": 70
+            },
+            {
+              "paragraphId": "p1",
+              "start": 72,
+              "end": 86
             }
           ],
           "scoring": {
@@ -625,14 +641,41 @@
         },
         {
           "id": "q3",
-          "prompt": "힘을 합쳐 돕는 행동은?",
-          "answerText": "협동의",
-          "answerMatchMode": "EXACT",
+          "prompt": "새로 만든 결말에서 까치가 친구들과 한 행동과 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "친구들과 힘을 합쳐",
+            "물을 마시는 결말"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 69,
-              "end": 72
+              "start": 8,
+              "end": 18
+            },
+            {
+              "paragraphId": "p2",
+              "start": 19,
+              "end": 28
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "다시 이야기하며 중요성을 느낀 마음을 본문에서 찾으시오.",
+          "answerText": "포기하지 않는 마음",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 9,
+              "end": 19
             }
           ],
           "scoring": {

@@ -445,18 +445,18 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "남이 나에게 베풀어 주는 고마운 마음이나 혜택은?",
-          "answerText": "은혜",
-          "answerMatchMode": "ANY",
+          "prompt": "노래에서 반복되는 표현 '스승의 은혜'를 모두 찾으시오.",
+          "answerText": "스승의 은혜",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 4,
+              "start": 0,
               "end": 6
             },
             {
               "paragraphId": "p3",
-              "start": 27,
+              "start": 23,
               "end": 29
             }
           ],
@@ -468,14 +468,14 @@
         },
         {
           "id": "q2",
-          "prompt": "아버지와 어머니를 함께 묶어 정답게 부르는 말은?",
-          "answerText": "어버이",
+          "prompt": "스승의 은혜를 무엇 같다고 표현했는지 지문에서 찾으시오.",
+          "answerText": "하늘 같아서",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 25,
-              "end": 28
+              "paragraphId": "p1",
+              "start": 8,
+              "end": 14
             }
           ],
           "scoring": {
@@ -486,14 +486,32 @@
         },
         {
           "id": "q3",
-          "prompt": "남의 은혜나 고마움을 잊지 않고 알맞게 갚는 일은?",
-          "answerText": "보답",
+          "prompt": "스승이 가르쳐 주신 말을 지문에서 찾으시오.",
+          "answerText": "참되거라 바르거라",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 18,
-              "end": 20
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 9
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "스승을 무엇이라고 표현했는지 지문에서 찾으시오.",
+          "answerText": "스승은 마음의 어버이시다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 17,
+              "end": 30
             }
           ],
           "scoring": {

@@ -571,12 +571,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 학생회장이 논의의 목적이나 초점을 어떻게 설정하는가?",
+          "prompt": "학생회장이 오늘 의견을 모아 보자고 한 항목을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 137
+              "start": 92,
+              "end": 102
+            },
+            {
+              "paragraphId": "p1",
+              "start": 104,
+              "end": 111
+            },
+            {
+              "paragraphId": "p1",
+              "start": 113,
+              "end": 126
             }
           ],
           "scoring": {
@@ -584,17 +594,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학생회장: 다음 달부터 점심시간 방송을 학생 주도 코너로 바꾸자는 제안을 논의하겠습니다. 기존 방송이 공지 위주라서 학생 참여도가 낮다는 의견이 많았습니다. 오늘은 방송 시간을 늘릴지, 내용을 바꿀지, 운영 인원을 어떻게 둘지 의견을 모아 보죠."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "방송 시간을 늘릴지",
+            "내용을 바꿀지",
+            "운영 인원을 어떻게 둘지"
+          ]
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 홍보부원이 어떤 의견이나 판단을 제시하는가?",
+          "prompt": "기존 방송에 대해 많았던 의견을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 165
+              "paragraphId": "p1",
+              "start": 65,
+              "end": 79
             }
           ],
           "scoring": {
@@ -603,16 +617,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "홍보부원: 저는 시간을 조금 늘리기보다 내용을 바꾸는 쪽이 더 효과적이라고 봅니다. 지금처럼 안내만 읽으면 학생들이 집중하지 않으니까요. 짧은 인터뷰나 동아리 소개를 넣으면 반응이 달라질 수 있습니다. 다만 진행자가 즉흥적으로 말하면 전달이 흐려질 수 있으니, 간단한 대본은 꼭 준비해야 합니다."
+          "answerText": "학생 참여도가 낮다는 의견"
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 지도교사가 무엇을 제안하거나 요청하는가?",
+          "prompt": "홍보부원이 시간을 조금 늘리기보다 더 효과적이라고 본 쪽을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 144
+              "paragraphId": "p2",
+              "start": 22,
+              "end": 31
             }
           ],
           "scoring": {
@@ -621,16 +635,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "지도교사: 내용 변화 자체는 좋지만 점심시간은 학생들이 쉬는 시간이기도 합니다. 방송이 너무 길거나 목소리가 지나치게 크면 오히려 불만이 늘 수 있어요. 특히 시험 기간에는 조용한 분위기를 원하는 학생이 많으니, 상시 확대보다 시기별 조정이 필요해 보입니다."
+          "answerText": "내용을 바꾸는 쪽"
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 방송부장이 어떤 우려를 드러내는가?",
+          "prompt": "홍보부원이 방송에 넣으면 반응이 달라질 수 있다고 한 내용을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 156
+              "paragraphId": "p2",
+              "start": 77,
+              "end": 83
+            },
+            {
+              "paragraphId": "p2",
+              "start": 85,
+              "end": 91
             }
           ],
           "scoring": {
@@ -638,17 +657,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "방송부장: 그래서 저는 요일을 나누는 안을 생각했습니다. 월요일과 목요일만 참여형 코너를 운영하고 나머지 날은 공지를 짧게 전달하는 방식입니다. 이렇게 하면 방송이 쉬는 시간을 방해한다는 우려도 줄일 수 있고, 학생들이 어떤 요일에 어떤 내용을 듣게 되는지도 예측할 수 있습니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "짧은 인터뷰",
+            "동아리 소개"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 학생회장이 무엇을 제안하거나 요청하는가?",
+          "prompt": "진행자가 즉흥적으로 말할 때 생길 수 있는 문제를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 157
+              "paragraphId": "p2",
+              "start": 131,
+              "end": 140
             }
           ],
           "scoring": {
@@ -657,16 +679,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생회장: 그러면 학생 반응을 먼저 확인하는 절차가 있으면 좋겠습니다. 바로 확대하는 대신 2주 정도 시범 운영을 하고, 점심시간 만족도 조사와 의견함 결과를 함께 보죠. 반응이 좋으면 정식 편성으로 옮기고, 불편 의견이 많으면 시간이나 형식을 다시 조정하는 식이 적절해 보입니다."
+          "answerText": "전달이 흐려질 수"
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 지도교사가 어떤 점을 묻고 있는가?",
+          "prompt": "지도교사가 상시 확대보다 필요하다고 본 조정을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 155
+              "paragraphId": "p3",
+              "start": 127,
+              "end": 133
             }
           ],
           "scoring": {
@@ -675,7 +697,71 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "지도교사: 그 정도라면 무리하지 않고 시작할 수 있겠네요. 시범 운영안에는 방송 길이, 진행 요일, 진행자 수, 음량 기준을 분명히 넣어 주세요. 학생들이 무엇을 바꾸려는지 정확히 알아야 반응도 분명하게 나옵니다. 다음 회의에서는 시범 대본과 조사 문항 초안을 함께 검토합시다."
+          "answerText": "시기별 조정"
+        },
+        {
+          "id": "q7",
+          "prompt": "방송부장이 참여형 코너를 운영하자고 한 요일을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 32,
+              "end": 35
+            },
+            {
+              "paragraphId": "p4",
+              "start": 37,
+              "end": 40
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "월요일",
+            "목요일"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "지도교사가 시범 운영안에 분명히 넣어 달라고 한 기준을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 42,
+              "end": 47
+            },
+            {
+              "paragraphId": "p6",
+              "start": 49,
+              "end": 54
+            },
+            {
+              "paragraphId": "p6",
+              "start": 56,
+              "end": 61
+            },
+            {
+              "paragraphId": "p6",
+              "start": 63,
+              "end": 68
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "방송 길이",
+            "진행 요일",
+            "진행자 수",
+            "음량 기준"
+          ]
         }
       ]
     }

@@ -571,30 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 이 글의 중심 개념을 어떤 원리나 관점에서 소개하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 197
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "글을 읽는 사람을 단순히 ‘글을 받아들이는 대상’으로만 보면 독자 개념은 지나치게 좁아진다. 실제 글쓰기에서는 필자가 누구를 떠올리며 글을 쓰는지가 문장 선택과 설명 방식에 직접 영향을 준다. 이런 점 때문에 최근에는 독자를 필자 밖에 따로 서 있는 수신자만으로 보지 않고, 일정한 읽기 관습을 공유하는 집단 속의 참여자로 이해하려는 관점이 중요해졌다."
-        },
-        {
-          "id": "q2",
-          "prompt": "둘째 문단은 왜 중요하거나 어떤 이유로 문제 되는지 설명하는가?",
+          "prompt": "담화 공동체를 가리키는 정의 문장을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 199
+              "end": 65
             }
           ],
           "scoring": {
@@ -603,16 +585,48 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "담화 공동체는 특정한 말하기와 쓰기 관습, 자주 다루는 주제, 익숙한 어휘와 논증 방식을 함께 지닌 집단을 가리킨다. 과학 보고서를 읽고 쓰는 사람들, 학교 신문을 만드는 학생들, 인터넷 토론판 이용자들은 서로 다른 담화 공동체를 이룰 수 있다. 같은 사안을 다루더라도 어떤 공동체에 속하느냐에 따라 적절한 표현과 설득 방식이 달라지는 이유가 여기에 있다."
+          "answerText": "담화 공동체는 특정한 말하기와 쓰기 관습, 자주 다루는 주제, 익숙한 어휘와 논증 방식을 함께 지닌 집단을 가리킨다."
+        },
+        {
+          "id": "q2",
+          "prompt": "서로 다른 담화 공동체의 예시 세 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 83
+            },
+            {
+              "paragraphId": "p2",
+              "start": 85,
+              "end": 99
+            },
+            {
+              "paragraphId": "p2",
+              "start": 101,
+              "end": 113
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "과학 보고서를 읽고 쓰는 사람들",
+            "학교 신문을 만드는 학생들",
+            "인터넷 토론판 이용자들"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 어떤 생각이나 관계를 보여 주는가?",
+          "prompt": "필자가 글을 쓸 때 활용하는 공동체의 자원을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 186
+              "start": 39,
+              "end": 69
             }
           ],
           "scoring": {
@@ -621,16 +635,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 관점에서 보면 필자와 독자는 완전히 분리된 존재가 아니다. 필자는 자신이 속한 공동체가 익숙하게 여기는 지식과 표현 방식을 활용해 글을 쓰고, 독자도 같은 배경지식을 바탕으로 의미를 구성한다. 그래서 독자는 단순히 완성된 글을 받아들이는 사람이 아니라, 공동체가 공유한 규약을 통해 글의 뜻을 함께 만들어 내는 참여자로 이해된다."
+          "answerText": "자신이 속한 공동체가 익숙하게 여기는 지식과 표현 방식"
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 어떤 생각이나 관계를 보여 주는가?",
+          "prompt": "같은 사안을 다루더라도 표현과 설득 방식이 달라지는 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 228
+              "paragraphId": "p2",
+              "start": 151,
+              "end": 167
             }
           ],
           "scoring": {
@@ -639,16 +653,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "담화 공동체 개념은 상호 텍스트성과도 밀접하다. 하나의 글은 이전 글의 주장이나 표현을 반복하기도 하고, 설명하지 않아도 독자가 이미 알고 있을 것이라 가정하는 전제를 바탕으로 전개되기도 한다. 이런 반복과 전제는 공동체 구성원들이 무엇을 알고 있으며 무엇을 설명 없이 받아들이는지를 보여 준다. 따라서 한 글의 의미는 그 글만 떼어 놓고 볼 때보다, 공동체 안의 다른 글들과 연결해서 볼 때 더 선명해진다."
+          "answerText": "어떤 공동체에 속하느냐에 따라"
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 예시를 통해 중심 개념의 어떤 특징이나 작동 방식을 보여 주는가?",
+          "prompt": "하나의 글이 전개될 때 바탕이 된다고 한 전제를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 214
+              "paragraphId": "p4",
+              "start": 68,
+              "end": 92
             }
           ],
           "scoring": {
@@ -657,16 +671,48 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "예를 들어 학술 보고서에서는 근거 제시 방식, 인용 형식, 개념 정의가 엄격하게 요구된다. 반면 학교 게시판의 안내문이나 동아리 공지문은 독자가 이미 공유하고 있는 상황을 전제로 더 짧고 직접적인 표현을 쓴다. 서로 다른 담화 공동체는 ‘좋은 글’의 기준도 다르게 설정하므로, 글을 이해하거나 평가할 때는 문장 자체뿐 아니라 그것이 어느 공동체의 규약을 따르는지도 함께 살펴야 한다."
+          "answerText": "독자가 이미 알고 있을 것이라 가정하는 전제"
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 글의 핵심을 어떻게 정리하는가?",
+          "prompt": "학술 보고서에서 엄격하게 요구되는 세 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 16,
+              "end": 24
+            },
+            {
+              "paragraphId": "p5",
+              "start": 26,
+              "end": 31
+            },
+            {
+              "paragraphId": "p5",
+              "start": 33,
+              "end": 38
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "근거 제시 방식",
+            "인용 형식",
+            "개념 정의"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "담화 공동체 개념이 모든 독자를 단순화할 위험이 있는 이유를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 230
+              "start": 48,
+              "end": 88
             }
           ],
           "scoring": {
@@ -675,7 +721,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "다만 담화 공동체 개념이 모든 독자를 하나의 동질적인 집단처럼 단순화할 위험도 있다. 같은 공동체에 속해도 관심사와 경험, 이해 수준은 다를 수 있기 때문이다. 또 규약이 느슨한 온라인 공간처럼 공동체의 경계가 뚜렷하지 않은 경우에는 이 개념만으로 독자의 실제 반응을 충분히 설명하기 어렵다. 결국 담화 공동체는 독자와 글의 관계를 이해하는 유용한 틀이지만, 독자의 다양성을 함께 고려할 때 더 설득력을 갖는다."
+          "answerText": "같은 공동체에 속해도 관심사와 경험, 이해 수준은 다를 수 있기 때문이다"
+        },
+        {
+          "id": "q8",
+          "prompt": "담화 공동체가 더 설득력을 갖기 위해 함께 고려해야 하는 것을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 201,
+              "end": 208
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "독자의 다양성"
         }
       ]
     }

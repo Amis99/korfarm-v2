@@ -557,33 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "주인공 이인국이 환자들을 치료하고 수술을 집도하며 운영하던 전문적인 장소는?",
-          "answerText": "병원",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 19,
-              "end": 21
-            },
-            {
-              "paragraphId": "p2",
-              "start": 97,
-              "end": 99
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "이인국 박사가 해방 직후 자신의 지위를 유지하고 살아남기 위해 새롭게 배운 언어는?",
+          "prompt": "박사가 자신의 안전을 위해 배우며 기회를 엿본 언어를 찾으시오.",
           "answerText": "러시아어",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -599,15 +575,53 @@
           "revealOnWrong": true
         },
         {
+          "id": "q2",
+          "prompt": "박사가 수술을 성공적으로 마친 대상을 찾으시오.",
+          "answerText": "소련군 장교",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 4,
+              "end": 10
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q3",
-          "prompt": "박사가 자신의 행동에 대해 마음속 한구석에서 계속해서 느끼던 불편한 감정은?",
-          "answerText": "불안",
-          "answerMatchMode": "EXACT",
+          "prompt": "박사가 상황이 변할 때마다 어떻게 적응했는지 보여 주는 어구를 찾으시오.",
+          "answerText": "재빨리 적응",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 61,
+              "end": 67
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "박사가 앉아 창밖의 변해가는 세상을 바라본 장소를 나타내는 어구를 찾으시오.",
+          "answerText": "화려한 방 안",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 36,
-              "end": 38
+              "start": 95,
+              "end": 102
             }
           ],
           "scoring": {

@@ -1039,25 +1039,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "어간과 어말 어미 사이에 들어가는 어미를 뜻하는 말은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 6
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "선어말 어미"
-        },
-        {
-          "id": "q2",
-          "prompt": "일이 이미 끝남을 뜻하는 말은?",
+          "prompt": "이미 끝난 일이나 상태를 뜻하는 두 글자 단어를 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -1076,67 +1058,17 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
           "answerText": "완료"
         },
         {
-          "id": "q3",
-          "prompt": "상태나 일이 이어짐을 뜻하는 말은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 99,
-              "end": 101
-            },
-            {
-              "paragraphId": "p6",
-              "start": 74,
-              "end": 76
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지속"
-        },
-        {
-          "id": "q4",
-          "prompt": "스스로 하려는 마음을 뜻하는 말은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 127,
-              "end": 129
-            },
-            {
-              "paragraphId": "p3",
-              "start": 54,
-              "end": 56
-            },
-            {
-              "paragraphId": "p6",
-              "start": 92,
-              "end": 94
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "의지"
-        },
-        {
-          "id": "q5",
-          "prompt": "확실하지 않은 것을 짐작함을 뜻하는 말은?",
+          "id": "q2",
+          "prompt": "확실히 알지 못하는 일을 짐작함을 뜻하는 두 글자 단어를 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -1160,12 +1092,114 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
           "answerText": "추측"
+        },
+        {
+          "id": "q3",
+          "prompt": "어떤 일을 스스로 하려는 마음을 뜻하는 두 글자 단어를 지문에서 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 127,
+              "end": 129
+            },
+            {
+              "paragraphId": "p3",
+              "start": 54,
+              "end": 56
+            },
+            {
+              "paragraphId": "p6",
+              "start": 92,
+              "end": 94
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "의지"
+        },
+        {
+          "id": "q4",
+          "prompt": "지문에서 '내일 가겠다'에 나타나는 '-겠-'의 의미가 무엇이라 하였는지 두 글자로 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 127,
+              "end": 129
+            },
+            {
+              "paragraphId": "p3",
+              "start": 54,
+              "end": 56
+            },
+            {
+              "paragraphId": "p6",
+              "start": 92,
+              "end": 94
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "의지"
+        },
+        {
+          "id": "q5",
+          "prompt": "지문에서 '아마', '분명', '내일', '벌써'와 같은 말을 가리켜 무엇이라 하였는지 세 글자로 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 76,
+              "end": 79
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "부사어"
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 '문맥'이 쓰인 위치를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 169,
+              "end": 171
+            },
+            {
+              "paragraphId": "p6",
+              "start": 118,
+              "end": 120
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerText": "문맥"
         }
       ]
     }

@@ -889,24 +889,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "기후 위기의 큰 원인으로 제시된 기체는 무엇인가요?",
-          "answerText": "이산화탄소",
+          "prompt": "이산화탄소가 나오는 원인을 찾으시오.",
+          "answerText": "석탄이나 석유 같은 화석 연료",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 135,
-              "end": 140
-            },
-            {
-              "paragraphId": "p1",
-              "start": 174,
-              "end": 179
-            },
-            {
-              "paragraphId": "p2",
-              "start": 168,
-              "end": 173
+              "start": 103,
+              "end": 119
             }
           ],
           "scoring": {
@@ -917,29 +907,14 @@
         },
         {
           "id": "q2",
-          "prompt": "배출량과 흡수량을 맞춰 실제 배출을 0으로 만드는 약속은 무엇인가요?",
-          "answerText": "탄소 중립",
+          "prompt": "탄소 중립의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "배출하는 이산화탄소의 양과 흡수하는 양을 똑같이 맞추어 실제 배출량을 숫자 '0'으로 만들자는 약속",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 239,
-              "end": 244
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p3",
-              "start": 26,
-              "end": 31
-            },
-            {
-              "paragraphId": "p4",
-              "start": 6,
-              "end": 11
+              "start": 169,
+              "end": 224
             }
           ],
           "scoring": {
@@ -950,19 +925,22 @@
         },
         {
           "id": "q3",
-          "prompt": "화석 연료 대신 늘려야 한다고 한 에너지는 무엇인가요?",
-          "answerText": "재생 에너지",
-          "answerMatchMode": "ANY",
+          "prompt": "탄소 중립을 실천하는 가장 중요한 방법을 모두 찾으시오.",
+          "answerTexts": [
+            "화석 연료의 사용을 줄이고",
+            "'재생 에너지'를 늘리는 것"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 39,
-              "end": 45
+              "start": 23,
+              "end": 37
             },
             {
               "paragraphId": "p2",
-              "start": 84,
-              "end": 90
+              "start": 38,
+              "end": 53
             }
           ],
           "scoring": {
@@ -973,14 +951,28 @@
         },
         {
           "id": "q4",
-          "prompt": "개인 실천 예로 든 이동 수단 가운데 하나는 무엇인가요?",
-          "answerText": "자전거",
-          "answerMatchMode": "ANY",
+          "prompt": "재생 에너지의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "태양광",
+            "풍력",
+            "수력"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 119,
-              "end": 122
+              "paragraphId": "p2",
+              "start": 57,
+              "end": 60
+            },
+            {
+              "paragraphId": "p2",
+              "start": 63,
+              "end": 65
+            },
+            {
+              "paragraphId": "p2",
+              "start": 67,
+              "end": 69
             }
           ],
           "scoring": {
@@ -991,7 +983,7 @@
         },
         {
           "id": "q5",
-          "prompt": "글이 마지막에 지키고자 한 것은 어떤 지구인가요?",
+          "prompt": "다음 세대의 아이들이 살아갈 수 있어야 한다고 한 지구를 찾으시오.",
           "answerText": "안전하고 건강한 지구",
           "answerMatchMode": "ANY",
           "answerRanges": [

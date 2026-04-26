@@ -402,14 +402,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "산이나 들에서 자라는 나물이나 채소를 뜻하는 말은?",
-          "answerText": "나물",
+          "prompt": "돌이 물에 빠지는 소리를 나타낸 표현을 지문에서 찾으시오.",
+          "answerText": "퐁당퐁당",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 9,
-              "end": 11
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 4
             }
           ],
           "scoring": {
@@ -420,14 +420,55 @@
         },
         {
           "id": "q2",
-          "prompt": "피부에 살짝 닿아 가렵거나 웃음이 나는 느낌이 들게 하는 것은?",
-          "answerText": "간질",
+          "prompt": "노래에서 반복되는 명령형 표현 '돌을 던지자'를 모두 찾으시오.",
+          "answerText": "돌을 던지자",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 5,
+              "end": 11
+            },
+            {
+              "paragraphId": "p1",
+              "start": 18,
+              "end": 24
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "냇물에게 퍼지라고 말하는 부분을 지문에서 찾으시오.",
+          "answerText": "냇물아 퍼져라",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 25,
+              "end": 32
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "무엇을 간질여 주라고 했는지 지문에서 찾으시오.",
+          "answerText": "우리 누나 손등을",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 26,
-              "end": 28
+              "start": 16,
+              "end": 25
             }
           ],
           "scoring": {

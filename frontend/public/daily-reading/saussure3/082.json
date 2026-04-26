@@ -557,49 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리가 산이나 숲에서 길을 잃지 않도록 북쪽과 남쪽을 정확하게 알려 주는 도구는?",
-          "answerText": "나침반",
-          "answerMatchMode": "EXACT",
+          "prompt": "나침반이 알려 주는 것은 어떤 방향입니까?",
+          "answerText": "동서남북 방향",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p1",
-              "start": 53,
-              "end": 56
-            },
-            {
-              "paragraphId": "p1",
-              "start": 100,
-              "end": 103
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p2",
-              "start": 80,
-              "end": 83
-            },
-            {
-              "paragraphId": "p2",
-              "start": 112,
-              "end": 115
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p3",
-              "start": 103,
-              "end": 106
+              "start": 31,
+              "end": 38
             }
           ],
           "scoring": {
@@ -611,34 +576,32 @@
         },
         {
           "id": "q2",
-          "prompt": "나침반 바늘이 늘 북쪽을 향하는 이유는, 지구 전체가 이것과 같은 역할을 하기 때문입니다.",
-          "answerText": "자석",
-          "answerMatchMode": "EXACT",
+          "prompt": "나침반 안의 바늘이 항상 가리키는 두 방향을 모두 찾으시오.",
+          "answerTexts": [
+            "북쪽",
+            "남쪽"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 17,
-              "end": 19
+              "start": 81,
+              "end": 83
             },
             {
               "paragraphId": "p1",
-              "start": 61,
-              "end": 63
+              "start": 85,
+              "end": 87
             },
             {
               "paragraphId": "p2",
-              "start": 30,
-              "end": 32
+              "start": 10,
+              "end": 12
             },
             {
               "paragraphId": "p2",
-              "start": 54,
-              "end": 56
-            },
-            {
-              "paragraphId": "p3",
-              "start": 12,
-              "end": 14
+              "start": 92,
+              "end": 94
             }
           ],
           "scoring": {
@@ -650,14 +613,47 @@
         },
         {
           "id": "q3",
-          "prompt": "나침반 바늘의 N극이 북쪽을 가리키게 만드는 원인으로, 지구의 북극이 가진 자석의 성질은?",
-          "answerText": "S극",
-          "answerMatchMode": "EXACT",
+          "prompt": "나침반의 N극 바늘이 북쪽으로 돌아가게 하는 힘은 무엇입니까?",
+          "answerText": "다른 극끼리 서로 끌어당기는 힘",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 34,
-              "end": 36
+              "start": 58,
+              "end": 75
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "나침반을 사용할 때 주의해야 할 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "자석이나 철로 된 물건",
+            "수평을 잘 맞추어 들고",
+            "바늘이 멈출 때까지 기다려야"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 12,
+              "end": 24
+            },
+            {
+              "paragraphId": "p3",
+              "start": 56,
+              "end": 68
+            },
+            {
+              "paragraphId": "p3",
+              "start": 69,
+              "end": 84
             }
           ],
           "scoring": {

@@ -562,117 +562,82 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "아주 먼 옛날 이웃 나라 중국에 살았으며, 사람들에게 바르게 사는 방법을 가르쳐 준 훌륭한 학자는 누구인가요?",
-          "answerText": "공자",
-          "answerMatchMode": "EXACT",
+          "prompt": "공자가 자라서 어떤 사람이 되었는지 지문에서 찾으시오.",
+          "answerText": "사람들에게 바르게 사는 방법을 가르쳐 주는 훌륭한 학자",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 20,
-              "end": 22
-            },
-            {
-              "paragraphId": "p1",
-              "start": 41,
-              "end": 43
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 97,
-              "end": 99
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p3",
-              "start": 19,
-              "end": 21
-            },
-            {
-              "paragraphId": "p3",
-              "start": 105,
-              "end": 107
+              "start": 107,
+              "end": 137
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "공자가 가장 중요하게 가르친 것은 부모님과 친구, 이웃을 아끼고 소중히 여기는 이 마음입니다. 이 마음은 무엇인가요?",
-          "answerText": "사랑",
-          "answerMatchMode": "EXACT",
+          "prompt": "공자가 가장 중요하게 가르친 마음을 따옴표까지 포함하여 지문에서 찾으시오.",
+          "answerText": "'사랑하는 마음'",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 11,
-              "end": 13
-            },
-            {
-              "paragraphId": "p2",
-              "start": 41,
-              "end": 43
+              "start": 10,
+              "end": 19
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "공자의 따뜻한 가르침을 듣고 배우기 위해 먼 곳에서 찾아온 사람들을 무엇이라고 불렀나요?",
-          "answerText": "제자",
-          "answerMatchMode": "EXACT",
+          "prompt": "'사랑하는 마음'의 바른 행동으로 제시된 내용을 모두 찾으시오.",
+          "answerText": "부모님을 사랑하고 존경하며, 친구들과 사이좋게 지내고 어려운 이웃을 도와주는 것",
+          "answerTexts": [
+            "부모님을 사랑하고 존경하며",
+            "친구들과 사이좋게 지내고 어려운 이웃을 도와주는 것"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 120,
-              "end": 122
+              "start": 36,
+              "end": 50
             },
             {
-              "paragraphId": "p3",
-              "start": 14,
-              "end": 16
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 80
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "공자가 세상을 떠난 후, 제자들이 공자가 평소에 들려준 좋은 말씀들을 모아서 만든 책의 이름은 무엇인가요?",
-          "answerText": "논어",
-          "answerMatchMode": "EXACT",
+          "prompt": "제자들이 공자의 말씀을 모아서 만든 책 이름을 따옴표까지 포함하여 지문에서 찾으시오.",
+          "answerText": "'논어'",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 44,
-              "end": 46
+              "start": 43,
+              "end": 47
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         }

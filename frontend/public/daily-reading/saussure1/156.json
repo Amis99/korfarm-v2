@@ -552,34 +552,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "마법의 무엇를 연주하나요?",
-          "answerText": "피아노",
-          "answerMatchMode": "EXACT",
+          "prompt": "이슬 맺힌 꽃밭을 찾으러 토끼와 함께 나선 두 친구를 모두 찾아보세요",
+          "answerText": "다람쥐, 파랑새",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 19,
-              "end": 22
-            },
-            {
-              "paragraphId": "p1",
-              "start": 37,
-              "end": 40
-            },
-            {
-              "paragraphId": "p1",
-              "start": 89,
-              "end": 92
+              "paragraphId": "p2",
+              "start": 81,
+              "end": 84
             },
             {
               "paragraphId": "p2",
-              "start": 19,
-              "end": 22
-            },
-            {
-              "paragraphId": "p2",
-              "start": 161,
-              "end": 164
+              "start": 86,
+              "end": 89
             }
           ],
           "scoring": {
@@ -591,14 +576,24 @@
         },
         {
           "id": "q2",
-          "prompt": "쪽지를 남긴 주인공?",
-          "answerText": "요정",
-          "answerMatchMode": "EXACT",
+          "prompt": "깊은 숲속에 지어진 작고 소박한 집을 가리키는 낱말을 찾아보세요",
+          "answerText": "오두막",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 81,
-              "end": 83
+              "start": 9,
+              "end": 12
+            },
+            {
+              "paragraphId": "p1",
+              "start": 156,
+              "end": 159
+            },
+            {
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 69
             }
           ],
           "scoring": {
@@ -610,9 +605,28 @@
         },
         {
           "id": "q3",
-          "prompt": "오두막 주인 무엇인가요?",
+          "prompt": "피아노 건반을 누르면 아름다운 선율과 함께 나오는 것을 찾아보세요",
+          "answerText": "빛",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 66,
+              "end": 67
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "오두막의 주인이며 쪽지를 받고 모험을 시작한 인물을 찾아보세요",
           "answerText": "토끼",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",

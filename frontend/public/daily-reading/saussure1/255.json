@@ -396,33 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "몸의 기운과 튼튼함?",
-          "answerText": "건강",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 35,
-              "end": 37
-            },
-            {
-              "paragraphId": "p2",
-              "start": 118,
-              "end": 120
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "질병을 일으키는 생물?",
+          "prompt": "글에서 우리 손에 눈에 보이지 않게 살고 있다고 한 작은 생물의 이름을 본문에서 찾아 두 글자로 써 보세요",
           "answerText": "세균",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -443,15 +419,58 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "나쁜 일을 미리 막음?",
-          "answerText": "예방",
-          "answerMatchMode": "EXACT",
+          "id": "q2",
+          "prompt": "손을 깨끗이 씻으면 효과적으로 예방할 수 있다고 본문에서 든 두 가지 질병의 예시를 모두 찾아 써 보세요",
+          "answerText": "감기, 배탈",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 96,
-              "end": 98
+              "start": 70,
+              "end": 72
+            },
+            {
+              "paragraphId": "p1",
+              "start": 74,
+              "end": 76
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "본문에서는 손을 씻을 때 거품을 내기 위해 무엇을 사용해야 한다고 했는지 두 글자로 찾아 써 보세요",
+          "answerText": "비누",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 9,
+              "end": 11
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글쓴이가 손을 씻을 때 손가락 사이와 손톱 밑까지 몇 초 이상 문질러야 한다고 알려주었는지 본문에서 그대로 찾아 써 보세요",
+          "answerText": "30초",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 45,
+              "end": 48
             }
           ],
           "scoring": {

@@ -587,19 +587,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "순서대로 행동하는 모양은?",
-          "answerText": "차례차례",
-          "answerMatchMode": "EXACT",
+          "prompt": "골목길을 지날 때 살펴야 하는 것과 걷는 방법을 모두 찾으시오.",
+          "answerTexts": [
+            "차가 오는지",
+            "한 줄로 차례차례 걷습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 46,
-              "end": 50
+              "start": 10,
+              "end": 16
             },
             {
-              "paragraphId": "p2",
-              "start": 55,
-              "end": 59
+              "paragraphId": "p1",
+              "start": 41,
+              "end": 55
             }
           ],
           "scoring": {
@@ -611,14 +614,14 @@
         },
         {
           "id": "q2",
-          "prompt": "순서를 지키는 상태는?",
-          "answerText": "질서를",
-          "answerMatchMode": "EXACT",
+          "prompt": "질서를 지키면 생기는 결과를 찾으시오.",
+          "answerText": "부딪치지 않습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 57,
-              "end": 60
+              "start": 73,
+              "end": 82
             }
           ],
           "scoring": {
@@ -630,14 +633,49 @@
         },
         {
           "id": "q3",
-          "prompt": "길을 내어주는 행동은?",
-          "answerText": "양보합니다",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구와 장난치며 뛰어가면 생길 수 있는 일을 모두 찾으시오.",
+          "answerTexts": [
+            "장난치며 뛰어가면",
+            "사고가 날 수 있습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 48,
-              "end": 53
+              "start": 4,
+              "end": 13
+            },
+            {
+              "paragraphId": "p2",
+              "start": 14,
+              "end": 26
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "사고를 막는 습관의 두 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "주위를 살피고",
+            "천천히 걷는 습관"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 28,
+              "end": 35
+            },
+            {
+              "paragraphId": "p3",
+              "start": 36,
+              "end": 45
             }
           ],
           "scoring": {

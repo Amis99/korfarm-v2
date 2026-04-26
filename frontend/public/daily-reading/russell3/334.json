@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"자료 사용하기는 조사 결과와 글쓴이의 주장을 구분해 쓰는 일이다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "의견문 초고에 활용한 조사 자료를 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 159
+              "start": 14,
+              "end": 28
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "나는 우리 학교 학생들의 아침 식사 실태 조사 자료를 활용해 의견문 초고를 쓰고 있다. 자료를 보면 아침을 거르는 학생 비율이 생각보다 높았고, 이유로는 시간 부족과 식욕 부족이 많이 꼽혔다. 그런데 초고를 쓰다 보니 자료에서 확인되는 내용과 내가 하고 싶은 말을 뒤섞어 적게 되었다."
+          "answerText": "아침 식사 실태 조사 자료"
         },
         {
           "id": "q2",
-          "prompt": "\"아침을 거르는 학생 비율이 높고 이유는 시간 부족과 식욕 부족이다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "자료 활용 글에서 우선 밝혀야 할 것을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 136
+              "start": 62,
+              "end": 67
+            },
+            {
+              "paragraphId": "p4",
+              "start": 89,
+              "end": 94
             }
           ],
           "scoring": {
@@ -603,69 +608,15 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "처음에는 '아침 식사는 꼭 해야 한다'는 내 생각을 먼저 길게 적었다. 하지만 자료를 활용하는 글이라면, 우선 조사 결과가 무엇을 보여 주는지부터 분명히 밝혀야 할 것 같다. 자료에서 드러나는 사실과 그 사실에 대한 해석은 구분해서 써야 한다."
+          "answerText": "조사 결과"
         },
         {
           "id": "q3",
-          "prompt": "\"응답 비율은 수치를 정확히 정리해 구체적으로 제시해야 한다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "자료 인용에서 막연한 표현보다 중요하다고 한 것을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 169
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "예를 들어 응답 비율을 설명할 때는 어떤 항목이 가장 높았는지, 그 차이가 얼마나 나는지 차례대로 제시해야 한다. 그런데 지금 초고는 수치를 정확히 정리하기보다 '학생들이 많이 힘들어한다'는 식으로만 적어 두어서, 자료를 실제로 쓴 느낌이 약하다. 자료를 인용할 때는 막연한 표현보다 구체성이 중요하다."
-        },
-        {
-          "id": "q4",
-          "prompt": "\"모든 수치를 나열하기보다 주장과 관련된 항목을 골라야 한다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 158
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "또 자료를 쓸 때는 모든 수치를 나열하는 것이 능사가 아니다. 주장과 관련 있는 항목을 골라 제시하고, 왜 그 수치가 중요한지 풀어 주어야 한다. 지금 초고는 조사 결과와 해결 방안을 한 문단에 함께 넣어 두어서, 독자가 어느 부분이 근거이고 어느 부분이 제안인지 헷갈릴 수도 있다."
-        },
-        {
-          "id": "q5",
-          "prompt": "\"간편식 안내 강화 주장은 시간 부족 응답을 중심으로 연결하면 자연스럽다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 157
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "나는 학교가 아침 간편식 안내를 강화해야 한다는 쪽으로 글을 쓰고 싶다. 그렇다면 자료 가운데 시간 부족 응답 비율을 중심으로 제시하고, 그다음 해결 방안을 연결하는 편이 더 자연스러울 것이다. 자료는 주장을 대신해 주는 장식이 아니라, 주장을 뒷받침하는 핵심 근거가 되어야 한다."
-        },
-        {
-          "id": "q6",
-          "prompt": "\"자료는 장식이 아니라 주장을 뒷받침하는 핵심 근거이다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
+              "start": 159,
               "end": 162
             }
           ],
@@ -675,7 +626,61 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 이 초고를 고칠 때는 자료의 내용, 자료 해석, 글쓴이의 주장, 해결 방안을 단계적으로 나누어 정리해야 한다. 자료 사용하기는 숫자를 옮겨 적는 일이 아니라 자료가 글 속에서 어떤 역할을 하는지 설계하는 일에 가깝다. 그래야 자료가 글의 설득력을 높이는 근거로 제대로 기능할 수 있다."
+          "answerText": "구체성"
+        },
+        {
+          "id": "q4",
+          "prompt": "자료를 쓸 때 골라 제시해야 한다고 한 항목을 지문에서 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 35,
+              "end": 47
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "주장과 관련 있는 항목"
+        },
+        {
+          "id": "q5",
+          "prompt": "글쓴이가 중심으로 제시하려는 응답 비율을 지문에서 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 53,
+              "end": 64
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "시간 부족 응답 비율"
+        },
+        {
+          "id": "q6",
+          "prompt": "자료가 높이는 근거로 기능해야 한다고 한 것을 지문에서 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 133,
+              "end": 139
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "글의 설득력"
         }
       ]
     }

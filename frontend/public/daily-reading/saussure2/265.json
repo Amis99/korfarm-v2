@@ -562,29 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "게임도 하고 정보도 찾는 편리한 세상이지만 조심하지 않으면 위험할 수 있는 곳은 어디인가요?",
-          "answerText": "인터넷",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리가 조심하지 않으면 인터넷이 어떻게 될 수도 있다고 했는지 지문에서 찾으시오.",
+          "answerText": "아주 위험한 곳이 될 수도 있어요.",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p1",
-              "start": 84,
-              "end": 87
-            },
-            {
-              "paragraphId": "p3",
-              "start": 3,
-              "end": 6
-            },
-            {
-              "paragraphId": "p3",
-              "start": 103,
-              "end": 106
+              "start": 60,
+              "end": 79
             }
           ],
           "scoring": {
@@ -596,14 +581,22 @@
         },
         {
           "id": "q2",
-          "prompt": "함부로 알려주면 안 되는 나의 이름, 주소, 비밀번호 등을 아울러 무엇이라고 부르나요?",
-          "answerText": "정보",
-          "answerMatchMode": "EXACT",
+          "prompt": "모르는 사람에게 절대 말하지 않아야 한다고 한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "내 이름이나 집 주소",
+            "전화번호와 비밀번호"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 13,
-              "end": 15
+              "start": 32,
+              "end": 43
+            },
+            {
+              "paragraphId": "p2",
+              "start": 45,
+              "end": 55
             }
           ],
           "scoring": {
@@ -615,14 +608,14 @@
         },
         {
           "id": "q3",
-          "prompt": "모르는 사람이 이상한 메시지와 함께 보내서 절대 누르면 안 되는 것은 무엇인가요?",
-          "answerText": "링크",
-          "answerMatchMode": "EXACT",
+          "prompt": "이상한 메시지나 모르는 사람이 보낸 링크를 받으면 어떻게 해야 하는지 지문에서 찾으시오.",
+          "answerText": "절대 누르지 말고 부모님께 말씀드려야 해요.",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 98,
-              "end": 100
+              "start": 102,
+              "end": 126
             }
           ],
           "scoring": {
@@ -634,14 +627,14 @@
         },
         {
           "id": "q4",
-          "prompt": "컴퓨터나 스마트폰을 너무 오래 보면 나빠지는 우리 몸의 부분은 어디인가요?",
-          "answerText": "눈",
-          "answerMatchMode": "EXACT",
+          "prompt": "컴퓨터나 스마트폰을 너무 오래 보면 생길 수 있는 일을 나타낸 구절을 찾으시오.",
+          "answerText": "눈이 나빠지고 건강을 해칠 수 있어요.",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 53,
-              "end": 54
+              "end": 74
             }
           ],
           "scoring": {

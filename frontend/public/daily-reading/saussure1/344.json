@@ -396,29 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "하늘에서 내리는 하얀 결정?",
-          "answerText": "눈",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서 '몸의 온도'를 뜻하는 두 글자 낱말을 찾아 적어 보세요",
+          "answerText": "체온",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 8,
-              "end": 9
-            },
-            {
-              "paragraphId": "p1",
-              "start": 50,
-              "end": 51
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 1
-            },
-            {
-              "paragraphId": "p2",
-              "start": 137,
-              "end": 138
+              "start": 108,
+              "end": 110
             }
           ],
           "scoring": {
@@ -430,9 +415,28 @@
         },
         {
           "id": "q2",
-          "prompt": "손을 보호하는 방한 도구?",
+          "prompt": "운동화나 장화를 신어야 하는 까닭이 무엇인지 글에서 찾아 적어 보세요",
+          "answerText": "눈길은 무척 미끄러우므로",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 50,
+              "end": 63
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "두 손을 자유롭게 하려고 끼는 방한 도구의 이름을 적어 보세요",
           "answerText": "장갑",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -453,10 +457,10 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "위험 없는 평안한 상태?",
+          "id": "q4",
+          "prompt": "글에서 '위험 없이 편안한 상태'를 뜻하는 두 글자 낱말을 찾아 적어 보세요",
           "answerText": "안전",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",

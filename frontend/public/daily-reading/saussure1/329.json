@@ -396,20 +396,11 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "어머니의 친정집 이름?",
-          "answerText": "외갓집",
-          "answerMatchMode": "EXACT",
+          "prompt": "이번 주말을 맞아 시골에 계신 외할머니와 함께 글쓴이를 반겨주신 가족이 누구인지 찾아보세요",
+          "answerText": "외할아버지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 44,
-              "end": 47
-            },
-            {
-              "paragraphId": "p2",
-              "start": 3,
-              "end": 6
-            }
+            {"paragraphId": "p1", "start": 27, "end": 32}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -420,20 +411,11 @@
         },
         {
           "id": "q2",
-          "prompt": "땅속에서 자라는 구근?",
-          "answerText": "고구마",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 외갓집 마당에서 함께 뛰어다니며 시골의 맑은 공기를 마음껏 마신 친척이 누구인지 찾아보세요",
+          "answerText": "외사촌 동생",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 37,
-              "end": 40
-            },
-            {
-              "paragraphId": "p2",
-              "start": 72,
-              "end": 75
-            }
+            {"paragraphId": "p1", "start": 103, "end": 109}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -444,15 +426,26 @@
         },
         {
           "id": "q3",
-          "prompt": "과거를 되새기는 마음?",
-          "answerText": "추억",
-          "answerMatchMode": "EXACT",
+          "prompt": "오늘 외갓집 방문에서 가장 신났던 순간은 할아버지와 함께 어디에서 고구마를 캤을 때였는지 찾아보세요",
+          "answerText": "텃밭",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 137,
-              "end": 139
-            }
+            {"paragraphId": "p2", "start": 32, "end": 34}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글쓴이가 가족과 함께 웃음꽃을 피웠던 행복한 추억을 어디에 소중히 적어 두었는지 찾아보세요",
+          "answerText": "일기장",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 141, "end": 144}
           ],
           "scoring": {
             "correctDeltaSec": 10,

@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "꾸밈이 없는 상태는?",
-          "answerText": "진실을",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리가 읽은 이야기는 나무꾼이 무엇을 숨긴 이야기인지 지문에서 찾으시오.",
+          "answerText": "선녀의 옷을",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 14,
-              "end": 17
+              "paragraphId": "p1",
+              "start": 9,
+              "end": 15
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "사실이 아닌 꾸민 말은?",
-          "answerText": "거짓",
-          "answerMatchMode": "EXACT",
+          "prompt": "내가 나무꾼이라면 하지 않았을 행동을 지문에서 찾으시오.",
+          "answerText": "옷을 숨기지 않았을 것입니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 30,
-              "end": 32
+              "paragraphId": "p1",
+              "start": 44,
+              "end": 59
             }
           ],
           "scoring": {
@@ -625,14 +625,41 @@
         },
         {
           "id": "q3",
-          "prompt": "신비롭고 놀라운 일은?",
-          "answerText": "기적을",
-          "answerMatchMode": "EXACT",
+          "prompt": "선녀가 슬퍼한 까닭을 나타내는 어구를 지문에서 찾으시오.",
+          "answerText": "하늘나라로 돌아가지 못해",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 40,
-              "end": 43
+              "paragraphId": "p2",
+              "start": 4,
+              "end": 17
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "이야기에서 중요하게 드러나는 마음 두 가지를 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "정직한 마음",
+            "서로를 존중하는 마음"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 61,
+              "end": 67
+            },
+            {
+              "paragraphId": "p2",
+              "start": 58,
+              "end": 69
             }
           ],
           "scoring": {

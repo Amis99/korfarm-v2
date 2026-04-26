@@ -975,7 +975,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다시 착륙해 반복해서 쓰는 로켓 기술은 무엇인가요?",
+          "prompt": "다시 착륙해 반복해서 쓰는 로켓 기술을 찾으시오.",
           "answerText": "재사용 발사체(Reusable Launch Vehicle)",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -993,19 +993,14 @@
         },
         {
           "id": "q2",
-          "prompt": "수직으로 다시 내려앉는 로켓 부분은 무엇인가요?",
-          "answerText": "1단 추진체",
+          "prompt": "분리된 1단 로켓이 착륙 지점을 향해 하는 동작을 찾으시오.",
+          "answerText": "스스로 남은 연료를 분사하여 방향을 틀고 속도를 줄이며 착륙 지점을 향해 맹렬하게 역추진한다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 228,
-              "end": 234
-            },
-            {
-              "paragraphId": "p3",
-              "start": 65,
-              "end": 71
+              "paragraphId": "p2",
+              "start": 110,
+              "end": 161
             }
           ],
           "scoring": {
@@ -1016,14 +1011,22 @@
         },
         {
           "id": "q3",
-          "prompt": "로켓이 착륙하는 바다 위 구조물은 무엇인가요?",
-          "answerText": "바지선",
-          "answerMatchMode": "ANY",
+          "prompt": "로켓 착륙 과정에서 견디거나 제어해야 하는 조건을 모두 찾으시오.",
+          "answerTexts": [
+            "섭씨 수천 도의 마찰열",
+            "초속 수 킬로미터의 엄청난 속도"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 223,
-              "end": 226
+              "start": 163,
+              "end": 175
+            },
+            {
+              "paragraphId": "p2",
+              "start": 181,
+              "end": 198
             }
           ],
           "scoring": {
@@ -1034,14 +1037,14 @@
         },
         {
           "id": "q4",
-          "prompt": "발사 비용 절감이 앞당긴 변화는 무엇인가요?",
-          "answerText": "우주 민주화(Democratization of Space)",
+          "prompt": "재사용 발사체가 발사 비용을 낮춘 정도를 찾으시오.",
+          "answerText": "과거의 10분의 1 수준",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 248,
-              "end": 280
+              "start": 139,
+              "end": 152
             }
           ],
           "scoring": {
@@ -1052,10 +1055,18 @@
         },
         {
           "id": "q5",
-          "prompt": "민간 우주 산업 시대를 무엇이라고 하나요?",
-          "answerText": "뉴 스페이스(New Space)",
-          "answerMatchMode": "ANY",
+          "prompt": "재사용 발사체가 앞당기거나 연 우주 산업 변화를 모두 찾으시오.",
+          "answerTexts": [
+            "우주 민주화(Democratization of Space)",
+            "뉴 스페이스(New Space)"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 248,
+              "end": 280
+            },
             {
               "paragraphId": "p4",
               "start": 287,

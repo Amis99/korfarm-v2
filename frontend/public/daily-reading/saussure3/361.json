@@ -850,14 +850,28 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "보행자용 ( )가 붙어 있습니다.",
-          "answerText": "버튼",
-          "answerMatchMode": "EXACT",
+          "prompt": "횡단보도 주변에서 관찰한 안전 장치를 모두 찾으시오.",
+          "answerTexts": [
+            "하얀 선들",
+            "보행자용 버튼",
+            "소리로 안내하는 기능"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 79,
+              "start": 36,
+              "end": 41
+            },
+            {
+              "paragraphId": "p1",
+              "start": 74,
               "end": 81
+            },
+            {
+              "paragraphId": "p1",
+              "start": 95,
+              "end": 106
             }
           ],
           "scoring": {
@@ -869,14 +883,14 @@
         },
         {
           "id": "q2",
-          "prompt": "시스템이 ( ) 정교했습니다.",
-          "answerText": "무척",
-          "answerMatchMode": "EXACT",
+          "prompt": "초록불이 켜지기 전 확인한 것을 찾으시오.",
+          "answerText": "초록불이 켜지기 전 빨간불이 깜빡이는지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 101,
-              "end": 103
+              "start": 26,
+              "end": 47
             }
           ],
           "scoring": {
@@ -888,13 +902,40 @@
         },
         {
           "id": "q3",
-          "prompt": "나만의 안전 ( )를 그려요.",
-          "answerText": "지도",
-          "answerMatchMode": "EXACT",
+          "prompt": "유심히 관찰한 사람과 차의 움직임을 모두 찾으시오.",
+          "answerTexts": [
+            "사람들의 발걸음",
+            "차의 움직임"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 53,
+              "end": 61
+            },
+            {
+              "paragraphId": "p2",
+              "start": 63,
+              "end": 69
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "스스로 그려 보는 것을 찾으시오.",
+          "answerText": "우리 동네 안전 지도",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 36,
+              "start": 27,
               "end": 38
             }
           ],

@@ -561,7 +561,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "한 나라에서 정부가 있고 중심이 되는 가장 중요한 도시는?",
+          "prompt": "서울은 대한민국의 무엇이라고 했나요? 지문에서 해당 단어를 찾으시오.",
           "answerText": "수도",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -579,19 +579,55 @@
         },
         {
           "id": "q2",
-          "prompt": "옛날 임금님이 살면서 나라의 일을 보던 아주 크고 멋진 집은?",
-          "answerText": "궁궐",
+          "prompt": "서울 한가운데에서 길게 흐르는 것은 무엇인가요? 지문에서 해당 단어를 찾으시오.",
+          "answerText": "한강",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 39,
+              "end": 41
+            },
+            {
+              "paragraphId": "p1",
+              "start": 55,
+              "end": 57
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "경복궁에 가면 무엇을 엿볼 수 있다고 했나요? 지문에서 해당 어구를 찾으시오.",
+          "answerText": "옛 사람들의 생활",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 22,
-              "end": 24
-            },
+              "start": 39,
+              "end": 48
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "밤이 되면 건물 불빛들이 무엇처럼 반짝인다고 했나요? 지문에서 해당 어구를 찾으시오.",
+          "answerText": "별처럼",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 67,
-              "end": 69
+              "paragraphId": "p3",
+              "start": 44,
+              "end": 47
             }
           ],
           "scoring": {

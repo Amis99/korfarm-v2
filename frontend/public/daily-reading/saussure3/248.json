@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "정성을 다해 일하는 태도는?",
-          "answerText": "성실함이",
-          "answerMatchMode": "EXACT",
+          "prompt": "개미가 부지런히 모은 것을 지문에서 찾아 클릭하시오.",
+          "answerText": "식량",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 48,
-              "end": 52
+              "start": 36,
+              "end": 38
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "게으름을 피우는 태도는?",
-          "answerText": "나태한",
-          "answerMatchMode": "EXACT",
+          "prompt": "개미의 성실함이 가져온 결과를 나타내는 어구를 지문에서 찾아 클릭하시오.",
+          "answerText": "복을 가져왔습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 31,
-              "end": 34
+              "paragraphId": "p1",
+              "start": 53,
+              "end": 62
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "가르침을 주는 내용은?",
-          "answerText": "교훈임",
-          "answerMatchMode": "EXACT",
+          "prompt": "나태한 태도는 나중에 무엇으로 돌아온다고 했는지 지문에서 찾아 클릭하시오.",
+          "answerText": "큰 어려움",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 87,
-              "end": 90
+              "start": 43,
+              "end": 48
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "미래를 준비하는 마음이 무엇을 이루게 해 주는지 지문에서 찾아 클릭하시오.",
+          "answerText": "우리의 꿈",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 44,
+              "end": 49
             }
           ],
           "scoring": {

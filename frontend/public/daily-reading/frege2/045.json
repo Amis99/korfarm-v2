@@ -1120,7 +1120,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "국가가 모든 국민에게 조건 없이 일정 금액을 지급하는 제도는 무엇인가요?",
+          "prompt": "국가가 모든 국민에게 조건 없이 일정 금액을 지급하는 제도 이름을 찾으시오.",
           "answerText": "기본소득",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1173,28 +1173,18 @@
         },
         {
           "id": "q2",
-          "prompt": "찬성 측이 기본소득의 장점으로 내세운, 복지에서 소외되는 문제를 줄이는 효과는 무엇인가요?",
-          "answerText": "복지의 사각지대 해소",
-          "answerMatchMode": "ANY",
+          "prompt": "기본소득 도입 찬성 측이 강조한 효과를 모두 찾으시오.",
+          "answerTexts": [
+            "복지의 사각지대 해소",
+            "경제 선순환"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 18,
               "end": 29
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "안정적인 소득을 바탕으로 소비가 늘어 경제가 살아나는 효과를 글에서는 무엇이라고 하나요?",
-          "answerText": "경제 선순환",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+            },
             {
               "paragraphId": "p2",
               "start": 33,
@@ -1208,15 +1198,41 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "반대 측이 가장 크게 걱정하는 국가 예산상의 문제는 무엇인가요?",
-          "answerText": "재정적 부담",
+          "id": "q3",
+          "prompt": "기본소득이 기존 복지 제도의 문제를 해결할 수 있다고 보는 지급 방식을 찾으시오.",
+          "answerText": "보편적 지급",
           "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 110,
+              "end": 116
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "기본소득 도입 반대 측이 우려한 문제를 모두 찾으시오.",
+          "answerTexts": [
+            "재정적 부담",
+            "노동 의욕 저하"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 16,
               "end": 22
+            },
+            {
+              "paragraphId": "p3",
+              "start": 26,
+              "end": 34
             }
           ],
           "scoring": {
@@ -1227,14 +1243,14 @@
         },
         {
           "id": "q5",
-          "prompt": "반대 측이 더 효율적이라고 본 기존 복지 방식은 무엇인가요?",
-          "answerText": "선별적 복지",
+          "prompt": "기본소득 논의가 던지는 철학적인 질문을 찾으시오.",
+          "answerText": "인류가 노동과 소득의 관계를 어떻게 재정의할 것인가",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 222,
-              "end": 228
+              "paragraphId": "p4",
+              "start": 33,
+              "end": 61
             }
           ],
           "scoring": {

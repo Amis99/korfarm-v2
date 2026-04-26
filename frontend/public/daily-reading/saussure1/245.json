@@ -396,59 +396,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "밤하늘에 떠 있는 천체?",
-          "answerText": "달",
-          "answerMatchMode": "EXACT",
+          "prompt": "사물을 주의 깊게 살펴보는 일을 무엇이라고 하는지 본문에서 찾아보세요",
+          "answerText": "관찰",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 11,
-              "end": 12
-            },
-            {
-              "paragraphId": "p1",
-              "start": 48,
-              "end": 49
-            },
-            {
-              "paragraphId": "p1",
-              "start": 113,
-              "end": 114
-            },
-            {
-              "paragraphId": "p1",
-              "start": 134,
-              "end": 135
-            },
-            {
-              "paragraphId": "p1",
-              "start": 148,
-              "end": 149
-            },
-            {
-              "paragraphId": "p1",
-              "start": 152,
-              "end": 153
+              "start": 36,
+              "end": 38
             },
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 1
-            },
-            {
-              "paragraphId": "p2",
-              "start": 18,
-              "end": 19
-            },
-            {
-              "paragraphId": "p2",
-              "start": 39,
-              "end": 40
-            },
-            {
-              "paragraphId": "p2",
-              "start": 113,
-              "end": 114
+              "start": 129,
+              "end": 131
             }
           ],
           "scoring": {
@@ -460,9 +420,9 @@
         },
         {
           "id": "q2",
-          "prompt": "둥글고 환한 달?",
+          "prompt": "쟁반처럼 둥근 모양의 달을 무엇이라고 부르는지 본문에서 찾아보세요",
           "answerText": "보름달",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -484,19 +444,33 @@
         },
         {
           "id": "q3",
-          "prompt": "주의 깊게 살펴보는 일?",
-          "answerText": "관찰",
-          "answerMatchMode": "EXACT",
+          "prompt": "달이 스스로 빛을 내지 못하면서도 빛나 보이는 까닭은 무엇을 반사하기 때문인지 본문에서 찾아보세요",
+          "answerText": "햇빛",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 36,
-              "end": 38
-            },
+              "start": 65,
+              "end": 67
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "달의 모양이 변하는 일은 약 얼마를 주기로 반복된다고 했는지 본문에서 찾아보세요",
+          "answerText": "한 달",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 129,
-              "end": 131
+              "start": 16,
+              "end": 19
             }
           ],
           "scoring": {

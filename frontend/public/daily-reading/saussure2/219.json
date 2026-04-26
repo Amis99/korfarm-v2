@@ -559,61 +559,76 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "동시는 마음속에 있는 생각이나 느낌을 예쁜 이것처럼 짧게 쓴 글이에요. 이것은 무엇일까요?",
-          "answerText": "노랫말",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 24,
-              "end": 27
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 5,
-            "wrongDeltaSec": -2,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
+        "prompt": "동시가 어떤 글인지 설명한 부분을 지문에서 찾으시오.",
+        "answerText": "마음속에 있는 생각이나 느낌을 예쁜 노랫말처럼 짧게 쓴 글",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p1",
+            "start": 4,
+            "end": 36
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
         },
-        {
-          "id": "q2",
-          "prompt": "눈으로 보고 귀로 듣고 손으로 만져 본 느낌을 재미있는 이것 내는 말로 꾸며 주면 더욱 좋아요. 이것은 무엇일까요?",
-          "answerText": "흉내",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 81,
-              "end": 83
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 5,
-            "wrongDeltaSec": -2,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
+        "revealOnWrong": true
+      },
+      {
+        "id": "q2",
+        "prompt": "동시를 쓸 때 가장 중요한 것을 지문에서 찾으시오.",
+        "answerText": "내가 직접 겪고 느낀 것을 솔직하게 표현하는 거예요",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p1",
+            "start": 113,
+            "end": 141
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
         },
-        {
-          "id": "q3",
-          "prompt": "줄을 자주 바꾸어 쓰면 읽을 때 숨을 고르기 편하고 이것이 생겨서 노래처럼 들려요. 이것은 무엇일까요?",
-          "answerText": "리듬감",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 67,
-              "end": 70
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 5,
-            "wrongDeltaSec": -2,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        }
+        "revealOnWrong": true
+      },
+      {
+        "id": "q3",
+        "prompt": "동시를 쓸 때 먼저 해야 할 일을 지문에서 찾으시오.",
+        "answerText": "먼저 쓰고 싶은 진짜 주제를 정하고",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p2",
+            "start": 9,
+            "end": 28
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
+        },
+        "revealOnWrong": true
+      },
+      {
+        "id": "q4",
+        "prompt": "동시를 보기 좋게 정리하려면 마지막으로 어떻게 해야 하는지 지문에서 찾으시오.",
+        "answerText": "연과 행을 잘 나누어",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p3",
+            "start": 6,
+            "end": 17
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
+        },
+        "revealOnWrong": true
+      }
       ]
     }
   }

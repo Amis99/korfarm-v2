@@ -870,34 +870,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "만복사에서 홀로 지내던 청년의 이름은 누구인가요?",
-          "answerText": "양생",
-          "answerMatchMode": "ALL",
+          "prompt": "양생이 아름다운 여인을 만나게 된 계기를 찾으시오.",
+          "answerText": "부처님과 저포 놀이를 하여 이긴 대가",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p1",
-              "start": 51,
-              "end": 53
-            },
-            {
-              "paragraphId": "p2",
-              "start": 40,
-              "end": 42
-            },
-            {
-              "paragraphId": "p3",
-              "start": 51,
-              "end": 53
-            },
-            {
-              "paragraphId": "p4",
-              "start": 9,
-              "end": 11
+              "start": 55,
+              "end": 75
             }
           ],
           "scoring": {
@@ -908,31 +888,13 @@
         },
         {
           "id": "q2",
-          "prompt": "양생이 홀로 지내던 절의 이름은 무엇인가요?",
-          "answerText": "만복사",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 33,
-              "end": 36
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "여인이 자신의 정체를 밝힐 때 사용한 말은 무엇인가요?",
-          "answerText": "귀신",
+          "prompt": "여인이 고백한 자신의 정체를 찾으시오.",
+          "answerText": "왜구의 침략 때 목숨을 잃은 귀신",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 24,
+              "start": 8,
               "end": 26
             }
           ],
@@ -943,15 +905,41 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "여인이 부모님께 소식을 전해 달라며 준 물건은 무엇인가요?",
-          "answerText": "은그릇",
+          "id": "q3",
+          "prompt": "양생과 여인의 인연이 오래갈 수 없었던 이유를 찾으시오.",
+          "answerText": "죽은 자와 산 자의 인연은 오래갈 수 없었다",
           "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 88,
+              "end": 112
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "이별 때 여인이 부탁하며 준 물건과 양생이 해 준 일을 모두 찾으시오.",
+          "answerTexts": [
+            "은그릇",
+            "그녀의 제사를 지내 주었다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 17,
               "end": 20
+            },
+            {
+              "paragraphId": "p3",
+              "start": 67,
+              "end": 81
             }
           ],
           "scoring": {
@@ -962,14 +950,14 @@
         },
         {
           "id": "q5",
-          "prompt": "양생이 나중에 들어가 살았던 산의 이름은 무엇인가요?",
-          "answerText": "지리산",
+          "prompt": "여인을 잊지 못한 양생이 한 일을 찾으시오.",
+          "answerText": "평생 결혼하지 않았다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 57,
-              "end": 60
+              "start": 39,
+              "end": 50
             }
           ],
           "scoring": {

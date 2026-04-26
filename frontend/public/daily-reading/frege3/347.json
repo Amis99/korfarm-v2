@@ -1122,14 +1122,28 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "허생이 다음 실험을 위해 건너간 곳은 어디인가요?",
-          "answerText": "제주도",
-          "answerMatchMode": "ANY",
+          "prompt": "과일 매점매석 뒤 나타난 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "값이 폭등했습니다",
+            "막대한 이익",
+            "조선의 시장 유통 구조"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 9,
-              "end": 12
+              "paragraphId": "p1",
+              "start": 18,
+              "end": 27
+            },
+            {
+              "paragraphId": "p1",
+              "start": 67,
+              "end": 73
+            },
+            {
+              "paragraphId": "p1",
+              "start": 86,
+              "end": 98
             }
           ],
           "scoring": {
@@ -1140,14 +1154,34 @@
         },
         {
           "id": "q2",
-          "prompt": "망건 재료로 선점한 것은 무엇인가요?",
-          "answerText": "말총",
-          "answerMatchMode": "ANY",
+          "prompt": "허생이 제주도에서 선점한 재료와 그 용도를 모두 찾으시오.",
+          "answerTexts": [
+            "제주도",
+            "말총",
+            "망건",
+            "나라의 의관"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 9,
+              "end": 12
+            },
             {
               "paragraphId": "p2",
               "start": 18,
               "end": 20
+            },
+            {
+              "paragraphId": "p2",
+              "start": 28,
+              "end": 30
+            },
+            {
+              "paragraphId": "p2",
+              "start": 58,
+              "end": 64
             }
           ],
           "scoring": {
@@ -1158,51 +1192,27 @@
         },
         {
           "id": "q3",
-          "prompt": "허생이 길에서 만나 설득한 사람들은 누구인가요?",
-          "answerText": "도적들",
-          "answerMatchMode": "ANY",
+          "prompt": "허생이 도적들에게 권한 일과 마련해 준 것을 모두 찾으시오.",
+          "answerTexts": [
+            "굶주린 도적들",
+            "도둑질 대신 농사를 지으라고",
+            "소와 씨앗"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 14,
+              "start": 10,
               "end": 17
             },
             {
               "paragraphId": "p3",
-              "start": 30,
-              "end": 33
+              "start": 36,
+              "end": 51
             },
             {
               "paragraphId": "p3",
-              "start": 97,
-              "end": 100
-            },
-            {
-              "paragraphId": "p4",
-              "start": 4,
-              "end": 7
-            },
-            {
-              "paragraphId": "p5",
-              "start": 29,
-              "end": 32
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "허생이 밑천으로 사 준 것 가운데 농사의 시작에 필요한 것은 무엇인가요?",
-          "answerText": "씨앗",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 76,
+              "start": 73,
               "end": 78
             }
           ],
@@ -1213,14 +1223,60 @@
           "revealOnWrong": true
         },
         {
+          "id": "q4",
+          "prompt": "허생이 도적들과 함께 옮긴 곳과 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "아무도 살지 않는 섬",
+            "사람과 가축",
+            "자유롭고 풍요로운 삶"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 13,
+              "end": 24
+            },
+            {
+              "paragraphId": "p4",
+              "start": 41,
+              "end": 47
+            },
+            {
+              "paragraphId": "p4",
+              "start": 73,
+              "end": 84
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q5",
-          "prompt": "섬에 만들어진 평화롭고 화목한 삶의 형태는 무엇인가요?",
-          "answerText": "공동체",
-          "answerMatchMode": "ANY",
+          "prompt": "섬에서 도적들이 바뀐 모습과 허생이 증명한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "선량한 농부",
+            "백성들을 먹여 살리는 법",
+            "평화롭고 화목한 공동체"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 98,
+              "start": 37,
+              "end": 43
+            },
+            {
+              "paragraphId": "p5",
+              "start": 63,
+              "end": 76
+            },
+            {
+              "paragraphId": "p5",
+              "start": 89,
               "end": 101
             }
           ],

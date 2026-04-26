@@ -571,111 +571,183 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 도서관 휴대 전화 보관함 제안을 어떤 목적에서 꺼내고 있는가?",
+          "prompt": "발표자가 자신을 소개한 소속과 역할을 찾으시오.",
+          "answerText": "학생 자치회 문화환경부 대표",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 157
+              "end": 15
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학생 자치회 문화환경부 대표입니다. 오늘 저는 도서관 열람실 입구에 휴대 전화 보관함을 설치하자는 제안을 드리려고 합니다. 이 제안은 휴대 전화를 완전히 금지하자는 뜻이 아니라, 열람실 안에서 반복되는 진동음과 화면 확인 행동을 줄여 학습 집중도를 높이자는 목적에서 나온 것입니다."
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 설문 결과를 통해 열람실 이용 학생들이 어떤 불편을 겪는다고 말하는가?",
+          "prompt": "휴대 전화 보관함 설치 제안의 목적을 찾으시오.",
+          "answerText": "열람실 안에서 반복되는 진동음과 화면 확인 행동을 줄여 학습 집중도를 높이자",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 209
+              "paragraphId": "p1",
+              "start": 100,
+              "end": 142
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지난달 열람실 이용 학생 214명을 대상으로 설문을 실시한 결과, '주변 사람의 휴대 전화 확인 때문에 흐름이 끊긴 적이 있다'는 응답이 71%로 나타났습니다. 특히 시험 기간 저녁 시간대에는 자리 이동이 어렵다 보니, 작은 진동 소리나 화면 불빛도 더 크게 느껴진다는 의견이 많았습니다. 학생들은 규칙이 없는 상태에서 서로 눈치를 보는 분위기 자체가 불편하다고 말했습니다."
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 자율 보관함 운영안을 어떤 선택형 방식으로 설명하는가?",
+          "prompt": "설문에서 71%로 나타난 응답 내용을 찾으시오.",
+          "answerText": "'주변 사람의 휴대 전화 확인 때문에 흐름이 끊긴 적이 있다'는 응답",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 195
+              "paragraphId": "p2",
+              "start": 37,
+              "end": 75
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그래서 저희는 열람실 입구에 번호표 방식의 소형 보관함을 두고, 자율적으로 휴대 전화를 맡긴 뒤 입실하는 방안을 제안합니다. 급한 연락이 예상되는 학생은 진동 설정을 확인한 뒤 그냥 소지할 수 있게 하되, 일반적인 경우에는 보관함을 이용하도록 안내하려 합니다. 즉 강제 압수 방식이 아니라, 열람실 이용 예절을 분명히 하는 선택형 운영이 핵심입니다."
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 이 방안의 장점을 어떤 세 가지로 정리하는가?",
+          "prompt": "시험 기간 저녁 시간대에 작은 방해가 더 크게 느껴지는 상황을 모두 찾으시오.",
+          "answerTexts": [
+            "자리 이동이 어렵다",
+            "작은 진동 소리나 화면 불빛도 더 크게 느껴진다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 166
+              "paragraphId": "p2",
+              "start": 108,
+              "end": 118
+            },
+            {
+              "paragraphId": "p2",
+              "start": 123,
+              "end": 149
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 방안의 장점은 세 가지입니다. 첫째, 개인 간 직접 제지보다 규칙에 따른 조정이 가능해 갈등이 줄어듭니다. 둘째, 학생 스스로 집중을 위해 휴대 전화를 내려놓는 경험을 할 수 있습니다. 셋째, 도서관 관리자도 단순히 '조용히 해 주세요'라고 반복하기보다 명확한 이용 기준을 안내할 수 있습니다."
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 분실 우려와 비용 문제에 어떻게 대응하려 하는가?",
+          "prompt": "제안한 운영 방식의 핵심을 설명한 구절을 찾으시오.",
+          "answerText": "강제 압수 방식이 아니라, 열람실 이용 예절을 분명히 하는 선택형 운영",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 170
+              "paragraphId": "p3",
+              "start": 148,
+              "end": 187
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "물론 분실 우려와 설치 비용을 걱정하실 수 있습니다. 이에 대해 저희는 잠금 장치가 있는 소형 보관함 20칸을 우선 시범 설치하고, 학생회가 사용 수칙 안내문과 분실 주의 스티커 제작을 맡겠습니다. 또 한 달 동안 이용률과 만족도를 조사해 실효성이 낮으면 확대하지 않는 방식으로 부담을 줄일 수 있습니다."
+          "revealOnWrong": true
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 휴대 전화 보관함을 도서관의 어떤 약속을 보이게 하는 장치로 말하는가?",
+          "prompt": "휴대 전화 보관함 방안의 장점을 모두 찾으시오.",
+          "answerTexts": [
+            "개인 간 직접 제지보다 규칙에 따른 조정이 가능해 갈등이 줄어듭니다",
+            "학생 스스로 집중을 위해 휴대 전화를 내려놓는 경험을 할 수 있습니다",
+            "도서관 관리자도 단순히 '조용히 해 주세요'라고 반복하기보다 명확한 이용 기준을 안내할 수 있습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 182
+              "paragraphId": "p4",
+              "start": 23,
+              "end": 60
+            },
+            {
+              "paragraphId": "p4",
+              "start": 66,
+              "end": 104
+            },
+            {
+              "paragraphId": "p4",
+              "start": 110,
+              "end": 165
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q7",
+          "prompt": "분실 우려와 설치 비용에 대한 대응 방안을 모두 찾으시오.",
+          "answerTexts": [
+            "잠금 장치가 있는 소형 보관함 20칸을 우선 시범 설치하고",
+            "학생회가 사용 수칙 안내문과 분실 주의 스티커 제작을 맡겠습니다",
+            "한 달 동안 이용률과 만족도를 조사해 실효성이 낮으면 확대하지 않는 방식"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 40,
+              "end": 72
+            },
+            {
+              "paragraphId": "p5",
+              "start": 74,
+              "end": 109
+            },
+            {
+              "paragraphId": "p5",
+              "start": 113,
+              "end": 153
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q8",
+          "prompt": "도서관을 조용한 공간 이상으로 정의한 구절을 찾으시오.",
+          "answerText": "서로의 공부 시간을 존중하는 약속이 작동하는 공간",
           "answerMatchMode": "ANY",
-          "answerText": "도서관은 조용한 공간이기만 한 곳이 아니라, 서로의 공부 시간을 존중하는 약속이 작동하는 공간이라고 생각합니다. 휴대 전화 보관함은 큰 공사나 강한 통제가 아니라, 그 약속을 눈에 보이게 만드는 작은 장치입니다. 시범 운영부터 시작할 수 있도록 검토해 주신다면 학생 자치회도 운영 지원과 후속 조사에 책임 있게 참여하겠습니다."
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 25,
+              "end": 52
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
         }
       ]
     }

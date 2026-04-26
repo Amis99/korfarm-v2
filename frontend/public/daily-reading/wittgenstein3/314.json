@@ -571,48 +571,58 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "prompt": "잘못된 보도에 신속하게 대응할 수 있는 대표적인 별도 수단을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 220
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "언론 보도로 인해 개인의 명예나 권리가 침해되었을 때 피해자가 곧바로 형사 고소나 장기 소송에 의존하면, 실제 피해 회복은 늦어질 수 있다. 그래서 언론중재법은 잘못된 보도에 신속하게 대응할 수 있는 별도의 수단을 마련한다. 그 대표적인 것이 정정보도청구권과 반론보도청구권이다. 두 권리는 모두 피해자에게 언론에 맞설 기회를 준다는 점에서는 비슷하지만, 작동 방식과 입증 구조는 분명히 다르다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 첫 핵심 원리나 기준을 어떻게 설명하는가?",
-          "answerRanges": [
+              "start": 136,
+              "end": 143
+            },
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 227
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "정정보도청구권은 보도 내용이 사실과 다를 때 그 잘못을 바로잡게 하는 권리이다. 따라서 핵심은 원보도의 허위성을 시정하는 데 있다. 피해자는 해당 보도가 진실하지 않다는 점을 보여 주어야 하고, 언론사에 정정 보도를 요구함으로써 독자나 시청자가 잘못된 사실을 바로 인식하도록 만든다. 이 권리는 언론의 자유를 전면적으로 제한하기보다, 허위 사실 유포로 인해 왜곡된 공적 정보 환경을 교정하는 기능을 갖는다."
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단은 그 원리의 작동 방식이나 예시를 무엇으로 보여 주는가?",
-          "answerRanges": [
+              "end": 7
+            },
+            {
+              "paragraphId": "p6",
+              "start": 3,
+              "end": 10
+            },
+            {
+              "paragraphId": "p1",
+              "start": 145,
+              "end": 152
+            },
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 234
+              "end": 7
+            },
+            {
+              "paragraphId": "p6",
+              "start": 12,
+              "end": 19
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "정정보도청구권",
+            "반론보도청구권"
+          ]
+        },
+        {
+          "id": "q2",
+          "prompt": "정정보도청구권이 바로잡게 하는 대상을 지문에서 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 9,
+              "end": 29
             }
           ],
           "scoring": {
@@ -621,16 +631,34 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "반론보도청구권은 이와 달리 원보도의 진실 여부가 아직 확정되지 않았더라도 행사될 수 있다. 여기서 중요한 것은 피해자가 자신과 관련된 보도에 대해 다른 입장이나 해명을 제시할 기회를 확보하는 데 있다. 다시 말해 반론보도는 '원보도가 틀렸다'는 판단을 전제로 하지 않고, 보도로 인해 불리한 위치에 놓인 당사자에게 대등한 대응 통로를 열어 주는 장치이다. 이 점에서 반론보도는 진실 판단보다 절차적 균형에 무게를 둔다."
+          "answerText": "보도 내용이 사실과 다를 때 그 잘못"
+        },
+        {
+          "id": "q3",
+          "prompt": "정정보도청구권의 핵심이 무엇에 있다고 했는지 지문에서 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 53,
+              "end": 69
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "원보도의 허위성을 시정하는 데"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
+          "prompt": "반론보도가 전제로 하지 않는 판단을 지문에서 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 251
+              "paragraphId": "p3",
+              "start": 126,
+              "end": 134
             }
           ],
           "scoring": {
@@ -639,16 +667,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "두 권리의 공통된 전제는 청구 대상이 사실적 주장이어야 한다는 점이다. 존재 여부를 증거로 확인할 수 있는 주장에 대해서만 정정이나 반론을 요구할 수 있고, 단순한 의견이나 논평, 광고는 원칙적으로 대상이 되지 않는다. 또한 보도와 개별적 관련성이 있고 실제 피해를 입은 사람이 청구 주체가 된다. 즉 누구나 추상적으로 언론 보도에 문제를 제기하는 것이 아니라, 해당 보도로 직접 영향을 받은 당사자가 법이 정한 범위 안에서 행사하는 권리인 셈이다."
+          "answerText": "원보도가 틀렸다"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 이 주제의 효과나 쟁점을 어떤 방향으로 확장하는가?",
+          "prompt": "반론보도가 대등한 대응 통로를 열어 주는 대상자를 지문에서 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 223
+              "paragraphId": "p3",
+              "start": 152,
+              "end": 173
             }
           ],
           "scoring": {
@@ -657,16 +685,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "절차도 신속성을 중심으로 설계되어 있다. 피해자는 보도를 안 날부터 일정 기간 안에 언론사 대표자에게 서면으로 청구해야 하고, 언론사가 이를 받아들이면 정해진 기한 안에 원보도와 같은 채널이나 지면에서 보도해야 한다. 이는 반박의 기회가 형식적으로만 주어지는 것을 막고, 원보도와 비슷한 전달력을 확보하게 하려는 취지이다. 같은 매체, 같은 위치, 유사한 방식의 전달이 요구되는 이유도 여기에 있다."
+          "answerText": "보도로 인해 불리한 위치에 놓인 당사자"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 앞선 논의를 어떤 의미로 정리하는가?",
+          "prompt": "두 권리의 청구 대상이 되지 않는 것을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 253
+              "paragraphId": "p4",
+              "start": 88,
+              "end": 94
+            },
+            {
+              "paragraphId": "p4",
+              "start": 97,
+              "end": 99
+            },
+            {
+              "paragraphId": "p4",
+              "start": 101,
+              "end": 103
             }
           ],
           "scoring": {
@@ -674,8 +712,70 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "결국 정정보도청구권과 반론보도청구권은 서로 대체 관계라기보다 기능이 다른 병행 수단으로 이해해야 한다. 정정보도는 허위 사실의 시정을 통해 진실 발견을 돕고, 반론보도는 당사자의 입장을 공론장에 다시 올려 절차적 공정을 보완한다. 하나가 내용의 정확성을 바로잡는 데 초점이 있다면, 다른 하나는 당사자에게 말할 기회를 돌려주는 데 초점이 있다. 언론중재법은 이 두 장치를 함께 두어 개인의 피해 회복과 건전한 여론 형성이라는 두 목적을 동시에 추구한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "단순한 의견",
+            "논평",
+            "광고"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "반박의 전달력을 확보하기 위해 요구되는 전달 조건을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 181,
+              "end": 186
+            },
+            {
+              "paragraphId": "p5",
+              "start": 188,
+              "end": 193
+            },
+            {
+              "paragraphId": "p5",
+              "start": 195,
+              "end": 201
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "같은 매체",
+            "같은 위치",
+            "유사한 방식"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "6문단에서 두 권리가 각각 초점을 두는 내용을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 133,
+              "end": 148
+            },
+            {
+              "paragraphId": "p6",
+              "start": 165,
+              "end": 184
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "내용의 정확성을 바로잡는 데",
+            "당사자에게 말할 기회를 돌려주는 데"
+          ]
         }
       ]
     }

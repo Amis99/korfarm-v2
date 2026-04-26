@@ -562,14 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "곡식이나 채소 따위를 심고 가꾸어 거두는 일은?",
-          "answerText": "농사",
+          "prompt": "농촌에 펼쳐진 것을 지문에서 찾으시오.",
+          "answerText": "맑은 공기와 푸른 자연",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 99,
-              "end": 101
+              "start": 46,
+              "end": 58
             }
           ],
           "scoring": {
@@ -580,14 +580,50 @@
         },
         {
           "id": "q2",
-          "prompt": "농촌에서 정성껏 기른 쌀, 채소, 과일 따위를 통틀어 이르는 말은?",
-          "answerText": "농산물",
+          "prompt": "농촌 사람들이 짓는 농사의 내용을 지문에서 찾으시오.",
+          "answerText": "곡식과 채소를 기르는 농사",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 87,
+              "end": 101
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "도시에 이어져 있는 건물들을 지문에서 찾으시오.",
+          "answerText": "하늘 높이 솟은 커다란 빌딩과 빽빽한 아파트",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 34,
+              "end": 58
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "농촌과 도시가 함께 살아가는 방식을 지문에서 찾으시오.",
+          "answerText": "서로 도움을 주고받으며",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 74,
-              "end": 77
+              "start": 148,
+              "end": 160
             }
           ],
           "scoring": {

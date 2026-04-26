@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "학교에서 아침 자율 무엇는 의견에 반대하는 글을 쓰려고 한다?",
+          "prompt": "글쓴이는 어떤 의견에 반대하는 글을 쓰려고 하나요?",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 11,
-              "end": 23
+              "start": 5,
+              "end": 27
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학습 시간을 의무화하자"
+          "answerText": "아침 자율 학습 시간을 의무화하자는 의견"
         },
         {
           "id": "q2",
-          "prompt": "무엇 집중이 자동으로 잘되는 것은 아니다?",
+          "prompt": "글쓴이가 한 가지 방식만 강제로 요구하는 것이 좋지 않다고 생각한 이유는?",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 55,
-              "end": 67
+              "paragraphId": "p1",
+              "start": 51,
+              "end": 72
             }
           ],
           "scoring": {
@@ -603,41 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "하지만 조용하다고 해서"
+          "answerText": "모든 학생의 생활이 같은 것은 아니므로"
         },
         {
           "id": "q3",
-          "prompt": "특히 통학 시간이 긴 학생은 아침 일찍 오느라 피로가 누적될 수 무엇?",
+          "prompt": "찬성하는 쪽이 아침 자율 학습의 효과로 말한 내용을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 174,
-              "end": 176
+              "start": 21,
+              "end": 36
             },
             {
-              "paragraphId": "p3",
-              "start": 36,
-              "end": 38
-            },
-            {
-              "paragraphId": "p3",
-              "start": 191,
-              "end": 193
-            },
-            {
-              "paragraphId": "p4",
-              "start": 212,
-              "end": 214
-            },
-            {
-              "paragraphId": "p5",
-              "start": 200,
-              "end": 202
-            },
-            {
-              "paragraphId": "p6",
-              "start": 203,
-              "end": 205
+              "paragraphId": "p2",
+              "start": 37,
+              "end": 48
             }
           ],
           "scoring": {
@@ -645,17 +625,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "있다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "학교 분위기가 더 조용해지고",
+            "공부 시간이 늘어난다"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "그런데 앞 문단과 이 무엇도 조금 애매하고, 같은 내용을 겹쳐 말한 부분도 있다?",
+          "prompt": "조용하다고 해서 자동으로 잘되는 것은 무엇인가요?",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 170,
-              "end": 184
+              "paragraphId": "p2",
+              "start": 68,
+              "end": 70
             }
           ],
           "scoring": {
@@ -664,16 +647,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "문단의 순서가 자연스러운지"
+          "answerText": "집중"
         },
         {
           "id": "q5",
-          "prompt": "그런데 지금 결론은 대안을 말하기는 하지만, 앞에서 반박한 내용과 무엇 드러나지 않는다?",
+          "prompt": "통학 시간이 긴 학생에게 누적될 수 있는 것은?",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 154,
-              "end": 168
+              "paragraphId": "p3",
+              "start": 26,
+              "end": 28
             }
           ],
           "scoring": {
@@ -682,16 +665,48 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "어떻게 연결되는지가 충분히"
+          "answerText": "피로"
         },
         {
           "id": "q6",
-          "prompt": "문단의 초점은 무엇인가요?",
+          "prompt": "생활 조건이 다른 학생의 예시를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 42,
-              "end": 56
+              "paragraphId": "p4",
+              "start": 36,
+              "end": 50
+            },
+            {
+              "paragraphId": "p4",
+              "start": 52,
+              "end": 71
+            },
+            {
+              "paragraphId": "p4",
+              "start": 73,
+              "end": 96
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "집에서 동생을 돌보는 학생",
+            "아침에 병원 치료를 받고 오는 학생",
+            "대중교통 사정상 일찍 도착하기 어려운 학생"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "글쓴이가 의무화보다 낫다고 본 운영 방식은?",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 31,
+              "end": 39
             }
           ],
           "scoring": {
@@ -700,7 +715,39 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "주장에 반대하려는 초고이지"
+          "answerText": "선택형 프로그램"
+        },
+        {
+          "id": "q8",
+          "prompt": "마지막 문단에서 더 다듬어져야 한다고 한 요소를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 59,
+              "end": 64
+            },
+            {
+              "paragraphId": "p6",
+              "start": 66,
+              "end": 71
+            },
+            {
+              "paragraphId": "p6",
+              "start": 73,
+              "end": 83
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "논지 제시",
+            "근거 배열",
+            "반박 대상의 명확화"
+          ]
         }
       ]
     }

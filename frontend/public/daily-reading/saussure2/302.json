@@ -562,14 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "학교 안에서 책상과 의자, 그리고 칠판이 있으며 친구들과 선생님이 모여 공부하는 이곳은 어디인가요?",
-          "answerText": "교실",
-          "answerMatchMode": "EXACT",
+          "prompt": "교실에서 친구들과 나란히 앉아 공부할 때 쓰는 물건을 지문에서 찾으시오.",
+          "answerText": "책상과 의자",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 38,
-              "end": 40
+              "start": 60,
+              "end": 66
             }
           ],
           "scoring": {
@@ -581,19 +581,14 @@
         },
         {
           "id": "q2",
-          "prompt": "재미있는 책이 가득해서 다른 친구들을 위해 조용히 책을 읽어야 하는 학교의 장소는 어디인가요?",
-          "answerText": "도서관",
-          "answerMatchMode": "EXACT",
+          "prompt": "학교 안에 있는 도서관이 어떤 곳인지 지문에서 찾으시오.",
+          "answerText": "재미있는 책이 가득한 도서관",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 19,
+              "start": 7,
               "end": 22
-            },
-            {
-              "paragraphId": "p2",
-              "start": 29,
-              "end": 32
             }
           ],
           "scoring": {
@@ -605,19 +600,23 @@
         },
         {
           "id": "q3",
-          "prompt": "밖으로 나가면 넓게 펼쳐져 있어서 친구들과 신나게 달리기나 공놀이를 할 수 있는 곳은 어디인가요?",
-          "answerText": "운동장",
-          "answerMatchMode": "EXACT",
+          "prompt": "운동장에서 할 수 있는 활동을 지문에서 모두 찾으시오.",
+          "answerText": "친구들과 신나게 달리기 시합, 재미있는 공놀이",
+          "answerTexts": [
+            "친구들과 신나게 달리기 시합",
+            "재미있는 공놀이"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 62,
-              "end": 65
+              "start": 83,
+              "end": 98
             },
             {
               "paragraphId": "p2",
-              "start": 76,
-              "end": 79
+              "start": 104,
+              "end": 112
             }
           ],
           "scoring": {
@@ -629,14 +628,14 @@
         },
         {
           "id": "q4",
-          "prompt": "점심시간이 되면 맛있는 밥을 먹기 위해 친구들과 함께 모이는 학교의 장소는 어디인가요?",
-          "answerText": "급식실",
-          "answerMatchMode": "EXACT",
+          "prompt": "보건실 선생님이 어떻게 치료해 주시는지 지문에서 찾으시오.",
+          "answerText": "친절하게 치료해 주신답니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 79,
-              "end": 82
+              "start": 43,
+              "end": 57
             }
           ],
           "scoring": {

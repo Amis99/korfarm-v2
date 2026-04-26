@@ -571,111 +571,72 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"학교 운동장을 지역 주민에게 주말마다 개방하자는 주장을 담은 글을 써 보려고 한다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 133
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글쓴이가 운동장 개방 글에서 강조하고 싶다고 밝힌 점을 찾으시오",
+          "answerText": "주민과 학생 모두에게 도움이 된다는 점을 강조하고 싶다",
           "answerMatchMode": "ANY",
-          "answerText": "학교 운동장을 지역 주민에게 주말마다 개방하자는 주장을 담은 글을 써 보려고 한다. 나는 이 글에서 주민과 학생 모두에게 도움이 된다는 점을 강조하고 싶다. 다만 어떤 근거를 먼저 내세워야 설득력이 높아질지는 아직 정리가 덜 된 상태이다."
+          "answerRanges": [
+            { "paragraphId": "p1", "start": 56, "end": 86 }
+          ],
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "\"이 점은 개방의 필요성을 말할 때 가장 먼저 제시할 수 있는 장점처럼 보인다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "운동장을 지역과 함께 나눌 때 얻을 수 있는 두 가지 장점을 모두 찾으시오",
+          "answerTexts": ["시설 활용도가 높아지고","주민들은 멀리 가지 않아도 가벼운 운동을 할 수 있다"],
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 143
-            }
+            { "paragraphId": "p2", "start": 55, "end": 67 },
+            { "paragraphId": "p2", "start": 69, "end": 98 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "먼저 학교 운동장은 주말에 비어 있는 시간이 많다. 사용하지 않는 공간을 지역 사회와 함께 나누면 시설 활용도가 높아지고, 주민들은 멀리 가지 않아도 가벼운 운동을 할 수 있다. 이 점은 개방의 필요성을 말할 때 가장 먼저 제시할 수 있는 장점처럼 보인다."
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "\"그래서 이용 시간 제한이나 출입 기록 방식 같은 조건도 함께 제시해야 한다는 생각이 든다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "운동장 개방에 대한 우려와 그에 대한 보완 방안을 모두 찾으시오",
+          "answerTexts": ["시설 훼손이나 소음 문제를 걱정할 수 있다","이용 시간 제한이나 출입 기록 방식 같은 조건도 함께 제시해야 한다는 생각이 든다"],
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 141
-            }
+            { "paragraphId": "p3", "start": 16, "end": 39 },
+            { "paragraphId": "p3", "start": 95, "end": 140 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "하지만 일부 학생과 학부모는 시설 훼손이나 소음 문제를 걱정할 수 있다. 실제로 관리 인력이 부족한 상태에서 무조건 개방부터 하면 오히려 갈등이 커질 수도 있다. 그래서 이용 시간 제한이나 출입 기록 방식 같은 조건도 함께 제시해야 한다는 생각이 든다."
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "\"이 글은 주민 건강 증진 효과를 앞세울 수도 있고, 비어 있는 공공 공간을 효율적으로 활용하자는 논리로 쓸 수도 있다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 180
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글쓴이가 초고에서 발견한 문제점을 찾으시오",
+          "answerText": "기대 효과와 우려 사항이 비슷한 비중으로 섞여 있어 어느 근거가 중심인지 바로 드러나지 않는다",
           "answerMatchMode": "ANY",
-          "answerText": "이 글은 주민 건강 증진 효과를 앞세울 수도 있고, 비어 있는 공공 공간을 효율적으로 활용하자는 논리로 쓸 수도 있다. 그런데 지금 초고는 기대 효과와 우려 사항이 비슷한 비중으로 섞여 있어 어느 근거가 중심인지 바로 드러나지 않는다. 읽는 사람에게 무엇을 가장 먼저 납득시키고 싶은지를 기준으로 순서를 다시 잡아야 한다."
+          "answerRanges": [
+            { "paragraphId": "p4", "start": 78, "end": 130 }
+          ],
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "글에서 설명한 것은 무엇인가요?",
+          "prompt": "중심을 '공공 시설 활용'에 둘 때와 '주민 건강 증진'에 둘 때의 글 전개 방식을 모두 찾으시오",
+          "answerTexts": ["공공 시설 활용이라는 관점을 중심에 둔다면, 비어 있는 운동장을 지역과 나누는 것이 왜 필요한지부터 말하고, 이후 주민 건강과 학교 이미지 개선 효과를 덧붙이는 편이 자연스럽다","주민 건강 증진을 중심에 둔다면, 운동 공간 부족 문제를 먼저 제시한 뒤 학교 운동장 개방을 해결책으로 연결하는 편이 더 적절할 수 있다"],
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 9,
-              "end": 21
-            }
+            { "paragraphId": "p5", "start": 3, "end": 101 },
+            { "paragraphId": "p5", "start": 107, "end": 183 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "활용이라는 관점을 중심"
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q6",
-          "prompt": "\"따라서 최종 글에서는 주장에 가장 힘을 실어 주는 근거를 먼저 세우고, 우려 사항은 반박이나 보완책의 자리로 옮기는 방식이 필요하다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 186
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글쓴이가 최종 글에서 권장하는 근거 배열 방식을 찾으시오",
+          "answerText": "주장에 가장 힘을 실어 주는 근거를 먼저 세우고, 우려 사항은 반박이나 보완책의 자리로 옮기는 방식이 필요하다",
           "answerMatchMode": "ANY",
-          "answerText": "따라서 최종 글에서는 주장에 가장 힘을 실어 주는 근거를 먼저 세우고, 우려 사항은 반박이나 보완책의 자리로 옮기는 방식이 필요하다. 그래야 읽는 사람이 글의 방향을 잃지 않고, 글쓴이가 무엇을 설득하려는지도 분명하게 이해할 수 있다. 이 초고는 근거 배열을 비교하며 더 효과적인 설득 순서를 고르기 위한 준비 단계라고 볼 수 있다."
+          "answerRanges": [
+            { "paragraphId": "p6", "start": 12, "end": 73 }
+          ],
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         }
       ]
     }

@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "중심 대상은 무엇인가요?",
+          "prompt": "언어로의 전환이 연구 대상을 어디로 옮겨 놓은 관점인지 설명한 부분을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 11
+              "start": 21,
+              "end": 66
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "역사 연구에서 이른바"
+          "answerText": "연구 대상을 과거 사건 자체에서 그 사건을 말하고 기록하는 언어로 옮겨 놓은 관점"
         },
         {
           "id": "q2",
-          "prompt": "하나의 말은 일정한 의미를 가리키지만, 그 연결은 고정된 자연 무엇?",
+          "prompt": "언어가 대상을 그대로 비추는 무엇이 아니라고 했는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 85,
-              "end": 98
+              "start": 36,
+              "end": 38
             }
           ],
           "scoring": {
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "법칙처럼 주어지지 않는다"
+          "answerText": "거울"
         },
         {
           "id": "q3",
-          "prompt": "문헌을 남긴 사람은 무엇을 먼저 적고 무엇, 그 선택은 당대의 관심과 규범을 반영한다?",
+          "prompt": "같은 대상을 두고도 시대와 공동체가 다르면 달라질 수 있다고 한 두 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 74,
-              "end": 86
+              "paragraphId": "p2",
+              "start": 124,
+              "end": 129
+            },
+            {
+              "paragraphId": "p2",
+              "start": 145,
+              "end": 152
             }
           ],
           "scoring": {
@@ -620,17 +625,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "무엇을 빼는지 선택하며"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "다른 이름",
+            "떠올리는 범위"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "중요한 점은 매체가 글인지 아닌지가 아니라, 그것이 어떤 기호 체계 속에서 의미를 무엇?",
+          "prompt": "역사 자료가 사실을 담은 그릇이면서 동시에 무엇인지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 144,
-              "end": 158
+              "paragraphId": "p3",
+              "start": 35,
+              "end": 49
             }
           ],
           "scoring": {
@@ -639,16 +647,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "생산하고 전달하는지에 있다"
+          "answerText": "해석이 개입한 언어적 산물"
         },
         {
           "id": "q5",
-          "prompt": "이때 핵심 개념으로 무엇?",
+          "prompt": "자료를 읽는 일이 기록된 문장 확인을 넘어 따져 보는 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 11,
-              "end": 23
+              "paragraphId": "p3",
+              "start": 147,
+              "end": 165
             }
           ],
           "scoring": {
@@ -657,16 +665,60 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "등장하는 것이 담론이다"
+          "answerText": "어떤 방식으로 의미가 조직되었는지"
         },
         {
           "id": "q6",
-          "prompt": "문단의 초점은 무엇인가요?",
+          "prompt": "언어로의 전환이 텍스트로 보는 해석 가능한 대상을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 149,
-              "end": 163
+              "paragraphId": "p4",
+              "start": 53,
+              "end": 55
+            },
+            {
+              "paragraphId": "p4",
+              "start": 57,
+              "end": 60
+            },
+            {
+              "paragraphId": "p4",
+              "start": 62,
+              "end": 64
+            },
+            {
+              "paragraphId": "p4",
+              "start": 66,
+              "end": 68
+            },
+            {
+              "paragraphId": "p4",
+              "start": 70,
+              "end": 75
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "그림",
+            "기념비",
+            "광고",
+            "의복",
+            "공간 배치"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "담론의 뜻을 설명한 문장을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 25,
+              "end": 82
             }
           ],
           "scoring": {
@@ -675,7 +727,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "역사 텍스트를 재개념화한다"
+          "answerText": "담론은 단순한 문장 묶음이 아니라, 무엇을 말할 수 있고 무엇을 중요하게 여길지 정하는 표현의 질서다."
+        },
+        {
+          "id": "q8",
+          "prompt": "이 관점이 담론과 함께 살핀다고 한 관계를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 133,
+              "end": 138
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "권력 관계"
         }
       ]
     }

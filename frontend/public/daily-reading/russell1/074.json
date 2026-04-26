@@ -1148,93 +1148,87 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '인용'을 모두 찾으시오.",
+          "prompt": "이 대화에 등장한 두 명의 학생 이름을 모두 찾으시오",
+          "answerText": "민서 / 준호",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 138,
-              "end": 140
-            }
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p1", "start": 73, "end": 75},
+            {"paragraphId": "p1", "start": 184, "end": 186},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 125, "end": 127},
+            {"paragraphId": "p3", "start": 107, "end": 109},
+            {"paragraphId": "p3", "start": 177, "end": 179},
+            {"paragraphId": "p4", "start": 172, "end": 174}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "인용"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '흐트러지'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 93,
-              "end": 97
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "민서와 준호 외에 셋째 문단에서 처음 등장하는 학생의 이름을 찾으시오",
+          "answerText": "지수",
           "answerMatchMode": "ANY",
-          "answerText": "흐트러지"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 0, "end": 2}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '주장'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 222,
-              "end": 224
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "이번 발표에서 학생들이 자료를 모으기 위해 한 활동의 이름(세 글자)을 찾으시오",
+          "answerText": "인터뷰",
           "answerMatchMode": "ANY",
-          "answerText": "주장"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 11, "end": 14},
+            {"paragraphId": "p1", "start": 85, "end": 88},
+            {"paragraphId": "p1", "start": 191, "end": 194},
+            {"paragraphId": "p2", "start": 136, "end": 139},
+            {"paragraphId": "p3", "start": 15, "end": 18},
+            {"paragraphId": "p3", "start": 114, "end": 117},
+            {"paragraphId": "p4", "start": 28, "end": 31},
+            {"paragraphId": "p4", "start": 133, "end": 136},
+            {"paragraphId": "p4", "start": 184, "end": 187}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '공통된'을 모두 찾으시오.",
+          "prompt": "선생님이 정리한, 인터뷰를 발표와 연결할 때 한 줄로 이어져야 한다고 한 세 가지 요소를 모두 찾으시오",
+          "answerText": "질문 / 답변 / 발표 목적",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 82,
-              "end": 85
-            }
+            {"paragraphId": "p4", "start": 53, "end": 55},
+            {"paragraphId": "p4", "start": 57, "end": 59},
+            {"paragraphId": "p4", "start": 61, "end": 66}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "공통된"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '기억'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 269,
-              "end": 271
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "학생들이 알아보고 싶어 했던 대상 시설(세 글자)의 이름을 찾으시오",
+          "answerText": "도서관",
           "answerMatchMode": "ANY",
-          "answerText": "기억"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 226, "end": 229},
+            {"paragraphId": "p2", "start": 34, "end": 37}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "발표에서 인터뷰 답변이 무엇이 되어야 한다고 했는지, 두 글자 단어를 찾으시오",
+          "answerText": "근거",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 126, "end": 128}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

@@ -747,14 +747,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "영국 런던에 사는 규칙적인 신사의 이름은 무엇인가요?",
-          "answerText": "필리어스 포그",
+          "prompt": "필리어스 포그를 설명한 표현을 찾으시오.",
+          "answerText": "규칙적인 신사",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 7
+              "start": 19,
+              "end": 26
             }
           ],
           "scoring": {
@@ -765,14 +765,22 @@
         },
         {
           "id": "q2",
-          "prompt": "클럽에서 사람들과 이야기한 사건은 무엇인가요?",
-          "answerText": "은행 강도 사건",
-          "answerMatchMode": "ANY",
+          "prompt": "포그의 규칙적인 삶을 보여 주는 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "매일 정해진 시간에 일어나",
+            "같은 길을 따라 클럽으로 향했다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 20,
-              "end": 28
+              "paragraphId": "p1",
+              "start": 30,
+              "end": 44
+            },
+            {
+              "paragraphId": "p1",
+              "start": 45,
+              "end": 62
             }
           ],
           "scoring": {
@@ -783,19 +791,14 @@
         },
         {
           "id": "q3",
-          "prompt": "포그가 장담한 세계 일주 기간은 얼마인가요?",
-          "answerText": "팔십 일",
-          "answerMatchMode": "ALL",
+          "prompt": "한 회원이 말한 세계 일주 방법과 기간을 찾으시오.",
+          "answerText": "기차와 배를 타면 팔십 일 만에 세계를 돌 수 있다고",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 84,
-              "end": 88
-            },
-            {
-              "paragraphId": "p3",
-              "start": 48,
-              "end": 52
+              "start": 74,
+              "end": 103
             }
           ],
           "scoring": {
@@ -806,13 +809,21 @@
         },
         {
           "id": "q4",
-          "prompt": "포그가 전 재산을 걸고 떠나겠다고 한 여행은 무엇인가요?",
-          "answerText": "세계 일주",
-          "answerMatchMode": "ANY",
+          "prompt": "포그가 자신의 결심을 보인 행동과 여행을 모두 찾으시오.",
+          "answerTexts": [
+            "자신의 전 재산을 걸고",
+            "팔십 일 만의 세계 일주"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 56,
+              "start": 35,
+              "end": 47
+            },
+            {
+              "paragraphId": "p3",
+              "start": 48,
               "end": 61
             }
           ],
@@ -824,19 +835,14 @@
         },
         {
           "id": "q5",
-          "prompt": "포그가 새로 고용해 함께 기차에 오른 하인의 이름은 누구인가요?",
-          "answerText": "파스파르투",
+          "prompt": "포그가 새로 고용한 하인을 설명한 부분을 찾으시오.",
+          "answerText": "새로 고용한 하인 파스파르투",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 20,
+              "start": 10,
               "end": 25
-            },
-            {
-              "paragraphId": "p4",
-              "start": 78,
-              "end": 83
             }
           ],
           "scoring": {

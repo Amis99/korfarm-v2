@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "최근 사람들의 공장이나 자동차 매연 등으로 인해 지구의 평균 온도가 점점 올라가 날씨가 더워지는 현상은?",
+          "prompt": "지구의 평균 온도가 점점 올라가서 날씨가 더워지는 현상을 지문에서 찾으시오.",
           "answerText": "지구 온난화 현상",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -576,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "이러한 현상이 일어나면 온도가 높아져 극지방에 거대한 덩어리로 존재하는 이것이 녹아 바닷물이 높아집니다.",
-          "answerText": "빙하",
-          "answerMatchMode": "EXACT",
+          "prompt": "지구 온난화가 발생하는 원인으로, 공장이나 자동차에서 내뿜는 것을 지문에서 찾으시오.",
+          "answerText": "나쁜 가스",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 22,
-              "end": 24
+              "paragraphId": "p1",
+              "start": 79,
+              "end": 84
             }
           ],
           "scoring": {
@@ -595,14 +595,49 @@
         },
         {
           "id": "q3",
-          "prompt": "지구 온난화로 인한 이상 기후로 비가 내리지 않아 땅이 메마르고 농작물이 자라지 못하는 현상은 무엇인가요?",
-          "answerText": "가뭄",
-          "answerMatchMode": "EXACT",
+          "prompt": "이상 기후로 인해 나타나는 두 가지 일을 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "갑자기 큰 비",
+            "가뭄"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 106,
+              "end": 113
+            },
             {
               "paragraphId": "p2",
               "start": 120,
               "end": 122
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "지구 온난화를 막기 위해 생활 속에서 해야 할 실천 두 가지를 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "걷거나 자전거를 타고",
+            "쓰지 않는 불은 꼭 꺼야 합니다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 54,
+              "end": 65
+            },
+            {
+              "paragraphId": "p3",
+              "start": 66,
+              "end": 83
             }
           ],
           "scoring": {

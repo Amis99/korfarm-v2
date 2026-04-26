@@ -1287,36 +1287,16 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "근로자가 일정한 시간 동안 얼마나 많은 결과를 내는지를 나타내는 지표는 무엇인가요?",
-          "answerText": "노동 생산성",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 9,
-              "end": 15
-            },
-            {
-              "paragraphId": "p1",
-              "start": 45,
-              "end": 51
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 6
-            },
-            {
-              "paragraphId": "p4",
-              "start": 4,
-              "end": 10
-            },
-            {
-              "paragraphId": "p5",
-              "start": 97,
-              "end": 103
-            }
-          ],
+      "prompt": "노동 생산성이 무엇인지 설명한 부분을 찾으시오.",
+      "answerText": "근로자가 일정한 시간 동안 얼마나 많은 물건을 만들었는지를 나타냅니다",
+      "answerMatchMode": "ANY",
+      "answerRanges": [
+        {
+          "paragraphId": "p1",
+          "start": 53,
+          "end": 91
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1325,16 +1305,16 @@
         },
         {
           "id": "q2",
-          "prompt": "노동 생산성을 높이는 대표적 방법으로 제시된 것은 무엇인가요?",
-          "answerText": "새로운 기술과 기계",
+      "prompt": "노동 생산성을 높이는 대표적인 방법을 찾으시오.",
+      "answerText": "새로운 기술과 기계",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 24,
-              "end": 34
-            }
-          ],
+          "end": 34
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1343,8 +1323,8 @@
         },
         {
           "id": "q3",
-          "prompt": "근로자의 지식과 기술을 발전시켜 생산성을 높이는 방법은 무엇인가요?",
-          "answerText": "교육과 훈련",
+      "prompt": "근로자의 지식과 기술을 발전시키는 방법을 찾으시오.",
+      "answerText": "교육과 훈련",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
@@ -1361,16 +1341,24 @@
         },
         {
           "id": "q4",
-          "prompt": "생산성 향상의 이익이 모두에게 돌아가게 하려면 무엇이 필요하다고 했나요?",
-          "answerText": "공정하게 나누는 제도",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 221,
-              "end": 232
-            }
-          ],
+      "prompt": "노동 생산성이 높아질 때 생기는 걱정이나 문제를 모두 찾으시오.",
+      "answerTexts": [
+        "사람의 일자리가 줄어들 것이라는 걱정",
+        "이익이 모두에게 공평하게 나누어지지 않는 문제"
+      ],
+      "answerMatchMode": "ALL",
+      "answerRanges": [
+        {
+          "paragraphId": "p4",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "paragraphId": "p4",
+          "start": 108,
+          "end": 133
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1379,16 +1367,16 @@
         },
         {
           "id": "q5",
-          "prompt": "미래의 노동 생산성을 좌우하는 힘으로 강조된 것은 무엇인가요?",
-          "answerText": "창의력",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 110,
-              "end": 113
-            }
-          ],
+      "prompt": "미래의 노동 생산성이 무엇에 달려 있는지 찾으시오.",
+      "answerText": "창의력과 생각의 힘",
+      "answerMatchMode": "ANY",
+      "answerRanges": [
+        {
+          "paragraphId": "p5",
+          "start": 110,
+          "end": 120
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45

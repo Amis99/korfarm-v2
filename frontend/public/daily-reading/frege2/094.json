@@ -1079,104 +1079,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "네트워크에서 큰 데이터를 잘게 나눈 기본 단위는 무엇인가요?",
-          "answerText": "패킷",
+          "prompt": "인터넷 패킷의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "커다란 데이터를 작게 나눈 기본 단위",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p1",
-              "start": 113,
-              "end": 115
-            },
-            {
-              "paragraphId": "p1",
-              "start": 205,
-              "end": 207
-            },
-            {
-              "paragraphId": "p1",
-              "start": 232,
-              "end": 234
-            },
-            {
-              "paragraphId": "p1",
-              "start": 307,
-              "end": 309
-            },
-            {
-              "paragraphId": "p2",
-              "start": 2,
-              "end": 4
-            },
-            {
-              "paragraphId": "p2",
-              "start": 71,
-              "end": 73
-            },
-            {
-              "paragraphId": "p2",
-              "start": 109,
-              "end": 111
-            },
-            {
-              "paragraphId": "p2",
-              "start": 240,
-              "end": 242
-            },
-            {
-              "paragraphId": "p2",
-              "start": 302,
-              "end": 304
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p3",
-              "start": 27,
-              "end": 29
-            },
-            {
-              "paragraphId": "p3",
-              "start": 116,
-              "end": 118
-            },
-            {
-              "paragraphId": "p3",
-              "start": 173,
-              "end": 175
-            },
-            {
-              "paragraphId": "p3",
-              "start": 317,
-              "end": 319
-            },
-            {
-              "paragraphId": "p4",
-              "start": 10,
-              "end": 12
-            },
-            {
-              "paragraphId": "p4",
-              "start": 52,
-              "end": 54
-            },
-            {
-              "paragraphId": "p4",
-              "start": 124,
-              "end": 126
-            },
-            {
-              "paragraphId": "p4",
-              "start": 212,
-              "end": 214
+              "start": 40,
+              "end": 60
             }
           ],
           "scoring": {
@@ -1187,19 +1097,22 @@
         },
         {
           "id": "q2",
-          "prompt": "IP 주소와 순서 번호 등 제어 정보가 담기는 부분은 무엇인가요?",
-          "answerText": "헤더",
-          "answerMatchMode": "ANY",
+          "prompt": "헤더에 담기는 제어 정보를 모두 찾으시오.",
+          "answerTexts": [
+            "보내는 사람과 받는 사람의 IP 주소",
+            "패킷의 순서 번호"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 10,
-              "end": 12
+              "start": 49,
+              "end": 69
             },
             {
               "paragraphId": "p2",
-              "start": 44,
-              "end": 46
+              "start": 71,
+              "end": 80
             }
           ],
           "scoring": {
@@ -1210,19 +1123,14 @@
         },
         {
           "id": "q3",
-          "prompt": "사용자가 실제로 전송하려는 데이터 몸체는 무엇인가요?",
-          "answerText": "페이로드",
+          "prompt": "페이로드가 무엇인지 설명한 부분을 찾으시오.",
+          "answerText": "사용자가 실제로 전송하고자 하는 데이터의 몸체",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 16,
-              "end": 20
-            },
-            {
-              "paragraphId": "p2",
-              "start": 143,
-              "end": 147
+              "start": 149,
+              "end": 174
             }
           ],
           "scoring": {
@@ -1233,19 +1141,14 @@
         },
         {
           "id": "q4",
-          "prompt": "오류 검출 정보를 포함하는 부분은 무엇인가요?",
-          "answerText": "트레일러",
+          "prompt": "트레일러가 포함하는 정보를 찾으시오.",
+          "answerText": "오류가 발생했는지 검출하는 정보",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 24,
-              "end": 28
-            },
-            {
-              "paragraphId": "p2",
-              "start": 178,
-              "end": 182
+              "start": 196,
+              "end": 213
             }
           ],
           "scoring": {
@@ -1256,14 +1159,27 @@
         },
         {
           "id": "q5",
-          "prompt": "인터넷이 채택한 효율적인 전송 방식은 무엇인가요?",
-          "answerText": "패킷 교환",
-          "answerMatchMode": "ANY",
+          "prompt": "기존 방식과 인터넷 패킷 방식의 이름을 모두 찾으시오.",
+          "answerTexts": [
+            "회선 교환",
+            "패킷 교환"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 12,
+              "end": 17
+            },
             {
               "paragraphId": "p3",
               "start": 27,
               "end": 32
+            },
+            {
+              "paragraphId": "p3",
+              "start": 57,
+              "end": 62
             },
             {
               "paragraphId": "p3",

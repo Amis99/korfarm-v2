@@ -571,111 +571,163 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 사회자가 논의의 목적이나 초점을 어떻게 설정하는가?",
+          "prompt": "사회자가 발표자로 소개한 학생을 찾으시오.",
+          "answerText": "지원 학생",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 116
+              "start": 26,
+              "end": 31
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "사회자: 다음 순서는 학생 자치회 발표입니다. 지원 학생이 다음 달부터 운영하려는 ‘아침 독서 기록 공유판’ 계획을 설명하겠습니다. 발표를 들으면서 이 계획이 무엇을 바꾸려는 것인지 생각해 주시면 좋겠습니다."
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 지원이 무엇을 제안하거나 요청하는가?",
+          "prompt": "지원 학생이 다음 달부터 운영하려는 계획의 이름을 찾으시오.",
+          "answerText": "‘아침 독서 기록 공유판’",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 182
+              "paragraphId": "p1",
+              "start": 46,
+              "end": 60
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지원: 저는 새로운 행사를 하나 더 늘리자고 말하려는 것이 아닙니다. 지금도 독서 활동 자체는 꾸준히 이루어지고 있지만, 누가 어떤 책을 읽었는지 서로 알기 어려워서 좋은 활동이 학교 전체 분위기로 이어지지 못하고 있습니다. 그래서 먼저 독서량을 경쟁시키기보다, 읽은 내용을 짧게 나누는 통로를 만들자는 제안을 드리려 합니다."
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 지원이 어떤 의견이나 판단을 제시하는가?",
+          "prompt": "지원이 자신이 말하려는 것이 아니라고 밝힌 내용을 찾으시오.",
+          "answerText": "새로운 행사를 하나 더 늘리자고",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 191
+              "paragraphId": "p2",
+              "start": 7,
+              "end": 24
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지원: 지난달에 2학년 각 반을 조사해 보니, 독서 기록장은 있지만 반 안에서만 머무는 경우가 많았습니다. 반면 복도 게시판에 한 줄 감상을 붙여 본 반은 다른 학생들이 자연스럽게 책 제목을 물어보면서 대화가 이어졌습니다. 저는 이 차이가 단순한 장식의 문제가 아니라, 독서가 개인 활동에서 공동의 화제로 넘어가는 계기와 관련 있다고 봅니다."
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 지원이 어떤 점을 묻고 있는가?",
+          "prompt": "좋은 독서 활동이 학교 전체 분위기로 이어지지 못한 이유를 찾으시오.",
+          "answerText": "누가 어떤 책을 읽었는지 서로 알기 어려워서",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 183
+              "paragraphId": "p2",
+              "start": 68,
+              "end": 92
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지원: 그래서 제 계획은 크지 않습니다. 한 달 동안 시범적으로 중앙 복도 게시판 한 면만 쓰고, 책 제목과 한 줄 메모만 적도록 하겠습니다. 분량을 길게 요구하지 않는 이유는 부담을 줄이기 위해서입니다. 중요한 것은 잘 쓴 감상문을 뽑는 일이 아니라, 다른 학생이 ‘그 책이 왜 궁금했는지’ 바로 이해하게 만드는 데 있습니다."
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 민호가 무엇을 제안하거나 요청하는가?",
+          "prompt": "독서 기록장과 복도 게시판의 차이를 보여 주는 조사 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "반 안에서만 머무는 경우가 많았습니다",
+            "대화가 이어졌습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 122
+              "paragraphId": "p3",
+              "start": 38,
+              "end": 58
+            },
+            {
+              "paragraphId": "p3",
+              "start": 113,
+              "end": 123
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "민호: 설명을 듣다 보니 좋은 학생 몇 명만 더 열심히 하자는 제안처럼 들릴 수도 있겠어요. 발표 의도가 독서를 잘하는 학생을 드러내려는 데 있는지, 아니면 참여 문턱을 낮추려는 데 있는지 분명히 말해 주면 좋겠습니다."
+          "revealOnWrong": true
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 지원이 어떤 점을 묻고 있는가?",
+          "prompt": "지원이 시범 운영에서 하겠다고 한 구체적 방식을 모두 찾으시오.",
+          "answerTexts": [
+            "중앙 복도 게시판 한 면만 쓰고",
+            "책 제목과 한 줄 메모만 적도록"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 192
+              "paragraphId": "p4",
+              "start": 36,
+              "end": 53
+            },
+            {
+              "paragraphId": "p4",
+              "start": 55,
+              "end": 72
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q7",
+          "prompt": "분량을 길게 요구하지 않는 이유를 찾으시오.",
+          "answerText": "부담을 줄이기 위해서",
           "answerMatchMode": "ANY",
-          "answerText": "지원: 저는 독서 우수 학생을 가려내려는 것이 아닙니다. 오히려 긴 글을 쓰기 부담스러운 학생도 짧게 참여할 수 있게 하려는 것입니다. 오늘 발표의 목적은 ‘게시판을 꼭 설치하자’고 압박하는 데 있지 않고, 독서를 서로 보이게 만드는 방식이 왜 필요한지 먼저 공감대를 만들자는 데 있습니다. 그 점을 바탕으로 시범 운영 허락을 부탁드리겠습니다."
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 99,
+              "end": 110
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q8",
+          "prompt": "지원이 오늘 발표의 목적이라고 밝힌 핵심을 찾으시오.",
+          "answerText": "독서를 서로 보이게 만드는 방식이 왜 필요한지 먼저 공감대를 만들자는 데",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 116,
+              "end": 156
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
         }
       ]
     }

@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "내리는 사람을 먼저 ( ).",
-          "answerText": "기다림",
-          "answerMatchMode": "EXACT",
+          "prompt": "문이 열리면 먼저 기다려야 하는 사람을 지문에서 찾으시오.",
+          "answerText": "내리는 사람",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 49,
-              "end": 52
+              "start": 38,
+              "end": 44
             }
           ],
           "scoring": {
@@ -869,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "이웃에게 ( ) 인사를 해요.",
-          "answerText": "밝은",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리들의 생명을 지켜 주는 것을 지문에서 찾으시오.",
+          "answerText": "안전한 이용 습관",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 35,
-              "end": 37
+              "paragraphId": "p1",
+              "start": 107,
+              "end": 116
             }
           ],
           "scoring": {
@@ -888,9 +888,28 @@
         },
         {
           "id": "q3",
-          "prompt": "가볍게 ( )를 하며 인사해요.",
+          "prompt": "이웃에게 인사할 때의 목소리를 지문에서 찾으시오.",
+          "answerText": "밝은 목소리",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 35,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "인사를 전하며 가볍게 하는 행동을 지문에서 찾으시오.",
           "answerText": "목례",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",

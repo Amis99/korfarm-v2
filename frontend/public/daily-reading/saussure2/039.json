@@ -564,14 +564,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "꾀가 많고 꼬리가 풍성한 개과 동물은?",
-          "answerText": "여우",
-          "answerMatchMode": "ANY",
+          "prompt": "이 이야기에 등장하는 두 동물 친구를 모두 찾으시오.",
+          "answerTexts": [
+            "여우",
+            "두루미"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 5,
               "end": 7
+            },
+            {
+              "paragraphId": "p1",
+              "start": 9,
+              "end": 12
             },
             {
               "paragraphId": "p1",
@@ -582,44 +590,6 @@
               "paragraphId": "p1",
               "start": 82,
               "end": 84
-            },
-            {
-              "paragraphId": "p2",
-              "start": 20,
-              "end": 22
-            },
-            {
-              "paragraphId": "p2",
-              "start": 43,
-              "end": 45
-            },
-            {
-              "paragraphId": "p3",
-              "start": 12,
-              "end": 14
-            },
-            {
-              "paragraphId": "p3",
-              "start": 45,
-              "end": 47
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "목과 다리가 길고 날개가 큰 희고 검은 새는?",
-          "answerText": "두루미",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 9,
-              "end": 12
             },
             {
               "paragraphId": "p1",
@@ -633,8 +603,18 @@
             },
             {
               "paragraphId": "p2",
+              "start": 20,
+              "end": 22
+            },
+            {
+              "paragraphId": "p2",
               "start": 38,
               "end": 41
+            },
+            {
+              "paragraphId": "p2",
+              "start": 43,
+              "end": 45
             },
             {
               "paragraphId": "p2",
@@ -643,37 +623,30 @@
             },
             {
               "paragraphId": "p3",
+              "start": 12,
+              "end": 14
+            },
+            {
+              "paragraphId": "p3",
+              "start": 45,
+              "end": 47
+            },
+            {
+              "paragraphId": "p3",
               "start": 68,
               "end": 71
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "음식을 담는 바닥이 평평하고 둥근 그릇은?",
-          "answerText": "접시",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 52,
-              "end": 54
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "목이 길고 잘록하며 배가 불룩한 병은?",
+          "id": "q2",
+          "prompt": "두루미가 고기를 담아 내놓은 목이 길고 구멍이 좁은 그릇을 찾아보세요.",
           "answerText": "호리병",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -694,8 +667,52 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "여우가 친구를 자기 집으로 부르며 한 행동을 가리키는 낱말을 찾아보세요.",
+          "answerText": "초대",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 28,
+              "end": 30
+            },
+            {
+              "paragraphId": "p2",
+              "start": 31,
+              "end": 33
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "여우와 두루미 이야기가 알려 주는 교훈을 한 문장 그대로 찾아보세요.",
+          "answerText": "내가 남을 배려하지 않고 함부로 대하면, 나도 결국 똑같이 돌려받게 된다는 것을 배웠어요.",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 95,
+              "end": 145
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         }

@@ -791,10 +791,44 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "민서가 지적한 매점 간식의 가장 큰 문제는 무엇인가요?",
-          "answerText": "영양 불균형 문제",
-          "answerMatchMode": "ANY",
+          "prompt": "토의 주제와 참석자를 모두 찾으시오.",
+          "answerTexts": [
+            "건강한 학교 매점 만들기",
+            "각 학급 대표들과 매점 운영 위원회 선생님들"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 18,
+              "end": 31
+            },
+            {
+              "paragraphId": "p1",
+              "start": 59,
+              "end": 83
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "민서가 지적한 문제와 원인을 모두 찾으시오.",
+          "answerTexts": [
+            "당분이 너무 많아",
+            "영양 불균형 문제"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 31,
+              "end": 40
+            },
             {
               "paragraphId": "p2",
               "start": 71,
@@ -808,33 +842,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "매월 선정해 홍보하기로 한 것은 무엇인가요?",
-          "answerText": "이달의 건강 간식",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 49,
-              "end": 58
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q3",
-          "prompt": "당분과 지방 함량을 비교해 보여 주는 게시판 이름은 무엇인가요?",
-          "answerText": "영양 신호등",
+          "prompt": "지후가 제기한 선택지 문제를 찾으시오.",
+          "answerText": "신선한 과일이나 건강한 음료를 사고 싶어도 선택지 자체가 너무 부족하다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 127,
-              "end": 133
+              "paragraphId": "p2",
+              "start": 98,
+              "end": 137
             }
           ],
           "scoring": {
@@ -845,10 +861,24 @@
         },
         {
           "id": "q4",
-          "prompt": "신선 식품 보관을 위해 보완 요청하기로 한 설비는 무엇인가요?",
-          "answerText": "고성능 냉장 설비",
-          "answerMatchMode": "ANY",
+          "prompt": "토의에서 합의한 실천 사항을 모두 찾으시오.",
+          "answerTexts": [
+            "이달의 건강 간식",
+            "영양 신호등",
+            "고성능 냉장 설비"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 49,
+              "end": 58
+            },
+            {
+              "paragraphId": "p3",
+              "start": 127,
+              "end": 133
+            },
             {
               "paragraphId": "p3",
               "start": 202,
@@ -863,14 +893,14 @@
         },
         {
           "id": "q5",
-          "prompt": "결정된 사항들을 보고하기로 한 곳은 어디인가요?",
-          "answerText": "학교운영위원회",
+          "prompt": "이번 토의가 뜻깊었다고 한 이유를 찾으시오.",
+          "answerText": "우리가 스스로 건강한 삶의 주체가 되기 위해 머리를 맞댔다는 점",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 152,
-              "end": 159
+              "start": 33,
+              "end": 68
             }
           ],
           "scoring": {

@@ -396,20 +396,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "야외 놀이하는 곳?",
+          "prompt": "가족들과 함께 숲속으로 여행을 다녀온 야외 장소의 이름을 글에서 찾아 보세요",
           "answerText": "캠핑장",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 14,
-              "end": 17
-            },
-            {
-              "paragraphId": "p2",
-              "start": 105,
-              "end": 108
-            }
+            {"paragraphId": "p1", "start": 14, "end": 17},
+            {"paragraphId": "p2", "start": 105, "end": 108}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -420,15 +412,11 @@
         },
         {
           "id": "q2",
-          "prompt": "천막으로 만든 집?",
-          "answerText": "텐트",
-          "answerMatchMode": "EXACT",
+          "prompt": "마시멜로를 구워 먹기 위해 밤에 피운 것의 이름을 글에서 찾아 보세요",
+          "answerText": "모닥불",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 43,
-              "end": 45
-            }
+            {"paragraphId": "p2", "start": 22, "end": 25}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -439,15 +427,26 @@
         },
         {
           "id": "q3",
-          "prompt": "행복했던 기억?",
-          "answerText": "추억",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 캠핑에서 가장 신났다고 한 짧은 시간을 가리키는 두 글자 낱말을 찾아 보세요",
+          "answerText": "순간",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 118,
-              "end": 120
-            }
+            {"paragraphId": "p2", "start": 7, "end": 9}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "캠핑장에서 만들어 일기장에 기록한 행복했던 기억을 뜻하는 두 글자 낱말을 찾아 보세요",
+          "answerText": "추억",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 118, "end": 120}
           ],
           "scoring": {
             "correctDeltaSec": 10,

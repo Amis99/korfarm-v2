@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단의 내용으로 가장 적절한 것은?",
+          "prompt": "과학 실험 부스를 너무 일찍 시작하면 누가 먼저 지칠 수 있는가?",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 155
+              "start": 111,
+              "end": 114
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "지원: 축제 운영표를 보니까 우리 동아리 부스 시간이 오전 열 시부터 오후 다섯 시까지로 잡혀 있더라. 그런데 과학 실험 부스는 준비 시간이 길어서 시작을 너무 일찍 하면 오히려 학생들이 오기 전에 인력이 먼저 지칠 수 있어. 시간대를 조금 조정할 수 있는지 오늘 결정해야 해."
+          "answerText": "인력이"
         },
         {
           "id": "q2",
-          "prompt": "2문단의 내용으로 가장 적절한 것은?",
+          "prompt": "사진 동아리 쪽은 오후 늦게 사람이 몰리면 무엇이 엉킨다고 했는가?",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 155
+              "start": 32,
+              "end": 37
             }
           ],
           "scoring": {
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "도현: 사진 동아리 쪽은 반대로 오후 늦게 사람이 몰리면 촬영 동선이 엉키니까, 우리 부스는 오전 비중이 더 컸으면 좋겠어. 작년에도 세 시 이후에 줄이 길어져서 설명보다 정리만 하다가 끝났잖아. 전체 시간을 줄이기보다 방문이 몰리는 시간을 나눠 쓰는 쪽이 현실적이라고 생각해."
+          "answerText": "촬영 동선"
         },
         {
           "id": "q3",
-          "prompt": "3문단의 내용으로 가장 적절한 것은?",
+          "prompt": "민지가 제안한 과학 부스와 사진 부스의 시작 방식을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 170
+              "start": 60,
+              "end": 74
+            },
+            {
+              "paragraphId": "p3",
+              "start": 82,
+              "end": 103
             }
           ],
           "scoring": {
@@ -620,17 +625,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "민지: 학생회에서 받은 안내를 보면 본행사는 열한 시부터고, 점심 이후부터 방문객이 급격히 늘어난대. 그럼 과학 부스는 열한 시 시작으로 늦추고, 사진 부스는 열 시 반부터 미리 열어서 초반 방문객을 받는 방식이 가능할 것 같아. 대신 두 부스 모두 마감 시간을 같게 두면 정리 인력 배치가 쉬워질 거야."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "과학 부스는 열한 시 시작",
+            "사진 부스는 열 시 반부터 미리 열어서"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단의 내용으로 가장 적절한 것은?",
+          "prompt": "실험 장비 예열과 안전 점검에는 최소 얼마나 필요한가?",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 161
+              "start": 48,
+              "end": 52
             }
           ],
           "scoring": {
@@ -639,15 +647,77 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "지원: 그 안이면 우리도 준비가 한결 안정적이야. 실험 장비 예열과 안전 점검에 최소 사십 분은 필요하거든. 다만 시작이 늦어지는 대신 중간 휴식 시간을 따로 빼기는 어려우니, 학생회가 진행요원 한 명을 교대로 붙여 주면 좋겠어. 그러면 오후 두 시쯤 짧게라도 정비 시간을 가질 수 있어."
+          "answerText": "사십 분"
         },
         {
           "id": "q5",
-          "prompt": "5문단의 내용으로 가장 적절한 것은?",
+          "prompt": "지원은 학생회가 중간 정비를 위해 무엇을 해 주길 바라는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 104,
+              "end": 120
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "진행요원 한 명을 교대로 붙여"
+        },
+        {
+          "id": "q6",
+          "prompt": "도현은 초반 관람객을 위해 무엇을 한 번 더 넣어 달라고 했는가?",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
+              "start": 44,
+              "end": 68
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "홍보 멘트를 오전 프로그램 안내에 한 번 더"
+        },
+        {
+          "id": "q7",
+          "prompt": "최종 정리에서 학생회가 지원하기로 한 두 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 71,
+              "end": 82
+            },
+            {
+              "paragraphId": "p6",
+              "start": 84,
+              "end": 92
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "과학 부스 교대 인력",
+            "오전 홍보 멘트"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "두 동아리는 무엇에 맞춰 준비물 목록을 업데이트해야 하는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 143,
               "end": 150
             }
           ],
@@ -657,25 +727,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "도현: 사진 동아리도 그 조건이면 괜찮아. 대신 초반 관람객이 적을 수 있으니 홍보 멘트를 오전 프로그램 안내에 한 번 더 넣어 주면 좋겠어. 우리도 열 시 반부터 열두 시 반까지 집중 운영하고, 이후에는 체험 항목을 줄여서 대기 시간을 줄이는 쪽으로 조정할 수 있어."
-        },
-        {
-          "id": "q6",
-          "prompt": "6문단의 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 171
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "민지: 그럼 정리하자. 사진 부스는 열 시 반부터 다섯 시까지, 과학 실험 부스는 열한 시부터 다섯 시까지 운영하고, 학생회는 과학 부스 교대 인력과 오전 홍보 멘트를 지원하는 걸로 하자. 내가 수정된 운영표를 오늘 저녁에 다시 보내고, 두 동아리는 각자 변경된 시간표에 맞춰 준비물 목록을 업데이트해 줘."
+          "answerText": "변경된 시간표"
         }
       ]
     }

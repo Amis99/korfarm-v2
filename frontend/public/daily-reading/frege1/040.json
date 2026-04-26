@@ -750,7 +750,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이번 토의의 주제는 무엇이었나요?",
+          "prompt": "토의의 주제로 제시된 어구를 찾으시오.",
           "answerText": "안전한 학교 앞 도로 만들기",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -768,14 +768,14 @@
         },
         {
           "id": "q2",
-          "prompt": "친구들이 위험하다고 지적한 문제는 무엇인가요?",
-          "answerText": "불법 주정차 문제",
+          "prompt": "회의에 참석한 사람들을 가리키는 말을 찾으시오.",
+          "answerText": "각 학급 대표들",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 17,
-              "end": 26
+              "paragraphId": "p1",
+              "start": 55,
+              "end": 63
             }
           ],
           "scoring": {
@@ -786,14 +786,22 @@
         },
         {
           "id": "q3",
-          "prompt": "학교 앞에 더 강하게 알리기로 한 구역 이름은 무엇인가요?",
-          "answerText": "주정차 금지 구역",
-          "answerMatchMode": "ANY",
+          "prompt": "지민이가 차가 보이지 않아 위험했다고 말한 까닭을 모두 찾으시오.",
+          "answerTexts": [
+            "세워진 차들 때문에",
+            "뒤에서 오는 차가 보이지 않아"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 111,
-              "end": 120
+              "start": 48,
+              "end": 58
+            },
+            {
+              "paragraphId": "p2",
+              "start": 59,
+              "end": 75
             }
           ],
           "scoring": {
@@ -804,9 +812,12 @@
         },
         {
           "id": "q4",
-          "prompt": "설치 확대를 요청하기로 한 표시물은 무엇인가요?",
-          "answerText": "노란 발자국",
-          "answerMatchMode": "ANY",
+          "prompt": "학교 측에 설치를 요청하기로 한 안전 시설물을 모두 찾으시오.",
+          "answerTexts": [
+            "노란 발자국",
+            "노란 카펫"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -817,6 +828,11 @@
               "paragraphId": "p3",
               "start": 138,
               "end": 144
+            },
+            {
+              "paragraphId": "p3",
+              "start": 146,
+              "end": 151
             }
           ],
           "scoring": {
@@ -827,14 +843,14 @@
         },
         {
           "id": "q5",
-          "prompt": "회의 뒤에도 계속 가지기로 다짐한 것은 무엇인가요?",
-          "answerText": "지속적인 관심",
+          "prompt": "문제를 지적하는 데 그치지 않고 찾아낸 방안을 가리키는 어구를 찾으시오.",
+          "answerText": "구체적인 실천 방안",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 130,
-              "end": 137
+              "start": 66,
+              "end": 76
             }
           ],
           "scoring": {

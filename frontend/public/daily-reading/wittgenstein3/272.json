@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "prompt": "1문단에서 실제 메모리보다 더 큰 공간이 있는 것처럼 보이게 만드는 기법을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 192
+              "start": 176,
+              "end": 185
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "컴퓨터는 보통 저장 용량이 큰 보조 기억 장치와 속도가 빠르지만 공간이 작은 주기억 장치를 함께 사용한다. 문제는 여러 프로그램을 동시에 실행하려 할 때 필요한 코드와 데이터를 전부 주기억 장치에 올리기 어렵다는 점이다. 이 한계를 넘기기 위해 운영 체제는 실제 메모리보다 더 큰 공간이 있는 것처럼 보이게 만드는 가상 메모리 기법을 사용한다."
+          "answerText": "가상 메모리 기법"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 핵심 원리나 기준을 어떻게 설명하는가?",
+          "prompt": "1문단에서 컴퓨터가 함께 사용하는 두 기억 장치를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 193
+              "paragraphId": "p1",
+              "start": 8,
+              "end": 25
+            },
+            {
+              "paragraphId": "p1",
+              "start": 27,
+              "end": 49
             }
           ],
           "scoring": {
@@ -602,17 +607,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "가상 메모리는 프로그램 전체를 한꺼번에 적재하지 않고, 당장 실행에 필요한 부분만 주기억 장치에 두는 방식으로 동작한다. 이는 프로그램이 실행되는 동안 모든 명령과 데이터를 고르게 쓰지 않는다는 사실을 전제로 한다. 어느 순간에는 특정 구간만 집중적으로 접근하는 경우가 많기 때문에, 나머지 부분은 보조 기억 장치에 남겨 두어도 실행이 가능하다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "저장 용량이 큰 보조 기억 장치",
+            "속도가 빠르지만 공간이 작은 주기억 장치"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단은 그 원리의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "2문단에서 가상 메모리가 당장 필요한 부분을 처리하는 방식을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 186
+              "paragraphId": "p2",
+              "start": 31,
+              "end": 59
             }
           ],
           "scoring": {
@@ -621,16 +629,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이처럼 참조가 일정한 범위에 몰리는 성질을 지역성이라고 한다. 최근에 사용한 명령 주변을 다시 읽는 시간적 지역성, 현재 다루는 주소 근처를 이어서 접근하는 공간적 지역성이 대표적이다. 운영 체제는 이런 성질을 기대하고 프로그램을 페이지라는 같은 크기의 단위로 나누어 관리하며, 필요한 페이지만 페이지 프레임에 배치해 효율을 높인다."
+          "answerText": "당장 실행에 필요한 부분만 주기억 장치에 두는 방식"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
+          "prompt": "2문단에서 가상 메모리 방식의 전제가 되는 사실을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 186
+              "paragraphId": "p2",
+              "start": 71,
+              "end": 111
             }
           ],
           "scoring": {
@@ -639,16 +647,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "실행 중인 프로세스가 어떤 주소를 요구하면 운영 체제는 페이지 테이블을 통해 그 페이지가 주기억 장치에 있는지 먼저 확인한다. 이미 적재되어 있으면 곧바로 접근하지만, 페이지 프레임에 없으면 페이지 부재가 발생한다. 그러면 보조 기억 장치에서 해당 페이지를 읽어 와야 하고, 이 과정에는 단순한 메모리 접근보다 훨씬 큰 시간이 든다."
+          "answerText": "프로그램이 실행되는 동안 모든 명령과 데이터를 고르게 쓰지 않는다는 사실"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 이 주제의 효과나 쟁점을 어떤 방향으로 확장하는가?",
+          "prompt": "3문단에서 참조가 일정한 범위에 몰리는 성질을 무엇이라고 하는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 202
+              "paragraphId": "p3",
+              "start": 24,
+              "end": 33
             }
           ],
           "scoring": {
@@ -657,16 +665,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "문제는 사용 가능한 페이지 프레임이 부족할 때 심해진다. 새로운 페이지를 들여오려면 기존 페이지 가운데 하나를 내보내야 하므로 운영 체제는 FIFO, LRU, LFU 같은 교체 규칙을 사용한다. 그러나 교체 규칙이 무엇이든 현재 프로세스가 유지해야 할 작업 집합보다 프레임 수가 지나치게 적으면, 방금 불러온 페이지가 곧바로 다시 밀려나는 일이 반복될 수 있다."
+          "answerText": "지역성이라고 한다"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 앞선 논의를 어떤 의미로 정리하는가?",
+          "prompt": "3문단에서 대표적인 지역성의 두 종류를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 199
+              "paragraphId": "p3",
+              "start": 56,
+              "end": 63
+            },
+            {
+              "paragraphId": "p3",
+              "start": 88,
+              "end": 95
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "시간적 지역성",
+            "공간적 지역성"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "4문단에서 페이지 프레임에 없을 때 발생한다고 한 일을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 107,
+              "end": 119
             }
           ],
           "scoring": {
@@ -675,7 +709,30 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이처럼 계산보다 페이지 부재 처리와 교체 작업에 시간이 더 많이 쓰이는 상태를 스래싱이라고 한다. 스래싱이 일어나면 CPU는 쉬지 않고 동작하는 것처럼 보여도 실제 연산 진도는 거의 나가지 않는다. 결국 가상 메모리의 성능은 단순히 저장 공간을 늘리는 데 있지 않고, 지역성이 유지될 만큼 충분한 프레임을 확보하고 과도한 페이지 교체를 막는 데 달려 있다."
+          "answerText": "페이지 부재가 발생한다"
+        },
+        {
+          "id": "q8",
+          "prompt": "6문단에서 계산보다 페이지 부재 처리와 교체 작업에 시간이 더 많이 쓰이는 상태를 가리키는 말을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 44,
+              "end": 47
+            },
+            {
+              "paragraphId": "p6",
+              "start": 55,
+              "end": 58
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "스래싱"
         }
       ]
     }

@@ -610,93 +610,71 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "'잔반'은 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 4,
-              "end": 6
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '잔반'을 찾으시오",
+          "answerText": "잔반",
           "answerMatchMode": "ANY",
-          "answerText": "잔반"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 4, "end": 6}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "'퇴식구'는 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 11,
-              "end": 14
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '퇴식구'를 찾으시오",
+          "answerText": "퇴식구",
           "answerMatchMode": "ANY",
-          "answerText": "퇴식구"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 11, "end": 14}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "'배식량'은 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 4,
-              "end": 7
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '배식량'을 찾으시오",
+          "answerText": "배식량",
           "answerMatchMode": "ANY",
-          "answerText": "배식량"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 4, "end": 7}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "'조리실'은 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 38,
-              "end": 41
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '조리실'을 찾으시오",
+          "answerText": "조리실",
           "answerMatchMode": "ANY",
-          "answerText": "조리실"
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 38, "end": 41}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "'초고'는 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 41,
-              "end": 43
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글쓴이가 글을 쓰게 된 까닭으로 든 표현을 찾으시오",
+          "answerText": "환경에도 좋지 않고 그냥 보기에도 조금 심하다는 생각이 들어서",
           "answerMatchMode": "ANY",
-          "answerText": "초고"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 36, "end": 70}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "배식량 선택제로 기대하는 결과 세 가지를 모두 찾으시오",
+          "answerText": "음식물 쓰레기가 줄고 / 학생들도 부담 없이 먹을 수 있고 / 조리실에서도 여러모로 편해질 수 있어서",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 7, "end": 18},
+            {"paragraphId": "p5", "start": 19, "end": 37},
+            {"paragraphId": "p5", "start": 38, "end": 59}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

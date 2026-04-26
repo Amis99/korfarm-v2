@@ -850,19 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "포장지로 정성껏 감싼 ( )물.",
-          "answerText": "선물",
-          "answerMatchMode": "EXACT",
+          "prompt": "생일 파티를 위해 준비한 것을 본문에서 찾으시오.",
+          "answerText": "정성껏 감싼 선물",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 41,
+              "start": 34,
               "end": 43
-            },
-            {
-              "paragraphId": "p2",
-              "start": 55,
-              "end": 57
             }
           ],
           "scoring": {
@@ -874,14 +869,22 @@
         },
         {
           "id": "q2",
-          "prompt": "케이크의 ( )을 끄며 노래해요.",
-          "answerText": "촛불",
-          "answerMatchMode": "EXACT",
+          "prompt": "케이크 앞에서 한 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "케이크의 촛불을 끄며",
+            "생일 축하 노래를 불렀음"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 5,
-              "end": 7
+              "start": 0,
+              "end": 11
+            },
+            {
+              "paragraphId": "p2",
+              "start": 12,
+              "end": 25
             }
           ],
           "scoring": {
@@ -893,13 +896,40 @@
         },
         {
           "id": "q3",
-          "prompt": "소중한 ( )이 영원하길 빌어요.",
-          "answerText": "우정",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구들과 함께한 놀이와 그때 피어난 모습을 모두 찾으시오.",
+          "answerTexts": [
+            "재미있는 게임",
+            "웃음꽃이 활짝 피어났습니다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 83,
+              "end": 90
+            },
+            {
+              "paragraphId": "p2",
+              "start": 95,
+              "end": 109
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "영원하길 마음속으로 빈 것을 본문에서 찾으시오.",
+          "answerText": "소중한 우정",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 63,
+              "start": 59,
               "end": 65
             }
           ],

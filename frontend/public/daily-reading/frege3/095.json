@@ -1370,46 +1370,16 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "생산가능인구가 급격히 줄어들어 사회 활력이 떨어지는 현상은 무엇인가요?",
-          "answerText": "인구절벽",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 4
-            },
-            {
-              "paragraphId": "p1",
-              "start": 143,
-              "end": 147
-            },
-            {
-              "paragraphId": "p1",
-              "start": 295,
-              "end": 299
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 4
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 4
-            },
-            {
-              "paragraphId": "p5",
-              "start": 6,
-              "end": 10
-            },
-            {
-              "paragraphId": "p5",
-              "start": 275,
-              "end": 279
-            }
-          ],
+      "prompt": "인구절벽의 정의에 해당하는 부분을 찾으시오.",
+      "answerText": "생산가능인구(15~64세)가 급격히 줄어들어 경제 활동이 위축되고 사회적 활력이 떨어지는 현상",
+      "answerMatchMode": "ANY",
+      "answerRanges": [
+        {
+          "paragraphId": "p1",
+          "start": 6,
+          "end": 58
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1418,16 +1388,24 @@
         },
         {
           "id": "q2",
-          "prompt": "본문이 생산가능인구의 범위로 제시한 연령대는 무엇인가요?",
-          "answerText": "15~64세",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 13,
-              "end": 19
-            }
-          ],
+      "prompt": "인구절벽의 가장 직접적인 원인을 모두 찾으시오.",
+      "answerTexts": [
+        "유례없이 낮은 출산율",
+        "급격한 고령화"
+      ],
+      "answerMatchMode": "ALL",
+      "answerRanges": [
+        {
+          "paragraphId": "p2",
+          "start": 18,
+          "end": 29
+        },
+        {
+          "paragraphId": "p2",
+          "start": 31,
+          "end": 38
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1436,16 +1414,30 @@
         },
         {
           "id": "q3",
-          "prompt": "인구절벽의 직접적인 원인으로 출산율 저하와 함께 제시된 것은 무엇인가요?",
-          "answerText": "고령화",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 35,
-              "end": 38
-            }
-          ],
+      "prompt": "청년 세대가 결혼과 출산을 기피하게 만든 요인을 모두 찾으시오.",
+      "answerTexts": [
+        "경제적 불안정",
+        "주거비 상승",
+        "양육 부담"
+      ],
+      "answerMatchMode": "ALL",
+      "answerRanges": [
+        {
+          "paragraphId": "p2",
+          "start": 49,
+          "end": 56
+        },
+        {
+          "paragraphId": "p2",
+          "start": 58,
+          "end": 64
+        },
+        {
+          "paragraphId": "p2",
+          "start": 70,
+          "end": 75
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1454,16 +1446,36 @@
         },
         {
           "id": "q4",
-          "prompt": "인구절벽으로 기금 고갈 위기에 직면하는 공적 연금 제도는 무엇인가요?",
-          "answerText": "국민연금",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 34,
-              "end": 38
-            }
-          ],
+      "prompt": "복지 시스템에 나타나는 재정 위험을 모두 찾으시오.",
+      "answerTexts": [
+        "기금 고갈 위기",
+        "건강보험 재정 부담",
+        "세수는 감소",
+        "복지 수요는 폭발적으로 증가"
+      ],
+      "answerMatchMode": "ALL",
+      "answerRanges": [
+        {
+          "paragraphId": "p3",
+          "start": 54,
+          "end": 62
+        },
+        {
+          "paragraphId": "p3",
+          "start": 86,
+          "end": 96
+        },
+        {
+          "paragraphId": "p3",
+          "start": 129,
+          "end": 135
+        },
+        {
+          "paragraphId": "p3",
+          "start": 141,
+          "end": 156
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1472,16 +1484,24 @@
         },
         {
           "id": "q5",
-          "prompt": "본문이 정년 연장과 함께 합의를 서둘러야 한다고 한 의제는 무엇인가요?",
-          "answerText": "연금 개혁",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 209,
-              "end": 214
-            }
-          ],
+      "prompt": "위기 극복을 위해 필요한 것을 모두 찾으시오.",
+      "answerTexts": [
+        "기존 복지 모델의 전면적인 개편",
+        "사회 생산성 제고를 위한 정책적 혁신"
+      ],
+      "answerMatchMode": "ALL",
+      "answerRanges": [
+        {
+          "paragraphId": "p4",
+          "start": 14,
+          "end": 31
+        },
+        {
+          "paragraphId": "p4",
+          "start": 33,
+          "end": 53
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45

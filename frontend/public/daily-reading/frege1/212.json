@@ -913,19 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "커피나무 열매의 씨앗을 무엇이라고 하나요?",
-          "answerText": "생두",
+          "prompt": "커피를 무엇으로 어떻게 만드는지 설명한 부분을 찾으시오.",
+          "answerText": "커피나무 열매의 씨앗인 생두를 볶아",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 72,
-              "end": 74
-            },
-            {
-              "paragraphId": "p3",
-              "start": 52,
-              "end": 54
+              "start": 59,
+              "end": 78
             }
           ],
           "scoring": {
@@ -936,19 +931,22 @@
         },
         {
           "id": "q2",
-          "prompt": "커피가 자라는 띠를 무엇이라고 부르나요?",
-          "answerText": "커피 벨트",
-          "answerMatchMode": "ANY",
+          "prompt": "커피나무가 잘 자라는 지역과 커피 벨트의 뜻을 모두 찾으시오.",
+          "answerTexts": [
+            "일 년 내내 덥고 비가 자주 내리는 적도 근처 나라",
+            "커피가 자라는 띠라는 뜻"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 153,
-              "end": 158
+              "start": 91,
+              "end": 119
             },
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 5
+              "paragraphId": "p1",
+              "start": 137,
+              "end": 150
             }
           ],
           "scoring": {
@@ -959,19 +957,34 @@
         },
         {
           "id": "q3",
-          "prompt": "처음 커피가 발견된 곳으로 소개된 나라는 어디인가요?",
-          "answerText": "에티오피아",
-          "answerMatchMode": "ANY",
+          "prompt": "커피로 유명한 나라와 그 특징을 모두 찾으시오.",
+          "answerTexts": [
+            "아프리카의 에티오피아",
+            "남미의 브라질과 콜롬비아",
+            "처음 커피가 발견된 곳",
+            "세계에서 가장 많은 커피를 생산합니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 54,
+              "start": 48,
               "end": 59
             },
             {
               "paragraphId": "p2",
-              "start": 87,
-              "end": 92
+              "start": 61,
+              "end": 74
+            },
+            {
+              "paragraphId": "p2",
+              "start": 94,
+              "end": 106
+            },
+            {
+              "paragraphId": "p2",
+              "start": 141,
+              "end": 161
             }
           ],
           "scoring": {
@@ -982,10 +995,24 @@
         },
         {
           "id": "q4",
-          "prompt": "초록색 생두를 불에 볶는 과정을 무엇이라고 하나요?",
-          "answerText": "로스팅",
-          "answerMatchMode": "ANY",
+          "prompt": "커피 열매가 원두가 되는 과정과 그 이름을 모두 찾으시오.",
+          "answerTexts": [
+            "껍질을 벗기고 잘 말린 뒤 여러 나라로 수출됩니다",
+            "불에 볶는 과정",
+            "로스팅"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 11,
+              "end": 38
+            },
+            {
+              "paragraphId": "p3",
+              "start": 56,
+              "end": 64
+            },
             {
               "paragraphId": "p3",
               "start": 90,
@@ -1000,13 +1027,21 @@
         },
         {
           "id": "q5",
-          "prompt": "한 잔의 커피가 담고 있다고 한 세계의 이야기는 무엇인가요?",
-          "answerText": "수고",
-          "answerMatchMode": "ANY",
+          "prompt": "커피가 세계 사람들을 이어 주는 역할과 우리가 느낄 수 있는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "전 세계 사람들을 이어주는 역할",
+            "지구 반대편 사람들의 수고"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 110,
+              "start": 15,
+              "end": 32
+            },
+            {
+              "paragraphId": "p4",
+              "start": 98,
               "end": 112
             }
           ],

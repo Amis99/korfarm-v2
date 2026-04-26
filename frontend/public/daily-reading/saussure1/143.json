@@ -552,9 +552,62 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "아주 작은 먼지의 이름?",
+          "prompt": "1문단에서 '미세먼지'를 정의한 부분을 찾아 그대로 써 보세요",
+          "answerText": "공기 중에 떠다니는 아주 작은 먼지",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 19
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "미세먼지가 우리 몸속으로 들어와 건강을 해치는 두 통로를 모두 지문에서 찾아 써 보세요",
+          "answerText": "코, 입",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 68,
+              "end": 69
+            },
+            {
+              "paragraphId": "p1",
+              "start": 71,
+              "end": 72
+            },
+            {
+              "paragraphId": "p2",
+              "start": 15,
+              "end": 16
+            },
+            {
+              "paragraphId": "p2",
+              "start": 18,
+              "end": 19
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "마스크는 무엇이 우리 몸으로 들어오는 것을 막아 준다고 했는지 한 단어로 찾아 써 보세요",
           "answerText": "미세먼지",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -585,54 +638,20 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "먼지를 막아 주는 도구.",
-          "answerText": "마스크",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "외출 후 깨끗이 씻어야 한다고 한 두 곳을 모두 지문에서 찾아 써 보세요",
+          "answerText": "손, 발",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 25,
-              "end": 28
+              "start": 112,
+              "end": 113
             },
             {
               "paragraphId": "p2",
-              "start": 34,
-              "end": 37
-            },
-            {
-              "paragraphId": "p2",
-              "start": 78,
-              "end": 81
-            },
-            {
-              "paragraphId": "p2",
-              "start": 144,
-              "end": 147
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "소중한 무엇을 지켜요인가요?",
-          "answerText": "건강",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 87,
-              "end": 89
-            },
-            {
-              "paragraphId": "p2",
-              "start": 169,
-              "end": 171
+              "start": 115,
+              "end": 116
             }
           ],
           "scoring": {

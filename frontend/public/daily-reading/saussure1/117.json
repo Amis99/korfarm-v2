@@ -552,29 +552,15 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "'귀뚤귀뚤' 노래하는 벌레는?",
-          "answerText": "귀뚜라미",
-          "answerMatchMode": "EXACT",
+          "prompt": "음악회에서 노래와 연주를 들려주는 풀벌레 두 마리를 모두 찾아 적어 보세요",
+          "answerText": "귀뚜라미, 베짱이",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
               "end": 4
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "'쓱싹쓱쓱' 연주하는 벌레는?",
-          "answerText": "베짱이",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
+            },
             {
               "paragraphId": "p2",
               "start": 29,
@@ -589,10 +575,58 @@
           "revealOnWrong": true
         },
         {
+          "id": "q2",
+          "prompt": "'별들도 노래 소리에 맞춰 반짝반짝 □을 추는 것 같아요'에서 별을 사람처럼 표현했어요. □에 들어갈 한 글자는?",
+          "answerText": "춤",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 111,
+              "end": 112
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q3",
-          "prompt": "아름다운 화음이 울리는 곳?",
+          "prompt": "여러 사람이 모여 노래나 연주를 함께 들려주는 모임을 무엇이라고 하나요? 지문에서 찾아 보세요",
+          "answerText": "음악회",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 78,
+              "end": 81
+            },
+            {
+              "paragraphId": "p1",
+              "start": 140,
+              "end": 143
+            },
+            {
+              "paragraphId": "p2",
+              "start": 132,
+              "end": 135
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "풀벌레들의 아름다운 화음은 어디에 가득 울려 퍼졌나요?",
           "answerText": "밤하늘",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",

@@ -1139,7 +1139,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "글쓴이가 지켜야 한다고 본 핵심 권리는 무엇인가요?",
+          "prompt": "글쓴이가 보호해야 한다고 본 핵심 권리를 찾으시오.",
           "answerText": "데이터 프라이버시(Data Privacy)",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1157,7 +1157,7 @@
         },
         {
           "id": "q2",
-          "prompt": "글쓴이가 우려한 사회 모습은 무엇인가요?",
+          "prompt": "글쓴이가 우려한 사회 모습을 찾으시오.",
           "answerText": "알고리즘 독재와 감시 사회",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1175,14 +1175,28 @@
         },
         {
           "id": "q3",
-          "prompt": "글쓴이가 정당한 몫이라고 본 권리는 무엇인가요?",
-          "answerText": "데이터 배당권",
-          "answerMatchMode": "ANY",
+          "prompt": "기업이 개인을 분석할 때 사용하는 민감 정보를 모두 찾으시오.",
+          "answerTexts": [
+            "개인의 위치 정보",
+            "질병 기록",
+            "정치적 성향"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 246,
-              "end": 253
+              "paragraphId": "p2",
+              "start": 72,
+              "end": 81
+            },
+            {
+              "paragraphId": "p2",
+              "start": 83,
+              "end": 88
+            },
+            {
+              "paragraphId": "p2",
+              "start": 94,
+              "end": 100
             }
           ],
           "scoring": {
@@ -1193,14 +1207,22 @@
         },
         {
           "id": "q4",
-          "prompt": "사용자가 삭제를 요구할 수 있는 권리는 무엇인가요?",
-          "answerText": "잊힐 권리",
-          "answerMatchMode": "ANY",
+          "prompt": "개인을 보호하면서 빅데이터를 분석할 수 있는 익명화 기술을 모두 찾으시오.",
+          "answerTexts": [
+            "가명 처리",
+            "암호화"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 163,
-              "end": 168
+              "paragraphId": "p4",
+              "start": 128,
+              "end": 133
+            },
+            {
+              "paragraphId": "p4",
+              "start": 135,
+              "end": 138
             }
           ],
           "scoring": {
@@ -1211,7 +1233,7 @@
         },
         {
           "id": "q5",
-          "prompt": "즉시 입법화하자고 촉구한 제도는 무엇인가요?",
+          "prompt": "즉시 입법화하자고 촉구한 제도를 찾으시오.",
           "answerText": "징벌적 손해배상 제도",
           "answerMatchMode": "ANY",
           "answerRanges": [

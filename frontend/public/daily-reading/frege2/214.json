@@ -556,24 +556,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "손상된 문화재를 되살리는 작업을 무엇이라고 하나요?",
-          "answerText": "디지털 복원",
+          "prompt": "손상된 문화재를 되살리는 작업을 찾으시오.",
+          "answerText": "디지털 복원 작업",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 22,
-              "end": 28
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 6
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 6
+              "end": 31
             }
           ],
           "scoring": {
@@ -584,7 +574,7 @@
         },
         {
           "id": "q2",
-          "prompt": "훼손된 부분을 재현할 때 사용하는 기술은 무엇인가요?",
+          "prompt": "훼손된 부분을 완벽하게 재현할 때 사용하는 기술을 찾으시오.",
           "answerText": "3차원 컴퓨터 그래픽",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -602,14 +592,14 @@
         },
         {
           "id": "q3",
-          "prompt": "정밀하게 분석할 수 있다고 한 아주 작은 금은 무엇인가요?",
-          "answerText": "미세한 균열",
+          "prompt": "원본 훼손을 방지하기 위해 디지털 복원이 사용하는 작업 방식을 찾으시오.",
+          "answerText": "직접 만지지 않고",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 46,
-              "end": 52
+              "start": 8,
+              "end": 17
             }
           ],
           "scoring": {
@@ -620,14 +610,22 @@
         },
         {
           "id": "q4",
-          "prompt": "복원된 데이터를 활용한 전시 방식 가운데 하나는 무엇인가요?",
-          "answerText": "홀로그램",
-          "answerMatchMode": "ANY",
+          "prompt": "복원된 데이터가 활용되는 전시 방식을 모두 찾으시오.",
+          "answerTexts": [
+            "가상 현실",
+            "홀로그램 전시"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
+              "start": 9,
+              "end": 14
+            },
+            {
+              "paragraphId": "p3",
               "start": 17,
-              "end": 21
+              "end": 24
             }
           ],
           "scoring": {
@@ -638,7 +636,7 @@
         },
         {
           "id": "q5",
-          "prompt": "디지털 복원이 지키고 전하려는 것은 무엇인가요?",
+          "prompt": "디지털 복원이 보존하고 후대에 전하는 것을 찾으시오.",
           "answerText": "역사적 가치",
           "answerMatchMode": "ANY",
           "answerRanges": [

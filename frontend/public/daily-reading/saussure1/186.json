@@ -474,20 +474,15 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "짭조름한 무엇 냄새인가요?",
-          "answerText": "바다",
-          "answerMatchMode": "EXACT",
+          "prompt": "여름 방학을 맞아 할머니 댁이 있는 바다 마을로 놀러 간 주인공 소년의 이름은 무엇인가요",
+          "answerText": "민수",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 27,
-              "end": 29
-            },
-            {
-              "paragraphId": "p1",
-              "start": 66,
-              "end": 68
-            }
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p1", "start": 51, "end": 53},
+            {"paragraphId": "p2", "start": 15, "end": 17},
+            {"paragraphId": "p2", "start": 83, "end": 85},
+            {"paragraphId": "p2", "start": 145, "end": 147}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -498,30 +493,14 @@
         },
         {
           "id": "q2",
-          "prompt": "반짝이는 파란 무엇인가요?",
+          "prompt": "민수가 운동화 속 모래알 사이에서 발견한, 반짝이는 파란 물건은 무엇인가요",
           "answerText": "돌멩이",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 115,
-              "end": 118
-            },
-            {
-              "paragraphId": "p1",
-              "start": 130,
-              "end": 133
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p2",
-              "start": 87,
-              "end": 90
-            }
+            {"paragraphId": "p1", "start": 115, "end": 118},
+            {"paragraphId": "p1", "start": 130, "end": 133},
+            {"paragraphId": "p2", "start": 0, "end": 3},
+            {"paragraphId": "p2", "start": 87, "end": 90}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -532,25 +511,28 @@
         },
         {
           "id": "q3",
-          "prompt": "발에 신는 무엇인가요?",
-          "answerText": "운동화",
-          "answerMatchMode": "EXACT",
+          "prompt": "민수가 돌멩이의 비밀을 풀기 위해 바닷가를 따라 걸어간 곳은 어디인가요",
+          "answerText": "숲",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 55,
-              "end": 58
-            },
-            {
-              "paragraphId": "p1",
-              "start": 83,
-              "end": 86
-            },
-            {
-              "paragraphId": "p2",
-              "start": 19,
-              "end": 22
-            }
+            {"paragraphId": "p1", "start": 147, "end": 148},
+            {"paragraphId": "p2", "start": 119, "end": 120},
+            {"paragraphId": "p2", "start": 133, "end": 134}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "할머니께서 모험을 응원하며 민수에게 건네 주신 시원한 음식은 무엇인가요",
+          "answerText": "수박",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 66, "end": 68}
           ],
           "scoring": {
             "correctDeltaSec": 10,

@@ -850,29 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "치약으로 ( )을 구석구석 닦아요.",
-          "answerText": "치아",
-          "answerMatchMode": "EXACT",
+          "prompt": "치아 사이에 낀 것을 어떻게 하는 일이 중요하다고 했는지 본문에서 찾으시오.",
+          "answerText": "음식물을 제거하는 일",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 31,
-              "end": 33
-            },
-            {
-              "paragraphId": "p1",
-              "start": 96,
-              "end": 98
-            },
-            {
-              "paragraphId": "p1",
-              "start": 118,
-              "end": 120
-            },
-            {
-              "paragraphId": "p3",
-              "start": 5,
-              "end": 7
+              "start": 40,
+              "end": 51
             }
           ],
           "scoring": {
@@ -884,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "화장실 바닥의 ( )를 조심해요.",
-          "answerText": "물기",
-          "answerMatchMode": "EXACT",
+          "prompt": "칫솔에 치약을 묻힌 뒤 어떻게 닦는지 본문에서 찾으시오.",
+          "answerText": "위아래로 구석구석",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 32,
-              "end": 34
+              "paragraphId": "p1",
+              "start": 69,
+              "end": 78
             }
           ],
           "scoring": {
@@ -903,14 +888,41 @@
         },
         {
           "id": "q3",
-          "prompt": "포근한 ( ) 속에서 잠이 듭니다.",
-          "answerText": "이불",
-          "answerMatchMode": "EXACT",
+          "prompt": "양치를 마친 뒤 화장실에서 걷는 모습을 본문에서 찾으시오.",
+          "answerText": "조심조심",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 17,
+              "end": 21
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "내일 일어나길 바란 모습과 이불 속에서 떠나는 곳을 모두 찾으시오.",
+          "answerTexts": [
+            "건강한 모습",
+            "행복한 꿈나라"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 110,
-              "end": 112
+              "start": 56,
+              "end": 62
+            },
+            {
+              "paragraphId": "p3",
+              "start": 117,
+              "end": 124
             }
           ],
           "scoring": {

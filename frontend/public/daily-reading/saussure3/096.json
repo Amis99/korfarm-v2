@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "가난한 소년 톰이 왕자와 옷을 바꿔 입고 들어가 생활하게 된 웅장한 장소는?",
+          "prompt": "톰이 들어온 장소를 찾으시오.",
           "answerText": "왕궁",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -586,13 +586,21 @@
         },
         {
           "id": "q2",
-          "prompt": "톰이 왕자 흉내를 내기 위해 배우려 노력했지만 잘 몰랐던 귀족들의 행동 방식은?",
-          "answerText": "예절",
-          "answerMatchMode": "EXACT",
+          "prompt": "톰이 들킬까 봐 보인 반응과 몰랐던 것을 모두 찾으시오.",
+          "answerTexts": [
+            "가슴이 떨렸습니다",
+            "왕자의 예절"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 96,
+              "start": 78,
+              "end": 87
+            },
+            {
+              "paragraphId": "p1",
+              "start": 92,
               "end": 98
             }
           ],
@@ -605,14 +613,49 @@
         },
         {
           "id": "q3",
-          "prompt": "진정 왕자 에드워드가 왕궁에서 쫓겨난 뒤, 낡고 지저분한 옷을 입고 도착한 곳은?",
-          "answerText": "거리",
-          "answerMatchMode": "EXACT",
+          "prompt": "왕궁 사람들이 한 말투와 톰이 하려고 애쓴 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "걱정 어린 목소리로 수군거렸습니다",
+            "왕자의 행동을 흉내 내려고"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 23,
+              "end": 41
+            },
+            {
+              "paragraphId": "p2",
+              "start": 64,
+              "end": 78
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "왕궁 밖의 에드워드가 한 행동과 사람들이 에드워드를 부른 말을 모두 찾으시오.",
+          "answerTexts": [
+            "거친 옷을 입고 거리를 헤매었습니다",
+            "미친 아이"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 35,
-              "end": 37
+              "start": 26,
+              "end": 45
+            },
+            {
+              "paragraphId": "p3",
+              "start": 73,
+              "end": 78
             }
           ],
           "scoring": {

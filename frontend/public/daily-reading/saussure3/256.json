@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "남을 도와주거나 살핌은?",
-          "answerText": "배려하는",
-          "answerMatchMode": "EXACT",
+          "prompt": "여우가 어떤 방식으로 대접했는지 보여 주는 어구를 찾으시오.",
+          "answerText": "자신의 기준에서만",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 20,
-              "end": 24
+              "start": 39,
+              "end": 48
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "남을 대하는 바른 태도는?",
-          "answerText": "예절을",
-          "answerMatchMode": "EXACT",
+          "prompt": "여우의 행동이 두루미에게 어떤 결과를 주었는지 나타내는 부분을 찾으시오.",
+          "answerText": "상처가 됨",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 54,
-              "end": 57
+              "paragraphId": "p1",
+              "start": 63,
+              "end": 68
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "가르침을 주는 내용은?",
-          "answerText": "교훈을",
-          "answerMatchMode": "EXACT",
+          "prompt": "진정한 친구가 되려면 무엇을 존중해야 하는지 지문에서 찾으시오.",
+          "answerText": "서로의 차이",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 71,
+              "end": 77
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "친구의 입장이 되어 생각하는 마음을 한자어로 나타낸 말을 찾으시오.",
+          "answerText": "역지사지의 마음",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 15,
-              "end": 18
+              "start": 72,
+              "end": 80
             }
           ],
           "scoring": {

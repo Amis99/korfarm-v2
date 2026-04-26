@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이번 보고서는 2학기 학교 축제 운영 전반을 살펴보고 다음 행사에 반영할 개선점을 무엇?",
+          "prompt": "이번 보고서의 작성 목적에 해당하는 어구를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 46,
-              "end": 59
+              "start": 30,
+              "end": 53
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정리하기 위해 작성하였다"
+          "answerText": "다음 행사에 반영할 개선점을 정리하기 위해"
         },
         {
           "id": "q2",
-          "prompt": "조사는 축제 다음 날 1, 2학년 학생 몇 무엇는 방식으로 진행하였다?",
+          "prompt": "조사가 어떤 방식으로 진행되었는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 24,
-              "end": 36
+              "start": 33,
+              "end": 40
             }
           ],
           "scoring": {
@@ -603,16 +603,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "명과 교사들에게 질문하"
+          "answerText": "질문하는 방식"
         },
         {
           "id": "q3",
-          "prompt": "주요 소재는 무엇인가요?",
+          "prompt": "설문에 응답한 학생 수를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 91,
-              "end": 104
+              "paragraphId": "p2",
+              "start": 62,
+              "end": 65
             }
           ],
           "scoring": {
@@ -621,16 +621,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "시간이 20분이 넘었다고"
+          "answerText": "38명"
         },
         {
           "id": "q4",
-          "prompt": "무엇 말하면서도 동시에 진행이 길고 이동 동선이 복잡했다는 의견도 함께 냈다?",
+          "prompt": "가장 많이 나온 의견을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 98,
-              "end": 113
+              "paragraphId": "p3",
+              "start": 13,
+              "end": 33
             }
           ],
           "scoring": {
@@ -639,16 +639,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생들은 무대가 재미있었다고"
+          "answerText": "인기 부스 앞 대기 줄이 길었다는 점"
         },
         {
           "id": "q5",
-          "prompt": "또 무엇은 내년에도 유지하고, 사람이 몰리지 않은 부스는 없애거나 내용을 바꾸는 것도 가능하다?",
+          "prompt": "대기 시간 수치가 현장 기억에 의존하게 된 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 84,
-              "end": 97
+              "paragraphId": "p3",
+              "start": 150,
+              "end": 174
             }
           ],
           "scoring": {
@@ -657,16 +657,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "만족도가 높았던 프로그램"
+          "answerText": "실제 대기 시간을 모두 기록한 것은 아니어서"
         },
         {
           "id": "q6",
-          "prompt": "문단의 초점은 무엇인가요?",
+          "prompt": "공연장에 대한 학생들의 만족 의견과 불편 의견을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 89,
-              "end": 103
+              "paragraphId": "p4",
+              "start": 103,
+              "end": 112
+            },
+            {
+              "paragraphId": "p4",
+              "start": 124,
+              "end": 142
             }
           ],
           "scoring": {
@@ -674,8 +679,69 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "보고서에서는 보완해야 한다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "무대가 재미있었다",
+            "진행이 길고 이동 동선이 복잡했다"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "보고서 초고에서 제시한 개선 방안을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 9,
+              "end": 27
+            },
+            {
+              "paragraphId": "p5",
+              "start": 29,
+              "end": 44
+            },
+            {
+              "paragraphId": "p5",
+              "start": 46,
+              "end": 68
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "인기 부스에 도우미를 더 배치하고",
+            "사전 예약제를 일부 도입하며",
+            "공연장 입구 안내판을 크게 설치하는 방법"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "다음 보고서에서 더 정확한 비교와 분석을 위해 할 일을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 110,
+              "end": 124
+            },
+            {
+              "paragraphId": "p6",
+              "start": 126,
+              "end": 154
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "학년별 의견을 따로 모으고",
+            "행사 중 실제 대기 시간과 이동 경로를 기록해 두면"
+          ]
         }
       ]
     }

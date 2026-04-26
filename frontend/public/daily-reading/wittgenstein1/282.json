@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "중심 대상은 무엇인가요?",
+          "prompt": "말하는 이가 유배된 곳을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 109,
-              "end": 121
+              "start": 11,
+              "end": 17
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "몸을 음란하다 이르로세"
+          "answerText": "해도(海島)"
         },
         {
           "id": "q2",
-          "prompt": "핵심 개념은 무엇인가요?",
+          "prompt": "말하는 이가 임에게 무엇을 했는지 묻는 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 21
+              "paragraphId": "p1",
+              "start": 36,
+              "end": 44
             }
           ],
           "scoring": {
@@ -603,16 +603,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "긴 소매 들고 앉아 옛 잘못을 헤아리니"
+          "answerText": "임에게 득죄했나"
         },
         {
           "id": "q3",
-          "prompt": "주요 소재는 무엇인가요?",
+          "prompt": "2문단에서 말하는 이가 자신의 허물로 든 두 표현을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 25
+              "paragraphId": "p2",
+              "start": 24,
+              "end": 33
+            },
+            {
+              "paragraphId": "p2",
+              "start": 34,
+              "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "우직하기 본성이오",
+            "망령됨도 내 죄로되"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "근본을 생각하면 무엇이라고 말하는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 56,
+              "end": 65
             }
           ],
           "scoring": {
@@ -621,16 +647,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "날 살리신 이 은혜를 결초(結草)하기 생각하나"
+          "answerText": "임 위한 정성일세"
         },
         {
-          "id": "q4",
-          "prompt": "중요한 기준은 무엇인가요?",
+          "id": "q5",
+          "prompt": "3문단에서 옷과 치마를 짓는 표현을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 75,
+              "end": 88
+            },
+            {
+              "paragraphId": "p3",
+              "start": 89,
+              "end": 99
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "마름과 연으로 옷을 짓고",
+            "부용으로 치마 지어"
+          ]
+        },
+        {
+          "id": "q6",
+          "prompt": "말하는 이가 꿈속에서 돌아가려는 곳을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 0,
-              "end": 23
+              "end": 2
             }
           ],
           "scoring": {
@@ -639,16 +691,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "고향에 돌아갈 꿈 벽해(碧海)를 밟아 건너"
+          "answerText": "고향"
         },
         {
-          "id": "q5",
-          "prompt": "글에서 설명한 것은 무엇인가요?",
+          "id": "q7",
+          "prompt": "5문단에서 임의 존재를 청각과 후각으로 느끼는 표현을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 11
+              "start": 31,
+              "end": 58
+            },
+            {
+              "paragraphId": "p5",
+              "start": 61,
+              "end": 82
             }
           ],
           "scoring": {
@@ -656,17 +713,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "멀리서 들려오는 어촌"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "우리 임 금옥(金玉) 같은 음성이 귓가에 의연하고",
+            "우리 임 어로향이 옷과 소매에 품었어라"
+          ]
         },
         {
-          "id": "q6",
-          "prompt": "어느 날 이내 꿈을 진짜로 삼을 건가 두어라 무엇를 날마다 고대하노라?",
+          "id": "q8",
+          "prompt": "마지막에 말하는 이가 임금에게 바라는 일을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
               "start": 27,
-              "end": 39
+              "end": 40
             }
           ],
           "scoring": {
@@ -675,7 +735,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "임금께서 행여 고치시기"
+          "answerText": "임금께서 행여 고치시기를"
         }
       ]
     }

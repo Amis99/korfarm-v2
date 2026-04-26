@@ -1035,98 +1035,70 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '배경'을 모두 찾으시오.",
+          "prompt": "첫 번째 발표자가 마지막에 해결 방법을 한꺼번에 정리하기 전에 차근차근 설명한 두 가지를 모두 찾으시오",
+          "answerText": "원인, 배경",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 76,
-              "end": 78
-            }
+            {"paragraphId": "p1", "start": 72, "end": 74},
+            {"paragraphId": "p1", "start": 76, "end": 78}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "배경"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '표지어'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 50,
-              "end": 53
-            },
-            {
-              "paragraphId": "p5",
-              "start": 95,
-              "end": 98
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "발표자가 중심을 드러내기 위해 높낮이를 바꾸어 활용한다고 한 말소리 요소를 찾으시오",
+          "answerText": "목소리",
           "answerMatchMode": "ANY",
-          "answerText": "표지어"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 72, "end": 75}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '통계'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 53,
-              "end": 55
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "발표 중 슬라이드의 제목이나 판서된 낱말처럼 눈에 보이며 핵심을 알려 주는 것을 찾으시오",
+          "answerText": "표지",
           "answerMatchMode": "ANY",
-          "answerText": "통계"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 129, "end": 131}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '재료'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 202,
-              "end": 204
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "발표자가 통계 수치를 제시했을 때 그 숫자가 뒷받침하는 핵심에 해당하는 것을 찾으시오",
+          "answerText": "결론",
           "answerMatchMode": "ANY",
-          "answerText": "재료"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 105, "end": 107}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '훈련'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 189,
-              "end": 191
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "듣는 사람이 표지어를 표시하거나 같은 뜻이 반복되는 부분을 묶어 가르기 쉬워진다고 한, 중심 내용과 짝이 되는 것을 찾으시오",
+          "answerText": "보조 설명",
           "answerMatchMode": "ANY",
-          "answerText": "훈련"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 90, "end": 95}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "발표 읽기는 들은 내용을 모두 받아 적는 데 그치지 않고, 중심 생각을 골라 내어 비교하는 무엇이라고 하였는지 찾으시오",
+          "answerText": "훈련",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 189, "end": 191}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

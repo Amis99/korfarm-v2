@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "마음껏 느끼며 누리는 상태는?",
-          "answerText": "만끽했습니다",
-          "answerMatchMode": "EXACT",
+          "prompt": "할머니께서 차려주신 것은 무엇인가요?",
+          "answerText": "밥상",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 24,
-              "end": 30
+              "paragraphId": "p1",
+              "start": 42,
+              "end": 44
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "평온하고 화목한 상태는?",
-          "answerText": "평화로운",
-          "answerMatchMode": "EXACT",
+          "prompt": "나는 할머니의 어디에서 행복을 느꼈나요?",
+          "answerText": "따뜻한 품속",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 52,
-              "end": 56
+              "paragraphId": "p1",
+              "start": 69,
+              "end": 75
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "시골에서 나는 기분 좋은 냄새는?",
-          "answerText": "향기가",
-          "answerMatchMode": "EXACT",
+          "prompt": "시골은 어떤 곳이라고 했나요?",
+          "answerText": "평화로운 곳",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 58
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "집으로 돌아와 일기에 붙인 것은 어떤 사진인가요?",
+          "answerText": "할머니와 찍은 사진",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 54,
-              "end": 57
+              "start": 8,
+              "end": 18
             }
           ],
           "scoring": {

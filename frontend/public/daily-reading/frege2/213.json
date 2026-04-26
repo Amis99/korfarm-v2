@@ -556,38 +556,18 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지구 궤도에 급증하고 있다고 한 것은 무엇인가요?",
-          "answerText": "우주 쓰레기",
-          "answerMatchMode": "ANY",
+          "prompt": "우주 쓰레기의 주요 원인으로 제시된 것을 모두 찾으시오.",
+          "answerTexts": [
+            "수명이 다한 위성",
+            "로켓 잔해물"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 20,
-              "end": 26
+              "start": 37,
+              "end": 46
             },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 6
-            },
-            {
-              "paragraphId": "p4",
-              "start": 13,
-              "end": 19
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "우주 쓰레기의 주요 원인 가운데 하나는 무엇인가요?",
-          "answerText": "로켓 잔해물",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 48,
@@ -601,25 +581,33 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "우주 쓰레기가 위협하는 작동 중 장치는 무엇인가요?",
-          "answerText": "위성",
+          "id": "q2",
+          "prompt": "우주 쓰레기가 작동 중인 위성에 큰 위협이 되는 까닭을 찾으시오.",
+          "answerText": "빠른 속도로 이동하여",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 2,
-              "end": 4
-            },
-            {
-              "paragraphId": "p1",
-              "start": 44,
-              "end": 46
-            },
+              "paragraphId": "p2",
+              "start": 8,
+              "end": 19
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "작은 파편과 충돌해도 발생할 수 있다고 한 결과를 찾으시오.",
+          "answerText": "심각한 피해",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 26,
-              "end": 28
+              "start": 52,
+              "end": 58
             }
           ],
           "scoring": {
@@ -630,14 +618,28 @@
         },
         {
           "id": "q4",
-          "prompt": "쓰레기를 포획하는 기술로 개발 중인 장치는 무엇인가요?",
-          "answerText": "로봇 팔",
-          "answerMatchMode": "ANY",
+          "prompt": "우주 쓰레기를 처리하는 데 쓰이는 방법이나 도구를 모두 찾으시오.",
+          "answerTexts": [
+            "로봇 팔",
+            "그물",
+            "레이저"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 11,
               "end": 15
+            },
+            {
+              "paragraphId": "p3",
+              "start": 40,
+              "end": 42
+            },
+            {
+              "paragraphId": "p3",
+              "start": 45,
+              "end": 48
             }
           ],
           "scoring": {
@@ -648,14 +650,14 @@
         },
         {
           "id": "q5",
-          "prompt": "우주 쓰레기 발생을 줄이기 위해 필요하다고 한 것은 무엇인가요?",
-          "answerText": "규제",
+          "prompt": "지속 가능한 우주 개발을 위해 마련해야 한다고 한 것을 찾으시오.",
+          "answerText": "적극적인 대책",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 28,
-              "end": 30
+              "start": 55,
+              "end": 62
             }
           ],
           "scoring": {

@@ -913,24 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "유물을 관람객에게 보여주기 위해 준비하는 모든 과정을 무엇이라고 하나요?",
-          "answerText": "전시 기획",
+          "prompt": "전시 기획이 뜻하는 과정을 지문에서 찾아 쓰시오.",
+          "answerText": "유물을 관람객에게 보여주기 위해 준비하는 모든 과정",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 72,
-              "end": 77
-            },
-            {
-              "paragraphId": "p1",
-              "start": 86,
-              "end": 91
-            },
-            {
-              "paragraphId": "p4",
-              "start": 129,
-              "end": 134
+              "start": 42,
+              "end": 70
             }
           ],
           "scoring": {
@@ -941,31 +931,13 @@
         },
         {
           "id": "q2",
-          "prompt": "박물관에서 보관 중인 유물을 전시할 때 먼저 살피는 곳은 어디인가요?",
-          "answerText": "수장고",
+          "prompt": "전시 기획에서 가장 중요하다고 한 주제를 지문에서 찾아 쓰시오.",
+          "answerText": "사람들의 흥미를 끌 수 있는 재미있는 주제",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 43,
-              "end": 46
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "관람객이 유물의 의미를 쉽게 이해하도록 꼼꼼하게 작성하는 것은 무엇인가요?",
-          "answerText": "설명 글",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 154,
+              "paragraphId": "p1",
+              "start": 135,
               "end": 158
             }
           ],
@@ -976,15 +948,49 @@
           "revealOnWrong": true
         },
         {
+          "id": "q3",
+          "prompt": "유물들이 담고 있어서 서로 어울리게 배치해야 하는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "역사",
+            "사연"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 99,
+              "end": 101
+            },
+            {
+              "paragraphId": "p2",
+              "start": 103,
+              "end": 105
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q4",
-          "prompt": "전시실에서 관람객이 편안하게 볼 수 있도록 밝기를 조절하는 것은 무엇인가요?",
-          "answerText": "조명",
-          "answerMatchMode": "ANY",
+          "prompt": "전시실을 더욱 생생하게 연출할 때 활용하는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "영상",
+            "소리"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 32,
-              "end": 34
+              "start": 80,
+              "end": 82
+            },
+            {
+              "paragraphId": "p3",
+              "start": 85,
+              "end": 87
             }
           ],
           "scoring": {
@@ -995,14 +1001,14 @@
         },
         {
           "id": "q5",
-          "prompt": "전시를 알리기 위해 만드는 것은 무엇인가요?",
-          "answerText": "포스터",
+          "prompt": "박물관 전시 기획은 과거의 유물에 무엇을 불어넣는 일인지 지문에서 찾아 쓰시오.",
+          "answerText": "새로운 생명",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 14,
-              "end": 17
+              "start": 144,
+              "end": 150
             }
           ],
           "scoring": {

@@ -850,19 +850,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "하얀 ( ) 씨앗이 됩니다.",
-          "answerText": "솜털",
-          "answerMatchMode": "EXACT",
+          "prompt": "민들레 씨앗의 모습과 움직임을 모두 찾으시오.",
+          "answerTexts": [
+            "하얀 솜털 씨앗",
+            "바람을 타고 멀리 날아가는 모습"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 42,
-              "end": 44
+              "start": 39,
+              "end": 47
             },
             {
-              "paragraphId": "p2",
-              "start": 53,
-              "end": 55
+              "paragraphId": "p1",
+              "start": 52,
+              "end": 69
             }
           ],
           "scoring": {
@@ -874,14 +877,22 @@
         },
         {
           "id": "q2",
-          "prompt": "자연의 ( ) 과정을 공부해요.",
-          "answerText": "순환",
-          "answerMatchMode": "EXACT",
+          "prompt": "씨앗이 멀리 날아가기 위해 필요한 조건을 모두 찾으시오.",
+          "answerTexts": [
+            "가벼운 무게",
+            "바람의 힘"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 109,
-              "end": 111
+              "paragraphId": "p2",
+              "start": 28,
+              "end": 34
+            },
+            {
+              "paragraphId": "p2",
+              "start": 36,
+              "end": 41
             }
           ],
           "scoring": {
@@ -893,14 +904,41 @@
         },
         {
           "id": "q3",
-          "prompt": "끈질긴 ( )력을 본받고 싶음.",
-          "answerText": "생명",
-          "answerMatchMode": "EXACT",
+          "prompt": "솜털 날개가 씨앗을 어떻게 돕는지 찾으시오.",
+          "answerText": "씨앗이 둥둥 뜨게 도와주는 중임",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 60,
+              "end": 77
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "본받고 싶은 점과 소중히 여기기로 한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "민들레의 끈질긴 생명력",
+            "주변의 작은 풀꽃 하나"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 35,
-              "end": 37
+              "start": 26,
+              "end": 38
+            },
+            {
+              "paragraphId": "p3",
+              "start": 53,
+              "end": 65
             }
           ],
           "scoring": {

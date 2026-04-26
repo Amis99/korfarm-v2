@@ -913,7 +913,25 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 충돌한다고 한 두 가지 중요한 가치는 무엇인가요?",
+          "prompt": "학교 교실에서 작은 갈등이 벌어지는 대상은 무엇인가요? 지문에서 찾으시오.",
+          "answerText": "에어컨과 난로 사용",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 38,
+              "end": 48
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "이 문제가 돈 문제를 넘어서 충돌한다고 한 두 가지 중요한 가치는 무엇인가요? 지문에서 찾으시오.",
           "answerText": "환경과 학습권",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -930,33 +948,23 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "에어컨 사용 제한을 주장하는 쪽이 실내 적정 온도로 제시한 온도는 몇 도인가요?",
-          "answerText": "26도",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 218,
-              "end": 221
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q3",
-          "prompt": "화석 연료를 태워 심해진다고 한 무서운 위기는 무엇인가요?",
-          "answerText": "기후 위기",
-          "answerMatchMode": "ANY",
+          "prompt": "에어컨 사용을 제한해야 한다고 주장하는 사람들이 가장 중요한 이유로 꼽은 것은 무엇인가요? 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "환경 보호",
+            "낭비 방지"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 175,
-              "end": 180
+              "start": 31,
+              "end": 36
+            },
+            {
+              "paragraphId": "p2",
+              "start": 38,
+              "end": 43
             }
           ],
           "scoring": {
@@ -967,19 +975,14 @@
         },
         {
           "id": "q4",
-          "prompt": "학생들의 자율을 주장하는 쪽이 먼저 생각해야 한다고 한 권리는 무엇인가요?",
-          "answerText": "학습권",
+          "prompt": "자율을 주장하는 사람들이 먼저 생각한다고 한 것은 무엇인가요? 지문에서 찾으시오.",
+          "answerText": "학생들의 쾌적한 학습권과 건강",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 238,
-              "end": 241
-            },
-            {
               "paragraphId": "p3",
-              "start": 49,
-              "end": 52
+              "start": 40,
+              "end": 56
             }
           ],
           "scoring": {
@@ -990,14 +993,22 @@
         },
         {
           "id": "q5",
-          "prompt": "모두가 만족할 수 있는 규칙을 위해 찾아야 한다고 한 것은 무엇인가요?",
-          "answerText": "타협점",
-          "answerMatchMode": "ANY",
+          "prompt": "에어컨을 틀 때와 쓰지 않을 때 해야 할 타협 방법은 무엇인가요? 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "문을 닫거나",
+            "코드를 뽑는"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 181,
-              "end": 184
+              "start": 158,
+              "end": 164
+            },
+            {
+              "paragraphId": "p4",
+              "start": 174,
+              "end": 180
             }
           ],
           "scoring": {

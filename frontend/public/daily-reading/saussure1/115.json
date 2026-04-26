@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "학교 앞 작은 무엇에 심인가요?",
+          "prompt": "채소를 심어 가꾸는 작은 밭을 무엇이라고 하나요? 지문에서 찾아 보세요",
           "answerText": "텃밭",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -581,13 +581,23 @@
         },
         {
           "id": "q2",
-          "prompt": "방울무엇가 자라고 있나요?",
-          "answerText": "토마토",
-          "answerMatchMode": "EXACT",
+          "prompt": "텃밭에서 무럭무럭 자라고 있는 채소 세 가지를 모두 찾아 보세요",
+          "answerText": "상추, 고추, 방울토마토",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 39,
+              "start": 29,
+              "end": 31
+            },
+            {
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 35
+            },
+            {
+              "paragraphId": "p1",
+              "start": 37,
               "end": 42
             }
           ],
@@ -600,14 +610,33 @@
         },
         {
           "id": "q3",
-          "prompt": "무엇를 뽑아 주어야 하나요?",
-          "answerText": "잡초",
-          "answerMatchMode": "EXACT",
+          "prompt": "잡초를 뽑아 주는 까닭은 식물이 무엇을 잘 받게 하기 위함인가요?",
+          "answerText": "햇빛",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 2
+              "start": 10,
+              "end": 12
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "수확한 채소로 만든 반찬을 먹으면 어떻게 된다고 했나요? 지문에서 찾아 보세요",
+          "answerText": "건강",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 83,
+              "end": 85
             }
           ],
           "scoring": {

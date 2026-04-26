@@ -549,7 +549,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "도화지에 아름다운 그림을 즐겁게 색칠하며 그릴 때 쓰는 길쭉한 도구로, 여러 가지 다른 화려하고 예쁜 색깔의 무지개 심이 들어 있는 예쁜 나무 연필은?",
+          "prompt": "여러 가지 빛깔의 심을 가진 그림 도구로, 보관할 때 뚜껑을 닫아 굳지 않도록 해야 하는 학용품의 이름이 무엇인지 찾아보세요",
           "answerText": "색연필",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -560,69 +560,86 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "두꺼운 동화책 도서를 도중에 덮어 두어야 할 때, 나중에 다시 펼쳐 이어 읽기 쉽도록 잃어버리지 않게 책장 사이에 끼워 놓는 종이나 예쁜 끈 모양의 물건은?",
-          "answerText": "책갈피",
+          "prompt": "글에서 물건을 아껴 쓰면 새것을 덜 사도 되어서 무엇을 할 수 있다고 했는지 떠올려 보세요",
+          "answerText": "돈을 절약",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 83,
-              "end": 86
+              "paragraphId": "p2",
+              "start": 24,
+              "end": 29
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "물건을 아껴 쓰고 쓰레기를 덜 버려 우리가 보호해야 하는, 사람과 모든 동물이 살아가는 주변의 푸른 숲이나 맑은 공기 등 소중한 지구의 전체 자연 상태는?",
-          "answerText": "환경",
-          "answerMatchMode": "ANY",
+          "prompt": "공장에서 새 물건을 덜 만들면 어떤 두 가지 좋은 점이 생긴다고 했는지 모두 찾으시오.",
+          "answerText": "자원을 아끼고, 환경을 지킬",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 67,
-              "end": 69
+              "start": 59,
+              "end": 66
             },
             {
-              "paragraphId": "p3",
-              "start": 101,
-              "end": 103
+              "paragraphId": "p2",
+              "start": 67,
+              "end": 73
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true
+          "revealOnWrong": true,
+          "answerTexts": [
+            "자원을 아끼고",
+            "환경을 지킬"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "마를 아껴 쓰기 위해서, 공장에서 갓 만들어진 새것이 아니라 다른 누군가가 이미 사용한 적이 있거나 갖고 있던 헌 물건을 흔히 다른 말로 일컫는 이름은?",
-          "answerText": "중고",
-          "answerMatchMode": "ANY",
+          "prompt": "더 이상 쓰지 않는 물건을 다른 사람과 나누어 쓰는 두 가지 방법이 무엇인지 모두 찾으시오.",
+          "answerText": "필요한 친구에게 나눠 주거나, 중고로 판매",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
+              "start": 15,
+              "end": 30
+            },
+            {
+              "paragraphId": "p3",
               "start": 31,
-              "end": 33
+              "end": 37
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true
+          "revealOnWrong": true,
+          "answerTexts": [
+            "필요한 친구에게 나눠 주거나",
+            "중고로 판매"
+          ]
         }
       ]
     }

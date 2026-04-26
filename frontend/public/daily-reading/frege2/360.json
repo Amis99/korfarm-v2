@@ -884,7 +884,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "회의가 열린 곳은 어디인가요?",
+          "prompt": "회의가 열린 장소를 지문에서 찾으시오.",
           "answerText": "평화동 주민 센터",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -902,14 +902,14 @@
         },
         {
           "id": "q2",
-          "prompt": "양측이 합의한 음악 행사 종료 시각은 언제인가요?",
-          "answerText": "저녁 아홉 시 반",
+          "prompt": "주민 대표가 소음으로 인한 피해라고 든 어구를 찾으시오.",
+          "answerText": "수면 부족",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 120,
-              "end": 129
+              "paragraphId": "p1",
+              "start": 75,
+              "end": 80
             }
           ],
           "scoring": {
@@ -920,7 +920,25 @@
         },
         {
           "id": "q3",
-          "prompt": "행사장 주변에 설치하기로 한 것은 무엇인가요?",
+          "prompt": "공연 시간에 대해 주민 대표가 제안한 내용을 지문에서 찾으시오.",
+          "answerText": "공연 시간을 저녁 아홉 시로 제한",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 20,
+              "end": 38
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "소음 피해를 최소화하기 위해 행사장 주변에 설치할 것을 찾으시오.",
           "answerText": "소음 차단벽",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -937,26 +955,8 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "기준치를 넘는 소음을 바로 확인하기 위해 도입하기로 한 것은 무엇인가요?",
-          "answerText": "실시간 소음 측정기",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 89,
-              "end": 99
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q5",
-          "prompt": "이번 회의가 보여 준 것으로 평가한 것은 무엇인가요?",
+          "prompt": "이번 회의가 보여 준 시민의 태도를 나타내는 표현을 찾으시오.",
           "answerText": "성숙한 시민 의식",
           "answerMatchMode": "ANY",
           "answerRanges": [

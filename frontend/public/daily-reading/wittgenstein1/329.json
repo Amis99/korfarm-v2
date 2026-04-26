@@ -571,48 +571,63 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "중심 대상은 무엇인가요?",
+          "prompt": "피동 표현의 뜻을 설명한 문장을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 58
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "피동 표현은 주체가 어떤 행위를 직접 하는 대신 그 행위를 당하거나 겪는 관계를 드러내는 문장 방식이다."
+        },
+        {
+          "id": "q2",
+          "prompt": "국어에서 피동 표현이 크게 무엇으로 나뉜다고 하는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 68,
+              "end": 82
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "파생적 피동과 통사적 피동"
+        },
+        {
+          "id": "q3",
+          "prompt": "파생적 피동을 만드는 접미사를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 106,
               "end": 109
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "-이-"
-        },
-        {
-          "id": "q2",
-          "prompt": "핵심 개념은 무엇인가요?",
-          "answerRanges": [
+            },
             {
-              "paragraphId": "p2",
-              "start": 168,
-              "end": 183
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "있는지와 문장에서 자연스럽게"
-        },
-        {
-          "id": "q3",
-          "prompt": "주요 소재는 무엇인가요?",
-          "answerRanges": [
+              "paragraphId": "p1",
+              "start": 113,
+              "end": 116
+            },
             {
-              "paragraphId": "p3",
-              "start": 7,
-              "end": 9
+              "paragraphId": "p1",
+              "start": 120,
+              "end": 123
+            },
+            {
+              "paragraphId": "p1",
+              "start": 127,
+              "end": 130
             }
           ],
           "scoring": {
@@ -620,16 +635,80 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "잡다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "-이-",
+            "-히-",
+            "-리-",
+            "-기-"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "문장의 목적어가 실제로 동작의 영향을 받는 대상인지, 문장 전체 의미가 무엇를 따져야 한다?",
+          "prompt": "모든 능동사가 파생적 피동으로 바뀌지 않는 이유를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 33,
+              "end": 69
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "어떤 동사는 의미 구조상 피동 접미사가 자연스럽게 결합하지 않아서"
+        },
+        {
+          "id": "q5",
+          "prompt": "'잡다'의 파생적 피동 예시로 제시된 말을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 13,
+              "end": 16
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "잡히다"
+        },
+        {
+          "id": "q6",
+          "prompt": "피동사로 파생되지 않는 동사의 예를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 62,
+              "end": 64
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "먹다"
+        },
+        {
+          "id": "q7",
+          "prompt": "피동사가 있어도 능동문을 바꿀 때 따져야 할 두 대상을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 87,
+              "start": 47,
+              "end": 75
+            },
+            {
+              "paragraphId": "p4",
+              "start": 77,
               "end": 102
             }
           ],
@@ -638,35 +717,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "피동으로 바뀌어도 유지되는지"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "문장의 목적어가 실제로 동작의 영향을 받는 대상인지",
+            "문장 전체 의미가 피동으로 바뀌어도 유지되는지"
+          ]
         },
         {
-          "id": "q5",
-          "prompt": "한자어 계열 동사에서는 '무엇'나 '-어지다' 계열 표현이 많이 쓰이는 점도 주의할 필요가 있다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 14,
-              "end": 17
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "-되다"
-        },
-        {
-          "id": "q6",
-          "prompt": "둘째, 설령 피동사가 있더라도 그 문장이 실제로 피동 무엇 따진다?",
+          "id": "q8",
+          "prompt": "피동 표현 학습이 함께 판별해야 하는 두 범위를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 96,
-              "end": 111
+              "start": 155,
+              "end": 164
+            },
+            {
+              "paragraphId": "p6",
+              "start": 166,
+              "end": 175
             }
           ],
           "scoring": {
@@ -674,8 +743,11 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "관계를 자연스럽게 나타내는지"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "동사의 의미 특성",
+            "문장 전체의 관계"
+          ]
         }
       ]
     }

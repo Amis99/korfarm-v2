@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 이 문법 개념을 어떤 원리나 기준으로 소개하는가?",
+          "prompt": "자음군 단순화의 정의를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 164
+              "end": 76
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "자음군 단순화는 받침 자리에 둘 이상의 자음을 그대로 발음할 수 없어서, 겹받침 가운데 한 자음만 남기고 다른 자음이 탈락하는 현상이다. ‘흙’이 [흑], ‘삶’이 [삼]으로 발음되는 것이 대표적이다. 이 현상은 음절 끝에서 허용되는 자음 수가 제한되어 있다는 국어 음운 체계와 관련되어 있다."
+          "answerText": "자음군 단순화는 받침 자리에 둘 이상의 자음을 그대로 발음할 수 없어서, 겹받침 가운데 한 자음만 남기고 다른 자음이 탈락하는 현상이다."
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 이 문법 개념의 핵심을 어떻게 정리하는가?",
+          "prompt": "자음군 단순화의 대표적 예 두 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 188
+              "paragraphId": "p1",
+              "start": 77,
+              "end": 85
+            },
+            {
+              "paragraphId": "p1",
+              "start": 87,
+              "end": 95
             }
           ],
           "scoring": {
@@ -602,17 +607,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "다만 겹받침이 있다고 해서 언제나 자음군 단순화가 일어나는 것은 아니다. 뒤에 모음이 이어지면 받침 일부가 다음 음절로 이어져 연음될 수 있기 때문이다. 그래서 ‘흙이’는 [흘기], ‘삶이’는 [살미]처럼 발음되며, 이 경우에는 자음군 단순화가 일어나지 않았다고 본다. 결국 뒤에 오는 소리가 자음인지 모음인지가 판단의 첫 기준이 된다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "‘흙’이 [흑]",
+            "‘삶’이 [삼]"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 이 문법 개념에서 어떤 기준이나 관계를 보여 주는가?",
+          "prompt": "뒤에 모음이 이어질 때 자음군 단순화가 일어나지 않을 수 있는 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 206
+              "paragraphId": "p2",
+              "start": 41,
+              "end": 84
             }
           ],
           "scoring": {
@@ -621,16 +629,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "자음군 단순화와 비슷해 보이지만 다른 현상으로 ㅎ 탈락이 있다. ‘많아’, ‘않은’, ‘싫어’처럼 겹받침 안의 ‘ㅎ’이 사라지는 경우를 자음군 단순화로 오해하기 쉽지만, 여기서는 단순히 받침 하나가 사라진 것이 아니라 ㅎ이 이어지는 환경 속에서 별도의 탈락 현상을 보인다고 이해해야 한다. 따라서 겹받침이라는 겉모양만 보고 두 현상을 한데 묶으면 분석이 틀어지기 쉽다."
+          "answerText": "뒤에 모음이 이어지면 받침 일부가 다음 음절로 이어져 연음될 수 있기 때문이다"
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 이 문법 개념에서 어떤 예외나 한계를 드러내는가?",
+          "prompt": "자음군 단순화 여부를 판단하는 첫 기준을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 200
+              "paragraphId": "p2",
+              "start": 154,
+              "end": 173
             }
           ],
           "scoring": {
@@ -639,16 +647,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 둘을 구별할 때는 어떤 자음이 왜 없어졌는지를 따져야 한다. 자음군 단순화에서는 종성에 두 자음을 유지할 수 없다는 음절 구조 제약이 직접 원인이 된다. 반면 ㅎ 탈락은 ㅎ이 특정 환경에서 실현되지 못하는 음운 규칙에 가깝다. 그래서 같은 겹받침이라도 하나는 ‘종성 제약’이 핵심이고, 다른 하나는 ‘ㅎ의 약화와 탈락’이 핵심이라는 점에서 성격이 다르다."
+          "answerText": "뒤에 오는 소리가 자음인지 모음인지"
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 예시를 통해 이 문법 개념의 어떤 특징이나 적용 방식을 보여 주는가?",
+          "prompt": "ㅎ 탈락으로 오해하기 쉬운 예 세 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 206
+              "paragraphId": "p3",
+              "start": 36,
+              "end": 40
+            },
+            {
+              "paragraphId": "p3",
+              "start": 42,
+              "end": 46
+            },
+            {
+              "paragraphId": "p3",
+              "start": 48,
+              "end": 52
             }
           ],
           "scoring": {
@@ -656,17 +674,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "실제 발음에서는 다른 규칙이 뒤이어 나타나기도 한다. 예를 들어 ‘읽는’은 먼저 자음군 단순화로 [익는]에 가까운 단계가 되고, 이어서 비음화가 일어나 [잉는]으로 발음된다. ‘밟는’도 자음군 단순화 뒤에 비음화가 이어질 수 있다. 이처럼 하나의 단어 안에서 여러 음운 변동이 연속해서 일어나므로, 최종 발음만 보고 규칙 하나로 설명하려 하면 중간 과정을 놓치게 된다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "‘많아’",
+            "‘않은’",
+            "‘싫어’"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 이 문법 개념의 핵심을 어떻게 정리하는가?",
+          "prompt": "자음군 단순화에서 직접 원인이 되는 제약을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 218
+              "paragraphId": "p4",
+              "start": 47,
+              "end": 75
             }
           ],
           "scoring": {
@@ -675,7 +697,57 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정리하면 자음군 단순화는 ‘겹받침이 종성에서 하나로 줄어드는가’를 묻는 규칙이고, ㅎ 탈락은 ‘겹받침 속 ㅎ이 어떤 환경에서 사라지는가’를 묻는 규칙이다. 두 현상 모두 결과적으로 소리가 줄어드는 것처럼 보이지만, 적용 이유와 판단 기준이 다르다. 따라서 단어를 분석할 때는 겹받침의 구성, 뒤에 오는 형태, 뒤이어 다른 음운 변동이 이어지는지까지 차례로 살펴보아야 정확한 설명이 가능하다."
+          "answerText": "종성에 두 자음을 유지할 수 없다는 음절 구조 제약"
+        },
+        {
+          "id": "q7",
+          "prompt": "‘읽는’에서 [익는] 단계 뒤 이어서 일어나는 변동을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 72,
+              "end": 96
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "이어서 비음화가 일어나 [잉는]으로 발음된다"
+        },
+        {
+          "id": "q8",
+          "prompt": "단어를 분석할 때 차례로 살펴보아야 할 세 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 154,
+              "end": 161
+            },
+            {
+              "paragraphId": "p6",
+              "start": 163,
+              "end": 171
+            },
+            {
+              "paragraphId": "p6",
+              "start": 173,
+              "end": 192
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "겹받침의 구성",
+            "뒤에 오는 형태",
+            "뒤이어 다른 음운 변동이 이어지는지"
+          ]
         }
       ]
     }

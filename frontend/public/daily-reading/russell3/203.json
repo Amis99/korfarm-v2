@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"문장에서 움직임이나 상태를 나타내는 말로, 동사와 형용사가 여기에 해당한다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "용언의 뜻을 설명한 부분을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 223
+              "start": 4,
+              "end": 25
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "용언은 문장에서 움직임이나 상태를 나타내는 말로, 동사와 형용사가 여기에 해당한다. 용언은 문장 안에서 쓰일 때 다양한 어미가 붙으면서 형태가 달라지는데, 이러한 변화를 활용이라고 한다. 예를 들어 '먹다'는 '먹고, 먹으니, 먹으면'처럼 바뀌고, '크다'는 '크고, 크니, 크면'처럼 바뀐다. 따라서 용언의 활용을 이해한다는 것은 어간과 어미가 만날 때 어떤 형태 변화가 일어나는지를 읽는 일이다."
+          "answerText": "문장에서 움직임이나 상태를 나타내는 말"
         },
         {
           "id": "q2",
-          "prompt": "\"볼 때 먼저 구분해야 할 것은 어간과 어미이다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "용언에 해당하는 품사를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 30
+              "paragraphId": "p1",
+              "start": 28,
+              "end": 35
             }
           ],
           "scoring": {
@@ -603,16 +603,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "볼 때 먼저 구분해야 할 것은 어간과 어미이다."
+          "answerText": "동사와 형용사"
         },
         {
           "id": "q3",
-          "prompt": "\"어간이 크게 달라지지 않고 어미만 자연스럽게 붙는 경우를 말한다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "어간과 어미의 뜻을 설명한 부분을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 35,
+              "end": 48
+            },
+            {
+              "paragraphId": "p2",
+              "start": 56,
+              "end": 88
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "뜻의 중심을 이루는 부분",
+            "시제나 높임, 문장의 종류 같은 문법 기능을 덧붙이는 부분"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "규칙 활용의 뜻을 설명한 부분을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 7,
-              "end": 43
+              "end": 37
             }
           ],
           "scoring": {
@@ -621,34 +647,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "어간이 크게 달라지지 않고 어미만 자연스럽게 붙는 경우를 말한다."
-        },
-        {
-          "id": "q4",
-          "prompt": "\"어간이나 어미의 모양이 일정한 방식으로 달라지는 경우이다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 11,
-              "end": 43
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "어간이나 어미의 모양이 일정한 방식으로 달라지는 경우이다."
+          "answerText": "어간이 크게 달라지지 않고 어미만 자연스럽게 붙는 경우"
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '어미 선택에 따라 의미 차이가 드러나기도 한다.'을(를) 모두 찾으시오.",
+          "prompt": "불규칙 활용을 정확히 이해하려면 함께 살펴야 한다고 한 것을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 10,
-              "end": 36
+              "paragraphId": "p4",
+              "start": 178,
+              "end": 195
             }
           ],
           "scoring": {
@@ -657,16 +665,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "어미 선택에 따라 의미 차이가 드러나기도 한다."
+          "answerText": "바뀌는 조건과 바뀌지 않는 경우"
         },
         {
           "id": "q6",
-          "prompt": "\"맞춤법과 문장 표현을 정확하게 쓰는 데 직접 연결된다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "어간과 어미를 잘못 나누면 높임이나 시제에서 생길 수 있는 문제를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 8,
-              "end": 38
+              "start": 94,
+              "end": 124
             }
           ],
           "scoring": {
@@ -675,7 +683,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "맞춤법과 문장 표현을 정확하게 쓰는 데 직접 연결된다."
+          "answerText": "높임이나 시제를 나타내는 어미 선택도 어색해질 수 있다"
         }
       ]
     }

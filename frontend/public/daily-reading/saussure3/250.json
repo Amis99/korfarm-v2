@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "순서를 지키는 상태는?",
-          "answerText": "질서를",
-          "answerMatchMode": "EXACT",
+          "prompt": "눈 위를 쌩쌩 달릴 때 기분을 나타낸 어구를 찾으시오.",
+          "answerText": "상쾌하고 좋았습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 68,
-              "end": 71
+              "start": 52,
+              "end": 62
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "지나간 일의 기억은?",
-          "answerText": "추억이",
-          "answerMatchMode": "EXACT",
+          "prompt": "차례를 기다리며 우리가 지킨 행동을 찾으시오.",
+          "answerText": "질서를 지키며",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 83,
-              "end": 86
+              "paragraphId": "p1",
+              "start": 68,
+              "end": 75
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "마음이 따뜻한 상태는?",
-          "answerText": "훈훈함",
-          "answerMatchMode": "EXACT",
+          "prompt": "동생을 챙겨 주는 모습으로 제시된 행동을 찾으시오.",
+          "answerText": "동생의 썰매를 밀어주며",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 12
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "집으로 돌아와 즐거웠던 장면을 무엇으로 남겼는지 찾으시오.",
+          "answerText": "그림으로",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 57,
-              "end": 60
+              "start": 17,
+              "end": 21
             }
           ],
           "scoring": {

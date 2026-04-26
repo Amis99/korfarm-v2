@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "흙 속에 ( )처럼 복잡한 집.",
-          "answerText": "미로",
-          "answerMatchMode": "EXACT",
+          "prompt": "흙 속에 미로처럼 복잡하게 얽힌 소중한 장소를 무엇이라고 했는지 찾으시오.",
+          "answerText": "보금자리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 28,
-              "end": 30
+              "start": 45,
+              "end": 49
             }
           ],
           "scoring": {
@@ -869,19 +869,22 @@
         },
         {
           "id": "q2",
-          "prompt": "개미는 ( )에서 중요합니다.",
-          "answerText": "생태계",
-          "answerMatchMode": "EXACT",
+          "prompt": "개미집에서 서로를 돌보며 살아가는 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "여왕개미",
+            "일개미들"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 36,
-              "end": 39
+              "paragraphId": "p1",
+              "start": 52,
+              "end": 56
             },
             {
-              "paragraphId": "p3",
-              "start": 80,
-              "end": 83
+              "paragraphId": "p1",
+              "start": 58,
+              "end": 62
             }
           ],
           "scoring": {
@@ -893,14 +896,33 @@
         },
         {
           "id": "q3",
-          "prompt": "자연의 ( )를 배웁니다.",
-          "answerText": "신비",
-          "answerMatchMode": "EXACT",
+          "prompt": "개미가 흙을 골고루 섞어 무엇을 잘 자라게 돕는지 찾으시오.",
+          "answerText": "식물",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 16,
-              "end": 18
+              "paragraphId": "p2",
+              "start": 65,
+              "end": 67
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "생명을 귀하게 여기는 태도가 우리에게 가져오는 결과를 찾으시오.",
+          "answerText": "성장하게 함",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 133,
+              "end": 139
             }
           ],
           "scoring": {

@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "준비 ( )을 정리해 봅시다.",
-          "answerText": "과정",
-          "answerMatchMode": "EXACT",
+          "prompt": "횡단보도를 건너기 전, 어디에 서서 발을 가지런히 모아야 하는지 지문에서 찾으시오.",
+          "answerText": "정지선 뒤",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 15,
-              "end": 17
+              "start": 31,
+              "end": 36
             }
           ],
           "scoring": {
@@ -869,13 +869,13 @@
         },
         {
           "id": "q2",
-          "prompt": "왼쪽 ( )을 번쩍 들어요.",
-          "answerText": "손",
-          "answerMatchMode": "EXACT",
+          "prompt": "건너고 있음을 알리기 위해 들어야 하는 것은 무엇인지 지문에서 찾으시오.",
+          "answerText": "왼쪽 손",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 30,
+              "start": 27,
               "end": 31
             }
           ],
@@ -888,19 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "안전 수칙을 ( ) 정리해요.",
-          "answerText": "스스로",
-          "answerMatchMode": "EXACT",
+          "prompt": "건너는 중에도 계속해서 살펴야 하는 것은 무엇인지 지문에서 찾으시오.",
+          "answerText": "차가 오는지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 107,
-              "end": 110
-            },
+              "paragraphId": "p2",
+              "start": 62,
+              "end": 68
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "정해진 약속을 지키는 일이 무엇보다 어떠하다고 했는지 지문에서 찾으시오.",
+          "answerText": "가치 있음",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 7,
-              "end": 10
+              "start": 100,
+              "end": 105
             }
           ],
           "scoring": {

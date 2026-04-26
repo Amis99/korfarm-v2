@@ -474,20 +474,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "시끄러운 상태?",
-          "answerText": "소란",
-          "answerMatchMode": "EXACT",
+          "prompt": "민수에게 비밀 장소를 알려준 작은 바닷속 동물의 이름을 글에서 찾아 보세요",
+          "answerText": "소라",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 128,
-              "end": 130
-            },
-            {
-              "paragraphId": "p2",
-              "start": 111,
-              "end": 113
-            }
+            {"paragraphId": "p2", "start": 50, "end": 52},
+            {"paragraphId": "p2", "start": 96, "end": 98}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -498,15 +490,11 @@
         },
         {
           "id": "q2",
-          "prompt": "깊이 패인 바위 구멍?",
-          "answerText": "동굴",
-          "answerMatchMode": "EXACT",
+          "prompt": "소라가 민수의 발등을 두드리는 소리를 흉내 낸 두 글자 의성어를 글에서 찾아 보세요",
+          "answerText": "톡톡",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 128,
-              "end": 130
-            }
+            {"paragraphId": "p2", "start": 73, "end": 75}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -517,30 +505,27 @@
         },
         {
           "id": "q3",
-          "prompt": "옆으로 걷는 동물?",
-          "answerText": "꽃게",
-          "answerMatchMode": "EXACT",
+          "prompt": "소라의 안내로 민수가 도착한 안전한 장소의 이름을 글에서 찾아 보세요",
+          "answerText": "동굴",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 25,
-              "end": 27
-            },
-            {
-              "paragraphId": "p1",
-              "start": 40,
-              "end": 42
-            },
-            {
-              "paragraphId": "p1",
-              "start": 102,
-              "end": 104
-            },
-            {
-              "paragraphId": "p2",
-              "start": 24,
-              "end": 26
-            }
+            {"paragraphId": "p2", "start": 128, "end": 130}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "민수가 빼앗기지 않으려고 가슴에 꼭 품은 물건의 이름을 글에서 찾아 보세요",
+          "answerText": "왕관",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 55, "end": 57},
+            {"paragraphId": "p1", "start": 143, "end": 145}
           ],
           "scoring": {
             "correctDeltaSec": 10,

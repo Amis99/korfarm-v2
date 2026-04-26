@@ -914,19 +914,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "놀이터 안내판 설치를 건의한 학생 대표의 이름은 무엇인가요?",
-          "answerText": "김민준",
+          "prompt": "놀이터에서 빈번하게 발생한다고 한 사고를 가리키는 낱말을 찾으시오.",
+          "answerText": "안전사고",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 6,
-              "end": 9
-            },
-            {
-              "paragraphId": "p3",
-              "start": 37,
-              "end": 40
+              "paragraphId": "p1",
+              "start": 126,
+              "end": 130
             }
           ],
           "scoring": {
@@ -937,19 +932,14 @@
         },
         {
           "id": "q2",
-          "prompt": "그림이 들어간 안내판이 필요하다고 덧붙인 주민 대표는 누구인가요?",
-          "answerText": "이영희",
+          "prompt": "이 회의가 마련된 이유를 나타내는 구절을 찾으시오.",
+          "answerText": "놀이터에서 빈번하게 발생하는 안전사고를 줄이기 위해",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 116,
-              "end": 119
-            },
-            {
-              "paragraphId": "p3",
-              "start": 79,
-              "end": 82
+              "paragraphId": "p1",
+              "start": 110,
+              "end": 138
             }
           ],
           "scoring": {
@@ -960,19 +950,14 @@
         },
         {
           "id": "q3",
-          "prompt": "다음 달 초까지 안내판을 설치하겠다고 약속한 사람은 누구인가요?",
-          "answerText": "박태호",
+          "prompt": "위험한 행동의 예로 든 행동을 지문에서 찾으시오.",
+          "answerText": "미끄럼틀을 거꾸로 타는",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 174,
-              "end": 177
-            },
-            {
-              "paragraphId": "p3",
-              "start": 128,
-              "end": 131
+              "start": 58,
+              "end": 70
             }
           ],
           "scoring": {
@@ -983,19 +968,14 @@
         },
         {
           "id": "q4",
-          "prompt": "어른들이 번갈아 살펴보는 활동을 무엇이라고 했나요?",
-          "answerText": "안전 지킴이 활동",
+          "prompt": "어른들이 번갈아 가며 놀이터를 살펴보는 활동을 제안한 사람을 찾으시오.",
+          "answerText": "이영희 대표",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 109,
-              "end": 118
-            },
-            {
-              "paragraphId": "p4",
-              "start": 75,
-              "end": 84
+              "start": 79,
+              "end": 85
             }
           ],
           "scoring": {
@@ -1006,14 +986,22 @@
         },
         {
           "id": "q5",
-          "prompt": "게시판을 통해 모집하겠다고 한 사람들은 누구인가요?",
-          "answerText": "자원봉사자",
-          "answerMatchMode": "ANY",
+          "prompt": "회의 결과 하기로 결정하거나 합의한 일을 모두 찾으시오.",
+          "answerTexts": [
+            "놀이터에 그림이 포함된 안전수칙 안내판을 설치하기로 결정했습니다",
+            "주민들이 자발적으로 참여하는 놀이터 안전 지킴이 활동을 시작하기로 합의했습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 152,
-              "end": 157
+              "paragraphId": "p4",
+              "start": 15,
+              "end": 50
+            },
+            {
+              "paragraphId": "p4",
+              "start": 55,
+              "end": 98
             }
           ],
           "scoring": {

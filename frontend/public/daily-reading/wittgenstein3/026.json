@@ -1200,30 +1200,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 학교 도서관 이용 실태 설문을 반영한 운영 제안문 초고와 관련해 글을 쓰게 된 문제의식을 어떻게 밝히는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 219
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "안녕하세요. 학생회 학습 환경 개선부는 지난달 실시한 학교 도서관 이용 실태 설문과 도서관 출입 기록을 바탕으로 도서관 운영 개선안을 제안하고자 합니다. 이번 설문에는 전교생 612명 중 428명이 참여하였고, 응답자의 71퍼센트가 시험 기간뿐 아니라 평상시에도 도서관을 자주 이용한다고 답했습니다. 그런데 만족도는 높지 않았고, 특히 좌석 부족과 운영 시간 문제를 가장 많이 지적하였습니다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 현재 상황이나 조사 내용을 어떤 방향으로 제시하는가?",
+          "prompt": "설문에 나타난 도서관 이용 목적의 순서를 보여 주는 어구를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 217
+              "start": 34,
+              "end": 50
             }
           ],
           "scoring": {
@@ -1232,16 +1214,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "설문 결과를 자세히 보면, 학생들이 도서관을 이용하는 목적은 자습, 자료 대출, 모둠 과제 순으로 나타났습니다. 하지만 오후 4시 이후에는 열람 좌석이 빨리 차서 실제로 공부하려고 와도 그냥 돌아간다는 응답이 많았습니다. 출입 기록에서도 방과 후 1시간 동안 이용자가 집중되는 현상이 확인되었는데, 이런 점을 보면 현재 운영 방식이 학생들의 실제 이용 시간대랑 잘 안 맞는다고 생각됩니다."
+          "answerText": "자습, 자료 대출, 모둠 과제"
+        },
+        {
+          "id": "q2",
+          "prompt": "학생들이 만족도와 관련해 가장 많이 지적한 문제를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 188,
+              "end": 193
+            },
+            {
+              "paragraphId": "p1",
+              "start": 195,
+              "end": 203
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "좌석 부족",
+            "운영 시간 문제"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단은 첫 개선안이나 핵심 근거를 무엇으로 설명하는가?",
+          "prompt": "출입 기록에서 방과 후 1시간 동안 확인된 현상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 234
+              "paragraphId": "p2",
+              "start": 145,
+              "end": 157
             }
           ],
           "scoring": {
@@ -1250,16 +1258,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그래서 첫 번째로 제안하는 것은 시험 기간과 수행평가 집중 기간에 한해 도서관 운영 시간을 오후 9시까지 연장하는 것입니다. 설문 응답자의 64퍼센트가 운영 시간 연장에 찬성하였고, 그 이유로는 교실보다 조용한 환경, 참고 자료 접근의 용이성, 야간 자습 전 공백 시간 활용 등을 들었습니다. 물론 연장 운영은 관리 인력 부담이 생기므로 매일 시행하기보다는 주 3회부터 시범적으로 운영하는 것이 더 현실적이라고 봅니다."
+          "answerText": "이용자가 집중되는 현상"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 추가 제안이나 고려할 점을 어떤 이유와 함께 내놓는가?",
+          "prompt": "첫 번째 제안의 핵심 내용을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 234
+              "paragraphId": "p3",
+              "start": 40,
+              "end": 65
             }
           ],
           "scoring": {
@@ -1268,16 +1276,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "두 번째로는 좌석 이용 방식 개선이 필요합니다. 현재는 먼저 온 학생이 원하는 자리를 오래 점유하는 방식이라 회전율이 낮습니다. 그래서 모바일이나 학생증으로 이용 시간을 기록하고, 일정 시간 이상 장기 이석하면 좌석을 다른 학생이 쓸 수 있게 하는 방안을 검토할 수 있습니다. 다만 이 제도는 학생들을 지나치게 통제한다고 느끼게 할 수도 있어서, 처음부터 엄격하게 적용하는 것보다 안내 기간을 두는 것이 좋을 것입니다."
+          "answerText": "도서관 운영 시간을 오후 9시까지 연장하는 것"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 실행 과정의 조건이나 우려를 어떻게 따져 보는가?",
+          "prompt": "운영 시간 연장에 찬성한 이유로 제시된 내용을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 239
+              "paragraphId": "p3",
+              "start": 109,
+              "end": 120
+            },
+            {
+              "paragraphId": "p3",
+              "start": 122,
+              "end": 135
+            },
+            {
+              "paragraphId": "p3",
+              "start": 137,
+              "end": 153
             }
           ],
           "scoring": {
@@ -1285,17 +1303,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "세 번째는 공간 구분 운영입니다. 응답을 보면 조용히 혼자 공부하려는 학생과 소규모로 과제를 해야 하는 학생이 같은 공간에서 불편을 겪고 있었습니다. 그런데 현재는 열람실과 자료실의 용도가 명확히 나뉘지 않아서 소음 관련 민원이 자주 생긴다고 사서 선생님도 말씀하셨습니다. 따라서 도서관 내부를 정숙 학습 구역, 자료 열람 구역, 협업 구역으로 나누어 운영하면 이용 목적이 다른 학생들의 충돌을 줄일 수 있을 것이라 생각합니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "교실보다 조용한 환경",
+            "참고 자료 접근의 용이성",
+            "야간 자습 전 공백 시간 활용"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 이 글의 결론과 요청을 어떻게 마무리하는가?",
+          "prompt": "소음 관련 민원이 자주 생긴다고 말한 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 278
+              "paragraphId": "p5",
+              "start": 136,
+              "end": 142
             }
           ],
           "scoring": {
@@ -1304,7 +1326,57 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정리하면, 도서관 운영 시간의 부분 연장, 좌석 이용 방식 개선, 공간 구분 운영은 설문과 출입 기록에서 드러난 문제를 직접 반영한 제안입니다. 물론 예산과 인력 문제를 같이 검토해야 해서 곧바로 전면 시행하기는 어렵지만, 우선 한 달 정도 시범 운영을 해 보면 효과를 확인할 수 있을 것입니다. 학생들이 많이 원하니까 바로 확대하자는 의견도 있을 수 있지만, 저는 오히려 짧은 기간이라도 결과를 보고 조정하는 편이 더 낫다고 생각합니다. 학교 측에서 이 제안을 긍정적으로 검토해 주시길 바랍니다."
+          "answerText": "사서 선생님"
+        },
+        {
+          "id": "q7",
+          "prompt": "도서관 내부를 나누어 운영하자고 한 세 구역을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 165,
+              "end": 173
+            },
+            {
+              "paragraphId": "p5",
+              "start": 175,
+              "end": 183
+            },
+            {
+              "paragraphId": "p5",
+              "start": 185,
+              "end": 190
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "정숙 학습 구역",
+            "자료 열람 구역",
+            "협업 구역"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "공간 구분 운영을 통해 기대하는 결과를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 217,
+              "end": 230
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "충돌을 줄일 수 있을 것"
         }
       ]
     }

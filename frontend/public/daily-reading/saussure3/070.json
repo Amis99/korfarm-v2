@@ -557,9 +557,28 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "산속 캠핑장에서 산책을 하며 들이마실 때마다 가슴속까지 시원해졌던 것은 무엇인가요?",
+          "prompt": "캠핑장에서 보낸 하룻밤이 글쓴이에게 일깨워 준 것을 찾으시오.",
+          "answerText": "자연의 소중함",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 21,
+              "end": 28
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "산책하며 숨을 들이마실 때마다 느낀 것을 찾으시오.",
           "answerText": "맑은 공기",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -575,30 +594,23 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "도시와 달리 캠핑장 밤하늘에서 무척 가깝고 눈부시게 반짝여서 글쓴이를 감동시킨 것은?",
-          "answerText": "별",
-          "answerMatchMode": "EXACT",
+          "id": "q3",
+          "prompt": "별을 바라보며 글쓴이가 펼친 생각을 모두 찾으시오.",
+          "answerTexts": [
+            "우주에 대한 호기심",
+            "무한한 상상의 나래"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 37,
-              "end": 38
+              "paragraphId": "p2",
+              "start": 102,
+              "end": 112
             },
             {
               "paragraphId": "p2",
-              "start": 25,
-              "end": 26
-            },
-            {
-              "paragraphId": "p2",
-              "start": 50,
-              "end": 51
-            },
-            {
-              "paragraphId": "p2",
-              "start": 93,
-              "end": 94
+              "start": 114,
+              "end": 124
             }
           ],
           "scoring": {
@@ -609,15 +621,23 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "가족이 모닥불 앞에 앉아 서로의 고민을 들어주며 활짝 피워 낸 행복한 분위기는 무엇인가요?",
-          "answerText": "웃음꽃",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "모닥불 앞에서 가족이 서로에게 한 일을 모두 찾으시오.",
+          "answerTexts": [
+            "서로의 고민을 들어주고",
+            "웃음꽃을 피우며"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
+              "start": 48,
+              "end": 60
+            },
+            {
+              "paragraphId": "p3",
               "start": 61,
-              "end": 64
+              "end": 69
             }
           ],
           "scoring": {

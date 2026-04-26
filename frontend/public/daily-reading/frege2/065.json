@@ -1079,34 +1079,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "미래 세대를 해치지 않으면서 현재의 욕구를 채우는 소비는 무엇인가요?",
-          "answerText": "지속가능한 소비",
+          "prompt": "지속가능한 소비가 의미하는 소비 행위를 지문에서 찾으시오.",
+          "answerText": "미래 세대의 필요를 충족시킬 수 있는 능력을 저해하지 않으면서 현재의 욕구를 충족하는 소비 행위",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 8
-            },
-            {
-              "paragraphId": "p1",
-              "start": 242,
-              "end": 250
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 8
-            },
-            {
-              "paragraphId": "p3",
-              "start": 3,
-              "end": 11
-            },
-            {
-              "paragraphId": "p4",
-              "start": 6,
-              "end": 14
+              "start": 10,
+              "end": 63
             }
           ],
           "scoring": {
@@ -1117,28 +1097,18 @@
         },
         {
           "id": "q2",
-          "prompt": "탄소 배출이 적거나 재활용 포장재를 고르는 실천은 무엇인가요?",
-          "answerText": "친환경 제품 구매",
-          "answerMatchMode": "ANY",
+          "prompt": "지속가능한 소비의 구체적인 실천 방안으로 제시된 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "친환경 제품 구매",
+            "자원 재순환 참여"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 25,
               "end": 34
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "수리하거나 중고 거래를 통해 자원의 수명을 늘리는 참여는 무엇인가요?",
-          "answerText": "자원 재순환 참여",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+            },
             {
               "paragraphId": "p2",
               "start": 38,
@@ -1152,15 +1122,33 @@
           "revealOnWrong": true
         },
         {
+          "id": "q3",
+          "prompt": "물건을 버리는 대신 수리하여 다시 쓰거나 중고 거래를 활성화하는 것이 어떤 방법인지 찾으시오.",
+          "answerText": "자원의 수명을 연장하는 효과적인 방법",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 154,
+              "end": 174
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q4",
-          "prompt": "소비를 통해 자신의 가치관에 맞는 기업을 지지하는 행동은 무엇인가요?",
-          "answerText": "가치 소비",
+          "prompt": "소비자들이 지지를 보낸다고 한 브랜드의 조건을 찾으시오.",
+          "answerText": "자신의 가치관에 부합하는 브랜드",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 199,
-              "end": 204
+              "start": 167,
+              "end": 184
             }
           ],
           "scoring": {
@@ -1171,14 +1159,14 @@
         },
         {
           "id": "q5",
-          "prompt": "글에서 지지 대상으로 함께 언급한 공정한 거래 방식은 무엇인가요?",
-          "answerText": "공정 무역",
+          "prompt": "정부가 관련 인증 제도 정비와 인센티브 확대를 통해 조성해야 한다고 한 것을 찾으시오.",
+          "answerText": "사회적 기반",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 24,
-              "end": 29
+              "paragraphId": "p4",
+              "start": 165,
+              "end": 171
             }
           ],
           "scoring": {

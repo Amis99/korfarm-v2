@@ -474,35 +474,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리가 타는 탈것은?",
-          "answerText": "자전거",
-          "answerMatchMode": "EXACT",
+          "prompt": "자전거를 탈 때 반드시 머리 보호를 위해 헬멧을 써야 한다고 회의에서 말한 친구의 이름은 무엇인지 찾아 써 보세요",
+          "answerText": "지우",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 22,
-              "end": 25
-            },
-            {
-              "paragraphId": "p1",
-              "start": 61,
-              "end": 64
-            },
-            {
-              "paragraphId": "p1",
-              "start": 98,
-              "end": 101
-            },
-            {
-              "paragraphId": "p2",
-              "start": 21,
-              "end": 24
-            },
-            {
-              "paragraphId": "p2",
-              "start": 99,
-              "end": 102
-            }
+            {"paragraphId": "p1", "start": 94, "end": 96},
+            {"paragraphId": "p1", "start": 144, "end": 146}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -513,30 +490,11 @@
         },
         {
           "id": "q2",
-          "prompt": "의견 나누는 시간?",
-          "answerText": "회의",
-          "answerMatchMode": "EXACT",
+          "prompt": "사람이 다니는 길에서는 자전거를 타지 말고 조심해서 걷자고 제안한 친구의 이름은 무엇인지 찾아 써 보세요",
+          "answerText": "민수",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 36,
-              "end": 38
-            },
-            {
-              "paragraphId": "p1",
-              "start": 47,
-              "end": 49
-            },
-            {
-              "paragraphId": "p2",
-              "start": 53,
-              "end": 55
-            },
-            {
-              "paragraphId": "p2",
-              "start": 133,
-              "end": 135
-            }
+            {"paragraphId": "p2", "start": 4, "end": 6}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -547,15 +505,26 @@
         },
         {
           "id": "q3",
-          "prompt": "머리 지키는 장비?",
+          "prompt": "지우가 자전거를 탈 때 머리를 보호하기 위해 반드시 써야 한다고 한 장비는 무엇인지 찾아 써 보세요",
           "answerText": "헬멧",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 121,
-              "end": 123
-            }
+            {"paragraphId": "p1", "start": 121, "end": 123}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "회의에서 나온 의견들을 모아 다 함께 지키기로 약속하며 붙인 곳은 어디인지 찾아 써 보세요",
+          "answerText": "게시판",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 69, "end": 72}
           ],
           "scoring": {
             "correctDeltaSec": 10,

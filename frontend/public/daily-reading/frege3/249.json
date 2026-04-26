@@ -916,19 +916,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "공공장소에서 널리 쓰이고 있는 기술은 무엇인가요?",
-          "answerText": "얼굴인식 기술",
+          "prompt": "이 기술은 범죄자를 찾거나 미아를 발견하는 데 무엇을 준다고 했나요?",
+          "answerText": "큰 도움",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 7
-            },
-            {
-              "paragraphId": "p5",
-              "start": 3,
-              "end": 10
+              "paragraphId": "p1",
+              "start": 75,
+              "end": 79
             }
           ],
           "scoring": {
@@ -939,7 +934,7 @@
         },
         {
           "id": "q2",
-          "prompt": "얼굴인식 기술의 가장 큰 장점은 무엇인가요?",
+          "prompt": "얼굴인식 기술의 가장 큰 장점은 무엇이라고 했나요?",
           "answerText": "효율적인 보안 관리",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -957,14 +952,14 @@
         },
         {
           "id": "q3",
-          "prompt": "반대하는 쪽이 특히 유출을 걱정하는 것은 무엇인가요?",
-          "answerText": "개인 정보",
+          "prompt": "내 얼굴 정보가 수집되고 저장되는 것에 느끼는 감정은 무엇인가요?",
+          "answerText": "거부감",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 11,
-              "end": 16
+              "start": 65,
+              "end": 68
             }
           ],
           "scoring": {
@@ -975,14 +970,22 @@
         },
         {
           "id": "q4",
-          "prompt": "기술이 해결해야 할 정확성의 문제는 무엇인가요?",
-          "answerText": "인식 오류",
-          "answerMatchMode": "ANY",
+          "prompt": "인식 오류가 발생할 수 있는 기준을 모두 찾으시오.",
+          "answerTexts": [
+            "인종",
+            "성별"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 39,
-              "end": 44
+              "start": 27,
+              "end": 29
+            },
+            {
+              "paragraphId": "p4",
+              "start": 32,
+              "end": 34
             }
           ],
           "scoring": {
@@ -993,14 +996,14 @@
         },
         {
           "id": "q5",
-          "prompt": "기술을 올바르게 쓰기 위해 필요한 것은 무엇인가요?",
-          "answerText": "사회적 합의",
+          "prompt": "기술의 이점을 누리면서 보호해야 하는 것은 무엇인가요?",
+          "answerText": "개인의 권리",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 84,
-              "end": 90
+              "start": 53,
+              "end": 59
             }
           ],
           "scoring": {

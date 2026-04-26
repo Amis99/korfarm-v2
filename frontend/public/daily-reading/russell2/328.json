@@ -1039,25 +1039,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "가격 변화에 따른 수요의 반응 정도를 무엇이라고 하나요?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 54,
-              "end": 64
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "수요의 가격 탄력성"
-        },
-        {
-          "id": "q2",
-          "prompt": "가격이 변해도 소비량이 잘 달라지지 않는 성질은 무엇인가요?",
+          "prompt": "가격이 변해도 소비량이 크게 달라지지 않는 성질을 뜻하는 네 글자 단어를 지문에서 찾으시오.",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
@@ -1077,70 +1059,172 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
           "answerText": "비탄력적"
         },
         {
-          "id": "q3",
-          "prompt": "세금 부담의 실제 차이를 만들어 내는 쪽은 누구인가요?",
+          "id": "q2",
+          "prompt": "물건을 만드는 사람을 뜻하는 세 글자 단어를 지문에서 찾으시오.",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 27,
-              "end": 34
+              "paragraphId": "p4",
+              "start": 13,
+              "end": 16
+            },
+            {
+              "paragraphId": "p4",
+              "start": 130,
+              "end": 133
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerText": "시장 참여자들"
+          "answerText": "생산자"
+        },
+        {
+          "id": "q3",
+          "prompt": "세금이 매겨지는 비율을 뜻하는 두 글자 단어를 지문에서 찾으시오.",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 74,
+              "end": 76
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true,
+          "answerText": "세율"
         },
         {
           "id": "q4",
-          "prompt": "세금이 붙었을 때 누가 더 많이 떠안을 수 있는지를 가리키는 것은 무엇인가요?",
+          "prompt": "지문에서 수요가 비탄력적이면 누구의 부담이 더 커진다고 하였는지 세 글자로 찾으시오.",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 4,
-              "end": 9
+              "paragraphId": "p1",
+              "start": 153,
+              "end": 156
             },
             {
-              "paragraphId": "p6",
-              "start": 34,
-              "end": 39
+              "paragraphId": "p2",
+              "start": 87,
+              "end": 90
+            },
+            {
+              "paragraphId": "p3",
+              "start": 3,
+              "end": 6
+            },
+            {
+              "paragraphId": "p3",
+              "start": 121,
+              "end": 124
+            },
+            {
+              "paragraphId": "p3",
+              "start": 156,
+              "end": 159
+            },
+            {
+              "paragraphId": "p5",
+              "start": 84,
+              "end": 87
+            },
+            {
+              "paragraphId": "p5",
+              "start": 108,
+              "end": 111
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerText": "세금 부담"
+          "answerText": "소비자"
         },
         {
           "id": "q5",
-          "prompt": "세금을 이해할 때 함께 살펴야 하는 두 요소는 무엇인가요?",
+          "prompt": "지문에서 수요가 탄력적일 때 가격을 크게 올리기 어려워 세금의 상당 부분을 떠안게 되는 사람을 세 글자로 찾으시오.",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 98,
-              "end": 104
+              "paragraphId": "p2",
+              "start": 92,
+              "end": 95
+            },
+            {
+              "paragraphId": "p3",
+              "start": 59,
+              "end": 62
+            },
+            {
+              "paragraphId": "p5",
+              "start": 54,
+              "end": 57
+            },
+            {
+              "paragraphId": "p5",
+              "start": 129,
+              "end": 132
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerText": "수요와 공급"
+          "answerText": "판매자"
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 '탄력성'이 쓰인 위치를 모두 찾으시오.",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 61,
+              "end": 64
+            },
+            {
+              "paragraphId": "p1",
+              "start": 148,
+              "end": 151
+            },
+            {
+              "paragraphId": "p2",
+              "start": 122,
+              "end": 125
+            },
+            {
+              "paragraphId": "p6",
+              "start": 5,
+              "end": 8
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true,
+          "answerText": "탄력성"
         }
       ]
     }

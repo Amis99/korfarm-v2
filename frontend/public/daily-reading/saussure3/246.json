@@ -587,19 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "고마움을 잊지 않고 갚음?",
-          "answerText": "은혜를",
-          "answerMatchMode": "EXACT",
+          "prompt": "까치가 누구를 도와 은혜를 갚는 연극인지 본문에서 찾으시오.",
+          "answerText": "까치가 선비를 도와",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 18,
-              "end": 21
-            },
-            {
-              "paragraphId": "p3",
-              "start": 8,
-              "end": 11
+              "start": 7,
+              "end": 17
             }
           ],
           "scoring": {
@@ -611,14 +606,22 @@
         },
         {
           "id": "q2",
-          "prompt": "남을 위해 자신을 바침?",
-          "answerText": "희생의",
-          "answerMatchMode": "EXACT",
+          "prompt": "내가 맡은 까치의 행동과 구하려 한 인물을 모두 찾으시오.",
+          "answerTexts": [
+            "위험에 처한 선비",
+            "몸을 던지는 까치"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 76,
-              "end": 79
+              "paragraphId": "p1",
+              "start": 35,
+              "end": 44
+            },
+            {
+              "paragraphId": "p1",
+              "start": 53,
+              "end": 62
             }
           ],
           "scoring": {
@@ -630,14 +633,49 @@
         },
         {
           "id": "q3",
-          "prompt": "힘을 합쳐 돕는 행동은?",
-          "answerText": "협동하는",
-          "answerMatchMode": "EXACT",
+          "prompt": "선비를 구하는 장면에서 까치가 한 행동과 그 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "머리로 종을 쳐서",
+            "선비를 구하는 장면"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 9
+            },
+            {
+              "paragraphId": "p2",
+              "start": 10,
+              "end": 20
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "연극을 마치고 배운 마음과 친구들과 함께한 과정을 모두 찾으시오.",
+          "answerTexts": [
+            "은혜를 잊지 않는 마음",
+            "협동하는 과정"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
+              "start": 8,
+              "end": 20
+            },
+            {
+              "paragraphId": "p3",
               "start": 44,
-              "end": 48
+              "end": 51
             }
           ],
           "scoring": {

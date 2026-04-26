@@ -850,44 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "하얀 ( ) 뭉치가 바람에 날려요.",
-          "answerText": "씨앗",
-          "answerMatchMode": "EXACT",
+          "prompt": "노란 민들레가 무엇이 되었다고 했는지 지문에서 찾으시오.",
+          "answerText": "하얀 씨앗 뭉치",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 17,
-              "end": 19
-            },
-            {
-              "paragraphId": "p1",
-              "start": 34,
-              "end": 36
-            },
-            {
-              "paragraphId": "p1",
-              "start": 55,
-              "end": 57
-            },
-            {
-              "paragraphId": "p1",
-              "start": 90,
-              "end": 92
-            },
-            {
-              "paragraphId": "p1",
-              "start": 121,
-              "end": 123
-            },
-            {
-              "paragraphId": "p2",
-              "start": 56,
-              "end": 58
-            },
-            {
-              "paragraphId": "p3",
-              "start": 4,
-              "end": 6
+              "start": 14,
+              "end": 22
             }
           ],
           "scoring": {
@@ -899,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "땅에 내려앉아 ( )를 내립니다.",
-          "answerText": "뿌리",
-          "answerMatchMode": "EXACT",
+          "prompt": "씨앗 하나하나에 담겨 있다고 한 것을 지문에서 찾으시오.",
+          "answerText": "새로운 생명의 꿈",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 102,
-              "end": 104
+              "start": 65,
+              "end": 74
             }
           ],
           "scoring": {
@@ -918,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "식물을 ( ) 아껴 주어야 합니다.",
-          "answerText": "소중하게",
-          "answerMatchMode": "EXACT",
+          "prompt": "씨앗이 멀리 날아갈 수 있게 어떻게 응원한다고 했는지 지문에서 찾으시오.",
+          "answerText": "눈으로만",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 12,
-              "end": 16
+              "start": 72,
+              "end": 76
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "다시 만날 민들레를 언제 기다린다고 했는지 지문에서 찾으시오.",
+          "answerText": "내년 봄",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 109,
+              "end": 113
             }
           ],
           "scoring": {

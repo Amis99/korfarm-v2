@@ -914,61 +914,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '장식'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 65,
-              "end": 67
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글에서 어디서 자료를 가져왔는지를 밝히는 부분을 가리키는 낱말을 찾으시오",
+          "answerText": "출처",
           "answerMatchMode": "ANY",
-          "answerText": "장식"
-        },
-        {
-          "id": "q2",
-          "prompt": "지문에서 '사례'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 78,
-              "end": 80
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "사례"
-        },
-        {
-          "id": "q3",
-          "prompt": "지문에서 '설문'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 85,
-              "end": 87
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "설문"
-        },
-        {
-          "id": "q4",
-          "prompt": "지문에서 '출처'를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -977,30 +925,106 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "출처"
+          "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "지문에서 '기준'을 모두 찾으시오.",
+          "id": "q2",
+          "prompt": "글을 읽는 사람을 가리키는 낱말을 찾으시오",
+          "answerText": "독자",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 96,
-              "end": 98
+              "paragraphId": "p4",
+              "start": 51,
+              "end": 53
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "주장이 추상적인 데에서 벗어나 분명하고 실제적이게 되는 성질을 뜻하는 낱말을 찾으시오",
+          "answerText": "구체성",
           "answerMatchMode": "ANY",
-          "answerText": "기준"
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 106,
+              "end": 109
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글쓴이가 밝힌 '자료'의 정의를 담은 문장을 찾으시오",
+          "answerText": "자료는 내 생각을 대신해 주는 장식이 아니라, 주장이나 설명을 더 분명하게 만드는 근거다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 48,
+              "end": 97
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "자료 활용을 보여 주는 예시 상황을 처음 제시한 문장을 찾으시오",
+          "answerText": "예를 들어 급식 잔반을 줄이자는 글을 쓸 때, '잔반이 많다'고만 적으면 느낌에 머물기 쉽다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 51
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "관련 없는 수치를 너무 많이 넣었을 때 생기는 결과를 설명한 문장을 찾으시오",
+          "answerText": "글의 흐름과 직접 관련 없는 수치를 너무 많이 넣으면 읽는 사람이 무엇이 중요한지 놓치기 쉽다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 139,
+              "end": 191
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

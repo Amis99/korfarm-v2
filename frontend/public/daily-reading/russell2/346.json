@@ -1234,173 +1234,85 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "큰 문제를 작은 같은 종류의 문제로 바꾸어 푸는 방식을 뜻하는 말은 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 91,
-              "end": 93
-            },
-            {
-              "paragraphId": "p2",
-              "start": 119,
-              "end": 121
-            },
-            {
-              "paragraphId": "p2",
-              "start": 160,
-              "end": 162
-            },
-            {
-              "paragraphId": "p3",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p3",
-              "start": 80,
-              "end": 82
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p4",
-              "start": 163,
-              "end": 165
-            },
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p5",
-              "start": 103,
-              "end": 105
-            },
-            {
-              "paragraphId": "p5",
-              "start": 133,
-              "end": 135
-            },
-            {
-              "paragraphId": "p6",
-              "start": 5,
-              "end": 7
-            },
-            {
-              "paragraphId": "p6",
-              "start": 66,
-              "end": 68
-            },
-            {
-              "paragraphId": "p6",
-              "start": 138,
-              "end": 140
-            },
-            {
-              "paragraphId": "p6",
-              "start": 188,
-              "end": 190
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "큰 문제를 더 작은 같은 종류의 문제로 바꾸어 해결하는 방식을 가리키는 말이 무엇인지 찾으시오",
+          "answerText": "재귀",
           "answerMatchMode": "ANY",
-          "answerText": "재귀"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p1", "start": 91, "end": 93},
+            {"paragraphId": "p2", "start": 119, "end": 121},
+            {"paragraphId": "p2", "start": 160, "end": 162},
+            {"paragraphId": "p3", "start": 4, "end": 6},
+            {"paragraphId": "p3", "start": 80, "end": 82},
+            {"paragraphId": "p4", "start": 0, "end": 2},
+            {"paragraphId": "p4", "start": 163, "end": 165},
+            {"paragraphId": "p5", "start": 0, "end": 2},
+            {"paragraphId": "p5", "start": 103, "end": 105},
+            {"paragraphId": "p5", "start": 133, "end": 135},
+            {"paragraphId": "p6", "start": 5, "end": 7},
+            {"paragraphId": "p6", "start": 66, "end": 68},
+            {"paragraphId": "p6", "start": 138, "end": 140},
+            {"paragraphId": "p6", "start": 188, "end": 190}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "더 이상 나눌 수 없는 가장 작은 경우를 뜻하는 말은 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 125,
-              "end": 130
-            },
-            {
-              "paragraphId": "p6",
-              "start": 46,
-              "end": 51
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "재귀가 끝없이 반복되지 않도록 미리 정해 두는, 더 이상 나눌 수 없는 가장 작은 경우를 가리키는 말이 무엇인지 찾으시오",
+          "answerText": "바탕 조건",
           "answerMatchMode": "ANY",
-          "answerText": "바탕 조건"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 125, "end": 130},
+            {"paragraphId": "p6", "start": 46, "end": 51}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "함수가 자기 자신을 다시 부르는 짜임을 뜻하는 말은 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 43,
-              "end": 48
-            },
-            {
-              "paragraphId": "p6",
-              "start": 53,
-              "end": 58
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "함수가 자기 자신을 다시 부르며 단계적으로 내려갔다 올라오는 짜임을 가리키는 말이 무엇인지 찾으시오",
+          "answerText": "호출 구조",
           "answerMatchMode": "ANY",
-          "answerText": "호출 구조"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 43, "end": 48},
+            {"paragraphId": "p6", "start": 53, "end": 58}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "문제를 나누어 해결하는 알고리즘 방식을 뜻하는 말은 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 41,
-              "end": 46
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "큰 문제를 작은 부분으로 나누어 해결하는 대표적 알고리즘 방식을 가리키는 말이 무엇인지 찾으시오",
+          "answerText": "분할 정복",
           "answerMatchMode": "ANY",
-          "answerText": "분할 정복"
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 41, "end": 46}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "문제 구조를 간단히 드러내는 힘을 뜻하는 말은 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 198,
-              "end": 201
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "재귀가 문제 구조를 간단히 표현할 때 발휘한다고 한, 어떤 현상을 잘 풀어 보이는 힘을 가리키는 말이 무엇인지 찾으시오",
+          "answerText": "설명력",
           "answerMatchMode": "ANY",
-          "answerText": "설명력"
+          "answerRanges": [
+            {"paragraphId": "p6", "start": 198, "end": 201}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "재귀에서 자기 자신을 다시 부르는 주체로, 어떤 입력에 대해 정해진 결과를 돌려주는 코드 단위를 가리키는 말이 무엇인지 찾으시오",
+          "answerText": "함수",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 12, "end": 14}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

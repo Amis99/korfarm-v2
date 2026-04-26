@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "용언에서 발음이 달라지는 조건을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 152
+              "end": 37
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "용언의 어간 끝에 ㅎ이 있거나 ㄶ, ㅀ처럼 ㅎ이 포함된 받침이 오면 뒤에 이어지는 소리와의 관계에 따라 발음이 달라진다. 이 변화는 단순히 한 음운이 사라지는 현상으로만 볼 수 없고, 거센소리되기와 ㅎ 탈락이 어떤 환경에서 일어나는지 함께 살펴봐야 정확히 이해할 수 있다."
+          "answerText": "용언의 어간 끝에 ㅎ이 있거나 ㄶ, ㅀ처럼 ㅎ이 포함된 받침이 오면"
         },
         {
           "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "뒤에 예사소리 자음이 오면 ㅎ이 하는 작용을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 163
+              "start": 21,
+              "end": 39
             }
           ],
           "scoring": {
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "우선 뒤에 예사소리 자음이 오면 ㅎ은 그 자음을 거센소리로 만드는 작용을 한다. 그래서 '좋다'는 [조타], '놓고'는 [노코]처럼 발음된다. 이때 표기에서는 ㅎ이 그대로 남아 있지만 실제 발음에서는 다음 자음의 성질이 바뀌므로, 학습할 때는 표기와 발음을 따로 구분해 보는 습관이 필요하다."
+          "answerText": "그 자음을 거센소리로 만드는 작용"
         },
         {
           "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "prompt": "2문단에서 예사소리 자음 뒤 환경의 발음 예를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 220
+              "paragraphId": "p2",
+              "start": 49,
+              "end": 59
+            },
+            {
+              "paragraphId": "p2",
+              "start": 61,
+              "end": 71
             }
           ],
           "scoring": {
@@ -620,17 +625,35 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "ㄶ과 ㅀ처럼 ㅎ이 다른 자음과 함께 있는 경우에도 기본 원리는 비슷하지만, 앞 자음의 실현 방식까지 함께 고려해야 한다. '많다'는 [만타], '않고'는 [안코]처럼 발음되어 ㄴ은 남고 ㅎ은 뒤 자음을 거세게 만든다. 반면 '싫지'는 [실치]처럼 발음되어 ㄹ은 유지되고 뒤의 ㅈ이 ㅊ으로 바뀐다. 따라서 ㄶ, ㅀ은 하나의 덩어리로 보되 실제 발음에서는 각 자음의 남는 방식이 다름을 봐야 한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'좋다'는 [조타]",
+            "'놓고'는 [노코]"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
+          "prompt": "3문단에서 ㄶ, ㅀ의 실제 발음에서 남거나 바뀌는 자음을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 176
+              "paragraphId": "p3",
+              "start": 98,
+              "end": 103
+            },
+            {
+              "paragraphId": "p3",
+              "start": 104,
+              "end": 120
+            },
+            {
+              "paragraphId": "p3",
+              "start": 143,
+              "end": 150
+            },
+            {
+              "paragraphId": "p3",
+              "start": 151,
+              "end": 164
             }
           ],
           "scoring": {
@@ -638,17 +661,22 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "뒤에 모음으로 시작하는 형식 형태소가 오면 상황이 달라진다. '좋아'는 [조아], '많아'는 [마나], '싫어도'는 [시러도]처럼 ㅎ이 약화되거나 탈락하고 앞의 자음만 이어지는 발음이 나타난다. 이때는 예사소리를 거세게 만들 대상이 없기 때문에, ㅎ의 영향이 자음 변화 대신 탈락 쪽으로 드러난다고 이해할 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "ㄴ은 남고",
+            "ㅎ은 뒤 자음을 거세게 만든다",
+            "ㄹ은 유지되고",
+            "뒤의 ㅈ이 ㅊ으로 바뀐다"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "뒤에 모음으로 시작하는 형식 형태소가 오면 무엇이 나타나는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 172
+              "paragraphId": "p4",
+              "start": 73,
+              "end": 101
             }
           ],
           "scoring": {
@@ -657,16 +685,48 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "다만 모든 예를 한 규칙으로 뭉뚱그리면 혼란이 생긴다. 같은 ㅎ 계열 받침이라도 뒤에 무엇이 오느냐, 어간과 어미의 경계가 어디냐에 따라 결과가 달라지기 때문이다. 그래서 '좋다/좋아', '많고/많아', '싫지/싫어'를 짝지어 비교하면 거센소리되기와 ㅎ 탈락이 서로 다른 환경에서 작동한다는 점이 분명해진다."
+          "answerText": "ㅎ이 약화되거나 탈락하고 앞의 자음만 이어지는 발음"
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "4문단에서 ㅎ 탈락 쪽으로 드러나는 발음 예를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 181
+              "paragraphId": "p4",
+              "start": 34,
+              "end": 44
+            },
+            {
+              "paragraphId": "p4",
+              "start": 46,
+              "end": 56
+            },
+            {
+              "paragraphId": "p4",
+              "start": 58,
+              "end": 70
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'좋아'는 [조아]",
+            "'많아'는 [마나]",
+            "'싫어도'는 [시러도]"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "모든 예를 한 규칙으로 뭉뚱그리면 생기는 결과를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 22,
+              "end": 29
             }
           ],
           "scoring": {
@@ -675,7 +735,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 어간 말음 ㅎ, ㄶ, ㅀ 뒤의 변화는 하나의 대표 규칙이 아니라 여러 환경을 구분해 이해해야 하는 발음 현상이다. 뒤에 자음이 오면 거센소리되기가, 뒤에 모음이 오면 ㅎ 탈락이 중심적으로 나타난다는 큰 틀을 먼저 잡고, 각 예에서 남는 자음과 사라지는 자음을 확인하면 표기와 발음의 관계를 더 정확하게 설명할 수 있다."
+          "answerText": "혼란이 생긴다"
+        },
+        {
+          "id": "q8",
+          "prompt": "뒤에 오는 소리에 따른 큰 틀을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 67,
+              "end": 112
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "뒤에 자음이 오면 거센소리되기가, 뒤에 모음이 오면 ㅎ 탈락이 중심적으로 나타난다"
         }
       ]
     }

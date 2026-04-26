@@ -884,39 +884,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지자체가 발행하고 관리하는 대안 화폐를 무엇이라고 하나요?",
-          "answerText": "지역 화폐",
+          "prompt": "지역 화폐가 어떤 대안 화폐인지 설명하는 정의 구절을 찾으시오.",
+          "answerText": "특정 지역에서만 사용할 수 있도록 발행된 대안 화폐",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p2",
-              "start": 36,
-              "end": 41
-            },
-            {
-              "paragraphId": "p3",
-              "start": 4,
-              "end": 9
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p4",
-              "start": 127,
-              "end": 132
+              "start": 7,
+              "end": 35
             }
           ],
           "scoring": {
@@ -927,10 +902,18 @@
         },
         {
           "id": "q2",
-          "prompt": "지역 화폐가 주민들을 유도하려는 곳은 어디인가요?",
-          "answerText": "동네 상점",
-          "answerMatchMode": "ANY",
+          "prompt": "지역 주민들이 어디 대신 어디를 이용하도록 유도되는지 두 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "대형 마트",
+            "동네 상점"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 87,
+              "end": 92
+            },
             {
               "paragraphId": "p1",
               "start": 96,
@@ -945,14 +928,14 @@
         },
         {
           "id": "q3",
-          "prompt": "소상공인이 덜게 되는 비용 부담은 무엇인가요?",
-          "answerText": "카드 수수료",
+          "prompt": "소상공인들이 안정적으로 확보할 수 있다고 한 대상을 찾으시오.",
+          "answerText": "단골손님",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 91,
-              "end": 97
+              "start": 105,
+              "end": 109
             }
           ],
           "scoring": {
@@ -963,14 +946,14 @@
         },
         {
           "id": "q4",
-          "prompt": "운영의 단점으로 제시된 지역의 부담은 무엇인가요?",
-          "answerText": "재정 부담",
+          "prompt": "재정 부담이 커질 수 있는 이유를 나타내는 구절을 찾으시오.",
+          "answerText": "지자체의 예산으로 할인 혜택을 지원하므로",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 53,
-              "end": 58
+              "start": 30,
+              "end": 52
             }
           ],
           "scoring": {
@@ -981,14 +964,14 @@
         },
         {
           "id": "q5",
-          "prompt": "성공적인 정착을 위해 유지해야 한다고 한 것은 무엇인가요?",
-          "answerText": "재정 건전성",
+          "prompt": "지역 화폐가 진정한 가치를 발휘하는 바탕이 되는 참여를 찾으시오.",
+          "answerText": "주민과 상인들의 자발적인 참여",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 61,
-              "end": 67
+              "start": 134,
+              "end": 150
             }
           ],
           "scoring": {

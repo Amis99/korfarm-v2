@@ -571,30 +571,78 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "prompt": "세금을 줄여 주는 방식이 다르다고 제시된 두 제도명을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 182
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "기업이 설비 투자를 할 때 법인세는 단순히 사후 이익을 줄이는 장치가 아니라, 언제 투자하는 것이 유리한지에도 영향을 준다. 특히 같은 투자 지원 제도처럼 보이는 감가상각 공제와 투자세액 공제는 세금을 줄여 주는 방식이 다르다. 둘 다 기업의 부담을 낮출 수 있지만, 비용 회수의 시점과 현금 흐름에 미치는 효과는 같지 않다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 첫 핵심 원리나 기준을 어떻게 설명하는가?",
-          "answerRanges": [
+              "start": 91,
+              "end": 98
+            },
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 215
+              "end": 7
+            },
+            {
+              "paragraphId": "p2",
+              "start": 178,
+              "end": 185
+            },
+            {
+              "paragraphId": "p3",
+              "start": 177,
+              "end": 184
+            },
+            {
+              "paragraphId": "p5",
+              "start": 26,
+              "end": 33
+            },
+            {
+              "paragraphId": "p6",
+              "start": 3,
+              "end": 10
+            },
+            {
+              "paragraphId": "p1",
+              "start": 100,
+              "end": 107
+            },
+            {
+              "paragraphId": "p4",
+              "start": 3,
+              "end": 10
+            },
+            {
+              "paragraphId": "p5",
+              "start": 106,
+              "end": 113
+            },
+            {
+              "paragraphId": "p6",
+              "start": 12,
+              "end": 19
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "감가상각 공제",
+            "투자세액 공제"
+          ]
+        },
+        {
+          "id": "q2",
+          "prompt": "감가상각 공제가 자본재 비용을 처리하는 방식을 설명한 어구를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 9,
+              "end": 79
             }
           ],
           "scoring": {
@@ -603,16 +651,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "감가상각 공제는 기업이 기계나 공장 같은 자본재를 구입한 뒤 그 비용을 한 번에 처리하지 않고 여러 회계 기간에 나누어 비용으로 인정받는 방식이다. 따라서 세금 절감 효과도 자본재의 내용 연수에 걸쳐 나누어 나타난다. 기업은 투자 직후에 전액을 돌려받는 것이 아니라, 시간이 지나며 조금씩 비용을 회수한다. 이 때문에 감가상각 공제는 투자 이후의 장기적 수익 계산과 밀접하게 연결된다."
+          "answerText": "기업이 기계나 공장 같은 자본재를 구입한 뒤 그 비용을 한 번에 처리하지 않고 여러 회계 기간에 나누어 비용으로 인정받는 방식"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 그 원리의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "2문단에서 자본재의 예로 든 대상을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 232
+              "paragraphId": "p2",
+              "start": 13,
+              "end": 15
+            },
+            {
+              "paragraphId": "p2",
+              "start": 17,
+              "end": 19
             }
           ],
           "scoring": {
@@ -620,17 +673,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "문제는 미래의 공제가 현재와 같은 가치로 느껴지지 않는다는 점이다. 인플레이션이 있거나 자금 조달 비용이 높으면, 몇 년 뒤 인정되는 비용은 지금 즉시 인정되는 비용보다 실질 가치가 작다. 그래서 법인세제에서 감가상각 기간이 길수록 기업은 같은 금액의 자본재를 사더라도 세제상 회수가 늦어진다고 느낄 수 있다. 결국 감가상각 공제는 투자 그 자체를 부정하지는 않지만, 투자 시점을 앞당기는 유인은 상대적으로 약하다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "기계",
+            "공장"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
+          "prompt": "감가상각 공제에서 기업이 시간이 지나며 하게 되는 일을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 202
+              "paragraphId": "p2",
+              "start": 150,
+              "end": 170
             }
           ],
           "scoring": {
@@ -639,16 +695,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "반면 투자세액 공제는 투자액의 일정 비율을 세액에서 직접 빼 주는 방식이므로 효과가 훨씬 즉각적으로 나타난다. 비용을 여러 해에 걸쳐 나누어 계산하는 것이 아니라, 투자가 이루어진 해의 세금 부담을 바로 낮춰 주기 때문이다. 기업 입장에서는 초기 투자비를 더 빨리 회수하는 셈이어서, 같은 조건이라면 설비 도입을 미루기보다 현재 실행하는 쪽이 유리해질 수 있다."
+          "answerText": "시간이 지나며 조금씩 비용을 회수한다"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 이 주제의 효과나 쟁점을 어떤 방향으로 확장하는가?",
+          "prompt": "몇 년 뒤 인정되는 비용의 실질 가치가 작아지는 조건을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 226
+              "paragraphId": "p3",
+              "start": 38,
+              "end": 48
+            },
+            {
+              "paragraphId": "p3",
+              "start": 49,
+              "end": 62
             }
           ],
           "scoring": {
@@ -656,17 +717,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 차이는 투자 결정의 기준에도 영향을 준다. 감가상각 공제는 자산의 경제적 소모를 조세 계산에 반영하는 장치라는 성격이 강하므로, 중립적인 세제에 가까운 방향으로 설계될 수 있다. 그러나 투자세액 공제는 특정 시점의 투자를 적극 유도하려는 정책 수단이어서, 경기 부양이나 산업 전환처럼 정부가 원하는 방향으로 기업 행동을 밀어 주는 효과가 더 크다. 그만큼 제도 목적도 세밀하게 구분해서 이해해야 한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "인플레이션이 있거나",
+            "자금 조달 비용이 높으면"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 앞선 논의를 어떤 의미로 정리하는가?",
+          "prompt": "투자세액 공제가 세액에서 직접 빼 주는 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 246
+              "paragraphId": "p4",
+              "start": 12,
+              "end": 22
             }
           ],
           "scoring": {
@@ -675,7 +739,59 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 감가상각 공제와 투자세액 공제의 가장 큰 차이는 세 부담을 줄여 주는 총량보다 그 절감이 언제 실현되느냐에 있다. 전자는 시간에 따라 분산된 회수 구조를 가지므로 투자 이후의 장기 수익성에 영향을 주고, 후자는 초기 세금 부담을 즉시 낮춰 투자 시점을 앞당길 유인을 제공한다. 따라서 법인세가 투자 결정에 미치는 효과를 평가할 때는 공제 규모만 볼 것이 아니라, 비용 회수가 현재 가치 기준에서 어떻게 달라지는지까지 함께 따져야 한다."
+          "answerText": "투자액의 일정 비율"
+        },
+        {
+          "id": "q7",
+          "prompt": "투자세액 공제가 정책 수단으로 활용될 수 있는 방향의 예를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 145,
+              "end": 150
+            },
+            {
+              "paragraphId": "p5",
+              "start": 153,
+              "end": 158
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "경기 부양",
+            "산업 전환"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "6문단에서 전자와 후자의 차이를 설명하는 핵심 표현을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 71,
+              "end": 87
+            },
+            {
+              "paragraphId": "p6",
+              "start": 137,
+              "end": 150
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "시간에 따라 분산된 회수 구조",
+            "투자 시점을 앞당길 유인"
+          ]
         }
       ]
     }

@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 문법 현상을 어떤 배경이나 문제의식에서 제시하는가?",
+          "prompt": "1문단에서 두 조사를 단순히 무엇으로만 외우면 막힌다고 했는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 171
+              "start": 54,
+              "end": 65
             }
           ],
           "scoring": {
@@ -585,16 +585,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "국어에서 '은/는'과 '이/가'는 모두 체언 뒤에 붙지만 기능은 같지 않다. 두 조사를 단순히 '주어를 나타내는 형식'으로만 외우면 실제 문장 해석에서 자주 막힌다. 특히 고3 수준의 독해와 문법 문항에서는 두 조사가 정보의 제시 방식, 화제의 설정, 문장의 초점과 긴밀하게 연결된다는 점을 구분해야 한다."
+          "answerText": "주어를 나타내는 형식"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 판별 기준이나 기본 원리를 어떻게 설명하는가?",
+          "prompt": "1문단에서 두 조사가 긴밀하게 연결된다고 한 세 요소를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 193
+              "paragraphId": "p1",
+              "start": 122,
+              "end": 131
+            },
+            {
+              "paragraphId": "p1",
+              "start": 133,
+              "end": 139
+            },
+            {
+              "paragraphId": "p1",
+              "start": 141,
+              "end": 147
             }
           ],
           "scoring": {
@@ -602,17 +612,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "'이/가'는 기본적으로 문장 안에서 서술의 주체를 드러내는 주격 조사다. 그런데 실제 담화에서는 단순히 문법적 주어를 표시하는 데서 그치지 않고, 새롭게 제시되는 정보나 특정 대상을 골라 세우는 기능을 자주 맡는다. 그래서 '누가 왔니?'라는 질문에 '철수가 왔다'라고 답하면, 화자는 여러 가능성 가운데 철수라는 대상을 초점으로 내세우게 된다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "정보의 제시 방식",
+            "화제의 설정",
+            "문장의 초점"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단은 해당 현상의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "2문단에서 이/가가 기본적으로 드러내는 것을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 172
+              "paragraphId": "p2",
+              "start": 20,
+              "end": 26
             }
           ],
           "scoring": {
@@ -621,16 +635,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "반면 '은/는'은 보조사로서 문장의 내용을 걸어 둘 화제를 먼저 세운다. 화제는 반드시 새 정보일 필요가 없고, 이미 공유되었거나 앞으로 설명의 기준점이 될 대상을 앞세우는 경우가 많다. 따라서 '철수는 왔다'라고 하면 철수라는 인물을 중심축으로 잡은 뒤, 그에 대해 '왔다'는 사실을 덧붙이는 구조가 된다."
+          "answerText": "서술의 주체"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 구별점이나 추가 조건을 어떤 방향으로 드러내는가?",
+          "prompt": "2문단에서 화자가 여러 가능성 가운데 초점으로 내세우는 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 204
+              "paragraphId": "p2",
+              "start": 171,
+              "end": 178
             }
           ],
           "scoring": {
@@ -639,16 +653,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 차이는 대조 상황에서 더 뚜렷해진다. '철수는 왔지만 영희는 안 왔다'에서 '는'은 각각의 대상을 병렬적으로 세우며 대비를 만든다. 반대로 '철수가 왔다'는 다른 후보가 아니라 바로 철수라는 점을 집어 주는 느낌이 강하다. 시험에서는 같은 사건이라도 화자가 무엇을 새 정보로 내세우는지, 무엇을 비교 대상으로 세우는지에 따라 조사 선택이 달라진다는 점을 묻는다."
+          "answerText": "철수라는 대상"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 해석상의 주의점이나 적용 효과를 어떻게 설명하는가?",
+          "prompt": "3문단에서 은/는이 먼저 세운다고 한 것을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 207
+              "paragraphId": "p3",
+              "start": 16,
+              "end": 31
             }
           ],
           "scoring": {
@@ -657,16 +671,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "또 한 문장 안에서 두 조사가 함께 쓰일 때는 정보 구조를 층위별로 나누어 보아야 한다. 예를 들어 '철수는 키가 크다'에서 '철수는'은 문장의 바깥 화제를 세우고, '키가'는 그 화제에 대해 서술할 속성의 주체를 표시한다. 이런 구조를 보면 '은/는'과 '이/가'는 서로 경쟁하는 관계가 아니라, 화제와 서술의 초점을 서로 다른 층위에서 조직하는 장치임을 알 수 있다."
+          "answerText": "문장의 내용을 걸어 둘 화제"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 이 문법 주제를 어떤 관점에서 정리하는가?",
+          "prompt": "4문단의 대조 상황 예문에서 대비를 만드는 두 절을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 210
+              "paragraphId": "p4",
+              "start": 24,
+              "end": 31
+            },
+            {
+              "paragraphId": "p4",
+              "start": 32,
+              "end": 40
             }
           ],
           "scoring": {
@@ -674,8 +693,69 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "결국 두 조사의 선택은 단순한 교체 문제가 아니라 담화 목적의 문제다. 말하려는 대상이 이미 대화의 중심인지, 새롭게 부각할 정보인지, 다른 대상과 대조할 것인지에 따라 적절한 조사가 달라진다. 따라서 국어 문법에서 '은/는'과 '이/가'를 정확히 이해한다는 것은 주어 개념을 아는 데서 끝나지 않고, 문장이 어떤 정보 구조로 독자와 청자에게 제시되는지까지 읽어 내는 일이다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "철수는 왔지만",
+            "영희는 안 왔다"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "5문단에서 철수는과 키가가 맡는 기능을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 77,
+              "end": 91
+            },
+            {
+              "paragraphId": "p5",
+              "start": 108,
+              "end": 124
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "문장의 바깥 화제를 세우고",
+            "서술할 속성의 주체를 표시한다"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "6문단에서 조사 선택에 따라 달라지는 기준을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 49,
+              "end": 60
+            },
+            {
+              "paragraphId": "p6",
+              "start": 62,
+              "end": 74
+            },
+            {
+              "paragraphId": "p6",
+              "start": 76,
+              "end": 90
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "이미 대화의 중심인지",
+            "새롭게 부각할 정보인지",
+            "다른 대상과 대조할 것인지"
+          ]
         }
       ]
     }

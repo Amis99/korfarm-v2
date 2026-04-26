@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 회의의 출발 문제를 어떻게 제시하는가?",
+          "prompt": "교장 선생님 앞에서 발표해야 하는 글을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 211
+              "start": 18,
+              "end": 36
             }
           ],
           "scoring": {
@@ -585,16 +585,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "민준: 내일 교장 선생님 앞에서 휴대전화 보관함 추가 설치 건의문을 발표해야 하니까, 오늘은 반론 대응 순서부터 정리하자. 지난번에는 자료 설명이 길어져서 정작 예상 질문 답변이 뒤로 밀렸어. 소연: 맞아. 이번에는 본문 발표를 줄이고 반론에 대한 답을 앞쪽에 배치하는 게 낫겠어. 지우: 특히 예산 문제는 거의 반드시 나올 테니까 누가 먼저 받고 누가 보충할지 딱 정해 두자."
+          "answerText": "휴대전화 보관함 추가 설치 건의문"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 제안이나 우려를 어떤 이유와 함께 내놓는가?",
+          "prompt": "발표 흐름에서 맡은 부분을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 220
+              "start": 14,
+              "end": 19
+            },
+            {
+              "paragraphId": "p2",
+              "start": 25,
+              "end": 30
+            },
+            {
+              "paragraphId": "p2",
+              "start": 36,
+              "end": 39
             }
           ],
           "scoring": {
@@ -602,17 +612,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "소연: 발표 흐름은 내가 문제 상황, 민준이 설문 결과, 지우가 개선안 순으로 하면 자연스러울 것 같아. 그런데 반론 대응은 발표 순서랑 같게 가면 좀 늘어질 수도 있어. 민준: 나도 그렇게 생각해. 예산 질문은 내가 수치 자료를 들고 있으니까 먼저 답하고, 소연이 왜 지금 설치가 필요한지 필요성 쪽을 붙여 주면 좋겠어. 지우: 그럼 나는 관리 인력이나 분실 책임처럼 운영 쪽 질문을 맡을게."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "문제 상황",
+            "설문 결과",
+            "개선안"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단은 논의를 어떤 대안이나 조정안으로 이어 가는가?",
+          "prompt": "예산 질문을 민준이 먼저 답하기로 한 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 215
+              "paragraphId": "p2",
+              "start": 122,
+              "end": 136
             }
           ],
           "scoring": {
@@ -621,16 +635,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "지우: 반론을 세 가지로 묶어 보자. 첫째는 예산이 부족하다는 말, 둘째는 학생들이 스스로 관리하면 되지 왜 시설을 늘리느냐는 말, 셋째는 보관함을 늘리면 오히려 분실 사고 책임이 커진다는 말이야. 소연: 좋다. 그런데 셋째는 조금 민감하니까 단순히 ‘책임은 학교가 안 져도 된다’는 식으로 말하면 안 될 것 같아. 관리 규정을 함께 제안하는 방향으로 말해야 덜 공격적으로 들릴 거야."
+          "answerText": "수치 자료를 들고 있으니까"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 예상 질문이나 진행 기준을 어떻게 준비하는가?",
+          "prompt": "지우가 맡기로 한 운영 관련 질문 범위를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 221
+              "paragraphId": "p2",
+              "start": 191,
+              "end": 196
+            },
+            {
+              "paragraphId": "p2",
+              "start": 199,
+              "end": 204
             }
           ],
           "scoring": {
@@ -638,17 +657,30 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "민준: 발언 분량도 정하자. 내가 숫자 설명을 하다 보면 길어지는 편이라 1분 넘기지 않게 끊어 줘. 설문 참여 인원, 점심시간 혼잡도, 현재 보관함 이용률까지만 말하고 바로 결론으로 가면 될 것 같아. 소연: 그다음 내가 40초 정도로 ‘왜 지금 필요한가’를 말하겠어. 수업 시간뿐 아니라 야간 자율학습 전후에도 휴대전화 보관 수요가 있다는 점을 강조하면 단순 편의 요구처럼 보이지 않을 거야."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "관리 인력",
+            "분실 책임"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단은 세부 운영 방식이나 보완 이유를 어떻게 구체화하는가?",
+          "prompt": "지우가 반론을 세 가지로 묶으며 든 내용을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 233
+              "paragraphId": "p3",
+              "start": 25,
+              "end": 36
+            },
+            {
+              "paragraphId": "p3",
+              "start": 42,
+              "end": 72
+            },
+            {
+              "paragraphId": "p3",
+              "start": 78,
+              "end": 107
             }
           ],
           "scoring": {
@@ -656,17 +688,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지우: 만약 ‘학생회가 불편을 과장한 것 아니냐’는 말이 나오면 어떻게 할까? 민준: 그 질문은 내가 먼저 설문 문항과 응답 수를 설명하고, 확인이 필요하면 원자료를 제출하겠다고 답할게. 소연: 그리고 바로 이어서 ‘불편 사례를 부풀리려는 게 아니라 반복된 민원을 정리한 것’이라고 정리하자. 지우: 좋아. 또 ‘설치보다 규칙 지도가 먼저 아니냐’는 반론에는 내가 규칙 지도와 시설 보완이 같이 가야 한다고 말하겠어."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "예산이 부족하다는 말",
+            "학생들이 스스로 관리하면 되지 왜 시설을 늘리느냐는 말",
+            "보관함을 늘리면 오히려 분실 사고 책임이 커진다는 말"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 최종 합의를 어떤 실행 계획으로 정리하는가?",
+          "prompt": "셋째 반론에 대해 피해야 한다고 한 말하기 방식을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 243
+              "paragraphId": "p3",
+              "start": 136,
+              "end": 160
             }
           ],
           "scoring": {
@@ -675,7 +711,57 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "민준: 정리하면 발표는 소연, 나, 지우 순서로 하고, 반론 대응은 예산은 내가 먼저, 필요성은 소연이 보충, 운영과 책임 문제는 지우가 맡는다. 각자 1분 안쪽으로 끊고, 질문이 길어져도 같은 얘기 반복하지 말자. 소연: 응, 발표문보다 질의응답이 더 중요하니까 답을 짧고 분명하게 하는 게 우선이야. 지우: 그럼 지금 정한 순서대로 한 번만 리허설하고, 내일은 추가 질문이 나오면 서로 눈치 보지 말고 필요한 사람만 이어서 답하자."
+          "answerText": "단순히 ‘책임은 학교가 안 져도 된다’는 식"
+        },
+        {
+          "id": "q7",
+          "prompt": "단순 편의 요구처럼 보이지 않게 강조할 점을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 163,
+              "end": 193
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "야간 자율학습 전후에도 휴대전화 보관 수요가 있다는 점"
+        },
+        {
+          "id": "q8",
+          "prompt": "정리한 반론 대응 역할을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 38,
+              "end": 47
+            },
+            {
+              "paragraphId": "p6",
+              "start": 49,
+              "end": 60
+            },
+            {
+              "paragraphId": "p6",
+              "start": 62,
+              "end": 80
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "예산은 내가 먼저",
+            "필요성은 소연이 보충",
+            "운영과 책임 문제는 지우가 맡는다"
+          ]
         }
       ]
     }

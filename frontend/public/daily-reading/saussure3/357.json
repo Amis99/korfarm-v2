@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "가스 ( )를 꼭 잠급니다.",
-          "answerText": "밸브",
-          "answerMatchMode": "EXACT",
+          "prompt": "가스레인지를 사용한 뒤 해야 할 일을 찾으시오.",
+          "answerText": "밸브를 꼭 잠급니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 43,
-              "end": 45
+              "end": 53
             }
           ],
           "scoring": {
@@ -869,14 +869,22 @@
         },
         {
           "id": "q2",
-          "prompt": "소화기 ( )을 뽑아야 해요.",
-          "answerText": "안전핀",
-          "answerMatchMode": "EXACT",
+          "prompt": "전기 코드와 화기 주변에서 주의해야 할 일을 모두 찾으시오.",
+          "answerTexts": [
+            "젖은 손으로 전기 코드를 만지지 않게 주의함",
+            "불이 붙기 쉬운 물건은 화기 주변에서 치웁니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 25,
-              "end": 28
+              "paragraphId": "p1",
+              "start": 55,
+              "end": 79
+            },
+            {
+              "paragraphId": "p1",
+              "start": 81,
+              "end": 106
             }
           ],
           "scoring": {
@@ -888,14 +896,47 @@
         },
         {
           "id": "q3",
-          "prompt": "안전 ( )을 최우선으로 함.",
-          "answerText": "수칙",
-          "answerMatchMode": "EXACT",
+          "prompt": "소화기를 사용할 때 해야 할 일을 모두 찾으시오.",
+          "answerTexts": [
+            "안전핀을 뽑고",
+            "노즐을 불이 난 곳으로 향함",
+            "손잡이를 꽉 움켜쥐어"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 3,
-              "end": 5
+              "paragraphId": "p2",
+              "start": 25,
+              "end": 32
+            },
+            {
+              "paragraphId": "p2",
+              "start": 33,
+              "end": 48
+            },
+            {
+              "paragraphId": "p2",
+              "start": 50,
+              "end": 61
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "사고를 막는 방패가 되는 것을 찾으시오.",
+          "answerText": "평소에 익혀 둔 규칙이 사고를 막는 방패임",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 75,
+              "end": 98
             }
           ],
           "scoring": {

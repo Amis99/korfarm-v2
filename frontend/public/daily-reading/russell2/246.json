@@ -1039,7 +1039,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "여러 사례를 보고 공통 법칙을 이끌어 내는 생각은?",
+          "prompt": "여러 사례에서 공통된 규칙을 이끌어 내는 사고 방식을 가리키는 말을 본문에서 찾으시오",
+          "answerText": "귀납",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -1098,57 +1100,17 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "귀납"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "더 나아가지 못하게 막는 끝선은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 12,
-              "end": 14
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "확실하지는 않지만 그럴듯하다고 인정될 만한 가능성을 뜻하는 말을 본문에서 찾으시오",
+          "answerText": "개연성",
           "answerMatchMode": "ANY",
-          "answerText": "한계"
-        },
-        {
-          "id": "q3",
-          "prompt": "몇 가지 사례를 넓혀 전체에 적용하는 일은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 124,
-              "end": 127
-            },
-            {
-              "paragraphId": "p6",
-              "start": 20,
-              "end": 23
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "일반화"
-        },
-        {
-          "id": "q4",
-          "prompt": "확실하지 않아도 그럴듯한 가능성은?",
           "answerRanges": [
             {
               "paragraphId": "p4",
@@ -1157,16 +1119,41 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "개연성"
+          "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "앞선 주장과 맞지 않아 틀렸음을 보여 주는 예는?",
+          "id": "q3",
+          "prompt": "본문에서 가열하면 팽창하는 예로 든 대상을 가리키는 말을 본문에서 찾으시오",
+          "answerText": "금속",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 41,
+              "end": 43
+            },
+            {
+              "paragraphId": "p1",
+              "start": 66,
+              "end": 68
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "앞서 세운 일반화에 어긋나 그것을 무너뜨리는 사례를 뜻하는 말을 본문에서 찾으시오",
+          "answerText": "반례",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p5",
@@ -1180,12 +1167,59 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "본문에서 귀납이 무너지는 장면을 보이기 위해 든 두 종류의 백조를 모두 찾으시오",
+          "answerText": "흰 백조, 검은 백조",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 77,
+              "end": 81
+            },
+            {
+              "paragraphId": "p3",
+              "start": 95,
+              "end": 100
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "관찰된 몇몇 사례를 넓혀 모든 대상에 적용하는 추론 방식을 가리키는 말을 본문에서 찾으시오",
+          "answerText": "일반화",
           "answerMatchMode": "ANY",
-          "answerText": "반례"
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 124,
+              "end": 127
+            },
+            {
+              "paragraphId": "p6",
+              "start": 20,
+              "end": 23
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

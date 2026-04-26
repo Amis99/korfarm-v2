@@ -571,11 +571,16 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "1문단에서 반복되는 구절을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
+              "end": 11
+            },
+            {
+              "paragraphId": "p1",
+              "start": 26,
               "end": 37
             }
           ],
@@ -584,17 +589,29 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "해바라기 씨를 심자.\n담모퉁이 참새 눈 숨기고\n해바라기 씨를 심자."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "해바라기 씨를 심자."
+          ]
         },
         {
           "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "2문단에서 흙을 다지는 주체를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 40
+              "end": 2
+            },
+            {
+              "paragraphId": "p2",
+              "start": 15,
+              "end": 18
+            },
+            {
+              "paragraphId": "p2",
+              "start": 28,
+              "end": 30
             }
           ],
           "scoring": {
@@ -602,17 +619,31 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "누나가 손으로 다지고 나면\n바둑이가 앞발로 다지고\n괭이가 꼬리로 다진다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "누나",
+            "바둑이",
+            "괭이"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "prompt": "2문단에서 다지는 데 쓰인 신체 부위를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 35
+              "paragraphId": "p2",
+              "start": 4,
+              "end": 5
+            },
+            {
+              "paragraphId": "p2",
+              "start": 20,
+              "end": 22
+            },
+            {
+              "paragraphId": "p2",
+              "start": 32,
+              "end": 34
             }
           ],
           "scoring": {
@@ -620,17 +651,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "우리가 눈 감고 한밤 자고 나면\n이슬이 내려와 같이 자고 가고,"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "손",
+            "앞발",
+            "꼬리"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
+          "prompt": "이슬을 사람처럼 행동하게 표현한 부분을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 27
+              "paragraphId": "p3",
+              "start": 18,
+              "end": 34
             }
           ],
           "scoring": {
@@ -639,16 +674,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "우리가 이웃에 간 동안에\n햇빛이 입 맞추고 가고,"
+          "answerText": "이슬이 내려와 같이 자고 가고"
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "햇빛이 사람처럼 하는 행동을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 37
+              "paragraphId": "p4",
+              "start": 18,
+              "end": 23
             }
           ],
           "scoring": {
@@ -657,16 +692,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "해바라기는 첫 시악시인데\n사흘이 지나도 부끄러워\n고개를 아니 든다."
+          "answerText": "입 맞추고"
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "해바라기를 비유한 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 53
+              "paragraphId": "p5",
+              "start": 6,
+              "end": 11
             }
           ],
           "scoring": {
@@ -675,7 +710,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "가만히 엿보러 왔다가\n소리를 깩! 지르고 간 놈이\n오오, 사철나무 잎에 숨은\n청개구리 고놈이다."
+          "answerText": "첫 시악시"
+        },
+        {
+          "id": "q7",
+          "prompt": "사흘이 지나도 해바라기가 하지 않는 행동을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 27,
+              "end": 36
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "고개를 아니 든다"
+        },
+        {
+          "id": "q8",
+          "prompt": "소리를 깩! 지르고 간 존재를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 43,
+              "end": 50
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "청개구리 고놈"
         }
       ]
     }

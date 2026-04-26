@@ -557,9 +557,36 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "여러 사람이 타고 짐을 실어 나르는 수단으로, 수레를 소가 끌게 만든 것은?",
+          "prompt": "옛날 조상들이 먼 길을 갈 때 이용한 교통수단을 모두 찾으시오.",
+          "answerTexts": [
+            "가마",
+            "말"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 17,
+              "end": 19
+            },
+            {
+              "paragraphId": "p1",
+              "start": 25,
+              "end": 26
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "짐을 옮길 때 이용한 옛날 교통수단을 찾으시오.",
           "answerText": "소달구지",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -575,15 +602,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "참 빠른 속도로 달릴 수 있도록 특별히 설계된 현대적인 기차를 부르는 말은?",
-          "answerText": "고속열차",
-          "answerMatchMode": "EXACT",
+          "id": "q3",
+          "prompt": "오늘날의 빠르고 편리한 교통수단의 예가 함께 나온 부분을 찾으시오.",
+          "answerText": "자동차, 기차, 비행기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 58,
-              "end": 62
+              "start": 14,
+              "end": 26
             }
           ],
           "scoring": {
@@ -594,11 +621,19 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "사람이 직접 운전하지 않아도 스스로 길을 찾아 목적지까지 가는 자동차는?",
-          "answerText": "자율 주행 차",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "미래에 나타날 새로운 이동 수단을 모두 찾으시오.",
+          "answerTexts": [
+            "하늘을 나는 자동차",
+            "자율 주행 차"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 50,
+              "end": 60
+            },
             {
               "paragraphId": "p3",
               "start": 62,

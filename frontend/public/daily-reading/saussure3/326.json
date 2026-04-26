@@ -850,9 +850,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "연못에 ( )를 빠뜨렸습니다.",
+          "prompt": "연못에 빠뜨린 물건을 지문에서 찾으시오.",
           "answerText": "쇠도끼",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -874,19 +874,22 @@
         },
         {
           "id": "q2",
-          "prompt": "( )한 나무꾼이 상을 받아요.",
-          "answerText": "정직",
-          "answerMatchMode": "EXACT",
+          "prompt": "산신령이 처음 들고 나타난 두 가지 도끼를 모두 찾으시오.",
+          "answerTexts": [
+            "금도끼",
+            "은도끼"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 13,
-              "end": 15
+              "start": 32,
+              "end": 35
             },
             {
               "paragraphId": "p1",
-              "start": 80,
-              "end": 82
+              "start": 37,
+              "end": 40
             }
           ],
           "scoring": {
@@ -898,14 +901,33 @@
         },
         {
           "id": "q3",
-          "prompt": "( ) 동화 속 재미를 찾아요.",
-          "answerText": "고전",
-          "answerMatchMode": "EXACT",
+          "prompt": "나무꾼이 도끼 대신 빠뜨린 것으로 상상한 물건을 지문에서 찾으시오.",
+          "answerText": "소중한 신발",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 67,
+              "end": 73
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "서로의 창의적인 생각을 들으며 피운 것을 지문에서 찾으시오.",
+          "answerText": "웃음꽃",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 110,
-              "end": 112
+              "start": 101,
+              "end": 104
             }
           ],
           "scoring": {

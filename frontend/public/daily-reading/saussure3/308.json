@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "해님과 바람이 ( )를 했습니다.",
-          "answerText": "내기",
-          "answerMatchMode": "EXACT",
+          "prompt": "세찬 바람은 나그네의 옷을 어떻게 만들었는지 지문에서 찾으시오.",
+          "answerText": "더 꽉 잡게",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 23,
-              "end": 25
+              "start": 43,
+              "end": 49
             }
           ],
           "scoring": {
@@ -869,29 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "나그네의 옷을 벗길 ( )을 해요.",
-          "answerText": "상상",
-          "answerMatchMode": "EXACT",
+          "prompt": "강한 힘보다 무엇이 이긴다는 내용인지 지문에서 찾으시오.",
+          "answerText": "부드러운 사랑",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 22,
-              "end": 24
-            },
-            {
-              "paragraphId": "p2",
-              "start": 118,
-              "end": 120
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p3",
-              "start": 127,
-              "end": 129
+              "paragraphId": "p1",
+              "start": 92,
+              "end": 99
             }
           ],
           "scoring": {
@@ -903,13 +888,32 @@
         },
         {
           "id": "q3",
-          "prompt": "나그네의 표정을 ( ) 묘사해요.",
-          "answerText": "생생하게",
-          "answerMatchMode": "EXACT",
+          "prompt": "해님과 바람 말고 누가 도와준다고 상상했는지 지문에서 찾으시오.",
+          "answerText": "구름 친구",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 67,
+              "end": 72
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "그림 속 나그네의 표정을 어떻게 묘사했는지 지문에서 찾으시오.",
+          "answerText": "무척 생생하게",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 70,
+              "start": 67,
               "end": 74
             }
           ],

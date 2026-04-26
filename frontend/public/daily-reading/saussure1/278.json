@@ -396,89 +396,52 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "책이 가득한 공부방?",
-          "answerText": "도서관",
-          "answerMatchMode": "EXACT",
+          "prompt": "용기를 내어 책상 밑의 손잡이를 당겨 비밀 계단을 발견한 인물은 누구인지 지문에서 찾아보세요",
+          "answerText": "수아",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 157,
-              "end": 160
-            },
-            {
-              "paragraphId": "p2",
-              "start": 23,
-              "end": 26
-            },
-            {
-              "paragraphId": "p2",
-              "start": 145,
-              "end": 148
-            }
+            {"paragraphId": "p1", "start": 16, "end": 18},
+            {"paragraphId": "p1", "start": 69, "end": 71},
+            {"paragraphId": "p1", "start": 123, "end": 125},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 136, "end": 138}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "책을 모아 둔 방?",
-          "answerText": "서재",
-          "answerMatchMode": "EXACT",
+          "prompt": "지하 계단을 내려가자 펼쳐졌던 낡은 책들이 가득한 신비로운 공간의 이름을 지문에서 찾아보세요",
+          "answerText": "비밀 서재",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 112,
-              "end": 114
-            },
-            {
-              "paragraphId": "p1",
-              "start": 127,
-              "end": 129
-            },
-            {
-              "paragraphId": "p2",
-              "start": 106,
-              "end": 108
-            }
+            {"paragraphId": "p1", "start": 109, "end": 114},
+            {"paragraphId": "p2", "start": 103, "end": 108}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "매우 귀하고 소중한 것?",
-          "answerText": "보물",
-          "answerMatchMode": "EXACT",
+          "prompt": "낡은 상자 안에서 발견된 진짜 보물 기록장에는 어떤 내용이 담겨 있었는지 지문에서 찾아보세요",
+          "answerText": "도서관의 역사",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 152,
-              "end": 154
-            },
-            {
-              "paragraphId": "p2",
-              "start": 31,
-              "end": 33
-            },
-            {
-              "paragraphId": "p2",
-              "start": 162,
-              "end": 164
-            }
+            {"paragraphId": "p1", "start": 157, "end": 164},
+            {"paragraphId": "p2", "start": 145, "end": 152}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "수아와 친구들이 도서관의 역사를 함께 배우며 마지막으로 나누었던 것은 무엇인지 지문에서 찾아보세요",
+          "answerText": "보물의 의미",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 162, "end": 168}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         }
       ]

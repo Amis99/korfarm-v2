@@ -557,14 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "분수에 넘치게 무언가를 탐내는 마음을 뜻하는 말은?",
-          "answerText": "욕심을",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리가 새로 지어 본 것은 무엇인지 지문에서 찾으시오.",
+          "answerText": "뒷이야기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 22,
-              "end": 25
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 37
             }
           ],
           "scoring": {
@@ -576,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "어떤 일이나 사건의 마지막 마무리나 상태를 뜻하는 말은?",
-          "answerText": "결말에",
-          "answerMatchMode": "EXACT",
+          "prompt": "정직한 할아버지 부부가 아기가 된 이웃을 어떻게 돌보았는지 지문에서 찾으시오.",
+          "answerText": "정성껏 돌보며",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 30,
-              "end": 33
+              "paragraphId": "p1",
+              "start": 75,
+              "end": 82
             }
           ],
           "scoring": {
@@ -595,14 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "사물이나 사실의 의미를 새롭게 이해하고 설명하는 활동은?",
-          "answerText": "재해석하니",
-          "answerMatchMode": "EXACT",
+          "prompt": "이웃집 할아버지는 어떤 사람이 되었는지 지문에서 찾으시오.",
+          "answerText": "나눔을 실천하는 사람",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 30,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "옛이야기를 어떤 방식으로 재해석했는지 지문에서 찾으시오.",
+          "answerText": "우리만의 방식",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 72,
-              "end": 77
+              "start": 62,
+              "end": 69
             }
           ],
           "scoring": {

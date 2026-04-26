@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "공기가 움직이는 무엇인가요?",
+          "prompt": "바람은 공기가 움직이는 무엇이라고 했는지 글에서 찾아 써 보세요",
           "answerText": "현상",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -571,14 +571,24 @@
         },
         {
           "id": "q2",
-          "prompt": "무엇로 만든 바람개비예요인가요?",
-          "answerText": "종이",
-          "answerMatchMode": "EXACT",
+          "prompt": "종이로 만들어 바람을 만나면 도는 물건이 무엇인지 찾아 써 보세요",
+          "answerText": "바람개비",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 70,
-              "end": 72
+              "start": 77,
+              "end": 81
+            },
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 4
+            },
+            {
+              "paragraphId": "p2",
+              "start": 59,
+              "end": 63
             }
           ],
           "scoring": {
@@ -590,14 +600,43 @@
         },
         {
           "id": "q3",
-          "prompt": "밖으로 나가서 무엇 보았나요?",
-          "answerText": "달려",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리가 달리면 무엇이 부딪혀 바람이 생기는지 찾아 모두 써 보세요",
+          "answerText": "공기",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "paragraphId": "p2",
+              "start": 33,
+              "end": 35
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "바람개비가 도는 모습을 흉내 낸 말을 글에서 찾아 모두 써 보세요",
+          "answerText": "뱅글",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 17,
-              "end": 19
+              "start": 76,
+              "end": 78
+            },
+            {
+              "paragraphId": "p2",
+              "start": 78,
+              "end": 80
             }
           ],
           "scoring": {

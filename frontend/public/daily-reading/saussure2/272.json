@@ -562,33 +562,85 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "무지개를 이루고 있는 예쁜 색깔은 모두 몇 가지인가요?",
-          "answerText": "일곱",
-          "answerMatchMode": "EXACT",
+          "prompt": "무지개를 이루는 일곱 가지 색깔을 모두 찾으시오.",
+          "answerText": "빨강, 주황, 노랑, 초록, 파랑, 남색, 보라",
+          "answerTexts": [
+            "빨강",
+            "주황",
+            "노랑",
+            "초록",
+            "파랑",
+            "남색",
+            "보라"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 71,
-              "end": 73
+              "start": 43,
+              "end": 45
+            },
+            {
+              "paragraphId": "p1",
+              "start": 47,
+              "end": 49
+            },
+            {
+              "paragraphId": "p1",
+              "start": 51,
+              "end": 53
+            },
+            {
+              "paragraphId": "p1",
+              "start": 55,
+              "end": 57
+            },
+            {
+              "paragraphId": "p1",
+              "start": 59,
+              "end": 61
+            },
+            {
+              "paragraphId": "p1",
+              "start": 63,
+              "end": 65
+            },
+            {
+              "paragraphId": "p1",
+              "start": 67,
+              "end": 69
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "공기 중에 떠 있는 이것과 햇빛이 만나면 빛이 꺾여 무지개가 생겨요. 이것은 무엇일까요?",
-          "answerText": "물방울",
-          "answerMatchMode": "EXACT",
+          "prompt": "무지개를 만드는 데 만나는 두 가지를 모두 찾으시오.",
+          "answerText": "햇빛, 물방울",
+          "answerTexts": [
+            "햇빛",
+            "물방울"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 5,
+              "end": 7
+            },
             {
               "paragraphId": "p2",
               "start": 9,
               "end": 12
+            },
+            {
+              "paragraphId": "p2",
+              "start": 57,
+              "end": 59
             },
             {
               "paragraphId": "p2",
@@ -597,47 +649,44 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "해가 쨍쨍한 날, 물이 뿜어져 나오는 이곳 근처에 가도 무지개를 볼 수 있어요. 이곳은 어디인가요?",
-          "answerText": "분수대",
-          "answerMatchMode": "EXACT",
+          "prompt": "햇빛이 작은 물방울들에 비쳐 빛이 꺾이면 어떻게 되는지 지문에서 찾으시오.",
+          "answerText": "여러 가지 색깔로 나뉘게 되지요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 106,
-              "end": 109
+              "start": 74,
+              "end": 91
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "무지개는 원래 반원 모양이 아니라 완벽한 이 모양이랍니다. 이 모양은 무엇인가요?",
-          "answerText": "동그라미",
-          "answerMatchMode": "EXACT",
+          "prompt": "땅에서 무지개를 보면 반만 보이는 까닭을 지문에서 찾으시오.",
+          "answerText": "아랫부분이 가려져서",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 23,
-              "end": 27
+              "start": 52,
+              "end": 62
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         }

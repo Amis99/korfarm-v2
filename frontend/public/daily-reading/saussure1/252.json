@@ -396,53 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "책의 갈피를 끼우는 도구?",
-          "answerText": "책갈피",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p1",
-              "start": 68,
-              "end": 71
-            },
-            {
-              "paragraphId": "p1",
-              "start": 146,
-              "end": 149
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p2",
-              "start": 57,
-              "end": 60
-            },
-            {
-              "paragraphId": "p2",
-              "start": 121,
-              "end": 124
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "글을 읽는 활동?",
+          "prompt": "책을 읽는 활동을 무엇이라고 하는지 본문에서 찾아보세요",
           "answerText": "독서",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -463,15 +419,58 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "모양을 예쁘게 다듬음?",
-          "answerText": "꾸미",
-          "answerMatchMode": "EXACT",
+          "id": "q2",
+          "prompt": "나만의 책갈피를 만들 때 사용한다고 한 두 가지 재료가 무엇인지 본문에서 찾아보세요",
+          "answerText": "종이, 리본",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 129,
-              "end": 131
+              "start": 45,
+              "end": 47
+            },
+            {
+              "paragraphId": "p1",
+              "start": 49,
+              "end": 51
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "책갈피를 사용하면 책장을 접지 않아도 되어 책을 어떻게 둘 수 있다고 했는지 본문에서 찾아보세요",
+          "answerText": "보관",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 38,
+              "end": 40
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "정성껏 꾸민 책갈피를 누구에게 선물한다고 했는지 본문에서 찾아보세요",
+          "answerText": "친구",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 62,
+              "end": 64
             }
           ],
           "scoring": {

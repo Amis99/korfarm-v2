@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "갓을 쓴 ( )가 됩니다.",
+          "prompt": "갓을 쓰고 산을 넘는 인물 역할을 맡은 사람을 두 글자로 적어 보세요",
           "answerText": "선비",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -576,9 +576,28 @@
         },
         {
           "id": "q2",
-          "prompt": "머리로 ( )을 댕댕 쳐요.",
+          "prompt": "선비를 위협하는 무서운 동물로 등장한 것을 세 글자로 적어 보세요",
+          "answerText": "구렁이",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 87,
+              "end": 90
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "까치가 머리로 쳤다고 한 것은 무엇인지 한 글자로 적어 보세요",
           "answerText": "종",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -594,15 +613,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "( )를 내는 까치의 모습.",
-          "answerText": "용기",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "다른 사람의 입장이 되어 보니 어떤 마음이 들었는지 두 글자로 적어 보세요",
+          "answerText": "보람",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 38,
-              "end": 40
+              "start": 102,
+              "end": 104
             }
           ],
           "scoring": {

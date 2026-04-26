@@ -396,24 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "철길 위를 달리는 차?",
-          "answerText": "기차",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 이번 기차 여행을 어떤 선물로 느꼈는지 찾아 보세요",
+          "answerText": "특별한 선물",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 11,
-              "end": 13
-            },
-            {
-              "paragraphId": "p1",
-              "start": 38,
-              "end": 40
-            },
-            {
-              "paragraphId": "p2",
-              "start": 121,
-              "end": 123
+              "start": 25,
+              "end": 31
             }
           ],
           "scoring": {
@@ -425,24 +415,14 @@
         },
         {
           "id": "q2",
-          "prompt": "다른 곳으로 떠나는 일?",
-          "answerText": "여행",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 가장 행복했다고 한 시간을 찾아 보세요",
+          "answerText": "공원에서 가족들과 함께 맛있는 도시락을 먹으며 도란도란 이야기를 나눈 시간",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 14,
-              "end": 16
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 136,
-              "end": 138
+              "start": 103,
+              "end": 144
             }
           ],
           "scoring": {
@@ -454,14 +434,38 @@
         },
         {
           "id": "q3",
-          "prompt": "눈앞에 보이는 모습?",
-          "answerText": "풍경",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 여행을 통해 느낀 두 가지를 모두 찾아 보세요",
+          "answerText": "가족의 소중함, 함께하는 즐거움",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 10,
+              "end": 17
+            },
+            {
+              "paragraphId": "p2",
+              "start": 19,
+              "end": 27
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "기차 안에서 본 풍경을 무엇에 비유했는지 한 군데 찾아 보세요",
+          "answerText": "한 폭의 그림",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 66,
-              "end": 68
+              "start": 74,
+              "end": 81
             }
           ],
           "scoring": {

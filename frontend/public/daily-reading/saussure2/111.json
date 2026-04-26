@@ -481,14 +481,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사물의 둘레를 감싸는 선이나 가장자리는?",
-          "answerText": "테두리",
+          "prompt": "시계가 무엇으로 이루어져 있는지 지문에서 찾으시오.",
+          "answerText": "숫자와 바늘",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 4,
-              "end": 7
+              "start": 54,
+              "end": 60
             }
           ],
           "scoring": {
@@ -499,14 +499,50 @@
         },
         {
           "id": "q2",
-          "prompt": "하루 동안 규칙적으로 마땅히 해야 하는 일은?",
-          "answerText": "일과",
+          "prompt": "긴 바늘은 얼마마다 한 칸씩 움직이는지 지문에서 찾으시오.",
+          "answerText": "1분마다 한 칸씩",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 6,
+              "end": 15
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "긴 바늘이 한 바퀴를 돌면 어떻게 되는지 지문에서 찾으시오.",
+          "answerText": "한 바퀴를 돌면 한 시간이 됩니다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 33,
+              "end": 51
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "시간표를 짜면 어떤 결과가 생기는지 지문에서 찾으시오.",
+          "answerText": "하루를 알차게 보낼 수 있습니다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 30,
-              "end": 32
+              "start": 60,
+              "end": 77
             }
           ],
           "scoring": {

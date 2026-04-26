@@ -416,19 +416,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "커다란 ( )가 있어요.",
-          "answerText": "느티나무",
-          "answerMatchMode": "EXACT",
+          "prompt": "햇볕이 가려져서 생긴 어두운 부분이라는 뜻의 단어를 지문에서 찾아 보세요.",
+          "answerText": "그늘",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 14,
-              "end": 18
-            },
-            {
-              "paragraphId": "p2",
-              "start": 27,
-              "end": 31
+              "start": 59,
+              "end": 61
             }
           ],
           "scoring": {
@@ -440,14 +435,19 @@
         },
         {
           "id": "q2",
-          "prompt": "( )에는 그늘을 줌.",
-          "answerText": "여름",
-          "answerMatchMode": "EXACT",
+          "prompt": "느티나무를 마치 사람처럼 표현한 시 행 두 군데(맞이하는 모습 + 잎을 주는 모습)를 모두 찾아 보세요.",
+          "answerText": "든든하게 서서 우리를\n언제나 반갑게 맞이합니다 / 예쁜 잎을 선물해 줍니다",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 50,
-              "end": 52
+              "start": 24,
+              "end": 49
+            },
+            {
+              "paragraphId": "p2",
+              "start": 13,
+              "end": 26
             }
           ],
           "scoring": {
@@ -459,9 +459,28 @@
         },
         {
           "id": "q3",
-          "prompt": "학교의 ( ) 같은 나무.",
+          "prompt": "느티나무 아래 모여서 도란도란 이야기하는 등장인물을 지문에서 찾아 보세요.",
+          "answerText": "친구들",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 39,
+              "end": 42
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "느티나무를 학교의 무엇 같다고 비유했는지 지문에서 찾아 보세요.",
           "answerText": "수호신",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",

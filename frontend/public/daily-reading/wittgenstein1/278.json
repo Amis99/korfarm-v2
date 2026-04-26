@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리 학교 축제는 이번에도 학생 참여가 무엇 생각한다?",
+          "prompt": "글쓴이가 처음에 중심으로 쓰려고 했던 내용을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 22,
-              "end": 39
+              "start": 55,
+              "end": 67
             }
           ],
           "scoring": {
@@ -585,16 +585,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "많았고 전반적으로 성공적이었다고"
+          "answerText": "축제가 재미있었다는 점"
         },
         {
           "id": "q2",
-          "prompt": "한 문단 안에서 화제가 계속 바뀌다 보니 무엇 수 있겠다?",
+          "prompt": "첫 문단에서 한꺼번에 꺼내 놓았다고 한 이야기를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 172,
-              "end": 186
+              "paragraphId": "p1",
+              "start": 93,
+              "end": 102
+            },
+            {
+              "paragraphId": "p1",
+              "start": 104,
+              "end": 110
+            },
+            {
+              "paragraphId": "p1",
+              "start": 112,
+              "end": 118
             }
           ],
           "scoring": {
@@ -602,17 +612,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "기사라기보다 메모처럼 읽힐"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "음식 부스 이야기",
+            "공연 이야기",
+            "날씨 이야기"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "주요 소재는 무엇인가요?",
+          "prompt": "분리배출 게임 부스를 준비한 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 121,
-              "end": 134
+              "paragraphId": "p2",
+              "start": 25,
+              "end": 31
             }
           ],
           "scoring": {
@@ -621,16 +635,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그래도 모두 열심히 했다"
+          "answerText": "환경 동아리"
         },
         {
           "id": "q4",
-          "prompt": "하지만 지금 초고에서는 이 장점을 뒤쪽에 짧게만 적어 두어 앞에서 무엇 덜 중요하게 보인다?",
+          "prompt": "체험 부스의 특징을 충분히 설명하지 못한 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 132,
-              "end": 144
+              "paragraphId": "p2",
+              "start": 88,
+              "end": 123
             }
           ],
           "scoring": {
@@ -639,16 +653,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "말한 문제점보다 오히려"
+          "answerText": "바로 뒤 문장에서 공연 시간이 조금 지연된 이야기를 붙여 버려서"
         },
         {
           "id": "q5",
-          "prompt": "마지막 부분에는 '무엇'고만 적어 두었다?",
+          "prompt": "공연의 첫 순서가 예정 시각보다 밀린 원인을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 10,
-              "end": 24
+              "paragraphId": "p3",
+              "start": 29,
+              "end": 41
             }
           ],
           "scoring": {
@@ -657,16 +671,68 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "내년에는 더 잘하면 좋겠다"
+          "answerText": "음향 점검이 길어지면서"
         },
         {
           "id": "q6",
-          "prompt": "문단의 초점은 무엇인가요?",
+          "prompt": "공연 문제를 설명할 때 나누어 쓰면 좋겠다고 한 내용을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 164,
+              "end": 173
+            },
+            {
+              "paragraphId": "p3",
+              "start": 175,
+              "end": 190
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "무엇이 아쉬웠는지",
+            "왜 그럼에도 의미가 있었는지"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "기사다운 결론이 되기 위해 들어가야 한다고 한 구체적 제안을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 61,
+              "end": 93
+            },
+            {
+              "paragraphId": "p5",
+              "start": 95,
+              "end": 126
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "공연 시작 전 장비 점검 시간을 더 확보할 필요가 있다든지",
+            "인기 부스 대기 줄을 분산할 안내 인력을 두어야 한다든지"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "이 초고를 다듬어야 할 방향을 설명한 부분을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 94,
-              "end": 102
+              "start": 34,
+              "end": 73
             }
           ],
           "scoring": {
@@ -675,7 +741,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "재미있었던 축제"
+          "answerText": "학생 참여가 많았던 이유와 운영에서 드러난 아쉬움을 함께 정리하는 방향"
         }
       ]
     }

@@ -1133,103 +1133,78 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "무엇은 남의 말이나 글을 내 문장 속에 가져오는 두 가지 방식이다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 12
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 12
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '간접 인용'을 모두 찾으시오.",
+          "answerText": "간접 인용",
           "answerMatchMode": "ANY",
-          "answerText": "직접 인용과 간접 인용"
+          "answerRanges": [
+            { "paragraphId": "p1", "start": 7, "end": 12 },
+            { "paragraphId": "p1", "start": 96, "end": 101 },
+            { "paragraphId": "p3", "start": 0, "end": 5 },
+            { "paragraphId": "p3", "start": 188, "end": 193 },
+            { "paragraphId": "p4", "start": 7, "end": 12 },
+            { "paragraphId": "p4", "start": 103, "end": 108 },
+            { "paragraphId": "p4", "start": 151, "end": 156 },
+            { "paragraphId": "p5", "start": 36, "end": 41 },
+            { "paragraphId": "p5", "start": 84, "end": 89 }
+          ],
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "예를 들어 민지가 \"무엇.\"라고 말했다고 쓰면, 민지가 실제로 한 말이 눈앞에 들리는 듯하다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 45,
-              "end": 62
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 직접 인용의 정의로 든 표현을 찾으시오.",
+          "answerText": "다른 사람이 한 말을 큰따옴표나 작은따옴표 안에 그대로 옮기는 방법",
           "answerMatchMode": "ANY",
-          "answerText": "오늘은 꼭 끝까지 읽어 볼 거야"
+          "answerRanges": [
+            { "paragraphId": "p1", "start": 55, "end": 92 }
+          ],
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "주요 소재는 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 123,
-              "end": 126
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 직접 인용의 예시로 든 민지의 말을 찾으시오.",
+          "answerText": "오늘은 꼭 끝까지 읽어 볼 거야",
           "answerMatchMode": "ANY",
-          "answerText": "-다고"
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 45, "end": 62 }
+          ],
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "무엇은 글의 목적에 따라 다르게 쓰인다?",
+          "prompt": "지문에서 간접 인용으로 바뀔 때 쓰이는 종결 표현을 모두 찾으시오.",
+          "answerText": "'-다고', '-라고', '-자고', '-냐고'",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 12
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 12
-            }
+            { "paragraphId": "p3", "start": 122, "end": 148 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "직접 인용과 간접 인용"
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "정리하면 직접 인용은 원래의 말을 그대로 무엇, 간접 인용은 그 내용을 풀어서 전하는 방식이다?",
+          "prompt": "지문에서 직접 인용을 쓸 때 정확히 신경 써야 할 요소를 모두 찾으시오.",
+          "answerText": "따옴표, 인용 조사, 종결 표현",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 23,
-              "end": 34
-            }
+            { "paragraphId": "p2", "start": 144, "end": 161 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "옮겨 말하는 방식이고"
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 직접 인용이 효과적인 경우와 간접 인용이 편리한 경우를 모두 찾으시오.",
+          "answerText": "대화 장면을 실감 나게 보여 주고 싶을 때, 기사나 보고문처럼 핵심 내용만 간단히 전하고 싶을 때",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            { "paragraphId": "p4", "start": 33, "end": 56 },
+            { "paragraphId": "p4", "start": 72, "end": 101 }
+          ],
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         }
       ]
     }

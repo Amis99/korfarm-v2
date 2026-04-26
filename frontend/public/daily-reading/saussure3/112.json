@@ -557,34 +557,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "농사를 짓거나 고기를 잡으며 살아가는 사람이 많고 자연과 가까운 지역은?",
-          "answerText": "촌락",
-          "answerMatchMode": "EXACT",
+          "prompt": "촌락이 도시에 보내는 것의 예와 종류를 모두 찾으시오.",
+          "answerTexts": [
+            "쌀과 과일",
+            "신선한 농산물"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 2
+              "start": 54,
+              "end": 59
             },
             {
               "paragraphId": "p1",
-              "start": 40,
-              "end": 42
-            },
-            {
-              "paragraphId": "p2",
-              "start": 35,
-              "end": 37
-            },
-            {
-              "paragraphId": "p2",
-              "start": 49,
-              "end": 51
-            },
-            {
-              "paragraphId": "p3",
-              "start": 10,
-              "end": 12
+              "start": 63,
+              "end": 70
             }
           ],
           "scoring": {
@@ -596,29 +584,22 @@
         },
         {
           "id": "q2",
-          "prompt": "사람들이 필요한 것을 서로 주고받으며 도움을 주고받는 활동을 무엇이라 하나요?",
-          "answerText": "교류",
-          "answerMatchMode": "EXACT",
+          "prompt": "도시가 촌락에 전해 주는 것의 예와 종류를 모두 찾으시오.",
+          "answerTexts": [
+            "텔레비전이나 자동차",
+            "편리한 물건들"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 98,
-              "end": 100
+              "paragraphId": "p2",
+              "start": 12,
+              "end": 22
             },
             {
               "paragraphId": "p2",
-              "start": 95,
-              "end": 97
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p3",
-              "start": 102,
-              "end": 104
+              "start": 26,
+              "end": 33
             }
           ],
           "scoring": {
@@ -630,14 +611,41 @@
         },
         {
           "id": "q3",
-          "prompt": "어떤 지역에서만 특별히 생산되는 대표적인 물건이나 농산물을 부르는 말은?",
-          "answerText": "특산물",
-          "answerMatchMode": "EXACT",
+          "prompt": "촌락 사람들이 도시에서 문화를 즐기는 장소를 찾으시오.",
+          "answerText": "큰 박물관이나 공연장",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
+              "paragraphId": "p2",
+              "start": 61,
+              "end": 72
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "교류가 양쪽 지역에 주는 결과와 교류를 의미 있게 만드는 마음을 모두 찾으시오.",
+          "answerTexts": [
+            "삶을 풍요롭게 만듭니다",
+            "따뜻한 마음"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 109,
+              "end": 121
+            },
+            {
               "paragraphId": "p3",
-              "start": 54,
-              "end": 57
+              "start": 94,
+              "end": 100
             }
           ],
           "scoring": {

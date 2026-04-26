@@ -557,29 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리가 실생활에서 보호하고 아껴야 할 전기와 물처럼 무한하지 않고 소중한 자원을 무엇이라고 부르나요?",
-          "answerText": "에너지",
-          "answerMatchMode": "EXACT",
+          "prompt": "1문단에서 전기와 물을 무엇이라고 했는지 지문에서 찾으시오.",
+          "answerText": "소중한 에너지 자원",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 29,
-              "end": 32
-            },
-            {
-              "paragraphId": "p1",
-              "start": 40,
-              "end": 43
-            },
-            {
-              "paragraphId": "p1",
-              "start": 86,
-              "end": 89
-            },
-            {
-              "paragraphId": "p3",
-              "start": 87,
-              "end": 90
+              "start": 25,
+              "end": 35
             }
           ],
           "scoring": {
@@ -591,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "전기를 절약하기 위한 방법으로 시청하지 않을 때는 반드시 뽑아 두어야 하는 텔레비전의 부품은 무엇인가요?",
-          "answerText": "코드",
-          "answerMatchMode": "EXACT",
+          "prompt": "2문단에서 쓰지 않는 방의 전등을 어떻게 해야 한다고 했는지 찾으시오.",
+          "answerText": "전등을 꼭 꺼야 합니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 74,
-              "end": 76
+              "start": 25,
+              "end": 37
             }
           ],
           "scoring": {
@@ -610,14 +595,59 @@
         },
         {
           "id": "q3",
-          "prompt": "물을 절약하기 위해 양치할 때 수도꼭지를 틀어놓지 않고 여기에 물을 받아서 사용하면 좋습니다.",
-          "answerText": "양치 컵",
-          "answerMatchMode": "EXACT",
+          "prompt": "2문단에서 전기 절약 방법과 관련해 언급된 물건이나 장치를 모두 찾으시오.",
+          "answerTexts": [
+            "전등",
+            "에어컨",
+            "텔레비전",
+            "코드",
+            "냉장고 문"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 25,
+              "end": 27
+            },
+            {
+              "paragraphId": "p2",
+              "start": 42,
+              "end": 45
+            },
+            {
+              "paragraphId": "p2",
+              "start": 59,
+              "end": 63
+            },
+            {
+              "paragraphId": "p2",
+              "start": 74,
+              "end": 76
+            },
+            {
+              "paragraphId": "p2",
+              "start": 86,
+              "end": 91
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "3문단에서 에너지를 아끼기 위해 기르는 것이 중요하다고 한 것은 무엇인지 찾으시오.",
+          "answerText": "작은 습관",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 37,
-              "end": 41
+              "start": 96,
+              "end": 101
             }
           ],
           "scoring": {

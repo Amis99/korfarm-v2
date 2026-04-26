@@ -474,35 +474,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "철썩이는 무엇 소리인가요?",
-          "answerText": "파도",
-          "answerMatchMode": "EXACT",
+          "prompt": "바닷가 마을에 사는 꼬마 소년으로 신기한 파도 소리를 수집하기 좋아하는 주인공의 이름은 무엇인지 찾아 써 보세요",
+          "answerText": "바다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 25,
-              "end": 27
-            },
-            {
-              "paragraphId": "p1",
-              "start": 65,
-              "end": 67
-            },
-            {
-              "paragraphId": "p1",
-              "start": 98,
-              "end": 100
-            },
-            {
-              "paragraphId": "p1",
-              "start": 155,
-              "end": 157
-            },
-            {
-              "paragraphId": "p2",
-              "start": 108,
-              "end": 110
-            }
+            {"paragraphId": "p1", "start": 17, "end": 19},
+            {"paragraphId": "p1", "start": 47, "end": 49}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -513,30 +490,11 @@
         },
         {
           "id": "q2",
-          "prompt": "높이 솟은 무엇로 가요인가요?",
-          "answerText": "등대",
-          "answerMatchMode": "EXACT",
+          "prompt": "소년이 파도가 들려주는 노래를 소중히 담는 데에 사용한 그릇은 무엇인지 찾아 써 보세요",
+          "answerText": "유리병",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 167,
-              "end": 169
-            },
-            {
-              "paragraphId": "p2",
-              "start": 38,
-              "end": 40
-            },
-            {
-              "paragraphId": "p2",
-              "start": 96,
-              "end": 98
-            },
-            {
-              "paragraphId": "p2",
-              "start": 146,
-              "end": 148
-            }
+            {"paragraphId": "p1", "start": 78, "end": 81}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -547,20 +505,27 @@
         },
         {
           "id": "q3",
-          "prompt": "주인공 소년의 이름?",
-          "answerText": "바다",
-          "answerMatchMode": "EXACT",
+          "prompt": "소년이 등대로 가는 길에 머리 위를 날며 앞길을 안내해 주는 것 같았던 동물은 무엇인지 찾아 써 보세요",
+          "answerText": "갈매기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 17,
-              "end": 19
-            },
-            {
-              "paragraphId": "p1",
-              "start": 47,
-              "end": 49
-            }
+            {"paragraphId": "p2", "start": 58, "end": 61}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "파도 소리 병 속에서 발견되어 소년을 등대 아래로 향하게 만든 첫 번째 힌트는 무엇인지 찾아 써 보세요",
+          "answerText": "쪽지",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 125, "end": 127},
+            {"paragraphId": "p1", "start": 138, "end": 140}
           ],
           "scoring": {
             "correctDeltaSec": 10,

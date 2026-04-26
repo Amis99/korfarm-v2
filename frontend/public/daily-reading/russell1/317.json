@@ -688,133 +688,82 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '외딴'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 12,
-              "end": 14
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '홀로 따로 떨어져 있는'이라는 뜻을 가진 두 글자 단어를 찾으시오",
+          "answerText": "외딴",
           "answerMatchMode": "ANY",
-          "answerText": "외딴"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 12, "end": 14}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '우물'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 14,
-              "end": 16
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 2
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '지나간 일을 돌이켜 생각함'을 뜻하는 한자어 두 글자를 찾으시오",
+          "answerText": "追憶",
           "answerMatchMode": "ANY",
-          "answerText": "우물"
+          "answerRanges": [
+            {"paragraphId": "p6", "start": 46, "end": 48}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '사나이'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 6,
-              "end": 9
-            },
-            {
-              "paragraphId": "p3",
-              "start": 23,
-              "end": 26
-            },
-            {
-              "paragraphId": "p4",
-              "start": 12,
-              "end": 15
-            },
-            {
-              "paragraphId": "p4",
-              "start": 37,
-              "end": 40
-            },
-            {
-              "paragraphId": "p5",
-              "start": 5,
-              "end": 8
-            },
-            {
-              "paragraphId": "p5",
-              "start": 33,
-              "end": 36
-            },
-            {
-              "paragraphId": "p6",
-              "start": 51,
-              "end": 54
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '~처럼'을 사용해 사나이를 다른 대상에 빗댄 직유적 표현을 찾으시오",
+          "answerText": "追憶처럼",
           "answerMatchMode": "ANY",
-          "answerText": "사나이"
+          "answerRanges": [
+            {"paragraphId": "p6", "start": 46, "end": 50}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '가엾어집니다'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 17,
-              "end": 23
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 사나이가 미워져서 화자가 보이는 행동을 한 어절로 찾으시오",
+          "answerText": "돌아갑니다",
           "answerMatchMode": "ANY",
-          "answerText": "가엾어집니다"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 32, "end": 37},
+            {"paragraphId": "p5", "start": 14, "end": 19}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '그리워집니다'를 모두 찾으시오.",
+          "prompt": "지문에서 화자가 사나이에 대해 느끼는 세 가지 감정을 모두 찾으시오",
+          "answerText": "미워, 가엾어, 그리워",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 38,
-              "end": 44
-            }
+            {"paragraphId": "p3", "start": 28, "end": 30},
+            {"paragraphId": "p4", "start": 17, "end": 20},
+            {"paragraphId": "p5", "start": 10, "end": 12},
+            {"paragraphId": "p5", "start": 38, "end": 41}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그리워집니다"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 우물 속에 있다고 한 자연 사물 다섯 가지를 모두 찾으시오",
+          "answerText": "달, 구름, 하늘, 바람, 가을",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 6, "end": 7},
+            {"paragraphId": "p2", "start": 12, "end": 14},
+            {"paragraphId": "p2", "start": 20, "end": 22},
+            {"paragraphId": "p2", "start": 32, "end": 34},
+            {"paragraphId": "p2", "start": 39, "end": 41},
+            {"paragraphId": "p6", "start": 6, "end": 7},
+            {"paragraphId": "p6", "start": 12, "end": 14},
+            {"paragraphId": "p6", "start": 20, "end": 22},
+            {"paragraphId": "p6", "start": 32, "end": 34},
+            {"paragraphId": "p6", "start": 39, "end": 41}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

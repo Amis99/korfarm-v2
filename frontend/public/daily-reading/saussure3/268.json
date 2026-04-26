@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "보석 같은 귀한 물건은?",
-          "answerText": "보물을",
-          "answerMatchMode": "EXACT",
+          "prompt": "농부가 보고 깜짝 놀란 대상을 본문에서 찾으시오.",
+          "answerText": "황금알을 낳는 거위",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 46,
-              "end": 49
+              "paragraphId": "p1",
+              "start": 4,
+              "end": 14
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "가르침을 주는 내용은?",
-          "answerText": "교훈을",
-          "answerMatchMode": "EXACT",
+          "prompt": "농부가 욕심 때문에 하려는 모습을 나타낸 표현을 본문에서 찾으시오.",
+          "answerText": "거위의 배를 가르려는 표정",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 17,
-              "end": 20
+              "paragraphId": "p1",
+              "start": 71,
+              "end": 85
             }
           ],
           "scoring": {
@@ -625,14 +625,49 @@
         },
         {
           "id": "q3",
-          "prompt": "정성을 다해 일하는 태도는?",
-          "answerText": "성실하게",
-          "answerMatchMode": "EXACT",
+          "prompt": "농부가 후회하게 된 원인과 잃은 것을 모두 찾으시오.",
+          "answerTexts": [
+            "어리석은 선택",
+            "소중한 보물"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 32,
+              "end": 39
+            },
+            {
+              "paragraphId": "p2",
+              "start": 42,
+              "end": 48
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "지나친 욕심에 대한 교훈과 중요한 태도를 모두 찾으시오.",
+          "answerTexts": [
+            "행복을 망친다는 교훈",
+            "성실하게 사는 태도"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
+              "start": 8,
+              "end": 19
+            },
+            {
+              "paragraphId": "p3",
               "start": 46,
-              "end": 50
+              "end": 56
             }
           ],
           "scoring": {

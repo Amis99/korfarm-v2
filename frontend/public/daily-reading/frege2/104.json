@@ -556,19 +556,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "양자의 특성을 이용한 새로운 통신 기술은 무엇인가요?",
-          "answerText": "양자 통신",
+          "prompt": "양자 통신의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "양자의 특성을 이용한 새로운 통신 기술",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 5
+              "start": 7,
+              "end": 28
             }
           ],
           "scoring": {
@@ -579,28 +574,18 @@
         },
         {
           "id": "q2",
-          "prompt": "양자 통신의 핵심 원리로 제시된 것 가운데 하나는 무엇인가요?",
-          "answerText": "양자 얽힘",
-          "answerMatchMode": "ANY",
+          "prompt": "양자 통신의 핵심 원리를 모두 찾으시오.",
+          "answerTexts": [
+            "양자 얽힘",
+            "중첩 현상"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 7,
               "end": 12
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "핵심 원리로 함께 제시된 또 다른 현상은 무엇인가요?",
-          "answerText": "중첩 현상",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+            },
             {
               "paragraphId": "p2",
               "start": 14,
@@ -614,15 +599,33 @@
           "revealOnWrong": true
         },
         {
+          "id": "q3",
+          "prompt": "양자 통신이 자랑하는 보안 수준을 찾으시오.",
+          "answerText": "해킹이 불가능한 수준의 보안",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 35,
+              "end": 50
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q4",
-          "prompt": "중간에서 정보를 훔치려 하면 즉시 무엇을 알 수 있다고 했나요?",
-          "answerText": "도청 사실",
+          "prompt": "누군가 정보를 훔치려 할 때 일어나는 변화를 찾으시오.",
+          "answerText": "양자 상태가 변한다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 39,
-              "end": 44
+              "start": 20,
+              "end": 30
             }
           ],
           "scoring": {
@@ -633,14 +636,14 @@
         },
         {
           "id": "q5",
-          "prompt": "양자 통신이 주목받는 분야는 무엇인가요?",
-          "answerText": "핵심 보안 기술",
+          "prompt": "양자 상태 변화 덕분에 즉시 알 수 있는 것을 찾으시오.",
+          "answerText": "도청 사실",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 11,
-              "end": 19
+              "paragraphId": "p3",
+              "start": 39,
+              "end": 44
             }
           ],
           "scoring": {

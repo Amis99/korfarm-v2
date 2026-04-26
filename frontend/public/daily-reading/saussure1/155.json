@@ -552,54 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "차가운 무엇이 녹았나요?",
-          "answerText": "얼음",
-          "answerMatchMode": "EXACT",
+          "prompt": "딱딱하고 모양이 정해진 얼음과 같은 물질의 상태를 무엇이라 하는지 찾아보세요",
+          "answerText": "고체",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 9,
-              "end": 11
-            },
-            {
-              "paragraphId": "p1",
-              "start": 37,
-              "end": 39
-            },
-            {
-              "paragraphId": "p1",
-              "start": 68,
-              "end": 70
-            },
-            {
-              "paragraphId": "p1",
-              "start": 100,
-              "end": 102
-            },
-            {
-              "paragraphId": "p1",
-              "start": 143,
-              "end": 145
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 52,
-              "end": 54
-            },
-            {
-              "paragraphId": "p2",
-              "start": 86,
-              "end": 88
-            },
-            {
-              "paragraphId": "p2",
-              "start": 109,
-              "end": 111
+              "start": 138,
+              "end": 140
             }
           ],
           "scoring": {
@@ -611,14 +571,19 @@
         },
         {
           "id": "q2",
-          "prompt": "컵 겉면의 작은 무엇인가요?",
-          "answerText": "물방울",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서 얼음과 물을 가리켜 부른 두 가지 물질의 상태를 모두 찾아보세요",
+          "answerText": "고체, 액체",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 119,
-              "end": 122
+              "start": 138,
+              "end": 140
+            },
+            {
+              "paragraphId": "p1",
+              "start": 147,
+              "end": 149
             }
           ],
           "scoring": {
@@ -630,9 +595,28 @@
         },
         {
           "id": "q3",
-          "prompt": "주위의 무엇에 따라 다름인가요?",
+          "prompt": "얼음이 녹는 까닭은 주위의 무엇을 흡수하기 때문인지 찾아보세요",
+          "answerText": "열",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 45,
+              "end": 46
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "얼음이 녹는 빠르기는 주위의 무엇에 따라 달라지는지 찾아보세요",
           "answerText": "온도",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",

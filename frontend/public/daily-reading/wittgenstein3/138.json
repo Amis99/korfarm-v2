@@ -571,30 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 교내 생성형 인공지능 활용 안내문 초고와 관련해 글을 쓰게 된 문제의식을 어떻게 밝히는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 217
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "최근 학교 안에서도 생성형 인공지능을 과제나 발표 준비에 활용하는 학생이 많아졌다. 그래서 사용을 무조건 막기보다 어떤 경우에 가능하고 어떤 경우는 제한되는지를 먼저 분명히 안내할 필요가 있다. 이번 안내문은 학생들이 편하게 이해할 수 있도록 만들려고 하며, 아직 세부 기준은 더 조정될 수 있다. 그렇지만 기본 방향은 학습 보조는 허용하고, 평가의 공정성을 해치는 사용은 막는 데 있다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 현재 상황이나 조사 내용을 어떤 방향으로 제시하는가?",
+          "prompt": "믿을 만한 권위를 갖춘 자료를 뜻하는 어구를 지문에서 찾아 쓰시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 217
+              "start": 159,
+              "end": 168
             }
           ],
           "scoring": {
@@ -603,16 +585,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "우선 수업 전 예습이나 자료 조사 단계에서 인공지능을 활용해 개념 설명을 듣거나 참고 질문을 만드는 일은 가능하다. 예를 들어 발표 주제를 정리하거나 어려운 용어를 쉽게 바꾸어 보는 데는 도움이 될 수 있다. 다만 이때도 인공지능이 준 내용을 그대로 사실로 믿으면 안 되고, 교과서나 공신력 있는 자료로 다시 확인해야 한다. 이 부분은 매우 중요하므로 확인 과정을 꼭 적는 것이 필요하다."
+          "answerText": "공신력 있는 자료"
+        },
+        {
+          "id": "q2",
+          "prompt": "예습이나 자료 조사 단계에서 가능하다고 한 인공지능 활용을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 34,
+              "end": 39
+            },
+            {
+              "paragraphId": "p2",
+              "start": 45,
+              "end": 50
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "개념 설명",
+            "참고 질문"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단은 첫 개선안이나 핵심 근거를 무엇으로 설명하는가?",
+          "prompt": "반대로 허용되지 않는다고 한 일을 지문에서 찾아 쓰시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 236
+              "start": 4,
+              "end": 35
             }
           ],
           "scoring": {
@@ -621,16 +629,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "반대로 수행평가 결과물 자체를 인공지능이 대신 작성하게 하는 일은 허용되지 않는다. 특히 독후감, 실험 보고서, 토론 발언문처럼 학생 개인의 이해와 사고 과정이 드러나야 하는 과제는 더 그렇다. 물론 초안을 참고하는 정도는 괜찮다는 의견도 있지만, 어디까지가 참고이고 어디부터가 대필인지 학생들이 헷갈릴 수 있어서 기준을 더 명확히 써야 할 것 같다. 현재로서는 문장 전체를 그대로 옮기는 사용은 금지라고 보는 편이 맞다."
+          "answerText": "수행평가 결과물 자체를 인공지능이 대신 작성하게 하는 일"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 추가 제안이나 고려할 점을 어떤 이유와 함께 내놓는가?",
+          "prompt": "학생 개인의 이해와 사고 과정이 드러나야 하는 과제의 예시를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 207
+              "paragraphId": "p3",
+              "start": 50,
+              "end": 53
+            },
+            {
+              "paragraphId": "p3",
+              "start": 55,
+              "end": 61
+            },
+            {
+              "paragraphId": "p3",
+              "start": 63,
+              "end": 69
             }
           ],
           "scoring": {
@@ -638,17 +656,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "출처 표시도 함께 안내해야 한다. 학생이 인공지능의 도움을 받아 아이디어를 정리했거나 질문 목록을 만들었다면, 과제 끝부분이나 발표 자료에 활용 사실을 짧게 밝히는 것이 바람직하다. 그런데 모든 사용을 일일이 적게 하면 오히려 형식만 늘어날 수도 있다. 그래서 단순 맞춤법 확인이나 표현 수정까지 전부 표시할지, 주요 내용 생성에 한해서만 표시할지는 더 논의가 필요하다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "독후감",
+            "실험 보고서",
+            "토론 발언문"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단은 실행 과정의 조건이나 우려를 어떻게 따져 보는가?",
+          "prompt": "현재로서는 금지라고 보는 편이 맞다고 한 사용 방식을 찾아 쓰시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 213
+              "paragraphId": "p3",
+              "start": 203,
+              "end": 220
             }
           ],
           "scoring": {
@@ -657,16 +679,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "또한 교사는 학생이 제출한 결과물만 보는 것이 아니라 작성 과정도 함께 확인할 필요가 있다. 초안과 수정본을 함께 제출하게 하거나, 수업 시간에 일부를 직접 써 보게 하면 학생이 실제로 이해했는지 알 수 있다. 이렇게 하면 인공지능 사용 여부만 단속하는 느낌보다 학습 과정을 보는 쪽에 가깝다. 다만 이런 방식은 교사 업무가 늘 수 있으므로 학년별로 다르게 적용해야 할지도 모른다."
+          "answerText": "문장 전체를 그대로 옮기는 사용"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 이 글의 결론과 요청을 어떻게 마무리하는가?",
+          "prompt": "활용 사실을 밝히는 것이 바람직하다고 한 인공지능 도움의 내용을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 245
+              "paragraphId": "p4",
+              "start": 36,
+              "end": 47
+            },
+            {
+              "paragraphId": "p4",
+              "start": 48,
+              "end": 60
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "아이디어를 정리했거나",
+            "질문 목록을 만들었다면"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "교사가 결과물만이 아니라 함께 확인할 필요가 있다고 한 대상을 찾아 쓰시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 30,
+              "end": 35
             }
           ],
           "scoring": {
@@ -675,7 +723,39 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정리하면 생성형 인공지능은 학습 보조 도구로는 쓸 수 있지만, 학생의 생각을 대신 제출하는 방식으로 사용해서는 안 된다. 학교는 금지와 허용만 나누기보다 활용 목적, 결과물 반영 정도, 출처 표시 방법을 같이 안내해야 한다. 그리고 학생들도 편리하다는 이유만으로 의존하지 말고, 최종 판단과 책임은 자신에게 있다는 점을 알아야 한다. 이 안내문은 이후에 예시를 더 보완하고 금지 사례를 조금 더 구체적으로 넣어서 다시 수정할 필요가 있다."
+          "answerText": "작성 과정"
+        },
+        {
+          "id": "q8",
+          "prompt": "학교가 금지와 허용만 나누기보다 같이 안내해야 한다고 한 내용을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 86,
+              "end": 91
+            },
+            {
+              "paragraphId": "p6",
+              "start": 93,
+              "end": 102
+            },
+            {
+              "paragraphId": "p6",
+              "start": 104,
+              "end": 112
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "활용 목적",
+            "결과물 반영 정도",
+            "출처 표시 방법"
+          ]
         }
       ]
     }

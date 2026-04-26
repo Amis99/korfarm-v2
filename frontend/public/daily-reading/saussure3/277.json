@@ -850,19 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "노래 ( )인 혹을 떼어 감.",
-          "answerText": "주머니",
-          "answerMatchMode": "EXACT",
+          "prompt": "도깨비들이 혹을 무엇이라고 여겼는지 지문에서 찾으시오.",
+          "answerText": "노래 주머니인 혹",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 61,
-              "end": 64
-            },
-            {
-              "paragraphId": "p2",
-              "start": 37,
-              "end": 40
+              "start": 58,
+              "end": 67
             }
           ],
           "scoring": {
@@ -874,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "요술 ( )이를 선물로 줌.",
-          "answerText": "방망이",
-          "answerMatchMode": "EXACT",
+          "prompt": "욕심쟁이 할아버지가 벌을 받게 된 행동을 지문에서 찾으시오.",
+          "answerText": "거짓말로 노래 주머니를 팔려다가",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 93,
-              "end": 96
+              "paragraphId": "p2",
+              "start": 29,
+              "end": 46
             }
           ],
           "scoring": {
@@ -893,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "위기에도 ( )하게 노래해요.",
-          "answerText": "씩씩",
-          "answerMatchMode": "EXACT",
+          "prompt": "착한 할아버지에게서 돋보인 두 가지를 지문에서 찾으시오.",
+          "answerText": "여유와 지혜",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 90,
+              "end": 96
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "역할놀이를 하며 어떤 시간이 즐거웠는지 지문에서 찾으시오.",
+          "answerText": "서로 배려하며 웃음을 나누는 시간",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 9,
-              "end": 11
+              "start": 78,
+              "end": 96
             }
           ],
           "scoring": {

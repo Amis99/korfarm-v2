@@ -918,26 +918,16 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이산화탄소가 물에 녹을 때 형성되는 것은 무엇인가요?",
-          "answerText": "탄산",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 14,
-              "end": 16
-            },
-            {
-              "paragraphId": "p3",
-              "start": 28,
-              "end": 30
-            },
-            {
-              "paragraphId": "p3",
-              "start": 59,
-              "end": 61
-            }
-          ],
+      "prompt": "바다가 온난화를 완화하는 방식을 찾으시오.",
+      "answerText": "대기 중의 이산화탄소를 흡수하여 온난화를 완화한다",
+      "answerMatchMode": "ANY",
+      "answerRanges": [
+        {
+          "paragraphId": "p1",
+          "start": 29,
+          "end": 56
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -946,16 +936,16 @@
         },
         {
           "id": "q2",
-          "prompt": "탄산이 형성되면서 증가하는 것은 무엇인가요?",
-          "answerText": "수소 이온 농도",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 36,
-              "end": 44
-            }
-          ],
+      "prompt": "이산화탄소가 물에 녹으면 일어나는 현상을 찾으시오.",
+      "answerText": "이산화탄소가 물에 녹으면 탄산이 형성된다",
+      "answerMatchMode": "ANY",
+      "answerRanges": [
+        {
+          "paragraphId": "p2",
+          "start": 0,
+          "end": 22
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -963,22 +953,17 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "산호와 조개류가 껍데기와 골격을 만들 때 사용하는 물질은 무엇인가요?",
-          "answerText": "탄산칼슘",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 28,
-              "end": 32
-            },
-            {
-              "paragraphId": "p3",
-              "start": 59,
-              "end": 63
-            }
-          ],
+      "id": "q3",
+      "prompt": "산성화가 특히 치명적인 대상을 찾으시오.",
+      "answerText": "산호와 조개류",
+      "answerMatchMode": "ANY",
+      "answerRanges": [
+        {
+          "paragraphId": "p3",
+          "start": 8,
+          "end": 15
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -987,16 +972,30 @@
         },
         {
           "id": "q4",
-          "prompt": "해양 생물 감소가 영향을 미치는 산업은 무엇인가요?",
-          "answerText": "어업",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 11,
-              "end": 13
-            }
-          ],
+      "prompt": "해양 생물 감소로 발생하는 결과를 모두 찾으시오.",
+      "answerTexts": [
+        "수산물 생산량",
+        "경제적 손실",
+        "해안 지역 주민들의 생계"
+      ],
+      "answerMatchMode": "ALL",
+      "answerRanges": [
+        {
+          "paragraphId": "p4",
+          "start": 25,
+          "end": 32
+        },
+        {
+          "paragraphId": "p4",
+          "start": 39,
+          "end": 45
+        },
+        {
+          "paragraphId": "p4",
+          "start": 56,
+          "end": 69
+        }
+      ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1005,13 +1004,21 @@
         },
         {
           "id": "q5",
-          "prompt": "지속 가능한 해양 환경을 위해 필요하다고 한 노력은 무엇인가요?",
-          "answerText": "국제적인 협력",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 72,
+      "prompt": "해양 산성화를 막기 위한 해결책을 모두 찾으시오.",
+      "answerTexts": [
+        "온실가스 배출을 줄이는 것",
+        "국제적인 협력"
+      ],
+      "answerMatchMode": "ALL",
+      "answerRanges": [
+        {
+          "paragraphId": "p5",
+          "start": 24,
+          "end": 38
+        },
+        {
+          "paragraphId": "p5",
+          "start": 72,
               "end": 79
             }
           ],

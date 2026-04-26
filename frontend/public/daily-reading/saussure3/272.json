@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "걱정 없이 평온한 상태는?",
-          "answerText": "평화를",
-          "answerMatchMode": "EXACT",
+          "prompt": "연못 주변을 산책할 때는 어떻게 걸어야 하는지 지문에서 찾으시오.",
+          "answerText": "조심조심",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 37,
-              "end": 40
+              "paragraphId": "p1",
+              "start": 22,
+              "end": 26
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "남을 도와주거나 살핌은?",
-          "answerText": "배려하는",
-          "answerMatchMode": "EXACT",
+          "prompt": "작은 개구리가 어떻게 되지 않게 주의한다고 했는지 지문에서 찾으시오.",
+          "answerText": "다치지 않게",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 72,
-              "end": 76
+              "paragraphId": "p1",
+              "start": 52,
+              "end": 58
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "생물의 생활 환경은?",
-          "answerText": "생태계를",
-          "answerMatchMode": "EXACT",
+          "prompt": "생명의 평화를 깨뜨리지 않도록 어떤 태도가 중요하다고 했는지 지문에서 찾으시오.",
+          "answerText": "조용히 관찰하는 태도",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 81,
-              "end": 85
+              "start": 50,
+              "end": 61
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "생명을 아끼는 마음으로 무엇에 귀를 기울이자고 했는지 지문에서 찾으시오.",
+          "answerText": "자연의 소리",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 75,
+              "end": 81
             }
           ],
           "scoring": {

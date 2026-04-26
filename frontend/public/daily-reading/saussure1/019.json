@@ -552,14 +552,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "서로의 ( )을 말해요.",
-          "answerText": "의견",
-          "answerMatchMode": "EXACT",
+          "prompt": "회의에서 친구들의 발표를 차례로 도와준 사람과 칠판에 내용을 적은 사람을 모두 찾아 보세요.",
+          "answerText": "회의 진행자, 기록자",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 43,
-              "end": 45
+              "start": 57,
+              "end": 63
+            },
+            {
+              "paragraphId": "p1",
+              "start": 87,
+              "end": 90
             }
           ],
           "scoring": {
@@ -571,14 +576,19 @@
         },
         {
           "id": "q2",
-          "prompt": "내용을 ( )히 적었어요.",
-          "answerText": "꼼꼼",
-          "answerMatchMode": "EXACT",
+          "prompt": "도서관에서 지키기로 정한 규칙의 예시를 모두 찾아 보세요.",
+          "answerText": "뛰지 않기, 조용히 하기",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 105,
-              "end": 107
+              "paragraphId": "p2",
+              "start": 28,
+              "end": 33
+            },
+            {
+              "paragraphId": "p2",
+              "start": 35,
+              "end": 41
             }
           ],
           "scoring": {
@@ -590,14 +600,33 @@
         },
         {
           "id": "q3",
-          "prompt": "회의 결과가 ( )해요.",
-          "answerText": "뿌듯",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구들과 약속을 하니 어떻다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "나들이가 더 기대됩니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 103,
-              "end": 105
+              "start": 67,
+              "end": 79
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "어떤 방법으로 회의를 마쳤다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "민주적인 방법",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 81,
+              "end": 88
             }
           ],
           "scoring": {

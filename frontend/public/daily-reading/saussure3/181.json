@@ -562,19 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "거울의 겉면이 매끄러워서 빛이 부딪혔다가 그대로 되돌아오고 튕겨져 나가는 원리는?",
-          "answerText": "반사",
-          "answerMatchMode": "EXACT",
+          "prompt": "거울에 우리의 얼굴이 똑같이 비치는 이유가 되는 원리를 찾으시오.",
+          "answerText": "반사의 원리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 100,
-              "end": 102
-            },
-            {
-              "paragraphId": "p3",
-              "start": 8,
-              "end": 10
+              "end": 106
             }
           ],
           "scoring": {
@@ -586,14 +581,14 @@
         },
         {
           "id": "q2",
-          "prompt": "우리의 모습을 비출 때 위아래 방향은 그대로이지만 좌우를 반대로 바꾸어 주는 거울은?",
-          "answerText": "평면거울",
-          "answerMatchMode": "EXACT",
+          "prompt": "거울의 겉면은 빛을 흩어지지 않게 하고 어떤 방향으로 튕겨 보낸다고 했는지 찾으시오.",
+          "answerText": "일정한 방향",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 63,
-              "end": 67
+              "start": 36,
+              "end": 42
             }
           ],
           "scoring": {
@@ -605,29 +600,49 @@
         },
         {
           "id": "q3",
-          "prompt": "글을 읽을 때 도대체 왜 그럴까 궁금증을 가지고 스스로 계속 묻고 던져 보아야 하는 것은?",
-          "answerText": "질문",
-          "answerMatchMode": "EXACT",
+          "prompt": "평면거울이 그대로 두는 방향과 거꾸로 바꾸는 방향을 모두 찾으시오.",
+          "answerTexts": [
+            "위아래",
+            "왼쪽과 오른쪽"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 143,
-              "end": 145
+              "paragraphId": "p2",
+              "start": 82,
+              "end": 85
             },
             {
               "paragraphId": "p2",
-              "start": 164,
-              "end": 166
+              "start": 93,
+              "end": 100
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "질문을 던지며 읽으면 쉽게 찾을 수 있는 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "글의 중심 내용",
+            "숨겨진 비밀"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 98,
+              "end": 106
             },
             {
               "paragraphId": "p3",
-              "start": 65,
-              "end": 67
-            },
-            {
-              "paragraphId": "p3",
-              "start": 134,
-              "end": 136
+              "start": 108,
+              "end": 114
             }
           ],
           "scoring": {

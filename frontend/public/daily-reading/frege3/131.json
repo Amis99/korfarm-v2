@@ -918,14 +918,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "천장이 높은 공간이 촉진한다고 한 사고 방식은 무엇인가요?",
-          "answerText": "창의적 사고",
+          "prompt": "건축이 지닌다고 한 물리적 구조물 이상의 것을 찾으시오.",
+          "answerText": "물리적 구조물 이상의 의미",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 37,
-              "end": 43
+              "paragraphId": "p1",
+              "start": 4,
+              "end": 18
             }
           ],
           "scoring": {
@@ -936,7 +936,25 @@
         },
         {
           "id": "q2",
-          "prompt": "실내에 생동감을 부여하는 빛은 무엇인가요?",
+          "prompt": "공간의 크기와 비례가 유발하는 반응을 찾으시오.",
+          "answerText": "심리적 반응",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 12,
+              "end": 18
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "실내에 생동감을 부여하는 빛을 찾으시오.",
           "answerText": "자연광",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -953,8 +971,8 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "사용자가 공간을 탐색하는 방식을 가리키는 말은 무엇인가요?",
+          "id": "q4",
+          "prompt": "사용자가 공간을 탐색하는 방식을 가리키는 말을 찾으시오.",
           "answerText": "동선",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -981,32 +999,22 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "따뜻한 느낌을 전달하는 재료는 무엇인가요?",
-          "answerText": "나무",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 21,
-              "end": 23
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q5",
-          "prompt": "차갑고 현대적인 인상을 주는 재료 두 가지는 무엇인가요?",
-          "answerText": "금속과 유리",
-          "answerMatchMode": "ANY",
+          "prompt": "차갑고 현대적인 인상을 주는 재료를 모두 찾으시오.",
+          "answerTexts": [
+            "금속",
+            "유리"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 39,
+              "end": 41
+            },
+            {
+              "paragraphId": "p5",
+              "start": 43,
               "end": 45
             }
           ],

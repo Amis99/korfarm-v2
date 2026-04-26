@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이웃과 인사하면 마음이 ( )해요.",
-          "answerText": "따뜻",
-          "answerMatchMode": "EXACT",
+          "prompt": "이웃과 사이좋게 지내면 마음이 어떻게 된다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "이웃과 사이좋게 지내면 마음이 무척 따뜻해져요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 46,
-              "end": 48
+              "start": 26,
+              "end": 51
             }
           ],
           "scoring": {
@@ -571,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "작은 ( )가 마을을 행복하게 해요.",
-          "answerText": "배려",
-          "answerMatchMode": "EXACT",
+          "prompt": "무거운 짐을 든 이웃을 어떻게 돕는다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "무거운 짐을 든 이웃을 위해 문을 열어 주어요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 109,
-              "end": 111
+              "start": 79,
+              "end": 104
             }
           ],
           "scoring": {
@@ -590,14 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "이웃은 가족만큼 ( )한 친구이에요.",
-          "answerText": "소중",
-          "answerMatchMode": "EXACT",
+          "prompt": "작은 배려가 어떤 마을을 만든다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "작은 배려가 즐거운 우리 마을을 만듭니다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 106,
+              "end": 128
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "이웃이 어떤 존재라고 했는지 지문에서 찾아 보세요.",
+          "answerText": "이웃은 가족만큼 소중한 우리들의 친구입니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 86,
-              "end": 88
+              "start": 77,
+              "end": 100
             }
           ],
           "scoring": {

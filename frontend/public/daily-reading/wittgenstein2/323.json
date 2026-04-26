@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "전통적인 컴퓨터 환경에서 CPU가 중심이 된 이유를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 265
+              "start": 74,
+              "end": 102
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "전통적인 컴퓨터 환경에서는 문서 작성이나 웹 탐색처럼 작업 종류가 자주 바뀌고 연산 순서의 통제가 중요한 일이 많았다. 이런 작업은 복잡한 명령 흐름을 빠르게 해석하고 조정해야 하므로 CPU가 중심이 되었다. CPU는 소수의 고성능 코어를 이용해 다양한 명령을 유연하게 처리하는 데 강점을 가진다. 그러나 인공 지능 학습이나 고해상도 영상 처리처럼 같은 계산을 엄청난 양의 데이터에 반복 적용해야 하는 작업이 늘어나면서, 기존 구조만으로는 처리량을 충분히 높이기 어려워졌다."
+          "answerText": "복잡한 명령 흐름을 빠르게 해석하고 조정해야 하므로"
         },
         {
           "id": "q2",
-          "prompt": "2문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "GPU가 발전해 온 그래픽 처리의 구조를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 272
+              "start": 47,
+              "end": 75
             }
           ],
           "scoring": {
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이때 주목받은 장치가 GPU다. GPU는 원래 그래픽 처리를 위해 만들어졌기 때문에 수많은 픽셀에 비슷한 연산을 한꺼번에 적용하는 구조에 맞추어 발전했다. 그래서 개별 코어 하나하나의 제어 능력보다는 많은 코어가 같은 일을 동시에 수행하는 병렬성에 초점을 둔다. 다시 말해 CPU가 복잡한 지휘를 잘하는 소수 정예 체제라면, GPU는 단순한 계산을 동시에 밀어붙이는 대규모 작업반에 가깝다. 이런 구조 덕분에 GPU는 행렬 연산, 영상 처리, 과학 계산 같은 분야에서 강한 성능을 낸다."
+          "answerText": "수많은 픽셀에 비슷한 연산을 한꺼번에 적용하는 구조"
         },
         {
           "id": "q3",
-          "prompt": "3문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "CPU와 GPU를 비유한 표현을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 285
+              "paragraphId": "p2",
+              "start": 170,
+              "end": 178
+            },
+            {
+              "paragraphId": "p2",
+              "start": 205,
+              "end": 212
             }
           ],
           "scoring": {
@@ -620,17 +625,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "GPU 안에서는 연산이 무작정 흩어져 실행되는 것이 아니라 일정한 묶음 단위로 관리된다. 여러 스레드가 하나의 스레드 블록으로 묶이고, 이 블록들이 연산 유닛에 배치되어 같은 명령을 병렬로 수행한다. 이 과정에서 스케줄러는 어떤 블록을 어느 연산 유닛에 보낼지 정해 자원 낭비를 줄이려 한다. 만약 어떤 블록은 일이 빨리 끝나고 다른 블록은 오래 걸리면, 일부 연산 유닛은 대기 상태가 되어 전체 효율이 떨어질 수 있다. 따라서 GPU 성능은 코어 수만이 아니라 일을 얼마나 고르게 나누느냐에도 크게 좌우된다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "소수 정예 체제",
+            "대규모 작업반"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "여러 스레드가 하나로 묶이는 단위를 찾으시오.",
           "answerRanges": [
             {
+              "paragraphId": "p3",
+              "start": 62,
+              "end": 68
+            },
+            {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 287
+              "start": 110,
+              "end": 116
             }
           ],
           "scoring": {
@@ -639,16 +652,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "GPU의 또 다른 핵심은 메모리 구조다. 모든 스레드가 접근할 수 있는 전역 메모리는 용량이 크지만 상대적으로 느리다. 반면 레지스터는 매우 빠르지만 한 스레드만 쓸 수 있고, 공유 메모리는 같은 스레드 블록 안의 여러 스레드가 함께 쓸 수 있으면서도 전역 메모리보다 빠르다. 따라서 성능을 높이려면 자주 쓰는 데이터를 가능한 한 레지스터나 공유 메모리에 올려두고, 전역 메모리 접근은 줄이는 편이 유리하다. 결국 병렬 처리 성능은 계산 능력뿐 아니라 데이터를 어디에 두고 어떻게 꺼내 쓰느냐에 의해서도 결정된다."
+          "answerText": "스레드 블록"
         },
         {
           "id": "q5",
-          "prompt": "5문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "일부 연산 유닛이 대기 상태가 될 수 있는 조건을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 291
+              "paragraphId": "p3",
+              "start": 167,
+              "end": 183
+            },
+            {
+              "paragraphId": "p3",
+              "start": 184,
+              "end": 197
             }
           ],
           "scoring": {
@@ -656,17 +674,56 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "하지만 GPU가 항상 유리한 것은 아니다. GPU는 많은 스레드가 같은 명령을 나란히 실행할 때 가장 효율적이므로, 조건에 따라 실행 경로가 자주 갈라지는 연산에서는 장점이 줄어든다. 예를 들어 어떤 값은 A 연산을 하고 다른 값은 B 연산을 해야 한다면, 한 블록 안의 스레드들이 서로 다른 길로 흩어지게 된다. 이 경우 일부 스레드는 먼저 끝나도 다른 스레드가 작업을 마칠 때까지 기다려야 하므로 병렬성이 약해진다. 따라서 GPU는 단순 반복 계산에는 강하지만, 분기문과 복잡한 제어가 많은 작업에는 불리할 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "어떤 블록은 일이 빨리 끝나고",
+            "다른 블록은 오래 걸리면"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "성능을 높이기 위해 자주 쓰는 데이터를 올려두는 곳을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 283
+              "paragraphId": "p4",
+              "start": 70,
+              "end": 74
+            },
+            {
+              "paragraphId": "p4",
+              "start": 185,
+              "end": 189
+            },
+            {
+              "paragraphId": "p4",
+              "start": 99,
+              "end": 105
+            },
+            {
+              "paragraphId": "p4",
+              "start": 191,
+              "end": 197
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "레지스터",
+            "공유 메모리"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "GPU가 불리할 수 있는 작업을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 261,
+              "end": 279
             }
           ],
           "scoring": {
@@ -675,7 +732,33 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그래서 최근의 컴퓨팅 환경은 CPU와 GPU를 경쟁 관계가 아니라 분업 관계로 본다. 전체 흐름을 제어하고 복잡한 판단을 처리하는 일은 CPU가 맡고, 대량의 반복 계산은 GPU가 맡는 식이다. 이처럼 연산의 성격에 따라 두 장치의 역할을 나누면 시스템 전체 효율을 높일 수 있다. 결국 중요한 것은 어떤 장치가 더 우월한지가 아니라, 작업이 요구하는 계산 방식이 무엇인지 파악하는 일이다. 현대의 대규모 연산 환경은 바로 이 점을 바탕으로 CPU와 GPU의 구조적 차이를 활용하는 방향으로 발전하고 있다."
+          "answerText": "분기문과 복잡한 제어가 많은 작업"
+        },
+        {
+          "id": "q8",
+          "prompt": "최근 컴퓨팅 환경에서 CPU가 맡는 일과 GPU가 맡는 일을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 48,
+              "end": 74
+            },
+            {
+              "paragraphId": "p6",
+              "start": 85,
+              "end": 94
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "전체 흐름을 제어하고 복잡한 판단을 처리하는 일",
+            "대량의 반복 계산"
+          ]
         }
       ]
     }

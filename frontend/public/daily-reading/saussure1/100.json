@@ -552,19 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "새해 첫날 ( )를 열었습니다.",
-          "answerText": "회의",
-          "answerMatchMode": "EXACT",
+          "prompt": "건강을 위해 매일 걷겠다고 말한 가족 구성원을 두 글자로 적어 보세요",
+          "answerText": "아빠",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 12,
-              "end": 14
-            },
-            {
-              "paragraphId": "p2",
-              "start": 52,
-              "end": 54
+              "start": 23,
+              "end": 25
             }
           ],
           "scoring": {
@@ -576,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "가족의 ( )을 종이에 적습니다.",
-          "answerText": "소망",
-          "answerMatchMode": "EXACT",
+          "prompt": "더 다정하게 말하겠다고 한 가족 구성원을 두 글자로 적어 보세요",
+          "answerText": "엄마",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 109,
-              "end": 111
+              "start": 48,
+              "end": 50
             }
           ],
           "scoring": {
@@ -595,14 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "서로의 ( )을 응원합니다.",
-          "answerText": "계획",
-          "answerMatchMode": "EXACT",
+          "prompt": "스스로 하겠다고 약속한 것은 학교의 무엇인지 두 글자로 적어 보세요",
+          "answerText": "숙제",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 82,
+              "end": 84
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "회의를 한 뒤 마음이 어떻게 되었다고 했는지 세 글자로 적어 보세요",
+          "answerText": "든든하",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 8,
-              "end": 10
+              "start": 66,
+              "end": 69
             }
           ],
           "scoring": {

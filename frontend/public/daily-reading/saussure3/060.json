@@ -557,24 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "여러 사람이 모여 물건을 사고팔며, 이웃 간의 따뜻한 정과 넉넉한 인심을 느낄 수 있는 곳은?",
-          "answerText": "전통 시장",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이 가족이 방문한 전통 시장의 모습을 설명한 부분을 찾으시오.",
+          "answerText": "맛있는 먹거리와 정겨운 웃음이 넘치는 전통 시장",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 28,
+              "start": 7,
               "end": 33
-            },
-            {
-              "paragraphId": "p3",
-              "start": 10,
-              "end": 15
-            },
-            {
-              "paragraphId": "p3",
-              "start": 99,
-              "end": 104
             }
           ],
           "scoring": {
@@ -586,14 +576,22 @@
         },
         {
           "id": "q2",
-          "prompt": "상인 아저씨가 물건을 파는 것 이외에도 손님에게 정을 담아 공짜로 더 얹어 주신 것을 부르는 말은?",
-          "answerText": "덤",
-          "answerMatchMode": "EXACT",
+          "prompt": "시장 입구에서 맡은 냄새와 상인 아저씨가 손님에게 한 일을 모두 찾으시오.",
+          "answerTexts": [
+            "갓 튀긴 꽈배기의 고소한 냄새",
+            "덤으로 채소를 더 얹어 주셨습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 53,
+              "end": 69
+            },
             {
               "paragraphId": "p2",
               "start": 25,
-              "end": 26
+              "end": 43
             }
           ],
           "scoring": {
@@ -605,19 +603,49 @@
         },
         {
           "id": "q3",
-          "prompt": "시장 여행을 마친 후 활기찬 분위기와 보고 들은 경험을 자세하게 정리하여 쓴 글은 무엇인가요?",
-          "answerText": "기행문",
-          "answerMatchMode": "EXACT",
+          "prompt": "좁은 길 양쪽 바구니에 담긴 물건을 모두 찾으시오.",
+          "answerTexts": [
+            "싱싱한 생선",
+            "알록달록한 과일들"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 55,
+              "end": 61
+            },
+            {
+              "paragraphId": "p2",
+              "start": 63,
+              "end": 72
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "기행문에 담은 시장의 특징을 모두 찾으시오.",
+          "answerTexts": [
+            "시장의 활기찬 분위기",
+            "이웃들의 넉넉한 인심"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 30,
-              "end": 33
+              "start": 48,
+              "end": 59
             },
             {
               "paragraphId": "p3",
-              "start": 42,
-              "end": 45
+              "start": 61,
+              "end": 72
             }
           ],
           "scoring": {

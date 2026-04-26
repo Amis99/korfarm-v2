@@ -1326,14 +1326,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "가장 먼저 시급하다고 한 대상은 어느 계층인가요?",
-          "answerText": "청년층",
+          "prompt": "글쓴이가 문제 해결을 위해 건의하고자 한 것은 무엇인가요?",
+          "answerText": "몇 가지 방안",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 7
+              "paragraphId": "p1",
+              "start": 107,
+              "end": 114
             }
           ],
           "scoring": {
@@ -1344,31 +1344,21 @@
         },
         {
           "id": "q2",
-          "prompt": "신혼부부를 위해 늘리자고 한 주택은 무엇인가요?",
-          "answerText": "공공 임대 주택",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 45,
-              "end": 53
-            }
+          "prompt": "기업 유치를 위해 필요하다고 한 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "세제 혜택",
+            "인프라 구축"
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "안심하고 아이를 맡길 수 있도록 필요하다고 한 시설은 무엇인가요?",
-          "answerText": "국공립 어린이집",
-          "answerMatchMode": "ANY",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 81,
+              "paragraphId": "p2",
+              "start": 76,
+              "end": 81
+            },
+            {
+              "paragraphId": "p2",
+              "start": 83,
               "end": 89
             }
           ],
@@ -1379,15 +1369,33 @@
           "revealOnWrong": true
         },
         {
+          "id": "q3",
+          "prompt": "교육 인프라 확충은 누구의 정착을 돕는다고 했나요?",
+          "answerText": "젊은 부모들",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 109,
+              "end": 115
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q4",
-          "prompt": "예술 공간이나 체험 시설로 개조하자고 한 것은 무엇인가요?",
-          "answerText": "빈집",
+          "prompt": "지역만의 고유한 스토리를 담아 활성화하자고 한 것은 무엇인가요?",
+          "answerText": "축제",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 37,
-              "end": 39
+              "start": 80,
+              "end": 82
             }
           ],
           "scoring": {
@@ -1398,14 +1406,14 @@
         },
         {
           "id": "q5",
-          "prompt": "지역 소멸을 함께 해결해야 한다고 한 주체의 조합은 무엇인가요?",
-          "answerText": "민관",
+          "prompt": "행정적 지원과 함께 필요하다고 한 것은 무엇인가요?",
+          "answerText": "시민들의 적극적인 참여",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 7,
-              "end": 9
+              "start": 39,
+              "end": 51
             }
           ],
           "scoring": {

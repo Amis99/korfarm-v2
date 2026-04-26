@@ -396,19 +396,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "밝고 환한 밤의 주인?",
-          "answerText": "달님",
-          "answerMatchMode": "EXACT",
+          "prompt": "호수에서 갑자기 깨어나 큰 소리로 호통을 치기 시작한 이는 누구인지 본문에서 찾아보세요",
+          "answerText": "수동룡",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 68,
-              "end": 70
+              "paragraphId": "p2",
+              "start": 35,
+              "end": 38
             },
             {
               "paragraphId": "p2",
-              "start": 126,
-              "end": 128
+              "start": 112,
+              "end": 115
             }
           ],
           "scoring": {
@@ -420,19 +420,14 @@
         },
         {
           "id": "q2",
-          "prompt": "목에 거는 장식 보물?",
-          "answerText": "목걸이",
-          "answerMatchMode": "EXACT",
+          "prompt": "물고기들이 목걸이 조각을 무엇으로 알고 서로 다투었는지 본문에서 찾아보세요",
+          "answerText": "보물",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 72,
-              "end": 75
-            },
-            {
-              "paragraphId": "p2",
-              "start": 130,
-              "end": 133
+              "start": 103,
+              "end": 105
             }
           ],
           "scoring": {
@@ -444,24 +439,33 @@
         },
         {
           "id": "q3",
-          "prompt": "물로 된 넓은 웅덩이?",
-          "answerText": "호수",
-          "answerMatchMode": "EXACT",
+          "prompt": "호숫가 주변이 동물 친구들로 가득 모여 시끌시끌하던 모습을 무엇이라고 표현했는지 본문에서 찾아보세요",
+          "answerText": "소동",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 6,
-              "end": 8
-            },
-            {
-              "paragraphId": "p1",
-              "start": 81,
-              "end": 83
-            },
+              "start": 46,
+              "end": 48
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "수동룡 아저씨가 갑자기 나타나자 몽이가 몸을 숨긴 곳은 어디인지 본문에서 찾아보세요",
+          "answerText": "바위",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 11,
-              "end": 13
+              "start": 87,
+              "end": 89
             }
           ],
           "scoring": {

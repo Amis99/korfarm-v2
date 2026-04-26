@@ -1039,123 +1039,75 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "어떤 일을 하려는 생각이나 목적은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 102,
-              "end": 103
-            },
-            {
-              "paragraphId": "p1",
-              "start": 134,
-              "end": 135
-            },
-            {
-              "paragraphId": "p2",
-              "start": 2,
-              "end": 3
-            },
-            {
-              "paragraphId": "p2",
-              "start": 71,
-              "end": 72
-            },
-            {
-              "paragraphId": "p4",
-              "start": 102,
-              "end": 103
-            },
-            {
-              "paragraphId": "p5",
-              "start": 111,
-              "end": 112
-            },
-            {
-              "paragraphId": "p5",
-              "start": 137,
-              "end": 138
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "‘처음으로 쓴 원고’를 뜻하는 두 글자 낱말을 찾으시오",
+          "answerText": "초고",
           "answerMatchMode": "ANY",
-          "answerText": "의"
+          "answerRanges": [
+            {"paragraphId": "p6", "start": 93, "end": 95}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "공연의 느낌과 흥을 살려 내는 힘은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 25,
-              "end": 33
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "‘남보다 잘하거나 뛰어난 점’을 뜻하는 두 글자 낱말을 찾으시오",
+          "answerText": "강점",
           "answerMatchMode": "ANY",
-          "answerText": "분위기를 만드는"
+          "answerRanges": [
+            {"paragraphId": "p6", "start": 44, "end": 46}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "차례를 바꾸어 서로 이어서 하는 모양은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 20,
-              "end": 22
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "‘같은 취미나 뜻을 가진 사람들이 모여 만든 단체’를 뜻하는 세 글자 낱말을 찾으시오",
+          "answerText": "동아리",
           "answerMatchMode": "ANY",
-          "answerText": "번갈"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 65, "end": 68},
+            {"paragraphId": "p3", "start": 90, "end": 93}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "악기가 제대로 되는지 살펴보는 일은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 30,
-              "end": 34
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "‘공연이나 운동 경기를 구경하는 사람’을 뜻하는 두 글자 낱말을 찾으시오",
+          "answerText": "관객",
           "answerMatchMode": "ANY",
-          "answerText": "악기 점"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 88, "end": 90},
+            {"paragraphId": "p2", "start": 63, "end": 65},
+            {"paragraphId": "p4", "start": 74, "end": 76},
+            {"paragraphId": "p5", "start": 2, "end": 4},
+            {"paragraphId": "p6", "start": 66, "end": 68}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "한쪽으로 치우치지 않게 하는 모양은?",
+          "prompt": "두 번째 곡에서 번갈아 중심을 잡았다고 한 두 파트(보컬·기타)를 모두 찾으시오",
+          "answerText": "보컬, 기타",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 140,
-              "end": 144
-            }
+            {"paragraphId": "p3", "start": 12, "end": 14},
+            {"paragraphId": "p3", "start": 16, "end": 18}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "글쓴이는 ‘짧은 설명만 있었어도’ 어떤 결과가 있었을 것이라고 생각했는지, 본문 속 일곱 글자 표현 ‘흐름이 덜 끊’을 찾으시오",
+          "answerText": "흐름이 덜 끊",
           "answerMatchMode": "ANY",
-          "answerText": "균형 있"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 130, "end": 137}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

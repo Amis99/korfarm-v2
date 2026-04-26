@@ -913,34 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "옛날부터 전해 내려오는 우리나라 고유의 음악은 무엇인가요?",
-          "answerText": "국악",
+          "prompt": "국악이 어떤 음악인지 설명한 부분을 찾으시오.",
+          "answerText": "옛날부터 전해 내려오는 우리나라 고유의 음악",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 64,
-              "end": 66
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 115,
-              "end": 117
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p4",
-              "start": 45,
-              "end": 47
+              "start": 38,
+              "end": 62
             }
           ],
           "scoring": {
@@ -951,19 +931,14 @@
         },
         {
           "id": "q2",
-          "prompt": "국악에서 흥을 돋우는 역할을 중요하게 여기는 것은 무엇인가요?",
-          "answerText": "장단",
+          "prompt": "명주실을 튕겨서 소리를 내는 국악기 예를 묶어 말한 부분을 찾으시오.",
+          "answerText": "가야금이나 해금",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 86,
-              "end": 88
-            },
-            {
-              "paragraphId": "p4",
-              "start": 49,
-              "end": 51
+              "start": 35,
+              "end": 43
             }
           ],
           "scoring": {
@@ -974,7 +949,25 @@
         },
         {
           "id": "q3",
-          "prompt": "서양 음악이 중요하게 여기는 여러 악기의 어울림은 무엇인가요?",
+          "prompt": "국악에서 흥을 돋우는 역할을 하는 악기를 묶어 말한 부분을 찾으시오.",
+          "answerText": "장구나 북",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 78,
+              "end": 83
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "서양 음악이 중요하게 여기는 여러 악기의 어울림을 뜻하는 단어를 찾으시오.",
           "answerText": "화음",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -991,33 +984,23 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "많은 사람이 함께 만들어 내는 풍성하고 화려한 연주를 무엇이라고 하나요?",
-          "answerText": "오케스트라",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 127,
-              "end": 132
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q5",
-          "prompt": "국악과 서양 음악이 만나 새롭게 인기를 얻는 음악은 무엇인가요?",
-          "answerText": "퓨전 음악",
-          "answerMatchMode": "ANY",
+          "prompt": "퓨전 음악의 방식으로 나온 예를 모두 찾으시오.",
+          "answerTexts": [
+            "국악의 장단에 서양 악기를 더하거나",
+            "서양 음악에 가야금 소리를 섞는"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 83,
-              "end": 88
+              "start": 45,
+              "end": 64
+            },
+            {
+              "paragraphId": "p4",
+              "start": 65,
+              "end": 82
             }
           ],
           "scoring": {

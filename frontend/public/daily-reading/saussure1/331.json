@@ -396,40 +396,11 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "살아 있는 모든 나무와 풀?",
-          "answerText": "식물",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서 바늘처럼 뾰족한 잎의 예로 든 식물이 무엇인지 찾아보세요",
+          "answerText": "소나무",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 15,
-              "end": 17
-            },
-            {
-              "paragraphId": "p1",
-              "start": 110,
-              "end": 112
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 60,
-              "end": 62
-            },
-            {
-              "paragraphId": "p2",
-              "start": 97,
-              "end": 99
-            },
-            {
-              "paragraphId": "p2",
-              "start": 126,
-              "end": 128
-            }
+            {"paragraphId": "p1", "start": 54, "end": 57}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -440,50 +411,11 @@
         },
         {
           "id": "q2",
-          "prompt": "나무나 풀의 푸른 낱낱?",
-          "answerText": "잎",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서 쟁반처럼 넓적한 잎의 예로 든 식물이 무엇인지 찾아보세요",
+          "answerText": "연꽃",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 19,
-              "end": 20
-            },
-            {
-              "paragraphId": "p1",
-              "start": 69,
-              "end": 70
-            },
-            {
-              "paragraphId": "p1",
-              "start": 89,
-              "end": 90
-            },
-            {
-              "paragraphId": "p1",
-              "start": 116,
-              "end": 117
-            },
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 5
-            },
-            {
-              "paragraphId": "p2",
-              "start": 74,
-              "end": 75
-            },
-            {
-              "paragraphId": "p2",
-              "start": 114,
-              "end": 115
-            },
-            {
-              "paragraphId": "p2",
-              "start": 130,
-              "end": 131
-            }
+            {"paragraphId": "p1", "start": 75, "end": 77}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -494,20 +426,26 @@
         },
         {
           "id": "q3",
-          "prompt": "해의 따뜻하고 밝은 기운?",
-          "answerText": "햇빛",
-          "answerMatchMode": "EXACT",
+          "prompt": "식물은 잎을 통해 햇빛을 받아 무엇을 만들고 숨을 쉬며 자라나는지 찾아보세요",
+          "answerText": "영양분",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 122,
-              "end": 124
-            },
-            {
-              "paragraphId": "p2",
-              "start": 101,
-              "end": 103
-            }
+            {"paragraphId": "p1", "start": 129, "end": 132}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "식물의 잎 모양이 서로 다른 이유는 저마다 처한 환경에 어떻게 하기 위해서인지 찾아보세요",
+          "answerText": "가장 잘 적응",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 31, "end": 38}
           ],
           "scoring": {
             "correctDeltaSec": 10,

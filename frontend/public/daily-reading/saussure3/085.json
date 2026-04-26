@@ -557,39 +557,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "말을 타거나 나룻배를 이용하던 과거의 느린 이동 방식과 비교되는 오늘날의 기차, 자동차 등은?",
-          "answerText": "교통수단",
-          "answerMatchMode": "EXACT",
+          "prompt": "옛날 사람들이 이동할 때 빌리거나 이용한 힘 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "동물의 힘",
+            "바람의 힘"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 81,
-              "end": 85
+              "start": 8,
+              "end": 13
             },
             {
-              "paragraphId": "p2",
-              "start": 30,
-              "end": 34
-            },
-            {
-              "paragraphId": "p2",
-              "start": 84,
-              "end": 88
-            },
-            {
-              "paragraphId": "p3",
-              "start": 35,
-              "end": 39
-            },
-            {
-              "paragraphId": "p3",
-              "start": 55,
-              "end": 59
-            },
-            {
-              "paragraphId": "p3",
-              "start": 98,
-              "end": 102
+              "paragraphId": "p1",
+              "start": 20,
+              "end": 25
             }
           ],
           "scoring": {
@@ -601,9 +584,9 @@
         },
         {
           "id": "q2",
-          "prompt": "과거에 먼 거리를 가기 위해 사람들이 타기도 했으며, 물길을 따라 이동하게 해 주던 배는?",
+          "prompt": "먼 거리를 갈 때 사람들이 타고 물길을 따라갔던 것은 무엇입니까?",
           "answerText": "나룻배",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -620,14 +603,41 @@
         },
         {
           "id": "q3",
-          "prompt": "미래에 등장할 것으로 예상되는 차로, 사람이 직접 운전하지 않아도 이것이 가능한 자동차는?",
-          "answerText": "스스로 움직이는",
-          "answerMatchMode": "EXACT",
+          "prompt": "오늘날 빠르고 편리한 교통수단의 예로 제시된 세 가지를 이어 쓴 어구를 찾으시오.",
+          "answerText": "기차와 자동차, 비행기",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 6,
+              "end": 18
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "미래의 교통수단이 지금보다 어떠할지 설명한 특징 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "훨씬 더 빠르고",
+            "환경을 오염시키지 않을"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 5,
-              "end": 13
+              "start": 66,
+              "end": 74
+            },
+            {
+              "paragraphId": "p3",
+              "start": 75,
+              "end": 87
             }
           ],
           "scoring": {

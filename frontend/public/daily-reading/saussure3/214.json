@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "맡은 일을 잘 해내는 마음?",
-          "answerText": "책임감을",
-          "answerMatchMode": "EXACT",
+          "prompt": "강아지와 놀고 난 뒤 해야 할 일을 지문에서 찾으시오.",
+          "answerText": "주변을 정리해야 합니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 13,
-              "end": 17
+              "paragraphId": "p1",
+              "start": 18,
+              "end": 30
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "물건을 질서 있게 치움?",
-          "answerText": "정리해야",
-          "answerMatchMode": "EXACT",
+          "prompt": "사용한 뒤 제자리에 잘 두는 물건들을 지문에서 찾으시오.",
+          "answerText": "장난감과 밥그릇",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 22,
-              "end": 26
+              "start": 36,
+              "end": 44
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "주변을 깨끗이 치움은?",
-          "answerText": "정돈하는",
-          "answerMatchMode": "EXACT",
+          "prompt": "정리되지 않은 물건 때문에 강아지에게 생길 수 있는 일을 지문에서 찾으시오.",
+          "answerText": "삼키거나 다칠 위험",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 17,
+              "end": 27
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "관찰이 끝난 뒤 잊지 않는 일을 지문에서 찾으시오.",
+          "answerText": "도구를 챙기는 일",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 62,
-              "end": 66
+              "start": 38,
+              "end": 47
             }
           ],
           "scoring": {

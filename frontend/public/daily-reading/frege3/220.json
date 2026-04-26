@@ -1303,7 +1303,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "오늘 회의가 다루는 핵심 문제는 무엇인가요?",
+          "prompt": "오늘 회의에서 주제로 삼은 사회 문제를 무엇이라고 했나요?",
           "answerText": "데이터 프라이버시 침해와 정보 주권",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1321,14 +1321,28 @@
         },
         {
           "id": "q2",
-          "prompt": "인권 단체가 현재의 수집 방식을 무엇이라고 불렀나요?",
-          "answerText": "디지털 약탈",
-          "answerMatchMode": "ANY",
+          "prompt": "기업들이 약관에 동의를 끼워 넣어 쓸어 담는다고 한 사생활 정보의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "사용자의 위치",
+            "건강",
+            "취향"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 39,
-              "end": 45
+              "start": 85,
+              "end": 92
+            },
+            {
+              "paragraphId": "p2",
+              "start": 94,
+              "end": 96
+            },
+            {
+              "paragraphId": "p2",
+              "start": 98,
+              "end": 100
             }
           ],
           "scoring": {
@@ -1339,7 +1353,7 @@
         },
         {
           "id": "q3",
-          "prompt": "기업 대표가 안전한 활용 방안으로 든 기술은 무엇인가요?",
+          "prompt": "기업 대표가 무조건적인 규제 대신 안전한 데이터 활용을 위해 예로 든 기술은 무엇인가요?",
           "answerText": "가명 처리 기술",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1357,14 +1371,14 @@
         },
         {
           "id": "q4",
-          "prompt": "법률 전문가가 확대해야 한다고 한 제도는 무엇인가요?",
-          "answerText": "마이데이터(MyData)",
+          "prompt": "법률 전문가는 완전히 바꿔야 한다고 한 것이 무엇이라고 했나요?",
+          "answerText": "데이터 소유권에 대한 패러다임",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 121,
-              "end": 134
+              "start": 61,
+              "end": 77
             }
           ],
           "scoring": {
@@ -1375,14 +1389,14 @@
         },
         {
           "id": "q5",
-          "prompt": "법률 전문가가 논의를 시작하자고 한 권리는 무엇인가요?",
-          "answerText": "데이터 배당권",
+          "prompt": "사회자는 정보 보호를 비용이 아니라 무엇으로 여겨야 한다고 했나요?",
+          "answerText": "미래 사회의 핵심 신뢰 자본",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 231,
-              "end": 238
+              "paragraphId": "p5",
+              "start": 196,
+              "end": 211
             }
           ],
           "scoring": {

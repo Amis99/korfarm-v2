@@ -552,19 +552,34 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "( )알을 얻어 행복해요.",
-          "answerText": "황금",
-          "answerMatchMode": "EXACT",
+          "prompt": "황금알을 낳는 거위 덕분에 부자가 된 사람을 두 글자로 적어 보세요",
+          "answerText": "농부",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 2
+              "start": 21,
+              "end": 23
             },
             {
               "paragraphId": "p1",
-              "start": 40,
-              "end": 42
+              "start": 30,
+              "end": 32
+            },
+            {
+              "paragraphId": "p1",
+              "start": 116,
+              "end": 118
+            },
+            {
+              "paragraphId": "p2",
+              "start": 13,
+              "end": 15
+            },
+            {
+              "paragraphId": "p2",
+              "start": 47,
+              "end": 49
             }
           ],
           "scoring": {
@@ -576,19 +591,24 @@
         },
         {
           "id": "q2",
-          "prompt": "거위의 ( )를 갈랐습니다.",
-          "answerText": "배",
-          "answerMatchMode": "EXACT",
+          "prompt": "농부가 더 빨리 부자가 되고 싶어 가지게 된 마음을 두 글자로 적어 보세요",
+          "answerText": "욕심",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 92,
-              "end": 93
+              "start": 78,
+              "end": 80
+            },
+            {
+              "paragraphId": "p1",
+              "start": 124,
+              "end": 126
             },
             {
               "paragraphId": "p2",
-              "start": 7,
-              "end": 8
+              "start": 60,
+              "end": 62
             }
           ],
           "scoring": {
@@ -600,14 +620,43 @@
         },
         {
           "id": "q3",
-          "prompt": "( )한 기쁨이 소중해요.",
-          "answerText": "소박",
-          "answerMatchMode": "EXACT",
+          "prompt": "거위의 배를 가른 결과로 농부가 어떻게 되었는지 두 글자로 적어 보세요",
+          "answerText": "후회",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 112,
-              "end": 114
+              "start": 20,
+              "end": 22
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "지나친 욕심이 망친다고 한 것은 무엇인지 두 글자로 적어 보세요",
+          "answerText": "행복",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 51,
+              "end": 53
+            },
+            {
+              "paragraphId": "p2",
+              "start": 64,
+              "end": 66
+            },
+            {
+              "paragraphId": "p2",
+              "start": 127,
+              "end": 129
             }
           ],
           "scoring": {

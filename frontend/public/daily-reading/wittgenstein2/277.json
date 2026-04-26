@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "발표자가 맡은 부서와 이름을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 127
+              "start": 12,
+              "end": 29
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "발표자: 안녕하세요. 학생회 안전환경부를 맡은 이서진입니다. 오늘은 아침 등교 시간마다 정문 앞에서 반복되는 자전거와 보행자 충돌 위험을 줄이기 위해, 자전거 통학 구역을 재배치하고 보행 동선을 분리하는 방안을 말씀드리겠습니다."
+          "answerText": "학생회 안전환경부를 맡은 이서진"
         },
         {
           "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "발표자가 줄이려는 위험을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 188
+              "paragraphId": "p1",
+              "start": 61,
+              "end": 75
             }
           ],
           "scoring": {
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "발표자: 현재는 자전거 거치대가 정문 바로 옆에 있어 자전거를 끌고 들어오는 학생과 도보로 등교하는 학생이 같은 좁은 구간에 몰립니다. 특히 비 오는 날이나 조회가 있는 날에는 이동 속도가 달라 서로 피하려다가 더 크게 엉키는 일이 많았습니다. 실제로 지난달에는 등교 시간 15분 동안 같은 구간에서 세 번의 접촉 사고가 보고되었습니다."
+          "answerText": "자전거와 보행자 충돌 위험"
         },
         {
           "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "prompt": "발표자가 말한 방안의 두 내용을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 195
+              "paragraphId": "p1",
+              "start": 85,
+              "end": 101
+            },
+            {
+              "paragraphId": "p1",
+              "start": 102,
+              "end": 116
             }
           ],
           "scoring": {
@@ -620,17 +625,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "발표자: 학생회가 제안하는 첫 번째 변화는 자전거 거치대를 체육관 옆 빈 공간으로 옮기는 것입니다. 그곳은 운동장과 바로 이어져 자전거를 세운 뒤 건물 뒤편 통로로 교실동에 접근할 수 있습니다. 두 번째 변화는 정문 앞 보행로를 노란 유도선으로 분리해, 자전거 이용 학생은 정문 앞 보행 구역을 통과하지 않고 측면 진입로를 이용하도록 하는 것입니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "자전거 통학 구역을 재배치하고",
+            "보행 동선을 분리하는 방안"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
+          "prompt": "자전거를 끌고 들어오는 학생과 도보 등교 학생이 같은 좁은 구간에 몰리는 까닭을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 213
+              "paragraphId": "p2",
+              "start": 9,
+              "end": 29
             }
           ],
           "scoring": {
@@ -639,16 +647,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "발표자: 이 방안의 장점은 복잡한 시설 공사 없이도 위험 구간을 줄일 수 있다는 데 있습니다. 기존 거치대를 옮기는 비용과 안내 표지판 제작비를 합해도 큰 예산이 들지 않고, 무엇보다 정문 앞 혼잡을 줄여 보행자의 이동 속도를 안정적으로 유지할 수 있습니다. 자전거 이용 학생도 지정 동선을 알게 되면 매일 같은 자리에서 서성일 필요가 없어 오히려 이동 시간이 줄어들 수 있습니다."
+          "answerText": "자전거 거치대가 정문 바로 옆에 있어"
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "학생회가 제안하는 두 가지 변화를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 204
+              "paragraphId": "p3",
+              "start": 24,
+              "end": 51
+            },
+            {
+              "paragraphId": "p3",
+              "start": 118,
+              "end": 139
             }
           ],
           "scoring": {
@@ -656,17 +669,58 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "발표자: 예상되는 질문도 있습니다. 체육관 쪽이 멀어져 불편하지 않겠느냐는 의견이 있을 수 있습니다. 이에 대해 학생회는 시범 운영 첫 2주 동안 아침 시간에 안내 인력을 배치하고, 비가 많이 오는 날에는 체육관 출입구 가까운 위치에 임시 보관대를 추가로 설치하는 보완책을 준비했습니다. 또 자전거 이용 학생 의견을 받아 진입 경로 표지판 위치도 조정할 계획입니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "자전거 거치대를 체육관 옆 빈 공간으로 옮기는 것",
+            "정문 앞 보행로를 노란 유도선으로 분리"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "이 방안의 장점으로 제시된 내용을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 179
+              "paragraphId": "p4",
+              "start": 15,
+              "end": 46
+            },
+            {
+              "paragraphId": "p4",
+              "start": 85,
+              "end": 96
+            },
+            {
+              "paragraphId": "p4",
+              "start": 115,
+              "end": 143
+            },
+            {
+              "paragraphId": "p4",
+              "start": 195,
+              "end": 212
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "복잡한 시설 공사 없이도 위험 구간을 줄일 수 있다는 데",
+            "큰 예산이 들지 않고",
+            "보행자의 이동 속도를 안정적으로 유지할 수 있습니다",
+            "이동 시간이 줄어들 수 있습니다"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "학생회가 예상한 불편 의견을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 20,
+              "end": 40
             }
           ],
           "scoring": {
@@ -675,7 +729,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "발표자: 정리하면, 이번 안은 정문 앞의 혼잡을 줄이고 보행자와 자전거 이용자의 동선을 분리해 안전을 높이려는 제안입니다. 오늘 설명드린 내용을 바탕으로 다음 주 학생자치회에서 시범 운영 여부를 결정하려고 하니, 불편한 점이나 보완 의견이 있으면 발표 후 질의응답 시간에 말씀해 주시기 바랍니다. 들어 주셔서 감사합니다."
+          "answerText": "체육관 쪽이 멀어져 불편하지 않겠느냐"
+        },
+        {
+          "id": "q8",
+          "prompt": "다음 주 학생자치회에서 결정하려는 것을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 99,
+              "end": 107
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "시범 운영 여부"
         }
       ]
     }

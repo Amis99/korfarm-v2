@@ -571,30 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 교내 다회용 컵 시범 운영 결과를 정리한 기사 초고와 관련해 글을 쓰게 된 문제의식을 어떻게 밝히는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 241
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지난달 우리 학교는 축제 기간 동안 매점 앞에서 다회용 컵 대여를 시범 운영했다. 학생회 환경부가 준비한 이 행사는 일회용 컵 쓰레기를 줄이자는 취지로 진행되었고, 보증금을 받고 컵을 반납하면 다시 돌려주는 방식이었다. 이번 기사에서는 행사 기간에 수집한 설문 결과와 반납 기록, 그리고 현장 관찰 내용을 바탕으로 시범 운영의 결과를 정리해 보려고 한다. 이 제도는 생각보다 효과가 있었고, 또 한편으로는 아직 부족한 점도 있었다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 현재 상황이나 조사 내용을 어떤 방향으로 제시하는가?",
+          "prompt": "쓰레기를 종류별로 나누어 모아 두는 장소를 가리키는 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 227
+              "start": 21,
+              "end": 26
             }
           ],
           "scoring": {
@@ -603,16 +585,44 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "먼저 가장 눈에 띄는 변화는 행사 뒤 분리수거장에 쌓인 플라스틱 컵 양이 줄어들었다는 점이다. 환경부가 비교한 자료에 따르면 작년 축제 이틀 동안 나온 일회용 컵 폐기물 수와 이번 시범 운영 기간의 수거량은 차이가 있었다. 정확한 수치는 아직 정리 중이지만, 담당 교사는 육안으로도 확실히 줄어든 편이라고 말했다. 다만 판매 음료 수가 완전히 같지는 않았기 때문에 단순 비교만으로 성과를 단정하기는 어렵다."
+          "answerText": "분리수거장"
+        },
+        {
+          "id": "q2",
+          "prompt": "다회용 컵 대여 행사가 진행된 취지를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 65,
+              "end": 83
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "일회용 컵 쓰레기를 줄이자는 취지"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 첫 개선안이나 핵심 근거를 무엇으로 설명하는가?",
+          "prompt": "이번 기사에서 시범 운영 결과를 정리하는 바탕으로 삼은 자료를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 211
+              "paragraphId": "p1",
+              "start": 143,
+              "end": 148
+            },
+            {
+              "paragraphId": "p1",
+              "start": 150,
+              "end": 155
+            },
+            {
+              "paragraphId": "p1",
+              "start": 161,
+              "end": 169
             }
           ],
           "scoring": {
@@ -620,17 +630,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학생 대상 간단한 설문에서는 긍정적인 응답이 더 많았다. 컵이 튼튼해서 들고 다니기 편했다는 의견, 쓰레기를 덜 만드는 것 같아 참여 의미가 있었다는 의견이 있었다. 반면 반납 장소가 멀어서 번거로웠다는 답변도 적지 않았고, 보증금을 냈다가 다시 돌려받는 방식이 처음에는 익숙하지 않았다는 반응도 있었다. 이런 점을 보면 취지에는 공감하지만 운영 방식은 더 손봐야 할 것 같다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "설문 결과",
+            "반납 기록",
+            "현장 관찰 내용"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단은 추가 제안이나 고려할 점을 어떤 이유와 함께 내놓는가?",
+          "prompt": "단순 비교만으로 성과를 단정하기 어려운 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 216
+              "paragraphId": "p2",
+              "start": 179,
+              "end": 203
             }
           ],
           "scoring": {
@@ -639,16 +653,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "현장 관찰 기록을 보면 점심시간 직후와 공연 직전에는 반납대 앞에 줄이 길어지는 문제가 나타났다. 특히 반납과 대여를 같은 곳에서 처리하다 보니 학생들이 한꺼번에 몰릴 때 속도가 늦어졌다. 또 일부 학생은 컵을 어디에 반납하는지 몰라서 그냥 일반 쓰레기통 옆에 두고 가기도 했다. 안내 표지판을 설치했지만 눈에 잘 띄지 않았고, 담당 학생 수가 충분했는지도 다시 생각해 볼 필요가 있다."
+          "answerText": "판매 음료 수가 완전히 같지는 않았기 때문에"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 실행 과정의 조건이나 우려를 어떻게 따져 보는가?",
+          "prompt": "학생 설문에서 긍정적인 응답으로 제시된 의견을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 284
+              "paragraphId": "p3",
+              "start": 32,
+              "end": 54
+            },
+            {
+              "paragraphId": "p3",
+              "start": 56,
+              "end": 86
             }
           ],
           "scoring": {
@@ -656,17 +675,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이런 자료를 종합하면 다회용 컵 운영은 쓰레기 감축이라는 점에서는 분명 의미가 있었지만, 실제 참여 편의성은 아직 완전하지 않았다. 그래서 다음 행사에서는 반납 장소를 한 군데가 아니라 출입구 쪽까지 넓히고, 줄이 길어지는 시간대에는 인원을 더 배치해야 한다. 또 보증금 액수도 지금처럼 유지하는 게 좋은지, 아니면 조금 낮추는 것이 더 참여를 늘릴 수 있는지도 검토할 필요가 있다. 사실 보증금이 높아서 책임감이 생긴다는 의견도 있었고 부담된다는 의견도 있어서 어느 쪽이 더 맞는지는 추가 조사가 필요하다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "컵이 튼튼해서 들고 다니기 편했다는 의견",
+            "쓰레기를 덜 만드는 것 같아 참여 의미가 있었다는 의견"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 이 글의 결론과 요청을 어떻게 마무리하는가?",
+          "prompt": "점심시간 직후와 공연 직전에 나타난 문제를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 263
+              "paragraphId": "p4",
+              "start": 30,
+              "end": 47
             }
           ],
           "scoring": {
@@ -675,7 +697,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이번 시범 운영은 완전한 성공이라고 쓰기에는 이른 면이 있지만, 그렇다고 단순한 일회성 행사로 끝내기에는 아쉬운 결과를 남겼다. 학생들이 환경 문제에 관심을 보였고 실제 행동으로도 어느 정도 이어졌기 때문이다. 다만 기사에서는 성과를 너무 앞세우기보다 한계와 보완점을 같이 다루는 것이 더 적절할 것 같다. 앞으로 학교가 이 제도를 정식으로 확대할지 여부는, 다음 행사에서 운영 방식이 얼마나 개선되는지와 학생 참여율이 얼마나 유지되는지를 함께 보고 판단해야 할 것이다."
+          "answerText": "반납대 앞에 줄이 길어지는 문제"
+        },
+        {
+          "id": "q7",
+          "prompt": "다음 행사에서 반납 장소를 어디까지 넓히자고 했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 104,
+              "end": 111
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "출입구 쪽까지"
+        },
+        {
+          "id": "q8",
+          "prompt": "학교가 제도 확대 여부를 판단할 때 함께 보아야 할 기준을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 209,
+              "end": 225
+            },
+            {
+              "paragraphId": "p6",
+              "start": 227,
+              "end": 244
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "운영 방식이 얼마나 개선되는지",
+            "학생 참여율이 얼마나 유지되는지"
+          ]
         }
       ]
     }

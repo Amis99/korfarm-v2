@@ -552,29 +552,44 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "퀴즈의 정답은?",
-          "answerText": "마음",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 이야기의 주인공이 누구인지 이름을 지문에서 찾아 써 보세요",
+          "answerText": "민수",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 60,
-              "end": 62
+              "start": 0,
+              "end": 2
             },
             {
               "paragraphId": "p1",
-              "start": 86,
-              "end": 88
+              "start": 52,
+              "end": 54
             },
             {
               "paragraphId": "p1",
-              "start": 154,
-              "end": 156
+              "start": 131,
+              "end": 133
+            },
+            {
+              "paragraphId": "p1",
+              "start": 179,
+              "end": 181
             },
             {
               "paragraphId": "p2",
-              "start": 93,
-              "end": 95
+              "start": 37,
+              "end": 39
+            },
+            {
+              "paragraphId": "p2",
+              "start": 117,
+              "end": 119
+            },
+            {
+              "paragraphId": "p2",
+              "start": 175,
+              "end": 177
             }
           ],
           "scoring": {
@@ -586,29 +601,14 @@
         },
         {
           "id": "q2",
-          "prompt": "신기한 모험의 주인공?",
-          "answerText": "연필",
-          "answerMatchMode": "EXACT",
+          "prompt": "무지개 연필이 민수에게 말해준, 가장 큰 보물이 무엇인지 한 단어로 찾아 써 보세요",
+          "answerText": "마음",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 78,
-              "end": 80
-            },
-            {
-              "paragraphId": "p1",
-              "start": 127,
-              "end": 129
-            },
-            {
-              "paragraphId": "p2",
-              "start": 54,
-              "end": 56
-            },
-            {
-              "paragraphId": "p2",
-              "start": 130,
-              "end": 132
+              "start": 154,
+              "end": 156
             }
           ],
           "scoring": {
@@ -620,24 +620,33 @@
         },
         {
           "id": "q3",
-          "prompt": "세상에서 소중한 무엇인가요?",
-          "answerText": "보물",
-          "answerMatchMode": "EXACT",
+          "prompt": "민수가 정답을 적자 필통 안에서 나타난 것이 무엇인지 지문에서 찾아 써 보세요",
+          "answerText": "금색 열쇠",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 25,
-              "end": 27
-            },
+              "start": 108,
+              "end": 113
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "민수가 깊이 생각하는 모습을 흉내 낸 말을 지문에서 찾아 써 보세요",
+          "answerText": "곰곰이",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 145,
-              "end": 147
-            },
-            {
-              "paragraphId": "p2",
-              "start": 83,
-              "end": 85
+              "start": 43,
+              "end": 46
             }
           ],
           "scoring": {

@@ -559,19 +559,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "하늘을 자유롭게 날아다니는 동물 중에는 이것을 가진 새가 가장 많아요. 이것은 무엇일까요?",
-          "answerText": "깃털",
-          "answerMatchMode": "EXACT",
+          "prompt": "새들이 높이 날아오를 수 있는 이유로 제시된 몸의 특징을 지문에서 찾으시오.",
+          "answerText": "가벼운 뼈와 넓은 날개",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 22,
-              "end": 24
-            },
-            {
-              "paragraphId": "p3",
-              "start": 50,
-              "end": 52
+              "start": 44,
+              "end": 56
             }
           ],
           "scoring": {
@@ -583,29 +578,14 @@
         },
         {
           "id": "q2",
-          "prompt": "잠자리는 투명하고 얇은 네 개의 이것을 빠르게 움직여서 하늘을 씽씽 날아다닌답니다. 이것은 무엇일까요?",
-          "answerText": "날개",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리 주변에서 쉽게 볼 수 있는 새의 예시를 지문에서 찾으시오.",
+          "answerText": "참새나 비둘기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 54,
-              "end": 56
-            },
-            {
-              "paragraphId": "p2",
-              "start": 50,
-              "end": 52
-            },
-            {
-              "paragraphId": "p2",
-              "start": 95,
-              "end": 97
-            },
-            {
-              "paragraphId": "p3",
-              "start": 67,
-              "end": 69
+              "start": 89,
+              "end": 96
             }
           ],
           "scoring": {
@@ -617,14 +597,38 @@
         },
         {
           "id": "q3",
-          "prompt": "박쥐는 새처럼 깃털이 없지만 얇은 이것으로 된 날개를 펄럭이며 밤하늘을 날아요. 이것은 무엇일까요?",
-          "answerText": "피부",
-          "answerMatchMode": "EXACT",
+          "prompt": "나비가 꽃밭을 이리저리 날아다닐 때 팔랑거리는 대상을 지문에서 찾으시오.",
+          "answerText": "알록달록하고 예쁜 날개",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 40,
+              "end": 52
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "포유류 중에서도 유일하게 하늘을 나는 신기한 동물은 무엇인지 지문에서 찾으시오.",
+          "answerText": "박쥐",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 61,
-              "end": 63
+              "start": 36,
+              "end": 38
+            },
+            {
+              "paragraphId": "p3",
+              "start": 42,
+              "end": 44
             }
           ],
           "scoring": {

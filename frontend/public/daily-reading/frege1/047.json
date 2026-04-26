@@ -914,14 +914,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "머프 포터가 다시 시작하게 된 생활은 무엇인가요?",
-          "answerText": "새로운 삶",
+          "prompt": "톰 소여가 사람들에게 어떤 대상으로 인정받았는지 나타내는 말을 찾으시오.",
+          "answerText": "영웅",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 73,
-              "end": 78
+              "start": 96,
+              "end": 98
             }
           ],
           "scoring": {
@@ -932,31 +932,13 @@
         },
         {
           "id": "q2",
-          "prompt": "톰과 허크가 동굴에서 찾은 것은 무엇인가요?",
-          "answerText": "보물 상자",
+          "prompt": "두 소년에게 보물보다 더 소중하다고 한 관계의 핵심을 찾으시오.",
+          "answerText": "서로에 대한 믿음",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 26,
-              "end": 31
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "두 소년에게 보물보다 더 소중했던 것은 무엇인가요?",
-          "answerText": "믿음",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 85,
+              "start": 78,
               "end": 87
             }
           ],
@@ -967,15 +949,33 @@
           "revealOnWrong": true
         },
         {
+          "id": "q3",
+          "prompt": "허크가 누구의 양자가 되었는지 알려 주는 어구를 찾으시오.",
+          "answerText": "더글러스 부인",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 100,
+              "end": 107
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q4",
-          "prompt": "베키와 다시 어울리며 되찾은 모습은 무엇인가요?",
-          "answerText": "밝은 모습",
+          "prompt": "수많은 모험을 통해 톰이 깨달은 사실을 지문에서 찾으시오.",
+          "answerText": "세상은 넓고 배울 것이 많다는 사실",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 83,
-              "end": 88
+              "start": 111,
+              "end": 130
             }
           ],
           "scoring": {
@@ -986,14 +986,22 @@
         },
         {
           "id": "q5",
-          "prompt": "이야기 마지막에 톰의 마음속에서 다시 꿈틀거린 것은 무엇인가요?",
-          "answerText": "호기심",
-          "answerMatchMode": "ANY",
+          "prompt": "글에서 성장이 단순히 무엇이 아니며 무엇을 배우는 과정인지 알 수 있는 두 구절을 모두 찾으시오.",
+          "answerTexts": [
+            "나이를 먹는 것",
+            "자신의 행동에 책임지는 법을 배우는 과정"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 56,
-              "end": 59
+              "start": 85,
+              "end": 93
+            },
+            {
+              "paragraphId": "p4",
+              "start": 99,
+              "end": 121
             }
           ],
           "scoring": {

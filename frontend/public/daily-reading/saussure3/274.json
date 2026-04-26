@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "경험하여 알게 된 일은?",
-          "answerText": "체험을",
-          "answerMatchMode": "EXACT",
+          "prompt": "숲 체험을 한 뒤에 해야 하는 일을 지문에서 찾으시오.",
+          "answerText": "씻어야 함",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 17,
-              "end": 20
+              "start": 27,
+              "end": 32
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "맑고 깨끗한 상태를 뜻함?",
-          "answerText": "청결을",
-          "answerMatchMode": "EXACT",
+          "prompt": "나무를 만지거나 흙을 밟으며 묻은 것을 지문에서 찾으시오.",
+          "answerText": "먼지를",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 66,
-              "end": 69
+              "paragraphId": "p1",
+              "start": 53,
+              "end": 56
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "지나간 일의 기억은?",
-          "answerText": "추억을",
-          "answerMatchMode": "EXACT",
+          "prompt": "씻지 않고 음식을 먹으면 생길 수 있는 일을 지문에서 찾으시오.",
+          "answerText": "배탈이 날 수",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 14,
+              "end": 21
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "깨끗하게 씻는 행동이 보호하는 대상을 지문에서 찾으시오.",
+          "answerText": "우리 몸을",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 76,
-              "end": 79
+              "start": 43,
+              "end": 48
             }
           ],
           "scoring": {

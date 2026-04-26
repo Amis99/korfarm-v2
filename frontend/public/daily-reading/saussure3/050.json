@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "조상들의 훌륭한 문화를 배우기 위해 방문한 곳으로, 오래된 성곽이 우뚝 솟아 있는 장소는 어디인가요?",
+          "prompt": "우리 모둠이 조상들의 훌륭한 문화를 배우기 위해 다녀온 곳을 찾아 쓰시오.",
           "answerText": "역사 유적지",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -576,19 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "유적지 안에서 구경한 조상들이 살았던 집으로, 주변의 자연환경과 참 잘 어울리게 지어진 것은?",
-          "answerText": "한옥",
-          "answerMatchMode": "EXACT",
+          "prompt": "유적지 입구에 있던 성곽의 모습을 나타낸 표현을 찾아 쓰시오.",
+          "answerText": "무척 크고 오래된 성곽이 우뚝 솟아 있었습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 15,
-              "end": 17
-            },
-            {
-              "paragraphId": "p2",
-              "start": 53,
-              "end": 55
+              "paragraphId": "p1",
+              "start": 56,
+              "end": 81
             }
           ],
           "scoring": {
@@ -600,14 +595,49 @@
         },
         {
           "id": "q3",
-          "prompt": "학교에 돌아와 유적지에서 본 무기와 생활 모습 등을 그림과 함께 자세하게 글로 정리한 문서는?",
-          "answerText": "체험 학습 보고서",
-          "answerMatchMode": "EXACT",
+          "prompt": "성 안에 있던 것 가운데 조상들이 살았던 집과 나라를 지키기 위해 쓰던 물건을 모두 찾으시오.",
+          "answerTexts": [
+            "조상들이 살았던 한옥",
+            "낡은 무기들"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 6,
+              "end": 17
+            },
+            {
+              "paragraphId": "p2",
+              "start": 33,
+              "end": 39
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "보고서에 그림과 글로 자세히 표현한 두 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "조상들의 생활 모습",
+            "무기의 모양"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 28,
-              "end": 37
+              "start": 53,
+              "end": 63
+            },
+            {
+              "paragraphId": "p3",
+              "start": 65,
+              "end": 71
             }
           ],
           "scoring": {

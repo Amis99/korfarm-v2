@@ -850,19 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사자가 사냥꾼의 ( )에 걸렸습니다.",
-          "answerText": "그물",
-          "answerMatchMode": "EXACT",
+          "prompt": "사자가 붙잡은 대상을 지문에서 찾으시오.",
+          "answerText": "작은 생쥐",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 94,
-              "end": 96
-            },
-            {
-              "paragraphId": "p1",
-              "start": 118,
-              "end": 120
+              "start": 14,
+              "end": 19
             }
           ],
           "scoring": {
@@ -874,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "남에게 베푼 ( )은 다시 돌아와요.",
-          "answerText": "친절",
-          "answerMatchMode": "EXACT",
+          "prompt": "생쥐가 사자를 구하기 위해 한 행동이 드러나는 어구를 찾으시오.",
+          "answerText": "그물을 갉아",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 58,
-              "end": 60
+              "paragraphId": "p1",
+              "start": 118,
+              "end": 124
             }
           ],
           "scoring": {
@@ -893,24 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "고마운 ( )을 잊지 않고 표현해요.",
-          "answerText": "마음",
-          "answerMatchMode": "EXACT",
+          "prompt": "상대를 보고 판단하지 말아야 할 기준을 지문에서 찾으시오.",
+          "answerText": "겉모습",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 97,
-              "end": 99
-            },
+              "start": 81,
+              "end": 84
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "매일매일 실천하자고 한 행동을 지문에서 찾으시오.",
+          "answerText": "착한 행동",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 58,
-              "end": 60
-            },
-            {
-              "paragraphId": "p3",
-              "start": 93,
-              "end": 95
+              "start": 114,
+              "end": 119
             }
           ],
           "scoring": {

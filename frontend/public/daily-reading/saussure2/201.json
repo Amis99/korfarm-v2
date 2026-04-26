@@ -559,14 +559,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "아시아에는 아주 높은 이것과 끝없이 펼쳐진 사막이 있어요. 이것은 무엇일까요?",
-          "answerText": "산맥",
-          "answerMatchMode": "EXACT",
+          "prompt": "아시아가 세계에서 어떤 대륙인지 설명한 어구를 지문에서 찾으시오.",
+          "answerText": "가장 넓고 사람도 가장 많이 사는 커다란 대륙",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 52,
-              "end": 54
+              "start": 10,
+              "end": 35
             }
           ],
           "scoring": {
@@ -578,14 +578,14 @@
         },
         {
           "id": "q2",
-          "prompt": "우리나라와 일본, 중국이 있는 아시아의 동쪽 지역은 어디인가요?",
-          "answerText": "동아시아",
-          "answerMatchMode": "EXACT",
+          "prompt": "동아시아 나라들에 비슷한 점이 많은 이유를 지문에서 찾으시오.",
+          "answerText": "서로 가까이 있어서",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 15,
-              "end": 19
+              "start": 48,
+              "end": 58
             }
           ],
           "scoring": {
@@ -597,14 +597,33 @@
         },
         {
           "id": "q3",
-          "prompt": "동남아시아 사람들이 즐겨 먹는 달콤한 이것은 무엇인가요?",
-          "answerText": "열대 과일",
-          "answerMatchMode": "EXACT",
+          "prompt": "동아시아 사람들이 밥을 지어 먹을 때 주로 쓰는 곡식을 지문에서 찾으시오.",
+          "answerText": "쌀",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 74,
+              "end": 75
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "동남아시아에 있는 나라의 예로 든 표현을 지문에서 찾으시오.",
+          "answerText": "베트남과 태국",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 63,
-              "end": 68
+              "start": 22,
+              "end": 29
             }
           ],
           "scoring": {

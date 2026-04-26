@@ -10,8 +10,8 @@
     "min": 4,
     "max": 4
   },
-  "area": "기타",
-  "subArea": "매체",
+  "area": "국어",
+  "subArea": "독해",
   "competencies": [
     "사실적 이해",
     "비판적 이해"
@@ -97,7 +97,7 @@
           }
         },
         {
-          "stepId": "s3",
+          "stepId": "s2",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -138,7 +138,7 @@
           }
         },
         {
-          "stepId": "s4",
+          "stepId": "s3",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -179,7 +179,7 @@
           }
         },
         {
-          "stepId": "s5",
+          "stepId": "s4",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -220,7 +220,7 @@
           }
         },
         {
-          "stepId": "s2",
+          "stepId": "s5",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -302,7 +302,7 @@
           }
         },
         {
-          "stepId": "s8",
+          "stepId": "s7",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -343,7 +343,7 @@
           }
         },
         {
-          "stepId": "s9",
+          "stepId": "s8",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -384,7 +384,7 @@
           }
         },
         {
-          "stepId": "s10",
+          "stepId": "s9",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -425,7 +425,7 @@
           }
         },
         {
-          "stepId": "s7",
+          "stepId": "s10",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -507,7 +507,7 @@
           }
         },
         {
-          "stepId": "s13",
+          "stepId": "s12",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -548,7 +548,7 @@
           }
         },
         {
-          "stepId": "s14",
+          "stepId": "s13",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -589,7 +589,7 @@
           }
         },
         {
-          "stepId": "s15",
+          "stepId": "s14",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -630,7 +630,7 @@
           }
         },
         {
-          "stepId": "s12",
+          "stepId": "s15",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -712,7 +712,7 @@
           }
         },
         {
-          "stepId": "s18",
+          "stepId": "s17",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -753,7 +753,7 @@
           }
         },
         {
-          "stepId": "s19",
+          "stepId": "s18",
           "type": "MULTIPLE_CHOICE",
           "condition": "DETAIL",
           "highlight": {
@@ -794,7 +794,7 @@
           }
         },
         {
-          "stepId": "s17",
+          "stepId": "s19",
           "type": "MULTIPLE_CHOICE",
           "condition": "SUMMARY",
           "highlight": {
@@ -872,24 +872,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "비 오는 날 건물 입구에서 흔히 볼 수 있는 것은 무엇인가요?",
-          "answerText": "비닐 우산 커버",
+          "prompt": "일이 복잡하고 귀찮다는 뜻을 나타내는 어구를 지문에서 찾으시오.",
+          "answerText": "번거롭고",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 21,
-              "end": 29
-            },
-            {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 8
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 8
+              "start": 73,
+              "end": 77
             }
           ],
           "scoring": {
@@ -900,47 +890,12 @@
         },
         {
           "id": "q2",
-          "prompt": "환경 보호를 위해 비닐 커버 대신 설치하는 것은 무엇인가요?",
-          "answerText": "빗물 제거기",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 121,
-              "end": 127
-            },
-            {
-              "paragraphId": "p2",
-              "start": 48,
-              "end": 54
-            },
-            {
-              "paragraphId": "p3",
-              "start": 3,
-              "end": 9
-            },
-            {
-              "paragraphId": "p3",
-              "start": 133,
-              "end": 139
-            },
-            {
-              "paragraphId": "p4",
-              "start": 10,
-              "end": 16
-            }
+          "prompt": "비닐 우산 커버를 계속 사용하자는 사람들이 가장 중요하게 생각하는 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "편리함",
+            "안전"
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "비닐 우산 커버를 계속 사용하자는 사람들이 가장 중요하게 생각하는 것은 무엇인가요?",
-          "answerText": "편리함",
-          "answerMatchMode": "ANY",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -951,6 +906,34 @@
               "paragraphId": "p4",
               "start": 37,
               "end": 40
+            },
+            {
+              "paragraphId": "p2",
+              "start": 29,
+              "end": 31
+            },
+            {
+              "paragraphId": "p4",
+              "start": 113,
+              "end": 115
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "앞의 의견과 다른 의견을 제시할 때 쓴 연결 표현을 찾으시오.",
+          "answerText": "반면",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 2
             }
           ],
           "scoring": {
@@ -961,14 +944,14 @@
         },
         {
           "id": "q4",
-          "prompt": "빗물 제거기를 찬성하는 사람들이 심각한 쓰레기 문제로 보는 것은 무엇인가요?",
-          "answerText": "우산 비닐",
+          "prompt": "우산 비닐이 심각한 쓰레기 문제가 되는 이유를 나타내는 구절을 찾으시오.",
+          "answerText": "땅속에서 썩는 데 수백 년이 걸려",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 47,
-              "end": 52
+              "start": 54,
+              "end": 72
             }
           ],
           "scoring": {
@@ -979,13 +962,13 @@
         },
         {
           "id": "q5",
-          "prompt": "글에서 우리 모두가 함께 찾아야 한다고 한 것은 무엇인가요?",
-          "answerText": "더 좋은 방법",
+          "prompt": "우리 모두가 지혜를 모아 찾아야 하는 방법을 지문에서 찾으시오.",
+          "answerText": "안전하면서도 환경을 지킬 수 있는 더 좋은 방법",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 132,
+              "start": 113,
               "end": 139
             }
           ],

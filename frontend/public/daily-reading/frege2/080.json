@@ -997,14 +997,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "학생 대표들이 부족하다고 지적한 식단 요소는 무엇인가요?",
-          "answerText": "단백질 식단",
+          "prompt": "회의 참석자를 모두 찾으시오.",
+          "answerText": "학생 회장, 각 학년 대표, 영양 교사, 행정 실장",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 55,
-              "end": 61
+              "paragraphId": "p1",
+              "start": 39,
+              "end": 67
             }
           ],
           "scoring": {
@@ -1015,10 +1015,44 @@
         },
         {
           "id": "q2",
-          "prompt": "영양 교사가 품질 유지를 위해 활용한다고 한 공급 방식은 무엇인가요?",
-          "answerText": "지역 농산물 직거래",
-          "answerMatchMode": "ANY",
+          "prompt": "학생 대표들이 문제로 제기한 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "급식의 맛",
+            "메뉴의 단조로움"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 8,
+              "end": 13
+            },
+            {
+              "paragraphId": "p2",
+              "start": 15,
+              "end": 23
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "영양 교사가 품질 유지를 위해 활용한다고 한 방법을 모두 찾으시오.",
+          "answerTexts": [
+            "조리법의 다양화",
+            "지역 농산물 직거래"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 174,
+              "end": 182
+            },
             {
               "paragraphId": "p2",
               "start": 184,
@@ -1032,33 +1066,23 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "학생들의 의견을 실시간으로 받기 위해 설치하겠다고 한 것은 무엇인가요?",
-          "answerText": "급식 소리함",
-          "answerMatchMode": "ANY",
+          "id": "q4",
+          "prompt": "행정 실장이 제시한 배식 시스템 개선안을 모두 찾으시오.",
+          "answerTexts": [
+            "학년별 배식 시간을 조정",
+            "잔반 줄이기 캠페인"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 152,
-              "end": 158
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "정기적으로 식재료를 점검하고 급식의 질을 평가하기로 한 조직은 무엇인가요?",
-          "answerText": "급식 모니터링단",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+              "start": 65,
+              "end": 78
+            },
             {
-              "paragraphId": "p4",
-              "start": 64,
-              "end": 72
+              "paragraphId": "p3",
+              "start": 82,
+              "end": 92
             }
           ],
           "scoring": {
@@ -1069,14 +1093,14 @@
         },
         {
           "id": "q5",
-          "prompt": "이번 토의 기록을 전교생과 공유하기 위해 게시할 곳은 어디인가요?",
-          "answerText": "학교 홈페이지",
+          "prompt": "급식 모니터링단이 하기로 한 일을 찾으시오.",
+          "answerText": "정기적으로 식재료를 점검하고 급식의 질을 평가",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 169,
-              "end": 176
+              "start": 80,
+              "end": 105
             }
           ],
           "scoring": {

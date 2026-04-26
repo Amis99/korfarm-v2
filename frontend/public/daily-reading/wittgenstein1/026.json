@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 '일회용 컵 분리배출 개선 건의문 초고'와 관련해 어떤 문제의식으로 주장하는가?",
+          "prompt": "글쓴이가 대책을 제안하려는 대상이 되는 문제를 가리키는 어구를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 157
+              "start": 26,
+              "end": 31
             }
           ],
           "scoring": {
@@ -584,17 +584,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "우리 학교에서는 쉬는 시간마다 복도에 버려지는 일회용 컵이 많아 환경 동아리에서 대책을 제안하려고 한다. 지난주에 이틀 동안 2학년 복도와 급식실 앞 분리수거함을 조사했더니, 점심시간 이후 컵이 가장 많이 쌓였고 그중 절반 정도는 음료가 남아 있어 재활용이 어렵다는 결과가 나왔다."
+          "answerText": "일회용 컵",
+          "answerMatchMode": "ANY"
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 '일회용 컵 분리배출 개선 건의문 초고'와 관련해 어떤 근거로 보강해야 한다고 보는가?",
+          "prompt": "2학년 복도와 급식실 앞 분리수거함을 조사한 때를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 111
+              "paragraphId": "p1",
+              "start": 59,
+              "end": 69
             }
           ],
           "scoring": {
@@ -602,17 +602,17 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학생회 설문에서도 비슷한 반응이 확인되었다. 응답한 학생 132명 가운데 다수가 컵을 많이 쓰는 이유로 매점 음료를 자주 사기 때문이라고 답했고, 씻는 곳이 멀어서 그냥 버린다는 의견도 적지 않았다."
+          "answerText": "지난주에 이틀 동안",
+          "answerMatchMode": "ANY"
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 '일회용 컵 분리배출 개선 건의문 초고'와 관련해 어떤 근거로 보강해야 한다고 보는가?",
+          "prompt": "학생 다수가 컵을 많이 쓰는 이유로 든 내용을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 120
+              "paragraphId": "p2",
+              "start": 58,
+              "end": 73
             }
           ],
           "scoring": {
@@ -620,17 +620,27 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 자료를 바탕으로 보면 문제는 단순히 컵을 많이 쓴다는 데만 있지 않다. 컵을 버리는 장소, 남은 음료 처리, 학생들의 이동 동선이 함께 얽혀 있어서 분리수거함만 늘리는 방식으로는 효과가 크지 않을 것으로 보인다."
+          "answerText": "매점 음료를 자주 사기 때문",
+          "answerMatchMode": "ANY"
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 '일회용 컵 분리배출 개선 건의문 초고'와 관련해 어떤 근거로 보강해야 한다고 보는가?",
+          "prompt": "컵을 버릴 때 함께 얽혀 있다고 한 세 가지 요소를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 140
+              "paragraphId": "p3",
+              "start": 42,
+              "end": 51
+            },
+            {
+              "paragraphId": "p3",
+              "start": 53,
+              "end": 61
+            },
+            {
+              "paragraphId": "p3",
+              "start": 63,
+              "end": 73
             }
           ],
           "scoring": {
@@ -638,17 +648,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그래서 나는 우선 급식실 앞에 남은 음료를 비우는 통을 두고, 매점 옆에는 컵을 헹굴 수 있는 작은 세척 구역을 마련하자는 의견을 제시하려 한다. 여기에 텀블러를 가져온 학생에게 매점 할인이나 도장을 주는 방안도 함께 넣으면 참여율이 높아질 것 같다."
+          "answerTexts": [
+            "컵을 버리는 장소",
+            "남은 음료 처리",
+            "학생들의 이동 동선"
+          ],
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 주장을 설득력 있게 만들기 위해 어떤 점을 보완해야 한다고 보는가?",
+          "prompt": "글쓴이가 급식실 앞에 두자고 한 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 163
+              "paragraphId": "p4",
+              "start": 17,
+              "end": 29
             }
           ],
           "scoring": {
@@ -656,17 +670,22 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "다만 이 글에서는 설문 결과와 현장 관찰 내용을 한 번에 몰아 적어서 핵심 제안이 늦게 드러난다는 문제가 있다. 또 응답 수와 실제 이용 학생 수의 차이를 따져 보지 않은 채 전체 학생의 의견처럼 적은 부분도 있어서, 발표용 건의문으로 다듬으려면 정보의 순서와 근거 표현을 더 정리해야 한다."
+          "answerText": "남은 음료를 비우는 통",
+          "answerMatchMode": "ANY"
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 글의 독자와 요청을 어떻게 정리해야 한다고 말하는가?",
+          "prompt": "텀블러를 가져온 학생에게 주자고 한 혜택 두 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 161
+              "paragraphId": "p4",
+              "start": 100,
+              "end": 105
+            },
+            {
+              "paragraphId": "p4",
+              "start": 108,
+              "end": 110
             }
           ],
           "scoring": {
@@ -674,8 +693,69 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "결국 이 글의 목적은 컵 사용을 무조건 금지하자는 것이 아니라, 학생들이 불편함 때문에 분리배출을 포기하지 않도록 학교가 실질적인 장치를 마련하자고 제안하는 데 있다. 자료를 다시 배열할 때는 조사 결과, 문제 원인, 해결 방안이 자연스럽게 이어지도록 문단의 순서를 손보는 것이 필요하다."
+          "answerTexts": [
+            "매점 할인",
+            "도장"
+          ],
+          "answerMatchMode": "ALL"
+        },
+        {
+          "id": "q7",
+          "prompt": "발표문을 건의문으로 다듬으려면 정리해야 한다고 한 두 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 138,
+              "end": 144
+            },
+            {
+              "paragraphId": "p5",
+              "start": 146,
+              "end": 151
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerTexts": [
+            "정보의 순서",
+            "근거 표현"
+          ],
+          "answerMatchMode": "ALL"
+        },
+        {
+          "id": "q8",
+          "prompt": "자료를 다시 배열할 때 자연스럽게 이어지도록 해야 하는 세 요소를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 108,
+              "end": 113
+            },
+            {
+              "paragraphId": "p6",
+              "start": 115,
+              "end": 120
+            },
+            {
+              "paragraphId": "p6",
+              "start": 122,
+              "end": 127
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerTexts": [
+            "조사 결과",
+            "문제 원인",
+            "해결 방안"
+          ],
+          "answerMatchMode": "ALL"
         }
       ]
     }

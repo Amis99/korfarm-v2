@@ -913,14 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "조선 시대에 비의 양을 재는 대표적인 도구는 무엇이었나요?",
-          "answerText": "측우기",
+          "prompt": "측우기가 어떤 도구였는지 설명한 부분을 찾으시오.",
+          "answerText": "비의 양을 재는 대표적인 도구",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 76,
-              "end": 79
+              "start": 81,
+              "end": 97
             }
           ],
           "scoring": {
@@ -931,9 +931,12 @@
         },
         {
           "id": "q2",
-          "prompt": "공기의 차갑고 뜨거운 정도를 숫자로 알려주는 도구는 무엇인가요?",
-          "answerText": "온도계",
-          "answerMatchMode": "ANY",
+          "prompt": "기본 기상 관측 도구를 모두 찾으시오.",
+          "answerTexts": [
+            "온도계",
+            "풍향풍속계"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -944,20 +947,7 @@
               "paragraphId": "p2",
               "start": 32,
               "end": 35
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "바람이 부는 방향과 세기를 측정하는 도구는 무엇인가요?",
-          "answerText": "풍향풍속계",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+            },
             {
               "paragraphId": "p2",
               "start": 19,
@@ -976,20 +966,33 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "구름의 이동과 비의 양을 파악하기 위해 전파를 쏘는 도구는 무엇인가요?",
-          "answerText": "기상 레이더",
+          "id": "q3",
+          "prompt": "기상 레이더가 구름의 이동과 비의 양을 파악하는 방법을 찾으시오.",
+          "answerText": "전파를 쏘아 구름의 이동과 비의 양을 파악한다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 21,
-              "end": 27
-            },
+              "start": 41,
+              "end": 66
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "기상 레이더를 통해 미리 알 수 있는 것을 찾으시오.",
+          "answerText": "태풍이나 폭우가 언제 올지",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 33,
-              "end": 39
+              "start": 74,
+              "end": 88
             }
           ],
           "scoring": {
@@ -1000,7 +1003,7 @@
         },
         {
           "id": "q5",
-          "prompt": "우리나라가 쏘아 올린 자랑스러운 기상 위성의 이름은 무엇인가요?",
+          "prompt": "우리나라가 쏘아 올린 자랑스러운 기상 위성의 이름을 찾으시오.",
           "answerText": "천리안 위성",
           "answerMatchMode": "ANY",
           "answerRanges": [

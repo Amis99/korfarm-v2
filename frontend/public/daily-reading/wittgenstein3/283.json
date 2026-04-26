@@ -569,114 +569,180 @@
     },
     "confirm": {
       "questions": [
-        {
-          "id": "q1",
-          "prompt": "1문단은 이 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 216
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q1",
+              "prompt":  "1960년대 미국 팝 아트가 전개된 방향을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  17,
+                                       "end":  44
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "고급 예술과 대중문화의 경계를 일부러 흐리는 방향"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "1960년대 미국의 팝 아트는 고급 예술과 대중문화의 경계를 일부러 흐리는 방향으로 전개되었다. 그중 로이 리히텐슈타인은 만화 이미지를 회화 안으로 끌어들인 작가로 자주 언급된다. 그러나 그의 작업을 단순히 만화를 크게 옮겨 그린 것으로 이해하면 핵심을 놓치게 된다. 그는 대중 매체의 이미지를 전유하면서도 그것을 새로운 맥락에 놓아, 원본과 복제의 관계 자체를 다시 생각하게 만들었다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 첫 핵심 원리나 기준을 어떻게 설명하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 209
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q2",
+              "prompt":  "만화 이미지를 회화 안으로 끌어들인 작가로 언급된 인물을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  57,
+                                       "end":  66
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "로이 리히텐슈타인"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "리히텐슈타인이 주목한 것은 만화의 서사 전체가 아니라, 인쇄 매체가 이미지를 전달하는 방식이었다. 그는 벤데이 도트처럼 대량 인쇄물에서 흔히 볼 수 있던 시각 효과를 회화 안에서 다시 재현했다. 얼핏 보면 기계적으로 복제된 이미지 같지만 실제 작업 과정은 손의 개입과 반복 조정으로 이루어졌다. 이 지점에서 그의 작품은 수작업 회화와 기계적 복제의 구분을 곧바로 무너뜨린다."
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단은 그 원리의 작동 방식이나 예시를 무엇으로 보여 주는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 226
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q3",
+              "prompt":  "리히텐슈타인이 회화 안에서 재현한 시각 효과와 그 효과가 흔히 보이던 매체를 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  58,
+                                       "end":  64
+                                   },
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  67,
+                                       "end":  73
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "벤데이 도트",
+                                  "대량 인쇄물"
+                              ]
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "또한 그는 만화 원본을 그대로 옮기지 않고 특정 패널만 골라 확대하거나, 원래 연결되어 있던 장면에서 일부를 떼어 내 강조했다. 이때 원래 이야기의 맥락은 약해지고, 대신 어떤 표정이나 폭발 장면, 한순간의 긴장이 독립된 회화적 사건으로 떠오른다. 다시 말해 리히텐슈타인의 전유는 원본의 내용을 충실히 되풀이하는 일이 아니라, 원본에서 무엇을 잘라 내고 무엇을 전면에 세울지 재배열하는 선택의 과정이었다."
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 230
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q4",
+              "prompt":  "리히텐슈타인의 실제 작업 과정이 무엇으로 이루어졌는지 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  143,
+                                       "end":  148
+                                   },
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  150,
+                                       "end":  155
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "손의 개입",
+                                  "반복 조정"
+                              ]
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그의 작품에서 말풍선과 의성어는 단순한 설명 문구가 아니라 시각적 조형 요소로 기능한다. 만화에서는 서사를 보조하던 텍스트가 회화 안에서는 화면의 리듬과 충격을 조직하는 장치가 된다. 예를 들어 폭발음을 나타내는 단어는 소리를 전달하는 데 그치지 않고, 화면 속 붉은 색면과 각진 형태를 더 강한 사건처럼 느끼게 만든다. 이렇게 텍스트와 이미지는 서로를 보충하는 정보가 아니라 함께 재구성된 하나의 화면이 된다."
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단은 이 주제의 효과나 쟁점을 어떤 방향으로 확장하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 234
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q5",
+              "prompt":  "그가 만화 원본을 그대로 옮기지 않고 한 조작 중 하나를 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p3",
+                                       "start":  24,
+                                       "end":  39
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "특정 패널만 골라 확대하거나"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이러한 작업 방식은 예술에서 원본성이 무엇을 뜻하는지 다시 묻게 만든다. 전통적으로 원본은 작가가 처음 만들어 낸 고유한 이미지와 연결되었지만, 리히텐슈타인의 경우 출발점은 이미 대중 매체에 실린 익명의 만화 장면이다. 그런데도 그의 작품은 단순 모사가 아니라 새로운 의미를 생산한 독자적 회화로 받아들여진다. 즉 원본성은 소재의 최초성에만 있지 않고, 어떤 맥락에서 어떻게 재구성했는가에도 달려 있다는 점이 드러난다."
-        },
-        {
-          "id": "q6",
-          "prompt": "6문단은 앞선 논의를 어떤 의미로 정리하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 249
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q6",
+              "prompt":  "말풍선과 의성어가 그의 작품에서 기능하는 요소를 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p4",
+                                       "start":  33,
+                                       "end":  42
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "시각적 조형 요소"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "결국 리히텐슈타인의 회화는 복제 시대의 예술이 무엇으로 독창성을 확보하는지를 보여 준다. 그는 대중문화 이미지를 빌려 오되 그대로 머무르지 않고, 화면 구성과 강조점, 기법의 재현 방식을 바꾸어 다른 감상 경험을 만들었다. 그 결과 관람자는 원본 만화를 보는 것이 아니라, 원본을 전유해 다시 조직한 회화를 보게 된다. 리히텐슈타인의 작업이 중요한 이유는 바로 이 지점, 즉 전유와 재맥락화를 통해 원본성의 개념 자체를 흔들어 놓았다는 데 있다."
-        }
+          {
+              "id":  "q7",
+              "prompt":  "원본성이 소재의 최초성 말고 무엇에도 달려 있는지 설명한 부분을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  198,
+                                       "end":  216
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "어떤 맥락에서 어떻게 재구성했는가"
+          },
+          {
+              "id":  "q8",
+              "prompt":  "그가 다른 감상 경험을 만들기 위해 바꾼 요소를 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  82,
+                                       "end":  87
+                                   },
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  89,
+                                       "end":  92
+                                   },
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  94,
+                                       "end":  103
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "화면 구성",
+                                  "강조점",
+                                  "기법의 재현 방식"
+                              ]
+          }
       ]
     }
   }

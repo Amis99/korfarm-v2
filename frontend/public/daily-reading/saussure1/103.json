@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "중요한 무엇를 알려 주었나요?",
+          "prompt": "표지판이 우리에게 그림과 글자로 알려 준다고 한 중요한 것을 두 글자로 적어 보세요",
           "answerText": "정보",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -571,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "빨간색 무엇가 있는 표지판인가요?",
-          "answerText": "테두리",
-          "answerMatchMode": "EXACT",
+          "prompt": "조심하라는 뜻을 알리는 표지판의 가장자리 색깔을 세 글자로 적어 보세요",
+          "answerText": "빨간색",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 73,
-              "end": 76
+              "start": 69,
+              "end": 72
             }
           ],
           "scoring": {
@@ -590,14 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "어린이 무엇 표지판을 봐요인가요?",
-          "answerText": "보호",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리가 해도 되는 일을 안내해 주는 표지판의 색깔을 세 글자로 적어 보세요",
+          "answerText": "파란색",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 103,
+              "end": 106
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "어린이 보호 표지판을 보면 자동차들이 무엇을 줄이고 운전한다고 했는지 두 글자로 적어 보세요",
+          "answerText": "속도",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 21,
-              "end": 23
+              "start": 51,
+              "end": 53
             }
           ],
           "scoring": {

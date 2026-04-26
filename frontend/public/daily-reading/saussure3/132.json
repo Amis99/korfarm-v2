@@ -557,19 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "물체가 차지하고 있는 공간의 크기를 뜻하는 과학 용어는 무엇인가요?",
-          "answerText": "부피",
-          "answerMatchMode": "EXACT",
+          "prompt": "물질의 세 가지 상태가 함께 나온 부분을 찾으시오.",
+          "answerText": "고체, 액체, 기체",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 33,
-              "end": 35
-            },
-            {
-              "paragraphId": "p2",
-              "start": 84,
-              "end": 86
+              "paragraphId": "p1",
+              "start": 14,
+              "end": 24
             }
           ],
           "scoring": {
@@ -581,29 +576,22 @@
         },
         {
           "id": "q2",
-          "prompt": "물이나 주스처럼 담는 그릇에 따라 모양이 변하는 물질의 상태는?",
-          "answerText": "액체",
-          "answerMatchMode": "EXACT",
+          "prompt": "고체와 액체의 예로 나온 물질을 모두 찾으시오.",
+          "answerTexts": [
+            "딱딱한 나무토막",
+            "흐르는 오렌지 주스"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 18,
-              "end": 20
+              "start": 95,
+              "end": 103
             },
             {
               "paragraphId": "p1",
-              "start": 122,
-              "end": 124
-            },
-            {
-              "paragraphId": "p2",
-              "start": 52,
-              "end": 54
-            },
-            {
-              "paragraphId": "p3",
-              "start": 45,
-              "end": 47
+              "start": 110,
+              "end": 120
             }
           ],
           "scoring": {
@@ -615,24 +603,49 @@
         },
         {
           "id": "q3",
-          "prompt": "공기처럼 모양과 부피가 일정하지 않고 공간을 가득 채우는 물질의 상태는?",
-          "answerText": "기체",
-          "answerMatchMode": "EXACT",
+          "prompt": "기체인 공기의 특징을 모두 찾으시오.",
+          "answerTexts": [
+            "눈에 보이지 않지만",
+            "부피가 줄어드는 성질"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 22,
-              "end": 24
+              "paragraphId": "p2",
+              "start": 8,
+              "end": 18
             },
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 2
+              "start": 33,
+              "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "물을 얼렸을 때 일어나는 변화를 모두 찾으시오.",
+          "answerTexts": [
+            "물을 얼리면",
+            "고체인 얼음"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 49,
+              "end": 55
             },
             {
               "paragraphId": "p3",
-              "start": 82,
-              "end": 84
+              "start": 56,
+              "end": 62
             }
           ],
           "scoring": {

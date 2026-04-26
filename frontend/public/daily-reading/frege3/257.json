@@ -1327,14 +1327,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "완득이와 함께 사는 장애가 있는 가족은 누구인가요?",
-          "answerText": "난쟁이 아버지",
-          "answerMatchMode": "ANY",
+          "prompt": "완득이와 함께 사는 가족을 모두 찾으시오.",
+          "answerTexts": [
+            "난쟁이 아버지",
+            "가짜 삼촌"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 5,
               "end": 12
+            },
+            {
+              "paragraphId": "p1",
+              "start": 14,
+              "end": 19
             }
           ],
           "scoring": {
@@ -1345,49 +1353,14 @@
         },
         {
           "id": "q2",
-          "prompt": "완득이의 담임 선생님 이름은 무엇인가요?",
-          "answerText": "똥주",
+          "prompt": "학교에서 싸움꾼으로 알려진 완득이의 실제 마음을 설명한 부분을 찾으시오.",
+          "answerText": "마음이 여린 소년",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 8,
-              "end": 10
-            },
-            {
-              "paragraphId": "p2",
-              "start": 69,
-              "end": 71
-            },
-            {
-              "paragraphId": "p2",
-              "start": 87,
-              "end": 89
-            },
-            {
-              "paragraphId": "p2",
-              "start": 125,
-              "end": 127
-            },
-            {
-              "paragraphId": "p3",
-              "start": 5,
-              "end": 7
-            },
-            {
-              "paragraphId": "p4",
-              "start": 38,
-              "end": 40
-            },
-            {
-              "paragraphId": "p4",
-              "start": 130,
-              "end": 132
-            },
-            {
-              "paragraphId": "p5",
-              "start": 112,
-              "end": 114
+              "paragraphId": "p1",
+              "start": 93,
+              "end": 102
             }
           ],
           "scoring": {
@@ -1398,14 +1371,14 @@
         },
         {
           "id": "q3",
-          "prompt": "똥주가 뺏어 먹은 완득이의 수급품은 무엇인가요?",
-          "answerText": "햇반",
+          "prompt": "똥주가 완득이를 괴롭히는 방식을 설명한 부분을 찾으시오.",
+          "answerText": "사생활에 간섭하며 얄궂은 농담",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 104,
-              "end": 106
+              "start": 37,
+              "end": 53
             }
           ],
           "scoring": {
@@ -1416,24 +1389,22 @@
         },
         {
           "id": "q4",
-          "prompt": "오랫동안 소식을 몰랐던 완득이의 가족은 누구인가요?",
-          "answerText": "어머니",
-          "answerMatchMode": "ANY",
+          "prompt": "똥주가 완득이에게 전한 어머니에 대한 사실과 출신을 모두 찾으시오.",
+          "answerTexts": [
+            "어머니가 살아 있다는 것입니다",
+            "베트남 출신의 여성"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 47,
-              "end": 50
+              "end": 63
             },
             {
               "paragraphId": "p3",
-              "start": 65,
-              "end": 68
-            },
-            {
-              "paragraphId": "p3",
-              "start": 106,
-              "end": 109
+              "start": 70,
+              "end": 80
             }
           ],
           "scoring": {
@@ -1444,14 +1415,22 @@
         },
         {
           "id": "q5",
-          "prompt": "완득이 어머니의 출신을 보여 주는 표현은 무엇인가요?",
-          "answerText": "베트남 출신",
-          "answerMatchMode": "ANY",
+          "prompt": "교회에서 완득이가 한 기도와 실제 바람을 모두 찾으시오.",
+          "answerTexts": [
+            "똥주를 죽여달라는 엉뚱한 기도",
+            "누군가 자신을 봐주기를 간절히 바라고 있었습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 70,
-              "end": 76
+              "paragraphId": "p4",
+              "start": 38,
+              "end": 54
+            },
+            {
+              "paragraphId": "p4",
+              "start": 102,
+              "end": 128
             }
           ],
           "scoring": {

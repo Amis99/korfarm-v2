@@ -396,9 +396,28 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "병을 고치는 전문 시설?",
+          "prompt": "아픈 몸을 낫게 해주는 행동을 뜻하는 두 글자 낱말을 글에서 찾아 적어 보세요",
+          "answerText": "치료",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 25,
+              "end": 27
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "아프거나 다쳤을 때 찾아가 치료를 받는 장소의 이름을 글에서 찾아 적어 보세요",
           "answerText": "병원",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -429,39 +448,10 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "몸의 기운과 튼튼함?",
-          "answerText": "건강",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 138,
-              "end": 140
-            },
-            {
-              "paragraphId": "p2",
-              "start": 38,
-              "end": 40
-            },
-            {
-              "paragraphId": "p2",
-              "start": 61,
-              "end": 63
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q3",
-          "prompt": "나쁜 일을 미리 막음?",
+          "prompt": "질병이 생기지 않도록 미리 막는 일을 뜻하는 두 글자 낱말을 글에서 찾아 적어 보세요",
           "answerText": "예방",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -472,6 +462,25 @@
               "paragraphId": "p2",
               "start": 22,
               "end": 24
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "아픈 곳이 있다면 참지 말고 어떻게 해야 한다고 글에서 말했는지 설명해 보세요",
+          "answerText": "바로 병원을 찾아가 적절한 도움을 받음",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 131,
+              "end": 152
             }
           ],
           "scoring": {

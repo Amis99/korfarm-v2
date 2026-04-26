@@ -571,30 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 글을 쓰게 된 문제의식이나 제안 배경을 어떻게 밝히는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 228
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "최근 학교에서는 도서관 앞 열린 학습 공간과 본관 3층 복도 옆 자습 공간을 어떻게 운영할지에 대한 질문이 계속 나오고 있다. 어떤 학생은 그곳을 조용히 공부하는 자리로 생각하고, 또 어떤 학생은 발표 준비나 짧은 토의를 할 수 있는 장소라고 여긴다. 그래서 이 공간을 단순히 비어 있는 자리라고 둘 것이 아니라, 여러 학생이 함께 쓰는 '공유 공간'으로 정의하고 그에 맞는 이용 기준을 안내할 필요가 있다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 현재 상황이나 조사 내용을 어떤 방향으로 제시하는가?",
+          "prompt": "공유 공간의 뜻을 설명한 핵심 정의를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 224
+              "start": 15,
+              "end": 69
             }
           ],
           "scoring": {
@@ -603,16 +585,100 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "우선 여기서 공유 공간이란 특정 동아리나 학급이 독점하는 장소가 아니라, 학교 구성원이 일정한 규칙 아래 함께 이용하는 공간을 뜻한다고 볼 수 있다. 다만 '함께 이용'이라는 표현이 너무 넓어서 완전히 자유로운 사용까지 허용하는 것처럼 읽힐 수도 있다. 그래서 이 공간은 누구나 사용할 수 있지만, 다른 사람의 학습을 방해하지 않는 범위 안에서 공동으로 쓰는 장소라고 조금 더 풀어 써야 할 것 같다."
+          "answerText": "특정 동아리나 학급이 독점하는 장소가 아니라, 학교 구성원이 일정한 규칙 아래 함께 이용하는 공간"
+        },
+        {
+          "id": "q2",
+          "prompt": "학생들이 그 공간을 서로 다르게 생각한 용도를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 82,
+              "end": 93
+            },
+            {
+              "paragraphId": "p1",
+              "start": 110,
+              "end": 133
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "조용히 공부하는 자리",
+            "발표 준비나 짧은 토의를 할 수 있는 장소"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단은 첫 개선안이나 핵심 근거를 무엇으로 설명하는가?",
+          "prompt": "공유 공간에서 허용되는 쪽에 가까운 활동 예시를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 238
+              "start": 57,
+              "end": 70
+            },
+            {
+              "paragraphId": "p3",
+              "start": 72,
+              "end": 98
+            },
+            {
+              "paragraphId": "p3",
+              "start": 100,
+              "end": 121
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "혼자 문제집을 푸는 활동",
+            "두세 명이 자료를 펼쳐 발표 순서를 맞추는 활동",
+            "쉬는 시간에 과제를 짧게 상의하는 활동"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "공유 공간의 취지와 맞지 않는 경우를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 140,
+              "end": 150
+            },
+            {
+              "paragraphId": "p3",
+              "start": 151,
+              "end": 171
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "간식을 오래 먹거나",
+            "큰 소리로 사적인 이야기를 하는 경우"
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "이 공간을 공유 공간이라고 부를 수 있는 이유를 설명한 핵심 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 127,
+              "end": 156
             }
           ],
           "scoring": {
@@ -621,15 +687,75 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "공유 공간의 성격을 설명하려면 무엇이 가능한지 예시를 먼저 드는 것이 이해에 도움이 된다. 예를 들어 혼자 문제집을 푸는 활동, 두세 명이 자료를 펼쳐 발표 순서를 맞추는 활동, 쉬는 시간에 과제를 짧게 상의하는 활동은 허용되는 쪽에 가깝다. 그런데 간식을 오래 먹거나 큰 소리로 사적인 이야기를 하는 경우는 공유 공간의 취지와 맞지 않는다. 다만 발표 연습처럼 목소리가 조금 필요한 경우를 어디까지 허용할지는 아직 애매하다."
+          "answerText": "학습과 관련된 여러 활동이 겹쳐 일어날 수 있다는 점"
         },
         {
-          "id": "q4",
-          "prompt": "4문단은 추가 제안이나 고려할 점을 어떤 이유와 함께 내놓는가?",
+          "id": "q6",
+          "prompt": "운영 방식에서 따로 기준이 필요하다고 든 항목이나 상황을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
+              "paragraphId": "p5",
+              "start": 47,
+              "end": 52
+            },
+            {
+              "paragraphId": "p5",
+              "start": 59,
+              "end": 64
+            },
+            {
+              "paragraphId": "p5",
+              "start": 100,
+              "end": 124
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "자리 독점",
+            "모둠 활동",
+            "시험 기간에는 조용한 자습 수요가 많아지므로"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "안내문에서 말하려는 공유 공간의 핵심 성격을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 73,
+              "end": 97
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "서로의 이용 방식을 고려해야 하는 공유 공간"
+        },
+        {
+          "id": "q8",
+          "prompt": "다음 수정에서 따로 정리해야 할 항목을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 176,
+              "end": 184
+            },
+            {
+              "paragraphId": "p6",
+              "start": 203,
+              "end": 215
+            },
+            {
+              "paragraphId": "p6",
+              "start": 217,
               "end": 225
             }
           ],
@@ -638,44 +764,12 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "또 이 공간을 공유 공간이라고 부르는 이유는 단순히 여러 사람이 같이 쓴다는 사실 때문만은 아니다. 학교 안에는 열린 자리처럼 보여도 실제 사용 목적이 거의 정해진 곳이 있다. 반면 이 공간은 자습, 자료 확인, 짧은 협의처럼 학습과 관련된 여러 활동이 겹쳐 일어날 수 있다는 점에서 더 유연하다. '학습 공용 공간'이라는 표현도 가능하지만, 일단은 학생들이 더 쉽게 이해할 말이 공유 공간이라고 본다."
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단은 실행 조건이나 예상되는 우려를 어떻게 따져 보는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 231
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "운영 방식도 안내문에 함께 들어가야 한다. 개인 짐만 올려 두고 오래 비우는 경우는 자리 독점으로 보고, 모둠 활동은 한 번에 이용하는 시간을 제한하는 식의 기준이 필요하다. 또 시험 기간에는 조용한 자습 수요가 많아지므로 말하기 기준을 더 엄격하게 적용할 수 있다고 적어 두는 것이 좋겠다. 다만 이 부분은 시험 일정에 따라 달라질 수 있어서, 상황에 따라 학교가 조정할 수 있다고 쓰는 편이 나을지도 모르겠다."
-        },
-        {
-          "id": "q6",
-          "prompt": "6문단은 결론과 요청을 어떤 방향으로 마무리하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 252
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "결국 이 안내문에서 말하려는 핵심은 열린 학습 공간이 비어 있으니 아무렇게나 써도 되는 곳이 아니라, 여러 사람이 함께 쓰는 만큼 서로의 이용 방식을 고려해야 하는 공유 공간이라는 점이다. 다만 지금 초고는 정의와 예시, 운영 규칙의 순서가 조금 섞여 있어서 핵심이 한 번에 잡히지 않을 수 있다. 다음 수정에서는 공유 공간의 뜻을 먼저 분명히 제시하고, 그다음 허용 활동과 제한 행동, 시험 기간 예외를 따로 정리하면 더 나은 안내문이 될 것 같다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "공유 공간의 뜻",
+            "허용 활동과 제한 행동",
+            "시험 기간 예외"
+          ]
         }
       ]
     }

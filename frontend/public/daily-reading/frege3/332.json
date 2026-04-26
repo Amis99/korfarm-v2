@@ -1326,34 +1326,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "누구나 볼 수 있게 공개된 소프트웨어의 설계도는 무엇인가요?",
-          "answerText": "오픈소스",
+          "prompt": "오픈소스는 무엇을 누구나 볼 수 있게 공개한 것인가요?",
+          "answerText": "소프트웨어의 설계도",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 4
-            },
-            {
-              "paragraphId": "p2",
-              "start": 10,
-              "end": 14
-            },
-            {
-              "paragraphId": "p3",
-              "start": 5,
-              "end": 9
-            },
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 4
-            },
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 4
+              "start": 6,
+              "end": 16
             }
           ],
           "scoring": {
@@ -1364,19 +1344,22 @@
         },
         {
           "id": "q2",
-          "prompt": "오픈소스 생태계의 성공적인 운영체제 사례는 무엇인가요?",
-          "answerText": "리눅스",
-          "answerMatchMode": "ANY",
+          "prompt": "전 세계 개발자들이 자발적으로 고치고 개선하는 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "오류",
+            "기능"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 3
+              "start": 49,
+              "end": 51
             },
             {
               "paragraphId": "p2",
-              "start": 118,
-              "end": 121
+              "start": 57,
+              "end": 59
             }
           ],
           "scoring": {
@@ -1387,7 +1370,25 @@
         },
         {
           "id": "q3",
-          "prompt": "오픈소스 활용 때 반드시 지켜야 할 저작권 규정은 무엇인가요?",
+          "prompt": "기업들이 자사의 기술을 공개하는 목적을 나타내는 표현은 무엇인가요?",
+          "answerText": "생태계를 확장하려는 목적",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 46,
+              "end": 59
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "오픈소스 활용에서 지켜야 하는 저작권 규정은 무엇인가요?",
           "answerText": "라이선스",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1404,38 +1405,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "오픈소스가 큰 힘을 발휘한다고 한 최신 기술 분야는 무엇인가요?",
-          "answerText": "빅데이터",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 12,
-              "end": 16
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q5",
-          "prompt": "디지털 세상의 기초가 된다고 한 가치는 무엇인가요?",
-          "answerText": "공유",
+          "prompt": "우리는 어떤 디지털 문화를 만들어가야 하나요?",
+          "answerText": "함께 성장하는 디지털 문화",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 137,
-              "end": 139
-            },
-            {
               "paragraphId": "p5",
-              "start": 46,
-              "end": 48
+              "start": 130,
+              "end": 144
             }
           ],
           "scoring": {

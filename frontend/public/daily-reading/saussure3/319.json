@@ -850,19 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "마트 ( )를 위해 모였습니다.",
-          "answerText": "장보기",
-          "answerMatchMode": "EXACT",
+          "prompt": "가족들이 이번 주말에 하려고 준비한 일을 본문에서 찾으시오.",
+          "answerText": "마트 장보기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 9,
+              "start": 6,
               "end": 12
-            },
-            {
-              "paragraphId": "p2",
-              "start": 14,
-              "end": 17
             }
           ],
           "scoring": {
@@ -874,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "필요한 물건 ( )을 만들어요.",
-          "answerText": "목록",
-          "answerMatchMode": "EXACT",
+          "prompt": "엄마께서 말씀하신 반찬 재료를 본문에서 찾으시오.",
+          "answerText": "고기와 채소",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 18,
-              "end": 20
+              "paragraphId": "p1",
+              "start": 68,
+              "end": 74
             }
           ],
           "scoring": {
@@ -893,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "우리 가족의 ( )한 모습입니다.",
-          "answerText": "화목",
-          "answerMatchMode": "EXACT",
+          "prompt": "불필요한 낭비를 줄이며 되려고 한 대상을 본문에서 찾으시오.",
+          "answerText": "지혜로운 소비자",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 74
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "가족회의가 어떤 시간인지 나타내는 말을 본문에서 찾으시오.",
+          "answerText": "서로를 이해하는 소중한 시간",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 33,
-              "end": 35
+              "start": 89,
+              "end": 104
             }
           ],
           "scoring": {

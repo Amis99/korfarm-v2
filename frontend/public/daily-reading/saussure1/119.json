@@ -552,34 +552,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "역사 무엇관 견학을 가요인가요?",
-          "answerText": "박물",
-          "answerMatchMode": "EXACT",
+          "prompt": "여러 사람이 모여서 어떤 일을 의논하는 것을 두 글자로 무엇이라고 하나요? 지문에서 찾아 보세요",
+          "answerText": "회의",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 7,
-              "end": 9
+              "start": 22,
+              "end": 24
             },
             {
               "paragraphId": "p1",
-              "start": 41,
-              "end": 43
-            },
-            {
-              "paragraphId": "p1",
-              "start": 63,
-              "end": 65
-            },
-            {
-              "paragraphId": "p2",
-              "start": 62,
-              "end": 64
-            },
-            {
-              "paragraphId": "p2",
-              "start": 126,
-              "end": 128
+              "start": 33,
+              "end": 35
             }
           ],
           "scoring": {
@@ -591,14 +576,19 @@
         },
         {
           "id": "q2",
-          "prompt": "메모를 위한 준비물은?",
-          "answerText": "수첩",
-          "answerMatchMode": "EXACT",
+          "prompt": "메모를 위해 견학 때 꼭 챙기기로 한 두 가지 준비물을 모두 찾아 적어 보세요",
+          "answerText": "수첩, 연필",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 42,
               "end": 44
+            },
+            {
+              "paragraphId": "p2",
+              "start": 46,
+              "end": 48
             }
           ],
           "scoring": {
@@ -610,14 +600,33 @@
         },
         {
           "id": "q3",
-          "prompt": "미리 보며 공부할 것은?",
-          "answerText": "지도",
-          "answerMatchMode": "EXACT",
+          "prompt": "박물관에서 조용히 걷고 차례를 지키기로 한 까닭은 무엇을 지키기 위해서인가요?",
+          "answerText": "예절",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 66,
-              "end": 68
+              "paragraphId": "p1",
+              "start": 53,
+              "end": 55
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "회의에서 좋은 의견을 내며 귀를 기울인 사람들은 누구인가요?",
+          "answerText": "친구들",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 123,
+              "end": 126
             }
           ],
           "scoring": {

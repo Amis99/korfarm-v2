@@ -557,29 +557,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "위험이 없도록 몸을 보호하고 사고를 막는 일을 뜻하는 말은?",
-          "answerText": "안전",
-          "answerMatchMode": "EXACT",
+          "prompt": "선생님 말씀이 예로 든 안전 행동 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "복도에서 뛰지 않기",
+            "계단에서 난간 잡기"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 35,
-              "end": 37
+              "start": 49,
+              "end": 59
             },
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p3",
-              "start": 11,
-              "end": 13
-            },
-            {
-              "paragraphId": "p3",
-              "start": 107,
-              "end": 109
+              "paragraphId": "p1",
+              "start": 61,
+              "end": 71
             }
           ],
           "scoring": {
@@ -591,14 +584,14 @@
         },
         {
           "id": "q2",
-          "prompt": "사람들이 함께 지키기로 한 약속이나 도리를 무엇이라 하나요?",
-          "answerText": "규칙을",
-          "answerMatchMode": "EXACT",
+          "prompt": "복도에서 뛰지 않기와 난간 잡기 같은 말씀이 무엇을 지키는 약속인지 찾으시오.",
+          "answerText": "생명을 지키는 소중한 약속",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 62,
-              "end": 65
+              "paragraphId": "p1",
+              "start": 83,
+              "end": 97
             }
           ],
           "scoring": {
@@ -610,14 +603,41 @@
         },
         {
           "id": "q3",
-          "prompt": "여러 사람이 지켜야 할 일정한 본보기나 행동 방식을 뜻하는 말은?",
-          "answerText": "수칙을",
-          "answerMatchMode": "EXACT",
+          "prompt": "안전하게 행동하는 습관을 비유한 표현을 찾으시오.",
+          "answerText": "튼튼한 방패",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 14,
-              "end": 17
+              "paragraphId": "p2",
+              "start": 29,
+              "end": 35
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "다치지 않으려면 피해야 할 일과 필요한 태도를 모두 찾으시오.",
+          "answerTexts": [
+            "장난을 치다가 다치는 일",
+            "규칙을 지키며 행동하는 태도"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 43,
+              "end": 56
+            },
+            {
+              "paragraphId": "p2",
+              "start": 62,
+              "end": 77
             }
           ],
           "scoring": {

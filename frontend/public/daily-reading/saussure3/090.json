@@ -557,24 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리 고장을 외적으로부터 지키기 위해 조상들이 산속에 튼튼하게 쌓아 올린 시설은?",
-          "answerText": "산성",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 역사를 배우기 위해 함께 방문한 사람은 누구인지 지문에서 찾으시오.",
+          "answerText": "부모님",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 30,
-              "end": 32
-            },
-            {
-              "paragraphId": "p1",
-              "start": 53,
-              "end": 55
-            },
-            {
-              "paragraphId": "p2",
-              "start": 11,
-              "end": 13
+              "start": 18,
+              "end": 21
             }
           ],
           "scoring": {
@@ -586,29 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "조상들이 나라를 사랑하는 마음을 담아 남겨 주신 소중한 보물들을 통틀어 이르는 말은?",
-          "answerText": "문화재",
-          "answerMatchMode": "EXACT",
+          "prompt": "산성 입구에서 우리를 반겨 준 것은 무엇인지 지문에서 찾으시오.",
+          "answerText": "튼튼한 돌벽",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 40,
-              "end": 43
-            },
-            {
-              "paragraphId": "p1",
-              "start": 120,
-              "end": 123
-            },
-            {
-              "paragraphId": "p3",
-              "start": 16,
-              "end": 19
-            },
-            {
-              "paragraphId": "p3",
-              "start": 67,
-              "end": 70
+              "start": 88,
+              "end": 94
             }
           ],
           "scoring": {
@@ -620,9 +595,9 @@
         },
         {
           "id": "q3",
-          "prompt": "역사적인 장소를 방문한 뒤, 그곳에서 배우고 느낀 점을 글로 정리하여 작성한 것은?",
+          "prompt": "관람을 마친 뒤 쓴 글의 종류를 지문에서 찾으시오.",
           "answerText": "기행문",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -633,6 +608,33 @@
               "paragraphId": "p3",
               "start": 41,
               "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "기행문에 담은 두 가지 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "조상들의 나라 사랑하는 마음",
+            "우리 문화재를 아껴야 한다는 다짐"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 47,
+              "end": 62
+            },
+            {
+              "paragraphId": "p3",
+              "start": 64,
+              "end": 82
             }
           ],
           "scoring": {

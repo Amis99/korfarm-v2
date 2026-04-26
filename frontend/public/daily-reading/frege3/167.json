@@ -1057,7 +1057,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이 작품의 이름은 무엇인가요?",
+          "prompt": "송강 정철의 작품 이름을 찾으시오.",
           "answerText": "관동별곡(關東別曲)",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1075,19 +1075,14 @@
         },
         {
           "id": "q2",
-          "prompt": "화자가 한양의 임금을 걱정하는 마음은 무엇인가요?",
-          "answerText": "연군지정",
+          "prompt": "화자가 한양의 임금을 걱정하는 마음을 찾으시오.",
+          "answerText": "연군지정(戀君之情)",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 81,
-              "end": 85
-            },
-            {
               "paragraphId": "p2",
               "start": 156,
-              "end": 160
+              "end": 166
             }
           ],
           "scoring": {
@@ -1098,7 +1093,7 @@
         },
         {
           "id": "q3",
-          "prompt": "금강산 폭포를 비유한 표현은 무엇인가요?",
+          "prompt": "금강산 폭포를 비유한 표현을 찾으시오.",
           "answerText": "은 같은 무지개 옥 같은 용의 꼬리",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1116,7 +1111,7 @@
         },
         {
           "id": "q4",
-          "prompt": "자연의 아름다움 끝에 귀결되는 정신은 무엇인가요?",
+          "prompt": "자연의 아름다움에 심취한 뒤 귀결되는 정신을 찾으시오.",
           "answerText": "애민 정신(愛民精神)",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1134,14 +1129,22 @@
         },
         {
           "id": "q5",
-          "prompt": "개인의 즐거움보다 공동체를 먼저 생각하는 정신은 무엇인가요?",
-          "answerText": "선우후락",
-          "answerMatchMode": "ANY",
+          "prompt": "작품 말미에 조화를 이룬 두 태도를 모두 찾으시오.",
+          "answerTexts": [
+            "도교적 낭만주의",
+            "유교적 현실주의"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 216,
-              "end": 220
+              "start": 24,
+              "end": 32
+            },
+            {
+              "paragraphId": "p5",
+              "start": 49,
+              "end": 57
             }
           ],
           "scoring": {

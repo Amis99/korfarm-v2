@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "폐결핵이 점점 악화된 이유를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 202
+              "start": 37,
+              "end": 49
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "한여름 내내 진영은 앓았다. 애당초 극히 경미하게 발생한 폐결핵이 전연 방치되었기 때문에 점점 악화되어 갔던 것이다. 뿐만 아니라 다른 병까지 연속적으로 병발하는 것이었다. 찬물만 마셔도 배탈이 났다. 눈병이 나고 입이 부르트고 하기가 일쑤였다. 앓다 못해 귀까지 앓았다. 그리고 여러 해째 건드리지 않고 둔 충치가 일시에 쑤시어 밤낮을 가리지 않고 욱신거렸다."
+          "answerText": "전연 방치되었기 때문에"
         },
         {
           "id": "q2",
-          "prompt": "2문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "찬물만 마셔도 배탈이 난 뒤 이어진 몸의 증상을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 93
+              "paragraphId": "p1",
+              "start": 113,
+              "end": 119
+            },
+            {
+              "paragraphId": "p1",
+              "start": 120,
+              "end": 127
             }
           ],
           "scoring": {
@@ -602,17 +607,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "진영은 진실로 하나의 육신이 해체되어 가는 과정 속에서 몸서리치는 무서움을 느꼈다. 그것은 마치 쨍쨍하게 내리찍는 햇볕 아래 늘어진 한 마리의 지렁이 같은 생명이었다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "눈병이 나고",
+            "입이 부르트고"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "진영의 생명을 비유한 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 38
+              "paragraphId": "p2",
+              "start": 74,
+              "end": 89
             }
           ],
           "scoring": {
@@ -621,16 +629,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이러한 육신과 더불어 정신도 해체되어 가는 과정 속에 진영은 있었다."
+          "answerText": "한 마리의 지렁이 같은 생명"
         },
         {
           "id": "q4",
-          "prompt": "4문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "육신과 정신의 상태에 반복해서 쓰인 표현을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 209
+              "paragraphId": "p2",
+              "start": 16,
+              "end": 26
+            },
+            {
+              "paragraphId": "p3",
+              "start": 16,
+              "end": 26
             }
           ],
           "scoring": {
@@ -639,16 +652,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "밤마다 귓가에 울려오는 아이의 울음소리, 산이, 언덕이, 집이 무너지는 소리, 산산이 바스러진 유리 조각이 수없이 날아와서 얼굴 위에 박히는 환각, 눈을 감으면 내장이 터진 소년병의 얼굴이, 남편의 얼굴이, 아이의 얼굴이, 분홍빛, 노란빛, 파란빛, 마지막에는 시꺼먼 빛, 그런 빛깔로 차례차례 뒤덮여 가면은 드디어 무한정한 공간이 안개처럼 진영의 주변을 꽉 싸는 것이었다."
+          "answerText": "해체되어 가는 과정"
         },
         {
           "id": "q5",
-          "prompt": "5문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "밤마다 귓가에 울려오는 소리를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 41
+              "paragraphId": "p4",
+              "start": 13,
+              "end": 21
+            },
+            {
+              "paragraphId": "p4",
+              "start": 32,
+              "end": 42
             }
           ],
           "scoring": {
@@ -656,17 +674,90 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "소리와 감각과 색채, 이러한 순서로 진영의 신경은 궤도에서 무너져 나갔다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "아이의 울음소리",
+            "집이 무너지는 소리"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "눈을 감으면 떠오르는 얼굴들을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 90,
+              "end": 104
+            },
+            {
+              "paragraphId": "p4",
+              "start": 107,
+              "end": 113
+            },
+            {
+              "paragraphId": "p4",
+              "start": 116,
+              "end": 122
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "내장이 터진 소년병의 얼굴",
+            "남편의 얼굴",
+            "아이의 얼굴"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "진영의 주변을 뒤덮는 빛깔을 순서대로 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 125,
+              "end": 128
+            },
+            {
+              "paragraphId": "p4",
+              "start": 130,
+              "end": 133
+            },
+            {
+              "paragraphId": "p4",
+              "start": 135,
+              "end": 138
+            },
+            {
+              "paragraphId": "p4",
+              "start": 146,
+              "end": 151
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "분홍빛",
+            "노란빛",
+            "파란빛",
+            "시꺼먼 빛"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "진영이 몸을 끌고 간 곳을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 88
+              "start": 33,
+              "end": 37
             }
           ],
           "scoring": {
@@ -675,7 +766,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "진영은 그 이상 견딜 수가 없어서 내버려 두었던 몸을 끌고 H 병원으로 갔다. 그러나 그곳에도 일주일이 멀다고 그만, 가는 것을 그만 중지하고 말았던 것이다."
+          "answerText": "H 병원"
         }
       ]
     }

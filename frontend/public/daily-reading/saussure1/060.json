@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "맛있는 ( )과 과자.",
-          "answerText": "떡",
-          "answerMatchMode": "EXACT",
+          "prompt": "교실 가득 춤을 추는 것 같았던 물건을 지문에서 찾아 보세요.",
+          "answerText": "알록달록한 풍선들",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 5
+              "paragraphId": "p1",
+              "start": 36,
+              "end": 45
             }
           ],
           "scoring": {
@@ -571,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "친구들과 ( )워진 기분.",
-          "answerText": "가까워",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구들에게 정성껏 불러 주었던 노래를 지문에서 찾아 보세요.",
+          "answerText": "생일 축하 노래",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 50,
-              "end": 53
+              "paragraphId": "p1",
+              "start": 67,
+              "end": 75
             }
           ],
           "scoring": {
@@ -590,14 +590,38 @@
         },
         {
           "id": "q3",
-          "prompt": "마음속에 깊이 ( )해요.",
-          "answerText": "간직",
-          "answerMatchMode": "EXACT",
+          "prompt": "맛있게 나누어 먹은 두 가지 음식을 모두 지문에서 찾아 보세요.",
+          "answerText": "떡, 과자",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 117,
-              "end": 119
+              "start": 4,
+              "end": 5
+            },
+            {
+              "paragraphId": "p2",
+              "start": 7,
+              "end": 9
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "친구들과 한층 더 가까워진 기분이 든 까닭을 지문에서 찾아 보세요.",
+          "answerText": "함께 웃고 떠드니",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 30,
+              "end": 39
             }
           ],
           "scoring": {

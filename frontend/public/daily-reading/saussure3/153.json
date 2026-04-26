@@ -557,10 +557,18 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "입안에 남은 찌꺼기 때문에 이가 썩어서 생기는 병은 무엇인가요?",
-          "answerText": "충치",
-          "answerMatchMode": "EXACT",
+          "prompt": "치아 사이에 남아 있으면 생기기 쉬운 것과 그 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "음식 찌꺼기",
+            "충치"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 51,
+              "end": 57
+            },
             {
               "paragraphId": "p1",
               "start": 72,
@@ -576,14 +584,22 @@
         },
         {
           "id": "q2",
-          "prompt": "치아를 닦을 때 사용하는 도구로, 솔이 달린 것은 무엇인가요?",
-          "answerText": "칫솔",
-          "answerMatchMode": "EXACT",
+          "prompt": "이를 닦을 때 사용한 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "칫솔",
+            "치약"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 94,
               "end": 96
+            },
+            {
+              "paragraphId": "p1",
+              "start": 98,
+              "end": 100
             }
           ],
           "scoring": {
@@ -595,14 +611,41 @@
         },
         {
           "id": "q3",
-          "prompt": "입안이 텁텁하지 않고 시원하며 맑은 상태를 뜻하는 말은?",
-          "answerText": "상쾌하게",
-          "answerMatchMode": "EXACT",
+          "prompt": "잠자기 전에 깨끗하게 닦거나 씻은 몸의 부분을 모두 찾으시오.",
+          "answerTexts": [
+            "혀까지",
+            "손과 발"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 28,
-              "end": 32
+              "start": 0,
+              "end": 3
+            },
+            {
+              "paragraphId": "p2",
+              "start": 46,
+              "end": 50
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "청결한 습관은 우리 몸을 지켜주는 무엇과 같다고 했는지 찾으시오.",
+          "answerText": "든든한 방패",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 107,
+              "end": 113
             }
           ],
           "scoring": {

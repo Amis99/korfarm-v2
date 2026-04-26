@@ -884,7 +884,25 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "스포츠의 결과를 정당화하는 핵심 요소는 무엇인가요?",
+          "prompt": "스포츠의 본질로 제시된 경쟁을 찾으시오.",
+          "answerText": "공정한 규칙 아래에서 이루어지는 경쟁",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 5,
+              "end": 25
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "스포츠의 결과를 정당화하는 핵심 요소를 찾으시오.",
           "answerText": "규칙의 공정성",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -901,33 +919,23 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "공정성을 유지하는 데 결정적인 역할을 하는 사람들은 누구인가요?",
-          "answerText": "심판",
-          "answerMatchMode": "ANY",
+          "id": "q3",
+          "prompt": "심판이 경기 중 해야 한다고 한 일을 모두 찾으시오.",
+          "answerTexts": [
+            "상황을 객관적으로 판단",
+            "규칙을 적용"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "공정성을 심각하게 훼손하는 행위로 제시된 것은 무엇인가요?",
-          "answerText": "약물 복용",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+              "start": 45,
+              "end": 57
+            },
             {
-              "paragraphId": "p3",
-              "start": 3,
-              "end": 8
+              "paragraphId": "p2",
+              "start": 60,
+              "end": 66
             }
           ],
           "scoring": {
@@ -938,14 +946,14 @@
         },
         {
           "id": "q4",
-          "prompt": "부정행위를 막고 선수의 건강을 보호하기 위해 존재하는 것은 무엇인가요?",
-          "answerText": "도핑 규정",
+          "prompt": "약물 복용이 뜻하는 부당한 시도를 찾으시오.",
+          "answerText": "자신의 능력 외의 방법으로 부당한 이득을 취하려는 시도",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 68,
-              "end": 73
+              "start": 34,
+              "end": 64
             }
           ],
           "scoring": {
@@ -956,14 +964,22 @@
         },
         {
           "id": "q5",
-          "prompt": "공정한 경쟁의 결과에 승복하는 태도를 무엇의 기본 덕목이라고 했나요?",
-          "answerText": "민주 시민",
-          "answerMatchMode": "ANY",
+          "prompt": "스포츠를 통해 배우는 자세를 모두 찾으시오.",
+          "answerTexts": [
+            "규칙 준수",
+            "결과 수용"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 56,
-              "end": 61
+              "start": 84,
+              "end": 89
+            },
+            {
+              "paragraphId": "p4",
+              "start": 91,
+              "end": 96
             }
           ],
           "scoring": {

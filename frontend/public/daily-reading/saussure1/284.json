@@ -396,30 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "작품을 모아 보여주는 모임?",
+          "prompt": "여러 사람이 볼 수 있도록 작품과 유물을 한곳에 모아 보여주는 모임을 무엇이라고 할까요?",
           "answerText": "전시회",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 16,
-              "end": 19
-            },
-            {
-              "paragraphId": "p1",
-              "start": 66,
-              "end": 69
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p2",
-              "start": 132,
-              "end": 135
-            }
+            {"paragraphId": "p1", "start": 16, "end": 19},
+            {"paragraphId": "p1", "start": 66, "end": 69},
+            {"paragraphId": "p2", "start": 0, "end": 3},
+            {"paragraphId": "p2", "start": 132, "end": 135}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -430,30 +414,15 @@
         },
         {
           "id": "q2",
-          "prompt": "사람이 만든 예술 물건?",
-          "answerText": "작품",
-          "answerMatchMode": "EXACT",
+          "prompt": "전시회에 가면 직접 만나볼 수 있는 두 가지가 무엇인지 모두 찾아 적어 보세요",
+          "answerText": "작품, 유물",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 30,
-              "end": 32
-            },
-            {
-              "paragraphId": "p1",
-              "start": 74,
-              "end": 76
-            },
-            {
-              "paragraphId": "p1",
-              "start": 141,
-              "end": 143
-            },
-            {
-              "paragraphId": "p2",
-              "start": 79,
-              "end": 81
-            }
+            {"paragraphId": "p1", "start": 30, "end": 32},
+            {"paragraphId": "p1", "start": 38, "end": 40},
+            {"paragraphId": "p1", "start": 74, "end": 76},
+            {"paragraphId": "p1", "start": 141, "end": 143},
+            {"paragraphId": "p2", "start": 79, "end": 81}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -464,15 +433,28 @@
         },
         {
           "id": "q3",
-          "prompt": "지켜야 할 바른 태도?",
-          "answerText": "예절",
-          "answerMatchMode": "EXACT",
+          "prompt": "관람할 때 다른 사람에게 방해가 되지 않도록 지켜야 할 두 가지 수칙을 모두 찾아 적어 보세요",
+          "answerText": "사진 촬영 금지, 거리 유지",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 121,
-              "end": 123
-            }
+            {"paragraphId": "p2", "start": 31, "end": 39},
+            {"paragraphId": "p2", "start": 41, "end": 46}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "다양한 전시회를 경험하면 키울 수 있는 두 가지를 모두 찾아 적어 보세요",
+          "answerText": "넓은 눈, 풍부한 상상력",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 149, "end": 153},
+            {"paragraphId": "p2", "start": 155, "end": 162}
           ],
           "scoring": {
             "correctDeltaSec": 10,

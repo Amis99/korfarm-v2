@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 '유의어의 치환 가능성과 문맥 제약'을 어떤 관점에서 소개하는가?",
+          "prompt": "유의어 학습에서 핵심으로 제시된 판단 내용을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 189
+              "start": 160,
+              "end": 178
             }
           ],
           "scoring": {
@@ -585,33 +585,15 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "유의어는 뜻이 비슷해 보이는 단어들이지만, 그렇다고 해서 언제나 자유롭게 서로 바꾸어 쓸 수 있는 것은 아니다. 실제 언어생활에서는 문체, 어감, 결합하는 표현이 조금씩 달라서 같은 자리에 넣었을 때 문장이 어색해지는 경우가 많다. 따라서 유의어 학습에서 핵심은 '비슷하다'는 사실보다 '어디까지 바꾸어 쓸 수 있는가'를 판단하는 일이다."
+          "answerText": "'어디까지 바꾸어 쓸 수 있는가'"
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 예시를 통해 '유의어의 치환 가능성과 문맥 제약'의 어떤 특징이나 작동 방식을 보여 주는가?",
+          "prompt": "단어 뜻만이 아니라 치환 가능성을 결정한다고 한 제약을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 166
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "어떤 유의어는 기본 뜻은 거의 같아도 사용 영역이 다르다. 예를 들어 공적인 글에서 자연스러운 표현이 일상 대화에서는 지나치게 딱딱하게 느껴질 수 있고, 반대로 구어적인 표현은 설명문이나 보고서에서 부정확하게 보일 수 있다. 이는 단어 뜻만이 아니라 문체적 제약이 치환 가능성을 결정한다는 뜻이다."
-        },
-        {
-          "id": "q3",
-          "prompt": "셋째 문단은 '유의어의 치환 가능성과 문맥 제약'과 관련해 어떤 생각이나 관계를 보여 주는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
+              "start": 140,
               "end": 146
             }
           ],
@@ -621,16 +603,59 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "또 유의어는 함께 어울리는 다른 단어가 다를 수 있다. 비슷한 뜻을 가진 동사라도 자주 결합하는 목적어나 부사어가 다르면, 문장 안에서의 자연스러움이 달라진다. 그래서 사전적 의미가 비슷하다고 해서 아무 문맥에나 넣어도 된다고 생각하면 실제 쓰임을 놓치게 된다."
+          "answerText": "문체적 제약"
+        },
+        {
+          "id": "q3",
+          "prompt": "사용 영역의 차이를 보여 주기 위해 든 글이나 말의 영역을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 39,
+              "end": 44
+            },
+            {
+              "paragraphId": "p2",
+              "start": 57,
+              "end": 62
+            },
+            {
+              "paragraphId": "p2",
+              "start": 99,
+              "end": 102
+            },
+            {
+              "paragraphId": "p2",
+              "start": 105,
+              "end": 108
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "공적인 글",
+            "일상 대화",
+            "설명문",
+            "보고서"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 '유의어의 치환 가능성과 문맥 제약'과 관련해 어떤 생각이나 관계를 보여 주는가?",
+          "prompt": "비슷한 뜻을 가진 동사라도 달라질 수 있다고 한 결합 대상을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 157
+              "paragraphId": "p3",
+              "start": 54,
+              "end": 57
+            },
+            {
+              "paragraphId": "p3",
+              "start": 59,
+              "end": 62
             }
           ],
           "scoring": {
@@ -638,17 +663,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "치환 가능성을 따질 때는 문장의 중심 의미가 유지되는지도 확인해야 한다. 어떤 표현은 비슷해 보여도 강도나 태도의 차이를 함께 품고 있어서, 바꾸는 순간 화자의 평가나 감정이 달라질 수 있다. 이 경우에는 정보 자체는 비슷해도 표현 효과가 달라지므로 완전한 치환이라고 보기 어렵다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "목적어",
+            "부사어"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 '유의어의 치환 가능성과 문맥 제약'의 핵심을 어떻게 정리하는가?",
+          "prompt": "사전적 의미가 비슷하다고 아무 문맥에나 넣으면 생기는 결과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 143
+              "paragraphId": "p3",
+              "start": 132,
+              "end": 145
             }
           ],
           "scoring": {
@@ -657,16 +685,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "유의어 학습이 어려운 이유도 여기에 있다. 단어를 낱개로 외우면 뜻은 기억할 수 있어도 실제 문맥에서 어떤 표현이 더 적절한지는 판단하기 어렵다. 결국 유의어는 사전 풀이만이 아니라 사용 장면, 결합 관계, 표현 강도를 함께 보아야 제대로 이해할 수 있다."
+          "answerText": "실제 쓰임을 놓치게 된다"
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 '유의어의 치환 가능성과 문맥 제약'의 핵심을 어떻게 정리하는가?",
+          "prompt": "치환 가능성을 따질 때 확인해야 하는 내용을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 148
+              "paragraphId": "p4",
+              "start": 14,
+              "end": 31
             }
           ],
           "scoring": {
@@ -675,7 +703,62 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정리하면 유의어의 치환 가능성은 단순한 뜻의 유사성만으로 결정되지 않는다. 문체, 어감, 결합 관계, 발화 의도까지 함께 보아야 어느 표현이 자연스러운지 판단할 수 있다. 문법과 어휘를 함께 읽는다는 것은 바로 이런 문맥 제약을 구체적으로 따져 보는 일과 연결된다."
+          "answerText": "문장의 중심 의미가 유지되는지도"
+        },
+        {
+          "id": "q7",
+          "prompt": "유의어를 제대로 이해하기 위해 함께 보아야 할 요소를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 102,
+              "end": 107
+            },
+            {
+              "paragraphId": "p5",
+              "start": 109,
+              "end": 114
+            },
+            {
+              "paragraphId": "p6",
+              "start": 50,
+              "end": 55
+            },
+            {
+              "paragraphId": "p5",
+              "start": 116,
+              "end": 121
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "사용 장면",
+            "결합 관계",
+            "표현 강도"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "문법과 어휘를 함께 읽는 일이 무엇과 연결된다고 했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 121,
+              "end": 141
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "문맥 제약을 구체적으로 따져 보는 일"
         }
       ]
     }

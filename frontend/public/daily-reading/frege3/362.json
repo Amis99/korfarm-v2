@@ -916,14 +916,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "인구 감소로 지역이 사라지는 현상은 무엇인가요?",
-          "answerText": "지역 소멸",
+          "prompt": "지역 소멸의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "인구 감소로 지역이 사라지는 현상",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 5
+              "start": 7,
+              "end": 25
             }
           ],
           "scoring": {
@@ -934,14 +934,22 @@
         },
         {
           "id": "q2",
-          "prompt": "모든 지역이 고르게 성장하는 상태를 무엇이라고 하나요?",
-          "answerText": "균형 발전",
-          "answerMatchMode": "ANY",
+          "prompt": "지역 소멸의 원인과 영향으로 제시된 것을 모두 찾으시오.",
+          "answerTexts": [
+            "청년층의 대도시 집중",
+            "국가 전체의 활력"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 5
+              "paragraphId": "p1",
+              "start": 30,
+              "end": 41
+            },
+            {
+              "paragraphId": "p1",
+              "start": 60,
+              "end": 69
             }
           ],
           "scoring": {
@@ -952,14 +960,28 @@
         },
         {
           "id": "q3",
-          "prompt": "사람들이 계속 지역에 머물게 하려면 먼저 개선해야 할 것은 무엇인가요?",
-          "answerText": "정주 여건",
-          "answerMatchMode": "ANY",
+          "prompt": "균형 발전의 뜻과 핵심 과제를 모두 찾으시오.",
+          "answerTexts": [
+            "모든 지역이 고르게 성장하는 것",
+            "인프라 구축",
+            "일자리 창출"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 5
+              "paragraphId": "p2",
+              "start": 7,
+              "end": 24
+            },
+            {
+              "paragraphId": "p2",
+              "start": 29,
+              "end": 35
+            },
+            {
+              "paragraphId": "p2",
+              "start": 37,
+              "end": 43
             }
           ],
           "scoring": {
@@ -970,10 +992,24 @@
         },
         {
           "id": "q4",
-          "prompt": "지역 전략의 예로 활용하자고 한 고유 자원은 무엇인가요?",
-          "answerText": "특산물",
-          "answerMatchMode": "ANY",
+          "prompt": "지역에 머물게 하거나 불러모으기 위해 필요한 자원을 모두 찾으시오.",
+          "answerTexts": [
+            "교육과 의료 서비스의 질",
+            "관광 자원",
+            "특산물"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 27,
+              "end": 40
+            },
+            {
+              "paragraphId": "p4",
+              "start": 26,
+              "end": 31
+            },
             {
               "paragraphId": "p4",
               "start": 34,
@@ -988,14 +1024,34 @@
         },
         {
           "id": "q5",
-          "prompt": "정부와 함께 협력이 필수적이라고 한 지방의 주체는 누구인가요?",
-          "answerText": "지방 자치 단체",
-          "answerMatchMode": "ANY",
+          "prompt": "지역 소멸 대응에 필요한 주체와 지원을 모두 찾으시오.",
+          "answerTexts": [
+            "정부와 지방 자치 단체",
+            "규제 완화",
+            "예산 지원",
+            "상생의 길"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 4,
+              "start": 0,
               "end": 12
+            },
+            {
+              "paragraphId": "p5",
+              "start": 30,
+              "end": 35
+            },
+            {
+              "paragraphId": "p5",
+              "start": 37,
+              "end": 42
+            },
+            {
+              "paragraphId": "p5",
+              "start": 54,
+              "end": 59
             }
           ],
           "scoring": {

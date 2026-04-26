@@ -850,19 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "( )를 함부로 만지지 마요.",
-          "answerText": "소화기",
-          "answerMatchMode": "EXACT",
+          "prompt": "화재를 막아 주는 기구들을 찾으시오.",
+          "answerText": "소화기와 경보기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 10,
-              "end": 13
-            },
-            {
-              "paragraphId": "p1",
-              "start": 33,
-              "end": 36
+              "end": 18
             }
           ],
           "scoring": {
@@ -874,14 +869,22 @@
         },
         {
           "id": "q2",
-          "prompt": "비상구 앞 ( )을 치웁니다.",
-          "answerText": "짐",
-          "answerMatchMode": "EXACT",
+          "prompt": "장난하거나 앞을 막으면 안 되는 곳과 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "경보기 버튼을 장난으로 누르는 행동",
+            "비상구 앞에 자전거나 짐을 두지 말아야 합니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
+              "paragraphId": "p1",
+              "start": 52,
+              "end": 71
+            },
+            {
               "paragraphId": "p2",
-              "start": 12,
-              "end": 13
+              "start": 0,
+              "end": 25
             }
           ],
           "scoring": {
@@ -893,14 +896,33 @@
         },
         {
           "id": "q3",
-          "prompt": "사고를 ( )하는 힘이 돼요.",
-          "answerText": "예방",
-          "answerMatchMode": "EXACT",
+          "prompt": "언제든 대피할 수 있게 어떻게 해야 하는지 찾으시오.",
+          "answerText": "길을 깨끗이 비워 둠",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 40,
+              "end": 51
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "큰 사고를 예방하는 힘이 되는 것을 찾으시오.",
+          "answerText": "작은 배려가 모여 큰 사고를 예방하는 힘",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 68,
-              "end": 70
+              "start": 52,
+              "end": 74
             }
           ],
           "scoring": {

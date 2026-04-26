@@ -571,47 +571,54 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "prompt": "찻잔을 길들이는 것이라고 설명된 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 53
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "차심이라는 말 있지\n찻잔을 닦지 않아 물이끼가 끼었나 했더니\n차심으로 찻잔을 길들이는 거라 했지"
-        },
-        {
-          "id": "q2",
-          "prompt": "2연은 그 정서를 어떤 이미지나 흐름으로 이어 가는가?",
-          "answerRanges": [
+              "end": 2
+            },
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 67
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "가마 속에서 흙과 유약이 다툴 때 그릇에 잔금이 생겨요\n뜨거운 찻물이 금 속을 파고들어 가\n그릇 색이 점점 바뀌는 겁니다"
-        },
-        {
-          "id": "q3",
-          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
-          "answerRanges": [
+              "paragraphId": "p1",
+              "start": 34,
+              "end": 36
+            },
             {
               "paragraphId": "p3",
               "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p4",
+              "start": 16,
+              "end": 18
+            },
+            {
+              "paragraphId": "p5",
+              "start": 18,
+              "end": 20
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "차심"
+        },
+        {
+          "id": "q2",
+          "prompt": "차심으로 길들이는 대상 이름을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 11,
+              "end": 13
+            },
+            {
+              "paragraphId": "p1",
+              "start": 39,
               "end": 41
             }
           ],
@@ -621,15 +628,64 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "차심 박힌 그릇의 금은 병균도 막아주고\n그릇을 더 단단하게 조여 준다고……"
+          "answerText": "찻잔"
+        },
+        {
+          "id": "q3",
+          "prompt": "그릇에 잔금이 생기는 조건을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 7,
+              "end": 18
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "흙과 유약이 다툴 때"
         },
         {
           "id": "q4",
-          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
+          "prompt": "2연에서 찻물이 금 속에 하는 일과 그 결과를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
+              "paragraphId": "p2",
+              "start": 31,
+              "end": 50
+            },
+            {
+              "paragraphId": "p2",
+              "start": 51,
+              "end": 63
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "뜨거운 찻물이 금 속을 파고들어 가",
+            "그릇 색이 점점 바뀌는"
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "차심 박힌 그릇의 금이 한다고 설명된 일을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 13,
+              "end": 21
+            },
+            {
+              "paragraphId": "p3",
+              "start": 22,
               "end": 39
             }
           ],
@@ -638,17 +694,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "불가마 속의 고통을 다스리는 차심,\n그게 차의 마음이라는 말처럼 들렸지"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "병균도 막아주고",
+            "그릇을 더 단단하게 조여 준다고"
+          ]
         },
         {
-          "id": "q5",
-          "prompt": "5연은 앞선 흐름에 어떤 긴장이나 전환을 더하는가?",
+          "id": "q6",
+          "prompt": "화자에게 차심이 무엇처럼 들렸는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 35
+              "paragraphId": "p4",
+              "start": 23,
+              "end": 28
             }
           ],
           "scoring": {
@@ -657,15 +716,33 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "수백 년 동안 대를 이은 잔에선\n차심만 우려도 차 맛이 난다는데"
+          "answerText": "차의 마음"
         },
         {
-          "id": "q6",
-          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
+          "id": "q7",
+          "prompt": "잔이 이어 온 오랜 시간을 드러내는 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 13
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "수백 년 동안 대를 이은"
+        },
+        {
+          "id": "q8",
+          "prompt": "화자가 금까지 어떻게 받아들이고 싶은지 드러내는 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
+              "start": 48,
               "end": 60
             }
           ],
@@ -675,7 +752,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "갈라진 너와 나 사이에도 그런 빛깔을 우릴 수 있다면\n아픈 금 속으로 찻물을 내리면서\n금마저 몸의 일부인 양"
+          "answerText": "금마저 몸의 일부인 양"
         }
       ]
     }

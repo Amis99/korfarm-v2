@@ -571,111 +571,96 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 문법 현상을 어떤 배경이나 문제의식에서 제시하는가?",
+          "prompt": "1문단에서 두 형식이 각각 무게를 두는 내용을 모두 찾으시오.",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 222
-            }
+            { "paragraphId": "p1", "start": 190, "end": 197 },
+            { "paragraphId": "p1", "start": 199, "end": 213 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "선어말 어미 '-더-'와 '-겠-'은 모두 용언 어간 뒤에 붙지만 기능은 전혀 같지 않다. '-더-'는 화자가 과거 어느 시점에 직접 지각하거나 체험한 내용을 현재에 회상하며 제시할 때 쓰이고, '-겠-'은 아직 실현되지 않은 일에 대한 추측, 의지, 가능성 판단을 드러낼 때 주로 쓰인다. 따라서 두 형식은 모두 서술 태도를 표시하지만, 하나는 회상에, 다른 하나는 예측과 판단에 무게가 실린다."
+          "answerMatchMode": "ALL",
+          "answerTexts": ["하나는 회상에", "다른 하나는 예측과 판단에"]
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 판별 기준이나 기본 원리를 어떻게 설명하는가?",
+          "prompt": "‘-더-’의 핵심이라고 한 표현을 찾으시오.",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 195
-            }
+            { "paragraphId": "p2", "start": 11, "end": 21 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "'-더-'의 핵심은 화자의 직접 경험성이다. '비가 오더라', '학생들이 조용하더라'처럼 쓰이면 화자가 그 장면을 실제로 보고 나중에 떠올리며 말하는 느낌이 강하다. 이때 중요한 것은 단순 과거 사실이 아니라 과거의 관찰 장면을 다시 불러오는 회상성이다. 그래서 '-더-'는 객관적 연대기보다 화자의 기억과 인식이 개입된 담화 표지라고 볼 수 있다."
+          "answerText": "화자의 직접 경험성"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 해당 현상의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "2문단에서 ‘-더-’의 예로 든 표현을 모두 찾으시오.",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 221
-            }
+            { "paragraphId": "p2", "start": 26, "end": 32 },
+            { "paragraphId": "p2", "start": 36, "end": 46 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "반면 '-겠-'은 화자의 현재 판단이 앞으로의 상태나 미실현 상황에 투사되는 형식이다. '비가 오겠어'에서는 추측이, '제가 먼저 하겠습니다'에서는 화자의 의지가, '그 정도면 가능하겠네'에서는 판단이 중심이 된다. 같은 '-겠-'이라도 문맥에 따라 의미 작용은 달라지지만, 공통적으로는 말하는 순간의 추론이나 태도가 드러난다. 즉 '-겠-'은 회상보다 현재 발화 시점의 판단을 전면에 내세운다."
+          "answerMatchMode": "ALL",
+          "answerTexts": ["비가 오더라", "학생들이 조용하더라"]
         },
         {
           "id": "q4",
-          "prompt": "4문단은 구별점이나 추가 조건을 어떤 방향으로 드러내는가?",
+          "prompt": "과거의 관찰 장면을 다시 불러오는 성격을 가리키는 말을 찾으시오.",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 246
-            }
+            { "paragraphId": "p2", "start": 136, "end": 139 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "두 형식의 차이는 결합 순서에서도 드러난다. 일반적으로 '-더-'는 이미 지나간 경험을 회상하는 표지이고 '-겠-'은 현재의 추측이나 의지를 나타내므로, 둘이 한 용언 안에 함께 들어갈 때는 의미 충돌이 생기기 쉽다. 실제 언어생활에서 '-더겠-'과 같은 결합은 매우 부자연스럽고, 화자의 기억과 현재 추측이 한 형태 안에서 동시에 작동해 해석이 불안정해진다. 따라서 둘은 이론적으로 나란히 놓아 볼 수 있어도 실제 결합은 강하게 제약된다."
+          "answerText": "회상성"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 해석상의 주의점이나 적용 효과를 어떻게 설명하는가?",
+          "prompt": "3문단에서 ‘-겠-’의 문맥별 의미를 보여 주는 예를 모두 찾으시오.",
           "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 225
-            }
+            { "paragraphId": "p3", "start": 49, "end": 64 },
+            { "paragraphId": "p3", "start": 66, "end": 90 },
+            { "paragraphId": "p3", "start": 92, "end": 112 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "또한 각 형식은 결합 가능한 주체와 상황에서도 차이를 보인다. '-더-'는 화자가 직접 확인한 타인의 행동이나 상태에는 자연스럽지만, 자신의 의지를 회상하는 자리에 쓰면 어색해질 수 있다. 반대로 '-겠-'은 화자의 의지 표현에는 잘 어울리지만, 이미 확정적으로 관찰한 과거 사실을 회상하는 자리에는 적절하지 않다. 예를 들어 '내가 가겠더라' 같은 표현은 특별한 인용 맥락이 아니면 매우 부자연스럽다."
+          "answerMatchMode": "ALL",
+          "answerTexts": ["'비가 오겠어'에서는 추측이", "'제가 먼저 하겠습니다'에서는 화자의 의지가", "'그 정도면 가능하겠네'에서는 판단이"]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 이 문법 주제를 어떤 관점에서 정리하는가?",
+          "prompt": "두 형식이 한 용언 안에 함께 들어갈 때 생기기 쉬운 일을 찾으시오.",
           "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 247
-            }
+            { "paragraphId": "p4", "start": 107, "end": 112 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 '-더-'와 '-겠-'을 구별할 때에는 단순히 과거와 미래를 나누는 데서 멈추면 안 된다. '-더-'는 화자가 과거 장면을 어떻게 기억하여 다시 말하는지, '-겠-'은 현재 시점에서 어떤 추측과 의지를 담아 말하는지를 보여 준다. 두 선어말 어미는 모두 화자의 태도를 드러내지만, 하나는 회상적 인식, 다른 하나는 전망적 판단에 기반한다. 그래서 고급 문법 해석에서는 의미뿐 아니라 담화 기능과 결합 제약까지 함께 살피는 것이 중요하다."
+          "answerText": "의미 충돌"
+        },
+        {
+          "id": "q7",
+          "prompt": "실제 언어생활에서 매우 부자연스럽다고 한 결합을 찾으시오.",
+          "answerRanges": [
+            { "paragraphId": "p4", "start": 132, "end": 138 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "'-더겠-'"
+        },
+        {
+          "id": "q8",
+          "prompt": "6문단에서 두 선어말 어미가 각각 기반한다고 한 것을 모두 찾으시오.",
+          "answerRanges": [
+            { "paragraphId": "p6", "start": 164, "end": 170 },
+            { "paragraphId": "p6", "start": 179, "end": 185 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": ["회상적 인식", "전망적 판단"]
         }
       ]
     }

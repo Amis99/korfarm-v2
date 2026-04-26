@@ -562,24 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "한 나라의 중앙 정부가 있는 곳으로, 나라의 중심이 되는 도시는?",
-          "answerText": "도읍지",
+          "prompt": "도읍지가 어떤 도시인지 설명한 부분을 지문에서 찾으시오.",
+          "answerText": "나라의 왕이 살며 나라를 다스리던 가장 중요한 도시",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 35,
-              "end": 38
-            },
-            {
-              "paragraphId": "p1",
-              "start": 43,
-              "end": 46
-            },
-            {
-              "paragraphId": "p3",
-              "start": 101,
-              "end": 104
+              "start": 57,
+              "end": 85
             }
           ],
           "scoring": {
@@ -590,14 +580,50 @@
         },
         {
           "id": "q2",
-          "prompt": "사람의 힘으로 자연의 사물과 비슷하게 만들어 낸 것을 뜻하는 말은?",
-          "answerText": "인공",
+          "prompt": "부여에서 걸어 볼 수 있는 백제를 지키던 튼튼한 성을 지문에서 찾으시오.",
+          "answerText": "부소산성",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 23,
+              "end": 27
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "낙화암이 어떤 바위인지 설명한 부분을 지문에서 찾으시오.",
+          "answerText": "백마강이 한눈에 내려다보이는 높은 바위",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 53,
+              "end": 74
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "부여에 있는 우리나라에서 가장 오래된 인공 연못의 이름을 지문에서 찾으시오.",
+          "answerText": "궁남지",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 22,
-              "end": 24
+              "start": 30,
+              "end": 33
             }
           ],
           "scoring": {

@@ -561,14 +561,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "고구려 사람들이 말을 타고 들판을 달리며 하는 것을 무척 좋아했던 것은 무엇인가요?",
-          "answerText": "사냥",
-          "answerMatchMode": "EXACT",
+          "prompt": "고구려가 삼국 중에서 어떤 위치에 자리 잡은 나라였는지 지문에서 찾으시오.",
+          "answerText": "가장 북쪽에 자리 잡은 나라",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 91,
-              "end": 93
+              "start": 12,
+              "end": 27
             }
           ],
           "scoring": {
@@ -580,9 +580,28 @@
         },
         {
           "id": "q2",
-          "prompt": "고구려를 세운 사람으로, 어릴 때부터 활솜씨가 뛰어나기로 유명했던 인물은 누구인가요?",
+          "prompt": "고구려 사람들이 아주 강하고 씩씩했던 이유를 지문에서 찾으시오.",
+          "answerText": "추운 날씨와 험한 산이 많아서",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 32,
+              "end": 48
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "고구려를 세운 사람의 이름을 지문에서 찾으시오.",
           "answerText": "주몽",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -608,34 +627,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "고구려는 무술을 열심히 연습해서 아주 강한 무엇을 만들었나요?",
-          "answerText": "군대",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 24,
-              "end": 26
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q4",
-          "prompt": "고구려 사람들이 열심히 연습해서 이웃 나라가 쉽게 쳐들어오지 못하게 만든 것은 무엇인가요?",
-          "answerText": "무술",
-          "answerMatchMode": "EXACT",
+          "prompt": "고구려가 무술을 열심히 연습해서 만든 것을 지문에서 찾으시오.",
+          "answerText": "아주 강한 군대",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 5,
-              "end": 7
+              "start": 18,
+              "end": 26
             }
           ],
           "scoring": {

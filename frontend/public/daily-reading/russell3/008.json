@@ -571,111 +571,117 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"참이나 거짓을 분명하게 판단할 수 있어야 한다\"에 해당하는 부분은 어디인가요?",
+          "prompt": "1문단에서 '명제'를 정의한 부분을 찾으시오",
+          "answerText": "참이나 거짓을 분명하게 판단할 수 있는 문장",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 166
+              "start": 4,
+              "end": 28
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "명제는 참이나 거짓을 분명하게 판단할 수 있는 문장을 뜻한다. 질문이나 감탄처럼 사실 여부를 따질 수 없는 표현은 보통 명제로 보지 않는다. 논리학에서는 추론의 타당성을 따지기 위해 먼저 어떤 문장이 명제인지부터 구별한다. 이 출발점이 흔들리면 뒤에서 다루는 논리 계산도 함께 흔들릴 수밖에 없다."
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "\"구조를 분해하는 것\"에 해당하는 부분은 어디인가요?",
+          "prompt": "2문단에서 복합 명제를 만드는 연결 표현의 예시를 모두 든 부분을 찾으시오",
+          "answerText": "'그리고', '또는', '만약 ~라면', '아니다'",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 212
+              "start": 44,
+              "end": 72
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "명제는 단순한 형태일 수도 있고, 여러 명제가 결합된 복합 명제일 수도 있다. '그리고', '또는', '만약 ~라면', '아니다' 같은 연결 표현이 들어가면 명제 사이의 관계를 함께 따져야 한다. 이때 단순히 문장 뜻을 직감으로 판단하는 것보다, 각 경우를 체계적으로 따지는 도구가 필요하다. 특히 여러 연결사가 겹쳐 있는 문장일수록 구조를 분해하지 않으면 판단이 쉽게 흐려진다."
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "\"가능한 경우별로 참과 거짓을 정리하는 것\"에 해당하는 부분은 어디인가요?",
+          "prompt": "3문단에서 '진리표'를 정의한 부분을 찾으시오",
+          "answerText": "복합 명제의 참과 거짓을 가능한 경우별로 정리한 표",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 165
+              "start": 8,
+              "end": 36
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "진리표는 이런 복합 명제의 참과 거짓을 가능한 경우별로 정리한 표이다. 예를 들어 두 명제가 있을 때 각각 참과 거짓이 될 수 있는 경우를 모두 적고, 그 조합에 따라 전체 문장의 진릿값이 어떻게 달라지는지 계산한다. 그래서 진리표는 복잡한 문장을 눈짐작이 아니라 규칙에 따라 판단하게 해 준다."
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "\"둘 중 하나 또는 둘 다를 포함할 수 있다\"에 해당하는 부분은 어디인가요?",
+          "prompt": "4문단에서 논리학에서 '또는'을 어떻게 받아들이는지 밝힌 부분을 찾으시오",
+          "answerText": "둘 중 하나 또는 둘 다를 포함하는 경우가 많다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 203
+              "start": 89,
+              "end": 115
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "진리표를 쓰면 조건문이나 선택문처럼 헷갈리기 쉬운 구조도 분명하게 살필 수 있다. 특히 일상 언어에서는 '또는'을 배타적으로 받아들이기도 하지만, 논리학에서는 둘 중 하나 또는 둘 다를 포함하는 경우가 많다. 이런 차이를 진리표로 확인하면 자연어의 직감과 논리적 규칙을 구분해 이해할 수 있다. 따라서 진리표는 언어를 기호적으로 단순화해 생각하는 훈련이기도 하다."
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "\"논리적 같은 의미인지, 항상 참인지, 모순인지\"에 해당하는 부분은 어디인가요?",
+          "prompt": "5문단에서 진리표가 명제 분석에서 판별할 수 있는 세 가지 사항을 든 부분을 찾으시오",
+          "answerText": "두 명제가 논리적으로 같은 의미를 가지는지, 어떤 명제가 항상 참인지, 서로 모순되는지를 판별",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 208
+              "start": 7,
+              "end": 59
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "또 진리표는 두 명제가 논리적으로 같은 의미를 가지는지, 어떤 명제가 항상 참인지, 서로 모순되는지를 판별하는 데도 쓰인다. 따라서 진리표는 계산 도구를 넘어 명제 구조를 분석하는 기본 장치라고 할 수 있다. 복잡한 논증도 명제로 바꿔 정리하면 어떤 전제가 어떤 결론으로 이어지는지 더 분명해진다. 논리학에서 엄밀함을 확보하는 데 진리표가 자주 쓰이는 이유도 여기에 있다."
+          "revealOnWrong": true
         },
         {
           "id": "q6",
-          "prompt": "\"문장을 명제로 바꾸고 경우를 표로 정리하는 것\"에 해당하는 부분은 어디인가요?",
+          "prompt": "6문단에서 진리표의 역할을 비유적으로 압축해 표현한 부분을 찾으시오",
+          "answerText": "논증을 눈에 보이게 만드는 도구",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 310
+              "start": 283,
+              "end": 300
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "정리하면 명제는 참과 거짓을 판단할 수 있는 문장이고, 진리표는 복합 명제의 진릿값을 가능한 경우별로 분석하는 표이다. 이 둘을 함께 이해하면 논리적 추론을 더 엄밀하게 다룰 수 있다. 따라서 명제와 진리표를 배울 때는 정의만 외울 것이 아니라, 실제 문장을 명제로 바꾸고 경우를 표로 정리하는 과정까지 익혀야 한다. 그래야 추상적인 기호 규칙이 실제 논증을 해석하는 데 어떻게 쓰이는지도 자연스럽게 연결된다. 논리학의 엄밀함이 왜 필요한지도 이런 훈련을 통해 더 분명하게 드러난다. 이런 점에서 진리표는 논증을 눈에 보이게 만드는 도구라고 할 수 있다."
+          "revealOnWrong": true
         }
       ]
     }

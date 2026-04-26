@@ -914,14 +914,28 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "놀이터에 새로 생긴 것은 무엇인가요?",
-          "answerText": "안내판",
-          "answerMatchMode": "ANY",
+          "prompt": "안전수칙 안내판에 적힌 규칙의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "미끄럼틀 거꾸로 타지 않기",
+            "그네 서서 타지 않기",
+            "모래 던지지 않기"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 23,
-              "end": 26
+              "start": 35,
+              "end": 49
+            },
+            {
+              "paragraphId": "p1",
+              "start": 51,
+              "end": 62
+            },
+            {
+              "paragraphId": "p1",
+              "start": 64,
+              "end": 73
             }
           ],
           "scoring": {
@@ -932,13 +946,13 @@
         },
         {
           "id": "q2",
-          "prompt": "안전수칙을 강화해야 한다고 주장하는 사람들이 가장 중요하다고 한 것은 무엇인가요?",
-          "answerText": "생명과 건강",
+          "prompt": "안전수칙을 강화해야 한다는 사람들이 가장 중요하다고 한 것을 찾으시오.",
+          "answerText": "아이들의 생명과 건강",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 30,
+              "start": 25,
               "end": 36
             }
           ],
@@ -950,14 +964,32 @@
         },
         {
           "id": "q3",
-          "prompt": "너무 많은 규칙이 빼앗는다고 한 것은 무엇인가요?",
-          "answerText": "창의력과 자유",
-          "answerMatchMode": "ANY",
+          "prompt": "너무 많은 규칙이 빼앗는다고 한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "창의력",
+            "자유"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 19,
+              "end": 22
+            },
+            {
+              "paragraphId": "p1",
+              "start": 171,
+              "end": 173
+            },
+            {
+              "paragraphId": "p3",
+              "start": 24,
               "end": 26
+            },
+            {
+              "paragraphId": "p4",
+              "start": 127,
+              "end": 129
             }
           ],
           "scoring": {
@@ -968,14 +1000,14 @@
         },
         {
           "id": "q4",
-          "prompt": "글에서 중요하다고 한 것은 안전과 자유 사이의 무엇인가요?",
-          "answerText": "균형",
+          "prompt": "놀이터가 어떤 공간인지 설명한 부분을 찾으시오.",
+          "answerText": "새로운 방법으로 세상을 탐색하는 공간",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 139,
-              "end": 141
+              "paragraphId": "p3",
+              "start": 68,
+              "end": 88
             }
           ],
           "scoring": {
@@ -986,14 +1018,14 @@
         },
         {
           "id": "q5",
-          "prompt": "글의 끝에서 필요하다고 한 것은 어떤 해결책인가요?",
-          "answerText": "해결책",
+          "prompt": "결국 중요하다고 한 것을 찾으시오.",
+          "answerText": "안전과 자유 사이에서 적절한 균형",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 170,
-              "end": 173
+              "start": 123,
+              "end": 141
             }
           ],
           "scoring": {

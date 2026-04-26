@@ -569,114 +569,196 @@
     },
     "confirm": {
       "questions": [
-        {
-          "id": "q1",
-          "prompt": "1문단은 과학 탐구 발표 자료의 그래프 해석과 순서 조정 회의와 관련한 회의의 출발 문제를 어떻게 제시하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 194
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "팀장: \"내일 과학 탐구 발표 전에 자료 순서를 다시 맞춰야 해. 지금 슬라이드를 보니까 온도 변화 그래프가 먼저 나오고 실험 조건 표가 뒤에 있어서 듣는 사람이 왜 선이 저렇게 움직이는지 바로 이해하기 어려울 것 같아.\" 발표자: \"저도 말하면서 조금 헷갈렸어요. 그래프는 눈에 먼저 들어오는데 기준 설명이 뒤라서 질문이 생길 수 있겠더라고요.\""
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 첫 제안이나 우려를 어떤 이유와 함께 내놓는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 176
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "자료 담당: \"그럼 첫 장에서 실험 목적을 짧게 말하고, 두 번째에 실험 조건 표를 넣은 뒤 세 번째에 시간대별 온도 그래프를 보여 주는 순서가 낫지 않을까? 특히 가열 시간과 측정 간격을 먼저 알려 줘야 그래프의 기울기 변화가 보일 거야.\" 팀장: \"좋아, 그래프를 먼저 해석하기보다 읽는 기준부터 주자는 거네.\""
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단은 논의를 어떤 대안이나 조정안으로 이어 가는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 200
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "발표자: \"도표 설명도 조금 바꿔야 할 것 같아. 지금은 평균값만 강조했는데, 오차 범위 막대를 같이 언급하지 않으면 결과가 딱 잘린 값처럼 들릴 수 있어.\" 팀원: \"맞아. 지난번 예행연습에서도 선생님이 표본 수가 적은데 왜 차이가 확실하다고 말하냐고 물으셨잖아. 그래서 이번에는 그래프를 설명할 때 '경향이 보인다'는 식으로 표현을 조정하는 게 좋겠어.\""
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단은 예상 질문·반론·진행 기준을 어떤 방식으로 준비하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 189
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "자료 담당: \"예상 질문도 정리해 보자. 아마 '왜 20분 이후에 그래프가 완만해졌는가', '같은 조건에서 다시 실험했는가', '대조군은 왜 하나뿐인가' 같은 질문이 나올 가능성이 높아.\" 발표자: \"그 질문은 제가 답할게. 다만 재실험 횟수는 숫자를 정확히 말해야 하니까 표 아래에 '총 3회 반복'을 따로 적어 두는 편이 안전하겠어.\""
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단은 세부 운영 방안이나 보완 이유를 어떻게 구체화하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 193
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "팀장: \"질문 대응 순서도 나누자. 실험 절차와 측정 조건 질문은 발표자가 먼저 답하고, 그래프 계산 방식이나 평균 산출 방식은 자료 담당이 보충하는 걸로 하자. 혹시 도표의 단위를 왜 저렇게 표시했는지 묻는 질문이 나오면, 국제단위계 기준에 맞췄다고 짧게 말하고 넘어가면 될 것 같아.\" 자료 담당: \"그 부분은 슬라이드 각주에도 넣어 둘게.\""
-        },
-        {
-          "id": "q6",
-          "prompt": "6문단은 과학 탐구 발표 자료의 그래프 해석과 순서 조정 회의와 관련한 최종 합의를 어떤 실행 계획으로 정리하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 181
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "팀장: \"정리하자. 발표는 연구 목적, 실험 조건 표, 시간대별 그래프, 결과 해석, 한계와 보완 순으로 바꾼다. 그래프 설명에서는 평균값만 단정적으로 말하지 말고 오차 범위와 반복 실험 횟수를 함께 언급한다. 질문은 원인 해석, 재실험 여부, 대조군 설정 세 가지를 중심으로 대비하고, 오늘 안에 수정본을 다시 공유하자.\""
-        }
+              {
+                      "id": "q1",
+                      "prompt": "팀장이 발표 전에 다시 맞춰야 한다고 한 대상을 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p1",
+                                      "start": 20,
+                                      "end": 25
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ANY",
+                      "answerText": "자료 순서"
+              },
+              {
+                      "id": "q2",
+                      "prompt": "듣는 사람이 그래프의 움직임을 바로 이해하기 어려운 이유를 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p1",
+                                      "start": 68,
+                                      "end": 83
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ANY",
+                      "answerText": "실험 조건 표가 뒤에 있어서"
+              },
+              {
+                      "id": "q3",
+                      "prompt": "자료 담당이 제안한 앞부분 발표 순서 세 가지를 모두 찾으시오",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p2",
+                                      "start": 17,
+                                      "end": 22
+                              },
+                              {
+                                      "paragraphId": "p1",
+                                      "start": 68,
+                                      "end": 75
+                              },
+                              {
+                                      "paragraphId": "p2",
+                                      "start": 38,
+                                      "end": 45
+                              },
+                              {
+                                      "paragraphId": "p6",
+                                      "start": 22,
+                                      "end": 29
+                              },
+                              {
+                                      "paragraphId": "p2",
+                                      "start": 58,
+                                      "end": 69
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ALL",
+                      "answerTexts": [
+                              "실험 목적",
+                              "실험 조건 표",
+                              "시간대별 온도 그래프"
+                      ]
+              },
+              {
+                      "id": "q4",
+                      "prompt": "평균값만 강조하면 결과가 딱 잘린 값처럼 들릴 수 있어 함께 언급해야 하는 것을 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p3",
+                                      "start": 44,
+                                      "end": 52
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ANY",
+                      "answerText": "오차 범위 막대"
+              },
+              {
+                      "id": "q5",
+                      "prompt": "지난 예행연습에서 선생님이 물은 내용을 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p3",
+                                      "start": 115,
+                                      "end": 140
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ANY",
+                      "answerText": "표본 수가 적은데 왜 차이가 확실하다고 말하냐"
+              },
+              {
+                      "id": "q6",
+                      "prompt": "나올 가능성이 높은 예상 질문 세 가지를 모두 찾으시오",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p4",
+                                      "start": 27,
+                                      "end": 48
+                              },
+                              {
+                                      "paragraphId": "p4",
+                                      "start": 52,
+                                      "end": 68
+                              },
+                              {
+                                      "paragraphId": "p4",
+                                      "start": 72,
+                                      "end": 84
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ALL",
+                      "answerTexts": [
+                              "왜 20분 이후에 그래프가 완만해졌는가",
+                              "같은 조건에서 다시 실험했는가",
+                              "대조군은 왜 하나뿐인가"
+                      ]
+              },
+              {
+                      "id": "q7",
+                      "prompt": "질문 대응에서 발표자와 자료 담당의 역할을 나타낸 구절 두 가지를 모두 찾으시오",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p5",
+                                      "start": 37,
+                                      "end": 48
+                              },
+                              {
+                                      "paragraphId": "p5",
+                                      "start": 72,
+                                      "end": 86
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ALL",
+                      "answerTexts": [
+                              "발표자가 먼저 답하고",
+                              "자료 담당이 보충하는 걸로"
+                      ]
+              },
+              {
+                      "id": "q8",
+                      "prompt": "그래프 설명에서 평균값만 단정적으로 말하지 말고 함께 언급해야 한다고 정리한 내용을 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p6",
+                                      "start": 92,
+                                      "end": 116
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ANY",
+                      "answerText": "오차 범위와 반복 실험 횟수를 함께 언급한다"
+              }
       ]
     }
   }

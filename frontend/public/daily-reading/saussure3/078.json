@@ -557,14 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "피터 팬이 아이들을 구하기 위해 몰래 올라탄, 무서운 해적들이 머물고 있던 배는?",
-          "answerText": "해적선",
-          "answerMatchMode": "EXACT",
+          "prompt": "피터 팬이 아이들을 구하기 위해 뚫고 간 것은?",
+          "answerText": "거센 파도",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 3
+              "start": 28,
+              "end": 33
             }
           ],
           "scoring": {
@@ -576,9 +576,9 @@
         },
         {
           "id": "q2",
-          "prompt": "해적들이 잠든 사이에 피터 팬과 함께 아이들의 몸을 묶은 밧줄을 풀어 준 요정은?",
+          "prompt": "해적들이 잠든 사이 피터 팬과 함께 아이들의 밧줄을 풀어 준 인물은?",
           "answerText": "팅커벨",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -595,14 +595,48 @@
         },
         {
           "id": "q3",
-          "prompt": "바다에 빠진 후크 선장을 위협했던 동물로, 뱃속에 시계가 들어 있어 소리를 내는 것은?",
-          "answerText": "악어",
-          "answerMatchMode": "EXACT",
+          "prompt": "칼을 뽑아 들고 피터 팬에게 달려든 인물은?",
+          "answerText": "후크 선장",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 10,
+              "end": 15
+            },
+            {
+              "paragraphId": "p2",
+              "start": 63,
+              "end": 68
+            },
+            {
+              "paragraphId": "p2",
+              "start": 85,
+              "end": 90
+            },
+            {
+              "paragraphId": "p3",
+              "start": 7,
+              "end": 12
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "피터 팬이 웬디와 아이들을 어디까지 안전하게 바래다주었는지 찾으시오.",
+          "answerText": "런던의 집 앞",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 29,
-              "end": 31
+              "start": 104,
+              "end": 111
             }
           ],
           "scoring": {

@@ -953,93 +953,103 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '무작위'를 모두 찾으시오.",
+          "prompt": "지문에서 '정렬'을 모두 찾으시오",
+          "answerText": "정렬",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 25,
-              "end": 28
-            }
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p1", "start": 239, "end": 241},
+            {"paragraphId": "p2", "start": 120, "end": 122},
+            {"paragraphId": "p3", "start": 114, "end": 116},
+            {"paragraphId": "p4", "start": 3, "end": 5},
+            {"paragraphId": "p4", "start": 234, "end": 236}
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "무작위"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '가나다순'을 모두 찾으시오.",
+          "prompt": "지문에서 '탐색'을 모두 찾으시오",
+          "answerText": "탐색",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 71,
-              "end": 75
-            }
+            {"paragraphId": "p1", "start": 4, "end": 6},
+            {"paragraphId": "p1", "start": 243, "end": 245},
+            {"paragraphId": "p2", "start": 132, "end": 134},
+            {"paragraphId": "p4", "start": 7, "end": 9},
+            {"paragraphId": "p4", "start": 238, "end": 240}
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "가나다순"
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '숫자순'을 모두 찾으시오.",
+          "prompt": "지문에서 '원인'을 모두 찾으시오",
+          "answerText": "원인",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 78,
-              "end": 81
-            }
+            {"paragraphId": "p2", "start": 128, "end": 130},
+            {"paragraphId": "p3", "start": 211, "end": 213}
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "숫자순"
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '수행'을 모두 찾으시오.",
+          "prompt": "데이터의 정렬 여부라는 원인이 바꾸어 놓는다고 한 결과를 가리키는 표현을 찾으시오",
+          "answerText": "탐색 속도",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 190,
-              "end": 192
-            }
+            {"paragraphId": "p2", "start": 132, "end": 137}
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "수행"
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '체감'을 모두 찾으시오.",
+          "prompt": "자료가 정리되어 있을 때의 예로 든 두 가지 정렬 방식을 함께 가리킨 구절을 찾으시오",
+          "answerText": "가나다순이나 숫자순",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 234,
-              "end": 236
-            }
+            {"paragraphId": "p2", "start": 71, "end": 81}
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "체감"
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "알고리즘의 선택이라는 원인이 만들어 낸다고 한 결과 세 가지를 한꺼번에 가리킨 구절을 찾으시오",
+          "answerText": "계산 효율, 메모리 사용량, 실제 체감 속도",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 215, "end": 239}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

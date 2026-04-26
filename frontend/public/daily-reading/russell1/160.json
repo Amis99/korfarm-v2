@@ -992,79 +992,28 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '체온'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 96,
-              "end": 98
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "혈액 속에 있어서 병원체를 공격하는 면역 세포를 가리키는 낱말을 찾으시오",
+          "answerText": "백혈구",
           "answerMatchMode": "ANY",
-          "answerText": "체온"
-        },
-        {
-          "id": "q2",
-          "prompt": "지문에서 '혈당'을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 100,
+              "paragraphId": "p2",
+              "start": 99,
               "end": 102
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "혈당"
+          "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "지문에서 '수분량'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 104,
-              "end": 107
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "id": "q2",
+          "prompt": "세균에 의해 생기는 질병을 치료하는 데 쓰이는 약을 가리키는 낱말을 찾으시오",
+          "answerText": "항생제",
           "answerMatchMode": "ANY",
-          "answerText": "수분량"
-        },
-        {
-          "id": "q4",
-          "prompt": "지문에서 '면역세포'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 133,
-              "end": 137
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "면역세포"
-        },
-        {
-          "id": "q5",
-          "prompt": "지문에서 '항생제'를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -1073,12 +1022,87 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "코나 입속처럼 몸 안쪽 표면을 덮어 외부 침입을 막아 주는 부분을 가리키는 낱말을 찾으시오",
+          "answerText": "점막",
           "answerMatchMode": "ANY",
-          "answerText": "항생제"
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 54,
+              "end": 56
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글쓴이가 밝힌 '면역 반응과 백신'의 정의를 담은 문장을 찾으시오",
+          "answerText": "면역 반응과 백신은 병원체가 몸에 들어왔을 때 우리 몸이 어떻게 대응하고 그 대응을 미리 준비할 수 있는지를 설명하는 생명과학 개념이다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 75
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "세균이나 바이러스가 침입했을 때 몸이 면역 반응을 일으키는 모습을 예로 든 문장을 찾으시오",
+          "answerText": "예를 들어 세균이나 바이러스가 침입하면 우리 몸은 면역 반응을 일으켜 이를 막으려 한다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 48
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "항생제가 어떤 병원체에는 듣고 어떤 병원체에는 듣지 않는지를 설명한 결과 문장을 찾으시오",
+          "answerText": "항생제는 세균에 의해 생기는 질병을 치료하는 데 도움을 줄 수 있지만, 바이러스에는 효과가 없다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 91,
+              "end": 144
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

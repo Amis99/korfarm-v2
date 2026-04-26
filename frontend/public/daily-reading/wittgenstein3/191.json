@@ -571,30 +571,35 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "prompt": "'나무'를 뜻하는 한자어를 지문에서 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 3,
+              "end": 5
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "수목"
+        },
+        {
+          "id": "q2",
+          "prompt": "1연에서 색채 대비를 이루는 말을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 29
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "검정 수목 두루마기에\n흰 동정 달아 입고\n창에 기대면"
-        },
-        {
-          "id": "q2",
-          "prompt": "2연은 그 정서를 어떤 이미지나 흐름으로 이어 가는가?",
-          "answerRanges": [
+              "end": 2
+            },
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 42
+              "paragraphId": "p1",
+              "start": 12,
+              "end": 13
             }
           ],
           "scoring": {
@@ -602,17 +607,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "박 넌출 상기 남은\n기울은 울타리 위로 장독대 위로\n새하얀 눈이\n나려 쌓인다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "검정",
+            "흰"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
+          "prompt": "2연에서 눈이 쌓이는 위치를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 56
+              "paragraphId": "p2",
+              "start": 11,
+              "end": 21
+            },
+            {
+              "paragraphId": "p2",
+              "start": 22,
+              "end": 28
             }
           ],
           "scoring": {
@@ -620,17 +633,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "홀로 지니던 값진 보람과\n빛나는 자랑을 모조리 불사르고\n소슬한 바람 속에\n낙엽처럼 무념히 썩어 가면은"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "기울은 울타리 위로",
+            "장독대 위로"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
+          "prompt": "화자가 값진 보람과 빛나는 자랑을 어떻게 했다고 했는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 51
+              "paragraphId": "p3",
+              "start": 22,
+              "end": 30
             }
           ],
           "scoring": {
@@ -639,15 +655,38 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 허망한 시공 위에\n내 외로운 영혼 가까이\n꽃다발처럼 꽃다발처럼\n하이얀 눈발이\n나려 쌓인다"
+          "answerText": "모조리 불사르고"
         },
         {
           "id": "q5",
-          "prompt": "5연은 앞선 흐름에 어떤 긴장이나 전환을 더하는가?",
+          "prompt": "'잡념 없이 평온하게'의 뜻으로 쓰인 표현을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
+              "paragraphId": "p3",
+              "start": 46,
+              "end": 49
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "무념히"
+        },
+        {
+          "id": "q6",
+          "prompt": "4연에서 반복되어 눈발을 비유하는 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 25,
+              "end": 30
+            },
+            {
+              "paragraphId": "p4",
+              "start": 31,
               "end": 36
             }
           ],
@@ -657,16 +696,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "마음 이리 고요한 날은\n아련히 들려오는\n서라벌 천년의 풀피리 소리"
+          "answerText": "꽃다발처럼"
         },
         {
-          "id": "q6",
-          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
+          "id": "q7",
+          "prompt": "마음이 고요한 날 들려오는 소리를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 41
+              "paragraphId": "p5",
+              "start": 22,
+              "end": 36
             }
           ],
           "scoring": {
@@ -675,7 +714,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "비애로 하여 내 혼이 야위기에는\n절망이란 오히려\n나리는 눈처럼 포근하고나."
+          "answerText": "서라벌 천년의 풀피리 소리"
+        },
+        {
+          "id": "q8",
+          "prompt": "화자의 혼이 야위는 원인으로 제시된 감정을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 2
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "비애"
         }
       ]
     }

@@ -552,89 +552,53 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "핵심 내용을 담은 무엇 문장인가요?",
-          "answerText": "중심",
-          "answerMatchMode": "EXACT",
+          "prompt": "한 문단 안에서 가장 핵심이 되는 내용을 담은 문장을 무엇이라고 하는지 글에서 찾아 써 보세요",
+          "answerText": "중심 문장",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 30,
-              "end": 32
-            },
-            {
-              "paragraphId": "p1",
-              "start": 44,
-              "end": 46
-            },
-            {
-              "paragraphId": "p1",
-              "start": 95,
-              "end": 97
-            },
-            {
-              "paragraphId": "p1",
-              "start": 143,
-              "end": 145
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 82,
-              "end": 84
-            },
-            {
-              "paragraphId": "p2",
-              "start": 179,
-              "end": 181
-            }
+            {"paragraphId": "p1", "start": 30, "end": 35},
+            {"paragraphId": "p1", "start": 44, "end": 49},
+            {"paragraphId": "p1", "start": 95, "end": 100},
+            {"paragraphId": "p1", "start": 143, "end": 148},
+            {"paragraphId": "p2", "start": 0, "end": 5},
+            {"paragraphId": "p2", "start": 82, "end": 87},
+            {"paragraphId": "p2", "start": 179, "end": 184}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "도와주는 무엇 문장들인가요?",
-          "answerText": "뒷받침",
-          "answerMatchMode": "EXACT",
+          "prompt": "중심 문장을 설명하거나 도와주는 나머지 문장들을 무엇이라고 하는지 글에서 찾아 써 보세요",
+          "answerText": "뒷받침 문장",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 113,
-              "end": 116
-            }
+            {"paragraphId": "p1", "start": 113, "end": 119}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "문장 아래에 무엇을 그었나요?",
-          "answerText": "밑줄",
-          "answerMatchMode": "EXACT",
+          "prompt": "중심 문장이 한 문단 안에서 나오는 위치 두 가지를 글에서 모두 찾아 써 보세요",
+          "answerText": "맨 앞, 맨 뒤",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 92,
-              "end": 94
-            }
+            {"paragraphId": "p1", "start": 55, "end": 58},
+            {"paragraphId": "p1", "start": 72, "end": 75}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "중심 문장 아래에 그어 가며 읽으면 내용을 기억하기 쉽다고 한 표시가 무엇인지 글에서 찾아 써 보세요",
+          "answerText": "밑줄",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 92, "end": 94}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         }
       ]

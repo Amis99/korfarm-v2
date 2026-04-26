@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "1문단에서 '단어의 뜻'과 같은 의미로 쓰인 어구를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 182
+              "start": 163,
+              "end": 168
             }
           ],
           "scoring": {
@@ -585,16 +585,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "같은 형태의 단어가 서로 다른 뜻으로 쓰일 때, 우리는 그것을 하나의 단어가 여러 의미를 가진 경우로 볼지, 아니면 우연히 소리만 같은 별개의 단어로 볼지 판단해야 한다. 이 문제는 단어의 뜻을 사전에 어떻게 싣는지와도 직접 연결된다. 따라서 다의어와 동음이의어를 가르는 기준을 세우는 일은 어휘 의미를 이해하는 데 중요하다."
+          "answerText": "어휘 의미"
         },
         {
           "id": "q2",
-          "prompt": "2문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "1문단에서 같은 형태의 단어를 두고 판단해야 하는 두 경우를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 35,
+              "end": 55
+            },
+            {
+              "paragraphId": "p1",
+              "start": 65,
+              "end": 82
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "하나의 단어가 여러 의미를 가진 경우",
+            "우연히 소리만 같은 별개의 단어"
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "2문단에서 다의어의 정의를 설명한 문장을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 170
+              "end": 44
             }
           ],
           "scoring": {
@@ -603,16 +629,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "다의어는 하나의 중심 의미에서 출발해 관련된 여러 뜻으로 확장된 경우를 말한다. 예를 들어 사람의 '입'에서 출발해 병의 입구나 강의 어귀처럼 어떤 사물이 열리거나 드나드는 부분을 가리키는 뜻으로 넓어질 수 있다. 이런 경우에는 형태가 같을 뿐 아니라 의미 사이에도 어느 정도 연결 고리를 찾을 수 있다."
+          "answerText": "다의어는 하나의 중심 의미에서 출발해 관련된 여러 뜻으로 확장된 경우를 말한다."
         },
         {
-          "id": "q3",
-          "prompt": "3문단을 이해한 내용으로 가장 적절한 것은?",
+          "id": "q4",
+          "prompt": "2문단에서 사람의 '입'에서 뜻이 확장된 예시 두 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 65,
+              "end": 70
+            },
+            {
+              "paragraphId": "p2",
+              "start": 72,
+              "end": 77
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "병의 입구",
+            "강의 어귀"
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "3문단에서 동음이의어의 정의를 설명한 문장을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 164
+              "end": 41
             }
           ],
           "scoring": {
@@ -621,52 +673,80 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "동음이의어는 형태는 같지만 의미적으로 직접 이어지지 않는 별개의 단어이다. '배'가 과일, 신체의 한 부분, 물 위를 다니는 탈것을 뜻할 때처럼, 각각의 의미 사이에 공통된 중심 의미를 세우기 어렵다면 보통 동음이의어로 처리한다. 겉모양이 같다는 사실만으로 같은 단어라고 볼 수는 없는 것이다."
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 159
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "다의어와 동음이의어를 나눌 때 핵심은 의미 확장의 경로가 설명되느냐이다. 어떤 의미가 비유, 기능의 유사성, 위치의 유사성을 통해 자연스럽게 이어진다면 다의어로 볼 가능성이 크다. 반대로 의미 사이의 관련성을 찾기 어렵고 역사적으로도 별개의 어원이라면 동음이의어로 보는 편이 타당하다."
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 173
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "사전에서는 이런 차이를 표제어 배열 방식으로 드러낸다. 다의어는 하나의 표제어 아래에 여러 뜻풀이를 번호로 나누어 제시하는 일이 많다. 이에 비해 동음이의어는 같은 형태라도 서로 다른 표제어로 나누고, 필요한 경우 숫자를 붙여 구별하기도 한다. 즉 사전 배열은 의미 관계에 대한 판단 결과를 보여 주는 셈이다."
+          "answerText": "동음이의어는 형태는 같지만 의미적으로 직접 이어지지 않는 별개의 단어이다."
         },
         {
           "id": "q6",
-          "prompt": "6문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "3문단에서 '배'가 뜻하는 세 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 181
+              "paragraphId": "p3",
+              "start": 47,
+              "end": 49
+            },
+            {
+              "paragraphId": "p3",
+              "start": 51,
+              "end": 59
+            },
+            {
+              "paragraphId": "p3",
+              "start": 61,
+              "end": 72
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "과일",
+            "신체의 한 부분",
+            "물 위를 다니는 탈것"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "4문단에서 의미가 자연스럽게 이어지는 통로 세 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 48,
+              "end": 50
+            },
+            {
+              "paragraphId": "p4",
+              "start": 52,
+              "end": 59
+            },
+            {
+              "paragraphId": "p4",
+              "start": 61,
+              "end": 68
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "비유",
+            "기능의 유사성",
+            "위치의 유사성"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "5문단에서 사전 배열이 보여 주는 것을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 146,
+              "end": 161
             }
           ],
           "scoring": {
@@ -675,7 +755,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 다의어와 동음이의어의 판별은 말소리의 동일성만으로 결정되지 않는다. 의미 사이의 관련성, 확장 경로의 설명 가능성, 그리고 사전 편찬에서의 처리 방식까지 함께 살펴야 한다. 따라서 어떤 단어를 해석할 때는 겉으로 같은 형태라는 이유만으로 묶지 말고, 실제 의미 구조가 어떻게 이루어져 있는지 따져 보는 태도가 필요하다."
+          "answerText": "의미 관계에 대한 판단 결과"
         }
       ]
     }

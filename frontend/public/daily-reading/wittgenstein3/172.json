@@ -569,114 +569,186 @@
     },
     "confirm": {
       "questions": [
-        {
-          "id": "q1",
-          "prompt": "1문단은 회의의 출발 문제를 어떻게 제시하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 168
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q1",
+              "prompt":  "1문단에서 사회 멘트를 한 번 더 맞춰 보자고 한 사람을 찾아 쓰시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  0,
+                                       "end":  2
+                                   },
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  114,
+                                       "end":  116
+                                   },
+                                   {
+                                       "paragraphId":  "p4",
+                                       "start":  0,
+                                       "end":  2
+                                   },
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  123,
+                                       "end":  125
+                                   },
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  82,
+                                       "end":  84
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "민재"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "민재: 내일 진로 박람회 리허설 전에 사회 멘트를 한 번 더 맞춰 보자. 지금 원고를 보니까 부스 소개가 너무 길어서 첫 순서부터 시간이 밀릴 것 같아.\n수아: 맞아. 특히 개회 멘트에서 행사 취지를 두 번 반복하고 있어서 줄일 필요가 있어. 참가 학생들이 빨리 핵심 일정부터 들을 수 있게 해야 해."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 첫 제안이나 우려를 어떤 이유와 함께 내놓는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 166
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q2",
+              "prompt":  "1문단에서 부스 소개가 너무 길면 생길 것 같다고 한 결과를 찾아 쓰시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  66,
+                                       "end":  84
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "첫 순서부터 시간이 밀릴 것 같아"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지윤: 그럼 도입부는 '오늘 박람회는 학과 정보와 진로 체험을 연결하는 자리입니다' 정도로 짧게 정리하자. 대신 부스별 설명은 사회자가 다 읽지 말고, 주요 체험 두세 개만 강조하는 편이 나을 것 같아.\n민재: 좋아. 사회 멘트는 짧게 하고, 나머지는 안내 책자와 현장 표지로 보완하는 걸로 하자."
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단은 논의를 어떤 대안이나 조정안으로 이어 가는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 198
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q3",
+              "prompt":  "6문단에서 개회 멘트를 줄여 간략하게 한다는 뜻으로 쓴 말을 찾아 쓰시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  16,
+                                       "end":  18
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "축약"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "수아: 질문 순서도 다시 봐야 해. 지금은 선생님 강연 뒤에 바로 자유 질문을 받게 되어 있는데, 그러면 중복 질문이 많이 나올 것 같아. 미리 받은 질문 두 개를 먼저 정리해서 사회자가 읽고, 그다음 현장 질문을 받는 구조가 더 안정적이야.\n지윤: 그러면 참가 학생들이 질문하기도 훨씬 편하겠다. 처음부터 손들라고 하면 분위기가 좀 무거울 수 있으니까."
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단은 예상 질문이나 진행 기준을 어떻게 준비하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 186
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q4",
+              "prompt":  "2문단에서 도입부를 짧게 정리하자며 제안한 직접 인용문을 찾아 쓰시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  12,
+                                       "end":  46
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "\u0027오늘 박람회는 학과 정보와 진로 체험을 연결하는 자리입니다\u0027"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "민재: 예상 질문에 대한 연결 멘트도 넣자. 예를 들어 '관련 질문이 많았던 전공 선택 기준부터 먼저 여쭙겠습니다'라고 하면 갑자기 질문이 튀어나오는 느낌이 줄어들 거야.\n수아: 그리고 답변이 길어질 때는 사회자가 끊는 표현도 준비해야 해. '나머지 세부 상담은 부스에서 이어가겠습니다' 같은 멘트를 미리 넣어 두면 자연스러울 거야."
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단은 세부 운영 방식이나 보완 이유를 어떻게 구체화하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 169
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q5",
+              "prompt":  "2문단에서 사회 멘트를 짧게 한 뒤 보완 수단으로 정한 두 대상을 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  141,
+                                       "end":  146
+                                   },
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  148,
+                                       "end":  153
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "안내 책자",
+                                  "현장 표지"
+                              ]
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지윤: 사회 태도도 체크하자. 너무 딱딱하면 분위기가 굳고, 반대로 너무 가볍게 하면 박람회 전체가 산만해 보여. 그래서 목소리는 밝게 하되, 질문을 다시 정리해 말할 때는 짧고 또렷하게 끊어 주는 식으로 가면 좋겠어.\n민재: 응, 웃음이 필요한 부분과 정보 전달이 중요한 부분을 나눠서 톤을 조절하자."
-        },
-        {
-          "id": "q6",
-          "prompt": "6문단은 최종 합의를 어떤 실행 계획으로 정리하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 165
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q6",
+              "prompt":  "3문단에서 자유 질문을 바로 받으면 생길 것 같다고 한 문제를 찾아 쓰시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p3",
+                                       "start":  59,
+                                       "end":  76
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "중복 질문이 많이 나올 것 같아"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "수아: 정리하면 개회 멘트는 축약, 부스 설명은 핵심만, 질문은 사전 질문 두 개 뒤 현장 질문, 답변이 길어지면 부스 상담으로 넘기는 방식이네.\n민재: 맞아. 그 순서대로 원고 수정해서 오늘 안에 공유할게. 내일 리허설에서는 실제 시간까지 재 보면서 멘트 속도와 질문 전환 표현을 다시 맞추자."
-        }
+          {
+              "id":  "q7",
+              "prompt":  "4문단에서 답변이 길어질 때 사용할 멘트로 제시된 직접 인용문을 찾아 쓰시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p4",
+                                       "start":  135,
+                                       "end":  160
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "\u0027나머지 세부 상담은 부스에서 이어가겠습니다\u0027"
+          },
+          {
+              "id":  "q8",
+              "prompt":  "6문단에서 내일 리허설 때 다시 맞추기로 한 두 항목을 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  141,
+                                       "end":  146
+                                   },
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  148,
+                                       "end":  156
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "멘트 속도",
+                                  "질문 전환 표현"
+                              ]
+          }
       ]
     }
   }

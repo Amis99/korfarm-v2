@@ -571,111 +571,197 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 시인과 광대와 풀벌레를 어떤 공통된 재주로 묶어 바라보는가?",
+          "prompt": "시를 낮추어 설명한 구절을 찾으시오.",
+          "answerText": "글을 꾸미고 웅얼거려서 잠시 사람들의 입을 벌어지게 만드는 것뿐",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 259
+              "start": 41,
+              "end": 76
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "시란 무엇이 좋고 무엇이 귀하기에 세상 사람들이 그렇게 좋아하는 것인가? 글을 꾸미고 웅얼거려서 잠시 사람들의 입을 벌어지게 만드는 것뿐이다. 나는 예전에 시인과 광대는 풀벌레 같은 존재라고 여겼다. 시인은 생각을 소리로 내고 광대는 입으로 소리를 낸다. 풀벌레는 배로 소리를 내는 놈도 있고, 날개로 소리를 내는 놈도 있고, 다리로 소리를 내는 놈도 있고, 가슴으로 소리를 내는 놈도 있다. 소리 내는 방법은 다르지만 그 재주로 사람을 기쁘게 하기는 마찬가지다."
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 시인, 광대, 벌레를 고됨과 사회적 평가에서 어떻게 대비하는가?",
+          "prompt": "풀벌레가 소리를 내는 방법을 모두 찾으시오.",
+          "answerTexts": [
+            "배로 소리를 내는 놈",
+            "날개로 소리를 내는 놈",
+            "다리로 소리를 내는 놈",
+            "가슴으로 소리를 내는 놈"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 392
+              "paragraphId": "p1",
+              "start": 148,
+              "end": 159
+            },
+            {
+              "paragraphId": "p1",
+              "start": 165,
+              "end": 177
+            },
+            {
+              "paragraphId": "p1",
+              "start": 183,
+              "end": 195
+            },
+            {
+              "paragraphId": "p1",
+              "start": 201,
+              "end": 214
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "힘든가 편한가로 말하자면 벌레는 몹시 편하고 광대가 그다음이며 시인이 가장 힘들다. 벌레는 때가 되면 천기(天機)가 저절로 움직여 소리를 내니, 일부러 소리 내는 것이 아니다. 광대는 술잔을 들고 좌우에서 웃으며 하루 종일 복을 비니, 입술이 마르고 혀가 뻣뻣해져도 마음은 관여하지 않아 입은 힘들지만 마음은 편하다. 시인은 생각을 짜내어 입으로 말하고 손으로 쓰며 눈으로 보고 귀로 들어야 겨우 한 구를 완성한다. 오장육부를 힘들게 만들어 부지런히 짓는 것이 삼분의 이다. 그렇지만 세상 사람들이 이 세 가지의 순서를 매기면 시인은 마루에서 절하고 광대는 마당에 두며 벌레는 죽을 때까지 풀숲과 섬돌 사이를 벗어나지 못한다. 그렇다면 사람은 힘든 것을 귀하게 여기고 편한 것을 천하게 여기는 것인가?"
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 시에 대한 태도를 접으려 하면서도 어떤 미련을 남기고 있는가?",
+          "prompt": "힘든가 편한가로 볼 때 가장 힘든 존재를 나타낸 구절을 찾으시오.",
+          "answerText": "시인이 가장 힘들다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 190
+              "paragraphId": "p2",
+              "start": 35,
+              "end": 45
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "옛사람이 말하기를 “귀한 사람은 남을 부리고 천한 사람은 남에게 부림을 받는다.” 하였으니 ㉠사물은 어찌하여 똑같지 않은 것인가. 나는 늦게야 그러한 줄 깨닫고, 마침내 손가락을 깨물어 맹세하여 시에 대해 말하기를 기피했다. 그렇지만 좋은 시를 보면 문득 기뻐하였으니 ㉡마치 병이 나서 술을 절제하는 사람이 문득 술 생각이 나는 것 같았다."
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 허균의 시 짓기를 어떤 잘못된 선택에 비유해 비판하는가?",
+          "prompt": "광대의 입과 마음 상태를 대조한 구절을 모두 찾으시오.",
+          "answerTexts": [
+            "입은 힘들지만",
+            "마음은 편하다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 155
+              "paragraphId": "p2",
+              "start": 161,
+              "end": 168
+            },
+            {
+              "paragraphId": "p2",
+              "start": 169,
+              "end": 176
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지금 허 군(허균을 가리킴)은 유, 불, 도 삼교(三敎)와 제자백가에 통달했는데, 불교의 말을 더욱 믿어 시를 지어 장식했다. 이것은 좋은 벼를 뽑아 버리고 잡초를 키우는 것과 같다. 힘들고 부지런한데도 도리어 광대나 벌레보다 못하게 될 것인데, 이 사실을 깨닫지 못하고 있다."
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단의 다른 이는 마음과 시의 관계를 어떤 비유로 말하는가?",
+          "prompt": "귀한 사람과 천한 사람의 관계를 말한 옛사람의 말을 찾으시오.",
+          "answerText": "귀한 사람은 남을 부리고 천한 사람은 남에게 부림을 받는다.",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 79
+              "paragraphId": "p3",
+              "start": 11,
+              "end": 44
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "어떤 이는 말한다. “ⓐ마음은 거북 등껍데기와 같아 속을 태우면 조짐이 바깥으로 나타나니, 이것은 마치 생각이 움직여 시를 읊는 것과 같다.”"
+          "revealOnWrong": true
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 생각과 시의 관계를 어떤 물과 얼음의 비유로 설명하는가?",
+          "prompt": "'마치'로 시작해 시나 생각을 비유한 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "마치 병이 나서 술을 절제하는 사람이 문득 술 생각이 나는 것 같았다",
+            "마치 생각이 움직여 시를 읊는 것과 같다",
+            "마치 생각이 움직여 시를 짓고, 시를 읊으면 다시 생각하게 되는 것과 같다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
+              "paragraphId": "p3",
+              "start": 151,
+              "end": 189
+            },
+            {
+              "paragraphId": "p5",
+              "start": 55,
+              "end": 77
+            },
+            {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 192
+              "start": 69,
+              "end": 110
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q7",
+          "prompt": "생각과 시를 각각 물과 얼음에 비유한 구절을 모두 찾으시오.",
+          "answerTexts": [
+            "생각은 물과 같고",
+            "시는 얼음과 같다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 13,
+              "end": 22
+            },
+            {
+              "paragraphId": "p6",
+              "start": 23,
+              "end": 32
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q8",
+          "prompt": "사람을 감동시킬 수 있는 시의 조건을 찾으시오.",
+          "answerText": "깊은 생각에서 나온 시",
           "answerMatchMode": "ANY",
-          "answerText": "나는 이렇게 생각한다. 생각은 물과 같고 시는 얼음과 같다. 물이 얼면 얼음이 되고 얼음이 녹으면 도로 물이 된다. 이것은 마치 생각이 움직여 시를 짓고, 시를 읊으면 다시 생각하게 되는 것과 같다. 생각이 깊지 않으면 시가 좋지 않고, 마음이 맑지 않으면 생각이 깊어질 수 없다. 그러므로 깊은 생각에서 나온 시라야 사람을 감동시킬 수 있다."
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 163,
+              "end": 175
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
         }
       ]
     }

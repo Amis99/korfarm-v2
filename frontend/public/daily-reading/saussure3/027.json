@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "책벌레 포포가 도서관을 지키기 위한 저주를 풀기 위해 찾아야 하는 첫 번째 목표물로, 숲속에 숨겨진 물건은?",
+          "prompt": "포포가 찾아 나선 첫 번째 목표물을 지문에서 찾으시오.",
           "answerText": "은빛 깃털",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -581,24 +581,14 @@
         },
         {
           "id": "q2",
-          "prompt": "햇빛도 들지 않는 끈적이는 숲속에서 나타나 포포의 길을 가로막고 무섭게 덤벼든 무시무시한 괴물은?",
-          "answerText": "독거미",
-          "answerMatchMode": "EXACT",
+          "prompt": "숲의 깊은 곳에서 포포의 길을 가로막은 존재를 지문에서 찾으시오.",
+          "answerText": "거대한 독거미",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 14,
+              "start": 10,
               "end": 17
-            },
-            {
-              "paragraphId": "p2",
-              "start": 39,
-              "end": 42
-            },
-            {
-              "paragraphId": "p3",
-              "start": 7,
-              "end": 10
             }
           ],
           "scoring": {
@@ -610,19 +600,41 @@
         },
         {
           "id": "q3",
-          "prompt": "포포가 마법 책에서 읽은 주문을 큰 소리로 외우자, 거대한 거미가 마법에 걸려 작고 귀엽게 변한 곤충은?",
-          "answerText": "무당벌레",
-          "answerMatchMode": "EXACT",
+          "prompt": "독거미가 덤벼들자 포포가 한 행동을 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "방패로 막아 냈습니다.",
+            "주문을 큰 소리로 외웠습니다."
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 67,
+              "end": 79
+            },
+            {
+              "paragraphId": "p2",
+              "start": 94,
+              "end": 110
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "포포가 깃털을 배낭에 넣은 뒤 향한 곳을 지문에서 찾으시오.",
+          "answerText": "다음 목적지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 19,
-              "end": 23
-            },
-            {
-              "paragraphId": "p3",
-              "start": 39,
-              "end": 43
+              "start": 96,
+              "end": 102
             }
           ],
           "scoring": {

@@ -571,27 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "중심 대상은 무엇인가요?",
+          "prompt": "민재가 지금 초안에서 너무 길게 읽는 것 같다고 한 부분을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 58,
-              "end": 60
-            },
-            {
-              "paragraphId": "p1",
-              "start": 181,
-              "end": 183
-            },
-            {
-              "paragraphId": "p3",
-              "start": 150,
-              "end": 152
-            },
-            {
-              "paragraphId": "p4",
-              "start": 69,
-              "end": 71
+              "start": 39,
+              "end": 44
             }
           ],
           "scoring": {
@@ -600,11 +585,29 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "같아"
+          "answerText": "일정 안내"
         },
         {
           "id": "q2",
-          "prompt": "'무엇'처럼 성격을 먼저 짚고, 그 뒤에 달라진 점 두세 개를 바로 붙이면 어떨까?",
+          "prompt": "서윤이 도입에서 먼저 말하자고 한 내용을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 128,
+              "end": 140
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "올해 축제의 핵심 변화"
+        },
+        {
+          "id": "q3",
+          "prompt": "행사 자체를 한 문장으로 설명하는 표현으로 지호가 제안한 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -621,8 +624,8 @@
           "answerText": "학생회가 준비한 참여형 학교 축제"
         },
         {
-          "id": "q3",
-          "prompt": "지금 원고에는 '무엇' 같은 표현이 있어서 홍보보다 지시에 가까워 보여?",
+          "id": "q4",
+          "prompt": "홍보보다 지시에 가까워 보인다고 한 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -639,31 +642,18 @@
           "answerText": "반드시 참여해야 합니다"
         },
         {
-          "id": "q4",
-          "prompt": "부스 이름을 전부 읽는 대신 공연, 체험, 무엇 훨씬 이해하기 쉬울 것 같아?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 43,
-              "end": 55
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "전시로 묶어서 소개하면"
-        },
-        {
           "id": "q5",
-          "prompt": "지금은 '무엇'로 끝나서 듣고 나서 학생이 뭘 해야 하는지가 약해?",
+          "prompt": "강요보다 기대감을 주는 쪽으로 바꿀 표현 두 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 30,
-              "end": 40
+              "paragraphId": "p3",
+              "start": 104,
+              "end": 119
+            },
+            {
+              "paragraphId": "p3",
+              "start": 123,
+              "end": 135
             }
           ],
           "scoring": {
@@ -671,17 +661,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "많은 관심 바랍니다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "직접 체험해 볼 수 있습니다",
+            "함께 즐길 수 있습니다"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "둘째, 무엇로 묶어 대표 예시만 소개한다?",
+          "prompt": "부스 이름을 전부 읽는 대신 무엇으로 묶어 소개하자고 했는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 59,
-              "end": 72
+              "paragraphId": "p4",
+              "start": 35,
+              "end": 45
             }
           ],
           "scoring": {
@@ -690,7 +683,57 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "본론은 프로그램을 갈래별"
+          "answerText": "공연, 체험, 전시"
+        },
+        {
+          "id": "q7",
+          "prompt": "결론에서 분명해야 한다고 한 정보를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 10,
+              "end": 15
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "행동 정보"
+        },
+        {
+          "id": "q8",
+          "prompt": "마지막에 다시 정리해 주면 실제 참여로 이어지기 쉬워진다고 한 세 가지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 71,
+              "end": 86
+            },
+            {
+              "paragraphId": "p5",
+              "start": 88,
+              "end": 99
+            },
+            {
+              "paragraphId": "p5",
+              "start": 101,
+              "end": 106
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "사전 신청이 필요한 프로그램",
+            "준비물이 필요한 부스",
+            "운영 시간"
+          ]
         }
       ]
     }

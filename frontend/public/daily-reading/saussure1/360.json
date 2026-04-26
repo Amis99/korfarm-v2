@@ -396,19 +396,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "그림을 모아 보여주는 곳?",
-          "answerText": "미술관",
-          "answerMatchMode": "EXACT",
+          "prompt": "이번 미술관 산책이 나에게 선물해 준 두 가지를 모두 찾아 적어 보세요",
+          "answerText": "아름다움, 창의성",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 3,
-              "end": 6
+              "start": 19,
+              "end": 23
             },
             {
-              "paragraphId": "p2",
-              "start": 152,
-              "end": 155
+              "paragraphId": "p1",
+              "start": 25,
+              "end": 28
             }
           ],
           "scoring": {
@@ -420,14 +420,14 @@
         },
         {
           "id": "q2",
-          "prompt": "천천히 걸으며 구경함?",
-          "answerText": "산책",
-          "answerMatchMode": "EXACT",
+          "prompt": "미술관에서 보낸 시간을 무엇처럼 빗대어 표현했는지 본문에서 찾아 적어 보세요",
+          "answerText": "마치 한 편의 영화처럼",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 7,
-              "end": 9
+              "start": 108,
+              "end": 120
             }
           ],
           "scoring": {
@@ -439,10 +439,34 @@
         },
         {
           "id": "q3",
-          "prompt": "지극하고 참된 마음?",
-          "answerText": "정성",
-          "answerMatchMode": "EXACT",
+          "prompt": "정원에서 본 나비 조각상이 어떻게 할 듯 생생하다고 빗대어 표현했는지 적어 보세요",
+          "answerText": "금방이라도 하늘로 날아갈 듯",
+          "answerMatchMode": "ANY",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 155,
+              "end": 170
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "작품을 관찰하며 작가가 전하려는 따뜻한 두 가지를 모두 찾아 적어 보세요",
+          "answerText": "메시지, 정성",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 26,
+              "end": 29
+            },
             {
               "paragraphId": "p2",
               "start": 31,

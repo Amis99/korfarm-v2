@@ -557,13 +557,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "피터 팬이 방에 찾아와 웬디와 동생들이 하늘을 훨훨 날 수 있도록 몸에 살짝 뿌려 준 가벼운 물건은?",
-          "answerText": "요정 가루",
-          "answerMatchMode": "EXACT",
+          "prompt": "피터 팬이 웬디와 동생들의 몸에 뿌려 준 것을 찾으시오.",
+          "answerText": "신비로운 요정 가루",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 20,
+              "start": 15,
               "end": 25
             }
           ],
@@ -576,19 +576,22 @@
         },
         {
           "id": "q2",
-          "prompt": "밤하늘과 푸른 바다를 가로질러 아이들이 마침내 도착한 마법과 모험이 가득한 환상의 섬 이름은?",
-          "answerText": "네버랜드",
-          "answerMatchMode": "EXACT",
+          "prompt": "가루를 맞은 아이들의 몸에 생긴 변화를 모두 찾으시오.",
+          "answerTexts": [
+            "풍선처럼 가벼워지며",
+            "둥실 떠올랐습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 87,
-              "end": 91
+              "paragraphId": "p1",
+              "start": 67,
+              "end": 77
             },
             {
-              "paragraphId": "p3",
-              "start": 29,
-              "end": 33
+              "paragraphId": "p1",
+              "start": 78,
+              "end": 87
             }
           ],
           "scoring": {
@@ -600,10 +603,51 @@
         },
         {
           "id": "q3",
-          "prompt": "네버랜드 바다에 무서운 해적선이 둥둥 떠 있는 것을 보고, 피터 팬이 아이들에게 조심하라고 속삭인 사람은?",
-          "answerText": "후크 선장",
-          "answerMatchMode": "EXACT",
+          "prompt": "아이들이 피터 팬을 따라 지나고 건넌 곳을 모두 찾으시오.",
+          "answerTexts": [
+            "런던의 빛나는 별들",
+            "깊고 푸른 바다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 14,
+              "end": 24
+            },
+            {
+              "paragraphId": "p2",
+              "start": 30,
+              "end": 38
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "네버랜드에서 보인 대상과 피터 팬이 조심하라고 한 인물을 모두 찾으시오.",
+          "answerTexts": [
+            "아름다운 인어들이",
+            "무서운 해적선",
+            "후크 선장"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 46,
+              "end": 55
+            },
+            {
+              "paragraphId": "p3",
+              "start": 66,
+              "end": 73
+            },
             {
               "paragraphId": "p3",
               "start": 99,

@@ -875,113 +875,74 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '중심'을 모두 찾으시오.",
+          "prompt": "글의 짜임을 파악한 뒤 남기는 것이 요약이라고 말하며 비유로 쓴 두 글자를 지문에서 찾으시오",
+          "answerText": "뼈대",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 84,
-              "end": 86
-            },
-            {
-              "paragraphId": "p1",
-              "start": 183,
-              "end": 185
-            },
-            {
-              "paragraphId": "p3",
-              "start": 83,
-              "end": 85
-            },
-            {
-              "paragraphId": "p4",
-              "start": 195,
-              "end": 197
-            }
+            {"paragraphId": "p2", "start": 240, "end": 242}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "중심"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '구조'를 모두 찾으시오.",
+          "prompt": "좋은 요약문을 쓰려면 먼저 살펴봐야 한다고 한 글의 두 글자를 지문에서 찾으시오",
+          "answerText": "구조",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 18,
-              "end": 20
-            }
+            {"paragraphId": "p2", "start": 18, "end": 20}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "구조"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '뼈대'를 모두 찾으시오.",
+          "prompt": "요약이 문장을 짧게 줄이는 일이 아니라 어디서 시작한다고 정의했는지 지문에서 찾으시오",
+          "answerText": "글의 중심 내용과 세부 내용을 구분하는 데",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 240,
-              "end": 242
-            }
+            {"paragraphId": "p1", "start": 81, "end": 104}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "뼈대"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '흐름'을 모두 찾으시오.",
+          "prompt": "핵심 개념과 그 관계를 먼저 찾으라고 설명할 때 예로 든 글의 종류를 지문에서 찾으시오",
+          "answerText": "설명문",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 226,
-              "end": 228
-            },
-            {
-              "paragraphId": "p4",
-              "start": 224,
-              "end": 226
-            }
+            {"paragraphId": "p1", "start": 118, "end": 121}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "흐름"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '점검'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 160,
-              "end": 162
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "비교 글에서 요약할 때 빠지지 않아야 한다고 한 두 가지를 지문에서 찾으시오",
+          "answerText": "공통점, 차이점",
           "answerMatchMode": "ALL",
-          "answerText": "점검"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 145, "end": 148},
+            {"paragraphId": "p2", "start": 150, "end": 153}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "요약을 다 쓴 뒤에 점검하려고 비교해야 한다고 한 대상을 지문에서 찾으시오",
+          "answerText": "원문",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 7, "end": 9},
+            {"paragraphId": "p3", "start": 34, "end": 36},
+            {"paragraphId": "p3", "start": 117, "end": 119},
+            {"paragraphId": "p4", "start": 113, "end": 115},
+            {"paragraphId": "p4", "start": 191, "end": 193}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

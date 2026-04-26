@@ -571,30 +571,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단의 내용을 바탕으로 알 수 있는 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 183
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "독자는 흔히 글을 읽는 사람으로 정의되지만, 실제 글쓰기 상황에서 독자는 그렇게 단순한 존재가 아니다. 필자는 자신이 누구에게 말하고 있는지, 독자가 어떤 배경지식과 기대를 가졌는지 예상하면서 글을 구성한다. 그래서 독자는 텍스트 바깥의 수동적 수용자라기보다, 글이 만들어지는 과정에 이미 참여하고 있는 존재로 이해될 수 있다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "이런 관점에서 제시된 개념을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 183
+              "start": 16,
+              "end": 25
+            },
+            {
+              "paragraphId": "p5",
+              "start": 169,
+              "end": 178
+            },
+            {
+              "paragraphId": "p6",
+              "start": 94,
+              "end": 103
             }
           ],
           "scoring": {
@@ -603,16 +595,44 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이런 관점에서 제시된 개념이 담화 공동체 독자이다. 담화 공동체는 특정한 표현 방식, 읽기 관습, 논의 규칙을 공유하는 집단을 가리킨다. 학술 글쓰기 공동체, 신문 기사 공동체, 학교 보고서 쓰기 공동체처럼 사람들은 여러 담화 공동체에 동시에 속할 수 있으며, 필자는 자신이 속한 공동체의 규약과 어휘를 바탕으로 글을 조직한다."
+          "answerText": "담화 공동체 독자"
+        },
+        {
+          "id": "q2",
+          "prompt": "담화 공동체의 뜻을 설명한 부분을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 37,
+              "end": 69
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "특정한 표현 방식, 읽기 관습, 논의 규칙을 공유하는 집단"
         },
         {
           "id": "q3",
-          "prompt": "3문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "사람들이 동시에 속할 수 있는 담화 공동체의 예를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 170
+              "paragraphId": "p2",
+              "start": 77,
+              "end": 87
+            },
+            {
+              "paragraphId": "p2",
+              "start": 89,
+              "end": 98
+            },
+            {
+              "paragraphId": "p2",
+              "start": 100,
+              "end": 113
             }
           ],
           "scoring": {
@@ -620,17 +640,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "담화 공동체 관점에서는 필자와 독자의 경계가 이전보다 흐려진다. 필자는 독자의 반응을 미리 상정하며 글을 쓰고, 독자는 그 공동체가 공유하는 지식과 표현 관습을 바탕으로 의미를 해석한다. 이런 점에서 독자는 단순히 완성된 글을 읽는 사람이 아니라, 필자와 함께 의미 형성에 참여하는 공동 생산자에 가깝다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "학술 글쓰기 공동체",
+            "신문 기사 공동체",
+            "학교 보고서 쓰기 공동체"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "담화 공동체 관점에서 달라지는 필자와 독자의 관계를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 195
+              "paragraphId": "p3",
+              "start": 13,
+              "end": 34
             }
           ],
           "scoring": {
@@ -639,16 +663,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 개념은 상호 텍스트성과도 긴밀하게 연결된다. 어떤 글도 완전히 고립된 채 존재하지 않고, 다른 텍스트의 표현과 주장, 전제를 반복하거나 변형하면서 의미를 만든다. 포터가 말한 반복과 전제는 바로 이런 연결 방식을 보여 준다. 특정 공동체의 독자는 이러한 반복과 전제를 자연스럽게 읽어 내므로, 텍스트는 공동체 내부의 지식망 위에서 작동하게 된다."
+          "answerText": "필자와 독자의 경계가 이전보다 흐려진다"
         },
         {
           "id": "q5",
-          "prompt": "5문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "필자가 독자와 함께 의미 형성에 참여하는 방식의 근거를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 205
+              "paragraphId": "p3",
+              "start": 36,
+              "end": 61
             }
           ],
           "scoring": {
@@ -657,16 +681,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "예를 들어 같은 설명문이라도 학술 공동체의 독자를 전제하면 용어 정의와 선행 논의를 촘촘히 제시해야 하지만, 일반 독자를 전제하면 사례와 쉬운 비유가 더 필요해질 수 있다. 즉 필자는 글을 쓰는 순간부터 특정한 독자 집단을 염두에 두며, 독자 역시 자신이 속한 공동체의 규약을 바탕으로 글을 해석한다. 담화 공동체 독자는 이런 상호 작용을 설명하는 데 유용한 틀이다."
+          "answerText": "필자는 독자의 반응을 미리 상정하며 글을 쓰고"
         },
         {
           "id": "q6",
-          "prompt": "6문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "포터가 말한 상호 텍스트성의 연결 방식을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 181
+              "paragraphId": "p4",
+              "start": 100,
+              "end": 106
+            },
+            {
+              "paragraphId": "p4",
+              "start": 144,
+              "end": 150
             }
           ],
           "scoring": {
@@ -675,7 +704,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "다만 이 관점에도 한계는 있다. 실제 독자 집단은 언제나 하나의 가치나 규칙만 공유하는 동질적 집단이 아니며, 텍스트를 읽는 방식도 개인마다 다르기 때문이다. 그럼에도 담화 공동체 독자 개념은 글이 단순히 필자의 생각을 옮긴 결과가 아니라, 공동체의 지식과 관습 속에서 생산되고 해석되는 사회적 행위임을 분명하게 보여 준다."
+          "answerText": "반복과 전제"
+        },
+        {
+          "id": "q7",
+          "prompt": "학술 공동체의 독자를 전제할 때 촘촘히 제시해야 하는 요소를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 33,
+              "end": 38
+            },
+            {
+              "paragraphId": "p5",
+              "start": 40,
+              "end": 45
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "용어 정의",
+            "선행 논의"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "담화 공동체 독자 관점의 한계를 설명한 문장을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 18,
+              "end": 87
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "실제 독자 집단은 언제나 하나의 가치나 규칙만 공유하는 동질적 집단이 아니며, 텍스트를 읽는 방식도 개인마다 다르기 때문이다"
         }
       ]
     }

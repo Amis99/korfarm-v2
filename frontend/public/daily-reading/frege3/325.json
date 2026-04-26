@@ -1327,24 +1327,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "젊은 세대가 일자리를 찾지 못하는 문제는 무엇인가요?",
-          "answerText": "청년 실업",
+          "prompt": "청년 실업의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "사회 진출을 앞둔 젊은 세대가 일자리를 찾지 못하는 문제",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p3",
-              "start": 13,
-              "end": 18
-            },
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 5
+              "start": 7,
+              "end": 38
             }
           ],
           "scoring": {
@@ -1355,10 +1345,50 @@
         },
         {
           "id": "q2",
-          "prompt": "기술 중심 산업 구조 변화의 대표 기술로 언급된 것은 무엇인가요?",
-          "answerText": "인공지능",
-          "answerMatchMode": "ANY",
+          "prompt": "청년 실업이 사회 전반에 미치는 영향을 모두 찾으시오.",
+          "answerTexts": [
+            "소비가 줄어들고",
+            "결혼과 출산이 늦어지는"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 126,
+              "end": 134
+            },
+            {
+              "paragraphId": "p1",
+              "start": 135,
+              "end": 147
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "산업 구조 변화와 관련해 언급된 변화와 기술을 모두 찾으시오.",
+          "answerTexts": [
+            "기술 중심으로 급격히 변한 점",
+            "자동화",
+            "인공지능"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 23,
+              "end": 39
+            },
+            {
+              "paragraphId": "p2",
+              "start": 44,
+              "end": 47
+            },
             {
               "paragraphId": "p2",
               "start": 49,
@@ -1372,33 +1402,35 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "청년이 원하는 일자리와 기업이 제공하는 일자리의 차이를 무엇이라고 하나요?",
-          "answerText": "일자리 미스매치",
-          "answerMatchMode": "ANY",
+          "id": "q4",
+          "prompt": "일자리 미스매치에서 차이가 난다고 한 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "청년들이 원하는 양질의 일자리",
+            "기업이 제공하는 일자리",
+            "교육 현장에서 배우는 기술",
+            "산업 현장에서 요구하는 역량"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 8
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "취업난이 길어질 때 나타나는 정신적 문제의 예는 무엇인가요?",
-          "answerText": "우울증",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+              "start": 38,
+              "end": 54
+            },
             {
-              "paragraphId": "p4",
-              "start": 127,
-              "end": 130
+              "paragraphId": "p3",
+              "start": 56,
+              "end": 68
+            },
+            {
+              "paragraphId": "p3",
+              "start": 124,
+              "end": 138
+            },
+            {
+              "paragraphId": "p3",
+              "start": 140,
+              "end": 155
             }
           ],
           "scoring": {
@@ -1409,14 +1441,34 @@
         },
         {
           "id": "q5",
-          "prompt": "청년 실업 해결을 위해 적극적으로 협력해야 할 주체는 누구와 누구인가요?",
-          "answerText": "정부와 기업",
-          "answerMatchMode": "ANY",
+          "prompt": "취업난이 길어질 때 청년들이 겪는 문제를 모두 찾으시오.",
+          "answerTexts": [
+            "심리적으로 위축",
+            "사회적 고립",
+            "우울증",
+            "불안 증세"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 13,
-              "end": 19
+              "paragraphId": "p4",
+              "start": 15,
+              "end": 23
+            },
+            {
+              "paragraphId": "p4",
+              "start": 26,
+              "end": 32
+            },
+            {
+              "paragraphId": "p4",
+              "start": 127,
+              "end": 130
+            },
+            {
+              "paragraphId": "p4",
+              "start": 133,
+              "end": 138
             }
           ],
           "scoring": {

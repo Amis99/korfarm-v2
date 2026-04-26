@@ -571,30 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 문법 현상을 어떤 배경이나 문제의식에서 제시하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 208
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "부사어는 흔히 서술어를 꾸며 주는 성분이라고 배운다. 그러나 실제 문장에서는 모든 부사어가 같은 지위를 갖는 것은 아니다. 어떤 부사어는 없어도 문장이 성립하지만, 어떤 부사어는 빠지면 서술어의 뜻이 완성되지 않거나 문장이 매우 부자연스러워진다. 그래서 문장 성분을 세밀하게 분석할 때에는 부사어를 하나로 묶지 않고 필수적 부사어와 수의적 부사어로 나누어 볼 필요가 있다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 첫 판별 기준이나 기본 원리를 어떻게 설명하는가?",
+          "prompt": "필수적 부사어의 정의에 해당하는 문장을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 241
+              "end": 37
             }
           ],
           "scoring": {
@@ -603,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "필수적 부사어는 특정 서술어가 요구하는 의미 자리를 채우는 성분이다. 예를 들어 '철수는 서울에 산다'에서 '서울에'를 빼면 '철수는 산다'라는 문장이 문법적으로 아주 불가능한 것은 아니어도, 원래 서술어 '살다'가 기대하는 장소 정보가 빠져 의미가 크게 비게 된다. '의자 위에 놓다', '친구에게 주다'처럼 장소나 대상, 방향을 요구하는 서술어에서도 비슷한 현상이 나타난다. 이런 경우의 부사어는 서술어와 긴밀하게 결합해 있다."
+          "answerText": "필수적 부사어는 특정 서술어가 요구하는 의미 자리를 채우는 성분이다"
         },
         {
-          "id": "q3",
-          "prompt": "3문단은 해당 현상의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "id": "q2",
+          "prompt": "수의적 부사어의 정의에 해당하는 문장을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 224
+              "start": 3,
+              "end": 58
             }
           ],
           "scoring": {
@@ -621,16 +603,44 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "반면 수의적 부사어는 문장에 추가 정보를 덧붙이지만, 빠진다고 해서 서술어의 기본 틀이 무너지지는 않는다. '철수는 어제 도서관에서 조용히 책을 읽었다'에서 '어제', '도서관에서', '조용히'는 모두 부사어이지만, '철수는 책을 읽었다'만으로도 문장의 중심 뜻은 유지된다. 이처럼 시간, 장소, 방식, 정도를 나타내더라도 서술어가 본래 요구하는 자리가 아니라면 수의적 부사어로 보는 것이 일반적이다."
+          "answerText": "수의적 부사어는 문장에 추가 정보를 덧붙이지만, 빠진다고 해서 서술어의 기본 틀이 무너지지는 않는다"
+        },
+        {
+          "id": "q3",
+          "prompt": "'철수는 서울에 산다'에서 빠지면 장소 정보가 빠지는 부사어를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 60,
+              "end": 65
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "'서울에'"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 구별점이나 추가 조건을 어떤 방향으로 드러내는가?",
+          "prompt": "3문단에서 수의적 부사어의 예로 든 표현을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 257
+              "paragraphId": "p3",
+              "start": 88,
+              "end": 92
+            },
+            {
+              "paragraphId": "p3",
+              "start": 94,
+              "end": 101
+            },
+            {
+              "paragraphId": "p3",
+              "start": 103,
+              "end": 108
             }
           ],
           "scoring": {
@@ -638,17 +648,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "두 부사어를 가를 때에는 겉으로 드러난 조사만 보고 판단하면 안 된다. '에', '에서', '에게'처럼 같은 조사로 실현되어도 어떤 문장에서는 필수적이고 다른 문장에서는 수의적일 수 있기 때문이다. '학교에 다니다'의 '학교에'는 서술어의 의미 완성에 가깝지만, '학교에 갔다가 친구를 만났다'에서 '학교에'는 상황을 덧붙이는 정보에 가깝다. 결국 핵심은 부사어의 형태가 아니라, 그것이 해당 서술어의 의미 구조 안에서 필수 자리를 차지하는지 살피는 데 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'어제'",
+            "'도서관에서'",
+            "'조용히'"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단은 해석상의 주의점이나 적용 효과를 어떻게 설명하는가?",
+          "prompt": "두 부사어를 가를 때 무엇만 보고 판단하면 안 된다고 했는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 229
+              "paragraphId": "p4",
+              "start": 14,
+              "end": 25
             }
           ],
           "scoring": {
@@ -657,16 +671,48 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "판별에는 몇 가지 실질적 기준이 쓰인다. 첫째, 부사어를 뺀 문장이 의미상 크게 비거나 매우 어색해지는지 본다. 둘째, 그 부사어가 다른 것으로 쉽게 대체되기보다 서술어가 요구하는 특정 관계를 채우는지 살핀다. 셋째, 문장의 초점이 아니라 서술어의 자릿수와 결합 관계를 중심에 두어야 한다. 이 기준을 쓰면 부사어가 길거나 중요해 보여도 수의적일 수 있고, 짧은 성분이어도 필수적일 수 있다는 점이 분명해진다."
+          "answerText": "겉으로 드러난 조사만"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 이 문법 주제를 어떤 관점에서 정리하는가?",
+          "prompt": "5문단에서 제시한 판별 기준을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 27,
+              "end": 58
+            },
+            {
+              "paragraphId": "p5",
+              "start": 67,
+              "end": 112
+            },
+            {
+              "paragraphId": "p5",
+              "start": 122,
+              "end": 161
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "부사어를 뺀 문장이 의미상 크게 비거나 매우 어색해지는지",
+            "그 부사어가 다른 것으로 쉽게 대체되기보다 서술어가 요구하는 특정 관계를 채우는지",
+            "문장의 초점이 아니라 서술어의 자릿수와 결합 관계를 중심에 두어야 한다"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "필수적 부사어가 문장의 뼈대를 이룬다는 설명을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 261
+              "start": 72,
+              "end": 101
             }
           ],
           "scoring": {
@@ -675,7 +721,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "따라서 부사어를 단순히 '있으면 더 자세해지는 성분'으로 이해하는 데서 멈추면 문장 구조를 정확히 읽기 어렵다. 필수적 부사어는 서술어가 요구하는 논항에 가까워 문장의 뼈대를 이루고, 수의적 부사어는 그 뼈대 위에 상황과 뉘앙스를 덧붙인다. 문장을 분석할 때에는 먼저 서술어가 어떤 의미 자리를 필요로 하는지 확인하고, 그다음 해당 부사어가 그 자리를 채우는지 따져야 한다. 이 구별은 문장 성분 판별뿐 아니라 서술어의 의미 구조를 이해하는 데도 중요한 기준이 된다."
+          "answerText": "서술어가 요구하는 논항에 가까워 문장의 뼈대를 이루고"
+        },
+        {
+          "id": "q8",
+          "prompt": "문장을 분석할 때 먼저 확인해야 할 것을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 150,
+              "end": 172
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "서술어가 어떤 의미 자리를 필요로 하는지"
         }
       ]
     }

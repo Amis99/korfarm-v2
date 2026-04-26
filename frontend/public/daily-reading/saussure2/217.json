@@ -559,9 +559,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "길쭉한 몸을 가진 가장 대표적인 땅속 생물로 땅을 기름지게 만들어 주는 동물은 누구일까요?",
+          "prompt": "가장 대표적인 땅속 생물로 소개된 동물의 이름을 지문에서 찾아 쓰시오.",
           "answerText": "지렁이",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -583,14 +583,14 @@
         },
         {
           "id": "q2",
-          "prompt": "어른 매미가 되기 전까지 땅속에서 오랜 시간 나무뿌리의 즙을 먹으며 자라는 애벌레는 무엇인가요?",
-          "answerText": "굼벵이",
-          "answerMatchMode": "EXACT",
+          "prompt": "지렁이는 식물이 잘 자라도록 땅을 어떻게 만들어 준다고 했나요? 지문에서 찾아 쓰시오.",
+          "answerText": "아주 기름지게",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 98,
-              "end": 101
+              "paragraphId": "p1",
+              "start": 107,
+              "end": 114
             }
           ],
           "scoring": {
@@ -602,19 +602,33 @@
         },
         {
           "id": "q3",
-          "prompt": "크고 튼튼한 앞발로 땅굴을 아주 빠르고 멋지게 파는 이 동물은 누구일까요?",
-          "answerText": "두더지",
-          "answerMatchMode": "EXACT",
+          "prompt": "개미들이 땅속 깊은 곳에 무엇을 지으며 모여 산다고 했나요? 지문에서 찾아 쓰시오.",
+          "answerText": "복잡하고 커다란 집",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 14,
+              "end": 24
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "두더지가 지나간 자리에는 무엇이 생긴다고 했나요? 지문에서 찾아 쓰시오.",
+          "answerText": "흙이 위로 볼록하게 튀어나온 흙무더기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p3",
-              "start": 41,
-              "end": 44
+              "start": 55,
+              "end": 75
             }
           ],
           "scoring": {

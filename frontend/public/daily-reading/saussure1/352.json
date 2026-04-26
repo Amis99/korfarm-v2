@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "글의 핵심을 담은 문구?",
+          "prompt": "글에서 '글의 가장 윗부분에 적어 전체 내용을 대표하는 부분'을 뜻하는 두 글자 낱말을 찾아 적어 보세요",
           "answerText": "제목",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -440,24 +440,14 @@
         },
         {
           "id": "q2",
-          "prompt": "글이 담고 있는 정보?",
-          "answerText": "내용",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서 좋은 제목을 무엇과 같다고 빗대었는지 글에서 찾아 적어 보세요",
+          "answerText": "글의 얼굴",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 21,
-              "end": 23
-            },
-            {
-              "paragraphId": "p1",
-              "start": 145,
-              "end": 147
-            },
-            {
-              "paragraphId": "p2",
-              "start": 22,
-              "end": 24
+              "start": 133,
+              "end": 138
             }
           ],
           "scoring": {
@@ -469,9 +459,28 @@
         },
         {
           "id": "q3",
-          "prompt": "생각을 나타내는 일?",
+          "prompt": "제목을 붙일 때 가장 먼저 살펴봐야 하는 것이 무엇인지 글에서 찾아 적어 보세요",
+          "answerText": "문단마다의 중심 내용",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 13,
+              "end": 24
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글에서 '생각이나 느낌을 말이나 글로 드러내어 나타냄'을 뜻하는 두 글자 낱말을 찾아 적어 보세요",
           "answerText": "표현",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",

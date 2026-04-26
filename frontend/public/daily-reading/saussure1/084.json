@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "애벌레는 ( ) 잎을 먹습니다.",
-          "answerText": "초록",
-          "answerMatchMode": "EXACT",
+          "prompt": "말없이 조용하게 무엇을 꾸준히 하는 모양을 뜻하는 단어를 지문에서 찾아 보세요.",
+          "answerText": "묵묵히",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 39,
-              "end": 41
+              "start": 100,
+              "end": 103
             }
           ],
           "scoring": {
@@ -571,10 +571,20 @@
         },
         {
           "id": "q2",
-          "prompt": "( )를 뚫고 나비가 나옴.",
-          "answerText": "번데기",
-          "answerMatchMode": "EXACT",
+          "prompt": "나비가 자라는 동안 거치는 모습을 지문에 나온 순서대로 모두 찾아 보세요.",
+          "answerText": "알, 애벌레, 번데기, 나비",
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 4,
+              "end": 5
+            },
+            {
+              "paragraphId": "p1",
+              "start": 34,
+              "end": 37
+            },
             {
               "paragraphId": "p1",
               "start": 72,
@@ -589,6 +599,26 @@
               "paragraphId": "p2",
               "start": 8,
               "end": 11
+            },
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p2",
+              "start": 19,
+              "end": 21
+            },
+            {
+              "paragraphId": "p2",
+              "start": 80,
+              "end": 81
+            },
+            {
+              "paragraphId": "p2",
+              "start": 84,
+              "end": 86
             }
           ],
           "scoring": {
@@ -600,9 +630,28 @@
         },
         {
           "id": "q3",
-          "prompt": "달콤한 ( )을 먹어요.",
+          "prompt": "알에서 나비가 되기까지 무척 필요한 것은 무엇인지 찾아 보세요.",
+          "answerText": "정성",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 94,
+              "end": 96
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "나비가 꽃을 찾아다니며 먹는 음식이 무엇인지 찾아 보세요.",
           "answerText": "꿀",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",

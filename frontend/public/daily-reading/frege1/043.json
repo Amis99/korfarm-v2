@@ -914,9 +914,38 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지역끼리 물건과 문화를 주고받는 활동을 무엇이라고 하나요?",
-          "answerText": "교류",
-          "answerMatchMode": "ANY",
+          "prompt": "오늘날 발달한 교통수단과 그 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "기차, 자동차, 비행기",
+            "전 세계가 하나로 연결되었다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 100,
+              "end": 112
+            },
+            {
+              "paragraphId": "p1",
+              "start": 130,
+              "end": 145
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "교류의 이름과 정의를 모두 찾으시오.",
+          "answerTexts": [
+            "교류",
+            "물건, 정보, 문화 등을 주고받는 활동"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -932,24 +961,11 @@
               "paragraphId": "p2",
               "start": 146,
               "end": 148
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "활발한 교류가 지역 경제를 키우는 무엇이 된다고 했나요?",
-          "answerText": "원동력",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+            },
             {
               "paragraphId": "p2",
-              "start": 163,
-              "end": 166
+              "start": 48,
+              "end": 69
             }
           ],
           "scoring": {
@@ -960,14 +976,28 @@
         },
         {
           "id": "q3",
-          "prompt": "먼 곳으로 다니거나 여행하는 것이 이제 어떤 일이 되었나요?",
-          "answerText": "일상",
-          "answerMatchMode": "ANY",
+          "prompt": "교류로 가능해진 일과 경제적 효과를 모두 찾으시오.",
+          "answerTexts": [
+            "싱싱한 먹거리",
+            "실시간으로 접한다",
+            "지역 경제를 발전시키는 원동력"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 83,
-              "end": 85
+              "paragraphId": "p2",
+              "start": 95,
+              "end": 102
+            },
+            {
+              "paragraphId": "p2",
+              "start": 131,
+              "end": 140
+            },
+            {
+              "paragraphId": "p2",
+              "start": 150,
+              "end": 166
             }
           ],
           "scoring": {
@@ -978,14 +1008,22 @@
         },
         {
           "id": "q4",
-          "prompt": "교통 발달 뒤 하나의 생활권이 되었다고 한 곳은 어디인가요?",
-          "answerText": "지구촌",
-          "answerMatchMode": "ANY",
+          "prompt": "교통 발달로 바뀐 생활 모습을 모두 찾으시오.",
+          "answerTexts": [
+            "먼 거리도 짧은 시간 안에 이동할 수 있게 되면서",
+            "새롭고 다양한 생활 양식"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 143,
-              "end": 146
+              "start": 29,
+              "end": 56
+            },
+            {
+              "paragraphId": "p3",
+              "start": 114,
+              "end": 127
             }
           ],
           "scoring": {
@@ -996,14 +1034,28 @@
         },
         {
           "id": "q5",
-          "prompt": "앞으로 삶을 더 풍요롭게 할 교통수단은 무엇인가요?",
-          "answerText": "친환경 교통수단",
-          "answerMatchMode": "ANY",
+          "prompt": "교통 발달의 부작용을 모두 찾으시오.",
+          "answerTexts": [
+            "대기 오염",
+            "교통 체증",
+            "소음 문제"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 137,
-              "end": 145
+              "start": 38,
+              "end": 43
+            },
+            {
+              "paragraphId": "p4",
+              "start": 46,
+              "end": 51
+            },
+            {
+              "paragraphId": "p4",
+              "start": 53,
+              "end": 58
             }
           ],
           "scoring": {

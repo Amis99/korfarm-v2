@@ -571,111 +571,179 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 회의의 출발 문제를 어떻게 제시하는가?",
+          "prompt": "입구 바로 오른쪽에 붙어 있어 줄이 뒤엉킬 것 같다고 한 두 부스를 모두 찾으시오.",
+          "answerTexts": [
+            "드론 조종 체험",
+            "액체질소 시연 부스"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 190
+              "start": 34,
+              "end": 42
+            },
+            {
+              "paragraphId": "p1",
+              "start": 45,
+              "end": 55
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "진행자 민호: 과학 전시 체험 부스 배치를 다시 보려고 해. 드론 조종 체험이랑 액체질소 시연 부스가 입구 바로 오른쪽에 붙어 있으니까 첫 타임에 학생이 몰리면 줄이 뒤엉킬 것 같아. 안전 담당 서연: 나도 그게 제일 걱정됐어. 특히 드론 체험은 대기 줄이 길어지면 옆 통로를 막을 수 있어서, 입구에서 바로 꺾는 배치는 피하는 게 좋겠어."
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 제안이나 우려를 어떤 이유와 함께 내놓는가?",
+          "prompt": "드론 체험의 입구 바로 꺾는 배치를 피해야 하는 이유를 찾으시오.",
+          "answerText": "대기 줄이 길어지면 옆 통로를 막을 수 있어서",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 187
+              "paragraphId": "p1",
+              "start": 138,
+              "end": 163
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "민호: 그러면 드론 체험을 체육관 안쪽 벽면으로 옮기고, 입구 근처에는 안내판이랑 대기선만 두는 건 어때? 서연: 괜찮아. 대신 액체질소 시연은 출입문에서 너무 멀어지면 환기 문제를 확인하기 어려우니까 지금 위치에서 완전히 빼지는 말자. 입구 옆이 아니라 창문 가까운 쪽으로 반 칸만 이동하면 동선도 덜 겹치고 환기 관리도 쉬울 거야."
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "3문단은 논의를 어떤 대안이나 조정안으로 이어 가는가?",
+          "prompt": "액체질소 시연을 지금 위치에서 완전히 빼지 말자고 한 이유를 찾으시오.",
+          "answerText": "환기 문제를 확인하기 어려우니까",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 213
+              "paragraphId": "p2",
+              "start": 95,
+              "end": 112
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "민호: 좋아, 그럼 입장 동선은 오른쪽으로 바로 몰리지 않게 정문 중앙에서 두 갈래로 나누자. 왼쪽은 전시 패널 관람, 오른쪽은 체험 부스 대기 줄로 유도하고 바닥 화살표를 붙이면 될 것 같아. 서연: 거기에 진행 요원 한 명을 입구에 세워서 '시연 먼저 보실 분', '체험 예약하실 분'을 바로 나눠 주면 더 좋아. 그냥 표지만 두면 학생들이 멈춰 서서 다시 묻는 경우가 많거든."
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "4문단은 예상 질문이나 진행 기준을 어떻게 준비하는가?",
+          "prompt": "정문 중앙에서 나눈 두 갈래 동선을 모두 찾으시오.",
+          "answerTexts": [
+            "왼쪽은 전시 패널 관람",
+            "오른쪽은 체험 부스 대기 줄"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 219
+              "paragraphId": "p3",
+              "start": 53,
+              "end": 65
+            },
+            {
+              "paragraphId": "p3",
+              "start": 67,
+              "end": 82
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "민호: 운영 시간도 조금 손봐야 할 것 같아. 원래는 액체질소 시연을 20분마다 하려고 했는데, 질의응답까지 포함하면 한 번에 25분은 잡아야 할 것 같아. 서연: 맞아, 지난번 예행 때도 질문이 몰리면서 다음 차례 학생들이 통로에 서 있었어. 차라리 시연 시간을 줄이기보다 회차 수를 조정하고, 질문은 진행자가 세 개 정도 먼저 받고 추가 질문은 옆 상담 테이블에서 받는 방식으로 분리하자."
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "5문단은 세부 운영 방식이나 보완 이유를 어떻게 구체화하는가?",
+          "prompt": "입구에 세워 학생들을 바로 나눠 주기로 한 사람을 찾으시오.",
+          "answerText": "진행 요원 한 명",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 224
+              "paragraphId": "p3",
+              "start": 117,
+              "end": 126
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "민호: 그럼 현장 질문 대응은 이렇게 하자. 시연 직후에는 공통 질문 세 개만 바로 받고, 개별 질문은 체험 종료 뒤 별도 표지판이 있는 상담 자리로 유도한다. 서연: 그리고 안전 관련 질문은 내가 바로 답하되, 보호 장비 착용이나 접근 거리처럼 규칙이 필요한 내용은 진행자가 먼저 공지문으로 한번 정리해 줘. 학생들이 설명을 듣고도 앞으로 나오려는 경우가 있어서 시작 전에 기준을 분명히 말해야 해."
+          "revealOnWrong": true
         },
         {
           "id": "q6",
-          "prompt": "6문단은 최종 합의를 어떤 실행 계획으로 정리하는가?",
+          "prompt": "질의응답까지 포함할 때 시연 한 번에 잡아야 할 시간 표현을 찾으시오.",
+          "answerText": "한 번에 25분",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 230
+              "paragraphId": "p4",
+              "start": 66,
+              "end": 74
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "민호: 정리할게. 드론 체험은 안쪽 벽면으로 옮기고, 액체질소 시연은 창가 쪽으로 조금 이동한다. 입구는 관람 동선과 체험 대기 동선을 분리하고 진행 요원이 안내한다. 시연은 25분 간격으로 운영하고 질문은 현장 공통 질문과 별도 상담 자리로 나눈다. 서연: 응, 나는 그 기준으로 안전 표지와 대기선 위치를 다시 표시할게. 민호: 좋다. 오늘 안에 수정 배치도를 공유하고 내일 점심에 한 번 더 현장 점검하자."
+          "revealOnWrong": true
+        },
+        {
+          "id": "q7",
+          "prompt": "질문을 처리하는 두 방식을 모두 찾으시오.",
+          "answerTexts": [
+            "현장 공통 질문",
+            "별도 상담 자리"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 116,
+              "end": 124
+            },
+            {
+              "paragraphId": "p6",
+              "start": 126,
+              "end": 134
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q8",
+          "prompt": "수정 배치도를 공유하고 다시 현장 점검하기로 한 시점을 모두 찾으시오.",
+          "answerTexts": [
+            "오늘 안에",
+            "내일 점심에"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 190,
+              "end": 195
+            },
+            {
+              "paragraphId": "p6",
+              "start": 209,
+              "end": 215
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
         }
       ]
     }

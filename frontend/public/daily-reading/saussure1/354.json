@@ -396,29 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "강을 건너게 잇는 길?",
-          "answerText": "다리",
-          "answerMatchMode": "EXACT",
+          "prompt": "다리와 탑에 담겨 있는 것이 무엇인지 본문에서 찾아 적어 보세요",
+          "answerText": "설계 원리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 14,
-              "end": 16
-            },
-            {
-              "paragraphId": "p1",
-              "start": 74,
-              "end": 76
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 144,
-              "end": 146
+              "start": 54,
+              "end": 59
             }
           ],
           "scoring": {
@@ -430,29 +415,14 @@
         },
         {
           "id": "q2",
-          "prompt": "높게 솟은 건축물?",
-          "answerText": "탑",
-          "answerMatchMode": "EXACT",
+          "prompt": "아치형 다리는 곡선의 힘으로 무게를 어떻게 한다고 했는지 적어 보세요",
+          "answerText": "고르게 분산",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 24,
-              "end": 25
-            },
-            {
-              "paragraphId": "p1",
-              "start": 152,
-              "end": 153
-            },
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 5
-            },
-            {
-              "paragraphId": "p2",
-              "start": 148,
-              "end": 149
+              "start": 93,
+              "end": 99
             }
           ],
           "scoring": {
@@ -464,19 +434,43 @@
         },
         {
           "id": "q3",
-          "prompt": "사물의 근본적인 법칙?",
-          "answerText": "원리",
-          "answerMatchMode": "EXACT",
+          "prompt": "탑의 모양이 무게 중심을 낮추어 보여 주는 것이 무엇인지 적어 보세요",
+          "answerText": "균형의 미",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 57,
-              "end": 59
+              "start": 189,
+              "end": 194
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "다리와 탑을 볼 때 세심하게 살펴야 할 세 가지를 모두 찾아 적어 보세요",
+          "answerText": "대칭성, 질감, 조화",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 16,
+              "end": 19
             },
             {
               "paragraphId": "p2",
-              "start": 169,
-              "end": 171
+              "start": 25,
+              "end": 27
+            },
+            {
+              "paragraphId": "p2",
+              "start": 40,
+              "end": 42
             }
           ],
           "scoring": {

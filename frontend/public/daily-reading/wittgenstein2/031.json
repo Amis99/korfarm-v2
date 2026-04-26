@@ -571,12 +571,37 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이 문단에 따르면 파벌이 형성되는 이유는 무엇인가요?",
+          "prompt": "'공동체 전체의 이익보다 특정 집단의 요구를 앞세우는' 집단을 가리키는 말을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 203
+              "start": 118,
+              "end": 120
+            },
+            {
+              "paragraphId": "p2",
+              "start": 31,
+              "end": 33
+            },
+            {
+              "paragraphId": "p3",
+              "start": 156,
+              "end": 158
+            },
+            {
+              "paragraphId": "p4",
+              "start": 63,
+              "end": 65
+            },
+            {
+              "paragraphId": "p5",
+              "start": 78,
+              "end": 80
+            },
+            {
+              "paragraphId": "p6",
+              "start": 99,
+              "end": 101
             }
           ],
           "scoring": {
@@ -585,16 +610,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "매디슨은 대중이 정치에 참여하는 체제라고 해서 언제나 공공선이 잘 실현되는 것은 아니라고 보았다. 시민은 각기 다른 이해관계를 지니며, 이 이해관계가 결집하면 공동체 전체의 이익보다 특정 집단의 요구를 앞세우는 파벌이 형성될 수 있기 때문이다. 따라서 정치 제도를 평가할 때는 누가 권력을 갖는가뿐 아니라, 그 권력이 어떤 방식으로 통제되는가도 함께 보아야 한다."
+          "answerText": "파벌"
         },
         {
           "id": "q2",
-          "prompt": "이 문단에 따르면 다수결이라도 어떤 결과가 생길 수 있나요?",
+          "prompt": "매디슨이 정치 제도를 평가할 때 함께 보아야 한다고 한 두 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
+              "paragraphId": "p1",
+              "start": 155,
               "end": 165
+            },
+            {
+              "paragraphId": "p1",
+              "start": 172,
+              "end": 191
             }
           ],
           "scoring": {
@@ -602,17 +632,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그는 순수한 민주정에서 다수의 직접 지배가 이루어질 때 파벌 문제를 제어하기 어렵다고 판단했다. 다수 집단이 자기 이해가 걸린 문제를 스스로 결정하면, 형식상 다수결이더라도 실질적으로는 편파적 판단이 나올 가능성이 크다고 본 것이다. 이때 소수의 권리나 장기적 공익은 쉽게 뒤로 밀려날 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "누가 권력을 갖는가",
+            "그 권력이 어떤 방식으로 통제되는가"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "이 문단에 따르면 직접 참여를 줄이는 목적은 무엇인가요?",
+          "prompt": "순수한 민주정에서 다수의 직접 지배가 이루어질 때 제어하기 어렵다고 본 문제를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 193
+              "paragraphId": "p2",
+              "start": 31,
+              "end": 36
             }
           ],
           "scoring": {
@@ -621,16 +654,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그래서 매디슨은 공화정, 특히 선출된 대표를 거치는 정치 구조에 더 주목했다. 대표는 시민의 의견을 그대로 되풀이하는 전달자라기보다, 당장의 정념을 걸러 내고 보다 넓은 공익의 관점에서 판단해야 하는 존재로 이해되었다. 직접 참여를 줄이는 목적은 시민을 배제하려는 것이 아니라, 파벌의 즉각적 지배가 제도 전체를 흔드는 일을 막으려는 데 있었다."
+          "answerText": "파벌 문제"
         },
         {
           "id": "q4",
-          "prompt": "이 문단에서 길어지는 조정 과정의 효과는 무엇인가요?",
+          "prompt": "다수 집단이 자기 이해가 걸린 문제를 스스로 결정할 때 나올 수 있는 판단을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 160
+              "paragraphId": "p2",
+              "start": 104,
+              "end": 110
             }
           ],
           "scoring": {
@@ -639,16 +672,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "대표제는 규모가 큰 공화국일수록 더 큰 효과를 낼 수 있다고 여겨졌다. 사회가 넓고 이해관계가 다양할수록 단일한 파벌이 쉽게 정치 전체를 장악하기 어렵기 때문이다. 서로 다른 이익이 경쟁하고 조정되는 과정이 길어질수록, 특정 집단의 정념이 곧장 국가 결정으로 굳어지는 가능성도 낮아진다."
+          "answerText": "편파적 판단"
         },
         {
           "id": "q5",
-          "prompt": "이 문단에 따르면 민주정 비판의 초점은 어디에 놓이나요?",
+          "prompt": "대표가 어떤 존재로 이해되었는지 나타내는 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 187
+              "paragraphId": "p3",
+              "start": 75,
+              "end": 114
             }
           ],
           "scoring": {
@@ -657,15 +690,15 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이렇게 보면 민주정과 공화정의 차이는 단순히 직접 참여와 간접 참여의 구분에 머물지 않는다. 핵심은 정치적 평등의 원리를 유지하면서도 다수 파벌의 위험을 어떻게 완화할 것인가에 있다. 공화정은 대표, 숙의, 제도적 필터를 통해 이 문제를 다루려는 체제이고, 민주정 비판 역시 시민 참여 자체보다 통제 장치의 취약성에 초점이 놓여 있다."
+          "answerText": "당장의 정념을 걸러 내고 보다 넓은 공익의 관점에서 판단해야 하는 존재"
         },
         {
           "id": "q6",
-          "prompt": "이 문단에 따르면 이 논의는 무엇을 묻게 만드나요?",
+          "prompt": "직접 참여를 줄이는 목적이 무엇인지 나타내는 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
+              "paragraphId": "p3",
+              "start": 156,
               "end": 188
             }
           ],
@@ -675,7 +708,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 매디슨의 논의는 민주정과 공화정을 절대적으로 대립시키기보다, 공공선을 지키는 제도 설계의 문제를 제기한다. 시민 참여는 중요하지만, 참여가 곧장 공익을 보장하지는 않으므로 파벌을 걸러 낼 구조가 필요하다는 것이다. 따라서 이 논의는 정치 체제를 평가할 때 다수의 의사와 대표적 심의가 어떤 균형을 이루는지 묻게 만드는 기준이 된다."
+          "answerText": "파벌의 즉각적 지배가 제도 전체를 흔드는 일을 막으려는 데"
+        },
+        {
+          "id": "q7",
+          "prompt": "사회가 넓고 이해관계가 다양할수록 단일한 파벌이 정치 전체를 장악하기 어려운 까닭을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 92,
+              "end": 121
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "서로 다른 이익이 경쟁하고 조정되는 과정이 길어질수록"
+        },
+        {
+          "id": "q8",
+          "prompt": "매디슨의 논의가 제기하는 문제를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 37,
+              "end": 55
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "공공선을 지키는 제도 설계의 문제"
         }
       ]
     }

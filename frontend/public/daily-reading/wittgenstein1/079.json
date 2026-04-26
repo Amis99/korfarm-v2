@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 연은 어떤 장면의 변화나 분위기를 보여 주는가?",
+          "prompt": "1연에서 계절적 배경을 드러내는 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 73
+              "end": 3
             }
           ],
           "scoring": {
@@ -585,15 +585,38 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "동짓달에도 날씨가 며칠 푸근하면\n철없는 개나리는 노란 얼굴 내민다\n봄이 오면 꽃샘추위 아랑곳없이\n진달래는 곳곳에 소담스럽게 피어난다"
+          "answerText": "동짓달"
         },
         {
           "id": "q2",
-          "prompt": "둘째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "prompt": "1연에서 개나리를 사람처럼 표현한 부분을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 27,
+              "end": 36
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "노란 얼굴 내민다"
+        },
+        {
+          "id": "q3",
+          "prompt": "2연에서 의문형으로 반복되는 표현을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
+              "start": 20,
+              "end": 29
+            },
+            {
+              "paragraphId": "p2",
+              "start": 63,
               "end": 73
             }
           ],
@@ -602,35 +625,46 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "피어나는 꽃의 마음을\n가냘프다고 / 억누를 수 있느냐\n어두운 땅속으로 뻗어나가는 뿌리의 힘을\n보이지 않는다고 / 업신여길 수 있느냐"
-        },
-        {
-          "id": "q3",
-          "prompt": "셋째 연은 어떤 장면이나 정서를 보여 주는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 49
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "땅에 깊숙이 뿌리내리고\n하늘로 피어오르는 꿈을\n드높은 가지 끝에 품은\n나무처럼 젊은이들도"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "억누를 수 있느냐",
+            "업신여길 수 있느냐"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "넷째 연은 어떤 태도나 정서의 방향을 드러내는가?",
+          "prompt": "4연에서 젊은이들이 향해야 할 서로 다른 방향을 나타내는 말을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 53
+              "start": 4,
+              "end": 6
+            },
+            {
+              "paragraphId": "p4",
+              "start": 17,
+              "end": 20
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "위로",
+            "아래로"
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "3연에서 젊은이들을 비유한 대상을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 39,
+              "end": 43
             }
           ],
           "scoring": {
@@ -639,15 +673,38 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "힘차게 위로 솟아오르고\n조용히 아래로 깊어지며\n밝고 넓게 퍼져 나가기를\n그러나 행여 잊지 말기를"
+          "answerText": "나무처럼"
         },
         {
-          "id": "q5",
-          "prompt": "다섯째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "id": "q6",
+          "prompt": "5연에서 뿌리가 언제나 있다고 한 곳을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 34,
+              "end": 36
+            },
+            {
+              "paragraphId": "p5",
+              "start": 42,
+              "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "땅속"
+        },
+        {
+          "id": "q7",
+          "prompt": "5연에서 수액이 드러나지 않게 흐르는 모습을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
+              "start": 63,
               "end": 81
             }
           ],
@@ -657,16 +714,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "아무리 높다란 나뭇가지 끝에서\n저 들판 너머를 볼 수 있어도\n뿌리는 언제나 땅속에 있고 / 지하수가 수액이 되어\n남모르게 줄기 속을 흐르지 않으면"
+          "answerText": "남모르게 줄기 속을 흐르지 않으면"
         },
         {
-          "id": "q6",
-          "prompt": "마지막 연은 앞선 흐름이 어디에 이르고 있음을 보여 주는가?",
+          "id": "q8",
+          "prompt": "6연에서 향냄새를 풍기는 꽃나무 이름을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 42
+              "start": 16,
+              "end": 20
+            },
+            {
+              "paragraphId": "p6",
+              "start": 22,
+              "end": 25
             }
           ],
           "scoring": {
@@ -674,8 +736,11 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "바람결에 멀리 향냄새 풍기는\n아카시아도 라일락도 / 절대로 피어날 수 없음을"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "아카시아",
+            "라일락"
+          ]
         }
       ]
     }

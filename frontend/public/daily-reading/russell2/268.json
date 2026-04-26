@@ -840,108 +840,71 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이 작품의 제목은 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 25,
-              "end": 30
-            },
-            {
-              "paragraphId": "p5",
-              "start": 29,
-              "end": 34
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "얼어붙은 심장 밑으로 흐르다가 멈춘 따뜻한 흐름을 가리키는 시어를 찾으시오",
+          "answerText": "난류",
           "answerMatchMode": "ANY",
-          "answerText": "고운 심장"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 27, "end": 29}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "화자는 어떤 상태를 계속 떠올리나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 55
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "이 시에서 화자가 말을 건네는 대상이 되는 인물을 가리키는 시어를 모두 찾으시오",
+          "answerText": "너",
           "answerMatchMode": "ANY",
-          "answerText": "지치도록 고요한 하늘에 별도 얼어붙어\n하늘이 무너지고\n지구가 정지하고\n푸른 별이 모조리 떨어질지라도"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 26, "end": 27},
+            {"paragraphId": "p4", "start": 14, "end": 15},
+            {"paragraphId": "p4", "start": 19, "end": 20}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "너는 무엇을 지녔다고 하나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 26,
-              "end": 27
-            },
-            {
-              "paragraphId": "p4",
-              "start": 14,
-              "end": 15
-            },
-            {
-              "paragraphId": "p4",
-              "start": 19,
-              "end": 20
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "감탄사를 활용하여 화자의 정서를 직접 드러낸 영탄법 표현을 본문에서 찾으시오",
+          "answerText": "오 너는",
           "answerMatchMode": "ANY",
-          "answerText": "너"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 17, "end": 21}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "작가는 누구인가요?",
+          "prompt": "동일한 통사 구조를 반복하여 종말의 이미지를 강조한 세 행을 본문에서 찾으시오",
+          "answerText": "하늘이 무너지고\n지구가 정지하고\n푸른 별이 모조리 떨어질지라도",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 23,
-              "end": 26
-            }
+            {"paragraphId": "p3", "start": 21, "end": 55}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "신석정"
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "밤은 어떻게 이어진다고 하나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 18
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "이 작품의 작가를 본문에서 찾으시오",
+          "answerText": "신석정",
           "answerMatchMode": "ANY",
-          "answerText": "밤이 이대로 억만 년이야 갈리라구"
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 23, "end": 26}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "화자가 '너'를 향해 그래도 서럽지 않다고 한 까닭을 본문에서 찾으시오",
+          "answerText": "아직 고운 심장을 지녔거니",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 22, "end": 36}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

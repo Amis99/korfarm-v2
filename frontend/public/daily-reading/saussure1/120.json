@@ -552,14 +552,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "입구에서 본 멋진 건물은?",
-          "answerText": "기와집",
-          "answerMatchMode": "EXACT",
+          "prompt": "사물의 이치를 잘 알아 옳고 그름을 가려내는 슬기로움을 두 글자로 무엇이라고 하나요? 지문에서 찾아 보세요",
+          "answerText": "지혜",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 43,
-              "end": 46
+              "paragraphId": "p2",
+              "start": 15,
+              "end": 17
             }
           ],
           "scoring": {
@@ -571,14 +571,19 @@
         },
         {
           "id": "q2",
-          "prompt": "안에서 본 손부채와 붓은?",
-          "answerText": "부채",
-          "answerMatchMode": "EXACT",
+          "prompt": "박물관 안에서 옛날 사람들이 썼던 두 가지 물건을 모두 찾아 적어 보세요",
+          "answerText": "부채, 붓",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 78,
               "end": 80
+            },
+            {
+              "paragraphId": "p1",
+              "start": 82,
+              "end": 83
             }
           ],
           "scoring": {
@@ -590,14 +595,38 @@
         },
         {
           "id": "q3",
-          "prompt": "나무로 만든 신기한 기구?",
-          "answerText": "농사",
-          "answerMatchMode": "EXACT",
+          "prompt": "옛날 물건들을 만들고 사용한 우리의 옛 어른들을 무엇이라고 부르나요? 지문에서 찾아 보세요",
+          "answerText": "조상",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 95,
+              "end": 97
+            },
+            {
+              "paragraphId": "p2",
+              "start": 10,
+              "end": 12
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "박물관 견학을 통해 '우리 □□가 소중하다'는 것을 배웠다고 했어요. □□에 들어갈 두 글자는?",
+          "answerText": "역사",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 36,
-              "end": 38
+              "start": 68,
+              "end": 70
             }
           ],
           "scoring": {

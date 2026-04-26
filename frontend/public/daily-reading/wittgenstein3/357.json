@@ -571,11 +571,81 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 문법 현상을 어떤 배경이나 문제의식에서 제시하는가?",
+          "prompt": "두음 법칙의 뜻을 설명한 부분을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
+              "start": 7,
+              "end": 51
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "한자어가 단어 첫머리에 올 때 특정 자음이 한국어 음운 체계에 맞게 바뀌는 현상"
+        },
+        {
+          "id": "q2",
+          "prompt": "1문단에서 두음 법칙의 핵심 쟁점으로 제시한 내용을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 163,
+              "end": 183
+            },
+            {
+              "paragraphId": "p1",
+              "start": 187,
+              "end": 209
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "첫머리의 ㄴ과 ㄹ이 어떻게 교체되는지",
+            "왜 합성어 내부에서는 그 교체가 멈추는지"
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "ㄴ이 탈락하려면 함께 갖추어져야 하는 조건을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 126,
+              "end": 139
+            },
+            {
+              "paragraphId": "p2",
+              "start": 141,
+              "end": 151
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "한자어의 첫머리라는 조건",
+            "뒤따르는 모음 환경"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "두음 법칙이 자음 하나만 보고 결정되지 않는 이유가 드러난 어구를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 198,
               "end": 221
             }
           ],
@@ -585,70 +655,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "두음 법칙은 한자어가 단어 첫머리에 올 때 특정 자음이 한국어 음운 체계에 맞게 바뀌는 현상을 가리킨다. 이 규칙을 이해할 때 중요한 점은 단순히 \"처음 소리가 달라진다\"고 외우는 것이 아니라, 어떤 환경에서만 바뀌고 어떤 환경에서는 바뀌지 않는지를 형태 구조와 함께 살피는 데 있다. 특히 첫머리의 ㄴ과 ㄹ이 어떻게 교체되는지, 또 왜 합성어 내부에서는 그 교체가 멈추는지가 핵심 쟁점이 된다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 첫 판별 기준이나 기본 원리를 어떻게 설명하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 224
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "먼저 ㄴ은 한자어 첫머리에서 ㅣ나 반모음 j 계열 모음 앞에 올 때 탈락하는 경우가 많다. 그래서 여자, 요리, 유대, 이익처럼 적고 읽지, 녀자, 뇨리, 뉴대, 니익처럼 두지 않는다. 이때 모든 ㄴ이 사라지는 것은 아니고, 한자어의 첫머리라는 조건과 뒤따르는 모음 환경이 함께 갖추어져야 한다. 즉 두음 법칙은 자음 하나만 보고 결정되는 현상이 아니라 음운 환경과 어휘 부류가 함께 작용한 결과이다."
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단은 해당 현상의 작동 방식이나 예시를 무엇으로 보여 주는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 219
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "ㄹ의 경우에는 교체 양상이 조금 더 복잡하다. 한자어 첫머리의 ㄹ은 모음 앞에서 대체로 ㄴ으로 바뀌거나, 다시 ㄴ이 두음 법칙의 적용을 받아 사라지기도 한다. 그래서 낙원, 노동, 내일처럼 나타나기도 하고, 역사, 유리, 요량처럼 적히기도 한다. 결국 ㄹ은 뒤에 오는 모음의 종류에 따라 ㄴ으로 실현되거나 아예 탈락한 형태로 굳어지는데, 이 역시 단어의 첫머리라는 위치가 전제되어야 성립한다."
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단은 구별점이나 추가 조건을 어떤 방향으로 드러내는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 228
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그런데 같은 한자어 요소라도 합성어 내부에 들어가면 두음 법칙이 적용되지 않는 경우가 많다. 대표적으로 남녀, 신라, 공로, 의류 같은 말에서는 둘째 요소의 첫머리에 원래 자음이 남아 있다. 이는 두음 법칙이 형태소 일반에 무차별적으로 적용되는 규칙이 아니라, 독립된 단어의 첫머리에서 작동하는 규범이라는 점을 보여 준다. 따라서 여성은 되지만 남여는 안 되고, 노동은 되지만 근로는 그대로 유지되는 것이다."
+          "answerText": "음운 환경과 어휘 부류가 함께 작용한 결과"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 해석상의 주의점이나 적용 효과를 어떻게 설명하는가?",
+          "prompt": "ㄹ이 뒤따르는 모음에 따라 나타나는 두 결과를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 235
+              "paragraphId": "p3",
+              "start": 161,
+              "end": 170
+            },
+            {
+              "paragraphId": "p3",
+              "start": 171,
+              "end": 187
             }
           ],
           "scoring": {
@@ -656,17 +677,58 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 차이는 결국 단어 경계와 합성어 내부 구조를 어떻게 보느냐와 연결된다. 발음만 비슷하다고 해서 언제나 같은 규칙을 적용할 수는 없고, 그 말이 하나의 단어로 시작하느냐, 아니면 이미 앞선 요소 뒤에 이어 붙은 둘째 성분이냐를 따져야 한다. 두음 법칙이 합성어 내부에서 비적용되는 이유는 둘째 성분의 ㄴ·ㄹ이 더 이상 \"단어 첫머리\"에 있지 않기 때문이다. 즉 형태론적 위치가 음운 규칙의 적용 범위를 제한하는 셈이다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "ㄴ으로 실현되거나",
+            "아예 탈락한 형태로 굳어지는데"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 이 문법 주제를 어떤 관점에서 정리하는가?",
+          "prompt": "합성어 내부에서 둘째 요소의 원래 자음이 남아 있는 예를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 240
+              "paragraphId": "p4",
+              "start": 58,
+              "end": 60
+            },
+            {
+              "paragraphId": "p4",
+              "start": 62,
+              "end": 64
+            },
+            {
+              "paragraphId": "p4",
+              "start": 66,
+              "end": 68
+            },
+            {
+              "paragraphId": "p4",
+              "start": 70,
+              "end": 72
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "남녀",
+            "신라",
+            "공로",
+            "의류"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "두음 법칙이 합성어 내부에서 비적용되는 이유를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 162,
+              "end": 197
             }
           ],
           "scoring": {
@@ -675,7 +737,44 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정리하면, 두음 법칙은 한자어 첫머리의 ㄴ과 ㄹ이 특정 모음 환경에서 교체되도록 하는 규범이지만, 그 적용 범위는 어디까지나 단어의 맨 앞이다. 그래서 이 규칙을 정확히 이해하려면 ㄴ의 탈락과 ㄹ의 교체 양상만 외울 것이 아니라, 한자어 여부, 뒤따르는 모음, 그리고 합성어 내부인지 아닌지를 함께 판별해야 한다. 두음 법칙은 음운 현상이면서도 동시에 형태 구조를 드러내는 규칙이라는 점에서 고급 문법 학습의 중요한 사례가 된다."
+          "answerText": "둘째 성분의 ㄴ·ㄹ이 더 이상 \"단어 첫머리\"에 있지 않기 때문"
+        },
+        {
+          "id": "q8",
+          "prompt": "두음 법칙을 정확히 이해하려면 함께 판별해야 할 요소를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 141,
+              "end": 148
+            },
+            {
+              "paragraphId": "p6",
+              "start": 129,
+              "end": 135
+            },
+            {
+              "paragraphId": "p6",
+              "start": 137,
+              "end": 144
+            },
+            {
+              "paragraphId": "p6",
+              "start": 150,
+              "end": 162
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "한자어 여부",
+            "뒤따르는 모음",
+            "합성어 내부인지 아닌지"
+          ]
         }
       ]
     }

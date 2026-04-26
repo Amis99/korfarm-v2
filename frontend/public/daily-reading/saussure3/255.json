@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "몸의 온도를 뜻함은?",
-          "answerText": "체온을",
-          "answerMatchMode": "EXACT",
+          "prompt": "체온을 유지하기 위해 외출할 때 착용한다고 한 것을 지문에서 찾으시오.",
+          "answerText": "목도리와 장갑",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 53,
-              "end": 56
+              "start": 39,
+              "end": 46
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "지켜야 할 행동 방식은?",
-          "answerText": "수칙이",
-          "answerMatchMode": "EXACT",
+          "prompt": "찬 바람에 무엇에 걸리지 않게 주의를 기울인다고 했나요? 지문에서 단어를 찾으시오.",
+          "answerText": "감기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 24,
-              "end": 27
+              "start": 74,
+              "end": 76
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "남을 도와주거나 살핌은?",
-          "answerText": "배려하며",
-          "answerMatchMode": "EXACT",
+          "prompt": "눈길에서는 어디에 손을 넣지 말라고 했나요? 지문에서 단어를 찾으시오.",
+          "answerText": "주머니",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 71,
-              "end": 75
+              "start": 16,
+              "end": 19
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "규칙을 지켜서 보내기로 한 방학을 지문에서 찾으시오.",
+          "answerText": "건강한 겨울 방학",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 68,
+              "end": 77
             }
           ],
           "scoring": {

@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "즐거운 소풍 ( )을 전해요.",
+          "prompt": "친구에게 소풍에서 있었던 일을 알려주는 의미로, 새로운 소식이나 알림을 가리키는 단어를 지문에서 찾아 보세요.",
           "answerText": "소식",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -571,14 +571,14 @@
         },
         {
           "id": "q2",
-          "prompt": "산길의 예쁜 ( )들.",
-          "answerText": "꽃",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 친구에게 나중에 보여주겠다고 약속한 것으로, 소풍에서 카메라로 찍은 것을 가리키는 단어를 찾아 보세요.",
+          "answerText": "사진",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 72,
-              "end": 73
+              "start": 119,
+              "end": 121
             }
           ],
           "scoring": {
@@ -590,9 +590,33 @@
         },
         {
           "id": "q3",
-          "prompt": "( )하게 잘 지내렴.",
+          "prompt": "다음에 가족과 같이 가자고 한 소풍 장소에 많이 있는 것 두 가지를 지문에서 찾아 보세요. (재미있게 탈 수 있는 시설과 시원한 그늘)",
+          "answerText": "놀이 기구, 나무 그늘",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 34,
+              "end": 39
+            },
+            {
+              "paragraphId": "p2",
+              "start": 45,
+              "end": 50
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글쓴이가 편지 마지막에 친구에게 잘 지내라며 빌어준 것으로, 몸의 상태가 튼튼함을 가리키는 단어를 찾아 보세요.",
           "answerText": "건강",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",

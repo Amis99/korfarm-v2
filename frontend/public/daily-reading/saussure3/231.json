@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "얼굴에 나타나는 감정은?",
-          "answerText": "표정을",
-          "answerMatchMode": "EXACT",
+          "prompt": "좋은 친구 관계를 맺기 위해 해야 할 일을 나타낸 구절을 지문에서 찾으시오.",
+          "answerText": "친구를 자세히 관찰해야 합니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 79,
-              "end": 82
+              "start": 18,
+              "end": 34
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "남을 도와주거나 살핌은?",
-          "answerText": "배려가",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구가 슬플 때 건네는 말을 나타낸 구절을 지문에서 찾으시오.",
+          "answerText": "따뜻한 위로의 말",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 34,
-              "end": 37
+              "start": 14,
+              "end": 23
             }
           ],
           "scoring": {
@@ -625,14 +625,41 @@
         },
         {
           "id": "q3",
-          "prompt": "굳게 믿고 의지하는 마음?",
-          "answerText": "신뢰를",
-          "answerMatchMode": "EXACT",
+          "prompt": "작은 배려가 쌓는 것을 지문에서 찾으시오.",
+          "answerText": "친구 사이의 신뢰",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 45,
-              "end": 48
+              "start": 38,
+              "end": 47
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "친구를 대하는 마음과 만들어 갈 친구 관계를 모두 찾으시오.",
+          "answerTexts": [
+            "친구를 아끼고 존중하는 마음",
+            "함께 성장하는 즐거운 친구 관계"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 4,
+              "end": 19
+            },
+            {
+              "paragraphId": "p3",
+              "start": 66,
+              "end": 83
             }
           ],
           "scoring": {

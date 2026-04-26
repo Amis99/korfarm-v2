@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "안전한 ( )에서만 지켜봅시다.",
-          "answerText": "인도",
-          "answerMatchMode": "EXACT",
+          "prompt": "민들레 씨앗을 따라가다 하지 말아야 할 위험한 행동을 본문에서 찾으시오.",
+          "answerText": "도로로 갑자기 뛰어들면 위험함",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 89,
-              "end": 91
+              "start": 33,
+              "end": 49
             }
           ],
           "scoring": {
@@ -869,14 +869,22 @@
         },
         {
           "id": "q2",
-          "prompt": "나무에 ( ) 행동은 위험해요.",
-          "answerText": "올라가는",
-          "answerMatchMode": "EXACT",
+          "prompt": "차가 다니는 길가에서 지켜야 할 태도를 모두 찾으시오.",
+          "answerTexts": [
+            "차가 다니는 길가에서는",
+            "항상 조심해야 합니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 35,
-              "end": 39
+              "paragraphId": "p1",
+              "start": 51,
+              "end": 63
+            },
+            {
+              "paragraphId": "p1",
+              "start": 64,
+              "end": 75
             }
           ],
           "scoring": {
@@ -888,14 +896,41 @@
         },
         {
           "id": "q3",
-          "prompt": "안전이 ( )라는 걸 잊지 마요.",
-          "answerText": "먼저",
-          "answerMatchMode": "EXACT",
+          "prompt": "높은 곳에 있는 씨앗을 잡으려 할 때 하지 말아야 할 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "매달리지 않음",
+            "나무나 담장에 올라가는 행동"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 113,
-              "end": 115
+              "paragraphId": "p2",
+              "start": 18,
+              "end": 25
+            },
+            {
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 42
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "민들레 씨앗을 불 때 친구에게 하지 않도록 주의할 일을 본문에서 찾으시오.",
+          "answerText": "친구의 얼굴을 향해 씨앗을 날리지 않도록 주의함",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 25,
+              "end": 51
             }
           ],
           "scoring": {

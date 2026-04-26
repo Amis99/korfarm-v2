@@ -557,14 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "미술관에서 작품의 의미와 역사에 대해 친절하게 설명해 주시는 선생님은?",
-          "answerText": "도슨트",
-          "answerMatchMode": "EXACT",
+          "prompt": "가족이 주말에 방문한 곳을 지문에서 찾으시오.",
+          "answerText": "현대 미술관",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 91,
-              "end": 94
+              "start": 28,
+              "end": 34
             }
           ],
           "scoring": {
@@ -576,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "눈에 보이는 사물을 똑같이 그리지 않고 점, 선, 면 등으로 화가의 감정을 표현한 그림은?",
-          "answerText": "추상화",
-          "answerMatchMode": "EXACT",
+          "prompt": "미술관 벽에 있던 색깔을 나타내는 어구를 찾으시오.",
+          "answerText": "알록달록한 색깔",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 27,
-              "end": 30
+              "paragraphId": "p1",
+              "start": 52,
+              "end": 60
             }
           ],
           "scoring": {
@@ -595,9 +595,28 @@
         },
         {
           "id": "q3",
-          "prompt": "여행을 하거나 새로운 곳을 방문한 뒤에 보고 들은 내용과 느낌을 기록한 글은?",
+          "prompt": "화가에게서 느껴진 마음을 나타내는 어구를 찾으시오.",
+          "answerText": "슬픈 마음",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 73,
+              "end": 78
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "관람을 마친 뒤 감동을 잊지 않으려고 쓴 글을 찾으시오.",
           "answerText": "기행문",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",

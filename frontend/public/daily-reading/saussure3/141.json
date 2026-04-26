@@ -557,19 +557,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "땅속의 마그마가 지표면 밖으로 뿜어져 나올 때 흘러내리는 뜨거운 액체는?",
-          "answerText": "용암",
-          "answerMatchMode": "EXACT",
+          "prompt": "지진과 화산이 일어나는 과정을 관찰할 때 사용한 것은?",
+          "answerText": "모형",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
+              "paragraphId": "p1",
               "start": 28,
               "end": 30
             },
             {
               "paragraphId": "p2",
-              "start": 44,
-              "end": 46
+              "start": 6,
+              "end": 8
             }
           ],
           "scoring": {
@@ -581,14 +581,28 @@
         },
         {
           "id": "q2",
-          "prompt": "자연 재해로부터 안전한 곳을 파악하기 위해 우리가 직접 그린 지도는?",
-          "answerText": "안전 지도",
-          "answerMatchMode": "EXACT",
+          "prompt": "관찰한 내용을 무엇과 함께 어디에 어떻게 기록했는지 모두 찾으시오.",
+          "answerTexts": [
+            "그림",
+            "보고서",
+            "상세히"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 21,
-              "end": 26
+              "paragraphId": "p1",
+              "start": 95,
+              "end": 97
+            },
+            {
+              "paragraphId": "p1",
+              "start": 102,
+              "end": 105
+            },
+            {
+              "paragraphId": "p1",
+              "start": 107,
+              "end": 110
             }
           ],
           "scoring": {
@@ -600,29 +614,33 @@
         },
         {
           "id": "q3",
-          "prompt": "어떤 사물을 주의 깊게 살펴보며 변화나 특징을 찾아내는 행동은?",
-          "answerText": "관찰",
-          "answerMatchMode": "EXACT",
+          "prompt": "용암이 마을을 덮치는 모습을 상상하며 토론한 장소는?",
+          "answerText": "안전한 대피 장소",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 35,
-              "end": 37
-            },
-            {
-              "paragraphId": "p1",
-              "start": 87,
-              "end": 89
-            },
+              "paragraphId": "p2",
+              "start": 65,
+              "end": 74
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "지진이 났을 때 대피해야 한다고 확인한 곳은?",
+          "answerText": "운동장",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p3",
-              "start": 85,
-              "end": 87
+              "start": 49,
+              "end": 52
             }
           ],
           "scoring": {

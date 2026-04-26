@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "고양이는 ( )한 몸을 가졌습니다.",
-          "answerText": "유연",
-          "answerMatchMode": "EXACT",
+          "prompt": "담장 위에서 고양이가 무엇을 하고 있는지 나타내는 구절을 찾으시오.",
+          "answerText": "햇볕을 쬐는",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 33,
-              "end": 35
+              "start": 7,
+              "end": 13
             }
           ],
           "scoring": {
@@ -869,19 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "뾰족한 ( )는 예민하게 움직여요.",
-          "answerText": "귀",
-          "answerMatchMode": "EXACT",
+          "prompt": "고양이의 몸이 어떤지 나타내는 말을 지문에서 찾으시오.",
+          "answerText": "유연한",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 67,
-              "end": 68
-            },
-            {
-              "paragraphId": "p2",
-              "start": 98,
-              "end": 99
+              "start": 33,
+              "end": 36
             }
           ],
           "scoring": {
@@ -893,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "생명을 ( ) 여기는 마음을 가져요.",
-          "answerText": "귀하게",
-          "answerMatchMode": "EXACT",
+          "prompt": "고양이를 멀리서 어떤 눈빛으로 바라보며 인사를 나누는지 지문에서 찾으시오.",
+          "answerText": "다정한 눈빛으로",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 98,
-              "end": 101
+              "start": 58,
+              "end": 66
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "일기에 가득 담기는 마음을 나타낸 구절을 지문에서 찾으시오.",
+          "answerText": "생명을 소중히 하는 마음",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 56,
+              "end": 69
             }
           ],
           "scoring": {

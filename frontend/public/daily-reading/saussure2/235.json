@@ -673,118 +673,74 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "프로그램이 우리가 원하는 대로 움직이지 않을 때 생긴 오류나 실수를 부르는 말은 무엇인가요?",
-          "answerText": "버그",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 96,
-              "end": 98
-            },
-            {
-              "paragraphId": "p1",
-              "start": 174,
-              "end": 176
-            },
-            {
-              "paragraphId": "p2",
-              "start": 32,
-              "end": 34
-            },
-            {
-              "paragraphId": "p2",
-              "start": 63,
-              "end": 65
-            },
-            {
-              "paragraphId": "p3",
-              "start": 13,
-              "end": 15
-            },
-            {
-              "paragraphId": "p3",
-              "start": 63,
-              "end": 65
-            },
-            {
-              "paragraphId": "p3",
-              "start": 78,
-              "end": 80
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
+        "prompt": "버그가 무엇인지 설명한 부분을 지문에서 찾으시오.",
+        "answerText": "프로그램에 생긴 오류나 실수",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p1",
+            "start": 78,
+            "end": 93
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
         },
-        {
-          "id": "q2",
-          "prompt": "프로그램 속에 숨어 있는 버그를 찾아서 올바르게 고치는 과정을 무엇이라고 하나요?",
-          "answerText": "디버깅",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 85,
-              "end": 88
-            },
-            {
-              "paragraphId": "p2",
-              "start": 97,
-              "end": 100
-            },
-            {
-              "paragraphId": "p3",
-              "start": 149,
-              "end": 152
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
+        "revealOnWrong": true
+      },
+      {
+        "id": "q2",
+        "prompt": "디버깅이 무엇인지 설명한 부분을 지문에서 찾으시오.",
+        "answerText": "프로그램 속에 숨어 있는 버그를 찾아서 올바르게 고치는 과정",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p2",
+            "start": 49,
+            "end": 82
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
         },
-        {
-          "id": "q3",
-          "prompt": "오류가 생겼을 때 실수를 찾아내려면 누구처럼 코드를 꼼꼼하게 살펴보아야 하나요?",
-          "answerText": "탐정",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 114,
-              "end": 116
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
+        "revealOnWrong": true
+      },
+      {
+        "id": "q3",
+        "prompt": "디버깅을 할 때 코드를 어떻게 살펴보아야 하는지 지문에서 찾으시오.",
+        "answerText": "코드를 처음부터 끝까지 꼼꼼하게 살펴보아야 해요",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p2",
+            "start": 119,
+            "end": 145
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
         },
-        {
-          "id": "q4",
-          "prompt": "버그를 고치는 일은 코딩을 실패했다는 뜻이 아니라 어떤 프로그램을 만들기 위한 과정인가요?",
-          "answerText": "완벽한",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 102,
-              "end": 105
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+        "revealOnWrong": true
+      },
+      {
+        "id": "q4",
+        "prompt": "버그가 코딩 실패가 아니라 어떤 과정인지 지문에서 찾으시오.",
+        "answerText": "더 완벽한 프로그램을 만들기 위해 꼭 거쳐야 하는 과정",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p3",
+            "start": 100,
+            "end": 130
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
+        },
           "revealOnWrong": true
         }
       ]

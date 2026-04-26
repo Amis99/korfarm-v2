@@ -955,14 +955,28 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "톰의 마음을 단번에 빼앗은 사람은 누구인가요?",
-          "answerText": "아름다운 소녀",
-          "answerMatchMode": "ANY",
+          "prompt": "톰이 본 소녀의 모습이 드러난 부분을 모두 찾으시오.",
+          "answerTexts": [
+            "낯선 소녀",
+            "노란 땋은 머리",
+            "푸른색 눈"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 107,
-              "end": 114
+              "start": 61,
+              "end": 66
+            },
+            {
+              "paragraphId": "p1",
+              "start": 87,
+              "end": 95
+            },
+            {
+              "paragraphId": "p1",
+              "start": 97,
+              "end": 102
             }
           ],
           "scoring": {
@@ -973,14 +987,22 @@
         },
         {
           "id": "q2",
-          "prompt": "새로 이사 온 판사의 딸 이름은 무엇인가요?",
-          "answerText": "베키 대처",
-          "answerMatchMode": "ANY",
+          "prompt": "톰이 베키 옆에 앉기 위해 한 일과 앉은 자리를 모두 찾으시오.",
+          "answerTexts": [
+            "일부러 지각을 하여",
+            "소녀의 옆자리"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 102,
-              "end": 107
+              "start": 11,
+              "end": 21
+            },
+            {
+              "paragraphId": "p2",
+              "start": 77,
+              "end": 84
             }
           ],
           "scoring": {
@@ -991,14 +1013,22 @@
         },
         {
           "id": "q3",
-          "prompt": "베키가 보고 미소 지은 것은 무엇인가요?",
-          "answerText": "우스꽝스러운 그림",
-          "answerMatchMode": "ANY",
+          "prompt": "소녀의 이름과 신분을 모두 찾으시오.",
+          "answerTexts": [
+            "베키 대처",
+            "판사의 딸"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 60,
-              "end": 69
+              "paragraphId": "p2",
+              "start": 102,
+              "end": 107
+            },
+            {
+              "paragraphId": "p2",
+              "start": 122,
+              "end": 127
             }
           ],
           "scoring": {
@@ -1009,10 +1039,18 @@
         },
         {
           "id": "q4",
-          "prompt": "톰이 베키에게 건넨 것은 무엇인가요?",
-          "answerText": "자신이 가장 아끼는 선물",
-          "answerMatchMode": "ANY",
+          "prompt": "톰이 베키의 관심을 끌기 위해 보여 주거나 건넨 것을 모두 찾으시오.",
+          "answerTexts": [
+            "우스꽝스러운 그림",
+            "자신이 가장 아끼는 선물"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 60,
+              "end": 69
+            },
             {
               "paragraphId": "p3",
               "start": 100,
@@ -1027,7 +1065,7 @@
         },
         {
           "id": "q5",
-          "prompt": "톰의 학교생활을 바꾸어 놓은 기운은 무엇인가요?",
+          "prompt": "톰의 학교생활을 바꾸어 놓은 기운을 찾으시오.",
           "answerText": "풋풋한 첫사랑의 기운",
           "answerMatchMode": "ANY",
           "answerRanges": [

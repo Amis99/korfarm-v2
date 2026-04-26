@@ -587,14 +587,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "몸으로 겪어보는 일은?",
-          "answerText": "체험을",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리가 다녀온 곳과 탄 것을 모두 찾으시오.",
+          "answerTexts": [
+            "눈썰매장",
+            "쌩쌩 눈썰매"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 74,
-              "end": 77
+              "start": 14,
+              "end": 18
+            },
+            {
+              "paragraphId": "p1",
+              "start": 28,
+              "end": 34
             }
           ],
           "scoring": {
@@ -606,14 +614,14 @@
         },
         {
           "id": "q2",
-          "prompt": "지켜야 할 행동 방식은?",
-          "answerText": "수칙을",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구와 한 시합의 내용을 찾으시오.",
+          "answerText": "누가 더 빨리 내려가는지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 64,
-              "end": 67
+              "start": 4,
+              "end": 17
             }
           ],
           "scoring": {
@@ -625,14 +633,41 @@
         },
         {
           "id": "q3",
-          "prompt": "순서를 지키는 상태는?",
-          "answerText": "질서",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리가 지킨 것과 행동한 모습을 모두 찾으시오.",
+          "answerTexts": [
+            "안전 수칙",
+            "질서 있게 행동했습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
+              "start": 61,
+              "end": 66
+            },
+            {
+              "paragraphId": "p2",
               "start": 72,
-              "end": 74
+              "end": 84
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "집에 돌아와 일기에 그린 것을 찾으시오.",
+          "answerText": "썰매 타는 모습",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 8,
+              "end": 16
             }
           ],
           "scoring": {

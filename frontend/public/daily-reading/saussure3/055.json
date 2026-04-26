@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "부모와 아직 결혼하지 않은 자녀가 함께 살아가는 제일 흔한 가족의 형태로, 인원수가 적어 결정이 빠른 가족은?",
+          "prompt": "부모와 자녀가 함께 사는 제일 흔한 가족 형태를 지문에서 찾으시오.",
           "answerText": "핵가족",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -581,9 +581,9 @@
         },
         {
           "id": "q2",
-          "prompt": "할아버지, 할머니부터 손자, 손녀까지 3대 이상이 함께 모여 살며, 어른들로부터 삶의 지혜를 배울 수 있는 가족은?",
+          "prompt": "조부모부터 손자까지 3대 이상이 함께 사는 형태를 지문에서 무엇이라고 부르는지 찾으시오.",
           "answerText": "확대 가족",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -605,14 +605,41 @@
         },
         {
           "id": "q3",
-          "prompt": "가족의 형태가 달라도 제일 중요한 것은 모든 가족 구성원이 서로를 진심으로 이해하고 사랑하며 이 마음을 가지는 것입니다.",
-          "answerText": "아끼는 마음",
-          "answerMatchMode": "EXACT",
+          "prompt": "핵가족에서 맞벌이를 할 경우 부족하다고 한 사람을 지문에서 찾으시오.",
+          "answerText": "아이를 돌볼 사람",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 102,
-              "end": 108
+              "paragraphId": "p2",
+              "start": 54,
+              "end": 63
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "확대 가족에서 어른들로부터 배울 수 있다고 한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "예절",
+            "지혜"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 95,
+              "end": 97
+            },
+            {
+              "paragraphId": "p2",
+              "start": 99,
+              "end": 101
             }
           ],
           "scoring": {

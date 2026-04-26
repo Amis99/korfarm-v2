@@ -913,34 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "새로운 소식이나 사실을 알리기 위해 쓰는 글은 무엇인가요?",
-          "answerText": "기사문",
+          "prompt": "글의 종류가 무엇에 따라 달라진다고 했나요?",
+          "answerText": "목적에 따라",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 67,
-              "end": 70
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p3",
-              "start": 5,
-              "end": 8
-            },
-            {
-              "paragraphId": "p4",
-              "start": 4,
-              "end": 7
-            },
-            {
-              "paragraphId": "p4",
-              "start": 60,
-              "end": 63
+              "start": 12,
+              "end": 18
             }
           ],
           "scoring": {
@@ -951,34 +931,14 @@
         },
         {
           "id": "q2",
-          "prompt": "겪은 일이나 중요한 사실을 남겨 두는 글은 무엇인가요?",
-          "answerText": "기록문",
+          "prompt": "기사문에서 사람들의 관심을 끌 수 있도록 맨 앞에 쓰는 것은 무엇인가요?",
+          "answerText": "가장 중요한 내용",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 124,
-              "end": 127
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p3",
-              "start": 66,
-              "end": 69
-            },
-            {
-              "paragraphId": "p4",
-              "start": 29,
-              "end": 32
-            },
-            {
-              "paragraphId": "p4",
-              "start": 102,
-              "end": 105
+              "paragraphId": "p2",
+              "start": 77,
+              "end": 86
             }
           ],
           "scoring": {
@@ -989,10 +949,24 @@
         },
         {
           "id": "q3",
-          "prompt": "기록문의 예로 나온 글 가운데 회의 내용을 적은 것은 무엇인가요?",
-          "answerText": "회의록",
-          "answerMatchMode": "ANY",
+          "prompt": "기록문에 속하는 글의 예로 든 것을 모두 찾으시오.",
+          "answerTexts": [
+            "관찰 일기",
+            "역사책",
+            "회의록"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 40,
+              "end": 45
+            },
+            {
+              "paragraphId": "p3",
+              "start": 47,
+              "end": 50
+            },
             {
               "paragraphId": "p3",
               "start": 52,
@@ -1007,14 +981,14 @@
         },
         {
           "id": "q4",
-          "prompt": "기사문은 자신의 생각을 넣지 않고 어떻게 전달해야 하나요?",
-          "answerText": "객관적으로",
+          "prompt": "기사문은 자신의 생각이나 느낌을 넣지 않고 오직 무엇만을 전달해야 하나요?",
+          "answerText": "일어난 사실만",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 140,
-              "end": 145
+              "start": 131,
+              "end": 138
             }
           ],
           "scoring": {
@@ -1025,14 +999,14 @@
         },
         {
           "id": "q5",
-          "prompt": "기록문은 어떤 순서대로 적는 것이 특징인가요?",
-          "answerText": "시간 순서",
+          "prompt": "기록문의 목적은 사실을 어떻게 하는 것인가요?",
+          "answerText": "오래 보존하는 것",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 89,
-              "end": 94
+              "paragraphId": "p4",
+              "start": 38,
+              "end": 47
             }
           ],
           "scoring": {

@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 글을 쓰게 된 문제의식이나 제안 배경을 어떻게 밝히는가?",
+          "prompt": "북토크 행사를 준비한 목적을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 178
+              "start": 76,
+              "end": 108
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "우리 학교 독서동아리는 이번 달에 지역 서점과 함께 북토크 행사를 열 예정이다. 이 행사는 학생들이 책을 단지 읽는 데서 그치지 않고, 책을 둘러싼 생각을 직접 나누고 질문할 기회를 만들기 위해 준비되었다. 특히 학교 밖 공간에서 열리는 행사라는 점에서 평소 교실 안 독서 활동과는 조금 다른 분위기를 기대할 수 있다."
+          "answerText": "책을 둘러싼 생각을 직접 나누고 질문할 기회를 만들기 위해"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 현재 상황이나 조사 내용을 어떤 방향으로 제시하는가?",
+          "prompt": "행사가 진행될 장소 이름을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 215
+              "start": 14,
+              "end": 25
             }
           ],
           "scoring": {
@@ -603,16 +603,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "행사는 학교 근처에 있는 '페이지 사이 서점'에서 진행되며, 서점 대표와 청소년 소설을 꾸준히 읽어 온 지역 독서모임 운영자가 함께 이야기를 이끌 예정이다. 처음에는 작가를 초청하는 방안도 검토했지만 일정상 어렵게 되어, 대신 책을 오래 읽고 소개해 온 사람들과 학생이 만나는 방식으로 바꾸었다. 이 부분은 아쉽기도 하지만 오히려 질문을 더 편하게 할 수 있다는 장점도 있을 것 같다."
+          "answerText": "'페이지 사이 서점'"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 첫 개선안이나 핵심 근거를 무엇으로 설명하는가?",
+          "prompt": "행사에서 이야기를 이끌 두 대상을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 226
+              "paragraphId": "p2",
+              "start": 34,
+              "end": 39
+            },
+            {
+              "paragraphId": "p2",
+              "start": 58,
+              "end": 69
             }
           ],
           "scoring": {
@@ -620,17 +625,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이번 북토크의 중심 도서는 청소년의 선택과 책임을 다룬 소설 한 편으로 정했는데, 아직 최종 제목을 안내문에 먼저 쓰는 게 좋은지 조금 더 고민 중이다. 행사에서는 책 줄거리를 길게 설명하기보다, 등장인물이 어떤 장면에서 왜 다른 선택을 했는지, 독자는 그 선택을 어떻게 받아들였는지를 중심으로 이야기를 나눌 예정이다. 다만 이 문장이 지금은 조금 딱딱해서 행사 분위기가 잘 안 드러나는 것 같기도 하다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "서점 대표",
+            "지역 독서모임 운영자"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단은 추가 제안이나 고려할 점을 어떤 이유와 함께 내놓는가?",
+          "prompt": "작가 초청 방안을 바꾸게 된 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 231
+              "paragraphId": "p2",
+              "start": 112,
+              "end": 122
             }
           ],
           "scoring": {
@@ -639,16 +647,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "참가 대상은 1, 2학년 희망 학생 25명 내외로 생각하고 있고, 신청 인원이 많으면 간단한 신청 이유를 받아 조정할 계획이다. 북토크는 단순히 듣기만 하는 방식이 아니라, 앞부분에서는 진행자의 질문을 듣고 뒤에서는 학생들이 직접 질문하거나 짧은 소감을 말하는 시간도 넣으려고 한다. 그런데 설명 순서상 장소, 인원, 활동 내용을 어디에 먼저 두는 것이 읽는 사람에게 더 잘 들어올지는 다시 정리해야 할 것 같다."
+          "answerText": "일정상 어렵게 되어"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 실행 조건이나 예상되는 우려를 어떻게 따져 보는가?",
+          "prompt": "행사에서 중심으로 나눌 이야기를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 192
+              "paragraphId": "p3",
+              "start": 110,
+              "end": 136
+            },
+            {
+              "paragraphId": "p3",
+              "start": 138,
+              "end": 158
             }
           ],
           "scoring": {
@@ -656,17 +669,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 행사를 통해 학생들은 책 한 권을 여러 시선으로 읽는 경험을 하게 될 것이다. 또 지역 서점이 단순히 책을 파는 곳이 아니라 사람들의 이야기가 오가는 문화 공간이라는 점도 자연스럽게 알 수 있을 것이라고 본다. 다만 지금 초고는 이런 기대 효과를 조금 길게 쓴 편이라, 실제 안내문에서는 너무 홍보 문구처럼 보이지 않게 조절할 필요가 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "등장인물이 어떤 장면에서 왜 다른 선택을 했는지",
+            "독자는 그 선택을 어떻게 받아들였는지"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 결론과 요청을 어떤 방향으로 마무리하는가?",
+          "prompt": "북토크의 참가 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 232
+              "paragraphId": "p4",
+              "start": 7,
+              "end": 26
             }
           ],
           "scoring": {
@@ -675,7 +691,59 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "북토크는 다음 달 셋째 주 금요일 방과 후에 열 예정이며, 자세한 신청 방법은 추후 학교 게시판과 독서동아리 공지를 통해 다시 안내할 계획이다. 책을 좋아하는 학생뿐 아니라 평소 혼자 책 읽기가 어렵다고 느끼는 학생에게도 부담 없이 열려 있는 자리라는 점을 함께 강조하고 싶다. 전체적으로는 행사 취지와 운영 방식이 들어가 있지만, 제목 노출 순서와 도서 소개 부분을 더 다듬으면 소개문으로서 더 분명해질 것 같다."
+          "answerText": "1, 2학년 희망 학생 25명 내외"
+        },
+        {
+          "id": "q7",
+          "prompt": "북토크에서 단순히 듣기만 하지 않도록 넣으려는 활동을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 104,
+              "end": 115
+            },
+            {
+              "paragraphId": "p4",
+              "start": 121,
+              "end": 148
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "진행자의 질문을 듣고",
+            "학생들이 직접 질문하거나 짧은 소감을 말하는 시간"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "소개문을 더 분명하게 만들기 위해 다듬을 부분을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 186,
+              "end": 194
+            },
+            {
+              "paragraphId": "p6",
+              "start": 196,
+              "end": 204
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "제목 노출 순서",
+            "도서 소개 부분"
+          ]
         }
       ]
     }

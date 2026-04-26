@@ -557,34 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "물질을 이루고 있는 무척 작은 입자를 무엇이라 하나요?",
-          "answerText": "알갱이",
-          "answerMatchMode": "EXACT",
+          "prompt": "물질이 고체, 액체, 기체로 나뉘는 원리는 무엇에 따라 결정되는지 지문에서 찾으시오.",
+          "answerText": "알갱이들의 거리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 24,
-              "end": 27
-            },
-            {
-              "paragraphId": "p1",
-              "start": 48,
-              "end": 51
-            },
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 7
-            },
-            {
-              "paragraphId": "p2",
-              "start": 48,
-              "end": 51
-            },
-            {
-              "paragraphId": "p2",
-              "start": 95,
-              "end": 98
+              "end": 32
             }
           ],
           "scoring": {
@@ -596,14 +576,28 @@
         },
         {
           "id": "q2",
-          "prompt": "참 낮은 온도에서 얼어 있는 이산화탄소로, 기체로 바로 변하는 물질은?",
-          "answerText": "드라이아이스",
-          "answerMatchMode": "EXACT",
+          "prompt": "고체, 액체, 기체에서 알갱이들이 놓인 상태를 나타내는 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "촘촘하게 붙어 있어",
+            "조금 떨어져 있어",
+            "멀리 퍼져 있어"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 4,
-              "end": 10
+              "paragraphId": "p1",
+              "start": 54,
+              "end": 64
+            },
+            {
+              "paragraphId": "p2",
+              "start": 10,
+              "end": 19
+            },
+            {
+              "paragraphId": "p2",
+              "start": 54,
+              "end": 62
             }
           ],
           "scoring": {
@@ -615,14 +609,33 @@
         },
         {
           "id": "q3",
-          "prompt": "물질이 주변 온도에 따라 고체, 액체, 기체로 모습이 바뀌는 과정은?",
-          "answerText": "상태 변화",
-          "answerMatchMode": "EXACT",
+          "prompt": "액체가 가진 성질을 지문에서 찾으시오.",
+          "answerText": "흐르는 성질",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 30,
+              "end": 36
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "물질이 환경에 따라 자신의 모습을 바꾸며 유지하는 것을 지문에서 찾으시오.",
+          "answerText": "자연의 조화",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 30,
-              "end": 35
+              "start": 71,
+              "end": 77
             }
           ],
           "scoring": {

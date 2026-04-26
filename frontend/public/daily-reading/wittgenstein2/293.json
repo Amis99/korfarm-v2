@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "상계가 무엇인지 설명한 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 183
+              "start": 4,
+              "end": 61
             }
           ],
           "scoring": {
@@ -585,34 +585,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "상계는 서로 같은 종류의 채권과 채무를 가진 당사자가 별도의 실제 지급 없이 대등액만큼 채무를 소멸시키는 제도다. 예를 들어 A가 B에게 물건값을 받을 돈이 있으면서 동시에 B에게 빌린 돈을 갚아야 한다면, 일정한 요건 아래에서 두 금액을 맞물려 정산할 수 있다. 이처럼 상계는 채권 관계를 간단하게 정리하는 수단으로 기능한다."
+          "answerText": "서로 같은 종류의 채권과 채무를 가진 당사자가 별도의 실제 지급 없이 대등액만큼 채무를 소멸시키는 제도"
         },
         {
           "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "prompt": "상계의 장점을 모두 찾으시오.",
+          "answerTexts": [
+            "결제를 단순화하고",
+            "위험을 줄인다는"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 153
+              "start": 8,
+              "end": 17
+            },
+            {
+              "paragraphId": "p2",
+              "start": 18,
+              "end": 26
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "상계의 장점은 결제를 단순화하고 위험을 줄인다는 데 있다. 서로 돈을 주고받는 절차를 따로 거치지 않아도 되므로 거래 비용이 줄고, 상대방의 자력이 불안정할 때도 자신의 채무 부담을 줄일 수 있다. 그래서 상계는 사적 자치와 채권 관계의 신속한 청산을 돕는 제도로 이해된다."
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "prompt": "서로 돈을 주고받는 절차를 따로 거치지 않아도 줄어드는 비용을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 166
+              "paragraphId": "p2",
+              "start": 63,
+              "end": 68
             }
           ],
           "scoring": {
@@ -621,34 +629,72 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "상계를 설명할 때는 자동채권과 수동채권을 구분해야 한다. 자동채권은 상계를 주장하는 사람이 상대방에게 가진 채권이고, 수동채권은 상대방이 그 사람에게 가진 채권이다. 상계의 효과는 두 채권이 서로 마주 보는 구조 속에서 발생하므로, 어느 채권이 자동채권인지 정확히 구분해야 요건 판단도 가능해진다."
+          "answerText": "거래 비용"
         },
         {
           "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
+          "prompt": "상계를 설명할 때 구분해야 하는 채권을 모두 찾으시오.",
+          "answerTexts": [
+            "자동채권",
+            "수동채권"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
+              "paragraphId": "p3",
+              "start": 11,
+              "end": 15
+            },
+            {
+              "paragraphId": "p3",
+              "start": 32,
+              "end": 36
+            },
+            {
+              "paragraphId": "p3",
+              "start": 137,
+              "end": 141
+            },
+            {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 191
+              "start": 131,
+              "end": 135
+            },
+            {
+              "paragraphId": "p6",
+              "start": 75,
+              "end": 79
+            },
+            {
+              "paragraphId": "p3",
+              "start": 17,
+              "end": 21
+            },
+            {
+              "paragraphId": "p3",
+              "start": 66,
+              "end": 70
+            },
+            {
+              "paragraphId": "p6",
+              "start": 81,
+              "end": 85
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "상계가 성립하려면 우선 두 채권이 서로 대립하는 관계에 있어야 하고, 같은 종류의 급부를 목적으로 해야 한다. 금전 채권끼리는 상계가 가능하지만, 금전 채무와 특정 물건을 넘길 의무처럼 급부의 종류가 다르면 상계할 수 없다. 또 특히 자동채권은 변제기가 도래해야 하므로, 아직 기한이 오지 않은 채권만으로는 원칙적으로 상계를 주장할 수 없다."
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "자동채권의 뜻을 설명한 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 166
+              "paragraphId": "p3",
+              "start": 38,
+              "end": 62
             }
           ],
           "scoring": {
@@ -657,16 +703,42 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "모든 채권이 상계 대상이 되는 것도 아니다. 채권의 성질상 상계가 허용되지 않는 경우가 있고, 법률이나 당사자 약정으로 상계가 금지되기도 한다. 고의 불법행위로 인한 손해배상채무처럼 정책적 이유로 상계를 제한하는 경우가 대표적이며, 이는 상계 제도의 편의보다 더 우선하는 가치가 있음을 보여 준다."
+          "answerText": "상계를 주장하는 사람이 상대방에게 가진 채권"
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "상계 성립을 위한 기본 요건을 모두 찾으시오.",
+          "answerTexts": [
+            "두 채권이 서로 대립하는 관계에 있어야 하고",
+            "같은 종류의 급부를 목적으로 해야 한다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 203
+              "paragraphId": "p4",
+              "start": 13,
+              "end": 37
+            },
+            {
+              "paragraphId": "p4",
+              "start": 39,
+              "end": 60
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q7",
+          "prompt": "고의 불법행위로 인한 손해배상채무처럼 상계를 제한하는 까닭을 나타내는 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 102,
+              "end": 108
             }
           ],
           "scoring": {
@@ -675,7 +747,39 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "상계는 상대방에 대한 일방적 의사 표시로 이루어지며, 요건을 갖춘 시점부터 대등액 범위에서 채권과 채무가 소멸한 것으로 본다. 따라서 자동채권과 수동채권의 구별, 변제기 도래 여부, 상계 금지 사유의 존재를 차례로 따져야 상계 가능성을 올바르게 판단할 수 있다. 결국 상계는 단순한 계산 문제가 아니라 채권 관계의 구조를 정확히 읽는 법적 판단의 문제이기도 하다."
+          "answerText": "정책적 이유"
+        },
+        {
+          "id": "q8",
+          "prompt": "상계 가능성을 판단할 때 차례로 따져야 할 사항을 모두 찾으시오.",
+          "answerTexts": [
+            "자동채권과 수동채권의 구별",
+            "변제기 도래 여부",
+            "상계 금지 사유의 존재"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 75,
+              "end": 89
+            },
+            {
+              "paragraphId": "p6",
+              "start": 91,
+              "end": 100
+            },
+            {
+              "paragraphId": "p6",
+              "start": 102,
+              "end": 114
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
         }
       ]
     }

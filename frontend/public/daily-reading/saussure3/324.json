@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "식당은 ( )이 이용하는 곳임.",
-          "answerText": "많은 사람",
-          "answerMatchMode": "EXACT",
+          "prompt": "식당이 어떤 장소인지 나타내는 어구를 찾으시오.",
+          "answerText": "많은 사람이 함께 이용하는 장소",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 31,
-              "end": 36
+              "end": 48
             }
           ],
           "scoring": {
@@ -869,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "음식을 ( ) 맛있게 먹어요.",
-          "answerText": "골고루",
-          "answerMatchMode": "EXACT",
+          "prompt": "음식이 나오기 전까지 어떻게 해야 하는지 나타내는 어구를 찾으시오.",
+          "answerText": "차분하게 기다려야 합니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 4,
-              "end": 7
+              "paragraphId": "p2",
+              "start": 12,
+              "end": 25
             }
           ],
           "scoring": {
@@ -888,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "바른 ( )이 나를 빛나게 해요.",
-          "answerText": "습관",
-          "answerMatchMode": "EXACT",
+          "prompt": "입안에 음식이 있을 때 해야 할 일을 나타내는 어구를 찾으시오.",
+          "answerText": "말을 삼가도록 함",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 105,
-              "end": 107
+              "start": 40,
+              "end": 49
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "식당 예절을 잘 지킨 뒤 받은 결과를 나타내는 어구를 찾으시오.",
+          "answerText": "부모님께서 칭찬하심",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 90,
+              "end": 100
             }
           ],
           "scoring": {

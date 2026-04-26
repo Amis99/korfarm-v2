@@ -548,7 +548,80 @@
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "구름을 만드는 물의 출처를 지문에서 찾으시오.",
+          "answerText": "바다와 강, 호수 등의 물",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 112,
+              "end": 126
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "물이 어떻게 하늘 위로 올라가는지 지문에서 찾으시오.",
+          "answerText": "수증기로 변해 하늘 위로 올라가면서",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 135,
+              "end": 154
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "수증기가 하늘 높이 올라가면 무엇으로 변하는지 지문에서 찾으시오.",
+          "answerText": "아주 작은 물방울이나 얼음 알갱이",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 34,
+              "end": 52
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "하늘 전체를 뒤덮은 두껍고 어두운 구름이 알려 주는 것을 지문에서 찾으시오.",
+          "answerText": "비가 올 가능성이 높다는 신호",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 85,
+              "end": 101
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        }
+      ]
     }
   }
 }

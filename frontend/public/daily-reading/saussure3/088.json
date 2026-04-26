@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "샬롯이 지혜를 짜내어 정성껏 만든 도구로, 윌버를 칭찬하는 글자를 새긴 것은?",
+          "prompt": "샬롯이 글자를 새긴 것을 찾으시오.",
           "answerText": "거미줄",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -581,14 +581,22 @@
         },
         {
           "id": "q2",
-          "prompt": "가을이 되어 샬롯과 윌버가 함께 찾아간 장소로, 윌버가 최고의 돼지로 뽑힌 곳은?",
-          "answerText": "축제장",
-          "answerMatchMode": "EXACT",
+          "prompt": "거미줄 글자를 본 사람들이 윌버를 어떻게 여기고 무엇을 하러 왔는지 모두 찾으시오.",
+          "answerTexts": [
+            "대단한 돼지",
+            "윌버를 보려고"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 68,
-              "end": 71
+              "paragraphId": "p1",
+              "start": 55,
+              "end": 61
+            },
+            {
+              "paragraphId": "p1",
+              "start": 62,
+              "end": 69
             }
           ],
           "scoring": {
@@ -600,14 +608,49 @@
         },
         {
           "id": "q3",
-          "prompt": "윌버가 상을 받으며 샬롯의 도움으로 잃지 않게 된 제일 소중한 것은 무엇인가요?",
-          "answerText": "목숨",
-          "answerMatchMode": "EXACT",
+          "prompt": "샬롯이 거미줄에 만든 더 멋진 글자들을 모두 찾으시오.",
+          "answerTexts": [
+            "눈부신",
+            "겸손한"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 39,
+              "end": 42
+            },
+            {
+              "paragraphId": "p2",
+              "start": 44,
+              "end": 47
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "축제장에서 윌버가 뽑힌 모습과 얻게 된 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "최고의 돼지",
+            "목숨을 완전히 구하게 되었습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
+              "start": 90,
+              "end": 96
+            },
+            {
+              "paragraphId": "p3",
               "start": 110,
-              "end": 112
+              "end": 127
             }
           ],
           "scoring": {

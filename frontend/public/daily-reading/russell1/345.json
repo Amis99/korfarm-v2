@@ -836,93 +836,73 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '홀로이'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 17,
-              "end": 20
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 화자가 부르며 묻는 말의 대상이 되는 인물을 찾으시오.",
+          "answerText": "당신",
           "answerMatchMode": "ANY",
-          "answerText": "홀로이"
+          "answerRanges": [
+            { "paragraphId": "p1", "start": 0, "end": 2 }
+          ],
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "지문에서 '주저앉아서'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 26,
-              "end": 31
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 화자가 홀로 주저앉아 있는 장소를 모두 찾으시오.",
+          "answerText": "개여울",
           "answerMatchMode": "ANY",
-          "answerText": "주저앉아서"
+          "answerRanges": [
+            { "paragraphId": "p1", "start": 21, "end": 24 },
+            { "paragraphId": "p3", "start": 4, "end": 7 }
+          ],
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "지문에서 '헤적일'을 모두 찾으시오.",
+          "prompt": "지문에서 봄의 정경을 보여 주는 시각적 소재를 모두 찾으시오.",
+          "answerText": "파릇한 풀포기, 잔물, 봄바람",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 56,
-              "end": 59
-            }
+            { "paragraphId": "p1", "start": 32, "end": 39 },
+            { "paragraphId": "p1", "start": 47, "end": 49 },
+            { "paragraphId": "p1", "start": 51, "end": 54 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "헤적일"
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '하염없이'를 모두 찾으시오.",
+          "prompt": "지문에서 같은 구절이 반복되며 수미상관을 이루는 표현을 모두 찾으시오.",
+          "answerText": "가도 아주 가지는 / 않노라",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 16,
-              "end": 20
-            }
+            { "paragraphId": "p2", "start": 0, "end": 13 },
+            { "paragraphId": "p4", "start": 0, "end": 13 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "하염없이"
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '부탁인지요'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 26,
-              "end": 31
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 화자가 받았다고 회상하는 약속을 가리키는 행을 찾으시오.",
+          "answerText": "그러한 약속이 있었겠지요",
           "answerMatchMode": "ANY",
-          "answerText": "부탁인지요"
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 16, "end": 29 }
+          ],
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 떠난 임의 약속을 화자가 새롭게 해석한 결론을 찾으시오.",
+          "answerText": "굳이 잊지 말라는 부탁인지요",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            { "paragraphId": "p4", "start": 16, "end": 31 }
+          ],
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         }
       ]
     }

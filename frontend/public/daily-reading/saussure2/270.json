@@ -562,14 +562,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "여러 사람이 함께 타는 버스나 지하철 같은 차를 부르는 말은 무엇인가요?",
-          "answerText": "대중교통",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리가 자주 타는 교통수단으로 제시된 표현을 지문에서 찾으시오.",
+          "answerText": "버스나 지하철",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 55,
-              "end": 59
+              "start": 10,
+              "end": 17
+            },
+            {
+              "paragraphId": "p1",
+              "start": 70,
+              "end": 77
             }
           ],
           "scoring": {
@@ -581,19 +586,14 @@
         },
         {
           "id": "q2",
-          "prompt": "차를 탈 때는 먼저 타려고 밀치지 말고 차례차례 이것을 서서 기다려야 해요. 이것은 무엇인가요?",
-          "answerText": "줄",
-          "answerMatchMode": "EXACT",
+          "prompt": "대중교통이 어떤 차인지 설명한 부분을 지문에서 찾으시오.",
+          "answerText": "여러 사람이 함께 타는 차",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 99,
-              "end": 100
-            },
-            {
-              "paragraphId": "p2",
-              "start": 62,
-              "end": 63
+              "start": 39,
+              "end": 53
             }
           ],
           "scoring": {
@@ -605,14 +605,23 @@
         },
         {
           "id": "q3",
-          "prompt": "달리는 차 안에서 넘어지지 않으려면 자리에 앉거나 꼭 잡아야 하는 것은 무엇인가요?",
-          "answerText": "손잡이",
-          "answerMatchMode": "EXACT",
+          "prompt": "달리는 차 안에서 넘어지지 않으려면 해야 할 일을 지문에서 모두 찾으시오.",
+          "answerText": "자리에 바르게 앉거나 손잡이를 꼭 잡아야",
+          "answerTexts": [
+            "자리에 바르게 앉거나",
+            "손잡이를 꼭 잡아야"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
+              "start": 101,
+              "end": 112
+            },
+            {
+              "paragraphId": "p2",
               "start": 113,
-              "end": 116
+              "end": 123
             }
           ],
           "scoring": {
@@ -624,14 +633,14 @@
         },
         {
           "id": "q4",
-          "prompt": "할아버지나 할머니, 몸이 불편한 분이 타시면 자리를 내어 드리는 것을 무엇이라 하나요?",
-          "answerText": "양보",
-          "answerMatchMode": "EXACT",
+          "prompt": "작은 예절을 잘 지키면 어떤 결과가 나타나는지 지문에서 찾으시오.",
+          "answerText": "모두가 안전하고 즐겁게 목적지까지 갈 수 있어요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 41,
-              "end": 43
+              "start": 104,
+              "end": 130
             }
           ],
           "scoring": {

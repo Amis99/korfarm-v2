@@ -557,19 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "커다란 나무 밑에 숨겨져 있으며, 아이들이 구멍을 통해 미끄러져 들어간 피터 팬의 거처는?",
-          "answerText": "지하 동굴",
-          "answerMatchMode": "EXACT",
+          "prompt": "피터 팬의 집이 어디에 있었는지 설명한 부분을 찾으시오.",
+          "answerText": "커다란 나무 밑에 숨겨진 지하 동굴",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 59,
+              "start": 45,
               "end": 64
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 5
             }
           ],
           "scoring": {
@@ -581,14 +576,22 @@
         },
         {
           "id": "q2",
-          "prompt": "지하 집에서 살고 있던 무리로, 웬디를 보자 엄마가 되어달라고 간절히 부탁한 아이들은?",
-          "answerText": "잃어버린 아이들",
-          "answerMatchMode": "EXACT",
+          "prompt": "지하 동굴 집에 있던 아이들과 그 아이들이 웬디에게 한 부탁을 모두 찾으시오.",
+          "answerTexts": [
+            "잃어버린 아이들",
+            "엄마가 되어달라고"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 22,
               "end": 30
+            },
+            {
+              "paragraphId": "p2",
+              "start": 51,
+              "end": 60
             }
           ],
           "scoring": {
@@ -600,19 +603,55 @@
         },
         {
           "id": "q3",
-          "prompt": "피터 팬 때문에 한쪽 팔을 잃었으며, 시계 소리를 내는 악어를 제일 무서워하는 해적의 이름은?",
-          "answerText": "후크 선장",
-          "answerMatchMode": "EXACT",
+          "prompt": "웬디가 아이들을 위해 한 일을 모두 찾으시오.",
+          "answerTexts": [
+            "맛있는 음식을 차려 주고",
+            "잠자리 이야기를 들려주었습니다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 86,
+              "end": 99
+            },
+            {
+              "paragraphId": "p2",
+              "start": 100,
+              "end": 116
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "후크 선장이 세운 계획과 후크 선장의 처지를 모두 찾으시오.",
+          "answerTexts": [
+            "피터 팬을 잡을 계획",
+            "한쪽 팔을 잃고",
+            "악어에게 쫓기는 신세"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 15,
-              "end": 20
+              "start": 22,
+              "end": 33
             },
             {
               "paragraphId": "p3",
-              "start": 42,
-              "end": 47
+              "start": 58,
+              "end": 66
+            },
+            {
+              "paragraphId": "p3",
+              "start": 67,
+              "end": 78
             }
           ],
           "scoring": {

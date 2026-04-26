@@ -571,12 +571,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "prompt": "예술의 표현 효과를 이해하려면 함께 보아야 할 대상을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 222
+              "start": 177,
+              "end": 182
+            },
+            {
+              "paragraphId": "p1",
+              "start": 189,
+              "end": 210
             }
           ],
           "scoring": {
@@ -584,17 +589,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "예술이 감정을 다룬다고 할 때, 감정이 작품 안에 그대로 옮겨 담긴다고 생각하기 쉽다. 그러나 실제로 감정은 언제나 일정한 형식과 매체를 거쳐 제시된다. 같은 슬픔이나 환희라 해도 시, 회화, 음악은 그것을 서로 다른 방식으로 조직하며, 감상자가 받아들이는 경로 역시 달라진다. 따라서 예술의 표현 효과를 이해하려면 감정 자체만이 아니라 그것을 실어 나르는 형식과 매체의 성격을 함께 보아야 한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "감정 자체",
+            "그것을 실어 나르는 형식과 매체의 성격"
+          ]
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 핵심 원리나 기준을 어떻게 설명하는가?",
+          "prompt": "예술 형식이 감정을 무엇으로 보이게 할 것인지에 대해 하는 역할을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 215
+              "start": 10,
+              "end": 33
             }
           ],
           "scoring": {
@@ -603,16 +611,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "우선 예술 형식은 감정을 무엇으로 보이게 할 것인지 결정한다. 어떤 작품은 인물의 표정, 몸짓, 장면 배치를 통해 정서를 드러내고, 어떤 작품은 사건의 전개나 화자의 진술, 어조의 변화를 통해 감정의 흐름을 전달한다. 이처럼 표현은 단순한 내용의 전달이 아니라, 감정을 일정한 구조 속에 배열하는 과정이다. 감상자는 바로 그 구조를 따라가며 작품이 만들어 내는 정서적 방향을 파악한다."
+          "answerText": "감정을 무엇으로 보이게 할 것인지 결정한다"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 그 원리의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "작품이 정서를 드러내는 방식으로 제시된 요소를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 239
+              "paragraphId": "p2",
+              "start": 42,
+              "end": 48
+            },
+            {
+              "paragraphId": "p2",
+              "start": 50,
+              "end": 52
+            },
+            {
+              "paragraphId": "p2",
+              "start": 54,
+              "end": 59
             }
           ],
           "scoring": {
@@ -620,17 +638,31 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "여기에 매체의 차이가 개입하면 감정 전달 방식은 더 분명하게 갈라진다. 문자 매체는 시간의 흐름 속에서 차례로 읽히기 때문에 감정이 생겨나고 누적되며 변형되는 과정을 서술하기에 유리하다. 반면 이미지 매체는 여러 요소를 한꺼번에 제시하므로, 한 순간의 표정이나 구도, 색채 대비를 통해 정서의 인상을 응축해 보여 주는 데 강점을 지닌다. 그래서 문자 예술은 정서의 전개를, 이미지 예술은 정서의 응결된 장면을 두드러지게 만든다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "인물의 표정",
+            "몸짓",
+            "장면 배치"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
+          "prompt": "감정의 흐름을 전달하는 방식으로 제시된 요소를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 227
+              "paragraphId": "p2",
+              "start": 81,
+              "end": 87
+            },
+            {
+              "paragraphId": "p2",
+              "start": 89,
+              "end": 95
+            },
+            {
+              "paragraphId": "p2",
+              "start": 97,
+              "end": 103
             }
           ],
           "scoring": {
@@ -638,17 +670,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 차이는 감상자의 상상 작용에도 영향을 준다. 문자 예술에서는 독자가 표현되지 않은 부분을 스스로 메우며 장면과 정서를 구성해야 하므로, 감정은 독자의 내적 재구성을 거쳐 살아난다. 반대로 이미지 예술에서는 시각적 형상이 먼저 주어지기 때문에 감상자는 그것이 주는 분위기와 정서적 압력을 즉각 받아들인다. 즉 하나는 상상을 통해 감정을 확장시키고, 다른 하나는 감각적 형상으로 감정을 밀도 있게 응축한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "사건의 전개",
+            "화자의 진술",
+            "어조의 변화"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단은 이 주제의 효과나 쟁점을 어떤 방향으로 확장하는가?",
+          "prompt": "문자 매체가 감정의 변화 과정을 서술하기에 유리한 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 225
+              "paragraphId": "p3",
+              "start": 47,
+              "end": 69
             }
           ],
           "scoring": {
@@ -657,16 +693,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그렇다고 매체가 감정을 기계적으로 결정하는 것은 아니다. 같은 문자 매체라도 설명적인 진술 위주인지, 리듬과 반복을 살린 시적 언어인지에 따라 정서 효과가 달라지고, 같은 이미지 매체라도 사실적 묘사인지 추상적 구성인지에 따라 감상의 방향이 달라진다. 결국 감정 전달은 내용, 형식, 매체가 따로 작동하는 결과가 아니라, 세 요소가 서로를 제한하고 가능하게 하며 형성되는 복합적 산물이라고 보아야 한다."
+          "answerText": "시간의 흐름 속에서 차례로 읽히기 때문에"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 앞선 논의를 어떤 의미로 정리하는가?",
+          "prompt": "이미지 매체가 한 순간의 요소들을 통해 정서의 인상을 어떻게 보여 주는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 237
+              "paragraphId": "p3",
+              "start": 160,
+              "end": 179
             }
           ],
           "scoring": {
@@ -675,7 +711,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "오늘날에는 한 작품 안에서 문자, 이미지, 소리, 영상이 결합하는 경우가 많아지면서 매체 차이가 더 복잡하게 드러난다. 이때 중요한 것은 어느 매체가 우월한가를 따지는 일이 아니라, 각 매체가 감정을 어떤 방식으로 구조화하고 수용자에게 어떤 경로로 도달하게 하는가를 분석하는 일이다. 결국 예술 표현의 차이는 감정의 종류보다도, 그것이 어떤 형식으로 조직되고 어떤 매체를 통해 감각되느냐에 의해 크게 달라진다고 할 수 있다."
+          "answerText": "정서의 인상을 응축해 보여 주는 데"
+        },
+        {
+          "id": "q7",
+          "prompt": "같은 문자 매체라도 정서 효과를 달라지게 하는 표현 방식을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 43,
+              "end": 53
+            },
+            {
+              "paragraphId": "p5",
+              "start": 57,
+              "end": 73
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "설명적인 진술 위주",
+            "리듬과 반복을 살린 시적 언어"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "오늘날 한 작품 안에서 여러 매체가 결합하는 현상을 설명한 부분을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 6,
+              "end": 39
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "한 작품 안에서 문자, 이미지, 소리, 영상이 결합하는 경우"
         }
       ]
     }

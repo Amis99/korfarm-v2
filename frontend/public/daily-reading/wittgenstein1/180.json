@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "나는 이 행사가 학교에 큰 무엇 학교 신문 기사로 소개하려고 한다?",
+          "prompt": "글의 임시 제목을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 67,
-              "end": 81
+              "start": 8,
+              "end": 21
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "변화를 만들었다고 생각해서"
+          "answerText": "우리 학교의 새로운 시작"
         },
         {
           "id": "q2",
-          "prompt": "행사 첫날에는 아침 등교 시간에 다회용 컵 무엇?",
+          "prompt": "행사가 지닌 두 가지 목적을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 24,
-              "end": 37
+              "paragraphId": "p1",
+              "start": 106,
+              "end": 119
+            },
+            {
+              "paragraphId": "p1",
+              "start": 124,
+              "end": 137
             }
           ],
           "scoring": {
@@ -602,17 +607,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "사용 캠페인이 진행되었다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "환경 보호를 알리는 목적",
+            "학생 참여를 늘리려는 뜻"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "하지만 초고의 지금 흐름만 보면 행사가 무엇만 먼저 드러난다?",
+          "prompt": "행사 첫날 아침 등교 시간에 진행된 활동을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 217,
-              "end": 230
+              "paragraphId": "p2",
+              "start": 18,
+              "end": 30
             }
           ],
           "scoring": {
@@ -621,16 +629,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "모두 성공적이었다는 인상"
+          "answerText": "다회용 컵 사용 캠페인"
         },
         {
           "id": "q4",
-          "prompt": "무엇 쓰레기를 구분해 버리도록 안내받았고, 환경 동아리 학생들이 직접 배출대를 정리했다?",
+          "prompt": "학생회가 스티커를 나누어 준 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 34,
-              "end": 47
+              "paragraphId": "p2",
+              "start": 44,
+              "end": 64
             }
           ],
           "scoring": {
@@ -639,16 +647,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생들은 플라스틱과 일반"
+          "answerText": "일회용 컵 대신 텀블러를 가져온 학생"
         },
         {
           "id": "q5",
-          "prompt": "이번 환경 주간의 의미를 정리하자면 학생들이 환경 문제를 학교생활과 연결해 생각해 보는 무엇?",
+          "prompt": "과학 동아리 전시 설명판에 함께 들어간 두 문제를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 49,
-              "end": 63
+              "paragraphId": "p3",
+              "start": 47,
+              "end": 57
+            },
+            {
+              "paragraphId": "p3",
+              "start": 59,
+              "end": 67
             }
           ],
           "scoring": {
@@ -656,17 +669,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "계기가 마련되었다는 점이다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "오존층 파괴의 원리",
+            "탄소 배출 문제"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "문단의 초점은 무엇인가요?",
+          "prompt": "분리배출 활동에서 줄이 몰린 원인을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 19,
-              "end": 33
+              "paragraphId": "p4",
+              "start": 104,
+              "end": 110
             }
           ],
           "scoring": {
@@ -675,7 +691,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "주간이 성공적이었다고 쓰고"
+          "answerText": "안내문 위치"
+        },
+        {
+          "id": "q7",
+          "prompt": "이번 환경 주간의 의미로 정리한 내용을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 20,
+              "end": 61
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "학생들이 환경 문제를 학교생활과 연결해 생각해 보는 계기가 마련되었다는 점"
+        },
+        {
+          "id": "q8",
+          "prompt": "초고를 고칠 때 문단을 어떻게 정리해야 하는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 185,
+              "end": 199
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "행사 소개와 평가를 구분해"
         }
       ]
     }

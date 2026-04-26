@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "무엇도 있었는데, 그래프 설명할 때는 고개를 숙이고 자료집만 보는 사람이 많았어?",
+          "prompt": "민서가 조사 결과보다 반응이 더 컸다고 본 대상을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 77,
-              "end": 88
+              "start": 45,
+              "end": 50
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "앞줄에서는 웃는 학생"
+          "answerText": "사례 소개"
         },
         {
           "id": "q2",
-          "prompt": "민서: 그럼 용어를 우리가 무엇 넘어간 게 문제일 수도 있겠다?",
+          "prompt": "도윤이 앞줄과 그래프 설명 때 관찰한 청중 반응을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
+              "paragraphId": "p1",
+              "start": 83,
+              "end": 94
+            },
+            {
+              "paragraphId": "p1",
               "start": 107,
-              "end": 120
+              "end": 130
             }
           ],
           "scoring": {
@@ -602,70 +607,19 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "당연하게 안다고 생각하고"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "웃는 학생도 있었는데",
+            "고개를 숙이고 자료집만 보는 사람이 많았어"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "질문도 그 무엇?",
+          "prompt": "세 번째 슬라이드에서 반응이 끊긴 때를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 57,
-              "end": 69
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "장면을 기준으로 나왔고"
-        },
-        {
-          "id": "q4",
-          "prompt": "민서: 무엇보다, 핵심 자료를 따라갈 발판이 부족했던 것 같아?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 4,
-              "end": 16
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "발표 자체가 지루했다기"
-        },
-        {
-          "id": "q5",
-          "prompt": "글에서 설명한 것은 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 73,
-              "end": 90
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "지금까지 내용에서 가장 큰 문제"
-        },
-        {
-          "id": "q6",
-          "prompt": "발표 시간을 조금 무엇 지점을 먼저 정리하자?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 18,
+              "paragraphId": "p2",
+              "start": 19,
               "end": 32
             }
           ],
@@ -675,7 +629,113 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "줄이더라도 청중이 헷갈려한"
+          "answerText": "숫자를 한꺼번에 읽을 때"
+        },
+        {
+          "id": "q4",
+          "prompt": "민서가 문제일 수도 있다고 본 일을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 99,
+              "end": 126
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "용어를 우리가 당연하게 안다고 생각하고 넘어간 게"
+        },
+        {
+          "id": "q5",
+          "prompt": "도윤이 청중의 반응이 좋았던 조건을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 7,
+              "end": 19
+            },
+            {
+              "paragraphId": "p3",
+              "start": 20,
+              "end": 33
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "급식실 사진 보여 주고",
+            "실제 동선 이야기했을 때"
+          ]
+        },
+        {
+          "id": "q6",
+          "prompt": "지우가 청중이 내용을 붙잡았다고 본 대목을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 85,
+              "end": 107
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "낯선 수치보다 자기 경험과 연결되는 대목"
+        },
+        {
+          "id": "q7",
+          "prompt": "수정할 때 세 번째 슬라이드 앞뒤로 넣거나 줄이기로 한 내용을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 27,
+              "end": 36
+            },
+            {
+              "paragraphId": "p5",
+              "start": 38,
+              "end": 50
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "용어 설명을 넣고",
+            "숫자는 세 개만 남기자"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "지우가 반응을 기준으로 무엇을 해서 단체방에 올리겠다고 했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 137,
+              "end": 154
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "수정안 정리해서 단체방에 올릴게"
         }
       ]
     }

@@ -556,14 +556,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "에드워드 왕자가 톰의 아버지에게 붙잡혀 강제로 시켜야 했던 일은 무엇인가요?",
-          "answerText": "돈을 벌어오라고",
-          "answerMatchMode": "EXACT",
+          "prompt": "진정 왕자 에드워드가 견딘 두 가지 어려움을 나타내는 어구는 무엇인가요?",
+          "answerText": "배고픔과 추위",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 69,
-              "end": 77
+              "start": 12,
+              "end": 19
             }
           ],
           "scoring": {
@@ -575,14 +575,19 @@
         },
         {
           "id": "q2",
-          "prompt": "왕궁에 남은 톰이 나라의 질서를 유지하고 백성들을 다스리기 위해 참여한 일은?",
-          "answerText": "법을 정하는",
-          "answerMatchMode": "EXACT",
+          "prompt": "왕자를 아들인 줄 알고 거칠게 대한 사람을 가리키는 어구는 무엇인가요?",
+          "answerText": "톰의 아버지",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 27,
-              "end": 33
+              "paragraphId": "p1",
+              "start": 25,
+              "end": 31
+            },
+            {
+              "paragraphId": "p1",
+              "start": 40,
+              "end": 46
             }
           ],
           "scoring": {
@@ -594,14 +599,41 @@
         },
         {
           "id": "q3",
-          "prompt": "톰이 가짜 왕자 신분임에도 불구하고, 마음을 다해 아끼고 보살피려 했던 사람들은?",
-          "answerText": "백성",
-          "answerMatchMode": "EXACT",
+          "prompt": "마일스 기사의 도움으로 왕자에게 일어난 일을 모두 찾으시오.",
+          "answerTexts": [
+            "목숨을 구하고",
+            "숲으로 숨었습니다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 24,
+              "end": 31
+            },
+            {
+              "paragraphId": "p2",
+              "start": 32,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "톰이 비록 가짜 왕자였지만 가지고 있었다고 한 마음은 무엇인가요?",
+          "answerText": "백성을 사랑하는 마음",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 104,
-              "end": 106
+              "end": 115
             }
           ],
           "scoring": {

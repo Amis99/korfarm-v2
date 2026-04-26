@@ -557,24 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "빛이 거울의 표면에 부딪힌 뒤 다시 튀어 나가는 과학적인 성질을 무엇이라고 하나요?",
-          "answerText": "반사",
-          "answerMatchMode": "EXACT",
+          "prompt": "거울이 물체의 모습을 보여 줄 때 이용하는 원리를 지문에서 찾으시오.",
+          "answerText": "빛의 반사 원리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 17,
-              "end": 19
-            },
-            {
-              "paragraphId": "p2",
-              "start": 32,
-              "end": 34
-            },
-            {
-              "paragraphId": "p3",
-              "start": 95,
-              "end": 97
+              "start": 14,
+              "end": 22
             }
           ],
           "scoring": {
@@ -586,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "거울을 만들 때 빛을 더 잘 튀겨낼 수 있도록 유리 뒷면에 얇게 입히는 재료는 무엇인가요?",
-          "answerText": "금속",
-          "answerMatchMode": "EXACT",
+          "prompt": "거울 앞에 서면 빛이 거울 표면에 부딪힌 뒤 어떻게 되는지 지문에서 찾으시오.",
+          "answerText": "다시 튀어 나옵니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 96,
-              "end": 98
+              "paragraphId": "p1",
+              "start": 69,
+              "end": 79
             }
           ],
           "scoring": {
@@ -605,14 +595,41 @@
         },
         {
           "id": "q3",
-          "prompt": "자동차 운전자가 뒤쪽의 교통 상황을 확인하여 안전하게 운전하도록 도와주는 거울의 이름은?",
-          "answerText": "백미러",
-          "answerMatchMode": "EXACT",
+          "prompt": "거울의 표면이 어떤 상태라서 빛을 어떻게 반사하는지 두 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "참 매끄러워서",
+            "한쪽 방향으로 일정하게"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 8,
+              "end": 15
+            },
+            {
+              "paragraphId": "p2",
+              "start": 19,
+              "end": 31
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "자동차의 백미러는 운전자가 무엇을 확인하여 안전하게 운전하도록 돕는지 지문에서 찾으시오.",
+          "answerText": "뒤쪽 상황",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 45,
-              "end": 48
+              "start": 55,
+              "end": 60
             }
           ],
           "scoring": {

@@ -557,14 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "동물이 태어나서 성장하고 자손을 남기고 죽을 때까지의 과정을 무엇이라 하나요?",
-          "answerText": "한살이를",
-          "answerMatchMode": "EXACT",
+          "prompt": "숲 체험 학습에서 관찰한 나비의 변화 과정을 지문에서 찾으시오.",
+          "answerText": "나비가 알에서 깨어나 자라는 과정",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 8,
-              "end": 12
+              "paragraphId": "p1",
+              "start": 16,
+              "end": 34
             }
           ],
           "scoring": {
@@ -576,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "애벌레가 나비로 변하기 전에 껍질 속에서 멈춰 있는 상태는?",
-          "answerText": "번데기가",
-          "answerMatchMode": "EXACT",
+          "prompt": "작은 알들을 다치지 않게 하려고 어떻게 발걸음을 옮겼는지 지문에서 찾으시오.",
+          "answerText": "조심조심",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 23,
-              "end": 27
+              "paragraphId": "p1",
+              "start": 80,
+              "end": 84
             }
           ],
           "scoring": {
@@ -595,14 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "어떤 집단이나 모임을 이루고 있는 하나하나의 요소를 뜻하는 말은?",
-          "answerText": "구성원임",
-          "answerMatchMode": "EXACT",
+          "prompt": "나비가 하늘로 날아오를 때까지 우리는 어떤 태도로 지켜보았는지 지문에서 찾으시오.",
+          "answerText": "숨을 죽이고",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 76,
+              "end": 82
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "작은 곤충 하나도 자연의 어떤 존재임을 잊지 않아야 하는지 지문에서 찾으시오.",
+          "answerText": "귀한 구성원",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 61,
-              "end": 65
+              "start": 58,
+              "end": 64
             }
           ],
           "scoring": {

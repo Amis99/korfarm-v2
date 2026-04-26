@@ -474,34 +474,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "얼굴에 나타나는 마음?",
-          "answerText": "표정",
-          "answerMatchMode": "EXACT",
+          "prompt": "즐거울 때 입꼬리는 어느 방향으로 올라간다고 했는지 한 글자로 찾아보세요",
+          "answerText": "위",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 27,
-              "end": 29
-            },
-            {
-              "paragraphId": "p1",
-              "start": 112,
-              "end": 114
-            },
-            {
-              "paragraphId": "p2",
-              "start": 9,
-              "end": 11
-            },
-            {
-              "paragraphId": "p2",
-              "start": 95,
-              "end": 97
-            },
-            {
-              "paragraphId": "p2",
-              "start": 145,
-              "end": 147
+              "start": 49,
+              "end": 50
             }
           ],
           "scoring": {
@@ -513,14 +493,14 @@
         },
         {
           "id": "q2",
-          "prompt": "도화지에 그리는 것?",
-          "answerText": "그림",
-          "answerMatchMode": "EXACT",
+          "prompt": "슬프거나 속상할 때 처지는 얼굴 부분은 무엇인지 찾아보세요",
+          "answerText": "눈썹",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 159,
-              "end": 161
+              "paragraphId": "p1",
+              "start": 90,
+              "end": 92
             }
           ],
           "scoring": {
@@ -532,14 +512,43 @@
         },
         {
           "id": "q3",
-          "prompt": "자세히 살펴보는 것?",
-          "answerText": "관찰",
-          "answerMatchMode": "EXACT",
+          "prompt": "화가 난 얼굴을 그릴 때는 미간을 찌푸리고 무엇을 꽉 다문 모습으로 그리는지 찾아보세요",
+          "answerText": "입술",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 149,
-              "end": 151
+              "start": 69,
+              "end": 71
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "깜짝 놀란 표정은 눈을 크게 뜨고 어디를 벌린 모습으로 나타내는지 한 글자로 찾아보세요",
+          "answerText": "입",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 44,
+              "end": 45
+            },
+            {
+              "paragraphId": "p2",
+              "start": 69,
+              "end": 70
+            },
+            {
+              "paragraphId": "p2",
+              "start": 108,
+              "end": 109
             }
           ],
           "scoring": {

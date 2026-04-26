@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "순서대로 행동하는 모양은?",
-          "answerText": "차례차례",
-          "answerMatchMode": "EXACT",
+          "prompt": "도서관 이용의 기본이 되는 행동을 지문에서 찾으시오.",
+          "answerText": "조용히 순서를 기다리는 것이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 46,
-              "end": 50
+              "start": 60,
+              "end": 75
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "질서 있고 조용한 상태는?",
-          "answerText": "정숙한",
-          "answerMatchMode": "EXACT",
+          "prompt": "친구가 책을 다 읽을 때까지 어떻게 해야 하는지 지문에서 찾으시오.",
+          "answerText": "양보하며 기다려 줍니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 75,
-              "end": 78
+              "start": 47,
+              "end": 59
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "물건이 있던 원래 자리는?",
-          "answerText": "제자리에",
-          "answerMatchMode": "EXACT",
+          "prompt": "도서관의 정숙한 분위기를 유지하는 마음을 지문에서 찾으시오.",
+          "answerText": "배려하는 마음",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 61,
+              "end": 68
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "빌린 책을 제자리에 두는 데 필요한 습관을 지문에서 찾으시오.",
+          "answerText": "제자리에 두는 습관",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 44,
-              "end": 48
+              "end": 54
             }
           ],
           "scoring": {

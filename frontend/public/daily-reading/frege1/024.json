@@ -913,74 +913,24 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "판에 그림을 새기고 찍어내는 예술은 무엇인가요?",
-          "answerText": "판화",
+          "prompt": "판에 새기고 종이에 찍어내는 대상이 되는 것은 무엇입니까?",
+          "answerText": "그림",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 2
+              "start": 18,
+              "end": 20
             },
             {
               "paragraphId": "p1",
-              "start": 88,
-              "end": 90
+              "start": 55,
+              "end": 57
             },
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 137,
-              "end": 139
-            },
-            {
-              "paragraphId": "p3",
-              "start": 13,
-              "end": 15
-            },
-            {
-              "paragraphId": "p3",
-              "start": 20,
-              "end": 22
-            },
-            {
-              "paragraphId": "p3",
-              "start": 35,
-              "end": 37
-            },
-            {
-              "paragraphId": "p3",
-              "start": 85,
-              "end": 87
-            },
-            {
-              "paragraphId": "p3",
-              "start": 157,
-              "end": 159
-            },
-            {
-              "paragraphId": "p4",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p4",
-              "start": 62,
-              "end": 64
-            },
-            {
-              "paragraphId": "p4",
-              "start": 79,
-              "end": 81
-            },
-            {
-              "paragraphId": "p4",
-              "start": 129,
-              "end": 131
+              "paragraphId": "p1",
+              "start": 96,
+              "end": 98
             }
           ],
           "scoring": {
@@ -991,14 +941,14 @@
         },
         {
           "id": "q2",
-          "prompt": "판화가 찍힐 때 바뀌는 방향은 무엇인가요?",
-          "answerText": "좌우가 바뀌어",
+          "prompt": "직접 그리는 그림과 달리 판화가 거쳐 완성되는 것은 무엇입니까?",
+          "answerText": "판이라는 매체",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 13,
-              "end": 20
+              "paragraphId": "p1",
+              "start": 62,
+              "end": 69
             }
           ],
           "scoring": {
@@ -1009,9 +959,12 @@
         },
         {
           "id": "q3",
-          "prompt": "튀어나온 부분에 잉크를 묻혀 찍는 방식은 무엇인가요?",
-          "answerText": "볼록 판화",
-          "answerMatchMode": "ANY",
+          "prompt": "제작 방식에 따라 나뉘는 판화의 종류를 모두 찾으시오.",
+          "answerTexts": [
+            "볼록 판화",
+            "오목 판화"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -1022,20 +975,7 @@
               "paragraphId": "p3",
               "start": 32,
               "end": 37
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "파인 홈에 잉크를 채워 찍는 방식은 무엇인가요?",
-          "answerText": "오목 판화",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+            },
             {
               "paragraphId": "p3",
               "start": 17,
@@ -1054,15 +994,47 @@
           "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "일상생활 활용의 예로 든 물건은 무엇인가요?",
-          "answerText": "도장",
+          "id": "q4",
+          "prompt": "오목 판화에서 잉크를 채워 찍는 곳은 무엇입니까?",
+          "answerText": "파인 홈",
           "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 89,
+              "end": 93
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "일상생활에서 판화의 원리를 이용한 예를 모두 찾으시오.",
+          "answerTexts": [
+            "도장",
+            "인쇄물",
+            "옷의 무늬"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 39,
               "end": 41
+            },
+            {
+              "paragraphId": "p4",
+              "start": 44,
+              "end": 47
+            },
+            {
+              "paragraphId": "p4",
+              "start": 49,
+              "end": 54
             }
           ],
           "scoring": {

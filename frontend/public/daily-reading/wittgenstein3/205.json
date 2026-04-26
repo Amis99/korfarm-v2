@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "prompt": "1연에서 '서른 남은 해'를 무엇에 비유하는지 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 33
+              "end": 11
             }
           ],
           "scoring": {
@@ -585,15 +585,56 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "무너지는 꽃이파리처럼\n휘날려 발아래 깔리는\n서른 남은 해야."
+          "answerText": "무너지는 꽃이파리처럼"
         },
         {
           "id": "q2",
-          "prompt": "2연은 그 정서를 어떤 이미지나 흐름으로 이어 가는가?",
+          "prompt": "1연에서 발아래 깔리는 대상으로 호명된 말을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 24,
+              "end": 32
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "서른 남은 해야"
+        },
+        {
+          "id": "q3",
+          "prompt": "2연에서 뜻이 감기는 모습을 반복적으로 드러낸 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
+              "start": 18,
+              "end": 25
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "한 금 두 금"
+        },
+        {
+          "id": "q4",
+          "prompt": "4연에서 대비되는 색감과 감각 이미지를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
               "start": 0,
+              "end": 6
+            },
+            {
+              "paragraphId": "p4",
+              "start": 33,
               "end": 38
             }
           ],
@@ -602,17 +643,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "구름같이 피려던 뜻은 날로 굳어\n한 금 두 금 곱다랗게 감기는 연륜."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "비췻빛 하늘",
+            "눈빛 파도"
+          ]
         },
         {
-          "id": "q3",
-          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
+          "id": "q5",
+          "prompt": "3연에서 화자의 움직임을 비유하는 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 36
+              "end": 11
             }
           ],
           "scoring": {
@@ -621,16 +665,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "갈매기처럼 꼬리 떨며\n산호 핀 바다 바다에 내려앉은 섬으로 가자."
+          "answerText": "갈매기처럼 꼬리 떨며"
         },
         {
-          "id": "q4",
-          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
+          "id": "q6",
+          "prompt": "3연에서 반복되어 방향성을 강조하는 말을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 45
+              "paragraphId": "p3",
+              "start": 17,
+              "end": 19
+            },
+            {
+              "paragraphId": "p3",
+              "start": 20,
+              "end": 22
             }
           ],
           "scoring": {
@@ -639,16 +688,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "비췻빛 하늘 아래 피는 꽃은 맑기도 하리라.\n무너질 적에는 눈빛 파도에 적시우리."
+          "answerText": "바다"
         },
         {
-          "id": "q5",
-          "prompt": "5연은 앞선 흐름에 어떤 긴장이나 전환을 더하는가?",
+          "id": "q7",
+          "prompt": "5연에서 끊어 버리려는 대상들을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 0,
-              "end": 36
+              "end": 6
+            },
+            {
+              "paragraphId": "p5",
+              "start": 18,
+              "end": 27
             }
           ],
           "scoring": {
@@ -656,12 +710,15 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "초라한 경력을 육지에 막은 다음\n주름 잡히는 연륜마저 끊어 버리고"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "초라한 경력",
+            "주름 잡히는 연륜"
+          ]
         },
         {
-          "id": "q6",
-          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
+          "id": "q8",
+          "prompt": "마지막 연에서 화자의 결의를 드러내는 문장을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",

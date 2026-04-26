@@ -879,93 +879,72 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "내가 그의 이름을 불러 주기 전에는 그는 다만 하나의 무엇?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 30,
-              "end": 41
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 의미가 부여되기 전 그의 모습을 가리키는 시어를 찾으시오",
+          "answerText": "몸짓",
           "answerMatchMode": "ANY",
-          "answerText": "몸짓에 지나지 않았다"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 30, "end": 32}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "내가 그의 이름을 불러 주었을 때 무엇 꽃이 되었다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 19,
-              "end": 29
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 화자가 잊혀지지 않는 존재가 되고 싶다는 마음을 담아 부른 시어를 찾으시오",
+          "answerText": "눈짓",
           "answerMatchMode": "ANY",
-          "answerText": "그는 나에게로 와서"
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 45, "end": 47}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "내가 그의 이름을 불러 준 것처럼 나의 이 무엇은 누가 나의 이름을 불러 다오?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 24,
-              "end": 34
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '내가 그의 이름을 불러'라는 같은 표현을 되풀이해 운율을 만드는 표현법의 사례를 모두 찾으시오",
+          "answerText": "내가 그의 이름을 불러",
           "answerMatchMode": "ANY",
-          "answerText": "빛깔과 향기에 알맞"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 0, "end": 12},
+            {"paragraphId": "p2", "start": 0, "end": 12},
+            {"paragraphId": "p3", "start": 0, "end": 12}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "무엇이 되고 싶다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 23
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 화자가 자신을 불러 줄 사람이 알맞아야 한다고 본 자신의 본질을 가리키는 표현을 찾으시오",
+          "answerText": "나의 이 빛깔과 향기에 알맞은",
           "answerMatchMode": "ANY",
-          "answerText": "그에게로 가서 나도\n그의 꽃이 되고 싶다."
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 19, "end": 35}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "무엇이 되고 싶다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 18
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 그가 비로소 의미 있는 존재로 다가온 까닭을 보여 주는 시구를 찾으시오",
+          "answerText": "내가 그의 이름을 불러 주었을 때",
           "answerMatchMode": "ANY",
-          "answerText": "우리들은 모두\n무엇이 되고 싶다."
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 0, "end": 18}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 화자가 마지막 연에서 서로 의미 있는 존재가 되고자 하는 두 대상을 모두 찾으시오",
+          "answerText": "너는 / 나는",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 19, "end": 21},
+            {"paragraphId": "p5", "start": 26, "end": 28}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

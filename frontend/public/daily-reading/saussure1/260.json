@@ -396,33 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "나무가 많은 체험 길?",
-          "answerText": "숲길",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 6,
-              "end": 8
-            },
-            {
-              "paragraphId": "p1",
-              "start": 71,
-              "end": 73
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "둥글고 귀여운 열매?",
+          "prompt": "글쓴이가 가을 숲길에서 바위 틈에서 우연히 발견한 작고 귀여운 것이 무엇이라고 했는지 본문에서 찾아 세 글자로 써 보세요",
           "answerText": "도토리",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -438,15 +414,58 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "가을에 붉게 물든 잎?",
-          "answerText": "단풍",
-          "answerMatchMode": "EXACT",
+          "id": "q2",
+          "prompt": "친구들과 함께 걸었던 숲길이 마치 동화 속 나라처럼 느껴졌던 까닭은 길이 알록달록한 무엇으로 가득했기 때문인지 본문에서 찾아 세 글자로 써 보세요",
+          "answerText": "단풍잎",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 81,
-              "end": 83
+              "end": 84
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "글쓴이는 숲속 생물들의 소리에 귀를 기울이며 무엇을 아끼고 보호해야 한다는 마음을 가지게 되었는지 본문에서 찾아 두 글자로 써 보세요",
+          "answerText": "자연",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 20,
+              "end": 22
+            },
+            {
+              "paragraphId": "p2",
+              "start": 24,
+              "end": 26
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글쓴이가 더욱 안전하고 보람찬 소풍이 될 수 있었던 까닭은 친구들과 무엇을 나누며 정성껏 준비했기 때문인지 본문에서 찾아 두 글자로 써 보세요",
+          "answerText": "의견",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 62,
+              "end": 64
             }
           ],
           "scoring": {

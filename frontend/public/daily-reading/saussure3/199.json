@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "잊지 않고 간직하는 기억은?",
-          "answerText": "추억을",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 지난 주말에 다녀온 곳을 지문에서 찾으시오.",
+          "answerText": "놀이공원",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 16,
-              "end": 19
+              "start": 11,
+              "end": 15
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "하늘에 쏘는 화려한 불꽃은?",
-          "answerText": "불꽃놀이를",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 하나씩 편지에 담은 것을 지문에서 찾으시오.",
+          "answerText": "행복했던 순간들",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 9,
-              "end": 14
+              "paragraphId": "p1",
+              "start": 65,
+              "end": 73
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "꾸밈이 없는 참된 마음은?",
-          "answerText": "진심을",
-          "answerMatchMode": "EXACT",
+          "prompt": "가족이 함께 웃는 시간은 무엇이라고 했는지 지문에서 찾으시오.",
+          "answerText": "진심을 담은 보물",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 44,
-              "end": 47
+              "end": 53
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "가족을 사랑하는 마음이 우리 집을 어떻게 만든다고 했는지 지문에서 찾으시오.",
+          "answerText": "행복하게",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 79,
+              "end": 83
             }
           ],
           "scoring": {

@@ -891,9 +891,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "먹이를 보면 ( )을 알립니다.",
+          "prompt": "개미들이 먹이를 찾으면 친구들에게 무엇을 알리는지 지문에서 찾으시오.",
           "answerText": "소식",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -910,14 +910,14 @@
         },
         {
           "id": "q2",
-          "prompt": "( )로 인사를 나눕니다.",
-          "answerText": "더듬이",
-          "answerMatchMode": "EXACT",
+          "prompt": "개미들이 서로 마주치면 무엇으로 인사를 나누는지 지문에서 찾으시오.",
+          "answerText": "더듬이로",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 35,
-              "end": 38
+              "end": 39
             }
           ],
           "scoring": {
@@ -929,13 +929,32 @@
         },
         {
           "id": "q3",
-          "prompt": "기다림의 ( )을 배웁니다.",
-          "answerText": "미덕",
-          "answerMatchMode": "EXACT",
+          "prompt": "복도나 계단에서 무엇을 기다리는지 지문에서 찾으시오.",
+          "answerText": "차례를",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 108,
+              "start": 36,
+              "end": 39
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "개미들의 행진을 보며 무엇을 배우는지 지문에서 찾으시오.",
+          "answerText": "기다림의 미덕",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 103,
               "end": 110
             }
           ],

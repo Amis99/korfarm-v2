@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 사회자가 이번 발표의 목적을 어떻게 예고하는가?",
+          "prompt": "사회자가 설명한 발표의 내용을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 165
+              "start": 34,
+              "end": 56
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "사회자: 다음은 환경 동아리 대표의 발표입니다. 오늘 발표는 교내 일회용 컵 사용을 줄이기 위한 제안을 담고 있습니다. 발표가 끝난 뒤에는 학생회 예산위원들의 간단한 질문을 받겠습니다. 발표자는 특히 이번 발표의 목적이 무엇인지 먼저 분명히 밝히겠다고 했으니, 그 점에 주목해 들으면 좋겠습니다."
+          "answerText": "교내 일회용 컵 사용을 줄이기 위한 제안"
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 발표자가 단순한 문제 제기를 넘어 무엇을 제안하려 한다고 밝히는가?",
+          "prompt": "발표자가 목적이 아니라고 한 것과 실제 목적을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 232
+              "start": 158,
+              "end": 169
+            },
+            {
+              "paragraphId": "p2",
+              "start": 177,
+              "end": 212
             }
           ],
           "scoring": {
@@ -602,17 +607,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "발표자: 저는 오늘 학교 안에서 일회용 컵 사용이 얼마나 많은지 단순히 알리기 위해 이 자리에 선 것이 아닙니다. 지난달 동아리에서 매점과 자판기 주변을 조사한 결과, 점심시간 이후 버려지는 일회용 컵이 예상보다 많았고 분리수거도 제대로 되지 않았습니다. 그래서 이번 발표의 목적은 불편을 하소연하는 데 있지 않고, 한 달 동안만이라도 다회용 컵 반납대를 시범 운영해 보자는 제안을 구체적으로 설명하는 데 있습니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "불편을 하소연하는 데",
+            "한 달 동안만이라도 다회용 컵 반납대를 시범 운영해 보자는 제안"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 왜 학교 전체 제도 변경이 아니라 작은 시험 운영부터 요청하려 하는가?",
+          "prompt": "발표자가 세운 시범 운영 범위와 이후 계획을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 257
+              "start": 145,
+              "end": 158
+            },
+            {
+              "paragraphId": "p3",
+              "start": 171,
+              "end": 188
             }
           ],
           "scoring": {
@@ -620,17 +633,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "발표자: 조사 결과만 놓고 보면 쓰레기가 많다는 사실을 모두가 알고 있다고 말할 수도 있습니다. 하지만 저는 단순한 공감이 아니라 실제로 실행 가능한 작은 시험 운영을 승인받고 싶습니다. 처음부터 학교 전체 제도를 바꾸자고 주장하면 부담이 크기 때문에, 우선 본관 1층 한 구역에서만 시범 운영을 해 보고 그 결과를 다시 보고하자는 계획을 세웠습니다. 다시 말해 오늘 발표는 문제 제기에서 끝나는 발표가 아니라, 제한된 범위의 실행 허가를 요청하는 발표입니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "본관 1층 한 구역에서만",
+            "그 결과를 다시 보고하자는 계획"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 예산위원 1이 발표의 초점을 어떤 두 갈래로 구분해 묻고 있는가?",
+          "prompt": "오늘 발표가 요청하는 것을 설명한 표현을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 232
+              "paragraphId": "p3",
+              "start": 231,
+              "end": 244
             }
           ],
           "scoring": {
@@ -639,16 +655,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "예산위원 1: 취지는 이해됩니다. 다만 발표를 들으면서 궁금했던 점은, 지금 이 자리에서 우리가 결정해야 하는 것이 전체 설치 예산인지, 아니면 시범 운영 자체에 대한 동의인지였습니다. 발표 중간에 환경 교육 효과도 강조하셔서, 캠페인 제안과 설비 제안이 함께 들어 있는 것처럼 들리기도 했습니다. 발표의 목적이 시범 운영 승인이라면, 지금 당장 필요한 준비가 무엇인지도 함께 밝혀 주시면 판단이 쉬울 것 같습니다."
+          "answerText": "제한된 범위의 실행 허가"
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 발표자가 오늘 요청의 핵심과 배경 설명의 관계를 어떻게 정리하는가?",
+          "prompt": "예산위원이 구별하려 한 두 결정을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 257
+              "paragraphId": "p4",
+              "start": 65,
+              "end": 73
+            },
+            {
+              "paragraphId": "p4",
+              "start": 81,
+              "end": 96
             }
           ],
           "scoring": {
@@ -656,17 +677,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "발표자: 질문하신 대로 오늘 제가 요청하는 것은 전체 예산 확정이 아니라 시범 운영 승인입니다. 환경 교육은 왜 이 제안이 필요한지를 설명하는 배경일 뿐이고, 핵심 요구는 한 달 동안 반납대와 세척함을 운영할 수 있게 허락해 달라는 데 있습니다. 이후 회수율과 불편 사항을 조사한 뒤 확대 여부는 다시 논의해도 늦지 않다고 생각합니다. 그래서 제 발표의 의도는 학교 정책을 한 번에 바꾸자는 것이 아니라, 작은 실험을 통해 판단할 근거를 만들자는 데 있습니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "전체 설치 예산",
+            "시범 운영 자체에 대한 동의"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 사회자가 오늘 논의의 중심을 무엇으로 정리하는가?",
+          "prompt": "발표자가 오늘 요청하는 것을 정정해 밝힌 부분을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 255
+              "paragraphId": "p5",
+              "start": 27,
+              "end": 49
             }
           ],
           "scoring": {
@@ -675,7 +699,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "사회자: 정리하겠습니다. 발표자는 일회용 컵 사용의 문제를 알리는 데서 멈추지 않고, 시범 운영 승인을 얻기 위해 발표하고 있다는 점을 분명히 했습니다. 따라서 오늘 논의의 중심은 환경 캠페인의 필요성 일반이 아니라, 제안된 시범 운영이 타당한지 판단하는 데 있다고 볼 수 있겠습니다. 질문도 그 기준에 맞춰 이어가겠습니다. 발표를 들을 때는 정보의 양보다 발표자가 청중에게 어떤 결정을 요청하는지 구별하는 일이 중요하다는 점도 함께 확인할 수 있겠습니다."
+          "answerText": "전체 예산 확정이 아니라 시범 운영 승인"
+        },
+        {
+          "id": "q7",
+          "prompt": "발표자의 핵심 요구를 설명한 부분을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 96,
+              "end": 131
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "한 달 동안 반납대와 세척함을 운영할 수 있게 허락해 달라는 데"
+        },
+        {
+          "id": "q8",
+          "prompt": "오늘 논의의 중심을 설명한 부분을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 122,
+              "end": 144
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "제안된 시범 운영이 타당한지 판단하는 데"
         }
       ]
     }

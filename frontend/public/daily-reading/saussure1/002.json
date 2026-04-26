@@ -552,14 +552,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "( )색은 따뜻한 느낌을 줍니다.",
-          "answerText": "빨간",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 따뜻한 색의 예시로 든 색깔을 모두 찾아 보세요.",
+          "answerText": "빨간색, 노란색",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 24,
-              "end": 26
+              "end": 27
+            },
+            {
+              "paragraphId": "p1",
+              "start": 29,
+              "end": 32
             }
           ],
           "scoring": {
@@ -571,14 +576,19 @@
         },
         {
           "id": "q2",
-          "prompt": "차가운 색은 시원한 ( )가 생각나요.",
-          "answerText": "바다",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 차가운 색의 예시로 든 색깔을 모두 찾아 보세요.",
+          "answerText": "파란색, 보라색",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 36,
-              "end": 38
+              "start": 0,
+              "end": 3
+            },
+            {
+              "paragraphId": "p2",
+              "start": 5,
+              "end": 8
             }
           ],
           "scoring": {
@@ -590,14 +600,33 @@
         },
         {
           "id": "q3",
-          "prompt": "마음을 ( )하게 가라앉혀 주어요.",
-          "answerText": "차분",
-          "answerMatchMode": "EXACT",
+          "prompt": "따뜻한 색을 보면 무엇이 떠오른다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "밝은 햇살",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 56,
+              "end": 61
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "차가운 색을 보면 무엇이 생각난다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "시원한 바다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 50,
-              "end": 52
+              "start": 32,
+              "end": 38
             }
           ],
           "scoring": {

@@ -474,30 +474,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "아껴 써야 할 소중한?",
+          "prompt": "글에서 바르게 사용하면 계획적인 생활에 도움이 된다고 한 것이 무엇인지 두 글자 말을 찾아보세요",
           "answerText": "시간",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 25,
-              "end": 27
-            },
-            {
-              "paragraphId": "p2",
-              "start": 23,
-              "end": 25
-            },
-            {
-              "paragraphId": "p2",
-              "start": 86,
-              "end": 88
-            },
-            {
-              "paragraphId": "p2",
-              "start": 135,
-              "end": 137
-            }
+            {"paragraphId": "p1", "start": 25, "end": 27},
+            {"paragraphId": "p2", "start": 23, "end": 25},
+            {"paragraphId": "p2", "start": 86, "end": 88},
+            {"paragraphId": "p2", "start": 135, "end": 137}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -508,20 +492,16 @@
         },
         {
           "id": "q2",
-          "prompt": "일찍 일어나는 무엇인가요?",
-          "answerText": "아침",
-          "answerMatchMode": "EXACT",
+          "prompt": "1문단에서 하루의 때를 알려 주는 말로 든 세 가지 예를 모두 찾아보세요",
+          "answerText": "아침, 점심, 저녁",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 43,
-              "end": 45
-            },
-            {
-              "paragraphId": "p1",
-              "start": 87,
-              "end": 89
-            }
+            {"paragraphId": "p1", "start": 43, "end": 45},
+            {"paragraphId": "p1", "start": 87, "end": 89},
+            {"paragraphId": "p1", "start": 49, "end": 51},
+            {"paragraphId": "p1", "start": 106, "end": 108},
+            {"paragraphId": "p1", "start": 55, "end": 57},
+            {"paragraphId": "p1", "start": 124, "end": 126}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -532,20 +512,31 @@
         },
         {
           "id": "q3",
-          "prompt": "지금 지내고 있는 무엇인가요?",
-          "answerText": "오늘",
-          "answerMatchMode": "EXACT",
+          "prompt": "2문단에서 시간을 정확히 알려 주는 말로 든 세 가지 예를 모두 찾아보세요",
+          "answerText": "어제, 오늘, 내일",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 7,
-              "end": 9
-            },
-            {
-              "paragraphId": "p2",
-              "start": 63,
-              "end": 65
-            }
+            {"paragraphId": "p2", "start": 1, "end": 3},
+            {"paragraphId": "p2", "start": 48, "end": 50},
+            {"paragraphId": "p2", "start": 7, "end": 9},
+            {"paragraphId": "p2", "start": 63, "end": 65},
+            {"paragraphId": "p2", "start": 13, "end": 15},
+            {"paragraphId": "p2", "start": 76, "end": 78}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "저녁이 되면 오순도순 모여 즐거운 대화를 나누는 사람들을 가리키는 두 글자 말을 찾아보세요",
+          "answerText": "가족",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 131, "end": 133}
           ],
           "scoring": {
             "correctDeltaSec": 10,

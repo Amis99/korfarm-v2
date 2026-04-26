@@ -1240,55 +1240,67 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '균형'을 모두 찾으시오.",
+          "prompt": "시장에서 한쪽이 어떤 상태이면 거래량보다 가격 변화가 더 두드러진다고 했는지 해당 표현을 찾으시오",
+          "answerText": "비탄력적",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 110,
+              "end": 114
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "사고팔려는 양이 맞아떨어지는 상태를 가리키는 용어를 모두 찾으시오",
+          "answerText": "시장 균형",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 3,
+              "start": 0,
               "end": 5
             },
             {
               "paragraphId": "p1",
-              "start": 75,
+              "start": 72,
               "end": 77
             },
             {
               "paragraphId": "p2",
-              "start": 166,
+              "start": 163,
               "end": 168
             },
             {
               "paragraphId": "p5",
-              "start": 3,
+              "start": 0,
               "end": 5
             },
             {
-              "paragraphId": "p5",
-              "start": 161,
-              "end": 163
-            },
-            {
-              "paragraphId": "p5",
-              "start": 180,
-              "end": 182
-            },
-            {
               "paragraphId": "p6",
-              "start": 6,
+              "start": 3,
               "end": 8
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "균형"
+          "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "지문에서 '탄력성'을 모두 찾으시오.",
+          "id": "q3",
+          "prompt": "가격이나 소득이 바뀔 때 수요나 공급이 얼마나 크게 달라지는지를 보여 주는 정도를 가리키는 용어를 모두 찾으시오",
+          "answerText": "탄력성",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -1337,71 +1349,93 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "탄력성"
+          "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "지문에서 '초과'를 모두 찾으시오.",
+          "id": "q4",
+          "prompt": "3문단에서 탄력성의 차이를 설명하기 위해 든 상품의 예를 모두 찾으시오",
+          "answerText": "약,전기,간식,취미용품",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 55,
+              "end": 56
+            },
+            {
+              "paragraphId": "p3",
+              "start": 59,
+              "end": 61
+            },
+            {
+              "paragraphId": "p3",
+              "start": 117,
+              "end": 119
+            },
+            {
+              "paragraphId": "p3",
+              "start": 122,
+              "end": 126
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "시장에서 가격이 너무 높을 때 생길 수 있는 현상에 해당하는 용어를 찾으시오",
+          "answerText": "초과 공급",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 101,
-              "end": 103
-            },
-            {
-              "paragraphId": "p2",
-              "start": 109,
-              "end": 111
+              "end": 106
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "초과"
+          "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "지문에서 '대체'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 64,
-              "end": 66
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "id": "q6",
+          "prompt": "수요와 공급이 모두 탄력적이면 가격 변화 뒤에 크게 움직일 수 있다고 한 대상에 해당하는 낱말을 모두 찾으시오",
+          "answerText": "거래량",
           "answerMatchMode": "ANY",
-          "answerText": "대체"
-        },
-        {
-          "id": "q5",
-          "prompt": "지문에서 '비탄력적'을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 110,
-              "end": 114
+              "start": 85,
+              "end": 88
+            },
+            {
+              "paragraphId": "p5",
+              "start": 117,
+              "end": 120
+            },
+            {
+              "paragraphId": "p6",
+              "start": 156,
+              "end": 159
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "비탄력적"
+          "revealOnWrong": true
         }
       ]
     }

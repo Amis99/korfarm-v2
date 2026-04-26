@@ -571,7 +571,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사회자: 오늘 토론의 논제는 '무엇을 전면 금지해야 한다'입니다?",
+          "prompt": "토론 논제에서 전면 금지해야 한다고 한 대상은?",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -589,12 +589,17 @@
         },
         {
           "id": "q2",
-          "prompt": "핵심 개념은 무엇인가요?",
+          "prompt": "찬성 측이 줄일 수 있다고 한 두 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 144,
-              "end": 161
+              "paragraphId": "p1",
+              "start": 57,
+              "end": 62
+            },
+            {
+              "paragraphId": "p1",
+              "start": 64,
+              "end": 69
             }
           ],
           "scoring": {
@@ -602,17 +607,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "실천한다는 상징성도 분명해집니다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "환경 부담",
+            "정리 비용"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "반대 측 1: 찬성 측은 쓰레기량만 강조하지만 운영 조건을 무엇?",
+          "prompt": "찬성 측 1은 다회용 컵 대여나 개인 컵 사용을 기본으로 하면 무엇을 줄일 수 있다고 했나요?",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 33,
-              "end": 47
+              "paragraphId": "p2",
+              "start": 116,
+              "end": 122
             }
           ],
           "scoring": {
@@ -621,16 +629,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "충분히 고려하지 않았습니다"
+          "answerText": "폐기물 자체"
         },
         {
           "id": "q4",
-          "prompt": "중요한 기준은 무엇인가요?",
+          "prompt": "반대 측 1은 다회용 컵을 쓰려면 무엇이 필요하다고 했나요?",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 162,
-              "end": 175
+              "paragraphId": "p3",
+              "start": 60,
+              "end": 72
             }
           ],
           "scoring": {
@@ -639,16 +647,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "태도야말로 책임을 회피하"
+          "answerText": "세척 인력과 보관 공간"
         },
         {
           "id": "q5",
-          "prompt": "반대 측 2: 방금 반박은 저희 무엇?",
+          "prompt": "반대 측 2는 방금 반박이 무엇을 비껴갔다고 했나요?",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 18,
-              "end": 32
+              "start": 15,
+              "end": 24
             }
           ],
           "scoring": {
@@ -657,11 +665,11 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "주장의 핵심을 비껴갔습니다"
+          "answerText": "저희 주장의 핵심"
         },
         {
           "id": "q6",
-          "prompt": "문단의 초점은 무엇인가요?",
+          "prompt": "찬성 측 두 번째 발언이 상대 입장을 단순화한 표현은?",
           "answerRanges": [
             {
               "paragraphId": "p4",
@@ -681,6 +689,42 @@
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
           "answerText": "아무것도 바꾸지 말자"
+        },
+        {
+          "id": "q7",
+          "prompt": "반대 측 2가 현실적인 대안으로 든 방식은?",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 147,
+              "end": 179
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "일부 부스부터 보증금 컵을 시범 적용하는 식의 단계적 전환"
+        },
+        {
+          "id": "q8",
+          "prompt": "토론에서 타당한 반박이 되려면 직접 겨냥해야 하는 것은?",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 164,
+              "end": 178
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "상대가 제시한 근거의 약점"
         }
       ]
     }

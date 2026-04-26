@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 학교 축제 만족도 조사 발표 자료 순서 조정 회의와 관련한 회의의 출발 문제를 어떻게 제시하는가?",
+          "prompt": "내일 전교생 간담회에서 발표해야 하는 결과를 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 170
+              "start": 19,
+              "end": 31
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생회장: 내일 전교생 간담회에서 축제 만족도 조사 결과를 발표해야 하니까 오늘은 자료 순서를 최종 점검하자. 우선 전체 만족도, 프로그램별 만족도, 불편 사항, 개선안 순으로 잡아 왔는데 이대로 가도 되는지 봐 줘. 자료 담당: 전체 평균은 5점 만점에 4.1점이고, 체험 부스 만족도가 제일 높았어요."
+          "answerText": "축제 만족도 조사 결과"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 제안이나 우려를 어떤 이유와 함께 내놓는가?",
+          "prompt": "학생회장이 처음 잡아 온 자료 순서를 지문에서 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 157
+              "paragraphId": "p1",
+              "start": 65,
+              "end": 94
             }
           ],
           "scoring": {
@@ -603,16 +603,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "방송부원: 첫 장에 평균 점수부터 넣으면 무난하긴 한데, 청중이 금방 집중하지 않을 수도 있어요. 작년에 비해 만족도가 얼마나 달라졌는지 비교 그래프를 앞에 두면 더 눈에 띌 것 같아요. 학생회장: 그러면 첫 부분에서 올해 수치만 말하지 말고 전년 대비 변화부터 보여 주자는 거네."
+          "answerText": "전체 만족도, 프로그램별 만족도, 불편 사항, 개선안"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 논의를 어떤 대안이나 조정안으로 이어 가는가?",
+          "prompt": "평균 점수부터 넣으면 생길 수 있다고 한 문제를 지문에서 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 164
+              "paragraphId": "p2",
+              "start": 32,
+              "end": 53
             }
           ],
           "scoring": {
@@ -621,16 +621,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "자료 담당: 다만 전년 자료는 조사 문항이 완전히 같지는 않아요. 그래서 단순 비교처럼 보이면 오해할 수 있어요. 환경 동아리 부장: 그럼 제목을 '전년과의 단순 비교'가 아니라 '응답 경향 참고' 정도로 조정하면 어때요. 발표할 때도 문항 차이가 있다는 설명을 짧게 넣으면 괜찮을 것 같아요."
+          "answerText": "청중이 금방 집중하지 않을 수도 있어요"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 예상 질문·반론·진행 기준을 어떤 방식으로 준비하는가?",
+          "prompt": "비교 그래프 제목을 조정할 때 바꾸려는 기존 표현과 새 표현을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 186
+              "paragraphId": "p3",
+              "start": 82,
+              "end": 94
+            },
+            {
+              "paragraphId": "p3",
+              "start": 100,
+              "end": 110
             }
           ],
           "scoring": {
@@ -638,17 +643,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학생회장: 좋다. 그다음에는 만족도가 높았던 프로그램을 먼저 소개하고 싶은데, 그 전에 불편 사항을 먼저 보여 주는 게 낫다는 의견도 있었지? 방송부원: 발표 흐름상 장점부터 말한 뒤 문제점을 제시하는 편이 덜 방어적으로 들려요. 대신 불편 사항 그래프를 띄울 때는 수치만 읽지 말고, 어디서 불만이 집중됐는지 바로 짚어 줘야 해요."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'전년과의 단순 비교'",
+            "'응답 경향 참고'"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단은 세부 운영 방안이나 보완 이유를 어떻게 구체화하는가?",
+          "prompt": "덜 방어적으로 들린다고 한 발표 흐름을 지문에서 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 181
+              "paragraphId": "p4",
+              "start": 93,
+              "end": 114
             }
           ],
           "scoring": {
@@ -657,16 +665,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "자료 담당: 불편 사항은 화장실 혼잡, 쓰레기통 위치, 공연장 입퇴장 동선 순으로 응답이 많았어요. 그런데 쓰레기통 위치 항목은 자유 응답이 많아서 막대그래프보다 학생 의견 두세 개를 함께 제시하는 게 더 이해가 쉬워요. 학생회장: 그러면 그래프 다음 장에 실제 응답 문장을 짧게 넣고, 너무 감정적인 표현은 순화해서 읽자."
+          "answerText": "장점부터 말한 뒤 문제점을 제시하는 편"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 학교 축제 만족도 조사 발표 자료 순서 조정 회의와 관련한 최종 합의를 어떤 실행 계획으로 정리하는가?",
+          "prompt": "응답이 많았던 불편 사항의 순서를 지문에서 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 227
+              "paragraphId": "p5",
+              "start": 14,
+              "end": 41
             }
           ],
           "scoring": {
@@ -675,7 +683,69 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "환경 동아리 부장: 마지막 개선안 부분에서는 우리 의견만 말하지 말고 응답 결과와 연결해서 제안해야 설득력이 있어요. 학생회장: 정리하면, 첫 장은 전년 대비 경향, 둘째는 인기 프로그램, 셋째는 불편 사항 그래프, 넷째는 자유 응답 인용, 마지막은 개선안으로 간다. 방송부원: 발표 멘트도 그 순서에 맞춰 다시 맞춰 볼게요. 자료 담당: 저는 비교 그래프 제목이랑 주석을 수정해서 오늘 안에 넘기겠습니다."
+          "answerText": "화장실 혼잡, 쓰레기통 위치, 공연장 입퇴장 동선"
+        },
+        {
+          "id": "q7",
+          "prompt": "막대그래프보다 함께 제시하는 것이 이해가 쉽다고 한 자료를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 91,
+              "end": 101
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "학생 의견 두세 개"
+        },
+        {
+          "id": "q8",
+          "prompt": "최종 발표 순서의 다섯 항목을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 78,
+              "end": 91
+            },
+            {
+              "paragraphId": "p6",
+              "start": 93,
+              "end": 104
+            },
+            {
+              "paragraphId": "p6",
+              "start": 106,
+              "end": 119
+            },
+            {
+              "paragraphId": "p6",
+              "start": 121,
+              "end": 133
+            },
+            {
+              "paragraphId": "p6",
+              "start": 135,
+              "end": 143
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "첫 장은 전년 대비 경향",
+            "둘째는 인기 프로그램",
+            "셋째는 불편 사항 그래프",
+            "넷째는 자유 응답 인용",
+            "마지막은 개선안"
+          ]
         }
       ]
     }

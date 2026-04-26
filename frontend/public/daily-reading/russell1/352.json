@@ -684,103 +684,76 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "중심 대상은 무엇인가요?",
+          "prompt": "지문에서 수미상관을 이루며 처음과 끝에 똑같이 반복되는 두 행을 모두 찾으시오.",
+          "answerText": "내를 건너서 숲으로 / 고개를 넘어서 마을로",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 22
-            },
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 22
-            }
+            { "paragraphId": "p1", "start": 0, "end": 22 },
+            { "paragraphId": "p5", "start": 0, "end": 22 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "내를 건너서 숲으로\n고개를 넘어서 마을로"
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "무엇 새로운 길?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 23
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 화자가 자신의 길을 가리키는 표현을 모두 찾으시오.",
+          "answerText": "나의 길",
           "answerMatchMode": "ANY",
-          "answerText": "어제도 가고 오늘도 갈\n나의 길 새로운 길"
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 13, "end": 17 },
+            { "paragraphId": "p4", "start": 0, "end": 4 }
+          ],
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "무엇 아가씨가 지나고 바람이 일고?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 14
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 길의 성격을 드러내며 반복되는 표현을 모두 찾으시오.",
+          "answerText": "새로운 길",
           "answerMatchMode": "ANY",
-          "answerText": "민들레가 피고 까치가 날고"
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 18, "end": 23 },
+            { "paragraphId": "p4", "start": 10, "end": 15 }
+          ],
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "무엇 오늘도…… 내일도……?",
+          "prompt": "지문에서 길에서 마주치는 자연과 사람의 모습을 보여 주는 네 가지 소재를 모두 찾으시오.",
+          "answerText": "민들레, 까치, 아가씨, 바람",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 15
-            }
+            { "paragraphId": "p3", "start": 0, "end": 3 },
+            { "paragraphId": "p3", "start": 8, "end": 10 },
+            { "paragraphId": "p3", "start": 15, "end": 18 },
+            { "paragraphId": "p3", "start": 24, "end": 26 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "나의 길은 언제나 새로운 길"
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "글에서 설명한 것은 무엇인가요?",
+          "prompt": "지문에서 시간이 흘러도 길은 변함없이 새롭다는 뜻을 담은 두 시간 표현을 모두 찾으시오.",
+          "answerText": "어제도, 오늘도",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 22
-            },
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 22
-            }
+            { "paragraphId": "p2", "start": 0, "end": 3 },
+            { "paragraphId": "p2", "start": 7, "end": 10 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 말줄임표로 길이 미래까지 이어짐을 보여 주는 행을 찾으시오.",
+          "answerText": "오늘도…… 내일도……",
           "answerMatchMode": "ANY",
-          "answerText": "내를 건너서 숲으로\n고개를 넘어서 마을로"
+          "answerRanges": [
+            { "paragraphId": "p4", "start": 16, "end": 27 }
+          ],
+          "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false },
+          "revealOnWrong": true
         }
       ]
     }

@@ -872,9 +872,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "잠수함의 주인으로 등장한 사람은 누구인가요?",
-          "answerText": "네모 선장",
-          "answerMatchMode": "ANY",
+          "prompt": "한 남자가 소개한 자기 이름과 잠수함 이름을 모두 찾으시오.",
+          "answerTexts": [
+            "네모 선장",
+            "노틸러스호"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -890,20 +893,7 @@
               "paragraphId": "p4",
               "start": 0,
               "end": 5
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "선장이 알려 준 잠수함의 이름은 무엇인가요?",
-          "answerText": "노틸러스호",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+            },
             {
               "paragraphId": "p1",
               "start": 90,
@@ -922,8 +912,8 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "선장이 그들이 할 수 없다고 선언한 일은 무엇인가요?",
+          "id": "q2",
+          "prompt": "네모 선장이 다시는 할 수 없다고 선언한 일을 찾으시오.",
           "answerText": "육지로 돌아갈 수 없다고",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -940,15 +930,41 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "수천 권의 책이 꽂힌 공간은 어디인가요?",
-          "answerText": "도서관",
+          "id": "q3",
+          "prompt": "그들이 처한 운명을 찾으시오.",
+          "answerText": "평생 바다 위에서 살아가야 하는 운명",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
+              "paragraphId": "p2",
+              "start": 118,
+              "end": 138
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "잠수함 안에서 본 문명의 공간을 모두 찾으시오.",
+          "answerTexts": [
+            "수천 권의 책이 꽂힌 도서관",
+            "귀한 예술품들이 가득한 박물관"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
               "paragraphId": "p3",
-              "start": 40,
+              "start": 28,
               "end": 43
+            },
+            {
+              "paragraphId": "p3",
+              "start": 45,
+              "end": 61
             }
           ],
           "scoring": {
@@ -959,24 +975,28 @@
         },
         {
           "id": "q5",
-          "prompt": "선장이 진정한 자유와 평화를 준다고 믿은 곳은 어디인가요?",
-          "answerText": "바다",
-          "answerMatchMode": "ANY",
+          "prompt": "네모 선장이 거부한 법, 따르는 법, 바다에서 얻는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "육지의 법",
+            "바다의 법",
+            "진정한 자유와 평화"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 121,
-              "end": 123
+              "paragraphId": "p4",
+              "start": 7,
+              "end": 12
             },
             {
               "paragraphId": "p4",
               "start": 19,
-              "end": 21
+              "end": 24
             },
             {
               "paragraphId": "p4",
-              "start": 43,
-              "end": 45
+              "start": 47,
+              "end": 57
             }
           ],
           "scoring": {

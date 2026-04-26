@@ -829,12 +829,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 이 대화가 어떤 점검 과제나 조정 문제에서 시작되는가?",
+          "prompt": "교사가 충분했다고 평가한 발표 준비 요소를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 122
+              "start": 27,
+              "end": 32
             }
           ],
           "scoring": {
@@ -843,16 +843,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "교사: 방금 환경 동아리 발표 연습 잘 들었어. 자료 정리는 충분했는데, 전달 태도에서 조금만 다듬으면 훨씬 설득력이 높아질 것 같아. 특히 첫머리에서 시선을 너무 오래 원고에 두다 보니 청중과 연결되는 느낌이 약했어."
+          "answerText": "자료 정리"
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 첫 번째 사례를 통해 어떤 문제점이나 조정 필요를 짚는가?",
+          "prompt": "교사가 첫머리에서 약했다고 지적한 느낌을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 72
+              "paragraphId": "p1",
+              "start": 105,
+              "end": 116
             }
           ],
           "scoring": {
@@ -861,16 +861,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생: 제가 긴장하면 자꾸 원고를 확인하게 돼요. 혹시 내용을 줄줄 외우지 못해도 괜찮을까요? 틀릴까 봐 계속 내려다보게 됩니다."
+          "answerText": "청중과 연결되는 느낌"
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 다른 의견이나 응답을 통해 어떤 기준과 보완점을 더하는가?",
+          "prompt": "학생이 긴장하면 자꾸 확인하게 된다고 한 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 140
+              "paragraphId": "p2",
+              "start": 15,
+              "end": 18
             }
           ],
           "scoring": {
@@ -879,16 +879,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "교사: 완전히 암기할 필요는 없어. 다만 문장 전체를 읽으려 하지 말고 핵심어만 적어 두면 시선을 빨리 다시 들 수 있어. 그리고 질문을 던지는 문장에서는 끝을 올려 말하기보다, 청중이 따라오고 있는지 확인하듯 잠깐 멈추는 편이 더 안정적으로 들린다."
+          "answerText": "원고를"
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 앞선 흐름 속에서 무엇을 다시 조정하거나 비교하게 만드는가?",
+          "prompt": "교사가 원고를 다루는 방법으로 제시한 부분을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 84
+              "paragraphId": "p3",
+              "start": 23,
+              "end": 39
+            },
+            {
+              "paragraphId": "p3",
+              "start": 40,
+              "end": 50
             }
           ],
           "scoring": {
@@ -896,17 +901,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학생: 속도도 좀 빨랐던 것 같아요. 뒤쪽에서 잘 안 들린다고 하면 저는 더 크게 말해야 한다고만 생각했는데, 친구가 너무 빨라서 놓친다고 하더라고요."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "문장 전체를 읽으려 하지 말고",
+            "핵심어만 적어 두면"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 논의를 모아 어떤 해결 방향이나 기준을 정리하는가?",
+          "prompt": "질문을 던지는 문장에서 더 안정적으로 들리는 말하기 방식을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 166
+              "paragraphId": "p3",
+              "start": 100,
+              "end": 126
             }
           ],
           "scoring": {
@@ -915,16 +923,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "교사: 맞아. 말하기 태도는 목소리 크기만의 문제가 아니야. 중요한 대목 앞에서 속도를 조금 늦추고, 다음 화면으로 넘어갈 때 한 박자 쉬면 청중이 정보를 정리할 시간을 갖게 돼. 또 반박이 예상되는 지점에서는 미소를 억지로 유지하기보다 차분한 표정으로 근거를 또렷하게 제시하는 편이 신뢰를 준다."
+          "answerText": "청중이 따라오고 있는지 확인하듯 잠깐 멈추는 편"
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 이 대화를 어떤 실천 계획이나 최종 판단으로 마무리하는가?",
+          "prompt": "뒤쪽 친구가 발표를 놓친 이유로 말한 내용을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 140
+              "paragraphId": "p4",
+              "start": 66,
+              "end": 77
             }
           ],
           "scoring": {
@@ -933,7 +941,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "학생: 그러면 다시 연습할 때는 첫 문단은 핵심어만 보고 말하고, 자료 화면이 바뀔 때마다 잠깐 쉬어 볼게요. 질문을 받을 때도 급하게 답하지 말고 질문을 한번 되짚은 뒤 대답하겠습니다. 다음 연습에서는 내용뿐 아니라 태도 변화가 보이도록 해 볼게요."
+          "answerText": "너무 빨라서 놓친다고"
+        },
+        {
+          "id": "q7",
+          "prompt": "청중이 정보를 정리할 시간을 갖게 하는 속도 조절 방법을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 34,
+              "end": 55
+            },
+            {
+              "paragraphId": "p5",
+              "start": 57,
+              "end": 78
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "중요한 대목 앞에서 속도를 조금 늦추고",
+            "다음 화면으로 넘어갈 때 한 박자 쉬면"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "학생이 다음 연습에서 내용뿐 아니라 보이도록 하겠다고 한 것을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 122,
+              "end": 127
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "태도 변화"
         }
       ]
     }

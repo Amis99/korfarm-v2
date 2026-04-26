@@ -1139,14 +1139,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "도체와 부도체의 중간 성질을 가진 물질은 무엇인가요?",
-          "answerText": "반도체(Semiconductor)",
+          "prompt": "반도체가 어떤 물질인지 설명한 부분을 찾으시오.",
+          "answerText": "도체(전기가 잘 통하는 물질)와 부도체(전기가 통하지 않는 물질)의 중간 성질을 가진 물질",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 31,
-              "end": 49
+              "start": 51,
+              "end": 101
             }
           ],
           "scoring": {
@@ -1157,14 +1157,14 @@
         },
         {
           "id": "q2",
-          "prompt": "불순물을 미세하게 섞어 전도성을 높이는 공정은 무엇인가요?",
-          "answerText": "도핑(Doping)",
+          "prompt": "도핑 공정이 무엇인지 설명한 부분을 찾으시오.",
+          "answerText": "특정한 불순물을 미세하게 섞어 전기 전도성을 획기적으로 높이고 전류의 흐름을 자유롭게 조절하는 핵심적인 공정 기술",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 260,
-              "end": 270
+              "start": 191,
+              "end": 254
             }
           ],
           "scoring": {
@@ -1175,14 +1175,22 @@
         },
         {
           "id": "q3",
-          "prompt": "5개의 바깥 전자를 가진 불순물 원소 가운데 하나는 무엇인가요?",
-          "answerText": "인(P)",
-          "answerMatchMode": "ANY",
+          "prompt": "가장 바깥쪽에 5개의 전자를 가진 불순물의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "인(P)",
+            "비소(As)"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 214,
               "end": 218
+            },
+            {
+              "paragraphId": "p2",
+              "start": 223,
+              "end": 229
             }
           ],
           "scoring": {
@@ -1193,19 +1201,14 @@
         },
         {
           "id": "q4",
-          "prompt": "5족 원소를 주입해 만든 반도체는 무엇인가요?",
-          "answerText": "N형 반도체",
+          "prompt": "전자가 부족해 생기는 정공의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "전자가 하나 부족하여 전자가 들어갈 수 있는 빈자리",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 103,
-              "end": 109
-            },
-            {
-              "paragraphId": "p4",
-              "start": 12,
-              "end": 18
+              "start": 156,
+              "end": 184
             }
           ],
           "scoring": {
@@ -1216,14 +1219,22 @@
         },
         {
           "id": "q5",
-          "prompt": "전자가 부족해 생기는 빈자리는 무엇이라고 하나요?",
-          "answerText": "정공(Hole)",
-          "answerMatchMode": "ANY",
+          "prompt": "P형 반도체와 N형 반도체를 이어 붙여 만든 핵심 부품을 모두 찾으시오.",
+          "answerTexts": [
+            "다이오드(Diode)",
+            "트랜지스터(Transistor)"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 189,
-              "end": 197
+              "paragraphId": "p4",
+              "start": 55,
+              "end": 66
+            },
+            {
+              "paragraphId": "p4",
+              "start": 70,
+              "end": 87
             }
           ],
           "scoring": {

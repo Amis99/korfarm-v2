@@ -562,9 +562,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "친구를 때리거나 놀리고 일부러 따돌려서 몸이나 마음을 아프게 하는 이런 나쁜 행동을 무엇이라고 부르나요?",
+          "prompt": "친구의 몸이나 마음을 아프게 하고 괴롭히는 모든 행동을 무엇이라고 부르는지 지문에서 찾아 쓰시오.",
           "answerText": "학교 폭력",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -586,14 +586,29 @@
         },
         {
           "id": "q2",
-          "prompt": "친구를 괴롭히는 것은 친구의 소중한 마음에 커다란 이것을 남기는 행동이에요. 다치거나 아픈 자리를 뜻하는 이것은 무엇인가요?",
-          "answerText": "상처",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 친구를 괴롭히는 행동의 예로 든 세 가지 표현을 모두 찾으시오.",
+          "answerText": "친구를 때리거나 / 나쁜 말로 놀리고 / 일부러 따돌리는 행동",
+          "answerTexts": [
+            "친구를 때리거나",
+            "나쁜 말로 놀리고",
+            "일부러 따돌리는 행동"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 76,
-              "end": 78
+              "paragraphId": "p1",
+              "start": 40,
+              "end": 48
+            },
+            {
+              "paragraphId": "p1",
+              "start": 50,
+              "end": 59
+            },
+            {
+              "paragraphId": "p1",
+              "start": 61,
+              "end": 72
             }
           ],
           "scoring": {
@@ -605,14 +620,14 @@
         },
         {
           "id": "q3",
-          "prompt": "누군가 나를 괴롭히면 혼자 고민하지 말고 집에서는 부모님께, 학교에서는 이분께 꼭 말씀드려야 해요. 누구인가요?",
-          "answerText": "선생님",
-          "answerMatchMode": "EXACT",
+          "prompt": "학교 폭력을 당한 친구가 학교에 가는 것을 어떻게 느끼고, 마음이 어떻다고 했는지 지문에서 찾아 쓰시오.",
+          "answerText": "두렵고 마음이 아주 많이 아파요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 63,
-              "end": 66
+              "paragraphId": "p2",
+              "start": 29,
+              "end": 46
             }
           ],
           "scoring": {
@@ -624,14 +639,14 @@
         },
         {
           "id": "q4",
-          "prompt": "나를 괴롭히는 사람에게 \"하지 마!\"라고 씩씩하고 당당하게 말할 수 있는 이 마음은 무엇인가요?",
-          "answerText": "용기",
-          "answerMatchMode": "EXACT",
+          "prompt": "괴롭힘을 당하는 친구를 보면 모른 척하지 말고 누구에게 알려야 하는지 지문에서 찾아 쓰시오.",
+          "answerText": "어른들께",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 26,
-              "end": 28
+              "start": 110,
+              "end": 114
             }
           ],
           "scoring": {

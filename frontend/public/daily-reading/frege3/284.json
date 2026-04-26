@@ -1327,24 +1327,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사람의 얼굴 특징을 분석해 신원을 확인하는 기술은 무엇인가요?",
-          "answerText": "얼굴 인식 기술",
+          "prompt": "얼굴 인식 기술의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "사람의 얼굴 특징을 분석하여 신원을 확인하는 기술",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 8
-            },
-            {
-              "paragraphId": "p4",
-              "start": 42,
-              "end": 50
-            },
-            {
-              "paragraphId": "p5",
-              "start": 37,
-              "end": 45
+              "start": 10,
+              "end": 37
             }
           ],
           "scoring": {
@@ -1355,14 +1345,22 @@
         },
         {
           "id": "q2",
-          "prompt": "한 번 유출되면 바꾸기 어려운 정보는 무엇인가요?",
-          "answerText": "얼굴 정보",
-          "answerMatchMode": "ANY",
+          "prompt": "얼굴 인식 기술이 실생활에서 쓰이는 예를 모두 찾으시오.",
+          "answerTexts": [
+            "스마트폰 잠금 해제",
+            "공항 입출국 심사"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 33,
-              "end": 38
+              "paragraphId": "p1",
+              "start": 42,
+              "end": 52
+            },
+            {
+              "paragraphId": "p1",
+              "start": 54,
+              "end": 63
             }
           ],
           "scoring": {
@@ -1373,10 +1371,18 @@
         },
         {
           "id": "q3",
-          "prompt": "가장 먼저 지적된 윤리 문제는 무엇인가요?",
-          "answerText": "사생활 침해",
-          "answerMatchMode": "ANY",
+          "prompt": "얼굴 인식 기술의 가장 큰 우려를 모두 찾으시오.",
+          "answerTexts": [
+            "개인 정보 유출",
+            "사생활 침해"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 9,
+              "end": 17
+            },
             {
               "paragraphId": "p2",
               "start": 19,
@@ -1391,14 +1397,28 @@
         },
         {
           "id": "q4",
-          "prompt": "오인식률이 높게 나타난 집단의 예로 든 것은 무엇인가요?",
-          "answerText": "유색 인종",
-          "answerMatchMode": "ANY",
+          "prompt": "얼굴 인식 알고리즘의 편향성과 관련해 언급한 기준과 집단을 모두 찾으시오.",
+          "answerTexts": [
+            "인종이나 성별",
+            "유색 인종",
+            "여성"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 31,
+              "end": 38
+            },
             {
               "paragraphId": "p3",
               "start": 76,
               "end": 81
+            },
+            {
+              "paragraphId": "p3",
+              "start": 84,
+              "end": 86
             }
           ],
           "scoring": {
@@ -1409,14 +1429,28 @@
         },
         {
           "id": "q5",
-          "prompt": "기술 사용 범위를 분명히 하기 위해 세워야 할 기준은 무엇인가요?",
-          "answerText": "가이드라인",
-          "answerMatchMode": "ANY",
+          "prompt": "무분별한 사용을 막기 위해 필요한 장치를 모두 찾으시오.",
+          "answerTexts": [
+            "법적 규제",
+            "명확한 가이드라인",
+            "기술적 보호 장치"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 97,
+              "start": 19,
+              "end": 24
+            },
+            {
+              "paragraphId": "p4",
+              "start": 93,
               "end": 102
+            },
+            {
+              "paragraphId": "p4",
+              "start": 138,
+              "end": 147
             }
           ],
           "scoring": {

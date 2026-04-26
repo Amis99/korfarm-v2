@@ -561,14 +561,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "마음속으로 지극히 정성스럽고 바라는 정도가 아주 강한 모양은?",
-          "answerText": "간절",
+          "prompt": "환웅을 찾아와 사람이 되고 싶다고 빈 이들을 지문에서 찾으시오.",
+          "answerText": "곰과 호랑이",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 71,
-              "end": 73
+              "start": 44,
+              "end": 50
+            },
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 6
             }
           ],
           "scoring": {
@@ -579,14 +584,55 @@
         },
         {
           "id": "q2",
-          "prompt": "가장 맨 처음을 뜻하는 말은?",
-          "answerText": "최초",
+          "prompt": "환웅이 곰과 호랑이에게 준 것을 지문에서 찾으시오.",
+          "answerText": "쑥과 마늘",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 89,
-              "end": 91
+              "paragraphId": "p1",
+              "start": 85,
+              "end": 90
+            },
+            {
+              "paragraphId": "p2",
+              "start": 19,
+              "end": 24
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "성격이 급한 호랑이가 한 일을 지문에서 찾으시오.",
+          "answerText": "동굴 밖으로 뛰쳐나갔어요",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 61,
+              "end": 74
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "꾹 참고 견딘 곰이 마침내 어떻게 되었는지 지문에서 찾으시오.",
+          "answerText": "아름다운 여자가",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 96,
+              "end": 104
             }
           ],
           "scoring": {

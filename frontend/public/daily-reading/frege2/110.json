@@ -556,25 +556,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "글쓴이가 노키즈존 운영에 대해 취한 입장은 무엇인가요?",
-          "answerText": "반대",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 15,
-              "end": 17
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "노키즈존이 침해한다고 본 대상의 권리는 무엇인가요?",
+          "prompt": "글쓴이가 노키즈존이 침해한다고 본 권리를 찾으시오.",
           "answerText": "아동의 기본적인 권리",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -591,15 +573,33 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "특정 집단의 출입을 전면 금지하는 것을 글은 무엇으로 보나요?",
-          "answerText": "차별",
+          "id": "q2",
+          "prompt": "글에서 차별이라고 본 행동을 찾으시오.",
+          "answerText": "특정 집단의 출입을 전면 금지하는 것",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 22,
-              "end": 24
+              "start": 0,
+              "end": 20
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "문제가 있을 때 해결해야 하는 방식을 찾으시오.",
+          "answerText": "개별적으로 해결",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 36,
+              "end": 44
             }
           ],
           "scoring": {
@@ -610,14 +610,22 @@
         },
         {
           "id": "q4",
-          "prompt": "아이들이 자라기 위해 필요하다고 한 주변의 태도는 무엇인가요?",
-          "answerText": "사회적 배려",
-          "answerMatchMode": "ANY",
+          "prompt": "아이들에게 필요하다고 한 태도를 모두 찾으시오.",
+          "answerTexts": [
+            "사회적 배려",
+            "어른들의 조금 더 너그러운 시선"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 5,
               "end": 11
+            },
+            {
+              "paragraphId": "p3",
+              "start": 24,
+              "end": 41
             }
           ],
           "scoring": {
@@ -628,13 +636,13 @@
         },
         {
           "id": "q5",
-          "prompt": "노키즈존 대신 정착되어야 한다고 한 것은 무엇인가요?",
-          "answerText": "배려하는 문화",
+          "prompt": "노키즈존 대신 정착되어야 한다고 한 문화를 찾으시오.",
+          "answerText": "서로를 배려하는 문화",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 12,
+              "start": 8,
               "end": 19
             }
           ],

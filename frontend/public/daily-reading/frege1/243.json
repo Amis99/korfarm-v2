@@ -913,7 +913,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "물건을 사고파는 모든 장소나 활동을 무엇이라고 하나요?",
+          "prompt": "물건을 사고파는 모든 장소나 활동을 뜻하는 단어를 찾으시오.",
           "answerText": "시장",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -956,19 +956,14 @@
         },
         {
           "id": "q2",
-          "prompt": "사람들이 어떤 물건을 얼마나 사고 싶어 하는지를 나타내는 것은 무엇인가요?",
-          "answerText": "수요",
+          "prompt": "수요가 무엇을 나타내는지 설명한 부분을 찾으시오.",
+          "answerText": "사람들이 어떤 물건을 얼마나 사고 싶어 하는지를 나타냅니다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 17,
-              "end": 19
-            },
-            {
-              "paragraphId": "p2",
-              "start": 35,
-              "end": 37
+              "start": 39,
+              "end": 71
             }
           ],
           "scoring": {
@@ -979,19 +974,14 @@
         },
         {
           "id": "q3",
-          "prompt": "사람들이 그 물건을 얼마나 팔고 싶어 하는지를 의미하는 것은 무엇인가요?",
-          "answerText": "공급",
+          "prompt": "공급의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "사람들이 그 물건을 얼마나 팔고 싶어 하는지를 의미합니다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 21,
-              "end": 23
-            },
-            {
-              "paragraphId": "p2",
-              "start": 73,
-              "end": 75
+              "start": 77,
+              "end": 108
             }
           ],
           "scoring": {
@@ -1002,44 +992,14 @@
         },
         {
           "id": "q4",
-          "prompt": "사고 싶은 사람은 많은데 물건이 부족하면 무엇이 비싸지나요?",
-          "answerText": "가격",
+          "prompt": "사고 싶은 사람은 많은데 물건이 부족하면 발생하는 현상을 찾으시오.",
+          "answerText": "가격이 비싸집니다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 127,
-              "end": 129
-            },
-            {
-              "paragraphId": "p2",
-              "start": 13,
-              "end": 15
-            },
-            {
-              "paragraphId": "p2",
-              "start": 132,
-              "end": 134
-            },
-            {
               "paragraphId": "p3",
               "start": 23,
-              "end": 25
-            },
-            {
-              "paragraphId": "p3",
-              "start": 60,
-              "end": 62
-            },
-            {
-              "paragraphId": "p3",
-              "start": 96,
-              "end": 98
-            },
-            {
-              "paragraphId": "p3",
-              "start": 119,
-              "end": 121
+              "end": 32
             }
           ],
           "scoring": {
@@ -1050,19 +1010,22 @@
         },
         {
           "id": "q5",
-          "prompt": "기업들이 더 좋은 물건을 싸게 만들려고 노력하게 하는 것은 무엇인가요?",
-          "answerText": "경쟁",
-          "answerMatchMode": "ANY",
+          "prompt": "경쟁 덕분에 우리가 쓸 수 있는 물건의 특징을 모두 찾으시오.",
+          "answerTexts": [
+            "다양하고",
+            "질 좋은"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 17,
-              "end": 19
+              "start": 91,
+              "end": 95
             },
             {
               "paragraphId": "p4",
-              "start": 80,
-              "end": 82
+              "start": 96,
+              "end": 100
             }
           ],
           "scoring": {

@@ -474,9 +474,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "긴 철길 위를 달리는 차?",
+          "prompt": "오늘 글쓴이가 가족들과 함께 타고 할머니 댁에 다녀온, 칙칙폭폭 소리를 내며 긴 철길 위를 달리는 차의 이름을 두 글자로 써 보세요",
           "answerText": "기차",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -518,9 +518,9 @@
         },
         {
           "id": "q2",
-          "prompt": "산속을 뚫고 지나는 길?",
+          "prompt": "기차가 지날 때 갑자기 주변이 깜깜해진 까닭이 된, 산속을 뚫고 지나는 길을 가리키는 두 글자 낱말을 글에서 찾아 써 보세요",
           "answerText": "터널",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -537,19 +537,33 @@
         },
         {
           "id": "q3",
-          "prompt": "다른 곳으로 떠나는 일?",
-          "answerText": "여행",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 기차 창밖으로 보이는 빠르게 지나가는 모습이 신기했다고 한 '푸른 ○○과 예쁜 꽃들'에서 ○○에 들어갈 두 글자 낱말을 써 보세요",
+          "answerText": "들판",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 84,
+              "end": 86
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "어두운 터널을 지나 다시 환한 빛이 보이며 밖으로 나오자 동생과 글쓴이가 재미있어서 어떻게 웃었는지 두 글자로 써 보세요",
+          "answerText": "깔깔",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p2",
-              "start": 145,
-              "end": 147
+              "start": 111,
+              "end": 113
             }
           ],
           "scoring": {

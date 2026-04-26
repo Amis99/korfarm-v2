@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "디지털 이미지 워터마킹이 어떤 기술인지 설명하는 어구를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 174
+              "start": 14,
+              "end": 50
             }
           ],
           "scoring": {
@@ -585,16 +585,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "디지털 이미지 워터마킹은 이미지 파일에 눈에 잘 띄지 않는 방식으로 정보를 심어 두는 기술이다. 삽입된 정보는 저작권자 표시, 배포 경로 확인, 원본 훼손 여부 검증에 활용될 수 있다. 중요한 점은 워터마크가 이미지의 본래 품질을 크게 해치지 않으면서도, 필요한 상황에서는 다시 확인될 수 있어야 한다는 것이다."
+          "answerText": "이미지 파일에 눈에 잘 띄지 않는 방식으로 정보를 심어 두는 기술"
         },
         {
           "id": "q2",
-          "prompt": "2문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "삽입된 정보가 활용될 수 있는 항목을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 202
+              "paragraphId": "p1",
+              "start": 62,
+              "end": 69
+            },
+            {
+              "paragraphId": "p1",
+              "start": 71,
+              "end": 79
+            },
+            {
+              "paragraphId": "p1",
+              "start": 81,
+              "end": 92
             }
           ],
           "scoring": {
@@ -602,35 +612,57 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "워터마킹 방식은 크게 공간 영역 방식과 주파수 영역 방식으로 나뉜다. 공간 영역 방식의 대표 예가 LSB 치환이다. 디지털 이미지를 이루는 각 픽셀은 여러 비트로 밝기나 색 정보를 표현하는데, 이 가운데 가장 하위 비트는 값이 바뀌어도 육안으로 큰 차이가 드러나지 않는 경우가 많다. LSB 치환은 바로 이 최하위 비트에 워터마크 정보를 조금씩 숨기는 방식이다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "저작권자 표시",
+            "배포 경로 확인",
+            "원본 훼손 여부 검증"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "워터마킹 방식이 크게 나뉘는 두 방식을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 212
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 방식의 장점은 구현이 단순하고 비교적 많은 양의 정보를 빠르게 넣을 수 있다는 점이다. 하지만 하위 비트 자체를 직접 바꾸는 방식이므로, 누군가 LSB를 다시 조작하거나 이미지 데이터를 단순 변형하면 워터마크가 쉽게 손상될 수 있다. 즉 삽입은 쉽지만 견고성은 상대적으로 약하다. 그래서 LSB 치환은 대용량 삽입에는 유리해도 강한 변형에 버텨야 하는 상황에서는 한계가 있다."
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단을 이해한 내용으로 가장 적절한 것은?",
-          "answerRanges": [
+              "paragraphId": "p2",
+              "start": 12,
+              "end": 20
+            },
+            {
+              "paragraphId": "p2",
+              "start": 39,
+              "end": 47
+            },
+            {
+              "paragraphId": "p2",
+              "start": 22,
+              "end": 31
+            },
             {
               "paragraphId": "p4",
               "start": 0,
-              "end": 222
+              "end": 9
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "공간 영역 방식",
+            "주파수 영역 방식"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "공간 영역 방식의 대표 예를 말한 어구를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 55,
+              "end": 63
             }
           ],
           "scoring": {
@@ -639,16 +671,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "주파수 영역 방식은 이미지의 공간 정보를 곧바로 고치는 대신, 변환 과정을 거쳐 얻은 주파수 성분 위에 워터마크를 넣는다. 이때 널리 쓰이는 것이 DCT 방식이다. DCT를 적용하면 이미지의 완만한 변화는 낮은 주파수 쪽에, 경계선처럼 급격한 변화는 높은 주파수 쪽에 더 많이 반영된다. 이후 특정 주파수 대역을 골라 워터마크를 삽입하면 역변환 뒤에도 정보가 이미지 전반에 퍼진 형태로 남게 된다."
+          "answerText": "LSB 치환이다"
         },
         {
           "id": "q5",
-          "prompt": "5문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "LSB 치환에서 워터마크 정보를 숨기는 위치를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 230
+              "paragraphId": "p2",
+              "start": 172,
+              "end": 178
             }
           ],
           "scoring": {
@@ -657,16 +689,68 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "문제는 어느 대역에 넣느냐에 따라 시각적 변화와 보존성이 달라진다는 점이다. 너무 낮은 주파수 영역에 넣으면 원본 이미지가 눈에 띄게 달라질 수 있고, 너무 높은 주파수 영역에 넣으면 JPEG 압축처럼 고주파 성분을 줄이는 과정에서 워터마크가 사라질 수 있다. 그래서 실제로는 낮은 주파수와 높은 주파수의 경계 부근, 즉 시각적 변화는 크지 않으면서도 압축에 완전히 지워지지는 않는 구간을 선택하는 경우가 많다."
+          "answerText": "최하위 비트"
         },
         {
           "id": "q6",
-          "prompt": "6문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "LSB 치환의 장점으로 제시된 내용을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 10,
+              "end": 18
+            },
+            {
+              "paragraphId": "p3",
+              "start": 19,
+              "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "구현이 단순하고",
+            "비교적 많은 양의 정보를 빠르게 넣을 수 있다"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "DCT 방식에서 이미지의 완만한 변화와 급격한 변화가 반영되는 위치를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 115,
+              "end": 123
+            },
+            {
+              "paragraphId": "p4",
+              "start": 140,
+              "end": 148
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "낮은 주파수 쪽",
+            "높은 주파수 쪽"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "DCT 방식이 압축이나 변형에 대한 저항성을 높일 수 있는 이유를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 236
+              "start": 137,
+              "end": 152
             }
           ],
           "scoring": {
@@ -675,7 +759,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 LSB 치환과 DCT 방식의 차이는 정보를 어디에 넣느냐에서 비롯된다. LSB 치환은 픽셀의 하위 비트를 직접 바꿔 삽입량과 속도에서 강점을 보이지만, 변형에 약하다. DCT 방식은 삽입 가능한 양이 상대적으로 적고 계산도 더 복잡하지만, 워터마크를 더 넓게 분산시켜 압축이나 변형에 대한 저항성을 높일 수 있다. 워터마킹의 목적이 대용량 삽입인지, 위변조 검출인지에 따라 적합한 방식이 달라지는 이유가 여기에 있다."
+          "answerText": "워터마크를 더 넓게 분산시켜"
         }
       ]
     }

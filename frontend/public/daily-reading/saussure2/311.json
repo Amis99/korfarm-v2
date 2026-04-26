@@ -562,14 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "빛이 중간에 꺾이지 않고 언제나 똑바로 앞으로만 나아가는 성질을 빛의 무엇이라고 부르나요?",
-          "answerText": "직진",
-          "answerMatchMode": "EXACT",
+          "prompt": "빛이 중간에 꺾이지 않고 똑바로 앞으로만 나아가는 성질을 무엇이라고 부르는지 지문에서 찾으시오.",
+          "answerText": "빛의 '직진'",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 90,
-              "end": 92
+              "start": 86,
+              "end": 93
             }
           ],
           "scoring": {
@@ -581,44 +581,14 @@
         },
         {
           "id": "q2",
-          "prompt": "똑바로 나아가던 빛이 불투명한 물건에 부딪혀 통과하지 못할 때 그 물건의 뒤쪽에 생기는 어두운 부분은 무엇인가요?",
-          "answerText": "그림자",
-          "answerMatchMode": "EXACT",
+          "prompt": "빛이 불투명한 물건에 부딪혀 통과하지 못하면 그 물건의 뒤쪽에 무엇이 생기는지 지문에서 찾으시오.",
+          "answerText": "어두운 부분",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 67,
-              "end": 70
-            },
-            {
-              "paragraphId": "p2",
-              "start": 103,
-              "end": 106
-            },
-            {
-              "paragraphId": "p2",
-              "start": 117,
-              "end": 120
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p3",
-              "start": 54,
-              "end": 57
-            },
-            {
-              "paragraphId": "p3",
-              "start": 78,
-              "end": 81
-            },
-            {
-              "paragraphId": "p3",
-              "start": 100,
-              "end": 103
+              "start": 46,
+              "end": 52
             }
           ],
           "scoring": {
@@ -630,9 +600,9 @@
         },
         {
           "id": "q3",
-          "prompt": "빛이 잘 통과하는 투명한 물건은 진한 그림자를 만들지 않아요. 본문에서 빛이 잘 통과하는 투명한 물건으로 예를 든 이것은 무엇인가요?",
+          "prompt": "빛이 잘 통과하는 투명한 물건의 예로 든 것을 지문에서 찾으시오.",
           "answerText": "유리창",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -649,14 +619,23 @@
         },
         {
           "id": "q4",
-          "prompt": "빛을 비추는 거리에 따라 달라지며, 물건이 빛에 가까워지면 그림자의 이것이 아주 커져요. 이것은 무엇인가요?",
-          "answerText": "크기",
-          "answerMatchMode": "EXACT",
+          "prompt": "물건이 손전등에 가까워질 때와 손전등에서 멀어질 때 그림자가 어떻게 되는지 지문에서 모두 찾으시오.",
+          "answerText": "그림자는 아주 커지고, 손전등에서 멀어지면 그림자는 다시 작아지지요",
+          "answerTexts": [
+            "그림자는 아주 커지고",
+            "그림자는 다시 작아지지요"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 22,
-              "end": 24
+              "start": 54,
+              "end": 65
+            },
+            {
+              "paragraphId": "p3",
+              "start": 78,
+              "end": 91
             }
           ],
           "scoring": {

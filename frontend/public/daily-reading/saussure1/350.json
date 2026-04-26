@@ -435,9 +435,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "편지를 받는 친구 이름?",
+          "prompt": "글쓴이가 편지를 보내는 친구의 이름이 무엇인지 글에서 찾아 적어 보세요",
           "answerText": "지후",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -454,9 +454,28 @@
         },
         {
           "id": "q2",
-          "prompt": "그림을 모아 보여주는 곳?",
+          "prompt": "글쓴이가 미술관 정원에서 본 작품이 무엇인지 글에서 찾아 적어 보세요",
+          "answerText": "커다란 나비 조각상",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 16,
+              "end": 26
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "글에서 '그림이나 조각 등을 모아 보여 주는 곳'을 뜻하는 세 글자 낱말을 찾아 적어 보세요",
           "answerText": "미술관",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -482,15 +501,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "들려주는 재미난 말?",
-          "answerText": "이야기",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "글쓴이가 미술관을 어떤 곳에 빗대어 표현했는지 글에서 찾아 적어 보세요",
+          "answerText": "꿈속 나라",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 57,
-              "end": 60
+              "start": 96,
+              "end": 101
             }
           ],
           "scoring": {

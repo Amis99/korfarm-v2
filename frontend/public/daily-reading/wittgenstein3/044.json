@@ -1181,84 +1181,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 31
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "어제도 하룻밤\n나그네 집에\n가마귀 가왁가왁 울며 새었소."
-        },
-        {
-          "id": "q2",
-          "prompt": "2연은 그 장면이나 정서를 어떻게 이어 가는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 19
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "오늘은\n또 몇 십 리\n어디로 갈까."
-        },
-        {
-          "id": "q3",
-          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 33
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "산으로 올라갈까\n들로 갈까\n오라는 곳이 없어 나는 못 가오."
-        },
-        {
-          "id": "q4",
-          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 41
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "말마소 내 집도\n정주(定州) 곽산(郭山)\n차(車) 가고 배 가는 곳이라오."
-        },
-        {
-          "id": "q5",
-          "prompt": "5연은 앞선 흐름을 어떤 긴장이나 전환으로 끌고 가는가?",
+          "prompt": "대상을 부르는 호명 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 0,
-              "end": 65
+              "end": 3
+            },
+            {
+              "paragraphId": "p5",
+              "start": 32,
+              "end": 35
             }
           ],
           "scoring": {
@@ -1267,16 +1200,133 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "여보소 공중에\n저 기러기\n공중엔 길 있어서 잘 가는가?\n\n여보소 공중에\n저 기러기\n열 십자(十字) 복판에 내가 섰소."
+          "answerText": "여보소"
+        },
+        {
+          "id": "q2",
+          "prompt": "까마귀 울음소리를 반복해 나타낸 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 19,
+              "end": 23
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "가왁가왁"
+        },
+        {
+          "id": "q3",
+          "prompt": "화자가 갈 곳을 몰라 묻는 물음 표현을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 12,
+              "end": 18
+            },
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 8
+            },
+            {
+              "paragraphId": "p3",
+              "start": 9,
+              "end": 14
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "어디로 갈까",
+            "산으로 올라갈까",
+            "들로 갈까"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "화자의 집과 관련해 제시된 지명을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 9,
+              "end": 15
+            },
+            {
+              "paragraphId": "p4",
+              "start": 16,
+              "end": 22
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "정주(定州)",
+            "곽산(郭山)"
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "화자가 공중에서 부르는 대상을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 8,
+              "end": 13
+            },
+            {
+              "paragraphId": "p5",
+              "start": 40,
+              "end": 45
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "저 기러기"
         },
         {
           "id": "q6",
-          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
+          "prompt": "공중의 대상에게 길이 있는지 묻는 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 14,
+              "end": 30
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "공중엔 길 있어서 잘 가는가?"
+        },
+        {
+          "id": "q7",
+          "prompt": "길이 여러 갈래로 갈라진 모습을 반복으로 드러낸 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
               "start": 0,
-              "end": 36
+              "end": 9
             }
           ],
           "scoring": {
@@ -1285,7 +1335,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "갈래갈래 갈린 길\n길이라도\n내게 바이(전혀) 갈 길은 하나 없소."
+          "answerText": "갈래갈래 갈린 길"
+        },
+        {
+          "id": "q8",
+          "prompt": "화자에게 갈 길이 전혀 없다는 처지를 드러낸 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 15,
+              "end": 35
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "내게 바이(전혀) 갈 길은 하나 없소"
         }
       ]
     }

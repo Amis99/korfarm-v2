@@ -557,19 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "달빛 시계의 잃어버린 바늘을 찾기 위해 모험을 떠난 주인공 토끼가 도착하여 길을 잃어버린 어두운 곳은?",
-          "answerText": "안개 숲",
-          "answerMatchMode": "EXACT",
+          "prompt": "토끼가 바늘을 찾기 위해 어디에 도착했는지 나타내는 표현을 지문에서 찾으시오.",
+          "answerText": "안개 숲에 도착했습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 31,
-              "end": 35
-            },
-            {
-              "paragraphId": "p1",
-              "start": 45,
-              "end": 49
+              "end": 43
             }
           ],
           "scoring": {
@@ -581,34 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "숲 중앙에 위치한 자신의 둥지에서 첫 번째 은빛 시계 바늘을 빼앗기지 않으려고 무섭게 지키고 있던 동물은?",
-          "answerText": "거미",
-          "answerMatchMode": "EXACT",
+          "prompt": "안개 숲에서 토끼가 길을 잃고 헤맨 까닭을 나타내는 표현을 지문에서 찾으시오.",
+          "answerText": "너무 어두워서",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 23,
-              "end": 25
-            },
-            {
-              "paragraphId": "p2",
-              "start": 61,
-              "end": 63
-            },
-            {
-              "paragraphId": "p3",
-              "start": 12,
-              "end": 14
-            },
-            {
-              "paragraphId": "p3",
+              "paragraphId": "p1",
               "start": 51,
-              "end": 53
-            },
-            {
-              "paragraphId": "p3",
-              "start": 55,
-              "end": 57
+              "end": 58
             }
           ],
           "scoring": {
@@ -620,34 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "거미가 거미줄을 쏘며 무섭게 쫓아왔지만, 둘은 숲을 무사히 빠져나와 달빛 시계의 첫 번째 부품인 이것을 찾았습니다.",
-          "answerText": "바늘",
-          "answerMatchMode": "EXACT",
+          "prompt": "요정은 숲의 중앙에 있는 무엇이 바늘을 지키고 있다고 말했는지 지문에서 찾으시오.",
+          "answerText": "거대한 거미",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 7,
-              "end": 9
-            },
-            {
               "paragraphId": "p2",
-              "start": 27,
-              "end": 29
-            },
-            {
-              "paragraphId": "p2",
-              "start": 100,
-              "end": 102
-            },
+              "start": 19,
+              "end": 25
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "토끼가 요정의 도움을 받아 바늘을 어떻게 했는지 나타내는 표현을 지문에서 찾으시오.",
+          "answerText": "재빨리 가로챘습니다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 30,
-              "end": 32
-            },
-            {
-              "paragraphId": "p3",
-              "start": 99,
-              "end": 101
+              "start": 34,
+              "end": 44
             }
           ],
           "scoring": {

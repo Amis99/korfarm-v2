@@ -915,14 +915,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "인간의 DNA에 담긴 유전 정보를 모두 해독하려는 연구는 무엇인가요?",
-          "answerText": "인간 게놈 프로젝트",
+          "prompt": "인간 게놈 프로젝트가 무엇인지 설명한 부분을 찾으시오.",
+          "answerText": "인간의 DNA에 담긴 유전 정보를 모두 해독하려는 연구",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 10
+              "start": 12,
+              "end": 42
             }
           ],
           "scoring": {
@@ -933,13 +933,13 @@
         },
         {
           "id": "q2",
-          "prompt": "프로젝트를 통해 완전히 밝혀진 것은 무엇인가요?",
-          "answerText": "DNA 염기 서열",
+          "prompt": "인간 게놈 프로젝트를 통해 밝혀진 것을 찾으시오.",
+          "answerText": "약 30억 쌍의 DNA 염기 서열",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 111,
+              "start": 102,
               "end": 120
             }
           ],
@@ -951,14 +951,28 @@
         },
         {
           "id": "q3",
-          "prompt": "특정 질병 관련 유전자를 찾아 개발할 수 있게 된 치료법은 무엇인가요?",
-          "answerText": "맞춤형 치료법",
-          "answerMatchMode": "ANY",
+          "prompt": "게놈 정보 해독으로 가능해진 의학적 변화를 모두 찾으시오.",
+          "answerTexts": [
+            "특정 질병과 관련된 유전자를 찾아내어",
+            "맞춤형 치료법을 개발할 수 있게 되었다",
+            "유전병을 미리 진단하고 예방할 수 있는 길"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
+              "start": 39,
+              "end": 59
+            },
+            {
+              "paragraphId": "p2",
               "start": 60,
-              "end": 67
+              "end": 81
+            },
+            {
+              "paragraphId": "p2",
+              "start": 86,
+              "end": 109
             }
           ],
           "scoring": {
@@ -969,14 +983,28 @@
         },
         {
           "id": "q4",
-          "prompt": "개인의 유전 정보 유출로 발생할 수 있는 문제는 무엇인가요?",
-          "answerText": "사생활 침해",
-          "answerMatchMode": "ANY",
+          "prompt": "게놈 프로젝트의 성공이 낳은 생명 윤리적 문제를 모두 찾으시오.",
+          "answerTexts": [
+            "심각한 사생활 침해",
+            "부당한 차별",
+            "인간의 존엄성이 훼손될 수 있다는 우려"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 65,
+              "start": 61,
               "end": 71
+            },
+            {
+              "paragraphId": "p3",
+              "start": 108,
+              "end": 114
+            },
+            {
+              "paragraphId": "p3",
+              "start": 143,
+              "end": 164
             }
           ],
           "scoring": {
@@ -987,14 +1015,14 @@
         },
         {
           "id": "q5",
-          "prompt": "글에서 훼손될 수 있다고 우려한 인간의 가치는 무엇인가요?",
-          "answerText": "인간의 존엄성",
+          "prompt": "유전 정보의 수집과 활용이 이루어져야 하는 조건을 찾으시오.",
+          "answerText": "개인의 동의와 철저한 보안",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 143,
-              "end": 150
+              "paragraphId": "p4",
+              "start": 59,
+              "end": 73
             }
           ],
           "scoring": {

@@ -571,12 +571,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "대리권이 없거나 범위를 넘은 사람이 한 대리를 가리키는 말을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 221
+              "start": 175,
+              "end": 179
+            },
+            {
+              "paragraphId": "p2",
+              "start": 109,
+              "end": 113
+            },
+            {
+              "paragraphId": "p6",
+              "start": 73,
+              "end": 77
             }
           ],
           "scoring": {
@@ -585,16 +595,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "민법의 대리제도는 본인이 직접 거래하기 어려울 때 다른 사람이 대신 법률행위를 하게 하는 장치이다. 이때 대리행위의 효과가 본인에게 귀속되려면, 대리인은 실제로 대리권을 가지고 있어야 하고 그 범위 안에서 행동해야 한다. 그런데 현실에서는 대리권이 없거나 범위를 넘은 사람이 거래를 하는 경우가 발생하는데, 이런 무권대리가 언제나 무효로만 처리되면 거래 상대방은 예기치 않은 손해를 떠안게 된다."
+          "answerText": "무권대리"
         },
         {
           "id": "q2",
-          "prompt": "2문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "민법의 대리제도가 무엇을 하게 하는 장치인지 설명한 어구를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 194
+              "paragraphId": "p1",
+              "start": 10,
+              "end": 52
             }
           ],
           "scoring": {
@@ -603,34 +613,48 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "표현대리는 바로 이런 문제를 조정하기 위한 제도이다. 대리인에게 실제 대리권이 없더라도 겉으로는 있는 것처럼 보이는 외관이 형성되어 있고, 그 외관 형성에 본인에게 일정한 책임을 물을 수 있다면 무권대리행위의 효과를 본인에게 귀속시킨다. 핵심은 상대방이 왜 그 대리인을 믿을 수밖에 없었는지, 그리고 그 믿음을 본인이 어느 정도 초래했는지에 있다."
+          "answerText": "본인이 직접 거래하기 어려울 때 다른 사람이 대신 법률행위를 하게 하는 장치"
         },
         {
           "id": "q3",
-          "prompt": "3문단의 내용을 바탕으로 알 수 있는 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 148
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 제도가 항상 성립하는 것은 아니다. 상대방이 대리권이 없다는 사실을 알았거나, 조금만 주의했어도 알 수 있었는데도 확인하지 않았다면 표현대리를 주장하기 어렵다. 표현대리는 상대방의 신뢰를 보호하려는 제도이므로, 보호할 만한 신뢰가 먼저 인정되어야 하기 때문이다."
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "표현대리의 대표적 유형으로 제시된 세 경우를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 200
+              "start": 30,
+              "end": 75
+            },
+            {
+              "paragraphId": "p4",
+              "start": 77,
+              "end": 105
+            },
+            {
+              "paragraphId": "p4",
+              "start": 107,
+              "end": 138
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "본인이 실제로는 대리권을 주지 않았으면서 제3자에게 대리권이 있다고 알려 준 경우",
+            "대리인이 기본대리권은 있었지만 그 범위를 넘은 경우",
+            "이미 있던 대리권이 소멸했는데 외관이 정리되지 않은 경우"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "무권대리가 언제나 무효로만 처리될 때 거래 상대방에게 생기는 결과를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 195,
+              "end": 220
             }
           ],
           "scoring": {
@@ -639,16 +663,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "민법은 표현대리를 몇 가지 유형으로 나누어 설명한다. 본인이 실제로는 대리권을 주지 않았으면서 제3자에게 대리권이 있다고 알려 준 경우, 대리인이 기본대리권은 있었지만 그 범위를 넘은 경우, 이미 있던 대리권이 소멸했는데 외관이 정리되지 않은 경우가 대표적이다. 이들 사례는 형태는 다르지만, 모두 본인이 외관 형성에 일정 부분 책임이 있다는 점에서 묶인다."
+          "answerText": "거래 상대방은 예기치 않은 손해를 떠안게 된다"
         },
         {
           "id": "q5",
-          "prompt": "5문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "표현대리에서 무권대리행위의 효과를 누구에게 귀속시킨다고 했는지 해당 어구를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 215
+              "paragraphId": "p2",
+              "start": 121,
+              "end": 131
             }
           ],
           "scoring": {
@@ -657,16 +681,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "표현대리의 장점은 거래 안전을 높인다는 데 있다. 거래 상대방은 본인과 대리인 사이의 내부 사정을 모두 알기 어렵기 때문에, 겉으로 드러난 표시를 신뢰할 수밖에 없는 경우가 많다. 만약 이런 신뢰가 지나치게 쉽게 부정된다면, 대리제도 자체가 불안정해지고 거래 비용도 커질 것이다. 표현대리는 이런 위험을 줄이면서도 본인 책임의 범위를 무한정 넓히지 않으려는 절충 장치라고 볼 수 있다."
+          "answerText": "본인에게 귀속시킨다"
         },
         {
           "id": "q6",
-          "prompt": "6문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "표현대리를 주장하기 어려워지는 상대방의 인식 상태를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 197
+              "paragraphId": "p3",
+              "start": 22,
+              "end": 75
             }
           ],
           "scoring": {
@@ -675,7 +699,57 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "따라서 표현대리를 판단할 때는 대리권의 유무만이 아니라 외관 형성의 경위, 상대방의 인식, 본인의 책임 정도를 함께 살펴야 한다. 무권대리의 모든 사례를 본인에게 돌리는 것도 문제지만, 반대로 상대방에게 모든 손해를 떠넘기는 것도 거래 질서를 해칠 수 있다. 표현대리는 이 두 위험 사이에서 상대방 보호와 본인 책임의 균형점을 찾으려는 제도적 장치이다."
+          "answerText": "상대방이 대리권이 없다는 사실을 알았거나, 조금만 주의했어도 알 수 있었는데도 확인하지 않았다면"
+        },
+        {
+          "id": "q7",
+          "prompt": "표현대리의 장점이 무엇이라고 했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 10,
+              "end": 26
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "거래 안전을 높인다는 데 있다"
+        },
+        {
+          "id": "q8",
+          "prompt": "표현대리를 판단할 때 대리권의 유무와 함께 살펴야 하는 세 요소를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 31,
+              "end": 40
+            },
+            {
+              "paragraphId": "p6",
+              "start": 42,
+              "end": 49
+            },
+            {
+              "paragraphId": "p6",
+              "start": 51,
+              "end": 60
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "외관 형성의 경위",
+            "상대방의 인식",
+            "본인의 책임 정도"
+          ]
         }
       ]
     }

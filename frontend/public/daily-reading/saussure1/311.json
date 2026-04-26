@@ -396,34 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "공부할 때 쓰는 탁자?",
-          "answerText": "책상",
-          "answerMatchMode": "EXACT",
+          "prompt": "연필이나 지우개처럼 글씨를 쓰는 데 쓰이는 물건들을 한꺼번에 부르는 세 글자 낱말을 글에서 찾아 적어 보세요",
+          "answerText": "필기구",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 20,
-              "end": 22
-            },
-            {
-              "paragraphId": "p1",
-              "start": 125,
-              "end": 127
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 59,
-              "end": 61
-            },
-            {
-              "paragraphId": "p2",
-              "start": 116,
-              "end": 118
+              "start": 74,
+              "end": 77
             }
           ],
           "scoring": {
@@ -435,29 +415,19 @@
         },
         {
           "id": "q2",
-          "prompt": "질서 있게 가다듬음?",
-          "answerText": "정리",
-          "answerMatchMode": "EXACT",
+          "prompt": "오랫동안 되풀이하여 몸에 익은 행동을 뜻하는 두 글자 낱말을 글에서 찾아 적어 보세요",
+          "answerText": "습관",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 29,
-              "end": 31
-            },
-            {
-              "paragraphId": "p1",
-              "start": 121,
-              "end": 123
+              "start": 55,
+              "end": 57
             },
             {
               "paragraphId": "p2",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p2",
-              "start": 69,
-              "end": 71
+              "start": 79,
+              "end": 81
             }
           ],
           "scoring": {
@@ -469,19 +439,33 @@
         },
         {
           "id": "q3",
-          "prompt": "학문을 익히는 일?",
-          "answerText": "공부",
-          "answerMatchMode": "EXACT",
+          "prompt": "필기구를 제자리에 두고 필요한 책만 꺼내 놓으면 어떤 좋은 결과가 생긴다고 글에서 말했는지 적어 보세요",
+          "answerText": "집중력이 쑥쑥 자라남",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 7,
-              "end": 9
-            },
+              "start": 101,
+              "end": 113
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "잘 정리된 책상이 우리에게 어떤 환경을 만들어 준다고 글에서 말했는지 적어 보세요",
+          "answerText": "마음을 차분하게 만들어 주어 즐겁게 공부할 수 있는 환경을 만들어 줌",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 149,
-              "end": 151
+              "start": 129,
+              "end": 167
             }
           ],
           "scoring": {

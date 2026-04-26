@@ -603,7 +603,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "입이 납작하고 뒤뚱거리며 걷는 물새는?",
+          "prompt": "다른 형제들에게 못생겼다며 놀림을 받고 집을 떠난 새끼의 동물 이름을 두 글자로 찾아보세요.",
           "answerText": "오리",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -664,50 +664,15 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "눈이 오고 얼음이 어는 가장 추운 계절은?",
-          "answerText": "겨울",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 3,
-              "end": 5
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "땅이 오목하게 파여 물이 넓게 고인 곳은?",
-          "answerText": "호수",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 25,
-              "end": 27
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "몸빛이 눈처럼 하얗고 목이 긴 아름다운 새는?",
+          "prompt": "물에 비친 모습을 보고 알게 된 새끼 오리의 진짜 정체를 두 글자로 찾아보세요.",
           "answerText": "백조",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -728,8 +693,55 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "다른 오리들이 미운 오리 새끼에게 한 행동 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "놀리고",
+            "쪼아 댔어요"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 117,
+              "end": 120
+            },
+            {
+              "paragraphId": "p1",
+              "start": 121,
+              "end": 127
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "자신이 백조라는 사실을 깨달은 새끼 오리가 흘린 눈물의 마음을 두 글자로 찾아보세요.",
+          "answerText": "기쁨",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 92,
+              "end": 94
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         }

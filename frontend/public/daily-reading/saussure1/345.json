@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "겨울에 깊이 자는 잠?",
+          "prompt": "추운 겨울 동안 동물이 깊이 자는 잠을 무엇이라고 하는지 적어 보세요",
           "answerText": "겨울잠",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -430,14 +430,14 @@
         },
         {
           "id": "q2",
-          "prompt": "생물의 성장 바탕?",
-          "answerText": "영양분",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서 겨울잠을 자는 동물로 든 예 세 가지를 모두 찾아 적어 보세요",
+          "answerText": "곰이나 개구리 그리고 뱀",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 110,
-              "end": 113
+              "start": 67,
+              "end": 80
             }
           ],
           "scoring": {
@@ -449,34 +449,33 @@
         },
         {
           "id": "q3",
-          "prompt": "사람 외의 모든 짐승?",
-          "answerText": "동물",
-          "answerMatchMode": "EXACT",
+          "prompt": "동물들이 겨울에 깊은 잠에 빠지는 까닭이 무엇인지 글에서 찾아 적어 보세요",
+          "answerText": "에너지를 아끼기 위해",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 23,
-              "end": 25
-            },
-            {
-              "paragraphId": "p1",
-              "start": 85,
-              "end": 87
-            },
+              "start": 28,
+              "end": 39
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글에서 '몸의 온도'를 뜻하는 두 글자 낱말을 찾아 적어 보세요",
+          "answerText": "체온",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 11,
-              "end": 13
-            },
-            {
-              "paragraphId": "p2",
-              "start": 74,
-              "end": 76
-            },
-            {
-              "paragraphId": "p2",
-              "start": 122,
-              "end": 124
+              "start": 18,
+              "end": 20
             }
           ],
           "scoring": {

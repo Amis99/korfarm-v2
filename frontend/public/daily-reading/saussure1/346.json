@@ -396,67 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "맛있고 달콤한 빵?",
-          "answerText": "케이크",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 13,
-              "end": 16
-            },
-            {
-              "paragraphId": "p1",
-              "start": 90,
-              "end": 93
-            },
-            {
-              "paragraphId": "p1",
-              "start": 148,
-              "end": 151
-            },
-            {
-              "paragraphId": "p2",
-              "start": 22,
-              "end": 25
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "시끄럽고 어지러운 일?",
-          "answerText": "소동",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 177,
-              "end": 179
-            },
-            {
-              "paragraphId": "p2",
-              "start": 139,
-              "end": 141
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "주인공 작은 곰의 이름?",
+          "prompt": "케이크를 배달하는 이야기 속 주인공의 이름을 적어 보세요",
           "answerText": "포근이",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -482,6 +424,68 @@
               "paragraphId": "p2",
               "start": 157,
               "end": 160
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "글에서 '시끄럽고 어지럽게 벌어진 일'을 뜻하는 두 글자 낱말을 찾아 적어 보세요",
+          "answerText": "소동",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 177,
+              "end": 179
+            },
+            {
+              "paragraphId": "p2",
+              "start": 139,
+              "end": 141
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "동물 친구들이 토끼네 집으로 몰려온 까닭이 무엇인지 글에서 찾아 적어 보세요",
+          "answerText": "마법 케이크를 배달한다는 소문이 나면서",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 87,
+              "end": 108
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "포근이가 케이크를 전해 주려고 한 대상이 누구인지 글에서 찾아 적어 보세요",
+          "answerText": "토끼 가족",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 5,
+              "end": 10
             }
           ],
           "scoring": {

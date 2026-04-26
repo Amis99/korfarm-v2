@@ -474,20 +474,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "마음속의 기분?",
+          "prompt": "기분이나 마음속 느낌을 가리키는 두 글자 낱말을 글에서 찾아 보세요",
           "answerText": "감정",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 33,
-              "end": 35
-            },
-            {
-              "paragraphId": "p2",
-              "start": 126,
-              "end": 128
-            }
+            {"paragraphId": "p1", "start": 33, "end": 35},
+            {"paragraphId": "p2", "start": 126, "end": 128}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -498,20 +490,13 @@
         },
         {
           "id": "q2",
-          "prompt": "몸으로 하는 표현?",
-          "answerText": "몸짓",
-          "answerMatchMode": "EXACT",
+          "prompt": "마음속 이야기를 다른 사람에게 전달하기 위해 사용하는 두 가지 비슷한 말을 모두 글에서 찾아 보세요",
+          "answerText": "몸짓, 몸동작",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 139,
-              "end": 141
-            },
-            {
-              "paragraphId": "p2",
-              "start": 14,
-              "end": 16
-            }
+            {"paragraphId": "p1", "start": 139, "end": 141},
+            {"paragraphId": "p2", "start": 14, "end": 16},
+            {"paragraphId": "p2", "start": 114, "end": 117}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -522,15 +507,28 @@
         },
         {
           "id": "q3",
-          "prompt": "마음을 전하는 무엇인가요?",
+          "prompt": "몸으로 전하는 마음을 알리는 표시를 가리키는 두 글자 낱말을 글에서 찾아 보세요",
           "answerText": "신호",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 172,
-              "end": 174
-            }
+            {"paragraphId": "p2", "start": 172, "end": 174}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "친구와 대화할 때 알맞은 몸짓을 사용하면 서로 더 깊이 이해하게 되는 것을 가리키는 두 글자 낱말을 찾아 보세요",
+          "answerText": "마음",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 146, "end": 148},
+            {"paragraphId": "p2", "start": 27, "end": 29},
+            {"paragraphId": "p2", "start": 168, "end": 170}
           ],
           "scoring": {
             "correctDeltaSec": 10,

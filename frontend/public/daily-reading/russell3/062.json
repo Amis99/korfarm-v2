@@ -571,111 +571,72 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"자기장의 변화가 주변 도체에 전압을 만들어 내는 것\"에 해당하는 부분은 어디인가요?",
+          "prompt": "지문에서 '어떤 면을 통과하는 자기장의 양'을 뜻하는 두 글자 단어가 등장하는 부분을 모두 찾으시오",
+          "answerTexts": ["자속"],
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 214
-            }
+            {"paragraphId": "p2", "start": 9, "end": 11},
+            {"paragraphId": "p2", "start": 29, "end": 31},
+            {"paragraphId": "p2", "start": 93, "end": 95},
+            {"paragraphId": "p2", "start": 114, "end": 116}
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "전자기 유도는 자기장의 변화가 주변 도체에 전압을 만들어 내는 현상이다. 전류가 흐르지 않던 코일에 갑자기 전압이 생기는 까닭은, 도선이 놓인 공간의 자기장이 시간에 따라 달라졌기 때문이다. 따라서 전자기 유도는 전기와 자기의 관계를 보여 주는 대표적 현상으로 읽힌다. 자기장이 단순히 존재하는 것만으로는 충분하지 않고, 그 세기나 방향이 변해야 유도 전압이 생긴다는 점이 중요하다."
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "\"자속 변화율이 클수록 유도 전압도 커진다\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 114,
-              "end": 136
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '자속 변화율이 클수록 유도 전압도 커진다'고 설명한 인물의 이름을 찾으시오",
+          "answerText": "패러데이",
           "answerMatchMode": "ANY",
-          "answerText": "자속 변화율이 클수록 유도 전압도 커진다"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 103, "end": 107}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "\"변화하는 자기장을 철심을 통해 전달하는 것\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 225
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 변압기를 정의한 문장을 찾으시오",
+          "answerText": "변압기는 이런 전자기 유도 원리를 이용해 교류 전압의 크기를 바꾸는 장치이다",
           "answerMatchMode": "ANY",
-          "answerText": "변압기는 이런 전자기 유도 원리를 이용해 교류 전압의 크기를 바꾸는 장치이다. 하나의 철심에 1차 코일과 2차 코일을 감아 두고, 1차 코일에 교류를 흘리면 시간에 따라 변하는 자기장이 생긴다. 이 자기장 변화가 철심을 거쳐 2차 코일에 전달되면, 2차 코일에도 유도 전압이 생긴다. 즉 변압기는 전류를 직접 밀어 넣는 장치가 아니라, 변화하는 자기장을 매개로 다른 코일에 전압을 만들어 내는 장치이다."
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 0, "end": 42}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "\"2차 코일의 감은 수가 더 많을 때이다\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 226
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 승압 변압기와 강압 변압기를 구분하는 기준이 함께 드러난 문장을 찾으시오",
+          "answerText": "2차 코일의 감은 수가 더 많으면 승압 변압기가 되고, 더 적으면 강압 변압기가 된다",
           "answerMatchMode": "ANY",
-          "answerText": "변압기에서 전압의 크기는 두 코일의 감은 수 비에 따라 달라진다. 2차 코일의 감은 수가 더 많으면 승압 변압기가 되고, 더 적으면 강압 변압기가 된다. 이 관계 덕분에 발전소에서 만든 전기를 멀리 보낼 때는 전압을 높여 손실을 줄이고, 가정이나 학교에 들어올 때는 다시 낮은 전압으로 바꾸어 안전하게 사용할 수 있다. 따라서 변압기는 전력 전달 효율과 안전을 동시에 가능하게 하는 장치라고 할 수 있다."
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 37, "end": 84}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "\"시간이 지나도 방향과 세기가 일정해 자기장이 거의 변하지 않기 때문\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 224
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "변압기가 직류보다 교류에서 주로 쓰이는 까닭이 드러난 부분을 찾으시오",
+          "answerText": "직류는 시간이 지나도 방향과 세기가 일정하므로 자기장도 거의 변하지 않아, 같은 방식으로는 지속적인 유도 전압을 만들기 어렵다",
           "answerMatchMode": "ANY",
-          "answerText": "여기서 중요한 점은 변압기가 교류에서 주로 쓰인다는 사실이다. 직류는 시간이 지나도 방향과 세기가 일정하므로 자기장도 거의 변하지 않아, 같은 방식으로는 지속적인 유도 전압을 만들기 어렵다. 반면 교류는 전류가 주기적으로 바뀌기 때문에 자기장도 계속 변하고, 그 변화가 다른 코일에 안정적으로 전달될 수 있다. 그래서 전력망과 변압기의 관계를 이해하려면 전자기 유도와 교류의 성질을 함께 보아야 한다."
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 35, "end": 105}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q6",
-          "prompt": "\"전자기 유도는 원리이고 변압기는 그 원리를 쓰는 장치이다\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 200
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "변압기 덕분에 발전소에서는 전압을 높이고 가정이나 학교에서는 낮추는 까닭이 드러난 부분을 찾으시오",
+          "answerText": "이 관계 덕분에 발전소에서 만든 전기를 멀리 보낼 때는 전압을 높여 손실을 줄이고, 가정이나 학교에 들어올 때는 다시 낮은 전압으로 바꾸어 안전하게 사용할 수 있다",
           "answerMatchMode": "ANY",
-          "answerText": "정리하면 전자기 유도는 자기장의 변화가 전압을 만들어 내는 현상이고, 변압기는 그 현상을 이용해 전압 크기를 바꾸는 장치이다. 전자는 원리를 설명하고, 후자는 그 원리가 실제 전력 전달에 어떻게 쓰이는지 보여 준다. 따라서 변압기를 이해하려면 코일 수 비만 외울 것이 아니라, 변화하는 자기장이 왜 다른 코일에 전압을 만들 수 있는지부터 함께 생각해야 한다."
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 86, "end": 177}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

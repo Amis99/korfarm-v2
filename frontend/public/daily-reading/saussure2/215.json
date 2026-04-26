@@ -559,61 +559,76 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "무언가를 알게 해 주는 것을 뜻하는 낱말은 무엇인가요?",
-          "answerText": "가르치다",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
+        "prompt": "무언가를 알게 해 주는 것을 뜻하는 낱말을 지문에서 찾으시오.",
+        "answerText": "가르치다",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p1",
               "start": 69,
               "end": 73
             }
-          ],
-          "scoring": {
-            "correctDeltaSec": 5,
-            "wrongDeltaSec": -2,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
         },
-        {
-          "id": "q2",
-          "prompt": "머릿속에 있던 기억이나 생각을 까맣게 지워 버렸을 때 쓰는 말은 무엇인가요?",
-          "answerText": "잊어버리다",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 70,
-              "end": 75
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 5,
-            "wrongDeltaSec": -2,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
+        "revealOnWrong": true
+      },
+      {
+        "id": "q2",
+        "prompt": "손가락으로 방향을 짚는 것을 뜻하는 낱말을 지문에서 찾으시오.",
+        "answerText": "가리키다",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p1",
+            "start": 98,
+            "end": 102
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
         },
-        {
-          "id": "q3",
-          "prompt": "평소에 책을 소리 내어 읽거나 이것을 쓰면서 헷갈리는 말을 꼼꼼히 확인하는 습관을 길러 보아요. 이것은 무엇일까요?",
-          "answerText": "일기",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 113,
-              "end": 115
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 5,
-            "wrongDeltaSec": -2,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        }
+        "revealOnWrong": true
+      },
+      {
+        "id": "q3",
+        "prompt": "물건을 흘려서 찾지 못할 때 쓰는 말을 지문에서 찾으시오.",
+        "answerText": "잃어버리다",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p2",
+            "start": 18,
+            "end": 23
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
+        },
+        "revealOnWrong": true
+      },
+      {
+        "id": "q4",
+        "prompt": "머릿속에 있던 기억이나 생각을 까맣게 지워 버렸을 때 쓰는 말을 지문에서 찾으시오.",
+        "answerText": "잊어버리다",
+        "answerMatchMode": "ANY",
+        "answerRanges": [
+          {
+            "paragraphId": "p2",
+            "start": 70,
+            "end": 75
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -45
+        },
+        "revealOnWrong": true
+      }
       ]
     }
   }

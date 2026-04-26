@@ -474,39 +474,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "물어보는 말?",
-          "answerText": "질문",
-          "answerMatchMode": "EXACT",
+          "prompt": "질문하는 문장 뒤에 꼭 붙여주어야 하는 문장 부호의 이름을 글에서 찾아보세요",
+          "answerText": "물음표",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 17,
-              "end": 19
-            },
-            {
-              "paragraphId": "p1",
-              "start": 33,
-              "end": 35
-            },
-            {
-              "paragraphId": "p1",
-              "start": 114,
-              "end": 116
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 50,
-              "end": 52
-            },
-            {
-              "paragraphId": "p2",
-              "start": 125,
-              "end": 127
+              "start": 45,
+              "end": 48
             }
           ],
           "scoring": {
@@ -518,24 +493,14 @@
         },
         {
           "id": "q2",
-          "prompt": "생각을 담은 글의 마디?",
-          "answerText": "문장",
-          "answerMatchMode": "EXACT",
+          "prompt": "질문하는 문장은 끝을 어떻게 해서 말한다고 했는지 글에서 찾아보세요",
+          "answerText": "올려서",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 22,
-              "end": 24
-            },
-            {
-              "paragraphId": "p1",
-              "start": 38,
-              "end": 40
-            },
-            {
-              "paragraphId": "p1",
-              "start": 51,
-              "end": 53
+              "start": 100,
+              "end": 103
             }
           ],
           "scoring": {
@@ -547,14 +512,33 @@
         },
         {
           "id": "q3",
-          "prompt": "늘 하는 버릇?",
-          "answerText": "습관",
-          "answerMatchMode": "EXACT",
+          "prompt": "질문을 하면 무엇의 생각이나 사실을 알 수 있다고 했는지 한 단어로 찾아보세요",
+          "answerText": "상대방",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 121,
+              "end": 124
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "질문을 잘하는 습관은 새로운 무엇을 배우는 데 큰 도움이 된다고 했는지 한 단어로 찾아보세요",
+          "answerText": "지식",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 8,
-              "end": 10
+              "start": 16,
+              "end": 18
             }
           ],
           "scoring": {

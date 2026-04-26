@@ -583,19 +583,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "회의에 참석해 의견을 나눈 학생 측 주체는 누구인가요?",
-          "answerText": "학생회",
-          "answerMatchMode": "ANY",
+          "prompt": "회의 주제와 참석 주체를 모두 찾으시오.",
+          "answerTexts": [
+            "교내 CCTV 설치",
+            "학생회와 교직원"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 34,
-              "end": 37
+              "start": 7,
+              "end": 17
             },
             {
-              "paragraphId": "p2",
-              "start": 3,
-              "end": 6
+              "paragraphId": "p1",
+              "start": 34,
+              "end": 42
             }
           ],
           "scoring": {
@@ -606,14 +609,22 @@
         },
         {
           "id": "q2",
-          "prompt": "학생회가 CCTV 설치의 이유로 든 문제는 무엇인가요?",
-          "answerText": "도난 방지",
-          "answerMatchMode": "ANY",
+          "prompt": "학생회 측이 CCTV 설치가 시급하다고 주장한 이유를 모두 찾으시오.",
+          "answerTexts": [
+            "도난 방지를 위해 설치가 시급하다고",
+            "최근 피해 사례가 늘고 있어"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 10,
-              "end": 15
+              "end": 29
+            },
+            {
+              "paragraphId": "p2",
+              "start": 38,
+              "end": 53
             }
           ],
           "scoring": {
@@ -624,7 +635,7 @@
         },
         {
           "id": "q3",
-          "prompt": "일부 교직원이 지적한 비용 문제는 무엇인가요?",
+          "prompt": "일부 교직원이 지적한 비용 문제를 찾으시오.",
           "answerText": "유지 보수 비용",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -642,7 +653,7 @@
         },
         {
           "id": "q4",
-          "prompt": "교직원이 함께 고민해야 한다고 한 역할은 무엇인가요?",
+          "prompt": "교직원이 함께 고민해야 한다고 한 역할을 찾으시오.",
           "answerText": "영상 관리 책임자",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -660,14 +671,14 @@
         },
         {
           "id": "q5",
-          "prompt": "다음 회의에서 다시 검토하기로 한 것은 무엇인가요?",
-          "answerText": "예산안",
+          "prompt": "양측이 합의한 방향을 찾으시오.",
+          "answerText": "비용을 절감할 수 있는 방안",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 46,
-              "end": 49
+              "start": 4,
+              "end": 19
             }
           ],
           "scoring": {

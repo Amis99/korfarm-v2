@@ -1298,7 +1298,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "건의문이 제안한 전담 조직은 무엇인가요?",
+          "prompt": "건의문이 창설해야 한다고 제안한 전담 조직을 찾으시오.",
           "answerText": "메타버스 전담 사이버 수사대",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1316,24 +1316,14 @@
         },
         {
           "id": "q2",
-          "prompt": "운영 기업의 무엇을 강화해야 한다고 했나요?",
-          "answerText": "책임",
+          "prompt": "전담 수사대가 할 일을 찾으시오.",
+          "answerText": "불법 행위를 모니터링하고 증거를 수집",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 16,
-              "end": 18
-            },
-            {
-              "paragraphId": "p3",
-              "start": 181,
-              "end": 183
-            },
-            {
-              "paragraphId": "p5",
-              "start": 106,
-              "end": 108
+              "paragraphId": "p2",
+              "start": 137,
+              "end": 157
             }
           ],
           "scoring": {
@@ -1344,14 +1334,14 @@
         },
         {
           "id": "q3",
-          "prompt": "가해자에게 즉각 취해야 할 조치의 대상은 무엇인가요?",
-          "answerText": "계정",
+          "prompt": "범죄 발생 시 가해자에게 즉각 취해야 한다고 한 조치를 찾으시오.",
+          "answerText": "가해자의 계정을 즉각 정지",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 133,
-              "end": 135
+              "start": 128,
+              "end": 142
             }
           ],
           "scoring": {
@@ -1362,7 +1352,7 @@
         },
         {
           "id": "q4",
-          "prompt": "사용자 교육으로 의무화하자고 한 것은 무엇인가요?",
+          "prompt": "사용자를 대상으로 의무화해야 한다고 한 교육을 찾으시오.",
           "answerText": "디지털 윤리 교육",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1380,14 +1370,28 @@
         },
         {
           "id": "q5",
-          "prompt": "선제적인 대응이 만드는 목표는 어떤 사회인가요?",
-          "answerText": "안전한 가상 사회",
-          "answerMatchMode": "ANY",
+          "prompt": "이를 위한 필수적인 조치를 모두 찾으시오.",
+          "answerTexts": [
+            "전담 수사대 창설",
+            "기업 책임 강화",
+            "윤리 교육 의무화"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 203,
-              "end": 212
+              "start": 92,
+              "end": 101
+            },
+            {
+              "paragraphId": "p5",
+              "start": 103,
+              "end": 111
+            },
+            {
+              "paragraphId": "p5",
+              "start": 113,
+              "end": 122
             }
           ],
           "scoring": {

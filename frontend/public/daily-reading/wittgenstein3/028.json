@@ -1200,12 +1200,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 파생 사동과 통사 사동의 결합 제약과 의미 차이라는 문법 주제를 어떤 배경에서 꺼내는가?",
+          "prompt": "사동 표현의 뜻을 설명한 부분을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 226
+              "start": 7,
+              "end": 47
             }
           ],
           "scoring": {
@@ -1214,16 +1214,31 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "사동 표현은 어떤 주체가 다른 대상에게 행위를 하도록 만들거나 어떤 상태가 생기게 함을 나타낸다. 그런데 한국어의 사동은 한 가지 방식으로만 실현되지 않는다. 용언 어간에 '-이-', '-히-', '-리-', '-기-' 같은 형태가 붙는 파생 사동이 있고, 본용언 뒤에 '-게 하다'가 결합하는 통사 사동이 있다. 두 방식은 겉으로는 모두 '시키는 뜻'을 나타내지만, 결합 범위와 의미 작용은 같지 않다."
+          "answerText": "어떤 주체가 다른 대상에게 행위를 하도록 만들거나 어떤 상태가 생기게 함"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 판별 기준이나 기본 원리를 어떻게 설명하는가?",
+          "prompt": "파생 사동에 붙는 형태를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 238
+              "paragraphId": "p1",
+              "start": 96,
+              "end": 101
+            },
+            {
+              "paragraphId": "p1",
+              "start": 103,
+              "end": 108
+            },
+            {
+              "paragraphId": "p1",
+              "start": 110,
+              "end": 115
+            },
+            {
+              "paragraphId": "p1",
+              "start": 117,
+              "end": 122
             }
           ],
           "scoring": {
@@ -1231,17 +1246,22 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "파생 사동은 하나의 단어 안에서 실현되는 사동이다. 예를 들어 '앉다-앉히다', '입다-입히다', '울다-울리다'처럼 사동 접사가 붙어 새로운 용언이 형성된다. 이런 방식은 어휘적으로 굳어진 경우가 많아, 어떤 용언이 파생 사동을 허용하는지는 개별적으로 확인해야 한다. 따라서 의미상 누군가에게 어떤 행동을 하게 만든다는 뜻이 가능하더라도, 모든 용언이 자동으로 '-이/-히/-리/-기-' 사동형을 만들 수 있는 것은 아니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'-이-'",
+            "'-히-'",
+            "'-리-'",
+            "'-기-'"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단은 해당 문법 현상의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "파생 사동의 정의를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 216
+              "paragraphId": "p2",
+              "start": 7,
+              "end": 25
             }
           ],
           "scoring": {
@@ -1250,16 +1270,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "반면 통사 사동은 용언의 활용형 뒤에 '-게 하다'를 결합해 사동의 뜻을 드러낸다. '먹게 하다', '웃게 하다', '공부하게 하다'처럼 비교적 생산성이 높아 다양한 서술어와 폭넓게 결합할 수 있다. 그래서 파생 사동형이 어색하거나 존재하지 않는 용언도 통사 사동으로는 자연스럽게 표현되는 경우가 많다. 이 점에서 통사 사동은 문장 차원에서 사동 관계를 드러내는 방식이라고 할 수 있다."
+          "answerText": "하나의 단어 안에서 실현되는 사동"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 구별점이나 추가 조건을 어떻게 드러내는가?",
+          "prompt": "파생 사동의 예로 제시된 단어 짝을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 223
+              "paragraphId": "p2",
+              "start": 35,
+              "end": 43
+            },
+            {
+              "paragraphId": "p2",
+              "start": 45,
+              "end": 53
+            },
+            {
+              "paragraphId": "p2",
+              "start": 55,
+              "end": 63
             }
           ],
           "scoring": {
@@ -1267,17 +1297,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "두 방식은 결합 제약뿐 아니라 의미의 결도에서도 차이를 보인다. 파생 사동은 상대적으로 직접적이고 밀착된 작용을 나타내는 경향이 있다. '아이를 앉히다', '옷을 입히다'처럼 행위 주체가 대상의 상태 변화에 직접 관여하는 느낌이 강하다. 이에 비해 통사 사동은 어떤 행동이 일어나도록 유도하거나 허용하는 뜻까지 넓게 나타낼 수 있어, 직접 강제뿐 아니라 지시·유발·방임의 의미도 함께 드러내기 쉽다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'앉다-앉히다'",
+            "'입다-입히다'",
+            "'울다-울리다'"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단은 해석상의 주의점이나 효과를 어떤 방향으로 설명하는가?",
+          "prompt": "통사 사동이 사동의 뜻을 드러내는 방식을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 233
+              "paragraphId": "p3",
+              "start": 21,
+              "end": 45
             }
           ],
           "scoring": {
@@ -1286,16 +1320,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "또한 동일한 기본 용언이라도 파생 사동과 통사 사동이 완전히 같은 뜻으로 쓰이지 않는 경우가 있다. '울리다'는 종을 치게 하거나 소리가 나게 하는 뜻으로 굳어 있어 어휘적 특성이 강하지만, '울게 하다'는 특정 대상을 실제로 울도록 만든 상황을 서술하는 데 더 적합할 수 있다. 다시 말해 파생 사동은 사전에 등재된 하나의 용언으로 굳은 경우가 많고, 통사 사동은 문맥 속에서 사동 관계를 보다 분석적으로 드러낸다."
+          "answerText": "'-게 하다'를 결합해 사동의 뜻을 드러낸다"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 파생 사동과 통사 사동의 결합 제약과 의미 차이라는 문법 주제의 의미를 어떤 관점에서 정리하는가?",
+          "prompt": "통사 사동의 생산성이 높다고 볼 수 있는 근거를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 243
+              "paragraphId": "p3",
+              "start": 89,
+              "end": 110
             }
           ],
           "scoring": {
@@ -1304,7 +1338,65 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정리하면 파생 사동은 접사 결합에 의해 형성되는 어휘적 사동으로서 결합 제약이 크고 의미가 굳어 있는 경우가 많다. 통사 사동은 '-게 하다'를 활용하는 문장 차원의 사동으로서 생산성이 높고 의미 범위도 넓다. 따라서 실제 문장을 해석할 때에는 두 표현이 모두 사동이라는 공통점만 볼 것이 아니라, 어떤 서술어와 결합했는지, 행위 주체가 대상에게 얼마나 직접적으로 작용하는지, 그리고 의미가 어휘적으로 굳어 있는지를 함께 살펴야 한다."
+          "answerText": "다양한 서술어와 폭넓게 결합할 수 있다"
+        },
+        {
+          "id": "q7",
+          "prompt": "통사 사동이 함께 드러내기 쉬운 의미를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 187,
+              "end": 192
+            },
+            {
+              "paragraphId": "p4",
+              "start": 198,
+              "end": 206
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "직접 강제",
+            "지시·유발·방임"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "실제 문장을 해석할 때 함께 살펴야 할 기준을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 167,
+              "end": 180
+            },
+            {
+              "paragraphId": "p6",
+              "start": 182,
+              "end": 209
+            },
+            {
+              "paragraphId": "p6",
+              "start": 215,
+              "end": 231
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "어떤 서술어와 결합했는지",
+            "행위 주체가 대상에게 얼마나 직접적으로 작용하는지",
+            "의미가 어휘적으로 굳어 있는지"
+          ]
         }
       ]
     }

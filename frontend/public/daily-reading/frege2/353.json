@@ -884,29 +884,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "복잡한 숫자나 정보를 그림이나 표로 나타내는 방법을 무엇이라고 하나요?",
-          "answerText": "데이터 시각화",
+          "prompt": "데이터 시각화의 정의에 해당하는 부분을 찾으시오.",
+          "answerText": "복잡한 숫자나 정보를 그림이나 표로 나타내는 방법",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 7
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 7
-            },
-            {
-              "paragraphId": "p4",
-              "start": 16,
-              "end": 23
-            },
-            {
-              "paragraphId": "p4",
-              "start": 114,
-              "end": 121
+              "start": 9,
+              "end": 36
             }
           ],
           "scoring": {
@@ -917,14 +902,22 @@
         },
         {
           "id": "q2",
-          "prompt": "대표적으로 자주 사용된다고 한 그래프는 무엇인가요?",
-          "answerText": "막대그래프",
-          "answerMatchMode": "ANY",
+          "prompt": "대표적인 그래프의 예시로 제시된 것을 모두 찾으시오.",
+          "answerTexts": [
+            "막대그래프",
+            "꺾은선그래프"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 81,
               "end": 86
+            },
+            {
+              "paragraphId": "p1",
+              "start": 88,
+              "end": 94
             }
           ],
           "scoring": {
@@ -935,13 +928,13 @@
         },
         {
           "id": "q3",
-          "prompt": "데이터 시각화를 읽을 때 제목과 함께 먼저 확인해야 하는 것은 무엇인가요?",
-          "answerText": "단위",
+          "prompt": "데이터 시각화를 읽을 때 먼저 확인해야 한다고 한 것을 찾으시오.",
+          "answerText": "제목과 단위",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 22,
+              "start": 18,
               "end": 24
             }
           ],
@@ -953,14 +946,14 @@
         },
         {
           "id": "q4",
-          "prompt": "변화가 더 크게 보일 수 있는 까닭과 관련된 것은 무엇인가요?",
-          "answerText": "눈금 간격",
+          "prompt": "변화가 더 크게 보일 수 있는 이유를 찾으시오.",
+          "answerText": "그래프의 눈금 간격이 일정하지 않으면",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 48,
-              "end": 53
+              "start": 43,
+              "end": 63
             }
           ],
           "scoring": {
@@ -971,14 +964,14 @@
         },
         {
           "id": "q5",
-          "prompt": "데이터 시각화 읽기 능력은 현대 사회를 살아가는 우리의 무엇이라고 했나요?",
-          "answerText": "필수 경쟁력",
+          "prompt": "자료를 있는 그대로 받아들이기보다 필요한 태도를 찾으시오.",
+          "answerText": "비판적으로 생각하는 태도",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 145,
-              "end": 151
+              "paragraphId": "p3",
+              "start": 146,
+              "end": 159
             }
           ],
           "scoring": {

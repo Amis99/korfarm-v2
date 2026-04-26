@@ -1035,93 +1035,74 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "문맥상 연역은 무엇을 뜻하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 95,
-              "end": 125
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "연역의 정의를 찾으시오.",
+          "answerText": "일반적인 규칙에서 개별 사례의 결론을 이끌어 내는 방식",
           "answerMatchMode": "ANY",
-          "answerText": "일반적인 규칙에서 개별 사례의 결론을 이끌어 내는 방식"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 95, "end": 125}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "문맥상 귀납은 무엇을 뜻하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 133,
-              "end": 163
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "귀납의 정의를 찾으시오.",
+          "answerText": "여러 개별 사례를 살펴보고 공통된 규칙을 찾아내는 방식",
           "answerMatchMode": "ANY",
-          "answerText": "여러 개별 사례를 살펴보고 공통된 규칙을 찾아내는 방식"
+          "answerRanges": [
+            {"paragraphId": "p1", "start": 133, "end": 163}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "문맥상 전제는 무엇을 뜻하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 43
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "어떤 결론을 이끌어 내기 위해 미리 내세우는 판단을 가리키는 단어를 찾으시오.",
+          "answerText": "전제",
           "answerMatchMode": "ANY",
-          "answerText": "연역은 이미 주어진 전제가 참일 때 결론도 반드시 따라야 하는 경우를 말한다."
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 11, "end": 13},
+            {"paragraphId": "p2", "start": 71, "end": 73},
+            {"paragraphId": "p2", "start": 85, "end": 87},
+            {"paragraphId": "p2", "start": 189, "end": 191}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "문맥상 일반화는 무엇을 뜻하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 49,
-              "end": 112
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "검증되지 않은 채 잠시 세워 두는 가정을 가리키는 단어를 찾으시오.",
+          "answerText": "가설",
           "answerMatchMode": "ANY",
-          "answerText": "예를 들어 여러 금속을 가열했더니 모두 팽창하는 현상이 나타났다면, 금속은 가열하면 팽창한다고 일반화할 수 있다."
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 148, "end": 150},
+            {"paragraphId": "p4", "start": 163, "end": 165}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "문맥상 가설은 무엇을 뜻하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 120,
-              "end": 196
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "부피가 늘어나거나 부풀어 오른다는 뜻의 단어를 찾으시오.",
+          "answerText": "팽창",
           "answerMatchMode": "ANY",
-          "answerText": "예를 들어 과학에서는 먼저 관찰을 통해 귀납적으로 가설을 세우고, 그다음 그 가설이 맞는지 연역적으로 예측을 만들어 시험해 볼 수 있다."
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 71, "end": 73},
+            {"paragraphId": "p3", "start": 96, "end": 98}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "이미 아는 사실을 바탕으로 다른 판단을 이끌어 내는 일을 가리키는 단어를 찾으시오.",
+          "answerText": "추론",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 33, "end": 35}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

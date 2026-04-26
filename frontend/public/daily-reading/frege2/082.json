@@ -1079,24 +1079,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "촬영자의 의도와 시선이 반영되는 보도 형식은 무엇인가요?",
-          "answerText": "사진 보도",
+          "prompt": "카메라의 렌즈가 반영하기 마련인 것을 지문 속 어구로 찾으시오.",
+          "answerText": "촬영자의 의도와 시선",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 5
-            },
-            {
-              "paragraphId": "p3",
-              "start": 4,
-              "end": 9
-            },
-            {
-              "paragraphId": "p4",
-              "start": 35,
-              "end": 40
+              "start": 39,
+              "end": 50
             }
           ],
           "scoring": {
@@ -1107,14 +1097,14 @@
         },
         {
           "id": "q2",
-          "prompt": "사진 기자가 소외된 이웃의 아픔을 조명해 이끌어내는 것은 무엇인가요?",
-          "answerText": "사회적 공감",
+          "prompt": "같은 사건이라도 전혀 다른 느낌을 주게 하는 조건을 지문 속 표현으로 찾으시오.",
+          "answerText": "어떤 각도에서 찍느냐",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 87,
-              "end": 93
+              "paragraphId": "p1",
+              "start": 72,
+              "end": 83
             }
           ],
           "scoring": {
@@ -1125,7 +1115,25 @@
         },
         {
           "id": "q3",
-          "prompt": "사진 일부를 잘라내거나 편집할 때 왜곡될 수 있는 것은 무엇인가요?",
+          "prompt": "사진 기자가 대중에게 전달하는 것을 지문 속 단어로 찾으시오.",
+          "answerText": "메시지",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 25,
+              "end": 28
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "사진의 일부만 잘라내거나 편집하면 본래의 무엇이 왜곡될 수 있는지 찾으시오.",
           "answerText": "맥락",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1142,33 +1150,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "디지털 기술 발달로 더욱 쉬워져 신뢰성을 위협하는 것은 무엇인가요?",
-          "answerText": "사진 조작",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 16,
-              "end": 21
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q5",
-          "prompt": "언론이 사진의 진실성을 지키기 위해 다해야 하는 것은 무엇인가요?",
-          "answerText": "윤리적 책임",
+          "prompt": "독자가 사진을 맹신하지 않고 길러야 하는 태도를 지문 속 표현으로 찾으시오.",
+          "answerText": "객관적으로 바라보는 태도",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 82,
-              "end": 88
+              "start": 116,
+              "end": 129
             }
           ],
           "scoring": {

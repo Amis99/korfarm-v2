@@ -559,9 +559,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "무더운 여름이 되면 우리 몸은 뜨거워진 체온을 낮추기 위해 이것을 뻘뻘 흘려요. 이것은 무엇일까요?",
+          "prompt": "무더운 여름이 되면 우리 몸은 뜨거워진 체온을 낮추기 위해 무엇을 뻘뻘 흘려요?",
           "answerText": "땀",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -588,14 +588,14 @@
         },
         {
           "id": "q2",
-          "prompt": "햇볕이 너무 쨍쨍한 낮에는 바깥 놀이를 피하고 이곳에서 쉬어야 한답니다. 이곳은 어디일까요?",
-          "answerText": "그늘",
-          "answerMatchMode": "EXACT",
+          "prompt": "땀이 피부 밖으로 나와 마르면서 무엇을 식혀 주는 역할을 하나요?",
+          "answerText": "몸의 열",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 129,
-              "end": 131
+              "paragraphId": "p1",
+              "start": 62,
+              "end": 66
             }
           ],
           "scoring": {
@@ -607,14 +607,42 @@
         },
         {
           "id": "q3",
-          "prompt": "외출할 때는 시원한 옷을 입고, 머리를 보호해 주는 이것을 써야 해요. 이것은 무엇일까요?",
-          "answerText": "모자",
-          "answerMatchMode": "EXACT",
+          "prompt": "더운 날씨에 밖에서 무리하게 뛰어놀면 걸릴 수 있는 무서운 병을 모두 찾으시오.",
+          "answerText": "일사병, 열사병",
+          "answerTexts": [
+            "일사병",
+            "열사병"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 21,
+              "end": 24
+            },
+            {
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 30
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "더위로부터 우리 몸을 건강하게 지키려면 무엇을 자주 마셔 주는 것이 가장 좋다고 했나요?",
+          "answerText": "시원한 물",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 89,
-              "end": 91
+              "start": 22,
+              "end": 27
             }
           ],
           "scoring": {

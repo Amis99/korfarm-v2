@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "순서를 지키는 상태는?",
-          "answerText": "질서 있게",
-          "answerMatchMode": "EXACT",
+          "prompt": "좁은 골목길을 다닐 때 먼저 살펴야 할 내용을 본문에서 찾으시오.",
+          "answerText": "차가 오는지 안전하게 살펴야 함",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 60,
-              "end": 65
+              "paragraphId": "p1",
+              "start": 14,
+              "end": 31
             }
           ],
           "scoring": {
@@ -606,14 +606,22 @@
         },
         {
           "id": "q2",
-          "prompt": "지켜야 할 행동 방식은?",
-          "answerText": "수칙을",
-          "answerMatchMode": "EXACT",
+          "prompt": "골목길에서 위험한 걷기 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "이어폰을 끼거나",
+            "스마트폰을 보며 걷는 행동"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 11,
-              "end": 14
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 41
+            },
+            {
+              "paragraphId": "p1",
+              "start": 42,
+              "end": 56
             }
           ],
           "scoring": {
@@ -625,14 +633,49 @@
         },
         {
           "id": "q3",
-          "prompt": "살아 있는 모든 것은?",
-          "answerText": "생명을",
-          "answerMatchMode": "EXACT",
+          "prompt": "골목 귀퉁이에서 해야 할 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "멈추어 서서",
+            "좌우를 확인하는 태도"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 46,
-              "end": 49
+              "paragraphId": "p2",
+              "start": 10,
+              "end": 16
+            },
+            {
+              "paragraphId": "p2",
+              "start": 17,
+              "end": 28
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "보행 규칙을 실천할 때 생각해야 할 대상과 실천 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "타인의 안전도 생각하며",
+            "보행 규칙을 실천해야 합니다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 70,
+              "end": 82
+            },
+            {
+              "paragraphId": "p2",
+              "start": 83,
+              "end": 98
             }
           ],
           "scoring": {

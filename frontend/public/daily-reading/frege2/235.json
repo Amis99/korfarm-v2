@@ -720,54 +720,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "어떤 개념을 명확하게 설명하기 위해 쓰는 방법을 무엇이라고 하나요?",
-          "answerText": "정의",
+          "prompt": "정의가 주로 어떤 형식으로 표현되는지 지문에서 찾으시오.",
+          "answerText": "무엇은 무엇이다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 35,
-              "end": 37
-            },
-            {
-              "paragraphId": "p1",
-              "start": 42,
-              "end": 44
-            },
-            {
-              "paragraphId": "p1",
-              "start": 112,
-              "end": 114
-            },
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p2",
-              "start": 108,
-              "end": 110
-            },
-            {
-              "paragraphId": "p3",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p3",
-              "start": 84,
-              "end": 86
-            },
-            {
-              "paragraphId": "p4",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p4",
-              "start": 111,
-              "end": 113
+              "start": 50,
+              "end": 58
             }
           ],
           "scoring": {
@@ -778,7 +738,7 @@
         },
         {
           "id": "q2",
-          "prompt": "올바른 정의가 먼저 포함해야 하는 것은 무엇인가요?",
+          "prompt": "올바른 정의를 내리기 위한 첫 번째 기준에서 포함해야 한다고 한 대상의 속성을 찾으시오.",
           "answerText": "본질적인 속성",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -796,7 +756,7 @@
         },
         {
           "id": "q3",
-          "prompt": "대상을 포함하는 더 큰 범주를 무엇이라고 하나요?",
+          "prompt": "대상을 포함하는 더 큰 범주를 가리키는 말을 찾으시오.",
           "answerText": "유개념",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -819,7 +779,7 @@
         },
         {
           "id": "q4",
-          "prompt": "대상을 다른 것과 구별해 주는 특징을 무엇이라고 하나요?",
+          "prompt": "다른 것들과 구별되는 특징을 가리키는 말을 찾으시오.",
           "answerText": "종차",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -842,10 +802,18 @@
         },
         {
           "id": "q5",
-          "prompt": "정의를 할 때 피해야 한다고 한 표현 방식 가운데 하나는 무엇인가요?",
-          "answerText": "비유적인 표현",
-          "answerMatchMode": "ANY",
+          "prompt": "정의를 할 때 피하는 것이 좋다고 한 표현 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "부정적인 표현",
+            "비유적인 표현"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 12,
+              "end": 19
+            },
             {
               "paragraphId": "p4",
               "start": 22,

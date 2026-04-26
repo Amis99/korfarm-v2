@@ -587,14 +587,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "물건을 질서 있게 치움?",
-          "answerText": "정리해야",
-          "answerMatchMode": "EXACT",
+          "prompt": "잠자기 전에 해야 할 두 일을 모두 찾으시오.",
+          "answerTexts": [
+            "깨끗하게 양치질",
+            "주변을 정리해야 함"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 25,
-              "end": 29
+              "start": 8,
+              "end": 16
+            },
+            {
+              "paragraphId": "p1",
+              "start": 21,
+              "end": 31
             }
           ],
           "scoring": {
@@ -606,14 +614,22 @@
         },
         {
           "id": "q2",
-          "prompt": "병을 일으키는 작은 생물?",
-          "answerText": "세균이",
-          "answerMatchMode": "EXACT",
+          "prompt": "제자리에 잘 두어야 하는 것과 필요한 습관을 모두 찾으시오.",
+          "answerTexts": [
+            "칫솔과 치약",
+            "제자리에 잘 두는 습관"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 42,
-              "end": 45
+              "paragraphId": "p1",
+              "start": 37,
+              "end": 43
+            },
+            {
+              "paragraphId": "p1",
+              "start": 45,
+              "end": 57
             }
           ],
           "scoring": {
@@ -625,14 +641,41 @@
         },
         {
           "id": "q3",
-          "prompt": "일을 이루었을 때의 뿌듯함?",
-          "answerText": "성취감을",
-          "answerMatchMode": "EXACT",
+          "prompt": "세면대에서 필요한 정성을 모두 찾으시오.",
+          "answerTexts": [
+            "세면대에 튄 물기",
+            "컵을 엎어두는 정성"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 78,
-              "end": 82
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 9
+            },
+            {
+              "paragraphId": "p2",
+              "start": 14,
+              "end": 24
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "청결한 환경을 스스로 만드는 습관이 지켜 주는 것을 찾으시오.",
+          "answerText": "건강을 지켜줍니다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 83,
+              "end": 92
             }
           ],
           "scoring": {

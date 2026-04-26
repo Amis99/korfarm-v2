@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "개인의 이익이 아니라 우리 마을 주민 전체의 안전하고 편리한 생활을 돕기 위해 국가가 세운 기관은?",
+          "prompt": "주민들의 안전하고 편리한 생활을 돕는 여러 기관을 지문에서는 무엇이라고 부르는지 찾으시오.",
           "answerText": "공공기관",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -586,24 +586,14 @@
         },
         {
           "id": "q2",
-          "prompt": "전염병 예방 접종을 하거나 아픈 사람들을 치료하고 약을 주어 주민들의 건강을 챙기는 공공기관은 어디인가요?",
-          "answerText": "보건소",
-          "answerMatchMode": "EXACT",
+          "prompt": "보건소에서 전염병을 예방하기 위해 사람들에게 해 주던 일을 찾으시오.",
+          "answerText": "예방 접종",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 115,
-              "end": 118
-            },
-            {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p2",
-              "start": 86,
-              "end": 89
+              "start": 26,
+              "end": 31
             }
           ],
           "scoring": {
@@ -615,14 +605,33 @@
         },
         {
           "id": "q3",
-          "prompt": "주민 누구나 방문하여 마음껏 책을 빌리거나 조용히 공부할 수 있도록 마련된 유익한 공간은 어디인가요?",
+          "prompt": "우리가 책을 마음껏 빌릴 수 있는 곳으로 방문한 장소를 찾으시오.",
           "answerText": "시립 도서관",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 24,
               "end": 30
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "이번 탐구 활동을 통해 공공기관이 마을에 어떠하다는 것을 깨달았는지 찾으시오.",
+          "answerText": "꼭 필요하다는 것",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 104,
+              "end": 113
             }
           ],
           "scoring": {

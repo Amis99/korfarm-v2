@@ -416,38 +416,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "아기 ( )이가 누웠습니다.",
-          "answerText": "고양",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 13,
-              "end": 15
-            },
-            {
-              "paragraphId": "p1",
-              "start": 52,
-              "end": 54
-            },
-            {
-              "paragraphId": "p2",
-              "start": 48,
-              "end": 50
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "발끝이 ( ) 춤을 춤.",
+          "prompt": "이 시에서 고양이 발끝의 움직임을 흉내 내는 말로 표현한 단어를 찾아 보세요.",
           "answerText": "꿈틀꿈틀",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -463,15 +434,58 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "( ) 숨소리가 들림.",
+          "id": "q2",
+          "prompt": "고양이가 자는 모습을 흉내 내는 말로, 조용히 잠자는 소리를 표현한 단어를 찾아 보세요.",
           "answerText": "새근새근",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 25,
               "end": 29
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "고양이의 숨소리를 다른 것에 빗대어 '~처럼'으로 비유한 표현을 시에서 찾아 보세요.",
+          "answerText": "노래처럼",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 35,
+              "end": 39
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "이 시에서 고양이가 누운 장소를 따뜻하게 비추고 있는 자연 현상을 가리키는 단어를 찾아 보세요.",
+          "answerText": "햇살",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p2",
+              "start": 62,
+              "end": 64
             }
           ],
           "scoring": {

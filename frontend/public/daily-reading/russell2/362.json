@@ -961,143 +961,182 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "학교 텃밭 활동을 소개한 글의 종류를 가리키는 말은 무엇인가요?",
+          "prompt": "글쓴이가 읽고 정리한 원문의 글 종류를 가리키는 세 글자 단어를 지문에서 모두 찾으시오.",
+          "answerText": "기사문",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 13,
-              "end": 15
+              "end": 16
             },
             {
               "paragraphId": "p2",
               "start": 19,
-              "end": 21
+              "end": 22
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "기사"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "읽고 써 본 글을 뜻하는 말은 무엇인가요?",
-          "answerMatchMode": "ANY",
+          "prompt": "원문이 텃밭을 만든 배경으로 함께 강조했다고 글쓴이가 든 두 가지를 지문에서 모두 찾으시오.",
+          "answerText": "생태 교육 / 공동체 활동",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 20,
-              "end": 21
-            },
-            {
-              "paragraphId": "p2",
-              "start": 36,
-              "end": 37
-            },
-            {
               "paragraphId": "p3",
-              "start": 54,
-              "end": 55
-            },
-            {
-              "paragraphId": "p4",
               "start": 19,
-              "end": 20
+              "end": 24
             },
-            {
-              "paragraphId": "p5",
-              "start": 74,
-              "end": 75
-            },
-            {
-              "paragraphId": "p6",
-              "start": 7,
-              "end": 8
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "초"
-        },
-        {
-          "id": "q3",
-          "prompt": "읽은 내용을 짧게 정리해 쓴 글을 뜻하는 말은 무엇인가요?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 27,
-              "end": 30
-            },
-            {
-              "paragraphId": "p3",
-              "start": 114,
-              "end": 117
-            },
-            {
-              "paragraphId": "p4",
-              "start": 102,
-              "end": 105
-            },
-            {
-              "paragraphId": "p5",
-              "start": 113,
-              "end": 116
-            },
-            {
-              "paragraphId": "p6",
-              "start": 172,
-              "end": 175
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerText": "요약문"
-        },
-        {
-          "id": "q4",
-          "prompt": "여럿이 함께 어울려 활동하는 관계를 뜻하는 말은 무엇인가요?",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 26,
-              "end": 28
+              "end": 32
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "공동"
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "학생들이 역할별로 나누어 맡았다고 한 작업 세 가지를 지문에서 모두 찾으시오.",
+          "answerText": "물 주기 / 잡초 제거 / 수확 기록",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 12,
+              "end": 16
+            },
+            {
+              "paragraphId": "p4",
+              "start": 18,
+              "end": 23
+            },
+            {
+              "paragraphId": "p4",
+              "start": 25,
+              "end": 30
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "요약문이 균형 있게 드러내야 한다고 한 세 가지 항목을 지문에서 모두 찾으시오.",
+          "answerText": "목적 / 운영 방식 / 기대 효과",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 125,
+              "end": 127
+            },
+            {
+              "paragraphId": "p3",
+              "start": 129,
+              "end": 134
+            },
+            {
+              "paragraphId": "p3",
+              "start": 136,
+              "end": 141
+            },
+            {
+              "paragraphId": "p6",
+              "start": 112,
+              "end": 114
+            },
+            {
+              "paragraphId": "p6",
+              "start": 116,
+              "end": 121
+            },
+            {
+              "paragraphId": "p6",
+              "start": 123,
+              "end": 128
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "앞으로의 가능성을 미리 내다보며 바라보는 뜻을 가진 말은 무엇인가요?",
+          "prompt": "원문 마지막에 텃밭 활동이 이어질 수 있다고 든 분야 네 가지를 지문에서 모두 찾으시오.",
+          "answerText": "과학 수업 / 급식 / 환경 교육 / 봉사 활동",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 17,
+              "end": 22
+            },
+            {
+              "paragraphId": "p5",
+              "start": 28,
+              "end": 30
+            },
+            {
+              "paragraphId": "p5",
+              "start": 32,
+              "end": 37
+            },
+            {
+              "paragraphId": "p5",
+              "start": 39,
+              "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "요약문은 글쓴이의 생각을 정리하는 글이 아니므로 무엇 대신 무엇을 중심으로 써야 한다고 했는지, 들어가서는 안 된다고 한 표현을 지문에서 찾으시오.",
+          "answerText": "의견",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 57,
-              "end": 59
+              "start": 92,
+              "end": 94
+            },
+            {
+              "paragraphId": "p6",
+              "start": 64,
+              "end": 66
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerText": "전망"
+          "revealOnWrong": true
         }
       ]
     }

@@ -441,14 +441,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "깊고 험한 산속에 살고 있는 야생 토끼는?",
-          "answerText": "산토끼",
+          "prompt": "노래에서 부르는 대상을 지문에서 찾으시오.",
+          "answerText": "산토끼 토끼야",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 3
+              "end": 7
             }
           ],
           "scoring": {
@@ -459,14 +459,55 @@
         },
         {
           "id": "q2",
-          "prompt": "밤나무의 열매로 껍질을 깐 둥글고 통통한 밤은?",
-          "answerText": "알밤",
+          "prompt": "노래에서 반복되는 물음 '어디를 가느냐'를 모두 찾으시오.",
+          "answerText": "어디를 가느냐",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 8,
+              "end": 15
+            },
+            {
+              "paragraphId": "p1",
+              "start": 25,
+              "end": 32
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "토끼가 어떻게 뛰는지 나타낸 표현을 지문에서 찾으시오.",
+          "answerText": "깡충깡충 뛰면서",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 16,
+              "end": 24
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "토끼가 주워 오겠다고 한 것을 지문에서 찾으시오.",
+          "answerText": "토실토실 알밤을",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 22,
-              "end": 24
+              "start": 17,
+              "end": 25
             }
           ],
           "scoring": {

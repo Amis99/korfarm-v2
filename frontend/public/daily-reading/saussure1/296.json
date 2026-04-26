@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "귀중한 가치가 있는 것?",
+          "prompt": "귀중한 가치가 있어 소중한 물건을 무엇이라고 하는지 지문에서 찾아 적어 보세요",
           "answerText": "보물",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -425,19 +425,19 @@
         },
         {
           "id": "q2",
-          "prompt": "과거를 되새기는 기억?",
-          "answerText": "추억",
-          "answerMatchMode": "EXACT",
+          "prompt": "준이가 연 상자 안에서 발견한 두 가지 물건을 1문단에서 모두 찾아 적어 보세요",
+          "answerText": "편지, 그림",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 162,
-              "end": 164
+              "start": 113,
+              "end": 115
             },
             {
-              "paragraphId": "p2",
-              "start": 163,
-              "end": 165
+              "paragraphId": "p1",
+              "start": 121,
+              "end": 123
             }
           ],
           "scoring": {
@@ -449,19 +449,43 @@
         },
         {
           "id": "q3",
-          "prompt": "생각이나 감정의 근본?",
-          "answerText": "마음",
-          "answerMatchMode": "EXACT",
+          "prompt": "용기를 내어 상자의 비밀 번호를 입력해 뚜껑을 연 인물의 이름을 1문단에서 찾아 적어 보세요",
+          "answerText": "준이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
+              "paragraphId": "p1",
               "start": 14,
               "end": 16
             },
             {
+              "paragraphId": "p1",
+              "start": 133,
+              "end": 135
+            },
+            {
               "paragraphId": "p2",
-              "start": 159,
-              "end": 161
+              "start": 125,
+              "end": 127
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "1문단에서 상자 뚜껑이 열리는 순간의 소리를 흉내 내어 표현한 말을 그대로 찾아 적어 보세요",
+          "answerText": "딸깍",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 42,
+              "end": 44
             }
           ],
           "scoring": {

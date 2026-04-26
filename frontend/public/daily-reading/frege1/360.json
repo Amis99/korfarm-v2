@@ -913,14 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "회의를 진행한 동아리 기장의 이름은 무엇인가요?",
-          "answerText": "지민",
+          "prompt": "첫 회의가 열린 때를 나타내는 어구를 지문에서 찾으시오.",
+          "answerText": "오늘 오후 방과 후에",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 133,
-              "end": 135
+              "start": 0,
+              "end": 11
             }
           ],
           "scoring": {
@@ -931,19 +931,14 @@
         },
         {
           "id": "q2",
-          "prompt": "투표 결과 심기로 결정한 작물 가운데 하나는 무엇인가요?",
-          "answerText": "상추",
+          "prompt": "회의에 모인 동아리원 수를 나타내는 어구를 지문에서 찾으시오.",
+          "answerText": "열다섯 명",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 48,
-              "end": 50
-            },
-            {
-              "paragraphId": "p2",
-              "start": 124,
-              "end": 126
+              "paragraphId": "p1",
+              "start": 41,
+              "end": 46
             }
           ],
           "scoring": {
@@ -954,19 +949,14 @@
         },
         {
           "id": "q3",
-          "prompt": "열매가 열리는 과정을 볼 수 있어 좋다고 한 작물은 무엇인가요?",
-          "answerText": "방울토마토",
+          "prompt": "수호가 물만 주면 금방 자란다고 하며 심자고 제안한 작물 이름이 들어 있는 어구를 지문에서 찾으시오.",
+          "answerText": "상추와 깻잎",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 91,
-              "end": 96
-            },
-            {
-              "paragraphId": "p2",
-              "start": 128,
-              "end": 133
+              "start": 48,
+              "end": 54
             }
           ],
           "scoring": {
@@ -977,14 +967,14 @@
         },
         {
           "id": "q4",
-          "prompt": "공평하게 참여하도록 게시판에 붙이기로 한 것은 무엇인가요?",
-          "answerText": "당번표",
+          "prompt": "물 주기를 맡는 방식에서 한 조의 인원과 순서를 나타내는 어구를 지문에서 찾으시오.",
+          "answerText": "세 명씩 한 조가 되어 요일별로 돌아가며",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 148,
-              "end": 151
+              "start": 53,
+              "end": 75
             }
           ],
           "scoring": {
@@ -995,10 +985,18 @@
         },
         {
           "id": "q5",
-          "prompt": "부족해서 지원을 받기로 한 물품 가운데 하나는 무엇인가요?",
-          "answerText": "거름",
-          "answerMatchMode": "ANY",
+          "prompt": "부족해서 지원을 받기로 한 물품들을 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "호미",
+            "거름"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 41,
+              "end": 43
+            },
             {
               "paragraphId": "p4",
               "start": 45,

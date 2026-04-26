@@ -571,30 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단의 내용을 바탕으로 알 수 있는 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 156
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "민재: 학생회 정책 설명회 발표 자료가 거의 완성됐는데, 도표를 어떤 순서로 보여 줄지 아직 정리가 안 됐어. 작년에는 통계 자료를 한꺼번에 앞에 몰아 넣었다가 청중이 핵심을 놓쳤잖아. 서윤: 이번에는 문제 제기, 현황, 대안 비교, 예상 효과 순으로 흐름을 잡아야 할 것 같아."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "도표가 설명이 아니라 무엇으로 읽힐 것이라고 했는지, 그 단어를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 201
+              "start": 141,
+              "end": 143
             }
           ],
           "scoring": {
@@ -603,51 +585,33 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "하린: 나는 첫 화면에서 설문 결과 도표부터 보여 주는 건 반대야. 숫자만 먼저 나오면 아직 정책 내용도 모르는 학생들이 지루해할 수 있어. 먼저 왜 이 정책을 논의하게 되었는지 사례를 하나 제시하고, 그다음에 설문 결과를 붙여야 도표가 설명이 아니라 근거로 읽힐 거야. 민재: 그러면 실제 민원 사례를 첫 장에 넣고, 바로 뒤에 관련 설문 그래프를 배치하자."
+          "answerText": "근거"
+        },
+        {
+          "id": "q2",
+          "prompt": "하린이 설문 결과 도표를 첫 화면에 두는 것에 반대한 이유를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 38,
+              "end": 77
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "숫자만 먼저 나오면 아직 정책 내용도 모르는 학생들이 지루해할 수 있어"
         },
         {
           "id": "q3",
-          "prompt": "3문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "실제 민원 사례를 첫 장에 넣자고 한 사람의 발화를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 197
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "서윤: 현황 파트에서는 현재 운영 방식과 문제점을 한 장에 다 넣지 말고 나누는 게 좋겠어. 운영 절차 도표는 흐름을 보여 주는 용도고, 만족도 그래프는 평가 자료니까 성격이 달라. 두 자료를 같은 장에 놓으면 각각을 읽는 시간이 부족해질 수 있어. 하린: 맞아. 절차 도표를 보고 난 뒤에 바로 불편 응답 비율을 보여 주면 앞뒤 연결도 더 자연스러워."
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단의 내용을 바탕으로 알 수 있는 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 194
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "민재: 대안 비교 부분은 표 하나로 끝내려 했는데, 비용·인력·예상 효과를 한 표에 다 넣으니까 글자가 너무 작아졌어. 서윤: 그건 핵심 비교 기준 두 개만 표로 남기고, 나머지는 사회자가 말로 보충하는 게 나아. 청중 입장에서는 한 화면에서 세 항목만 분명하게 읽히면 충분하거든. 하린: 대신 표 밑에 색으로 현재안과 대안의 차이를 표시해 두자."
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단의 내용을 바탕으로 알 수 있는 것은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
+              "paragraphId": "p2",
+              "start": 152,
               "end": 201
             }
           ],
@@ -657,16 +621,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "서윤: 마지막 예상 효과 그래프는 결론 바로 앞에 두는 게 좋겠어. 발표 중간에 넣으면 아직 대안 설명이 안 끝났는데 효과를 먼저 말하게 돼서 설득 순서가 흔들려. 민재: 그러네. 그러면 결론 직전에 예상 변화 그래프를 넣고, 그다음에 학생 의견 수렴 일정으로 마무리하자. 하린: 질문 시간에는 다시 대안 비교 표로 돌아갈 수 있게 슬라이드 번호도 적어 두자."
+          "answerText": "민재: 그러면 실제 민원 사례를 첫 장에 넣고, 바로 뒤에 관련 설문 그래프를 배치하자."
         },
         {
-          "id": "q6",
-          "prompt": "6문단의 내용을 바탕으로 알 수 있는 것은?",
+          "id": "q4",
+          "prompt": "현재안과 대안의 차이를 무엇으로 표시하자고 했는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 176
+              "paragraphId": "p4",
+              "start": 170,
+              "end": 173
             }
           ],
           "scoring": {
@@ -675,7 +639,79 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "민재: 정리하면 사례 제시, 설문 결과, 현재 절차, 불편 응답, 대안 비교 표, 예상 효과 그래프 순서네. 서윤: 응, 이렇게 가면 도표가 따로 노는 느낌이 줄고 발표 흐름도 더 분명해질 거야. 하린: 내가 오늘 밤까지 순서표대로 슬라이드를 다시 정리해 볼게. 내일은 시간 재면서 실제 발표처럼 한 번 맞춰 보자."
+          "answerText": "색으로"
+        },
+        {
+          "id": "q5",
+          "prompt": "운영 절차 도표와 만족도 그래프의 성격 차이를 설명한 문장을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 52,
+              "end": 101
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "운영 절차 도표는 흐름을 보여 주는 용도고, 만족도 그래프는 평가 자료니까 성격이 달라."
+        },
+        {
+          "id": "q6",
+          "prompt": "절차 도표 뒤에 불편 응답 비율을 보여 주면 생기는 결과를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 182,
+              "end": 196
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "앞뒤 연결도 더 자연스러워"
+        },
+        {
+          "id": "q7",
+          "prompt": "민재가 정리한 최종 도표 순서를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 9,
+              "end": 55
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "사례 제시, 설문 결과, 현재 절차, 불편 응답, 대안 비교 표, 예상 효과 그래프"
+        },
+        {
+          "id": "q8",
+          "prompt": "서윤이 처음 제시한 발표 흐름을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 113,
+              "end": 138
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "문제 제기, 현황, 대안 비교, 예상 효과 순"
         }
       ]
     }

@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사실이 아닌 꾸민 말은?",
-          "answerText": "거짓말을",
-          "answerMatchMode": "EXACT",
+          "prompt": "소년이 거짓말을 한 이유로 제시된 마음은 무엇인가요?",
+          "answerText": "심심한 마음",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 12,
-              "end": 16
+              "start": 34,
+              "end": 40
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "믿고 의지하는 마음은?",
-          "answerText": "신뢰를",
-          "answerMatchMode": "EXACT",
+          "prompt": "소년이 미처 몰랐던, 거짓말이 가져올 것은 무엇인가요?",
+          "answerText": "슬픔",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 29,
-              "end": 32
+              "paragraphId": "p1",
+              "start": 73,
+              "end": 75
             }
           ],
           "scoring": {
@@ -625,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "남의 마음을 짐작함은?",
-          "answerText": "헤아리며",
-          "answerMatchMode": "EXACT",
+          "prompt": "늑대가 나타났을 때 소년의 상태는 무엇인가요?",
+          "answerText": "겁에 질렸습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 66,
-              "end": 70
+              "paragraphId": "p2",
+              "start": 18,
+              "end": 26
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "아무도 믿어주지 않아 소년에게 찾아온 감정은 무엇인가요?",
+          "answerText": "외로움",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 40,
+              "end": 43
             }
           ],
           "scoring": {

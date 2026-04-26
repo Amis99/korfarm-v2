@@ -396,40 +396,16 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "실제로 일어난 일?",
+          "prompt": "실제로 일어나서 눈으로 확인할 수 있는 일을 가리키는 낱말을 찾아보세요",
           "answerText": "사실",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 32,
-              "end": 34
-            },
-            {
-              "paragraphId": "p1",
-              "start": 108,
-              "end": 110
-            },
-            {
-              "paragraphId": "p1",
-              "start": 148,
-              "end": 150
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 76,
-              "end": 78
-            },
-            {
-              "paragraphId": "p2",
-              "start": 127,
-              "end": 129
-            }
+            {"paragraphId": "p1", "start": 32, "end": 34},
+            {"paragraphId": "p1", "start": 108, "end": 110},
+            {"paragraphId": "p1", "start": 148, "end": 150},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 76, "end": 78},
+            {"paragraphId": "p2", "start": 127, "end": 129}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -440,35 +416,15 @@
         },
         {
           "id": "q2",
-          "prompt": "머릿속으로 하는 고찰?",
+          "prompt": "어떤 일에 대한 자신의 느낌을 가리키는 낱말을 찾아보세요",
           "answerText": "생각",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 53,
-              "end": 55
-            },
-            {
-              "paragraphId": "p1",
-              "start": 141,
-              "end": 143
-            },
-            {
-              "paragraphId": "p1",
-              "start": 152,
-              "end": 154
-            },
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p2",
-              "start": 131,
-              "end": 133
-            }
+            {"paragraphId": "p1", "start": 53, "end": 55},
+            {"paragraphId": "p1", "start": 141, "end": 143},
+            {"paragraphId": "p1", "start": 152, "end": 154},
+            {"paragraphId": "p2", "start": 4, "end": 6},
+            {"paragraphId": "p2", "start": 131, "end": 133}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -479,15 +435,27 @@
         },
         {
           "id": "q3",
-          "prompt": "옳고 그름을 가늠함?",
-          "answerText": "판단",
-          "answerMatchMode": "EXACT",
+          "prompt": "사실과 생각을 명확히 나누어 이해하면 글의 내용을 더 정확하게 무엇할 수 있는지 찾아보세요",
+          "answerText": "파악",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 21,
-              "end": 23
-            }
+            {"paragraphId": "p1", "start": 183, "end": 185}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "사실과 생각을 구분하는 능력이 길러 주는 두 가지(올바른 ◯◯, 비판적인 ◯◯)를 모두 찾아보세요",
+          "answerText": "판단, 사고",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 21, "end": 23},
+            {"paragraphId": "p2", "start": 34, "end": 36}
           ],
           "scoring": {
             "correctDeltaSec": 10,

@@ -396,24 +396,29 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "맛있고 달콤한 빵?",
-          "answerText": "케이크",
-          "answerMatchMode": "EXACT",
+          "prompt": "용기를 내어 진심 어린 외침으로 동물들의 다툼을 멈춘 주인공의 이름을 적어 보세요",
+          "answerText": "포근이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 47,
-              "end": 50
+              "start": 16,
+              "end": 19
             },
             {
               "paragraphId": "p1",
-              "start": 146,
-              "end": 149
+              "start": 88,
+              "end": 91
+            },
+            {
+              "paragraphId": "p1",
+              "start": 141,
+              "end": 144
             },
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 3
+              "start": 100,
+              "end": 103
             }
           ],
           "scoring": {
@@ -425,9 +430,28 @@
         },
         {
           "id": "q2",
-          "prompt": "복되고 기쁜 마음?",
+          "prompt": "친구들의 마음이 환하고 따뜻해진 모습을 무엇에 빗대었는지 글에서 찾아 적어 보세요",
+          "answerText": "햇살처럼",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 28,
+              "end": 32
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "글에서 '복되고 기쁜 마음'을 뜻하는 두 글자 낱말을 찾아 적어 보세요",
           "answerText": "행복",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -443,10 +467,10 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "남에게 거저 주는 일?",
+          "id": "q4",
+          "prompt": "글에서 '서로 가져 함께 누림'을 뜻하는 두 글자 낱말을 찾아 적어 보세요",
           "answerText": "나눔",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",

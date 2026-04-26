@@ -1039,7 +1039,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '운동량'을 모두 찾으시오.",
+          "prompt": "물체의 질량과 속도를 함께 고려한 물리량을 가리키는 세 글자 단어를 지문에서 모두 찾으시오.",
+          "answerText": "운동량",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -1123,150 +1125,109 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "운동량"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "정해 둔 범위 안에서 일정한 상태를 뜻하는 낱말은?",
+          "prompt": "운동량을 결정하는 두 가지 물리량을 지문에서 모두 찾으시오.",
+          "answerText": "질량 / 속도",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p2",
-              "start": 103,
-              "end": 105
-            },
-            {
-              "paragraphId": "p3",
-              "start": 79,
-              "end": 81
-            },
-            {
-              "paragraphId": "p4",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p5",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p5",
-              "start": 12,
-              "end": 14
-            },
-            {
-              "paragraphId": "p5",
-              "start": 51,
-              "end": 53
-            },
-            {
-              "paragraphId": "p6",
+              "paragraphId": "p1",
               "start": 9,
               "end": 11
             },
             {
-              "paragraphId": "p6",
-              "start": 95,
-              "end": 97
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "보존"
-        },
-        {
-          "id": "q3",
-          "prompt": "주위에서 작용하는 영향이나 작용을 뜻하는 낱말은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
+              "paragraphId": "p1",
               "start": 13,
-              "end": 17
-            },
-            {
-              "paragraphId": "p6",
-              "start": 130,
-              "end": 134
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "외부 힘"
-        },
-        {
-          "id": "q4",
-          "prompt": "함께 묶어서 하나로 보는 범위를 뜻하는 낱말은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 27,
-              "end": 28
-            },
-            {
-              "paragraphId": "p3",
-              "start": 132,
-              "end": 133
-            },
-            {
-              "paragraphId": "p4",
-              "start": 14,
               "end": 15
             },
             {
-              "paragraphId": "p4",
-              "start": 75,
-              "end": 76
+              "paragraphId": "p1",
+              "start": 31,
+              "end": 33
             },
             {
-              "paragraphId": "p4",
-              "start": 125,
-              "end": 126
-            },
-            {
-              "paragraphId": "p6",
-              "start": 25,
-              "end": 26
+              "paragraphId": "p1",
+              "start": 39,
+              "end": 41
             },
             {
               "paragraphId": "p6",
-              "start": 115,
-              "end": 116
+              "start": 106,
+              "end": 108
             },
             {
               "paragraphId": "p6",
-              "start": 123,
-              "end": 124
+              "start": 110,
+              "end": 112
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "계"
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "운동량 보존 원리가 특히 중요하게 쓰이는 두 가지 상황을 지문에서 모두 찾으시오.",
+          "answerText": "충돌 / 폭발",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 115,
+              "end": 117
+            },
+            {
+              "paragraphId": "p2",
+              "start": 120,
+              "end": 122
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "운동량 보존이 단순하지 않게 되는 외부 영향의 예로 든 두 가지를 지문에서 모두 찾으시오.",
+          "answerText": "마찰 / 공기 저항",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 49,
+              "end": 51
+            },
+            {
+              "paragraphId": "p4",
+              "start": 54,
+              "end": 59
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "사물이 어느 쪽을 향하고 있는지를 뜻하는 낱말은?",
+          "prompt": "에너지와 달리 운동량이 함께 고려해야 한다고 한 요소가 무엇인지 지문에서 찾으시오.",
+          "answerText": "방향",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -1280,12 +1241,30 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "운동량 보존이 성립하려면 계의 바깥에서 무엇이 작용하지 않는다고 볼 수 있어야 하는지 지문에서 찾으시오.",
+          "answerText": "큰 힘",
           "answerMatchMode": "ANY",
-          "answerText": "방향"
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 22,
+              "end": 25
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

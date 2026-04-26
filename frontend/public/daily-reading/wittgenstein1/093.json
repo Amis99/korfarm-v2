@@ -571,65 +571,75 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "prompt": "첫 연에서 하늘의 빛깔을 나타내는 말을 찾으시오.",
+          "answerText": "파아란",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 18
+              "start": 5,
+              "end": 8
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "가지마다 파아란 하늘을\n바뜰었다."
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "둘째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "prompt": "꽃보다 곱다고 한 대상을 찾으시오.",
+          "answerText": "파릇한 새순",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 16
+              "end": 6
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "파릇한 새순이 꽃보다 고웁다."
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "셋째 연은 어떤 장면이나 정서를 보여 주는가?",
+          "prompt": "셋째 연에서 한자 표기와 함께 제시된 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "청송(靑松)",
+            "낙엽(落葉)"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 34
+              "end": 6
+            },
+            {
+              "paragraphId": "p3",
+              "start": 20,
+              "end": 26
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "청송(靑松)이래도 가을 되면\n홀 홀 낙엽(落葉) 진다 하느니,"
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "넷째 연은 어떤 장면의 변화나 분위기를 보여 주는가?",
+          "prompt": "낙엽이 지는 모습을 반복 표기로 나타낸 부분을 찾으시오.",
+          "answerText": "홀 홀",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
+              "paragraphId": "p3",
+              "start": 16,
               "end": 19
             }
           ],
@@ -637,45 +647,95 @@
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "봄마다 새로 젊은\n자랑이 사랑웁다."
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "다섯째 연은 어떤 장면의 변화나 분위기를 보여 주는가?",
+          "prompt": "봄마다 새로 젊다고 표현된 대상을 찾으시오.",
+          "answerText": "자랑",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 10,
+              "end": 12
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "다섯째 연에서 서로 대비되는 시간 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "낮에",
+            "밤에"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 0,
-              "end": 30
+              "end": 2
+            },
+            {
+              "paragraphId": "p5",
+              "start": 9,
+              "end": 11
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "낮에 햇볕 입고\n밤에 별이 소올솔 내리는\n이슬 마시고,"
+          "revealOnWrong": true
         },
         {
-          "id": "q6",
-          "prompt": "마지막 연은 앞선 흐름이 어디에 이르고 있음을 보여 주는가?",
+          "id": "q7",
+          "prompt": "새순이 입거나 마시는 것으로 제시된 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "햇볕",
+            "이슬"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 3,
+              "end": 5
+            },
+            {
+              "paragraphId": "p5",
+              "start": 23,
+              "end": 25
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q8",
+          "prompt": "마지막 연에서 새 순이 이르는 성장 방향을 찾으시오.",
+          "answerText": "여름으로 자란다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 18
+              "start": 9,
+              "end": 17
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "파릇한 새 순이\n여름으로 자란다."
+          "revealOnWrong": true
         }
       ]
     }

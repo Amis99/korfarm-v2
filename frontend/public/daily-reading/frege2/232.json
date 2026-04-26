@@ -720,14 +720,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "미세플라스틱의 지름 기준은 얼마 이하인가요?",
-          "answerText": "5밀리미터",
+          "prompt": "미세플라스틱의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "지름이 5밀리미터 이하인 작은 플라스틱 조각",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 12,
-              "end": 17
+              "start": 8,
+              "end": 32
             }
           ],
           "scoring": {
@@ -738,14 +738,22 @@
         },
         {
           "id": "q2",
-          "prompt": "처음부터 작게 만들어진 종류를 무엇이라고 하나요?",
-          "answerText": "1차 미세플라스틱",
-          "answerMatchMode": "ANY",
+          "prompt": "미세플라스틱이 나뉘는 종류를 모두 찾으시오.",
+          "answerTexts": [
+            "1차 미세플라스틱",
+            "2차 미세플라스틱"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 55,
               "end": 64
+            },
+            {
+              "paragraphId": "p1",
+              "start": 83,
+              "end": 92
             }
           ],
           "scoring": {
@@ -756,19 +764,14 @@
         },
         {
           "id": "q3",
-          "prompt": "미세플라스틱을 먹이로 착각해 섭취하는 존재는 무엇인가요?",
-          "answerText": "해양 생물",
+          "prompt": "해양 생물들이 미세플라스틱을 섭취하는 이유를 찾으시오.",
+          "answerText": "먹이로 착각하여 섭취하기 때문",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 47,
-              "end": 52
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 5
+              "start": 55,
+              "end": 71
             }
           ],
           "scoring": {
@@ -779,14 +782,22 @@
         },
         {
           "id": "q4",
-          "prompt": "미세플라스틱이 인간에게 전달되는 경로는 무엇인가요?",
-          "answerText": "먹이 사슬",
-          "answerMatchMode": "ANY",
+          "prompt": "미세플라스틱으로 생물들에게 발생하는 피해를 모두 찾으시오.",
+          "answerTexts": [
+            "소화 기관이 막히거나",
+            "영양실조에 걸리는"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 22,
-              "end": 27
+              "paragraphId": "p2",
+              "start": 86,
+              "end": 97
+            },
+            {
+              "paragraphId": "p2",
+              "start": 98,
+              "end": 107
             }
           ],
           "scoring": {
@@ -797,14 +808,28 @@
         },
         {
           "id": "q5",
-          "prompt": "문제 해결을 위해 시급하다고 한 기술은 무엇인가요?",
-          "answerText": "하수 처리 기술",
-          "answerMatchMode": "ANY",
+          "prompt": "미세플라스틱이 발견되고 있다고 한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "해산물",
+            "소금",
+            "마시는 물"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 98,
-              "end": 106
+              "paragraphId": "p3",
+              "start": 58,
+              "end": 61
+            },
+            {
+              "paragraphId": "p3",
+              "start": 64,
+              "end": 66
+            },
+            {
+              "paragraphId": "p3",
+              "start": 72,
+              "end": 77
             }
           ],
           "scoring": {

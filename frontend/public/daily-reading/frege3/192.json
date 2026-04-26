@@ -888,19 +888,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "스마트폰과 전기차의 핵심 부품은 무엇인가요?",
-          "answerText": "리튬이온 배터리",
+          "prompt": "스마트폰과 전기차의 핵심 부품을 설명한 부분을 찾으시오.",
+          "answerText": "스마트폰과 전기차의 핵심 부품인 리튬이온 배터리",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 18,
-              "end": 26
-            },
-            {
-              "paragraphId": "p3",
               "start": 0,
-              "end": 8
+              "end": 26
             }
           ],
           "scoring": {
@@ -911,9 +906,12 @@
         },
         {
           "id": "q2",
-          "prompt": "배터리의 용량과 전압을 결정하는 소재는 무엇인가요?",
-          "answerText": "양극재",
-          "answerMatchMode": "ANY",
+          "prompt": "배터리의 성능을 좌우하는 두 소재를 모두 찾으시오.",
+          "answerTexts": [
+            "양극재",
+            "음극재"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -924,20 +922,7 @@
               "paragraphId": "p2",
               "start": 35,
               "end": 38
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "배터리의 수명과 충전 속도에 영향을 미치는 소재는 무엇인가요?",
-          "answerText": "음극재",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+            },
             {
               "paragraphId": "p2",
               "start": 14,
@@ -956,8 +941,26 @@
           "revealOnWrong": true
         },
         {
+          "id": "q3",
+          "prompt": "리튬이온 배터리가 전기를 발생시키는 원리를 찾으시오.",
+          "answerText": "리튬 이온이 양극과 음극 사이를 이동하며 전기를 발생",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 49,
+              "end": 78
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q4",
-          "prompt": "합선 뒤 큰 화재로 이어질 수 있는 현상은 무엇인가요?",
+          "prompt": "합선 뒤 큰 화재로 이어질 수 있는 현상을 찾으시오.",
           "answerText": "열폭주 현상",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -975,19 +978,14 @@
         },
         {
           "id": "q5",
-          "prompt": "한계를 극복하기 위해 개발되는 차세대 배터리는 무엇인가요?",
-          "answerText": "전고체 배터리",
+          "prompt": "전고체 배터리가 사용하는 전해질의 변화를 설명한 부분을 찾으시오.",
+          "answerText": "액체 전해질 대신 고체 전해질",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 16,
-              "end": 23
-            },
-            {
-              "paragraphId": "p4",
-              "start": 34,
-              "end": 41
+              "start": 43,
+              "end": 59
             }
           ],
           "scoring": {

@@ -1356,12 +1356,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1연은 화물열차 지붕 위의 장면을 통해 어떤 정서를 드러내는가?",
+          "prompt": "화자들이 함께 타고 있는 대상으로 반복되는 말을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 83
+              "start": 9,
+              "end": 14
+            },
+            {
+              "paragraphId": "p1",
+              "start": 42,
+              "end": 47
+            },
+            {
+              "paragraphId": "p6",
+              "start": 80,
+              "end": 85
             }
           ],
           "scoring": {
@@ -1370,34 +1380,39 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "무엇을 실었느냐 화물 열차의\n검은 문들은 탄탄히 잠겨졌다\n바람 속을 달리는 화물 열차의 지붕 우에\n우리 제각기 드러누워\n한결같이 쳐다보는 하나씩의 별"
+          "answerText": "화물 열차"
         },
         {
           "id": "q2",
-          "prompt": "2연은 출신이 다른 사람들을 어떤 관점으로 묶어 보이는가?",
+          "prompt": "화물 열차의 문이 어떤 상태로 표현되는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 23,
+              "end": 31
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "탄탄히 잠겨졌다"
+        },
+        {
+          "id": "q3",
+          "prompt": "화자들이 온 곳으로 제시된 두 지명을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 114
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "두만강 저쪽에서 온다는 사람들과\n자무스(중국의 쑹화강 상류에 있는, 러시아와의 국경 가까이에 있는 도시)에서 온다는 사람들과\n험한 땅에서 험한 변 치르고\n눈보라 치기 전에 고향으로 돌아간다는\n남도 사람들과"
-        },
-        {
-          "id": "q3",
-          "prompt": "3연은 화자의 처지를 어떻게 드러내는가?",
-          "answerRanges": [
+              "end": 6
+            },
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 56
+              "paragraphId": "p2",
+              "start": 18,
+              "end": 21
             }
           ],
           "scoring": {
@@ -1405,17 +1420,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "북어 쪼가리 초담배 밀가루떡이랑\n나눠서 요기하며 내사 서울이 그리워\n고향과는 딴 방향으로 흔들려 간다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "두만강 저쪽",
+            "자무스"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4연은 귀향하는 이들이 무엇을 서럽게 바라보는 장면인가?",
+          "prompt": "사람들이 고향으로 돌아가기 전에 치른 일을 나타내는 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 64
+              "paragraphId": "p2",
+              "start": 70,
+              "end": 85
             }
           ],
           "scoring": {
@@ -1424,16 +1442,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "푸르른 바다와 거리 거리를\n설움 많은 이민 열차의 흐린 창으로\n그저 서러이 내다보던 골짝 골짝을\n갈 때와 마찬가지로"
+          "answerText": "험한 땅에서 험한 변 치르고"
         },
         {
           "id": "q5",
-          "prompt": "5연은 화자와 귀환자들의 어떤 공통 처지를 강조하는가?",
+          "prompt": "화자가 서울에 대해 느끼는 마음을 드러내는 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 57
+              "paragraphId": "p3",
+              "start": 27,
+              "end": 37
             }
           ],
           "scoring": {
@@ -1442,16 +1460,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "헐벗은 채 돌아오는 이 사람들과\n마찬가지로 헐벗은 나요\n나라에 기쁜 일 많아\n울지를 못하는 함경도 사내"
+          "answerText": "내사 서울이 그리워"
         },
         {
           "id": "q6",
-          "prompt": "6연은 전장과 이동의 피로 속에서 어떤 시선의 결속을 남기는가?",
+          "prompt": "이민 열차의 창은 어떻게 묘사되는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 121
+              "paragraphId": "p4",
+              "start": 28,
+              "end": 32
             }
           ],
           "scoring": {
@@ -1460,7 +1478,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "총을 안고 뿔가(폴카(polka). 보헤미아 지방의 경쾌한 무곡(舞曲).)의 노래를 부르던\n슬라브의 늙은 병정은 잠이 들었나\n바람 속을 달리는 화물 열차의 지붕 우에\n우리 제각기 드러누워\n한결같이 쳐다보는 하나씩의 별"
+          "answerText": "흐린 창"
+        },
+        {
+          "id": "q7",
+          "prompt": "화자와 돌아오는 사람들이 같은 처지임을 드러내는 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 18,
+              "end": 30
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "마찬가지로 헐벗은 나요"
+        },
+        {
+          "id": "q8",
+          "prompt": "화자가 나라에 기쁜 일이 많아 하지 못한다고 한 행동을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 43,
+              "end": 50
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "울지를 못하는"
         }
       ]
     }

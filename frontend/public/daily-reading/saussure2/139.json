@@ -561,14 +561,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "법원에서 재판을 진행하고 올바른 결정을 내리는 사람은?",
-          "answerText": "판사",
+          "prompt": "사람들 사이에 다툼이 생겼을 때 법원이 하는 일을 지문에서 찾으시오.",
+          "answerText": "누구의 잘못인지 공평하게 따져 주는 곳",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 92,
-              "end": 94
+              "start": 22,
+              "end": 43
             }
           ],
           "scoring": {
@@ -579,14 +579,50 @@
         },
         {
           "id": "q2",
-          "prompt": "어떤 일이 사실인지 아닌지 밝혀 주는 중요한 물건이나 표시는?",
-          "answerText": "증거",
+          "prompt": "판사님이 판결을 내릴 때 기준으로 삼는 것을 지문에서 찾으시오.",
+          "answerText": "법이라는 약속",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 97,
+              "end": 104
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "법원이 나쁜 죄를 지은 사람에게 주는 것을 지문에서 찾으시오.",
+          "answerText": "알맞은 벌",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 21,
+              "end": 26
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "법원에서 재판을 받을 때 어떻게 말해야 하는지 지문에서 찾으시오.",
+          "answerText": "거짓말을 하지 않고 정직하게 사실만",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 60,
-              "end": 62
+              "start": 15,
+              "end": 34
             }
           ],
           "scoring": {

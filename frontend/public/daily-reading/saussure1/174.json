@@ -474,45 +474,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이야기 펼쳐지는 곳?",
+          "prompt": "인형들이 주인공이 되어 재미있는 이야기를 들려주는 곳을 무엇이라고 했는지 찾아 써 보세요",
           "answerText": "무대",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p1",
-              "start": 42,
-              "end": 44
-            },
-            {
-              "paragraphId": "p1",
-              "start": 86,
-              "end": 88
-            },
-            {
-              "paragraphId": "p2",
-              "start": 12,
-              "end": 14
-            },
-            {
-              "paragraphId": "p2",
-              "start": 71,
-              "end": 73
-            },
-            {
-              "paragraphId": "p2",
-              "start": 102,
-              "end": 104
-            },
-            {
-              "paragraphId": "p2",
-              "start": 143,
-              "end": 145
-            }
+            {"paragraphId": "p1", "start": 4, "end": 6},
+            {"paragraphId": "p1", "start": 42, "end": 44},
+            {"paragraphId": "p1", "start": 86, "end": 88},
+            {"paragraphId": "p2", "start": 12, "end": 14},
+            {"paragraphId": "p2", "start": 71, "end": 73},
+            {"paragraphId": "p2", "start": 102, "end": 104},
+            {"paragraphId": "p2", "start": 143, "end": 145}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -523,65 +495,21 @@
         },
         {
           "id": "q2",
-          "prompt": "연극의 주인공?",
+          "prompt": "사람들이 무대 뒤에 숨어서 움직이고 목소리를 흉내 내는 대상은 무엇인지 찾아 써 보세요",
           "answerText": "인형",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 8,
-              "end": 10
-            },
-            {
-              "paragraphId": "p1",
-              "start": 70,
-              "end": 72
-            },
-            {
-              "paragraphId": "p1",
-              "start": 96,
-              "end": 98
-            },
-            {
-              "paragraphId": "p1",
-              "start": 105,
-              "end": 107
-            },
-            {
-              "paragraphId": "p1",
-              "start": 122,
-              "end": 124
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 18,
-              "end": 20
-            },
-            {
-              "paragraphId": "p2",
-              "start": 44,
-              "end": 46
-            },
-            {
-              "paragraphId": "p2",
-              "start": 108,
-              "end": 110
-            },
-            {
-              "paragraphId": "p2",
-              "start": 139,
-              "end": 141
-            }
+            {"paragraphId": "p1", "start": 0, "end": 2},
+            {"paragraphId": "p1", "start": 8, "end": 10},
+            {"paragraphId": "p1", "start": 70, "end": 72},
+            {"paragraphId": "p1", "start": 96, "end": 98},
+            {"paragraphId": "p1", "start": 105, "end": 107},
+            {"paragraphId": "p1", "start": 122, "end": 124},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 18, "end": 20},
+            {"paragraphId": "p2", "start": 44, "end": 46},
+            {"paragraphId": "p2", "start": 108, "end": 110},
+            {"paragraphId": "p2", "start": 139, "end": 141}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -592,15 +520,26 @@
         },
         {
           "id": "q3",
-          "prompt": "즐거울 때 치는 것?",
+          "prompt": "인형이 마치 살아 있는 것처럼 움직이는 모습을 보고 즐거워서 관객들이 친 것은 무엇인지 찾아 써 보세요",
           "answerText": "박수",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 149,
-              "end": 151
-            }
+            {"paragraphId": "p1", "start": 149, "end": 151}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "줄이나 손이 보이지 않게 설계된 무대가 만들어 주는 분위기는 어떤 같은 분위기라고 했는지 찾아 써 보세요",
+          "answerText": "마법",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 75, "end": 77}
           ],
           "scoring": {
             "correctDeltaSec": 10,

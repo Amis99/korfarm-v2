@@ -557,14 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "제일 가깝고 친한 친구를 뜻하는 말은 무엇인가요?",
-          "answerText": "단짝",
-          "answerMatchMode": "EXACT",
+          "prompt": "파티 장소에 무엇이 가득했는지 지문에서 찾으시오",
+          "answerText": "알록달록한 풍선들이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 4,
-              "end": 6
+              "start": 55,
+              "end": 65
             }
           ],
           "scoring": {
@@ -576,14 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "날마다 그날그날의 일이나 감상을 적은 기록이나 공책은?",
-          "answerText": "일기장에",
-          "answerMatchMode": "EXACT",
+          "prompt": "나는 민수에게 줄 어떤 선물을 들고 갔는지 지문에서 찾으시오",
+          "answerText": "정성 가득한 선물",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 22,
-              "end": 26
+              "paragraphId": "p1",
+              "start": 105,
+              "end": 114
             }
           ],
           "scoring": {
@@ -595,14 +595,41 @@
         },
         {
           "id": "q3",
-          "prompt": "친구 사이에 정이 깊고 친밀한 관계를 뜻하는 말은?",
-          "answerText": "우정을",
-          "answerMatchMode": "EXACT",
+          "prompt": "게임과 간식 나누기의 결과로 무엇을 어떻게 했다고 했는지 지문에서 찾으시오",
+          "answerText": "우정을 더욱 깊게 쌓았습니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 73,
-              "end": 76
+              "end": 88
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "집으로 돌아온 나는 한 일을 본문에서 모두 찾으시오.",
+          "answerTexts": [
+            "민수와 찍은 사진을 일기장에 붙이고",
+            "파티 장면을 그림으로 그렸습니다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 11,
+              "end": 30
+            },
+            {
+              "paragraphId": "p3",
+              "start": 31,
+              "end": 48
             }
           ],
           "scoring": {

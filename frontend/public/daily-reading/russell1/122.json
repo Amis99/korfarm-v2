@@ -1031,76 +1031,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '온도'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 28,
-              "end": 30
-            },
-            {
-              "paragraphId": "p2",
-              "start": 58,
-              "end": 60
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "온도"
-        },
-        {
-          "id": "q2",
-          "prompt": "지문에서 '농도'를 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 32,
-              "end": 34
-            },
-            {
-              "paragraphId": "p3",
-              "start": 144,
-              "end": 146
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "농도"
-        },
-        {
-          "id": "q3",
-          "prompt": "지문에서 '표면적'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 36,
-              "end": 39
-            },
-            {
-              "paragraphId": "p2",
-              "start": 127,
-              "end": 130
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "표면적"
-        },
-        {
-          "id": "q4",
-          "prompt": "지문에서 '촉매'를 모두 찾으시오.",
+          "prompt": "스스로 크게 변하지 않으면서 반응이 더 쉽게 일어나도록 돕는 물질을 무엇이라 하는지 찾으시오",
+          "answerText": "촉매",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -1114,30 +1047,141 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL",
-          "answerText": "촉매"
+          "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "지문에서 '비율'을 모두 찾으시오.",
+          "id": "q2",
+          "prompt": "산성 용액과 염기성 용액이 만나 새로운 물질과 물이 만들어지는 반응의 이름을 찾으시오",
+          "answerText": "중화 반응",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 218,
-              "end": 220
+              "start": 49,
+              "end": 54
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "가루 상태의 물질이 덩어리 상태보다 빨리 반응하는 까닭으로 든 조건을 찾으시오",
+          "answerText": "표면적이 넓어",
           "answerMatchMode": "ANY",
-          "answerText": "비율"
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 127,
+              "end": 134
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "온도가 높아질 때 반응 속도가 빨라지는 이유로 든 표현을 찾으시오",
+          "answerText": "입자 운동이 활발해져",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 67,
+              "end": 78
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "화학 반응의 원인을 읽을 때 자주 살피는 네 가지 조건을 모두 찾으시오",
+          "answerText": "온도, 농도, 표면적, 촉매",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 28,
+              "end": 30
+            },
+            {
+              "paragraphId": "p2",
+              "start": 58,
+              "end": 60
+            },
+            {
+              "paragraphId": "p2",
+              "start": 32,
+              "end": 34
+            },
+            {
+              "paragraphId": "p3",
+              "start": 144,
+              "end": 146
+            },
+            {
+              "paragraphId": "p2",
+              "start": 36,
+              "end": 39
+            },
+            {
+              "paragraphId": "p2",
+              "start": 127,
+              "end": 130
+            },
+            {
+              "paragraphId": "p2",
+              "start": 41,
+              "end": 43
+            },
+            {
+              "paragraphId": "p2",
+              "start": 164,
+              "end": 166
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "산과 염기의 반응에서 결과를 결정하는 요소로 농도와 함께 든 조건을 찾으시오",
+          "answerText": "어느 쪽이 더 많은지",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 131,
+              "end": 142
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

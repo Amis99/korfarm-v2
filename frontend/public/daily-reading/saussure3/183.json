@@ -562,29 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "책에 기록되지 않고 사람들의 입을 통해 오래도록 전해 내려오는 것은?",
-          "answerText": "옛이야기",
-          "answerMatchMode": "EXACT",
+          "prompt": "할머니와 할아버지의 입을 통해 전해 내려오는 것으로 지문에 나온 표현을 찾으시오.",
+          "answerText": "신비로운 옛이야기들",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 59,
-              "end": 63
-            },
-            {
-              "paragraphId": "p1",
-              "start": 162,
-              "end": 166
-            },
-            {
-              "paragraphId": "p3",
-              "start": 4,
-              "end": 8
-            },
-            {
-              "paragraphId": "p3",
-              "start": 148,
-              "end": 152
+              "start": 54,
+              "end": 64
             }
           ],
           "scoring": {
@@ -596,19 +581,14 @@
         },
         {
           "id": "q2",
-          "prompt": "동네 한가운데에 있으며 옛날에 선녀가 내려와 목욕을 하고 갔다는 곳은?",
-          "answerText": "우물",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리 고장의 숨겨진 옛이야기를 직접 조사하려면 방문하라고 한 장소를 찾으시오.",
+          "answerText": "도서관이나 마을 회관",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 92,
-              "end": 94
-            },
-            {
-              "paragraphId": "p3",
-              "start": 43,
-              "end": 45
+              "paragraphId": "p1",
+              "start": 133,
+              "end": 144
             }
           ],
           "scoring": {
@@ -620,14 +600,33 @@
         },
         {
           "id": "q3",
-          "prompt": "옛이야기들을 깊이 조사하고 읽으면 평범했던 곳들도 훨씬 더 어떻게 느껴지나요?",
-          "answerText": "특별하게",
-          "answerMatchMode": "EXACT",
+          "prompt": "뒷산에 얽힌 전설에서 호랑이와 친구가 된 인물을 지문에서 찾으시오.",
+          "answerText": "마음씨 착한 나무꾼",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 35,
+              "end": 45
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "옛이야기를 조사하고 읽으면 더 특별하게 느껴지는 대상을 지문에서 찾으시오.",
+          "answerText": "평범한 산과 우물",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 52,
-              "end": 56
+              "start": 36,
+              "end": 45
             }
           ],
           "scoring": {

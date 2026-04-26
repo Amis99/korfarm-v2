@@ -559,14 +559,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "향기로운 꽃 주변에서 부지런히 꿀을 모으며 날아다니는 것은 나비와 무엇인가요?",
-          "answerText": "꿀벌",
-          "answerMatchMode": "EXACT",
+          "prompt": "공원에서 가장 먼저 우리를 반겨 주는 것은 무엇인지 지문에서 찾아 쓰시오.",
+          "answerText": "푸른 잎을 가진 크고 작은 나무들",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
+              "paragraphId": "p1",
               "start": 57,
-              "end": 59
+              "end": 75
             }
           ],
           "scoring": {
@@ -578,14 +578,14 @@
         },
         {
           "id": "q2",
-          "prompt": "공원을 산책하는 사람들을 따라다니는 비둘기와 이것이 흔한 친구랍니다. 이것은 무엇인가요?",
-          "answerText": "참새",
-          "answerMatchMode": "EXACT",
+          "prompt": "공원의 꽃과 풀밭 사이를 자세히 살펴보면 만날 수 있는 대상을 지문에서 찾아 쓰시오.",
+          "answerText": "작은 곤충들",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 63,
-              "end": 65
+              "paragraphId": "p2",
+              "start": 23,
+              "end": 29
             }
           ],
           "scoring": {
@@ -596,17 +596,54 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "가끔씩 도토리를 찾아 나무를 오르내리는 귀여운 이 동물은 누구일까요?",
-          "answerText": "청설모",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 106,
-              "end": 109
-            }
-          ],
+        "id": "q3",
+        "prompt": "향기로운 꽃 주변에서 볼 수 있는 곤충을 모두 찾으시오.",
+        "answerText": "나비와 꿀벌",
+        "answerTexts": [
+          "나비",
+          "꿀벌"
+        ],
+        "answerMatchMode": "ALL",
+        "answerRanges": [
+          {
+            "paragraphId": "p2",
+            "start": 53,
+            "end": 55
+          },
+          {
+            "paragraphId": "p2",
+            "start": 57,
+            "end": 59
+          }
+        ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+        "id": "q4",
+        "prompt": "공원을 산책하는 사람들을 따라다니는 가장 흔한 친구를 모두 찾으시오.",
+        "answerText": "비둘기와 참새",
+        "answerTexts": [
+          "비둘기",
+          "참새"
+        ],
+        "answerMatchMode": "ALL",
+        "answerRanges": [
+          {
+            "paragraphId": "p3",
+            "start": 58,
+            "end": 61
+          },
+          {
+            "paragraphId": "p3",
+            "start": 63,
+            "end": 65
+          }
+        ],
           "scoring": {
             "correctDeltaSec": 5,
             "wrongDeltaSec": -2,

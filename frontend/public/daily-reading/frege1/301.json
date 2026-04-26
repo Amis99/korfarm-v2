@@ -913,69 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "글의 종류와 내용을 바꾸는 가장 중요한 것은 무엇인가요?",
-          "answerText": "목적",
+          "prompt": "글을 쓸 때 가장 중요한 목적이 무엇을 뜻하는지 찾으시오.",
+          "answerText": "왜 쓰는가에 대한 목적",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 18,
+              "start": 8,
               "end": 20
-            },
-            {
-              "paragraphId": "p1",
-              "start": 32,
-              "end": 34
-            },
-            {
-              "paragraphId": "p1",
-              "start": 80,
-              "end": 82
-            },
-            {
-              "paragraphId": "p1",
-              "start": 141,
-              "end": 143
-            },
-            {
-              "paragraphId": "p2",
-              "start": 35,
-              "end": 37
-            },
-            {
-              "paragraphId": "p2",
-              "start": 99,
-              "end": 101
-            },
-            {
-              "paragraphId": "p2",
-              "start": 167,
-              "end": 169
-            },
-            {
-              "paragraphId": "p3",
-              "start": 75,
-              "end": 77
-            },
-            {
-              "paragraphId": "p3",
-              "start": 113,
-              "end": 115
-            },
-            {
-              "paragraphId": "p3",
-              "start": 130,
-              "end": 132
-            },
-            {
-              "paragraphId": "p4",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p4",
-              "start": 122,
-              "end": 124
             }
           ],
           "scoring": {
@@ -986,14 +931,22 @@
         },
         {
           "id": "q2",
-          "prompt": "첫째 목적은 다른 사람에게 무엇이나 새로운 지식을 알려 주기 위한 것인가요?",
-          "answerText": "유용한 정보",
-          "answerMatchMode": "ANY",
+          "prompt": "다른 사람에게 알려 주기 위한 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "유용한 정보",
+            "새로운 지식"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 116,
               "end": 122
+            },
+            {
+              "paragraphId": "p1",
+              "start": 124,
+              "end": 130
             }
           ],
           "scoring": {
@@ -1004,14 +957,22 @@
         },
         {
           "id": "q3",
-          "prompt": "다른 사람의 마음을 움직일 때 함께 제시해야 하는 것은 무엇인가요?",
-          "answerText": "근거",
-          "answerMatchMode": "ANY",
+          "prompt": "내 생각에 동의하게 만드는 글에서 해야 할 일을 모두 찾으시오.",
+          "answerTexts": [
+            "자신의 주장을 뚜렷하게 밝히고",
+            "타당한 근거를 함께 제시해야 합니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 79,
-              "end": 81
+              "start": 46,
+              "end": 62
+            },
+            {
+              "paragraphId": "p2",
+              "start": 75,
+              "end": 94
             }
           ],
           "scoring": {
@@ -1022,14 +983,22 @@
         },
         {
           "id": "q4",
-          "prompt": "감정을 표현하는 글의 예로 든 것 가운데 하루를 적는 글은 무엇인가요?",
-          "answerText": "일기장",
-          "answerMatchMode": "ANY",
+          "prompt": "주장을 뒷받침하는 글의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "신문 사설",
+            "논설문"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 42,
-              "end": 45
+              "paragraphId": "p2",
+              "start": 110,
+              "end": 115
+            },
+            {
+              "paragraphId": "p2",
+              "start": 118,
+              "end": 121
             }
           ],
           "scoring": {
@@ -1040,19 +1009,14 @@
         },
         {
           "id": "q5",
-          "prompt": "글을 쓸 때 목적과 함께 생각해야 하는 것은 누구인가요?",
-          "answerText": "읽는 사람",
+          "prompt": "읽는 대상에 따라 선택해야 하는 것을 찾으시오.",
+          "answerText": "알맞은 단어와 표현",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 142,
-              "end": 147
-            },
-            {
               "paragraphId": "p4",
-              "start": 13,
-              "end": 18
+              "start": 49,
+              "end": 59
             }
           ],
           "scoring": {

@@ -565,7 +565,34 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "자료를 몇 묶음으로 나누어 확인하나요?",
+          "prompt": "자료를 급히 넣으면 생길 수 있는 일을 모두 찾으시오.",
+          "answerText": "제목표는 있는데 설명카드가 없거나, 설명카드는 있는데 펜이 빠지는 일",
+          "answerTexts": [
+            "제목표는 있는데 설명카드가 없거나",
+            "설명카드는 있는데 펜이 빠지는 일"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 50,
+              "end": 68
+            },
+            {
+              "paragraphId": "p1",
+              "start": 70,
+              "end": 88
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "자료를 몇 묶음으로 나누어 확인하는지 지문에서 찾으시오.",
           "answerText": "세 묶음",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -582,33 +609,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "마지막으로 보는 도구 두 가지는 무엇인가요?",
-          "answerText": "펜과 집게",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 178,
-              "end": 183
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
           "id": "q3",
-          "prompt": "다은이가 두고 갈 뻔한 것은 무엇인가요?",
-          "answerText": "파란 제목표",
+          "prompt": "준서가 준비판 마지막 줄에서 읽은 내용을 따옴표까지 포함하여 지문에서 찾으시오.",
+          "answerText": "'자리 위를 한 번 더 보기'",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 20,
-              "end": 26
+              "start": 74,
+              "end": 90
             }
           ],
           "scoring": {
@@ -619,32 +628,14 @@
         },
         {
           "id": "q4",
-          "prompt": "준서가 다시 보자고 한 두 곳은 어디인가요?",
-          "answerText": "책상 모서리와 의자 옆",
+          "prompt": "발표 준비에서 중요하다고 한 습관을 지문에서 찾으시오.",
+          "answerText": "남아 있는 자리까지 같은 기준으로 다시 보는 습관",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 96,
-              "end": 108
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q5",
-          "prompt": "제목표는 무엇 밑에 가려져 있었나요?",
-          "answerText": "설명 종이 밑",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 146,
-              "end": 153
+              "start": 262,
+              "end": 289
             }
           ],
           "scoring": {

@@ -571,29 +571,11 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "prompt": "유추를 정의한 문장 속 핵심 설명을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 236
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "법은 일반적이고 추상적인 문언으로 만들어지지만, 실제 사건은 언제나 개별적이고 구체적이다. 그래서 법 적용에서는 종종 법 문언에 정확히 들어맞지 않는 사례가 나타난다. 이때 해석자는 문언의 범위를 가능한 한 유지하려 하면서도, 눈앞의 사안을 외면하기 어려운 압박을 받는다. 바로 이 지점에서 유추 적용 문제가 생긴다. 유추는 직접 규율하는 규정이 없는 사안을, 그와 유사한 다른 사안에 관한 규범을 빌려 해결하려는 시도다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 첫 핵심 원리나 기준을 어떻게 설명하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
+              "start": 182,
               "end": 234
             }
           ],
@@ -603,16 +585,39 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "유추가 필요해지는 이유는 법이 모든 상황을 미리 빠짐없이 예상할 수 없기 때문이다. 사회는 빠르게 변하고, 새로운 기술이나 거래 방식은 기존 문언이 예정하지 않은 문제를 끊임없이 만들어 낸다. 그래서 법 문언만 기계적으로 읽으면 결론을 내리지 못하는 경우가 생긴다. 이때 유추는 법의 공백처럼 보이는 부분을 메우는 도구가 된다. 유사한 사안에 이미 반영된 법의 취지나 판단 기준을 끌어와 현재 사건에 적용하려는 것이다."
+          "answerText": "직접 규율하는 규정이 없는 사안을, 그와 유사한 다른 사안에 관한 규범을 빌려 해결하려는 시도"
+        },
+        {
+          "id": "q2",
+          "prompt": "유추가 필요해지는 이유를 설명한 문장을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 14,
+              "end": 45
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "법이 모든 상황을 미리 빠짐없이 예상할 수 없기 때문이다"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 그 원리의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "기존 문언이 예정하지 않은 문제를 만드는 예를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 256
+              "paragraphId": "p2",
+              "start": 60,
+              "end": 66
+            },
+            {
+              "paragraphId": "p2",
+              "start": 69,
+              "end": 74
             }
           ],
           "scoring": {
@@ -620,17 +625,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그러나 유추는 단순히 비슷해 보인다는 이유만으로 허용될 수 없다. 두 사례가 닮았다고 말하려면 무엇이 법적으로 중요한 공통점인지 먼저 정해야 하는데, 그 과정에는 이미 해석자의 판단이 들어간다. 결국 유추는 사례와 사례의 겉모습을 연결하는 일이 아니라, 그 둘을 이어 주는 일반 원리나 규범적 비교점을 찾아내는 작업에 가깝다. 이 때문에 유추는 구체적 타당성을 높이는 수단이 될 수 있지만, 동시에 해석자의 재량을 넓혀 법적 안정성을 흔들 위험도 안고 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "새로운 기술",
+            "거래 방식"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
+          "prompt": "두 사례가 닮았다고 말하기 전에 먼저 정해야 하는 것을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 271
+              "paragraphId": "p3",
+              "start": 53,
+              "end": 71
             }
           ],
           "scoring": {
@@ -639,16 +647,41 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "법적 안정성은 누구나 법 문언을 보고 어느 정도 결과를 예측할 수 있어야 한다는 요청과 관련된다. 반면 구체적 타당성은 특수한 사안에서 지나치게 불합리한 결론이 나오지 않도록 해야 한다는 요청이다. 유추는 후자를 위해 유용하지만, 지나치게 넓어지면 전자를 해칠 수 있다. 즉 비슷한 사안을 비슷하게 처리하려는 노력은 정당하지만, 문언의 한계를 넘어 규범을 확장하는 일이 반복되면 결국 법의 경계가 흐려질 수 있다. 그래서 유추를 허용할지 말지는 언제나 두 가치의 충돌 속에서 판단된다."
+          "answerText": "무엇이 법적으로 중요한 공통점인지"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 이 주제의 효과나 쟁점을 어떤 방향으로 확장하는가?",
+          "prompt": "유추와 관련해 충돌하는 두 가치를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
+              "paragraphId": "p3",
+              "start": 193,
+              "end": 200
+            },
+            {
+              "paragraphId": "p4",
+              "start": 58,
+              "end": 65
+            },
+            {
+              "paragraphId": "p6",
+              "start": 260,
+              "end": 267
+            },
+            {
+              "paragraphId": "p3",
+              "start": 235,
+              "end": 241
+            },
+            {
+              "paragraphId": "p4",
               "start": 0,
-              "end": 254
+              "end": 6
+            },
+            {
+              "paragraphId": "p6",
+              "start": 269,
+              "end": 275
             }
           ],
           "scoring": {
@@ -656,17 +689,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 충돌은 특히 형사법이나 조세법에서 더 민감하게 드러난다. 형사법에서는 국민의 자유를 제한하고 처벌을 부과하므로, 법이 정하지 않은 행위를 유추로 처벌 범위 안에 넣는 것은 허용되기 어렵다. 조세법 역시 국민에게 금전 부담을 지우는 영역이므로, 납세 의무를 문언보다 넓게 해석해 유추 적용하는 데 매우 신중해야 한다. 이런 분야에서는 구체적 사안에서 다소 아쉬운 결과가 나오더라도, 예측 가능성과 권리 보호를 위해 유추를 제한하는 편이 우선될 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "구체적 타당성",
+            "법적 안정성"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단은 앞선 논의를 어떤 의미로 정리하는가?",
+          "prompt": "법적 안정성의 요청을 설명한 내용을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 304
+              "paragraphId": "p4",
+              "start": 8,
+              "end": 43
             }
           ],
           "scoring": {
@@ -675,7 +711,61 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 유추 적용은 법의 결함을 보완하는 만능 해법이 아니다. 문언의 한계를 보충해 현실 문제를 해결하려는 장점이 있지만, 그만큼 해석의 자의성과 규범 확장의 위험도 함께 커진다. 따라서 유추를 논할 때에는 단지 '비슷하니 적용하자'는 식의 직관에 머물러서는 안 된다. 어떤 일반 원리가 두 사안을 연결하는지, 그 연결이 법 문언과 체계 안에서 정당화될 수 있는지, 그리고 해당 영역이 형사·조세처럼 엄격한 제한을 요구하는 분야인지를 함께 따져야 한다. 유추는 결국 구체적 타당성과 법적 안정성 사이에서 가장 조심스럽게 다뤄야 할 해석 기술이다."
+          "answerText": "누구나 법 문언을 보고 어느 정도 결과를 예측할 수 있어야 한다"
+        },
+        {
+          "id": "q7",
+          "prompt": "유추 제한이 특히 민감하게 드러나는 법 분야를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 9,
+              "end": 12
+            },
+            {
+              "paragraphId": "p5",
+              "start": 34,
+              "end": 37
+            },
+            {
+              "paragraphId": "p5",
+              "start": 15,
+              "end": 18
+            },
+            {
+              "paragraphId": "p5",
+              "start": 108,
+              "end": 111
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "형사법",
+            "조세법"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "유추를 논할 때 머물러서는 안 된다고 한 직관적 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 118,
+              "end": 129
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "'비슷하니 적용하자'"
         }
       ]
     }

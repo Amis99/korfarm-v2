@@ -888,19 +888,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "데이터를 기반으로 한 새로운 체제를 무엇이라고 하나요?",
-          "answerText": "감시자본주의",
+          "prompt": "기업이 사용자의 행동 데이터를 수집하고 분석하여 무엇을 창출한다고 했나요?",
+          "answerText": "이윤",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 25,
-              "end": 31
-            },
-            {
-              "paragraphId": "p4",
-              "start": 8,
-              "end": 14
+              "start": 69,
+              "end": 71
             }
           ],
           "scoring": {
@@ -911,31 +906,21 @@
         },
         {
           "id": "q2",
-          "prompt": "기업이 정보를 모으는 대표적 기기 가운데 하나는 무엇인가요?",
-          "answerText": "스마트폰",
-          "answerMatchMode": "ANY",
+          "prompt": "기업들이 개인 정보를 수집하는 통로를 모두 찾으시오.",
+          "answerTexts": [
+            "스마트폰",
+            "소셜 미디어"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 5,
               "end": 9
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "이 과정에서 심각하게 침해될 수 있는 것은 무엇인가요?",
-          "answerText": "프라이버시",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+            },
             {
-              "paragraphId": "p3",
-              "start": 12,
+              "paragraphId": "p2",
+              "start": 11,
               "end": 17
             }
           ],
@@ -946,15 +931,33 @@
           "revealOnWrong": true
         },
         {
-          "id": "q4",
-          "prompt": "민주주의를 위협하는 힘으로 표현한 것은 무엇인가요?",
-          "answerText": "보이지 않는 권력",
+          "id": "q3",
+          "prompt": "수집된 정보는 정교한 알고리즘을 거쳐 무엇으로 변환된다고 했나요?",
+          "answerText": "개인 맞춤형 광고",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 88,
-              "end": 97
+              "paragraphId": "p2",
+              "start": 94,
+              "end": 103
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "동의 없는 정보 수집과 매각은 무엇을 훼손하는 문제로 지적되나요?",
+          "answerText": "개인의 자율성",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 77,
+              "end": 84
             }
           ],
           "scoring": {
@@ -965,14 +968,14 @@
         },
         {
           "id": "q5",
-          "prompt": "글에서 시급하다고 한 대응 가운데 하나는 무엇인가요?",
-          "answerText": "법적 규제",
+          "prompt": "투명한 데이터 관리 체계가 구축되어야만 누릴 수 있다고 한 것은 무엇인가요?",
+          "answerText": "정보화 사회의 이점",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 23,
-              "end": 28
+              "start": 94,
+              "end": 104
             }
           ],
           "scoring": {

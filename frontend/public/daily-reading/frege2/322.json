@@ -884,14 +884,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "3D 프린팅은 무엇을 바탕으로 입체적인 물건을 만들어 내나요?",
-          "answerText": "디지털 설계도",
+          "prompt": "3D 프린팅의 정의에 해당하는 부분을 찾으시오.",
+          "answerText": "디지털 설계도를 바탕으로 입체적인 물건을 만들어내는 기술",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 8,
-              "end": 15
+              "end": 39
             }
           ],
           "scoring": {
@@ -902,7 +902,7 @@
         },
         {
           "id": "q2",
-          "prompt": "3D 프린팅은 재료를 어떤 방식으로 쌓아 형태를 만드나요?",
+          "prompt": "3D 프린팅이 형태를 만드는 방식을 찾으시오.",
           "answerText": "한 층씩 쌓아 올려",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -920,14 +920,22 @@
         },
         {
           "id": "q3",
-          "prompt": "의료 분야에서 환자의 몸에 맞추어 정밀하게 만들 수 있는 것은 무엇인가요?",
-          "answerText": "인공 뼈",
-          "answerMatchMode": "ANY",
+          "prompt": "의료 분야에서 정밀하게 제작할 수 있다고 한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "인공 뼈",
+            "관절"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 46,
               "end": 50
+            },
+            {
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 54
             }
           ],
           "scoring": {
@@ -938,14 +946,14 @@
         },
         {
           "id": "q4",
-          "prompt": "건축 분야에서 집이나 건물을 짓는 데 쓰는 것은 무엇인가요?",
-          "answerText": "대형 3D 프린터",
+          "prompt": "건축 분야에서 3D 프린팅으로 지을 수 있게 된 것을 찾으시오.",
+          "answerText": "집이나 건물",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 33,
-              "end": 42
+              "start": 48,
+              "end": 54
             }
           ],
           "scoring": {
@@ -956,19 +964,14 @@
         },
         {
           "id": "q5",
-          "prompt": "우주에서 바로 만들어 사용할 수 있다고 한 것은 무엇인가요?",
-          "answerText": "부품",
+          "prompt": "3D 프린팅이 주목받는 미래 산업에서의 성격을 찾으시오.",
+          "answerText": "미래 산업을 혁신할 핵심 기술",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 37,
-              "end": 39
-            },
-            {
-              "paragraphId": "p4",
-              "start": 77,
-              "end": 79
+              "start": 129,
+              "end": 145
             }
           ],
           "scoring": {

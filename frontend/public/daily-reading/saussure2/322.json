@@ -562,87 +562,82 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "아빠, 엄마, 나, 동생이 함께 모여 주말 계획을 세우기 위해 연 이 모임의 이름은 무엇인가요?",
-          "answerText": "가족회의",
-          "answerMatchMode": "EXACT",
+          "prompt": "가족회의 참석자를 쉼표까지 포함하여 지문에서 찾으시오.",
+          "answerText": "아빠, 엄마, 나, 동생",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 83,
-              "end": 87
+              "start": 33,
+              "end": 46
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "주말을 즐겁게 보내기 위해 각자 하고 싶은 일에 대해 자기 생각을 말했어요. 어떤 일에 대한 각자의 생각을 뜻하는 이 단어는 무엇인가요?",
-          "answerText": "의견",
-          "answerMatchMode": "EXACT",
+          "prompt": "엄마가 낸 의견을 지문에서 찾으시오.",
+          "answerText": "날씨가 좋으니 공원으로 소풍을 가서 자전거를 타면 좋겠습니다.",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 115,
-              "end": 117
-            },
-            {
               "paragraphId": "p2",
-              "start": 1,
-              "end": 3
+              "start": 13,
+              "end": 47
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "엄마가 주말에 공원으로 소풍을 가서 타자고 제안한 것으로, 두 개의 바퀴를 발로 굴려서 타는 이것은 무엇인가요?",
-          "answerText": "자전거",
-          "answerMatchMode": "EXACT",
+          "prompt": "결정된 토요일 낮 활동을 모두 찾으시오.",
+          "answerText": "공원에 가서 자전거를 타고 모래놀이를 하기로 했습니다.",
+          "answerTexts": [
+            "공원에 가서 자전거를 타고",
+            "모래놀이를 하기로 했습니다."
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 33,
-              "end": 36
+              "paragraphId": "p3",
+              "start": 17,
+              "end": 31
             },
             {
               "paragraphId": "p3",
-              "start": 24,
-              "end": 27
+              "start": 32,
+              "end": 47
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "가족들은 서로의 뜻을 존중하여 남을 위해 조금씩 물러나 주었어요. 자기의 이익을 버리고 남에게 내어주는 것을 뜻하는 이 단어는 무엇인가요?",
-          "answerText": "양보",
-          "answerMatchMode": "EXACT",
+          "prompt": "회의 끝에 모두가 좋아하는 일을 하기로 한 방법을 지문에서 찾으시오.",
+          "answerText": "조금씩 양보해서",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 91,
-              "end": 93
+              "start": 87,
+              "end": 95
             }
           ],
           "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
           },
           "revealOnWrong": true
         }

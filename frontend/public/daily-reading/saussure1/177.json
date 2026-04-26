@@ -474,20 +474,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "철썩이는 무엇 소리인가요?",
-          "answerText": "파도",
-          "answerMatchMode": "EXACT",
+          "prompt": "등대 옆 바위 틈에서 한 마리 기어 나와 바다에게 손짓을 하며 다음 힌트를 알고 있는 듯 보였던 동물은 무엇인지 찾아 써 보세요",
+          "answerText": "게",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 27,
-              "end": 29
-            },
-            {
-              "paragraphId": "p2",
-              "start": 115,
-              "end": 117
-            }
+            {"paragraphId": "p1", "start": 99, "end": 100},
+            {"paragraphId": "p1", "start": 128, "end": 129},
+            {"paragraphId": "p2", "start": 16, "end": 17}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -498,25 +491,12 @@
         },
         {
           "id": "q2",
-          "prompt": "높이 솟은 무엇로 가요인가요?",
-          "answerText": "등대",
-          "answerMatchMode": "EXACT",
+          "prompt": "거센 바람에 날아갈 뻔한 바다의 머리에 쓰는 물건을 갈매기들이 부리로 꼭 잡아 주었는데 그 물건은 무엇인지 찾아 써 보세요",
+          "answerText": "모자",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p1",
-              "start": 84,
-              "end": 86
-            },
-            {
-              "paragraphId": "p2",
-              "start": 94,
-              "end": 96
-            }
+            {"paragraphId": "p1", "start": 34, "end": 36},
+            {"paragraphId": "p1", "start": 66, "end": 68}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -527,20 +507,28 @@
         },
         {
           "id": "q3",
-          "prompt": "머리에 쓰는 무엇인가요?",
-          "answerText": "모자",
-          "answerMatchMode": "EXACT",
+          "prompt": "게가 보물 지도처럼 생겼다며 바다에게 건네준 것은 어떠한 종이인지 두 단어를 모두 찾아 써 보세요",
+          "answerText": "낡은 종이",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 34,
-              "end": 36
-            },
-            {
-              "paragraphId": "p1",
-              "start": 66,
-              "end": 68
-            }
+            {"paragraphId": "p2", "start": 30, "end": 32},
+            {"paragraphId": "p2", "start": 33, "end": 35},
+            {"paragraphId": "p2", "start": 49, "end": 51}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "갑자기 등대 꼭대기에서 번쩍이며 파도 소리를 더욱 커지게 만든 것은 무엇인지 찾아 써 보세요",
+          "answerText": "빛",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 106, "end": 107}
           ],
           "scoring": {
             "correctDeltaSec": 10,

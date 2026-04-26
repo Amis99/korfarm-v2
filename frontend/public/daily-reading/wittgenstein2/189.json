@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "관형사형 어미 '-는'과 '-(으)ㄴ'이 공통으로 하는 기능을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 232
+              "start": 26,
+              "end": 38
             }
           ],
           "scoring": {
@@ -585,16 +585,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "관형사형 어미 '-는'과 '-(으)ㄴ'은 모두 뒤에 오는 명사를 꾸며 주지만, 두 형식이 나타내는 시간과 사건의 성격은 같지 않다. 가장 단순한 설명에서는 '-는'을 현재, '-(으)ㄴ'을 과거로 이해하기 쉽다. 그러나 실제 문장에서는 단순한 시제 대응만으로 설명되지 않는 경우가 많다. 어떤 형식이 선택되느냐는 동작이 진행 중인지, 이미 성립해 있는 상태인지, 서술어가 어떤 사건성을 가지는지와 함께 보아야 한다."
+          "answerText": "뒤에 오는 명사를 꾸며"
         },
         {
           "id": "q2",
-          "prompt": "2문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "가장 단순한 설명에서 두 어미를 어떻게 이해하기 쉬운지 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 219
+              "paragraphId": "p1",
+              "start": 87,
+              "end": 95
+            },
+            {
+              "paragraphId": "p1",
+              "start": 97,
+              "end": 108
             }
           ],
           "scoring": {
@@ -602,17 +607,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "동작성이 뚜렷한 용언에서는 '-는'이 진행 중이거나 반복되는 사건을 드러내는 경우가 많다. '지금 책을 읽는 학생', '아침마다 운동하는 사람' 같은 표현이 여기에 해당한다. 이때 '-는'은 단순히 현재 시점만 가리키는 것이 아니라, 아직 끝나지 않았거나 습관적으로 이어지는 행위를 배경으로 만든다. 그래서 같은 용언이라도 사건이 끝난 뒤의 결과를 말하려 하면 '-(으)ㄴ'이 더 자연스럽다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'-는'을 현재",
+            "'-(으)ㄴ'을 과거"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "'-는'이 진행 중이거나 반복되는 사건을 드러내는 표현 예시를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 237
+              "paragraphId": "p2",
+              "start": 51,
+              "end": 64
+            },
+            {
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 80
             }
           ],
           "scoring": {
@@ -620,17 +633,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "반대로 '-(으)ㄴ'은 완료된 사건이나 이미 성립한 상태를 나타내는 데 자주 쓰인다. '어제 읽은 책', '문이 닫힌 교실'에서 꾸밈을 받는 명사는 이미 일어난 사건의 결과와 연결된다. 그러나 '-(으)ㄴ'이 언제나 과거만 뜻하는 것은 아니다. 형용사나 상태성을 강하게 띠는 서술어에서는 현재의 성질을 나타낼 때에도 '-(으)ㄴ'이 쓰인다. '예쁜 꽃', '작은 방'이 자연스럽고 '예쁘는 꽃'이 어색한 이유가 여기에 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'지금 책을 읽는 학생'",
+            "'아침마다 운동하는 사람'"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "2문단에서 '-는'이 배경으로 만든다고 한 행위의 성격을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 243
+              "paragraphId": "p2",
+              "start": 131,
+              "end": 156
             }
           ],
           "scoring": {
@@ -639,16 +655,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 차이는 서술어의 사건성과도 관련된다. '먹다', '달리다'처럼 시간 속에서 전개되는 동작 동사는 현재 진행이나 반복을 나타내는 '-는'과 잘 결합한다. 하지만 '크다', '맑다'처럼 상태를 나타내는 형용사는 이미 성립한 속성을 꾸미는 일이 많으므로 '-(으)ㄴ'이 기본형처럼 기능한다. 따라서 관형사형 어미를 고를 때는 문장 바깥의 시간 표현만 볼 것이 아니라, 서술어가 움직임을 나타내는지 상태를 나타내는지도 함께 판단해야 한다."
+          "answerText": "아직 끝나지 않았거나 습관적으로 이어지는 행위"
         },
         {
           "id": "q5",
-          "prompt": "5문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "'-(으)ㄴ'이 자주 나타내는 대상을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 248
+              "paragraphId": "p3",
+              "start": 13,
+              "end": 19
+            },
+            {
+              "paragraphId": "p3",
+              "start": 22,
+              "end": 31
             }
           ],
           "scoring": {
@@ -656,17 +677,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "같은 동사라도 화자가 어떤 장면을 떠올리느냐에 따라 두 형식이 달라질 수 있다. '내가 만난 사람'은 만남이 끝난 장면을 가리키지만, '지금 만나는 사람'은 진행 중인 만남을 드러낸다. 또한 '늘 웃는 아이'처럼 반복적 성격을 강조할 때도 '-는'이 쓰인다. 결국 두 형식의 대립은 단순한 현재 대 과거의 구분이라기보다, 사건이 진행되는 장면을 보여 줄 것인지, 결과나 성질이 굳어진 상태를 보여 줄 것인지의 차이로 이해하는 편이 더 정확하다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "완료된 사건",
+            "이미 성립한 상태"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "6문단의 내용을 바탕으로 알 수 있는 것은?",
+          "prompt": "3문단에서 자연스럽다고 든 표현을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 242
+              "paragraphId": "p3",
+              "start": 191,
+              "end": 197
+            },
+            {
+              "paragraphId": "p3",
+              "start": 199,
+              "end": 205
             }
           ],
           "scoring": {
@@ -674,8 +703,63 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "정리하면 '-는'은 진행·반복·동작성을 드러내는 데 유리하고, '-(으)ㄴ'은 완료·결과·상태성을 드러내는 데 더 자연스럽다. 다만 형용사처럼 상태 서술어가 중심인 경우에는 현재의 성질을 말할 때도 '-(으)ㄴ'이 기본적으로 선택될 수 있다. 따라서 관형절을 읽을 때는 꾸며 주는 어미만 떼어 보지 말고, 그 어미가 어떤 서술어와 결합했는지, 화자가 사건의 어느 국면을 부각하는지까지 함께 살펴야 문장 의미를 정확히 파악할 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'예쁜 꽃'",
+            "'작은 방'"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "같은 동사 '만나다'에서 두 형식이 가리키는 장면을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 45,
+              "end": 66
+            },
+            {
+              "paragraphId": "p5",
+              "start": 75,
+              "end": 96
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'내가 만난 사람'은 만남이 끝난 장면",
+            "'지금 만나는 사람'은 진행 중인 만남"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "정리 부분에서 '-는'과 '-(으)ㄴ'이 각각 드러내는 성격을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 11,
+              "end": 20
+            },
+            {
+              "paragraphId": "p6",
+              "start": 44,
+              "end": 53
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "진행·반복·동작성",
+            "완료·결과·상태성"
+          ]
         }
       ]
     }

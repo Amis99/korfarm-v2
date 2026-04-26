@@ -557,9 +557,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "일정한 모양과 부피를 가지며 외부의 힘에도 쉽게 변하지 않는 물질의 상태는?",
+          "prompt": "나무 상자나 돌처럼 모양과 크기가 변하지 않는 물질의 상태를 지문에서 찾으시오.",
           "answerText": "고체",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -581,9 +581,9 @@
         },
         {
           "id": "q2",
-          "prompt": "흐르는 성질이 있어 모양이 자유롭게 변하지만 부피는 일정한 상태는?",
+          "prompt": "물이나 주스처럼 흐르는 성질이 있는 물질의 상태를 지문에서 찾으시오.",
           "answerText": "액체",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -605,14 +605,38 @@
         },
         {
           "id": "q3",
-          "prompt": "물에서 기체 상태로 변한 것으로, 눈에 보이지 않는 투명한 물질은 무엇인가요?",
-          "answerText": "수증기",
-          "answerMatchMode": "EXACT",
+          "prompt": "공기나 풍선 속의 바람처럼 눈에 보이지 않는 물질의 상태를 지문에서 찾으시오.",
+          "answerText": "기체",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 19,
-              "end": 22
+              "paragraphId": "p1",
+              "start": 22,
+              "end": 24
+            },
+            {
+              "paragraphId": "p2",
+              "start": 49,
+              "end": 51
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "세 가지 상태가 서로 변하기도 하는 기준을 지문에서 찾으시오.",
+          "answerText": "온도",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 110,
+              "end": 112
             }
           ],
           "scoring": {

@@ -406,9 +406,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "넓은 ( )에 도착해요.",
+          "prompt": "땅이 우묵하게 들어가 물이 괴어 있는 곳이라는 뜻의 단어를 지문에서 찾아 보세요.",
           "answerText": "연못",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -430,14 +430,24 @@
         },
         {
           "id": "q2",
-          "prompt": "( )가 활짝 피었습니다.",
-          "answerText": "웃음꽃",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 시의 주인공이자 항해를 마치고 연못에 도착한 등장인물의 이름을 모두 찾아 보세요.",
+          "answerText": "종이배",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 3
+            },
+            {
+              "paragraphId": "p1",
+              "start": 62,
+              "end": 65
+            },
+            {
               "paragraphId": "p2",
-              "start": 12,
-              "end": 15
+              "start": 27,
+              "end": 30
             }
           ],
           "scoring": {
@@ -449,14 +459,38 @@
         },
         {
           "id": "q3",
-          "prompt": "즐거운 ( )을 마쳤어요.",
-          "answerText": "모험",
-          "answerMatchMode": "EXACT",
+          "prompt": "종이배의 항해를 모여서 축하해 주는 등장인물을 지문에서 찾아 보세요.",
+          "answerText": "친구들",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 51,
+              "end": 54
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "사람이 아닌 사물(웃음, 배)을 마치 사람처럼 표현한 부분 두 군데를 모두 찾아 보세요.",
+          "answerText": "웃음꽃이 활짝 피었습니다 / 달빛 아래 조용히 잠듭니다",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 60,
-              "end": 62
+              "start": 12,
+              "end": 25
+            },
+            {
+              "paragraphId": "p2",
+              "start": 70,
+              "end": 84
             }
           ],
           "scoring": {

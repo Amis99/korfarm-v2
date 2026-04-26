@@ -396,39 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "아이들이 노는 장소?",
-          "answerText": "놀이터",
-          "answerMatchMode": "EXACT",
+          "prompt": "텅 빈 놀이터에 떠올라 미끄럼틀과 그네를 은은하게 비추던 것이 무엇인지 적어 보세요",
+          "answerText": "하얀 반달",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 41,
-              "end": 44
-            },
-            {
-              "paragraphId": "p1",
-              "start": 81,
-              "end": 84
-            },
-            {
-              "paragraphId": "p1",
-              "start": 124,
-              "end": 127
-            },
-            {
-              "paragraphId": "p2",
-              "start": 28,
-              "end": 31
-            },
-            {
-              "paragraphId": "p2",
-              "start": 91,
-              "end": 94
-            },
-            {
-              "paragraphId": "p2",
-              "start": 129,
-              "end": 132
+              "start": 87,
+              "end": 92
             }
           ],
           "scoring": {
@@ -440,19 +415,14 @@
         },
         {
           "id": "q2",
-          "prompt": "해 질 녘의 붉은 빛?",
-          "answerText": "노을",
-          "answerMatchMode": "EXACT",
+          "prompt": "놀이터의 기구들이 무엇을 하는 듯하다고 빗대어 표현했는지 본문에서 찾아 적어 보세요",
+          "answerText": "아이들의 꿈을 꾸는 듯",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 18,
-              "end": 20
-            },
-            {
-              "paragraphId": "p2",
-              "start": 77,
-              "end": 79
+              "start": 151,
+              "end": 163
             }
           ],
           "scoring": {
@@ -464,14 +434,38 @@
         },
         {
           "id": "q3",
-          "prompt": "편안히 몸을 쉼?",
-          "answerText": "휴식",
-          "answerMatchMode": "EXACT",
+          "prompt": "놀이터의 풍경을 무엇처럼 평화롭고 아름답다고 빗대어 표현했는지 적어 보세요",
+          "answerText": "동화 속의 한 장면처럼",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 159,
-              "end": 161
+              "start": 103,
+              "end": 115
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "고요한 밤하늘 아래 놀이터에서 어우러진 두 가지 빛을 모두 찾아 적어 보세요",
+          "answerText": "노을빛, 달빛",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 77,
+              "end": 80
+            },
+            {
+              "paragraphId": "p2",
+              "start": 82,
+              "end": 84
             }
           ],
           "scoring": {

@@ -396,49 +396,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "단단한 광물 덩어리?",
-          "answerText": "돌",
-          "answerMatchMode": "EXACT",
+          "prompt": "돌이 신기하고 특별한 모양을 가지게 된 까닭이 되는 두 가지를 모두 찾아 보세요",
+          "answerText": "비바람, 물에 깎이면서",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 36,
-              "end": 37
+              "start": 113,
+              "end": 116
             },
             {
               "paragraphId": "p1",
-              "start": 48,
-              "end": 49
-            },
-            {
-              "paragraphId": "p1",
-              "start": 65,
-              "end": 66
-            },
-            {
-              "paragraphId": "p1",
-              "start": 101,
-              "end": 102
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 1
-            },
-            {
-              "paragraphId": "p2",
-              "start": 56,
-              "end": 57
-            },
-            {
-              "paragraphId": "p2",
-              "start": 85,
-              "end": 86
-            },
-            {
-              "paragraphId": "p2",
-              "start": 133,
-              "end": 134
+              "start": 122,
+              "end": 129
             }
           ],
           "scoring": {
@@ -450,14 +420,14 @@
         },
         {
           "id": "q2",
-          "prompt": "물건 만드는 바탕 물자?",
-          "answerText": "재료",
-          "answerMatchMode": "EXACT",
+          "prompt": "돌이 우리 생활에서 재료로 쓰이는 두 가지 일을 모두 찾아 보세요",
+          "answerText": "길을 만들거나 건물을 지을",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 28,
-              "end": 30
+              "start": 11,
+              "end": 25
             }
           ],
           "scoring": {
@@ -469,14 +439,33 @@
         },
         {
           "id": "q3",
-          "prompt": "산, 강 등 세상의 형상?",
-          "answerText": "자연",
-          "answerMatchMode": "EXACT",
+          "prompt": "예쁜 무늬가 있는 돌이 집 안에서 어떤 역할을 하는지 찾아 보세요",
+          "answerText": "장식품",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 114,
-              "end": 116
+              "start": 68,
+              "end": 71
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "공원에서 작은 조약돌로 만드는 길은 어떤 길인지 찾아 보세요",
+          "answerText": "지압을 하는 길",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 93,
+              "end": 101
             }
           ],
           "scoring": {

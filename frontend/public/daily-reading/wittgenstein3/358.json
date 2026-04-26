@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "prompt": "수중에서 산소 가용성이 달라지는 조건이 함께 제시된 어구를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 201
+              "start": 54,
+              "end": 63
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "수중 환경에서 호흡하는 일은 겉보기보다 훨씬 어렵다. 물에는 공기보다 이용 가능한 산소가 적고, 물의 온도와 흐름에 따라 산소 가용성도 달라진다. 그럼에도 수생 동물은 아가미를 발달시켜 물속에서 산소를 얻는다. 아가미는 단순히 물과 닿는 표면이 넓기만 한 기관이 아니라, 적은 산소를 가능한 한 끝까지 빼내기 위해 구조와 흐름이 정교하게 조절된 호흡 기관이다."
+          "answerText": "물의 온도와 흐름"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 핵심 원리나 기준을 어떻게 설명하는가?",
+          "prompt": "아가미가 어떤 호흡 기관인지 설명한 부분을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 213
+              "paragraphId": "p1",
+              "start": 152,
+              "end": 198
             }
           ],
           "scoring": {
@@ -603,52 +603,128 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "아가미는 크게 외새와 내새로 나눌 수 있다. 외새는 몸 바깥으로 돌출되어 있어 물과 직접 넓게 접촉하므로 산소 교환 면적을 확보하기 쉽다. 그러나 외부에 노출된 만큼 손상되기 쉽고, 계속 흔들거나 움직여야 물과의 접촉이 유지되므로 에너지 소모도 커진다. 반면 내새는 몸 안쪽에 자리해 보호를 받으며, 필라멘트와 라멜라 같은 세밀한 구조를 통해 훨씬 안정적으로 기체 교환을 수행한다."
+          "answerText": "적은 산소를 가능한 한 끝까지 빼내기 위해 구조와 흐름이 정교하게 조절된 호흡 기관"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 그 원리의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "아가미가 크게 나뉘는 두 종류를 모두 찾으시오.",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 8,
+              "end": 10
+            },
+            {
+              "paragraphId": "p2",
+              "start": 12,
+              "end": 14
+            },
+            {
+              "paragraphId": "p2",
+              "start": 25,
+              "end": 27
+            },
+            {
+              "paragraphId": "p2",
+              "start": 145,
+              "end": 147
+            },
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 216
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "내새의 핵심은 라멜라 내부 모세혈관과 그 바깥을 지나는 물이 서로 반대 방향으로 흐른다는 점이다. 이른바 역류 교환이 일어나면, 물은 이동하는 내내 자기보다 산소 농도가 낮은 혈액과 계속 마주치게 된다. 그래서 물이 아가미를 빠져나갈 때까지 산소 확산이 끊기지 않고 이어질 수 있다. 만약 같은 방향으로 흐른다면 중간 지점에서 농도 차가 빠르게 줄어들어 더 이상 효과적인 확산이 어렵다."
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
-          "answerRanges": [
+              "end": 2
+            },
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 226
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 원리는 산소 흡수 효율을 높이는 데 결정적이다. 물이 처음 들어왔을 때는 산소가 풍부하므로 혈액 쪽으로 쉽게 이동하고, 물이 일부 산소를 잃은 뒤에도 여전히 더 낮은 산소 농도의 혈액을 만나므로 확산이 계속된다. 다시 말해 내새는 구조적 표면적 확대와 흐름의 배치를 동시에 이용해 산소 포획 효율을 극대화한다. 수생 동물이 상대적으로 산소가 부족한 환경에서도 살아갈 수 있는 이유가 바로 여기에 있다."
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단은 이 주제의 효과나 쟁점을 어떤 방향으로 확장하는가?",
-          "answerRanges": [
+              "start": 127,
+              "end": 129
+            },
             {
               "paragraphId": "p5",
               "start": 0,
-              "end": 246
+              "end": 2
+            },
+            {
+              "paragraphId": "p5",
+              "start": 31,
+              "end": 33
+            },
+            {
+              "paragraphId": "p5",
+              "start": 66,
+              "end": 68
+            },
+            {
+              "paragraphId": "p5",
+              "start": 139,
+              "end": 141
+            },
+            {
+              "paragraphId": "p5",
+              "start": 219,
+              "end": 221
+            },
+            {
+              "paragraphId": "p6",
+              "start": 43,
+              "end": 45
+            },
+            {
+              "paragraphId": "p6",
+              "start": 47,
+              "end": 49
+            },
+            {
+              "paragraphId": "p6",
+              "start": 127,
+              "end": 129
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "외새",
+            "내새"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "외새가 가진 한계를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 93,
+              "end": 100
+            },
+            {
+              "paragraphId": "p2",
+              "start": 129,
+              "end": 140
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "손상되기 쉽고",
+            "에너지 소모도 커진다"
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "역류 교환의 핵심 조건을 설명한 부분을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 8,
+              "end": 51
             }
           ],
           "scoring": {
@@ -657,16 +733,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "외새 역시 넓은 접촉 면적을 통해 산소 교환을 하지만, 내새만큼 안정적이고 지속적인 역류 교환 체계를 갖추기 어렵다. 외새는 물과 직접 맞닿아 있어 유리해 보이지만, 보호 장치가 부족하고 물의 흐름을 능동적으로 관리하기 어렵다는 한계가 있다. 반면 내새는 덮개와 내부 통로 덕분에 물을 일정 방향으로 흐르게 할 수 있어, 역류 교환 구조가 제대로 작동한다. 그래서 많은 어류가 진화 과정에서 내새를 중심으로 한 호흡 체계를 발전시킨 것이다."
+          "answerText": "라멜라 내부 모세혈관과 그 바깥을 지나는 물이 서로 반대 방향으로 흐른다는 점"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 앞선 논의를 어떤 의미로 정리하는가?",
+          "prompt": "물과 혈액이 같은 방향으로 흐를 때 생기는 결과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 229
+              "paragraphId": "p3",
+              "start": 175,
+              "end": 215
             }
           ],
           "scoring": {
@@ -675,7 +751,51 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 수생 동물의 아가미 효율은 단순히 표면적이 넓은가에만 달려 있지 않다. 외새와 내새의 차이는 노출 위치와 보호 정도의 차이이기도 하지만, 더 본질적으로는 물과 혈액의 흐름을 얼마나 정교하게 맞물리게 하느냐의 차이다. 특히 내새의 역류 교환은 적은 산소를 가진 물에서도 최대한 많은 산소를 혈액으로 옮기게 하는 핵심 메커니즘이다. 수생 호흡의 효율성은 결국 구조와 흐름을 함께 설계한 결과라고 할 수 있다."
+          "answerText": "중간 지점에서 농도 차가 빠르게 줄어들어 더 이상 효과적인 확산이 어렵다"
+        },
+        {
+          "id": "q7",
+          "prompt": "내새가 산소 포획 효율을 극대화하는 데 동시에 이용하는 것을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 131,
+              "end": 141
+            },
+            {
+              "paragraphId": "p4",
+              "start": 143,
+              "end": 149
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "구조적 표면적 확대",
+            "흐름의 배치"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "적은 산소를 가진 물에서도 많은 산소를 혈액으로 옮기는 핵심 메커니즘을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 127,
+              "end": 136
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "내새의 역류 교환"
         }
       ]
     }

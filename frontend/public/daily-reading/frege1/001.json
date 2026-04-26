@@ -913,19 +913,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리나라에서 새해 첫날 아침에 먹는 음식은 무엇인가요?",
-          "answerText": "떡국",
+          "prompt": "우리나라에서 새해 첫날 아침에 하는 일을 찾으시오.",
+          "answerText": "떡국을 먹는다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 39,
-              "end": 41
-            },
-            {
-              "paragraphId": "p1",
-              "start": 48,
-              "end": 50
+              "end": 46
             }
           ],
           "scoring": {
@@ -936,14 +931,22 @@
         },
         {
           "id": "q2",
-          "prompt": "중국에서 새해를 무엇이라고 부르나요?",
-          "answerText": "춘절",
-          "answerMatchMode": "ANY",
+          "prompt": "우리나라에서 가족들이 모여 하는 새해 풍습을 모두 찾으시오.",
+          "answerTexts": [
+            "조상님께 차례를 지내고",
+            "어른들께 세배를 하며 건강을 기원한다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 11,
-              "end": 13
+              "paragraphId": "p1",
+              "start": 93,
+              "end": 105
+            },
+            {
+              "paragraphId": "p1",
+              "start": 106,
+              "end": 126
             }
           ],
           "scoring": {
@@ -954,10 +957,18 @@
         },
         {
           "id": "q3",
-          "prompt": "중국에서 세뱃돈을 담아 주는 봉투는 무엇인가요?",
-          "answerText": "홍바오",
-          "answerMatchMode": "ANY",
+          "prompt": "중국 새해 풍습에서 집 대문에 붙이는 것과 세뱃돈 봉투 이름을 모두 찾으시오.",
+          "answerTexts": [
+            "붉은색 종이",
+            "홍바오"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 47,
+              "end": 53
+            },
             {
               "paragraphId": "p2",
               "start": 80,
@@ -972,10 +983,18 @@
         },
         {
           "id": "q4",
-          "prompt": "영국이나 스코틀랜드의 새해 첫 손님 풍습은 무엇인가요?",
-          "answerText": "퍼스트 푸팅",
-          "answerMatchMode": "ANY",
+          "prompt": "서양 새해 풍습에서 나온 장소와 풍습 이름을 모두 찾으시오.",
+          "answerTexts": [
+            "뉴욕 타임스퀘어",
+            "퍼스트 푸팅"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 32,
+              "end": 40
+            },
             {
               "paragraphId": "p3",
               "start": 129,
@@ -990,14 +1009,34 @@
         },
         {
           "id": "q5",
-          "prompt": "글에서 새해에 세워 보자고 한 것은 무엇인가요?",
-          "answerText": "목표",
-          "answerMatchMode": "ANY",
+          "prompt": "새해를 맞이하는 마음으로 설명한 내용을 모두 찾으시오.",
+          "answerTexts": [
+            "지난 시간을 돌아보고",
+            "다가올 미래에 대한 희망을 품는 것이다",
+            "가족과 이웃의 행복을 빌며",
+            "새로운 결심을 다지는 소중한 시간"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 121,
-              "end": 123
+              "start": 34,
+              "end": 45
+            },
+            {
+              "paragraphId": "p4",
+              "start": 46,
+              "end": 67
+            },
+            {
+              "paragraphId": "p4",
+              "start": 69,
+              "end": 83
+            },
+            {
+              "paragraphId": "p4",
+              "start": 84,
+              "end": 102
             }
           ],
           "scoring": {

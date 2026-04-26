@@ -587,19 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "매미가 내는 소리는?",
-          "answerText": "노래를",
-          "answerMatchMode": "EXACT",
+          "prompt": "여름 숲속에서 매미가 하는 행동을 찾으시오.",
+          "answerText": "큰 소리로 노래를 부릅니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 22,
-              "end": 25
-            },
-            {
-              "paragraphId": "p3",
-              "start": 61,
-              "end": 64
+              "start": 16,
+              "end": 30
             }
           ],
           "scoring": {
@@ -611,14 +606,22 @@
         },
         {
           "id": "q2",
-          "prompt": "지켜야 할 약속은?",
-          "answerText": "규칙이",
-          "answerMatchMode": "EXACT",
+          "prompt": "매미를 관찰할 때 하지 말아야 할 일을 모두 찾으시오.",
+          "answerTexts": [
+            "나무를 함부로 흔들거나",
+            "매미를 괴롭히지 말아야 합니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 52,
-              "end": 55
+              "start": 62,
+              "end": 74
+            },
+            {
+              "paragraphId": "p1",
+              "start": 75,
+              "end": 91
             }
           ],
           "scoring": {
@@ -630,14 +633,41 @@
         },
         {
           "id": "q3",
-          "prompt": "걱정 없이 평온한 상태는?",
-          "answerText": "평화가",
-          "answerMatchMode": "EXACT",
+          "prompt": "매미가 세상으로 나오기 전에 한 일과 존중해야 할 것을 모두 찾으시오.",
+          "answerTexts": [
+            "땅속에서 긴 시간을 보내고",
+            "짧은 시간 동안 숲을 지키는 매미의 생명"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 4,
+              "end": 18
+            },
+            {
+              "paragraphId": "p2",
+              "start": 30,
+              "end": 52
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "규칙을 잘 지키면 유지되는 것을 찾으시오.",
+          "answerText": "숲의 평화",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 17,
-              "end": 20
+              "start": 14,
+              "end": 19
             }
           ],
           "scoring": {

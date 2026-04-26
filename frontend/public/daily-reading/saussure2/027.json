@@ -564,7 +564,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "물을 부어 반죽하면 모양이 잘 지어지는 흙은?",
+          "prompt": "물기가 있어 손으로 쉽게 주무를 수 있고, 마음껏 모양을 만들 수 있는 미술 재료의 이름이 무엇인지 알아보세요",
           "answerText": "찰흙",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -595,62 +595,90 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "옷이 더러워지지 않게 겉에 두르는 것은?",
-          "answerText": "앞치마",
-          "answerMatchMode": "ANY",
+          "prompt": "찰흙을 손으로 빚을 수 있는 세 가지 모양이 무엇이라고 했는지 모두 찾으시오.",
+          "answerText": "판을 만들거나, 공을 만들, 나선형 그릇",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 35,
-              "end": 38
+              "paragraphId": "p1",
+              "start": 46,
+              "end": 53
+            },
+            {
+              "paragraphId": "p1",
+              "start": 62,
+              "end": 67
+            },
+            {
+              "paragraphId": "p1",
+              "start": 90,
+              "end": 96
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true
+          "revealOnWrong": true,
+          "answerTexts": [
+            "판을 만들거나",
+            "공을 만들",
+            "나선형 그릇"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "머릿속으로 자유롭게 그리는 생각의 힘은?",
-          "answerText": "상상력",
-          "answerMatchMode": "ANY",
+          "prompt": "찰흙으로 만든 작품을 흙 가마에 넣고 아주 높은 열로 구우면 어떻게 변한다고 했는지, 두 가지 모습을 모두 찾으시오.",
+          "answerText": "단단하고, 튼튼",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 85,
-              "end": 88
+              "paragraphId": "p2",
+              "start": 60,
+              "end": 64
+            },
+            {
+              "paragraphId": "p2",
+              "start": 65,
+              "end": 67
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true
+          "revealOnWrong": true,
+          "answerTexts": [
+            "단단하고",
+            "튼튼"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "정성껏 만들어서 내놓은 훌륭한 결과물은?",
-          "answerText": "작품",
+          "prompt": "찰흙으로 만든 작품을 가마에 구워 단단해진 결과물을 무엇이라 부르는지 알아보세요",
+          "answerText": "도자기",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 8,
-              "end": 10
+              "start": 82,
+              "end": 85
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         }

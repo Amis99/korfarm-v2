@@ -557,59 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "바다 생물들의 집이며 바닷물을 깨끗하게 정화해 주는 소중한 자연 공간은 어디인가요?",
-          "answerText": "갯벌",
-          "answerMatchMode": "EXACT",
+          "prompt": "바다 생물들의 집이자 바닷물을 깨끗하게 해 주는 자연의 무엇인지 지문에서 찾으시오.",
+          "answerText": "자연의 정수기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 22,
-              "end": 24
-            },
-            {
-              "paragraphId": "p1",
-              "start": 36,
-              "end": 38
-            },
-            {
-              "paragraphId": "p1",
-              "start": 104,
-              "end": 106
-            },
-            {
-              "paragraphId": "p1",
-              "start": 120,
-              "end": 122
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 61,
-              "end": 63
-            },
-            {
-              "paragraphId": "p2",
-              "start": 92,
-              "end": 94
-            },
-            {
-              "paragraphId": "p3",
-              "start": 8,
-              "end": 10
-            },
-            {
-              "paragraphId": "p3",
-              "start": 58,
-              "end": 60
-            },
-            {
-              "paragraphId": "p3",
-              "start": 114,
-              "end": 116
+              "start": 85,
+              "end": 92
             }
           ],
           "scoring": {
@@ -621,10 +576,18 @@
         },
         {
           "id": "q2",
-          "prompt": "버려진 비닐이나 이것은 썩지 않고 갯벌에 남아 생태계를 심각하게 파괴하는 원인이 됩니다.",
-          "answerText": "플라스틱",
-          "answerMatchMode": "EXACT",
+          "prompt": "갯벌에 버려져 썩지 않고 남아 조개나 게의 생명을 위협하는 것 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "비닐",
+            "플라스틱"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 8,
+              "end": 10
+            },
             {
               "paragraphId": "p2",
               "start": 12,
@@ -640,9 +603,28 @@
         },
         {
           "id": "q3",
-          "prompt": "방문객들에게 갯벌 보호의 중요성을 알리기 위해 입구에 설치해 달라고 건의한 것은?",
+          "prompt": "갯벌을 훼손하지 않고 보호하기 위해 우리는 언제 행동해야 하는지 지문에서 찾으시오.",
+          "answerText": "지금 당장",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 112,
+              "end": 117
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "방문객들에게 갯벌의 소중함을 알리기 위해 세워 줄 것을 건의한 것은 무엇인지 찾으시오.",
           "answerText": "안내판",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",

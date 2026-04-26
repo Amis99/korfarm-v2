@@ -844,93 +844,137 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이 시는 어떤 장면에서 시작하나요?",
+          "prompt": "화자가 펴서 말리고 또 지키려 하는 신체 장기를 본문에서 모두 찾으시오",
+          "answerText": "肝",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 28
+              "start": 18,
+              "end": 19
+            },
+            {
+              "paragraphId": "p2",
+              "start": 30,
+              "end": 31
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "바닷가 햇빛 바른 바위우에\n습한 肝을 펴서 말리우자"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "화자는 왜 토끼처럼 둘러리를 돈다고 하나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 36
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "이 시 마지막 연에서 불을 도적한 죄로 형벌을 받는 신화 속 인물을 본문에서 모두 찾으시오",
+          "answerText": "푸로메디어쓰",
           "answerMatchMode": "ANY",
-          "answerText": "코카사쓰山中에서 도망해온 토끼처럼\n둘러리를 빙빙 돌며 肝을 지키자"
-        },
-        {
-          "id": "q3",
-          "prompt": "독수리에게 말을 건네는 장면은 무엇을 드러내나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 33
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "내가 오래 기르든 여윈 독수리야!\n와서 뜯어 먹어라, 시름없"
-        },
-        {
-          "id": "q4",
-          "prompt": "거북이와 용궁의 유혹은 어떤 태도를 보여 주나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 23
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "거북이야!\n다시는 龍宮의 誘惑에 안떨어진다"
-        },
-        {
-          "id": "q5",
-          "prompt": "푸로메디어쓰의 모습은 무엇을 상징하나요?",
           "answerRanges": [
             {
               "paragraphId": "p6",
               "start": 0,
+              "end": 6
+            },
+            {
+              "paragraphId": "p6",
+              "start": 11,
+              "end": 17
+            },
+            {
+              "paragraphId": "p6",
+              "start": 46,
               "end": 52
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "화자가 자신을 빗대어 표현한 동물의 직유 표현을 본문에서 찾으시오",
+          "answerText": "토끼처럼",
           "answerMatchMode": "ANY",
-          "answerText": "푸로메디어쓰 불상한 푸로메디어쓰\n불 도적한 죄로 목에 맷돌을 달고\n끝없이 沈澱하는 푸로메디어쓰"
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 14,
+              "end": 18
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "화자가 거북이를 부르며 사용한 돈호법 표현을 본문에서 찾으시오",
+          "answerText": "거북이야!",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 5
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "화자가 거북이를 부른 뒤 다시는 빠지지 않겠다고 거부한 대상을 본문에서 찾으시오",
+          "answerText": "龍宮의 誘惑",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 10,
+              "end": 16
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "푸로메디어쓰가 받고 있는 형벌의 모습을 보여 주는 두 표현을 본문에서 모두 찾으시오",
+          "answerText": "목에 맷돌을 달고 / 끝없이 沈澱하는",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 27,
+              "end": 36
+            },
+            {
+              "paragraphId": "p6",
+              "start": 37,
+              "end": 45
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

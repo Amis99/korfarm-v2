@@ -652,119 +652,168 @@
     },
     "confirm": {
       "questions": [
-        {
-          "id": "q1",
-          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 27
-            },
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 27
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "유등제를 한번 보고 싶다.\n해 저문 강가로 나아가"
-        },
-        {
-          "id": "q2",
-          "prompt": "2연은 그 장면이나 정서를 어떻게 이어 가는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 47
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "머나먼 행렬을 이루면서 밝은 연등 불빛 흘러가는\n그 조용한 눈물의 제의를\n보고 싶다."
-        },
-        {
-          "id": "q3",
-          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 26
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "나도 함께 따라갈 수 있다면\n얼마나 더 좋으랴."
-        },
-        {
-          "id": "q4",
-          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 81
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "세상의 온갖 설움을 푼 몸이 두둥실\n물 위에 떠서\n한 줌씩 불빛 던지며 어둠을 헤치고 흘러가면\n마침내 닿을 그곳이 불귀의 하늘이어도\n나는 좋으리."
-        },
-        {
-          "id": "q5",
-          "prompt": "5연은 앞선 흐름을 어떤 긴장이나 전환으로 끌고 가는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 99
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "길가엔\n깨끗이 옷을 차려입은 사람들\n멀어져 가는 점점의 등불을 바라보며\n차마 돌아서지 못하는 발걸음, 섰던 자리에 묶여\n두 손 모아 간절히 비나니\n부디 저 길이 극락에 이르소서."
-        },
-        {
-          "id": "q6",
-          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 114
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "유등제를 한번 보고 싶다.\n해 저문 강가로 나아가\n수천, 수만 개의 연꽃 등불 밤하늘 별빛인 양\n물 위에 떠서\n아득히 행렬을 이루면서 어둠 속으로 흘러가는\n그 눈물 글썽이는 축복의 제의를\n나는\n보고 싶다."
-        }
+              {
+                      "id": "q1",
+                      "prompt": "화자가 처음과 끝에서 반복해 말하는 소망의 문장을 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p1",
+                                      "start": 0,
+                                      "end": 14
+                              },
+                              {
+                                      "paragraphId": "p6",
+                                      "start": 0,
+                                      "end": 14
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ANY",
+                      "answerText": "유등제를 한번 보고 싶다."
+              },
+              {
+                      "id": "q2",
+                      "prompt": "화자가 유등제를 보러 나아가려는 장소와 움직임을 나타낸 구절을 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p1",
+                                      "start": 15,
+                                      "end": 27
+                              },
+                              {
+                                      "paragraphId": "p6",
+                                      "start": 15,
+                                      "end": 27
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ANY",
+                      "answerText": "해 저문 강가로 나아가"
+              },
+              {
+                      "id": "q3",
+                      "prompt": "연등 불빛이 흘러가는 장면을 의식처럼 부른 표현을 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p2",
+                                      "start": 27,
+                                      "end": 39
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ANY",
+                      "answerText": "그 조용한 눈물의 제의"
+              },
+              {
+                      "id": "q4",
+                      "prompt": "화자가 함께 따라가고 싶다는 마음을 감탄적으로 드러낸 구절을 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p3",
+                                      "start": 16,
+                                      "end": 25
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ANY",
+                      "answerText": "얼마나 더 좋으랴"
+              },
+              {
+                      "id": "q5",
+                      "prompt": "닿게 될 곳이 돌아올 수 없는 하늘임을 나타내는 표현을 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p4",
+                                      "start": 64,
+                                      "end": 70
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ANY",
+                      "answerText": "불귀의 하늘"
+              },
+              {
+                      "id": "q6",
+                      "prompt": "길가의 사람들이 보이는 행동과 기원을 나타낸 구절 두 가지를 모두 찾으시오",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p5",
+                                      "start": 40,
+                                      "end": 55
+                              },
+                              {
+                                      "paragraphId": "p5",
+                                      "start": 67,
+                                      "end": 81
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ALL",
+                      "answerTexts": [
+                              "차마 돌아서지 못하는 발걸음",
+                              "두 손 모아 간절히 비나니"
+                      ]
+              },
+              {
+                      "id": "q7",
+                      "prompt": "연꽃 등불을 별빛에 빗댄 표현을 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p6",
+                                      "start": 44,
+                                      "end": 53
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ANY",
+                      "answerText": "밤하늘 별빛인 양"
+              },
+              {
+                      "id": "q8",
+                      "prompt": "마지막 연에서 유등제를 눈물과 축복의 성격으로 부른 표현을 찾으시오.",
+                      "answerRanges": [
+                              {
+                                      "paragraphId": "p6",
+                                      "start": 87,
+                                      "end": 103
+                              }
+                      ],
+                      "scoring": {
+                              "correctDeltaSec": 30,
+                              "wrongDeltaSec": -45
+                      },
+                      "revealOnWrong": true,
+                      "answerMatchMode": "ANY",
+                      "answerText": "그 눈물 글썽이는 축복의 제의"
+              }
       ]
     }
   }

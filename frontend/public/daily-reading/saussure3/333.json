@@ -850,14 +850,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "비누 ( )으로 문질러요.",
-          "answerText": "거품",
-          "answerMatchMode": "EXACT",
+          "prompt": "잠자기 전에 몸을 깨끗이 씻어야 하는 이유를 모두 찾으시오.",
+          "answerTexts": [
+            "몸을 깨끗이 씻어야",
+            "건강에 좋음"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 91,
-              "end": 93
+              "start": 35,
+              "end": 45
+            },
+            {
+              "paragraphId": "p1",
+              "start": 46,
+              "end": 52
             }
           ],
           "scoring": {
@@ -869,14 +877,22 @@
         },
         {
           "id": "q2",
-          "prompt": "얼굴의 ( )을 제거합니다.",
-          "answerText": "노폐물",
-          "answerMatchMode": "EXACT",
+          "prompt": "샤워를 할 때 쓰는 것과 그 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "따뜻한 물로 샤워를 하면",
+            "하루의 피로가 풀립니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 70,
-              "end": 73
+              "paragraphId": "p1",
+              "start": 54,
+              "end": 67
+            },
+            {
+              "paragraphId": "p1",
+              "start": 68,
+              "end": 80
             }
           ],
           "scoring": {
@@ -888,14 +904,41 @@
         },
         {
           "id": "q3",
-          "prompt": "조용한 ( )을 들어 봅니다.",
-          "answerText": "음악",
-          "answerMatchMode": "EXACT",
+          "prompt": "비누 거품으로 몸을 씻는 모습을 모두 찾으시오.",
+          "answerTexts": [
+            "보들보들한 비누 거품",
+            "피부를 싹싹 문지름"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 39,
-              "end": 41
+              "paragraphId": "p1",
+              "start": 82,
+              "end": 93
+            },
+            {
+              "paragraphId": "p1",
+              "start": 96,
+              "end": 106
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "청결한 수면 습관이 우리 몸에 주는 결과를 본문에서 찾으시오.",
+          "answerText": "우리 몸을 튼튼하게 만듦",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 118,
+              "end": 131
             }
           ],
           "scoring": {

@@ -396,20 +396,11 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "여럿이 모여 의논함?",
-          "answerText": "회의",
-          "answerMatchMode": "EXACT",
+          "prompt": "오늘 가족회의에서 사회를 본 사람을 찾아보세요",
+          "answerText": "아빠",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 40,
-              "end": 42
-            },
-            {
-              "paragraphId": "p2",
-              "start": 107,
-              "end": 109
-            }
+            {"paragraphId": "p1", "start": 51, "end": 53}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -420,20 +411,12 @@
         },
         {
           "id": "q2",
-          "prompt": "어머니의 친정집 이름?",
-          "answerText": "외갓집",
-          "answerMatchMode": "EXACT",
+          "prompt": "함께 모여 어떤 일을 의논하고 결정하는 모임을 가리키는 두 글자 낱말을 찾아보세요",
+          "answerText": "회의",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 18,
-              "end": 21
-            },
-            {
-              "paragraphId": "p2",
-              "start": 148,
-              "end": 151
-            }
+            {"paragraphId": "p1", "start": 40, "end": 42},
+            {"paragraphId": "p2", "start": 107, "end": 109}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -444,15 +427,27 @@
         },
         {
           "id": "q3",
-          "prompt": "마음속에 있는 생각?",
-          "answerText": "의견",
-          "answerMatchMode": "EXACT",
+          "prompt": "시골의 추운 날씨에 대비해 챙기기로 한 두 가지 준비물을 모두 찾아보세요",
+          "answerText": "옷, 장화",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 99,
-              "end": 101
-            }
+            {"paragraphId": "p2", "start": 23, "end": 24},
+            {"paragraphId": "p2", "start": 26, "end": 28}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "회의가 즐겁게 마무리될 수 있었던 까닭은 가족들이 서로의 생각을 무엇했기 때문입니다. 빈칸에 들어갈 두 글자 낱말을 찾아보세요",
+          "answerText": "존중",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 75, "end": 77}
           ],
           "scoring": {
             "correctDeltaSec": 10,

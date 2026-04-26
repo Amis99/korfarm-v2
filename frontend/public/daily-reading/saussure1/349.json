@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "그림을 모아 보여주는 곳?",
+          "prompt": "글에서 '그림이나 조각 등을 모아 보여 주는 곳'을 뜻하는 세 글자 낱말을 찾아 적어 보세요",
           "answerText": "미술관",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -425,29 +425,14 @@
         },
         {
           "id": "q2",
-          "prompt": "선과 색으로 나타낸 것?",
-          "answerText": "그림",
-          "answerMatchMode": "EXACT",
+          "prompt": "미술관 정원에 전시되어 있던 작품이 무엇인지 글에서 찾아 세 글자로 적어 보세요",
+          "answerText": "조각상",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 86,
-              "end": 88
-            },
-            {
-              "paragraphId": "p1",
-              "start": 124,
-              "end": 126
-            },
-            {
-              "paragraphId": "p2",
-              "start": 43,
-              "end": 45
-            },
-            {
-              "paragraphId": "p2",
-              "start": 80,
-              "end": 82
+              "start": 50,
+              "end": 53
             }
           ],
           "scoring": {
@@ -459,19 +444,43 @@
         },
         {
           "id": "q3",
-          "prompt": "모습을 남기는 정지 장면?",
-          "answerText": "사진",
-          "answerMatchMode": "EXACT",
+          "prompt": "글쓴이가 미술관에 함께 간 사람들이 누구인지 글에서 찾아 두 글자로 적어 보세요",
+          "answerText": "가족",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 53,
-              "end": 55
+              "paragraphId": "p1",
+              "start": 4,
+              "end": 6
             },
             {
               "paragraphId": "p2",
-              "start": 93,
-              "end": 95
+              "start": 50,
+              "end": 52
+            },
+            {
+              "paragraphId": "p2",
+              "start": 135,
+              "end": 137
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "글쓴이가 오늘 미술관 산책에서 가장 신났던 순간이 언제였는지 글에서 찾아 적어 보세요",
+          "answerText": "'커다란 사과' 그림 앞에서 가족 사진을 찍었을 때",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 34,
+              "end": 62
             }
           ],
           "scoring": {

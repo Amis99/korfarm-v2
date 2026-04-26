@@ -587,34 +587,29 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사실이 아닌 꾸민 말은?",
-          "answerText": "거짓",
-          "answerMatchMode": "EXACT",
+          "prompt": "사실과 다른 말을 하는 일을 가리키는 낱말을 찾으시오.",
+          "answerText": "거짓말",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 5,
-              "end": 7
-            },
-            {
-              "paragraphId": "p1",
-              "start": 55,
-              "end": 57
+              "end": 8
             },
             {
               "paragraphId": "p1",
               "start": 64,
-              "end": 66
+              "end": 67
             },
             {
               "paragraphId": "p2",
               "start": 39,
-              "end": 41
+              "end": 42
             },
             {
               "paragraphId": "p3",
               "start": 44,
-              "end": 46
+              "end": 47
             }
           ],
           "scoring": {
@@ -626,19 +621,14 @@
         },
         {
           "id": "q2",
-          "prompt": "굳게 믿고 의지하는 마음?",
-          "answerText": "신뢰를",
-          "answerMatchMode": "EXACT",
+          "prompt": "마을 사람들이 소년의 말을 믿은 뒤 한 행동을 찾으시오.",
+          "answerText": "믿고 달려왔지만",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 51,
+              "paragraphId": "p1",
+              "start": 46,
               "end": 54
-            },
-            {
-              "paragraphId": "p3",
-              "start": 70,
-              "end": 73
             }
           ],
           "scoring": {
@@ -650,14 +640,41 @@
         },
         {
           "id": "q3",
-          "prompt": "잘못을 깨닫고 뉘우침?",
-          "answerText": "사과하고",
-          "answerMatchMode": "EXACT",
+          "prompt": "소년이 신뢰를 잃게 된 까닭과 그 결과를 모두 찾으시오.",
+          "answerTexts": [
+            "반복된 거짓말로 인해",
+            "신뢰를 모두 잃은 것입니다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 35,
+              "end": 46
+            },
+            {
+              "paragraphId": "p2",
+              "start": 51,
+              "end": 65
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "신뢰를 회복하는 과정에서 바탕이 되는 마음을 찾으시오.",
+          "answerText": "정직한 마음",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 35,
-              "end": 39
+              "start": 61,
+              "end": 67
             }
           ],
           "scoring": {

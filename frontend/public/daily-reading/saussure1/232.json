@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "주인 잃어버린 물건?",
+          "prompt": "글에서 '주인을 잃어버린 물건'이라는 뜻으로 설명하며, 학교나 공공장소에서 잃어버린 물건이 모이는 센터의 이름이 된 세 글자 낱말을 찾아 써 보세요",
           "answerText": "유실물",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -425,14 +425,14 @@
         },
         {
           "id": "q2",
-          "prompt": "물건 잃은 장소와 무엇?",
-          "answerText": "날짜",
-          "answerMatchMode": "EXACT",
+          "prompt": "유실물 센터의 선생님이 물건의 특징을 듣고 비슷한 물건이 있는지 확인할 때 살펴본다고 한 두 글자 낱말을 글에서 찾아 써 보세요",
+          "answerText": "장부",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 105,
-              "end": 107
+              "paragraphId": "p2",
+              "start": 67,
+              "end": 69
             }
           ],
           "scoring": {
@@ -444,9 +444,38 @@
         },
         {
           "id": "q3",
-          "prompt": "내 물건에 미리 적는 것?",
+          "prompt": "잃어버린 물건을 빨리 찾기 위해 정확히 알고 있어야 한다고 한 두 가지를 글에서 모두 찾아 써 보세요",
+          "answerText": "날짜, 장소",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 105,
+              "end": 107
+            },
+            {
+              "paragraphId": "p1",
+              "start": 109,
+              "end": 111
+            },
+            {
+              "paragraphId": "p1",
+              "start": 6,
+              "end": 8
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "평소에 내 물건에 무엇을 미리 적어 두면 잃어버렸을 때 훨씬 쉽게 찾을 수 있다고 하였는지 두 글자로 써 보세요",
           "answerText": "이름",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",

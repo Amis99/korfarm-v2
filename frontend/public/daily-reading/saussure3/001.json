@@ -557,24 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "배추흰나비의 작고 노란색인 알에서 며칠이 지나면 껍데기를 깨고 제일 먼저 나오는 것은 무엇인가요?",
-          "answerText": "애벌레",
-          "answerMatchMode": "EXACT",
+          "prompt": "배추흰나비가 노란색 알을 낳는 식물의 종류를 지문에서 찾으시오.",
+          "answerText": "십자화과 식물",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 52,
-              "end": 55
-            },
-            {
-              "paragraphId": "p1",
-              "start": 72,
-              "end": 75
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
+              "start": 13,
+              "end": 20
             }
           ],
           "scoring": {
@@ -586,24 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "몸집을 키운 애벌레가 허물을 여러 번 벗은 뒤, 안전한 곳에 자리 잡고 단단하게 몸을 바꾼 상태는?",
-          "answerText": "번데기",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 알에서 며칠이 지나면 나온다고 한 대상을 지문에서 찾으시오.",
+          "answerText": "작은 애벌레",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 87,
-              "end": 90
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p3",
-              "start": 42,
-              "end": 45
+              "paragraphId": "p1",
+              "start": 49,
+              "end": 55
             }
           ],
           "scoring": {
@@ -615,29 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "놀라운 변화를 거쳐 번데기 껍질을 갈라치고 나와, 꽃의 꿀을 먹고 다시 알을 낳는 예쁜 곤충은 무엇인가요?",
-          "answerText": "나비",
-          "answerMatchMode": "EXACT",
+          "prompt": "몸이 커지면서 애벌레가 벗는 것을 횟수까지 포함해 지문에서 찾으시오.",
+          "answerText": "허물을 네 번",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 3,
-              "end": 5
-            },
+              "paragraphId": "p2",
+              "start": 40,
+              "end": 47
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "시간이 흐르면 번데기 껍질에 일어나는 변화를 지문에서 찾으시오.",
+          "answerText": "번데기 껍질이 갈라지고",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 9,
-              "end": 11
-            },
-            {
-              "paragraphId": "p3",
-              "start": 58,
-              "end": 60
-            },
-            {
-              "paragraphId": "p3",
-              "start": 71,
-              "end": 73
+              "start": 42,
+              "end": 54
             }
           ],
           "scoring": {

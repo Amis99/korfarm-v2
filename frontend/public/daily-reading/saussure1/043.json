@@ -552,29 +552,29 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지구가 ( ) 바퀴씩 돎.",
-          "answerText": "한",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리가 사는 둥근 별이라는 뜻의 단어를 지문에서 모두 찾아 보세요.",
+          "answerText": "지구",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 8,
-              "end": 9
+              "start": 0,
+              "end": 2
             },
             {
               "paragraphId": "p1",
-              "start": 53,
-              "end": 54
-            },
-            {
-              "paragraphId": "p1",
-              "start": 82,
-              "end": 83
+              "start": 32,
+              "end": 34
             },
             {
               "paragraphId": "p2",
-              "start": 138,
-              "end": 139
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p2",
+              "start": 48,
+              "end": 50
             }
           ],
           "scoring": {
@@ -586,19 +586,14 @@
         },
         {
           "id": "q2",
-          "prompt": "태양 ( )을 받는 쪽.",
-          "answerText": "빛",
-          "answerMatchMode": "EXACT",
+          "prompt": "지구가 스스로 한 바퀴씩 돌면 무엇이 생긴다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "낮과 밤",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 43,
-              "end": 44
-            },
-            {
-              "paragraphId": "p1",
-              "start": 67,
-              "end": 68
+              "start": 21,
+              "end": 25
             }
           ],
           "scoring": {
@@ -610,14 +605,33 @@
         },
         {
           "id": "q3",
-          "prompt": "우리 생활의 ( )이에요.",
-          "answerText": "리듬",
-          "answerMatchMode": "EXACT",
+          "prompt": "태양 빛을 받는 쪽은 무엇이 된다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "환한 낮",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 145,
-              "end": 147
+              "start": 52,
+              "end": 56
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "빛을 받지 못하는 쪽은 무엇이 된다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "깜깜한 밤",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 80,
+              "end": 85
             }
           ],
           "scoring": {

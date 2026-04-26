@@ -571,111 +571,123 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"교내 분리배출 안내판을 새로 만드는 일입니다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 18,
-              "end": 43
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "'말이나 태도가 분명하지 않음'을 뜻하는 단어를 찾으시오.",
+          "answerText": "모호",
           "answerMatchMode": "ANY",
-          "answerText": "교내 분리배출 안내판을 새로 만드는 일입니다."
-        },
-        {
-          "id": "q2",
-          "prompt": "\"학생 가: 저는 안내판 문구를 먼저 고쳐야 한다고 봅니다.\"에 해당하는 부분은 어디인가요?",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 32
+              "start": 140,
+              "end": 142
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "학생 가가 가장 먼저 고쳐야 한다고 본 부분이 드러난 곳을 찾으시오.",
+          "answerText": "저는 안내판 문구를 먼저 고쳐야 한다고 봅니다",
           "answerMatchMode": "ANY",
-          "answerText": "학생 가: 저는 안내판 문구를 먼저 고쳐야 한다고 봅니다."
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 6,
+              "end": 31
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "\"합치면, 핵심 문구를 짧게 하고 그림을 보완하는 방향이 되겠네요.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "학생 다가 우선 다루어야 한다고 본 헷갈리는 항목의 구체적인 예시가 모두 드러난 부분을 찾으시오.",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 12,
-              "end": 48
+              "start": 119,
+              "end": 169
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "합치면, 핵심 문구를 짧게 하고 그림을 보완하는 방향이 되겠네요."
+          "answerTexts": [
+            "플라스틱 컵 뚜껑, 배달 용기, 음료 팩처럼 실제로 자주 틀리는 항목이 우선일 수 있습니다"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "\"설치 장소도 중요하다고 봅니다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "학생 라가 새롭게 제기한 의견이 드러난 부분을 찾으시오.",
+          "answerText": "저는 설치 장소도 중요하다고 봅니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 9,
-              "end": 26
+              "start": 6,
+              "end": 25
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "설치 장소도 중요하다고 봅니다."
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "\"정리하면 세 가지입니다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "사회자가 정리한 세 가지 의견이 모두 드러난 부분을 찾으시오.",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 14,
-              "end": 27
+              "start": 28,
+              "end": 95
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "정리하면 세 가지입니다."
+          "answerTexts": [
+            "첫째 문구는 짧게, 둘째 그림은 핵심 오분류 항목 중심으로, 셋째 설치 위치는 실제 사용 동선을 고려해 정한다는 것입니다"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "\"오분류 항목 세 가지를 정하고, 내일 점심시간에 현장 사진을 찍어 위치를 다시 보겠습니다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "학생 다와 학생 라가 각각 맡기로 한 일이 모두 드러난 부분을 찾으시오.",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 206
+              "start": 61,
+              "end": 108
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학생 나: 오늘은 오분류 항목 세 가지를 정하고, 내일 점심시간에 현장 사진을 찍어 위치를 다시 보겠습니다. 학생 다: 저는 문구 초안을 맡겠습니다. 학생 라: 저는 그림 예시를 모아 보겠습니다. 사회자: 좋습니다. 서로 맡은 일을 나눴으니 다음 회의에서는 초안 비교와 위치 검토를 함께 진행하겠습니다. 이렇게 하면 역할을 나누면서도 같은 기준으로 협력할 수 있습니다."
+          "answerTexts": [
+            "학생 다: 저는 문구 초안을 맡겠습니다. 학생 라: 저는 그림 예시를 모아 보겠습니다"
+          ]
         }
       ]
     }

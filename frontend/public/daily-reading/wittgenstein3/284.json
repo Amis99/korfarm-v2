@@ -569,114 +569,194 @@
     },
     "confirm": {
       "questions": [
-        {
-          "id": "q1",
-          "prompt": "1문단은 회의의 출발 문제를 어떻게 제시하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 247
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q1",
+              "prompt":  "작년에 질문이 한꺼번에 나오게 된 발표 방식의 원인을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  73,
+                                       "end":  90
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "만족도 숫자만 먼저 보여 줬다가"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "민지는 노트북 화면을 돌려 보이며 말했다. \"지금 발표 자료는 거의 다 됐는데, 질의응답 순서를 다시 봐야 할 것 같아. 작년에도 만족도 숫자만 먼저 보여 줬다가 왜 이렇게 낮은 항목이 있냐는 질문이 한꺼번에 나왔잖아.\" 준호가 고개를 끄덕였다. \"맞아. 특히 먹거리 부스랑 동선 관련 불만이 먼저 튀어나올 거야. 수치만 던지면 바로 방어적으로 보일 수 있으니까, 발표 뒤 질문을 받기 전에 우리가 먼저 해석 기준을 짧게 말하는 게 좋겠어.\""
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 첫 제안이나 우려를 어떤 이유와 함께 내놓는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 229
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q2",
+              "prompt":  "작년에 한꺼번에 나왔던 질문의 내용을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  91,
+                                       "end":  106
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "왜 이렇게 낮은 항목이 있냐"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "서연이 출력한 설문 요약표를 넘기며 끼어들었다. \"나는 질문 순서를 우리가 어느 정도 유도해야 한다고 봐. 자유 질문만 받으면 예산 얘기부터 나올 수도 있어. 그러면 뒤에 준비한 개선안으로 못 넘어가.\" 민지가 잠깐 생각하다가 말했다. \"그럼 사회자가 먼저 '가장 많이 나온 의견 세 가지부터 차례로 보겠다'고 정리하고, 그 안에서 질문을 받는 건 어때? 완전히 통제하는 건 아니지만 흐름은 잡을 수 있잖아.\""
-        },
-        {
-          "id": "q3",
-          "prompt": "3문단은 논의를 어떤 대안이나 조정안으로 이어 가는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 284
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q3",
+              "prompt":  "준호가 먼저 튀어나올 것으로 예상한 불만 항목을 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  146,
+                                       "end":  152
+                                   },
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  154,
+                                       "end":  162
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "먹거리 부스",
+                                  "동선 관련 불만"
+                              ]
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "준호는 슬라이드 다섯 번째 장을 가리켰다. \"나는 첫 질문이 '왜 만족도 전체 평균은 높았는데 재참여 의향은 더 낮았냐'일 가능성이 크다고 봐. 이거 설명 못 하면 숫자를 왜곡해서 발표한 것처럼 들릴 수 있어.\" 서연이 답했다. \"그 질문은 내가 받을게. 응답자 중 삼학년 비율이 높아서 시험 부담이 반영됐다는 점, 그리고 만족도와 재참여 의향이 같은 지표가 아니라는 점을 먼저 설명하면 돼.\" 민지는 \"좋아. 대신 너무 길게 말하면 변명처럼 들릴 수 있으니까 핵심만 두 문장으로 정리해 둬.\"라고 덧붙였다."
-        },
-        {
-          "id": "q4",
-          "prompt": "4문단은 예상 질문이나 진행 기준을 어떻게 준비하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 264
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q4",
+              "prompt":  "서연이 질문 순서를 유도해야 한다고 본 이유를 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  60,
+                                       "end":  87
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "자유 질문만 받으면 예산 얘기부터 나올 수도 있어"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "잠시 뒤 민지가 다른 메모를 읽었다. \"그리고 '먹거리 가격이 비쌌다'는 응답이 예상보다 많았는데, 이건 우리가 제일 곤란할 수 있어. 학생회가 직접 가격을 정한 건 아니어도 다 학생회 책임처럼 들리거든.\" 준호가 바로 반응했다. \"그 질문 나오면 내가 먼저 사실 관계를 정리할게. 부스 운영 주체가 달랐다는 점은 말하되, 그렇다고 책임을 넘기는 식으로는 말하지 말자. 대신 다음 축제에서는 가격 상한 협의 절차를 넣겠다고 바로 이어 가면 듣는 쪽도 덜 날카로워질 거야.\""
-        },
-        {
-          "id": "q5",
-          "prompt": "5문단은 세부 운영 방식이나 보완 이유를 어떻게 구체화하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 252
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q5",
+              "prompt":  "재참여 의향 질문을 서연이 맡겠다고 한 말을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p3",
+                                       "start":  135,
+                                       "end":  141
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "내가 받을게"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "서연은 청중 반응까지 고려해야 한다고 말했다. \"질문이 공격적으로 들어오면 바로 수치로만 맞받아치지 말자. 특히 동선 문제는 불편을 실제로 겪은 학생들이 많아서 공감 없이 설명부터 하면 더 반발할 거야.\" 민지가 수첩에 받아 적으며 말했다. \"그럼 응답 원칙을 세 개로 맞추자. 먼저 불편 제기를 요약해서 확인하고, 다음에 설문 수치나 운영 사실을 짧게 설명하고, 마지막에 개선 방향을 붙이는 거야. 그 순서를 지키면 분위기가 덜 거칠어질 것 같아.\""
-        },
-        {
-          "id": "q6",
-          "prompt": "6문단은 최종 합의를 어떤 실행 계획으로 정리하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 277
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q6",
+              "prompt":  "서연이 만족도와 재참여 의향 차이를 설명할 때 먼저 말하겠다고 한 두 근거를 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p3",
+                                       "start":  143,
+                                       "end":  175
+                                   },
+                                   {
+                                       "paragraphId":  "p3",
+                                       "start":  181,
+                                       "end":  207
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "응답자 중 삼학년 비율이 높아서 시험 부담이 반영됐다는 점",
+                                  "만족도와 재참여 의향이 같은 지표가 아니라는 점"
+                              ]
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "마지막으로 세 사람은 역할을 정리했다. 민지가 전체 발표와 첫 질문 정리를 맡고, 준호는 예산·가격·운영 주체 관련 질문을 담당하고, 서연은 만족도 해석과 재참여 의향, 동선 문제 응답을 맡기로 했다. 민지가 자리에서 일어나며 말했다. \"좋아, 질문은 완전히 피하는 게 아니라 우리가 먼저 쟁점을 보여 주는 식으로 가자. 발표 끝나고 바로 '많이 나온 질문부터 차례로 답하겠다'고 말하면 흐름이 잡힐 거야.\" 준호와 서연도 자료를 챙기며 \"응, 그 순서대로 한 번만 더 맞춰 보자.\"라고 답했다."
-        }
+          {
+              "id":  "q7",
+              "prompt":  "민지가 정리한 응답 원칙 세 가지를 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  159,
+                                       "end":  175
+                                   },
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  181,
+                                       "end":  202
+                                   },
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  209,
+                                       "end":  219
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "불편 제기를 요약해서 확인하고",
+                                  "설문 수치나 운영 사실을 짧게 설명하고",
+                                  "개선 방향을 붙이는"
+                              ]
+          },
+          {
+              "id":  "q8",
+              "prompt":  "마지막에 세 사람이 나누어 맡은 역할을 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  26,
+                                       "end":  40
+                                   },
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  50,
+                                       "end":  67
+                                   },
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  79,
+                                       "end":  103
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "전체 발표와 첫 질문 정리",
+                                  "예산·가격·운영 주체 관련 질문",
+                                  "만족도 해석과 재참여 의향, 동선 문제 응답"
+                              ]
+          }
       ]
     }
   }

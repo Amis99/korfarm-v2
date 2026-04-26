@@ -587,14 +587,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "주의 깊게 살펴보는 행동은?",
-          "answerText": "관찰하며",
-          "answerMatchMode": "EXACT",
+          "prompt": "눈이 오는 날 길이 어떻다고 했는지 지문에서 찾으시오.",
+          "answerText": "미끄러우니",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 46,
-              "end": 50
+              "start": 12,
+              "end": 17
             }
           ],
           "scoring": {
@@ -606,19 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "위험이 없도록 보호하는 것?",
-          "answerText": "안전을",
-          "answerMatchMode": "EXACT",
+          "prompt": "우리가 자세히 관찰하며 걸은 대상을 지문에서 찾으시오.",
+          "answerText": "눈이 쌓인 바닥",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 79,
-              "end": 82
-            },
-            {
-              "paragraphId": "p3",
-              "start": 58,
-              "end": 61
+              "start": 32,
+              "end": 40
             }
           ],
           "scoring": {
@@ -630,14 +625,33 @@
         },
         {
           "id": "q3",
-          "prompt": "사고를 미리 막는 행동은?",
-          "answerText": "예방합니다",
-          "answerMatchMode": "EXACT",
+          "prompt": "사고를 예방하려면 어떤 신발을 신어야 하는지 지문에서 찾으시오.",
+          "answerText": "미끄러지지 않는 신발",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 51,
-              "end": 56
+              "start": 30,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "우리가 배운 걷는 법을 지문에서 찾으시오.",
+          "answerText": "주머니에 손을 넣지 않고 걷는 법",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 27,
+              "end": 45
             }
           ],
           "scoring": {

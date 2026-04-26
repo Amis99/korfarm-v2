@@ -571,12 +571,38 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "prompt": "혈압을 결정하는 두 요소를 모두 찾으시오.",
+          "answerTexts": [
+            "심장이 혈액을 밀어내는 힘",
+            "혈관이 그 흐름에 저항하는 정도"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 154
+              "start": 4,
+              "end": 18
+            },
+            {
+              "paragraphId": "p1",
+              "start": 20,
+              "end": 37
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "인체가 혈압을 일정 범위 안에 유지하려는 이유가 되는 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 52,
+              "end": 86
             }
           ],
           "scoring": {
@@ -585,16 +611,53 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "혈압은 심장이 혈액을 밀어내는 힘과 혈관이 그 흐름에 저항하는 정도에 의해 결정된다. 인체는 뇌와 콩팥 같은 주요 기관에 안정적으로 혈액을 공급해야 하므로 혈압을 일정 범위 안에 유지하려 한다. 그래서 체액량, 심박수, 혈관 수축 정도를 조절하는 여러 기전이 동시에 작동한다."
+          "answerText": "뇌와 콩팥 같은 주요 기관에 안정적으로 혈액을 공급해야 하므로"
         },
         {
-          "id": "q2",
-          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "id": "q3",
+          "prompt": "혈압 조절에서 동시에 작동하는 기전을 모두 찾으시오.",
+          "answerTexts": [
+            "체액량",
+            "심박수",
+            "혈관 수축 정도"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 113,
+              "end": 116
+            },
+            {
+              "paragraphId": "p1",
+              "start": 118,
+              "end": 121
+            },
+            {
+              "paragraphId": "p5",
+              "start": 118,
+              "end": 121
+            },
+            {
+              "paragraphId": "p1",
+              "start": 123,
+              "end": 131
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "혈압 조절에서 중요한 요소 중 하나를 설명한 문장을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 151
+              "end": 26
             }
           ],
           "scoring": {
@@ -603,70 +666,74 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "혈압 조절에서 중요한 요소 중 하나는 혈액량이다. 콩팥이 물과 나트륨의 재흡수량을 조절하면 혈액량이 달라지고, 이는 다시 심장이 한 번 박동할 때 내보내는 혈액량과 혈압에 영향을 준다. 혈액량이 줄면 혈압이 떨어지기 쉽고, 혈액량이 늘면 혈압은 상승하는 방향으로 변한다."
-        },
-        {
-          "id": "q3",
-          "prompt": "다음 중 3문단에 해당하는 내용은",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 155
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "혈압이 낮아지면 레닌-안지오텐신-알도스테론계, 즉 RAAS가 활성화된다. 먼저 콩팥에서 레닌이 분비되고, 이것이 혈장 단백질인 안지오텐시노젠에 작용해 안지오텐신 I을 만든다. 이어 안지오텐신 전환 효소가 이를 안지오텐신 II로 바꾸면 혈압을 끌어올리는 본격적인 반응이 시작된다."
-        },
-        {
-          "id": "q4",
-          "prompt": "다음 중 4문단에 해당하는 내용은",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 157
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "안지오텐신 II는 두 방향에서 혈압을 높인다. 하나는 혈관 평활근을 수축시켜 말초 저항을 높이는 것이고, 다른 하나는 부신 겉질을 자극해 알도스테론 분비를 증가시키는 것이다. 알도스테론은 콩팥에서 나트륨과 물의 재흡수를 늘려 혈액량을 회복시키므로, 결과적으로 혈압 상승에 기여한다."
+          "answerText": "혈압 조절에서 중요한 요소 중 하나는 혈액량이다"
         },
         {
           "id": "q5",
-          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "prompt": "혈압이 낮아질 때 RAAS에서 차례로 생기는 과정 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "레닌이 분비되고",
+            "안지오텐신 I을 만든다",
+            "안지오텐신 II로 바꾸면"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 189
+              "paragraphId": "p3",
+              "start": 49,
+              "end": 57
+            },
+            {
+              "paragraphId": "p3",
+              "start": 84,
+              "end": 96
+            },
+            {
+              "paragraphId": "p3",
+              "start": 117,
+              "end": 130
             }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이와 별개로 압수용체 반사는 혈압 변화를 매우 빠르게 조절한다. 경동맥동과 대동맥궁의 압수용체는 혈관 벽의 늘어나는 정도를 감지해 혈압 변화를 신경 신호로 바꾼다. 혈압이 급히 떨어지면 교감 신경 활성이 높아져 심박수와 심장 수축력이 증가하고 혈관이 수축하며, 혈압이 높아지면 반대로 부교감 신경이 우세해져 이를 낮추는 방향으로 반응한다."
+          "revealOnWrong": true
         },
         {
           "id": "q6",
-          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "prompt": "안지오텐신 II가 혈압을 높이는 두 방향을 모두 찾으시오.",
+          "answerTexts": [
+            "혈관 평활근을 수축시켜 말초 저항을 높이는 것",
+            "부신 겉질을 자극해 알도스테론 분비를 증가시키는 것"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 189
+              "paragraphId": "p4",
+              "start": 30,
+              "end": 55
+            },
+            {
+              "paragraphId": "p4",
+              "start": 66,
+              "end": 94
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q7",
+          "prompt": "압수용체가 혈압 변화를 바꾸는 신호를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 80,
+              "end": 85
             }
           ],
           "scoring": {
@@ -675,7 +742,33 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 압수용체 반사는 초단기 조절, RAAS는 비교적 장기 조절을 담당하며 서로 보완적으로 작동한다. 한쪽은 신경 반사를 통해 즉각적으로 대응하고, 다른 한쪽은 호르몬과 체액 조절을 통해 혈압을 더 안정적으로 회복시킨다. 이 균형이 깨지면 고혈압이나 저혈압 문제가 생길 수 있어, 실제 치료에서도 혈관 수축과 호르몬 작용을 함께 고려한다."
+          "answerText": "신경 신호"
+        },
+        {
+          "id": "q8",
+          "prompt": "압수용체 반사와 RAAS가 각각 담당하는 조절을 모두 찾으시오.",
+          "answerTexts": [
+            "초단기 조절",
+            "비교적 장기 조절"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 12,
+              "end": 18
+            },
+            {
+              "paragraphId": "p6",
+              "start": 26,
+              "end": 35
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
         }
       ]
     }

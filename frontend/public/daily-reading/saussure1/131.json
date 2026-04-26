@@ -552,69 +552,48 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "기르는 식물은 무엇식물인가요?",
-          "answerText": "반려",
-          "answerMatchMode": "EXACT",
+          "prompt": "집에서 기르는 식물을 부르는 이름이 무엇인지 글에서 찾아 써 보세요",
+          "answerText": "반려식물",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 12,
-              "end": 14
-            },
-            {
-              "paragraphId": "p1",
-              "start": 26,
-              "end": 28
-            },
-            {
-              "paragraphId": "p2",
-              "start": 147,
-              "end": 149
-            }
+            {"paragraphId": "p1", "start": 12, "end": 16},
+            {"paragraphId": "p1", "start": 26, "end": 30},
+            {"paragraphId": "p2", "start": 147, "end": 151}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "식물도 무엇을 받아야 하나요?",
+          "prompt": "식물을 잘 기르려면 잘 드는 곳에 두어야 하는 것이 무엇인지 글에서 찾아 써 보세요",
           "answerText": "햇빛",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 73,
-              "end": 75
-            }
+            {"paragraphId": "p1", "start": 73, "end": 75}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "무엇을 다해 돌봐 주었나요?",
-          "answerText": "정성",
-          "answerMatchMode": "EXACT",
+          "prompt": "잎에 묻은 먼지를 닦아 줄 때 사용하는 부드러운 도구가 무엇인지 글에서 찾아 써 보세요",
+          "answerText": "수건",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 110,
-              "end": 112
-            }
+            {"paragraphId": "p2", "start": 86, "end": 88}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "물을 너무 많이 주면 식물의 어느 부분이 썩을 수 있는지 글에서 찾아 써 보세요",
+          "answerText": "뿌리",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 43, "end": 45}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         }
       ]

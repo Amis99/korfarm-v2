@@ -1079,28 +1079,18 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "혁명의 구호였지만 금지된 지 오래된 노래는 무엇인가요?",
-          "answerText": "영국 동물의 노래",
-          "answerMatchMode": "ANY",
+          "prompt": "새로운 세대의 동물들이 배우고 받아들인 것을 모두 찾으시오.",
+          "answerTexts": [
+            "돼지들이 가르치는 역사만",
+            "억압적인 질서"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 222,
-              "end": 231
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "새로운 세대의 동물들이 당연하게 받아들인 것은 무엇이었나요?",
-          "answerText": "억압적인 질서",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
+              "start": 150,
+              "end": 163
+            },
             {
               "paragraphId": "p1",
               "start": 187,
@@ -1114,15 +1104,41 @@
           "revealOnWrong": true
         },
         {
+          "id": "q2",
+          "prompt": "돼지들이 인간처럼 변한 모습을 모두 찾으시오.",
+          "answerTexts": [
+            "인간들의 말투와 몸짓을 완벽하게 흉내 내고",
+            "인간들보다 더 잔인한 방식으로 다른 동물들을 착취하고"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 77,
+              "end": 100
+            },
+            {
+              "paragraphId": "p2",
+              "start": 112,
+              "end": 141
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
           "id": "q3",
-          "prompt": "작가가 공동체를 지키는 유일한 보루라고 한 것은 무엇인가요?",
-          "answerText": "깨어 있는 시민 의식",
+          "prompt": "지배 구조는 그대로이고 바뀐 것은 지배자뿐임을 나타낸 부분을 찾으시오.",
+          "answerText": "오직 지배자의 얼굴만이 바뀌었을 뿐이었다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 182,
-              "end": 193
+              "paragraphId": "p2",
+              "start": 252,
+              "end": 274
             }
           ],
           "scoring": {
@@ -1133,14 +1149,14 @@
         },
         {
           "id": "q4",
-          "prompt": "글에서 건강하게 작동하는지 성찰해야 한다고 한 것은 무엇인가요?",
-          "answerText": "민주주의",
+          "prompt": "조지 오웰이 경고한 내용을 찾으시오.",
+          "answerText": "권력이 견제받지 않을 때 필연적으로 타락할 수밖에 없음",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 306,
-              "end": 310
+              "start": 15,
+              "end": 45
             }
           ],
           "scoring": {
@@ -1151,14 +1167,14 @@
         },
         {
           "id": "q5",
-          "prompt": "어두운 시대를 밝히는 가장 밝은 등불이라고 한 것은 무엇인가요?",
-          "answerText": "진실을 말하는 용기",
+          "prompt": "작품의 마지막 구절이 우리에게 던지는 근본적인 질문을 찾으시오.",
+          "answerText": "진정한 평등과 자유는 무엇인가",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 267,
-              "end": 277
+              "paragraphId": "p3",
+              "start": 248,
+              "end": 264
             }
           ],
           "scoring": {

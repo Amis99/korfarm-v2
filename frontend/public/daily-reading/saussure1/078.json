@@ -240,59 +240,48 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "봄비 내린 ( )에 모이에요.",
-          "answerText": "들판",
-          "answerMatchMode": "EXACT",
+          "prompt": "봄에 내리는 비를 가리키는 단어를 지문에서 찾아 보세요.",
+          "answerText": "봄비",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 6,
-              "end": 8
-            }
+            {"paragraphId": "p1", "start": 0, "end": 2}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "( )색 잎사귀가 웃습니다.",
-          "answerText": "연두",
-          "answerMatchMode": "EXACT",
+          "prompt": "풀과 꽃이 자라는 넓고 평평한 땅을 뜻하는 단어를 지문에서 찾아 보세요.",
+          "answerText": "들판",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 23,
-              "end": 25
-            }
+            {"paragraphId": "p1", "start": 6, "end": 8}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "( )빛 꿈을 꿉니다.",
-          "answerText": "초록",
-          "answerMatchMode": "EXACT",
+          "prompt": "새싹들이 이야기를 나누는 모양, 잎사귀가 웃는 모양, 함께 자라는 모양을 흉내 낸 말 세 가지를 모두 찾아 보세요.",
+          "answerText": "도란도란, 방긋방긋, 무럭무럭",
+          "answerMatchMode": "ALL",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 45,
-              "end": 47
-            }
+            {"paragraphId": "p1", "start": 21, "end": 25},
+            {"paragraphId": "p2", "start": 32, "end": 36},
+            {"paragraphId": "p2", "start": 55, "end": 59}
           ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "햇살을 사람처럼 부른 호칭에 쓰인 단어를 지문에서 찾아 보세요.",
+          "answerText": "대장",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 3, "end": 5}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
           "revealOnWrong": true
         }
       ]

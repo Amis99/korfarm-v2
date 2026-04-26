@@ -571,12 +571,27 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 관형절 수식 범위와 피수식어 선택에 따른 중의성 해소라는 문법 주제를 어떤 배경에서 꺼내는가?",
+          "prompt": "꾸밈을 받는 말을 뜻하는 문법 용어를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 216
+              "paragraphId": "p4",
+              "start": 8,
+              "end": 12
+            },
+            {
+              "paragraphId": "p4",
+              "start": 192,
+              "end": 196
+            },
+            {
+              "paragraphId": "p5",
+              "start": 59,
+              "end": 63
+            },
+            {
+              "paragraphId": "p6",
+              "start": 35,
+              "end": 39
             }
           ],
           "scoring": {
@@ -585,16 +600,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "한국어에서 문장의 뜻이 두 갈래 이상으로 읽히는 경우는 단순히 어휘가 모호해서만 생기지 않는다. 관형절이 어떤 명사를 꾸미는지 분명하지 않을 때도 중의성이 발생한다. 특히 하나의 관형어가 뒤에 이어지는 둘 이상의 체언 가운데 어디에 걸리는지가 불분명하면, 문장 구조는 같아 보여도 해석은 달라진다. 따라서 관형절의 수식 범위를 파악하는 일은 문장의 정확한 의미를 이해하는 데 핵심적이다."
+          "answerText": "피수식어"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 판별 기준이나 기본 원리를 어떻게 설명하는가?",
+          "prompt": "관형절의 정의를 설명한 문장을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 241
+              "end": 34
             }
           ],
           "scoring": {
@@ -603,16 +618,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "관형절은 용언이 체언 앞에서 체언을 꾸미는 기능을 하는 절이다. 이때 관형절은 바로 뒤의 명사를 수식하는 것이 기본이지만, 실제 문장에서는 명사구가 길어지면서 수식 대상이 직후 명사인지 더 큰 명사구 전체인지 헷갈리는 경우가 생긴다. 예를 들어 '학생이 추천한 책 목록'이라는 표현은 추천한 대상이 '책'인지, '책 목록' 전체인지 해석이 갈릴 여지가 있다. 이런 차이는 관형절의 문법적 결합 범위를 어디까지 보느냐에 따라 생긴다."
+          "answerText": "관형절은 용언이 체언 앞에서 체언을 꾸미는 기능을 하는 절이다"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 해당 문법 현상의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "관형절의 기본적인 수식 방식을 나타낸 어구를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 234
+              "paragraphId": "p2",
+              "start": 44,
+              "end": 60
             }
           ],
           "scoring": {
@@ -621,16 +636,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "중의성이 두드러지는 경우는 체언이 연속될 때이다. '교사가 소개한 작가 강연' 같은 표현은 교사가 소개한 것이 '작가'인지, '작가 강연'인지 문맥 없이 단정하기 어렵다. 한국어에서는 조사 없이 체언이 이어지는 구성이 비교적 자유롭기 때문에, 관형절이 어느 명사와 직접 결합하는지를 독자가 스스로 추정해야 하는 장면이 자주 나타난다. 이때 의미상 자연스러운 결합이 우선 해석되지만, 문법적으로는 둘 다 가능할 수 있다."
+          "answerText": "바로 뒤의 명사를 수식하는 것"
         },
         {
           "id": "q4",
-          "prompt": "4문단은 구별점이나 추가 조건을 어떻게 드러내는가?",
+          "prompt": "'학생이 추천한 책 목록'에서 추천한 대상 후보를 나타낸 어구를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 216
+              "paragraphId": "p2",
+              "start": 167,
+              "end": 172
+            },
+            {
+              "paragraphId": "p2",
+              "start": 174,
+              "end": 185
             }
           ],
           "scoring": {
@@ -638,17 +658,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이런 중의성은 피수식어를 분명히 드러내면 상당 부분 해소된다. 가장 쉬운 방법은 조사나 서술 성분을 보충하여 관형절이 닿는 지점을 분명히 하는 것이다. 이를테면 '학생이 추천한 책의 목록'처럼 바꾸면 추천 대상이 책이라는 점이 선명해지고, '학생이 추천한 도서 목록'과 같이 명사 결합을 굳히는 방법도 있다. 즉 관형절의 의미를 명확히 하려면 피수식어를 더 분명한 형태로 제시해야 한다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'책'인지",
+            "'책 목록' 전체인지"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단은 해석상의 주의점이나 효과를 어떤 방향으로 설명하는가?",
+          "prompt": "중의성이 두드러지는 경우를 설명한 어구를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 234
+              "paragraphId": "p3",
+              "start": 15,
+              "end": 24
             }
           ],
           "scoring": {
@@ -657,15 +680,59 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "문장 부호나 어순 조정도 중요한 역할을 한다. 관형절이 길어질수록 독자는 뒤에 오는 첫 명사를 자연스럽게 피수식어로 받아들이기 쉬우므로, 실제 의도와 다르면 표현을 나누어 주는 편이 낫다. '어제 선생님이 읽어 주신 시 해설 자료'보다 '어제 선생님이 읽어 주신 시의 해설 자료'처럼 고쳐 쓰면 의미가 안정된다. 결국 중의성을 줄이는 핵심은 문장의 길이를 늘리는 데 있지 않고, 결합 관계를 눈에 띄게 만드는 데 있다."
+          "answerText": "체언이 연속될 때"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 관형절 수식 범위와 피수식어 선택에 따른 중의성 해소라는 문법 주제의 의미를 어떤 관점에서 정리하는가?",
+          "prompt": "관형절이 닿는 지점을 분명히 하는 가장 쉬운 방법을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
+              "paragraphId": "p4",
+              "start": 45,
+              "end": 81
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "조사나 서술 성분을 보충하여 관형절이 닿는 지점을 분명히 하는 것"
+        },
+        {
+          "id": "q7",
+          "prompt": "중의성을 줄이기 위해 고친 표현의 예를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 90,
+              "end": 105
+            },
+            {
+              "paragraphId": "p4",
+              "start": 134,
+              "end": 149
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'학생이 추천한 책의 목록'",
+            "'학생이 추천한 도서 목록'"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "중의성을 줄이는 핵심을 설명한 어구를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 212,
               "end": 230
             }
           ],
@@ -675,7 +742,7 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "따라서 관형절의 중의성은 막연한 표현 문제라기보다 수식 범위와 피수식어 선택의 문제로 이해해야 한다. 관형절이 어떤 명사를 꾸미는지, 그 명사가 단독 명사인지 명사구의 일부인지를 가려 보면 해석의 갈림길이 보인다. 한국어 문장을 정확하게 읽고 쓰기 위해서는 관형절의 위치만 보지 말고, 뒤따르는 명사들의 결합 구조까지 함께 살펴야 한다. 그래야 겉보기에는 자연스러운 문장 속에 숨어 있는 중의성을 줄일 수 있다."
+          "answerText": "결합 관계를 눈에 띄게 만드는 데"
         }
       ]
     }

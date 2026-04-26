@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "포스터 속에 들어앉아 무엇을 하고 있다?",
+          "prompt": "포스터 속에서 자꾸만 곁눈질을 하는 대상을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 12,
-              "end": 24
+              "end": 16
             }
           ],
           "scoring": {
@@ -585,16 +585,62 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "비둘기는 자꾸만 곁눈질"
+          "answerText": "비둘기는"
         },
         {
           "id": "q2",
-          "prompt": "핵심 개념은 무엇인가요?",
+          "prompt": "시에서 반복되는 공간 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 6
+            },
+            {
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 39
+            },
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 6
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "포스터 속에"
+        },
+        {
+          "id": "q3",
+          "prompt": "포스터 속에 오래 들어앉아 있으면 무엇이 변한다고 했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 52,
+              "end": 59
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "비둘기의 습성"
+        },
+        {
+          "id": "q4",
+          "prompt": "화자가 알고 있다고 반복해 말한 대상을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 18
+              "end": 17
             }
           ],
           "scoring": {
@@ -603,52 +649,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "비둘기가 노닐던 한때의 지붕마루를"
-        },
-        {
-          "id": "q3",
-          "prompt": "무엇가 날아 볼 하늘이 없다?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 25
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "포스터 속에는\n비둘기가 날아 볼 하늘이 없다."
-        },
-        {
-          "id": "q4",
-          "prompt": "무엇 보지만 그저 열없는 일?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 11
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "답답하면 주리도 틀어"
+          "answerText": "비둘기가 노닐던 한때의 지붕마루"
         },
         {
           "id": "q5",
-          "prompt": "무엇 하나 남지 않는다?",
+          "prompt": "'없다'로 부재를 드러내는 구절을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 29
+              "paragraphId": "p3",
+              "start": 8,
+              "end": 24
+            },
+            {
+              "paragraphId": "p3",
+              "start": 26,
+              "end": 37
             }
           ],
           "scoring": {
@@ -656,17 +671,46 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "불 속에 던져 살라 보아도\n잿가루 하나 남지 않는다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "비둘기가 날아 볼 하늘이 없다",
+            "마셔 볼 공기가 없다"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "그는 찍어 낸 무엇 속에 다친 데 하나 없이 들어앉아 있으니 차라리 죽지 못해 그는 탈이다?",
+          "prompt": "피와 재의 부재를 드러내는 표현을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 46,
+              "end": 59
+            },
+            {
+              "paragraphId": "p5",
+              "start": 15,
+              "end": 28
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "피 한 방울 나지 않는다",
+            "잿가루 하나 남지 않는다"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "비둘기가 훼손되지 않는 상태를 드러내는 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 11
+              "start": 22,
+              "end": 32
             }
           ],
           "scoring": {
@@ -675,7 +719,25 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그는 찍어 낸 포스터"
+          "answerText": "다친 데 하나 없이"
+        },
+        {
+          "id": "q8",
+          "prompt": "포스터 속 비둘기의 처지를 역설적으로 정리한 마지막 구절을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 42,
+              "end": 58
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "차라리 죽지 못해 그는 탈이다"
         }
       ]
     }

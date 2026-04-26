@@ -998,96 +998,12 @@
     },
     "confirm": {
       "questions": [
-        {
-          "id": "q1",
-          "prompt": "과적합과 일반화는 각각 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 64,
-              "end": 169
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이때 훈련에 사용한 자료에만 지나치게 맞춰져 새로운 자료에서는 성능이 떨어지는 현상을 과적합이라고 한다. 반대로 훈련에 쓰지 않은 자료에도 비교적 안정적으로 적용되는 성질을 일반화라고 한다"
-        },
-        {
-          "id": "q2",
-          "prompt": "과적합은 어떤 상황에서 잘 나타나나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 189
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "과적합은 모델이 중요한 규칙뿐 아니라 우연한 특징까지 함께 외워 버릴 때 잘 나타난다. 예를 들어 시험 문제를 푸는 원리를 이해하지 않고 답만 통째로 기억하면 비슷한 문제에는 강하지만 조금만 바뀐 문제에는 약해지는 것과 비슷하다. 인공지능도 훈련 자료의 작은 잡음이나 예외적 패턴까지 그대로 따라가면 실제 환경에서는 판단이 흔들릴 수 있다"
-        },
-        {
-          "id": "q3",
-          "prompt": "일반화가 잘된 모델은 무엇을 하며, 학습 목표는 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 6,
-              "end": 16
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "일반화가 잘된 모델"
-        },
-        {
-          "id": "q4",
-          "prompt": "과적합이 생기는 까닭은 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 11
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "과적합이 생기는 까닭"
-        },
-        {
-          "id": "q5",
-          "prompt": "과적합을 줄이기 위해 무엇을 하고, 성능은 어떻게 살펴야 하나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 193
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이를 줄이기 위해서는 훈련 자료와 검증 자료를 나누어 성능을 따로 살피고, 필요하면 모델의 복잡도를 낮추거나 자료를 더 다양하게 모아야 한다. 학습 중간에 검증 성능이 오히려 떨어지기 시작하면 과적합의 신호로 볼 수 있다. 즉 인공지능의 성능은 한 번의 높은 점수로 판단하는 것이 아니라, 여러 자료에서 얼마나 안정적으로 작동하는지로 살펴야 한다"
-        }
+        {"id":"q1","prompt":"훈련에 쓴 자료에만 지나치게 맞춰져 새로운 자료에서는 성능이 떨어지는 현상을 가리키는 말을 찾으시오","answerText":"과적합","answerMatchMode":"ANY","answerRanges":[{"paragraphId":"p1","start":112,"end":115},{"paragraphId":"p2","start":0,"end":3},{"paragraphId":"p4","start":0,"end":3},{"paragraphId":"p5","start":108,"end":111},{"paragraphId":"p6","start":5,"end":8}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q2","prompt":"훈련에 쓰지 않은 자료에도 비교적 안정적으로 적용되는 성질을 가리키는 말을 찾으시오","answerText":"일반화","answerMatchMode":"ANY","answerRanges":[{"paragraphId":"p1","start":161,"end":164},{"paragraphId":"p3","start":6,"end":9},{"paragraphId":"p6","start":32,"end":35}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q3","prompt":"자료에서 규칙을 찾아 새로운 상황에도 판단을 내리는 학습의 주체로, 본문에서 학습 대상이 되는 것을 찾으시오","answerText":"인공지능","answerMatchMode":"ANY","answerRanges":[{"paragraphId":"p1","start":0,"end":4},{"paragraphId":"p2","start":129,"end":133},{"paragraphId":"p3","start":99,"end":103},{"paragraphId":"p5","start":127,"end":131},{"paragraphId":"p6","start":68,"end":72}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q4","prompt":"과적합을 줄이기 위해 비교해서 살펴야 한다고 한 두 가지 자료를 모두 찾으시오","answerText":"훈련 자료, 검증 자료","answerMatchMode":"ALL","answerRanges":[{"paragraphId":"p5","start":12,"end":17},{"paragraphId":"p5","start":19,"end":24}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q5","prompt":"훈련 자료의 작은 잡음이나 예외적 패턴까지 따라갈 때 실제 환경에서 일어나는 결과를 찾으시오","answerText":"판단이 흔들릴 수 있다","answerMatchMode":"ANY","answerRanges":[{"paragraphId":"p2","start":177,"end":189}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q6","prompt":"학습이 이루어지는 대상으로, 규칙을 찾아 판단하도록 만들어지는 것을 가리키는 말을 찾으시오","answerText":"모델","answerMatchMode":"ANY","answerRanges":[{"paragraphId":"p2","start":5,"end":7},{"paragraphId":"p3","start":14,"end":16},{"paragraphId":"p4","start":21,"end":23},{"paragraphId":"p4","start":117,"end":119},{"paragraphId":"p5","start":47,"end":49}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true}
       ]
     }
   }

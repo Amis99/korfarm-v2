@@ -563,9 +563,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "강아지와 고양이처럼 아프고 다친 동물을 치료해 주는 의사 선생님을 무엇이라고 부르나요?",
+          "prompt": "지문에서 강아지와 고양이처럼 아픈 동물을 치료해 주는 직업 이름을 찾으시오.",
           "answerText": "수의사",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -582,9 +582,9 @@
         },
         {
           "id": "q2",
-          "prompt": "10년 후의 내가 수의사가 되기 위해 열심히 공부를 하고 있을 이곳은 어디인가요?",
+          "prompt": "수의사가 되기 위해 어디에서 열심히 공부를 하고 있을 것이라고 했는지 찾으시오.",
           "answerText": "대학교",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -601,9 +601,9 @@
         },
         {
           "id": "q3",
-          "prompt": "내가 남을 대가 없이 돕기 위해 동물 보호소에 가서 불쌍한 동물들을 돌보는 이 활동은 무엇인가요?",
+          "prompt": "동물 보호소에 가서 불쌍한 동물들을 돌보는 활동을 무엇이라고 했는지 찾으시오.",
           "answerText": "봉사 활동",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -620,14 +620,23 @@
         },
         {
           "id": "q4",
-          "prompt": "앞으로 훌륭한 어린이가 되기 위해 이루고자 하는 희망이나 장래 희망을 뜻하는 이것은 무엇인가요?",
-          "answerText": "꿈",
-          "answerMatchMode": "EXACT",
+          "prompt": "10년 후의 내가 부모님께 되고 싶은 모습과 친구들에게 되고 싶은 모습을 모두 찾으시오.",
+          "answerText": "듬직한 자녀, 좋은 친구",
+          "answerTexts": [
+            "듬직한 자녀",
+            "좋은 친구"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 131,
-              "end": 132
+              "paragraphId": "p3",
+              "start": 42,
+              "end": 48
+            },
+            {
+              "paragraphId": "p3",
+              "start": 74,
+              "end": 79
             }
           ],
           "scoring": {

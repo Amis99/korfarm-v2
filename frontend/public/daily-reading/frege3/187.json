@@ -507,9 +507,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "시의 첫머리에서 반복해 부른 이름은 무엇인가요?",
+          "prompt": "새 울음처럼 반복되는 말은 무엇인가요?",
           "answerText": "접동",
-          "answerMatchMode": "ALL",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -540,24 +540,14 @@
         },
         {
           "id": "q2",
-          "prompt": "누나가 살던 곳으로 제시된 강 이름은 무엇인가요?",
-          "answerText": "진두강",
+          "prompt": "누나가 죽은 까닭으로 제시된 것은 무엇인가요?",
+          "answerText": "의붓어미 시샘",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p2",
-              "start": 17,
-              "end": 20
-            },
-            {
               "paragraphId": "p3",
-              "start": 16,
-              "end": 19
+              "start": 33,
+              "end": 40
             }
           ],
           "scoring": {
@@ -568,25 +558,7 @@
         },
         {
           "id": "q3",
-          "prompt": "누나를 죽게 만든 인물은 누구인가요?",
-          "answerText": "의붓어미",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 33,
-              "end": 37
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "죽어서 누나가 되었다고 한 새는 무엇인가요?",
+          "prompt": "누나가 죽어서 되었다고 한 존재는 무엇인가요?",
           "answerText": "접동새",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -603,8 +575,8 @@
           "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "누나가 죽어서도 못 잊는 존재는 무엇인가요?",
+          "id": "q4",
+          "prompt": "누나가 죽어서도 못 잊는 대상은 무엇인가요?",
           "answerText": "오랩동생",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -612,6 +584,32 @@
               "paragraphId": "p5",
               "start": 11,
               "end": 15
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "누나가 옮아가는 산을 모두 찾으시오.",
+          "answerTexts": [
+            "이 산",
+            "저 산"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 53,
+              "end": 56
+            },
+            {
+              "paragraphId": "p5",
+              "start": 57,
+              "end": 60
             }
           ],
           "scoring": {

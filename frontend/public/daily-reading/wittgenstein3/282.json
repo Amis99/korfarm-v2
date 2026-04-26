@@ -569,114 +569,184 @@
     },
     "confirm": {
       "questions": [
-        {
-          "id": "q1",
-          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 68
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q1",
+              "prompt":  "죽은 줄 알았던 매화나무 가지와 쇠잔한 눈 위에 가만히 오는 것을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  53,
+                                       "end":  56
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "봄기운"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "죽은 줄 알았던 매화나무 가지에, 구슬 같은 꽃방울을 맺혀 주는 쇠잔한 눈 위에, 가만히 오는 봄기운은 아름답기도 합니다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2연은 그 정서를 어떤 이미지나 흐름으로 이어 가는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 67
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q2",
+              "prompt":  "꽃방울을 무엇에 비유했는지 나타내는 표현을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p1",
+                                       "start":  19,
+                                       "end":  24
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "구슬 같은"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그러나 그밖에 다른 하늘에서 오는 알 수 없는 향기는, 모든 꽃의 죽음을 가지고 다니는 쇠잔한 눈이 주는 줄을 아십니까."
-        },
-        {
-          "id": "q3",
-          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 57
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q3",
+              "prompt":  "쇠잔한 눈이 주는 향기와 그 눈이 가지고 다니는 것을 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  19,
+                                       "end":  28
+                                   },
+                                   {
+                                       "paragraphId":  "p2",
+                                       "start":  31,
+                                       "end":  39
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "알 수 없는 향기",
+                                  "모든 꽃의 죽음"
+                              ]
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "구름은 가늘고 시냇물은 옅고 가을 산은 비었는데, 파리한 바위 사이에 실컷 붉은 단풍은 곱기도 합니다."
-        },
-        {
-          "id": "q4",
-          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 94
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q4",
+              "prompt":  "바위 사이에 핀 단풍의 색채를 드러내는 표현을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p3",
+                                       "start":  39,
+                                       "end":  47
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "실컷 붉은 단풍"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "그러나 단풍은 노래도 부르고 울음도 웁니다. 그러한 ‘자연의 인생’은 가을바람의 꿈을 따라 사라지고 기억에만 남아 있는, 지난여름의 무르녹은 녹음이 주는 줄을 아십니까."
-        },
-        {
-          "id": "q5",
-          "prompt": "5연은 앞선 흐름에 어떤 긴장이나 전환을 더하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 57
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q5",
+              "prompt":  "단풍을 사람처럼 표현한 행동을 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p4",
+                                       "start":  8,
+                                       "end":  15
+                                   },
+                                   {
+                                       "paragraphId":  "p4",
+                                       "start":  16,
+                                       "end":  23
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "노래도 부르고",
+                                  "울음도 웁니다"
+                              ]
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "일경초가 장륙금신이 되고, 장륙금신이 일경초가 됩니다. 천지는 한 보금자리요, 만유는 같은 소조입니다."
-        },
-        {
-          "id": "q6",
-          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 74
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+          {
+              "id":  "q6",
+              "prompt":  "자연의 인생이 무엇을 따라 사라진다고 했는지 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p4",
+                                       "start":  39,
+                                       "end":  46
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "가을바람의 꿈"
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "나는 자연의 거울에 인생을 비춰 보았습니다. 고통의 가시덤불 뒤에, 환희의 낙원을 건설하기 위하여 님을 떠난, 나는 아아 행복입니다."
-        }
+          {
+              "id":  "q7",
+              "prompt":  "서로 바뀐다고 제시된 두 대상을 모두 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  0,
+                                       "end":  3
+                                   },
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  5,
+                                       "end":  9
+                                   },
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  15,
+                                       "end":  19
+                                   },
+                                   {
+                                       "paragraphId":  "p5",
+                                       "start":  21,
+                                       "end":  24
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ALL",
+              "answerTexts":  [
+                                  "일경초",
+                                  "장륙금신"
+                              ]
+          },
+          {
+              "id":  "q8",
+              "prompt":  "화자가 고통의 가시덤불 뒤에 건설하려는 것을 찾으시오.",
+              "answerRanges":  [
+                                   {
+                                       "paragraphId":  "p6",
+                                       "start":  38,
+                                       "end":  44
+                                   }
+                               ],
+              "scoring":  {
+                              "correctDeltaSec":  30,
+                              "wrongDeltaSec":  -45
+                          },
+              "revealOnWrong":  true,
+              "answerMatchMode":  "ANY",
+              "answerText":  "환희의 낙원"
+          }
       ]
     }
   }

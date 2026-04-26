@@ -562,19 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "기쁘거나 슬프거나 놀랐을 때의 마음을 실감 나게 전하기 위해 문장 끝에 붙이는 문장 부호는 무엇인가요?",
-          "answerText": "느낌표",
-          "answerMatchMode": "EXACT",
+          "prompt": "느낌을 나타내는 문장이 무엇인지 설명한 부분을 지문에서 찾으시오.",
+          "answerText": "기쁘거나 슬프거나 놀랐을 때의 마음을 표현하는 것",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 67,
-              "end": 70
-            },
-            {
-              "paragraphId": "p1",
-              "start": 98,
-              "end": 101
+              "start": 4,
+              "end": 31
             }
           ],
           "scoring": {
@@ -586,14 +581,14 @@
         },
         {
           "id": "q2",
-          "prompt": "\"와, 정말 예쁜 꽃이구나!\"처럼 무언가를 보고 크게 마음이 움직여 칭찬하거나 몹시 놀랄 때 하는 말은 무엇인가요?",
-          "answerText": "감탄",
-          "answerMatchMode": "EXACT",
+          "prompt": "느낌표가 어떤 기호인지 설명한 부분을 지문에서 찾으시오.",
+          "answerText": "내 마음을 강조해 주는 멋진 기호",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 30,
-              "end": 32
+              "paragraphId": "p1",
+              "start": 103,
+              "end": 121
             }
           ],
           "scoring": {
@@ -605,14 +600,22 @@
         },
         {
           "id": "q3",
-          "prompt": "마음뿐만 아니라 사과가 달콤하다는 느낌처럼 우리 이것으로 직접 느낀 감각도 표현할 수 있어요. 이것은 무엇인가요?",
-          "answerText": "몸",
-          "answerMatchMode": "EXACT",
+          "prompt": "2문단에서 따옴표 안에 제시된 느낌을 나타내는 문장 두 가지를 모두 찾으시오.",
+          "answerTexts": [
+            "와, 정말 예쁜 꽃이구나!",
+            "앗, 깜짝이야!"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 12,
-              "end": 13
+              "paragraphId": "p2",
+              "start": 1,
+              "end": 15
+            },
+            {
+              "paragraphId": "p2",
+              "start": 42,
+              "end": 50
             }
           ],
           "scoring": {
@@ -624,14 +627,14 @@
         },
         {
           "id": "q4",
-          "prompt": "\"앗, 바람이 아주 차갑구나!\"처럼 피부에 닿아서 느껴지는 감각을 무엇이라고 하나요?",
-          "answerText": "촉감",
-          "answerMatchMode": "EXACT",
+          "prompt": "사과의 달콤함과 바람의 차가움을 어떤 감각으로 나타내기도 한다고 했는지 지문에서 찾으시오.",
+          "answerText": "맛이나 촉감을 나타내기도 해요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 77,
-              "end": 79
+              "start": 73,
+              "end": 89
             }
           ],
           "scoring": {

@@ -564,7 +564,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "쓰레기를 종류별로 나누어 버리는 것은?",
+          "prompt": "쓰레기를 종류별로 잘 나누어 버리는 것을 무엇이라고 부르나요?",
           "answerText": "분리수거",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -587,14 +587,14 @@
         },
         {
           "id": "q2",
-          "prompt": "다 같이 지키기로 약속한 것은?",
-          "answerText": "규칙",
+          "prompt": "쓰레기를 아무렇게나 섞어서 버리면 무엇이 일어나나요?",
+          "answerText": "심각한 환경 오염이 일어나요",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 21,
-              "end": 23
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 48
             }
           ],
           "scoring": {
@@ -605,14 +605,32 @@
         },
         {
           "id": "q3",
-          "prompt": "자주 반복해서 몸에 밴 행동은?",
-          "answerText": "습관",
+          "prompt": "내가 조금만 부지런해지면 무엇을 지킬 수 있나요?",
+          "answerText": "우리가 사는 지구",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 65,
-              "end": 67
+              "start": 98,
+              "end": 107
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "쓰레기를 올바르게 분리하면 막을 수 있는 것을 지문에서 찾으시오.",
+          "answerText": "쓰레기 산이 커지는 것",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 23,
+              "end": 35
             }
           ],
           "scoring": {

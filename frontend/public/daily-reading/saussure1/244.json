@@ -396,29 +396,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "물건을 사고파는 거리?",
-          "answerText": "시장",
-          "answerMatchMode": "EXACT",
+          "prompt": "남을 생각하는 넉넉한 마음을 무엇이라고 하는지 본문에서 찾아보세요",
+          "answerText": "인심",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 30,
-              "end": 32
-            },
-            {
-              "paragraphId": "p1",
-              "start": 54,
-              "end": 56
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 60,
-              "end": 62
+              "start": 81,
+              "end": 83
             }
           ],
           "scoring": {
@@ -430,29 +415,14 @@
         },
         {
           "id": "q2",
-          "prompt": "큰 규모의 현대식 상점?",
-          "answerText": "마트",
-          "answerMatchMode": "EXACT",
+          "prompt": "마트에서 많은 물건을 한꺼번에 살 때 이용하는 도구는 무엇인지 본문에서 찾아보세요",
+          "answerText": "카트",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 41,
-              "end": 43
-            },
-            {
-              "paragraphId": "p1",
-              "start": 106,
-              "end": 108
-            },
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p2",
-              "start": 96,
-              "end": 98
+              "start": 133,
+              "end": 135
             }
           ],
           "scoring": {
@@ -464,14 +434,38 @@
         },
         {
           "id": "q3",
-          "prompt": "남을 위하는 넉넉한 마음?",
-          "answerText": "인심",
-          "answerMatchMode": "EXACT",
+          "prompt": "전통 시장에서 정겨운 외침과 넉넉한 인심을 보여 주는 사람은 누구인지 본문에서 찾아보세요",
+          "answerText": "상인",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 81,
-              "end": 83
+              "start": 58,
+              "end": 60
+            },
+            {
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 68
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "장을 볼 때 상황에 맞춰 알맞은 곳을 골라야 한다고 했는데, 어떻게 장을 보아야 하는지 본문에서 찾아보세요",
+          "answerText": "현명",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 148,
+              "end": 150
             }
           ],
           "scoring": {

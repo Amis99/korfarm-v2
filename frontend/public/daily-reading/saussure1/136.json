@@ -513,49 +513,39 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "말을 하는 신기한 무엇인가요?",
-          "answerText": "연필",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 이야기에서 무지개 연필을 가지고 있는 주인공이 누구인지 이름을 찾아 써 보세요",
+          "answerText": "민수",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 33,
-              "end": 35
+              "start": 0,
+              "end": 2
             },
             {
               "paragraphId": "p1",
-              "start": 44,
-              "end": 46
+              "start": 98,
+              "end": 100
             },
             {
               "paragraphId": "p1",
-              "start": 72,
-              "end": 74
+              "start": 127,
+              "end": 129
             },
             {
               "paragraphId": "p1",
-              "start": 94,
-              "end": 96
-            },
-            {
-              "paragraphId": "p1",
-              "start": 134,
-              "end": 136
-            },
-            {
-              "paragraphId": "p1",
-              "start": 172,
-              "end": 174
+              "start": 162,
+              "end": 164
             },
             {
               "paragraphId": "p2",
-              "start": 9,
-              "end": 11
+              "start": 88,
+              "end": 90
             },
             {
               "paragraphId": "p2",
-              "start": 135,
-              "end": 137
+              "start": 164,
+              "end": 166
             }
           ],
           "scoring": {
@@ -567,24 +557,14 @@
         },
         {
           "id": "q2",
-          "prompt": "일곱 색깔 무엇 연필인가요?",
-          "answerText": "무지개",
-          "answerMatchMode": "EXACT",
+          "prompt": "민수가 연필을 이리저리 살펴보는 모습을 흉내 내는 말로 표현했어요. 그 말을 지문에서 찾아 써 보세요",
+          "answerText": "요리조리",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 68,
-              "end": 71
-            },
-            {
-              "paragraphId": "p1",
-              "start": 90,
-              "end": 93
-            },
-            {
-              "paragraphId": "p2",
-              "start": 131,
-              "end": 134
+              "start": 176,
+              "end": 180
             }
           ],
           "scoring": {
@@ -596,29 +576,33 @@
         },
         {
           "id": "q3",
-          "prompt": "지도가 숨겨진 무엇인가요?",
-          "answerText": "보물",
-          "answerMatchMode": "EXACT",
+          "prompt": "민수의 가슴이 두근거리는 모습을 흉내 내는 말로 표현했어요. 그 말을 지문에서 찾아 써 보세요",
+          "answerText": "콩닥콩닥",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 145,
-              "end": 147
-            },
-            {
-              "paragraphId": "p1",
-              "start": 185,
-              "end": 187
-            },
+              "paragraphId": "p2",
+              "start": 189,
+              "end": 193
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "보물을 찾으려면 연필이 내는 무엇의 정답을 맞혀야 한다고 했는지 한 단어로 찾아 써 보세요",
+          "answerText": "퀴즈",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p2",
-              "start": 150,
-              "end": 152
+              "start": 16,
+              "end": 18
             }
           ],
           "scoring": {

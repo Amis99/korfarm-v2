@@ -571,111 +571,141 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"학습 데이터 편향은 한쪽으로 치우친 자료를 배우며 결과도 기울어지는 현상이다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "인공지능이 배우는 자료가 한쪽으로 치우쳐 결과도 같은 방향으로 기울어지는 현상의 이름을 찾으시오",
+          "answerText": "학습 데이터 편향",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 201
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "학습 데이터 편향은 인공지능이 배우는 자료가 한쪽으로 치우쳐 있어 결과도 같은 방향으로 기울어지는 현상을 말한다. 인공지능은 데이터를 통해 규칙을 익히기 때문에, 처음에 주어진 자료가 불균형하거나 특정 조건만 많이 담고 있으면 그 한계를 그대로 따라 배우기 쉽다. 그래서 모델의 성능을 높이는 문제와 별개로, 어떤 데이터를 학습에 썼는지 살피는 일이 중요하다."
-        },
-        {
-          "id": "q2",
-          "prompt": "\"표본이 불균형하면 어떤 집단에서는 잘 맞고 다른 집단에서는 오차가 커질 수 있다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 194
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "가장 흔한 편향은 표본의 불균형에서 나타난다. 예를 들어 어떤 질병 진단 모델을 만들면서 젊은 환자 자료가 대부분이고 고령 환자 자료가 적다면, 모델은 젊은 집단에서는 잘 맞아도 고령 집단에서는 오차가 커질 수 있다. 사진 분류에서도 특정 배경, 특정 조명, 특정 지역에서 찍힌 이미지가 많으면 그 조건을 정상적인 기준으로 오해할 가능성이 커진다."
-        },
-        {
-          "id": "q3",
-          "prompt": "\"라벨링 기준이 흔들리면 모델이 모호한 기준을 그대로 배울 수 있다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 198
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "라벨을 붙이는 과정에서도 편향이 생길 수 있다. 같은 문장을 읽고도 사람이 다르게 판단하면 학습 데이터 안의 정답 기준 자체가 흔들린다. 특히 감정 분석이나 위험도 판단처럼 해석이 개입되는 과업은 라벨링 기준을 자세히 정하지 않으면 사람마다 다른 관점이 섞여 들어간다. 이 경우 모델의 오류는 계산 실수라기보다 모호한 기준을 그대로 배운 결과일 수 있다."
-        },
-        {
-          "id": "q4",
-          "prompt": "\"학습 데이터와 실제 사용 환경이 다르면 분포 차이로 성능이 떨어질 수 있다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
+              "end": 9
+            },
             {
               "paragraphId": "p4",
               "start": 0,
-              "end": 214
+              "end": 9
+            },
+            {
+              "paragraphId": "p6",
+              "start": 3,
+              "end": 12
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "학습 단계와 실제 사용 환경의 자료가 달라 성능이 갑자기 떨어지는 현상의 이름을 찾으시오",
+          "answerText": "분포 차이",
           "answerMatchMode": "ANY",
-          "answerText": "학습 데이터 편향은 모델이 현실에서 쓰일 때 더 크게 드러난다. 학습 단계에서는 정확도가 높아 보여도, 실제 사용 환경의 자료가 학습 데이터와 다르면 성능이 갑자기 떨어질 수 있다. 이를 분포 차이라고 하는데, 시험지에서만 잘 푼 학생이 실제 상황에서는 당황하는 것과 비슷하다. 그래서 인공지능 개발에서는 학습용 자료뿐 아니라 실제 사용 환경을 닮은 검증 자료도 따로 확인해야 한다."
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 105,
+              "end": 110
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "학습 데이터 편향의 정의가 직접 제시된 부분을 찾으시오",
+          "answerText": "인공지능이 배우는 자료가 한쪽으로 치우쳐 있어 결과도 같은 방향으로 기울어지는 현상을 말한다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 11,
+              "end": 62
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "학습 데이터 편향이 실제 사용 환경에서 더 크게 드러나는 이유로 직접 제시된 부분을 찾으시오",
+          "answerText": "학습 단계에서는 정확도가 높아 보여도, 실제 사용 환경의 자료가 학습 데이터와 다르면 성능이 갑자기 떨어질 수 있다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 36,
+              "end": 100
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "\"편향은 자료를 고르게 수집하고 기준을 세밀하게 정하는 방식으로 줄일 수 있다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "편향을 줄이기 위한 세 가지 방법을 모두 찾으시오",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 207
+              "start": 17,
+              "end": 33
+            },
+            {
+              "paragraphId": "p5",
+              "start": 35,
+              "end": 53
+            },
+            {
+              "paragraphId": "p5",
+              "start": 55,
+              "end": 72
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "편향을 줄이기 위한 방법으로는 자료를 더 고르게 수집하는 일, 부족한 집단 데이터를 보강하는 일, 라벨 기준을 세밀하게 정하는 일이 있다. 또한 모델이 어떤 입력에 크게 영향을 받는지 분석해, 원래 중요하지 않아야 할 요소에 지나치게 반응하는지도 점검한다. 예를 들어 사람 얼굴을 인식하는 모델이 표정보다 배경색에 더 강하게 반응한다면 데이터 구성부터 다시 살펴야 한다."
+          "answerTexts": [
+            "자료를 더 고르게 수집하는 일",
+            "부족한 집단 데이터를 보강하는 일",
+            "라벨 기준을 세밀하게 정하는 일"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "\"학습 데이터 편향은 기술 문제이면서 동시에 사회적 문제이다.\"에 해당하는 부분은 어디인가요?",
+          "prompt": "표정보다 배경색에 더 강하게 반응하는 모델의 사례에서 다시 살펴야 하는 출발점이 제시된 부분을 찾으시오",
+          "answerText": "사람 얼굴을 인식하는 모델이 표정보다 배경색에 더 강하게 반응한다면 데이터 구성부터 다시 살펴야 한다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 223
+              "paragraphId": "p5",
+              "start": 150,
+              "end": 206
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "결국 학습 데이터 편향은 인공지능의 기술 문제가 동시에 사회적 문제이기도 하다. 어떤 집단이 적게 포함되었는지, 어떤 기준이 당연한 것으로 처리되었는지를 묻지 않으면 모델은 겉으로만 객관적인 판단을 내릴 뿐 실제로는 기존의 불균형을 되풀이할 수 있다. 따라서 좋은 인공지능을 만든다는 것은 모델 구조를 바꾸는 일만이 아니라, 학습 데이터가 누구를 얼마나 대표하는지 끊임없이 점검하는 일까지 포함한다."
+          "revealOnWrong": true
         }
       ]
     }

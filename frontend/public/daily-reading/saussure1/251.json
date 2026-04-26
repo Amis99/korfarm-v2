@@ -396,34 +396,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "입으로 먹는 영양물?",
-          "answerText": "음식",
-          "answerMatchMode": "EXACT",
+          "prompt": "오랜 시간 우리 조상들이 음식에 담아 온 슬기로운 마음을 무엇이라고 표현했는지 본문에서 찾아보세요",
+          "answerText": "지혜",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 9,
-              "end": 11
-            },
-            {
-              "paragraphId": "p1",
-              "start": 146,
-              "end": 148
+              "start": 26,
+              "end": 28
             },
             {
               "paragraphId": "p2",
-              "start": 46,
-              "end": 48
-            },
-            {
-              "paragraphId": "p2",
-              "start": 56,
-              "end": 58
-            },
-            {
-              "paragraphId": "p2",
-              "start": 136,
-              "end": 138
+              "start": 126,
+              "end": 128
             }
           ],
           "scoring": {
@@ -435,29 +420,14 @@
         },
         {
           "id": "q2",
-          "prompt": "전해 내려오는 고유의 것?",
-          "answerText": "전통",
-          "answerMatchMode": "EXACT",
+          "prompt": "발효의 과학이 담긴 음식으로 우리 몸을 튼튼하게 해 주는 음식의 예를 본문에서 찾아보세요",
+          "answerText": "김치",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 6,
-              "end": 8
-            },
-            {
-              "paragraphId": "p1",
-              "start": 143,
-              "end": 145
-            },
-            {
-              "paragraphId": "p2",
-              "start": 53,
-              "end": 55
-            },
-            {
-              "paragraphId": "p2",
-              "start": 133,
-              "end": 135
+              "start": 90,
+              "end": 92
             }
           ],
           "scoring": {
@@ -469,19 +439,33 @@
         },
         {
           "id": "q3",
-          "prompt": "사물을 깨닫는 밝은 마음?",
-          "answerText": "지혜",
-          "answerMatchMode": "EXACT",
+          "prompt": "지혜를 담아 전통 음식을 만들어 우리에게 물려준 옛 어른들을 무엇이라고 표현했는지 본문에서 찾아보세요",
+          "answerText": "조상",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 26,
-              "end": 28
-            },
+              "paragraphId": "p2",
+              "start": 121,
+              "end": 123
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "전통 음식에는 깊은 맛과 함께 이웃 사이에 정을 나누는 어떤 마음이 담겨 있다고 했는지 본문에서 찾아보세요",
+          "answerText": "인심",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 126,
-              "end": 128
+              "start": 106,
+              "end": 108
             }
           ],
           "scoring": {

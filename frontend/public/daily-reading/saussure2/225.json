@@ -559,9 +559,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "가을이 오면 풀숲에서 '귀뚤귀뚤' 아름다운 소리가 들려옵니다. 이 맑고 고운 소리의 주인공은 바로 이것이에요. 이것은 무엇일까요?",
+          "prompt": "이 맑고 고운 소리의 주인공은 무엇인지 지문에서 찾으시오.",
           "answerText": "귀뚜라미",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -603,19 +603,29 @@
         },
         {
           "id": "q2",
-          "prompt": "귀뚜라미는 입으로 소리를 내는 것이 아니라 이것을 비벼서 소리를 만들어요. 이것은 무엇일까요?",
-          "answerText": "날개",
-          "answerMatchMode": "EXACT",
+          "prompt": "귀뚜라미가 조용히 숨어 지내는 곳은 어디인지 모두 찾으시오.",
+          "answerText": "풀밭이나 돌 밑, 축축한 흙 속",
+          "answerTexts": [
+            "풀밭",
+            "돌 밑",
+            "축축한 흙 속"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 24,
-              "end": 26
+              "paragraphId": "p1",
+              "start": 80,
+              "end": 82
             },
             {
-              "paragraphId": "p2",
-              "start": 43,
-              "end": 45
+              "paragraphId": "p1",
+              "start": 85,
+              "end": 88
+            },
+            {
+              "paragraphId": "p1",
+              "start": 90,
+              "end": 97
             }
           ],
           "scoring": {
@@ -627,14 +637,42 @@
         },
         {
           "id": "q3",
-          "prompt": "귀뚜라미는 자기 몸보다 훨씬 긴 이것을 가지고 있어서 어두운 곳에서도 길을 잘 찾을 수 있어요. 이것은 무엇일까요?",
-          "answerText": "더듬이",
-          "answerMatchMode": "EXACT",
+          "prompt": "수컷 귀뚜라미가 노래를 부르는 이유를 모두 찾으시오.",
+          "answerText": "암컷을 부르거나 자기 자리를 지키기 위해",
+          "answerTexts": [
+            "암컷을 부르거나",
+            "자기 자리를 지키기 위해"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 108,
+              "end": 116
+            },
+            {
+              "paragraphId": "p2",
+              "start": 117,
+              "end": 130
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 5,
+            "wrongDeltaSec": -2,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "튼튼한 뒷다리가 있어서 적이 나타나면 어떤 결과가 생기는지 지문에서 찾으시오.",
+          "answerText": "높이 뛰어올라 멀리 도망갈 수 있답니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 18,
-              "end": 21
+              "start": 85,
+              "end": 106
             }
           ],
           "scoring": {

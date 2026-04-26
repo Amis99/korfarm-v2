@@ -1037,121 +1037,12 @@
     },
     "confirm": {
       "questions": [
-        {
-          "id": "q1",
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "prompt": "부분을 이루는 요소는?",
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 11,
-              "end": 13
-            },
-            {
-              "paragraphId": "p3",
-              "start": 72,
-              "end": 74
-            },
-            {
-              "paragraphId": "p4",
-              "start": 60,
-              "end": 62
-            },
-            {
-              "paragraphId": "p5",
-              "start": 95,
-              "end": 97
-            },
-            {
-              "paragraphId": "p6",
-              "start": 99,
-              "end": 101
-            }
-          ],
-          "answerText": "성분"
-        },
-        {
-          "id": "q2",
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "prompt": "여러 항목을 차례로 벌여 적는 일은?",
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 12,
-              "end": 14
-            },
-            {
-              "paragraphId": "p4",
-              "start": 100,
-              "end": 102
-            }
-          ],
-          "answerText": "열거"
-        },
-        {
-          "id": "q3",
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "prompt": "용언이나 다른 말을 꾸며 주는 문장 성분은?",
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 62,
-              "end": 65
-            }
-          ],
-          "answerText": "부사어"
-        },
-        {
-          "id": "q4",
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "prompt": "다른 말을 꾸며 주는 말은?",
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 24,
-              "end": 27
-            }
-          ],
-          "answerText": "수식어"
-        },
-        {
-          "id": "q5",
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "prompt": "문법 관계를 드러내는 징표는?",
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 176,
-              "end": 181
-            }
-          ],
-          "answerText": "문법 표지"
-        }
+        {"id":"q1","prompt":"이 글이 다루는 화제로, 글의 흐름과 성분의 관계를 드러내는 두 글자 부호의 이름을 찾으시오","answerText":"쉼표","answerMatchMode":"ANY","answerRanges":[{"paragraphId":"p1","start":0,"end":2},{"paragraphId":"p1","start":89,"end":91},{"paragraphId":"p2","start":41,"end":43},{"paragraphId":"p2","start":103,"end":105},{"paragraphId":"p2","start":128,"end":130},{"paragraphId":"p3","start":0,"end":2},{"paragraphId":"p3","start":78,"end":80},{"paragraphId":"p3","start":105,"end":107},{"paragraphId":"p4","start":3,"end":5},{"paragraphId":"p4","start":78,"end":80},{"paragraphId":"p4","start":106,"end":108},{"paragraphId":"p5","start":0,"end":2},{"paragraphId":"p5","start":49,"end":51},{"paragraphId":"p5","start":75,"end":77},{"paragraphId":"p6","start":3,"end":5},{"paragraphId":"p6","start":58,"end":60},{"paragraphId":"p6","start":142,"end":144}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q2","prompt":"여러 항목을 차례로 벌여 늘어놓는 것을 가리키는 두 글자 단어를 찾으시오","answerText":"열거","answerMatchMode":"ANY","answerRanges":[{"paragraphId":"p2","start":12,"end":14},{"paragraphId":"p4","start":100,"end":102}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q3","prompt":"한 문장에서 어디까지 걸리는지에 따라 의미가 달라지게 만드는, 다른 말을 꾸며 주는 말을 가리키는 세 글자 단어를 찾으시오","answerText":"수식어","answerMatchMode":"ANY","answerRanges":[{"paragraphId":"p5","start":24,"end":27}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q4","prompt":"쉼표가 같은 자격으로 묶어 줄 수 있는 세 가지 언어 단위를 모두 찾으시오","answerText":"명사, 구, 절","answerMatchMode":"ALL","answerRanges":[{"paragraphId":"p2","start":25,"end":27},{"paragraphId":"p2","start":29,"end":30},{"paragraphId":"p2","start":32,"end":33}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q5","prompt":"기본적으로 밀접하게 이어지므로 그 사이에 특별한 이유 없이는 쉼표를 두지 않는 두 가지 문장 성분을 모두 찾으시오","answerText":"주어, 서술어","answerMatchMode":"ALL","answerRanges":[{"paragraphId":"p4","start":34,"end":36},{"paragraphId":"p4","start":38,"end":41}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true},
+        {"id":"q6","prompt":"쉼표를 바르게 쓰려면 소리 내어 읽는 것뿐 아니라 함께 살펴야 한다고 한, 문장 안 성분의 짜임을 가리키는 두 글자 단어를 찾으시오","answerText":"구조","answerMatchMode":"ANY","answerRanges":[{"paragraphId":"p3","start":85,"end":87},{"paragraphId":"p4","start":137,"end":139},{"paragraphId":"p5","start":121,"end":123},{"paragraphId":"p6","start":120,"end":122}],"scoring":{"correctDeltaSec":10,"wrongDeltaSec":-5,"eliminateWrongChoice":false},"revealOnWrong":true}
       ]
     }
   }

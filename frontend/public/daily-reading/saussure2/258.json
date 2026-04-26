@@ -556,38 +556,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "임금님의 명령을 받아 몰래 백성들의 삶을 살피는 사람을 무엇이라고 부르나요?",
-          "answerText": "암행어사",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 36,
-              "end": 40
-            },
-            {
-              "paragraphId": "p1",
-              "start": 49,
-              "end": 53
-            },
-            {
-              "paragraphId": "p2",
-              "start": 75,
-              "end": 79
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "암행어사 중에서 가장 유명한 사람으로 언제나 백성들의 편에 섰던 인물은 누구인가요?",
+          "prompt": "암행어사 중에서 가장 유명한 사람은 누구인지 찾으시오.",
           "answerText": "박문수",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -628,15 +599,34 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "박문수가 낡은 옷을 입고 변장했던 차림은 무엇인가요?",
-          "answerText": "거지",
-          "answerMatchMode": "EXACT",
+          "id": "q2",
+          "prompt": "임금님의 명령을 받은 암행어사가 몰래 살핀 것은 무엇인지 찾으시오.",
+          "answerText": "백성들의 삶",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 96,
-              "end": 98
+              "start": 23,
+              "end": 29
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "박문수는 왜 마을에 몰래 숨어들어갔는지, 확인하려 한 내용을 찾으시오.",
+          "answerText": "나쁜 관리들이 백성들을 괴롭히지 않는지",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 18,
+              "end": 39
             }
           ],
           "scoring": {
@@ -648,14 +638,23 @@
         },
         {
           "id": "q4",
-          "prompt": "박문수의 이야기가 오늘날 우리에게 깊이 생각하게 해주는 두 가지 중 '용기'와 함께 나오는 말은 무엇인가요?",
-          "answerText": "정의로움",
-          "answerMatchMode": "EXACT",
+          "prompt": "그는 나쁜 사람들과 가난한 사람들에게 어떤 일을 했는지 모두 찾으시오.",
+          "answerText": "벌을 주고 / 도와주었어요",
+          "answerTexts": [
+            "벌을 주고",
+            "도와주었어요"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 92,
-              "end": 96
+              "paragraphId": "p2",
+              "start": 112,
+              "end": 117
+            },
+            {
+              "paragraphId": "p2",
+              "start": 127,
+              "end": 133
             }
           ],
           "scoring": {

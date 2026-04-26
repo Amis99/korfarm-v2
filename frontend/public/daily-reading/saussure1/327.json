@@ -396,30 +396,16 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "밤하늘의 반짝이는 빛?",
-          "answerText": "별빛",
-          "answerMatchMode": "EXACT",
+          "prompt": "잠들기 전 창밖을 보다가 반짝이는 별빛을 발견하고 가슴이 설렌 인물이 누구인지 찾아보세요",
+          "answerText": "수아",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 76,
-              "end": 78
-            },
-            {
-              "paragraphId": "p1",
-              "start": 111,
-              "end": 113
-            },
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p2",
-              "start": 126,
-              "end": 128
-            }
+            {"paragraphId": "p1", "start": 30, "end": 32},
+            {"paragraphId": "p1", "start": 53, "end": 55},
+            {"paragraphId": "p1", "start": 129, "end": 131},
+            {"paragraphId": "p2", "start": 0, "end": 2},
+            {"paragraphId": "p2", "start": 80, "end": 82},
+            {"paragraphId": "p2", "start": 139, "end": 141}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -430,15 +416,14 @@
         },
         {
           "id": "q2",
-          "prompt": "방 안을 비추는 유리?",
-          "answerText": "창문",
-          "answerMatchMode": "EXACT",
+          "prompt": "글에서는 별을 사람처럼 표현하여 수아에게 인사를 건네는 듯하다고 했는데, 이렇게 별이 보내 준 빛을 무엇이라고 했는지 찾아보세요",
+          "answerText": "별빛",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 135,
-              "end": 137
-            }
+            {"paragraphId": "p1", "start": 76, "end": 78},
+            {"paragraphId": "p1", "start": 111, "end": 113},
+            {"paragraphId": "p2", "start": 4, "end": 6},
+            {"paragraphId": "p2", "start": 126, "end": 128}
           ],
           "scoring": {
             "correctDeltaSec": 10,
@@ -449,15 +434,26 @@
         },
         {
           "id": "q3",
-          "prompt": "가장 친한 친구 사이?",
+          "prompt": "반짝이는 빛으로 대답해 주는 별이 수아에게 세상에서 가장 따뜻하고 든든한 밤의 무엇이 되었는지 찾아보세요",
           "answerText": "단짝",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 105,
-              "end": 107
-            }
+            {"paragraphId": "p2", "start": 105, "end": 107}
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "별빛이 내려앉은 창문이 수아의 꿈을 지켜주는 마법 같은 무엇이 되었는지 찾아보세요",
+          "answerText": "통로",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 157, "end": 159}
           ],
           "scoring": {
             "correctDeltaSec": 10,

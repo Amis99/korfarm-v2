@@ -552,9 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "자신의 ( )을 발표해요.",
+          "prompt": "후보들이 반을 더 행복하게 만들기 위해 발표하는 약속이나 계획을 뜻하는 단어를 지문에서 찾아 보세요.",
           "answerText": "공약",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -571,9 +571,28 @@
         },
         {
           "id": "q2",
-          "prompt": "( ) 투표를 행사해요.",
+          "prompt": "지문에서 반장 선거를 통해 배운다고 한 것이 무엇인지 찾아 보세요.",
+          "answerText": "민주주의",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 128,
+              "end": 132
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "투표할 때 자신의 마음이 다른 사람에게 드러나지 않도록 한다는 뜻으로, 지문에서 투표 방식을 가리키는 단어를 찾아 보세요.",
           "answerText": "비밀",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -589,15 +608,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "( )하게 표를 세어요.",
-          "answerText": "공정",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "지문에서 선거에 뽑힌 친구를 가리키는 표현으로, '뽑혀서 자리에 오른'이라는 뜻의 단어를 찾아 보세요.",
+          "answerText": "당선",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 61,
-              "end": 63
+              "start": 95,
+              "end": 97
             }
           ],
           "scoring": {

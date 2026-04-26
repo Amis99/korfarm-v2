@@ -975,7 +975,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "이 작품의 제목은 무엇인가요?",
+          "prompt": "허난설헌이 지은 작품의 제목을 찾으시오.",
           "answerText": "규원가(閨怨歌)",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -993,44 +993,14 @@
         },
         {
           "id": "q2",
-          "prompt": "화자를 고통스럽게 만든 가족 구성원은 누구인가요?",
-          "answerText": "남편",
+          "prompt": "화자를 고통받게 한 남편을 설명한 부분을 찾으시오.",
+          "answerText": "무능하고 바람기 많은 남편",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 59,
+              "start": 47,
               "end": 61
-            },
-            {
-              "paragraphId": "p2",
-              "start": 77,
-              "end": 79
-            },
-            {
-              "paragraphId": "p2",
-              "start": 126,
-              "end": 128
-            },
-            {
-              "paragraphId": "p3",
-              "start": 34,
-              "end": 36
-            },
-            {
-              "paragraphId": "p3",
-              "start": 55,
-              "end": 57
-            },
-            {
-              "paragraphId": "p4",
-              "start": 145,
-              "end": 147
-            },
-            {
-              "paragraphId": "p5",
-              "start": 112,
-              "end": 114
             }
           ],
           "scoring": {
@@ -1041,14 +1011,22 @@
         },
         {
           "id": "q3",
-          "prompt": "홀로 남은 화자의 외로움을 증폭시키는 밤의 소리는 무엇인가요?",
-          "answerText": "귀뚜라미",
-          "answerMatchMode": "ANY",
+          "prompt": "홀로 남은 화자의 외로움을 증폭시키는 소리를 모두 찾으시오.",
+          "answerTexts": [
+            "귀뚜라미 소리",
+            "나뭇잎이 떨어지는 소리"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 139,
-              "end": 143
+              "end": 146
+            },
+            {
+              "paragraphId": "p3",
+              "start": 148,
+              "end": 160
             }
           ],
           "scoring": {
@@ -1059,24 +1037,19 @@
         },
         {
           "id": "q4",
-          "prompt": "화자가 슬픔을 달래려 의지한 악기는 무엇인가요?",
-          "answerText": "거문고",
+          "prompt": "화자가 자신의 슬픔을 달래려 의지한 소리를 찾으시오.",
+          "answerText": "거문고 소리",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 29,
-              "end": 32
-            },
-            {
-              "paragraphId": "p4",
-              "start": 51,
-              "end": 54
+              "end": 35
             },
             {
               "paragraphId": "p4",
               "start": 161,
-              "end": 164
+              "end": 167
             }
           ],
           "scoring": {
@@ -1087,13 +1060,21 @@
         },
         {
           "id": "q5",
-          "prompt": "결론에서 이 작품을 무엇이라고 표현했나요?",
-          "answerText": "문학적인 항소장",
-          "answerMatchMode": "ANY",
+          "prompt": "결론에서 이 작품을 비유한 표현을 모두 찾으시오.",
+          "answerTexts": [
+            "가부장적 제도의 거대한 벽에 갇혀 질식해 가던 한 여성의 처절한 피맺힌 절규",
+            "불평등한 세상을 향해 날리는 문학적인 항소장"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 75,
+              "start": 13,
+              "end": 55
+            },
+            {
+              "paragraphId": "p5",
+              "start": 59,
               "end": 83
             }
           ],

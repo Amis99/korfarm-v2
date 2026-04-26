@@ -571,26 +571,72 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "민호가 방송을 통해 먼저 떠올리게 하려는 것은 무엇인가요?",
-          "answerText": "잘못을 바로 떠올리게 하려는 거야",
+          "prompt": "이 대화에 등장하는 두 학생의 이름을 본문에서 모두 찾으시오",
+          "answerText": "민호 / 서연",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 59,
-              "end": 77
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 2
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "서연이 시작 장면으로 내세우려는 것은 무엇인가요?",
+          "prompt": "이번 방송이 다루는 학교 생활 주제를 본문에서 찾으시오",
+          "answerText": "분리배출 규칙",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 11,
+              "end": 18
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "서연이 방송 시작에 보여 주자고 제안한 장면을 본문에서 찾으시오",
           "answerText": "캔하고 플라스틱이 한 통에 섞인 장면",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -599,52 +645,60 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q3",
-          "prompt": "질문이 들어가면 친구들이 먼저 돌아보게 되는 것은 무엇인가요?",
-          "answerText": "자기 행동",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 35,
-              "end": 40
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "끝부분에서 고르게 하려는 것은 무엇인가요?",
-          "answerText": "오늘부터 바꿀 행동 하나",
+          "prompt": "서연이 끝부분에 친구들에게 시켜야 한다고 제안한 행동을 본문에서 찾으시오",
+          "answerText": "오늘부터 바꿀 행동 하나를 고르게",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 27,
-              "end": 40
+              "end": 45
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "서연은 이번 발표를 어떤 방향으로 정리하나요?",
+          "prompt": "민호가 짝지어 설명하기로 한 두 가지를 본문에서 모두 찾으시오",
+          "answerText": "잘못 버리면 생기는 문제 / 바로 바꿀 행동",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 22,
+              "end": 35
+            },
+            {
+              "paragraphId": "p5",
+              "start": 37,
+              "end": 45
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "서연이 정리한 이번 발표의 진짜 목적을 본문에서 찾으시오",
           "answerText": "정보 나열이 아니라 행동을 바꾸게 하는 데",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p6",
@@ -653,11 +707,11 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "revealOnWrong": true
         }
       ]
     }

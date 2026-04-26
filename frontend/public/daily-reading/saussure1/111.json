@@ -552,49 +552,49 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "규칙적으로 울리는 무엇자예요인가요?",
-          "answerText": "박",
-          "answerMatchMode": "EXACT",
+          "prompt": "동요 안에서 일정한 규칙에 따라 울리는 것이 무엇인지 글에서 찾아 모두 써 보세요",
+          "answerText": "박자",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 44,
-              "end": 45
+              "end": 46
             },
             {
               "paragraphId": "p1",
               "start": 89,
-              "end": 90
+              "end": 91
             },
             {
               "paragraphId": "p1",
               "start": 98,
-              "end": 99
+              "end": 100
             },
             {
               "paragraphId": "p1",
               "start": 140,
-              "end": 141
+              "end": 142
             },
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 1
+              "end": 2
             },
             {
               "paragraphId": "p2",
               "start": 43,
-              "end": 44
+              "end": 45
             },
             {
               "paragraphId": "p2",
               "start": 80,
-              "end": 81
+              "end": 82
             },
             {
               "paragraphId": "p2",
               "start": 115,
-              "end": 116
+              "end": 117
             }
           ],
           "scoring": {
@@ -606,14 +606,14 @@
         },
         {
           "id": "q2",
-          "prompt": "노래의 무엇걸이와 같습니나요?",
-          "answerText": "걸음",
-          "answerMatchMode": "EXACT",
+          "prompt": "박자를 노래의 무엇과 같다고 빗대어 표현했는지 글에서 찾아 써 보세요",
+          "answerText": "걸음걸이",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 8,
-              "end": 10
+              "end": 12
             }
           ],
           "scoring": {
@@ -625,14 +625,58 @@
         },
         {
           "id": "q3",
-          "prompt": "박자에 맞춰 무엇을 쳐요인가요?",
+          "prompt": "박자에 맞춰 무엇을 치면 노래 부르기가 더 즐거워지는지 글에서 찾아 써 보세요",
           "answerText": "손뼉",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 105,
               "end": 107
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "아이들이 즐겁게 부르는 동요의 큰 개념이 무엇인지 글에서 찾아 모두 써 보세요",
+          "answerText": "노래",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 17,
+              "end": 19
+            },
+            {
+              "paragraphId": "p1",
+              "start": 112,
+              "end": 114
+            },
+            {
+              "paragraphId": "p1",
+              "start": 129,
+              "end": 131
+            },
+            {
+              "paragraphId": "p2",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "paragraphId": "p2",
+              "start": 84,
+              "end": 86
+            },
+            {
+              "paragraphId": "p2",
+              "start": 132,
+              "end": 134
             }
           ],
           "scoring": {

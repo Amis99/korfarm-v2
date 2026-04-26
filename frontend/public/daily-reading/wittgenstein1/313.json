@@ -571,22 +571,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "중심 대상은 무엇인가요?",
+          "prompt": "축제장 한쪽에서 판매된 것을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 126,
-              "end": 129
+              "start": 20,
+              "end": 23
             },
             {
               "paragraphId": "p1",
-              "start": 183,
-              "end": 186
-            },
-            {
-              "paragraphId": "p4",
-              "start": 103,
-              "end": 106
+              "start": 25,
+              "end": 31
             }
           ],
           "scoring": {
@@ -594,17 +589,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "있었다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "공예품",
+            "지역 농산물"
+          ]
         },
         {
           "id": "q2",
-          "prompt": "무엇을 더 크게 만들고, 온라인 홍보물에도 이동 경로를 자세히 넣으면 좋겠다고 생각한다?",
+          "prompt": "오후가 되기 전에 거의 다 팔린 두 가지를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 106,
-              "end": 118
+              "paragraphId": "p1",
+              "start": 64,
+              "end": 68
+            },
+            {
+              "paragraphId": "p1",
+              "start": 70,
+              "end": 72
             }
           ],
           "scoring": {
@@ -612,17 +615,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "다음 행사에서는 안내판"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "딸기 잼",
+            "쌀빵"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "이 무엇 점과 아쉬운 점을 함께 소개하려고 한다?",
+          "prompt": "처음 찾아온 사람이 입구를 쉽게 찾기 어려웠던 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 122,
-              "end": 135
+              "paragraphId": "p2",
+              "start": 3,
+              "end": 17
             }
           ],
           "scoring": {
@@ -631,15 +637,77 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "글에서는 축제의 인상적인"
+          "answerText": "교통 안내 표지가 부족해서"
         },
         {
           "id": "q4",
-          "prompt": "중요한 기준은 무엇인가요?",
+          "prompt": "다음 행사에서 개선하면 좋겠다고 한 안내 관련 방안을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 115,
+              "end": 128
+            },
+            {
+              "paragraphId": "p2",
+              "start": 130,
+              "end": 154
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "안내판을 더 크게 만들고",
+            "온라인 홍보물에도 이동 경로를 자세히 넣으면"
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "봄빛 어울림 축제가 열린 장소를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 7,
+              "end": 18
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "우리 동네 하천 광장"
+        },
+        {
+          "id": "q6",
+          "prompt": "무대 행사에서 먼저 진행된 공연을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 94,
+              "start": 27,
+              "end": 36
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "청소년 밴드 공연"
+        },
+        {
+          "id": "q7",
+          "prompt": "프로그램 사이의 간격이 조금 길어서 생긴 결과를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 90,
               "end": 106
             }
           ],
@@ -649,34 +717,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "흩어지는 순간도 있었다"
+          "answerText": "관객이 흩어지는 순간도 있었다"
         },
         {
-          "id": "q5",
-          "prompt": "또 축제에서 나온 수익 일부를 마을 도서관 무엇 이런 점도 더 널리 알렸으면 좋겠다?",
+          "id": "q8",
+          "prompt": "글쓴이가 축제 홍보 때 함께 드러내면 좋겠다고 한 내용을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 94,
-              "end": 108
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "기금으로 돌린다고 들었는데"
-        },
-        {
-          "id": "q6",
-          "prompt": "하지만 안내 체계와 프로그램 연결이 조금만 더 무엇 편하게 즐길 수 있을 것이다?",
-          "answerRanges": [
+              "start": 144,
+              "end": 148
+            },
             {
-              "paragraphId": "p6",
-              "start": 73,
-              "end": 86
+              "paragraphId": "p5",
+              "start": 155,
+              "end": 160
             }
           ],
           "scoring": {
@@ -684,8 +739,11 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "다듬어지면 방문객이 훨씬"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "즐길거리",
+            "행사 취지"
+          ]
         }
       ]
     }

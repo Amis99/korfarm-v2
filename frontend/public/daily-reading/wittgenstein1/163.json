@@ -571,11 +571,34 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 어떤 상황이나 장면을 보여 주는가?",
+          "prompt": "화자가 '참 좋지요'라고 말한 대상을 지문에서 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
+              "start": 10,
+              "end": 17
+            },
+            {
+              "paragraphId": "p6",
               "start": 0,
+              "end": 7
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "당신이라는 말"
+        },
+        {
+          "id": "q2",
+          "prompt": "화자가 그래서 하겠다고 한 행동을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 29,
               "end": 34
             }
           ],
@@ -585,16 +608,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "당신....... 당신이라는 말 참 좋지요,\n그래서 불러봅니다"
+          "answerText": "불러봅니다"
         },
         {
-          "id": "q2",
-          "prompt": "둘째 문단은 어떤 상황이나 장면을 보여 주는가?",
+          "id": "q3",
+          "prompt": "슬픔의 반복을 문이 닫히고 열리는 모습으로 표현한 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 93
+              "start": 27,
+              "end": 56
             }
           ],
           "scoring": {
@@ -603,52 +626,49 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "킥킥 거리며 한때 적요로움의 울음이 있었던 때,\n한 슬픔이 문을 닫으면 또 한 슬픔이 문을 여는 것을\n이만큼 살아옴의 상처에 기대,\n나 킥킥……………,\n당신을 부릅니다"
+          "answerText": "한 슬픔이 문을 닫으면 또 한 슬픔이 문을 여는 것을"
         },
         {
-          "id": "q3",
-          "prompt": "셋째 문단은 어떤 상황이나 장면을 보여 주는가?",
+          "id": "q4",
+          "prompt": "화자가 기대어 당신을 부르는 상처를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 57,
+              "end": 68
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "이만큼 살아옴의 상처"
+        },
+        {
+          "id": "q5",
+          "prompt": "3연에 나오는 자연물과 그 상태를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 65
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "단풍의 손바닥,\n은행의 두 갈래 그리고 합침\n저 개망초의 시름,\n밟힌 풀의 흙으로 돌아감\n당신……………….\n킥킥거리며"
-        },
-        {
-          "id": "q4",
-          "prompt": "넷째 문단은 어떤 상황이나 장면을 보여 주는가?",
-          "answerRanges": [
+              "end": 7
+            },
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 89
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "세월에 대해 혹은 사랑과 상처,\n상처의 몸이 나에게 기대와 저를 부빌 때\n당신....... 그대라는 자연의 달과 별……………,\n킥킥거리며 당신이라고………………,"
-        },
-        {
-          "id": "q5",
-          "prompt": "다섯째 문단은 인물의 어떤 심정을 드러내는가?",
-          "answerRanges": [
+              "paragraphId": "p3",
+              "start": 9,
+              "end": 24
+            },
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 112
+              "paragraphId": "p3",
+              "start": 25,
+              "end": 34
+            },
+            {
+              "paragraphId": "p3",
+              "start": 36,
+              "end": 49
             }
           ],
           "scoring": {
@@ -656,17 +676,22 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "금방 울 것 같은 사내의 아름다움\n그 아름다움에 기대 마음의 무덤에\n나 벌초하러 진설 음식도 없이 맨 술 한 병 차고\n병자처럼,\n그러나 치병과 환후는 각각 따로인 것을\n킥킥 당신 이쁜 당신………………,"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "단풍의 손바닥",
+            "은행의 두 갈래 그리고 합침",
+            "저 개망초의 시름",
+            "밟힌 풀의 흙으로 돌아감"
+          ]
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 어떤 상황이나 장면을 보여 주는가?",
+          "prompt": "4연에서 '당신'을 자연물에 빗대어 다시 부른 표현을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 63
+              "paragraphId": "p4",
+              "start": 51,
+              "end": 64
             }
           ],
           "scoring": {
@@ -675,7 +700,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "당신이라는 말 참 좋지요,\n내가 아니라서 끝내 버릴 수 없는,\n무를 수도 없는 참혹……………….\n그러나 킥킥 당신"
+          "answerText": "그대라는 자연의 달과 별"
+        },
+        {
+          "id": "q7",
+          "prompt": "화자가 벌초하러 가며 차고 간 것을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 45,
+              "end": 62
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "진설 음식도 없이 맨 술 한 병"
+        },
+        {
+          "id": "q8",
+          "prompt": "화자가 '당신'을 끝내 버릴 수 없다고 말하는 이유를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 15,
+              "end": 22
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "내가 아니라서"
         }
       ]
     }

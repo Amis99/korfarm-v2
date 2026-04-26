@@ -587,14 +587,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "개미들이 모여 사는 집단은?",
-          "answerText": "군집은",
-          "answerMatchMode": "EXACT",
+          "prompt": "개미들이 보인 감시 대상과 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "적의 침입",
+            "감시하는 것"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 3,
-              "end": 6
+              "start": 40,
+              "end": 45
+            },
+            {
+              "paragraphId": "p1",
+              "start": 47,
+              "end": 53
             }
           ],
           "scoring": {
@@ -606,14 +614,22 @@
         },
         {
           "id": "q2",
-          "prompt": "신호를 위해 내뿜는 물질은?",
-          "answerText": "페로몬을",
-          "answerMatchMode": "EXACT",
+          "prompt": "군집의 안전을 유지하는 행동과 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "질서 있는 행동",
+            "거대한 군집의 안전"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 37,
-              "end": 41
+              "paragraphId": "p1",
+              "start": 62,
+              "end": 70
+            },
+            {
+              "paragraphId": "p1",
+              "start": 72,
+              "end": 82
             }
           ],
           "scoring": {
@@ -625,19 +641,41 @@
         },
         {
           "id": "q3",
-          "prompt": "위험이 없고 평안한 상태는?",
-          "answerText": "안전하게",
-          "answerMatchMode": "EXACT",
+          "prompt": "위험이 닥치면 개미가 내뿜는 것과 알리는 대상을 모두 찾으시오.",
+          "answerTexts": [
+            "페로몬",
+            "동료에게 알립니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 14,
-              "end": 18
+              "paragraphId": "p2",
+              "start": 37,
+              "end": 40
             },
             {
-              "paragraphId": "p3",
-              "start": 73,
-              "end": 77
+              "paragraphId": "p2",
+              "start": 46,
+              "end": 55
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "개미들의 협동은 무엇이 된다고 했는지 찾으시오.",
+          "answerText": "재난을 막는 강력한 힘",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 78
             }
           ],
           "scoring": {

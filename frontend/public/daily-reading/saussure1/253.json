@@ -396,9 +396,71 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "말하지 않기로 한 것?",
+          "prompt": "친구 사이의 두터운 정을 가리키는 말을 본문에서 찾아보세요",
+          "answerText": "우정",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 130,
+              "end": 132
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "멋진 어린이가 가져야 할 기본 덕목으로 어떤 두 가지 마음과 태도를 말했는지 본문에서 찾아보세요",
+          "answerText": "정직, 배려",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 59,
+              "end": 61
+            },
+            {
+              "paragraphId": "p2",
+              "start": 81,
+              "end": 83
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "실수로 비밀을 말했을 때 솔직하게 사과하고 다짐하기 위해 필요한 마음을 본문에서 찾아보세요",
+          "answerText": "용기",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 48,
+              "end": 50
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "다른 사람에게 말하지 않기로 한 특별한 이야기를 무엇이라고 표현했는지 본문에서 찾아보세요",
           "answerText": "비밀",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -419,49 +481,6 @@
               "paragraphId": "p2",
               "start": 118,
               "end": 120
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "앞으로 할 일의 예고?",
-          "answerText": "약속",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 40,
-              "end": 42
-            },
-            {
-              "paragraphId": "p1",
-              "start": 112,
-              "end": 114
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "친구 사이의 두터운 정?",
-          "answerText": "우정",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 130,
-              "end": 132
             }
           ],
           "scoring": {

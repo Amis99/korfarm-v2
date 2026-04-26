@@ -362,29 +362,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "작고 오목하게 파인 곳에 맑은 물이 고인 샘은?",
-          "answerText": "옹달샘",
-          "answerMatchMode": "ANY",
+          "prompt": "노래에서 반복되는 표현 '깊은 산속 옹달샘'을 모두 찾으시오.",
+          "answerText": "깊은 산속 옹달샘",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 6,
-              "end": 9
-            },
-            {
-              "paragraphId": "p1",
-              "start": 26,
-              "end": 29
-            },
-            {
-              "paragraphId": "p2",
-              "start": 6,
+              "start": 0,
               "end": 9
             },
             {
               "paragraphId": "p2",
-              "start": 26,
-              "end": 29
+              "start": 0,
+              "end": 9
             }
           ],
           "scoring": {
@@ -395,14 +385,65 @@
         },
         {
           "id": "q2",
-          "prompt": "술래가 숨은 사람을 찾아내는 재미있는 놀이는?",
-          "answerText": "숨바꼭질",
+          "prompt": "노래에서 반복되는 물음 '누가 와서 먹나요'를 모두 찾으시오.",
+          "answerText": "누가 와서 먹나요",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 10,
+              "end": 19
+            },
+            {
+              "paragraphId": "p1",
+              "start": 30,
+              "end": 39
+            },
+            {
+              "paragraphId": "p2",
+              "start": 10,
+              "end": 19
+            },
+            {
+              "paragraphId": "p2",
+              "start": 30,
+              "end": 39
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "새벽에 옹달샘에 온 동물이 적힌 부분을 지문에서 찾으시오.",
+          "answerText": "새벽에 토끼가",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 40,
+              "end": 47
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "달밤에 옹달샘에 온 동물이 적힌 부분을 지문에서 찾으시오.",
+          "answerText": "달밤에 노루가",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 48,
-              "end": 52
+              "start": 40,
+              "end": 47
             }
           ],
           "scoring": {

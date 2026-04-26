@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 법인세의 부담 귀착과 감가상각의 투자 유인라는 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "prompt": "법인세가 부과되는 대상을 설명한 구절을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 188
+              "start": 30,
+              "end": 58
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "법인세는 개인에게 직접 부과되는 일반적 조세와 달리, 법률상 독립된 실체로 인정되는 법인에 부과되는 조세이다. 형식상 납세 주체는 법인이지만, 실제 부담이 누구에게 돌아가는지는 별개의 문제다. 그래서 법인세를 이해하려면 단순히 세율만 볼 것이 아니라, 과세 대상이 무엇이며 그 부담이 경제 내부에서 어떻게 이전되는지도 함께 따져야 한다."
+          "answerText": "법률상 독립된 실체로 인정되는 법인에 부과되는 조세"
         },
         {
           "id": "q2",
-          "prompt": "2문단은 첫 핵심 기준이나 원리를 어떻게 설명하는가?",
+          "prompt": "형식상 납세 주체가 법인임을 나타내는 구절을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 209
+              "paragraphId": "p1",
+              "start": 73,
+              "end": 78
             }
           ],
           "scoring": {
@@ -603,16 +603,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "법인세의 부담을 설명하는 한 관점은 이것을 법인 부문에 투자된 자본에 대한 과세로 보는 입장이다. 이 관점에서는 주주가 제공한 자본의 기회비용이 과세 대상 계산에서 충분히 공제되지 않기 때문에, 결국 법인에 투자된 자본이 얻는 소득이 과세된다고 본다. 이 경우 세 부담은 우선 자본 소유자에게 돌아가지만, 시장 여건에 따라 일부는 노동 공급자나 소비자에게도 이전될 수 있다."
+          "answerText": "법인이지만"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 이어지는 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "법인세 부담이 이전될 수 있다고 한 대상을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 213
+              "paragraphId": "p2",
+              "start": 155,
+              "end": 161
+            },
+            {
+              "paragraphId": "p2",
+              "start": 185,
+              "end": 191
+            },
+            {
+              "paragraphId": "p2",
+              "start": 193,
+              "end": 196
             }
           ],
           "scoring": {
@@ -620,17 +630,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "다른 관점은 법인세를 경제적 이윤에 대한 과세로 이해하는 방식이다. 기업의 총수입에서 명시적 비용뿐 아니라 기회비용까지 뺀 뒤에도 남는 초과 이윤에 세금이 매겨진다고 보는 것이다. 특히 차입 자금에 대한 이자는 비용 처리되므로, 이 입장에서는 법인세가 정상적인 투자 보상보다 초과 이윤을 겨냥한다고 해석할 수 있다. 그렇다면 세 부담은 주주에게 집중된다고 보는 쪽이 더 자연스럽다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "자본 소유자",
+            "노동 공급자",
+            "소비자"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
+          "prompt": "경제적 이윤에 대한 과세 관점에서 세금이 매겨지는 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 190
+              "paragraphId": "p3",
+              "start": 38,
+              "end": 81
             }
           ],
           "scoring": {
@@ -639,16 +653,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "문제는 현행 법인세제가 기업의 행동 자체를 바꿀 수 있다는 점이다. 차입금 이자는 비용으로 인정되지만 자기 자본의 기회비용은 비용으로 처리되지 않는다면, 기업은 상대적으로 부채 조달을 선호하게 된다. 이렇게 되면 세제가 기업의 자금 조달 방식과 투자 결정에 영향을 미치게 되고, 세금이 경제 활동에 중립적이어야 한다는 원칙이 흔들리게 된다."
+          "answerText": "기업의 총수입에서 명시적 비용뿐 아니라 기회비용까지 뺀 뒤에도 남는 초과 이윤"
         },
         {
           "id": "q5",
-          "prompt": "5문단은 이 주제가 낳는 효과나 쟁점을 어떤 방향으로 확장하는가?",
+          "prompt": "기업이 부채 조달을 선호하게 되는 조건을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 213
+              "paragraphId": "p4",
+              "start": 38,
+              "end": 84
             }
           ],
           "scoring": {
@@ -657,16 +671,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이런 문제를 줄이기 위해 중요하게 논의되는 것이 감가상각이다. 자본재의 가치 하락을 세법상 비용으로 얼마나, 어떤 속도로 인정할 것인지는 기업의 세 부담을 좌우한다. 감가상각이 경제적 현실보다 느리게 인정되면 기업은 실제 가치 하락보다 적은 비용만 인정받게 되어 세 부담이 무거워진다. 반대로 더 빠른 감가상각을 허용하면 초기 세 부담이 줄어 기업의 투자를 유인하는 효과가 생긴다."
+          "answerText": "차입금 이자는 비용으로 인정되지만 자기 자본의 기회비용은 비용으로 처리되지 않는다면"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 법인세의 부담 귀착과 감가상각의 투자 유인라는 주제의 의미를 어떤 관점에서 정리하는가?",
+          "prompt": "그 조건 때문에 기업에 나타나는 결과를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 225
+              "paragraphId": "p4",
+              "start": 96,
+              "end": 110
             }
           ],
           "scoring": {
@@ -675,7 +689,71 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "여기에 인플레이션까지 겹치면 역사적 비용에 기초한 감가상각은 현실 가치 하락을 제대로 반영하지 못할 수 있다. 나중에 같은 자본재를 다시 사려면 더 많은 비용이 드는데, 세법은 과거의 취득 가격을 기준으로 비용을 계산하기 때문이다. 결국 법인세는 단순한 조세가 아니라 부담 귀착, 투자 결정, 자금 조달, 물가 변화가 한데 얽힌 제도이며, 어떤 감가상각 규칙을 택하느냐에 따라 그 성격이 크게 달라진다."
+          "answerText": "부채 조달을 선호하게 된다"
+        },
+        {
+          "id": "q7",
+          "prompt": "자본재의 가치 하락을 세법상 비용으로 인정하는 문제와 관련해 중요하게 논의되는 말을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 27,
+              "end": 31
+            },
+            {
+              "paragraphId": "p5",
+              "start": 93,
+              "end": 97
+            },
+            {
+              "paragraphId": "p5",
+              "start": 169,
+              "end": 173
+            },
+            {
+              "paragraphId": "p6",
+              "start": 28,
+              "end": 32
+            },
+            {
+              "paragraphId": "p6",
+              "start": 193,
+              "end": 197
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "감가상각"
+        },
+        {
+          "id": "q8",
+          "prompt": "더 빠른 감가상각을 허용할 때 생기는 효과를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 180,
+              "end": 191
+            },
+            {
+              "paragraphId": "p5",
+              "start": 192,
+              "end": 212
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "초기 세 부담이 줄어",
+            "기업의 투자를 유인하는 효과가 생긴다"
+          ]
         }
       ]
     }

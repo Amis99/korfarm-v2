@@ -561,9 +561,48 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "고구려의 훌륭한 왕으로, 이름처럼 영토를 넓게 넓힌 왕의 이름은 무엇인가요?",
+          "prompt": "백제의 뒤를 이어 한강을 차지하고 가장 큰 힘을 자랑한 나라는 어디인가요?",
+          "answerText": "고구려",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 35,
+              "end": 38
+            },
+            {
+              "paragraphId": "p1",
+              "start": 43,
+              "end": 46
+            },
+            {
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 30
+            },
+            {
+              "paragraphId": "p2",
+              "start": 99,
+              "end": 102
+            },
+            {
+              "paragraphId": "p3",
+              "start": 75,
+              "end": 78
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "이름처럼 영토를 넓게 넓힌 훌륭한 왕은 누구인가요?",
           "answerText": "광개토 대왕",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -594,10 +633,10 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "광개토 대왕의 아들로, 수도를 평양으로 옮기고 한강을 차지한 왕은 누구인가요?",
+          "id": "q3",
+          "prompt": "광개토 대왕의 아들인 왕은 누구인가요?",
           "answerText": "장수왕",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -623,39 +662,24 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "장수왕이 도읍을 옮기고 한강을 차지하기 위해 남쪽으로 내려오기 전 새롭게 정한 수도는 어디인가요?",
-          "answerText": "평양",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "장수왕이 고구려를 더욱 튼튼하게 만들기 위해 한 일을 모두 찾으시오.",
+          "answerText": "수도를 평양으로 옮기고 / 남쪽으로 내려와 한강을 차지했지요",
+          "answerTexts": [
+            "수도를 평양으로 옮기고",
+            "남쪽으로 내려와 한강을 차지했지요"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 56,
-              "end": 58
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "장수왕이 아버지의 업적을 자랑스럽게 여겨 세운 거대한 돌을 무엇이라고 하나요?",
-          "answerText": "비석",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 30,
-              "end": 32
+              "start": 52,
+              "end": 64
             },
             {
-              "paragraphId": "p3",
-              "start": 42,
-              "end": 44
+              "paragraphId": "p2",
+              "start": 65,
+              "end": 83
             }
           ],
           "scoring": {

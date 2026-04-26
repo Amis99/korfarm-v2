@@ -557,14 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "인간의 지능을 기계로 구현하여 대화를 나누거나 도움을 주는 똑똑한 로봇은?",
-          "answerText": "인공지능 로봇",
-          "answerMatchMode": "EXACT",
+          "prompt": "가족이 체험 학습 날에 방문한 곳을 지문에서 찾으시오.",
+          "answerText": "어린이 과학관",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 66,
-              "end": 73
+              "start": 29,
+              "end": 36
             }
           ],
           "scoring": {
@@ -576,14 +576,22 @@
         },
         {
           "id": "q2",
-          "prompt": "우주 공간처럼 지구가 당기는 힘이 거의 느껴지지 않아 몸이 둥둥 뜨는 상태는?",
-          "answerText": "무중력",
-          "answerMatchMode": "EXACT",
+          "prompt": "우주 체험관에서 경험하거나 조종한 것을 모두 찾으시오.",
+          "answerTexts": [
+            "무중력 상태",
+            "화성 탐사선"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 10,
-              "end": 13
+              "end": 16
+            },
+            {
+              "paragraphId": "p2",
+              "start": 25,
+              "end": 31
             }
           ],
           "scoring": {
@@ -595,19 +603,33 @@
         },
         {
           "id": "q3",
-          "prompt": "과학관을 다녀온 뒤 자신의 생각과 느낌을 정리하여 기록한 글의 형식은?",
-          "answerText": "감상문",
-          "answerMatchMode": "EXACT",
+          "prompt": "여러 실험 기구들을 만지며 노는 동안 무엇을 몰랐는지 지문에서 찾으시오.",
+          "answerText": "시간 가는 줄",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 81,
+              "end": 88
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "감상문에 꼼꼼하게 적은 대상을 지문에서 찾으시오.",
+          "answerText": "자석 자동차의 원리와 느낀 점",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 36,
-              "end": 39
-            },
-            {
-              "paragraphId": "p3",
-              "start": 47,
-              "end": 50
+              "start": 62,
+              "end": 78
             }
           ],
           "scoring": {

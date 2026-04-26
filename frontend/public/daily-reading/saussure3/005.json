@@ -557,44 +557,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "매일 바뀌는 날씨와 달리, 특정한 지역에서 오랫동안 비슷하게 유지되는 날씨의 평균적인 상태는 무엇인가요?",
-          "answerText": "기후",
-          "answerMatchMode": "EXACT",
+          "prompt": "한 지역에서 오래 유지되는 날씨를 설명할 때, 지문은 그것을 어떤 상태라고 했나요? 지문에서 해당 구절을 찾으시오.",
+          "answerText": "날씨의 평균 상태",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 97,
-              "end": 99
-            },
-            {
-              "paragraphId": "p2",
-              "start": 29,
-              "end": 31
-            },
-            {
-              "paragraphId": "p2",
-              "start": 39,
-              "end": 41
-            },
-            {
-              "paragraphId": "p2",
-              "start": 106,
-              "end": 108
-            },
-            {
-              "paragraphId": "p3",
-              "start": 22,
-              "end": 24
-            },
-            {
-              "paragraphId": "p3",
-              "start": 35,
-              "end": 37
-            },
-            {
-              "paragraphId": "p3",
-              "start": 75,
-              "end": 77
+              "start": 86,
+              "end": 95
             }
           ],
           "scoring": {
@@ -606,19 +576,14 @@
         },
         {
           "id": "q2",
-          "prompt": "지구의 적도 주변 지역들처럼 태양 빛을 강하게 받아 일 년 내내 덥고 습한 기후를 부르는 말은 무엇인가요?",
-          "answerText": "열대 기후",
-          "answerMatchMode": "EXACT",
+          "prompt": "적도 주변이 태양 빛을 강하게 받아 어떤 기후인지 나타내는 구절을 지문에서 찾으시오.",
+          "answerText": "덥고 습한 열대 기후",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 26,
+              "start": 20,
               "end": 31
-            },
-            {
-              "paragraphId": "p2",
-              "start": 36,
-              "end": 41
             }
           ],
           "scoring": {
@@ -630,19 +595,41 @@
         },
         {
           "id": "q3",
-          "prompt": "우리나라처럼 덥지도 춥지도 않으며, 봄여름가을겨울 사계절의 변화가 뚜렷하게 나타나는 기후는 무엇인가요?",
-          "answerText": "온대 기후",
-          "answerMatchMode": "EXACT",
+          "prompt": "열대 기후 사람들이 더위를 식히려고 하는 행동 두 가지를 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "얇은 옷을 입고",
+            "해산물을 먹습니다"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 56,
+              "end": 64
+            },
+            {
+              "paragraphId": "p2",
+              "start": 65,
+              "end": 74
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "기후가 깊은 영향을 주는 대상을 나타내는 구절을 지문에서 찾으시오.",
+          "answerText": "사람들의 생활 방식",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 19,
-              "end": 24
-            },
-            {
-              "paragraphId": "p3",
-              "start": 32,
-              "end": 37
+              "start": 79,
+              "end": 89
             }
           ],
           "scoring": {

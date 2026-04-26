@@ -918,93 +918,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '피동'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p1",
-              "start": 47,
-              "end": 49
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p4",
-              "start": 51,
-              "end": 53
-            },
-            {
-              "paragraphId": "p4",
-              "start": 94,
-              "end": 96
-            },
-            {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 2
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "지문에서 '낱말의 앞이나 뒤에 붙어 새로운 뜻을 더하는 말'을 뜻하는 낱말을 모두 찾으시오.",
+          "answerText": "접사",
           "answerMatchMode": "ANY",
-          "answerText": "피동"
-        },
-        {
-          "id": "q2",
-          "prompt": "지문에서 '사동'을 모두 찾으시오.",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p1",
-              "start": 110,
-              "end": 112
-            },
-            {
-              "paragraphId": "p3",
-              "start": 76,
-              "end": 78
-            },
-            {
-              "paragraphId": "p4",
-              "start": 55,
-              "end": 57
-            },
-            {
-              "paragraphId": "p4",
-              "start": 99,
-              "end": 101
-            },
-            {
-              "paragraphId": "p5",
-              "start": 4,
-              "end": 6
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "사동"
-        },
-        {
-          "id": "q3",
-          "prompt": "지문에서 '접사'를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
@@ -1023,53 +939,106 @@
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "지문에서 '목적어 없이도 뜻이 통하는 동사'를 가리키는 낱말을 찾으시오.",
+          "answerText": "자동사",
           "answerMatchMode": "ANY",
-          "answerText": "접사"
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 77,
+              "end": 80
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "지문에서 '동작이 미치는 대상이 있어 목적어를 필요로 하는 동사'를 가리키는 낱말을 찾으시오.",
+          "answerText": "타동사",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 82,
+              "end": 85
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "지문에서 '형식'을 모두 찾으시오.",
+          "prompt": "지문에서 '피동'이 어떤 뜻을 드러내는지 정의한 표현을 찾으시오",
+          "answerText": "피동은 주어가 스스로 어떤 일을 하는 것이 아니라 다른 힘에 의해 그 일을 당하거나 영향을 받는 뜻을 드러내고",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 147,
-              "end": 149
-            },
-            {
-              "paragraphId": "p4",
-              "start": 172,
-              "end": 174
+              "paragraphId": "p1",
+              "start": 47,
+              "end": 108
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "형식"
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "지문에서 '사건'을 모두 찾으시오.",
+          "prompt": "지문에서 '사동'이 어떤 뜻을 드러내는지 정의한 표현을 찾으시오",
+          "answerText": "사동은 주어가 다른 대상에게 어떤 행동을 하게 만드는 뜻을 드러낸다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 46,
-              "end": 48
+              "paragraphId": "p1",
+              "start": 110,
+              "end": 147
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
-          "revealOnWrong": true,
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "지문에서 피동과 사동을 비교해 읽는 기준을 세우면 어떤 결과로 이어지는지 정리한 마지막 문장을 찾으시오",
+          "answerText": "이런 기준을 세우면 비슷해 보이는 표현도 관계의 방향에 따라 분명하게 갈라지고, 문장의 뜻도 더 정확하게 이해할 수 있다",
           "answerMatchMode": "ANY",
-          "answerText": "사건"
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 119,
+              "end": 186
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

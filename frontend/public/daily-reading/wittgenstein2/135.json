@@ -571,12 +571,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단의 내용으로 가장 적절한 것은?",
+          "prompt": "1문단에서 권 씨가 대비한 두 상황을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 254
+              "start": 98,
+              "end": 150
+            },
+            {
+              "paragraphId": "p1",
+              "start": 163,
+              "end": 195
             }
           ],
           "scoring": {
@@ -584,17 +589,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "\"짝을 채우기 싫다 이거지? 좋았어. 그런데 자네가 하는 잡역 일하고 무슨 상관이 있어서 우리 얘기에 이틀 동안이나 관심이 갔지?\" \"물론 상관은 없습니다. 그렇지만 한쪽에선 작업 중에 팔이 뭉텅 잘려져 나간 사람이 있고 그 팔 값을 찾아 주려고 투쟁하는 사람들이 있는 반면에 다른 한쪽에선 몸에 걸치는 옷 때문에 자기 인생을 걸려는 분들도 계시구나 하는 생각이 들어서 그냥 지나칠 수가 없었습니다.\" 그 순간 장상태의 얼굴색이 하얗게 질리는 것 같았다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "작업 중에 팔이 뭉텅 잘려져 나간 사람이 있고 그 팔 값을 찾아 주려고 투쟁하는 사람들이 있는",
+            "몸에 걸치는 옷 때문에 자기 인생을 걸려는 분들도 계시구나"
+          ]
         },
         {
           "id": "q2",
-          "prompt": "2문단의 내용으로 가장 적절한 것은?",
+          "prompt": "그 말에 얼굴색이 하얗게 질리는 것 같았던 인물을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 174
+              "paragraphId": "p1",
+              "start": 230,
+              "end": 233
             }
           ],
           "scoring": {
@@ -603,16 +611,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "체육 대회가 열리는 제1 공장까지 가자면 다른 날보다 더 일찍 나서야 되는데도 여전히 밍기적거리고만 있는 남편 곁에서 아내는 시종 근심스런 눈초리를 거두지 않았다. 제복 때문에 총각 사원 하나가 사표를 던졌다는 소문을 아내는 믿지 않았다. 사표를 제출한 게 아니라 강제로 모가지가 잘린 거라고 굳게 믿고 있었다."
+          "answerText": "장상태"
         },
         {
           "id": "q3",
-          "prompt": "3문단의 내용으로 가장 적절한 것은?",
+          "prompt": "아내가 근심스런 눈초리로 지켜본 대상을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 123
+              "paragraphId": "p2",
+              "start": 59,
+              "end": 61
             }
           ],
           "scoring": {
@@ -621,16 +629,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "\"까짓것 난 필요 없어. 거기 아니면 밥 빌어먹을 데 없는 줄 알아? 세상엔 아직도 유니폼 안 입는 회사가 수두룩하단 말야!\" 거듭되는 재촉에 이렇게 큰소리로 대거리를 했지만 결국 민도식은 뒤늦게나마 집을 나서고 말았다."
+          "answerText": "남편"
         },
         {
           "id": "q4",
-          "prompt": "4문단의 내용으로 가장 적절한 것은?",
+          "prompt": "아내가 총각 사원에게 일어났다고 굳게 믿은 일을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 238
+              "paragraphId": "p2",
+              "start": 148,
+              "end": 161
             }
           ],
           "scoring": {
@@ -639,16 +647,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "시내를 멀리 벗어나서 교외에 널찍하게 자리 잡은 제1 공장 앞에 당도했을 때는 벌써 개회식이 시작된 뒤였다. 공장 정문 철책 너머로 검정 곤색 일색의 운동장을 넘어다보는 순간 민도식은 갑자기 숨이 턱 막혀 옴을 느꼈다. 새로 맞춘 제복으로 단장한 남녀 전 사원이 각 부서별로 군대처럼 질서 정연하게 도열해 서서 연단에 선 지휘자의 손끝을 우러러보며 사가를 제창하기 직전의 예비 운동으로 목청을 가다듬는 헛기침들을 하고 있었다."
+          "answerText": "강제로 모가지가 잘린 거"
         },
         {
           "id": "q5",
-          "prompt": "5문단의 내용으로 가장 적절한 것은?",
+          "prompt": "민도식이 유니폼을 입지 않는 회사가 많다고 큰소리친 직접 발화를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 157
+              "paragraphId": "p3",
+              "start": 39,
+              "end": 69
             }
           ],
           "scoring": {
@@ -657,16 +665,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이윽고 공장 일대를 한바탕 들었다 놓는 우렁찬 노래가 터지기 시작했다. 노래 부르는 사원들 모두가 작당해서 지각한 사람을 야유하는 듯한 기분이 들었다. 검정 곤색의 제복들이 일치단결해 가지고 사복 차림으로 꽁무니에 따라붙으려는 유일한 사람을 완강히 거부하는 듯한 기분에 사로잡혔다."
+          "answerText": "세상엔 아직도 유니폼 안 입는 회사가 수두룩하단 말야!"
         },
         {
           "id": "q6",
-          "prompt": "6문단의 내용으로 가장 적절한 것은?",
+          "prompt": "민도식이 제1 공장 앞에 당도했을 때 개회식은 이미 어떤 상태였는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 201
+              "paragraphId": "p4",
+              "start": 47,
+              "end": 57
             }
           ],
           "scoring": {
@@ -675,7 +683,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "세상 전체가 온통 제복투성이인 가운데 저 혼자만 외돌토리로 떨어져 있는 셈이었다. 자기 한 사람쯤 불참한다 해도 아무렇지도 않게 체육 대회 개회식은 진행될 수 있다는 사실이 민도식을 무척 화나면서도 그지없이 외롭게 만들었다. 정문으로 들어서지도 못하고 그렇다고 뒤돌아서서 나오지도 못한 채 그는 일단 멈춘 자리에 붙박여 버린 듯 언제까지고 움직일 줄을 몰랐다."
+          "answerText": "개회식이 시작된 뒤"
+        },
+        {
+          "id": "q7",
+          "prompt": "남녀 전 사원이 정렬한 모습을 군대에 빗댄 표현을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 154,
+              "end": 170
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "군대처럼 질서 정연하게 도열해"
+        },
+        {
+          "id": "q8",
+          "prompt": "세상 전체가 제복투성이인 가운데 민도식이 혼자 떨어져 있음을 나타내는 말을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 27,
+              "end": 31
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "외돌토리"
         }
       ]
     }

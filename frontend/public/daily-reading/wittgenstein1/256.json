@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "그런데 지금 원고는 무엇 청중이 왜 이 발표를 들어야 하는지 바로 느끼기 어려워?",
+          "prompt": "전체 계획을 먼저 대강 살핀다는 뜻으로 쓰인 단어를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 47,
-              "end": 61
+              "start": 242,
+              "end": 244
             }
           ],
           "scoring": {
@@ -585,16 +585,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "첫머리부터 예산표가 나와서"
+          "answerText": "개관"
         },
         {
           "id": "q2",
-          "prompt": "핵심 개념은 무엇인가요?",
+          "prompt": "민서가 도입에서 먼저 제시하자고 한 불편 의견을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 179,
-              "end": 195
+              "paragraphId": "p1",
+              "start": 102,
+              "end": 125
             }
           ],
           "scoring": {
@@ -603,34 +603,53 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "작년 문제 세 가지-올해 개선"
+          "answerText": "지난해 축제 뒤에 나온 불편 의견 두세 개"
         },
         {
           "id": "q3",
-          "prompt": "주요 소재는 무엇인가요?",
+          "prompt": "소연이 내일 발표를 듣는 사람으로 든 대상을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 46,
+              "end": 51
+            },
+            {
+              "paragraphId": "p2",
+              "start": 57,
+              "end": 63
+            },
+            {
+              "paragraphId": "p2",
+              "start": 66,
+              "end": 73
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "학생 대표",
+            "교감 선생님",
+            "행정실 주무관"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "준호가 첫 장과 둘째 장에서 대응시키자고 한 내용을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 14,
               "end": 26
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "기다림, 혼잡, 쓰레기"
-        },
-        {
-          "id": "q4",
-          "prompt": "중요한 기준은 무엇인가요?",
-          "answerRanges": [
+            },
             {
-              "paragraphId": "p4",
-              "start": 28,
-              "end": 37
+              "paragraphId": "p3",
+              "start": 54,
+              "end": 84
             }
           ],
           "scoring": {
@@ -638,17 +657,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "협조 부탁드립니다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "기다림, 혼잡, 쓰레기",
+            "입장 동선 조정, 부스 배치 재편, 분리수거 인력 확대"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "민서: 그 순서면 발표를 듣는 사람도 '무엇을 결정해야 하는지'를 따라가기 쉬울 것 같아?",
+          "prompt": "같은 자료를 두 번 말하는 느낌이 들면 어떤 결과가 생길 수 있다고 했는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 236,
-              "end": 252
+              "paragraphId": "p3",
+              "start": 157,
+              "end": 173
             }
           ],
           "scoring": {
@@ -657,16 +679,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "왜-무엇을-어떻게-그래서 무엇"
+          "answerText": "발표 속도가 늘어질 수 있거든"
         },
         {
           "id": "q6",
-          "prompt": "문단의 초점은 무엇인가요?",
+          "prompt": "소연이 반복 자체보다 문제 삼은 것을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 153,
-              "end": 167
+              "paragraphId": "p3",
+              "start": 194,
+              "end": 209
             }
           ],
           "scoring": {
@@ -675,7 +697,57 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이렇게 열면 되겠지? 소연"
+          "answerText": "반복의 역할이 겹치면 문제야"
+        },
+        {
+          "id": "q7",
+          "prompt": "민서가 결론에서 분명히 말해야 한다고 든 결정 사항의 예를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 153,
+              "end": 159
+            },
+            {
+              "paragraphId": "p4",
+              "start": 161,
+              "end": 172
+            },
+            {
+              "paragraphId": "p4",
+              "start": 174,
+              "end": 184
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "학생회 승인",
+            "안전 인력 추가 협의",
+            "환경부스 예산 배정"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "도입과 결론이 서로 호응하면 발표의 효과가 어떻게 된다고 했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 305,
+              "end": 322
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "발표의 효과가 훨씬 또렷해지겠다"
         }
       ]
     }

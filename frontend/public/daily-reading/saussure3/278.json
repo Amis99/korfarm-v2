@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "아기를 잡아먹으려 ( )봄.",
-          "answerText": "엿",
-          "answerMatchMode": "EXACT",
+          "prompt": "호랑이가 민가로 내려올 때의 상태를 본문에서 찾으시오.",
+          "answerText": "배가 무척 고픈",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 43,
-              "end": 44
+              "start": 0,
+              "end": 8
             }
           ],
           "scoring": {
@@ -869,14 +869,14 @@
         },
         {
           "id": "q2",
-          "prompt": "호랑이는 등이 ( )웠습니다.",
-          "answerText": "무거",
-          "answerMatchMode": "EXACT",
+          "prompt": "엄마가 곶감이라고 말하자 아기의 울음이 어떻게 되었는지 본문에서 찾으시오.",
+          "answerText": "울음이 뚝 그침",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 59,
-              "end": 61
+              "paragraphId": "p1",
+              "start": 70,
+              "end": 78
             }
           ],
           "scoring": {
@@ -888,14 +888,33 @@
         },
         {
           "id": "q3",
-          "prompt": "( ) 동화를 읽고 배워요.",
-          "answerText": "전래",
-          "answerMatchMode": "EXACT",
+          "prompt": "호랑이와 소 도둑이 산속으로 달려갈 때의 마음을 본문에서 찾으시오.",
+          "answerText": "서로 무서워하며",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 29,
+              "end": 37
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "웃음과 교훈을 함께 얻게 하는 읽을거리를 본문에서 찾으시오.",
+          "answerText": "전래 동화",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 55,
-              "end": 57
+              "end": 60
             }
           ],
           "scoring": {

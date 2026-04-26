@@ -563,44 +563,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리나라 강원도에 있으며, 뾰족하고 커다란 바위가 많고 산에 눈이 오랫동안 하얗게 쌓여 있어서 이름이 붙여진 이 아름다운 산은 어디인가요?",
-          "answerText": "설악산",
-          "answerMatchMode": "EXACT",
+          "prompt": "설악산이라는 이름이 붙은 까닭을 설명하는 지문 속 구절을 찾으시오.",
+          "answerText": "눈이 오랫동안 녹지 않고 하얗게 쌓여 있어서",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 24,
-              "end": 27
-            },
-            {
-              "paragraphId": "p1",
-              "start": 35,
-              "end": 38
-            },
-            {
-              "paragraphId": "p1",
-              "start": 142,
-              "end": 145
-            },
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p2",
-              "start": 168,
-              "end": 171
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p3",
-              "start": 154,
-              "end": 157
+              "start": 40,
+              "end": 64
             }
           ],
           "scoring": {
@@ -612,9 +582,28 @@
         },
         {
           "id": "q2",
-          "prompt": "설악산에 있는 바위 중 하나로, 손가락으로 살짝만 밀어도 까딱까딱 흔들거리지만 절대 아래로 떨어지지는 않는 이 신기한 바위는 무엇인가요?",
+          "prompt": "커다란 바위들이 병풍처럼 넓게 펼쳐진 곳의 이름을 찾으시오.",
+          "answerText": "울산바위",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 49,
+              "end": 53
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "손가락으로 살짝만 밀어도 흔들거리지만 절대 아래로 떨어지지 않는 바위의 이름을 찾으시오.",
           "answerText": "흔들바위",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -630,34 +619,24 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "계절이 바뀌어 가을이 되면 나뭇잎이 붉거나 노랗게 변하는 현상으로, 설악산을 알록달록 아름답게 덮어주는 이것은 무엇인가요?",
-          "answerText": "단풍",
-          "answerMatchMode": "EXACT",
+          "id": "q4",
+          "prompt": "설악산의 계절별 모습 중 봄과 여름에 나타나는 자연물을 모두 찾으시오.",
+          "answerText": "예쁜 꽃, 시원한 맑은 계곡물",
+          "answerTexts": [
+            "예쁜 꽃",
+            "시원한 맑은 계곡물"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 86,
-              "end": 88
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "설악산에서 힘든 길을 걷지 않고 공중에 매달린 밧줄을 따라 산 위로 편안하게 올라가며 풍경을 감상할 수 있게 해주는 이 탈것은 무엇인가요?",
-          "answerText": "케이블카",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
+              "start": 37,
+              "end": 41
+            },
             {
-              "paragraphId": "p2",
-              "start": 159,
-              "end": 163
+              "paragraphId": "p3",
+              "start": 52,
+              "end": 62
             }
           ],
           "scoring": {

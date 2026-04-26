@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "입속에 있는 단단한 것?",
+          "prompt": "글에서 우리의 입속에 있어 음식을 씹는 데 꼭 필요하다고 한 한 글자 낱말을 찾아 써 보세요",
           "answerText": "이",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -465,34 +465,14 @@
         },
         {
           "id": "q2",
-          "prompt": "입속에 넣어서 먹는 것?",
-          "answerText": "음식",
-          "answerMatchMode": "EXACT",
+          "prompt": "이를 건강하게 지키려면 밥을 먹은 뒤에 반드시 해야 한다고 한, 솔로 이를 깨끗이 닦는 일을 가리키는 세 글자 낱말을 찾아 써 보세요",
+          "answerText": "양치질",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 9,
-              "end": 11
-            },
-            {
-              "paragraphId": "p1",
-              "start": 44,
-              "end": 46
-            },
-            {
-              "paragraphId": "p1",
-              "start": 94,
-              "end": 96
-            },
-            {
               "paragraphId": "p2",
-              "start": 47,
-              "end": 49
-            },
-            {
-              "paragraphId": "p2",
-              "start": 103,
-              "end": 105
+              "start": 26,
+              "end": 29
             }
           ],
           "scoring": {
@@ -504,14 +484,33 @@
         },
         {
           "id": "q3",
-          "prompt": "솔로 이를 닦는 일?",
-          "answerText": "양치질",
-          "answerMatchMode": "EXACT",
+          "prompt": "이가 맛있는 음식을 잘게 부수어 잘되도록 도와준다고 한, 음식이 몸에서 받아들여지도록 변하는 과정을 가리키는 두 글자 낱말을 글에서 찾아 써 보세요",
+          "answerText": "소화",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 55,
+              "end": 57
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "이 사이에 낀 음식 찌꺼기를 닦아내지 않으면 이가 썩어서 무엇이 생길 수 있다고 하였는지 두 글자로 써 보세요",
+          "answerText": "구멍",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 26,
-              "end": 29
+              "start": 75,
+              "end": 77
             }
           ],
           "scoring": {

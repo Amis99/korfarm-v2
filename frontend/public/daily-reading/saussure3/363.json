@@ -850,24 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "지구는 ( )와 같습니다.",
-          "answerText": "자석",
-          "answerMatchMode": "EXACT",
+          "prompt": "지구를 무엇과 같다고 했는지 찾으시오.",
+          "answerText": "커다란 자석",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 18,
+              "start": 14,
               "end": 20
-            },
-            {
-              "paragraphId": "p2",
-              "start": 4,
-              "end": 6
-            },
-            {
-              "paragraphId": "p2",
-              "start": 99,
-              "end": 101
             }
           ],
           "scoring": {
@@ -879,14 +869,22 @@
         },
         {
           "id": "q2",
-          "prompt": "지구 내부에 ( )가 흘러요.",
-          "answerText": "전류",
-          "answerMatchMode": "EXACT",
+          "prompt": "지구가 자석처럼 작용하는 이유와 만드는 것을 모두 찾으시오.",
+          "answerTexts": [
+            "지구 내부에 흐르는 전류",
+            "자기장"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 65,
+              "start": 54,
               "end": 67
+            },
+            {
+              "paragraphId": "p1",
+              "start": 69,
+              "end": 72
             }
           ],
           "scoring": {
@@ -898,14 +896,41 @@
         },
         {
           "id": "q3",
-          "prompt": "우주 ( )으로부터 보호해요.",
-          "answerText": "위험",
-          "answerMatchMode": "EXACT",
+          "prompt": "보이지 않는 힘이 무엇으로부터 우리를 보호하는지 찾으시오.",
+          "answerText": "우주의 위험으로부터 우리를 보호함",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 98,
-              "end": 100
+              "start": 94,
+              "end": 112
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "사회적 관점에서 배운 가치와 찾아야 할 방향을 모두 찾으시오.",
+          "answerTexts": [
+            "협력하는 가치",
+            "올바른 삶의 방향"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 42,
+              "end": 49
+            },
+            {
+              "paragraphId": "p2",
+              "start": 67,
+              "end": 76
             }
           ],
           "scoring": {

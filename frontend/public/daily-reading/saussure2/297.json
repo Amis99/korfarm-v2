@@ -562,39 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "외출하기 전 텔레비전이나 스마트폰으로 날씨를 미리 알아보는 것을 '일기 OO' 또는 '날씨 OO'라고 해요. OO에 들어갈 말은 무엇인가요?",
-          "answerText": "예보",
-          "answerMatchMode": "EXACT",
+          "prompt": "외출하기 전 날씨를 미리 알아보는 것을 무엇이라고 하는지 지문에서 찾으시오.",
+          "answerText": "'일기 예보' 또는 '날씨 예보'",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 45,
-              "end": 47
-            },
-            {
-              "paragraphId": "p1",
-              "start": 56,
-              "end": 58
-            },
-            {
-              "paragraphId": "p1",
-              "start": 69,
-              "end": 71
-            },
-            {
-              "paragraphId": "p2",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p3",
-              "start": 3,
-              "end": 5
-            },
-            {
-              "paragraphId": "p3",
-              "start": 125,
-              "end": 127
+              "start": 41,
+              "end": 59
             }
           ],
           "scoring": {
@@ -606,14 +581,14 @@
         },
         {
           "id": "q2",
-          "prompt": "구름, 바람의 방향, 공기의 온도 등을 관찰하여 날씨 예보를 만드는 곳은 어디인가요?",
-          "answerText": "기상청",
-          "answerMatchMode": "EXACT",
+          "prompt": "날씨를 미리 알면 우리는 하루를 어떻게 준비할 수 있는지 지문에서 찾으시오.",
+          "answerText": "편리하고 안전하게 준비할 수 있답니다",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 20,
-              "end": 23
+              "paragraphId": "p1",
+              "start": 141,
+              "end": 161
             }
           ],
           "scoring": {
@@ -625,14 +600,28 @@
         },
         {
           "id": "q3",
-          "prompt": "우주에 떠서 날씨 정보를 모아 기상청으로 보내주는 이 기계의 이름은 무엇인가요?",
-          "answerText": "인공위성",
-          "answerMatchMode": "EXACT",
+          "prompt": "기상청에서 일하는 사람들이 꼼꼼하게 관찰하는 것을 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "하늘의 구름",
+            "바람의 방향",
+            "공기의 온도"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 101,
-              "end": 105
+              "start": 41,
+              "end": 47
+            },
+            {
+              "paragraphId": "p2",
+              "start": 49,
+              "end": 55
+            },
+            {
+              "paragraphId": "p2",
+              "start": 57,
+              "end": 63
             }
           ],
           "scoring": {
@@ -644,14 +633,22 @@
         },
         {
           "id": "q4",
-          "prompt": "비가 온다는 날씨 예보 소식을 들으면 비를 맞지 않기 위해 미리 챙길 수 있는 것은 무엇인가요?",
-          "answerText": "우산",
-          "answerMatchMode": "EXACT",
+          "prompt": "날씨 예보를 듣고 안전하게 일을 하는 사람들을 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "농부 아저씨",
+            "배를 타는 어부 아저씨들"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 47,
-              "end": 49
+              "start": 99,
+              "end": 105
+            },
+            {
+              "paragraphId": "p3",
+              "start": 107,
+              "end": 120
             }
           ],
           "scoring": {

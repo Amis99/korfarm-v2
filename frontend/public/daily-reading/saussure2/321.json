@@ -562,34 +562,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "전 세계 사람들이 축구로 하나가 되며 4년마다 열리는 이 큰 축제는 무엇인가요?",
-          "answerText": "월드컵",
-          "answerMatchMode": "EXACT",
+          "prompt": "월드컵이 어떤 축제인지 설명한 첫 문장을 지문에서 찾으시오.",
+          "answerText": "전 세계 사람들이 축구로 하나가 되는 아주 커다란 축제가 있어요.",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 41,
-              "end": 44
-            },
-            {
-              "paragraphId": "p1",
-              "start": 51,
-              "end": 54
-            },
-            {
-              "paragraphId": "p2",
               "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p3",
-              "start": 109,
-              "end": 112
+              "end": 36
             }
           ],
           "scoring": {
@@ -601,19 +581,14 @@
         },
         {
           "id": "q2",
-          "prompt": "월드컵에서 우승한 나라가 받는 황금으로 만들어진 멋진 상은 무엇인가요?",
-          "answerText": "트로피",
-          "answerMatchMode": "EXACT",
+          "prompt": "월드컵이 몇 년마다 열리고 어떤 대회인지 설명한 문장을 지문에서 찾으시오.",
+          "answerText": "월드컵은 4년마다 한 번씩 열리는 세계에서 가장 큰 축구 대회예요.",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 31,
-              "end": 34
-            },
-            {
-              "paragraphId": "p2",
+              "paragraphId": "p1",
               "start": 51,
-              "end": 54
+              "end": 88
             }
           ],
           "scoring": {
@@ -625,14 +600,14 @@
         },
         {
           "id": "q3",
-          "prompt": "축구장에 나선 선수들은 서로 힘을 합쳐 다른 선수에게 공을 이어줍니다. 공을 이어주는 것을 무엇이라고 하나요?",
-          "answerText": "패스",
-          "answerMatchMode": "EXACT",
+          "prompt": "선수들이 트로피를 차지하기 위해 어떻게 훈련하는지 지문에서 찾으시오.",
+          "answerText": "매일 땀을 흘리며 열심히 훈련한답니다.",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 115,
-              "end": 117
+              "start": 64,
+              "end": 85
             }
           ],
           "scoring": {
@@ -644,14 +619,22 @@
         },
         {
           "id": "q4",
-          "prompt": "월드컵을 통해 세계 여러 나라 사람들이 싸우지 않고 사이좋게 어울립니다. 이런 상태를 뜻하는 말은 무엇인가요?",
-          "answerText": "평화",
-          "answerMatchMode": "EXACT",
+          "prompt": "월드컵의 가장 큰 목적과 함께 응원할 때 느낄 수 있는 것을 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "세계 여러 나라 사람들이 축구를 통해 서로 친구가 되고, 평화롭게 어울리는 것",
+            "세계가 하나로 연결되는 것"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 72,
-              "end": 74
+              "start": 40,
+              "end": 83
+            },
+            {
+              "paragraphId": "p3",
+              "start": 126,
+              "end": 140
             }
           ],
           "scoring": {

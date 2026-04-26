@@ -1057,7 +1057,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "김 첨지가 하루 종일 벌어들인 돈은 얼마인가요?",
+          "prompt": "김 첨지가 하루 종일 벌어들인 돈을 찾으시오.",
           "answerText": "팔십 전",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1075,19 +1075,14 @@
         },
         {
           "id": "q2",
-          "prompt": "결말부에서 가난한 자의 꿈을 상징하는 음식은 무엇인가요?",
-          "answerText": "설렁탕",
+          "prompt": "가장 운이 좋다고 믿었던 날이 어떤 날로 뒤바뀌었는지 찾으시오.",
+          "answerText": "사랑하는 사람을 잃은 가장 비극적인 날",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 31,
-              "end": 34
-            },
-            {
-              "paragraphId": "p3",
-              "start": 168,
-              "end": 171
+              "paragraphId": "p1",
+              "start": 190,
+              "end": 211
             }
           ],
           "scoring": {
@@ -1098,25 +1093,7 @@
         },
         {
           "id": "q3",
-          "prompt": "김 첨지가 남긴 마지막 대사의 핵심 문장은 무엇인가요?",
-          "answerText": "운수가 좋더니만",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 27,
-              "end": 35
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "작품이 비판한 사회 구조의 이름은 무엇인가요?",
+          "prompt": "김 첨지의 비극이 기인한다고 설명한 사회 구조를 찾으시오.",
           "answerText": "식민지 자본주의 체제의 구조적 모순",
           "answerMatchMode": "ANY",
           "answerRanges": [
@@ -1133,15 +1110,33 @@
           "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "결론에서 이 작품의 묘사 방식으로 제시된 기법은 무엇인가요?",
-          "answerText": "사실주의적 기법",
+          "id": "q4",
+          "prompt": "결말부에서 비극적 매개체로 제시된 음식을 찾으시오.",
+          "answerText": "식어버린 설렁탕",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 35,
-              "end": 43
+              "paragraphId": "p3",
+              "start": 26,
+              "end": 34
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "김 첨지의 마지막 대사가 보여 주는 수사법을 찾으시오.",
+          "answerText": "반어법(Irony)",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 65,
+              "end": 75
             }
           ],
           "scoring": {

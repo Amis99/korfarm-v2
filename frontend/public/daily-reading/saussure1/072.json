@@ -552,28 +552,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "기분을 ( )하게 설명해요.",
-          "answerText": "차분",
-          "answerMatchMode": "EXACT",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 64,
-              "end": 66
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 10,
-            "wrongDeltaSec": -5,
-            "eliminateWrongChoice": false
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q2",
-          "prompt": "친구의 말도 ( )합니다.",
+          "prompt": "친구의 말을 귀 기울여 잘 듣는 일을 가리키는 단어를 지문에서 찾아 보세요.",
           "answerText": "경청",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -589,15 +570,58 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "예쁜 ( )을 쌓아 보아요.",
-          "answerText": "추억",
-          "answerMatchMode": "EXACT",
+          "id": "q2",
+          "prompt": "친구와 다툰 뒤 서로 잘못을 풀고 다시 사이좋게 지내는 일을 가리키는 단어를 지문에서 찾아 보세요.",
+          "answerText": "화해",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 139,
-              "end": 141
+              "start": 59,
+              "end": 61
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "지문에서 갈등을 잘 해결하기 위해 필요한 두 가지 태도를 찾아 보세요. (자신의 것을 미루어 친구에게 주는 일과 다른 사람을 생각해 주는 일)",
+          "answerText": "양보, 배려",
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 88,
+              "end": 90
+            },
+            {
+              "paragraphId": "p2",
+              "start": 93,
+              "end": 95
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "지문에 따르면 잘못한 일에 대해 미안한 마음을 진심으로 전하는 행동을 가리키는 단어를 찾아 보세요.",
+          "answerText": "사과",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 119,
+              "end": 121
             }
           ],
           "scoring": {

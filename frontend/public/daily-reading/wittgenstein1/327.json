@@ -571,12 +571,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "중심 대상은 무엇인가요?",
+          "prompt": "1문단에서 두 체험 공간을 각각 소개한 어구를 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 136,
-              "end": 149
+              "start": 38,
+              "end": 52
+            },
+            {
+              "paragraphId": "p1",
+              "start": 53,
+              "end": 71
             }
           ],
           "scoring": {
@@ -584,37 +589,30 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "낫다고 단정하기는 어렵지"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "하나는 전통 공예 마당이고",
+            "다른 하나는 미래 기술 체험관이다"
+          ]
         },
         {
           "id": "q2",
-          "prompt": "핵심 개념은 무엇인가요?",
+          "prompt": "전통 공예 마당에서 손으로 직접 해 보는 활동의 예를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 34,
-              "end": 36
+              "paragraphId": "p2",
+              "start": 10,
+              "end": 15
             },
             {
               "paragraphId": "p2",
-              "start": 71,
-              "end": 73
+              "start": 17,
+              "end": 22
             },
             {
               "paragraphId": "p2",
-              "start": 108,
-              "end": 110
-            },
-            {
-              "paragraphId": "p2",
-              "start": 172,
-              "end": 174
-            },
-            {
-              "paragraphId": "p4",
-              "start": 92,
-              "end": 94
+              "start": 24,
+              "end": 29
             }
           ],
           "scoring": {
@@ -622,17 +620,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "있다"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "부채 그림",
+            "매듭 팔찌",
+            "목판 찍기"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "미래 기술 체험관은 드론 조종, 가상 현실 안전 교육, 간단한 센서 조립처럼 장비를 써 무엇?",
+          "prompt": "전통 공예 마당에서 줄이 길어도 금방 빠지는 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 49,
-              "end": 60
+              "paragraphId": "p2",
+              "start": 75,
+              "end": 86
             }
           ],
           "scoring": {
@@ -641,16 +643,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "보는 활동이 중심이다"
+          "answerText": "체험 시간이 짧은 편"
         },
         {
           "id": "q4",
-          "prompt": "중요한 기준은 무엇인가요?",
+          "prompt": "미래 기술 체험관에서 장비를 써 보는 활동의 예를 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 71,
-              "end": 85
+              "paragraphId": "p3",
+              "start": 11,
+              "end": 16
+            },
+            {
+              "paragraphId": "p3",
+              "start": 18,
+              "end": 29
+            },
+            {
+              "paragraphId": "p3",
+              "start": 31,
+              "end": 40
             }
           ],
           "scoring": {
@@ -658,17 +670,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "중학생이나 고등학생이 관심"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "드론 조종",
+            "가상 현실 안전 교육",
+            "간단한 센서 조립"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "무엇 마당을 먼저 추천하려고 한다?",
+          "prompt": "미래 기술 체험관에서 현장에서 바로 들어가기 어려운 경우가 있는 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 12
+              "paragraphId": "p3",
+              "start": 107,
+              "end": 122
             }
           ],
           "scoring": {
@@ -677,16 +693,62 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "개인적으로는 전통 공예"
+          "answerText": "예약을 먼저 해야 하는 체험"
         },
         {
           "id": "q6",
-          "prompt": "문단의 초점은 무엇인가요?",
+          "prompt": "전통 공예 마당이 오기 좋다고 한 방문객을 찾으시오.",
           "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 30,
+              "end": 39
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "가족 단위 방문객"
+        },
+        {
+          "id": "q7",
+          "prompt": "안내 글에서 결과물을 가져가고 싶을 때의 선택 기준을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 173,
+              "end": 195
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "체험 결과물을 가져가고 싶으면 공예 마당"
+        },
+        {
+          "id": "q8",
+          "prompt": "안내문에서 먼저 말하고, 표처럼 보이게 쓰고, 마지막에 밝히라고 한 내용을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 114,
+              "end": 127
+            },
             {
               "paragraphId": "p6",
               "start": 133,
               "end": 145
+            },
+            {
+              "paragraphId": "p6",
+              "start": 149,
+              "end": 170
             }
           ],
           "scoring": {
@@ -694,8 +756,12 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "차이점을 표처럼 보이게"
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "두 공간의 공통점을 짧게",
+            "차이점을 표처럼 보이게",
+            "마지막에 추천 대상을 조금 더 또렷하게"
+          ]
         }
       ]
     }

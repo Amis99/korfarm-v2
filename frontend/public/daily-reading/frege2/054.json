@@ -1038,14 +1038,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "국가의 경제 규모와 성장 속도를 파악하는 대표 지표는 무엇인가요?",
-          "answerText": "국내총생산",
+          "prompt": "국내총생산의 정의를 찾으시오.",
+          "answerText": "일정 기간 동안 한 나라 안에서 생산된 모든 최종 생산물의 시장 가치를 합산한 것",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 5
+              "start": 12,
+              "end": 57
             }
           ],
           "scoring": {
@@ -1056,14 +1056,14 @@
         },
         {
           "id": "q2",
-          "prompt": "GDP가 반영하지 못하는 가정 내 활동의 대표 사례로 든 것은 무엇인가요?",
-          "answerText": "가사 노동",
+          "prompt": "GDP가 반영하는 가치의 범위를 찾으시오.",
+          "answerText": "시장에서 거래되는 물건과 서비스의 가치만",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 68,
-              "end": 73
+              "paragraphId": "p1",
+              "start": 202,
+              "end": 224
             }
           ],
           "scoring": {
@@ -1074,14 +1074,28 @@
         },
         {
           "id": "q3",
-          "prompt": "GDP가 담아내지 못하는 사회 문제 가운데 부의 나뉨과 관련된 것은 무엇인가요?",
-          "answerText": "소득의 분배 상태",
-          "answerMatchMode": "ANY",
+          "prompt": "시장 밖에서 이루어져 GDP 통계에서 제외되는 활동의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "가사 노동",
+            "자녀 양육",
+            "자원봉사 활동"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 8,
-              "end": 17
+              "paragraphId": "p2",
+              "start": 68,
+              "end": 73
+            },
+            {
+              "paragraphId": "p2",
+              "start": 76,
+              "end": 81
+            },
+            {
+              "paragraphId": "p2",
+              "start": 87,
+              "end": 94
             }
           ],
           "scoring": {
@@ -1092,14 +1106,22 @@
         },
         {
           "id": "q4",
-          "prompt": "국민들의 주관적인 만족도를 측정하는 새 지표는 무엇인가요?",
-          "answerText": "행복 지수",
-          "answerMatchMode": "ANY",
+          "prompt": "삶의 질을 떨어뜨리지만 GDP를 높이는 사건의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "교통사고",
+            "질병"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 82,
-              "end": 87
+              "paragraphId": "p2",
+              "start": 165,
+              "end": 169
+            },
+            {
+              "paragraphId": "p2",
+              "start": 189,
+              "end": 191
             }
           ],
           "scoring": {
@@ -1110,10 +1132,18 @@
         },
         {
           "id": "q5",
-          "prompt": "환경적 가치를 포함해 GDP를 보완하려는 지표는 무엇인가요?",
-          "answerText": "녹색 GDP",
-          "answerMatchMode": "ANY",
+          "prompt": "GDP를 보완하거나 대체할 수 있는 새로운 행복 지표의 예를 모두 찾으시오.",
+          "answerTexts": [
+            "행복 지수",
+            "녹색 GDP"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 82,
+              "end": 87
+            },
             {
               "paragraphId": "p4",
               "start": 103,

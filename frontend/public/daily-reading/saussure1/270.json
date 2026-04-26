@@ -435,9 +435,28 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "물건을 사고파는 활기찬 곳?",
+          "prompt": "글쓴이가 시장 이야기를 들려주려고 사랑하는 마음을 담아 편지를 쓴 친구의 이름이 무엇인지 본문에서 찾아 보세요",
+          "answerText": "지호",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 5,
+              "end": 7
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "글쓴이가 엄마와 함께 다녀와서 지호에게 자랑하고 싶어 한 전통 무엇인지 본문에서 한 단어로 찾아 보세요",
           "answerText": "시장",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -473,15 +492,15 @@
           "revealOnWrong": true
         },
         {
-          "id": "q2",
-          "prompt": "들려주고 싶은 재미난 것?",
-          "answerText": "이야기",
-          "answerMatchMode": "EXACT",
+          "id": "q3",
+          "prompt": "시장에서 먹었던 달콤한 음식 가운데 지금까지 먹어본 것 중에 최고로 맛있었던 것이 무엇인지 본문에서 찾아 보세요",
+          "answerText": "호떡",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 52,
-              "end": 55
+              "paragraphId": "p2",
+              "start": 16,
+              "end": 18
             }
           ],
           "scoring": {
@@ -492,10 +511,10 @@
           "revealOnWrong": true
         },
         {
-          "id": "q3",
-          "prompt": "잠시 구경하러 나가는 일?",
+          "id": "q4",
+          "prompt": "다음 기회에 지호와 함께 시장으로 가자고 한 짧은 외출이 무엇인지 본문에서 한 단어로 찾아 보세요",
           "answerText": "나들이",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",

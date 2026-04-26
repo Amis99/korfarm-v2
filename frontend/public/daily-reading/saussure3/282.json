@@ -850,14 +850,22 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "줄을 서서 ( ) 기다립니다.",
-          "answerText": "차례차례",
-          "answerMatchMode": "EXACT",
+          "prompt": "급식실에 갈 때 복도와 줄에서 지켜야 할 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "복도에서 뛰지 않고",
+            "차례차례 줄을 서서 기다림"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
+              "start": 24,
+              "end": 34
+            },
+            {
+              "paragraphId": "p1",
               "start": 35,
-              "end": 39
+              "end": 49
             }
           ],
           "scoring": {
@@ -869,14 +877,22 @@
         },
         {
           "id": "q2",
-          "prompt": "음식을 ( ) 맛있게 먹어요.",
-          "answerText": "골고루",
-          "answerMatchMode": "EXACT",
+          "prompt": "줄을 기다릴 때 하지 말아야 할 행동을 모두 찾으시오.",
+          "answerTexts": [
+            "앞 친구를 밀거나",
+            "큰 소리로 떠들지 않습니다"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 54,
-              "end": 57
+              "paragraphId": "p1",
+              "start": 51,
+              "end": 60
+            },
+            {
+              "paragraphId": "p1",
+              "start": 61,
+              "end": 75
             }
           ],
           "scoring": {
@@ -888,14 +904,49 @@
         },
         {
           "id": "q3",
-          "prompt": "식판을 ( ) 정리합니다.",
-          "answerText": "깨끗이",
-          "answerMatchMode": "EXACT",
+          "prompt": "식판을 들고 걸을 때와 자리에 앉을 때 지켜야 할 일을 모두 찾으시오.",
+          "answerTexts": [
+            "쏟아지지 않게 주의함",
+            "정해진 자리에 앉아"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 13,
+              "end": 24
+            },
+            {
+              "paragraphId": "p2",
+              "start": 26,
+              "end": 36
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "다 먹은 뒤 정리해야 할 것을 모두 찾으시오.",
+          "answerTexts": [
+            "빈 식판을 깨끗이 정리합니다",
+            "남은 음식물은 정해진 곳에 조심히 버림"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 15,
-              "end": 18
+              "start": 9,
+              "end": 24
+            },
+            {
+              "paragraphId": "p3",
+              "start": 26,
+              "end": 47
             }
           ],
           "scoring": {

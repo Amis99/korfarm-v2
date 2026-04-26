@@ -396,9 +396,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "냇가에 있는 단단한 것?",
+          "prompt": "햇빛을 받아 무지개색으로 빛나는 신비로운 이 돌의 이름은 무엇인가요?",
           "answerText": "개울돌",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -430,14 +430,14 @@
         },
         {
           "id": "q2",
-          "prompt": "귀중한 가치가 있는 것?",
-          "answerText": "보물",
-          "answerMatchMode": "EXACT",
+          "prompt": "\"반짝이는 ○○처럼 행복하게 빛났습니다\"에서 하루를 빗댄 표현을 찾아보세요",
+          "answerText": "보석",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 133,
-              "end": 135
+              "paragraphId": "p2",
+              "start": 142,
+              "end": 144
             }
           ],
           "scoring": {
@@ -449,14 +449,53 @@
         },
         {
           "id": "q3",
-          "prompt": "들려주는 재미있는 말?",
-          "answerText": "이야기",
-          "answerMatchMode": "EXACT",
+          "prompt": "개울가에서 반짝이는 돌을 발견한 주인공은 누구인지 살펴보세요",
+          "answerText": "하양이",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 25,
+              "end": 28
+            },
+            {
+              "paragraphId": "p1",
+              "start": 61,
+              "end": 64
+            },
+            {
+              "paragraphId": "p1",
+              "start": 116,
+              "end": 119
+            },
+            {
+              "paragraphId": "p2",
+              "start": 54,
+              "end": 57
+            },
+            {
+              "paragraphId": "p2",
+              "start": 125,
+              "end": 128
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "개울돌과 단짝이 된 덕분에 하양이의 하루는 어떤 모습으로 빛났는지 살펴보세요",
+          "answerText": "행복하게",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 77,
-              "end": 80
+              "start": 147,
+              "end": 151
             }
           ],
           "scoring": {

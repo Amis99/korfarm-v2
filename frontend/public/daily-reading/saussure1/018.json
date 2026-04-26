@@ -406,14 +406,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "바람이 ( )을 불어요.",
-          "answerText": "휘파람",
-          "answerMatchMode": "EXACT",
+          "prompt": "이 시에서 바람이나 민들레를 사람처럼 표현한 부분(의인법)을 모두 찾아 보세요.",
+          "answerText": "휘파람을 불어요, 고개를 숙여요",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 16,
-              "end": 19
+              "end": 24
+            },
+            {
+              "paragraphId": "p2",
+              "start": 19,
+              "end": 26
             }
           ],
           "scoring": {
@@ -425,14 +430,14 @@
         },
         {
           "id": "q2",
-          "prompt": "나뭇잎이 ( ) 대답해요.",
-          "answerText": "쏴아쏴아",
-          "answerMatchMode": "EXACT",
+          "prompt": "바람의 인사에 고개를 숙이는 꽃이 무엇인지 지문에서 찾아 보세요.",
+          "answerText": "민들레",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 39,
-              "end": 43
+              "paragraphId": "p2",
+              "start": 6,
+              "end": 9
             }
           ],
           "scoring": {
@@ -444,14 +449,33 @@
         },
         {
           "id": "q3",
-          "prompt": "민들레가 고개를 ( )어요.",
-          "answerText": "숙여",
-          "answerMatchMode": "EXACT",
+          "prompt": "바람이 향기를 싣고 어디로 날아간다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "마을로 멀리 날아가요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 23,
-              "end": 25
+              "paragraphId": "p1",
+              "start": 68,
+              "end": 79
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "나뭇잎이 바람 소리에 어떻게 소리 낸다고 했는지 그 흉내 낸 말을 지문에서 찾아 보세요.",
+          "answerText": "쏴아쏴아",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 39,
+              "end": 43
             }
           ],
           "scoring": {

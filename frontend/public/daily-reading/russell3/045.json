@@ -571,111 +571,64 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"형식상 금지된 행위라도 일정한 사정이 있으면 위법하지 않다고 보는 판단이다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 213
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "위법성 조각이 적용되는 상황을 설명한 부분을 찾으시오",
+          "answerText": "형식상 범죄의 요건에 해당하더라도, 일정한 사정이 있으면 위법하지 않다고 판단되는 경우",
           "answerMatchMode": "ANY",
-          "answerText": "법학에서 어떤 행위가 형식상 범죄의 요건에 해당하더라도, 일정한 사정이 있으면 위법하지 않다고 판단되는 경우가 있다. 이런 경우를 설명할 때 쓰는 개념이 위법성 조각이다. 즉 겉으로는 금지된 행위처럼 보여도, 법이 예외적으로 허용하거나 책임을 다르게 보는 상황이 있다는 뜻이다. 그래서 위법성 조각은 법 적용이 단순한 문장 대조를 넘어서 상황 판단을 필요로 한다는 점을 보여 준다."
+          "answerRanges": [{"paragraphId": "p1", "start": 12, "end": 60}],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "\"공격이 실제로 급박했는지와 방어가 필요한 범위를 넘지 않았는지이다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 206
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "위법성 조각의 대표적 예로 처음 제시된 개념을 찾으시오",
+          "answerText": "정당방위",
           "answerMatchMode": "ANY",
-          "answerText": "대표적인 예로 정당방위를 들 수 있다. 누군가의 부당한 공격이 현재 진행 중일 때, 자신이나 다른 사람을 지키기 위해 필요한 범위 안에서 방어 행위를 했다면 그 행위는 위법하지 않을 수 있다. 여기서 중요한 것은 방어의 이유만이 아니라, 공격이 실제로 급박했는지와 방어가 필요한 범위를 넘지 않았는지를 함께 따지는 점이다. 따라서 정당방위는 감정적 맞대응과는 구별된다."
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 8, "end": 12},
+            {"paragraphId": "p2", "start": 185, "end": 189},
+            {"paragraphId": "p6", "start": 60, "end": 64}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "\"더 큰 위험을 피하려고 다른 법익을 일부 침해한 경우이다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 201
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "정당방위 판단에서 함께 따져야 한다고 한 두 가지 기준을 찾으시오",
+          "answerText": "공격이 실제로 급박했는지와 방어가 필요한 범위를 넘지 않았는지",
           "answerMatchMode": "ANY",
-          "answerText": "긴급피난도 위법성 조각과 관련해 자주 언급된다. 더 큰 위험을 피하기 위해 어쩔 수 없이 다른 법익을 일부 침해한 경우, 그 행위를 위법하지 않다고 볼 수 있는지 판단하는 개념이다. 예를 들어 급한 재난 상황에서 타인의 재산을 잠시 이용해 생명을 구하는 장면을 생각해 볼 수 있다. 이 경우에도 피하려는 위험의 크기와 침해한 이익의 정도를 함께 비교해야 한다."
+          "answerRanges": [{"paragraphId": "p2", "start": 133, "end": 167}],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "\"객관적으로 위험이 인정되는지와 대응 방식이 적절한지이다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 195
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "정당방위와 함께 위법성 조각의 또 다른 대표적 예로 제시된 개념을 찾으시오",
+          "answerText": "긴급피난",
           "answerMatchMode": "ANY",
-          "answerText": "위법성 조각을 판단할 때는 행위자의 주관적 사정만으로 결정하지 않는다. 단지 본인이 위험하다고 느꼈다는 이유만으로 모두 허용되는 것은 아니며, 객관적으로도 그런 위험이 인정되는지와 대응 방식이 적절한지를 함께 본다. 그래서 위법성 조각은 개인의 감정 상태를 이해하는 문제이면서도, 동시에 사회 전체가 받아들일 수 있는 기준을 세우는 문제이기도 하다."
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 0, "end": 4},
+            {"paragraphId": "p6", "start": 66, "end": 70}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "\"법이 모든 상황을 똑같이 처리하지 않기 때문이다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 14,
-              "end": 41
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "위법성 조각 판단의 객관적 기준이 무엇인지 찾으시오",
+          "answerText": "객관적으로도 그런 위험이 인정되는지와 대응 방식이 적절한지",
           "answerMatchMode": "ANY",
-          "answerText": "법이 모든 상황을 똑같이 처리하지 않기 때문이다."
+          "answerRanges": [{"paragraphId": "p4", "start": 80, "end": 112}],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q6",
-          "prompt": "\"예외를 외우는 일이 아니라 법이 왜 상황 판단을 요구하는지 이해하는 일이다.\"에 해당하는 부분은 어디인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 216
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "글쓴이가 정리한 위법성 조각 학습의 의미를 찾으시오",
+          "answerText": "법이 왜 상황 판단을 요구하는지를 이해하는 일",
           "answerMatchMode": "ANY",
-          "answerText": "정리하면 위법성 조각은 형식상 금지된 행위라도 일정한 요건 아래에서는 위법하지 않다고 보는 법적 판단이다. 정당방위와 긴급피난처럼 대표적인 사례를 통해 보면, 핵심은 행위의 겉모양보다 그것이 이루어진 상황과 필요성, 비례성을 함께 따지는 데 있다. 따라서 법학에서 위법성 조각을 배운다는 것은 예외를 외우는 일이 아니라, 법이 왜 상황 판단을 요구하는지를 이해하는 일이라고 할 수 있다."
+          "answerRanges": [{"paragraphId": "p6", "start": 180, "end": 205}],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "발표자가 속한 부서를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 142
+              "start": 10,
+              "end": 17
             }
           ],
           "scoring": {
@@ -585,16 +585,26 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "안녕하세요. 저는 학생회 환경부에서 축제 기간에 운영한 다회용 컵 보증금제 시범 사업 결과를 말씀드리겠습니다. 오늘 발표에서는 먼저 시범 운영의 목적을 짚고, 다음으로 실제 운영 결과를 보여 드린 뒤, 마지막으로 확대 시행 여부와 보완점을 제안하겠습니다."
+          "answerText": "학생회 환경부"
         },
         {
           "id": "q2",
-          "prompt": "2문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "오늘 발표에서 차례로 다루겠다고 한 내용을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 167
+              "paragraphId": "p1",
+              "start": 74,
+              "end": 83
+            },
+            {
+              "paragraphId": "p1",
+              "start": 94,
+              "end": 102
+            },
+            {
+              "paragraphId": "p1",
+              "start": 119,
+              "end": 132
             }
           ],
           "scoring": {
@@ -602,17 +612,21 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이번 시범 사업은 축제 때마다 쌓이는 일회용 컵 쓰레기를 줄이기 위해 진행되었습니다. 음료를 살 때 보증금 1,000원을 함께 받고, 컵을 반납하면 전액을 돌려주는 방식이었습니다. 저희는 이 제도가 쓰레기 감소에 효과가 있는지, 또 학생들이 실제로 불편 없이 참여할 수 있는지를 함께 살펴보았습니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "시범 운영의 목적",
+            "실제 운영 결과",
+            "확대 시행 여부와 보완점"
+          ]
         },
         {
           "id": "q3",
-          "prompt": "3문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "이번 시범 사업을 진행한 목적을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 159
+              "paragraphId": "p2",
+              "start": 21,
+              "end": 38
             }
           ],
           "scoring": {
@@ -621,16 +635,21 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "먼저 결과를 말씀드리겠습니다. 시범 운영 기간 동안 음료 판매량은 작년과 비슷했지만, 행사 종료 후 분리수거장에서 나온 플라스틱 컵 양은 눈에 띄게 줄었습니다. 반납률도 예상보다 높았고, 특히 반납 부스를 매점 옆이 아니라 이동 동선 끝쪽에 둘 때 혼잡이 더 적다는 점을 확인했습니다."
+          "answerText": "일회용 컵 쓰레기를 줄이기 위해"
         },
         {
           "id": "q4",
-          "prompt": "4문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "보증금제 방식에서 보증금을 받는 때와 돌려주는 조건을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 186
+              "paragraphId": "p2",
+              "start": 48,
+              "end": 55
+            },
+            {
+              "paragraphId": "p2",
+              "start": 75,
+              "end": 82
             }
           ],
           "scoring": {
@@ -638,17 +657,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "다만 불편도 있었습니다. 일부 학생들은 보증금 금액을 처음에 제대로 알지 못했고, 줄이 길어질 때는 컵을 바로 반납하지 않고 들고 다니는 경우도 있었습니다. 또 반납 부스 안내 표지가 작아서 처음 참여한 학생들은 위치를 찾는 데 시간이 걸렸습니다. 따라서 제도 자체보다 안내 방식과 동선 설계가 더 중요하다는 점을 알 수 있었습니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "음료를 살 때",
+            "컵을 반납하면"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "행사 종료 후 플라스틱 컵 양이 어떻게 되었는지 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 222
+              "paragraphId": "p3",
+              "start": 77,
+              "end": 88
             }
           ],
           "scoring": {
@@ -657,16 +679,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "그래서 저희는 다음 학기 학교 행사부터 다회용 컵 보증금제를 확대 시행하되, 세 가지를 보완할 것을 제안합니다. 첫째, 주문대 앞과 메뉴판에 보증금 안내를 크게 넣어 처음부터 절차를 분명히 알려야 합니다. 둘째, 반납 부스를 한 곳이 아니라 행사장 출구 쪽까지 포함해 두 곳 이상 운영해야 합니다. 셋째, 반납이 빠른 시간대와 혼잡한 시간대를 구분해 인력을 배치하면 대기 시간을 줄일 수 있습니다."
+          "answerText": "눈에 띄게 줄었습니다"
         },
         {
           "id": "q6",
-          "prompt": "6문단을 이해한 내용으로 가장 적절한 것은?",
+          "prompt": "혼잡이 더 적었던 반납 부스 위치를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 173
+              "paragraphId": "p3",
+              "start": 125,
+              "end": 133
             }
           ],
           "scoring": {
@@ -675,7 +697,65 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "정리하면, 이번 시범 사업은 일회용 컵 쓰레기 감소라는 목표에서 분명한 가능성을 보여 주었습니다. 동시에 제도가 성공하려면 참여 의식만 강조할 것이 아니라, 학생들이 쉽게 이해하고 바로 행동할 수 있는 운영 구조를 함께 갖춰야 한다는 점도 확인했습니다. 이상으로 발표를 마치겠습니다. 질문 있으시면 받겠습니다."
+          "answerText": "이동 동선 끝쪽"
+        },
+        {
+          "id": "q7",
+          "prompt": "일부 학생들이 겪은 불편을 드러내는 구절을 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 22,
+              "end": 44
+            },
+            {
+              "paragraphId": "p4",
+              "start": 56,
+              "end": 79
+            },
+            {
+              "paragraphId": "p4",
+              "start": 119,
+              "end": 137
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "보증금 금액을 처음에 제대로 알지 못했고",
+            "컵을 바로 반납하지 않고 들고 다니는 경우",
+            "위치를 찾는 데 시간이 걸렸습니다"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "보증금 안내를 넣어야 한다고 제안한 위치를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 67,
+              "end": 72
+            },
+            {
+              "paragraphId": "p5",
+              "start": 74,
+              "end": 77
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "주문대 앞",
+            "메뉴판"
+          ]
         }
       ]
     }

@@ -571,111 +571,122 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"발표 뒤 기자가 질문하는 인터뷰형 발표\"에 해당하는 부분은 어디인가요?",
+          "prompt": "이 행사 진행 순서를 안내하고 마지막에 형식을 정리한 사람의 역할 이름을 모두 찾으시오",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 156
+              "end": 3
+            },
+            {
+              "paragraphId": "p6",
+              "start": 97,
+              "end": 100
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "사회자: 오늘 행사는 학교 환경 동아리와 지역 신문이 함께 준비한 인터뷰형 발표입니다. 먼저 동아리 대표가 학교 텀블러 사용 현황을 짧게 발표하고, 이어서 기자가 질문을 던지는 순서로 진행하겠습니다. 청중 여러분께서는 발표 내용과 질문이 어떻게 이어지는지 주목해 주시기 바랍니다."
+          "answerText": "사회자"
         },
         {
           "id": "q2",
-          "prompt": "\"텀블러를 주 3회 이상 사용하는 학생이 전체의 46퍼센트였다\"에 해당하는 부분은 어디인가요?",
+          "prompt": "학생들이 텀블러를 사용하지 않는 까닭으로 응답한 내용을 모두 찾으시오",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 212
+              "start": 81,
+              "end": 141
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "발표자: 지난달 학생 280명을 대상으로 조사한 결과, 텀블러를 주 3회 이상 사용하는 학생은 전체의 46퍼센트였습니다. 사용하지 않는 이유로는 '들고 다니기 불편하다', '세척이 번거롭다', '매점에서 바로 음료를 사는 편이 쉽다'는 응답이 많았습니다. 저희는 이 결과를 바탕으로 텀블러 사용을 늘리려면 단순 홍보보다 세척과 보관의 불편을 줄이는 방안이 필요하다고 판단했습니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": ["'들고 다니기 불편하다', '세척이 번거롭다', '매점에서 바로 음료를 사는 편이 쉽다'는 응답이 많았습니다"]
         },
         {
           "id": "q3",
-          "prompt": "\"학생들이 가장 불편해하는 지점이 세척인지 보관인지\"에 해당하는 부분은 어디인가요?",
+          "prompt": "발표자가 단순 홍보보다 세척과 보관 불편을 줄이는 방안이 필요하다고 판단한 결론을 찾으시오",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 187
+              "paragraphId": "p2",
+              "start": 158,
+              "end": 211
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "기자: 방금 발표에서 가장 눈에 띈 부분은 사용 의지보다 실천의 불편이 더 큰 장애라는 점이었습니다. 그렇다면 동아리에서는 단순히 '환경 보호가 중요하다'는 메시지를 반복하기보다, 실천 조건을 바꾸는 쪽으로 접근해야 한다고 본 셈인가요? 또 학생들이 실제로 가장 불편해하는 지점이 세척인지, 보관인지도 구분해서 살펴보았는지 궁금합니다."
+          "answerText": "텀블러 사용을 늘리려면 단순 홍보보다 세척과 보관의 불편을 줄이는 방안이 필요하다고 판단했습니다"
         },
         {
           "id": "q4",
-          "prompt": "\"세척 시설 부족과 가방 속 누수 걱정\"에 해당하는 부분은 어디인가요?",
+          "prompt": "자유 응답 분석에서 반복해서 나타난 문제점을 모두 찾으시오",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 45,
-              "end": 65
+              "end": 78
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "세척 시설 부족과 가방 속 누수 걱정"
+          "answerMatchMode": "ALL",
+          "answerTexts": ["세척 시설 부족과 가방 속 누수 걱정이 반복해서 나타났습니다"]
         },
         {
           "id": "q5",
-          "prompt": "\"청중이 기억해야 할 제안을 한 문장으로 정리해 달라는 것\"에 해당하는 부분은 어디인가요?",
+          "prompt": "기자가 끝에서 중심 제안을 묶어 주는 말이 중요하다고 본 까닭을 찾으시오",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 178
+              "start": 49,
+              "end": 109
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "기자: 그렇다면 마지막으로 청중이 기억해야 할 제안을 한 문장으로 정리해 주시겠습니까? 발표와 인터뷰가 길어지면 구체적 수치와 사례는 남아도, 실제 행동으로 이어질 핵심 문장이 흐려질 수 있습니다. 인터뷰형 발표에서는 질문이 내용을 넓혀 주기도 하지만, 끝에서는 중심 제안을 다시 묶어 주는 말이 특히 중요해 보입니다."
+          "answerText": "발표와 인터뷰가 길어지면 구체적 수치와 사례는 남아도, 실제 행동으로 이어질 핵심 문장이 흐려질 수 있습니다"
         },
         {
           "id": "q6",
-          "prompt": "\"발표가 기본 정보를 제시하고, 질문이 쟁점을 드러내며, 마지막 답변이 중심 메시지를 정리한다\"에 해당하는 부분은 어디인가요?",
+          "prompt": "사회자가 정리한 인터뷰형 발표 구조의 세 가지 단계를 모두 찾으시오",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 213
+              "start": 131,
+              "end": 197
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "발표자: 저희의 핵심 제안은 '학생들이 환경을 생각하지 않아서가 아니라, 실천이 불편해서 텀블러를 덜 쓰는 만큼, 학교는 불편을 줄이는 조건부터 마련해야 한다'는 것입니다. 사회자: 지금 대화를 보면 인터뷰와 발표가 결합된 형식에서는 발표가 기본 정보를 제시하고, 질문이 핵심 쟁점을 날카롭게 드러내며, 마지막 답변이 중심 메시지를 정리하는 구조가 된다는 점을 확인할 수 있습니다."
+          "answerMatchMode": "ALL",
+          "answerTexts": ["발표가 기본 정보를 제시하고, 질문이 핵심 쟁점을 날카롭게 드러내며, 마지막 답변이 중심 메시지를 정리하는 구조가 된다"]
         }
       ]
     }

@@ -552,19 +552,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "상추 ( )을 직접 심습니다.",
-          "answerText": "씨앗",
-          "answerMatchMode": "EXACT",
+          "prompt": "식물의 새로 돋아난 어린 잎이라는 뜻의 단어를 지문에서 모두 찾아 보세요.",
+          "answerText": "새싹",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 15,
-              "end": 17
+              "start": 85,
+              "end": 87
             },
             {
-              "paragraphId": "p1",
-              "start": 56,
-              "end": 58
+              "paragraphId": "p2",
+              "start": 100,
+              "end": 102
             }
           ],
           "scoring": {
@@ -576,9 +576,9 @@
         },
         {
           "id": "q2",
-          "prompt": "흙이 ( )해서 신기해요.",
+          "prompt": "지문에서 흙을 만진 느낌을 표현한 단어를 찾아 보세요.",
           "answerText": "보들보들",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -595,14 +595,33 @@
         },
         {
           "id": "q3",
-          "prompt": "( )의 소중함을 느낌.",
-          "answerText": "생명",
-          "answerMatchMode": "EXACT",
+          "prompt": "정성을 조금이나마 알 것 같다고 한 분들이 누구인지 지문에서 찾아 보세요.",
+          "answerText": "농사짓는 분들",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 27,
+              "end": 34
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "씨앗을 심으며 무엇을 느낄 수 있어 보람찼다고 했는지 지문에서 찾아 보세요.",
+          "answerText": "생명의 소중함",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 112,
-              "end": 114
+              "end": 119
             }
           ],
           "scoring": {

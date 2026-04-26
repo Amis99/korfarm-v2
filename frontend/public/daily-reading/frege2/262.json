@@ -925,64 +925,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "전기를 저장해 두었다가 필요할 때 쓰는 장치를 무엇이라고 하나요?",
-          "answerText": "배터리",
+          "prompt": "배터리의 뜻을 설명한 부분을 찾으시오.",
+          "answerText": "전기를 저장해 두었다가 필요할 때 쓰는 장치",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 14,
-              "end": 17
-            },
-            {
-              "paragraphId": "p1",
-              "start": 25,
-              "end": 28
-            },
-            {
-              "paragraphId": "p1",
-              "start": 57,
-              "end": 60
-            },
-            {
-              "paragraphId": "p2",
-              "start": 87,
-              "end": 90
-            },
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 3
-            },
-            {
-              "paragraphId": "p3",
-              "start": 73,
-              "end": 76
-            },
-            {
-              "paragraphId": "p3",
-              "start": 109,
-              "end": 112
-            },
-            {
-              "paragraphId": "p4",
-              "start": 15,
-              "end": 18
-            },
-            {
-              "paragraphId": "p4",
-              "start": 52,
-              "end": 55
-            },
-            {
-              "paragraphId": "p4",
-              "start": 88,
-              "end": 91
-            },
-            {
-              "paragraphId": "p4",
-              "start": 103,
-              "end": 106
+              "start": 30,
+              "end": 54
             }
           ],
           "scoring": {
@@ -993,9 +943,12 @@
         },
         {
           "id": "q2",
-          "prompt": "배터리 안의 두 방 가운데 하나의 이름은 무엇인가요?",
-          "answerText": "양극",
-          "answerMatchMode": "ANY",
+          "prompt": "배터리 안에 있는 두 개의 방을 모두 찾으시오.",
+          "answerTexts": [
+            "양극",
+            "음극"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -1006,48 +959,7 @@
               "paragraphId": "p2",
               "start": 9,
               "end": 11
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q3",
-          "prompt": "전기를 쓰는 과정을 무엇이라고 하나요?",
-          "answerText": "방전",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 66,
-              "end": 68
             },
-            {
-              "paragraphId": "p2",
-              "start": 92,
-              "end": 94
-            },
-            {
-              "paragraphId": "p3",
-              "start": 26,
-              "end": 28
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "충전할 때 전자가 다시 돌아가는 곳은 어디인가요?",
-          "answerText": "음극",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 69,
@@ -1071,14 +983,58 @@
           "revealOnWrong": true
         },
         {
-          "id": "q5",
-          "prompt": "최근 중요하다고 한 미래 배터리의 조건 가운데 하나는 무엇인가요?",
-          "answerText": "안전한 배터리",
+          "id": "q3",
+          "prompt": "전기가 만들어지는 원리를 설명한 부분을 찾으시오.",
+          "answerText": "전자가 이동하면서 전기가 만들어진다",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
+              "paragraphId": "p1",
+              "start": 97,
+              "end": 116
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "충전할 때 전자를 다시 음극으로 보내는 과정을 찾으시오.",
+          "answerText": "외부에서 전기를 공급해 전자를 다시 음극으로 보낸다",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 39,
+              "end": 67
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "최근 연구 중이거나 중요하다고 한 배터리 개발 방향을 모두 찾으시오.",
+          "answerTexts": [
+            "더 작고 오래가는 배터리",
+            "폭발 위험이 없는 안전한 배터리"
+          ],
+          "answerMatchMode": "ALL",
+          "answerRanges": [
+            {
               "paragraphId": "p4",
-              "start": 48,
+              "start": 5,
+              "end": 18
+            },
+            {
+              "paragraphId": "p4",
+              "start": 38,
               "end": 55
             }
           ],

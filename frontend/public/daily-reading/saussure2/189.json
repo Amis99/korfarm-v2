@@ -559,9 +559,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "시계가 가리키는 어느 한 때를 뜻하는 말은?",
+          "prompt": "지문에서 '시계가 가리키는 때'를 뜻하는 낱말을 찾아 쓰시오.",
           "answerText": "시각",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
@@ -602,9 +602,9 @@
         },
         {
           "id": "q2",
-          "prompt": "어떤 시각부터 다른 시각까지의 사이를 뜻하는 말은?",
+          "prompt": "지문에서 '어떤 시각부터 다른 시각까지의 사이'를 뜻하는 낱말을 찾아 쓰시오.",
           "answerText": "시간",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -635,14 +635,32 @@
         },
         {
           "id": "q3",
-          "prompt": "앞으로 할 일을 미리 생각해서 정한 내용은?",
-          "answerText": "계획",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 '학교에서 수업을 듣는' 시간이 얼마나 되는지 나타낸 어구를 찾아 쓰시오.",
+          "answerText": "사십 분",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 42,
+              "end": 46
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "지문에서 규칙적인 생활을 위해 길러야 한다고 한 습관을 찾아 쓰시오.",
+          "answerText": "시계를 보는 습관",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 11,
-              "end": 13
+              "start": 65,
+              "end": 74
             }
           ],
           "scoring": {

@@ -850,14 +850,14 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "부모님과 ( ) 마트에 갔습니다.",
-          "answerText": "대형",
-          "answerMatchMode": "EXACT",
+          "prompt": "편지로 쓴 이야기의 내용을 본문에서 찾으시오.",
+          "answerText": "마트 다녀온 이야기",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 45,
-              "end": 47
+              "start": 10,
+              "end": 20
             }
           ],
           "scoring": {
@@ -869,14 +869,22 @@
         },
         {
           "id": "q2",
-          "prompt": "마트 안은 ( ) 북적였습니다.",
-          "answerText": "북적북적",
-          "answerMatchMode": "EXACT",
+          "prompt": "주말에 누구와 어디에 갔는지 모두 찾으시오.",
+          "answerTexts": [
+            "부모님과 함께",
+            "커다란 대형 마트"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 106,
-              "end": 110
+              "start": 33,
+              "end": 40
+            },
+            {
+              "paragraphId": "p1",
+              "start": 41,
+              "end": 50
             }
           ],
           "scoring": {
@@ -888,19 +896,33 @@
         },
         {
           "id": "q3",
-          "prompt": "친구의 ( ) 주말 답장을 기다려요.",
-          "answerText": "주말",
-          "answerMatchMode": "EXACT",
+          "prompt": "카트를 밀며 골라 담은 것을 본문에서 찾으시오.",
+          "answerText": "맛있는 과자와 과일",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 29,
-              "end": 31
-            },
+              "paragraphId": "p2",
+              "start": 7,
+              "end": 17
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "편지를 읽은 친구에게 부탁한 일을 본문에서 찾으시오.",
+          "answerText": "답장으로 들려줘",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 62,
-              "end": 64
+              "start": 70,
+              "end": 78
             }
           ],
           "scoring": {

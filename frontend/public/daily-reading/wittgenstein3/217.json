@@ -571,30 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "1문단은 이 문법 현상을 어떤 배경이나 문제의식에서 제시하는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 213
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "국어에서 과거를 나타내는 형식은 하나가 아니다. 표면적으로는 모두 지난 일을 말하는 것처럼 보여도, 어떤 형식은 사건이 일어난 시점을 강조하고 어떤 형식은 그것을 바라본 화자의 인식 방식을 함께 드러낸다. 선어말 어미 '-었-'과 '-더-'는 이런 차이가 가장 분명하게 드러나는 형식이다. 따라서 두 어미를 단순히 같은 과거 표현으로 처리하면 문장의 의미를 정확히 이해하기 어렵다."
-        },
-        {
-          "id": "q2",
-          "prompt": "2문단은 첫 판별 기준이나 기본 원리를 어떻게 설명하는가?",
+          "prompt": "사건이 말해지는 때를 뜻하는 어구를 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 233
+              "start": 11,
+              "end": 16
             }
           ],
           "scoring": {
@@ -603,16 +585,39 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "'-었-'은 사건이 발화 시점보다 앞서 일어났음을 나타내는 가장 기본적인 과거 표지이다. 그래서 '비가 왔다', '책을 읽었다'처럼 사건의 완료나 선행을 드러내는 데 널리 쓰인다. 이 형식은 기본적으로 사건 자체의 시간적 위치를 표시하는 기능이 강하며, 화자가 그 장면을 직접 보았는지 나중에 알았는지는 문장 안에서 반드시 드러나지 않는다. 즉 '-었-'은 과거 사건의 성립을 비교적 객관적으로 서술하는 데 적합하다."
+          "answerText": "발화 시점"
+        },
+        {
+          "id": "q2",
+          "prompt": "'-었-'이 어떤 과거 표지인지 설명한 부분을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 7,
+              "end": 46
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "사건이 발화 시점보다 앞서 일어났음을 나타내는 가장 기본적인 과거 표지"
         },
         {
           "id": "q3",
-          "prompt": "3문단은 해당 현상의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "prompt": "'-더-'에 함께 들어 있는 두 성격을 모두 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 229
+              "start": 156,
+              "end": 159
+            },
+            {
+              "paragraphId": "p3",
+              "start": 161,
+              "end": 164
             }
           ],
           "scoring": {
@@ -620,17 +625,25 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "반면 '-더-'는 단순한 과거가 아니라 화자가 과거의 어느 시점에서 직접 지각하거나 체험한 내용을 회상하며 말할 때 쓰인다. '눈이 오더라', '그 학생이 울고 있더라'와 같은 문장에서 화자는 과거의 장면을 실제로 보고 나서 지금 그 경험을 떠올리고 있다. 그래서 '-더-'에는 회상성과 증거성이 함께 들어 있다. 사건의 시간만이 아니라, 그 장면을 바라보았던 화자의 인식 위치가 문장 의미에 포함되는 것이다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "회상성",
+            "증거성"
+          ]
         },
         {
           "id": "q4",
-          "prompt": "4문단은 구별점이나 추가 조건을 어떤 방향으로 드러내는가?",
+          "prompt": "'-더-'가 쓰인 예시 문장을 모두 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 232
+              "paragraphId": "p3",
+              "start": 70,
+              "end": 78
+            },
+            {
+              "paragraphId": "p3",
+              "start": 80,
+              "end": 94
             }
           ],
           "scoring": {
@@ -638,17 +651,20 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "이 차이는 결합 제약에서도 드러난다. '-더-'는 일반적으로 화자가 직접 경험한 내용과 잘 어울리므로, 자신의 과거 의지를 말하거나 아직 확인하지 못한 사실을 추측하는 맥락에는 잘 쓰이지 않는다. 예를 들어 '내일 가겠더라'처럼 미래 추측과 결합하는 것은 자연스럽지 않다. 또 1인칭의 의도적 행위와 결합할 때도 제약이 커서, 화자가 자신의 행위를 현장에서 객관화해 회상하는 특별한 맥락이 아니면 어색해질 수 있다."
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "'눈이 오더라'",
+            "'그 학생이 울고 있더라'"
+          ]
         },
         {
           "id": "q5",
-          "prompt": "5문단은 해석상의 주의점이나 적용 효과를 어떻게 설명하는가?",
+          "prompt": "'-더-'가 잘 어울리는 내용의 조건을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 216
+              "paragraphId": "p4",
+              "start": 34,
+              "end": 47
             }
           ],
           "scoring": {
@@ -657,16 +673,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "반대로 '-었-'은 체험 여부와 상관없이 폭넓게 쓰인다. 화자가 직접 본 사건에도 쓸 수 있고, 전해 들은 사실이나 문서로 확인한 정보에도 쓸 수 있다. 그래서 '-더-'가 가능한 자리에 '-었-'이 들어갈 수 있는 경우는 많지만, 그 반대는 아니다. 예를 들어 '비가 왔다'는 단순 보고가 가능하지만, '비가 오더라'는 화자가 실제로 비 오는 장면을 경험했다는 뉘앙스를 강하게 남긴다."
+          "answerText": "화자가 직접 경험한 내용"
         },
         {
           "id": "q6",
-          "prompt": "6문단은 이 문법 주제를 어떤 관점에서 정리하는가?",
+          "prompt": "미래 추측과 결합하는 것이 자연스럽지 않은 예문을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 208
+              "paragraphId": "p4",
+              "start": 116,
+              "end": 125
             }
           ],
           "scoring": {
@@ -675,7 +691,57 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "결국 '-었-'과 '-더-'의 차이는 과거냐 아니냐의 문제가 아니라, 과거 사건을 어떤 시점에서 어떤 방식으로 파악하느냐의 문제이다. '-었-'은 사건의 선행과 완료를 중심에 두고, '-더-'는 화자의 직접 경험과 회상을 전면에 놓는다. 따라서 두 어미를 정확히 구별하려면 사건의 시간뿐 아니라 화자의 인식 위치, 직접 지각 여부, 문장의 보고 방식까지 함께 살펴야 한다."
+          "answerText": "'내일 가겠더라'"
+        },
+        {
+          "id": "q7",
+          "prompt": "'-었-'이 쓸 수 있는 사건이나 정보의 출처를 모두 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 32,
+              "end": 43
+            },
+            {
+              "paragraphId": "p5",
+              "start": 54,
+              "end": 62
+            },
+            {
+              "paragraphId": "p5",
+              "start": 65,
+              "end": 75
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL",
+          "answerTexts": [
+            "화자가 직접 본 사건",
+            "전해 들은 사실",
+            "문서로 확인한 정보"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "두 어미를 정확히 구별하려면 함께 살펴야 하는 범위를 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 153,
+              "end": 197
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "사건의 시간뿐 아니라 화자의 인식 위치, 직접 지각 여부, 문장의 보고 방식까지"
         }
       ]
     }

@@ -1000,113 +1000,77 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "전체 예측 가운데 맞힌 비율은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 6
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "전체 예측 가운데 맞힌 비율을 뜻하지만 자료가 한쪽으로 치우치면 성능을 오해할 수 있는 평가 지표를 가리키는 말을 찾으시오",
+          "answerText": "정확도",
           "answerMatchMode": "ANY",
-          "answerText": "겉보기 정확"
+          "answerRanges": [
+            {"paragraphId": "p2", "start": 4, "end": 7},
+            {"paragraphId": "p2", "start": 52, "end": 55},
+            {"paragraphId": "p2", "start": 125, "end": 128},
+            {"paragraphId": "p6", "start": 72, "end": 75}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "정상을 위험하다고 잘못 판단한 경우는?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 103,
-              "end": 107
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "위험하다고 판단한 것들 가운데 실제로 위험한 것이 얼마나 되는지를 보여 주는 지표를 가리키는 말을 찾으시오",
+          "answerText": "정밀도",
           "answerMatchMode": "ANY",
-          "answerText": "거짓 양"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 0, "end": 3},
+            {"paragraphId": "p4", "start": 167, "end": 170},
+            {"paragraphId": "p6", "start": 77, "end": 80}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "위험한 대상을 놓친 경우는?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 114,
-              "end": 118
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "실제 위험한 것들 가운데 모델이 얼마나 놓치지 않았는지를 보여 주어 의료 검사처럼 놓치는 일이 치명적일 때 특히 중요한 지표를 가리키는 말을 찾으시오",
+          "answerText": "재현율",
           "answerMatchMode": "ANY",
-          "answerText": "거짓 음"
+          "answerRanges": [
+            {"paragraphId": "p4", "start": 49, "end": 52},
+            {"paragraphId": "p4", "start": 118, "end": 121},
+            {"paragraphId": "p6", "start": 82, "end": 85}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "위험하다고 판단한 것들 가운데 실제 위험한 비율은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 2
-            },
-            {
-              "paragraphId": "p4",
-              "start": 167,
-              "end": 169
-            },
-            {
-              "paragraphId": "p6",
-              "start": 77,
-              "end": 79
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "정상인 대상을 잘못 위험하다고 판단하는 경우를 가리키는 말을 찾으시오",
+          "answerText": "거짓 양성",
           "answerMatchMode": "ANY",
-          "answerText": "정밀"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 103, "end": 108}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "실제 위험한 것들 가운데 놓치지 않은 비율은?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 49,
-              "end": 51
-            },
-            {
-              "paragraphId": "p4",
-              "start": 118,
-              "end": 120
-            },
-            {
-              "paragraphId": "p6",
-              "start": 82,
-              "end": 84
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
+          "prompt": "실제로 위험한 대상을 놓치는 경우를 가리키는 말을 찾으시오",
+          "answerText": "거짓 음성",
           "answerMatchMode": "ANY",
-          "answerText": "재현"
+          "answerRanges": [
+            {"paragraphId": "p3", "start": 114, "end": 119}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "모델이 어디에서 어떤 실수를 했는지 살피기 위해 분석하는, 잘못된 분류를 가리키는 말을 찾으시오",
+          "answerText": "오분류",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {"paragraphId": "p5", "start": 51, "end": 54},
+            {"paragraphId": "p6", "start": 35, "end": 38}
+          ],
+          "scoring": {"correctDeltaSec": 10, "wrongDeltaSec": -5, "eliminateWrongChoice": false},
+          "revealOnWrong": true
         }
       ]
     }

@@ -562,18 +562,18 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "드디어 견우와 직녀가 만날 수 있게 된 음력 칠월의 이 날은 언제인가요?",
-          "answerText": "칠석",
-          "answerMatchMode": "EXACT",
+          "prompt": "견우와 직녀가 기다리고 기다리던 날을 지문에서 찾으시오.",
+          "answerText": "칠월 칠석",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 17,
+              "start": 14,
               "end": 19
             },
             {
               "paragraphId": "p3",
-              "start": 39,
+              "start": 36,
               "end": 41
             }
           ],
@@ -586,14 +586,14 @@
         },
         {
           "id": "q2",
-          "prompt": "두 사람이 엉엉 울자 하늘로 날아올라 다리를 만들어 준 새들은 까치와 무엇인가요?",
-          "answerText": "까마귀",
-          "answerMatchMode": "EXACT",
+          "prompt": "견우와 직녀가 은하수를 건널 수 없었던 이유를 지문에서 찾으시오.",
+          "answerText": "건널 수 있는 다리가 없었어요",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 55,
-              "end": 58
+              "paragraphId": "p1",
+              "start": 70,
+              "end": 86
             }
           ],
           "scoring": {
@@ -605,9 +605,9 @@
         },
         {
           "id": "q3",
-          "prompt": "까치와 까마귀가 은하수 위에 자기들의 몸을 이어서 만들어 준 고마운 다리의 이름은 무엇인가요?",
+          "prompt": "새들이 만들어 준 고마운 다리의 이름을 지문에서 찾으시오.",
           "answerText": "오작교",
-          "answerMatchMode": "EXACT",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
@@ -629,23 +629,21 @@
         },
         {
           "id": "q4",
-          "prompt": "칠월 칠석에 내리는 비는 견우와 직녀가 만나서 기뻐 흘리는 이것이라고 해요. 이것은 무엇인가요?",
-          "answerText": "눈물",
-          "answerMatchMode": "EXACT",
+          "prompt": "칠월 칠석에 내리는 비와 다음 날 내리는 비가 각각 어떤 눈물인지 지문에서 모두 찾으시오.",
+          "answerTexts": [
+            "만나서 흘리는 기쁨의 눈물",
+            "다시 헤어져야 해서 흘리는 슬픔의 눈물"
+          ],
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 9,
-              "end": 11
-            },
-            {
               "paragraphId": "p3",
-              "start": 68,
+              "start": 56,
               "end": 70
             },
             {
               "paragraphId": "p3",
-              "start": 113,
+              "start": 94,
               "end": 115
             }
           ],

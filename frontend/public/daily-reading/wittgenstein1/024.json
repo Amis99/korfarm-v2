@@ -571,12 +571,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫째 문단은 '오존층 파괴와 CFC'를 어떤 관점에서 소개하는가?",
+          "prompt": "1문단에서 오존층의 역할을 설명한 표현을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 126
+              "start": 26,
+              "end": 51
             }
           ],
           "scoring": {
@@ -585,16 +585,34 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "성층권의 오존층은 태양에서 오는 자외선 가운데 해로운 부분을 흡수해 지표의 생명체를 보호한다. 오존은 성층권에서 계속 만들어지고 또 분해되는데, 두 과정이 대체로 균형을 이루기 때문에 오존 농도도 일정한 범위 안에서 유지된다."
+          "answerText": "해로운 부분을 흡수해 지표의 생명체를 보호한다"
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 '오존층 파괴와 CFC'와 관련해 어떤 생각이나 관계를 보여 주는가?",
+          "prompt": "1문단에서 오존에 일어나는 두 과정을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 63,
+              "end": 79
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "계속 만들어지고 또 분해되는데"
+        },
+        {
+          "id": "q3",
+          "prompt": "2문단에서 문제가 되는 물질을 밝힌 문장을 찾으시오.",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 109
+              "end": 23
             }
           ],
           "scoring": {
@@ -603,34 +621,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "문제가 되는 물질 가운데 하나가 CFC이다. CFC는 한때 반응성이 낮고 쓰기 편한 물질로 여겨져 냉매나 분사제에 널리 사용되었지만, 대기 하층에서 쉽게 분해되지 않아 성층권까지 올라갈 수 있다."
-        },
-        {
-          "id": "q3",
-          "prompt": "셋째 문단은 '오존층 파괴와 CFC'와 관련해 어떤 생각이나 관계를 보여 주는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 118
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY",
-          "answerText": "성층권 상층부에 도달한 CFC는 강한 자외선을 받아 분해되며 염소 원자를 내놓는다. 이 염소 원자는 오존과 반응해 오존을 산소 분자로 바꾸는 과정에 참여하고, 반응 뒤에도 다시 남아 같은 일을 되풀이할 수 있다."
+          "answerText": "문제가 되는 물질 가운데 하나가 CFC이다"
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 '오존층 파괴와 CFC'와 관련해 어떤 생각이나 관계를 보여 주는가?",
+          "prompt": "2문단에서 CFC가 성층권까지 올라갈 수 있는 이유를 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 102
+              "paragraphId": "p2",
+              "start": 75,
+              "end": 108
             }
           ],
           "scoring": {
@@ -639,16 +639,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "이 때문에 염소 원자는 오존 파괴 반응을 이어 가게 만드는 촉매처럼 작용한다. 한 번 생긴 염소가 여러 차례 반응에 참여하면, 적은 양의 CFC도 오존층의 균형을 크게 흔들 수 있다."
+          "answerText": "대기 하층에서 쉽게 분해되지 않아 성층권까지 올라갈 수 있다"
         },
         {
           "id": "q5",
-          "prompt": "다섯째 문단은 '오존층 파괴와 CFC'와 관련해 어떤 생각이나 관계를 보여 주는가?",
+          "prompt": "3문단에서 CFC가 자외선을 받아 무엇을 내놓는지 설명한 문장을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 147
+              "paragraphId": "p3",
+              "start": 18,
+              "end": 45
             }
           ],
           "scoring": {
@@ -657,16 +657,16 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "남극 상공에서 봄철마다 오존 농도가 크게 줄어드는 현상이 발견되자, 인류는 오존층 파괴가 단순한 가설이 아니라 실제 문제라는 사실을 확인하게 되었다. 이후 CFC 사용을 줄이기 위한 국제 협약이 마련되었고, 여러 나라가 생산과 사용을 단계적으로 제한하기 시작했다."
+          "answerText": "강한 자외선을 받아 분해되며 염소 원자를 내놓는다"
         },
         {
           "id": "q6",
-          "prompt": "여섯째 문단은 '오존층 파괴와 CFC'와 관련해 어떤 생각이나 관계를 보여 주는가?",
+          "prompt": "3문단에서 염소 원자가 참여하는 과정을 찾으시오.",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 0,
-              "end": 131
+              "paragraphId": "p3",
+              "start": 64,
+              "end": 82
             }
           ],
           "scoring": {
@@ -675,7 +675,43 @@
           },
           "revealOnWrong": true,
           "answerMatchMode": "ANY",
-          "answerText": "오존층 파괴 문제는 한 물질이 대기 중에서 어떤 경로를 거쳐 다른 환경 문제를 낳는지 보여 주는 사례이다. 겉보기에 안정적이고 편리한 물질이라도 대기 전체의 순환 속에서 어떤 반응을 일으키는지 따져 보아야 한다는 점이 여기서 드러난다."
+          "answerText": "오존을 산소 분자로 바꾸는 과정에"
+        },
+        {
+          "id": "q7",
+          "prompt": "4문단에서 염소 원자가 어떻게 작용한다고 했는지 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 33,
+              "end": 42
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "촉매처럼 작용한다"
+        },
+        {
+          "id": "q8",
+          "prompt": "5문단에서 CFC 사용을 줄이기 위해 마련된 것을 찾으시오.",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 102,
+              "end": 114
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "answerText": "국제 협약이 마련되었고"
         }
       ]
     }

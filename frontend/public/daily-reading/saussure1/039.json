@@ -552,14 +552,19 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "채소 후보를 ( )했습니다.",
-          "answerText": "토의",
-          "answerMatchMode": "EXACT",
+          "prompt": "채소를 키우려고 만든 작은 밭이라는 뜻의 단어를 지문에서 모두 찾아 보세요.",
+          "answerText": "텃밭",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 76,
-              "end": 78
+              "start": 10,
+              "end": 12
+            },
+            {
+              "paragraphId": "p2",
+              "start": 92,
+              "end": 94
             }
           ],
           "scoring": {
@@ -571,14 +576,19 @@
         },
         {
           "id": "q2",
-          "prompt": "물 줄 ( )을 정했어요.",
-          "answerText": "당번",
-          "answerMatchMode": "EXACT",
+          "prompt": "지문에서 키울 채소 후보로 나온 것을 모두 찾아 보세요.",
+          "answerText": "상추, 방울토마토",
+          "answerMatchMode": "ALL",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 37,
-              "end": 39
+              "paragraphId": "p1",
+              "start": 57,
+              "end": 59
+            },
+            {
+              "paragraphId": "p1",
+              "start": 61,
+              "end": 66
             }
           ],
           "scoring": {
@@ -590,14 +600,33 @@
         },
         {
           "id": "q3",
-          "prompt": "( )하는 마음을 가집시다.",
-          "answerText": "협력",
-          "answerMatchMode": "EXACT",
+          "prompt": "발표 순서를 정해 준 사람이 누구인지 지문에서 찾아 보세요.",
+          "answerText": "회의 진행자",
+          "answerMatchMode": "ANY",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 84,
+              "end": 90
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "최종적으로 무엇을 먼저 심기로 결정했는지 지문에서 찾아 보세요.",
+          "answerText": "상추",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 82,
-              "end": 84
+              "start": 6,
+              "end": 8
             }
           ],
           "scoring": {
