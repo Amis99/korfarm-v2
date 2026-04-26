@@ -103,7 +103,20 @@ def load_bit_chapter(level: str, ch: int):
 # 영역 그룹핑
 # ============================================================
 def group_sections_by_area(sections: list) -> dict:
-    """sections를 area로 그룹핑. 같은 area 안에서는 원본 순서 유지."""
+    """sections를 area로 그룹핑 + 영역 내 type 우선순위 정렬.
+    v18.5: JSON 입력 순서가 활동→지문 같이 뒤바뀐 경우라도 자동으로
+    [개념·해설·지문·어휘 → 활동·문제·글짓기 → 정리표] 순으로 정렬.
+    """
+    TYPE_ORDER = {
+        'concept': 1,
+        'passage_explain': 2,
+        'passage': 3,
+        'vocab_list': 4,
+        'activity': 5,
+        'question': 6,
+        'writing': 7,
+        'summary_table': 8,
+    }
     groups = {}
     order_seen = []
     for s in sections:
@@ -116,6 +129,9 @@ def group_sections_by_area(sections: list) -> dict:
             groups[area] = []
             order_seen.append(area)
         groups[area].append(s)
+    # 영역별 stable sort by type priority (동일 type은 원본 순서 유지)
+    for area in groups:
+        groups[area] = sorted(groups[area], key=lambda s: TYPE_ORDER.get(s.get('type'), 99))
     return groups, order_seen
 
 
@@ -145,17 +161,50 @@ def build_general_chapter_tex(level: str, ch: int) -> str:
 
     out = []
     out.append(rf'\kfChapterCover{{{ch}}}{{{RS.latex_escape(title)}}}{{Chapter {ch}}}{{이번 챕터의 학습 내용을 시작합니다.}}')
-    out.append('')
 
-    # 러셀+(러셀2/3): 문제 섹션 multicols
-    use_qmulticol = level.startswith('러셀') and not level.endswith('1')
+    # v9: 러셀 전 시리즈 + 프레게3: 문제 섹션 multicols
+    use_qmulticol = level.startswith('러셀') or level == '프레게3'
 
     groups, _ = group_sections_by_area(sections)
-    for area in order_areas(list(groups.keys())):
-        guide = ''
-        if groups[area]:
-            t0 = groups[area][0].get('title', '') or ''
-            guide = f'{area} 영역 학습' if not t0 else f'{area} 영역 — {t0}'
+    ordered_areas = order_areas(list(groups.keys()))
+
+    # v15.3: 문학 영역 부제 fallback chain ("만들어서라도 적어")
+    #   1) extract_area_subtitle (작품명/작가 추출)
+    #   2) 첫 passage 본문 첫 줄 (예: 동요 첫 행을 인용)
+    #   3) 챕터 title
+    def _area_sub(area: str) -> str:
+        s = RS.extract_area_subtitle(area, groups[area]) or ''
+        if s:
+            return s
+        if area == '문학':
+            for sec in groups[area]:
+                if not isinstance(sec, dict): continue
+                c = sec.get('content', {})
+                if isinstance(c, dict):
+                    txt = c.get('text', '') or ''
+                    if txt.strip():
+                        first = txt.strip().split('\n')[0].strip()
+                        if len(first) > 24:
+                            first = first[:22] + '…'
+                        return f'「{first}」'
+            return title  # 마지막 fallback
+        return s
+
+    if ordered_areas:
+        out.append(r'\begin{kfChapterAreaList}')
+        for area in ordered_areas:
+            sub = _area_sub(area)
+            color = RS.AREA_COLORS.get(area, 'kfAreaConcept')
+            sub_l = RS.render_inline_oneline(sub) if sub else ''
+            out.append(r'\kfChapterAreaItem{' + RS.latex_escape(area) + '}{' + color + '}{' + sub_l + '}')
+        out.append(r'\end{kfChapterAreaList}')
+    else:
+        out.append(r'\kfChapterCoverEnd')
+    out.append('')
+
+    for area in ordered_areas:
+        sub = _area_sub(area)
+        guide = f'{area} 영역 학습' if not sub else sub
         out.append(RS.area_header(area, guide))
 
         # 같은 영역 내에서 question 섹션을 묶기
@@ -175,7 +224,7 @@ def build_general_chapter_tex(level: str, ch: int) -> str:
                 if tex:
                     out.append(tex)
             else:
-                tex = RS.render_section(s, area=area)
+                tex = RS.render_section(s, area=area, use_multicol=use_qmulticol)
                 if tex:
                     out.append(tex)
                 i += 1
@@ -188,21 +237,84 @@ def build_bit_chapter_tex(level: str, ch: int) -> str:
     out = []
     title = f'{level} ch{ch:02d}'
     out.append(rf'\kfChapterCover{{{ch}}}{{{RS.latex_escape(title)}}}{{Chapter {ch}}}{{이번 챕터: 문법 → 문학 5작품 → 비문학 5지문 → 패턴 워크북.}}')
+
+    # v6: 챕터 표지 하단 영역 목차
+    cover_items = []
+    if bundle.get('grammar'):
+        g = bundle['grammar']
+        domain = (g.get('domain') or '').strip()
+        sub_domain = (g.get('subDomain') or '').strip()
+        if domain and sub_domain:
+            gsub = f'{domain} / {sub_domain}'
+        elif domain:
+            gsub = domain
+        else:
+            gsub = ''
+        cover_items.append(('문법', 'kfAreaGrammar', gsub))
+    if bundle.get('literature'):
+        first = bundle['literature'][0] if bundle['literature'] else {}
+        ft = (first.get('title') or '').strip()
+        fa = (first.get('author') or '').strip()
+        n = len(bundle['literature'])
+        if ft and fa:
+            lsub = f'「{ft}」 — {fa} 외 {n-1}편'
+        elif ft:
+            lsub = f'「{ft}」 외 {n-1}편'
+        else:
+            lsub = f'문학 {n}편'
+        cover_items.append(('문학', 'kfAreaLiterature', lsub))
+    if bundle.get('reading'):
+        first = bundle['reading'][0] if bundle['reading'] else {}
+        ft = (first.get('title') or '').strip()
+        n = len(bundle['reading'])
+        if ft:
+            rsub = f'「{ft}」 외 {n-1}편'
+        else:
+            rsub = f'비문학 {n}편'
+        cover_items.append(('비문학', 'kfAreaNonlit', rsub))
+    if bundle.get('pattern'):
+        pat = bundle['pattern']
+        qc = pat.get('questionCount', '?') if isinstance(pat, dict) else '?'
+        cover_items.append(('실력 확인', 'kfAreaWeekly', f'패턴 워크북 — 총 {qc}문항'))
+
+    if cover_items:
+        out.append(r'\begin{kfChapterAreaList}')
+        for area, color, sub in cover_items:
+            sub_l = RS.render_inline_oneline(sub) if sub else ''
+            out.append(r'\kfChapterAreaItem{' + RS.latex_escape(area) + '}{' + color + '}{' + sub_l + '}')
+        out.append(r'\end{kfChapterAreaList}')
+    else:
+        out.append(r'\kfChapterCoverEnd')
     out.append('')
 
     # 문법
     if bundle.get('grammar'):
         out.append(RS.render_bit_grammar(bundle['grammar']))
         out.append('')
-    # 문학
+    # 문학 — v5: 영역 헤더 부제로 「작품명」 - 작가 형태 (첫 작품 기준)
     if bundle.get('literature'):
-        out.append(RS.area_header('문학', f"이번 챕터 문학 작품 {len(bundle['literature'])}편"))
+        first = bundle['literature'][0] if bundle['literature'] else {}
+        first_title = (first.get('title') or '').strip()
+        first_author = (first.get('author') or '').strip()
+        if first_title:
+            sub = f'「{first_title}」 외 {len(bundle["literature"])-1}편'
+            if first_author:
+                sub = f'「{first_title}」 — {first_author} 외 {len(bundle["literature"])-1}편'
+        else:
+            sub = f"이번 챕터 문학 작품 {len(bundle['literature'])}편"
+        out.append(RS.area_header('문학', sub))
         for i, lit in enumerate(bundle['literature'], 1):
             out.append(RS.render_bit_literature(lit, i))
             out.append('')
-    # 비문학
+    # 비문학 — v5: 첫 지문 제목으로 부제
     if bundle.get('reading'):
-        out.append(RS.area_header('비문학', f"이번 챕터 비문학 지문 {len(bundle['reading'])}편"))
+        first = bundle['reading'][0] if bundle['reading'] else {}
+        first_title = (first.get('title') or '').strip()
+        if first_title:
+            sub = f'{first_title} 외 {len(bundle["reading"])-1}편'
+        else:
+            sub = f"이번 챕터 비문학 지문 {len(bundle['reading'])}편"
+        out.append(RS.area_header('비문학', sub))
         for i, rd in enumerate(bundle['reading'], 1):
             out.append(RS.render_bit_reading(rd, i))
             out.append('')
@@ -262,14 +374,22 @@ def build_volume_tex(level: str, vol: int) -> str:
 \begin{{document}}
 """
 
-    # 표지(권 표지)
+    # 표지(권 표지) — v18.2: Canva 배경 + 시리즈명 초대형, 시리즈별 색상 분기
+    import re as _re
+    _m = _re.match(r'^(.+?)([0-9]+)$', level)
+    if _m:
+        series_name, series_num = _m.group(1), _m.group(2)
+    else:
+        series_name, series_num = level, ''
     cover = rf"""
-\thispagestyle{{empty}}
-\vspace*{{40mm}}
+\thispagestyle{{kfBlank}}
+\kfBookCoverBg
+\vspace*{{\kfBookCoverVspace}}
 \begin{{center}}
-{{\Huge\bfseries\color{{kfPrimary}} {RS.latex_escape(level)}}}\\[10pt]
-{{\Large\color{{kfMute}} 학생용 교재 — 제 {vol} 권}}\\[20pt]
-{{\small\color{{kfMute}} (챕터 {ch_start} \textendash{{}} {ch_end})}}
+{{\kfLogoLg}}\\[14pt]
+{{\fontsize{{72}}{{84}}\selectfont\bfseries\kfBookCoverColor {RS.latex_escape(series_name)}}}\\[18pt]
+{{\fontsize{{28}}{{32}}\selectfont\kfBookCoverSubColor \textsc{{Level}} \textbf{{{series_num}}}}}\\[22pt]
+{{\large\kfBookCoverSubColor 제 {vol} 권 \quad\textbar\quad 챕터 {ch_start}\textendash{{}} {ch_end}}}
 \end{{center}}
 \vfill
 \hfill\kfSeriesBadge\hspace{{15mm}}
@@ -288,7 +408,8 @@ def compile_pdf(tex_name: str, work_dir: Path) -> tuple[bool, int, str]:
     # TEXINPUTS는 Windows에서 ;로 구분, 끝에 ; 두 개 = 표준 경로 추가
     components_p = str(COMPONENTS).replace('\\', '/')
     styles_p = str(STYLES).replace('\\', '/')
-    texinputs = f'.;{components_p};{styles_p};;'
+    assets_p = str(HARNESS / '_assets').replace('\\', '/')
+    texinputs = f'.;{components_p};{styles_p};{assets_p};;'
     env = os.environ.copy()
     env['TEXINPUTS'] = texinputs
 
@@ -330,7 +451,12 @@ def build_one(level: str, vol: int) -> dict:
     pdf_src = DRAFT / f'{out_name}.pdf'
     pdf_dst = OUTPUT / f'{out_name}.pdf'
     if pdf_src.exists():
-        shutil.copy2(pdf_src, pdf_dst)
+        try:
+            shutil.copy2(pdf_src, pdf_dst)
+        except PermissionError as pe:
+            # 뷰어가 대상 파일을 잡고 있을 때: draft PDF를 그대로 사용.
+            print(f'  [WARN] output 복사 실패 (뷰어 점유 가능): {pe}')
+            pdf_dst = pdf_src
     return {
         'level': level, 'vol': vol, 'success': success,
         'pages': pages, 'pdf': str(pdf_dst) if pdf_src.exists() else None,

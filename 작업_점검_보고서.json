@@ -1239,6 +1239,441 @@
         "SSH 키와 네트워크 접근 권한이 있는 세션에서 node scripts/reorder-daily-reading-intensive-timeline.mjs --source=db 를 실행한다.",
         "dry-run 결과가 정상이라면 node scripts/reorder-daily-reading-intensive-timeline.mjs --source=db --apply-db 를 실행한다."
       ]
+    },
+    {
+      "entry_id": "2026-04-24-017",
+      "timestamp": "2026-04-24T19:21:19+09:00",
+      "task_summary": "전체 프로젝트 구조, 기능, 배포, DB 스키마 점검",
+      "project_root": "C:\\Users\\RENEWCOM PC\\Documents\\국어농장v2홈페이지",
+      "related_projects": [],
+      "work_type": [
+        "project audit",
+        "frontend route audit",
+        "backend api audit",
+        "database schema audit",
+        "deployment readiness check"
+      ],
+      "files_created": [
+        "docs/전체_프로젝트_기능_점검_보고서_2026-04-24.md"
+      ],
+      "files_updated": [
+        "작업_점검_보고서.json"
+      ],
+      "files_checked": [
+        "frontend/src/App.jsx",
+        "frontend/src/pages/FarmListPage.jsx",
+        "frontend/src/pages/AdminFlagsPage.jsx",
+        "frontend/src/components/editor/EditorShell.jsx",
+        "backend/src/main/kotlin/**/*.kt",
+        "backend/src/main/resources/application.yml",
+        "backend/src/main/resources/application-prod.yml",
+        "backend/src/main/resources/db/migration/*.sql",
+        "scripts/deploy-frontend.sh",
+        "scripts/deploy-backend.sh",
+        "docs/api.md",
+        "docs/data-model.md",
+        "docs/settings.default.json",
+        "docs/프로젝트_현황_명세서.md"
+      ],
+      "verification": {
+        "checks_performed": [
+          "프론트 라우터 기준 112개 경로, pages 106개, JSX components 90개 집계",
+          "백엔드 Kotlin 파일 217개, REST 컨트롤러 53개, HTTP 매핑 345개 집계",
+          "JPA @Table 매핑 97개와 마이그레이션 CREATE TABLE 90개 비교",
+          "마이그레이션 CREATE TABLE 누락 후보 13개 테이블 도출",
+          "운영 DB SSH 터널 연결 후 information_schema 메타데이터 조회 성공",
+          "운영 DB에서 누락 후보 13개 테이블과 flyway_schema_history 존재 확인",
+          "aws sts get-caller-identity 성공 및 root ARN 사용 확인",
+          "npm.cmd run lint 실행 결과 241 errors, 57 warnings로 실패 확인",
+          "npm.cmd run build 실행 결과 Vite 프로덕션 빌드 성공 및 EditorShell 중복 키 경고 확인",
+          ".\\gradlew.bat test 통과",
+          ".\\gradlew.bat bootJar -x test 통과",
+          "작업_점검_보고서.json JSON.parse 통과"
+        ],
+        "result_summary": "전체 프로젝트의 주요 기능 영역, 프론트/백엔드 연결, 운영 배포 경로, DB 스키마 재현성을 점검했다. 프론트/백엔드 빌드는 통과했지만 마이그레이션 재현성, 농장 page-progress API 불일치, root AWS 자격 증명, 하드코딩 운영 접근 정보, ESLint 실패, AdminFlags 라우트 누락을 주요 위험으로 기록했다.",
+        "manual_review": true,
+        "json_validation": true
+      },
+      "status": "done",
+      "remaining_risks": [
+        "운영 DB에는 누락 후보 테이블이 존재하지만 새 DB를 마이그레이션만으로 재현할 수 없는 상태다.",
+        "frontend/src/pages/FarmListPage.jsx가 백엔드에 없는 /v1/learning/farm/page-progress를 호출한다.",
+        "AWS 인증이 root ARN으로 확인되어 배포 자동화 권한 분리가 필요하다.",
+        "여러 운영/DB 접근 스크립트에 민감 설정이 직접 들어 있어 시크릿 분리가 필요하다.",
+        "프론트 ESLint가 실패하므로 CI 게이트로 사용하려면 설정/코드 정리가 필요하다.",
+        "현재 워크트리가 다른 AI 작업으로 매우 더러워서 배포 시 의도하지 않은 변경이 포함될 수 있다."
+      ],
+      "next_actions": [
+        "누락 13개 테이블의 기준 DDL을 마이그레이션으로 복구하고 빈 DB에서 Flyway + ddl-auto validate를 검증한다.",
+        "농장 page-progress API를 백엔드에 복구하거나 프론트 모달을 현재 progress API 기준으로 수정한다.",
+        "AWS root 자격 증명과 하드코딩 DB 접속 정보를 최소 권한 IAM 및 환경변수/시크릿으로 분리한다.",
+        "ESLint ignore/override와 src 오류를 분리해 린트 게이트를 회복한다.",
+        "AdminFlagsPage를 /admin/flags 라우트와 관리자 메뉴에 연결할지 결정한다.",
+        "배포 전 현재 워크트리의 변경 범위를 별도 브랜치/커밋으로 명확히 고정한다."
+      ]
+    },
+    {
+      "entry_id": "2026-04-24-018",
+      "timestamp": "2026-04-24T19:59:14+09:00",
+      "task_summary": "농장 학습 진행률 오류 방법 B 작업 지시서 작성",
+      "project_root": "C:\\Users\\RENEWCOM PC\\Documents\\국어농장v2홈페이지",
+      "related_projects": [],
+      "work_type": [
+        "handoff document",
+        "frontend bug triage",
+        "no-code-change instruction"
+      ],
+      "files_created": [
+        "docs/농장학습_진행률오류_방법B_작업지시서_2026-04-24.md"
+      ],
+      "files_updated": [
+        "작업_점검_보고서.json"
+      ],
+      "files_checked": [
+        "frontend/src/pages/FarmListPage.jsx",
+        "backend/src/main/kotlin/com/korfarm/api/learning/FarmLearningController.kt",
+        "backend/src/main/kotlin/com/korfarm/api/learning/FarmLearningDtos.kt",
+        "backend/src/main/resources/db/migration/V0046__study_content_module.sql"
+      ],
+      "verification": {
+        "checks_performed": [
+          "FarmListPage.jsx에서 /v1/learning/farm/page-progress 호출 위치 재확인",
+          "FarmLearningController.kt에 /page-progress 엔드포인트가 없고 /progress 엔드포인트만 존재함을 재확인",
+          "FarmLearningDtos.kt의 /progress 응답이 stats와 myStatus만 제공함을 확인",
+          "V0046__study_content_module.sql에서 content_page_progress 테이블 삭제 이력 확인",
+          "사용자 결정 사항: 방법 B, 배포 금지, 코드 수정 금지, 다음 AI 작업용 문서화",
+          "작업_점검_보고서.json JSON.parse 통과"
+        ],
+        "result_summary": "사용자가 선택한 방법 B 기준으로 다음 AI가 FarmListPage.jsx만 좁게 수정할 수 있도록 문제 원인, 건드릴 파일, 건드리지 말아야 할 범위, UX 방향, 검증 기준을 한 문서에 정리했다. 코드와 배포는 수행하지 않았다.",
+        "manual_review": true,
+        "json_validation": true
+      },
+      "status": "done",
+      "remaining_risks": [
+        "실제 코드 수정은 아직 수행하지 않았다.",
+        "현재 워크트리가 다른 AI 작업으로 더러워 다음 작업자는 수정 파일 범위를 엄격히 제한해야 한다.",
+        "방법 B 적용 후에는 페이지별 정확도/씨앗/마지막 페이지 표시는 제거되거나 단순화된다."
+      ],
+      "next_actions": [
+        "다음 AI가 docs/농장학습_진행률오류_방법B_작업지시서_2026-04-24.md를 기준으로 FarmListPage.jsx만 수정한다.",
+        "수정 후 /v1/learning/farm/page-progress 문자열이 사라졌는지 확인한다.",
+        "npm.cmd run build로 프론트 빌드를 확인하고 배포는 하지 않는다."
+      ]
+    },
+    {
+      "entry_id": "2026-04-25-001",
+      "timestamp": "2026-04-25T10:55:34+09:00",
+      "task_summary": "saussure3 일일 독해 확인학습 001-365 전수 수동 재작성",
+      "project_root": "C:\\Users\\RENEWCOM PC\\Documents\\국어농장v2홈페이지",
+      "related_projects": [],
+      "work_type": [
+        "daily-reading confirm rewrite",
+        "manual question authoring",
+        "answer range validation"
+      ],
+      "files_created": [],
+      "files_updated": [
+        "frontend/public/daily-reading/saussure3/001.json through 365.json",
+        "작업_점검_보고서.json"
+      ],
+      "files_checked": [
+        "frontend/public/daily-reading/saussure3/001.json through 365.json"
+      ],
+      "verification": {
+        "checks_performed": [
+          "All 365 saussure3 JSON files parsed successfully",
+          "Every payload.confirm.questions array has exactly 4 questions",
+          "Every rewritten confirm question uses only ANY or ALL",
+          "No rewritten confirm question uses EXACT or EXACT_MATCH",
+          "Every ALL question prompt contains 모두 찾으시오",
+          "Every answerRange JS slice(start,end) matches a registered answerText or answerTexts item",
+          "Every duplicate occurrence of each registered answer text is included in answerRanges",
+          "Final validator result: OK saussure3 001-365"
+        ],
+        "result_summary": "saussure3 365개 일일 독해 파일의 확인학습을 사용자 지침에 맞춰 4문항씩 수동 재작성했고, 지문 원문 기반 답과 정확한 위치 범위를 검증했다.",
+        "manual_review": true,
+        "json_validation": true
+      },
+      "status": "done",
+      "remaining_risks": [
+        "이번 작업은 로컬 JSON 파일 수정과 검증만 수행했으며, 배포나 DB 반영은 수행하지 않았다.",
+        "현재 요청 범위 밖인 frege1, frege2, frege3 확인학습 전수 재작성은 별도 작업으로 남아 있다."
+      ],
+      "next_actions": [
+        "frege1 확인학습 재작성 작업을 같은 규칙으로 시작한다.",
+        "DB 반영이 필요하면 로컬 JSON 검증 완료본을 기준으로 별도 승인 후 등록 절차를 진행한다."
+      ]
+    },
+    {
+      "entry_id": "2026-04-26-001",
+      "timestamp": "2026-04-26T00:00:00+09:00",
+      "task_summary": "frege2 일일 독해 확인학습 001-365 전수 수동 재작성",
+      "project_root": "C:\\Users\\RENEWCOM PC\\Documents\\국어농장v2홈페이지",
+      "related_projects": [],
+      "work_type": [
+        "daily-reading confirm rewrite",
+        "manual question authoring",
+        "answer range validation"
+      ],
+      "files_created": [],
+      "files_updated": [
+        "frontend/public/daily-reading/frege2/001.json through 365.json",
+        "작업_점검_보고서.json"
+      ],
+      "files_checked": [
+        "frontend/public/daily-reading/frege2/001.json through 365.json"
+      ],
+      "verification": {
+        "checks_performed": [
+          "All 365 frege2 JSON files parsed successfully",
+          "Every payload.confirm.questions array has exactly 5 questions",
+          "Every rewritten confirm question uses only ANY or ALL",
+          "No rewritten confirm question uses EXACT or EXACT_MATCH",
+          "Every ALL question prompt contains 모두",
+          "Every answerRange JS slice(start,end) matches a registered answerText or answerTexts item",
+          "Every duplicate occurrence of each registered answer text is included in answerRanges",
+          "Final validator result: OK frege2 001-365"
+        ],
+        "result_summary": "frege2 365개 일일 독해 파일의 확인학습을 사용자 지침에 맞춰 5문항씩 수동 재작성했고, 지문 원문 기반 답과 정확한 위치 범위를 검증했다.",
+        "manual_review": true,
+        "json_validation": true
+      },
+      "status": "done",
+      "remaining_risks": [
+        "이번 작업은 로컬 JSON 파일 수정과 검증만 수행했으며, 배포나 DB 반영은 수행하지 않았다.",
+        "같은 요청 범위 안에서 frege3 확인학습 전수 재작성은 아직 남아 있다."
+      ],
+      "next_actions": [
+        "frege3 확인학습 재작성 작업을 같은 규칙으로 시작한다.",
+        "DB 반영이 필요하면 로컬 JSON 검증 완료본을 기준으로 별도 승인 후 등록 절차를 진행한다."
+      ]
+    },
+    {
+      "entry_id": "2026-04-26-002",
+      "timestamp": "2026-04-26T00:00:00+09:00",
+      "task_summary": "wittgenstein1, wittgenstein2, wittgenstein3 daily-reading confirmation-learning questions 001-365 manual rewrite",
+      "project_root": "C:\\Users\\RENEWCOM PC\\Documents\\국어농장v2홈페이지",
+      "related_projects": [],
+      "work_type": [
+        "daily-reading confirm rewrite",
+        "manual question authoring",
+        "answer range validation",
+        "agent-assisted batch editing"
+      ],
+      "files_created": [],
+      "files_updated": [
+        "frontend/public/daily-reading/wittgenstein1/001.json through 365.json",
+        "frontend/public/daily-reading/wittgenstein2/001.json through 365.json",
+        "frontend/public/daily-reading/wittgenstein3/001.json through 365.json",
+        "tmp/daily-reading-confirm-rewrite-report-2026-04-26.json",
+        "작업_점검_보고서.json"
+      ],
+      "files_checked": [
+        "frontend/public/daily-reading/wittgenstein1/001.json through 365.json",
+        "frontend/public/daily-reading/wittgenstein2/001.json through 365.json",
+        "frontend/public/daily-reading/wittgenstein3/001.json through 365.json"
+      ],
+      "verification": {
+        "checks_performed": [
+          "All 1,095 wittgenstein JSON files parsed successfully",
+          "Every payload.confirm.questions array has exactly 8 questions",
+          "Every rewritten confirm question uses only ANY or ALL",
+          "No rewritten confirm question uses EXACT or EXACT_MATCH",
+          "Every ALL question prompt contains 모두",
+          "ANY questions use answerText and ALL questions use answerTexts",
+          "Every answerRange JS slice(start,end) matches a registered answerText or answerTexts item",
+          "Every duplicate occurrence of each registered answer text is included in answerRanges",
+          "Final validator result: OK FINAL cumulative wittgenstein1-3 001-365"
+        ],
+        "result_summary": "wittgenstein1-3 365 days each, 8 confirmation-learning questions per file, were manually rewritten against exact passage substrings and locally validated for answer text, answerRanges, duplicate occurrences, and ANY/ALL rules.",
+        "manual_review": true,
+        "json_validation": true
+      },
+      "status": "done",
+      "remaining_risks": [
+        "This task changed local JSON files only. No AWS deployment, DB registration, or DB update was performed.",
+        "Other levels outside wittgenstein1-3 were not part of this final validation pass."
+      ],
+      "next_actions": [
+        "If DB registration is needed later, run a separate DB update process from the validated local JSON after explicit approval."
+      ]
+    },
+    {
+      "entry_id": "2026-04-27-russell3-confirm-201-220",
+      "timestamp": "2026-04-27T00:00:00+09:00",
+      "task_summary": "russell3 daily-reading confirmation questions manually rewritten for 201-220 only.",
+      "project_root": "C:\\Users\\RENEWCOM PC\\Documents\\국어농장v2홈페이지",
+      "work_type": [
+        "daily-reading confirm rewrite",
+        "manual question and answer authoring",
+        "offset validation only"
+      ],
+      "files_created": [],
+      "files_updated": [
+        "frontend/public/daily-reading/russell3/201.json through 220.json",
+        "작업_점검_보고서.json",
+        "tmp/daily-reading-confirm-rewrite-report-2026-04-26.json"
+      ],
+      "files_checked": [
+        "frontend/public/daily-reading/russell3/201.json through 220.json"
+      ],
+      "verification": {
+        "checks_performed": [
+          "JSON parse for russell3 201-220",
+          "6 confirm questions per file",
+          "answerMatchMode is ANY or ALL only",
+          "ALL prompts include 모두",
+          "answer range slices match exact answer text",
+          "all duplicate occurrences of each answer text are registered"
+        ],
+        "result_summary": "OK russell3 201-220. Questions and answer texts were authored manually by reading each passage; scripting was used only for answer offset calculation and validation.",
+        "manual_review": true,
+        "json_validation": true
+      },
+      "status": "pass",
+      "remaining_risks": [
+        "russell3 221-365 still remains in the old quoted-summary style except any pre-existing unrelated edits."
+      ],
+      "next_actions": [
+        "Continue manual rewrite from russell3/221.json."
+      ]
+    },
+    {
+      "entry_id": "2026-04-27-russell3-confirm-221-236",
+      "timestamp": "2026-04-27T00:00:00+09:00",
+      "task_summary": "russell3 daily-reading confirmation questions manually rewritten for 221-236 only.",
+      "project_root": "C:\\Users\\RENEWCOM PC\\Documents\\국어농장v2홈페이지",
+      "work_type": [
+        "daily-reading confirm rewrite",
+        "manual question and answer authoring",
+        "offset validation only"
+      ],
+      "files_created": [],
+      "files_updated": [
+        "frontend/public/daily-reading/russell3/221.json through 236.json",
+        "작업_점검_보고서.json",
+        "tmp/daily-reading-confirm-rewrite-report-2026-04-26.json"
+      ],
+      "files_checked": [
+        "frontend/public/daily-reading/russell3/221.json through 236.json"
+      ],
+      "verification": {
+        "checks_performed": [
+          "JSON parse for russell3 221-236",
+          "6 confirm questions per file",
+          "answerMatchMode is ANY or ALL only",
+          "ANY questions use answerText and ALL questions use answerTexts",
+          "ALL prompts include 모두",
+          "answer range slices match exact answer text",
+          "all duplicate occurrences of each answer text are registered"
+        ],
+        "result_summary": "OK russell3 221-236. Questions and answer texts were authored manually by reading each passage; scripting/tooling was used only for answer offset calculation, validation, and report update.",
+        "manual_review": true,
+        "json_validation": true
+      },
+      "status": "pass",
+      "remaining_risks": [
+        "russell3 237-365 still remains to be manually rewritten unless already changed by another AI later.",
+        "This task changed local JSON files only. No AWS deployment, DB registration, or DB update was performed."
+      ],
+      "next_actions": [
+        "Continue manual rewrite from russell3/237.json."
+      ]
+    },
+    {
+      "entry_id": "2026-04-27-russell3-confirm-237-365",
+      "timestamp": "2026-04-27T00:00:00+09:00",
+      "task_summary": "russell3 daily-reading confirmation questions manually rewritten for 237-365, completing the remaining tail segment after prior 201-236 work.",
+      "project_root": "C:\\Users\\RENEWCOM PC\\Documents\\????v2????",
+      "work_type": [
+        "daily-reading confirm rewrite",
+        "manual question and answer authoring",
+        "agent-assisted batch editing",
+        "offset validation only"
+      ],
+      "files_created": [],
+      "files_updated": [
+        "frontend/public/daily-reading/russell3/237.json through 365.json",
+        "??_??_???.json",
+        "tmp/daily-reading-confirm-rewrite-report-2026-04-26.json"
+      ],
+      "files_checked": [
+        "frontend/public/daily-reading/russell3/237.json through 365.json",
+        "frontend/public/daily-reading/russell3/001.json through 236.json (strict audit only, not rewritten in this step)"
+      ],
+      "verification": {
+        "checks_performed": [
+          "JSON parse for russell3 237-365",
+          "129 files checked, 6 confirm questions per file, 774 questions total",
+          "answerMatchMode is ANY or ALL only",
+          "ANY questions use answerText and ALL questions use answerTexts",
+          "ALL prompts include ??",
+          "answer range slices match exact registered answer text",
+          "all duplicate occurrences of each registered answer text are included in answerRanges",
+          "Strict audit of pre-existing russell3 001-236 found 136 issue files / 1171 validator issues, first observed at 009.json"
+        ],
+        "result_summary": "OK russell3 237-365: 774 confirmation-learning questions validated. Full russell3 001-365 strict validation is not clean yet because pre-existing 001-236 issues remain outside this step.",
+        "manual_review": true,
+        "json_validation": true
+      },
+      "status": "pass_with_prior_scope_risk",
+      "remaining_risks": [
+        "russell3 237-365 passed the strict local validator after manual rewrite.",
+        "russell3 001-236 contains earlier work with strict-validator issues: 136 files / 1171 issues, mainly ALL answerText vs answerTexts and missing duplicate occurrences.",
+        "This task changed local JSON files only. No AWS deployment, DB registration, or DB update was performed."
+      ],
+      "next_actions": [
+        "Clean and revalidate russell3 001-236 before claiming full russell3 001-365 strict completion.",
+        "Run DB registration only after explicit approval and after the full local strict validation is clean."
+      ]
+    },
+    {
+      "entry_id": "2026-04-27-russell3-confirm-001-365-strict-clean",
+      "timestamp": "2026-04-27T00:00:00+09:00",
+      "task_summary": "russell3 daily-reading confirmation-learning strict cleanup completed for 001-236, making russell3 001-365 pass full validation.",
+      "project_root": "C:\\Users\\RENEWCOM PC\\Documents\\????v2????",
+      "work_type": [
+        "daily-reading confirm rewrite cleanup",
+        "manual answer structure review",
+        "agent-assisted disjoint range editing",
+        "full answer range validation"
+      ],
+      "files_created": [
+        "tmp/russell3-001-236-strict-issues.json"
+      ],
+      "files_updated": [
+        "frontend/public/daily-reading/russell3/001.json through 236.json issue files only",
+        "??_??_???.json",
+        "tmp/daily-reading-confirm-rewrite-report-2026-04-26.json"
+      ],
+      "files_checked": [
+        "frontend/public/daily-reading/russell3/001.json through 365.json"
+      ],
+      "verification": {
+        "checks_performed": [
+          "Initial strict audit of russell3 001-236 found 136 issue files / 1171 validator issues",
+          "Disjoint cleanup ranges: 001-060, 061-120, 121-180, 181-236",
+          "JSON parse for russell3 001-365",
+          "365 files checked, 6 confirm questions per file, 2190 questions total",
+          "answerMatchMode is ANY or ALL only",
+          "ANY questions use answerText and ALL questions use answerTexts",
+          "ALL prompts include ??",
+          "answer range slices match exact registered answer text",
+          "all duplicate occurrences of each registered answer text are included in answerRanges",
+          "Final validator result: OK russell3 001-365: 2190 questions validated; ANY=1842; ALL=348"
+        ],
+        "result_summary": "OK russell3 001-365. The earlier strict-validator issues in 001-236 were cleaned, and the full russell3 set now validates under the same rules used for 237-365.",
+        "manual_review": true,
+        "json_validation": true
+      },
+      "status": "pass",
+      "remaining_risks": [
+        "This task changed local JSON files only. No AWS deployment, DB registration, or DB update was performed.",
+        "The validation checks structural correctness and exact passage spans; it does not replace human pedagogical review of every question style."
+      ],
+      "next_actions": [
+        "Use the validated local JSON as the source for any later DB registration only after explicit approval."
+      ]
     }
   ]
 }

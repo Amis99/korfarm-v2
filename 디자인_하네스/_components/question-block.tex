@@ -1,32 +1,74 @@
 % ============================================================
-% question-block.tex
+% question-block.tex (v12)
 % 문제 블록 (번호 배지 + 발문 + 보기/조건 + 선택지 + 답안란)
 % 모든 구성을 하나의 minipage로 묶어 단/페이지 단절 금지
 %
+% 번호 배지: 타입별 색
+%   객관식 = kfPrimary (파랑)
+%   단답형 = kfAreaGrammar (초록)
+%   서술형 = kfAccent (주황)
+%
+% 번호 포맷: 2자리 0 패딩 (01, 02, …, 99) — 박스 폭 일정 (minimum width)
+%
 % 사용:
-%   \begin{kfQBlock}{1}{객관식}
-%     \kfQStem{다음 글에 대한 설명으로 가장 적절한 것은?}
-%     \begin{kfEvidence} ... \end{kfEvidence}    % 선택
-%     \begin{kfCondition} ... \end{kfCondition}  % 선택
-%     \begin{kfChoices}
-%       \kfChoice ...
-%     \end{kfChoices}
-%     \kfAnswerLines{2}                            % 선택
+%   \begin{kfQBlock}{01}{객관식}
+%     \kfQStem{...}
+%     \begin{kfChoices}...\end{kfChoices}
 %   \end{kfQBlock}
+%   \begin{kfQBlock}{02}{단답형} ... \end{kfQBlock}
+%   \begin{kfQBlock}{03}{서술형} ... \end{kfQBlock}
 % ============================================================
 
-% 무단절 minipage로 묶고, 발문/보기/조건/선택지/답안란을 자유롭게 배치
-% 사용자 피드백 #4: [객관식]/[서술형] 등 텍스트 라벨 제거 — 번호 배지만 표시
-% #2(유형 라벨)는 호환성 인자로만 받고 출력하지 않음.
-\newenvironment{kfQBlock}[2]%
-  {\par\smallskip\needspace{6\baselineskip}%
-   \noindent\begin{minipage}{\linewidth}%
-   \samepage%
-   \par\noindent
-   \kfQNum{#1}\hspace{4pt}%
-   \begin{minipage}[t]{\dimexpr\linewidth-30pt\relax}%
+% 타입별 배지 매크로 (@ 없이 — 인용부가 \makeatletter 모드가 아니어도 안전)
+\newcommand{\kfQnumDraw}[2]{%
+  \tikz[baseline=(qn.base)]{%
+    \node[draw=#1, fill=#1!10, text=#1,
+          rounded corners=3pt, minimum width=22pt,
+          inner xsep=4pt, inner ysep=2pt,
+          font=\small\bfseries]
+          (qn) {#2};%
   }%
-  {\end{minipage}\end{minipage}\par\smallskip}
+}
+
+\newcommand{\kfQNumObj}[1]{\kfQnumDraw{kfPrimary}{#1}}
+\newcommand{\kfQNumShort}[1]{\kfQnumDraw{kfAreaGrammar}{#1}}
+\newcommand{\kfQNumDesc}[1]{\kfQnumDraw{kfAccent}{#1}}
+\renewcommand{\kfQNum}[1]{\kfQNumObj{#1}}
+
+% 유형 문자열로 배지 색 선택
+\def\kfTypeShort{단답형}
+\def\kfTypeDesc{서술형}
+
+\newcommand{\kfQNumByType}[2]{%
+  \def\kfCurType{#1}%
+  \ifx\kfCurType\kfTypeShort
+    \kfQNumShort{#2}%
+  \else
+    \ifx\kfCurType\kfTypeDesc
+      \kfQNumDesc{#2}%
+    \else
+      \kfQNumObj{#2}%
+    \fi
+  \fi
+}
+
+% 무단절 + 타입별 번호 배지
+% v14: tcolorbox(blanker, breakable=false)로 회귀 — 자동 fits 검사
+%      multicols* 시작 직전 \needspace{0.45\textheight}로 컬럼 측정 정확성 보장
+%      lrbox 측정 + \columnbreak 로직은 너무 보수적이라 단 바꿈 과다 발생 (#34) → 폐기
+% PAGE_BREAK_POLICY.md §2.6, §5
+\newenvironment{kfQBlock}[2]%
+  {\par\smallskip%
+   \begin{tcolorbox}[
+     blanker, breakable=false, parbox=false,
+     left=0pt, right=0pt, top=0pt, bottom=0pt,
+     before skip=2pt, after skip=4pt
+   ]%
+   \noindent\kfQNumByType{#2}{#1}\hspace{4pt}%
+   \begin{minipage}[t]{\dimexpr\linewidth-34pt\relax}%
+       \ignorespaces%
+  }%
+  {\end{minipage}\end{tcolorbox}}
 
 % 문제 발문
 \newcommand{\kfQStem}[1]{%

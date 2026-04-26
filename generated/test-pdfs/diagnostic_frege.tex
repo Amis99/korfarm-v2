@@ -1,0 +1,1144 @@
+\documentclass[12pt,a4paper]{article}
+
+% ─── 인코딩 / 폰트 ───
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\xeCJKsetup{CJKspace=true}
+\setCJKmainfont{Noto Sans KR}[
+  Path=C:/Windows/Fonts/, Extension=.ttf,
+  UprightFont=NotoSansKR-VF, BoldFont=NotoSansKR-VF,
+  UprightFeatures={RawFeature={axis={wght=400}}},
+  BoldFeatures={RawFeature={axis={wght=700}}},
+]
+\setCJKsansfont{Noto Sans KR}[
+  Path=C:/Windows/Fonts/, Extension=.ttf,
+  UprightFont=NotoSansKR-VF, BoldFont=NotoSansKR-VF,
+  UprightFeatures={RawFeature={axis={wght=400}}},
+  BoldFeatures={RawFeature={axis={wght=700}}},
+]
+\setmainfont{Noto Sans KR}[
+  Path=C:/Windows/Fonts/, Extension=.ttf,
+  UprightFont=NotoSansKR-VF, BoldFont=NotoSansKR-VF,
+  UprightFeatures={RawFeature={axis={wght=400}}},
+  BoldFeatures={RawFeature={axis={wght=700}}},
+]
+
+% ─── 레이아웃 ───
+\usepackage[a4paper, margin=1.5cm, top=2.8cm, bottom=2cm, heightrounded]{geometry}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{needspace}
+\usepackage{etoolbox}
+\usepackage[normalem]{ulem}
+
+\fontsize{12pt}{16pt}\selectfont
+
+\definecolor{korfarmBrown}{HTML}{8B6914}
+\definecolor{passageBg}{HTML}{F5F5F0}
+\definecolor{passageBorder}{HTML}{D0C8B0}
+\definecolor{bogiBg}{HTML}{EBF2FA}
+\definecolor{bogiBorder}{HTML}{A8C8E8}
+\definecolor{condBg}{HTML}{FFF4E6}
+\definecolor{condBorder}{HTML}{E8C890}
+\definecolor{numCircle}{HTML}{2C3E50}
+\definecolor{ptsBadge}{HTML}{6B7280}
+\definecolor{answerLine}{HTML}{B0B0B0}
+\definecolor{noticeBg}{HTML}{FFF7E8}
+\definecolor{noticeBorder}{HTML}{D4B980}
+
+\tcbset{
+  passage/.style={
+    colback=passageBg, colframe=passageBorder,
+    boxrule=0.5pt, arc=3pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+    fontupper=\fontsize{12pt}{19pt}\selectfont,
+    breakable,
+  },
+  bogi/.style={
+    colback=bogiBg, colframe=bogiBorder,
+    boxrule=0.5pt, arc=3pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+    fontupper=\fontsize{12pt}{16pt}\selectfont,
+    title={\textbf{〈보기〉}},
+    fonttitle=\bfseries,
+    coltitle=black,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=bogiBg, colframe=bogiBorder, boxrule=0.3pt, arc=2pt},
+  },
+  cond/.style={
+    colback=condBg, colframe=condBorder,
+    boxrule=0.5pt, arc=3pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+    fontupper=\fontsize{12pt}{16pt}\selectfont,
+    title={\textbf{〈조건〉}},
+    fonttitle=\bfseries,
+    coltitle=black,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=condBg, colframe=condBorder, boxrule=0.3pt, arc=2pt},
+  },
+  notice/.style={
+    colback=noticeBg, colframe=noticeBorder,
+    boxrule=0.8pt, arc=4pt, left=10pt, right=10pt, top=8pt, bottom=8pt,
+    fontupper=\fontsize{12pt}{16pt}\selectfont,
+  },
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[L]{%
+  \raisebox{-4pt}{\includegraphics[height=18pt]{C:/Users/RENEWCOM PC/Documents/국어농장v2홈페이지/scripts/../frontend/public/korfarm-logo.png}}%
+  \hspace{6pt}%
+  \textbf{[진단] 프레게 단계}%
+  \hspace{6pt}%
+  \textcolor{gray}{역량 진단 시험지}%
+}
+\fancyhead[R]{%
+  \small\textcolor{gray}{48문항\,·\,480점\,·\,60분}%
+}
+\fancyfoot[C]{\small\textcolor{gray}{— \thepage\ —}}
+
+\raggedbottom
+\setlength{\headheight}{20pt}
+\addtolength{\topmargin}{-6pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlength{\columnsep}{12pt}
+
+\newcommand{\qnum}[1]{%
+  \tikz[baseline=(num.base)]{%
+    \node[circle, fill=numCircle, text=white, inner sep=0pt,
+          minimum size=18pt, font=\small\bfseries] (num) {#1};%
+  }%
+}
+
+\newcommand{\pts}[1]{%
+  \hfill\textcolor{ptsBadge}{[#1점]}%
+}
+
+\newcommand{\answerlines}[1]{%
+  \par\vspace{4pt}%
+  \foreach \i in {1,...,#1} {%
+    {\color{answerLine}\hrule height 0.4pt}\vspace{35pt}%
+  }%
+  \vspace{2pt}%
+}
+
+\begin{document}
+\twocolumn[
+% ─── 첫 페이지 헤더 ───
+\begin{center}
+{\Large\bfseries [진단] 프레게 단계 역량 진단}
+\end{center}
+\vspace{3mm}
+{\color{korfarmBrown}\hrule height 1.2pt}
+\vspace{4mm}
+\hfill\rule{3.5cm}{0.4pt}\,학교\hspace{10mm}%
+\rule{2cm}{0.4pt}\,학년\hspace{10mm}%
+이름\,\rule{3.5cm}{0.4pt}
+\vspace{4mm}
+{\color{korfarmBrown}\hrule height 0.6pt}
+\vspace{4mm}
+
+% ─── 응시 안내 박스 ───
+\begin{tcolorbox}[notice]
+\textbf{응시 안내}\\[2pt]
+$\bullet$\ 객관식 48문항\,·\,60분 제한\\
+$\bullet$\ \textbf{문제를 다 풀면 답안을 바로 제출하세요.}\\
+$\bullet$\ 찍고 넘어간 문제는 풀이속도 측정 시 1문항당 3분이 가산됩니다.\\
+$\bullet$\ 종이로 푼 답안은 국어농장 사이트의 OMR 입력 화면에 옮겨 적어 제출해 주세요.
+\end{tcolorbox}
+\vspace{4mm}
+]
+\vspace{4mm}
+\needspace{5\baselineskip}
+{\small\textbf{※ 다음 글을 읽고 물음에 답하시오.}}
+\vspace{2mm}
+\begin{tcolorbox}[passage]
+"너, 이노무 시키, 이리 안 와!" \\{}
+주인 영감의 고함 소리가 등 뒤에서 벼락같이 터졌다. 수남이는 자전거를 끌고 죽을힘을 다해 달렸다. 다리가 후들거리고 심장이 터질 것만 같았다. \\{}
+'내가 왜 그랬을까? 아무리 화가 났어도 도둑질을 하는 게 아니었는데...' \\{}
+수남이의 눈앞이 흐려졌다. 바람 때문에 눈물이 나는 건지, 무서워서 눈물이 나는 건지 알 수 없었다. \\{}
+오늘 낮에 있었던 일이다. 배달을 갔다가 바람이 불어 자전거가 넘어지는 바람에 고급 승용차에 흠집을 냈다. 차 주인은 수리비로 오천 원을 내오라며 자전거를 붙잡아 두었다. 수남이는 어쩔 줄 몰라 발만 동동 구르고 있는데, 구경하던 사람들이 소리쳤다. \\{}
+"얘, 도망가라! 그깟 흠집 가지고 무슨 오천 원이냐? 그냥 자전거 타고 도망가!" \\{}
+그 말에 홀린 듯 수남이는 자전거를 들고 튀었다. 하지만 지금 수남이의 가슴속은 쿵쾅거리는 소리로 가득 찼다. \\{}
+집에 돌아오니 아버지가 물끄러미 바라보셨다. \\{}
+"너, 얼굴이 왜 그 모양이냐?" \\{}
+수남이는 아무 말도 할 수 없었다. 아버지 앞에서 도둑질을 했다는 사실을 어떻게 말할 수 있을까? 수남이는 이불을 뒤집어쓰고 웅크렸다. 자전거 바퀴가 굴러가는 소리가 귓가에 맴도는 것 같았다. \\{}
+\vspace{4pt} \\{}
+- 박완서,  부분
+\end{tcolorbox}
+\vspace{3mm}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{1}\enspace 수남이가 고급 승용차에 흠집을 낸 까닭은 무엇인가요? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 바람이 불어 자전거가 넘어졌기 때문에
+  \item ② 주인 영감이 밀었기 때문에
+  \item ③ 자전거를 타고 너무 빨리 달렸기 때문에
+  \item ④ 빗길에 미끄러졌기 때문에
+  \item ⑤ 일부러 차를 발로 찼기 때문에
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{2}\enspace 수남이가 자전거를 들고 도망친 직접적인 계기는 무엇인가요? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 아버지에게 혼날 것이 무서워서
+  \item ② 구경하던 사람들의 외침을 듣고
+  \item ③ 배달 시간이 늦어서
+  \item ④ 주인 영감이 때리려고 해서
+  \item ⑤ 돈을 가지러 집에 가기 위해서
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{3}\enspace 다음 문장의 빈칸에 들어갈 낱말로 알맞은 것은 무엇입니까? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{tcolorbox}[bogi]
+수남이는 그 일 때문에 (          ) 동안 잠을 못 잤다.
+\end{tcolorbox}
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 며칠
+  \item ② 며 칠
+  \item ③ 몇 일
+  \item ④ 몇일
+  \item ⑤ 면일
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{4}\enspace 수남이의 심장이 터질 것 같았던 이유로 가장 적절한 것은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 주인 영감과 싸워서 이겼기 때문에
+  \item ② 자전거가 너무 무거워서
+  \item ③ 아버지에게 칭찬받을 생각이 나서
+  \item ④ 도둑질을 했다는 죄책감과 두려움 때문에
+  \item ⑤ 돈을 벌 수 있어서 기뻤기 때문에
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{5}\enspace 차 주인이 수남이에게 요구한 수리비는 얼마인가요? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 오천 원
+  \item ② 천 원
+  \item ③ 일만 원
+  \item ④ 십만 원
+  \item ⑤ 오만 원
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{6}\enspace 구경하던 사람들이 수남이에게 한 말의 의도로 적절한 것은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 수남이가 자전거를 훔치도록 부추기려는 악의
+  \item ② 자전거가 본인들의 것이라고 주장하기 위해
+  \item ③ 작은 실수에 과한 돈을 요구하는 차 주인에 대한 반감
+  \item ④ 차 주인과 친하기 때문에 장난을 친 것
+  \item ⑤ 수남이를 경찰에 신고하기 위해서
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{7}\enspace '쿵쾅거리는 소리'가 의미하는 것은 무엇인가요? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 공사장에서 나는 소음
+  \item ② 자전거 바퀴가 굴러가는 소리
+  \item ③ 천둥이 치는 소리
+  \item ④ 주인 영감이 발을 구르는 소리
+  \item ⑤ 두려움과 긴장으로 심장이 뛰는 소리
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{8}\enspace 수남이가 집에 돌아왔을 때, 아버지는 어떤 반응을 보였나요? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 아무 말 없이 방으로 들어갔다
+  \item ② 수남이를 크게 꾸짖으며 때렸다
+  \item ③ 경찰서에 신고하러 나갔다
+  \item ④ 수남이의 얼굴을 물끄러미 바라보며 물었다
+  \item ⑤ 자전거를 잘 가져왔다고 칭찬했다
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+{\small\textbf{※ 다음 글을 읽고 물음에 답하시오.}}
+\vspace{2mm}
+\begin{tcolorbox}[passage]
+[지문] \\{}
+식물은 움직일 수 없지만, 스스로 양분을 만들고 자손을 퍼뜨리며 살아갑니다. 식물이 살아남기 위해 사용하는 놀라운 전략들에 대해 알아봅시다. \\{}
+\vspace{4pt} \\{}
+가장 대표적인 생존 전략은 '광합성'입니다. 식물은 잎에 있는 엽록소를 이용해 햇빛을 흡수합니다. 그리고 뿌리에서 빨아들인 물과 잎의 기공으로 들이마신 이산화탄소를 재료로 하여 포도당이라는 양분을 만듭니다. 이 과정에서 우리에게 꼭 필요한 산소가 부산물로 나옵니다. 식물은 이렇게 만든 양분으로 줄기를 키우고 꽃을 피웁니다. \\{}
+\vspace{4pt} \\{}
+식물의 또 다른 중요한 과제는 '씨앗 퍼뜨리기'입니다. 움직일 수 없는 식물은 자손을 멀리 보내기 위해 다양한 방법을 씁니다. 민들레나 단풍나무는 씨앗에 날개나 털을 달아 바람에 날려 보냅니다. 도꼬마리 같은 식물은 씨앗 끝을 갈고리 모양으로 만들어 동물 털이나 사람 옷에 붙어서 이동합니다. \\{}
+\vspace{4pt} \\{}
+또한 맛있는 열매를 맺어 동물이 먹게 한 뒤, 배설물을 통해 씨앗이 멀리 퍼지게 하는 식물들도 있습니다. 벚나무나 참나무가 대표적입니다. 이처럼 식물은 움직이지 못하지만, 지혜로운 방법으로 생명을 이어가고 있습니다.
+\end{tcolorbox}
+\vspace{3mm}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{9}\enspace 식물이 광합성을 하기 위해 필요한 재료가 아닌 것은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 산소
+  \item ② 엽록소
+  \item ③ 햇빛
+  \item ④ 물
+  \item ⑤ 이산화탄소
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{10}\enspace 민들레나 단풍나무가 씨앗을 퍼뜨리는 방법은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 스스로 터져서 씨앗을 튕겨 낸다
+  \item ② 물에 띄워 멀리 보낸다
+  \item ③ 씨앗에 날개나 털을 달아 바람에 날려 보낸다
+  \item ④ 맛있는 열매를 동물이 먹게 한다
+  \item ⑤ 갈고리 모양으로 동물의 털에 붙인다
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{11}\enspace 다음 문장의 빈칸에 들어갈 낱말로 알맞은 것은 무엇입니까? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{tcolorbox}[bogi]
+씨앗을 심고 물을 주자 (          ) 싹이 나왔다.
+\end{tcolorbox}
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 어느세
+  \item ② 금제
+  \item ③ 금방에
+  \item ④ 금세
+  \item ⑤ 금새
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{12}\enspace 이 글은 어떻게 전개되고 있나요? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 시간의 흐름에 따라 식물이 자라는 과정을 나열하고 있다
+  \item ② 식물의 생존 전략을 몇 가지 방법으로 나누어 설명하고 있다
+  \item ③ 동물과 식물의 공통점과 차이점을 비교하고 있다
+  \item ④ 식물 보호를 위해 우리가 해야 할 일을 주장하고 있다
+  \item ⑤ 식물이 사라져가는 원인을 분석하고 있다
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{13}\enspace 광합성 과정에서 부산물로 나오는 것으로, 우리에게 꼭 필요한 것은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 이산화탄소
+  \item ② 물
+  \item ③ 햇빛
+  \item ④ 산소
+  \item ⑤ 포도당
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{14}\enspace 식물이 자손을 멀리 퍼뜨리려고 노력하는 이유는 무엇일까요? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 예쁜 꽃을 피우기 위해서
+  \item ② 동물들에게 먹이를 주기 위해서
+  \item ③ 다른 식물과 친구가 되기 위해서
+  \item ④ 햇빛을 피하기 위해서
+  \item ⑤ 움직일 수 없는 식물이 생존하고 번식하기 위해서
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{15}\enspace 씨앗을 동물 털이나 사람 옷에 붙여서 이동시키는 식물은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 민들레
+  \item ② 참나무
+  \item ③ 벚나무
+  \item ④ 도꼬마리
+  \item ⑤ 단풍나무
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{16}\enspace 씨앗을 퍼뜨리는 방법으로 '동물'을 이용하는 식물들의 공통점으로 알맞은 것은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 모두 물가에서 자란다
+  \item ② 밤에만 꽃을 피운다
+  \item ③ 씨앗이 동물의 몸에 붙거나, 열매가 동물의 먹이가 된다
+  \item ④ 모두 날개나 털을 가지고 있다
+  \item ⑤ 씨앗의 크기가 매우 작아서 눈에 보이지 않는다
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+{\small\textbf{※ 다음 글을 읽고 물음에 답하시오.}}
+\vspace{2mm}
+\begin{tcolorbox}[passage]
+"이 바보." \\{}
+소녀가 조약돌을 집어 던졌다. \\{}
+소년은 저도 모르게 벌떡 일어섰다. \\{}
+단발머리를 나풀거리며 소녀가 막 달린다. 갈밭 사잇길로 들어섰다. 뒤에는 청량한 가을 햇살 아래 빛나는 갈꽃뿐. \\{}
+이제 저쯤 갈밭머리로 소녀가 나타나리라. 꽤 오랜 시간이 지났다고 생각됐다. 그런데도 소녀는 나타나지 않는다. 발돋움을 했다. 그러고도 상당한 시간이 지났다. \\{}
+저쪽 갈밭머리에 갈꽃이 한 옴큼 움직였다. 소녀가 갈꽃을 안고 있었다. 이제 천천히 걸어오고 있다. 유난히 맑은 가을 햇살이 소녀의 갈꽃 머리에서 반짝거렸다. 소녀 아닌 갈꽃이 들길을 걸어오는 것만 같았다. \\{}
+소년은 이 갈꽃이 아주 뵈지 않게 되기까지 그대로 서 있었다. 문득, 소녀가 던진 조약돌을 내려다보았다. 물기가 걷혀 있었다. 소년은 조약돌을 집어 주머니에 넣었다. \\{}
+\vspace{4pt} \\{}
+다음 날부터 좀처럼 소녀는 보이지 않았다. 매일같이 개울가로 달려와 봐도 뵈지 않았다. \\{}
+학교에서는 쉬는 시간에 운동장을 살폈다. 남몰래 5학년 여자 반을 엿보기도 했다. 그러나 뵈지 않았다. \\{}
+그날도 소년은 주머니 속 조약돌을 만지작거리며 개울가로 나왔다. \\{}
+\vspace{4pt} \\{}
+- 황순원,  부분
+\end{tcolorbox}
+\vspace{3mm}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{17}\enspace 소년이 조약돌을 집어 주머니에 넣은 행동의 이유는 무엇일까요? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 소녀에게 다시 던지려고
+  \item ② 실수로 주머니에 넣어서
+  \item ③ 소녀에 대한 관심과 그리움을 간직하고 싶어서
+  \item ④ 돌을 모으는 취미가 있어서
+  \item ⑤ 조약돌이 아주 예쁘게 생겨서
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{18}\enspace 소년이 소녀를 기다리는 동안의 심정 변화를 잘 나타낸 문장은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 유난히 맑은 가을 햇살 (기쁨) -> 소녀 아닌 갈꽃 (실망)
+  \item ② 이제 저쯤 갈밭머리로 소녀가 나타나리라. (기대) -> 그런데도 소녀는 나타나지 않는다. (초조)
+  \item ③ 학교에서는 쉬는 시간에 운동장을 살폈다. (무관심) -> 남몰래 5학년 여자 반을 엿보기도 했다. (호기심)
+  \item ④ 물기가 걷혀 있었다. (허무) -> 조약돌을 집어 주머니에 넣었다. (후회)
+  \item ⑤ 이 바보. (분노) -> 소년은 저도 모르게 벌떡 일어섰다. (놀람)
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{19}\enspace 다음 문장의 빈칸에 들어갈 말로 알맞은 것은 무엇입니까? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{tcolorbox}[bogi]
+소녀를 만날 생각에 가슴이 (          ).
+\end{tcolorbox}
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 설레었다
+  \item ② 설레였다
+  \item ③ 설레엤다
+  \item ④ 설레이었다
+  \item ⑤ 설렛다
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{20}\enspace '소녀 아닌 갈꽃이 들길을 걸어오는 것만 같았다'라는 표현의 효과로 가장 적절한 것은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 소녀가 걷는 속도가 매우 빠르다는 것을 강조한다
+  \item ② 소녀와 자연이 하나가 된 듯한 아름답고 신비로운 분위기를 준다
+  \item ③ 소년이 시력이 좋지 않다는 것을 암시한다
+  \item ④ 가을 날씨가 매우 춥다는 것을 보여준다
+  \item ⑤ 소녀의 옷차림이 화려하다는 것을 나타낸다
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{21}\enspace 소녀가 던진 말을 '이 바보'라고 한 것에서 알 수 있는 소녀의 마음은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 자신의 조약돌을 주워 달라는 명령
+  \item ② 아무 이유 없이 지나가는 사람에게 시비를 거는 태도
+  \item ③ 자신을 알아보지 못하거나 다가오지 않는 소년에 대한 서운함과 관심
+  \item ④ 소년이 정말로 지능이 낮다고 생각하는 무시
+  \item ⑤ 소년과 싸우고 싶어 하는 적대감
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{22}\enspace 이 글의 시간적, 공간적 배경으로 알맞은 것은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 겨울, 눈 덮인 산
+  \item ② 여름, 해수욕장
+  \item ③ 봄, 꽃이 핀 학교 운동장
+  \item ④ 가을, 갈밭(갈대밭)과 개울가
+  \item ⑤ 밤, 어두운 골목길
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{23}\enspace '나풀거리며'와 느낌이 비슷한 말은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 비틀비틀
+  \item ② 쿵쿵거리며
+  \item ③ 하늘거리며
+  \item ④ 살금살금
+  \item ⑤ 버럭버럭
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{24}\enspace 다음 날부터 소년이 한 행동으로 알맞지 않은 것은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 쉬는 시간에 운동장을 살폈다
+  \item ② 주머니 속 조약돌을 만지작거렸다
+  \item ③ 5학년 여자 반을 엿보았다
+  \item ④ 매일같이 개울가로 달려가 보았다
+  \item ⑤ 소녀의 집 앞에 찾아가 문을 두드렸다
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+{\small\textbf{※ 다음 글을 읽고 물음에 답하시오.}}
+\vspace{2mm}
+\begin{tcolorbox}[passage]
+[지문] \\{}
+오늘날 우리는 인터넷과 스마트폰을 통해 수많은 사람과 소통하며 살아갑니다. 하지만 얼굴이 보이지 않는다는 점을 악용하여 남에게 상처를 주는 일이 빈번하게 발생하고 있습니다. 악성 댓글이나 근거 없는 소문 유포가 대표적인 예입니다. 이러한 사이버 폭력은 피해자에게 씻을 수 없는 고통을 줍니다. \\{}
+따라서 우리는 올바른 디지털 예절, 즉 '네티켓'을 지켜야 합니다. 첫째, 상대방을 존중하는 마음을 가져야 합니다. 화면 너머에 나와 똑같은 감정을 가진 사람이 있다는 사실을 기억해야 합니다. 내가 듣기 싫은 말은 남에게도 하지 말아야 합니다. \\{}
+둘째, 정확하지 않은 정보를 함부로 퍼뜨리지 말아야 합니다. 사실 확인이 되지 않은 소문을 공유하는 것은 큰 혼란을 일으킬 수 있습니다. 정보를 공유하기 전에 그것이 믿을 만한지, 누군가에게 피해를 주지는 않는지 신중하게 생각해야 합니다. \\{}
+셋째, 개인 정보를 소중히 다루어야 합니다. 자신의 정보뿐만 아니라 타인의 정보도 함부로 유출해서는 안 됩니다. \\{}
+디지털 세상은 우리가 함께 만들어가는 공간입니다. 서로 배려하고 존중하는 태도를 가질 때, 비로소 건강하고 행복한 디지털 세상을 만들 수 있을 것입니다.
+\end{tcolorbox}
+\vspace{3mm}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{25}\enspace 이 글에서 말하는 '네티켓'의 의미는? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 스마트폰 사용법
+  \item ② 인터넷 게임 규칙
+  \item ③ 올바른 디지털 예절
+  \item ④ 빠른 인터넷 속도
+  \item ⑤ 개인 정보 해킹 기술
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{26}\enspace 글쓴이가 제안한 첫 번째 디지털 예절은 무엇인가요? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 타인의 정보를 몰래 알아보는 것
+  \item ② 상대방을 존중하는 마음을 가지는 것
+  \item ③ 화면 너머에 사람이 없다고 생각하는 것
+  \item ④ 정확하지 않은 정보를 공유하는 것
+  \item ⑤ 자신의 정보를 널리 퍼뜨리는 것
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{27}\enspace 다음 문장의 빈칸에 들어갈 낱말로 알맞은 것은 무엇입니까? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{tcolorbox}[bogi]
+친구에게 나쁜 말을 하면 (          ).
+\end{tcolorbox}
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 안 돼
+  \item ② 않 돼
+  \item ③ 안 대
+  \item ④ 않 되
+  \item ⑤ 안 되
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{28}\enspace 정확하지 않은 정보를 함부로 퍼뜨리면 안 되는 이유는? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 인터넷 속도가 느려지기 때문에
+  \item ② 해킹을 당할 위험이 있어서
+  \item ③ 정보를 만드는 데 돈이 많이 들어서
+  \item ④ 큰 혼란을 일으키거나 타인에게 피해를 줄 수 있어서
+  \item ⑤ 자신의 이름이 유명해질까 봐
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{29}\enspace 글쓴이가 사이버 폭력의 예로 든 것이 아닌 것은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 바이러스 유포
+  \item ② 근거 없는 소문 유포
+  \item ③ 악성 댓글
+  \item ④ 남에게 피해를 주는 일
+  \item ⑤ 상대방에게 상처를 주는 일
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{30}\enspace 건강한 디지털 세상을 만들기 위해 우리에게 가장 필요한 태도는? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 인터넷 사용 시간을 늘리는 태도
+  \item ② 서로 배려하고 존중하는 태도
+  \item ③ 자신의 의견을 끝까지 주장하는 태도
+  \item ④ 최신 기기를 빠르게 구매하는 태도
+  \item ⑤ 남의 일에 무관심한 태도
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{31}\enspace '유출하다'와 뜻이 반대되는 말은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 내보내다
+  \item ② 알려주다
+  \item ③ 퍼뜨리다
+  \item ④ 보호하다
+  \item ⑤ 공개하다
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{32}\enspace 이 글이 주장하는 방식에 대한 설명으로 옳은 것은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 전문가의 말을 인용하여 신뢰성을 높이고 있다
+  \item ② 자신의 경험을 바탕으로 감동을 주고 있다
+  \item ③ 질문과 대답의 형식으로 독자의 흥미를 끌고 있다
+  \item ④ 통계 자료를 활용하여 객관적인 근거를 대고 있다
+  \item ⑤ 첫째, 둘째, 셋째와 같이 순서를 매겨 실천 방법을 제시하고 있다
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+{\small\textbf{※ 다음 글을 읽고 물음에 답하시오.}}
+\vspace{2mm}
+\begin{tcolorbox}[passage]
+"옥희야." \\{}
+하고 불렀습니다. 나는 \\{}
+"왜?" \\{}
+하고 대답하고 아저씨를 쳐다보았습니다. \\{}
+"너, 아범 보고 싶지 않니?" \\{}
+"아범?" \\{}
+나에게 아범이 있었던 것은 사실이나, 내가 세상에 나오기도 전에, 아범은 세상을 떠났다고 외할머니가 일러 주신 것이 생각났습니다. \\{}
+"응, 아범말이다. 네 아범은 참 훌륭한 사람이었단다. 나하구 아주 친한 친구였었단다." \\{}
+"아범은 어디 갔어?" \\{}
+"세상 떠났지." \\{}
+"세상 떠나면 못 와?" \\{}
+"못 오지." \\{}
+"왜?" \\{}
+"하늘나라로 갔으니까." \\{}
+나는 갑자기 서러워졌습니다. 아저씨도 아빠가 없는 것이 불쌍해 보였던지 나를 덥석 안아 올려 무릎 위에 앉히고, 머리를 쓰다듬어 주며 뺨에다 입을 맞추어 주었습니다. 그리고, \\{}
+"옥희는, 이제 누가 제일 좋으니?" \\{}
+하고 물었습니다. 나는, \\{}
+"어머니." \\{}
+하고 대답했습니다. \\{}
+"그 다음엔?" \\{}
+"그 다음엔, 아저씨." \\{}
+아저씨는 나를 꼭 껴안아 주었습니다. 그리고 내 뺨에다 입을 맞추었습니다. \\{}
+\vspace{4pt} \\{}
+- 주요섭,  부분
+\end{tcolorbox}
+\vspace{3mm}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{33}\enspace 이 글에 등장하는 인물 간의 관계에 대한 설명으로 알맞은 것은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 외할머니는 아저씨의 어머니이다
+  \item ② 아저씨는 '나(옥희)'의 아버지와 친한 친구 사이였다
+  \item ③ 옥희는 어머니보다 아저씨를 더 좋아한다
+  \item ④ 옥희는 아저씨를 매우 싫어한다
+  \item ⑤ 아저씨는 옥희의 친아버지이다
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{34}\enspace 옥희의 아버지가 지금 계시지 않은 이유는? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 아저씨와 싸우고 집을 나가서
+  \item ② 병원에 입원해 있어서
+  \item ③ 돈을 벌러 멀리 떠나서
+  \item ④ 외할머니 댁에 가 있어서
+  \item ⑤ 옥희가 태어나기도 전에 세상을 떠나서
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{35}\enspace 다음 의 문장에서 밑줄 친 '친절했다'의 품사는 무엇입니까? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{tcolorbox}[bogi]
+아저씨는 나에게 참 친절했다.
+\end{tcolorbox}
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 부사
+  \item ② 관형사
+  \item ③ 형용사
+  \item ④ 동사
+  \item ⑤ 명사
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{36}\enspace 이 글의 서술자(말하는 사람)인 '나'에 대한 설명으로 옳은 것은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 순수한 어린아이의 시선으로 이야기를 전달하고 있다
+  \item ② 매우 분석적이고 비판적인 성인 남성이다
+  \item ③ 이야기 속에 등장하지 않고 관찰만 하는 사람이다
+  \item ④ 작가가 직접 자신의 이야기를 하고 있다
+  \item ⑤ 모든 사건을 꿰뚫어 보는 전지전능한 신과 같은 존재이다
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{37}\enspace 아저씨가 옥희를 안아주고 뺨에 입을 맞춘 이유는 무엇일까요? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 옥희에게 부탁할 일이 있어서
+  \item ② 옥희가 울면서 떼를 썼기 때문에
+  \item ③ 옥희가 노래를 잘 불렀기 때문에
+  \item ④ 자신의 친구인 옥희 아버지를 닮지 않아서
+  \item ⑤ 아버지가 없는 옥희에 대한 연민과 사랑스러움 때문에
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{38}\enspace 이 글에서 '하늘나라'가 상징하는 의미는? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 비행기
+  \item ② 해외여행
+  \item ③ 죽음
+  \item ④ 높은 산꼭대기
+  \item ⑤ 꿈속 세상
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{39}\enspace 옥희가 '갑자기 서러워진' 이유는 무엇일까요? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 외할머니가 무서운 이야기를 해서
+  \item ② 아버지가 돌아가셔서 다시는 볼 수 없다는 사실을 깨달아서
+  \item ③ 배가 고픈데 밥을 주지 않아서
+  \item ④ 어머니가 보고 싶어서
+  \item ⑤ 아저씨가 옥희를 혼냈기 때문에
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{40}\enspace 옥희는 '누가 제일 좋으냐'는 아저씨의 질문에 누구라고 대답했나요? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 아범(아버지)
+  \item ② 아저씨
+  \item ③ 외할머니
+  \item ④ 선생님
+  \item ⑤ 어머니
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+{\small\textbf{※ 다음 글을 읽고 물음에 답하시오.}}
+\vspace{2mm}
+\begin{tcolorbox}[passage]
+[지문] \\{}
+세종 대왕이 훈민정음을 창제한 것은 백성을 사랑하는 마음, 즉 '애민 정신'에서 비롯되었습니다. 당시에는 한자를 사용했는데, 한자는 배우기가 매우 어려워 일반 백성들은 자신의 생각을 글로 표현하기 힘들었습니다. 세종 대왕은 이러한 백성들의 고충을 안타깝게 여겨 누구나 쉽게 배우고 쓸 수 있는 우리 글자를 만들기로 결심했습니다. \\{}
+\vspace{4pt} \\{}
+훈민정음은 매우 과학적인 원리로 만들어졌습니다. \\{}
+첫째, '상형의 원리'입니다. 자음은 발음 기관의 모양을 본떠 만들었고, 모음은 하늘(·), 땅(ㅡ), 사람(ㅣ)의 모양을 본떠 만들었습니다. 예를 들어 'ㄱ'은 혀뿌리가 목구멍을 막는 모양을, 'ㄴ'은 혀가 윗잇몸에 닿는 모양을 본뜬 것입니다. \\{}
+둘째, '가획의 원리'입니다. 기본 글자에 획을 더하여 소리의 세기를 나타냈습니다. 'ㄱ'에 획을 더하면 'ㅋ'이 되고, 'ㄴ'에 획을 더하면 'ㄷ', 'ㅌ'이 되는 식입니다. \\{}
+\vspace{4pt} \\{}
+이처럼 훈민정음은 창제 동기가 숭고할 뿐만 아니라, 그 제자 원리가 매우 독창적이고 과학적이어서 세계적으로 그 우수성을 인정받고 있습니다. 유네스코에서는 '세종대왕 문해상'을 제정하여 문맹 퇴치에 기여한 사람들에게 상을 주고 있습니다.
+\end{tcolorbox}
+\vspace{3mm}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{41}\enspace 세종 대왕이 훈민정음을 만든 가장 근본적인 이유는? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 자신의 똑똑함을 자랑하기 위해서
+  \item ② 외국 사신들을 접대하기 위해서
+  \item ③ 신하들의 요청을 들어주기 위해서
+  \item ④ 한자가 너무 쉬워서
+  \item ⑤ 백성을 사랑하는 애민 정신 때문에
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{42}\enspace 훈민정음 자음 글자를 만든 원리는 무엇인가요? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 기존 한자의 모양을 조금씩 고쳐서 만들었다
+  \item ② 동물의 울음소리를 흉내 내어 만들었다
+  \item ③ 하늘, 땅, 사람의 모양을 본떠서 만들었다
+  \item ④ 외국의 글자를 그대로 가져와서 만들었다
+  \item ⑤ 발음 기관의 모양을 본떠서 만들었다
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{43}\enspace 다음 의 문장에서 밑줄 친 '백성'의 품사는 무엇입니까? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{tcolorbox}[bogi]
+세종 대왕은 백성을 사랑했다.
+\end{tcolorbox}
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 조사
+  \item ② 명사
+  \item ③ 형용사
+  \item ④ 동사
+  \item ⑤ 감탄사
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{44}\enspace '비롯되었다'와 바꿔 쓰기에 가장 적절한 말은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 시작되었다
+  \item ② 발견되었다
+  \item ③ 변화되었다
+  \item ④ 마무리되었다
+  \item ⑤ 사라졌다
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{45}\enspace 훈민정음 모음을 만들 때 본뜬 대상이 아닌 것은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 아래아(·)
+  \item ② 바다
+  \item ③ 사람
+  \item ④ 하늘
+  \item ⑤ 땅
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{46}\enspace 이 글에서 설명하는 훈민정음의 특징이 아닌 것은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 창제 동기가 숭고하다
+  \item ② 독창적인 글자이다
+  \item ③ 세계적으로 우수성을 인정받고 있다
+  \item ④ 배우기가 매우 어렵다
+  \item ⑤ 제자 원리가 과학적이다
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{47}\enspace 유네스코에서 주는 '세종대왕 문해상'은 어떤 사람들에게 주는 상일까요? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 한국 역사를 세계에 널리 알린 사람
+  \item ② 새로운 글자를 많이 발명한 사람
+  \item ③ 글을 모르는 사람들을 위해 글을 가르치고 문맹 퇴치에 힘쓴 사람
+  \item ④ 과학 기술 발전에 기여한 사람
+  \item ⑤ 세종 대왕의 업적을 연구한 학자
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{48}\enspace 이 글의 내용 전개 방식으로 알맞은 것은? \pts{10}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 창제 동기를 밝히고 제자 원리를 나누어 설명하고 있다
+  \item ② 세종 대왕의 어린 시절 일화를 소개하고 있다
+  \item ③ 훈민정음과 한자의 차이점을 대조하고 있다
+  \item ④ 훈민정음이 만들어진 과정을 시간 순서대로 기록하고 있다
+  \item ⑤ 글자의 모양이 변해온 역사를 설명하고 있다
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\end{document}

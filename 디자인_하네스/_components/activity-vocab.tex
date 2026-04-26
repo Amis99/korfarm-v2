@@ -9,10 +9,13 @@
 % ============================================================
 
 % adjustbox로 폭 강제 + 일반 tabular + p{} 열 사용
+% v17.1: \colorbox{white}로 표 배경에 흰색 mask — Canva 배경 도형 본문 침범 차단
+% v17.1: tcolorbox(blanker, colback=white)로 흰색 mask 강제
 \newenvironment{kfVocab}%
   {\par\smallskip\needspace{4\baselineskip}%
    \renewcommand{\arraystretch}{1.35}%
    \arrayrulecolor{kfRule}%
+   \begin{tcolorbox}[blanker, colback=white, left=2pt, right=2pt, top=2pt, bottom=2pt]%
    \noindent\begin{adjustbox}{max width=\linewidth, center}%
    \begin{tabular}{|>{\centering\arraybackslash}m{1.0cm}|m{8.5cm}|>{\centering\arraybackslash}m{4.0cm}|}%
    \hline
@@ -23,9 +26,13 @@
    \ignorespaces}%
   {\end{tabular}%
    \end{adjustbox}%
+   \end{tcolorbox}%
    \arrayrulecolor{black}%
    \par\smallskip}
 
+% v16: 번호를 동그라미 배지로
 \newcommand{\kfVocabItem}[2]{%
-  \textbf{#1} & #2 & \rule[-1.0em]{0pt}{2.4em}\\\hline%
+  \tikz[baseline=-0.6ex]{\node[draw=kfPrimary, fill=kfPrimary!10,
+    text=kfPrimary, circle, inner sep=0pt, minimum size=14pt,
+    font=\small\bfseries]{#1};} & #2 & \rule[-1.0em]{0pt}{2.4em}\\\hline%
 }

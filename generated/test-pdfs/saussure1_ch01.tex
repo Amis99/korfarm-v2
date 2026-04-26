@@ -1,0 +1,303 @@
+\documentclass[12pt,a4paper]{article}
+
+% ─── 인코딩 / 폰트 ───
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Sans KR}[
+  Path=C:/Windows/Fonts/, Extension=.ttf,
+  UprightFont=NotoSansKR-VF, BoldFont=NotoSansKR-VF,
+  UprightFeatures={RawFeature={axis={wght=400}}},
+  BoldFeatures={RawFeature={axis={wght=700}}},
+]
+\setCJKsansfont{Noto Sans KR}[
+  Path=C:/Windows/Fonts/, Extension=.ttf,
+  UprightFont=NotoSansKR-VF, BoldFont=NotoSansKR-VF,
+  UprightFeatures={RawFeature={axis={wght=400}}},
+  BoldFeatures={RawFeature={axis={wght=700}}},
+]
+\setmainfont{Noto Sans KR}[
+  Path=C:/Windows/Fonts/, Extension=.ttf,
+  UprightFont=NotoSansKR-VF, BoldFont=NotoSansKR-VF,
+  UprightFeatures={RawFeature={axis={wght=400}}},
+  BoldFeatures={RawFeature={axis={wght=700}}},
+]
+
+% ─── 레이아웃 ───
+\usepackage[a4paper, margin=1.5cm, top=2.8cm, bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{needspace}
+\usepackage{etoolbox}
+\usepackage[normalem]{ulem}
+
+% ─── 본문 폰트 크기 설정 ───
+\fontsize{14pt}{19pt}\selectfont
+
+% ─── 색상 정의 ───
+\definecolor{korfarmBrown}{HTML}{8B6914}
+\definecolor{passageBg}{HTML}{F5F5F0}
+\definecolor{passageBorder}{HTML}{D0C8B0}
+\definecolor{bogiBg}{HTML}{EBF2FA}
+\definecolor{bogiBorder}{HTML}{A8C8E8}
+\definecolor{condBg}{HTML}{FFF4E6}
+\definecolor{condBorder}{HTML}{E8C890}
+\definecolor{numCircle}{HTML}{2C3E50}
+\definecolor{ptsBadge}{HTML}{6B7280}
+\definecolor{answerLine}{HTML}{B0B0B0}
+
+% ─── tcolorbox 스타일 ───
+\tcbset{
+  passage/.style={
+    colback=passageBg, colframe=passageBorder,
+    boxrule=0.5pt, arc=3pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+    fontupper=\fontsize{14pt}{22pt}\selectfont,
+  },
+  bogi/.style={
+    colback=bogiBg, colframe=bogiBorder,
+    boxrule=0.5pt, arc=3pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+    fontupper=\fontsize{14pt}{19pt}\selectfont,
+    title={\textbf{〈보기〉}},
+    fonttitle=\bfseries,
+    coltitle=black,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=bogiBg, colframe=bogiBorder, boxrule=0.3pt, arc=2pt},
+  },
+  cond/.style={
+    colback=condBg, colframe=condBorder,
+    boxrule=0.5pt, arc=3pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+    fontupper=\fontsize{14pt}{19pt}\selectfont,
+    title={\textbf{〈조건〉}},
+    fonttitle=\bfseries,
+    coltitle=black,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=condBg, colframe=condBorder, boxrule=0.3pt, arc=2pt},
+  },
+}
+
+% ─── 헤더/푸터 ───
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[L]{%
+  \raisebox{-4pt}{\includegraphics[height=18pt]{C:/Users/RENEWCOM PC/Documents/국어농장v2홈페이지/scripts/../frontend/public/korfarm-logo.png}}%
+  \hspace{6pt}%
+  \textbf{소쉬르 1권}%
+  \hspace{6pt}%
+  \textcolor{gray}{1장 챕터 테스트}%
+}
+\fancyhead[R]{%
+  \small\textcolor{gray}{10문항\,·\,45점\,·\,60분}%
+}
+\fancyfoot[C]{\small\textcolor{gray}{— \thepage\ —}}
+
+% ─── 기타 설정 ───
+\setlength{\headheight}{20pt}
+\addtolength{\topmargin}{-6pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+
+% ─── 문제번호 매크로 ───
+\newcommand{\qnum}[1]{%
+  \tikz[baseline=(num.base)]{%
+    \node[circle, fill=numCircle, text=white, inner sep=0pt,
+          minimum size=18pt, font=\small\bfseries] (num) {#1};%
+  }%
+}
+
+\newcommand{\pts}[1]{%
+  \hfill\textcolor{ptsBadge}{[#1점]}%
+}
+
+% ─── 답안 밑줄 매크로 ───
+\newcommand{\answerlines}[1]{%
+  \par\vspace{4pt}%
+  \foreach \i in {1,...,#1} {%
+    {\color{answerLine}\hrule height 0.4pt}\vspace{20pt}%
+  }%
+  \vspace{2pt}%
+}
+
+\begin{document}
+
+% ─── 첫 페이지 헤더 ───
+\begin{center}
+{\Large\bfseries 소쉬르 1권\quad 1장 챕터 테스트}
+\end{center}
+\vspace{3mm}
+{\color{korfarmBrown}\hrule height 1.2pt}
+\vspace{5mm}
+\begin{center}
+학교\enspace\rule{3.5cm}{0.4pt}\hspace{12mm}%
+학년\enspace\rule{2.5cm}{0.4pt}\hspace{12mm}%
+이름\enspace\rule{3.5cm}{0.4pt}
+\end{center}
+\vspace{5mm}
+{\color{korfarmBrown}\hrule height 0.6pt}
+\vspace{6mm}
+\begin{samepage}
+\vspace{4mm}
+\needspace{5\baselineskip}
+\qnum{1}\enspace 다음 중 맛을 느끼는 감각 기관은 무엇인가요? \pts{3}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=1.5em, labelsep=0pt, label={}, itemsep=2pt, parsep=0pt]
+  \item ① 눈
+  \item ② 귀
+  \item ③ 입
+  \item ④ 코
+\end{itemize}
+\end{samepage}
+
+\begin{samepage}
+\vspace{4mm}
+\needspace{5\baselineskip}
+\qnum{2}\enspace 다음 설명에 알맞은 감각의 이름은 무엇인가요? \pts{3}
+
+\vspace{3mm}
+\begin{tcolorbox}[bogi]
+"코로 냄새를 맡는 감각이에요. 상한 음식 냄새를 맡아 배탈이 나지 않게 도와주기도 해요."
+\end{tcolorbox}
+\vspace{3mm}
+\begin{itemize}[leftmargin=1.5em, labelsep=0pt, label={}, itemsep=2pt, parsep=0pt]
+  \item ① 시각
+  \item ② 청각
+  \item ③ 후각
+  \item ④ 촉각
+\end{itemize}
+\end{samepage}
+
+\begin{samepage}
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{tcolorbox}[passage]
+내 몸은 소중해 \\{}
+\vspace{4pt} \\{}
+눈은 ㉠\uline{반짝반짝} 세상을 봐요 \\{}
+코는 킁킁킁 냄새를 맡아요 \\{}
+귀는 쫑긋쫑긋 소리를 들어요 \\{}
+입은 냠냠냠 맛을 느껴요 \\{}
+손은 살살살 만져 봐요 \\{}
+발은 통통통 걸어가요 \\{}
+\vspace{4pt} \\{}
+우리 몸은 정말 신기해요 \\{}
+내 몸은 소중해요
+\end{tcolorbox}
+\vspace{3mm}
+\qnum{3}\enspace ㉠과 같이 모양이나 소리를 흉내 내는 말이 \uline{아닌} 것은 무엇인가요? \pts{3}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=1.5em, labelsep=0pt, label={}, itemsep=2pt, parsep=0pt]
+  \item ① 킁킁킁
+  \item ② 냠냠냠
+  \item ③ 소중해
+  \item ④ 통통통
+\end{itemize}
+\end{samepage}
+
+\begin{samepage}
+\vspace{4mm}
+\needspace{5\baselineskip}
+\qnum{4}\enspace 이 동시에서 '냠냠냠' 맛을 느끼는 신체 부위는 무엇인지 찾아 쓰세요. \pts{8}
+
+\vspace{3mm}
+\answerlines{1}
+\end{samepage}
+
+\begin{samepage}
+\vspace{4mm}
+\needspace{5\baselineskip}
+\qnum{5}\enspace 다음 중 이 동시에 나오지 않은 신체 부위는 어디인가요? \pts{3}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=1.5em, labelsep=0pt, label={}, itemsep=2pt, parsep=0pt]
+  \item ① 귀
+  \item ② 발
+  \item ③ 입
+  \item ④ 머리
+\end{itemize}
+\end{samepage}
+
+\begin{samepage}
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{tcolorbox}[passage]
+동물들의 슈퍼 감각 \\{}
+\vspace{4pt} \\{}
+우리 몸에는 세상을 보고, 냄새 맡고, 들을 수 있게 해 주는 고마운 눈, 코, 귀가 있어요. 그런데 동물 친구들 중에는 사람보다 훨씬 더 뛰어난 ‘슈퍼 감각’을 가진 친구들이 있답니다. \\{}
+\vspace{4pt} \\{}
+먼저 ( ⓐ )은/는 아주 특별한 눈을 가지고 있어요. 높은 하늘을 날아다니지만, 땅 위에 있는 아주 작은 토끼도 금방 찾아낼 수 있습니다. 사람보다 무려 여덟 배나 더 멀리, 더 자세히 볼 수 있기 때문이에요. \\{}
+\vspace{4pt} \\{}
+개는 훌륭한 코를 가지고 있어요. 킁킁! 개는 냄새를 아주 잘 맡아서 잃어버린 물건을 찾거나, 눈에 보이지 않는 범인을 냄새로 찾아내기도 합니다. \\{}
+\vspace{4pt} \\{}
+마지막으로 토끼는 길쭉한 귀를 가지고 있어요. 토끼의 귀가 긴 이유는 바로 아주 작은 소리도 놓치지 않고 잘 듣기 위해서예요. 토끼는 귀를 이리저리 움직여서 사방에서 들려오는 소리를 모을 수 있답니다.
+\end{tcolorbox}
+\vspace{3mm}
+\qnum{6}\enspace 빈칸 ⓐ에 들어갈 알맞은 동물은 누구인가요? \pts{3}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=1.5em, labelsep=0pt, label={}, itemsep=2pt, parsep=0pt]
+  \item ① 매
+  \item ② 호랑이
+  \item ③ 강아지
+  \item ④ 고양이
+\end{itemize}
+\end{samepage}
+
+\begin{samepage}
+\vspace{4mm}
+\needspace{5\baselineskip}
+\qnum{7}\enspace 개가 잃어버린 물건을 잘 찾을 수 있는 이유는 무엇인가요? \pts{3}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=1.5em, labelsep=0pt, label={}, itemsep=2pt, parsep=0pt]
+  \item ① 눈이 좋아서 멀리까지 볼 수 있기 때문에
+  \item ② 귀가 커서 소리를 잘 듣기 때문에
+  \item ③ 코로 냄새를 아주 잘 맡기 때문에
+  \item ④ 발이 빨라서 금방 달려갈 수 있기 때문에
+\end{itemize}
+\end{samepage}
+
+\begin{samepage}
+\vspace{4mm}
+\needspace{5\baselineskip}
+\qnum{8}\enspace 토끼의 귀가 길쭉한 이유는 무엇인가요? 글의 내용을 바탕으로 한 문장으로 쓰세요. \pts{8}
+
+\vspace{3mm}
+\answerlines{2}
+\end{samepage}
+
+\begin{samepage}
+\vspace{4mm}
+\needspace{5\baselineskip}
+\qnum{9}\enspace 다음 문장에서 '무엇을'에 해당하는 말을 찾아 쓰세요. \pts{8}
+
+\vspace{3mm}
+\begin{tcolorbox}[bogi]
+"코는 먼지를 깨끗하게 걸러 줘요."
+\end{tcolorbox}
+\vspace{3mm}
+\answerlines{1}
+\end{samepage}
+
+\begin{samepage}
+\vspace{4mm}
+\needspace{5\baselineskip}
+\qnum{10}\enspace 다음 중 '입'이 하는 일이 \uline{아닌} 것은 무엇인가요? \pts{3}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=1.5em, labelsep=0pt, label={}, itemsep=2pt, parsep=0pt]
+  \item ① 음식을 씹어서 먹는다.
+  \item ② 맛을 느낀다.
+  \item ③ 친구와 대화할 때 말을 한다.
+  \item ④ 반짝반짝 빛을 받아들인다.
+\end{itemize}
+\end{samepage}
+
+\end{document}

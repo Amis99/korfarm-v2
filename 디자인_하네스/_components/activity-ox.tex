@@ -1,21 +1,33 @@
 % ============================================================
-% activity-ox.tex
-% O/X 표기 활동
+% activity-ox.tex (v15)
+% O/X 표기 활동 — 그래픽 디자인
 % 사용:
 %   \begin{kfOXList}
-%     \kfOXItem 글쓴이는 자연을 예찬하고 있다.
-%     \kfOXItem 1연과 4연은 수미상관 구조이다.
+%     \kfOXItem 글쓴이는 자연을 예찬하고 있다.\kfOX
+%     \kfOXItem 1연과 4연은 수미상관 구조이다.\kfOX
 %   \end{kfOXList}
+%
+% \kfOX = 우측에 [O] [X] 두 박스 (학생이 하나 동그라미)
 % ============================================================
 
 \newenvironment{kfOXList}%
   {\par\smallskip%
-   \begin{enumerate}[leftmargin=20pt, itemsep=4pt, topsep=2pt,
+   \begin{enumerate}[leftmargin=20pt, itemsep=5pt, topsep=2pt,
                     label=\textbf{\arabic*.}, labelsep=6pt]}%
   {\end{enumerate}\par\smallskip}
 
-\newcommand{\kfOXItem}{%
-  \item}
+\newcommand{\kfOXItem}{\item}
 
-% 인라인 OX 박스 (문장 끝에 부착)
-\newcommand{\kfOX}{\hfill (\hspace{0.6cm}\textbf{O}\hspace{0.6cm},\hspace{0.6cm}\textbf{X}\hspace{0.6cm})}
+% v16: O/X 그래픽 박스 키움 (18×14 → 24×20pt) + 영역색 강조
+\newcommand{\kfOX}{%
+  \hfill\nolinebreak
+  \tikz[baseline=-0.9ex]{%
+    \node[draw=kfPrimary, fill=kfPrimary!5, line width=0.6pt, rounded corners=3pt,
+          minimum width=24pt, minimum height=20pt, inner sep=0pt,
+          font=\normalsize\bfseries\color{kfPrimary}] (ob) {O};%
+    \node[draw=kfMute, fill=kfMute!5, line width=0.6pt, rounded corners=3pt,
+          minimum width=24pt, minimum height=20pt, inner sep=0pt,
+          font=\normalsize\bfseries\color{kfMute},
+          right=4pt of ob] (xb) {X};%
+  }%
+}

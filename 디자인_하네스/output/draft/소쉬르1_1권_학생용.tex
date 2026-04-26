@@ -21,22 +21,29 @@
 
 \begin{document}
 
-\thispagestyle{empty}
-\vspace*{40mm}
+\thispagestyle{kfBlank}
+\kfBookCoverBg
+\vspace*{\kfBookCoverVspace}
 \begin{center}
-{\Huge\bfseries\color{kfPrimary} 소쉬르1}\\[10pt]
-{\Large\color{kfMute} 학생용 교재 — 제 1 권}\\[20pt]
-{\small\color{kfMute} (챕터 1 \textendash{} 4)}
+{\kfLogoLg}\\[14pt]
+{\fontsize{72}{84}\selectfont\bfseries\kfBookCoverColor 소쉬르}\\[18pt]
+{\fontsize{28}{32}\selectfont\kfBookCoverSubColor \textsc{Level} \textbf{1}}\\[22pt]
+{\large\kfBookCoverSubColor 제 1 권 \quad\textbar\quad 챕터 1\textendash{} 4}
 \end{center}
 \vfill
 \hfill\kfSeriesBadge\hspace{15mm}
 \clearpage
 \kfChapterCover{1}{소쉬르1 (챕터1)}{Chapter 1}{이번 챕터의 학습 내용을 시작합니다.}
+\begin{kfChapterAreaList}
+\kfChapterAreaItem{어휘}{kfAreaVocab}{핵심 어휘 익히기}
+\kfChapterAreaItem{개념}{kfAreaConcept}{배경지식 넓히기: 우리 몸을 지켜 주는 '감각'}
+\kfChapterAreaItem{문학}{kfAreaLiterature}{「눈은 반짝반짝 세상을 봐요」}
+\kfChapterAreaItem{비문학}{kfAreaNonlit}{동물들의 슈퍼 감각}
+\kfChapterAreaItem{실력확인}{kfAreaWeekly}{}
+\end{kfChapterAreaList}
 
-\kfStartVocab{어휘 영역 — 핵심 어휘 익히기}
+\kfStartVocab{핵심 어휘 익히기}
 
-
-\kfSecHeader{kfAreaVocab}{어휘}{핵심 어휘 익히기}
 
 \begin{kfVocab}
 \kfVocabItem{1}{눈으로 보는 감각}
@@ -48,21 +55,10 @@
 \end{kfVocab}
 
 
-\kfStartConcept{개념 영역 — 핵심 어휘 익히기}
+\kfStartConcept{배경지식 넓히기: 우리 몸을 지켜 주는 '감각'}
 
 
-\kfSecHeader{kfAreaConcept}{활동}{핵심 어휘 익히기}
-\noindent\textit{\small 다음 단어와 알맞은 설명을 연결해 보세요.}\par\medskip
-\begin{kfConnect}
-\kfPair{눈}{사물을 봐요}
-\kfPair{코}{소리를 들어요}
-\kfPair{입}{만져서 느껴요}
-\kfPair{귀}{냄새를 맡아요}
-\kfPair{손}{맛을 느껴요}
-\end{kfConnect}
-
-\kfSecHeader{kfAreaConcept}{개념}{배경지식 넓히기: 우리 몸을 지켜 주는 '감각'}
-
+\kfPassageNoteNT{%
 우리가 느끼는 감각은 세상을 즐겁게 탐험하도록 도와주기도 하지만, 위험한 상황에서 우리 몸을 지켜 주는 '보디가드' 역할도 해요.
 
 코(후각)의 경고: "으악, 쉰 냄새가 나!" 상한 음식 냄새를 맡게 해서, 배가 아프지 않게 먹지 말라고 알려 줘요.
@@ -75,17 +71,25 @@
 \item 피부(촉각): 뜨거운 주전자에서 손을 뗍니다.
 \item 귀(청각): 자동차 경적을 듣고 안전한 곳으로 피합니다.
 \end{itemize}
+}
 
-\kfSecHeader{kfAreaConcept}{활동}{배경지식 넓히기: 우리 몸을 지켜 주는 '감각'}
-\noindent\textit{\small 다음 문장이 옳으면 O, 옳지 않으면 X를 표시하세요.}\par\medskip
+\kfActivityBg \par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 다음 단어와 알맞은 설명을 연결해 보세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\begin{kfConnect}
+\kfPair{눈}{사물을 봐요}
+\kfPair{코}{소리를 들어요}
+\kfPair{입}{만져서 느껴요}
+\kfPair{귀}{냄새를 맡아요}
+\kfPair{손}{맛을 느껴요}
+\end{kfConnect}
+
+\kfActivityBg \par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 다음 문장이 옳으면 O, 옳지 않으면 X를 표시하세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
 \begin{kfOXList}
-\kfOXItem 감각은 우리를 즐겁게 해 줄 뿐만 아니라, 위험할 때 몸을 지켜 주기도 해요. ( ) \kfOX
-\kfOXItem 뜨거운 주전자에 손이 닿았을 때 위험을 알려 주는 감각은 '후각'이에요. ( ) \kfOX
-\kfOXItem 자동차 소리를 듣고 안전한 곳으로 피하게 해 주는 것은 '청각' 덕분이에요. ( ) \kfOX
+\kfOXItem 감각은 우리를 즐겁게 해 줄 뿐만 아니라, 위험할 때 몸을 지켜 주기도 해요. \kfFillBlank[12mm]{} \kfOX
+\kfOXItem 뜨거운 주전자에 손이 닿았을 때 위험을 알려 주는 감각은 '후각'이에요. \kfFillBlank[12mm]{} \kfOX
+\kfOXItem 자동차 소리를 듣고 안전한 곳으로 피하게 해 주는 것은 '청각' 덕분이에요. \kfFillBlank[12mm]{} \kfOX
 \end{kfOXList}
 
-\kfSecHeader{kfAreaConcept}{활동}{감각을 나타내는 말}
-\noindent\textit{\small 다음 문장에 어울리는 감각을 나타내는 말을 고르세요.}\par\medskip
+\kfActivityBg \par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 다음 문장에 어울리는 감각을 나타내는 말을 고르세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
 \begin{kfBlankList}
 \kfBlankItem 눈으로 별을 보니 ( 반짝반짝 / 킁킁 / 쫑긋쫑긋 ) 빛났어요.
 \kfBlankItem 코로 꽃 냄새를 ( 통통통 / 킁킁 / 냠냠 ) 맡았어요.
@@ -93,11 +97,10 @@
 \end{kfBlankList}
 
 
-\kfStartLit{문학 영역 — 작품}
+\kfStartLit{「눈은 반짝반짝 세상을 봐요」}
 
 
-\kfSecHeader{kfAreaLiterature}{지문}{작품}
-\kfPassageNote{작품}{%
+\kfPassageNote{}{%
 눈은 반짝반짝 세상을 봐요 \\[4pt]
 코는 킁킁킁 냄새를 맡아요 \\[4pt]
 귀는 쫑긋쫑긋 소리를 들어요 \\[4pt]
@@ -109,9 +112,13 @@
 }
 
 
+\kfActivityBg \par\kfMaybeNeedspace{18\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 주어진 안내에 맞춰 자유롭게 글로 표현해 보세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfWritingPrompt{동요에 나오지 않은 다른 신체 부위를 넣거나 재미있는 흉내 내는 말(의성어·의태어)을 넣어 나만의 노랫말을 만들어 보세요.}
+\kfWriting{답안 작성}{8}
+
 \kfSecHeader{kfAreaLiterature}{문제}{}
 
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{01}{객관식}
 \kfQStem{이 동요에서 '반짝반짝' 세상을 보는 신체 부위는 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 코
@@ -120,7 +127,7 @@
 \kfChoice 입
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{02}{객관식}
 \kfQStem{동요에서 발이 하는 행동을 나타낸 말은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 살살살
@@ -129,7 +136,7 @@
 \kfChoice 쫑긋쫑긋
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{03}{객관식}
 \kfQStem{이 동요에서 '냠냠냠 맛을 느낀다'고 한 신체 부위는 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 코
@@ -138,27 +145,16 @@
 \kfChoice 귀
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{04}{서술형}
 \kfQStem{이 동요를 읽고 나서, 여러분이 가장 고마운 신체 부위는 무엇인가요? 그 이유도 함께 써 보세요.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
-\par\noindent\textit{\small * 나는 ( ) 이(가) 가장 고마워요. * 왜냐하면 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
-
-\kfSecHeader{kfAreaLiterature}{활동}{창의 활동: 꼬마 작사가 되어보기}
-\noindent\textit{\small 주어진 안내에 맞춰 자유롭게 글로 표현해 보세요.}\par\medskip
-\kfWritingPrompt{동요에 나오지 않은 다른 신체 부위를 넣거나 재미있는 흉내 내는 말(의성어·의태어)을 넣어 나만의 노랫말을 만들어 보세요.}
-\kfWriting{답안 작성}{8}
-
-\kfSecHeader{kfAreaLiterature}{글쓰기}{창의 활동: 꼬마 작사가 되어보기}
-
-\kfWritingPrompt{동요에 나오지 않은 다른 신체 부위를 넣거나 재미있는 흉내 내는 말(의성어·의태어)을 넣어 나만의 노랫말을 만들어 보세요.}
-\kfWriting{글쓰기 답안}{12}
+\par\noindent\textit{\small * 나는 \kfFillBlank[12mm]{} 이(가) 가장 고마워요. * 왜냐하면 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
 
 
-\kfStartNonlit{비문학 영역 — 동물들의 슈퍼 감각}
+\kfStartNonlit{동물들의 슈퍼 감각}
 
 
-\kfSecHeader{kfAreaNonlit}{지문}{동물들의 슈퍼 감각}
 \kfPassageNote{동물들의 슈퍼 감각}{%
 우리 몸에는 세상을 보고, 냄새 맡고, 들을 수 있게 해 주는 고마운 눈, 코, 귀가 있어요. 그런데 동물 친구들 중에는 사람보다 훨씬 더 뛰어난 ‘슈퍼 감각’을 가진 친구들이 있답니다.
 
@@ -170,9 +166,10 @@
 }
 
 
-\kfSecHeader{kfAreaNonlit}{활동}{문장 독해 훈련}
-\noindent\textit{\small 각 문장을 읽고 물음에 답하세요.}\par\medskip
-\begin{kfSentenceUnit}{1}{}
+\kfActivityBg \par\needspace{15\baselineskip}
+\kfSecHeader{kfAreaNonlit}{활동}{문장 독해}
+\par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 각 문장을 읽고 물음에 답하세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\begin{kfSentenceUnit}{1}{눈은 빛을 받아들여요}
 \kfSentQ{1.}{(1) 이 문장에서 '무엇이'에 해당하는 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 눈은
@@ -187,7 +184,7 @@
 \end{kfChoices}
 \end{kfSentenceUnit}
 
-\begin{kfSentenceUnit}{2}{}
+\begin{kfSentenceUnit}{2}{코는 먼지를 깨끗하게}
 \kfSentQ{2.}{(1) 이 문장에서 '무엇이'에 해당하는 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 코는
@@ -202,9 +199,10 @@
 \end{kfChoices}
 \end{kfSentenceUnit}
 
-\kfSecHeader{kfAreaNonlit}{활동}{문장 독해 훈련}
-\noindent\textit{\small 각 문장을 읽고 물음에 답하세요.}\par\medskip
-\begin{kfSentenceUnit}{1}{}
+\kfActivityBg \par\needspace{15\baselineskip}
+\kfSecHeader{kfAreaNonlit}{활동}{문장 독해}
+\par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 각 문장을 읽고 물음에 답하세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\begin{kfSentenceUnit}{1}{눈은 빛을 받아들여요}
 \kfSentQ{1.}{(1) 이 문장에서 '무엇이'에 해당하는 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 눈은
@@ -219,7 +217,7 @@
 \end{kfChoices}
 \end{kfSentenceUnit}
 
-\begin{kfSentenceUnit}{2}{}
+\begin{kfSentenceUnit}{2}{코는 먼지를 깨끗하게}
 \kfSentQ{2.}{(1) 이 문장에서 '무엇이'에 해당하는 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 코는
@@ -234,19 +232,22 @@
 \end{kfChoices}
 \end{kfSentenceUnit}
 
-\kfSecHeader{kfAreaNonlit}{활동}{요약문 완성하기}
-\noindent\textit{\small 빈칸에 알맞은 말을 채워 보세요.}\par\medskip
+\kfActivityBg \par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 빈칸에 알맞은 말을 채워 보세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
 \begin{kfBlankList}
 \kfBlankItem 빈칸에 알맞은 말을 <보기>에서 찾아 써 보세요.
 
-* 매는 사람보다 8배나 더 잘 보는 (        )을 가지고 있어요. * 개는 (        )를 아주 잘 맡아서 잃어버린 물건을 찾아요. * 토끼는 긴 귀로 아주 작은 (        )도 잘 들을 수 있어요.
-\begin{kfEvidence}<보기> 냄새, 눈, 소리, 코, 맛\end{kfEvidence}
+* 매는 사람보다 8배나 더 잘 보는 \kfFillBlank[42mm]{}을 가지고 있어요. * 개는 \kfFillBlank[42mm]{}를 아주 잘 맡아서 잃어버린 물건을 찾아요. * 토끼는 긴 귀로 아주 작은 \kfFillBlank[42mm]{}도 잘 들을 수 있어요.
+\begin{kfEvidence}냄새, 눈, 소리, 코, 맛\end{kfEvidence}
 \end{kfBlankList}
+
+\kfActivityBg \par\kfMaybeNeedspace{18\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 주어진 안내에 맞춰 자유롭게 글로 표현해 보세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfWritingPrompt{만약 여러분이 동물들의 슈퍼 감각 중 하나를 가질 수 있다면, 무엇을 갖고 싶은가요? 그리고 그 감각으로 무엇을 하고 싶은지 상상해서 써 보세요.}
+\kfWriting{답안 작성}{8}
 
 \kfSecHeader{kfAreaNonlit}{문제}{}
 
-\begin{kfQBlock}{4}{}
-\kfQStem{이 글에서 설명하지 \uline{않은} 동물은 누구인가요?}
+\begin{kfQBlock}{01}{객관식}
+\kfQStem{이 글에서 설명하지 \uline{\underline{않은}} 동물은 누구인가요?}
 \begin{kfChoices}
 \kfChoice 매
 \kfChoice 개
@@ -254,7 +255,7 @@
 \kfChoice 토끼
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{02}{객관식}
 \kfQStem{토끼의 귀가 길쭉한 이유는 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 빠르게 하늘을 날기 위해서
@@ -263,7 +264,7 @@
 \kfChoice 사방을 멀리까지 보기 위해서
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{03}{객관식}
 \kfQStem{매는 사람보다 눈이 얼마나 더 좋다고 했나요?}
 \begin{kfChoices}
 \kfChoice 2배
@@ -273,18 +274,8 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\kfSecHeader{kfAreaNonlit}{활동}{창의 활동: 내가 갖고 싶은 슈퍼 감각}
-\noindent\textit{\small 주어진 안내에 맞춰 자유롭게 글로 표현해 보세요.}\par\medskip
-\kfWritingPrompt{만약 여러분이 동물들의 슈퍼 감각 중 하나를 가질 수 있다면, 무엇을 갖고 싶은가요? 그리고 그 감각으로 무엇을 하고 싶은지 상상해서 써 보세요.}
-\kfWriting{답안 작성}{8}
 
-\kfSecHeader{kfAreaNonlit}{글쓰기}{창의 활동: 내가 갖고 싶은 슈퍼 감각}
-
-\kfWritingPrompt{만약 여러분이 동물들의 슈퍼 감각 중 하나를 가질 수 있다면, 무엇을 갖고 싶은가요? 그리고 그 감각으로 무엇을 하고 싶은지 상상해서 써 보세요.}
-\kfWriting{글쓰기 답안}{12}
-
-
-\kfStartWeekly{실력확인 영역 — 주간 실력 확인}
+\kfStartWeekly{실력확인 영역 학습}
 
 
 \noindent\textit{\small 제한시간: 20분 / 총 10문항}\par\medskip
@@ -312,7 +303,7 @@
 
 마지막으로 토끼는 길쭉한 귀를 가지고 있어요. 토끼의 귀가 긴 이유는 바로 아주 작은 소리도 놓치지 않고 잘 듣기 위해서예요. 토끼는 귀를 이리저리 움직여서 사방에서 들려오는 소리를 모을 수 있답니다.
 }
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{01}{객관식}
 \kfQStem{다음 중 맛을 느끼는 감각 기관은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 눈
@@ -322,7 +313,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{02}{객관식}
 \kfQStem{다음 설명에 알맞은 감각의 이름은 무엇인가요?}
 \begin{kfEvidence}"코로 냄새를 맡는 감각이에요. 상한 음식 냄새를 맡아 배탈이 나지 않게 도와주기도 해요."\end{kfEvidence}
 \begin{kfChoices}
@@ -333,8 +324,8 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{3}{}
-\kfQStem{㉠과 같이 모양이나 소리를 흉내 내는 말이 \uline{아닌} 것은 무엇인가요?}
+\begin{kfQBlock}{03}{객관식}
+\kfQStem{㉠과 같이 모양이나 소리를 흉내 내는 말이 \uline{\underline{아닌}} 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 킁킁킁
 \kfChoice 냠냠냠
@@ -343,8 +334,8 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{5}{}
-\kfQStem{다음 중 이 동시에 나오지 않은 신체 부위는 어디인가요?}
+\begin{kfQBlock}{04}{객관식}
+\kfQStem{다음 중 이 동시에 나오지 \underline{않은} 신체 부위는 어디인가요?}
 \begin{kfChoices}
 \kfChoice 귀
 \kfChoice 발
@@ -353,7 +344,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{05}{객관식}
 \kfQStem{빈칸 ⓐ에 들어갈 알맞은 동물은 누구인가요?}
 \begin{kfChoices}
 \kfChoice 매
@@ -363,7 +354,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{06}{객관식}
 \kfQStem{개가 잃어버린 물건을 잘 찾을 수 있는 이유는 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 눈이 좋아서 멀리까지 볼 수 있기 때문에
@@ -373,8 +364,8 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{10}{}
-\kfQStem{다음 중 '입'이 하는 일이 \uline{아닌} 것은 무엇인가요?}
+\begin{kfQBlock}{07}{객관식}
+\kfQStem{다음 중 '입'이 하는 일이 \uline{\underline{아닌}} 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 음식을 씹어서 먹는다.
 \kfChoice 맛을 느낀다.
@@ -383,17 +374,17 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{08}{서술형}
 \kfQStem{이 동시에서 '냠냠냠' 맛을 느끼는 신체 부위는 무엇인지 찾아 쓰세요.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
 
-\begin{kfQBlock}{8}{}
+\begin{kfQBlock}{09}{서술형}
 \kfQStem{토끼의 귀가 길쭉한 이유는 무엇인가요? 글의 내용을 바탕으로 한 문장으로 쓰세요.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
 
-\begin{kfQBlock}{9}{}
+\begin{kfQBlock}{10}{서술형}
 \kfQStem{다음 문장에서 '무엇을'에 해당하는 말을 찾아 쓰세요.}
 \begin{kfEvidence}"코는 먼지를 깨끗하게 걸러 줘요."\end{kfEvidence}
 \kfAnswerNote{답안}{4}
@@ -405,11 +396,16 @@
 \clearpage
 
 \kfChapterCover{2}{소쉬르1 (챕터2)}{Chapter 2}{이번 챕터의 학습 내용을 시작합니다.}
+\begin{kfChapterAreaList}
+\kfChapterAreaItem{어휘}{kfAreaVocab}{핵심 어휘 익히기}
+\kfChapterAreaItem{개념}{kfAreaConcept}{배경지식 넓히기: 마음의 날씨, 감정}
+\kfChapterAreaItem{문학}{kfAreaLiterature}{「하하 호호 기쁠 때는」}
+\kfChapterAreaItem{비문학}{kfAreaNonlit}{감정의 종류와 표현법}
+\kfChapterAreaItem{실력확인}{kfAreaWeekly}{}
+\end{kfChapterAreaList}
 
-\kfStartVocab{어휘 영역 — 핵심 어휘 익히기}
+\kfStartVocab{핵심 어휘 익히기}
 
-
-\kfSecHeader{kfAreaVocab}{어휘}{핵심 어휘 익히기}
 
 \begin{kfVocab}
 \kfVocabItem{1}{어려운 일을 해냈을 때 마음이 꽉 찬 듯 자랑스러운 느낌}
@@ -421,21 +417,10 @@
 \end{kfVocab}
 
 
-\kfStartConcept{개념 영역 — 핵심 어휘 익히기}
+\kfStartConcept{배경지식 넓히기: 마음의 날씨, 감정}
 
 
-\kfSecHeader{kfAreaConcept}{활동}{핵심 어휘 익히기}
-\noindent\textit{\small 다음 단어와 알맞은 설명을 연결해 보세요.}\par\medskip
-\begin{kfConnect}
-\kfPair{뿌듯함}{친구의 마음을 나도 똑같이 느껴요}
-\kfPair{설렘}{기대와 달라서 섭섭하고 아쉬워요}
-\kfPair{긴장}{어려운 일을 해내서 자랑스러워요}
-\kfPair{서운함}{좋은 일이 생길 것 같아 두근거려요}
-\kfPair{공감}{중요한 일을 앞두고 조마조마해요}
-\end{kfConnect}
-
-\kfSecHeader{kfAreaConcept}{개념}{배경지식 넓히기: 마음의 날씨, 감정}
-
+\kfPassageNoteNT{%
 우리의 마음은 마치 날씨와 같아요. 맑은 날, 비 오는 날, 천둥이 치는 날이 있는 것처럼 우리의 기분도 매일매일 변한답니다. 이것을 '감정'이라고 해요.
 
 좋은 일이 생기면 햇살처럼 환한 '기쁨'을 느끼고, 친구와 싸우거나 물건을 잃어버리면 먹구름처럼 어두운 '슬픔'이나 '화'를 느껴요. 깜깜한 밤에는 '두려움'을 느끼기도 하죠.
@@ -446,17 +431,25 @@
 \item 슬픔 — 먹구름처럼 어두운 마음 (예: 아끼던 물건을 잃어버렸을 때)
 \item 두려움 — 깜깜한 밤에 느끼는 마음
 \end{itemize}
+}
 
-\kfSecHeader{kfAreaConcept}{활동}{배경지식 넓히기: 마음의 날씨, 감정}
-\noindent\textit{\small 다음 문장이 옳으면 O, 옳지 않으면 X를 표시하세요.}\par\medskip
+\kfActivityBg \par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 다음 단어와 알맞은 설명을 연결해 보세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\begin{kfConnect}
+\kfPair{뿌듯함}{친구의 마음을 나도 똑같이 느껴요}
+\kfPair{설렘}{기대와 달라서 섭섭하고 아쉬워요}
+\kfPair{긴장}{어려운 일을 해내서 자랑스러워요}
+\kfPair{서운함}{좋은 일이 생길 것 같아 두근거려요}
+\kfPair{공감}{중요한 일을 앞두고 조마조마해요}
+\end{kfConnect}
+
+\kfActivityBg \par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 다음 문장이 옳으면 O, 옳지 않으면 X를 표시하세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
 \begin{kfOXList}
-\kfOXItem 사람의 마음은 날씨처럼 매일 변할 수 있어요. ( ) \kfOX
-\kfOXItem 화가 나거나 슬픈 마음은 나쁜 것이니 무조건 숨겨야 해요. ( ) \kfOX
-\kfOXItem '두려움'은 무섭거나 겁이 나는 마음을 말해요. ( ) \kfOX
+\kfOXItem 사람의 마음은 날씨처럼 매일 변할 수 있어요. \kfFillBlank[12mm]{} \kfOX
+\kfOXItem 화가 나거나 슬픈 마음은 나쁜 것이니 무조건 숨겨야 해요. \kfFillBlank[12mm]{} \kfOX
+\kfOXItem '두려움'은 무섭거나 겁이 나는 마음을 말해요. \kfFillBlank[12mm]{} \kfOX
 \end{kfOXList}
 
-\kfSecHeader{kfAreaConcept}{활동}{감정을 나타내는 말}
-\noindent\textit{\small 다음 상황에 어울리는 감정 단어를 골라 동그라미 하세요.}\par\medskip
+\kfActivityBg \par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 다음 상황에 어울리는 감정 단어를 골라 동그라미 하세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
 \begin{kfBlankList}
 \kfBlankItem 생일 선물로 갖고 싶었던 로봇을 받았어요. ( 기쁨 / 화 )
 \kfBlankItem 캄캄한 밤에 혼자 화장실에 가야 해요. ( 즐거움 / 두려움 )
@@ -469,11 +462,10 @@
 \end{kfBlankList}
 
 
-\kfStartLit{문학 영역 — 작품}
+\kfStartLit{「하하 호호 기쁠 때는」}
 
 
-\kfSecHeader{kfAreaLiterature}{지문}{작품}
-\kfPassageNote{작품}{%
+\kfPassageNote{}{%
 하하 호호 기쁠 때는 \\[4pt]
 마음에 쨍하고 해가 떠요 \\[14pt]
 흑흑 훌쩍 슬플 때는 \\[4pt]
@@ -487,9 +479,13 @@
 }
 
 
+\kfActivityBg \par\kfMaybeNeedspace{18\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 주어진 안내에 맞춰 자유롭게 글로 표현해 보세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfWritingPrompt{동시에 나온 날씨 대신 다른 색깔이나 사물로 감정을 표현해 나만의 노랫말을 만들어 보세요.}
+\kfWriting{답안 작성}{8}
+
 \kfSecHeader{kfAreaLiterature}{문제}{}
 
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{01}{객관식}
 \kfQStem{이 동시에서 기쁠 때 마음에 무엇이 뜬다고 했나요?}
 \begin{kfChoices}
 \kfChoice 달
@@ -498,7 +494,7 @@
 \kfChoice 무지개
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{02}{객관식}
 \kfQStem{동시에서 '화날 때'의 마음을 빗대어 표현한 날씨는 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 비
@@ -507,8 +503,8 @@
 \kfChoice 천둥
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
-\kfQStem{다음 중 이 동시에 나오지 않은 감정은 무엇인가요?}
+\begin{kfQBlock}{03}{객관식}
+\kfQStem{다음 중 이 동시에 나오지 \underline{않은} 감정은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 기쁨
 \kfChoice 심심함
@@ -516,26 +512,15 @@
 \kfChoice 무서움
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{04}{서술형}
 \kfQStem{여러분은 언제 마음속에 '해'가 뜬 것처럼 기쁜가요? 경험을 떠올려 써 보세요.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
 
-\kfSecHeader{kfAreaLiterature}{활동}{창의 활동: 꼬마 작사가 되어보기}
-\noindent\textit{\small 주어진 안내에 맞춰 자유롭게 글로 표현해 보세요.}\par\medskip
-\kfWritingPrompt{동시에 나온 날씨 대신 다른 색깔이나 사물로 감정을 표현해 나만의 노랫말을 만들어 보세요.}
-\kfWriting{답안 작성}{8}
 
-\kfSecHeader{kfAreaLiterature}{글쓰기}{창의 활동: 꼬마 작사가 되어보기}
-
-\kfWritingPrompt{동시에 나온 날씨 대신 다른 색깔이나 사물로 감정을 표현해 나만의 노랫말을 만들어 보세요.}
-\kfWriting{글쓰기 답안}{12}
+\kfStartNonlit{감정의 종류와 표현법}
 
 
-\kfStartNonlit{비문학 영역 — 감정의 종류와 표현법}
-
-
-\kfSecHeader{kfAreaNonlit}{지문}{감정의 종류와 표현법}
 \kfPassageNote{감정의 종류와 표현법}{%
 사람은 누구나 다양한 감정을 느끼며 살아갑니다. 감정에는 기쁨, 즐거움, 행복함 같은 긍정적인 감정도 있고, 슬픔, 화, 짜증, 부끄러움 같은 조금 힘든 감정도 있습니다. 이 모든 감정은 우리가 살아가는데 꼭 필요한 마음의 신호입니다.
 
@@ -545,9 +530,10 @@
 }
 
 
-\kfSecHeader{kfAreaNonlit}{활동}{문장 독해 훈련}
-\noindent\textit{\small 각 문장을 읽고 물음에 답하세요.}\par\medskip
-\begin{kfSentenceUnit}{1}{}
+\kfActivityBg \par\needspace{15\baselineskip}
+\kfSecHeader{kfAreaNonlit}{활동}{문장 독해}
+\par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 각 문장을 읽고 물음에 답하세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\begin{kfSentenceUnit}{1}{다양한 감정을 느껴요 사람은}
 \kfSentQ{1.}{(1) 이 문장에서 '무엇을'에 해당하는 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 다양한 감정을
@@ -562,7 +548,7 @@
 \end{kfChoices}
 \end{kfSentenceUnit}
 
-\begin{kfSentenceUnit}{2}{}
+\begin{kfSentenceUnit}{2}{뺏어갔어요 내 장난감을 친구가}
 \kfSentQ{2.}{(1) 이 문장에서 '누가'에 해당하는 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 뺏어갔어요
@@ -583,18 +569,21 @@
 \end{kfChoices}
 \end{kfSentenceUnit}
 
-\kfSecHeader{kfAreaNonlit}{활동}{요약문 완성하기}
-\noindent\textit{\small 빈칸에 알맞은 말을 채워 보세요.}\par\medskip
+\kfActivityBg \par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 빈칸에 알맞은 말을 채워 보세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
 \begin{kfBlankList}
 \kfBlankItem 빈칸에 알맞은 말을 <보기>에서 찾아 써 보세요.
 
-* 기쁠 때는 (       )을/를 지으며 기분을 나눠요. * 슬플 때는 억지로 참지 말고 (       )을/를 흘려도 괜찮아요. * 화가 날 때는 소리를 지르는 대신 (       )으로 표현해요.
-\begin{kfEvidence}<보기> 말, 눈물, 웃음, 짜증, 부끄러움\end{kfEvidence}
+* 기쁠 때는 \kfFillBlank[42mm]{}을/를 지으며 기분을 나눠요. * 슬플 때는 억지로 참지 말고 \kfFillBlank[42mm]{}을/를 흘려도 괜찮아요. * 화가 날 때는 소리를 지르는 대신 \kfFillBlank[42mm]{}으로 표현해요.
+\begin{kfEvidence}말, 눈물, 웃음, 짜증, 부끄러움\end{kfEvidence}
 \end{kfBlankList}
+
+\kfActivityBg \par\kfMaybeNeedspace{18\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 주어진 안내에 맞춰 자유롭게 글로 표현해 보세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfWritingPrompt{친구가 실수로 내 공책을 찢었어요. 너무 속상하고 화가 나요. 이때 친구에게 어떻게 말하면 좋을까요?}
+\kfWriting{답안 작성}{8}
 
 \kfSecHeader{kfAreaNonlit}{문제}{}
 
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{01}{객관식}
 \kfQStem{이 글에서 화가 날 때 마음을 가라앉히는 방법으로 알려 준 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 입을 꾹 닫고 아무 말도 하지 않는다.
@@ -603,7 +592,7 @@
 \kfChoice 심호흡을 크게 '후\textasciitilde{}' 내쉬거나 숫자를 센다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{02}{객관식}
 \kfQStem{이 글에서 눈물에 대해 설명한 내용으로 알맞은 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 화가 났을 때만 흘리는 신호이다.
@@ -612,7 +601,7 @@
 \kfChoice 살아가는 데 필요 없는 마음의 신호이다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{03}{객관식}
 \kfQStem{친구가 장난감을 뺏어 가서 화가 났을 때, 이 글에서 권한 행동은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 웃음을 지으며 "정말 신난다!"라고 큰 소리로 외친 뒤 함께 즐거워한다.
@@ -622,18 +611,8 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\kfSecHeader{kfAreaNonlit}{활동}{창의 활동: 감정 해결사}
-\noindent\textit{\small 주어진 안내에 맞춰 자유롭게 글로 표현해 보세요.}\par\medskip
-\kfWritingPrompt{친구가 실수로 내 공책을 찢었어요. 너무 속상하고 화가 나요. 이때 친구에게 어떻게 말하면 좋을까요?}
-\kfWriting{답안 작성}{8}
 
-\kfSecHeader{kfAreaNonlit}{글쓰기}{창의 활동: 감정 해결사}
-
-\kfWritingPrompt{친구가 실수로 내 공책을 찢었어요. 너무 속상하고 화가 나요. 이때 친구에게 어떻게 말하면 좋을까요?}
-\kfWriting{글쓰기 답안}{12}
-
-
-\kfStartWeekly{실력확인 영역 — 주간 실력 확인}
+\kfStartWeekly{실력확인 영역 학습}
 
 
 \noindent\textit{\small 제한시간: 20분 / 총 10문항}\par\medskip
@@ -659,7 +638,7 @@
 
 가장 중요한 것은 자신의 감정을 솔직하게 말하는 것입니다. 친구가 나를 때려서 화가 났다면, 같이 때리는 대신 "네가 때려서 아프고 화가 나. 하지 마."라고 말해야 합니다.
 }
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{01}{객관식}
 \kfQStem{다음 중 기분이 좋고 즐거운 감정을 나타내는 말은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 슬픔
@@ -669,7 +648,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{02}{객관식}
 \kfQStem{다음 설명에 알맞은 감정의 이름은 무엇인가요? "갑작스러운 일을 당해서 가슴이 쿵 하고 뛰는 느낌이에요."}
 \begin{kfChoices}
 \kfChoice 심심함
@@ -679,7 +658,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{03}{객관식}
 \kfQStem{화가 났을 때의 마음을 빗대어 표현한 말은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 해
@@ -689,8 +668,8 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{5}{}
-\kfQStem{다음 중 이 동시에서 다루지 않은 감정은 무엇인가요?}
+\begin{kfQBlock}{04}{객관식}
+\kfQStem{다음 중 이 동시에서 다루지 \underline{않은} 감정은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 기쁨
 \kfChoice 슬픔
@@ -699,7 +678,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{05}{객관식}
 \kfQStem{빈칸 ⓐ에 들어갈 알맞은 감정은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 기쁠
@@ -709,7 +688,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{06}{객관식}
 \kfQStem{친구가 나를 때려서 화가 났을 때 가장 올바른 행동은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 아무 말도 하지 않는다.
@@ -719,7 +698,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{10}{}
+\begin{kfQBlock}{07}{객관식}
 \kfQStem{사람의 감정에 대한 설명으로 맞는 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 기쁨만 소중하고 슬픔은 쓸모없다.
@@ -729,17 +708,17 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{08}{서술형}
 \kfQStem{이 동시에서 '무서울 때' 마음에 찾아오는 것은 무엇인지 찾아 쓰세요.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
 
-\begin{kfQBlock}{8}{}
+\begin{kfQBlock}{09}{서술형}
 \kfQStem{내 마음을 잘 표현하는 것이 중요한 이유는 무엇인가요? 글의 내용을 바탕으로 한 문장으로 쓰세요.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
 
-\begin{kfQBlock}{9}{}
+\begin{kfQBlock}{10}{서술형}
 \kfQStem{다음 문장에서 '누가'에 해당하는 말을 찾아 쓰세요.}
 \begin{kfEvidence}"아기가 방긋방긋 웃어요."\end{kfEvidence}
 \kfAnswerNote{답안}{4}
@@ -751,11 +730,16 @@
 \clearpage
 
 \kfChapterCover{3}{소쉬르1 (챕터3)}{Chapter 3}{이번 챕터의 학습 내용을 시작합니다.}
+\begin{kfChapterAreaList}
+\kfChapterAreaItem{어휘}{kfAreaVocab}{핵심 어휘 익히기}
+\kfChapterAreaItem{개념}{kfAreaConcept}{배경지식 넓히기: 하루를 나누는 기준}
+\kfChapterAreaItem{문학}{kfAreaLiterature}{「"지수야, 일어날 시간이야!"」}
+\kfChapterAreaItem{비문학}{kfAreaNonlit}{시각을 읽는 법}
+\kfChapterAreaItem{실력확인}{kfAreaWeekly}{}
+\end{kfChapterAreaList}
 
-\kfStartVocab{어휘 영역 — 핵심 어휘 익히기}
+\kfStartVocab{핵심 어휘 익히기}
 
-
-\kfSecHeader{kfAreaVocab}{어휘}{핵심 어휘 익히기}
 
 \begin{kfVocab}
 \kfVocabItem{1}{날마다 규칙적으로 하는 일이나 하루 동안의 계획}
@@ -767,21 +751,10 @@
 \end{kfVocab}
 
 
-\kfStartConcept{개념 영역 — 핵심 어휘 익히기}
+\kfStartConcept{배경지식 넓히기: 하루를 나누는 기준}
 
 
-\kfSecHeader{kfAreaConcept}{활동}{핵심 어휘 익히기}
-\noindent\textit{\small 다음 단어와 알맞은 설명을 선으로 연결해 보세요.}\par\medskip
-\begin{kfConnect}
-\kfPair{일과}{낮 12시(정오)부터 밤까지의 시간이에요}
-\kfPair{오전}{하루 동안 해야 할 규칙적인 일이에요}
-\kfPair{정오}{낮 12시가 되기 전까지의 시간이에요}
-\kfPair{오후}{시간의 어느 한 시점을 말해요}
-\kfPair{시각}{낮 12시를 가리키는 말이에요}
-\end{kfConnect}
-
-\kfSecHeader{kfAreaConcept}{개념}{배경지식 넓히기: 하루를 나누는 기준}
-
+\kfPassageNoteNT{%
 우리는 하루를 크게 오전과 오후로 나누어 부릅니다. 이 둘을 나누는 기준은 바로 낮 12시인 '정오'입니다.
 
 해가 뜨고 정오가 되기 전까지를 '오전'이라고 해요. 오전에는 보통 잠에서 깨어 학교에 가거나 공부를 하며 하루를 시작하지요. 정오가 지나고 해가 지기 시작하여 밤 12시가 될 때까지는 '오후'라고 합니다. 오후에는 학교 수업을 마치고 집으로 돌아와 가족들과 시간을 보냅니다.
@@ -792,39 +765,46 @@
 \item 정오(12시) — 점심 먹는 시간
 \item 오후 3시 — 학교 마치는 시간
 \end{itemize}
+}
 
-\kfSecHeader{kfAreaConcept}{활동}{배경지식 넓히기: 하루를 나누는 기준}
-\noindent\textit{\small 다음 문장이 옳으면 O, 옳지 않으면 X를 표시하세요.}\par\medskip
-\begin{kfOXList}
-\kfOXItem 하루를 오전과 오후로 나누는 기준은 '정오'입니다. ( ) \kfOX
-\kfOXItem 오후는 해가 뜨기 시작해서 낮 12시가 될 때까지를 말합니다. ( ) \kfOX
-\kfOXItem '일과'는 날마다 규칙적으로 하는 하루 동안의 일을 뜻합니다. ( ) \kfOX
-\end{kfOXList}
-
-\kfSecHeader{kfAreaConcept}{개념}{시간의 순서 배열하기}
-
+\kfPassageNoteNT{%
 시간의 흐름을 나타내는 말 시간은 눈에 보이지 않지만 멈추지 않고 계속 흘러가요. 이런 시간의 순서를 나타내는 여러 가지 말이 있답니다. * 하루의 순서: 아침(해가 뜰 때)  점심(해가 높이 떴을 때)  저녁(해가 질 때)  밤(깜깜할 때) * 날짜의 순서: 어제(지나간 날)  오늘(지금의 날)  내일(다가올 날) * 계절의 순서: 봄(싹이 나요)  여름(초록잎이 무성해요)  가을(낙엽이 져요)  겨울(눈이 내려요) 이런 말들을 알면 어떤 일이 언제 일어났는지 쉽게 알 수 있어요.
 \par\medskip\begin{itemize}[leftmargin=18pt, itemsep=2pt, topsep=2pt, label=\textbullet]
 \item 하루: 아침 → 점심 → 저녁 → 밤
 \item 날짜: 어제 → 오늘 → 내일
 \item 계절: 봄 → 여름 → 가을 → 겨울
 \end{itemize}
+}
 
-\kfSecHeader{kfAreaConcept}{활동}{시간의 순서 배열하기}
-\noindent\textit{\small 다음 단어들을 시간의 흐름 순서대로 나열하여 번호를 쓰세요.}\par\medskip
+\kfActivityBg \par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 다음 단어와 알맞은 설명을 선으로 연결해 보세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\begin{kfConnect}
+\kfPair{일과}{낮 12시(정오)부터 밤까지의 시간이에요}
+\kfPair{오전}{하루 동안 해야 할 규칙적인 일이에요}
+\kfPair{정오}{낮 12시가 되기 전까지의 시간이에요}
+\kfPair{오후}{시간의 어느 한 시점을 말해요}
+\kfPair{시각}{낮 12시를 가리키는 말이에요}
+\end{kfConnect}
+
+\kfActivityBg \par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 다음 문장이 옳으면 O, 옳지 않으면 X를 표시하세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\begin{kfOXList}
+\kfOXItem 하루를 오전과 오후로 나누는 기준은 '정오'입니다. \kfFillBlank[12mm]{} \kfOX
+\kfOXItem 오후는 해가 뜨기 시작해서 낮 12시가 될 때까지를 말합니다. \kfFillBlank[12mm]{} \kfOX
+\kfOXItem '일과'는 날마다 규칙적으로 하는 하루 동안의 일을 뜻합니다. \kfFillBlank[12mm]{} \kfOX
+\end{kfOXList}
+
+\kfActivityBg \par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 다음 단어들을 시간의 흐름 순서대로 나열하여 번호를 쓰세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
 \begin{kfBlankList}
-\kfBlankItem (  ) 정오 (  ) 오전 (  ) 오후
-\kfBlankItem (  ) 내일 (  ) 어제 (  ) 오늘
-\kfBlankItem (  ) 점심 (  ) 아침 (  ) 밤 (  ) 저녁
-\kfBlankItem (  ) 여름 (  ) 봄 (  ) 겨울 (  ) 가을
+\kfBlankItem \kfFillBlank[20mm]{} 정오 \kfFillBlank[20mm]{} 오전 \kfFillBlank[20mm]{} 오후
+\kfBlankItem \kfFillBlank[20mm]{} 내일 \kfFillBlank[20mm]{} 어제 \kfFillBlank[20mm]{} 오늘
+\kfBlankItem \kfFillBlank[20mm]{} 점심 \kfFillBlank[20mm]{} 아침 \kfFillBlank[20mm]{} 밤 \kfFillBlank[20mm]{} 저녁
+\kfBlankItem \kfFillBlank[20mm]{} 여름 \kfFillBlank[20mm]{} 봄 \kfFillBlank[20mm]{} 겨울 \kfFillBlank[20mm]{} 가을
 \end{kfBlankList}
 
 
-\kfStartLit{문학 영역 — 작품}
+\kfStartLit{「"지수야, 일어날 시간이야!"」}
 
 
-\kfSecHeader{kfAreaLiterature}{지문}{작품}
-\kfPassageNote{작품}{%
+\kfPassageNote{}{%
 "지수야, 일어날 시간이야!"
 
 오전 8시, 지수는 알람 소리에 눈을 떴습니다. 오늘은 학교에서 현장 학습을 가는 날이라 평소보다 일찍 일과를 시작했습니다. 지수는 세수를 하고 든든하게 아침밥을 먹은 뒤 집을 나섰습니다.
@@ -835,9 +815,13 @@
 }
 
 
+\kfActivityBg \par\kfMaybeNeedspace{18\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 주어진 안내에 맞춰 자유롭게 글로 표현해 보세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfWritingPrompt{내일 꼭 지키고 싶은 일을 '오전'과 '오후'로 나누어 계획해 보세요.}
+\kfWriting{답안 작성}{8}
+
 \kfSecHeader{kfAreaLiterature}{문제}{}
 
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{01}{객관식}
 \kfQStem{지수가 오전 8시에 일어나서 가장 먼저 한 일은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 도시락 먹기
@@ -846,7 +830,7 @@
 \kfChoice 일기 쓰기
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{02}{객관식}
 \kfQStem{지수와 친구들이 점심 도시락을 먹은 때는 언제인가요?}
 \begin{kfChoices}
 \kfChoice 오전 9시
@@ -855,7 +839,7 @@
 \kfChoice 밤 10시
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{03}{객관식}
 \kfQStem{다음 중 지수의 오후 일과에 해당하는 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 늦잠 자기
@@ -864,27 +848,16 @@
 \kfChoice 박물관 도착하기
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{04}{서술형}
 \kfQStem{여러분의 하루 일과 중 가장 중요하게 생각하는 일은 무엇인가요?}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
-\par\noindent\textit{\small * 나는 ( )을/를 가장 중요하게 생각해요. * 왜냐하면 ( )}
-
-\kfSecHeader{kfAreaLiterature}{활동}{창의 활동: 나만의 일과표 만들기}
-\noindent\textit{\small 주어진 안내에 맞춰 자유롭게 글로 표현해 보세요.}\par\medskip
-\kfWritingPrompt{내일 꼭 지키고 싶은 일을 '오전'과 '오후'로 나누어 계획해 보세요.}
-\kfWriting{답안 작성}{8}
-
-\kfSecHeader{kfAreaLiterature}{글쓰기}{창의 활동: 나만의 일과표 만들기}
-
-\kfWritingPrompt{내일 꼭 지키고 싶은 일을 '오전'과 '오후'로 나누어 계획해 보세요.}
-\kfWriting{글쓰기 답안}{12}
+\par\noindent\textit{\small * 나는 \kfFillBlank[12mm]{}을/를 가장 중요하게 생각해요. * 왜냐하면 \kfFillBlank[12mm]{}}
 
 
-\kfStartNonlit{비문학 영역 — 시각을 읽는 법}
+\kfStartNonlit{시각을 읽는 법}
 
 
-\kfSecHeader{kfAreaNonlit}{지문}{시각을 읽는 법}
 \kfPassageNote{시각을 읽는 법}{%
 우리는 정확한 시각을 알기 위해 시계를 봅니다. 시계에는 길이가 다른 두 개의 바늘이 부지런히 움직이고 있습니다. 이 바늘들은 각각 '시'와 '분'을 가리키며 우리가 규칙적인 일과를 보낼 수 있도록 도와줍니다.
 
@@ -894,9 +867,10 @@
 }
 
 
-\kfSecHeader{kfAreaNonlit}{활동}{문장 독해 훈련}
-\noindent\textit{\small 각 문장을 읽고 물음에 답하세요.}\par\medskip
-\begin{kfSentenceUnit}{1}{}
+\kfActivityBg \par\needspace{15\baselineskip}
+\kfSecHeader{kfAreaNonlit}{활동}{문장 독해}
+\par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 각 문장을 읽고 물음에 답하세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\begin{kfSentenceUnit}{1}{나는 오전에 책을}
 \kfSentQ{1.}{(1) 이 문장에서 '무엇을'에 해당하는 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 나는
@@ -911,7 +885,7 @@
 \end{kfChoices}
 \end{kfSentenceUnit}
 
-\begin{kfSentenceUnit}{2}{}
+\begin{kfSentenceUnit}{2}{우리는 오후에 그림을}
 \kfSentQ{2.}{(1) 이 문장에서 '무엇을'에 해당하는 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 우리는
@@ -926,18 +900,21 @@
 \end{kfChoices}
 \end{kfSentenceUnit}
 
-\kfSecHeader{kfAreaNonlit}{활동}{요약문 완성하기}
-\noindent\textit{\small 빈칸에 알맞은 말을 채워 보세요.}\par\medskip
+\kfActivityBg \par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 빈칸에 알맞은 말을 채워 보세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
 \begin{kfBlankList}
 \kfBlankItem 빈칸에 알맞은 말을 <보기>에서 찾아 써 보세요.
 
-* 시계의 짧은 바늘은 (       )을/를 알려 줍니다. * 시계의 긴 바늘은 (       )을/를 알려 줍니다. * 시침과 분침이 모두 12를 가리키는 낮 시간을 (       )라고 합니다.
-\begin{kfEvidence}<보기> 시각, 시, 분, 정오, 오전, 오후\end{kfEvidence}
+* 시계의 짧은 바늘은 \kfFillBlank[42mm]{}을/를 알려 줍니다. * 시계의 긴 바늘은 \kfFillBlank[42mm]{}을/를 알려 줍니다. * 시침과 분침이 모두 12를 가리키는 낮 시간을 \kfFillBlank[42mm]{}라고 합니다.
+\begin{kfEvidence}시각, 시, 분, 정오, 오전, 오후\end{kfEvidence}
 \end{kfBlankList}
+
+\kfActivityBg \par\kfMaybeNeedspace{18\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 주어진 안내에 맞춰 자유롭게 글로 표현해 보세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfWritingPrompt{하루 중에 내가 가장 좋아하는 시간은 언제인가요? 무엇을 할 때인지 써 보세요.}
+\kfWriting{답안 작성}{8}
 
 \kfSecHeader{kfAreaNonlit}{문제}{}
 
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{01}{객관식}
 \kfQStem{시계의 짧은 바늘(시침)에 대한 설명으로 옳은 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice '분'을 알려 준다.
@@ -946,7 +923,7 @@
 \kfChoice '시'를 알려 준다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{02}{객관식}
 \kfQStem{'정오'는 시계 바늘이 어떻게 되어 있을 때인가요?}
 \begin{kfChoices}
 \kfChoice 짧은 바늘은 6, 긴 바늘은 12
@@ -955,7 +932,7 @@
 \kfChoice 짧은 바늘과 긴 바늘 모두 3
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{03}{객관식}
 \kfQStem{긴 바늘(분침)이 숫자 12를 가리킬 때 분은 어떻게 읽나요?}
 \begin{kfChoices}
 \kfChoice 12분
@@ -965,18 +942,8 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\kfSecHeader{kfAreaNonlit}{활동}{창의 활동: 내가 가장 좋아하는 시간}
-\noindent\textit{\small 주어진 안내에 맞춰 자유롭게 글로 표현해 보세요.}\par\medskip
-\kfWritingPrompt{하루 중에 내가 가장 좋아하는 시간은 언제인가요? 무엇을 할 때인지 써 보세요.}
-\kfWriting{답안 작성}{8}
 
-\kfSecHeader{kfAreaNonlit}{글쓰기}{창의 활동: 내가 가장 좋아하는 시간}
-
-\kfWritingPrompt{하루 중에 내가 가장 좋아하는 시간은 언제인가요? 무엇을 할 때인지 써 보세요.}
-\kfWriting{글쓰기 답안}{12}
-
-
-\kfStartWeekly{실력확인 영역 — 주간 실력 확인}
+\kfStartWeekly{실력확인 영역 학습}
 
 
 \noindent\textit{\small 제한시간: 20분 / 총 10문항}\par\medskip
@@ -1002,7 +969,7 @@
 
 길고 얇은 바늘은 '분'을 나타내는 분침입니다. 분침이 숫자 12를 가리키면 '0분'이 되어 정각을 의미합니다. 예를 들어, 짧은 바늘이 3에 있고 긴 바늘이 12에 있으면 ( ⓐ ) 정각이 됩니다.
 }
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{01}{객관식}
 \kfQStem{해가 떠서 낮 12시가 되기 전까지의 시간을 무엇이라고 하나요?}
 \begin{kfChoices}
 \kfChoice 오전
@@ -1012,7 +979,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{02}{객관식}
 \kfQStem{날마다 규칙적으로 하는 하루의 일을 뜻하는 단어는 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 시각
@@ -1022,7 +989,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{03}{객관식}
 \kfQStem{이 글에서 지수가 '정오'에 한 일은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 세수 하기
@@ -1032,7 +999,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{04}{객관식}
 \kfQStem{지수가 하루를 마무리하며 한 행동은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 알람 끄기
@@ -1042,7 +1009,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{05}{객관식}
 \kfQStem{시계의 긴 바늘(분침)이 12를 가리킬 때의 설명으로 맞는 것은?}
 \begin{kfChoices}
 \kfChoice 12분이라고 읽는다.
@@ -1052,7 +1019,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{06}{객관식}
 \kfQStem{빈칸 ⓐ에 들어갈 알맞은 시각은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 3시
@@ -1062,7 +1029,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{10}{}
+\begin{kfQBlock}{07}{객관식}
 \kfQStem{다음 중 시간의 흐름 순서가 올바른 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 오후 → 정오 → 오전
@@ -1072,17 +1039,17 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{08}{서술형}
 \kfQStem{빈칸 ㉠에 들어갈 알맞은 말을 '오전' 또는 '오후' 중에서 골라 쓰세요.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
 
-\begin{kfQBlock}{8}{}
+\begin{kfQBlock}{09}{서술형}
 \kfQStem{시계의 짧은 바늘(시침)이 하는 역할은 무엇인가요? 글의 내용을 바탕으로 쓰세요.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
 
-\begin{kfQBlock}{9}{}
+\begin{kfQBlock}{10}{서술형}
 \kfQStem{다음 문장에서 '무엇을'에 해당하는 말을 찾아 쓰세요.}
 \begin{kfEvidence}"지수는 태권도 학원에서 발차기를 연습했어요."\end{kfEvidence}
 \kfAnswerNote{답안}{4}
@@ -1094,11 +1061,16 @@
 \clearpage
 
 \kfChapterCover{4}{소쉬르1 (챕터4)}{Chapter 4}{이번 챕터의 학습 내용을 시작합니다.}
+\begin{kfChapterAreaList}
+\kfChapterAreaItem{어휘}{kfAreaVocab}{핵심 어휘 익히기}
+\kfChapterAreaItem{개념}{kfAreaConcept}{배경지식 넓히기: 마음을 전하는 '편지'}
+\kfChapterAreaItem{문학}{kfAreaLiterature}{「할머니, 안녕하세요? 저 민수예요.」}
+\kfChapterAreaItem{비문학}{kfAreaNonlit}{우리 가족을 소개합니다}
+\kfChapterAreaItem{실력확인}{kfAreaWeekly}{}
+\end{kfChapterAreaList}
 
-\kfStartVocab{어휘 영역 — 핵심 어휘 익히기}
+\kfStartVocab{핵심 어휘 익히기}
 
-
-\kfSecHeader{kfAreaVocab}{어휘}{핵심 어휘 익히기}
 
 \begin{kfVocab}
 \kfVocabItem{1}{서로 뜻이 잘 맞고 정다워서 분위기가 좋음}
@@ -1110,21 +1082,10 @@
 \end{kfVocab}
 
 
-\kfStartConcept{개념 영역 — 핵심 어휘 익히기}
+\kfStartConcept{배경지식 넓히기: 마음을 전하는 '편지'}
 
 
-\kfSecHeader{kfAreaConcept}{활동}{핵심 어휘 익히기}
-\noindent\textit{\small 다음 단어와 알맞은 설명을 선으로 연결해 보세요.}\par\medskip
-\begin{kfConnect}
-\kfPair{화목하다}{윗어른을 공손히 모시는 마음이에요}
-\kfPair{보살핌}{용기를 낼 수 있도록 응원해 줘요}
-\kfPair{안부}{사이가 좋고 정다운 모습이에요}
-\kfPair{격려}{잘 지내는지 묻는 소식이에요}
-\kfPair{공경}{정성을 다해 보호하고 돌봐 줘요}
-\end{kfConnect}
-
-\kfSecHeader{kfAreaConcept}{개념}{배경지식 넓히기: 마음을 전하는 '편지'}
-
+\kfPassageNoteNT{%
 가족이나 친구에게 말로 하기 부끄러운 마음을 전하고 싶을 때 우리는 '편지'를 씁니다. 편지는 정해진 형식이 있어요.
 
 가장 먼저 '받는 사람'을 쓰고, 날씨나 건강을 묻는 '첫인사'를 합니다. 그다음에는 하고 싶은 말을 자세히 쓰고, 마지막으로 행복을 비는 '끝인사'를 남깁니다. 그리고 편지를 쓴 날짜와 '보내는 사람'의 이름을 적습니다.
@@ -1136,29 +1097,36 @@
 \item 끝인사: '항상 건강하세요.'
 \item 보내는 사람: '○○○ 올림'
 \end{itemize}
+}
 
-\kfSecHeader{kfAreaConcept}{활동}{배경지식 넓히기: 마음을 전하는 '편지'}
-\noindent\textit{\small 다음 문장이 옳으면 O, 옳지 않으면 X를 표시하세요.}\par\medskip
+\kfActivityBg \par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 다음 단어와 알맞은 설명을 선으로 연결해 보세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\begin{kfConnect}
+\kfPair{화목하다}{윗어른을 공손히 모시는 마음이에요}
+\kfPair{보살핌}{용기를 낼 수 있도록 응원해 줘요}
+\kfPair{안부}{사이가 좋고 정다운 모습이에요}
+\kfPair{격려}{잘 지내는지 묻는 소식이에요}
+\kfPair{공경}{정성을 다해 보호하고 돌봐 줘요}
+\end{kfConnect}
+
+\kfActivityBg \par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 다음 문장이 옳으면 O, 옳지 않으면 X를 표시하세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
 \begin{kfOXList}
-\kfOXItem 편지는 받는 사람, 첫인사, 내용, 끝인사, 보낸 사람의 순서로 씁니다. ( ) \kfOX
-\kfOXItem 편지는 말로 하기 힘든 마음을 전할 때 좋은 방법입니다. ( ) \kfOX
-\kfOXItem '안부'는 윗어른을 공손하게 모신다는 뜻입니다. ( ) \kfOX
+\kfOXItem 편지는 받는 사람, 첫인사, 내용, 끝인사, 보낸 사람의 순서로 씁니다. \kfFillBlank[12mm]{} \kfOX
+\kfOXItem 편지는 말로 하기 힘든 마음을 전할 때 좋은 방법입니다. \kfFillBlank[12mm]{} \kfOX
+\kfOXItem '안부'는 윗어른을 공손하게 모신다는 뜻입니다. \kfFillBlank[12mm]{} \kfOX
 \end{kfOXList}
 
-\kfSecHeader{kfAreaConcept}{활동}{편지 형식 알기}
-\noindent\textit{\small 편지를 쓸 때 들어갈 내용으로 알맞은 곳에 번호를 쓰세요.}\par\medskip
+\kfActivityBg \par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 편지를 쓸 때 들어갈 내용으로 알맞은 곳에 번호를 쓰세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
 \begin{kfBlankList}
 \kfBlankItem ( 1 ) 받는 사람 ( 2 ) 첫인사 ( 3 ) 쓴 날짜와 보낸 사람
 
-* (  ) 사랑하는 할머니께 * (  ) 2024년 5월 8일 손자 민수 올림 * (  ) 할머니, 그동안 건강하셨나요?
+* \kfFillBlank[20mm]{} 사랑하는 할머니께 * \kfFillBlank[20mm]{} 2024년 5월 8일 손자 민수 올림 * \kfFillBlank[20mm]{} 할머니, 그동안 건강하셨나요?
 \end{kfBlankList}
 
 
-\kfStartLit{문학 영역 — 작품}
+\kfStartLit{「할머니, 안녕하세요? 저 민수예요.」}
 
 
-\kfSecHeader{kfAreaLiterature}{지문}{작품}
-\kfPassageNote{작품}{%
+\kfPassageNote{}{%
 할머니, 안녕하세요? 저 민수예요.
 
 시골에는 하얀 눈이 많이 내렸나요? 이곳은 날씨가 많이 추워졌어요. 감기에 걸리시지는 않았는지 걱정이 돼요.
@@ -1177,9 +1145,13 @@
 }
 
 
+\kfActivityBg \par\kfMaybeNeedspace{18\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 주어진 안내에 맞춰 자유롭게 글로 표현해 보세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfWritingPrompt{여러분이 사랑하는 가족 중 한 명에게 하고 싶은 말을 짧게 써 보세요.}
+\kfWriting{답안 작성}{8}
+
 \kfSecHeader{kfAreaLiterature}{문제}{}
 
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{01}{객관식}
 \kfQStem{이 편지를 받은 사람은 누구인가요?}
 \begin{kfChoices}
 \kfChoice 민수
@@ -1188,7 +1160,7 @@
 \kfChoice 어머니
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{02}{객관식}
 \kfQStem{민수가 요즘 열심히 배우고 있는 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 피아노
@@ -1197,8 +1169,8 @@
 \kfChoice 미술
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
-\kfQStem{민수가 설날에 할머니 댁에 가서 하겠다고 약속한 일이 아닌 것은 무엇인가요?}
+\begin{kfQBlock}{03}{객관식}
+\kfQStem{민수가 설날에 할머니 댁에 가서 하겠다고 약속한 일이 \underline{아닌} 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 발차기 시범 보이기
 \kfChoice 붕어빵 사 가기
@@ -1206,27 +1178,16 @@
 \kfChoice 된장찌개 끓여 드리기
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{04}{서술형}
 \kfQStem{민수는 할머니를 생각하며 어떤 마음으로 편지를 썼을까요?}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
-\par\noindent\textit{\small * 민수는 할머니가 ( ) 마음으로 편지를 썼을 거예요.}
-
-\kfSecHeader{kfAreaLiterature}{활동}{창의 활동: 마음을 전하는 한마디}
-\noindent\textit{\small 주어진 안내에 맞춰 자유롭게 글로 표현해 보세요.}\par\medskip
-\kfWritingPrompt{여러분이 사랑하는 가족 중 한 명에게 하고 싶은 말을 짧게 써 보세요.}
-\kfWriting{답안 작성}{8}
-
-\kfSecHeader{kfAreaLiterature}{글쓰기}{창의 활동: 마음을 전하는 한마디}
-
-\kfWritingPrompt{여러분이 사랑하는 가족 중 한 명에게 하고 싶은 말을 짧게 써 보세요.}
-\kfWriting{글쓰기 답안}{12}
+\par\noindent\textit{\small * 민수는 할머니가 \kfFillBlank[12mm]{} 마음으로 편지를 썼을 거예요.}
 
 
-\kfStartNonlit{비문학 영역 — 우리 가족을 소개합니다}
+\kfStartNonlit{우리 가족을 소개합니다}
 
 
-\kfSecHeader{kfAreaNonlit}{지문}{우리 가족을 소개합니다}
 \kfPassageNote{우리 가족을 소개합니다}{%
 우리 가족은 모두 네 명입니다. 아빠, 엄마, 형, 그리고 저입니다. 우리 가족은 항상 서로를 아끼고 보살핌을 주고받는 화목한 가족입니다.
 
@@ -1238,9 +1199,10 @@
 }
 
 
-\kfSecHeader{kfAreaNonlit}{활동}{문장 독해 훈련}
-\noindent\textit{\small 각 문장을 읽고 물음에 답하세요.}\par\medskip
-\begin{kfSentenceUnit}{1}{}
+\kfActivityBg \par\needspace{15\baselineskip}
+\kfSecHeader{kfAreaNonlit}{활동}{문장 독해}
+\par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 각 문장을 읽고 물음에 답하세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\begin{kfSentenceUnit}{1}{민수는 할머니를 사랑해요}
 \kfSentQ{1.}{(1) 이 문장에서 '누가'에 해당하는 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 민수는
@@ -1255,7 +1217,7 @@
 \end{kfChoices}
 \end{kfSentenceUnit}
 
-\begin{kfSentenceUnit}{2}{}
+\begin{kfSentenceUnit}{2}{아빠는 저를 업어}
 \kfSentQ{2.}{(1) 이 문장에서 '누가'에 해당하는 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 아빠는
@@ -1270,18 +1232,21 @@
 \end{kfChoices}
 \end{kfSentenceUnit}
 
-\kfSecHeader{kfAreaNonlit}{활동}{요약문 완성하기}
-\noindent\textit{\small 빈칸에 알맞은 말을 채워 보세요.}\par\medskip
+\kfActivityBg \par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 빈칸에 알맞은 말을 채워 보세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
 \begin{kfBlankList}
 \kfBlankItem 빈칸에 알맞은 말을 <보기>에서 찾아 써 보세요.
 
-* 아빠는 등산을 할 때 힘들어하는 저를 (       )해 주십니다. * 엄마는 요리 솜씨가 좋고, 제 이야기를 잘 (       ) 주십니다. * 형은 장난꾸러기지만 저를 잘 챙겨 주는 (       )가 깊은 형입니다.
-\begin{kfEvidence}<보기> 우애, 들어, 격려, 화목, 친절\end{kfEvidence}
+* 아빠는 등산을 할 때 힘들어하는 저를 \kfFillBlank[42mm]{}해 주십니다. * 엄마는 요리 솜씨가 좋고, 제 이야기를 잘 \kfFillBlank[42mm]{} 주십니다. * 형은 장난꾸러기지만 저를 잘 챙겨 주는 \kfFillBlank[42mm]{}가 깊은 형입니다.
+\begin{kfEvidence}우애, 들어, 격려, 화목, 친절\end{kfEvidence}
 \end{kfBlankList}
+
+\kfActivityBg \par\kfMaybeNeedspace{18\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 주어진 안내에 맞춰 자유롭게 글로 표현해 보세요.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfWritingPrompt{우리 가족 중 한 사람을 골라 자랑하고 싶은 점을 써 보세요.}
+\kfWriting{답안 작성}{8}
 
 \kfSecHeader{kfAreaNonlit}{문제}{}
 
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{01}{객관식}
 \kfQStem{아빠가 주말에 가족들과 함께 즐겨 하시는 일은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 요리하기
@@ -1290,7 +1255,7 @@
 \kfChoice 낮잠 자기
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{02}{객관식}
 \kfQStem{글쓴이가 형을 소개한 내용으로 알맞은 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 한 번도 장난을 친 적이 없는 점잖은 형이다.
@@ -1299,7 +1264,7 @@
 \kfChoice 숙제가 어려울 때 친절하게 가르쳐 준다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{03}{객관식}
 \kfQStem{글쓴이가 학교에서 있었던 일을 엄마에게 제일 먼저 이야기하는 이유는 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 가족 중 요리 솜씨가 가장 좋아서
@@ -1309,18 +1274,8 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\kfSecHeader{kfAreaNonlit}{활동}{창의 활동: 우리 가족 자랑하기}
-\noindent\textit{\small 주어진 안내에 맞춰 자유롭게 글로 표현해 보세요.}\par\medskip
-\kfWritingPrompt{우리 가족 중 한 사람을 골라 자랑하고 싶은 점을 써 보세요.}
-\kfWriting{답안 작성}{8}
 
-\kfSecHeader{kfAreaNonlit}{글쓰기}{창의 활동: 우리 가족 자랑하기}
-
-\kfWritingPrompt{우리 가족 중 한 사람을 골라 자랑하고 싶은 점을 써 보세요.}
-\kfWriting{글쓰기 답안}{12}
-
-
-\kfStartWeekly{실력확인 영역 — 주간 실력 확인}
+\kfStartWeekly{실력확인 영역 학습}
 
 
 \noindent\textit{\small 제한시간: 20분 / 총 10문항}\par\medskip
@@ -1347,7 +1302,7 @@
 
 형은 장난꾸러기지만 저를 잘 챙겨 줍니다. 제가 숙제를 어려워하면 친절하게 가르쳐 줍니다.
 }
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{01}{객관식}
 \kfQStem{형제나 자매 사이의 깊은 정과 사랑을 뜻하는 말은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 공경
@@ -1357,7 +1312,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{02}{객관식}
 \kfQStem{다음 중 '화목하다'라는 말과 가장 잘 어울리는 가족의 모습은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 서로 돕고 웃음꽃이 피는 가족
@@ -1367,7 +1322,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{03}{객관식}
 \kfQStem{민수가 할머니께 편지를 쓴 이유로 가장 알맞은 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 용돈을 달라고 부탁하기 위해서
@@ -1377,7 +1332,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{04}{객관식}
 \kfQStem{윗글의 내용과 다른 것은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 민수는 요즘 태권도를 배우고 있다.
@@ -1387,7 +1342,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{05}{객관식}
 \kfQStem{아빠가 저에게 "힘내자!"라고 말해주신 행동을 뜻하는 단어는 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 격려
@@ -1397,7 +1352,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{06}{객관식}
 \kfQStem{빈칸 ⓐ에 들어갈 알맞은 말은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 등산
@@ -1407,7 +1362,7 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{10}{}
+\begin{kfQBlock}{07}{객관식}
 \kfQStem{편지를 쓸 때 가장 마지막에 들어가는 내용은 무엇인가요?}
 \begin{kfChoices}
 \kfChoice 받는 사람 이름
@@ -1417,17 +1372,17 @@
 \end{kfChoices}
 \end{kfQBlock}
 
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{08}{서술형}
 \kfQStem{빈칸 ㉠에 들어갈 편지를 받는 사람은 누구인지 쓰세요.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
 
-\begin{kfQBlock}{8}{}
+\begin{kfQBlock}{09}{서술형}
 \kfQStem{글쓴이가 우리 가족을 '화목하다'고 소개한 이유는 무엇일까요? 글의 내용을 바탕으로 쓰세요.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
 
-\begin{kfQBlock}{9}{}
+\begin{kfQBlock}{10}{서술형}
 \kfQStem{다음 문장에서 '누구를'에 해당하는 말을 찾아 쓰세요.}
 \begin{kfEvidence}"형은 동생을 도와주었습니다."\end{kfEvidence}
 \kfAnswerNote{답안}{4}

@@ -1,13 +1,25 @@
 % ============================================================
-% chapter-cover.tex
-% 챕터 진입 페이지 (표지)
+% chapter-cover.tex (v6)
+% 챕터 진입 페이지 (표지) — 하단에 영역 목차 추가
 % 사용:
 %   \kfChapterCover{1}{근대성과 자아}{Chapter 1}{이번 챕터에서는 ...}
+%   \begin{kfChapterAreaList}
+%     \kfChapterAreaItem{어휘}{kfAreaVocab}{핵심 어휘 12개}
+%     ...
+%   \end{kfChapterAreaList}
+%
+%   영역 목차가 없을 때는 \kfChapterCoverEnd 호출
 % ============================================================
 
 \newcommand{\kfChapterCover}[4]{%
   \clearpage%
-  \thispagestyle{empty}%
+  \thispagestyle{kfBlank}%
+  \kfMarkChapter{Chapter #1. #2}%
+  \kfChapterCoverBg%
+  % v18.5: 챕터 표지 우상단에 로고
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north east, inner sep=0pt] at ($(current page.north east)+(-18mm,-18mm)$) {\kfLogoMd};
+  \end{tikzpicture}%
   \vspace*{20mm}%
   \noindent
   \begin{tikzpicture}[remember picture, overlay]
@@ -31,7 +43,59 @@
     {\color{kfRule}\rule{50mm}{0.5pt}}\\[6pt]
     {\small\color{kfInk} #4}
   \end{minipage}%
-  \vfill
+  \par\vspace{14mm}%
+}
+
+% v6 / v18.5 / v18.6: 챕터 표지의 영역 목차 — 흰색 반투명 박스
+% v18.6: 배경 가로선/도형과 안 겹치도록 TikZ overlay로 우하단 절대 위치
+\makeatletter
+% 영역 항목들을 모아 둘 박스
+\newsavebox{\kf@arealistbox}
+\newenvironment{kfChapterAreaList}{%
+  \begin{lrbox}{\kf@arealistbox}%
+  \begin{minipage}{0.62\linewidth}%
+    \begin{tcolorbox}[%
+      enhanced, colback=white, colframe=white,
+      opacityback=0.92, opacityframe=0,
+      boxrule=0pt, arc=4pt,
+      width=\linewidth,
+      top=8pt, bottom=8pt, left=10pt, right=10pt,
+    ]%
+      {\footnotesize\bfseries\color{kfMute} 이 챕터의 영역}\par\vspace{4pt}%
+      {\color{kfRule}\hrule height 0.3pt}\par\vspace{4pt}%
+      \begin{itemize}[leftmargin=14pt, itemsep=2pt, topsep=0pt, label={\color{kfPrimary!70}\textbullet}]%
+}{%
+      \end{itemize}%
+    \end{tcolorbox}%
+  \end{minipage}%
+  \end{lrbox}%
+  % v18.7: 배경 상단 가로선 ~ 하단 가로선 사이의 중간 영역에 배치
+  % 가로선이 내용을 가리지 않도록 박스 중심이 두 선 사이 중점에 위치
+  \begin{tikzpicture}[remember picture, overlay]%
+    \node[anchor=center, inner sep=0pt]
+      at ($(current page.south)+(0mm,90mm)$)
+      {\usebox{\kf@arealistbox}};%
+  \end{tikzpicture}%
+  \vfill%
+  \noindent\hfill\kfSeriesBadge\hspace{12mm}%
+  \clearpage%
+}
+\makeatother
+
+% 영역 항목: \kfChapterAreaItem{영역명}{kfArea색}{부제}
+\makeatletter
+\newcommand{\kfChapterAreaItem}[3]{%
+  \item {\small\bfseries\color{#2} #1}%
+  \def\kf@cci@sub{#3}%
+  \ifx\kf@cci@sub\@empty\else
+    {\small\color{kfMute}\, \textemdash\, #3}%
+  \fi
+}
+\makeatother
+
+% 영역 목록 없이 cover만 (legacy)
+\newcommand{\kfChapterCoverEnd}{%
+  \vfill%
   \noindent\hfill\kfSeriesBadge\hspace{12mm}%
   \clearpage%
 }

@@ -1,0 +1,744 @@
+\documentclass[10pt,a4paper]{article}
+
+% ─── 인코딩 / 폰트 ───
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\xeCJKsetup{CJKspace=true}
+\setCJKmainfont{Noto Sans KR}[
+  Path=C:/Windows/Fonts/, Extension=.ttf,
+  UprightFont=NotoSansKR-VF, BoldFont=NotoSansKR-VF,
+  UprightFeatures={RawFeature={axis={wght=400}}},
+  BoldFeatures={RawFeature={axis={wght=700}}},
+]
+\setCJKsansfont{Noto Sans KR}[
+  Path=C:/Windows/Fonts/, Extension=.ttf,
+  UprightFont=NotoSansKR-VF, BoldFont=NotoSansKR-VF,
+  UprightFeatures={RawFeature={axis={wght=400}}},
+  BoldFeatures={RawFeature={axis={wght=700}}},
+]
+\setmainfont{Noto Sans KR}[
+  Path=C:/Windows/Fonts/, Extension=.ttf,
+  UprightFont=NotoSansKR-VF, BoldFont=NotoSansKR-VF,
+  UprightFeatures={RawFeature={axis={wght=400}}},
+  BoldFeatures={RawFeature={axis={wght=700}}},
+]
+
+% ─── 레이아웃 ───
+\usepackage[a4paper, margin=1.5cm, top=2.8cm, bottom=2cm, heightrounded]{geometry}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{needspace}
+\usepackage{etoolbox}
+\usepackage[normalem]{ulem}
+
+% ─── 본문 폰트 크기 설정 ───
+\fontsize{10pt}{14pt}\selectfont
+
+% ─── 색상 정의 ───
+\definecolor{korfarmBrown}{HTML}{8B6914}
+\definecolor{passageBg}{HTML}{F5F5F0}
+\definecolor{passageBorder}{HTML}{D0C8B0}
+\definecolor{bogiBg}{HTML}{EBF2FA}
+\definecolor{bogiBorder}{HTML}{A8C8E8}
+\definecolor{condBg}{HTML}{FFF4E6}
+\definecolor{condBorder}{HTML}{E8C890}
+\definecolor{numCircle}{HTML}{2C3E50}
+\definecolor{ptsBadge}{HTML}{6B7280}
+\definecolor{answerLine}{HTML}{B0B0B0}
+
+% ─── tcolorbox 스타일 ───
+\tcbset{
+  passage/.style={
+    colback=passageBg, colframe=passageBorder,
+    boxrule=0.5pt, arc=3pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+    fontupper=\fontsize{10pt}{16.5pt}\selectfont,
+    breakable,
+  },
+  bogi/.style={
+    colback=bogiBg, colframe=bogiBorder,
+    boxrule=0.5pt, arc=3pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+    fontupper=\fontsize{10pt}{14pt}\selectfont,
+    title={\textbf{〈보기〉}},
+    fonttitle=\bfseries,
+    coltitle=black,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=bogiBg, colframe=bogiBorder, boxrule=0.3pt, arc=2pt},
+  },
+  cond/.style={
+    colback=condBg, colframe=condBorder,
+    boxrule=0.5pt, arc=3pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+    fontupper=\fontsize{10pt}{14pt}\selectfont,
+    title={\textbf{〈조건〉}},
+    fonttitle=\bfseries,
+    coltitle=black,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=condBg, colframe=condBorder, boxrule=0.3pt, arc=2pt},
+  },
+}
+
+% ─── 헤더/푸터 ───
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[L]{%
+  \raisebox{-4pt}{\includegraphics[height=18pt]{C:/Users/RENEWCOM PC/Documents/국어농장v2홈페이지/scripts/../frontend/public/korfarm-logo.png}}%
+  \hspace{6pt}%
+  \textbf{러셀 1권}%
+  \hspace{6pt}%
+  \textcolor{gray}{1장 챕터 테스트}%
+}
+\fancyhead[R]{%
+  \small\textcolor{gray}{30문항\,·\,110점\,·\,60분}%
+}
+\fancyfoot[C]{\small\textcolor{gray}{— \thepage\ —}}
+
+% ─── 기타 설정 ───
+\raggedbottom
+\setlength{\headheight}{20pt}
+\addtolength{\topmargin}{-6pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlength{\columnsep}{12pt}
+
+% ─── 문제번호 매크로 ───
+\newcommand{\qnum}[1]{%
+  \tikz[baseline=(num.base)]{%
+    \node[circle, fill=numCircle, text=white, inner sep=0pt,
+          minimum size=18pt, font=\small\bfseries] (num) {#1};%
+  }%
+}
+
+\newcommand{\pts}[1]{%
+  \hfill\textcolor{ptsBadge}{[#1점]}%
+}
+
+% ─── 답안 밑줄 매크로 ───
+\newcommand{\answerlines}[1]{%
+  \par\vspace{4pt}%
+  \foreach \i in {1,...,#1} {%
+    {\color{answerLine}\hrule height 0.4pt}\vspace{35pt}%
+  }%
+  \vspace{2pt}%
+}
+
+\begin{document}
+\twocolumn[
+% ─── 첫 페이지 헤더 ───
+\begin{center}
+{\Large\bfseries 러셀 1권\quad 1장 챕터 테스트}
+\end{center}
+\vspace{3mm}
+{\color{korfarmBrown}\hrule height 1.2pt}
+\vspace{5mm}
+\hfill\rule{3.5cm}{0.4pt}\,학교\hspace{10mm}%
+\rule{2cm}{0.4pt}\,학년\hspace{10mm}%
+이름\,\rule{3.5cm}{0.4pt}
+\vspace{5mm}
+{\color{korfarmBrown}\hrule height 0.6pt}
+\vspace{6mm}
+]
+\vspace{4mm}
+\needspace{5\baselineskip}
+{\small\textcolor{gray}{◈ 다음 글을 읽고 물음에 답하시오.}}
+\vspace{2mm}
+\begin{tcolorbox}[passage]
+우리말에는 헤아릴 수 없이 많은 단어가 있다. 이 수많은 단어를 공통된 성질에 따라 분류해 놓은 갈래를 ‘품사’라고 한다. 품사는 단어가 지닌 고유한 성격을 알려 주는 이름표와도 같다. \\{}
+\vspace{4pt} \\{}
+품사를 분류하는 기준은 크게 세 가지이다. 첫 번째 기준은 ‘형태’로, 단어가 문장 속에서 형태가 변하는지 여부에 따라 나눈다. ‘나무’, ‘헌’, ‘아주’와 같은 단어들은 문장에서 쓰일 때 그 형태가 변하지 않는데, 이를 ‘불변어’라고 한다. 반면에 ‘먹다’, ‘예쁘다’와 같은 단어들은 문장에서 쓰일 때 형태가 다양하게 변한다. ‘먹다’는 ‘먹고, 먹으니, 먹어서’로, ‘예쁘다’는 ‘예쁘고, 예쁘니, 예뻐서’로 활용된다. 이처럼 문장 속에서 형태가 바뀌는 단어를 ‘가변어’라고 한다. \\{}
+\vspace{4pt} \\{}
+두 번째 기준은 ‘기능’으로, 단어가 문장 안에서 어떤 역할을 하는지에 따라 분류한다. 문장의 몸통과 같이 중심이 되어 주어나 목적어 등으로 쓰이는 단어를 ‘체언’이라고 한다. 주로 체언 뒤에 붙어 다른 말과의 문법적 관계를 나타내는 단어는 ‘관계언’이라고 한다. 문장에서 주어의 움직임이나 상태를 풀이하는 단어는 ‘용언’이라고 하며, 다른 말을 꾸며 주는 역할을 하는 단어는 ‘수식언’이라고 한다. 마지막으로 문장의 다른 성분과 직접적인 관계를 맺지 않고 독립적으로 쓰이는 단어를 ‘독립언’이라고 한다. \\{}
+\vspace{4pt} \\{}
+세 번째 기준은 ‘의미’로, 단어가 지닌 공통된 뜻에 따라 품사를 분류하는 것이다. 체언에는 사람이나 사물의 이름을 나타내는 ‘명사’, 명사를 대신하는 ‘대명사’, 수량이나 순서를 나타내는 ‘수사’가 있다. 관계언에는 ‘조사’가 속한다. 용언은 움직임을 나타내는 ‘동사’와 성질이나 상태를 나타내는 ‘형용사’로 나뉜다. 수식언에는 체언을 꾸미는 ‘관형사’와 주로 용언을 꾸미는 ‘부사’가 있다. 마지막으로 독립언에는 놀람이나 부름, 대답을 나타내는 ‘감탄사’가 속한다. \\{}
+\vspace{4pt} \\{}
+이처럼 우리말은 형태 기준에 따라 불변어와 가변어로 나누고, 기능 기준에 따라 체언, 관계언, 용언, 수식언, 독립언으로 나누며, 의미 기준에 따라 명사, 대명사, 수사, 조사, 동사, 형용사, 관형사, 부사, 감탄사의 9품사로 나눈다.
+\end{tcolorbox}
+\vspace{3mm}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{1}\enspace 품사를 나누는 세 가지 기준을 바르게 짝지은 것은? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 형태, 기능, 소리
+  \item ② 기능, 의미, 문맥
+  \item ③ 형태, 의미, 길이
+  \item ④ 형태, 기능, 의미
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{2}\enspace 형태가 변하는 '가변어'에 속하는 품사는? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 동사
+  \item ② 명사
+  \item ③ 관형사
+  \item ④ 부사
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{3}\enspace 기능에 따른 묶음이 나머지와 \uline{다른} 하나는? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 나무
+  \item ② 우리
+  \item ③ 첫째
+  \item ④ 아주
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{4}\enspace 밑줄 친 단어의 품사가 나머지와 \uline{다른} 하나는? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 기차가 \uline{오다}.
+  \item ② 밥을 \uline{먹다}.
+  \item ③ 새가 \uline{달린다}.
+  \item ④ 하늘이 \uline{아름답다}.
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{5}\enspace 일정한 기준에 따라 단어의 종류를 나누어 놓은 체계는 무엇인가? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 가변어
+  \item ② 수식언
+  \item ③ 품사
+  \item ④ 불변어
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{6}\enspace 문장 속에서 형태가 바뀌는 단어들을 무엇이라고 하는가? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 품사
+  \item ② 불변어
+  \item ③ 가변어
+  \item ④ 명사, 대명사, 수사
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{7}\enspace 문장 속에서 형태가 고정되어 변하지 않는 단어들은 무엇인가? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 명사, 대명사, 수사
+  \item ② 가변어
+  \item ③ 불변어
+  \item ④ 품사
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{8}\enspace 다음 문장에서 '헌'과 '아주'의 품사를 각각 쓰고, 이 단어들이 문장에서 어떤 기능을 하는지 서술하시오. \pts{8}
+\par}
+
+\vspace{3mm}
+\begin{tcolorbox}[bogi]
+나는 헌 책을 아주 재미있게 읽었다.
+\end{tcolorbox}
+\vspace{3mm}
+\answerlines{3}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+{\small\textcolor{gray}{◈ 다음 글을 읽고 물음에 답하시오.}}
+\vspace{2mm}
+\begin{tcolorbox}[passage]
+비유법은 표현하고 싶은 대상을 그와 비슷한 다른 대상에 빗대어 더 생생하고 인상 깊게 나타내는 표현 방법이다. 이때 진짜 말하고 싶은 대상을 '원관념'이라 하고, 빗대어 표현하는 대상을 '보조관념'이라고 한다. 원관념과 보조관념은 서로 공통점이 있어야 자연스러운 비유가 이루어진다. \\{}
+\vspace{4pt} \\{}
+직유법은 '같이', '처럼', '듯이', '-인 양' 등 비유를 나타내는 말을 사용하여 원관념과 보조관념을 직접 연결하는 방법이다. 「빼앗긴 들에도 봄은 오는가」에서 "가르마 같은 논길"은 '논길(원관념)'을 '가르마(보조관념)'에 비유하여 일직선으로 뻗은 모습을 표현한 것이다. 또한 "살찐 가슴처럼 부드러운 이 흙"은 '흙(원관념)'을 '살찐 가슴(보조관념)'에 빗대어 흙의 부드럽고 풍요로운 느낌을 강조한다. 직유법은 비교하는 말이 직접 드러나 있어 독자가 그 의미를 이해하기 쉽다. \\{}
+\vspace{4pt} \\{}
+은유법은 'A는 B이다' 또는 'A의 B' 같은 형태로 원관념과 보조관념을 간접적으로 연결하는 방법이다. "내 마음은 호수요"는 '마음(A)은 호수(B)이다'의 형태로, 마음이 호수처럼 넓고 고요하다는 의미를 함축적으로 드러낸다. 직유법보다 더 깊은 생각을 하게 만든다. \\{}
+\vspace{4pt} \\{}
+의인법은 사람이 아닌 사물이나 동식물에 인격을 부여하여 사람처럼 생각하고 행동하는 것으로 표현하는 방법이다. 「빼앗긴 들에도 봄은 오는가」에서는 "입을 다물고 있는 하늘아, 들판아"라고 하여 하늘과 들판을 사람처럼 표현했다. 또한 "바람은 내 귀에 속삭이며"나, "착한 개울이 ... 아기를 달래는 노래를 하며 ... 어깨춤을 추며 흘러가네"처럼 자연물이 사람처럼 행동하게 하여 대상에 친근감을 부여하고 생동감을 불어넣는다. \\{}
+\vspace{4pt} \\{}
+대유법도 비유법의 한 종류로, 한 부분으로 전체를 나타내거나 사물의 특징으로 그 사물 자체를 나타내는 방법이다. 「빼앗긴 들에도 봄은 오는가」의 '빼앗긴 들'은 '들'이라는 부분(보조관념)을 통해 '빼앗긴 우리나라 국토'라는 전체(원관념)를 상징적으로 보여준다. \\{}
+\vspace{4pt} \\{}
+이러한 비유법은 평범한 내용을 더 새롭고 감동적으로 전달하며, 독자가 작품의 의미를 더 깊이 있게 감상하도록 돕는 중요한 표현 기법이다.
+\end{tcolorbox}
+\vspace{3mm}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{9}\enspace 대상을 다른 대상에 빗대어 표현하는 '비유법'을 사용하는 가장 주된 이유는 무엇인가? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 내용을 정확하게 전달하기 위해
+  \item ② 어려운 한자어를 쉽게 풀어쓰기 위해
+  \item ③ 문장의 길이를 짧게 줄이기 위해
+  \item ④ 표현을 더 생생하고 인상 깊게 만들기 위해
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{10}\enspace "내 마음은 호수요"라는 표현에 대한 설명으로 알맞은 것은 무엇인가? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 원관념은 '마음', 보조관념은 '호수'이다.
+  \item ② 원관념은 '호수', 보조관념은 '마음'이다.
+  \item ③ 사람이 아닌 것을 사람처럼 표현했다.
+  \item ④ 원관념과 보조관념이 '처럼'으로 연결되어 있다.
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{11}\enspace 다음 중 직유법을 만들기 위해 사용되는 말이 \uline{아닌} 것은 무엇인가? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 같이
+  \item ② 처럼
+  \item ③ -인 양
+  \item ④ 이다
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{12}\enspace "가르마 같은 논길"이라는 표현에 대한 설명으로 알맞지 \uline{않은} 것은 무엇인가? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 사람이 아닌 것을 사람처럼 표현했다.
+  \item ② '가르마'가 보조관념이다.
+  \item ③ 논길의 일직선으로 뻗은 모습을 표현했다.
+  \item ④ 직유법이 사용되었다.
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{13}\enspace 표현하고 싶은 대상을 그와 비슷한 다른 대상에 빗대어 생생하게 나타내는 표현 방법을 무엇이라고 하는가? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 원관념
+  \item ② 비유법
+  \item ③ 보조관념
+  \item ④ 직유법
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{14}\enspace 비유법에서 진짜 말하고 싶은 대상, 즉 '논길'이나 '흙'을 무엇이라고 하는가? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 은유법
+  \item ② 원관념
+  \item ③ 직유법
+  \item ④ 보조관념
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{15}\enspace 비유법에서 빗대어 표현하는 대상, 즉 '가르마'나 '살찐 가슴'을 무엇이라고 하는가? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 직유법
+  \item ② 비유법
+  \item ③ 은유법
+  \item ④ 보조관념
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{16}\enspace '직유법'과 '은유법'의 차이점을 에 맞게 서술하시오. \pts{8}
+\par}
+
+\vspace{3mm}
+\begin{tcolorbox}[cond]
+1. 각 비유법의 특징이 드러나게 서술할 것. \\{}
+2. 예시를 각각 활용할 것.
+\end{tcolorbox}
+\vspace{3mm}
+\answerlines{4}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+{\small\textcolor{gray}{◈ 다음 글을 읽고 물음에 답하시오.}}
+\vspace{2mm}
+\begin{tcolorbox}[passage]
+지금은 남의 땅 \textbackslash{}- 빼앗긴 들에도 봄은 오는가? \\{}
+\vspace{4pt} \\{}
+나는 온몸에 따뜻한 햇살을 받고   \\{}
+푸른 하늘과 푸른 들판이 만나는 곳으로   \\{}
+가르마 같은 논길을 따라 꿈속을 걷듯 걸어만 간다. \\{}
+\vspace{4pt} \\{}
+입을 다물고 있는 하늘아, 들판아   \\{}
+내 마음에는 내가 혼자 온 것 같지가 않구나.   \\{}
+네가 나를 이끌었느냐, 누가 나를 불렀느냐? 답답하구나, 대답을 해 다오. \\{}
+\vspace{4pt} \\{}
+바람은 내 귀에 속삭이며   \\{}
+한 발짝도 멈추지 마라, 옷자락을 흔들고   \\{}
+종달새는 울타리 너머에서 아가씨처럼 구름 뒤에서 반갑게 웃네. \\{}
+\vspace{4pt} \\{}
+고맙게 잘 자란 보리밭아   \\{}
+간밤 자정이 넘어서 내린 고운 비로   \\{}
+너는 삼단 머리처럼 깨끗이 씻었구나. 내 머리까지 가벼워진다. \\{}
+\vspace{4pt} \\{}
+혼자라도 힘차게 가자   \\{}
+마른 논을 끼고 도는 착한 개울이   \\{}
+아기를 달래는 노래를 하며 혼자서 어깨춤을 추며 흘러가네. \\{}
+\vspace{4pt} \\{}
+나비야, 제비야, 장난치지 마라   \\{}
+맨드라미와 들꽃에게도 인사를 해야지   \\{}
+피마자기름을 바른 사람이 농사짓던 그 들판을 다 보고 싶다. \\{}
+\vspace{4pt} \\{}
+내 손에 호미를 쥐어 다오   \\{}
+살찐 가슴처럼 부드러운 이 흙을   \\{}
+발목이 아프도록 밟아도 보고 좋은 땀도 흘리고 싶다. \\{}
+\vspace{4pt} \\{}
+강가에 나온 아이처럼   \\{}
+시간도 모르고 끝도 없이 떠도는 내 마음아   \\{}
+무엇을 찾느냐, 어디로 가느냐? 우스워라, 대답을 해 보거라. \\{}
+\vspace{4pt} \\{}
+나는 온몸에 풀냄새를 맡으며   \\{}
+푸른 웃음과 푸른 슬픔이 섞인 사이로   \\{}
+다리를 절며 하루를 걷는다. 아마도 봄 신령이 내게 내려왔나 보다. \\{}
+\vspace{4pt} \\{}
+그러나 지금은 \textbackslash{}- 들을 빼앗겨 봄까지 빼앗기겠네.
+\end{tcolorbox}
+\vspace{3mm}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{17}\enspace 이 시의 전체적인 내용과 흐름을 가장 잘 설명한 것은 무엇인가? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 나라를 빼앗긴 슬픔을 느끼다가, 봄의 풍경을 보며 희망을 되찾고 있다.
+  \item ② 봄의 아름다움에 기뻐하다가, 봄이 짧다는 사실에 슬퍼하고 있다.
+  \item ③ 봄을 즐기는 사람들을 부러워하다가, 자신도 그들처럼 되고 싶다고 다짐하고 있다.
+  \item ④ 자연의 아름다움에 흠뻑 빠져 기뻐하다가, 이 땅이 빼앗긴 현실을 깨닫고 절망하고 있다.
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{18}\enspace 말하는 이가 봄의 들판을 걸으며 느끼는 주된 감정으로 알맞지 \uline{않은} 것은 무엇인가? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 종달새 소리와 개울의 춤을 보며 느끼는 흥겨움
+  \item ② 땀 흘려 일하고 싶은 국토에 대한 애정
+  \item ③ 푸른 하늘과 들판을 보며 느끼는 아름다움
+  \item ④ 모든 것을 포기하고 싶은 절망감과 무기력함
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{19}\enspace 이 시에서 ‘빼앗긴 들’이 상징하는 의미로 가장 알맞은 것은 무엇인가? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 일제에게 주권을 빼앗긴 우리의 국토
+  \item ② 농사를 지을 수 없게 된 황폐한 땅
+  \item ③ 봄이 와도 꽃이 피지 않는 죽음의 땅
+  \item ④ 다른 사람에게 팔려나간 개인의 땅
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{20}\enspace “푸른 웃음과 푸른 슬픔이 섞인 사이로”라는 구절에 담긴 말하는 이의 심정은 무엇인가? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 기쁨과 슬픔 중 어떤 감정이 진짜인지 헷갈리는 혼란스러운 마음
+  \item ② 기쁜데 슬픈 척, 슬픈데 기쁜 척하는 거짓된 마음
+  \item ③ 과거에는 기뻤지만 지금은 슬프기만 한 변해버린 마음
+  \item ④ 아름다운 봄의 풍경을 보는 기쁨과 나라를 빼앗긴 슬픔이 뒤섞인 복잡한 마음
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{21}\enspace 말하는 이가 봄의 아름다움에 흠뻑 빠져 있다가, 다시 현실을 깨닫고 스스로를 “우스워라”라고 말하는 이유는 무엇인가? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 종달새가 아가씨처럼 구는 모습이 너무 웃겨서
+  \item ② 나라를 빼앗긴 비참한 상황을 잊고 마냥 즐거워하는 자신이 한심해서
+  \item ③ 친구들과의 약속을 잊어버리고 혼자 놀고 있어서
+  \item ④ 길을 잃고 엉뚱한 곳으로 가고 있었기 때문에
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{22}\enspace (1) 서술어 '속삭이며'의 주어는 무엇인가? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 바람은
+  \item ② 종달새는
+  \item ③ 구름
+  \item ④ 아가씨
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{23}\enspace (2) 서술어 '흔들고'의 주어는 무엇인가? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 바람은
+  \item ② 종달새는
+  \item ③ 내 귀
+  \item ④ 울타리
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{24}\enspace “푸른 웃음과 푸른 슬픔”이라는 표현에 담긴 말하는 이의 복잡한 마음을 에 맞게 서술하시오. \pts{8}
+\par}
+
+\vspace{3mm}
+\begin{tcolorbox}[cond]
+1. ‘웃음’이 나는 이유를 설명할 것. \\{}
+2. ‘슬픔’을 느끼는 이유를 설명할 것.
+\end{tcolorbox}
+\vspace{3mm}
+\answerlines{3}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+{\small\textcolor{gray}{◈ 다음 글을 읽고 물음에 답하시오.}}
+\vspace{2mm}
+\begin{tcolorbox}[passage]
+사람은 누구나 마음속에 바라는 것이 있다. 현실요법이라는 상담 방법에서는, 사람의 모든 행동이 이런 욕구를 이루기 위해 스스로 선택하는 것이라고 본다. 그런데 어떤 선택이 문제가 되면, 마음속 욕구들의 균형을 맞춰서 새로운 선택을 하는 것이 중요하다고 말한다. \\{}
+\vspace{4pt} \\{}
+현실요법에서는 사람에게 다섯 가지 기본적인 욕구가 있다고 설명한다. 첫째는 살고 싶은 마음이다. 건강을 지키고, 안전하게 살고 싶어 하는 마음이다. 이 마음이 강한 사람은 규칙을 잘 지키고, 필요한 것을 아끼며 모으는 것을 좋아한다. 둘째는 사랑하고 싶은 마음이다. 다른 사람과 함께 지내고, 사랑을 주고받고 싶어 하는 마음이다. 이런 사람은 다른 사람을 잘 도와주지만, 사랑을 받지 못하면 상처를 받기 쉽다. 셋째는 인정받고 싶은 마음이다. 다른 사람에게 잘한다는 말을 듣고 싶고, 스스로 뿌듯함을 느끼고 싶은 마음이다. 이런 사람은 공부나 일에 열심히 하고, 자기 생각을 잘 말하는 편이다. 넷째는 자유롭고 싶은 마음이다. 누구에게도 간섭받지 않고, 스스로 선택하고 싶은 마음이다. 이 마음이 강한 사람은 혼자 있는 걸 좋아하고, 다른 사람과 너무 가까워지는 것을 불편해할 수도 있다. 다섯째는 즐겁게 살고 싶은 마음이다. 새로운 것을 배우거나, 놀면서 재미를 느끼고 싶어 하는 마음이다. 이런 사람은 취미 활동을 즐기고, 항상 밝고 호기심이 많다. \\{}
+\vspace{4pt} \\{}
+사람마다 이 다섯 가지 마음의 크기는 다르다. 그래서 행동하는 방식도 다르고, 갈등이 생기기도 한다. 예를 들어, 사랑하고 싶은 마음은 크지만 인정받고 싶은 마음은 약한 사람은, 다른 사람의 부탁을 거절하지 못해 힘들 수 있다. 이럴 때는 인정받고 싶은 마음을 키워서, 자기 생각을 솔직하게 말할 수 있도록 도와준다. 또 어떤 사람은 자유롭고 싶은 마음과 인정받고 싶은 마음이 둘 다 강한 경우도 있다. 이럴 때는 자기 생각만 고집하면 친구들과 자주 다툴 수 있다. 이럴 때는 다른 사람의 생각도 기꺼이 듣고, 마음을 헤아리는 연습이 필요하다. \\{}
+\vspace{4pt} \\{}
+현실요법에서는 자기 욕구만 채우려고 하지 않고, 다른 사람의 욕구도 방해하지 않으면서 좋은 선택을 하도록 돕는다. 사람은 남이 시키는 대로만 사는 존재가 아니라, 스스로 선택하고 행동할 수 있는 존재라는 것이 현실요법의 가장 중요한 생각이다. 요즘에는 이 상담 방법이 많은 사람들에게 관심을 받고, 여러 심리 상담에서 넓게 사용되고 있다.
+\end{tcolorbox}
+\vspace{3mm}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{25}\enspace 윗글의 중심 내용으로 가장 적절한 것은? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 인간의 행동을 결정하는 뇌 과학의 원리
+  \item ② 청소년기에 겪는 여러 가지 마음의 갈등
+  \item ③ 다양한 심리 상담 방법의 종류와 역사
+  \item ④ 현실요법의 다섯 가지 기본 욕구와 이를 통한 문제 해결
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{26}\enspace 윗글의 내용과 일치하지 \uline{않는} 것은? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① '살고 싶은 마음'이 강한 사람은 규칙을 잘 지키는 경향이 있다.
+  \item ② 모든 사람의 다섯 가지 마음의 크기는 똑같다.
+  \item ③ 현실요법은 사람의 모든 행동을 스스로의 선택으로 본다.
+  \item ④ 현실요법은 요즘 여러 심리 상담에서 사용되고 있다.
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{27}\enspace 〈보기〉의 민수가 가장 키워야 할 마음으로 적절한 것은? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{tcolorbox}[bogi]
+민수는 친구들과 어울려 노는 것을 가장 좋아한다. 하지만 친구들이 무리한 부탁을 할 때도 거절하지 못하고 다 들어주다가 결국 자기 할 일을 못 해서 속상할 때가 많다.
+\end{tcolorbox}
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 인정받고 싶은 마음
+  \item ② 자유롭고 싶은 마음
+  \item ③ 사랑하고 싶은 마음
+  \item ④ 살고 싶은 마음
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{28}\enspace 다음 중 '즐겁게 살고 싶은 마음'이 강한 사람의 특징으로 가장 적절한 것은? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 공부나 일에 열심히 하고 자기 생각을 잘 말한다.
+  \item ② 혼자 있는 것을 좋아하고 간섭받기를 싫어한다.
+  \item ③ 취미 활동을 즐기고 항상 밝고 호기심이 많다.
+  \item ④ 다른 사람을 잘 도와주지만 상처받기 쉽다.
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{29}\enspace 현실요법이 생각하는 '인간'에 대한 설명으로 가장 중요한 것은? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 다른 사람의 도움 없이는 살아갈 수 없는 존재
+  \item ② 남이 시키는 대로 행동하는 것이 가장 편한 존재
+  \item ③ 다섯 가지 마음의 크기가 정해져 있어 변하지 않는 존재
+  \item ④ 스스로 선택하고 행동할 수 있는 힘을 가진 존재
+\end{itemize}
+\end{minipage}
+\vspace{4mm}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{minipage}{\columnwidth}
+{\hangindent=2em\hangafter=1
+\qnum{30}\enspace 현실요법에서 갈등이 생기는 이유와 해결 방법을 다음 조건에 맞게 써보세요. \pts{8}
+\par}
+
+\vspace{3mm}
+\begin{tcolorbox}[cond]
+1. 개인차의 원인을 포함할 것 \\{}
+2. 해결을 위한 접근 방법을 제시할 것
+\end{tcolorbox}
+\vspace{3mm}
+\answerlines{4}
+\end{minipage}
+\vspace{4mm}
+
+\end{document}

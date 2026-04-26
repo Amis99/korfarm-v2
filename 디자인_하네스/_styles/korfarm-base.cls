@@ -37,27 +37,27 @@
 \ProcessOptions\relax
 
 % ---------- 베이스 클래스 ----------
-\LoadClass[a4paper,oneside]{book}
+% v12: twoside 활성화 → fancyhdr LE/RE/LO/RO 분기 가능
+\LoadClass[b5paper,twoside]{book}
 
 % ---------- 시리즈별 geometry 차등 ----------
-%   Sau/Fre: top/bottom 16mm/14mm, inner 18mm, outer 13mm
-%   Rus/Wit: top/bottom 11mm,      inner 14mm, outer 11mm  (v4: 압축 강화)
+% v12: top 여백 + headheight + headsep 확대 (헤더 영역 충분히 확보)
 \RequirePackage{geometry}
 \ifcase\kf@series\relax
   % 0 = fallback (러셀 정책)
-  \geometry{paperwidth=182mm,paperheight=257mm,top=11mm,bottom=11mm,inner=14mm,outer=11mm,headheight=12pt,headsep=4mm,footskip=7mm}
+  \geometry{paperwidth=182mm,paperheight=257mm,top=20mm,bottom=16mm,inner=16mm,outer=12mm,headheight=28pt,headsep=8mm,footskip=12mm}
 \or
   % 1 = Saussure
-  \geometry{paperwidth=182mm,paperheight=257mm,top=16mm,bottom=16mm,inner=18mm,outer=13mm,headheight=14pt,headsep=7mm,footskip=10mm}
+  \geometry{paperwidth=182mm,paperheight=257mm,top=24mm,bottom=18mm,inner=19mm,outer=14mm,headheight=30pt,headsep=10mm,footskip=14mm}
 \or
-  % 2 = Frege  (v4: top/bottom 16→14mm, headsep/footskip 미세 압축)
-  \geometry{paperwidth=182mm,paperheight=257mm,top=14mm,bottom=14mm,inner=17mm,outer=12mm,headheight=13pt,headsep=5mm,footskip=8mm}
+  % 2 = Frege
+  \geometry{paperwidth=182mm,paperheight=257mm,top=22mm,bottom=17mm,inner=18mm,outer=13mm,headheight=28pt,headsep=9mm,footskip=13mm}
 \or
-  % 3 = Russell  (v4: top/bottom 13→11mm)
-  \geometry{paperwidth=182mm,paperheight=257mm,top=11mm,bottom=11mm,inner=14mm,outer=11mm,headheight=12pt,headsep=4mm,footskip=7mm}
+  % 3 = Russell
+  \geometry{paperwidth=182mm,paperheight=257mm,top=20mm,bottom=16mm,inner=16mm,outer=12mm,headheight=28pt,headsep=8mm,footskip=12mm}
 \or
-  % 4 = Wittgenstein  (v4: top/bottom 13→11mm)
-  \geometry{paperwidth=182mm,paperheight=257mm,top=11mm,bottom=11mm,inner=14mm,outer=11mm,headheight=12pt,headsep=4mm,footskip=7mm}
+  % 4 = Wittgenstein
+  \geometry{paperwidth=182mm,paperheight=257mm,top=20mm,bottom=16mm,inner=16mm,outer=12mm,headheight=28pt,headsep=8mm,footskip=12mm}
 \fi
 
 % ---------- 필수 패키지 ----------
@@ -78,6 +78,7 @@
 \RequirePackage{enumitem}
 \RequirePackage{array}
 \RequirePackage{tabularx}
+\RequirePackage{multirow}
 \RequirePackage{adjustbox}
 \RequirePackage{setspace}
 \RequirePackage{titlesec}
@@ -85,33 +86,205 @@
 \RequirePackage{calc}
 \RequirePackage{graphicx}
 \RequirePackage[hidelinks]{hyperref}
+\RequirePackage{eso-pic}
+
+% v17: 페이지 전체 배경 PDF 삽입 (Canva 디자인)
+% \IfFileExists로 가드 — 파일 없으면 무시
+\newcommand{\kfPageBg}[1]{%
+  \IfFileExists{#1.pdf}{%
+    \AddToShipoutPictureBG*{%
+      \AtPageLowerLeft{%
+        \includegraphics[width=\paperwidth, height=\paperheight, keepaspectratio=false]{#1}%
+      }%
+    }%
+  }{}%
+}
+
+% v17.1: 시리즈별 plain 배경 (영역 헤더 외 모든 페이지) — 자동 적용
+% \kfPlainBgAuto는 fancy 페이지 스타일 진입 시 자동 호출
+\def\kf@plainfile{}
+\ifcase\kf@series\relax
+  \def\kf@plainfile{rus_plain_bg_b5}%
+\or
+  \def\kf@plainfile{sau_plain_bg_b5}%
+\or
+  \def\kf@plainfile{fre_plain_bg_b5}%
+\or
+  \def\kf@plainfile{rus_plain_bg_b5}%
+\or
+  \def\kf@plainfile{wit_plain_bg_b5}%
+\fi
+
+% v18.2: 권 표지 페이지에는 반투명 마스크 비활성화
+\newif\ifkf@usemask
+\kf@usemasktrue
+
+% 모든 fancy 페이지에 plain 배경 적용 — 단 영역 헤더 페이지는 자체 배경이 우선
+% v18.2: plain 배경 위에 반투명 흰색 마스크를 깔아 본문 가독성 확보
+\AddToShipoutPictureBG{%
+  \IfFileExists{\kf@plainfile.pdf}{%
+    \AtPageLowerLeft{%
+      \includegraphics[width=\paperwidth, height=\paperheight, keepaspectratio=false]{\kf@plainfile}%
+    }%
+  }{}%
+  \ifkf@usemask
+    \AtPageLowerLeft{%
+      \begin{tikzpicture}[remember picture, overlay]
+        \fill[white, fill opacity=0.88, rounded corners=4pt]
+          ($(current page.south west)+(7mm,12mm)$)
+          rectangle ($(current page.north east)+(-7mm,-15mm)$);
+      \end{tikzpicture}%
+    }%
+  \fi
+  \global\kf@usemasktrue% 다음 페이지 위해 리셋
+}
+
+% v18.3: 활동/문제 배경이 마스크를 덮지 않도록 — 활동/문제 배경 위에 마스크 한 번 더
+\newcommand{\kf@addMaskOverBg}{%
+  \AddToShipoutPictureBG*{%
+    \AtPageLowerLeft{%
+      \begin{tikzpicture}[remember picture, overlay]
+        \fill[white, fill opacity=0.88, rounded corners=4pt]
+          ($(current page.south west)+(7mm,12mm)$)
+          rectangle ($(current page.north east)+(-7mm,-15mm)$);
+      \end{tikzpicture}%
+    }%
+  }%
+}
+
+% v18: 시리즈별 권 표지 / 챕터 표지 배경 매크로
+\def\kf@bookcoverfile{}
+\def\kf@chaptercoverfile{}
+\ifcase\kf@series\relax
+  \def\kf@bookcoverfile{rus_book_cover_bg_b5}\def\kf@chaptercoverfile{rus_chapter_cover_bg_b5}%
+\or
+  \def\kf@bookcoverfile{sau_book_cover_bg_b5}\def\kf@chaptercoverfile{sau_chapter_cover_bg_b5}%
+\or
+  \def\kf@bookcoverfile{fre_book_cover_bg_b5}\def\kf@chaptercoverfile{fre_chapter_cover_bg_b5}%
+\or
+  \def\kf@bookcoverfile{rus_book_cover_bg_b5}\def\kf@chaptercoverfile{rus_chapter_cover_bg_b5}%
+\or
+  \def\kf@bookcoverfile{wit_book_cover_bg_b5}\def\kf@chaptercoverfile{wit_chapter_cover_bg_b5}%
+\fi
+\newcommand{\kfBookCoverBg}{\kfPageBg{\kf@bookcoverfile}\global\kf@usemaskfalse}
+\newcommand{\kfChapterCoverBg}{\kfPageBg{\kf@chaptercoverfile}}
+
+% v18.2: 시리즈별 권 표지 텍스트 색상 (배경 밝기에 따라 흰/검 분기) + 텍스트 시작 여백
+\ifcase\kf@series\relax
+  \def\kfBookCoverColor{\color{white}}\def\kfBookCoverSubColor{\color{white!75!black}}\def\kfBookCoverVspace{60mm}%
+\or
+  \def\kfBookCoverColor{\color{kfInk}}\def\kfBookCoverSubColor{\color{kfMute}}\def\kfBookCoverVspace{50mm}%
+\or
+  \def\kfBookCoverColor{\color{kfInk}}\def\kfBookCoverSubColor{\color{kfMute}}\def\kfBookCoverVspace{125mm}%
+\or
+  \def\kfBookCoverColor{\color{white}}\def\kfBookCoverSubColor{\color{white!75!black}}\def\kfBookCoverVspace{60mm}%
+\or
+  \def\kfBookCoverColor{\color{white}}\def\kfBookCoverSubColor{\color{white!75!black}}\def\kfBookCoverVspace{85mm}%
+\fi
+
+% v18.5: 영역 헤더 직후 첫 컨텐츠는 needspace 무시 (영역 헤더만 있는 빈 페이지 방지)
+\newif\ifkf@areaJustOpened
+\kf@areaJustOpenedfalse
+\newcommand{\kfMaybeNeedspace}[1]{%
+  \ifkf@areaJustOpened
+    \global\kf@areaJustOpenedfalse%
+  \else
+    \needspace{#1}%
+  \fi
+}
+% v18.6: 영역 직후 플래그 리셋 (지문 박스 등 첫 컨텐츠 후 호출)
+\newcommand{\kfResetAreaFlag}{\global\kf@areaJustOpenedfalse}
+
+% v18.6: 지시문 앞에 붙이는 삼각 마크 — TikZ로 직접 그려 폰트 미지원(▸→⊠) 회피
+\newcommand{\kfTipMark}{%
+  \tikz[baseline=-0.2ex]{%
+    \fill[kfPrimary] (0pt,-0.4ex) -- (3.6pt,0.6ex) -- (0pt,1.6ex) -- cycle;%
+  }%
+}
+
+% v18.6 NOTE: 한자 확장 영역(筇 焼 寧 顏 등) + IPA(ŋ ɾ ʌ ː) + 위첨자/아래첨자
+% 폰트 fallback은 후속 작업. 현재는 ▸→\kfTipMark 치환만 적용.
+% 본문 내 한자/IPA 깨짐은 컨텐츠(JSON) 측에서 표기를 수정하는 것이 안전.
+\newcommand{\kfHanja}[1]{#1}
+
+% v18.2: 답 쓰는 그래픽 빈칸 매크로 ( ) 자동 치환용
+% 인자 1개: 너비 단위 옵션 (기본 16mm). 학생이 펜으로 답을 쓸 둥근 사각 박스
+\newcommand{\kfFillBlank}[1][16mm]{%
+  \tikz[baseline=-0.4ex]{%
+    \draw[kfRule, line width=0.4pt, rounded corners=2pt]
+      (0,-1.4ex) rectangle (#1, 1.4ex);%
+  }%
+}
+
+% v18.1: 시리즈별 활동/문제 강조 배경 매크로 (다음 페이지 1장에만 적용)
+\def\kf@actfile{}
+\def\kf@qfile{}
+\ifcase\kf@series\relax
+  \def\kf@actfile{rus_act_bg_b5}\def\kf@qfile{rus_q_bg_b5}%
+\or
+  \def\kf@actfile{sau_act_bg_b5}\def\kf@qfile{sau_q_bg_b5}%
+\or
+  \def\kf@actfile{fre_act_bg_b5}\def\kf@qfile{fre_q_bg_b5}%
+\or
+  \def\kf@actfile{rus_act_bg_b5}\def\kf@qfile{rus_q_bg_b5}%
+\or
+  \def\kf@actfile{wit_act_bg_b5}\def\kf@qfile{wit_q_bg_b5}%
+\fi
+\newcommand{\kfActivityBg}{\kfPageBg{\kf@actfile}\kf@addMaskOverBg}
+\newcommand{\kfQuestionBg}{\kfPageBg{\kf@qfile}\kf@addMaskOverBg}
 
 % ---------- 폰트 설정 (Noto Sans/Serif KR Variable Font) ----------
+% v18.4: 본문 가독성↑ — weight 400→500 (Medium). 학년 수준 분기:
+%   소쉬르(입문)/프레게(중급) = Sans (NotoSansKR) — 친근, 가독성↑
+%   러셀(고급)/비트(수능) = Serif (NotoSerifKR) — 학구적, 인쇄 교재 분위기
 \setmainfont{NotoSerifKR-VF.ttf}[
   Path = C:/WINDOWS/Fonts/,
-  UprightFeatures = {RawFeature={+axis={wght=400}}},
-  BoldFeatures    = {RawFeature={+axis={wght=700}}},
+  UprightFeatures = {RawFeature={+axis={wght=500}}},
+  BoldFeatures    = {RawFeature={+axis={wght=800}}},
   AutoFakeSlant = 0.15
 ]
 \setsansfont{NotoSansKR-VF.ttf}[
   Path = C:/WINDOWS/Fonts/,
-  UprightFeatures = {RawFeature={+axis={wght=400}}},
-  BoldFeatures    = {RawFeature={+axis={wght=700}}},
+  UprightFeatures = {RawFeature={+axis={wght=500}}},
+  BoldFeatures    = {RawFeature={+axis={wght=800}}},
   AutoFakeSlant = 0.15
 ]
-\setCJKmainfont{NotoSansKR-VF.ttf}[
-  Path = C:/WINDOWS/Fonts/,
-  UprightFeatures = {RawFeature={+axis={wght=400}}},
-  BoldFeatures    = {RawFeature={+axis={wght=700}}},
-  AutoFakeSlant = 0.15
-]
+% 시리즈별 CJK 본문 폰트 분기
+\ifcase\kf@series\relax
+  % 0=fallback (러셀)
+  \setCJKmainfont{NotoSerifKR-VF.ttf}[Path = C:/WINDOWS/Fonts/, UprightFeatures={RawFeature={+axis={wght=500}}}, BoldFeatures={RawFeature={+axis={wght=800}}}, AutoFakeSlant=0.15]
+\or
+  % 1=소쉬르 (입문) — Sans 친근
+  \setCJKmainfont{NotoSansKR-VF.ttf}[Path = C:/WINDOWS/Fonts/, UprightFeatures={RawFeature={+axis={wght=500}}}, BoldFeatures={RawFeature={+axis={wght=800}}}, AutoFakeSlant=0.15]
+\or
+  % 2=프레게 (중급) — Sans 친근
+  \setCJKmainfont{NotoSansKR-VF.ttf}[Path = C:/WINDOWS/Fonts/, UprightFeatures={RawFeature={+axis={wght=500}}}, BoldFeatures={RawFeature={+axis={wght=800}}}, AutoFakeSlant=0.15]
+\or
+  % 3=러셀 (고급) — Serif 학구적
+  \setCJKmainfont{NotoSerifKR-VF.ttf}[Path = C:/WINDOWS/Fonts/, UprightFeatures={RawFeature={+axis={wght=500}}}, BoldFeatures={RawFeature={+axis={wght=800}}}, AutoFakeSlant=0.15]
+\or
+  % 4=비트 (수능) — Serif 학구적
+  \setCJKmainfont{NotoSerifKR-VF.ttf}[Path = C:/WINDOWS/Fonts/, UprightFeatures={RawFeature={+axis={wght=500}}}, BoldFeatures={RawFeature={+axis={wght=800}}}, AutoFakeSlant=0.15]
+\fi
 \setCJKsansfont{NotoSansKR-VF.ttf}[
   Path = C:/WINDOWS/Fonts/,
-  UprightFeatures = {RawFeature={+axis={wght=400}}},
-  BoldFeatures    = {RawFeature={+axis={wght=700}}}
+  UprightFeatures = {RawFeature={+axis={wght=500}}},
+  BoldFeatures    = {RawFeature={+axis={wght=800}}}
 ]
-% 본문 기본은 Sans (Noto Sans KR)
-\renewcommand{\familydefault}{\sfdefault}
+% 본문 기본 — 소쉬·프레는 Sans, 러셀·비트는 Serif
+\ifcase\kf@series\relax
+  \renewcommand{\familydefault}{\rmdefault}% 0
+\or
+  \renewcommand{\familydefault}{\sfdefault}% 1=소쉬르
+\or
+  \renewcommand{\familydefault}{\sfdefault}% 2=프레게
+\or
+  \renewcommand{\familydefault}{\rmdefault}% 3=러셀
+\or
+  \renewcommand{\familydefault}{\rmdefault}% 4=비트
+\fi
+% v18.4: 본문 텍스트 색상 진검정 (마스크 위 가독성↑)
+\AtBeginDocument{\color{black}}
 
 % ---------- 폰트 크기 강제 (\ifcase 분기) ----------
 \AtBeginDocument{%
@@ -215,16 +388,123 @@
   \setlength{\kfColSep}{6pt}
 \fi
 
-% ---------- 머리말/꼬리말 ----------
+% ---------- 머리말/꼬리말 (v12: twoside LE/RE/LO/RO) ----------
+% 헤더: outer=국어농장 V2, inner=영역명(\leftmark)
+% 푸터: outer=페이지번호, inner=챕터명(\rightmark)
 \pagestyle{fancy}
 \fancyhf{}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}
-\fancyhead[L]{\small\color{kfMute}\leftmark}
-\fancyhead[R]{\small\color{kfMute}국어농장 V2}
-\fancyfoot[C]{\thepage}
 
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+% v18.5: 국어농장 로고 매크로 (모든 시리즈 공통)
+\newcommand{\kfLogo}[1][22mm]{%
+  \IfFileExists{korfarm-logo.png}{\includegraphics[height=#1, keepaspectratio]{korfarm-logo}}{국어농장 V2}%
+}
+\newcommand{\kfLogoSm}{\kfLogo[10pt]}% 헤더용 작은 로고
+\newcommand{\kfLogoMd}{\kfLogo[14mm]}% 챕터 표지용
+\newcommand{\kfLogoLg}{\kfLogo[26mm]}% 권 표지용 큰 로고
+
+% 짝수 페이지(왼쪽) — outer=좌, inner=우
+\fancyhead[LE]{\raisebox{-2pt}{\kfLogoSm}}
+\fancyhead[RE]{\small\color{kfPrimary}\leftmark}
+\fancyfoot[LE]{\small\bfseries\color{kfInk}\thepage}
+\fancyfoot[RE]{\small\color{kfMute}\rightmark}
+
+% 홀수 페이지(오른쪽) — inner=좌, outer=우
+\fancyhead[LO]{\small\color{kfPrimary}\leftmark}
+\fancyhead[RO]{\raisebox{-2pt}{\kfLogoSm}}
+\fancyfoot[LO]{\small\color{kfMute}\rightmark}
+\fancyfoot[RO]{\small\bfseries\color{kfInk}\thepage}
+
+% 마커 매핑: \leftmark=영역명, \rightmark=챕터명
+% (area-header.tex / chapter-cover.tex 에서 \kfMarkArea{...} \kfMarkChapter{...} 호출)
+\gdef\kf@currentchapter{}
+\newcommand{\kfMarkChapter}[1]{%
+  \gdef\kf@currentchapter{#1}%
+  \markboth{}{#1}%
+}
+% v16: 영역+시리즈별 메모란 카테고리 자동 매핑
+\def\kf@areaVocab{어휘}\def\kf@areaGrammar{문법}\def\kf@areaConcept{개념}
+\def\kf@areaLit{문학}\def\kf@areaNonlit{비문학}
+\newcommand{\kfMarkArea}[1]{%
+  \markboth{#1}{\kf@currentchapter}%
+  \def\kf@curarea{#1}%
+  \ifx\kf@curarea\kf@areaVocab\gdef\kf@memocat{낱말 메모}\fi
+  \ifx\kf@curarea\kf@areaGrammar\gdef\kf@memocat{규칙 정리}\fi
+  \ifx\kf@curarea\kf@areaConcept\gdef\kf@memocat{핵심 정리}\fi
+  \ifx\kf@curarea\kf@areaLit
+    \ifcase\kf@series\relax
+      \gdef\kf@memocat{감상/해석/근거}%
+    \or\gdef\kf@memocat{감상/느낌}%
+    \or\gdef\kf@memocat{감상/해석}%
+    \or\gdef\kf@memocat{감상/해석/근거}%
+    \or\gdef\kf@memocat{정의/근거/예외}%
+    \fi
+  \fi
+  \ifx\kf@curarea\kf@areaNonlit
+    \ifcase\kf@series\relax
+      \gdef\kf@memocat{근거/비교/판단}%
+    \or\gdef\kf@memocat{핵심 정리}%
+    \or\gdef\kf@memocat{핵심 정리}%
+    \or\gdef\kf@memocat{근거/비교/판단}%
+    \or\gdef\kf@memocat{정의/근거/예외}%
+    \fi
+  \fi
+}
+
+% 챕터 표지·권 표지: 헤더/푸터 없음
+\fancypagestyle{kfBlank}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+}
+
+% multicols 안 여부와 무관하게 컬럼 남은 공간 가져오는 wrapper.
+% multicols 안: \@colroom (한 컬럼 남은 공간)
+% multicols 밖: \pagegoal-\pagetotal
+\newcommand{\kfStoreColRoom}[1]{%
+  \@ifundefined{@colroom}%
+    {\setlength{#1}{\dimexpr\pagegoal-\pagetotal\relax}}%
+    {\setlength{#1}{\dimexpr\@colroom-\pagetotal\relax}}%
+}
+
+% multicols* 환경 진입 추적 (kfQBlock의 break 분기용)
+\newif\ifkfInMC
+\kfInMCfalse
+
+% 소쉬르(1)/프레게(2): 지문 박스를 항상 새 페이지에서 시작 (사용자 정책)
+% 러셀(3)/비트(4): 페이지 효율 위해 새 페이지 강제 안 함
+\newif\ifkfPassageNewPage
+\kfPassageNewPagefalse
+\ifcase\kf@series\relax\or\kfPassageNewPagetrue\or\kfPassageNewPagetrue\fi
+
+% v16: 메모란 카테고리 라벨 (시리즈별 default)
+%   소쉬르 = 감상/느낌  / 프레게 = 핵심 정리
+%   러셀   = 근거/비교/판단 / 비트 = 정의/근거/예외
+\def\kf@memocat{}
+\ifcase\kf@series\relax
+  \def\kf@memocat{근거/판단}%
+\or
+  \def\kf@memocat{감상/느낌}%
+\or
+  \def\kf@memocat{핵심 정리}%
+\or
+  \def\kf@memocat{근거/비교/판단}%
+\or
+  \def\kf@memocat{정의/근거/예외}%
+\fi
+\newcommand{\kfSetMemoCategory}[1]{\gdef\kf@memocat{#1}}
+% 환경에서 사용: \kfBeginMC ... \kfEndMC가 multicols*를 감쌈
+% v15: needspace 0.45→0.3 (라벨만 페이지 상단에 두고 빈 공간 생기는 문제 완화)
+\newcommand{\kfBeginMC}{%
+  \par\needspace{0.3\textheight}%
+  \kfInMCtrue%
+  \begin{multicols*}{2}\raggedcolumns\setlength{\columnsep}{12pt}%
+}
+\newcommand{\kfEndMC}{%
+  \end{multicols*}%
+  \kfInMCfalse%
+}
 
 % ---------- 영역 표제 ----------
 \newcommand{\kfAreaHeader}[3]{%

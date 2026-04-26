@@ -21,23 +21,30 @@
 
 \begin{document}
 
-\thispagestyle{empty}
-\vspace*{40mm}
+\thispagestyle{kfBlank}
+\kfBookCoverBg
+\vspace*{\kfBookCoverVspace}
 \begin{center}
-{\Huge\bfseries\color{kfPrimary} 러셀1}\\[10pt]
-{\Large\color{kfMute} 학생용 교재 — 제 1 권}\\[20pt]
-{\small\color{kfMute} (챕터 1 \textendash{} 4)}
+{\kfLogoLg}\\[14pt]
+{\fontsize{72}{84}\selectfont\bfseries\kfBookCoverColor 러셀}\\[18pt]
+{\fontsize{28}{32}\selectfont\kfBookCoverSubColor \textsc{Level} \textbf{1}}\\[22pt]
+{\large\kfBookCoverSubColor 제 1 권 \quad\textbar\quad 챕터 1\textendash{} 4}
 \end{center}
 \vfill
 \hfill\kfSeriesBadge\hspace{15mm}
 \clearpage
 \kfChapterCover{1}{러셀1 (챕터1)}{Chapter 1}{이번 챕터의 학습 내용을 시작합니다.}
+\begin{kfChapterAreaList}
+\kfChapterAreaItem{문법}{kfAreaGrammar}{문장 속 단어들의 역할 (품사)}
+\kfChapterAreaItem{개념}{kfAreaConcept}{표현을 생생하게 만드는 비유법}
+\kfChapterAreaItem{문학}{kfAreaLiterature}{「빼앗긴 들에도 봄은 오는가」}
+\kfChapterAreaItem{비문학}{kfAreaNonlit}{[인문] 내 마음의 다섯 가지 욕구, 현실요법}
+\end{kfChapterAreaList}
 
-\kfStartGrammar{문법 영역 — 문장 속 단어들의 역할 (품사)}
+\kfStartGrammar{문장 속 단어들의 역할 (품사)}
 
 
-\kfSecHeader{kfAreaGrammar}{개념}{문장 속 단어들의 역할 (품사)}
-
+\kfPassageNoteNT{%
 우리말에는 헤아릴 수 없이 많은 단어가 있다. 이 수많은 단어를 공통된 성질에 따라 분류해 놓은 갈래를 ‘품사’라고 한다. 품사는 단어가 지닌 고유한 성격을 알려 주는 이름표와도 같다.
 
 품사를 분류하는 기준은 크게 세 가지이다. 첫 번째 기준은 ‘형태’로, 단어가 문장 속에서 형태가 변하는지 여부에 따라 나눈다. ‘나무’, ‘헌’, ‘아주’와 같은 단어들은 문장에서 쓰일 때 그 형태가 변하지 않는데, 이를 ‘불변어’라고 한다. 반면에 ‘먹다’, ‘예쁘다’와 같은 단어들은 문장에서 쓰일 때 형태가 다양하게 변한다. ‘먹다’는 ‘먹고, 먹으니, 먹어서’로, ‘예쁘다’는 ‘예쁘고, 예쁘니, 예뻐서’로 활용된다. 이처럼 문장 속에서 형태가 바뀌는 단어를 ‘가변어’라고 한다.
@@ -52,9 +59,9 @@
 \item 기능 — '체언(학교)·용언(뛰다)·수식언(예쁜)·관계언(이/가)·독립언(아!)'
 \item 의미 9품사 — '명·대·수 / 조 / 동·형 / 관·부 / 감'
 \end{itemize}
+}
 
-\kfSecHeader{kfAreaGrammar}{활동}{내용 확인}
-\noindent\textit{\small 아래 표의 빈칸에 알맞은 말을 채워 문법 내용을 확인해 보자.}\par\medskip
+\kfActivityBg \par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 아래 표의 빈칸에 알맞은 말을 채워 문법 내용을 확인해 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
 * 품사 분류의 세 가지 기준 *
 
 우리말 단어를 나누는 세 가지 기준과 9품사의 관계를 표로 정리해 보자. 
@@ -63,20 +70,21 @@
 \noindent\begin{adjustbox}{max width=\linewidth, center}
 \renewcommand{\arraystretch}{1.45}
 \arrayrulecolor{kfRule}
-\begin{tabular}{|>{\raggedright\arraybackslash}p{\dimexpr 0.4306\linewidth-12pt\relax}|>{\raggedright\arraybackslash}p{\dimexpr 0.4167\linewidth-12pt\relax}|>{\raggedright\arraybackslash}p{\dimexpr 0.1528\linewidth-12pt\relax}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{\dimexpr 0.3303\linewidth-12pt\relax}|>{\raggedright\arraybackslash}p{\dimexpr 0.4650\linewidth-12pt\relax}|>{\raggedright\arraybackslash}p{\dimexpr 0.2047\linewidth-12pt\relax}|}
 \hline
 \rowcolor{kfPrimaryLight!50}\textbf{\color{kfPrimary} 형태} & \textbf{\color{kfPrimary} 기능} & \textbf{\color{kfPrimary} 의미} \\\hline
-[ ① \_\_\_\_\_\_ ] (형태가 변하지 않음) & [ ② \_\_\_\_\_\_ ] (문장의 몸통) & 명사, 대명사, 수사 \\\hline
-\rule[-1.0em]{0pt}{2.4em} & [ ③ \_\_\_\_\_\_ ] (관계 표시) & 조사 \\\hline
-\rule[-1.0em]{0pt}{2.4em} & [ ④ \_\_\_\_\_\_ ] (꾸며주는 말) & 관형사, 부사 \\\hline
-\rule[-1.0em]{0pt}{2.4em} & [ ⑤ \_\_\_\_\_\_ ] (독립적인 말) & 감탄사 \\\hline
+\multirow{4}{*}{[ ① \_\_\_\_\_\_ ] (형태가 변하지 않음)} & [ ② \_\_\_\_\_\_ ] (문장의 몸통) & 명사, 대명사, 수사 \\\cline{2-3}
+ & [ ③ \_\_\_\_\_\_ ] (관계 표시) & 조사 \\\cline{2-3}
+ & [ ④ \_\_\_\_\_\_ ] (꾸며주는 말) & 관형사, 부사 \\\cline{2-3}
+ & [ ⑤ \_\_\_\_\_\_ ] (독립적인 말) & 감탄사 \\\cline{2-3}
 [ ⑥ \_\_\_\_\_\_ ] (형태가 변함) & [ ⑦ \_\_\_\_\_\_ ] (움직임·상태 서술) & 동사, 형용사 \\\hline
 \end{tabular}
 \arrayrulecolor{black}
 \end{adjustbox}\par\medskip
 
-\kfSecHeader{kfAreaGrammar}{활동}{분석 훈련}
-\noindent\textit{\small  9품사 분류 훈련! 다음 단어의 품사를 9품사 중 하나로 쓰시오.}\par\medskip
+\kfActivityBg \kfSecHeader{kfAreaGrammar}{활동}{분석 훈련}
+\par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk}  9품사 분류 훈련! 다음 단어의 품사를 9품사 중 하나로 쓰시오.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfBeginMC
 \begin{enumerate}[leftmargin=22pt, itemsep=6pt, topsep=4pt, label=\textbf{\arabic*.}]
 \item 하늘
 \item 달린다
@@ -89,11 +97,14 @@
 \item 어머나
 \item 먹고
 \end{enumerate}
+\kfEndMC
 
 \kfSecHeader{kfAreaGrammar}{문제}{}
 
-\begin{kfQBlock}{1}{}
-\kfQStem{품사를 나누는 세 가지 기준에 대한 설명으로 적절하지 \uline{않은} 것은?}
+\par\medskip
+\kfBeginMC
+\begin{kfQBlock}{01}{객관식}
+\kfQStem{품사를 나누는 세 가지 기준에 대한 설명으로 적절하지 \uline{\underline{않은}} 것은?}
 \begin{kfChoices}
 \kfChoice 단어의 ‘소리(음운)’가 가장 우선적인 분류 기준이 된다.
 \kfChoice 문장 안에서 하는 ‘기능’에 따라 체언·용언 등으로 나뉜다.
@@ -102,7 +113,7 @@
 \kfChoice 단어의 ‘형태’가 변하는지에 따라 가변어와 불변어로 나뉜다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{02}{객관식}
 \kfQStem{형태가 변하는 '가변어'에 속하는 품사는?}
 \begin{kfChoices}
 \kfChoice 명사
@@ -112,7 +123,7 @@
 \kfChoice 감탄사
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{03}{객관식}
 \kfQStem{기능에 따른 묶음이 나머지와 \uline{다른} 하나는?}
 \begin{kfChoices}
 \kfChoice 학생
@@ -122,7 +133,7 @@
 \kfChoice 나무
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{04}{객관식}
 \kfQStem{밑줄 친 단어의 품사가 나머지와 \uline{다른} 하나는?}
 \begin{kfChoices}
 \kfChoice 새가 \uline{달린다}.
@@ -132,8 +143,8 @@
 \kfChoice 기차가 \uline{오다}.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
-\kfQStem{'수식언'에 대한 설명으로 옳지 \uline{않은} 것은?}
+\begin{kfQBlock}{05}{객관식}
+\kfQStem{'수식언'에 대한 설명으로 옳지 \uline{\underline{않은}} 것은?}
 \begin{kfChoices}
 \kfChoice 다른 말을 꾸며 주는 기능을 한다.
 \kfChoice 사람이나 사물의 이름을 가리키는 기능을 한다.
@@ -142,7 +153,7 @@
 \kfChoice 관형사와 부사가 수식언에 속한다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{06}{객관식}
 \kfQStem{<보기>의 밑줄 친 단어와 품사가 같은 것은?}
 \begin{kfEvidence}나는 \uline{새} 옷을 입었다.\end{kfEvidence}
 \begin{kfChoices}
@@ -153,7 +164,7 @@
 \kfChoice 동생이 \uline{밥}을 다 먹는다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{07}{객관식}
 \kfQStem{밑줄 친 단어의 품사가 '부사'인 것은?}
 \begin{kfChoices}
 \kfChoice 토끼가 \uline{빨리} 달린다.
@@ -163,8 +174,8 @@
 \kfChoice \uline{모든} 학생이 모였다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{8}{}
-\kfQStem{문장 속에서 형태가 변하지 않는 '불변어'가 \uline{아닌} 것은?}
+\begin{kfQBlock}{08}{객관식}
+\kfQStem{문장 속에서 형태가 변하지 않는 '불변어'가 \uline{\underline{아닌}} 것은?}
 \begin{kfChoices}
 \kfChoice 하늘
 \kfChoice 그리고
@@ -173,8 +184,8 @@
 \kfChoice 헌
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{9}{}
-\kfQStem{'용언'에 대한 설명으로 옳지 \uline{않은} 것은?}
+\begin{kfQBlock}{09}{객관식}
+\kfQStem{'용언'에 대한 설명으로 옳지 \uline{\underline{않은}} 것은?}
 \begin{kfChoices}
 \kfChoice 사물의 움직임이나 상태를 서술하는 기능을 한다.
 \kfChoice 형태가 고정된 불변어로, 다른 말을 꾸며 주는 기능을 한다.
@@ -183,58 +194,58 @@
 \kfChoice 동사와 형용사가 모두 용언의 범주에 포함된다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{10}{단답형}
 \kfQStem{일정한 기준에 따라 단어의 종류를 나누어 놓은 체계는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{11}{단답형}
 \kfQStem{문장 속에서 형태가 바뀌는 단어들을 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{12}{단답형}
 \kfQStem{문장 속에서 형태가 고정되어 변하지 않는 단어들은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{13}{단답형}
 \kfQStem{문장에서 몸통처럼 중심이 되어 주어나 목적어 등으로 쓰이는 단어들의 묶음은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{14}{단답형}
 \kfQStem{체언을 꾸미거나 용언을 꾸미는 기능을 하는 단어들의 묶음은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{15}{단답형}
 \kfQStem{주어의 움직임이나 상태를 풀이하는 기능을 하는 단어들의 묶음은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{16}{단답형}
 \kfQStem{체언에 속하는 3가지 품사를 쓰시오.}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{8}{}
+\begin{kfQBlock}{17}{단답형}
 \kfQStem{용언에 속하는 2가지 품사를 쓰시오.}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{9}{}
+\begin{kfQBlock}{18}{단답형}
 \kfQStem{'새', '헌', '모든'처럼 체언을 꾸며주는 품사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{10}{}
+\begin{kfQBlock}{19}{단답형}
 \kfQStem{'와', '네', '여보세요'처럼 독립적으로 쓰이는 품사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{20}{서술형}
 \kfQStem{다음 문장에서 '헌'과 '아주'의 품사를 각각 쓰고, 이 단어들이 문장에서 어떤 기능을 하는지 서술하시오.}
 \begin{kfEvidence}나는 헌 책을 아주 재미있게 읽었다.\end{kfEvidence}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
+\kfEndMC
 
 
-\kfStartConcept{개념 영역 — 표현을 생생하게 만드는 비유법}
+\kfStartConcept{표현을 생생하게 만드는 비유법}
 
 
-\kfSecHeader{kfAreaConcept}{개념}{표현을 생생하게 만드는 비유법}
-
+\kfPassageNoteNT{%
 비유법은 표현하고 싶은 대상을 그와 비슷한 다른 대상에 빗대어 더 생생하고 인상 깊게 나타내는 표현 방법이다. 이때 진짜 말하고 싶은 대상을 '원관념'이라 하고, 빗대어 표현하는 대상을 '보조관념'이라고 한다. 원관념과 보조관념은 서로 공통점이 있어야 자연스러운 비유가 이루어진다.
 
 직유법은 '같이', '처럼', '듯이', '-인 양' 등 비유를 나타내는 말을 사용하여 원관념과 보조관념을 직접 연결하는 방법이다. 「빼앗긴 들에도 봄은 오는가」에서 "가르마 같은 논길"은 '논길(원관념)'을 '가르마(보조관념)'에 비유하여 일직선으로 뻗은 모습을 표현한 것이다. 또한 "살찐 가슴처럼 부드러운 이 흙"은 '흙(원관념)'을 '살찐 가슴(보조관념)'에 빗대어 흙의 부드럽고 풍요로운 느낌을 강조한다. 직유법은 비교하는 말이 직접 드러나 있어 독자가 그 의미를 이해하기 쉽다.
@@ -251,11 +262,14 @@
 \item 은유법 — '내 마음은 호수요'(A는 B이다)
 \item 대유법 — '빼앗긴 들'→'들'로 국토 전체를 상징
 \end{itemize}
+}
 
 \kfSecHeader{kfAreaConcept}{문제}{}
 
-\begin{kfQBlock}{1}{}
-\kfQStem{비유법을 사용하는 이유로 적절하지 \uline{않은} 것은 무엇인가?}
+\par\medskip
+\kfBeginMC
+\begin{kfQBlock}{01}{객관식}
+\kfQStem{비유법을 사용하는 이유로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 어려운 한자어를 쉽게 풀어쓰기 위한 맞춤법 규정이기 때문이다.
 \kfChoice 추상적 개념을 구체적인 대상에 빗대어 이해하기 쉽게 만들기 위해서이다.
@@ -264,8 +278,8 @@
 \kfChoice 표현을 더 생생하고 인상 깊게 만들기 위해서이다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
-\kfQStem{"내 마음은 호수요"라는 표현에 대한 설명으로 알맞지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{02}{객관식}
+\kfQStem{"내 마음은 호수요"라는 표현에 대한 설명으로 알맞지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice '처럼·같이' 같은 연결어를 사용한 직유법이다.
 \kfChoice 'A는 B이다' 형식으로 두 대상을 직접 빗댄 은유법이다.
@@ -274,8 +288,8 @@
 \kfChoice 원관념은 '마음', 보조관념은 '호수'이다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
-\kfQStem{다음 중 직유법을 만들기 위해 사용되는 말이 \uline{아닌} 것은 무엇인가?}
+\begin{kfQBlock}{03}{객관식}
+\kfQStem{다음 중 직유법을 만들기 위해 사용되는 말이 \uline{\underline{아닌}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 같이
 \kfChoice 이다
@@ -284,8 +298,8 @@
 \kfChoice 처럼
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
-\kfQStem{"가르마 같은 논길"이라는 표현에 대한 설명으로 알맞지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{04}{객관식}
+\kfQStem{"가르마 같은 논길"이라는 표현에 대한 설명으로 알맞지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 사람이 아닌 것을 사람처럼 표현했다.
 \kfChoice '가르마'가 보조관념이다.
@@ -294,8 +308,8 @@
 \kfChoice '논길'이 원관념이다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
-\kfQStem{은유법에 대한 설명으로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{05}{객관식}
+\kfQStem{은유법에 대한 설명으로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 'A는 B이다'의 형태로 두 대상을 간접적으로 연결한다.
 \kfChoice '같이·처럼·같은' 같은 연결어를 사용해 두 대상을 직접 잇는다.
@@ -304,8 +318,8 @@
 \kfChoice 원관념과 보조관념을 직접 등치시켜 의미를 강조한다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
-\kfQStem{다음 중, 사람처럼 표현한 대상이 \uline{아닌} 것은 무엇인가?}
+\begin{kfQBlock}{06}{객관식}
+\kfQStem{다음 중, 사람처럼 표현한 대상이 \uline{\underline{아닌}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 입을 다물고 있는 하늘아
 \kfChoice 바람은 내 귀에 속삭이며
@@ -314,7 +328,7 @@
 \kfChoice 아기를 달래는 노래
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{07}{객관식}
 \kfQStem{의인법을 사용했을 때 얻을 수 있는 효과로 가장 알맞은 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 대상의 의미를 반대로 바꾸어 강조한다.
@@ -324,7 +338,7 @@
 \kfChoice 숨겨진 의미를 찾아야 해서 이해하기 어렵다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{8}{}
+\begin{kfQBlock}{08}{객관식}
 \kfQStem{다음 중, 지문에서 설명하는 비유법의 종류가 \uline{다른} 하나는 무엇인가?}
 \begin{kfChoices}
 \kfChoice 바다가 푸른 숨을 쉰다
@@ -334,7 +348,7 @@
 \kfChoice 착한 개울이 아기를 달래는 노래를 하며
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{9}{}
+\begin{kfQBlock}{09}{객관식}
 \kfQStem{'빼앗긴 들'이라는 표현에 대한 설명으로 알맞은 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 직유법 - '들'이라는 대상을 '빼앗긴 것'에 직접적으로 비유한 표현이다.
@@ -344,8 +358,8 @@
 \kfChoice 반어법 - 실제로는 빼앗기지 않았는데 빼앗겼다고 일부러 반대로 표현했다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{10}{}
-\kfQStem{비유법에 대한 설명으로 알맞지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{10}{객관식}
+\kfQStem{비유법에 대한 설명으로 알맞지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 비유법은 표현을 단순하고 건조하게 만든다.
 \kfChoice 은유법은 'A는 B이다'의 형태를 띤다.
@@ -354,46 +368,47 @@
 \kfChoice 직유법은 비교하는 말이 직접 드러나 이해하기 쉽다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{11}{단답형}
 \kfQStem{표현하고 싶은 대상을 그와 비슷한 다른 대상에 빗대어 생생하게 나타내는 표현 방법을 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{12}{단답형}
 \kfQStem{비유법에서 진짜 말하고 싶은 대상, 즉 '논길'이나 '흙'을 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{13}{단답형}
 \kfQStem{비유법에서 빗대어 표현하는 대상, 즉 '가르마'나 '살찐 가슴'을 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{14}{단답형}
 \kfQStem{'같이', '처럼', '듯이' 등을 사용하여 원관념과 보조관념을 직접 연결하는 비유법은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{15}{단답형}
 \kfQStem{"살찐 가슴처럼 부드러운 이 흙"에서 원관념은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{16}{단답형}
 \kfQStem{'A는 B이다'의 형태로 원관념과 보조관념을 간접적으로 연결하는 비유법은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{17}{단답형}
 \kfQStem{"내 마음은 호수요"는 '마음'을 '호수'처럼 넓고 고요하다는 의미로 표현한 것입니다. 이러한 비유법을 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{18}{서술형}
 \kfQStem{'직유법'과 '은유법'의 차이점을 <조건>에 맞게 서술하시오.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
+\kfEndMC
 
 
-\kfStartLit{문학 영역 — 작품}
+\kfStartLit{「빼앗긴 들에도 봄은 오는가」}
 
 
-\kfSecHeader{kfAreaLiterature}{지문}{작품}
-\kfPassageNote{작품}{%
-지금은 남의 땅 \textbackslash{}- 빼앗긴 들에도 봄은 오는가? \\[14pt]
+\kfPassageNote{}{%
+지금은 남의 땅 \\[4pt]
+빼앗긴 들에도 봄은 오는가? \\[14pt]
 나는 온몸에 따뜻한 햇살을 받고 \\[4pt]
 푸른 하늘과 푸른 들판이 만나는 곳으로 \\[4pt]
 가르마 같은 논길을 따라 꿈속을 걷듯 걸어만 간다. \\[14pt]
@@ -421,12 +436,15 @@
 나는 온몸에 풀냄새를 맡으며 \\[4pt]
 푸른 웃음과 푸른 슬픔이 섞인 사이로 \\[4pt]
 다리를 절며 하루를 걷는다. 아마도 봄 신령이 내게 내려왔나 보다. \\[14pt]
-그러나 지금은 \textbackslash{}- 들을 빼앗겨 봄까지 빼앗기겠네.
+그러나 지금은 \\[4pt]
+들을 빼앗겨 봄까지 빼앗기겠네.
 }
 
 
-\kfSecHeader{kfAreaLiterature}{활동}{문학 문장 독해}
-\noindent\textit{\small 작품 속 문장을 자세히 읽고, 문장별로 주어진 물음에 답해 보자.}\par\medskip
+\kfActivityBg \par\needspace{15\baselineskip}
+\kfSecHeader{kfAreaLiterature}{활동}{문장 독해}
+\par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 작품 속 문장을 자세히 읽고, 문장별로 주어진 물음에 답해 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfBeginMC
 \begin{kfSentenceUnit}{1}{"바람은 내 귀에 속삭이며 한 발짝도 멈추지 마라, 옷자락을 흔들고 종달새는 울타리 너머에서 아가씨처럼 구름 뒤에서 반갑게 웃네."}
 \kfSentQ{1.}{다음 문장에서 서술어를 기준으로 각각의 주어는 무엇인가? (1) 서술어 '속삭이며'의 주어는 무엇인가?}
 \begin{kfChoices}
@@ -495,10 +513,12 @@
 \end{kfChoices}
 \end{kfSentenceUnit}
 
-\kfSecHeader{kfAreaLiterature}{활동}{해설 학습}
-\noindent\textit{\small 작품 해설을 단원별로 읽고, 각 단원에 딸린 물음에 답해 보자.}\par\medskip
-\par\noindent\textbf{\color{kfPrimary} 해설 단원 1}\par\smallskip
-\kfPassageNote{해설 1}{%
+\kfEndMC
+
+\kfActivityBg \kfSecHeader{kfAreaLiterature}{활동}{해설 학습}
+\par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 작품 해설을 단원별로 읽고, 각 단원에 딸린 물음에 답해 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\par\medskip
+\kfPassageNoteNT{%
 「빼앗긴 들에도 봄은 오는가」는 일제강점기에 쓰인 대표적인 저항시이다. 이 시는 직접적으로 일제를 비판하지는 않지만, 상징적인 방법으로 나라를 잃은 슬픔과 되찾고 싶은 의지를 드러낸다.
 
 화자는 "내 손에 호미를 쥐어 다오"라며 이 땅에서 직접 농사짓고 싶다는 소망을 표현한다. 이는 단순히 농사를 짓고 싶다는 뜻이 아니라, 이 땅의 진정한 주인이 되고 싶다는 의미이다. "좋은 땀도 흘리고 싶다"는 표현도 조국을 위해 기꺼이 노력하겠다는 의지를 담고 있다.
@@ -506,38 +526,38 @@
 하지만 시의 마지막에서 화자는 "봄까지 빼앗기겠네"라며 절망적인 현실을 인정한다. 자연의 봄마저도 제대로 누릴 수 없게 될 것이라는 두려움을 표현한 것으로, 일제강점기의 암울한 현실을 보여준다. 그럼에도 불구하고 이 시 자체가 우리말로 우리의 정서를 표현했다는 것 자체가 저항 정신의 표현이라고 할 수 있다.
 }
 
-\begin{kfQBlock}{1}{문제}
+\begin{kfQBlock}{01}{단답형}
 \kfQStem{이 시는 일제강점기에 쓰인 대표적인 어떤 종류의 시인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{2}{문제}
+\begin{kfQBlock}{02}{단답형}
 \kfQStem{화자가 "좋은 땀도 흘리고 싶다"고 한 말에 담긴 의지는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{3}{문제}
+\begin{kfQBlock}{03}{단답형}
 \kfQStem{시의 마지막 구절 "봄까지 빼앗기겠네"에서 드러나는 화자의 현실에 대한 인식은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{4}{문제}
+\begin{kfQBlock}{04}{단답형}
 \kfQStem{화자가 이 땅의 주인이 되고 싶다는 소망을 표현하기 위해 손에 쥐어달라고 한 도구는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{5}{문제}
+\begin{kfQBlock}{05}{단답형}
 \kfQStem{화자는 들판에 이어 무엇까지 빼앗길 것이라고 두려워하고 있는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{6}{문제}
+\begin{kfQBlock}{06}{단답형}
 \kfQStem{이 시의 화자가 절망 속에서도 우리말로 우리의 정서를 표현한 것 자체가 무엇의 표현이라고 할 수 있는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\par\noindent\textbf{\color{kfPrimary} 해설 단원 2}\par\smallskip
-\kfPassageNote{해설 2}{%
+\par\medskip
+\kfPassageNoteNT{%
 「빼앗긴 들에도 봄은 오는가」는 첫 연과 마지막 연이 질문과 대답으로 호응하는 수미상관 구조가 특징적인 작품이다. 수미상관이란 시나 소설에서 시작과 끝을 유사하게 구성해 주제를 강조하거나 리듬을 형성하는 기법이다. 보통은 첫 부분과 마지막 부분이 똑같은 표현을 반복하는데, 이 작품에서는 조금 다르게 질문과 대답의 형식으로 수미상관을 이루고 있다.
 
 첫 연에서 "빼앗긴 들에도 봄은 오는가?"라고 물었다면, 마지막 연에서는 "들을 빼앗겨 봄까지 빼앗기겠네"라고 절망적으로 답하고 있다. 똑같은 말은 아니지만 '빼앗긴 들'과 '봄'이라는 핵심 단어가 반복되면서 질문에 대한 대답 형식으로 연결되어 있어서 수미상관의 효과를 내고 있다.
@@ -547,38 +567,38 @@
 "그러나 지금은"이라는 표현은 시상이 전환되는 중요한 부분이다. 아름다운 봄에 도취되어 있던 화자가 갑자기 차가운 현실로 돌아오는 순간을 보여준다. 이런 구조를 통해 일제강점기 지식인의 고뇌와 내적 갈등을 효과적으로 드러내고 있다.
 }
 
-\begin{kfQBlock}{1}{문제}
+\begin{kfQBlock}{01}{단답형}
 \kfQStem{이 시는 첫 연과 마지막 연이 똑같은 문장으로 반복되지는 않지만, ‘빼앗긴 들’과 ‘봄’이라는 핵심 시어를 중심으로 질문과 대답의 관계를 이룹니다. 이처럼 시의 시작과 끝을 유사하게 구성하여 주제를 강조하는 기법을 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{2}{문제}
+\begin{kfQBlock}{02}{단답형}
 \kfQStem{아름다운 봄에 대한 황홀경에서 차가운 현실로 돌아오게 만드는 시상 전환 부분의 시작 시구는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{3}{문제}
+\begin{kfQBlock}{03}{단답형}
 \kfQStem{이 시의 구조는 일제강점기 어떤 계층의 인물이 겪는 고뇌와 내적 갈등을 효과적으로 보여주는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{4}{문제}
+\begin{kfQBlock}{04}{단답형}
 \kfQStem{첫 연에서 화자가 던진 질문은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{5}{문제}
+\begin{kfQBlock}{05}{단답형}
 \kfQStem{화자가 마지막 연에서 내린 절망적인 대답은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{6}{문제}
+\begin{kfQBlock}{06}{단답형}
 \kfQStem{첫 연과 마지막 연은 어떤 형식으로 서로 호응하고 있는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\par\noindent\textbf{\color{kfPrimary} 해설 단원 3}\par\smallskip
-\kfPassageNote{해설 3}{%
+\par\medskip
+\kfPassageNoteNT{%
 이 시에서 가장 중요한 상징은 '빼앗긴 들'과 '봄'이다. '빼앗긴 들'은 일제에 나라를 빼앗긴 우리나라를 의미하고, '봄'은 자연의 계절이면서 동시에 조국 광복에 대한 희망을 상징한다.
 
 시 전체에는 우리나라의 전통적이고 정겨운 풍경들이 많이 등장한다. "가르마 같은 논길"은 논 사이의 좁은 길을 머리 가르마에 비유한 것이고, "삼단 머리"는 옛날 여성들의 머리 모양을 말한다. "피마자기름을 바른 사람"도 전통적인 우리나라 여성들의 모습을 그린 것이다.
@@ -586,33 +606,33 @@
 "살찐 가슴처럼 부드러운 흙", "아기를 달래는 노래" 같은 표현들은 우리 땅을 어머니처럼 따뜻하고 풍요로운 존재로 그리고 있다. 이런 다양한 상징들이 어우러져 단순한 자연 풍경이 아닌, 조국에 대한 깊은 사랑과 그리움을 표현하고 있다.
 }
 
-\begin{kfQBlock}{1}{문제}
+\begin{kfQBlock}{01}{단답형}
 \kfQStem{이 시에서 '빼앗긴 들'이 상징하는 것은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{2}{문제}
+\begin{kfQBlock}{02}{단답형}
 \kfQStem{이 시에서 계절로서의 의미와 함께 '조국 광복에 대한 희망'을 상징하는 시어는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{3}{문제}
+\begin{kfQBlock}{03}{단답형}
 \kfQStem{논 사이의 좁은 길을 머리카락을 나눈 모양에 빗대어 표현한 시어는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{4}{문제}
+\begin{kfQBlock}{04}{단답형}
 \kfQStem{"살찐 가슴처럼 부드러운 흙"이라는 표현은 우리 땅을 어떤 존재로 그리고 있는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{5}{문제}
+\begin{kfQBlock}{05}{단답형}
 \kfQStem{이 시에 나오는 "가르마 같은 논길"과 "삼단 머리"는 어떤 존재의 이미지를 떠올리게 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\par\noindent\textbf{\color{kfPrimary} 해설 단원 4}\par\smallskip
-\kfPassageNote{해설 4}{%
+\par\medskip
+\kfPassageNoteNT{%
 「빼앗긴 들에도 봄은 오는가」에서 주목할 만한 표현 기법 중 하나는 대유법이다. 대유법이란 전체를 부분으로, 또는 부분을 전체로 표현하는 방법이다.
 
 이 시에서 '들'은 우리나라 전체를 의미하는 대유법적 표현이다. 실제로는 나라 전체가 빼앗겼지만, 그 중에서도 '들판'이라는 부분을 들어서 전체 국토를 나타내고 있다. 들판은 우리 민족이 대대로 농사지으며 살아온 삶의 터전이자, 가장 친근하고 정겨운 공간이기 때문에 조국을 상징하기에 적합한 소재이다.
@@ -620,29 +640,31 @@
 이처럼 대유법을 사용하면 추상적이고 큰 개념을 구체적이고 친근한 이미지로 표현할 수 있어서, 독자들이 더 생생하게 느끼고 깊이 공감할 수 있게 된다.
 }
 
-\begin{kfQBlock}{1}{문제}
+\begin{kfQBlock}{01}{단답형}
 \kfQStem{전체를 부분으로, 또는 부분을 전체로 표현하는 방법을 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{2}{문제}
+\begin{kfQBlock}{02}{단답형}
 \kfQStem{'들'이라는 부분은 실제로는 어떤 전체를 나타내고 있는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{3}{문제}
+\begin{kfQBlock}{03}{단답형}
 \kfQStem{들판이 조국을 상징하기에 적합한 이유 중 하나는, 우리 민족이 대대로 살아온 무엇이기 때문인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{4}{문제}
+\begin{kfQBlock}{04}{단답형}
 \kfQStem{이 시에서 '들판'이라는 부분으로 표현된 전체 국토가 어떤 상황에 처해있다고 설명되었는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
 \kfSecHeader{kfAreaLiterature}{문제}{}
 
-\begin{kfQBlock}{1}{}
+\par\medskip
+\kfBeginMC
+\begin{kfQBlock}{01}{객관식}
 \kfQStem{이 시의 전체적인 내용과 흐름을 가장 잘 설명한 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 봄의 아름다움에 기뻐하다가, 봄이 짧다는 사실에 슬퍼하고 있다.
@@ -652,8 +674,8 @@
 \kfChoice 봄을 즐기는 사람들을 부러워하다가, 자신도 그들처럼 되고 싶다고 다짐하고 있다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
-\kfQStem{말하는 이가 봄의 들판을 걸으며 느끼는 주된 감정으로 알맞지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{02}{객관식}
+\kfQStem{말하는 이가 봄의 들판을 걸으며 느끼는 주된 감정으로 알맞지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 종달새 소리와 개울의 춤을 보며 느끼는 흥겨움
 \kfChoice 땀 흘려 일하고 싶은 국토에 대한 애정
@@ -662,8 +684,8 @@
 \kfChoice 자신의 처지를 모르고 마냥 즐거워하는 것에 대한 부끄러움
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
-\kfQStem{이 시에서 ‘빼앗긴 들’이 상징하는 의미로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{03}{객관식}
+\kfQStem{이 시에서 ‘빼앗긴 들’이 상징하는 의미로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 다른 사람에게 팔려나간 한 개인의 사유지
 \kfChoice 자유와 주권을 잃은 식민지 조선의 현실
@@ -672,8 +694,8 @@
 \kfChoice 일제에게 주권을 빼앗긴 우리의 국토
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
-\kfQStem{“푸른 웃음과 푸른 슬픔이 섞인 사이로”라는 구절에 담긴 말하는 이의 심정으로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{04}{객관식}
+\kfQStem{“푸른 웃음과 푸른 슬픔이 섞인 사이로”라는 구절에 담긴 말하는 이의 심정으로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 기쁜 척, 슬픈 척하며 자신의 진짜 감정을 일부러 속이는 거짓된 마음
 \kfChoice 자연의 생명력이 주는 환희와 식민지 현실의 비애가 뒤섞인 양가감정
@@ -682,7 +704,7 @@
 \kfChoice 봄의 아름다움에 빠진 기쁨과 나라를 빼앗긴 슬픔이 함께 어우러진 복잡한 마음
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{05}{객관식}
 \kfQStem{말하는 이가 봄의 아름다움에 흠뻑 빠져 있다가, 다시 현실을 깨닫고 스스로를 “우스워라”라고 말하는 이유는 무엇인가?}
 \begin{kfChoices}
 \kfChoice 길을 잃어 엉뚱한 들길로 잘못 들어선 자신이 어이없어서
@@ -692,7 +714,7 @@
 \kfChoice 친구들과의 약속을 잊고 혼자 들판에 나와 있어서
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{06}{객관식}
 \kfQStem{이 시의 첫 구절과 마지막 구절에 대한 설명으로 가장 알맞은 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 질문으로 시작해서 희망적인 대답으로 끝나고 있다.
@@ -702,8 +724,8 @@
 \kfChoice 기쁜 다짐으로 시작해서 슬픈 후회로 끝나고 있다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
-\kfQStem{이 시에서 대상에 대한 말하는 이의 정서 및 태도에 대한 설명으로 알맞지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{07}{객관식}
+\kfQStem{이 시에서 대상에 대한 말하는 이의 정서 및 태도에 대한 설명으로 알맞지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 하늘과 들판을 향해 왜 침묵하냐며 원망을 드러낸다.
 \kfChoice 잘 자란 보리밭을 보며 고마움을 느낀다.
@@ -712,7 +734,7 @@
 \kfChoice 종달새를 '아씨'에 비유하며 반가움을 표현한다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{8}{}
+\begin{kfQBlock}{08}{객관식}
 \kfQStem{말하는 이가 “내 손에 호미를 쥐어 다오”라고 말한 가장 큰 이유는 무엇인가?}
 \begin{kfChoices}
 \kfChoice 농사를 직접 지어서 많은 돈을 벌어보고 싶어서
@@ -722,20 +744,20 @@
 \kfChoice 호미를 들어 보이며 일본에 저항하는 용기를 드러내고 싶어서
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{09}{서술형}
 \kfQStem{“푸른 웃음과 푸른 슬픔”이라는 표현에 담긴 말하는 이의 복잡한 마음을 <조건>에 맞게 서술하시오.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{10}{서술형}
 \kfQStem{이 시의 첫 연과 마지막 연은 서로 질문하고 답하는 관계에 있습니다. 이러한 구조가 주는 효과를 서술하시오.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
+\kfEndMC
 
 
-\kfStartNonlit{비문학 영역 — [인문] 내 마음의 다섯 가지 욕구, 현실요법}
+\kfStartNonlit{[인문] 내 마음의 다섯 가지 욕구, 현실요법}
 
 
-\kfSecHeader{kfAreaNonlit}{지문}{[인문] 내 마음의 다섯 가지 욕구, 현실요법}
 \kfPassageNote{[인문] 내 마음의 다섯 가지 욕구, 현실요법}{%
 사람은 누구나 마음속에 바라는 것이 있다. 현실요법이라는 상담 방법에서는, 사람의 모든 행동이 이런 욕구를 이루기 위해 스스로 선택하는 것이라고 본다. 그런데 어떤 선택이 문제가 되면, 마음속 욕구들의 균형을 맞춰서 새로운 선택을 하는 것이 중요하다고 말한다.
 
@@ -747,8 +769,7 @@
 }
 
 
-\kfSecHeader{kfAreaNonlit}{활동}{어휘 학습}
-\noindent\textit{\small 다음 표의 '의미'를 읽고, 그에 해당하는 '어휘'를 지문에서 찾아 적으시오.}\par\medskip
+\kfActivityBg \par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 다음 표의 '의미'를 읽고, 그에 해당하는 '어휘'를 지문에서 찾아 적으시오.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
 \begin{kfVocab}
 \kfVocabItem{1}{어떤 것을 이루거나 얻고 싶어 하는 마음}
 \kfVocabItem{2}{여러 요소가 어느 한쪽으로 기울지 않고 고른 상태}
@@ -759,8 +780,10 @@
 \kfVocabItem{7}{상대방의 마음이나 상황을 짐작하여 살피는 것}
 \end{kfVocab}
 
-\kfSecHeader{kfAreaNonlit}{활동}{비문학 문장 독해}
-\noindent\textit{\small 지문을 문장 단위로 정독하면서, 문장별로 주어진 물음에 답해 보자.}\par\medskip
+\kfActivityBg \par\needspace{15\baselineskip}
+\kfSecHeader{kfAreaNonlit}{활동}{문장 독해}
+\par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 지문을 문장 단위로 정독하면서, 문장별로 주어진 물음에 답해 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfBeginMC
 \begin{kfSentenceUnit}{1}{사람은 누구나 마음속에 바라는 것이 있다.}
 \kfSentQ{1.}{누구나 마음속에 무엇이 있는가?}
 \begin{kfChoices}
@@ -1198,39 +1221,47 @@
 \end{kfChoices}
 \end{kfSentenceUnit}
 
-\kfSecHeader{kfAreaNonlit}{활동}{구조도}
-\noindent\textit{\small 글의 흐름을 살펴보고, 구조도의 빈칸을 알맞게 채워 보자.}\par\medskip
-\par\medskip\needspace{6\baselineskip}
-\begin{tcolorbox}[enhanced, breakable=false,
+\kfEndMC
+
+\kfActivityBg \par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 글의 흐름을 살펴보고, 구조도의 빈칸을 알맞게 채워 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\par\medskip\needspace{8\baselineskip}
+\begin{tcolorbox}[enhanced, breakable=true,
   colback=kfPaper, colframe=kfRule, boxrule=0.4pt, arc=2pt,
-  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
   title={\footnotesize\bfseries\color{kfMute} 글의 구조도},
   coltitle=kfMute, colbacktitle=kfPrimaryLight!40,
   attach boxed title to top left={yshift=-1.5mm, xshift=6pt},
   boxed title style={colframe=kfRule, boxrule=0.3pt, arc=1pt}]
-\setstretch{1.4}\footnotesize
-지침: 글의 전체적인 논리 흐름을 파악하며 빈칸에 알맞은 내용을 채우시오. \\
-
-\noindent \textbullet\ 1문단: 현실요법의 기본 생각 \\
-\noindent \quad\textbullet\ 인간의 모든 행동 = ( ① )을 이루기 위한 ( ② ) \\
-\noindent \quad\textbullet\ 문제 해결 방법 = 마음속 욕구들의 ( ③ ) 맞추기 \\
-\noindent \textbullet\ 2문단: 다섯 가지 기본 욕구 \\
-\noindent \quad\textbullet\ 욕구 1: ( ④ ) 싶은 마음 \\
-\noindent \quad\textbullet\ 욕구 2: ( ⑤ ) 싶은 마음 \\
-\noindent \quad\textbullet\ 욕구 3: ( ⑥ )받고 싶은 마음 \\
-\noindent \quad\textbullet\ 욕구 4: ( ⑦ ) 싶은 마음 \\
-\noindent \quad\textbullet\ 욕구 5: ( ⑧ ) 살고 싶은 마음 \\
-\noindent \textbullet\ 3문단: 갈등의 원인과 해결 \\
-\noindent \quad\textbullet\ 원인: 사람마다 다섯 가지 마음의 ( ⑨ )가 다르기 때문 \\
-\noindent \quad\textbullet\ 사례 및 해결책 제시 \\
-\noindent \textbullet\ 4문단: 현실요법의 목표와 현재 \\
-\noindent \quad\textbullet\ 핵심 목표: 다른 사람을 존중하며 ( ⑩ ) 좋은 선택을 하도록 돕는 것 \\
-\noindent \quad\textbullet\ 현재: 많은 ( ⑪ )을 받으며 넓게 사용되고 있음 \\
+\footnotesize\setstretch{1.3}
+\renewcommand{\arraystretch}{1.35}
+\arrayrulecolor{kfRule}
+\noindent\begin{tabularx}{\linewidth}{|>{\centering\arraybackslash}p{1.6cm}|>{\raggedright\arraybackslash}p{3.4cm}|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor{kfPrimaryLight!40}\textbf{\color{kfPrimary}단} & \textbf{\color{kfPrimary}항목} & \textbf{\color{kfPrimary}내용} \\\hline
+\multirow{2}{*}{1문단} & 인간의 모든 행동 & ( ① )을 이루기 위한 ( ② ) \\\cline{2-3}
+ & 문제 해결 방법 & 마음속 욕구들의 ( ③ ) 맞추기 \\\cline{2-3}
+\hline
+\multirow{5}{*}{2문단} & 욕구 1 & ( ④ ) 싶은 마음 \\\cline{2-3}
+ & 욕구 2 & ( ⑤ ) 싶은 마음 \\\cline{2-3}
+ & 욕구 3 & ( ⑥ )받고 싶은 마음 \\\cline{2-3}
+ & 욕구 4 & ( ⑦ ) 싶은 마음 \\\cline{2-3}
+ & 욕구 5 & ( ⑧ ) 살고 싶은 마음 \\\cline{2-3}
+\hline
+\multirow{2}{*}{3문단} & 원인 & 사람마다 다섯 가지 마음의 ( ⑨ )가 다르기 때문 \\\cline{2-3}
+ &  & 사례 및 해결책 제시 \\\cline{2-3}
+\hline
+\multirow{2}{*}{4문단} & 핵심 목표 & 다른 사람을 존중하며 ( ⑩ ) 좋은 선택을 하도록 돕는 것 \\\cline{2-3}
+ & 현재 & 많은 ( ⑪ )을 받으며 넓게 사용되고 있음 \\\cline{2-3}
+\hline
+\end{tabularx}
+\arrayrulecolor{black}
 \end{tcolorbox}\par\medskip
 \kfSecHeader{kfAreaNonlit}{문제}{}
 
-\begin{kfQBlock}{1}{}
-\kfQStem{윗글의 중심 내용으로 적절하지 \uline{않은} 것은?}
+\par\medskip
+\kfBeginMC
+\begin{kfQBlock}{01}{객관식}
+\kfQStem{윗글의 중심 내용으로 적절하지 \uline{\underline{않은}} 것은?}
 \begin{kfChoices}
 \kfChoice 현실요법이 제시하는 다섯 가지 기본 욕구
 \kfChoice 인간의 행동을 결정하는 뇌 과학과 신경 회로의 작동 원리
@@ -1239,7 +1270,7 @@
 \kfChoice 기본 욕구를 이해함으로써 자신의 행동을 점검하는 방법
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{02}{객관식}
 \kfQStem{윗글의 내용과 일치하지 \uline{않는} 것은?}
 \begin{kfChoices}
 \kfChoice 현실요법은 사람의 모든 행동을 스스로의 선택으로 본다.
@@ -1249,7 +1280,7 @@
 \kfChoice 현실요법은 요즘 여러 심리 상담에서 사용되고 있다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{03}{객관식}
 \kfQStem{<보기>의 민수가 가장 키워야 할 마음으로 적절한 것은?}
 \begin{kfEvidence}민수는 친구들과 어울려 노는 것을 가장 좋아한다. 하지만 친구들이 무리한 부탁을 할 때도 거절하지 못하고 다 들어주다가 결국 자기 할 일을 못 해서 속상할 때가 많다.\end{kfEvidence}
 \begin{kfChoices}
@@ -1260,7 +1291,7 @@
 \kfChoice 즐겁게 살고 싶은 마음
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{04}{객관식}
 \kfQStem{다음 중 '즐겁게 살고 싶은 마음'이 강한 사람의 특징으로 가장 적절한 것은?}
 \begin{kfChoices}
 \kfChoice 취미 활동을 즐기고 항상 밝고 호기심이 많다.
@@ -1270,7 +1301,7 @@
 \kfChoice 규칙을 잘 지키고 필요한 것을 아껴 모은다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{05}{객관식}
 \kfQStem{현실요법이 생각하는 '인간'에 대한 설명으로 가장 중요한 것은?}
 \begin{kfChoices}
 \kfChoice 다른 사람의 도움 없이는 살아갈 수 없는 존재
@@ -1280,7 +1311,7 @@
 \kfChoice 다른 사람의 욕구를 먼저 이루어주어야 하는 존재
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{06}{객관식}
 \kfQStem{'자유롭고 싶은 마음'과 '인정받고 싶은 마음'이 둘 다 강한 사람이 겪을 수 있는 문제점으로 가장 적절한 것은?}
 \begin{kfChoices}
 \kfChoice 다른 사람의 부탁을 거절하지 못해 힘들어한다.
@@ -1290,7 +1321,7 @@
 \kfChoice 새로운 것을 배우는 데에만 시간을 너무 많이 쓴다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{07}{객관식}
 \kfQStem{윗글에 나타난 현실요법의 상담 목표를 가장 정확히 진술한 것은?}
 \begin{kfChoices}
 \kfChoice 다섯 가지 욕구 중 한 가지를 선택해 그 욕구만 집중적으로 키우도록 돕는다.
@@ -1300,42 +1331,48 @@
 \kfChoice 다섯 가지 욕구 중 가장 약한 욕구를 진단해 그것을 키우라고 알려 주는 데 그친다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{08}{단답형}
 \kfQStem{사람의 모든 행동이 마음속 욕구를 이루기 위한 선택이라고 보는 상담 방법은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{09}{단답형}
 \kfQStem{건강을 지키고 안전하게 살고 싶어 하는 기본적인 마음은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{10}{단답형}
 \kfQStem{다른 사람과 함께 지내고 사랑을 주고받고 싶어 하는 마음은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{11}{단답형}
 \kfQStem{다른 사람에게 잘한다는 말을 듣고 스스로 뿌듯함을 느끼고 싶은 마음은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{12}{단답형}
 \kfQStem{누구에게도 간섭받지 않고 스스로 선택하고 싶은 마음은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{13}{서술형}
 \kfQStem{현실요법에서 갈등이 생기는 이유와 해결 방법을 다음 조건에 맞게 써보세요.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
+\kfEndMC
 
 
 
 \clearpage
 
 \kfChapterCover{2}{러셀1 (챕터2)}{Chapter 2}{이번 챕터의 학습 내용을 시작합니다.}
+\begin{kfChapterAreaList}
+\kfChapterAreaItem{문법}{kfAreaGrammar}{문장의 뼈대를 세우는 말 (명사, 대명사, 수사)}
+\kfChapterAreaItem{개념}{kfAreaConcept}{이야기가 펼쳐지는 시간과 공간}
+\kfChapterAreaItem{문학}{kfAreaLiterature}{「메밀꽃 필 무렵」}
+\kfChapterAreaItem{비문학}{kfAreaNonlit}{[사회] 어떤 방법이 가장 공정할까? 여러 가지 투표 방식}
+\end{kfChapterAreaList}
 
-\kfStartGrammar{문법 영역 — 문장의 뼈대를 세우는 말 (명사, 대명사, 수사)}
+\kfStartGrammar{문장의 뼈대를 세우는 말 (명사, 대명사, 수사)}
 
 
-\kfSecHeader{kfAreaGrammar}{개념}{문장의 뼈대를 세우는 말 (명사, 대명사, 수사)}
-
+\kfPassageNoteNT{%
 하나의 문장이 만들어지려면 ‘누가’ 또는 ‘무엇이’에 해당하는 주인공이 반드시 있어야 한다. 이러한 주인공 역할을 하는 대표적인 말에는 세 가지가 있는데, 바로 명사, 대명사, 수사다.
 
 명사는 세상 모든 것의 ‘이름’을 나타내는 말이다. 나의 이름도 명사고, 우리 엄마 이름도 명사다. 우리가 매일 보는 ‘학교, 컴퓨터, 의자’ 같은 물건의 이름도 명사고, 눈에는 안 보이지만 머릿속으로 생각할 수 있는 ‘사랑, 행복, 우정’ 같은 이름도 전부 명사다. 한마디로 이름표를 붙일 수 있는 것은 모두 명사라고 할 수 있다.
@@ -1348,9 +1385,9 @@
 \item 대명사 — 인칭(나·너·그녀) / 지시(이것·저것·거기)
 \item 수사 — 양수사(하나·둘·셋) / 서수사(첫째·둘째·셋째)
 \end{itemize}
+}
 
-\kfSecHeader{kfAreaGrammar}{활동}{내용 확인}
-\noindent\textit{\small 아래 표의 빈칸에 알맞은 말을 채워 문법 내용을 확인해 보자.}\par\medskip
+\kfActivityBg \par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 아래 표의 빈칸에 알맞은 말을 채워 문법 내용을 확인해 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
 * 문장의 뼈대를 세우는 말 *
 
 문장의 주인공에 어떤 것들이 있는지 아래 표를 채우며 알아보자. 
@@ -1359,7 +1396,7 @@
 \noindent\begin{adjustbox}{max width=\linewidth, center}
 \renewcommand{\arraystretch}{1.45}
 \arrayrulecolor{kfRule}
-\begin{tabular}{|>{\raggedright\arraybackslash}p{\dimexpr 0.2338\linewidth-12pt\relax}|>{\raggedright\arraybackslash}p{\dimexpr 0.5195\linewidth-12pt\relax}|>{\raggedright\arraybackslash}p{\dimexpr 0.2468\linewidth-12pt\relax}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{\dimexpr 0.2318\linewidth-12pt\relax}|>{\raggedright\arraybackslash}p{\dimexpr 0.4374\linewidth-12pt\relax}|>{\raggedright\arraybackslash}p{\dimexpr 0.3307\linewidth-12pt\relax}|}
 \hline
 \rowcolor{kfPrimaryLight!50}\textbf{\color{kfPrimary} 주인공의 종류} & \textbf{\color{kfPrimary} 설 명} & \textbf{\color{kfPrimary} 예 시} \\\hline
 [ ① \_\_\_\_\_\_ ] & 세상 모든 것의 이름을 나타내는 말 (이름표를 붙일 수 있는 모든 것!) & 학교, 컴퓨터, 사랑, 행복 \\\hline
@@ -1369,8 +1406,9 @@
 \arrayrulecolor{black}
 \end{adjustbox}\par\medskip
 
-\kfSecHeader{kfAreaGrammar}{활동}{분석 훈련}
-\noindent\textit{\small  명사, 대명사, 수사 찾기 훈련! 문장에서 명사(이름), 대명사(이름 대신), 수사(숫자)에 해당하는 단어를 모두 찾아 쓰시오.}\par\medskip
+\kfActivityBg \kfSecHeader{kfAreaGrammar}{활동}{분석 훈련}
+\par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk}  명사, 대명사, 수사 찾기 훈련! 문장에서 명사(이름), 대명사(이름 대신), 수사(숫자)에 해당하는 단어를 모두 찾아 쓰시오.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfBeginMC
 \begin{enumerate}[leftmargin=22pt, itemsep=6pt, topsep=4pt, label=\textbf{\arabic*.}]
 \item 하늘에 무지개가 예쁘게 떠 있다.
 \item 우리는 공원에서 그를 만났다.
@@ -1383,10 +1421,13 @@
 \item 하나보다 둘이 더 낫다는 말이 있다.
 \item 이분은 우리 할머니시고, 저분은 우리 할아버지시다.
 \end{enumerate}
+\kfEndMC
 
 \kfSecHeader{kfAreaGrammar}{문제}{}
 
-\begin{kfQBlock}{1}{}
+\par\medskip
+\kfBeginMC
+\begin{kfQBlock}{01}{객관식}
 \kfQStem{다음 중 품사가 \uline{다른} 하나는?}
 \begin{kfChoices}
 \kfChoice 행복
@@ -1396,7 +1437,7 @@
 \kfChoice 연필
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{02}{객관식}
 \kfQStem{‘수사’에 대한 설명으로 옳은 것은?}
 \begin{kfChoices}
 \kfChoice 사물의 이름을 나타낸다.
@@ -1406,8 +1447,8 @@
 \kfChoice 놀람이나 느낌, 대답을 나타낸다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
-\kfQStem{다음 밑줄 친 단어의 품사가 명사가 \uline{아닌} 것은?}
+\begin{kfQBlock}{03}{객관식}
+\kfQStem{다음 밑줄 친 단어의 품사가 명사가 \uline{\underline{아닌}} 것은?}
 \begin{kfChoices}
 \kfChoice 나는 \uline{사과}를 좋아한다.
 \kfChoice \uline{이것}은 내 책이다.
@@ -1416,8 +1457,8 @@
 \kfChoice \uline{컴퓨터}가 고장 났다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
-\kfQStem{다음 중 수량을 나타내는 수사가 \uline{아닌} 것은?}
+\begin{kfQBlock}{04}{객관식}
+\kfQStem{다음 중 수량을 나타내는 수사가 \uline{\underline{아닌}} 것은?}
 \begin{kfChoices}
 \kfChoice 하나
 \kfChoice 일곱
@@ -1426,7 +1467,7 @@
 \kfChoice 열
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{05}{객관식}
 \kfQStem{다음 중 본문에서 ‘눈으로 볼 수 있는 이름(구체명사)’으로 분류한 것에 해당하지 \uline{않는} 것은?}
 \begin{kfChoices}
 \kfChoice 책상
@@ -1436,7 +1477,7 @@
 \kfChoice 나무
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{06}{객관식}
 \kfQStem{다음 문장에 사용된 대명사는 모두 몇 개인가?}
 \begin{kfChoices}
 \kfChoice 1개
@@ -1446,8 +1487,8 @@
 \kfChoice 5개
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
-\kfQStem{다음 중 품사의 연결이 바르지 \uline{않은} 것은?}
+\begin{kfQBlock}{07}{객관식}
+\kfQStem{다음 중 품사의 연결이 바르지 \uline{\underline{않은}} 것은?}
 \begin{kfChoices}
 \kfChoice 의자 - 명사
 \kfChoice 그녀 - 대명사
@@ -1456,7 +1497,7 @@
 \kfChoice 저것 - 대명사
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{8}{}
+\begin{kfQBlock}{08}{객관식}
 \kfQStem{다음 중 장소를 가리키는 대명사는?}
 \begin{kfChoices}
 \kfChoice 무엇
@@ -1466,7 +1507,7 @@
 \kfChoice 저희
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{9}{}
+\begin{kfQBlock}{09}{객관식}
 \kfQStem{다음 문장에서 수사는 총 몇 번 사용되었는가?}
 \begin{kfEvidence}우리는 사과 하나와 배 둘을 샀고, 형은 달리기에서 첫째로 들어왔다.\end{kfEvidence}
 \begin{kfChoices}
@@ -1477,9 +1518,10 @@
 \kfChoice 5개
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{10}{}
+\begin{kfQBlock}{10}{객관식}
 \kfQStem{다음 <보기>에 대한 설명으로 옳은 것은?}
-\begin{kfEvidence}가. 그는 책 하나를 샀다. 나. 그것은 그녀의 가방이다.\end{kfEvidence}
+\begin{kfEvidence}가. 그는 책 하나를 샀다. \\\relax
+나. 그것은 그녀의 가방이다.\end{kfEvidence}
 \begin{kfChoices}
 \kfChoice '가'의 ‘그’와 ‘나'의 ‘그것’은 모두 명사다.
 \kfChoice '가'의 ‘책’과 '나'의 ‘가방’은 모두 대명사다.
@@ -1488,58 +1530,58 @@
 \kfChoice '가'의 ‘하나’는 대명사이고, '나'의 ‘가방’은 수사다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{11}{단답형}
 \kfQStem{‘의자’, ‘하늘’처럼 구체적인 사물의 이름을 나타내는 품사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{12}{단답형}
 \kfQStem{명사를 대신하여 쓰이는 품사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{13}{단답형}
 \kfQStem{수량이나 순서를 나타내는 품사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{14}{단답형}
 \kfQStem{눈에 보이지 않는 ‘희망’, ‘슬픔’ 등의 단어는 어떤 품사에 속하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{15}{단답형}
 \kfQStem{‘다인이는 착하다. 그녀는 인기가 많다.’에서 ‘그녀’의 품사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{16}{단답형}
 \kfQStem{‘사과 하나와 배 둘을 샀다.’에서 ‘하나’와 ‘둘’의 품사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{17}{단답형}
 \kfQStem{‘첫째도 건강, 둘째도 건강’에서 ‘첫째’, ‘둘째’의 품사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{8}{}
+\begin{kfQBlock}{18}{단답형}
 \kfQStem{‘너와 나’에서 ‘너’와 ‘나’의 품사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{9}{}
+\begin{kfQBlock}{19}{단답형}
 \kfQStem{‘컴퓨터’의 품사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{10}{}
+\begin{kfQBlock}{20}{단답형}
 \kfQStem{‘저기가 우리 집이야.’에서 ‘저기’의 품사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{21}{서술형}
 \kfQStem{다음 문장에서 명사, 대명사, 수사를 각각 모두 찾아 쓰시오.}
 \begin{kfEvidence}우리 셋이 힘을 합쳐 저 문제를 풀었다.\end{kfEvidence}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
+\kfEndMC
 
 
-\kfStartConcept{개념 영역 — 이야기가 펼쳐지는 시간과 공간}
+\kfStartConcept{이야기가 펼쳐지는 시간과 공간}
 
 
-\kfSecHeader{kfAreaConcept}{개념}{이야기가 펼쳐지는 시간과 공간}
-
+\kfPassageNoteNT{%
 소설의 배경은 등장인물들이 활동하고 사건이 일어나는 시간과 공간을 말한다. 배경은 단순히 이야기가 벌어지는 무대 역할만 하는 것이 아니라, 인물의 행동과 감정에 영향을 주고 작품의 분위기를 만드는 중요한 역할을 한다.
 
 배경은 크게 시간적 배경과 공간적 배경으로 나누어진다. 시간적 배경은 이야기가 일어나는 때를 나타내며, 계절이나 하루 중 특정 시간, 역사적 시대 등을 포함한다. 공간적 배경은 이야기가 펼쳐지는 장소를 말하며, 나라나 지역 같은 넓은 공간부터 집이나 방 같은 좁은 공간까지 모두 해당한다.
@@ -1552,11 +1594,14 @@
 \item 공간 — 같은 작품의 '메밀꽃 핀 좁은 산길'(세 사람의 동선 결정)
 \item 분위기 조성 — '비 오는 일제 강점기 평양역' → 식민지 침체감
 \end{itemize}
+}
 
 \kfSecHeader{kfAreaConcept}{문제}{}
 
-\begin{kfQBlock}{1}{}
-\kfQStem{소설의 ‘배경’에 대한 설명으로 적절하지 \uline{않은} 것은 무엇인가?}
+\par\medskip
+\kfBeginMC
+\begin{kfQBlock}{01}{객관식}
+\kfQStem{소설의 ‘배경’에 대한 설명으로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 작품의 주제·인물·사건 가운데 ‘인물’만을 가리키는 요소이다.
 \kfChoice 시간적·공간적 배경뿐만 아니라 사회적인 배경까지 포함한다.
@@ -1565,8 +1610,8 @@
 \kfChoice 인물들이 활동하는 특정한 시간과 공간을 가리킨다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
-\kfQStem{박지원의 「허생전」이 ‘묵적골’·‘남산’ 같은 실제 지명을 사용한 이유로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{02}{객관식}
+\kfQStem{박지원의 「허생전」이 ‘묵적골’·‘남산’ 같은 실제 지명을 사용한 이유로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 이야기에 현실감을 부여해 진짜처럼 느끼게 하기 위해서이다.
 \kfChoice 독자들에게 서울의 지리를 자세하게 가르쳐 주기 위해서이다.
@@ -1575,8 +1620,8 @@
 \kfChoice 당시 조선 사회의 모습을 사실적으로 보여 주기 위해서이다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
-\kfQStem{현진건의 「운수 좋은 날」에서 ‘비’가 내리는 배경이 주는 효과로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{03}{객관식}
+\kfQStem{현진건의 「운수 좋은 날」에서 ‘비’가 내리는 배경이 주는 효과로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 주인공의 마음을 상쾌하고 즐겁게 만들어 희망을 준다.
 \kfChoice 사건 전체를 음울한 정조로 감싸는 분위기를 형성한다.
@@ -1585,8 +1630,8 @@
 \kfChoice 어둡고 불길한 분위기를 만들어 비극적 결말을 암시한다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
-\kfQStem{<보기>의 ‘소나기’ 배경이 이야기 전개에 한 역할로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{04}{객관식}
+\kfQStem{<보기>의 ‘소나기’ 배경이 이야기 전개에 한 역할로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfEvidence}징검다리를 건너는데 소나기가 쏟아졌다. ... 비를 피할 곳을 찾다가 마침 보이는 수수단 속으로 두 아이는 뛰어들었다.\end{kfEvidence}
 \begin{kfChoices}
 \kfChoice 두 사람이 다투고 서로를 원망하게 만드는 갈등의 원인이 된다.
@@ -1596,8 +1641,8 @@
 \kfChoice 서먹한 두 사람을 한 공간에 머물게 해 가까워지는 계기를 만든다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
-\kfQStem{<보기>의 ‘장마’가 상징하는 의미로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{05}{객관식}
+\kfQStem{<보기>의 ‘장마’가 상징하는 의미로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfEvidence}이 밤중에 억수로 내리는 비를 맞아 가며 마을을 활보하는 사람들은... 전쟁이 북으로 물러갔다고는 하지만 아직도 빨치산들이 읍내 경찰서를 습격하고 불을 지를 만큼 어수선한 때였다.\end{kfEvidence}
 \begin{kfChoices}
 \kfChoice 6·25 전쟁이라는 우리 민족의 불행과 시련
@@ -1607,7 +1652,7 @@
 \kfChoice 이념 갈등으로 어두워진 한 가족·민족의 처지
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{06}{객관식}
 \kfQStem{김유정의 「봄·봄」처럼 계절을 통해 작품의 분위기를 드러내는 배경은 어떤 종류에 해당하는가?}
 \begin{kfChoices}
 \kfChoice 시간적 배경
@@ -1617,7 +1662,7 @@
 \kfChoice 사회적 배경
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{07}{객관식}
 \kfQStem{허균의 「홍길동전」에서 서자를 차별하는 '조선 시대의 신분 제도'는 어떤 배경에 해당하는가?}
 \begin{kfChoices}
 \kfChoice 시간적 배경
@@ -1627,8 +1672,8 @@
 \kfChoice 심리적 배경
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{8}{}
-\kfQStem{다음 중 소설 속 배경의 기능으로 알맞지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{08}{객관식}
+\kfQStem{다음 중 소설 속 배경의 기능으로 알맞지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 작품 전체의 독특한 분위기를 자연스럽게 조성한다.
 \kfChoice 이야기에 마치 실제처럼 느껴지는 사실성을 부여한다.
@@ -1637,8 +1682,8 @@
 \kfChoice 작품 전체가 전하려는 핵심 주제를 슬쩍 암시하기도 한다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{9}{}
-\kfQStem{이효석의 「메밀꽃 필 무렵」에서 ‘달빛 비치는 메밀꽃밭’ 배경이 주는 분위기로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{09}{객관식}
+\kfQStem{이효석의 「메밀꽃 필 무렵」에서 ‘달빛 비치는 메밀꽃밭’ 배경이 주는 분위기로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 긴급하고 위험한 사건이 벌어지는 긴장된 분위기
 \kfChoice 신비롭고 환상적인 자연의 분위기
@@ -1647,8 +1692,8 @@
 \kfChoice 서정적이고 낭만적인 분위기
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{10}{}
-\kfQStem{소설의 배경에 대한 설명으로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{10}{객관식}
+\kfQStem{소설의 배경에 대한 설명으로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 때로는 작품의 주제를 암시하는 상징적 의미를 지닌다.
 \kfChoice 인물·사건과 무관한 단순한 배경 무대일 뿐이다.
@@ -1657,45 +1702,45 @@
 \kfChoice 시간·공간·사회적 배경 등 여러 차원으로 나타난다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{11}{단답형}
 \kfQStem{소설에서 등장인물들이 활동하고 사건이 일어나는 시간과 공간을 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{12}{단답형}
 \kfQStem{배경은 크게 '공간적 배경'과 어떤 배경으로 나누어지는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{13}{단답형}
 \kfQStem{이야기가 일어나는 '때'를 나타내는 배경은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{14}{단답형}
 \kfQStem{이야기가 펼쳐지는 '장소'를 나타내는 배경은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{15}{단답형}
 \kfQStem{「메밀꽃 필 무렵」의 시간적 배경은 달빛이 쏟아지는 어떤 계절의 밤인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{16}{단답형}
 \kfQStem{「메밀꽃 필 무렵」의 공간적 배경은 무엇이 피어있는 산길인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{17}{단답형}
 \kfQStem{「메밀꽃 필 무렵」의 배경은 허생원이 과거 이야기를 꺼내기에 알맞은 어떤 분위기를 만들어주는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{18}{서술형}
 \kfQStem{소설에서 배경이 하는 중요한 역할을 서술하시오.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
+\kfEndMC
 
 
-\kfStartLit{문학 영역 — 작품}
+\kfStartLit{「메밀꽃 필 무렵」}
 
 
-\kfSecHeader{kfAreaLiterature}{지문}{작품}
-\kfPassageNote{작품}{%
+\kfPassageNote{}{%
 \textbackslash{}[앞부분 줄거리\textbackslash{}] 왼손잡이인 허 생원은 나귀와 함께 장에서 장으로 다니며 물건을 파는 장돌뱅이입니다. 봉평 장에서 장사를 마친 후 조 선달과 함께 주막집에서 술을 마시다가, 젊은 장돌뱅이 동이가 주막 아주머니와 농담치는 모습을 보고 화가 나서 동이를 꾸짖었습니다. 동이는 말대꾸하지 않고 그냥 나갔지만, 잠시 후 허 생원의 나귀가 도망갔다고 알려줍니다. 허 생원은 동이가 도와준 것이 고마웠습니다. 그들은 함께 대화 장을 향해 메밀꽃이 핀 달밤에 길을 떠났습니다.
 
 허 생원은 여자와는 인연이 멀었습니다. 얼굴에 얽은 자국이 있는 모습을 들고 여자 앞에 나설 용기도 없었고, 여자 쪽에서 정을 보낸 적도 없었으며, 쓸쓸하고 비뚤어진 인생을 살았습니다. 주막집을 생각만 해도 어린애처럼 얼굴이 빨개지고 발밑이 떨리며 그 자리에서 깜짝 놀라버립니다.
@@ -1794,8 +1839,10 @@
 }
 
 
-\kfSecHeader{kfAreaLiterature}{활동}{문학 문장 독해}
-\noindent\textit{\small 작품 속 문장을 자세히 읽고, 문장별로 주어진 물음에 답해 보자.}\par\medskip
+\kfActivityBg \par\needspace{15\baselineskip}
+\kfSecHeader{kfAreaLiterature}{활동}{문장 독해}
+\par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 작품 속 문장을 자세히 읽고, 문장별로 주어진 물음에 답해 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfBeginMC
 \begin{kfSentenceUnit}{1}{"나귀가 걷기 시작했을 때 동이의 채찍은 왼손에 있었습니다. 오랫동안 할머니처럼 눈이 어둡던 허 생원도 이번만은 동이의 왼손잡이가 눈에 띄지 않을 수 없었습니다."}
 \kfSentQ{1.}{다음 문장에서 서술어를 기준으로 각각의 주어는 무엇인가? (1) 서술어 '걷기 시작했을 때'의 주어는 무엇인가?}
 \begin{kfChoices}
@@ -1837,10 +1884,12 @@
 \end{kfChoices}
 \end{kfSentenceUnit}
 
-\kfSecHeader{kfAreaLiterature}{활동}{해설 학습}
-\noindent\textit{\small 작품 해설을 단원별로 읽고, 각 단원에 딸린 물음에 답해 보자.}\par\medskip
-\par\noindent\textbf{\color{kfPrimary} 해설 단원 1}\par\smallskip
-\kfPassageNote{해설 1}{%
+\kfEndMC
+
+\kfActivityBg \kfSecHeader{kfAreaLiterature}{활동}{해설 학습}
+\par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 작품 해설을 단원별로 읽고, 각 단원에 딸린 물음에 답해 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\par\medskip
+\kfPassageNoteNT{%
 「메밀꽃 필 무렵」에서 가장 인상적인 것은 달빛 아래 하얗게 핀 메밀꽃밭의 모습이다. '소금을 뿌린 듯이' 하얀 메밀꽃과 부드러운 달빛이 만들어내는 풍경은 정말 아름답다.
 
 작가는 이런 자연 풍경을 통해 등장인물들의 마음을 표현하고 있다. 이 아름다운 배경은 단순히 예쁜 풍경이 아니라 허 생원이 젊은 시절 성 서방네 처녀와 만났던 그날 밤을 떠올리게 해주는 중요한 역할을 한다.
@@ -1850,33 +1899,33 @@
 이처럼 감각을 전이시킨 표현들이 모여서 마치 한 편의 아름다운 시를 읽는 것 같은 느낌을 주며, 독자들을 꿈같은 분위기 속으로 이끌어준다.
 }
 
-\begin{kfQBlock}{1}{문제}
+\begin{kfQBlock}{01}{단답형}
 \kfQStem{소설에서 가장 인상적인 풍경은 달빛 아래 어떤 꽃밭의 모습인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{2}{문제}
+\begin{kfQBlock}{02}{단답형}
 \kfQStem{하얀 메밀꽃이 핀 모습을 무엇을 뿌린 것 같다고 비유했는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{3}{문제}
+\begin{kfQBlock}{03}{단답형}
 \kfQStem{아름다운 자연 풍경은 허 생원이 과거의 어떤 인물을 떠올리게 하는 중요한 역할을 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{4}{문제}
+\begin{kfQBlock}{04}{단답형}
 \kfQStem{‘짐승 같은 달의 숨소리’는 눈에 보이는 것을 어떤 감각으로 바꾼 표현인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{5}{문제}
+\begin{kfQBlock}{05}{단답형}
 \kfQStem{작품의 서정적인 분위기를 만드는 가장 핵심적인 배경 두 가지는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\par\noindent\textbf{\color{kfPrimary} 해설 단원 2}\par\smallskip
-\kfPassageNote{해설 2}{%
+\par\medskip
+\kfPassageNoteNT{%
 이 소설은 현재의 이야기와 과거의 이야기, 즉 두 개의 시간이 교차되는 특별한 구조를 가지고 있다. 하나는 허 생원과 동이, 조 선달이 봉평에서 대화 장으로 가는 현재의 이야기이다.
 
 다른 하나는 허 생원이 젊은 시절 성 서방네 처녀와 만났던 과거의 이야기이다. 현재 이야기에서는 허 생원이 동이를 꾸짖다가 화해하고, 점점 동이가 자신의 아들일지도 모른다는 생각을 하게 된다.
@@ -1886,28 +1935,28 @@
 마지막에 동이가 허 생원처럼 '왼손잡이'라는 것이 밝혀지면서 과거의 그 처녀가 동이의 어머니이고, 허 생원이 동이의 아버지일 가능성을 강하게 보여준다.
 }
 
-\begin{kfQBlock}{1}{문제}
+\begin{kfQBlock}{01}{단답형}
 \kfQStem{현재 이야기에서 허 생원 일행이 가고 있는 목적지는 어디인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{2}{문제}
+\begin{kfQBlock}{02}{단답형}
 \kfQStem{과거 이야기에서 허 생원이 성 서방네 처녀와 인연을 맺은 장소는 어디인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{3}{문제}
+\begin{kfQBlock}{03}{단답형}
 \kfQStem{마지막에 밝혀진 단서를 통해, 과거의 성 서방네 처녀는 누구의 어머니일 가능성이 높아졌는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{4}{문제}
+\begin{kfQBlock}{04}{단답형}
 \kfQStem{허 생원과 동이가 부자 관계일 수 있음을 보여주는 가장 결정적인 신체적 특징은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\par\noindent\textbf{\color{kfPrimary} 해설 단원 3}\par\smallskip
-\kfPassageNote{해설 3}{%
+\par\medskip
+\kfPassageNoteNT{%
 허 생원은 겉으로는 무뚝뚝하고 거친 장돌뱅이처럼 보이지만, 속으로는 매우 순수하고 낭만적인 마음을 가진 사람이다. 평생 여자와 인연이 없었다고 하면서도 젊은 시절 단 하룻밤의 추억을 소중히 간직하고 있다.
 
 처음에 허 생원은 동이가 주막에서 여자와 농담치는 모습을 보고 화를 내며 따귀까지 때린다. 하지만 동이가 말대꾸 없이 조용히 나가는 모습을 보고 미안한 마음이 든다.
@@ -1917,39 +1966,41 @@
 동이는 아버지 없이 어머니 혼자 키운 아이로, 어머니에 대한 효심이 깊고 순박한 청년이다. 둘 사이의 갈등이 화해로 바뀌면서 부자의 정을 느끼게 되는 과정이 자연스럽게 그려진다.
 }
 
-\begin{kfQBlock}{1}{문제}
+\begin{kfQBlock}{01}{단답형}
 \kfQStem{허 생원은 겉으로는 무뚝뚝하지만, 속으로는 어떤 마음을 가진 사람인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{2}{문제}
+\begin{kfQBlock}{02}{단답형}
 \kfQStem{허 생원은 주막에서 동이에게 화가 나 어떤 행동을 했는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{3}{문제}
+\begin{kfQBlock}{03}{단답형}
 \kfQStem{동이가 말대꾸 없이 조용히 나가자 허 생원은 어떤 마음이 들었는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{4}{문제}
+\begin{kfQBlock}{04}{단답형}
 \kfQStem{도망간 나귀를 알려준 동이에게 허 생원은 어떤 마음을 갖게 되었는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{5}{문제}
+\begin{kfQBlock}{05}{단답형}
 \kfQStem{동이는 아버지 없이 자라면서 누구에 대한 효심이 깊은 청년인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{6}{문제}
+\begin{kfQBlock}{06}{단답형}
 \kfQStem{두 사람이 점점 가까워지면서 무엇을 느끼게 되는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
 \kfSecHeader{kfAreaLiterature}{문제}{}
 
-\begin{kfQBlock}{1}{}
+\par\medskip
+\kfBeginMC
+\begin{kfQBlock}{01}{객관식}
 \kfQStem{허 생원이 주막에서 동이에게 화를 내고 때린 가장 큰 이유는 무엇인가?}
 \begin{kfChoices}
 \kfChoice 동이가 빌려 간 돈을 갚지 않아서
@@ -1959,8 +2010,8 @@
 \kfChoice 동이가 장사를 제대로 하지 않고 게으름을 피워서
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
-\kfQStem{이 소설에서 ‘달밤과 메밀꽃밭’이라는 배경이 하는 역할로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{02}{객관식}
+\kfQStem{이 소설에서 ‘달밤과 메밀꽃밭’이라는 배경이 하는 역할로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 앞으로 일어날 위험하고 잔혹한 사건을 강하게 암시한다.
 \kfChoice 흰빛의 메밀꽃과 달빛이 어우러진 서정적·환상적 정서를 환기한다.
@@ -1969,7 +2020,7 @@
 \kfChoice 허 생원이 과거의 사랑 이야기를 떠올리게 하는 낭만적인 분위기를 만든다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{03}{객관식}
 \kfQStem{허 생원이 평생 잊지 못하고 소중하게 간직하고 있는 추억은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 젊은 시절 장사를 해서 아주 큰돈을 한꺼번에 벌었던 일
@@ -1979,8 +2030,8 @@
 \kfChoice 자신의 나귀를 타고 처음으로 장터에 함께 나갔던 일
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
-\kfQStem{허 생원의 이야기를 듣는 조 선달의 역할로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{04}{객관식}
+\kfQStem{허 생원의 이야기를 듣는 조 선달의 역할로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 허 생원의 이야기가 거짓임을 지적하며 강하게 비판하는 역할을 한다.
 \kfChoice 청자로서 인물의 회상을 부드럽게 끌어내는 보조적 역할을 한다.
@@ -1989,7 +2040,7 @@
 \kfChoice 허 생원의 말에 맞장구를 쳐 주며 이야기가 자연스럽게 이어지게 한다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{05}{객관식}
 \kfQStem{허 생원이 동이에게 친밀감과 정을 느끼게 되는 결정적인 계기는 무엇인가?}
 \begin{kfChoices}
 \kfChoice 동이가 허 생원의 도망간 나귀를 찾아주었을 때
@@ -1999,8 +2050,8 @@
 \kfChoice 동이가 허 생원에게 맛있는 음식을 대접했을 때
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
-\kfQStem{동이가 허 생원의 아들일지도 모른다고 암시하는 단서로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{06}{객관식}
+\kfQStem{동이가 허 생원의 아들일지도 모른다고 암시하는 단서로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 동이가 허 생원처럼 왼손잡이라는 점
 \kfChoice 동이가 허 생원과 거울에 비춘 듯 똑같이 닮은 얼굴을 하고 있다는 점
@@ -2009,7 +2060,7 @@
 \kfChoice 동이의 어머니가 봉평 출신이라는 점
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{07}{객관식}
 \kfQStem{허 생원이 동이와 함께 가기로 결심한 새로운 목적지는 어디인가?}
 \begin{kfChoices}
 \kfChoice 동이의 어머니가 계신 제천
@@ -2019,8 +2070,8 @@
 \kfChoice 돈을 많이 벌 수 있는 서울
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{8}{}
-\kfQStem{이 글의 표현상 특징으로 알맞지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{08}{객관식}
+\kfQStem{이 글의 표현상 특징으로 알맞지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice "소금을 뿌린 듯이"와 같은 비유적 표현을 사용한다.
 \kfChoice "짐승 같은 달의 숨소리"와 같은 감각적인 표현을 사용한다.
@@ -2029,27 +2080,26 @@
 \kfChoice 현재의 사건 속에 과거의 회상을 삽입하여 인물의 사연을 깊이 있게 보여준다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{09}{서술형}
 \kfQStem{이 소설에서 ‘달밤의 메밀꽃밭’이라는 배경이 하는 역할을 <조건>에 맞게 서술하시오.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{10}{서술형}
 \kfQStem{허 생원은 어떤 단서들을 통해 동이가 자신의 아들일지도 모른다고 짐작하게 되는지 두 가지를 서술하시오.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
+\kfEndMC
 
 
-\kfStartNonlit{비문학 영역 — [사회] 어떤 방법이 가장 공정할까? 여러 가지 투표 방식}
+\kfStartNonlit{[사회] 어떤 방법이 가장 공정할까? 여러 가지 투표 방식}
 
 
-\kfSecHeader{kfAreaNonlit}{지문}{[사회] 어떤 방법이 가장 공정할까? 여러 가지 투표 방식}
 \kfPassageNote{[사회] 어떤 방법이 가장 공정할까? 여러 가지 투표 방식}{%
 우리 마을에 병원, 학교, 경찰서 중 하나를 짓는다고 상상해 보자. 사람들마다 원하는 것이 다르기 때문에, 모두의 생각을 하나로 모으는 과정이 필요하다. 이처럼 여러 사람의 의견을 모아 단체의 최종 결정을 내리는 방법에는 여러 가지가 있다. 각 투표 방식의 특징은 무엇이고 어떤 장점과 단점이 있는지 알아보자.   가장 널리 쓰이는 투표 방식은 단순 과반수제이다. 투표에 참여한 사람 중 절반이 넘는 사람이 찬성하는 의견을 선택하는 방법이다. 가장 간단하고 빠르게 결정을 내릴 수 있다는 장점이 있다. 하지만 이 방식은 사람들이 각 의견을 얼마나 강하게 원하거나 싫어하는지는 보여주지 못한다. 그래서 다수의 사람들이 찬성했다는 이유만으로 소수의 사람들이 크게 피해를 보는 결정이 내려질 수 있다. 또한, 어떤 후보끼리 먼저 대결을 붙이느냐에 따라 최종 결과가 달라지는 현상이 나타나기도 한다.   점수 투표제는 사람들에게 일정한 점수를 나누어 주고, 원하는 의견에 자유롭게 점수를 나누어 투표하게 하는 방식이다. 예를 들어 10점을 가지고 병원에 7점, 학교에 3점을 주는 식이다. 이 방법은 각자가 의견을 얼마나 좋아하는지 그 마음의 크기를 자세히 표현할 수 있다. 하지만 다른 사람의 투표 결과를 예상하고, 이기기 위해 자신의 진짜 생각과 다르게 점수를 몰아주는 전략적인 행동이 나타날 수 있다는 단점이 있다.   보르다 투표제는 모든 후보의 순위를 매겨서 점수를 주는 방식이다. 후보가 세 명이면 1등에게 3점, 2등에게 2점, 3등에게 1점을 주는 식이다. 그 후 모든 점수를 합쳐 가장 높은 점수를 얻은 후보가 선택된다. 이 방식은 한두 명에게만 인기가 많은 의견보다는, 여러 사람에게 두루두루 괜찮다고 평가받는 무난한 의견이 뽑힐 가능성이 높다.   이처럼 투표에는 다양한 방법이 있으며 각각 장점과 단점이 뚜렷하다. 따라서 어떤 상황에서 투표를 하는지에 따라 가장 알맞은 방식을 선택하는 지혜가 필요하다.
 }
 
 
-\kfSecHeader{kfAreaNonlit}{활동}{어휘 학습}
-\noindent\textit{\small 다음 표의 '의미'를 읽고, 그에 해당하는 '어휘'를 지문에서 찾아 적으시오.}\par\medskip
+\kfActivityBg \par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 다음 표의 '의미'를 읽고, 그에 해당하는 '어휘'를 지문에서 찾아 적으시오.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
 \begin{kfVocab}
 \kfVocabItem{1}{전체 수의 절반을 넘는 수}
 \kfVocabItem{2}{수가 많은 쪽}
@@ -2060,8 +2110,10 @@
 \kfVocabItem{7}{특별히 좋지도 나쁘지도 않은 평범한 것}
 \end{kfVocab}
 
-\kfSecHeader{kfAreaNonlit}{활동}{비문학 문장 독해}
-\noindent\textit{\small 지문을 문장 단위로 정독하면서, 문장별로 주어진 물음에 답해 보자.}\par\medskip
+\kfActivityBg \par\needspace{15\baselineskip}
+\kfSecHeader{kfAreaNonlit}{활동}{문장 독해}
+\par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 지문을 문장 단위로 정독하면서, 문장별로 주어진 물음에 답해 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfBeginMC
 \begin{kfSentenceUnit}{1}{우리 마을에 병원, 학교, 경찰서 중 하나를 짓는다고 상상해 보자.}
 \kfSentQ{1.}{이 문장은 독자에게 어떤 상황을 상상해 보라고 제안하는가?}
 \begin{kfChoices}
@@ -2374,42 +2426,50 @@
 \end{kfChoices}
 \end{kfSentenceUnit}
 
-\kfSecHeader{kfAreaNonlit}{활동}{구조도}
-\noindent\textit{\small 글의 흐름을 살펴보고, 구조도의 빈칸을 알맞게 채워 보자.}\par\medskip
-\par\medskip\needspace{6\baselineskip}
-\begin{tcolorbox}[enhanced, breakable=false,
+\kfEndMC
+
+\kfActivityBg \par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 글의 흐름을 살펴보고, 구조도의 빈칸을 알맞게 채워 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\par\medskip\needspace{8\baselineskip}
+\begin{tcolorbox}[enhanced, breakable=true,
   colback=kfPaper, colframe=kfRule, boxrule=0.4pt, arc=2pt,
-  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
   title={\footnotesize\bfseries\color{kfMute} 글의 구조도},
   coltitle=kfMute, colbacktitle=kfPrimaryLight!40,
   attach boxed title to top left={yshift=-1.5mm, xshift=6pt},
   boxed title style={colframe=kfRule, boxrule=0.3pt, arc=1pt}]
-\setstretch{1.4}\footnotesize
-지침: 글의 전체적인 논리 흐름을 파악하며 빈칸에 알맞은 내용을 채우시오. \\
-
-\noindent \textbullet\ 1문단: 투표 방식의 필요성 \\
-\noindent \quad\textbullet\ 배경: 사람들마다 ( ① )이 다름 \\
-\noindent \quad\textbullet\ 필요성: ( ② )을 하나로 모으는 과정이 필요 \\
-\noindent \quad\textbullet\ 주제 소개: 다양한 ( ③ ) 방식의 특징과 장단점 \\
-\noindent \textbullet\ 2문단: 방법 1 - ( ④ ) 과반수제 \\
-\noindent \quad\textbullet\ 방법: ( ⑤ )이 넘는 찬성으로 결정 \\
-\noindent \quad\textbullet\ 장점: 간단하고 ( ⑥ ) \\
-\noindent \quad\textbullet\ 단점 1: 좋아하는 크기를 반영하지 못해 ( ⑦ ) 의 사람들이 피해를 봄 \\
-\noindent \quad\textbullet\ 단점 2: 대결 순서에 따라 ( ⑧ )가 바뀔 수 있음 \\
-\noindent \textbullet\ 3문단: 방법 2 - ( ⑨ ) 투표제 \\
-\noindent \quad\textbullet\ 방법: 주어진 ( ⑩ )를 자유롭게 나누어 투표 \\
-\noindent \quad\textbullet\ 장점: 각자가 의견을 얼마나 좋아하는지 그 마음의 ( ⑪ )를 자세히 표현할 수 있음  단점: ( ⑫ )인 행동이 나타날 수 있음 \\
-\noindent \textbullet\ 4문단: 방법 3 - ( ⑬ ) 투표제 \\
-\noindent \quad\textbullet\ 방법: 모든 후보의 ( ⑭ )를 매겨 점수 부여 \\
-\noindent \quad\textbullet\ 특징: ( ⑮ )한 의견이 뽑힐 가능성이 높음 \\
-\noindent \textbullet\ 5문단: 결론 \\
-\noindent \quad\textbullet\ 요약: 투표 방식마다 ( ⑯ )과 단점이 뚜렷함 \\
-\noindent \quad\textbullet\ 주장: ( ⑰ )에 맞는 방식을 선택하는 지혜가 필요 \\
+\footnotesize\setstretch{1.3}
+\renewcommand{\arraystretch}{1.35}
+\arrayrulecolor{kfRule}
+\noindent\begin{tabularx}{\linewidth}{|>{\centering\arraybackslash}p{1.6cm}|>{\raggedright\arraybackslash}p{3.4cm}|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor{kfPrimaryLight!40}\textbf{\color{kfPrimary}단} & \textbf{\color{kfPrimary}항목} & \textbf{\color{kfPrimary}내용} \\\hline
+\multirow{3}{*}{1문단} & 배경 & 사람들마다 ( ① )이 다름 \\\cline{2-3}
+ & 필요성 & ( ② )을 하나로 모으는 과정이 필요 \\\cline{2-3}
+ & 주제 소개 & 다양한 ( ③ ) 방식의 특징과 장단점 \\\cline{2-3}
+\hline
+\multirow{4}{*}{2문단} & 방법 & ( ⑤ )이 넘는 찬성으로 결정 \\\cline{2-3}
+ & 장점 & 간단하고 ( ⑥ ) \\\cline{2-3}
+ & 단점 1 & 좋아하는 크기를 반영하지 못해 ( ⑦ ) 의 사람들이 피해를 봄 \\\cline{2-3}
+ & 단점 2 & 대결 순서에 따라 ( ⑧ )가 바뀔 수 있음 \\\cline{2-3}
+\hline
+\multirow{2}{*}{3문단} & 방법 & 주어진 ( ⑩ )를 자유롭게 나누어 투표 \\\cline{2-3}
+ & 장점 & 각자가 의견을 얼마나 좋아하는지 그 마음의 ( ⑪ )를 자세히 표현할 수 있음  단점: ( ⑫ )인 행동이 나타날 수 있음 \\\cline{2-3}
+\hline
+\multirow{2}{*}{4문단} & 방법 & 모든 후보의 ( ⑭ )를 매겨 점수 부여 \\\cline{2-3}
+ & 특징 & ( ⑮ )한 의견이 뽑힐 가능성이 높음 \\\cline{2-3}
+\hline
+\multirow{2}{*}{5문단} & 요약 & 투표 방식마다 ( ⑯ )과 단점이 뚜렷함 \\\cline{2-3}
+ & 주장 & ( ⑰ )에 맞는 방식을 선택하는 지혜가 필요 \\\cline{2-3}
+\hline
+\end{tabularx}
+\arrayrulecolor{black}
 \end{tcolorbox}\par\medskip
 \kfSecHeader{kfAreaNonlit}{문제}{}
 
-\begin{kfQBlock}{1}{}
-\kfQStem{윗글의 중심 내용으로 적절하지 \uline{않은} 것은?}
+\par\medskip
+\kfBeginMC
+\begin{kfQBlock}{01}{객관식}
+\kfQStem{윗글의 중심 내용으로 적절하지 \uline{\underline{않은}} 것은?}
 \begin{kfChoices}
 \kfChoice 투표의 역사와 민주주의의 전반적인 발전 과정
 \kfChoice 다수결 투표·결선 투표·보르다 투표제 같은 다양한 의사결정 방법
@@ -2418,7 +2478,7 @@
 \kfChoice 여러 가지 투표 방식의 특징과 장단점 비교
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{02}{객관식}
 \kfQStem{윗글의 내용과 일치하지 \uline{않는} 것은?}
 \begin{kfChoices}
 \kfChoice 단순 과반수제는 가장 간단하고 빠른 결정 방식이다.
@@ -2428,7 +2488,7 @@
 \kfChoice 투표 방식을 선택할 때는 상황을 고려하는 지혜가 필요하다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{03}{객관식}
 \kfQStem{<보기>의 상황에서 나타날 수 있는 문제점을 윗글에서 찾은 것으로 가장 적절한 것은?}
 \begin{kfEvidence}우리 반 30명 중 16명이 점심 메뉴로 떡볶이를 골랐고, 14명은 피자를 골랐다. 그런데 피자를 고른 친구들 중에는 떡볶이를 아주 싫어하는 친구들이 많았다.\end{kfEvidence}
 \begin{kfChoices}
@@ -2439,7 +2499,7 @@
 \kfChoice 보르다 투표제에서 순위를 매기기 힘든 문제
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{04}{객관식}
 \kfQStem{다음 중 '보르다 투표제'에 대한 설명으로 옳은 것은?}
 \begin{kfChoices}
 \kfChoice 투표자의 절반이 넘는 표를 얻어야 한다.
@@ -2449,7 +2509,7 @@
 \kfChoice 가장 인기 있는 후보가 항상 유리하다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{05}{객관식}
 \kfQStem{각 투표 방식과 그 특징을 바르게 짝지은 것은?}
 \begin{kfChoices}
 \kfChoice 단순 과반수제 - 선호도의 크기를 알 수 있다.
@@ -2459,7 +2519,7 @@
 \kfChoice 점수 투표제 - 소수의 의견이 무시되기 쉽다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{06}{객관식}
 \kfQStem{<보기>의 상황에 가장 적합한 투표 방식과 그 이유를 고르시오.}
 \begin{kfEvidence}우리 반 학급 회의에서 소풍 장소를 정하려고 한다. 후보지는 놀이공원, 박물관, 수목원 세 곳이다. 한두 명이라도 아주 싫어하는 곳은 피하고, 되도록 많은 친구들이 "그곳도 괜찮아"라고 생각하는 곳으로 정하고 싶다.\end{kfEvidence}
 \begin{kfChoices}
@@ -2470,42 +2530,48 @@
 \kfChoice 점수 투표제 - 결과를 왜곡하는 전략적인 행동을 막을 수 있어서
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{07}{단답형}
 \kfQStem{여러 사람의 의견을 모아 단체의 최종 결정을 내리는 대표적인 방법을 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{08}{단답형}
 \kfQStem{가장 널리 쓰이며, 투표 참여자 중 절반이 넘는 사람이 찬성하면 결정되는 방식은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{09}{단답형}
 \kfQStem{단순 과반수제에서 다수의 의견 때문에 피해를 볼 수 있는 사람들은 누구인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{10}{단답형}
 \kfQStem{사람들에게 일정한 점수를 주고 원하는 의견에 자유롭게 나누어 투표하게 하는 방식은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{11}{단답형}
 \kfQStem{모든 후보의 순위를 매겨서 점수를 주는 투표 방식은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{12}{서술형}
 \kfQStem{'단순 과반수제'와 '점수 투표제'가 각각 가진 가장 큰 장점을 서술하시오.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
+\kfEndMC
 
 
 
 \clearpage
 
 \kfChapterCover{3}{러셀1 (챕터3)}{Chapter 3}{이번 챕터의 학습 내용을 시작합니다.}
+\begin{kfChapterAreaList}
+\kfChapterAreaItem{문법}{kfAreaGrammar}{단어를 이어주는 풀 (조사)}
+\kfChapterAreaItem{개념}{kfAreaConcept}{시의 머리와 꼬리가 만나는 수미상관}
+\kfChapterAreaItem{문학}{kfAreaLiterature}{「산에 언덕에」 — 신동엽}
+\kfChapterAreaItem{비문학}{kfAreaNonlit}{[과학] 식물은 어떻게 높은 곳까지 물을 끌어올릴까?}
+\end{kfChapterAreaList}
 
-\kfStartGrammar{문법 영역 — 단어를 이어주는 풀 (조사)}
+\kfStartGrammar{단어를 이어주는 풀 (조사)}
 
 
-\kfSecHeader{kfAreaGrammar}{개념}{단어를 이어주는 풀 (조사)}
-
+\kfPassageNoteNT{%
 단어들을 그냥 순서대로 늘어놓는다고 해서 문장이 되지는 않는다. 예를 들어 ‘동생’, ‘빵’, ‘먹다’처럼 단어만 흩어져 있으면, 누가 무엇을 하는지 관계가 분명하지 않아 어색하다.
 
 하지만 이 단어들 사이에 '이'와 '을'이라는 특별한 풀을 붙여주면 ‘동생이 빵을 먹는다.’라는 자연스러운 문장이 완성된다. 이처럼 다른 말 뒤에 주로 붙어서 그 말과 다른 말과의 문법적 관계를 나타내거나 특별한 의미를 더해주는 단어를 '조사'라고 한다. 여기서 조사 ‘이’는 ‘동생’이 문장의 주인공임을, ‘을’은 ‘빵’이 먹는 행동의 대상임을 명확히 알려준다. 이처럼 문장에서의 문법적 자격을 나타내는 조사를 격조사라고 한다. 이 외에도 조사는 '은', '는', '만', '도'처럼 특별한 의미를 더해주는 보조사나, '와', '과'처럼 두 단어를 이어주는 접속 조사 등이 있다.
@@ -2516,9 +2582,9 @@
 \item 보조사 — '나는 갔다 / 나도 안다 / 너만 와라'(은·도·만)
 \item 접속 조사 — '사과와 배를 샀다'(와)
 \end{itemize}
+}
 
-\kfSecHeader{kfAreaGrammar}{활동}{내용 확인}
-\noindent\textit{\small 아래 표의 빈칸에 알맞은 말을 채워 문법 내용을 확인해 보자.}\par\medskip
+\kfActivityBg \par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 아래 표의 빈칸에 알맞은 말을 채워 문법 내용을 확인해 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
 * 단어를 이어주는 풀, 조사 *
 
 아래 표의 빈칸을 채우며 조사의 특징과 종류를 알아보자.
@@ -2533,20 +2599,22 @@
 \noindent\begin{adjustbox}{max width=\linewidth, center}
 \renewcommand{\arraystretch}{1.45}
 \arrayrulecolor{kfRule}
-\begin{tabular}{|>{\raggedright\arraybackslash}p{\dimexpr 0.0328\linewidth-12pt\relax}|>{\raggedright\arraybackslash}p{\dimexpr 0.5902\linewidth-12pt\relax}|>{\raggedright\arraybackslash}p{\dimexpr 0.3770\linewidth-12pt\relax}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{\dimexpr 0.0286\linewidth-12pt\relax}|>{\raggedright\arraybackslash}p{\dimexpr 0.5017\linewidth-12pt\relax}|>{\raggedright\arraybackslash}p{\dimexpr 0.4698\linewidth-12pt\relax}|}
 \hline
 \rowcolor{kfPrimaryLight!50}\textbf{\color{kfPrimary} 구 분} & \textbf{\color{kfPrimary} 설 명} & \textbf{\color{kfPrimary} 예 시} \\\hline
 정의 & [ ① \_\_\_\_\_\_ ]  다른 말 뒤에 붙어 문법적 관계를 나타내거나 특별한 의미를 더해주는 말 & 학교\uline{에}, 밥\uline{을}, 너\uline{만}, 하늘\uline{과} 땅 \\\hline
 특징 & 홀로 쓰일 수 없고, 주로 [ ② \_\_\_\_\_\_, \_\_\_\_\_\_, \_\_\_\_\_\_ ] 뒤에 붙어 쓰인다. & 나\uline{도} 간다. \\\hline
-종류 & [ ③ \_\_\_\_\_\_ ]  문장에서의 문법적 자격을 나타냄 & 동생\uline{이} 빵\uline{을} 먹는다. \\\hline
-\rule[-1.0em]{0pt}{2.4em} & [ ④ \_\_\_\_\_\_ ]  특별한 의미를 더해줌 & 나는 학생, 나\uline{도} 학생, 나\uline{만} 학생 \\\hline
-\rule[-1.0em]{0pt}{2.4em} & [ ⑤ \_\_\_\_\_\_ ]  두 단어를 같은 자격으로 이어줌 & 너\uline{와} 나, 사과\uline{랑} 배 \\\hline
+\multirow{3}{*}{종류} & [ ③ \_\_\_\_\_\_ ]  문장에서의 문법적 자격을 나타냄 & 동생\uline{이} 빵\uline{을} 먹는다. \\\cline{2-3}
+ & [ ④ \_\_\_\_\_\_ ]  특별한 의미를 더해줌 & 나는 학생, 나\uline{도} 학생, 나\uline{만} 학생 \\\cline{2-3}
+ & [ ⑤ \_\_\_\_\_\_ ]  두 단어를 같은 자격으로 이어줌 & 너\uline{와} 나, 사과\uline{랑} 배 \\\cline{2-3}
+\hline
 \end{tabular}
 \arrayrulecolor{black}
 \end{adjustbox}\par\medskip
 
-\kfSecHeader{kfAreaGrammar}{활동}{분석 훈련}
-\noindent\textit{\small  조사 찾기 훈련! 문장에서 조사에 해당하는 단어를 모두 찾아 쓰시오.}\par\medskip
+\kfActivityBg \kfSecHeader{kfAreaGrammar}{활동}{분석 훈련}
+\par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk}  조사 찾기 훈련! 문장에서 조사에 해당하는 단어를 모두 찾아 쓰시오.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfBeginMC
 \begin{enumerate}[leftmargin=22pt, itemsep=6pt, topsep=4pt, label=\textbf{\arabic*.}]
 \item 하늘이 푸르고 바다가 넓다.
 \item 나는 밥을 먹었다.
@@ -2559,11 +2627,14 @@
 \item 오늘은 날씨가 좋다.
 \item 아버지께서 공원에 가신다.
 \end{enumerate}
+\kfEndMC
 
 \kfSecHeader{kfAreaGrammar}{문제}{}
 
-\begin{kfQBlock}{1}{}
-\kfQStem{조사에 대한 설명으로 옳지 \uline{않은} 것은?}
+\par\medskip
+\kfBeginMC
+\begin{kfQBlock}{01}{객관식}
+\kfQStem{조사에 대한 설명으로 옳지 \uline{\underline{않은}} 것은?}
 \begin{kfChoices}
 \kfChoice 명사 뒤에 붙어 쓰인다.
 \kfChoice 홀로 쓰일 수 없다.
@@ -2572,7 +2643,7 @@
 \kfChoice 문법적 관계를 표시한다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{02}{객관식}
 \kfQStem{밑줄 친 단어 중 품사가 \uline{다른} 하나는?}
 \begin{kfChoices}
 \kfChoice 하늘\uline{이} 매우 푸르다.
@@ -2582,9 +2653,10 @@
 \kfChoice 학교\uline{에} 간다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{03}{객관식}
 \kfQStem{<보기>의 빈칸에 공통으로 들어갈 수 있는 조사는?}
-\begin{kfEvidence}* 나\_\_ 학생이다. * 사과\_\_ 맛있다.\end{kfEvidence}
+\begin{kfEvidence}* 나\_\_ 학생이다. \\\relax
+* 사과\_\_ 맛있다.\end{kfEvidence}
 \begin{kfChoices}
 \kfChoice 는
 \kfChoice 를
@@ -2593,7 +2665,7 @@
 \kfChoice 까지
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{04}{객관식}
 \kfQStem{밑줄 친 조사의 종류가 나머지와 \uline{다른} 하나는?}
 \begin{kfChoices}
 \kfChoice 너\uline{와} 나
@@ -2603,7 +2675,7 @@
 \kfChoice 철수\uline{하고} 영희
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{05}{객관식}
 \kfQStem{'특별한 의미'를 더해주는 보조사가 사용된 문장은?}
 \begin{kfChoices}
 \kfChoice 나는 너만 좋아한다.
@@ -2613,7 +2685,7 @@
 \kfChoice 하늘이 맑다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{06}{객관식}
 \kfQStem{‘동생이 빵을 먹는다’에 대한 설명으로 옳은 것은?}
 \begin{kfChoices}
 \kfChoice 조사 '이'는 동작의 대상임을 나타낸다.
@@ -2623,7 +2695,7 @@
 \kfChoice 조사 '이'와 '을'은 홀로 쓰일 수 있다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{07}{객관식}
 \kfQStem{'두 단어를 이어주는' 접속 조사가 쓰인 문장은?}
 \begin{kfChoices}
 \kfChoice 그는 천재이다.
@@ -2633,9 +2705,10 @@
 \kfChoice 너는 학생이다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{8}{}
+\begin{kfQBlock}{08}{객관식}
 \kfQStem{<보기>의 빈칸에 들어갈 격조사가 바르게 짝지어진 것은?}
-\begin{kfEvidence}* 철수\_\_ 학교에 간다. * 나는 사과\_\_ 먹는다.\end{kfEvidence}
+\begin{kfEvidence}* 철수\_\_ 학교에 간다. \\\relax
+* 나는 사과\_\_ 먹는다.\end{kfEvidence}
 \begin{kfChoices}
 \kfChoice 가, 를
 \kfChoice 는, 도
@@ -2644,58 +2717,58 @@
 \kfChoice 와, 를
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{09}{단답형}
 \kfQStem{명사, 대명사, 수사 뒤에 붙어 문법적 관계를 나타내는 품사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{10}{단답형}
 \kfQStem{문장에서의 문법적 자격을 나타내는 조사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{11}{단답형}
 \kfQStem{'은', '는', '만', '도'처럼 특별한 의미를 더하는 조사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{12}{단답형}
 \kfQStem{'와', '과'처럼 두 단어를 이어주는 조사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{13}{단답형}
 \kfQStem{‘동생이 밥을 먹는다’에서 주인공임을 나타내는 격조사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{14}{단답형}
 \kfQStem{‘동생이 밥을 먹는다’에서 행동의 대상임을 나타내는 격조사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{15}{단답형}
 \kfQStem{'이것만 너에게 줄게'에서 특별한 의미를 더하는 보조사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{8}{}
+\begin{kfQBlock}{16}{단답형}
 \kfQStem{'사과는 맛있지만 배는 맛없다'에서 대조의 의미를 더하는 보조사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{9}{}
+\begin{kfQBlock}{17}{단답형}
 \kfQStem{'철수야, 이리 와 봐'에서 누군가를 부를 때 사용하는 격조사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{10}{}
+\begin{kfQBlock}{18}{단답형}
 \kfQStem{'우리는 학교에 간다'에서 장소를 나타내는 격조사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{19}{서술형}
 \kfQStem{다음 <보기>의 흩어진 단어들을 조사를 사용하여 자연스러운 한 문장으로 만들어 보시오.}
 \begin{kfEvidence}나, 사과, 바나나, 좋아하다\end{kfEvidence}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
+\kfEndMC
 
 
-\kfStartConcept{개념 영역 — 시의 머리와 꼬리가 만나는 수미상관}
+\kfStartConcept{시의 머리와 꼬리가 만나는 수미상관}
 
 
-\kfSecHeader{kfAreaConcept}{개념}{시의 머리와 꼬리가 만나는 수미상관}
-
+\kfPassageNoteNT{%
 수미상관은 시의 첫 부분과 마지막 부분을 같거나 비슷한 시구로 구성하는 표현 기법이다. '수(首)'는 머리, '미(尾)'는 꼬리, '상관(相關)'은 서로 관련이 있다는 뜻으로, 시의 머리와 꼬리가 서로 호응한다는 의미이다. 마치 액자가 그림을 감싸듯이 시의 처음과 끝이 하나로 연결되어 완결된 구조를 만들어낸다.
 
 수미상관에는 두 가지 형태가 있다. 첫째는 완전한 반복으로, 처음과 끝이 글자 하나 바꾸지 않고 똑같이 나오는 것이다. 한용운의 「나룻배와 행인」에서 "나는 나룻배 / 당신은 행인"이라는 구절이 처음과 끝에 그대로 반복되는 것이 그 예이다. 둘째는 변주된 반복으로, 기본 구조는 비슷하지만 일부 단어가 바뀌는 것이다. 김소월의 「산유화」에서 "산에는 꽃 피네"가 "산에는 꽃 지네"로 변주되어 꽃이 피고 지는 자연의 순환을 보여주는 것이 그 예이다.
@@ -2706,11 +2779,14 @@
 \item 변주 반복 — '산에는 꽃 피네' → '산에는 꽃 지네'(「산유화」)
 \item 효과 — 통일감·운율 형성 + 주제 강조 + 여운 남김
 \end{itemize}
+}
 
 \kfSecHeader{kfAreaConcept}{문제}{}
 
-\begin{kfQBlock}{1}{}
-\kfQStem{‘수미상관’에 대한 설명으로 적절하지 \uline{않은} 것은 무엇인가?}
+\par\medskip
+\kfBeginMC
+\begin{kfQBlock}{01}{객관식}
+\kfQStem{‘수미상관’에 대한 설명으로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 비슷한 문장 구조를 짝지어 운율을 만드는 ‘대구법’과 같은 개념이다.
 \kfChoice 시의 형식에 통일성과 안정감을 부여한다.
@@ -2719,8 +2795,8 @@
 \kfChoice 시의 첫 부분과 마지막 부분을 같거나 비슷한 시구절로 구성한다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
-\kfQStem{‘수미상관(首尾相關)’의 한자 뜻풀이에 대한 설명으로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{02}{객관식}
+\kfQStem{‘수미상관(首尾相關)’의 한자 뜻풀이에 대한 설명으로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice ‘首’는 시의 머리(처음)를 가리킨다.
 \kfChoice 머리와 꼬리가 서로 반대되는 의미로 대립한다는 뜻이다.
@@ -2729,8 +2805,8 @@
 \kfChoice ‘尾’는 시의 꼬리(끝)를 가리킨다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
-\kfQStem{수미상관이 시의 형식에 주는 효과로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{03}{객관식}
+\kfQStem{수미상관이 시의 형식에 주는 효과로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 시의 길이를 늘려 분량을 키우는 효과를 낸다.
 \kfChoice 시작과 끝의 호응으로 형식미를 완성한다.
@@ -2739,7 +2815,7 @@
 \kfChoice 시 전체에 안정감과 통일성을 준다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{04}{객관식}
 \kfQStem{수미상관이 운율을 형성하는 이유는 무엇인가?}
 \begin{kfChoices}
 \kfChoice 같거나 비슷한 시구를 반복하기 때문에
@@ -2749,8 +2825,8 @@
 \kfChoice 평소 잘 안 쓰는 어려운 단어를 사용하기 때문에
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
-\kfQStem{수미상관이 시의 내용에 주는 효과로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{05}{객관식}
+\kfQStem{수미상관이 시의 내용에 주는 효과로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 시인이 강조하고 싶은 주제를 독자의 기억에 깊이 남긴다.
 \kfChoice 시의 주제와 정반대되는 내용을 제시하여 반전의 재미를 준다.
@@ -2759,7 +2835,7 @@
 \kfChoice 핵심 정서를 한 번 더 환기시켜 강한 인상을 남긴다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{06}{객관식}
 \kfQStem{수미상관이 시를 다 읽고 난 후 독자에게 주는 감동과 관련된 효과는 무엇인가?}
 \begin{kfChoices}
 \kfChoice 감동을 줄여주고 이성적으로 생각하게 한다.
@@ -2769,8 +2845,8 @@
 \kfChoice 숨겨진 반전의 내용을 암시한다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
-\kfQStem{다음 중 수미상관의 효과로 알맞지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{07}{객관식}
+\kfQStem{다음 중 수미상관의 효과로 알맞지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 시 전체의 구조적 안정감을 높여 준다.
 \kfChoice 시인이 전하려는 주제를 한층 강조해 준다.
@@ -2779,8 +2855,8 @@
 \kfChoice 다 읽은 독자에게 깊은 여운을 남겨 준다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{8}{}
-\kfQStem{다음 중 수미상관에 대한 설명으로 알맞지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{08}{객관식}
+\kfQStem{다음 중 수미상관에 대한 설명으로 알맞지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 시의 머리와 꼬리가 서로 관련된다는 뜻이다.
 \kfChoice 시의 처음과 중간 부분을 똑같이 만드는 기법이다.
@@ -2789,45 +2865,45 @@
 \kfChoice 감동을 심화시키고 여운을 남기는 역할을 한다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{09}{단답형}
 \kfQStem{시의 첫 부분과 마지막 부분을 같거나 비슷하게 구성하는 표현 기법을 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{10}{단답형}
 \kfQStem{'수미상관'에서 '수(首)'는 머리를, '미(尾)'는 무엇을 뜻하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{11}{단답형}
 \kfQStem{수미상관은 시 전체에 통일성과 무엇을 부여하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{12}{단답형}
 \kfQStem{시의 처음과 끝에 비슷한 구절을 반복하면 무엇이 형성되는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{13}{단답형}
 \kfQStem{시의 처음과 끝에서 같은 말을 반복하면 시인이 말하려는 무엇이 강조되는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{14}{단답형}
 \kfQStem{시를 다 읽고 나서 다시 처음으로 돌아가는 듯한 느낌을 주어, 감동을 더 깊게 하고 무엇을 남기는 역할을 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{15}{단답형}
 \kfQStem{김소월의 「산유화」에서 '꽃 피네'가 '꽃 지네'로 살짝 바뀌어 나타난 것은 자연의 어떤 원리를 보여주기 위함인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{16}{서술형}
 \kfQStem{시인들이 시의 처음과 끝을 비슷하게 만드는 수미상관 기법을 사용하는 이유는 무엇인지, 그 효과와 관련하여 <조건>에 맞게 서술하시오.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
+\kfEndMC
 
 
-\kfStartLit{문학 영역 — 작품}
+\kfStartLit{「산에 언덕에」 — 신동엽}
 
 
-\kfSecHeader{kfAreaLiterature}{지문}{작품}
-\kfPassageNote{작품}{%
+\kfPassageNote{}{%
 그리운 그의 얼굴 다시 찾을 수 없어도 \\[4pt]
 화사한 그의 꽃 \\[4pt]
 산에 언덕에 피어날지어이. \\[14pt]
@@ -2843,8 +2919,10 @@
 }
 
 
-\kfSecHeader{kfAreaLiterature}{활동}{문학 문장 독해}
-\noindent\textit{\small 작품 속 문장을 자세히 읽고, 문장별로 주어진 물음에 답해 보자.}\par\medskip
+\kfActivityBg \par\needspace{15\baselineskip}
+\kfSecHeader{kfAreaLiterature}{활동}{문장 독해}
+\par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 작품 속 문장을 자세히 읽고, 문장별로 주어진 물음에 답해 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfBeginMC
 \begin{kfSentenceUnit}{1}{"그리운 그의 얼굴 다시 찾을 수 없어도 화사한 그의 꽃 산에 언덕에 피어날지어이."}
 \kfSentQ{1.}{다음 문장에서 서술어를 기준으로 각각의 주어는 무엇인가? (1) 서술어 '찾을 수 없어도'의 주어는 무엇인가?}
 \begin{kfChoices}
@@ -2886,10 +2964,12 @@
 \end{kfChoices}
 \end{kfSentenceUnit}
 
-\kfSecHeader{kfAreaLiterature}{활동}{해설 학습}
-\noindent\textit{\small 작품 해설을 단원별로 읽고, 각 단원에 딸린 물음에 답해 보자.}\par\medskip
-\par\noindent\textbf{\color{kfPrimary} 해설 단원 1}\par\smallskip
-\kfPassageNote{해설 1}{%
+\kfEndMC
+
+\kfActivityBg \kfSecHeader{kfAreaLiterature}{활동}{해설 학습}
+\par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 작품 해설을 단원별로 읽고, 각 단원에 딸린 물음에 답해 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\par\medskip
+\kfPassageNoteNT{%
 「산에 언덕에」는 신동엽 시인이 1960년 4·19 혁명 때 희생된 젊은 학생들을 추모하며 쓴 시이다. 4·19 혁명은 이승만 정권의 독재에 맞서 학생들이 일으킨 민주화 운동으로, 많은 젊은이들이 목숨을 잃었다.
 
 이 시는 신동엽이 4·19 혁명 때 희생된 학생들을 그리워하며 쓴 추모시이다. '그'는 나라를 위해 목숨을 바친 젊은 영웅들을 가리킨다.
@@ -2901,43 +2981,43 @@
 마지막 연에서는 '그'의 영혼이 반드시 이 땅에 다시 피어날 것이라는 확신을 보여준다. 죽음으로 끝나는 것이 아니라 새로운 생명으로 부활할 것이라는 희망적인 메시지를 전한다.
 }
 
-\begin{kfQBlock}{1}{문제}
+\begin{kfQBlock}{01}{단답형}
 \kfQStem{이 시는 신동엽 시인이 어떤 역사적 사건 때 희생된 학생들을 추모하며 쓴 시인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{2}{문제}
+\begin{kfQBlock}{02}{단답형}
 \kfQStem{시에서 화자가 그리워하는 '그'는 누구를 가리키는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{3}{문제}
+\begin{kfQBlock}{03}{단답형}
 \kfQStem{화자는 '그'가 죽었지만, 그의 정신이 무엇이 되어 산과 언덕에 피어날 것이라고 믿는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{4}{문제}
+\begin{kfQBlock}{04}{단답형}
 \kfQStem{'그'의 정신은 '꽃'과 함께 무엇이 되어 들과 숲에서 영원히 살아갈 것이라고 했는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{5}{문제}
+\begin{kfQBlock}{05}{단답형}
 \kfQStem{3연과 4연에서 화자는 자신과 똑같이 슬퍼하는 누구에게 말을 걸어 위로하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{6}{문제}
+\begin{kfQBlock}{06}{단답형}
 \kfQStem{화자는 행인에게, 눈으로 '그'를 찾을 수 없다면 무엇을 담으라고 조언하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{7}{문제}
+\begin{kfQBlock}{07}{단답형}
 \kfQStem{화자는 행인에게 '바람'도 느낄 수 없다면, 무엇을 담으라고 조언하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\par\noindent\textbf{\color{kfPrimary} 해설 단원 2}\par\smallskip
-\kfPassageNote{해설 2}{%
+\par\medskip
+\kfPassageNoteNT{%
 이 시는 총 5연으로 구성되어 있으며, 각 연마다 조금씩 다른 내용을 담고 있다. 1연에서는 '그'의 얼굴을 다시 볼 수 없다는 현실을 인정하면서도, 그가 아름다운 꽃으로 피어나기를 바라는 마음을 표현한다.
 
 2연에서는 '그'의 노래를 더 이상 들을 수 없지만, 그의 맑은 정신이 자연 속에서 계속 살아갈 것이라고 노래한다. 여기서 '노래'는 그가 가졌던 신념이나 꿈을 의미하고, '숨결'은 보이지 않지만 여전히 살아있는 그의 정신을 나타낸다.
@@ -2947,43 +3027,43 @@
 마지막 5연에서는 다시 1연과 비슷한 구조로 돌아가면서, '그'의 영혼이 반드시 이 땅에 피어날 것이라는 확신을 표현한다. 전체적으로 이 시는 죽음이라는 슬픈 현실을 부정하지 않으면서도, 그 속에서 희망과 생명의 의미를 찾아내는 내용을 담고 있다.
 }
 
-\begin{kfQBlock}{1}{문제}
+\begin{kfQBlock}{01}{단답형}
 \kfQStem{이 시는 총 몇 개의 연으로 구성되어 있는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{2}{문제}
+\begin{kfQBlock}{02}{단답형}
 \kfQStem{1연에서 화자는 '그'가 무엇으로 피어나기를 바라고 있는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{3}{문제}
+\begin{kfQBlock}{03}{단답형}
 \kfQStem{2연에서 '그'가 가졌던 신념이나 꿈을 의미하는 시어는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{4}{문제}
+\begin{kfQBlock}{04}{단답형}
 \kfQStem{'그'의 보이지 않지만 여전히 살아있는 정신을 나타내는 시어는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{5}{문제}
+\begin{kfQBlock}{05}{단답형}
 \kfQStem{'그'가 없다는 사실, 즉 '그'의 부재를 슬퍼하며 헤매는 사람은 누구인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{6}{문제}
+\begin{kfQBlock}{06}{단답형}
 \kfQStem{화자는 행인에게, 눈으로 볼 수 없다면 바람을, 바람도 느낄 수 없다면 무엇을 마음에 담으라고 위로하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{7}{문제}
+\begin{kfQBlock}{07}{단답형}
 \kfQStem{마지막 5연에서 화자는 '그'의 무엇이 반드시 피어날 것이라고 확신하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\par\noindent\textbf{\color{kfPrimary} 해설 단원 3}\par\smallskip
-\kfPassageNote{해설 3}{%
+\par\medskip
+\kfPassageNoteNT{%
 이 시의 가장 큰 특징은 '반복법'이다. "-ㄹ지어이"라는 특별한 어미가 1연, 2연, 5연에서 반복되어 나타난다. 이는 예스러운 표현으로, 단순한 바람이 아니라 '반드시 그렇게 될 것이다'라는 강한 확신을 담고 있다. 이런 반복을 통해 시 전체에 운율감이 생기고, 화자의 간절한 마음이 더욱 강조된다.
 
 '수미상관'이라는 표현 기법도 중요하다. 수미상관이란 첫 부분과 끝 부분이 비슷한 구조를 가지는 것을 말한다. 1연과 5연이 "그리운 그의 \textasciitilde{} 다시 찾을 수 없어도"로 시작하여 비슷한 패턴을 보인다. 이를 통해 시에 안정감을 주면서도 주제 의식을 더욱 강조하게 된다.
@@ -2991,43 +3071,43 @@
 또한 '대구법'이 사용되었다. 대구법이란 비슷한 구조의 문장이나 구를 나란히 배치하여 리듬감을 만들고 의미를 강조하는 표현 방법이다. "눈길 비었거든 바람 담을지네. 바람 비었거든 인정 담을지네."에서 보듯이 "\textasciitilde{} 비었거든 \textasciitilde{} 담을지네"라는 똑같은 문장 구조를 반복하여 리듬감을 만들고 의미를 강조했다. 이런 대구법을 통해 화자가 행인에게 전하고 싶은 메시지가 더욱 또렷하게 전달된다.
 }
 
-\begin{kfQBlock}{1}{문제}
+\begin{kfQBlock}{01}{단답형}
 \kfQStem{"-ㄹ지어이"라는 어미를 계속 사용하는 표현 기법은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{2}{문제}
+\begin{kfQBlock}{02}{단답형}
 \kfQStem{시의 첫 부분과 끝 부분이 비슷한 구조를 가지는 표현 기법을 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{3}{문제}
+\begin{kfQBlock}{03}{단답형}
 \kfQStem{이 시에서는 몇 연과 몇 연이 수미상관 구조를 이루고 있는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{4}{문제}
+\begin{kfQBlock}{04}{단답형}
 \kfQStem{수미상관 기법은 시에 안정감을 주고 무엇을 강조하는 효과가 있는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{5}{문제}
+\begin{kfQBlock}{05}{단답형}
 \kfQStem{비슷한 구조의 문장이나 구를 나란히 배치하여 리듬감을 만드는 표현 방법을 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{6}{문제}
+\begin{kfQBlock}{06}{단답형}
 \kfQStem{이 시에서 "\textasciitilde{}\textasciitilde{} 비었거든 \textasciitilde{}\textasciitilde{} 담을지네"라는 똑같은 문장 구조를 반복한 표현법은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{7}{문제}
+\begin{kfQBlock}{07}{단답형}
 \kfQStem{대구법은 리듬감을 만들고 무엇을 강조하는 효과가 있는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\par\noindent\textbf{\color{kfPrimary} 해설 단원 4}\par\smallskip
-\kfPassageNote{해설 4}{%
+\par\medskip
+\kfPassageNoteNT{%
 이 시에 나오는 여러 시어들은 각각 깊은 의미를 담고 있다. '그'는 화자가 그리워하는 대상으로, 4·19 혁명에서 희생된 젊은 학생들을 상징한다. 단순히 한 개인이 아니라, 정의를 위해 목숨을 바친 모든 젊은 영혼들을 대표한다.
 
 '꽃'은 죽음을 이긴 새로운 생명을 상징한다. 꽃은 아름답고 화사하며, 생명력이 넘치는 존재이다. 화자는 '그'의 정신이 꽃처럼 아름답게 다시 피어날 것이라고 믿고 있다. '숨결'은 보이지는 않지만 살아있는 것을 의미한다. 사람이 숨을 쉬어야 살 수 있듯이, '그'의 정신도 보이지 않는 숨결처럼 이 땅에서 계속 살아갈 것이라는 뜻이다.
@@ -3037,45 +3117,47 @@
 '산', '언덕', '들', '숲'과 같은 자연 공간들은 '그'의 정신이 부활할 무대를 나타낸다. 이런 넓고 푸른 자연 속에서 '그'의 영혼이 영원히 살아갈 것이라는 희망을 담고 있다.
 }
 
-\begin{kfQBlock}{1}{문제}
+\begin{kfQBlock}{01}{단답형}
 \kfQStem{이 시에서 화자가 그리워하는 '그'는 누구를 상징하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{2}{문제}
+\begin{kfQBlock}{02}{단답형}
 \kfQStem{죽음을 이긴 새로운 생명을 상징하며, '그'의 정신이 아름답게 부활한 모습을 나타내는 시어는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{3}{문제}
+\begin{kfQBlock}{03}{단답형}
 \kfQStem{보이지는 않지만 살아있는 '그'의 정신을 의미하는 시어는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{4}{문제}
+\begin{kfQBlock}{04}{단답형}
 \kfQStem{'그'를 그리워하며 그의 흔적을 찾아 헤매는 모든 사람들을 상징하는 시어는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{5}{문제}
+\begin{kfQBlock}{05}{단답형}
 \kfQStem{'그'의 자유로운 정신을 상징하는 시어는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{6}{문제}
+\begin{kfQBlock}{06}{단답형}
 \kfQStem{사람과 사람 사이의 따뜻한 마음을 의미하는 시어는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{7}{문제}
+\begin{kfQBlock}{07}{단답형}
 \kfQStem{'산', '언덕', '들', '숲'과 같은 자연 공간은 무엇을 의미하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
 \kfSecHeader{kfAreaLiterature}{문제}{}
 
-\begin{kfQBlock}{1}{}
-\kfQStem{‘그’의 죽음에 대한 말하는 이의 태도로 적절하지 \uline{않은} 것은 무엇인가?}
+\par\medskip
+\kfBeginMC
+\begin{kfQBlock}{01}{객관식}
+\kfQStem{‘그’의 죽음에 대한 말하는 이의 태도로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 그의 정신과 영혼이 꽃·숨결로 다시 피어날 것이라고 믿는다.
 \kfChoice 죽음을 헛된 것으로 여겨 슬픔과 절망에 잠겨 있다.
@@ -3084,8 +3166,8 @@
 \kfChoice 죽음을 절망으로만 보지 않고 부활의 가능성을 노래한다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
-\kfQStem{이 시에서 ‘꽃’과 ‘숨결’이 공통적으로 상징하는 의미로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{02}{객관식}
+\kfQStem{이 시에서 ‘꽃’과 ‘숨결’이 공통적으로 상징하는 의미로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice ‘그’를 죽음으로 이끈 비극적 원인
 \kfChoice 사라진 듯 보이지만 다시 살아나는 생명의 부활
@@ -3094,7 +3176,7 @@
 \kfChoice 죽은 ‘그’의 정신이 다시 태어난 모습
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{03}{객관식}
 \kfQStem{3연에 나오는 ‘행인’은 어떤 사람이라고 할 수 있는가?}
 \begin{kfChoices}
 \kfChoice '그'의 죽음에 아무 관심이 없는 사람
@@ -3104,8 +3186,8 @@
 \kfChoice '그'의 무덤을 찾아와 슬프게 우는 가족
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
-\kfQStem{‘\textasciitilde{}ㄹ지어이’라는 말의 반복이 만들어 내는 효과로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{04}{객관식}
+\kfQStem{‘\textasciitilde{}ㄹ지어이’라는 말의 반복이 만들어 내는 효과로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 화자가 자신의 주장이 틀렸을 수 있다는 겸손함을 강조한다.
 \kfChoice 같은 종결 어미의 반복으로 운율을 만들어 낸다.
@@ -3114,8 +3196,8 @@
 \kfChoice ‘그’가 꼭 다시 부활할 것이라는 간절한 소망과 강한 믿음을 강조한다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
-\kfQStem{이 시의 수미상관 구조가 만들어 내는 효과로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{05}{객관식}
+\kfQStem{이 시의 수미상관 구조가 만들어 내는 효과로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 시 전체에 안정감을 주고 주제를 한 번 더 강조한다.
 \kfChoice 말하는 이의 마음이 약해졌음을 암시하는 신호 역할을 한다.
@@ -3124,8 +3206,8 @@
 \kfChoice 부활에 대한 화자의 굳은 믿음을 강하게 부각한다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
-\kfQStem{이 시의 ‘그’가 4·19 혁명 때 희생된 젊은 학생들을 상징한다고 할 때, 이 시의 주제로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{06}{객관식}
+\kfQStem{이 시의 ‘그’가 4·19 혁명 때 희생된 젊은 학생들을 상징한다고 할 때, 이 시의 주제로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 자연의 아름다움과 생명력만을 예찬하는 단순한 자연시
 \kfChoice 희생된 이들의 정신이 ‘꽃·숨결’로 부활한다는 굳은 믿음
@@ -3134,7 +3216,7 @@
 \kfChoice 민주주의를 위해 희생된 숭고한 정신에 대한 추모
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{07}{객관식}
 \kfQStem{"눈길 비었거든 바람 담을지네. / 바람 비었거든 인정 담을지네."와 같이 비슷한 문장 구조를 짝지어 운율을 만드는 표현법은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 과장법
@@ -3144,7 +3226,7 @@
 \kfChoice 의인법
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{8}{}
+\begin{kfQBlock}{08}{객관식}
 \kfQStem{이 시에 대한 설명으로 가장 알맞은 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice '그'의 죽음이라는 슬픈 현실에 절망하며 무거운 분위기로 끝을 맺는다.
@@ -3154,20 +3236,20 @@
 \kfChoice '그'와 함께했던 어린 시절의 즐거웠던 일들을 한 가지씩 자세히 회상하고 있다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{09}{서술형}
 \kfQStem{이 시는 “그리운 그의 \textasciitilde{} 없어도 / \textasciitilde{}ㄹ지어이”라는 비슷한 문장 구조를 반복합니다. 이러한 표현이 주는 효과를 서술하시오.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{10}{서술형}
 \kfQStem{이 시에서 말하는 이의 소망이 어떻게 점점 더 깊어지는지 서술하시오.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
+\kfEndMC
 
 
-\kfStartNonlit{비문학 영역 — [과학] 식물은 어떻게 높은 곳까지 물을 끌어올릴까?}
+\kfStartNonlit{[과학] 식물은 어떻게 높은 곳까지 물을 끌어올릴까?}
 
 
-\kfSecHeader{kfAreaNonlit}{지문}{[과학] 식물은 어떻게 높은 곳까지 물을 끌어올릴까?}
 \kfPassageNote{[과학] 식물은 어떻게 높은 곳까지 물을 끌어올릴까?}{%
 식물이 살아가려면 물이 꼭 필요하다. 식물은 잎에서 햇빛을 이용해 스스로 양분을 만드는데, 이때 물은 아주 중요한 재료가 된다. 그런데 여기에는 큰 문제가 하나 있다. 바로 중력이다. 중력은 물을 항상 아래로 끌어당기지만 식물은 위로 자라기 때문에, 중력을 거슬러 물을 위로 올려야만 한다. 그렇다면 키가 큰 나무는 대체 어떻게 꼭대기에 있는 나뭇잎까지 물을 보내는 것일까?
 
@@ -3183,8 +3265,7 @@
 }
 
 
-\kfSecHeader{kfAreaNonlit}{활동}{어휘 학습}
-\noindent\textit{\small 다음 표의 '의미'를 읽고, 그에 해당하는 '어휘'를 지문에서 찾아 적으시오.}\par\medskip
+\kfActivityBg \par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 다음 표의 '의미'를 읽고, 그에 해당하는 '어휘'를 지문에서 찾아 적으시오.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
 \begin{kfVocab}
 \kfVocabItem{1}{식물이 살아가는 데 필요한 영양소}
 \kfVocabItem{2}{어떤 것을 만드는 데 필요한 것}
@@ -3202,8 +3283,10 @@
 \kfVocabItem{14}{고리가 여러 개 연결된 모양의 물건}
 \end{kfVocab}
 
-\kfSecHeader{kfAreaNonlit}{활동}{비문학 문장 독해}
-\noindent\textit{\small 지문을 문장 단위로 정독하면서, 문장별로 주어진 물음에 답해 보자.}\par\medskip
+\kfActivityBg \par\needspace{15\baselineskip}
+\kfSecHeader{kfAreaNonlit}{활동}{문장 독해}
+\par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 지문을 문장 단위로 정독하면서, 문장별로 주어진 물음에 답해 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfBeginMC
 \begin{kfSentenceUnit}{1}{식물이 살아가려면 물이 꼭 필요하다.}
 \kfSentQ{1.}{누가 살아가려면 물이 필요한가?}
 \begin{kfChoices}
@@ -3775,40 +3858,47 @@
 \end{kfChoices}
 \end{kfSentenceUnit}
 
-\kfSecHeader{kfAreaNonlit}{활동}{구조도}
-\noindent\textit{\small 글의 흐름을 살펴보고, 구조도의 빈칸을 알맞게 채워 보자.}\par\medskip
-\par\medskip\needspace{6\baselineskip}
-\begin{tcolorbox}[enhanced, breakable=false,
+\kfEndMC
+
+\kfActivityBg \par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 글의 흐름을 살펴보고, 구조도의 빈칸을 알맞게 채워 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\par\medskip\needspace{8\baselineskip}
+\begin{tcolorbox}[enhanced, breakable=true,
   colback=kfPaper, colframe=kfRule, boxrule=0.4pt, arc=2pt,
-  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
   title={\footnotesize\bfseries\color{kfMute} 글의 구조도},
   coltitle=kfMute, colbacktitle=kfPrimaryLight!40,
   attach boxed title to top left={yshift=-1.5mm, xshift=6pt},
   boxed title style={colframe=kfRule, boxrule=0.3pt, arc=1pt}]
-\setstretch{1.4}\footnotesize
-지침: 글의 전체적인 논리 흐름을 파악하며 빈칸에 알맞은 내용을 채우시오. \\
-
-\noindent \textbullet\ 1문단: 질문 - 나무는 어떻게 물을 위로 올릴까? \\
-\noindent \quad\textbullet\ 문제 상황: ( ① )은 물을 아래로 끌어당김 \\
-\noindent \quad\textbullet\ 핵심 질문: 키 큰 나무가 어떻게 꼭대기까지 ( ② )을 보낼까? \\
-\noindent \textbullet\ 2문단: 세 가지 힘의 조화 \\
-\noindent \quad\textbullet\ 나무가 물을 끌어올리는 비결: ( ③ ) 가지 힘의 조화 \\
-\noindent \quad\textbullet\ 세 가지 힘의 이름: 뿌리압, ( ④ ) 현상, 증산 작용 \\
-\noindent \textbullet\ 3-5문단: 세 가지 힘의 원리 \\
-\noindent \quad\textbullet\ 힘 1: ( ⑤ ) (밀어 올리는 힘) \\
-\noindent \quad\quad\textbullet\ 원리: 뿌리 안과 밖의 ( ⑥ ) 차이로 물이 들어와 압력 발생 \\
-\noindent \quad\textbullet\ 힘 2: 모세관 현상 (타고 올라가는 힘) \\
-\noindent \quad\quad\textbullet\ 원리: 가는 ( ⑦ ) 벽에 물 분자가 달라붙어 올라감 \\
-\noindent \quad\textbullet\ 힘 3: ( ⑧ ) (끌어당기는 힘) \\
-\noindent \quad\quad\textbullet\ 원리: ( ⑨ )에서 물이 수증기로 빠져나가면서 연결된 물줄기를 당김 \\
-\noindent \quad\quad\textbullet\ 특징: 가장 ( ⑩ ) 힘 \\
-\noindent \textbullet\ 6문단: 결론 \\
-\noindent \quad\textbullet\ 최종 정리: 세 가지 힘을 ( ⑪ )롭게 이용하여 꼭대기까지 물을 보냄 \\
+\footnotesize\setstretch{1.3}
+\renewcommand{\arraystretch}{1.35}
+\arrayrulecolor{kfRule}
+\noindent\begin{tabularx}{\linewidth}{|>{\centering\arraybackslash}p{1.6cm}|>{\raggedright\arraybackslash}p{3.4cm}|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor{kfPrimaryLight!40}\textbf{\color{kfPrimary}단} & \textbf{\color{kfPrimary}항목} & \textbf{\color{kfPrimary}내용} \\\hline
+\multirow{2}{*}{1문단} & 문제 상황 & ( ① )은 물을 아래로 끌어당김 \\\cline{2-3}
+ & 핵심 질문 & 키 큰 나무가 어떻게 꼭대기까지 ( ② )을 보낼까? \\\cline{2-3}
+\hline
+\multirow{2}{*}{2문단} & 나무가 물을 끌어올리는 비결 & ( ③ ) 가지 힘의 조화 \\\cline{2-3}
+ & 세 가지 힘의 이름 & 뿌리압, ( ④ ) 현상, 증산 작용 \\\cline{2-3}
+\hline
+\multirow{7}{*}{3-5문단: 세 가지 힘의 원리} & 힘 1 & ( ⑤ ) (밀어 올리는 힘) \\\cline{2-3}
+ & 원리 & 뿌리 안과 밖의 ( ⑥ ) 차이로 물이 들어와 압력 발생 \\\cline{2-3}
+ & 힘 2 & 모세관 현상 (타고 올라가는 힘) \\\cline{2-3}
+ & 원리 & 가는 ( ⑦ ) 벽에 물 분자가 달라붙어 올라감 \\\cline{2-3}
+ & 힘 3 & ( ⑧ ) (끌어당기는 힘) \\\cline{2-3}
+ & 원리 & ( ⑨ )에서 물이 수증기로 빠져나가면서 연결된 물줄기를 당김 \\\cline{2-3}
+ & 특징 & 가장 ( ⑩ ) 힘 \\\cline{2-3}
+\hline
+6문단 & 최종 정리 & 세 가지 힘을 ( ⑪ )롭게 이용하여 꼭대기까지 물을 보냄 \\\hline
+\end{tabularx}
+\arrayrulecolor{black}
 \end{tcolorbox}\par\medskip
 \kfSecHeader{kfAreaNonlit}{문제}{}
 
-\begin{kfQBlock}{1}{}
-\kfQStem{윗글의 중심 내용으로 적절하지 \uline{않은} 것은?}
+\par\medskip
+\kfBeginMC
+\begin{kfQBlock}{01}{객관식}
+\kfQStem{윗글의 중심 내용으로 적절하지 \uline{\underline{않은}} 것은?}
 \begin{kfChoices}
 \kfChoice 식물이 중력을 이기고 물을 위로 끌어올리는 원리
 \kfChoice 세상에서 가장 키가 큰 나무들의 종류와 분류 기준
@@ -3817,7 +3907,7 @@
 \kfChoice 뿌리의 삼투압·줄기의 모세관 현상·잎의 증산 작용이 함께 작동하는 과정
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{02}{객관식}
 \kfQStem{윗글의 내용과 일치하지 \uline{않는} 것은?}
 \begin{kfChoices}
 \kfChoice 식물은 양분을 만들 때 물을 재료로 사용한다.
@@ -3827,7 +3917,7 @@
 \kfChoice 식물은 세 가지 힘을 조화롭게 사용하여 물을 운반한다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{03}{객관식}
 \kfQStem{흙 속의 물이 식물의 뿌리 안으로 저절로 들어오는 이유는 무엇인가?}
 \begin{kfChoices}
 \kfChoice 뿌리가 펌프처럼 물을 빨아들이기 때문에
@@ -3837,8 +3927,8 @@
 \kfChoice 중력이 흙 속의 물을 뿌리 쪽으로 밀어주기 때문에
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
-\kfQStem{윗글을 통해 알 수 있는 내용이 \uline{아닌} 것은?}
+\begin{kfQBlock}{04}{객관식}
+\kfQStem{윗글을 통해 알 수 있는 내용이 \uline{\underline{아닌}} 것은?}
 \begin{kfChoices}
 \kfChoice 식물이 물을 위로 올리는 데는 중력이 방해가 된다.
 \kfChoice 세상에서 가장 키가 큰 나무는 세쿼이아이다.
@@ -3847,7 +3937,7 @@
 \kfChoice 뿌리압만으로는 키 큰 나무 꼭대기까지 물을 보낼 수 없다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{05}{객관식}
 \kfQStem{<보기>의 현상을 일으키는 가장 핵심적인 식물의 작용은 무엇인가?}
 \begin{kfEvidence}햇빛이 잘 드는 창가에 둔 화분의 나뭇잎에 비닐봉지를 씌우고 묶어두었더니, 잠시 후 봉지 안쪽에 물방울이 맺혔다.\end{kfEvidence}
 \begin{kfChoices}
@@ -3858,42 +3948,48 @@
 \kfChoice 중력 거스르기
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{06}{단답형}
 \kfQStem{식물이 살아가기 위해 꼭 필요한 것은 무엇인가요?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{07}{단답형}
 \kfQStem{지구에 있는 모든 물체를 아래로 끌어당기는 힘은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{08}{단답형}
 \kfQStem{세상에서 가장 키가 큰 나무로 소개된 나무의 이름은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{09}{단답형}
 \kfQStem{흙 속의 물이 뿌리 안으로 저절로 들어오면서 물줄기를 위로 밀어 올리는 힘은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{10}{단답형}
 \kfQStem{액체가 아주 가는 관을 따라 저절로 올라가는 현상을 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{11}{서술형}
 \kfQStem{키 큰 나무가 물을 꼭대기까지 보낼 수 있는 세 가지 힘의 이름을 쓰고, 각각의 힘이 주로 작용하는 나무의 부위를 서술하시오.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
+\kfEndMC
 
 
 
 \clearpage
 
 \kfChapterCover{4}{러셀1 (챕터4)}{Chapter 4}{이번 챕터의 학습 내용을 시작합니다.}
+\begin{kfChapterAreaList}
+\kfChapterAreaItem{문법}{kfAreaGrammar}{움직임과 상태를 나타내는 말 (동사, 형용사)}
+\kfChapterAreaItem{개념}{kfAreaConcept}{조선 시대의 노래, 시조}
+\kfChapterAreaItem{문학}{kfAreaLiterature}{「강호사시가」}
+\kfChapterAreaItem{비문학}{kfAreaNonlit}{[기술] 가상과 현실의 만남, 가상현실과 증강현실}
+\end{kfChapterAreaList}
 
-\kfStartGrammar{문법 영역 — 움직임과 상태를 나타내는 말 (동사, 형용사)}
+\kfStartGrammar{움직임과 상태를 나타내는 말 (동사, 형용사)}
 
 
-\kfSecHeader{kfAreaGrammar}{개념}{움직임과 상태를 나타내는 말 (동사, 형용사)}
-
+\kfPassageNoteNT{%
 우리말 문장에서 주어의 움직임이나 상태를 설명해 주는 말들이 있다. 이 말들은 문장의 끝부분에 와서 '어찌하다' 또는 '어떠하다'라는 뜻을 나타낸다. 이 단어들은 문장에서 쓰일 때 상황에 맞게 끝 부분의 모양이 바뀐다. 이렇게 모양이 바뀌는 말들을 '용언'이라고 부른다. 용언에는 크게 두 가지 종류가 있는데, 바로 동사와 형용사이다.
 
 먼저 동사는 사람이나 사물의 움직임이나 행동을 나타내는 말이다. '어찌하다'에 해당하는 말이라고 생각하면 쉽다. 예를 들어 '아이가 밥을 먹다', '새가 하늘을 날다', '동생이 그림을 그리다' 같은 문장에서 '먹다', '날다', '그리다'가 바로 동사이다. '가다', '오다', '공부하다', '자다'처럼 우리가 하는 대부분의 행동이 동사에 속한다.
@@ -3908,9 +4004,9 @@
 \item 형용사 — '예쁘다·높다·푸르다'(상태)
 \item 구분(현재형 검사) — '먹는다(o)' / '예쁜다(x)'
 \end{itemize}
+}
 
-\kfSecHeader{kfAreaGrammar}{활동}{내용 확인}
-\noindent\textit{\small 아래 표의 빈칸에 알맞은 말을 채워 문법 내용을 확인해 보자.}\par\medskip
+\kfActivityBg \par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 아래 표의 빈칸에 알맞은 말을 채워 문법 내용을 확인해 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
 * 움직임과 상태를 나타내는 말, 용언 *
 
 아래 표의 빈칸을 채우며 동사와 형용사의 개념과 차이점을 알아보자. 
@@ -3919,7 +4015,7 @@
 \noindent\begin{adjustbox}{max width=\linewidth, center}
 \renewcommand{\arraystretch}{1.45}
 \arrayrulecolor{kfRule}
-\begin{tabular}{|>{\raggedright\arraybackslash}p{\dimexpr 0.1856\linewidth-12pt\relax}|>{\raggedright\arraybackslash}p{\dimexpr 0.5052\linewidth-12pt\relax}|>{\raggedright\arraybackslash}p{\dimexpr 0.3093\linewidth-12pt\relax}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{\dimexpr 0.1511\linewidth-12pt\relax}|>{\raggedright\arraybackslash}p{\dimexpr 0.4466\linewidth-12pt\relax}|>{\raggedright\arraybackslash}p{\dimexpr 0.4024\linewidth-12pt\relax}|}
 \hline
 \rowcolor{kfPrimaryLight!50}\textbf{\color{kfPrimary} 구 분} & \textbf{\color{kfPrimary} 설 명} & \textbf{\color{kfPrimary} 예 시} \\\hline
 [ ① \_\_\_\_\_\_ ] & 사람이나 사물의 움직임이나 행동을 나타내는 말 ('어찌하다') & 먹다, 날다, 그리다, 가다 \\\hline
@@ -3930,8 +4026,9 @@
 \arrayrulecolor{black}
 \end{adjustbox}\par\medskip
 
-\kfSecHeader{kfAreaGrammar}{활동}{분석 훈련}
-\noindent\textit{\small  동사, 형용사 찾기 훈련! 문장에 쓰인 동사와 형용사를 모두 찾아 ‘-다’로 끝나는 원래 모습(기본형)으로 써 보자.}\par\medskip
+\kfActivityBg \kfSecHeader{kfAreaGrammar}{활동}{분석 훈련}
+\par\kfMaybeNeedspace{24\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk}  동사, 형용사 찾기 훈련! 문장에 쓰인 동사와 형용사를 모두 찾아 ‘-다’로 끝나는 원래 모습(기본형)으로 써 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfBeginMC
 \begin{enumerate}[leftmargin=22pt, itemsep=6pt, topsep=4pt, label=\textbf{\arabic*.}]
 \item 귀여운 아기가 잠을 잔다.
 \item 나는 재미있는 영화를 봤다.
@@ -3944,10 +4041,13 @@
 \item 착한 아이가 집으로 온다.
 \item 친구가 밝게 웃는다.
 \end{enumerate}
+\kfEndMC
 
 \kfSecHeader{kfAreaGrammar}{문제}{}
 
-\begin{kfQBlock}{1}{}
+\par\medskip
+\kfBeginMC
+\begin{kfQBlock}{01}{객관식}
 \kfQStem{다음 단어들 중 성격이 \uline{다른} 하나는 무엇인가?}
 \begin{kfChoices}
 \kfChoice 슬프다
@@ -3957,7 +4057,7 @@
 \kfChoice 보다
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{02}{객관식}
 \kfQStem{다음 문장의 굵게 표시된 단어에 대한 설명으로 옳은 것은?}
 \begin{kfChoices}
 \kfChoice 다른 말을 꾸미는 부사다.
@@ -3967,7 +4067,7 @@
 \kfChoice 주인공 역할을 하는 명사다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{03}{객관식}
 \kfQStem{다음 중 ‘움직임’을 나타내는 말이 포함된 문장은?}
 \begin{kfChoices}
 \kfChoice 아기가 잠을 잔다.
@@ -3977,7 +4077,7 @@
 \kfChoice 산이 높다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{04}{객관식}
 \kfQStem{다음 중 성질이나 ‘상태’를 나타내는 말이 포함된 문장은?}
 \begin{kfChoices}
 \kfChoice 바다가 아주 넓다.
@@ -3987,7 +4087,7 @@
 \kfChoice 기차가 역을 떠났다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{05}{객관식}
 \kfQStem{다음 단어들 중 품사의 종류가 나머지와 \uline{다른} 하나는?}
 \begin{kfChoices}
 \kfChoice 높다
@@ -3997,7 +4097,7 @@
 \kfChoice 빠르다
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{06}{객관식}
 \kfQStem{다음 밑줄 친 단어 중 품사가 \uline{다른} 하나는?}
 \begin{kfChoices}
 \kfChoice 새가 \uline{난다}.
@@ -4007,7 +4107,7 @@
 \kfChoice 아기가 \uline{웃는다}.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{07}{객관식}
 \kfQStem{다음 중 현재의 일을 나타내는 '-는다'나 '-ㄴ다'를 붙였을 때 어색한 말은?}
 \begin{kfChoices}
 \kfChoice 가다
@@ -4017,7 +4117,7 @@
 \kfChoice 보다
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{8}{}
+\begin{kfQBlock}{08}{객관식}
 \kfQStem{다음 중 현재의 일을 나타내는 '-는다'나 '-ㄴ다'를 붙였을 때 자연스러운 말은?}
 \begin{kfChoices}
 \kfChoice 높다
@@ -4027,57 +4127,57 @@
 \kfChoice 맛있다
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{09}{단답형}
 \kfQStem{문장에서 쓰일 때 상황에 맞게 끝부분의 모양이 바뀌는 말을 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{10}{단답형}
 \kfQStem{사람이나 사물의 '움직임'이나 '행동'을 나타내는 품사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{11}{단답형}
 \kfQStem{사람이나 사물의 '상태'나 '성질'을 나타내는 품사는 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{12}{단답형}
 \kfQStem{동사는 '어떠하다', '어찌하다' 중 주로 어떤 물음에 대한 답이 되는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{13}{단답형}
 \kfQStem{형용사는 '어떠하다', '어찌하다' 중 주로 어떤 물음에 대한 답이 되는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{14}{단답형}
 \kfQStem{동사와 형용사를 구별할 때, 현재의 일을 나타내는 어떤 말을 붙여보는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{15}{단답형}
 \kfQStem{'예쁘다', '착하다', '시원하다'는 모두 어떤 품사에 속하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{8}{}
+\begin{kfQBlock}{16}{단답형}
 \kfQStem{'달리다', '먹다', '공부하다'는 모두 어떤 품사에 속하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{9}{}
+\begin{kfQBlock}{17}{단답형}
 \kfQStem{'자다', '웃다', '만들다'는 모두 어떤 품사에 속하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{10}{}
+\begin{kfQBlock}{18}{단답형}
 \kfQStem{'높다', '푸르다', '길다'는 모두 어떤 품사에 속하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{19}{서술형}
 \kfQStem{‘기쁘다'는 동사와 형용사 중 무엇일까? 지문에서 배운 구별 방법을 사용하여 그 이유를 간단히 설명하시오.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
+\kfEndMC
 
 
-\kfStartConcept{개념 영역 — 조선 시대의 노래, 시조}
+\kfStartConcept{조선 시대의 노래, 시조}
 
 
-\kfSecHeader{kfAreaConcept}{개념}{조선 시대의 노래, 시조}
-
+\kfPassageNoteNT{%
 시조는 고려 말에 발생하여 조선 시대를 거쳐 오늘날까지 이어지는 우리나라의 대표적인 '정형시(정해진 형식이 있는 시)'이다. 우리 고유의 문학 갈래로, 짧은 형식 속에 다양한 주제를 담아냈다.
 
 시조의 가장 큰 형식적 특징은 '3장(章) 6구(句)'의 정해진 틀을 가진다는 점이다. 첫째 줄을 '초장', 둘째 줄을 '중장', 셋째 줄을 '종장'이라고 부르며(3장), 각 장은 다시 2개의 '구(句)'로 나눌 수 있어 총 6구를 이룬다. 전체 글자 수는 45자 내외로 매우 간결한 형태이다.
@@ -4098,11 +4198,14 @@
 \item 연시조 — 맹사성 「강호사시가」(사계절을 4수로 연결)
 \item 사설시조 — 조선 후기 평민층, 중장이 길게 늘어진 형태
 \end{itemize}
+}
 
 \kfSecHeader{kfAreaConcept}{문제}{}
 
-\begin{kfQBlock}{1}{}
-\kfQStem{지문의 내용으로 보아 ‘시조’에 대한 설명으로 적절하지 \uline{않은} 것은 무엇인가?}
+\par\medskip
+\kfBeginMC
+\begin{kfQBlock}{01}{객관식}
+\kfQStem{지문의 내용으로 보아 ‘시조’에 대한 설명으로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 운율은 있으나 정해진 형식이 없는 자유시의 한 종류이다.
 \kfChoice 초장·중장·종장의 3장 형식을 갖춘다.
@@ -4111,8 +4214,8 @@
 \kfChoice 고려 말에 발생하여 오늘날까지 이어져 온 정형시이다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
-\kfQStem{평시조의 형식적 특징으로 알맞지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{02}{객관식}
+\kfQStem{평시조의 형식적 특징으로 알맞지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 중장이 제한 없이 매우 길어진다.
 \kfChoice 전체 글자 수는 45자 내외이다.
@@ -4121,8 +4224,8 @@
 \kfChoice 3장 6구의 구조를 가진다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
-\kfQStem{시조가 ‘정형시’로서 지켜야 할 규칙으로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{03}{객관식}
+\kfQStem{시조가 ‘정형시’로서 지켜야 할 규칙으로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 종장의 첫 마디는 반드시 3글자로 고정되어야 한다.
 \kfChoice 자연의 아름다움만을 주제로 노래해야 한다는 형식 규정이 있다.
@@ -4131,7 +4234,7 @@
 \kfChoice 한 장은 보통 네 마디씩 4음보로 끊어 읽어야 한다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{04}{객관식}
 \kfQStem{<보기>는 정몽주의 「단심가」이다. 이 시조의 율격을 바르게 설명한 것은 무엇인가?}
 \begin{kfEvidence}이 몸이 / 죽고 죽어 / 일백 번 / 고쳐 죽어\end{kfEvidence}
 \begin{kfChoices}
@@ -4142,8 +4245,8 @@
 \kfChoice 3.3.2조
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
-\kfQStem{시조의 종장에 대한 설명으로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{05}{객관식}
+\kfQStem{시조의 종장에 대한 설명으로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice ‘아아’와 같은 감탄사로 시작하는 것이 정해진 규칙이다.
 \kfChoice 보통 3·5·4·3의 음수율을 정석으로 한다.
@@ -4152,8 +4255,8 @@
 \kfChoice 첫 마디는 3음절로 고정해야 한다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
-\kfQStem{맹사성의 「강호사시가」에 대한 설명으로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{06}{객관식}
+\kfQStem{맹사성의 「강호사시가」에 대한 설명으로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice ‘자연 속 사계절’을 주제로 묶인 연시조이다.
 \kfChoice 조선 후기 평민들이 창작한 사설시조에 해당한다.
@@ -4162,9 +4265,11 @@
 \kfChoice 평시조 4수가 모여 한 작품을 이루는 연시조이다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{07}{객관식}
 \kfQStem{<보기>는 조선 후기에 창작된 작자 미상의 시조이다. 이 시조의 갈래는 무엇인가?}
-\begin{kfEvidence}개를 여라믄이나 기르되 요 개같이 얄미우랴 미운 임 오며는 꼬리를 홰홰 치며 칩뛰락 나리뛰락 반겨서 내닫고 고운 임 오며는 뒷발을 버둥버둥 므르락 나으락 캉캉 짖어서 도라가게 한다 쉰밥이 그릇그릇 난들 너 머길 줄이 이시랴\end{kfEvidence}
+\begin{kfEvidence}개를 여라믄이나 기르되 요 개같이 얄미우랴 \\\relax
+미운 임 오며는 꼬리를 홰홰 치며 칩뛰락 나리뛰락 반겨서 내닫고 고운 임 오며는 뒷발을 버둥버둥 므르락 나으락 캉캉 짖어서 도라가게 한다 \\\relax
+쉰밥이 그릇그릇 난들 너 머길 줄이 이시랴\end{kfEvidence}
 \begin{kfChoices}
 \kfChoice 평시조
 \kfChoice 연시조
@@ -4173,8 +4278,8 @@
 \kfChoice 현대시
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{8}{}
-\kfQStem{사설시조에 대한 설명으로 알맞지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{08}{객관식}
+\kfQStem{사설시조에 대한 설명으로 알맞지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 3장 6구, 45자 내외의 엄격한 형식을 지켰다.
 \kfChoice 주로 평민들에 의해 창작되었다.
@@ -4183,45 +4288,45 @@
 \kfChoice 조선 후기에 주로 창작되었다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{09}{단답형}
 \kfQStem{고려 말에 발생하여 조선 시대를 거쳐 이어진, 정해진 형식이 있는 우리나라의 대표적인 시를 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{10}{단답형}
 \kfQStem{시조는 '초장', '중장', '종장'으로 구성된다. 이를 합쳐 몇 장 구성이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{11}{단답형}
 \kfQStem{시조는 한 장을 네 마디로 끊어 읽는 규칙적인 리듬을 가진다. 이 리듬의 단위를 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{12}{단답형}
 \kfQStem{시조 각 음보의 글자 수가 3글자 혹은 4글자로 반복되는 것을 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{13}{단답형}
 \kfQStem{시조의 3장 중, 형식이 가장 엄격하게 정해져 있는 장은 어디인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
+\begin{kfQBlock}{14}{단답형}
 \kfQStem{시조의 종장에서 첫 번째 음보는 반드시 몇 글자로 고정되어야 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{15}{단답형}
 \kfQStem{하나의 큰 주제 아래 여러 수의 평시조가 연결되어 이루어진 시조의 형식을 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{16}{서술형}
 \kfQStem{'평시조'와 '사설시조'는 형식과 내용 면에서 뚜렷한 차이를 보인다. 두 시조의 형식적 차이점을 <조건>에 맞게 서술하시오.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
+\kfEndMC
 
 
-\kfStartLit{문학 영역 — 작품}
+\kfStartLit{「강호사시가」}
 
 
-\kfSecHeader{kfAreaLiterature}{지문}{작품}
-\kfPassageNote{작품}{%
+\kfPassageNote{}{%
 \textbackslash{}<춘사 (봄 노래)\textbackslash{}> \\[14pt]
 자연에 봄이 오니 깊은 흥이 저절로 난다 \\[4pt]
 시냇가에서 막걸리 마시며 고기를 안주 삼아 \\[4pt]
@@ -4241,8 +4346,10 @@
 }
 
 
-\kfSecHeader{kfAreaLiterature}{활동}{문학 문장 독해}
-\noindent\textit{\small 작품 속 문장을 자세히 읽고, 문장별로 주어진 물음에 답해 보자.}\par\medskip
+\kfActivityBg \par\needspace{15\baselineskip}
+\kfSecHeader{kfAreaLiterature}{활동}{문장 독해}
+\par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 작품 속 문장을 자세히 읽고, 문장별로 주어진 물음에 답해 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfBeginMC
 \begin{kfSentenceUnit}{1}{"자연에 봄이 오니 깊은 흥이 저절로 난다."}
 \kfSentQ{1.}{다음 문장에서 서술어를 기준으로 각각의 주어는 무엇인가? (1) 서술어 '오니'의 주어는 무엇인가?}
 \begin{kfChoices}
@@ -4287,10 +4394,12 @@
 \end{kfChoices}
 \end{kfSentenceUnit}
 
-\kfSecHeader{kfAreaLiterature}{활동}{해설 학습}
-\noindent\textit{\small 작품 해설을 단원별로 읽고, 각 단원에 딸린 물음에 답해 보자.}\par\medskip
-\par\noindent\textbf{\color{kfPrimary} 해설 단원 1}\par\smallskip
-\kfPassageNote{해설 1}{%
+\kfEndMC
+
+\kfActivityBg \kfSecHeader{kfAreaLiterature}{활동}{해설 학습}
+\par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 작품 해설을 단원별로 읽고, 각 단원에 딸린 물음에 답해 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\par\medskip
+\kfPassageNoteNT{%
 「강호사시가」는 맹사성이 쓴 우리나라 최초의 연시조이다. 연시조란 여러 수의 시조를 연결해서 하나의 큰 주제를 노래하는 형식을 말한다. 이 작품은 총 4수로 이루어져 있으며, 봄·여름·가을·겨울 사계절의 아름다움을 차례대로 노래했다.
 
 '강호'는 '강과 호수'라는 뜻으로, 자연을 의미한다. 즉 이 시는 자연 속에서 사계절을 보내며 느끼는 즐거움과 만족감을 표현한 작품이다. 각 계절마다 그 계절에 어울리는 풍경과 놀이를 제시하면서, 자연과 함께하는 삶의 아름다움을 보여준다.
@@ -4298,33 +4407,33 @@
 특히 각 수마다 "자연에 \textasciitilde{}이 오니"로 시작하고 "임금님 덕분이다"로 끝나는 같은 구조를 반복한다. 이런 반복은 시에 운율감을 주면서도 주제 의식을 강조하는 역할을 한다. 자연을 즐기면서도 임금의 은혜를 잊지 않는 조선시대 선비들의 마음가짐을 잘 보여주는 대표적인 작품이다.
 }
 
-\begin{kfQBlock}{1}{문제}
+\begin{kfQBlock}{01}{단답형}
 \kfQStem{향가는 몇 구체, 8구체, 10구체로 나뉘는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{2}{문제}
+\begin{kfQBlock}{02}{단답형}
 \kfQStem{중장(제2장)에서 '갈매기'는 화자와 함께 무엇을 즐기는 대상인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{3}{문제}
+\begin{kfQBlock}{03}{단답형}
 \kfQStem{각 계절 노래(수)는 어떤 말로 끝나는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{undefined}{문제}
+\begin{kfQBlock}{04}{단답형}
 \kfQStem{종장의 마지막 구 '임금 은혜를 이제 더욱 아노이다'에서 화자는 자연 속에 있으면서도 누구의 은혜를 잊지 않고 있는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{5}{문제}
+\begin{kfQBlock}{05}{단답형}
 \kfQStem{이러한 마음가짐은 어느 시대 선비들의 특징인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\par\noindent\textbf{\color{kfPrimary} 해설 단원 2}\par\smallskip
-\kfPassageNote{해설 2}{%
+\par\medskip
+\kfPassageNoteNT{%
 이 시의 내용은 사계절의 흐름에 따라 전개된다. 봄에는 시냇가에서 막걸리를 마시며 물고기를 안주로 삼는 흥겨운 모습을, 여름에는 초가집에서 강바람을 맞으며 더위를 식히는 여유로운 모습을 그린다.
 
 가을에는 살이 오른 물고기들을 보며 작은 배에 그물을 싣고 물 따라 떠다니는 한가로운 모습을, 겨울에는 깊이 쌓인 눈 속에서도 삿갓과 도롱이 차림으로 추위를 즐기는 모습을 보여준다. 이는 단순히 계절의 변화를 묘사한 것이 아니라, 각 계절마다 자연과 함께하는 특별한 즐거움이 있음을 말해준다.
@@ -4332,43 +4441,43 @@
 특히 주목할 점은 화자가 실제로 농사를 짓거나 생계를 위해 고기를 잡는 것이 아니라는 점이다. 그물을 "물 따라 흘러가며" 던져두는 모습에서 알 수 있듯이, 이는 풍류를 즐기기 위한 놀이이다. 이처럼 화자는 자연 속에서 여유롭고 한가로운 삶을 즐기고 있으며, 이러한 평안한 삶이 모두 임금의 은혜 덕분이라고 생각하고 있다.
 }
 
-\begin{kfQBlock}{1}{문제}
+\begin{kfQBlock}{01}{단답형}
 \kfQStem{봄에 시냇가에서 막걸리를 마실 때 안주로 삼은 것은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{2}{문제}
+\begin{kfQBlock}{02}{단답형}
 \kfQStem{여름에 말하는 이는 어디에서 강바람을 맞으며 더위를 식혔는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{3}{문제}
+\begin{kfQBlock}{03}{단답형}
 \kfQStem{가을에 말하는 이는 작은 배에 무엇을 싣고 물 따라 떠다녔는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{4}{문제}
+\begin{kfQBlock}{04}{단답형}
 \kfQStem{겨울에 말하는 이는 눈 속에서 무엇과 무엇을 착용했는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{5}{문제}
+\begin{kfQBlock}{05}{단답형}
 \kfQStem{가을에 그물을 배에 싣고 떠다닌 것은 생계를 위한 일이었는가, 놀이였는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{6}{문제}
+\begin{kfQBlock}{06}{단답형}
 \kfQStem{해설문에 따르면, 화자는 자연 속에서 한가롭게 무엇을 즐기고 있는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{7}{문제}
+\begin{kfQBlock}{07}{단답형}
 \kfQStem{화자는 땀을 식히기 위해 무슨 바람을 쐬었는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\par\noindent\textbf{\color{kfPrimary} 해설 단원 3}\par\smallskip
-\kfPassageNote{해설 3}{%
+\par\medskip
+\kfPassageNoteNT{%
 이 시에 나오는 여러 시어들은 각각 특별한 의미를 담고 있다. '막걸리'는 화자의 소박하고 서민적인 생활을 보여준다. 비싼 술이 아닌 막걸리를 마시는 것에서 화자가 검소한 생활을 하고 있음을 알 수。
 
 '초가집'은 화자가 사는 집으로, 기와집이 아닌 볏짚으로 지붕을 덮은 소박한 집을 의미한다. '작은 배'와 '그물'은 화자가 강에서 고기잡이를 하는 모습을 보여주지만, 실제로는 생계를 위한 것이 아니라 자연을 즐기기 위한 풍류 활동임을 나타낸다.
@@ -4378,35 +4487,37 @@
 무엇보다 중요한 것은 '임금의 은혜'라는 표현이다. 화자는 자연에서 누리는 모든 즐거움의 근원을 임금의 은혜로 돌리고 있다. 이는 자연과 정치 현실이 따로 분리된 것이 아니라, 임금의 다스림이라는 하나의 질서 안에 있다고 보는 조선시대 선비들의 세계관을 보여준다.
 }
 
-\begin{kfQBlock}{1}{문제}
+\begin{kfQBlock}{01}{단답형}
 \kfQStem{화자가 나귀를 타고 들어간 곳은 깊은 산속의 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{2}{문제}
+\begin{kfQBlock}{02}{단답형}
 \kfQStem{'바람', '명월'은 화자가 즐기는 무엇을 상징하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{3}{문제}
+\begin{kfQBlock}{03}{단답형}
 \kfQStem{가난해도 마음이 편안하고 도를 즐기며 사는 태도를 한자성어로 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{4}{문제}
+\begin{kfQBlock}{04}{단답형}
 \kfQStem{화자는 자연의 흥취에 젖어 나귀를 타고 산천을 구경하고 있는데, 이는 무엇을 돌리고 있는 것과 같은가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
-\begin{kfQBlock}{5}{문제}
+\begin{kfQBlock}{05}{단답형}
 \kfQStem{자신의 분수를 알고 만족하며 사는 삶의 태도를 한자성어로 무엇이라고 하는가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
 
 \kfSecHeader{kfAreaLiterature}{문제}{}
 
-\begin{kfQBlock}{1}{}
-\kfQStem{이 시의 각 계절 노래마다 공통적으로 반복되는 내용으로 적절하지 \uline{않은} 것은 무엇인가?}
+\par\medskip
+\kfBeginMC
+\begin{kfQBlock}{01}{객관식}
+\kfQStem{이 시의 각 계절 노래마다 공통적으로 반복되는 내용으로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 친구들과 어울려 큰 잔치를 벌이며 즐기는 모습
 \kfChoice ‘이 몸이 한가하옴도 역군은이샷다’와 같은 종장의 반복
@@ -4415,8 +4526,8 @@
 \kfChoice 자연 속에서의 한가로움이 임금의 은혜 덕분이라는 생각
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
-\kfQStem{이 시에 나타난 말하는 이의 삶의 태도로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{02}{객관식}
+\kfQStem{이 시에 나타난 말하는 이의 삶의 태도로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 자연을 개발하여 더 편리한 삶을 만들려는 적극적 개척의 태도
 \kfChoice 자연의 사계절을 즐기며 한가로움을 누리려는 태도
@@ -4425,7 +4536,7 @@
 \kfChoice 자연 속에서 소박하게 사는 삶에 만족하는 태도
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{03}{객관식}
 \kfQStem{<추사(가을 노래)>에서 “작은 배에 그물을 싣고 물 따라 흘러가며”라는 구절을 통해 알 수 있는 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 가족의 생계를 위해 부지런히 고기를 잡는 어부의 모습
@@ -4435,7 +4546,7 @@
 \kfChoice 큰 배를 살 돈이 없어 작은 배를 탈 수밖에 없는 모습
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{04}{객관식}
 \kfQStem{말하는 이가 자연 속에서 입고 사용하는 물건으로, 그의 소박한 삶을 보여주는 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 비단옷과 옥으로 만든 갓
@@ -4445,8 +4556,8 @@
 \kfChoice 가죽으로 만든 신발
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
-\kfQStem{<하사(여름 노래)>에서 ‘믿음직한 강물’이라는 표현에 담긴 의미로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{05}{객관식}
+\kfQStem{<하사(여름 노래)>에서 ‘믿음직한 강물’이라는 표현에 담긴 의미로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 시원한 바람을 보내 주어 더위를 식혀 주는 강물에 대한 신뢰
 \kfChoice 강물에 대한 믿음을 가져야 복을 받는다는 미신적 사고
@@ -4455,8 +4566,8 @@
 \kfChoice 변함없이 흐르며 화자에게 안식을 주는 자연에 대한 친근감
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{6}{}
-\kfQStem{이 시에 대한 설명으로 알맞지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{06}{객관식}
+\kfQStem{이 시에 대한 설명으로 알맞지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 사계절의 흐름에 따라 시를 전개하고 있다.
 \kfChoice 각 계절마다 자연을 즐기는 모습이 나타난다.
@@ -4465,7 +4576,7 @@
 \kfChoice 비슷한 문장 구조를 반복하여 운율을 형성하고 있다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{7}{}
+\begin{kfQBlock}{07}{객관식}
 \kfQStem{<추사(가을 노래)>에서 "물고기마다 살이 올랐다"는 표현은 가을의 어떤 모습을 보여주는가?}
 \begin{kfChoices}
 \kfChoice 쓸쓸함
@@ -4475,8 +4586,8 @@
 \kfChoice 깨끗함
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{8}{}
-\kfQStem{이 시가 우리나라 시의 역사에서 중요한 작품으로 평가받는 이유로 적절하지 \uline{않은} 것은 무엇인가?}
+\begin{kfQBlock}{08}{객관식}
+\kfQStem{이 시가 우리나라 시의 역사에서 중요한 작품으로 평가받는 이유로 적절하지 \uline{\underline{않은}} 것은 무엇인가?}
 \begin{kfChoices}
 \kfChoice 임금을 강하게 비판하는 정치 풍자시의 시초이기 때문이다.
 \kfChoice 자연 친화적 삶의 태도를 보여 주는 강호 시조의 출발점이 되기 때문이다.
@@ -4485,20 +4596,20 @@
 \kfChoice 여러 수의 시조가 하나의 제목 아래 묶인 최초의 연시조이기 때문이다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{09}{서술형}
 \kfQStem{이 시에서 말하는 이가 소박하지만 만족스러운 삶을 살고 있음을 보여주는 모습 두 가지를 찾아 서술하시오.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{10}{서술형}
 \kfQStem{이 시의 각 계절 노래는 비슷한 구조로 되어 있다. 그 공통적인 구조를 세 단계로 나누어 서술하시오.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
+\kfEndMC
 
 
-\kfStartNonlit{비문학 영역 — [기술] 가상과 현실의 만남, 가상현실과 증강현실}
+\kfStartNonlit{[기술] 가상과 현실의 만남, 가상현실과 증강현실}
 
 
-\kfSecHeader{kfAreaNonlit}{지문}{[기술] 가상과 현실의 만남, 가상현실과 증강현실}
 \kfPassageNote{[기술] 가상과 현실의 만남, 가상현실과 증강현실}{%
 영화나 게임 속 주인공처럼 새로운 세상을 탐험하거나, 내 방에 공룡이 나타나는 모습을 상상해 본 적이 있는가? 이러한 상상을 현실로 만드는 기술이 바로 가상현실(Virtual Reality, 이하 VR)과 증강현실(Augmented Reality, 이하 AR)이다. 두 기술은 실감 나는 체험을 제공한다는 점에서는 같지만, 작동 방식에는 분명한 차이가 있다. 가상현실과 증강현실은 무엇이며, 어떻게 다를까?
 
@@ -4510,8 +4621,7 @@
 }
 
 
-\kfSecHeader{kfAreaNonlit}{활동}{어휘 학습}
-\noindent\textit{\small 다음 표의 '의미'를 읽고, 그에 해당하는 '어휘'를 지문에서 찾아 적으시오.}\par\medskip
+\kfActivityBg \par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 다음 표의 '의미'를 읽고, 그에 해당하는 '어휘'를 지문에서 찾아 적으시오.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
 \begin{kfVocab}
 \kfVocabItem{1}{실제로 겪는 듯한 느낌}
 \kfVocabItem{2}{컴퓨터 기술로 만든 가짜 현실}
@@ -4528,8 +4638,10 @@
 \kfVocabItem{13}{서로 나뉘어 있는 것들 사이의 구분}
 \end{kfVocab}
 
-\kfSecHeader{kfAreaNonlit}{활동}{비문학 문장 독해}
-\noindent\textit{\small 지문을 문장 단위로 정독하면서, 문장별로 주어진 물음에 답해 보자.}\par\medskip
+\kfActivityBg \par\needspace{15\baselineskip}
+\kfSecHeader{kfAreaNonlit}{활동}{문장 독해}
+\par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 지문을 문장 단위로 정독하면서, 문장별로 주어진 물음에 답해 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\kfBeginMC
 \begin{kfSentenceUnit}{1}{영화나 게임 속 주인공처럼 새로운 세상을 탐험하거나, 내 방에 공룡이 나타나는 모습을 상상해 본 적이 있는가?}
 \kfSentQ{1.}{이 문장에서 제시된 두 가지 상상의 예는 무엇인가?}
 \begin{kfChoices}
@@ -4854,42 +4966,50 @@
 \end{kfChoices}
 \end{kfSentenceUnit}
 
-\kfSecHeader{kfAreaNonlit}{활동}{구조도}
-\noindent\textit{\small 글의 흐름을 살펴보고, 구조도의 빈칸을 알맞게 채워 보자.}\par\medskip
-\par\medskip\needspace{6\baselineskip}
-\begin{tcolorbox}[enhanced, breakable=false,
+\kfEndMC
+
+\kfActivityBg \par\kfMaybeNeedspace{32\baselineskip}\noindent{\kfTipMark\,\,}{\small\color{kfInk} 글의 흐름을 살펴보고, 구조도의 빈칸을 알맞게 채워 보자.}\par\nopagebreak[4]\smallskip\nopagebreak[4]
+\par\medskip\needspace{8\baselineskip}
+\begin{tcolorbox}[enhanced, breakable=true,
   colback=kfPaper, colframe=kfRule, boxrule=0.4pt, arc=2pt,
-  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
   title={\footnotesize\bfseries\color{kfMute} 글의 구조도},
   coltitle=kfMute, colbacktitle=kfPrimaryLight!40,
   attach boxed title to top left={yshift=-1.5mm, xshift=6pt},
   boxed title style={colframe=kfRule, boxrule=0.3pt, arc=1pt}]
-\setstretch{1.4}\footnotesize
-지침: 글의 전체적인 논리 흐름을 파악하며 빈칸에 알맞은 내용을 채우시오. \\
-
-\noindent \textbullet\ 1문단: 주제 소개 \\
-\noindent \quad\textbullet\ 공통점: 상상을 현실로 만드는 ( ① ) 체험 기술 \\
-\noindent \quad\textbullet\ 차이점: ( ② ) 방식의 차이 \\
-\noindent \quad\textbullet\ 질문: 두 기술은 무엇이며 어떻게 다른가? \\
-\noindent \textbullet\ 2문단: ( ③ ) (VR) \\
-\noindent \quad\textbullet\ 개념: 완전히 ( ④ )된 새로운 디지털 세상 \\
-\noindent \quad\textbullet\ 체험 방식: 머리에 쓰는 기기로 시야를 완전히 ( ⑤ ) \\
-\noindent \quad\textbullet\ 특징: 높은 ( ⑥ ) \\
-\noindent \quad\textbullet\ 예시: 바닷속 탐험, 가상 여행 \\
-\noindent \textbullet\ 3문단: ( ⑦ ) (AR) \\
-\noindent \quad\textbullet\ 개념: ( ⑧ ) 세계 위에 가상의 정보를 ( ⑨ ) 기술 \\
-\noindent \quad\textbullet\ 체험 방식: 스마트폰 ( ⑩ )로 실제 환경을 비춤 \\
-\noindent \quad\textbullet\ 특징: ( ⑪ )을 유지하며 정보 획득 \\
-\noindent \quad\textbullet\ 예시: 포켓몬 잡는 게임, 가구 배치 앱 \\
-\noindent \textbullet\ 4문단: 가상 현실과 증강 현실의 차이점과 활용 및 전망 \\
-\noindent \quad\textbullet\ 핵심 차이점 \\
-\noindent \quad\quad\textbullet\ 가상현실: 현실과 ( ⑫ )된 새로운 공간 창조 \\
-\noindent \quad\quad\textbullet\ 증강현실: 현실 세계를 ( ⑬ ) \\
-\noindent \quad\textbullet\ 미래 전망: 게임을 넘어 교육, 의료 등 다양한 분야로 발전 \\
+\footnotesize\setstretch{1.3}
+\renewcommand{\arraystretch}{1.35}
+\arrayrulecolor{kfRule}
+\noindent\begin{tabularx}{\linewidth}{|>{\centering\arraybackslash}p{1.6cm}|>{\raggedright\arraybackslash}p{3.4cm}|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor{kfPrimaryLight!40}\textbf{\color{kfPrimary}단} & \textbf{\color{kfPrimary}항목} & \textbf{\color{kfPrimary}내용} \\\hline
+\multirow{3}{*}{1문단} & 공통점 & 상상을 현실로 만드는 ( ① ) 체험 기술 \\\cline{2-3}
+ & 차이점 & ( ② ) 방식의 차이 \\\cline{2-3}
+ & 질문 & 두 기술은 무엇이며 어떻게 다른가? \\\cline{2-3}
+\hline
+\multirow{4}{*}{2문단} & 개념 & 완전히 ( ④ )된 새로운 디지털 세상 \\\cline{2-3}
+ & 체험 방식 & 머리에 쓰는 기기로 시야를 완전히 ( ⑤ ) \\\cline{2-3}
+ & 특징 & 높은 ( ⑥ ) \\\cline{2-3}
+ & 예시 & 바닷속 탐험, 가상 여행 \\\cline{2-3}
+\hline
+\multirow{4}{*}{3문단} & 개념 & ( ⑧ ) 세계 위에 가상의 정보를 ( ⑨ ) 기술 \\\cline{2-3}
+ & 체험 방식 & 스마트폰 ( ⑩ )로 실제 환경을 비춤 \\\cline{2-3}
+ & 특징 & ( ⑪ )을 유지하며 정보 획득 \\\cline{2-3}
+ & 예시 & 포켓몬 잡는 게임, 가구 배치 앱 \\\cline{2-3}
+\hline
+\multirow{4}{*}{4문단} &  & 핵심 차이점 \\\cline{2-3}
+ & 가상현실 & 현실과 ( ⑫ )된 새로운 공간 창조 \\\cline{2-3}
+ & 증강현실 & 현실 세계를 ( ⑬ ) \\\cline{2-3}
+ & 미래 전망 & 게임을 넘어 교육, 의료 등 다양한 분야로 발전 \\\cline{2-3}
+\hline
+\end{tabularx}
+\arrayrulecolor{black}
 \end{tcolorbox}\par\medskip
 \kfSecHeader{kfAreaNonlit}{문제}{}
 
-\begin{kfQBlock}{1}{}
+\par\medskip
+\kfBeginMC
+\begin{kfQBlock}{01}{객관식}
 \kfQStem{윗글의 내용과 일치하지 \uline{않는} 것은?}
 \begin{kfChoices}
 \kfChoice 가상현실과 증강현실은 모두 실감 나는 체험을 제공한다.
@@ -4899,8 +5019,8 @@
 \kfChoice 증강현실은 현실감을 유지하면서 추가적인 정보를 얻을 수 있다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
-\kfQStem{가상현실(VR)과 증강현실(AR)의 차이점에 대한 설명으로 적절하지 \uline{않은} 것은?}
+\begin{kfQBlock}{02}{객관식}
+\kfQStem{가상현실(VR)과 증강현실(AR)의 차이점에 대한 설명으로 적절하지 \uline{\underline{않은}} 것은?}
 \begin{kfChoices}
 \kfChoice VR은 현실과 단절된 가상 공간을, AR은 현실이 확장된 공간을 만든다.
 \kfChoice VR은 최신 기술이고 AR은 그보다 훨씬 오래된 기술이다.
@@ -4909,7 +5029,7 @@
 \kfChoice VR은 머리에 쓰는 기기를 통해 가상 공간을 체험하게 한다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{03}{객관식}
 \kfQStem{<보기>의 상황에 사용된 기술은 무엇인가?}
 \begin{kfEvidence}나는 박물관에서 공룡 뼈 화석을 스마트폰 카메라로 비추었다. 그랬더니 화면 속 뼈 위에 살이 붙고 피부가 생기면서, 살아있는 공룡이 눈앞에서 움직이는 것처럼 보였다.\end{kfEvidence}
 \begin{kfChoices}
@@ -4920,8 +5040,8 @@
 \kfChoice 홀로그램
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
-\kfQStem{다음 중 ‘가상현실(VR)’ 기술의 예시로 적절하지 \uline{않은} 것은?}
+\begin{kfQBlock}{04}{객관식}
+\kfQStem{다음 중 ‘가상현실(VR)’ 기술의 예시로 적절하지 \uline{\underline{않은}} 것은?}
 \begin{kfChoices}
 \kfChoice 스마트폰 카메라로 길거리를 비추며 포켓몬을 잡는 게임
 \kfChoice HMD를 쓰고 우주 공간을 떠다니는 시뮬레이션을 체험하는 것
@@ -4930,8 +5050,8 @@
 \kfChoice 특수한 안경을 쓰고 깊은 바닷속을 탐험하는 체험
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
-\kfQStem{윗글을 통해 알 수 있는 내용으로 적절하지 \uline{않은} 것은?}
+\begin{kfQBlock}{05}{객관식}
+\kfQStem{윗글을 통해 알 수 있는 내용으로 적절하지 \uline{\underline{않은}} 것은?}
 \begin{kfChoices}
 \kfChoice 가상현실과 증강현실은 작동 원리가 같은 기술이어서 굳이 구분할 필요가 없다.
 \kfChoice 가상현실은 현실 시야를 가린 가상 공간에서 높은 몰입감을 느끼게 한다.
@@ -4940,30 +5060,31 @@
 \kfChoice 가상현실과 증강현실은 현실 세계를 활용하는 방식이 서로 다르다.
 \end{kfChoices}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{06}{단답형}
 \kfQStem{우리를 완전히 새로운 디지털 세상으로 안내하며, 머리에 쓰는 기기를 통해 높은 몰입감을 주는 기술은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{2}{}
+\begin{kfQBlock}{07}{단답형}
 \kfQStem{현실 세계 위에 가상의 정보를 덧붙여 보여주며, 주로 스마트폰 카메라를 통해 작동하는 기술은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{3}{}
+\begin{kfQBlock}{08}{단답형}
 \kfQStem{가상현실과 증강현실이 공통적으로 제공하는 것은 무엇인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{4}{}
+\begin{kfQBlock}{09}{단답형}
 \kfQStem{증강현실 기술이 현실감을 유지할 수 있는 이유는 무엇이 기본 바탕이 되기 때문인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{5}{}
+\begin{kfQBlock}{10}{단답형}
 \kfQStem{가구 앱을 이용해 우리 집에 가상의 소파를 미리 놓아 보는 것은 어떤 기술의 예시인가?}
 \kfAnswerLines{1}
 \end{kfQBlock}
-\begin{kfQBlock}{1}{}
+\begin{kfQBlock}{11}{서술형}
 \kfQStem{'가상현실'과 '증강현실'의 차이점을 다음 조건에 맞게 서술하시오.}
 \kfAnswerNote{답안}{4}
 \end{kfQBlock}
+\kfEndMC
 
 
 

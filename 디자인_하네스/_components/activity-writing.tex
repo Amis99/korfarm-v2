@@ -6,8 +6,9 @@
 %   \kfWritingPrompt{프롬프트 텍스트}
 % ============================================================
 
+% v15: 안내 + 답안 작성란 분리 방지 — \needspace 큰 값으로 한 페이지에 강제
 \newcommand{\kfWritingPrompt}[1]{%
-  \par\smallskip%
+  \par\smallskip\needspace{18\baselineskip}%
   \begin{tcolorbox}[
     enhanced, breakable=false,
     colback=kfPrimaryLight!30, colframe=kfPrimary,
@@ -16,7 +17,7 @@
   ]%
   \small\textbf{\color{kfPrimary}글쓰기 안내}\\[2pt]%
   #1
-  \end{tcolorbox}\par\smallskip%
+  \end{tcolorbox}\par\nopagebreak%
 }
 
 \newcommand{\kfWriting}[2]{%

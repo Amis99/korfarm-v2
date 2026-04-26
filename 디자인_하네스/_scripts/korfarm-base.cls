@@ -78,6 +78,7 @@
 \RequirePackage{enumitem}
 \RequirePackage{array}
 \RequirePackage{tabularx}
+\RequirePackage{multirow}
 \RequirePackage{adjustbox}
 \RequirePackage{setspace}
 \RequirePackage{titlesec}

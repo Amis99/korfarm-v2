@@ -1,100 +1,172 @@
 % ============================================================
-% passage-note.tex
-% 지문(70%) + 메모란(30%) 7:3 레이아웃 컴포넌트
+% passage-note.tex (v11)
+% 지문 박스 + 첫 페이지 우측 메모란 (동적 높이)
+% 정책: PAGE_BREAK_POLICY.md §3, §4 참조
+%
+% 변경 (v11):
+%  · 지문 박스 폭 확대: enlarge right by=-3.7cm  (메모 3.4cm + gap 3mm)
+%  · 메모란 동적 높이: frame.north east ~ frame.south east 사이 자동 채움
+%  · 메모 줄선: clip 영역으로 박스 내부만 채움 (박스 높이 모르고도 작동)
+%  · 문단 들여쓰기 활성화: tcolorbox 내부 \parindent=1em, \noindent 제거
+%
 % 사용:
-%   \kfPassageNote{제목 또는 출처}{지문 본문}
-% 또는 환경:
-%   \begin{kfPassageNoteEnv}{출처}
-%     본문...
-%   \end{kfPassageNoteEnv}
+%   \kfPassageNote{제목}{지문 본문}      → 메모란 포함
+%   \kfPassageNoteNT{지문 본문}          → 메모란 포함, 제목 없음
+%   \kfPassageFull{제목}{본문}           → 메모란 없음 (활동 내 보기)
 % ============================================================
 
-\providecommand{\kfPassageInner}[1]{%
-  % 지문 70% + 메모 30% (단/페이지 분할 금지: minipage 묶음)
-  \par\needspace{8\baselineskip}%
-  \noindent\begin{minipage}{\linewidth}%
-    \begin{tcolorbox}[
-      enhanced, breakable=false,
-      colback=kfPassageBg, colframe=kfRule,
-      boxrule=0.4pt, arc=2pt,
-      left=\kfBoxPad, right=\kfBoxPad, top=\kfBoxPad, bottom=\kfBoxPad,
-      width=\linewidth,
-      raster columns=2, raster column skip=4pt,
-      raster every box/.style={enhanced, breakable=false, boxrule=0pt}
-    ]
-    #1
-    \end{tcolorbox}%
-  \end{minipage}\par
+\makeatletter
+
+% 메모란 규격 (cm 고정)
+\newlength{\kf@memoW}
+\setlength{\kf@memoW}{3.4cm}
+\newlength{\kf@memoGap}
+\setlength{\kf@memoGap}{3mm}
+
+% --- 메인: 제목 있는 버전 ---
+\newcommand{\kf@passagenote@with}[2]{%
+  \par\ifkfPassageNewPage\ifdim\pagetotal>0.4\textheight\clearpage\fi\fi\smallskip\needspace{6\baselineskip}%
+  \begin{tcolorbox}[
+    enhanced, breakable,
+    width=\dimexpr\linewidth-4cm\relax,
+    colback=kfPassageBg, colframe=kfPrimary!70,
+    boxrule=0.6pt, arc=3pt,
+    left=\kfBoxPad, right=\kfBoxPad, top=\dimexpr\kfBoxPad+8pt\relax, bottom=\kfBoxPad,
+    title={\small\bfseries\color{kfPrimary} #1},
+    coltitle=kfPrimary,
+    colbacktitle=kfPrimaryLight!60,
+    attach boxed title to top left={yshift=-2.4mm, xshift=8pt},
+    boxed title style={colframe=kfPrimary!50, boxrule=0.5pt, arc=2pt},
+    parbox=false,
+    overlay unbroken and first={%
+      \begin{scope}
+        \draw[kfRule, line width=0.4pt, fill=kfNoteBg, rounded corners=2pt]
+          ([xshift=\kf@memoGap]frame.north east) rectangle
+          ([xshift=\kf@memoGap+\kf@memoW]frame.south east);
+        \node[anchor=north east, font=\footnotesize\bfseries\color{kfMute}, inner sep=3pt]
+          at ([xshift=\kf@memoGap+\kf@memoW, yshift=-2pt]frame.north east) {메모};
+        \node[anchor=north east, fill=kfPrimary!15, text=kfPrimary,
+              font=\scriptsize\bfseries, rounded corners=2pt,
+              inner xsep=4pt, inner ysep=2pt]
+          at ([xshift=\kf@memoGap+\kf@memoW-3pt, yshift=-19pt]frame.north east) {\kf@memocat};
+        \begin{scope}
+          \path[clip]
+            ([xshift=\kf@memoGap]frame.north east) rectangle
+            ([xshift=\kf@memoGap+\kf@memoW]frame.south east);
+          \foreach \i in {1,...,40}{%
+            \draw[kfRule, line width=0.25pt]
+              ([xshift=\kf@memoGap+2mm, yshift=-7mm - \i*5mm]frame.north east) --
+              ([xshift=\kf@memoGap+\kf@memoW-2mm, yshift=-7mm - \i*5mm]frame.north east);%
+          }
+        \end{scope}
+      \end{scope}
+    }
+  ]
+    \setlength{\parindent}{1em}%
+    \hspace*{1em}\ignorespaces#2%
+  \end{tcolorbox}\par\smallskip
 }
 
-% --- 메인 매크로: 두 박스를 가로로 ---
-% #1 = 출처/제목 (없으면 빈 인자)
-% #2 = 지문 본문
+% --- 제목 없는 버전 ---
+\newcommand{\kf@passagenote@notitle}[1]{%
+  \par\ifkfPassageNewPage\ifdim\pagetotal>0.4\textheight\clearpage\fi\fi\smallskip\needspace{6\baselineskip}%
+  \begin{tcolorbox}[
+    enhanced, breakable,
+    width=\dimexpr\linewidth-4cm\relax,
+    colback=kfPassageBg, colframe=kfPrimary!70,
+    boxrule=0.6pt, arc=3pt,
+    left=\kfBoxPad, right=\kfBoxPad, top=\dimexpr\kfBoxPad+8pt\relax, bottom=\kfBoxPad,
+    parbox=false,
+    overlay unbroken and first={%
+      \begin{scope}
+        \draw[kfRule, line width=0.4pt, fill=kfNoteBg, rounded corners=2pt]
+          ([xshift=\kf@memoGap]frame.north east) rectangle
+          ([xshift=\kf@memoGap+\kf@memoW]frame.south east);
+        \node[anchor=north east, font=\footnotesize\bfseries\color{kfMute}, inner sep=3pt]
+          at ([xshift=\kf@memoGap+\kf@memoW, yshift=-2pt]frame.north east) {메모};
+        \node[anchor=north east, fill=kfPrimary!15, text=kfPrimary,
+              font=\scriptsize\bfseries, rounded corners=2pt,
+              inner xsep=4pt, inner ysep=2pt]
+          at ([xshift=\kf@memoGap+\kf@memoW-3pt, yshift=-19pt]frame.north east) {\kf@memocat};
+        \begin{scope}
+          \path[clip]
+            ([xshift=\kf@memoGap]frame.north east) rectangle
+            ([xshift=\kf@memoGap+\kf@memoW]frame.south east);
+          \foreach \i in {1,...,40}{%
+            \draw[kfRule, line width=0.25pt]
+              ([xshift=\kf@memoGap+2mm, yshift=-7mm - \i*5mm]frame.north east) --
+              ([xshift=\kf@memoGap+\kf@memoW-2mm, yshift=-7mm - \i*5mm]frame.north east);%
+          }
+        \end{scope}
+      \end{scope}
+    }
+  ]
+    \setlength{\parindent}{1em}%
+    \hspace*{1em}\ignorespaces#1%
+  \end{tcolorbox}\par\smallskip
+}
+
 \newcommand{\kfPassageNote}[2]{%
-  \par\smallskip\needspace{8\baselineskip}%
-  \noindent\begin{minipage}{\linewidth}%
-    \begin{minipage}[t]{0.685\linewidth}%
-      \begin{tcolorbox}[
-        enhanced, breakable=false,
-        colback=kfPassageBg, colframe=kfPrimary!70,
-        boxrule=0.6pt, arc=3pt,
-        left=\kfBoxPad, right=\kfBoxPad, top=\kfBoxPad, bottom=\kfBoxPad,
-        title={\small\bfseries\color{kfPrimary} #1},
-        coltitle=kfPrimary,
-        colbacktitle=kfPrimaryLight!60,
-        attach boxed title to top left={yshift=-2.4mm, xshift=8pt},
-        boxed title style={colframe=kfPrimary!50, boxrule=0.5pt, arc=2pt}
-      ]
-        \noindent\ignorespaces%
-        #2
-      \end{tcolorbox}%
-    \end{minipage}%
-    \hfill
-    \begin{minipage}[t]{0.295\linewidth}%
-      \begin{tcolorbox}[
-        enhanced, breakable=false,
-        colback=kfNoteBg, colframe=kfRule,
-        boxrule=0.4pt, arc=2pt,
-        left=4pt, right=4pt, top=\kfBoxPad, bottom=\kfBoxPad,
-        title={\footnotesize\bfseries\color{kfMute} 메모},
-        coltitle=kfMute,
-        colbacktitle=kfNoteBg,
-        attach boxed title to top left={yshift=-1.5mm, xshift=4pt},
-        boxed title style={colframe=kfRule, boxrule=0.3pt, arc=1pt}
-      ]
-        \footnotesize
-        % 메모 줄선
-        \foreach \i in {1,...,12}{%
-          \textcolor{kfRule}{\rule{\linewidth}{0.3pt}}\\[6pt]%
-        }
-      \end{tcolorbox}%
-    \end{minipage}%
-  \end{minipage}\par\smallskip
+  \def\kf@tmptitle{#1}%
+  \ifx\kf@tmptitle\@empty
+    \kf@passagenote@notitle{#2}%
+  \else
+    \kf@passagenote@with{#1}{#2}%
+  \fi
 }
+\newcommand{\kfPassageNoteNT}[1]{\kf@passagenote@notitle{#1}}
+\makeatother
 
-% --- 풀폭 지문 박스 (메모란 없음) — 활동 안의 작은 지문, 보기 박스 등에 사용 ---
+% ============================================================
+% 풀폭 지문 박스 (메모란 없음) — 활동 내 보기 박스
+% PAGE_BREAK_POLICY.md §3
+% ============================================================
+\makeatletter
+\newcommand{\kf@passagefull@with}[2]{%
+  \par\ifkfPassageNewPage\ifdim\pagetotal>0.4\textheight\clearpage\fi\fi\smallskip\needspace{6\baselineskip}%
+  \begin{tcolorbox}[
+    enhanced, breakable,
+    colback=kfPassageBg, colframe=kfPrimary!70,
+    boxrule=0.6pt, arc=3pt,
+    left=\kfBoxPad, right=\kfBoxPad, top=\dimexpr\kfBoxPad+8pt\relax, bottom=\kfBoxPad,
+    title={\small\bfseries\color{kfPrimary} #1},
+    coltitle=kfPrimary,
+    colbacktitle=kfPrimaryLight!60,
+    attach boxed title to top left={yshift=-2.4mm, xshift=8pt},
+    boxed title style={colframe=kfPrimary!50, boxrule=0.5pt, arc=2pt},
+    parbox=false
+  ]
+    \setlength{\parindent}{1em}%
+    \hspace*{1em}\ignorespaces#2%
+  \end{tcolorbox}\par\smallskip
+}
+\newcommand{\kf@passagefull@notitle}[1]{%
+  \par\ifkfPassageNewPage\ifdim\pagetotal>0.4\textheight\clearpage\fi\fi\smallskip\needspace{6\baselineskip}%
+  \begin{tcolorbox}[
+    enhanced, breakable,
+    colback=kfPassageBg, colframe=kfPrimary!70,
+    boxrule=0.6pt, arc=3pt,
+    left=\kfBoxPad, right=\kfBoxPad, top=\dimexpr\kfBoxPad+8pt\relax, bottom=\kfBoxPad,
+    parbox=false
+  ]
+    \setlength{\parindent}{1em}%
+    \hspace*{1em}\ignorespaces#1%
+  \end{tcolorbox}\par\smallskip
+}
 \newcommand{\kfPassageFull}[2]{%
-  \par\smallskip\needspace{6\baselineskip}%
-  \noindent\begin{minipage}{\linewidth}%
-    \begin{tcolorbox}[
-      enhanced, breakable=false,
-      colback=kfPassageBg, colframe=kfPrimary!70,
-      boxrule=0.6pt, arc=3pt,
-      left=\kfBoxPad, right=\kfBoxPad, top=\kfBoxPad, bottom=\kfBoxPad,
-      title={\small\bfseries\color{kfPrimary} #1},
-      coltitle=kfPrimary,
-      colbacktitle=kfPrimaryLight!60,
-      attach boxed title to top left={yshift=-2.4mm, xshift=8pt},
-      boxed title style={colframe=kfPrimary!50, boxrule=0.5pt, arc=2pt}
-    ]
-      \noindent\ignorespaces%
-      #2
-    \end{tcolorbox}%
-  \end{minipage}\par\smallskip
+  \def\kf@tmptitle{#1}%
+  \ifx\kf@tmptitle\@empty
+    \kf@passagefull@notitle{#2}%
+  \else
+    \kf@passagefull@with{#1}{#2}%
+  \fi
 }
+\newcommand{\kfPassageFullNT}[1]{\kf@passagefull@notitle{#1}}
+\makeatother
 
-% --- 작은 문장 박스 (문장 독해용) — 메모란 없음, 컴팩트 ---
-% #1 = 라벨(문장 N), #2 = 본문
+% ============================================================
+% 작은 문장 박스 (문장 독해용) — PAGE_BREAK_POLICY.md §2.5
+% ============================================================
 \newcommand{\kfSentenceBox}[2]{%
   \par\smallskip\needspace{3\baselineskip}%
   \noindent\begin{tcolorbox}[
@@ -102,46 +174,74 @@
     colback=kfPassageBg, colframe=kfMute,
     boxrule=0.4pt, arc=2pt,
     left=8pt, right=6pt, top=4pt, bottom=4pt,
-    title={\scriptsize\bfseries\color{kfPrimary} #1},
+    title={\footnotesize\bfseries\color{kfPrimary} #1},
     coltitle=kfPrimary, colbacktitle=kfPaper,
     attach boxed title to top left={yshift=-1.6mm, xshift=4pt},
     boxed title style={colframe=kfMute, boxrule=0.3pt, arc=1pt}
   ]%
-    \small\setstretch{1.4}#2%
+    \setstretch{1.3}#2%
   \end{tcolorbox}\par\smallskip%
 }
 
-% --- 환경 버전 (긴 본문용) ---
+% ============================================================
+% 지문 본문 아래 안내/정리 박스 (v16 신규)
+% 사용: \kfPassageHint{한 줄 정리}{본문 안내 텍스트}
+% ============================================================
+\newcommand{\kfPassageHint}[2]{%
+  \par\smallskip\needspace{4\baselineskip}%
+  \begin{tcolorbox}[
+    enhanced, breakable=false,
+    colback=kfPrimary!5, colframe=kfPrimary!40,
+    boxrule=0.4pt, arc=2pt,
+    left=8pt, right=6pt, top=4pt, bottom=4pt,
+    title={\footnotesize\bfseries\color{kfPrimary} #1},
+    coltitle=kfPrimary, colbacktitle=kfPaper,
+    attach boxed title to top left={yshift=-1.5mm, xshift=4pt},
+    boxed title style={colframe=kfPrimary!40, boxrule=0.3pt, arc=1pt}
+  ]%
+    \small\setstretch{1.3}#2%
+  \end{tcolorbox}\par\smallskip%
+}
+
+% ============================================================
+% 환경 버전 (호환성) — 메모란 포함
+% ============================================================
+\makeatletter
 \newenvironment{kfPassageNoteEnv}[1]%
-  {\par\needspace{8\baselineskip}%
-   \noindent\begin{minipage}{\linewidth}%
-     \def\kf@psrc{#1}%
-     \begin{minipage}[t]{0.69\linewidth}%
-       \begin{tcolorbox}[
-         enhanced, breakable=false,
-         colback=kfPassageBg, colframe=kfRule,
-         boxrule=0.4pt, arc=2pt,
-         left=\kfBoxPad, right=\kfBoxPad, top=\kfBoxPad, bottom=\kfBoxPad,
-         title={\small\bfseries\color{kfPrimary} \kf@psrc},
-         coltitle=kfPrimary, colbacktitle=kfPaper,
-         attach boxed title to top left={yshift=-2mm, xshift=6pt},
-         boxed title style={colframe=kfRule, boxrule=0.4pt, arc=1pt}
-       ]
+  {\par\needspace{6\baselineskip}%
+   \def\kf@psrc{#1}%
+   \begin{tcolorbox}[
+     enhanced, breakable,
+     width=\dimexpr\linewidth-4cm\relax,
+     colback=kfPassageBg, colframe=kfPrimary!70,
+     boxrule=0.6pt, arc=3pt,
+     left=\kfBoxPad, right=\kfBoxPad, top=\dimexpr\kfBoxPad+8pt\relax, bottom=\kfBoxPad,
+     title={\small\bfseries\color{kfPrimary} \kf@psrc},
+     coltitle=kfPrimary, colbacktitle=kfPrimaryLight!60,
+     attach boxed title to top left={yshift=-2.4mm, xshift=8pt},
+     boxed title style={colframe=kfPrimary!50, boxrule=0.5pt, arc=2pt},
+     parbox=false,
+     overlay unbroken and first={%
+       \begin{scope}
+         \draw[kfRule, line width=0.4pt, fill=kfNoteBg, rounded corners=2pt]
+           ([xshift=\kf@memoGap]frame.north east) rectangle
+           ([xshift=\kf@memoGap+\kf@memoW]frame.south east);
+         \node[anchor=north east, font=\footnotesize\bfseries\color{kfMute}, inner sep=3pt]
+           at ([xshift=\kf@memoGap+\kf@memoW, yshift=-2pt]frame.north east) {메모};
+         \begin{scope}
+           \path[clip]
+             ([xshift=\kf@memoGap]frame.north east) rectangle
+             ([xshift=\kf@memoGap+\kf@memoW]frame.south east);
+           \foreach \i in {1,...,40}{%
+             \draw[kfRule, line width=0.25pt]
+               ([xshift=\kf@memoGap+2mm, yshift=-7mm - \i*5mm]frame.north east) --
+               ([xshift=\kf@memoGap+\kf@memoW-2mm, yshift=-7mm - \i*5mm]frame.north east);%
+           }
+         \end{scope}
+       \end{scope}
+     }
+   ]%
+   \setlength{\parindent}{1em}%
   }%
-  {\end{tcolorbox}\end{minipage}\hfill
-   \begin{minipage}[t]{0.29\linewidth}
-     \begin{tcolorbox}[
-       enhanced, breakable=false,
-       colback=kfNoteBg, colframe=kfRule,
-       boxrule=0.4pt, arc=2pt,
-       left=4pt, right=4pt, top=4pt, bottom=4pt,
-       title={\footnotesize\bfseries\color{kfMute} 메모},
-       coltitle=kfMute, colbacktitle=kfNoteBg,
-       attach boxed title to top left={yshift=-1.5mm, xshift=4pt},
-       boxed title style={colframe=kfRule, boxrule=0.3pt, arc=1pt}
-     ]
-     \footnotesize
-     \foreach \i in {1,...,10}{\textcolor{kfRule}{\rule{\linewidth}{0.3pt}}\\[5pt]}%
-     \end{tcolorbox}
-   \end{minipage}%
-   \end{minipage}\par\smallskip}
+  {\end{tcolorbox}\par\smallskip}
+\makeatother

@@ -1,0 +1,331 @@
+\documentclass[12pt,a4paper]{article}
+
+% ─── 인코딩 / 폰트 ───
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\xeCJKsetup{CJKspace=true}
+\setCJKmainfont{Noto Sans KR}[
+  Path=C:/Windows/Fonts/, Extension=.ttf,
+  UprightFont=NotoSansKR-VF, BoldFont=NotoSansKR-VF,
+  UprightFeatures={RawFeature={axis={wght=400}}},
+  BoldFeatures={RawFeature={axis={wght=700}}},
+]
+\setCJKsansfont{Noto Sans KR}[
+  Path=C:/Windows/Fonts/, Extension=.ttf,
+  UprightFont=NotoSansKR-VF, BoldFont=NotoSansKR-VF,
+  UprightFeatures={RawFeature={axis={wght=400}}},
+  BoldFeatures={RawFeature={axis={wght=700}}},
+]
+\setmainfont{Noto Sans KR}[
+  Path=C:/Windows/Fonts/, Extension=.ttf,
+  UprightFont=NotoSansKR-VF, BoldFont=NotoSansKR-VF,
+  UprightFeatures={RawFeature={axis={wght=400}}},
+  BoldFeatures={RawFeature={axis={wght=700}}},
+]
+
+% ─── 레이아웃 ───
+\usepackage[a4paper, margin=1.5cm, top=2.8cm, bottom=2cm, heightrounded]{geometry}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{needspace}
+\usepackage{etoolbox}
+\usepackage[normalem]{ulem}
+
+% ─── 본문 폰트 크기 설정 ───
+\fontsize{14pt}{19pt}\selectfont
+
+% ─── 색상 정의 ───
+\definecolor{korfarmBrown}{HTML}{8B6914}
+\definecolor{passageBg}{HTML}{F5F5F0}
+\definecolor{passageBorder}{HTML}{D0C8B0}
+\definecolor{bogiBg}{HTML}{EBF2FA}
+\definecolor{bogiBorder}{HTML}{A8C8E8}
+\definecolor{condBg}{HTML}{FFF4E6}
+\definecolor{condBorder}{HTML}{E8C890}
+\definecolor{numCircle}{HTML}{2C3E50}
+\definecolor{ptsBadge}{HTML}{6B7280}
+\definecolor{answerLine}{HTML}{B0B0B0}
+
+% ─── tcolorbox 스타일 ───
+\tcbset{
+  passage/.style={
+    colback=passageBg, colframe=passageBorder,
+    boxrule=0.5pt, arc=3pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+    fontupper=\fontsize{14pt}{22pt}\selectfont,
+    breakable,
+  },
+  bogi/.style={
+    colback=bogiBg, colframe=bogiBorder,
+    boxrule=0.5pt, arc=3pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+    fontupper=\fontsize{14pt}{19pt}\selectfont,
+    title={\textbf{〈보기〉}},
+    fonttitle=\bfseries,
+    coltitle=black,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=bogiBg, colframe=bogiBorder, boxrule=0.3pt, arc=2pt},
+  },
+  cond/.style={
+    colback=condBg, colframe=condBorder,
+    boxrule=0.5pt, arc=3pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+    fontupper=\fontsize{14pt}{19pt}\selectfont,
+    title={\textbf{〈조건〉}},
+    fonttitle=\bfseries,
+    coltitle=black,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=condBg, colframe=condBorder, boxrule=0.3pt, arc=2pt},
+  },
+}
+
+% ─── 헤더/푸터 ───
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[L]{%
+  \raisebox{-4pt}{\includegraphics[height=18pt]{C:/Users/RENEWCOM PC/Documents/국어농장v2홈페이지/scripts/../frontend/public/korfarm-logo.png}}%
+  \hspace{6pt}%
+  \textbf{소쉬르 1권}%
+  \hspace{6pt}%
+  \textcolor{gray}{15장 챕터 테스트}%
+}
+\fancyhead[R]{%
+  \small\textcolor{gray}{10문항\,·\,40점\,·\,60분}%
+}
+\fancyfoot[C]{\small\textcolor{gray}{— \thepage\ —}}
+
+% ─── 기타 설정 ───
+\raggedbottom
+\setlength{\headheight}{20pt}
+\addtolength{\topmargin}{-6pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+
+% ─── 문제번호 매크로 ───
+\newcommand{\qnum}[1]{%
+  \tikz[baseline=(num.base)]{%
+    \node[circle, fill=numCircle, text=white, inner sep=0pt,
+          minimum size=18pt, font=\small\bfseries] (num) {#1};%
+  }%
+}
+
+\newcommand{\pts}[1]{%
+  \hfill\textcolor{ptsBadge}{[#1점]}%
+}
+
+% ─── 답안 밑줄 매크로 ───
+\newcommand{\answerlines}[1]{%
+  \par\vspace{4pt}%
+  \foreach \i in {1,...,#1} {%
+    {\color{answerLine}\hrule height 0.4pt}\vspace{35pt}%
+  }%
+  \vspace{2pt}%
+}
+
+\begin{document}
+
+% ─── 첫 페이지 헤더 ───
+\begin{center}
+{\Large\bfseries 소쉬르 1권\quad 15장 챕터 테스트}
+\end{center}
+\vspace{3mm}
+{\color{korfarmBrown}\hrule height 1.2pt}
+\vspace{5mm}
+\hfill\rule{3.5cm}{0.4pt}\,학교\hspace{10mm}%
+\rule{2cm}{0.4pt}\,학년\hspace{10mm}%
+이름\,\rule{3.5cm}{0.4pt}
+\vspace{5mm}
+{\color{korfarmBrown}\hrule height 0.6pt}
+\vspace{6mm}
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{samepage}
+{\hangindent=2em\hangafter=1
+\qnum{1}\enspace 다음 중 문장의 끝에 쓰는 부호를 통틀어 무엇이라고 하나요? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 교통 신호
+  \item ② 암호
+  \item ③ 문장 부호
+  \item ④ 수학 기호
+\end{itemize}
+\end{samepage}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{samepage}
+{\hangindent=2em\hangafter=1
+\qnum{2}\enspace 전에 없던 것을 처음으로 만들거나 제정하는 것을 뜻하는 말은? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 창제
+  \item ② 반포
+  \item ③ 모방
+  \item ④ 연습
+\end{itemize}
+\end{samepage}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+{\small\textbf{※ 다음 글을 읽고 물음에 답하시오.}}
+\vspace{2mm}
+\begin{tcolorbox}[passage]
+가나다라 한글 노래 \\{}
+\vspace{4pt} \\{}
+"하늘은 맑을까?" \\{}
+궁금할 땐 ( ㉠ ) 콕! \\{}
+\vspace{4pt} \\{}
+"와, 정말 아름답다!" \\{}
+신날 땐 느낌표 쾅! \\{}
+\vspace{4pt} \\{}
+세종대왕님이 만드신 \\{}
+세상에서 제일 쉬운 글자. \\{}
+\vspace{4pt} \\{}
+바르고 고운 말로 \\{}
+예쁘게 써 보아요!
+\end{tcolorbox}
+\vspace{3mm}
+\begin{samepage}
+{\hangindent=2em\hangafter=1
+\qnum{3}\enspace 빈칸 ㉠에 들어갈 말로, 궁금한 것을 물어볼 때 쓰는 부호의 이름은 무엇인가요? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 쉼표
+  \item ② 마침표
+  \item ③ 물음표
+  \item ④ 따옴표
+\end{itemize}
+\end{samepage}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{samepage}
+{\hangindent=2em\hangafter=1
+\qnum{4}\enspace 동시에서 '신날 때' 사용하는 문장 부호는 무엇이라고 했나요? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 마침표
+  \item ② 물음표
+  \item ③ 느낌표
+  \item ④ 쉼표
+\end{itemize}
+\end{samepage}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{samepage}
+{\hangindent=2em\hangafter=1
+\qnum{5}\enspace 다음 중 한글에 대한 설명으로 알맞지 \uline{않은} 것은? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 세종대왕님이 만드셨다.
+  \item ② 배우기가 매우 어렵다.
+  \item ③ 바르고 고운 말로 써야 한다.
+  \item ④ 소리도 모양도 으뜸인 글자다.
+\end{itemize}
+\end{samepage}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+{\small\textbf{※ 다음 글을 읽고 물음에 답하시오.}}
+\vspace{2mm}
+\begin{tcolorbox}[passage]
+백성을 사랑한 세종대왕 \\{}
+\vspace{4pt} \\{}
+세종대왕은 글을 몰라 어려움을 겪는 백성들을 위해 새 글자를 만들기로 결심했습니다. 집현전 학자들과 함께 연구하여 1443년, 드디어 훈민정음을 창제했습니다. \\{}
+\vspace{4pt} \\{}
+한글은 사람의 발음 기관 모양과 하늘, 땅, 사람의 모양을 본떠 만들었기 때문에 아주 과학적입니다. 덕분에 우리는 누구나 자신의 생각을 글로 자유롭게 표현할 수 있게 되었습니다.
+\end{tcolorbox}
+\vspace{3mm}
+\begin{samepage}
+{\hangindent=2em\hangafter=1
+\qnum{6}\enspace 세종대왕이 한글을 만든 기관의 이름은 무엇인가요? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 수원 화성
+  \item ② 경복궁
+  \item ③ 집현전
+  \item ④ 박물관
+\end{itemize}
+\end{samepage}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{samepage}
+{\hangindent=2em\hangafter=1
+\qnum{7}\enspace 훈민정음을 만들 때 본뜬 모양이 \uline{아닌} 것은? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① 사람의 발음 기관
+  \item ② 하늘과 땅
+  \item ③ 사람의 모양
+  \item ④ 동물의 발자국
+\end{itemize}
+\end{samepage}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{samepage}
+{\hangindent=2em\hangafter=1
+\qnum{8}\enspace 세종대왕이 한글을 만든 까닭은 무엇인가요? \pts{8}
+\par}
+
+\vspace{3mm}
+\answerlines{2}
+\end{samepage}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{samepage}
+{\hangindent=2em\hangafter=1
+\qnum{9}\enspace 다음 문장에서 '누가'에 해당하는 말을 찾아 쓰세요. \pts{8}
+\par}
+
+\vspace{3mm}
+\begin{tcolorbox}[bogi]
+"백성들이 한글을 익힙니다."
+\end{tcolorbox}
+\vspace{3mm}
+\answerlines{1}
+\end{samepage}
+
+\vspace{4mm}
+\needspace{5\baselineskip}
+\begin{samepage}
+{\hangindent=2em\hangafter=1
+\qnum{10}\enspace 다음 의 문장 끝에 들어갈 알맞은 문장 부호는 무엇인가요? \pts{3}
+\par}
+
+\vspace{3mm}
+\begin{tcolorbox}[bogi]
+ \\{}
+"우리나라 꽃은 무궁화입니다"
+\end{tcolorbox}
+\vspace{3mm}
+\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]
+  \item ① ?
+  \item ② !
+  \item ③ .
+  \item ④ ,
+\end{itemize}
+\end{samepage}
+
+\end{document}

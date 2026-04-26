@@ -12,12 +12,12 @@
 % ============================================================
 
 \providecommand{\kfSecHeader}[3]{%
-  \par\needspace{4\baselineskip}%
+  \par\needspace{10\baselineskip}\filbreak%
   \vspace{3pt}%
   \noindent
   \begin{tikzpicture}
     \node[anchor=west, inner sep=0pt] (bar) at (0,0) {\color{#1}\rule{3pt}{14pt}};
-    \node[anchor=west, inner sep=0pt, xshift=6pt, font=\small\bfseries\color{#1}]
+    \node[anchor=west, inner sep=0pt, xshift=6pt, font=\normalsize\bfseries\color{#1}]
        (lbl) at (bar.east) {[\,#2\,]};
     \node[anchor=west, inner sep=0pt, xshift=4pt, font=\small\color{kfMute}]
        at (lbl.east) {#3};

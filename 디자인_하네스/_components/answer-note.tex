@@ -11,9 +11,9 @@
   \par\noindent\textcolor{kfRule}{\rule{\linewidth}{0.4pt}}\par
 }
 
-% N줄 답안란 (간단)
+% N줄 답안란 (간단) — v5: 발문과 첫 줄 사이 1.2em 여백 + 마지막 줄 후 \smallskip
 \newcommand{\kfAnswerLines}[1]{%
-  \par\smallskip%
+  \par\vspace{1.2em}%
   \begin{minipage}{\linewidth}%
   \foreach \i in {1,...,#1}{%
     \textcolor{kfRule}{\rule{\linewidth}{0.4pt}}\\[6pt]%
@@ -22,9 +22,9 @@
   \par\smallskip%
 }
 
-% 라벨이 있는 노트형 답안란
+% 라벨이 있는 노트형 답안란 — v5: 발문과 박스 사이 1.2em 여백
 \newcommand{\kfAnswerNote}[2]{%
-  \par\smallskip\needspace{#2\baselineskip}%
+  \par\vspace{1.2em}\needspace{#2\baselineskip}%
   \begin{tcolorbox}[
     enhanced, breakable=false,
     colback=kfPaper, colframe=kfRule,
