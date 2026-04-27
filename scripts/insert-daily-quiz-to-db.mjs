@@ -33,16 +33,16 @@ for (const a of process.argv.slice(2)) args[a.replace(/^--/, '')] = true;
 const APPLY_DB = !!args['apply-db'];
 
 const VALID_FOLDERS = [
-  '러셀1', '러셀2',
-  '비트겐슈타인1',
-  '소쉬르1', '소쉬르3',
-  '프레게2', '프레게3',
+  '소쉬르1', '소쉬르2', '소쉬르3',
+  '프레게1', '프레게2', '프레게3',
+  '러셀1', '러셀2', '러셀3',
+  '비트겐슈타인1', '비트겐슈타인2', '비트겐슈타인3',
 ];
 const FOLDER_TO_LEVEL = {
-  '소쉬르1': 'SAUSSURE_1', '소쉬르3': 'SAUSSURE_3',
-  '프레게2': 'FREGE_2', '프레게3': 'FREGE_3',
-  '러셀1': 'RUSSELL_1', '러셀2': 'RUSSELL_2',
-  '비트겐슈타인1': 'WITTGENSTEIN_1',
+  '소쉬르1': 'SAUSSURE_1', '소쉬르2': 'SAUSSURE_2', '소쉬르3': 'SAUSSURE_3',
+  '프레게1': 'FREGE_1', '프레게2': 'FREGE_2', '프레게3': 'FREGE_3',
+  '러셀1': 'RUSSELL_1', '러셀2': 'RUSSELL_2', '러셀3': 'RUSSELL_3',
+  '비트겐슈타인1': 'WITTGENSTEIN_1', '비트겐슈타인2': 'WITTGENSTEIN_2', '비트겐슈타인3': 'WITTGENSTEIN_3',
 };
 
 function stamp() { return new Date().toISOString().replace(/[:.]/g, '-'); }
