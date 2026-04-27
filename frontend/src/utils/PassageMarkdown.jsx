@@ -2,6 +2,7 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import rehypeRaw from "rehype-raw";
 import "katex/dist/katex.min.css";
 import "../styles/passage-markdown.css";
 
@@ -46,7 +47,7 @@ function PassageMarkdown({ children, className = "" }) {
     <div className={`passage-markdown ${className}`.trim()}>
       <Markdown
         remarkPlugins={[remarkGfm, remarkMath]}
-        rehypePlugins={[[rehypeKatex, { throwOnError: false, errorColor: "#c0392b" }]]}
+        rehypePlugins={[rehypeRaw, [rehypeKatex, { throwOnError: false, errorColor: "#c0392b" }]]}
       >
         {text}
       </Markdown>

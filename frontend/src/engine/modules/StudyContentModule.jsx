@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import PassageMarkdown from "../../utils/PassageMarkdown";
+import RichText from "../../utils/RichText";
 import { useEngine } from "../core/EngineContext";
 import { apiPost } from "../../utils/api";
 import { FEEDBACK } from "../shared/feedbackTimings";
@@ -219,7 +220,7 @@ function StudyContentModule({ content }) {
               </div>
               <div className="sc-history-body">
                 <div className="sc-history-stem">
-                  <span className="sc-history-num">Q{idx + 1}.</span> {h.question.stem}
+                  <span className="sc-history-num">Q{idx + 1}.</span> <RichText>{h.question.stem}</RichText>
                 </div>
                 {h.question.questionType !== "ESSAY" && (
                   <div className="sc-history-answers">
@@ -228,7 +229,7 @@ function StudyContentModule({ content }) {
                       return userChoice ? (
                         <div className="sc-history-line">
                           <span className="sc-history-label">내 답</span>
-                          <span>{userChoice.text}</span>
+                          <span><RichText>{userChoice.text}</RichText></span>
                         </div>
                       ) : null;
                     })()}
@@ -237,7 +238,7 @@ function StudyContentModule({ content }) {
                       return correctChoice ? (
                         <div className="sc-history-line correct-text">
                           <span className="sc-history-label">정답</span>
-                          <span>{correctChoice.text}</span>
+                          <span><RichText>{correctChoice.text}</RichText></span>
                         </div>
                       ) : null;
                     })()}
@@ -268,7 +269,7 @@ function StudyContentModule({ content }) {
       {/* 현재 문제 */}
       {currentQuestion && !completing && (
         <div className="sc-current">
-          <div className="sc-current-stem">{currentQuestion.stem}</div>
+          <div className="sc-current-stem"><RichText>{currentQuestion.stem}</RichText></div>
 
           {currentQuestion.questionType === "MULTI_CHOICE" && (
             <ul className="sc-choices">
@@ -280,7 +281,7 @@ function StudyContentModule({ content }) {
                     disabled={answerLocked}
                     onClick={() => submitAnswer({ selectedChoiceId: c.id })}
                   >
-                    {c.text}
+                    <RichText>{c.text}</RichText>
                   </button>
                 </li>
               ))}
@@ -297,7 +298,7 @@ function StudyContentModule({ content }) {
                   disabled={answerLocked}
                   onClick={() => submitAnswer({ selectedChoiceId: c.id })}
                 >
-                  {c.text}
+                  <RichText>{c.text}</RichText>
                 </button>
               ))}
             </div>

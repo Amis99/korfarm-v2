@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useEngine } from "../core/EngineContext";
 import ChoiceAnalysisCore from "../shared/ChoiceAnalysisCore";
+import RichText from "../../utils/RichText";
 
 /**
  * 농장 모드 — 선택지 분석 학습 모듈
@@ -82,7 +83,7 @@ function ChoiceAnalysisModule({ content }) {
             ) : (
               // 완료된 카드는 stem만 요약 표시
               <div className="ca-completed-summary">
-                <div className="ca-completed-stem">{q.stem}</div>
+                <div className="ca-completed-stem"><RichText>{q.stem}</RichText></div>
                 <div className="ca-completed-meta">
                   5개 선택지 모두 정답 처리 완료
                 </div>

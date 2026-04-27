@@ -132,7 +132,7 @@ function ChoiceJudgementModule({ content }) {
                 <div className="choice-props">
                   {currentChoice.propositions.map((prop) => (
                     <div key={prop.propId} className="choice-prop">
-                      <span>{prop.text}</span>
+                      <span><RichText>{prop.text}</RichText></span>
                       {propMarks[prop.propId] ? (
                         <span
                           className={`choice-prop-mark ${

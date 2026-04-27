@@ -252,7 +252,7 @@ export default function ChoiceAnalysisCore({
                       className={`ca-sentence ${isClickable ? "clickable" : ""} ${isShake ? "shake" : ""} ${isConfirmed ? "confirmed" : ""}`}
                       onClick={() => handleSentenceClick(s.id)}
                     >
-                      {s.text}
+                      <RichText>{s.text}</RichText>
                       {isConfirmed && <span className="ca-sentence-check">✓</span>}
                     </span>
                   );
