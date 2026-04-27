@@ -90,6 +90,10 @@ class DiagSessionEntity(
     @Column(name = "scores_json", columnDefinition = "json")
     var scoresJson: String? = null,
 
+    /** v2: 그 세션에서 측정 가능한 최대 가중치 합 (역량별). 점수 = scores / maxScores × 100. */
+    @Column(name = "max_scores_json", columnDefinition = "json")
+    var maxScoresJson: String? = null,
+
     @Column(name = "touch_counts_json", columnDefinition = "json")
     var touchCountsJson: String? = null,
 

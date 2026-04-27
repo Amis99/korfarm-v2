@@ -127,12 +127,22 @@ class DiagnosticService(
             throw ApiException("SESSION_NOT_ACTIVE", "세션이 활성 상태가 아닙니다", HttpStatus.BAD_REQUEST)
         }
 
-        // 현재 상태 복원
-        val scores: MutableMap<String, Double> = objectMapper.readValue(session.scoresJson ?: "{}")
+        // ── v2 채점 알고리즘 ──
+        //   scores: 정답 시 정답 vector 양수 누적 (earned)
+        //   maxScores: 모든 응시 문항의 정답 vector 양수 누적 (측정 가능 최대)
+        //   최종 점수 = scores / maxScores × 100 (ratioScores)
+
+        // 현재 상태 복원 (v1 데이터와 호환되지 않으므로 신규 세션은 0 시작)
+        val scores: MutableMap<String, Double> = if (session.scoresJson.isNullOrBlank())
+            ScoringEngine.initScores()
+        else objectMapper.readValue(session.scoresJson!!)
+        val maxScores: MutableMap<String, Double> = if (session.maxScoresJson.isNullOrBlank())
+            ScoringEngine.initMaxScores()
+        else objectMapper.readValue(session.maxScoresJson!!)
         val touchCounts: MutableMap<String, Int> = objectMapper.readValue(session.touchCountsJson ?: "{}")
         val existingResponses = responseRepo.findBySessionIdOrderByResponseOrderAsc(sessionId)
 
-        // 오류기여 맵 초기화
+        // 오류기여 맵 초기화 — error_path 분류용 (점수에 영향 없음)
         val errorContrib = ScoringEngine.initErrorContrib()
 
         var answeredCount = session.answeredCount
@@ -145,31 +155,37 @@ class DiagnosticService(
             if (question.questionType == "서술형") continue
 
             val choicesData: List<Map<String, Any>> = objectMapper.readValue(question.choicesJson)
+            val correctChoiceData = choicesData.find { (it["choice_id"] as? String) == question.correctChoice }
             val selectedChoice = choicesData.find { (it["choice_id"] as? String) == resp.choice }
             val isCorrect = resp.choice == question.correctChoice
 
-            // 벡터 적용
-            if (selectedChoice != null) {
+            // 정답 vector — 그 문항의 max/earned 누적에 사용
+            @Suppress("UNCHECKED_CAST")
+            val correctVector = (correctChoiceData?.get("vector") as? Map<String, Any>)
+                ?.mapValues { (it.value as Number).toDouble() } ?: emptyMap()
+
+            // 모든 응답: max 누적 (측정 가능 가중치)
+            ScoringEngine.accumulateMaxScores(maxScores, correctVector)
+
+            // 정답: scores 누적 (실 획득 가중치)
+            if (isCorrect) {
+                ScoringEngine.applyCorrectVector(scores, correctVector)
+            } else {
+                // 오답: error_path 기록만 (점수 영향 없음)
                 @Suppress("UNCHECKED_CAST")
-                val vector = (selectedChoice["vector"] as? Map<String, Any>)
+                val selectedVector = (selectedChoice?.get("vector") as? Map<String, Any>)
                     ?.mapValues { (it.value as Number).toDouble() } ?: emptyMap()
-                val multiplier = getLevelMultiplier(session.tier, getQuestionLevel(question))
-
-                if (isCorrect) {
-                    ScoringEngine.applyVector(scores, vector, CORRECT_WEIGHT, 1.0)
-                } else {
-                    ScoringEngine.applyVector(scores, vector, INCORRECT_WEIGHT, multiplier)
-                    val errorPath = selectedChoice["error_path"] as? String
-                    ScoringEngine.accumulateError(errorContrib, vector, errorPath, INCORRECT_WEIGHT, multiplier)
-                }
-
-                for (k in vector.keys) {
-                    val nk = normalizeKey(k)
-                    if (nk in touchCounts) touchCounts[nk] = touchCounts[nk]!! + 1
-                }
+                val errorPath = selectedChoice?.get("error_path") as? String
+                ScoringEngine.accumulateError(errorContrib, selectedVector, errorPath, 1.0, 1.0)
             }
 
-            ScoringEngine.clampScores(scores)
+            // touch_count: 정답 vector 의 양수 역량마다 ++
+            for ((k, v) in correctVector) {
+                if (v <= 0) continue
+                val nk = normalizeKey(k)
+                if (nk in touchCounts) touchCounts[nk] = touchCounts[nk]!! + 1
+            }
+
             answeredCount++
             if (isCorrect) correctCount++
 
@@ -188,6 +204,7 @@ class DiagnosticService(
 
         // 세션 갱신
         session.scoresJson = objectMapper.writeValueAsString(scores)
+        session.maxScoresJson = objectMapper.writeValueAsString(maxScores)
         session.touchCountsJson = objectMapper.writeValueAsString(touchCounts)
         session.answeredCount = answeredCount
         session.correctCount = correctCount
@@ -216,7 +233,10 @@ class DiagnosticService(
             throw ApiException("SESSION_NOT_ACTIVE", "세션이 활성 상태가 아닙니다", HttpStatus.BAD_REQUEST)
         }
 
-        val scores: MutableMap<String, Double> = objectMapper.readValue(session.scoresJson ?: "{}")
+        // v2: scores (earned) 와 maxScores 로드
+        val scores: MutableMap<String, Double> = if (session.scoresJson.isNullOrBlank())
+            ScoringEngine.initScores()
+        else objectMapper.readValue(session.scoresJson!!)
         // 정답률 기반 TCI: 미응답을 오답으로 간주 (correct / 48 × 100)
         val rawTci = if (session.answeredCount > 0)
             session.correctCount.toDouble() / 48.0 * 100.0
@@ -244,7 +264,12 @@ class DiagnosticService(
 
         sessionRepo.save(session)
 
-        return buildReport(session, scores, recommendation)
+        // v2: scores (earned) / maxScores → ratio (0~100) 변환 후 buildReport 에 전달
+        val maxScores: Map<String, Double> = if (session.maxScoresJson.isNullOrBlank())
+            emptyMap()
+        else objectMapper.readValue(session.maxScoresJson!!)
+        val ratioScores = ScoringEngine.ratioScores(scores, maxScores).toMutableMap()
+        return buildReport(session, ratioScores, recommendation)
     }
 
     // ── 인쇄 OMR 답안 일괄 제출 → 진단 세션 생성 + 채점 + 리포트 ──
@@ -288,7 +313,9 @@ class DiagnosticService(
         }
 
         val sessionId = IdGenerator.newId("dsess")
+        // v2: scores (earned), maxScores 둘 다 0 시작
         val scores = ScoringEngine.initScores()
+        val maxScores = ScoringEngine.initMaxScores()
         val touchCounts = ScoringEngine.initTouchCounts()
         val errorContrib = ScoringEngine.initErrorContrib()
 
@@ -299,6 +326,7 @@ class DiagnosticService(
             mode = "offline",
             status = "active",
             scoresJson = objectMapper.writeValueAsString(scores),
+            maxScoresJson = objectMapper.writeValueAsString(maxScores),
             touchCountsJson = objectMapper.writeValueAsString(touchCounts)
         )
         sessionRepo.save(session)
@@ -314,30 +342,36 @@ class DiagnosticService(
 
             val question = questionRepo.findById(qd.questionId).orElse(null) ?: return@forEachIndexed
             val choicesData: List<Map<String, Any>> = objectMapper.readValue(question.choicesJson)
+            val correctChoiceData = choicesData.find { (it["choice_id"] as? String) == question.correctChoice }
             val selectedChoice = choice?.let { c -> choicesData.find { (it["choice_id"] as? String) == c } }
             val isCorrect = choice != null && choice == question.correctChoice
 
-            if (selectedChoice != null) {
+            // 정답 vector — 그 문항이 측정하는 가중치
+            @Suppress("UNCHECKED_CAST")
+            val correctVector = (correctChoiceData?.get("vector") as? Map<String, Any>)
+                ?.mapValues { (it.value as Number).toDouble() } ?: emptyMap()
+
+            // 모든 응답: max 누적
+            ScoringEngine.accumulateMaxScores(maxScores, correctVector)
+
+            // 정답: scores 누적
+            if (isCorrect) {
+                ScoringEngine.applyCorrectVector(scores, correctVector)
+            } else if (selectedChoice != null) {
                 @Suppress("UNCHECKED_CAST")
-                val vector = (selectedChoice["vector"] as? Map<String, Any>)
+                val selectedVector = (selectedChoice["vector"] as? Map<String, Any>)
                     ?.mapValues { (it.value as Number).toDouble() } ?: emptyMap()
-                val multiplier = getLevelMultiplier(tier, getQuestionLevel(question))
-
-                if (isCorrect) {
-                    ScoringEngine.applyVector(scores, vector, CORRECT_WEIGHT, 1.0)
-                } else {
-                    ScoringEngine.applyVector(scores, vector, INCORRECT_WEIGHT, multiplier)
-                    val errorPath = selectedChoice["error_path"] as? String
-                    ScoringEngine.accumulateError(errorContrib, vector, errorPath, INCORRECT_WEIGHT, multiplier)
-                }
-
-                for (k in vector.keys) {
-                    val nk = normalizeKey(k)
-                    if (nk in touchCounts) touchCounts[nk] = touchCounts[nk]!! + 1
-                }
+                val errorPath = selectedChoice["error_path"] as? String
+                ScoringEngine.accumulateError(errorContrib, selectedVector, errorPath, 1.0, 1.0)
             }
 
-            ScoringEngine.clampScores(scores)
+            // touch_count 누적 (정답 vector 양수 역량마다)
+            for ((k, v) in correctVector) {
+                if (v <= 0) continue
+                val nk = normalizeKey(k)
+                if (nk in touchCounts) touchCounts[nk] = touchCounts[nk]!! + 1
+            }
+
             answeredCount++
             if (isCorrect) correctCount++
 
@@ -361,6 +395,7 @@ class DiagnosticService(
         val recommendation = ScoringEngine.calculateRecommendation(tier, rawTci, confidence)
 
         session.scoresJson = objectMapper.writeValueAsString(scores)
+        session.maxScoresJson = objectMapper.writeValueAsString(maxScores)
         session.touchCountsJson = objectMapper.writeValueAsString(touchCounts)
         session.errorAnalysisJson = objectMapper.writeValueAsString(errorContrib)
         session.answeredCount = answeredCount
@@ -378,7 +413,9 @@ class DiagnosticService(
         session.effectiveSpeedSec = null
         sessionRepo.save(session)
 
-        val report = buildReport(session, scores, recommendation)
+        // v2: scores (earned) / maxScores → ratio (0~100) 변환
+        val ratioScores = ScoringEngine.ratioScores(scores, maxScores).toMutableMap()
+        val report = buildReport(session, ratioScores, recommendation)
         return FromOmrResponse(sessionId = sessionId, report = report)
     }
 
@@ -393,7 +430,13 @@ class DiagnosticService(
         val recommendation = ScoringEngine.calculateRecommendation(
             session.tier, session.rawTci?.toDouble() ?: 50.0, session.confidence?.toDouble() ?: 0.0
         )
-        return buildReport(session, scores, recommendation)
+        // v2 세션은 scores 가 earned (절대값) 이므로 maxScores 로 나눠 ratio 산출.
+        // v1 세션 (maxScoresJson 없음) 은 scores 자체가 0~100 점수이므로 그대로 사용 (호환).
+        val displayScores = if (!session.maxScoresJson.isNullOrBlank()) {
+            val maxScores: Map<String, Double> = objectMapper.readValue(session.maxScoresJson!!)
+            ScoringEngine.ratioScores(scores, maxScores).toMutableMap()
+        } else scores
+        return buildReport(session, displayScores, recommendation)
     }
 
     // ── 학부모용 리포트 조회 (studentUserId로 검증) ──
@@ -412,7 +455,11 @@ class DiagnosticService(
         val recommendation = ScoringEngine.calculateRecommendation(
             session.tier, session.rawTci?.toDouble() ?: 50.0, session.confidence?.toDouble() ?: 0.0
         )
-        return buildReport(session, scores, recommendation)
+        val displayScores = if (!session.maxScoresJson.isNullOrBlank()) {
+            val maxScores: Map<String, Double> = objectMapper.readValue(session.maxScoresJson!!)
+            ScoringEngine.ratioScores(scores, maxScores).toMutableMap()
+        } else scores
+        return buildReport(session, displayScores, recommendation)
     }
 
     // ── 이력 조회 ──
