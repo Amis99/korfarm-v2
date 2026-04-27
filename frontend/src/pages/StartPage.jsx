@@ -23,6 +23,14 @@ const LEVEL_LABEL_MAP = {
   wittgenstein3: "비트겐슈타인 3",
 };
 
+// 프론트 levelFolder → 백엔드 levelId 매핑 (catalog API 호출용)
+const LEVEL_FOLDER_TO_BACKEND_ID = {
+  saussure1: "SAUSSURE_1", saussure2: "SAUSSURE_2", saussure3: "SAUSSURE_3",
+  frege1: "FREGE_1", frege2: "FREGE_2", frege3: "FREGE_3",
+  russell1: "RUSSELL_1", russell2: "RUSSELL_2", russell3: "RUSSELL_3",
+  wittgenstein1: "WITTGENSTEIN_1", wittgenstein2: "WITTGENSTEIN_2", wittgenstein3: "WITTGENSTEIN_3",
+};
+
 function getDayOfYear() {
   const now = new Date();
   const start = new Date(now.getFullYear(), 0, 0);
@@ -150,18 +158,17 @@ function StartPage() {
       const lsd = data?.learning_start_date || data?.learningStartDate || null;
       if (lid && !isParent) {
         const di = calcDayIndex(lsd);
-        const dayStr = String(di).padStart(3, "0");
-        const base = import.meta.env.BASE_URL || "/";
-        fetch(`${base}daily-reading/${lid}/${dayStr}.json`)
-          .then((r) => (r.ok ? r.json() : null))
-          .then((d) => {
-            if (d?.title) { setReadingTitle(d.title); return; }
-            fetch(`${base}daily-reading/${lid}/001.json`)
-              .then((r2) => (r2.ok ? r2.json() : null))
-              .then((d2) => { if (d2?.title) setReadingTitle(d2.title); })
-              .catch(() => {});
-          })
-          .catch(() => {});
+        const backendLevel = LEVEL_FOLDER_TO_BACKEND_ID[lid];
+        if (backendLevel) {
+          // DB catalog API 로 콘텐츠 제목 조회 (정적 파일 미사용)
+          apiGet(`/v1/learning/catalog/GENERAL?contentType=DAILY_READING&levelId=${backendLevel}`)
+            .then((catalog) => {
+              const items = Array.isArray(catalog) ? catalog : [];
+              const match = items.find((it) => Number(it.dayIndex ?? it.day_index) === di);
+              if (match?.title) setReadingTitle(match.title);
+            })
+            .catch(() => {});
+        }
       }
     }).catch((e) => console.error(e));
     // 관리자인 경우 기본 레벨을 override 초기값으로 설정
@@ -175,21 +182,18 @@ function StartPage() {
     }
   }, [isLoggedIn, isParent]);
 
-  // 관리자 레벨 변경 시 daily reading 재로드
+  // 관리자 레벨 변경 시 daily reading 재로드 (DB catalog API)
   useEffect(() => {
     if (!isAdmin || !adminLevelOverride) return;
     const lsd = profile?.learning_start_date || profile?.learningStartDate || null;
     const di = calcDayIndex(lsd);
-    const dayStr = String(di).padStart(3, "0");
-    const base = import.meta.env.BASE_URL || "/";
-    fetch(`${base}daily-reading/${adminLevelOverride}/${dayStr}.json`)
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => {
-        if (d?.title) { setReadingTitle(d.title); return; }
-        fetch(`${base}daily-reading/${adminLevelOverride}/001.json`)
-          .then((r2) => (r2.ok ? r2.json() : null))
-          .then((d2) => { if (d2?.title) setReadingTitle(d2.title); })
-          .catch(() => {});
+    const backendLevel = LEVEL_FOLDER_TO_BACKEND_ID[adminLevelOverride];
+    if (!backendLevel) return;
+    apiGet(`/v1/learning/catalog/GENERAL?contentType=DAILY_READING&levelId=${backendLevel}`)
+      .then((catalog) => {
+        const items = Array.isArray(catalog) ? catalog : [];
+        const match = items.find((it) => Number(it.dayIndex ?? it.day_index) === di);
+        if (match?.title) setReadingTitle(match.title);
       })
       .catch(() => {});
   }, [adminLevelOverride, isAdmin, profile]);

@@ -101,6 +101,17 @@ export default function CumulativeQuestionCard({
     );
   }, [question]);
 
+  // question.highlight.text 가 있으면 passage 안의 그 텍스트를 형광펜 처리.
+  // passage 가 string 일 때만 적용 (CHOICE_OX 같은 객체형 passage 는 ChoiceAnalysisCore 가 처리).
+  const highlightText = question?.highlight?.text;
+  const renderedPassage = useMemo(() => {
+    if (typeof passage !== "string" || !passage) return passage;
+    if (!highlightText || typeof highlightText !== "string") return passage;
+    // 정규식 escape
+    const esc = highlightText.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    // markdown 렌더 후에도 살아남도록 <mark> 태그로 치환 (PassageMarkdown 은 rehype-raw 로 HTML 허용)
+    return passage.replace(new RegExp(esc, "g"), `<mark class="dq-highlight">${highlightText}</mark>`);
+  }, [passage, highlightText]);
   // passage가 string이고 비어있지 않을 때만 렌더
   const hasPassage = typeof passage === "string" && passage.trim().length > 0;
   // prompt가 stem과 다르고 비어있지 않으면 별도 박스로 (현재 데이터에선 prompt가 진짜 본문인 경우 있음)
@@ -183,7 +194,7 @@ export default function CumulativeQuestionCard({
 
       {hasPassage && (
         <div className="cum-card-passage">
-          <PassageMarkdown>{passage}</PassageMarkdown>
+          <PassageMarkdown>{renderedPassage}</PassageMarkdown>
         </div>
       )}
 
