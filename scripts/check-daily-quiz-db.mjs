@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** DB의 daily-quiz contentId 패턴 점검 */
+/** DB의 daily-quiz 메타데이터 한 건 직접 확인 */
 import fs from 'node:fs';
 import path from 'node:path';
 import net from 'node:net';
@@ -18,7 +18,6 @@ function extractConfigValue(source, key) {
 function readDbConfig() {
   const source = fs.readFileSync(path.join(ROOT, 'scripts', 'import-pro-content.js'), 'utf8');
   const block = source.match(/const DB_CONFIG = \{([\s\S]*?)\};/);
-  if (!block) throw new Error('DB_CONFIG block not found.');
   const cs = block[1];
   return {
     host: extractConfigValue(cs, 'host'),
@@ -62,34 +61,41 @@ async function main() {
       charset: 'utf8mb4',
     });
 
-    // 1) daily-quiz 패턴 (dq- 접두) 카운트와 샘플
-    const [c1] = await conn.execute(
-      `SELECT COUNT(*) as cnt FROM content_versions WHERE content_id LIKE 'dq-%'`
+    // contents.DAILY_QUIZ의 첫 row + content_versions의 content_json 일부
+    const [rows] = await conn.execute(
+      `SELECT c.id, c.level_id, c.day_index, cv.content_json FROM contents c
+       JOIN content_versions cv ON cv.content_id = c.id
+       WHERE c.content_type = 'DAILY_QUIZ' LIMIT 3`
     );
-    console.log('dq-* contentId 개수:', c1[0].cnt);
-    const [s1] = await conn.execute(
-      `SELECT content_id FROM content_versions WHERE content_id LIKE 'dq-%' ORDER BY content_id LIMIT 20`
-    );
-    console.log('dq-* 샘플:', s1.map((r) => r.content_id));
-
-    // 2) contents 컬럼
-    const [cols] = await conn.execute(`SHOW COLUMNS FROM contents`);
-    console.log('contents 컬럼:', cols.map((c) => c.Field).join(', '));
-    // 3) DAILY_QUIZ row 샘플
-    const [s2] = await conn.execute(
-      `SELECT * FROM contents WHERE content_type = 'DAILY_QUIZ' LIMIT 3`
-    );
-    console.log('DAILY_QUIZ 샘플 row:');
-    for (const r of s2) {
-      const truncated = {};
-      for (const [k, v] of Object.entries(r)) {
-        truncated[k] = (typeof v === 'string' && v.length > 100) ? v.slice(0, 100) + '...' : v;
-      }
-      console.log(JSON.stringify(truncated));
+    console.log('DAILY_QUIZ + content_versions JOIN 샘플:');
+    for (const r of rows) {
+      const cj = r.content_json;
+      let cidField = '?';
+      try {
+        const obj = typeof cj === 'string' ? JSON.parse(cj) : cj;
+        cidField = obj.contentId || obj.payload?.contentId || '(없음)';
+      } catch { cidField = '(parse-fail)'; }
+      console.log(`  contents.id=${r.id}  level=${r.level_id}  day=${r.day_index}  content_json.contentId=${cidField}`);
     }
+    // content_json 안 dq- 패턴 카운트
+    const [r2x] = await conn.execute(
+      `SELECT COUNT(*) c FROM content_versions WHERE content_json LIKE '%"contentId":"dq-%'`
+    );
+    console.log('content_versions.content_json에 dq-* contentId 포함:', r2x[0].c);
+
+    // dq- 패턴 검색
+    const [r2] = await conn.execute(`SELECT COUNT(*) c FROM contents WHERE id LIKE 'dq-%'`);
+    console.log('contents.id LIKE dq-% :', r2[0].c);
+
+    // level별 카운트
+    const [r3] = await conn.execute(
+      `SELECT level_id, COUNT(*) c FROM contents WHERE content_type = 'DAILY_QUIZ' GROUP BY level_id ORDER BY level_id`
+    );
+    console.log('DAILY_QUIZ level별 카운트:');
+    for (const r of r3) console.log('  ', r.level_id, ':', r.c);
   } finally {
     if (conn) await conn.end();
-    if (tunnel) await new Promise((r) => tunnel.server.close(r)) && tunnel.sshClient.end();
+    if (tunnel) { await new Promise((r) => tunnel.server.close(r)); tunnel.sshClient.end(); }
   }
 }
 
