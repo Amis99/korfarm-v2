@@ -33,6 +33,8 @@ class TestService(
     // ─── Student: list tests ───
     @Transactional(readOnly = true)
     fun listTests(userId: String, levelId: String?, source: String?): List<TestPaperSummary> {
+        // 본사/기관 관리자는 무한 응시 가능 — hasSubmitted를 항상 false로 반환
+        val isAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
         // 사용자의 소속 기관 ID 조회
         val userOrgIds = orgMembershipRepository.findByUserIdAndStatus(userId, "active").map { it.orgId }
 
@@ -73,7 +75,7 @@ class TestService(
                 series = p.series,
                 orgId = p.orgId,
                 orgName = p.orgId?.let { orgMap[it]?.name },
-                hasSubmitted = sub != null,
+                hasSubmitted = if (isAdmin) false else sub != null,
                 score = sub?.score,
                 createdAt = p.createdAt
             )
@@ -83,6 +85,7 @@ class TestService(
     // ─── Student: 진단 테스트 목록 ───
     @Transactional(readOnly = true)
     fun listDiagnosticTests(userId: String): List<TestPaperSummary> {
+        val isAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
         val papers = testPaperRepo.findByStatus("open")
             .filter { it.series == "diagnostic" }
 
@@ -101,7 +104,7 @@ class TestService(
                 series = p.series,
                 orgId = p.orgId,
                 orgName = null,
-                hasSubmitted = sub != null,
+                hasSubmitted = if (isAdmin) false else sub != null,
                 score = sub?.score,
                 createdAt = p.createdAt
             )
@@ -111,6 +114,7 @@ class TestService(
     // ─── Student: test detail ───
     @Transactional(readOnly = true)
     fun getTestDetail(testId: String, userId: String): TestPaperDetail {
+        val isAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
         val p = findPaper(testId)
         val hasQuestions = questionRepo.findByTestIdOrderByNumberAsc(testId).isNotEmpty()
         val hasSub = submissionRepo.findByTestIdAndUserId(testId, userId) != null
@@ -126,7 +130,7 @@ class TestService(
             examDate = p.examDate?.toString(),
             series = p.series,
             hasQuestions = hasQuestions,
-            hasSubmitted = hasSub,
+            hasSubmitted = if (isAdmin) false else hasSub,
             createdAt = p.createdAt
         )
     }
@@ -150,9 +154,15 @@ class TestService(
     // ─── Student: submit OMR + auto-grade ───
     @Transactional
     fun submitOmr(testId: String, userId: String, submittedBy: String, answers: Map<String, String>): TestSubmissionEntity {
+        val isAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
         val existing = submissionRepo.findByTestIdAndUserId(testId, userId)
         if (existing != null) {
-            throw ApiException("ALREADY_SUBMITTED", "이미 제출한 시험입니다.", HttpStatus.CONFLICT)
+            // 본사/기관 관리자는 무한 응시 가능 — 기존 제출 삭제 후 새로 채점
+            if (!isAdmin) {
+                throw ApiException("ALREADY_SUBMITTED", "이미 제출한 시험입니다.", HttpStatus.CONFLICT)
+            }
+            submissionRepo.delete(existing)
+            submissionRepo.flush()
         }
         val questions = questionRepo.findByTestIdOrderByNumberAsc(testId)
         if (questions.isEmpty()) {

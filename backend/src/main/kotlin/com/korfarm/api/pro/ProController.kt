@@ -85,8 +85,9 @@ class ProController(
         val userId = requireUserId()
         subscriptionService.requireActive(userId)
 
-        // 기본 4개 완료 확인
-        if (!proModeService.checkAllBaseCompleted(userId, chapterId)) {
+        // 기본 4개 완료 확인 — 본사/기관 관리자는 우회
+        val isAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        if (!isAdmin && !proModeService.checkAllBaseCompleted(userId, chapterId)) {
             throw ApiException("LOCKED", "기본 학습 4개를 모두 완료해야 모범답안을 볼 수 있습니다.", HttpStatus.FORBIDDEN)
         }
 

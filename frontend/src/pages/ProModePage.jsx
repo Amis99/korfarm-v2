@@ -7,10 +7,12 @@ import "../styles/pro-mode.css";
 import "../styles/video-modal.css";
 
 function ProModePage() {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, user } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const overrideLevel = searchParams.get("level");
+  // 본사/기관 관리자는 구독 검증 우회 (백엔드 우회와 별개 안전망)
+  const isAdmin = user?.roles?.some((r) => r === "HQ_ADMIN" || r === "ORG_ADMIN");
   const [chapters, setChapters] = useState([]);
   const [userLevel, setUserLevel] = useState("");
   const [loading, setLoading] = useState(true);
@@ -34,7 +36,7 @@ function ProModePage() {
         setChapters(chaps || []);
       })
       .catch((e) => {
-        if (isPaymentRequired(e)) {
+        if (isPaymentRequired(e) && !isAdmin) {
           setNeedSubscription(true);
         } else {
           console.error(e);
@@ -73,7 +75,8 @@ function ProModePage() {
   };
 
   const handleRowClick = (ch) => {
-    if (!ch.isAccessible) {
+    // 관리자는 잠금 무시하고 모든 챕터 진입 가능
+    if (!ch.isAccessible && !isAdmin) {
       alert("이전 챕터를 먼저 통과해야 잠금이 해제됩니다.");
       return;
     }

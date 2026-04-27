@@ -46,8 +46,10 @@ function CompetencyAnalysis({ scores }) {
 
 function ProTestPage() {
   const { chapterId } = useParams();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, user } = useAuth();
   const navigate = useNavigate();
+  // 본사/기관 관리자는 통과한 챕터도 무한 재응시 가능 — isTestPassed 잠금 무시
+  const isAdmin = user?.roles?.some((r) => r === "HQ_ADMIN" || r === "ORG_ADMIN");
 
   // 상태 머신: ready → printed → omr_input → result
   //            ready → online_solving → result
@@ -88,8 +90,8 @@ function ProTestPage() {
       const status = await apiGet(`/v1/pro/chapters/${chapterId}/test-status`);
       setTestStatus(status);
 
-      // 이미 통과한 경우
-      if (status.isTestPassed) {
+      // 이미 통과한 경우 — 관리자는 무한 재응시 가능하므로 ready 단계 유지
+      if (status.isTestPassed && !isAdmin) {
         setPhase("result");
         const passedSession = status.history?.find(s => s.status === "passed");
         setResult({

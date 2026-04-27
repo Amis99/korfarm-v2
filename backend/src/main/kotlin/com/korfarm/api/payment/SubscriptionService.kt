@@ -1,6 +1,7 @@
 ﻿package com.korfarm.api.payment
 
 import com.korfarm.api.common.ApiException
+import com.korfarm.api.security.SecurityUtils
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -41,6 +42,8 @@ class SubscriptionService(
 
     @Transactional(readOnly = true)
     fun requireActive(userId: String) {
+        // 본사 관리자/기관 관리자는 구독 검증 우회 — 모든 학습 메뉴 무제한 접근
+        if (SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")) return
         val current = subscriptionRepository.findTopByUserIdOrderByEndAtDesc(userId)
             ?: throw ApiException("PAYMENT_REQUIRED", "subscription required", HttpStatus.PAYMENT_REQUIRED)
         if (!isEntitled(current)) {
