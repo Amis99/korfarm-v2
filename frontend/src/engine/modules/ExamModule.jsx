@@ -102,17 +102,22 @@ function ExamModule({ content }) {
     }
     setIsSubmitting(true);
     const finalAnswers = answersRef.current;
+    // setRecords 는 비동기 batch — 같은 함수 내에서 finish 즉시 호출 시 ref 가 stale 이라
+    // collected 배열을 직접 모아 finish 에 인자로 전달 (records 누락 버그 방지)
+    const collected = [];
     questions.forEach((q) => {
       if (finalAnswers[q.id]) {
-        recordAnswer({
+        const entry = {
           id: q.id,
           selectedId: finalAnswers[q.id],
           questionKind: q.questionKind,
           timeSpentMs: timeRef.current[q.id]?.totalMs || 0,
-        });
+        };
+        collected.push(entry);
+        recordAnswer(entry);
       }
     });
-    finish(true);
+    finish(true, { records: collected });
   };
 
   if (questions.length === 0) return null;

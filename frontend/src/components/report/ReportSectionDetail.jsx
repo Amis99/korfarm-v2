@@ -55,7 +55,7 @@ const SECTIONS = [
               </div>
             </div>
             {it.testId && (
-              <Link to={`/test-report/${it.testId}`} className="ur-test-card-link">
+              <Link to={`/tests/${it.testId}/report`} className="ur-test-card-link">
                 상세 성적표 보기 →
               </Link>
             )}

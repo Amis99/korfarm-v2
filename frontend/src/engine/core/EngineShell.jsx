@@ -371,7 +371,9 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
 
   const finish = (success, options = {}) => {
     setStatus("FINISHED");
-    const latestRecords = recordsRef.current;
+    // 호출자가 records를 직접 전달하면 그것을 우선 사용 (setState 비동기 큐가 아직 commit 안 된
+    // 상태에서 finish 호출되는 경우 ref가 stale일 수 있음 — ExamModule 등 일괄 제출 패턴 보호)
+    const latestRecords = options.records || recordsRef.current;
     const correct = latestRecords.filter((item) => item.correct).length;
     const wrong = latestRecords.filter((item) => item.correct === false).length;
     const total = latestRecords.length;
