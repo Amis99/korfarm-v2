@@ -310,7 +310,7 @@ function AdminContentPage() {
     commitSearch(e.target.value);
   };
 
-  /* 콘텐츠 미리보기 (DB → API, static → 정적 파일) */
+  /* 콘텐츠 미리보기 (DB 단일 소스) */
   const handleServerPreview = async (content) => {
     if (!content?.id) return;
     setPreviewLoadingId(content.id);
@@ -318,15 +318,7 @@ function AdminContentPage() {
     try {
       let previewData;
       let moduleKey;
-      if (content.source === "static" && content.jsonPath) {
-        const base = import.meta.env.BASE_URL || "/";
-        const url = `${base}${content.jsonPath.replace(/^\//, "")}`;
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(`정적 파일 로드 실패: ${res.status}`);
-        const fileData = await res.json();
-        previewData = fileData;
-        moduleKey = resolveModuleKeyForContentType(fileData.contentType, content.moduleKey);
-      } else {
+      {
         const preview = await apiGet(`/v1/admin/content/${content.id}/preview`);
         // contentType은 이제 array (다중 분류). string으로 와도 wrap.
         const ctRaw = preview.contentType ?? preview.content_type ?? "";
@@ -572,7 +564,7 @@ function AdminContentPage() {
                     </td>
                     <td>
                       <Link
-                        to={`/admin/content/edit?id=${content.id}${content.source === "static" ? `&source=static&jsonPath=${encodeURIComponent(content.jsonPath)}&type=${encodeURIComponent(content.type)}&title=${encodeURIComponent(content.title)}` : ""}&from=${fromParam}`}
+                        to={`/admin/content/edit?id=${content.id}&from=${fromParam}`}
                         className="admin-content-title-link"
                         title={content.title}
                       >
@@ -621,13 +613,8 @@ function AdminContentPage() {
                           className="admin-icon-btn admin-tooltip-wrap"
                           type="button"
                           onClick={() => {
+                            // 학습 콘텐츠는 DB 단일 소스 — static 분기 제거
                             const params = new URLSearchParams({ id: content.id, mode: "json", from: fromParam });
-                            if (content.source === "static") {
-                              params.set("source", "static");
-                              params.set("jsonPath", content.jsonPath);
-                              params.set("type", content.type);
-                              params.set("title", content.title);
-                            }
                             navigate(`/admin/content/edit?${params.toString()}`);
                           }}
                         >

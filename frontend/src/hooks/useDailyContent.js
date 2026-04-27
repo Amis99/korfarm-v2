@@ -92,44 +92,29 @@ export default function useDailyContent({ folder, contentType, errorLabel }) {
         }
         const dayStr = String(dayIndex).padStart(3, "0");
 
-        const isJson = (res) =>
-          res.ok && (res.headers.get("content-type") || "").includes("application/json");
-
-        // 1) DB API 우선 — daily-quiz/daily-reading 모두 catalog로 contentId 조회 → content 본문 로드
+        // DB 단일 소스 — 정적 파일 폴백은 더 이상 사용하지 않음 (학습 콘텐츠는 DB 만 권위).
+        // catalog 매칭 실패 시 명확한 에러로 처리.
         let data = null;
         const backendLevelId = LEVEL_FOLDER_TO_BACKEND_ID[levelFolder];
-        if (backendLevelId) {
-          try {
-            const catalog = await apiGet(
-              `/v1/learning/catalog/GENERAL?contentType=${contentType}&levelId=${backendLevelId}`
-            );
-            const items = Array.isArray(catalog) ? catalog : [];
-            const match = items.find((it) => Number(it.dayIndex ?? it.day_index) === dayIndex);
-            if (match) {
-              const cid = match.contentId || match.content_id;
-              const detail = await apiGet(`/v1/learning/content/${cid}`);
-              // detail.content가 표준양식 전체 JSON (contentId, payload 포함)
-              data = detail?.content || null;
-              if (data && !cancelled) setContent(data);
-            }
-          } catch (apiErr) {
-            console.warn(`${errorLabel} DB 로드 실패, 정적 파일 폴백:`, apiErr.message);
-          }
+        if (!backendLevelId) {
+          throw new Error(`${errorLabel} 레벨 매핑 실패 (${levelFolder}).`);
         }
-
-        // 2) 정적 파일 폴백 (DB에 없거나 실패한 경우)
+        const catalog = await apiGet(
+          `/v1/learning/catalog/GENERAL?contentType=${contentType}&levelId=${backendLevelId}`
+        );
+        const items = Array.isArray(catalog) ? catalog : [];
+        const match = items.find((it) => Number(it.dayIndex ?? it.day_index) === dayIndex);
+        if (!match) {
+          throw new Error(`${errorLabel} ${dayIndex}일차 콘텐츠가 DB에 없습니다.`);
+        }
+        const cid = match.contentId || match.content_id;
+        const detail = await apiGet(`/v1/learning/content/${cid}`);
+        // detail.content 가 표준양식 전체 JSON (contentId, payload 포함)
+        data = detail?.content || null;
         if (!data) {
-          const res = await fetch(`${BASE}${folder}/${levelFolder}/${dayStr}.json`);
-          if (isJson(res)) {
-            data = await res.json();
-            if (!cancelled) setContent(data);
-          } else {
-            const fallbackRes = await fetch(`${BASE}${folder}/${levelFolder}/001.json`);
-            if (!isJson(fallbackRes)) throw new Error(`${errorLabel} 데이터를 불러올 수 없습니다.`);
-            data = await fallbackRes.json();
-            if (!cancelled) setContent(data);
-          }
+          throw new Error(`${errorLabel} 콘텐츠 본문 로드 실패 (${cid}).`);
         }
+        if (!cancelled) setContent(data);
         // 일일 씨앗 현황 조회
         if (!cancelled) {
           apiGet(`/v1/learning/farm/daily-seed-status?contentType=${contentType}`)

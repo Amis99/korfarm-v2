@@ -25,6 +25,9 @@ export function useContentEditor(contentId, staticInfo) {
   const [saveMsg, setSaveMsg] = useState("");
   const undoStack = useRef([]);
   const [undoLen, setUndoLen] = useState(0);
+  // 표준 양식 wrapper (rawContent 전체) 보관 — save 시 wrapper 보존하여 schema 손실 방지.
+  // 학생 화면은 wrapper.payload 를 기대하므로, save 시 wrapper.payload 만 갱신해서 보내야 함.
+  const wrapperRef = useRef(null);
   const isStatic = !!staticInfo;
 
   /* 데이터 로드 */
@@ -56,7 +59,11 @@ export function useContentEditor(contentId, staticInfo) {
           apiRes = await apiGet(`/v1/admin/content/${contentId}/preview`);
           ct = apiRes.contentType || apiRes.content_type || "";
           const rawContent = apiRes.content || apiRes.payload || {};
-          payload = rawContent.payload || rawContent;
+          // wrapper 보존: 학생 화면이 기대하는 표준 양식 (contentId/contentType/.../payload) 유지
+          // payload 키 존재 여부로 wrapper / non-wrapper 판별
+          const isWrapped = rawContent && typeof rawContent === "object" && "payload" in rawContent;
+          wrapperRef.current = isWrapped ? rawContent : null;
+          payload = isWrapped ? rawContent.payload : rawContent;
           title = apiRes.title || "";
           schemaVersion = apiRes.schemaVersion || apiRes.schema_version || "1.0";
         }
@@ -165,8 +172,6 @@ export function useContentEditor(contentId, staticInfo) {
     setSaveMsg("");
     setError("");
     try {
-      /* content에 title 포함 (백엔드가 content["title"]에서 추출) */
-      const payload = meta.title ? { ...content, title: meta.title } : content;
       // contentType은 항상 array로 전송 (다중 분류)
       const ctArray = Array.isArray(meta.contentType)
         ? meta.contentType.filter(Boolean)
@@ -174,6 +179,21 @@ export function useContentEditor(contentId, staticInfo) {
       if (ctArray.length === 0) {
         throw new Error("contentType이 비어있습니다 (최소 1개 카테고리 필요)");
       }
+      // ── content_json 본문 빌드 ──
+      // 학생 화면은 표준 wrapper { contentId, contentType, ..., payload: {...} } 형태를 기대.
+      // wrapper 가 있던 콘텐츠는 wrapper 보존 + payload 갱신 (schema 손실 방지).
+      // wrapper 가 없던 옛 콘텐츠는 동일 wrapper 로 래핑하여 정규화.
+      const fullContent = wrapperRef.current
+        ? { ...wrapperRef.current, payload: content, title: meta.title || wrapperRef.current.title }
+        : {
+            contentId,
+            contentType: ctArray[0],
+            title: meta.title || "",
+            targetLevel: meta.levelId || null,
+            area: meta.area || null,
+            subArea: meta.subArea || null,
+            payload: content,
+          };
       await apiPut(`/v1/admin/content/${contentId}`, {
         contentType: ctArray,
         schemaVersion: meta.schemaVersion || "1.0",
@@ -184,8 +204,10 @@ export function useContentEditor(contentId, staticInfo) {
         dayIndex: meta.dayIndex !== "" && meta.dayIndex != null ? Number(meta.dayIndex) : null,
         moduleKey: meta.moduleKey || null,
         videoUrl: meta.videoUrl || null,
-        content: payload,
+        content: fullContent,
       });
+      // 다음 저장 시에도 wrapper 유지되도록 wrapperRef 갱신
+      wrapperRef.current = fullContent;
       setOriginal(JSON.parse(JSON.stringify(content)));
       setOriginalMeta(JSON.parse(JSON.stringify(meta)));
       undoStack.current = [];

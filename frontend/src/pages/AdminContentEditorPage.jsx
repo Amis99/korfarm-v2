@@ -10,12 +10,8 @@ export default function AdminContentEditorPage() {
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const contentId = params.get("id");
-  const source = params.get("source");
-  const staticInfo = source === "static" ? {
-    jsonPath: params.get("jsonPath"),
-    contentType: params.get("type"),
-    title: params.get("title"),
-  } : null;
+  // 학습 콘텐츠 DB 단일 소스 — static 분기 제거 (옛 source=static URL 들어와도 무시)
+  const staticInfo = null;
 
   if (!contentId) {
     return (
