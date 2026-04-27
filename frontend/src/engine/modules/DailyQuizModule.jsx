@@ -513,6 +513,17 @@ function DailyQuizModule({ content }) {
     setTimeout(() => handleNext(), 400);
   };
 
+  // CHOICE_COMPLEX_OX 오답 시 즉시 학습 종료 (사용자 요구: 10번에서 오답 즉시 종료)
+  const handleChoiceAnalysisFail = () => {
+    if (!currentQuestion) return;
+    setCompletedMap((prev) => ({
+      ...prev,
+      [currentQuestion.id]: { isCorrect: false },
+    }));
+    // 엔진 종료 — 누적 정답률 등 결과 표시
+    setTimeout(() => finish(false), 200);
+  };
+
   // ── 렌더링 ──
 
   if (!currentQuestion) return null;
@@ -556,7 +567,7 @@ function DailyQuizModule({ content }) {
               />
             );
           }
-          if (q.type === "CHOICE_OX" || q.type === "CHOICE_ANALYSIS") {
+          if (q.type === "CHOICE_COMPLEX_OX" || q.type === "CHOICE_OX" || q.type === "CHOICE_ANALYSIS") {
             // 10번 등 선택지 분석 — cum-card 안에 inline 렌더
             return (
               <div
@@ -582,6 +593,7 @@ function DailyQuizModule({ content }) {
                   <ChoiceAnalysisCore
                     question={q}
                     onComplete={handleChoiceAnalysisComplete}
+                    onFail={handleChoiceAnalysisFail}
                     adjustTime={adjustTime}
                     recordAnswer={recordAnswer}
                   />

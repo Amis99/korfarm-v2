@@ -2,386 +2,407 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import RichText from "../../utils/RichText";
 
 /**
- * ChoiceAnalysisCore — 선택지 분석(CHOICE_OX / CHOICE_ANALYSIS) 1문제 단위 인터랙션.
+ * ChoiceAnalysisCore — CHOICE_COMPLEX_OX 학습 모듈.
  *
- * 단일 모듈(농장)과 DailyQuiz Q10 에서 공통 사용.
- *
- * 학습 흐름 (구형식, 사용자 의도):
- *   1) 지문 표시 — paragraphs[].text + tokens[] (token 단위 클릭 가능)
- *   2) 5개 선택지 노출
- *   3) 선택지 클릭 → 그 선택지의 propositions[] (명제 1~N개) 활성
- *   4) 명제별 처리:
- *      a) 명제 텍스트 + OX 모달 표시
- *      b) 학생이 OX 클릭 → propositions[i].oxAnswer 와 비교
- *      c) 정답이면 다음 단계 (token 클릭), 오답이면 페널티 + 재시도
- *      d) token 클릭 단계 — 학생이 evidenceTokens 의 token 들을 클릭
- *         · matchMode === "ALL": 모든 evidenceTokens 클릭해야 통과
- *         · matchMode === "ANY": 한 개만 클릭해도 통과
- *      e) 통과 → 다음 명제 (또는 선택지 분석 완료)
- *   5) 5개 선택지 모두 분석 완료 → 최종 선택 단계 (phase="final")
- *   6) 학생이 finalIsCorrectChoice === true 인 선택지를 클릭해야 정답
+ * 학습 흐름:
+ *   1) 좌측 지문 + 우측 선택지 (2~5개)
+ *   2) 선택지 클릭 → 포스트잇 모달 (이동 가능)
+ *      모달에 그 선택지의 1번 명제 + OX 버튼
+ *   3) 학생 OX 클릭:
+ *      · 정답 → 1초 연두 애니메이션 후 다음 단계 (근거 영역 클릭)
+ *      · 오답 → 3초 빨강 애니메이션 후 학습 종료 (finish(false))
+ *   4) 근거 영역 클릭 단계: 모달은 안내 문구로 변경, 학생은 지문에서 글자 영역 클릭
+ *      · matchMode "ANY": 정답 영역 한 번만 클릭하면 통과
+ *      · matchMode "ALL": 모든 정답 영역을 클릭해야 통과
+ *      · 정답 영역 클릭 → 1초 하이라이트 + 다음 명제 (또는 선택지 통과)
+ *      · 오답 영역 클릭 → 3초 흔들림 + 학습 종료
+ *   5) 모든 명제 통과 → 선택지 통과 표시
+ *   6) 모든 선택지 통과 → onComplete (정답 처리)
  *
  * Props:
- *   question: 구형식 CHOICE_OX 문제
- *   onComplete(): 최종 정답 통과 시 호출
- *   adjustTime(delta): 시간 가감
- *   recordAnswer(entry): 답변 기록
+ *   question: 새 CHOICE_COMPLEX_OX 스키마
+ *     {
+ *       passage: { paragraphs: [{ id, text }] },
+ *       choices: [{
+ *         choiceId, text,
+ *         propositions: [{
+ *           propId, text, oxAnswer ("O"|"X"),
+ *           matchMode ("ANY"|"ALL"),
+ *           evidenceRanges: [{ paragraphId, start, end }]
+ *         }]
+ *       }]
+ *     }
+ *   onComplete(): 모든 선택지 통과 시
+ *   onFail():     오답 시 즉시 호출 (학습 종료)
+ *   adjustTime(d), recordAnswer(entry)
  */
+
+const CORRECT_FEEDBACK_MS = 1000;
+const WRONG_FEEDBACK_MS = 3000;
 
 export default function ChoiceAnalysisCore({
   question,
   onComplete,
+  onFail,
   adjustTime,
   recordAnswer,
 }) {
   const passage = question?.passage || {};
+  const paragraphs = useMemo(() => passage.paragraphs || [], [passage]);
   const choices = useMemo(() => question?.choices || [], [question]);
-  const tokens = useMemo(() => passage.tokens || [], [passage]);
-  const paragraphs = passage.paragraphs || [];
   const scoring = question?.scoring || { correctDeltaSec: 20, wrongDeltaSec: -40 };
 
-  const tokenById = (tid) => tokens.find((t) => t.tokenId === tid);
-
   // ─── 상태 ───
-  // phase: "analysis" — 명제별 OX + token 분석
-  //        "final"    — 최종 선택지 1개 클릭
-  //        "done"     — 정답 통과
-  const [phase, setPhase] = useState("analysis");
-
-  // 활성 선택지·명제·서브단계
+  // passedChoices: 통과한 선택지 ID 들
+  const [passedChoices, setPassedChoices] = useState(() => new Set());
+  // 활성 선택지·명제
   const [activeChoiceId, setActiveChoiceId] = useState(null);
   const [activePropIdx, setActivePropIdx] = useState(0);
-  // "ox" — OX 모달, "tokens" — 지문에서 evidence token 클릭
-  const [propStep, setPropStep] = useState("ox");
-
-  // 분석 완료한 선택지 ID 들
-  const [analyzedChoices, setAnalyzedChoices] = useState(() => new Set());
-
-  // 활성 명제 내에서 이미 정답 클릭한 token 들 (ALL 모드)
-  const [confirmedTokens, setConfirmedTokens] = useState(() => new Set());
-
-  // 잘못 클릭한 token (흔들림)
-  const [shakeTokenId, setShakeTokenId] = useState(null);
-  // 잘못 클릭한 선택지 (final 단계)
-  const [shakeChoiceId, setShakeChoiceId] = useState(null);
-  // OX 모달 즉시 피드백
+  // step: "ox"  — OX 모달
+  //       "evidence" — 근거 영역 클릭
+  const [step, setStep] = useState("ox");
+  // 활성 명제에서 클릭 완료한 evidence range 인덱스 (ALL 모드용)
+  const [confirmedEvidenceIdx, setConfirmedEvidenceIdx] = useState(() => new Set());
+  // 클릭한 글자 위치 하이라이트 (시각용)
+  // key: "paragraphId:start-end" → "correct" | "wrong"
+  const [rangeHighlights, setRangeHighlights] = useState({});
+  // 피드백
   const [oxFeedback, setOxFeedback] = useState(null); // "correct" | "wrong"
+  const [evidenceFeedback, setEvidenceFeedback] = useState(null); // "correct" | "wrong"
+  // 학습 종료됨 (onFail 호출 후)
+  const [terminated, setTerminated] = useState(false);
 
-  const shakeTimerRef = useRef(null);
-  const oxFeedbackTimerRef = useRef(null);
+  // 모달 위치 (드래그)
+  const [modalPos, setModalPos] = useState({ x: null, y: null });
+  const dragRef = useRef({ active: false, dx: 0, dy: 0 });
 
-  // 문제 바뀌면 리셋
+  const feedbackTimerRef = useRef(null);
+
+  // 문제 변경 시 리셋
   useEffect(() => {
-    setPhase("analysis");
+    setPassedChoices(new Set());
     setActiveChoiceId(null);
     setActivePropIdx(0);
-    setPropStep("ox");
-    setAnalyzedChoices(new Set());
-    setConfirmedTokens(new Set());
-    setShakeTokenId(null);
-    setShakeChoiceId(null);
+    setStep("ox");
+    setConfirmedEvidenceIdx(new Set());
+    setRangeHighlights({});
     setOxFeedback(null);
+    setEvidenceFeedback(null);
+    setTerminated(false);
+    setModalPos({ x: null, y: null });
   }, [question]);
 
   useEffect(() => () => {
-    if (shakeTimerRef.current) clearTimeout(shakeTimerRef.current);
-    if (oxFeedbackTimerRef.current) clearTimeout(oxFeedbackTimerRef.current);
+    if (feedbackTimerRef.current) clearTimeout(feedbackTimerRef.current);
   }, []);
 
   if (!question) return null;
 
-  // 활성 선택지·명제 객체
-  const activeChoice = choices.find((c) => c.choiceId === activeChoiceId);
-  const activeProposition = activeChoice?.propositions?.[activePropIdx] || null;
+  const activeChoice = choices.find((c) => c.choiceId === activeChoiceId) || null;
+  const activeProp = activeChoice?.propositions?.[activePropIdx] || null;
+  const totalProps = activeChoice?.propositions?.length || 0;
+  const evidenceRanges = activeProp?.evidenceRanges || [];
+  const matchMode = activeProp?.matchMode || "ALL";
 
   // ─── 핸들러 ───
 
-  const flashShakeToken = (tid) => {
-    setShakeTokenId(tid);
-    if (shakeTimerRef.current) clearTimeout(shakeTimerRef.current);
-    shakeTimerRef.current = setTimeout(() => setShakeTokenId(null), 500);
+  const fail = (reason) => {
+    setTerminated(true);
+    if (feedbackTimerRef.current) clearTimeout(feedbackTimerRef.current);
+    feedbackTimerRef.current = setTimeout(() => {
+      onFail && onFail(reason);
+    }, WRONG_FEEDBACK_MS);
   };
 
-  const flashShakeChoice = (cid) => {
-    setShakeChoiceId(cid);
-    if (shakeTimerRef.current) clearTimeout(shakeTimerRef.current);
-    shakeTimerRef.current = setTimeout(() => setShakeChoiceId(null), 500);
-  };
-
-  // 선택지 클릭 (analysis phase)
   const handleChoiceClick = (cid) => {
-    if (phase !== "analysis") return;
-    if (analyzedChoices.has(cid)) return; // 이미 분석된 건 비활성
+    if (terminated) return;
+    if (passedChoices.has(cid)) return;
     if (activeChoiceId === cid) return;
     setActiveChoiceId(cid);
     setActivePropIdx(0);
-    setPropStep("ox");
-    setConfirmedTokens(new Set());
+    setStep("ox");
+    setConfirmedEvidenceIdx(new Set());
+    setRangeHighlights({});
+    setOxFeedback(null);
+    setEvidenceFeedback(null);
   };
 
-  // 명제 OX 클릭
   const handleOxClick = (ox) => {
-    if (!activeProposition) return;
-    const isCorrect = ox === activeProposition.oxAnswer;
+    if (terminated || !activeProp) return;
+    const isCorrect = ox === activeProp.oxAnswer;
     adjustTime(isCorrect ? scoring.correctDeltaSec : scoring.wrongDeltaSec);
     recordAnswer({
-      id: `${question.id}-${activeChoice.choiceId}-${activeProposition.propId}-${ox}`,
+      id: `${question.id}-${activeChoice.choiceId}-${activeProp.propId}-ox-${ox}`,
       correct: isCorrect,
       questionKind: question.questionKind,
     });
     if (!isCorrect) {
-      // 무한 재시도: 모달 그대로 두고 피드백만
       setOxFeedback("wrong");
-      if (oxFeedbackTimerRef.current) clearTimeout(oxFeedbackTimerRef.current);
-      oxFeedbackTimerRef.current = setTimeout(() => setOxFeedback(null), 800);
+      fail("ox-wrong");
       return;
     }
-    // 정답 → token 클릭 단계로 진행
     setOxFeedback("correct");
-    if (oxFeedbackTimerRef.current) clearTimeout(oxFeedbackTimerRef.current);
-    oxFeedbackTimerRef.current = setTimeout(() => {
+    if (feedbackTimerRef.current) clearTimeout(feedbackTimerRef.current);
+    feedbackTimerRef.current = setTimeout(() => {
       setOxFeedback(null);
-      setPropStep("tokens");
-    }, 600);
+      setStep("evidence");
+    }, CORRECT_FEEDBACK_MS);
   };
 
-  // 명제 통과 → 다음 명제 또는 선택지 분석 완료
-  const advanceAfterToken = () => {
-    const props = activeChoice?.propositions || [];
-    if (activePropIdx + 1 < props.length) {
-      // 다음 명제
-      setActivePropIdx(activePropIdx + 1);
-      setPropStep("ox");
-      setConfirmedTokens(new Set());
-      return;
-    }
-    // 모든 명제 처리 → 선택지 분석 완료
-    const next = new Set(analyzedChoices);
-    next.add(activeChoice.choiceId);
-    setAnalyzedChoices(next);
-    setActiveChoiceId(null);
-    setActivePropIdx(0);
-    setPropStep("ox");
-    setConfirmedTokens(new Set());
-    // 5개 모두 분석 완료 → final phase
-    if (next.size >= choices.length) {
-      setTimeout(() => setPhase("final"), 300);
-    }
-  };
-
-  // token 클릭 (propStep === "tokens" 일 때)
-  const handleTokenClick = (tid) => {
-    if (phase !== "analysis" || propStep !== "tokens" || !activeProposition) return;
-    const evidenceTokens = activeProposition.evidenceTokens || [];
-    const isEvidence = evidenceTokens.includes(tid);
-    if (!isEvidence) {
-      adjustTime(-10);
+  const handleParagraphClick = (paragraphId, charIndex) => {
+    if (terminated || step !== "evidence" || !activeProp) return;
+    // charIndex 가 어떤 evidenceRange 에 속하는지 확인
+    const matchedIdx = evidenceRanges.findIndex(
+      (r) => r.paragraphId === paragraphId && charIndex >= r.start && charIndex < r.end,
+    );
+    if (matchedIdx < 0) {
+      // 오답 영역 클릭 → 학습 종료
+      adjustTime(scoring.wrongDeltaSec);
       recordAnswer({
-        id: `${question.id}-${activeChoice.choiceId}-${activeProposition.propId}-wrong-${tid}`,
+        id: `${question.id}-${activeChoice.choiceId}-${activeProp.propId}-evidence-wrong`,
         correct: false,
         questionKind: question.questionKind,
       });
-      flashShakeToken(tid);
+      // 빨강 흔들림 (해당 글자 위치 표시 안 함, 그냥 화면 효과)
+      setEvidenceFeedback("wrong");
+      fail("evidence-wrong");
       return;
     }
-    if (confirmedTokens.has(tid)) return; // 이미 클릭한 token
+    if (confirmedEvidenceIdx.has(matchedIdx)) return; // 이미 클릭한 영역
+    // 정답 영역 클릭
+    const r = evidenceRanges[matchedIdx];
+    const key = `${r.paragraphId}:${r.start}-${r.end}`;
+    setRangeHighlights((prev) => ({ ...prev, [key]: "correct" }));
+    setEvidenceFeedback("correct");
+    if (feedbackTimerRef.current) clearTimeout(feedbackTimerRef.current);
+    feedbackTimerRef.current = setTimeout(() => {
+      setEvidenceFeedback(null);
+      const next = new Set(confirmedEvidenceIdx);
+      next.add(matchedIdx);
+      setConfirmedEvidenceIdx(next);
 
-    const matchMode = activeProposition.matchMode || "ALL";
-    if (matchMode === "ANY") {
-      advanceAfterToken();
-      return;
-    }
-    // ALL: 모두 클릭해야 통과
-    const next = new Set(confirmedTokens);
-    next.add(tid);
-    setConfirmedTokens(next);
-    if (evidenceTokens.every((t) => next.has(t))) {
-      advanceAfterToken();
-    }
+      // 통과 조건
+      const passed = matchMode === "ANY"
+        ? next.size >= 1
+        : next.size >= evidenceRanges.length;
+
+      if (!passed) return; // ALL 인데 아직 다 안 클릭
+
+      // 명제 통과 → 다음 명제 또는 선택지 통과
+      if (activePropIdx + 1 < totalProps) {
+        setActivePropIdx(activePropIdx + 1);
+        setStep("ox");
+        setConfirmedEvidenceIdx(new Set());
+        setRangeHighlights({});
+        return;
+      }
+      // 모든 명제 통과 → 선택지 통과
+      adjustTime(scoring.correctDeltaSec);
+      recordAnswer({
+        id: `${question.id}-${activeChoice.choiceId}-passed`,
+        correct: true,
+        questionKind: question.questionKind,
+      });
+      const passedNext = new Set(passedChoices);
+      passedNext.add(activeChoice.choiceId);
+      setPassedChoices(passedNext);
+      setActiveChoiceId(null);
+      setActivePropIdx(0);
+      setStep("ox");
+      setConfirmedEvidenceIdx(new Set());
+      setRangeHighlights({});
+      setModalPos({ x: null, y: null });
+      // 모든 선택지 통과 시 onComplete
+      if (passedNext.size >= choices.length) {
+        setTimeout(() => onComplete && onComplete(), 400);
+      }
+    }, CORRECT_FEEDBACK_MS);
   };
 
-  // 최종 선택지 클릭 (phase === "final")
-  const handleFinalChoiceClick = (cid) => {
-    if (phase !== "final") return;
-    const choice = choices.find((c) => c.choiceId === cid);
-    if (!choice) return;
-    const isFinal = choice.finalIsCorrectChoice === true;
-    adjustTime(isFinal ? scoring.correctDeltaSec : scoring.wrongDeltaSec);
-    recordAnswer({
-      id: `${question.id}-final-${cid}`,
-      correct: isFinal,
-      questionKind: question.questionKind,
-    });
-    if (!isFinal) {
-      flashShakeChoice(cid);
-      return;
-    }
-    setPhase("done");
-    setTimeout(() => onComplete && onComplete(), 400);
+  // ─── 모달 드래그 ───
+  const onModalDragStart = (e) => {
+    const p = "touches" in e ? e.touches[0] : e;
+    dragRef.current = { active: true, dx: p.clientX - (modalPos.x ?? 0), dy: p.clientY - (modalPos.y ?? 0) };
+    document.addEventListener("mousemove", onModalDragMove);
+    document.addEventListener("mouseup", onModalDragEnd);
+    document.addEventListener("touchmove", onModalDragMove);
+    document.addEventListener("touchend", onModalDragEnd);
+  };
+  const onModalDragMove = (e) => {
+    if (!dragRef.current.active) return;
+    const p = "touches" in e ? e.touches[0] : e;
+    setModalPos({ x: p.clientX - dragRef.current.dx, y: p.clientY - dragRef.current.dy });
+  };
+  const onModalDragEnd = () => {
+    dragRef.current.active = false;
+    document.removeEventListener("mousemove", onModalDragMove);
+    document.removeEventListener("mouseup", onModalDragEnd);
+    document.removeEventListener("touchmove", onModalDragMove);
+    document.removeEventListener("touchend", onModalDragEnd);
   };
 
-  // ─── 렌더 ───
-
-  const totalProps = activeChoice?.propositions?.length || 0;
-  const renderedTokens = tokens.length > 0 ? tokens : null;
+  // ─── 단락 렌더링 (글자 단위, 활성 evidence 영역 색상) ───
+  const renderParagraph = (p) => {
+    const text = p.text || "";
+    const len = text.length;
+    // 어떤 글자 인덱스가 어떤 상태인지 미리 계산
+    // 1) confirmed: 이미 정답 클릭한 영역 (활성 명제 한정)
+    const confirmedSet = new Set();
+    if (step === "evidence" && activeProp) {
+      evidenceRanges.forEach((r, idx) => {
+        if (r.paragraphId !== p.id) return;
+        if (!confirmedEvidenceIdx.has(idx)) return;
+        for (let i = r.start; i < r.end; i++) confirmedSet.add(i);
+      });
+    }
+    return (
+      <p key={p.id} className="ca-paragraph">
+        {Array.from(text).map((ch, i) => {
+          const isClickable = step === "evidence" && !terminated && activeChoice;
+          const isConfirmed = confirmedSet.has(i);
+          return (
+            <span
+              key={`${p.id}-${i}`}
+              className={`ca-char ${isClickable ? "clickable" : ""} ${isConfirmed ? "confirmed" : ""}`}
+              onClick={isClickable ? () => handleParagraphClick(p.id, i) : undefined}
+            >
+              {ch === " " ? " " : ch === "\n" ? "\n" : ch}
+            </span>
+          );
+        })}
+      </p>
+    );
+  };
 
   return (
-    <div className="ca-module">
+    <div className={`ca-module ${terminated ? "terminated" : ""}`}>
       <div className="ca-stem">
         <RichText>{question.stem || ""}</RichText>
       </div>
 
       <div className="ca-progress-bar">
-        {phase === "analysis" && (
-          <span>
-            {analyzedChoices.size} / {choices.length} 선택지 분석 완료
-            {activeChoice && totalProps > 1 && (
-              <span className="ca-prop-progress">
-                {" "}· 명제 {activePropIdx + 1} / {totalProps}
-              </span>
-            )}
-          </span>
-        )}
-        {phase === "final" && <span>최종 정답을 1개 선택하세요.</span>}
-        {phase === "done" && <span className="ca-done-mark">정답!</span>}
+        <span>
+          {passedChoices.size} / {choices.length} 선택지 통과
+          {activeChoice && totalProps > 1 && (
+            <span className="ca-prop-progress">
+              {" "}· 명제 {activePropIdx + 1} / {totalProps}
+            </span>
+          )}
+        </span>
+        {terminated && <span className="ca-fail-mark">오답 — 학습 종료</span>}
       </div>
 
       <div className="ca-split">
         {/* 좌측: 지문 */}
         <div className="ca-passage-pane">
           <div className="ca-passage-label">지문</div>
-          <div className="ca-passage-body">
-            {/* 단락별 본문은 그대로 + token 별도 클릭 가능 영역 */}
-            {paragraphs.map((p) => (
-              <p key={p.id} className="ca-paragraph">
-                {p.text}
-              </p>
-            ))}
-            {renderedTokens && (
-              <div className="ca-tokens">
-                <div className="ca-tokens-label">근거 단위</div>
-                <div className="ca-tokens-list">
-                  {renderedTokens.map((t) => {
-                    const isShake = shakeTokenId === t.tokenId;
-                    const isConfirmed = confirmedTokens.has(t.tokenId);
-                    const isClickable = phase === "analysis" && propStep === "tokens";
-                    return (
-                      <span
-                        key={t.tokenId}
-                        className={`ca-token ${isClickable ? "clickable" : ""} ${isShake ? "shake" : ""} ${isConfirmed ? "confirmed" : ""}`}
-                        onClick={() => handleTokenClick(t.tokenId)}
-                      >
-                        <RichText>{t.text}</RichText>
-                        {isConfirmed && <span className="ca-token-check">✓</span>}
-                      </span>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
+          <div className={`ca-passage-body ${step === "evidence" ? "selecting" : ""}`}>
+            {paragraphs.map(renderParagraph)}
           </div>
         </div>
 
-        {/* 우측: 선택지 5개 */}
+        {/* 우측: 선택지 */}
         <div className="ca-choices-pane">
-          <div className="ca-passage-label">
-            {phase === "final" ? "최종 정답을 고르세요" : "선택지"}
-          </div>
+          <div className="ca-passage-label">선택지</div>
           {choices.map((c, i) => {
-            const isAnalyzed = analyzedChoices.has(c.choiceId);
-            const isActiveAnalysis = phase === "analysis" && c.choiceId === activeChoiceId;
-            const isShake = shakeChoiceId === c.choiceId;
-            const isCorrectFinal = phase === "done" && c.finalIsCorrectChoice;
-            const disabled =
-              (phase === "analysis" && isAnalyzed) ||
-              (phase === "final" && false) ||
-              phase === "done";
+            const isPassed = passedChoices.has(c.choiceId);
+            const isActive = c.choiceId === activeChoiceId;
             return (
               <button
                 key={c.choiceId}
                 type="button"
-                className={`ca-choice ${isActiveAnalysis ? "active" : ""} ${isAnalyzed ? "analyzed" : ""} ${isShake ? "shake" : ""} ${isCorrectFinal ? "final-correct" : ""}`}
-                onClick={() =>
-                  phase === "final"
-                    ? handleFinalChoiceClick(c.choiceId)
-                    : handleChoiceClick(c.choiceId)
-                }
-                disabled={disabled}
+                className={`ca-choice ${isActive ? "active" : ""} ${isPassed ? "passed" : ""}`}
+                onClick={() => handleChoiceClick(c.choiceId)}
+                disabled={terminated || isPassed}
               >
                 <span className="ca-choice-num">{i + 1}</span>
                 <span className="ca-choice-text">
                   <RichText>{c.text}</RichText>
                 </span>
-                {isAnalyzed && phase === "analysis" && (
-                  <span className="ca-choice-mark passed">✓</span>
-                )}
-                {isActiveAnalysis && (
-                  <span className="ca-choice-mark active">▶</span>
-                )}
-                {isCorrectFinal && (
-                  <span className="ca-choice-mark final">✓ 정답</span>
-                )}
+                {isPassed && <span className="ca-choice-mark passed">✓</span>}
+                {isActive && !isPassed && <span className="ca-choice-mark active">▶</span>}
               </button>
             );
           })}
-          {phase === "analysis" && !activeChoiceId && analyzedChoices.size < choices.length && (
-            <div className="ca-hint">선택지를 클릭하여 명제를 분석하세요.</div>
-          )}
-          {phase === "analysis" && activeChoice && propStep === "tokens" && (
-            <div className="ca-hint">
-              명제의 근거가 되는 <strong>근거 단위</strong>를 지문에서 클릭하세요.
-              {activeProposition?.matchMode === "ALL" && (
-                <span> (모두: {confirmedTokens.size} / {(activeProposition?.evidenceTokens || []).length})</span>
-              )}
-            </div>
-          )}
         </div>
       </div>
 
-      {/* OX 모달 (analysis phase, propStep === "ox") */}
-      {phase === "analysis" && activeProposition && propStep === "ox" && (
-        <div className="ca-modal-overlay">
-          <div className="ca-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="ca-modal-title">
-              명제 {activePropIdx + 1}{totalProps > 1 ? ` / ${totalProps}` : ""} — 지문과 일치하나요?
-            </div>
-            <div className="ca-modal-body">
-              <div className="ca-modal-section">
-                <div className="ca-modal-label">선택지 {choices.findIndex(c => c.choiceId === activeChoiceId) + 1}</div>
-                <div className="ca-modal-text choice"><RichText>{activeChoice?.text || ""}</RichText></div>
+      {/* 포스트잇 모달 (이동 가능) */}
+      {activeChoice && !terminated && (
+        <div
+          className={`ca-postit ${oxFeedback ? `feedback-${oxFeedback}` : ""}`}
+          style={
+            modalPos.x != null && modalPos.y != null
+              ? { left: modalPos.x, top: modalPos.y, transform: "none" }
+              : undefined
+          }
+        >
+          <div
+            className="ca-postit-header"
+            onMouseDown={onModalDragStart}
+            onTouchStart={onModalDragStart}
+          >
+            <span className="ca-postit-title">
+              선택지 {choices.findIndex((c) => c.choiceId === activeChoiceId) + 1} ·
+              명제 {activePropIdx + 1}
+              {totalProps > 1 ? ` / ${totalProps}` : ""}
+            </span>
+            <span className="ca-postit-drag-hint">이동 가능</span>
+          </div>
+
+          <div className="ca-postit-body">
+            <div className="ca-postit-section">
+              <div className="ca-postit-label">검증 명제</div>
+              <div className="ca-postit-text">
+                <RichText>{activeProp?.text || ""}</RichText>
               </div>
-              <div className="ca-modal-arrow">↓</div>
-              <div className="ca-modal-section">
-                <div className="ca-modal-label">검증 명제</div>
-                <div className="ca-modal-text proposition"><RichText>{activeProposition.text || ""}</RichText></div>
-              </div>
             </div>
-            {oxFeedback === "wrong" && (
-              <div className="ca-modal-feedback wrong">다시 생각해 보세요</div>
+
+            {step === "ox" && (
+              <>
+                <div className="ca-postit-question">지문과 일치하나요?</div>
+                <div className="ca-postit-actions">
+                  <button
+                    type="button"
+                    className="ca-ox-btn ca-ox-O"
+                    onClick={() => handleOxClick("O")}
+                    disabled={!!oxFeedback}
+                  >
+                    O<br /><span className="ca-ox-sub">일치</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="ca-ox-btn ca-ox-X"
+                    onClick={() => handleOxClick("X")}
+                    disabled={!!oxFeedback}
+                  >
+                    X<br /><span className="ca-ox-sub">불일치</span>
+                  </button>
+                </div>
+                {oxFeedback === "correct" && (
+                  <div className="ca-postit-feedback correct">정답! 이제 근거 영역을 골라 주세요.</div>
+                )}
+                {oxFeedback === "wrong" && (
+                  <div className="ca-postit-feedback wrong">오답! 학습이 종료됩니다.</div>
+                )}
+              </>
             )}
-            {oxFeedback === "correct" && (
-              <div className="ca-modal-feedback correct">정답! 이제 근거 위치를 찾아주세요.</div>
+
+            {step === "evidence" && (
+              <>
+                <div className="ca-postit-question">
+                  {matchMode === "ANY"
+                    ? "근거 부분을 고르시오. (한 군데만 정확히)"
+                    : `근거 부분을 모두 고르시오. (${confirmedEvidenceIdx.size} / ${evidenceRanges.length})`}
+                </div>
+                {evidenceFeedback === "correct" && (
+                  <div className="ca-postit-feedback correct">정확! 다음 단계로 진행합니다.</div>
+                )}
+                {evidenceFeedback === "wrong" && (
+                  <div className="ca-postit-feedback wrong">오답 영역입니다. 학습이 종료됩니다.</div>
+                )}
+              </>
             )}
-            <div className="ca-modal-actions">
-              <button
-                type="button"
-                className="ca-modal-ox-btn ca-ox-O"
-                onClick={() => handleOxClick("O")}
-                disabled={oxFeedback === "correct"}
-              >
-                O<br />
-                <span className="ca-ox-sub">일치</span>
-              </button>
-              <button
-                type="button"
-                className="ca-modal-ox-btn ca-ox-X"
-                onClick={() => handleOxClick("X")}
-                disabled={oxFeedback === "correct"}
-              >
-                X<br />
-                <span className="ca-ox-sub">불일치</span>
-              </button>
-            </div>
           </div>
         </div>
       )}
