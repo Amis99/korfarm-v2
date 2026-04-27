@@ -540,19 +540,27 @@ function PrintAnswerKeyQuestions({ questions }) {
       {questions.map((q, idx) => {
         let answerText = "";
         if (q.type === "CHOICE_OX" || q.type === "CHOICE_ANALYSIS") {
+          // CHOICE_OX/CHOICE_ANALYSIS는 인쇄지에서 선지 셔플 안 함 — 원본 ID 그대로 표시
           answerText = (q.choices || [])
             .map((c) => `${c.choiceId || c.id}=${c.expectedOX || (c.finalIsCorrectChoice ? "X" : "O")}`)
             .join(", ");
         } else if (q.type === "FILL_BLANKS" && q.blanks) {
+          // 인쇄지의 빈칸 셔플 시드와 동일하게 ${q.id}-${blank.id || bi} 사용
           answerText = q.blanks
             .map((b, bi) => {
-              const c = b.choices?.find((c) => c.id === b.answerId);
-              return `빈칸${bi + 1}: ${c?.text || b.answerId || "-"}`;
+              const blankShuffled = deterministicShuffle(b.choices || [], `${q.id || ""}-${b.id || bi}`);
+              const ansIdx = blankShuffled.findIndex((c) => c.id === b.answerId);
+              const c = ansIdx >= 0 ? blankShuffled[ansIdx] : null;
+              if (ansIdx >= 0 && c) return `빈칸${bi + 1}: ${ansIdx + 1}번 (${c.text})`;
+              return `빈칸${bi + 1}: ${b.answerId || "-"}`;
             })
             .join(" / ");
         } else if (q.choices && q.answerId) {
-          const correct = q.choices.find((c) => (c.id || c.choiceId) === q.answerId);
-          answerText = correct ? `${q.answerId}. ${correct.text}` : q.answerId;
+          // 인쇄지의 선지 셔플 시드(question.id)와 동일하게 셔플 후, 정답이 몇 번째인지 표시
+          const shuffled = deterministicShuffle(q.choices, q.id || "");
+          const ansIdx = shuffled.findIndex((c) => (c.id || c.choiceId) === q.answerId);
+          const correct = ansIdx >= 0 ? shuffled[ansIdx] : null;
+          answerText = correct ? `${ansIdx + 1}번 (${correct.text})` : q.answerId;
         }
         return (
           <li key={q.id || idx} className="print-answer-item">
@@ -581,12 +589,15 @@ function PrintAnswerKeyReading({ payload }) {
         {(intensive.timeline || []).map((step, idx) => {
           const q = step.question;
           if (!q) return null;
-          const correct = (q.choices || []).find((c) => c.id === q.answerId);
+          // 인쇄지의 정독 선지 셔플 시드(step.stepId || `i${idx}`)와 동일하게 셔플
+          const shuffled = deterministicShuffle(q.choices || [], step.stepId || `i${idx}`);
+          const ansIdx = shuffled.findIndex((c) => c.id === q.answerId);
+          const correct = ansIdx >= 0 ? shuffled[ansIdx] : null;
           return (
             <li key={step.stepId || idx} className="print-answer-item">
               <div className="print-answer-num">{idx + 1}</div>
               <div className="print-answer-correct">
-                정답: {correct ? `${q.answerId}. ${correct.text}` : q.answerId || "-"}
+                정답: {correct ? `${ansIdx + 1}번 (${correct.text})` : q.answerId || "-"}
               </div>
               {q.explanation && (
                 <div className="print-answer-explanation"><strong>해설:</strong> {q.explanation}</div>
