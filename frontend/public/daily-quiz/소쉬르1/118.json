@@ -71,7 +71,7 @@
         "questionKind": "SENTENCE_READING",
         "competency": "문장 독해력",
         "stem": "빈칸에 알맞은 말을 고르세요.",
-        "passage": "예쁜 색종이를 네모 모양이 되도록 반으로 반듯하게 [ \u3000 ].",
+        "passage": "예쁜 색종이를 네모 모양이 되도록 반으로 반듯하게 [ 　 ].",
         "choices": [
           {
             "id": "A",
@@ -175,7 +175,7 @@
         "questionKind": "GRAMMAR_USAGE",
         "competency": "어법·문법 능력",
         "stem": "밑줄 친 부분의 맞춤법이 올바른 것을 고르세요.",
-        "passage": "오늘 오전에 놀이터에서 친구와 숨바꼭질을 ( \u3260 ).\n재미있게 뛰어놀았더니 배가 몹시 ( \u3261 ).",
+        "passage": "오늘 오전에 놀이터에서 친구와 숨바꼭질을 ( ㉠ ).\n재미있게 뛰어놀았더니 배가 몹시 ( ㉡ ).",
         "choices": [
           {
             "id": "A",
@@ -382,182 +382,123 @@
       },
       {
         "id": "dq-SAUSSURE_1-118-10",
-        "type": "CHOICE_OX",
+        "type": "CHOICE_COMPLEX_OX",
         "questionKind": "CHOICE_ANALYSIS",
-        "competency": "선택지 분석 및 전략 수립 능력",
-        "stem": "글의 내용과 다른 것을 고르세요.",
+        "competency": "시간 어휘 이해 (오전/오후)",
+        "stem": "윗글에 대한 설명으로 적절하지 <u>않은</u> 것은?",
         "passage": {
           "paragraphs": [
             {
               "id": "p1",
               "text": "하루는 아침, 점심, 저녁으로 흘러갑니다. '오전'은 우리가 아침에 일어나서 점심을 먹기 전까지의 시간입니다. '오후'는 우리가 점심을 먹고 난 다음부터 잠자리에 들기 전까지의 시간입니다."
             }
-          ],
-          "tokens": [
-            {
-              "tokenId": "p1_t1",
-              "paragraphId": "p1",
-              "text": "하루는 "
-            },
-            {
-              "tokenId": "p1_t2",
-              "paragraphId": "p1",
-              "text": "아침, "
-            },
-            {
-              "tokenId": "p1_t3",
-              "paragraphId": "p1",
-              "text": "점심, "
-            },
-            {
-              "tokenId": "p1_t4",
-              "paragraphId": "p1",
-              "text": "저녁으로 "
-            },
-            {
-              "tokenId": "p1_t5",
-              "paragraphId": "p1",
-              "text": "흘러갑니다. "
-            },
-            {
-              "tokenId": "p1_t6",
-              "paragraphId": "p1",
-              "text": "'오전'은 "
-            },
-            {
-              "tokenId": "p1_t7",
-              "paragraphId": "p1",
-              "text": "우리가 "
-            },
-            {
-              "tokenId": "p1_t8",
-              "paragraphId": "p1",
-              "text": "아침에 "
-            },
-            {
-              "tokenId": "p1_t9",
-              "paragraphId": "p1",
-              "text": "일어나서 "
-            },
-            {
-              "tokenId": "p1_t10",
-              "paragraphId": "p1",
-              "text": "점심을 "
-            },
-            {
-              "tokenId": "p1_t11",
-              "paragraphId": "p1",
-              "text": "먹기 "
-            },
-            {
-              "tokenId": "p1_t12",
-              "paragraphId": "p1",
-              "text": "전까지의 "
-            },
-            {
-              "tokenId": "p1_t13",
-              "paragraphId": "p1",
-              "text": "시간입니다. "
-            },
-            {
-              "tokenId": "p1_t14",
-              "paragraphId": "p1",
-              "text": "'오후'는 "
-            },
-            {
-              "tokenId": "p1_t15",
-              "paragraphId": "p1",
-              "text": "우리가 "
-            },
-            {
-              "tokenId": "p1_t16",
-              "paragraphId": "p1",
-              "text": "점심을 "
-            },
-            {
-              "tokenId": "p1_t17",
-              "paragraphId": "p1",
-              "text": "먹고 "
-            },
-            {
-              "tokenId": "p1_t18",
-              "paragraphId": "p1",
-              "text": "난 "
-            },
-            {
-              "tokenId": "p1_t19",
-              "paragraphId": "p1",
-              "text": "다음부터 "
-            },
-            {
-              "tokenId": "p1_t20",
-              "paragraphId": "p1",
-              "text": "잠자리에 "
-            },
-            {
-              "tokenId": "p1_t21",
-              "paragraphId": "p1",
-              "text": "들기 "
-            },
-            {
-              "tokenId": "p1_t22",
-              "paragraphId": "p1",
-              "text": "전까지의 "
-            },
-            {
-              "tokenId": "p1_t23",
-              "paragraphId": "p1",
-              "text": "시간입니다."
-            }
           ]
         },
         "choices": [
           {
             "choiceId": "A",
-            "text": "오전은 우리가 점심을 먹고 난 후부터 잠자기 전까지의 시간입니다.",
+            "text": "오전은 아침에 일어나서 점심을 먹기 전까지의 시간이다.",
             "propositions": [
               {
                 "propId": "A1",
-                "text": "오전은 점심 이후의 시간이다.",
-                "evidenceTokens": [
-                  "p1_t6",
-                  "p1_t7",
-                  "p1_t8",
-                  "p1_t9",
-                  "p1_t10",
-                  "p1_t11",
-                  "p1_t12"
-                ],
-                "oxAnswer": "X",
-                "matchMode": "ANY"
+                "text": "오전은 아침에 일어난 뒤부터 시작된다.",
+                "oxAnswer": "O",
+                "matchMode": "ALL",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 24,
+                    "end": 61
+                  }
+                ]
+              },
+              {
+                "propId": "A2",
+                "text": "오전은 점심을 먹기 전에 끝난다.",
+                "oxAnswer": "O",
+                "matchMode": "ALL",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 24,
+                    "end": 61
+                  }
+                ]
               }
-            ],
-            "finalIsCorrectChoice": true
+            ]
           },
           {
             "choiceId": "B",
-            "text": "오후는 우리가 점심을 먹고 난 다음부터입니다.",
+            "text": "오후는 점심을 먹은 뒤부터 잠자기 전까지의 시간이다.",
             "propositions": [
               {
                 "propId": "B1",
-                "text": "오후는 점심 이후이다.",
-                "evidenceTokens": [
-                  "p1_t14",
-                  "p1_t15",
-                  "p1_t16",
-                  "p1_t17",
-                  "p1_t18",
-                  "p1_t19",
-                  "p1_t20"
-                ],
+                "text": "오후는 점심을 먹은 뒤에 시작된다.",
                 "oxAnswer": "O",
-                "matchMode": "ALL"
+                "matchMode": "ALL",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 62,
+                    "end": 105
+                  }
+                ]
+              },
+              {
+                "propId": "B2",
+                "text": "오후는 잠자리에 들기 전에 끝난다.",
+                "oxAnswer": "O",
+                "matchMode": "ALL",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 62,
+                    "end": 105
+                  }
+                ]
               }
-            ],
-            "finalIsCorrectChoice": false
+            ]
+          },
+          {
+            "choiceId": "C",
+            "text": "오전은 점심을 먹은 뒤부터 저녁까지의 시간이다.",
+            "propositions": [
+              {
+                "propId": "C1",
+                "text": "오전이 점심 이후에 시작된다.",
+                "oxAnswer": "X",
+                "matchMode": "ALL",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 24,
+                    "end": 61
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "choiceId": "D",
+            "text": "하루는 아침, 점심, 저녁으로 흘러간다.",
+            "propositions": [
+              {
+                "propId": "D1",
+                "text": "하루는 아침, 점심, 저녁의 순서로 이어진다.",
+                "oxAnswer": "O",
+                "matchMode": "ALL",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 0,
+                    "end": 23
+                  }
+                ]
+              }
+            ]
           }
         ],
-        "explanation": "오전은 아침부터 점심밥을 먹기 전까지이고, 오후는 점심을 먹은 뒤부터 잠자기 전까지입니다.",
+        "explanation": "③은 오전의 시간대를 오후의 시간대처럼 뒤바꿔 설명한 섞어치기 함정입니다. 지문에서 오전은 '아침에 일어나서 점심을 먹기 전까지'라고 분명히 정해져 있습니다.",
         "scoring": {
           "correctDeltaSec": 20,
           "wrongDeltaSec": -40

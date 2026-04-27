@@ -377,58 +377,119 @@
       },
       {
         "id": "dq-WITTGENSTEIN_1-118-10",
-        "type": "CHOICE_OX",
+        "type": "CHOICE_COMPLEX_OX",
         "questionKind": "CHOICE_ANALYSIS",
-        "competency": "콰인의 번역 불확정성과 근본적 번역의 논리 분석",
-        "stem": "콰인의 번역 불확정성에 관한 지문을 읽고, 선택지의 적절성을 분석하여 OX 판정하세요.",
+        "competency": "번역의 불확정성 개념 이해",
+        "stem": "윗글에 대한 설명으로 적절하지 <u>않은</u> 것은?",
         "passage": {
           "paragraphs": [
             {
               "id": "p1",
-              "text": "윌러드 콰인은 서로 다른 언어 체계를 가진 두 문화권 사이의 '근본적 번역'이 객관적으로 유일한 정답을 가질 수 없다는 '번역의 불확정성'을 주장했다. 미지의 언어권에서 원주민이 토끼를 보고 '가바가이(Gavagai)'라고 외칠 때, 번역가는 이를 '토끼'로 번역할 수도 있지만 '토끼의 부분'이나 '토끼성' 등으로 번역할 수도 있다. 행동적 증거만으로는 이 가설들 중 어느 것이 옳은지 결정할 논리적 근거가 부족하기 때문이다. 이는 우리가 사용하는 개념 체계가 세계를 바라보는 방식에 따라 다르게 구성될 수 있음을 시사한다."
-            }
-          ],
-          "tokens": [
-            {
-              "tokenId": "p1_t1",
-              "paragraphId": "p1",
-              "text": "번역의 불확정성은 경험적 데이터가 이론적 해석을 완벽히 결정하지 못한다는 점에 기초한다. "
-            },
-            {
-              "tokenId": "p1_t2",
-              "paragraphId": "p1",
-              "text": "객관적 정답의 부재는 언어적 의미의 상대성과 해석의 가변성을 긍정하는 근거이다. "
-            },
-            {
-              "tokenId": "p1_t3",
-              "paragraphId": "p1",
-              "text": "언어 체계 간의 대응 관계는 절대적 등가가 아닌 개연적 가설들의 경합 상태이다."
+              "text": "윌러드 콰인은 서로 다른 언어 체계를 가진 두 문화권 사이의 '근본적 번역'이 객관적으로 유일한 정답을 가질 수 없다는 '번역의 불확정성'을 주장했다. 미지의 언어권에서 원주민이 토끼를 보고 '가바가이'라고 외칠 때, 번역가는 이를 '토끼'로 번역할 수도 있지만 '토끼의 부분'이나 '토끼성' 등으로 번역할 수도 있다. 행동적 증거만으로는 이 가설들 중 어느 것이 옳은지 결정할 논리적 근거가 부족하기 때문이다. 이는 우리가 사용하는 개념 체계가 세계를 바라보는 방식에 따라 다르게 구성될 수 있음을 시사한다."
             }
           ]
         },
         "choices": [
           {
             "choiceId": "A",
-            "text": "콰인의 이론에 의하면, 서로 다른 언어를 사용하는 두 사람 사이에 완벽한 의사소통이 이루어지기 위해서는 오직 단 하나의 객관적이고 필연적인 번역 규칙만이 존재한다는 사실을 깨달아야 한다.",
+            "text": "콰인은 두 문화권의 근본적 번역에 객관적으로 유일한 정답이 없다고 주장했다.",
             "propositions": [
               {
                 "propId": "A1",
-                "text": "객관적으로 유일한 번역 규칙이 존재한다는 주장이 콰인의 불확정성 개념과 부합하는가?",
-                "evidenceTokens": [
-                  "p1_t1",
-                  "p1_t2"
-                ],
-                "oxAnswer": "X",
-                "matchMode": "ALL"
+                "text": "콰인은 근본적 번역에 유일한 정답이 없다고 보았다.",
+                "oxAnswer": "O",
+                "matchMode": "ALL",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 0,
+                    "end": 83
+                  }
+                ]
               }
-            ],
-            "finalIsCorrectChoice": true
+            ]
+          },
+          {
+            "choiceId": "B",
+            "text": "'가바가이'는 토끼, 토끼의 부분, 토끼성 등 여러 방식으로 해석될 수 있다.",
+            "propositions": [
+              {
+                "propId": "B1",
+                "text": "'가바가이'는 여러 방식으로 번역될 수 있다.",
+                "oxAnswer": "O",
+                "matchMode": "ALL",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 122,
+                    "end": 177
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "choiceId": "C",
+            "text": "행동적 증거가 충분히 누적되면 번역의 불확정성은 자연스럽게 해소된다.",
+            "propositions": [
+              {
+                "propId": "C1",
+                "text": "행동적 증거가 충분하면 불확정성이 해소된다.",
+                "oxAnswer": "X",
+                "matchMode": "ALL",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 179,
+                    "end": 229
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "choiceId": "D",
+            "text": "콰인의 주장은 개념 체계가 세계를 다르게 구성할 수 있음을 시사한다.",
+            "propositions": [
+              {
+                "propId": "D1",
+                "text": "콰인의 논의는 개념 체계와 세계 구성의 차이를 시사한다.",
+                "oxAnswer": "O",
+                "matchMode": "ALL",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 234,
+                    "end": 284
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "choiceId": "E",
+            "text": "근본적 번역은 서로 다른 언어 체계 사이에서 일어나는 번역을 가리킨다.",
+            "propositions": [
+              {
+                "propId": "E1",
+                "text": "근본적 번역은 서로 다른 언어 체계 사이의 번역이다.",
+                "oxAnswer": "O",
+                "matchMode": "ALL",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 8,
+                    "end": 42
+                  }
+                ]
+              }
+            ]
           }
         ],
-        "explanation": "지문에 따르면 콰인은 번역이 '유일한 정답을 가질 수 없으며' 여러 해석이 가능하다고 보았습니다. 단 하나의 객관적 규칙이 존재한다는 선택지는 지문의 핵심 주장과 정반대이므로 'X'이며 정답입니다.",
+        "explanation": "③은 본문이 명시한 '행동적 증거만으로는 결정 근거가 부족하다'는 한계를 정반대로 뒤집은 인과 왜곡 함정입니다.",
         "scoring": {
-          "correctDeltaSec": 30,
-          "wrongDeltaSec": -60
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -40
         }
       }
     ]

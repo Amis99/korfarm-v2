@@ -387,55 +387,121 @@
       },
       {
         "id": "dq-RUSSELL_1-118-10",
-        "type": "CHOICE_OX",
+        "type": "CHOICE_COMPLEX_OX",
         "questionKind": "CHOICE_ANALYSIS",
-        "competency": "선택지 분석 및 전략 수립 능력",
-        "stem": "국어 문법 지문을 읽고 선택지의 타당성을 분석하여 정답을 고르세요.",
+        "competency": "능동문과 피동문의 기능 이해",
+        "stem": "윗글에 대한 설명으로 적절하지 <u>않은</u> 것은?",
         "passage": {
           "paragraphs": [
             {
               "id": "p1",
               "text": "능동문은 주어가 제 힘으로 동작을 하는 문장이고, 피동문은 주어가 남에 의해 동작을 당하는 문장이다. 피동문은 동작의 주체를 밝히고 싶지 않거나, 동작을 당하는 대상을 강조하고자 할 때 주로 쓰인다. 예를 들어 '토끼가 사냥꾼에게 잡혔다'는 피동문으로, 토끼가 당한 상황에 초점을 맞춘 표현이다."
             }
-          ],
-          "tokens": [
-            {
-              "tokenId": "p1_t1",
-              "paragraphId": "p1",
-              "text": "능동문은 주어가 스스로 동작하는 것이고, 피동문은 동작을 당하는 것이다. "
-            },
-            {
-              "tokenId": "p1_t2",
-              "paragraphId": "p1",
-              "text": "피동문은 주체를 숨기거나 당하는 대상을 강조할 때 유용하다. "
-            },
-            {
-              "tokenId": "p1_t3",
-              "paragraphId": "p1",
-              "text": "피동 표현을 통해 동작의 결과나 대상에 초점을 맞출 수 있다."
-            }
           ]
         },
         "choices": [
           {
             "choiceId": "A",
-            "text": "피동 표현을 사용하면 동작을 가한 주체보다는 그 동작의 직접적인 영향을 받은 대상의 입장을 부각할 수 있다.",
+            "text": "능동문에서는 주어가 동작을 행하는 주체로 기능한다.",
             "propositions": [
               {
                 "propId": "A1",
-                "text": "피동문이 동작을 당하는 대상(객체)을 강조하는 효과가 있다는 설명이 지문에 나타나 있는가?",
-                "evidenceTokens": [
-                  "p1_t2",
-                  "p1_t3"
-                ],
+                "text": "능동문의 주어는 동작의 주체이다.",
                 "oxAnswer": "O",
-                "matchMode": "ALL"
+                "matchMode": "ALL",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 0,
+                    "end": 26
+                  }
+                ]
               }
-            ],
-            "finalIsCorrectChoice": false
+            ]
+          },
+          {
+            "choiceId": "B",
+            "text": "피동문은 동작을 당하는 대상의 처지를 부각하기 위해 활용되기도 한다.",
+            "propositions": [
+              {
+                "propId": "B1",
+                "text": "피동문은 동작을 당하는 대상을 강조하는 데 쓰인다.",
+                "oxAnswer": "O",
+                "matchMode": "ANY",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 82,
+                    "end": 110
+                  },
+                  {
+                    "paragraphId": "p1",
+                    "start": 142,
+                    "end": 164
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "choiceId": "C",
+            "text": "피동문은 동작을 행한 주체를 분명히 드러내기 위해 사용되는 표현이다.",
+            "propositions": [
+              {
+                "propId": "C1",
+                "text": "피동문의 목적은 주체를 분명히 드러내는 것이다.",
+                "oxAnswer": "X",
+                "matchMode": "ALL",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 57,
+                    "end": 110
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "choiceId": "D",
+            "text": "예시 '토끼가 사냥꾼에게 잡혔다'는 피동문에 해당한다.",
+            "propositions": [
+              {
+                "propId": "D1",
+                "text": "'토끼가 사냥꾼에게 잡혔다'는 피동문이다.",
+                "oxAnswer": "O",
+                "matchMode": "ALL",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 118,
+                    "end": 140
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "choiceId": "E",
+            "text": "피동문은 동작의 주체를 굳이 밝히지 않고자 할 때 쓰일 수 있다.",
+            "propositions": [
+              {
+                "propId": "E1",
+                "text": "피동문은 주체를 밝히지 않으려는 의도로 쓰이기도 한다.",
+                "oxAnswer": "O",
+                "matchMode": "ALL",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 57,
+                    "end": 80
+                  }
+                ]
+              }
+            ]
           }
         ],
-        "explanation": "지문에서 피동문은 '동작을 당하는 대상을 강조하고자 할 때' 주로 쓰인다고 설명했으므로, 대상의 입장을 부각한다는 명제는 지문의 내용과 일치하는 'O'입니다.",
+        "explanation": "③은 피동문의 사용 동기를 정반대로 뒤집은 의도/목적 왜곡 함정입니다. 본문에 따르면 피동문은 주체를 숨기거나 대상을 부각하는 표현입니다.",
         "scoring": {
           "correctDeltaSec": 20,
           "wrongDeltaSec": -40

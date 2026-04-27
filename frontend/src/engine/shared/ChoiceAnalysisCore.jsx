@@ -49,7 +49,16 @@ export default function ChoiceAnalysisCore({
 }) {
   const passage = question?.passage || {};
   const paragraphs = useMemo(() => passage.paragraphs || [], [passage]);
-  const choices = useMemo(() => question?.choices || [], [question]);
+  // 선택지 셔플 — question.id 기준 useMemo (한 문제당 한 번만, 출제 순서 무관)
+  const choices = useMemo(() => {
+    const arr = [...(question?.choices || [])];
+    for (let i = arr.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [question?.id]);
   const scoring = question?.scoring || { correctDeltaSec: 20, wrongDeltaSec: -40 };
 
   // ─── 상태 ───

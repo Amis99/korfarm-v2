@@ -335,72 +335,97 @@
       },
       {
         "id": "dq-FREGE_2-118-10",
-        "type": "CHOICE_OX",
+        "type": "CHOICE_COMPLEX_OX",
         "questionKind": "CHOICE_ANALYSIS",
-        "competency": "선택지 분석 및 전략 수립 능력",
-        "stem": "다음 글의 내용과 일치하지 않는 것을 고르시오.",
+        "competency": "외래어 논의 진행 방향 파악",
+        "stem": "윗글에 대한 설명으로 적절하지 <u>않은</u> 것은?",
         "passage": {
           "paragraphs": [
             {
               "id": "p1",
               "text": "외래어에 관하여 다양한 의견이 하나로 모아지고 있다."
             }
-          ],
-          "tokens": [
-            {
-              "tokenId": "p1_t1",
-              "paragraphId": "p1",
-              "text": "외래어에 관하여 "
-            },
-            {
-              "tokenId": "p1_t2",
-              "paragraphId": "p1",
-              "text": "다양한 의견이 "
-            },
-            {
-              "tokenId": "p1_t3",
-              "paragraphId": "p1",
-              "text": "하나로 모아지고 있다."
-            }
           ]
         },
         "choices": [
           {
             "choiceId": "A",
-            "text": "외래어에 대한 논의는 완전히 끝이 났다.",
+            "text": "외래어를 둘러싼 견해가 다양하게 존재해 왔다.",
             "propositions": [
               {
                 "propId": "A1",
-                "text": "의견 수렴이 사실상 중단되었다는 잘못된 주장",
-                "evidenceTokens": [
-                  "p1_t2",
-                  "p1_t3"
-                ],
-                "oxAnswer": "X",
-                "matchMode": "ALL"
+                "text": "외래어에 관해 다양한 의견이 있다.",
+                "oxAnswer": "O",
+                "matchMode": "ALL",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 0,
+                    "end": 16
+                  }
+                ]
               }
-            ],
-            "finalIsCorrectChoice": true
+            ]
           },
           {
             "choiceId": "B",
-            "text": "외래어 현상에 있어서 여러 의견이 합쳐지고 있다.",
+            "text": "외래어 논의는 서로 다른 의견들이 합의로 수렴하는 흐름에 있다.",
             "propositions": [
               {
                 "propId": "B1",
-                "text": "의견이 수렴되고 있다는 바른 주장",
-                "evidenceTokens": [
-                  "p1_t2",
-                  "p1_t3"
-                ],
+                "text": "외래어 의견이 합의 방향으로 수렴하고 있다.",
                 "oxAnswer": "O",
-                "matchMode": "ALL"
+                "matchMode": "ALL",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 9,
+                    "end": 28
+                  }
+                ]
               }
-            ],
-            "finalIsCorrectChoice": false
+            ]
+          },
+          {
+            "choiceId": "C",
+            "text": "외래어를 둘러싼 의견 차이는 갈수록 벌어져 합의가 어려워지고 있다.",
+            "propositions": [
+              {
+                "propId": "C1",
+                "text": "외래어 의견 차이가 점점 벌어지고 있다.",
+                "oxAnswer": "X",
+                "matchMode": "ALL",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 0,
+                    "end": 28
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "choiceId": "D",
+            "text": "외래어 의견은 단일한 관점이 아닌 여러 관점에서 출발하였다.",
+            "propositions": [
+              {
+                "propId": "D1",
+                "text": "외래어에 관한 출발점은 여러 관점이었다.",
+                "oxAnswer": "O",
+                "matchMode": "ALL",
+                "evidenceRanges": [
+                  {
+                    "paragraphId": "p1",
+                    "start": 9,
+                    "end": 16
+                  }
+                ]
+              }
+            ]
           }
         ],
-        "explanation": "지문에서는 의견이 모아지고 있다고 밝히고 있으므로, 논의가 중단되었다는 A는 지문 내용과 다릅니다.",
+        "explanation": "③은 합의 방향으로 모아지는 흐름을 정반대로 뒤집어 갈등 심화로 단정한 가치 판단 왜곡 함정입니다.",
         "scoring": {
           "correctDeltaSec": 20,
           "wrongDeltaSec": -40
