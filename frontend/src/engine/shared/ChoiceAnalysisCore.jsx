@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import RichText from "../../utils/RichText";
+import QuestionModal from "./QuestionModal";
 
 /**
  * ChoiceAnalysisCore — CHOICE_COMPLEX_OX 학습 모듈.
@@ -81,9 +82,14 @@ export default function ChoiceAnalysisCore({
   // 학습 종료됨 (onFail 호출 후)
   const [terminated, setTerminated] = useState(false);
 
-  // 모달 위치 (드래그)
-  const [modalPos, setModalPos] = useState({ x: null, y: null });
-  const dragRef = useRef({ active: false, dx: 0, dy: 0 });
+  // 마지막 클릭한 선택지 anchorRect — 모달이 자연스럽게 그 카드 옆으로 이동
+  const [anchorRect, setAnchorRect] = useState(null);
+
+  // 클릭 위치에 띄우는 ⭕/❌ 플로팅 피드백
+  // {x, y, kind: "correct"|"wrong"} | null
+  const [clickFeedback, setClickFeedback] = useState(null);
+  // 오답 시 정답 영역(들)을 일시 강조 (3초간 학습용 노출)
+  const [revealEvidence, setRevealEvidence] = useState(false);
 
   const feedbackTimerRef = useRef(null);
 
@@ -98,7 +104,9 @@ export default function ChoiceAnalysisCore({
     setOxFeedback(null);
     setEvidenceFeedback(null);
     setTerminated(false);
-    setModalPos({ x: null, y: null });
+    setAnchorRect(null);
+    setClickFeedback(null);
+    setRevealEvidence(false);
   }, [question]);
 
   useEffect(() => () => {
@@ -123,10 +131,14 @@ export default function ChoiceAnalysisCore({
     }, WRONG_FEEDBACK_MS);
   };
 
-  const handleChoiceClick = (cid) => {
+  const handleChoiceClick = (cid, event) => {
     if (terminated) return;
     if (passedChoices.has(cid)) return;
     if (activeChoiceId === cid) return;
+    if (event?.currentTarget?.getBoundingClientRect) {
+      const r = event.currentTarget.getBoundingClientRect();
+      setAnchorRect({ left: r.left, right: r.right, top: r.top, height: r.height });
+    }
     setActiveChoiceId(cid);
     setActivePropIdx(0);
     setStep("ox");
@@ -158,51 +170,49 @@ export default function ChoiceAnalysisCore({
     }, CORRECT_FEEDBACK_MS);
   };
 
-  const handleParagraphClick = (paragraphId, charIndex) => {
+  const handleParagraphClick = (paragraphId, charIndex, clientX, clientY) => {
     if (terminated || step !== "evidence" || !activeProp) return;
-    // charIndex 가 어떤 evidenceRange 에 속하는지 확인
     const matchedIdx = evidenceRanges.findIndex(
       (r) => r.paragraphId === paragraphId && charIndex >= r.start && charIndex < r.end,
     );
     if (matchedIdx < 0) {
-      // 오답 영역 클릭 → 학습 종료
+      // 오답 영역 클릭 → 클릭 위치 ❌ + 정답 영역 3초 노출 + 학습 종료
       adjustTime(scoring.wrongDeltaSec);
       recordAnswer({
         id: `${question.id}-${activeChoice.choiceId}-${activeProp.propId}-evidence-wrong`,
         correct: false,
         questionKind: question.questionKind,
       });
-      // 빨강 흔들림 (해당 글자 위치 표시 안 함, 그냥 화면 효과)
+      setClickFeedback({ x: clientX, y: clientY, kind: "wrong" });
+      setRevealEvidence(true);
       setEvidenceFeedback("wrong");
       fail("evidence-wrong");
       return;
     }
-    if (confirmedEvidenceIdx.has(matchedIdx)) return; // 이미 클릭한 영역
-    // 정답 영역 클릭
-    const r = evidenceRanges[matchedIdx];
-    const key = `${r.paragraphId}:${r.start}-${r.end}`;
-    setRangeHighlights((prev) => ({ ...prev, [key]: "correct" }));
+    if (confirmedEvidenceIdx.has(matchedIdx)) return;
+    // 정답 영역 클릭 → 즉시 그 range 전체를 confirmed 로 추가 (start~end 전 글자 하이라이트)
+    const next = new Set(confirmedEvidenceIdx);
+    next.add(matchedIdx);
+    setConfirmedEvidenceIdx(next);
+    setClickFeedback({ x: clientX, y: clientY, kind: "correct" });
     setEvidenceFeedback("correct");
+
+    // 통과 조건
+    const passed = matchMode === "ANY"
+      ? next.size >= 1
+      : next.size >= evidenceRanges.length;
+
     if (feedbackTimerRef.current) clearTimeout(feedbackTimerRef.current);
     feedbackTimerRef.current = setTimeout(() => {
       setEvidenceFeedback(null);
-      const next = new Set(confirmedEvidenceIdx);
-      next.add(matchedIdx);
-      setConfirmedEvidenceIdx(next);
-
-      // 통과 조건
-      const passed = matchMode === "ANY"
-        ? next.size >= 1
-        : next.size >= evidenceRanges.length;
-
-      if (!passed) return; // ALL 인데 아직 다 안 클릭
+      setClickFeedback(null);
+      if (!passed) return; // ALL 인데 아직 다 안 클릭 — 사용자가 다음 영역 계속 클릭
 
       // 명제 통과 → 다음 명제 또는 선택지 통과
       if (activePropIdx + 1 < totalProps) {
         setActivePropIdx(activePropIdx + 1);
         setStep("ox");
         setConfirmedEvidenceIdx(new Set());
-        setRangeHighlights({});
         return;
       }
       // 모든 명제 통과 → 선택지 통과
@@ -219,8 +229,7 @@ export default function ChoiceAnalysisCore({
       setActivePropIdx(0);
       setStep("ox");
       setConfirmedEvidenceIdx(new Set());
-      setRangeHighlights({});
-      setModalPos({ x: null, y: null });
+      setAnchorRect(null);
       // 모든 선택지 통과 시 onComplete
       if (passedNext.size >= choices.length) {
         setTimeout(() => onComplete && onComplete(), 400);
@@ -228,34 +237,69 @@ export default function ChoiceAnalysisCore({
     }, CORRECT_FEEDBACK_MS);
   };
 
-  // ─── 모달 드래그 ───
-  const onModalDragStart = (e) => {
-    const p = "touches" in e ? e.touches[0] : e;
-    dragRef.current = { active: true, dx: p.clientX - (modalPos.x ?? 0), dy: p.clientY - (modalPos.y ?? 0) };
-    document.addEventListener("mousemove", onModalDragMove);
-    document.addEventListener("mouseup", onModalDragEnd);
-    document.addEventListener("touchmove", onModalDragMove);
-    document.addEventListener("touchend", onModalDragEnd);
-  };
-  const onModalDragMove = (e) => {
-    if (!dragRef.current.active) return;
-    const p = "touches" in e ? e.touches[0] : e;
-    setModalPos({ x: p.clientX - dragRef.current.dx, y: p.clientY - dragRef.current.dy });
-  };
-  const onModalDragEnd = () => {
-    dragRef.current.active = false;
-    document.removeEventListener("mousemove", onModalDragMove);
-    document.removeEventListener("mouseup", onModalDragEnd);
-    document.removeEventListener("touchmove", onModalDragMove);
-    document.removeEventListener("touchend", onModalDragEnd);
+  // ─── QuestionModal 통합용 props 빌드 ───
+  const choiceIdx = activeChoice ? choices.findIndex((c) => c.choiceId === activeChoiceId) : -1;
+  const modalTitle = activeChoice
+    ? `선택지 ${choiceIdx + 1} · 명제 ${activePropIdx + 1}${totalProps > 1 ? ` / ${totalProps}` : ""}`
+    : "";
+  const modalPrompt = (() => {
+    if (!activeProp) return "";
+    if (step === "ox") {
+      return `**검증 명제** — ${activeProp.text}\n\n지문과 일치하나요?`;
+    }
+    const guide = matchMode === "ANY"
+      ? "근거 부분을 한 군데만 정확히 클릭하세요."
+      : `근거 부분을 모두 클릭하세요. (${confirmedEvidenceIdx.size} / ${evidenceRanges.length})`;
+    return `**검증 명제** — ${activeProp.text}\n\n${guide}`;
+  })();
+  const modalChoices = step === "ox"
+    ? [
+        { id: "O", text: "**O** · 일치" },
+        { id: "X", text: "**X** · 불일치" },
+      ]
+    : [];
+  const modalMark = oxFeedback || evidenceFeedback || null;
+  const modalShuffleKey = activeChoice
+    ? `${question.id}-${activeChoiceId}-${activePropIdx}-${step}`
+    : null;
+  const modalFeedbackDur = (oxFeedback === "wrong" || evidenceFeedback === "wrong")
+    ? WRONG_FEEDBACK_MS
+    : CORRECT_FEEDBACK_MS;
+
+  // ─── 마크다운 토큰 검출 (char offset 보존) ───
+  // **굵게**, *기울이기*, ==하이라이트== 패턴 → styleMap[i] / tokenSet 으로 분리.
+  // 토큰 char(**·*·==) 자체는 CSS 로 시각적으로 숨김 → evidenceRanges char index 그대로 보존.
+  const computeMarkdownMaps = (text) => {
+    const styleMap = {};
+    const tokenSet = new Set();
+    const addRange = (a, b, kind) => { for (let i = a; i < b; i += 1) if (!styleMap[i]) styleMap[i] = kind; };
+    const addTokens = (a, b) => { for (let i = a; i < b; i += 1) tokenSet.add(i); };
+    text.replace(/==([^=\n]+)==/g, (m, _g, idx) => {
+      addRange(idx + 2, idx + m.length - 2, "highlight");
+      addTokens(idx, idx + 2);
+      addTokens(idx + m.length - 2, idx + m.length);
+      return m;
+    });
+    text.replace(/\*\*([^*\n]+)\*\*/g, (m, _g, idx) => {
+      addRange(idx + 2, idx + m.length - 2, "bold");
+      addTokens(idx, idx + 2);
+      addTokens(idx + m.length - 2, idx + m.length);
+      return m;
+    });
+    text.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, (m, pre, _g, idx) => {
+      const off = pre ? pre.length : 0;
+      addRange(idx + off + 1, idx + m.length - 1, "italic");
+      addTokens(idx + off, idx + off + 1);
+      addTokens(idx + m.length - 1, idx + m.length);
+      return m;
+    });
+    return { styleMap, tokenSet };
   };
 
-  // ─── 단락 렌더링 (글자 단위, 활성 evidence 영역 색상) ───
+  // ─── 단락 렌더링 (글자 단위, 활성 evidence + 마크다운 + 줄바꿈) ───
   const renderParagraph = (p) => {
     const text = p.text || "";
-    const len = text.length;
-    // 어떤 글자 인덱스가 어떤 상태인지 미리 계산
-    // 1) confirmed: 이미 정답 클릭한 영역 (활성 명제 한정)
+    const { styleMap, tokenSet } = computeMarkdownMaps(text);
     const confirmedSet = new Set();
     if (step === "evidence" && activeProp) {
       evidenceRanges.forEach((r, idx) => {
@@ -267,13 +311,28 @@ export default function ChoiceAnalysisCore({
     return (
       <p key={p.id} className="ca-paragraph">
         {Array.from(text).map((ch, i) => {
+          if (ch === "\n") return <br key={`${p.id}-${i}-br`} />;
           const isClickable = step === "evidence" && !terminated && activeChoice;
           const isConfirmed = confirmedSet.has(i);
+          const isToken = tokenSet.has(i);
+          const style = styleMap[i];
+          const classes = ["ca-char"];
+          if (isClickable) classes.push("clickable");
+          if (isConfirmed) classes.push("confirmed");
+          if (isToken) classes.push("md-token");
+          if (style === "bold") classes.push("md-bold");
+          if (style === "italic") classes.push("md-italic");
+          if (style === "highlight") classes.push("md-highlight");
+          // 오답 시 정답 영역 일시 노출 (revealEvidence=true 동안 evidenceRanges 강조)
+          const isRevealed = revealEvidence && evidenceRanges.some(
+            (r) => r.paragraphId === p.id && i >= r.start && i < r.end,
+          );
+          if (isRevealed) classes.push("reveal");
           return (
             <span
               key={`${p.id}-${i}`}
-              className={`ca-char ${isClickable ? "clickable" : ""} ${isConfirmed ? "confirmed" : ""}`}
-              onClick={isClickable ? () => handleParagraphClick(p.id, i) : undefined}
+              className={classes.join(" ")}
+              onClick={isClickable ? (e) => handleParagraphClick(p.id, i, e.clientX, e.clientY) : undefined}
             >
               {ch === " " ? " " : ch === "\n" ? "\n" : ch}
             </span>
@@ -290,7 +349,7 @@ export default function ChoiceAnalysisCore({
       </div>
 
       <div className="ca-progress-bar">
-        <span>
+        <span className="ca-progress-count">
           {passedChoices.size} / {choices.length} 선택지 통과
           {activeChoice && totalProps > 1 && (
             <span className="ca-prop-progress">
@@ -298,7 +357,17 @@ export default function ChoiceAnalysisCore({
             </span>
           )}
         </span>
-        {terminated && <span className="ca-fail-mark">오답 — 학습 종료</span>}
+        <span className="ca-progress-guide">
+          {terminated
+            ? "오답 — 학습 종료"
+            : passedChoices.size >= choices.length
+              ? "모든 선지 분석 완료"
+              : !activeChoice
+                ? "선택지를 클릭하세요."
+                : step === "ox"
+                  ? "명제의 OX를 판별하세요."
+                  : "근거를 지문에서 찾으세요."}
+        </span>
       </div>
 
       <div className="ca-split">
@@ -316,19 +385,26 @@ export default function ChoiceAnalysisCore({
           {choices.map((c, i) => {
             const isPassed = passedChoices.has(c.choiceId);
             const isActive = c.choiceId === activeChoiceId;
+            // 선지의 적절성 = 모든 명제의 oxAnswer. 하나라도 X면 부적절(X), 모두 O면 적절(O)
+            const choiceOx = (c.propositions || []).some((p) => p.oxAnswer === "X") ? "X" : "O";
             return (
               <button
                 key={c.choiceId}
                 type="button"
                 className={`ca-choice ${isActive ? "active" : ""} ${isPassed ? "passed" : ""}`}
-                onClick={() => handleChoiceClick(c.choiceId)}
+                onClick={(e) => handleChoiceClick(c.choiceId, e)}
                 disabled={terminated || isPassed}
               >
                 <span className="ca-choice-num">{i + 1}</span>
                 <span className="ca-choice-text">
                   <RichText>{c.text}</RichText>
                 </span>
-                {isPassed && <span className="ca-choice-mark passed">✓</span>}
+                {/* 통과 후: 선지의 적절성(O/X) 표시 — O 4개 + X 1개 */}
+                {isPassed && (
+                  <span className={`ca-choice-ox ox-${choiceOx === "O" ? "yes" : "no"}`}>
+                    {choiceOx}
+                  </span>
+                )}
                 {isActive && !isPassed && <span className="ca-choice-mark active">▶</span>}
               </button>
             );
@@ -336,83 +412,30 @@ export default function ChoiceAnalysisCore({
         </div>
       </div>
 
-      {/* 포스트잇 모달 (이동 가능) */}
+      {/* 1~9번 일일퀴즈와 동일한 QuestionModal — 명제·OX/안내·피드백을 모달 안에 통합 */}
       {activeChoice && !terminated && (
+        <QuestionModal
+          title={modalTitle}
+          prompt={modalPrompt}
+          choices={modalChoices}
+          preShuffled
+          onSelect={(id) => {
+            if (step === "ox") handleOxClick(id);
+          }}
+          mark={modalMark}
+          anchorRect={anchorRect}
+          shuffleKey={modalShuffleKey}
+          feedbackDuration={modalFeedbackDur}
+        />
+      )}
+
+      {/* 클릭 위치 ⭕/❌ 플로팅 — viewport 좌표 기준 fixed */}
+      {clickFeedback && (
         <div
-          className={`ca-postit ${oxFeedback ? `feedback-${oxFeedback}` : ""}`}
-          style={
-            modalPos.x != null && modalPos.y != null
-              ? { left: modalPos.x, top: modalPos.y, transform: "none" }
-              : undefined
-          }
+          className={`ca-click-mark ca-click-${clickFeedback.kind}`}
+          style={{ left: clickFeedback.x, top: clickFeedback.y }}
         >
-          <div
-            className="ca-postit-header"
-            onMouseDown={onModalDragStart}
-            onTouchStart={onModalDragStart}
-          >
-            <span className="ca-postit-title">
-              선택지 {choices.findIndex((c) => c.choiceId === activeChoiceId) + 1} ·
-              명제 {activePropIdx + 1}
-              {totalProps > 1 ? ` / ${totalProps}` : ""}
-            </span>
-            <span className="ca-postit-drag-hint">이동 가능</span>
-          </div>
-
-          <div className="ca-postit-body">
-            <div className="ca-postit-section">
-              <div className="ca-postit-label">검증 명제</div>
-              <div className="ca-postit-text">
-                <RichText>{activeProp?.text || ""}</RichText>
-              </div>
-            </div>
-
-            {step === "ox" && (
-              <>
-                <div className="ca-postit-question">지문과 일치하나요?</div>
-                <div className="ca-postit-actions">
-                  <button
-                    type="button"
-                    className="ca-ox-btn ca-ox-O"
-                    onClick={() => handleOxClick("O")}
-                    disabled={!!oxFeedback}
-                  >
-                    O<br /><span className="ca-ox-sub">일치</span>
-                  </button>
-                  <button
-                    type="button"
-                    className="ca-ox-btn ca-ox-X"
-                    onClick={() => handleOxClick("X")}
-                    disabled={!!oxFeedback}
-                  >
-                    X<br /><span className="ca-ox-sub">불일치</span>
-                  </button>
-                </div>
-                {oxFeedback === "correct" && (
-                  <div className="ca-postit-feedback correct">정답! 이제 근거 영역을 골라 주세요.</div>
-                )}
-                {oxFeedback === "wrong" && (
-                  <div className="ca-postit-feedback wrong">오답! 학습이 종료됩니다.</div>
-                )}
-              </>
-            )}
-
-            {step === "evidence" && (
-              <>
-                <div className="ca-postit-question">
-                  {matchMode === "ANY"
-                    ? "근거 부분을 고르시오. (한 군데만 정확히)"
-                    : `근거 부분을 모두 고르시오. (${confirmedEvidenceIdx.size} / ${evidenceRanges.length})`}
-                </div>
-                {evidenceFeedback === "correct" && (
-                  <div className="ca-postit-feedback correct">정확! 다음 단계로 진행합니다.</div>
-                )}
-                {evidenceFeedback === "wrong" && (
-                  <div className="ca-postit-feedback wrong">오답 영역입니다. 학습이 종료됩니다.</div>
-                )}
-              </>
-            )}
-          </div>
+          {clickFeedback.kind === "correct" ? "⭕" : "❌"}
         </div>
       )}
     </div>

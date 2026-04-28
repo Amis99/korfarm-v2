@@ -171,7 +171,9 @@ function TextSelectCard({
   const passage = question.passage || {};
   const paragraphs = passage.paragraphs || [];
   const answerRanges = useMemo(() => resolveAnswerRanges(question, passage), [question, passage]);
-  const matchMode = (question?.answerMatchMode || "ALL").toUpperCase();
+  // ALL/ANY 화이트리스트 — 그 외(placeholder, INCLUDES 등)는 ALL 로 fallback
+  const rawMode = (question?.answerMatchMode || "").toString().toUpperCase();
+  const matchMode = rawMode === "ANY" ? "ANY" : "ALL";
   const usesAllMatches = matchMode === "ALL" && answerRanges.length > 1;
   const confirmedKeySet = useMemo(() => new Set(confirmedRangeKeys || []), [confirmedRangeKeys]);
 

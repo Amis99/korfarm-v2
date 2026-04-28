@@ -19,8 +19,12 @@ import SentenceStructureForm from "./form/SentenceStructureForm";
 import ContentPdfForm from "./form/ContentPdfForm";
 import BackgroundPreview from "./preview/BackgroundPreview";
 import BackgroundForm from "./form/BackgroundForm";
+import DailyQuizDocEditor from "./dailyquiz/DailyQuizDocEditor";
+import DailyReadingDocEditor from "./dailyreading/DailyReadingDocEditor";
 import { resolveModuleKeyForContentType } from "../../constants/contentTypes";
 import "../../styles/content-editor.css";
+import "../../styles/dailyquiz-doc-editor.css";
+import "../../styles/dailyreading-doc-editor.css";
 
 const TYPE_LABEL = {
   PRO_READING: "독해 훈련",
@@ -50,11 +54,12 @@ const TYPE_LABEL = {
 function resolveEditorType(ct) {
   if (!ct) return "worksheet";
   const arr = Array.isArray(ct) ? ct : [ct];
-  // 우선순위: json-only > reading > 기타. DAILY_QUIZ가 있으면 json-only
+  // 우선순위: daily-quiz / daily-reading (워드 프로세서형) > reading > 기타.
   for (const v of arr) {
     if (typeof v !== "string") continue;
     const up = v.toUpperCase();
-    if (up === "DAILY_QUIZ" || up.includes("DAILY_QUIZ")) return "json-only";
+    if (up === "DAILY_QUIZ" || up.includes("DAILY_QUIZ")) return "daily-quiz";
+    if (up === "DAILY_READING" || up.includes("DAILY_READING")) return "daily-reading";
   }
   for (const v of arr) {
     if (typeof v !== "string") continue;
@@ -191,6 +196,9 @@ export default function EditorShell({ contentId, staticInfo }) {
   if (error && !content) return <div className="ce-status error">{error}</div>;
 
   const editorType = resolveEditorType(meta?.contentType);
+  const isDailyQuiz = editorType === "daily-quiz";
+  const isDailyReading = editorType === "daily-reading";
+  const isDocEditor = isDailyQuiz || isDailyReading;
   // contentType이 array면 라벨도 배열 처리 — " · "로 join
   const ctArrayDisplay = Array.isArray(meta?.contentType)
     ? meta.contentType
@@ -361,7 +369,13 @@ export default function EditorShell({ contentId, staticInfo }) {
         </div>
       )}
 
-      {showJson ? (
+      {!showJson && isDocEditor ? (
+        /* 워드 프로세서형 단일 페이지 에디터 (좌우 분할 X) — 일일퀴즈/일일독해 */
+        <div className="ce-doc-pane">
+          {isDailyQuiz && <DailyQuizDocEditor editor={editor} />}
+          {isDailyReading && <DailyReadingDocEditor editor={editor} />}
+        </div>
+      ) : showJson ? (
         /* JSON 직접 편집 모드 */
         <div className="ce-json-pane">
           {isJsonOnly && (

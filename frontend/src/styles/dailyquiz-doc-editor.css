@@ -1,0 +1,501 @@
+/* ────────────────────────────────────────────────────────
+   일일퀴즈 워드 프로세서형 에디터 — 시험지 컨셉
+   학생 화면 cum-card 와 비슷한 레이아웃, 단 모든 텍스트는 인라인 편집 가능
+   ──────────────────────────────────────────────────────── */
+
+.ce-doc-pane {
+  flex: 1;
+  overflow: auto;
+  background: #f4f1ea;
+  padding: 24px 0;
+}
+
+.dq-doc-root {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.dq-doc-meta {
+  background: #1a221d;
+  border: 1px solid #2a3a30;
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #e8efe9;
+  margin-bottom: 18px;
+}
+.dq-doc-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+.dq-doc-meta-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #cbe0d2;
+}
+.dq-doc-meta-row input[type="number"] {
+  background: #0f1714;
+  color: #e8efe9;
+  border: 1px solid #2a3a30;
+  border-radius: 4px;
+  padding: 3px 6px;
+  font-size: 12px;
+}
+.dq-doc-meta-stat { color: #8aab93; font-size: 11px; }
+
+/* 시험지 종이 — 흰 배경 카드 */
+.dq-doc-paper {
+  background: #fffaf0;
+  border: 1px solid #d8c89c;
+  border-radius: 8px;
+  padding: 28px 32px 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.dq-doc-empty {
+  padding: 40px;
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+}
+
+.dq-doc-add-between {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px dashed rgba(60, 45, 35, 0.3);
+  border-radius: 4px;
+  color: rgba(60, 45, 35, 0.55);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 120ms;
+}
+.dq-doc-add-between:hover {
+  background: rgba(255, 230, 130, 0.18);
+  border-color: rgba(60, 45, 35, 0.6);
+  color: #5b4d2e;
+}
+.dq-doc-add-end {
+  margin-top: 16px;
+  padding: 10px;
+  font-weight: 700;
+}
+
+/* ─── 카드 ─── */
+.dq-card {
+  border-bottom: 2px dashed rgba(60, 45, 35, 0.25);
+  padding: 14px 0 18px;
+  margin-bottom: 8px;
+}
+.dq-card:last-of-type { border-bottom: none; }
+
+.dq-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.dq-card-num {
+  font-weight: 800;
+  color: #5b4d2e;
+  font-size: 14px;
+}
+.dq-card-type {
+  background: #fff;
+  border: 1px solid #d8c89c;
+  border-radius: 4px;
+  padding: 3px 6px;
+  font-size: 12px;
+  color: #2d2516;
+}
+.dq-card-actions {
+  display: flex;
+  gap: 4px;
+}
+.dq-card-actions button {
+  background: transparent;
+  border: 1px solid rgba(60, 45, 35, 0.25);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #5b4d2e;
+}
+.dq-card-actions button:hover:not(:disabled) {
+  background: rgba(255, 230, 130, 0.3);
+}
+.dq-card-actions button.danger {
+  color: #c0392b;
+  border-color: rgba(192, 57, 43, 0.4);
+}
+.dq-card-actions button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.dq-card-body {
+  padding-left: 6px;
+}
+
+.dq-section-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #8a6d3b;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 8px 0 4px;
+  border-bottom: 1px solid rgba(138, 109, 59, 0.3);
+  padding-bottom: 2px;
+}
+
+/* ─── inline editable ─── */
+.ie-editable {
+  display: block;
+  min-height: 1.6em;
+  padding: 6px 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid transparent;
+  color: #2d2516;
+  font-size: 14px;
+  line-height: 1.7;
+  cursor: text;
+  transition: background 120ms, border-color 120ms;
+}
+.ie-editable:hover { background: rgba(255, 255, 255, 0.9); }
+.ie-editable:focus { background: #fff; border-color: rgba(138, 109, 59, 0.5); }
+.ie-editable.is-empty:not(:focus)::before {
+  content: attr(data-placeholder);
+  color: rgba(60, 45, 35, 0.35);
+  font-style: italic;
+}
+
+.dq-stem { font-weight: 700; font-size: 15px; }
+.dq-passage { font-size: 14px; line-height: 1.85; min-height: 3em; }
+.dq-explanation { font-size: 13px; color: #5b4d2e; min-height: 2em; }
+
+/* ─── MULTI_CHOICE ─── */
+.dq-mc { margin-top: 6px; }
+.dq-mc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.dq-mc-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(60, 45, 35, 0.1);
+}
+.dq-mc-row.is-answer .dq-mc-num {
+  background: #2e7d32;
+  color: #fff;
+}
+.dq-mc-radio {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+.dq-mc-radio input { margin: 0 4px 0 0; }
+.dq-mc-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px; height: 22px;
+  border: 1.5px solid rgba(60, 45, 35, 0.5);
+  border-radius: 50%;
+  font-size: 12px; font-weight: 700;
+  color: #5b4d2e;
+}
+.dq-mc-text {
+  flex: 1;
+  font-size: 13px;
+  border: 1px solid rgba(60, 45, 35, 0.15);
+  background: #fff !important;
+}
+.dq-mc-del {
+  background: transparent;
+  border: 1px solid rgba(192, 57, 43, 0.3);
+  color: #c0392b;
+  border-radius: 4px;
+  width: 22px; height: 22px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+}
+.dq-mc-del:hover { background: rgba(192, 57, 43, 0.1); }
+
+.dq-add-btn {
+  background: rgba(46, 125, 50, 0.08);
+  border: 1px dashed rgba(46, 125, 50, 0.45);
+  color: #2e7d32;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 6px;
+}
+.dq-add-btn:hover { background: rgba(46, 125, 50, 0.15); }
+
+/* ─── FILL_BLANKS ─── */
+.dq-fb-template {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  background: rgba(255, 230, 130, 0.18) !important;
+}
+.dq-fb-blank {
+  border: 1px solid rgba(60, 45, 35, 0.18);
+  border-radius: 6px;
+  padding: 8px;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.5);
+}
+.dq-fb-blank-header {
+  display: flex; align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.dq-fb-blank-num {
+  font-weight: 700; color: #8a6d3b; font-size: 12px;
+}
+.dq-fb-blank-move, .dq-fb-choice-move {
+  display: inline-flex; gap: 2px;
+}
+.dq-fb-blank-move button, .dq-fb-choice-move button {
+  background: transparent;
+  border: 1px solid rgba(60, 45, 35, 0.25);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: 10px;
+  cursor: pointer;
+  color: #5b4d2e;
+  line-height: 1.4;
+}
+.dq-fb-blank-move button:hover:not(:disabled),
+.dq-fb-choice-move button:hover:not(:disabled) {
+  background: rgba(255, 230, 130, 0.4);
+}
+.dq-fb-blank-move button:disabled,
+.dq-fb-choice-move button:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* ─── TEXT_SELECT / 공통 paragraph 편집 ─── */
+.dq-ts-para-edit {
+  margin-bottom: 6px;
+  border: 1px solid rgba(60, 45, 35, 0.12);
+  border-radius: 4px;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.4);
+}
+.dq-ts-para-head {
+  display: flex; align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.dq-ts-para-id {
+  font-family: monospace;
+  font-size: 11px;
+  color: #888;
+  background: rgba(0,0,0,0.04);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+.dq-ts-para-input {
+  font-size: 14px;
+  background: #fff !important;
+}
+
+.dq-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  color: #5b4d2e;
+}
+.dq-mode-toggle label { display: inline-flex; align-items: center; gap: 2px; }
+
+/* ─── EvidenceRangePicker ─── */
+.dq-evp {
+  border: 1px solid rgba(60, 45, 35, 0.2);
+  border-radius: 6px;
+  padding: 10px;
+  background: #fff;
+  margin-top: 6px;
+}
+.dq-evp-hint {
+  font-size: 11px;
+  color: #5b4d2e;
+  background: rgba(255, 230, 130, 0.2);
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+.dq-evp-passage {
+  font-size: 14px;
+  line-height: 1.9;
+  user-select: text;
+  cursor: text;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  padding: 10px;
+  background: #fffaf0;
+  color: #2d2516;
+  border-radius: 4px;
+  border: 1px dashed rgba(60, 45, 35, 0.25);
+}
+.dq-evp-passage .dq-evp-char.hi { cursor: pointer; }
+.dq-evp-passage .dq-evp-char.hi:hover {
+  filter: brightness(0.92);
+}
+.dq-evp-para { margin: 0 0 8px; }
+.dq-evp-char { padding: 0 1px; }
+.dq-evp-char.start { cursor: pointer; }
+.dq-evp-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* ─── CHOICE_COMPLEX_OX ─── */
+.dq-cco-choice {
+  border: 1.5px solid rgba(60, 45, 35, 0.18);
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.55);
+}
+.dq-cco-choice-head {
+  display: flex; align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.dq-cco-choice-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px;
+  border: 1.5px solid rgba(60, 45, 35, 0.5);
+  border-radius: 50%;
+  font-size: 13px; font-weight: 700;
+  color: #5b4d2e;
+}
+.dq-cco-choice-text {
+  flex: 1;
+  font-size: 14px;
+  background: #fff !important;
+}
+.dq-cco-props {
+  margin-left: 24px;
+  padding-left: 10px;
+  border-left: 2px solid rgba(60, 45, 35, 0.12);
+}
+.dq-cco-prop {
+  border: 1px solid rgba(60, 45, 35, 0.12);
+  border-radius: 4px;
+  padding: 6px 8px;
+  margin-bottom: 6px;
+  background: rgba(255, 255, 255, 0.65);
+}
+.dq-cco-prop.active {
+  border-color: rgba(120, 200, 255, 0.7);
+  box-shadow: 0 0 0 2px rgba(120, 200, 255, 0.2);
+}
+.dq-cco-prop-head {
+  display: flex; align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+.dq-cco-prop-num {
+  font-size: 11px; font-weight: 700; color: #8a6d3b;
+}
+.dq-cco-ox-toggle, .dq-cco-mode-toggle {
+  display: inline-flex;
+  border: 1px solid rgba(60, 45, 35, 0.25);
+  border-radius: 4px;
+  overflow: hidden;
+  font-size: 11px;
+}
+.dq-cco-ox-toggle label, .dq-cco-mode-toggle label {
+  padding: 2px 8px;
+  cursor: pointer;
+  font-weight: 700;
+  color: #5b4d2e;
+  border-right: 1px solid rgba(60, 45, 35, 0.15);
+}
+.dq-cco-ox-toggle label:last-child, .dq-cco-mode-toggle label:last-child {
+  border-right: none;
+}
+.dq-cco-ox-toggle label input, .dq-cco-mode-toggle label input {
+  display: none;
+}
+.dq-cco-ox-toggle label.dq-cco-ox-O.on { background: #c8f0d2; color: #1f5d2c; }
+.dq-cco-ox-toggle label.dq-cco-ox-X.on { background: #f8d0cc; color: #8a2a20; }
+.dq-cco-mode-toggle label.on { background: rgba(255, 220, 100, 0.6); color: #5b4d2e; }
+.dq-cco-active-btn {
+  font-size: 11px;
+  padding: 2px 8px;
+  border: 1px solid rgba(60, 45, 35, 0.3);
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #5b4d2e;
+}
+.dq-cco-active-btn.on {
+  background: rgba(120, 200, 255, 0.2);
+  border-color: rgba(40, 130, 200, 0.6);
+  color: #1a5680;
+}
+.dq-cco-prop-text {
+  font-size: 13px;
+  background: #fff !important;
+  margin-bottom: 4px;
+}
+.dq-cco-evidence-summary {
+  font-size: 11px;
+  color: #5b4d2e;
+  padding-top: 2px;
+}
+.dq-cco-picker-pane {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 2px dashed rgba(120, 200, 255, 0.4);
+}
+/* 명제 카드 안에 인라인으로 뜨는 picker — 어느 명제를 편집 중인지 즉시 보임 */
+.dq-cco-picker-inline {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 2px dashed rgba(120, 200, 255, 0.55);
+}
+.dq-cco-picker-inline .dq-evp {
+  border-color: rgba(120, 200, 255, 0.45);
+  background: rgba(220, 240, 255, 0.35);
+}
+
+/* ─── 점수 ─── */
+.dq-scoring-row {
+  display: flex; gap: 14px;
+  font-size: 12px;
+  color: #5b4d2e;
+}
+.dq-scoring-row label {
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.dq-scoring-row input {
+  width: 60px;
+  background: #fff;
+  border: 1px solid rgba(60, 45, 35, 0.25);
+  border-radius: 4px;
+  padding: 2px 4px;
+  font-size: 12px;
+  text-align: right;
+}
+
+/* ─── 모바일 ─── */
+@media (max-width: 768px) {
+  .dq-doc-paper { padding: 16px 14px; }
+  .dq-card-header { flex-wrap: wrap; }
+  .dq-cco-props { margin-left: 0; padding-left: 6px; }
+  .dq-mc-text, .dq-cco-choice-text, .dq-cco-prop-text { font-size: 12px; }
+}

@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { CompletedWordCard, buildCorrectDestCells } from "../modules/PhonemeChangeModule";
 import { CompletedSentenceCard } from "../modules/MorphemeAnalysisModule";
+import RichText from "../../utils/RichText";
 
 const ROLE_SHORT = { "주어":"주","서술어":"서","목적어":"목","보어":"보","부사어":"부","관형어":"관","독립어":"독" };
 
@@ -128,8 +129,12 @@ function PrintWorksheetItem({ question, num }) {
     [question.id]
   );
 
-  // CHOICE_ANALYSIS / CHOICE_OX는 별도 형식
-  if (question.type === "CHOICE_ANALYSIS" || question.type === "CHOICE_OX") {
+  // CHOICE_ANALYSIS / CHOICE_OX / CHOICE_COMPLEX_OX 는 별도 형식
+  if (
+    question.type === "CHOICE_ANALYSIS" ||
+    question.type === "CHOICE_OX" ||
+    question.type === "CHOICE_COMPLEX_OX"
+  ) {
     return <PrintChoiceAnalysisItem question={question} num={num} />;
   }
 
@@ -207,31 +212,40 @@ function PrintChoiceAnalysisItem({ question, num }) {
   const passage = question.passage || {};
   const paragraphs = passage.paragraphs || [];
   const choices = question.choices || [];
+  const isComplexOx = question.type === "CHOICE_COMPLEX_OX";
 
-  // 모든 문장을 수집해서 ①②③… 번호 매김
+  // 옛 sentences 기반 — 문장 번호 매김 (CHOICE_ANALYSIS 호환)
   const allSentences = [];
   paragraphs.forEach((p) => {
     (p.sentences || []).forEach((s) => allSentences.push({ ...s, paragraphId: p.id }));
   });
   const idToNum = {};
   allSentences.forEach((s, i) => { idToNum[s.id] = i + 1; });
+  const hasSentences = allSentences.length > 0;
 
   return (
     <li className="print-question print-choice-analysis-item">
       <div className="print-q-header">
         <span className="print-q-num">{num}.</span>
-        <span className="print-q-stem">{stem}</span>
+        <span className="print-q-stem">
+          <RichText>{stem}</RichText>
+        </span>
       </div>
       {paragraphs.length > 0 && (
         <div className="print-q-passage">
           {paragraphs.map((p) => (
             <p key={p.id} className="print-ca-paragraph">
-              {(p.sentences || []).map((s) => (
-                <span key={s.id}>
-                  <sup className="print-ca-sentnum">{idToNum[s.id]}</sup>
-                  {s.text + " "}
-                </span>
-              ))}
+              {hasSentences && (p.sentences || []).length > 0 ? (
+                (p.sentences || []).map((s) => (
+                  <span key={s.id}>
+                    <sup className="print-ca-sentnum">{idToNum[s.id]}</sup>
+                    {s.text + " "}
+                  </span>
+                ))
+              ) : (
+                // CHOICE_COMPLEX_OX 등 — paragraphs[].text 그대로 출력
+                <RichText>{p.text || ""}</RichText>
+              )}
             </p>
           ))}
         </div>
@@ -240,9 +254,13 @@ function PrintChoiceAnalysisItem({ question, num }) {
         {choices.map((c, ci) => (
           <li key={c.choiceId || c.id || ci} className="print-ca-choice">
             <span className="print-q-choice-num">{ci + 1}</span>
-            <span className="print-ca-choice-text">{c.text}</span>
+            <span className="print-ca-choice-text">
+              <RichText>{c.text || ""}</RichText>
+            </span>
             <span className="print-ca-ox">⃝O ⃝X</span>
-            <span className="print-ca-evidence">근거 문장: [          ]</span>
+            <span className="print-ca-evidence">
+              {isComplexOx ? "근거: [                  ]" : "근거 문장: [          ]"}
+            </span>
           </li>
         ))}
       </ol>
@@ -544,6 +562,15 @@ function PrintAnswerKeyQuestions({ questions }) {
           answerText = (q.choices || [])
             .map((c) => `${c.choiceId || c.id}=${c.expectedOX || (c.finalIsCorrectChoice ? "X" : "O")}`)
             .join(", ");
+        } else if (q.type === "CHOICE_COMPLEX_OX") {
+          // 인쇄지의 선지는 셔플 안 함(원본 순서) — 부적절 선지(=정답) 번호와 모든 선지의 OX
+          const lines = (q.choices || []).map((c, ci) => {
+            const ox = (c.propositions || []).some((p) => p.oxAnswer === "X") ? "X" : "O";
+            return `${ci + 1}번=${ox}`;
+          });
+          const wrongIdx = (q.choices || []).findIndex((c) => (c.propositions || []).some((p) => p.oxAnswer === "X"));
+          const head = wrongIdx >= 0 ? `정답(부적절): ${wrongIdx + 1}번  ·  ` : "";
+          answerText = head + lines.join(", ");
         } else if (q.type === "FILL_BLANKS" && q.blanks) {
           // 인쇄지의 빈칸 셔플 시드와 동일하게 ${q.id}-${blank.id || bi} 사용
           answerText = q.blanks
