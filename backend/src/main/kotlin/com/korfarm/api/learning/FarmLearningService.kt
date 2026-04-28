@@ -1,8 +1,12 @@
 package com.korfarm.api.learning
 
+import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.korfarm.api.common.IdGenerator
+import com.korfarm.api.diagnostic.scoring.COMPETENCIES
 import com.korfarm.api.economy.EconomyService
 import com.korfarm.api.paid.ContentRepository
+import com.korfarm.api.paid.ContentVersionRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
@@ -14,7 +18,10 @@ class FarmLearningService(
     private val farmLearningLogRepository: FarmLearningLogRepository,
     private val quizAnswerDetailRepository: QuizAnswerDetailRepository,
     private val contentRepository: ContentRepository,
-    private val economyService: EconomyService
+    private val contentVersionRepository: ContentVersionRepository,
+    private val economyService: EconomyService,
+    private val learningCompetencyService: LearningCompetencyService,
+    private val objectMapper: ObjectMapper,
 ) {
     companion object {
         val DAILY_SEED_LIMIT_TYPES = setOf("DAILY_QUIZ", "DAILY_READING")
@@ -99,7 +106,62 @@ class FarmLearningService(
             quizAnswerDetailRepository.saveAll(details)
         }
 
+        // 10대 역량 종합 누적 — 콘텐츠의 questions[] 의 competency 와 매칭하여 정답률 계산.
+        // 재응시(같은 user × content)는 LearningCompetencyService 가 자동 무시.
+        try {
+            val ratioByCompetency = computeCompetencyRatios(log.contentId, request.answers)
+            if (ratioByCompetency.isNotEmpty()) {
+                val source = resolveSourceFromContentType(log.contentType)
+                learningCompetencyService.record(userId, log.contentId, source, ratioByCompetency)
+            }
+        } catch (_: Exception) { /* 누적 실패는 학습 완료 자체를 막지 않음 */ }
+
         return FarmCompleteResponse(success = true, earnedSeed = actualEarned, dailySeedRemaining = dailySeedRemaining)
+    }
+
+    /**
+     * 콘텐츠 questions[] 의 competency 필드와 학생 응답을 매칭하여
+     * 역량별 정답률(0~1) 맵을 반환. 측정되지 않은 역량은 키 자체 없음.
+     */
+    private fun computeCompetencyRatios(
+        contentId: String,
+        answers: List<AnswerDetailRequest>?,
+    ): Map<String, Double> {
+        if (answers.isNullOrEmpty()) return emptyMap()
+        val version = contentVersionRepository.findTopByContentIdOrderByCreatedAtDesc(contentId)
+            ?: return emptyMap()
+        val wrapper: Map<String, Any> = try {
+            objectMapper.readValue(version.contentJson, object : TypeReference<Map<String, Any>>() {})
+        } catch (_: Exception) { return emptyMap() }
+        @Suppress("UNCHECKED_CAST")
+        val payload = (wrapper["payload"] as? Map<String, Any>) ?: wrapper
+        @Suppress("UNCHECKED_CAST")
+        val questions = (payload["questions"] as? List<Map<String, Any>>) ?: return emptyMap()
+
+        // questionId → competency 매핑 (10대 역량 화이트리스트만 인정)
+        val qIdToCompetency = mutableMapOf<String, String>()
+        for (q in questions) {
+            val qid = (q["id"] ?: q["questionId"])?.toString() ?: continue
+            val comp = q["competency"]?.toString()?.trim() ?: continue
+            if (comp.isEmpty() || comp !in COMPETENCIES) continue
+            qIdToCompetency[qid] = comp
+        }
+        if (qIdToCompetency.isEmpty()) return emptyMap()
+
+        // 역량별 정답/총 카운트
+        val correctByComp = mutableMapOf<String, Int>()
+        val totalByComp = mutableMapOf<String, Int>()
+        for (a in answers) {
+            val comp = qIdToCompetency[a.questionId] ?: continue
+            totalByComp[comp] = (totalByComp[comp] ?: 0) + 1
+            if (a.correct) correctByComp[comp] = (correctByComp[comp] ?: 0) + 1
+        }
+        if (totalByComp.isEmpty()) return emptyMap()
+
+        return totalByComp.mapValues { (comp, total) ->
+            val correct = correctByComp[comp] ?: 0
+            if (total > 0) correct.toDouble() / total else 0.0
+        }
     }
 
     @Transactional(readOnly = true)
