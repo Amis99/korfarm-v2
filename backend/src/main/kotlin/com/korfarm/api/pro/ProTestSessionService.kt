@@ -3,6 +3,8 @@ package com.korfarm.api.pro
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
+import com.korfarm.api.learning.LearningCompetencyService
+import com.korfarm.api.learning.mapDomainToCompetency
 import com.korfarm.api.test.TestPaperRepo
 import com.korfarm.api.test.TestQuestionRepo
 import com.korfarm.api.test.TestService
@@ -22,6 +24,7 @@ class ProTestSessionService(
     private val testService: TestService,
     private val proModeService: ProModeService,
     private val essayGradingService: EssayGradingService,
+    private val learningCompetencyService: LearningCompetencyService,
     private val objectMapper: ObjectMapper
 ) {
     companion object {
@@ -184,6 +187,27 @@ class ProTestSessionService(
             session.competencyScores = objectMapper.writeValueAsString(competencyScores)
         }
         testSessionRepo.save(session)
+
+        // 학습 종합 누적 — domain 기준 정답률을 10대 역량에 매핑하여 record (weight=10)
+        // contentId 는 chapterTestId 사용 → 각 버전이 별도 entry (사용자가 v1/v2 응시 시 둘 다 누적)
+        try {
+            val ratioByCompetency = mutableMapOf<String, Double>()
+            for ((domain, score) in competencyScores) {
+                val competency = mapDomainToCompetency(domain) ?: continue
+                val ratio = (score.accuracy / 100.0).coerceIn(0.0, 1.0)
+                // 동일 competency 매핑이 여러 domain 에서 올 경우 최대값 유지 (가장 좋은 도메인 점수)
+                val prev = ratioByCompetency[competency]
+                if (prev == null || ratio > prev) ratioByCompetency[competency] = ratio
+            }
+            if (ratioByCompetency.isNotEmpty()) {
+                learningCompetencyService.record(
+                    userId = userId,
+                    contentId = session.chapterTestId,
+                    source = "chapter_test",
+                    ratioByCompetency = ratioByCompetency,
+                )
+            }
+        } catch (_: Exception) { /* 누적 실패는 채점 자체를 막지 않음 */ }
 
         // 통과 시 프로그레스 완료 기록
         if (passed) {

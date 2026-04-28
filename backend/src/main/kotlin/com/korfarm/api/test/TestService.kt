@@ -9,7 +9,9 @@ import com.korfarm.api.org.OrgRepository
 import com.korfarm.api.security.SecurityUtils
 import com.korfarm.api.economy.EconomyService
 import com.korfarm.api.economy.SeedCatalogRepository
+import com.korfarm.api.learning.LearningCompetencyService
 import com.korfarm.api.learning.SeedRewardPolicy
+import com.korfarm.api.learning.mapDomainToCompetency
 import com.korfarm.api.user.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -27,7 +29,8 @@ class TestService(
     private val orgMembershipRepository: OrgMembershipRepository,
     private val objectMapper: ObjectMapper,
     private val economyService: EconomyService,
-    private val seedCatalogRepository: SeedCatalogRepository
+    private val seedCatalogRepository: SeedCatalogRepository,
+    private val learningCompetencyService: LearningCompetencyService,
 ) {
 
     // ─── Student: list tests ───
@@ -238,6 +241,45 @@ class TestService(
             val seedType = SeedRewardPolicy.randomSeedType(catalog)
             economyService.addSeeds(userId, seedType, seedReward, "테스트 완료", "test", testId)
         }
+
+        // 학습 종합 누적 — domain → 10대 역량 매핑 후 정답률로 record (weight=10)
+        // contentId = "test_paper_{testId}" — 한 시험지 첫 응시만 누적 (재응시 자동 무시)
+        try {
+            data class DStats(var correct: Int = 0, var total: Int = 0)
+            val byDomain = mutableMapOf<String, DStats>()
+            for (q in questions) {
+                val dom = q.domain
+                if (dom.isNullOrBlank() || dom == "종합") continue
+                val s = byDomain.getOrPut(dom) { DStats() }
+                s.total += 1
+                val myAnswer = answers[q.number.toString()] ?: ""
+                if (q.type == "객관식") {
+                    if (myAnswer.isNotBlank() && myAnswer == q.correctAnswer) s.correct += 1
+                } else {
+                    val keywords = parseEssayKeywords(q.essayKeywordsJson)
+                    if (keywords != null && keywords.isNotEmpty() && myAnswer.isNotBlank()) {
+                        val kr = gradeByKeywords(myAnswer, keywords, q.points)
+                        if (kr.score >= q.points * 0.7) s.correct += 1
+                    }
+                }
+            }
+            val ratioByCompetency = mutableMapOf<String, Double>()
+            for ((dom, s) in byDomain) {
+                val competency = mapDomainToCompetency(dom) ?: continue
+                if (s.total <= 0) continue
+                val ratio = s.correct.toDouble() / s.total
+                val prev = ratioByCompetency[competency]
+                if (prev == null || ratio > prev) ratioByCompetency[competency] = ratio
+            }
+            if (ratioByCompetency.isNotEmpty()) {
+                learningCompetencyService.record(
+                    userId = userId,
+                    contentId = "test_paper_${testId}",
+                    source = "test_paper",
+                    ratioByCompetency = ratioByCompetency,
+                )
+            }
+        } catch (_: Exception) { /* 누적 실패는 채점 자체를 막지 않음 */ }
 
         return saved
     }
