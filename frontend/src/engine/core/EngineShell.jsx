@@ -455,7 +455,12 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
     if (farmLogIdRef.current) {
       const answers = latestRecords
         .filter(r => r.id && r.correct !== undefined)
-        .map(r => ({ questionId: r.id, questionKind: r.questionKind || null, correct: !!r.correct }));
+        .map(r => ({
+          questionId: r.id,
+          questionKind: r.questionKind || null,
+          correct: !!r.correct,
+          chosenChoiceId: r.chosenChoiceId || r.selectedId || null,  // wrongVector 매칭용
+        }));
 
       apiPost("/v1/learning/farm/complete", {
         log_id: farmLogIdRef.current,

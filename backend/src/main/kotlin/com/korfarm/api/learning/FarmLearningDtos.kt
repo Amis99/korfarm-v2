@@ -21,7 +21,9 @@ data class FarmCompleteRequest(
 data class AnswerDetailRequest(
     val questionId: String,
     val questionKind: String? = null,
-    val correct: Boolean
+    val correct: Boolean,
+    /** 학생이 고른 선택지 ID (오답일 때 wrongVector 매칭용). null 가능. */
+    val chosenChoiceId: String? = null,
 )
 
 data class FarmCompleteResponse(

@@ -1,4 +1,5 @@
 import InlineEditable from "../dailyquiz/InlineEditable";
+import CompetencyVectorEditor from "../dailyquiz/CompetencyVectorEditor";
 
 const TYPE_OPTIONS = ["실질 자립", "실질 의존", "형식 의존"];
 const FORMATION_OPTIONS = ["단일어", "합성어", "파생어"];
@@ -240,6 +241,14 @@ export default function WordFormationDocEditor({ editor }) {
                       </>
                     )}
                   </details>
+
+                  <div className="dq-section-label" style={{ marginTop: 14 }}>10대 역량 벡터</div>
+                  <CompetencyVectorEditor
+                    value={w.competencyVector}
+                    onChange={(v) => editor.updateField(`words[${wi}].competencyVector`, v)}
+                    label="이 단어 학습 정답 시 누적될 역량 가중치"
+                    color="correct"
+                  />
                 </div>
               </div>
             </div>

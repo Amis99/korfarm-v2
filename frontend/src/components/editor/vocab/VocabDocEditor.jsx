@@ -1,4 +1,5 @@
 import VocabQuestionCard from "./VocabQuestionCard";
+import { getDefaultVector } from "../../../constants/competencies";
 
 /**
  * 어휘(PRO_VOCAB / VOCAB_BASIC) 워드 프로세서형 비주얼 에디터.
@@ -28,10 +29,13 @@ export default function VocabDocEditor({ editor }) {
 
   const addQuestion = (atIdx) => {
     const newId = `vq-${Date.now().toString(36)}`;
+    // 모드별 default questionKind + 그 kind 의 default 벡터
+    const defaultKind = mode === "pos" ? "POS" : mode === "concept" ? "CONCEPT" : "WORD_TO_MEANING";
+    const defaultVec = getDefaultVector({ questionKind: defaultKind });
     editor.addItem("questions", atIdx, {
       id: newId,
       type: "MULTI_CHOICE",
-      questionKind: "WORD_TO_MEANING",
+      questionKind: defaultKind,
       stem: "",
       choices: [
         { id: "c1", text: "" }, { id: "c2", text: "" },
@@ -40,6 +44,7 @@ export default function VocabDocEditor({ editor }) {
       answerId: "",
       explanation: "",
       scoring: { correctDeltaSec: 20, wrongDeltaSec: -40 },
+      ...(defaultVec ? { competencyVector: defaultVec } : {}),
     });
   };
   const removeQuestion = (i) => {

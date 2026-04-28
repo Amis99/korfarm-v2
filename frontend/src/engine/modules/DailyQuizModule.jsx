@@ -390,6 +390,7 @@ function DailyQuizModule({ content }) {
       id: currentQuestion.id,
       correct: isCorrect,
       questionKind: currentQuestion.questionKind,
+      chosenChoiceId: selectedId,
     });
     setCompletedMap((prev) => ({
       ...prev,

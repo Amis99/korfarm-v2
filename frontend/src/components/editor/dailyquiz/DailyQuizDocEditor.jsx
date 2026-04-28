@@ -1,5 +1,6 @@
 import { useState } from "react";
 import QuestionCardEditor from "./QuestionCardEditor";
+import { getDefaultVector } from "../../../constants/competencies";
 
 /**
  * 일일퀴즈 워드 프로세서형 비주얼 에디터.
@@ -18,6 +19,9 @@ export default function DailyQuizDocEditor({ editor }) {
 
   const addQuestion = (atIdx) => {
     const newId = `q${Date.now().toString(36)}`;
+    // 일일퀴즈 1~10번 매핑 default 벡터 자동 입력
+    const dailyIdx = atIdx + 1; // 1-based
+    const defaultVec = getDefaultVector({ dailyQuizIndex: dailyIdx });
     const newQ = {
       id: newId,
       type: "MULTI_CHOICE",
@@ -32,6 +36,7 @@ export default function DailyQuizDocEditor({ editor }) {
       answerId: "",
       explanation: "",
       scoring: { correctDeltaSec: 20, wrongDeltaSec: -40 },
+      ...(defaultVec ? { competencyVector: defaultVec } : {}),
     };
     editor.addItem("questions", atIdx, newQ);
   };

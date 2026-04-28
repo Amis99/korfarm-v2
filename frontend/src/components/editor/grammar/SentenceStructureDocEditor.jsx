@@ -1,4 +1,5 @@
 import InlineEditable from "../dailyquiz/InlineEditable";
+import CompetencyVectorEditor from "../dailyquiz/CompetencyVectorEditor";
 
 const ROLE_OPTIONS = ["주어", "서술어", "목적어", "보어", "관형어", "부사어", "독립어"];
 const CLAUSE_TYPES = ["대등", "종속", "명사절", "서술절", "관형절", "부사절", "인용절"];
@@ -185,6 +186,14 @@ export default function SentenceStructureDocEditor({ editor }) {
                         range: [], layer: 2, clauseType: "대등", parentRole: "", parentLayer: 1,
                       })}>+ 절 추가</button>
                   </details>
+
+                  <div className="dq-section-label" style={{ marginTop: 14 }}>10대 역량 벡터</div>
+                  <CompetencyVectorEditor
+                    value={s.competencyVector}
+                    onChange={(v) => editor.updateField(`sentences[${si}].competencyVector`, v)}
+                    label="이 문장 학습 정답 시 누적될 역량 가중치"
+                    color="correct"
+                  />
                 </div>
               </div>
             </div>

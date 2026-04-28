@@ -5,6 +5,7 @@ import { API_BASE } from "../utils/api";
 import AdminLayout from "../components/AdminLayout";
 import { resolveModuleKeyForContentType } from "../constants/contentTypes";
 import "../styles/admin-pro.css";
+import CompetencyVectorEditor from "../components/editor/dailyquiz/CompetencyVectorEditor";
 
 /* ─── 상수 ─── */
 const COURSE_LEVELS = [
@@ -1231,6 +1232,35 @@ function AdminProPage() {
           <input type="text" value={q.intent || ""}
             onChange={(e) => updateQuestion(idx, { intent: e.target.value })}
             placeholder="출제 의도" style={{ width: "100%" }} />
+
+          {/* 10대 역량 벡터 — 정답 시 누적 + 선택지별 약점 */}
+          <div className="dq-section-label" style={{ marginTop: 14 }}>10대 역량 벡터</div>
+          <CompetencyVectorEditor
+            value={q.competencyVector}
+            onChange={(v) => updateQuestion(idx, { competencyVector: v })}
+            label="정답 시 누적될 역량 가중치 (테스트 가중치=10)"
+            color="correct"
+          />
+          {!isEssay && choices.length > 0 && (
+            <div className="dq-section-label" style={{ marginTop: 8 }}>선택지별 약점 벡터</div>
+          )}
+          {!isEssay && choices.map((c, ci) => {
+            if ((q.correctAnswer || q.correct_answer) === c.id) return null;
+            return (
+              <CompetencyVectorEditor
+                key={`wv-${c.id || ci}`}
+                value={c.wrongVector}
+                onChange={(v) => {
+                  const nextChoices = [...choices];
+                  nextChoices[ci] = { ...nextChoices[ci], wrongVector: v };
+                  updateQuestion(idx, { choices: nextChoices });
+                }}
+                label={`선택지 ${ci + 1} (${(c.text || "").slice(0, 20)}${(c.text || "").length > 20 ? "…" : ""}) 약점`}
+                color="wrong"
+                compact
+              />
+            );
+          })}
         </div>
       </div>
     );

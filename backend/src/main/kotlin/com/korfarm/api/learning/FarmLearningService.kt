@@ -180,12 +180,11 @@ class FarmLearningService(
         val results = mutableListOf<com.korfarm.api.learning.QuestionResult>()
         for (a in answers) {
             val (correctVec, wrongMap) = qInfo[a.questionId] ?: continue
-            // 학생이 고른 선택지 ID 가 SubmitAnswer 에는 없음. AnswerDetailRequest 도 없음.
-            // 현재는 chosenWrongVector 는 null (선택지 ID 미전송). 정답 여부만 사용.
-            // 추후 답안 details 로 chosenChoiceId 받으면 활용.
+            // 오답일 때만 학생이 고른 선택지의 wrongVector 활용
+            val chosenWrong = if (!a.correct && a.chosenChoiceId != null) wrongMap[a.chosenChoiceId] else null
             results.add(com.korfarm.api.learning.QuestionResult(
                 correctVector = correctVec,
-                chosenWrongVector = null,
+                chosenWrongVector = chosenWrong,
                 isCorrect = a.correct,
             ))
         }

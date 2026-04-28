@@ -1,4 +1,5 @@
 import InlineEditable from "../dailyquiz/InlineEditable";
+import CompetencyVectorEditor from "../dailyquiz/CompetencyVectorEditor";
 
 const STEP_TYPES = [
   { value: "PHONEME_RESULT", label: "음운 결과 (도착 셀 채우기)" },
@@ -223,6 +224,14 @@ export default function PhonemeChangeDocEditor({ editor }) {
                     );
                   })}
                   <button type="button" className="dq-add-btn" onClick={() => addStep(wi)}>+ Step 추가</button>
+
+                  <div className="dq-section-label" style={{ marginTop: 14 }}>10대 역량 벡터</div>
+                  <CompetencyVectorEditor
+                    value={w.competencyVector}
+                    onChange={(v) => editor.updateField(`words[${wi}].competencyVector`, v)}
+                    label="이 단어 학습 정답 시 누적될 역량 가중치"
+                    color="correct"
+                  />
                 </div>
               </div>
             </div>

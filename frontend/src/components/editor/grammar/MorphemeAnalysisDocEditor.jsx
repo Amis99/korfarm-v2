@@ -1,4 +1,5 @@
 import InlineEditable from "../dailyquiz/InlineEditable";
+import CompetencyVectorEditor from "../dailyquiz/CompetencyVectorEditor";
 
 const TYPE_OPTIONS = ["실질 자립", "실질 의존", "형식 의존"];
 
@@ -233,6 +234,14 @@ export default function MorphemeAnalysisDocEditor({ editor }) {
                       </button>
                     </div>
                   </div>
+
+                  <div className="dq-section-label" style={{ marginTop: 14 }}>10대 역량 벡터</div>
+                  <CompetencyVectorEditor
+                    value={s.competencyVector}
+                    onChange={(v) => editor.updateField(`sentences[${si}].competencyVector`, v)}
+                    label="이 문장 학습 정답 시 누적될 역량 가중치"
+                    color="correct"
+                  />
                 </div>
               </div>
             </div>
