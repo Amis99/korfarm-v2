@@ -1,0 +1,111 @@
+/* ─────────────────────────────────────────────────────────
+   배경지식/추론 워드 프로세서형 에디터
+   dailyquiz-doc-editor.css 위에 얹어 사용
+   ───────────────────────────────────────────────────────── */
+
+.bg-mode-toggle {
+  display: inline-flex;
+  gap: 4px;
+}
+
+/* 지문 그룹 — 큰 카드 + 안에 문제 카드들 누적 */
+.bg-passage-group {
+  border: 2px solid rgba(60, 45, 35, 0.25);
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 16px;
+  background: rgba(255, 245, 215, 0.55);
+  position: relative;
+}
+
+.bg-passage-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 2px dashed rgba(60, 45, 35, 0.2);
+  flex-wrap: wrap;
+}
+.bg-passage-num {
+  font-weight: 800;
+  font-size: 14px;
+  color: #5b4d2e;
+}
+.bg-passage-id {
+  font-family: monospace;
+  font-size: 11px;
+  color: #888;
+  background: rgba(0,0,0,0.04);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+.bg-passage-body { padding-left: 6px; }
+
+.bg-passage-title {
+  font-weight: 700;
+  font-size: 16px;
+  background: #fff !important;
+}
+.bg-passage-text {
+  font-size: 14px;
+  line-height: 1.85;
+  min-height: 4em;
+  background: #fff !important;
+}
+
+/* 첨부 자료 영역 (PDF/이미지) */
+.bg-attachments {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px dashed rgba(60, 45, 35, 0.2);
+  border-radius: 4px;
+}
+.bg-attachment-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 6px;
+  background: #fff;
+  border: 1px solid rgba(60, 45, 35, 0.15);
+  border-radius: 3px;
+}
+.bg-attachment-icon { font-size: 16px; }
+.bg-attachment-name {
+  flex: 1;
+  font-size: 13px;
+  color: #1a5680;
+  text-decoration: none;
+}
+.bg-attachment-name:hover { text-decoration: underline; }
+.bg-attachment-meta { font-size: 11px; color: #888; }
+.bg-attachment-add {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 4px 10px;
+  background: rgba(46, 125, 50, 0.08);
+  border: 1px dashed rgba(46, 125, 50, 0.45);
+  color: #2e7d32;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.bg-attachment-add:hover { background: rgba(46, 125, 50, 0.18); }
+
+/* 지문 안 문제 카드 — 옅은 카드로 구분 */
+.dq-card.bg-q-card {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(60, 45, 35, 0.15);
+  border-radius: 6px;
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-bottom-style: solid;
+}
+.dq-card.bg-q-card .dq-card-num {
+  font-size: 12px;
+  color: #8a6d3b;
+}

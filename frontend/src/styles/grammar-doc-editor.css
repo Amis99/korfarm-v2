@@ -1,0 +1,192 @@
+/* ─────────────────────────────────────────────────────────
+   문법 4종 워드 프로세서형 에디터 공용 CSS
+   dailyquiz-doc-editor.css 위에 얹어 사용
+   ───────────────────────────────────────────────────────── */
+
+.gr-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 6px 0;
+  font-size: 12px;
+}
+.gr-table th,
+.gr-table td {
+  border: 1px solid rgba(60, 45, 35, 0.18);
+  padding: 4px 6px;
+  text-align: left;
+  vertical-align: middle;
+}
+.gr-table th {
+  background: rgba(255, 230, 130, 0.18);
+  font-weight: 700;
+  color: #5b4d2e;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.gr-table tbody tr:hover {
+  background: rgba(255, 245, 215, 0.4);
+}
+.gr-table input[type="text"],
+.gr-table input[type="number"],
+.gr-table select {
+  width: 100%;
+  border: 1px solid rgba(60, 45, 35, 0.15);
+  border-radius: 3px;
+  padding: 2px 4px;
+  font-size: 12px;
+  background: #fff;
+  color: #2d2516;
+  box-sizing: border-box;
+}
+
+.gr-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 10px;
+}
+.gr-grid-2col input[type="text"],
+.gr-grid-2col input[type="number"],
+.gr-grid-2col textarea {
+  width: 100%;
+  border: 1px solid rgba(60, 45, 35, 0.2);
+  border-radius: 3px;
+  padding: 4px 6px;
+  font-size: 12px;
+  background: #fff;
+  color: #2d2516;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+/* 음운 변동 step 카드 */
+.gr-step {
+  border: 1px solid rgba(60, 45, 35, 0.18);
+  border-radius: 6px;
+  padding: 8px;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.55);
+}
+.gr-step-head {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+.gr-step-head select,
+.gr-step-head input {
+  font-size: 11px;
+  padding: 2px 4px;
+}
+
+/* details/summary 펼침 */
+.dq-card details {
+  border: 1px dashed rgba(60, 45, 35, 0.18);
+  border-radius: 4px;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.4);
+}
+.dq-card details summary {
+  outline: none;
+  padding: 2px 0;
+}
+
+/* 절 분석 — 박스 토글 */
+.gr-clause-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px dashed rgba(60, 45, 35, 0.2);
+  border-radius: 4px;
+}
+.gr-clause-box {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 8px;
+  background: #fff;
+  border: 1.5px solid rgba(60, 45, 35, 0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 120ms;
+  min-width: 50px;
+  color: #2d2516;
+}
+.gr-clause-box span {
+  color: inherit;
+}
+.gr-clause-box:hover { border-color: rgba(60, 45, 35, 0.5); }
+.gr-clause-box.on {
+  background: rgba(120, 200, 255, 0.3);
+  border-color: rgba(40, 130, 200, 0.7);
+  font-weight: 700;
+}
+.gr-clause-box-text {
+  color: #2d2516;
+}
+.gr-clause-box-id {
+  font-family: monospace;
+  font-size: 9px;
+  color: #888;
+  margin-top: 2px;
+}
+
+/* 형태소 분석 비주얼 — 모드 표시 */
+.ma-basic { background: rgba(120, 200, 255, 0.18); color: #1a5680 !important; padding: 2px 8px; border-radius: 3px; }
+.ma-advanced { background: rgba(255, 180, 100, 0.22); color: #8a4a10 !important; padding: 2px 8px; border-radius: 3px; }
+
+/* 학생 칩 미리보기 */
+.ma-preview-chips {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 6px 8px;
+  background: rgba(255, 250, 220, 0.6);
+  border: 1px dashed rgba(138, 109, 59, 0.4);
+  border-radius: 4px;
+  margin: 4px 0;
+}
+.ma-preview-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #8a6d3b;
+}
+.ma-chip {
+  display: inline-block;
+  padding: 4px 10px;
+  background: #fff;
+  border: 1px solid rgba(60, 45, 35, 0.3);
+  border-radius: 14px;
+  font-size: 13px;
+  color: #2d2516;
+}
+
+/* name/nameDetail 입력에 풀 외 값 경고 */
+.ma-warn {
+  background: rgba(192, 57, 43, 0.08) !important;
+  border-color: rgba(192, 57, 43, 0.5) !important;
+}
+
+/* 검증 경고 행 */
+.ma-warn-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 6px 0;
+  padding: 6px 10px;
+  background: rgba(192, 57, 43, 0.08);
+  border: 1px solid rgba(192, 57, 43, 0.4);
+  border-radius: 4px;
+  color: #c0392b;
+  font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  .gr-table { font-size: 11px; }
+  .gr-grid-2col { grid-template-columns: 1fr; }
+}

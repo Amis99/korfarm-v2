@@ -21,10 +21,18 @@ import BackgroundPreview from "./preview/BackgroundPreview";
 import BackgroundForm from "./form/BackgroundForm";
 import DailyQuizDocEditor from "./dailyquiz/DailyQuizDocEditor";
 import DailyReadingDocEditor from "./dailyreading/DailyReadingDocEditor";
+import BackgroundDocEditor from "./background/BackgroundDocEditor";
+import VocabDocEditor from "./vocab/VocabDocEditor";
+import PhonemeChangeDocEditor from "./grammar/PhonemeChangeDocEditor";
+import WordFormationDocEditor from "./grammar/WordFormationDocEditor";
+import SentenceStructureDocEditor from "./grammar/SentenceStructureDocEditor";
+import MorphemeAnalysisDocEditor from "./grammar/MorphemeAnalysisDocEditor";
 import { resolveModuleKeyForContentType } from "../../constants/contentTypes";
 import "../../styles/content-editor.css";
 import "../../styles/dailyquiz-doc-editor.css";
 import "../../styles/dailyreading-doc-editor.css";
+import "../../styles/background-doc-editor.css";
+import "../../styles/grammar-doc-editor.css";
 
 const TYPE_LABEL = {
   PRO_READING: "독해 훈련",
@@ -54,12 +62,31 @@ const TYPE_LABEL = {
 function resolveEditorType(ct) {
   if (!ct) return "worksheet";
   const arr = Array.isArray(ct) ? ct : [ct];
-  // 우선순위: daily-quiz / daily-reading (워드 프로세서형) > reading > 기타.
+  // 우선순위: 워드 프로세서형(daily-quiz / daily-reading / background-doc / vocab-doc / grammar) > reading 좌우 분할 > 기타.
   for (const v of arr) {
     if (typeof v !== "string") continue;
     const up = v.toUpperCase();
-    if (up === "DAILY_QUIZ" || up.includes("DAILY_QUIZ")) return "daily-quiz";
-    if (up === "DAILY_READING" || up.includes("DAILY_READING")) return "daily-reading";
+    // 일일퀴즈 + 동일 패턴 (선택지 분석)
+    if (up === "DAILY_QUIZ" || up.includes("DAILY_QUIZ") ||
+        up === "CHOICE_ANALYSIS" || up === "CHOICE_JUDGEMENT") return "daily-quiz";
+    // 일일독해 + 동일 패턴 (PRO/READING/STORY/CLASSIC)
+    if (up === "DAILY_READING" || up.includes("DAILY_READING") ||
+        up === "PRO_READING" || up === "READING" || up === "STORY" || up === "CLASSIC" ||
+        up === "READING_NONFICTION" || up === "READING_LITERATURE" ||
+        up.includes("READING_TRAINING")) return "daily-reading";
+    // 배경지식·추론 + 내용 숙지 (사용자 지시: STUDY_CONTENT 는 배경지식 모듈과 거의 동일)
+    if (up === "PRO_BACKGROUND" || up === "BACKGROUND" || up === "BACKGROUND_KNOWLEDGE" ||
+        up === "BACKGROUND_KNOWLEDGE_QUIZ" || up === "PRO_LOGIC" || up === "LOGIC" ||
+        up === "STUDY_CONTENT" || up === "CONTENT_PDF" || up === "CONTENT_PDF_QUIZ" ||
+        up.includes("BACKGROUND") || up.includes("LOGIC") || up.includes("CONTENT_PDF")) return "background-doc";
+    // 어휘 + 품사 (워크시트 구조 동일, questionKind 만 다름)
+    if (up === "PRO_VOCAB" || up === "VOCAB_BASIC" || up === "VOCAB" ||
+        up === "GRAMMAR_POS" || up.includes("VOCAB")) return "vocab-doc";
+    // 문법 4종 — 워드 프로세서형 (단순 분기)
+    if (up.includes("PHONEME_CHANGE")) return "phoneme-doc";
+    if (up.includes("WORD_FORMATION")) return "wordformation-doc";
+    if (up.includes("SENTENCE_STRUCTURE")) return "sentence-doc";
+    if (up.includes("MORPHEME_ANALYSIS") || up.includes("MORPHEME")) return "morpheme-doc";
   }
   for (const v of arr) {
     if (typeof v !== "string") continue;
@@ -73,9 +100,6 @@ function resolveEditorType(ct) {
     if (up === "GRAMMAR_WORD_FORMATION" || up.includes("WORD_FORMATION")) return "wordformation";
     if (up === "GRAMMAR_SENTENCE_STRUCTURE" || up.includes("SENTENCE_STRUCTURE")) return "sentence";
     if (up === "STUDY_CONTENT" || up === "CONTENT_PDF" || up === "CONTENT_PDF_QUIZ" || up.includes("CONTENT_PDF")) return "contentpdf";
-    if (up === "PRO_BACKGROUND" || up === "BACKGROUND" || up === "BACKGROUND_KNOWLEDGE" ||
-        up === "BACKGROUND_KNOWLEDGE_QUIZ" || up === "PRO_LOGIC" || up === "LOGIC" ||
-        up.includes("BACKGROUND")) return "background";
   }
   return "worksheet";
 }
@@ -198,7 +222,14 @@ export default function EditorShell({ contentId, staticInfo }) {
   const editorType = resolveEditorType(meta?.contentType);
   const isDailyQuiz = editorType === "daily-quiz";
   const isDailyReading = editorType === "daily-reading";
-  const isDocEditor = isDailyQuiz || isDailyReading;
+  const isBackgroundDoc = editorType === "background-doc";
+  const isVocabDoc = editorType === "vocab-doc";
+  const isPhonemeDoc = editorType === "phoneme-doc";
+  const isWordformationDoc = editorType === "wordformation-doc";
+  const isSentenceDoc = editorType === "sentence-doc";
+  const isMorphemeDoc = editorType === "morpheme-doc";
+  const isGrammarDoc = isPhonemeDoc || isWordformationDoc || isSentenceDoc || isMorphemeDoc;
+  const isDocEditor = isDailyQuiz || isDailyReading || isBackgroundDoc || isVocabDoc || isGrammarDoc;
   // contentType이 array면 라벨도 배열 처리 — " · "로 join
   const ctArrayDisplay = Array.isArray(meta?.contentType)
     ? meta.contentType
@@ -370,10 +401,16 @@ export default function EditorShell({ contentId, staticInfo }) {
       )}
 
       {!showJson && isDocEditor ? (
-        /* 워드 프로세서형 단일 페이지 에디터 (좌우 분할 X) — 일일퀴즈/일일독해 */
+        /* 워드 프로세서형 단일 페이지 에디터 (좌우 분할 X) */
         <div className="ce-doc-pane">
           {isDailyQuiz && <DailyQuizDocEditor editor={editor} />}
           {isDailyReading && <DailyReadingDocEditor editor={editor} />}
+          {isBackgroundDoc && <BackgroundDocEditor editor={editor} />}
+          {isVocabDoc && <VocabDocEditor editor={editor} />}
+          {isPhonemeDoc && <PhonemeChangeDocEditor editor={editor} />}
+          {isWordformationDoc && <WordFormationDocEditor editor={editor} />}
+          {isSentenceDoc && <SentenceStructureDocEditor editor={editor} />}
+          {isMorphemeDoc && <MorphemeAnalysisDocEditor editor={editor} />}
         </div>
       ) : showJson ? (
         /* JSON 직접 편집 모드 */

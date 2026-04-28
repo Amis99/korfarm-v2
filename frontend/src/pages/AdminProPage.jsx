@@ -61,8 +61,15 @@ function AdminProPage() {
   const [previewLoadingId, setPreviewLoadingId] = useState(null);
   const [infoPopoverId, setInfoPopoverId] = useState(null);
 
-  /* 정답해설 탭 */
-  const [answerMode, setAnswerMode] = useState("preview");
+  /* 콘텐츠 추가 모달 */
+  const [addModalOpen, setAddModalOpen] = useState(false);
+  const [addModalTab, setAddModalTab] = useState("search"); // "search" | "create"
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [allContents, setAllContents] = useState([]);
+  const [createCategory, setCreateCategory] = useState("");
+
+  /* 정답해설 탭 — 비주얼 편집을 기본 모드로 */
+  const [answerMode, setAnswerMode] = useState("visual");
   const [answerJson, setAnswerJson] = useState("");
   const [answerTitle, setAnswerTitle] = useState("");
   const [answerLoading, setAnswerLoading] = useState(false);
@@ -128,7 +135,7 @@ function AdminProPage() {
     setSelectedChapter(ch);
     setActiveTab("content");
     setEditVideoUrl(ch.videoUrl || ch.video_url || "");
-    setAnswerMode("preview");
+    setAnswerMode("visual");
     setInfoPopoverId(null);
 
     /* 콘텐츠 현황 */
@@ -451,6 +458,74 @@ function AdminProPage() {
     );
   };
 
+  /* 챕터 items 재설정 — 추가/삭제/이동 모두 이 함수로 */
+  const applyChapterItems = async (newItems) => {
+    if (!selectedChapter) return;
+    try {
+      await apiPost(`/v1/admin/pro/chapters/${selectedChapter.id}/items`, {
+        items: newItems.map((it, i) => ({
+          type: it.typeKey,
+          contentId: it.id,
+          order: i,
+          label: it.title || null,
+        })),
+      });
+      const st = await apiGet(`/v1/admin/pro/chapters/${selectedChapter.id}/content-status`);
+      setContentStatus(st);
+      setStatusCache((prev) => ({ ...prev, [selectedChapter.id]: st }));
+    } catch (err) {
+      alert(err.message || "변경 실패");
+    }
+  };
+  const moveContentItem = async (from, to) => {
+    const items = getContentItems();
+    if (to < 0 || to >= items.length) return;
+    const next = [...items];
+    const [m] = next.splice(from, 1);
+    next.splice(to, 0, m);
+    await applyChapterItems(next);
+  };
+  const removeContentItem = async (idx) => {
+    const items = getContentItems();
+    const c = items[idx];
+    if (!window.confirm(`이 학습("${c.title}")을 챕터에서 제거? (콘텐츠 자체는 보존됩니다)`)) return;
+    const next = items.filter((_, i) => i !== idx);
+    await applyChapterItems(next);
+  };
+  const addContentToChapter = async (contentId, contentType, title) => {
+    const items = getContentItems();
+    if (items.find((it) => it.id === contentId)) {
+      alert("이미 챕터에 추가되어 있는 콘텐츠입니다.");
+      return;
+    }
+    // contentType → typeKey 추론 (reading/vocab/background/logic/answer)
+    const ct = String(contentType || "").toUpperCase();
+    let typeKey = "reading";
+    if (ct.includes("VOCAB")) typeKey = "vocab";
+    else if (ct.includes("BACKGROUND")) typeKey = "background";
+    else if (ct.includes("LOGIC")) typeKey = "logic";
+    else if (ct.includes("ANSWER")) typeKey = "answer";
+    const next = [...items, { id: contentId, title, typeKey, contentType }];
+    await applyChapterItems(next);
+    setAddModalOpen(false);
+  };
+
+  /* 학습 검색 (모달용) — 클라이언트 필터 */
+  const openAddModal = async () => {
+    setAddModalOpen(true);
+    setAddModalTab("search");
+    setSearchKeyword("");
+    setCreateCategory("");
+    if (allContents.length === 0) {
+      try {
+        const list = await apiGet("/v1/admin/content");
+        setAllContents(Array.isArray(list) ? list : []);
+      } catch {
+        setAllContents([]);
+      }
+    }
+  };
+
   const tests = contentStatus?.testVersions || contentStatus?.test_versions || [];
 
   /* ═══════════════════════════════════════════════════════
@@ -472,19 +547,9 @@ function AdminProPage() {
             </div>
           </header>
 
-          {/* 영상 URL */}
-          <div className="ap-card ap-video-card">
-            <label>영상 URL</label>
-            <div className="ap-video-input-row">
-              <input
-                value={editVideoUrl}
-                onChange={(e) => setEditVideoUrl(e.target.value)}
-                placeholder="https://www.youtube.com/watch?v=..."
-              />
-              <button className="ts-btn ts-btn-primary ts-btn-sm" onClick={handleSaveVideo} disabled={videoSaving}>
-                {videoSaving ? "..." : "저장"}
-              </button>
-            </div>
+          {/* 영상 URL — 챕터 단위 매칭은 폐기. 학습 콘텐츠 메타에서 관리. */}
+          <div className="ap-info-banner">
+            ⓘ 영상 URL은 학습 단위로 관리합니다 — 콘텐츠 관리 → 해당 학습 → 메타데이터 패널의 비디오 URL
           </div>
 
           {/* 3탭 */}
@@ -592,48 +657,149 @@ function AdminProPage() {
     if (contentLoading) return <p className="ap-muted">불러오는 중...</p>;
     if (!contentStatus) return <p className="ap-muted">콘텐츠 현황을 불러올 수 없습니다.</p>;
     const items = getContentItems();
-    if (items.length === 0) return <p className="ap-muted">연결된 콘텐츠가 없습니다.</p>;
 
     return (
-      <table className="ts-table ap-content-table">
-        <thead>
-          <tr>
-            <th>제목</th>
-            <th>유형</th>
-            <th>최종수정일</th>
-            <th>액션</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((c) => (
-            <tr key={c.id}>
-              <td className="ap-ct-title">{c.title || "(제목 없음)"}</td>
-              <td><span className={`ap-ct-type ap-ct-type-${c.typeKey}`}>{c.type}</span></td>
-              <td className="ap-ct-date">{c.updatedAt ? new Date(c.updatedAt).toLocaleDateString("ko") : "-"}</td>
-              <td className="ap-ct-actions">
-                <button className="ap-icon-btn" title="미리보기" disabled={previewLoadingId === c.id}
-                  onClick={() => handleContentPreview(c.id)}>
-                  {previewLoadingId === c.id ? "..." : <span className="material-symbols-outlined">visibility</span>}
-                </button>
-                <button className="ap-icon-btn" title="수정"
+      <div className="ap-content-tab">
+        <div className="ap-content-toolbar">
+          <button className="ts-btn ts-btn-primary ts-btn-sm" onClick={openAddModal}>
+            + 학습 추가
+          </button>
+          <span className="ap-muted" style={{ marginLeft: 12, fontSize: 12 }}>
+            카드 클릭 → 비주얼 에디터로 이동 · 액션 버튼은 정지(클릭 통과 안 함)
+          </span>
+        </div>
+
+        {items.length === 0 ? (
+          <p className="ap-muted" style={{ padding: 20 }}>아직 학습이 없습니다. [+ 학습 추가] 로 시작하세요.</p>
+        ) : (
+          <table className="ts-table ap-content-table">
+            <thead>
+              <tr>
+                <th>제목</th>
+                <th>유형</th>
+                <th>최종수정일</th>
+                <th style={{ width: 200 }}>액션</th>
+              </tr>
+            </thead>
+            <tbody>
+              {items.map((c, i) => (
+                <tr key={c.id} className="ts-clickable-row"
                   onClick={() => navigate(`/admin/content/edit?id=${c.id}&from=/admin/pro`)}>
-                  <span className="material-symbols-outlined">edit</span>
+                  <td className="ap-ct-title">{c.title || "(제목 없음)"}</td>
+                  <td><span className={`ap-ct-type ap-ct-type-${c.typeKey}`}>{c.type}</span></td>
+                  <td className="ap-ct-date">{c.updatedAt ? new Date(c.updatedAt).toLocaleDateString("ko") : "-"}</td>
+                  <td className="ap-ct-actions" onClick={(e) => e.stopPropagation()}>
+                    <button className="ap-icon-btn" title="미리보기" disabled={previewLoadingId === c.id}
+                      onClick={() => handleContentPreview(c.id)}>
+                      {previewLoadingId === c.id ? "..." : <span className="material-symbols-outlined">visibility</span>}
+                    </button>
+                    <button className="ap-icon-btn" title="위로" disabled={i === 0}
+                      onClick={() => moveContentItem(i, i - 1)}>▲</button>
+                    <button className="ap-icon-btn" title="아래로" disabled={i >= items.length - 1}
+                      onClick={() => moveContentItem(i, i + 1)}>▼</button>
+                    <button className="ap-icon-btn" title="챕터에서 제거"
+                      onClick={() => removeContentItem(i)}>
+                      <span className="material-symbols-outlined">link_off</span>
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+
+        {addModalOpen && renderAddModal()}
+      </div>
+    );
+  }
+
+  function renderAddModal() {
+    const items = getContentItems();
+    const usedIds = new Set(items.map((it) => it.id));
+    const filtered = (allContents || []).filter((c) => {
+      if (usedIds.has(c.contentId || c.id)) return false;
+      const kw = searchKeyword.trim().toLowerCase();
+      if (!kw) return true;
+      const title = (c.title || "").toLowerCase();
+      const ct = String(Array.isArray(c.contentType) ? c.contentType.join(" ") : c.contentType || "").toLowerCase();
+      return title.includes(kw) || ct.includes(kw);
+    }).slice(0, 50);
+
+    const CATEGORIES = [
+      { value: "PRO_READING", label: "프로 독해" },
+      { value: "PRO_VOCAB", label: "프로 어휘" },
+      { value: "PRO_BACKGROUND", label: "프로 배경지식" },
+      { value: "PRO_LOGIC", label: "프로 논리사고력" },
+      { value: "READING", label: "농장 - 독해" },
+      { value: "VOCAB", label: "농장 - 어휘" },
+      { value: "BACKGROUND", label: "농장 - 배경지식" },
+      { value: "LOGIC", label: "농장 - 논리사고력" },
+    ];
+
+    return (
+      <div className="ap-modal-overlay" onClick={() => setAddModalOpen(false)}>
+        <div className="ap-modal" onClick={(e) => e.stopPropagation()}>
+          <div className="ap-modal-header">
+            <h3>학습 추가 — {selectedChapter.title}</h3>
+            <button className="ap-icon-btn" onClick={() => setAddModalOpen(false)}>
+              <span className="material-symbols-outlined">close</span>
+            </button>
+          </div>
+          <div className="ap-modal-tabs">
+            <button className={`ap-modal-tab ${addModalTab === "search" ? "active" : ""}`}
+              onClick={() => setAddModalTab("search")}>기존 학습 검색</button>
+            <button className={`ap-modal-tab ${addModalTab === "create" ? "active" : ""}`}
+              onClick={() => setAddModalTab("create")}>새 학습 작성</button>
+          </div>
+          <div className="ap-modal-body">
+            {addModalTab === "search" && (
+              <>
+                <input type="text" placeholder="제목 또는 카테고리로 검색"
+                  value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)}
+                  className="ap-modal-search" autoFocus />
+                <div className="ap-modal-results">
+                  {filtered.length === 0 && (
+                    <p className="ap-muted" style={{ padding: 12 }}>검색 결과 없음</p>
+                  )}
+                  {filtered.map((c) => {
+                    const ct = Array.isArray(c.contentType) ? c.contentType.join(" / ") : (c.contentType || "");
+                    return (
+                      <div key={c.contentId || c.id} className="ap-modal-result-row"
+                        onClick={() => addContentToChapter(c.contentId || c.id, ct, c.title || "")}>
+                        <span className="ap-modal-result-title">{c.title || "(제목 없음)"}</span>
+                        <span className="ap-modal-result-type">{ct}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
+            )}
+            {addModalTab === "create" && (
+              <div className="ap-modal-create">
+                <div className="dq-section-label">카테고리 선택</div>
+                <select value={createCategory} onChange={(e) => setCreateCategory(e.target.value)}
+                  className="ap-modal-create-select">
+                  <option value="">(카테고리 선택)</option>
+                  {CATEGORIES.map((c) => (
+                    <option key={c.value} value={c.value}>{c.label}</option>
+                  ))}
+                </select>
+                <p className="ap-muted" style={{ marginTop: 10, fontSize: 12 }}>
+                  카테고리 선택 후 [콘텐츠 관리에서 작성하기] 버튼을 누르면 콘텐츠 관리 페이지로 이동합니다.
+                  거기서 신규 콘텐츠를 작성한 뒤, 다시 이 챕터로 돌아와 [기존 학습 검색]으로 추가하세요.
+                </p>
+                <button className="ts-btn ts-btn-primary" disabled={!createCategory}
+                  onClick={() => {
+                    navigate(`/admin/content?from=/admin/pro&newType=${createCategory}`);
+                    setAddModalOpen(false);
+                  }}>
+                  콘텐츠 관리에서 작성하기 →
                 </button>
-                <button className="ap-icon-btn ap-icon-btn-muted" title="정보"
-                  onClick={() => setInfoPopoverId(infoPopoverId === c.id ? null : c.id)}>
-                  <span className="material-symbols-outlined">info</span>
-                </button>
-                {infoPopoverId === c.id && (
-                  <div className="ap-info-popover">
-                    <div><strong>ID:</strong> <code>{c.id}</code></div>
-                    <div><strong>타입:</strong> {c.contentType}</div>
-                  </div>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     );
   }
 
