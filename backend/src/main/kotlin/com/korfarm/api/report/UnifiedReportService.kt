@@ -3,9 +3,14 @@ package com.korfarm.api.report
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.korfarm.api.common.ApiException
+import com.korfarm.api.diagnostic.DiagSessionRepository
+import com.korfarm.api.diagnostic.scoring.COMPETENCIES
 import com.korfarm.api.learning.FarmLearningLogRepository
+import com.korfarm.api.learning.LEARNING_COMPETENCY_WINDOW_SIZE
 import com.korfarm.api.learning.LearningAttemptRepository
+import com.korfarm.api.learning.LearningCompetencyLogRepository
 import com.korfarm.api.learning.QuizAnswerDetailRepository
+import com.korfarm.api.learning.UserCompetencySummaryRepository
 import com.korfarm.api.paid.ContentRepository
 import com.korfarm.api.pro.CompetencyScore
 import com.korfarm.api.pro.ProChapterItemRepo
@@ -44,6 +49,11 @@ class UnifiedReportService(
     private val studyPlanTargetRepo: StudyPlanTargetRepository,
     private val quizAnswerDetailRepo: QuizAnswerDetailRepository,
     private val contentRepository: ContentRepository,
+    /** 학습 종합 누적 (Phase 2 신규) */
+    private val userCompetencySummaryRepo: UserCompetencySummaryRepository,
+    private val learningCompetencyLogRepo: LearningCompetencyLogRepository,
+    /** 진단 v2 결과 조회 (Phase 2 신규) */
+    private val diagSessionRepo: DiagSessionRepository,
     private val objectMapper: ObjectMapper
 ) {
     private val dtFmt = DateTimeFormatter.ISO_LOCAL_DATE_TIME
@@ -103,6 +113,11 @@ class UnifiedReportService(
         // 캘린더 데이터
         val calendar = buildCalendarData(studentId, start, end)
 
+        // Phase 2 — 학습 종합 누적 / 진단 측정 / 변화 추이
+        val learningCompetency = buildLearningCompetencySnapshot(studentId)
+        val diagnosticCompetency = buildDiagnosticCompetencySnapshot(studentId)
+        val competencyTrend = buildCompetencyTrend(studentId, start, end)
+
         return UnifiedReportResponse(
             studentId = studentId,
             studentName = user.name ?: "",
@@ -114,9 +129,102 @@ class UnifiedReportService(
             areaStats = areaStats,
             competencyStats = competencyStats,
             competencyRadarData = competencyRadarData,
+            learningCompetency = learningCompetency,
+            diagnosticCompetency = diagnosticCompetency,
+            competencyTrend = competencyTrend,
             recommendations = recommendations,
             calendar = calendar
         )
+    }
+
+    /* ───────────────── Phase 2: 학습 종합 누적 / 진단 측정 / 시계열 ───────────────── */
+
+    private fun buildLearningCompetencySnapshot(userId: String): LearningCompetencySnapshot {
+        val rows = userCompetencySummaryRepo.findByUserId(userId).associateBy { it.competency }
+        val items = COMPETENCIES.map { name ->
+            val r = rows[name]
+            LearningCompetencyItem(
+                competency = name,
+                ratioScore = r?.ratioScore ?: 0.0,
+                sampleCount = r?.sampleCount ?: 0,
+            )
+        }
+        val totalSamples = items.sumOf { it.sampleCount }
+        val updatedAt = rows.values.mapNotNull { it.updatedAt }.maxOrNull()?.format(dtFmt)
+        return LearningCompetencySnapshot(
+            items = items,
+            totalSamples = totalSamples,
+            updatedAt = updatedAt,
+            windowSize = LEARNING_COMPETENCY_WINDOW_SIZE,
+        )
+    }
+
+    private fun buildDiagnosticCompetencySnapshot(userId: String): DiagnosticCompetencySnapshot? {
+        val sessions = diagSessionRepo.findByUserIdOrderByStartedAtDesc(userId)
+        val latest = sessions.firstOrNull { it.status == "COMPLETED" || it.scoresJson != null }
+            ?: return null
+        val scores: Map<String, Double> = try {
+            if (latest.scoresJson.isNullOrBlank()) emptyMap()
+            else objectMapper.readValue(latest.scoresJson, object : TypeReference<Map<String, Double>>() {})
+        } catch (_: Exception) { emptyMap() }
+        val touches: Map<String, Int> = try {
+            if (latest.touchCountsJson.isNullOrBlank()) emptyMap()
+            else objectMapper.readValue(latest.touchCountsJson, object : TypeReference<Map<String, Int>>() {})
+        } catch (_: Exception) { emptyMap() }
+        val items = COMPETENCIES.map { name ->
+            DiagnosticCompetencyItem(
+                competency = name,
+                score = scores[name] ?: 0.0,
+                touchCount = touches[name] ?: 0,
+            )
+        }
+        return DiagnosticCompetencySnapshot(
+            items = items,
+            tier = latest.tier,
+            measuredAt = latest.completedAt?.format(dtFmt) ?: latest.startedAt?.format(dtFmt),
+        )
+    }
+
+    private fun buildCompetencyTrend(
+        userId: String,
+        start: LocalDateTime,
+        end: LocalDateTime,
+    ): List<CompetencyTrendPoint> {
+        // 기간 내 모든 entry (in_window 무관) 조회
+        val all = learningCompetencyLogRepo.findInWindowAsc(userId)
+        val filtered = all.filter { it.completedAt in start..end }
+        if (filtered.isEmpty()) return emptyList()
+
+        val typeRefV = object : TypeReference<Map<String, Double>>() {}
+        val typeRefM = object : TypeReference<Map<String, Int>>() {}
+
+        // 일자별 그룹
+        val byDate = filtered.groupBy { it.completedAt.toLocalDate() }
+        val out = mutableListOf<CompetencyTrendPoint>()
+        for ((date, entries) in byDate.toSortedMap()) {
+            val earned = COMPETENCIES.associateWith { 0.0 }.toMutableMap()
+            val maxV = COMPETENCIES.associateWith { 0.0 }.toMutableMap()
+            for (e in entries) {
+                val v: Map<String, Double> = try { objectMapper.readValue(e.vectorJson, typeRefV) } catch (_: Exception) { emptyMap() }
+                val m: Map<String, Int> = try { objectMapper.readValue(e.measuredJson, typeRefM) } catch (_: Exception) { emptyMap() }
+                for (c in COMPETENCIES) {
+                    val measured = (m[c] ?: 0).toDouble()
+                    if (measured == 0.0) continue
+                    earned[c] = earned.getValue(c) + e.weight * measured * (v[c] ?: 0.0).coerceIn(0.0, 1.0)
+                    maxV[c] = maxV.getValue(c) + e.weight * measured
+                }
+            }
+            for (c in COMPETENCIES) {
+                val mx = maxV.getValue(c)
+                if (mx <= 0.0) continue
+                out.add(CompetencyTrendPoint(
+                    date = date.toString(),
+                    competency = c,
+                    ratioScore = (earned.getValue(c) / mx) * 100.0,
+                ))
+            }
+        }
+        return out
     }
 
     @Transactional(readOnly = true)

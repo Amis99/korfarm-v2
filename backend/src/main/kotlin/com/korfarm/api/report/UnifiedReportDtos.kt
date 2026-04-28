@@ -14,8 +14,48 @@ data class UnifiedReportResponse(
     val areaStats: List<AreaStats> = emptyList(),
     val competencyStats: List<CompetencyStats> = emptyList(),
     val competencyRadarData: RadarData? = null,
+    /** 학습 종합 누적 10대 역량 (슬라이딩 윈도우 N=100 가중평균) — 진단과 별도. Phase 2 신규. */
+    val learningCompetency: LearningCompetencySnapshot? = null,
+    /** 진단 v2 측정 10대 역량 (가장 최근 1회 응시) — 학습 누적과 별도. Phase 2 신규. */
+    val diagnosticCompetency: DiagnosticCompetencySnapshot? = null,
+    /** 역량별 일자별 변화 추이 (시계열). Phase 2 신규. */
+    val competencyTrend: List<CompetencyTrendPoint> = emptyList(),
     val recommendations: List<LearningRecommendation> = emptyList(),
     val calendar: List<CalendarDay> = emptyList()
+)
+
+/** 학습 종합 누적 10대 역량 (윈도우 내 가중평균) */
+data class LearningCompetencySnapshot(
+    val items: List<LearningCompetencyItem>,
+    val totalSamples: Int,
+    val updatedAt: String?,
+    val windowSize: Int,
+)
+
+data class LearningCompetencyItem(
+    val competency: String,
+    val ratioScore: Double,        // 0~100
+    val sampleCount: Int,
+)
+
+/** 진단 v2 측정 결과 (가장 최근 1회) */
+data class DiagnosticCompetencySnapshot(
+    val items: List<DiagnosticCompetencyItem>,
+    val tier: String?,
+    val measuredAt: String?,
+)
+
+data class DiagnosticCompetencyItem(
+    val competency: String,
+    val score: Double,             // 0~100
+    val touchCount: Int,
+)
+
+/** 역량별 일자별 변화 추이 */
+data class CompetencyTrendPoint(
+    val date: String,              // yyyy-MM-dd
+    val competency: String,
+    val ratioScore: Double,        // 그 일자 단일 가중평균 (0~100)
 )
 
 data class ReportPeriod(
