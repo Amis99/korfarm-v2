@@ -507,6 +507,84 @@
   font-size: 11px;
 }
 
+/* ─── 역량 벡터 입력기 ─── */
+.cv-editor {
+  border: 1px solid rgba(60, 45, 35, 0.18);
+  border-radius: 4px;
+  padding: 4px 6px;
+  margin: 4px 0;
+  background: rgba(255, 255, 255, 0.5);
+}
+.cv-editor.cv-color-correct {
+  background: rgba(255, 230, 130, 0.12);
+  border-color: rgba(240, 108, 36, 0.3);
+}
+.cv-editor.cv-color-wrong {
+  background: rgba(40, 130, 200, 0.06);
+  border-color: rgba(40, 130, 200, 0.3);
+}
+.cv-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: #5b4d2e;
+  padding: 2px 0;
+  text-align: left;
+}
+.cv-toggle:hover { color: #2d2516; }
+.cv-toggle-arrow { font-size: 10px; }
+.cv-toggle-label { font-weight: 700; }
+.cv-toggle-summary { color: #888; font-size: 11px; margin-left: auto; }
+
+.cv-body {
+  margin-top: 6px;
+  padding: 6px 4px;
+  border-top: 1px dashed rgba(60, 45, 35, 0.15);
+}
+.cv-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 0;
+}
+.cv-label {
+  font-size: 11px;
+  color: #2d2516;
+  flex-basis: 130px;
+  flex-shrink: 0;
+}
+.cv-compact .cv-label { flex-basis: 80px; font-size: 10px; }
+.cv-slider { flex: 1; min-width: 60px; }
+.cv-num {
+  width: 50px;
+  padding: 1px 4px;
+  font-size: 11px;
+  border: 1px solid rgba(60, 45, 35, 0.2);
+  border-radius: 3px;
+  text-align: right;
+  background: #fff;
+  color: #2d2516;
+}
+.cv-actions {
+  margin-top: 4px;
+  text-align: right;
+}
+.cv-clear {
+  font-size: 10px;
+  background: transparent;
+  border: 1px solid rgba(192, 57, 43, 0.3);
+  color: #c0392b;
+  padding: 1px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.cv-clear:hover { background: rgba(192, 57, 43, 0.08); }
+
 /* ─── 모바일 ─── */
 @media (max-width: 768px) {
   .dq-doc-paper { padding: 16px 14px; }

@@ -1,6 +1,7 @@
 import InlineEditable from "../dailyquiz/InlineEditable";
 import MultiChoiceEditor from "../dailyquiz/MultiChoiceEditor";
 import FillBlanksEditor from "../dailyquiz/FillBlanksEditor";
+import CompetencyVectorEditor from "../dailyquiz/CompetencyVectorEditor";
 
 const TYPE_OPTIONS = [
   { value: "MULTI_CHOICE", label: "객관식" },
@@ -137,6 +138,30 @@ export default function VocabQuestionCard({
 
         {t === "MULTI_CHOICE" && <MultiChoiceEditor question={question} path={path} editor={editor} />}
         {t === "FILL_BLANKS" && <FillBlanksEditor question={question} path={path} editor={editor} />}
+
+        <div className="dq-section-label" style={{ marginTop: 14 }}>10대 역량 벡터</div>
+        <CompetencyVectorEditor
+          value={question.competencyVector}
+          onChange={(v) => editor.updateField(`${path}.competencyVector`, v)}
+          label="정답 시 누적될 역량 가중치"
+          color="correct"
+        />
+        {t === "MULTI_CHOICE" && (question.choices || []).length > 0 && (
+          <div className="dq-section-label" style={{ marginTop: 8 }}>선택지별 약점 벡터</div>
+        )}
+        {t === "MULTI_CHOICE" && (question.choices || []).map((c, ci) => {
+          if (question.answerId === c.id) return null;
+          return (
+            <CompetencyVectorEditor
+              key={`wv-${c.id || ci}`}
+              value={c.wrongVector}
+              onChange={(v) => editor.updateField(`${path}.choices[${ci}].wrongVector`, v)}
+              label={`선택지 ${ci + 1} (${(c.text || "").slice(0, 20)}${(c.text || "").length > 20 ? "…" : ""}) 약점`}
+              color="wrong"
+              compact
+            />
+          );
+        })}
 
         <div className="dq-section-label" style={{ marginTop: 14 }}>해설 (explanation) — 사전 정의·예문·한자·어원 등</div>
         <InlineEditable

@@ -3,6 +3,7 @@ import MultiChoiceEditor from "./MultiChoiceEditor";
 import FillBlanksEditor from "./FillBlanksEditor";
 import TextSelectEditor from "./TextSelectEditor";
 import ChoiceComplexOxEditor from "./ChoiceComplexOxEditor";
+import CompetencyVectorEditor from "./CompetencyVectorEditor";
 
 const TYPE_OPTIONS = [
   { value: "MULTI_CHOICE", label: "객관식 (MULTI_CHOICE)" },
@@ -101,6 +102,33 @@ export default function QuestionCardEditor({
         {t === "FILL_BLANKS" && <FillBlanksEditor question={question} path={path} editor={editor} />}
         {t === "TEXT_SELECT" && <TextSelectEditor question={question} path={path} editor={editor} />}
         {t === "CHOICE_COMPLEX_OX" && <ChoiceComplexOxEditor question={question} path={path} editor={editor} />}
+
+        {/* 10대 역량 벡터 — 정답 시 누적될 가중치 분포 */}
+        <div className="dq-section-label" style={{ marginTop: 14 }}>10대 역량 벡터</div>
+        <CompetencyVectorEditor
+          value={question.competencyVector}
+          onChange={(v) => editor.updateField(`${path}.competencyVector`, v)}
+          label="정답 시 누적될 역량 가중치"
+          color="correct"
+        />
+        {/* MULTI_CHOICE 의 경우: 각 선택지의 wrongVector (오답 선택 시 학생 약점) */}
+        {t === "MULTI_CHOICE" && (question.choices || []).length > 0 && (
+          <div className="dq-section-label" style={{ marginTop: 8 }}>선택지별 약점 벡터 (이 선택지를 골라 틀린 학생의 약점)</div>
+        )}
+        {t === "MULTI_CHOICE" && (question.choices || []).map((c, ci) => {
+          const isAnswer = question.answerId === c.id;
+          if (isAnswer) return null; // 정답 선지는 wrongVector 의미 없음
+          return (
+            <CompetencyVectorEditor
+              key={`wv-${c.id || ci}`}
+              value={c.wrongVector}
+              onChange={(v) => editor.updateField(`${path}.choices[${ci}].wrongVector`, v)}
+              label={`선택지 ${ci + 1} (${(c.text || "").slice(0, 20)}${(c.text || "").length > 20 ? "…" : ""}) 약점`}
+              color="wrong"
+              compact
+            />
+          );
+        })}
 
         <div className="dq-section-label" style={{ marginTop: 14 }}>해설 (explanation)</div>
         <InlineEditable
