@@ -383,18 +383,68 @@ function AdminProPage() {
     if (editingQIdx === idx) { setEditingQIdx(null); setEditQ(null); }
   };
 
-  const addQuestion = () => {
-    const nextNum = testQuestions.length + 1;
+  const addQuestion = (atIdx) => {
+    const insertAt = atIdx ?? testQuestions.length;
+    const nextNum = insertAt + 1;
     const newQ = {
       number: nextNum, type: "객관식", domain: "", points: 3, stem: "", passage: null,
       correctAnswer: "",
       choices: [{ id: "1", text: "" }, { id: "2", text: "" }, { id: "3", text: "" }, { id: "4", text: "" }],
       choiceExplanations: {},
     };
-    setTestQuestions([...testQuestions, newQ]);
+    const next = [...testQuestions];
+    next.splice(insertAt, 0, newQ);
+    // 번호 재정렬
+    setTestQuestions(next.map((q, i) => ({ ...q, number: i + 1 })));
     setTestQuestionsModified(true);
-    setEditingQIdx(testQuestions.length);
-    setEditQ(JSON.parse(JSON.stringify(newQ)));
+  };
+  const moveQuestion = (from, to) => {
+    if (to < 0 || to >= testQuestions.length) return;
+    const next = [...testQuestions];
+    const [m] = next.splice(from, 1);
+    next.splice(to, 0, m);
+    setTestQuestions(next.map((q, i) => ({ ...q, number: i + 1 })));
+    setTestQuestionsModified(true);
+  };
+  const updateQuestion = (idx, patch) => {
+    const next = [...testQuestions];
+    next[idx] = { ...next[idx], ...patch };
+    setTestQuestions(next);
+    setTestQuestionsModified(true);
+  };
+  const updateQuestionChoice = (qIdx, cIdx, patch) => {
+    const next = [...testQuestions];
+    const choices = [...(next[qIdx].choices || [])];
+    choices[cIdx] = { ...choices[cIdx], ...patch };
+    next[qIdx] = { ...next[qIdx], choices };
+    setTestQuestions(next);
+    setTestQuestionsModified(true);
+  };
+  const addQuestionChoice = (qIdx) => {
+    const next = [...testQuestions];
+    const choices = [...(next[qIdx].choices || [])];
+    const newId = String(choices.length + 1);
+    choices.push({ id: newId, text: "" });
+    next[qIdx] = { ...next[qIdx], choices };
+    setTestQuestions(next);
+    setTestQuestionsModified(true);
+  };
+  const removeQuestionChoice = (qIdx, cIdx) => {
+    const next = [...testQuestions];
+    const choices = [...(next[qIdx].choices || [])];
+    if (choices.length <= 2) return alert("최소 2개의 선택지가 필요합니다.");
+    choices.splice(cIdx, 1);
+    next[qIdx] = { ...next[qIdx], choices };
+    setTestQuestions(next);
+    setTestQuestionsModified(true);
+  };
+  const updateChoiceExplanation = (qIdx, choiceId, value) => {
+    const next = [...testQuestions];
+    const ce = { ...(next[qIdx].choiceExplanations || next[qIdx].choice_explanations || {}) };
+    ce[choiceId] = value;
+    next[qIdx] = { ...next[qIdx], choiceExplanations: ce };
+    setTestQuestions(next);
+    setTestQuestionsModified(true);
   };
 
   const handleTestJsonDownload = () => {
@@ -1035,9 +1085,9 @@ function AdminProPage() {
     );
   }
 
-  /* ── 비주얼 에디터 ── */
+  /* ── 비주얼 에디터 — 문서 편집기 스타일 (카드 누적 인라인 편집) ── */
   function renderTestEditor() {
-    if (!selectedTestPaperId) return <p className="ap-muted">시험지를 선택하세요.</p>;
+    if (!selectedTestPaperId) return <p className="ap-muted" style={{ padding: 20 }}>시험지를 선택하세요.</p>;
     if (testQuestionsLoading) return <p className="ap-muted">문항을 불러오는 중...</p>;
 
     if (testJsonMode) {
@@ -1060,38 +1110,28 @@ function AdminProPage() {
     }
 
     return (
-      <>
-        {testQuestions.length > 0 ? (
-          <table className="ts-table ap-q-table">
-            <thead>
-              <tr><th>#</th><th>유형</th><th>역량</th><th>배점</th><th>정답</th><th>문제 미리보기</th><th></th></tr>
-            </thead>
-            <tbody>
-              {testQuestions.map((q, idx) => (
-                <tr key={idx} className={editingQIdx === idx ? "ap-q-editing" : ""}>
-                  <td>{q.number}</td>
-                  <td><span className={`ap-q-type-badge ${q.type === "서술형" ? "essay" : "mc"}`}>{q.type}</span></td>
-                  <td className="ap-q-domain">{q.domain || "-"}</td>
-                  <td>{q.points}</td>
-                  <td className="ap-mono">{q.correctAnswer || q.correct_answer || (q.modelAnswer || q.model_answer ? "서술" : "-")}</td>
-                  <td className="ap-q-stem-preview">{(q.stem || q.passage || "").slice(0, 40)}{(q.stem || q.passage || "").length > 40 ? "..." : ""}</td>
-                  <td className="ap-q-actions">
-                    <button className="ap-icon-btn" title="편집" onClick={() => startEditQuestion(idx)}><span className="material-symbols-outlined">edit</span></button>
-                    <button className="ap-icon-btn ap-icon-btn-danger" title="삭제" onClick={() => deleteQuestion(idx)}><span className="material-symbols-outlined">delete</span></button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : <p className="ap-muted">문항이 없습니다.</p>}
+      <div className="ap-test-doc">
+        {testQuestions.length === 0 && (
+          <p className="ap-muted" style={{ padding: 20 }}>아직 문항이 없습니다. 아래 [+] 로 첫 문항 추가.</p>
+        )}
 
-        {/* 문항 편집 패널 */}
-        {editingQIdx !== null && editQ && renderQuestionEditPanel()}
+        {testQuestions.map((q, idx) => (
+          <div key={idx}>
+            <button type="button" className="ap-test-add-between" onClick={() => addQuestion(idx)}>
+              + 여기에 문항 추가
+            </button>
+            {renderTestQuestionCard(q, idx)}
+          </div>
+        ))}
+
+        <button type="button" className="ap-test-add-between ap-test-add-end" onClick={() => addQuestion(testQuestions.length)}>
+          + 마지막에 문항 추가
+        </button>
 
         <div className="ap-test-bottom-actions">
           <div className="ap-test-bottom-left">
-            <button className="ts-btn ts-btn-outline ts-btn-sm" onClick={addQuestion}><span className="material-symbols-outlined">add</span> 문항 추가</button>
-            <button className="ts-btn ts-btn-outline ts-btn-sm" onClick={() => { setTestJsonText(JSON.stringify(testQuestions, null, 2)); setTestJsonMode(true); setEditingQIdx(null); setEditQ(null); }}>
+            <button className="ts-btn ts-btn-outline ts-btn-sm"
+              onClick={() => { setTestJsonText(JSON.stringify(testQuestions, null, 2)); setTestJsonMode(true); }}>
               <span className="material-symbols-outlined">code</span> JSON 편집
             </button>
           </div>
@@ -1102,7 +1142,97 @@ function AdminProPage() {
             </button>
           </div>
         </div>
-      </>
+      </div>
+    );
+  }
+
+  /* ── 단일 문항 카드 (인라인 편집) ── */
+  function renderTestQuestionCard(q, idx) {
+    const choices = q.choices || [];
+    const choiceExplanations = q.choiceExplanations || q.choice_explanations || {};
+    const isEssay = q.type === "서술형";
+    return (
+      <div className="ap-test-q-card">
+        <div className="ap-test-q-head">
+          <span className="ap-test-q-num">문항 {q.number}</span>
+          <select value={q.type || "객관식"}
+            onChange={(e) => updateQuestion(idx, { type: e.target.value })}>
+            <option value="객관식">객관식</option>
+            <option value="서술형">서술형</option>
+          </select>
+          <input type="text" placeholder="역량 (예: 사실적 이해)" value={q.domain || ""}
+            onChange={(e) => updateQuestion(idx, { domain: e.target.value })} style={{ width: 140 }} />
+          <input type="text" placeholder="세부 역량" value={q.subDomain || q.sub_domain || ""}
+            onChange={(e) => updateQuestion(idx, { subDomain: e.target.value })} style={{ width: 120 }} />
+          <label style={{ fontSize: 11 }}>배점
+            <input type="number" min={1} value={q.points || 0}
+              onChange={(e) => updateQuestion(idx, { points: Number(e.target.value) })} style={{ width: 50, marginLeft: 4 }} />
+          </label>
+          <div className="dq-fb-blank-move">
+            <button type="button" onClick={() => moveQuestion(idx, idx - 1)} disabled={idx === 0}>▲</button>
+            <button type="button" onClick={() => moveQuestion(idx, idx + 1)} disabled={idx >= testQuestions.length - 1}>▼</button>
+          </div>
+          <span style={{ flex: 1 }} />
+          <button type="button" className="ap-icon-btn ap-icon-btn-danger" onClick={() => deleteQuestion(idx)}>
+            <span className="material-symbols-outlined">delete</span>
+          </button>
+        </div>
+
+        <div className="ap-test-q-body">
+          <div className="dq-section-label">지문 (선택, 마크다운)</div>
+          <textarea className="ap-test-q-passage" rows={3} value={q.passage || ""}
+            onChange={(e) => updateQuestion(idx, { passage: e.target.value || null })}
+            placeholder="지문이 있으면 입력 (없으면 비워두세요)" />
+
+          <div className="dq-section-label">발문 (stem)</div>
+          <textarea className="ap-test-q-stem" rows={2} value={q.stem || ""}
+            onChange={(e) => updateQuestion(idx, { stem: e.target.value })}
+            placeholder="문제 발문" />
+
+          {!isEssay ? (
+            <>
+              <div className="dq-section-label">선택지 — 라디오로 정답 지정</div>
+              {choices.map((c, ci) => (
+                <div key={ci} className={`ap-test-choice-row ${q.correctAnswer === c.id ? "is-answer" : ""}`}>
+                  <label className="dq-mc-radio">
+                    <input type="radio" name={`tq-${idx}-ans`}
+                      checked={q.correctAnswer === c.id || q.correct_answer === c.id}
+                      onChange={() => updateQuestion(idx, { correctAnswer: c.id })} />
+                    <span className="dq-mc-num">{ci + 1}</span>
+                  </label>
+                  <input type="text" value={c.text || ""}
+                    onChange={(e) => updateQuestionChoice(idx, ci, { text: e.target.value })}
+                    placeholder="선택지" style={{ flex: 1 }} />
+                  <input type="text" value={choiceExplanations[c.id] || ""}
+                    onChange={(e) => updateChoiceExplanation(idx, c.id, e.target.value)}
+                    placeholder="이 선택지 해설 (선택)" style={{ flex: 1, fontSize: 12 }} />
+                  <button type="button" className="dq-mc-del"
+                    onClick={() => removeQuestionChoice(idx, ci)}>×</button>
+                </div>
+              ))}
+              <button type="button" className="dq-add-btn" onClick={() => addQuestionChoice(idx)}>+ 선택지 추가</button>
+            </>
+          ) : (
+            <>
+              <div className="dq-section-label">서술형 정답·해설</div>
+              <textarea className="ap-test-q-stem" rows={2} value={q.modelAnswer || q.model_answer || ""}
+                onChange={(e) => updateQuestion(idx, { modelAnswer: e.target.value })}
+                placeholder="모범 답안" />
+              <input type="text" value={Array.isArray(q.essayKeywords) ? q.essayKeywords.join(", ") : (q.essayKeywords || q.essay_keywords || "")}
+                onChange={(e) => updateQuestion(idx, { essayKeywords: e.target.value.split(",").map((s) => s.trim()).filter(Boolean) })}
+                placeholder="핵심 키워드 (쉼표 구분)" style={{ width: "100%", marginTop: 4 }} />
+              <textarea className="ap-test-q-stem" rows={3} value={q.essayRubric || q.essay_rubric || ""}
+                onChange={(e) => updateQuestion(idx, { essayRubric: e.target.value })}
+                placeholder="채점 기준 (rubric)" />
+            </>
+          )}
+
+          <div className="dq-section-label">출제 의도 (intent)</div>
+          <input type="text" value={q.intent || ""}
+            onChange={(e) => updateQuestion(idx, { intent: e.target.value })}
+            placeholder="출제 의도" style={{ width: "100%" }} />
+        </div>
+      </div>
     );
   }
 
