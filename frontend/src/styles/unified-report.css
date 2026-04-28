@@ -767,3 +767,73 @@
     -webkit-print-color-adjust: exact;
   }
 }
+
+/* ─── Phase 2: 학습 누적 vs 진단 비교 패널 ─── */
+.ur-comp-panel { padding: 14px 16px; }
+.ur-comp-panel-head {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px; margin-bottom: 10px;
+}
+.ur-comp-panel-head h3 { margin: 0; font-size: 16px; color: #2d2516; }
+.ur-comp-panel-meta { display: flex; gap: 6px; flex-wrap: wrap; }
+.ur-comp-tag {
+  font-size: 11px; padding: 3px 10px; border-radius: 12px;
+  font-weight: 600;
+}
+.ur-tag-learning {
+  background: rgba(240, 108, 36, 0.12); color: #c0501a;
+  border: 1px solid rgba(240, 108, 36, 0.4);
+}
+.ur-tag-diag {
+  background: rgba(40, 130, 200, 0.10); color: #1a5680;
+  border: 1px solid rgba(40, 130, 200, 0.4);
+}
+.ur-comp-panel-body {
+  display: grid; grid-template-columns: minmax(280px, 1fr) 1.2fr; gap: 16px;
+}
+@media (max-width: 768px) {
+  .ur-comp-panel-body { grid-template-columns: 1fr; }
+}
+.ur-comp-radar { padding: 10px; }
+.ur-comp-table-wrap { overflow-x: auto; }
+.ur-comp-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.ur-comp-table th, .ur-comp-table td {
+  border-bottom: 1px solid rgba(60, 45, 35, 0.1);
+  padding: 5px 8px; text-align: left;
+}
+.ur-comp-table th { background: rgba(255, 230, 130, 0.12); font-weight: 700; color: #5b4d2e; }
+.ur-comp-name { font-weight: 600; }
+.ur-comp-val { font-weight: 700; text-align: right; min-width: 60px; }
+.ur-comp-meta { color: #888; font-size: 11px; }
+.ur-comp-na { color: #aaa; }
+.ur-comp-a { color: #2e7d32; }
+.ur-comp-b { color: #1a5680; }
+.ur-comp-c { color: #b8860b; }
+.ur-comp-d { color: #c46a00; }
+.ur-comp-f { color: #c0392b; }
+
+/* ─── Phase 2: 변화 추이 라인 차트 ─── */
+.ur-trend-chart { padding: 14px 16px; }
+.ur-trend-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  margin-bottom: 8px; flex-wrap: wrap;
+}
+.ur-trend-head h3 { margin: 0; font-size: 16px; color: #2d2516; }
+.ur-trend-toggles {
+  display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px;
+}
+.ur-trend-toggle {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 9px;
+  background: #fff;
+  border: 1px solid rgba(60, 45, 35, 0.2);
+  border-radius: 14px;
+  font-size: 11px; cursor: pointer;
+  color: #888;
+  transition: all 120ms;
+}
+.ur-trend-toggle:hover { border-color: rgba(60, 45, 35, 0.4); color: #2d2516; }
+.ur-trend-toggle.on { font-weight: 700; background: #fff; }
+.ur-trend-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
+.ur-trend-canvas { width: 100%; }
+

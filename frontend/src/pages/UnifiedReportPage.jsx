@@ -6,6 +6,8 @@ import { apiGet as adminApiGet } from "../utils/adminApi";
 import ReportCalendar from "../components/report/ReportCalendar";
 import ReportRadarChart from "../components/report/ReportRadarChart";
 import ReportCompetencySection from "../components/report/ReportCompetencySection";
+import ReportLearningDiagnosticPanel from "../components/report/ReportLearningDiagnosticPanel";
+import ReportCompetencyTrendChart from "../components/report/ReportCompetencyTrendChart";
 import ReportAreaSection from "../components/report/ReportAreaSection";
 import ReportSectionDetail from "../components/report/ReportSectionDetail";
 import ReportRecommendations from "../components/report/ReportRecommendations";
@@ -107,7 +109,20 @@ export default function UnifiedReportPage() {
             endDate={endDate}
           />
 
-          {/* 2. 역량 분석: 레이더 + 테이블 */}
+          {/* 2. 역량 분석: 학습 누적 vs 진단 측정 (Phase 2 신규) */}
+          {(report.learningCompetency || report.diagnosticCompetency) && (
+            <ReportLearningDiagnosticPanel
+              learningCompetency={report.learningCompetency}
+              diagnosticCompetency={report.diagnosticCompetency}
+            />
+          )}
+
+          {/* 3. 역량별 변화 추이 (Phase 2 신규) */}
+          {report.competencyTrend?.length > 0 && (
+            <ReportCompetencyTrendChart trend={report.competencyTrend} />
+          )}
+
+          {/* 4. (기존) 기간 내 활동 기반 역량 레이더 + 표 — 보조 자료 */}
           <div className="ur-charts-row ur-charts-row--single">
             <ReportRadarChart competencyRadarData={report.competencyRadarData} />
           </div>
