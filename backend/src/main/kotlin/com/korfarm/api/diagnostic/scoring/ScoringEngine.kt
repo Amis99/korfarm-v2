@@ -46,6 +46,23 @@ object ScoringEngine {
         }
     }
 
+    /**
+     * 오답 응답 시 호출 — 학생이 고른 선택지의 wrongVector 양수를 scores 에서 차감.
+     * (사용자 결정 Option B, 2026-04-28: 오답 → 약점 가중 음수 영향)
+     * earned 가 음수가 될 수 있지만 ratioScores 가 0~100 clamp.
+     */
+    fun applyWrongVector(
+        scores: MutableMap<String, Double>,
+        wrongVector: Map<String, Double>,
+    ) {
+        for ((k, v) in wrongVector) {
+            if (v <= 0) continue
+            val nk = normalizeKey(k)
+            if (nk !in scores) continue
+            scores[nk] = scores[nk]!! - v
+        }
+    }
+
     /** earned / max × 100. 측정 0 인 역량은 0 으로 반환. */
     fun ratioScores(
         earned: Map<String, Double>,

@@ -106,13 +106,13 @@ class FarmLearningService(
             quizAnswerDetailRepository.saveAll(details)
         }
 
-        // 10대 역량 종합 누적 — 콘텐츠의 questions[] 의 competency 와 매칭하여 정답률 계산.
+        // 10대 역량 종합 누적 (벡터 기반) — 콘텐츠의 questions[] 의 competencyVector + choices[].wrongVector 추출
         // 재응시(같은 user × content)는 LearningCompetencyService 가 자동 무시.
         try {
-            val ratioByCompetency = computeCompetencyRatios(log.contentId, request.answers)
-            if (ratioByCompetency.isNotEmpty()) {
+            val results = computeQuestionResults(log.contentId, request.answers)
+            if (results.isNotEmpty()) {
                 val source = resolveSourceFromContentType(log.contentType)
-                learningCompetencyService.record(userId, log.contentId, source, ratioByCompetency)
+                learningCompetencyService.recordVector(userId, log.contentId, source, results)
             }
         } catch (_: Exception) { /* 누적 실패는 학습 완료 자체를 막지 않음 */ }
 
@@ -120,48 +120,76 @@ class FarmLearningService(
     }
 
     /**
-     * 콘텐츠 questions[] 의 competency 필드와 학생 응답을 매칭하여
-     * 역량별 정답률(0~1) 맵을 반환. 측정되지 않은 역량은 키 자체 없음.
+     * 콘텐츠 questions[] 의 competencyVector + choices[].wrongVector 와 학생 응답 매칭하여
+     * 문항별 QuestionResult 리스트 반환 (벡터 기반).
+     *
+     * 호환:
+     *  - competencyVector 가 있으면 그 벡터 사용
+     *  - 없으면 단일 competency 필드를 {competency: 1.0} 으로 fallback
+     *  - 둘 다 없는 문항은 누적 제외
      */
-    private fun computeCompetencyRatios(
+    private fun computeQuestionResults(
         contentId: String,
         answers: List<AnswerDetailRequest>?,
-    ): Map<String, Double> {
-        if (answers.isNullOrEmpty()) return emptyMap()
+    ): List<com.korfarm.api.learning.QuestionResult> {
+        if (answers.isNullOrEmpty()) return emptyList()
         val version = contentVersionRepository.findTopByContentIdOrderByCreatedAtDesc(contentId)
-            ?: return emptyMap()
+            ?: return emptyList()
         val wrapper: Map<String, Any> = try {
             objectMapper.readValue(version.contentJson, object : TypeReference<Map<String, Any>>() {})
-        } catch (_: Exception) { return emptyMap() }
+        } catch (_: Exception) { return emptyList() }
         @Suppress("UNCHECKED_CAST")
         val payload = (wrapper["payload"] as? Map<String, Any>) ?: wrapper
         @Suppress("UNCHECKED_CAST")
-        val questions = (payload["questions"] as? List<Map<String, Any>>) ?: return emptyMap()
+        val questions = (payload["questions"] as? List<Map<String, Any>>) ?: return emptyList()
 
-        // questionId → competency 매핑 (10대 역량 화이트리스트만 인정)
-        val qIdToCompetency = mutableMapOf<String, String>()
+        // questionId → (correctVector, choiceId→wrongVector) 매핑
+        val qInfo = mutableMapOf<String, Pair<Map<String, Double>, Map<String, Map<String, Double>>>>()
         for (q in questions) {
             val qid = (q["id"] ?: q["questionId"])?.toString() ?: continue
-            val comp = q["competency"]?.toString()?.trim() ?: continue
-            if (comp.isEmpty() || comp !in COMPETENCIES) continue
-            qIdToCompetency[qid] = comp
-        }
-        if (qIdToCompetency.isEmpty()) return emptyMap()
+            // correctVector
+            @Suppress("UNCHECKED_CAST")
+            val cv = (q["competencyVector"] as? Map<String, Any>)?.mapNotNull { (k, v) ->
+                val w = (v as? Number)?.toDouble() ?: return@mapNotNull null
+                if (k !in COMPETENCIES) null else (k to w)
+            }?.toMap() ?: emptyMap()
+            // fallback: 단일 competency 필드
+            val correctVector: Map<String, Double> = if (cv.isNotEmpty()) cv else {
+                val single = q["competency"]?.toString()?.trim()
+                if (single != null && single in COMPETENCIES) mapOf(single to 1.0) else emptyMap()
+            }
+            if (correctVector.isEmpty()) continue
 
-        // 역량별 정답/총 카운트
-        val correctByComp = mutableMapOf<String, Int>()
-        val totalByComp = mutableMapOf<String, Int>()
+            // choices[].wrongVector
+            @Suppress("UNCHECKED_CAST")
+            val choices = (q["choices"] as? List<Map<String, Any>>) ?: emptyList()
+            val wrongByChoice = mutableMapOf<String, Map<String, Double>>()
+            for (ch in choices) {
+                val cid = (ch["id"] ?: ch["choiceId"])?.toString() ?: continue
+                @Suppress("UNCHECKED_CAST")
+                val wv = (ch["wrongVector"] as? Map<String, Any>)?.mapNotNull { (k, v) ->
+                    val w = (v as? Number)?.toDouble() ?: return@mapNotNull null
+                    if (k !in COMPETENCIES) null else (k to w)
+                }?.toMap() ?: emptyMap()
+                if (wv.isNotEmpty()) wrongByChoice[cid] = wv
+            }
+            qInfo[qid] = correctVector to wrongByChoice
+        }
+        if (qInfo.isEmpty()) return emptyList()
+
+        val results = mutableListOf<com.korfarm.api.learning.QuestionResult>()
         for (a in answers) {
-            val comp = qIdToCompetency[a.questionId] ?: continue
-            totalByComp[comp] = (totalByComp[comp] ?: 0) + 1
-            if (a.correct) correctByComp[comp] = (correctByComp[comp] ?: 0) + 1
+            val (correctVec, wrongMap) = qInfo[a.questionId] ?: continue
+            // 학생이 고른 선택지 ID 가 SubmitAnswer 에는 없음. AnswerDetailRequest 도 없음.
+            // 현재는 chosenWrongVector 는 null (선택지 ID 미전송). 정답 여부만 사용.
+            // 추후 답안 details 로 chosenChoiceId 받으면 활용.
+            results.add(com.korfarm.api.learning.QuestionResult(
+                correctVector = correctVec,
+                chosenWrongVector = null,
+                isCorrect = a.correct,
+            ))
         }
-        if (totalByComp.isEmpty()) return emptyMap()
-
-        return totalByComp.mapValues { (comp, total) ->
-            val correct = correctByComp[comp] ?: 0
-            if (total > 0) correct.toDouble() / total else 0.0
-        }
+        return results
     }
 
     @Transactional(readOnly = true)
