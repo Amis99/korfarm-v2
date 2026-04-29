@@ -117,6 +117,7 @@ function AdminTestPage() {
           <thead>
             <tr>
               <th>제목</th>
+              <th>구분</th>
               <th>레벨</th>
               <th>시행일</th>
               <th>문항 수</th>
@@ -126,17 +127,34 @@ function AdminTestPage() {
           </thead>
           <tbody>
             {tests.map(t => (
-              <tr
-                key={t.testId}
-                className="ts-clickable-row"
-                onClick={() => navigate(`/admin/tests/${t.testId}`)}
-              >
-                <td>{t.title}</td>
+              <tr key={t.testId}>
+                <td
+                  style={{ cursor: "pointer", color: "#2563eb", textDecoration: "underline" }}
+                  onClick={() => t.testId && navigate(`/admin/tests/${t.testId}/edit`)}
+                  title="클릭: 시험지 비주얼 편집기 열기"
+                >
+                  {t.title}
+                </td>
+                <td>
+                  <span style={{
+                    fontSize: 11, padding: "2px 6px", borderRadius: 4,
+                    background: t.orgId ? "#fef3c7" : "#dbeafe",
+                    color: t.orgId ? "#92400e" : "#1e40af",
+                  }}>
+                    {t.orgId ? (t.orgName || "기관") : "본사"}
+                  </span>
+                </td>
                 <td>{t.levelId || "-"}</td>
                 <td>{t.examDate || "-"}</td>
                 <td>{t.totalQuestions}</td>
                 <td>{t.totalPoints}</td>
-                <td>{t.submissionCount ?? t.score ?? 0}명</td>
+                <td
+                  style={{ cursor: "pointer", color: "#2563eb", textDecoration: "underline" }}
+                  onClick={() => t.testId && navigate(`/admin/tests/${t.testId}/statistics`)}
+                  title="클릭: 응시자 통계 보기"
+                >
+                  {t.submissionCount ?? t.score ?? 0}명
+                </td>
               </tr>
             ))}
           </tbody>
