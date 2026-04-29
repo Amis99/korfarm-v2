@@ -167,6 +167,8 @@ function TextSelectCard({
   onClickChar,
   confirmedRangeKeys,
   revealRanges,
+  currentClickRange,
+  currentClickResult,
 }) {
   const passage = question.passage || {};
   const paragraphs = passage.paragraphs || [];
@@ -175,13 +177,12 @@ function TextSelectCard({
   const rawMode = (question?.answerMatchMode || "").toString().toUpperCase();
   const matchMode = rawMode === "ANY" ? "ANY" : "ALL";
   const usesAllMatches = matchMode === "ALL" && answerRanges.length > 1;
-  const confirmedKeySet = useMemo(() => new Set(confirmedRangeKeys || []), [confirmedRangeKeys]);
 
-  // 표시할 하이라이트 범위
+  // 표시할 하이라이트 범위 (누적 X — 직전 클릭 1개 + reveal 만)
   const activeRanges = completion
     ? answerRanges
     : [
-        ...answerRanges.filter((r) => confirmedKeySet.has(toRangeKey(r))),
+        ...(currentClickRange ? [currentClickRange] : []),
         ...(revealRanges || []),
       ];
 
@@ -217,14 +218,25 @@ function TextSelectCard({
         {paragraphs.map((paragraph) => {
           const pRanges = activeRanges.filter((r) => r.paragraphId === paragraph.id);
           const mask = buildHighlightMask(paragraph.text.length, pRanges);
+          // 오버레이 위치: 클릭한 range 의 시작 char 1개에만 O/X 표시
+          const overlayIdx =
+            currentClickRange && currentClickRange.paragraphId === paragraph.id && currentClickResult
+              ? currentClickRange.start
+              : -1;
           return (
             <p key={paragraph.id} className="confirm-paragraph">
               {Array.from(paragraph.text).map((char, ci) => {
                 const isSpace = char === " " || char === "\n";
+                const overlayCls =
+                  ci === overlayIdx
+                    ? currentClickResult === "correct"
+                      ? "dq-overlay-correct"
+                      : "dq-overlay-wrong"
+                    : "";
                 return (
                   <span
                     key={`${paragraph.id}-${ci}`}
-                    className={`confirm-char ${mask.has(ci) ? "worksheet-highlight" : ""}`}
+                    className={`confirm-char ${mask.has(ci) ? "worksheet-highlight" : ""} ${overlayCls}`}
                     onClick={
                       isSpace || !isActive || completion ? undefined : () => onClickChar(paragraph.id, ci)
                     }
@@ -268,6 +280,8 @@ function DailyQuizModule({ content }) {
   // TEXT_SELECT 진행 상태
   const [confirmedRangeKeys, setConfirmedRangeKeys] = useState([]);
   const [revealRanges, setRevealRanges] = useState([]);
+  const [currentClickRange, setCurrentClickRange] = useState(null);     // 직전 클릭 1개 (중간 정답 + 오답 단일 표시용)
+  const [currentClickResult, setCurrentClickResult] = useState(null);   // "correct" | "wrong" | null — 클릭 위치에 O/X 오버레이
 
   const advanceTimerRef = useRef(null);
   const confirmLockRef = useRef(false);
@@ -362,6 +376,8 @@ function DailyQuizModule({ content }) {
     setFillModalKey(null);
     setConfirmedRangeKeys([]);
     setRevealRanges([]);
+    setCurrentClickRange(null);
+    setCurrentClickResult(null);
     setLastResult(null);
     confirmLockRef.current = false;
   };
@@ -463,13 +479,22 @@ function DailyQuizModule({ content }) {
     confirmLockRef.current = true;
     if (advanceTimerRef.current) clearTimeout(advanceTimerRef.current);
 
+    // 타이밍 (사용자 명시: 중간 0.5초 / 마지막 정답 1초 / 오답 3초)
+    const TS_INTERIM_MS = 500;
+    const TS_FINAL_CORRECT_MS = 1000;
+    const TS_WRONG_MS = FEEDBACK.A_WRONG_ADVANCE_MS;  // 3000
+
     if (isCorrectClick) {
       if (usesAllMatches && matchedRange) {
         const key = toRangeKey(matchedRange);
         const nextKeys = [...confirmedRangeKeys, key];
         setConfirmedRangeKeys(nextKeys);
-        setRevealRanges(textSelectAnswerRanges);
+        setCurrentClickRange(matchedRange);
+        setCurrentClickResult("correct");
+
         if (nextKeys.length >= textSelectAnswerRanges.length) {
+          // 마지막 정답: 모든 정답 reveal + O 오버레이 + 1초
+          setRevealRanges(textSelectAnswerRanges);
           setCompletedMap((prev) => ({
             ...prev,
             [currentQuestion.id]: { isCorrect: true },
@@ -477,13 +502,20 @@ function DailyQuizModule({ content }) {
           advanceTimerRef.current = setTimeout(() => {
             confirmLockRef.current = false;
             handleNext();
-          }, FEEDBACK.A_CORRECT_ADVANCE_MS);
+          }, TS_FINAL_CORRECT_MS);
         } else {
-          confirmLockRef.current = false;
-          setTimeout(() => setRevealRanges([]), 600);
+          // 중간 정답: 클릭한 1개만 0.5초 표시 + O 오버레이, 그 후 사라지고 다음 클릭 대기
+          advanceTimerRef.current = setTimeout(() => {
+            setCurrentClickRange(null);
+            setCurrentClickResult(null);
+            confirmLockRef.current = false;
+          }, TS_INTERIM_MS);
         }
         return;
       }
+      // ANY 모드 (단일 정답으로 카드 완료)
+      setCurrentClickRange(matchedRange);
+      setCurrentClickResult("correct");
       setRevealRanges(textSelectAnswerRanges);
       setCompletedMap((prev) => ({
         ...prev,
@@ -492,8 +524,11 @@ function DailyQuizModule({ content }) {
       advanceTimerRef.current = setTimeout(() => {
         confirmLockRef.current = false;
         handleNext();
-      }, FEEDBACK.A_CORRECT_ADVANCE_MS);
+      }, TS_FINAL_CORRECT_MS);
     } else {
+      // 오답: 학생이 클릭한 위치에 X 오버레이 + 모든 정답 reveal + 3초
+      setCurrentClickRange({ paragraphId, start: index, end: index + 1 });
+      setCurrentClickResult("wrong");
       setRevealRanges(textSelectAnswerRanges);
       setCompletedMap((prev) => ({
         ...prev,
@@ -502,7 +537,7 @@ function DailyQuizModule({ content }) {
       advanceTimerRef.current = setTimeout(() => {
         confirmLockRef.current = false;
         handleNext();
-      }, FEEDBACK.A_WRONG_ADVANCE_MS);
+      }, TS_WRONG_MS);
     }
   };
 
@@ -567,6 +602,8 @@ function DailyQuizModule({ content }) {
                 onClickChar={handleTextSelectClick}
                 confirmedRangeKeys={isActive ? confirmedRangeKeys : []}
                 revealRanges={isActive ? revealRanges : []}
+                currentClickRange={isActive ? currentClickRange : null}
+                currentClickResult={isActive ? currentClickResult : null}
               />
             );
           }

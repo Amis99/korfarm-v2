@@ -1246,6 +1246,39 @@ mark.highlight {
   box-shadow: 0 0 10px var(--highlight-shadow);
 }
 
+/* TEXT_SELECT 클릭 결과 오버레이 (학생이 클릭한 위치에 O/X 큰 글자) */
+.confirm-char.dq-overlay-correct,
+.confirm-char.dq-overlay-wrong {
+  position: relative;
+}
+.confirm-char.dq-overlay-correct::after,
+.confirm-char.dq-overlay-wrong::after {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.4em;
+  font-weight: 700;
+  pointer-events: none;
+  z-index: 10;
+  line-height: 1;
+  animation: dq-overlay-pop 0.18s ease-out;
+}
+.confirm-char.dq-overlay-correct::after {
+  content: "○";
+  color: rgba(220, 38, 38, 0.85);  /* 빨간 첨삭 톤 (정답 표시) */
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
+}
+.confirm-char.dq-overlay-wrong::after {
+  content: "✕";
+  color: rgba(220, 38, 38, 0.95);
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
+}
+@keyframes dq-overlay-pop {
+  0% { transform: translate(-50%, -50%) scale(0.4); opacity: 0; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
 .reading-confirm-question {
   display: grid;
   gap: 8px;
