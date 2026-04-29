@@ -13,6 +13,9 @@ interface TestQuestionRepo : JpaRepository<TestQuestionEntity, String> {
     fun deleteByTestId(testId: String)
 }
 
+interface TestPaperStatisticsRepo : JpaRepository<TestPaperStatisticsEntity, String>
+
+
 interface TestSubmissionRepo : JpaRepository<TestSubmissionEntity, String> {
     fun findByTestIdAndUserId(testId: String, userId: String): TestSubmissionEntity?
     fun findByUserId(userId: String): List<TestSubmissionEntity>

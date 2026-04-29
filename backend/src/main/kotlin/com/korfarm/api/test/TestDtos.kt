@@ -220,3 +220,66 @@ data class StudentForTest(
     val hasSubmitted: Boolean,
     val score: Int?
 )
+
+// ── Admin: 시험지 통계 요약 ──
+data class TestPaperStatistics(
+    val paperId: String,
+    val submissionCount: Int,
+    val avgScore: Double?,
+    val maxScore: Int?,
+    val minScore: Int?,
+    val stdDev: Double?,
+    val totalPoints: Int,
+    val gradeStats: Map<String, GradeStat>,
+    val updatedAt: LocalDateTime?
+)
+
+data class GradeStat(
+    val count: Int,
+    val avg: Double,
+    val max: Int,
+    val min: Int,
+    val stdDev: Double
+)
+
+// ── Admin: 학생별 응시 상세 (통계 페이지) ──
+data class StudentSubmissionDetail(
+    val userId: String,
+    val userName: String?,
+    val school: String?,
+    val grade: String?,
+    val orgName: String?,
+    val score: Int,
+    val totalPoints: Int,
+    val accuracy: Double,
+    val submittedAt: LocalDateTime,
+    val domainScores: Map<String, DomainScore>,
+    val wrongQuestionNumbers: List<Int>
+)
+
+// ── Admin: 문항별 분석 ──
+data class QuestionAnalysis(
+    val number: Int,
+    val type: String,
+    val domain: String?,
+    val subDomain: String?,
+    val points: Int,
+    val correctAnswer: String?,
+    val wrongRate: Double,                    // 오답률 (0.0~1.0)
+    val correctRate: Double,                  // 정답률
+    val attempts: Int,                        // 전체 응시자 수
+    val correctCount: Int,                    // 정답자 수
+    val choiceDistribution: Map<String, Int>, // 선택지별 응답자 수 {"1": N, "2": N, ...}
+    val choiceStudents: Map<String, List<String>>, // 선택지별 응답한 학생 이름 {"1": ["홍길동", ...], ...}
+    val wrongStudentNames: List<String>,      // 틀린 학생 이름 (전체)
+    val competencyVector: Map<String, Double> // 문항의 10대 역량 가중치
+)
+
+// ── 시험지 비주얼 에디터 payload ──
+// payload_json 컬럼에 직렬화되는 형식. 자유로운 구조 허용 (Map<String, Any>)
+// 권장 구조:
+//   { "passages": [...], "questions": [...], "metadata": {...} }
+data class TestPaperPayload(
+    val payload: Any?  // Map<String, Any> 형태로 자유 구조
+)
+

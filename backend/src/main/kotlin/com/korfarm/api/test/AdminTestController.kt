@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/v1/admin/test-papers")
 class AdminTestController(
-    private val testService: TestService
+    private val testService: TestService,
+    private val testStatisticsService: TestStatisticsService,
+    private val objectMapper: com.fasterxml.jackson.databind.ObjectMapper,
 ) {
     private fun requireAdmin() {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
@@ -160,5 +162,57 @@ class AdminTestController(
         testService.verifyAdminTestAccess(testId, currentUser())
         val data = testService.getWrongNote(testId, userId)
         return ApiResponse(success = true, data = data)
+    }
+
+    // ─── 시험지 통계 (응시 즉시 캐시된 데이터) ───
+    @GetMapping("/{testId}/statistics")
+    fun getStatistics(@PathVariable testId: String): ApiResponse<TestPaperStatistics> {
+        requireAdmin()
+        testService.verifyAdminTestAccess(testId, currentUser())
+        val data = testStatisticsService.getStatistics(testId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    // ─── 학생별 응시 상세 (학생 테이블·영역별·틀린 번호) ───
+    @GetMapping("/{testId}/students-detail")
+    fun getStudentsDetail(@PathVariable testId: String): ApiResponse<List<StudentSubmissionDetail>> {
+        requireAdmin()
+        testService.verifyAdminTestAccess(testId, currentUser())
+        val data = testStatisticsService.getStudentDetails(testId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    // ─── 문항별 분석 (오답률·선택지 분포·고른 학생·역량 벡터) ───
+    @GetMapping("/{testId}/question-analysis")
+    fun getQuestionAnalysis(@PathVariable testId: String): ApiResponse<List<QuestionAnalysis>> {
+        requireAdmin()
+        testService.verifyAdminTestAccess(testId, currentUser())
+        val data = testStatisticsService.getQuestionAnalysis(testId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    // ─── 시험지 비주얼 에디터 payload ───
+    // 권한: 본사 시험은 HQ_ADMIN만 편집 가능, 기관 시험은 해당 기관 ORG_ADMIN 또는 HQ_ADMIN
+    @GetMapping("/{testId}/payload")
+    fun getPayload(@PathVariable testId: String): ApiResponse<Map<String, Any?>> {
+        requireAdmin()
+        testService.verifyAdminTestAccess(testId, currentUser())
+        val raw = testService.getPayload(testId)
+        val parsed: Any? = if (raw.isNullOrBlank()) null else
+            try { objectMapper.readValue(raw, Any::class.java) } catch (_: Exception) { null }
+        return ApiResponse(success = true, data = mapOf("payload" to parsed))
+    }
+
+    @PutMapping("/{testId}/payload")
+    fun savePayload(
+        @PathVariable testId: String,
+        @RequestBody body: Map<String, Any?>
+    ): ApiResponse<Map<String, String>> {
+        requireAdmin()
+        testService.verifyAdminTestAccess(testId, currentUser())
+        val payload = body["payload"]
+        val json = objectMapper.writeValueAsString(payload)
+        testService.savePayload(testId, json)
+        return ApiResponse(success = true, data = mapOf("status" to "saved"))
     }
 }

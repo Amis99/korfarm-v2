@@ -31,6 +31,7 @@ class TestService(
     private val economyService: EconomyService,
     private val seedCatalogRepository: SeedCatalogRepository,
     private val learningCompetencyService: LearningCompetencyService,
+    private val testStatisticsService: TestStatisticsService,
 ) {
 
     // ─── Student: list tests ───
@@ -281,7 +282,26 @@ class TestService(
             }
         } catch (_: Exception) { /* 누적 실패는 채점 자체를 막지 않음 */ }
 
+        // 응시 즉시 통계 캐시 갱신 (실패 시 무시 — 채점 자체는 성공)
+        try {
+            testStatisticsService.recomputeAndCache(testId)
+        } catch (_: Exception) { /* 통계 갱신 실패해도 채점은 성공 */ }
+
         return saved
+    }
+
+    // ─── Admin: 시험지 비주얼 에디터 payload ───
+    @Transactional(readOnly = true)
+    fun getPayload(testId: String): String? {
+        val paper = findPaper(testId)
+        return paper.payloadJson
+    }
+
+    @Transactional
+    fun savePayload(testId: String, payloadJson: String) {
+        val paper = findPaper(testId)
+        paper.payloadJson = payloadJson
+        testPaperRepo.save(paper)
     }
 
     // ─── Student: report (성적표) ───

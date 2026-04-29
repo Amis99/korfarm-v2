@@ -49,6 +49,9 @@ class TestPaperEntity(
     @Column(nullable = false)
     var status: String = "draft",
 
+    @Column(name = "payload_json", columnDefinition = "LONGTEXT")
+    var payloadJson: String? = null,
+
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now(),
 
@@ -62,6 +65,43 @@ class TestPaperEntity(
         updatedAt = now
     }
 
+    @PreUpdate
+    fun onUpdate() {
+        updatedAt = LocalDateTime.now()
+    }
+}
+
+@Entity
+@Table(name = "test_paper_statistics")
+class TestPaperStatisticsEntity(
+    @Id
+    @Column(name = "paper_id")
+    var paperId: String,
+
+    @Column(name = "submission_count", nullable = false)
+    var submissionCount: Int = 0,
+
+    @Column(name = "avg_score")
+    var avgScore: Double? = null,
+
+    @Column(name = "max_score")
+    var maxScore: Int? = null,
+
+    @Column(name = "min_score")
+    var minScore: Int? = null,
+
+    @Column(name = "std_dev")
+    var stdDev: Double? = null,
+
+    @Column(name = "grade_stats_json", columnDefinition = "LONGTEXT")
+    var gradeStatsJson: String? = null,
+
+    @Column(name = "question_stats_json", columnDefinition = "LONGTEXT")
+    var questionStatsJson: String? = null,
+
+    @Column(name = "updated_at", nullable = false)
+    var updatedAt: LocalDateTime = LocalDateTime.now()
+) {
     @PreUpdate
     fun onUpdate() {
         updatedAt = LocalDateTime.now()
