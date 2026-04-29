@@ -1,8 +1,28 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { apiGet, apiPost } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/test-storage.css";
+
+// 백엔드 응답이 SNAKE_CASE이거나 camelCase일 수 있어 양쪽 모두 지원
+function normalizeTest(t) {
+  if (!t) return null;
+  return {
+    testId: t.testId ?? t.test_id ?? null,
+    title: t.title ?? "",
+    description: t.description ?? "",
+    levelId: t.levelId ?? t.level_id ?? "",
+    totalQuestions: t.totalQuestions ?? t.total_questions ?? 0,
+    totalPoints: t.totalPoints ?? t.total_points ?? 0,
+    timeLimitMinutes: t.timeLimitMinutes ?? t.time_limit_minutes ?? null,
+    examDate: t.examDate ?? t.exam_date ?? "",
+    series: t.series ?? "",
+    orgId: t.orgId ?? t.org_id ?? null,
+    orgName: t.orgName ?? t.org_name ?? "",
+    submissionCount: t.submissionCount ?? t.submission_count ?? 0,
+    createdAt: t.createdAt ?? t.created_at ?? null,
+  };
+}
 
 function AdminTestPage() {
   const navigate = useNavigate();
@@ -12,10 +32,19 @@ function AdminTestPage() {
   const [form, setForm] = useState({ title: "", description: "", levelId: "", totalQuestions: 0, totalPoints: 0, timeLimitMinutes: "", examDate: "", series: "" });
   const [creating, setCreating] = useState(false);
 
+  // 필터·검색
+  const [search, setSearch] = useState("");
+  const [filterScope, setFilterScope] = useState("all"); // all / hq / org
+  const [filterLevel, setFilterLevel] = useState("all");
+  const [filterSeries, setFilterSeries] = useState("all");
+
   const load = () => {
     setLoading(true);
     apiGet("/v1/admin/test-papers")
-      .then(setTests)
+      .then((data) => {
+        const arr = Array.isArray(data) ? data : [];
+        setTests(arr.map(normalizeTest));
+      })
       .catch(() => setTests([]))
       .finally(() => setLoading(false));
   };
@@ -39,7 +68,8 @@ function AdminTestPage() {
       const res = await apiPost("/v1/admin/test-papers", body);
       setShowCreate(false);
       setForm({ title: "", description: "", levelId: "", totalQuestions: 0, totalPoints: 0, timeLimitMinutes: "", examDate: "", series: "" });
-      if (res.testId) navigate(`/admin/tests/${res.testId}`);
+      const newId = res?.testId ?? res?.test_id;
+      if (newId) navigate(`/admin/tests/${newId}/edit`);
       else load();
     } catch {
       alert("생성에 실패했습니다.");
@@ -47,6 +77,31 @@ function AdminTestPage() {
       setCreating(false);
     }
   };
+
+  // 레벨·시리즈 옵션 추출
+  const levelOptions = useMemo(() => {
+    const set = new Set();
+    tests.forEach((t) => t.levelId && set.add(t.levelId));
+    return Array.from(set).sort();
+  }, [tests]);
+  const seriesOptions = useMemo(() => {
+    const set = new Set();
+    tests.forEach((t) => t.series && set.add(t.series));
+    return Array.from(set).sort();
+  }, [tests]);
+
+  // 필터 적용
+  const filtered = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return tests.filter((t) => {
+      if (q && !t.title.toLowerCase().includes(q)) return false;
+      if (filterScope === "hq" && t.orgId) return false;
+      if (filterScope === "org" && !t.orgId) return false;
+      if (filterLevel !== "all" && t.levelId !== filterLevel) return false;
+      if (filterSeries !== "all" && t.series !== filterSeries) return false;
+      return true;
+    });
+  }, [tests, search, filterScope, filterLevel, filterSeries]);
 
   return (
     <AdminLayout>
@@ -107,10 +162,57 @@ function AdminTestPage() {
         </form>
       )}
 
+      {/* 필터/검색 바 */}
+      <div className="ts-filter-bar" style={{
+        display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 12,
+        padding: "10px 12px", background: "var(--panel)",
+        border: "1px solid var(--stroke)", borderRadius: 8,
+      }}>
+        <input
+          type="text"
+          placeholder="제목 검색"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          style={{
+            flex: "1 1 200px", minWidth: 160, padding: "6px 10px",
+            background: "var(--bg)", color: "var(--text)",
+            border: "1px solid var(--stroke)", borderRadius: 6,
+          }}
+        />
+        <select
+          value={filterScope}
+          onChange={(e) => setFilterScope(e.target.value)}
+          style={{ padding: "6px 10px", background: "var(--bg)", color: "var(--text)", border: "1px solid var(--stroke)", borderRadius: 6 }}
+        >
+          <option value="all">전체 구분</option>
+          <option value="hq">본사 시험</option>
+          <option value="org">기관 시험</option>
+        </select>
+        <select
+          value={filterLevel}
+          onChange={(e) => setFilterLevel(e.target.value)}
+          style={{ padding: "6px 10px", background: "var(--bg)", color: "var(--text)", border: "1px solid var(--stroke)", borderRadius: 6 }}
+        >
+          <option value="all">전체 레벨</option>
+          {levelOptions.map((lv) => <option key={lv} value={lv}>{lv}</option>)}
+        </select>
+        <select
+          value={filterSeries}
+          onChange={(e) => setFilterSeries(e.target.value)}
+          style={{ padding: "6px 10px", background: "var(--bg)", color: "var(--text)", border: "1px solid var(--stroke)", borderRadius: 6 }}
+        >
+          <option value="all">전체 시리즈</option>
+          {seriesOptions.map((s) => <option key={s} value={s}>{s}</option>)}
+        </select>
+        <span style={{ alignSelf: "center", color: "var(--muted)", fontSize: 13 }}>
+          {filtered.length} / {tests.length}
+        </span>
+      </div>
+
       {loading ? (
         <div className="ts-center"><p>불러오는 중...</p></div>
-      ) : tests.length === 0 ? (
-        <div className="ts-center"><p>등록된 시험이 없습니다.</p></div>
+      ) : filtered.length === 0 ? (
+        <div className="ts-center"><p>{tests.length === 0 ? "등록된 시험이 없습니다." : "조건에 맞는 시험이 없습니다."}</p></div>
       ) : (
         <div className="ts-table-scroll">
         <table className="ts-table">
@@ -126,20 +228,27 @@ function AdminTestPage() {
             </tr>
           </thead>
           <tbody>
-            {tests.map(t => (
+            {filtered.map(t => (
               <tr key={t.testId}>
-                <td
-                  style={{ cursor: "pointer", color: "#2563eb", textDecoration: "underline" }}
-                  onClick={() => t.testId && navigate(`/admin/tests/${t.testId}/edit`)}
-                  title="클릭: 시험지 비주얼 편집기 열기"
-                >
-                  {t.title}
+                <td>
+                  <span
+                    onClick={() => t.testId && navigate(`/admin/tests/${t.testId}/edit`)}
+                    title="클릭: 시험지 비주얼 편집기 열기"
+                    style={{
+                      cursor: t.testId ? "pointer" : "default",
+                      color: "var(--accent)", fontWeight: 600,
+                      textDecoration: "underline",
+                    }}
+                  >
+                    {t.title || "(제목 없음)"}
+                  </span>
                 </td>
                 <td>
                   <span style={{
-                    fontSize: 11, padding: "2px 6px", borderRadius: 4,
-                    background: t.orgId ? "#fef3c7" : "#dbeafe",
-                    color: t.orgId ? "#92400e" : "#1e40af",
+                    fontSize: 11, padding: "2px 8px", borderRadius: 4,
+                    background: t.orgId ? "rgba(245, 158, 11, 0.15)" : "rgba(59, 130, 246, 0.15)",
+                    color: t.orgId ? "#fbbf24" : "#60a5fa",
+                    border: `1px solid ${t.orgId ? "rgba(245, 158, 11, 0.3)" : "rgba(59, 130, 246, 0.3)"}`,
                   }}>
                     {t.orgId ? (t.orgName || "기관") : "본사"}
                   </span>
@@ -148,12 +257,18 @@ function AdminTestPage() {
                 <td>{t.examDate || "-"}</td>
                 <td>{t.totalQuestions}</td>
                 <td>{t.totalPoints}</td>
-                <td
-                  style={{ cursor: "pointer", color: "#2563eb", textDecoration: "underline" }}
-                  onClick={() => t.testId && navigate(`/admin/tests/${t.testId}/statistics`)}
-                  title="클릭: 응시자 통계 보기"
-                >
-                  {t.submissionCount ?? t.score ?? 0}명
+                <td>
+                  <span
+                    onClick={() => t.testId && navigate(`/admin/tests/${t.testId}/statistics`)}
+                    title="클릭: 응시자 통계 보기"
+                    style={{
+                      cursor: t.testId ? "pointer" : "default",
+                      color: "var(--accent)", fontWeight: 600,
+                      textDecoration: "underline",
+                    }}
+                  >
+                    {t.submissionCount}명
+                  </span>
                 </td>
               </tr>
             ))}

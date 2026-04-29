@@ -68,7 +68,12 @@ export default function AdminTestEditorPage() {
           apiGet(`/v1/admin/test-papers/${testId}/payload`),
         ]);
         if (cancelled) return;
-        setTest(t);
+        setTest({
+          testId: t?.testId ?? t?.test_id,
+          title: t?.title ?? "",
+          examDate: t?.examDate ?? t?.exam_date ?? "",
+          totalQuestions: t?.totalQuestions ?? t?.total_questions ?? 0,
+        });
         const loaded = p?.payload || {};
         const normalized = {
           passages: Array.isArray(loaded.passages) ? loaded.passages : [],
