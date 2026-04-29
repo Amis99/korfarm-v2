@@ -633,15 +633,9 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
                   <strong>{content?.title || "학습"}</strong>
                 </div>
                 <div className="engine-header-divider" />
-                <div className="engine-header-item">
+                <div className="engine-header-item engine-level">
                   <strong>
                     {getLevelLabel(content?.targetLevel)}
-                  </strong>
-                </div>
-                <div className="engine-header-divider" />
-                <div className="engine-header-item">
-                  <strong>
-                    {getAreaLabel(content?.area, content?.subArea)} · {getSubAreaLabel(content?.subArea)}
                   </strong>
                 </div>
               </div>
