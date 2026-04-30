@@ -53,8 +53,18 @@ function EmoticonImage({ fileId, alt = "", className = "" }) {
     };
   }, [fileId]);
 
-  if (!url) return <div className={`emoticon-placeholder ${className}`} />;
-  return <img src={url} alt={alt} className={`emoticon-image ${className}`} />;
+  // 부모 박스 안에 항상 fit 되도록 인라인 스타일을 강제 (community-chat.css 가
+  // import 안 된 어드민·라이트 화면에서도 동작 보장).
+  const fitStyle = {
+    display: "block",
+    maxWidth: "100%",
+    maxHeight: "100%",
+    width: "auto",
+    height: "auto",
+    objectFit: "contain",
+  };
+  if (!url) return <div className={`emoticon-placeholder ${className}`} style={fitStyle} />;
+  return <img src={url} alt={alt} className={`emoticon-image ${className}`} style={fitStyle} />;
 }
 
 export default EmoticonImage;
