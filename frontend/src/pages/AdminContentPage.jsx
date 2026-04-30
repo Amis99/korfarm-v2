@@ -83,6 +83,7 @@ const mapContentList = (items) =>
       chapterId: content.chapterId || content.chapter_id || "",
       dayIndex: content.dayIndex ?? content.day_index ?? null,
       area: content.area || "",
+      subArea: content.subArea || content.sub_area || "",
       status: normalizeContentStatus(content.status),
     };
   });
@@ -243,10 +244,38 @@ function AdminContentPage() {
         if (!content.types.includes(typeFilter)) return false;
       }
       if (!term) return true;
+      // 검색 대상: 제목, 유형, 레벨(코드+한국어 라벨), 일차, 챕터, 영역, 세부영역
       const typesStr = (content.types || []).join(" ");
-      return [content.title, typesStr, content.status, content.levelId, content.chapterId]
+      const levelShort = getLevelShort(content.levelId) || "";
+      const levelFull = LEVEL_LABEL_MAP[content.levelId] || "";
+      // 일차: "266", "266일차" 모두 매칭
+      const dayStr = content.dayIndex != null
+        ? `${content.dayIndex} ${content.dayIndex}일차`
+        : "";
+      const numericTerm = term.replace(/일차/g, "").trim();
+      const haystack = [
+        content.title,
+        typesStr,
+        content.status,
+        content.levelId,
+        levelShort,
+        levelFull,
+        content.chapterId,
+        content.area,
+        content.subArea,
+        dayStr,
+      ]
         .filter(Boolean)
-        .some((v) => v.toLowerCase().includes(term));
+        .map((v) => String(v).toLowerCase())
+        .join(" ");
+      if (haystack.includes(term)) return true;
+      // 일차 숫자 정확 일치 (예: 검색어 "266" → dayIndex 266)
+      if (numericTerm && /^\d+$/.test(numericTerm)
+          && content.dayIndex != null
+          && String(content.dayIndex) === numericTerm) {
+        return true;
+      }
+      return false;
     });
     // 정렬
     const dir = sortDir === "desc" ? -1 : 1;
@@ -533,7 +562,7 @@ function AdminContentPage() {
             <div className="admin-detail-search">
               <span className="material-symbols-outlined">search</span>
               <input
-                placeholder="제목·유형·레벨 검색"
+                placeholder="제목·유형·레벨·일차·챕터·영역 검색"
                 value={searchInput}
                 onChange={handleSearchChange}
                 onCompositionStart={handleSearchCompositionStart}
