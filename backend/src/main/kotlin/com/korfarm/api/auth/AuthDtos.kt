@@ -25,7 +25,12 @@ data class UserProfile(
 
 data class AuthResponseData(
     val accessToken: String,
-    val refreshToken: String,
+    /** 관리자만 발급. 학생/학부모는 null (sessionStorage access token 만 사용, 탭 닫으면 로그아웃) */
+    val refreshToken: String? = null,
     val expiresIn: Long,
     val user: UserProfile
+)
+
+data class RefreshRequest(
+    val refreshToken: String
 )

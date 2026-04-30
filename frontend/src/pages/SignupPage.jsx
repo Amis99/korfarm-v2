@@ -261,10 +261,16 @@ function SignupPage() {
         throw new Error(message);
       }
       const token = payload?.data?.access_token || payload?.data?.accessToken;
+      const refresh = payload?.data?.refresh_token || payload?.data?.refreshToken;
       const pendingApproval = payload?.data?.user?.pending_approval || payload?.data?.user?.pendingApproval;
 
       if (token) {
         sessionStorage.setItem(TOKEN_KEY, token);
+      }
+      if (refresh) {
+        localStorage.setItem("korfarm_refresh", refresh);
+      } else {
+        localStorage.removeItem("korfarm_refresh");
       }
 
       // 승인이 필요한 경우 (국어농장 외 기관) 메시지 표시 후 pending 페이지로 이동

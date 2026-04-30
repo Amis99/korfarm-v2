@@ -43,6 +43,13 @@ class AuthController(
         return ApiResponse(success = true, data = data)
     }
 
+    /** 관리자 전용 — 만료된 access token 을 14일 refresh 로 자동 갱신 */
+    @PostMapping("/refresh")
+    fun refresh(@RequestBody request: RefreshRequest): ApiResponse<AuthResponseData> {
+        val data = authService.refresh(request.refreshToken)
+        return ApiResponse(success = true, data = data)
+    }
+
     @PostMapping("/logout")
     fun logout(): ApiResponse<Any> {
         val userId = SecurityUtils.currentUserId()

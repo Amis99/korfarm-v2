@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { TOKEN_KEY } from "../utils/api";
+import { TOKEN_KEY, REFRESH_KEY } from "../utils/api";
 
 export function useAuth() {
   const token = typeof window !== "undefined" ? sessionStorage.getItem(TOKEN_KEY) : null;
@@ -22,6 +22,7 @@ export function useAuth() {
 
   const logout = useCallback(() => {
     sessionStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(REFRESH_KEY);
     window.location.href = import.meta.env.BASE_URL || "/";
   }, []);
 

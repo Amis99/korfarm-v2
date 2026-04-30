@@ -15,7 +15,10 @@ class JwtService(private val props: JwtProperties) {
 
     fun createAccessToken(userId: String, roles: List<String>): String {
         val now = Instant.now()
-        val exp = now.plusSeconds(props.accessTokenSeconds)
+        // 관리자(HQ_ADMIN/ORG_ADMIN) 는 길게, 학생/학부모는 짧게.
+        val isAdmin = roles.any { it == "HQ_ADMIN" || it == "ORG_ADMIN" }
+        val ttl = if (isAdmin) props.accessTokenSeconds else props.studentAccessTokenSeconds
+        val exp = now.plusSeconds(ttl)
         return JWT.create()
             .withIssuer(props.issuer)
             .withSubject(userId)

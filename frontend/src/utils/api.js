@@ -1,5 +1,7 @@
 export const API_BASE = import.meta.env.VITE_API_BASE ?? "http://localhost:8080";
 export const TOKEN_KEY = "korfarm_token";
+/** 관리자 전용 14일 refresh token. localStorage 에 저장 (탭/브라우저 닫아도 유지). */
+export const REFRESH_KEY = "korfarm_refresh";
 
 // snake_case ↔ camelCase 변환 (백엔드 SNAKE_CASE Jackson 설정 대응)
 const snakeToCamel = (s) => s.replace(/_([a-z])/g, (_, c) => c.toUpperCase());
@@ -51,11 +53,46 @@ const authHeaders = () => {
 
 // 401 응답 시 토큰 삭제 + 로그인 페이지 리다이렉트
 const handle401 = (path) => {
-  // 로그인/회원가입 관련 요청에서는 리다이렉트하지 않음
-  const authPaths = ["/v1/auth/login", "/v1/auth/signup", "/v1/auth/request-password-reset"];
+  // 로그인/회원가입/refresh 자체는 리다이렉트 X
+  const authPaths = ["/v1/auth/login", "/v1/auth/signup",
+    "/v1/auth/request-password-reset", "/v1/auth/refresh"];
   if (authPaths.some((p) => path.includes(p))) return;
   sessionStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(REFRESH_KEY);
   window.location.href = import.meta.env.BASE_URL + "login";
+};
+
+/**
+ * 관리자 전용 — refresh token 으로 새 access token 받기.
+ * 동시 다발 호출 시 한 번만 호출되도록 중복 방지.
+ */
+let refreshInflight = null;
+const tryRefresh = async () => {
+  const refresh = localStorage.getItem(REFRESH_KEY);
+  if (!refresh) return false;
+  if (refreshInflight) return refreshInflight;
+  refreshInflight = (async () => {
+    try {
+      const res = await fetch(buildUrl("/v1/auth/refresh"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ refresh_token: refresh }),
+      });
+      if (!res.ok) return false;
+      const payload = await res.json();
+      const newAccess = payload?.data?.access_token || payload?.data?.accessToken;
+      const newRefresh = payload?.data?.refresh_token || payload?.data?.refreshToken;
+      if (!newAccess) return false;
+      sessionStorage.setItem(TOKEN_KEY, newAccess);
+      if (newRefresh) localStorage.setItem(REFRESH_KEY, newRefresh);
+      return true;
+    } catch {
+      return false;
+    } finally {
+      refreshInflight = null;
+    }
+  })();
+  return refreshInflight;
 };
 
 /**
@@ -71,7 +108,6 @@ const safeJson = async (response, method, path) => {
     );
   }
   if (!response.ok) {
-    if (response.status === 401) handle401(path);
     let msg = `${method} ${path} 요청 실패: ${response.status}`;
     try {
       const payload = await response.json();
@@ -83,44 +119,46 @@ const safeJson = async (response, method, path) => {
   return camelize(payload?.data ?? payload);
 };
 
-export const apiGet = async (path) => {
-  const response = await fetch(buildUrl(path), {
-    headers: authHeaders(),
-  });
-  return safeJson(response, "GET", path);
+/**
+ * 401 시 refresh 시도 → 성공하면 1회 재시도.
+ * 학생/학부모는 refresh 토큰이 없어 즉시 logout 처리.
+ */
+const fetchWithAuthRetry = async (method, path, makeInit) => {
+  const url = buildUrl(path);
+  let response = await fetch(url, makeInit());
+  if (response.status === 401) {
+    const refreshed = await tryRefresh();
+    if (refreshed) {
+      response = await fetch(url, makeInit());
+    } else {
+      handle401(path);
+    }
+  }
+  return safeJson(response, method, path);
 };
 
-export const apiPost = async (path, body) => {
-  const response = await fetch(buildUrl(path), {
+export const apiGet = async (path) =>
+  fetchWithAuthRetry("GET", path, () => ({ headers: authHeaders() }));
+
+export const apiPost = async (path, body) =>
+  fetchWithAuthRetry("POST", path, () => ({
     method: "POST",
-    headers: {
-      ...authHeaders(),
-      "Content-Type": "application/json",
-    },
+    headers: { ...authHeaders(), "Content-Type": "application/json" },
     body: body ? JSON.stringify(snakeize(body)) : "{}",
-  });
-  return safeJson(response, "POST", path);
-};
+  }));
 
-export const apiDelete = async (path) => {
-  const response = await fetch(buildUrl(path), {
+export const apiDelete = async (path) =>
+  fetchWithAuthRetry("DELETE", path, () => ({
     method: "DELETE",
     headers: authHeaders(),
-  });
-  return safeJson(response, "DELETE", path);
-};
+  }));
 
-export const apiPatch = async (path, body) => {
-  const response = await fetch(buildUrl(path), {
+export const apiPatch = async (path, body) =>
+  fetchWithAuthRetry("PATCH", path, () => ({
     method: "PATCH",
-    headers: {
-      ...authHeaders(),
-      "Content-Type": "application/json",
-    },
+    headers: { ...authHeaders(), "Content-Type": "application/json" },
     body: body ? JSON.stringify(snakeize(body)) : "{}",
-  });
-  return safeJson(response, "PATCH", path);
-};
+  }));
 
 export const apiUploadFile = async (fileId, file) => {
   const formData = new FormData();
@@ -133,17 +171,12 @@ export const apiUploadFile = async (fileId, file) => {
   return safeJson(response, "POST", `/v1/files/${fileId}/upload`);
 };
 
-export const apiPut = async (path, body) => {
-  const response = await fetch(buildUrl(path), {
+export const apiPut = async (path, body) =>
+  fetchWithAuthRetry("PUT", path, () => ({
     method: "PUT",
-    headers: {
-      ...authHeaders(),
-      "Content-Type": "application/json",
-    },
+    headers: { ...authHeaders(), "Content-Type": "application/json" },
     body: body ? JSON.stringify(snakeize(body)) : "{}",
-  });
-  return safeJson(response, "PUT", path);
-};
+  }));
 
 export const WS_BASE = (() => {
   if (API_BASE && API_BASE.startsWith("http")) {

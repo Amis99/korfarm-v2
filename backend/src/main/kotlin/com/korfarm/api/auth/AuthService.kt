@@ -284,17 +284,62 @@ class AuthService(
         refreshTokenRepository.saveAll(tokens)
     }
 
+    /**
+     * 관리자 전용 refresh token 으로 새 access token 발급 (rotate).
+     * 기존 refresh 는 revoke 하고 새 refresh 도 발급해 14일 슬라이딩 윈도우 유지.
+     */
+    fun refresh(refreshToken: String): AuthResponseData {
+        val payload = try {
+            jwtService.verify(refreshToken)
+        } catch (e: Exception) {
+            throw ApiException("INVALID_TOKEN", "유효하지 않은 토큰입니다.", HttpStatus.UNAUTHORIZED)
+        }
+        val tokenHash = TokenHasher.sha256(refreshToken)
+        val entity = refreshTokenRepository.findByTokenHash(tokenHash)
+            ?: throw ApiException("INVALID_TOKEN", "토큰이 존재하지 않습니다.", HttpStatus.UNAUTHORIZED)
+        if (entity.revokedAt != null) {
+            throw ApiException("INVALID_TOKEN", "취소된 토큰입니다.", HttpStatus.UNAUTHORIZED)
+        }
+        if (entity.expiresAt.isBefore(LocalDateTime.now())) {
+            throw ApiException("INVALID_TOKEN", "만료된 토큰입니다.", HttpStatus.UNAUTHORIZED)
+        }
+        val user = userRepository.findById(payload.userId).orElseThrow {
+            ApiException("INVALID_TOKEN", "사용자를 찾을 수 없습니다.", HttpStatus.UNAUTHORIZED)
+        }
+        // 관리자 권한이 사라졌으면 refresh 거부 (보안)
+        val roles = resolveRoles(user.id)
+        val isAdmin = roles.any { it == "HQ_ADMIN" || it == "ORG_ADMIN" }
+        if (!isAdmin) {
+            entity.revokedAt = LocalDateTime.now()
+            refreshTokenRepository.save(entity)
+            throw ApiException("FORBIDDEN", "관리자 권한이 없습니다.", HttpStatus.FORBIDDEN)
+        }
+        // 기존 refresh revoke (rotate)
+        entity.revokedAt = LocalDateTime.now()
+        refreshTokenRepository.save(entity)
+        // 새 토큰 발급
+        return issueTokens(user)
+    }
+
     private fun issueTokens(user: UserEntity, orgId: String? = null, pendingApproval: Boolean = false): AuthResponseData {
         val roles = resolveRoles(user.id)
         val accessToken = jwtService.createAccessToken(user.id, roles)
-        val refreshToken = jwtService.createRefreshToken(user.id)
-        val refreshEntity = RefreshTokenEntity(
-            id = IdGenerator.newId("rt"),
-            userId = user.id,
-            tokenHash = TokenHasher.sha256(refreshToken),
-            expiresAt = LocalDateTime.now().plusSeconds(jwtProperties.refreshTokenSeconds)
-        )
-        refreshTokenRepository.save(refreshEntity)
+        // 관리자(HQ_ADMIN/ORG_ADMIN) 만 refresh token 발급. 학생/학부모는 sessionStorage 로 짧게.
+        val isAdmin = roles.any { it == "HQ_ADMIN" || it == "ORG_ADMIN" }
+        val refreshToken: String? = if (isAdmin) {
+            val rt = jwtService.createRefreshToken(user.id)
+            refreshTokenRepository.save(
+                RefreshTokenEntity(
+                    id = IdGenerator.newId("rt"),
+                    userId = user.id,
+                    tokenHash = TokenHasher.sha256(rt),
+                    expiresAt = LocalDateTime.now().plusSeconds(jwtProperties.refreshTokenSeconds)
+                )
+            )
+            rt
+        } else null
+        val expiresIn = if (isAdmin) jwtProperties.accessTokenSeconds
+                       else jwtProperties.studentAccessTokenSeconds
 
         // pending 상태 확인: 파라미터로 전달받거나, 멤버십 조회
         val isPending = pendingApproval || checkPendingApproval(user.id)
@@ -303,7 +348,7 @@ class AuthService(
         return AuthResponseData(
             accessToken = accessToken,
             refreshToken = refreshToken,
-            expiresIn = jwtProperties.accessTokenSeconds,
+            expiresIn = expiresIn,
             user = UserProfile(
                 id = user.id,
                 loginId = user.email,

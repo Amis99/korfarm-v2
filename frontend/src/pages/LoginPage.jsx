@@ -27,8 +27,15 @@ function LoginPage() {
         throw new Error(message);
       }
       const token = payload?.data?.access_token || payload?.data?.accessToken;
+      const refresh = payload?.data?.refresh_token || payload?.data?.refreshToken;
       if (token) {
         sessionStorage.setItem(TOKEN_KEY, token);
+      }
+      // 관리자(HQ_ADMIN/ORG_ADMIN) 만 refresh token 받음 → localStorage 보관 (14일 자동 갱신)
+      if (refresh) {
+        localStorage.setItem("korfarm_refresh", refresh);
+      } else {
+        localStorage.removeItem("korfarm_refresh");
       }
       const pendingApproval = payload?.data?.user?.pending_approval || payload?.data?.user?.pendingApproval;
       if (pendingApproval) {
