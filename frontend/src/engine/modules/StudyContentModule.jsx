@@ -3,6 +3,8 @@ import { useEngine } from "../core/EngineContext";
 import { apiPost } from "../../utils/api";
 import { FEEDBACK } from "../shared/feedbackTimings";
 import CumulativeQuestionCard from "../shared/CumulativeQuestionCard";
+import QuestionModal from "../shared/QuestionModal";
+import PassageReviewModal from "../shared/PassageReviewModal";
 import PassageMarkdown from "../../utils/PassageMarkdown";
 import RichText from "../../utils/RichText";
 import "../../styles/background-module.css";
@@ -41,6 +43,7 @@ function StudyContentModule({ content }) {
   const [lastResult, setLastResult] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
   const [completing, setCompleting] = useState(false);
+  const [showPassageReview, setShowPassageReview] = useState(false);
   const advanceTimerRef = useRef(null);
   const scrollRef = useRef(null);
   const lockRef = useRef(false);
@@ -227,12 +230,22 @@ function StudyContentModule({ content }) {
       <div className="learning-modal-instruction">
         문제를 읽고 클릭하면 답안을 입력할 수 있습니다.
       </div>
-      <details className="bg-passage-collapse">
-        <summary>본문 다시 보기</summary>
-        <div className="bg-passage-collapse-body">
-          <PassageMarkdown className="bg-passage-text">{currentPage.markdown || ""}</PassageMarkdown>
-        </div>
-      </details>
+      <div style={{ textAlign: "right", marginBottom: 8 }}>
+        <button
+          type="button"
+          className="bg-btn"
+          style={{
+            background: "rgba(255, 252, 246, 0.95)",
+            border: "1px solid rgba(75, 61, 54, 0.3)",
+            color: "#4b3d36",
+            fontSize: 13,
+            padding: "6px 14px",
+          }}
+          onClick={() => setShowPassageReview(true)}
+        >
+          본문 다시 보기
+        </button>
+      </div>
       <div className="cum-stack" ref={scrollRef}>
         {visibleQuestions.map((q, idx) => {
           const completion = completedMap[q.id];
@@ -259,6 +272,13 @@ function StudyContentModule({ content }) {
         </p>
       )}
       {errorMsg && <p style={{ color: "#c0392b", textAlign: "center" }}>{errorMsg}</p>}
+      {showPassageReview && (
+        <PassageReviewModal
+          title="본문 다시 보기"
+          passage={currentPage.markdown || ""}
+          onClose={() => setShowPassageReview(false)}
+        />
+      )}
     </div>
   );
 }
@@ -434,37 +454,87 @@ function ShortAnswerCard({ question, idx, total, completion, isActive, onSubmit 
   );
 }
 
-/** 서술형 — 빈칸 선택지 모달 */
+/** 서술형 — 표준 포스트잇 QuestionModal로 빈칸별 선택지 (WorksheetQuizModule FILL_BLANKS 패턴) */
 function EssayCard({ question, idx, total, completion, isActive, onSubmit }) {
   const blanks = useMemo(
     () => parseBlanks(question.modelAnswerMasked || ""),
     [question.modelAnswerMasked]
   );
-  const [values, setValues] = useState(() => blanks.segments.map(() => null));
-  const [pickerIdx, setPickerIdx] = useState(null);
+  const [values, setValues] = useState(() => Array(blanks.length).fill(null));
+  const [activeBlankIdx, setActiveBlankIdx] = useState(0);
+  const cardRef = useRef(null);
+  const [anchorRect, setAnchorRect] = useState(null);
   const choicesByIdx = question.fillBlanksChoices || [];
-  const filled = values.filter((v) => v != null && v !== "").length;
   const totalBlanks = blanks.length;
 
-  const submit = () => {
-    if (filled < totalBlanks) return;
-    let result = "";
-    let blankIdx = 0;
-    for (const seg of blanks.segments) {
-      if (seg.type === "text") {
-        result += seg.text;
-      } else {
-        result += values[blankIdx] || "";
-        blankIdx += 1;
-      }
+  // 활성화되면 카드 위치 측정 → 모달 anchor
+  useEffect(() => {
+    if (!isActive || !cardRef.current) return;
+    const card = cardRef.current;
+    try {
+      card.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch {
+      card.scrollIntoView();
     }
-    onSubmit(result);
+    const measure = () => {
+      if (!cardRef.current) return;
+      const r = cardRef.current.getBoundingClientRect();
+      setAnchorRect({ left: r.left, right: r.right, top: r.top, height: r.height });
+    };
+    measure();
+    const t = setTimeout(measure, 350);
+    return () => clearTimeout(t);
+  }, [isActive, question.id]);
+
+  // 활성화 시 첫 빈칸부터 시작
+  useEffect(() => {
+    if (isActive && !completion) setActiveBlankIdx(0);
+  }, [isActive, completion, question.id]);
+
+  const handlePick = (choiceId) => {
+    // choiceId 형식: "blankN-optM"
+    const m = choiceId.match(/^blank(\d+)-opt(\d+)$/);
+    if (!m) return;
+    const bIdx = Number(m[1]);
+    const oIdx = Number(m[2]);
+    const text = (choicesByIdx[bIdx] || [])[oIdx];
+    if (text == null) return;
+    const next = [...values];
+    next[bIdx] = text;
+    setValues(next);
+
+    // 다음 빈칸 또는 제출
+    if (bIdx >= totalBlanks - 1) {
+      // 마지막 빈칸 → 답안 조립 후 서버 제출
+      let result = "";
+      let blankIdx = 0;
+      for (const seg of blanks.segments) {
+        if (seg.type === "text") result += seg.text;
+        else {
+          result += next[blankIdx] || "";
+          blankIdx += 1;
+        }
+      }
+      // 약간의 지연 후 제출 (모달 피드백 시간 확보)
+      setTimeout(() => onSubmit(result), FEEDBACK.A_CORRECT_ADVANCE_MS);
+    } else {
+      setTimeout(() => setActiveBlankIdx(bIdx + 1), FEEDBACK.A_CORRECT_ADVANCE_MS);
+    }
   };
 
+  // 현재 빈칸의 선택지 → QuestionModal choices 형식
+  const currentChoices = useMemo(() => {
+    const opts = choicesByIdx[activeBlankIdx] || [];
+    return opts.map((text, i) => ({ id: `blank${activeBlankIdx}-opt${i}`, text }));
+  }, [activeBlankIdx, choicesByIdx]);
+
   return (
-    <div className={`cum-card ${completion ? "completed" : ""} ${isActive ? "active" : ""} ${
-      completion?.isCorrect === true ? "correct" : completion?.isCorrect === false ? "wrong" : ""
-    }`}>
+    <div
+      ref={cardRef}
+      className={`cum-card ${completion ? "completed" : ""} ${isActive ? "active" : ""} ${
+        completion?.isCorrect === true ? "correct" : completion?.isCorrect === false ? "wrong" : ""
+      }`}
+    >
       <div className="cum-card-header">
         <span className="cum-card-num">문제 {idx + 1} / {total}</span>
         {completion && (
@@ -493,36 +563,17 @@ function EssayCard({ question, idx, total, completion, isActive, onSubmit }) {
           const blankIdx = blanks.indexByPos[i];
           const value = values[blankIdx];
           return (
-            <button
+            <span
               key={i}
-              type="button"
-              className={`essay-blank ${value ? "filled" : ""}`}
-              onClick={() => isActive && setPickerIdx(blankIdx)}
-              disabled={!isActive}
+              className={`essay-blank ${value ? "filled" : ""} ${
+                isActive && activeBlankIdx === blankIdx ? "active" : ""
+              }`}
             >
               {value || `빈칸${blankIdx + 1}`}
-            </button>
+            </span>
           );
         })}
       </div>
-
-      {!completion && isActive && (
-        <>
-          <p style={{ fontSize: 12, color: "#3a4a3e", textAlign: "center", margin: "12px 0" }}>
-            빈칸을 클릭해서 정답을 고르세요 ({filled}/{totalBlanks})
-          </p>
-          <div className="ssm-actions">
-            <button
-              type="button"
-              className="ssm-btn ssm-btn-primary"
-              onClick={submit}
-              disabled={filled < totalBlanks}
-            >
-              제출
-            </button>
-          </div>
-        </>
-      )}
 
       {/* 완료: 모범답안 표시 */}
       {completion && completion.correctAnswer && !completion.isCorrect && (
@@ -531,51 +582,17 @@ function EssayCard({ question, idx, total, completion, isActive, onSubmit }) {
         </p>
       )}
 
-      {/* 빈칸별 선택지 픽커 */}
-      {pickerIdx !== null && isActive && (
-        <div className="essay-edit-overlay" onClick={() => setPickerIdx(null)}>
-          <div className="essay-edit-modal" onClick={(e) => e.stopPropagation()}>
-            <p style={{ margin: 0, fontSize: 13, color: "#3a4a3e", marginBottom: 12 }}>
-              빈칸 {pickerIdx + 1} 에 들어갈 말을 고르세요
-            </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-              {(choicesByIdx[pickerIdx] || []).length === 0 ? (
-                <p style={{ color: "#c0392b", fontSize: 12 }}>선택지가 없습니다</p>
-              ) : (
-                (choicesByIdx[pickerIdx] || []).map((opt, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={() => {
-                      const next = [...values];
-                      next[pickerIdx] = opt;
-                      setValues(next);
-                      setPickerIdx(null);
-                    }}
-                    style={{
-                      padding: "10px 14px",
-                      background: "#ffffff",
-                      border: "1.5px solid rgba(31, 58, 44, 0.18)",
-                      borderRadius: 8,
-                      fontSize: 14, fontWeight: 600,
-                      color: "#1a2920",
-                      cursor: "pointer",
-                      textAlign: "left",
-                      fontFamily: "inherit",
-                    }}
-                  >
-                    {opt}
-                  </button>
-                ))
-              )}
-            </div>
-            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 10 }}>
-              <button type="button" className="ssm-btn ssm-btn-ghost" onClick={() => setPickerIdx(null)}>
-                취소
-              </button>
-            </div>
-          </div>
-        </div>
+      {/* 활성화 + 미완료 → 표준 포스트잇 모달 (드래그 가능) */}
+      {isActive && !completion && currentChoices.length > 0 && (
+        <QuestionModal
+          title="빈칸 채우기"
+          prompt={`${activeBlankIdx + 1}번째 빈칸에 들어갈 말을 고르세요 (${activeBlankIdx + 1}/${totalBlanks})`}
+          choices={currentChoices}
+          onSelect={handlePick}
+          shuffleKey={`${question.id}-blank-${activeBlankIdx}`}
+          anchorRect={anchorRect}
+          feedbackDuration={FEEDBACK.A_CORRECT_ADVANCE_MS}
+        />
       )}
     </div>
   );

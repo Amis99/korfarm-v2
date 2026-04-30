@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import { FEEDBACK } from "../shared/feedbackTimings";
 import CumulativeQuestionCard from "../shared/CumulativeQuestionCard";
+import PassageReviewModal from "../shared/PassageReviewModal";
 import PassageMarkdown from "../../utils/PassageMarkdown";
 import "../../styles/background-module.css";
 
@@ -31,6 +32,7 @@ function BackgroundModule({ content }) {
   /** completedMap: { [questionId]: { selectedId, isCorrect } } */
   const [completedMap, setCompletedMap] = useState({});
   const [lastResult, setLastResult] = useState(null);
+  const [showPassageReview, setShowPassageReview] = useState(false);
   const advanceTimerRef = useRef(null);
   const scrollRef = useRef(null);
 
@@ -173,14 +175,24 @@ function BackgroundModule({ content }) {
           </span>
           <span className="bg-phase-label">문제 풀기</span>
         </div>
-        {/* 지문 요약 — 접힌 상태로 위에 둠 */}
+        {/* 지문 다시 보기 — 모달로 (시간 계속, 문제 풀이 차단) */}
         <div className="learning-modal-instruction">문제를 읽고 클릭하면 답안을 입력할 수 있습니다.</div>
-        <details className="bg-passage-collapse">
-          <summary>지문 다시 보기</summary>
-          <div className="bg-passage-collapse-body">
-            <PassageMarkdown className="bg-passage-text">{currentPassage.text}</PassageMarkdown>
-          </div>
-        </details>
+        <div style={{ textAlign: "right", marginBottom: 8 }}>
+          <button
+            type="button"
+            className="bg-btn"
+            style={{
+              background: "rgba(255, 252, 246, 0.95)",
+              border: "1px solid rgba(75, 61, 54, 0.3)",
+              color: "#4b3d36",
+              fontSize: 13,
+              padding: "6px 14px",
+            }}
+            onClick={() => setShowPassageReview(true)}
+          >
+            지문 다시 보기
+          </button>
+        </div>
         <div className="cum-stack" ref={scrollRef}>
           {visibleQuestions.map((q, idx) => (
             <CumulativeQuestionCard
@@ -195,6 +207,13 @@ function BackgroundModule({ content }) {
             />
           ))}
         </div>
+        {showPassageReview && (
+          <PassageReviewModal
+            title="지문 다시 보기"
+            passage={currentPassage.text || ""}
+            onClose={() => setShowPassageReview(false)}
+          />
+        )}
       </div>
     );
   }

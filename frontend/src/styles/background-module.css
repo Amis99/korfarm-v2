@@ -109,3 +109,80 @@
   color: #fff;
   box-shadow: 0 2px 8px rgba(255,143,43,0.3);
 }
+
+/* ── 본문 다시 보기 모달 (PassageReviewModal) ── */
+.passage-review-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(43, 34, 29, 0.55);
+  z-index: 950; /* 질문 모달(1000)보다 아래, 학습 본문보다 위 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.passage-review-modal {
+  background: #fdf8ec;
+  background-image:
+    repeating-linear-gradient(
+      transparent,
+      transparent 28px,
+      rgba(75, 61, 54, 0.08) 28px,
+      rgba(75, 61, 54, 0.08) 29px
+    );
+  border: 2px solid rgba(75, 61, 54, 0.35);
+  border-radius: 6px;
+  width: 100%;
+  max-width: 720px;
+  max-height: 84vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.passage-review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px;
+  background: rgba(75, 61, 54, 0.08);
+  border-bottom: 1px solid rgba(75, 61, 54, 0.25);
+}
+.passage-review-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #4b3d36;
+}
+
+.passage-review-close {
+  background: rgba(255, 252, 246, 0.95);
+  border: 1px solid rgba(75, 61, 54, 0.3);
+  color: #4b3d36;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.passage-review-close:hover { background: rgba(75, 61, 54, 0.08); }
+
+.passage-review-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 28px;
+  font-size: 15px;
+  line-height: 1.85;
+  color: #2b221d;
+  word-break: keep-all;
+}
+.passage-review-body p { margin: 0 0 14px; }
+.passage-review-body h1,
+.passage-review-body h2,
+.passage-review-body h3 {
+  color: #4b3d36;
+  margin: 18px 0 8px;
+}
