@@ -20,6 +20,19 @@ const deepSnakeize = (val) => {
   return val;
 };
 
+// 깊은 camelCase 변환 — 백엔드 SNAKE_CASE 응답을 프론트엔드가 쓰는 camelCase 로 통일.
+// 응답에 nested 배열/객체가 많은 비주얼 에디터에서 필수.
+const snakeToCamel = (s) => s.replace(/_([a-z])/g, (_, c) => c.toUpperCase());
+const deepCamelize = (val) => {
+  if (Array.isArray(val)) return val.map(deepCamelize);
+  if (val && typeof val === "object" && val.constructor === Object) {
+    return Object.fromEntries(
+      Object.entries(val).map(([k, v]) => [snakeToCamel(k), deepCamelize(v)])
+    );
+  }
+  return val;
+};
+
 // 기본 타임아웃 (관리자 API — 큰 JSON 저장을 고려해 60초)
 const DEFAULT_TIMEOUT_MS = 60_000;
 
@@ -104,6 +117,18 @@ export const apiGet = async (path) => {
   return safeJson(response, "GET", path);
 };
 
+/** 깊은 camelCase 변환 GET — 백엔드 snake_case 응답을 nested 까지 camelCase 로 변환.
+ *  비주얼 에디터처럼 questionType / boxContent / fillBlanks 등 nested 필드를
+ *  camelCase 로 읽어야 하는 화면에서 사용.
+ */
+export const apiGetCamel = async (path) => {
+  const response = await fetchWithTimeout(buildUrl(path), {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  });
+  const data = await safeJson(response, "GET", path);
+  return deepCamelize(data);
+};
+
 export const apiPost = async (path, body) => {
   const response = await fetchWithTimeout(buildUrl(path), {
     method: "POST",
@@ -116,7 +141,8 @@ export const apiPost = async (path, body) => {
   return safeJson(response, "POST", path);
 };
 
-/** 깊은 snake_case 변환 POST (nested 객체·배열 모두 변환). study questions:bulk 등 */
+/** 깊은 snake_case 변환 POST (nested 객체·배열 모두 변환). study questions:bulk 등.
+ *  응답도 nested 까지 camelCase 로 변환 — 저장 후 메모리 상태가 snake 로 깨지지 않도록. */
 export const apiPostDeep = async (path, body) => {
   const response = await fetchWithTimeout(buildUrl(path), {
     method: "POST",
@@ -126,10 +152,11 @@ export const apiPostDeep = async (path, body) => {
     },
     body: body ? JSON.stringify(deepSnakeize(body)) : "{}",
   });
-  return safeJson(response, "POST", path);
+  const data = await safeJson(response, "POST", path);
+  return deepCamelize(data);
 };
 
-/** 깊은 snake_case 변환 PATCH */
+/** 깊은 snake_case 변환 PATCH. 응답도 nested 까지 camelCase 로 변환. */
 export const apiPatchDeep = async (path, body) => {
   const response = await fetchWithTimeout(buildUrl(path), {
     method: "PATCH",
@@ -139,7 +166,8 @@ export const apiPatchDeep = async (path, body) => {
     },
     body: body ? JSON.stringify(deepSnakeize(body)) : "{}",
   });
-  return safeJson(response, "PATCH", path);
+  const data = await safeJson(response, "PATCH", path);
+  return deepCamelize(data);
 };
 
 export const apiPut = async (path, body) => {

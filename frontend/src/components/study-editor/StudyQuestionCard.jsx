@@ -116,7 +116,7 @@ export default function StudyQuestionCard({ question, index, onChange, onDelete 
           {index + 1}번
         </strong>
         <select
-          value={question.questionType}
+          value={question.questionType || question.question_type || "MULTI_CHOICE"}
           onChange={(e) => changeType(e.target.value)}
           style={inputStyle({ width: 100 })}
         >

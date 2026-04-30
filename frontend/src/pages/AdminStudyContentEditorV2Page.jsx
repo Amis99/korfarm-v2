@@ -5,7 +5,7 @@ import MarkdownEditField from "../components/editor/MarkdownEditField";
 import StudyQuestionCard from "../components/study-editor/StudyQuestionCard";
 import AiPdfImageUploadModal from "../components/study-editor/AiPdfImageUploadModal";
 import AiStudyQuestionGenModal from "../components/study-editor/AiStudyQuestionGenModal";
-import { apiGet, apiPost, apiPostDeep, apiPatch, apiPatchDeep, apiPut, apiDelete } from "../utils/adminApi";
+import { apiGet, apiGetCamel, apiPost, apiPostDeep, apiPatch, apiPatchDeep, apiPut, apiDelete } from "../utils/adminApi";
 import "../styles/admin-detail.css";
 import "../styles/study-editor.css";
 
@@ -128,14 +128,17 @@ export default function AdminStudyContentEditorV2Page() {
     if (isNew) return;
     setLoading(true);
     try {
-      const c = await apiGet(`/v1/admin/study/contents/${contentId}`);
+      // 백엔드가 SNAKE_CASE 응답이라 nested 필드 (questionType, fillBlanks, isCorrect 등) 까지
+      // camelCase 로 변환된 GET 사용. 일반 apiGet 으로 받으면 question.questionType 가 undefined
+      // 가 되어 드롭다운이 "객관식"(첫 옵션)으로 잘못 폴백됨.
+      const c = await apiGetCamel(`/v1/admin/study/contents/${contentId}`);
       setMeta({
         id: c.id, title: c.title, description: c.description || "",
         levelId: c.levelId || "", area: c.area || "", subArea: c.subArea || "",
         visibility: c.visibility, ownerOrgId: c.ownerOrgId, creatorId: c.creatorId,
         questionCount: c.questionCount || 0,
       });
-      const list = await apiGet(`/v1/admin/study/contents/${contentId}/pages`);
+      const list = await apiGetCamel(`/v1/admin/study/contents/${contentId}/pages`);
       setPages(Array.isArray(list) ? list : []);
       if (list?.length > 0) setActivePageId(list[0].id);
     } catch (err) {
