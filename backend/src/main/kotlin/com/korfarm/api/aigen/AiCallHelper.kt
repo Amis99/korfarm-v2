@@ -73,13 +73,59 @@ class AiCallHelper(
         return block
     }
 
-    private fun postRaw(jsonBody: String): String {
+    /**
+     * Multimodal 호출 — user content 에 이미지(들) 또는 PDF + 텍스트 지시문.
+     * @param userContent  user content 배열 (이미지/PDF block + text block 혼합)
+     */
+    fun callMultimodal(
+        model: String,
+        systemBlocks: List<Map<String, Any?>>,
+        userContent: List<Map<String, Any?>>,
+        maxTokens: Int = 8192,
+    ): CallResult {
+        if (!isConfigured()) throw IllegalStateException("Claude API 키 미설정")
+        val started = System.currentTimeMillis()
+        val body = mapOf(
+            "model" to model,
+            "max_tokens" to maxTokens,
+            "system" to systemBlocks,
+            "messages" to listOf(mapOf("role" to "user", "content" to userContent)),
+        )
+        val raw = postRaw(objectMapper.writeValueAsString(body), pdfBeta = userContent.any { it["type"] == "document" })
+        val duration = (System.currentTimeMillis() - started).toInt()
+        @Suppress("UNCHECKED_CAST")
+        val resp = objectMapper.readValue(raw, Map::class.java) as Map<String, Any?>
+        val text = ((resp["content"] as? List<*>)?.firstOrNull() as? Map<*, *>)?.get("text") as? String ?: ""
+        val usage = resp["usage"] as? Map<*, *>
+        val inTokens = (usage?.get("input_tokens") as? Number)?.toInt()
+        val outTokens = (usage?.get("output_tokens") as? Number)?.toInt()
+        return CallResult(text = text, durationMs = duration, inputTokens = inTokens, outputTokens = outTokens)
+    }
+
+    /** base64 image content block */
+    fun imageBlock(base64Data: String, mediaType: String): Map<String, Any?> = mapOf(
+        "type" to "image",
+        "source" to mapOf("type" to "base64", "media_type" to mediaType, "data" to base64Data)
+    )
+
+    /** base64 PDF document content block */
+    fun pdfBlock(base64Data: String): Map<String, Any?> = mapOf(
+        "type" to "document",
+        "source" to mapOf("type" to "base64", "media_type" to "application/pdf", "data" to base64Data)
+    )
+
+    /** plain text content block */
+    fun textBlock(text: String): Map<String, Any?> = mapOf("type" to "text", "text" to text)
+
+    private fun postRaw(jsonBody: String, pdfBeta: Boolean = false): String {
+        val betas = mutableListOf("prompt-caching-2024-07-31")
+        if (pdfBeta) betas.add("pdfs-2024-09-25")
         val req = HttpRequest.newBuilder()
             .uri(URI.create(apiUrl))
             .header("Content-Type", "application/json")
             .header("x-api-key", apiKey)
             .header("anthropic-version", "2023-06-01")
-            .header("anthropic-beta", "prompt-caching-2024-07-31")
+            .header("anthropic-beta", betas.joinToString(","))
             .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
             .build()
         val res = httpClient.send(req, HttpResponse.BodyHandlers.ofString())

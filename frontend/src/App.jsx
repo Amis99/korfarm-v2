@@ -116,7 +116,8 @@ const AdminQBCodesPage = lazy(() => import("./pages/AdminQBCodesPage"));
 const AdminEditHistoryPage = lazy(() => import("./pages/AdminEditHistoryPage"));
 const AdminLearningDBPage = lazy(() => import("./pages/AdminLearningDBPage"));
 const AdminStudyContentPage = lazy(() => import("./pages/AdminStudyContentPage"));
-const AdminStudyContentEditorPage = lazy(() => import("./pages/AdminStudyContentEditorPage"));
+const AdminStudyContentEditorV2Page = lazy(() => import("./pages/AdminStudyContentEditorV2Page"));
+const StudentStudyV2Page = lazy(() => import("./pages/StudentStudyV2Page"));
 const AdminBoardsPage = lazy(() => import("./pages/AdminBoardsPage"));
 const AdminChatArchivesPage = lazy(() => import("./pages/AdminChatArchivesPage"));
 
@@ -222,6 +223,8 @@ function App() {
           <Route path="/learning" element={P(<LearningHubPage />)} />
           <Route path="/learning/:learningId" element={P(<LearningRunnerPage />)} />
           <Route path="/study-learning/:contentId" element={P(<StudyLearningPage />)} />
+          {/* V0076 페이지 단위 시험지 디자인 학습 (신규) */}
+          <Route path="/study/:contentId" element={P(<StudentStudyV2Page />)} />
           <Route path="/pro-mode" element={P(<ProModePage />)} />
           <Route path="/pro-mode/chapter/:chapterId" element={P(<ProChapterPage />)} />
           <Route path="/pro-mode/chapter/:chapterId/test" element={P(<ProTestPage />)} />
@@ -270,7 +273,10 @@ function App() {
           <Route path="/admin/content/preview" element={A(<AdminContentPreviewPage />)} />
           <Route path="/admin/content/edit" element={A(<AdminContentEditorPage />)} />
           <Route path="/admin/study-content" element={A(<AdminStudyContentPage />)} />
-          <Route path="/admin/study-content/editor/:contentId" element={A(<AdminStudyContentEditorPage />)} />
+          {/* 옛 에디터 라우트는 v2 로 매핑 (backward 호환). AdminStudyContentEditorPage 는 폐기 예정 */}
+          <Route path="/admin/study-content/editor/:contentId" element={A(<AdminStudyContentEditorV2Page />)} />
+          <Route path="/admin/study-content-v2/editor/new" element={A(<AdminStudyContentEditorV2Page />)} />
+          <Route path="/admin/study-content-v2/editor/:contentId" element={A(<AdminStudyContentEditorV2Page />)} />
           <Route path="/admin/boards" element={A(<AdminBoardsPage />)} />
           <Route path="/admin/boards/chat-archives" element={A(<AdminChatArchivesPage />)} />
           <Route path="/admin/assignments" element={A(<AdminAssignmentsPage />)} />

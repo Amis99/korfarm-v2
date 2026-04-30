@@ -70,3 +70,24 @@ data class LearningConceptDto(
     val description: String?,
     val displayOrder: Int
 )
+
+// ─── 내용 숙지 자료 → 문제 생성 (페이지 단위, 4유형) ───
+data class StudyQuestionGenRequest(
+    val pageMarkdown: String,
+    val area: String? = null,         // LIT/READ/GRAM/SPEAK/WRITE/MEDIA
+    val subArea: String? = null,
+    val levelId: String? = null,
+    val mcqCount: Int = 0,
+    val oxCount: Int = 0,
+    val shortCount: Int = 0,
+    val essayCount: Int = 0,
+    /** 이미 추출된 출제 포인트 재사용 (없으면 새로 추출) */
+    val existingCheckpoints: List<StudyCheckpointDto>? = null,
+)
+
+data class StudyCheckpointDto(
+    val id: String,
+    val text: String,
+    val kind: String,
+    val evidence: String?
+)

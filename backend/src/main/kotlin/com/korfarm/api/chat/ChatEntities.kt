@@ -120,6 +120,10 @@ class ChatEmoticonEntity(
     @Column(nullable = false)
     var name: String,
 
+    /** 시리즈 분류 (예: "중", "고양이 포도", "닥터 뵹"). NULL 허용. */
+    @Column
+    var series: String? = null,
+
     @Column(name = "file_id", nullable = false)
     var fileId: String,
 

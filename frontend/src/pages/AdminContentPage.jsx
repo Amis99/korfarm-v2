@@ -81,10 +81,38 @@ const mapContentList = (items) =>
       type: types[0] || "",        // primary (테이블 셀 라벨용)
       levelId: content.levelId || content.level_id || "",
       chapterId: content.chapterId || content.chapter_id || "",
+      dayIndex: content.dayIndex ?? content.day_index ?? null,
       area: content.area || "",
       status: normalizeContentStatus(content.status),
     };
   });
+
+/* contentType (대문자 코드) → 농장 ID(lowercase) 매핑 */
+const CONTENT_TYPE_TO_FARM_ID = {
+  // 농장별
+  VOCAB: "vocab", READING: "reading", STORY: "story", CLASSIC: "classic",
+  BACKGROUND: "background", CONCEPT: "concept", LOGIC: "logic", CHOICE_ANALYSIS: "choice",
+  GRAMMAR_WORD_FORMATION: "grammar", GRAMMAR_SENTENCE_STRUCTURE: "grammar",
+  GRAMMAR_PHONEME_CHANGE: "grammar", GRAMMAR_POS: "grammar",
+  // 프로 모드
+  PRO_VOCAB: "vocab", PRO_READING: "reading",
+  PRO_BACKGROUND: "background", PRO_LOGIC: "logic",
+};
+
+/* 콘텐츠가 속한 농장명 도출 (types 배열 + area 모두 시도) */
+function deriveFarmName(content, FARM_MAP) {
+  // 1) area 가 lowercase 면 직접
+  if (content.area) {
+    const lower = content.area.toLowerCase();
+    if (FARM_MAP[lower]) return FARM_MAP[lower].name;
+  }
+  // 2) contentType 으로 매핑
+  for (const t of (content.types || [])) {
+    const farmId = CONTENT_TYPE_TO_FARM_ID[t];
+    if (farmId && FARM_MAP[farmId]) return FARM_MAP[farmId].name;
+  }
+  return null;
+}
 
 /* 템플릿 그룹 분류 (글쓰기/내용숙지/프로답안 제외 — 콘텐츠 학습이 아님) */
 const TEMPLATE_GROUPS = [
@@ -222,11 +250,40 @@ function AdminContentPage() {
     });
     // 정렬
     const dir = sortDir === "desc" ? -1 : 1;
+    // 일차/농장/챕터 컬럼은 단일 sortKey="dynCol"로 묶고 tabFilter에 따라 비교 로직 분기
+    const valueOf = (row) => {
+      if (sortKey === "dynCol") {
+        if (tabFilter === "daily") {
+          // dayIndex 우선, 없으면 title 에서 NN일차 추출
+          let day = row.dayIndex;
+          if (!day) {
+            const m = (row.title || "").match(/(\d+)\s*일차/);
+            if (m) day = parseInt(m[1], 10);
+          }
+          return { num: day ?? Number.MAX_SAFE_INTEGER };
+        }
+        if (tabFilter === "pro") {
+          return { num: row.dayIndex ?? Number.MAX_SAFE_INTEGER };
+        }
+        // 농장: 농장명(문자열) 정렬
+        const farmName = deriveFarmName(row, FARM_MAP) || "";
+        return { str: farmName.toLowerCase() };
+      }
+      return { str: (row[sortKey] ?? "").toString().toLowerCase() };
+    };
     const cmp = (a, b) => {
-      const va = (a[sortKey] ?? "").toString().toLowerCase();
-      const vb = (b[sortKey] ?? "").toString().toLowerCase();
-      if (va < vb) return -1 * dir;
-      if (va > vb) return 1 * dir;
+      const va = valueOf(a);
+      const vb = valueOf(b);
+      // 숫자 비교 우선
+      if (va.num !== undefined || vb.num !== undefined) {
+        const an = va.num ?? Number.MAX_SAFE_INTEGER;
+        const bn = vb.num ?? Number.MAX_SAFE_INTEGER;
+        if (an < bn) return -1 * dir;
+        if (an > bn) return 1 * dir;
+        return 0;
+      }
+      if (va.str < vb.str) return -1 * dir;
+      if (va.str > vb.str) return 1 * dir;
       return 0;
     };
     result = [...result].sort(cmp);
@@ -416,6 +473,30 @@ function AdminContentPage() {
             </button>
           </div>
         </div>
+        {/* 내용 숙지 안내 */}
+        <div
+          className="admin-detail-card"
+          style={{
+            padding: 12,
+            background: "var(--admin-panel-light, #f5f9f3)",
+            borderLeft: "4px solid var(--admin-accent)",
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+          }}
+        >
+          <span style={{ fontSize: 13, color: "var(--admin-ink)" }}>
+            <strong style={{ color: "var(--admin-accent-strong)" }}>📚 내용 숙지 콘텐츠</strong>는 별도 메뉴에서 관리합니다 — 페이지 단위 비주얼 에디터 + 4유형 문제 + AI 자동 생성.
+          </span>
+          <button
+            type="button"
+            className="admin-detail-btn secondary xs"
+            style={{ marginLeft: "auto" }}
+            onClick={() => navigate("/admin/study-content")}
+          >
+            내용 숙지 메뉴 →
+          </button>
+        </div>
         {/* 요약 카드 */}
         <div className="admin-content-stats">
           <div className="admin-content-stat-card">
@@ -532,7 +613,14 @@ function AdminContentPage() {
                 <th className="admin-th-level admin-th-sortable" onClick={() => handleSort("levelId")} style={{ cursor: "pointer" }}>
                   레벨{sortIcon("levelId")}
                 </th>
-                <th className="admin-th-type">농장</th>
+                <th
+                  className="admin-th-type admin-th-sortable"
+                  onClick={() => handleSort("dynCol")}
+                  style={{ cursor: "pointer" }}
+                >
+                  {tabFilter === "daily" ? "일차" : tabFilter === "pro" ? "챕터" : "농장"}
+                  {sortIcon("dynCol")}
+                </th>
                 <th className="admin-th-status admin-th-sortable" onClick={() => handleSort("status")} style={{ cursor: "pointer" }}>
                   상태{sortIcon("status")}
                 </th>
@@ -585,9 +673,37 @@ function AdminContentPage() {
                       </span>
                     </td>
                     <td>
-                      <span className="type-pill" style={{ fontSize: 11 }}>
-                        {FARM_MAP[content.area]?.name || content.area || "-"}
-                      </span>
+                      {(() => {
+                        if (tabFilter === "daily") {
+                          // 일차: dayIndex 우선, 없으면 title 에서 "NN일차" 추출 시도
+                          let day = content.dayIndex;
+                          if (!day) {
+                            const m = (content.title || "").match(/(\d+)\s*일차/);
+                            if (m) day = parseInt(m[1], 10);
+                          }
+                          return (
+                            <span className="type-pill" style={{ fontSize: 11 }}>
+                              {day ? `${day}일차` : "-"}
+                            </span>
+                          );
+                        }
+                        if (tabFilter === "pro") {
+                          // 챕터: dayIndex 가 챕터 번호로 재사용됨 (autoLinkProChapter)
+                          const ch = content.dayIndex;
+                          return (
+                            <span className="type-pill" style={{ fontSize: 11 }}>
+                              {ch ? `${ch}장` : "-"}
+                            </span>
+                          );
+                        }
+                        // 농장별: 농장명
+                        const farmName = deriveFarmName(content, FARM_MAP);
+                        return (
+                          <span className="type-pill" style={{ fontSize: 11 }}>
+                            {farmName || "-"}
+                          </span>
+                        );
+                      })()}
                     </td>
                     <td>
                       <span className="admin-tooltip-wrap" style={{ cursor: "default" }}>

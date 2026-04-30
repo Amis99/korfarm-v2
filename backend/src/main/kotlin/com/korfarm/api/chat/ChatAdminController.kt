@@ -91,4 +91,13 @@ class ChatAdminController(
         chatService.deleteEmoticon(emoticonId)
         return ApiResponse(success = true, data = mapOf("emoticonId" to emoticonId, "status" to "deleted"))
     }
+
+    @PatchMapping("/emoticons/{emoticonId}")
+    fun updateEmoticon(
+        @PathVariable emoticonId: String,
+        @RequestBody request: UpdateEmoticonRequest
+    ): ApiResponse<EmoticonView> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        return ApiResponse(success = true, data = chatService.updateEmoticon(emoticonId, request))
+    }
 }

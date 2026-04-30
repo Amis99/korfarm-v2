@@ -22,6 +22,7 @@ import kotlin.math.roundToInt
 @Service
 class StudyContentService(
     private val studyContentRepository: StudyContentRepository,
+    private val studyPageRepository: StudyPageRepository,
     private val studyQuestionRepository: StudyQuestionRepository,
     private val studyAttemptRepository: StudyAttemptRepository,
     private val studyProgressRepository: StudyProgressRepository,
@@ -29,6 +30,7 @@ class StudyContentService(
     private val orgRepository: OrgRepository,
     private val farmLearningLogRepository: FarmLearningLogRepository,
     private val economyService: EconomyService,
+    private val competencyService: com.korfarm.api.learning.LearningCompetencyService,
     private val objectMapper: ObjectMapper
 ) {
     private val log = LoggerFactory.getLogger(StudyContentService::class.java)
@@ -84,6 +86,16 @@ class StudyContentService(
     // ─────────────────────────────────────────────
     // 매핑
     // ─────────────────────────────────────────────
+    private fun vectorFromJson(json: String?): Map<String, Double>? = try {
+        if (json.isNullOrBlank()) null
+        else objectMapper.readValue(json, object : TypeReference<Map<String, Double>>() {})
+    } catch (e: Exception) { null }
+
+    private fun checkpointsFromJson(json: String?): List<StudyCheckpointDto> = try {
+        if (json.isNullOrBlank()) emptyList()
+        else objectMapper.readValue(json, object : TypeReference<List<StudyCheckpointDto>>() {})
+    } catch (e: Exception) { emptyList() }
+
     private fun toQuestionDto(q: StudyQuestionEntity): StudyQuestionDto {
         return StudyQuestionDto(
             id = q.id,
@@ -94,7 +106,9 @@ class StudyContentService(
             modelAnswer = q.modelAnswer,
             fillBlanks = if (q.fillBlanks.isNullOrBlank()) null else fillBlanksFromJson(q.fillBlanks),
             evalPointIdx = intListFromJson(q.evalPointIdx),
-            difficulty = q.difficulty
+            difficulty = q.difficulty,
+            competencyVector = vectorFromJson(q.competencyVector),
+            wrongVector = vectorFromJson(q.wrongVector)
         )
     }
 
@@ -105,6 +119,7 @@ class StudyContentService(
             description = c.description,
             levelId = c.levelId,
             area = c.area,
+            subArea = c.subArea,
             visibility = c.visibility,
             ownerOrgId = c.ownerOrgId,
             creatorId = c.creatorId,
@@ -114,6 +129,10 @@ class StudyContentService(
             questionCount = c.questionCount,
             status = c.status,
             questions = qs.map { toQuestionDto(it) },
+            sourceType = c.sourceType,
+            sourceFileUrl = c.sourceFileUrl,
+            sourceFileName = c.sourceFileName,
+            sourceFileSizeBytes = c.sourceFileSizeBytes,
             createdAt = c.createdAt.format(fmt),
             updatedAt = c.updatedAt.format(fmt)
         )
@@ -125,12 +144,15 @@ class StudyContentService(
             title = c.title,
             description = c.description,
             levelId = c.levelId,
+            area = c.area,
+            subArea = c.subArea,
             visibility = c.visibility,
             ownerOrgId = c.ownerOrgId,
             ownerOrgName = c.ownerOrgId?.let { orgNameMap[it] },
             creatorId = c.creatorId,
             questionCount = c.questionCount,
             status = c.status,
+            sourceType = c.sourceType,
             createdAt = c.createdAt.format(fmt),
             updatedAt = c.updatedAt.format(fmt)
         )
@@ -216,7 +238,13 @@ class StudyContentService(
             title = request.title,
             description = request.description,
             levelId = request.levelId,
-            area = "CONTENT",
+            area = request.area,
+            subArea = request.subArea,
+            sourceType = request.sourceType.ifBlank { "manual" },
+            sourceFileUrl = request.sourceFileUrl,
+            sourceFileName = request.sourceFileName,
+            sourceFileHash = request.sourceFileHash,
+            sourceFileSizeBytes = request.sourceFileSizeBytes,
             visibility = visibility,
             ownerOrgId = ownerOrgId,
             creatorId = userId,
@@ -242,6 +270,8 @@ class StudyContentService(
         request.title?.let { if (it.isNotBlank()) c.title = it }
         request.description?.let { c.description = it }
         request.levelId?.let { c.levelId = it }
+        request.area?.let { c.area = it.takeIf { v -> v.isNotBlank() } }
+        request.subArea?.let { c.subArea = it.takeIf { v -> v.isNotBlank() } }
         request.markdown?.let { if (it.isNotBlank()) c.markdown = it }
         request.evalPoints?.let { c.evalPoints = toJson(it) }
         request.errorPatterns?.let { c.errorPatterns = toJson(it) }
@@ -311,6 +341,8 @@ class StudyContentService(
                 fillBlanks = q.fillBlanks?.let { toJson(it) },
                 evalPointIdx = toJson(q.evalPointIdx),
                 difficulty = q.difficulty,
+                competencyVector = q.competencyVector?.let { toJson(it) },
+                wrongVector = q.wrongVector?.let { toJson(it) },
                 createdAt = now,
                 updatedAt = now
             )
@@ -326,7 +358,7 @@ class StudyContentService(
         qs.forEachIndexed { i, q ->
             val tag = "문제 ${i + 1}"
             val type = q.questionType.uppercase()
-            if (type !in setOf("MULTI_CHOICE", "OX", "ESSAY")) {
+            if (type !in setOf("MULTI_CHOICE", "OX", "SHORT_ANSWER", "ESSAY")) {
                 throw ApiException("INVALID", "$tag: 알 수 없는 type=${q.questionType}", HttpStatus.BAD_REQUEST)
             }
             if (q.stem.isBlank()) throw ApiException("INVALID", "$tag: stem 비어있음", HttpStatus.BAD_REQUEST)
@@ -355,6 +387,11 @@ class StudyContentService(
                         }
                     }
                 }
+                "SHORT_ANSWER" -> {
+                    if (q.modelAnswer.isNullOrBlank()) {
+                        throw ApiException("INVALID", "$tag: SHORT_ANSWER 는 modelAnswer(정답) 필수", HttpStatus.BAD_REQUEST)
+                    }
+                }
                 "ESSAY" -> {
                     if (q.modelAnswer.isNullOrBlank()) {
                         throw ApiException("INVALID", "$tag: ESSAY는 modelAnswer 필수", HttpStatus.BAD_REQUEST)
@@ -362,6 +399,187 @@ class StudyContentService(
                 }
             }
         }
+    }
+
+    // ─────────────────────────────────────────────
+    // 페이지 CRUD (V0076 이후) — 페이지별 마크다운 + 출제 포인트 + 문제
+    // ─────────────────────────────────────────────
+    @Transactional(readOnly = true)
+    fun listPages(contentId: String, userId: String): List<StudyPageDto> {
+        val c = studyContentRepository.findById(contentId).orElse(null)
+            ?: throw ApiException("NOT_FOUND", "콘텐츠 없음", HttpStatus.NOT_FOUND)
+        ensureAdminCanAccess(c, userId)
+        val pages = studyPageRepository.findAllByContentIdOrderByPageNoAsc(contentId)
+        val allQuestions = studyQuestionRepository.findAllByContentIdOrderByQuestionNoAsc(contentId)
+            .groupBy { it.pageId }
+        return pages.map { p ->
+            StudyPageDto(
+                id = p.id,
+                pageNo = p.pageNo,
+                title = p.title,
+                markdown = p.markdown,
+                checkpoints = checkpointsFromJson(p.checkpoints),
+                questions = (allQuestions[p.id] ?: emptyList()).map { toQuestionDto(it) },
+                createdAt = p.createdAt.format(fmt),
+                updatedAt = p.updatedAt.format(fmt)
+            )
+        }
+    }
+
+    @Transactional
+    fun createPage(contentId: String, request: StudyPageCreateRequest, userId: String): StudyPageDto {
+        val c = studyContentRepository.findById(contentId).orElse(null)
+            ?: throw ApiException("NOT_FOUND", "콘텐츠 없음", HttpStatus.NOT_FOUND)
+        ensureAdminCanAccess(c, userId)
+        val existing = studyPageRepository.findAllByContentIdOrderByPageNoAsc(contentId)
+        val nextNo = request.pageNo ?: ((existing.maxOfOrNull { it.pageNo } ?: 0) + 1)
+        // 같은 page_no 가 있으면 뒤로 밀기
+        existing.filter { it.pageNo >= nextNo }.forEach {
+            it.pageNo = it.pageNo + 1
+            studyPageRepository.save(it)
+        }
+        val entity = StudyPageEntity(
+            id = IdGenerator.newId("sp"),
+            contentId = contentId,
+            pageNo = nextNo,
+            title = request.title,
+            markdown = request.markdown,
+            checkpoints = null
+        )
+        studyPageRepository.save(entity)
+        return StudyPageDto(
+            id = entity.id, pageNo = entity.pageNo, title = entity.title,
+            markdown = entity.markdown, checkpoints = emptyList(), questions = emptyList(),
+            createdAt = entity.createdAt.format(fmt), updatedAt = entity.updatedAt.format(fmt)
+        )
+    }
+
+    @Transactional
+    fun updatePage(
+        contentId: String, pageId: String, request: StudyPageUpdateRequest, userId: String
+    ): StudyPageDto {
+        val c = studyContentRepository.findById(contentId).orElse(null)
+            ?: throw ApiException("NOT_FOUND", "콘텐츠 없음", HttpStatus.NOT_FOUND)
+        ensureAdminCanAccess(c, userId)
+        val page = studyPageRepository.findById(pageId).orElse(null)
+            ?: throw ApiException("NOT_FOUND", "페이지 없음", HttpStatus.NOT_FOUND)
+        if (page.contentId != contentId) {
+            throw ApiException("INVALID", "페이지가 콘텐츠에 속하지 않습니다", HttpStatus.BAD_REQUEST)
+        }
+        request.title?.let { page.title = it.takeIf { v -> v.isNotBlank() } }
+        request.markdown?.let { if (it.isNotBlank()) page.markdown = it }
+        request.checkpoints?.let { page.checkpoints = toJson(it) }
+        // 페이지 순서 변경
+        if (request.pageNo != null && request.pageNo != page.pageNo) {
+            reorderPage(contentId, page, request.pageNo)
+        }
+        studyPageRepository.save(page)
+        val questions = studyQuestionRepository.findAllByPageIdOrderByQuestionNoAsc(pageId)
+        return StudyPageDto(
+            id = page.id, pageNo = page.pageNo, title = page.title,
+            markdown = page.markdown, checkpoints = checkpointsFromJson(page.checkpoints),
+            questions = questions.map { toQuestionDto(it) },
+            createdAt = page.createdAt.format(fmt), updatedAt = page.updatedAt.format(fmt)
+        )
+    }
+
+    private fun reorderPage(contentId: String, page: StudyPageEntity, newNo: Int) {
+        val pages = studyPageRepository.findAllByContentIdOrderByPageNoAsc(contentId)
+            .filter { it.id != page.id }
+            .toMutableList()
+        val target = newNo.coerceIn(1, pages.size + 1)
+        pages.add(target - 1, page)
+        pages.forEachIndexed { idx, p ->
+            if (p.pageNo != idx + 1) {
+                p.pageNo = idx + 1
+                studyPageRepository.save(p)
+            }
+        }
+    }
+
+    @Transactional
+    fun deletePage(contentId: String, pageId: String, userId: String) {
+        val c = studyContentRepository.findById(contentId).orElse(null)
+            ?: throw ApiException("NOT_FOUND", "콘텐츠 없음", HttpStatus.NOT_FOUND)
+        ensureAdminCanAccess(c, userId)
+        val page = studyPageRepository.findById(pageId).orElse(null)
+            ?: throw ApiException("NOT_FOUND", "페이지 없음", HttpStatus.NOT_FOUND)
+        if (page.contentId != contentId) {
+            throw ApiException("INVALID", "페이지가 콘텐츠에 속하지 않습니다", HttpStatus.BAD_REQUEST)
+        }
+        // 해당 페이지의 문제도 삭제
+        studyQuestionRepository.deleteAllByPageId(pageId)
+        studyPageRepository.delete(page)
+        // 남은 페이지 번호 정렬
+        val remaining = studyPageRepository.findAllByContentIdOrderByPageNoAsc(contentId)
+        remaining.forEachIndexed { idx, p ->
+            if (p.pageNo != idx + 1) {
+                p.pageNo = idx + 1
+                studyPageRepository.save(p)
+            }
+        }
+        // questionCount 재계산
+        c.questionCount = studyQuestionRepository.countByContentId(contentId)
+        studyContentRepository.save(c)
+    }
+
+    /** 페이지별 문제 일괄 교체 (페이지당 최대 30) */
+    @Transactional
+    fun replacePageQuestions(
+        contentId: String, pageId: String,
+        request: StudyPageQuestionsBulkRequest, userId: String
+    ): StudyPageDto {
+        val c = studyContentRepository.findById(contentId).orElse(null)
+            ?: throw ApiException("NOT_FOUND", "콘텐츠 없음", HttpStatus.NOT_FOUND)
+        ensureAdminCanAccess(c, userId)
+        val page = studyPageRepository.findById(pageId).orElse(null)
+            ?: throw ApiException("NOT_FOUND", "페이지 없음", HttpStatus.NOT_FOUND)
+        if (page.contentId != contentId) {
+            throw ApiException("INVALID", "페이지가 콘텐츠에 속하지 않습니다", HttpStatus.BAD_REQUEST)
+        }
+        val list = request.questions
+        if (list.size > 30) {
+            throw ApiException("TOO_MANY", "페이지당 최대 30문제까지 저장 가능합니다", HttpStatus.BAD_REQUEST)
+        }
+        val evalPointsSize = stringListFromJson(c.evalPoints).size
+        val errorPatternsSize = stringListFromJson(c.errorPatterns).size
+        if (list.isNotEmpty()) {
+            validateQuestions(list, evalPointsSize, errorPatternsSize)
+        }
+        studyQuestionRepository.deleteAllByPageId(pageId)
+        studyQuestionRepository.flush()
+
+        val now = LocalDateTime.now()
+        val entities = list.mapIndexed { idx, q ->
+            StudyQuestionEntity(
+                id = IdGenerator.newId("sq"),
+                contentId = contentId,
+                pageId = pageId,
+                questionNo = q.questionNo.takeIf { it > 0 } ?: (idx + 1),
+                questionType = q.questionType.uppercase(),
+                stem = q.stem,
+                choices = q.choices?.let { toJson(it) },
+                modelAnswer = q.modelAnswer,
+                fillBlanks = q.fillBlanks?.let { toJson(it) },
+                evalPointIdx = toJson(q.evalPointIdx),
+                difficulty = q.difficulty,
+                competencyVector = q.competencyVector?.let { toJson(it) },
+                wrongVector = q.wrongVector?.let { toJson(it) },
+                createdAt = now,
+                updatedAt = now
+            )
+        }
+        studyQuestionRepository.saveAll(entities)
+        // 콘텐츠 전체 questionCount 재계산
+        c.questionCount = studyQuestionRepository.countByContentId(contentId)
+        studyContentRepository.save(c)
+
+        return StudyPageDto(
+            id = page.id, pageNo = page.pageNo, title = page.title,
+            markdown = page.markdown, checkpoints = checkpointsFromJson(page.checkpoints),
+            questions = entities.map { toQuestionDto(it) },
+            createdAt = page.createdAt.format(fmt), updatedAt = page.updatedAt.format(fmt)
+        )
     }
 
     // ─────────────────────────────────────────────
@@ -387,6 +605,8 @@ class StudyContentService(
                 title = c.title,
                 description = c.description,
                 levelId = c.levelId,
+                area = c.area,
+                subArea = c.subArea,
                 visibility = c.visibility,
                 questionCount = c.questionCount,
                 seenRatio = seenRatio,
@@ -409,9 +629,127 @@ class StudyContentService(
             title = c.title,
             description = c.description,
             levelId = c.levelId,
+            area = c.area,
+            subArea = c.subArea,
             markdown = c.markdown,
             questionCount = c.questionCount
         )
+    }
+
+    /**
+     * V0076 이후 학생용 — 콘텐츠의 모든 페이지(본문 + 정답 마스킹된 문제) 일괄 + 세션 시작.
+     * 시험지 디자인 학습 화면용. 페이지 순서대로 본문 읽고 페이지별 문제를 모달에서 푸는 흐름.
+     */
+    @Transactional
+    fun getFullForStudent(contentId: String, userId: String): StudyContentFullStudentDto {
+        val c = studyContentRepository.findById(contentId).orElse(null)
+            ?: throw ApiException("NOT_FOUND", "콘텐츠 없음", HttpStatus.NOT_FOUND)
+        ensureStudentCanAccess(c, userId)
+
+        val pages = studyPageRepository.findAllByContentIdOrderByPageNoAsc(contentId)
+        val allQuestions = studyQuestionRepository.findAllByContentIdOrderByQuestionNoAsc(contentId)
+            .groupBy { it.pageId }
+
+        // 세션 시작 — farm_learning_logs 에 STARTED 기록
+        val now = LocalDateTime.now()
+        val logEntity = FarmLearningLogEntity(
+            id = IdGenerator.newId("fl"),
+            userId = userId,
+            contentId = contentId,
+            contentType = CONTENT_TYPE,
+            status = "STARTED",
+            startedAt = now
+        )
+        farmLearningLogRepository.save(logEntity)
+        val sessionId = IdGenerator.newId("ss")
+
+        return StudyContentFullStudentDto(
+            id = c.id,
+            title = c.title,
+            description = c.description,
+            levelId = c.levelId,
+            area = c.area,
+            subArea = c.subArea,
+            sessionId = sessionId,
+            logId = logEntity.id,
+            pages = pages.map { p ->
+                val pageQs = allQuestions[p.id] ?: emptyList()
+                StudyPageStudentDto(
+                    id = p.id,
+                    pageNo = p.pageNo,
+                    title = p.title,
+                    markdown = p.markdown,
+                    questions = pageQs.map { q -> toStudentQuestionDto(q) }
+                )
+            }
+        )
+    }
+
+    /** 정답 마스킹 + 음절 카드 / 모범답안 ___ 생성 */
+    private fun toStudentQuestionDto(q: StudyQuestionEntity): StudyPageStudentQuestionDto {
+        val type = q.questionType.uppercase()
+        val choices = if (type == "MULTI_CHOICE" || type == "OX") {
+            choicesFromJson(q.choices).map { StudyPageStudentChoiceDto(it.id, it.text) }
+        } else null
+
+        var answerLength: Int? = null
+        var syllableCards: List<String>? = null
+        if (type == "SHORT_ANSWER") {
+            val answer = (q.modelAnswer ?: "").replace("\\s+".toRegex(), "")
+            answerLength = answer.length
+            if (answer.isNotEmpty()) {
+                syllableCards = buildSyllableCards(answer)
+            }
+        }
+
+        var modelAnswerMasked: String? = null
+        var fillBlanksCount: Int? = null
+        if (type == "ESSAY") {
+            val ans = q.modelAnswer ?: ""
+            val blanks = fillBlanksFromJson(q.fillBlanks)
+            fillBlanksCount = blanks.size
+            // 각 phrase 를 동일 글자수의 ___ 로 치환 (반복 phrase 도 모두)
+            var masked = ans
+            for (b in blanks) {
+                val replacement = "_".repeat(b.phrase.length.coerceAtLeast(3))
+                masked = masked.replace(b.phrase, replacement)
+            }
+            modelAnswerMasked = masked
+        }
+
+        return StudyPageStudentQuestionDto(
+            id = q.id,
+            questionNo = q.questionNo,
+            questionType = type,
+            stem = q.stem,
+            choices = choices,
+            answerLength = answerLength,
+            syllableCards = syllableCards,
+            modelAnswerMasked = modelAnswerMasked,
+            fillBlanksCount = fillBlanksCount
+        )
+    }
+
+    /** 정답 글자 + 더미 (정답 글자수 만큼) 셔플 = 글자수 × 2 카드 풀 */
+    private fun buildSyllableCards(answer: String): List<String> {
+        val chars = answer.toCharArray().map { it.toString() }
+        // 더미: 한글 음절 풀에서 정답 글자와 다른 것을 무작위 추출
+        val dummyPool = ("가나다라마바사아자차카타파하" +
+            "거너더러머버서어저처커터퍼허" +
+            "고노도로모보소오조초코토포호" +
+            "구누두루무부수우주추쿠투푸후" +
+            "기니디리미비시이지치키티피히")
+            .toCharArray().map { it.toString() }
+            .filter { it !in chars }
+            .shuffled()
+            .take(chars.size)
+        val pool = (chars + dummyPool).toMutableList()
+        // Fisher-Yates 셔플
+        for (i in pool.size - 1 downTo 1) {
+            val j = (0..i).random()
+            val tmp = pool[i]; pool[i] = pool[j]; pool[j] = tmp
+        }
+        return pool
     }
 
     private fun ensureStudentCanAccess(c: StudyContentEntity, userId: String) {
@@ -577,6 +915,13 @@ class StudyContentService(
                 if (!isCorrect && selected?.errorPatternIdx != null) {
                     triggeredErr = listOf(selected.errorPatternIdx)
                 }
+            }
+            "SHORT_ANSWER" -> {
+                // 학생이 음절 카드 순서대로 클릭한 결과를 userAnswer 로 받음.
+                // 공백 제거 후 정답(modelAnswer) 과 정확히 일치해야 정답.
+                val expected = (q.modelAnswer ?: "").replace("\\s+".toRegex(), "")
+                val ans = (request.userAnswer ?: "").replace("\\s+".toRegex(), "")
+                isCorrect = expected.isNotEmpty() && expected == ans
             }
             "ESSAY" -> {
                 // 모범답안의 fillBlanks 핵심 문구가 학생 답안에 모두 포함되면 정답
@@ -749,6 +1094,36 @@ class StudyContentService(
                 .sortedBy { it.second }
                 .take(3)
             weak.forEach { (idx, _, _) -> weaknessHint.add(evalPoints[idx]) }
+        }
+
+        // 10대 역량 벡터 누적 (해당 학습 최초 1회만)
+        try {
+            val sessionAttempts = attempts
+            val results = sessionAttempts.mapNotNull { att ->
+                val q = studyQuestionRepository.findById(att.questionId).orElse(null) ?: return@mapNotNull null
+                val correctVec = vectorFromJson(q.competencyVector) ?: emptyMap()
+                val chosenWrong: Map<String, Double>? = if (!att.isCorrect) {
+                    when (q.questionType.uppercase()) {
+                        "MULTI_CHOICE", "OX" -> {
+                            val choices = choicesFromJson(q.choices)
+                            val selected = choices.firstOrNull { it.id == att.userAnswer || it.text == att.userAnswer }
+                            selected?.wrongVector ?: emptyMap()
+                        }
+                        else -> vectorFromJson(q.wrongVector) ?: emptyMap()
+                    }
+                } else null
+                if (correctVec.isEmpty() && chosenWrong.isNullOrEmpty()) return@mapNotNull null
+                com.korfarm.api.learning.QuestionResult(
+                    correctVector = correctVec,
+                    chosenWrongVector = chosenWrong,
+                    isCorrect = att.isCorrect
+                )
+            }
+            if (results.isNotEmpty()) {
+                competencyService.recordVector(userId, contentId, "farm_learning", results)
+            }
+        } catch (ex: Exception) {
+            log.warn("study competency 누적 실패 contentId={}, userId={}: {}", contentId, userId, ex.message)
         }
 
         return StudySessionCompleteResponse(

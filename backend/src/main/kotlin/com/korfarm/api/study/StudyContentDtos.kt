@@ -7,17 +7,27 @@ data class StudyContentCreateRequest(
     val title: String,
     val description: String? = null,
     val levelId: String? = null,
+    val area: String? = null,           // LIT/READ/GRAM/SPEAK/WRITE/MEDIA
+    val subArea: String? = null,         // 현대시·고전시·논설 등
     val markdown: String,
     val evalPoints: List<String> = emptyList(),
     val errorPatterns: List<String> = emptyList(),
     val visibility: String, // PUBLIC | ORG (HQ_ADMIN만 PUBLIC, ORG_ADMIN은 ORG)
-    val ownerOrgId: String? = null
+    val ownerOrgId: String? = null,
+    // 원본 자료 (PDF/이미지를 마크다운으로 변환한 경우 출처 보관)
+    val sourceType: String = "manual",   // manual | pdf | image
+    val sourceFileUrl: String? = null,
+    val sourceFileName: String? = null,
+    val sourceFileHash: String? = null,
+    val sourceFileSizeBytes: Long? = null
 )
 
 data class StudyContentUpdateRequest(
     val title: String? = null,
     val description: String? = null,
     val levelId: String? = null,
+    val area: String? = null,
+    val subArea: String? = null,
     val markdown: String? = null,
     val evalPoints: List<String>? = null,
     val errorPatterns: List<String>? = null,
@@ -29,20 +39,26 @@ data class StudyContentUpdateRequest(
 data class StudyQuestionDto(
     val id: String? = null,
     val questionNo: Int,
-    val questionType: String, // MULTI_CHOICE | OX | ESSAY
+    val questionType: String, // MULTI_CHOICE | OX | SHORT_ANSWER | ESSAY
     val stem: String,
     val choices: List<StudyChoiceDto>? = null,
-    val modelAnswer: String? = null,
-    val fillBlanks: List<StudyFillBlankDto>? = null,
+    val modelAnswer: String? = null,        // ESSAY: 모범답안 / SHORT_ANSWER: 정답
+    val fillBlanks: List<StudyFillBlankDto>? = null,  // ESSAY 빈칸
     val evalPointIdx: List<Int> = emptyList(),
-    val difficulty: Int = 3
+    val difficulty: Int = 3,
+    /** 정답 시 누적 가중치 {역량명: 가중치} */
+    val competencyVector: Map<String, Double>? = null,
+    /** SHORT_ANSWER/ESSAY 오답 시 마이너스 누적 가중치. MULTI_CHOICE/OX 는 choices.wrongVector 사용 */
+    val wrongVector: Map<String, Double>? = null
 )
 
 data class StudyChoiceDto(
     val id: String,
     val text: String,
     val isCorrect: Boolean,
-    val errorPatternIdx: Int? = null
+    val errorPatternIdx: Int? = null,
+    /** 이 선택지를 골라 틀렸을 때 마이너스로 누적될 가중치 */
+    val wrongVector: Map<String, Double>? = null
 )
 
 data class StudyFillBlankDto(
@@ -55,6 +71,44 @@ data class StudyQuestionsBulkRequest(
 )
 
 // ─────────────────────────────────────────────
+// 페이지 (V0076 이후) — 페이지별 본문 + 출제 포인트 + 문제
+// ─────────────────────────────────────────────
+data class StudyPageDto(
+    val id: String,
+    val pageNo: Int,
+    val title: String? = null,
+    val markdown: String,
+    val checkpoints: List<StudyCheckpointDto> = emptyList(),
+    val questions: List<StudyQuestionDto> = emptyList(),
+    val createdAt: String? = null,
+    val updatedAt: String? = null
+)
+
+data class StudyCheckpointDto(
+    val id: String,
+    val text: String,
+    val kind: String,    // FACT|RELATION|INTENT|STRUCTURE|INFER
+    val evidence: String? = null
+)
+
+data class StudyPageCreateRequest(
+    val title: String? = null,
+    val markdown: String = "",
+    val pageNo: Int? = null   // null 이면 마지막 다음 번호
+)
+
+data class StudyPageUpdateRequest(
+    val title: String? = null,
+    val markdown: String? = null,
+    val pageNo: Int? = null,                  // 페이지 순서 변경
+    val checkpoints: List<StudyCheckpointDto>? = null
+)
+
+data class StudyPageQuestionsBulkRequest(
+    val questions: List<StudyQuestionDto>
+)
+
+// ─────────────────────────────────────────────
 // 관리자용 응답
 // ─────────────────────────────────────────────
 data class StudyContentSummary(
@@ -62,12 +116,15 @@ data class StudyContentSummary(
     val title: String,
     val description: String? = null,
     val levelId: String? = null,
+    val area: String? = null,
+    val subArea: String? = null,
     val visibility: String,
     val ownerOrgId: String? = null,
     val ownerOrgName: String? = null,
     val creatorId: String,
     val questionCount: Int,
     val status: String,
+    val sourceType: String = "manual",
     val createdAt: String,
     val updatedAt: String
 )
@@ -77,7 +134,8 @@ data class StudyContentDetail(
     val title: String,
     val description: String? = null,
     val levelId: String? = null,
-    val area: String,
+    val area: String? = null,
+    val subArea: String? = null,
     val visibility: String,
     val ownerOrgId: String? = null,
     val creatorId: String,
@@ -87,6 +145,10 @@ data class StudyContentDetail(
     val questionCount: Int,
     val status: String,
     val questions: List<StudyQuestionDto>,
+    val sourceType: String = "manual",
+    val sourceFileUrl: String? = null,
+    val sourceFileName: String? = null,
+    val sourceFileSizeBytes: Long? = null,
     val createdAt: String,
     val updatedAt: String
 )
@@ -99,6 +161,8 @@ data class StudyContentStudentItem(
     val title: String,
     val description: String? = null,
     val levelId: String? = null,
+    val area: String? = null,
+    val subArea: String? = null,
     val visibility: String,
     val questionCount: Int,
     val seenRatio: Double = 0.0, // 0~1
@@ -111,6 +175,8 @@ data class StudyContentStudentDetail(
     val title: String,
     val description: String? = null,
     val levelId: String? = null,
+    val area: String? = null,
+    val subArea: String? = null,
     val markdown: String,
     val questionCount: Int
 )
@@ -168,4 +234,50 @@ data class StudySessionCompleteResponse(
     val earnedSeed: Int,
     val seedType: String,
     val weaknessHint: List<String> = emptyList()
+)
+
+// ─────────────────────────────────────────────
+// V0076 이후 — 페이지 단위 학생 학습 (시험지 디자인)
+// ─────────────────────────────────────────────
+/** 학생 화면용 — 콘텐츠 메타 + 모든 페이지(본문+문제) 정답 마스킹된 형태 */
+data class StudyContentFullStudentDto(
+    val id: String,
+    val title: String,
+    val description: String? = null,
+    val levelId: String? = null,
+    val area: String? = null,
+    val subArea: String? = null,
+    val pages: List<StudyPageStudentDto>,
+    val sessionId: String,    // 학습 세션 ID (저장 시 사용)
+    val logId: String         // farm_learning_log ID (완료 시 사용)
+)
+
+data class StudyPageStudentDto(
+    val id: String,
+    val pageNo: Int,
+    val title: String? = null,
+    val markdown: String,
+    val questions: List<StudyPageStudentQuestionDto>
+)
+
+/** 정답 마스킹된 문제 (correctChoiceId, modelAnswer.fillBlanks 정답 등 제거) */
+data class StudyPageStudentQuestionDto(
+    val id: String,
+    val questionNo: Int,
+    val questionType: String,
+    val stem: String,
+    /** MULTI_CHOICE/OX: 선택지 (id, text 만 — isCorrect 마스킹) */
+    val choices: List<StudyPageStudentChoiceDto>? = null,
+    /** SHORT_ANSWER: 정답 글자수 — 음절 카드 생성용. 정답 자체는 마스킹 */
+    val answerLength: Int? = null,
+    /** SHORT_ANSWER: 음절 카드 풀 (정답 글자 + 더미 글자 셔플, 글자수×2) */
+    val syllableCards: List<String>? = null,
+    /** ESSAY: 모범답안 (빈칸 위치는 fillBlanks 의 phrase 를 ___ 로 마스킹) */
+    val modelAnswerMasked: String? = null,
+    val fillBlanksCount: Int? = null
+)
+
+data class StudyPageStudentChoiceDto(
+    val id: String,
+    val text: String
 )

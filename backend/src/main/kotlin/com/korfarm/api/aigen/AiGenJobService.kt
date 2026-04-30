@@ -20,6 +20,8 @@ import java.util.concurrent.Executors
 class AiGenJobService(
     private val jobRepo: AiGenJobRepository,
     private val service: AiTestGenService,
+    private val studyGenerator: StudyQuestionGenerator,
+    private val fileToMarkdownService: FileToMarkdownService,
     private val objectMapper: ObjectMapper,
 ) {
     private val log = LoggerFactory.getLogger(AiGenJobService::class.java)
@@ -56,6 +58,42 @@ class AiGenJobService(
         return saved
     }
 
+    /** 파일 (PDF/이미지) → 마크다운 비동기 변환. fileBytes 는 base64 인코딩해서 requestJson 에 저장. */
+    fun submitFileToMarkdown(
+        fileBytes: ByteArray, mediaType: String, originalFilename: String?, userId: String
+    ): AiGenJobEntity {
+        val payload = mapOf(
+            "base64" to java.util.Base64.getEncoder().encodeToString(fileBytes),
+            "mediaType" to mediaType,
+            "filename" to originalFilename,
+        )
+        val job = AiGenJobEntity(
+            id = IdGenerator.newId("aijob"),
+            userId = userId,
+            testId = null,
+            kind = "file-to-markdown",
+            status = "queued",
+            requestJson = objectMapper.writeValueAsString(payload),
+        )
+        val saved = jobRepo.save(job)
+        executor.submit { runFileToMarkdown(saved.id) }
+        return saved
+    }
+
+    fun submitStudyQuestion(req: StudyQuestionGenRequest, userId: String): AiGenJobEntity {
+        val job = AiGenJobEntity(
+            id = IdGenerator.newId("aijob"),
+            userId = userId,
+            testId = null,
+            kind = "study-question",
+            status = "queued",
+            requestJson = objectMapper.writeValueAsString(req),
+        )
+        val saved = jobRepo.save(job)
+        executor.submit { runStudyQuestion(saved.id) }
+        return saved
+    }
+
     @Transactional(readOnly = true)
     fun get(jobId: String, userId: String): AiGenJobEntity? {
         val job = jobRepo.findById(jobId).orElse(null) ?: return null
@@ -88,6 +126,82 @@ class AiGenJobService(
             log.error("AI question job 실패 jobId=$jobId", e)
             markFailed(jobId, e.message ?: e.javaClass.simpleName)
         }
+    }
+
+    private fun runFileToMarkdown(jobId: String) {
+        try {
+            markRunning(jobId)
+            val job = jobRepo.findById(jobId).orElse(null) ?: return
+            @Suppress("UNCHECKED_CAST")
+            val payload = objectMapper.readValue(job.requestJson, Map::class.java) as Map<String, Any?>
+            val base64 = payload["base64"] as? String
+                ?: throw IllegalArgumentException("base64 누락")
+            val mediaType = payload["mediaType"] as? String
+                ?: throw IllegalArgumentException("mediaType 누락")
+            val filename = payload["filename"] as? String
+            val bytes = java.util.Base64.getDecoder().decode(base64)
+            val result = fileToMarkdownService.convert(bytes, mediaType, job.userId)
+            val resultPayload = mapOf(
+                "markdown" to result.markdown,
+                "sourceFileName" to filename,
+                "sourceHash" to result.sourceHash,
+                "sourceSizeBytes" to result.sourceSizeBytes,
+                "sourceMediaType" to mediaType,
+                "durationMs" to result.durationMs,
+                "inputTokens" to result.inputTokens,
+                "outputTokens" to result.outputTokens,
+            )
+            markCompleted(jobId, objectMapper.writeValueAsString(resultPayload))
+        } catch (e: Exception) {
+            log.error("AI file-to-markdown job 실패 jobId=$jobId", e)
+            markFailed(jobId, e.message ?: e.javaClass.simpleName)
+        }
+    }
+
+    private fun runStudyQuestion(jobId: String) {
+        try {
+            markRunning(jobId)
+            val job = jobRepo.findById(jobId).orElse(null) ?: return
+            val req = objectMapper.readValue(job.requestJson, StudyQuestionGenRequest::class.java)
+            val genReq = StudyQuestionGenerator.GenRequest(
+                pageMarkdown = req.pageMarkdown,
+                area = req.area,
+                subArea = req.subArea,
+                levelId = req.levelId,
+                mcqCount = req.mcqCount,
+                oxCount = req.oxCount,
+                shortCount = req.shortCount,
+                essayCount = req.essayCount,
+                existingCheckpoints = req.existingCheckpoints?.map {
+                    StudyQuestionGenerator.Checkpoint(it.id, it.text, it.kind, it.evidence)
+                }
+            )
+            val result = studyGenerator.generate(genReq, job.userId)
+            // 응답: checkpoints + questions JSON
+            val payload = mapOf(
+                "checkpoints" to result.checkpoints.map {
+                    mapOf("id" to it.id, "text" to it.text, "kind" to it.kind, "evidence" to it.evidence)
+                },
+                "questions" to (objectMapper.readValue(
+                    cleanJson(result.questionsJson),
+                    Map::class.java
+                ) as? Map<*, *>)?.get("questions"),
+                "tokensCheckpoint" to result.checkpointTokens,
+                "tokensQuestion" to result.questionTokens,
+                "totalDurationMs" to result.totalDurationMs,
+            )
+            markCompleted(jobId, objectMapper.writeValueAsString(payload))
+        } catch (e: Exception) {
+            log.error("AI study-question job 실패 jobId=$jobId", e)
+            markFailed(jobId, e.message ?: e.javaClass.simpleName)
+        }
+    }
+
+    private fun cleanJson(raw: String): String {
+        return raw.trim()
+            .removePrefix("```json").removePrefix("```")
+            .removeSuffix("```")
+            .trim()
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)

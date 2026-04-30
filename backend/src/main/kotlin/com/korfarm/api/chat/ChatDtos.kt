@@ -73,6 +73,7 @@ data class ArchiveListItem(
 data class EmoticonView(
     val id: String,
     val name: String,
+    val series: String? = null,
     val fileId: String,
     val sortOrder: Int,
     val createdAt: String
@@ -80,6 +81,13 @@ data class EmoticonView(
 
 data class CreateEmoticonRequest(
     val name: String,
+    val series: String? = null,
     val fileId: String,
+    val sortOrder: Int? = null
+)
+
+data class UpdateEmoticonRequest(
+    val name: String? = null,
+    val series: String? = null,
     val sortOrder: Int? = null
 )

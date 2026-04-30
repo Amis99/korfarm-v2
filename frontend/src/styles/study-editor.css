@@ -1,0 +1,145 @@
+/* 내용 숙지 비주얼 에디터 — 좌측 페이지 사이드바 + 우측 본문 */
+
+.study-editor-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .study-editor-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 좌측 페이지 사이드바 */
+.study-page-sidebar {
+  background: var(--admin-panel, #ffffff);
+  border: 1px solid var(--admin-stroke);
+  border-radius: 14px;
+  padding: 12px;
+  position: sticky;
+  top: 12px;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+
+.study-page-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--admin-stroke);
+}
+
+.study-page-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.study-page-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.study-page-item:hover {
+  background: rgba(45, 106, 79, 0.06);
+}
+
+.study-page-item.active {
+  background: var(--admin-accent-soft);
+  border-color: var(--admin-accent);
+}
+
+.study-page-item-no {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: var(--admin-accent);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.study-page-item.active .study-page-item-no {
+  background: var(--admin-accent-strong);
+}
+
+.study-page-item-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.study-page-item-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--admin-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.study-page-item-meta {
+  font-size: 11px;
+  color: var(--admin-muted);
+  margin-top: 2px;
+}
+
+/* 우측 본문 */
+.study-page-main {
+  background: var(--admin-panel, #ffffff);
+  border: 1px solid var(--admin-stroke);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.study-page-header {
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--admin-stroke-soft);
+}
+
+.study-checkpoints-box {
+  background: var(--admin-panel-light, #f5f9f3);
+  border: 1px solid var(--admin-stroke);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+}
+
+/* 공통 인풋 */
+.study-input {
+  padding: 7px 10px;
+  border: 1px solid var(--admin-stroke);
+  border-radius: 6px;
+  background: var(--admin-panel, #ffffff);
+  color: var(--admin-ink);
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.study-input:focus {
+  outline: none;
+  border-color: var(--admin-accent);
+}
+
+.study-input:disabled {
+  background: var(--admin-panel-light, #f5f9f3);
+  color: var(--admin-muted);
+  cursor: not-allowed;
+}

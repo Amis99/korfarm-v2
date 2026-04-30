@@ -267,11 +267,24 @@ class ChatService(
         val entity = ChatEmoticonEntity(
             id = IdGenerator.newId("cemo"),
             name = req.name.trim(),
+            series = req.series?.trim()?.takeIf { it.isNotEmpty() },
             fileId = req.fileId,
             sortOrder = req.sortOrder ?: (maxOrder + 1),
             status = "active",
             createdBy = adminId
         )
+        emoticonRepo.save(entity)
+        return entity.toView()
+    }
+
+    @Transactional
+    fun updateEmoticon(emoticonId: String, req: UpdateEmoticonRequest): EmoticonView {
+        val entity = emoticonRepo.findById(emoticonId).orElseThrow {
+            ApiException("NOT_FOUND", "이모티콘을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        req.name?.let { if (it.isNotBlank()) entity.name = it.trim() }
+        req.series?.let { entity.series = it.trim().takeIf { v -> v.isNotEmpty() } }
+        req.sortOrder?.let { entity.sortOrder = it }
         emoticonRepo.save(entity)
         return entity.toView()
     }
@@ -288,6 +301,7 @@ class ChatService(
     private fun ChatEmoticonEntity.toView(): EmoticonView = EmoticonView(
         id = id,
         name = name,
+        series = series,
         fileId = fileId,
         sortOrder = sortOrder,
         createdAt = createdAt.format(isoFmt)

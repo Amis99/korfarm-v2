@@ -28,13 +28,26 @@ interface StudyContentRepository : JpaRepository<StudyContentEntity, String> {
     fun findVisibleForStudentNoOrg(): List<StudyContentEntity>
 }
 
+interface StudyPageRepository : JpaRepository<StudyPageEntity, String> {
+
+    fun findAllByContentIdOrderByPageNoAsc(contentId: String): List<StudyPageEntity>
+
+    fun deleteAllByContentId(contentId: String)
+}
+
 interface StudyQuestionRepository : JpaRepository<StudyQuestionEntity, String> {
 
     fun findAllByContentIdOrderByQuestionNoAsc(contentId: String): List<StudyQuestionEntity>
 
+    fun findAllByPageIdOrderByQuestionNoAsc(pageId: String): List<StudyQuestionEntity>
+
     fun countByContentId(contentId: String): Int
 
+    fun countByPageId(pageId: String): Int
+
     fun deleteAllByContentId(contentId: String)
+
+    fun deleteAllByPageId(pageId: String)
 }
 
 interface StudyAttemptRepository : JpaRepository<StudyAttemptEntity, String> {

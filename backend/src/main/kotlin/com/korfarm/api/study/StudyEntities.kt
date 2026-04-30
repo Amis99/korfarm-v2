@@ -28,8 +28,31 @@ class StudyContentEntity(
     @Column(name = "level_id")
     var levelId: String? = null,
 
-    @Column(nullable = false)
-    var area: String = "CONTENT",
+    /** 학습 영역 코드: LIT/READ/GRAM/SPEAK/WRITE/MEDIA (NULL = 미설정) */
+    @Column
+    var area: String? = null,
+
+    /** 세부 영역 (현대시·고전시·논설 등) */
+    @Column(name = "sub_area")
+    var subArea: String? = null,
+
+    /** 원본 자료 출처: manual(직접 작성) / pdf / image */
+    @Column(name = "source_type", nullable = false)
+    var sourceType: String = "manual",
+
+    /** 원본 파일 URL (PDF/이미지 업로드 시) */
+    @Column(name = "source_file_url")
+    var sourceFileUrl: String? = null,
+
+    @Column(name = "source_file_name")
+    var sourceFileName: String? = null,
+
+    /** SHA-256 hash — 같은 파일 재업로드 시 dedup */
+    @Column(name = "source_file_hash")
+    var sourceFileHash: String? = null,
+
+    @Column(name = "source_file_size_bytes")
+    var sourceFileSizeBytes: Long? = null,
 
     @Column(nullable = false)
     var visibility: String,
@@ -75,7 +98,52 @@ class StudyContentEntity(
 }
 
 // ─────────────────────────────────────────────
-// 2. study_questions — 문제
+// 1-b. study_pages — 페이지 단위 본문 (1:N from study_contents)
+// 학습 진행: 페이지1 본문 → 페이지1 문제(최대 30) → 페이지2 본문 → 페이지2 문제 → ...
+// ─────────────────────────────────────────────
+@Entity
+@Table(name = "study_pages")
+class StudyPageEntity(
+    @Id
+    var id: String,
+
+    @Column(name = "content_id", nullable = false)
+    var contentId: String,
+
+    @Column(name = "page_no", nullable = false)
+    var pageNo: Int,
+
+    @Column
+    var title: String? = null,
+
+    @Column(columnDefinition = "longtext", nullable = false)
+    var markdown: String,
+
+    /** 출제 포인트 리스트 JSON: [{id, text, kind, evidence?}] */
+    @Column(columnDefinition = "json")
+    var checkpoints: String? = null,
+
+    @Column(name = "created_at", nullable = false)
+    var createdAt: LocalDateTime = LocalDateTime.now(),
+
+    @Column(name = "updated_at", nullable = false)
+    var updatedAt: LocalDateTime = LocalDateTime.now()
+) {
+    @PrePersist
+    fun onCreate() {
+        val now = LocalDateTime.now()
+        createdAt = now
+        updatedAt = now
+    }
+
+    @PreUpdate
+    fun onUpdate() {
+        updatedAt = LocalDateTime.now()
+    }
+}
+
+// ─────────────────────────────────────────────
+// 2. study_questions — 문제 (페이지별 최대 30문제)
 // ─────────────────────────────────────────────
 @Entity
 @Table(name = "study_questions")
@@ -86,29 +154,52 @@ class StudyQuestionEntity(
     @Column(name = "content_id", nullable = false)
     var contentId: String,
 
+    /** 소속 페이지 (V0076 이후) */
+    @Column(name = "page_id")
+    var pageId: String? = null,
+
     @Column(name = "question_no", nullable = false)
     var questionNo: Int,
 
     @Column(name = "question_type", nullable = false)
-    var questionType: String, // MULTI_CHOICE | OX | ESSAY
+    var questionType: String, // MULTI_CHOICE | OX | SHORT_ANSWER | ESSAY
 
     @Column(columnDefinition = "text", nullable = false)
     var stem: String,
 
+    /**
+     * MULTI_CHOICE/OX choices JSON:
+     *   [{id, text, isCorrect, wrongVector: {역량명: 가중치}, errorPatternIdx?}]
+     * SHORT_ANSWER/ESSAY 는 사용 안 함.
+     */
     @Column(columnDefinition = "json")
-    var choices: String? = null, // JSON: [{id, text, isCorrect, errorPatternIdx?}]
+    var choices: String? = null,
 
+    /** ESSAY: 모범답안 / SHORT_ANSWER: 정답 (글자 그대로) */
     @Column(name = "model_answer", columnDefinition = "text")
     var modelAnswer: String? = null,
 
+    /** ESSAY: [{phrase, position}] 빈칸 — 학생이 클릭해서 채우는 영역 */
     @Column(name = "fill_blanks", columnDefinition = "json")
-    var fillBlanks: String? = null, // JSON: [{phrase, position}]
+    var fillBlanks: String? = null,
 
     @Column(name = "eval_point_idx", columnDefinition = "json", nullable = false)
-    var evalPointIdx: String, // JSON int array
+    var evalPointIdx: String,
 
     @Column(nullable = false)
     var difficulty: Int = 3,
+
+    /** 정답 시 누적될 10대 역량 가중치: {"역량명": 0.4, ...} */
+    @Column(name = "competency_vector", columnDefinition = "json")
+    var competencyVector: String? = null,
+
+    /**
+     * 오답 시 마이너스로 누적될 가중치.
+     * MULTI_CHOICE/OX: 사용 안 함 (choices 안의 wrongVector 사용)
+     * SHORT_ANSWER/ESSAY: {"역량명": 0.3, ...}
+     */
+    @Column(name = "wrong_vector", columnDefinition = "json")
+    var wrongVector: String? = null,
 
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now(),
