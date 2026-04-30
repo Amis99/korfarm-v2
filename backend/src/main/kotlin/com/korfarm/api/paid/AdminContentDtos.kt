@@ -13,6 +13,9 @@ data class AdminContentSummary(
     val contentType: List<String>,
     val levelId: String?,
     val chapterId: String?,
+    val dayIndex: Int? = null,
+    val area: String? = null,
+    val subArea: String? = null,
     val title: String,
     val status: String,
     val videoUrl: String? = null

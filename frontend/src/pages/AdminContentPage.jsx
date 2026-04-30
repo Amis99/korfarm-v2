@@ -254,13 +254,8 @@ function AdminContentPage() {
     const valueOf = (row) => {
       if (sortKey === "dynCol") {
         if (tabFilter === "daily") {
-          // dayIndex 우선, 없으면 title 에서 NN일차 추출
-          let day = row.dayIndex;
-          if (!day) {
-            const m = (row.title || "").match(/(\d+)\s*일차/);
-            if (m) day = parseInt(m[1], 10);
-          }
-          return { num: day ?? Number.MAX_SAFE_INTEGER };
+          // 일차는 contents.day_index 컬럼만 사용 (제목에서 추출 X)
+          return { num: row.dayIndex ?? Number.MAX_SAFE_INTEGER };
         }
         if (tabFilter === "pro") {
           return { num: row.dayIndex ?? Number.MAX_SAFE_INTEGER };
@@ -675,12 +670,8 @@ function AdminContentPage() {
                     <td>
                       {(() => {
                         if (tabFilter === "daily") {
-                          // 일차: dayIndex 우선, 없으면 title 에서 "NN일차" 추출 시도
-                          let day = content.dayIndex;
-                          if (!day) {
-                            const m = (content.title || "").match(/(\d+)\s*일차/);
-                            if (m) day = parseInt(m[1], 10);
-                          }
+                          // 일차는 contents.day_index 컬럼만 사용 (제목에서 추출 X)
+                          const day = content.dayIndex;
                           return (
                             <span className="type-pill" style={{ fontSize: 11 }}>
                               {day ? `${day}일차` : "-"}

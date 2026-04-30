@@ -386,6 +386,9 @@ class AdminContentService(
                 contentType = parseCategories(content),
                 levelId = content.levelId,
                 chapterId = content.chapterId,
+                dayIndex = content.dayIndex,
+                area = content.area,
+                subArea = content.subArea,
                 title = content.title,
                 status = content.status,
                 videoUrl = content.videoUrl
