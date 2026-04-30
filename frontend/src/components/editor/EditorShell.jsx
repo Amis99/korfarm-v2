@@ -1,6 +1,7 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useContentEditor } from "../../hooks/useContentEditor";
+import { AREA_LABELS, SUB_AREA_LABELS } from "../../constants/questionBankCodes";
 import ReadingPreview from "./preview/ReadingPreview";
 import WorksheetPreview from "./preview/WorksheetPreview";
 import AnswerKeyPreview from "./preview/AnswerKeyPreview";
@@ -112,6 +113,13 @@ export default function EditorShell({ contentId, staticInfo }) {
   const editor = useContentEditor(contentId, staticInfo);
   const { meta, content, loading, error, saving, dirty, metaDirty, saveMsg, canUndo, isStatic } = editor;
   const [metaOpen, setMetaOpen] = useState(false);
+
+  /* 영역 → 세부영역 필터링 (테스트 관리와 동일 정책 — 코드 prefix 매칭) */
+  const subAreaOptions = useMemo(() => {
+    const area = meta?.area || "";
+    if (!area) return Object.entries(SUB_AREA_LABELS);
+    return Object.entries(SUB_AREA_LABELS).filter(([code]) => code.startsWith(`${area}_`));
+  }, [meta?.area]);
 
   /* JSON 모드 */
   const [showJson, setShowJson] = useState(initialMode === "json");
@@ -346,33 +354,58 @@ export default function EditorShell({ contentId, staticInfo }) {
               </div>
               <div className="ce-meta-field">
                 <label>영역 (area)</label>
-                <input
-                  type="text"
+                <select
                   value={meta.area || ""}
-                  onChange={(e) => editor.updateMeta("area", e.target.value)}
+                  onChange={(e) => {
+                    const newArea = e.target.value;
+                    editor.updateMeta("area", newArea);
+                    // 영역 변경 시 기존 세부영역이 새 영역에 속하지 않으면 reset
+                    const sub = meta.subArea || "";
+                    if (sub && !sub.startsWith(`${newArea}_`)) {
+                      editor.updateMeta("subArea", "");
+                    }
+                  }}
                   disabled={isStatic}
-                  placeholder="예: reading"
-                />
+                  title="영역 (테스트 관리와 동일 코드 체계)"
+                >
+                  <option value="">-- 영역 선택 --</option>
+                  {Object.entries(AREA_LABELS).map(([code, label]) => (
+                    <option key={code} value={code}>{label} ({code})</option>
+                  ))}
+                  {/* 옛 비표준 값 보존 — 사용자가 새로 선택할 때까지 표시 */}
+                  {meta.area && !AREA_LABELS[meta.area] && (
+                    <option value={meta.area}>{meta.area} (비표준)</option>
+                  )}
+                </select>
               </div>
               <div className="ce-meta-field">
                 <label>세부 영역 (subArea)</label>
-                <input
-                  type="text"
+                <select
                   value={meta.subArea || ""}
                   onChange={(e) => editor.updateMeta("subArea", e.target.value)}
-                  disabled={isStatic}
-                  placeholder="예: nonfiction"
-                />
+                  disabled={isStatic || !meta.area}
+                  title={meta.area ? "세부 영역" : "먼저 영역을 선택하세요"}
+                >
+                  <option value="">{meta.area ? "-- 세부영역 선택 --" : "-- 영역 먼저 선택 --"}</option>
+                  {subAreaOptions.map(([code, label]) => (
+                    <option key={code} value={code}>{label} ({code})</option>
+                  ))}
+                  {/* 옛 비표준 값 보존 */}
+                  {meta.subArea && !SUB_AREA_LABELS[meta.subArea] && (
+                    <option value={meta.subArea}>{meta.subArea} (비표준)</option>
+                  )}
+                </select>
               </div>
               <div className="ce-meta-field">
-                <label>일차 (dayIndex)</label>
+                <label>일차 (dayIndex) — 일일퀴즈/일일독해 학생 매칭 키</label>
                 <input
                   type="number"
                   value={meta.dayIndex ?? ""}
                   onChange={(e) => editor.updateMeta("dayIndex", e.target.value)}
                   disabled={isStatic}
-                  placeholder="1"
-                  min="0"
+                  placeholder="1~365"
+                  min="1"
+                  max="365"
                 />
               </div>
               <div className="ce-meta-field">
