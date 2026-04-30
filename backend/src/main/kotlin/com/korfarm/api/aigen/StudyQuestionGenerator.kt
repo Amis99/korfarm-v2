@@ -173,7 +173,77 @@ class StudyQuestionGenerator(
                 HttpStatus.UNPROCESSABLE_ENTITY
             )
         }
-        return result.text to result
+        // ESSAY 빈칸 마커 정규화 — AI 가 ____ 를 잊어도 phrase 첫 등장 위치로 자동 보정.
+        val normalized = normalizeEssayBlankMarkers(result.text)
+        return normalized to result
+    }
+
+    /**
+     * AI 응답에서 ESSAY 의 modelAnswer 안 ____ 마커 개수와 fillBlanks 길이가 다르면
+     * phrase 의 첫 등장만 골라 ____ 로 교체하여 두 값을 일치시킴.
+     * 같은 phrase 가 본문에 두 번 나와도 학생 화면에서 빈칸이 늘지 않도록 방어.
+     */
+    private fun normalizeEssayBlankMarkers(rawJson: String): String {
+        val cleaned = stripCodeFence(rawJson)
+        if (!cleaned.startsWith("{")) return rawJson
+        return try {
+            @Suppress("UNCHECKED_CAST")
+            val root = objectMapper.readValue(cleaned, Map::class.java).toMutableMap() as MutableMap<String, Any?>
+            val questions = (root["questions"] as? List<*>) ?: return rawJson
+            val patched = questions.map { item ->
+                val q = (item as? Map<*, *>) ?: return@map item
+                val type = (q["questionType"] as? String) ?: (q["question_type"] as? String)
+                if (type?.uppercase() != "ESSAY") return@map q
+                val mutable = q.toMutableMap() as MutableMap<Any?, Any?>
+                var modelAnswer = (mutable["modelAnswer"] as? String) ?: (mutable["model_answer"] as? String) ?: return@map q
+                val blanks = (mutable["fillBlanks"] as? List<*>) ?: (mutable["fill_blanks"] as? List<*>) ?: return@map q
+                val markerCount = countBlankMarkers(modelAnswer)
+                if (markerCount >= blanks.size) return@map q  // 충분
+                // 부족분만큼 phrase 첫 등장을 ____ 로 치환
+                for (b in blanks) {
+                    val phrase = ((b as? Map<*, *>)?.get("phrase") as? String) ?: continue
+                    if (phrase.isBlank()) continue
+                    if (countBlankMarkers(modelAnswer) >= blanks.size) break
+                    val idx = modelAnswer.indexOf(phrase)
+                    if (idx < 0) continue
+                    modelAnswer = modelAnswer.substring(0, idx) + "____" + modelAnswer.substring(idx + phrase.length)
+                }
+                mutable["modelAnswer"] = modelAnswer
+                mutable.remove("model_answer")
+                mutable
+            }
+            root["questions"] = patched
+            objectMapper.writeValueAsString(root)
+        } catch (e: Exception) {
+            logger.warn("ESSAY 빈칸 마커 정규화 실패 — 원본 그대로 사용: {}", e.message)
+            rawJson
+        }
+    }
+
+    private fun stripCodeFence(s: String): String {
+        var t = s.trim()
+        t = t.removePrefix("```json").removePrefix("```JSON").removePrefix("```").removeSuffix("```").trim()
+        if (!t.startsWith("{")) {
+            val first = t.indexOf('{')
+            val last = t.lastIndexOf('}')
+            if (first >= 0 && last > first) t = t.substring(first, last + 1)
+        }
+        return t
+    }
+
+    /** 연속된 `_` 가 2개 이상인 구간을 한 빈칸으로 카운트. */
+    private fun countBlankMarkers(text: String): Int {
+        var count = 0
+        var i = 0
+        while (i < text.length) {
+            if (text[i] == '_') {
+                var j = i
+                while (j < text.length && text[j] == '_') j++
+                if (j - i >= 2) count++
+                i = j
+            } else i++
+        }
+        return count
     }
 
     /** 1+2단계 통합 호출 */
