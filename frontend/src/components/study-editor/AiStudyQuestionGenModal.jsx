@@ -13,7 +13,7 @@ import { pollJob } from "../../utils/aiGenJob";
  *  - onClose()
  *  - onGenerated({checkpoints, questions})
  */
-const COUNT_OPTIONS = [0, 5, 10, 15, 20, 25];
+const COUNT_OPTIONS = [0, 1, 2, 3, 4, 5, 10, 15, 20, 25];
 
 export default function AiStudyQuestionGenModal({
   pageMarkdown, area, subArea, levelId, existingCheckpoints,
@@ -38,7 +38,7 @@ export default function AiStudyQuestionGenModal({
     }
     setSubmitting(true);
     setError("");
-    setProgress("출제 포인트 추출 중... (10~30초)");
+    setProgress("출제 포인트 분석 중... (20~60초)");
     try {
       const submission = await apiPost("/v1/admin/ai-gen/study-question", {
         pageMarkdown,
@@ -51,7 +51,7 @@ export default function AiStudyQuestionGenModal({
         essayCount: counts.essay,
         existingCheckpoints: existingCheckpoints?.length ? existingCheckpoints : null,
       });
-      setProgress("문제 생성 중... (30초~2분)");
+      setProgress("문제 생성 중... (1~2분)");
       const result = await pollJob(submission.jobId, 60, 2000);
       if (result.status !== "completed") {
         throw new Error(result.errorMessage || `생성 실패 (${result.status})`);
@@ -82,14 +82,13 @@ export default function AiStudyQuestionGenModal({
           fontSize: 13,
           color: "#8a5e1c",
         }}>
-          <strong>⚠️ 추가 과금 서비스</strong>
+          <strong>⚠️ 추가 과금 안내</strong>
           <p style={{ margin: "4px 0 0", fontSize: 12 }}>
-            출제 포인트 추출(Sonnet 4.6) + 문제 생성(Opus 4.7) 2단계 호출.
-            30문제 기준 약 ₩300~1,500 예상. 정확한 금액은 AI 사용 내역 메뉴.
+            AI 호출이므로 추가 과금이 발생할 수 있습니다.
           </p>
           {existingCheckpoints?.length > 0 && (
             <p style={{ margin: "4px 0 0", fontSize: 12 }}>
-              ✓ 출제 포인트 {existingCheckpoints.length}개 재사용 — 1단계 비용 절감
+              ✓ 기존 출제 포인트 {existingCheckpoints.length}개 재사용
             </p>
           )}
         </div>

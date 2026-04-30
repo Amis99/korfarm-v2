@@ -142,14 +142,15 @@ class AiGenJobService(
             val bytes = java.util.Base64.getDecoder().decode(base64)
             val result = fileToMarkdownService.convert(bytes, mediaType, job.userId)
             val resultPayload = mapOf(
-                "markdown" to result.markdown,
+                "pages" to result.pages.map { mapOf("pageNo" to it.pageNo, "markdown" to it.markdown) },
+                "markdown" to result.markdown,            // backward 호환 (모든 페이지 합본)
                 "sourceFileName" to filename,
                 "sourceHash" to result.sourceHash,
                 "sourceSizeBytes" to result.sourceSizeBytes,
                 "sourceMediaType" to mediaType,
-                "durationMs" to result.durationMs,
-                "inputTokens" to result.inputTokens,
-                "outputTokens" to result.outputTokens,
+                "totalDurationMs" to result.totalDurationMs,
+                "totalInputTokens" to result.totalInputTokens,
+                "totalOutputTokens" to result.totalOutputTokens,
             )
             markCompleted(jobId, objectMapper.writeValueAsString(resultPayload))
         } catch (e: Exception) {

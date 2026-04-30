@@ -28,6 +28,9 @@ const SUB_AREA_BY_AREA = {
   MEDIA: ["뉴스", "광고", "SNS", "영상", "복합 매체"],
 };
 
+/** 페이지당 최대 줄 수 — 초과 시 경고 + [새 페이지로 분할] 버튼 노출 */
+const MAX_LINES_PER_PAGE = 80;
+
 const LEVEL_OPTIONS = [
   { value: "", label: "(미설정)" },
   { value: "saussure1", label: "소쉬르1 (초1)" }, { value: "saussure2", label: "소쉬르2 (초2)" },
@@ -256,18 +259,82 @@ export default function AdminStudyContentEditorV2Page() {
     updateActivePage({ questions });
   };
 
-  // PDF/이미지 변환 결과 → 활성 페이지에 마크다운 채움
-  const onConvertedFromFile = (data) => {
-    if (!activePage) {
-      // 새 페이지 만들고 거기에
-      addPage().then(() => {
-        setTimeout(() => updateActivePage({ markdown: data.markdown }), 100);
-      });
-    } else {
-      updateActivePage({ markdown: data.markdown });
+  // PDF/이미지 변환 결과 → 페이지별로 비주얼 에디터에 추가
+  // PDF: pages 배열에 N개 → 활성 페이지에 1번째, 이후 페이지는 새로 생성
+  // 이미지: 1페이지 → 활성 페이지에 채움
+  const onConvertedFromFile = async (data) => {
+    const pages = data.pages || (data.markdown ? [{ pageNo: 1, markdown: data.markdown }] : []);
+    if (pages.length === 0) {
+      setError("변환 결과가 비어 있습니다");
+      return;
     }
-    setInfo(`변환 완료 (${data.sourceFileName}, ${(data.sourceSizeBytes / 1024).toFixed(1)} KB)`);
-    setTimeout(() => setInfo(""), 3000);
+    try {
+      // 1번째 페이지: 활성 페이지에 채워서 저장
+      let target = activePage;
+      if (!target) {
+        // 활성 페이지 없으면 새로 만들고 사용
+        target = await apiPost(`/v1/admin/study/contents/${contentId}/pages`, {
+          markdown: pages[0].markdown,
+        });
+        setPages((prev) => [...prev, target]);
+        setActivePageId(target.id);
+      } else {
+        const updated = await apiPatch(
+          `/v1/admin/study/contents/${contentId}/pages/${target.id}`,
+          { markdown: pages[0].markdown }
+        );
+        setPages((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
+      }
+
+      // 2번째 페이지부터는 새 페이지로 추가 (서버에 즉시 저장)
+      let lastNewPage = null;
+      for (let i = 1; i < pages.length; i++) {
+        const newPage = await apiPost(`/v1/admin/study/contents/${contentId}/pages`, {
+          markdown: pages[i].markdown,
+        });
+        setPages((prev) => [...prev, newPage]);
+        lastNewPage = newPage;
+      }
+      // 첫 새 페이지로 활성 전환은 사용자 선택 — 그대로 둠
+      setInfo(
+        `변환 완료 — ${pages.length}페이지${pages.length > 1 ? " (페이지별 자동 분할 + 저장)" : ""}` +
+        ` · ${(data.sourceSizeBytes / 1024).toFixed(1)} KB`
+      );
+      setTimeout(() => setInfo(""), 4000);
+    } catch (err) {
+      setError("페이지 저장 실패: " + err.message);
+    }
+  };
+
+  // 활성 페이지를 줄 수 기준으로 다음 페이지로 분할
+  const splitPageByLines = async () => {
+    if (!activePage) return;
+    const lines = (activePage.markdown || "").split("\n");
+    if (lines.length <= MAX_LINES_PER_PAGE) return;
+    const head = lines.slice(0, MAX_LINES_PER_PAGE).join("\n");
+    const tail = lines.slice(MAX_LINES_PER_PAGE).join("\n");
+    setSaving(true); setError("");
+    try {
+      // 현재 페이지: head 만 저장
+      const updated = await apiPatch(
+        `/v1/admin/study/contents/${contentId}/pages/${activePage.id}`,
+        { markdown: head }
+      );
+      setPages((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
+      // 새 페이지: tail
+      const newPage = await apiPost(
+        `/v1/admin/study/contents/${contentId}/pages`,
+        { markdown: tail }
+      );
+      setPages((prev) => [...prev, newPage]);
+      setActivePageId(newPage.id);
+      setInfo(`${MAX_LINES_PER_PAGE}줄까지 현재 페이지에 두고 나머지를 새 페이지로 분리`);
+      setTimeout(() => setInfo(""), 3000);
+    } catch (err) {
+      setError("분할 실패: " + err.message);
+    } finally {
+      setSaving(false);
+    }
   };
 
   // AI 문제 생성 결과 → 활성 페이지의 questions / checkpoints 에 추가
@@ -457,20 +524,46 @@ export default function AdminStudyContentEditorV2Page() {
                   </div>
 
                   {/* 본문 마크다운 */}
-                  <div style={{ marginBottom: 14 }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
-                      <strong style={{ fontSize: 13, color: "var(--admin-accent-strong)" }}>📖 본문 (마크다운)</strong>
-                      <button className="admin-detail-btn secondary xs" onClick={() => setShowPdfModal(true)}>
-                        📄 PDF/이미지 → 마크다운 (AI)
-                      </button>
-                    </div>
-                    <MarkdownEditField
-                      value={activePage.markdown || ""}
-                      onChange={(v) => updateActivePage({ markdown: v })}
-                      placeholder="본문을 직접 입력하거나 PDF/이미지를 업로드해서 변환"
-                      minHeight={240}
-                    />
-                  </div>
+                  {(() => {
+                    const lineCount = (activePage.markdown || "").split("\n").length;
+                    const overLimit = lineCount > MAX_LINES_PER_PAGE;
+                    return (
+                      <div style={{ marginBottom: 14 }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6, flexWrap: "wrap", gap: 6 }}>
+                          <strong style={{ fontSize: 13, color: "var(--admin-accent-strong)" }}>📖 본문 (마크다운)</strong>
+                          <div style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap" }}>
+                            <span style={{
+                              fontSize: 12,
+                              fontWeight: 700,
+                              color: overLimit ? "#c0392b" : "var(--admin-muted)",
+                            }}>
+                              줄 수 {lineCount} / {MAX_LINES_PER_PAGE}
+                              {overLimit ? " ⚠️ 한도 초과" : ""}
+                            </span>
+                            {overLimit && (
+                              <button
+                                className="admin-detail-btn xs"
+                                onClick={splitPageByLines}
+                                disabled={saving}
+                                title={`${MAX_LINES_PER_PAGE}줄까지 현재 페이지에 두고 나머지를 새 페이지로 분리`}
+                              >
+                                ✂ 새 페이지로 분할
+                              </button>
+                            )}
+                            <button className="admin-detail-btn secondary xs" onClick={() => setShowPdfModal(true)}>
+                              📄 PDF/이미지 → 마크다운 (AI)
+                            </button>
+                          </div>
+                        </div>
+                        <MarkdownEditField
+                          value={activePage.markdown || ""}
+                          onChange={(v) => updateActivePage({ markdown: v })}
+                          placeholder={`본문을 직접 입력하거나 PDF/이미지를 업로드해서 변환 (최대 ${MAX_LINES_PER_PAGE}줄, 초과 시 새 페이지로 분할)`}
+                          minHeight={240}
+                        />
+                      </div>
+                    );
+                  })()}
 
                   {/* 출제 포인트 */}
                   {activePage.checkpoints && activePage.checkpoints.length > 0 && (

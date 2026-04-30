@@ -30,6 +30,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("com.auth0:java-jwt:4.4.0")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.apache.pdfbox:pdfbox:3.0.2")
     runtimeOnly("com.mysql:mysql-connector-j")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

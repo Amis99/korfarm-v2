@@ -1,9 +1,12 @@
 package com.korfarm.api.aigen
 
 import com.korfarm.api.common.ApiException
+import org.apache.pdfbox.Loader
+import org.apache.pdfbox.pdmodel.PDDocument
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
+import java.io.ByteArrayOutputStream
 import java.security.MessageDigest
 import java.util.Base64
 
@@ -24,6 +27,7 @@ class FileToMarkdownService(
 
     companion object {
         private const val MAX_FILE_SIZE_BYTES: Long = 30 * 1024 * 1024 // 30MB
+        private const val MAX_PDF_PAGES: Int = 10                       // PDF 최대 페이지 수
         private val SYSTEM_PROMPT = """
 당신은 시험·교재 자료를 한국어 학습 콘텐츠용 깔끔한 마크다운(Markdown)으로 변환하는 전문가입니다.
 
@@ -40,12 +44,20 @@ class FileToMarkdownService(
     }
 
     data class ConversionResult(
-        val markdown: String,
+        val pages: List<PageMarkdown>,        // 페이지별 마크다운 (이미지=1, PDF=N)
         val sourceHash: String,
         val sourceSizeBytes: Long,
-        val inputTokens: Int?,
-        val outputTokens: Int?,
-        val durationMs: Int,
+        val totalInputTokens: Int,
+        val totalOutputTokens: Int,
+        val totalDurationMs: Int,
+    ) {
+        /** 호환용 — 모든 페이지 마크다운을 합친 문자열 */
+        val markdown: String get() = pages.joinToString("\n\n---\n\n") { it.markdown }
+    }
+
+    data class PageMarkdown(
+        val pageNo: Int,
+        val markdown: String,
     )
 
     /**
@@ -71,16 +83,59 @@ class FileToMarkdownService(
             throw ApiException("UNSUPPORTED_MEDIA", "지원하지 않는 형식: $mediaType", HttpStatus.UNSUPPORTED_MEDIA_TYPE)
         }
 
-        val base64 = Base64.getEncoder().encodeToString(fileBytes)
         val hash = sha256(fileBytes)
+        val started = System.currentTimeMillis()
 
-        val mediaBlock = if (isPdf) aiCall.pdfBlock(base64) else aiCall.imageBlock(base64, mediaType)
+        // 이미지 = 1페이지
+        if (isImage) {
+            val md = callOnePage(fileBytes, mediaType, userId)
+            return ConversionResult(
+                pages = listOf(PageMarkdown(1, md.text.trim())),
+                sourceHash = hash,
+                sourceSizeBytes = fileBytes.size.toLong(),
+                totalInputTokens = md.inputTokens ?: 0,
+                totalOutputTokens = md.outputTokens ?: 0,
+                totalDurationMs = (System.currentTimeMillis() - started).toInt(),
+            )
+        }
+
+        // PDF = 페이지별 분할 호출
+        val pageBytesList = splitPdfByPage(fileBytes)
+        if (pageBytesList.size > MAX_PDF_PAGES) {
+            throw ApiException(
+                "PDF_TOO_MANY_PAGES",
+                "PDF 페이지가 너무 많습니다 (현재 ${pageBytesList.size}장 / 최대 ${MAX_PDF_PAGES}장). 분할 후 업로드하세요.",
+                HttpStatus.PAYLOAD_TOO_LARGE
+            )
+        }
+        val pages = mutableListOf<PageMarkdown>()
+        var totalIn = 0
+        var totalOut = 0
+        for ((idx, pageBytes) in pageBytesList.withIndex()) {
+            val res = callOnePage(pageBytes, "application/pdf", userId)
+            pages.add(PageMarkdown(idx + 1, res.text.trim()))
+            totalIn += (res.inputTokens ?: 0)
+            totalOut += (res.outputTokens ?: 0)
+        }
+        return ConversionResult(
+            pages = pages,
+            sourceHash = hash,
+            sourceSizeBytes = fileBytes.size.toLong(),
+            totalInputTokens = totalIn,
+            totalOutputTokens = totalOut,
+            totalDurationMs = (System.currentTimeMillis() - started).toInt(),
+        )
+    }
+
+    /** 단일 이미지/PDF 페이지를 Claude Vision 으로 변환. 실패 시 ApiException. */
+    private fun callOnePage(fileBytes: ByteArray, mediaType: String, userId: String): AiCallHelper.CallResult {
+        val base64 = Base64.getEncoder().encodeToString(fileBytes)
+        val mediaBlock = if (mediaType == "application/pdf") aiCall.pdfBlock(base64) else aiCall.imageBlock(base64, mediaType)
         val instructionBlock = aiCall.textBlock(
             "위 파일의 본문을 한국어 학습 콘텐츠용 마크다운으로 변환해주세요. " +
             "원문을 그대로 보존하되 마크다운 문법으로 구조화만 해주세요. " +
             "결과만 출력 (다른 설명·인사말 금지)."
         )
-
         try {
             val result = aiCall.callMultimodal(
                 model = AiCallHelper.MODEL_SONNET,
@@ -98,30 +153,49 @@ class FileToMarkdownService(
                 durationMs = result.durationMs,
                 status = "success",
             )
-            return ConversionResult(
-                markdown = result.text.trim(),
-                sourceHash = hash,
-                sourceSizeBytes = fileBytes.size.toLong(),
-                inputTokens = result.inputTokens,
-                outputTokens = result.outputTokens,
-                durationMs = result.durationMs,
-            )
+            return result
         } catch (ex: Exception) {
             logger.error("파일→마크다운 변환 실패", ex)
             logService.log(
-                userId = userId,
-                testId = null,
-                kind = "file-to-markdown",
-                model = AiCallHelper.MODEL_SONNET,
-                status = "error",
+                userId = userId, testId = null, kind = "file-to-markdown",
+                model = AiCallHelper.MODEL_SONNET, status = "error",
                 errorMessage = ex.message?.take(500),
             )
             throw ApiException("AI_CALL_FAILED", "변환 실패: ${ex.message}", HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
 
+    /** PDF 를 페이지별 단일 페이지 PDF byte array 로 분할. */
+    private fun splitPdfByPage(bytes: ByteArray): List<ByteArray> {
+        val srcDoc = Loader.loadPDF(bytes)
+        try {
+            val list = mutableListOf<ByteArray>()
+            for (i in 0 until srcDoc.numberOfPages) {
+                PDDocument().use { pageDoc ->
+                    pageDoc.addPage(srcDoc.getPage(i))
+                    val baos = ByteArrayOutputStream()
+                    pageDoc.save(baos)
+                    list.add(baos.toByteArray())
+                }
+            }
+            return list
+        } finally {
+            srcDoc.close()
+        }
+    }
+
     private fun sha256(bytes: ByteArray): String {
         val md = MessageDigest.getInstance("SHA-256")
         return md.digest(bytes).joinToString("") { "%02x".format(it) }
+    }
+
+    /** PDF 페이지 수 카운트 (PDFBox). 파싱 실패 시 0 반환 (검증 통과). */
+    private fun countPdfPages(bytes: ByteArray): Int {
+        return try {
+            Loader.loadPDF(bytes).use { doc -> doc.numberOfPages }
+        } catch (ex: Exception) {
+            logger.warn("PDF 페이지 수 카운트 실패: {}", ex.message)
+            0
+        }
     }
 }

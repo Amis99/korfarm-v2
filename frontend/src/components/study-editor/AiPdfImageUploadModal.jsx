@@ -64,14 +64,12 @@ export default function AiPdfImageUploadModal({ onClose, onConverted }) {
       setProgress("AI 변환 중... (PDF는 페이지 수에 따라 30초~2분 소요)");
       const result = await pollJob(jobId, 150, 2000);
       onConverted({
-        markdown: result.markdown,
+        pages: result.pages || [],         // [{pageNo, markdown}]
+        markdown: result.markdown,         // 합본 (호환)
         sourceFileName: result.sourceFileName,
         sourceHash: result.sourceHash,
         sourceSizeBytes: result.sourceSizeBytes,
         sourceMediaType: result.sourceMediaType,
-        durationMs: result.durationMs,
-        inputTokens: result.inputTokens,
-        outputTokens: result.outputTokens,
       });
       onClose();
     } catch (err) {
@@ -95,10 +93,12 @@ export default function AiPdfImageUploadModal({ onClose, onConverted }) {
           fontSize: 13,
           color: "#8a5e1c",
         }}>
-          <strong>⚠️ 추가 과금 서비스</strong>
+          <strong>⚠️ 추가 과금 안내</strong>
           <p style={{ margin: "4px 0 0", fontSize: 12 }}>
-            Claude Sonnet 4.6 (Vision/PDF) 호출. PDF 한 페이지당 약 ₩50~200, 이미지 1장 약 ₩30~100 예상.
-            정확한 금액은 AI 사용 내역 메뉴에서 확인.
+            AI 변환 호출이므로 추가 과금이 발생할 수 있습니다.
+          </p>
+          <p style={{ margin: "4px 0 0", fontSize: 12, fontWeight: 700 }}>
+            📄 PDF 는 최대 10장까지 — 더 큰 자료는 분할 후 업로드하세요. 페이지별로 자동 분리되어 비주얼 에디터에 추가됩니다.
           </p>
         </div>
         <div className="admin-modal-field">

@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service
 /**
  * 내용 숙지 페이지 → 출제 포인트 추출 → 4유형 문제 생성 (2단계 파이프라인).
  *
- * 1단계: Sonnet 4.6 — 출제 포인트 추출 (페이지 마크다운만 보고 검증 가능한 핵심 포인트 리스트)
- * 2단계: Opus 4.7 — 출제 포인트 + 객관식 지침 + 서술형 지침 + 4유형 가이드 → 문제 생성
+ * 1단계 (분석): Opus 4.7 — 자료 정독·검증 가능 단위로 분해·evidence 포착 (추론력 우위)
+ * 2단계 (생성): Sonnet 4.6 — 추출된 포인트 + 객관식·서술형 지침을 따라 4유형 문제 templating
  *
  * 페이지별 최대 30문제 제한.
  */
@@ -69,20 +69,22 @@ class StudyQuestionGenerator(
         val totalDurationMs: Int,
     )
 
-    /** 1단계: 출제 포인트 추출 */
+    /** 1단계: 출제 포인트 추출 (Opus — 자료 분석·분해의 추론력) */
     fun extractCheckpoints(pageMarkdown: String, userId: String): Pair<List<Checkpoint>, AiCallHelper.CallResult> {
         val started = System.currentTimeMillis()
         val result = aiCall.call(
-            model = AiCallHelper.MODEL_SONNET,
+            model = AiCallHelper.MODEL_OPUS,
             systemBlocks = listOf(aiCall.systemBlock(checkpointsExtractPrompt, ephemeralCache = true)),
-            userText = "다음 학습 자료에서 출제 포인트를 추출하세요.\n\n[자료]\n$pageMarkdown",
-            maxTokens = 4096,
+            userText = "다음 학습 자료에서 출제 포인트를 추출하세요. " +
+                "응답은 반드시 `{\"checkpoints\":[...]}` JSON 객체 한 개만. " +
+                "코드펜스(```), 인사말, 설명 절대 금지.\n\n[자료]\n$pageMarkdown",
+            maxTokens = 8192,
         )
         logService.log(
             userId = userId,
             testId = null,
             kind = "study-checkpoints",
-            model = AiCallHelper.MODEL_SONNET,
+            model = AiCallHelper.MODEL_OPUS,
             inputTokens = result.inputTokens,
             outputTokens = result.outputTokens,
             durationMs = result.durationMs,
@@ -144,7 +146,7 @@ class StudyQuestionGenerator(
         }
 
         val result = aiCall.callMultimodal(
-            model = AiCallHelper.MODEL_OPUS,
+            model = AiCallHelper.MODEL_SONNET,
             systemBlocks = systemBlocks,
             userContent = listOf(aiCall.textBlock(userText)),
             maxTokens = 8192,
@@ -153,7 +155,7 @@ class StudyQuestionGenerator(
             userId = userId,
             testId = null,
             kind = "study-questions",
-            model = AiCallHelper.MODEL_OPUS,
+            model = AiCallHelper.MODEL_SONNET,
             inputTokens = result.inputTokens,
             outputTokens = result.outputTokens,
             durationMs = result.durationMs,
@@ -184,25 +186,46 @@ class StudyQuestionGenerator(
     }
 
     private fun parseCheckpoints(rawText: String): List<Checkpoint> {
-        val cleaned = rawText.trim()
-            .removePrefix("```json").removePrefix("```")
-            .removeSuffix("```")
-            .trim()
+        // 1차 정리: 앞뒤 공백 + 흔한 코드펜스 제거
+        var cleaned = rawText.trim()
+        // ```json … ``` 또는 ``` … ``` 패턴 제거 (다중 가능)
+        cleaned = cleaned.removePrefix("```json").removePrefix("```JSON").removePrefix("```")
+            .removeSuffix("```").trim()
+        // 텍스트 안에 JSON 객체가 끼어 있는 경우 첫 { 부터 마지막 } 까지 추출
+        if (!cleaned.startsWith("{")) {
+            val first = cleaned.indexOf('{')
+            val last = cleaned.lastIndexOf('}')
+            if (first >= 0 && last > first) {
+                cleaned = cleaned.substring(first, last + 1)
+            }
+        }
         return try {
             @Suppress("UNCHECKED_CAST")
             val obj = objectMapper.readValue(cleaned, Map::class.java) as Map<String, Any?>
-            val list = obj["checkpoints"] as? List<*> ?: return emptyList()
-            list.mapIndexedNotNull { i, item ->
+            // checkpoints 키 또는 root 가 array 인 경우도 허용
+            val list = (obj["checkpoints"] as? List<*>)
+                ?: (obj["items"] as? List<*>)
+                ?: return run {
+                    logger.warn("checkpoints 키 없음. obj keys: {}, raw 500자: {}", obj.keys, rawText.take(500))
+                    emptyList()
+                }
+            val parsed = list.mapIndexedNotNull { i, item ->
                 val m = item as? Map<*, *> ?: return@mapIndexedNotNull null
+                val text = (m["text"] as? String) ?: (m["content"] as? String)
+                if (text.isNullOrBlank()) return@mapIndexedNotNull null
                 Checkpoint(
                     id = (m["id"] as? String) ?: "cp${i + 1}",
-                    text = (m["text"] as? String) ?: return@mapIndexedNotNull null,
-                    kind = (m["kind"] as? String) ?: "FACT",
+                    text = text,
+                    kind = (m["kind"] as? String) ?: (m["type"] as? String) ?: "FACT",
                     evidence = m["evidence"] as? String,
                 )
             }
+            if (parsed.isEmpty()) {
+                logger.warn("checkpoints 배열은 있지만 항목 파싱 실패. raw 500자: {}", rawText.take(500))
+            }
+            parsed
         } catch (ex: Exception) {
-            logger.warn("checkpoints JSON 파싱 실패. raw 200자: {}", cleaned.take(200))
+            logger.warn("checkpoints JSON 파싱 실패: {}. raw 1000자: {}", ex.message, rawText.take(1000))
             emptyList()
         }
     }
