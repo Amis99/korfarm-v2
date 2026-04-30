@@ -102,94 +102,10 @@ class ParentLinkService(
         }
     }
 
-    @Transactional
-    fun requestLink(parentUserId: String, request: ParentLinkRequestCodeRequest): ParentLinkView {
-        val parent = userRepository.findById(parentUserId).orElseThrow {
-            ApiException("NOT_FOUND", "parent not found", HttpStatus.NOT_FOUND)
-        }
-        val student = resolveUser(request.studentUserId, request.studentLoginId, "student")
-        if (parent.id == student.id) {
-            throw ApiException("INVALID_LINK", "parent and student cannot be the same", HttpStatus.BAD_REQUEST)
-        }
-        val existing = parentStudentLinkRepository.findByParentUserIdAndStudentUserId(parent.id, student.id)
-        if (existing != null && existing.status == "active") {
-            throw ApiException("LINK_EXISTS", "link already exists", HttpStatus.CONFLICT)
-        }
-        val now = LocalDateTime.now()
-        val link = existing ?: ParentStudentLinkEntity(
-            id = IdGenerator.newId("pl"),
-            parentUserId = parent.id,
-            studentUserId = student.id,
-            status = "pending"
-        )
-        link.status = "pending"
-        link.requestCode = generateRequestCode()
-        link.requestedAt = now
-        link.approvedAt = null
-        link.approvedBy = null
-        parentStudentLinkRepository.save(link)
-        return link.toView(parent, student)
-    }
+    // requestLink/confirmLink/approveLink: 자동 연결 정책 도입 후 폐기.
+    // 학부모는 회원가입 시 학생 이름·휴대폰 일치하면 즉시 active 연결됨.
 
-    @Transactional
-    fun confirmLink(studentUserId: String, request: ParentLinkConfirmRequest): ParentLinkView {
-        val student = userRepository.findById(studentUserId).orElseThrow {
-            ApiException("NOT_FOUND", "student not found", HttpStatus.NOT_FOUND)
-        }
-        val parent = resolveUser(request.parentUserId, request.parentLoginId, "parent")
-        val link = parentStudentLinkRepository.findByParentUserIdAndStudentUserId(parent.id, student.id)
-            ?: throw ApiException("NOT_FOUND", "link not found", HttpStatus.NOT_FOUND)
-        if (link.status != "pending") {
-            throw ApiException("INVALID_STATUS", "link is not pending", HttpStatus.BAD_REQUEST)
-        }
-        if (link.requestCode != request.requestCode) {
-            throw ApiException("INVALID_CODE", "invalid request code", HttpStatus.BAD_REQUEST)
-        }
-        link.status = "active"
-        link.requestCode = null
-        link.approvedAt = LocalDateTime.now()
-        link.approvedBy = student.id
-        parentStudentLinkRepository.save(link)
-        return link.toView(parent, student)
-    }
-
-    @Transactional
-    fun approveLink(linkId: String, reviewerId: String): ParentLinkView {
-        val link = parentStudentLinkRepository.findById(linkId).orElseThrow {
-            ApiException("NOT_FOUND", "link not found", HttpStatus.NOT_FOUND)
-        }
-        val parent = userRepository.findById(link.parentUserId).orElseThrow {
-            ApiException("NOT_FOUND", "parent not found", HttpStatus.NOT_FOUND)
-        }
-        val student = userRepository.findById(link.studentUserId).orElseThrow {
-            ApiException("NOT_FOUND", "student not found", HttpStatus.NOT_FOUND)
-        }
-        link.status = "active"
-        link.requestCode = null
-        link.approvedAt = LocalDateTime.now()
-        link.approvedBy = reviewerId
-        parentStudentLinkRepository.save(link)
-        return link.toView(parent, student)
-    }
-
-    @Transactional
-    fun rejectLink(linkId: String, reviewerId: String): ParentLinkView {
-        val link = parentStudentLinkRepository.findById(linkId).orElseThrow {
-            ApiException("NOT_FOUND", "link not found", HttpStatus.NOT_FOUND)
-        }
-        val parent = userRepository.findById(link.parentUserId).orElseThrow {
-            ApiException("NOT_FOUND", "parent not found", HttpStatus.NOT_FOUND)
-        }
-        val student = userRepository.findById(link.studentUserId).orElseThrow {
-            ApiException("NOT_FOUND", "student not found", HttpStatus.NOT_FOUND)
-        }
-        link.status = "rejected"
-        link.requestCode = null
-        link.approvedAt = LocalDateTime.now()
-        link.approvedBy = reviewerId
-        parentStudentLinkRepository.save(link)
-        return link.toView(parent, student)
-    }
+    // rejectLink 폐기.
 
     @Transactional
     fun deactivate(linkId: String) {
@@ -214,11 +130,6 @@ class ParentLinkService(
         throw ApiException("INVALID_REQUEST", "$label identifier required", HttpStatus.BAD_REQUEST)
     }
 
-    private fun generateRequestCode(): String {
-        val value = (100000..999999).random()
-        return value.toString()
-    }
-
     private fun ParentStudentLinkEntity.toView(parent: UserEntity, student: UserEntity): ParentLinkView {
         return ParentLinkView(
             linkId = id,
@@ -228,7 +139,6 @@ class ParentLinkService(
             studentLoginId = student.email,
             studentName = student.name,
             status = status,
-            requestCode = requestCode,
             requestedAt = requestedAt,
             approvedAt = approvedAt,
             approvedBy = approvedBy,

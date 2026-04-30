@@ -46,24 +46,6 @@ class ParentLinkController(
         return ApiResponse(success = true, data = data)
     }
 
-    @PostMapping("/admin/parents/links/{linkId}/approve")
-    fun approveLink(@PathVariable linkId: String): ApiResponse<ParentLinkView> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
-        val reviewerId = SecurityUtils.currentUserId()
-            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
-        val data = parentLinkService.approveLink(linkId, reviewerId)
-        return ApiResponse(success = true, data = data)
-    }
-
-    @PostMapping("/admin/parents/links/{linkId}/reject")
-    fun rejectLink(@PathVariable linkId: String): ApiResponse<ParentLinkView> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
-        val reviewerId = SecurityUtils.currentUserId()
-            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
-        val data = parentLinkService.rejectLink(linkId, reviewerId)
-        return ApiResponse(success = true, data = data)
-    }
-
     @GetMapping("/parents/links")
     fun myLinks(): ApiResponse<List<ParentLinkView>> {
         val userId = SecurityUtils.currentUserId()
@@ -72,24 +54,9 @@ class ParentLinkController(
         return ApiResponse(success = true, data = data)
     }
 
-    @PostMapping("/parents/links/request")
-    fun requestLink(@Valid @RequestBody request: ParentLinkRequestCodeRequest): ApiResponse<ParentLinkView> {
-        val userId = SecurityUtils.currentUserId()
-            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
-        if (!SecurityUtils.hasAnyRole("PARENT")) {
-            throw ApiException("FORBIDDEN", "parent role required", HttpStatus.FORBIDDEN)
-        }
-        val data = parentLinkService.requestLink(userId, request)
-        return ApiResponse(success = true, data = data)
-    }
-
-    @PostMapping("/students/links/confirm")
-    fun confirmLink(@Valid @RequestBody request: ParentLinkConfirmRequest): ApiResponse<ParentLinkView> {
-        val userId = SecurityUtils.currentUserId()
-            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
-        val data = parentLinkService.confirmLink(userId, request)
-        return ApiResponse(success = true, data = data)
-    }
+    // 폐기됨: /v1/parents/links/request, /v1/students/links/confirm,
+    //         /v1/admin/parents/links/{id}/approve, /v1/admin/parents/links/{id}/reject
+    // 학부모 회원가입 시 학생 정보(이름·휴대폰) 일치하면 자동 연결되는 정책으로 통일.
 
     @DeleteMapping("/admin/parents/links/{linkId}")
     fun deleteLink(@PathVariable linkId: String): ApiResponse<Map<String, String>> {

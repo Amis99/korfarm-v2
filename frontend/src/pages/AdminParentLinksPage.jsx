@@ -4,26 +4,13 @@ import { useAdminList } from "../hooks/useAdminList";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/admin-detail.css";
 
-const SAMPLE_LINKS = [
-  {
-    linkId: "pl_001",
-    parentLoginId: "parent01",
-    studentLoginId: "student01",
-    studentName: "김하린",
-    status: "pending",
-    requestCode: "482931",
-    createdAt: "2026-01-24T10:12:00+09:00",
-  },
-  {
-    linkId: "pl_002",
-    parentLoginId: "parent02",
-    studentLoginId: "student02",
-    studentName: "박민준",
-    status: "active",
-    requestCode: null,
-    createdAt: "2026-01-21T09:30:00+09:00",
-  },
-];
+/**
+ * 학부모 연결 관리 (어드민)
+ * 정책: 학부모 회원가입 시 학생 정보(이름·휴대폰)가 정확히 일치하면 즉시 자동 연결.
+ *  - "승인 대기"·"승인"·"거절" 같은 잔재 흐름은 모두 제거.
+ *  - 어드민은 (1) 직접 연결 생성, (2) 현황 확인, (3) 해제 만 가능.
+ */
+const SAMPLE_LINKS = [];
 
 const mapLinks = (items) =>
   items.map((item) => ({
@@ -32,7 +19,6 @@ const mapLinks = (items) =>
     studentLoginId: item.student_login_id ?? item.studentLoginId,
     studentName: item.student_name ?? item.studentName,
     status: item.status,
-    requestCode: item.request_code ?? item.requestCode,
     createdAt: item.created_at ?? item.createdAt,
   }));
 
@@ -40,10 +26,6 @@ const formatStatus = (status) => {
   switch (status) {
     case "active":
       return "연결됨";
-    case "pending":
-      return "승인 대기";
-    case "rejected":
-      return "거절";
     case "inactive":
       return "해제";
     default:
@@ -73,7 +55,7 @@ function AdminParentLinksPage() {
   }, [data]);
 
   const stats = useMemo(() => {
-    const summary = { active: 0, pending: 0, rejected: 0, inactive: 0 };
+    const summary = { active: 0, inactive: 0 };
     rows.forEach((row) => {
       summary[row.status] = (summary[row.status] || 0) + 1;
     });
@@ -115,25 +97,15 @@ function AdminParentLinksPage() {
     }
   };
 
-  const handleAction = async (linkId, action) => {
+  const handleDeactivate = async (linkId) => {
     setActionError("");
+    if (!window.confirm("이 연결을 해제하시겠습니까?")) return;
     setActionLoading(true);
     try {
-      let result = null;
-      if (action === "deactivate") {
-        await apiDelete(`/v1/admin/parents/links/${linkId}`);
-        result = { link_id: linkId, status: "inactive" };
-      } else if (action === "approve") {
-        result = await apiPost(`/v1/admin/parents/links/${linkId}/approve`);
-      } else if (action === "reject") {
-        result = await apiPost(`/v1/admin/parents/links/${linkId}/reject`);
-      }
-      if (result) {
-        const mapped = mapLinks([result])[0];
-        setRows((prev) =>
-          prev.map((row) => (row.linkId === linkId ? { ...row, ...mapped } : row))
-        );
-      }
+      await apiDelete(`/v1/admin/parents/links/${linkId}`);
+      setRows((prev) =>
+        prev.map((row) => (row.linkId === linkId ? { ...row, status: "inactive" } : row))
+      );
     } catch (err) {
       setActionError(err.message);
     } finally {
@@ -148,7 +120,11 @@ function AdminParentLinksPage() {
           <h1>학부모 연결 관리</h1>
         </div>
 
-        <div className="admin-detail-grid">
+        <p className="admin-detail-note" style={{ marginTop: 0 }}>
+          학부모가 회원가입 시 학생 이름·휴대폰을 정확히 입력하면 자동 연결됩니다.
+          어드민은 직접 연결 생성과 해제만 합니다.
+        </p>
+        <div className="admin-detail-grid" style={{ gridTemplateColumns: "1fr 2fr" }}>
           <div className="admin-detail-card">
             <h2>연결 생성</h2>
             <div className="admin-detail-toolbar">
@@ -189,8 +165,8 @@ function AdminParentLinksPage() {
                 <button type="button" className={`admin-filter ${statusFilter === "active" ? "active" : ""}`} onClick={() => setStatusFilter("active")}>
                   연결됨 {stats.active}
                 </button>
-                <button type="button" className={`admin-filter ${statusFilter === "pending" ? "active" : ""}`} onClick={() => setStatusFilter("pending")}>
-                  승인 대기 {stats.pending}
+                <button type="button" className={`admin-filter ${statusFilter === "inactive" ? "active" : ""}`} onClick={() => setStatusFilter("inactive")}>
+                  해제 {stats.inactive || 0}
                 </button>
               </div>
             </div>
@@ -203,7 +179,6 @@ function AdminParentLinksPage() {
                   <th>학생</th>
                   <th>학생 이름</th>
                   <th>상태</th>
-                  <th>요청 코드</th>
                   <th>조치</th>
                 </tr>
               </thead>
@@ -214,34 +189,19 @@ function AdminParentLinksPage() {
                     <td>{row.studentLoginId}</td>
                     <td>{row.studentName || "-"}</td>
                     <td>{formatStatus(row.status)}</td>
-                    <td>{row.requestCode || "-"}</td>
                     <td>
-                      <div className="admin-detail-actions">
-                        <button
-                          className="admin-detail-btn"
-                          type="button"
-                          onClick={() => handleAction(row.linkId, "approve")}
-                          disabled={actionLoading}
-                        >
-                          승인
-                        </button>
+                      {row.status === "active" ? (
                         <button
                           className="admin-detail-btn secondary"
                           type="button"
-                          onClick={() => handleAction(row.linkId, "reject")}
-                          disabled={actionLoading}
-                        >
-                          거절
-                        </button>
-                        <button
-                          className="admin-detail-btn secondary"
-                          type="button"
-                          onClick={() => handleAction(row.linkId, "deactivate")}
+                          onClick={() => handleDeactivate(row.linkId)}
                           disabled={actionLoading}
                         >
                           해제
                         </button>
-                      </div>
+                      ) : (
+                        <span className="admin-detail-note" style={{ margin: 0, color: "var(--admin-muted)" }}>—</span>
+                      )}
                     </td>
                   </tr>
                 ))}

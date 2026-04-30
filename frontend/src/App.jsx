@@ -27,7 +27,6 @@ const SubscriptionPage = lazy(() => import("./pages/SubscriptionPage"));
 
 const RankingPage = lazy(() => import("./pages/RankingPage"));
 const ParentLinksPage = lazy(() => import("./pages/ParentLinksPage"));
-const StudentLinkConfirmPage = lazy(() => import("./pages/StudentLinkConfirmPage"));
 
 const DailyLearningPage = lazy(() => import("./pages/DailyLearningPage"));
 const DailyQuizPage = lazy(() => import("./pages/DailyQuizPage"));
@@ -215,7 +214,6 @@ function App() {
           <Route path="/subscription" element={P(<SubscriptionPage />)} />
           <Route path="/ranking" element={P(<RankingPage />)} />
           <Route path="/parents/links" element={P(<ParentLinksPage />)} />
-          <Route path="/students/links/confirm" element={P(<StudentLinkConfirmPage />)} />
           <Route path="/daily" element={P(<DailyLearningPage />)} />
           <Route path="/daily-quiz" element={P(<DailyQuizPage />)} />
           <Route path="/daily-reading" element={P(<DailyReadingPage />)} />
