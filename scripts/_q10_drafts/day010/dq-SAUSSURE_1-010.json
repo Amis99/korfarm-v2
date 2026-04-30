@@ -1,0 +1,128 @@
+{
+  "contentId": "dq-SAUSSURE_1-010",
+  "questionId": "dq-SAUSSURE_1-010-10",
+  "level": "SAUSSURE_1",
+  "grade": "초1",
+  "competencyKeyword": "할머니 댁 방문의 사실관계 이해",
+  "stem": "글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      { "id": "p1", "text": "우리는 시골 할머니 댁에 놀러 갔습니다. 할머니께서는 버스 정류장까지 마중을 나오셨습니다. 저녁에는 다 함께 맛있는 고기도 먹고 신나게 노래도 불렀습니다." }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "내가 정류장까지 할머니를 마중 나갔어요.",
+      "isCorrect": true,
+      "wrongVector": {},
+      "propositions": [
+        {
+          "propId": "A1",
+          "text": "마중 나간 사람은 나다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "할머니께서는 버스 정류장까지 마중을 나오셨습니다" }
+          ]
+        },
+        {
+          "propId": "A2",
+          "text": "할머니가 마중을 받았다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "할머니께서는 버스 정류장까지 마중을 나오셨습니다" }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "시골 할머니 댁에 놀러 갔어요.",
+      "isCorrect": false,
+      "wrongVector": {
+        "문장 독해력": 0.5,
+        "선택지 분석 및 전략 수립 능력": 0.3,
+        "어휘력": 0.2
+      },
+      "propositions": [
+        {
+          "propId": "B1",
+          "text": "할머니 댁에 놀러 갔다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "우리는 시골 할머니 댁에 놀러 갔습니다" }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "C",
+      "text": "할머니께서 정류장까지 마중을 나오셨어요.",
+      "isCorrect": false,
+      "wrongVector": {
+        "문장 독해력": 0.5,
+        "선택지 분석 및 전략 수립 능력": 0.3,
+        "어휘력": 0.2
+      },
+      "propositions": [
+        {
+          "propId": "C1",
+          "text": "할머니가 마중을 나오셨다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "할머니께서는 버스 정류장까지 마중을 나오셨습니다" }
+          ]
+        },
+        {
+          "propId": "C2",
+          "text": "마중 나오신 곳은 정류장이다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "버스 정류장까지 마중을 나오셨습니다" }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "D",
+      "text": "저녁에 함께 고기를 먹고 노래를 불렀어요.",
+      "isCorrect": false,
+      "wrongVector": {
+        "어휘력": 0.4,
+        "문장 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      },
+      "propositions": [
+        {
+          "propId": "D1",
+          "text": "저녁에 고기를 먹었다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "저녁에는 다 함께 맛있는 고기도 먹고" }
+          ]
+        },
+        {
+          "propId": "D2",
+          "text": "함께 노래도 불렀다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "신나게 노래도 불렀습니다" }
+          ]
+        }
+      ]
+    }
+  ],
+  "competencyVector": {
+    "선택지 분석 및 전략 수립 능력": 0.5,
+    "문장 독해력": 0.3,
+    "어휘력": 0.2
+  },
+  "explanation": "지문은 '할머니께서 정류장까지 마중을 나오셨다'고 했습니다. 마중을 나간 사람과 받은 사람을 뒤바꾼 A는 Who/Whose 함정입니다."
+}

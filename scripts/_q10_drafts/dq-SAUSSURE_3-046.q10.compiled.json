@@ -1,0 +1,142 @@
+{
+  "id": "dq-SAUSSURE_3-046-10",
+  "type": "CHOICE_COMPLEX_OX",
+  "questionKind": "CHOICE_ANALYSIS",
+  "competency": "국어사전의 단어 배열",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      {
+        "id": "p1",
+        "text": "우리가 책을 읽다가 모르는 어려운 낱말의 정확하고 뜻깊은 자세한 의미를 제대로 찾을 때 유용하게 사용하는 두꺼운 국어사전은, 놀랍게도 모든 단어가 우리가 잘 아는 편리한 순서대로, 즉 가, 나, 다 이런 올바르고 규칙적인 차례대로 차곡차곡 잘 정리되어 있습니다. 예를 들어 '사과'와 '포도'라는 단어 친구를 사전에서 찾으려면, 한글 글자 '사'가 '포'보다 자음의 규칙 순서에서 훨씬 먼저 나오기 때문에 우리는 사전의 끝이 아니라 훨씬 앞쪽 부분에서 '사과'를 금방 쉽고 빠르게 찾아낼 수 있습니다. 평소에 학교나 집에서 뜻을 잘 모르는 낱말을 책에서 만날 때마다 이 무겁고 알찬 사전을 내 손으로 펼쳐서 하나하나 직접 공책에 적으며 찾아보는 좋은 습관을 기르면, 나의 새로운 어휘력과 낱말 실력이 나무처럼 무럭무럭 뛰어나게 자라나고 길고 어려운 글을 예전보다 훨씬 더 잘 완벽하게 이해할 수 있습니다."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "국어사전에서 '사과'는 '포도'보다 사전 끝쪽에서 찾을 수 있다.",
+      "propositions": [
+        {
+          "propId": "A1",
+          "text": "'사과'는 사전 끝쪽에 있다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 231,
+              "end": 279
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "국어사전은 가, 나, 다 순서로 단어가 정리되어 있다.",
+      "propositions": [
+        {
+          "propId": "B1",
+          "text": "가나다 순으로 정리된다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 103,
+              "end": 145
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "어휘력": 0.4,
+        "비문학 배경지식": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "C",
+      "text": "'사'가 '포'보다 자음 순서에서 먼저 나온다.",
+      "propositions": [
+        {
+          "propId": "C1",
+          "text": "'사'가 '포'보다 먼저 나온다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 184,
+              "end": 226
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "구조 독해력": 0.4,
+        "어휘력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "D",
+      "text": "사전을 자주 찾아보면 어휘력이 자라난다.",
+      "propositions": [
+        {
+          "propId": "D1",
+          "text": "사전 활용은 어휘력 향상이다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 373,
+              "end": 411
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "비문학 배경지식": 0.4,
+        "구조 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "E",
+      "text": "사전을 활용하면 어려운 글을 더 잘 이해할 수 있다.",
+      "propositions": [
+        {
+          "propId": "E1",
+          "text": "사전 활용으로 글 이해가 좋아진다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 412,
+              "end": 449
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "논리 사고력": 0.4,
+        "구조 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    }
+  ],
+  "explanation": "지문은 '사과는 사전 앞쪽에서 빨리 찾을 수 있다'고 했습니다. 이를 '끝쪽에서 찾는다'로 뒤집은 A는 위치를 정반대로 만든 순서/방향 함정입니다.",
+  "scoring": {
+    "correctDeltaSec": 20,
+    "wrongDeltaSec": -40
+  },
+  "competencyVector": {
+    "선택지 분석 및 전략 수립 능력": 0.5,
+    "구조 독해력": 0.3,
+    "어휘력": 0.2
+  }
+}

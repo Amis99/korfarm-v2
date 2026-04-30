@@ -234,7 +234,7 @@ export default function ChoiceJudgementForm({ editor, focusPath }) {
                           {(ch.propositions || []).map((pr, pri) => {
                             const prPath = `${chPath}.propositions[${pri}]`;
                             return (
-                              <div key={pr.propId || pri} style={{ marginBottom: 8, padding: 8, background: "#161d18", borderRadius: 6 }}>
+                              <div key={pr.propId || pri} style={{ marginBottom: 8, padding: 8, background: "var(--panel)", borderRadius: 6 }}>
                                 <div className="ce-form-row">
                                   <input
                                     className="ce-form-input"

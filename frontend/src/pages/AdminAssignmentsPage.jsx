@@ -493,7 +493,7 @@ function AdminAssignmentsPage() {
                 ))}
                 {!loading && filteredAssignments.length === 0 && (
                   <tr>
-                    <td colSpan={4} style={{ textAlign: "center", color: "#a6b6a9", padding: 24 }}>
+                    <td colSpan={4} style={{ textAlign: "center", color: "var(--muted)", padding: 24 }}>
                       과제가 없습니다.
                     </td>
                   </tr>
@@ -565,7 +565,7 @@ function AdminAssignmentsPage() {
                 ))}
                 {!feedbackLoading && filteredFeedback.length === 0 && (
                   <tr>
-                    <td colSpan={5} style={{ textAlign: "center", color: "#a6b6a9", padding: 24 }}>
+                    <td colSpan={5} style={{ textAlign: "center", color: "var(--muted)", padding: 24 }}>
                       제출물이 없습니다.
                     </td>
                   </tr>
@@ -661,7 +661,7 @@ function AdminAssignmentsPage() {
                         checked={formData.selectedContentIds.includes(item.contentId)}
                         onChange={() => toggleContent(item.contentId)}
                       />
-                      <span style={{ color: "#a6b6a9", fontSize: 11, minWidth: 70 }}>{item.category}</span>
+                      <span style={{ color: "var(--muted)", fontSize: 11, minWidth: 70 }}>{item.category}</span>
                       <span>{item.title}</span>
                     </label>
                   ))}

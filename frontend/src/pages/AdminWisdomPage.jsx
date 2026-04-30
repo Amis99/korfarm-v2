@@ -103,27 +103,36 @@ function AdminWisdomPage() {
 
   return (
     <AdminLayout>
-      <div className="admin-topbar">
-        <div>
-          <h1>지식과 지혜 관리</h1>
-          <p>학생 글 목록과 첨삭 관리</p>
+      <div className="admin-detail-wrap">
+        <div className="admin-detail-header">
+          <div>
+            <h1>지식과 지혜 관리</h1>
+            <p className="admin-detail-subtitle">학생 글 목록과 첨삭 관리</p>
+          </div>
         </div>
-      </div>
 
-      <section style={{ padding: "0 24px" }}>
+        <div className="admin-detail-card">
             <div style={{ display: "flex", gap: 10, marginBottom: 16, flexWrap: "wrap", alignItems: "center" }}>
               <select
                 className="wis-filter-select"
                 value={levelId}
                 onChange={(e) => { setLevelId(e.target.value); setPage(1); }}
+                style={{
+                  padding: "8px 12px",
+                  border: "1px solid var(--admin-stroke)",
+                  borderRadius: 8,
+                  background: "var(--admin-panel)",
+                  color: "var(--admin-ink)",
+                  fontSize: 13,
+                  fontFamily: "inherit",
+                }}
               >
                 {LEVEL_OPTIONS.map((l) => (
                   <option key={l.id} value={l.id}>{l.label}</option>
                 ))}
               </select>
               <button
-                className="admin-action"
-                style={{ background: "#8e44ad" }}
+                className="admin-detail-btn"
                 disabled={selected.size === 0 || batchRunning}
                 onClick={handleBatch}
               >
@@ -132,7 +141,7 @@ function AdminWisdomPage() {
               {batchMsg && (
                 <span style={{
                   fontSize: 13,
-                  color: batchMsg.startsWith("오류") ? "#e74c3c" : "#6da475",
+                  color: batchMsg.startsWith("오류") ? "#c0392b" : "var(--admin-accent-strong)",
                 }}>
                   {batchMsg}
                 </span>
@@ -140,12 +149,12 @@ function AdminWisdomPage() {
             </div>
 
             {loading ? (
-              <p style={{ color: "#888" }}>불러오는 중...</p>
+              <p style={{ color: "var(--admin-muted)" }}>불러오는 중...</p>
             ) : visible.length === 0 ? (
-              <p style={{ color: "#888" }}>제출물이 없습니다.</p>
+              <p style={{ color: "var(--admin-muted)" }}>제출물이 없습니다.</p>
             ) : (
               <>
-                <table className="admin-table" style={{ width: "100%" }}>
+                <table className="admin-detail-table" style={{ width: "100%" }}>
                   <thead>
                     <tr>
                       <th style={{ width: 36 }}>
@@ -160,7 +169,7 @@ function AdminWisdomPage() {
                       <th>#</th>
                       <th>레벨</th>
                       <th>주제</th>
-                      <th>��성자</th>
+                      <th>작성자</th>
                       <th>유형</th>
                       <th>피드백</th>
                       <th>상태</th>
@@ -192,7 +201,7 @@ function AdminWisdomPage() {
                           <td>{post.submission_type === "manuscript" ? "원고지" : "업로드"}</td>
                           <td>
                             <span style={{
-                              color: post.has_feedback ? "#6da475" : "#bbb",
+                              color: post.has_feedback ? "var(--admin-accent-strong)" : "var(--admin-muted)",
                               fontWeight: 700,
                               fontSize: 13,
                             }}>
@@ -208,7 +217,7 @@ function AdminWisdomPage() {
                 </table>
 
                 {totalPages > 1 && (
-                  <div className="wis-paging" style={{ marginBottom: 24 }}>
+                  <div className="admin-pagination" style={{ marginBottom: 24 }}>
                     <button disabled={page <= 1} onClick={() => setPage(page - 1)}>이전</button>
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
                       <button key={p} className={p === page ? "active" : ""} onClick={() => setPage(p)}>
@@ -220,7 +229,8 @@ function AdminWisdomPage() {
                 )}
               </>
             )}
-      </section>
+        </div>
+      </div>
     </AdminLayout>
   );
 }

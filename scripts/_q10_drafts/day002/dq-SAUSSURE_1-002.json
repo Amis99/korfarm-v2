@@ -1,0 +1,128 @@
+{
+  "contentId": "dq-SAUSSURE_1-002",
+  "questionId": "dq-SAUSSURE_1-002-10",
+  "level": "SAUSSURE_1",
+  "grade": "초1",
+  "competencyKeyword": "주체와 객체 구분",
+  "stem": "글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      { "id": "p1", "text": "할머니와 시장에 구경을 갔습니다. 시장에서는 싱싱한 채소와 팔딱거리는 물고기를 팝니다. 할머니께서 사과를 사 주셨습니다." }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "내가 할머니께 사과를 사 드렸어요.",
+      "isCorrect": true,
+      "wrongVector": {},
+      "propositions": [
+        {
+          "propId": "A1",
+          "text": "내가 사과를 샀다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "할머니께서 사과를 사 주셨습니다" }
+          ]
+        },
+        {
+          "propId": "A2",
+          "text": "할머니가 사과를 받았다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "할머니께서 사과를 사 주셨습니다" }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "할머니와 함께 시장에 갔어요.",
+      "isCorrect": false,
+      "wrongVector": {
+        "문장 독해력": 0.5,
+        "선택지 분석 및 전략 수립 능력": 0.3,
+        "어휘력": 0.2
+      },
+      "propositions": [
+        {
+          "propId": "B1",
+          "text": "시장에 갔다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "시장에 구경을 갔습니다" }
+          ]
+        },
+        {
+          "propId": "B2",
+          "text": "할머니와 함께 갔다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "할머니와 시장에 구경을 갔습니다" }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "C",
+      "text": "시장에서 싱싱한 채소를 팔아요.",
+      "isCorrect": false,
+      "wrongVector": {
+        "어휘력": 0.4,
+        "문장 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      },
+      "propositions": [
+        {
+          "propId": "C1",
+          "text": "시장에서 채소를 판다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "시장에서는 싱싱한 채소와 팔딱거리는 물고기를 팝니다" }
+          ]
+        },
+        {
+          "propId": "C2",
+          "text": "그 채소는 싱싱하다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "싱싱한 채소" }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "D",
+      "text": "할머니께서 나에게 사과를 사 주셨어요.",
+      "isCorrect": false,
+      "wrongVector": {
+        "문장 독해력": 0.5,
+        "선택지 분석 및 전략 수립 능력": 0.3,
+        "어휘력": 0.2
+      },
+      "propositions": [
+        {
+          "propId": "D1",
+          "text": "할머니가 사과를 사 주셨다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "할머니께서 사과를 사 주셨습니다" }
+          ]
+        }
+      ]
+    }
+  ],
+  "competencyVector": {
+    "선택지 분석 및 전략 수립 능력": 0.5,
+    "문장 독해력": 0.3,
+    "어휘력": 0.2
+  },
+  "explanation": "지문은 '할머니께서 사과를 사 주셨다'고 했습니다. 사과를 산 사람은 할머니이고 받은 사람은 화자입니다. 이를 뒤바꾼 A는 주체와 객체를 왜곡한 Who/Whose 함정입니다."
+}

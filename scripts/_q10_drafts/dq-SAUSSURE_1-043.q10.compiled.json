@@ -1,0 +1,131 @@
+{
+  "id": "dq-SAUSSURE_1-043-10",
+  "type": "CHOICE_COMPLEX_OX",
+  "questionKind": "CHOICE_ANALYSIS",
+  "competency": "동진이의 발표 동물 순서",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      {
+        "id": "p1",
+        "text": "동진이가 앞에 나가 씩씩하게 발표했습니다. 가장 먼저 예쁜 물고기를 설명했습니다. 그다음 팔랑팔랑 날아다니는 나비를 그렸습니다. 마지막으로 뚜벅뚜벅 걷는 낙타 사진을 보여주었습니다."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "동진이는 처음에 낙타 사진을 보여주었다.",
+      "propositions": [
+        {
+          "propId": "A1",
+          "text": "낙타 사진을 가장 먼저 보여줬다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 24,
+              "end": 44
+            }
+          ]
+        },
+        {
+          "propId": "A2",
+          "text": "낙타가 처음 순서다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 72,
+              "end": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "처음에는 물고기를 설명했다.",
+      "propositions": [
+        {
+          "propId": "B1",
+          "text": "처음 순서는 물고기다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 24,
+              "end": 44
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "어휘력": 0.4,
+        "문장 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "C",
+      "text": "그다음 나비를 그렸다.",
+      "propositions": [
+        {
+          "propId": "C1",
+          "text": "두 번째는 나비 그리기다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 46,
+              "end": 70
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "문장 독해력": 0.4,
+        "구조 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "D",
+      "text": "마지막에 낙타 사진을 보여주었다.",
+      "propositions": [
+        {
+          "propId": "D1",
+          "text": "마지막은 낙타 사진이다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 72,
+              "end": 100
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "구조 독해력": 0.4,
+        "어휘력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    }
+  ],
+  "explanation": "지문은 '맨 처음 한 일은 물고기 설명이고 낙타 사진은 마지막'이라고 했습니다. 낙타를 처음으로 만든 A는 순서/방향 함정입니다.",
+  "scoring": {
+    "correctDeltaSec": 20,
+    "wrongDeltaSec": -40
+  },
+  "competencyVector": {
+    "선택지 분석 및 전략 수립 능력": 0.5,
+    "문장 독해력": 0.3,
+    "구조 독해력": 0.2
+  }
+}

@@ -63,12 +63,12 @@ export default function ReadingPreview({ content, onClickPath, focusPath }) {
         data-editor-path="passage"
         onClick={() => onClickPath("passage")}
       >
-        <div style={{ fontSize: 12, color: "#6a7a6e", marginBottom: 6 }}>지문</div>
+        <div style={{ fontSize: 12, color: "var(--muted)", marginBottom: 6 }}>지문</div>
         <div className="ce-preview-passage" id="ce-passage-container">
           {paragraphs.map((para) => (
             <p key={para.id} data-paragraph-id={para.id}>{renderParagraph(para).props.children}</p>
           ))}
-          {paragraphs.length === 0 && <span style={{ color: "#6a7a6e" }}>(지문 없음)</span>}
+          {paragraphs.length === 0 && <span style={{ color: "var(--muted)" }}>(지문 없음)</span>}
         </div>
       </div>
 
@@ -79,12 +79,12 @@ export default function ReadingPreview({ content, onClickPath, focusPath }) {
           data-editor-path="intensive"
           onClick={() => onClickPath("intensive")}
         >
-          <div style={{ fontSize: 12, color: "#6a7a6e", marginBottom: 6 }}>
+          <div style={{ fontSize: 12, color: "var(--muted)", marginBottom: 6 }}>
             정독 타임라인 ({timeline.length}단계)
           </div>
           {timeline.map((step, i) => (
             <div key={step.stepId || i} style={{ fontSize: 12, padding: "4px 0", borderBottom: "1px solid #1a2420" }}>
-              <strong style={{ color: "#a6b6a9" }}>Step {i + 1}</strong>
+              <strong style={{ color: "var(--muted)" }}>Step {i + 1}</strong>
               {step.highlight && <span style={{ color: "#ff7f2a", marginLeft: 8 }}>하이라이트</span>}
               {step.question && (
                 <span style={{ color: "#4ecb71", marginLeft: 8 }}>
@@ -103,11 +103,11 @@ export default function ReadingPreview({ content, onClickPath, focusPath }) {
           data-editor-path="recall"
           onClick={() => onClickPath("recall")}
         >
-          <div style={{ fontSize: 12, color: "#6a7a6e", marginBottom: 6 }}>
+          <div style={{ fontSize: 12, color: "var(--muted)", marginBottom: 6 }}>
             복기 카드 ({recall.cards.length}개)
           </div>
           {recall.cards.map((card, i) => (
-            <div key={card.id || i} style={{ fontSize: 12, padding: "3px 0", color: "#a6b6a9" }}>
+            <div key={card.id || i} style={{ fontSize: 12, padding: "3px 0", color: "var(--muted)" }}>
               {i + 1}. {(card.text || "").slice(0, 50)}{card.text?.length > 50 ? "..." : ""}
             </div>
           ))}
@@ -121,7 +121,7 @@ export default function ReadingPreview({ content, onClickPath, focusPath }) {
           data-editor-path="confirm"
           onClick={() => onClickPath("confirm")}
         >
-          <div style={{ fontSize: 12, color: "#6a7a6e", marginBottom: 6 }}>
+          <div style={{ fontSize: 12, color: "var(--muted)", marginBottom: 6 }}>
             확인 문항 ({confirm.questions.length}개)
           </div>
           {confirm.questions.map((q, i) => (

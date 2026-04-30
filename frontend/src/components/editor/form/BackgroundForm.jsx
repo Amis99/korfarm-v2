@@ -136,7 +136,7 @@ export default function BackgroundForm({ editor, focusPath }) {
             <div className="ce-form-section">
               <label className="ce-form-label">
                 지문 본문
-                <span style={{ fontWeight: 400, marginLeft: 8, color: lenWarning ? "#ff6b6b" : "#6a7a6e" }}>
+                <span style={{ fontWeight: 400, marginLeft: 8, color: lenWarning ? "#ff6b6b" : "var(--muted)" }}>
                   ({textLen}자{lenWarning ? " — 300~500자 권장" : ""})
                 </span>
               </label>

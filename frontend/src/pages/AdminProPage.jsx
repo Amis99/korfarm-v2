@@ -625,19 +625,30 @@ function AdminProPage() {
      ═══════════════════════════════════════════════════════ */
   return (
     <AdminLayout>
-      <div className="ts-page ts-admin ap-page">
-        <header className="ap-list-header">
+      <div className="admin-detail-wrap">
+        <div className="admin-detail-header">
           <h1>프로 모드 관리</h1>
-          <select
-            className="ap-level-dropdown"
-            value={levelFilter}
-            onChange={(e) => setLevelFilter(e.target.value)}
-          >
-            {COURSE_LEVELS.map((lv) => (
-              <option key={lv.id} value={lv.id}>{lv.name}</option>
-            ))}
-          </select>
-        </header>
+          <div className="admin-detail-header-actions">
+            <select
+              className="ap-level-dropdown"
+              value={levelFilter}
+              onChange={(e) => setLevelFilter(e.target.value)}
+              style={{
+                padding: "8px 12px",
+                border: "1px solid var(--admin-stroke)",
+                borderRadius: 8,
+                background: "var(--admin-panel)",
+                color: "var(--admin-ink)",
+                fontSize: 13,
+                fontFamily: "inherit",
+              }}
+            >
+              {COURSE_LEVELS.map((lv) => (
+                <option key={lv.id} value={lv.id}>{lv.name}</option>
+              ))}
+            </select>
+          </div>
+        </div>
 
         {loading ? (
           <div className="ts-center"><p>불러오는 중...</p></div>

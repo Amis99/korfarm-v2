@@ -1,0 +1,59 @@
+{
+  "contentId": "dq-SAUSSURE_1-027",
+  "questionId": "dq-SAUSSURE_1-027-10",
+  "level": "SAUSSURE_1",
+  "grade": "초1",
+  "competencyKeyword": "친구들의 모둠 활동",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      { "id": "p1", "text": "모둠 시간에 지훈이는 모르는 단어를 국어사전에서 찾았습니다. 영희는 실수한 친구에게 다정하게 위로를 건넸습니다. 반면 수현이는 화가 나서 친구에게 미운 말을 던졌습니다." }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "영희는 친구에게 미운 말을 던졌다.",
+      "isCorrect": true,
+      "wrongVector": {},
+      "propositions": [
+        { "propId": "A1", "text": "미운 말을 한 친구는 영희다.", "oxAnswer": "X", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "영희는 실수한 친구에게 다정하게 위로를 건넸습니다" }] },
+        { "propId": "A2", "text": "영희가 미운 말을 했다.", "oxAnswer": "X", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "수현이는 화가 나서 친구에게 미운 말을 던졌습니다" }] }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "지훈이는 단어를 국어사전에서 찾았다.",
+      "isCorrect": false,
+      "wrongVector": { "어휘력": 0.4, "문장 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "B1", "text": "지훈이는 사전을 찾았다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "지훈이는 모르는 단어를 국어사전에서 찾았습니다" }] }
+      ]
+    },
+    {
+      "choiceId": "C",
+      "text": "영희는 실수한 친구를 위로해 주었다.",
+      "isCorrect": false,
+      "wrongVector": { "문장 독해력": 0.4, "구조 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "C1", "text": "영희는 친구를 위로했다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "영희는 실수한 친구에게 다정하게 위로를 건넸습니다" }] }
+      ]
+    },
+    {
+      "choiceId": "D",
+      "text": "수현이는 화가 나서 미운 말을 했다.",
+      "isCorrect": false,
+      "wrongVector": { "구조 독해력": 0.4, "어휘력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "D1", "text": "수현이는 미운 말을 했다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "수현이는 화가 나서 친구에게 미운 말을 던졌습니다" }] }
+      ]
+    }
+  ],
+  "competencyVector": { "선택지 분석 및 전략 수립 능력": 0.5, "문장 독해력": 0.3, "구조 독해력": 0.2 },
+  "explanation": "지문은 '영희는 위로를 건넸고 미운 말을 한 사람은 수현이'라고 했습니다. 두 친구의 행동을 뒤바꾼 A는 Who 함정입니다."
+}

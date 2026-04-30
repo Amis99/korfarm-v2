@@ -1,0 +1,131 @@
+{
+  "id": "dq-SAUSSURE_1-036-10",
+  "type": "CHOICE_COMPLEX_OX",
+  "questionKind": "CHOICE_ANALYSIS",
+  "competency": "민호의 시간대별 관찰",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      {
+        "id": "p1",
+        "text": "민호는 호기심이 아주 많습니다. 아침에는 햇빛을 받는 강낭콩 싹을 관찰했습니다. 점심에는 어항 속 올챙이들이 헤엄치는 것을 보았습니다. 그리고 밤이 되자 마당에서 모양이 변하는 달을 구경했습니다."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "민호는 아침에 마당에서 달을 구경했다.",
+      "propositions": [
+        {
+          "propId": "A1",
+          "text": "달을 본 시간은 아침이다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 80,
+              "end": 108
+            }
+          ]
+        },
+        {
+          "propId": "A2",
+          "text": "민호는 아침에 달을 보았다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 18,
+              "end": 43
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "민호는 호기심이 아주 많다.",
+      "propositions": [
+        {
+          "propId": "B1",
+          "text": "민호는 호기심이 많다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 16
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "어휘력": 0.4,
+        "문장 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "C",
+      "text": "아침에는 강낭콩 싹을 관찰했다.",
+      "propositions": [
+        {
+          "propId": "C1",
+          "text": "아침에 강낭콩 싹을 보았다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 18,
+              "end": 43
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "문장 독해력": 0.4,
+        "구조 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "D",
+      "text": "점심에는 어항 속 올챙이를 보았다.",
+      "propositions": [
+        {
+          "propId": "D1",
+          "text": "점심에 올챙이를 보았다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 45,
+              "end": 74
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "구조 독해력": 0.4,
+        "어휘력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    }
+  ],
+  "explanation": "지문은 '달을 구경한 시간은 밤'이라고 했습니다. 시간대를 아침으로 바꾼 A는 시점을 왜곡한 함정입니다.",
+  "scoring": {
+    "correctDeltaSec": 20,
+    "wrongDeltaSec": -40
+  },
+  "competencyVector": {
+    "선택지 분석 및 전략 수립 능력": 0.5,
+    "문장 독해력": 0.3,
+    "구조 독해력": 0.2
+  }
+}

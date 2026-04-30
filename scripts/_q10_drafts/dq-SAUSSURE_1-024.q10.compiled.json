@@ -1,0 +1,131 @@
+{
+  "id": "dq-SAUSSURE_1-024-10",
+  "type": "CHOICE_COMPLEX_OX",
+  "questionKind": "CHOICE_ANALYSIS",
+  "competency": "친구들의 행동 구분",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      {
+        "id": "p1",
+        "text": "수현이는 복도에서 넘어진 동생을 따뜻하게 안아 주었습니다. 준호는 교실에서 짝꿍에게 연필을 친절하게 빌려주었습니다. 반면 서진이는 친구들 몰래 맛있는 사탕을 혼자 먹었습니다."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "준호는 짝꿍 몰래 사탕을 혼자 먹었다.",
+      "propositions": [
+        {
+          "propId": "A1",
+          "text": "사탕을 몰래 먹은 사람은 준호이다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 63
+            }
+          ]
+        },
+        {
+          "propId": "A2",
+          "text": "준호의 행동은 사탕을 몰래 먹는 것이다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 68,
+              "end": 96
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "수현이는 넘어진 동생을 안아 주었다.",
+      "propositions": [
+        {
+          "propId": "B1",
+          "text": "수현이는 동생을 안아 주었다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 31
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "어휘력": 0.4,
+        "문장 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "C",
+      "text": "준호는 짝꿍에게 연필을 빌려주었다.",
+      "propositions": [
+        {
+          "propId": "C1",
+          "text": "준호는 연필을 빌려주었다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 63
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "문장 독해력": 0.4,
+        "구조 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "D",
+      "text": "서진이는 친구들 몰래 사탕을 혼자 먹었다.",
+      "propositions": [
+        {
+          "propId": "D1",
+          "text": "서진이는 사탕을 혼자 먹었다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 68,
+              "end": 96
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "구조 독해력": 0.4,
+        "어휘력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    }
+  ],
+  "explanation": "지문은 '준호는 연필을 빌려주었고, 사탕을 몰래 먹은 것은 서진이'라고 했습니다. 두 친구의 행동을 뒤바꾼 A는 Who 함정입니다.",
+  "scoring": {
+    "correctDeltaSec": 20,
+    "wrongDeltaSec": -40
+  },
+  "competencyVector": {
+    "선택지 분석 및 전략 수립 능력": 0.5,
+    "문장 독해력": 0.3,
+    "구조 독해력": 0.2
+  }
+}

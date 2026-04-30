@@ -1,0 +1,67 @@
+{
+  "contentId": "dq-RUSSELL_3-134",
+  "questionId": "dq-RUSSELL_3-134-10",
+  "level": "RUSSELL_3",
+  "grade": "중3",
+  "competencyKeyword": "블록체인 해시 함수",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르시오.",
+  "passage": {
+    "paragraphs": [
+      { "id": "p1", "text": "블록체인에서 데이터의 조작을 막는 핵심 기술은 '해시 함수'이다. 해시 함수는 어떤 길의의 데이터를 입력해도 고정된 길이의 고유한 결과값(해시값)을 만들어낸다. 데이터가 아주 미세하게만 바뀌어도 해시값은 완전히 달라지는 '눈사태 효과' 때문에 위변조 여부를 즉시 알 수 있다. 또한 이전 블록의 해시값이 다음 블록에 포함되어 사슬처럼 연결되어 있어, 중간의 정보를 수정하려면 이후 모든 블록의 해시값을 다시 계산해야 하므로 보안성이 매우 높다." }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "데이터가 미세하게 바뀌어도 해시값은 거의 그대로 유지된다.",
+      "isCorrect": true,
+      "wrongVector": {},
+      "propositions": [
+        { "propId": "A1", "text": "해시 변동 없음이다.", "oxAnswer": "X", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "데이터가 아주 미세하게만 바뀌어도 해시값은 완전히 달라지는 '눈사태 효과' 때문에 위변조 여부를 즉시 알 수 있다" }] }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "해시 함수는 어떤 길이 데이터든 고정된 길이의 결과값을 만든다.",
+      "isCorrect": false,
+      "wrongVector": { "어휘력": 0.4, "비문학 배경지식": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "B1", "text": "고정 길이 해시다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "해시 함수는 어떤 길의의 데이터를 입력해도 고정된 길이의 고유한 결과값(해시값)을 만들어낸다" }] }
+      ]
+    },
+    {
+      "choiceId": "C",
+      "text": "눈사태 효과로 위변조 여부를 즉시 확인할 수 있다.",
+      "isCorrect": false,
+      "wrongVector": { "구조 독해력": 0.4, "논리 사고력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "C1", "text": "눈사태 효과다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "데이터가 아주 미세하게만 바뀌어도 해시값은 완전히 달라지는 '눈사태 효과' 때문에 위변조 여부를 즉시 알 수 있다" }] }
+      ]
+    },
+    {
+      "choiceId": "D",
+      "text": "이전 블록 해시값이 다음 블록에 포함돼 사슬처럼 연결된다.",
+      "isCorrect": false,
+      "wrongVector": { "비문학 배경지식": 0.4, "구조 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "D1", "text": "사슬 연결이다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "이전 블록의 해시값이 다음 블록에 포함되어 사슬처럼 연결되어 있어" }] }
+      ]
+    },
+    {
+      "choiceId": "E",
+      "text": "중간 정보를 수정하려면 이후 모든 블록 해시를 재계산해야 한다.",
+      "isCorrect": false,
+      "wrongVector": { "논리 사고력": 0.4, "구조 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "E1", "text": "재계산 필요다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "중간의 정보를 수정하려면 이후 모든 블록의 해시값을 다시 계산해야 하므로 보안성이 매우 높다" }] }
+      ]
+    }
+  ],
+  "competencyVector": { "선택지 분석 및 전략 수립 능력": 0.5, "비문학 배경지식": 0.3, "논리 사고력": 0.2 },
+  "explanation": "지문은 '미세 변경에도 해시값이 완전히 달라지는 눈사태 효과'를 강조했습니다. 이를 '해시값이 거의 그대로 유지된다'로 뒤집은 A는 부정/상대어 함정입니다."
+}

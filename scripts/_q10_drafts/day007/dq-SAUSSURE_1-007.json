@@ -1,0 +1,128 @@
+{
+  "contentId": "dq-SAUSSURE_1-007",
+  "questionId": "dq-SAUSSURE_1-007-10",
+  "level": "SAUSSURE_1",
+  "grade": "초1",
+  "competencyKeyword": "산책 시간과 행동 이해",
+  "stem": "글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      { "id": "p1", "text": "낮에 공원으로 산책을 갔습니다. 길에는 민들레꽃이 피어 있었습니다. 꽃을 꺾어 꽃병에 담았습니다." }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "밤에 공원에 가서 꽃을 꺾어 왔어요.",
+      "isCorrect": true,
+      "wrongVector": {},
+      "propositions": [
+        {
+          "propId": "A1",
+          "text": "공원에 간 시간은 밤이다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "낮에 공원으로 산책을 갔습니다" }
+          ]
+        },
+        {
+          "propId": "A2",
+          "text": "꽃을 꺾어 왔다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "꽃을 꺾어 꽃병에 담았습니다" }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "낮에 공원으로 산책을 갔어요.",
+      "isCorrect": false,
+      "wrongVector": {
+        "문장 독해력": 0.5,
+        "선택지 분석 및 전략 수립 능력": 0.3,
+        "어휘력": 0.2
+      },
+      "propositions": [
+        {
+          "propId": "B1",
+          "text": "공원에 산책을 갔다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "낮에 공원으로 산책을 갔습니다" }
+          ]
+        },
+        {
+          "propId": "B2",
+          "text": "그 시간은 낮이다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "낮에 공원으로" }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "C",
+      "text": "길에 민들레꽃이 피어 있었어요.",
+      "isCorrect": false,
+      "wrongVector": {
+        "어휘력": 0.4,
+        "문장 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      },
+      "propositions": [
+        {
+          "propId": "C1",
+          "text": "민들레꽃이 피어 있었다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "길에는 민들레꽃이 피어 있었습니다" }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "D",
+      "text": "민들레꽃을 꺾어 꽃병에 담았어요.",
+      "isCorrect": false,
+      "wrongVector": {
+        "문장 독해력": 0.4,
+        "선택지 분석 및 전략 수립 능력": 0.3,
+        "어휘력": 0.3
+      },
+      "propositions": [
+        {
+          "propId": "D1",
+          "text": "꽃을 꺾었다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "꽃을 꺾어 꽃병에 담았습니다" }
+          ]
+        },
+        {
+          "propId": "D2",
+          "text": "꽃을 꽃병에 담았다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "꽃병에 담았습니다" }
+          ]
+        }
+      ]
+    }
+  ],
+  "competencyVector": {
+    "선택지 분석 및 전략 수립 능력": 0.5,
+    "문장 독해력": 0.3,
+    "어휘력": 0.2
+  },
+  "explanation": "지문은 '낮에 공원으로 산책을 갔다'고 했습니다. 산책 시간을 '밤'으로 뒤집은 A는 부정/상대어 함정입니다."
+}

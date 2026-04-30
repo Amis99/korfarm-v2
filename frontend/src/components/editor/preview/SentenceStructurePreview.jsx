@@ -6,7 +6,7 @@ export default function SentenceStructurePreview({ content, onClickPath, focusPa
 
   return (
     <div>
-      {sentences.length === 0 && <div style={{ color: "#6a7a6e" }}>문장이 없습니다.</div>}
+      {sentences.length === 0 && <div style={{ color: "var(--muted)" }}>문장이 없습니다.</div>}
       {sentences.map((sent, si) => {
         const path = `sentences[${si}]`;
         const isActive = focusPath && focusPath.startsWith(path);
@@ -17,7 +17,7 @@ export default function SentenceStructurePreview({ content, onClickPath, focusPa
             data-editor-path={path}
             onClick={() => onClickPath(path)}
           >
-            <div style={{ fontSize: 12, color: "#6a7a6e", marginBottom: 6 }}>
+            <div style={{ fontSize: 12, color: "var(--muted)", marginBottom: 6 }}>
               문장 {si + 1} — {sent.sentenceId || ""}
             </div>
 
@@ -37,7 +37,7 @@ export default function SentenceStructurePreview({ content, onClickPath, focusPa
                 <span className="ce-preview-badge">서술어</span>
                 {rq.predicate}
                 {rq.targetRoles?.length > 0 && (
-                  <span style={{ marginLeft: 6, fontSize: 11, color: "#a6b6a9" }}>
+                  <span style={{ marginLeft: 6, fontSize: 11, color: "var(--muted)" }}>
                     → {rq.targetRoles.join(", ")}
                   </span>
                 )}
@@ -46,7 +46,7 @@ export default function SentenceStructurePreview({ content, onClickPath, focusPa
 
             {/* embeddedOrLinked 요약 */}
             {(sent.embeddedOrLinked || []).length > 0 && (
-              <div style={{ marginTop: 6, fontSize: 11, color: "#6a7a6e" }}>
+              <div style={{ marginTop: 6, fontSize: 11, color: "var(--muted)" }}>
                 절 구조: {sent.embeddedOrLinked.map((e) => `${e.type}(${e.clauseType || ""})`).join(", ")}
               </div>
             )}

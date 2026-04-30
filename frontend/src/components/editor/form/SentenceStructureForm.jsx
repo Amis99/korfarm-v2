@@ -144,7 +144,7 @@ export default function SentenceStructureForm({ editor, focusPath }) {
                 {(sent.roleQueryOrder || []).map((rq, ri) => {
                   const rqPath = `${sPath}.roleQueryOrder[${ri}]`;
                   return (
-                    <div key={ri} style={{ marginBottom: 8, padding: 8, background: "#161d18", borderRadius: 6 }}>
+                    <div key={ri} style={{ marginBottom: 8, padding: 8, background: "var(--panel)", borderRadius: 6 }}>
                       <div className="ce-form-row">
                         <div>
                           <label className="ce-form-label">서술어 토큰 ID</label>
@@ -183,7 +183,7 @@ export default function SentenceStructureForm({ editor, focusPath }) {
                 {(sent.embeddedOrLinked || []).map((cl, ci) => {
                   const clPath = `${sPath}.embeddedOrLinked[${ci}]`;
                   return (
-                    <div key={ci} style={{ marginBottom: 8, padding: 8, background: "#161d18", borderRadius: 6 }}>
+                    <div key={ci} style={{ marginBottom: 8, padding: 8, background: "var(--panel)", borderRadius: 6 }}>
                       <div className="ce-form-row">
                         <div>
                           <label className="ce-form-label">유형</label>

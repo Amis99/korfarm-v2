@@ -63,109 +63,124 @@ export default function AdminEditHistoryPage() {
 
   return (
     <AdminLayout>
-      <h2 style={{ marginBottom: 16 }}>수정 이력</h2>
+      <div className="admin-detail-wrap">
+        <div className="admin-detail-header">
+          <h1>수정 이력</h1>
+        </div>
 
-      {/* 탭 */}
-      <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
-        <button
-          className={`admin-tab-btn ${tab === "editors" ? "active" : ""}`}
-          onClick={() => { setTab("editors"); setParams({ tab: "editors" }); }}
-        >
-          관리자별
-        </button>
-        <button
-          className={`admin-tab-btn ${tab === "by-content" ? "active" : ""}`}
-          onClick={() => setTab("by-content")}
-        >
-          학습별
-        </button>
-      </div>
+        {/* 탭 */}
+        <div className="admin-detail-tabs">
+          <button
+            className={`admin-detail-tab ${tab === "editors" ? "active" : ""}`}
+            onClick={() => { setTab("editors"); setParams({ tab: "editors" }); }}
+          >
+            관리자별
+          </button>
+          <button
+            className={`admin-detail-tab ${tab === "by-content" ? "active" : ""}`}
+            onClick={() => setTab("by-content")}
+          >
+            학습별
+          </button>
+        </div>
 
-      {/* 관리자 목록 */}
-      {tab === "editors" && (
-        <div>
-          {loading ? (
-            <p style={{ color: "#8a9a8e" }}>불러오는 중...</p>
-          ) : editors.length === 0 ? (
-            <p style={{ color: "#8a9a8e" }}>수정 이력이 있는 관리자가 없습니다.</p>
-          ) : (
-            <table className="admin-table">
-              <thead>
-                <tr>
-                  <th>관리자</th>
-                  <th>아이디</th>
-                  <th>수정 횟수</th>
-                  <th>최근 수정</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {editors.map((e) => (
-                  <tr key={e.user_id || e.userId}>
-                    <td>{e.name || "-"}</td>
-                    <td style={{ fontSize: 12, color: "#8a9a8e" }}>{e.email}</td>
-                    <td>{e.edit_count ?? e.editCount}</td>
-                    <td style={{ fontSize: 12 }}>{formatDate(e.last_edit_at || e.lastEditAt)}</td>
-                    <td>
-                      <button
-                        className="admin-btn-sm"
-                        onClick={() => handleClickEditor(e.user_id || e.userId)}
-                      >
-                        이력 보기
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        <div className="admin-detail-card">
+          {/* 관리자 목록 */}
+          {tab === "editors" && (
+            <>
+              {loading ? (
+                <p style={{ color: "var(--admin-muted)" }}>불러오는 중...</p>
+              ) : editors.length === 0 ? (
+                <p style={{ color: "var(--admin-muted)" }}>수정 이력이 있는 관리자가 없습니다.</p>
+              ) : (
+                <table className="admin-detail-table">
+                  <thead>
+                    <tr>
+                      <th>관리자</th>
+                      <th>아이디</th>
+                      <th>수정 횟수</th>
+                      <th>최근 수정</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {editors.map((e) => (
+                      <tr key={e.user_id || e.userId}>
+                        <td>{e.name || "-"}</td>
+                        <td style={{ fontSize: 12, color: "var(--admin-muted)" }}>{e.email}</td>
+                        <td>{e.edit_count ?? e.editCount}</td>
+                        <td style={{ fontSize: 12 }}>{formatDate(e.last_edit_at || e.lastEditAt)}</td>
+                        <td>
+                          <button
+                            className="admin-detail-btn secondary xs"
+                            onClick={() => handleClickEditor(e.user_id || e.userId)}
+                          >
+                            이력 보기
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </>
+          )}
+
+          {/* 관리자별 이력 */}
+          {tab === "by-editor" && (
+            <>
+              <div style={{ marginBottom: 12, display: "flex", alignItems: "center", gap: 12 }}>
+                <button
+                  className="admin-detail-btn secondary xs"
+                  onClick={() => { setTab("editors"); setParams({ tab: "editors" }); }}
+                >
+                  &larr; 관리자 목록
+                </button>
+                <span style={{ color: "var(--admin-muted)" }}>관리자: {selectedEditor}</span>
+              </div>
+              {renderLogTable(logs, loading)}
+            </>
+          )}
+
+          {/* 학습별 이력 */}
+          {tab === "by-content" && (
+            <>
+              <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
+                <input
+                  className="admin-input"
+                  placeholder="콘텐츠 ID 입력"
+                  value={contentIdInput}
+                  onChange={(e) => setContentIdInput(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearchByContent()}
+                  style={{
+                    width: 300,
+                    padding: "8px 12px",
+                    border: "1px solid var(--admin-stroke)",
+                    borderRadius: 8,
+                    background: "var(--admin-panel)",
+                    color: "var(--admin-ink)",
+                    fontSize: 13,
+                  }}
+                />
+                <button className="admin-detail-btn" onClick={handleSearchByContent}>
+                  검색
+                </button>
+              </div>
+              {renderLogTable(logs, loading)}
+            </>
           )}
         </div>
-      )}
-
-      {/* 관리자별 이력 */}
-      {tab === "by-editor" && (
-        <div>
-          <div style={{ marginBottom: 12 }}>
-            <button className="admin-btn-sm" onClick={() => { setTab("editors"); setParams({ tab: "editors" }); }}>
-              &larr; 관리자 목록
-            </button>
-            <span style={{ marginLeft: 12, color: "#a6b6a9" }}>
-              관리자: {selectedEditor}
-            </span>
-          </div>
-          {renderLogTable(logs, loading)}
-        </div>
-      )}
-
-      {/* 학습별 이력 */}
-      {tab === "by-content" && (
-        <div>
-          <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-            <input
-              className="admin-input"
-              placeholder="콘텐츠 ID 입력"
-              value={contentIdInput}
-              onChange={(e) => setContentIdInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSearchByContent()}
-              style={{ width: 300 }}
-            />
-            <button className="admin-btn-sm" onClick={handleSearchByContent}>
-              검색
-            </button>
-          </div>
-          {renderLogTable(logs, loading)}
-        </div>
-      )}
+      </div>
     </AdminLayout>
   );
 }
 
 function renderLogTable(logs, loading) {
-  if (loading) return <p style={{ color: "#8a9a8e" }}>불러오는 중...</p>;
-  if (logs.length === 0) return <p style={{ color: "#8a9a8e" }}>이력이 없습니다.</p>;
+  if (loading) return <p style={{ color: "var(--admin-muted)" }}>불러오는 중...</p>;
+  if (logs.length === 0) return <p style={{ color: "var(--admin-muted)" }}>이력이 없습니다.</p>;
 
   return (
-    <table className="admin-table">
+    <table className="admin-detail-table">
       <thead>
         <tr>
           <th>일시</th>
@@ -188,10 +203,10 @@ function renderLogTable(logs, loading) {
             </td>
             <td style={{ fontSize: 12 }}>
               <div>{log.content_title || log.contentTitle || "-"}</div>
-              <div style={{ color: "#6a7a6e", fontSize: 11 }}>{log.content_id || log.contentId}</div>
+              <div style={{ color: "var(--admin-muted)", fontSize: 11 }}>{log.content_id || log.contentId}</div>
             </td>
             <td style={{ fontSize: 12 }}>{log.editor_name || log.editorName || log.editor_id || log.editorId}</td>
-            <td style={{ fontSize: 12, color: "#a6b6a9" }}>{log.summary || "-"}</td>
+            <td style={{ fontSize: 12, color: "var(--admin-muted)" }}>{log.summary || "-"}</td>
           </tr>
         ))}
       </tbody>

@@ -129,6 +129,53 @@ export const apiPatch = async (path, body) => {
   return safeJson(response, "PATCH", path);
 };
 
+/**
+ * 바이너리(예: ZIP) 다운로드를 트리거하는 POST.
+ * 응답을 blob으로 받아 a 태그 클릭으로 자동 다운로드.
+ * 에러는 JSON으로 fallback해서 메시지 추출.
+ */
+export const apiPostDownload = async (path, body, fallbackFilename = "download.bin") => {
+  const response = await fetchWithTimeout(
+    buildUrl(path),
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+        "Content-Type": "application/json",
+      },
+      body: body ? JSON.stringify(snakeizeTop(body)) : "{}",
+    },
+    120_000
+  );
+  if (!response.ok) {
+    if (response.status === 401 || response.status === 403) {
+      handleAuthFailure(response.status);
+    }
+    let msg = `다운로드 실패: ${response.status}`;
+    try {
+      const payload = await response.json();
+      msg = payload?.error?.message || payload?.message || msg;
+    } catch { /* ignore */ }
+    throw new Error(msg);
+  }
+  const blob = await response.blob();
+  // Content-Disposition 에서 filename 추출
+  const cd = response.headers.get("content-disposition") || "";
+  const match = cd.match(/filename\*?=(?:UTF-8'')?["']?([^"';]+)/i);
+  const filename = match ? decodeURIComponent(match[1]) : fallbackFilename;
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => {
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, 0);
+  return { filename, sizeBytes: blob.size };
+};
+
 export const apiDelete = async (path) => {
   const response = await fetchWithTimeout(buildUrl(path), {
     method: "DELETE",

@@ -1,0 +1,131 @@
+{
+  "id": "dq-SAUSSURE_1-031-10",
+  "type": "CHOICE_COMPLEX_OX",
+  "questionKind": "CHOICE_ANALYSIS",
+  "competency": "아침의 친구들 행동",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      {
+        "id": "p1",
+        "text": "아침에 지민이는 일어나서 엄마와 아빠께 밝게 인사했습니다. 그때 민수는 넘어져서 우는 동생을 일으켜주었습니다. 하지만 수현이는 장난감이 없다며 화가 나서 쿵쿵 뛰었습니다."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "지민이는 화가 나서 쿵쿵 뛰었다.",
+      "propositions": [
+        {
+          "propId": "A1",
+          "text": "쿵쿵 뛴 친구는 지민이다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 66,
+              "end": 94
+            }
+          ]
+        },
+        {
+          "propId": "A2",
+          "text": "지민이가 화가 나서 뛰었다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 4,
+              "end": 31
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "지민이는 엄마와 아빠께 인사했다.",
+      "propositions": [
+        {
+          "propId": "B1",
+          "text": "지민이는 부모님께 인사했다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 4,
+              "end": 31
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "어휘력": 0.4,
+        "문장 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "C",
+      "text": "민수는 우는 동생을 일으켜 주었다.",
+      "propositions": [
+        {
+          "propId": "C1",
+          "text": "민수는 동생을 일으켰다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 36,
+              "end": 60
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "문장 독해력": 0.4,
+        "구조 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "D",
+      "text": "수현이는 장난감이 없다며 화를 냈다.",
+      "propositions": [
+        {
+          "propId": "D1",
+          "text": "수현이는 장난감 때문에 화를 냈다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 66,
+              "end": 94
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "구조 독해력": 0.4,
+        "어휘력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    }
+  ],
+  "explanation": "지문은 '지민이는 인사했고, 화가 나서 쿵쿵 뛴 사람은 수현이'라고 했습니다. 두 친구의 행동을 뒤바꾼 A는 Who 함정입니다.",
+  "scoring": {
+    "correctDeltaSec": 20,
+    "wrongDeltaSec": -40
+  },
+  "competencyVector": {
+    "선택지 분석 및 전략 수립 능력": 0.5,
+    "문장 독해력": 0.3,
+    "구조 독해력": 0.2
+  }
+}

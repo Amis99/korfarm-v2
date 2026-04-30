@@ -87,7 +87,7 @@ function MetaForm({ data, codes, onChange }) {
         </div>
       </div>
 
-      <div style={{ marginTop: 16, padding: "14px", background: "#151f18", borderRadius: 10, border: "1px solid #2a3a2e" }}>
+      <div style={{ marginTop: 16, padding: "14px", background: "#151f18", borderRadius: 10, border: "1px solid var(--stroke)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
           <span className={`qb-review-dot ${data.review_status || "none"}`} />
           <span style={{ fontSize: "0.82rem", color: "#c8bfb6", fontWeight: 600 }}>

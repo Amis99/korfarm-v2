@@ -1,0 +1,183 @@
+{
+  "id": "dq-SAUSSURE_1-001-10",
+  "type": "CHOICE_COMPLEX_OX",
+  "questionKind": "CHOICE_ANALYSIS",
+  "competency": "사건 흐름·부정문 이해",
+  "stem": "글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      {
+        "id": "p1",
+        "text": "민수는 아침에 일찍 일어났습니다. 세수를 하고 밥을 먹었습니다. 학교에 가려고 보니 필통이 없었습니다. 어제 책상 위에 그냥 두고 가방에 안 넣었습니다."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "민수는 아침에 늦게 일어났어요.",
+      "propositions": [
+        {
+          "propId": "A1",
+          "text": "민수는 아침에 일어났어요.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 18
+            }
+          ]
+        },
+        {
+          "propId": "A2",
+          "text": "민수는 늦게 일어났어요.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 8,
+              "end": 17
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "민수는 일어나서 세수를 하고 밥을 먹었어요.",
+      "propositions": [
+        {
+          "propId": "B1",
+          "text": "민수는 일어났어요.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 11,
+              "end": 17
+            }
+          ]
+        },
+        {
+          "propId": "B2",
+          "text": "민수는 세수를 했어요.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 19,
+              "end": 25
+            }
+          ]
+        },
+        {
+          "propId": "B3",
+          "text": "민수는 밥을 먹었어요.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 26,
+              "end": 34
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "문장 독해력": 0.5,
+        "선택지 분석 및 전략 수립 능력": 0.3,
+        "어휘력": 0.2
+      }
+    },
+    {
+      "choiceId": "C",
+      "text": "민수는 학교에 가려고 보니 필통이 없었어요.",
+      "propositions": [
+        {
+          "propId": "C1",
+          "text": "민수는 학교에 가려고 했어요.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 36,
+              "end": 43
+            }
+          ]
+        },
+        {
+          "propId": "C2",
+          "text": "필통이 없었어요.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 47,
+              "end": 56
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "문장 독해력": 0.5,
+        "선택지 분석 및 전략 수립 능력": 0.3,
+        "어휘력": 0.2
+      }
+    },
+    {
+      "choiceId": "D",
+      "text": "필통은 어제 책상 위에 있었어요.",
+      "propositions": [
+        {
+          "propId": "D1",
+          "text": "필통은 어제 책상 위에 있었어요.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 58,
+              "end": 72
+            }
+          ]
+        },
+        {
+          "propId": "D2",
+          "text": "민수는 필통을 가방에 넣지 않았어요.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 73,
+              "end": 84
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "논리 사고력": 0.4,
+        "문장 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    }
+  ],
+  "explanation": "지문에는 '아침에 일찍 일어났습니다'라고 되어 있으므로, 늦게 일어났다는 진술은 사실과 반대입니다. (패턴: 부정/상대어 — 일찍↔늦게)",
+  "scoring": {
+    "correctDeltaSec": 20,
+    "wrongDeltaSec": -40
+  },
+  "competencyVector": {
+    "선택지 분석 및 전략 수립 능력": 0.5,
+    "문장 독해력": 0.3,
+    "어휘력": 0.2
+  }
+}

@@ -114,7 +114,7 @@ export default function ReadingForm({ editor, focusPath }) {
             <div key={para.id || i} className="ce-form-section">
               <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
                 <label className="ce-form-label" style={{ margin: 0 }}>단락 {i + 1}</label>
-                <span style={{ fontSize: 11, color: "#6a7a6e" }}>ID: {para.id}</span>
+                <span style={{ fontSize: 11, color: "var(--muted)" }}>ID: {para.id}</span>
                 <button
                   className="ce-choice-del"
                   onClick={() => handleRemoveParagraph(i)}
@@ -149,7 +149,7 @@ export default function ReadingForm({ editor, focusPath }) {
               <div key={step.stepId || i} className="ce-collapsible" style={{ margin: "8px 0" }}>
                 <div className="ce-collapsible-header">
                   <span>Step {i + 1}</span>
-                  <span style={{ fontSize: 11, color: "#6a7a6e" }}>ID: {step.stepId}</span>
+                  <span style={{ fontSize: 11, color: "var(--muted)" }}>ID: {step.stepId}</span>
                   <button
                     className="ce-choice-del"
                     onClick={() => handleRemoveStep(i)}
@@ -241,7 +241,7 @@ export default function ReadingForm({ editor, focusPath }) {
             renderItem={(card, i) => (
               <div style={{ flex: 1 }}>
                 <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-                  <span style={{ fontSize: 12, color: "#6a7a6e" }}>{i + 1}.</span>
+                  <span style={{ fontSize: 12, color: "var(--muted)" }}>{i + 1}.</span>
                   <input
                     className="ce-form-input"
                     value={card.text || ""}

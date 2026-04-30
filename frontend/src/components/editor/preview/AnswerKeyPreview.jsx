@@ -6,7 +6,7 @@ export default function AnswerKeyPreview({ content, onClickPath, focusPath }) {
 
   return (
     <div>
-      {sections.length === 0 && <div style={{ color: "#6a7a6e" }}>섹션이 없습니다.</div>}
+      {sections.length === 0 && <div style={{ color: "var(--muted)" }}>섹션이 없습니다.</div>}
       {sections.map((sec, si) => {
         const secPath = `sections[${si}]`;
         return (
@@ -36,12 +36,12 @@ export default function AnswerKeyPreview({ content, onClickPath, focusPath }) {
                     <div className="ce-preview-answer-text">
                       <div>{item.answer || "(정답 없음)"}</div>
                       {item.explanation && (
-                        <div style={{ fontSize: 11, color: "#6a7a6e", marginTop: 2 }}>
+                        <div style={{ fontSize: 11, color: "var(--muted)", marginTop: 2 }}>
                           {item.explanation.length > 60 ? item.explanation.slice(0, 60) + "..." : item.explanation}
                         </div>
                       )}
                     </div>
-                    {item.type && <span style={{ fontSize: 11, color: "#6a7a6e" }}>{item.type}</span>}
+                    {item.type && <span style={{ fontSize: 11, color: "var(--muted)" }}>{item.type}</span>}
                     {item.points && <span style={{ fontSize: 11, color: "#ff7f2a" }}>{item.points}점</span>}
                   </div>
                 );

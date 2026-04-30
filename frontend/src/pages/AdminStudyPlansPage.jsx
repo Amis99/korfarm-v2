@@ -95,20 +95,23 @@ export default function AdminStudyPlansPage() {
 
   return (
     <AdminLayout>
-      <div className="asp-wrap">
-      <div className="asp-header">
+      <div className="admin-detail-wrap">
+      <div className="admin-detail-header">
         <h1>
-          <span className="material-symbols-outlined">event_note</span>
+          <span className="material-symbols-outlined" style={{ verticalAlign: "middle", marginRight: 8 }}>event_note</span>
           학습 계획표
         </h1>
-        <button className="asp-create-btn" onClick={() => setShowCreate(true)}>
-          <span className="material-symbols-outlined" style={{ fontSize: 18 }}>add</span>
-          새 계획표
-        </button>
+        <div className="admin-detail-header-actions">
+          <button className="admin-detail-btn" onClick={() => setShowCreate(true)}>
+            <span className="material-symbols-outlined" style={{ fontSize: 18 }}>add</span>
+            새 계획표
+          </button>
+        </div>
       </div>
 
+      <div className="admin-detail-card">
       {/* 필터/검색 바 */}
-      <div className="asp-filter-bar">
+      <div className="admin-detail-toolbar">
         <select
           className="asp-select"
           value={statusFilter}
@@ -202,6 +205,7 @@ export default function AdminStudyPlansPage() {
         </table>
         </div>
       )}
+      </div>
 
       {showCreate && (
         <StudyPlanCreateForm

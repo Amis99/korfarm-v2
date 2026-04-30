@@ -1,13 +1,19 @@
 .admin-page {
-  --admin-bg: #0f1410;
-  --admin-panel: #161d18;
-  --admin-panel-light: #1e2620;
-  --admin-accent: #ff7f2a;
-  --admin-accent-strong: #e77b18;
-  --admin-text: #f3f6f1;
-  --admin-muted: #a6b6a9;
+  /* 라이트 그린 테마 — 페이지 본문 */
+  --admin-bg: #eef4ec;             /* 옅은 그린 페이지 배경 */
+  --admin-panel: #ffffff;          /* 흰색 카드/모달 */
+  --admin-panel-light: #f5f9f3;    /* 더 옅은 그린 보조 패널 */
+  --admin-accent: #2d6a4f;         /* 짙은 그린 액센트 */
+  --admin-accent-strong: #1f4a37;
+  --admin-text: #1a2920;           /* 짙은 글씨 */
+  --admin-muted: #3a4a3e;          /* 짙은 회녹색 — 흐림 방지 */
+  /* 사이드바 전용 — 짙은 녹색 + 흰 글씨 */
+  --admin-side-bg: #1f3a2c;
+  --admin-side-text: #ffffff;
+  --admin-side-muted: #c8d6cf;
+  --admin-side-active-bg: rgba(255, 255, 255, 0.14);
   font-family: var(--font-body);
-  background: radial-gradient(circle at top, #18231a 0%, #0f1410 60%);
+  background: var(--admin-bg);
   color: var(--admin-text);
   min-height: 100vh;
 }
@@ -37,7 +43,7 @@
   align-items: center;
   justify-content: center;
   background: var(--admin-panel);
-  border: 1px solid rgba(255, 127, 42, 0.25);
+  border: 1px solid rgba(45, 106, 79, 0.25);
   border-radius: 10px;
   padding: 8px;
   color: var(--admin-text);
@@ -63,7 +69,7 @@
   z-index: 1040;
 }
 
-/* ── Sidebar ── */
+/* ── Sidebar (짙은 녹색 + 흰 글씨) ── */
 .admin-side {
   position: fixed;
   top: 0;
@@ -71,8 +77,9 @@
   bottom: 0;
   width: 250px;
   z-index: 1050;
-  background: rgba(15, 20, 16, 0.97);
-  border-right: 1px solid rgba(255, 127, 42, 0.1);
+  background: var(--admin-side-bg);
+  color: var(--admin-side-text);
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
   padding: 28px 20px;
   display: flex;
   flex-direction: column;
@@ -98,10 +105,10 @@
   align-items: center;
   justify-content: center;
   background: transparent;
-  border: 1px solid rgba(255, 127, 42, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 10px;
   padding: 6px;
-  color: var(--admin-text);
+  color: var(--admin-side-text);
   cursor: pointer;
   line-height: 1;
 }
@@ -136,7 +143,7 @@
 
 .admin-nav a {
   text-decoration: none;
-  color: var(--admin-muted);
+  color: var(--admin-side-muted);
   padding: 9px 12px;
   border-radius: 10px;
   display: flex;
@@ -149,15 +156,34 @@
 
 .admin-nav a.active,
 .admin-nav a:hover {
-  background: rgba(255, 127, 42, 0.12);
-  color: var(--admin-text);
+  background: var(--admin-side-active-bg);
+  color: var(--admin-side-text);
 }
 
 .admin-main {
-  padding: 24px 36px 60px;
-  display: grid;
-  gap: 26px;
-  align-content: start;
+  padding: 18px 20px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 모든 어드민 페이지 콘텐츠는 1200 max 로 통일 — 폭 천차만별 방지 */
+.admin-main > * {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .admin-main {
+    padding: 12px 12px 40px;
+    gap: 12px;
+  }
 }
 
 .admin-topbar {
@@ -172,7 +198,7 @@
   background: var(--admin-panel);
   border-radius: 14px;
   padding: 10px 14px;
-  border: 1px solid rgba(255, 127, 42, 0.12);
+  border: 1px solid rgba(31, 58, 44, 0.12);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -198,7 +224,7 @@
   background: var(--admin-panel);
   border-radius: 18px;
   padding: 18px;
-  border: 1px solid rgba(255, 127, 42, 0.08);
+  border: 1px solid rgba(45, 106, 79, 0.08);
   display: grid;
   gap: 8px;
 }
@@ -223,14 +249,14 @@
 .admin-table td {
   text-align: left;
   padding: 10px 6px;
-  border-bottom: 1px solid rgba(255, 127, 42, 0.08);
+  border-bottom: 1px solid rgba(45, 106, 79, 0.08);
 }
 
 .admin-pill {
   display: inline-flex;
   padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(255, 127, 42, 0.15);
+  background: rgba(45, 106, 79, 0.15);
   color: var(--admin-accent);
   font-size: 11px;
   font-weight: 700;
@@ -241,7 +267,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  border-bottom: 1px dashed rgba(255, 127, 42, 0.1);
+  border-bottom: 1px dashed rgba(45, 106, 79, 0.1);
 }
 
 .admin-toggle:last-child {
@@ -250,7 +276,7 @@
 
 .admin-action {
   background: var(--admin-accent);
-  color: #0f1410;
+  color: #ffffff;
   border: none;
   border-radius: 12px;
   padding: 10px 14px;

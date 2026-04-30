@@ -32,7 +32,19 @@ class TestService(
     private val seedCatalogRepository: SeedCatalogRepository,
     private val learningCompetencyService: LearningCompetencyService,
     private val testStatisticsService: TestStatisticsService,
+    private val diagSessionRepo: com.korfarm.api.diagnostic.DiagSessionRepository,
+    private val proTestSessionRepo: com.korfarm.api.pro.ProTestSessionRepo,
+    private val diagPassageRepo: com.korfarm.api.diagnostic.DiagPassageRepository,
+    private val diagQuestionRepo: com.korfarm.api.diagnostic.DiagQuestionRepository,
+    private val diagResponseRepo: com.korfarm.api.diagnostic.DiagResponseRepository,
 ) {
+
+    // 시험지 ID/series 로 종류 분류 — diagnostic / chapter / misc
+    private fun resolveKind(paper: TestPaperEntity): String = when {
+        paper.id.startsWith("diag_paper_") -> "diagnostic"
+        paper.series == "chapter" -> "chapter"
+        else -> "misc"
+    }
 
     // ─── Student: list tests ───
     @Transactional(readOnly = true)
@@ -158,6 +170,13 @@ class TestService(
     // ─── Student: submit OMR + auto-grade ───
     @Transactional
     fun submitOmr(testId: String, userId: String, submittedBy: String, answers: Map<String, String>): TestSubmissionEntity {
+        if (testId.startsWith("diag_paper_")) {
+            throw ApiException(
+                "UNSUPPORTED",
+                "진단 시험은 학생 직접 응시 흐름만 지원합니다. 진단 테스트 메뉴에서 응시해 주세요.",
+                HttpStatus.BAD_REQUEST
+            )
+        }
         val isAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
         val existing = submissionRepo.findByTestIdAndUserId(testId, userId)
         if (existing != null) {
@@ -291,10 +310,79 @@ class TestService(
     }
 
     // ─── Admin: 시험지 비주얼 에디터 payload ───
+    // payload_json 이 비어있으면 종류별 원본 테이블에서 일일퀴즈 비주얼 에디터 스키마로 자동 변환해 반환
     @Transactional(readOnly = true)
     fun getPayload(testId: String): String? {
         val paper = findPaper(testId)
-        return paper.payloadJson
+        if (!paper.payloadJson.isNullOrBlank()) return paper.payloadJson
+
+        // 진단 시험: diag_questions / diag_passages 에서 변환
+        if (testId.startsWith("diag_paper_")) {
+            return buildDiagnosticPayload(testId.removePrefix("diag_paper_"))
+        }
+
+        val questions = questionRepo.findByTestIdOrderByNumberAsc(testId)
+        if (questions.isEmpty()) return null
+
+        // 지문 그룹화 — 동일 텍스트의 지문들은 한 번만 등록하고 question.passageId 로 참조
+        // 빈 지문은 passages 에 추가 안 함 (지문 없는 문제)
+        val passagesList = mutableListOf<Map<String, Any?>>()
+        val passageTextToId = mutableMapOf<String, String>()
+        for (q in questions) {
+            val text = q.passage?.trim().orEmpty()
+            if (text.isBlank()) continue
+            if (!passageTextToId.containsKey(text)) {
+                val pid = "p${passagesList.size + 1}"
+                passageTextToId[text] = pid
+                passagesList.add(mapOf(
+                    "id" to pid,
+                    "text" to text,
+                    "domain" to q.domain,
+                    "subDomain" to q.subDomain
+                ))
+            }
+        }
+
+        val converted = questions.map { q ->
+            val rawChoices = parseChoices(q.choicesJson) ?: emptyList()
+            val choices = rawChoices.mapIndexed { i, c ->
+                mapOf("id" to (c.id.ifBlank { "c${i + 1}" }), "text" to c.text)
+            }
+            val mappedType = when (q.type) {
+                "객관식" -> "MULTI_CHOICE"
+                "서술형" -> "ESSAY"
+                else -> "MULTI_CHOICE"
+            }
+            val explanations = parseExplanations(q.choiceExplanationsJson) ?: emptyMap()
+            val essayKw = parseEssayKeywords(q.essayKeywordsJson) ?: emptyList()
+            val text = q.passage?.trim().orEmpty()
+            mapOf(
+                "id" to q.id,
+                "number" to q.number,
+                "type" to mappedType,
+                "stem" to (q.stem ?: ""),
+                "passageId" to passageTextToId[text],
+                "choices" to choices,
+                "answerId" to (q.correctAnswer ?: ""),
+                "choiceExplanations" to explanations,
+                "explanation" to (q.intent ?: ""),
+                "modelAnswer" to (q.modelAnswer ?: ""),
+                "essayKeywords" to essayKw,
+                "essayRubric" to (q.essayRubricJson ?: ""),
+                "domain" to q.domain,
+                "subDomain" to q.subDomain,
+                "points" to q.points,
+                // 시험은 시간 가감 없음 (씨앗 보상은 응시 시 점수 비율 기반 자동 지급)
+                "questionType" to null,
+                "wrongPattern" to null,
+                "boxContent" to null,
+                "conditionContent" to null
+            )
+        }
+        return objectMapper.writeValueAsString(mapOf(
+            "passages" to passagesList,
+            "questions" to converted
+        ))
     }
 
     @Transactional
@@ -302,11 +390,322 @@ class TestService(
         val paper = findPaper(testId)
         paper.payloadJson = payloadJson
         testPaperRepo.save(paper)
+        // 진단 시험은 diag_questions / diag_passages 에 양방향 동기화 (편집 즉시 진단 시스템에 반영)
+        if (testId.startsWith("diag_paper_")) {
+            try {
+                applyPayloadToDiagnostic(testId.removePrefix("diag_paper_"), payloadJson)
+            } catch (e: Exception) {
+                // 진단 동기화 실패해도 payload_json은 저장된 상태로 둠
+                org.slf4j.LoggerFactory.getLogger(TestService::class.java)
+                    .warn("진단 동기화 실패 (paperId=$testId): ${e.message}", e)
+            }
+        }
+    }
+
+    /**
+     * 진단 시험을 비주얼 에디터 스키마({questions:[...], passages:[...]})로 변환.
+     * 한 지문의 문항들을 묶어 question.passage 에 본문을 그대로 박아 넣음 (일일퀴즈와 동일 구조).
+     */
+    private fun buildDiagnosticPayload(tier: String): String? {
+        val passages = diagPassageRepo.findByTierOrderByLevelAscIdAsc(tier)
+        val questions = diagQuestionRepo.findByTierOrderByIdAsc(tier)
+        if (passages.isEmpty() && questions.isEmpty()) return null
+
+        val passageMap = passages.associateBy { it.id }
+        val passagesPayload = passages.map { p ->
+            mapOf(
+                "id" to p.id,
+                "tier" to p.tier,
+                "level" to p.level,
+                "genre" to p.genre,
+                "text" to p.textMd
+            )
+        }
+        val questionsPayload = questions.map { q ->
+            // choices_json: 진단 스키마 [{choice_id, text, vector, error_path}] → 일일퀴즈 스키마 [{id, text}]
+            val rawChoices: List<Map<String, Any?>> = try {
+                objectMapper.readValue(q.choicesJson, object : TypeReference<List<Map<String, Any?>>>() {})
+            } catch (_: Exception) { emptyList() }
+            val choices = rawChoices.mapIndexed { i, m ->
+                mapOf(
+                    "id" to (m["choice_id"] ?: m["id"] ?: ('A' + i).toString()).toString(),
+                    "text" to (m["text"] ?: "").toString(),
+                    // 진단 전용 메타데이터는 보존 (저장 시 round-trip 가능)
+                    "vector" to m["vector"],
+                    "errorPath" to m["error_path"]
+                )
+            }
+            val passage = passageMap[q.passageId]?.textMd ?: ""
+            val type = when (q.questionType.uppercase()) {
+                "OBJECTIVE", "MULTI_CHOICE", "객관식" -> "MULTI_CHOICE"
+                "ESSAY", "서술형" -> "ESSAY"
+                else -> "MULTI_CHOICE"
+            }
+            mapOf(
+                "id" to q.id,
+                "type" to type,
+                "stem" to q.stem,
+                "passage" to passage,
+                "passageId" to q.passageId,
+                "choices" to choices,
+                "answerId" to (q.correctChoice ?: ""),
+                "modelAnswer" to (q.modelAnswer ?: ""),
+                // 진단 전용 메타 보존
+                "tier" to q.tier,
+                "questionType" to q.questionType,
+                "boxContent" to q.boxContent,
+                "pairId" to q.pairId,
+                "orderInPassage" to q.orderInPassage,
+                "scoring" to mapOf("correctDeltaSec" to 0, "wrongDeltaSec" to 0)
+            )
+        }
+        return objectMapper.writeValueAsString(
+            mapOf(
+                "kind" to "diagnostic",
+                "tier" to tier,
+                "passages" to passagesPayload,
+                "questions" to questionsPayload
+            )
+        )
+    }
+
+    /**
+     * 비주얼 에디터에서 저장된 payload 를 진단 테이블에 반영 (편집 가능 양방향 동기화).
+     * passage/question id 가 일치하면 UPDATE, 신규면 INSERT, 사라진 row 는 그대로 둠 (안전).
+     */
+    @Transactional
+    private fun applyPayloadToDiagnostic(tier: String, payloadJson: String) {
+        val payload: Map<String, Any?> = objectMapper.readValue(
+            payloadJson, object : TypeReference<Map<String, Any?>>() {}
+        )
+        val passagesIn = (payload["passages"] as? List<*>)?.filterIsInstance<Map<String, Any?>>() ?: emptyList()
+        val questionsIn = (payload["questions"] as? List<*>)?.filterIsInstance<Map<String, Any?>>() ?: emptyList()
+
+        // ── 지문 동기화 ──
+        for (p in passagesIn) {
+            val id = (p["id"] as? String) ?: continue
+            val text = (p["text"] as? String) ?: ""
+            val genre = (p["genre"] as? String) ?: "비문학"
+            val level = (p["level"] as? Number)?.toInt() ?: 1
+            val existing = diagPassageRepo.findById(id).orElse(null)
+            if (existing != null) {
+                existing.textMd = text
+                existing.genre = genre
+                existing.level = level
+                existing.tier = tier
+            } else {
+                diagPassageRepo.save(com.korfarm.api.diagnostic.DiagPassageEntity(
+                    id = id, tier = tier, level = level, genre = genre, textMd = text
+                ))
+            }
+        }
+
+        // ── 문항 동기화 ──
+        for (q in questionsIn) {
+            val id = (q["id"] as? String) ?: continue
+            val stem = (q["stem"] as? String) ?: ""
+            val passageId = (q["passageId"] as? String) ?: ""
+            val answerId = (q["answerId"] as? String)?.takeIf { it.isNotBlank() }
+            val rawChoices = (q["choices"] as? List<*>)?.filterIsInstance<Map<String, Any?>>() ?: emptyList()
+            // 비주얼 에디터 스키마({id,text,vector,errorPath}) → 진단 스키마({choice_id,text,vector,error_path})
+            val diagChoices = rawChoices.map { c ->
+                val out = mutableMapOf<String, Any?>(
+                    "choice_id" to c["id"],
+                    "text" to c["text"]
+                )
+                if (c["vector"] != null) out["vector"] = c["vector"]
+                if (c["errorPath"] != null) out["error_path"] = c["errorPath"]
+                out
+            }
+            val choicesJson = objectMapper.writeValueAsString(diagChoices)
+            val questionType = (q["questionType"] as? String) ?: when ((q["type"] as? String)?.uppercase()) {
+                "ESSAY" -> "ESSAY"
+                else -> "OBJECTIVE"
+            }
+            val orderInPassage = (q["orderInPassage"] as? Number)?.toInt() ?: 1
+            val existing = diagQuestionRepo.findById(id).orElse(null)
+            if (existing != null) {
+                existing.stem = stem
+                existing.passageId = passageId
+                existing.tier = tier
+                existing.questionType = questionType
+                existing.choicesJson = choicesJson
+                existing.correctChoice = answerId
+                existing.modelAnswer = (q["modelAnswer"] as? String)?.takeIf { it.isNotBlank() }
+                existing.boxContent = q["boxContent"] as? String
+                existing.pairId = q["pairId"] as? String
+                existing.orderInPassage = orderInPassage
+            } else {
+                diagQuestionRepo.save(com.korfarm.api.diagnostic.DiagQuestionEntity(
+                    id = id,
+                    passageId = passageId,
+                    tier = tier,
+                    questionType = questionType,
+                    stem = stem,
+                    boxContent = q["boxContent"] as? String,
+                    correctChoice = answerId,
+                    choicesJson = choicesJson,
+                    modelAnswer = (q["modelAnswer"] as? String)?.takeIf { it.isNotBlank() },
+                    pairId = q["pairId"] as? String,
+                    orderInPassage = orderInPassage
+                ))
+            }
+        }
+    }
+
+    /**
+     * 진단 시험 성적표 — diag_sessions / diag_responses 에서 변환.
+     * 종류별 통합 어드민 페이지가 학생 성적표 모달을 띄울 때 호출됨.
+     */
+    @Transactional(readOnly = true)
+    fun diagnosticReport(testId: String, userId: String): TestReportResponse {
+        val tier = testId.removePrefix("diag_paper_")
+        val paper = findPaper(testId)
+
+        // 가장 최근 completed 세션 사용
+        val sessions = diagSessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, tier)
+            .filter { it.status == "completed" }
+        val session = sessions.firstOrNull()
+            ?: throw ApiException("NOT_SUBMITTED", "아직 제출하지 않았습니다.", HttpStatus.NOT_FOUND)
+
+        val responses = diagResponseRepo.findBySessionIdOrderByResponseOrderAsc(session.id)
+        val tierQuestions = diagQuestionRepo.findByTierOrderByIdAsc(tier)
+        val questionMap = tierQuestions.associateBy { it.id }
+        val questionNumberMap = tierQuestions.withIndex().associate { (idx, q) -> q.id to (idx + 1) }
+        val passageMap = diagPassageRepo.findByTierOrderByLevelAscIdAsc(tier).associateBy { it.id }
+
+        val details = responses.mapNotNull { r ->
+            val q = questionMap[r.questionId] ?: return@mapNotNull null
+            val number = questionNumberMap[r.questionId] ?: 0
+            val rawChoices: List<Map<String, Any?>> = try {
+                objectMapper.readValue(q.choicesJson, object : TypeReference<List<Map<String, Any?>>>() {})
+            } catch (_: Exception) { emptyList() }
+            // 선택지 텍스트 매핑 (id 일치)
+            val myAnswerText = rawChoices.firstOrNull {
+                ((it["choice_id"] ?: it["id"]) as? String) == r.selectedChoice
+            }?.get("text") as? String
+            val correctText = rawChoices.firstOrNull {
+                ((it["choice_id"] ?: it["id"]) as? String) == q.correctChoice
+            }?.get("text") as? String
+            QuestionResult(
+                questionNumber = number,
+                type = if (q.questionType.equals("ESSAY", ignoreCase = true) || q.questionType == "서술형") "서술형" else "객관식",
+                domain = null,
+                passage = passageMap[q.passageId]?.textMd,
+                myAnswer = (r.selectedChoice ?: "") + (myAnswerText?.let { " — $it" } ?: ""),
+                correctAnswer = (q.correctChoice ?: q.modelAnswer ?: "") + (correctText?.let { " — $it" } ?: ""),
+                isCorrect = r.isCorrect,
+                points = 1,
+                earnedPoints = if (r.isCorrect) 1 else 0,
+                choiceExplanation = null,
+                intent = null
+            )
+        }
+
+        // 영역별 = 10대 역량 (scoresJson + maxScoresJson)
+        val scoresMap: Map<String, Any?> = session.scoresJson?.let {
+            try { objectMapper.readValue(it, object : TypeReference<Map<String, Any?>>() {}) } catch (_: Exception) { emptyMap() }
+        } ?: emptyMap()
+        val maxMap: Map<String, Any?> = session.maxScoresJson?.let {
+            try { objectMapper.readValue(it, object : TypeReference<Map<String, Any?>>() {}) } catch (_: Exception) { emptyMap() }
+        } ?: emptyMap()
+        val domainScores = scoresMap.keys.associate { key ->
+            val sc = (scoresMap[key] as? Number)?.toInt() ?: 0
+            val mx = (maxMap[key] as? Number)?.toInt() ?: 0
+            // 정답/총수: 응답 기준이 아니라 가중치 기준이라 근사치 — 점수 비율로 표시
+            val correct = if (mx > 0) ((sc.toDouble() / mx) * 10).toInt().coerceAtLeast(0) else 0
+            key to DomainScore(score = sc, maxScore = mx, correct = correct, total = 10)
+        }
+
+        val totalQ = responses.size.coerceAtLeast(session.answeredCount).coerceAtLeast(1)
+        val accuracy = (session.correctCount.toDouble() / totalQ) * 100.0
+
+        return TestReportResponse(
+            testId = paper.id,
+            testTitle = paper.title,
+            totalQuestions = paper.totalQuestions.takeIf { it > 0 } ?: totalQ,
+            totalPoints = paper.totalPoints.takeIf { it > 0 } ?: 100,
+            score = session.rawTci?.toInt() ?: session.correctCount,
+            correctCount = session.correctCount,
+            accuracy = Math.round(accuracy * 10.0) / 10.0,
+            submittedAt = session.completedAt ?: session.startedAt,
+            details = details,
+            domainScores = domainScores
+        )
+    }
+
+    /**
+     * 진단 시험 오답 노트.
+     */
+    @Transactional(readOnly = true)
+    fun diagnosticWrongNote(testId: String, userId: String): WrongNoteResponse {
+        val tier = testId.removePrefix("diag_paper_")
+        val paper = findPaper(testId)
+
+        val sessions = diagSessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, tier)
+            .filter { it.status == "completed" }
+        val session = sessions.firstOrNull()
+            ?: throw ApiException("NOT_SUBMITTED", "아직 제출하지 않았습니다.", HttpStatus.NOT_FOUND)
+
+        val responses = diagResponseRepo.findBySessionIdOrderByResponseOrderAsc(session.id)
+        val tierQuestions = diagQuestionRepo.findByTierOrderByIdAsc(tier)
+        val questionMap = tierQuestions.associateBy { it.id }
+        val questionNumberMap = tierQuestions.withIndex().associate { (idx, q) -> q.id to (idx + 1) }
+        val passageMap = diagPassageRepo.findByTierOrderByLevelAscIdAsc(tier).associateBy { it.id }
+
+        val wrongItems = responses.filter { !it.isCorrect }.mapNotNull { r ->
+            val q = questionMap[r.questionId] ?: return@mapNotNull null
+            val number = questionNumberMap[r.questionId] ?: 0
+            val rawChoices: List<Map<String, Any?>> = try {
+                objectMapper.readValue(q.choicesJson, object : TypeReference<List<Map<String, Any?>>>() {})
+            } catch (_: Exception) { emptyList() }
+            val myChoice = rawChoices.firstOrNull {
+                ((it["choice_id"] ?: it["id"]) as? String) == r.selectedChoice
+            }
+            val correctChoice = rawChoices.firstOrNull {
+                ((it["choice_id"] ?: it["id"]) as? String) == q.correctChoice
+            }
+            val myAnswerText = (myChoice?.get("text") as? String) ?: ""
+            val correctAnswerText = (correctChoice?.get("text") as? String) ?: q.modelAnswer ?: ""
+            val errorPath = (myChoice?.get("error_path") as? String) ?: ""
+            val feedback = buildString {
+                append("문제: ")
+                appendLine(q.stem)
+                append("내가 고른 답: ")
+                appendLine("${r.selectedChoice ?: "-"}${if (myAnswerText.isNotBlank()) " — $myAnswerText" else ""}")
+                if (errorPath.isNotBlank()) {
+                    append("오답 패턴: ")
+                    appendLine(errorPath)
+                }
+                append("정답: ")
+                appendLine("${q.correctChoice ?: "-"}${if (correctAnswerText.isNotBlank()) " — $correctAnswerText" else ""}")
+            }
+            WrongNoteItem(
+                questionNumber = number,
+                type = if (q.questionType.equals("ESSAY", ignoreCase = true) || q.questionType == "서술형") "서술형" else "객관식",
+                domain = null,
+                passage = passageMap[q.passageId]?.textMd,
+                myAnswer = "${r.selectedChoice ?: ""}${if (myAnswerText.isNotBlank()) " — $myAnswerText" else ""}",
+                correctAnswer = "${q.correctChoice ?: ""}${if (correctAnswerText.isNotBlank()) " — $correctAnswerText" else ""}",
+                points = 1,
+                intent = null,
+                feedback = feedback
+            )
+        }
+
+        return WrongNoteResponse(
+            testId = paper.id,
+            testTitle = paper.title,
+            wrongItems = wrongItems
+        )
     }
 
     // ─── Student: report (성적표) ───
     @Transactional(readOnly = true)
     fun getReport(testId: String, userId: String): TestReportResponse {
+        // 진단 시험은 diag_sessions/diag_responses 기반
+        if (testId.startsWith("diag_paper_")) return diagnosticReport(testId, userId)
+
         val paper = findPaper(testId)
         val sub = submissionRepo.findByTestIdAndUserId(testId, userId)
             ?: throw ApiException("NOT_SUBMITTED", "아직 제출하지 않았습니다.", HttpStatus.NOT_FOUND)
@@ -389,6 +788,9 @@ class TestService(
     // ─── Student: wrong note (오답 노트) ───
     @Transactional(readOnly = true)
     fun getWrongNote(testId: String, userId: String): WrongNoteResponse {
+        // 진단 시험은 diag_responses 의 incorrect 응답에서 오답 추출
+        if (testId.startsWith("diag_paper_")) return diagnosticWrongNote(testId, userId)
+
         val paper = findPaper(testId)
         val sub = submissionRepo.findByTestIdAndUserId(testId, userId)
             ?: throw ApiException("NOT_SUBMITTED", "아직 제출하지 않았습니다.", HttpStatus.NOT_FOUND)
@@ -427,6 +829,78 @@ class TestService(
         )
     }
 
+    /**
+     * 진단 시험 문항 목록 (관리자용 — 옛 흐름 호환).
+     * diag_questions 를 TestQuestionView 형태로 변환.
+     */
+    @Transactional(readOnly = true)
+    fun diagnosticQuestions(testId: String): List<TestQuestionView> {
+        val tier = testId.removePrefix("diag_paper_")
+        val questions = diagQuestionRepo.findByTierOrderByIdAsc(tier)
+        val passages = diagPassageRepo.findByTierOrderByLevelAscIdAsc(tier).associateBy { it.id }
+        return questions.mapIndexed { idx, q ->
+            val number = idx + 1
+            val rawChoices: List<Map<String, Any?>> = try {
+                objectMapper.readValue(q.choicesJson, object : TypeReference<List<Map<String, Any?>>>() {})
+            } catch (_: Exception) { emptyList() }
+            val choices = rawChoices.mapIndexed { i, m ->
+                ChoiceItem(
+                    id = ((m["choice_id"] ?: m["id"]) as? String) ?: ('A' + i).toString(),
+                    text = (m["text"] as? String) ?: ""
+                )
+            }
+            val explanations = rawChoices.mapNotNull { m ->
+                val cid = ((m["choice_id"] ?: m["id"]) as? String) ?: return@mapNotNull null
+                val ep = (m["error_path"] as? String) ?: return@mapNotNull null
+                cid to ep
+            }.toMap()
+            val mappedType = if (q.questionType.equals("ESSAY", ignoreCase = true) || q.questionType == "서술형")
+                "서술형" else "객관식"
+            TestQuestionView(
+                questionId = q.id,
+                number = number,
+                type = mappedType,
+                domain = null,
+                subDomain = null,
+                passage = passages[q.passageId]?.textMd,
+                stem = q.stem,
+                points = 1,
+                correctAnswer = q.correctChoice,
+                choices = choices.takeIf { it.isNotEmpty() },
+                choiceExplanations = explanations.takeIf { it.isNotEmpty() },
+                intent = q.boxContent,
+                essayKeywords = null,
+                essayRubric = q.gradingCriteriaJson,
+                modelAnswer = q.modelAnswer
+            )
+        }
+    }
+
+    /**
+     * 진단 시험 응시자 목록 (관리자용).
+     * diag_sessions 를 SubmissionSummary 형태로 변환.
+     */
+    @Transactional(readOnly = true)
+    fun diagnosticSubmissions(testId: String): List<SubmissionSummary> {
+        val tier = testId.removePrefix("diag_paper_")
+        val sessions = diagSessionRepo.findByTierAndStatus(tier, "completed")
+        if (sessions.isEmpty()) return emptyList()
+        val userMap = userRepository.findAllById(sessions.map { it.userId }).associateBy { it.id }
+        return sessions.sortedByDescending { it.completedAt ?: it.startedAt }.map { s ->
+            val totalQ = s.answeredCount.coerceAtLeast(1)
+            val accuracy = (s.correctCount.toDouble() / totalQ) * 100.0
+            SubmissionSummary(
+                userId = s.userId,
+                userName = userMap[s.userId]?.name,
+                score = s.rawTci?.toInt() ?: s.correctCount,
+                correctCount = s.correctCount,
+                accuracy = Math.round(accuracy * 10.0) / 10.0,
+                submittedBy = null,
+                submittedAt = s.completedAt ?: s.startedAt
+            )
+        }
+    }
+
     // ─── Student: test history ───
     @Transactional(readOnly = true)
     fun getHistory(userId: String): List<TestHistoryItem> {
@@ -459,11 +933,11 @@ class TestService(
     // ─── Admin: create test ───
     @Transactional
     fun createTest(req: CreateTestRequest, callerUserId: String): TestPaperEntity {
-        // ORG_ADMIN이면 자동으로 소속 기관 ID 설정
+        // ORG_ADMIN이면 자동으로 소속 기관 ID 설정. 본사(HQ_ADMIN)면 지정 값 또는 본사 표준 ID(org_hq).
+        // test_papers.org_id 는 NOT NULL 이므로 null 대신 "org_hq" 사용.
         val orgId = if (SecurityUtils.hasAnyRole("HQ_ADMIN")) {
-            req.orgId // HQ_ADMIN은 지정값 사용 (null이면 본사 시험)
+            req.orgId ?: "org_hq"
         } else {
-            // ORG_ADMIN: 자기 소속 기관 ID 자동 설정
             orgMembershipRepository.findByUserIdAndStatus(callerUserId, "active")
                 .firstOrNull()?.orgId
                 ?: throw ApiException("NO_ORG", "소속 기관이 없습니다.", HttpStatus.BAD_REQUEST)
@@ -520,6 +994,8 @@ class TestService(
     // ─── Admin: get questions ───
     @Transactional(readOnly = true)
     fun getQuestions(testId: String): List<TestQuestionView> {
+        if (testId.startsWith("diag_paper_")) return diagnosticQuestions(testId)
+
         return questionRepo.findByTestIdOrderByNumberAsc(testId).map { q ->
             TestQuestionView(
                 questionId = q.id,
@@ -544,6 +1020,13 @@ class TestService(
     // ─── Admin: set questions (bulk) ───
     @Transactional
     fun setQuestions(testId: String, inputs: List<QuestionInput>) {
+        if (testId.startsWith("diag_paper_")) {
+            throw ApiException(
+                "UNSUPPORTED",
+                "진단 시험은 일괄 문항 입력을 지원하지 않습니다. 비주얼 에디터(/edit)로 편집해 주세요.",
+                HttpStatus.BAD_REQUEST
+            )
+        }
         findPaper(testId)
         questionRepo.deleteByTestId(testId)
         val entities = inputs.map { inp ->
@@ -586,16 +1069,37 @@ class TestService(
     fun listAllTests(callerUserId: String): List<TestPaperSummary> {
         var papers = testPaperRepo.findAll().sortedByDescending { it.createdAt }
 
-        // ORG_ADMIN이면 본사(orgId=null) + 자기 기관 시험만 필터링
+        // ORG_ADMIN이면 본사(orgId=null|"org_hq") + 자기 기관 시험만 필터링
         if (!SecurityUtils.hasAnyRole("HQ_ADMIN")) {
             val callerOrgIds = orgMembershipRepository.findByUserIdAndStatus(callerUserId, "active").map { it.orgId }
-            papers = papers.filter { it.orgId == null || callerOrgIds.contains(it.orgId) }
+            papers = papers.filter { it.orgId == null || it.orgId == "org_hq" || callerOrgIds.contains(it.orgId) }
         }
 
         val orgIds = papers.mapNotNull { it.orgId }.distinct()
         val orgMap = if (orgIds.isNotEmpty()) orgRepository.findAllById(orgIds).associateBy { it.id } else emptyMap()
+        // 종류별 응시 카운트 집계 — 한 번에 모두 조회 후 메모리에서 group
+        val paperIds = papers.map { it.id }
+        // 챕터·기타 응시: test_submissions (graded). pro_test_sessions 는 응시 시작 세션 마스터이지 채점 결과 row 가 아니라 카운트 기준에 부적합.
+        val subCountByPaper: Map<String, Int> = if (paperIds.isNotEmpty()) {
+            submissionRepo.findByTestIdIn(paperIds)
+                .filter { it.status == "graded" }
+                .groupingBy { it.testId }
+                .eachCount()
+        } else emptyMap()
+        // 진단 응시: diag_sessions (tier 매핑) — diag_paper_<tier> 형태
+        val diagCountByTier: Map<String, Int> = diagSessionRepo
+            .findByStatusOrderByStartedAtDesc("completed")
+            .groupingBy { it.tier }
+            .eachCount()
         return papers.map { p ->
-            val subCount = submissionRepo.findByTestId(p.id).size
+            val kind = resolveKind(p)
+            val subCount = when (kind) {
+                "diagnostic" -> {
+                    val tier = p.id.removePrefix("diag_paper_")
+                    diagCountByTier[tier] ?: 0
+                }
+                else -> subCountByPaper[p.id] ?: 0
+            }
             TestPaperSummary(
                 testId = p.id,
                 title = p.title,
@@ -611,7 +1115,8 @@ class TestService(
                 hasSubmitted = false,
                 score = null,
                 submissionCount = subCount,
-                createdAt = p.createdAt
+                createdAt = p.createdAt,
+                kind = kind
             )
         }
     }
@@ -619,6 +1124,8 @@ class TestService(
     // ─── Admin: submission list ───
     @Transactional(readOnly = true)
     fun getSubmissions(testId: String): List<SubmissionSummary> {
+        if (testId.startsWith("diag_paper_")) return diagnosticSubmissions(testId)
+
         val paper = findPaper(testId)
         val subs = submissionRepo.findByTestId(testId)
         val userMap = userRepository.findAllById(subs.map { it.userId }).associateBy { it.id }
@@ -684,7 +1191,7 @@ class TestService(
     fun verifyAdminTestAccess(testId: String, callerUserId: String) {
         if (SecurityUtils.hasAnyRole("HQ_ADMIN")) return
         val paper = findPaper(testId)
-        if (paper.orgId == null) return // 본사 시험은 모든 관리자 접근 가능
+        if (paper.orgId == null || paper.orgId == "org_hq") return // 본사 시험은 모든 관리자 접근 가능
         val callerOrgIds = orgMembershipRepository.findByUserIdAndStatus(callerUserId, "active").map { it.orgId }
         if (!callerOrgIds.contains(paper.orgId)) {
             throw ApiException("FORBIDDEN", "다른 기관의 시험에 접근할 수 없습니다.", HttpStatus.FORBIDDEN)
@@ -741,7 +1248,21 @@ class TestService(
 
     private fun parseChoices(json: String?): List<ChoiceItem>? {
         if (json.isNullOrBlank()) return null
-        return objectMapper.readValue(json, object : TypeReference<List<ChoiceItem>>() {})
+        return try {
+            objectMapper.readValue(json, object : TypeReference<List<ChoiceItem>>() {})
+        } catch (_: Exception) {
+            // 진단 등 다른 스키마({choice_id, text, vector, error_path}) → loose 변환
+            try {
+                val raw: List<Map<String, Any?>> = objectMapper.readValue(
+                    json, object : TypeReference<List<Map<String, Any?>>>() {}
+                )
+                raw.mapIndexed { i, m ->
+                    val id = (m["id"] ?: m["choice_id"] ?: ('A' + i).toString()).toString()
+                    val text = (m["text"] ?: "").toString()
+                    ChoiceItem(id = id, text = text)
+                }
+            } catch (_: Exception) { null }
+        }
     }
 
     data class KeywordGradeResult(

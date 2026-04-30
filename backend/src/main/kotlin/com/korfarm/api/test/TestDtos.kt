@@ -18,7 +18,10 @@ data class TestPaperSummary(
     val hasSubmitted: Boolean,
     val score: Int?,
     val submissionCount: Int? = null,
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime,
+    // 테스트 종류: "diagnostic" / "chapter" / "misc"
+    // 종류별로 응시 카운트 소스가 다름 (diagnostic → diag_sessions, chapter → pro_test_sessions, misc → test_submissions)
+    val kind: String = "misc"
 )
 
 // ── Student: Test detail ──
@@ -269,10 +272,22 @@ data class QuestionAnalysis(
     val correctRate: Double,                  // 정답률
     val attempts: Int,                        // 전체 응시자 수
     val correctCount: Int,                    // 정답자 수
-    val choiceDistribution: Map<String, Int>, // 선택지별 응답자 수 {"1": N, "2": N, ...}
-    val choiceStudents: Map<String, List<String>>, // 선택지별 응답한 학생 이름 {"1": ["홍길동", ...], ...}
+    val choiceDistribution: Map<String, Int>, // 객관식: 선택지별 응답자 수 {"1": N, ...}
+    val choiceStudents: Map<String, List<String>>, // 객관식: 선택지별 응답 학생 이름
     val wrongStudentNames: List<String>,      // 틀린 학생 이름 (전체)
-    val competencyVector: Map<String, Double> // 문항의 10대 역량 가중치
+    val competencyVector: Map<String, Double>, // 10대 역량 가중치
+    // 서술형 전용
+    val essayDistribution: Map<String, Int> = emptyMap(), // {"full": N, "partial": N, "zero": N}
+    val essayBuckets: Map<String, List<EssayAnswerEntry>> = emptyMap(), // 점수 버킷별 학생/답안
+    // 객관식 선지 ID 목록 — 진단(A/B/C/D 등) vs 일반(1/2/3/4/5) 구분 위해 동적 전달
+    val choiceIds: List<String> = emptyList()
+)
+
+data class EssayAnswerEntry(
+    val userId: String,
+    val name: String,
+    val answer: String,
+    val earned: Int
 )
 
 // ── 시험지 비주얼 에디터 payload ──

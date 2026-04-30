@@ -1,0 +1,131 @@
+{
+  "id": "dq-SAUSSURE_1-026-10",
+  "type": "CHOICE_COMPLEX_OX",
+  "questionKind": "CHOICE_ANALYSIS",
+  "competency": "세 친구의 활동 구분",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      {
+        "id": "p1",
+        "text": "민수는 도화지에 공룡 그림을 그렸습니다. 그리고 영희는 손뼉을 치며 노래를 불렀습니다. 한편 지민이는 재미있는 전래 동화를 읽었습니다."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "민수는 손뼉을 치며 노래를 불렀다.",
+      "propositions": [
+        {
+          "propId": "A1",
+          "text": "노래를 부른 사람은 민수다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 27,
+              "end": 47
+            }
+          ]
+        },
+        {
+          "propId": "A2",
+          "text": "민수는 노래를 불렀다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 21
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "민수는 공룡 그림을 그렸다.",
+      "propositions": [
+        {
+          "propId": "B1",
+          "text": "민수는 공룡 그림을 그렸다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 21
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "어휘력": 0.4,
+        "문장 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "C",
+      "text": "영희는 손뼉을 치며 노래를 불렀다.",
+      "propositions": [
+        {
+          "propId": "C1",
+          "text": "영희는 노래를 불렀다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 27,
+              "end": 47
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "문장 독해력": 0.4,
+        "구조 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "D",
+      "text": "지민이는 전래 동화를 읽었다.",
+      "propositions": [
+        {
+          "propId": "D1",
+          "text": "지민이는 동화책을 읽었다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 52,
+              "end": 74
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "구조 독해력": 0.4,
+        "어휘력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    }
+  ],
+  "explanation": "지문은 '민수는 공룡 그림을 그렸고, 노래를 부른 사람은 영희'라고 했습니다. 두 친구의 행동을 뒤바꾼 A는 Who 함정입니다.",
+  "scoring": {
+    "correctDeltaSec": 20,
+    "wrongDeltaSec": -40
+  },
+  "competencyVector": {
+    "선택지 분석 및 전략 수립 능력": 0.5,
+    "문장 독해력": 0.3,
+    "구조 독해력": 0.2
+  }
+}

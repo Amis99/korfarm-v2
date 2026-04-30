@@ -95,7 +95,7 @@ export default function WordFormationForm({ editor, focusPath }) {
                 <label className="ce-form-label">형태소 ({(item.morphemes || []).length}개)</label>
                 {(item.morphemes || []).map((m, mi) => (
                   <div key={mi} className="ce-form-row" style={{ marginBottom: 4 }}>
-                    <span style={{ color: "#6a7a6e", fontSize: 12, width: 24, textAlign: "center", flexShrink: 0 }}>{mi}</span>
+                    <span style={{ color: "var(--muted)", fontSize: 12, width: 24, textAlign: "center", flexShrink: 0 }}>{mi}</span>
                     <input
                       className="ce-form-input"
                       value={m || ""}

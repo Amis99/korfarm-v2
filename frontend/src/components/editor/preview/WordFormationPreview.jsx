@@ -6,7 +6,7 @@ export default function WordFormationPreview({ content, onClickPath, focusPath }
 
   return (
     <div>
-      {items.length === 0 && <div style={{ color: "#6a7a6e" }}>항목이 없습니다.</div>}
+      {items.length === 0 && <div style={{ color: "var(--muted)" }}>항목이 없습니다.</div>}
       {items.map((item, i) => {
         const path = `items[${i}]`;
         const isActive = focusPath && focusPath.startsWith(path);
@@ -46,7 +46,7 @@ export default function WordFormationPreview({ content, onClickPath, focusPath }
 
             {/* formationGame 요약 */}
             {item.formationGame?.mergeQuestions?.length > 0 && (
-              <div style={{ marginTop: 6, fontSize: 11, color: "#6a7a6e" }}>
+              <div style={{ marginTop: 6, fontSize: 11, color: "var(--muted)" }}>
                 결합 게임: {item.formationGame.mergeQuestions.length}문항
               </div>
             )}

@@ -133,7 +133,7 @@ function AdminStudyContentPage() {
           <h1>내용 숙지 콘텐츠 관리</h1>
           <button
             type="button"
-            className="ldb-btn ldb-btn-primary"
+            className="admin-detail-btn"
             onClick={() => setShowCreate(!showCreate)}
           >
             {showCreate ? "닫기" : "＋ 신규 콘텐츠"}
@@ -146,13 +146,13 @@ function AdminStudyContentPage() {
           style={{
             padding: 16,
             marginBottom: 20,
-            background: "#fdf6e8",
-            borderLeft: "4px solid #b08850",
+            background: "var(--admin-panel-light, #f5f9f3)",
+            borderLeft: "4px solid #2d6a4f",
           }}
         >
           <div style={{ marginBottom: 10 }}>
-            <strong style={{ fontSize: 15 }}>📚 표준 양식 & AI 프롬프트</strong>
-            <p style={{ fontSize: 13, color: "#5a4030", margin: "6px 0 0" }}>
+            <strong style={{ fontSize: 15, color: "#1f4a37" }}>📚 표준 양식 & AI 프롬프트</strong>
+            <p style={{ fontSize: 13, color: "#3a4a3e", margin: "6px 0 0" }}>
               아래 프롬프트와 표준 양식을 다운받아 외부 ChatGPT/Claude에 사용하세요.
               생성된 JSON을 업로드하면 신규 콘텐츠로 바로 등록됩니다.
             </p>
@@ -160,28 +160,28 @@ function AdminStudyContentPage() {
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
             <button
               type="button"
-              className="ldb-btn ldb-btn-ghost"
+              className="admin-detail-btn secondary"
               onClick={() => downloadTextFile(AI_CHECKLIST_PROMPT, "checklist_prompt.txt")}
             >
               📋 체크리스트 생성 프롬프트
             </button>
             <button
               type="button"
-              className="ldb-btn ldb-btn-ghost"
+              className="admin-detail-btn secondary"
               onClick={() => downloadTextFile(AI_QUESTION_PROMPT, "question_prompt.txt")}
             >
               📋 문제 생성 프롬프트
             </button>
             <button
               type="button"
-              className="ldb-btn ldb-btn-ghost"
+              className="admin-detail-btn secondary"
               onClick={() => downloadJsonFile(STUDY_CONTENT_TEMPLATE, "study_content_template.json")}
             >
               📄 콘텐츠 템플릿 JSON
             </button>
             <button
               type="button"
-              className="ldb-btn ldb-btn-ghost"
+              className="admin-detail-btn secondary"
               onClick={() => downloadJsonFile(STUDY_QUESTIONS_TEMPLATE, "study_questions_schema.json")}
             >
               📄 문제 스키마 JSON
@@ -195,7 +195,7 @@ function AdminStudyContentPage() {
             />
             <button
               type="button"
-              className="ldb-btn ldb-btn-primary"
+              className="admin-detail-btn"
               onClick={() => uploadInputRef.current?.click()}
             >
               📤 콘텐츠 JSON 업로드 (신규 생성)
@@ -281,7 +281,7 @@ function AdminStudyContentPage() {
               </label>
               <button
                 type="button"
-                className="ldb-btn ldb-btn-primary"
+                className="admin-detail-btn"
                 onClick={handleCreate}
                 disabled={creating}
               >
@@ -326,7 +326,7 @@ function AdminStudyContentPage() {
                   <td>
                     <button
                       type="button"
-                      className="ldb-btn ldb-btn-ghost"
+                      className="admin-detail-btn secondary"
                       onClick={() => handleDelete(item)}
                     >
                       삭제

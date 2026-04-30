@@ -22,7 +22,7 @@ function QuestionPreview({ question, index }) {
       <div className="qb-question-stem">{question.stem}</div>
 
       {question.box_items?.length > 0 && (
-        <div style={{ margin: "8px 0", padding: "8px 12px", background: "#18201a", borderRadius: 6, border: "1px solid #2a3a2e" }}>
+        <div style={{ margin: "8px 0", padding: "8px 12px", background: "#18201a", borderRadius: 6, border: "1px solid var(--stroke)" }}>
           <div style={{ fontSize: "0.75rem", color: "#8a9a8e", marginBottom: 4 }}>&lt;보기&gt;</div>
           {question.box_items.map((bi, i) => (
             <div key={i} style={{ fontSize: "0.83rem", color: "#b0a8a0", padding: "2px 0" }}>

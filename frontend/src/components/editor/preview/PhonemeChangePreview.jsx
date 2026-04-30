@@ -6,7 +6,7 @@ export default function PhonemeChangePreview({ content, onClickPath, focusPath }
 
   return (
     <div>
-      {words.length === 0 && <div style={{ color: "#6a7a6e" }}>단어가 없습니다.</div>}
+      {words.length === 0 && <div style={{ color: "var(--muted)" }}>단어가 없습니다.</div>}
       {words.map((w, wi) => {
         const path = `words[${wi}]`;
         const isActive = focusPath && focusPath.startsWith(path);

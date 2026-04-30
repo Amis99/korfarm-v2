@@ -89,7 +89,7 @@ const AdminReportsPage = lazy(() => import("./pages/AdminReportsPage"));
 const AdminWisdomPage = lazy(() => import("./pages/AdminWisdomPage"));
 const AdminWisdomDetailPage = lazy(() => import("./pages/AdminWisdomDetailPage"));
 const AdminTestPage = lazy(() => import("./pages/AdminTestPage"));
-const AdminTestDetailPage = lazy(() => import("./pages/AdminTestDetailPage"));
+const AdminAiUsagePage = lazy(() => import("./pages/AdminAiUsagePage"));
 const AdminTestEditorPage = lazy(() => import("./pages/AdminTestEditorPage"));
 const AdminTestStatisticsPage = lazy(() => import("./pages/AdminTestStatisticsPage"));
 const AdminProPage = lazy(() => import("./pages/AdminProPage"));
@@ -286,9 +286,11 @@ function App() {
           <Route path="/admin/wisdom" element={A(<AdminWisdomPage />)} />
           <Route path="/admin/wisdom/:postId" element={A(<AdminWisdomDetailPage />)} />
           <Route path="/admin/tests" element={A(<AdminTestPage />)} />
-          <Route path="/admin/tests/:testId" element={A(<AdminTestDetailPage />)} />
+          <Route path="/admin/ai-usage" element={A(<AdminAiUsagePage />)} />
           <Route path="/admin/tests/:testId/edit" element={A(<AdminTestEditorPage />)} />
           <Route path="/admin/tests/:testId/statistics" element={A(<AdminTestStatisticsPage />)} />
+          {/* 옛 /admin/tests/:testId 디테일 페이지는 통계 페이지로 통합 → 통계로 redirect (외부 링크 호환) */}
+          <Route path="/admin/tests/:testId" element={A(<AdminTestStatisticsPage />)} />
           {/* 학습자료 DB 통합 */}
           <Route path="/admin/learning-db" element={A(<AdminLearningDBPage />)} />
           <Route path="/admin/learning-db/qb-import" element={A(<AdminQBImportPage />)} />

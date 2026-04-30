@@ -234,9 +234,9 @@ class OrgService(
         val allClassMemberships = classMembershipRepository.findAll()
             .filter { it.status == "active" }
             .groupBy { it.userId }
-        // STUDENT 역할인 사용자만 표시 (부모/관리자 제외)
+        // STUDENT 역할인 사용자만 표시 (부모/관리자 제외, soft deleted 제외)
         var students = userRepository.findAll()
-            .filter { it.id in studentUserIds }
+            .filter { it.id in studentUserIds && it.deletedAt == null }
             .sortedBy { it.createdAt }
         // 기관 필터: ORG_ADMIN인 경우 해당 기관 소속 학생만
         if (filterOrgId != null) {

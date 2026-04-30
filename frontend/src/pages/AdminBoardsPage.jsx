@@ -116,16 +116,16 @@ function AdminBoardsPage() {
       <div className="admin-detail-wrap">
         <div className="admin-detail-header">
           <h1>게시판 관리</h1>
-          <div style={{ display: "flex", gap: 8 }}>
+          <div className="admin-detail-header-actions">
             <Link
               to="/admin/boards/chat-archives"
-              className="ldb-btn ldb-btn-ghost"
+              className="admin-detail-btn secondary"
             >
               💬 채팅 첨부 보관함
             </Link>
             <button
               type="button"
-              className="ldb-btn ldb-btn-primary"
+              className="admin-detail-btn"
               onClick={() => setShowCreate(!showCreate)}
             >
               {showCreate ? "닫기" : "＋ 신규 게시판"}
@@ -134,7 +134,7 @@ function AdminBoardsPage() {
         </div>
 
         {showCreate && (
-          <div className="admin-card" style={{ padding: 20, marginBottom: 24 }}>
+          <div className="admin-detail-card">
             <h3>신규 게시판 작성</h3>
             <div style={{ display: "grid", gap: 12, marginTop: 12 }}>
               <label>
@@ -146,7 +146,7 @@ function AdminBoardsPage() {
                   placeholder="예: board_announcements 또는 announcements"
                   style={{ width: "100%", padding: 8 }}
                 />
-                <div style={{ fontSize: 12, color: "#888", marginTop: 2 }}>
+                <div style={{ fontSize: 12, color: "var(--admin-muted)", marginTop: 2 }}>
                   ID는 영어/숫자/언더스코어만, 한번 정하면 변경 불가
                 </div>
               </label>
@@ -169,7 +169,7 @@ function AdminBoardsPage() {
               </label>
               <button
                 type="button"
-                className="ldb-btn ldb-btn-primary"
+                className="admin-detail-btn"
                 onClick={handleCreate}
                 style={{ alignSelf: "flex-start" }}
               >
@@ -179,14 +179,15 @@ function AdminBoardsPage() {
           </div>
         )}
 
-        {error && <div style={{ color: "#a00", marginBottom: 16 }}>{error}</div>}
+        {error && <div className="admin-error">{error}</div>}
 
+        <div className="admin-detail-card">
         {loading ? (
           <p>불러오는 중...</p>
         ) : boards.length === 0 ? (
-          <p style={{ color: "#888" }}>등록된 게시판이 없습니다.</p>
+          <p style={{ color: "var(--admin-muted)" }}>등록된 게시판이 없습니다.</p>
         ) : (
-          <table className="admin-table">
+          <table className="admin-detail-table">
             <thead>
               <tr>
                 <th>게시판 ID</th>
@@ -241,15 +242,15 @@ function AdminBoardsPage() {
                     <td>{b.createdAt?.slice(0, 10)}</td>
                     <td>
                       {isEditing ? (
-                        <>
-                          <button type="button" className="ldb-btn ldb-btn-primary" onClick={() => saveEdit(b.boardId)}>저장</button>
-                          <button type="button" className="ldb-btn ldb-btn-ghost" onClick={cancelEdit}>취소</button>
-                        </>
+                        <div style={{ display: "flex", gap: 6 }}>
+                          <button type="button" className="admin-detail-btn xs" onClick={() => saveEdit(b.boardId)}>저장</button>
+                          <button type="button" className="admin-detail-btn ghost xs" onClick={cancelEdit}>취소</button>
+                        </div>
                       ) : (
-                        <>
-                          <button type="button" className="ldb-btn ldb-btn-ghost" onClick={() => startEdit(b)}>편집</button>
-                          <button type="button" className="ldb-btn ldb-btn-ghost" onClick={() => handleDelete(b)} style={{ color: "#a00" }}>삭제</button>
-                        </>
+                        <div style={{ display: "flex", gap: 6 }}>
+                          <button type="button" className="admin-detail-btn secondary xs" onClick={() => startEdit(b)}>편집</button>
+                          <button type="button" className="admin-detail-btn danger xs" onClick={() => handleDelete(b)}>삭제</button>
+                        </div>
                       )}
                     </td>
                   </tr>
@@ -258,6 +259,7 @@ function AdminBoardsPage() {
             </tbody>
           </table>
         )}
+        </div>
       </div>
     </AdminLayout>
   );

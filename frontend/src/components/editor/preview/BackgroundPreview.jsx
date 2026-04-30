@@ -8,7 +8,7 @@ export default function BackgroundPreview({ content, onClickPath, focusPath }) {
   const hasPassages = passages.length > 0;
 
   if (!hasPassages && legacyQuestions.length === 0) {
-    return <div style={{ color: "#6a7a6e" }}>콘텐츠가 없습니다.</div>;
+    return <div style={{ color: "var(--muted)" }}>콘텐츠가 없습니다.</div>;
   }
 
   // passages 모드
@@ -32,12 +32,12 @@ export default function BackgroundPreview({ content, onClickPath, focusPath }) {
                 </span>
                 <strong style={{ fontSize: 14 }}>{p.title || "(제목 없음)"}</strong>
               </div>
-              <div style={{ fontSize: 13, color: "#a6b6a9", lineHeight: 1.7, marginBottom: 8, whiteSpace: "pre-wrap" }}>
+              <div style={{ fontSize: 13, color: "var(--muted)", lineHeight: 1.7, marginBottom: 8, whiteSpace: "pre-wrap" }}>
                 {p.text
                   ? p.text.length > 200 ? p.text.slice(0, 200) + "..." : p.text
                   : "(지문 없음)"}
               </div>
-              <div style={{ fontSize: 11, color: "#6a7a6e", marginBottom: 4 }}>
+              <div style={{ fontSize: 11, color: "var(--muted)", marginBottom: 4 }}>
                 글자 수: {p.text?.length || 0}자
               </div>
               {(p.questions || []).map((q, qi) => {
@@ -52,7 +52,7 @@ export default function BackgroundPreview({ content, onClickPath, focusPath }) {
                     style={{ marginTop: 6, marginLeft: 8 }}
                   >
                     <div className="ce-preview-q-stem">
-                      <strong style={{ color: "#6a7a6e", marginRight: 6 }}>Q{qi + 1}.</strong>
+                      <strong style={{ color: "var(--muted)", marginRight: 6 }}>Q{qi + 1}.</strong>
                       {q.stem || "(발문 없음)"}
                     </div>
                     {(q.choices || []).map((c, ci) => (
@@ -89,7 +89,7 @@ export default function BackgroundPreview({ content, onClickPath, focusPath }) {
             onClick={() => onClickPath(path)}
           >
             <div className="ce-preview-q-stem">
-              <strong style={{ color: "#6a7a6e", marginRight: 6 }}>{i + 1}.</strong>
+              <strong style={{ color: "var(--muted)", marginRight: 6 }}>{i + 1}.</strong>
               {q.stem || q.prompt || "(발문 없음)"}
             </div>
             {(q.choices || []).map((c, ci) => (

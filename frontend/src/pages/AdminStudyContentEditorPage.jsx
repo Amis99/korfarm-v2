@@ -194,7 +194,7 @@ function AdminStudyContentEditorPage() {
     <AdminLayout>
       <div className="admin-detail-wrap">
         <div className="admin-detail-header">
-          <button type="button" className="ldb-btn ldb-btn-ghost" onClick={() => navigate("/admin/study-content")}>
+          <button type="button" className="admin-detail-btn secondary" onClick={() => navigate("/admin/study-content")}>
             ← 목록
           </button>
           <h1 style={{ marginLeft: 12 }}>{title || "(제목 없음)"}</h1>
@@ -269,7 +269,7 @@ function AdminStudyContentEditorPage() {
             </div>
 
             <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
-              <button type="button" className="ldb-btn ldb-btn-ghost" onClick={() => setShowPreview(!showPreview)}>
+              <button type="button" className="admin-detail-btn secondary" onClick={() => setShowPreview(!showPreview)}>
                 {showPreview ? "편집 모드" : "미리보기"}
               </button>
             </div>
@@ -288,7 +288,7 @@ function AdminStudyContentEditorPage() {
             )}
 
             <div style={{ marginTop: 12 }}>
-              <button type="button" className="ldb-btn ldb-btn-primary" onClick={handleSaveMeta} disabled={saving}>
+              <button type="button" className="admin-detail-btn" onClick={handleSaveMeta} disabled={saving}>
                 {saving ? "저장 중..." : "본문 + 메타 저장"}
               </button>
             </div>
@@ -298,15 +298,15 @@ function AdminStudyContentEditorPage() {
         {/* ── 체크리스트 탭 ── */}
         {activeTab === "checklist" && (
           <div className="admin-card" style={{ padding: 16 }}>
-            <div style={{ marginBottom: 16, padding: 12, background: "#fdf6e8", borderLeft: "4px solid #b08850" }}>
+            <div style={{ marginBottom: 16, padding: 12, background: "var(--admin-panel-light, #f5f9f3)", borderLeft: "4px solid #2d6a4f" }}>
               <strong>AI 체크리스트 생성 프롬프트</strong>
-              <p style={{ fontSize: 13, color: "#5a4030", margin: "6px 0 10px" }}>
+              <p style={{ fontSize: 13, color: "#3a4a3e", margin: "6px 0 10px" }}>
                 아래 버튼으로 시스템 프롬프트를 다운로드 받은 후, 외부 ChatGPT/Claude에 본문과 함께 입력하면
                 evalPoints/errorPatterns JSON을 받을 수 있습니다.
               </p>
               <button
                 type="button"
-                className="ldb-btn ldb-btn-ghost"
+                className="admin-detail-btn secondary"
                 onClick={() => downloadTextFile(AI_CHECKLIST_PROMPT, "checklist_prompt.txt")}
               >
                 📋 시스템 프롬프트 다운로드
@@ -328,7 +328,7 @@ function AdminStudyContentEditorPage() {
                   <button type="button" onClick={() => removeEvalPoint(i)}>×</button>
                 </div>
               ))}
-              <button type="button" className="ldb-btn ldb-btn-ghost" onClick={addEvalPoint}>＋ 평가 포인트 추가</button>
+              <button type="button" className="admin-detail-btn secondary" onClick={addEvalPoint}>＋ 평가 포인트 추가</button>
             </div>
 
             <h3>오답 패턴 (errorPatterns) — 학생들이 흔히 범하는 오류 유형</h3>
@@ -346,10 +346,10 @@ function AdminStudyContentEditorPage() {
                   <button type="button" onClick={() => removeErrorPattern(i)}>×</button>
                 </div>
               ))}
-              <button type="button" className="ldb-btn ldb-btn-ghost" onClick={addErrorPattern}>＋ 오답 패턴 추가</button>
+              <button type="button" className="admin-detail-btn secondary" onClick={addErrorPattern}>＋ 오답 패턴 추가</button>
             </div>
 
-            <button type="button" className="ldb-btn ldb-btn-primary" onClick={handleSaveMeta} disabled={saving}>
+            <button type="button" className="admin-detail-btn" onClick={handleSaveMeta} disabled={saving}>
               {saving ? "저장 중..." : "체크리스트 저장"}
             </button>
           </div>
@@ -358,30 +358,30 @@ function AdminStudyContentEditorPage() {
         {/* ── 문제 탭 ── */}
         {activeTab === "questions" && (
           <div className="admin-card" style={{ padding: 16 }}>
-            <div style={{ marginBottom: 16, padding: 12, background: "#fdf6e8", borderLeft: "4px solid #b08850" }}>
+            <div style={{ marginBottom: 16, padding: 12, background: "var(--admin-panel-light, #f5f9f3)", borderLeft: "4px solid #2d6a4f" }}>
               <strong>AI 문제 생성 프롬프트</strong>
-              <p style={{ fontSize: 13, color: "#5a4030", margin: "6px 0 10px" }}>
+              <p style={{ fontSize: 13, color: "#3a4a3e", margin: "6px 0 10px" }}>
                 시스템 프롬프트와 표준 스키마를 다운로드 받아 외부 AI에 사용하세요.
                 생성된 JSON은 아래 '업로드' 버튼으로 가져올 수 있습니다.
               </p>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                 <button
                   type="button"
-                  className="ldb-btn ldb-btn-ghost"
+                  className="admin-detail-btn secondary"
                   onClick={() => downloadTextFile(AI_QUESTION_PROMPT, "question_prompt.txt")}
                 >
                   📋 시스템 프롬프트
                 </button>
                 <button
                   type="button"
-                  className="ldb-btn ldb-btn-ghost"
+                  className="admin-detail-btn secondary"
                   onClick={() => downloadJsonFile(STUDY_QUESTIONS_TEMPLATE, "study_questions_schema.json")}
                 >
                   📄 스키마(예시) 다운로드
                 </button>
                 <button
                   type="button"
-                  className="ldb-btn ldb-btn-ghost"
+                  className="admin-detail-btn secondary"
                   onClick={() => downloadJsonFile(STUDY_CONTENT_TEMPLATE, "study_content_template.json")}
                 >
                   📄 콘텐츠 템플릿 다운로드
@@ -395,14 +395,14 @@ function AdminStudyContentEditorPage() {
                 />
                 <button
                   type="button"
-                  className="ldb-btn ldb-btn-primary"
+                  className="admin-detail-btn"
                   onClick={() => fileInputRef.current?.click()}
                 >
                   📤 문제 JSON 업로드
                 </button>
                 <button
                   type="button"
-                  className="ldb-btn ldb-btn-ghost"
+                  className="admin-detail-btn secondary"
                   onClick={() => downloadJsonFile({ questions }, `${title || "questions"}.json`)}
                 >
                   📥 현재 문제 다운로드
@@ -415,8 +415,8 @@ function AdminStudyContentEditorPage() {
               <span style={{ fontSize: 13, color: questions.length < 5 ? "#a00" : "#888" }}>
                 (최소 5개 / 최대 2000개)
               </span>
-              <button type="button" className="ldb-btn ldb-btn-ghost" onClick={handleAddQuestion}>＋ 문제 추가</button>
-              <button type="button" className="ldb-btn ldb-btn-primary" onClick={handleSaveQuestions} disabled={saving}>
+              <button type="button" className="admin-detail-btn secondary" onClick={handleAddQuestion}>＋ 문제 추가</button>
+              <button type="button" className="admin-detail-btn" onClick={handleSaveQuestions} disabled={saving}>
                 {saving ? "저장 중..." : "문제 일괄 저장"}
               </button>
             </div>
@@ -547,7 +547,7 @@ function QuestionEditor({ q, idx, evalPointsCount, errorPatternsCount, onUpdate,
             </div>
           ))}
           {q.questionType === "MULTI_CHOICE" && (
-            <button type="button" className="ldb-btn ldb-btn-ghost" onClick={addChoice}>＋ 선택지 추가</button>
+            <button type="button" className="admin-detail-btn secondary" onClick={addChoice}>＋ 선택지 추가</button>
           )}
         </div>
       )}
@@ -586,7 +586,7 @@ function QuestionEditor({ q, idx, evalPointsCount, errorPatternsCount, onUpdate,
               }}>×</button>
             </div>
           ))}
-          <button type="button" className="ldb-btn ldb-btn-ghost" onClick={() => {
+          <button type="button" className="admin-detail-btn secondary" onClick={() => {
             onUpdate((prev) => ({
               ...prev,
               fillBlanks: [...(prev.fillBlanks || []), { phrase: "" }],

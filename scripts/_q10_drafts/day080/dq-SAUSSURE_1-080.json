@@ -1,0 +1,59 @@
+{
+  "contentId": "dq-SAUSSURE_1-080",
+  "questionId": "dq-SAUSSURE_1-080-10",
+  "level": "SAUSSURE_1",
+  "grade": "초1",
+  "competencyKeyword": "도와주는 사람들의 일",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      { "id": "p1", "text": "우리를 돕는 사람들이 있습니다. 소방관은 불을 끕니다. 경찰관은 도둑을 잡습니다. 의사는 환자를 치료합니다." }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "경찰관은 환자를 치료한다.",
+      "isCorrect": true,
+      "wrongVector": {},
+      "propositions": [
+        { "propId": "A1", "text": "경찰이 치료를 한다.", "oxAnswer": "X", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "경찰관은 도둑을 잡습니다" }] },
+        { "propId": "A2", "text": "환자 치료의 주체는 경찰이다.", "oxAnswer": "X", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "의사는 환자를 치료합니다" }] }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "소방관은 불을 끈다.",
+      "isCorrect": false,
+      "wrongVector": { "어휘력": 0.4, "문장 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "B1", "text": "소방관=불 끄기다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "소방관은 불을 끕니다" }] }
+      ]
+    },
+    {
+      "choiceId": "C",
+      "text": "경찰관은 도둑을 잡는다.",
+      "isCorrect": false,
+      "wrongVector": { "문장 독해력": 0.4, "구조 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "C1", "text": "경찰=도둑 잡기다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "경찰관은 도둑을 잡습니다" }] }
+      ]
+    },
+    {
+      "choiceId": "D",
+      "text": "의사는 환자를 치료한다.",
+      "isCorrect": false,
+      "wrongVector": { "구조 독해력": 0.4, "어휘력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "D1", "text": "의사=치료자다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "의사는 환자를 치료합니다" }] }
+      ]
+    }
+  ],
+  "competencyVector": { "선택지 분석 및 전략 수립 능력": 0.5, "문장 독해력": 0.3, "구조 독해력": 0.2 },
+  "explanation": "지문은 '경찰관이 도둑을 잡고, 의사가 환자를 치료한다'고 했습니다. 두 직업 일을 뒤바꾼 A는 섞어치기 함정입니다."
+}

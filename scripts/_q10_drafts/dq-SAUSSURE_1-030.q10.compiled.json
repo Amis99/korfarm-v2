@@ -1,0 +1,131 @@
+{
+  "id": "dq-SAUSSURE_1-030-10",
+  "type": "CHOICE_COMPLEX_OX",
+  "questionKind": "CHOICE_ANALYSIS",
+  "competency": "장소와 사람 짝짓기",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      {
+        "id": "p1",
+        "text": "민수는 시장에서 상인 아주머니를 만났습니다. 그리고 지민이는 병원에서 의사 선생님을 보았습니다. 한편 영희는 용감한 소방관 아저씨를 보았습니다."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "민수는 병원에서 의사 선생님을 만났다.",
+      "propositions": [
+        {
+          "propId": "A1",
+          "text": "민수가 만난 곳은 병원이다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 23
+            }
+          ]
+        },
+        {
+          "propId": "A2",
+          "text": "민수가 만난 사람은 의사 선생님이다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 29,
+              "end": 52
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "민수는 시장에서 상인 아주머니를 만났다.",
+      "propositions": [
+        {
+          "propId": "B1",
+          "text": "민수는 시장에서 상인을 만났다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 23
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "어휘력": 0.4,
+        "문장 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "C",
+      "text": "지민이는 병원에서 의사 선생님을 보았다.",
+      "propositions": [
+        {
+          "propId": "C1",
+          "text": "지민이는 병원에서 의사를 보았다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 29,
+              "end": 52
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "문장 독해력": 0.4,
+        "구조 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "D",
+      "text": "영희는 용감한 소방관 아저씨를 보았다.",
+      "propositions": [
+        {
+          "propId": "D1",
+          "text": "영희는 소방관을 보았다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 57,
+              "end": 79
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "구조 독해력": 0.4,
+        "어휘력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    }
+  ],
+  "explanation": "지문은 '민수는 시장에서 상인을 만났고, 병원에서 의사를 본 사람은 지민이'라고 했습니다. 만난 장소와 사람을 뒤바꾼 A는 섞어치기 함정입니다.",
+  "scoring": {
+    "correctDeltaSec": 20,
+    "wrongDeltaSec": -40
+  },
+  "competencyVector": {
+    "선택지 분석 및 전략 수립 능력": 0.5,
+    "문장 독해력": 0.3,
+    "구조 독해력": 0.2
+  }
+}

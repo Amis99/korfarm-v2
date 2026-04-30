@@ -34,7 +34,7 @@ function EditHistoryModal({ contentId, onClose }) {
           {loading ? (
             <div className="ldb-loading">불러오는 중...</div>
           ) : logs.length === 0 ? (
-            <div style={{ color: "#6a7a6e", textAlign: "center", padding: 20 }}>이력이 없습니다</div>
+            <div style={{ color: "var(--muted)", textAlign: "center", padding: 20 }}>이력이 없습니다</div>
           ) : (
             <table className="ldb-log-table">
               <thead>

@@ -65,7 +65,7 @@ export default function WorksheetForm({ editor, focusPath }) {
                   background: "#1a2520",
                   border: "1px dashed #4a5a4e",
                   borderRadius: 4,
-                  color: "#a6b6a9",
+                  color: "var(--muted)",
                   fontSize: 12,
                   fontFamily: "monospace",
                   whiteSpace: "pre-wrap",

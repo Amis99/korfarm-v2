@@ -1,0 +1,53 @@
+{
+  "contentId": "dq-SAUSSURE_1-018",
+  "questionId": "dq-SAUSSURE_1-018-10",
+  "level": "SAUSSURE_1",
+  "grade": "초1",
+  "competencyKeyword": "자전거 연습 결과 이해",
+  "stem": "글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      { "id": "p1", "text": "아빠와 자전거 타기 연습을 했습니다. 처음에는 여러 번 넘어져서 무릎이 까졌습니다. 그래도 열심히 연습해서 혼자 쌩쌩 탔습니다." }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "한 번도 넘어지지 않고 자전거를 처음부터 잘 탔어요.",
+      "isCorrect": true,
+      "wrongVector": {},
+      "propositions": [
+        { "propId": "A1", "text": "한 번도 넘어지지 않았다.", "oxAnswer": "X", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "처음에는 여러 번 넘어져서 무릎이 까졌습니다" }] },
+        { "propId": "A2", "text": "처음부터 자전거를 잘 탔다.", "oxAnswer": "X", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "그래도 열심히 연습해서 혼자 쌩쌩 탔습니다" }] }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "아빠와 자전거 타기 연습을 했어요.",
+      "isCorrect": false,
+      "wrongVector": { "어휘력": 0.4, "문장 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [{ "propId": "B1", "text": "아빠와 자전거 연습을 했다.", "oxAnswer": "O", "matchMode": "ALL",
+        "evidence": [{ "paragraphId": "p1", "substring": "아빠와 자전거 타기 연습을 했습니다" }] }]
+    },
+    {
+      "choiceId": "C",
+      "text": "처음에는 여러 번 넘어져서 무릎이 까졌어요.",
+      "isCorrect": false,
+      "wrongVector": { "문장 독해력": 0.5, "선택지 분석 및 전략 수립 능력": 0.3, "어휘력": 0.2 },
+      "propositions": [{ "propId": "C1", "text": "여러 번 넘어졌다.", "oxAnswer": "O", "matchMode": "ALL",
+        "evidence": [{ "paragraphId": "p1", "substring": "처음에는 여러 번 넘어져서 무릎이 까졌습니다" }] }]
+    },
+    {
+      "choiceId": "D",
+      "text": "열심히 연습해서 혼자 자전거를 탔어요.",
+      "isCorrect": false,
+      "wrongVector": { "논리 사고력": 0.4, "문장 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [{ "propId": "D1", "text": "혼자 자전거를 탔다.", "oxAnswer": "O", "matchMode": "ALL",
+        "evidence": [{ "paragraphId": "p1", "substring": "그래도 열심히 연습해서 혼자 쌩쌩 탔습니다" }] }]
+    }
+  ],
+  "competencyVector": { "선택지 분석 및 전략 수립 능력": 0.5, "문장 독해력": 0.3, "어휘력": 0.2 },
+  "explanation": "지문은 '처음에는 여러 번 넘어졌고 연습 끝에 혼자 탔다'고 했습니다. 이를 '처음부터 잘 탔다'로 뒤집은 A는 부정/상대어 함정입니다."
+}

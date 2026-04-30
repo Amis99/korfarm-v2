@@ -1,0 +1,131 @@
+{
+  "id": "dq-SAUSSURE_1-041-10",
+  "type": "CHOICE_COMPLEX_OX",
+  "questionKind": "CHOICE_ANALYSIS",
+  "competency": "동진이의 발표 순서",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      {
+        "id": "p1",
+        "text": "발표 시간에 동진이가 앞으로 씩씩하게 나갔습니다. 동진이는 먼저 멋진 그림일기를 친구들에게 보여주었습니다. 그다음 웃어른께 높임말을 쓰는 방법을 발표했습니다. 마지막으로 국어사전에서 낱말을 찾는 법을 설명했습니다."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "동진이는 가장 먼저 사전에서 낱말 찾는 법을 설명했다.",
+      "propositions": [
+        {
+          "propId": "A1",
+          "text": "사전 찾는 법을 가장 먼저 설명했다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 28,
+              "end": 58
+            }
+          ]
+        },
+        {
+          "propId": "A2",
+          "text": "사전 설명이 처음 순서다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 89,
+              "end": 118
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "동진이는 그림일기를 친구들에게 보여주었다.",
+      "propositions": [
+        {
+          "propId": "B1",
+          "text": "그림일기를 보여주었다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 58
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "어휘력": 0.4,
+        "문장 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "C",
+      "text": "그다음 높임말 쓰는 방법을 발표했다.",
+      "propositions": [
+        {
+          "propId": "C1",
+          "text": "두 번째는 높임말 발표다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 60,
+              "end": 87
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "문장 독해력": 0.4,
+        "구조 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "D",
+      "text": "마지막으로 사전에서 낱말 찾는 법을 설명했다.",
+      "propositions": [
+        {
+          "propId": "D1",
+          "text": "마지막은 사전 설명이다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 89,
+              "end": 118
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "구조 독해력": 0.4,
+        "어휘력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    }
+  ],
+  "explanation": "지문은 '먼저 그림일기, 다음 높임말, 마지막 사전 설명' 순이라고 했습니다. 사전 설명을 맨 처음으로 만든 A는 순서/방향 함정입니다.",
+  "scoring": {
+    "correctDeltaSec": 20,
+    "wrongDeltaSec": -40
+  },
+  "competencyVector": {
+    "선택지 분석 및 전략 수립 능력": 0.5,
+    "문장 독해력": 0.3,
+    "구조 독해력": 0.2
+  }
+}

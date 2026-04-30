@@ -2,19 +2,21 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { apiGet } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
+import Modal from "../components/Modal";
+import TestReportView from "../components/test-report/TestReportView";
+import TestWrongNoteView from "../components/test-report/TestWrongNoteView";
 import "../styles/test-storage.css";
 
 function fmt(n, digits = 1) {
   if (n == null || isNaN(n)) return "-";
   return Number(n).toFixed(digits);
 }
-
 function pct(n) {
   if (n == null || isNaN(n)) return "-";
   return (Number(n) * 100).toFixed(1) + "%";
 }
 
-// snake_case ↔ camelCase 양쪽 지원 정규화
+// 정규화 — snake_case ↔ camelCase
 function normTest(t) {
   if (!t) return null;
   return {
@@ -29,14 +31,10 @@ function normTest(t) {
 function normStats(s) {
   if (!s) return null;
   const grade = s.gradeStats ?? s.grade_stats ?? {};
-  // 학년 통계 키도 snake-case일 가능성
   const normalizedGrade = {};
   for (const [k, v] of Object.entries(grade || {})) {
     normalizedGrade[k] = {
-      count: v.count ?? 0,
-      avg: v.avg ?? 0,
-      max: v.max ?? 0,
-      min: v.min ?? 0,
+      count: v.count ?? 0, avg: v.avg ?? 0, max: v.max ?? 0, min: v.min ?? 0,
       stdDev: v.stdDev ?? v.std_dev ?? 0,
     };
   }
@@ -66,7 +64,20 @@ function normStudent(d) {
     wrongQuestionNumbers: d.wrongQuestionNumbers ?? d.wrong_question_numbers ?? [],
   };
 }
+function normEssayEntry(e) {
+  return {
+    userId: e.userId ?? e.user_id,
+    name: e.name ?? "",
+    answer: e.answer ?? "",
+    earned: e.earned ?? 0,
+  };
+}
 function normQuestion(q) {
+  const ebRaw = q.essayBuckets ?? q.essay_buckets ?? {};
+  const eb = {};
+  for (const [k, list] of Object.entries(ebRaw)) {
+    eb[k] = (Array.isArray(list) ? list : []).map(normEssayEntry);
+  }
   return {
     number: q.number ?? 0,
     type: q.type,
@@ -82,6 +93,9 @@ function normQuestion(q) {
     choiceStudents: q.choiceStudents ?? q.choice_students ?? {},
     wrongStudentNames: q.wrongStudentNames ?? q.wrong_student_names ?? [],
     competencyVector: q.competencyVector ?? q.competency_vector ?? {},
+    essayDistribution: q.essayDistribution ?? q.essay_distribution ?? {},
+    essayBuckets: eb,
+    choiceIds: q.choiceIds ?? q.choice_ids ?? [],
   };
 }
 
@@ -98,6 +112,20 @@ function StatCard({ label, value, sub }) {
   );
 }
 
+// 클릭 가능한 셀 (모달 트리거)
+function ClickableCell({ children, onClick, title }) {
+  return (
+    <span
+      onClick={onClick}
+      title={title || "클릭 시 상세 보기"}
+      style={{
+        cursor: "pointer", color: "var(--accent)", textDecoration: "underline",
+        textDecorationStyle: "dotted",
+      }}
+    >{children}</span>
+  );
+}
+
 export default function AdminTestStatisticsPage() {
   const { testId } = useParams();
   const navigate = useNavigate();
@@ -111,6 +139,22 @@ export default function AdminTestStatisticsPage() {
   // 학생 필터
   const [stuSearch, setStuSearch] = useState("");
   const [stuGrade, setStuGrade] = useState("all");
+
+  // 모달 상태
+  const [modal, setModal] = useState(null);
+  // modal 형태:
+  //  { kind:"domain", student }
+  //  { kind:"wrong", student }
+  //  { kind:"choice", question, choiceId }
+  //  { kind:"essay", question, bucketKey }
+  //  { kind:"competency", question }
+  //  { kind:"report", student }
+  //  { kind:"wrongNote", student }
+
+  const [reportData, setReportData] = useState(null);
+  const [reportLoading, setReportLoading] = useState(false);
+  const [wrongNoteData, setWrongNoteData] = useState(null);
+  const [wrongNoteLoading, setWrongNoteLoading] = useState(false);
 
   useEffect(() => {
     if (!testId || testId === "undefined") {
@@ -143,6 +187,24 @@ export default function AdminTestStatisticsPage() {
     return () => { cancelled = true; };
   }, [testId, navigate]);
 
+  // 모달이 report/wrongNote면 데이터 로드
+  useEffect(() => {
+    if (!modal) { setReportData(null); setWrongNoteData(null); return; }
+    if (modal.kind === "report" && modal.student) {
+      setReportLoading(true);
+      apiGet(`/v1/admin/test-papers/${testId}/submissions/${modal.student.userId}/report`)
+        .then(setReportData)
+        .catch((e) => { console.error(e); alert("성적표 로드 실패"); setModal(null); })
+        .finally(() => setReportLoading(false));
+    } else if (modal.kind === "wrongNote" && modal.student) {
+      setWrongNoteLoading(true);
+      apiGet(`/v1/admin/test-papers/${testId}/submissions/${modal.student.userId}/wrong-note`)
+        .then(setWrongNoteData)
+        .catch((e) => { console.error(e); alert("오답 노트 로드 실패"); setModal(null); })
+        .finally(() => setWrongNoteLoading(false));
+    }
+  }, [modal, testId]);
+
   const gradeOptions = useMemo(() => {
     const set = new Set();
     students.forEach((s) => s.grade && set.add(s.grade));
@@ -169,11 +231,13 @@ export default function AdminTestStatisticsPage() {
   if (!test || !stats) return null;
 
   const totalPoints = stats.totalPoints || test.totalPoints || 0;
-
   const inputStyle = {
     padding: "6px 10px", background: "var(--bg)", color: "var(--text)",
     border: "1px solid var(--stroke)", borderRadius: 6,
   };
+
+  // 모달 닫기
+  const closeModal = () => setModal(null);
 
   return (
     <AdminLayout>
@@ -185,7 +249,6 @@ export default function AdminTestStatisticsPage() {
           <Link to={`/admin/tests/${testId}/edit`} style={{ marginLeft: 12, color: "var(--accent)" }}>[시험지 편집]</Link>
         </div>
 
-        {/* 전체 통계 */}
         <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 12 }}>
           <StatCard label="응시자" value={`${stats.submissionCount}명`} />
           <StatCard label="평균" value={`${fmt(stats.avgScore)}점`} sub={totalPoints ? pct((stats.avgScore || 0) / totalPoints) : null} />
@@ -224,7 +287,6 @@ export default function AdminTestStatisticsPage() {
           </div>
         )}
 
-        {/* 탭 */}
         <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
           <button
             onClick={() => setTab("students")}
@@ -259,7 +321,7 @@ export default function AdminTestStatisticsPage() {
               </span>
             </div>
             <div style={{ background: "var(--panel)", border: "1px solid var(--stroke)", borderRadius: 8, padding: 8, overflowX: "auto" }}>
-              <table style={{ width: "100%", fontSize: 11, minWidth: 800, color: "var(--text)" }}>
+              <table style={{ width: "100%", fontSize: 12, minWidth: 800, color: "var(--text)" }}>
                 <thead>
                   <tr style={{ background: "var(--bg)", textAlign: "left" }}>
                     <th style={{ padding: "6px 6px" }}>이름</th>
@@ -274,29 +336,41 @@ export default function AdminTestStatisticsPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredStudents.map((s) => (
-                    <tr key={s.userId} style={{ borderTop: "1px solid var(--stroke)" }}>
-                      <td style={{ padding: "4px 6px", fontWeight: 600 }}>{s.userName || "-"}</td>
-                      <td style={{ padding: "4px 6px" }}>{s.school || "-"}</td>
-                      <td style={{ padding: "4px 6px" }}>{s.grade || "-"}</td>
-                      <td style={{ padding: "4px 6px" }}>{s.orgName || "본사"}</td>
-                      <td style={{ padding: "4px 6px", color: "var(--muted)" }}>
-                        {s.submittedAt ? new Date(s.submittedAt).toLocaleString("ko-KR") : "-"}
-                      </td>
-                      <td style={{ padding: "4px 6px", fontWeight: 600 }}>{s.score} / {s.totalPoints}</td>
-                      <td style={{ padding: "4px 6px" }}>{pct(s.accuracy)}</td>
-                      <td style={{ padding: "4px 6px" }}>
-                        {Object.entries(s.domainScores || {}).map(([dom, d]) => (
-                          <span key={dom} style={{ marginRight: 8 }}>
-                            {dom}: <b>{d.score}</b>/{d.maxScore ?? d.max_score}
-                          </span>
-                        ))}
-                      </td>
-                      <td style={{ padding: "4px 6px", color: "#fca5a5" }}>
-                        {(s.wrongQuestionNumbers || []).join(", ") || "-"}
-                      </td>
-                    </tr>
-                  ))}
+                  {filteredStudents.map((s) => {
+                    const domainCount = Object.keys(s.domainScores || {}).length;
+                    const wrongCount = (s.wrongQuestionNumbers || []).length;
+                    return (
+                      <tr key={s.userId} style={{ borderTop: "1px solid var(--stroke)" }}>
+                        <td style={{ padding: "4px 6px", fontWeight: 600 }}>
+                          <ClickableCell onClick={() => setModal({ kind: "report", student: s })} title="성적표 보기">
+                            {s.userName || "-"}
+                          </ClickableCell>
+                        </td>
+                        <td style={{ padding: "4px 6px" }}>{s.school || "-"}</td>
+                        <td style={{ padding: "4px 6px" }}>{s.grade || "-"}</td>
+                        <td style={{ padding: "4px 6px" }}>{s.orgName || "본사"}</td>
+                        <td style={{ padding: "4px 6px", color: "var(--muted)" }}>
+                          {s.submittedAt ? new Date(s.submittedAt).toLocaleString("ko-KR") : "-"}
+                        </td>
+                        <td style={{ padding: "4px 6px", fontWeight: 600 }}>{s.score} / {s.totalPoints}</td>
+                        <td style={{ padding: "4px 6px" }}>{pct(s.accuracy)}</td>
+                        <td style={{ padding: "4px 6px" }}>
+                          {domainCount > 0 ? (
+                            <ClickableCell onClick={() => setModal({ kind: "domain", student: s })}>
+                              {domainCount}개 영역
+                            </ClickableCell>
+                          ) : "-"}
+                        </td>
+                        <td style={{ padding: "4px 6px", color: wrongCount > 0 ? "#fca5a5" : "var(--muted)" }}>
+                          {wrongCount > 0 ? (
+                            <ClickableCell onClick={() => setModal({ kind: "wrong", student: s })} title="틀린 번호 보기">
+                              <span style={{ color: "#fca5a5" }}>{wrongCount}개</span>
+                            </ClickableCell>
+                          ) : "-"}
+                        </td>
+                      </tr>
+                    );
+                  })}
                   {filteredStudents.length === 0 && (
                     <tr><td colSpan={9} style={{ padding: 16, textAlign: "center", color: "var(--muted)" }}>응시 학생 없음</td></tr>
                   )}
@@ -308,7 +382,7 @@ export default function AdminTestStatisticsPage() {
 
         {tab === "questions" && (
           <div style={{ background: "var(--panel)", border: "1px solid var(--stroke)", borderRadius: 8, padding: 8, overflowX: "auto" }}>
-            <table style={{ width: "100%", fontSize: 11, minWidth: 900, color: "var(--text)" }}>
+            <table style={{ width: "100%", fontSize: 12, minWidth: 1000, color: "var(--text)" }}>
               <thead>
                 <tr style={{ background: "var(--bg)", textAlign: "left" }}>
                   <th style={{ padding: "6px 6px" }}>번호</th>
@@ -317,63 +391,394 @@ export default function AdminTestStatisticsPage() {
                   <th style={{ padding: "6px 6px" }}>배점</th>
                   <th style={{ padding: "6px 6px" }}>정답</th>
                   <th style={{ padding: "6px 6px" }}>정답률</th>
-                  <th style={{ padding: "6px 6px" }}>오답률</th>
                   <th style={{ padding: "6px 6px" }}>응시</th>
-                  <th style={{ padding: "6px 6px" }}>선택지 분포</th>
+                  <th style={{ padding: "6px 6px", minWidth: 240 }}>선택지 분포 (%)</th>
                   <th style={{ padding: "6px 6px" }}>역량</th>
                 </tr>
               </thead>
               <tbody>
                 {questions.map((q) => (
-                  <tr key={q.number} style={{ borderTop: "1px solid var(--stroke)" }}>
-                    <td style={{ padding: "4px 6px", fontWeight: 600 }}>{q.number}</td>
-                    <td style={{ padding: "4px 6px" }}>{q.type}</td>
-                    <td style={{ padding: "4px 6px" }}>{q.domain || "-"}{q.subDomain ? ` / ${q.subDomain}` : ""}</td>
-                    <td style={{ padding: "4px 6px" }}>{q.points}</td>
-                    <td style={{ padding: "4px 6px" }}>{q.correctAnswer || "-"}</td>
-                    <td style={{ padding: "4px 6px", color: q.correctRate >= 0.7 ? "#86efac" : q.correctRate >= 0.4 ? "#fcd34d" : "#fca5a5" }}>
-                      {pct(q.correctRate)}
-                    </td>
-                    <td style={{ padding: "4px 6px" }}>{pct(q.wrongRate)}</td>
-                    <td style={{ padding: "4px 6px" }}>{q.correctCount}/{q.attempts}</td>
-                    <td style={{ padding: "4px 6px" }}>
-                      {Object.entries(q.choiceDistribution || {}).sort().map(([c, n]) => {
-                        const studentNames = (q.choiceStudents || {})[c] || [];
-                        const tip = studentNames.length > 0 ? studentNames.join(", ") : "";
-                        const isCorrect = c === q.correctAnswer;
-                        return (
-                          <span
-                            key={c}
-                            title={tip}
-                            style={{
-                              marginRight: 6, padding: "1px 5px",
-                              background: isCorrect ? "rgba(34,197,94,0.2)" : "rgba(239,68,68,0.2)",
-                              color: isCorrect ? "#86efac" : "#fca5a5",
-                              borderRadius: 3,
-                              cursor: tip ? "help" : "default",
-                              fontWeight: 600,
-                            }}
-                          >{c}: {n}</span>
-                        );
-                      })}
-                    </td>
-                    <td style={{ padding: "4px 6px", color: "var(--muted)" }}>
-                      {Object.entries(q.competencyVector || {})
-                        .sort((a, b) => b[1] - a[1])
-                        .slice(0, 2)
-                        .map(([k, v]) => `${k} ${fmt(v, 2)}`)
-                        .join(" / ") || "-"}
-                    </td>
-                  </tr>
+                  <QuestionRow
+                    key={q.number}
+                    q={q}
+                    onChoiceClick={(cid) => setModal({ kind: "choice", question: q, choiceId: cid })}
+                    onEssayClick={(bk) => setModal({ kind: "essay", question: q, bucketKey: bk })}
+                    onCompetencyClick={() => setModal({ kind: "competency", question: q })}
+                  />
                 ))}
                 {questions.length === 0 && (
-                  <tr><td colSpan={10} style={{ padding: 16, textAlign: "center", color: "var(--muted)" }}>문항 분석 없음</td></tr>
+                  <tr><td colSpan={9} style={{ padding: 16, textAlign: "center", color: "var(--muted)" }}>문항 분석 없음</td></tr>
                 )}
               </tbody>
             </table>
           </div>
         )}
       </div>
+
+      {/* ── 모달 ── */}
+      {modal?.kind === "domain" && (
+        <Modal open onClose={closeModal} title={`${modal.student.userName || "-"} — 영역별 점수`} size="md">
+          <DomainModalBody student={modal.student} />
+        </Modal>
+      )}
+      {modal?.kind === "wrong" && (
+        <Modal open onClose={closeModal} title={`${modal.student.userName || "-"} — 틀린 번호 (${modal.student.wrongQuestionNumbers.length}개)`} size="sm">
+          <WrongModalBody numbers={modal.student.wrongQuestionNumbers} />
+        </Modal>
+      )}
+      {modal?.kind === "choice" && (
+        <Modal open onClose={closeModal} title={`${modal.question.number}번 — 선택지 ${modal.choiceId} 응답자`} size="md">
+          <ChoiceModalBody question={modal.question} choiceId={modal.choiceId} />
+        </Modal>
+      )}
+      {modal?.kind === "essay" && (
+        <Modal open onClose={closeModal} title={`${modal.question.number}번 — ${ESSAY_LABEL[modal.bucketKey] || modal.bucketKey} 학생·답안`} size="lg">
+          <EssayModalBody question={modal.question} bucketKey={modal.bucketKey} />
+        </Modal>
+      )}
+      {modal?.kind === "competency" && (
+        <Modal open onClose={closeModal} title={`${modal.question.number}번 — 역량 가중치`} size="md">
+          <CompetencyModalBody question={modal.question} />
+        </Modal>
+      )}
+      {modal?.kind === "report" && (
+        <Modal open onClose={closeModal} title={`성적표 — ${modal.student.userName || ""}`} size="xl">
+          {reportLoading ? <div style={{ padding: 24, textAlign: "center" }}>불러오는 중...</div> : (
+            reportData && (
+              <TestReportView
+                report={reportData}
+                userName={modal.student.userName}
+                embedded
+                onSwitchToWrongNote={() => setModal({ kind: "wrongNote", student: modal.student })}
+              />
+            )
+          )}
+        </Modal>
+      )}
+      {modal?.kind === "wrongNote" && (
+        <Modal open onClose={closeModal} title={`오답 노트 — ${modal.student.userName || ""}`} size="xl">
+          {wrongNoteLoading ? <div style={{ padding: 24, textAlign: "center" }}>불러오는 중...</div> : (
+            wrongNoteData && (
+              <TestWrongNoteView
+                data={wrongNoteData}
+                userName={modal.student.userName}
+                embedded
+                onSwitchToReport={() => setModal({ kind: "report", student: modal.student })}
+              />
+            )
+          )}
+        </Modal>
+      )}
     </AdminLayout>
+  );
+}
+
+const ESSAY_LABEL = { full: "만점", partial: "부분점수", zero: "0점" };
+const ESSAY_COLOR = {
+  full: { bg: "rgba(34,197,94,0.18)", fg: "#86efac", bd: "rgba(34,197,94,0.4)" },
+  partial: { bg: "rgba(252,211,77,0.18)", fg: "#fcd34d", bd: "rgba(252,211,77,0.4)" },
+  zero: { bg: "rgba(239,68,68,0.18)", fg: "#fca5a5", bd: "rgba(239,68,68,0.4)" },
+};
+
+function QuestionRow({ q, onChoiceClick, onEssayClick, onCompetencyClick }) {
+  const isEssay = q.type === "서술형" || q.type === "서술";
+  const total = q.attempts || 0;
+
+  return (
+    <tr style={{ borderTop: "1px solid var(--stroke)" }}>
+      <td style={{ padding: "4px 6px", fontWeight: 600 }}>{q.number}</td>
+      <td style={{ padding: "4px 6px" }}>{q.type}</td>
+      <td style={{ padding: "4px 6px" }}>{q.domain || "-"}{q.subDomain ? ` / ${q.subDomain}` : ""}</td>
+      <td style={{ padding: "4px 6px" }}>{q.points}</td>
+      <td style={{ padding: "4px 6px" }}>{q.correctAnswer || "-"}</td>
+      <td style={{
+        padding: "4px 6px",
+        color: q.correctRate >= 0.7 ? "#86efac" : q.correctRate >= 0.4 ? "#fcd34d" : "#fca5a5",
+        fontWeight: 600,
+      }}>{pct(q.correctRate)}</td>
+      <td style={{ padding: "4px 6px" }}>{q.correctCount}/{q.attempts}</td>
+      <td style={{ padding: "4px 6px" }}>
+        {isEssay ? (
+          <EssayDistribution q={q} total={total} onClick={onEssayClick} />
+        ) : (
+          <ChoiceDistribution q={q} total={total} onClick={onChoiceClick} />
+        )}
+      </td>
+      <td style={{ padding: "4px 6px" }}>
+        {Object.keys(q.competencyVector || {}).length > 0 ? (
+          <ClickableCell onClick={onCompetencyClick} title="역량 상세 보기">
+            {Object.keys(q.competencyVector).length}개
+          </ClickableCell>
+        ) : "-"}
+      </td>
+    </tr>
+  );
+}
+
+// 객관식 — 동적 선지 ID(1/2/3/4/5 또는 A/B/C/D 등) + 백분율
+function ChoiceDistribution({ q, total, onClick }) {
+  // 우선순위: q.choiceIds → choiceDistribution 키 → 1~5 fallback
+  let choices = (q.choiceIds && q.choiceIds.length > 0)
+    ? q.choiceIds
+    : Object.keys(q.choiceDistribution || {});
+  if (choices.length === 0) choices = ["1", "2", "3", "4", "5"];
+  // 라벨 — 숫자형이면 "N번", 문자형이면 그대로
+  const isNumeric = (c) => /^\d+$/.test(c);
+
+  return (
+    <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
+      {choices.map((c) => {
+        const n = q.choiceDistribution?.[c] || 0;
+        const ratio = total > 0 ? (n / total) : 0;
+        const isCorrect = c === q.correctAnswer;
+        const hasResponses = n > 0;
+        return (
+          <button
+            key={c}
+            type="button"
+            onClick={() => hasResponses && onClick(c)}
+            disabled={!hasResponses}
+            style={{
+              minWidth: 44, padding: "4px 6px", borderRadius: 4,
+              background: isCorrect ? "rgba(34,197,94,0.18)" : (hasResponses ? "rgba(239,68,68,0.12)" : "var(--bg)"),
+              color: isCorrect ? "#86efac" : (hasResponses ? "#fca5a5" : "var(--muted)"),
+              border: `1px solid ${isCorrect ? "rgba(34,197,94,0.4)" : "var(--stroke)"}`,
+              fontSize: 11, fontWeight: 700,
+              cursor: hasResponses ? "pointer" : "default",
+              textAlign: "center", lineHeight: 1.2,
+            }}
+            title={hasResponses ? `${c} 응답자 ${n}명` : ""}
+          >
+            <div>{isNumeric(c) ? `${c}번` : c}</div>
+            <div style={{ fontSize: 10, fontWeight: 500, marginTop: 2 }}>
+              {total > 0 ? `${(ratio * 100).toFixed(0)}%` : "-"}
+            </div>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+// 서술형 — 만점/부분점수/0점 셀 + 백분율
+function EssayDistribution({ q, total, onClick }) {
+  const buckets = ["full", "partial", "zero"];
+  return (
+    <div style={{ display: "flex", gap: 4 }}>
+      {buckets.map((bk) => {
+        const n = q.essayDistribution?.[bk] || 0;
+        const ratio = total > 0 ? (n / total) : 0;
+        const has = n > 0;
+        const c = ESSAY_COLOR[bk];
+        return (
+          <button
+            key={bk}
+            type="button"
+            onClick={() => has && onClick(bk)}
+            disabled={!has}
+            style={{
+              minWidth: 64, padding: "4px 8px", borderRadius: 4,
+              background: has ? c.bg : "var(--bg)",
+              color: has ? c.fg : "var(--muted)",
+              border: `1px solid ${has ? c.bd : "var(--stroke)"}`,
+              fontSize: 11, fontWeight: 700,
+              cursor: has ? "pointer" : "default",
+              textAlign: "center", lineHeight: 1.2,
+            }}
+            title={has ? `${ESSAY_LABEL[bk]} ${n}명` : ""}
+          >
+            <div>{ESSAY_LABEL[bk]}</div>
+            <div style={{ fontSize: 10, fontWeight: 500, marginTop: 2 }}>
+              {total > 0 ? `${(ratio * 100).toFixed(0)}%` : "-"}
+            </div>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+// 모달 본문들
+
+function DomainModalBody({ student }) {
+  const entries = Object.entries(student.domainScores || {});
+  return (
+    <div style={{ fontSize: 13 }}>
+      <div style={{ marginBottom: 8, color: "var(--muted)" }}>
+        총점: <strong style={{ color: "var(--text)" }}>{student.score} / {student.totalPoints}</strong>
+        {" · "}정답률: <strong style={{ color: "var(--text)" }}>{(student.accuracy * 100).toFixed(1)}%</strong>
+      </div>
+      <table style={{ width: "100%", fontSize: 12, color: "var(--text)" }}>
+        <thead>
+          <tr style={{ background: "var(--bg)", textAlign: "left" }}>
+            <th style={{ padding: "6px 8px" }}>영역</th>
+            <th style={{ padding: "6px 8px" }}>득점</th>
+            <th style={{ padding: "6px 8px" }}>만점</th>
+            <th style={{ padding: "6px 8px" }}>정답</th>
+            <th style={{ padding: "6px 8px" }}>비율</th>
+          </tr>
+        </thead>
+        <tbody>
+          {entries.map(([domain, d]) => {
+            const max = d.maxScore ?? d.max_score ?? 0;
+            const rate = max > 0 ? ((d.score / max) * 100).toFixed(0) : "-";
+            return (
+              <tr key={domain} style={{ borderTop: "1px solid var(--stroke)" }}>
+                <td style={{ padding: "6px 8px", fontWeight: 600 }}>{domain}</td>
+                <td style={{ padding: "6px 8px" }}>{d.score}</td>
+                <td style={{ padding: "6px 8px" }}>{max}</td>
+                <td style={{ padding: "6px 8px" }}>{d.correct}/{d.total}</td>
+                <td style={{ padding: "6px 8px" }}>{rate}{rate !== "-" ? "%" : ""}</td>
+              </tr>
+            );
+          })}
+          {entries.length === 0 && (
+            <tr><td colSpan={5} style={{ padding: 16, textAlign: "center", color: "var(--muted)" }}>영역별 데이터 없음</td></tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function WrongModalBody({ numbers }) {
+  if (!numbers?.length) return <div style={{ color: "var(--muted)" }}>틀린 문항 없음</div>;
+  return (
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+      {numbers.map((n) => (
+        <span key={n} style={{
+          padding: "4px 10px", borderRadius: 4,
+          background: "rgba(239,68,68,0.18)",
+          border: "1px solid rgba(239,68,68,0.4)",
+          color: "#fca5a5", fontWeight: 700, fontSize: 13,
+        }}>{n}번</span>
+      ))}
+    </div>
+  );
+}
+
+function ChoiceModalBody({ question, choiceId }) {
+  const names = (question.choiceStudents || {})[choiceId] || [];
+  const count = (question.choiceDistribution || {})[choiceId] || 0;
+  const total = question.attempts || 0;
+  const ratio = total > 0 ? ((count / total) * 100).toFixed(1) : 0;
+  const isCorrect = choiceId === question.correctAnswer;
+
+  return (
+    <div style={{ fontSize: 13 }}>
+      <div style={{ marginBottom: 12, color: "var(--muted)" }}>
+        <span>{count}명 ({ratio}%)</span>
+        <span style={{ marginLeft: 8 }}>·</span>
+        <span style={{ marginLeft: 8, color: isCorrect ? "#86efac" : "#fca5a5", fontWeight: 700 }}>
+          {isCorrect ? "정답" : "오답"}
+        </span>
+      </div>
+      {names.length === 0 ? (
+        <div style={{ color: "var(--muted)" }}>응답자 없음</div>
+      ) : (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+          {names.map((n, i) => (
+            <span key={i} style={{
+              padding: "4px 10px", borderRadius: 4,
+              background: "var(--bg)", border: "1px solid var(--stroke)",
+              fontSize: 12,
+            }}>{n}</span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function EssayModalBody({ question, bucketKey }) {
+  const list = (question.essayBuckets || {})[bucketKey] || [];
+  const total = question.attempts || 0;
+  const c = ESSAY_COLOR[bucketKey] || ESSAY_COLOR.zero;
+
+  return (
+    <div style={{ fontSize: 13 }}>
+      <div style={{ marginBottom: 12, color: "var(--muted)" }}>
+        <span style={{ color: c.fg, fontWeight: 700 }}>{ESSAY_LABEL[bucketKey]}</span>
+        {" · "}
+        <span>{list.length}명 / 응시 {total}명</span>
+        {total > 0 && <span> ({((list.length / total) * 100).toFixed(1)}%)</span>}
+      </div>
+      {list.length === 0 ? (
+        <div style={{ color: "var(--muted)" }}>해당 점수 응답자 없음</div>
+      ) : (
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {list.map((e, i) => (
+            <div key={i} style={{
+              padding: 10, borderRadius: 6,
+              background: "var(--bg)", border: "1px solid var(--stroke)",
+            }}>
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
+                <strong style={{ color: "var(--text)" }}>{e.name}</strong>
+                <span style={{ color: c.fg, fontWeight: 600, fontSize: 11 }}>
+                  {e.earned}점 / {question.points}점
+                </span>
+              </div>
+              <pre style={{
+                margin: 0, whiteSpace: "pre-wrap", wordBreak: "break-word",
+                fontFamily: "inherit", fontSize: 12, color: "var(--text)",
+              }}>{e.answer || "(답안 없음)"}</pre>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CompetencyModalBody({ question }) {
+  const entries = Object.entries(question.competencyVector || {}).sort((a, b) => b[1] - a[1]);
+  const sum = entries.reduce((s, [, v]) => s + Math.abs(v), 0);
+
+  return (
+    <div style={{ fontSize: 13 }}>
+      <div style={{ marginBottom: 8, color: "var(--muted)" }}>
+        {question.number}번 / {question.type} / 정답: {question.correctAnswer || "-"}
+      </div>
+      {entries.length === 0 ? (
+        <div style={{ color: "var(--muted)" }}>역량 데이터 없음</div>
+      ) : (
+        <table style={{ width: "100%", fontSize: 12, color: "var(--text)" }}>
+          <thead>
+            <tr style={{ background: "var(--bg)", textAlign: "left" }}>
+              <th style={{ padding: "6px 8px" }}>역량</th>
+              <th style={{ padding: "6px 8px" }}>가중치</th>
+              <th style={{ padding: "6px 8px" }}>비율</th>
+            </tr>
+          </thead>
+          <tbody>
+            {entries.map(([k, v]) => {
+              const ratio = sum > 0 ? Math.abs(v) / sum : 0;
+              return (
+                <tr key={k} style={{ borderTop: "1px solid var(--stroke)" }}>
+                  <td style={{ padding: "6px 8px", fontWeight: 600 }}>{k}</td>
+                  <td style={{ padding: "6px 8px" }}>{Number(v).toFixed(2)}</td>
+                  <td style={{ padding: "6px 8px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                      <div style={{
+                        flex: 1, height: 8, background: "var(--bg)",
+                        borderRadius: 4, overflow: "hidden", maxWidth: 200,
+                      }}>
+                        <div style={{
+                          width: `${(ratio * 100).toFixed(0)}%`, height: "100%",
+                          background: "var(--accent)",
+                        }} />
+                      </div>
+                      <span style={{ fontSize: 11, color: "var(--muted)" }}>
+                        {(ratio * 100).toFixed(0)}%
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      )}
+    </div>
   );
 }

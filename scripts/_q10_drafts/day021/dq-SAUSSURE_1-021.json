@@ -1,0 +1,59 @@
+{
+  "contentId": "dq-SAUSSURE_1-021",
+  "questionId": "dq-SAUSSURE_1-021-10",
+  "level": "SAUSSURE_1",
+  "grade": "초1",
+  "competencyKeyword": "치과 진료 상황 이해",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      { "id": "p1", "text": "이가 아파서 치과에 다녀왔습니다. 의사 선생님이 입속을 살피셨습니다. 충치가 없어서 소독만 하고 집에 왔습니다." }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "충치가 있어서 이를 뽑고 왔다.",
+      "isCorrect": true,
+      "wrongVector": {},
+      "propositions": [
+        { "propId": "A1", "text": "충치가 있었다.", "oxAnswer": "X", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "충치가 없어서 소독만 하고 집에 왔습니다" }] },
+        { "propId": "A2", "text": "이를 뽑았다.", "oxAnswer": "X", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "충치가 없어서 소독만 하고 집에 왔습니다" }] }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "이가 아파서 치과에 갔다.",
+      "isCorrect": false,
+      "wrongVector": { "어휘력": 0.4, "문장 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "B1", "text": "치과에 다녀왔다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "이가 아파서 치과에 다녀왔습니다" }] }
+      ]
+    },
+    {
+      "choiceId": "C",
+      "text": "의사 선생님이 입속을 살피셨다.",
+      "isCorrect": false,
+      "wrongVector": { "문장 독해력": 0.4, "구조 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "C1", "text": "선생님이 입속을 보셨다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "의사 선생님이 입속을 살피셨습니다" }] }
+      ]
+    },
+    {
+      "choiceId": "D",
+      "text": "소독만 하고 집에 돌아왔다.",
+      "isCorrect": false,
+      "wrongVector": { "구조 독해력": 0.4, "어휘력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "D1", "text": "소독만 하고 집에 왔다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "소독만 하고 집에 왔습니다" }] }
+      ]
+    }
+  ],
+  "competencyVector": { "선택지 분석 및 전략 수립 능력": 0.5, "문장 독해력": 0.3, "구조 독해력": 0.2 },
+  "explanation": "지문은 '충치가 없어서 소독만 하고 집에 왔다'고 했습니다. 이를 '충치가 있어서 이를 뽑았다'로 바꾼 A는 부정/상대어 함정입니다."
+}

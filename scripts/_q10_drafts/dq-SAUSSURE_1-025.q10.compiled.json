@@ -1,0 +1,131 @@
+{
+  "id": "dq-SAUSSURE_1-025-10",
+  "type": "CHOICE_COMPLEX_OX",
+  "questionKind": "CHOICE_ANALYSIS",
+  "competency": "가전제품의 기능 구분",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      {
+        "id": "p1",
+        "text": "냉장고는 음식을 차갑게 얼려 줍니다. 그리고 에어컨은 더운 공기를 시원한 바람으로 바꿉니다. 한편 청소기는 바닥의 먼지를 빨아들입니다."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "청소기는 더운 공기를 시원한 바람으로 바꾼다.",
+      "propositions": [
+        {
+          "propId": "A1",
+          "text": "공기를 시원하게 하는 가전은 청소기다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 25,
+              "end": 50
+            }
+          ]
+        },
+        {
+          "propId": "A2",
+          "text": "청소기의 기능은 공기 시원하게 하기다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 55,
+              "end": 74
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "냉장고는 음식을 차갑게 한다.",
+      "propositions": [
+        {
+          "propId": "B1",
+          "text": "냉장고는 음식을 차갑게 한다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 19
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "어휘력": 0.4,
+        "문장 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "C",
+      "text": "에어컨은 더운 공기를 시원하게 바꾼다.",
+      "propositions": [
+        {
+          "propId": "C1",
+          "text": "에어컨은 공기를 시원하게 한다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 25,
+              "end": 50
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "문장 독해력": 0.4,
+        "구조 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "D",
+      "text": "청소기는 바닥의 먼지를 빨아들인다.",
+      "propositions": [
+        {
+          "propId": "D1",
+          "text": "청소기는 먼지를 빨아들인다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 55,
+              "end": 74
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "구조 독해력": 0.4,
+        "어휘력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    }
+  ],
+  "explanation": "지문은 '에어컨이 공기를 시원하게 하고 청소기는 먼지를 빨아들인다'고 했습니다. 두 가전의 기능을 뒤바꾼 A는 섞어치기 함정입니다.",
+  "scoring": {
+    "correctDeltaSec": 20,
+    "wrongDeltaSec": -40
+  },
+  "competencyVector": {
+    "선택지 분석 및 전략 수립 능력": 0.5,
+    "문장 독해력": 0.3,
+    "구조 독해력": 0.2
+  }
+}

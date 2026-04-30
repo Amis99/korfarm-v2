@@ -1,0 +1,57 @@
+{
+  "contentId": "dq-SAUSSURE_1-065",
+  "questionId": "dq-SAUSSURE_1-065-10",
+  "level": "SAUSSURE_1",
+  "grade": "초1",
+  "competencyKeyword": "동물의 식성",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      { "id": "p1", "text": "호랑이는 고기를 먹습니다. 토끼는 풀을 먹습니다. 곰은 고기와 풀을 모두 먹습니다." }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "토끼는 고기와 풀을 모두 먹는다.",
+      "isCorrect": true,
+      "wrongVector": {},
+      "propositions": [
+        { "propId": "A1", "text": "토끼는 고기도 먹는다.", "oxAnswer": "X", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "토끼는 풀을 먹습니다" }] }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "토끼는 풀을 먹는다.",
+      "isCorrect": false,
+      "wrongVector": { "어휘력": 0.4, "문장 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "B1", "text": "토끼의 먹이는 풀이다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "토끼는 풀을 먹습니다" }] }
+      ]
+    },
+    {
+      "choiceId": "C",
+      "text": "곰은 고기와 풀을 모두 먹는다.",
+      "isCorrect": false,
+      "wrongVector": { "문장 독해력": 0.4, "구조 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "C1", "text": "곰은 둘 다 먹는다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "곰은 고기와 풀을 모두 먹습니다" }] }
+      ]
+    },
+    {
+      "choiceId": "D",
+      "text": "호랑이는 고기를 먹는다.",
+      "isCorrect": false,
+      "wrongVector": { "구조 독해력": 0.4, "어휘력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "D1", "text": "호랑이는 고기를 먹는다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "호랑이는 고기를 먹습니다" }] }
+      ]
+    }
+  ],
+  "competencyVector": { "선택지 분석 및 전략 수립 능력": 0.5, "문장 독해력": 0.3, "구조 독해력": 0.2 },
+  "explanation": "지문은 '토끼가 풀을 먹고, 곰이 고기와 풀을 모두 먹는다'고 했습니다. 곰의 식성을 토끼에게 옮긴 A는 Who 함정입니다."
+}

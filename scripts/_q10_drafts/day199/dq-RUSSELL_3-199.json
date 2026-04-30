@@ -1,0 +1,67 @@
+{
+  "contentId": "dq-RUSSELL_3-199",
+  "questionId": "dq-RUSSELL_3-199-10",
+  "level": "RUSSELL_3",
+  "grade": "중3",
+  "competencyKeyword": "데이터베이스 정규화",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르시오.",
+  "passage": {
+    "paragraphs": [
+      { "id": "p1", "text": "데이터베이스 정규화는 데이터의 중복을 최소화하여 데이터 간의 불일치 현상인 '이상(Anomaly) 현상'을 방지하기 위한 설계 기법이다. 정규화를 거치지 않은 테이블에서 데이터를 수정하거나 삭제하면 일부만 처리되어 데이터 모순이 생길 수 있다. 정규화는 복잡한 테이블을 작은 단위로 쪼개어 무결성을 높여주지만, 너무 과도하게 정규화를 하면 나중에 데이터를 조회할 때 여러 테이블을 합치는 '조인' 연산이 많아져 성능이 느려질 수도 있다." }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "정규화는 데이터 중복을 늘려 무결성을 떨어뜨리는 기법이다.",
+      "isCorrect": true,
+      "wrongVector": {},
+      "propositions": [
+        { "propId": "A1", "text": "중복 증가·무결성 저하다.", "oxAnswer": "X", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "데이터의 중복을 최소화하여 데이터 간의 불일치 현상인 '이상(Anomaly) 현상'을 방지하기 위한 설계 기법이다" }] }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "정규화는 이상 현상을 방지하기 위한 설계 기법이다.",
+      "isCorrect": false,
+      "wrongVector": { "어휘력": 0.4, "비문학 배경지식": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "B1", "text": "이상 방지다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "데이터의 중복을 최소화하여 데이터 간의 불일치 현상인 '이상(Anomaly) 현상'을 방지하기 위한 설계 기법이다" }] }
+      ]
+    },
+    {
+      "choiceId": "C",
+      "text": "정규화 없는 테이블은 데이터 수정·삭제 시 모순이 생길 수 있다.",
+      "isCorrect": false,
+      "wrongVector": { "구조 독해력": 0.4, "논리 사고력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "C1", "text": "비정규화 모순이다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "정규화를 거치지 않은 테이블에서 데이터를 수정하거나 삭제하면 일부만 처리되어 데이터 모순이 생길 수 있다" }] }
+      ]
+    },
+    {
+      "choiceId": "D",
+      "text": "정규화는 복잡한 테이블을 쪼개어 무결성을 높인다.",
+      "isCorrect": false,
+      "wrongVector": { "비문학 배경지식": 0.4, "구조 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "D1", "text": "무결성 향상이다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "정규화는 복잡한 테이블을 작은 단위로 쪼개어 무결성을 높여주지만" }] }
+      ]
+    },
+    {
+      "choiceId": "E",
+      "text": "과도한 정규화는 조인 연산 증가로 성능을 느리게 할 수 있다.",
+      "isCorrect": false,
+      "wrongVector": { "논리 사고력": 0.4, "구조 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "E1", "text": "과정규화 부작용이다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "너무 과도하게 정규화를 하면 나중에 데이터를 조회할 때 여러 테이블을 합치는 '조인' 연산이 많아져 성능이 느려질 수도 있다" }] }
+      ]
+    }
+  ],
+  "competencyVector": { "선택지 분석 및 전략 수립 능력": 0.5, "비문학 배경지식": 0.3, "논리 사고력": 0.2 },
+  "explanation": "지문은 '정규화가 중복을 최소화하고 무결성을 높인다'고 했습니다. 이를 '중복을 늘리고 무결성을 떨어뜨린다'로 뒤집은 A는 부정/상대어 함정입니다."
+}

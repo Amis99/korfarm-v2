@@ -156,7 +156,7 @@ export default function ContentPdfForm({ editor, focusPath }) {
                     {(q.blanks || []).map((b, bi) => {
                       const bPath = `${qPath}.blanks[${bi}]`;
                       return (
-                        <div key={bi} style={{ marginBottom: 8, padding: 8, background: "#161d18", borderRadius: 6 }}>
+                        <div key={bi} style={{ marginBottom: 8, padding: 8, background: "var(--panel)", borderRadius: 6 }}>
                           <label className="ce-form-label">빈칸 {bi + 1} 선택지</label>
                           <ChoiceEditor
                             choices={b.choices || []}
@@ -200,7 +200,7 @@ export default function ContentPdfForm({ editor, focusPath }) {
                   {(q.sentenceParts || []).map((sp, spi) => {
                     const spPath = `${qPath}.sentenceParts[${spi}]`;
                     return (
-                      <div key={spi} style={{ marginBottom: 8, padding: 8, background: "#161d18", borderRadius: 6 }}>
+                      <div key={spi} style={{ marginBottom: 8, padding: 8, background: "var(--panel)", borderRadius: 6 }}>
                         <div className="ce-form-row">
                           <div>
                             <label className="ce-form-label">정답</label>

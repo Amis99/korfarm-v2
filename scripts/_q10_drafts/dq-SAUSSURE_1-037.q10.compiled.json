@@ -1,0 +1,131 @@
+{
+  "id": "dq-SAUSSURE_1-037-10",
+  "type": "CHOICE_COMPLEX_OX",
+  "questionKind": "CHOICE_ANALYSIS",
+  "competency": "지훈이가 만난 사람들",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      {
+        "id": "p1",
+        "text": "오전에 지훈이는 부지런히 돌아다녔습니다. 제일 먼저 아픈 사람의 병을 고쳐 주시는 의사 선생님께 인사했습니다. 그리고 시장에서 맛있는 음식을 파는 아주머니를 만났습니다. 마지막으로 도둑을 잡아 주는 경찰관 아저씨를 보았습니다."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "지훈이는 시장에서 도둑을 잡는 경찰관을 만났다.",
+      "propositions": [
+        {
+          "propId": "A1",
+          "text": "시장에서 만난 사람은 경찰관이다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 66,
+              "end": 93
+            }
+          ]
+        },
+        {
+          "propId": "A2",
+          "text": "지훈이가 시장에서 경찰관을 만났다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 95,
+              "end": 125
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "지훈이는 의사 선생님께 인사했다.",
+      "propositions": [
+        {
+          "propId": "B1",
+          "text": "의사 선생님께 인사했다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 46,
+              "end": 60
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "어휘력": 0.4,
+        "문장 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "C",
+      "text": "시장에서 음식을 파는 아주머니를 만났다.",
+      "propositions": [
+        {
+          "propId": "C1",
+          "text": "시장에서 아주머니를 만났다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 66,
+              "end": 93
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "문장 독해력": 0.4,
+        "구조 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "D",
+      "text": "마지막으로 경찰관 아저씨를 보았다.",
+      "propositions": [
+        {
+          "propId": "D1",
+          "text": "마지막엔 경찰관을 보았다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 95,
+              "end": 125
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "구조 독해력": 0.4,
+        "어휘력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    }
+  ],
+  "explanation": "지문은 '시장에서 만난 사람은 음식 파는 아주머니'라고 했습니다. 시장과 경찰관을 묶은 A는 장소·인물 결합을 잘못 만든 결합/분리 함정입니다.",
+  "scoring": {
+    "correctDeltaSec": 20,
+    "wrongDeltaSec": -40
+  },
+  "competencyVector": {
+    "선택지 분석 및 전략 수립 능력": 0.5,
+    "문장 독해력": 0.3,
+    "구조 독해력": 0.2
+  }
+}

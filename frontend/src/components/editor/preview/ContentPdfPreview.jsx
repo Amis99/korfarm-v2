@@ -13,8 +13,8 @@ export default function ContentPdfPreview({ content, onClickPath, focusPath }) {
           className={`ce-preview-card ${focusPath === "pdfUrl" ? "active" : ""}`}
           onClick={() => onClickPath("pdfUrl")}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: "#6a7a6e", marginBottom: 4 }}>PDF URL</div>
-          <div style={{ fontSize: 12, color: "#a6b6a9", wordBreak: "break-all" }}>{pdfUrl}</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: "var(--muted)", marginBottom: 4 }}>PDF URL</div>
+          <div style={{ fontSize: 12, color: "var(--muted)", wordBreak: "break-all" }}>{pdfUrl}</div>
         </div>
       )}
 
@@ -29,7 +29,7 @@ export default function ContentPdfPreview({ content, onClickPath, focusPath }) {
       </div>
 
       {/* 문항 */}
-      {questions.length === 0 && !pdfUrl && <div style={{ color: "#6a7a6e" }}>콘텐츠가 없습니다.</div>}
+      {questions.length === 0 && !pdfUrl && <div style={{ color: "var(--muted)" }}>콘텐츠가 없습니다.</div>}
       {questions.map((q, i) => {
         const path = `questions[${i}]`;
         const isActive = focusPath && focusPath.startsWith(path);
@@ -41,7 +41,7 @@ export default function ContentPdfPreview({ content, onClickPath, focusPath }) {
             onClick={() => onClickPath(path)}
           >
             <div className="ce-preview-q-stem">
-              <strong style={{ color: "#6a7a6e", marginRight: 6 }}>{i + 1}.</strong>
+              <strong style={{ color: "var(--muted)", marginRight: 6 }}>{i + 1}.</strong>
               <span className="ce-preview-badge">{q.type || "MCQ"}</span>
               {q.stem || "(발문 없음)"}
             </div>
@@ -57,18 +57,18 @@ export default function ContentPdfPreview({ content, onClickPath, focusPath }) {
                 </div>
               ))
             ) : q.type === "FILL_BLANKS" ? (
-              <div style={{ fontSize: 12, color: "#a6b6a9", marginTop: 4 }}>
+              <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 4 }}>
                 [빈칸형] {q.template?.slice(0, 60) || ""}...
                 {q.blanks?.length > 0 && ` (빈칸 ${q.blanks.length}개)`}
               </div>
             ) : q.type === "SENTENCE_BUILDING" ? (
-              <div style={{ fontSize: 12, color: "#a6b6a9", marginTop: 4 }}>
+              <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 4 }}>
                 [문장 구성] 파트 {q.sentenceParts?.length || 0}개
               </div>
             ) : null}
 
             {q.scoring && (
-              <div style={{ fontSize: 10, color: "#6a7a6e", marginTop: 4 }}>
+              <div style={{ fontSize: 10, color: "var(--muted)", marginTop: 4 }}>
                 정답:{q.scoring.correctDeltaSec}s / 오답:{q.scoring.wrongDeltaSec}s
               </div>
             )}

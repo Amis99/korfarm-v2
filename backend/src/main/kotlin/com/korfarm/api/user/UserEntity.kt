@@ -73,7 +73,16 @@ class UserEntity(
     var createdAt: LocalDateTime = LocalDateTime.now(),
 
     @Column(name = "updated_at", nullable = false)
-    var updatedAt: LocalDateTime = LocalDateTime.now()
+    var updatedAt: LocalDateTime = LocalDateTime.now(),
+
+    @Column(name = "deleted_at")
+    var deletedAt: LocalDateTime? = null,
+
+    @Column(name = "deleted_by")
+    var deletedBy: String? = null,
+
+    @Column(name = "delete_reason", columnDefinition = "TEXT")
+    var deleteReason: String? = null
 ) {
     @PrePersist
     fun onCreate() {

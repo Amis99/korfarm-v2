@@ -74,13 +74,11 @@ function AdminInquiryPage() {
 
   return (
     <AdminLayout>
-      <div style={{ maxWidth: 960, margin: "0 auto", padding: "20px 20px" }}>
-        <div className="admin-topbar" style={{ marginBottom: 20 }}>
+      <div className="admin-detail-wrap">
+        <div className="admin-detail-header">
           <div>
-            <h1 style={{ fontSize: 22, fontWeight: 800, margin: 0 }}>문의 관리</h1>
-            <p style={{ margin: "4px 0 0", fontSize: 14, color: "var(--admin-muted)" }}>
-              사용자 문의글을 확인하고 답변합니다.
-            </p>
+            <h1>문의 관리</h1>
+            <p className="admin-detail-subtitle">사용자 문의글을 확인하고 답변합니다.</p>
           </div>
         </div>
 
@@ -88,21 +86,21 @@ function AdminInquiryPage() {
           <div>
             <button
               type="button"
-              className="admin-action"
-              style={{ marginBottom: 16, cursor: "pointer" }}
+              className="admin-detail-btn secondary"
+              style={{ marginBottom: 16 }}
               onClick={() => { setSelected(null); setDetail(null); }}
             >
               ← 목록으로
             </button>
 
-            <div className="admin-card" style={{ padding: 24, marginBottom: 20 }}>
-              <h2 style={{ fontSize: 18, fontWeight: 800, margin: "0 0 8px" }}>{detail.title}</h2>
-              <div style={{ fontSize: 13, color: "#888", marginBottom: 16, display: "flex", gap: 16, flexWrap: "wrap" }}>
+            <div className="admin-detail-card" style={{ marginBottom: 16 }}>
+              <h2>{detail.title}</h2>
+              <div style={{ fontSize: 13, color: "var(--admin-muted)", marginBottom: 16, display: "flex", gap: 16, flexWrap: "wrap" }}>
                 {detail.isGuest ? (
                   <>
-                    <span>이름: <strong style={{ color: "#2b221d" }}>{detail.guestName}</strong></span>
-                    <span>연락처: <strong style={{ color: "#2b221d" }}>{detail.guestContact}</strong></span>
-                    <span style={{ background: "#fff3e0", padding: "1px 8px", borderRadius: 4, fontSize: 11, fontWeight: 700, color: "#e65100" }}>비회원</span>
+                    <span>이름: <strong style={{ color: "var(--admin-ink)" }}>{detail.guestName}</strong></span>
+                    <span>연락처: <strong style={{ color: "var(--admin-ink)" }}>{detail.guestContact}</strong></span>
+                    <span style={{ background: "var(--admin-accent-soft)", padding: "1px 8px", borderRadius: 4, fontSize: 11, fontWeight: 700, color: "var(--admin-accent-strong)" }}>비회원</span>
                   </>
                 ) : (
                   <span>작성자: {detail.authorId}</span>
@@ -114,13 +112,11 @@ function AdminInquiryPage() {
               </div>
             </div>
 
-            <div className="admin-card" style={{ padding: 24 }}>
-              <h3 style={{ fontSize: 16, fontWeight: 700, margin: "0 0 16px" }}>
-                답변 ({comments.filter((c) => c.status !== "deleted").length})
-              </h3>
+            <div className="admin-detail-card">
+              <h3>답변 ({comments.filter((c) => c.status !== "deleted").length})</h3>
 
               {comments.filter((c) => c.status !== "deleted").length === 0 && (
-                <p style={{ color: "#888", fontSize: 14, marginBottom: 16 }}>아직 답변이 없습니다.</p>
+                <p style={{ color: "var(--admin-muted)", fontSize: 14, marginBottom: 16 }}>아직 답변이 없습니다.</p>
               )}
 
               {comments
@@ -130,13 +126,13 @@ function AdminInquiryPage() {
                     key={c.commentId || c.id}
                     style={{
                       padding: "12px 16px",
-                      background: "#f7faf6",
-                      borderRadius: 12,
+                      background: "var(--admin-panel-light, #f5f9f3)",
+                      borderRadius: 10,
                       marginBottom: 10,
-                      border: "1px solid #e2eadf",
+                      border: "1px solid var(--admin-stroke)",
                     }}
                   >
-                    <div style={{ fontSize: 13, color: "#888", marginBottom: 6 }}>
+                    <div style={{ fontSize: 13, color: "var(--admin-muted)", marginBottom: 6 }}>
                       {c.authorId} · {formatDate(c.createdAt)}
                     </div>
                     <div style={{ fontSize: 15, lineHeight: 1.7, whiteSpace: "pre-wrap" }}>
@@ -154,29 +150,22 @@ function AdminInquiryPage() {
                     width: "100%",
                     minHeight: 100,
                     padding: 12,
-                    border: "1px solid #dde6d8",
-                    borderRadius: 12,
+                    border: "1px solid var(--admin-stroke)",
+                    borderRadius: 10,
                     fontSize: 15,
                     resize: "vertical",
                     fontFamily: "inherit",
                     boxSizing: "border-box",
+                    color: "var(--admin-ink)",
+                    background: "var(--admin-panel)",
                   }}
                 />
                 <button
                   type="button"
+                  className="admin-detail-btn"
                   onClick={submitReply}
                   disabled={submitting || !reply.trim()}
-                  style={{
-                    marginTop: 8,
-                    padding: "10px 24px",
-                    background: "#ff8f2b",
-                    border: "none",
-                    borderRadius: 12,
-                    fontWeight: 800,
-                    fontSize: 14,
-                    cursor: submitting ? "not-allowed" : "pointer",
-                    opacity: submitting || !reply.trim() ? 0.5 : 1,
-                  }}
+                  style={{ marginTop: 8 }}
                 >
                   {submitting ? "등록 중..." : "답변 등록"}
                 </button>
@@ -184,14 +173,14 @@ function AdminInquiryPage() {
             </div>
           </div>
         ) : (
-          <div className="admin-card" style={{ padding: 0, overflow: "hidden" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <div className="admin-detail-card" style={{ padding: 0, overflow: "hidden" }}>
+            <table className="admin-detail-table" style={{ width: "100%" }}>
               <thead>
-                <tr style={{ background: "#f7faf6", borderBottom: "2px solid #e2eadf" }}>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontSize: 13, fontWeight: 700 }}>번호</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontSize: 13, fontWeight: 700 }}>제목</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontSize: 13, fontWeight: 700 }}>작성자 / 연락처</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontSize: 13, fontWeight: 700 }}>작성일</th>
+                <tr>
+                  <th style={{ padding: "12px 16px" }}>번호</th>
+                  <th style={{ padding: "12px 16px" }}>제목</th>
+                  <th style={{ padding: "12px 16px" }}>작성자 / 연락처</th>
+                  <th style={{ padding: "12px 16px" }}>작성일</th>
                 </tr>
               </thead>
               <tbody>

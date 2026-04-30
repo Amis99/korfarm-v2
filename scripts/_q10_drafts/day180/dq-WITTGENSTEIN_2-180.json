@@ -1,0 +1,67 @@
+{
+  "contentId": "dq-WITTGENSTEIN_2-180",
+  "questionId": "dq-WITTGENSTEIN_2-180-10",
+  "level": "WITTGENSTEIN_2",
+  "grade": "고2",
+  "competencyKeyword": "과적합 방지와 규제",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르시오.",
+  "passage": {
+    "paragraphs": [
+      { "id": "p1", "text": "인공지능 모델이 훈련 데이터에 대해서는 높은 정확도를 보이지만 실제 미지의 데이터에서는 성능이 떨어지는 현상을 '과적합'이라 한다. 이는 모델이 데이터의 보편적 패턴이 아닌 사소한 노이즈(오차)까지 모두 학습했기 때문에 발생한다. 이를 방지하기 위해 훈련 데이터의 양을 늘리거나, 모델의 복잡도를 제한하는 '규제(Regularization)' 기법을 사용한다. 진정으로 우수한 모델이란 학습한 특정 데이터를 넘어서 새로운 데이터에도 유연하게 적용되는 '일반화 성능'을 갖춘 모델이다." }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "우수한 모델은 학습한 특정 데이터에만 정확하게 적용되어야 한다.",
+      "isCorrect": true,
+      "wrongVector": {},
+      "propositions": [
+        { "propId": "A1", "text": "특정 데이터 한정이다.", "oxAnswer": "X", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "진정으로 우수한 모델이란 학습한 특정 데이터를 넘어서 새로운 데이터에도 유연하게 적용되는 '일반화 성능'을 갖춘 모델이다" }] }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "과적합은 훈련 데이터에서 정확도가 높으나 미지 데이터에서 떨어진다.",
+      "isCorrect": false,
+      "wrongVector": { "어휘력": 0.4, "비문학 배경지식": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "B1", "text": "과적합 정의다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "훈련 데이터에 대해서는 높은 정확도를 보이지만 실제 미지의 데이터에서는 성능이 떨어지는 현상을 '과적합'이라 한다" }] }
+      ]
+    },
+    {
+      "choiceId": "C",
+      "text": "노이즈까지 학습하면 보편 패턴 학습이 무너져 과적합이 생긴다.",
+      "isCorrect": false,
+      "wrongVector": { "구조 독해력": 0.4, "논리 사고력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "C1", "text": "노이즈 학습 원인이다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "데이터의 보편적 패턴이 아닌 사소한 노이즈(오차)까지 모두 학습했기 때문에 발생한다" }] }
+      ]
+    },
+    {
+      "choiceId": "D",
+      "text": "규제는 모델 복잡도를 제한해 과적합을 방지한다.",
+      "isCorrect": false,
+      "wrongVector": { "비문학 배경지식": 0.4, "구조 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "D1", "text": "규제 효과다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "모델의 복잡도를 제한하는 '규제(Regularization)' 기법을 사용한다" }] }
+      ]
+    },
+    {
+      "choiceId": "E",
+      "text": "데이터 양을 늘리는 것도 과적합 방지의 한 방법이다.",
+      "isCorrect": false,
+      "wrongVector": { "논리 사고력": 0.4, "구조 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "E1", "text": "데이터 증강이다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "훈련 데이터의 양을 늘리거나, 모델의 복잡도를 제한하는" }] }
+      ]
+    }
+  ],
+  "competencyVector": { "선택지 분석 및 전략 수립 능력": 0.5, "비문학 배경지식": 0.3, "논리 사고력": 0.2 },
+  "explanation": "지문은 '우수한 모델은 학습 데이터를 넘어서 새 데이터에도 적용되는 일반화 성능을 갖춘다'고 했습니다. 이를 '특정 데이터에만 적용되어야 한다'로 뒤집은 A는 부정/상대어(일반화↔특정화) 함정입니다."
+}

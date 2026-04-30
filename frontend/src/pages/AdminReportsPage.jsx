@@ -303,7 +303,7 @@ function MaterialsTab() {
           <tbody>
             {filteredMaterials.length === 0 && !loading ? (
               <tr>
-                <td colSpan={5} style={{ textAlign: "center", color: "#a6b6a9", padding: "24px 0" }}>
+                <td colSpan={5} style={{ textAlign: "center", color: "var(--muted)", padding: "24px 0" }}>
                   {statusFilter === "pending"
                     ? "승인 대기 중인 학습 자료가 없습니다."
                     : "학습 자료가 없습니다."}

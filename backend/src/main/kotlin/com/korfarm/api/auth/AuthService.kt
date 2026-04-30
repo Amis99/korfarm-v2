@@ -214,6 +214,9 @@ class AuthService(
         if (!passwordEncoder.matches(password, user.passwordHash)) {
             throw ApiException("INVALID_CREDENTIALS", "invalid credentials", HttpStatus.UNAUTHORIZED)
         }
+        if (user.deletedAt != null) {
+            throw ApiException("ACCOUNT_DELETED", "삭제된 계정입니다", HttpStatus.UNAUTHORIZED)
+        }
         val now = LocalDateTime.now()
         try {
             userRepository.updateLastLoginAt(user.id, now, now)

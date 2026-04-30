@@ -1,0 +1,131 @@
+{
+  "id": "dq-SAUSSURE_1-044-10",
+  "type": "CHOICE_COMPLEX_OX",
+  "questionKind": "CHOICE_ANALYSIS",
+  "competency": "민지의 마트 다녀오기",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      {
+        "id": "p1",
+        "text": "주말에 민지는 버스를 타고 마트에 갔습니다. 마트에서 맛있는 귤과 딸기를 샀습니다. 돌아올 때는 짐이 무거워서 택시를 탔습니다."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "민지는 마트에 갈 때 택시를 탔다.",
+      "propositions": [
+        {
+          "propId": "A1",
+          "text": "갈 때 택시를 탔다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 23
+            }
+          ]
+        },
+        {
+          "propId": "A2",
+          "text": "택시는 마트 갈 때 사용했다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 47,
+              "end": 70
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "민지는 마트에 갈 때 버스를 탔다.",
+      "propositions": [
+        {
+          "propId": "B1",
+          "text": "갈 때 버스를 탔다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 23
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "어휘력": 0.4,
+        "문장 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "C",
+      "text": "마트에서 귤과 딸기를 샀다.",
+      "propositions": [
+        {
+          "propId": "C1",
+          "text": "귤과 딸기를 샀다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 25,
+              "end": 45
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "문장 독해력": 0.4,
+        "구조 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "D",
+      "text": "돌아올 때는 택시를 탔다.",
+      "propositions": [
+        {
+          "propId": "D1",
+          "text": "돌아올 때 택시였다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 47,
+              "end": 70
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "구조 독해력": 0.4,
+        "어휘력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    }
+  ],
+  "explanation": "지문은 '갈 때는 버스, 돌아올 때는 택시'라고 했습니다. 두 교통수단을 뒤바꾼 A는 섞어치기 함정입니다.",
+  "scoring": {
+    "correctDeltaSec": 20,
+    "wrongDeltaSec": -40
+  },
+  "competencyVector": {
+    "선택지 분석 및 전략 수립 능력": 0.5,
+    "문장 독해력": 0.3,
+    "구조 독해력": 0.2
+  }
+}

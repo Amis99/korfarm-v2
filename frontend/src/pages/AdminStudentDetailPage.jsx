@@ -172,7 +172,7 @@ function AdminStudentDetailPage() {
   const sParentPhone = student?.parentPhone || student?.parent_phone || "-";
   const sRegion = student?.region || "-";
 
-  const tabStyle = (key) => ({ padding: "8px 16px", borderRadius: "999px", border: tab === key ? "1px solid rgba(240,108,36,0.6)" : "1px solid rgba(240,108,36,0.2)", background: tab === key ? "rgba(240,108,36,0.24)" : "rgba(240,108,36,0.08)", color: "#f3f6f1", fontWeight: 700, fontSize: 13, cursor: "pointer" });
+  const tabStyle = (key) => ({ padding: "8px 16px", borderRadius: "999px", border: tab === key ? "1px solid rgba(240,108,36,0.6)" : "1px solid rgba(240,108,36,0.2)", background: tab === key ? "rgba(240,108,36,0.24)" : "rgba(240,108,36,0.08)", color: "var(--text)", fontWeight: 700, fontSize: 13, cursor: "pointer" });
 
   return (
     <AdminLayout>
@@ -202,7 +202,7 @@ function AdminStudentDetailPage() {
                 <tr><td style={{ fontWeight: 700 }}>학생 연락처</td><td>{sStudentPhone}</td></tr>
                 <tr><td style={{ fontWeight: 700 }}>학부모 연락처</td><td>{sParentPhone}</td></tr>
                 <tr><td style={{ fontWeight: 700 }}>상태</td><td><span className="status-pill" data-status={sStatus}>{sStatus}</span></td></tr>
-                <tr><td style={{ fontWeight: 700 }}>구독</td><td><span className="status-pill" data-status={sSubStatus === "active" ? "active" : "inactive"}>{sSubStatus === "active" ? "유료" : "무료"}</span>{sSubEnd && <span style={{ marginLeft: 8, fontSize: 12, color: "#a6b6a9" }}>~{sSubEnd.slice(0, 10)}</span>}</td></tr>
+                <tr><td style={{ fontWeight: 700 }}>구독</td><td><span className="status-pill" data-status={sSubStatus === "active" ? "active" : "inactive"}>{sSubStatus === "active" ? "유료" : "무료"}</span>{sSubEnd && <span style={{ marginLeft: 8, fontSize: 12, color: "var(--muted)" }}>~{sSubEnd.slice(0, 10)}</span>}</td></tr>
               </tbody></table>
             )}
           </div>
@@ -251,7 +251,7 @@ function AdminStudentDetailPage() {
                       <td>{t.totalQuestions}</td>
                       <td>{t.accuracy != null ? `${t.accuracy}%` : "-"}</td>
                       <td style={{ fontSize: 12 }}>{t.submittedAt ? String(t.submittedAt).replace("T", " ").slice(0, 16) : "-"}</td>
-                      <td><button className="admin-detail-btn secondary" style={{ fontSize: 11, padding: "3px 8px" }} onClick={() => navigate(`/admin/tests/${t.testId}`)}>상세</button></td>
+                      <td><button className="admin-detail-btn secondary" style={{ fontSize: 11, padding: "3px 8px" }} onClick={() => navigate(`/admin/tests/${t.testId}/statistics`)}>상세</button></td>
                     </tr>
                   ))}</tbody>
                 </table>
@@ -280,7 +280,7 @@ function AdminStudentDetailPage() {
                     <span>비료: <strong>{inventory.fertilizer ?? 0}</strong></span>
                     <span style={{ color: "#f06c24", fontWeight: 700 }}>시즌 점수: {seasonScore.toLocaleString()}</span>
                   </div>
-                  <div style={{ padding: "8px 12px", background: "rgba(240,108,36,0.08)", borderRadius: 10, fontSize: 11, color: "#a6b6a9" }}>시즌 점수 = {FORMULA_TEXT}</div>
+                  <div style={{ padding: "8px 12px", background: "rgba(240,108,36,0.08)", borderRadius: 10, fontSize: 11, color: "var(--muted)" }}>시즌 점수 = {FORMULA_TEXT}</div>
                 </>
               )}
             </div>
@@ -290,26 +290,26 @@ function AdminStudentDetailPage() {
               {grantSuccess && <p className="admin-detail-note" style={{ color: "#9dd6b0" }}>{grantSuccess}</p>}
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "flex-end", marginTop: 8 }}>
                 <div>
-                  <label style={{ display: "block", fontSize: 12, color: "#a6b6a9", marginBottom: 4 }}>종류</label>
-                  <select value={grantForm.type} onChange={(e) => setGrantForm({ ...grantForm, type: e.target.value })} style={{ background: "#1a2118", border: "1px solid rgba(240,108,36,0.28)", color: "#f3f6f1", borderRadius: 8, padding: "6px 10px", fontSize: 13 }}>
+                  <label style={{ display: "block", fontSize: 12, color: "var(--muted)", marginBottom: 4 }}>종류</label>
+                  <select value={grantForm.type} onChange={(e) => setGrantForm({ ...grantForm, type: e.target.value })} style={{ background: "#1a2118", border: "1px solid rgba(240,108,36,0.28)", color: "var(--text)", borderRadius: 8, padding: "6px 10px", fontSize: 13 }}>
                     <option value="seed">씨앗</option><option value="crop">수확물</option><option value="fertilizer">비료</option>
                   </select>
                 </div>
                 {grantForm.type !== "fertilizer" && (
                   <div>
-                    <label style={{ display: "block", fontSize: 12, color: "#a6b6a9", marginBottom: 4 }}>항목</label>
-                    <select value={grantForm.itemType} onChange={(e) => setGrantForm({ ...grantForm, itemType: e.target.value })} style={{ background: "#1a2118", border: "1px solid rgba(240,108,36,0.28)", color: "#f3f6f1", borderRadius: 8, padding: "6px 10px", fontSize: 13 }}>
+                    <label style={{ display: "block", fontSize: 12, color: "var(--muted)", marginBottom: 4 }}>항목</label>
+                    <select value={grantForm.itemType} onChange={(e) => setGrantForm({ ...grantForm, itemType: e.target.value })} style={{ background: "#1a2118", border: "1px solid rgba(240,108,36,0.28)", color: "var(--text)", borderRadius: 8, padding: "6px 10px", fontSize: 13 }}>
                       {grantForm.type === "seed" ? Object.entries(SEED_LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>) : Object.entries(CROP_LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
                     </select>
                   </div>
                 )}
                 <div>
-                  <label style={{ display: "block", fontSize: 12, color: "#a6b6a9", marginBottom: 4 }}>수량</label>
-                  <input type="number" min="1" value={grantForm.amount} onChange={(e) => setGrantForm({ ...grantForm, amount: parseInt(e.target.value) || 1 })} style={{ width: 60, background: "#1a2118", border: "1px solid rgba(240,108,36,0.28)", color: "#f3f6f1", borderRadius: 8, padding: "6px 10px", fontSize: 13 }} />
+                  <label style={{ display: "block", fontSize: 12, color: "var(--muted)", marginBottom: 4 }}>수량</label>
+                  <input type="number" min="1" value={grantForm.amount} onChange={(e) => setGrantForm({ ...grantForm, amount: parseInt(e.target.value) || 1 })} style={{ width: 60, background: "#1a2118", border: "1px solid rgba(240,108,36,0.28)", color: "var(--text)", borderRadius: 8, padding: "6px 10px", fontSize: 13 }} />
                 </div>
                 <div style={{ flex: 1, minWidth: 120 }}>
-                  <label style={{ display: "block", fontSize: 12, color: "#a6b6a9", marginBottom: 4 }}>사유</label>
-                  <input value={grantForm.reason} onChange={(e) => setGrantForm({ ...grantForm, reason: e.target.value })} placeholder="지급/차감 사유" style={{ width: "100%", background: "#1a2118", border: "1px solid rgba(240,108,36,0.28)", color: "#f3f6f1", borderRadius: 8, padding: "6px 10px", fontSize: 13, boxSizing: "border-box" }} />
+                  <label style={{ display: "block", fontSize: 12, color: "var(--muted)", marginBottom: 4 }}>사유</label>
+                  <input value={grantForm.reason} onChange={(e) => setGrantForm({ ...grantForm, reason: e.target.value })} placeholder="지급/차감 사유" style={{ width: "100%", background: "#1a2118", border: "1px solid rgba(240,108,36,0.28)", color: "var(--text)", borderRadius: 8, padding: "6px 10px", fontSize: 13, boxSizing: "border-box" }} />
                 </div>
                 <button className="admin-detail-btn" style={{ fontSize: 13 }} onClick={() => handleGrant("grant")} disabled={grantLoading}>지급</button>
                 <button className="admin-detail-btn secondary" style={{ fontSize: 13 }} onClick={() => handleGrant("deduct")} disabled={grantLoading}>차감</button>
@@ -342,27 +342,27 @@ function AdminStudentDetailPage() {
             {loadingDuel ? (<p className="admin-detail-note">로딩 중...</p>) : !duelStats ? (<p className="admin-detail-note">대결 전적을 불러올 수 없습니다.</p>) : (
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))", gap: 16, marginTop: 12 }}>
                 <div style={{ background: "rgba(240,108,36,0.08)", borderRadius: 14, padding: 16, textAlign: "center" }}>
-                  <div style={{ fontSize: 12, color: "#a6b6a9", marginBottom: 4 }}>승리</div>
+                  <div style={{ fontSize: 12, color: "var(--muted)", marginBottom: 4 }}>승리</div>
                   <div style={{ fontSize: 28, fontWeight: 700, color: "#9dd6b0" }}>{duelStats.wins}</div>
                 </div>
                 <div style={{ background: "rgba(240,108,36,0.08)", borderRadius: 14, padding: 16, textAlign: "center" }}>
-                  <div style={{ fontSize: 12, color: "#a6b6a9", marginBottom: 4 }}>패배</div>
+                  <div style={{ fontSize: 12, color: "var(--muted)", marginBottom: 4 }}>패배</div>
                   <div style={{ fontSize: 28, fontWeight: 700, color: "#f0a59c" }}>{duelStats.losses}</div>
                 </div>
                 <div style={{ background: "rgba(240,108,36,0.08)", borderRadius: 14, padding: 16, textAlign: "center" }}>
-                  <div style={{ fontSize: 12, color: "#a6b6a9", marginBottom: 4 }}>승률</div>
+                  <div style={{ fontSize: 12, color: "var(--muted)", marginBottom: 4 }}>승률</div>
                   <div style={{ fontSize: 28, fontWeight: 700 }}>{typeof duelStats.winRate === "number" ? `${(duelStats.winRate * 100).toFixed(1)}%` : "0%"}</div>
                 </div>
                 <div style={{ background: "rgba(240,108,36,0.08)", borderRadius: 14, padding: 16, textAlign: "center" }}>
-                  <div style={{ fontSize: 12, color: "#a6b6a9", marginBottom: 4 }}>현재 연승</div>
+                  <div style={{ fontSize: 12, color: "var(--muted)", marginBottom: 4 }}>현재 연승</div>
                   <div style={{ fontSize: 28, fontWeight: 700 }}>{duelStats.currentStreak}</div>
                 </div>
                 <div style={{ background: "rgba(240,108,36,0.08)", borderRadius: 14, padding: 16, textAlign: "center" }}>
-                  <div style={{ fontSize: 12, color: "#a6b6a9", marginBottom: 4 }}>최고 연승</div>
+                  <div style={{ fontSize: 12, color: "var(--muted)", marginBottom: 4 }}>최고 연승</div>
                   <div style={{ fontSize: 28, fontWeight: 700, color: "#f6d18d" }}>{duelStats.bestStreak}</div>
                 </div>
                 <div style={{ background: "rgba(240,108,36,0.08)", borderRadius: 14, padding: 16, textAlign: "center" }}>
-                  <div style={{ fontSize: 12, color: "#a6b6a9", marginBottom: 4 }}>기권 패배</div>
+                  <div style={{ fontSize: 12, color: "var(--muted)", marginBottom: 4 }}>기권 패배</div>
                   <div style={{ fontSize: 28, fontWeight: 700 }}>{duelStats.forfeitLosses}</div>
                 </div>
               </div>

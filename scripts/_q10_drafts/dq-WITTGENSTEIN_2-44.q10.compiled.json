@@ -1,0 +1,155 @@
+{
+  "id": "dq-WITTGENSTEIN_2-44-10",
+  "type": "CHOICE_COMPLEX_OX",
+  "questionKind": "CHOICE_ANALYSIS",
+  "competency": "디지털 서명·부인 방지",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르시오.",
+  "passage": {
+    "paragraphs": [
+      {
+        "id": "p1",
+        "text": "디지털 서명은 전자 문서의 송신자를 확인하고 문서의 위변조 여부를 증명하기 위해 비대칭 암호화 기술을 사용한다. 송신자는 자신의 '개인키'로 문서의 해시값을 암호화하여 서명을 생성하고, 수신자는 송신자의 '공개키'를 사용하여 이를 복호화한다. 만약 복호화된 값과 문서의 해시값이 일치하면 문서가 변하지 않았음이 입증된다. 개인키는 소유자만 가질 수 있으므로, 나중에 송신자가 서명 사실을 부인할 수 없는 '부인 방지' 기능도 제공한다."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "송신자가 공개키로 서명을 만들고 수신자가 개인키로 복호화한다.",
+      "propositions": [
+        {
+          "propId": "A1",
+          "text": "송신자가 공개키로 서명을 만든다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 63,
+              "end": 102
+            }
+          ]
+        },
+        {
+          "propId": "A2",
+          "text": "수신자가 개인키로 복호화한다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 104,
+              "end": 134
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "디지털 서명은 비대칭 암호화 기술을 사용한다.",
+      "propositions": [
+        {
+          "propId": "B1",
+          "text": "디지털 서명은 비대칭 암호화이다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 45,
+              "end": 61
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "어휘력": 0.4,
+        "비문학 배경지식": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "C",
+      "text": "디지털 서명은 송신자 확인과 위변조 증명 목적이 있다.",
+      "propositions": [
+        {
+          "propId": "C1",
+          "text": "송신자 확인·위변조 증명 목적이다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 8,
+              "end": 44
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "구조 독해력": 0.4,
+        "논리 사고력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "D",
+      "text": "복호화 값과 해시값이 일치하면 문서가 변하지 않았음이 입증된다.",
+      "propositions": [
+        {
+          "propId": "D1",
+          "text": "값 일치는 무결성 입증이다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 139,
+              "end": 178
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "비문학 배경지식": 0.4,
+        "구조 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "E",
+      "text": "개인키는 소유자만 가지므로 부인 방지 기능을 제공한다.",
+      "propositions": [
+        {
+          "propId": "E1",
+          "text": "개인키 독점이 부인 방지를 만든다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 180,
+              "end": 242
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "논리 사고력": 0.4,
+        "구조 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    }
+  ],
+  "explanation": "지문은 '송신자가 개인키로 서명, 수신자가 공개키로 복호화'라고 했습니다. 두 키의 사용 주체와 단계를 뒤바꾼 A는 섞어치기 함정입니다.",
+  "scoring": {
+    "correctDeltaSec": 20,
+    "wrongDeltaSec": -40
+  },
+  "competencyVector": {
+    "선택지 분석 및 전략 수립 능력": 0.5,
+    "비문학 배경지식": 0.3,
+    "논리 사고력": 0.2
+  }
+}

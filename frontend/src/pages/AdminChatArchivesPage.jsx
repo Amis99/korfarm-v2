@@ -152,7 +152,7 @@ function AdminChatArchivesPage() {
         </div>
 
         <div className="admin-card" style={{ padding: 16, marginBottom: 20 }}>
-          <p style={{ fontSize: 13, color: "#5a4030", margin: 0 }}>
+          <p style={{ fontSize: 13, color: "#3a4a3e", margin: 0 }}>
             ⓘ 채팅방의 첨부 파일은 업로드 7일 후 주차별 ZIP으로 자동 보관됩니다.
             보관 후 한 달(30일)이 지나면 ZIP은 자동 삭제됩니다.
           </p>
@@ -197,7 +197,7 @@ function AdminChatArchivesPage() {
                     {a.status === "available" ? (
                       <button
                         type="button"
-                        className="ldb-btn ldb-btn-primary"
+                        className="admin-detail-btn"
                         onClick={() => handleDownload(a)}
                       >
                         ZIP 다운로드
@@ -240,7 +240,7 @@ function AdminChatArchivesPage() {
                   <td>
                     <button
                       type="button"
-                      className="ldb-btn ldb-btn-ghost"
+                      className="admin-detail-btn secondary"
                       onClick={() => handleUnmute(m.userId)}
                     >
                       차단 해제
@@ -254,7 +254,7 @@ function AdminChatArchivesPage() {
 
         <h2 style={{ marginTop: 32 }}>이모티콘 관리</h2>
         <div className="admin-card" style={{ padding: 16, marginBottom: 16 }}>
-          <p style={{ fontSize: 13, color: "#5a4030", marginTop: 0 }}>
+          <p style={{ fontSize: 13, color: "#3a4a3e", marginTop: 0 }}>
             이모티콘 이미지를 등록하면 사용자들이 채팅 입력창의 우측 원형 버튼에서 사용할 수 있습니다.
             PNG/JPG/GIF/WEBP 모두 지원합니다.
           </p>
@@ -276,7 +276,7 @@ function AdminChatArchivesPage() {
             />
             <button
               type="button"
-              className="ldb-btn ldb-btn-primary"
+              className="admin-detail-btn"
               onClick={() => emoFileInputRef.current?.click()}
               disabled={uploading || !newEmoName.trim()}
             >
@@ -327,7 +327,7 @@ function AdminChatArchivesPage() {
                   style={{
                     fontSize: 12,
                     fontWeight: 600,
-                    color: "#5a4030",
+                    color: "#3a4a3e",
                     textAlign: "center",
                     wordBreak: "break-all",
                   }}
@@ -336,7 +336,7 @@ function AdminChatArchivesPage() {
                 </div>
                 <button
                   type="button"
-                  className="ldb-btn ldb-btn-ghost"
+                  className="admin-detail-btn secondary"
                   style={{ fontSize: 11, padding: "4px 8px" }}
                   onClick={() => handleEmoticonDelete(emo)}
                 >

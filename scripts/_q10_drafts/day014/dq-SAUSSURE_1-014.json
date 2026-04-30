@@ -1,0 +1,119 @@
+{
+  "contentId": "dq-SAUSSURE_1-014",
+  "questionId": "dq-SAUSSURE_1-014-10",
+  "level": "SAUSSURE_1",
+  "grade": "초1",
+  "competencyKeyword": "낮과 밤의 일과 시간 구분",
+  "stem": "글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      { "id": "p1", "text": "시골 할머니 댁에 놀러 갔습니다. 낮에는 할머니를 도와 마당에서 빨간 고추를 말렸습니다. 밤이 되자 윙윙거리는 모기를 피해 이불 속으로 쏙 들어갔습니다." }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "밤에 마당에서 빨간 고추를 말렸어요.",
+      "isCorrect": true,
+      "wrongVector": {},
+      "propositions": [
+        {
+          "propId": "A1",
+          "text": "고추를 말린 시간은 밤이다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "낮에는 할머니를 도와 마당에서 빨간 고추를 말렸습니다" }
+          ]
+        },
+        {
+          "propId": "A2",
+          "text": "마당에서 빨간 고추를 말렸다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "마당에서 빨간 고추를 말렸습니다" }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "할머니 댁에 놀러 갔어요.",
+      "isCorrect": false,
+      "wrongVector": {
+        "어휘력": 0.4,
+        "문장 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      },
+      "propositions": [
+        {
+          "propId": "B1",
+          "text": "할머니 댁에 놀러 갔다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "시골 할머니 댁에 놀러 갔습니다" }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "C",
+      "text": "낮에 마당에서 빨간 고추를 말렸어요.",
+      "isCorrect": false,
+      "wrongVector": {
+        "문장 독해력": 0.5,
+        "선택지 분석 및 전략 수립 능력": 0.3,
+        "어휘력": 0.2
+      },
+      "propositions": [
+        {
+          "propId": "C1",
+          "text": "낮에 고추를 말렸다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "낮에는 할머니를 도와 마당에서 빨간 고추를 말렸습니다" }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "D",
+      "text": "밤에 모기를 피해 이불 속으로 들어갔어요.",
+      "isCorrect": false,
+      "wrongVector": {
+        "문장 독해력": 0.4,
+        "선택지 분석 및 전략 수립 능력": 0.3,
+        "어휘력": 0.3
+      },
+      "propositions": [
+        {
+          "propId": "D1",
+          "text": "밤에 이불 속으로 들어갔다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "밤이 되자 윙윙거리는 모기를 피해 이불 속으로 쏙 들어갔습니다" }
+          ]
+        },
+        {
+          "propId": "D2",
+          "text": "이는 모기를 피하기 위함이다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "윙윙거리는 모기를 피해" }
+          ]
+        }
+      ]
+    }
+  ],
+  "competencyVector": {
+    "선택지 분석 및 전략 수립 능력": 0.5,
+    "문장 독해력": 0.3,
+    "어휘력": 0.2
+  },
+  "explanation": "지문은 '낮에는 마당에서 고추를 말렸다'고 했습니다. 시간을 '밤'으로 뒤집은 A는 부정/상대어 함정입니다."
+}

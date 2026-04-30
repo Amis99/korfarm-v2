@@ -1,0 +1,67 @@
+{
+  "contentId": "dq-RUSSELL_3-109",
+  "questionId": "dq-RUSSELL_3-109-10",
+  "level": "RUSSELL_3",
+  "grade": "중3",
+  "competencyKeyword": "디지털 서명과 부인 방지",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르시오.",
+  "passage": {
+    "paragraphs": [
+      { "id": "p1", "text": "디지털 서명은 공개키 암호 방식을 응용하여 데이터의 위변조 여부를 확인하는 기술이다. 송신자는 자신의 '개인키'로 문서의 해시값을 암호화하여 서명을 생성하고, 수신자는 송신자의 '공개키'로 이를 복호화하여 문서가 변하지 않았음을 증명한다. 개인키는 오직 한 사람만 가질 수 있으므로 이를 통해 서명자가 누구인지 확인하는 '부인 방지' 기능도 수행한다. 서명 과정은 복잡한 수학적 연산에 기반하여 강력한 보안을 유지한다." }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "송신자는 공개키로 서명을 생성하고 수신자는 개인키로 복호화한다.",
+      "isCorrect": true,
+      "wrongVector": {},
+      "propositions": [
+        { "propId": "A1", "text": "송신자=공개키 서명이다.", "oxAnswer": "X", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "송신자는 자신의 '개인키'로 문서의 해시값을 암호화하여 서명을 생성하고, 수신자는 송신자의 '공개키'로 이를 복호화하여" }] }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "디지털 서명은 데이터의 위변조 여부를 확인하는 기술이다.",
+      "isCorrect": false,
+      "wrongVector": { "어휘력": 0.4, "비문학 배경지식": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "B1", "text": "위변조 확인 기술이다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "데이터의 위변조 여부를 확인하는 기술이다" }] }
+      ]
+    },
+    {
+      "choiceId": "C",
+      "text": "수신자는 공개키로 복호화하여 문서 무변경을 증명한다.",
+      "isCorrect": false,
+      "wrongVector": { "구조 독해력": 0.4, "논리 사고력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "C1", "text": "공개키 복호화다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "수신자는 송신자의 '공개키'로 이를 복호화하여 문서가 변하지 않았음을 증명한다" }] }
+      ]
+    },
+    {
+      "choiceId": "D",
+      "text": "개인키는 오직 한 사람만 가질 수 있다.",
+      "isCorrect": false,
+      "wrongVector": { "비문학 배경지식": 0.4, "구조 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "D1", "text": "개인키 단독 소유다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "개인키는 오직 한 사람만 가질 수 있으므로" }] }
+      ]
+    },
+    {
+      "choiceId": "E",
+      "text": "디지털 서명은 부인 방지 기능을 수행한다.",
+      "isCorrect": false,
+      "wrongVector": { "논리 사고력": 0.4, "구조 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "E1", "text": "부인 방지 기능이다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "서명자가 누구인지 확인하는 '부인 방지' 기능도 수행한다" }] }
+      ]
+    }
+  ],
+  "competencyVector": { "선택지 분석 및 전략 수립 능력": 0.5, "비문학 배경지식": 0.3, "논리 사고력": 0.2 },
+  "explanation": "지문은 '송신자는 개인키로 서명, 수신자는 공개키로 복호화'라고 했습니다. 두 키 역할을 뒤바꾼 A는 섞어치기 함정입니다."
+}

@@ -1,0 +1,128 @@
+{
+  "contentId": "dq-SAUSSURE_3-004",
+  "questionId": "dq-SAUSSURE_3-004-10",
+  "level": "SAUSSURE_3",
+  "grade": "초3",
+  "competencyKeyword": "인공지능의 능력과 활용 이해",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      { "id": "p1", "text": "인공지능은 여러 가지 정보를 사람처럼 생각하고 배울 수 있는 컴퓨터 기술입니다. 요즘에는 이 인공지능이 사람을 대신하여 그림을 그려 주기도 하고, 가고 싶은 길을 빠르게 찾아 주기도 합니다." }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "인공지능은 사람처럼 생각하지만 스스로 배우지는 못해요.",
+      "isCorrect": true,
+      "wrongVector": {},
+      "propositions": [
+        {
+          "propId": "A1",
+          "text": "인공지능은 사람처럼 생각한다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "사람처럼 생각하고 배울 수 있는 컴퓨터 기술입니다" }
+          ]
+        },
+        {
+          "propId": "A2",
+          "text": "인공지능은 스스로 배우지 못한다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "사람처럼 생각하고 배울 수 있는 컴퓨터 기술입니다" }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "인공지능은 정보를 사람처럼 생각하고 배우는 기술이에요.",
+      "isCorrect": false,
+      "wrongVector": {
+        "어휘력": 0.4,
+        "문장 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      },
+      "propositions": [
+        {
+          "propId": "B1",
+          "text": "인공지능은 정보를 다룬다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "인공지능은 여러 가지 정보를" }
+          ]
+        },
+        {
+          "propId": "B2",
+          "text": "인공지능은 사람처럼 생각하고 배운다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "사람처럼 생각하고 배울 수 있는 컴퓨터 기술" }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "C",
+      "text": "요즘에는 인공지능이 사람을 대신하여 그림을 그려 줘요.",
+      "isCorrect": false,
+      "wrongVector": {
+        "문장 독해력": 0.5,
+        "선택지 분석 및 전략 수립 능력": 0.3,
+        "어휘력": 0.2
+      },
+      "propositions": [
+        {
+          "propId": "C1",
+          "text": "인공지능이 사람을 대신해 그림을 그려 준다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "인공지능이 사람을 대신하여 그림을 그려 주기도 하고" }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "D",
+      "text": "인공지능은 가고 싶은 길을 빠르게 찾아 주기도 해요.",
+      "isCorrect": false,
+      "wrongVector": {
+        "문장 독해력": 0.5,
+        "선택지 분석 및 전략 수립 능력": 0.3,
+        "어휘력": 0.2
+      },
+      "propositions": [
+        {
+          "propId": "D1",
+          "text": "인공지능은 가고 싶은 길을 찾아 준다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "가고 싶은 길을 빠르게 찾아 주기도 합니다" }
+          ]
+        },
+        {
+          "propId": "D2",
+          "text": "그것도 빠르게 해 준다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidence": [
+            { "paragraphId": "p1", "substring": "빠르게 찾아 주기도 합니다" }
+          ]
+        }
+      ]
+    }
+  ],
+  "competencyVector": {
+    "선택지 분석 및 전략 수립 능력": 0.5,
+    "문장 독해력": 0.3,
+    "어휘력": 0.2
+  },
+  "explanation": "지문은 인공지능이 '사람처럼 생각하고 배울 수 있는' 기술이라고 했습니다. 두 능력을 분리해 배우지 못한다고 한 A는 결합/분리 함정입니다."
+}

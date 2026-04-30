@@ -1,0 +1,67 @@
+{
+  "contentId": "dq-RUSSELL_3-079",
+  "questionId": "dq-RUSSELL_3-079-10",
+  "level": "RUSSELL_3",
+  "grade": "중3",
+  "competencyKeyword": "TCP/IP 패킷 전송",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르시오.",
+  "passage": {
+    "paragraphs": [
+      { "id": "p1", "text": "인터넷에서 데이터를 주고받는 표준 규약인 TCP/IP는 데이터를 작은 단위인 '패킷'으로 나누어 전송한다. IP는 패킷의 주소를 지정하고 경로를 찾는 역할을 하며, TCP는 전송된 패킷에 오류가 없는지 확인하고 순서대로 재조립하여 데이터의 신뢰성을 보장한다. 만약 전송 과정에서 일부 패킷이 유실되면 TCP는 이를 감지하고 재전송을 요청하여 정보가 누락되지 않도록 관리한다." }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "TCP는 패킷의 주소를 지정하고 경로를 찾는다.",
+      "isCorrect": true,
+      "wrongVector": {},
+      "propositions": [
+        { "propId": "A1", "text": "TCP가 주소·경로 담당이다.", "oxAnswer": "X", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "IP는 패킷의 주소를 지정하고 경로를 찾는 역할을 하며" }] }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "TCP/IP는 데이터를 패킷 단위로 나눠 전송한다.",
+      "isCorrect": false,
+      "wrongVector": { "어휘력": 0.4, "비문학 배경지식": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "B1", "text": "패킷 단위 전송 방식이다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "데이터를 작은 단위인 '패킷'으로 나누어 전송한다" }] }
+      ]
+    },
+    {
+      "choiceId": "C",
+      "text": "TCP는 패킷 오류를 확인하고 순서대로 재조립한다.",
+      "isCorrect": false,
+      "wrongVector": { "구조 독해력": 0.4, "논리 사고력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "C1", "text": "TCP는 신뢰성 보장이다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "TCP는 전송된 패킷에 오류가 없는지 확인하고 순서대로 재조립하여 데이터의 신뢰성을 보장한다" }] }
+      ]
+    },
+    {
+      "choiceId": "D",
+      "text": "패킷이 유실되면 TCP는 재전송을 요청한다.",
+      "isCorrect": false,
+      "wrongVector": { "비문학 배경지식": 0.4, "구조 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "D1", "text": "유실 시 재전송 요청한다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "일부 패킷이 유실되면 TCP는 이를 감지하고 재전송을 요청하여" }] }
+      ]
+    },
+    {
+      "choiceId": "E",
+      "text": "TCP/IP는 인터넷의 표준 통신 규약이다.",
+      "isCorrect": false,
+      "wrongVector": { "논리 사고력": 0.4, "구조 독해력": 0.3, "선택지 분석 및 전략 수립 능력": 0.3 },
+      "propositions": [
+        { "propId": "E1", "text": "표준 규약이다.", "oxAnswer": "O", "matchMode": "ALL",
+          "evidence": [{ "paragraphId": "p1", "substring": "인터넷에서 데이터를 주고받는 표준 규약인 TCP/IP" }] }
+      ]
+    }
+  ],
+  "competencyVector": { "선택지 분석 및 전략 수립 능력": 0.5, "비문학 배경지식": 0.3, "논리 사고력": 0.2 },
+  "explanation": "지문은 'IP가 주소 지정·경로 탐색을, TCP가 오류 확인과 재조립을 한다'고 했습니다. IP 역할을 TCP로 옮긴 A는 섞어치기 함정입니다."
+}

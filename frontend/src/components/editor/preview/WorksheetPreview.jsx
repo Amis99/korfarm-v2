@@ -50,7 +50,7 @@ export default function WorksheetPreview({ content, onClickPath, focusPath }) {
 
   return (
     <div id="ce-passage-container">
-      {questions.length === 0 && <div style={{ color: "#6a7a6e" }}>문항이 없습니다.</div>}
+      {questions.length === 0 && <div style={{ color: "var(--muted)" }}>문항이 없습니다.</div>}
       {questions.map((q, i) => {
         const path = `questions[${i}]`;
         const isActive = focusPath && focusPath.startsWith(path);
@@ -76,20 +76,20 @@ export default function WorksheetPreview({ content, onClickPath, focusPath }) {
             onClick={() => onClickPath(path)}
           >
             <div className="ce-preview-q-stem">
-              <strong style={{ color: "#6a7a6e", marginRight: 6 }}>{i + 1}.</strong>
+              <strong style={{ color: "var(--muted)", marginRight: 6 }}>{i + 1}.</strong>
               {stemDisp}
             </div>
             {isStringPassage && (
               <div
                 className="ce-preview-passage-line"
                 data-paragraph-id={`q${i}`}
-                style={{ fontSize: 13, color: "#cdd6d0", marginBottom: 6, padding: "6px 10px", background: "#111815", borderRadius: 4, lineHeight: 1.6 }}
+                style={{ fontSize: 13, color: "#cdd6d0", marginBottom: 6, padding: "6px 10px", background: "var(--bg)", borderRadius: 4, lineHeight: 1.6 }}
               >
                 {renderHighlightedString(q.passage, effectiveRanges)}
               </div>
             )}
             {objectPassageDisp && (
-              <div style={{ fontSize: 12, color: "#8a9a8e", marginBottom: 6, padding: "4px 8px", background: "#111815", borderRadius: 4 }}>
+              <div style={{ fontSize: 12, color: "#8a9a8e", marginBottom: 6, padding: "4px 8px", background: "var(--bg)", borderRadius: 4 }}>
                 {objectPassageDisp}
               </div>
             )}
@@ -107,7 +107,7 @@ export default function WorksheetPreview({ content, onClickPath, focusPath }) {
               );
             })}
             {templateDisp && (
-              <div style={{ fontSize: 12, color: "#a6b6a9", marginTop: 4 }}>
+              <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 4 }}>
                 [빈칸형] {templateDisp}
               </div>
             )}

@@ -1,0 +1,118 @@
+{
+  "id": "dq-SAUSSURE_1-023-10",
+  "type": "CHOICE_COMPLEX_OX",
+  "questionKind": "CHOICE_ANALYSIS",
+  "competency": "지민이의 하루 일과",
+  "stem": "윗글의 내용으로 적절하지 <u>않은</u> 것을 고르세요.",
+  "passage": {
+    "paragraphs": [
+      {
+        "id": "p1",
+        "text": "아침에 일어난 지민이는 제일 먼저 할머니께 밝게 인사했습니다. 낮에는 놀이터에서 친구들과 장난감을 보며 사이좋게 놀았습니다. 저녁에는 푹신한 침대에 누워 재미있는 동화책을 조용히 읽었습니다."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "choiceId": "A",
+      "text": "지민이는 저녁에 친구들과 놀이터에서 놀았다.",
+      "propositions": [
+        {
+          "propId": "A1",
+          "text": "친구들과 놀이터에서 논 시간은 저녁이다.",
+          "oxAnswer": "X",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 35,
+              "end": 68
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "choiceId": "B",
+      "text": "아침에 할머니께 인사를 했다.",
+      "propositions": [
+        {
+          "propId": "B1",
+          "text": "아침에 할머니께 인사했다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 33
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "어휘력": 0.4,
+        "문장 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "C",
+      "text": "낮에는 놀이터에서 친구들과 놀았다.",
+      "propositions": [
+        {
+          "propId": "C1",
+          "text": "낮에 친구들과 놀이터에서 놀았다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 35,
+              "end": 68
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "문장 독해력": 0.4,
+        "구조 독해력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    },
+    {
+      "choiceId": "D",
+      "text": "저녁에는 침대에서 동화책을 읽었다.",
+      "propositions": [
+        {
+          "propId": "D1",
+          "text": "저녁에 동화책을 읽었다.",
+          "oxAnswer": "O",
+          "matchMode": "ALL",
+          "evidenceRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 70,
+              "end": 105
+            }
+          ]
+        }
+      ],
+      "wrongVector": {
+        "구조 독해력": 0.4,
+        "어휘력": 0.3,
+        "선택지 분석 및 전략 수립 능력": 0.3
+      }
+    }
+  ],
+  "explanation": "지문은 '낮에 놀이터에서 친구들과 놀고 저녁에는 동화책을 읽었다'고 했습니다. 시간대를 뒤바꾼 A는 순서/방향 함정입니다.",
+  "scoring": {
+    "correctDeltaSec": 20,
+    "wrongDeltaSec": -40
+  },
+  "competencyVector": {
+    "선택지 분석 및 전략 수립 능력": 0.5,
+    "문장 독해력": 0.3,
+    "구조 독해력": 0.2
+  }
+}
