@@ -87,7 +87,7 @@ function StudyContentModule({ content }) {
   };
 
   // ── 답안 제출 (서버 채점) ──
-  const submitAnswer = async ({ selectedChoiceId, userAnswer }) => {
+  const submitAnswer = async ({ selectedChoiceId, userAnswer, blankPicks }) => {
     if (lockRef.current || !currentQuestion) return;
     lockRef.current = true;
 
@@ -99,6 +99,7 @@ function StudyContentModule({ content }) {
           questionId: currentQuestion.id,
           selectedChoiceId: selectedChoiceId || null,
           userAnswer: userAnswer || null,
+          blankPicks: blankPicks || null,
         }
       );
       const isCorrect = !!res.isCorrect;
@@ -338,7 +339,7 @@ function StudyQuestionItem({ question, cardQuestion, idx, total, completion, isA
     );
   }
 
-  // ESSAY → 빈칸 채우기
+  // ESSAY → 빈칸 채우기 (EssayCard 가 { userAnswer, blankPicks } 형태로 호출)
   if (type === "ESSAY") {
     return (
       <EssayCard
@@ -347,7 +348,7 @@ function StudyQuestionItem({ question, cardQuestion, idx, total, completion, isA
         total={total}
         completion={completion}
         isActive={isActive}
-        onSubmit={(userAnswer) => onSubmit({ userAnswer })}
+        onSubmit={(payload) => onSubmit(payload)}
       />
     );
   }
@@ -505,7 +506,8 @@ function EssayCard({ question, idx, total, completion, isActive, onSubmit }) {
 
     // 다음 빈칸 또는 제출
     if (bIdx >= totalBlanks - 1) {
-      // 마지막 빈칸 → 답안 조립 후 서버 제출
+      // 마지막 빈칸 — 빈칸별 텍스트(blankPicks) 와 조립 텍스트 둘 다 보냄.
+      // 백엔드는 blankPicks 가 있으면 위치별 비교, 없으면 폴백.
       let result = "";
       let blankIdx = 0;
       for (const seg of blanks.segments) {
@@ -515,8 +517,10 @@ function EssayCard({ question, idx, total, completion, isActive, onSubmit }) {
           blankIdx += 1;
         }
       }
-      // 약간의 지연 후 제출 (모달 피드백 시간 확보)
-      setTimeout(() => onSubmit(result), FEEDBACK.A_CORRECT_ADVANCE_MS);
+      setTimeout(
+        () => onSubmit({ userAnswer: result, blankPicks: next }),
+        FEEDBACK.A_CORRECT_ADVANCE_MS
+      );
     } else {
       setTimeout(() => setActiveBlankIdx(bIdx + 1), FEEDBACK.A_CORRECT_ADVANCE_MS);
     }

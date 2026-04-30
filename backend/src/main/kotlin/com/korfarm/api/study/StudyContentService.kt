@@ -732,18 +732,17 @@ class StudyContentService(
         var fillBlanksCount: Int? = null
         var fillBlanksChoices: List<List<String>>? = null
         if (type == "ESSAY") {
-            val ans = q.modelAnswer ?: ""
+            // 어드민이 modelAnswer 안에 ____ (연속 _ 2개 이상) 로 빈칸을 직접 표시.
+            // phrase 문자열 매칭으로 인한 중복 마스킹 버그 방지 — 빈칸 위치는 마커가 결정.
+            val template = q.modelAnswer ?: ""
             val blanks = fillBlanksFromJson(q.fillBlanks)
-            fillBlanksCount = blanks.size
-            // 각 phrase 를 동일 글자수의 ___ 로 치환 (반복 phrase 도 모두)
-            var masked = ans
-            for (b in blanks) {
-                val replacement = "_".repeat(b.phrase.length.coerceAtLeast(3))
-                masked = masked.replace(b.phrase, replacement)
-            }
-            modelAnswerMasked = masked
-            // 각 빈칸의 선택지 (정답+오답) 셔플
-            fillBlanksChoices = blanks.map { b ->
+            val markerRuns = countBlankMarkers(template)
+            // 마커 개수와 fillBlanks 데이터 개수 중 작은 쪽을 사용 (불일치 시 안전 폴백)
+            val effective = minOf(markerRuns, blanks.size)
+            fillBlanksCount = effective
+            modelAnswerMasked = template
+            fillBlanksChoices = (0 until effective).map { i ->
+                val b = blanks[i]
                 val opts = (b.choices ?: listOf(b.phrase)).distinct().toMutableList()
                 if (b.phrase !in opts) opts.add(0, b.phrase)
                 opts.shuffled()
@@ -764,6 +763,21 @@ class StudyContentService(
             fillBlanksCount = fillBlanksCount,
             fillBlanksChoices = fillBlanksChoices
         )
+    }
+
+    /** 연속된 `_` 가 2개 이상인 구간을 한 빈칸으로 카운트. */
+    private fun countBlankMarkers(template: String): Int {
+        var count = 0
+        var i = 0
+        while (i < template.length) {
+            if (template[i] == '_') {
+                var j = i
+                while (j < template.length && template[j] == '_') j++
+                if (j - i >= 2) count++
+                i = j
+            } else i++
+        }
+        return count
     }
 
     /**
@@ -995,12 +1009,22 @@ class StudyContentService(
                 isCorrect = expected.isNotEmpty() && expected == ans
             }
             "ESSAY" -> {
-                // 학생이 빈칸 선택지에서 고른 결과를 합친 텍스트.
-                // 정답 phrase 가 모두 포함되면 정답 (한 빈칸이라도 다른 선택지를 골랐으면 빠짐).
+                // 새 방식 — 학생이 빈칸별로 고른 텍스트(blankPicks) 가 각 위치의 phrase 와 일치해야 정답.
+                // 동일 phrase 가 본문에 두 번 나와도 위치별 비교라 안전.
                 val blanks = fillBlanksFromJson(q.fillBlanks)
-                val ans = (request.userAnswer ?: "").replace("\\s+".toRegex(), "")
-                isCorrect = blanks.isNotEmpty() && blanks.all { b ->
-                    ans.contains(b.phrase.replace("\\s+".toRegex(), ""))
+                val picks = request.blankPicks
+                isCorrect = if (picks != null && blanks.isNotEmpty()) {
+                    picks.size >= blanks.size && blanks.indices.all { i ->
+                        val pick = (picks[i] ?: "").replace("\\s+".toRegex(), "")
+                        val expected = blanks[i].phrase.replace("\\s+".toRegex(), "")
+                        pick == expected
+                    }
+                } else {
+                    // 옛 호환: contains 검사
+                    val ans = (request.userAnswer ?: "").replace("\\s+".toRegex(), "")
+                    blanks.isNotEmpty() && blanks.all { b ->
+                        ans.contains(b.phrase.replace("\\s+".toRegex(), ""))
+                    }
                 }
             }
         }

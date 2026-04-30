@@ -23,6 +23,20 @@ const QUESTION_TYPES = [
   { value: "ESSAY", label: "서술형" },
 ];
 
+/** 연속된 `_` 가 2개 이상인 구간을 한 빈칸으로 카운트 (백엔드 로직과 동일). */
+function countUnderscoreRuns(text) {
+  let count = 0, i = 0;
+  while (i < text.length) {
+    if (text[i] === "_") {
+      let j = i;
+      while (j < text.length && text[j] === "_") j++;
+      if (j - i >= 2) count++;
+      i = j;
+    } else i++;
+  }
+  return count;
+}
+
 export default function StudyQuestionCard({ question, index, onChange, onDelete }) {
   const [showVector, setShowVector] = useState(false);
   const [showWrongAt, setShowWrongAt] = useState(null); // 선택지 인덱스
@@ -372,15 +386,26 @@ export default function StudyQuestionCard({ question, index, onChange, onDelete 
 
       {question.questionType === "ESSAY" && (
         <div style={{ marginTop: 8 }}>
-          <label style={labelStyle}>모범답안 (학생은 빈칸을 클릭해서 채움)</label>
+          <label style={labelStyle}>
+            모범답안 — 빈칸 자리에 <code style={{ background: "rgba(192,57,43,0.08)", padding: "0 4px", borderRadius: 3 }}>____</code> (밑줄 2개 이상 연속) 으로 표시
+          </label>
           <textarea
             value={question.modelAnswer || ""}
             onChange={(e) => update({ modelAnswer: e.target.value })}
-            placeholder="모범답안 본문"
+            placeholder='예: "이 작품의 주제는 ____ 이고, 인물은 ____ 적이다."'
             rows={4}
             style={textareaStyle}
           />
-          <label style={labelStyle}>빈칸 (학생이 채울 핵심 문구)</label>
+          <p style={{ fontSize: 11, color: "var(--admin-muted)", margin: "4px 0 8px" }}>
+            감지된 빈칸 <strong style={{ color: "var(--admin-accent-strong)" }}>{countUnderscoreRuns(question.modelAnswer || "")}개</strong>
+            {" · "}
+            아래 빈칸 데이터 <strong>{(question.fillBlanks || []).length}개</strong>
+            {" — "}
+            <span style={{ color: countUnderscoreRuns(question.modelAnswer || "") === (question.fillBlanks || []).length ? "#2d6a4f" : "#c0392b" }}>
+              {countUnderscoreRuns(question.modelAnswer || "") === (question.fillBlanks || []).length ? "OK" : "개수 불일치 (작은 쪽만 사용)"}
+            </span>
+          </p>
+          <label style={labelStyle}>빈칸 데이터 (____ 위치 순서대로)</label>
           <FillBlanksEditor
             blanks={question.fillBlanks || []}
             onChange={(blanks) => update({ fillBlanks: blanks })}

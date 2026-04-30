@@ -221,7 +221,9 @@ data class StudyAttemptSubmitRequest(
     val sessionId: String,
     val questionId: String,
     val selectedChoiceId: String? = null, // MULTI_CHOICE/OX
-    val userAnswer: String? = null         // ESSAY
+    val userAnswer: String? = null,        // ESSAY (조립된 텍스트, 폴백용) / SHORT_ANSWER
+    /** ESSAY 새 방식: 각 빈칸별 학생이 고른 텍스트 (순서대로). 우선 사용. */
+    val blankPicks: List<String>? = null
 )
 
 data class StudyAttemptSubmitResponse(
