@@ -20,6 +20,7 @@ export default function AiStudyQuestionGenModal({
   onClose, onGenerated,
 }) {
   const [counts, setCounts] = useState({ mcq: 5, ox: 5, short: 5, essay: 5 });
+  const [tier, setTier] = useState("BASIC"); // BASIC | ADVANCED
   const [submitting, setSubmitting] = useState(false);
   const [progress, setProgress] = useState("");
   const [error, setError] = useState("");
@@ -50,16 +51,15 @@ export default function AiStudyQuestionGenModal({
         shortCount: counts.short,
         essayCount: counts.essay,
         existingCheckpoints: existingCheckpoints?.length ? existingCheckpoints : null,
+        tier,
       });
       setProgress("문제 생성 중... (1~2분)");
-      const result = await pollJob(submission.jobId, 60, 2000);
-      if (result.status !== "completed") {
-        throw new Error(result.errorMessage || `생성 실패 (${result.status})`);
-      }
-      const data = result.result || {};
+      // pollJob 은 잡이 completed 일 때만 result 데이터(checkpoints/questions)를 반환.
+      // failed 면 throw, 시간 초과도 throw — 정상 반환이면 곧 성공.
+      const result = await pollJob(submission.jobId, 150, 2000);
       onGenerated({
-        checkpoints: data.checkpoints || [],
-        questions: data.questions || [],
+        checkpoints: result.checkpoints || [],
+        questions: result.questions || [],
       });
       onClose();
     } catch (err) {
@@ -91,6 +91,18 @@ export default function AiStudyQuestionGenModal({
               ✓ 기존 출제 포인트 {existingCheckpoints.length}개 재사용
             </p>
           )}
+        </div>
+
+        <div className="admin-modal-section">
+          <h3 style={{ fontSize: 13, color: "var(--admin-accent-strong)" }}>AI 모델</h3>
+          <div style={{ display: "flex", gap: 8 }}>
+            <TierOption value="BASIC" current={tier} onChange={setTier}
+              icon="⚡" label="기본"
+              hint="빠르고 저렴" />
+            <TierOption value="ADVANCED" current={tier} onChange={setTier}
+              icon="✨" label="고급"
+              hint="정밀·고품질 (시간 더 소요)" />
+          </div>
         </div>
 
         <div className="admin-modal-section">
@@ -142,6 +154,31 @@ export default function AiStudyQuestionGenModal({
         </div>
       </div>
     </div>
+  );
+}
+
+function TierOption({ value, current, onChange, icon, label, hint }) {
+  const active = current === value;
+  return (
+    <button
+      type="button"
+      onClick={() => onChange(value)}
+      style={{
+        flex: 1,
+        padding: "10px 14px",
+        border: `2px solid ${active ? "var(--admin-accent)" : "var(--admin-stroke)"}`,
+        background: active ? "var(--admin-accent-soft)" : "var(--admin-panel)",
+        borderRadius: 10,
+        cursor: "pointer",
+        fontFamily: "inherit",
+        textAlign: "left",
+      }}
+    >
+      <div style={{ fontSize: 13, fontWeight: 700, color: active ? "var(--admin-accent-strong)" : "var(--admin-ink)" }}>
+        {icon} {label}
+      </div>
+      <div style={{ fontSize: 11, color: "var(--admin-muted)", marginTop: 2 }}>{hint}</div>
+    </button>
   );
 }
 

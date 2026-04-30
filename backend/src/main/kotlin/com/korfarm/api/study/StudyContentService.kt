@@ -96,16 +96,24 @@ class StudyContentService(
         else objectMapper.readValue(json, object : TypeReference<List<StudyCheckpointDto>>() {})
     } catch (e: Exception) { emptyList() }
 
+    private fun stringListFromJsonOrNull(json: String?): List<String>? = try {
+        if (json.isNullOrBlank()) null
+        else objectMapper.readValue(json, object : TypeReference<List<String>>() {})
+    } catch (e: Exception) { null }
+
     private fun toQuestionDto(q: StudyQuestionEntity): StudyQuestionDto {
         return StudyQuestionDto(
             id = q.id,
             questionNo = q.questionNo,
             questionType = q.questionType,
             stem = q.stem,
+            boxContent = q.boxContent,
+            conditionContent = q.conditionContent,
             choices = if (q.choices.isNullOrBlank()) null else choicesFromJson(q.choices),
             modelAnswer = q.modelAnswer,
             fillBlanks = if (q.fillBlanks.isNullOrBlank()) null else fillBlanksFromJson(q.fillBlanks),
-            evalPointIdx = intListFromJson(q.evalPointIdx),
+            distractorSyllables = stringListFromJsonOrNull(q.distractorSyllables),
+            evalPointIdx = intListFromJson(q.evalPointIdx).map { it as Any },
             difficulty = q.difficulty,
             competencyVector = vectorFromJson(q.competencyVector),
             wrongVector = vectorFromJson(q.wrongVector)
@@ -339,7 +347,7 @@ class StudyContentService(
                 choices = q.choices?.let { toJson(it) },
                 modelAnswer = q.modelAnswer,
                 fillBlanks = q.fillBlanks?.let { toJson(it) },
-                evalPointIdx = toJson(q.evalPointIdx),
+                evalPointIdx = toJson(q.evalPointIdx ?: emptyList<Any>()),
                 difficulty = q.difficulty,
                 competencyVector = q.competencyVector?.let { toJson(it) },
                 wrongVector = q.wrongVector?.let { toJson(it) },
@@ -362,9 +370,14 @@ class StudyContentService(
                 throw ApiException("INVALID", "$tag: 알 수 없는 type=${q.questionType}", HttpStatus.BAD_REQUEST)
             }
             if (q.stem.isBlank()) throw ApiException("INVALID", "$tag: stem 비어있음", HttpStatus.BAD_REQUEST)
-            q.evalPointIdx.forEach { idx ->
-                if (idx < 0 || idx >= evalPointsSize) {
-                    throw ApiException("INVALID", "$tag: evalPointIdx $idx 가 evalPoints 범위 초과", HttpStatus.BAD_REQUEST)
+            // evalPointIdx — evalPoints 가 비어있는 새 시스템 콘텐츠에서는 그냥 무시.
+            // 채워져 있으면 Int 만 범위 검증, String/checkpoint id 는 무시 (옛 시스템 호환)
+            if (evalPointsSize > 0) {
+                (q.evalPointIdx ?: emptyList()).forEach { v ->
+                    val idx = (v as? Number)?.toInt() ?: return@forEach
+                    if (idx < 0 || idx >= evalPointsSize) {
+                        throw ApiException("INVALID", "$tag: evalPointIdx $idx 가 evalPoints 범위 초과", HttpStatus.BAD_REQUEST)
+                    }
                 }
             }
             when (type) {
@@ -379,10 +392,13 @@ class StudyContentService(
                     if (choices.none { it.isCorrect }) {
                         throw ApiException("INVALID", "$tag: 정답 선택지 없음", HttpStatus.BAD_REQUEST)
                     }
-                    choices.forEach { ch ->
-                        if (ch.errorPatternIdx != null) {
-                            if (ch.errorPatternIdx < 0 || ch.errorPatternIdx >= errorPatternsSize) {
-                                throw ApiException("INVALID", "$tag: errorPatternIdx ${ch.errorPatternIdx} 범위 초과", HttpStatus.BAD_REQUEST)
+                    // errorPatternIdx — errorPatterns 가 비어있는 새 시스템 콘텐츠에서는 그냥 무시
+                    if (errorPatternsSize > 0) {
+                        choices.forEach { ch ->
+                            if (ch.errorPatternIdx != null) {
+                                if (ch.errorPatternIdx < 0 || ch.errorPatternIdx >= errorPatternsSize) {
+                                    throw ApiException("INVALID", "$tag: errorPatternIdx ${ch.errorPatternIdx} 범위 초과", HttpStatus.BAD_REQUEST)
+                                }
                             }
                         }
                     }
@@ -558,10 +574,13 @@ class StudyContentService(
                 questionNo = q.questionNo.takeIf { it > 0 } ?: (idx + 1),
                 questionType = q.questionType.uppercase(),
                 stem = q.stem,
+                boxContent = q.boxContent?.takeIf { it.isNotBlank() },
+                conditionContent = q.conditionContent?.takeIf { it.isNotBlank() },
                 choices = q.choices?.let { toJson(it) },
                 modelAnswer = q.modelAnswer,
                 fillBlanks = q.fillBlanks?.let { toJson(it) },
-                evalPointIdx = toJson(q.evalPointIdx),
+                distractorSyllables = q.distractorSyllables?.let { toJson(it) },
+                evalPointIdx = toJson(q.evalPointIdx ?: emptyList<Any>()),
                 difficulty = q.difficulty,
                 competencyVector = q.competencyVector?.let { toJson(it) },
                 wrongVector = q.wrongVector?.let { toJson(it) },
@@ -587,11 +606,17 @@ class StudyContentService(
     // ─────────────────────────────────────────────
     @Transactional(readOnly = true)
     fun listForStudent(userId: String): List<StudyContentStudentItem> {
-        val orgId = currentUserOrgId(userId)
-        val contents = if (orgId != null) {
-            studyContentRepository.findVisibleForStudent(orgId)
+        // 본사·기관 관리자는 학생 화면에서 모든 active 콘텐츠 열람 (미리보기 / 검수)
+        val isAdmin = isHqAdmin() || isOrgAdmin()
+        val orgId = if (!isAdmin) currentUserOrgId(userId) else null
+        val contents = if (isAdmin) {
+            studyContentRepository.findAllByStatusOrderByCreatedAtDesc("active")
         } else {
-            studyContentRepository.findVisibleForStudentNoOrg()
+            if (orgId != null) {
+                studyContentRepository.findVisibleForStudent(orgId)
+            } else {
+                studyContentRepository.findVisibleForStudentNoOrg()
+            }
         }
         return contents.map { c ->
             val progress = studyProgressRepository.findOne(userId, c.id)
@@ -698,12 +723,14 @@ class StudyContentService(
             val answer = (q.modelAnswer ?: "").replace("\\s+".toRegex(), "")
             answerLength = answer.length
             if (answer.isNotEmpty()) {
-                syllableCards = buildSyllableCards(answer)
+                val saved = stringListFromJsonOrNull(q.distractorSyllables)
+                syllableCards = buildSyllableCards(answer, saved)
             }
         }
 
         var modelAnswerMasked: String? = null
         var fillBlanksCount: Int? = null
+        var fillBlanksChoices: List<List<String>>? = null
         if (type == "ESSAY") {
             val ans = q.modelAnswer ?: ""
             val blanks = fillBlanksFromJson(q.fillBlanks)
@@ -715,6 +742,12 @@ class StudyContentService(
                 masked = masked.replace(b.phrase, replacement)
             }
             modelAnswerMasked = masked
+            // 각 빈칸의 선택지 (정답+오답) 셔플
+            fillBlanksChoices = blanks.map { b ->
+                val opts = (b.choices ?: listOf(b.phrase)).distinct().toMutableList()
+                if (b.phrase !in opts) opts.add(0, b.phrase)
+                opts.shuffled()
+            }
         }
 
         return StudyPageStudentQuestionDto(
@@ -722,40 +755,78 @@ class StudyContentService(
             questionNo = q.questionNo,
             questionType = type,
             stem = q.stem,
+            boxContent = q.boxContent,
+            conditionContent = q.conditionContent,
             choices = choices,
             answerLength = answerLength,
             syllableCards = syllableCards,
             modelAnswerMasked = modelAnswerMasked,
-            fillBlanksCount = fillBlanksCount
+            fillBlanksCount = fillBlanksCount,
+            fillBlanksChoices = fillBlanksChoices
         )
     }
 
-    /** 정답 글자 + 더미 (정답 글자수 만큼) 셔플 = 글자수 × 2 카드 풀 */
-    private fun buildSyllableCards(answer: String): List<String> {
+    /**
+     * 정답 글자 + 더미 음절 셔플 = 글자수 × 2 카드 풀.
+     *
+     * @param answer 정답 (공백 제거된 글자열)
+     * @param savedDistractors 어드민/AI 가 저장한 오답 음절. 우선 사용. 부족하면 무작위 풀에서 보충.
+     *
+     * 규칙:
+     *  - 정답 글자와 더미 글자 모두 중복 금지 (음절 풀에 같은 글자 두 번 안 나옴)
+     *  - 더미 개수 = 정답 글자수 (총 글자수 × 2 카드)
+     */
+    private fun buildSyllableCards(answer: String, savedDistractors: List<String>?): List<String> {
         val chars = answer.toCharArray().map { it.toString() }
-        // 더미: 한글 음절 풀에서 정답 글자와 다른 것을 무작위 추출
-        val dummyPool = ("가나다라마바사아자차카타파하" +
-            "거너더러머버서어저처커터퍼허" +
-            "고노도로모보소오조초코토포호" +
-            "구누두루무부수우주추쿠투푸후" +
-            "기니디리미비시이지치키티피히")
-            .toCharArray().map { it.toString() }
-            .filter { it !in chars }
-            .shuffled()
-            .take(chars.size)
-        val pool = (chars + dummyPool).toMutableList()
-        // Fisher-Yates 셔플
-        for (i in pool.size - 1 downTo 1) {
-            val j = (0..i).random()
-            val tmp = pool[i]; pool[i] = pool[j]; pool[j] = tmp
+        val targetDummyCount = chars.size
+        val used = chars.toMutableSet()
+        val dummies = mutableListOf<String>()
+
+        // 1차: 저장된 오답 음절 사용 (정답·자기 자신과 중복 X)
+        savedDistractors?.forEach { raw ->
+            val s = raw.trim()
+            if (s.length == 1 && s !in used) {
+                dummies.add(s)
+                used.add(s)
+                if (dummies.size >= targetDummyCount) return@forEach
+            }
         }
-        return pool
+
+        // 2차: 부족하면 무작위 한글 음절 풀에서 보충 (중복 금지)
+        if (dummies.size < targetDummyCount) {
+            val pool = ("가나다라마바사아자차카타파하" +
+                "거너더러머버서어저처커터퍼허" +
+                "고노도로모보소오조초코토포호" +
+                "구누두루무부수우주추쿠투푸후" +
+                "기니디리미비시이지치키티피히")
+                .toCharArray().map { it.toString() }
+                .filter { it !in used }
+                .shuffled()
+            val need = targetDummyCount - dummies.size
+            for (s in pool) {
+                if (need <= 0) break
+                if (s in used) continue
+                dummies.add(s)
+                used.add(s)
+                if (dummies.size >= targetDummyCount) break
+            }
+        }
+
+        val cards = (chars + dummies).toMutableList()
+        // Fisher-Yates 셔플
+        for (i in cards.size - 1 downTo 1) {
+            val j = (0..i).random()
+            val tmp = cards[i]; cards[i] = cards[j]; cards[j] = tmp
+        }
+        return cards
     }
 
     private fun ensureStudentCanAccess(c: StudyContentEntity, userId: String) {
         if (c.status != "active") {
             throw ApiException("FORBIDDEN", "비활성 콘텐츠", HttpStatus.FORBIDDEN)
         }
+        // 본사·기관 관리자는 학생 화면에서도 visibility 무관하게 접근 (미리보기·검수)
+        if (isHqAdmin() || isOrgAdmin()) return
         when (c.visibility) {
             "PUBLIC" -> return
             "ORG" -> {
@@ -924,7 +995,8 @@ class StudyContentService(
                 isCorrect = expected.isNotEmpty() && expected == ans
             }
             "ESSAY" -> {
-                // 모범답안의 fillBlanks 핵심 문구가 학생 답안에 모두 포함되면 정답
+                // 학생이 빈칸 선택지에서 고른 결과를 합친 텍스트.
+                // 정답 phrase 가 모두 포함되면 정답 (한 빈칸이라도 다른 선택지를 골랐으면 빠짐).
                 val blanks = fillBlanksFromJson(q.fillBlanks)
                 val ans = (request.userAnswer ?: "").replace("\\s+".toRegex(), "")
                 isCorrect = blanks.isNotEmpty() && blanks.all { b ->

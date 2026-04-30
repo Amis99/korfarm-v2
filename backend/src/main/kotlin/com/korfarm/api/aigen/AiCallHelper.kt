@@ -61,7 +61,8 @@ class AiCallHelper(
         val usage = resp["usage"] as? Map<*, *>
         val inTokens = (usage?.get("input_tokens") as? Number)?.toInt()
         val outTokens = (usage?.get("output_tokens") as? Number)?.toInt()
-        return CallResult(text = text, durationMs = duration, inputTokens = inTokens, outputTokens = outTokens)
+        val stopReason = resp["stop_reason"] as? String
+        return CallResult(text = text, durationMs = duration, inputTokens = inTokens, outputTokens = outTokens, stopReason = stopReason)
     }
 
     /**
@@ -99,7 +100,8 @@ class AiCallHelper(
         val usage = resp["usage"] as? Map<*, *>
         val inTokens = (usage?.get("input_tokens") as? Number)?.toInt()
         val outTokens = (usage?.get("output_tokens") as? Number)?.toInt()
-        return CallResult(text = text, durationMs = duration, inputTokens = inTokens, outputTokens = outTokens)
+        val stopReason = resp["stop_reason"] as? String
+        return CallResult(text = text, durationMs = duration, inputTokens = inTokens, outputTokens = outTokens, stopReason = stopReason)
     }
 
     /** base64 image content block */
@@ -141,5 +143,6 @@ class AiCallHelper(
         val durationMs: Int,
         val inputTokens: Int?,
         val outputTokens: Int?,
+        val stopReason: String? = null,   // "end_turn" | "max_tokens" | "stop_sequence" | "tool_use"
     )
 }

@@ -41,10 +41,17 @@ data class StudyQuestionDto(
     val questionNo: Int,
     val questionType: String, // MULTI_CHOICE | OX | SHORT_ANSWER | ESSAY
     val stem: String,
+    /** <보기> 본문 (마크다운). 객관식·서술형에서 사용 */
+    val boxContent: String? = null,
+    /** <조건> 본문 (서술형 위주) */
+    val conditionContent: String? = null,
     val choices: List<StudyChoiceDto>? = null,
     val modelAnswer: String? = null,        // ESSAY: 모범답안 / SHORT_ANSWER: 정답
-    val fillBlanks: List<StudyFillBlankDto>? = null,  // ESSAY 빈칸
-    val evalPointIdx: List<Int> = emptyList(),
+    val fillBlanks: List<StudyFillBlankDto>? = null,  // ESSAY 빈칸 (각 빈칸에 choices 포함)
+    /** SHORT_ANSWER 오답 음절 풀 (정답 글자 외, 중복 금지) */
+    val distractorSyllables: List<String>? = null,
+    /** 평가 포인트 인덱스 — Int 또는 String(checkpoint id). 둘 다 허용. */
+    val evalPointIdx: List<Any>? = null,
     val difficulty: Int = 3,
     /** 정답 시 누적 가중치 {역량명: 가중치} */
     val competencyVector: Map<String, Double>? = null,
@@ -62,8 +69,10 @@ data class StudyChoiceDto(
 )
 
 data class StudyFillBlankDto(
-    val phrase: String,
-    val position: Int? = null
+    val phrase: String,                       // 정답 어구 (한 단어 ~ 두 단어)
+    val position: Int? = null,
+    /** 정답 + 오답 보기 (학생은 선택지에서 고름. 정답이 포함되어 있어야 함) */
+    val choices: List<String>? = null
 )
 
 data class StudyQuestionsBulkRequest(
@@ -266,6 +275,10 @@ data class StudyPageStudentQuestionDto(
     val questionNo: Int,
     val questionType: String,
     val stem: String,
+    /** <보기> 본문 (마스킹 X — 학습 자료) */
+    val boxContent: String? = null,
+    /** <조건> 본문 */
+    val conditionContent: String? = null,
     /** MULTI_CHOICE/OX: 선택지 (id, text 만 — isCorrect 마스킹) */
     val choices: List<StudyPageStudentChoiceDto>? = null,
     /** SHORT_ANSWER: 정답 글자수 — 음절 카드 생성용. 정답 자체는 마스킹 */
@@ -274,7 +287,13 @@ data class StudyPageStudentQuestionDto(
     val syllableCards: List<String>? = null,
     /** ESSAY: 모범답안 (빈칸 위치는 fillBlanks 의 phrase 를 ___ 로 마스킹) */
     val modelAnswerMasked: String? = null,
-    val fillBlanksCount: Int? = null
+    val fillBlanksCount: Int? = null,
+    /**
+     * ESSAY: 빈칸별 선택지 (정답 + 오답 보기, 셔플됨).
+     * 학생은 빈칸 클릭 시 이 카드 중 하나를 고름.
+     * blank 인덱스 순서대로.
+     */
+    val fillBlanksChoices: List<List<String>>? = null
 )
 
 data class StudyPageStudentChoiceDto(

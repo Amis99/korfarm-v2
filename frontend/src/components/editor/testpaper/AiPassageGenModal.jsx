@@ -26,6 +26,7 @@ export default function AiPassageGenModal({ open, onClose, defaultArea, defaultS
   const [conceptOptions, setConceptOptions] = useState([]);
   const [grammarTopics, setGrammarTopics] = useState([]);
   const [loadingConcepts, setLoadingConcepts] = useState(false);
+  const [tier, setTier] = useState("BASIC");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
@@ -76,6 +77,7 @@ export default function AiPassageGenModal({ open, onClose, defaultArea, defaultS
         concepts: concepts.length > 0 ? concepts : [],
         moodPrompt: moodPrompt || null,
         grammarTopic: area === "GRAM" ? (grammarTopic || null) : null,
+        tier,
       };
       const submit = await apiPost("/v1/admin/ai-gen/passage", body);
       const jobId = submit?.jobId ?? submit?.job_id;
@@ -101,6 +103,13 @@ export default function AiPassageGenModal({ open, onClose, defaultArea, defaultS
   return (
     <Modal open={open} onClose={onClose} title="🤖 AI 지문 생성" size="lg">
       <div style={{ display: "flex", flexDirection: "column", gap: 12, fontSize: 13 }}>
+        <div>
+          <div style={{ fontSize: 12, fontWeight: 700, marginBottom: 6, color: "#1f4a37" }}>AI 모델</div>
+          <div style={{ display: "flex", gap: 8 }}>
+            <TierBtn value="BASIC" current={tier} onClick={setTier} icon="⚡" label="기본" hint="빠르고 저렴" />
+            <TierBtn value="ADVANCED" current={tier} onClick={setTier} icon="✨" label="고급" hint="정밀·고품질 (시간 더 소요)" />
+          </div>
+        </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 10 }}>
           <Field label="영역 *">
             <select value={area} onChange={(e) => { setArea(e.target.value); setSubArea(""); }} style={inpStyle}>
@@ -197,6 +206,31 @@ function Field({ label, children }) {
       <span style={{ fontSize: 11, color: "var(--muted)" }}>{label}</span>
       {children}
     </label>
+  );
+}
+
+function TierBtn({ value, current, onClick, icon, label, hint }) {
+  const active = current === value;
+  return (
+    <button
+      type="button"
+      onClick={() => onClick(value)}
+      style={{
+        flex: 1,
+        padding: "10px 14px",
+        border: `2px solid ${active ? "#2d6a4f" : "rgba(31,58,44,0.18)"}`,
+        background: active ? "rgba(45,106,79,0.10)" : "#ffffff",
+        borderRadius: 10,
+        cursor: "pointer",
+        fontFamily: "inherit",
+        textAlign: "left",
+      }}
+    >
+      <div style={{ fontSize: 13, fontWeight: 700, color: active ? "#1f4a37" : "#1a2920" }}>
+        {icon} {label}
+      </div>
+      <div style={{ fontSize: 11, color: "#5e7060", marginTop: 2 }}>{hint}</div>
+    </button>
   );
 }
 

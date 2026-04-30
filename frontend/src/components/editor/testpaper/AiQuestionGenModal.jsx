@@ -38,6 +38,7 @@ export default function AiQuestionGenModal({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [reviewResult, setReviewResult] = useState(null);
+  const [tier, setTier] = useState("BASIC");
 
   const isEssay = type === "ESSAY";
   const QTYPE_OPTS = area === "LIT" ? LIT_QUESTION_TYPE_LABELS : READ_QUESTION_TYPE_LABELS;
@@ -61,6 +62,7 @@ export default function AiQuestionGenModal({
         conditionText: isEssay && needsCondition ? conditionText : null,
         attachment: attachment || null,
         stemHint: stemHint || null,
+        tier,
       };
       const submit = await apiPost("/v1/admin/ai-gen/question", body);
       const jobId = submit?.jobId ?? submit?.job_id;
@@ -96,6 +98,13 @@ export default function AiQuestionGenModal({
   return (
     <Modal open={open} onClose={onClose} title="🤖 AI 문항 생성" size="lg">
       <div style={{ display: "flex", flexDirection: "column", gap: 12, fontSize: 13 }}>
+        <div>
+          <div style={{ fontSize: 12, fontWeight: 700, marginBottom: 6, color: "#1f4a37" }}>AI 모델</div>
+          <div style={{ display: "flex", gap: 8 }}>
+            <TierBtn value="BASIC" current={tier} onClick={setTier} icon="⚡" label="기본" hint="빠르고 저렴" />
+            <TierBtn value="ADVANCED" current={tier} onClick={setTier} icon="✨" label="고급" hint="정밀·고품질 (시간 더 소요)" />
+          </div>
+        </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 10 }}>
           <Field label="유형">
             <select value={type} onChange={(e) => setType(e.target.value)} style={inpStyle}>
@@ -191,7 +200,7 @@ export default function AiQuestionGenModal({
           </button>
         </div>
         <div style={{ fontSize: 11, color: "var(--muted)" }}>
-          모델: Claude Opus 4.7 · 학생 페르소나 검증 자동 (재시도 최대 2회) · 통과 시 모든 필드 자동 채움
+          학생 페르소나 검증 자동 (재시도 최대 2회) · 통과 시 모든 필드 자동 채움
         </div>
       </div>
     </Modal>
@@ -204,6 +213,31 @@ function Field({ label, children }) {
       <span style={{ fontSize: 11, color: "var(--muted)" }}>{label}</span>
       {children}
     </label>
+  );
+}
+
+function TierBtn({ value, current, onClick, icon, label, hint }) {
+  const active = current === value;
+  return (
+    <button
+      type="button"
+      onClick={() => onClick(value)}
+      style={{
+        flex: 1,
+        padding: "10px 14px",
+        border: `2px solid ${active ? "#2d6a4f" : "rgba(31,58,44,0.18)"}`,
+        background: active ? "rgba(45,106,79,0.10)" : "#ffffff",
+        borderRadius: 10,
+        cursor: "pointer",
+        fontFamily: "inherit",
+        textAlign: "left",
+      }}
+    >
+      <div style={{ fontSize: 13, fontWeight: 700, color: active ? "#1f4a37" : "#1a2920" }}>
+        {icon} {label}
+      </div>
+      <div style={{ fontSize: 11, color: "#5e7060", marginTop: 2 }}>{hint}</div>
+    </button>
   );
 }
 

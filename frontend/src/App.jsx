@@ -117,7 +117,6 @@ const AdminEditHistoryPage = lazy(() => import("./pages/AdminEditHistoryPage"));
 const AdminLearningDBPage = lazy(() => import("./pages/AdminLearningDBPage"));
 const AdminStudyContentPage = lazy(() => import("./pages/AdminStudyContentPage"));
 const AdminStudyContentEditorV2Page = lazy(() => import("./pages/AdminStudyContentEditorV2Page"));
-const StudentStudyV2Page = lazy(() => import("./pages/StudentStudyV2Page"));
 const AdminBoardsPage = lazy(() => import("./pages/AdminBoardsPage"));
 const AdminChatArchivesPage = lazy(() => import("./pages/AdminChatArchivesPage"));
 
@@ -223,8 +222,6 @@ function App() {
           <Route path="/learning" element={P(<LearningHubPage />)} />
           <Route path="/learning/:learningId" element={P(<LearningRunnerPage />)} />
           <Route path="/study-learning/:contentId" element={P(<StudyLearningPage />)} />
-          {/* V0076 페이지 단위 시험지 디자인 학습 (신규) */}
-          <Route path="/study/:contentId" element={P(<StudentStudyV2Page />)} />
           <Route path="/pro-mode" element={P(<ProModePage />)} />
           <Route path="/pro-mode/chapter/:chapterId" element={P(<ProChapterPage />)} />
           <Route path="/pro-mode/chapter/:chapterId/test" element={P(<ProTestPage />)} />

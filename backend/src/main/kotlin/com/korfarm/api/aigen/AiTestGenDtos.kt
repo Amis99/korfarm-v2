@@ -1,5 +1,8 @@
 package com.korfarm.api.aigen
 
+/** AI 모델 티어 — 기본(BASIC) / 고급(ADVANCED). 디폴트 BASIC. */
+enum class AiTier { BASIC, ADVANCED }
+
 // ─── 지문 생성 ───
 data class PassageGenRequest(
     val testId: String,
@@ -10,7 +13,8 @@ data class PassageGenRequest(
     val paragraphs: Int = 3,
     val concepts: List<String> = emptyList(),  // 강조 학습 개념 이름들
     val moodPrompt: String? = null,
-    val grammarTopic: String? = null  // GRAM 영역인 경우 RAG 검색용
+    val grammarTopic: String? = null,  // GRAM 영역인 경우 RAG 검색용
+    val tier: String? = "BASIC"          // BASIC | ADVANCED
 )
 
 data class PassageGenResponse(
@@ -39,7 +43,8 @@ data class QuestionGenRequest(
     val conditionText: String? = null,      // 서술형 조건 본문
     val attachment: String? = null,         // 첨부 자료 (해설/모범답안 등)
     val stemHint: String? = null,           // 발문 가이드
-    val grammarTopic: String? = null
+    val grammarTopic: String? = null,
+    val tier: String? = "BASIC"             // BASIC | ADVANCED
 )
 
 data class QuestionGenResponse(
@@ -83,6 +88,7 @@ data class StudyQuestionGenRequest(
     val essayCount: Int = 0,
     /** 이미 추출된 출제 포인트 재사용 (없으면 새로 추출) */
     val existingCheckpoints: List<StudyCheckpointDto>? = null,
+    val tier: String? = "BASIC"             // BASIC | ADVANCED
 )
 
 data class StudyCheckpointDto(

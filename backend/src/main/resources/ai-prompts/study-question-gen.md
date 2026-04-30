@@ -53,16 +53,26 @@
 - 자료 본문에 등장하는 핵심어·구절을 답하는 형식
 - `modelAnswer`: 정답 (글자 그대로, 띄어쓰기 무시)
 - 정답은 2~6글자 단어가 이상적 (학생 화면에서 음절 카드로 풀이)
+- `distractorSyllables`: **오답 음절 풀** — 정답 글자수와 동일한 개수. 한국어 음운 함정(자모 비슷·형태 비슷·의미 혼동) 위주. **정답 글자와 중복 금지, 더미들 사이에서도 중복 금지**.
+  - 예: 정답 "활유법" → distractorSyllables: ["의", "인", "수"]
 - `wrongVector`: 오답 시 누적 (자료 이해 부족 → `사실 이해`·`어휘 이해` 등)
 - 발문 명확: "다음 빈칸에 들어갈 적절한 말을 쓰시오" 식
 
 ### 4. 서술형 (`ESSAY`)
 - **첨부된 서술형 문제 생성 지침을 100% 준수.**
 - `modelAnswer`: 모범답안 본문 (전체 문장)
-- `fillBlanks`: 모범답안에서 핵심 문구 1~3개를 추출. 학생은 이 빈칸을 클릭해서 채움.
-  - `phrase`: 빈칸에 들어갈 정답 문구
+- `fillBlanks`: 모범답안에서 **5개 이상의 한 단어/두 단어 빈칸**으로 분해. 긴 어구는 금지.
+  - 학생은 빈칸 클릭 시 **선택지에서 골라서 채움** (타이핑 X — 타이핑은 테스트·글쓰기 학습만)
+  - `phrase`: 빈칸 정답 (한 단어 또는 두 단어, 너무 길면 X)
   - `position`: modelAnswer 안에서의 시작 글자 위치 (선택)
+  - `choices`: **정답 + 오답 보기 3~4개** (총 4~5개). 의미·형태가 비슷한 것으로. 정답이 반드시 포함.
 - `wrongVector`: 오답 시 누적
+
+### 5. <보기> / <조건> (객관식·서술형 공통)
+- 자료 본문 외에 **별도 자료가 필요한 경우**에만 사용 (옵션):
+  - `boxContent`: <보기> 본문 (마크다운 가능. 자료 일부 발췌·도식·예시 등)
+  - `conditionContent`: <조건> 본문 (서술형의 답안 작성 조건. 예: "30자 이내로 쓸 것")
+- 필요 없으면 빈 문자열 또는 생략
 
 ## 출력 형식 (strict JSON)
 ```json
@@ -72,12 +82,18 @@
       "questionType": "MULTI_CHOICE|OX|SHORT_ANSWER|ESSAY",
       "questionNo": 1,
       "stem": "발문 본문",
+      "boxContent": "(선택) <보기> 본문 마크다운",
+      "conditionContent": "(선택) <조건> 본문",
       "choices": [
-        {"id": "c1", "text": "선택지 1", "isCorrect": false, "wrongVector": {"사실 이해": 0.4, "추론": 0.2}, "errorPatternIdx": 0}
+        {"id": "c1", "text": "선택지 1", "isCorrect": false, "wrongVector": {"사실 이해": 0.4, "추론": 0.2}}
       ],
       "modelAnswer": "...",
-      "fillBlanks": [{"phrase": "...", "position": 12}],
-      "evalPointIdx": [0, 1],
+      "distractorSyllables": ["의", "인", "수"],
+      "fillBlanks": [
+        {"phrase": "활유법", "position": 12, "choices": ["활유법", "의인법", "비유법", "은유법"]},
+        {"phrase": "정조", "position": 30, "choices": ["정조", "분위기", "심상", "어조"]}
+      ],
+      "evalPointIdx": [],
       "difficulty": 3,
       "competencyVector": {"사실 이해": 0.5, "구조 파악": 0.3},
       "wrongVector": {"사실 이해": 0.3}
@@ -85,6 +101,10 @@
   ]
 }
 ```
+
+**`evalPointIdx` 는 항상 빈 배열 `[]` 로 출력. 어떤 값도 넣지 마세요. (옛 시스템 호환 필드)**
+
+**`errorPatternIdx` 는 사용하지 마세요. choices 안에서도 절대 포함 금지. 함정 패턴은 `wrongVector` 로만 표현하세요.**
 
 ## 검증 체크리스트 (AI 자체 검증)
 - [ ] 요청한 유형별 개수 정확히 생성

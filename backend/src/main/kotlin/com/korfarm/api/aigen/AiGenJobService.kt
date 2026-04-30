@@ -175,7 +175,8 @@ class AiGenJobService(
                 essayCount = req.essayCount,
                 existingCheckpoints = req.existingCheckpoints?.map {
                     StudyQuestionGenerator.Checkpoint(it.id, it.text, it.kind, it.evidence)
-                }
+                },
+                tier = req.tier ?: "BASIC",
             )
             val result = studyGenerator.generate(genReq, job.userId)
             // 응답: checkpoints + questions JSON

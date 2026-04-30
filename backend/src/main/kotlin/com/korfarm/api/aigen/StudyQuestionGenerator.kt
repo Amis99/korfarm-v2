@@ -59,6 +59,7 @@ class StudyQuestionGenerator(
         val shortCount: Int,
         val essayCount: Int,
         val existingCheckpoints: List<Checkpoint>? = null,  // 이미 추출돼 있으면 재사용
+        val tier: String? = "BASIC",                         // BASIC | ADVANCED
     )
 
     data class GenResult(
@@ -69,11 +70,14 @@ class StudyQuestionGenerator(
         val totalDurationMs: Int,
     )
 
-    /** 1단계: 출제 포인트 추출 (Opus — 자료 분석·분해의 추론력) */
-    fun extractCheckpoints(pageMarkdown: String, userId: String): Pair<List<Checkpoint>, AiCallHelper.CallResult> {
+    /** 1단계: 출제 포인트 추출 (BASIC=Sonnet / ADVANCED=Opus) */
+    fun extractCheckpoints(
+        pageMarkdown: String, userId: String, tier: String = "BASIC"
+    ): Pair<List<Checkpoint>, AiCallHelper.CallResult> {
         val started = System.currentTimeMillis()
+        val model = if (tier.uppercase() == "ADVANCED") AiCallHelper.MODEL_OPUS else AiCallHelper.MODEL_SONNET
         val result = aiCall.call(
-            model = AiCallHelper.MODEL_OPUS,
+            model = model,
             systemBlocks = listOf(aiCall.systemBlock(checkpointsExtractPrompt, ephemeralCache = true)),
             userText = "다음 학습 자료에서 출제 포인트를 추출하세요. " +
                 "응답은 반드시 `{\"checkpoints\":[...]}` JSON 객체 한 개만. " +
@@ -84,14 +88,14 @@ class StudyQuestionGenerator(
             userId = userId,
             testId = null,
             kind = "study-checkpoints",
-            model = AiCallHelper.MODEL_OPUS,
+            model = model,
             inputTokens = result.inputTokens,
             outputTokens = result.outputTokens,
             durationMs = result.durationMs,
             status = "success",
         )
         val cps = parseCheckpoints(result.text)
-        logger.info("checkpoints 추출 완료: {}개 ({}ms)", cps.size, System.currentTimeMillis() - started)
+        logger.info("checkpoints 추출 완료: {}개 ({}ms, tier={})", cps.size, System.currentTimeMillis() - started, tier)
         return cps to result
     }
 
@@ -149,7 +153,7 @@ class StudyQuestionGenerator(
             model = AiCallHelper.MODEL_SONNET,
             systemBlocks = systemBlocks,
             userContent = listOf(aiCall.textBlock(userText)),
-            maxTokens = 8192,
+            maxTokens = 32768,   // 30문제까지 안전. 평균 1문제 ~600 tokens.
         )
         logService.log(
             userId = userId,
@@ -161,16 +165,25 @@ class StudyQuestionGenerator(
             durationMs = result.durationMs,
             status = "success",
         )
+        // 응답이 max_tokens 에 막혀 잘렸으면 JSON 파싱 실패. 명확한 에러로.
+        if (result.stopReason == "max_tokens") {
+            throw ApiException(
+                "OUTPUT_TRUNCATED",
+                "AI 응답이 길이 한계에 도달해 잘렸습니다. 문제 수를 줄여서 다시 시도해주세요 (현재 $total 문제).",
+                HttpStatus.UNPROCESSABLE_ENTITY
+            )
+        }
         return result.text to result
     }
 
     /** 1+2단계 통합 호출 */
     fun generate(req: GenRequest, userId: String): GenResult {
         val started = System.currentTimeMillis()
+        val tier = (req.tier ?: "BASIC").uppercase()
         val (checkpoints, cpResult) = if (req.existingCheckpoints != null && req.existingCheckpoints.isNotEmpty()) {
             req.existingCheckpoints to AiCallHelper.CallResult("", 0, 0, 0)
         } else {
-            extractCheckpoints(req.pageMarkdown, userId)
+            extractCheckpoints(req.pageMarkdown, userId, tier)
         }
         if (checkpoints.isEmpty()) {
             throw ApiException("NO_CHECKPOINTS", "출제 포인트를 추출하지 못했습니다", HttpStatus.UNPROCESSABLE_ENTITY)

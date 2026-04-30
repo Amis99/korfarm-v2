@@ -167,6 +167,14 @@ class StudyQuestionEntity(
     @Column(columnDefinition = "text", nullable = false)
     var stem: String,
 
+    /** <보기> 본문 (마크다운 + 이미지 가능). 객관식·서술형에서 사용 */
+    @Column(name = "box_content", columnDefinition = "mediumtext")
+    var boxContent: String? = null,
+
+    /** <조건> 본문 (단순 텍스트). 서술형 위주 */
+    @Column(name = "condition_content", columnDefinition = "text")
+    var conditionContent: String? = null,
+
     /**
      * MULTI_CHOICE/OX choices JSON:
      *   [{id, text, isCorrect, wrongVector: {역량명: 가중치}, errorPatternIdx?}]
@@ -179,9 +187,16 @@ class StudyQuestionEntity(
     @Column(name = "model_answer", columnDefinition = "text")
     var modelAnswer: String? = null,
 
-    /** ESSAY: [{phrase, position}] 빈칸 — 학생이 클릭해서 채우는 영역 */
+    /**
+     * ESSAY 빈칸 — 학생이 선택지에서 골라서 채움
+     * [{phrase, position?, choices: [string]}]  // choices = 정답 + 오답 보기
+     */
     @Column(name = "fill_blanks", columnDefinition = "json")
     var fillBlanks: String? = null,
+
+    /** SHORT_ANSWER 오답 음절 풀 (어드민/AI 입력. 정답 글자 + 이 더미들이 셔플돼 음절 카드로 노출) */
+    @Column(name = "distractor_syllables", columnDefinition = "json")
+    var distractorSyllables: String? = null,
 
     @Column(name = "eval_point_idx", columnDefinition = "json", nullable = false)
     var evalPointIdx: String,

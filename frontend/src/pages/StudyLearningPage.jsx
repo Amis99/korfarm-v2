@@ -1,15 +1,13 @@
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import EngineShell from "../engine/core/EngineShell";
-import { apiGet } from "../utils/api";
+import { apiPost } from "../utils/api";
 
 /**
- * 내용 숙지 학습 페이지
+ * 내용 숙지 학습 페이지 (V0076 페이지 단위, EngineShell 안에서 작동)
  * - URL: /study-learning/:contentId
- * - /v1/learning/study/contents/{id} 호출하여 마크다운 본문 수신
- * - EngineShell + StudyContentModule 렌더링
- * - farmLogId는 모듈 자체에서 관리하므로 EngineShell에 전달하지 않음
- *   (EngineShell.finish가 farm/complete를 호출하지 않도록)
+ * - POST /v1/learning/study/contents/{id}/full → 페이지 + 정답 마스킹된 문제 + 세션 시작
+ * - EngineShell + StudyContentModule (페이지 단위 흐름)
  */
 function StudyLearningPage() {
   const { contentId } = useParams();
@@ -22,19 +20,21 @@ function StudyLearningPage() {
     if (!contentId) return;
     setLoading(true);
     setError(null);
-    apiGet(`/v1/learning/study/contents/${contentId}`)
+    apiPost(`/v1/learning/study/contents/${contentId}/full`, {})
       .then((data) => {
         setContent({
           contentId: data.id,
           title: data.title,
           targetLevel: data.levelId,
-          area: "BACKGROUND",
-          subArea: "STUDY_CONTENT",
+          area: data.area || "STUDY",
+          subArea: data.subArea || "STUDY_CONTENT",
           contentType: "STUDY_CONTENT",
-          timeLimitSec: 600,
+          timeLimitSec: 1200,
           seedReward: { count: 3 },
           payload: {
-            markdown: data.markdown,
+            sessionId: data.sessionId,
+            logId: data.logId,
+            pages: data.pages || [],
           },
         });
         setLoading(false);
@@ -50,21 +50,14 @@ function StudyLearningPage() {
   }, [navigate]);
 
   if (loading) {
-    return (
-      <div className="lr-loading">
-        <p>학습 데이터를 불러오는 중...</p>
-      </div>
-    );
+    return <div className="lr-loading"><p>학습 데이터를 불러오는 중...</p></div>;
   }
-
   if (error || !content) {
     return (
       <div className="lr-loading">
         <h2>학습 데이터를 불러올 수 없습니다.</h2>
         {error && <p className="lr-error">{error}</p>}
-        <button type="button" onClick={() => navigate("/farm-mode/content")}>
-          돌아가기
-        </button>
+        <button type="button" onClick={() => navigate("/farm-mode/content")}>돌아가기</button>
       </div>
     );
   }

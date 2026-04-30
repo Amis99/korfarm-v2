@@ -5,7 +5,7 @@ import MarkdownEditField from "../components/editor/MarkdownEditField";
 import StudyQuestionCard from "../components/study-editor/StudyQuestionCard";
 import AiPdfImageUploadModal from "../components/study-editor/AiPdfImageUploadModal";
 import AiStudyQuestionGenModal from "../components/study-editor/AiStudyQuestionGenModal";
-import { apiGet, apiPost, apiPatch, apiPut, apiDelete } from "../utils/adminApi";
+import { apiGet, apiPost, apiPostDeep, apiPatch, apiPatchDeep, apiPut, apiDelete } from "../utils/adminApi";
 import "../styles/admin-detail.css";
 import "../styles/study-editor.css";
 
@@ -28,8 +28,54 @@ const SUB_AREA_BY_AREA = {
   MEDIA: ["뉴스", "광고", "SNS", "영상", "복합 매체"],
 };
 
-/** 페이지당 최대 줄 수 — 초과 시 경고 + [새 페이지로 분할] 버튼 노출 */
+/** 페이지당 최대 줄 수 — 초과 시 자동 분할 / 경고 / [새 페이지로 분할] 버튼 */
 const MAX_LINES_PER_PAGE = 80;
+
+/**
+ * 마크다운을 줄 수 한도로 분할.
+ * 한 페이지의 maxLines 를 초과하면 적절한 break point (빈 줄·헤딩 시작) 에서 자른다.
+ * break point 가 없으면 maxLines 위치에서 강제 컷.
+ *
+ * @returns string[]  분할된 마크다운 청크 배열 (분할 안 되면 원본 1개 배열)
+ */
+function splitMarkdownByLines(markdown, maxLines = MAX_LINES_PER_PAGE) {
+  const lines = (markdown || "").split("\n");
+  if (lines.length <= maxLines) return [markdown || ""];
+  const chunks = [];
+  let cursor = 0;
+  while (cursor < lines.length) {
+    const remaining = lines.length - cursor;
+    if (remaining <= maxLines) {
+      chunks.push(lines.slice(cursor).join("\n").trim());
+      break;
+    }
+    // 우선순위: 빈 줄 → 헤딩 시작 → 강제 컷
+    let end = cursor + maxLines;
+    let found = -1;
+    // (1) 빈 줄 — 한도 내에서 마지막 빈 줄 (가능한 한 나중)
+    for (let i = end; i > cursor + Math.floor(maxLines / 2); i--) {
+      if ((lines[i] || "").trim() === "") {
+        found = i;
+        break;
+      }
+    }
+    // (2) 빈 줄 없으면 헤딩 시작 (#) 찾기
+    if (found < 0) {
+      for (let i = end; i > cursor + Math.floor(maxLines / 2); i--) {
+        if ((lines[i] || "").startsWith("#")) {
+          found = i;
+          break;
+        }
+      }
+    }
+    if (found < 0) found = end; // 강제 컷
+    chunks.push(lines.slice(cursor, found).join("\n").trim());
+    cursor = found;
+    // 분할 지점의 빈 줄 건너뛰기
+    while (cursor < lines.length && (lines[cursor] || "").trim() === "") cursor++;
+  }
+  return chunks.filter(c => c.length > 0);
+}
 
 const LEVEL_OPTIONS = [
   { value: "", label: "(미설정)" },
@@ -140,6 +186,63 @@ export default function AdminStudyContentEditorV2Page() {
       setTimeout(() => setInfo(""), 1500);
     } catch (err) {
       setError(err.message);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  /**
+   * 통합 저장 — 메타 + 모든 페이지(본문/체크포인트/문제) 를 한 번에 일괄 저장.
+   * 페이지 단위 dirty 추적 없이 모두 저장 (안전성 우선).
+   */
+  const saveAll = async () => {
+    if (isNew) { await createContent(); return; }
+    setSaving(true); setError("");
+    let successCount = 0;
+    let failedCount = 0;
+    try {
+      // 1) 메타
+      await apiPut(`/v1/admin/study/contents/${contentId}`, {
+        title: meta.title, description: meta.description,
+        levelId: meta.levelId || null, area: meta.area || null, subArea: meta.subArea || null,
+        visibility: meta.visibility,
+      });
+      successCount++;
+      // 2) 페이지마다 본문/체크포인트 + 문제 일괄 (nested 객체는 deep snake 변환)
+      for (const p of pages) {
+        try {
+          // 본문/제목/체크포인트 (checkpoints 안의 객체도 nested → deep snake)
+          const updated = await apiPatchDeep(
+            `/v1/admin/study/contents/${contentId}/pages/${p.id}`,
+            { title: p.title, markdown: p.markdown, checkpoints: p.checkpoints || [] }
+          );
+          // 문제 (questions 배열 안의 객체·중첩 choices·fillBlanks 등 모두 deep snake 필수)
+          const questionsResult = await apiPostDeep(
+            `/v1/admin/study/contents/${contentId}/pages/${p.id}/questions:bulk`,
+            { questions: p.questions || [] }
+          );
+          // 메모리 갱신: 서버 응답으로 동기화 (questions 재정렬·id 부여 반영)
+          setPages((prev) =>
+            prev.map((x) =>
+              x.id === p.id
+                ? { ...updated, questions: questionsResult.questions || [] }
+                : x
+            )
+          );
+          successCount++;
+        } catch (perr) {
+          failedCount++;
+          console.error(`page ${p.pageNo} 저장 실패:`, perr);
+        }
+      }
+      if (failedCount > 0) {
+        setError(`일부 저장 실패 — 성공 ${successCount} / 실패 ${failedCount}`);
+      } else {
+        setInfo(`💾 저장 완료 — 메타 + ${pages.length}페이지 (본문·문제 모두 반영)`);
+        setTimeout(() => setInfo(""), 2500);
+      }
+    } catch (err) {
+      setError("저장 실패: " + err.message);
     } finally {
       setSaving(false);
     }
@@ -260,75 +363,83 @@ export default function AdminStudyContentEditorV2Page() {
   };
 
   // PDF/이미지 변환 결과 → 페이지별로 비주얼 에디터에 추가
-  // PDF: pages 배열에 N개 → 활성 페이지에 1번째, 이후 페이지는 새로 생성
-  // 이미지: 1페이지 → 활성 페이지에 채움
+  // PDF: pages 배열에 N개 → 각 페이지가 또 80줄 넘으면 추가 분할
+  // 이미지: 1페이지 → 80줄 넘으면 분할
   const onConvertedFromFile = async (data) => {
-    const pages = data.pages || (data.markdown ? [{ pageNo: 1, markdown: data.markdown }] : []);
-    if (pages.length === 0) {
+    const rawPages = data.pages || (data.markdown ? [{ pageNo: 1, markdown: data.markdown }] : []);
+    if (rawPages.length === 0) {
+      setError("변환 결과가 비어 있습니다");
+      return;
+    }
+    // 각 PDF 페이지를 80줄 한도로 추가 분할
+    const allChunks = [];
+    for (const p of rawPages) {
+      const chunks = splitMarkdownByLines(p.markdown || "", MAX_LINES_PER_PAGE);
+      for (const c of chunks) allChunks.push(c);
+    }
+    if (allChunks.length === 0) {
       setError("변환 결과가 비어 있습니다");
       return;
     }
     try {
-      // 1번째 페이지: 활성 페이지에 채워서 저장
+      // 1번째 청크: 활성 페이지에 채워서 저장
       let target = activePage;
       if (!target) {
-        // 활성 페이지 없으면 새로 만들고 사용
         target = await apiPost(`/v1/admin/study/contents/${contentId}/pages`, {
-          markdown: pages[0].markdown,
+          markdown: allChunks[0],
         });
         setPages((prev) => [...prev, target]);
         setActivePageId(target.id);
       } else {
         const updated = await apiPatch(
           `/v1/admin/study/contents/${contentId}/pages/${target.id}`,
-          { markdown: pages[0].markdown }
+          { markdown: allChunks[0] }
         );
         setPages((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
       }
 
-      // 2번째 페이지부터는 새 페이지로 추가 (서버에 즉시 저장)
-      let lastNewPage = null;
-      for (let i = 1; i < pages.length; i++) {
+      // 2번째부터는 새 페이지로 추가
+      for (let i = 1; i < allChunks.length; i++) {
         const newPage = await apiPost(`/v1/admin/study/contents/${contentId}/pages`, {
-          markdown: pages[i].markdown,
+          markdown: allChunks[i],
         });
         setPages((prev) => [...prev, newPage]);
-        lastNewPage = newPage;
       }
-      // 첫 새 페이지로 활성 전환은 사용자 선택 — 그대로 둠
-      setInfo(
-        `변환 완료 — ${pages.length}페이지${pages.length > 1 ? " (페이지별 자동 분할 + 저장)" : ""}` +
-        ` · ${(data.sourceSizeBytes / 1024).toFixed(1)} KB`
-      );
-      setTimeout(() => setInfo(""), 4000);
+      const splitInfo = allChunks.length > rawPages.length
+        ? ` (원본 ${rawPages.length}페이지 → ${allChunks.length}페이지로 자동 분할, 페이지당 ${MAX_LINES_PER_PAGE}줄 한도)`
+        : "";
+      setInfo(`변환 완료 — ${allChunks.length}페이지${splitInfo} · ${(data.sourceSizeBytes / 1024).toFixed(1)} KB`);
+      setTimeout(() => setInfo(""), 5000);
     } catch (err) {
       setError("페이지 저장 실패: " + err.message);
     }
   };
 
-  // 활성 페이지를 줄 수 기준으로 다음 페이지로 분할
+  // 활성 페이지를 줄 수 기준으로 자동 분할 (적절한 break point 에서)
   const splitPageByLines = async () => {
     if (!activePage) return;
-    const lines = (activePage.markdown || "").split("\n");
-    if (lines.length <= MAX_LINES_PER_PAGE) return;
-    const head = lines.slice(0, MAX_LINES_PER_PAGE).join("\n");
-    const tail = lines.slice(MAX_LINES_PER_PAGE).join("\n");
+    const chunks = splitMarkdownByLines(activePage.markdown || "", MAX_LINES_PER_PAGE);
+    if (chunks.length <= 1) return;
     setSaving(true); setError("");
     try {
-      // 현재 페이지: head 만 저장
+      // 현재 페이지: 첫 청크
       const updated = await apiPatch(
         `/v1/admin/study/contents/${contentId}/pages/${activePage.id}`,
-        { markdown: head }
+        { markdown: chunks[0] }
       );
       setPages((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
-      // 새 페이지: tail
-      const newPage = await apiPost(
-        `/v1/admin/study/contents/${contentId}/pages`,
-        { markdown: tail }
-      );
-      setPages((prev) => [...prev, newPage]);
-      setActivePageId(newPage.id);
-      setInfo(`${MAX_LINES_PER_PAGE}줄까지 현재 페이지에 두고 나머지를 새 페이지로 분리`);
+      // 나머지 청크: 새 페이지들
+      const newPages = [];
+      for (let i = 1; i < chunks.length; i++) {
+        const np = await apiPost(
+          `/v1/admin/study/contents/${contentId}/pages`,
+          { markdown: chunks[i] }
+        );
+        newPages.push(np);
+      }
+      setPages((prev) => [...prev, ...newPages]);
+      if (newPages.length > 0) setActivePageId(newPages[0].id);
+      setInfo(`${chunks.length}페이지로 자동 분할 (적절한 단락 경계에서 잘림)`);
       setTimeout(() => setInfo(""), 3000);
     } catch (err) {
       setError("분할 실패: " + err.message);
@@ -367,8 +478,8 @@ export default function AdminStudyContentEditorV2Page() {
             <button className="admin-detail-btn secondary" onClick={() => navigate("/admin/study-content")}>
               ← 목록
             </button>
-            <button className="admin-detail-btn" onClick={saveMeta} disabled={saving}>
-              {saving ? "저장 중..." : "메타 저장"}
+            <button className="admin-detail-btn" onClick={saveAll} disabled={saving}>
+              {saving ? "저장 중..." : "💾 저장"}
             </button>
           </div>
         </div>
@@ -514,9 +625,6 @@ export default function AdminStudyContentEditorV2Page() {
                         className="study-input"
                         style={{ flex: 1, minWidth: 180 }}
                       />
-                      <button className="admin-detail-btn secondary xs" onClick={savePageBody}>
-                        본문/포인트 저장
-                      </button>
                       <button className="admin-detail-btn danger xs" onClick={() => deletePage(activePage.id)}>
                         페이지 삭제
                       </button>
@@ -597,9 +705,6 @@ export default function AdminStudyContentEditorV2Page() {
                         <button className="admin-detail-btn secondary xs" onClick={() => addQuestion("ESSAY")}>+ 서술</button>
                         <button className="admin-detail-btn xs" onClick={() => setShowAiModal(true)}>
                           🤖 AI 생성
-                        </button>
-                        <button className="admin-detail-btn xs" onClick={savePageQuestions} disabled={saving}>
-                          문제 저장
                         </button>
                       </div>
                     </div>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import MarkdownEditField from "../editor/MarkdownEditField";
 
 /**
  * 4유형 문제 카드 — MULTI_CHOICE / OX / SHORT_ANSWER / ESSAY 통합.
@@ -143,17 +144,84 @@ export default function StudyQuestionCard({ question, index, onChange, onDelete 
         </div>
       </div>
 
-      {/* 발문 */}
+      {/* 발문 — 마크다운 풀기능 (밑줄 <u>·이미지 등) */}
       <div style={{ marginBottom: 8 }}>
         <label style={labelStyle}>발문</label>
-        <textarea
+        <MarkdownEditField
           value={question.stem || ""}
-          onChange={(e) => update({ stem: e.target.value })}
-          placeholder="문제 발문"
-          rows={2}
-          style={textareaStyle}
+          onChange={(text) => update({ stem: text })}
+          placeholder="문제 발문 — 밑줄(<u>)·강조·이미지 가능"
+          minHeight={70}
         />
       </div>
+
+      {/* <보기> — 객관식·서술형에서만 (선택) */}
+      {(question.questionType === "MULTI_CHOICE" || question.questionType === "ESSAY") && (
+        <div style={{ marginBottom: 8 }}>
+          {!question.boxContent && question.boxContent !== "" ? (
+            <button
+              type="button"
+              className="admin-detail-btn secondary xs"
+              onClick={() => update({ boxContent: " " })}
+            >
+              + &lt;보기&gt; 추가
+            </button>
+          ) : (
+            <>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <label style={labelStyle}>&lt;보기&gt; (마크다운 + 밑줄·이미지)</label>
+                <button
+                  type="button"
+                  className="admin-detail-btn ghost xs"
+                  onClick={() => update({ boxContent: null })}
+                >
+                  제거
+                </button>
+              </div>
+              <MarkdownEditField
+                value={question.boxContent || ""}
+                onChange={(text) => update({ boxContent: text })}
+                placeholder="<보기> 본문 — 마크다운 + 밑줄(<u>) + 이미지 가능"
+                minHeight={100}
+              />
+            </>
+          )}
+        </div>
+      )}
+
+      {/* <조건> — 서술형 위주 (객관식도 가능) */}
+      {(question.questionType === "ESSAY" || question.questionType === "MULTI_CHOICE") && (
+        <div style={{ marginBottom: 8 }}>
+          {!question.conditionContent && question.conditionContent !== "" ? (
+            <button
+              type="button"
+              className="admin-detail-btn secondary xs"
+              onClick={() => update({ conditionContent: " " })}
+            >
+              + &lt;조건&gt; 추가
+            </button>
+          ) : (
+            <>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <label style={labelStyle}>&lt;조건&gt; (마크다운 + 밑줄)</label>
+                <button
+                  type="button"
+                  className="admin-detail-btn ghost xs"
+                  onClick={() => update({ conditionContent: null })}
+                >
+                  제거
+                </button>
+              </div>
+              <MarkdownEditField
+                value={question.conditionContent || ""}
+                onChange={(text) => update({ conditionContent: text })}
+                placeholder="<조건> 본문 — 30자 이내, ~을 포함하여 등 (밑줄 가능)"
+                minHeight={60}
+              />
+            </>
+          )}
+        </div>
+      )}
 
       {/* 정답시 누적 역량 벡터 */}
       {showVector && (
@@ -247,6 +315,47 @@ export default function StudyQuestionCard({ question, index, onChange, onDelete 
           <p style={{ fontSize: 11, color: "var(--admin-muted)", margin: "4px 0 0" }}>
             학생 화면: 정답 글자수 × 2개의 음절 카드 중 정답 글자 순서대로 클릭
           </p>
+
+          {/* 오답 음절 풀 */}
+          <div style={{ marginTop: 8 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <label style={labelStyle}>오답 음절 풀 (정답 글자수만큼, 중복 금지)</label>
+              <button
+                type="button"
+                className="admin-detail-btn ghost xs"
+                onClick={() => {
+                  // AI 자동 생성은 향후 — 일단 자모 비슷한 글자 자동 추천 (간단)
+                  alert("오답 음절은 직접 입력하거나, AI 문제 생성 시 자동 채워집니다.");
+                }}
+                title="향후 AI 자동 생성 지원"
+              >
+                ❓ 도움말
+              </button>
+            </div>
+            <input
+              value={(question.distractorSyllables || []).join(", ")}
+              onChange={(e) => {
+                const list = e.target.value.split(/[,\s]+/).map(s => s.trim()).filter(Boolean);
+                // 한 글자 + 정답·서로 중복 제거
+                const answer = (question.modelAnswer || "").replace(/\s/g, "").split("");
+                const seen = new Set(answer);
+                const uniq = [];
+                for (const s of list) {
+                  if (s.length !== 1) continue;
+                  if (seen.has(s)) continue;
+                  seen.add(s);
+                  uniq.push(s);
+                }
+                update({ distractorSyllables: uniq });
+              }}
+              placeholder="예: 의, 인, 수 (콤마로 구분)"
+              style={inputStyle({ width: "100%" })}
+            />
+            <p style={{ fontSize: 11, color: "var(--admin-muted)", margin: "4px 0 0" }}>
+              현재 {(question.distractorSyllables || []).length}개 — 정답 글자수와 같으면 OK. 부족하면 자동 보충.
+            </p>
+          </div>
+
           {showVector && (
             <div style={vectorBoxStyle}>
               <div style={{ fontSize: 12, fontWeight: 700, marginBottom: 6, color: "#c0392b" }}>
@@ -317,7 +426,7 @@ function FillBlanksEditor({ blanks, onChange }) {
     next[i] = { ...next[i], ...patch };
     onChange(next);
   };
-  const add = () => onChange([...blanks, { phrase: "" }]);
+  const add = () => onChange([...blanks, { phrase: "", choices: [] }]);
   const remove = (i) => {
     const next = [...blanks];
     next.splice(i, 1);
@@ -325,15 +434,47 @@ function FillBlanksEditor({ blanks, onChange }) {
   };
   return (
     <div>
+      <p style={{ fontSize: 11, color: "var(--admin-muted)", margin: "0 0 6px" }}>
+        한 단어/두 단어 빈칸 5개 이상. 각 빈칸에 정답 + 오답 보기 3~4개 (학생은 선택지에서 고름).
+      </p>
       {blanks.map((b, i) => (
-        <div key={i} style={{ display: "flex", gap: 4, marginBottom: 4 }}>
-          <input
-            value={b.phrase || ""}
-            onChange={(e) => update(i, { phrase: e.target.value })}
-            placeholder={`빈칸 ${i + 1} 정답 문구`}
-            style={inputStyle({ flex: 1 })}
-          />
-          <button type="button" className="admin-detail-btn ghost xs" onClick={() => remove(i)}>✕</button>
+        <div key={i} style={{
+          marginBottom: 8, padding: 8,
+          border: "1px solid var(--admin-stroke)",
+          borderRadius: 6,
+          background: "var(--admin-panel-light, #f5f9f3)",
+        }}>
+          <div style={{ display: "flex", gap: 4, alignItems: "center", marginBottom: 4 }}>
+            <span style={{ fontSize: 11, fontWeight: 700, color: "var(--admin-accent-strong)", minWidth: 40 }}>
+              빈칸 {i + 1}
+            </span>
+            <input
+              value={b.phrase || ""}
+              onChange={(e) => update(i, { phrase: e.target.value })}
+              placeholder="정답 (한 단어 또는 두 단어)"
+              style={inputStyle({ flex: 1 })}
+            />
+            <button type="button" className="admin-detail-btn ghost xs" onClick={() => remove(i)}>✕</button>
+          </div>
+          <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
+            <span style={{ fontSize: 10, color: "var(--admin-muted)", minWidth: 40 }}>오답 보기</span>
+            <input
+              value={(b.choices || []).filter(c => c !== b.phrase).join(", ")}
+              onChange={(e) => {
+                const distractors = e.target.value.split(/[,\n]/).map(s => s.trim()).filter(Boolean);
+                // choices = 정답 + 오답들 (중복 제거)
+                const set = new Set();
+                const list = [];
+                if (b.phrase) { list.push(b.phrase); set.add(b.phrase); }
+                for (const d of distractors) {
+                  if (!set.has(d)) { list.push(d); set.add(d); }
+                }
+                update(i, { choices: list });
+              }}
+              placeholder="오답 3~4개 (콤마 구분)"
+              style={inputStyle({ flex: 1, fontSize: 12 })}
+            />
+          </div>
         </div>
       ))}
       <button type="button" className="admin-detail-btn secondary xs" onClick={add}>+ 빈칸 추가</button>

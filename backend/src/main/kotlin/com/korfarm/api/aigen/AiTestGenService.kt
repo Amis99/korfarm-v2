@@ -28,11 +28,14 @@ class AiTestGenService(
     }
 
     fun generateQuestion(req: QuestionGenRequest, userId: String): QuestionGenResponse {
+        // 티어에 따른 모델 (로그·응답에 정확히 반영)
+        val tier = (req.tier ?: "BASIC").uppercase()
+        val model = if (tier == "ADVANCED") AiCallHelper.MODEL_OPUS else AiCallHelper.MODEL_SONNET
         return try {
             val gen = questionGenerator.generate(req)
             aiGenLogService.log(
                 userId = userId, testId = req.testId, kind = "question",
-                model = AiCallHelper.MODEL_OPUS,
+                model = model,
                 inputTokens = gen.inputTokens, outputTokens = gen.outputTokens,
                 durationMs = gen.durationMs,
                 passed = gen.review.passed, retryCount = gen.retryCount,
@@ -45,13 +48,13 @@ class AiTestGenService(
                 reviewIssues = gen.review.issues,
                 suggestedFixes = gen.review.suggestedFixes,
                 retryCount = gen.retryCount,
-                model = AiCallHelper.MODEL_OPUS,
+                model = model,
                 durationMs = gen.durationMs,
             )
         } catch (e: Exception) {
             aiGenLogService.log(
                 userId = userId, testId = req.testId, kind = "question",
-                model = AiCallHelper.MODEL_OPUS,
+                model = model,
                 status = "error", errorMessage = e.message,
             )
             throw e

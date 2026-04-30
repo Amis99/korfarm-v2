@@ -9,6 +9,17 @@ const snakeizeTop = (obj) => {
   );
 };
 
+// 깊은 snake_case 변환 — 배열/객체 재귀. 백엔드가 SNAKE_CASE strategy 라 nested 도 변환 필요.
+const deepSnakeize = (val) => {
+  if (Array.isArray(val)) return val.map(deepSnakeize);
+  if (val && typeof val === "object") {
+    return Object.fromEntries(
+      Object.entries(val).map(([k, v]) => [camelToSnake(k), deepSnakeize(v)])
+    );
+  }
+  return val;
+};
+
 // 기본 타임아웃 (관리자 API — 큰 JSON 저장을 고려해 60초)
 const DEFAULT_TIMEOUT_MS = 60_000;
 
@@ -103,6 +114,32 @@ export const apiPost = async (path, body) => {
     body: body ? JSON.stringify(snakeizeTop(body)) : "{}",
   });
   return safeJson(response, "POST", path);
+};
+
+/** 깊은 snake_case 변환 POST (nested 객체·배열 모두 변환). study questions:bulk 등 */
+export const apiPostDeep = async (path, body) => {
+  const response = await fetchWithTimeout(buildUrl(path), {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+      "Content-Type": "application/json",
+    },
+    body: body ? JSON.stringify(deepSnakeize(body)) : "{}",
+  });
+  return safeJson(response, "POST", path);
+};
+
+/** 깊은 snake_case 변환 PATCH */
+export const apiPatchDeep = async (path, body) => {
+  const response = await fetchWithTimeout(buildUrl(path), {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+      "Content-Type": "application/json",
+    },
+    body: body ? JSON.stringify(deepSnakeize(body)) : "{}",
+  });
+  return safeJson(response, "PATCH", path);
 };
 
 export const apiPut = async (path, body) => {

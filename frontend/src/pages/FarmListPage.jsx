@@ -375,8 +375,8 @@ function FarmListPage() {
                       className="farm-row"
                       onClick={() => {
                         if (item.isStudyContent) {
-                          // V0076 페이지 단위 시험지 디자인으로 라우팅
-                          navigate(`/study/${item.contentId}`);
+                          // V0076 페이지 단위 — EngineShell + StudyContentModule
+                          navigate(`/study-learning/${item.contentId}`);
                         } else if (farmId === "content") {
                           setProgressModal(item);
                         } else {

@@ -38,9 +38,13 @@ class QuestionGenerator(
         var totalDuration = 0
         var totalIn = 0; var totalOut = 0
 
+        // 모델 티어: BASIC=Sonnet, ADVANCED=Opus. 디폴트 BASIC.
+        val tier = (req.tier ?: "BASIC").uppercase()
+        val model = if (tier == "ADVANCED") AiCallHelper.MODEL_OPUS else AiCallHelper.MODEL_SONNET
+
         for (attempt in 1..maxAttempts) {
             val userPrompt = buildUserPrompt(req, isEssay, prevIssues = lastReview?.issues ?: emptyList(), prevSuggested = lastReview?.suggestedFixes ?: emptyList()) + refText
-            val r = helper.call(AiCallHelper.MODEL_OPUS, systemBlocks, userPrompt, maxTokens = 2048)
+            val r = helper.call(model, systemBlocks, userPrompt, maxTokens = 2048)
             totalDuration += r.durationMs
             r.inputTokens?.let { totalIn += it }
             r.outputTokens?.let { totalOut += it }

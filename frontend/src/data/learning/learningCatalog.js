@@ -33,11 +33,11 @@ export function profileLevelToServer(levelId) {
   return getServerFromLevel(upper);
 }
 
-/** 콘텐츠의 targetLevel이 선택한 서버에 속하는지 판별 */
+/** 콘텐츠의 targetLevel이 선택한 서버에 속하는지 판별 (대소문자 무시) */
 export function levelBelongsToServer(targetLevel, server) {
   if (!server) return true;
   if (!targetLevel) return false;
-  return targetLevel.startsWith(server);
+  return targetLevel.toUpperCase().startsWith(server.toUpperCase());
 }
 
 export const SUB_AREA_LABELS = {
@@ -124,7 +124,7 @@ export const FARM_MAP = {
     description: "PDF·텍스트 내용 확인 학습",
     color: "#7b8fb2",
     seedType: "seed_rice",
-    servers: ["RUSSELL", "WITTGENSTEIN"],
+    servers: "all",
   },
   grammar: {
     id: "grammar",
