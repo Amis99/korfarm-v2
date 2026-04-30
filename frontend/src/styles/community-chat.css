@@ -598,9 +598,14 @@
   padding: 4px;
 }
 
-.chat-emoticon-large {
+/* PC·모바일 모두 채팅에서 이모티콘은 메시지 본문보다 살짝 큰 정도(140px)만.
+ * .emoticon-image 와 .chat-emoticon-large 두 클래스가 같이 붙어 있어 specificity
+ * 0,0,2,0 으로 emoticon-image.css 의 0,0,1,0 규칙을 명확히 누른다. */
+.emoticon-image.chat-emoticon-large {
   max-width: 140px;
   max-height: 140px;
+  width: auto;
+  height: auto;
   object-fit: contain;
 }
 

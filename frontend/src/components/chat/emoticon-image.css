@@ -1,0 +1,12 @@
+/* EmoticonImage 컴포넌트 기본 규칙 — 컴포넌트와 함께 import 되어 어드민·채팅·라이트
+ * 모든 화면에서 부모 박스 안에 비율 유지하며 fit 됨.
+ * 더 큰 표시 크기가 필요한 곳은 별도 클래스(.chat-emoticon-large 등) 로 override 한다. */
+.emoticon-image,
+.emoticon-placeholder {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
