@@ -226,6 +226,15 @@
   position: relative;
 }
 
+/* 첨삭 텍스트는 길어지면 자동 줄바꿈 — 잘리지 않게 */
+.ms-correction-item .ms-correction-text {
+  flex: 1;
+  white-space: pre-wrap;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+}
+
 .ms-correction-item .ms-expand-badge {
   position: relative;
   top: auto;
@@ -235,7 +244,8 @@
   pointer-events: auto;
 }
 
-.ms-correction-item input {
+.ms-correction-item input,
+.ms-correction-item textarea {
   flex: 1;
   border: none;
   border-bottom: 1px dashed #e74c3c;
@@ -245,6 +255,17 @@
   font-family: var(--font-body);
   padding: 2px 4px;
   outline: none;
+  min-width: 0;
+}
+
+.ms-correction-item textarea {
+  resize: vertical;
+  white-space: pre-wrap;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+  min-height: 1.6em;
+  font-family: inherit;
 }
 
 .ms-correction-item input::placeholder {
@@ -331,5 +352,43 @@
 
   .ms-correction-item input {
     font-size: 12px;
+  }
+}
+
+/* ── 인쇄용 ── */
+@media print {
+  /* 어드민 레이아웃 숨김 */
+  .admin-side,
+  .admin-toolbar-row,
+  .admin-topbar,
+  .admin-backdrop,
+  .wisdom-action-bar,
+  .ms-ann-remove {
+    display: none !important;
+  }
+  .admin-page {
+    background: #fff !important;
+  }
+  .admin-main {
+    padding: 0 !important;
+  }
+  .admin-main > * {
+    max-width: none !important;
+    box-shadow: none !important;
+  }
+  /* 페이지 나누기 — 첨삭이 끊기지 않도록 */
+  .ms-cell-row {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .ms-correction-item {
+    color: #c0392b !important;
+  }
+  /* 입력란을 텍스트로 보이도록 — 인쇄 모드에선 textarea 대신 text 그대로 */
+  .ms-correction-item textarea,
+  .ms-correction-item input {
+    border: none !important;
+    color: #c0392b !important;
+    background: transparent !important;
   }
 }

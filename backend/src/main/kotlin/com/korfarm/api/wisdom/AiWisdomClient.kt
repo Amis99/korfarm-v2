@@ -188,33 +188,29 @@ class AiWisdomClient(
 
         for (corr in corrections) {
             val corrMap = corr as? Map<*, *> ?: continue
-            val errorText = corrMap["text"] as? String ?: continue
+            val errorText = (corrMap["text"] as? String)?.trim() ?: continue
+            if (errorText.isEmpty()) continue
             val suggestion = corrMap["suggestion"] as? String ?: ""
             val reason = corrMap["reason"] as? String ?: ""
 
             // 원문에서 위치 검색
+            var matched = false
             for ((pageIdx, pageText) in pages.withIndex()) {
-                var searchFrom = 0
-                while (true) {
-                    val startIdx = pageText.indexOf(errorText, searchFrom)
-                    if (startIdx < 0) break
-                    val rangeKey = "$pageIdx:$startIdx"
-                    if (rangeKey !in usedRanges) {
-                        usedRanges.add(rangeKey)
-                        val annComment = buildAnnotationComment(suggestion, reason)
-                        annotations.add(mapOf(
-                            "id" to annotationId,
-                            "page" to pageIdx,
-                            "startIdx" to startIdx,
-                            "endIdx" to startIdx + errorText.length - 1,
-                            "comment" to annComment
-                        ))
-                        annotationId++
-                        break
-                    }
-                    searchFrom = startIdx + 1
-                }
-                if (annotations.size >= annotationId - 1 && annotations.lastOrNull()?.get("page") == pageIdx) break
+                if (matched) break
+                val match = locateInPage(pageText, errorText, usedRanges, pageIdx) ?: continue
+                val (startIdx, endIdxExclusive) = match
+                val rangeKey = "$pageIdx:$startIdx"
+                usedRanges.add(rangeKey)
+                val annComment = buildAnnotationComment(suggestion, reason)
+                annotations.add(mapOf(
+                    "id" to annotationId,
+                    "page" to pageIdx,
+                    "startIdx" to startIdx,
+                    "endIdx" to endIdxExclusive - 1,
+                    "comment" to annComment
+                ))
+                annotationId++
+                matched = true
             }
         }
 
@@ -229,6 +225,48 @@ class AiWisdomClient(
         val content = (responseMap["content"] as? List<*>)?.firstOrNull() as? Map<*, *>
         val text = content?.get("text") as? String ?: "응답 파싱 실패"
         return AiFeedbackResult(text, null, modelId)
+    }
+
+    /**
+     * pageText 안에서 errorText 와 매칭되는 (start, endExclusive) 를 반환.
+     * 1차: 정확 매칭. 2차: 공백 무시 정규식 매칭 (errorText 5자 이상일 때만).
+     * usedRanges 와 겹치는 위치는 건너뛴다.
+     */
+    private fun locateInPage(
+        pageText: String,
+        errorText: String,
+        usedRanges: Set<String>,
+        pageIdx: Int
+    ): Pair<Int, Int>? {
+        // 1차: 정확 매칭
+        var searchFrom = 0
+        while (true) {
+            val startIdx = pageText.indexOf(errorText, searchFrom)
+            if (startIdx < 0) break
+            val rangeKey = "$pageIdx:$startIdx"
+            if (rangeKey !in usedRanges) {
+                return Pair(startIdx, startIdx + errorText.length)
+            }
+            searchFrom = startIdx + 1
+        }
+        // 2차: 공백/개행 허용 매칭 (errorText 가 너무 짧으면 오매칭 위험 → 건너뜀)
+        if (errorText.length < 5) return null
+        val pattern = errorText.toCharArray().joinToString("\\s*") { ch ->
+            if (ch.isWhitespace()) "\\s*" else Regex.escape(ch.toString())
+        }
+        return try {
+            val regex = Regex(pattern)
+            for (m in regex.findAll(pageText)) {
+                val s = m.range.first
+                val rangeKey = "$pageIdx:$s"
+                if (rangeKey !in usedRanges) {
+                    return Pair(s, m.range.last + 1)
+                }
+            }
+            null
+        } catch (e: Exception) {
+            null
+        }
     }
 
     private fun buildAnnotationComment(suggestion: String, reason: String): String {

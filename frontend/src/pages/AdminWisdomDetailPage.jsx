@@ -373,7 +373,7 @@ function AdminWisdomDetailPage() {
                   </p>
                 )}
 
-                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                <div className="wisdom-action-bar" style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   <button className="admin-action" onClick={handleSave} disabled={saving}>
                     {saving ? "저장 중..." : post.feedback ? "수정 저장" : "피드백 저장"}
                   </button>
@@ -385,6 +385,14 @@ function AdminWisdomDetailPage() {
                     title={!hasContent ? "글 내용이 없습니다. 파일 업로드 글은 먼저 OCR 변환이 필요합니다." : ""}
                   >
                     {aiLoading ? "AI 첨삭 중..." : "AI 첨삭"}
+                  </button>
+                  <button
+                    className="admin-action"
+                    style={{ background: "#2d6a4f" }}
+                    onClick={() => window.print()}
+                    title="첨삭이 표시된 원고지를 인쇄합니다."
+                  >
+                    인쇄
                   </button>
                   <button
                     className="admin-action"

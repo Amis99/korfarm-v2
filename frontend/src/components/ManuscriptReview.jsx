@@ -272,12 +272,13 @@ export default function ManuscriptReview({
                       <span className="ms-correction-text">{ann.comment}</span>
                     ) : (
                       <>
-                        <input
+                        <textarea
                           value={ann.comment}
                           onChange={(e) =>
                             updateAnnotationComment(ann.id, e.target.value)
                           }
                           placeholder="첨삭 코멘트 입력..."
+                          rows={Math.max(1, Math.ceil((ann.comment?.length || 0) / 40))}
                         />
                         <button
                           className="ms-ann-remove"
