@@ -1,10 +1,13 @@
 package com.korfarm.api.chat
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.korfarm.api.aigen.AiGenLogRepository
 import com.korfarm.api.aigen.AiGenLogService
 import com.korfarm.api.wisdom.AiPromptRepository
+import jakarta.persistence.EntityManager
+import jakarta.persistence.PersistenceContext
 import org.slf4j.LoggerFactory
+import org.springframework.transaction.annotation.Transactional
+import java.sql.Date as SqlDate
 import java.time.LocalDate
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.data.domain.PageRequest
@@ -36,11 +39,13 @@ class PodoHarness(
     private val aiPromptRepository: AiPromptRepository,
     private val objectMapper: ObjectMapper,
     private val aiGenLogService: AiGenLogService,
-    private val aiGenLogRepository: AiGenLogRepository,
     @Value("\${claude.api.key:}") private val apiKey: String,
     @Value("\${claude.api.url:https://api.anthropic.com/v1/messages}") private val apiUrl: String,
     @Value("\${podo.daily.limit:100}") private val dailyLimit: Int
 ) {
+    @PersistenceContext
+    private lateinit var em: EntityManager
+
     private val log = LoggerFactory.getLogger(PodoHarness::class.java)
     private val httpClient = HttpClient.newBuilder()
         .connectTimeout(Duration.ofSeconds(10))
@@ -52,27 +57,52 @@ class PodoHarness(
     companion object {
         const val PODO_USER_ID = "u_ai_podo"
         private val TRIGGER_PATTERN = Regex("포도야|포도[아야]?[,\\s]|@포도", RegexOption.IGNORE_CASE)
-        // 일일 한도 카운트에 포함시킬 kind (모든 포도 호출)
-        private val PODO_KINDS = listOf("podo-chat", "podo-board")
     }
 
     // ─── 일일 한도 ──────────────────────────────────────
 
     /**
-     * 사용자별 오늘 사용량 (성공 row 수). 한도 초과 시 true 반환.
-     * row 단위 카운트라 한 번의 generate() 가 callClaude 여러 번 = 여러 row 임.
-     * → "callClaude 100회" 가 한도. 평균 generate 1회 = 2~3 callClaude 이므로 실질 30~50 회 호출.
+     * 사용자가 오늘 포도를 호출한 횟수 (= generate / generateForBoard / generateForBoardWithImages
+     * 진입 횟수). 한도 초과 시 true 반환.
      */
     private fun isDailyLimitReached(userId: String): Boolean {
         if (dailyLimit <= 0) return false
         return try {
-            val from = LocalDate.now().atStartOfDay()
-            val to = from.plusDays(1)
-            val count = aiGenLogRepository.countByUserAndKindsInRange(userId, PODO_KINDS, from, to)
+            val today = SqlDate.valueOf(LocalDate.now())
+            val q = em.createNativeQuery(
+                "SELECT call_count FROM podo_daily_usage WHERE user_id = :uid AND usage_date = :d"
+            )
+            q.setParameter("uid", userId)
+            q.setParameter("d", today)
+            val rows = q.resultList
+            val count = (rows.firstOrNull() as? Number)?.toInt() ?: 0
             count >= dailyLimit
         } catch (e: Exception) {
             log.warn("일일 한도 조회 실패: userId={} err={}", userId, e.message)
             false
+        }
+    }
+
+    /**
+     * 호출 카운트 +1. UPSERT (오늘이 처음이면 INSERT, 있으면 +1).
+     * 트랜잭션 단위로 처리하기 위해 별도 메서드 분리.
+     */
+    @Transactional
+    fun incrementDailyCount(userId: String) {
+        try {
+            val today = SqlDate.valueOf(LocalDate.now())
+            val q = em.createNativeQuery(
+                """
+                INSERT INTO podo_daily_usage (user_id, usage_date, call_count, updated_at)
+                VALUES (:uid, :d, 1, NOW())
+                ON DUPLICATE KEY UPDATE call_count = call_count + 1, updated_at = NOW()
+                """.trimIndent()
+            )
+            q.setParameter("uid", userId)
+            q.setParameter("d", today)
+            q.executeUpdate()
+        } catch (e: Exception) {
+            log.warn("일일 카운트 증가 실패: userId={} err={}", userId, e.message)
         }
     }
 
@@ -121,6 +151,7 @@ class PodoHarness(
         if (isDailyLimitReached(triggerMessage.userId)) {
             return "오늘 포도가 너무 많이 일했어! 하루 ${dailyLimit}번 한도에 도달해서 더 답할 수 없어 ㅠㅠ 내일 다시 만나자~"
         }
+        incrementDailyCount(triggerMessage.userId)
 
         val systemPrompt = aiPromptRepository.findByPromptKeyAndLevelGroup("community_chat", "_common")
             ?.promptText ?: return ""
@@ -207,6 +238,7 @@ $chatContext
     fun generateForBoard(title: String, content: String, authorId: String): String {
         if (apiKey.isBlank()) return ""
         if (isDailyLimitReached(authorId)) return ""
+        incrementDailyCount(authorId)
 
         val systemPrompt = aiPromptRepository.findByPromptKeyAndLevelGroup("community_chat", "_common")
             ?.promptText ?: return ""
@@ -271,6 +303,7 @@ $chatContext
     fun generateForBoardWithImages(title: String, content: String, images: List<Pair<ByteArray, String>>, authorId: String): String {
         if (apiKey.isBlank()) return ""
         if (isDailyLimitReached(authorId)) return ""
+        incrementDailyCount(authorId)
 
         val systemPrompt = aiPromptRepository.findByPromptKeyAndLevelGroup("community_chat", "_common")
             ?.promptText ?: return ""
