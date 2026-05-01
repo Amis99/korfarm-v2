@@ -17,11 +17,24 @@ class BoardEntity(
     @Column(name = "board_type", nullable = false)
     var boardType: String,
 
-    @Column(name = "org_scope", nullable = false)
-    var orgScope: String,
+    /** 더 이상 사용 안 함 (V0080 이후). NULL 허용. */
+    @Column(name = "org_scope")
+    var orgScope: String? = null,
 
     @Column(nullable = false)
     var status: String,
+
+    /** 열람 최소 등급 — FREE/PAID/ORG_ADMIN/HQ_ADMIN */
+    @Column(name = "view_min_role", nullable = false)
+    var viewMinRole: String = "FREE",
+
+    /** 글쓰기 최소 등급 */
+    @Column(name = "write_min_role", nullable = false)
+    var writeMinRole: String = "FREE",
+
+    /** 댓글+좋아요 최소 등급 */
+    @Column(name = "comment_min_role", nullable = false)
+    var commentMinRole: String = "FREE",
 
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now(),

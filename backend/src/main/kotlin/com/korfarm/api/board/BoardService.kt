@@ -9,10 +9,27 @@ import com.korfarm.api.contracts.UpdatePostRequest
 import com.korfarm.api.files.FileRepository
 import com.korfarm.api.user.UserRepository
 import com.korfarm.api.system.FeatureFlagService
+import com.korfarm.api.security.SecurityUtils
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
+
+/** 게시판 권한 등급 서열 (낮음→높음) — V0080 마이그레이션 정책. */
+private val ROLE_RANK = mapOf(
+    "FREE" to 0,
+    "PAID" to 1,
+    "ORG_ADMIN" to 2,
+    "HQ_ADMIN" to 3
+)
+
+/** 사용자의 roles 가 minRole 이상 등급을 가지면 true. HQ_ADMIN 은 항상 true. */
+internal fun hasRoleAtLeast(userRoles: Collection<String>, minRole: String): Boolean {
+    if (userRoles.contains("HQ_ADMIN")) return true
+    val min = ROLE_RANK[minRole.uppercase()] ?: 0
+    val maxUser = userRoles.mapNotNull { ROLE_RANK[it.uppercase()] }.maxOrNull() ?: 0
+    return maxUser >= min
+}
 
 @Service
 class BoardService(
@@ -30,16 +47,25 @@ class BoardService(
     @Transactional(readOnly = true)
     fun listBoards(userId: String?): List<BoardView> {
         val boards = boardRepository.findByStatusOrderByBoardTypeAsc("active")
+        val roles = SecurityUtils.currentRoles().toMutableList()
+        // 비로그인은 FREE 로 간주
+        if (roles.isEmpty()) roles.add("FREE")
         return boards.filter { board ->
             val flagKey = flagKeyForBoard(board.boardType)
-            flagKey == null || featureFlagService.isEnabled(flagKey, userId)
-        }.map { it.toView() }
+            val flagOk = flagKey == null || featureFlagService.isEnabled(flagKey, userId)
+            flagOk && hasRoleAtLeast(roles, board.viewMinRole)
+        }.map { it.toView(roles) }
     }
 
     @Transactional(readOnly = true)
     fun listPosts(boardId: String, userId: String?, isAdmin: Boolean): List<PostSummary> {
         val board = getBoard(boardId)
         requireBoardEnabled(board, userId)
+        // 게시판 열람 권한 체크 (HQ_ADMIN 항상 통과, 비로그인은 FREE)
+        val roles = SecurityUtils.currentRoles().ifEmpty { listOf("FREE") }
+        if (!hasRoleAtLeast(roles, board.viewMinRole)) {
+            throw ApiException("FORBIDDEN", "이 게시판을 열람할 권한이 없습니다", HttpStatus.FORBIDDEN)
+        }
         val posts = postRepository.findByBoardIdOrderByCreatedAtDesc(board.id)
         val visible = posts.filter { post ->
             when {
@@ -60,8 +86,10 @@ class BoardService(
     fun createPost(boardId: String, userId: String, isAdmin: Boolean, request: CreatePostRequest): PostDetail {
         val board = getBoard(boardId)
         requireBoardEnabled(board, userId)
-        if (board.boardType == "materials" && !isAdmin) {
-            throw ApiException("FORBIDDEN", "학습 자료 게시판은 관리자만 작성할 수 있습니다", HttpStatus.FORBIDDEN)
+        // 권한 매트릭스 — board.writeMinRole 이상 등급 보유자만 작성 가능 (HQ_ADMIN 항상 통과)
+        val roles = SecurityUtils.currentRoles()
+        if (!hasRoleAtLeast(roles, board.writeMinRole)) {
+            throw ApiException("FORBIDDEN", "이 게시판에 글을 쓸 권한이 없습니다", HttpStatus.FORBIDDEN)
         }
         val status = "active"
         val entity = PostEntity(
@@ -102,11 +130,15 @@ class BoardService(
         }
         val board = getBoard(post.boardId)
         requireBoardEnabled(board, userId)
-        if (board.boardType == "materials" && !isAdmin) {
-            throw ApiException("FORBIDDEN", "materials board requires admin", HttpStatus.FORBIDDEN)
-        }
+        // 본인 글이 아닌 경우 — 본사·기관 관리자만 수정 가능
         if (!isAdmin && post.userId != userId) {
             throw ApiException("FORBIDDEN", "not allowed", HttpStatus.FORBIDDEN)
+        }
+        // 본인 글이라도 게시판의 글쓰기 등급 권한이 사라졌으면 (예: 구독 만료) 차단.
+        // HQ_ADMIN 은 항상 통과.
+        val roles = SecurityUtils.currentRoles()
+        if (!isAdmin && !hasRoleAtLeast(roles, board.writeMinRole)) {
+            throw ApiException("FORBIDDEN", "이 게시판에 글을 쓸 권한이 없습니다", HttpStatus.FORBIDDEN)
         }
         if (post.status == "deleted") {
             throw ApiException("NOT_FOUND", "post not found", HttpStatus.NOT_FOUND)
@@ -117,6 +149,7 @@ class BoardService(
             postAttachmentRepository.deleteByPostId(post.id)
             attachFiles(post.id, userId, request.attachmentIds, isAdmin)
         }
+        // 학습 자료 게시판: 본인 글 수정 시 재검토(pending) — write 권한과 별개의 비즈니스 정책
         if (board.boardType == "materials" && !isAdmin) {
             post.status = "pending"
         }
@@ -176,6 +209,11 @@ class BoardService(
         if (post.status != "active") {
             throw ApiException("NOT_FOUND", "post not found", HttpStatus.NOT_FOUND)
         }
+        val board = getBoard(post.boardId)
+        val roles = SecurityUtils.currentRoles()
+        if (!hasRoleAtLeast(roles, board.commentMinRole)) {
+            throw ApiException("FORBIDDEN", "이 게시판에 댓글을 달 권한이 없습니다", HttpStatus.FORBIDDEN)
+        }
         val comment = CommentEntity(
             id = IdGenerator.newId("cmt"),
             postId = post.id,
@@ -201,6 +239,14 @@ class BoardService(
 
     @Transactional
     fun togglePostLike(postId: String, userId: String): Boolean {
+        val post = postRepository.findById(postId).orElseThrow {
+            ApiException("NOT_FOUND", "post not found", HttpStatus.NOT_FOUND)
+        }
+        val board = getBoard(post.boardId)
+        val roles = SecurityUtils.currentRoles()
+        if (!hasRoleAtLeast(roles, board.commentMinRole)) {
+            throw ApiException("FORBIDDEN", "이 게시판에 좋아요 권한이 없습니다", HttpStatus.FORBIDDEN)
+        }
         val existing = postLikeRepository.findByPostIdAndUserId(postId, userId)
         return if (existing != null) {
             postLikeRepository.delete(existing)
@@ -339,12 +385,18 @@ class BoardService(
         }
     }
 
-    private fun BoardEntity.toView(): BoardView {
+    private fun BoardEntity.toView(userRoles: Collection<String> = emptyList()): BoardView {
+        val roles = userRoles.ifEmpty { listOf("FREE") }
         return BoardView(
             boardId = id,
             boardType = boardType,
-            orgScope = orgScope,
-            status = status
+            status = status,
+            viewMinRole = viewMinRole,
+            writeMinRole = writeMinRole,
+            commentMinRole = commentMinRole,
+            canView = hasRoleAtLeast(roles, viewMinRole),
+            canWrite = hasRoleAtLeast(roles, writeMinRole),
+            canComment = hasRoleAtLeast(roles, commentMinRole)
         )
     }
 

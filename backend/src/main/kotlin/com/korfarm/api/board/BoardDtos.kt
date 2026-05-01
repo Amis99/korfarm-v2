@@ -5,8 +5,16 @@ import java.time.LocalDateTime
 data class BoardView(
     val boardId: String,
     val boardType: String,
-    val orgScope: String,
-    val status: String
+    val status: String,
+    /** 열람 최소 등급 (FREE/PAID/ORG_ADMIN/HQ_ADMIN) */
+    val viewMinRole: String,
+    val writeMinRole: String,
+    /** 댓글+좋아요 최소 등급 */
+    val commentMinRole: String,
+    /** 현재 사용자가 이 게시판에 가진 권한 — 프론트에서 버튼 disabled 판단용 */
+    val canView: Boolean = true,
+    val canWrite: Boolean = false,
+    val canComment: Boolean = false
 )
 
 data class PostAttachmentView(

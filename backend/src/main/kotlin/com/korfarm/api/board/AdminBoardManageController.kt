@@ -34,15 +34,7 @@ class AdminBoardManageController(
         val boards = boardRepository.findAll().sortedBy { it.boardType }
         val data = boards.map { board ->
             val postCount = postRepository.findByBoardIdOrderByCreatedAtDesc(board.id).count { it.status != "deleted" }
-            AdminBoardSummary(
-                boardId = board.id,
-                boardType = board.boardType,
-                orgScope = board.orgScope,
-                status = board.status,
-                postCount = postCount,
-                createdAt = board.createdAt.toString(),
-                updatedAt = board.updatedAt.toString()
-            )
+            board.toAdminSummary(postCount)
         }
         return ApiResponse(success = true, data = data)
     }
@@ -61,21 +53,16 @@ class AdminBoardManageController(
         val entity = BoardEntity(
             id = request.boardId,
             boardType = request.boardType,
-            orgScope = request.orgScope ?: "public",
+            orgScope = null,  // 폐기됨
             status = request.status ?: "active",
+            viewMinRole = normalizeRole(request.viewMinRole, "FREE"),
+            writeMinRole = normalizeRole(request.writeMinRole, "FREE"),
+            commentMinRole = normalizeRole(request.commentMinRole, "FREE"),
             createdAt = now,
             updatedAt = now
         )
         boardRepository.save(entity)
-        return ApiResponse(success = true, data = AdminBoardSummary(
-            boardId = entity.id,
-            boardType = entity.boardType,
-            orgScope = entity.orgScope,
-            status = entity.status,
-            postCount = 0,
-            createdAt = entity.createdAt.toString(),
-            updatedAt = entity.updatedAt.toString()
-        ))
+        return ApiResponse(success = true, data = entity.toAdminSummary(0))
     }
 
     @PatchMapping("/{boardId}")
@@ -89,20 +76,33 @@ class AdminBoardManageController(
             ApiException("NOT_FOUND", "게시판 없음", HttpStatus.NOT_FOUND)
         }
         request.boardType?.let { if (it.isNotBlank()) board.boardType = it }
-        request.orgScope?.let { board.orgScope = it }
         request.status?.let { board.status = it }
+        request.viewMinRole?.let { board.viewMinRole = normalizeRole(it, board.viewMinRole) }
+        request.writeMinRole?.let { board.writeMinRole = normalizeRole(it, board.writeMinRole) }
+        request.commentMinRole?.let { board.commentMinRole = normalizeRole(it, board.commentMinRole) }
         board.updatedAt = LocalDateTime.now()
         boardRepository.save(board)
         val postCount = postRepository.findByBoardIdOrderByCreatedAtDesc(board.id).count { it.status != "deleted" }
-        return ApiResponse(success = true, data = AdminBoardSummary(
-            boardId = board.id,
-            boardType = board.boardType,
-            orgScope = board.orgScope,
-            status = board.status,
+        return ApiResponse(success = true, data = board.toAdminSummary(postCount))
+    }
+
+    private fun normalizeRole(value: String?, default: String): String {
+        val v = value?.uppercase() ?: return default
+        return if (v in setOf("FREE", "PAID", "ORG_ADMIN", "HQ_ADMIN")) v else default
+    }
+
+    private fun BoardEntity.toAdminSummary(postCount: Int): AdminBoardSummary {
+        return AdminBoardSummary(
+            boardId = id,
+            boardType = boardType,
+            status = status,
+            viewMinRole = viewMinRole,
+            writeMinRole = writeMinRole,
+            commentMinRole = commentMinRole,
             postCount = postCount,
-            createdAt = board.createdAt.toString(),
-            updatedAt = board.updatedAt.toString()
-        ))
+            createdAt = createdAt.toString(),
+            updatedAt = updatedAt.toString()
+        )
     }
 
     @DeleteMapping("/{boardId}")
@@ -128,8 +128,10 @@ class AdminBoardManageController(
 data class AdminBoardSummary(
     val boardId: String,
     val boardType: String,
-    val orgScope: String,
     val status: String,
+    val viewMinRole: String,
+    val writeMinRole: String,
+    val commentMinRole: String,
     val postCount: Int,
     val createdAt: String,
     val updatedAt: String
@@ -138,12 +140,16 @@ data class AdminBoardSummary(
 data class AdminBoardCreateRequest(
     val boardId: String,
     val boardType: String,
-    val orgScope: String? = "public",
-    val status: String? = "active"
+    val status: String? = "active",
+    val viewMinRole: String? = "FREE",
+    val writeMinRole: String? = "FREE",
+    val commentMinRole: String? = "FREE"
 )
 
 data class AdminBoardUpdateRequest(
     val boardType: String? = null,
-    val orgScope: String? = null,
-    val status: String? = null
+    val status: String? = null,
+    val viewMinRole: String? = null,
+    val writeMinRole: String? = null,
+    val commentMinRole: String? = null
 )

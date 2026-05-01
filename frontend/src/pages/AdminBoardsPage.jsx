@@ -15,6 +15,14 @@ const BOARD_TYPE_LABELS = {
   inquiry: "문의/상담",
 };
 
+const ROLE_OPTIONS = [
+  { value: "FREE", label: "무료 회원 이상" },
+  { value: "PAID", label: "유료 회원 이상" },
+  { value: "ORG_ADMIN", label: "기관 관리자 이상" },
+  { value: "HQ_ADMIN", label: "본사 관리자만" },
+];
+const ROLE_LABEL = Object.fromEntries(ROLE_OPTIONS.map((r) => [r.value, r.label]));
+
 function AdminBoardsPage() {
   const [boards, setBoards] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,12 +33,16 @@ function AdminBoardsPage() {
   // 신규 작성 폼
   const [newBoardId, setNewBoardId] = useState("");
   const [newBoardType, setNewBoardType] = useState("community");
-  const [newOrgScope, setNewOrgScope] = useState("public");
+  const [newView, setNewView] = useState("FREE");
+  const [newWrite, setNewWrite] = useState("FREE");
+  const [newComment, setNewComment] = useState("FREE");
 
   // 편집 폼
   const [editType, setEditType] = useState("");
-  const [editScope, setEditScope] = useState("");
   const [editStatus, setEditStatus] = useState("");
+  const [editView, setEditView] = useState("FREE");
+  const [editWrite, setEditWrite] = useState("FREE");
+  const [editComment, setEditComment] = useState("FREE");
 
   const load = async () => {
     setLoading(true);
@@ -59,12 +71,16 @@ function AdminBoardsPage() {
       await apiPost("/v1/admin/board-management", {
         boardId: newBoardId,
         boardType: newBoardType,
-        orgScope: newOrgScope,
         status: "active",
+        viewMinRole: newView,
+        writeMinRole: newWrite,
+        commentMinRole: newComment,
       });
       setNewBoardId("");
       setNewBoardType("community");
-      setNewOrgScope("public");
+      setNewView("FREE");
+      setNewWrite("FREE");
+      setNewComment("FREE");
       setShowCreate(false);
       await load();
     } catch (e) {
@@ -75,8 +91,10 @@ function AdminBoardsPage() {
   const startEdit = (board) => {
     setEditingId(board.boardId);
     setEditType(board.boardType);
-    setEditScope(board.orgScope);
     setEditStatus(board.status);
+    setEditView(board.viewMinRole || "FREE");
+    setEditWrite(board.writeMinRole || "FREE");
+    setEditComment(board.commentMinRole || "FREE");
   };
 
   const cancelEdit = () => {
@@ -87,8 +105,10 @@ function AdminBoardsPage() {
     try {
       await apiPatch(`/v1/admin/board-management/${boardId}`, {
         boardType: editType,
-        orgScope: editScope,
         status: editStatus,
+        viewMinRole: editView,
+        writeMinRole: editWrite,
+        commentMinRole: editComment,
       });
       setEditingId(null);
       await load();
@@ -164,13 +184,32 @@ function AdminBoardsPage() {
                   <option value="inquiry">문의/상담</option>
                 </select>
               </label>
-              <label>
-                <div style={{ fontSize: 13, fontWeight: 600 }}>접근 범위</div>
-                <select value={newOrgScope} onChange={(e) => setNewOrgScope(e.target.value)} style={{ padding: 8 }}>
-                  <option value="public">전체 공개</option>
-                  <option value="org">기관 한정</option>
-                </select>
-              </label>
+              <div>
+                <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 6 }}>권한 매트릭스 (최소 등급)</div>
+                <div style={{ display: "grid", gap: 6 }}>
+                  <label style={{ display: "grid", gridTemplateColumns: "100px 1fr", alignItems: "center", gap: 8 }}>
+                    <span style={{ fontSize: 12, color: "var(--admin-muted)" }}>열람</span>
+                    <select value={newView} onChange={(e) => setNewView(e.target.value)} style={{ padding: 6 }}>
+                      {ROLE_OPTIONS.map((r) => <option key={r.value} value={r.value}>{r.label}</option>)}
+                    </select>
+                  </label>
+                  <label style={{ display: "grid", gridTemplateColumns: "100px 1fr", alignItems: "center", gap: 8 }}>
+                    <span style={{ fontSize: 12, color: "var(--admin-muted)" }}>글쓰기</span>
+                    <select value={newWrite} onChange={(e) => setNewWrite(e.target.value)} style={{ padding: 6 }}>
+                      {ROLE_OPTIONS.map((r) => <option key={r.value} value={r.value}>{r.label}</option>)}
+                    </select>
+                  </label>
+                  <label style={{ display: "grid", gridTemplateColumns: "100px 1fr", alignItems: "center", gap: 8 }}>
+                    <span style={{ fontSize: 12, color: "var(--admin-muted)" }}>댓글·좋아요</span>
+                    <select value={newComment} onChange={(e) => setNewComment(e.target.value)} style={{ padding: 6 }}>
+                      {ROLE_OPTIONS.map((r) => <option key={r.value} value={r.value}>{r.label}</option>)}
+                    </select>
+                  </label>
+                </div>
+                <p style={{ fontSize: 11, color: "var(--admin-muted)", margin: "4px 0 0" }}>
+                  본사 관리자(HQ_ADMIN)는 모든 권한을 항상 가집니다. 학생이 유료 구독하면 연결된 학부모도 자동으로 유료로 인정됩니다.
+                </p>
+              </div>
               <button
                 type="button"
                 className="admin-detail-btn"
@@ -196,10 +235,11 @@ function AdminBoardsPage() {
               <tr>
                 <th>게시판 ID</th>
                 <th>유형</th>
-                <th>범위</th>
+                <th>열람</th>
+                <th>글쓰기</th>
+                <th>댓글·좋아요</th>
                 <th>상태</th>
-                <th>게시글 수</th>
-                <th>생성일</th>
+                <th>게시글</th>
                 <th>관리</th>
               </tr>
             </thead>
@@ -224,12 +264,29 @@ function AdminBoardsPage() {
                     </td>
                     <td>
                       {isEditing ? (
-                        <select value={editScope} onChange={(e) => setEditScope(e.target.value)}>
-                          <option value="public">전체 공개</option>
-                          <option value="org">기관 한정</option>
+                        <select value={editView} onChange={(e) => setEditView(e.target.value)}>
+                          {ROLE_OPTIONS.map((r) => <option key={r.value} value={r.value}>{r.label}</option>)}
                         </select>
                       ) : (
-                        b.orgScope === "public" ? "전체" : "기관"
+                        <span style={{ fontSize: 12 }}>{ROLE_LABEL[b.viewMinRole] || b.viewMinRole}</span>
+                      )}
+                    </td>
+                    <td>
+                      {isEditing ? (
+                        <select value={editWrite} onChange={(e) => setEditWrite(e.target.value)}>
+                          {ROLE_OPTIONS.map((r) => <option key={r.value} value={r.value}>{r.label}</option>)}
+                        </select>
+                      ) : (
+                        <span style={{ fontSize: 12 }}>{ROLE_LABEL[b.writeMinRole] || b.writeMinRole}</span>
+                      )}
+                    </td>
+                    <td>
+                      {isEditing ? (
+                        <select value={editComment} onChange={(e) => setEditComment(e.target.value)}>
+                          {ROLE_OPTIONS.map((r) => <option key={r.value} value={r.value}>{r.label}</option>)}
+                        </select>
+                      ) : (
+                        <span style={{ fontSize: 12 }}>{ROLE_LABEL[b.commentMinRole] || b.commentMinRole}</span>
                       )}
                     </td>
                     <td>
@@ -243,7 +300,6 @@ function AdminBoardsPage() {
                       )}
                     </td>
                     <td>{b.postCount}</td>
-                    <td>{b.createdAt?.slice(0, 10)}</td>
                     <td>
                       {isEditing ? (
                         <div style={{ display: "flex", gap: 6 }}>

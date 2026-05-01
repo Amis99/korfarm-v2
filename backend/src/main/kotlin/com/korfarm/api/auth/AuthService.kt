@@ -389,12 +389,22 @@ class AuthService(
     private fun resolveRoles(userId: String): List<String> {
         val memberships = orgMembershipRepository.findByUserIdAndStatus(userId, "active")
         val roles = memberships.map { it.role }.distinct().toMutableSet()
+        val now = LocalDateTime.now()
+        // 학생 본인이 유효 구독 중이면 PAID 부여
+        try {
+            val ownSub = subscriptionRepository.findTopByUserIdOrderByEndAtDesc(userId)
+            if (ownSub != null && ownSub.endAt.isAfter(now)
+                && (ownSub.status == "active" || ownSub.status == "canceled")) {
+                roles.add("PAID")
+            }
+        } catch (ex: DataAccessException) {
+            logger.warn("Failed to resolve own subscription for userId={}", userId, ex)
+        }
+        // 학부모의 유료는 연결된 자녀의 구독에서 파생
         try {
             if (parentStudentLinkRepository.existsByParentUserIdAndStatus(userId, "active")) {
                 roles.add("PARENT")
-                // 부모의 유료 상태는 연결된 자녀의 구독에서 파생
                 val childLinks = parentStudentLinkRepository.findByParentUserIdAndStatus(userId, "active")
-                val now = LocalDateTime.now()
                 val hasSubscribedChild = childLinks.any { link ->
                     val sub = subscriptionRepository.findTopByUserIdOrderByEndAtDesc(link.studentUserId)
                     sub != null && sub.endAt.isAfter(now) && (sub.status == "active" || sub.status == "canceled")
