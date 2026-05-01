@@ -430,6 +430,9 @@ class StudyPlanService(
         syncKorfarmCellStatus(cells, userId, assetMap)
         syncTestCellStatus(cells, userId, assetMap)
 
+        // 학생 본인 레벨 (글쓰기 cellAction 의 levelId fallback 용)
+        val studentLevelId = userRepo.findById(userId).orElse(null)?.levelId
+
         // 글쓰기 셀에 연결된 wisdom_post 일괄 조회 (cellAction 의 wisdomPostId 채우기 용)
         val writingCellIds = cells.filter { assetMap[it.assetId]?.assetType == "writing" }.map { it.id }
         val wisdomPostByCellId: Map<String, String> = if (writingCellIds.isNotEmpty()) {
@@ -438,12 +441,11 @@ class StudyPlanService(
                 .associate { it.planCellId!! to it.id }
         } else emptyMap()
 
-        // 테스트 셀의 제출 여부 확인
+        // 테스트 셀의 제출 여부 확인 — cell.cellRefId 우선
         val testSubmissionCellIds: Set<String> = cells.filter {
-            val asset = assetMap[it.assetId]
-            asset?.assetType == "test" && asset.refId != null
+            assetMap[it.assetId]?.assetType == "test" && (it.cellRefId != null || assetMap[it.assetId]?.refId != null)
         }.mapNotNull { cell ->
-            val testId = assetMap[cell.assetId]?.refId ?: return@mapNotNull null
+            val testId = cell.cellRefId ?: assetMap[cell.assetId]?.refId ?: return@mapNotNull null
             if (testSubmissionRepo.findByTestIdAndUserId(testId, userId) != null) cell.id else null
         }.toSet()
 
@@ -453,6 +455,7 @@ class StudyPlanService(
                 cell = cell,
                 asset = asset,
                 userId = userId,
+                studentLevelId = studentLevelId,
                 wisdomPostByCellId = wisdomPostByCellId,
                 testSubmissionCellIds = testSubmissionCellIds,
                 isAdmin = isAdmin
@@ -477,6 +480,7 @@ class StudyPlanService(
         cell: StudyPlanCellEntity,
         asset: StudyPlanAssetEntity?,
         userId: String,
+        studentLevelId: String? = null,
         wisdomPostByCellId: Map<String, String>,
         testSubmissionCellIds: Set<String>,
         isAdmin: Boolean
@@ -496,9 +500,10 @@ class StudyPlanService(
             "writing" -> {
                 val cfg = parseWritingConfig(asset.configJson)
                 // Phase 3: 셀 단위 배정이 우선 — cell.cellRefId(topicKey), cell.assignedLabel(라벨)
+                // 글쓰기 levelId 는 학생 본인 레벨이 정답 (asset.refId 옛 모델 fallback 후순위)
                 CellAction(
                     kind = "write",
-                    levelId = cfg["levelId"] ?: asset.refId,
+                    levelId = cfg["levelId"] ?: studentLevelId ?: asset.refId,
                     topicKey = cell.cellRefId ?: cfg["topicKey"],
                     topicLabel = cell.assignedLabel ?: cfg["topicLabel"] ?: asset.label,
                     wisdomPostId = wisdomPostByCellId[cell.id]
@@ -925,7 +930,8 @@ class StudyPlanService(
         if (testCells.isEmpty()) return
 
         testCells.forEach { cell ->
-            val testId = assetMap[cell.assetId]?.refId ?: return@forEach
+            // 셀 단위 배정이 우선, asset.refId 는 옛 모델 fallback
+            val testId = cell.cellRefId ?: assetMap[cell.assetId]?.refId ?: return@forEach
             val submission = testSubmissionRepo.findByTestIdAndUserId(testId, userId) ?: return@forEach
 
             // 재시험인 경우: 제출이 판정 이후인지 확인
