@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import org.springframework.transaction.support.TransactionSynchronization
+import org.springframework.transaction.support.TransactionSynchronizationManager
 import org.slf4j.LoggerFactory
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -512,12 +514,12 @@ class WisdomService(
         if (post.content.isNullOrBlank()) {
             throw ApiException("NO_CONTENT", "글 내용이 없습니다. 파일 업로드 글은 먼저 OCR 변환이 필요합니다.", HttpStatus.BAD_REQUEST)
         }
-        // 진행 중인 job 재사용
+        // 진행 중인 job 재사용 — 단, 10분 넘게 진행 중인 좀비 job 은 무시 (재시도 허용)
         val existing = aiFeedbackJobRepository.findFirstByPostIdAndStatusInOrderByCreatedAtDesc(
             postId,
             listOf(AiFeedbackJobStatus.PENDING, AiFeedbackJobStatus.RUNNING)
         )
-        if (existing != null) {
+        if (existing != null && existing.createdAt.isAfter(LocalDateTime.now().minusMinutes(10))) {
             return AiFeedbackJobEnqueueResponse(jobId = existing.id, status = existing.status)
         }
         val job = AiFeedbackJobEntity(
@@ -527,9 +529,19 @@ class WisdomService(
             status = AiFeedbackJobStatus.PENDING
         )
         aiFeedbackJobRepository.save(job)
-        // 트랜잭션 커밋 후 비동기 실행하도록 외부 빈에 위임
-        aiFeedbackJobService.runJob(job.id)
-        return AiFeedbackJobEnqueueResponse(jobId = job.id, status = job.status)
+        // 트랜잭션 커밋 후에 비동기 실행 — 안 그러면 @Async 스레드가 새 트랜잭션 시작 시점에
+        // 아직 커밋 안 된 INSERT 가 안 보여 "job 누락" 으로 영원히 PENDING.
+        val jobId = job.id
+        if (TransactionSynchronizationManager.isSynchronizationActive()) {
+            TransactionSynchronizationManager.registerSynchronization(object : TransactionSynchronization {
+                override fun afterCommit() {
+                    aiFeedbackJobService.runJob(jobId)
+                }
+            })
+        } else {
+            aiFeedbackJobService.runJob(jobId)
+        }
+        return AiFeedbackJobEnqueueResponse(jobId = jobId, status = job.status)
     }
 
     @Transactional(readOnly = true)
