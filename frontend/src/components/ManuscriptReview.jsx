@@ -30,10 +30,10 @@ export default function ManuscriptReview({
   // 학생 뷰 펼침/접힘
   const [expandedIds, setExpandedIds] = useState(new Set());
 
-  // 셀 데이터 생성 (ManuscriptGrid와 동일 로직)
+  // 셀 데이터 생성 (각 셀에 원본 charIdx 함께 저장 → annotation char-base 매칭용)
   const cells = (() => {
     const text = currentText;
-    const result = [];
+    const result = []; // { ch: string, charIdx: number } | { ch: "", charIdx: -1 } (패딩)
     let cellIdx = 0;
     for (let i = 0; i < text.length && cellIdx < totalCells; i++) {
       const ch = text[i];
@@ -41,16 +41,16 @@ export default function ManuscriptReview({
         const remainder = cellIdx % cols;
         if (remainder !== 0) {
           for (let pad = remainder; pad < cols; pad++) {
-            result.push("");
+            result.push({ ch: "", charIdx: -1 });
             cellIdx++;
           }
         }
       } else {
-        result.push(ch);
+        result.push({ ch, charIdx: i });
         cellIdx++;
       }
     }
-    while (result.length < totalCells) result.push("");
+    while (result.length < totalCells) result.push({ ch: "", charIdx: -1 });
     return result;
   })();
 
@@ -60,14 +60,16 @@ export default function ManuscriptReview({
   // 현재 페이지의 어노테이션
   const currentPageAnnotations = annotations.filter((a) => a.page === safePage);
 
-  // 셀에 해당하는 어노테이션 찾기
+  // 셀에 해당하는 어노테이션 찾기 — cellIdx 의 원본 charIdx 로 비교
   const getAnnotationForCell = useCallback(
     (cellIdx) => {
+      const charIdx = cells[cellIdx]?.charIdx;
+      if (charIdx == null || charIdx < 0) return null;
       return currentPageAnnotations.find(
-        (a) => cellIdx >= a.startIdx && cellIdx <= a.endIdx
+        (a) => charIdx >= a.startIdx && charIdx <= a.endIdx
       );
     },
-    [currentPageAnnotations]
+    [currentPageAnnotations, cells]
   );
 
   // 드래그 범위 확인
@@ -114,14 +116,28 @@ export default function ManuscriptReview({
     const start = Math.min(dragStart, dragEndRef.current ?? dragStart);
     const end = Math.max(dragStart, dragEndRef.current ?? dragStart);
 
-    // 빈 셀만 있으면 무시
-    const hasContent = cells.slice(start, end + 1).some((ch) => ch !== "");
-    // 기존 어노테이션과 겹치면 무시
+    // 드래그 범위 안에서 글자 셀 (charIdx >= 0) 의 charIdx 만 추출
+    const charIndices = cells
+      .slice(start, end + 1)
+      .map((c) => c.charIdx)
+      .filter((idx) => idx >= 0);
+
+    if (charIndices.length === 0) {
+      setDragStart(null);
+      setDragEnd(null);
+      dragEndRef.current = null;
+      return;
+    }
+
+    const charStart = Math.min(...charIndices);
+    const charEnd = Math.max(...charIndices);
+
+    // 기존 어노테이션과 char-base 로 겹치면 무시
     const overlaps = currentPageAnnotations.some(
-      (a) => start <= a.endIdx && end >= a.startIdx
+      (a) => charStart <= a.endIdx && charEnd >= a.startIdx
     );
 
-    if (hasContent && !overlaps) {
+    if (!overlaps) {
       const nextId =
         annotations.length > 0
           ? Math.max(...annotations.map((a) => a.id)) + 1
@@ -129,8 +145,8 @@ export default function ManuscriptReview({
       const newAnn = {
         id: nextId,
         page: safePage,
-        startIdx: start,
-        endIdx: end,
+        startIdx: charStart,
+        endIdx: charEnd,
         comment: "",
       };
       onAnnotationsChange?.([...annotations, newAnn]);
@@ -200,11 +216,12 @@ export default function ManuscriptReview({
       {/* 행별 렌더링 */}
       {Array.from({ length: rows }, (_, rowIdx) => {
         const rowStart = rowIdx * cols;
-        const rowEnd = rowStart + cols - 1;
-        // 이 행에서 시작하는 어노테이션
-        const rowAnnotations = currentPageAnnotations.filter(
-          (a) => Math.floor(a.startIdx / cols) === rowIdx
-        );
+        // 이 행에서 시작하는 어노테이션 — annotation.startIdx 가 char-base 이므로
+        // 첫 등장 cellIdx 를 찾아 그 cell 이 이 row 안인지 판단
+        const rowAnnotations = currentPageAnnotations.filter((a) => {
+          const firstCell = cells.findIndex((c) => c.charIdx === a.startIdx);
+          return firstCell >= 0 && Math.floor(firstCell / cols) === rowIdx;
+        });
 
         return (
           <div key={rowIdx}>
@@ -213,10 +230,11 @@ export default function ManuscriptReview({
               className="ms-review-row"
               style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}
             >
-              {cells.slice(rowStart, rowStart + cols).map((ch, colIdx) => {
+              {cells.slice(rowStart, rowStart + cols).map((cell, colIdx) => {
                 const cellIdx = rowStart + colIdx;
+                const ch = cell.ch;
                 const ann = getAnnotationForCell(cellIdx);
-                const isFirst = ann && ann.startIdx === cellIdx;
+                const isFirst = ann && ann.startIdx === cell.charIdx;
                 const dragging = isInDragRange(cellIdx);
 
                 return (
