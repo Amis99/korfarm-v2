@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { apiPatch } from "../utils/api";
 import KorfarmContentSearchModal from "./KorfarmContentSearchModal";
+import TestSearchModal from "./TestSearchModal";
 import "../styles/admin-detail.css";
 
 const ASSET_LABELS = {
@@ -39,6 +40,7 @@ export default function CellAssignModal({ cell, scope, asset, onClose, onAssigne
     return todayPlus(7);
   });
   const [showContentSearch, setShowContentSearch] = useState(false);
+  const [showTestSearch, setShowTestSearch] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
@@ -49,6 +51,13 @@ export default function CellAssignModal({ cell, scope, asset, onClose, onAssigne
     setShowContentSearch(false);
   };
 
+  const handleTestSelected = (test) => {
+    setRefId(test.testId);
+    setRefLabel(test.title);
+    if (!label) setLabel(test.title);
+    setShowTestSearch(false);
+  };
+
   const handleSubmit = async () => {
     setError("");
     // 자산 종류별 검증
@@ -57,7 +66,7 @@ export default function CellAssignModal({ cell, scope, asset, onClose, onAssigne
     } else if (assetType === "korfarm") {
       if (!refId) { setError("콘텐츠를 선택해 주세요."); return; }
     } else if (assetType === "test") {
-      if (!refId) { setError("테스트 검색은 다음 단계에서 추가됩니다. 임시로 ID를 입력하세요."); return; }
+      if (!refId) { setError("테스트를 선택해 주세요."); return; }
     } else if (assetType === "writing") {
       if (!refId && !label.trim()) { setError("주제 또는 자유주제 제목을 입력해 주세요."); return; }
     }
@@ -86,6 +95,12 @@ export default function CellAssignModal({ cell, scope, asset, onClose, onAssigne
         <KorfarmContentSearchModal
           onSelect={handleContentSelected}
           onClose={() => setShowContentSearch(false)}
+        />
+      )}
+      {showTestSearch && (
+        <TestSearchModal
+          onSelect={handleTestSelected}
+          onClose={() => setShowTestSearch(false)}
         />
       )}
       <div className="admin-detail-modal-backdrop" onClick={close}>
@@ -146,7 +161,37 @@ export default function CellAssignModal({ cell, scope, asset, onClose, onAssigne
               </div>
             )}
 
-            {(assetType === "test" || assetType === "writing") && (
+            {assetType === "test" && (
+              <div style={{ marginBottom: 14 }}>
+                <label style={{ display: "block", fontSize: 13, fontWeight: 600, marginBottom: 6 }}>
+                  테스트 <span style={{ color: "#c0392b" }}>*</span>
+                </label>
+                <div style={{ display: "flex", gap: 8 }}>
+                  <input
+                    type="text"
+                    value={refLabel || refId}
+                    placeholder="테스트를 검색해 선택하세요 (진단 제외)"
+                    style={{ ...inputStyle, flex: 1, background: "#f5f9f3" }}
+                    readOnly
+                  />
+                  <button className="admin-detail-btn" onClick={() => setShowTestSearch(true)}>
+                    검색
+                  </button>
+                </div>
+                <label style={{ display: "block", fontSize: 12, color: "var(--admin-muted)", marginTop: 8 }}>
+                  표시 라벨 (선택)
+                </label>
+                <input
+                  type="text"
+                  value={label}
+                  onChange={(e) => setLabel(e.target.value)}
+                  placeholder="학생에게 보일 이름"
+                  style={inputStyle}
+                />
+              </div>
+            )}
+
+            {assetType === "writing" && (
               <div style={{
                 marginBottom: 14,
                 padding: 10,
@@ -156,9 +201,7 @@ export default function CellAssignModal({ cell, scope, asset, onClose, onAssigne
                 fontSize: 12,
                 color: "#8a6d00",
               }}>
-                {assetType === "test"
-                  ? "테스트 검색 기능은 다음 단계에서 추가됩니다."
-                  : "지식과 지혜 주제 검색·자유주제 기능은 다음 단계에서 추가됩니다."}
+                지식과 지혜 주제 검색·자유주제 기능은 다음 단계에서 추가됩니다.
               </div>
             )}
 
@@ -187,7 +230,7 @@ export default function CellAssignModal({ cell, scope, asset, onClose, onAssigne
             <button
               className="admin-detail-btn primary"
               onClick={handleSubmit}
-              disabled={saving || (assetType === "test" || assetType === "writing")}
+              disabled={saving || assetType === "writing"}
             >
               {saving ? "배정 중..." : "배정"}
             </button>
