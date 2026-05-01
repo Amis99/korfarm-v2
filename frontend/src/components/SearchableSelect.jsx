@@ -65,8 +65,9 @@ export default function SearchableSelect({
         setSearch("");
       }
     };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+    // click 이벤트로 등록 — mousedown 은 li onClick 과 타이밍 충돌 가능
+    document.addEventListener("click", handler);
+    return () => document.removeEventListener("click", handler);
   }, [open]);
 
   useEffect(() => {
@@ -98,7 +99,10 @@ export default function SearchableSelect({
       <button
         type="button"
         className={`searchable-select-trigger ${open ? "open" : ""}`}
-        onClick={() => !disabled && setOpen((v) => !v)}
+        onClick={(e) => {
+          e.stopPropagation();
+          if (!disabled) setOpen((v) => !v);
+        }}
         disabled={disabled}
       >
         <span className={!selected && !emptyOptionLabel ? "searchable-select-placeholder" : ""}>
@@ -121,7 +125,11 @@ export default function SearchableSelect({
             {emptyOptionLabel && (
               <li
                 className={`searchable-select-item ${value === "" ? "is-selected" : ""}`}
-                onClick={() => pick("")}
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  pick("");
+                }}
               >
                 {emptyOptionLabel}
               </li>
@@ -133,7 +141,11 @@ export default function SearchableSelect({
               <li
                 key={o.value}
                 className={`searchable-select-item ${o.value === value ? "is-selected" : ""}`}
-                onClick={() => pick(o.value)}
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  pick(o.value);
+                }}
                 title={o.label}
               >
                 {o.label}
