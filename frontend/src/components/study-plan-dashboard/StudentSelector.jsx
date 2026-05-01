@@ -1,11 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
 import { apiGet } from "../../utils/api";
 import { useAuth } from "../../hooks/useAuth";
-import OrgSelect from "../OrgSelect";
+import SearchableSelect from "../SearchableSelect";
 
 /**
  * 어드민 학습 계획표 대시보드 상단의 3단 dropdown.
  * 기관(HQ_ADMIN 만 활성) → 수강반 → 학생.
+ *
+ * 정책:
+ *  - HQ_ADMIN: 기관 선택해야만 수강반·학생 의미가 생김. 기관 미선택 시 수강반 비활성.
+ *  - ORG_ADMIN: 기관 dropdown 비활성(자기 기관 고정), 수강반·학생 항상 활성.
+ *  - 모든 dropdown 검색 가능 + 한글 초성 매칭 지원.
  *
  * Props:
  *   value         { orgId, classId, userId }
@@ -32,14 +37,14 @@ export default function StudentSelector({ value, onChange, showStudent = true, l
       .catch(() => setOrgs([]));
   }, []);
 
-  // 수강반 목록 — 기관 dropdown 변경 시 필터
+  // 수강반 목록
   useEffect(() => {
     apiGet("/v1/admin/classes")
       .then((data) => setClasses(Array.isArray(data) ? data : []))
       .catch(() => setClasses([]));
   }, []);
 
-  // 학생 목록 — 전역 students API 가 권한 자체 필터링
+  // 학생 목록 — 권한 자체 필터링은 백엔드가 처리
   useEffect(() => {
     if (!showStudent) return;
     apiGet("/v1/admin/students")
@@ -58,7 +63,6 @@ export default function StudentSelector({ value, onChange, showStudent = true, l
       list = list.filter((s) => {
         const sOrgId = s.orgId || s.org_id;
         if (sOrgId) return sOrgId === orgId;
-        // orgId 없으면 org 명으로 매칭 시도
         const matchOrg = orgs.find((o) => o.id === orgId);
         return matchOrg && s.org === matchOrg.name;
       });
@@ -80,64 +84,71 @@ export default function StudentSelector({ value, onChange, showStudent = true, l
     onChange?.({ orgId, classId, userId, ...patch });
   };
 
+  // 보안 정책: HQ 모드에서 기관 선택 안 하면 수강반/학생 비활성
+  const classDisabled = isHq && !orgId;
+  const studentDisabled = isHq && !orgId;
+
+  // 옵션 배열로 변환 — SearchableSelect 의 통일 포맷
+  const orgOptions = useMemo(() => {
+    const HQ_ORG_ID = "org_hq";
+    const hq = orgs.find((o) => o.id === HQ_ORG_ID);
+    const others = orgs
+      .filter((o) => o.id !== HQ_ORG_ID)
+      .sort((a, b) => (a.name || "").localeCompare(b.name || "", "ko"));
+    const list = hq ? [hq, ...others] : others;
+    return list.map((o) => ({ value: o.id, label: o.name || o.id }));
+  }, [orgs]);
+
+  const classOptions = useMemo(
+    () => filteredClasses.map((c) => ({ value: c.id, label: c.name || c.id })),
+    [filteredClasses]
+  );
+
+  const studentOptions = useMemo(
+    () => filteredStudents.map((s) => {
+      const id = s.id || s.userId;
+      const name = s.name || s.userName || id;
+      const school = s.school ? ` · ${s.school}` : "";
+      return { value: id, label: `${name}${school}` };
+    }),
+    [filteredStudents]
+  );
+
   return (
     <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
       {/* 기관 — HQ_ADMIN 만 활성 */}
-      <div style={{ minWidth: 180 }}>
-        <OrgSelect
-          orgs={orgs}
-          value={orgId}
-          onChange={(next) => update({ orgId: next, classId: "", userId: "" })}
-          placeholder={isHq ? "기관 전체" : (orgs.find((o) => o.id === orgId)?.name || "내 기관")}
-          disabled={!isHq}
-        />
-      </div>
+      <SearchableSelect
+        options={orgOptions}
+        value={orgId}
+        onChange={(next) => update({ orgId: next, classId: "", userId: "" })}
+        placeholder={isHq ? "기관 선택" : (orgs.find((o) => o.id === orgId)?.name || "내 기관")}
+        emptyOptionLabel="기관 전체"
+        disabled={!isHq}
+        minWidth={180}
+      />
 
-      {/* 수강반 */}
-      <select
-        className="admin-detail-select"
+      {/* 수강반 — HQ 모드에서 기관 미선택 시 비활성 */}
+      <SearchableSelect
+        options={classOptions}
         value={classId}
-        onChange={(e) => update({ classId: e.target.value, userId: "" })}
-        style={{
-          padding: "8px 12px",
-          borderRadius: 8,
-          border: "1px solid rgba(31,58,44,0.18)",
-          background: "var(--admin-panel, #fff)",
-          color: "var(--admin-ink, #1a2920)",
-          fontSize: 13,
-          minWidth: 160,
-        }}
-      >
-        <option value="">수강반 전체</option>
-        {filteredClasses.map((c) => (
-          <option key={c.id} value={c.id}>{c.name}</option>
-        ))}
-      </select>
+        onChange={(next) => update({ classId: next, userId: "" })}
+        placeholder={classDisabled ? "기관을 먼저 선택" : "수강반 전체"}
+        emptyOptionLabel={classDisabled ? null : "수강반 전체"}
+        disabled={classDisabled}
+        minWidth={160}
+      />
 
       {/* 학생 */}
       {showStudent ? (
-        <select
-          className="admin-detail-select"
+        <SearchableSelect
+          options={studentOptions}
           value={userId}
-          onChange={(e) => update({ userId: e.target.value })}
-          style={{
-            padding: "8px 12px",
-            borderRadius: 8,
-            border: "1px solid rgba(31,58,44,0.18)",
-            background: "var(--admin-panel, #fff)",
-            color: "var(--admin-ink, #1a2920)",
-            fontSize: 13,
-            minWidth: 200,
-          }}
-        >
-          <option value="">학생을 선택하세요</option>
-          {filteredStudents.map((s) => (
-            <option key={s.id || s.userId} value={s.id || s.userId}>
-              {s.name || s.userName || s.id || s.userId}
-              {s.school ? ` · ${s.school}` : ""}
-            </option>
-          ))}
-        </select>
+          onChange={(next) => update({ userId: next })}
+          placeholder={studentDisabled ? "기관을 먼저 선택" : "학생을 선택하세요"}
+          emptyOptionLabel={studentDisabled ? null : "학생을 선택하세요"}
+          disabled={studentDisabled}
+          minWidth={200}
+        />
       ) : (
         labelStudent && (
           <span style={{ fontSize: 12, color: "var(--admin-muted, #3a4a3e)" }}>

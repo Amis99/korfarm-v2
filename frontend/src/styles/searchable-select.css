@@ -1,0 +1,116 @@
+.searchable-select {
+  position: relative;
+  display: inline-block;
+}
+
+.searchable-select-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(31, 58, 44, 0.18);
+  background: var(--admin-panel, #fff);
+  color: var(--admin-ink, #1a2920);
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+}
+
+.searchable-select-trigger:hover:not(:disabled) {
+  border-color: var(--admin-accent, #2d6a4f);
+}
+
+.searchable-select-trigger.open {
+  border-color: var(--admin-accent, #2d6a4f);
+}
+
+.searchable-select-trigger:disabled {
+  background: rgba(31, 58, 44, 0.05);
+  color: rgba(31, 58, 44, 0.5);
+  cursor: not-allowed;
+}
+
+.searchable-select-placeholder {
+  color: rgba(31, 58, 44, 0.5);
+}
+
+.searchable-select-arrow {
+  font-size: 10px;
+  color: var(--admin-muted, #3a4a3e);
+  flex-shrink: 0;
+}
+
+.searchable-select-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 1080;
+  background: var(--admin-panel, #fff);
+  border: 1px solid rgba(31, 58, 44, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  max-height: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.searchable-select-search {
+  padding: 8px;
+  border-bottom: 1px solid rgba(31, 58, 44, 0.1);
+}
+
+.searchable-select-search input {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid rgba(31, 58, 44, 0.18);
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  color: var(--admin-ink, #1a2920);
+  background: #fff;
+}
+
+.searchable-select-search input:focus {
+  border-color: var(--admin-accent, #2d6a4f);
+}
+
+.searchable-select-list {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.searchable-select-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--admin-ink, #1a2920);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.searchable-select-item:hover {
+  background: var(--admin-panel-light, #f5f9f3);
+}
+
+.searchable-select-item.is-selected {
+  background: rgba(45, 106, 79, 0.12);
+  color: var(--admin-accent-strong, #1f4a37);
+  font-weight: 600;
+}
+
+.searchable-select-empty {
+  padding: 12px;
+  text-align: center;
+  color: var(--admin-muted, #3a4a3e);
+  font-size: 12px;
+}
