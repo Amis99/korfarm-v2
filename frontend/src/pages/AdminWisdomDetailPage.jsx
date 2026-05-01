@@ -95,19 +95,48 @@ function AdminWisdomDetailPage() {
   const handleAiFeedback = async () => {
     if (post.feedback && !confirm("기존 첨삭이 있습니다. AI 첨삭으로 덮어쓰시겠습니까?")) return;
     setAiLoading(true);
-    setMsg("");
+    setMsg("AI 분석 시작…");
     try {
-      const res = await apiPost(`/v1/admin/wisdom/posts/${postId}/ai-feedback`);
-      if (res.comment) setComment(res.comment);
-      if (res.correction) {
-        try {
-          const parsed = JSON.parse(res.correction);
-          if (Array.isArray(parsed)) setAnnotations(parsed);
-        } catch {
-          // fallback
-        }
+      // 1) 비동기 enqueue → jobId 즉시 수신
+      const enqueueRes = await apiPost(`/v1/admin/wisdom/posts/${postId}/ai-feedback`);
+      const jobId = enqueueRes.jobId;
+      if (!jobId) {
+        throw new Error("작업 생성 실패");
       }
-      setMsg("AI 첨삭 완료. 검토 후 '피드백 저장'을 눌러주세요.");
+
+      // 2) 2초 간격 polling (최대 5분)
+      const start = Date.now();
+      const TIMEOUT_MS = 5 * 60 * 1000;
+      const POLL_MS = 2000;
+      let lastStatus = enqueueRes.status || "PENDING";
+
+      while (true) {
+        if (Date.now() - start > TIMEOUT_MS) {
+          throw new Error("AI 첨삭이 5분을 초과했습니다. 잠시 후 다시 시도해주세요.");
+        }
+        await new Promise((r) => setTimeout(r, POLL_MS));
+        const elapsedSec = Math.floor((Date.now() - start) / 1000);
+        const job = await apiGet(`/v1/admin/wisdom/ai-feedback/jobs/${jobId}`);
+        lastStatus = job.status;
+        if (job.status === "COMPLETED") {
+          if (job.comment) setComment(job.comment);
+          if (job.correction) {
+            try {
+              const parsed = JSON.parse(job.correction);
+              if (Array.isArray(parsed)) setAnnotations(parsed);
+            } catch {
+              // fallback
+            }
+          }
+          setMsg("AI 첨삭 완료. 검토 후 '피드백 저장'을 눌러주세요.");
+          return;
+        }
+        if (job.status === "FAILED") {
+          throw new Error(job.errorMessage || "AI 첨삭이 실패했습니다.");
+        }
+        // PENDING / RUNNING — 상태 표시만 갱신
+        setMsg(`AI 분석 중… (${elapsedSec}초 / ${lastStatus})`);
+      }
     } catch (err) {
       setMsg(err.message || "AI 첨삭에 실패했습니다.");
     } finally {

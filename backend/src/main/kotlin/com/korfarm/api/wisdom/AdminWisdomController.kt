@@ -59,10 +59,23 @@ class AdminWisdomController(
 
     // ─── AI 첨삭 ───────────────────────────────────────
 
+    /**
+     * AI 첨삭 비동기 enqueue. 즉시 jobId 반환.
+     * 프론트는 GET /ai-feedback/jobs/{jobId} 로 polling.
+     */
     @PostMapping("/posts/{postId}/ai-feedback")
-    fun aiFeedback(@PathVariable postId: String): ApiResponse<AiFeedbackResult> {
+    fun aiFeedback(@PathVariable postId: String): ApiResponse<AiFeedbackJobEnqueueResponse> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
-        val result = wisdomService.generateAiFeedback(postId)
+        val reviewerId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        val result = wisdomService.enqueueAiFeedback(postId, reviewerId)
+        return ApiResponse(success = true, data = result)
+    }
+
+    @GetMapping("/ai-feedback/jobs/{jobId}")
+    fun aiFeedbackJob(@PathVariable jobId: String): ApiResponse<AiFeedbackJobStatusResponse> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        val result = wisdomService.getAiFeedbackJob(jobId)
         return ApiResponse(success = true, data = result)
     }
 

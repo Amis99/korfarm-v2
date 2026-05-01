@@ -27,6 +27,8 @@ class WisdomService(
     private val userRepository: UserRepository,
     private val aiWisdomClient: AiWisdomClient,
     private val studyPlanCellRepository: StudyPlanCellRepository,
+    private val aiFeedbackJobRepository: AiFeedbackJobRepository,
+    private val aiFeedbackJobService: AiFeedbackJobService,
     @Value("\${app.upload.dir:./uploads}") private val uploadDir: String
 ) {
     private val log = LoggerFactory.getLogger(WisdomService::class.java)
@@ -496,6 +498,53 @@ class WisdomService(
             throw ApiException("NO_CONTENT", "글 내용이 없습니다. 파일 업로드 글은 먼저 OCR 변환이 필요합니다.", HttpStatus.BAD_REQUEST)
         }
         return aiWisdomClient.generateFeedback(text, post.levelId, post.topicLabel)
+    }
+
+    /**
+     * AI 첨삭 비동기 enqueue.
+     * 동일 post 에 PENDING/RUNNING job 이 있으면 그 jobId 재사용 (중복 호출 방지).
+     */
+    @Transactional
+    fun enqueueAiFeedback(postId: String, requesterId: String): AiFeedbackJobEnqueueResponse {
+        val post = postRepository.findById(postId).orElseThrow {
+            ApiException("NOT_FOUND", "글을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        if (post.content.isNullOrBlank()) {
+            throw ApiException("NO_CONTENT", "글 내용이 없습니다. 파일 업로드 글은 먼저 OCR 변환이 필요합니다.", HttpStatus.BAD_REQUEST)
+        }
+        // 진행 중인 job 재사용
+        val existing = aiFeedbackJobRepository.findFirstByPostIdAndStatusInOrderByCreatedAtDesc(
+            postId,
+            listOf(AiFeedbackJobStatus.PENDING, AiFeedbackJobStatus.RUNNING)
+        )
+        if (existing != null) {
+            return AiFeedbackJobEnqueueResponse(jobId = existing.id, status = existing.status)
+        }
+        val job = AiFeedbackJobEntity(
+            id = IdGenerator.newId("aifb"),
+            postId = postId,
+            requestedBy = requesterId,
+            status = AiFeedbackJobStatus.PENDING
+        )
+        aiFeedbackJobRepository.save(job)
+        // 트랜잭션 커밋 후 비동기 실행하도록 외부 빈에 위임
+        aiFeedbackJobService.runJob(job.id)
+        return AiFeedbackJobEnqueueResponse(jobId = job.id, status = job.status)
+    }
+
+    @Transactional(readOnly = true)
+    fun getAiFeedbackJob(jobId: String): AiFeedbackJobStatusResponse {
+        val job = aiFeedbackJobRepository.findById(jobId).orElseThrow {
+            ApiException("NOT_FOUND", "AI 첨삭 작업을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        return AiFeedbackJobStatusResponse(
+            jobId = job.id,
+            status = job.status,
+            comment = job.resultComment,
+            correction = job.resultCorrection,
+            errorMessage = job.errorMessage,
+            completedAt = job.completedAt
+        )
     }
 
     fun ocrPost(postId: String): OcrResult {

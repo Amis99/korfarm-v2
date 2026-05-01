@@ -8,6 +8,7 @@ import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
+import java.time.Duration
 import java.util.Base64
 
 data class AiFeedbackResult(
@@ -29,7 +30,11 @@ class AiWisdomClient(
     private val aiPromptRepository: AiPromptRepository
 ) {
     private val logger = LoggerFactory.getLogger(AiWisdomClient::class.java)
-    private val httpClient = HttpClient.newHttpClient()
+    // 비동기 job 내부에서 호출되지만 백엔드가 영원히 대기하지 않도록 안전장치
+    private val httpClient = HttpClient.newBuilder()
+        .connectTimeout(Duration.ofSeconds(20))
+        .build()
+    private val requestTimeout: Duration = Duration.ofMinutes(5)
     private val modelId = "claude-sonnet-4-6"
 
     // ─── OCR ────────────────────────────────────────────
@@ -237,6 +242,7 @@ class AiWisdomClient(
     private fun callApiRaw(requestBody: String): String {
         val request = HttpRequest.newBuilder()
             .uri(URI.create(apiUrl))
+            .timeout(requestTimeout)
             .header("Content-Type", "application/json")
             .header("x-api-key", apiKey)
             .header("anthropic-version", "2023-06-01")

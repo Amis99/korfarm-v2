@@ -101,3 +101,18 @@ data class AiBatchResultItem(
     val status: String,
     val reason: String? = null
 )
+
+// AI 첨삭 비동기 job
+data class AiFeedbackJobEnqueueResponse(
+    val jobId: String,
+    val status: String
+)
+
+data class AiFeedbackJobStatusResponse(
+    val jobId: String,
+    val status: String,
+    val comment: String? = null,
+    val correction: String? = null,
+    val errorMessage: String? = null,
+    val completedAt: LocalDateTime? = null
+)
