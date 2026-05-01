@@ -52,6 +52,11 @@ export default function StudentSelector({ value, onChange, showStudent = true, l
       .catch(() => setStudents([]));
   }, [showStudent]);
 
+  // 백엔드 SNAKE_CASE 응답 (org_id 등) 도 호환되도록 fallback
+  const orgIdOf = (o) => o?.id || o?.orgId || o?.org_id;
+  const classIdOf = (c) => c?.id || c?.classId || c?.class_id;
+  const userIdOf = (s) => s?.id || s?.userId || s?.user_id;
+
   const filteredClasses = useMemo(() => {
     if (!orgId) return classes;
     return classes.filter((c) => (c.orgId || c.org_id) === orgId);
@@ -63,7 +68,7 @@ export default function StudentSelector({ value, onChange, showStudent = true, l
       list = list.filter((s) => {
         const sOrgId = s.orgId || s.org_id;
         if (sOrgId) return sOrgId === orgId;
-        const matchOrg = orgs.find((o) => o.id === orgId);
+        const matchOrg = orgs.find((o) => orgIdOf(o) === orgId);
         return matchOrg && s.org === matchOrg.name;
       });
     }
@@ -71,7 +76,7 @@ export default function StudentSelector({ value, onChange, showStudent = true, l
       list = list.filter((s) => {
         const ids = s.classIds || s.class_ids || [];
         if (Array.isArray(ids) && ids.includes(classId)) return true;
-        const cls = classes.find((c) => c.id === classId);
+        const cls = classes.find((c) => classIdOf(c) === classId);
         if (!cls) return false;
         const names = s.classNames || s.class_names || [];
         return Array.isArray(names) && names.includes(cls.name);
@@ -88,11 +93,14 @@ export default function StudentSelector({ value, onChange, showStudent = true, l
   const classDisabled = isHq && !orgId;
   const studentDisabled = isHq && !orgId;
 
-  // 옵션 배열로 변환 — SearchableSelect 의 통일 포맷
+  // 옵션 배열로 변환 — SearchableSelect 의 통일 포맷 (백엔드 SNAKE_CASE 호환)
   const orgOptions = useMemo(() => {
     const HQ_ORG_ID = "org_hq";
-    const hq = orgs.find((o) => o.id === HQ_ORG_ID);
-    const others = orgs
+    const normalized = orgs
+      .map((o) => ({ id: orgIdOf(o), name: o.name }))
+      .filter((o) => o.id);
+    const hq = normalized.find((o) => o.id === HQ_ORG_ID);
+    const others = normalized
       .filter((o) => o.id !== HQ_ORG_ID)
       .sort((a, b) => (a.name || "").localeCompare(b.name || "", "ko"));
     const list = hq ? [hq, ...others] : others;
@@ -100,17 +108,19 @@ export default function StudentSelector({ value, onChange, showStudent = true, l
   }, [orgs]);
 
   const classOptions = useMemo(
-    () => filteredClasses.map((c) => ({ value: c.id, label: c.name || c.id })),
+    () => filteredClasses
+      .map((c) => ({ value: classIdOf(c), label: c.name || classIdOf(c) }))
+      .filter((c) => c.value),
     [filteredClasses]
   );
 
   const studentOptions = useMemo(
     () => filteredStudents.map((s) => {
-      const id = s.id || s.userId;
-      const name = s.name || s.userName || id;
+      const id = userIdOf(s);
+      const name = s.name || s.userName || s.user_name || id;
       const school = s.school ? ` · ${s.school}` : "";
       return { value: id, label: `${name}${school}` };
-    }),
+    }).filter((o) => o.value),
     [filteredStudents]
   );
 
@@ -121,7 +131,7 @@ export default function StudentSelector({ value, onChange, showStudent = true, l
         options={orgOptions}
         value={orgId}
         onChange={(next) => update({ orgId: next, classId: "", userId: "" })}
-        placeholder={isHq ? "기관 선택" : (orgs.find((o) => o.id === orgId)?.name || "내 기관")}
+        placeholder={isHq ? "기관 선택" : (orgs.find((o) => orgIdOf(o) === orgId)?.name || "내 기관")}
         emptyOptionLabel="기관 전체"
         disabled={!isHq}
         minWidth={180}
