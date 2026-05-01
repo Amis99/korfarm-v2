@@ -355,40 +355,156 @@
   }
 }
 
-/* ── 인쇄용 ── */
+/* ── 인쇄 전용 레이아웃 ── */
+
+/* 화면에서는 wisdom-print-only 영역을 완전히 숨김 */
+.wisdom-print-only {
+  display: none;
+}
+
 @media print {
-  /* 어드민 레이아웃 숨김 */
+  /* 어드민 레이아웃·페이지 본문 모두 숨김 — 인쇄 영역만 노출 */
   .admin-side,
   .admin-toolbar-row,
   .admin-topbar,
   .admin-backdrop,
   .wisdom-action-bar,
-  .ms-ann-remove {
+  .admin-card,
+  .ms-ann-remove,
+  section {
     display: none !important;
   }
   .admin-page {
     background: #fff !important;
+    min-height: 0 !important;
   }
   .admin-main {
     padding: 0 !important;
+    gap: 0 !important;
   }
   .admin-main > * {
     max-width: none !important;
     box-shadow: none !important;
+    margin: 0 !important;
   }
-  /* 페이지 나누기 — 첨삭이 끊기지 않도록 */
-  .ms-cell-row {
-    break-inside: avoid;
+
+  @page {
+    size: A4 portrait;
+    margin: 12mm 14mm;
+  }
+
+  body {
+    background: #fff !important;
+  }
+
+  .wisdom-print-only {
+    display: block !important;
+  }
+
+  .wisdom-print-page {
+    page-break-after: always;
+    page-break-inside: avoid;
+    box-sizing: border-box;
+    width: 100%;
+    color: #1a1a1a;
+    font-family: var(--font-body, "Noto Sans KR", sans-serif);
+  }
+
+  .wisdom-print-page:last-child {
+    page-break-after: auto;
+  }
+
+  /* 헤더: 주제 + 학년 + 학생명 */
+  .wpp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1.5pt solid #333;
+    padding-bottom: 6pt;
+    margin-bottom: 8pt;
+  }
+  .wpp-title {
+    font-size: 13pt;
+    font-weight: 700;
+  }
+  .wpp-meta {
+    font-size: 10pt;
+    color: #444;
+    display: flex;
+    gap: 14pt;
+  }
+
+  /* 원고지 — 가로폭 100% / 정사각형 셀 → A4 가용 영역에 자동 맞춤 */
+  .wpp-grid {
+    display: grid;
+    border: 0.8pt solid #333;
+    background: #fff;
+    width: 100%;
+  }
+  .wpp-cell {
+    aspect-ratio: 1;
+    border: 0.3pt solid #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10pt;
+    font-family: inherit;
+    color: #1a1a1a;
+    position: relative;
+    line-height: 1;
+  }
+  .wpp-cell.wpp-filled {
+    background: #fff;
+  }
+  .wpp-cell.wpp-annotated {
+    border-bottom: 1.4pt solid #c0392b;
+  }
+  .wpp-ann-badge {
+    position: absolute;
+    top: -3pt;
+    left: -3pt;
+    background: #c0392b;
+    color: #fff;
+    border-radius: 50%;
+    width: 11pt;
+    height: 11pt;
+    font-size: 7pt;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  /* 마지막 페이지 — 총평 + 부분 첨삭 정리 */
+  .wisdom-print-comment-page .wpp-comments-block {
+    margin-top: 10pt;
+  }
+  .wisdom-print-comment-page h3 {
+    font-size: 12pt;
+    margin: 10pt 0 4pt;
+    border-bottom: 0.5pt solid #aaa;
+    padding-bottom: 2pt;
+  }
+  .wisdom-print-comment-page p {
+    font-size: 10.5pt;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    margin: 4pt 0;
+  }
+  .wisdom-print-comment-page ol {
+    font-size: 10pt;
+    line-height: 1.55;
+    padding-left: 18pt;
+    margin: 4pt 0;
+  }
+  .wisdom-print-comment-page ol li {
+    margin-bottom: 5pt;
     page-break-inside: avoid;
   }
-  .ms-correction-item {
-    color: #c0392b !important;
-  }
-  /* 입력란을 텍스트로 보이도록 — 인쇄 모드에선 textarea 대신 text 그대로 */
-  .ms-correction-item textarea,
-  .ms-correction-item input {
-    border: none !important;
-    color: #c0392b !important;
-    background: transparent !important;
+  /* 부분 첨삭 번호 색 — 본문 어노테이션과 같은 빨강 */
+  .wisdom-print-comment-page ol li::marker {
+    color: #c0392b;
+    font-weight: 700;
   }
 }

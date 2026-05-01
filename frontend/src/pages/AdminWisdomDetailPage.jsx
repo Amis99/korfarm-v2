@@ -22,6 +22,37 @@ const GRID_CONFIG = {
   wittgenstein3: { cols: 20, rows: 25 },
 };
 
+const LEVEL_LABEL = {
+  saussure1: "초1", saussure2: "초2", saussure3: "초3",
+  frege1: "초4", frege2: "초5", frege3: "초6",
+  russell1: "중1", russell2: "중2", russell3: "중3",
+  wittgenstein1: "고1", wittgenstein2: "고2", wittgenstein3: "고3",
+};
+
+/** 원본 텍스트 한 페이지를 (cols x rows) 셀 배열로 변환 — \n 만나면 행 끝까지 패딩 */
+function buildPrintCells(text, cols, rows) {
+  const totalCells = cols * rows;
+  const result = [];
+  let cellIdx = 0;
+  for (let i = 0; i < text.length && cellIdx < totalCells; i++) {
+    const ch = text[i];
+    if (ch === "\n") {
+      const remainder = cellIdx % cols;
+      if (remainder !== 0) {
+        for (let pad = remainder; pad < cols; pad++) {
+          result.push({ ch: "", charIdx: -1 });
+          cellIdx++;
+        }
+      }
+    } else {
+      result.push({ ch, charIdx: i });
+      cellIdx++;
+    }
+  }
+  while (result.length < totalCells) result.push({ ch: "", charIdx: -1 });
+  return result;
+}
+
 function AdminWisdomDetailPage() {
   const { postId } = useParams();
   const navigate = useNavigate();
@@ -405,6 +436,78 @@ function AdminWisdomDetailPage() {
               </div>
             </div>
       </section>
+
+      {/* ── 인쇄 전용 레이아웃 (화면에선 숨김, 인쇄 시에만 표시) ── */}
+      <div className="wisdom-print-only" aria-hidden="true">
+        {hasContent && (() => {
+          const pages = (post.content || "").split("\f");
+          const printAnnotations = annotations || [];
+          const printCommentText = comment || "";
+          const levelLabel = LEVEL_LABEL[post.level_id] || post.level_id;
+          const renderHeader = () => (
+            <header className="wpp-header">
+              <div className="wpp-title">{post.topic_label}</div>
+              <div className="wpp-meta">
+                <span>{levelLabel}</span>
+                <span>{post.author_name || post.author_id || ""}</span>
+              </div>
+            </header>
+          );
+          return (
+            <>
+              {pages.map((pageText, pageIdx) => {
+                const printCells = buildPrintCells(pageText, gridCols, gridRows);
+                const pageAnns = printAnnotations.filter((a) => a.page === pageIdx);
+                return (
+                  <div key={`pp-${pageIdx}`} className="wisdom-print-page">
+                    {renderHeader()}
+                    <div
+                      className="wpp-grid"
+                      style={{ gridTemplateColumns: `repeat(${gridCols}, 1fr)` }}
+                    >
+                      {printCells.map((cell, idx) => {
+                        const ann = cell.charIdx >= 0
+                          ? pageAnns.find((a) => cell.charIdx >= a.startIdx && cell.charIdx <= a.endIdx)
+                          : null;
+                        const isFirst = ann && ann.startIdx === cell.charIdx;
+                        const cls = ["wpp-cell"];
+                        if (cell.ch) cls.push("wpp-filled");
+                        if (ann) cls.push("wpp-annotated");
+                        return (
+                          <div key={idx} className={cls.join(" ")}>
+                            {isFirst && <span className="wpp-ann-badge">{ann.id}</span>}
+                            {cell.ch}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+              {/* 마지막: 코멘트 페이지 */}
+              <div className="wisdom-print-page wisdom-print-comment-page">
+                {renderHeader()}
+                {printCommentText && (
+                  <div className="wpp-comments-block">
+                    <h3>총평</h3>
+                    <p>{printCommentText}</p>
+                  </div>
+                )}
+                {printAnnotations.length > 0 && (
+                  <div className="wpp-comments-block">
+                    <h3>부분 첨삭</h3>
+                    <ol>
+                      {printAnnotations.map((a) => (
+                        <li key={a.id}>{a.comment}</li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
+              </div>
+            </>
+          );
+        })()}
+      </div>
     </AdminLayout>
   );
 }
