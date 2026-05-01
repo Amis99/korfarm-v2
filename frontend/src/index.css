@@ -30,6 +30,35 @@ body {
   background: radial-gradient(circle at top, #fff7eb 0%, #f3e6d6 40%, #efe1d1 100%);
   color: var(--text);
   font-family: var(--font-body);
+  /* 전역 텍스트 선택(드래그) 비활성화 — 클릭 시 파란 하이라이트 방지.
+   * 입력 필드와 어드민 에디터의 드래그 선택 모드는 아래 셀렉터로 예외 처리. */
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* 입력 필드는 어디서든 항상 텍스트 선택·복사·붙여넣기 가능해야 함 */
+input,
+textarea,
+select,
+[contenteditable="true"],
+[contenteditable=""] {
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+}
+
+/* 어드민 콘텐츠 에디터의 드래그 선택 모드 — HighlightPicker / EvidenceRangePicker / TextSelectEditor.
+ * 본문에서 마우스 드래그로 범위를 잡아 정답 영역·하이라이트를 등록하는 기능. */
+.ce-select-mode,
+.ce-select-mode *,
+.dq-evp-passage,
+.dq-evp-passage * {
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 body::before {
