@@ -1,6 +1,6 @@
 .admin-page {
   /* 라이트 그린 테마 — 페이지 본문 */
-  --admin-bg: #eef4ec;             /* 옅은 그린 페이지 배경 */
+  --admin-bg: #eef4ec;             /* 옅은 그린 페이지 배경 (배경 이미지 fallback) */
   --admin-panel: #ffffff;          /* 흰색 카드/모달 */
   --admin-panel-light: #f5f9f3;    /* 더 옅은 그린 보조 패널 */
   --admin-accent: #2d6a4f;         /* 짙은 그린 액센트 */
@@ -13,7 +13,9 @@
   --admin-side-muted: #c8d6cf;
   --admin-side-active-bg: rgba(255, 255, 255, 0.14);
   font-family: var(--font-body);
-  background: var(--admin-bg);
+  /* 배경: 액자 장식 이미지 전체 화면 + 옅은 그린 fallback */
+  background: var(--admin-bg) url("/관리자%20메뉴%20배경.png") no-repeat center top fixed;
+  background-size: cover;
   color: var(--admin-text);
   min-height: 100vh;
 }
