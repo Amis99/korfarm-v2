@@ -2,6 +2,8 @@ import { useState } from "react";
 import { apiPatch } from "../utils/api";
 import KorfarmContentSearchModal from "./KorfarmContentSearchModal";
 import TestSearchModal from "./TestSearchModal";
+import WisdomTopicSearchModal from "./WisdomTopicSearchModal";
+import { isFreeTopic } from "../constants/wisdomFreeTopic";
 import "../styles/admin-detail.css";
 
 const ASSET_LABELS = {
@@ -41,6 +43,7 @@ export default function CellAssignModal({ cell, scope, asset, onClose, onAssigne
   });
   const [showContentSearch, setShowContentSearch] = useState(false);
   const [showTestSearch, setShowTestSearch] = useState(false);
+  const [showTopicSearch, setShowTopicSearch] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
@@ -58,6 +61,14 @@ export default function CellAssignModal({ cell, scope, asset, onClose, onAssigne
     setShowTestSearch(false);
   };
 
+  const handleTopicSelected = (topic) => {
+    // topic.topicKey 가 free_topic 이면 자유 주제. 학생이 본인 제목 입력하게 됨.
+    setRefId(topic.topicKey);
+    setRefLabel(topic.topicLabel);
+    if (!label) setLabel(topic.topicLabel);
+    setShowTopicSearch(false);
+  };
+
   const handleSubmit = async () => {
     setError("");
     // 자산 종류별 검증
@@ -68,7 +79,7 @@ export default function CellAssignModal({ cell, scope, asset, onClose, onAssigne
     } else if (assetType === "test") {
       if (!refId) { setError("테스트를 선택해 주세요."); return; }
     } else if (assetType === "writing") {
-      if (!refId && !label.trim()) { setError("주제 또는 자유주제 제목을 입력해 주세요."); return; }
+      if (!refId) { setError("주제를 선택해 주세요."); return; }
     }
     if (!dueDate) { setError("마감 기한을 선택해 주세요."); return; }
     setSaving(true);
@@ -101,6 +112,12 @@ export default function CellAssignModal({ cell, scope, asset, onClose, onAssigne
         <TestSearchModal
           onSelect={handleTestSelected}
           onClose={() => setShowTestSearch(false)}
+        />
+      )}
+      {showTopicSearch && (
+        <WisdomTopicSearchModal
+          onSelect={handleTopicSelected}
+          onClose={() => setShowTopicSearch(false)}
         />
       )}
       <div className="admin-detail-modal-backdrop" onClick={close}>
@@ -192,16 +209,45 @@ export default function CellAssignModal({ cell, scope, asset, onClose, onAssigne
             )}
 
             {assetType === "writing" && (
-              <div style={{
-                marginBottom: 14,
-                padding: 10,
-                background: "rgba(255,193,7,0.1)",
-                border: "1px dashed rgba(255,193,7,0.5)",
-                borderRadius: 6,
-                fontSize: 12,
-                color: "#8a6d00",
-              }}>
-                지식과 지혜 주제 검색·자유주제 기능은 다음 단계에서 추가됩니다.
+              <div style={{ marginBottom: 14 }}>
+                <label style={{ display: "block", fontSize: 13, fontWeight: 600, marginBottom: 6 }}>
+                  글쓰기 주제 <span style={{ color: "#c0392b" }}>*</span>
+                </label>
+                <div style={{ display: "flex", gap: 8 }}>
+                  <input
+                    type="text"
+                    value={refLabel || refId}
+                    placeholder="주제를 검색해 선택하세요 (자유 주제 포함)"
+                    style={{ ...inputStyle, flex: 1, background: "#f5f9f3" }}
+                    readOnly
+                  />
+                  <button className="admin-detail-btn" onClick={() => setShowTopicSearch(true)}>
+                    검색
+                  </button>
+                </div>
+                {isFreeTopic(refId) && (
+                  <div style={{
+                    marginTop: 8,
+                    padding: 8,
+                    background: "rgba(255,193,7,0.1)",
+                    border: "1px dashed rgba(255,167,38,0.4)",
+                    borderRadius: 6,
+                    fontSize: 12,
+                    color: "#8a6d00",
+                  }}>
+                    자유 주제로 배정됩니다. 학생이 글을 쓸 때 본인이 직접 주제(제목)를 입력합니다.
+                  </div>
+                )}
+                <label style={{ display: "block", fontSize: 12, color: "var(--admin-muted)", marginTop: 8 }}>
+                  표시 라벨 (선택)
+                </label>
+                <input
+                  type="text"
+                  value={label}
+                  onChange={(e) => setLabel(e.target.value)}
+                  placeholder="학생에게 보일 이름"
+                  style={inputStyle}
+                />
               </div>
             )}
 
@@ -230,7 +276,7 @@ export default function CellAssignModal({ cell, scope, asset, onClose, onAssigne
             <button
               className="admin-detail-btn primary"
               onClick={handleSubmit}
-              disabled={saving || assetType === "writing"}
+              disabled={saving}
             >
               {saving ? "배정 중..." : "배정"}
             </button>

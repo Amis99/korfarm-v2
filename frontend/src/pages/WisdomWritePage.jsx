@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { apiPost, apiUploadFile, API_BASE, TOKEN_KEY } from "../utils/api";
 import ManuscriptGrid from "../components/ManuscriptGrid";
+import { FREE_TOPIC_KEY, FREE_TOPIC_DEFAULT_LABEL, withFreeTopic, isFreeTopic } from "../constants/wisdomFreeTopic";
 import "../styles/wisdom.css";
 
 const LEVEL_NAMES = {
@@ -36,6 +37,8 @@ function WisdomWritePage() {
 
   const [topics, setTopics] = useState([]);
   const [topicKey, setTopicKey] = useState(searchParams.get("topicKey") || "");
+  // 자유 주제 — 학생이 직접 입력하는 제목
+  const [freeTopicTitle, setFreeTopicTitle] = useState("");
   const [tab, setTab] = useState("manuscript");
   const [content, setContent] = useState("");
   const [files, setFiles] = useState([]);
@@ -45,11 +48,12 @@ function WisdomWritePage() {
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}wisdom-topics/${levelId}.json`)
       .then((r) => (r.ok ? r.json() : []))
-      .then(setTopics)
-      .catch(() => setTopics([]));
+      .then((data) => setTopics(withFreeTopic(data)))
+      .catch(() => setTopics(withFreeTopic([])));
   }, [levelId]);
 
   const selectedTopic = topics.find((t) => t.key === topicKey);
+  const isFree = isFreeTopic(topicKey);
 
   const handleFileSelect = (e) => {
     const selected = Array.from(e.target.files || []);
@@ -83,6 +87,9 @@ function WisdomWritePage() {
 
   const handleSubmit = async () => {
     if (!topicKey) { setError("주제를 선택해주세요."); return; }
+    if (isFree && !freeTopicTitle.trim()) {
+      setError("자유 주제 제목을 입력해주세요."); return;
+    }
     if (tab === "manuscript" && !content.trim()) { setError("내용을 입력해주세요."); return; }
     if (tab === "upload" && files.length === 0) { setError("파일을 선택해주세요."); return; }
     setError("");
@@ -94,10 +101,15 @@ function WisdomWritePage() {
         attachmentIds = await Promise.all(files.map(presignAndUpload));
       }
 
+      // 자유 주제는 topic_label 에 학생이 입력한 제목을 저장. 게시판은 같은 free_topic 키로 묶임.
+      const finalTopicLabel = isFree
+        ? (freeTopicTitle.trim() || FREE_TOPIC_DEFAULT_LABEL)
+        : (selectedTopic?.label || topicKey);
+
       await apiPost("/v1/wisdom/posts", {
         level_id: levelId,
         topic_key: topicKey,
-        topic_label: selectedTopic?.label || topicKey,
+        topic_label: finalTopicLabel,
         submission_type: tab === "manuscript" ? "manuscript" : "upload",
         content: tab === "manuscript" ? content : null,
         attachment_ids: attachmentIds,
@@ -146,6 +158,24 @@ function WisdomWritePage() {
             ))}
           </select>
         </div>
+
+        {isFree && (
+          <div className="wis-form-group">
+            <label>자유 주제 제목 <span style={{ color: "#e74c3c" }}>*</span></label>
+            <input
+              type="text"
+              className="wis-filter-select"
+              value={freeTopicTitle}
+              onChange={(e) => setFreeTopicTitle(e.target.value)}
+              placeholder="내가 쓸 글의 주제(제목)를 입력하세요"
+              style={{ width: "100%" }}
+              maxLength={80}
+            />
+            <p style={{ fontSize: 12, color: "#888", marginTop: 4 }}>
+              자유 주제 게시판은 모든 자유 주제 글이 모입니다. 익명으로 표시되며 댓글로 소통할 수 있어요.
+            </p>
+          </div>
+        )}
 
         <div className="wis-tabs">
           <button className={`wis-tab ${tab === "manuscript" ? "active" : ""}`} onClick={() => setTab("manuscript")}>

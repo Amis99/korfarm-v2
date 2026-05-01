@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { apiGet, apiDelete } from "../utils/api";
 import { useAuth } from "../hooks/useAuth";
+import { withFreeTopic } from "../constants/wisdomFreeTopic";
 import "../styles/wisdom.css";
 
 const LEVEL_NAMES = {
@@ -43,8 +44,8 @@ function WisdomBoardPage() {
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}wisdom-topics/${levelId}.json`)
       .then((r) => (r.ok ? r.json() : []))
-      .then(setTopics)
-      .catch(() => setTopics([]));
+      .then((data) => setTopics(withFreeTopic(data)))
+      .catch(() => setTopics(withFreeTopic([])));
   }, [levelId]);
 
   useEffect(() => {

@@ -495,17 +495,18 @@ class StudyPlanService(
             }
             "writing" -> {
                 val cfg = parseWritingConfig(asset.configJson)
+                // Phase 3: 셀 단위 배정이 우선 — cell.cellRefId(topicKey), cell.assignedLabel(라벨)
                 CellAction(
                     kind = "write",
                     levelId = cfg["levelId"] ?: asset.refId,
-                    topicKey = cfg["topicKey"],
-                    topicLabel = cfg["topicLabel"] ?: asset.label,
+                    topicKey = cell.cellRefId ?: cfg["topicKey"],
+                    topicLabel = cell.assignedLabel ?: cfg["topicLabel"] ?: asset.label,
                     wisdomPostId = wisdomPostByCellId[cell.id]
                 )
             }
             "test" -> CellAction(
                 kind = "test",
-                testId = asset.refId,
+                testId = cell.cellRefId ?: asset.refId,
                 hasSubmission = cell.id in testSubmissionCellIds
             )
             "activity" -> CellAction(kind = "activity")
