@@ -134,20 +134,50 @@
   font-weight: 700;
   white-space: nowrap;
 }
-.cell-badge.unassigned { background: rgba(158,158,158,0.1); color: #bbb; border: 1px dashed rgba(158,158,158,0.4); }
-.cell-badge.pending { background: rgba(158,158,158,0.15); color: #999; }
-.cell-badge.in_progress { background: rgba(33,150,243,0.15); color: #64b5f6; }
-.cell-badge.submitted { background: rgba(33,150,243,0.15); color: #64b5f6; }
-.cell-badge.partial { background: rgba(255,152,0,0.15); color: #ffa726; }
-.cell-badge.completed { background: rgba(76,175,80,0.2); color: #66bb6a; }
-.cell-badge.scored { background: rgba(255,152,0,0.2); color: #ffa726; }
-.cell-badge.passed { background: rgba(76,175,80,0.2); color: #66bb6a; }
-.cell-badge.retry { background: rgba(244,67,54,0.15); color: #ef5350; }
+.cell-badge.unassigned {
+  background: rgba(158,158,158,0.06);
+  color: #888;
+  border: 1.5px dashed rgba(158,158,158,0.5);
+  cursor: pointer;
+}
+.cell-badge.unassigned:hover {
+  background: rgba(45,106,79,0.08);
+  border-color: var(--admin-accent, #2d6a4f);
+  color: var(--admin-accent-strong, #1f4a37);
+}
+.cell-badge.pending { background: rgba(255,193,7,0.18); color: #8a6d00; }
+.cell-badge.in_progress { background: rgba(33,150,243,0.18); color: #1565c0; }
+.cell-badge.submitted { background: rgba(33,150,243,0.18); color: #1565c0; }
+.cell-badge.partial { background: rgba(255,152,0,0.18); color: #ef6c00; }
+.cell-badge.completed { background: rgba(76,175,80,0.28); color: #2e7d32; font-weight: 700; }
+.cell-badge.scored { background: rgba(255,152,0,0.22); color: #ef6c00; }
+.cell-badge.passed { background: rgba(76,175,80,0.28); color: #2e7d32; font-weight: 700; }
+.cell-badge.reviewed { background: rgba(76,175,80,0.28); color: #2e7d32; font-weight: 700; }
+.cell-badge.retry { background: rgba(244,67,54,0.18); color: #c62828; }
 /* 하위 호환 */
-.cell-badge.approved { background: rgba(76,175,80,0.2); color: #66bb6a; }
-.cell-badge.rejected { background: rgba(244,67,54,0.15); color: #ef5350; }
-.cell-badge.grading { background: rgba(255,152,0,0.15); color: #ffa726; }
-.cell-badge.failed { background: rgba(244,67,54,0.2); color: #ef5350; }
+.cell-badge.approved { background: rgba(76,175,80,0.28); color: #2e7d32; font-weight: 700; }
+.cell-badge.rejected { background: rgba(244,67,54,0.18); color: #c62828; }
+.cell-badge.grading { background: rgba(255,152,0,0.18); color: #ef6c00; }
+.cell-badge.failed { background: rgba(244,67,54,0.22); color: #c62828; }
+/* 기한 지났는데 미완료 — 회색, 클릭하면 재배정 */
+.cell-badge.overdue {
+  background: rgba(120,120,120,0.20) !important;
+  color: #555 !important;
+  border: 1px solid rgba(120,120,120,0.4) !important;
+  font-weight: 500 !important;
+  cursor: pointer;
+}
+.cell-overdue-tag {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 1px 5px;
+  background: rgba(244,67,54,0.18);
+  color: #c62828;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+.cell-asgn-label { opacity: 0.9; font-weight: 500; }
 
 /* 테스트 판정 텍스트 (점수 아래 작게) */
 .cell-verdict {

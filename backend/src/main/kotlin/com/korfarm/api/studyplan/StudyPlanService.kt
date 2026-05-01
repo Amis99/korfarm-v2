@@ -525,25 +525,65 @@ class StudyPlanService(
         }
     }
 
-    // ── 관리자: 국어농장 셀 콘텐츠 배정 ──
+    // ── 관리자: 셀 배정 (모든 자산 종류 통일) ──
 
+    /**
+     * 셀에 콘텐츠/테스트/주제/활동을 배정한다.
+     * - korfarm: cellRefId 필수 (contents.id), assignedLabel 선택
+     * - test:    cellRefId 필수 (tests.id), assignedLabel 선택
+     * - writing: cellRefId 선택 (wisdom_topics.id 또는 자유주제 표시), assignedLabel 선택 (자유주제 학생 제목)
+     * - activity: cellRefId 없음, assignedLabel 필수
+     *
+     * 마감일(dueAt) 은 필수. 클라이언트가 안 주면 default = 오늘 + 7일 23:59.
+     * 재배정도 허용 (만료/완료 셀 다시 사용).
+     */
     @Transactional
     fun assignCellContent(cellId: String, req: AssignCellContentRequest): StudyPlanCellEntity {
         val cell = findCell(cellId)
         val asset = assetRepo.findById(cell.assetId).orElseThrow {
             ApiException("NOT_FOUND", "asset not found", HttpStatus.NOT_FOUND)
         }
-        if (asset.assetType != "korfarm") {
-            throw ApiException("BAD_REQUEST", "국어농장 에셋만 콘텐츠 배정이 가능합니다", HttpStatus.BAD_REQUEST)
+        when (asset.assetType) {
+            "activity" -> {
+                if (req.assignedLabel.isNullOrBlank()) {
+                    throw ApiException("BAD_REQUEST", "활동 이름을 입력해 주세요", HttpStatus.BAD_REQUEST)
+                }
+            }
+            "korfarm", "test" -> {
+                if (req.cellRefId.isNullOrBlank()) {
+                    throw ApiException("BAD_REQUEST", "${asset.assetType} 자산은 ref id 가 필요합니다", HttpStatus.BAD_REQUEST)
+                }
+            }
+            "writing" -> {
+                // ref 없거나 자유주제일 수 있음 — 단 어느 쪽이든 라벨이 있어야
+                if (req.cellRefId.isNullOrBlank() && req.assignedLabel.isNullOrBlank()) {
+                    throw ApiException("BAD_REQUEST", "주제를 선택하거나 자유주제 제목을 입력해 주세요", HttpStatus.BAD_REQUEST)
+                }
+            }
         }
-        if (cell.status != "unassigned") {
-            throw ApiException("BAD_REQUEST", "배정 전 상태의 셀만 콘텐츠를 배정할 수 있습니다", HttpStatus.BAD_REQUEST)
-        }
+
         cell.cellRefId = req.cellRefId
+        cell.assignedLabel = req.assignedLabel
+        cell.dueAt = parseDueAt(req.dueAt) ?: LocalDate.now().plusDays(7).atTime(23, 59)
+        // 재배정 허용 — 이전이 completed/expired 였더라도 배정됨 상태로 리셋
         cell.status = "pending"
+        cell.score = null
+        cell.reviewedBy = null
+        cell.reviewedAt = null
         cellRepo.save(cell)
         createEvent(cell, "assigned")
         return cell
+    }
+
+    /** "yyyy-MM-dd" 또는 ISO LocalDateTime 모두 받기 */
+    private fun parseDueAt(s: String?): LocalDateTime? {
+        if (s.isNullOrBlank()) return null
+        return try {
+            if (s.length == 10) LocalDate.parse(s).atTime(23, 59)
+            else LocalDateTime.parse(s)
+        } catch (e: Exception) {
+            null
+        }
     }
 
     // ── 관리자: 통합 상태 변경 ──
@@ -959,15 +999,11 @@ class StudyPlanService(
         ))
     }
 
-    private fun initialCellStatus(asset: StudyPlanAssetEntity): String {
-        return when (asset.assetType) {
-            "korfarm" -> if (asset.refId != null) "pending" else "unassigned"
-            "activity" -> "unassigned"
-            "test" -> "pending"
-            "writing" -> "pending"
-            else -> "pending"
-        }
-    }
+    /**
+     * 모든 자산 종류는 셀 생성 시 'unassigned' (배정 전) 으로 시작.
+     * 셀 클릭 → 배정 모달 → 자산 종류별 ref 또는 라벨 + 마감일 입력.
+     */
+    private fun initialCellStatus(asset: StudyPlanAssetEntity): String = "unassigned"
 
     private fun createCell(planId: String, scopeId: String, asset: StudyPlanAssetEntity, userId: String): StudyPlanCellEntity {
         val status = initialCellStatus(asset)

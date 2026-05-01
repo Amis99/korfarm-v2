@@ -3,6 +3,7 @@ import { apiGet, apiPost, apiDelete } from "../../utils/api";
 import StudyPlanMatrix from "../StudyPlanMatrix";
 import StudyPlanCalendar from "../StudyPlanCalendar";
 import StudyPlanCellModal from "../StudyPlanCellModal";
+import CellAssignModal from "../CellAssignModal";
 import CalendarEventModal from "../CalendarEventModal";
 import PropagateDeltaModal from "./PropagateDeltaModal";
 
@@ -22,6 +23,7 @@ export default function StudentMatrixTab({ userId, focusCellId }) {
   const [error, setError] = useState(null);
 
   const [cellModal, setCellModal] = useState(null);
+  const [assignModal, setAssignModal] = useState(null); // 배정 전·만료 셀 클릭 시 배정 모달
   const [eventModal, setEventModal] = useState(null);
   const [propagateModal, setPropagateModal] = useState(null);
 
@@ -108,6 +110,11 @@ export default function StudentMatrixTab({ userId, focusCellId }) {
 
   const handleCellClick = (cell, scope, asset) => {
     if (!cell) return;
+    // 배정 전 또는 기한 지난 미완료 → 배정 모달 (재배정 가능)
+    if (cell.status === "unassigned" || cell.isOverdue) {
+      setAssignModal({ cell, scope, asset });
+      return;
+    }
     setCellModal({ cell, scope, asset });
   };
 
@@ -230,6 +237,15 @@ export default function StudentMatrixTab({ userId, focusCellId }) {
           asset={cellModal.asset}
           onClose={() => setCellModal(null)}
           onUpdated={() => { setCellModal(null); loadMatrix(); }}
+        />
+      )}
+      {assignModal && (
+        <CellAssignModal
+          cell={assignModal.cell}
+          scope={assignModal.scope}
+          asset={assignModal.asset}
+          onClose={() => setAssignModal(null)}
+          onAssigned={() => { setAssignModal(null); loadMatrix(); }}
         />
       )}
       {eventModal && (

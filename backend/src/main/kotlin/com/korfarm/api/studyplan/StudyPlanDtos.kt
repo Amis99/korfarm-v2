@@ -94,7 +94,12 @@ data class GradeCellRequest(
 )
 
 data class AssignCellContentRequest(
-    val cellRefId: String
+    /** 콘텐츠/테스트/주제 등 외부 ref 의 id. 활동(activity) 의 경우 null 허용 */
+    val cellRefId: String? = null,
+    /** 자유 텍스트 라벨 — 활동·자유주제 본인 입력. ref 가 있을 때 표시명 override 도 가능 */
+    val assignedLabel: String? = null,
+    /** 마감 기한 (ISO yyyy-MM-ddTHH:mm:ss 또는 yyyy-MM-dd). 배정 시 필수 */
+    val dueAt: String? = null
 )
 
 data class UpdateCellStatusRequest(
@@ -208,6 +213,12 @@ data class CellResponse(
     val assetKind: String? = null,
     val refId: String? = null,
     val cellRefId: String? = null,
+    /** 마감 기한 (ISO LocalDateTime). 배정 후에만 값 존재 */
+    val dueAt: String? = null,
+    /** 자유 텍스트 라벨 (활동·자유주제 학생 입력 등) */
+    val assignedLabel: String? = null,
+    /** 만료 여부 — dueAt < now 이면서 status NOT IN ('completed','submitted','reviewed') */
+    val isOverdue: Boolean = false,
     /** 셀 클릭 시 화면 전환에 필요한 정보. asset_type 별로 다른 필드. */
     val cellAction: CellAction? = null
 )
@@ -321,12 +332,18 @@ internal fun StudyPlanCellEntity.toResponse(
     asset: StudyPlanAssetEntity? = null,
     cellAction: CellAction? = null
 ): CellResponse {
+    val now = java.time.LocalDateTime.now()
+    val overdue = dueAt != null && dueAt!!.isBefore(now) &&
+        status !in setOf("completed", "submitted", "reviewed")
     return CellResponse(
         cellId = id, scopeId = scopeId, assetId = assetId,
         status = status, score = score, submissionCount = submissionCount,
         adminNote = adminNote, reviewedAt = reviewedAt?.toString(),
         assetType = asset?.assetType, assetKind = asset?.assetKind, refId = asset?.refId,
         cellRefId = cellRefId,
+        dueAt = dueAt?.toString(),
+        assignedLabel = assignedLabel,
+        isOverdue = overdue,
         cellAction = cellAction
     )
 }

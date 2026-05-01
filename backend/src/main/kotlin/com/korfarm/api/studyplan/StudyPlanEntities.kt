@@ -188,6 +188,14 @@ class StudyPlanCellEntity(
     @Column(name = "cell_ref_id")
     var cellRefId: String? = null,
 
+    /** 셀별 마감 기한 — 배정 시 필수, 만료(회색) 판정에 사용 */
+    @Column(name = "due_at")
+    var dueAt: LocalDateTime? = null,
+
+    /** 자유 텍스트 라벨 — 활동·자유주제 학생 입력 등 ref 가 없을 때 표시명 */
+    @Column(name = "assigned_label")
+    var assignedLabel: String? = null,
+
     var score: Int? = null,
 
     @Column(name = "submission_count", nullable = false)

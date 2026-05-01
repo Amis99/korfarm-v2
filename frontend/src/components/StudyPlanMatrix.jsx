@@ -287,6 +287,8 @@ export default function StudyPlanMatrix({
                         score={cell.score}
                         assetType={asset.assetType}
                         assetKind={asset.assetKind}
+                        isOverdue={cell.isOverdue}
+                        assignedLabel={cell.assignedLabel}
                       />
                     ) : (
                       <span style={{ color: "#bbb", fontSize: "0.75rem" }}>-</span>
