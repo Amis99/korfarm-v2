@@ -7,8 +7,9 @@ import { apiGet, apiPost, apiPatch, apiDelete } from "../utils/adminApi";
 import { camelize } from "../utils/api";
 import "../styles/admin-detail.css";
 
+// "community" 는 게시판이 아니라 채팅방으로 라우팅되므로 게시판 관리에서 제외.
+// 채팅 권한 관리는 별도 (현재 단순 인증된 회원 누구나).
 const BOARD_TYPE_LABELS = {
-  community: "커뮤니티",
   qna: "질문 답변",
   materials: "학습 자료",
   learning_request: "학습 신청",
@@ -177,7 +178,6 @@ function AdminBoardsPage() {
               <label>
                 <div style={{ fontSize: 13, fontWeight: 600 }}>게시판 유형</div>
                 <select value={newBoardType} onChange={(e) => setNewBoardType(e.target.value)} style={{ padding: 8 }}>
-                  <option value="community">커뮤니티</option>
                   <option value="qna">질문 답변</option>
                   <option value="materials">학습 자료</option>
                   <option value="learning_request">학습 신청</option>
@@ -252,7 +252,6 @@ function AdminBoardsPage() {
                     <td>
                       {isEditing ? (
                         <select value={editType} onChange={(e) => setEditType(e.target.value)}>
-                          <option value="community">커뮤니티</option>
                           <option value="qna">질문 답변</option>
                           <option value="materials">학습 자료</option>
                           <option value="learning_request">학습 신청</option>
