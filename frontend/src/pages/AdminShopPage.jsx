@@ -3,6 +3,8 @@ import { useSearchParams } from "react-router-dom";
 import { apiPost, apiPatch, apiDelete } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import AdminLayout from "../components/AdminLayout";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import "../styles/admin-detail.css";
 
 /* ── 상품 탭 ── */
@@ -50,6 +52,9 @@ function ShopProductsTab() {
         .some((v) => v.toLowerCase().includes(term));
     });
   }, [rows, search, statusFilter]);
+
+  const { page, setPage, totalPages, paged: pagedProducts } = usePagination(filteredProducts, 15);
+  useEffect(() => { setPage(1); }, [search, statusFilter, setPage]);
 
   const handleCreate = async () => {
     setActionError("");
@@ -143,7 +148,7 @@ function ShopProductsTab() {
               <tr><th>상품명</th><th>카테고리</th><th>가격</th><th>재고</th><th>상태</th><th>조치</th></tr>
             </thead>
             <tbody>
-              {filteredProducts.map((product) => (
+              {pagedProducts.map((product) => (
                 <tr key={product.id}>
                   <td>{product.title}</td>
                   <td>{product.category}</td>
@@ -160,6 +165,7 @@ function ShopProductsTab() {
               ))}
             </tbody>
           </table>
+          <Pagination page={page} totalPages={totalPages} onChange={setPage} />
         </div>
         <div className="admin-detail-card">
           <h3>재고 요약</h3>
@@ -268,6 +274,9 @@ function ShopOrdersTab() {
     });
   }, [rows, search, statusFilter]);
 
+  const { page, setPage, totalPages, paged: pagedOrders } = usePagination(filteredOrders, 15);
+  useEffect(() => { setPage(1); }, [search, statusFilter, setPage]);
+
   const handleUpdateStatus = async () => {
     if (!selectedOrder) return;
     setActionError("");
@@ -315,7 +324,7 @@ function ShopOrdersTab() {
               <tr><th>주문 번호</th><th>고객</th><th>금액</th><th>상태</th><th>조치</th></tr>
             </thead>
             <tbody>
-              {filteredOrders.map((order) => (
+              {pagedOrders.map((order) => (
                 <tr key={order.id}>
                   <td>
                     <span style={{ color: "#4a7c59", cursor: "pointer", textDecoration: "underline" }} onClick={() => openDetail(order)}>
@@ -334,6 +343,7 @@ function ShopOrdersTab() {
               ))}
             </tbody>
           </table>
+          <Pagination page={page} totalPages={totalPages} onChange={setPage} />
         </div>
         <div className="admin-detail-card">
           <h3>주문 요약</h3>

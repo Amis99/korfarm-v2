@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { apiGet, apiPost } from "../../utils/adminApi";
 import { AREA_LABELS, SUB_AREA_LABELS, SOURCE_LABELS } from "../../constants/questionBankCodes";
 import VSCodeTree from "./VSCodeTree";
+import Pagination from "../Pagination";
+import usePagination from "../../hooks/usePagination";
 
-const PER_PAGE = 20;
+const PER_PAGE = 15;
 
 function LDBQuestionBankTab() {
   const navigate = useNavigate();
@@ -16,7 +18,6 @@ function LDBQuestionBankTab() {
   const [statusFilter, setStatusFilter] = useState("");
   const [reviewFilter, setReviewFilter] = useState("");
   const [selectedFolder, setSelectedFolder] = useState(null);
-  const [page, setPage] = useState(1);
   const [selectedIds, setSelectedIds] = useState(new Set());
 
   useEffect(() => { loadRecords(); }, []);
@@ -110,7 +111,6 @@ function LDBQuestionBankTab() {
 
   const handleTreeSelect = (node) => {
     setSelectedFolder(node._filter || null);
-    setPage(1);
   };
 
   // 필터 적용
@@ -139,9 +139,10 @@ function LDBQuestionBankTab() {
     });
   }, [records, search, areaFilter, sourceFilter, statusFilter, reviewFilter, selectedFolder]);
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
-  const safePage = Math.min(page, totalPages);
-  const paged = filtered.slice((safePage - 1) * PER_PAGE, safePage * PER_PAGE);
+  const { page, setPage, totalPages, paged } = usePagination(filtered, PER_PAGE);
+
+  // 필터/검색/탭 변경 시 페이지 1로 리셋
+  useEffect(() => { setPage(1); }, [search, areaFilter, sourceFilter, statusFilter, reviewFilter, selectedFolder, setPage]);
 
   const toggleSelect = (id) => {
     setSelectedIds((prev) => {
@@ -194,21 +195,21 @@ function LDBQuestionBankTab() {
       {/* 필터바 */}
       <div className="ldb-filters">
         <input className="ldb-search" placeholder="레코드 코드, 제목, 작가 검색..."
-          value={search} onChange={(e) => { setSearch(e.target.value); setPage(1); }} />
-        <select className="ldb-select" value={areaFilter} onChange={(e) => { setAreaFilter(e.target.value); setPage(1); }}>
+          value={search} onChange={(e) => setSearch(e.target.value)} />
+        <select className="ldb-select" value={areaFilter} onChange={(e) => setAreaFilter(e.target.value)}>
           <option value="">전체 영역</option>
           {Object.entries(AREA_LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
         </select>
-        <select className="ldb-select" value={sourceFilter} onChange={(e) => { setSourceFilter(e.target.value); setPage(1); }}>
+        <select className="ldb-select" value={sourceFilter} onChange={(e) => setSourceFilter(e.target.value)}>
           <option value="">전체 소스</option>
           {Object.entries(SOURCE_LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
         </select>
-        <select className="ldb-select" value={statusFilter} onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}>
+        <select className="ldb-select" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
           <option value="">전체 상태</option>
           <option value="draft">초안</option>
           <option value="published">게시됨</option>
         </select>
-        <select className="ldb-select" value={reviewFilter} onChange={(e) => { setReviewFilter(e.target.value); setPage(1); }}>
+        <select className="ldb-select" value={reviewFilter} onChange={(e) => setReviewFilter(e.target.value)}>
           <option value="">전체 점검</option>
           <option value="none">점검 전</option>
           <option value="in_progress">점검 중</option>
@@ -277,16 +278,7 @@ function LDBQuestionBankTab() {
                 </table>
               </div>
 
-              {totalPages > 1 && (
-                <div className="qb-pagination">
-                  <button disabled={safePage <= 1} onClick={() => setPage(safePage - 1)}>&laquo;</button>
-                  {Array.from({ length: Math.min(totalPages, 10) }, (_, i) => {
-                    const p = i + 1;
-                    return <button key={p} className={safePage === p ? "active" : ""} onClick={() => setPage(p)}>{p}</button>;
-                  })}
-                  <button disabled={safePage >= totalPages} onClick={() => setPage(safePage + 1)}>&raquo;</button>
-                </div>
-              )}
+              <Pagination page={page} totalPages={totalPages} onChange={setPage} />
             </>
           )}
         </div>

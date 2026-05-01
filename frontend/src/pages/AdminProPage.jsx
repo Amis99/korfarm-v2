@@ -1,9 +1,11 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiGet, apiPost, apiPut } from "../utils/adminApi";
 import { API_BASE } from "../utils/api";
 import AdminLayout from "../components/AdminLayout";
 import { resolveModuleKeyForContentType } from "../constants/contentTypes";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import "../styles/admin-pro.css";
 import CompetencyVectorEditor from "../components/editor/dailyquiz/CompetencyVectorEditor";
 
@@ -93,6 +95,27 @@ function AdminProPage() {
   const [testVersion, setTestVersion] = useState(1);
   const [testPaperId, setTestPaperId] = useState("");
   const [testPapers, setTestPapers] = useState([]);
+
+  /* 챕터 목록 페이지네이션 */
+  const { page: chapterPage, setPage: setChapterPage, totalPages: chapterTotalPages, paged: pagedChapters } = usePagination(chapters, 15);
+  useEffect(() => { setChapterPage(1); }, [levelFilter, setChapterPage]);
+
+  /* 챕터 안 콘텐츠 목록 — 페이지네이션 */
+  const contentItemsForPaging = useMemo(() => {
+    if (!contentStatus?.items) return [];
+    return contentStatus.items.flatMap((item) =>
+      (item.contents || []).map((c) => ({
+        id: c.contentId || c.content_id,
+        title: c.title,
+        type: TYPE_LABELS[item.type] || item.type,
+        typeKey: item.type,
+        contentType: c.contentType || c.content_type || "",
+        updatedAt: c.updatedAt || c.updated_at || "",
+      })),
+    );
+  }, [contentStatus]);
+  const { page: contentPage, setPage: setContentPage, totalPages: contentTotalPages, paged: pagedContents } = usePagination(contentItemsForPaging, 15);
+  useEffect(() => { setContentPage(1); }, [selectedChapter?.id, setContentPage]);
 
   /* ═══ 챕터 목록 로드 ═══ */
   const load = useCallback(() => {
@@ -673,7 +696,7 @@ function AdminProPage() {
                 </tr>
               </thead>
               <tbody>
-                {chapters.map((ch) => {
+                {pagedChapters.map((ch) => {
                   const comp = getCompleteness(ch);
                   return (
                     <tr key={ch.id} className="ts-clickable-row" onClick={() => openDetail(ch)}>
@@ -708,6 +731,7 @@ function AdminProPage() {
                 })}
               </tbody>
             </table>
+            <Pagination page={chapterPage} totalPages={chapterTotalPages} onChange={setChapterPage} />
           </div>
         )}
       </div>
@@ -734,40 +758,46 @@ function AdminProPage() {
         {items.length === 0 ? (
           <p className="ap-muted" style={{ padding: 20 }}>아직 학습이 없습니다. [+ 학습 추가] 로 시작하세요.</p>
         ) : (
-          <table className="ts-table ap-content-table">
-            <thead>
-              <tr>
-                <th>제목</th>
-                <th>유형</th>
-                <th>최종수정일</th>
-                <th style={{ width: 200 }}>액션</th>
-              </tr>
-            </thead>
-            <tbody>
-              {items.map((c, i) => (
-                <tr key={c.id} className="ts-clickable-row"
-                  onClick={() => navigate(`/admin/content/edit?id=${c.id}&from=/admin/pro`)}>
-                  <td className="ap-ct-title">{c.title || "(제목 없음)"}</td>
-                  <td><span className={`ap-ct-type ap-ct-type-${c.typeKey}`}>{c.type}</span></td>
-                  <td className="ap-ct-date">{c.updatedAt ? new Date(c.updatedAt).toLocaleDateString("ko") : "-"}</td>
-                  <td className="ap-ct-actions" onClick={(e) => e.stopPropagation()}>
-                    <button className="ap-icon-btn" title="미리보기" disabled={previewLoadingId === c.id}
-                      onClick={() => handleContentPreview(c.id)}>
-                      {previewLoadingId === c.id ? "..." : <span className="material-symbols-outlined">visibility</span>}
-                    </button>
-                    <button className="ap-icon-btn" title="위로" disabled={i === 0}
-                      onClick={() => moveContentItem(i, i - 1)}>▲</button>
-                    <button className="ap-icon-btn" title="아래로" disabled={i >= items.length - 1}
-                      onClick={() => moveContentItem(i, i + 1)}>▼</button>
-                    <button className="ap-icon-btn" title="챕터에서 제거"
-                      onClick={() => removeContentItem(i)}>
-                      <span className="material-symbols-outlined">link_off</span>
-                    </button>
-                  </td>
+          <>
+            <table className="ts-table ap-content-table">
+              <thead>
+                <tr>
+                  <th>제목</th>
+                  <th>유형</th>
+                  <th>최종수정일</th>
+                  <th style={{ width: 200 }}>액션</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {pagedContents.map((c) => {
+                  const i = items.findIndex((it) => it.id === c.id);
+                  return (
+                    <tr key={c.id} className="ts-clickable-row"
+                      onClick={() => navigate(`/admin/content/edit?id=${c.id}&from=/admin/pro`)}>
+                      <td className="ap-ct-title">{c.title || "(제목 없음)"}</td>
+                      <td><span className={`ap-ct-type ap-ct-type-${c.typeKey}`}>{c.type}</span></td>
+                      <td className="ap-ct-date">{c.updatedAt ? new Date(c.updatedAt).toLocaleDateString("ko") : "-"}</td>
+                      <td className="ap-ct-actions" onClick={(e) => e.stopPropagation()}>
+                        <button className="ap-icon-btn" title="미리보기" disabled={previewLoadingId === c.id}
+                          onClick={() => handleContentPreview(c.id)}>
+                          {previewLoadingId === c.id ? "..." : <span className="material-symbols-outlined">visibility</span>}
+                        </button>
+                        <button className="ap-icon-btn" title="위로" disabled={i <= 0}
+                          onClick={() => moveContentItem(i, i - 1)}>▲</button>
+                        <button className="ap-icon-btn" title="아래로" disabled={i < 0 || i >= items.length - 1}
+                          onClick={() => moveContentItem(i, i + 1)}>▼</button>
+                        <button className="ap-icon-btn" title="챕터에서 제거"
+                          onClick={() => removeContentItem(i)}>
+                          <span className="material-symbols-outlined">link_off</span>
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            <Pagination page={contentPage} totalPages={contentTotalPages} onChange={setContentPage} />
+          </>
         )}
 
         {addModalOpen && renderAddModal()}

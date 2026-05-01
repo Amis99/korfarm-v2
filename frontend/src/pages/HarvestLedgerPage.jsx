@@ -3,6 +3,8 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
 import { TYPE_LABEL } from "../constants/contentTypes";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import "../styles/start.css";
 
 const MODULE_LABELS = {
@@ -41,6 +43,8 @@ function HarvestLedgerPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [childName, setChildName] = useState("");
+
+  const { page, setPage, totalPages, paged } = usePagination(logs, 20);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -141,7 +145,7 @@ function HarvestLedgerPage() {
             </tr>
           </thead>
           <tbody>
-            {logs.map((log) => {
+            {paged.map((log) => {
               const id = log.log_id ?? log.logId;
               const contentType = log.content_type ?? log.contentType;
               const contentTitle = log.content_title ?? log.contentTitle;
@@ -184,6 +188,7 @@ function HarvestLedgerPage() {
           </tbody>
         </table>
       </div>
+      <Pagination page={page} totalPages={totalPages} onChange={setPage} />
       <div style={{ textAlign: "center", marginTop: 24 }}>
         <Link to="/start" className="link-action">홈으로 돌아가기</Link>
       </div>

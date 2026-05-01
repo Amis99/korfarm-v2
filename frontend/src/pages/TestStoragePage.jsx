@@ -3,6 +3,8 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
 import { TestHistoryContent } from "./TestHistoryPage";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import "../styles/test-storage.css";
 
 const COURSE_LEVELS = [
@@ -92,6 +94,13 @@ function TestStoragePage() {
     return first?.orgName || "소속 기관";
   }, [tests, userOrgName]);
 
+  const { page, setPage, totalPages, paged } = usePagination(tests, 12);
+
+  // 필터 변경 시 페이지 리셋
+  useEffect(() => {
+    setPage(1);
+  }, [sourceFilter, levelFilter, activeTab, setPage]);
+
   if (!isLoggedIn) {
     return (
       <div className="ts-page ts-center">
@@ -178,37 +187,40 @@ function TestStoragePage() {
           ) : tests.length === 0 ? (
             <div className="ts-center"><p>등록된 시험이 없습니다.</p></div>
           ) : (
-            <div className="ts-grid">
-              {tests.map((t, idx) => (
-                <div
-                  key={t.testId ?? idx}
-                  className="ts-card"
-                  onClick={() => navigate(`/tests/${t.testId}`)}
-                >
-                  <div className="ts-card-top">
-                    <h3 className="ts-card-title">{t.title}</h3>
-                    {t.hasSubmitted ? (
-                      <span className="ts-badge ts-badge-done">{t.score}점</span>
-                    ) : (
-                      <span className="ts-badge ts-badge-pending">미응시</span>
-                    )}
+            <>
+              <div className="ts-grid">
+                {paged.map((t, idx) => (
+                  <div
+                    key={t.testId ?? idx}
+                    className="ts-card"
+                    onClick={() => navigate(`/tests/${t.testId}`)}
+                  >
+                    <div className="ts-card-top">
+                      <h3 className="ts-card-title">{t.title}</h3>
+                      {t.hasSubmitted ? (
+                        <span className="ts-badge ts-badge-done">{t.score}점</span>
+                      ) : (
+                        <span className="ts-badge ts-badge-pending">미응시</span>
+                      )}
+                    </div>
+                    {t.description && <p className="ts-card-desc">{t.description}</p>}
+                    <div className="ts-card-meta">
+                      {t.orgName ? (
+                        <span className="ts-meta-org">{t.orgName}</span>
+                      ) : (
+                        <span className="ts-meta-hq">국어농장</span>
+                      )}
+                      {t.levelId && <span>{LEVEL_NAME_MAP[t.levelId] || t.levelId}</span>}
+                      <span>{t.totalQuestions}문항</span>
+                      <span>{t.totalPoints}점</span>
+                      {t.series && <span>{t.series}</span>}
+                      {t.examDate && <span>{t.examDate}</span>}
+                    </div>
                   </div>
-                  {t.description && <p className="ts-card-desc">{t.description}</p>}
-                  <div className="ts-card-meta">
-                    {t.orgName ? (
-                      <span className="ts-meta-org">{t.orgName}</span>
-                    ) : (
-                      <span className="ts-meta-hq">국어농장</span>
-                    )}
-                    {t.levelId && <span>{LEVEL_NAME_MAP[t.levelId] || t.levelId}</span>}
-                    <span>{t.totalQuestions}문항</span>
-                    <span>{t.totalPoints}점</span>
-                    {t.series && <span>{t.series}</span>}
-                    {t.examDate && <span>{t.examDate}</span>}
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+              <Pagination page={page} totalPages={totalPages} onChange={setPage} />
+            </>
           )}
         </>
       )}

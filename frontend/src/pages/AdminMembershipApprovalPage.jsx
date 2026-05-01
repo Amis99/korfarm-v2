@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import AdminLayout from "../components/AdminLayout";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import { apiGet, apiPost } from "../utils/api";
 import "../styles/admin-detail.css";
 
@@ -22,6 +24,8 @@ function AdminMembershipApprovalPage() {
   const [actionLoading, setActionLoading] = useState(null);
   const [rejectModal, setRejectModal] = useState(null);
   const [rejectReason, setRejectReason] = useState("");
+
+  const { page, setPage, totalPages, paged: pagedMemberships } = usePagination(memberships, 15);
 
   const loadPendingMemberships = async () => {
     setLoading(true);
@@ -126,7 +130,7 @@ function AdminMembershipApprovalPage() {
                 </tr>
               </thead>
               <tbody>
-                {memberships.map((m) => (
+                {pagedMemberships.map((m) => (
                   <tr key={m.id}>
                     <td>{m.user_name || m.userName || "-"}</td>
                     <td>{m.user_login_id || m.userLoginId || "-"}</td>
@@ -176,6 +180,7 @@ function AdminMembershipApprovalPage() {
                 ))}
               </tbody>
             </table>
+            <Pagination page={page} totalPages={totalPages} onChange={setPage} />
           </div>
         )}
 

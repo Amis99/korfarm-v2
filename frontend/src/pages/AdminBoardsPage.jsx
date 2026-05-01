@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AdminLayout from "../components/AdminLayout";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import { apiGet, apiPost, apiPatch, apiDelete } from "../utils/adminApi";
 import { camelize } from "../utils/api";
 import "../styles/admin-detail.css";
@@ -94,6 +96,8 @@ function AdminBoardsPage() {
       alert("수정 실패: " + e.message);
     }
   };
+
+  const { page, setPage, totalPages, paged: pagedBoards } = usePagination(boards, 15);
 
   const handleDelete = async (board) => {
     if (board.postCount > 0) {
@@ -200,7 +204,7 @@ function AdminBoardsPage() {
               </tr>
             </thead>
             <tbody>
-              {boards.map((b) => {
+              {pagedBoards.map((b) => {
                 const isEditing = editingId === b.boardId;
                 return (
                   <tr key={b.boardId}>
@@ -259,6 +263,7 @@ function AdminBoardsPage() {
             </tbody>
           </table>
         )}
+        <Pagination page={page} totalPages={totalPages} onChange={setPage} />
         </div>
       </div>
     </AdminLayout>

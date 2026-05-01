@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AdminLayout from "../components/AdminLayout";
 import { apiGet, apiDelete } from "../utils/adminApi";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import "../styles/admin-detail.css";
 
 const AREA_LABEL = {
@@ -46,6 +48,9 @@ function AdminStudyContentPage() {
       || (i.ownerOrgName || "").toLowerCase().includes(q)
       || (i.area || "").toLowerCase().includes(q);
   });
+
+  const { page, setPage, totalPages, paged } = usePagination(filtered, 15);
+  useEffect(() => { setPage(1); }, [search, setPage]);
 
   return (
     <AdminLayout>
@@ -110,6 +115,7 @@ function AdminStudyContentPage() {
               {items.length === 0 ? "등록된 콘텐츠가 없습니다. + 신규 콘텐츠로 작성하세요." : "검색 결과가 없습니다."}
             </p>
           ) : (
+            <>
             <table className="admin-detail-table">
               <thead>
                 <tr>
@@ -124,7 +130,7 @@ function AdminStudyContentPage() {
                 </tr>
               </thead>
               <tbody>
-                {filtered.map((item) => (
+                {paged.map((item) => (
                   <tr key={item.id}>
                     <td>
                       <Link
@@ -168,6 +174,8 @@ function AdminStudyContentPage() {
                 ))}
               </tbody>
             </table>
+            <Pagination page={page} totalPages={totalPages} onChange={setPage} />
+            </>
           )}
         </div>
       </div>

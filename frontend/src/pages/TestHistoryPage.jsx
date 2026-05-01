@@ -3,6 +3,8 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
 import ScoreTrendChart from "../components/test-report/ScoreTrendChart";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import "../styles/test-storage.css";
 
 /* wrap=false → 내부 콘텐츠만 반환 (TestStoragePage 탭에서 사용) */
@@ -42,6 +44,8 @@ export function TestHistoryContent({ studentId: externalStudentId }) {
     const maxScore = Math.max(...history.map(h => h.score || 0));
     return { count, avgScore, avgAccuracy, maxScore };
   }, [history]);
+
+  const { page, setPage, totalPages, paged } = usePagination(history, 20);
 
   if (loading) {
     return <div className="ts-center"><p>불러오는 중...</p></div>;
@@ -94,7 +98,7 @@ export function TestHistoryContent({ studentId: externalStudentId }) {
           </tr>
         </thead>
         <tbody>
-          {history.map(h => (
+          {paged.map(h => (
             <tr
               key={h.testId}
               className="ts-clickable-row"
@@ -109,6 +113,7 @@ export function TestHistoryContent({ studentId: externalStudentId }) {
           ))}
         </tbody>
       </table>
+      <Pagination page={page} totalPages={totalPages} onChange={setPage} />
     </>
   );
 }

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { apiGet, apiPost, apiDelete } from "../utils/api";
 import AdminLayout from "../components/AdminLayout";
 import StudyPlanCreateForm from "../components/StudyPlanCreateForm";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import "../styles/admin-study-plan.css";
 
 export default function AdminStudyPlansPage() {
@@ -93,6 +95,9 @@ export default function AdminStudyPlansPage() {
   const hasArchived = selectedPlans.some((p) => p.status === "archived");
   const hasActive = selectedPlans.some((p) => p.status === "active");
 
+  const { page, setPage, totalPages, paged: pagedPlans } = usePagination(plans, 15);
+  useEffect(() => { setPage(1); }, [statusFilter, searchText, setPage]);
+
   return (
     <AdminLayout>
       <div className="admin-detail-wrap">
@@ -179,7 +184,7 @@ export default function AdminStudyPlansPage() {
             </tr>
           </thead>
           <tbody>
-            {plans.map((p) => (
+            {pagedPlans.map((p) => (
               <tr key={p.planId}>
                 <td onClick={(e) => e.stopPropagation()}>
                   <input
@@ -205,6 +210,7 @@ export default function AdminStudyPlansPage() {
         </table>
         </div>
       )}
+      <Pagination page={page} totalPages={totalPages} onChange={setPage} />
       </div>
 
       {showCreate && (

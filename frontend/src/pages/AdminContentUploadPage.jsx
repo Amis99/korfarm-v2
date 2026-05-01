@@ -11,6 +11,8 @@ import {
   resolveModuleKeyForContentType,
 } from "../constants/contentTypes";
 import AdminLayout from "../components/AdminLayout";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import "../styles/admin-detail.css";
 
 const STATIC_CONTENTS = [
@@ -403,6 +405,11 @@ function AdminContentUploadPage() {
     }
   };
 
+  /* 배치 모드 페이지네이션 — 선택된 파일 / 업로드 결과 각 독립 */
+  const batchFilesPg = usePagination(batchFiles, 15);
+  const batchResultsList = batchResults?.results || [];
+  const batchResultsPg = usePagination(batchResultsList, 15);
+
   /* 배치 결과에서 미리보기 — payload 이중 wrap 방지 */
   const [batchPreviewLoadingId, setBatchPreviewLoadingId] = useState(null);
   const handleBatchPreview = async (contentId) => {
@@ -568,26 +575,36 @@ function AdminContentUploadPage() {
 
             {/* 선택된 파일 목록 */}
             {batchFiles.length > 0 && (
-              <table className="admin-batch-table">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>파일명</th>
-                    <th className="text-right">크기</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {batchFiles.map((f, idx) => (
-                    <tr key={idx}>
-                      <td>{idx + 1}</td>
-                      <td>{f.name}</td>
-                      <td className="text-right">
-                        {(f.size / 1024).toFixed(1)} KB
-                      </td>
+              <>
+                <table className="admin-batch-table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>파일명</th>
+                      <th className="text-right">크기</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {batchFilesPg.paged.map((f, idx) => {
+                      const absoluteIdx = (batchFilesPg.page - 1) * 15 + idx;
+                      return (
+                        <tr key={absoluteIdx}>
+                          <td>{absoluteIdx + 1}</td>
+                          <td>{f.name}</td>
+                          <td className="text-right">
+                            {(f.size / 1024).toFixed(1)} KB
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+                <Pagination
+                  page={batchFilesPg.page}
+                  totalPages={batchFilesPg.totalPages}
+                  onChange={batchFilesPg.setPage}
+                />
+              </>
             )}
 
             {/* 업로드 버튼 */}
@@ -620,7 +637,7 @@ function AdminContentUploadPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {batchResults.results.map((r) => (
+                    {batchResultsPg.paged.map((r) => (
                       <tr key={r.index}>
                         <td>{r.index + 1}</td>
                         <td>{r.fileName}</td>
@@ -647,6 +664,11 @@ function AdminContentUploadPage() {
                     ))}
                   </tbody>
                 </table>
+                <Pagination
+                  page={batchResultsPg.page}
+                  totalPages={batchResultsPg.totalPages}
+                  onChange={batchResultsPg.setPage}
+                />
               </div>
             )}
           </div>

@@ -4,6 +4,8 @@ import { useAdminList } from "../hooks/useAdminList";
 import { useAuth } from "../hooks/useAuth";
 import { FARM_MAP, FARM_LIST } from "../data/learning/learningCatalog";
 import AdminLayout from "../components/AdminLayout";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import "../styles/admin-detail.css";
 
 const ASSIGNMENTS = [];
@@ -223,6 +225,24 @@ function AdminAssignmentsPage() {
         .some((v) => v.toLowerCase().includes(term));
     });
   }, [submissions, feedbackSearch, feedbackFilter]);
+
+  /* === 페이지네이션 (과제/피드백 각각 독립) === */
+  const {
+    page: assignmentPage,
+    setPage: setAssignmentPage,
+    totalPages: assignmentTotalPages,
+    paged: pagedAssignments,
+  } = usePagination(filteredAssignments, 15);
+  const {
+    page: feedbackPage,
+    setPage: setFeedbackPage,
+    totalPages: feedbackTotalPages,
+    paged: pagedFeedback,
+  } = usePagination(filteredFeedback, 15);
+
+  /* 검색·필터 변경 시 1페이지로 리셋 */
+  useEffect(() => { setAssignmentPage(1); }, [assignmentSearch, assignmentFilter, setAssignmentPage]);
+  useEffect(() => { setFeedbackPage(1); }, [feedbackSearch, feedbackFilter, setFeedbackPage]);
 
   /* === 과제 생성 === */
   const handleCreate = async () => {
@@ -475,7 +495,7 @@ function AdminAssignmentsPage() {
                 </tr>
               </thead>
               <tbody>
-                {filteredAssignments.map((a) => (
+                {pagedAssignments.map((a) => (
                   <tr
                     key={a.id}
                     style={{ cursor: "pointer" }}
@@ -500,6 +520,11 @@ function AdminAssignmentsPage() {
                 )}
               </tbody>
             </table>
+            <Pagination
+              page={assignmentPage}
+              totalPages={assignmentTotalPages}
+              onChange={setAssignmentPage}
+            />
           </div>
         )}
 
@@ -542,7 +567,7 @@ function AdminAssignmentsPage() {
                 </tr>
               </thead>
               <tbody>
-                {filteredFeedback.map((item) => (
+                {pagedFeedback.map((item) => (
                   <tr key={item.submissionId || `${item.student}-${item.promptId}`}>
                     <td>{item.student}</td>
                     <td>{item.promptId}</td>
@@ -572,6 +597,11 @@ function AdminAssignmentsPage() {
                 )}
               </tbody>
             </table>
+            <Pagination
+              page={feedbackPage}
+              totalPages={feedbackTotalPages}
+              onChange={setFeedbackPage}
+            />
           </div>
         )}
       </div>

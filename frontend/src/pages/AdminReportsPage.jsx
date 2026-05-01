@@ -2,6 +2,8 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { apiGet, apiPost } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import AdminLayout from "../components/AdminLayout";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import "../styles/admin-detail.css";
 
 /* ──────── 신고 관리 탭 ──────── */
@@ -41,6 +43,9 @@ function ReportsTab() {
         .some((v) => v.toLowerCase().includes(term));
     });
   }, [rows, search, statusFilter]);
+
+  const { page, setPage, totalPages, paged: pagedReports } = usePagination(filteredReports, 15);
+  useEffect(() => { setPage(1); }, [search, statusFilter, setPage]);
 
   const handleApprove = async (reportId) => {
     setActionError("");
@@ -111,7 +116,7 @@ function ReportsTab() {
             </tr>
           </thead>
           <tbody>
-            {filteredReports.map((report) => (
+            {pagedReports.map((report) => (
               <tr key={report.id}>
                 <td>{report.type}</td>
                 <td>{report.title}</td>
@@ -146,6 +151,7 @@ function ReportsTab() {
             ))}
           </tbody>
         </table>
+        <Pagination page={page} totalPages={totalPages} onChange={setPage} />
       </div>
       <div className="admin-detail-card">
         <h3>신고 요약</h3>
@@ -214,6 +220,9 @@ function MaterialsTab() {
         .some((v) => v.toLowerCase().includes(term));
     });
   }, [materials, search, statusFilter]);
+
+  const { page, setPage, totalPages, paged: pagedMaterials } = usePagination(filteredMaterials, 15);
+  useEffect(() => { setPage(1); }, [search, statusFilter, setPage]);
 
   const handleApprove = async (postId) => {
     setActionError("");
@@ -310,7 +319,7 @@ function MaterialsTab() {
                 </td>
               </tr>
             ) : (
-              filteredMaterials.map((m) => (
+              pagedMaterials.map((m) => (
                 <tr key={m.postId}>
                   <td>{m.title}</td>
                   <td>{m.authorId}</td>
@@ -347,6 +356,7 @@ function MaterialsTab() {
             )}
           </tbody>
         </table>
+        <Pagination page={page} totalPages={totalPages} onChange={setPage} />
       </div>
       <div className="admin-detail-card">
         <h3>학습 자료 요약</h3>

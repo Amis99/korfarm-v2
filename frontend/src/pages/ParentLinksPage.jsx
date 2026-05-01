@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { API_BASE, TOKEN_KEY } from "../utils/api";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import "../styles/parent-links.css";
 
 const formatStatus = (status) => {
@@ -23,6 +25,8 @@ function ParentLinksPage() {
   const [links, setLinks] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+
+  const { page, setPage, totalPages, paged } = usePagination(links, 15);
 
   useEffect(() => {
     let cancelled = false;
@@ -79,17 +83,20 @@ function ParentLinksPage() {
               연결이 필요하면 본사 또는 소속 기관으로 문의해 주세요.
             </p>
           ) : (
-            <ul className="parent-links-list">
-              {links.map((link) => (
-                <li key={link.link_id}>
-                  <div>
-                    <strong>{link.student_name || link.student_login_id}</strong>
-                    <span>{link.student_login_id}</span>
-                  </div>
-                  <span>{formatStatus(link.status)}</span>
-                </li>
-              ))}
-            </ul>
+            <>
+              <ul className="parent-links-list">
+                {paged.map((link) => (
+                  <li key={link.link_id}>
+                    <div>
+                      <strong>{link.student_name || link.student_login_id}</strong>
+                      <span>{link.student_login_id}</span>
+                    </div>
+                    <span>{formatStatus(link.status)}</span>
+                  </li>
+                ))}
+              </ul>
+              <Pagination page={page} totalPages={totalPages} onChange={setPage} />
+            </>
           )}
           {error ? <p className="parent-links-error">{error}</p> : null}
         </section>

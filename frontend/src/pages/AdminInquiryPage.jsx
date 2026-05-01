@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { apiGet, apiPost } from "../utils/api";
 import AdminLayout from "../components/AdminLayout";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 
 const formatDate = (dt) => {
   if (!dt) return "";
@@ -16,6 +18,8 @@ function AdminInquiryPage() {
   const [comments, setComments] = useState([]);
   const [reply, setReply] = useState("");
   const [submitting, setSubmitting] = useState(false);
+
+  const { page, setPage, totalPages, paged: pagedPosts } = usePagination(posts, 15);
 
   useEffect(() => {
     loadPosts();
@@ -197,7 +201,7 @@ function AdminInquiryPage() {
                     </td>
                   </tr>
                 ) : (
-                  posts.map((post, idx) => (
+                  pagedPosts.map((post, idx) => (
                     <tr
                       key={post.postId || post.id}
                       style={{ borderBottom: "1px solid #eee", cursor: "pointer" }}
@@ -205,7 +209,7 @@ function AdminInquiryPage() {
                       onMouseEnter={(e) => (e.currentTarget.style.background = "#f7faf6")}
                       onMouseLeave={(e) => (e.currentTarget.style.background = "")}
                     >
-                      <td style={{ padding: "12px 16px", fontSize: 14 }}>{posts.length - idx}</td>
+                      <td style={{ padding: "12px 16px", fontSize: 14 }}>{posts.length - ((page - 1) * 15 + idx)}</td>
                       <td style={{ padding: "12px 16px", fontSize: 14, fontWeight: 600 }}>{post.title}</td>
                       <td style={{ padding: "12px 16px", fontSize: 14, color: "#666" }}>
                         {post.isGuest ? (
@@ -222,6 +226,7 @@ function AdminInquiryPage() {
                 )}
               </tbody>
             </table>
+            <Pagination page={page} totalPages={totalPages} onChange={setPage} />
           </div>
         )}
       </div>

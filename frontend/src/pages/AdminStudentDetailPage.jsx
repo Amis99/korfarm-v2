@@ -4,6 +4,8 @@ import { apiGet, apiPost } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
 import { calcSeasonScore, FORMULA_TEXT } from "../utils/seasonScore";
 import { TYPE_LABEL } from "../constants/contentTypes";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import "../styles/admin-detail.css";
 
 const ReportSummaryCards = lazy(() => import("../components/report/ReportSummaryCards"));
@@ -125,6 +127,11 @@ function AdminStudentDetailPage() {
     }
   }, [tab, userId]);
 
+  // 각 리스트 페이지네이션 (탭별 독립)
+  const learningPg = usePagination(learningLogs, 15);
+  const testPg = usePagination(testHistory, 15);
+  const ledgerPg = usePagination(ledger, 15);
+
   const seasonScore = useMemo(() => {
     if (!inventory) return 0;
     const seeds = inventory.seeds || {};
@@ -216,7 +223,7 @@ function AdminStudentDetailPage() {
                 <p className="admin-detail-note" style={{ marginBottom: 12 }}>최근 {learningLogs.length}건 (완료: {learningLogs.filter((l) => l.status === "COMPLETED").length}건)</p>
                 <div style={{ overflowX: "auto" }}>
                   <table className="admin-detail-table"><thead><tr><th>유형</th><th>콘텐츠 ID</th><th>상태</th><th>점수</th><th>정답률</th><th>획득 씨앗</th><th>시작일</th><th>완료일</th></tr></thead>
-                    <tbody>{learningLogs.map((log, i) => (
+                    <tbody>{learningPg.paged.map((log, i) => (
                       <tr key={log.logId || i}>
                         <td>{contentTypeLabel(log.contentType)}</td>
                         <td style={{ fontSize: 12, maxWidth: 150, overflow: "hidden", textOverflow: "ellipsis" }}>{log.contentId}</td>
@@ -229,6 +236,7 @@ function AdminStudentDetailPage() {
                       </tr>
                     ))}</tbody>
                   </table>
+                  <Pagination page={learningPg.page} totalPages={learningPg.totalPages} onChange={learningPg.setPage} />
                 </div>
               </>
             )}
@@ -241,7 +249,7 @@ function AdminStudentDetailPage() {
             {loadingTests ? (<p className="admin-detail-note">로딩 중...</p>) : testHistory.length === 0 ? (<p className="admin-detail-note">테스트 응시 기록이 없습니다.</p>) : (
               <div style={{ overflowX: "auto" }}>
                 <table className="admin-detail-table"><thead><tr><th>시험명</th><th>시험일</th><th>점수</th><th>만점</th><th>정답</th><th>총문항</th><th>정답률</th><th>제출일</th><th>성적표</th></tr></thead>
-                  <tbody>{testHistory.map((t, i) => (
+                  <tbody>{testPg.paged.map((t, i) => (
                     <tr key={t.testId || i}>
                       <td>{t.testTitle || "-"}</td>
                       <td style={{ fontSize: 12 }}>{t.examDate || "-"}</td>
@@ -255,6 +263,7 @@ function AdminStudentDetailPage() {
                     </tr>
                   ))}</tbody>
                 </table>
+                <Pagination page={testPg.page} totalPages={testPg.totalPages} onChange={testPg.setPage} />
               </div>
             )}
           </div>
@@ -320,7 +329,7 @@ function AdminStudentDetailPage() {
               {ledger.length === 0 ? (<p className="admin-detail-note">경제 내역이 없습니다.</p>) : (
                 <div style={{ overflowX: "auto" }}>
                   <table className="admin-detail-table"><thead><tr><th>종류</th><th>항목</th><th>변동</th><th>사유</th><th>일시</th></tr></thead>
-                    <tbody>{ledger.slice(0, 50).map((e, i) => (
+                    <tbody>{ledgerPg.paged.map((e, i) => (
                       <tr key={e.id || i}>
                         <td>{e.currencyType || e.currency_type || "-"}</td>
                         <td>{e.itemType || e.item_type || "-"}</td>
@@ -330,6 +339,7 @@ function AdminStudentDetailPage() {
                       </tr>
                     ))}</tbody>
                   </table>
+                  <Pagination page={ledgerPg.page} totalPages={ledgerPg.totalPages} onChange={ledgerPg.setPage} />
                 </div>
               )}
             </div>

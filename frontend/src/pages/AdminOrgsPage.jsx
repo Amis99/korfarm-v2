@@ -4,6 +4,8 @@ import { apiGet, apiPost, apiPatch } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import AdminLayout from "../components/AdminLayout";
 import AdminPaymentsPage from "./AdminPaymentsPage";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import "../styles/admin-detail.css";
 
 const REGIONS = [
@@ -72,6 +74,9 @@ function OrgsListContent() {
         .some((v) => v.toLowerCase().includes(term));
     });
   }, [rows, search, statusFilter]);
+
+  const { page, setPage, totalPages, paged: pagedOrgs } = usePagination(filteredOrgs, 15);
+  useEffect(() => { setPage(1); }, [search, statusFilter, setPage]);
 
   const handleCreate = async () => {
     setActionError("");
@@ -256,7 +261,7 @@ function OrgsListContent() {
                 </tr>
               </thead>
               <tbody>
-                {filteredOrgs.map((org) => (
+                {pagedOrgs.map((org) => (
                   <tr key={org.id}>
                     <td>{org.name}</td>
                     <td>{org.orgType || "-"}</td>
@@ -282,6 +287,7 @@ function OrgsListContent() {
                 ))}
               </tbody>
             </table>
+            <Pagination page={page} totalPages={totalPages} onChange={setPage} />
           </div>
           <div className="admin-detail-card">
             <h3>기관 요약</h3>

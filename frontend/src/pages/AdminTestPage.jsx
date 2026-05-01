@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiGet, apiPost, apiDelete } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import "../styles/test-storage.css";
 
 // 백엔드 응답이 SNAKE_CASE이거나 camelCase일 수 있어 양쪽 모두 지원
@@ -143,6 +145,9 @@ function AdminTestPage() {
     });
   }, [tests, activeTab, search, filterScope, filterLevel, filterSeries]);
 
+  const { page, setPage, totalPages, paged } = usePagination(filtered, 15);
+  useEffect(() => { setPage(1); }, [activeTab, search, filterScope, filterLevel, filterSeries, setPage]);
+
   return (
     <AdminLayout>
     <div className="ts-page ts-admin">
@@ -256,7 +261,7 @@ function AdminTestPage() {
             </tr>
           </thead>
           <tbody>
-            {filtered.map(t => {
+            {paged.map(t => {
               const kindBg = t.kind === "diagnostic" ? "rgba(168, 85, 247, 0.15)"
                 : t.kind === "chapter" ? "rgba(34, 197, 94, 0.15)"
                 : "rgba(148, 163, 184, 0.15)";
@@ -334,6 +339,7 @@ function AdminTestPage() {
             })}
           </tbody>
         </table>
+        <Pagination page={page} totalPages={totalPages} onChange={setPage} />
         </div>
       )}
     </div>

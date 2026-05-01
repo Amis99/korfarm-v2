@@ -5,6 +5,8 @@ import AdminLayout from "../components/AdminLayout";
 import Modal from "../components/Modal";
 import TestReportView from "../components/test-report/TestReportView";
 import TestWrongNoteView from "../components/test-report/TestWrongNoteView";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import "../styles/test-storage.css";
 
 function fmt(n, digits = 1) {
@@ -223,6 +225,15 @@ export default function AdminTestStatisticsPage() {
     });
   }, [students, stuSearch, stuGrade]);
 
+  // 학생별/문항별 페이지네이션 (각 독립)
+  const studentsPg = usePagination(filteredStudents, 15);
+  const questionsPg = usePagination(questions, 15);
+
+  // 검색/필터/탭 변경 시 페이지 리셋
+  useEffect(() => {
+    studentsPg.setPage(1);
+  }, [stuSearch, stuGrade, tab]); // eslint-disable-line react-hooks/exhaustive-deps
+
   if (loading) return (
     <AdminLayout>
       <div className="ts-page ts-admin"><div className="ts-center"><p>로딩 중...</p></div></div>
@@ -336,7 +347,7 @@ export default function AdminTestStatisticsPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredStudents.map((s) => {
+                  {studentsPg.paged.map((s) => {
                     const domainCount = Object.keys(s.domainScores || {}).length;
                     const wrongCount = (s.wrongQuestionNumbers || []).length;
                     return (
@@ -376,6 +387,7 @@ export default function AdminTestStatisticsPage() {
                   )}
                 </tbody>
               </table>
+              <Pagination page={studentsPg.page} totalPages={studentsPg.totalPages} onChange={studentsPg.setPage} />
             </div>
           </>
         )}
@@ -397,7 +409,7 @@ export default function AdminTestStatisticsPage() {
                 </tr>
               </thead>
               <tbody>
-                {questions.map((q) => (
+                {questionsPg.paged.map((q) => (
                   <QuestionRow
                     key={q.number}
                     q={q}
@@ -411,6 +423,7 @@ export default function AdminTestStatisticsPage() {
                 )}
               </tbody>
             </table>
+            <Pagination page={questionsPg.page} totalPages={questionsPg.totalPages} onChange={questionsPg.setPage} />
           </div>
         )}
       </div>

@@ -6,6 +6,8 @@ import StudyPlanMatrix from "../components/StudyPlanMatrix";
 import StudyPlanCalendar from "../components/StudyPlanCalendar";
 import StudyPlanCellModal from "../components/StudyPlanCellModal";
 import CalendarEventModal from "../components/CalendarEventModal";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import "../styles/admin-study-plan.css";
 
 const TABS = [
@@ -103,6 +105,14 @@ export default function AdminStudyPlanDetailPage() {
       return false;
     });
   }, [students, classFilter, classTargets]);
+
+  // 좌측 학생 목록 페이지네이션
+  const studentPg = usePagination(filteredStudents, 15);
+
+  // 수강반 필터 변경 시 페이지 리셋
+  useEffect(() => {
+    studentPg.setPage(1);
+  }, [classFilter]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleCellClick = (cell, scope, asset) => {
     if (!cell) return;
@@ -234,7 +244,7 @@ export default function AdminStudyPlanDetailPage() {
               </span>
             </li>
 
-            {filteredStudents.map((s) => {
+            {studentPg.paged.map((s) => {
               const pct = s.totalCells > 0 ? Math.round((s.completedCells / s.totalCells) * 100) : 0;
               return (
                 <li
@@ -253,6 +263,7 @@ export default function AdminStudyPlanDetailPage() {
               );
             })}
           </ul>
+          <Pagination page={studentPg.page} totalPages={studentPg.totalPages} onChange={studentPg.setPage} />
         </div>
 
         {/* 우측: 탭 영역 */}
@@ -417,6 +428,13 @@ function SubmissionsTab({ planId, onCellClick }) {
     ? submissions
     : submissions.filter((s) => s.status === statusFilter);
 
+  const { page, setPage, totalPages, paged } = usePagination(filtered, 15);
+
+  // 상태 필터 변경 시 페이지 리셋
+  useEffect(() => {
+    setPage(1);
+  }, [statusFilter, setPage]);
+
   if (loading) return <div style={{ padding: 20, color: "#999" }}>로딩 중...</div>;
 
   return (
@@ -435,32 +453,35 @@ function SubmissionsTab({ planId, onCellClick }) {
       {filtered.length === 0 ? (
         <div style={{ padding: 20, color: "#999", textAlign: "center" }}>제출물이 없습니다.</div>
       ) : (
-        <table className="aspd-submissions-table">
-          <thead>
-            <tr>
-              <th>학생</th>
-              <th>범위</th>
-              <th>활동</th>
-              <th>유형</th>
-              <th>상태</th>
-              <th>제출수</th>
-              <th>점수</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((s) => (
-              <tr key={s.cellId} className="aspd-submissions-row" onClick={() => onCellClick(s)}>
-                <td>{s.userName}</td>
-                <td>{s.scopeLabel}</td>
-                <td>{s.assetLabel}</td>
-                <td><span className="aspd-type-badge">{ASSET_TYPE_KO[s.assetType] || s.assetType}</span></td>
-                <td><span className={`aspd-status-badge --${s.status}`}>{STATUS_LABEL[s.status] || s.status}</span></td>
-                <td>{s.submissionCount}</td>
-                <td>{s.score ?? "-"}</td>
+        <>
+          <table className="aspd-submissions-table">
+            <thead>
+              <tr>
+                <th>학생</th>
+                <th>범위</th>
+                <th>활동</th>
+                <th>유형</th>
+                <th>상태</th>
+                <th>제출수</th>
+                <th>점수</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {paged.map((s) => (
+                <tr key={s.cellId} className="aspd-submissions-row" onClick={() => onCellClick(s)}>
+                  <td>{s.userName}</td>
+                  <td>{s.scopeLabel}</td>
+                  <td>{s.assetLabel}</td>
+                  <td><span className="aspd-type-badge">{ASSET_TYPE_KO[s.assetType] || s.assetType}</span></td>
+                  <td><span className={`aspd-status-badge --${s.status}`}>{STATUS_LABEL[s.status] || s.status}</span></td>
+                  <td>{s.submissionCount}</td>
+                  <td>{s.score ?? "-"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <Pagination page={page} totalPages={totalPages} onChange={setPage} />
+        </>
       )}
     </div>
   );

@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import AdminLayout from "../components/AdminLayout";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import { apiGet, apiPost, apiPatch } from "../utils/adminApi";
 import { camelize, API_BASE, TOKEN_KEY } from "../utils/api";
 import EmoticonImage from "../components/chat/EmoticonImage";
@@ -31,6 +33,23 @@ function AdminChatArchivesPage() {
 
   // 시리즈 필터
   const [seriesFilter, setSeriesFilter] = useState("__ALL__");
+
+  /* === 페이지네이션 (archives/mutes 각각 독립) === */
+  const {
+    page: archivePage,
+    setPage: setArchivePage,
+    totalPages: archiveTotalPages,
+    paged: pagedArchives,
+  } = usePagination(archives, 15);
+  const {
+    page: mutePage,
+    setPage: setMutePage,
+    totalPages: muteTotalPages,
+    paged: pagedMutes,
+  } = usePagination(mutes, 15);
+
+  /* 탭 변경 시 1페이지로 리셋 */
+  useEffect(() => { setArchivePage(1); setMutePage(1); }, [activeTab, setArchivePage, setMutePage]);
 
   const load = async () => {
     setLoading(true); setError("");
@@ -254,7 +273,7 @@ function AdminChatArchivesPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {archives.map((a) => (
+                  {pagedArchives.map((a) => (
                     <tr key={a.archiveId}>
                       <td>{a.periodStart} ~ {a.periodEnd}</td>
                       <td>{a.fileCount}</td>
@@ -274,6 +293,11 @@ function AdminChatArchivesPage() {
                 </tbody>
               </table>
             )}
+            <Pagination
+              page={archivePage}
+              totalPages={archiveTotalPages}
+              onChange={setArchivePage}
+            />
           </div>
         )}
 
@@ -291,7 +315,7 @@ function AdminChatArchivesPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {mutes.map((m) => (
+                  {pagedMutes.map((m) => (
                     <tr key={m.userId}>
                       <td>{m.userId}</td>
                       <td>{m.mutedUntil ? m.mutedUntil.slice(0, 16).replace("T", " ") : "영구"}</td>
@@ -311,6 +335,11 @@ function AdminChatArchivesPage() {
                 </tbody>
               </table>
             )}
+            <Pagination
+              page={mutePage}
+              totalPages={muteTotalPages}
+              onChange={setMutePage}
+            />
           </div>
         )}
 

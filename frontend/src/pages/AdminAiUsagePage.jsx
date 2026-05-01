@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import AdminLayout from "../components/AdminLayout";
 import { apiGet } from "../utils/adminApi";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 
 const KIND_LABELS = { passage: "지문 생성", question: "문항 생성", review: "학생 페르소나 검증" };
 
@@ -88,6 +90,13 @@ export default function AdminAiUsagePage() {
     );
   }, [data, search]);
 
+  const { page, setPage, totalPages, paged } = usePagination(filtered, 15);
+
+  // 필터/검색 변경 시 페이지 리셋
+  useEffect(() => {
+    setPage(1);
+  }, [search, filterUser, filterOrg, filterKind, from, to, limit, setPage]);
+
   return (
     <AdminLayout>
       <div className="admin-detail-wrap">
@@ -173,7 +182,7 @@ export default function AdminAiUsagePage() {
                 </tr>
               </thead>
               <tbody>
-                {filtered.map((it) => (
+                {paged.map((it) => (
                   <tr key={it.id} style={{ borderTop: "1px solid var(--stroke)" }}>
                     <td style={td}>{it.createdAt ? new Date(it.createdAt).toLocaleString("ko-KR") : "-"}</td>
                     <td style={td}>{it.userName}</td>
@@ -203,6 +212,7 @@ export default function AdminAiUsagePage() {
                 )}
               </tbody>
             </table>
+            <Pagination page={page} totalPages={totalPages} onChange={setPage} />
           </div>
         )}
       </div>

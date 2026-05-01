@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { apiPost, apiGet } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import AdminLayout from "../components/AdminLayout";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
 import "../styles/admin-detail.css";
 
 const SEASONS = [
@@ -41,6 +43,11 @@ function AdminSeasonsPage({ wrap = true }) {
         .some((v) => v.toLowerCase().includes(term));
     });
   }, [rows, search, statusFilter]);
+
+  const { page, setPage, totalPages, paged: pagedSeasons } = usePagination(filteredSeasons, 15);
+
+  /* 검색·필터 변경 시 1페이지로 리셋 */
+  useEffect(() => { setPage(1); }, [search, statusFilter, setPage]);
 
   const handleCreate = async () => {
     setActionError("");
@@ -122,7 +129,7 @@ function AdminSeasonsPage({ wrap = true }) {
                 </tr>
               </thead>
               <tbody>
-                {filteredSeasons.map((season) => (
+                {pagedSeasons.map((season) => (
                   <tr key={season.id}>
                     <td>{season.name}</td>
                     <td>{season.start}</td>
@@ -136,6 +143,7 @@ function AdminSeasonsPage({ wrap = true }) {
                 ))}
               </tbody>
             </table>
+            <Pagination page={page} totalPages={totalPages} onChange={setPage} />
           </div>
           <div className="admin-detail-card">
             <h3>시즌 안내</h3>
