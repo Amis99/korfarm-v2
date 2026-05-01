@@ -46,7 +46,9 @@ data class UpdateStudyPlanRequest(
     val description: String? = null,
     val examScope: String? = null,
     val startDate: String? = null,
-    val endDate: String? = null
+    val endDate: String? = null,
+    /** 기관 default 템플릿 표식 — true 이면 신규 학생 자동 복제 대상 */
+    val isTemplate: Boolean? = null
 )
 
 data class AddScopeRequest(
@@ -147,7 +149,9 @@ data class StudyPlanDetailResponse(
     val targets: List<TargetResponse>,
     val scopes: List<ScopeResponse>,
     val assets: List<AssetResponse>,
-    val createdAt: String
+    val createdAt: String,
+    /** 기관 default 템플릿 여부 */
+    val isTemplate: Boolean = false
 )
 
 data class TargetResponse(

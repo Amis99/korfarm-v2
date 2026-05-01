@@ -224,6 +224,36 @@ export default function AdminStudyPlanDetailPage() {
     }
   };
 
+  // 템플릿 → 현재 학생들에게 일괄 반영
+  const handleApplyToStudents = async () => {
+    if (!plan?.isTemplate) return;
+    if (!window.confirm(
+      "이 템플릿의 변경 사항을 현재 학생들의 학습 계획표에 일괄 반영합니다.\n" +
+      "기존 학생 셀의 진행 상태(점수·제출물)는 보존되며 새 scope/asset 만 추가됩니다.\n" +
+      "계속할까요?"
+    )) return;
+    try {
+      const res = await apiPost(`/v1/admin/study-plans/${planId}/apply-to-students`, {});
+      const count = res?.applied ?? res?.affectedStudents ?? "?";
+      alert(`완료: ${count}명의 학생에게 반영됨`);
+      loadPlan();
+    } catch (e) {
+      alert(e.message || "일괄 반영 실패");
+    }
+  };
+
+  // 템플릿 토글
+  const handleToggleTemplate = async () => {
+    try {
+      await apiPatch(`/v1/admin/study-plans/${planId}`, {
+        isTemplate: !plan.isTemplate,
+      });
+      loadPlan();
+    } catch (e) {
+      alert(e.message || "템플릿 설정 실패");
+    }
+  };
+
   if (loading) return <AdminLayout><div className="asp-loading">불러오는 중...</div></AdminLayout>;
   if (!plan) return <AdminLayout><div className="asp-empty">계획표를 찾을 수 없습니다.</div></AdminLayout>;
 
@@ -238,6 +268,22 @@ export default function AdminStudyPlanDetailPage() {
         <span className={`asp-status ${plan.status}`}>
           {plan.status === "active" ? "진행중" : "보관"}
         </span>
+        {plan.isTemplate && (
+          <span
+            style={{
+              padding: "4px 10px",
+              borderRadius: 6,
+              background: "rgba(45, 106, 79, 0.12)",
+              color: "#2d6a4f",
+              fontSize: 12,
+              fontWeight: 700,
+              border: "1px solid rgba(45, 106, 79, 0.3)",
+            }}
+            title="기관 default 템플릿 — 신규 학생 자동 복제"
+          >
+            🧬 기관 템플릿
+          </span>
+        )}
       </div>
 
       {plan.examScope && (
@@ -382,7 +428,35 @@ export default function AdminStudyPlanDetailPage() {
                   </p>
                 </div>
                 {plan.status === "active" && (
-                  <button className="asp-add-btn" style={{ marginTop: 12 }} onClick={handleArchive}>보관 처리</button>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 12 }}>
+                    <button className="asp-add-btn" onClick={handleArchive}>보관 처리</button>
+                    <button
+                      className="asp-add-btn"
+                      onClick={handleToggleTemplate}
+                      style={{
+                        background: plan.isTemplate ? "rgba(45, 106, 79, 0.15)" : "var(--admin-panel)",
+                        color: plan.isTemplate ? "#2d6a4f" : "var(--admin-ink)",
+                        borderColor: plan.isTemplate ? "#2d6a4f" : "var(--admin-stroke)",
+                      }}
+                      title="기관 default 템플릿으로 지정/해제. 신규 학생 가입 시 자동 복제됩니다."
+                    >
+                      {plan.isTemplate ? "🧬 템플릿 해제" : "🧬 기관 템플릿으로 지정"}
+                    </button>
+                    {plan.isTemplate && (
+                      <button
+                        className="asp-add-btn"
+                        onClick={handleApplyToStudents}
+                        style={{
+                          background: "var(--admin-accent, #ff7f2a)",
+                          color: "#fff",
+                          borderColor: "var(--admin-accent, #ff7f2a)",
+                        }}
+                        title="이 템플릿의 변경 사항을 현재 학생들에게 일괄 반영"
+                      >
+                        📤 현재 학생들에게 일괄 반영
+                      </button>
+                    )}
+                  </div>
                 )}
               </div>
 

@@ -174,7 +174,8 @@ class StudyPlanService(
             examScope = plan.examScope, startDate = plan.startDate.toString(),
             endDate = plan.endDate.toString(), status = plan.status,
             createdBy = plan.createdBy, targets = targets,
-            scopes = scopes, assets = assets, createdAt = plan.createdAt.toString()
+            scopes = scopes, assets = assets, createdAt = plan.createdAt.toString(),
+            isTemplate = plan.isTemplate
         )
     }
 
@@ -186,6 +187,7 @@ class StudyPlanService(
         req.examScope?.let { plan.examScope = it }
         req.startDate?.let { plan.startDate = LocalDate.parse(it) }
         req.endDate?.let { plan.endDate = LocalDate.parse(it) }
+        req.isTemplate?.let { plan.isTemplate = it }
         return planRepo.save(plan)
     }
 
