@@ -74,12 +74,6 @@ interface TestPaperRepository : JpaRepository<TestPaperEntity, String> {
     fun findByStatus(status: String): List<TestPaperEntity>
 }
 
-interface WritingSubmissionRepository : JpaRepository<WritingSubmissionEntity, String>
-
-interface WritingFeedbackRepository : JpaRepository<WritingFeedbackEntity, String> {
-    fun findBySubmissionId(submissionId: String): WritingFeedbackEntity?
-}
-
 interface TestAnswerKeyRepository : JpaRepository<TestAnswerKeyEntity, String> {
     fun findTopByTestIdOrderByCreatedAtDesc(testId: String): TestAnswerKeyEntity?
 }

@@ -120,7 +120,7 @@ function AdminPage() {
         <div className="admin-card">
           <h2>관리 메뉴</h2>
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <Link className="admin-action" to="/admin/assignments">과제/피드백</Link>
+            <Link className="admin-action" to="/admin/study-plans">학습 계획표</Link>
             <Link className="admin-action" to="/admin/duel?tab=seasons">시즌 관리</Link>
             <Link className="admin-action" to="/admin/shop">상점 관리</Link>
             <Link className="admin-action" to="/admin/reports">보고 관리</Link>

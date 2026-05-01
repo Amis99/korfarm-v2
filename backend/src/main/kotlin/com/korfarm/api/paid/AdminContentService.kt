@@ -8,7 +8,6 @@ import com.korfarm.api.contracts.AdminContentImportRequest
 import com.korfarm.api.contracts.AdminTestAnswersRequest
 import com.korfarm.api.contracts.AdminTestCreateRequest
 import com.korfarm.api.contracts.AdminTestGradeRequest
-import com.korfarm.api.contracts.AdminWritingFeedbackRequest
 import com.korfarm.api.pro.ProChapterEntity
 import com.korfarm.api.pro.ProChapterItemEntity
 import com.korfarm.api.pro.ProChapterItemRepo
@@ -28,8 +27,6 @@ class AdminContentService(
     private val contentRepository: ContentRepository,
     private val contentVersionRepository: ContentVersionRepository,
     private val contentEditLogRepository: ContentEditLogRepository,
-    private val writingSubmissionRepository: WritingSubmissionRepository,
-    private val writingFeedbackRepository: WritingFeedbackRepository,
     private val testPaperRepository: TestPaperRepository,
     private val testAnswerKeyRepository: TestAnswerKeyRepository,
     private val testResultRepository: TestResultRepository,
@@ -394,57 +391,6 @@ class AdminContentService(
                 videoUrl = content.videoUrl
             )
         }
-    }
-
-    @Transactional(readOnly = true)
-    fun listWritingSubmissions(): List<AdminWritingSubmissionSummary> {
-        val userMap = userRepository.findAll().associateBy { it.id }
-        return writingSubmissionRepository.findAll().sortedByDescending { it.submittedAt ?: it.createdAt }.map { submission ->
-            val user = userMap[submission.userId]
-            AdminWritingSubmissionSummary(
-                submissionId = submission.id,
-                userId = submission.userId,
-                studentName = user?.name ?: user?.email ?: submission.userId,
-                promptId = submission.promptId,
-                status = submission.status,
-                submittedAt = submission.submittedAt
-            )
-        }
-    }
-
-    @Transactional
-    fun submitWritingFeedback(
-        submissionId: String,
-        reviewerId: String,
-        request: AdminWritingFeedbackRequest
-    ): WritingFeedbackView {
-        val submission = writingSubmissionRepository.findById(submissionId).orElseThrow {
-            ApiException("NOT_FOUND", "submission not found", HttpStatus.NOT_FOUND)
-        }
-        val rubricJson = objectMapper.writeValueAsString(request.rubric)
-        val existing = writingFeedbackRepository.findBySubmissionId(submission.id)
-        val entity = if (existing != null) {
-            existing.rubricJson = rubricJson
-            existing.comment = request.comment
-            existing.reviewerId = reviewerId
-            existing
-        } else {
-            WritingFeedbackEntity(
-                id = IdGenerator.newId("wf"),
-                submissionId = submission.id,
-                reviewerId = reviewerId,
-                rubricJson = rubricJson,
-                comment = request.comment
-            )
-        }
-        val saved = writingFeedbackRepository.save(entity)
-        return WritingFeedbackView(
-            feedbackId = saved.id,
-            submissionId = saved.submissionId,
-            reviewerId = saved.reviewerId,
-            comment = saved.comment,
-            createdAt = saved.createdAt
-        )
     }
 
     @Transactional

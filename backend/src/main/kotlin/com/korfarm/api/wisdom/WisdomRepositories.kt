@@ -9,6 +9,9 @@ interface WisdomPostRepository : JpaRepository<WisdomPostEntity, String> {
     fun findByLevelIdOrderByCreatedAtDesc(levelId: String): List<WisdomPostEntity>
     fun findByLevelIdAndTopicKeyOrderByCreatedAtDesc(levelId: String, topicKey: String): List<WisdomPostEntity>
     fun existsByLevelIdAndTopicKeyAndUserIdAndStatus(levelId: String, topicKey: String, userId: String, status: String): Boolean
+    /** 학습 계획표 셀과 연결된 글 조회 */
+    fun findByPlanCellId(planCellId: String): WisdomPostEntity?
+    fun findByPlanCellIdIn(planCellIds: Collection<String>): List<WisdomPostEntity>
 }
 
 interface WisdomAttachmentRepository : JpaRepository<WisdomAttachmentEntity, String> {

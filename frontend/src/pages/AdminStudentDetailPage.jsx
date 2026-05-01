@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo, lazy, Suspense } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { apiGet, apiPost } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
 import { calcSeasonScore, FORMULA_TEXT } from "../utils/seasonScore";
@@ -50,7 +50,14 @@ const contentTypeLabel = (t) => {
 function AdminStudentDetailPage() {
   const { userId } = useParams();
   const navigate = useNavigate();
-  const [tab, setTab] = useState("info");
+  const [searchParams] = useSearchParams();
+  // URL 의 ?tab= 쿼리로 초기 탭 지정 가능 (학습 계획표 셀에서 점프 시 사용)
+  const initialTab = (() => {
+    const t = searchParams.get("tab");
+    const valid = ["info", "learning", "tests", "inventory", "duel", "report"];
+    return valid.includes(t) ? t : "info";
+  })();
+  const [tab, setTab] = useState(initialTab);
   const [student, setStudent] = useState(null);
   const [loadingInfo, setLoadingInfo] = useState(true);
   const [learningLogs, setLearningLogs] = useState([]);

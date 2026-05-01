@@ -80,6 +80,40 @@ export default function StudyPlanPage() {
       return;
     }
 
+    // 글쓰기: wisdomPostId 있으면 본인 글 상세로, 없으면 새 글쓰기로
+    if (aType === "writing" || aKind === "write") {
+      // cellAction 우선, config_json fallback
+      const action = cell?.cellAction || asset?.cellAction || null;
+      let cfg = action || null;
+      if (!cfg) {
+        const cfgJson = asset?.configJson || asset?.config_json;
+        if (typeof cfgJson === "string") {
+          try { cfg = JSON.parse(cfgJson); } catch { cfg = null; }
+        } else if (cfgJson && typeof cfgJson === "object") {
+          cfg = cfgJson;
+        }
+      }
+      const wisdomPostId =
+        cell?.wisdomPostId ||
+        cell?.wisdom_post_id ||
+        cfg?.wisdomPostId ||
+        cfg?.wisdom_post_id;
+      if (wisdomPostId) {
+        navigate(`/writing/post/${wisdomPostId}`);
+        return;
+      }
+      const levelId = cfg?.levelId || cfg?.level_id || asset?.levelId;
+      const topicKey = cfg?.topicKey || cfg?.topic_key || asset?.topicKey || "";
+      const topicLabel = cfg?.topicLabel || cfg?.topic_label || asset?.topicLabel || "";
+      if (!levelId) return;
+      const params = new URLSearchParams();
+      params.set("planCellId", cell.cellId);
+      if (topicKey) params.set("topicKey", topicKey);
+      if (topicLabel) params.set("topicLabel", topicLabel);
+      navigate(`/writing/${levelId}/new?${params.toString()}`);
+      return;
+    }
+
     // 학습활동: pending/partial → 제출 페이지
     if (aType === "activity" && (cell.status === "pending" || cell.status === "partial")) {
       navigate(`/study-plan/submit/${cell.cellId}`);

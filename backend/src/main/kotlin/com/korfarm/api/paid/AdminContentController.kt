@@ -6,7 +6,6 @@ import com.korfarm.api.contracts.AdminContentImportRequest
 import com.korfarm.api.contracts.AdminTestAnswersRequest
 import com.korfarm.api.contracts.AdminTestCreateRequest
 import com.korfarm.api.contracts.AdminTestGradeRequest
-import com.korfarm.api.contracts.AdminWritingFeedbackRequest
 import com.korfarm.api.security.AdminGuard
 import com.korfarm.api.security.SecurityUtils
 import com.korfarm.api.system.FeatureFlagService
@@ -90,29 +89,6 @@ class AdminContentController(
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
         featureFlagService.requireEnabled("feature.admin.console")
         val data = adminContentService.previewContent(contentId)
-        return ApiResponse(success = true, data = data)
-    }
-
-    @PostMapping("/writing/{submissionId}/feedback")
-    fun feedback(
-        @PathVariable submissionId: String,
-        @Valid @RequestBody request: AdminWritingFeedbackRequest
-    ): ApiResponse<WritingFeedbackView> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
-        featureFlagService.requireEnabled("feature.admin.console")
-        featureFlagService.requireEnabled("feature.paid.writing")
-        val reviewerId = SecurityUtils.currentUserId()
-            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
-        val data = adminContentService.submitWritingFeedback(submissionId, reviewerId, request)
-        return ApiResponse(success = true, data = data)
-    }
-
-    @GetMapping("/writing/submissions")
-    fun listWritingSubmissions(): ApiResponse<List<AdminWritingSubmissionSummary>> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
-        featureFlagService.requireEnabled("feature.admin.console")
-        featureFlagService.requireEnabled("feature.paid.writing")
-        val data = adminContentService.listWritingSubmissions()
         return ApiResponse(success = true, data = data)
     }
 

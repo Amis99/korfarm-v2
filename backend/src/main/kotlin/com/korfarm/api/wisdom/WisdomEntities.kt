@@ -36,6 +36,10 @@ class WisdomPostEntity(
     @Column(nullable = false)
     var status: String,
 
+    /** 학습 계획표 글쓰기 셀과 연결된 경우 셀 ID (V0082 신설) */
+    @Column(name = "plan_cell_id")
+    var planCellId: String? = null,
+
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now(),
 

@@ -1,5 +1,7 @@
 package com.korfarm.api.studyplan
 
+import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.learning.FarmLearningLogRepository
@@ -7,6 +9,7 @@ import com.korfarm.api.org.*
 import com.korfarm.api.security.SecurityUtils
 import com.korfarm.api.test.TestSubmissionRepo
 import com.korfarm.api.user.UserRepository
+import com.korfarm.api.wisdom.WisdomPostRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -28,8 +31,26 @@ class StudyPlanService(
     private val classRepo: ClassRepository,
     private val userRepo: UserRepository,
     private val farmLearningLogRepo: FarmLearningLogRepository,
-    private val testSubmissionRepo: TestSubmissionRepo
+    private val testSubmissionRepo: TestSubmissionRepo,
+    private val wisdomPostRepo: WisdomPostRepository,
+    private val objectMapper: ObjectMapper
 ) {
+
+    companion object {
+        // 허용된 asset_type 값 (DB 스키마 변경 없이 코드에서 검증)
+        private val ALLOWED_ASSET_TYPES = setOf("korfarm", "writing", "test", "activity")
+    }
+
+    /** 신규/수정 시 asset_type 유효성 검사 */
+    private fun validateAssetType(assetType: String) {
+        if (assetType !in ALLOWED_ASSET_TYPES) {
+            throw ApiException(
+                "BAD_REQUEST",
+                "허용되지 않은 asset_type 입니다: $assetType (허용: ${ALLOWED_ASSET_TYPES.joinToString()})",
+                HttpStatus.BAD_REQUEST
+            )
+        }
+    }
     // ── 관리자: 계획표 CRUD ──
 
     @Transactional
@@ -69,6 +90,7 @@ class StudyPlanService(
 
         // 에셋(열) 저장
         req.assets.forEachIndexed { idx, a ->
+            validateAssetType(a.assetType)
             val asset = StudyPlanAssetEntity(
                 id = IdGenerator.newId("spa"),
                 planId = plan.id,
@@ -252,6 +274,7 @@ class StudyPlanService(
     @Transactional
     fun addAsset(planId: String, req: AddAssetRequest): StudyPlanAssetEntity {
         findPlan(planId)
+        validateAssetType(req.assetType)
         val asset = StudyPlanAssetEntity(
             id = IdGenerator.newId("spa"),
             planId = planId,
@@ -282,7 +305,7 @@ class StudyPlanService(
             ApiException("NOT_FOUND", "asset not found", HttpStatus.NOT_FOUND)
         }
         req.label?.let { asset.label = it }
-        req.assetType?.let { asset.assetType = it }
+        req.assetType?.let { validateAssetType(it); asset.assetType = it }
         req.assetKind?.let { asset.assetKind = it }
         req.refId?.let { asset.refId = it }
         req.configJson?.let { asset.configJson = it }
@@ -360,7 +383,7 @@ class StudyPlanService(
     // ── 관리자: 매트릭스 조회 (자동 동기화 포함) ──
 
     @Transactional
-    fun getMatrix(planId: String, userId: String): MatrixResponse {
+    fun getMatrix(planId: String, userId: String, isAdmin: Boolean = false): MatrixResponse {
         val scopes = scopeRepo.findByPlanIdOrderBySortOrder(planId).map { it.toResponse() }
         val assets = assetRepo.findByPlanIdOrderBySortOrder(planId)
         val assetMap = assets.associateBy { it.id }
@@ -370,12 +393,99 @@ class StudyPlanService(
         syncKorfarmCellStatus(cells, userId, assetMap)
         syncTestCellStatus(cells, userId, assetMap)
 
-        val cellResponses = cells.map { it.toResponse(assetMap[it.assetId]) }
+        // 글쓰기 셀에 연결된 wisdom_post 일괄 조회 (cellAction 의 wisdomPostId 채우기 용)
+        val writingCellIds = cells.filter { assetMap[it.assetId]?.assetType == "writing" }.map { it.id }
+        val wisdomPostByCellId: Map<String, String> = if (writingCellIds.isNotEmpty()) {
+            wisdomPostRepo.findByPlanCellIdIn(writingCellIds)
+                .filter { it.status == "active" }
+                .associate { it.planCellId!! to it.id }
+        } else emptyMap()
+
+        // 테스트 셀의 제출 여부 확인
+        val testSubmissionCellIds: Set<String> = cells.filter {
+            val asset = assetMap[it.assetId]
+            asset?.assetType == "test" && asset.refId != null
+        }.mapNotNull { cell ->
+            val testId = assetMap[cell.assetId]?.refId ?: return@mapNotNull null
+            if (testSubmissionRepo.findByTestIdAndUserId(testId, userId) != null) cell.id else null
+        }.toSet()
+
+        val cellResponses = cells.map { cell ->
+            val asset = assetMap[cell.assetId]
+            val action = buildCellAction(
+                cell = cell,
+                asset = asset,
+                userId = userId,
+                wisdomPostByCellId = wisdomPostByCellId,
+                testSubmissionCellIds = testSubmissionCellIds,
+                isAdmin = isAdmin
+            )
+            cell.toResponse(asset, action)
+        }
         return MatrixResponse(
             scopes = scopes,
             assets = assets.map { it.toResponse() },
             cells = cellResponses
         )
+    }
+
+    /**
+     * 셀 클릭 시 화면 라우팅 정보 (cellAction) 생성.
+     * - korfarm: { kind:"learn", contentId, learningHistoryUrl }
+     * - writing: { kind:"write", levelId, topicKey, topicLabel, wisdomPostId }
+     * - test: { kind:"test", testId, hasSubmission }
+     * - activity: { kind:"activity" }
+     */
+    private fun buildCellAction(
+        cell: StudyPlanCellEntity,
+        asset: StudyPlanAssetEntity?,
+        userId: String,
+        wisdomPostByCellId: Map<String, String>,
+        testSubmissionCellIds: Set<String>,
+        isAdmin: Boolean
+    ): CellAction? {
+        if (asset == null) return null
+        return when (asset.assetType) {
+            "korfarm" -> {
+                val contentId = cell.cellRefId ?: asset.refId
+                CellAction(
+                    kind = "learn",
+                    contentId = contentId,
+                    learningHistoryUrl = if (isAdmin && contentId != null) {
+                        "/admin/students/$userId/learning-history?contentId=$contentId"
+                    } else null
+                )
+            }
+            "writing" -> {
+                val cfg = parseWritingConfig(asset.configJson)
+                CellAction(
+                    kind = "write",
+                    levelId = cfg["levelId"] ?: asset.refId,
+                    topicKey = cfg["topicKey"],
+                    topicLabel = cfg["topicLabel"] ?: asset.label,
+                    wisdomPostId = wisdomPostByCellId[cell.id]
+                )
+            }
+            "test" -> CellAction(
+                kind = "test",
+                testId = asset.refId,
+                hasSubmission = cell.id in testSubmissionCellIds
+            )
+            "activity" -> CellAction(kind = "activity")
+            else -> null
+        }
+    }
+
+    private fun parseWritingConfig(configJson: String?): Map<String, String> {
+        if (configJson.isNullOrBlank()) return emptyMap()
+        return try {
+            val raw: Map<String, Any?> = objectMapper.readValue(
+                configJson, object : TypeReference<Map<String, Any?>>() {}
+            )
+            raw.mapNotNull { (k, v) -> v?.toString()?.let { k to it } }.toMap()
+        } catch (e: Exception) {
+            emptyMap()
+        }
     }
 
     // ── 관리자: 국어농장 셀 콘텐츠 배정 ──
@@ -674,6 +784,12 @@ class StudyPlanService(
                 "scored" to setOf("passed", "retry"),
                 "retry" to setOf("scored")
             )
+            "writing" -> mapOf(
+                "pending" to setOf("submitted"),
+                "submitted" to setOf("reviewed", "partial"),
+                "partial" to setOf("submitted"),
+                "reviewed" to setOf("completed")
+            )
             else -> emptyMap()
         }
         return validTransitions[from]?.contains(to) ?: false
@@ -811,6 +927,7 @@ class StudyPlanService(
             "korfarm" -> if (asset.refId != null) "pending" else "unassigned"
             "activity" -> "unassigned"
             "test" -> "pending"
+            "writing" -> "pending"
             else -> "pending"
         }
     }
@@ -842,5 +959,139 @@ class StudyPlanService(
                 }
             }
         }
+    }
+
+    // ── 기관 default 템플릿 → 학생용 복제 ──
+
+    /**
+     * 기관의 active 상태 default 템플릿(is_template=true) 들을 새 학생용으로 복제.
+     * 학생이 기관에 가입(또는 활성화)될 때 호출됨.
+     * 이미 복제 이력이 있는 템플릿은 skip — 중복 생성 방지.
+     */
+    @Transactional
+    fun cloneTemplatesForStudent(orgId: String, userId: String): Int {
+        val templates = planRepo.findByOrgIdAndIsTemplateAndStatus(orgId, true, "active")
+        if (templates.isEmpty()) return 0
+
+        var cloned = 0
+        templates.forEach { template ->
+            // 이미 이 학생용 복제본이 존재하면 skip
+            val existingCopies = planRepo.findByTemplateOriginId(template.id)
+            val alreadyHas = existingCopies.any { copy ->
+                // copy.targets 에 user 가 있는지 확인
+                targetRepo.findByPlanId(copy.id).any {
+                    it.targetType == "user" && it.targetId == userId
+                }
+            }
+            if (alreadyHas) return@forEach
+
+            cloneTemplateInternal(template, listOf(userId))
+            cloned += 1
+        }
+        return cloned
+    }
+
+    /**
+     * 어드민 액션: 템플릿을 현재 active 학생들에게 일괄 반영.
+     * 이미 복제본이 있는 학생은 skip, 새 학생만 복제.
+     * 반환값: 새로 복제된 학생 수.
+     */
+    @Transactional
+    fun applyTemplateToCurrentStudents(templateId: String): Int {
+        val template = planRepo.findById(templateId).orElseThrow {
+            ApiException("NOT_FOUND", "template not found", HttpStatus.NOT_FOUND)
+        }
+        if (!template.isTemplate) {
+            throw ApiException("BAD_REQUEST", "템플릿이 아닙니다", HttpStatus.BAD_REQUEST)
+        }
+
+        // 기관의 active 학생 전부
+        val activeStudents = orgMembershipRepo.findByOrgIdAndStatus(template.orgId, "active")
+            .filter { it.role == "STUDENT" }
+            .map { it.userId }
+            .toSet()
+
+        if (activeStudents.isEmpty()) return 0
+
+        // 이미 이 템플릿으로 만들어진 복제본의 학생들
+        val existingCopies = planRepo.findByTemplateOriginId(template.id)
+        val alreadyClonedUsers = existingCopies.flatMap { copy ->
+            targetRepo.findByPlanId(copy.id)
+                .filter { it.targetType == "user" }
+                .map { it.targetId }
+        }.toSet()
+
+        val newStudents = activeStudents - alreadyClonedUsers
+        if (newStudents.isEmpty()) return 0
+
+        cloneTemplateInternal(template, newStudents.toList())
+        return newStudents.size
+    }
+
+    /**
+     * 내부 헬퍼: 템플릿 → 새 학생용 plan 생성 (scopes/assets/cells 복사).
+     * 학생들마다 별도의 plan 을 만드는 게 아니라, 한 plan 에 여러 학생을 target 으로 묶음.
+     */
+    private fun cloneTemplateInternal(template: StudyPlanEntity, userIds: List<String>) {
+        if (userIds.isEmpty()) return
+
+        // 1) 새 plan 생성
+        val newPlan = StudyPlanEntity(
+            id = IdGenerator.newId("sp"),
+            orgId = template.orgId,
+            title = template.title,
+            description = template.description,
+            examScope = template.examScope,
+            startDate = template.startDate,
+            endDate = template.endDate,
+            status = "active",
+            isTemplate = false,
+            templateOriginId = template.id,
+            createdBy = template.createdBy
+        )
+        planRepo.save(newPlan)
+
+        // 2) targets 복사 (학생 user 들)
+        userIds.forEach { uid ->
+            targetRepo.save(StudyPlanTargetEntity(
+                id = IdGenerator.newId("spt"),
+                planId = newPlan.id,
+                targetType = "user",
+                targetId = uid
+            ))
+        }
+
+        // 3) scopes 복사
+        val srcScopes = scopeRepo.findByPlanIdOrderBySortOrder(template.id)
+        val newScopes = srcScopes.map { s ->
+            val ns = StudyPlanScopeEntity(
+                id = IdGenerator.newId("sps"),
+                planId = newPlan.id,
+                label = s.label,
+                sortOrder = s.sortOrder
+            )
+            scopeRepo.save(ns)
+            ns
+        }
+
+        // 4) assets 복사
+        val srcAssets = assetRepo.findByPlanIdOrderBySortOrder(template.id)
+        val newAssets = srcAssets.map { a ->
+            val na = StudyPlanAssetEntity(
+                id = IdGenerator.newId("spa"),
+                planId = newPlan.id,
+                assetType = a.assetType,
+                label = a.label,
+                assetKind = a.assetKind,
+                refId = a.refId,
+                sortOrder = a.sortOrder,
+                configJson = a.configJson
+            )
+            assetRepo.save(na)
+            na
+        }
+
+        // 5) cells 자동 생성 (학생 × scope × asset)
+        createCellsForUsers(newPlan.id, newScopes, newAssets, userIds.toSet())
     }
 }

@@ -10,6 +10,14 @@ const ASSET_TYPE_LABELS = {
   writing: "글쓰기",
 };
 
+// 시각 라벨용 머터리얼 심볼 아이콘 (작업 6)
+const ASSET_TYPE_ICONS = {
+  korfarm: "menu_book",
+  writing: "edit_note",
+  test: "assignment",
+  activity: "upload_file",
+};
+
 export default function StudyPlanMatrix({
   scopes, assets, cells, admin, onCellClick,
   onAddScope, onDeleteScope, onAddAsset, onDeleteAsset,
@@ -29,7 +37,17 @@ export default function StudyPlanMatrix({
   const [newAssetLabel, setNewAssetLabel] = useState("");
   const [newAssetDue, setNewAssetDue] = useState("");
   const [showContentSearch, setShowContentSearch] = useState(false);
+  // writing 전용 입력
+  const [newWritingTopicKey, setNewWritingTopicKey] = useState("");
+  const [newWritingLevelId, setNewWritingLevelId] = useState("");
   const popoverRef = useRef(null);
+
+  const WRITING_LEVEL_OPTIONS = [
+    "SAUSSURE_1","SAUSSURE_2","SAUSSURE_3",
+    "FREGE_1","FREGE_2","FREGE_3",
+    "RUSSELL_1","RUSSELL_2","RUSSELL_3",
+    "WITTGENSTEIN_1","WITTGENSTEIN_2","WITTGENSTEIN_3",
+  ];
 
   useEffect(() => {
     if (!showAssetPopover) return;
@@ -51,16 +69,33 @@ export default function StudyPlanMatrix({
 
   const handleAssetAdd = () => {
     if (!newAssetLabel.trim() || !onAddAsset) return;
-    const configJson = newAssetDue ? JSON.stringify({ dueDate: newAssetDue }) : undefined;
+    // writing 은 levelId 필수
+    if (newAssetType === "writing" && !newWritingLevelId) {
+      alert("글쓰기 레벨을 선택해 주세요.");
+      return;
+    }
+    const cfg = {};
+    if (newAssetDue) cfg.dueDate = newAssetDue;
+    if (newAssetType === "writing") {
+      cfg.levelId = newWritingLevelId;
+      cfg.topicLabel = newAssetLabel.trim();
+      if (newWritingTopicKey.trim()) cfg.topicKey = newWritingTopicKey.trim();
+    }
+    const configJson = Object.keys(cfg).length > 0 ? JSON.stringify(cfg) : undefined;
+    const assetKind =
+      newAssetType === "test" ? "test" :
+      newAssetType === "writing" ? "write" : "study";
     onAddAsset({
       assetType: newAssetType,
       label: newAssetLabel.trim(),
-      assetKind: newAssetType === "test" ? "test" : "study",
+      assetKind,
       configJson,
     });
     setNewAssetLabel("");
     setNewAssetType("activity");
     setNewAssetDue("");
+    setNewWritingTopicKey("");
+    setNewWritingLevelId("");
     setShowAssetPopover(false);
   };
 
@@ -104,6 +139,12 @@ export default function StudyPlanMatrix({
               <th key={a.id} className="sp-asset-header">
                 <div className="sp-asset-header-content">
                   <span className={`sp-asset-type-badge ${a.assetType || "activity"}`}>
+                    <span
+                      className="material-symbols-outlined"
+                      style={{ fontSize: 12, verticalAlign: "middle", marginRight: 3 }}
+                    >
+                      {ASSET_TYPE_ICONS[a.assetType] || "label"}
+                    </span>
                     {ASSET_TYPE_LABELS[a.assetType] || a.assetType}
                   </span>
                   <span className="sp-asset-label">{a.label}</span>
@@ -154,6 +195,37 @@ export default function StudyPlanMatrix({
                           className="asp-add-btn sp-popover-add"
                           onClick={() => setShowContentSearch(true)}
                         >콘텐츠 검색</button>
+                      </>
+                    ) : newAssetType === "writing" ? (
+                      <>
+                        <input
+                          className="asp-input sp-popover-input"
+                          value={newAssetLabel}
+                          onChange={(e) => setNewAssetLabel(e.target.value)}
+                          placeholder="주제 (학생에게 보임)"
+                          autoFocus
+                        />
+                        <input
+                          className="asp-input sp-popover-input"
+                          value={newWritingTopicKey}
+                          onChange={(e) => setNewWritingTopicKey(e.target.value)}
+                          placeholder="topicKey (선택)"
+                        />
+                        <select
+                          className="asp-input sp-popover-input"
+                          value={newWritingLevelId}
+                          onChange={(e) => setNewWritingLevelId(e.target.value)}
+                        >
+                          <option value="">레벨 선택</option>
+                          {WRITING_LEVEL_OPTIONS.map((lv) => (
+                            <option key={lv} value={lv}>{lv}</option>
+                          ))}
+                        </select>
+                        <div className="sp-popover-due">
+                          <label>기한</label>
+                          <input type="date" className="asp-input sp-popover-date" value={newAssetDue} onChange={(e) => setNewAssetDue(e.target.value)} />
+                        </div>
+                        <button className="asp-add-btn sp-popover-add" onClick={handleAssetAdd}>추가</button>
                       </>
                     ) : (
                       <>

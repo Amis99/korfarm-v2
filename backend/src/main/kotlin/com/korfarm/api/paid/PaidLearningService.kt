@@ -6,7 +6,6 @@ import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.test.TestPaperEntity
 import com.korfarm.api.contracts.SubmitRequest
-import com.korfarm.api.contracts.WritingSubmitRequest
 import com.korfarm.api.learning.LearningAttemptEntity
 import com.korfarm.api.learning.LearningAttemptRepository
 import com.korfarm.api.learning.SubmitResult
@@ -27,7 +26,6 @@ class PaidLearningService(
     private val contentRepository: ContentRepository,
     private val contentVersionRepository: ContentVersionRepository,
     private val testPaperRepository: TestPaperRepository,
-    private val writingSubmissionRepository: WritingSubmissionRepository,
     private val learningAttemptRepository: LearningAttemptRepository,
     private val economyService: EconomyService,
     private val userRepository: UserRepository,
@@ -70,33 +68,6 @@ class PaidLearningService(
                 description = null
             )
         }
-    }
-
-    @Transactional(readOnly = true)
-    fun writingPrompts(): List<WritingPrompt> {
-        return contentRepository.findByContentTypeAndStatus("writing", "active").map {
-            WritingPrompt(
-                promptId = it.id,
-                title = it.title,
-                prompt = it.title
-            )
-        }
-    }
-
-    @Transactional
-    fun submitWriting(userId: String, request: WritingSubmitRequest): String {
-        val promptId = contentRepository.findByContentTypeAndStatus("writing", "active")
-            .firstOrNull()?.id ?: "prompt_default"
-        val submission = WritingSubmissionEntity(
-            id = IdGenerator.newId("ws"),
-            userId = userId,
-            promptId = promptId,
-            content = request.content,
-            status = "submitted",
-            submittedAt = LocalDateTime.now()
-        )
-        writingSubmissionRepository.save(submission)
-        return submission.id
     }
 
     @Transactional(readOnly = true)

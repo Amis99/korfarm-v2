@@ -30,6 +30,14 @@ class StudyPlanEntity(
     @Column(nullable = false)
     var status: String = "active",
 
+    /** 기관 default 템플릿 여부. 새 학생 가입 시 자동 복제 (V0082 신설) */
+    @Column(name = "is_template", nullable = false)
+    var isTemplate: Boolean = false,
+
+    /** 학생용 복제본이라면 원본 템플릿 plan id (V0082 신설) */
+    @Column(name = "template_origin_id")
+    var templateOriginId: String? = null,
+
     @Column(name = "created_by", nullable = false)
     var createdBy: String,
 

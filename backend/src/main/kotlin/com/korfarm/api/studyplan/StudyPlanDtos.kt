@@ -203,7 +203,28 @@ data class CellResponse(
     val assetType: String? = null,
     val assetKind: String? = null,
     val refId: String? = null,
-    val cellRefId: String? = null
+    val cellRefId: String? = null,
+    /** 셀 클릭 시 화면 전환에 필요한 정보. asset_type 별로 다른 필드. */
+    val cellAction: CellAction? = null
+)
+
+/**
+ * 셀 클릭 시 학생/어드민 화면이 어떤 동작을 해야 하는지 알려주는 응답 모델.
+ * - korfarm: 국어농장 학습 콘텐츠로 이동
+ * - writing: 글농장(wisdom) 글쓰기 화면으로 이동
+ * - test: 테스트 응시/조회 화면으로 이동
+ * - activity: 학습활동(파일 제출) 화면으로 이동 (기존 로직)
+ */
+data class CellAction(
+    val kind: String,                 // "learn" | "write" | "test" | "activity"
+    val contentId: String? = null,    // korfarm: 콘텐츠 ID
+    val learningHistoryUrl: String? = null, // 어드민용 학습 이력 링크 (korfarm)
+    val levelId: String? = null,      // writing: 글농장 레벨
+    val topicKey: String? = null,     // writing
+    val topicLabel: String? = null,   // writing
+    val wisdomPostId: String? = null, // writing: 학생이 이미 작성한 경우 글 ID
+    val testId: String? = null,       // test: 테스트 ID
+    val hasSubmission: Boolean? = null // test: 학생 제출 존재 여부
 )
 
 data class CellFileResponse(
@@ -292,13 +313,17 @@ internal fun StudyPlanAssetEntity.toResponse(): AssetResponse {
     )
 }
 
-internal fun StudyPlanCellEntity.toResponse(asset: StudyPlanAssetEntity? = null): CellResponse {
+internal fun StudyPlanCellEntity.toResponse(
+    asset: StudyPlanAssetEntity? = null,
+    cellAction: CellAction? = null
+): CellResponse {
     return CellResponse(
         cellId = id, scopeId = scopeId, assetId = assetId,
         status = status, score = score, submissionCount = submissionCount,
         adminNote = adminNote, reviewedAt = reviewedAt?.toString(),
         assetType = asset?.assetType, assetKind = asset?.assetKind, refId = asset?.refId,
-        cellRefId = cellRefId
+        cellRefId = cellRefId,
+        cellAction = cellAction
     )
 }
 

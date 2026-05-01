@@ -2,6 +2,7 @@ package com.korfarm.api.org
 
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
+import com.korfarm.api.studyplan.StudyPlanService
 import com.korfarm.api.user.ParentStudentLinkEntity
 import com.korfarm.api.user.ParentStudentLinkRepository
 import com.korfarm.api.user.UserRepository
@@ -15,7 +16,8 @@ class MembershipApprovalService(
     private val orgMembershipRepository: OrgMembershipRepository,
     private val orgRepository: OrgRepository,
     private val userRepository: UserRepository,
-    private val parentStudentLinkRepository: ParentStudentLinkRepository
+    private val parentStudentLinkRepository: ParentStudentLinkRepository,
+    private val studyPlanService: StudyPlanService
 ) {
     private val logger = LoggerFactory.getLogger(MembershipApprovalService::class.java)
 
@@ -93,6 +95,18 @@ class MembershipApprovalService(
         orgMembershipRepository.save(membership)
 
         logger.info("멤버십 승인 완료: membershipId={}, approvedBy={}", membershipId, approvedBy)
+
+        // 학생이면 기관 default 템플릿 자동 복제
+        if (membership.role == "STUDENT") {
+            try {
+                val cloned = studyPlanService.cloneTemplatesForStudent(membership.orgId, membership.userId)
+                if (cloned > 0) {
+                    logger.info("기관 default 템플릿 복제 완료: orgId={}, userId={}, count={}", membership.orgId, membership.userId, cloned)
+                }
+            } catch (e: Exception) {
+                logger.warn("기관 default 템플릿 복제 실패 (승인은 정상 처리): membershipId={}, error={}", membershipId, e.message)
+            }
+        }
 
         // 학부모인 경우 자녀 자동 연결 시도
         var autoLinked = false

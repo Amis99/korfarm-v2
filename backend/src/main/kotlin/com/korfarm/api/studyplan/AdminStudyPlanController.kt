@@ -84,6 +84,17 @@ class AdminStudyPlanController(
         return ApiResponse(success = true, data = mapOf("planId" to planId))
     }
 
+    /**
+     * 템플릿(is_template=true) 을 현재 기관 active 학생들에게 일괄 반영.
+     * 이미 복제본이 있는 학생은 skip — 새 학생만 추가됨.
+     */
+    @PostMapping("/{planId}/apply-to-students")
+    fun applyTemplateToStudents(@PathVariable planId: String): ApiResponse<Map<String, Any>> {
+        requireAdmin()
+        val cloned = service.applyTemplateToCurrentStudents(planId)
+        return ApiResponse(success = true, data = mapOf("planId" to planId, "newlyCloned" to cloned))
+    }
+
     // ── 범위(행) 관리 ──
 
     @PostMapping("/{planId}/scopes")
@@ -192,7 +203,7 @@ class AdminStudyPlanController(
         @RequestParam userId: String
     ): ApiResponse<MatrixResponse> {
         requireAdmin()
-        return ApiResponse(success = true, data = service.getMatrix(planId, userId))
+        return ApiResponse(success = true, data = service.getMatrix(planId, userId, isAdmin = true))
     }
 
     // ── 셀 관리 ──

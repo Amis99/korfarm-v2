@@ -38,23 +38,6 @@ data class ContentPreview(
     val content: Map<String, Any>
 )
 
-data class WritingFeedbackView(
-    val feedbackId: String,
-    val submissionId: String,
-    val reviewerId: String,
-    val comment: String?,
-    val createdAt: LocalDateTime
-)
-
-data class AdminWritingSubmissionSummary(
-    val submissionId: String,
-    val userId: String,
-    val studentName: String,
-    val promptId: String,
-    val status: String,
-    val submittedAt: LocalDateTime?
-)
-
 data class TestPaperView(
     val testId: String,
     val title: String,

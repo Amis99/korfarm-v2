@@ -7,6 +7,10 @@ interface StudyPlanRepository : JpaRepository<StudyPlanEntity, String> {
     fun findByOrgIdAndStatusOrderByCreatedAtDesc(orgId: String, status: String): List<StudyPlanEntity>
     fun findByStatusOrderByCreatedAtDesc(status: String): List<StudyPlanEntity>
     fun findByOrgIdOrderByCreatedAtDesc(orgId: String): List<StudyPlanEntity>
+    /** 기관 default 템플릿 조회 */
+    fun findByOrgIdAndIsTemplateAndStatus(orgId: String, isTemplate: Boolean, status: String): List<StudyPlanEntity>
+    /** 특정 템플릿에서 파생된 학생용 복제본 조회 */
+    fun findByTemplateOriginId(templateOriginId: String): List<StudyPlanEntity>
 }
 
 interface StudyPlanTargetRepository : JpaRepository<StudyPlanTargetEntity, String> {

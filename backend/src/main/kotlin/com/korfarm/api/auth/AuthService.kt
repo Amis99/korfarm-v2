@@ -9,6 +9,7 @@ import com.korfarm.api.org.OrgRepository
 import com.korfarm.api.org.OrgMembershipEntity
 import com.korfarm.api.security.JwtProperties
 import com.korfarm.api.security.JwtService
+import com.korfarm.api.studyplan.StudyPlanService
 import com.korfarm.api.user.RefreshTokenEntity
 import com.korfarm.api.user.RefreshTokenRepository
 import com.korfarm.api.user.UserEntity
@@ -35,7 +36,8 @@ class AuthService(
     private val orgMembershipRepository: OrgMembershipRepository,
     private val orgRepository: OrgRepository,
     private val parentStudentLinkRepository: ParentStudentLinkRepository,
-    private val subscriptionRepository: SubscriptionRepository
+    private val subscriptionRepository: SubscriptionRepository,
+    private val studyPlanService: StudyPlanService
 ) {
     private val logger = LoggerFactory.getLogger(AuthService::class.java)
 
@@ -128,19 +130,19 @@ class AuthService(
 
         // 8. OrgMembership 생성
         val existing = orgMembershipRepository.findByOrgIdAndUserId(org.id, user.id)
+        val createdRole: String = when (normalizedAccountType) {
+            "parent" -> "PARENT"
+            "org_admin" -> "ORG_ADMIN"
+            else -> "STUDENT"
+        }
         if (existing == null) {
-            val role = when (normalizedAccountType) {
-                "parent" -> "PARENT"
-                "org_admin" -> "ORG_ADMIN"
-                else -> "STUDENT"
-            }
             val now = LocalDateTime.now()
             orgMembershipRepository.save(
                 OrgMembershipEntity(
                     id = IdGenerator.newId("om"),
                     orgId = org.id,
                     userId = user.id,
-                    role = role,
+                    role = createdRole,
                     status = membershipStatus,
                     requestedAt = now,
                     approvedAt = if (isAutoApprove) now else null,
@@ -149,6 +151,18 @@ class AuthService(
                     linkedParentPhone = request.linkedParentPhone
                 )
             )
+        }
+
+        // 8-1. 학생이 active 멤버십으로 가입한 경우 기관 default 템플릿 자동 복제
+        if (isAutoApprove && createdRole == "STUDENT") {
+            try {
+                val cloned = studyPlanService.cloneTemplatesForStudent(org.id, user.id)
+                if (cloned > 0) {
+                    logger.info("기관 default 템플릿 복제 완료: orgId={}, userId={}, count={}", org.id, user.id, cloned)
+                }
+            } catch (ex: Exception) {
+                logger.warn("기관 default 템플릿 복제 실패 (가입은 정상 처리): userId={}, error={}", user.id, ex.message)
+            }
         }
 
         // 9. 학부모 가입 시 학생 매칭 성공이면 자동 연결

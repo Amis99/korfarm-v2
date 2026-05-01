@@ -16,13 +16,6 @@ const SAMPLE_WRITING = {
   attachmentIds: [],
 };
 
-const SAMPLE_ASSIGNMENT_SUBMIT = {
-  content: {
-    answer: "Assignment response goes here.",
-    notes: "Draft submission.",
-  },
-};
-
 const SAMPLE_POST_CREATE = {
   title: "첫 번째 게시글",
   content: "학습 내용을 공유합니다.",
@@ -139,33 +132,6 @@ const SAMPLE_CONTENT_IMPORT = {
     title: "Sample content",
     questions: [],
   },
-};
-
-const SAMPLE_ASSIGNMENT_CREATE = {
-  assignmentType: "writing",
-  title: "Weekly Writing",
-  payload: {
-    prompt: "Write five lines about your week.",
-  },
-  dueAt: "2026-03-10T23:59:00+09:00",
-  targets: [{ targetType: "class", targetId: "class_001" }],
-};
-
-const SAMPLE_ASSIGNMENT_UPDATE = {
-  title: "Weekly Writing v2",
-  payload: {
-    prompt: "Update the prompt with new guidance.",
-  },
-  status: "active",
-};
-
-const SAMPLE_WRITING_FEEDBACK = {
-  rubric: {
-    structure: 4,
-    logic: 5,
-    expression: 4,
-  },
-  comment: "Good effort. Add more evidence in paragraph 2.",
 };
 
 const SAMPLE_TEST_CREATE = {
@@ -610,53 +576,6 @@ const ACTION_GROUPS = [
     ],
   },
   {
-    id: "assignments",
-    title: "과제",
-    description: "과제 리스트와 제출",
-    actions: [
-      {
-        id: "assignmentsList",
-        title: "과제 목록",
-        description: "내 과제 리스트",
-        method: "GET",
-        path: "/v1/assignments",
-        scope: "user",
-        auth: true,
-      },
-      {
-        id: "assignmentsDetail",
-        title: "과제 상세",
-        description: "과제 상세 조회",
-        method: "GET",
-        path: "/v1/assignments/:assignmentId",
-        scope: "user",
-        auth: true,
-        params: { assignmentId: "assignment_001" },
-      },
-      {
-        id: "assignmentsSubmit",
-        title: "과제 제출",
-        description: "과제 응답 제출",
-        method: "POST",
-        path: "/v1/assignments/:assignmentId/submit",
-        scope: "user",
-        auth: true,
-        params: { assignmentId: "assignment_001" },
-        body: SAMPLE_ASSIGNMENT_SUBMIT,
-      },
-      {
-        id: "assignmentsProgress",
-        title: "과제 진행률",
-        description: "제출 진행 상황",
-        method: "GET",
-        path: "/v1/assignments/:assignmentId/progress",
-        scope: "user",
-        auth: true,
-        params: { assignmentId: "assignment_001" },
-      },
-    ],
-  },
-  {
     id: "boards",
     title: "게시판",
     description: "커뮤니티, 질문, 자료 공유",
@@ -995,53 +914,6 @@ const ACTION_GROUPS = [
     ],
   },
   {
-    id: "admin-assignments",
-    title: "관리자 - 과제",
-    description: "과제 발행과 관리",
-    actions: [
-      {
-        id: "adminAssignmentCreate",
-        title: "과제 생성",
-        description: "과제 발행",
-        method: "POST",
-        path: "/v1/admin/assignments",
-        scope: "admin",
-        auth: true,
-        body: SAMPLE_ASSIGNMENT_CREATE,
-      },
-      {
-        id: "adminAssignmentUpdate",
-        title: "과제 수정",
-        description: "과제 업데이트",
-        method: "PATCH",
-        path: "/v1/admin/assignments/:assignmentId",
-        scope: "admin",
-        auth: true,
-        params: { assignmentId: "assignment_001" },
-        body: SAMPLE_ASSIGNMENT_UPDATE,
-      },
-      {
-        id: "adminAssignmentClose",
-        title: "과제 종료",
-        description: "과제 마감",
-        method: "POST",
-        path: "/v1/admin/assignments/:assignmentId/close",
-        scope: "admin",
-        auth: true,
-        params: { assignmentId: "assignment_001" },
-      },
-      {
-        id: "adminAssignmentOverview",
-        title: "과제 개요",
-        description: "과제 현황",
-        method: "GET",
-        path: "/v1/admin/assignments/overview",
-        scope: "admin",
-        auth: true,
-      },
-    ],
-  },
-  {
     id: "admin-content",
     title: "관리자 - 콘텐츠",
     description: "콘텐츠 업로드, 테스트 관리",
@@ -1065,17 +937,6 @@ const ACTION_GROUPS = [
         scope: "admin",
         auth: true,
         params: { contentId: "content_001" },
-      },
-      {
-        id: "adminWritingFeedback",
-        title: "글쓰기 피드백",
-        description: "글쓰기 채점",
-        method: "POST",
-        path: "/v1/admin/writing/:submissionId/feedback",
-        scope: "admin",
-        auth: true,
-        params: { submissionId: "submission_001" },
-        body: SAMPLE_WRITING_FEEDBACK,
       },
       {
         id: "adminTestCreate",

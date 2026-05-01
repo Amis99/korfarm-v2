@@ -366,6 +366,50 @@
 .asp-btn-retry { background: rgba(255,152,0,0.2); color: #ffcc80; }
 .asp-btn-fail { background: rgba(244,67,54,0.2); color: #ef9a9a; }
 
+/* 대상 chip — 수강반/학생 시각 구분 */
+.aspd-target-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 8px;
+  background: rgba(33,150,243,0.12);
+  color: #90caf9;
+  border-radius: 10px;
+  font-size: 0.72rem;
+}
+
+/* 셀 액션 분기 — 학습 히스토리/첨삭/시험지 PDF 등 점프 버튼 */
+.asp-cell-quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 16px;
+}
+.asp-btn-jump {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(33,150,243,0.15);
+  color: #90caf9;
+  transition: background 0.15s;
+}
+.asp-btn-jump:hover:not(:disabled) {
+  background: rgba(33,150,243,0.25);
+}
+.asp-btn-jump:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.asp-btn-jump .material-symbols-outlined {
+  font-size: 16px;
+}
+
 /* 설정 탭 */
 .aspd-settings-section {
   margin-bottom: 24px;
@@ -454,8 +498,15 @@
   line-height: 1.4;
 }
 .sp-asset-type-badge.korfarm { background: rgba(76,175,80,0.2); color: #66bb6a; }
-.sp-asset-type-badge.activity { background: rgba(33,150,243,0.2); color: #64b5f6; }
+.sp-asset-type-badge.activity { background: rgba(158,158,158,0.2); color: #bdbdbd; }
 .sp-asset-type-badge.test { background: rgba(255,152,0,0.2); color: #ffa726; }
+.sp-asset-type-badge.writing { background: rgba(156,39,176,0.2); color: #ce93d8; }
+
+/* 에셋 타입 옵션 버튼 색상 (팝오버 안) */
+.sp-asset-type-option.korfarm.active { background: rgba(76,175,80,0.25); color: #66bb6a; }
+.sp-asset-type-option.activity.active { background: rgba(158,158,158,0.25); color: #e0e0e0; }
+.sp-asset-type-option.test.active { background: rgba(255,152,0,0.25); color: #ffa726; }
+.sp-asset-type-option.writing.active { background: rgba(156,39,176,0.25); color: #ce93d8; }
 
 /* 에셋 헤더 레이아웃 */
 .sp-asset-header-content {

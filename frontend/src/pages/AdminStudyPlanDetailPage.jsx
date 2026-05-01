@@ -22,7 +22,14 @@ const STATUS_LABEL = {
   scored: "채점됨", passed: "통과", retry: "재시험",
   pending: "미수행", in_progress: "진행중", unassigned: "미배정",
 };
-const ASSET_TYPE_KO = { korfarm: "국어농장", activity: "학습활동", test: "테스트" };
+const ASSET_TYPE_KO = { korfarm: "국어농장", activity: "학습활동", test: "테스트", writing: "글쓰기" };
+
+const WRITING_LEVEL_OPTIONS = [
+  { value: "SAUSSURE_1", label: "소쉬르1 (초1)" }, { value: "SAUSSURE_2", label: "소쉬르2 (초2)" }, { value: "SAUSSURE_3", label: "소쉬르3 (초3)" },
+  { value: "FREGE_1", label: "프레게1 (초4)" }, { value: "FREGE_2", label: "프레게2 (초5)" }, { value: "FREGE_3", label: "프레게3 (초6)" },
+  { value: "RUSSELL_1", label: "러셀1 (중1)" }, { value: "RUSSELL_2", label: "러셀2 (중2)" }, { value: "RUSSELL_3", label: "러셀3 (중3)" },
+  { value: "WITTGENSTEIN_1", label: "비트겐슈타인1 (고1)" }, { value: "WITTGENSTEIN_2", label: "비트겐슈타인2 (고2)" }, { value: "WITTGENSTEIN_3", label: "비트겐슈타인3 (고3)" },
+];
 
 export default function AdminStudyPlanDetailPage() {
   const { planId } = useParams();
@@ -43,6 +50,10 @@ export default function AdminStudyPlanDetailPage() {
   const [newAssetLabel, setNewAssetLabel] = useState("");
   const [newAssetType, setNewAssetType] = useState("activity");
   const [newAssetKind, setNewAssetKind] = useState("study");
+  // writing 전용 추가 입력
+  const [newWritingTopicKey, setNewWritingTopicKey] = useState("");
+  const [newWritingTopicLabel, setNewWritingTopicLabel] = useState("");
+  const [newWritingLevelId, setNewWritingLevelId] = useState("");
 
   const loadPlan = useCallback(() => {
     apiGet(`/v1/admin/study-plans/${planId}`).then(setPlan).catch(() => {});
@@ -157,11 +168,35 @@ export default function AdminStudyPlanDetailPage() {
     const assetKind = isInline ? opts.assetKind : newAssetKind;
     if (!label) return;
     const refId = isInline ? opts.refId : undefined;
+    let configJson = isInline ? opts.configJson : undefined;
+
+    // writing 타입 — topicKey/topicLabel/levelId 를 config_json 으로 묶어 전송
+    if (!isInline && assetType === "writing") {
+      if (!newWritingLevelId) {
+        alert("글쓰기 레벨을 선택해 주세요.");
+        return;
+      }
+      configJson = JSON.stringify({
+        topicKey: newWritingTopicKey.trim() || null,
+        topicLabel: newWritingTopicLabel.trim() || label,
+        levelId: newWritingLevelId,
+      });
+    }
+
     try {
       await apiPost(`/v1/admin/study-plans/${planId}/assets`, {
-        assetType, label, assetKind, ...(refId ? { refId } : {}),
+        assetType,
+        label,
+        assetKind,
+        ...(refId ? { refId } : {}),
+        ...(configJson ? { configJson } : {}),
       });
-      if (!isInline) setNewAssetLabel("");
+      if (!isInline) {
+        setNewAssetLabel("");
+        setNewWritingTopicKey("");
+        setNewWritingTopicLabel("");
+        setNewWritingLevelId("");
+      }
       loadPlan();
       loadMatrix();
     } catch (e) {
@@ -326,7 +361,25 @@ export default function AdminStudyPlanDetailPage() {
                 <h3>기본 정보</h3>
                 <div style={{ fontSize: "0.82rem", color: "#ccc" }}>
                   <p>기간: {plan.startDate} ~ {plan.endDate}</p>
-                  <p>대상: {(plan.targets || []).map((t) => t.targetName || t.targetId).join(", ")}</p>
+                  <p style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 6 }}>
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: 14 }}>groups</span>
+                      대상:
+                    </span>
+                    {(plan.targets || []).length === 0
+                      ? <span style={{ color: "#888" }}>(미배정)</span>
+                      : (plan.targets || []).map((t, i) => (
+                          <span key={i} className="aspd-target-chip" title={t.targetType === "class" ? "수강반" : "개별 학생"}>
+                            <span className="material-symbols-outlined" style={{ fontSize: 12 }}>
+                              {t.targetType === "class" ? "school" : "person"}
+                            </span>
+                            {t.targetName || t.targetId}
+                          </span>
+                        ))}
+                  </p>
+                  <p style={{ fontSize: "0.72rem", color: "#888", marginTop: 4 }}>
+                    수강반/학생 추가 배정은 새 계획표 생성 또는 백엔드 API 확장 후 지원됩니다.
+                  </p>
                 </div>
                 {plan.status === "active" && (
                   <button className="asp-add-btn" style={{ marginTop: 12 }} onClick={handleArchive}>보관 처리</button>
@@ -366,16 +419,60 @@ export default function AdminStudyPlanDetailPage() {
                   ))}
                 </div>
                 <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
-                  <select className="asp-select" style={{ flex: 1 }} value={newAssetType} onChange={(e) => setNewAssetType(e.target.value)}>
+                  <select
+                    className="asp-select"
+                    style={{ flex: 1 }}
+                    value={newAssetType}
+                    onChange={(e) => {
+                      const v = e.target.value;
+                      setNewAssetType(v);
+                      // 타입 변경 시 assetKind 도 자동 보정
+                      if (v === "test") setNewAssetKind("test");
+                      else if (v === "writing") setNewAssetKind("write");
+                      else setNewAssetKind("study");
+                    }}
+                  >
                     <option value="korfarm">국어농장</option>
                     <option value="activity">학습활동</option>
+                    <option value="writing">글쓰기</option>
                     <option value="test">테스트</option>
                   </select>
                   <select className="asp-select" style={{ flex: 1 }} value={newAssetKind} onChange={(e) => setNewAssetKind(e.target.value)}>
                     <option value="study">학습활동</option>
+                    <option value="write">글쓰기</option>
                     <option value="test">테스트</option>
                   </select>
                 </div>
+
+                {/* ── 글쓰기(writing) 전용 입력 ── */}
+                {newAssetType === "writing" && (
+                  <div style={{ display: "flex", flexDirection: "column", gap: 6, marginTop: 8, padding: 10, background: "rgba(156,39,176,0.08)", borderRadius: 6 }}>
+                    <div style={{ fontSize: "0.75rem", color: "#ce93d8" }}>글쓰기 셀 추가 입력</div>
+                    <input
+                      className="asp-input"
+                      value={newWritingTopicKey}
+                      onChange={(e) => setNewWritingTopicKey(e.target.value)}
+                      placeholder="topicKey (식별용, 예: essay_2026spring)"
+                    />
+                    <input
+                      className="asp-input"
+                      value={newWritingTopicLabel}
+                      onChange={(e) => setNewWritingTopicLabel(e.target.value)}
+                      placeholder="topicLabel (학생에게 보일 주제)"
+                    />
+                    <select
+                      className="asp-select"
+                      value={newWritingLevelId}
+                      onChange={(e) => setNewWritingLevelId(e.target.value)}
+                    >
+                      <option value="">레벨 선택...</option>
+                      {WRITING_LEVEL_OPTIONS.map((lv) => (
+                        <option key={lv.value} value={lv.value}>{lv.label}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+
                 <div className="asp-add-row">
                   <input className="asp-input" value={newAssetLabel} onChange={(e) => setNewAssetLabel(e.target.value)} placeholder="새 에셋 추가" onKeyDown={(e) => e.key === "Enter" && handleAddAsset()} />
                   <button className="asp-add-btn" onClick={() => handleAddAsset()}>추가</button>

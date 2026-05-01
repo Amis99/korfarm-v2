@@ -3,7 +3,6 @@ package com.korfarm.api.paid
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.ApiResponse
 import com.korfarm.api.contracts.SubmitRequest
-import com.korfarm.api.contracts.WritingSubmitRequest
 import com.korfarm.api.learning.SubmitResult
 import com.korfarm.api.payment.SubscriptionService
 import com.korfarm.api.security.SecurityUtils
@@ -76,25 +75,6 @@ class PaidLearningController(
         subscriptionService.requireActive(userId)
         val result = paidLearningService.submitLearning(userId, modeId, "farm_mode", request)
         return ApiResponse(success = true, data = result)
-    }
-
-    @GetMapping("/writing/prompts")
-    fun writingPrompts(): ApiResponse<List<WritingPrompt>> {
-        val userId = SecurityUtils.currentUserId()
-            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
-        featureFlagService.requireEnabled("feature.paid.writing", userId)
-        subscriptionService.requireActive(userId)
-        return ApiResponse(success = true, data = paidLearningService.writingPrompts())
-    }
-
-    @PostMapping("/writing/submit")
-    fun submitWriting(@Valid @RequestBody request: WritingSubmitRequest): ApiResponse<Map<String, String>> {
-        val userId = SecurityUtils.currentUserId()
-            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
-        featureFlagService.requireEnabled("feature.paid.writing", userId)
-        subscriptionService.requireActive(userId)
-        val submissionId = paidLearningService.submitWriting(userId, request)
-        return ApiResponse(success = true, data = mapOf("submission_id" to submissionId))
     }
 
     @GetMapping("/tests")

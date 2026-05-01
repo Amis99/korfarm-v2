@@ -61,7 +61,6 @@ const DuelLobbyPage = lazy(() => import("./pages/DuelLobbyPage"));
 const DuelWaitingRoomPage = lazy(() => import("./pages/DuelWaitingRoomPage"));
 const DuelMatchPage = lazy(() => import("./pages/DuelMatchPage"));
 const DuelResultPage = lazy(() => import("./pages/DuelResultPage"));
-const AssignmentsPage = lazy(() => import("./pages/AssignmentsPage"));
 const DiagnosticPrintPage = lazy(() => import("./pages/DiagnosticPrintPage"));
 const DiagnosticV2Page = lazy(() => import("./pages/DiagnosticV2Page"));
 const DiagnosticTestPage = lazy(() => import("./pages/DiagnosticTestPage"));
@@ -80,7 +79,6 @@ const AdminContentPage = lazy(() => import("./pages/AdminContentPage"));
 const AdminContentUploadPage = lazy(() => import("./pages/AdminContentUploadPage"));
 const AdminContentPreviewPage = lazy(() => import("./pages/AdminContentPreviewPage"));
 const AdminContentEditorPage = lazy(() => import("./pages/AdminContentEditorPage"));
-const AdminAssignmentsPage = lazy(() => import("./pages/AdminAssignmentsPage"));
 const AdminShopPage = lazy(() => import("./pages/AdminShopPage"));
 const AdminDuelPage = lazy(() => import("./pages/AdminDuelPage"));
 const AdminParentLinksPage = lazy(() => import("./pages/AdminParentLinksPage"));
@@ -245,7 +243,8 @@ function App() {
           <Route path="/duel/result/:matchId" element={P(<DuelResultPage />)} />
           <Route path="/search" element={P(<SearchResultsPage />)} />
           <Route path="/report" element={P(<UnifiedReportPage />)} />
-          <Route path="/assignments" element={P(<AssignmentsPage />)} />
+          {/* /assignments 라우트는 학습 계획표로 통합되어 폐기 (V2 study-plan) */}
+          <Route path="/assignments" element={<Navigate to="/study-plan" replace />} />
           <Route path="/diagnostic/v2" element={P(<DiagnosticV2Page />)} />
           <Route path="/diagnostic/v2/test/:sessionId" element={P(<DiagnosticTestPage />)} />
           <Route path="/diagnostic/v2/print/:tier" element={P(<DiagnosticPrintPage />)} />
@@ -274,7 +273,8 @@ function App() {
           <Route path="/admin/study-content-v2/editor/:contentId" element={A(<AdminStudyContentEditorV2Page />)} />
           <Route path="/admin/boards" element={A(<AdminBoardsPage />)} />
           <Route path="/admin/boards/chat-archives" element={A(<AdminChatArchivesPage />)} />
-          <Route path="/admin/assignments" element={A(<AdminAssignmentsPage />)} />
+          {/* 과제/피드백 메뉴 폐기 — 학습 계획표로 통합됨 */}
+          <Route path="/admin/assignments" element={<Navigate to="/admin/study-plans" replace />} />
           <Route path="/admin/shop" element={A(<AdminShopPage />)} />
           <Route path="/admin/shop/products" element={<Navigate to="/admin/shop?tab=products" replace />} />
           <Route path="/admin/shop/orders" element={<Navigate to="/admin/shop?tab=orders" replace />} />
@@ -286,6 +286,8 @@ function App() {
           <Route path="/admin/reports" element={A(<AdminReportsPage />)} />
           <Route path="/admin/wisdom" element={A(<AdminWisdomPage />)} />
           <Route path="/admin/wisdom/:postId" element={A(<AdminWisdomDetailPage />)} />
+          {/* 학습 계획표 셀에서 진입하는 표준 경로 */}
+          <Route path="/admin/wisdom/posts/:postId" element={A(<AdminWisdomDetailPage />)} />
           <Route path="/admin/tests" element={A(<AdminTestPage />)} />
           <Route path="/admin/ai-usage" element={A(<AdminAiUsagePage />)} />
           <Route path="/admin/tests/:testId/edit" element={A(<AdminTestEditorPage />)} />

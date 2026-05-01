@@ -17,20 +17,20 @@ function LearningRunnerPage() {
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [assignmentSubmitted, setAssignmentSubmitted] = useState(false);
 
-  const assignmentId = searchParams.get("assignmentId");
   const proChapter = searchParams.get("proChapter");
   const proItemId = searchParams.get("proItemId");
+  // 학습 계획표 셀에서 진입한 경우 — 종료 시 학습 계획표로 복귀
+  const planCellId = searchParams.get("planCellId");
 
   const exitPath = useMemo(() => {
     if (proChapter) return `/pro-mode/chapter/${proChapter}`;
-    if (assignmentId) return "/assignments";
+    if (planCellId) return "/study-plan";
     // DB 응답의 area 필드로 농장 직접 결정
     const area = learning?.area;
     if (area && FARM_MAP[area]) return `/farm-mode/${area}`;
     return "/farm-mode";
-  }, [learning, assignmentId, proChapter]);
+  }, [learning, planCellId, proChapter]);
 
   // 항상 DB API로 콘텐츠 로드
   useEffect(() => {
@@ -86,22 +86,14 @@ function LearningRunnerPage() {
   }, [learningId, learning]);
 
 
-  // 학습 종료 시 과제 자동 제출 + 프로 모드 완료
+  // 학습 종료 시 프로 모드 완료 처리
+  // (학습 계획표 셀의 완료 처리는 백엔드가 학습 종료 로그로 자동 갱신)
   const handleExit = useCallback(() => {
     if (proItemId) {
       apiPost("/v1/pro/progress/complete", { itemId: proItemId }).catch((e) => console.error(e));
     }
-    if (assignmentId && !assignmentSubmitted) {
-      setAssignmentSubmitted(true);
-      apiPost(`/v1/assignments/${assignmentId}/submit`, {
-        content: {
-          completedAt: new Date().toISOString(),
-          contentId: learning?.contentId || learningId,
-        },
-      }).catch((e) => console.error(e));
-    }
     navigate(exitPath);
-  }, [assignmentId, assignmentSubmitted, exitPath, navigate, learning, learningId, proItemId]);
+  }, [exitPath, navigate, proItemId]);
 
   if (!learning && !loading) {
     return (

@@ -18,6 +18,12 @@ const LABELS_BY_TYPE = {
     retry: "재시험",
     passed: "통과",
   },
+  writing: {
+    unassigned: "배정 전",
+    pending: "글쓰기 시작",
+    submitted: "작성 완료(첨삭 대기)",
+    reviewed: "첨삭 완료",
+  },
 };
 
 const FALLBACK_LABELS = {
@@ -30,6 +36,7 @@ const FALLBACK_LABELS = {
   scored: "채점됨",
   passed: "통과",
   retry: "재시험",
+  reviewed: "첨삭 완료",
 };
 
 export default function CellStatusBadge({ status, score, assetType, assetKind }) {

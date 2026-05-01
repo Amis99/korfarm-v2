@@ -79,19 +79,38 @@ function StartPage() {
   const isAdmin = user?.roles?.some((r) => r === "HQ_ADMIN" || r === "ORG_ADMIN");
   const isParent = user?.roles?.includes("PARENT");
 
-  // 과제 수
-  const [assignmentCount, setAssignmentCount] = useState(null);
+  // 학습 계획표 셀 미수행 수 (학습 계획표 메뉴에 표시)
+  const [planPendingCount, setPlanPendingCount] = useState(null);
 
-  // 과제 목록 가져오기
+  // 학습 계획표 미수행 셀 수 가져오기
   useEffect(() => {
     if (!isLoggedIn || isParent) return;
-    apiGet("/v1/assignments")
-      .then((data) => {
-        const list = Array.isArray(data) ? data : [];
-        const pending = list.filter((a) => a.status !== "closed");
-        setAssignmentCount(pending.length);
+    apiGet("/v1/study-plans")
+      .then(async (data) => {
+        const plans = Array.isArray(data) ? data : [];
+        if (plans.length === 0) {
+          setPlanPendingCount(0);
+          return;
+        }
+        let total = 0;
+        await Promise.all(
+          plans.map(async (p) => {
+            try {
+              const matrix = await apiGet(`/v1/study-plans/${p.planId}/matrix`);
+              const cells = Array.isArray(matrix?.cells) ? matrix.cells : [];
+              total += cells.filter(
+                (c) =>
+                  c.status === "pending" ||
+                  c.status === "partial" ||
+                  c.status === "retry" ||
+                  c.status === "in_progress"
+              ).length;
+            } catch {}
+          })
+        );
+        setPlanPendingCount(total);
       })
-      .catch(() => setAssignmentCount(0));
+      .catch(() => setPlanPendingCount(0));
   }, [isLoggedIn, isParent]);
 
   // 부모인 경우 연결된 자녀 목록 가져오기
@@ -705,31 +724,31 @@ function StartPage() {
           </div>
         </section>
 
-        {/* [2] 과제 바구니 — 유료/관리자만 표시 */}
+        {/* [2] 학습 계획표 — 유료/관리자만 표시 (이전 과제 바구니 자리) */}
         {hasSub && (
           <section className="start-section-block">
             <h2 className="start-section-title">
-              <span className="material-symbols-outlined">shopping_basket</span>
-              과제 바구니
+              <span className="material-symbols-outlined">event_note</span>
+              학습 계획표
             </h2>
             <div className="start-basket">
               <div>
                 <span className="badge" style={{ background: "rgba(0,0,0,0.2)" }}>
-                  특별 과제
+                  오늘 할 일
                 </span>
-                {assignmentCount === null ? (
-                  <h3>과제 확인 중...</h3>
-                ) : assignmentCount > 0 ? (
+                {planPendingCount === null ? (
+                  <h3>학습 계획표 확인 중...</h3>
+                ) : planPendingCount > 0 ? (
                   <>
-                    <h3>특별 과제 {assignmentCount}건 도착!</h3>
-                    <p>완료하고 과제 씨앗을 받아보세요.</p>
+                    <h3>해야 할 학습 {planPendingCount}건</h3>
+                    <p>학습·글쓰기·테스트를 한 곳에서 관리하세요.</p>
                   </>
                 ) : (
-                  <h3>배정된 과제가 없습니다</h3>
+                  <h3>오늘 해야 할 학습이 없습니다</h3>
                 )}
               </div>
-              <button type="button" onClick={() => navigate("/assignments")}>
-                과제 보러가기
+              <button type="button" onClick={() => navigate("/study-plan")}>
+                학습 계획표 열기
               </button>
             </div>
           </section>

@@ -84,10 +84,6 @@ data class DuelRoomCreateRequest(
     @field:Min(1) val stakeAmount: Int
 )
 
-data class AssignmentSubmitRequest(
-    @field:NotNull val content: Map<String, Any>
-)
-
 data class CreatePostRequest(
     @field:NotBlank val title: String,
     @field:NotBlank val content: String,
@@ -115,11 +111,6 @@ data class PresignRequest(
     @field:NotBlank val filename: String,
     @field:NotBlank val mime: String,
     @field:Min(1) val size: Long
-)
-
-data class WritingSubmitRequest(
-    @field:NotBlank val content: String,
-    val attachmentIds: List<String> = emptyList()
 )
 
 data class OrderItemRequest(
@@ -227,26 +218,6 @@ data class AdminContentImportRequest(
     @field:NotNull val content: Map<String, Any>
 )
 
-data class AdminAssignmentCreateRequest(
-    @field:NotBlank val assignmentType: String,
-    @field:NotBlank val title: String,
-    @field:NotNull val payload: Map<String, Any>,
-    val dueAt: String? = null,
-    val targets: List<Map<String, Any>> = emptyList()
-)
-
-data class AdminAssignmentUpdateRequest(
-    val title: String? = null,
-    val payload: Map<String, Any>? = null,
-    val dueAt: String? = null,
-    val status: String? = null
-)
-
-data class AdminWritingFeedbackRequest(
-    @field:NotNull val rubric: Map<String, Any>,
-    val comment: String? = null
-)
-
 data class AdminTestCreateRequest(
     @field:NotBlank val orgId: String,
     @field:NotBlank val title: String,
@@ -293,7 +264,9 @@ data class CreateWisdomPostRequest(
     @field:NotBlank val topicLabel: String,
     @field:NotBlank val submissionType: String,
     val content: String? = null,
-    val attachmentIds: List<String> = emptyList()
+    val attachmentIds: List<String> = emptyList(),
+    /** 학습 계획표 글쓰기 셀과 연결할 cell id (V0082 신설). 있으면 cell.status='submitted' + submission_count++ */
+    val planCellId: String? = null
 )
 
 data class AdminWisdomFeedbackCreateRequest(

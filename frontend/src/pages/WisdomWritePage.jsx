@@ -30,7 +30,8 @@ function WisdomWritePage() {
   const { levelId } = useParams();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const assignmentId = searchParams.get("assignmentId");
+  // 학습 계획표 셀에서 진입한 경우 planCellId 가 채워진다.
+  const planCellId = searchParams.get("planCellId");
   const fileInputRef = useRef(null);
 
   const [topics, setTopics] = useState([]);
@@ -100,20 +101,13 @@ function WisdomWritePage() {
         submission_type: tab === "manuscript" ? "manuscript" : "upload",
         content: tab === "manuscript" ? content : null,
         attachment_ids: attachmentIds,
+        // 학습 계획표 셀에서 진입한 경우 백엔드가 셀과 연결한다.
+        plan_cell_id: planCellId || undefined,
       });
 
-      // 과제에서 시작한 경우 자동 제출
-      if (assignmentId) {
-        try {
-          await apiPost(`/v1/assignments/${assignmentId}/submit`, {
-            content: {
-              completedAt: new Date().toISOString(),
-              topicKey,
-              levelId,
-            },
-          });
-        } catch {}
-        navigate("/assignments");
+      // 학습 계획표에서 시작한 글쓰기는 학습 계획표로 복귀
+      if (planCellId) {
+        navigate("/study-plan");
         return;
       }
 

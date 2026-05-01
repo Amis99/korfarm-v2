@@ -5,6 +5,7 @@ import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.contracts.CreateWisdomPostRequest
 import com.korfarm.api.files.FileRepository
 import com.korfarm.api.files.FileService
+import com.korfarm.api.studyplan.StudyPlanCellRepository
 import com.korfarm.api.user.UserRepository
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional
 import org.slf4j.LoggerFactory
 import java.nio.file.Files
 import java.nio.file.Paths
+import java.time.LocalDateTime
 
 @Service
 class WisdomService(
@@ -24,6 +26,7 @@ class WisdomService(
     private val fileRepository: FileRepository,
     private val userRepository: UserRepository,
     private val aiWisdomClient: AiWisdomClient,
+    private val studyPlanCellRepository: StudyPlanCellRepository,
     @Value("\${app.upload.dir:./uploads}") private val uploadDir: String
 ) {
     private val log = LoggerFactory.getLogger(WisdomService::class.java)
@@ -128,6 +131,17 @@ class WisdomService(
 
     @Transactional
     fun createPost(userId: String, request: CreateWisdomPostRequest): WisdomPostDetail {
+        // 학습 계획표 셀 연동: planCellId 가 있으면 본인 셀인지 검증 후 연결
+        val planCell = request.planCellId?.let { cellId ->
+            val cell = studyPlanCellRepository.findById(cellId).orElseThrow {
+                ApiException("NOT_FOUND", "study plan cell not found", HttpStatus.NOT_FOUND)
+            }
+            if (cell.userId != userId) {
+                throw ApiException("FORBIDDEN", "본인의 셀이 아닙니다", HttpStatus.FORBIDDEN)
+            }
+            cell
+        }
+
         val post = WisdomPostEntity(
             id = IdGenerator.newId("wis"),
             userId = userId,
@@ -136,9 +150,17 @@ class WisdomService(
             topicLabel = request.topicLabel,
             submissionType = request.submissionType,
             content = request.content,
-            status = "active"
+            status = "active",
+            planCellId = planCell?.id
         )
         postRepository.save(post)
+
+        // 셀 상태 갱신: submitted + submission_count++
+        if (planCell != null) {
+            planCell.status = "submitted"
+            planCell.submissionCount += 1
+            studyPlanCellRepository.save(planCell)
+        }
 
         val attachments = attachFiles(post.id, userId, request.attachmentIds)
 
@@ -390,22 +412,35 @@ class WisdomService(
             ApiException("NOT_FOUND", "post not found", HttpStatus.NOT_FOUND)
         }
         val existing = feedbackRepository.findByPostId(postId)
-        if (existing != null) {
+        val savedFeedback = if (existing != null) {
             existing.reviewerId = reviewerId
             existing.comment = comment
             existing.correction = correction
             feedbackRepository.save(existing)
-            return existing.toView()
+            existing
+        } else {
+            val feedback = WisdomFeedbackEntity(
+                id = IdGenerator.newId("wfb"),
+                postId = post.id,
+                reviewerId = reviewerId,
+                comment = comment,
+                correction = correction
+            )
+            feedbackRepository.save(feedback)
+            feedback
         }
-        val feedback = WisdomFeedbackEntity(
-            id = IdGenerator.newId("wfb"),
-            postId = post.id,
-            reviewerId = reviewerId,
-            comment = comment,
-            correction = correction
-        )
-        feedbackRepository.save(feedback)
-        return feedback.toView()
+
+        // 학습 계획표 셀 연동: 첨삭 등록되면 cell.status='reviewed' 로 갱신
+        post.planCellId?.let { cellId ->
+            studyPlanCellRepository.findById(cellId).ifPresent { cell ->
+                cell.status = "reviewed"
+                cell.reviewedBy = reviewerId
+                cell.reviewedAt = LocalDateTime.now()
+                studyPlanCellRepository.save(cell)
+            }
+        }
+
+        return savedFeedback.toView()
     }
 
     // --- Helpers ---
@@ -531,6 +566,15 @@ class WisdomService(
                     correction = result.correction
                 )
                 feedbackRepository.save(feedback)
+                // 학습 계획표 셀 연동: 첨삭 시 cell.status='reviewed'
+                post.planCellId?.let { cellId ->
+                    studyPlanCellRepository.findById(cellId).ifPresent { cell ->
+                        cell.status = "reviewed"
+                        cell.reviewedBy = reviewerId
+                        cell.reviewedAt = LocalDateTime.now()
+                        studyPlanCellRepository.save(cell)
+                    }
+                }
                 AiBatchResultItem(postId, "ok")
             } catch (e: Exception) {
                 log.error("일괄 첨삭 실패: postId={}", postId, e)
