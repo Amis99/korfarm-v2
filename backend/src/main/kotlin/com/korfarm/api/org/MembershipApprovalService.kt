@@ -106,6 +106,16 @@ class MembershipApprovalService(
             } catch (e: Exception) {
                 logger.warn("기관 default 템플릿 복제 실패 (승인은 정상 처리): membershipId={}, error={}", membershipId, e.message)
             }
+
+            // 학생 plan 이 0개라면 기본 plan 자동 생성
+            try {
+                if (studyPlanService.hasAnyPlan(membership.userId).not()) {
+                    studyPlanService.createDefaultPlanForStudent(membership.orgId, membership.userId)
+                    logger.info("기본 학습 계획표 자동 생성: orgId={}, userId={}", membership.orgId, membership.userId)
+                }
+            } catch (e: Exception) {
+                logger.warn("기본 학습 계획표 자동 생성 실패 (승인은 정상 처리): membershipId={}, error={}", membershipId, e.message)
+            }
         }
 
         // 학부모인 경우 자녀 자동 연결 시도

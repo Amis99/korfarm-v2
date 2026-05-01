@@ -7,8 +7,13 @@ import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.learning.FarmLearningLogRepository
 import com.korfarm.api.org.*
 import com.korfarm.api.security.SecurityUtils
+import com.korfarm.api.test.TestPaperEntity
+import com.korfarm.api.test.TestPaperRepo
+import com.korfarm.api.test.TestSubmissionEntity
 import com.korfarm.api.test.TestSubmissionRepo
 import com.korfarm.api.user.UserRepository
+import com.korfarm.api.wisdom.WisdomFeedbackRepository
+import com.korfarm.api.wisdom.WisdomPostEntity
 import com.korfarm.api.wisdom.WisdomPostRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -32,7 +37,9 @@ class StudyPlanService(
     private val userRepo: UserRepository,
     private val farmLearningLogRepo: FarmLearningLogRepository,
     private val testSubmissionRepo: TestSubmissionRepo,
+    private val testPaperRepo: TestPaperRepo,
     private val wisdomPostRepo: WisdomPostRepository,
+    private val wisdomFeedbackRepo: WisdomFeedbackRepository,
     private val objectMapper: ObjectMapper
 ) {
 
@@ -1096,4 +1103,785 @@ class StudyPlanService(
         // 5) cells 자동 생성 (학생 × scope × asset)
         createCellsForUsers(newPlan.id, newScopes, newAssets, userIds.toSet())
     }
+
+    // ── 학생 단위 default plan 백필 ──
+    //
+    // 새 모델: 학생 1명당 자체 default plan 1개를 가진다.
+    // V0083 마이그레이션으로 기존 plan 이 모두 초기화된 후, 활성 학생 전원에게
+    // default plan 을 일괄 생성하기 위한 진입점.
+    //
+    // 구현 정책: 학생에게 plan 이 0개일 때만 생성. 이미 plan(=target) 이 있으면 skip.
+    // 실제 default plan 본문(scopes·assets·cells) 생성은 createDefaultPlanForStudent 가 책임진다.
+    // ※ createDefaultPlanForStudent 의 정식 구현은 백엔드 다른 에이전트가 작업 중이며,
+    //   현재 구현은 새 모델이 도착하기 전까지의 안전 stub.
+
+    /**
+     * 활성 학생 중 plan 이 0개인 자에게 default plan 을 일괄 생성한다.
+     * @return 새로 default plan 이 만들어진 학생 수
+     */
+    @Transactional
+    fun backfillDefaultPlansForActiveStudents(): BackfillResult {
+        // 활성 상태 학생 + 활성 기관멤버십 전체 조회
+        val activeMemberships = orgMembershipRepo.findByStatus("active")
+            .filter { it.role == "STUDENT" }
+        if (activeMemberships.isEmpty()) {
+            return BackfillResult(scanned = 0, created = 0, skipped = 0)
+        }
+
+        var created = 0
+        var skipped = 0
+        activeMemberships.forEach { m ->
+            // 이미 학생 user 로 잡힌 plan 이 1개라도 있으면 skip
+            val existing = targetRepo.findByTargetTypeAndTargetId("user", m.userId)
+            if (existing.isNotEmpty()) {
+                skipped += 1
+                return@forEach
+            }
+            try {
+                createDefaultPlanForStudent(m.orgId, m.userId)
+                created += 1
+            } catch (e: Exception) {
+                // 한 학생 실패가 전체를 막지 않도록 — 실패 건은 skip 으로 집계
+                skipped += 1
+            }
+        }
+        return BackfillResult(scanned = activeMemberships.size, created = created, skipped = skipped)
+    }
+
+    /** 학생이 plan(target=user) 1개라도 가지는지 — 호출처에서 자동 생성 여부 판단에 사용 */
+    @Transactional(readOnly = true)
+    fun hasAnyPlan(userId: String): Boolean {
+        return targetRepo.findByTargetTypeAndTargetId("user", userId).isNotEmpty()
+    }
+
+    /**
+     * 한 학생에게 default plan 1개를 생성한다.
+     *
+     * - 행: "기본" 1개
+     * - 열: 국어농장(korfarm) · 테스트(test) · 글쓰기(writing) 3개
+     * - 셀: 1 × 3 = 3개
+     */
+    @Transactional
+    fun createDefaultPlanForStudent(orgId: String, userId: String): StudyPlanEntity {
+        val user = userRepo.findById(userId).orElse(null)
+        val studentName = user?.name ?: "학생"
+        val today = LocalDate.now()
+        val now = LocalDateTime.now()
+        val plan = StudyPlanEntity(
+            id = IdGenerator.newId("sp"),
+            orgId = orgId,
+            title = "${studentName}의 학습 계획표",
+            description = null,
+            examScope = null,
+            startDate = today,
+            endDate = today.plusDays(365),
+            status = "active",
+            isTemplate = false,
+            templateOriginId = null,
+            createdBy = "system",
+            createdAt = now,
+            updatedAt = now
+        )
+        planRepo.save(plan)
+
+        // target = user
+        targetRepo.save(
+            StudyPlanTargetEntity(
+                id = IdGenerator.newId("spt"),
+                planId = plan.id,
+                targetType = "user",
+                targetId = userId,
+                createdAt = now
+            )
+        )
+
+        // scope: 기본
+        val scope = StudyPlanScopeEntity(
+            id = IdGenerator.newId("sps"),
+            planId = plan.id,
+            label = "기본",
+            sortOrder = 0
+        )
+        scopeRepo.save(scope)
+
+        // assets: 국어농장 / 테스트 / 글쓰기
+        val korfarmAsset = StudyPlanAssetEntity(
+            id = IdGenerator.newId("spa"),
+            planId = plan.id,
+            assetType = "korfarm",
+            label = "국어농장",
+            assetKind = "study",
+            sortOrder = 0
+        )
+        val testAsset = StudyPlanAssetEntity(
+            id = IdGenerator.newId("spa"),
+            planId = plan.id,
+            assetType = "test",
+            label = "테스트",
+            assetKind = "test",
+            sortOrder = 1
+        )
+        val writingAsset = StudyPlanAssetEntity(
+            id = IdGenerator.newId("spa"),
+            planId = plan.id,
+            assetType = "writing",
+            label = "글쓰기",
+            assetKind = "writing",
+            sortOrder = 2
+        )
+        assetRepo.save(korfarmAsset)
+        assetRepo.save(testAsset)
+        assetRepo.save(writingAsset)
+
+        // cells (1 scope × 3 assets)
+        listOf(korfarmAsset, testAsset, writingAsset).forEach { asset ->
+            createCell(plan.id, scope.id, asset, userId)
+        }
+        return plan
+    }
+
+    /**
+     * 학생당 기본 plan 백필. AdminController 의 전용 endpoint 에서 사용.
+     * - 모든 active 학생 멤버십을 본 뒤 plan 0개인 자에게 createDefaultPlanForStudent 호출.
+     */
+    @Transactional
+    fun backfillDefaultPlansHQ(): BackfillDefaultPlanResponse {
+        val allActive = orgMembershipRepo.findByStatus("active")
+            .filter { it.role == "STUDENT" }
+        var created = 0
+        var alreadyHas = 0
+        val seen = mutableSetOf<String>()
+        allActive.forEach { m ->
+            if (!seen.add(m.userId)) return@forEach
+            val existing = targetRepo.findByTargetTypeAndTargetId("user", m.userId)
+            if (existing.isNotEmpty()) {
+                alreadyHas += 1
+            } else {
+                try {
+                    createDefaultPlanForStudent(m.orgId, m.userId)
+                    created += 1
+                } catch (_: Exception) {
+                    // 실패 건은 둘 다 카운트 X
+                }
+            }
+        }
+        return BackfillDefaultPlanResponse(created = created, alreadyHas = alreadyHas)
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // Phase C: 행/열 일괄 적용 (충돌 감지)
+    // ─────────────────────────────────────────────────────────────
+
+    @Transactional
+    fun propagateDelta(
+        sourcePlanId: String,
+        currentUserId: String,
+        req: PropagateDeltaRequest
+    ): PropagateDeltaResponse {
+        val sourcePlan = findPlan(sourcePlanId)
+        val sourceScopes = scopeRepo.findByPlanIdOrderBySortOrder(sourcePlanId)
+            .filter { req.scopeIds.isNullOrEmpty() || it.id in req.scopeIds }
+        val sourceAssets = assetRepo.findByPlanIdOrderBySortOrder(sourcePlanId)
+            .filter { req.assetIds.isNullOrEmpty() || it.id in req.assetIds }
+
+        if (sourceScopes.isEmpty() && sourceAssets.isEmpty()) {
+            return PropagateDeltaResponse()
+        }
+
+        val scope = resolveAdminScope(currentUserId)
+        val targetUserIds = resolveTargetUserIdsForPropagation(scope, req, sourcePlan)
+        if (targetUserIds.isEmpty()) {
+            return PropagateDeltaResponse()
+        }
+
+        // 학생당 plan 1개 가정 — 각 학생의 active non-template plan 을 찾음
+        val userPlanMap = mutableMapOf<String, StudyPlanEntity>()
+        targetUserIds.forEach { uid ->
+            val planIds = targetRepo.findByTargetTypeAndTargetId("user", uid).map { it.planId }
+            if (planIds.isEmpty()) return@forEach
+            val candidates = planRepo.findAllById(planIds)
+                .filter { !it.isTemplate && it.status == "active" }
+                .sortedByDescending { it.createdAt }
+            if (candidates.isNotEmpty()) {
+                userPlanMap[uid] = candidates.first()
+            }
+        }
+
+        // 충돌 감지
+        val conflicts = mutableListOf<PropagateConflict>()
+        val perUserConflictLabels = mutableMapOf<String, Pair<MutableSet<String>, MutableSet<String>>>()
+        userPlanMap.forEach { (uid, plan) ->
+            val existingScopeLabels = scopeRepo.findByPlanIdOrderBySortOrder(plan.id).map { it.label }.toSet()
+            val existingAssetLabels = assetRepo.findByPlanIdOrderBySortOrder(plan.id).map { it.label }.toSet()
+            val scopeConflicts = mutableSetOf<String>()
+            val assetConflicts = mutableSetOf<String>()
+            sourceScopes.forEach { s -> if (s.label in existingScopeLabels) scopeConflicts.add(s.label) }
+            sourceAssets.forEach { a -> if (a.label in existingAssetLabels) assetConflicts.add(a.label) }
+            if (scopeConflicts.isNotEmpty() || assetConflicts.isNotEmpty()) {
+                perUserConflictLabels[uid] = scopeConflicts to assetConflicts
+                val userName = userRepo.findById(uid).orElse(null)?.name
+                scopeConflicts.forEach { conflicts.add(PropagateConflict(uid, userName, "scope", it)) }
+                assetConflicts.forEach { conflicts.add(PropagateConflict(uid, userName, "asset", it)) }
+            }
+        }
+
+        // policy 미지정 + 충돌 있음 → dry-run
+        if (req.conflictPolicy == null && conflicts.isNotEmpty()) {
+            return PropagateDeltaResponse(conflicts = conflicts, appliedCount = 0)
+        }
+
+        // 실제 적용
+        var appliedCount = 0
+        var skippedCount = 0
+        var overwrittenCount = 0
+        val results = mutableListOf<PropagateUserResult>()
+
+        userPlanMap.forEach { (uid, plan) ->
+            val (scopeConflictLabels, assetConflictLabels) = perUserConflictLabels[uid]
+                ?: (emptySet<String>() to emptySet<String>())
+            var applied = false
+
+            val existingScopesByLabel = scopeRepo.findByPlanIdOrderBySortOrder(plan.id).associateBy { it.label }
+            val existingAssetsByLabel = assetRepo.findByPlanIdOrderBySortOrder(plan.id).associateBy { it.label }
+
+            sourceScopes.forEach { s ->
+                if (s.label in scopeConflictLabels) {
+                    when (req.conflictPolicy) {
+                        "skip" -> skippedCount += 1
+                        "overwrite" -> {
+                            existingScopesByLabel[s.label]?.let { existing ->
+                                existing.sortOrder = s.sortOrder
+                                scopeRepo.save(existing)
+                            }
+                            overwrittenCount += 1
+                            applied = true
+                        }
+                    }
+                } else {
+                    val newScope = StudyPlanScopeEntity(
+                        id = IdGenerator.newId("sps"),
+                        planId = plan.id,
+                        label = s.label,
+                        sortOrder = s.sortOrder
+                    )
+                    scopeRepo.save(newScope)
+                    val planAssets = assetRepo.findByPlanIdOrderBySortOrder(plan.id)
+                    planAssets.forEach { a ->
+                        if (cellRepo.findByScopeIdAndAssetIdAndUserId(newScope.id, a.id, uid) == null) {
+                            createCell(plan.id, newScope.id, a, uid)
+                        }
+                    }
+                    appliedCount += 1
+                    applied = true
+                }
+            }
+
+            sourceAssets.forEach { a ->
+                if (a.label in assetConflictLabels) {
+                    when (req.conflictPolicy) {
+                        "skip" -> skippedCount += 1
+                        "overwrite" -> {
+                            existingAssetsByLabel[a.label]?.let { existing ->
+                                existing.refId = a.refId
+                                existing.configJson = a.configJson
+                                existing.sortOrder = a.sortOrder
+                                existing.assetKind = a.assetKind
+                                existing.assetType = a.assetType
+                                assetRepo.save(existing)
+                            }
+                            overwrittenCount += 1
+                            applied = true
+                        }
+                    }
+                } else {
+                    validateAssetType(a.assetType)
+                    val newAsset = StudyPlanAssetEntity(
+                        id = IdGenerator.newId("spa"),
+                        planId = plan.id,
+                        assetType = a.assetType,
+                        label = a.label,
+                        assetKind = a.assetKind,
+                        refId = a.refId,
+                        sortOrder = a.sortOrder,
+                        configJson = a.configJson
+                    )
+                    assetRepo.save(newAsset)
+                    val planScopes = scopeRepo.findByPlanIdOrderBySortOrder(plan.id)
+                    planScopes.forEach { sc ->
+                        if (cellRepo.findByScopeIdAndAssetIdAndUserId(sc.id, newAsset.id, uid) == null) {
+                            createCell(plan.id, sc.id, newAsset, uid)
+                        }
+                    }
+                    appliedCount += 1
+                    applied = true
+                }
+            }
+
+            results.add(PropagateUserResult(uid, applied))
+        }
+
+        return PropagateDeltaResponse(
+            conflicts = if (req.conflictPolicy == null) conflicts else emptyList(),
+            appliedCount = appliedCount,
+            skippedCount = skippedCount,
+            overwrittenCount = overwrittenCount,
+            results = results
+        )
+    }
+
+    private fun resolveTargetUserIdsForPropagation(
+        scope: AdminScope,
+        req: PropagateDeltaRequest,
+        sourcePlan: StudyPlanEntity
+    ): Set<String> {
+        val candidate: Set<String> = when (req.targetScope) {
+            "org" -> {
+                val orgId = when (scope) {
+                    is AdminScope.All -> sourcePlan.orgId
+                    is AdminScope.Org -> scope.orgId
+                }
+                orgMembershipRepo.findByOrgIdAndStatus(orgId, "active")
+                    .filter { it.role == "STUDENT" }
+                    .map { it.userId }.toSet()
+            }
+            "class" -> {
+                val cid = req.classId ?: return emptySet()
+                classMembershipRepo.findByClassIdAndStatus(cid, "active").map { it.userId }.toSet()
+            }
+            "users" -> req.userIds?.toSet() ?: emptySet()
+            else -> emptySet()
+        }
+        return when (scope) {
+            is AdminScope.All -> candidate
+            is AdminScope.Org -> {
+                val orgUserIds = orgMembershipRepo.findByOrgIdAndStatus(scope.orgId, "active")
+                    .filter { it.role == "STUDENT" }
+                    .map { it.userId }.toSet()
+                candidate.intersect(orgUserIds)
+            }
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // Phase D: 통합 리스트
+    // ─────────────────────────────────────────────────────────────
+
+    private fun listPlansInScope(scope: AdminScope): List<StudyPlanEntity> {
+        return when (scope) {
+            is AdminScope.All -> planRepo.findAll()
+            is AdminScope.Org -> planRepo.findByOrgIdOrderByCreatedAtDesc(scope.orgId)
+        }
+    }
+
+    /** 1) 제출물 통합 */
+    @Transactional(readOnly = true)
+    fun adminListSubmissions(
+        currentUserId: String,
+        assetType: String?,
+        status: String?,
+        classId: String?,
+        userIdFilter: String?,
+        sortBy: String,
+        sortDir: String,
+        page: Int,
+        limit: Int
+    ): AdminSubmissionListResponse {
+        val scope = resolveAdminScope(currentUserId)
+        val plans = listPlansInScope(scope)
+        val planMap = plans.associateBy { it.id }
+        if (planMap.isEmpty()) return AdminSubmissionListResponse(emptyList(), 0, page, limit, false)
+
+        val classUserIds: Set<String>? = classId?.let {
+            classMembershipRepo.findByClassIdAndStatus(it, "active").map { m -> m.userId }.toSet()
+        }
+
+        val allCells = plans.flatMap { cellRepo.findByPlanId(it.id) }
+            .filter {
+                it.submissionCount > 0 ||
+                it.status in listOf("submitted", "partial", "completed", "scored", "passed")
+            }
+            .filter { c -> userIdFilter == null || c.userId == userIdFilter }
+            .filter { c -> classUserIds == null || c.userId in classUserIds }
+            .filter { c -> status == null || c.status == status }
+
+        val scopeMap = scopeRepo.findAll().associateBy { it.id }
+        val assetMap = assetRepo.findAll().associateBy { it.id }
+        val filteredByAsset = if (assetType != null) {
+            allCells.filter { assetMap[it.assetId]?.assetType == assetType }
+        } else allCells
+
+        val userIds = filteredByAsset.map { it.userId }.toSet()
+        val userMap = if (userIds.isNotEmpty()) userRepo.findAllById(userIds).associateBy { it.id } else emptyMap()
+
+        val userClassMap = mutableMapOf<String, ClassEntity>()
+        userIds.forEach { uid ->
+            val firstClassId = classMembershipRepo.findByUserIdAndStatus(uid, "active").firstOrNull()?.classId
+            if (firstClassId != null) {
+                classRepo.findById(firstClassId).ifPresent { userClassMap[uid] = it }
+            }
+        }
+
+        val sorted = filteredByAsset.sortedWith(
+            when (sortBy) {
+                "score" -> compareBy<StudyPlanCellEntity> { it.score ?: -1 }
+                "status" -> compareBy { it.status }
+                else -> compareBy { it.updatedAt }
+            }
+        ).let { if (sortDir == "asc") it else it.reversed() }
+
+        val total = sorted.size
+        val from = ((page - 1).coerceAtLeast(0)) * limit
+        val to = (from + limit).coerceAtMost(total)
+        val paged = if (from < total) sorted.subList(from, to) else emptyList()
+
+        val items = paged.map { cell ->
+            val sc = scopeMap[cell.scopeId]
+            val ast = assetMap[cell.assetId]
+            val u = userMap[cell.userId]
+            val cls = userClassMap[cell.userId]
+            AdminSubmissionItem(
+                cellId = cell.id,
+                planId = cell.planId,
+                planTitle = planMap[cell.planId]?.title ?: "",
+                scopeId = cell.scopeId,
+                scopeLabel = sc?.label ?: "",
+                assetId = cell.assetId,
+                assetLabel = ast?.label ?: "",
+                assetType = ast?.assetType ?: "",
+                userId = cell.userId,
+                userName = u?.name ?: cell.userId,
+                classId = cls?.id,
+                className = cls?.name,
+                status = cell.status,
+                submissionCount = cell.submissionCount,
+                score = cell.score,
+                reviewedBy = cell.reviewedBy,
+                reviewedAt = cell.reviewedAt?.toString(),
+                updatedAt = cell.updatedAt.toString(),
+                adminNote = cell.adminNote
+            )
+        }
+
+        return AdminSubmissionListResponse(
+            items = items,
+            total = total,
+            page = page,
+            limit = limit,
+            hasMore = to < total
+        )
+    }
+
+    /** 2) 글쓰기 통합 */
+    @Transactional(readOnly = true)
+    fun adminListIntegratedWisdom(
+        currentUserId: String,
+        levelId: String?,
+        classId: String?,
+        userIdFilter: String?,
+        hasPlanCell: Boolean?,
+        hasFeedback: Boolean?,
+        sortBy: String,
+        sortDir: String,
+        page: Int,
+        limit: Int
+    ): AdminIntegratedWisdomResponse {
+        val scope = resolveAdminScope(currentUserId)
+
+        val scopedUserIds: Set<String>? = when (scope) {
+            is AdminScope.All -> null
+            is AdminScope.Org -> orgMembershipRepo.findByOrgIdAndStatus(scope.orgId, "active")
+                .map { it.userId }.toSet()
+        }
+
+        val classUserIds: Set<String>? = classId?.let {
+            classMembershipRepo.findByClassIdAndStatus(it, "active").map { m -> m.userId }.toSet()
+        }
+
+        val all = wisdomPostRepo.findAll()
+            .filter { p ->
+                (scopedUserIds == null || p.userId in scopedUserIds) &&
+                (levelId == null || p.levelId == levelId) &&
+                (userIdFilter == null || p.userId == userIdFilter) &&
+                (classUserIds == null || p.userId in classUserIds)
+            }
+            .filter { hasPlanCell == null || (it.planCellId != null) == hasPlanCell }
+
+        val postIds = all.map { it.id }
+        val feedbackByPostId = if (postIds.isNotEmpty()) {
+            wisdomFeedbackRepo.findByPostIdIn(postIds).associateBy { it.postId }
+        } else emptyMap()
+
+        val filteredByFeedback = if (hasFeedback != null) {
+            all.filter { (it.id in feedbackByPostId) == hasFeedback }
+        } else all
+
+        val sorted = filteredByFeedback.sortedWith(compareBy<WisdomPostEntity> { it.createdAt })
+            .let { if (sortDir == "asc") it else it.reversed() }
+
+        val total = sorted.size
+        val from = ((page - 1).coerceAtLeast(0)) * limit
+        val to = (from + limit).coerceAtMost(total)
+        val paged = if (from < total) sorted.subList(from, to) else emptyList()
+
+        val pagedUserIds = paged.map { it.userId }.toSet()
+        val userMap = if (pagedUserIds.isNotEmpty()) userRepo.findAllById(pagedUserIds).associateBy { it.id } else emptyMap()
+        val userClassMap = mutableMapOf<String, ClassEntity>()
+        pagedUserIds.forEach { uid ->
+            val firstClassId = classMembershipRepo.findByUserIdAndStatus(uid, "active").firstOrNull()?.classId
+            if (firstClassId != null) {
+                classRepo.findById(firstClassId).ifPresent { userClassMap[uid] = it }
+            }
+        }
+
+        val planCellIds = paged.mapNotNull { it.planCellId }.toSet()
+        val cellById = if (planCellIds.isNotEmpty()) {
+            cellRepo.findAllById(planCellIds).associateBy { it.id }
+        } else emptyMap()
+        val planIdsForCells = cellById.values.map { it.planId }.toSet()
+        val planByIdLocal = if (planIdsForCells.isNotEmpty()) {
+            planRepo.findAllById(planIdsForCells).associateBy { it.id }
+        } else emptyMap()
+
+        val items = paged.map { post ->
+            val u = userMap[post.userId]
+            val cls = userClassMap[post.userId]
+            val fb = feedbackByPostId[post.id]
+            val planTitle: String? = post.planCellId?.let { cellById[it]?.planId }?.let { planByIdLocal[it]?.title }
+            AdminIntegratedWisdomItem(
+                postId = post.id,
+                levelId = post.levelId,
+                topicKey = post.topicKey,
+                topicLabel = post.topicLabel,
+                userId = post.userId,
+                userName = u?.name ?: post.userId,
+                classId = cls?.id,
+                className = cls?.name,
+                submissionType = post.submissionType,
+                status = post.status,
+                planCellId = post.planCellId,
+                planTitle = planTitle,
+                hasFeedback = fb != null,
+                feedbackBy = fb?.reviewerId,
+                feedbackAt = fb?.createdAt?.toString(),
+                createdAt = post.createdAt.toString()
+            )
+        }
+        return AdminIntegratedWisdomResponse(items, total, page, limit, to < total)
+    }
+
+    /** 3) 테스트 통합 */
+    @Transactional(readOnly = true)
+    fun adminListTestAssets(
+        currentUserId: String,
+        from: String?,
+        to: String?,
+        classId: String?,
+        page: Int,
+        limit: Int
+    ): AdminTestAssetListResponse {
+        val scope = resolveAdminScope(currentUserId)
+        val plans = listPlansInScope(scope)
+        if (plans.isEmpty()) return AdminTestAssetListResponse(emptyList(), 0, page, limit, false)
+        val planMap = plans.associateBy { it.id }
+
+        val classUserIds: Set<String>? = classId?.let {
+            classMembershipRepo.findByClassIdAndStatus(it, "active").map { m -> m.userId }.toSet()
+        }
+
+        val testAssets = plans.flatMap { p ->
+            assetRepo.findByPlanIdOrderBySortOrder(p.id).filter { it.assetType == "test" }
+        }
+
+        val testIds = testAssets.mapNotNull { it.refId }.toSet()
+        val paperMap: Map<String, TestPaperEntity> = if (testIds.isNotEmpty()) {
+            testPaperRepo.findAllById(testIds).associateBy { it.id }
+        } else emptyMap()
+
+        val items = testAssets.map { asset ->
+            val cells = cellRepo.findByAssetId(asset.id)
+                .filter { classUserIds == null || it.userId in classUserIds }
+            val total = cells.size
+            val completed = cells.count { it.status in listOf("completed", "scored", "passed") }
+            val pending = cells.count { it.status in listOf("pending", "retry") }
+            val avg = cells.mapNotNull { it.score }.let { if (it.isEmpty()) null else it.average() }
+            val paper = asset.refId?.let { paperMap[it] }
+            AdminTestAssetItem(
+                assetId = asset.id,
+                planId = asset.planId,
+                planTitle = planMap[asset.planId]?.title ?: "",
+                testTitle = paper?.title ?: asset.label,
+                testId = asset.refId,
+                dueAt = paper?.examDate?.toString(),
+                totalAssigned = total,
+                completed = completed,
+                pending = pending,
+                avgScore = avg
+            )
+        }
+
+        val filtered = items.filter { item ->
+            val d = item.dueAt
+            (from == null || (d != null && d >= from)) && (to == null || (d != null && d <= to))
+        }
+
+        val totalCount = filtered.size
+        val fromIdx = ((page - 1).coerceAtLeast(0)) * limit
+        val toIdx = (fromIdx + limit).coerceAtMost(totalCount)
+        val paged = if (fromIdx < totalCount) filtered.subList(fromIdx, toIdx) else emptyList()
+
+        return AdminTestAssetListResponse(paged, totalCount, page, limit, toIdx < totalCount)
+    }
+
+    /** 3-drilldown */
+    @Transactional(readOnly = true)
+    fun adminGetTestAssetStudents(
+        currentUserId: String,
+        assetId: String
+    ): AdminTestAssetStudentListResponse {
+        val asset = assetRepo.findById(assetId).orElseThrow {
+            ApiException("NOT_FOUND", "asset not found", HttpStatus.NOT_FOUND)
+        }
+        val plan = findPlan(asset.planId)
+        val scope = resolveAdminScope(currentUserId)
+        if (scope is AdminScope.Org && scope.orgId != plan.orgId) {
+            throw ApiException("FORBIDDEN", "권한이 없습니다", HttpStatus.FORBIDDEN)
+        }
+
+        val cells = cellRepo.findByAssetId(assetId)
+        val userIds = cells.map { it.userId }.toSet()
+        val userMap = if (userIds.isNotEmpty()) userRepo.findAllById(userIds).associateBy { it.id } else emptyMap()
+        val userClassMap = mutableMapOf<String, ClassEntity>()
+        userIds.forEach { uid ->
+            val firstClassId = classMembershipRepo.findByUserIdAndStatus(uid, "active").firstOrNull()?.classId
+            if (firstClassId != null) {
+                classRepo.findById(firstClassId).ifPresent { userClassMap[uid] = it }
+            }
+        }
+
+        val testId = asset.refId
+        val submissionByUser: Map<String, TestSubmissionEntity> = if (testId != null) {
+            cells.mapNotNull { c ->
+                testSubmissionRepo.findByTestIdAndUserId(testId, c.userId)?.let { c.userId to it }
+            }.toMap()
+        } else emptyMap()
+
+        return AdminTestAssetStudentListResponse(
+            students = cells.map { cell ->
+                AdminTestAssetStudent(
+                    userId = cell.userId,
+                    userName = userMap[cell.userId]?.name,
+                    className = userClassMap[cell.userId]?.name,
+                    status = cell.status,
+                    score = cell.score,
+                    attemptedAt = submissionByUser[cell.userId]?.createdAt?.toString()
+                )
+            }
+        )
+    }
+
+    /** 4) 통합 캘린더 */
+    @Transactional(readOnly = true)
+    fun adminGetCalendar(
+        currentUserId: String,
+        from: String,
+        to: String,
+        classId: String?
+    ): AdminCalendarResponse {
+        val scope = resolveAdminScope(currentUserId)
+        val plans = listPlansInScope(scope)
+        val planIds = plans.map { it.id }.toSet()
+        if (planIds.isEmpty()) return AdminCalendarResponse(emptyList())
+        val planMap = plans.associateBy { it.id }
+
+        val fromDate = LocalDate.parse(from)
+        val toDate = LocalDate.parse(to)
+
+        val classUserIds: Set<String>? = classId?.let {
+            classMembershipRepo.findByClassIdAndStatus(it, "active").map { m -> m.userId }.toSet()
+        }
+
+        val schedules = scheduleRepo.findByPlanIdInAndScheduledDateBetween(planIds, fromDate, toDate)
+        val dayMap = mutableMapOf<String, MutableList<AdminCalendarItem>>()
+
+        schedules.forEach { s ->
+            val asset = s.assetId?.let { assetRepo.findById(it).orElse(null) }
+            val cells = if (asset != null) {
+                cellRepo.findByAssetId(asset.id)
+                    .filter { classUserIds == null || it.userId in classUserIds }
+            } else emptyList()
+            val total = cells.size
+            val pending = cells.count { it.status in listOf("pending", "retry", "unassigned") }
+            val completed = cells.count { it.status in listOf("completed", "scored", "passed") }
+            val label = s.label ?: asset?.label ?: planMap[s.planId]?.title ?: "활동"
+            val dateKey = s.scheduledDate.toString()
+            dayMap.getOrPut(dateKey) { mutableListOf() }.add(
+                AdminCalendarItem("schedule", s.id, label, total, pending, completed)
+            )
+        }
+
+        val days = dayMap.entries.sortedBy { it.key }.map { (date, items) ->
+            AdminCalendarDay(date = date, count = items.size, items = items)
+        }
+        return AdminCalendarResponse(days)
+    }
+
+    /** 4-drilldown */
+    @Transactional(readOnly = true)
+    fun adminGetCalendarDate(
+        currentUserId: String,
+        date: String
+    ): AdminCalendarDateDetailResponse {
+        val scope = resolveAdminScope(currentUserId)
+        val plans = listPlansInScope(scope)
+        val planIds = plans.map { it.id }.toSet()
+        if (planIds.isEmpty()) return AdminCalendarDateDetailResponse(emptyList())
+
+        val target = LocalDate.parse(date)
+        val schedules = scheduleRepo.findByPlanIdInAndScheduledDateBetween(planIds, target, target)
+
+        val actions = schedules.mapNotNull { s ->
+            val asset = s.assetId?.let { assetRepo.findById(it).orElse(null) } ?: return@mapNotNull null
+            val cells = cellRepo.findByAssetId(asset.id)
+            val userIds = cells.map { it.userId }.toSet()
+            val userMap = if (userIds.isNotEmpty()) userRepo.findAllById(userIds).associateBy { it.id } else emptyMap()
+            AdminCalendarAction(
+                assetId = asset.id,
+                label = s.label ?: asset.label,
+                assetType = asset.assetType,
+                dueAt = s.scheduledDate.toString(),
+                totalAssigned = cells.size,
+                students = cells.map { cell ->
+                    AdminCalendarActionStudent(
+                        userId = cell.userId,
+                        userName = userMap[cell.userId]?.name,
+                        status = cell.status
+                    )
+                }
+            )
+        }
+        return AdminCalendarDateDetailResponse(actions)
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // 권한 헬퍼
+    // ─────────────────────────────────────────────────────────────
+
+    private fun resolveAdminScope(userId: String): AdminScope {
+        if (SecurityUtils.hasAnyRole("HQ_ADMIN")) return AdminScope.All
+        val orgId = orgMembershipRepo.findByUserIdAndStatus(userId, "active").firstOrNull()?.orgId
+            ?: throw ApiException("FORBIDDEN", "기관 정보 없음", HttpStatus.FORBIDDEN)
+        return AdminScope.Org(orgId)
+    }
 }
+
+sealed class AdminScope {
+    object All : AdminScope()
+    data class Org(val orgId: String) : AdminScope()
+}
+
+/** 백필 결과 요약 */
+data class BackfillResult(
+    val scanned: Int,
+    val created: Int,
+    val skipped: Int
+)

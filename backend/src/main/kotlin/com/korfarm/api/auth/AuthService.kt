@@ -163,6 +163,16 @@ class AuthService(
             } catch (ex: Exception) {
                 logger.warn("기관 default 템플릿 복제 실패 (가입은 정상 처리): userId={}, error={}", user.id, ex.message)
             }
+
+            // 8-2. 학생이 plan 0개라면 (템플릿 복제도 0건이고 plan 자체가 없는 경우) 기본 plan 자동 생성
+            try {
+                if (studyPlanService.hasAnyPlan(user.id).not()) {
+                    studyPlanService.createDefaultPlanForStudent(org.id, user.id)
+                    logger.info("기본 학습 계획표 자동 생성: orgId={}, userId={}", org.id, user.id)
+                }
+            } catch (ex: Exception) {
+                logger.warn("기본 학습 계획표 자동 생성 실패 (가입은 정상 처리): userId={}, error={}", user.id, ex.message)
+            }
         }
 
         // 9. 학부모 가입 시 학생 매칭 성공이면 자동 연결

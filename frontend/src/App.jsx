@@ -90,8 +90,7 @@ const AdminAiUsagePage = lazy(() => import("./pages/AdminAiUsagePage"));
 const AdminTestEditorPage = lazy(() => import("./pages/AdminTestEditorPage"));
 const AdminTestStatisticsPage = lazy(() => import("./pages/AdminTestStatisticsPage"));
 const AdminProPage = lazy(() => import("./pages/AdminProPage"));
-const AdminStudyPlansPage = lazy(() => import("./pages/AdminStudyPlansPage"));
-const AdminStudyPlanDetailPage = lazy(() => import("./pages/AdminStudyPlanDetailPage"));
+const AdminStudyPlanDashboardPage = lazy(() => import("./pages/AdminStudyPlanDashboardPage"));
 const StudyPlanPage = lazy(() => import("./pages/StudyPlanPage"));
 const StudyPlanSubmitPage = lazy(() => import("./pages/StudyPlanSubmitPage"));
 const ParentStudyPlanPage = lazy(() => import("./pages/ParentStudyPlanPage"));
@@ -307,8 +306,9 @@ function App() {
           <Route path="/admin/manuscripts" element={<Navigate to="/admin/learning-db?tab=manuscripts" replace />} />
           <Route path="/admin/pro" element={A(<AdminProPage />)} />
           <Route path="/admin/edit-history" element={A(<AdminEditHistoryPage />)} />
-          <Route path="/admin/study-plans" element={A(<AdminStudyPlansPage />)} />
-          <Route path="/admin/study-plans/:planId" element={A(<AdminStudyPlanDetailPage />)} />
+          <Route path="/admin/study-plans" element={A(<AdminStudyPlanDashboardPage />)} />
+          {/* 구 상세 페이지는 dashboard 의 학생별 탭으로 통합 — 호환 redirect */}
+          <Route path="/admin/study-plans/:planId" element={<Navigate to="/admin/study-plans?tab=student" replace />} />
           <Route path="/admin/duel/questions" element={<Navigate to="/admin/duel?tab=questions" replace />} />
           <Route path="/ops" element={A(<OpsStation />)} />
 

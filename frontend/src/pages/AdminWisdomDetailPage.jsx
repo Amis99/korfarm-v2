@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useState, useEffect, useMemo } from "react";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { apiGet, apiPost, apiDelete } from "../utils/adminApi";
 import { API_BASE } from "../utils/api";
 import ManuscriptGrid from "../components/ManuscriptGrid";
@@ -25,6 +25,15 @@ const GRID_CONFIG = {
 function AdminWisdomDetailPage() {
   const { postId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  // 글쓰기 리스트(학습 계획표 글쓰기 탭 등) 에서 진입했는지 — 돌아가기 동작
+  const fromPath = useMemo(() => {
+    const p = new URLSearchParams(location.search).get("from");
+    return p || "";
+  }, [location.search]);
+  const handleBack = () => {
+    navigate(fromPath || "/admin/wisdom");
+  };
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [comment, setComment] = useState("");
@@ -177,6 +186,27 @@ function AdminWisdomDetailPage() {
     <AdminLayout>
       <div className="admin-topbar">
         <div>
+          {fromPath && (
+            <button
+              type="button"
+              onClick={handleBack}
+              style={{
+                background: "none",
+                border: "none",
+                color: "#2d6a4f",
+                fontSize: 13,
+                cursor: "pointer",
+                padding: 0,
+                marginBottom: 4,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 4,
+              }}
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: 16 }}>arrow_back</span>
+              글쓰기 리스트로
+            </button>
+          )}
           <h1>첨삭 작성</h1>
           <p>{post.topic_label} · {post.author_name || post.author_id}</p>
         </div>
@@ -330,9 +360,9 @@ function AdminWisdomDetailPage() {
                   <button
                     className="admin-action"
                     style={{ background: "#555" }}
-                    onClick={() => navigate("/admin/wisdom")}
+                    onClick={handleBack}
                   >
-                    목록으로
+                    {fromPath ? "글쓰기 리스트로" : "목록으로"}
                   </button>
                 </div>
               </div>

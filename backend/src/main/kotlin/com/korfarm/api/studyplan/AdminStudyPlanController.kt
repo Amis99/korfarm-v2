@@ -95,6 +95,8 @@ class AdminStudyPlanController(
         return ApiResponse(success = true, data = mapOf("planId" to planId, "newlyCloned" to cloned))
     }
 
+    // backfill-default 는 Phase B 섹션에 단일 정의를 둔다 (이 위치 내용 제거 — 아래 통합)
+
     // ── 범위(행) 관리 ──
 
     @PostMapping("/{planId}/scopes")
@@ -297,5 +299,78 @@ class AdminStudyPlanController(
     ): ApiResponse<List<CalendarEventResponse>> {
         requireAdmin()
         return ApiResponse(success = true, data = service.getCalendarEvents(planId, userId, month))
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // Phase B: 학생별 default plan 자동 생성 — backfill (HQ_ADMIN)
+    // ─────────────────────────────────────────────────────────────
+
+    @PostMapping("/backfill-default")
+    fun backfillDefault(): ApiResponse<BackfillDefaultPlanResponse> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        return ApiResponse(success = true, data = service.backfillDefaultPlansHQ())
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // Phase C: 행/열 일괄 적용 (충돌 감지)
+    // ─────────────────────────────────────────────────────────────
+
+    @PostMapping("/{planId}/propagate-delta")
+    fun propagateDelta(
+        @PathVariable planId: String,
+        @RequestBody request: PropagateDeltaRequest
+    ): ApiResponse<PropagateDeltaResponse> {
+        requireAdmin()
+        return ApiResponse(success = true, data = service.propagateDelta(planId, currentUser(), request))
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // Phase D: 통합 — 테스트 자산 / 캘린더
+    // ─────────────────────────────────────────────────────────────
+
+    @GetMapping("/test-assets")
+    fun listTestAssets(
+        @RequestParam(required = false) from: String?,
+        @RequestParam(required = false) to: String?,
+        @RequestParam(required = false) classId: String?,
+        @RequestParam(defaultValue = "1") page: Int,
+        @RequestParam(defaultValue = "50") limit: Int
+    ): ApiResponse<AdminTestAssetListResponse> {
+        requireAdmin()
+        return ApiResponse(
+            success = true,
+            data = service.adminListTestAssets(currentUser(), from, to, classId, page, limit)
+        )
+    }
+
+    @GetMapping("/test-assets/{assetId}/students")
+    fun testAssetStudents(@PathVariable assetId: String): ApiResponse<AdminTestAssetStudentListResponse> {
+        requireAdmin()
+        return ApiResponse(
+            success = true,
+            data = service.adminGetTestAssetStudents(currentUser(), assetId)
+        )
+    }
+
+    @GetMapping("/calendar")
+    fun adminCalendar(
+        @RequestParam from: String,
+        @RequestParam to: String,
+        @RequestParam(required = false) classId: String?
+    ): ApiResponse<AdminCalendarResponse> {
+        requireAdmin()
+        return ApiResponse(
+            success = true,
+            data = service.adminGetCalendar(currentUser(), from, to, classId)
+        )
+    }
+
+    @GetMapping("/calendar/{date}")
+    fun adminCalendarDate(@PathVariable date: String): ApiResponse<AdminCalendarDateDetailResponse> {
+        requireAdmin()
+        return ApiResponse(
+            success = true,
+            data = service.adminGetCalendarDate(currentUser(), date)
+        )
     }
 }

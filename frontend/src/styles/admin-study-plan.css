@@ -1,8 +1,13 @@
-/* ── 관리자 학습 계획표 ── */
+/* ── 관리자 학습 계획표 ──
+ * 디자인 토큰은 admin-detail.css 와 동일하게 정렬.
+ * --admin-ink / --admin-muted / --admin-accent / --admin-accent-strong
+ * --admin-panel / --admin-stroke / --admin-stroke-soft / --admin-accent-soft
+ */
 
 .asp-wrap {
   max-width: 1200px;
   margin: 0 auto;
+  color: var(--admin-ink, #1a2920);
 }
 
 .asp-header {
@@ -15,7 +20,7 @@
 }
 .asp-header h1 {
   font-size: 1.4rem;
-  color: var(--admin-text, #1a2920);
+  color: var(--admin-ink, #1a2920);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -24,17 +29,19 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #2d6a4f, #e06820);
+  padding: 9px 16px;
+  background: var(--admin-accent, #2d6a4f);
   color: #fff;
-  border: none;
-  border-radius: 8px;
+  border: 1px solid var(--admin-accent, #2d6a4f);
+  border-radius: 10px;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
 }
 .asp-create-btn:hover {
-  filter: brightness(1.1);
+  background: var(--admin-accent-strong, #1f4a37);
+  border-color: var(--admin-accent-strong, #1f4a37);
 }
 
 /* 목록 테이블 */
@@ -42,38 +49,45 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 0.85rem;
+  background: var(--admin-panel, #ffffff);
 }
 .asp-table th,
 .asp-table td {
   padding: 10px 12px;
   text-align: left;
-  border-bottom: 1px solid rgba(31, 58, 44, 0.06);
+  border-bottom: 1px solid var(--admin-stroke, rgba(31, 58, 44, 0.12));
 }
 .asp-table th {
-  color: var(--admin-muted, #3a4a3e);
-  font-weight: 600;
+  color: var(--admin-accent-strong, #1f4a37);
+  font-weight: 700;
   font-size: 0.8rem;
-  text-transform: uppercase;
+  background: var(--admin-panel-light, #f5f9f3);
 }
 .asp-table td {
-  color: #d4c8be;
+  color: var(--admin-ink, #1a2920);
 }
 .asp-table tbody tr {
   cursor: pointer;
   transition: background 0.15s;
 }
 .asp-table tbody tr:hover {
-  background: rgba(45, 106, 79,0.07);
+  background: rgba(45, 106, 79, 0.08);
 }
 .asp-status {
   display: inline-block;
   padding: 2px 10px;
   border-radius: 12px;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
 }
-.asp-status.active { background: rgba(76,175,80,0.2); color: #81c784; }
-.asp-status.archived { background: rgba(158,158,158,0.2); color: #aaa; }
+.asp-status.active {
+  background: rgba(45, 106, 79, 0.15);
+  color: var(--admin-accent-strong, #1f4a37);
+}
+.asp-status.archived {
+  background: rgba(166, 182, 169, 0.18);
+  color: var(--admin-muted, #3a4a3e);
+}
 
 /* 상세 페이지 레이아웃 */
 .aspd-layout {
@@ -86,14 +100,14 @@
   .aspd-layout { grid-template-columns: 1fr; }
 }
 .aspd-sidebar {
-  background: rgba(255,255,255,0.03);
+  background: var(--admin-panel, #ffffff);
   border-radius: 12px;
   padding: 16px;
-  border: 1px solid rgba(31, 58, 44, 0.06);
+  border: 1px solid var(--admin-stroke, rgba(31, 58, 44, 0.12));
 }
 .aspd-sidebar h3 {
   font-size: 0.85rem;
-  color: var(--admin-muted, #3a4a3e);
+  color: var(--admin-accent-strong, #1f4a37);
   margin-bottom: 12px;
 }
 .aspd-student-list {
@@ -111,24 +125,28 @@
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.82rem;
-  color: #ccc;
+  color: var(--admin-ink, #1a2920);
   display: flex;
   justify-content: space-between;
   align-items: center;
   transition: background 0.15s;
 }
-.aspd-student-item:hover { background: rgba(255,255,255,0.04); }
-.aspd-student-item.selected { background: rgba(45, 106, 79,0.15); color: #3d8a6f; }
+.aspd-student-item:hover { background: rgba(45, 106, 79, 0.08); }
+.aspd-student-item.selected {
+  background: rgba(45, 106, 79, 0.18);
+  color: var(--admin-accent-strong, #1f4a37);
+  font-weight: 700;
+}
 .aspd-progress-bar {
   width: 60px;
   height: 6px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(31, 58, 44, 0.10);
   border-radius: 3px;
   overflow: hidden;
 }
 .aspd-progress-fill {
   height: 100%;
-  background: #4caf50;
+  background: var(--admin-accent, #2d6a4f);
   border-radius: 3px;
   transition: width 0.3s;
 }
@@ -141,7 +159,7 @@
   display: flex;
   gap: 4px;
   margin-bottom: 20px;
-  border-bottom: 1px solid rgba(31, 58, 44, 0.06);
+  border-bottom: 1px solid var(--admin-stroke-soft, rgba(31, 58, 44, 0.08));
 }
 .aspd-tab {
   padding: 10px 18px;
@@ -149,21 +167,25 @@
   border: none;
   color: var(--admin-muted, #3a4a3e);
   font-size: 0.85rem;
+  font-weight: 700;
   cursor: pointer;
   border-bottom: 2px solid transparent;
   display: flex;
   align-items: center;
   gap: 6px;
-  transition: all 0.15s;
+  transition: color 0.15s, border-color 0.15s;
 }
-.aspd-tab:hover { color: #d4c8be; }
-.aspd-tab.active { color: #3d8a6f; border-bottom-color: #2d6a4f; }
+.aspd-tab:hover { color: var(--admin-ink, #1a2920); }
+.aspd-tab.active {
+  color: var(--admin-accent-strong, #1f4a37);
+  border-bottom-color: var(--admin-accent, #2d6a4f);
+}
 
 /* 생성 폼 모달 */
 .asp-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.6);
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -171,18 +193,20 @@
   padding: 20px;
 }
 .asp-modal {
-  background: #1a2220;
-  border-radius: 16px;
+  background: var(--admin-panel, #ffffff);
+  border-radius: 14px;
   padding: 28px;
   width: 100%;
   max-width: 640px;
   max-height: 85vh;
   overflow-y: auto;
-  border: 1px solid rgba(31, 58, 44, 0.08);
+  border: 1px solid var(--admin-stroke, rgba(31, 58, 44, 0.12));
+  color: var(--admin-ink, #1a2920);
+  box-shadow: 0 8px 24px rgba(31, 58, 44, 0.15);
 }
 .asp-modal h2 {
   font-size: 1.2rem;
-  color: #e8ddd4;
+  color: var(--admin-ink, #1a2920);
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -199,8 +223,8 @@
   border-radius: 2px;
   background: rgba(31, 58, 44, 0.08);
 }
-.asp-step.done { background: #4caf50; }
-.asp-step.current { background: #2d6a4f; }
+.asp-step.done { background: var(--admin-accent, #2d6a4f); }
+.asp-step.current { background: var(--admin-accent-strong, #1f4a37); }
 
 .asp-form-group {
   margin-bottom: 16px;
@@ -210,25 +234,26 @@
   font-size: 0.8rem;
   color: var(--admin-muted, #3a4a3e);
   margin-bottom: 6px;
-  font-weight: 600;
+  font-weight: 700;
 }
 .asp-input,
 .asp-textarea,
 .asp-select {
   width: 100%;
-  padding: 10px 12px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
+  padding: 9px 12px;
+  background: var(--admin-panel-light, #f5f9f3);
+  border: 1px solid var(--admin-stroke, rgba(31, 58, 44, 0.15));
   border-radius: 8px;
-  color: #e8ddd4;
+  color: var(--admin-ink, #1a2920);
   font-size: 0.85rem;
   box-sizing: border-box;
+  font-family: inherit;
 }
 .asp-input:focus,
 .asp-textarea:focus,
 .asp-select:focus {
   outline: none;
-  border-color: rgba(45, 106, 79,0.5);
+  border-color: var(--admin-accent, #2d6a4f);
 }
 .asp-textarea { min-height: 80px; resize: vertical; }
 .asp-date-row {
@@ -249,15 +274,16 @@
   align-items: center;
   gap: 4px;
   padding: 4px 10px;
-  background: rgba(45, 106, 79,0.12);
-  color: #3d8a6f;
+  background: var(--admin-accent-soft, rgba(45, 106, 79, 0.10));
+  color: var(--admin-accent-strong, #1f4a37);
   border-radius: 12px;
   font-size: 0.78rem;
+  font-weight: 600;
 }
 .asp-chip button {
   background: none;
   border: none;
-  color: #3d8a6f;
+  color: var(--admin-accent-strong, #1f4a37);
   cursor: pointer;
   font-size: 1rem;
   line-height: 1;
@@ -272,13 +298,18 @@
 .asp-add-row .asp-input { flex: 1; }
 .asp-add-btn {
   padding: 8px 16px;
-  background: rgba(45, 106, 79,0.15);
-  border: 1px solid rgba(45, 106, 79,0.3);
+  background: var(--admin-panel, #ffffff);
+  border: 1px solid var(--admin-accent, #2d6a4f);
   border-radius: 8px;
-  color: #3d8a6f;
+  color: var(--admin-accent-strong, #1f4a37);
   font-size: 0.82rem;
+  font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
+  transition: background 0.15s;
+}
+.asp-add-btn:hover {
+  background: var(--admin-accent-soft, rgba(45, 106, 79, 0.10));
 }
 
 .asp-form-actions {
@@ -291,24 +322,41 @@
 .asp-btn-prev,
 .asp-btn-next,
 .asp-btn-submit {
-  padding: 10px 24px;
-  border-radius: 8px;
+  padding: 9px 20px;
+  border-radius: 10px;
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  border: none;
+  border: 1px solid transparent;
+  transition: background 0.15s, border-color 0.15s;
+  font-family: inherit;
 }
 .asp-btn-prev {
-  background: rgba(31, 58, 44, 0.06);
-  color: #ccc;
+  background: var(--admin-panel, #ffffff);
+  color: var(--admin-ink, #1a2920);
+  border-color: var(--admin-stroke, rgba(31, 58, 44, 0.18));
+}
+.asp-btn-prev:hover {
+  background: var(--admin-accent-soft, rgba(45, 106, 79, 0.10));
+  border-color: var(--admin-accent, #2d6a4f);
 }
 .asp-btn-next {
-  background: rgba(45, 106, 79,0.2);
-  color: #3d8a6f;
+  background: var(--admin-panel, #ffffff);
+  color: var(--admin-accent-strong, #1f4a37);
+  border-color: var(--admin-accent, #2d6a4f);
+}
+.asp-btn-next:hover {
+  background: var(--admin-accent-soft, rgba(45, 106, 79, 0.10));
+  border-color: var(--admin-accent-strong, #1f4a37);
 }
 .asp-btn-submit {
-  background: linear-gradient(135deg, #2d6a4f, #e06820);
+  background: var(--admin-accent, #2d6a4f);
   color: #fff;
+  border-color: var(--admin-accent, #2d6a4f);
+}
+.asp-btn-submit:hover {
+  background: var(--admin-accent-strong, #1f4a37);
+  border-color: var(--admin-accent-strong, #1f4a37);
 }
 
 /* 셀 모달 */
@@ -326,7 +374,8 @@
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 8px;
-  background: rgba(255,255,255,0.05);
+  background: var(--admin-panel-light, #f5f9f3);
+  border: 1px solid var(--admin-stroke, rgba(31, 58, 44, 0.10));
   cursor: pointer;
 }
 .asp-cell-file-preview {
@@ -337,14 +386,14 @@
   max-height: 400px;
   object-fit: contain;
   border-radius: 8px;
-  background: rgba(255,255,255,0.05);
+  background: var(--admin-panel-light, #f5f9f3);
   cursor: pointer;
 }
 .asp-cell-pdf-preview {
   width: 100%;
   height: 400px;
   border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid var(--admin-stroke, rgba(31, 58, 44, 0.12));
 }
 .asp-cell-actions {
   display: flex;
@@ -353,18 +402,19 @@
 }
 .asp-cell-actions button {
   flex: 1;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 9px 14px;
+  border-radius: 10px;
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  border: none;
+  border: 1px solid transparent;
+  font-family: inherit;
 }
-.asp-btn-approve { background: rgba(76,175,80,0.2); color: #81c784; }
-.asp-btn-reject { background: rgba(244,67,54,0.2); color: #ef9a9a; }
-.asp-btn-pass { background: rgba(76,175,80,0.2); color: #81c784; }
-.asp-btn-retry { background: rgba(255,152,0,0.2); color: #ffcc80; }
-.asp-btn-fail { background: rgba(244,67,54,0.2); color: #ef9a9a; }
+.asp-btn-approve { background: rgba(45, 106, 79, 0.15); color: var(--admin-accent-strong, #1f4a37); border-color: rgba(45, 106, 79, 0.35); }
+.asp-btn-reject { background: rgba(192, 57, 43, 0.12); color: #c0392b; border-color: rgba(192, 57, 43, 0.30); }
+.asp-btn-pass { background: rgba(45, 106, 79, 0.15); color: var(--admin-accent-strong, #1f4a37); border-color: rgba(45, 106, 79, 0.35); }
+.asp-btn-retry { background: rgba(240, 173, 78, 0.15); color: #b87a14; border-color: rgba(240, 173, 78, 0.35); }
+.asp-btn-fail { background: rgba(192, 57, 43, 0.12); color: #c0392b; border-color: rgba(192, 57, 43, 0.30); }
 
 /* 대상 chip — 수강반/학생 시각 구분 */
 .aspd-target-chip {
@@ -372,10 +422,11 @@
   align-items: center;
   gap: 3px;
   padding: 2px 8px;
-  background: rgba(33,150,243,0.12);
-  color: #90caf9;
+  background: var(--admin-accent-soft, rgba(45, 106, 79, 0.10));
+  color: var(--admin-accent-strong, #1f4a37);
   border-radius: 10px;
   font-size: 0.72rem;
+  font-weight: 600;
 }
 
 /* 셀 액션 분기 — 학습 히스토리/첨삭/시험지 PDF 등 점프 버튼 */
@@ -392,15 +443,16 @@
   padding: 8px 12px;
   border-radius: 8px;
   font-size: 0.82rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(33,150,243,0.15);
-  color: #90caf9;
+  border: 1px solid var(--admin-accent, #2d6a4f);
+  background: var(--admin-panel, #ffffff);
+  color: var(--admin-accent-strong, #1f4a37);
   transition: background 0.15s;
+  font-family: inherit;
 }
 .asp-btn-jump:hover:not(:disabled) {
-  background: rgba(33,150,243,0.25);
+  background: var(--admin-accent-soft, rgba(45, 106, 79, 0.10));
 }
 .asp-btn-jump:disabled {
   opacity: 0.45;
@@ -416,7 +468,7 @@
 }
 .aspd-settings-section h3 {
   font-size: 0.9rem;
-  color: var(--admin-muted, #3a4a3e);
+  color: var(--admin-accent-strong, #1f4a37);
   margin-bottom: 12px;
 }
 .aspd-edit-list {
@@ -429,18 +481,23 @@
   align-items: center;
   gap: 8px;
   padding: 8px 10px;
-  background: rgba(255,255,255,0.03);
+  background: var(--admin-panel-light, #f5f9f3);
+  border: 1px solid var(--admin-stroke-soft, rgba(31, 58, 44, 0.08));
   border-radius: 6px;
 }
-.aspd-edit-item span { flex: 1; color: #ccc; font-size: 0.85rem; }
+.aspd-edit-item span {
+  flex: 1;
+  color: var(--admin-ink, #1a2920);
+  font-size: 0.85rem;
+}
 .aspd-edit-item button {
   background: none;
   border: none;
-  color: #888;
+  color: var(--admin-muted, #3a4a3e);
   cursor: pointer;
   font-size: 0.9rem;
 }
-.aspd-edit-item button:hover { color: #ef9a9a; }
+.aspd-edit-item button:hover { color: #c0392b; }
 
 /* 빈 상태 */
 .asp-empty {
@@ -452,13 +509,15 @@
   font-size: 48px;
   display: block;
   margin-bottom: 12px;
-  opacity: 0.4;
+  opacity: 0.5;
+  color: var(--admin-accent, #2d6a4f);
 }
 
 /* 에러/로딩 */
 .asp-error {
-  color: #ef9a9a;
-  background: rgba(244,67,54,0.1);
+  color: #c0392b;
+  background: rgba(192, 57, 43, 0.08);
+  border: 1px solid rgba(192, 57, 43, 0.25);
   padding: 10px 14px;
   border-radius: 8px;
   font-size: 0.82rem;
@@ -474,18 +533,20 @@
 .aspd-class-filter {
   margin-bottom: 10px;
   font-size: 0.8rem;
+  color: var(--admin-ink, #1a2920);
 }
 
 /* 전체 현황 항목 */
 .aspd-student-item.overview {
-  background: rgba(33,150,243,0.08);
-  border: 1px solid rgba(33,150,243,0.15);
-  color: #64b5f6;
+  background: rgba(74, 138, 200, 0.08);
+  border: 1px solid rgba(74, 138, 200, 0.30);
+  color: #2c5d99;
   margin-bottom: 4px;
+  font-weight: 700;
 }
 .aspd-student-item.overview.selected {
-  background: rgba(33,150,243,0.2);
-  color: #90caf9;
+  background: rgba(74, 138, 200, 0.18);
+  color: #1f4a78;
 }
 
 /* ── 매트릭스 에셋 타입 뱃지 ── */
@@ -494,19 +555,19 @@
   padding: 1px 6px;
   border-radius: 4px;
   font-size: 0.65rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.4;
 }
-.sp-asset-type-badge.korfarm { background: rgba(76,175,80,0.2); color: #66bb6a; }
-.sp-asset-type-badge.activity { background: rgba(158,158,158,0.2); color: #bdbdbd; }
-.sp-asset-type-badge.test { background: rgba(255,152,0,0.2); color: #ffa726; }
-.sp-asset-type-badge.writing { background: rgba(156,39,176,0.2); color: #ce93d8; }
+.sp-asset-type-badge.korfarm { background: rgba(45, 106, 79, 0.15); color: var(--admin-accent-strong, #1f4a37); }
+.sp-asset-type-badge.activity { background: rgba(166, 182, 169, 0.20); color: var(--admin-muted, #3a4a3e); }
+.sp-asset-type-badge.test { background: rgba(240, 173, 78, 0.15); color: #b87a14; }
+.sp-asset-type-badge.writing { background: rgba(163, 90, 212, 0.15); color: #7c3fb2; }
 
 /* 에셋 타입 옵션 버튼 색상 (팝오버 안) */
-.sp-asset-type-option.korfarm.active { background: rgba(76,175,80,0.25); color: #66bb6a; }
-.sp-asset-type-option.activity.active { background: rgba(158,158,158,0.25); color: #e0e0e0; }
-.sp-asset-type-option.test.active { background: rgba(255,152,0,0.25); color: #ffa726; }
-.sp-asset-type-option.writing.active { background: rgba(156,39,176,0.25); color: #ce93d8; }
+.sp-asset-type-option.korfarm.active { background: rgba(45, 106, 79, 0.18); color: var(--admin-accent-strong, #1f4a37); }
+.sp-asset-type-option.activity.active { background: rgba(166, 182, 169, 0.25); color: var(--admin-ink, #1a2920); }
+.sp-asset-type-option.test.active { background: rgba(240, 173, 78, 0.20); color: #b87a14; }
+.sp-asset-type-option.writing.active { background: rgba(163, 90, 212, 0.18); color: #7c3fb2; }
 
 /* 에셋 헤더 레이아웃 */
 .sp-asset-header-content {
@@ -518,6 +579,7 @@
 }
 .sp-asset-label {
   font-size: 0.8rem;
+  color: var(--admin-ink, #1a2920);
 }
 
 /* 행/열 삭제 버튼 (호버 표시) */
@@ -526,18 +588,18 @@
   position: absolute;
   top: -2px;
   right: -2px;
-  background: rgba(244,67,54,0.15);
+  background: rgba(192, 57, 43, 0.12);
   border: none;
   border-radius: 50%;
   width: 18px;
   height: 18px;
   padding: 0;
   cursor: pointer;
-  color: #ef9a9a;
+  color: #c0392b;
   line-height: 1;
 }
 .sp-delete-btn:hover {
-  background: rgba(244,67,54,0.3);
+  background: rgba(192, 57, 43, 0.25);
 }
 .sp-asset-header:hover .sp-delete-btn,
 .sp-scope-header:hover .sp-delete-btn {
@@ -549,6 +611,7 @@
 /* 범위 헤더 (행) */
 .sp-scope-header {
   position: relative;
+  color: var(--admin-ink, #1a2920);
 }
 
 /* "+" 열 추가 버튼 */
@@ -560,17 +623,17 @@
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  border: 1px dashed rgba(31, 58, 44, 0.15);
-  background: rgba(255,255,255,0.03);
+  border: 1px dashed var(--admin-stroke, rgba(31, 58, 44, 0.18));
+  background: var(--admin-panel-light, #f5f9f3);
   color: var(--admin-muted, #3a4a3e);
   font-size: 1.1rem;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
 .sp-add-col-btn:hover {
-  background: rgba(45, 106, 79,0.1);
-  border-color: rgba(45, 106, 79,0.3);
-  color: #3d8a6f;
+  background: var(--admin-accent-soft, rgba(45, 106, 79, 0.10));
+  border-color: var(--admin-accent, #2d6a4f);
+  color: var(--admin-accent-strong, #1f4a37);
 }
 
 /* 에셋 추가 팝오버 */
@@ -579,15 +642,16 @@
   top: 100%;
   right: 0;
   z-index: 100;
-  background: #1a2220;
-  border: 1px solid rgba(255,255,255,0.1);
+  background: var(--admin-panel, #ffffff);
+  border: 1px solid var(--admin-stroke, rgba(31, 58, 44, 0.18));
   border-radius: 10px;
   padding: 12px;
   min-width: 220px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 24px rgba(31, 58, 44, 0.18);
   display: flex;
   flex-direction: column;
   gap: 8px;
+  color: var(--admin-ink, #1a2920);
 }
 .sp-asset-type-select {
   display: flex;
@@ -597,21 +661,22 @@
   flex: 1;
   padding: 5px 4px;
   border-radius: 6px;
-  border: 1px solid rgba(31, 58, 44, 0.08);
-  background: rgba(255,255,255,0.03);
-  color: #aaa;
+  border: 1px solid var(--admin-stroke-soft, rgba(31, 58, 44, 0.10));
+  background: var(--admin-panel, #ffffff);
+  color: var(--admin-muted, #3a4a3e);
   font-size: 0.72rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
   text-align: center;
+  font-family: inherit;
 }
-.sp-asset-type-option.active,
 .sp-asset-type-option:hover {
-  border-color: rgba(45, 106, 79,0.4);
+  border-color: var(--admin-accent, #2d6a4f);
 }
-.sp-asset-type-option.korfarm.active { background: rgba(76,175,80,0.15); color: #66bb6a; border-color: rgba(76,175,80,0.4); }
-.sp-asset-type-option.activity.active { background: rgba(33,150,243,0.15); color: #64b5f6; border-color: rgba(33,150,243,0.4); }
-.sp-asset-type-option.test.active { background: rgba(255,152,0,0.15); color: #ffa726; border-color: rgba(255,152,0,0.4); }
+.sp-asset-type-option.korfarm.active { background: rgba(45, 106, 79, 0.18); color: var(--admin-accent-strong, #1f4a37); border-color: var(--admin-accent, #2d6a4f); }
+.sp-asset-type-option.activity.active { background: rgba(74, 138, 200, 0.15); color: #2c5d99; border-color: rgba(74, 138, 200, 0.40); }
+.sp-asset-type-option.test.active { background: rgba(240, 173, 78, 0.20); color: #b87a14; border-color: rgba(240, 173, 78, 0.45); }
 .sp-popover-input {
   font-size: 0.82rem;
   padding: 7px 10px;
@@ -624,7 +689,7 @@
 /* "+" 행 추가 */
 .sp-add-row td,
 .sp-add-row th {
-  border-top: 1px dashed rgba(31, 58, 44, 0.06);
+  border-top: 1px dashed var(--admin-stroke-soft, rgba(31, 58, 44, 0.10));
 }
 .sp-add-row-btn {
   display: flex;
@@ -636,10 +701,12 @@
   font-size: 0.8rem;
   cursor: pointer;
   padding: 6px 4px;
+  font-weight: 600;
   transition: color 0.15s;
+  font-family: inherit;
 }
 .sp-add-row-btn:hover {
-  color: #3d8a6f;
+  color: var(--admin-accent-strong, #1f4a37);
 }
 .sp-add-scope-input-wrap {
   display: flex;
@@ -653,7 +720,7 @@
 
 /* 테스트 종류 셀 뱃지 강조 */
 .cell-badge.test-kind {
-  border-left: 2px solid rgba(255,152,0,0.5);
+  border-left: 2px solid rgba(240, 173, 78, 0.60);
 }
 
 /* ── 필터/검색 바 ── */
@@ -682,18 +749,20 @@
   align-items: center;
   gap: 4px;
   padding: 8px 14px;
-  background: rgba(158,158,158,0.15);
-  border: 1px solid rgba(158,158,158,0.3);
+  background: var(--admin-panel, #ffffff);
+  border: 1px solid var(--admin-stroke, rgba(31, 58, 44, 0.18));
   border-radius: 8px;
-  color: #aaa;
+  color: var(--admin-muted, #3a4a3e);
   font-size: 0.82rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
 }
 .asp-archive-btn:hover {
-  background: rgba(158,158,158,0.25);
-  color: #ccc;
+  background: var(--admin-accent-soft, rgba(45, 106, 79, 0.10));
+  color: var(--admin-accent-strong, #1f4a37);
+  border-color: var(--admin-accent, #2d6a4f);
 }
 
 /* 체크박스 스타일 */
@@ -701,7 +770,7 @@
   width: 16px;
   height: 16px;
   cursor: pointer;
-  accent-color: #2d6a4f;
+  accent-color: var(--admin-accent, #2d6a4f);
 }
 
 /* ── 테이블 스크롤 래퍼 ── */
@@ -783,64 +852,90 @@
   display: flex; justify-content: space-between; align-items: center;
   margin-bottom: 12px;
 }
-.aspd-submissions-header h3 { margin: 0; font-size: 16px; }
+.aspd-submissions-header h3 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--admin-accent-strong, #1f4a37);
+}
 .aspd-filter-select {
-  padding: 6px 10px; border-radius: 6px; border: 1px solid #ddd;
-  font-size: 13px; background: #fff;
+  padding: 6px 10px; border-radius: 6px;
+  border: 1px solid var(--admin-stroke, rgba(31, 58, 44, 0.18));
+  font-size: 13px;
+  background: var(--admin-panel, #ffffff);
+  color: var(--admin-ink, #1a2920);
 }
 .aspd-submissions-table {
   width: 100%; border-collapse: collapse; font-size: 13px;
+  background: var(--admin-panel, #ffffff);
 }
 .aspd-submissions-table th {
-  padding: 8px; text-align: left; font-weight: 600; color: #666;
-  border-bottom: 2px solid #eee;
+  padding: 8px; text-align: left; font-weight: 700;
+  color: var(--admin-accent-strong, #1f4a37);
+  background: var(--admin-panel-light, #f5f9f3);
+  border-bottom: 1px solid var(--admin-stroke, rgba(31, 58, 44, 0.12));
 }
 .aspd-submissions-table td {
-  padding: 8px; border-bottom: 1px solid #f0f0f0;
+  padding: 8px;
+  color: var(--admin-ink, #1a2920);
+  border-bottom: 1px solid var(--admin-stroke-soft, rgba(31, 58, 44, 0.08));
 }
 .aspd-submissions-row { cursor: pointer; }
-.aspd-submissions-row:hover { background: rgba(45, 106, 79,0.04); }
+.aspd-submissions-row:hover { background: rgba(45, 106, 79, 0.06); }
 .aspd-type-badge {
   display: inline-block; padding: 2px 6px; border-radius: 4px;
-  font-size: 11px; font-weight: 600;
-  background: rgba(45, 106, 79,0.1); color: #e06820;
+  font-size: 11px; font-weight: 700;
+  background: var(--admin-accent-soft, rgba(45, 106, 79, 0.10));
+  color: var(--admin-accent-strong, #1f4a37);
 }
 .aspd-status-badge {
   display: inline-block; padding: 2px 8px; border-radius: 4px;
-  font-size: 11px; font-weight: 600;
+  font-size: 11px; font-weight: 700;
 }
 .aspd-status-badge.--submitted { background: #e8f0fe; color: #1a73e8; }
-.aspd-status-badge.--partial { background: #fef3e0; color: #e06820; }
+.aspd-status-badge.--partial { background: #fef3e0; color: #b87a14; }
 .aspd-status-badge.--completed { background: #e8f5e9; color: #2e7d32; }
 .aspd-status-badge.--scored { background: #f3e5f5; color: #7b1fa2; }
 .aspd-status-badge.--passed { background: #e8f5e9; color: #2e7d32; }
-.aspd-status-badge.--pending { background: #f5f5f5; color: #999; }
+.aspd-status-badge.--pending { background: #f5f5f5; color: var(--admin-muted, #3a4a3e); }
 
 /* 기한 입력 */
 .sp-popover-due {
   display: flex; align-items: center; gap: 6px;
   margin: 4px 0; font-size: 12px;
+  color: var(--admin-ink, #1a2920);
 }
-.sp-popover-due label { color: #666; white-space: nowrap; }
+.sp-popover-due label {
+  color: var(--admin-muted, #3a4a3e);
+  white-space: nowrap;
+}
 .sp-popover-date {
   padding: 4px 8px; font-size: 12px; border-radius: 4px;
-  border: 1px solid #ddd; flex: 1;
+  border: 1px solid var(--admin-stroke, rgba(31, 58, 44, 0.18));
+  background: var(--admin-panel-light, #f5f9f3);
+  color: var(--admin-ink, #1a2920);
+  flex: 1;
 }
 
 /* 전체 현황 매트릭스 */
 .aspd-overview-table {
   width: 100%; border-collapse: collapse; font-size: 13px;
+  background: var(--admin-panel, #ffffff);
 }
 .aspd-overview-table th {
-  padding: 8px; text-align: center; font-weight: 600; color: #555;
-  border-bottom: 2px solid #eee; background: #fafafa;
+  padding: 8px; text-align: center; font-weight: 700;
+  color: var(--admin-accent-strong, #1f4a37);
+  background: var(--admin-panel-light, #f5f9f3);
+  border-bottom: 1px solid var(--admin-stroke, rgba(31, 58, 44, 0.12));
 }
 .aspd-overview-table td {
-  padding: 8px; text-align: center; border-bottom: 1px solid #f0f0f0;
+  padding: 8px; text-align: center;
+  color: var(--admin-ink, #1a2920);
+  border-bottom: 1px solid var(--admin-stroke-soft, rgba(31, 58, 44, 0.08));
 }
 .aspd-overview-cell { cursor: default; }
 .aspd-overview-badge {
   display: inline-block; padding: 2px 10px; border-radius: 10px;
   font-size: 12px; font-weight: 700;
-  background: #fff3e0; color: #e06820;
+  background: var(--admin-accent-soft, rgba(45, 106, 79, 0.10));
+  color: var(--admin-accent-strong, #1f4a37);
 }

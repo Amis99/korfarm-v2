@@ -352,3 +352,174 @@ internal fun StudyPlanScheduleEntity.toResponse(): ScheduleResponse {
         scheduledDate = scheduledDate.toString(), label = label, memo = memo
     )
 }
+
+// ── Phase B: 기본 plan 자동 생성 backfill 응답 ──
+data class BackfillDefaultPlanResponse(
+    val created: Int,
+    val alreadyHas: Int
+)
+
+// ── Phase C: 행/열 일괄 적용 (충돌 감지) ──
+data class PropagateDeltaRequest(
+    val targetScope: String,                  // "org" | "class" | "users"
+    val classId: String? = null,
+    val userIds: List<String>? = null,
+    val scopeIds: List<String>? = null,       // 복제할 scope id 들 (planId 기준)
+    val assetIds: List<String>? = null,       // 복제할 asset id 들 (planId 기준)
+    val conflictPolicy: String? = null        // null | "skip" | "overwrite"
+)
+
+data class PropagateConflict(
+    val userId: String,
+    val userName: String?,
+    val kind: String,    // "scope" | "asset"
+    val label: String
+)
+
+data class PropagateUserResult(
+    val userId: String,
+    val applied: Boolean
+)
+
+data class PropagateDeltaResponse(
+    val conflicts: List<PropagateConflict> = emptyList(),
+    val appliedCount: Int = 0,
+    val skippedCount: Int = 0,
+    val overwrittenCount: Int = 0,
+    val results: List<PropagateUserResult> = emptyList()
+)
+
+// ── Phase D: 통합 리스트 4 API ──
+
+// 1) 제출물 통합
+data class AdminSubmissionListResponse(
+    val items: List<AdminSubmissionItem>,
+    val total: Int,
+    val page: Int,
+    val limit: Int,
+    val hasMore: Boolean
+)
+
+data class AdminSubmissionItem(
+    val cellId: String,
+    val planId: String,
+    val planTitle: String,
+    val scopeId: String,
+    val scopeLabel: String,
+    val assetId: String,
+    val assetLabel: String,
+    val assetType: String,
+    val userId: String,
+    val userName: String,
+    val classId: String?,
+    val className: String?,
+    val status: String,
+    val submissionCount: Int,
+    val score: Int?,
+    val reviewedBy: String?,
+    val reviewedAt: String?,
+    val updatedAt: String,
+    val adminNote: String?
+)
+
+// 2) 글쓰기 통합
+data class AdminIntegratedWisdomResponse(
+    val items: List<AdminIntegratedWisdomItem>,
+    val total: Int,
+    val page: Int,
+    val limit: Int,
+    val hasMore: Boolean
+)
+
+data class AdminIntegratedWisdomItem(
+    val postId: String,
+    val levelId: String,
+    val topicKey: String,
+    val topicLabel: String,
+    val userId: String,
+    val userName: String,
+    val classId: String?,
+    val className: String?,
+    val submissionType: String,
+    val status: String,
+    val planCellId: String?,
+    val planTitle: String?,
+    val hasFeedback: Boolean,
+    val feedbackBy: String?,
+    val feedbackAt: String?,
+    val createdAt: String
+)
+
+// 3) 테스트 통합
+data class AdminTestAssetListResponse(
+    val items: List<AdminTestAssetItem>,
+    val total: Int,
+    val page: Int,
+    val limit: Int,
+    val hasMore: Boolean
+)
+
+data class AdminTestAssetItem(
+    val assetId: String,
+    val planId: String,
+    val planTitle: String,
+    val testTitle: String?,
+    val testId: String?,
+    val dueAt: String?,
+    val totalAssigned: Int,
+    val completed: Int,
+    val pending: Int,
+    val avgScore: Double?
+)
+
+data class AdminTestAssetStudentListResponse(
+    val students: List<AdminTestAssetStudent>
+)
+
+data class AdminTestAssetStudent(
+    val userId: String,
+    val userName: String?,
+    val className: String?,
+    val status: String,
+    val score: Int?,
+    val attemptedAt: String?
+)
+
+// 4) 캘린더 통합
+data class AdminCalendarResponse(
+    val days: List<AdminCalendarDay>
+)
+
+data class AdminCalendarDay(
+    val date: String,
+    val count: Int,
+    val items: List<AdminCalendarItem>
+)
+
+data class AdminCalendarItem(
+    val type: String,        // "schedule" | "asset"
+    val refId: String,
+    val label: String,
+    val totalAssigned: Int,
+    val pending: Int,
+    val completed: Int
+)
+
+data class AdminCalendarDateDetailResponse(
+    val actions: List<AdminCalendarAction>
+)
+
+data class AdminCalendarAction(
+    val assetId: String,
+    val label: String,
+    val assetType: String,
+    val dueAt: String?,
+    val totalAssigned: Int,
+    val students: List<AdminCalendarActionStudent>
+)
+
+data class AdminCalendarActionStudent(
+    val userId: String,
+    val userName: String?,
+    val status: String
+)
