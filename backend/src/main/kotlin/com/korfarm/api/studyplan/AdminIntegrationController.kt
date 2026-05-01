@@ -6,6 +6,7 @@ import com.korfarm.api.security.AdminGuard
 import com.korfarm.api.security.SecurityUtils
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -49,6 +50,13 @@ class AdminIntegrationController(
                 currentUser(), assetType, status, classId, userId, sortBy, sortDir, page, limit
             )
         )
+    }
+
+    /** 학생 1명이 target 인 plan 목록 (학생별 탭의 매트릭스 진입점) */
+    @GetMapping("/v1/admin/students/{userId}/study-plans")
+    fun studentPlans(@PathVariable userId: String): ApiResponse<List<StudyPlanSummaryResponse>> {
+        requireAdmin()
+        return ApiResponse(success = true, data = service.listPlansForStudent(userId))
     }
 
     /** D-2) 글쓰기 통합 */
