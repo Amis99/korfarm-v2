@@ -1,6 +1,8 @@
 package com.korfarm.api.pro
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.korfarm.api.aigen.AiGenLogService
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import java.net.URI
@@ -18,12 +20,20 @@ data class AiGradeResult(
 class AiGradingClient(
     @Value("\${claude.api.key:}") private val apiKey: String,
     @Value("\${claude.api.url:https://api.anthropic.com/v1/messages}") private val apiUrl: String,
-    private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper,
+    private val aiGenLogService: AiGenLogService
 ) {
+    private val log = LoggerFactory.getLogger(AiGradingClient::class.java)
     private val httpClient = HttpClient.newHttpClient()
     private val modelId = "claude-sonnet-4-20250514"
 
-    fun grade(studentAnswer: String, modelAnswer: String, rubric: String, maxPoints: Int): AiGradeResult {
+    fun grade(
+        studentAnswer: String,
+        modelAnswer: String,
+        rubric: String,
+        maxPoints: Int,
+        userId: String
+    ): AiGradeResult {
         if (apiKey.isBlank()) {
             return AiGradeResult(0, "AI 채점 API 키가 설정되지 않았습니다.", "none")
         }
@@ -46,11 +56,56 @@ class AiGradingClient(
             .POST(HttpRequest.BodyPublishers.ofString(requestBody))
             .build()
 
+        val started = System.currentTimeMillis()
         return try {
             val response = httpClient.send(request, HttpResponse.BodyHandlers.ofString())
-            parseResponse(response.body())
+            val duration = (System.currentTimeMillis() - started).toInt()
+            val raw = response.body()
+            val (inTok, outTok) = extractUsage(raw)
+            logUsage(userId, duration, inTok, outTok, status = "success")
+            parseResponse(raw)
         } catch (e: Exception) {
+            val duration = (System.currentTimeMillis() - started).toInt()
+            logUsage(userId, duration, null, null, status = "error", errorMessage = e.message)
             AiGradeResult(0, "AI 채점 실패: ${e.message}", modelId)
+        }
+    }
+
+    private fun extractUsage(raw: String): Pair<Int?, Int?> {
+        return try {
+            val parsed = objectMapper.readValue(raw, Map::class.java)
+            val usage = parsed["usage"] as? Map<*, *>
+            Pair(
+                (usage?.get("input_tokens") as? Number)?.toInt(),
+                (usage?.get("output_tokens") as? Number)?.toInt()
+            )
+        } catch (e: Exception) {
+            Pair(null, null)
+        }
+    }
+
+    private fun logUsage(
+        userId: String,
+        durationMs: Int,
+        inputTokens: Int?,
+        outputTokens: Int?,
+        status: String,
+        errorMessage: String? = null
+    ) {
+        try {
+            aiGenLogService.log(
+                userId = userId,
+                testId = null,
+                kind = "pro-grading",
+                model = modelId,
+                inputTokens = inputTokens,
+                outputTokens = outputTokens,
+                durationMs = durationMs,
+                status = status,
+                errorMessage = errorMessage
+            )
+        } catch (e: Exception) {
+            log.warn("AI 사용 로그 저장 실패: kind=pro-grading err={}", e.message)
         }
     }
 

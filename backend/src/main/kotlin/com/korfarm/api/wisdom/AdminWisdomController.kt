@@ -82,7 +82,9 @@ class AdminWisdomController(
     @PostMapping("/posts/{postId}/ocr")
     fun ocr(@PathVariable postId: String): ApiResponse<OcrResult> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
-        val result = wisdomService.ocrAndSaveContent(postId)
+        val reviewerId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        val result = wisdomService.ocrAndSaveContent(postId, reviewerId)
         return ApiResponse(success = true, data = result)
     }
 

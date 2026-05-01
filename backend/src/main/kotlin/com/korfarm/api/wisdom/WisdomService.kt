@@ -489,7 +489,7 @@ class WisdomService(
 
     // ─── AI 첨삭 ───────────────────────────────────────
 
-    fun generateAiFeedback(postId: String): AiFeedbackResult {
+    fun generateAiFeedback(postId: String, requesterId: String): AiFeedbackResult {
         val post = postRepository.findById(postId).orElseThrow {
             ApiException("NOT_FOUND", "글을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
         }
@@ -497,7 +497,7 @@ class WisdomService(
         if (text.isNullOrBlank()) {
             throw ApiException("NO_CONTENT", "글 내용이 없습니다. 파일 업로드 글은 먼저 OCR 변환이 필요합니다.", HttpStatus.BAD_REQUEST)
         }
-        return aiWisdomClient.generateFeedback(text, post.levelId, post.topicLabel)
+        return aiWisdomClient.generateFeedback(text, post.levelId, post.topicLabel, requesterId)
     }
 
     /**
@@ -547,7 +547,7 @@ class WisdomService(
         )
     }
 
-    fun ocrPost(postId: String): OcrResult {
+    fun ocrPost(postId: String, requesterId: String): OcrResult {
         val post = postRepository.findById(postId).orElseThrow {
             ApiException("NOT_FOUND", "글을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
         }
@@ -573,12 +573,12 @@ class WisdomService(
         if (imageDataList.isEmpty()) {
             throw ApiException("FILE_NOT_FOUND", "서버에 파일이 존재하지 않습니다", HttpStatus.NOT_FOUND)
         }
-        return aiWisdomClient.ocrManuscript(imageDataList)
+        return aiWisdomClient.ocrManuscript(imageDataList, requesterId)
     }
 
     @Transactional
-    fun ocrAndSaveContent(postId: String): OcrResult {
-        val result = ocrPost(postId)
+    fun ocrAndSaveContent(postId: String, requesterId: String): OcrResult {
+        val result = ocrPost(postId, requesterId)
         if (result.text.isNotBlank()) {
             val post = postRepository.findById(postId).orElseThrow {
                 ApiException("NOT_FOUND", "글을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
@@ -606,7 +606,7 @@ class WisdomService(
                 if (existingFeedback != null) {
                     return@map AiBatchResultItem(postId, "skipped", "이미 첨삭 완료")
                 }
-                val result = aiWisdomClient.generateFeedback(post.content!!, post.levelId, post.topicLabel)
+                val result = aiWisdomClient.generateFeedback(post.content!!, post.levelId, post.topicLabel, reviewerId)
                 val feedback = WisdomFeedbackEntity(
                     id = IdGenerator.newId("wfb"),
                     postId = postId,

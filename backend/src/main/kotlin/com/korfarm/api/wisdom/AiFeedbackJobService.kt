@@ -29,7 +29,9 @@ class AiFeedbackJobService(
             }
 
             // Claude API 호출 (장시간) — 트랜잭션 밖
-            val result = aiWisdomClient.generateFeedback(context.text, context.levelId, context.topicLabel)
+            val result = aiWisdomClient.generateFeedback(
+                context.text, context.levelId, context.topicLabel, context.requestedBy
+            )
 
             tx.markCompleted(jobId, result)
         } catch (e: Exception) {
@@ -46,7 +48,8 @@ class AiFeedbackJobService(
 data class AiFeedbackJobContext(
     val text: String,
     val levelId: String,
-    val topicLabel: String
+    val topicLabel: String,
+    val requestedBy: String
 )
 
 @Service
@@ -75,7 +78,12 @@ class AiFeedbackJobTx(
         }
         job.status = AiFeedbackJobStatus.RUNNING
         jobRepository.save(job)
-        return AiFeedbackJobContext(text = text, levelId = post.levelId, topicLabel = post.topicLabel)
+        return AiFeedbackJobContext(
+            text = text,
+            levelId = post.levelId,
+            topicLabel = post.topicLabel,
+            requestedBy = job.requestedBy
+        )
     }
 
     @Transactional

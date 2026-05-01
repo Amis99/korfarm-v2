@@ -101,7 +101,8 @@ class EssayGradingService(
             studentAnswer = studentAnswer,
             modelAnswer = modelAnswer,
             rubric = rubric,
-            maxPoints = question.points
+            maxPoints = question.points,
+            userId = grading.userId
         )
 
         grading.aiScore = aiResult.score

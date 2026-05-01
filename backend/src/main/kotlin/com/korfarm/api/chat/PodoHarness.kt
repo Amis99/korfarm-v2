@@ -1,6 +1,7 @@
 package com.korfarm.api.chat
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.korfarm.api.aigen.AiGenLogService
 import com.korfarm.api.wisdom.AiPromptRepository
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
@@ -32,6 +33,7 @@ class PodoHarness(
     private val referenceRepo: AiChatReferenceRepository,
     private val aiPromptRepository: AiPromptRepository,
     private val objectMapper: ObjectMapper,
+    private val aiGenLogService: AiGenLogService,
     @Value("\${claude.api.key:}") private val apiKey: String,
     @Value("\${claude.api.url:https://api.anthropic.com/v1/messages}") private val apiUrl: String
 ) {
@@ -125,7 +127,7 @@ $chatContext
             mapOf("role" to "user", "content" to userContent)
         )
 
-        var response = callClaude(systemBlocks, messages)
+        var response = callClaude(systemBlocks, messages, triggerMessage.userId, "podo-chat")
         var iterations = 0
         val maxIterations = 3
 
@@ -158,7 +160,7 @@ $chatContext
             messages.add(mapOf("role" to "user", "content" to toolResults))
 
             // 다음 호출
-            response = callClaude(systemBlocks, messages)
+            response = callClaude(systemBlocks, messages, triggerMessage.userId, "podo-chat")
             iterations++
         }
 
@@ -173,7 +175,7 @@ $chatContext
 
     // ─── 게시판 댓글용 ─────────────────────────────────
 
-    fun generateForBoard(title: String, content: String): String {
+    fun generateForBoard(title: String, content: String, authorId: String): String {
         if (apiKey.isBlank()) return ""
 
         val systemPrompt = aiPromptRepository.findByPromptKeyAndLevelGroup("community_chat", "_common")
@@ -201,7 +203,7 @@ $chatContext
             mapOf("role" to "user", "content" to userContent)
         )
 
-        var response = callClaude(systemBlocks, messages)
+        var response = callClaude(systemBlocks, messages, authorId, "podo-board")
         var iterations = 0
         val maxIterations = 3
 
@@ -224,7 +226,7 @@ $chatContext
                 )
             }
             messages.add(mapOf("role" to "user", "content" to toolResults))
-            response = callClaude(systemBlocks, messages)
+            response = callClaude(systemBlocks, messages, authorId, "podo-board")
             iterations++
         }
 
@@ -236,7 +238,7 @@ $chatContext
 
     // ─── 게시판 댓글 (이미지 포함) ───────────────────────
 
-    fun generateForBoardWithImages(title: String, content: String, images: List<Pair<ByteArray, String>>): String {
+    fun generateForBoardWithImages(title: String, content: String, images: List<Pair<ByteArray, String>>, authorId: String): String {
         if (apiKey.isBlank()) return ""
 
         val systemPrompt = aiPromptRepository.findByPromptKeyAndLevelGroup("community_chat", "_common")
@@ -279,7 +281,7 @@ $chatContext
             mapOf("role" to "user", "content" to userContentBlocks)
         )
 
-        var response = callClaude(systemBlocks, messages)
+        var response = callClaude(systemBlocks, messages, authorId, "podo-board")
         var iterations = 0
         val maxIterations = 3
 
@@ -302,7 +304,7 @@ $chatContext
                 )
             }
             messages.add(mapOf("role" to "user", "content" to toolResults))
-            response = callClaude(systemBlocks, messages)
+            response = callClaude(systemBlocks, messages, authorId, "podo-board")
             iterations++
         }
 
@@ -470,7 +472,12 @@ $chatContext
 
     // ─── Claude API ─────────────────────────────────────
 
-    private fun callClaude(system: List<Map<String, Any>>, messages: List<Map<String, Any>>): String {
+    private fun callClaude(
+        system: List<Map<String, Any>>,
+        messages: List<Map<String, Any>>,
+        userId: String,
+        kind: String = "podo-chat"
+    ): String {
         val body = mutableMapOf<String, Any>(
             "model" to modelId,
             "max_tokens" to 1024,
@@ -481,6 +488,7 @@ $chatContext
         )
 
         val requestBody = objectMapper.writeValueAsString(body)
+        val started = System.currentTimeMillis()
 
         val request = HttpRequest.newBuilder()
             .uri(URI.create(apiUrl))
@@ -491,13 +499,57 @@ $chatContext
             .POST(HttpRequest.BodyPublishers.ofString(requestBody))
             .build()
 
-        val response = httpClient.send(request, HttpResponse.BodyHandlers.ofString())
+        val response = try {
+            httpClient.send(request, HttpResponse.BodyHandlers.ofString())
+        } catch (e: Exception) {
+            val duration = (System.currentTimeMillis() - started).toInt()
+            logUsage(userId, kind, duration, null, null, status = "error", errorMessage = e.message)
+            throw e
+        }
+        val duration = (System.currentTimeMillis() - started).toInt()
         if (response.statusCode() !in 200..299) {
             log.error("Claude API 오류: status={}, body={}", response.statusCode(), response.body().take(500))
+            logUsage(userId, kind, duration, null, null, status = "error", errorMessage = "HTTP ${response.statusCode()}")
             throw RuntimeException("Claude API HTTP ${response.statusCode()}")
         }
 
-        return response.body()
+        // 토큰 추출 + 로깅
+        val raw = response.body()
+        val (inTok, outTok) = try {
+            val parsed = objectMapper.readValue(raw, Map::class.java)
+            val usage = parsed["usage"] as? Map<*, *>
+            Pair((usage?.get("input_tokens") as? Number)?.toInt(), (usage?.get("output_tokens") as? Number)?.toInt())
+        } catch (e: Exception) {
+            Pair(null, null)
+        }
+        logUsage(userId, kind, duration, inTok, outTok, status = "success")
+        return raw
+    }
+
+    private fun logUsage(
+        userId: String,
+        kind: String,
+        durationMs: Int,
+        inputTokens: Int?,
+        outputTokens: Int?,
+        status: String,
+        errorMessage: String? = null
+    ) {
+        try {
+            aiGenLogService.log(
+                userId = userId,
+                testId = null,
+                kind = kind,
+                model = modelId,
+                inputTokens = inputTokens,
+                outputTokens = outputTokens,
+                durationMs = durationMs,
+                status = status,
+                errorMessage = errorMessage
+            )
+        } catch (e: Exception) {
+            log.warn("AI 사용 로그 저장 실패: kind={} err={}", kind, e.message)
+        }
     }
 
     @Suppress("UNCHECKED_CAST")

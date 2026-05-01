@@ -44,9 +44,9 @@ class PodoBoardService(
                 }
 
             val response = if (imageDataList.isNotEmpty()) {
-                podoHarness.generateForBoardWithImages(post.title, post.content, imageDataList)
+                podoHarness.generateForBoardWithImages(post.title, post.content, imageDataList, post.userId)
             } else {
-                podoHarness.generateForBoard(post.title, post.content)
+                podoHarness.generateForBoard(post.title, post.content, post.userId)
             }
             if (response.isBlank()) return
 

@@ -1,6 +1,7 @@
 package com.korfarm.api.wisdom
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.korfarm.api.aigen.AiGenLogService
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.slf4j.LoggerFactory
@@ -27,7 +28,8 @@ class AiWisdomClient(
     @Value("\${claude.api.key:}") private val apiKey: String,
     @Value("\${claude.api.url:https://api.anthropic.com/v1/messages}") private val apiUrl: String,
     private val objectMapper: ObjectMapper,
-    private val aiPromptRepository: AiPromptRepository
+    private val aiPromptRepository: AiPromptRepository,
+    private val aiGenLogService: AiGenLogService
 ) {
     private val logger = LoggerFactory.getLogger(AiWisdomClient::class.java)
     // 비동기 job 내부에서 호출되지만 백엔드가 영원히 대기하지 않도록 안전장치
@@ -39,7 +41,7 @@ class AiWisdomClient(
 
     // ─── OCR ────────────────────────────────────────────
 
-    fun ocrManuscript(imageDataList: List<Pair<ByteArray, String>>): OcrResult {
+    fun ocrManuscript(imageDataList: List<Pair<ByteArray, String>>, userId: String): OcrResult {
         if (apiKey.isBlank()) return OcrResult("", "none")
         if (imageDataList.isEmpty()) return OcrResult("", modelId)
 
@@ -68,19 +70,22 @@ class AiWisdomClient(
         ))
 
         return try {
-            val text = callApi(requestBody)
+            val resp = callApiWithMeta(requestBody)
+            val text = extractFirstText(resp.rawJson)
             // --- 구분선을 \f(form feed)로 변환
-            val normalized = text.replace(Regex("-{3,}"), "\u000C").trim()
+            val normalized = text.replace(Regex("-{3,}"), "").trim()
+            logUsage(userId, "wisdom-ocr", resp, status = "success")
             OcrResult(normalized, modelId)
         } catch (e: Exception) {
             logger.error("OCR 실패", e)
+            logFailure(userId, "wisdom-ocr", e.message)
             OcrResult("", modelId)
         }
     }
 
     // ─── 첨삭 ───────────────────────────────────────────
 
-    fun generateFeedback(text: String, levelId: String, topicLabel: String): AiFeedbackResult {
+    fun generateFeedback(text: String, levelId: String, topicLabel: String, userId: String): AiFeedbackResult {
         if (apiKey.isBlank()) return AiFeedbackResult("AI API 키가 설정되지 않았습니다.", null, "none")
         if (text.isBlank()) return AiFeedbackResult("학생 글이 비어 있습니다.", null, modelId)
 
@@ -149,10 +154,13 @@ class AiWisdomClient(
         ))
 
         return try {
-            val responseBody = callApiRaw(requestBody)
-            parseToolResponse(responseBody, text)
+            val resp = callApiWithMeta(requestBody)
+            val parsed = parseToolResponse(resp.rawJson, text)
+            logUsage(userId, "wisdom-feedback", resp, status = "success")
+            parsed
         } catch (e: Exception) {
             logger.error("AI 첨삭 실패", e)
+            logFailure(userId, "wisdom-feedback", e.message)
             AiFeedbackResult("AI 첨삭 실패: ${e.message}", null, modelId)
         }
     }
@@ -173,7 +181,7 @@ class AiWisdomClient(
         val corrections = input["corrections"] as? List<*> ?: emptyList<Any>()
 
         // corrections → annotation 형식 변환
-        val pages = originalText.split("\u000C")
+        val pages = originalText.split("")
         val annotations = mutableListOf<Map<String, Any>>()
         var annotationId = 1
         val usedRanges = mutableSetOf<String>()
@@ -232,14 +240,21 @@ class AiWisdomClient(
         }
     }
 
-    private fun callApi(requestBody: String): String {
-        val raw = callApiRaw(requestBody)
-        val responseMap = objectMapper.readValue(raw, Map::class.java)
+    private fun extractFirstText(rawJson: String): String {
+        val responseMap = objectMapper.readValue(rawJson, Map::class.java)
         val content = (responseMap["content"] as? List<*>)?.firstOrNull() as? Map<*, *>
         return content?.get("text") as? String ?: ""
     }
 
-    private fun callApiRaw(requestBody: String): String {
+    private data class CallMeta(
+        val rawJson: String,
+        val durationMs: Int,
+        val inputTokens: Int?,
+        val outputTokens: Int?
+    )
+
+    private fun callApiWithMeta(requestBody: String): CallMeta {
+        val started = System.currentTimeMillis()
         val request = HttpRequest.newBuilder()
             .uri(URI.create(apiUrl))
             .timeout(requestTimeout)
@@ -249,10 +264,52 @@ class AiWisdomClient(
             .POST(HttpRequest.BodyPublishers.ofString(requestBody))
             .build()
         val response = httpClient.send(request, HttpResponse.BodyHandlers.ofString())
+        val duration = (System.currentTimeMillis() - started).toInt()
         if (response.statusCode() !in 200..299) {
             logger.error("Claude API 오류: status={}, body={}", response.statusCode(), response.body())
             throw RuntimeException("Claude API 오류: HTTP ${response.statusCode()}")
         }
-        return response.body()
+        val raw = response.body()
+        val parsed = try {
+            objectMapper.readValue(raw, Map::class.java)
+        } catch (e: Exception) {
+            null
+        }
+        val usage = parsed?.get("usage") as? Map<*, *>
+        val inTok = (usage?.get("input_tokens") as? Number)?.toInt()
+        val outTok = (usage?.get("output_tokens") as? Number)?.toInt()
+        return CallMeta(rawJson = raw, durationMs = duration, inputTokens = inTok, outputTokens = outTok)
+    }
+
+    private fun logUsage(userId: String, kind: String, meta: CallMeta, status: String) {
+        try {
+            aiGenLogService.log(
+                userId = userId,
+                testId = null,
+                kind = kind,
+                model = modelId,
+                inputTokens = meta.inputTokens,
+                outputTokens = meta.outputTokens,
+                durationMs = meta.durationMs,
+                status = status
+            )
+        } catch (e: Exception) {
+            logger.warn("AI 사용 로그 저장 실패: kind={} err={}", kind, e.message)
+        }
+    }
+
+    private fun logFailure(userId: String, kind: String, errorMessage: String?) {
+        try {
+            aiGenLogService.log(
+                userId = userId,
+                testId = null,
+                kind = kind,
+                model = modelId,
+                status = "error",
+                errorMessage = errorMessage
+            )
+        } catch (e: Exception) {
+            logger.warn("AI 사용 로그 저장 실패(error): kind={} err={}", kind, e.message)
+        }
     }
 }

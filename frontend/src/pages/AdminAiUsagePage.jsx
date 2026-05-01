@@ -4,7 +4,20 @@ import { apiGet } from "../utils/adminApi";
 import Pagination from "../components/Pagination";
 import usePagination from "../hooks/usePagination";
 
-const KIND_LABELS = { passage: "지문 생성", question: "문항 생성", review: "학생 페르소나 검증" };
+const KIND_LABELS = {
+  passage: "지문 생성",
+  question: "문항 생성",
+  review: "학생 페르소나 검증",
+  "study-question": "학습 문항 (단일)",
+  "study-questions": "학습 문항 (일괄)",
+  "study-checkpoints": "학습 체크포인트",
+  "file-to-markdown": "파일 → 마크다운",
+  "wisdom-feedback": "글쓰기 AI 첨삭",
+  "wisdom-ocr": "글쓰기 OCR",
+  "podo-chat": "포도 AI 채팅",
+  "podo-board": "포도 AI 게시판 댓글",
+  "pro-grading": "프로모드 AI 채점",
+};
 
 // 백엔드 응답이 SNAKE_CASE로 올 수 있어 양쪽 지원
 function normItem(it) {
@@ -132,9 +145,28 @@ export default function AdminAiUsagePage() {
           </select>
           <select value={filterKind} onChange={(e) => setFilterKind(e.target.value)} style={inpStyle}>
             <option value="">전체 내역</option>
-            <option value="passage">지문 생성</option>
-            <option value="question">문항 생성</option>
-            <option value="review">학생 페르소나 검증</option>
+            <optgroup label="시험 출제 (AI)">
+              <option value="passage">지문 생성</option>
+              <option value="question">문항 생성</option>
+              <option value="review">학생 페르소나 검증</option>
+              <option value="file-to-markdown">파일 → 마크다운</option>
+            </optgroup>
+            <optgroup label="학습 모듈">
+              <option value="study-question">학습 문항 (단일)</option>
+              <option value="study-questions">학습 문항 (일괄)</option>
+              <option value="study-checkpoints">학습 체크포인트</option>
+            </optgroup>
+            <optgroup label="글쓰기">
+              <option value="wisdom-feedback">글쓰기 AI 첨삭</option>
+              <option value="wisdom-ocr">글쓰기 OCR</option>
+            </optgroup>
+            <optgroup label="포도 AI">
+              <option value="podo-chat">포도 AI 채팅</option>
+              <option value="podo-board">포도 AI 게시판 댓글</option>
+            </optgroup>
+            <optgroup label="프로모드">
+              <option value="pro-grading">프로모드 AI 채점</option>
+            </optgroup>
           </select>
           <label style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 12, color: "var(--admin-muted)" }}>
             기간
