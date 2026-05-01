@@ -88,6 +88,15 @@
 .sp-matrix thead th:first-child {
   text-align: left;
   min-width: 120px;
+  max-width: 120px;
+  width: 120px;
+}
+/* 자산(열) 셀 너비 고정 — 가로축 균일하게 */
+.sp-matrix thead th:not(:first-child):not(.sp-add-col-th),
+.sp-matrix tbody td {
+  min-width: 130px;
+  max-width: 130px;
+  width: 130px;
 }
 .sp-matrix tbody th {
   text-align: left;
@@ -123,7 +132,46 @@
   background: rgba(255,127,42,0.1);
 }
 
-/* 셀 상태 뱃지 */
+/* ── 셀 상태 5단계 (표준) ── */
+.cell-stage {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+}
+.cell-stage.stage-unassigned {
+  background: rgba(158,158,158,0.06);
+  color: #888;
+  border: 1.5px dashed rgba(158,158,158,0.5);
+}
+.cell-stage.stage-pending {
+  background: rgba(255,193,7,0.20);
+  color: #8a6d00;
+}
+.cell-stage.stage-overdue {
+  background: rgba(120,120,120,0.22);
+  color: #4a4a4a;
+  border: 1px solid rgba(120,120,120,0.4);
+}
+.cell-stage.stage-done {
+  background: rgba(33,150,243,0.20);
+  color: #0d47a1;
+}
+.cell-stage.stage-reviewed {
+  background: rgba(76,175,80,0.28);
+  color: #1b5e20;
+}
+
+/* 매트릭스 셀에 stage 호버 효과 */
+.sp-matrix tbody td:hover .cell-stage.stage-unassigned,
+.sp-matrix tbody td:hover .cell-stage.stage-overdue {
+  border-color: var(--admin-accent, #2d6a4f);
+}
+
+/* 셀 상태 뱃지 (기존 — 점진 폐기 예정) */
 .cell-badge {
   display: inline-flex;
   align-items: center;

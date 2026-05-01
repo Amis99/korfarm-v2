@@ -21,7 +21,9 @@ const STATUS_LABEL = {
 export default function SubmissionsTab({ classId, onPickStudent }) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [assetType, setAssetType] = useState("");
+  // 정책: 제출물 탭은 학습 활동(activity) 만 노출.
+  // 다른 자산은 각자 결과 화면(학습 히스토리/성적표/첨삭)으로 점프.
+  const assetType = "activity";
   const [status, setStatus] = useState("");
   const [sortBy, setSortBy] = useState("updatedAt");
   const [sortDir, setSortDir] = useState("desc");
@@ -29,7 +31,7 @@ export default function SubmissionsTab({ classId, onPickStudent }) {
   const load = () => {
     setLoading(true);
     const params = new URLSearchParams();
-    if (assetType) params.set("assetType", assetType);
+    params.set("assetType", assetType);
     if (status) params.set("status", status);
     if (classId) params.set("classId", classId);
     if (sortBy) params.set("sortBy", sortBy);
@@ -43,10 +45,10 @@ export default function SubmissionsTab({ classId, onPickStudent }) {
       .finally(() => setLoading(false));
   };
 
-  useEffect(load, [assetType, status, classId, sortBy, sortDir]);
+  useEffect(load, [status, classId, sortBy, sortDir]);
 
   const { page, setPage, totalPages, paged } = usePagination(items, 15);
-  useEffect(() => { setPage(1); }, [assetType, status, classId, sortBy, sortDir, setPage]);
+  useEffect(() => { setPage(1); }, [status, classId, sortBy, sortDir, setPage]);
 
   const sortIcon = (key) => sortBy === key ? (sortDir === "asc" ? " ▲" : " ▼") : "";
   const toggleSort = (key) => {
@@ -57,14 +59,9 @@ export default function SubmissionsTab({ classId, onPickStudent }) {
   return (
     <div className="admin-detail-card">
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center", marginBottom: 12 }}>
-        <select value={assetType} onChange={(e) => setAssetType(e.target.value)}
-          style={selectStyle}>
-          <option value="">전체 유형</option>
-          <option value="korfarm">국어농장</option>
-          <option value="activity">학습활동</option>
-          <option value="test">테스트</option>
-          <option value="writing">글쓰기</option>
-        </select>
+        <span style={{ fontSize: 12, color: "var(--admin-muted)", padding: "8px 12px", background: "rgba(45,106,79,0.08)", borderRadius: 6 }}>
+          학습 활동 제출물만 표시 (다른 자산은 각자 결과 화면 사용)
+        </span>
         <select value={status} onChange={(e) => setStatus(e.target.value)} style={selectStyle}>
           <option value="">전체 상태</option>
           <option value="submitted">제출</option>

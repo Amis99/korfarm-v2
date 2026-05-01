@@ -1,71 +1,47 @@
-const LABELS_BY_TYPE = {
-  korfarm: {
-    unassigned: "배정 전",
-    pending: "미수행",
-    in_progress: "진행중",
-    completed: "완료",
-  },
-  activity: {
-    unassigned: "배정 전",
-    pending: "미수행",
-    submitted: "제출",
-    partial: "일부 완료",
-    completed: "완료",
-  },
-  test: {
-    unassigned: "배정 전",
-    pending: "응시 전",
-    scored: "채점됨",
-    retry: "재시험",
-    passed: "통과",
-  },
-  writing: {
-    unassigned: "배정 전",
-    pending: "글쓰기 시작",
-    submitted: "작성 완료(첨삭 대기)",
-    reviewed: "첨삭 완료",
-  },
+/**
+ * 학습 계획표 셀 상태 뱃지 — 5단계 표준 라벨.
+ *
+ *  배정 전  : 자산만 추가됐을 뿐 아직 콘텐츠/주제/테스트 미배정
+ *  미수행   : 배정 완료, 학생이 아직 시작 안 함
+ *  미완료   : 마감 기한 지났는데 점검 완료가 아님 (회색)
+ *  수행완료 : 학생이 끝냈으나 어드민 확인 전 (제출/응시/제출물 작성)
+ *  점검완료 : 어드민 확인까지 끝난 상태 (초록 강조)
+ *
+ *  세부 내역(점수/코멘트/제출물·첨삭 결과 등)은 모달에서 표시.
+ */
+
+const STAGE = {
+  unassigned: { label: "배정 전", cls: "stage-unassigned" },
+  pending:    { label: "미수행",   cls: "stage-pending" },
+  overdue:    { label: "미완료",   cls: "stage-overdue" },
+  done:       { label: "수행완료", cls: "stage-done" },
+  reviewed:   { label: "점검완료", cls: "stage-reviewed" },
 };
 
-const FALLBACK_LABELS = {
-  unassigned: "배정 전",
-  pending: "미수행",
-  in_progress: "진행중",
-  submitted: "제출",
-  partial: "일부 완료",
-  completed: "완료",
-  scored: "채점됨",
-  passed: "통과",
-  retry: "재시험",
-  reviewed: "첨삭 완료",
-};
-
-export default function CellStatusBadge({ status, score, assetType, assetKind, isOverdue, assignedLabel }) {
-  const typeLabels = LABELS_BY_TYPE[assetType] || {};
-  const label = typeLabels[status] || FALLBACK_LABELS[status] || status;
-  const isTest = assetType === "test" || assetKind === "test";
-  // 만료(기한 지났으나 미완료) 셀은 회색 표시 + "기한 지남" 추가
-  const overdueCls = isOverdue ? " overdue" : "";
-
-  // 테스트: 점수가 있으면 점수 중심으로 표시
-  if (isTest && score != null && status !== "pending" && status !== "unassigned") {
-    return (
-      <span className={`cell-badge ${status} test-kind${overdueCls}`}>
-        <span>{score}점</span>
-        {(status === "retry" || status === "passed") && (
-          <span className="cell-verdict">{status === "passed" ? "통과" : "재시험"}</span>
-        )}
-      </span>
-    );
+/** status + isOverdue → 5단계 stage 분류 */
+function classifyStage(status, isOverdue) {
+  if (status === "unassigned") return STAGE.unassigned;
+  // 점검 완료 (어드민 확인까지 끝남) — 만료여도 점검 완료가 우선
+  if (status === "completed" || status === "passed" || status === "reviewed") {
+    return STAGE.reviewed;
   }
+  // 만료 + 미완료
+  if (isOverdue) return STAGE.overdue;
+  // 수행 완료 (학생이 끝냈으나 어드민 확인 전)
+  if (
+    status === "submitted" ||
+    status === "scored" ||
+    status === "in_progress" ||
+    status === "retry" ||
+    status === "partial"
+  ) {
+    return STAGE.done;
+  }
+  // 그 외 = 미수행
+  return STAGE.pending;
+}
 
-  const cls = `cell-badge ${status}${isTest ? " test-kind" : ""}${overdueCls}`;
-  return (
-    <span className={cls}>
-      {label}
-      {assignedLabel ? <span className="cell-asgn-label"> · {assignedLabel}</span> : null}
-      {score != null && ` ${score}점`}
-      {isOverdue && <span className="cell-overdue-tag"> 기한 지남</span>}
-    </span>
-  );
+export default function CellStatusBadge({ status, isOverdue }) {
+  const stage = classifyStage(status, isOverdue);
+  return <span className={`cell-stage ${stage.cls}`}>{stage.label}</span>;
 }

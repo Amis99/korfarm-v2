@@ -165,7 +165,12 @@ export default function AdminCalendarTab({ classId }) {
         {monthDays.map((d, i) => {
           const ds = fmt(d.date);
           const dayInfo = dayMap[ds];
-          const count = dayInfo?.count || (dayInfo?.items?.length ?? 0);
+          const items = dayInfo?.items || [];
+          const count = items.length;
+          const total = items.reduce((s, it) => s + (it.totalAssigned || 0), 0);
+          const done = items.reduce((s, it) => s + (it.completed || 0), 0);
+          const pct = total > 0 ? Math.round((done * 100) / total) : 0;
+          const fillColor = pct >= 100 ? "#2e7d32" : pct >= 50 ? "#f57c00" : "#9e9e9e";
           const isToday = ds === fmt(today);
           return (
             <div
@@ -181,23 +186,41 @@ export default function AdminCalendarTab({ classId }) {
                 opacity: d.otherMonth ? 0.4 : 1,
                 position: "relative",
                 outline: isToday ? "2px solid var(--admin-accent, #2d6a4f)" : "none",
+                display: "flex",
+                flexDirection: "column",
               }}
             >
               <div style={{ fontSize: 12, fontWeight: isToday ? 700 : 500, color: "var(--admin-ink)" }}>
                 {d.date.getDate()}
               </div>
               {count > 0 && (
-                <div style={{
-                  display: "inline-block",
-                  marginTop: 4,
-                  padding: "2px 6px",
-                  borderRadius: 12,
-                  background: "var(--admin-accent, #2d6a4f)",
-                  color: "#fff",
-                  fontSize: 11,
-                  fontWeight: 700,
-                }}>
-                  {count}건
+                <div style={{ marginTop: "auto" }}>
+                  {/* 배터리형 진행률 게이지 */}
+                  <div style={{
+                    height: 10,
+                    background: "rgba(0,0,0,0.06)",
+                    borderRadius: 3,
+                    overflow: "hidden",
+                    border: "1px solid rgba(0,0,0,0.12)",
+                    position: "relative",
+                  }}>
+                    <div style={{
+                      width: `${pct}%`,
+                      height: "100%",
+                      background: fillColor,
+                      transition: "width 0.3s",
+                    }} />
+                  </div>
+                  <div style={{
+                    fontSize: 10,
+                    color: "var(--admin-muted)",
+                    marginTop: 2,
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}>
+                    <span>{count}건</span>
+                    <span>{done}/{total}</span>
+                  </div>
                 </div>
               )}
             </div>

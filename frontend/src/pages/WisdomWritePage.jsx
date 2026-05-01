@@ -164,10 +164,10 @@ function WisdomWritePage() {
             <label>자유 주제 제목 <span style={{ color: "#e74c3c" }}>*</span></label>
             <input
               type="text"
-              className="wis-filter-select"
+              className="wis-filter-select wis-free-topic-input"
               value={freeTopicTitle}
               onChange={(e) => setFreeTopicTitle(e.target.value)}
-              placeholder="내가 쓸 글의 주제(제목)를 입력하세요"
+              placeholder="주제를 작성하세요"
               style={{ width: "100%" }}
               maxLength={80}
             />

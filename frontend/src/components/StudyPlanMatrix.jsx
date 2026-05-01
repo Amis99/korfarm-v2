@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import CellStatusBadge from "./CellStatusBadge";
-import KorfarmContentSearchModal from "./KorfarmContentSearchModal";
 import "../styles/study-plan.css";
 
 const ASSET_TYPE_LABELS = {
@@ -31,23 +30,11 @@ export default function StudyPlanMatrix({
   const [newScopeLabel, setNewScopeLabel] = useState("");
   const [addingScope, setAddingScope] = useState(false);
 
-  // 에셋 추가 팝오버
+  // 에셋 추가 팝오버 — 종류 + 이름만 받음. 실제 콘텐츠/주제/테스트 선택은 셀 배정 단계에서 진행.
   const [showAssetPopover, setShowAssetPopover] = useState(false);
   const [newAssetType, setNewAssetType] = useState("activity");
   const [newAssetLabel, setNewAssetLabel] = useState("");
-  const [newAssetDue, setNewAssetDue] = useState("");
-  const [showContentSearch, setShowContentSearch] = useState(false);
-  // writing 전용 입력
-  const [newWritingTopicKey, setNewWritingTopicKey] = useState("");
-  const [newWritingLevelId, setNewWritingLevelId] = useState("");
   const popoverRef = useRef(null);
-
-  const WRITING_LEVEL_OPTIONS = [
-    "SAUSSURE_1","SAUSSURE_2","SAUSSURE_3",
-    "FREGE_1","FREGE_2","FREGE_3",
-    "RUSSELL_1","RUSSELL_2","RUSSELL_3",
-    "WITTGENSTEIN_1","WITTGENSTEIN_2","WITTGENSTEIN_3",
-  ];
 
   useEffect(() => {
     if (!showAssetPopover) return;
@@ -69,19 +56,6 @@ export default function StudyPlanMatrix({
 
   const handleAssetAdd = () => {
     if (!newAssetLabel.trim() || !onAddAsset) return;
-    // writing 은 levelId 필수
-    if (newAssetType === "writing" && !newWritingLevelId) {
-      alert("글쓰기 레벨을 선택해 주세요.");
-      return;
-    }
-    const cfg = {};
-    if (newAssetDue) cfg.dueDate = newAssetDue;
-    if (newAssetType === "writing") {
-      cfg.levelId = newWritingLevelId;
-      cfg.topicLabel = newAssetLabel.trim();
-      if (newWritingTopicKey.trim()) cfg.topicKey = newWritingTopicKey.trim();
-    }
-    const configJson = Object.keys(cfg).length > 0 ? JSON.stringify(cfg) : undefined;
     const assetKind =
       newAssetType === "test" ? "test" :
       newAssetType === "writing" ? "write" : "study";
@@ -89,31 +63,10 @@ export default function StudyPlanMatrix({
       assetType: newAssetType,
       label: newAssetLabel.trim(),
       assetKind,
-      configJson,
     });
     setNewAssetLabel("");
     setNewAssetType("activity");
-    setNewAssetDue("");
-    setNewWritingTopicKey("");
-    setNewWritingLevelId("");
     setShowAssetPopover(false);
-  };
-
-  const handleContentSelected = (content) => {
-    if (!onAddAsset) return;
-    const configJson = newAssetDue ? JSON.stringify({ dueDate: newAssetDue }) : undefined;
-    onAddAsset({
-      assetType: "korfarm",
-      label: content.title,
-      assetKind: "study",
-      refId: content.contentId,
-      configJson,
-    });
-    setNewAssetLabel("");
-    setNewAssetType("activity");
-    setNewAssetDue("");
-    setShowAssetPopover(false);
-    setShowContentSearch(false);
   };
 
   const getCellClassName = (cell) => {
@@ -125,12 +78,6 @@ export default function StudyPlanMatrix({
 
   return (
     <div className="sp-matrix-wrap">
-      {showContentSearch && (
-        <KorfarmContentSearchModal
-          onSelect={handleContentSelected}
-          onClose={() => setShowContentSearch(false)}
-        />
-      )}
       <table className={`sp-matrix${admin ? " admin-theme" : ""}`}>
         <thead>
           <tr>
@@ -178,72 +125,18 @@ export default function StudyPlanMatrix({
                         >{label}</button>
                       ))}
                     </div>
-                    {newAssetType === "korfarm" ? (
-                      <>
-                        <input
-                          className="asp-input sp-popover-input"
-                          value={newAssetLabel}
-                          onChange={(e) => setNewAssetLabel(e.target.value)}
-                          placeholder="콘텐츠 이름"
-                          readOnly
-                        />
-                        <div className="sp-popover-due">
-                          <label>기한</label>
-                          <input type="date" className="asp-input sp-popover-date" value={newAssetDue} onChange={(e) => setNewAssetDue(e.target.value)} />
-                        </div>
-                        <button
-                          className="asp-add-btn sp-popover-add"
-                          onClick={() => setShowContentSearch(true)}
-                        >콘텐츠 검색</button>
-                      </>
-                    ) : newAssetType === "writing" ? (
-                      <>
-                        <input
-                          className="asp-input sp-popover-input"
-                          value={newAssetLabel}
-                          onChange={(e) => setNewAssetLabel(e.target.value)}
-                          placeholder="주제 (학생에게 보임)"
-                          autoFocus
-                        />
-                        <input
-                          className="asp-input sp-popover-input"
-                          value={newWritingTopicKey}
-                          onChange={(e) => setNewWritingTopicKey(e.target.value)}
-                          placeholder="topicKey (선택)"
-                        />
-                        <select
-                          className="asp-input sp-popover-input"
-                          value={newWritingLevelId}
-                          onChange={(e) => setNewWritingLevelId(e.target.value)}
-                        >
-                          <option value="">레벨 선택</option>
-                          {WRITING_LEVEL_OPTIONS.map((lv) => (
-                            <option key={lv} value={lv}>{lv}</option>
-                          ))}
-                        </select>
-                        <div className="sp-popover-due">
-                          <label>기한</label>
-                          <input type="date" className="asp-input sp-popover-date" value={newAssetDue} onChange={(e) => setNewAssetDue(e.target.value)} />
-                        </div>
-                        <button className="asp-add-btn sp-popover-add" onClick={handleAssetAdd}>추가</button>
-                      </>
-                    ) : (
-                      <>
-                        <input
-                          className="asp-input sp-popover-input"
-                          value={newAssetLabel}
-                          onChange={(e) => setNewAssetLabel(e.target.value)}
-                          placeholder="에셋 이름"
-                          onKeyDown={(e) => e.key === "Enter" && handleAssetAdd()}
-                          autoFocus
-                        />
-                        <div className="sp-popover-due">
-                          <label>기한</label>
-                          <input type="date" className="asp-input sp-popover-date" value={newAssetDue} onChange={(e) => setNewAssetDue(e.target.value)} />
-                        </div>
-                        <button className="asp-add-btn sp-popover-add" onClick={handleAssetAdd}>추가</button>
-                      </>
-                    )}
+                    <input
+                      className="asp-input sp-popover-input"
+                      value={newAssetLabel}
+                      onChange={(e) => setNewAssetLabel(e.target.value)}
+                      placeholder="열 이름"
+                      onKeyDown={(e) => e.key === "Enter" && handleAssetAdd()}
+                      autoFocus
+                    />
+                    <div style={{ fontSize: 11, color: "#888", margin: "4px 0 8px" }}>
+                      실제 학습/테스트/주제 선택은 셀의 "배정 전" 클릭 시 진행합니다.
+                    </div>
+                    <button className="asp-add-btn sp-popover-add" onClick={handleAssetAdd}>추가</button>
                   </div>
                 )}
               </th>
@@ -284,11 +177,7 @@ export default function StudyPlanMatrix({
                     {cell ? (
                       <CellStatusBadge
                         status={cell.status}
-                        score={cell.score}
-                        assetType={asset.assetType}
-                        assetKind={asset.assetKind}
                         isOverdue={cell.isOverdue}
-                        assignedLabel={cell.assignedLabel}
                       />
                     ) : (
                       <span style={{ color: "#bbb", fontSize: "0.75rem" }}>-</span>
