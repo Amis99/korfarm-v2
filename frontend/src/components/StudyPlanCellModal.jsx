@@ -174,21 +174,37 @@ export default function StudyPlanCellModal({ cell, scope, asset, onClose, onUpda
           <span className="material-symbols-outlined">
             {isTest ? "grading" : isKorfarm ? "eco" : isWriting ? "edit_note" : "task_alt"}
           </span>
-          제출물 확인
+          {isActivity ? "제출물 확인"
+            : isKorfarm ? "학습 결과 확인"
+            : isTest ? "테스트 결과 확인"
+            : isWriting ? "글쓰기 첨삭"
+            : "셀 상세"}
         </h2>
 
         <div style={{ marginBottom: 12 }}>
           <div style={{ fontSize: "0.82rem", color: "#8a7468", marginBottom: 4 }}>
             {scope?.label} / {asset?.label}
+            {cell.assignedLabel && cell.assignedLabel !== asset?.label && (
+              <span style={{ marginLeft: 6, color: "#5d4037" }}>· {cell.assignedLabel}</span>
+            )}
           </div>
           <CellStatusBadge
             status={cell.status}
-            score={cell.score}
-            assetType={assetType}
+            isOverdue={cell.isOverdue}
           />
-          {cell.submissionCount > 0 && (
+          {cell.dueAt && (
+            <span style={{ marginLeft: 8, fontSize: "0.75rem", color: "#888" }}>
+              마감: {String(cell.dueAt).slice(0, 10)}
+            </span>
+          )}
+          {isActivity && cell.submissionCount > 0 && (
             <span style={{ marginLeft: 8, fontSize: "0.75rem", color: "#888" }}>
               (제출 {cell.submissionCount}회)
+            </span>
+          )}
+          {cell.score != null && (
+            <span style={{ marginLeft: 8, fontSize: "0.75rem", color: "#888" }}>
+              점수 {cell.score}
             </span>
           )}
         </div>
@@ -308,8 +324,8 @@ export default function StudyPlanCellModal({ cell, scope, asset, onClose, onUpda
           </div>
         )}
 
-        {/* ── 첨부파일 (submitted 상태 등) ── */}
-        {cell.status !== "unassigned" && (
+        {/* ── 학습 활동 자산만 첨부파일(제출물) 표시 ── */}
+        {isActivity && cell.status !== "unassigned" && (
           <>
             {loading ? (
               <div className="asp-loading">파일 불러오는 중...</div>
@@ -332,11 +348,9 @@ export default function StudyPlanCellModal({ cell, scope, asset, onClose, onUpda
                 })}
               </div>
             ) : (
-              !isKorfarm && (
-                <div style={{ fontSize: "0.82rem", color: "#888", marginBottom: 12 }}>
-                  첨부파일 없음
-                </div>
-              )
+              <div style={{ fontSize: "0.82rem", color: "#888", marginBottom: 12 }}>
+                첨부파일 없음 (학생이 아직 업로드하지 않았습니다)
+              </div>
             )}
           </>
         )}

@@ -49,12 +49,32 @@ export default function StudyPlanCalendar({ schedules, startDate, endDate, admin
   const rangeStart = startDate ? new Date(startDate + "T00:00:00") : null;
   const rangeEnd = endDate ? new Date(endDate + "T00:00:00") : null;
 
-  // 이벤트 맵
-  const eventMap = {};
+  // 이벤트 맵 — cellId 별 가장 최신 단계 이벤트만 유지 (중복 제거)
+  const STATUS_PRIORITY = {
+    assigned: 1, in_progress: 1,
+    submitted: 2, scored: 2, retry: 2, partial: 2,
+    completed: 3, reviewed: 3, passed: 3,
+  };
+  const dedupedByCell = new Map();
   (events || []).forEach((ev) => {
+    if (!ev.cellId) {
+      // cellId 없는 이벤트는 그대로 유지
+      const key = `${ev.eventDate}-${ev.id}`;
+      dedupedByCell.set(key, ev);
+      return;
+    }
+    const cur = dedupedByCell.get(ev.cellId);
+    const np = STATUS_PRIORITY[ev.eventType] || 0;
+    const cp = cur ? STATUS_PRIORITY[cur.eventType] || 0 : -1;
+    if (np >= cp) dedupedByCell.set(ev.cellId, ev);
+  });
+  const eventMap = {};
+  for (const ev of dedupedByCell.values()) {
     if (!eventMap[ev.eventDate]) eventMap[ev.eventDate] = [];
     eventMap[ev.eventDate].push(ev);
-  });
+  }
+  const isDoneEvent = (ev) =>
+    ev.eventType === "completed" || ev.eventType === "reviewed" || ev.eventType === "passed";
 
   const changeMonth = (y, m) => {
     setViewYear(y);
@@ -95,7 +115,12 @@ export default function StudyPlanCalendar({ schedules, startDate, endDate, admin
           const inRange = rangeStart && rangeEnd && d.date >= rangeStart && d.date <= rangeEnd;
           const scheds = scheduleMap[ds] || [];
           const dayEvents = eventMap[ds] || [];
-          const hasEvents = dayEvents.length > 0;
+          const hasEvents = dayEvents.length > 0 || scheds.length > 0;
+          // 진행률: 셀 이벤트 기준 (completed / total)
+          const total = dayEvents.length;
+          const done = dayEvents.filter(isDoneEvent).length;
+          const pct = total > 0 ? Math.round((done * 100) / total) : 0;
+          const fillColor = pct >= 100 ? "#2e7d32" : pct >= 50 ? "#f57c00" : "#9e9e9e";
           const cls = [
             "sp-cal-day",
             d.otherMonth && "other-month",
@@ -115,15 +140,35 @@ export default function StudyPlanCalendar({ schedules, startDate, endDate, admin
             >
               <div className="sp-cal-day-num">
                 {d.date.getDate()}
-                {hasEvents && <span className="sp-cal-event-dot" />}
               </div>
-              {scheds.slice(0, 2).map((ev) => (
-                <span key={ev.id} className="sp-cal-event" title={ev.memo || ""}>
-                  {ev.label || "일정"}
-                </span>
-              ))}
-              {scheds.length > 2 && (
-                <span className="sp-cal-event">+{scheds.length - 2}</span>
+              {/* 진행률 게이지 — 액션이 있는 날만 노출 */}
+              {total > 0 && (
+                <div style={{ marginTop: "auto", paddingTop: 4 }}>
+                  <div style={{
+                    height: 8,
+                    background: "rgba(0,0,0,0.06)",
+                    borderRadius: 3,
+                    overflow: "hidden",
+                    border: "1px solid rgba(0,0,0,0.12)",
+                  }}>
+                    <div style={{
+                      width: `${pct}%`,
+                      height: "100%",
+                      background: fillColor,
+                      transition: "width 0.3s",
+                    }} />
+                  </div>
+                  <div style={{
+                    fontSize: 10,
+                    color: "#7b6a62",
+                    marginTop: 2,
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}>
+                    <span>{total}건</span>
+                    <span>{done}/{total}</span>
+                  </div>
+                </div>
               )}
             </div>
           );
