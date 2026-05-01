@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import { apiGet, apiPost, apiDelete } from "../utils/adminApi";
+import { apiGet, apiGetCamel, apiPost, apiPostDeep, apiDelete } from "../utils/adminApi";
 import { API_BASE } from "../utils/api";
 import ManuscriptGrid from "../components/ManuscriptGrid";
 import ManuscriptReview from "../components/ManuscriptReview";
@@ -97,8 +97,8 @@ function AdminWisdomDetailPage() {
     setAiLoading(true);
     setMsg("AI 분석 시작…");
     try {
-      // 1) 비동기 enqueue → jobId 즉시 수신
-      const enqueueRes = await apiPost(`/v1/admin/wisdom/posts/${postId}/ai-feedback`);
+      // 1) 비동기 enqueue → jobId 즉시 수신 (백엔드 SNAKE_CASE → camel 자동 변환)
+      const enqueueRes = await apiPostDeep(`/v1/admin/wisdom/posts/${postId}/ai-feedback`);
       const jobId = enqueueRes.jobId;
       if (!jobId) {
         throw new Error("작업 생성 실패");
@@ -116,7 +116,7 @@ function AdminWisdomDetailPage() {
         }
         await new Promise((r) => setTimeout(r, POLL_MS));
         const elapsedSec = Math.floor((Date.now() - start) / 1000);
-        const job = await apiGet(`/v1/admin/wisdom/ai-feedback/jobs/${jobId}`);
+        const job = await apiGetCamel(`/v1/admin/wisdom/ai-feedback/jobs/${jobId}`);
         lastStatus = job.status;
         if (job.status === "COMPLETED") {
           if (job.comment) setComment(job.comment);

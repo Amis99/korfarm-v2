@@ -1,9 +1,11 @@
 package com.korfarm.api.chat
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.korfarm.api.aigen.AiGenLogRepository
 import com.korfarm.api.aigen.AiGenLogService
 import com.korfarm.api.wisdom.AiPromptRepository
 import org.slf4j.LoggerFactory
+import java.time.LocalDate
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Component
@@ -34,8 +36,10 @@ class PodoHarness(
     private val aiPromptRepository: AiPromptRepository,
     private val objectMapper: ObjectMapper,
     private val aiGenLogService: AiGenLogService,
+    private val aiGenLogRepository: AiGenLogRepository,
     @Value("\${claude.api.key:}") private val apiKey: String,
-    @Value("\${claude.api.url:https://api.anthropic.com/v1/messages}") private val apiUrl: String
+    @Value("\${claude.api.url:https://api.anthropic.com/v1/messages}") private val apiUrl: String,
+    @Value("\${podo.daily.limit:100}") private val dailyLimit: Int
 ) {
     private val log = LoggerFactory.getLogger(PodoHarness::class.java)
     private val httpClient = HttpClient.newBuilder()
@@ -48,6 +52,28 @@ class PodoHarness(
     companion object {
         const val PODO_USER_ID = "u_ai_podo"
         private val TRIGGER_PATTERN = Regex("포도야|포도[아야]?[,\\s]|@포도", RegexOption.IGNORE_CASE)
+        // 일일 한도 카운트에 포함시킬 kind (모든 포도 호출)
+        private val PODO_KINDS = listOf("podo-chat", "podo-board")
+    }
+
+    // ─── 일일 한도 ──────────────────────────────────────
+
+    /**
+     * 사용자별 오늘 사용량 (성공 row 수). 한도 초과 시 true 반환.
+     * row 단위 카운트라 한 번의 generate() 가 callClaude 여러 번 = 여러 row 임.
+     * → "callClaude 100회" 가 한도. 평균 generate 1회 = 2~3 callClaude 이므로 실질 30~50 회 호출.
+     */
+    private fun isDailyLimitReached(userId: String): Boolean {
+        if (dailyLimit <= 0) return false
+        return try {
+            val from = LocalDate.now().atStartOfDay()
+            val to = from.plusDays(1)
+            val count = aiGenLogRepository.countByUserAndKindsInRange(userId, PODO_KINDS, from, to)
+            count >= dailyLimit
+        } catch (e: Exception) {
+            log.warn("일일 한도 조회 실패: userId={} err={}", userId, e.message)
+            false
+        }
     }
 
     // ─── 도구 정의 ──────────────────────────────────────
@@ -92,6 +118,9 @@ class PodoHarness(
 
     fun generate(triggerMessage: ChatMessageEntity): String {
         if (apiKey.isBlank()) return ""
+        if (isDailyLimitReached(triggerMessage.userId)) {
+            return "오늘 포도가 너무 많이 일했어! 하루 ${dailyLimit}번 한도에 도달해서 더 답할 수 없어 ㅠㅠ 내일 다시 만나자~"
+        }
 
         val systemPrompt = aiPromptRepository.findByPromptKeyAndLevelGroup("community_chat", "_common")
             ?.promptText ?: return ""
@@ -177,6 +206,7 @@ $chatContext
 
     fun generateForBoard(title: String, content: String, authorId: String): String {
         if (apiKey.isBlank()) return ""
+        if (isDailyLimitReached(authorId)) return ""
 
         val systemPrompt = aiPromptRepository.findByPromptKeyAndLevelGroup("community_chat", "_common")
             ?.promptText ?: return ""
@@ -240,6 +270,7 @@ $chatContext
 
     fun generateForBoardWithImages(title: String, content: String, images: List<Pair<ByteArray, String>>, authorId: String): String {
         if (apiKey.isBlank()) return ""
+        if (isDailyLimitReached(authorId)) return ""
 
         val systemPrompt = aiPromptRepository.findByPromptKeyAndLevelGroup("community_chat", "_common")
             ?.promptText ?: return ""
