@@ -137,21 +137,30 @@ class StudyPlanService(
 
     /**
      * 학생 1명이 target 인 plan 목록. 학생별 탭의 매트릭스 진입점.
-     * createDefaultPlanForStudent 가 target_type=user, target_id=학생ID 로 row 를 만들어 두었으므로
-     * 그걸로 조회.
+     * 정책: 모든 학생은 매트릭스를 갖고 있어야 한다. plan 이 없으면 lazy 생성.
      */
-    @Transactional(readOnly = true)
+    @Transactional
     fun listPlansForStudent(userId: String): List<StudyPlanSummaryResponse> {
         val targets = targetRepo.findByTargetTypeAndTargetId("user", userId)
         val planIds = targets.map { it.planId }.distinct()
-        if (planIds.isEmpty()) return emptyList()
-        val plans = planRepo.findAllById(planIds)
-            .filter { it.status == "active" }
-            .sortedByDescending { it.createdAt }
-        return plans.map { plan ->
-            val targetCount = targetRepo.findByPlanId(plan.id).size
-            plan.toSummary(targetCount)
+        val activePlans = if (planIds.isEmpty()) emptyList() else
+            planRepo.findAllById(planIds).filter { it.status == "active" }
+
+        if (activePlans.isEmpty()) {
+            val membership = orgMembershipRepo
+                .findByUserIdAndStatus(userId, "active")
+                .firstOrNull()
+                ?: return emptyList()
+            val newPlan = createDefaultPlanForStudent(membership.orgId, userId)
+            return listOf(newPlan.toSummary(1))
         }
+
+        return activePlans
+            .sortedByDescending { it.createdAt }
+            .map { plan ->
+                val targetCount = targetRepo.findByPlanId(plan.id).size
+                plan.toSummary(targetCount)
+            }
     }
 
     @Transactional(readOnly = true)
