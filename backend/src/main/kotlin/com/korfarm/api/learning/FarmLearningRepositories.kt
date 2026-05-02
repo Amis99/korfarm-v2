@@ -11,6 +11,12 @@ interface FarmLearningLogRepository : JpaRepository<FarmLearningLogEntity, Strin
         contentId: String
     ): FarmLearningLogEntity?
 
+    /** 어드민 학습 결과 모달 — 학생 + 콘텐츠 별 시도 이력 (createdAt desc) */
+    fun findByUserIdAndContentIdOrderByCreatedAtDesc(
+        userId: String,
+        contentId: String
+    ): List<FarmLearningLogEntity>
+
     fun findByUserIdAndContentIdIn(
         userId: String,
         contentIds: List<String>

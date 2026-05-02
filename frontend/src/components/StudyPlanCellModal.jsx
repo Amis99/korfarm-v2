@@ -37,6 +37,20 @@ export default function StudyPlanCellModal({ cell, scope, asset, onClose, onUpda
       .finally(() => setLoading(false));
   }, [cell?.cellId]);
 
+  // 국어농장 학습 히스토리
+  const [learningHistory, setLearningHistory] = useState(null);
+  useEffect(() => {
+    setLearningHistory(null);
+    const isFarm = (asset?.assetType || cell?.assetType) === "korfarm";
+    if (!isFarm) return;
+    const cId = cell?.cellRefId;
+    const sId = cell?.userId || cell?.user_id;
+    if (!cId || !sId) return;
+    apiGet(`/v1/admin/students/${sId}/content/${cId}/history`)
+      .then(setLearningHistory)
+      .catch(() => setLearningHistory(null));
+  }, [cell?.cellId, cell?.cellRefId, asset?.assetType]);
+
   const assetType = asset?.assetType || cell?.assetType;
   const isTest = assetType === "test";
   const isKorfarm = assetType === "korfarm";
@@ -300,10 +314,45 @@ export default function StudyPlanCellModal({ cell, scope, asset, onClose, onUpda
           </div>
         )}
 
-        {/* ── 국어농장 기타: 배정된 콘텐츠 정보 ── */}
+        {/* ── 국어농장 학습 히스토리 ── */}
         {isKorfarm && cell.status !== "unassigned" && (
-          <div style={{ fontSize: "0.82rem", color: "#aaa", marginBottom: 12 }}>
-            배정 콘텐츠: {cell.cellRefId || asset?.refId || "-"}
+          <div style={{ marginBottom: 12, padding: 12, background: "#f5f9f3", borderRadius: 8, fontSize: 13 }}>
+            {!learningHistory ? (
+              <span style={{ color: "#888" }}>학습 히스토리 불러오는 중...</span>
+            ) : learningHistory.totalAttempts === 0 ? (
+              <span style={{ color: "#888" }}>아직 학습 기록이 없습니다.</span>
+            ) : (
+              <div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 6, marginBottom: 8 }}>
+                  <div><strong>총 시도:</strong> {learningHistory.totalAttempts}회</div>
+                  <div><strong>완료:</strong> {learningHistory.completedAttempts}회</div>
+                  {learningHistory.bestScore != null && (
+                    <div><strong>최고 점수:</strong> {learningHistory.bestScore}점</div>
+                  )}
+                  {learningHistory.bestAccuracy != null && (
+                    <div><strong>최고 정답률:</strong> {learningHistory.bestAccuracy}%</div>
+                  )}
+                  <div><strong>획득 씨앗:</strong> {learningHistory.totalSeed}</div>
+                  {learningHistory.lastStartedAt && (
+                    <div><strong>마지막 학습:</strong> {String(learningHistory.lastStartedAt).slice(0, 10)}</div>
+                  )}
+                </div>
+                {learningHistory.attempts.length > 0 && (
+                  <details>
+                    <summary style={{ cursor: "pointer", color: "#5d4037" }}>시도별 상세 ({learningHistory.attempts.length}건)</summary>
+                    <ul style={{ margin: "8px 0 0", padding: "0 0 0 18px", maxHeight: 160, overflowY: "auto" }}>
+                      {learningHistory.attempts.map((a) => (
+                        <li key={a.attemptId} style={{ fontSize: 12, marginBottom: 4 }}>
+                          {String(a.startedAt).slice(0, 16).replace("T", " ")} · {a.status}
+                          {a.score != null ? ` · 점수 ${a.score}` : ""}
+                          {a.accuracy != null ? ` · 정답률 ${a.accuracy}%` : ""}
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                )}
+              </div>
+            )}
           </div>
         )}
 

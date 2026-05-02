@@ -33,7 +33,7 @@ function fmt(d) {
   return `${y}-${m}-${dd}`;
 }
 
-export default function StudyPlanCalendar({ schedules, startDate, endDate, admin, events, onMonthChange, onDateClick }) {
+export default function StudyPlanCalendar({ schedules, startDate, endDate, admin, events, cells, assets, onMonthChange, onDateClick }) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const [viewYear, setViewYear] = useState(today.getFullYear());
@@ -49,32 +49,62 @@ export default function StudyPlanCalendar({ schedules, startDate, endDate, admin
   const rangeStart = startDate ? new Date(startDate + "T00:00:00") : null;
   const rangeEnd = endDate ? new Date(endDate + "T00:00:00") : null;
 
-  // 이벤트 맵 — cellId 별 가장 최신 단계 이벤트만 유지 (중복 제거)
-  const STATUS_PRIORITY = {
-    assigned: 1, in_progress: 1,
-    submitted: 2, scored: 2, retry: 2, partial: 2,
-    completed: 3, reviewed: 3, passed: 3,
-  };
-  const dedupedByCell = new Map();
-  (events || []).forEach((ev) => {
-    if (!ev.cellId) {
-      // cellId 없는 이벤트는 그대로 유지
-      const key = `${ev.eventDate}-${ev.id}`;
-      dedupedByCell.set(key, ev);
-      return;
+  // ─ 캘린더 데이터 소스 우선순위 ─
+  // 1) cells (가장 정확) — assigned~dueAt 범위 매일 active, status 기반 진행률
+  // 2) events (fallback)
+  const dayActions = {}; // date -> [{ cellId, label, status, isDone }]
+  const isDoneStatus = (s) =>
+    s === "completed" || s === "reviewed" || s === "passed";
+
+  if (Array.isArray(cells) && cells.length > 0) {
+    const assetMap = {};
+    (assets || []).forEach((a) => { assetMap[a.id] = a; });
+    cells.forEach((c) => {
+      if (c.status === "unassigned" || !c.dueAt) return;
+      // 배정일 = createdAt or 오늘 fallback (createdAt 은 매트릭스 응답에 없을 수 있음)
+      const due = new Date(String(c.dueAt).slice(0, 10) + "T00:00:00");
+      const start = c.assignedAt
+        ? new Date(String(c.assignedAt).slice(0, 10) + "T00:00:00")
+        : new Date(due.getTime() - 7 * 24 * 60 * 60 * 1000); // 7일 전
+      // 범위 매일에 추가
+      for (let t = new Date(start); t <= due; t.setDate(t.getDate() + 1)) {
+        const ds = fmt(t);
+        if (!dayActions[ds]) dayActions[ds] = [];
+        const asset = assetMap[c.assetId];
+        dayActions[ds].push({
+          cellId: c.cellId,
+          label: c.assignedLabel || asset?.label || "액션",
+          status: c.status,
+          isDone: isDoneStatus(c.status),
+        });
+      }
+    });
+  } else if (Array.isArray(events)) {
+    // fallback: events 기반 (cellId 별 dedup)
+    const STATUS_PRIORITY = {
+      assigned: 1, in_progress: 1,
+      submitted: 2, scored: 2, retry: 2, partial: 2,
+      completed: 3, reviewed: 3, passed: 3,
+    };
+    const dedupedByCell = new Map();
+    events.forEach((ev) => {
+      if (!ev.cellId) return;
+      const cur = dedupedByCell.get(ev.cellId);
+      const np = STATUS_PRIORITY[ev.eventType] || 0;
+      const cp = cur ? STATUS_PRIORITY[cur.eventType] || 0 : -1;
+      if (np >= cp) dedupedByCell.set(ev.cellId, ev);
+    });
+    for (const ev of dedupedByCell.values()) {
+      const ds = ev.eventDate;
+      if (!dayActions[ds]) dayActions[ds] = [];
+      dayActions[ds].push({
+        cellId: ev.cellId,
+        label: ev.refLabel || "액션",
+        status: ev.eventType,
+        isDone: isDoneStatus(ev.eventType),
+      });
     }
-    const cur = dedupedByCell.get(ev.cellId);
-    const np = STATUS_PRIORITY[ev.eventType] || 0;
-    const cp = cur ? STATUS_PRIORITY[cur.eventType] || 0 : -1;
-    if (np >= cp) dedupedByCell.set(ev.cellId, ev);
-  });
-  const eventMap = {};
-  for (const ev of dedupedByCell.values()) {
-    if (!eventMap[ev.eventDate]) eventMap[ev.eventDate] = [];
-    eventMap[ev.eventDate].push(ev);
   }
-  const isDoneEvent = (ev) =>
-    ev.eventType === "completed" || ev.eventType === "reviewed" || ev.eventType === "passed";
 
   const changeMonth = (y, m) => {
     setViewYear(y);
@@ -114,11 +144,11 @@ export default function StudyPlanCalendar({ schedules, startDate, endDate, admin
           const isToday = ds === fmt(today);
           const inRange = rangeStart && rangeEnd && d.date >= rangeStart && d.date <= rangeEnd;
           const scheds = scheduleMap[ds] || [];
-          const dayEvents = eventMap[ds] || [];
-          const hasEvents = dayEvents.length > 0 || scheds.length > 0;
-          // 진행률: 셀 이벤트 기준 (completed / total)
-          const total = dayEvents.length;
-          const done = dayEvents.filter(isDoneEvent).length;
+          const acts = dayActions[ds] || [];
+          const hasEvents = acts.length > 0 || scheds.length > 0;
+          // 진행률: 셀 이벤트 기준 (완료/총)
+          const total = acts.length;
+          const done = acts.filter((a) => a.isDone).length;
           const pct = total > 0 ? Math.round((done * 100) / total) : 0;
           const fillColor = pct >= 100 ? "#2e7d32" : pct >= 50 ? "#f57c00" : "#9e9e9e";
           const cls = [
@@ -134,7 +164,7 @@ export default function StudyPlanCalendar({ schedules, startDate, endDate, admin
               key={i}
               className={cls}
               onClick={() => {
-                if (hasEvents && onDateClick) onDateClick(ds, dayEvents);
+                if (hasEvents && onDateClick) onDateClick(ds, acts);
               }}
               style={hasEvents ? { cursor: "pointer" } : undefined}
             >

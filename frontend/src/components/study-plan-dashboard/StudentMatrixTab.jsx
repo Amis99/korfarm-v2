@@ -187,7 +187,7 @@ export default function StudentMatrixTab({ userId, focusCellId }) {
   if (!planId || !matrix) return <div className="admin-detail-card"><p style={{ padding: 20 }}>학생 plan 을 불러올 수 없습니다.</p></div>;
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 360px", gap: 16, alignItems: "start" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
       <div className="admin-detail-card">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
           <h2 style={{ margin: 0, color: "var(--admin-ink)" }}>{plan?.title || "학습 계획표"}</h2>
@@ -203,28 +203,38 @@ export default function StudentMatrixTab({ userId, focusCellId }) {
           )}
         </div>
 
-        <StudyPlanMatrix
-          scopes={matrix.scopes}
-          assets={matrix.assets}
-          cells={matrix.cells}
-          admin
-          onCellClick={handleCellClick}
-          onAddScope={handleAddScope}
-          onDeleteScope={handleDeleteScope}
-          onAddAsset={handleAddAsset}
-          onDeleteAsset={handleDeleteAsset}
-        />
+        {/* 매트릭스 — 8행까지 보이는 세로 스크롤 컨테이너 */}
+        <div style={{
+          maxHeight: 420,
+          overflowY: "auto",
+          border: "1px solid var(--admin-stroke, rgba(31,58,44,0.12))",
+          borderRadius: 6,
+        }}>
+          <StudyPlanMatrix
+            scopes={matrix.scopes}
+            assets={matrix.assets}
+            cells={matrix.cells}
+            admin
+            onCellClick={handleCellClick}
+            onAddScope={handleAddScope}
+            onDeleteScope={handleDeleteScope}
+            onAddAsset={handleAddAsset}
+            onDeleteAsset={handleDeleteAsset}
+          />
+        </div>
       </div>
 
-      {/* 사이드 패널 — 학생 개인 캘린더 */}
+      {/* 매트릭스 아래 — 학생 개인 캘린더 */}
       <div className="admin-detail-card">
-        <h3 style={{ margin: "0 0 8px", color: "var(--admin-accent-strong)" }}>학생 캘린더</h3>
+        <h3 style={{ margin: "0 0 12px", color: "var(--admin-accent-strong)" }}>학생 캘린더</h3>
         <StudyPlanCalendar
           schedules={schedules}
           startDate={plan?.startDate}
           endDate={plan?.endDate}
           admin
           events={calendarEvents}
+          cells={matrix.cells}
+          assets={matrix.assets}
           onMonthChange={loadCalendarEvents}
           onDateClick={(date, evts) => setEventModal({ date, events: evts })}
         />

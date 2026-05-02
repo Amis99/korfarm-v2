@@ -1862,7 +1862,6 @@ class StudyPlanService(
         val plans = listPlansInScope(scope)
         val planIds = plans.map { it.id }.toSet()
         if (planIds.isEmpty()) return AdminCalendarResponse(emptyList())
-        val planMap = plans.associateBy { it.id }
 
         val fromDate = LocalDate.parse(from)
         val toDate = LocalDate.parse(to)
@@ -1871,27 +1870,61 @@ class StudyPlanService(
             classMembershipRepo.findByClassIdAndStatus(it, "active").map { m -> m.userId }.toSet()
         }
 
-        val schedules = scheduleRepo.findByPlanIdInAndScheduledDateBetween(planIds, fromDate, toDate)
-        val dayMap = mutableMapOf<String, MutableList<AdminCalendarItem>>()
+        // 권한 범위 셀 모두 — 배정된 (status != unassigned) + dueAt 있음
+        val allCells = cellRepo.findAll().filter { c ->
+            c.planId in planIds &&
+                c.status != "unassigned" &&
+                c.dueAt != null &&
+                (classUserIds == null || c.userId in classUserIds)
+        }
+        val assetMap = if (allCells.isNotEmpty()) {
+            assetRepo.findAllById(allCells.map { it.assetId }.toSet()).associateBy { it.id }
+        } else emptyMap()
 
-        schedules.forEach { s ->
-            val asset = s.assetId?.let { assetRepo.findById(it).orElse(null) }
-            val cells = if (asset != null) {
-                cellRepo.findByAssetId(asset.id)
-                    .filter { classUserIds == null || it.userId in classUserIds }
-            } else emptyList()
-            val total = cells.size
-            val pending = cells.count { it.status in listOf("pending", "retry", "unassigned") }
-            val completed = cells.count { it.status in listOf("completed", "scored", "passed") }
-            val label = s.label ?: asset?.label ?: planMap[s.planId]?.title ?: "활동"
-            val dateKey = s.scheduledDate.toString()
-            dayMap.getOrPut(dateKey) { mutableListOf() }.add(
-                AdminCalendarItem("schedule", s.id, label, total, pending, completed)
-            )
+        val DONE = setOf("completed", "scored", "passed", "reviewed")
+        val PENDING = setOf("pending", "in_progress", "retry")
+
+        // 매일 active 매트릭싱: assigned ~ dueAt 범위에 cell 추가
+        // assignedAt 정보가 없으니 dueAt - 7d 윈도우 기본 (재배정 후엔 cell.updatedAt 기준이 더 정확)
+        data class CellOnDate(val cell: StudyPlanCellEntity, val assetId: String, val assetLabel: String)
+        val dayCells = mutableMapOf<String, MutableList<CellOnDate>>()
+
+        allCells.forEach { c ->
+            val due = c.dueAt!!.toLocalDate()
+            val updated = c.updatedAt.toLocalDate()
+            val windowStart = if (updated.isBefore(due)) updated else due.minusDays(7)
+            val rangeStart = if (windowStart.isBefore(fromDate)) fromDate else windowStart
+            val rangeEnd = if (due.isAfter(toDate)) toDate else due
+            if (rangeEnd.isBefore(rangeStart)) return@forEach
+            val asset = assetMap[c.assetId]
+            val label = c.assignedLabel ?: asset?.label ?: "액션"
+            var t = rangeStart
+            while (!t.isAfter(rangeEnd)) {
+                dayCells.getOrPut(t.toString()) { mutableListOf() }.add(
+                    CellOnDate(c, c.assetId, label)
+                )
+                t = t.plusDays(1)
+            }
         }
 
-        val days = dayMap.entries.sortedBy { it.key }.map { (date, items) ->
-            AdminCalendarDay(date = date, count = items.size, items = items)
+        // 매트릭싱 → AdminCalendarItem (자산 단위 그룹)
+        val days = dayCells.entries.sortedBy { it.key }.map { (date, list) ->
+            val grouped = list.groupBy { it.assetId }
+            val items = grouped.map { (assetId, sublist) ->
+                val cells = sublist.map { it.cell }
+                val total = cells.size
+                val completed = cells.count { it.status in DONE }
+                val pending = cells.count { it.status in PENDING || it.status == "submitted" }
+                AdminCalendarItem(
+                    type = "asset",
+                    refId = assetId,
+                    label = sublist.first().assetLabel,
+                    totalAssigned = total,
+                    pending = pending,
+                    completed = completed
+                )
+            }
+            AdminCalendarDay(date = date, count = items.sumOf { it.totalAssigned }, items = items)
         }
         return AdminCalendarResponse(days)
     }
