@@ -999,53 +999,62 @@ function AdminProPage() {
   };
 
   function renderAnswerTab() {
-    if (answerLoading) return <p className="ap-muted">불러오는 중...</p>;
-    const pdfUrl = answerPdfFileId
-      ? `${import.meta.env.VITE_API_BASE || ""}/v1/files/${answerPdfFileId}/download${sessionStorage.getItem("korfarm_token") ? `?token=${sessionStorage.getItem("korfarm_token")}` : ""}`
-      : null;
+    if (contentLoading) return <p className="ap-muted">불러오는 중...</p>;
+    if (!contentStatus) return <p className="ap-muted">정답·해설 현황을 불러올 수 없습니다.</p>;
+    // type='answer' 만 추출
+    const answerItems = (contentStatus.items || [])
+      .filter((it) => it.type === "answer")
+      .flatMap((it) => (it.contents || []).map((c) => ({
+        id: c.contentId || c.content_id,
+        title: c.title,
+        updatedAt: c.updatedAt || c.updated_at || "",
+      })));
+
     return (
       <div className="ap-answer-section">
-        <div className="ap-answer-card" style={{ padding: 20, background: "var(--admin-panel-light, #f5f9f3)", borderRadius: 8 }}>
-          <h3 style={{ margin: "0 0 12px", fontSize: 15 }}>📄 정답·해설 PDF</h3>
-          {answerPdfFileId ? (
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              <p className="ap-muted" style={{ margin: 0, fontSize: 13 }}>
-                PDF 가 업로드되어 있습니다. 학생 화면에서 즉시 표시됩니다.
-              </p>
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                <button className="ts-btn ts-btn-primary" onClick={() => window.open(pdfUrl, "_blank", "noopener,noreferrer")}>
-                  📄 PDF 보기
-                </button>
-                <label className="ts-btn" style={{ cursor: "pointer" }}>
-                  🔄 다른 파일로 교체
-                  <input type="file" accept="application/pdf,.pdf" hidden
-                    onChange={(e) => e.target.files?.[0] && handleAnswerPdfUpload(e.target.files[0])}
-                    disabled={answerSaving} />
-                </label>
-                <button className="ts-btn" onClick={handleAnswerPdfRemove} disabled={answerSaving}
-                  style={{ color: "#c0392b" }}>
-                  🗑 제거
-                </button>
-              </div>
-            </div>
-          ) : (
-            <div>
-              <label className="ap-drop-zone" style={{ display: "block", cursor: "pointer", textAlign: "center", padding: 24, border: "2px dashed rgba(31,58,44,0.2)", borderRadius: 8, background: "#fff" }}>
-                <span className="material-symbols-outlined ap-drop-icon" style={{ fontSize: 32 }}>upload_file</span>
-                <p style={{ margin: "8px 0 0" }}>PDF 파일을 선택하세요</p>
-                <input type="file" accept="application/pdf,.pdf" hidden
-                  onChange={(e) => e.target.files?.[0] && handleAnswerPdfUpload(e.target.files[0])}
-                  disabled={answerSaving} />
-              </label>
-              {answerContentId && (
-                <p className="ap-muted" style={{ marginTop: 12, fontSize: 12, color: "#888" }}>
-                  ⚠ 옛 비주얼/JSON 정답해설 데이터가 남아 있습니다. PDF 업로드 시 PDF 가 우선 표시됩니다.
-                </p>
-              )}
-              {answerSaving && <p className="ap-muted" style={{ marginTop: 8, fontSize: 12 }}>업로드 중...</p>}
-            </div>
-          )}
+        <div className="ap-content-toolbar" style={{ display: "flex", alignItems: "center", marginBottom: 12 }}>
+          <button className="admin-detail-btn primary" onClick={() => { setCreateCategory("answer"); openAddModal(); }}>
+            + 정답·해설 추가
+          </button>
+          <span className="ap-muted" style={{ marginLeft: 12, fontSize: 12 }}>
+            행 클릭 → 콘텐츠 에디터로 이동 (작업 후 자동 복귀)
+          </span>
         </div>
+
+        {answerItems.length === 0 ? (
+          <p className="ap-muted" style={{ padding: 20 }}>이 챕터에 등록된 정답·해설이 없습니다.</p>
+        ) : (
+          <table className="admin-detail-table">
+            <thead>
+              <tr>
+                <th>제목</th>
+                <th style={{ width: 140 }}>최종수정일</th>
+                <th style={{ width: 110 }}>액션</th>
+              </tr>
+            </thead>
+            <tbody>
+              {answerItems.map((c) => (
+                <tr key={c.id} style={{ cursor: "pointer" }}
+                  onClick={() => navigate(`/admin/content/edit?id=${c.id}&from=/admin/pro`)}>
+                  <td>{c.title}</td>
+                  <td>{c.updatedAt ? new Date(c.updatedAt).toLocaleDateString() : "-"}</td>
+                  <td onClick={(e) => e.stopPropagation()}>
+                    <button className="admin-detail-btn secondary"
+                      style={{ fontSize: 12, padding: "4px 10px" }}
+                      onClick={() => {
+                        if (window.confirm(`"${c.title}" 정답·해설을 챕터에서 제거할까요?`)) {
+                          const newItems = getContentItems().filter((it) => it.id !== c.id);
+                          applyChapterItems(newItems);
+                        }
+                      }}>
+                      🗑 제거
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     );
   }
@@ -1054,55 +1063,69 @@ function AdminProPage() {
   function renderTestTab() {
     return (
       <div className="ap-test-section">
-        <div className="ap-test-header">
-          <div className="ap-test-version-select">
-            <label>
-              시험지
-              <select value={selectedTestPaperId} onChange={(e) => loadTestQuestions(e.target.value)}>
-                <option value="">-- 선택 --</option>
-                {tests.map((t) => (
-                  <option key={t.version} value={t.testPaperId || t.test_paper_id}>
-                    v{t.version} ({(t.testPaperId || t.test_paper_id || "").slice(0, 20)}...)
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
-          <div className="ap-test-sub-tabs">
-            <button
-              className="ts-btn ts-btn-primary ts-btn-sm"
-              onClick={() => selectedTestPaperId && navigate(`/admin/tests/${selectedTestPaperId}/edit?from=/admin/pro`)}
-              disabled={!selectedTestPaperId}
-              title="시험 관리의 비주얼 에디터로 이동 (작업 후 자동 복귀)"
-            >
-              📝 테스트 편집 (외부 에디터)
-            </button>
-            <button className={`ap-mode-btn ${testSubTab === "pdf" ? "active" : ""}`} onClick={() => setTestSubTab("pdf")}>PDF 미리보기</button>
-          </div>
-          <div className="ap-test-io-btns">
-            {testQuestionsModified && <span className="ap-unsaved-badge">미저장</span>}
-          </div>
+        <div className="ap-content-toolbar" style={{ display: "flex", alignItems: "center", marginBottom: 12 }}>
+          <span className="ap-muted" style={{ fontSize: 12 }}>
+            행 클릭 → 시험 관리 에디터로 이동 (작업 후 자동 복귀)
+          </span>
         </div>
 
-        {/* 자체 테스트 비주얼 에디터 폐기 — 시험 관리 에디터 재사용 */}
-        {testSubTab === "pdf" && renderTestPdf()}
+        {tests.length === 0 ? (
+          <p className="ap-muted" style={{ padding: 20 }}>이 챕터에 등록된 테스트가 없습니다. 아래에서 새 버전을 등록하세요.</p>
+        ) : (
+          <table className="admin-detail-table" style={{ marginBottom: 16 }}>
+            <thead>
+              <tr>
+                <th style={{ width: 80 }}>버전</th>
+                <th>시험명</th>
+                <th style={{ width: 100 }}>상태</th>
+                <th style={{ width: 100 }}>PDF</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tests.map((t) => {
+                const tpId = t.testPaperId || t.test_paper_id;
+                const meta = testPapers.find((tp) => (tp.testId || tp.test_id) === tpId);
+                const pdfFileId = t.pdfFileId || t.pdf_file_id;
+                return (
+                  <tr key={t.version} style={{ cursor: "pointer" }}
+                    onClick={() => tpId && navigate(`/admin/tests/${tpId}/edit?from=/admin/pro`)}>
+                    <td>v{t.version}</td>
+                    <td>{meta?.title || tpId || "(연결된 시험지 없음)"}</td>
+                    <td>{t.status || "-"}</td>
+                    <td onClick={(e) => e.stopPropagation()}>
+                      {pdfFileId ? (
+                        <a
+                          href={pdfFileId.startsWith("http") ? pdfFileId : `${API_BASE.replace(/\/$/, "")}/v1/files/${pdfFileId}/download`}
+                          target="_blank" rel="noopener noreferrer"
+                          style={{ color: "var(--admin-accent-strong, #2d6a4f)", fontSize: 12 }}
+                        >📄 보기</a>
+                      ) : (
+                        <span className="ap-muted" style={{ fontSize: 12 }}>없음</span>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
 
-        {/* 버전 등록 */}
-        <div className="ap-test-register">
-          <h4>새 버전 등록</h4>
-          <div className="ap-test-register-row">
-            <label>버전 <input type="number" min={1} value={testVersion} onChange={(e) => setTestVersion(e.target.value)} /></label>
-            <label>시험지
-              <select value={testPaperId} onChange={(e) => setTestPaperId(e.target.value)}>
+        {/* 새 버전 등록 */}
+        <div className="ap-test-register" style={{ padding: 12, background: "var(--admin-panel-light, #f5f9f3)", borderRadius: 8 }}>
+          <h4 style={{ margin: "0 0 8px", fontSize: 13 }}>새 버전 등록</h4>
+          <div className="ap-test-register-row" style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+            <label style={{ fontSize: 13 }}>버전 <input type="number" min={1} value={testVersion} onChange={(e) => setTestVersion(e.target.value)} style={{ width: 70 }} /></label>
+            <label style={{ fontSize: 13, flex: 1 }}>시험지
+              <select className="admin-type-filter-select" value={testPaperId} onChange={(e) => setTestPaperId(e.target.value)} style={{ marginLeft: 8 }}>
                 <option value="">-- 시험지 선택 --</option>
                 {testPapers.map((tp) => (
                   <option key={tp.testId || tp.test_id} value={tp.testId || tp.test_id}>
-                    {tp.title} ({(tp.testId || tp.test_id || "").slice(0, 20)})
+                    {tp.title}
                   </option>
                 ))}
               </select>
             </label>
-            <button className="ts-btn ts-btn-primary ts-btn-sm" onClick={handleRegisterTest}>등록</button>
+            <button className="admin-detail-btn primary" onClick={handleRegisterTest}>등록</button>
           </div>
         </div>
       </div>
