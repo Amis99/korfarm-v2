@@ -47,7 +47,7 @@ class TypstBuilder(
         sb.appendLine("]")
         sb.appendLine("#v(12pt)")
         sb.appendLine("#box(stroke: 0.5pt + gray, inset: 8pt, radius: 4pt, width: 100%)[")
-        sb.appendLine("  학교 #h(2em) _________ #h(2em) 학년/반 _____ #h(2em) 이름 _________ #h(2em) 응시일 ____")
+        sb.appendLine("  학교 #h(0.5em) #box(width: 7em, stroke: (bottom: 0.5pt))[#h(1em)] #h(1.5em) 학년/반 #h(0.5em) #box(width: 4em, stroke: (bottom: 0.5pt))[#h(1em)] #h(1.5em) 이름 #h(0.5em) #box(width: 7em, stroke: (bottom: 0.5pt))[#h(1em)] #h(1.5em) 응시일 #h(0.5em) #box(width: 5em, stroke: (bottom: 0.5pt))[#h(1em)]")
         sb.appendLine("]")
         sb.appendLine("#v(8pt)")
         sb.appendLine()
@@ -173,7 +173,7 @@ class TypstBuilder(
 
         val sb = StringBuilder()
         sb.appendLine("  #block(above: 8pt, below: 6pt)[")
-        sb.appendLine("    *${no}.* ${formatInline(stem)} #h(0.5em) #text(size: 9pt, fill: gray)[\\[${points}점\\]]")
+        sb.appendLine("    *${no}.* ${formatInline(stem)} #h(0.5em) #text(size: 9pt, fill: gray)[(${points}점)]")
         sb.appendLine("  ]")
         if (type == "ESSAY") {
             sb.appendLine("  #box(stroke: 0.5pt + gray, inset: 4pt, width: 100%, height: 60pt)[]")
