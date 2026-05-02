@@ -193,7 +193,14 @@ function AdminStudentDetailPage() {
       <div className="admin-detail-wrap">
         <div className="admin-detail-header">
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <button className="admin-detail-btn secondary" onClick={() => navigate("/admin/students")} style={{ fontSize: 13, padding: "6px 12px" }}>&larr; 목록</button>
+            <button
+              className="admin-detail-btn secondary"
+              onClick={() => {
+                const from = searchParams.get("from");
+                navigate(from || "/admin/students");
+              }}
+              style={{ fontSize: 13, padding: "6px 12px" }}
+            >&larr; 목록</button>
             <h1>{loadingInfo ? "로딩 중..." : `${sName} 학생 상세`}</h1>
           </div>
         </div>

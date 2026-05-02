@@ -421,10 +421,24 @@ class StudyPlanService(
 
     @Transactional
     fun getMatrix(planId: String, userId: String, isAdmin: Boolean = false): MatrixResponse {
-        val scopes = scopeRepo.findByPlanIdOrderBySortOrder(planId).map { it.toResponse() }
+        val scopeEntities = scopeRepo.findByPlanIdOrderBySortOrder(planId)
+        val scopes = scopeEntities.map { it.toResponse() }
         val assets = assetRepo.findByPlanIdOrderBySortOrder(planId)
         val assetMap = assets.associateBy { it.id }
-        val cells = cellRepo.findByPlanIdAndUserId(planId, userId)
+        var cells = cellRepo.findByPlanIdAndUserId(planId, userId)
+
+        // 누락된 (scope × asset) 조합에 대해 cell 자동 생성 — 매트릭스의 빈 셀이 클릭 안 되던 회귀 방지
+        val existingPairs = cells.map { it.scopeId to it.assetId }.toHashSet()
+        val missing = scopeEntities.flatMap { s ->
+            assets.map { a -> s.id to a.id }
+        }.filter { it !in existingPairs }
+        if (missing.isNotEmpty()) {
+            missing.forEach { (scopeId, assetId) ->
+                val asset = assetMap[assetId] ?: return@forEach
+                createCell(planId, scopeId, asset, userId)
+            }
+            cells = cellRepo.findByPlanIdAndUserId(planId, userId)
+        }
 
         // 자동 상태 동기화
         syncKorfarmCellStatus(cells, userId, assetMap)
@@ -462,9 +476,21 @@ class StudyPlanService(
             )
             cell.toResponse(asset, action)
         }
+        // 시험 자산의 PDF fileId 일괄 조회 (통합 PDF 정책 — 시험지·정답해설 동일 fileId)
+        val testAssetIds = assets.filter { it.assetType == "test" && !it.refId.isNullOrBlank() }
+            .mapNotNull { it.refId }
+        val pdfByTestId: Map<String, String?> = if (testAssetIds.isNotEmpty()) {
+            testPaperRepo.findAllById(testAssetIds).associate { it.id to it.pdfFileId }
+        } else emptyMap()
+
+        val assetResponses = assets.map { asset ->
+            val pdf = if (asset.assetType == "test") pdfByTestId[asset.refId] else null
+            asset.toResponse(testPdfFileId = pdf, answerPdfFileId = pdf)
+        }
+
         return MatrixResponse(
             scopes = scopes,
-            assets = assets.map { it.toResponse() },
+            assets = assetResponses,
             cells = cellResponses
         )
     }

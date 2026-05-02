@@ -179,7 +179,11 @@ data class AssetResponse(
     val assetKind: String,
     val refId: String?,
     val sortOrder: Int,
-    val configJson: String?
+    val configJson: String?,
+    /** 시험지 PDF (시험 자산 한정). 통합 PDF 정책 — testPdfFileId == answerPdfFileId */
+    val testPdfFileId: String? = null,
+    /** 정답·해설 PDF — 통합 PDF 인 경우 testPdfFileId 와 같은 값 */
+    val answerPdfFileId: String? = null
 )
 
 data class StudentProgressResponse(
@@ -321,11 +325,16 @@ internal fun StudyPlanScopeEntity.toResponse(): ScopeResponse {
     return ScopeResponse(id = id, label = label, sortOrder = sortOrder)
 }
 
-internal fun StudyPlanAssetEntity.toResponse(): AssetResponse {
+internal fun StudyPlanAssetEntity.toResponse(
+    testPdfFileId: String? = null,
+    answerPdfFileId: String? = null
+): AssetResponse {
     return AssetResponse(
         id = id, assetType = assetType, label = label,
         assetKind = assetKind, refId = refId, sortOrder = sortOrder,
-        configJson = configJson
+        configJson = configJson,
+        testPdfFileId = testPdfFileId,
+        answerPdfFileId = answerPdfFileId
     )
 }
 

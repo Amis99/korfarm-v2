@@ -116,6 +116,9 @@ export default function StudyPlanCellModal({ cell, scope, asset, onClose, onUpda
     if (!userId) return;
     const params = new URLSearchParams({ tab: "learning" });
     if (refId) params.set("contentId", refId);
+    // 돌아가기 시 학습 계획표 대시보드로 복귀하도록 from 전달
+    const from = window.location.pathname + window.location.search;
+    if (from) params.set("from", from);
     navigate(`/admin/students/${userId}?${params.toString()}`);
   };
 
