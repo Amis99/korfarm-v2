@@ -6,6 +6,7 @@ import AdminLayout from "../components/AdminLayout";
 import { resolveModuleKeyForContentType } from "../constants/contentTypes";
 import Pagination from "../components/Pagination";
 import usePagination from "../hooks/usePagination";
+import "../styles/admin-detail.css";
 import "../styles/admin-pro.css";
 import CompetencyVectorEditor from "../components/editor/dailyquiz/CompetencyVectorEditor";
 
@@ -129,7 +130,7 @@ function AdminProPage() {
         data.forEach((ch) => {
           apiGet(`/v1/admin/pro/chapters/${ch.id}/content-status`)
             .then((st) => setStatusCache((prev) => ({ ...prev, [ch.id]: st })))
-            .catch(() => {});
+            .catch((e) => console.error(`content-status 조회 실패 (chapter=${ch.id}):`, e));
         });
       })
       .catch((err) => {
@@ -178,7 +179,10 @@ function AdminProPage() {
     loadAnswerData(ch);
 
     /* 시험지 목록 */
-    apiGet("/v1/admin/test-papers").then(setTestPapers).catch(() => setTestPapers([]));
+    apiGet("/v1/admin/test-papers").then(setTestPapers).catch((e) => {
+      console.error("시험 목록 조회 실패:", e);
+      setTestPapers([]);
+    });
 
     /* 테스트 초기화 */
     setSelectedTestPaperId("");

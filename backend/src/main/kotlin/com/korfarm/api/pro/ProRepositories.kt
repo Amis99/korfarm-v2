@@ -12,6 +12,8 @@ interface ProChapterRepo : JpaRepository<ProChapterEntity, String> {
 interface ProChapterItemRepo : JpaRepository<ProChapterItemEntity, String> {
     fun findByChapterIdOrderByItemOrderAsc(chapterId: String): List<ProChapterItemEntity>
     fun findByChapterIdAndType(chapterId: String, type: String): List<ProChapterItemEntity>
+    /** N+1 fix — 여러 챕터의 item 일괄 조회 */
+    fun findByChapterIdInOrderByChapterIdAscItemOrderAsc(chapterIds: Collection<String>): List<ProChapterItemEntity>
     fun deleteByChapterId(chapterId: String)
 }
 

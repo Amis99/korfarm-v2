@@ -59,10 +59,10 @@ class ProModeService(
         val allProgress = progressRepo.findByUserIdAndChapterIdIn(userId, chapterIds)
         val progressByChapter = allProgress.groupBy { it.chapterId }
 
-        // 각 챕터별 아이템 조회
-        val allItems = chapterIds.associateWith { cid ->
-            itemRepo.findByChapterIdOrderByItemOrderAsc(cid)
-        }
+        // N+1 fix — 모든 챕터 item 일괄 조회 후 groupBy
+        val allItems: Map<String, List<ProChapterItemEntity>> =
+            itemRepo.findByChapterIdInOrderByChapterIdAscItemOrderAsc(chapterIds)
+                .groupBy { it.chapterId }
 
         // 테스트 통과 여부 확인
         val testSessions = chapterIds.flatMap { cid ->
