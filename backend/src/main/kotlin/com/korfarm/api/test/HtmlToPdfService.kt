@@ -87,7 +87,10 @@ class HtmlToPdfService(
                 .tp-box { border: 2px solid #333; border-radius: 6px; padding: 8pt 12pt; margin: 12pt 0; }
                 .tp-answer { color: #c0392b; font-weight: 700; }
                 .tp-explanation { background: #faf3f1; padding: 8pt; border-left: 3px solid #c0392b; margin: 6pt 0; }
-                .tp-cols-2 { column-count: 2; column-gap: 10mm; column-rule: 1px solid #ddd; }
+                /* 2단: 발란스 X (auto) — 콘텐츠가 첫 컬럼부터 채움, 마지막에서만 분할 */
+                .tp-cols-2 { column-count: 2; column-gap: 10mm; column-rule: 1px solid #ddd; column-fill: auto; }
+                /* 페이지 분할 */
+                .tp-page-break { page-break-after: always; break-after: page; height: 0; margin: 0; padding: 0; border: none; }
               </style>
             </head>
             <body>

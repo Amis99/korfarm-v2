@@ -28,7 +28,7 @@ class HtmlBuilder(
         val questions = (payload["questions"] as? List<Map<String, Any?>>) ?: emptyList()
 
         val sb = StringBuilder()
-        // 헤더
+        // 헤더 — 제목 가운데, 메타 가운데, 학교/학년반/이름 우측 정렬 (응시일 제외)
         sb.append("""<h1 style="text-align:center">${esc(paper.title)}</h1>""")
         val meta = buildList {
             add("${paper.totalQuestions}문항")
@@ -36,10 +36,10 @@ class HtmlBuilder(
             paper.timeLimitMinutes?.let { add("${it}분") }
         }.joinToString(" · ")
         sb.append("""<p style="text-align:center"><span style="color: #666">${esc(meta)}</span></p>""")
-        sb.append("""<p>학교 _________&nbsp;&nbsp; 학년/반 _____&nbsp;&nbsp; 이름 _________&nbsp;&nbsp; 응시일 ________</p>""")
+        sb.append("""<p style="text-align:right">학교 _________&nbsp;&nbsp; 학년/반 _____&nbsp;&nbsp; 이름 _________</p>""")
         sb.append("<hr/>")
 
-        // 본문 — 2단
+        // 본문 — 2단 (헤더 아래 자동 진입)
         sb.append("""<div class="tp-cols-2">""")
 
         val passageMap = passages.associateBy { (it["id"] as? String) ?: "" }
@@ -152,9 +152,20 @@ class HtmlBuilder(
 
     private fun paragraphsHtml(text: String): String {
         if (text.isBlank()) return ""
+        // passage / explanation 텍스트가 이미 HTML 태그를 포함하면 escape 하지 않고 그대로 렌더
+        // (예: 출처 우측 정렬용 <div style="text-align: right;">…</div>)
+        if (looksLikeHtml(text)) {
+            return text
+        }
         return text.replace("\r\n", "\n")
             .split(Regex("\n\\s*\n"))
             .joinToString("") { "<p>${esc(it.replace("\n", "<br/>"))}</p>" }
+    }
+
+    private fun looksLikeHtml(text: String): Boolean {
+        // <div ...> <p> <br> <span> <strong> 등 자주 쓰는 블록·인라인 태그 감지
+        return Regex("""<(div|p|br|span|strong|em|u|ul|ol|li|h[1-6]|table|tr|td|th)\b[^>]*>""", RegexOption.IGNORE_CASE)
+            .containsMatchIn(text)
     }
 
     private fun esc(s: String): String =
