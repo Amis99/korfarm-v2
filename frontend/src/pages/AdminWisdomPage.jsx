@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { apiGet, apiPost } from "../utils/adminApi";
+import { apiGet, apiPost, apiDelete } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/wisdom.css";
 
@@ -118,6 +118,17 @@ function AdminWisdomPage() {
     });
   };
 
+  const handleDelete = async (post) => {
+    if (!post?.post_id) return;
+    if (!window.confirm(`"${post.topic_label}" (${post.author_name || post.author_id}) 글을 삭제할까요?\n삭제된 글은 학생 화면에서 사라집니다.`)) return;
+    try {
+      await apiDelete(`/v1/admin/wisdom/posts/${post.post_id}`);
+      setPosts((prev) => prev.map((p) => p.post_id === post.post_id ? { ...p, status: "deleted" } : p));
+    } catch (e) {
+      alert("삭제 실패: " + (e?.message || ""));
+    }
+  };
+
   const handleBatch = async () => {
     if (selected.size === 0) return;
     if (!confirm(`선택한 ${selected.size}건에 AI 일괄 첨삭을 실행합니다. 진행하시겠습니까?`)) return;
@@ -162,57 +173,56 @@ function AdminWisdomPage() {
         </div>
 
         <div className="admin-detail-card">
-            <div style={{ display: "flex", gap: 8, marginBottom: 16, flexWrap: "wrap", alignItems: "center" }}>
+            <div style={{ display: "flex", gap: 10, marginBottom: 16, flexWrap: "wrap", alignItems: "center" }}>
               <input
                 type="text"
+                className="wis-filter-select"
                 placeholder="🔍 작성자·주제 검색"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                style={{ ...selectStyle, minWidth: 200 }}
+                style={{ minWidth: 200 }}
               />
-              <select value={levelId} onChange={(e) => setLevelId(e.target.value)} style={selectStyle}>
+              <select className="wis-filter-select" value={levelId} onChange={(e) => setLevelId(e.target.value)}>
                 {LEVEL_OPTIONS.map((l) => (
                   <option key={l.id} value={l.id}>{l.label}</option>
                 ))}
               </select>
-              <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} style={selectStyle}>
+              <select className="wis-filter-select" value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
                 <option value="all">전체 유형</option>
                 <option value="manuscript">원고지</option>
                 <option value="upload">업로드</option>
               </select>
-              <select value={feedbackFilter} onChange={(e) => setFeedbackFilter(e.target.value)} style={selectStyle}>
+              <select className="wis-filter-select" value={feedbackFilter} onChange={(e) => setFeedbackFilter(e.target.value)}>
                 <option value="all">전체 피드백</option>
                 <option value="done">완료</option>
                 <option value="pending">미완료</option>
               </select>
-              <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} style={selectStyle}>
+              <select className="wis-filter-select" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
                 <option value="active">활성만</option>
                 <option value="deleted">삭제됨만</option>
                 <option value="all">전체 상태</option>
               </select>
-              <select value={sortKey} onChange={(e) => setSortKey(e.target.value)} style={selectStyle}>
+              <select className="wis-filter-select" value={sortKey} onChange={(e) => setSortKey(e.target.value)}>
                 <option value="created">정렬: 작성일</option>
                 <option value="level">정렬: 레벨</option>
                 <option value="author">정렬: 작성자</option>
                 <option value="topic">정렬: 주제</option>
               </select>
               <button
+                className="wis-filter-select"
                 onClick={() => setSortDir((d) => (d === "asc" ? "desc" : "asc"))}
-                style={{ ...selectStyle, cursor: "pointer", padding: "8px 12px" }}
                 title="정렬 방향 토글"
               >
                 {sortDir === "asc" ? "↑ 오름차순" : "↓ 내림차순"}
               </button>
               {(search || typeFilter !== "all" || feedbackFilter !== "all" || statusFilter !== "active" || sortKey !== "created" || sortDir !== "desc" || levelId) && (
                 <button
+                  className="wis-filter-select"
                   onClick={() => {
                     setSearch(""); setTypeFilter("all"); setFeedbackFilter("all");
                     setStatusFilter("active"); setSortKey("created"); setSortDir("desc"); setLevelId("");
                   }}
-                  style={{
-                    ...selectStyle, cursor: "pointer", padding: "8px 12px",
-                    border: "1px dashed rgba(31,58,44,0.3)", color: "var(--admin-muted, #555)",
-                  }}
+                  style={{ borderStyle: "dashed", color: "var(--admin-muted, #555)" }}
                 >초기화</button>
               )}
               <button
@@ -262,6 +272,7 @@ function AdminWisdomPage() {
                       <th>피드백</th>
                       <th>상태</th>
                       <th>작성일</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -298,6 +309,20 @@ function AdminWisdomPage() {
                           </td>
                           <td>{post.status}</td>
                           <td>{fmtDate(post.created_at)}</td>
+                          <td onClick={(e) => e.stopPropagation()} style={{ textAlign: "right" }}>
+                            {post.status !== "deleted" && (
+                              <button
+                                onClick={() => handleDelete(post)}
+                                title="글 삭제 (soft delete)"
+                                style={{
+                                  padding: "4px 10px", fontSize: 11, fontWeight: 600,
+                                  background: "#c0392b", color: "#fff",
+                                  border: "1px solid #962f22", borderRadius: 4,
+                                  cursor: "pointer",
+                                }}
+                              >🗑 삭제</button>
+                            )}
+                          </td>
                         </tr>
                       );
                     })}
@@ -322,16 +347,5 @@ function AdminWisdomPage() {
     </AdminLayout>
   );
 }
-
-const selectStyle = {
-  padding: "8px 12px",
-  border: "1px solid rgba(31,58,44,0.2)",
-  borderRadius: 6,
-  background: "#fff",
-  color: "var(--admin-ink, #1a2920)",
-  fontSize: 13,
-  fontFamily: "inherit",
-  outline: "none",
-};
 
 export default AdminWisdomPage;

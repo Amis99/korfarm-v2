@@ -57,6 +57,14 @@ class AdminWisdomController(
         return ApiResponse(success = true, data = mapOf("status" to "deleted"))
     }
 
+    /** 어드민 글 삭제 — soft delete (status='deleted'). 작성자 확인 우회. */
+    @DeleteMapping("/posts/{postId}")
+    fun deletePost(@PathVariable postId: String): ApiResponse<Map<String, String>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        wisdomService.adminDeletePost(postId)
+        return ApiResponse(success = true, data = mapOf("status" to "deleted"))
+    }
+
     // ─── AI 첨삭 ───────────────────────────────────────
 
     /**

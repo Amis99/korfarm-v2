@@ -245,6 +245,16 @@ class WisdomService(
         postRepository.save(post)
     }
 
+    /** 어드민 — 작성자 확인 우회 + soft delete. */
+    @Transactional
+    fun adminDeletePost(postId: String) {
+        val post = postRepository.findById(postId).orElseThrow {
+            ApiException("NOT_FOUND", "post not found", HttpStatus.NOT_FOUND)
+        }
+        post.status = "deleted"
+        postRepository.save(post)
+    }
+
     // --- Like ---
 
     @Transactional
