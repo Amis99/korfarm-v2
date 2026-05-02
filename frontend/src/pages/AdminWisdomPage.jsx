@@ -172,79 +172,95 @@ function AdminWisdomPage() {
           </div>
         </div>
 
-        <div className="admin-detail-card">
-            <div style={{ display: "flex", gap: 10, marginBottom: 16, flexWrap: "wrap", alignItems: "center" }}>
+        <div className="admin-detail-card admin-single-card edit-mode">
+          <div className="admin-detail-toolbar admin-content-toolbar">
+            <div className="admin-detail-search">
+              <span className="material-symbols-outlined">search</span>
               <input
-                type="text"
-                className="wis-filter-select"
-                placeholder="🔍 작성자·주제 검색"
+                placeholder="작성자·주제 검색"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                style={{ minWidth: 200 }}
               />
-              <select className="wis-filter-select" value={levelId} onChange={(e) => setLevelId(e.target.value)}>
+            </div>
+            <div className="admin-detail-filters">
+              {/* 상태 토글 — 활성/삭제됨/전체 */}
+              {[
+                { key: "active", label: "활성" },
+                { key: "deleted", label: "삭제됨" },
+                { key: "all", label: "전체" },
+              ].map((f) => (
+                <button
+                  key={f.key}
+                  type="button"
+                  className={`admin-filter ${statusFilter === f.key ? "active" : ""}`}
+                  onClick={() => setStatusFilter(f.key)}
+                >{f.label}</button>
+              ))}
+              <select className="admin-type-filter-select" value={levelId} onChange={(e) => setLevelId(e.target.value)}>
                 {LEVEL_OPTIONS.map((l) => (
                   <option key={l.id} value={l.id}>{l.label}</option>
                 ))}
               </select>
-              <select className="wis-filter-select" value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
-                <option value="all">전체 유형</option>
+              <select className="admin-type-filter-select" value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
+                <option value="all">유형: 전체</option>
                 <option value="manuscript">원고지</option>
                 <option value="upload">업로드</option>
               </select>
-              <select className="wis-filter-select" value={feedbackFilter} onChange={(e) => setFeedbackFilter(e.target.value)}>
-                <option value="all">전체 피드백</option>
+              <select className="admin-type-filter-select" value={feedbackFilter} onChange={(e) => setFeedbackFilter(e.target.value)}>
+                <option value="all">피드백: 전체</option>
                 <option value="done">완료</option>
                 <option value="pending">미완료</option>
               </select>
-              <select className="wis-filter-select" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
-                <option value="active">활성만</option>
-                <option value="deleted">삭제됨만</option>
-                <option value="all">전체 상태</option>
-              </select>
-              <select className="wis-filter-select" value={sortKey} onChange={(e) => setSortKey(e.target.value)}>
+              <select className="admin-type-filter-select" value={sortKey} onChange={(e) => setSortKey(e.target.value)}>
                 <option value="created">정렬: 작성일</option>
                 <option value="level">정렬: 레벨</option>
                 <option value="author">정렬: 작성자</option>
                 <option value="topic">정렬: 주제</option>
               </select>
               <button
-                className="wis-filter-select"
+                type="button"
+                className="admin-filter"
                 onClick={() => setSortDir((d) => (d === "asc" ? "desc" : "asc"))}
                 title="정렬 방향 토글"
               >
-                {sortDir === "asc" ? "↑ 오름차순" : "↓ 내림차순"}
+                {sortDir === "asc" ? "↑" : "↓"}
               </button>
               {(search || typeFilter !== "all" || feedbackFilter !== "all" || statusFilter !== "active" || sortKey !== "created" || sortDir !== "desc" || levelId) && (
                 <button
-                  className="wis-filter-select"
+                  type="button"
+                  className="admin-filter"
                   onClick={() => {
                     setSearch(""); setTypeFilter("all"); setFeedbackFilter("all");
                     setStatusFilter("active"); setSortKey("created"); setSortDir("desc"); setLevelId("");
                   }}
-                  style={{ borderStyle: "dashed", color: "var(--admin-muted, #555)" }}
+                  style={{ borderStyle: "dashed" }}
                 >초기화</button>
               )}
-              <button
-                className="admin-detail-btn"
-                disabled={selected.size === 0 || batchRunning}
-                onClick={handleBatch}
-                style={{ marginLeft: "auto" }}
-              >
-                {batchRunning ? "AI 첨삭 중..." : `AI 일괄 첨삭 (${selected.size}건)`}
-              </button>
-              {batchMsg && (
-                <span style={{
-                  fontSize: 13,
-                  color: batchMsg.startsWith("오류") ? "#c0392b" : "var(--admin-accent-strong)",
-                }}>
-                  {batchMsg}
-                </span>
-              )}
             </div>
-            <div style={{ fontSize: 12, color: "var(--admin-muted)", marginBottom: 10 }}>
+          </div>
+          <div className="admin-content-bulk-bar" style={{ background: "transparent", border: "none", padding: "0 0 8px" }}>
+            <span className="admin-content-bulk-count" style={{ color: "var(--admin-muted)" }}>
               {filteredSorted.length}건 표시 (전체 {posts.length}건)
-            </div>
+              {selected.size > 0 ? ` · ${selected.size}건 선택` : ""}
+            </span>
+            <button
+              type="button"
+              className="admin-detail-btn"
+              disabled={selected.size === 0 || batchRunning}
+              onClick={handleBatch}
+              style={{ marginLeft: "auto" }}
+            >
+              {batchRunning ? "AI 첨삭 중..." : `AI 일괄 첨삭 (${selected.size}건)`}
+            </button>
+            {batchMsg && (
+              <span style={{
+                fontSize: 13,
+                color: batchMsg.startsWith("오류") ? "#c0392b" : "var(--admin-accent-strong)",
+              }}>
+                {batchMsg}
+              </span>
+            )}
+          </div>
 
             {loading ? (
               <p style={{ color: "var(--admin-muted)" }}>불러오는 중...</p>
