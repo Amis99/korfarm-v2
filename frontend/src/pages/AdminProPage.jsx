@@ -50,9 +50,12 @@ function AdminProPage() {
   const [loadError, setLoadError] = useState(null);
   const [statusCache, setStatusCache] = useState({});
 
-  /* 상세 뷰 */
+  /* 상세 뷰 (deprecated — 평면 리스트로 대체. 호환 유지 위해 state 만 남김) */
   const [selectedChapter, setSelectedChapter] = useState(null);
   const [activeTab, setActiveTab] = useState("content");
+
+  /* 메인 탭 — 진입 즉시 3 탭 평면 리스트 */
+  const [globalTab, setGlobalTab] = useState("learning"); // learning | answer | test
 
   /* 영상 URL */
   const [editVideoUrl, setEditVideoUrl] = useState("");
@@ -628,10 +631,76 @@ function AdminProPage() {
 
   const tests = contentStatus?.testVersions || contentStatus?.test_versions || [];
 
+  /* ═══ 메인 탭별 평면 리스트 ═══ */
+  const flatItems = useMemo(() => {
+    const learning = [];
+    const answer = [];
+    const test = [];
+    const learningTypes = new Set(["reading", "vocab", "background", "logic"]);
+    chapters.forEach((ch) => {
+      const chNum = ch.chapterNumber ?? ch.chapter_number;
+      const chTitle = ch.title;
+      const st = statusCache[ch.id];
+      if (!st) return;
+      (st.items || []).forEach((it) => {
+        (it.contents || []).forEach((c) => {
+          const row = {
+            chapterId: ch.id,
+            chapterNumber: chNum,
+            chapterTitle: chTitle,
+            type: it.type,
+            contentId: c.contentId || c.content_id,
+            title: c.title,
+            updatedAt: c.updatedAt || c.updated_at,
+          };
+          if (learningTypes.has(it.type)) learning.push(row);
+          else if (it.type === "answer") answer.push(row);
+        });
+      });
+      const tv = st.testVersions || st.test_versions || [];
+      tv.forEach((t) => {
+        const tpId = t.testPaperId || t.test_paper_id;
+        const meta = testPapers.find((tp) => (tp.testId || tp.test_id) === tpId);
+        test.push({
+          chapterId: ch.id,
+          chapterNumber: chNum,
+          chapterTitle: chTitle,
+          version: t.version,
+          testPaperId: tpId,
+          testTitle: meta?.title || tpId,
+          status: t.status,
+          pdfFileId: t.pdfFileId || t.pdf_file_id,
+        });
+      });
+    });
+    // 챕터 번호 순으로 안정 정렬
+    const byChapter = (a, b) => (a.chapterNumber ?? 0) - (b.chapterNumber ?? 0);
+    return {
+      learning: learning.sort(byChapter),
+      answer: answer.sort(byChapter),
+      test: test.sort(byChapter),
+    };
+  }, [chapters, statusCache, testPapers]);
+
+  const filteredFlat = useMemo(() => {
+    const q = chapterSearch.trim().toLowerCase();
+    if (!q) return flatItems;
+    const filt = (arr) => arr.filter((x) =>
+      (x.title || x.testTitle || "").toLowerCase().includes(q) ||
+      (x.chapterTitle || "").toLowerCase().includes(q) ||
+      String(x.chapterNumber ?? "").includes(q)
+    );
+    return {
+      learning: filt(flatItems.learning),
+      answer: filt(flatItems.answer),
+      test: filt(flatItems.test),
+    };
+  }, [flatItems, chapterSearch]);
+
   /* ═══════════════════════════════════════════════════════
-     ══════════════ 상세 뷰 ══════════════
+     ══════════════ 상세 뷰 (deprecated — 평면 리스트로 대체) ══════════════
      ═══════════════════════════════════════════════════════ */
-  if (selectedChapter) {
+  if (selectedChapter && false) {
     return (
       <AdminLayout>
         <div className="admin-detail-wrap">
@@ -683,8 +752,16 @@ function AdminProPage() {
   }
 
   /* ═══════════════════════════════════════════════════════
-     ══════════════ 목록 뷰 ══════════════
+     ══════════════ 메인 — 3 탭 평면 리스트 ══════════════
      ═══════════════════════════════════════════════════════ */
+  const TYPE_BADGE = {
+    reading: { label: "독해", bg: "#cce5ff", color: "#004085" },
+    vocab: { label: "어휘", bg: "#d4edda", color: "#155724" },
+    background: { label: "배경", bg: "#e2d5f0", color: "#5e2d8b" },
+    logic: { label: "논리", bg: "#fff3cd", color: "#856404" },
+    answer: { label: "정답", bg: "#fce4ec", color: "#880e4f" },
+  };
+
   return (
     <AdminLayout>
       <div className="admin-detail-wrap">
@@ -696,7 +773,7 @@ function AdminProPage() {
           <div className="admin-detail-search">
             <span className="material-symbols-outlined">search</span>
             <input
-              placeholder="챕터 제목·번호 검색"
+              placeholder="제목·챕터·번호 검색"
               value={chapterSearch}
               onChange={(e) => setChapterSearch(e.target.value)}
             />
@@ -711,440 +788,127 @@ function AdminProPage() {
                 <option key={lv.id} value={lv.id}>{lv.name}</option>
               ))}
             </select>
-            <select
-              className="admin-type-filter-select"
-              value={chapterSort}
-              onChange={(e) => setChapterSort(e.target.value)}
-            >
-              <option value="number">정렬: 챕터 번호</option>
-              <option value="titleAsc">정렬: 제목 가나다</option>
-            </select>
-            {(chapterSearch || chapterSort !== "number") && (
-              <button
-                type="button"
-                className="admin-filter"
-                onClick={() => { setChapterSearch(""); setChapterSort("number"); }}
-                style={{ borderStyle: "dashed" }}
-              >초기화</button>
-            )}
           </div>
         </div>
 
-        {loading ? (
-          <div className="ts-center"><p>불러오는 중...</p></div>
-        ) : loadError ? (
-          <div className="ts-center">
-            <p className="ap-error">오류: {loadError}</p>
-            <button className="ts-btn ts-btn-outline" onClick={load} style={{ marginTop: 12 }}>다시 시도</button>
-          </div>
-        ) : chapters.length === 0 ? (
-          <div className="ts-center"><p>등록된 챕터가 없습니다.</p></div>
-        ) : (
-          <div className="admin-detail-card admin-single-card edit-mode">
-            <table className="admin-detail-table ap-chapter-table">
-              <thead>
-                <tr>
-                  <th className="ap-col-num">#</th>
-                  <th className="ap-col-chapter">챕터명</th>
-                  <th className="ap-col-content">콘텐츠</th>
-                  <th className="ap-col-answer">해설</th>
-                  <th className="ap-col-test">시험</th>
-                  <th className="ap-col-action"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {pagedChapters.map((ch) => {
-                  const comp = getCompleteness(ch);
-                  return (
-                    <tr key={ch.id} className="ts-clickable-row" onClick={() => openDetail(ch)}>
-                      <td className="ap-col-num">{ch.chapterNumber ?? ch.chapter_number}</td>
-                      <td className="ap-col-chapter">
-                        <span className="ap-chapter-name">{ch.title}</span>
-                      </td>
-                      <td className="ap-col-content">
-                        {comp.contentCount !== null
-                          ? <span className={`ap-badge ${comp.contentCount >= 4 ? "ap-badge-ok" : "ap-badge-warn"}`}>{comp.contentCount}</span>
-                          : <span className="ap-muted">...</span>}
-                      </td>
-                      <td className="ap-col-answer">
-                        {comp.answer !== null
-                          ? (comp.answer
-                            ? <span className="ap-badge ap-badge-ok">✓</span>
-                            : <span className="ap-badge ap-badge-miss">✗</span>)
-                          : <span className="ap-muted">...</span>}
-                      </td>
-                      <td className="ap-col-test">
-                        {comp.test
-                          ? <span className="ap-badge ap-badge-info">{comp.test}</span>
-                          : comp.answer !== null
-                            ? <span className="ap-badge ap-badge-miss">-</span>
-                            : <span className="ap-muted">...</span>}
-                      </td>
-                      <td className="ap-col-action">
-                        <span className="material-symbols-outlined ap-row-arrow">chevron_right</span>
+        {/* 3 탭 */}
+        <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
+          {[
+            { key: "learning", label: `📚 국어농장 학습 콘텐츠 (${flatItems.learning.length})` },
+            { key: "answer", label: `📝 정답과 해설 (${flatItems.answer.length})` },
+            { key: "test", label: `📋 챕터 테스트 (${flatItems.test.length})` },
+          ].map((t) => (
+            <button
+              key={t.key}
+              type="button"
+              className={`admin-filter ${globalTab === t.key ? "active" : ""}`}
+              onClick={() => setGlobalTab(t.key)}
+            >{t.label}</button>
+          ))}
+        </div>
+
+        <div className="admin-detail-card admin-single-card edit-mode">
+          {loading ? (
+            <p style={{ padding: 24, textAlign: "center", color: "var(--admin-muted)" }}>불러오는 중...</p>
+          ) : loadError ? (
+            <p style={{ padding: 24, textAlign: "center", color: "#c0392b" }}>오류: {loadError}</p>
+          ) : globalTab === "learning" ? (
+            filteredFlat.learning.length === 0 ? (
+              <p style={{ padding: 24, textAlign: "center", color: "var(--admin-muted)" }}>학습 콘텐츠가 없습니다.</p>
+            ) : (
+              <table className="admin-detail-table">
+                <thead>
+                  <tr>
+                    <th style={{ width: 60 }}>챕터</th>
+                    <th>제목</th>
+                    <th style={{ width: 80 }}>유형</th>
+                    <th style={{ width: 130 }}>최종수정일</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredFlat.learning.map((c) => {
+                    const b = TYPE_BADGE[c.type] || { label: c.type, bg: "#eee", color: "#333" };
+                    return (
+                      <tr key={c.contentId} style={{ cursor: "pointer" }}
+                        onClick={() => navigate(`/admin/content/edit?id=${c.contentId}&from=/admin/pro`)}>
+                        <td>{c.chapterNumber}장</td>
+                        <td>{c.title}</td>
+                        <td>
+                          <span style={{ display: "inline-block", padding: "2px 8px", borderRadius: 10, fontSize: 11, fontWeight: 600, background: b.bg, color: b.color }}>{b.label}</span>
+                        </td>
+                        <td>{c.updatedAt ? new Date(c.updatedAt).toLocaleDateString() : "-"}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            )
+          ) : globalTab === "answer" ? (
+            filteredFlat.answer.length === 0 ? (
+              <p style={{ padding: 24, textAlign: "center", color: "var(--admin-muted)" }}>정답·해설이 없습니다.</p>
+            ) : (
+              <table className="admin-detail-table">
+                <thead>
+                  <tr>
+                    <th style={{ width: 60 }}>챕터</th>
+                    <th>제목</th>
+                    <th style={{ width: 130 }}>최종수정일</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredFlat.answer.map((c) => (
+                    <tr key={c.contentId} style={{ cursor: "pointer" }}
+                      onClick={() => navigate(`/admin/content/edit?id=${c.contentId}&from=/admin/pro`)}>
+                      <td>{c.chapterNumber}장</td>
+                      <td>{c.title}</td>
+                      <td>{c.updatedAt ? new Date(c.updatedAt).toLocaleDateString() : "-"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )
+          ) : (
+            filteredFlat.test.length === 0 ? (
+              <p style={{ padding: 24, textAlign: "center", color: "var(--admin-muted)" }}>챕터 테스트가 없습니다.</p>
+            ) : (
+              <table className="admin-detail-table">
+                <thead>
+                  <tr>
+                    <th style={{ width: 60 }}>챕터</th>
+                    <th>시험명</th>
+                    <th style={{ width: 70 }}>버전</th>
+                    <th style={{ width: 90 }}>상태</th>
+                    <th style={{ width: 80 }}>PDF</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredFlat.test.map((t) => (
+                    <tr key={`${t.chapterId}-${t.version}`} style={{ cursor: "pointer" }}
+                      onClick={() => t.testPaperId && navigate(`/admin/tests/${t.testPaperId}/edit?from=/admin/pro`)}>
+                      <td>{t.chapterNumber}장</td>
+                      <td>{t.testTitle}</td>
+                      <td>v{t.version}</td>
+                      <td>{t.status || "-"}</td>
+                      <td onClick={(e) => e.stopPropagation()}>
+                        {t.pdfFileId ? (
+                          <a href={t.pdfFileId.startsWith("http") ? t.pdfFileId : `${API_BASE.replace(/\/$/, "")}/v1/files/${t.pdfFileId}/download`}
+                            target="_blank" rel="noopener noreferrer"
+                            style={{ color: "var(--admin-accent-strong, #2d6a4f)", fontSize: 12 }}
+                          >📄 보기</a>
+                        ) : (
+                          <span style={{ color: "var(--admin-muted)", fontSize: 12 }}>없음</span>
+                        )}
                       </td>
                     </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-            <Pagination page={chapterPage} totalPages={chapterTotalPages} onChange={setChapterPage} />
-          </div>
-        )}
+                  ))}
+                </tbody>
+              </table>
+            )
+          )}
+        </div>
       </div>
     </AdminLayout>
   );
-
-  /* ══════════════ 탭 1: 콘텐츠 ══════════════ */
-  function renderContentTab() {
-    if (contentLoading) return <p className="ap-muted">불러오는 중...</p>;
-    if (!contentStatus) return <p className="ap-muted">콘텐츠 현황을 불러올 수 없습니다.</p>;
-    const items = getContentItems();
-
-    return (
-      <div className="ap-content-tab">
-        <div className="ap-content-toolbar">
-          <button className="ts-btn ts-btn-primary ts-btn-sm" onClick={openAddModal}>
-            + 학습 추가
-          </button>
-          <span className="ap-muted" style={{ marginLeft: 12, fontSize: 12 }}>
-            카드 클릭 → 비주얼 에디터로 이동 · 액션 버튼은 정지(클릭 통과 안 함)
-          </span>
-        </div>
-
-        {items.length === 0 ? (
-          <p className="ap-muted" style={{ padding: 20 }}>아직 학습이 없습니다. [+ 학습 추가] 로 시작하세요.</p>
-        ) : (
-          <>
-            <table className="admin-detail-table ap-content-table">
-              <thead>
-                <tr>
-                  <th>제목</th>
-                  <th>유형</th>
-                  <th>최종수정일</th>
-                  <th style={{ width: 200 }}>액션</th>
-                </tr>
-              </thead>
-              <tbody>
-                {pagedContents.map((c) => {
-                  const i = items.findIndex((it) => it.id === c.id);
-                  return (
-                    <tr key={c.id} className="ts-clickable-row"
-                      onClick={() => navigate(`/admin/content/edit?id=${c.id}&from=/admin/pro`)}>
-                      <td className="ap-ct-title">{c.title || "(제목 없음)"}</td>
-                      <td><span className={`ap-ct-type ap-ct-type-${c.typeKey}`}>{c.type}</span></td>
-                      <td className="ap-ct-date">{c.updatedAt ? new Date(c.updatedAt).toLocaleDateString("ko") : "-"}</td>
-                      <td className="ap-ct-actions" onClick={(e) => e.stopPropagation()}>
-                        <button className="ap-icon-btn" title="미리보기" disabled={previewLoadingId === c.id}
-                          onClick={() => handleContentPreview(c.id)}>
-                          {previewLoadingId === c.id ? "..." : <span className="material-symbols-outlined">visibility</span>}
-                        </button>
-                        <button className="ap-icon-btn" title="위로" disabled={i <= 0}
-                          onClick={() => moveContentItem(i, i - 1)}>▲</button>
-                        <button className="ap-icon-btn" title="아래로" disabled={i < 0 || i >= items.length - 1}
-                          onClick={() => moveContentItem(i, i + 1)}>▼</button>
-                        <button className="ap-icon-btn" title="챕터에서 제거"
-                          onClick={() => removeContentItem(i)}>
-                          <span className="material-symbols-outlined">link_off</span>
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-            <Pagination page={contentPage} totalPages={contentTotalPages} onChange={setContentPage} />
-          </>
-        )}
-
-        {addModalOpen && renderAddModal()}
-      </div>
-    );
-  }
-
-  function renderAddModal() {
-    const items = getContentItems();
-    const usedIds = new Set(items.map((it) => it.id));
-    const filtered = (allContents || []).filter((c) => {
-      if (usedIds.has(c.contentId || c.id)) return false;
-      const kw = searchKeyword.trim().toLowerCase();
-      if (!kw) return true;
-      const title = (c.title || "").toLowerCase();
-      const ct = String(Array.isArray(c.contentType) ? c.contentType.join(" ") : c.contentType || "").toLowerCase();
-      return title.includes(kw) || ct.includes(kw);
-    }).slice(0, 50);
-
-    const CATEGORIES = [
-      { value: "PRO_READING", label: "프로 독해" },
-      { value: "PRO_VOCAB", label: "프로 어휘" },
-      { value: "PRO_BACKGROUND", label: "프로 배경지식" },
-      { value: "PRO_LOGIC", label: "프로 논리사고력" },
-      { value: "READING", label: "농장 - 독해" },
-      { value: "VOCAB", label: "농장 - 어휘" },
-      { value: "BACKGROUND", label: "농장 - 배경지식" },
-      { value: "LOGIC", label: "농장 - 논리사고력" },
-    ];
-
-    return (
-      <div className="ap-modal-overlay" onClick={() => setAddModalOpen(false)}>
-        <div className="ap-modal" onClick={(e) => e.stopPropagation()}>
-          <div className="ap-modal-header">
-            <h3>학습 추가 — {selectedChapter.title}</h3>
-            <button className="ap-icon-btn" onClick={() => setAddModalOpen(false)}>
-              <span className="material-symbols-outlined">close</span>
-            </button>
-          </div>
-          <div className="ap-modal-tabs">
-            <button className={`ap-modal-tab ${addModalTab === "search" ? "active" : ""}`}
-              onClick={() => setAddModalTab("search")}>기존 학습 검색</button>
-            <button className={`ap-modal-tab ${addModalTab === "create" ? "active" : ""}`}
-              onClick={() => setAddModalTab("create")}>새 학습 작성</button>
-          </div>
-          <div className="ap-modal-body">
-            {addModalTab === "search" && (
-              <>
-                <input type="text" placeholder="제목 또는 카테고리로 검색"
-                  value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)}
-                  className="ap-modal-search" autoFocus />
-                <div className="ap-modal-results">
-                  {filtered.length === 0 && (
-                    <p className="ap-muted" style={{ padding: 12 }}>검색 결과 없음</p>
-                  )}
-                  {filtered.map((c) => {
-                    const ct = Array.isArray(c.contentType) ? c.contentType.join(" / ") : (c.contentType || "");
-                    return (
-                      <div key={c.contentId || c.id} className="ap-modal-result-row"
-                        onClick={() => addContentToChapter(c.contentId || c.id, ct, c.title || "")}>
-                        <span className="ap-modal-result-title">{c.title || "(제목 없음)"}</span>
-                        <span className="ap-modal-result-type">{ct}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </>
-            )}
-            {addModalTab === "create" && (
-              <div className="ap-modal-create">
-                <div className="dq-section-label">카테고리 선택</div>
-                <select value={createCategory} onChange={(e) => setCreateCategory(e.target.value)}
-                  className="ap-modal-create-select">
-                  <option value="">(카테고리 선택)</option>
-                  {CATEGORIES.map((c) => (
-                    <option key={c.value} value={c.value}>{c.label}</option>
-                  ))}
-                </select>
-                <p className="ap-muted" style={{ marginTop: 10, fontSize: 12 }}>
-                  카테고리 선택 후 [콘텐츠 관리에서 작성하기] 버튼을 누르면 콘텐츠 관리 페이지로 이동합니다.
-                  거기서 신규 콘텐츠를 작성한 뒤, 다시 이 챕터로 돌아와 [기존 학습 검색]으로 추가하세요.
-                </p>
-                <button className="ts-btn ts-btn-primary" disabled={!createCategory}
-                  onClick={() => {
-                    navigate(`/admin/content?from=/admin/pro&newType=${createCategory}`);
-                    setAddModalOpen(false);
-                  }}>
-                  콘텐츠 관리에서 작성하기 →
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  /* ══════════════ 탭 2: 정답과 해설 ══════════════ */
-
-  /* 비주얼 에디터 헬퍼 — answerJson ↔ 구조화 데이터 동기화 */
-  const getAnswerData = () => {
-    try { return JSON.parse(answerJson); } catch { return { sections: [] }; }
-  };
-  const setAnswerData = (data) => setAnswerJson(JSON.stringify(data, null, 2));
-
-  const updateSection = (si, patch) => {
-    const d = getAnswerData(); d.sections[si] = { ...d.sections[si], ...patch }; setAnswerData(d);
-  };
-  const addSection = () => {
-    const d = getAnswerData();
-    d.sections = [...(d.sections || []), { title: "새 섹션", groups: [{ groupTitle: "그룹", items: [] }] }];
-    setAnswerData(d);
-  };
-  const removeSection = (si) => {
-    if (!confirm("이 섹션을 삭제하시겠습니까?")) return;
-    const d = getAnswerData(); d.sections.splice(si, 1); setAnswerData(d);
-  };
-  const updateGroup = (si, gi, patch) => {
-    const d = getAnswerData(); d.sections[si].groups[gi] = { ...d.sections[si].groups[gi], ...patch }; setAnswerData(d);
-  };
-  const addGroup = (si) => {
-    const d = getAnswerData();
-    d.sections[si].groups = [...(d.sections[si].groups || []), { groupTitle: "새 그룹", items: [] }];
-    setAnswerData(d);
-  };
-  const removeGroup = (si, gi) => {
-    const d = getAnswerData(); d.sections[si].groups.splice(gi, 1); setAnswerData(d);
-  };
-  const updateItem = (si, gi, ii, patch) => {
-    const d = getAnswerData(); d.sections[si].groups[gi].items[ii] = { ...d.sections[si].groups[gi].items[ii], ...patch }; setAnswerData(d);
-  };
-  const addItem = (si, gi) => {
-    const d = getAnswerData();
-    const items = d.sections[si].groups[gi].items || [];
-    const nextNum = items.length > 0 ? String(Number(items[items.length - 1].number || 0) + 1) : "1";
-    items.push({ number: nextNum, type: "객관식", points: 3, answer: "", explanation: "" });
-    d.sections[si].groups[gi].items = items;
-    setAnswerData(d);
-  };
-  const removeItem = (si, gi, ii) => {
-    const d = getAnswerData(); d.sections[si].groups[gi].items.splice(ii, 1); setAnswerData(d);
-  };
-
-  function renderAnswerTab() {
-    if (contentLoading) return <p className="ap-muted">불러오는 중...</p>;
-    if (!contentStatus) return <p className="ap-muted">정답·해설 현황을 불러올 수 없습니다.</p>;
-    // type='answer' 만 추출
-    const answerItems = (contentStatus.items || [])
-      .filter((it) => it.type === "answer")
-      .flatMap((it) => (it.contents || []).map((c) => ({
-        id: c.contentId || c.content_id,
-        title: c.title,
-        updatedAt: c.updatedAt || c.updated_at || "",
-      })));
-
-    return (
-      <div className="ap-answer-section">
-        <div className="ap-content-toolbar" style={{ display: "flex", alignItems: "center", marginBottom: 12 }}>
-          <button className="admin-detail-btn primary" onClick={() => { setCreateCategory("answer"); openAddModal(); }}>
-            + 정답·해설 추가
-          </button>
-          <span className="ap-muted" style={{ marginLeft: 12, fontSize: 12 }}>
-            행 클릭 → 콘텐츠 에디터로 이동 (작업 후 자동 복귀)
-          </span>
-        </div>
-
-        {answerItems.length === 0 ? (
-          <p className="ap-muted" style={{ padding: 20 }}>이 챕터에 등록된 정답·해설이 없습니다.</p>
-        ) : (
-          <table className="admin-detail-table">
-            <thead>
-              <tr>
-                <th>제목</th>
-                <th style={{ width: 140 }}>최종수정일</th>
-                <th style={{ width: 110 }}>액션</th>
-              </tr>
-            </thead>
-            <tbody>
-              {answerItems.map((c) => (
-                <tr key={c.id} style={{ cursor: "pointer" }}
-                  onClick={() => navigate(`/admin/content/edit?id=${c.id}&from=/admin/pro`)}>
-                  <td>{c.title}</td>
-                  <td>{c.updatedAt ? new Date(c.updatedAt).toLocaleDateString() : "-"}</td>
-                  <td onClick={(e) => e.stopPropagation()}>
-                    <button className="admin-detail-btn secondary"
-                      style={{ fontSize: 12, padding: "4px 10px" }}
-                      onClick={() => {
-                        if (window.confirm(`"${c.title}" 정답·해설을 챕터에서 제거할까요?`)) {
-                          const newItems = getContentItems().filter((it) => it.id !== c.id);
-                          applyChapterItems(newItems);
-                        }
-                      }}>
-                      🗑 제거
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </div>
-    );
-  }
-
-  /* ══════════════ 탭 3: 테스트 관리 ══════════════ */
-  function renderTestTab() {
-    return (
-      <div className="ap-test-section">
-        <div className="ap-content-toolbar" style={{ display: "flex", alignItems: "center", marginBottom: 12 }}>
-          <span className="ap-muted" style={{ fontSize: 12 }}>
-            행 클릭 → 시험 관리 에디터로 이동 (작업 후 자동 복귀)
-          </span>
-        </div>
-
-        {tests.length === 0 ? (
-          <p className="ap-muted" style={{ padding: 20 }}>이 챕터에 등록된 테스트가 없습니다. 아래에서 새 버전을 등록하세요.</p>
-        ) : (
-          <table className="admin-detail-table" style={{ marginBottom: 16 }}>
-            <thead>
-              <tr>
-                <th style={{ width: 80 }}>버전</th>
-                <th>시험명</th>
-                <th style={{ width: 100 }}>상태</th>
-                <th style={{ width: 100 }}>PDF</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tests.map((t) => {
-                const tpId = t.testPaperId || t.test_paper_id;
-                const meta = testPapers.find((tp) => (tp.testId || tp.test_id) === tpId);
-                const pdfFileId = t.pdfFileId || t.pdf_file_id;
-                return (
-                  <tr key={t.version} style={{ cursor: "pointer" }}
-                    onClick={() => tpId && navigate(`/admin/tests/${tpId}/edit?from=/admin/pro`)}>
-                    <td>v{t.version}</td>
-                    <td>{meta?.title || tpId || "(연결된 시험지 없음)"}</td>
-                    <td>{t.status || "-"}</td>
-                    <td onClick={(e) => e.stopPropagation()}>
-                      {pdfFileId ? (
-                        <a
-                          href={pdfFileId.startsWith("http") ? pdfFileId : `${API_BASE.replace(/\/$/, "")}/v1/files/${pdfFileId}/download`}
-                          target="_blank" rel="noopener noreferrer"
-                          style={{ color: "var(--admin-accent-strong, #2d6a4f)", fontSize: 12 }}
-                        >📄 보기</a>
-                      ) : (
-                        <span className="ap-muted" style={{ fontSize: 12 }}>없음</span>
-                      )}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        )}
-
-        {/* 새 버전 등록 */}
-        <div className="ap-test-register" style={{ padding: 12, background: "var(--admin-panel-light, #f5f9f3)", borderRadius: 8 }}>
-          <h4 style={{ margin: "0 0 8px", fontSize: 13 }}>새 버전 등록</h4>
-          <div className="ap-test-register-row" style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
-            <label style={{ fontSize: 13 }}>버전 <input type="number" min={1} value={testVersion} onChange={(e) => setTestVersion(e.target.value)} style={{ width: 70 }} /></label>
-            <label style={{ fontSize: 13, flex: 1 }}>시험지
-              <select className="admin-type-filter-select" value={testPaperId} onChange={(e) => setTestPaperId(e.target.value)} style={{ marginLeft: 8 }}>
-                <option value="">-- 시험지 선택 --</option>
-                {testPapers.map((tp) => (
-                  <option key={tp.testId || tp.test_id} value={tp.testId || tp.test_id}>
-                    {tp.title}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <button className="admin-detail-btn primary" onClick={handleRegisterTest}>등록</button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  /* ── PDF 미리보기 ── */
-  function renderTestPdf() {
-    if (!selectedTestPaperId) return <p className="ap-muted">시험지를 선택하세요.</p>;
-    const selectedTest = tests.find((t) => (t.testPaperId || t.test_paper_id) === selectedTestPaperId);
-    const pdfFileId = selectedTest?.pdfFileId || selectedTest?.pdf_file_id;
-    if (!pdfFileId) return <p className="ap-muted">이 시험지에 연결된 PDF가 없습니다.</p>;
-    const pdfSrc = pdfFileId.startsWith("http") ? pdfFileId : `${API_BASE.replace(/\/$/, "")}/v1/files/${pdfFileId}/download`;
-    return (
-      <div className="ap-pdf-preview">
-        <iframe src={pdfSrc} title="PDF 미리보기" />
-      </div>
-    );
-  }
 }
 
 export default AdminProPage;
