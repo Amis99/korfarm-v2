@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiGet } from "../../utils/api";
+import { apiGetCamel } from "../../utils/adminApi";
 
 const DAY_NAMES = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -69,7 +70,7 @@ export default function AdminCalendarTab({ classId }) {
     const to = fmt(new Date(viewYear, viewMonth + 1, 0));
     const params = new URLSearchParams({ from, to });
     if (classId) params.set("classId", classId);
-    apiGet(`/v1/admin/study-plans/calendar?${params.toString()}`)
+    apiGetCamel(`/v1/admin/study-plans/calendar?${params.toString()}`)
       .then((data) => setDays(Array.isArray(data?.days) ? data.days : (Array.isArray(data) ? data : [])))
       .catch(() => setDays([]))
       .finally(() => setLoading(false));
@@ -104,10 +105,10 @@ export default function AdminCalendarTab({ classId }) {
     setActionLoading(true);
     try {
       // drilldown — 액션의 학생 명단
-      const data = await apiGet(`/v1/admin/study-plans/calendar/${dayModal.date}`);
+      const data = await apiGetCamel(`/v1/admin/study-plans/calendar/${dayModal.date}`);
       const actions = Array.isArray(data?.actions) ? data.actions : [];
       const matched = actions.find((a) => (a.assetId || a.refId) === (item.assetId || item.refId));
-      setActionModal({ item, students: matched?.students || matched?.students_list || [] });
+      setActionModal({ item, students: matched?.students || [] });
     } catch (e) {
       setActionModal({ item, students: [] });
     } finally {

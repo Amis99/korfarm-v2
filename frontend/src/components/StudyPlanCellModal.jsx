@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiGet, apiPatch, API_BASE, TOKEN_KEY } from "../utils/api";
+import { apiGetCamel } from "../utils/adminApi";
 import CellStatusBadge from "./CellStatusBadge";
 import KorfarmContentSearchModal from "./KorfarmContentSearchModal";
 import "../styles/admin-study-plan.css";
@@ -46,9 +47,9 @@ export default function StudyPlanCellModal({ cell, scope, asset, onClose, onUpda
     const cId = cell?.cellRefId;
     const sId = cell?.userId || cell?.user_id;
     if (!cId || !sId) return;
-    apiGet(`/v1/admin/students/${sId}/content/${cId}/history`)
+    apiGetCamel(`/v1/admin/students/${sId}/content/${cId}/history`)
       .then(setLearningHistory)
-      .catch(() => setLearningHistory(null));
+      .catch(() => setLearningHistory({ totalAttempts: 0, attempts: [] }));
   }, [cell?.cellId, cell?.cellRefId, asset?.assetType]);
 
   const assetType = asset?.assetType || cell?.assetType;

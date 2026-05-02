@@ -1929,7 +1929,7 @@ class StudyPlanService(
         return AdminCalendarResponse(days)
     }
 
-    /** 4-drilldown */
+    /** 4-drilldown — adminGetCalendar 와 같은 active 매트릭싱 정책 적용 */
     @Transactional(readOnly = true)
     fun adminGetCalendarDate(
         currentUserId: String,
@@ -1941,18 +1941,32 @@ class StudyPlanService(
         if (planIds.isEmpty()) return AdminCalendarDateDetailResponse(emptyList())
 
         val target = LocalDate.parse(date)
-        val schedules = scheduleRepo.findByPlanIdInAndScheduledDateBetween(planIds, target, target)
 
-        val actions = schedules.mapNotNull { s ->
-            val asset = s.assetId?.let { assetRepo.findById(it).orElse(null) } ?: return@mapNotNull null
-            val cells = cellRepo.findByAssetId(asset.id)
-            val userIds = cells.map { it.userId }.toSet()
-            val userMap = if (userIds.isNotEmpty()) userRepo.findAllById(userIds).associateBy { it.id } else emptyMap()
+        // 그 날 active 한 cells (배정~마감 사이) — adminGetCalendar 와 동일한 정책
+        val activeCells = cellRepo.findAll().filter { c ->
+            if (c.planId !in planIds) return@filter false
+            if (c.status == "unassigned") return@filter false
+            val due = c.dueAt?.toLocalDate() ?: return@filter false
+            val updated = c.updatedAt.toLocalDate()
+            val windowStart = if (updated.isBefore(due)) updated else due.minusDays(7)
+            !target.isBefore(windowStart) && !target.isAfter(due)
+        }
+        if (activeCells.isEmpty()) return AdminCalendarDateDetailResponse(emptyList())
+
+        val assetMap = assetRepo.findAllById(activeCells.map { it.assetId }.toSet()).associateBy { it.id }
+        val userIds = activeCells.map { it.userId }.toSet()
+        val userMap = if (userIds.isNotEmpty()) userRepo.findAllById(userIds).associateBy { it.id } else emptyMap()
+
+        // 자산 단위 그룹
+        val grouped = activeCells.groupBy { it.assetId }
+        val actions = grouped.mapNotNull { (assetId, cells) ->
+            val asset = assetMap[assetId] ?: return@mapNotNull null
+            val firstCell = cells.first()
             AdminCalendarAction(
                 assetId = asset.id,
-                label = s.label ?: asset.label,
+                label = firstCell.assignedLabel ?: asset.label,
                 assetType = asset.assetType,
-                dueAt = s.scheduledDate.toString(),
+                dueAt = firstCell.dueAt?.toString(),
                 totalAssigned = cells.size,
                 students = cells.map { cell ->
                     AdminCalendarActionStudent(
@@ -1960,7 +1974,7 @@ class StudyPlanService(
                         userName = userMap[cell.userId]?.name,
                         status = cell.status
                     )
-                }
+                }.sortedBy { it.userName ?: it.userId }
             )
         }
         return AdminCalendarDateDetailResponse(actions)
