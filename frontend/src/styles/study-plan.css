@@ -655,3 +655,46 @@
   color: #999;
   font-size: 0.85rem;
 }
+
+/* ── 매트릭스 필터·정렬 toolbar ── */
+.sp-matrix-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  background: var(--admin-panel-light, #f5f9f3);
+  border: 1px solid rgba(31, 58, 44, 0.12);
+  border-radius: 8px;
+}
+.sp-toolbar-input,
+.sp-toolbar-select {
+  padding: 6px 10px;
+  font-size: 13px;
+  border: 1px solid rgba(31, 58, 44, 0.2);
+  border-radius: 5px;
+  background: #fff;
+  color: var(--admin-ink, #1a2920);
+  font-family: inherit;
+}
+.sp-toolbar-input {
+  min-width: 180px;
+}
+.sp-toolbar-select {
+  cursor: pointer;
+}
+.sp-toolbar-reset {
+  margin-left: auto;
+  padding: 6px 12px;
+  font-size: 12px;
+  background: #fff;
+  color: var(--admin-muted, #555);
+  border: 1px dashed rgba(31, 58, 44, 0.3);
+  border-radius: 5px;
+  cursor: pointer;
+}
+.sp-toolbar-reset:hover {
+  background: #fafafa;
+  color: var(--admin-ink, #1a2920);
+}

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import CellStatusBadge from "./CellStatusBadge";
 import "../styles/study-plan.css";
 
@@ -8,6 +8,25 @@ const ASSET_TYPE_LABELS = {
   test: "테스트",
   writing: "글쓰기",
 };
+
+const STATUS_FILTER_OPTIONS = [
+  { value: "all", label: "전체 상태" },
+  { value: "unassigned", label: "배정 전" },
+  { value: "pending", label: "미수행" },
+  { value: "overdue", label: "미완료" },
+  { value: "done", label: "수행완료" },
+  { value: "reviewed", label: "점검완료" },
+];
+
+// 5단계 라벨 매핑 — DB status → STATUS_FILTER_OPTIONS.value 와 비교용
+function classifyCellStatus(cell) {
+  if (!cell) return "unassigned";
+  if (cell.status === "unassigned") return "unassigned";
+  if (cell.isOverdue) return "overdue";
+  if (cell.status === "reviewed") return "reviewed";
+  if (cell.status === "completed" || cell.status === "passed" || cell.status === "submitted") return "done";
+  return "pending";
+}
 
 // 시각 라벨용 머터리얼 심볼 아이콘 (작업 6)
 const ASSET_TYPE_ICONS = {
@@ -21,10 +40,44 @@ export default function StudyPlanMatrix({
   scopes, assets, cells, admin, onCellClick,
   onAddScope, onDeleteScope, onAddAsset, onDeleteAsset,
 }) {
+  // ── 필터·정렬 toolbar 상태 ──
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [assetTypeFilter, setAssetTypeFilter] = useState("all");
+  const [scopeSearch, setScopeSearch] = useState("");
+  const [scopeSort, setScopeSort] = useState("created");   // 'created' | 'label'
+  const [assetSort, setAssetSort] = useState("created");   // 'created' | 'label' | 'type'
+
   const cellMap = {};
   (cells || []).forEach((c) => {
     cellMap[`${c.scopeId}_${c.assetId}`] = c;
   });
+
+  // 필터·정렬된 scopes / assets — useMemo 로 메모이즈
+  const filteredScopes = useMemo(() => {
+    let arr = (scopes || []);
+    if (scopeSearch.trim()) {
+      const q = scopeSearch.trim().toLowerCase();
+      arr = arr.filter((s) => (s.label || "").toLowerCase().includes(q));
+    }
+    if (scopeSort === "label") {
+      arr = [...arr].sort((a, b) => (a.label || "").localeCompare(b.label || "", "ko"));
+    }
+    // 'created' 는 백엔드 sortOrder ASC 그대로
+    return arr;
+  }, [scopes, scopeSearch, scopeSort]);
+
+  const filteredAssets = useMemo(() => {
+    let arr = (assets || []);
+    if (assetTypeFilter !== "all") {
+      arr = arr.filter((a) => a.assetType === assetTypeFilter);
+    }
+    if (assetSort === "label") {
+      arr = [...arr].sort((a, b) => (a.label || "").localeCompare(b.label || "", "ko"));
+    } else if (assetSort === "type") {
+      arr = [...arr].sort((a, b) => (a.assetType || "").localeCompare(b.assetType || ""));
+    }
+    return arr;
+  }, [assets, assetTypeFilter, assetSort]);
 
   // 인라인 범위 추가
   const [newScopeLabel, setNewScopeLabel] = useState("");
@@ -78,11 +131,73 @@ export default function StudyPlanMatrix({
 
   return (
     <div className="sp-matrix-wrap">
+      {/* ── 필터·정렬 toolbar ── */}
+      <div className="sp-matrix-toolbar">
+        <input
+          type="text"
+          className="sp-toolbar-input"
+          placeholder="🔍 행 라벨 검색"
+          value={scopeSearch}
+          onChange={(e) => setScopeSearch(e.target.value)}
+        />
+        <select
+          className="sp-toolbar-select"
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          title="상태 필터 — 매칭 외 셀은 흐려짐"
+        >
+          {STATUS_FILTER_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>{o.label}</option>
+          ))}
+        </select>
+        <select
+          className="sp-toolbar-select"
+          value={assetTypeFilter}
+          onChange={(e) => setAssetTypeFilter(e.target.value)}
+          title="자산 종류 필터"
+        >
+          <option value="all">전체 자산</option>
+          {Object.entries(ASSET_TYPE_LABELS).map(([k, v]) => (
+            <option key={k} value={k}>{v}</option>
+          ))}
+        </select>
+        <select
+          className="sp-toolbar-select"
+          value={scopeSort}
+          onChange={(e) => setScopeSort(e.target.value)}
+          title="행 정렬"
+        >
+          <option value="created">행: 추가순</option>
+          <option value="label">행: 가나다순</option>
+        </select>
+        <select
+          className="sp-toolbar-select"
+          value={assetSort}
+          onChange={(e) => setAssetSort(e.target.value)}
+          title="열 정렬"
+        >
+          <option value="created">열: 추가순</option>
+          <option value="label">열: 가나다순</option>
+          <option value="type">열: 자산종류</option>
+        </select>
+        {(statusFilter !== "all" || assetTypeFilter !== "all" || scopeSearch || scopeSort !== "created" || assetSort !== "created") && (
+          <button
+            className="sp-toolbar-reset"
+            onClick={() => {
+              setStatusFilter("all");
+              setAssetTypeFilter("all");
+              setScopeSearch("");
+              setScopeSort("created");
+              setAssetSort("created");
+            }}
+          >초기화</button>
+        )}
+      </div>
       <table className={`sp-matrix${admin ? " admin-theme" : ""}`}>
         <thead>
           <tr>
             <th>범위</th>
-            {(assets || []).map((a) => (
+            {filteredAssets.map((a) => (
               <th key={a.id} className="sp-asset-header">
                 <div className="sp-asset-header-content">
                   <span className={`sp-asset-type-badge ${a.assetType || "activity"}`}>
@@ -144,7 +259,7 @@ export default function StudyPlanMatrix({
           </tr>
         </thead>
         <tbody>
-          {(scopes || []).map((scope) => (
+          {filteredScopes.map((scope) => (
             <tr key={scope.id}>
               <th className="sp-scope-header">
                 <span>{scope.label}</span>
@@ -158,12 +273,16 @@ export default function StudyPlanMatrix({
                   </button>
                 )}
               </th>
-              {(assets || []).map((asset) => {
+              {filteredAssets.map((asset) => {
                 const cell = cellMap[`${scope.id}_${asset.id}`];
                 const extraCls = getCellClassName(cell);
+                // status 필터 매칭 안 되면 흐리게
+                const stage = classifyCellStatus(cell);
+                const dimmed = statusFilter !== "all" && stage !== statusFilter;
+                const dimStyle = dimmed ? { opacity: 0.25 } : undefined;
+                const studentUnassigned = !admin && cell?.status === "unassigned";
                 const handleClick = () => {
-                  // 학생 뷰: unassigned 클릭 시 무반응
-                  if (!admin && cell?.status === "unassigned") return;
+                  if (studentUnassigned) return;
                   onCellClick?.(cell, scope, asset);
                 };
                 return (
@@ -172,7 +291,10 @@ export default function StudyPlanMatrix({
                     className={extraCls}
                     onClick={handleClick}
                     title={cell?.status === "partial" && cell?.adminNote ? `사유: ${cell.adminNote}` : undefined}
-                    style={!admin && cell?.status === "unassigned" ? { cursor: "default" } : undefined}
+                    style={{
+                      ...dimStyle,
+                      ...(studentUnassigned ? { cursor: "default" } : null),
+                    }}
                   >
                     {cell ? (
                       <CellStatusBadge
@@ -190,7 +312,7 @@ export default function StudyPlanMatrix({
           ))}
           {admin && onAddScope && (
             <tr className="sp-add-row">
-              <th colSpan={(assets || []).length + 1 + (admin && onAddAsset ? 1 : 0)}>
+              <th colSpan={filteredAssets.length + 1 + (admin && onAddAsset ? 1 : 0)}>
                 {addingScope ? (
                   <div className="sp-add-scope-input-wrap">
                     <input

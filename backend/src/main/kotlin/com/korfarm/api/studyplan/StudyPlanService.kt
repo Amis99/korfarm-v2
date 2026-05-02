@@ -261,11 +261,15 @@ class StudyPlanService(
     @Transactional
     fun addScope(planId: String, req: AddScopeRequest): StudyPlanScopeEntity {
         findPlan(planId)
+        // sortOrder 자동 결정 — 기본은 기존 max+1 (신규 행이 가장 아래로 들어감)
+        val nextSortOrder = scopeRepo.findByPlanIdOrderBySortOrder(planId)
+            .maxOfOrNull { it.sortOrder + 1 } ?: 0
+        val effectiveSortOrder = if (req.sortOrder > 0) req.sortOrder else nextSortOrder
         val scope = StudyPlanScopeEntity(
             id = IdGenerator.newId("sps"),
             planId = planId,
             label = req.label,
-            sortOrder = req.sortOrder
+            sortOrder = effectiveSortOrder
         )
         scopeRepo.save(scope)
         val userIds = resolveAllPlanUserIds(planId)
@@ -312,6 +316,10 @@ class StudyPlanService(
     fun addAsset(planId: String, req: AddAssetRequest): StudyPlanAssetEntity {
         findPlan(planId)
         validateAssetType(req.assetType)
+        // sortOrder 자동 결정 — 기본은 기존 min-1 (신규 열이 가장 좌측으로 들어감)
+        val prevSortOrder = assetRepo.findByPlanIdOrderBySortOrder(planId)
+            .minOfOrNull { it.sortOrder - 1 } ?: 0
+        val effectiveSortOrder = if (req.sortOrder != 0) req.sortOrder else prevSortOrder
         val asset = StudyPlanAssetEntity(
             id = IdGenerator.newId("spa"),
             planId = planId,
@@ -319,7 +327,7 @@ class StudyPlanService(
             label = req.label,
             assetKind = req.assetKind,
             refId = req.refId,
-            sortOrder = req.sortOrder,
+            sortOrder = effectiveSortOrder,
             configJson = req.configJson
         )
         assetRepo.save(asset)
