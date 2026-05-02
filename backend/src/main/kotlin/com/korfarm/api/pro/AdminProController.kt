@@ -80,4 +80,16 @@ class AdminProController(
         val result = proModeService.updateAnswerContent(id, request, userId)
         return ApiResponse(success = true, data = result)
     }
+
+    /** 신규 단순화 — 정답·해설 PDF 파일 ID 저장 (또는 제거 fileId=null) */
+    @PutMapping("/chapters/{id}/answer-pdf")
+    fun setAnswerPdf(
+        @PathVariable id: String,
+        @RequestBody body: Map<String, String?>
+    ): ApiResponse<Map<String, String?>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        val fileId = body["fileId"]?.takeIf { it.isNotBlank() }
+        proModeService.setAnswerPdfFileId(id, fileId)
+        return ApiResponse(success = true, data = mapOf("chapterId" to id, "pdfFileId" to fileId))
+    }
 }

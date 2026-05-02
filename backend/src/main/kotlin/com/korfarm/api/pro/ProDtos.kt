@@ -27,7 +27,9 @@ data class ProChapterItemView(
     val isLocked: Boolean,
     val isCompleted: Boolean,
     val completedAt: LocalDateTime?,
-    val score: Int?
+    val score: Int?,
+    /** type='answer' 의 정답·해설 PDF (신규 단순화). null 이면 옛 contents.contentJson */
+    val pdfFileId: String? = null
 )
 
 data class ProCompleteRequest(
@@ -151,7 +153,9 @@ data class RegisterProChapterTestRequest(
 data class AnswerKeyResponse(
     val contentId: String,
     val title: String,
-    val payload: String?
+    val payload: String?,
+    /** 신규 단순화 — pdfFileId 가 있으면 학생 화면에서 PDF 우선 표시 */
+    val pdfFileId: String? = null
 )
 
 // ─── 관리자용 콘텐츠 현황/정답해설 DTO ───
@@ -188,7 +192,9 @@ data class AdminAnswerContentResponse(
     val contentId: String?,
     val title: String?,
     val payload: String?,
-    val lastUpdatedAt: LocalDateTime?
+    val lastUpdatedAt: LocalDateTime?,
+    /** 신규 단순화 — pdfFileId 가 있으면 PDF 우선 표시 */
+    val pdfFileId: String? = null
 )
 
 data class UpdateAnswerContentRequest(

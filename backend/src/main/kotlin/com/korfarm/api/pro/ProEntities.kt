@@ -69,6 +69,10 @@ class ProChapterItemEntity(
     @Column(name = "content_id")
     var contentId: String? = null,
 
+    /** type='answer' 의 정답·해설 PDF 파일 ID (신규 단순화). null 이면 옛 contents.contentJson 사용 */
+    @Column(name = "pdf_file_id")
+    var pdfFileId: String? = null,
+
     @Column(name = "item_order", nullable = false)
     var itemOrder: Int,
 

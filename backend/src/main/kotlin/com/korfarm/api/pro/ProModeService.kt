@@ -157,7 +157,8 @@ class ProModeService(
                 isLocked = isLocked,
                 isCompleted = progress != null,
                 completedAt = progress?.completedAt,
-                score = progress?.score
+                score = progress?.score,
+                pdfFileId = item.pdfFileId
             )
         }
     }
@@ -369,22 +370,60 @@ class ProModeService(
             ApiException("NOT_FOUND", "챕터를 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
         }
         val answerItems = itemRepo.findByChapterIdAndType(chapterId, "answer")
-        val answerItem = answerItems.firstOrNull { it.contentId != null }
+        // pdfFileId 우선, 없으면 contentId fallback
+        val withPdf = answerItems.firstOrNull { !it.pdfFileId.isNullOrBlank() }
+        if (withPdf != null) {
+            return AdminAnswerContentResponse(
+                contentId = withPdf.contentId,
+                title = withPdf.label,
+                payload = null,
+                lastUpdatedAt = withPdf.updatedAt,
+                pdfFileId = withPdf.pdfFileId
+            )
+        }
 
+        val answerItem = answerItems.firstOrNull { it.contentId != null }
         if (answerItem?.contentId == null) {
-            return AdminAnswerContentResponse(null, null, null, null)
+            return AdminAnswerContentResponse(null, null, null, null, null)
         }
 
         val content = contentRepository.findById(answerItem.contentId!!).orElse(null)
-            ?: return AdminAnswerContentResponse(null, null, null, null)
+            ?: return AdminAnswerContentResponse(null, null, null, null, null)
 
         val version = contentVersionRepository.findTopByContentIdOrderByCreatedAtDesc(content.id)
         return AdminAnswerContentResponse(
             contentId = content.id,
             title = content.title,
             payload = version?.contentJson,
-            lastUpdatedAt = version?.updatedAt ?: content.updatedAt
+            lastUpdatedAt = version?.updatedAt ?: content.updatedAt,
+            pdfFileId = null
         )
+    }
+
+    /** 신규 단순화 — type='answer' item 의 pdf_file_id 직접 저장. 없으면 row 생성. */
+    @Transactional
+    fun setAnswerPdfFileId(chapterId: String, fileId: String?) {
+        val chapter = chapterRepo.findById(chapterId).orElseThrow {
+            ApiException("NOT_FOUND", "챕터를 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
+        }
+        val existing = itemRepo.findByChapterIdAndType(chapterId, "answer").firstOrNull()
+        if (existing != null) {
+            existing.pdfFileId = fileId
+            existing.updatedAt = LocalDateTime.now()
+            itemRepo.save(existing)
+        } else {
+            // type='answer' row 가 아예 없으면 신규 생성
+            val nextOrder = (itemRepo.findByChapterIdOrderByItemOrderAsc(chapterId).maxOfOrNull { it.itemOrder + 1 }) ?: 0
+            itemRepo.save(ProChapterItemEntity(
+                id = IdGenerator.newId("pci"),
+                chapterId = chapter.id,
+                type = "answer",
+                contentId = null,
+                pdfFileId = fileId,
+                itemOrder = nextOrder,
+                label = "정답·해설"
+            ))
+        }
     }
 
     // ─── 관리자: 정답해설 저장 ───

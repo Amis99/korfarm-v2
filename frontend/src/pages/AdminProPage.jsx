@@ -71,13 +71,14 @@ function AdminProPage() {
   const [allContents, setAllContents] = useState([]);
   const [createCategory, setCreateCategory] = useState("");
 
-  /* 정답해설 탭 — 비주얼 편집을 기본 모드로 */
-  const [answerMode, setAnswerMode] = useState("visual");
+  /* 정답해설 탭 — 단순 PDF 업로드로 단순화 (비주얼/JSON 에디터 폐기) */
+  const [answerMode, setAnswerMode] = useState("upload");
   const [answerJson, setAnswerJson] = useState("");
   const [answerTitle, setAnswerTitle] = useState("");
   const [answerLoading, setAnswerLoading] = useState(false);
   const [answerSaving, setAnswerSaving] = useState(false);
   const [answerContentId, setAnswerContentId] = useState(null);
+  const [answerPdfFileId, setAnswerPdfFileId] = useState(null);
 
   /* 테스트 탭 */
   const [testSubTab, setTestSubTab] = useState("editor");
@@ -197,13 +198,16 @@ function AdminProPage() {
     load();
   };
 
-  /* ═══ 정답해설 로드 ═══ */
+  /* ═══ 정답해설 로드 — pdfFileId 우선 (단순화), 없으면 옛 JSON fallback ═══ */
   const loadAnswerData = async (ch) => {
     setAnswerLoading(true);
     setAnswerContentId(null);
+    setAnswerPdfFileId(null);
     try {
       const ans = await apiGet(`/v1/admin/pro/chapters/${ch.id}/answer-content`);
-      if (ans.contentId || ans.content_id) {
+      const pdf = ans?.pdfFileId || ans?.pdf_file_id || null;
+      setAnswerPdfFileId(pdf);
+      if (ans?.contentId || ans?.content_id) {
         setAnswerContentId(ans.contentId || ans.content_id);
         setAnswerTitle(ans.title || "");
         let payload = ans.payload;
@@ -215,11 +219,53 @@ function AdminProPage() {
         setAnswerJson(ANSWER_TEMPLATE);
         setAnswerTitle(`모범답안 — ${ch.title}`);
       }
-    } catch {
+    } catch (e) {
+      console.error("정답해설 로드 실패", e);
       setAnswerJson(ANSWER_TEMPLATE);
       setAnswerTitle(`모범답안 — ${ch.title}`);
     }
     setAnswerLoading(false);
+  };
+
+  /* ═══ 정답·해설 PDF 업로드 (단순화) ═══ */
+  const handleAnswerPdfUpload = async (file) => {
+    if (!selectedChapter || !file) return;
+    setAnswerSaving(true);
+    try {
+      // presign → upload → fileId 백엔드 등록
+      const presign = await apiPost("/v1/files/presign", {
+        purpose: "pro_answer_pdf",
+        filename: file.name,
+        mime: file.type || "application/pdf",
+        size: file.size,
+      });
+      const fileId = presign?.fileId;
+      if (!fileId) throw new Error("presign 응답에 fileId 가 없습니다");
+      const { apiUploadFile } = await import("../utils/api");
+      await apiUploadFile(fileId, file);
+      await apiPut(`/v1/admin/pro/chapters/${selectedChapter.id}/answer-pdf`, { fileId });
+      setAnswerPdfFileId(fileId);
+    } catch (e) {
+      console.error("정답·해설 PDF 업로드 실패", e);
+      alert("PDF 업로드 실패: " + (e?.message || ""));
+    } finally {
+      setAnswerSaving(false);
+    }
+  };
+
+  const handleAnswerPdfRemove = async () => {
+    if (!selectedChapter) return;
+    if (!window.confirm("정답·해설 PDF 를 제거할까요?")) return;
+    setAnswerSaving(true);
+    try {
+      await apiPut(`/v1/admin/pro/chapters/${selectedChapter.id}/answer-pdf`, { fileId: null });
+      setAnswerPdfFileId(null);
+    } catch (e) {
+      console.error("정답·해설 PDF 제거 실패", e);
+      alert("제거 실패: " + (e?.message || ""));
+    } finally {
+      setAnswerSaving(false);
+    }
   };
 
   /* ═══ 영상 URL 저장 ═══ */
@@ -943,50 +989,52 @@ function AdminProPage() {
 
   function renderAnswerTab() {
     if (answerLoading) return <p className="ap-muted">불러오는 중...</p>;
+    const pdfUrl = answerPdfFileId
+      ? `${import.meta.env.VITE_API_BASE || ""}/v1/files/${answerPdfFileId}/download${sessionStorage.getItem("korfarm_token") ? `?token=${sessionStorage.getItem("korfarm_token")}` : ""}`
+      : null;
     return (
       <div className="ap-answer-section">
-        <div className="ap-answer-mode-bar">
-          <button className={`ap-mode-btn ${answerMode === "preview" ? "active" : ""}`} onClick={() => setAnswerMode("preview")}>미리보기</button>
-          <button className={`ap-mode-btn ${answerMode === "visual" ? "active" : ""}`} onClick={() => setAnswerMode("visual")}>비주얼 편집</button>
-          <button className={`ap-mode-btn ${answerMode === "edit" ? "active" : ""}`} onClick={() => setAnswerMode("edit")}>JSON 편집</button>
-          <button className={`ap-mode-btn ${answerMode === "upload" ? "active" : ""}`} onClick={() => setAnswerMode("upload")}>파일 업로드</button>
-          {answerContentId && <span className="ap-answer-id">ID: {answerContentId.slice(0, 16)}...</span>}
+        <div className="ap-answer-card" style={{ padding: 20, background: "var(--admin-panel-light, #f5f9f3)", borderRadius: 8 }}>
+          <h3 style={{ margin: "0 0 12px", fontSize: 15 }}>📄 정답·해설 PDF</h3>
+          {answerPdfFileId ? (
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              <p className="ap-muted" style={{ margin: 0, fontSize: 13 }}>
+                PDF 가 업로드되어 있습니다. 학생 화면에서 즉시 표시됩니다.
+              </p>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                <button className="ts-btn ts-btn-primary" onClick={() => window.open(pdfUrl, "_blank", "noopener,noreferrer")}>
+                  📄 PDF 보기
+                </button>
+                <label className="ts-btn" style={{ cursor: "pointer" }}>
+                  🔄 다른 파일로 교체
+                  <input type="file" accept="application/pdf,.pdf" hidden
+                    onChange={(e) => e.target.files?.[0] && handleAnswerPdfUpload(e.target.files[0])}
+                    disabled={answerSaving} />
+                </label>
+                <button className="ts-btn" onClick={handleAnswerPdfRemove} disabled={answerSaving}
+                  style={{ color: "#c0392b" }}>
+                  🗑 제거
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <label className="ap-drop-zone" style={{ display: "block", cursor: "pointer", textAlign: "center", padding: 24, border: "2px dashed rgba(31,58,44,0.2)", borderRadius: 8, background: "#fff" }}>
+                <span className="material-symbols-outlined ap-drop-icon" style={{ fontSize: 32 }}>upload_file</span>
+                <p style={{ margin: "8px 0 0" }}>PDF 파일을 선택하세요</p>
+                <input type="file" accept="application/pdf,.pdf" hidden
+                  onChange={(e) => e.target.files?.[0] && handleAnswerPdfUpload(e.target.files[0])}
+                  disabled={answerSaving} />
+              </label>
+              {answerContentId && (
+                <p className="ap-muted" style={{ marginTop: 12, fontSize: 12, color: "#888" }}>
+                  ⚠ 옛 비주얼/JSON 정답해설 데이터가 남아 있습니다. PDF 업로드 시 PDF 가 우선 표시됩니다.
+                </p>
+              )}
+              {answerSaving && <p className="ap-muted" style={{ marginTop: 8, fontSize: 12 }}>업로드 중...</p>}
+            </div>
+          )}
         </div>
-
-        {answerMode === "preview" && (
-          <div className="ap-answer-preview">
-            {answerTitle && <h3 className="ap-preview-title">{answerTitle}</h3>}
-            {renderAnswerPreview()}
-          </div>
-        )}
-
-        {answerMode === "visual" && renderAnswerVisualEditor()}
-
-        {answerMode === "edit" && (
-          <div className="ap-answer-edit">
-            <label className="ap-field-label">
-              제목
-              <input value={answerTitle} onChange={(e) => setAnswerTitle(e.target.value)} />
-            </label>
-            <textarea className="ap-json-editor" value={answerJson} onChange={(e) => setAnswerJson(e.target.value)} rows={20} spellCheck={false} />
-            <div className="ap-actions-right">
-              <button className="ts-btn ts-btn-primary" onClick={handleSaveAnswer} disabled={answerSaving}>
-                {answerSaving ? "저장 중..." : "저장"}
-              </button>
-            </div>
-          </div>
-        )}
-
-        {answerMode === "upload" && (
-          <div className="ap-answer-upload">
-            <div className="ap-drop-zone">
-              <span className="material-symbols-outlined ap-drop-icon">upload_file</span>
-              <p>JSON 파일을 선택하세요</p>
-              <input type="file" accept=".json,application/json" onChange={handleAnswerFileUpload} />
-            </div>
-            <p className="ap-muted">업로드 후 비주얼 편집 또는 JSON 편집 탭에서 확인하고 저장하세요.</p>
-          </div>
-        )}
       </div>
     );
   }
@@ -1087,22 +1135,22 @@ function AdminProPage() {
             </label>
           </div>
           <div className="ap-test-sub-tabs">
-            <button className={`ap-mode-btn ${testSubTab === "editor" ? "active" : ""}`} onClick={() => setTestSubTab("editor")}>비주얼 에디터</button>
+            <button
+              className="ts-btn ts-btn-primary ts-btn-sm"
+              onClick={() => selectedTestPaperId && navigate(`/admin/tests/${selectedTestPaperId}/edit?from=/admin/pro`)}
+              disabled={!selectedTestPaperId}
+              title="시험 관리의 비주얼 에디터로 이동 (작업 후 자동 복귀)"
+            >
+              📝 테스트 편집 (외부 에디터)
+            </button>
             <button className={`ap-mode-btn ${testSubTab === "pdf" ? "active" : ""}`} onClick={() => setTestSubTab("pdf")}>PDF 미리보기</button>
           </div>
           <div className="ap-test-io-btns">
-            <button className="ts-btn ts-btn-outline ts-btn-sm" onClick={handleTestJsonDownload} disabled={testQuestions.length === 0}>
-              <span className="material-symbols-outlined">download</span> JSON
-            </button>
-            <label className="ts-btn ts-btn-outline ts-btn-sm ap-file-upload-btn">
-              <span className="material-symbols-outlined">upload</span> JSON
-              <input type="file" accept=".json" onChange={handleTestJsonUpload} hidden />
-            </label>
             {testQuestionsModified && <span className="ap-unsaved-badge">미저장</span>}
           </div>
         </div>
 
-        {testSubTab === "editor" && renderTestEditor()}
+        {/* 자체 테스트 비주얼 에디터 폐기 — 시험 관리 에디터 재사용 */}
         {testSubTab === "pdf" && renderTestPdf()}
 
         {/* 버전 등록 */}

@@ -91,11 +91,22 @@ class ProController(
             throw ApiException("LOCKED", "기본 학습 4개를 모두 완료해야 모범답안을 볼 수 있습니다.", HttpStatus.FORBIDDEN)
         }
 
-        // answer 아이템의 콘텐츠 조회
+        // answer 아이템 조회 — pdfFileId 우선, 없으면 contents.contentJson fallback
         val items = proModeService.listChapterItems(userId, chapterId)
         val answerItem = items.find { it.type == "answer" }
             ?: throw ApiException("NOT_FOUND", "모범답안 아이템이 없습니다.", HttpStatus.NOT_FOUND)
 
+        // 우선: pdfFileId 가 있으면 PDF 단순화 응답
+        if (!answerItem.pdfFileId.isNullOrBlank()) {
+            return ApiResponse(success = true, data = AnswerKeyResponse(
+                contentId = answerItem.contentId ?: "",
+                title = answerItem.label ?: "정답·해설",
+                payload = null,
+                pdfFileId = answerItem.pdfFileId
+            ))
+        }
+
+        // Fallback: 옛 contents.contentJson 방식
         val contentId = answerItem.contentId
             ?: throw ApiException("NOT_FOUND", "모범답안 콘텐츠가 연결되지 않았습니다.", HttpStatus.NOT_FOUND)
 
@@ -108,7 +119,8 @@ class ProController(
         return ApiResponse(success = true, data = AnswerKeyResponse(
             contentId = contentId,
             title = content.title,
-            payload = version.contentJson
+            payload = version.contentJson,
+            pdfFileId = null
         ))
     }
 }

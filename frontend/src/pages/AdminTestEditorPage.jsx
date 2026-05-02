@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams, Link } from "react-router-dom";
 import AdminLayout from "../components/AdminLayout";
 import TestPaperDocEditor from "../components/editor/testpaper/TestPaperDocEditor";
 import { useTestEditor } from "../hooks/useTestEditor";
@@ -18,6 +18,11 @@ const KIND_LABEL = { diagnostic: "진단", chapter: "챕터", misc: "기타" };
 export default function AdminTestEditorPage() {
   const { testId } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const backPath = searchParams.get("from") || "/admin/tests";
+  const backLabel = backPath.startsWith("/admin/pro") ? "← 프로 모드 관리"
+    : backPath.startsWith("/admin/study-plan") ? "← 학습 계획표"
+    : "← 시험 관리";
   const editor = useTestEditor(testId === "undefined" ? null : testId);
   const [showJson, setShowJson] = useState(false);
   const [jsonText, setJsonText] = useState("");
@@ -41,7 +46,7 @@ export default function AdminTestEditorPage() {
   }, [editor.meta, metaForm]);
 
   if (!testId || testId === "undefined") {
-    navigate("/admin/tests");
+    navigate(backPath);
     return null;
   }
 
@@ -96,7 +101,7 @@ export default function AdminTestEditorPage() {
         <div style={{ padding: 24, color: "var(--text)" }}>
           {editor.error}
           <div style={{ marginTop: 12 }}>
-            <Link to="/admin/tests" className="ts-back-link">← 시험 관리</Link>
+            <Link to={backPath} className="ts-back-link">{backLabel}</Link>
           </div>
         </div>
       </AdminLayout>
@@ -111,8 +116,8 @@ export default function AdminTestEditorPage() {
       <div className="ce-shell" style={{ flexDirection: "column" }}>
         {/* 상단 툴바 — 콘텐츠 에디터와 동일 */}
         <div className="ce-toolbar">
-          <Link to="/admin/tests" className="ts-back-link" style={{ marginRight: 12, fontSize: 13 }}>
-            ← 시험 관리
+          <Link to={backPath} className="ts-back-link" style={{ marginRight: 12, fontSize: 13 }}>
+            {backLabel}
           </Link>
           <div className="ce-toolbar-title">
             <strong>{meta.title || "(제목 없음)"}</strong>

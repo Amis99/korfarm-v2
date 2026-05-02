@@ -194,6 +194,38 @@ function ProAnswerKeyPage() {
 
   const sections =
     data?.payload?.payload?.sections || data?.payload?.sections || [];
+  const pdfFileId = data?.pdfFileId || data?.pdf_file_id || null;
+
+  // PDF 단순화 — pdfFileId 가 있으면 iframe 으로 PDF 표시 (기존 비주얼 무시)
+  if (pdfFileId) {
+    const token = sessionStorage.getItem("korfarm_token");
+    const apiBase = import.meta.env.VITE_API_BASE || "";
+    const pdfUrl = `${apiBase}/v1/files/${pdfFileId}/download${token ? `?token=${token}` : ""}`;
+    return (
+      <div className="pro">
+        <div className="pro-topbar no-print">
+          <div className="pro-topbar-inner">
+            <Link to={`/pro-mode/chapter/${chapterId}`} className="pro-back">
+              <span className="material-symbols-outlined">arrow_back</span>
+              학습 목록
+            </Link>
+            <h1 className="pro-topbar-title">{data?.title || "정답과 해설"}</h1>
+            <a href={pdfUrl} download className="pro-back" style={{ marginLeft: "auto" }}>
+              <span className="material-symbols-outlined">download</span>
+              다운로드
+            </a>
+          </div>
+        </div>
+        <div className="pro-body" style={{ padding: 0 }}>
+          <iframe
+            src={pdfUrl}
+            title={data?.title || "정답과 해설"}
+            style={{ width: "100%", height: "calc(100vh - 60px)", border: "none", background: "#525659" }}
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="pro">
