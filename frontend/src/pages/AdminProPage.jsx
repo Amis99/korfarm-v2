@@ -8,7 +8,6 @@ import Pagination from "../components/Pagination";
 import usePagination from "../hooks/usePagination";
 import "../styles/admin-detail.css";
 import "../styles/admin-pro.css";
-import CompetencyVectorEditor from "../components/editor/dailyquiz/CompetencyVectorEditor";
 
 /* ─── 상수 ─── */
 const COURSE_LEVELS = [
@@ -98,9 +97,30 @@ function AdminProPage() {
   const [testPaperId, setTestPaperId] = useState("");
   const [testPapers, setTestPapers] = useState([]);
 
-  /* 챕터 목록 페이지네이션 */
-  const { page: chapterPage, setPage: setChapterPage, totalPages: chapterTotalPages, paged: pagedChapters } = usePagination(chapters, 15);
-  useEffect(() => { setChapterPage(1); }, [levelFilter, setChapterPage]);
+  /* 검색·정렬·필터 */
+  const [chapterSearch, setChapterSearch] = useState("");
+  const [chapterSort, setChapterSort] = useState("number"); // number | titleAsc
+
+  const filteredChapters = useMemo(() => {
+    let arr = chapters.slice();
+    if (chapterSearch.trim()) {
+      const q = chapterSearch.trim().toLowerCase();
+      arr = arr.filter((c) =>
+        (c.title || "").toLowerCase().includes(q) ||
+        String(c.chapterNumber ?? c.chapter_number ?? "").includes(q)
+      );
+    }
+    if (chapterSort === "titleAsc") {
+      arr.sort((a, b) => (a.title || "").localeCompare(b.title || "", "ko"));
+    } else {
+      arr.sort((a, b) => (a.globalChapterNumber ?? a.global_chapter_number ?? 0) - (b.globalChapterNumber ?? b.global_chapter_number ?? 0));
+    }
+    return arr;
+  }, [chapters, chapterSearch, chapterSort]);
+
+  /* 챕터 목록 페이지네이션 — 필터·정렬 결과 기준 */
+  const { page: chapterPage, setPage: setChapterPage, totalPages: chapterTotalPages, paged: pagedChapters } = usePagination(filteredChapters, 15);
+  useEffect(() => { setChapterPage(1); }, [levelFilter, chapterSearch, chapterSort, setChapterPage]);
 
   /* 챕터 안 콘텐츠 목록 — 페이지네이션 */
   const contentItemsForPaging = useMemo(() => {
@@ -346,50 +366,6 @@ function AdminProPage() {
     };
     reader.readAsText(file);
     e.target.value = "";
-  };
-
-  /* ═══ 정답해설 미리보기 렌더 ═══ */
-  const renderAnswerPreview = () => {
-    if (!answerJson || answerJson === ANSWER_TEMPLATE) {
-      return <p className="ap-muted">저장된 정답해설이 없습니다. JSON 편집 탭에서 작성하세요.</p>;
-    }
-    let data;
-    try { data = JSON.parse(answerJson); } catch { return <p className="ap-error">JSON 파싱 실패</p>; }
-    if (!data) return <p className="ap-muted">데이터가 비어있습니다.</p>;
-
-    const sections = data?.sections || [];
-    if (sections.length === 0) {
-      return (
-        <div>
-          <p className="ap-muted">sections 구조가 아닙니다. 원본 JSON:</p>
-          <pre className="ap-raw-json">{answerJson}</pre>
-        </div>
-      );
-    }
-
-    return sections.map((section, si) => (
-      <div key={si} className="ap-preview-section">
-        <h4 className="ap-preview-section-title">{section.title}</h4>
-        {section.groups?.map((group, gi) => (
-          <div key={gi} className="ap-preview-group">
-            <h5 className="ap-preview-group-title">{group.groupTitle}</h5>
-            {group.items?.map((item, ii) => (
-              <div key={ii} className="ap-preview-item">
-                <div className="ap-preview-item-header">
-                  <span className="ap-preview-num">{item.number}</span>
-                  {item.type && <span className="ap-preview-type">{item.type}</span>}
-                  {item.points && <span className="ap-preview-pts">{item.points}점</span>}
-                </div>
-                {item.problem && <p className="ap-preview-problem">{item.problem}</p>}
-                {item.answer && <div className="ap-preview-answer"><strong>정답:</strong> {item.answer}</div>}
-                {item.modelAnswer && <div className="ap-preview-model"><strong>모범답안:</strong> {item.modelAnswer}</div>}
-                {item.explanation && <div className="ap-preview-explanation"><strong>해설:</strong> {item.explanation}</div>}
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-    ));
   };
 
   /* ═══ 테스트 문항 관리 ═══ */
@@ -701,25 +677,43 @@ function AdminProPage() {
       <div className="admin-detail-wrap">
         <div className="admin-detail-header">
           <h1>프로 모드 관리</h1>
-          <div className="admin-detail-header-actions">
+        </div>
+
+        <div className="admin-detail-toolbar admin-content-toolbar">
+          <div className="admin-detail-search">
+            <span className="material-symbols-outlined">search</span>
+            <input
+              placeholder="챕터 제목·번호 검색"
+              value={chapterSearch}
+              onChange={(e) => setChapterSearch(e.target.value)}
+            />
+          </div>
+          <div className="admin-detail-filters">
             <select
-              className="ap-level-dropdown"
+              className="admin-type-filter-select"
               value={levelFilter}
               onChange={(e) => setLevelFilter(e.target.value)}
-              style={{
-                padding: "8px 12px",
-                border: "1px solid var(--admin-stroke)",
-                borderRadius: 8,
-                background: "var(--admin-panel)",
-                color: "var(--admin-ink)",
-                fontSize: 13,
-                fontFamily: "inherit",
-              }}
             >
               {COURSE_LEVELS.map((lv) => (
                 <option key={lv.id} value={lv.id}>{lv.name}</option>
               ))}
             </select>
+            <select
+              className="admin-type-filter-select"
+              value={chapterSort}
+              onChange={(e) => setChapterSort(e.target.value)}
+            >
+              <option value="number">정렬: 챕터 번호</option>
+              <option value="titleAsc">정렬: 제목 가나다</option>
+            </select>
+            {(chapterSearch || chapterSort !== "number") && (
+              <button
+                type="button"
+                className="admin-filter"
+                onClick={() => { setChapterSearch(""); setChapterSort("number"); }}
+                style={{ borderStyle: "dashed" }}
+              >초기화</button>
+            )}
           </div>
         </div>
 
@@ -1043,83 +1037,6 @@ function AdminProPage() {
     );
   }
 
-  /* ── 정답해설 비주얼 에디터 ── */
-  function renderAnswerVisualEditor() {
-    const data = getAnswerData();
-    const sections = data?.sections || [];
-    return (
-      <div className="ap-answer-visual">
-        <label className="ap-field-label">
-          제목
-          <input value={answerTitle} onChange={(e) => setAnswerTitle(e.target.value)} />
-        </label>
-
-        {sections.map((section, si) => (
-          <div key={si} className="ap-ve-section">
-            <div className="ap-ve-section-header">
-              <input className="ap-ve-section-title" value={section.title || ""} placeholder="섹션 제목"
-                onChange={(e) => updateSection(si, { title: e.target.value })} />
-              <button className="ap-icon-btn ap-icon-btn-danger" title="섹션 삭제" onClick={() => removeSection(si)}>
-                <span className="material-symbols-outlined">delete</span>
-              </button>
-            </div>
-
-            {(section.groups || []).map((group, gi) => (
-              <div key={gi} className="ap-ve-group">
-                <div className="ap-ve-group-header">
-                  <input className="ap-ve-group-title" value={group.groupTitle || ""} placeholder="그룹 제목"
-                    onChange={(e) => updateGroup(si, gi, { groupTitle: e.target.value })} />
-                  <button className="ap-icon-btn ap-icon-btn-danger" title="그룹 삭제" onClick={() => removeGroup(si, gi)}>
-                    <span className="material-symbols-outlined">close</span>
-                  </button>
-                </div>
-
-                <table className="ts-table ap-ve-items-table">
-                  <thead>
-                    <tr><th style={{width:50}}>번호</th><th style={{width:70}}>유형</th><th style={{width:50}}>배점</th><th style={{width:60}}>정답</th><th>해설</th><th style={{width:40}}></th></tr>
-                  </thead>
-                  <tbody>
-                    {(group.items || []).map((item, ii) => (
-                      <tr key={ii}>
-                        <td><input className="ap-ve-input-sm" value={item.number || ""} onChange={(e) => updateItem(si, gi, ii, { number: e.target.value })} /></td>
-                        <td>
-                          <select className="ap-ve-input-sm" value={item.type || "객관식"} onChange={(e) => updateItem(si, gi, ii, { type: e.target.value })}>
-                            <option value="객관식">객관식</option><option value="서술형">서술형</option>
-                          </select>
-                        </td>
-                        <td><input className="ap-ve-input-sm" type="number" min={1} value={item.points || 0} onChange={(e) => updateItem(si, gi, ii, { points: Number(e.target.value) })} /></td>
-                        <td><input className="ap-ve-input-sm" value={item.answer || ""} onChange={(e) => updateItem(si, gi, ii, { answer: e.target.value })} placeholder={item.type === "서술형" ? "서술" : "번호"} /></td>
-                        <td><input className="ap-ve-input" value={item.explanation || ""} onChange={(e) => updateItem(si, gi, ii, { explanation: e.target.value })} placeholder="해설 내용" /></td>
-                        <td>
-                          <button className="ap-icon-btn ap-icon-btn-danger" onClick={() => removeItem(si, gi, ii)}>
-                            <span className="material-symbols-outlined" style={{fontSize:16}}>close</span>
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-
-                <button className="ap-add-link" onClick={() => addItem(si, gi)}>+ 문항 추가</button>
-              </div>
-            ))}
-            <button className="ap-add-link" onClick={() => addGroup(si)}>+ 그룹 추가</button>
-          </div>
-        ))}
-
-        <button className="ts-btn ts-btn-outline ts-btn-sm" onClick={addSection} style={{ marginTop: 12 }}>
-          <span className="material-symbols-outlined">add</span> 섹션 추가
-        </button>
-
-        <div className="ap-actions-right" style={{ marginTop: 16 }}>
-          <button className="ts-btn ts-btn-primary" onClick={handleSaveAnswer} disabled={answerSaving}>
-            {answerSaving ? "저장 중..." : "저장"}
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   /* ══════════════ 탭 3: 테스트 관리 ══════════════ */
   function renderTestTab() {
     return (
@@ -1174,275 +1091,6 @@ function AdminProPage() {
             </label>
             <button className="ts-btn ts-btn-primary ts-btn-sm" onClick={handleRegisterTest}>등록</button>
           </div>
-        </div>
-      </div>
-    );
-  }
-
-  /* ── 비주얼 에디터 — 문서 편집기 스타일 (카드 누적 인라인 편집) ── */
-  function renderTestEditor() {
-    if (!selectedTestPaperId) return <p className="ap-muted" style={{ padding: 20 }}>시험지를 선택하세요.</p>;
-    if (testQuestionsLoading) return <p className="ap-muted">문항을 불러오는 중...</p>;
-
-    if (testJsonMode) {
-      return (
-        <div className="ap-test-json-edit">
-          <textarea className="ap-json-editor" value={testJsonText} onChange={(e) => setTestJsonText(e.target.value)} rows={24} spellCheck={false} />
-          <div className="ap-actions-right">
-            <button className="ts-btn ts-btn-primary" onClick={() => {
-              try {
-                const parsed = JSON.parse(testJsonText);
-                const qs = Array.isArray(parsed) ? parsed : parsed.questions;
-                if (!Array.isArray(qs)) { alert("questions 배열을 찾을 수 없습니다."); return; }
-                setTestQuestions(qs); setTestQuestionsModified(true); setTestJsonMode(false);
-              } catch { alert("JSON 파싱 실패"); }
-            }}>JSON 적용</button>
-            <button className="ts-btn ts-btn-outline" onClick={() => setTestJsonMode(false)}>취소</button>
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <div className="ap-test-doc">
-        {testQuestions.length === 0 && (
-          <p className="ap-muted" style={{ padding: 20 }}>아직 문항이 없습니다. 아래 [+] 로 첫 문항 추가.</p>
-        )}
-
-        {testQuestions.map((q, idx) => (
-          <div key={idx}>
-            <button type="button" className="ap-test-add-between" onClick={() => addQuestion(idx)}>
-              + 여기에 문항 추가
-            </button>
-            {renderTestQuestionCard(q, idx)}
-          </div>
-        ))}
-
-        <button type="button" className="ap-test-add-between ap-test-add-end" onClick={() => addQuestion(testQuestions.length)}>
-          + 마지막에 문항 추가
-        </button>
-
-        <div className="ap-test-bottom-actions">
-          <div className="ap-test-bottom-left">
-            <button className="ts-btn ts-btn-outline ts-btn-sm"
-              onClick={() => { setTestJsonText(JSON.stringify(testQuestions, null, 2)); setTestJsonMode(true); }}>
-              <span className="material-symbols-outlined">code</span> JSON 편집
-            </button>
-          </div>
-          <div className="ap-test-bottom-right">
-            <span className="ap-q-count">{testQuestions.length}문항 / {testQuestions.reduce((s, q) => s + (q.points || 0), 0)}점</span>
-            <button className="ts-btn ts-btn-primary ts-btn-sm" onClick={handleSaveTestQuestions} disabled={testQuestionsSaving || !testQuestionsModified}>
-              {testQuestionsSaving ? "저장 중..." : "문항 저장"}
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  /* ── 단일 문항 카드 (인라인 편집) ── */
-  function renderTestQuestionCard(q, idx) {
-    const choices = q.choices || [];
-    const choiceExplanations = q.choiceExplanations || q.choice_explanations || {};
-    const isEssay = q.type === "서술형";
-    return (
-      <div className="ap-test-q-card">
-        <div className="ap-test-q-head">
-          <span className="ap-test-q-num">문항 {q.number}</span>
-          <select value={q.type || "객관식"}
-            onChange={(e) => updateQuestion(idx, { type: e.target.value })}>
-            <option value="객관식">객관식</option>
-            <option value="서술형">서술형</option>
-          </select>
-          <input type="text" placeholder="역량 (예: 사실적 이해)" value={q.domain || ""}
-            onChange={(e) => updateQuestion(idx, { domain: e.target.value })} style={{ width: 140 }} />
-          <input type="text" placeholder="세부 역량" value={q.subDomain || q.sub_domain || ""}
-            onChange={(e) => updateQuestion(idx, { subDomain: e.target.value })} style={{ width: 120 }} />
-          <label style={{ fontSize: 11 }}>배점
-            <input type="number" min={1} value={q.points || 0}
-              onChange={(e) => updateQuestion(idx, { points: Number(e.target.value) })} style={{ width: 50, marginLeft: 4 }} />
-          </label>
-          <div className="dq-fb-blank-move">
-            <button type="button" onClick={() => moveQuestion(idx, idx - 1)} disabled={idx === 0}>▲</button>
-            <button type="button" onClick={() => moveQuestion(idx, idx + 1)} disabled={idx >= testQuestions.length - 1}>▼</button>
-          </div>
-          <span style={{ flex: 1 }} />
-          <button type="button" className="ap-icon-btn ap-icon-btn-danger" onClick={() => deleteQuestion(idx)}>
-            <span className="material-symbols-outlined">delete</span>
-          </button>
-        </div>
-
-        <div className="ap-test-q-body">
-          <div className="dq-section-label">지문 (선택, 마크다운)</div>
-          <textarea className="ap-test-q-passage" rows={3} value={q.passage || ""}
-            onChange={(e) => updateQuestion(idx, { passage: e.target.value || null })}
-            placeholder="지문이 있으면 입력 (없으면 비워두세요)" />
-
-          <div className="dq-section-label">발문 (stem)</div>
-          <textarea className="ap-test-q-stem" rows={2} value={q.stem || ""}
-            onChange={(e) => updateQuestion(idx, { stem: e.target.value })}
-            placeholder="문제 발문" />
-
-          {!isEssay ? (
-            <>
-              <div className="dq-section-label">선택지 — 라디오로 정답 지정</div>
-              {choices.map((c, ci) => (
-                <div key={ci} className={`ap-test-choice-row ${q.correctAnswer === c.id ? "is-answer" : ""}`}>
-                  <label className="dq-mc-radio">
-                    <input type="radio" name={`tq-${idx}-ans`}
-                      checked={q.correctAnswer === c.id || q.correct_answer === c.id}
-                      onChange={() => updateQuestion(idx, { correctAnswer: c.id })} />
-                    <span className="dq-mc-num">{ci + 1}</span>
-                  </label>
-                  <input type="text" value={c.text || ""}
-                    onChange={(e) => updateQuestionChoice(idx, ci, { text: e.target.value })}
-                    placeholder="선택지" style={{ flex: 1 }} />
-                  <input type="text" value={choiceExplanations[c.id] || ""}
-                    onChange={(e) => updateChoiceExplanation(idx, c.id, e.target.value)}
-                    placeholder="이 선택지 해설 (선택)" style={{ flex: 1, fontSize: 12 }} />
-                  <button type="button" className="dq-mc-del"
-                    onClick={() => removeQuestionChoice(idx, ci)}>×</button>
-                </div>
-              ))}
-              <button type="button" className="dq-add-btn" onClick={() => addQuestionChoice(idx)}>+ 선택지 추가</button>
-            </>
-          ) : (
-            <>
-              <div className="dq-section-label">서술형 정답·해설</div>
-              <textarea className="ap-test-q-stem" rows={2} value={q.modelAnswer || q.model_answer || ""}
-                onChange={(e) => updateQuestion(idx, { modelAnswer: e.target.value })}
-                placeholder="모범 답안" />
-              <input type="text" value={Array.isArray(q.essayKeywords) ? q.essayKeywords.join(", ") : (q.essayKeywords || q.essay_keywords || "")}
-                onChange={(e) => updateQuestion(idx, { essayKeywords: e.target.value.split(",").map((s) => s.trim()).filter(Boolean) })}
-                placeholder="핵심 키워드 (쉼표 구분)" style={{ width: "100%", marginTop: 4 }} />
-              <textarea className="ap-test-q-stem" rows={3} value={q.essayRubric || q.essay_rubric || ""}
-                onChange={(e) => updateQuestion(idx, { essayRubric: e.target.value })}
-                placeholder="채점 기준 (rubric)" />
-            </>
-          )}
-
-          <div className="dq-section-label">출제 의도 (intent)</div>
-          <input type="text" value={q.intent || ""}
-            onChange={(e) => updateQuestion(idx, { intent: e.target.value })}
-            placeholder="출제 의도" style={{ width: "100%" }} />
-
-          {/* 10대 역량 벡터 — 정답 시 누적 + 선택지별 약점 */}
-          <div className="dq-section-label" style={{ marginTop: 14 }}>10대 역량 벡터</div>
-          <CompetencyVectorEditor
-            value={q.competencyVector}
-            onChange={(v) => updateQuestion(idx, { competencyVector: v })}
-            label="정답 시 누적될 역량 가중치 (테스트 가중치=10)"
-            color="correct"
-          />
-          {!isEssay && choices.length > 0 && (
-            <div className="dq-section-label" style={{ marginTop: 8 }}>선택지별 약점 벡터</div>
-          )}
-          {!isEssay && choices.map((c, ci) => {
-            if ((q.correctAnswer || q.correct_answer) === c.id) return null;
-            return (
-              <CompetencyVectorEditor
-                key={`wv-${c.id || ci}`}
-                value={c.wrongVector}
-                onChange={(v) => {
-                  const nextChoices = [...choices];
-                  nextChoices[ci] = { ...nextChoices[ci], wrongVector: v };
-                  updateQuestion(idx, { choices: nextChoices });
-                }}
-                label={`선택지 ${ci + 1} (${(c.text || "").slice(0, 20)}${(c.text || "").length > 20 ? "…" : ""}) 약점`}
-                color="wrong"
-                compact
-              />
-            );
-          })}
-        </div>
-      </div>
-    );
-  }
-
-  /* ── 문항 편집 패널 (지문/문제/선택지/정답/해설 분리) ── */
-  function renderQuestionEditPanel() {
-    return (
-      <div className="ap-q-edit-panel">
-        <h4>문항 {editQ.number} 편집</h4>
-
-        {/* 기본 정보 */}
-        <div className="ap-q-section-label">기본 정보</div>
-        <div className="ap-q-edit-grid">
-          <label>유형
-            <select value={editQ.type} onChange={(e) => setEditQ({ ...editQ, type: e.target.value })}>
-              <option value="객관식">객관식</option>
-              <option value="서술형">서술형</option>
-            </select>
-          </label>
-          <label>역량
-            <input value={editQ.domain || ""} onChange={(e) => setEditQ({ ...editQ, domain: e.target.value })} />
-          </label>
-          <label>배점
-            <input type="number" min={1} value={editQ.points} onChange={(e) => setEditQ({ ...editQ, points: Number(e.target.value) })} />
-          </label>
-        </div>
-
-        {/* 지문 */}
-        <div className="ap-q-section-label">지문</div>
-        <textarea className="ap-q-textarea" value={editQ.passage || ""} onChange={(e) => setEditQ({ ...editQ, passage: e.target.value || null })} rows={4} placeholder="독해 지문이 있는 경우 입력" />
-
-        {/* 문제 */}
-        <div className="ap-q-section-label">문제</div>
-        <textarea className="ap-q-textarea" value={editQ.stem || ""} onChange={(e) => setEditQ({ ...editQ, stem: e.target.value })} rows={3} placeholder="문제 본문" />
-
-        {editQ.type === "객관식" && (
-          <>
-            {/* 선택지 */}
-            <div className="ap-q-section-label">선택지</div>
-            <div className="ap-q-choices-grid">
-              {(editQ.choices || []).map((ch, ci) => (
-                <div key={ci} className="ap-q-choice-row">
-                  <span className="ap-q-choice-num">{ch.id || ci + 1}</span>
-                  <input value={ch.text} onChange={(e) => {
-                    const next = [...(editQ.choices || [])]; next[ci] = { ...next[ci], text: e.target.value };
-                    setEditQ({ ...editQ, choices: next });
-                  }} placeholder="선택지 텍스트" />
-                </div>
-              ))}
-              <button className="ap-add-link" onClick={() => {
-                const nextId = String((editQ.choices || []).length + 1);
-                setEditQ({ ...editQ, choices: [...(editQ.choices || []), { id: nextId, text: "" }] });
-              }}>+ 선택지 추가</button>
-            </div>
-
-            {/* 정답 */}
-            <div className="ap-q-section-label">정답</div>
-            <input className="ap-q-answer-input" value={editQ.correctAnswer || editQ.correct_answer || ""} onChange={(e) => setEditQ({ ...editQ, correctAnswer: e.target.value })} placeholder="예: 2" />
-
-            {/* 해설 */}
-            <div className="ap-q-section-label">선택지별 해설</div>
-            <div className="ap-q-choices-grid">
-              {(editQ.choices || []).map((ch, ci) => (
-                <div key={ci} className="ap-q-choice-row">
-                  <span className="ap-q-choice-num">{ch.id || ci + 1}</span>
-                  <input value={(editQ.choiceExplanations || editQ.choice_explanations || {})[ch.id || String(ci + 1)] || ""} onChange={(e) => {
-                    const key = ch.id || String(ci + 1);
-                    const expl = { ...(editQ.choiceExplanations || editQ.choice_explanations || {}), [key]: e.target.value };
-                    setEditQ({ ...editQ, choiceExplanations: expl });
-                  }} placeholder="해설" />
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-
-        {editQ.type === "서술형" && (
-          <>
-            <div className="ap-q-section-label">모범답안</div>
-            <textarea className="ap-q-textarea" value={editQ.modelAnswer || editQ.model_answer || ""} onChange={(e) => setEditQ({ ...editQ, modelAnswer: e.target.value })} rows={3} />
-            <div className="ap-q-section-label">채점 기준</div>
-            <textarea className="ap-q-textarea" value={editQ.essayRubric || editQ.essay_rubric || ""} onChange={(e) => setEditQ({ ...editQ, essayRubric: e.target.value })} rows={2} />
-          </>
-        )}
-
-        <div className="ap-q-edit-actions">
-          <button className="ts-btn ts-btn-primary" onClick={applyEditQuestion}>적용</button>
-          <button className="ts-btn ts-btn-outline" onClick={cancelEditQuestion}>취소</button>
         </div>
       </div>
     );
