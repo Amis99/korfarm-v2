@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import AdminLayout from "../components/AdminLayout";
 import TestPaperRenderer from "../components/test-paper/TestPaperRenderer";
+import TestPaperEditor from "../components/test-paper/TestPaperEditor";
 import { apiGet, apiPut, apiPost } from "../utils/adminApi";
 
 /**
@@ -19,6 +20,7 @@ export default function AdminTestPaperDesignPage() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [meta, setMeta] = useState(null);
+  const [mode, setMode] = useState("edit"); // edit | preview
 
   const load = async (t = type) => {
     if (!testId) return;
@@ -129,6 +131,29 @@ export default function AdminTestPaperDesignPage() {
                   }}
                 >정답·해설</button>
               </div>
+              <div style={{
+                display: "inline-flex", border: "1px solid rgba(31,58,44,0.18)",
+                borderRadius: 8, overflow: "hidden",
+              }}>
+                <button
+                  onClick={() => setMode("edit")}
+                  style={{
+                    padding: "6px 14px", fontSize: 13,
+                    background: mode === "edit" ? "var(--admin-accent, #2d6a4f)" : "#fff",
+                    color: mode === "edit" ? "#fff" : "var(--admin-ink)",
+                    border: "none", cursor: "pointer",
+                  }}
+                >편집</button>
+                <button
+                  onClick={() => setMode("preview")}
+                  style={{
+                    padding: "6px 14px", fontSize: 13,
+                    background: mode === "preview" ? "var(--admin-accent, #2d6a4f)" : "#fff",
+                    color: mode === "preview" ? "#fff" : "var(--admin-ink)",
+                    border: "none", borderLeft: "1px solid rgba(31,58,44,0.18)", cursor: "pointer",
+                  }}
+                >미리보기</button>
+              </div>
               <button className="admin-detail-btn" onClick={handleAutoFill} disabled={saving}>
                 자동 채우기
               </button>
@@ -142,11 +167,11 @@ export default function AdminTestPaperDesignPage() {
           </div>
           {error && <div style={{ color: "#c0392b", marginTop: 8 }}>{error}</div>}
           <div style={{ marginTop: 8, fontSize: 12, color: "var(--admin-muted)" }}>
-            ※ 1차 단계: 자동 채우기·미리보기·인쇄·저장 가능. 페이지 추가·블록 편집·이미지 업로드 등 정밀 편집은 후속 단계에서 추가됩니다.
+            ※ 편집 모드: 페이지 추가·삭제·블록 편집·이미지 업로드 가능. 미리보기 모드: 학생이 보게 될 시험지 그대로. 인쇄 버튼은 새 탭에서 인쇄 미리보기 + 자동 인쇄 다이얼로그 호출.
           </div>
         </div>
 
-        {/* 미리보기 */}
+        {/* 편집/미리보기 영역 */}
         <div className="admin-detail-card" style={{ padding: 0, overflow: "hidden" }}>
           {loading ? (
             <p style={{ padding: 24, textAlign: "center", color: "var(--admin-muted)" }}>불러오는 중...</p>
@@ -157,6 +182,8 @@ export default function AdminTestPaperDesignPage() {
                 자동 채우기로 시작하기
               </button>
             </div>
+          ) : mode === "edit" ? (
+            <TestPaperEditor layout={layout} onChange={setLayout} />
           ) : (
             <TestPaperRenderer layout={layout} editable={false} />
           )}

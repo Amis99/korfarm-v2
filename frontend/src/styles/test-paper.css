@@ -256,3 +256,322 @@
     page-break-after: auto;
   }
 }
+
+/* ── Editor (Phase 2) ── */
+.tpe-root {
+  display: flex;
+  flex-direction: column;
+}
+
+.tpe-page-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 12px;
+  background: var(--admin-panel-light, #f5f9f3);
+  border-bottom: 1px solid rgba(31,58,44,0.12);
+}
+.tpe-page-tab {
+  position: relative;
+  padding: 6px 14px;
+  border: 1px solid rgba(31,58,44,0.18);
+  background: #fff;
+  color: var(--admin-ink, #1a2920);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 40px;
+}
+.tpe-page-tab.active {
+  background: var(--admin-accent, #2d6a4f);
+  color: #fff;
+  border-color: var(--admin-accent, #2d6a4f);
+}
+.tpe-page-tab.add {
+  background: rgba(45,106,79,0.08);
+  color: var(--admin-accent-strong, #1f4a37);
+  border-style: dashed;
+}
+.tpe-page-tab-actions {
+  display: inline-flex;
+  gap: 4px;
+  margin-left: 6px;
+  font-size: 11px;
+}
+.tpe-page-tab-actions span {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.18);
+}
+.tpe-page-tab-actions span:hover {
+  background: rgba(255,255,255,0.4);
+}
+
+.tpe-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(31,58,44,0.12);
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+.tpe-toolbar-label {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--admin-ink, #1a2920);
+}
+.tpe-toolbar-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(31,58,44,0.12);
+}
+.tpe-tb-btn {
+  padding: 5px 12px;
+  border: 1px solid rgba(31,58,44,0.18);
+  background: #fff;
+  color: var(--admin-ink, #1a2920);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+}
+.tpe-tb-btn.primary {
+  background: var(--admin-accent, #2d6a4f);
+  color: #fff;
+  border-color: var(--admin-accent, #2d6a4f);
+}
+
+.tpe-add-menu {
+  position: relative;
+  margin-left: auto;
+}
+.tpe-add-list {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 10;
+  background: #fff;
+  border: 1px solid rgba(31,58,44,0.2);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  min-width: 160px;
+}
+.tpe-add-list li {
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.tpe-add-list li:hover {
+  background: var(--admin-panel-light, #f5f9f3);
+}
+
+/* 편집 캔버스 */
+.tpe-canvas {
+  background: #efeae3;
+  padding: 24px;
+}
+.tpe-page-edit {
+  /* 편집 시 약간의 여유 */
+}
+
+/* 블록 wrap */
+.tpe-block-wrap {
+  position: relative;
+  border: 1px dashed transparent;
+  padding: 2px;
+  margin-bottom: 4pt;
+}
+.tpe-block-wrap:hover {
+  border-color: rgba(45,106,79,0.4);
+  background: rgba(45,106,79,0.02);
+}
+.tpe-block-controls {
+  position: absolute;
+  top: -10px;
+  right: 4px;
+  display: none;
+  gap: 2px;
+  background: #fff;
+  border: 1px solid rgba(31,58,44,0.2);
+  border-radius: 6px;
+  padding: 2px;
+  z-index: 4;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+.tpe-block-wrap:hover .tpe-block-controls {
+  display: flex;
+}
+.tpe-block-controls button {
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.tpe-block-controls button:hover {
+  background: rgba(45,106,79,0.12);
+}
+.tpe-block-controls button.danger {
+  color: #c0392b;
+}
+.tpe-block-controls button.danger:hover {
+  background: rgba(192,57,43,0.12);
+}
+.tpe-block-controls button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* contentEditable */
+.tpe-ce {
+  outline: none;
+  min-height: 1.6em;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: background 0.1s;
+}
+.tpe-ce:hover {
+  background: rgba(45,106,79,0.04);
+}
+.tpe-ce:focus {
+  background: rgba(45,106,79,0.08);
+}
+.tpe-ce[data-placeholder]:empty::before {
+  content: attr(data-placeholder);
+  color: rgba(120,120,120,0.5);
+  font-style: italic;
+}
+
+.tpe-edit-header h2 {
+  outline: none;
+}
+
+.tpe-empty-page {
+  text-align: center;
+  color: #888;
+  padding: 60pt 0;
+  border: 2px dashed #ccc;
+  border-radius: 6px;
+  margin: 12pt 0;
+}
+
+/* 문제 블록 편집 */
+.tpe-q-no {
+  border: 1px solid #ccc;
+  padding: 2px 4px;
+  font-size: 12pt;
+  font-weight: 700;
+  border-radius: 3px;
+  margin-right: 6pt;
+}
+.tpe-q-points {
+  border: 1px solid #ccc;
+  padding: 2px 4px;
+  font-size: 10pt;
+  border-radius: 3px;
+  margin-left: 8pt;
+}
+.tpe-question .tpr-question-stem {
+  display: flex;
+  gap: 4pt;
+  align-items: center;
+}
+.tpe-mini-del {
+  margin-left: auto;
+  width: 18px;
+  height: 18px;
+  border: none;
+  background: rgba(192,57,43,0.12);
+  color: #c0392b;
+  border-radius: 3px;
+  font-size: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.tpe-add-choice {
+  margin-top: 6pt;
+  padding: 4px 12px;
+  border: 1px dashed rgba(45,106,79,0.5);
+  background: transparent;
+  color: var(--admin-accent-strong, #1f4a37);
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+/* 이미지 편집 */
+.tpe-image-placeholder {
+  padding: 30pt;
+  background: #f5f5f5;
+  border: 2px dashed #ccc;
+  border-radius: 6px;
+  text-align: center;
+}
+.tpe-add-img-btn {
+  padding: 8px 16px;
+  background: var(--admin-accent, #2d6a4f);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.tpe-image-controls {
+  display: flex;
+  gap: 6px;
+  margin-top: 6pt;
+  font-size: 11px;
+}
+.tpe-image-controls select,
+.tpe-image-controls button {
+  padding: 2px 6px;
+  font-size: 11px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: #fff;
+}
+
+.tpe-unknown {
+  background: #fff5e6;
+  padding: 8pt;
+  font-size: 10pt;
+  font-family: monospace;
+}
+
+/* 인쇄 시 편집 UI 모두 숨김 */
+@media print {
+  .tpe-page-nav, .tpe-toolbar, .tpe-block-controls,
+  .tpe-add-list, .tpe-image-controls,
+  .tpe-add-choice, .tpe-mini-del,
+  .tpe-q-no, .tpe-q-points {
+    display: none !important;
+  }
+  .tpe-block-wrap {
+    border: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+  .tpe-canvas {
+    background: #fff;
+    padding: 0;
+  }
+  .tpe-ce {
+    background: transparent !important;
+  }
+}
