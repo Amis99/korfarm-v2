@@ -88,11 +88,11 @@ export default function AdminTestPaperDesignPage() {
     }
   }, [testId, type]);
 
-  // html 변경 시 1.5s debounce 후 미리보기 자동 갱신
+  // html 변경 시 3s debounce 후 미리보기 자동 갱신 (Chrome 호출 빈도 감소)
   const handleHtmlChange = (next) => {
     setHtml(next);
     if (previewDebounceRef.current) clearTimeout(previewDebounceRef.current);
-    previewDebounceRef.current = setTimeout(() => compilePreview(next), 1500);
+    previewDebounceRef.current = setTimeout(() => compilePreview(next), 3000);
   };
 
   // 첫 로드 후 초기 미리보기
@@ -225,7 +225,7 @@ export default function AdminTestPaperDesignPage() {
         </div>
 
         <div style={{
-          display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)",
+          display: "grid", gridTemplateColumns: "minmax(0, 3fr) minmax(0, 2fr)",
           gap: 12, alignItems: "stretch",
         }}>
           {/* 좌: 워드 편집기 */}

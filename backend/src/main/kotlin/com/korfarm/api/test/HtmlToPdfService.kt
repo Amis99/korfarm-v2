@@ -35,7 +35,12 @@ class HtmlToPdfService(
                 "--print-to-pdf=${pdfFile.toAbsolutePath()}",
                 "--print-to-pdf-no-header",
                 "--no-pdf-header-footer",
-                "--virtual-time-budget=10000",  // Paged.js 등 JS 처리 대기
+                "--disable-extensions",
+                "--disable-plugins",
+                "--disable-background-networking",
+                "--disable-default-apps",
+                "--mute-audio",
+                "--virtual-time-budget=2000",  // 2초만 — 정적 HTML 이라 JS 대기 불필요
                 "file://${htmlFile.toAbsolutePath()}"
             ).redirectErrorStream(true)
 
