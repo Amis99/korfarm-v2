@@ -727,8 +727,8 @@ function AdminProPage() {
         ) : chapters.length === 0 ? (
           <div className="ts-center"><p>등록된 챕터가 없습니다.</p></div>
         ) : (
-          <div className="ap-card">
-            <table className="ts-table ap-chapter-table">
+          <div className="admin-detail-card admin-single-card edit-mode">
+            <table className="admin-detail-table ap-chapter-table">
               <thead>
                 <tr>
                   <th className="ap-col-num">#</th>
@@ -803,7 +803,7 @@ function AdminProPage() {
           <p className="ap-muted" style={{ padding: 20 }}>아직 학습이 없습니다. [+ 학습 추가] 로 시작하세요.</p>
         ) : (
           <>
-            <table className="ts-table ap-content-table">
+            <table className="admin-detail-table ap-content-table">
               <thead>
                 <tr>
                   <th>제목</th>
