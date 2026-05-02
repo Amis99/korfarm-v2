@@ -32,7 +32,7 @@ class TypstBuilder(
         val fontStack = if (hasHcrFont) {
             "(\"HCR Batang\", \"Noto Serif CJK KR\", \"Noto Sans CJK KR\")"
         } else {
-            "(\"Noto Serif CJK KR\", \"Noto Sans CJK KR\", \"Noto Sans KR\")"
+            "(\"Noto Serif CJK KR\", \"Noto Sans CJK KR\")"
         }
 
         val sb = StringBuilder()
@@ -52,16 +52,14 @@ class TypstBuilder(
         buildHeader(sb)
         sb.appendLine()
 
-        // 본문 — 2단 auto
-        sb.appendLine("""#show: rest => columns(2, gutter: 8mm, rest)""")
-        sb.appendLine()
-
+        // 본문 — 2단 컨테이너 (#columns 명시 블록 — pagebreak 는 컨테이너 밖에서만 호출)
+        sb.appendLine("""#columns(2, gutter: 8mm)[""")
         buildBody(sb)
+        sb.appendLine("""]""")
         sb.appendLine()
 
-        // 정답·해설 — 새 페이지
+        // 정답·해설 — 새 페이지 (컨테이너 밖이라 pagebreak OK)
         sb.appendLine("""#pagebreak()""")
-        // 새 페이지에서 columns 영향 끊고 1단으로 정답표
         buildAnswerSection(sb)
 
         return sb.toString()
@@ -139,10 +137,10 @@ class TypstBuilder(
         sb.appendLine("""  *${no}.* ${MarkupToTypst.inline(stem)} #h(0.4em) #text(size: 0.85em, fill: rgb("#888"))[(${points}점)]""")
         sb.appendLine("""  #v(4pt)""")
 
-        // 보기 박스
+        // 보기 박스 — `<보기>` 의 `<` `>` 는 typst 라벨 문법과 충돌하므로 escape
         if (boxContent != null) {
             sb.appendLine("""  #bogi-box[""")
-            sb.appendLine("""    *<보기>*""")
+            sb.appendLine("""    *\<보기\>*""")
             sb.appendLine()
             sb.appendLine(MarkupToTypst.toTypst(boxContent, indent = "    "))
             sb.appendLine("""  ]""")
@@ -151,7 +149,7 @@ class TypstBuilder(
         // 조건 박스
         if (conditionContent != null) {
             sb.appendLine("""  #condition-box[""")
-            sb.appendLine("""    *<조건>*""")
+            sb.appendLine("""    *\<조건\>*""")
             sb.appendLine()
             sb.appendLine(MarkupToTypst.toTypst(conditionContent, indent = "    "))
             sb.appendLine("""  ]""")
@@ -179,7 +177,7 @@ class TypstBuilder(
         sb.appendLine("""= 정답·해설""")
         sb.appendLine()
 
-        // 정답표 (1단 — 2단 흐름 끝낸 후)
+        // 정답표 (1단)
         sb.appendLine("""#table(""")
         sb.appendLine("""  columns: 4,""")
         sb.appendLine("""  align: center,""")
@@ -200,12 +198,13 @@ class TypstBuilder(
         sb.appendLine(""")""")
         sb.appendLine("""#v(10pt)""")
 
-        // 해설 (2단)
-        sb.appendLine("""#show: rest => columns(2, gutter: 8mm, rest)""")
+        // 해설 (2단 컨테이너)
+        sb.appendLine("""#columns(2, gutter: 8mm)[""")
         questions.sortedBy(::numberOf).forEach { q ->
             buildExplanationBlock(sb, q)
             sb.appendLine("""#v(10pt)""")
         }
+        sb.appendLine("""]""")
     }
 
     private fun buildExplanationBlock(sb: StringBuilder, q: Map<String, Any?>) {
