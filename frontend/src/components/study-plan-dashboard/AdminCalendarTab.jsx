@@ -120,34 +120,31 @@ export default function AdminCalendarTab({ classId }) {
     }
   };
 
-  const handleStudentClick = async (item, st) => {
+  const handleStudentClick = (item, st) => {
     const cellId = st.cellId || st.cell_id;
     if (!cellId) return;
-    try {
-      // 셀 상세 + 매트릭스의 scope/asset 정보를 받아 모달 띄움
-      // 빠른 접근: cellAction 등은 cell 자체 응답에 없으니 매트릭스 행에서 cell 단건 조회로 대체
-      // 단순화: cellId 만 있는 가짜 cell 으로 모달 띄우고, 모달이 추가 데이터 자체 로드
-      setCellModal({
-        cell: {
-          cellId,
-          userId: st.userId,
-          status: st.status,
-          score: st.score,
-          isOverdue: st.isOverdue,
-          cellRefId: item.refId || item.assetId,
-        },
-        scope: { label: "캘린더" },
-        asset: {
-          assetType: item.assetType || item.type,
-          label: item.label,
-          refId: item.refId,
-        },
-      });
-    } catch (e) {
-      // fallback navigate
-      const userId = st.userId;
-      if (userId) navigate(`/admin/students/${userId}`);
-    }
+    // 자산 타입은 item.assetType 우선 (백엔드 신규 필드)
+    const aType = item.assetType || (item.type !== "asset" ? item.type : null);
+    setCellModal({
+      cell: {
+        cellId,
+        userId: st.userId,
+        status: st.status,
+        score: st.score,
+        submissionCount: st.submissionCount || 0,
+        isOverdue: st.isOverdue,
+        cellRefId: st.cellRefId || null,
+        // assetType 도 cell 에 같이 — StudyPlanCellModal 의 fallback 분기에 사용
+        assetType: aType,
+      },
+      scope: { label: "캘린더" },
+      asset: {
+        assetType: aType,
+        label: item.label,
+        // 글쓰기 셀은 cellRefId(=topicKey) 가 핵심. 콘텐츠/테스트는 cellRefId(=ref id)
+        refId: st.cellRefId || item.refId,
+      },
+    });
   };
 
   return (

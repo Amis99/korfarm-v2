@@ -520,7 +520,9 @@ data class AdminCalendarItem(
     val label: String,
     val totalAssigned: Int,
     val pending: Int,
-    val completed: Int
+    val completed: Int,
+    /** 자산 종류 (korfarm/test/writing/activity) — 자산 단위 그룹일 때만 채워짐 */
+    val assetType: String? = null
 )
 
 data class AdminCalendarDateDetailResponse(
@@ -543,5 +545,7 @@ data class AdminCalendarActionStudent(
     val status: String,
     val isOverdue: Boolean = false,
     val cellId: String,
-    val score: Int? = null
+    val cellRefId: String? = null,
+    val score: Int? = null,
+    val submissionCount: Int = 0
 )

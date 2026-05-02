@@ -1915,13 +1915,15 @@ class StudyPlanService(
                 val total = cells.size
                 val completed = cells.count { it.status in DONE }
                 val pending = cells.count { it.status in PENDING || it.status == "submitted" }
+                val asset = assetMap[assetId]
                 AdminCalendarItem(
                     type = "asset",
                     refId = assetId,
                     label = sublist.first().assetLabel,
                     totalAssigned = total,
                     pending = pending,
-                    completed = completed
+                    completed = completed,
+                    assetType = asset?.assetType
                 )
             }
             AdminCalendarDay(date = date, count = items.sumOf { it.totalAssigned }, items = items)
@@ -2000,7 +2002,9 @@ class StudyPlanService(
                         status = cell.status,
                         isOverdue = isOverdue,
                         cellId = cell.id,
-                        score = cell.score
+                        cellRefId = cell.cellRefId,
+                        score = cell.score,
+                        submissionCount = cell.submissionCount
                     )
                 }.sortedBy { it.userName ?: it.userId }
             )

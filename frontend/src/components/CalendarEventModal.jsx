@@ -28,14 +28,19 @@ export default function CalendarEventModal({ date, events, onClose }) {
           </button>
         </div>
         <ul className="sp-event-list">
-          {events.map((ev) => {
-            const info = EVENT_TYPE_MAP[ev.eventType] || {
-              label: ev.eventType,
+          {events.map((ev, i) => {
+            // 두 가지 형식 모두 처리:
+            // (A) StudyPlanEvent: { eventType, refLabel, memo }
+            // (B) cell 매트릭싱(act): { cellId, label, status, isDone }
+            const typeKey = ev.eventType || ev.status;
+            const info = EVENT_TYPE_MAP[typeKey] || {
+              label: typeKey || "액션",
               icon: "event",
-              color: "#999",
+              color: "#666",
             };
+            const mainLabel = ev.label || ev.refLabel || info.label;
             return (
-              <li key={ev.id} className="sp-event-item">
+              <li key={ev.id || ev.cellId || i} className="sp-event-item">
                 <span
                   className="material-symbols-outlined sp-event-icon"
                   style={{ color: info.color }}
@@ -46,9 +51,7 @@ export default function CalendarEventModal({ date, events, onClose }) {
                   <span className="sp-event-type" style={{ color: info.color }}>
                     {info.label}
                   </span>
-                  {ev.refLabel && (
-                    <span className="sp-event-ref">{ev.refLabel}</span>
-                  )}
+                  <span className="sp-event-ref">{mainLabel}</span>
                   {ev.memo && (
                     <span className="sp-event-memo">{ev.memo}</span>
                   )}
