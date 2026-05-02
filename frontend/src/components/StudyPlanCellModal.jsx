@@ -318,6 +318,37 @@ export default function StudyPlanCellModal({ cell, scope, asset, onClose, onUpda
           </div>
         )}
 
+        {/* ── 국어농장 복수 배정 콘텐츠 리스트 (assignment > 1 일 때만 노출) ── */}
+        {isKorfarm && (cell.assignments?.length || 0) > 1 && (
+          <div style={{ marginBottom: 12 }}>
+            <div style={{ fontSize: 12, color: "var(--admin-muted, #666)", marginBottom: 6, fontWeight: 600 }}>
+              배정된 콘텐츠 ({cell.assignments.filter((a) => a.status === "completed").length}/{cell.assignments.length} 완료)
+            </div>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 4 }}>
+              {cell.assignments.map((a) => (
+                <li
+                  key={a.id}
+                  style={{
+                    display: "flex", alignItems: "center", gap: 8,
+                    padding: "6px 10px",
+                    background: a.status === "completed" ? "#d4edda" : "#f5f9f3",
+                    border: `1px solid ${a.status === "completed" ? "#28a745" : "rgba(45,106,79,0.2)"}`,
+                    borderRadius: 6, fontSize: 12,
+                  }}
+                >
+                  <span style={{ flex: 1 }}>
+                    {a.status === "completed" && <span style={{ marginRight: 6 }}>✓</span>}
+                    {a.assignedLabel || a.refId}
+                  </span>
+                  <span style={{ fontSize: 10, color: a.status === "completed" ? "#155724" : "#666" }}>
+                    {a.status === "completed" ? "완료" : a.status === "in_progress" ? "진행중" : "미수행"}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         {/* ── 국어농장 학습 히스토리 ── */}
         {isKorfarm && cell.status !== "unassigned" && (
           <div style={{ marginBottom: 12, padding: 12, background: "#f5f9f3", borderRadius: 8, fontSize: 13 }}>

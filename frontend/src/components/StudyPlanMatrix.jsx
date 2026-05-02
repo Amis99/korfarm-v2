@@ -297,10 +297,19 @@ export default function StudyPlanMatrix({
                     }}
                   >
                     {cell ? (
-                      <CellStatusBadge
-                        status={cell.status}
-                        isOverdue={cell.isOverdue}
-                      />
+                      <>
+                        <CellStatusBadge
+                          status={cell.status}
+                          isOverdue={cell.isOverdue}
+                        />
+                        {asset.assetType === "korfarm" && (cell.assignments?.length || 0) > 1 && (
+                          <div style={{ fontSize: 10, color: "#555", marginTop: 2 }}>
+                            {cell.assignments.filter((a) => a.status === "completed").length}
+                            /
+                            {cell.assignments.length}
+                          </div>
+                        )}
+                      </>
                     ) : (
                       <span style={{ color: "#bbb", fontSize: "0.75rem" }}>-</span>
                     )}

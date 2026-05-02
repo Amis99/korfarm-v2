@@ -29,6 +29,7 @@ class StudyPlanService(
     private val assetRepo: StudyPlanAssetRepository,
     private val cellRepo: StudyPlanCellRepository,
     private val cellFileRepo: StudyPlanCellFileRepository,
+    private val cellAssignmentRepo: StudyPlanCellAssignmentRepository,
     private val scheduleRepo: StudyPlanScheduleRepository,
     private val eventRepo: StudyPlanEventRepository,
     private val classMembershipRepo: ClassMembershipRepository,
@@ -381,18 +382,71 @@ class StudyPlanService(
         val cellsByUser = allCells.groupBy { it.userId }
         val userMap = if (userIds.isNotEmpty()) userRepo.findAllById(userIds).associateBy { it.id } else emptyMap()
 
+        // korfarm 자산 셀의 assignment 일괄 조회 — 복수 배정 진행률용
+        val assets = assetRepo.findByPlanIdOrderBySortOrder(planId)
+        val korfarmAssetIds = assets.filter { it.assetType == "korfarm" }.map { it.id }.toSet()
+        val korfarmCellIds = allCells.filter { it.assetId in korfarmAssetIds }.map { it.id }
+        val assignmentsByCellId: Map<String, List<StudyPlanCellAssignmentEntity>> =
+            if (korfarmCellIds.isNotEmpty())
+                cellAssignmentRepo.findByCellIdIn(korfarmCellIds).groupBy { it.cellId }
+            else emptyMap()
+
+        // 셀 카운트 헬퍼 — korfarm 셀은 assignment 단위, 다른 자산은 cell 단위
+        fun countForCell(
+            cell: StudyPlanCellEntity,
+            isKorfarm: Boolean,
+            cellMatch: (StudyPlanCellEntity) -> Boolean,
+            assignMatch: (StudyPlanCellAssignmentEntity) -> Boolean
+        ): Pair<Int, Int> {
+            return if (isKorfarm) {
+                val assigns = assignmentsByCellId[cell.id]
+                if (assigns.isNullOrEmpty()) {
+                    Pair(1, if (cellMatch(cell)) 1 else 0)
+                } else {
+                    Pair(assigns.size, assigns.count { assignMatch(it) })
+                }
+            } else {
+                Pair(1, if (cellMatch(cell)) 1 else 0)
+            }
+        }
+
         return userIds.map { userId ->
             val cells = cellsByUser[userId] ?: emptyList()
+            var total = 0; var completed = 0; var pending = 0; var submitted = 0
+            var unassigned = 0; var inProgress = 0; var partial = 0
+            cells.forEach { cell ->
+                val isKorfarm = cell.assetId in korfarmAssetIds
+                val (t, c) = countForCell(cell, isKorfarm, { it.status in setOf("completed", "passed") }, { it.status == "completed" })
+                total += t; completed += c
+
+                if (isKorfarm) {
+                    val assigns = assignmentsByCellId[cell.id] ?: emptyList()
+                    if (assigns.isEmpty()) {
+                        if (cell.status == "pending") pending += 1
+                        if (cell.status == "in_progress") inProgress += 1
+                        if (cell.status == "unassigned") unassigned += 1
+                    } else {
+                        pending += assigns.count { it.status == "pending" }
+                        inProgress += assigns.count { it.status == "in_progress" }
+                    }
+                } else {
+                    if (cell.status == "pending") pending += 1
+                    if (cell.status in listOf("submitted", "scored")) submitted += 1
+                    if (cell.status == "unassigned") unassigned += 1
+                    if (cell.status == "in_progress") inProgress += 1
+                    if (cell.status == "partial") partial += 1
+                }
+            }
             StudentProgressResponse(
                 userId = userId,
                 userName = userMap[userId]?.name,
-                totalCells = cells.size,
-                completedCells = cells.count { it.status in listOf("completed", "passed") },
-                pendingCells = cells.count { it.status == "pending" },
-                submittedCells = cells.count { it.status in listOf("submitted", "scored") },
-                unassignedCells = cells.count { it.status == "unassigned" },
-                inProgressCells = cells.count { it.status == "in_progress" },
-                partialCells = cells.count { it.status == "partial" }
+                totalCells = total,
+                completedCells = completed,
+                pendingCells = pending,
+                submittedCells = submitted,
+                unassignedCells = unassigned,
+                inProgressCells = inProgress,
+                partialCells = partial
             )
         }
     }
@@ -471,6 +525,13 @@ class StudyPlanService(
             if (testSubmissionRepo.findByTestIdAndUserId(testId, userId) != null) cell.id else null
         }.toSet()
 
+        // 국어농장 셀의 assignment 일괄 조회 (복수 배정)
+        val korfarmCellIds = cells.filter { assetMap[it.assetId]?.assetType == "korfarm" }.map { it.id }
+        val assignmentsByCellId: Map<String, List<StudyPlanCellAssignmentEntity>> =
+            if (korfarmCellIds.isNotEmpty())
+                cellAssignmentRepo.findByCellIdIn(korfarmCellIds).groupBy { it.cellId }
+            else emptyMap()
+
         val cellResponses = cells.map { cell ->
             val asset = assetMap[cell.assetId]
             val action = buildCellAction(
@@ -482,7 +543,11 @@ class StudyPlanService(
                 testSubmissionCellIds = testSubmissionCellIds,
                 isAdmin = isAdmin
             )
-            cell.toResponse(asset, action)
+            val assigns = assignmentsByCellId[cell.id]
+                ?.sortedWith(compareBy({ it.sortOrder }, { it.createdAt }))
+                ?.map { it.toResponse() }
+                ?: emptyList()
+            cell.toResponse(asset, action, assigns)
         }
         // 시험 자산의 PDF fileId 일괄 조회 (통합 PDF 정책 — 시험지·정답해설 동일 fileId)
         val testAssetIds = assets.filter { it.assetType == "test" && !it.refId.isNullOrBlank() }
@@ -611,8 +676,84 @@ class StudyPlanService(
         cell.reviewedBy = null
         cell.reviewedAt = null
         cellRepo.save(cell)
+
+        // korfarm 셀: 같은 ref_id 의 assignment 가 없으면 row 생성 (복수 배정 정책)
+        if (asset.assetType == "korfarm" && !req.cellRefId.isNullOrBlank()) {
+            val existing = cellAssignmentRepo.findByCellIdOrderBySortOrderAscCreatedAtAsc(cell.id)
+            if (existing.none { it.refId == req.cellRefId }) {
+                val nextOrder = existing.maxOfOrNull { it.sortOrder + 1 } ?: 0
+                cellAssignmentRepo.save(StudyPlanCellAssignmentEntity(
+                    id = IdGenerator.newId("spca"),
+                    cellId = cell.id,
+                    refId = req.cellRefId,
+                    assignedLabel = req.assignedLabel,
+                    status = "pending",
+                    sortOrder = nextOrder
+                ))
+            }
+        }
         createEvent(cell, "assigned")
         return cell
+    }
+
+    /**
+     * 국어농장 셀에 콘텐츠 추가 배정 (복수 배정).
+     * cell.cellRefId 는 첫 배정만 유지. 두 번째 이상은 assignment row 만.
+     */
+    @Transactional
+    fun addCellAssignment(cellId: String, refId: String, label: String?): StudyPlanCellAssignmentEntity {
+        val cell = findCell(cellId)
+        val asset = assetRepo.findById(cell.assetId).orElseThrow {
+            ApiException("NOT_FOUND", "asset not found", HttpStatus.NOT_FOUND)
+        }
+        if (asset.assetType != "korfarm") {
+            throw ApiException("BAD_REQUEST", "복수 배정은 국어농장 자산만 지원합니다", HttpStatus.BAD_REQUEST)
+        }
+        if (refId.isBlank()) throw ApiException("BAD_REQUEST", "콘텐츠 ID 가 비어 있습니다", HttpStatus.BAD_REQUEST)
+        val existing = cellAssignmentRepo.findByCellIdOrderBySortOrderAscCreatedAtAsc(cell.id)
+        if (existing.any { it.refId == refId }) {
+            throw ApiException("BAD_REQUEST", "이미 배정된 콘텐츠입니다", HttpStatus.BAD_REQUEST)
+        }
+        val nextOrder = existing.maxOfOrNull { it.sortOrder + 1 } ?: 0
+        val saved = cellAssignmentRepo.save(StudyPlanCellAssignmentEntity(
+            id = IdGenerator.newId("spca"),
+            cellId = cell.id,
+            refId = refId,
+            assignedLabel = label,
+            status = "pending",
+            sortOrder = nextOrder
+        ))
+        // 첫 배정이면 cell.cellRefId 도 설정 (호환)
+        if (existing.isEmpty()) {
+            cell.cellRefId = refId
+            if (cell.assignedLabel.isNullOrBlank()) cell.assignedLabel = label
+            if (cell.status == "unassigned") cell.status = "pending"
+            cellRepo.save(cell)
+        }
+        return saved
+    }
+
+    @Transactional
+    fun removeCellAssignment(cellId: String, assignmentId: String) {
+        val a = cellAssignmentRepo.findById(assignmentId).orElseThrow {
+            ApiException("NOT_FOUND", "assignment not found", HttpStatus.NOT_FOUND)
+        }
+        if (a.cellId != cellId) {
+            throw ApiException("BAD_REQUEST", "assignment 가 셀에 속하지 않습니다", HttpStatus.BAD_REQUEST)
+        }
+        cellAssignmentRepo.deleteById(assignmentId)
+        // 남은 assignment 가 0 이면 cell.cellRefId 비우고 unassigned 로
+        val cell = findCell(cellId)
+        val remaining = cellAssignmentRepo.findByCellIdOrderBySortOrderAscCreatedAtAsc(cellId)
+        if (remaining.isEmpty()) {
+            cell.cellRefId = null
+            cell.status = "unassigned"
+            cellRepo.save(cell)
+        } else if (cell.cellRefId == a.refId) {
+            // 삭제된 게 첫 배정이었으면 다음 row 의 ref 로 갱신
+            cell.cellRefId = remaining.first().refId
+            cellRepo.save(cell)
+        }
     }
 
     /** "yyyy-MM-dd" 또는 ISO LocalDateTime 모두 받기 */
@@ -924,29 +1065,63 @@ class StudyPlanService(
         }
         if (korfarmCells.isEmpty()) return
 
-        val contentIds = korfarmCells.mapNotNull { it.cellRefId ?: assetMap[it.assetId]?.refId }.distinct()
-        if (contentIds.isEmpty()) return
+        // assignment row 들 일괄 조회
+        val cellIds = korfarmCells.map { it.id }
+        val assignmentsByCell = cellAssignmentRepo.findByCellIdIn(cellIds).groupBy { it.cellId }
 
-        val logs = farmLearningLogRepo.findByUserIdAndContentIdIn(userId, contentIds)
+        // 모든 ref_id 모아 학습 로그 일괄 조회 (cell.cellRefId fallback 포함)
+        val refIds = (assignmentsByCell.values.flatten().map { it.refId } +
+            korfarmCells.mapNotNull { it.cellRefId ?: assetMap[it.assetId]?.refId }).distinct()
+        if (refIds.isEmpty()) return
+
+        val logs = farmLearningLogRepo.findByUserIdAndContentIdIn(userId, refIds)
         val logMap = logs.groupBy { it.contentId }
 
         korfarmCells.forEach { cell ->
-            val contentId = cell.cellRefId ?: assetMap[cell.assetId]?.refId ?: return@forEach
-            val cellLogs = logMap[contentId] ?: return@forEach
+            val cellAssigns = assignmentsByCell[cell.id] ?: emptyList()
 
-            val hasCompleted = cellLogs.any { it.status == "COMPLETED" }
-            val hasStarted = cellLogs.isNotEmpty()
+            // assignment 별 status 동기화
+            cellAssigns.forEach { a ->
+                val contentLogs = logMap[a.refId] ?: return@forEach
+                val hasCompleted = contentLogs.any { it.status == "COMPLETED" }
+                val hasStarted = contentLogs.isNotEmpty()
+                val newStatus = when {
+                    hasCompleted && a.status != "completed" -> "completed"
+                    hasStarted && a.status == "pending" -> "in_progress"
+                    else -> null
+                }
+                if (newStatus != null) {
+                    a.status = newStatus
+                    if (newStatus == "completed" && a.completedAt == null) {
+                        a.completedAt = LocalDateTime.now()
+                    }
+                    cellAssignmentRepo.save(a)
+                }
+            }
 
-            val newStatus = when {
-                hasCompleted && cell.status != "completed" -> "completed"
-                hasStarted && cell.status == "pending" -> "in_progress"
+            // cell 의 종합 status 계산
+            val newCellStatus = when {
+                cellAssigns.isEmpty() -> {
+                    // assignment 가 없는 (옛 단일 배정만 있는) 셀은 기존 fallback 사용
+                    val contentId = cell.cellRefId ?: assetMap[cell.assetId]?.refId
+                    val cellLogs = contentId?.let { logMap[it] } ?: return@forEach
+                    val hasCompleted = cellLogs.any { it.status == "COMPLETED" }
+                    val hasStarted = cellLogs.isNotEmpty()
+                    when {
+                        hasCompleted && cell.status != "completed" -> "completed"
+                        hasStarted && cell.status == "pending" -> "in_progress"
+                        else -> null
+                    }
+                }
+                cellAssigns.all { it.status == "completed" } -> "completed"
+                cellAssigns.any { it.status == "completed" || it.status == "in_progress" } -> "in_progress"
                 else -> null
             }
 
-            if (newStatus != null) {
-                cell.status = newStatus
+            if (newCellStatus != null && newCellStatus != cell.status) {
+                cell.status = newCellStatus
                 cellRepo.save(cell)
-                createEvent(cell, newStatus)
+                createEvent(cell, newCellStatus)
             }
         }
     }

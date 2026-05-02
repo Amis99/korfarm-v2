@@ -49,6 +49,13 @@ interface StudyPlanCellFileRepository : JpaRepository<StudyPlanCellFileEntity, S
     fun deleteByCellIdIn(cellIds: Collection<String>)
 }
 
+interface StudyPlanCellAssignmentRepository : JpaRepository<StudyPlanCellAssignmentEntity, String> {
+    fun findByCellIdOrderBySortOrderAscCreatedAtAsc(cellId: String): List<StudyPlanCellAssignmentEntity>
+    fun findByCellIdIn(cellIds: Collection<String>): List<StudyPlanCellAssignmentEntity>
+    fun deleteByCellId(cellId: String)
+    fun deleteByCellIdIn(cellIds: Collection<String>)
+}
+
 interface StudyPlanEventRepository : JpaRepository<StudyPlanEventEntity, String> {
     fun findByPlanIdAndUserIdAndEventDateBetweenOrderByEventDate(
         planId: String, userId: String, start: LocalDate, end: LocalDate

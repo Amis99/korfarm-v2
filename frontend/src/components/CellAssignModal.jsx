@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { apiPatch } from "../utils/api";
+import { apiPost, apiDelete } from "../utils/adminApi";
 import KorfarmContentSearchModal from "./KorfarmContentSearchModal";
 import TestSearchModal from "./TestSearchModal";
 import WisdomTopicSearchModal from "./WisdomTopicSearchModal";
@@ -47,7 +48,64 @@ export default function CellAssignModal({ cell, scope, asset, onClose, onAssigne
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
+  // 국어농장 복수 배정 — assignments 리스트
+  const [assignments, setAssignments] = useState(cell?.assignments || []);
+  useEffect(() => { setAssignments(cell?.assignments || []); }, [cell]);
+
+  const isKorfarm = assetType === "korfarm";
+
+  const handleAddKorfarmAssignment = async (content) => {
+    setError("");
+    setSaving(true);
+    try {
+      if (assignments.length === 0) {
+        // 첫 배정 — assignCellContent (dueAt 필수)
+        if (!dueDate) { setError("첫 배정은 마감일을 먼저 선택해 주세요."); setSaving(false); return; }
+        await apiPatch(`/v1/admin/study-plans/cells/${cell.cellId}/assign`, {
+          cellRefId: content.contentId,
+          assignedLabel: content.title,
+          dueAt: dueDate,
+        });
+      } else {
+        // 추가 배정
+        await apiPost(`/v1/admin/study-plans/cells/${cell.cellId}/assignments`, {
+          refId: content.contentId,
+          label: content.title,
+        });
+      }
+      setAssignments((prev) => [...prev, {
+        id: `tmp_${Date.now()}`,
+        refId: content.contentId,
+        assignedLabel: content.title,
+        status: "pending",
+      }]);
+      setShowContentSearch(false);
+      onAssigned?.();
+    } catch (e) {
+      setError(e?.message || "배정 실패");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleRemoveAssignment = async (assignmentId) => {
+    if (!window.confirm("이 콘텐츠 배정을 제거할까요?")) return;
+    setError("");
+    try {
+      await apiDelete(`/v1/admin/study-plans/cells/${cell.cellId}/assignments/${assignmentId}`);
+      setAssignments((prev) => prev.filter((a) => a.id !== assignmentId));
+      onAssigned?.();
+    } catch (e) {
+      setError(e?.message || "제거 실패");
+    }
+  };
+
   const handleContentSelected = (content) => {
+    if (isKorfarm) {
+      // 국어농장 — 즉시 추가 배정 호출
+      handleAddKorfarmAssignment(content);
+      return;
+    }
     setRefId(content.contentId);
     setRefLabel(content.title);
     if (!label) setLabel(content.title);
@@ -71,11 +129,14 @@ export default function CellAssignModal({ cell, scope, asset, onClose, onAssigne
 
   const handleSubmit = async () => {
     setError("");
+    // korfarm 은 즉시 배정 흐름 — [닫기] 만 처리
+    if (isKorfarm) {
+      onClose?.();
+      return;
+    }
     // 자산 종류별 검증
     if (assetType === "activity") {
       if (!label.trim()) { setError("활동 이름을 입력해 주세요."); return; }
-    } else if (assetType === "korfarm") {
-      if (!refId) { setError("콘텐츠를 선택해 주세요."); return; }
     } else if (assetType === "test") {
       if (!refId) { setError("테스트를 선택해 주세요."); return; }
     } else if (assetType === "writing") {
@@ -87,7 +148,7 @@ export default function CellAssignModal({ cell, scope, asset, onClose, onAssigne
       await apiPatch(`/v1/admin/study-plans/cells/${cell.cellId}/assign`, {
         cellRefId: refId || null,
         assignedLabel: label.trim() || null,
-        dueAt: dueDate, // yyyy-MM-dd → 백엔드가 23:59 로 보정
+        dueAt: dueDate,
       });
       onAssigned?.();
       onClose?.();
@@ -151,30 +212,41 @@ export default function CellAssignModal({ cell, scope, asset, onClose, onAssigne
             {assetType === "korfarm" && (
               <div style={{ marginBottom: 14 }}>
                 <label style={{ display: "block", fontSize: 13, fontWeight: 600, marginBottom: 6 }}>
-                  콘텐츠 <span style={{ color: "#c0392b" }}>*</span>
+                  콘텐츠 (복수 배정 가능) <span style={{ color: "#c0392b" }}>*</span>
                 </label>
-                <div style={{ display: "flex", gap: 8 }}>
-                  <input
-                    type="text"
-                    value={refLabel || refId}
-                    placeholder="콘텐츠를 검색해 선택하세요"
-                    style={{ ...inputStyle, flex: 1, background: "#f5f9f3" }}
-                    readOnly
-                  />
-                  <button className="admin-detail-btn" onClick={() => setShowContentSearch(true)}>
-                    검색
-                  </button>
-                </div>
-                <label style={{ display: "block", fontSize: 12, color: "var(--admin-muted)", marginTop: 8 }}>
-                  표시 라벨 (선택)
-                </label>
-                <input
-                  type="text"
-                  value={label}
-                  onChange={(e) => setLabel(e.target.value)}
-                  placeholder="학생에게 보일 이름"
-                  style={inputStyle}
-                />
+                {assignments.length > 0 && (
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 8 }}>
+                    {assignments.map((a) => (
+                      <span key={a.id} style={chipStyle(a.status)}>
+                        {a.status === "completed" && <span style={{ marginRight: 4 }}>✓</span>}
+                        {a.assignedLabel || a.refId}
+                        {!String(a.id).startsWith("tmp_") && (
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveAssignment(a.id)}
+                            disabled={saving}
+                            title="제거"
+                            style={chipRemoveStyle}
+                          >×</button>
+                        )}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                <button
+                  type="button"
+                  className="admin-detail-btn"
+                  onClick={() => setShowContentSearch(true)}
+                  disabled={saving || (assignments.length === 0 && !dueDate)}
+                  style={{ width: "100%" }}
+                >
+                  + 콘텐츠 추가
+                </button>
+                {assignments.length === 0 && !dueDate && (
+                  <p style={{ fontSize: 11, color: "#c0392b", marginTop: 6 }}>
+                    첫 배정 전에 마감 기한을 먼저 선택해 주세요.
+                  </p>
+                )}
               </div>
             )}
 
@@ -272,14 +344,22 @@ export default function CellAssignModal({ cell, scope, asset, onClose, onAssigne
             )}
           </div>
           <div className="admin-detail-modal-footer">
-            <button className="admin-detail-btn" onClick={close} disabled={saving}>취소</button>
-            <button
-              className="admin-detail-btn primary"
-              onClick={handleSubmit}
-              disabled={saving}
-            >
-              {saving ? "배정 중..." : "배정"}
-            </button>
+            {isKorfarm ? (
+              <button className="admin-detail-btn primary" onClick={close} disabled={saving}>
+                완료
+              </button>
+            ) : (
+              <>
+                <button className="admin-detail-btn" onClick={close} disabled={saving}>취소</button>
+                <button
+                  className="admin-detail-btn primary"
+                  onClick={handleSubmit}
+                  disabled={saving}
+                >
+                  {saving ? "배정 중..." : "배정"}
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -295,4 +375,37 @@ const inputStyle = {
   fontSize: 14,
   fontFamily: "inherit",
   outline: "none",
+};
+
+function chipStyle(status) {
+  const colors = {
+    completed: { bg: "#d4edda", border: "#28a745", color: "#155724" },
+    in_progress: { bg: "#fff3cd", border: "#ffc107", color: "#856404" },
+    pending: { bg: "#e7f1ff", border: "#3b82f6", color: "#1e3a8a" },
+  };
+  const c = colors[status] || colors.pending;
+  return {
+    display: "inline-flex",
+    alignItems: "center",
+    padding: "4px 8px 4px 10px",
+    fontSize: 12,
+    fontWeight: 500,
+    background: c.bg,
+    color: c.color,
+    border: `1px solid ${c.border}`,
+    borderRadius: 12,
+    gap: 4,
+  };
+}
+
+const chipRemoveStyle = {
+  marginLeft: 4,
+  background: "transparent",
+  border: "none",
+  cursor: "pointer",
+  fontSize: 14,
+  fontWeight: 700,
+  lineHeight: 1,
+  color: "inherit",
+  padding: "0 4px",
 };

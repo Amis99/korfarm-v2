@@ -220,6 +220,31 @@ class AdminStudyPlanController(
         return ApiResponse(success = true, data = cell.toResponse())
     }
 
+    /** 국어농장 셀에 콘텐츠 추가 배정 (복수 배정) */
+    @PostMapping("/cells/{cellId}/assignments")
+    fun addCellAssignment(
+        @PathVariable cellId: String,
+        @RequestBody request: Map<String, String?>
+    ): ApiResponse<CellAssignmentResponse> {
+        requireAdmin()
+        val refId = request["refId"]?.takeIf { it.isNotBlank() }
+            ?: throw ApiException("BAD_REQUEST", "refId 가 필요합니다", HttpStatus.BAD_REQUEST)
+        val label = request["label"]
+        val assignment = service.addCellAssignment(cellId, refId, label)
+        return ApiResponse(success = true, data = assignment.toResponse())
+    }
+
+    /** 셀 배정 제거 */
+    @DeleteMapping("/cells/{cellId}/assignments/{assignmentId}")
+    fun removeCellAssignment(
+        @PathVariable cellId: String,
+        @PathVariable assignmentId: String
+    ): ApiResponse<Map<String, String>> {
+        requireAdmin()
+        service.removeCellAssignment(cellId, assignmentId)
+        return ApiResponse(success = true, data = mapOf("status" to "removed"))
+    }
+
     @PatchMapping("/cells/{cellId}/status")
     fun updateCellStatus(
         @PathVariable cellId: String,

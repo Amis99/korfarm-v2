@@ -225,7 +225,21 @@ data class CellResponse(
     /** 만료 여부 — dueAt < now 이면서 status NOT IN ('completed','submitted','reviewed') */
     val isOverdue: Boolean = false,
     /** 셀 클릭 시 화면 전환에 필요한 정보. asset_type 별로 다른 필드. */
-    val cellAction: CellAction? = null
+    val cellAction: CellAction? = null,
+    /** 국어농장 셀 복수 배정 — assignment row 들. 다른 자산 종류는 비어 있음. */
+    val assignments: List<CellAssignmentResponse> = emptyList()
+)
+
+data class CellAssignmentResponse(
+    val id: String,
+    val cellId: String,
+    val refId: String,
+    val assignedLabel: String?,
+    val status: String,
+    val score: Int?,
+    val dueAt: String?,
+    val completedAt: String?,
+    val sortOrder: Int
 )
 
 /**
@@ -340,7 +354,8 @@ internal fun StudyPlanAssetEntity.toResponse(
 
 internal fun StudyPlanCellEntity.toResponse(
     asset: StudyPlanAssetEntity? = null,
-    cellAction: CellAction? = null
+    cellAction: CellAction? = null,
+    assignments: List<CellAssignmentResponse> = emptyList()
 ): CellResponse {
     val now = java.time.LocalDateTime.now()
     val overdue = dueAt != null && dueAt!!.isBefore(now) &&
@@ -354,7 +369,17 @@ internal fun StudyPlanCellEntity.toResponse(
         dueAt = dueAt?.toString(),
         assignedLabel = assignedLabel,
         isOverdue = overdue,
-        cellAction = cellAction
+        cellAction = cellAction,
+        assignments = assignments
+    )
+}
+
+internal fun StudyPlanCellAssignmentEntity.toResponse(): CellAssignmentResponse {
+    return CellAssignmentResponse(
+        id = id, cellId = cellId, refId = refId,
+        assignedLabel = assignedLabel, status = status, score = score,
+        dueAt = dueAt?.toString(), completedAt = completedAt?.toString(),
+        sortOrder = sortOrder
     )
 }
 

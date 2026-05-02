@@ -230,6 +230,39 @@ class StudyPlanCellEntity(
 }
 
 @Entity
+@Table(name = "study_plan_cell_assignments")
+class StudyPlanCellAssignmentEntity(
+    @Id
+    var id: String,
+
+    @Column(name = "cell_id", nullable = false)
+    var cellId: String,
+
+    @Column(name = "ref_id", nullable = false)
+    var refId: String,
+
+    @Column(name = "assigned_label")
+    var assignedLabel: String? = null,
+
+    @Column(nullable = false)
+    var status: String = "pending",
+
+    var score: Int? = null,
+
+    @Column(name = "due_at")
+    var dueAt: LocalDateTime? = null,
+
+    @Column(name = "completed_at")
+    var completedAt: LocalDateTime? = null,
+
+    @Column(name = "sort_order", nullable = false)
+    var sortOrder: Int = 0,
+
+    @Column(name = "created_at", nullable = false)
+    var createdAt: LocalDateTime = LocalDateTime.now()
+)
+
+@Entity
 @Table(name = "study_plan_cell_files")
 class StudyPlanCellFileEntity(
     @Id
