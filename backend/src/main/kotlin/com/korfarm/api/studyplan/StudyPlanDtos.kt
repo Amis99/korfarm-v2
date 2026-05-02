@@ -539,5 +539,9 @@ data class AdminCalendarAction(
 data class AdminCalendarActionStudent(
     val userId: String,
     val userName: String?,
-    val status: String
+    val className: String?,
+    val status: String,
+    val isOverdue: Boolean = false,
+    val cellId: String,
+    val score: Int? = null
 )

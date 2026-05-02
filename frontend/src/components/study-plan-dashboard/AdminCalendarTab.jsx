@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiGet } from "../../utils/api";
 import { apiGetCamel } from "../../utils/adminApi";
+import CellStatusBadge from "../CellStatusBadge";
+import StudyPlanCellModal from "../StudyPlanCellModal";
 
 const DAY_NAMES = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -61,6 +63,8 @@ export default function AdminCalendarTab({ classId }) {
   const [dayModal, setDayModal] = useState(null); // { date, items: [...] }
   const [actionModal, setActionModal] = useState(null); // { item, students }
   const [actionLoading, setActionLoading] = useState(false);
+  // 학생 클릭 시 매트릭스 셀 모달
+  const [cellModal, setCellModal] = useState(null);
 
   const monthDays = getMonthDays(viewYear, viewMonth);
 
@@ -116,28 +120,33 @@ export default function AdminCalendarTab({ classId }) {
     }
   };
 
-  const handleStudentClick = (item, st) => {
-    const userId = st.userId || st.user_id || st.id;
-    if (!userId) return;
-    const type = item.assetType || item.type;
-    if (type === "korfarm") {
-      navigate(`/admin/students/${userId}?tab=learning&contentId=${item.refId || ""}`);
-    } else if (type === "writing") {
-      const postId = st.wisdomPostId || st.wisdom_post_id;
-      if (postId) {
-        navigate(`/admin/wisdom/posts/${postId}`);
-      } else {
-        navigate(`/admin/students/${userId}?tab=writing`);
-      }
-    } else if (type === "test") {
-      const testId = item.testId || item.refId;
-      if (testId) {
-        navigate(`/admin/tests/${testId}/statistics?studentId=${userId}`);
-      } else {
-        navigate(`/admin/students/${userId}?tab=tests`);
-      }
-    } else {
-      navigate(`/admin/students/${userId}`);
+  const handleStudentClick = async (item, st) => {
+    const cellId = st.cellId || st.cell_id;
+    if (!cellId) return;
+    try {
+      // 셀 상세 + 매트릭스의 scope/asset 정보를 받아 모달 띄움
+      // 빠른 접근: cellAction 등은 cell 자체 응답에 없으니 매트릭스 행에서 cell 단건 조회로 대체
+      // 단순화: cellId 만 있는 가짜 cell 으로 모달 띄우고, 모달이 추가 데이터 자체 로드
+      setCellModal({
+        cell: {
+          cellId,
+          userId: st.userId,
+          status: st.status,
+          score: st.score,
+          isOverdue: st.isOverdue,
+          cellRefId: item.refId || item.assetId,
+        },
+        scope: { label: "캘린더" },
+        asset: {
+          assetType: item.assetType || item.type,
+          label: item.label,
+          refId: item.refId,
+        },
+      });
+    } catch (e) {
+      // fallback navigate
+      const userId = st.userId;
+      if (userId) navigate(`/admin/students/${userId}`);
     }
   };
 
@@ -301,16 +310,18 @@ export default function AdminCalendarTab({ classId }) {
                 <tbody>
                   {actionModal.students.map((st, idx) => {
                     const userId = st.userId || st.user_id || st.id;
-                    const status = st.status || (st.completed ? "완료" : "미수행");
                     return (
-                      <tr key={userId || idx} className="clickable-row"
+                      <tr key={st.cellId || userId || idx} className="clickable-row"
                         onClick={() => handleStudentClick(actionModal.item, st)}>
                         <td>{st.userName || st.user_name || st.name || userId}</td>
                         <td>{st.className || st.class_name || "-"}</td>
                         <td>
-                          <span className="status-pill" data-status={status === "completed" || status === "passed" ? "completed" : "pending"}>
-                            {status}
-                          </span>
+                          <CellStatusBadge status={st.status} isOverdue={st.isOverdue} />
+                          {st.score != null && (
+                            <span style={{ marginLeft: 6, fontSize: 12, color: "var(--admin-muted)" }}>
+                              {st.score}점
+                            </span>
+                          )}
                         </td>
                         <td style={{ textAlign: "right", color: "var(--admin-accent)" }}>›</td>
                       </tr>
@@ -324,6 +335,16 @@ export default function AdminCalendarTab({ classId }) {
             </div>
           </div>
         </div>
+      )}
+
+      {cellModal && (
+        <StudyPlanCellModal
+          cell={cellModal.cell}
+          scope={cellModal.scope}
+          asset={cellModal.asset}
+          onClose={() => setCellModal(null)}
+          onUpdated={() => { setCellModal(null); load(); }}
+        />
       )}
     </div>
   );

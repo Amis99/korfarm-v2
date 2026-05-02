@@ -1957,22 +1957,50 @@ class StudyPlanService(
         val userIds = activeCells.map { it.userId }.toSet()
         val userMap = if (userIds.isNotEmpty()) userRepo.findAllById(userIds).associateBy { it.id } else emptyMap()
 
-        // 자산 단위 그룹
+        // 학생별 수강반 매핑
+        val classMap = mutableMapOf<String, String>()
+        userIds.forEach { uid ->
+            val classNames = classMembershipRepo.findByUserIdAndStatus(uid, "active")
+                .mapNotNull { classRepo.findById(it.classId).orElse(null)?.name }
+            if (classNames.isNotEmpty()) classMap[uid] = classNames.joinToString(", ")
+        }
+
+        val now = java.time.LocalDateTime.now()
+        val DONE = setOf("completed", "scored", "passed", "reviewed")
+
+        // 자산 단위 그룹 — 같은 학생이 자산 1개에 여러 cell(여러 행) 있으면 가장 진행된 cell 1개만 노출
+        val statusPriority = mapOf(
+            "completed" to 5, "passed" to 5, "reviewed" to 5,
+            "scored" to 4, "submitted" to 4, "in_progress" to 3,
+            "retry" to 3, "partial" to 3,
+            "pending" to 2, "unassigned" to 1
+        )
         val grouped = activeCells.groupBy { it.assetId }
         val actions = grouped.mapNotNull { (assetId, cells) ->
             val asset = assetMap[assetId] ?: return@mapNotNull null
             val firstCell = cells.first()
+            // 같은 (userId, assetId) 의 cells 가 여러 개면 가장 진행된 것 1개만
+            val byUser = cells.groupBy { it.userId }
+            val pickedCells = byUser.values.map { list ->
+                list.maxByOrNull { statusPriority[it.status] ?: 0 } ?: list.first()
+            }
             AdminCalendarAction(
                 assetId = asset.id,
                 label = firstCell.assignedLabel ?: asset.label,
                 assetType = asset.assetType,
                 dueAt = firstCell.dueAt?.toString(),
-                totalAssigned = cells.size,
-                students = cells.map { cell ->
+                totalAssigned = pickedCells.size,
+                students = pickedCells.map { cell ->
+                    val due = cell.dueAt
+                    val isOverdue = due != null && due.isBefore(now) && cell.status !in DONE
                     AdminCalendarActionStudent(
                         userId = cell.userId,
                         userName = userMap[cell.userId]?.name,
-                        status = cell.status
+                        className = classMap[cell.userId],
+                        status = cell.status,
+                        isOverdue = isOverdue,
+                        cellId = cell.id,
+                        score = cell.score
                     )
                 }.sortedBy { it.userName ?: it.userId }
             )
