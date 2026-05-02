@@ -634,32 +634,45 @@ function AdminProPage() {
   if (selectedChapter) {
     return (
       <AdminLayout>
-        <div className="ts-page ts-admin ap-page">
+        <div className="admin-detail-wrap">
           {/* 상세 헤더 */}
-          <header className="ap-detail-header">
-            <button className="ap-back-btn" onClick={backToList}>
-              <span className="material-symbols-outlined">arrow_back</span>
-              목록으로
-            </button>
-            <div className="ap-detail-title-area">
+          <div className="admin-detail-header">
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <button className="admin-detail-btn secondary" onClick={backToList} style={{ fontSize: 13, padding: "6px 12px" }}>
+                ← 목록으로
+              </button>
               <h1>{selectedChapter.title}</h1>
-              <span className="ap-detail-level">{selectedChapter.levelId || selectedChapter.level_id}</span>
+              <span style={{ color: "var(--admin-muted)", fontSize: 13 }}>{selectedChapter.levelId || selectedChapter.level_id}</span>
             </div>
-          </header>
+          </div>
 
-          {/* 영상 URL — 챕터 단위 매칭은 폐기. 학습 콘텐츠 메타에서 관리. */}
-          <div className="ap-info-banner">
+          {/* 영상 URL 안내 */}
+          <div style={{
+            padding: "10px 14px", marginBottom: 12,
+            background: "var(--admin-panel-light, #f5f9f3)",
+            border: "1px solid rgba(31,58,44,0.12)", borderRadius: 8,
+            fontSize: 13, color: "var(--admin-ink)",
+          }}>
             ⓘ 영상 URL은 학습 단위로 관리합니다 — 콘텐츠 관리 → 해당 학습 → 메타데이터 패널의 비디오 URL
           </div>
 
-          {/* 3탭 */}
-          <div className="ap-tabs">
-            <button className={`ap-tab ${activeTab === "content" ? "active" : ""}`} onClick={() => setActiveTab("content")}>콘텐츠</button>
-            <button className={`ap-tab ${activeTab === "answer" ? "active" : ""}`} onClick={() => setActiveTab("answer")}>정답과 해설</button>
-            <button className={`ap-tab ${activeTab === "test" ? "active" : ""}`} onClick={() => setActiveTab("test")}>테스트 관리</button>
+          {/* 3탭 — admin-detail-card 위에 탭 버튼들 */}
+          <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
+            {[
+              { key: "content", label: "콘텐츠" },
+              { key: "answer", label: "정답과 해설" },
+              { key: "test", label: "테스트 관리" },
+            ].map((t) => (
+              <button
+                key={t.key}
+                type="button"
+                className={`admin-filter ${activeTab === t.key ? "active" : ""}`}
+                onClick={() => setActiveTab(t.key)}
+              >{t.label}</button>
+            ))}
           </div>
 
-          <div className="ap-card ap-tab-body">
+          <div className="admin-detail-card admin-single-card edit-mode">
             {activeTab === "content" && renderContentTab()}
             {activeTab === "answer" && renderAnswerTab()}
             {activeTab === "test" && renderTestTab()}
