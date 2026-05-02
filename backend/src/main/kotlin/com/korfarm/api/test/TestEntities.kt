@@ -60,6 +60,14 @@ class TestPaperEntity(
     @Column(name = "answer_layout_json", columnDefinition = "LONGTEXT")
     var answerLayoutJson: String? = null,
 
+    /** 시험지 Typst 소스 — 자동 생성 + 어드민 편집. CLI 컴파일하여 PDF 생산 */
+    @Column(name = "typst_source", columnDefinition = "LONGTEXT")
+    var typstSource: String? = null,
+
+    /** 정답·해설 Typst 소스 */
+    @Column(name = "answer_typst_source", columnDefinition = "LONGTEXT")
+    var answerTypstSource: String? = null,
+
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now(),
 
