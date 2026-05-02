@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiGet, apiPost } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
@@ -24,6 +24,14 @@ function AdminWisdomPage() {
   const [batchRunning, setBatchRunning] = useState(false);
   const [batchMsg, setBatchMsg] = useState("");
 
+  // 필터·정렬
+  const [search, setSearch] = useState("");
+  const [typeFilter, setTypeFilter] = useState("all");        // all | manuscript | upload
+  const [feedbackFilter, setFeedbackFilter] = useState("all"); // all | done | pending
+  const [statusFilter, setStatusFilter] = useState("active");  // all | active | deleted
+  const [sortKey, setSortKey] = useState("created");           // created | level | author | topic
+  const [sortDir, setSortDir] = useState("desc");              // desc | asc
+
   useEffect(() => {
     setLoading(true);
     setSelected(new Set());
@@ -36,8 +44,50 @@ function AdminWisdomPage() {
       .finally(() => setLoading(false));
   }, [levelId]);
 
-  const totalPages = Math.max(1, Math.ceil(posts.length / PER_PAGE));
-  const visible = posts.slice((page - 1) * PER_PAGE, page * PER_PAGE);
+  // 검색·필터·정렬 적용
+  const filteredSorted = useMemo(() => {
+    let arr = posts.slice();
+    if (search.trim()) {
+      const q = search.trim().toLowerCase();
+      arr = arr.filter((p) =>
+        (p.author_name || "").toLowerCase().includes(q) ||
+        (p.author_id || "").toLowerCase().includes(q) ||
+        (p.topic_label || "").toLowerCase().includes(q)
+      );
+    }
+    if (typeFilter !== "all") {
+      arr = arr.filter((p) =>
+        typeFilter === "manuscript" ? p.submission_type === "manuscript" : p.submission_type !== "manuscript"
+      );
+    }
+    if (feedbackFilter !== "all") {
+      arr = arr.filter((p) => (feedbackFilter === "done" ? p.has_feedback : !p.has_feedback));
+    }
+    if (statusFilter !== "all") {
+      arr = arr.filter((p) => p.status === statusFilter);
+    }
+    arr.sort((a, b) => {
+      const dir = sortDir === "asc" ? 1 : -1;
+      switch (sortKey) {
+        case "level":
+          return ((a.level_id || "").localeCompare(b.level_id || "")) * dir;
+        case "author":
+          return ((a.author_name || a.author_id || "").localeCompare(b.author_name || b.author_id || "", "ko")) * dir;
+        case "topic":
+          return ((a.topic_label || "").localeCompare(b.topic_label || "", "ko")) * dir;
+        case "created":
+        default:
+          return (new Date(a.created_at).getTime() - new Date(b.created_at).getTime()) * dir;
+      }
+    });
+    return arr;
+  }, [posts, search, typeFilter, feedbackFilter, statusFilter, sortKey, sortDir]);
+
+  // page 가 totalPages 초과되지 않게 보정
+  useEffect(() => { setPage(1); }, [search, typeFilter, feedbackFilter, statusFilter, sortKey, sortDir]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredSorted.length / PER_PAGE));
+  const visible = filteredSorted.slice((page - 1) * PER_PAGE, page * PER_PAGE);
 
   // 체크박스: AI 일괄 첨삭 대상 = 원고지 타입 + 미첨삭 + active
   const isEligible = (post) =>
@@ -112,29 +162,64 @@ function AdminWisdomPage() {
         </div>
 
         <div className="admin-detail-card">
-            <div style={{ display: "flex", gap: 10, marginBottom: 16, flexWrap: "wrap", alignItems: "center" }}>
-              <select
-                className="wis-filter-select"
-                value={levelId}
-                onChange={(e) => { setLevelId(e.target.value); setPage(1); }}
-                style={{
-                  padding: "8px 12px",
-                  border: "1px solid var(--admin-stroke)",
-                  borderRadius: 8,
-                  background: "var(--admin-panel)",
-                  color: "var(--admin-ink)",
-                  fontSize: 13,
-                  fontFamily: "inherit",
-                }}
-              >
+            <div style={{ display: "flex", gap: 8, marginBottom: 16, flexWrap: "wrap", alignItems: "center" }}>
+              <input
+                type="text"
+                placeholder="🔍 작성자·주제 검색"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                style={{ ...selectStyle, minWidth: 200 }}
+              />
+              <select value={levelId} onChange={(e) => setLevelId(e.target.value)} style={selectStyle}>
                 {LEVEL_OPTIONS.map((l) => (
                   <option key={l.id} value={l.id}>{l.label}</option>
                 ))}
               </select>
+              <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} style={selectStyle}>
+                <option value="all">전체 유형</option>
+                <option value="manuscript">원고지</option>
+                <option value="upload">업로드</option>
+              </select>
+              <select value={feedbackFilter} onChange={(e) => setFeedbackFilter(e.target.value)} style={selectStyle}>
+                <option value="all">전체 피드백</option>
+                <option value="done">완료</option>
+                <option value="pending">미완료</option>
+              </select>
+              <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} style={selectStyle}>
+                <option value="active">활성만</option>
+                <option value="deleted">삭제됨만</option>
+                <option value="all">전체 상태</option>
+              </select>
+              <select value={sortKey} onChange={(e) => setSortKey(e.target.value)} style={selectStyle}>
+                <option value="created">정렬: 작성일</option>
+                <option value="level">정렬: 레벨</option>
+                <option value="author">정렬: 작성자</option>
+                <option value="topic">정렬: 주제</option>
+              </select>
+              <button
+                onClick={() => setSortDir((d) => (d === "asc" ? "desc" : "asc"))}
+                style={{ ...selectStyle, cursor: "pointer", padding: "8px 12px" }}
+                title="정렬 방향 토글"
+              >
+                {sortDir === "asc" ? "↑ 오름차순" : "↓ 내림차순"}
+              </button>
+              {(search || typeFilter !== "all" || feedbackFilter !== "all" || statusFilter !== "active" || sortKey !== "created" || sortDir !== "desc" || levelId) && (
+                <button
+                  onClick={() => {
+                    setSearch(""); setTypeFilter("all"); setFeedbackFilter("all");
+                    setStatusFilter("active"); setSortKey("created"); setSortDir("desc"); setLevelId("");
+                  }}
+                  style={{
+                    ...selectStyle, cursor: "pointer", padding: "8px 12px",
+                    border: "1px dashed rgba(31,58,44,0.3)", color: "var(--admin-muted, #555)",
+                  }}
+                >초기화</button>
+              )}
               <button
                 className="admin-detail-btn"
                 disabled={selected.size === 0 || batchRunning}
                 onClick={handleBatch}
+                style={{ marginLeft: "auto" }}
               >
                 {batchRunning ? "AI 첨삭 중..." : `AI 일괄 첨삭 (${selected.size}건)`}
               </button>
@@ -146,6 +231,9 @@ function AdminWisdomPage() {
                   {batchMsg}
                 </span>
               )}
+            </div>
+            <div style={{ fontSize: 12, color: "var(--admin-muted)", marginBottom: 10 }}>
+              {filteredSorted.length}건 표시 (전체 {posts.length}건)
             </div>
 
             {loading ? (
@@ -194,7 +282,7 @@ function AdminWisdomPage() {
                               title={eligible ? "AI 첨삭 대상 선택" : "이미 첨삭 완료 또는 업로드 타입"}
                             />
                           </td>
-                          <td>{posts.length - ((page - 1) * PER_PAGE + idx)}</td>
+                          <td>{filteredSorted.length - ((page - 1) * PER_PAGE + idx)}</td>
                           <td>{post.level_id}</td>
                           <td>{post.topic_label}</td>
                           <td>{post.author_name || post.author_id}</td>
@@ -234,5 +322,16 @@ function AdminWisdomPage() {
     </AdminLayout>
   );
 }
+
+const selectStyle = {
+  padding: "8px 12px",
+  border: "1px solid rgba(31,58,44,0.2)",
+  borderRadius: 6,
+  background: "#fff",
+  color: "var(--admin-ink, #1a2920)",
+  fontSize: 13,
+  fontFamily: "inherit",
+  outline: "none",
+};
 
 export default AdminWisdomPage;
