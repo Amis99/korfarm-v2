@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiGet, apiPost, apiDelete } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
+import "../styles/admin-detail.css";
 import "../styles/wisdom.css";
 
 const LEVEL_OPTIONS = [
