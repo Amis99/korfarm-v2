@@ -89,6 +89,8 @@ const AdminTestPage = lazy(() => import("./pages/AdminTestPage"));
 const AdminAiUsagePage = lazy(() => import("./pages/AdminAiUsagePage"));
 const AdminTestEditorPage = lazy(() => import("./pages/AdminTestEditorPage"));
 const AdminTestStatisticsPage = lazy(() => import("./pages/AdminTestStatisticsPage"));
+const AdminTestPaperDesignPage = lazy(() => import("./pages/AdminTestPaperDesignPage"));
+const TestPaperPrintPage = lazy(() => import("./pages/TestPaperPrintPage"));
 const AdminProPage = lazy(() => import("./pages/AdminProPage"));
 const AdminStudyPlanDashboardPage = lazy(() => import("./pages/AdminStudyPlanDashboardPage"));
 const StudyPlanPage = lazy(() => import("./pages/StudyPlanPage"));
@@ -290,6 +292,8 @@ function App() {
           <Route path="/admin/tests" element={A(<AdminTestPage />)} />
           <Route path="/admin/ai-usage" element={A(<AdminAiUsagePage />)} />
           <Route path="/admin/tests/:testId/edit" element={A(<AdminTestEditorPage />)} />
+          <Route path="/admin/tests/:testId/design" element={A(<AdminTestPaperDesignPage />)} />
+          <Route path="/admin/tests/:testId/print" element={A(<TestPaperPrintPage />)} />
           <Route path="/admin/tests/:testId/statistics" element={A(<AdminTestStatisticsPage />)} />
           {/* 옛 /admin/tests/:testId 디테일 페이지는 통계 페이지로 통합 → 통계로 redirect (외부 링크 호환) */}
           <Route path="/admin/tests/:testId" element={A(<AdminTestStatisticsPage />)} />

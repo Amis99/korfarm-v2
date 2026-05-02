@@ -52,6 +52,14 @@ class TestPaperEntity(
     @Column(name = "payload_json", columnDefinition = "LONGTEXT")
     var payloadJson: String? = null,
 
+    /** 시험지 시각 레이아웃 (디자인 에디터). null 이면 미디자인 — 어드민이 자동 채우기 후 편집 */
+    @Column(name = "layout_json", columnDefinition = "LONGTEXT")
+    var layoutJson: String? = null,
+
+    /** 정답·해설 시각 레이아웃. null 이면 미디자인 */
+    @Column(name = "answer_layout_json", columnDefinition = "LONGTEXT")
+    var answerLayoutJson: String? = null,
+
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now(),
 

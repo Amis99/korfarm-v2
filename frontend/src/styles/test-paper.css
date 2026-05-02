@@ -1,0 +1,258 @@
+/* ===== 시험지 디자인 — A4 페이지 + 다단 + 인쇄 ===== */
+
+.tpr-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 0;
+  background: #efeae3;
+}
+
+.tpr-page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm;
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-body, "Noto Sans KR", sans-serif);
+  color: #1a1a1a;
+}
+
+.tpr-page-header {
+  border-bottom: 2px solid #333;
+  padding-bottom: 8pt;
+  margin-bottom: 12pt;
+}
+.tpr-page-header h2 {
+  margin: 0;
+  font-size: 16pt;
+  font-weight: 700;
+}
+.tpr-page-meta {
+  margin-top: 4pt;
+  font-size: 10pt;
+  color: #666;
+}
+
+.tpr-page-body {
+  flex: 1;
+  font-size: 11pt;
+  line-height: 1.65;
+}
+.tpr-page-body.cols-2 {
+  column-count: 2;
+  column-gap: 10mm;
+  column-rule: 1px solid #ddd;
+}
+
+.tpr-page-footer {
+  text-align: center;
+  font-size: 9pt;
+  color: #888;
+  margin-top: 12pt;
+  padding-top: 6pt;
+  border-top: 1px solid #ddd;
+}
+
+/* 블록 공통 */
+.tpr-block {
+  margin-bottom: 12pt;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* info — 학교/이름란 */
+.tpr-info {
+  font-size: 11pt;
+  letter-spacing: 0.04em;
+  border: 1px dashed #888;
+  padding: 8pt 12pt;
+  border-radius: 4px;
+  background: #fafafa;
+}
+
+/* 자유 텍스트 */
+.tpr-text p { margin: 0 0 8pt; }
+.tpr-text strong { font-weight: 700; }
+
+/* 이미지 */
+.tpr-image { margin: 12pt 0; text-align: center; }
+.tpr-image-align-left { text-align: left; }
+.tpr-image-align-right { text-align: right; }
+.tpr-image img { display: inline-block; max-width: 100%; }
+.tpr-image figcaption {
+  font-size: 9pt;
+  color: #666;
+  margin-top: 4pt;
+}
+
+/* 지문 */
+.tpr-passage {
+  border-left: 4px solid #2d6a4f;
+  padding: 8pt 14pt;
+  background: #f5f9f3;
+  margin: 12pt 0;
+}
+.tpr-passage-label {
+  font-weight: 700;
+  font-size: 10.5pt;
+  color: #2d6a4f;
+  margin-bottom: 6pt;
+}
+.tpr-passage-body p { margin: 0 0 6pt; }
+
+/* 문제 */
+.tpr-question { margin: 12pt 0; }
+.tpr-question-stem {
+  font-weight: 600;
+  font-size: 11.5pt;
+  margin-bottom: 6pt;
+}
+.tpr-question-no {
+  font-weight: 700;
+  margin-right: 4pt;
+}
+.tpr-question-points {
+  margin-left: 6pt;
+  font-size: 10pt;
+  font-weight: 500;
+  color: #666;
+}
+.tpr-choices {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 18pt;
+}
+.tpr-choices li {
+  margin: 3pt 0;
+  display: flex;
+  gap: 6pt;
+  align-items: flex-start;
+}
+.tpr-choice-marker {
+  font-weight: 600;
+  color: #2d6a4f;
+  flex-shrink: 0;
+}
+.tpr-essay-blank {
+  margin-top: 6pt;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  height: 60pt;
+  background:
+    repeating-linear-gradient(to bottom, transparent, transparent 18pt, #ddd 18pt, #ddd 19pt);
+}
+
+/* 박스 (조건/보기) */
+.tpr-box {
+  border: 2px solid #333;
+  border-radius: 6px;
+  padding: 8pt 12pt;
+  margin: 12pt 0;
+}
+.tpr-box-label {
+  font-weight: 700;
+  margin-bottom: 6pt;
+  color: #333;
+}
+
+/* 정답표 */
+.tpr-answer-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10.5pt;
+}
+.tpr-answer-table th, .tpr-answer-table td {
+  border: 1px solid #888;
+  padding: 4pt 8pt;
+  text-align: center;
+}
+.tpr-answer-table th {
+  background: #f3f0eb;
+  font-weight: 700;
+}
+
+/* 정답·해설 카드 */
+.tpr-answer-exp {
+  background: #faf8f6;
+  border-left: 4px solid #c0392b;
+  padding: 8pt 12pt;
+  margin: 8pt 0;
+}
+.tpr-answer-exp-head {
+  display: flex;
+  align-items: center;
+  gap: 8pt;
+  margin-bottom: 4pt;
+}
+.tpr-answer-exp-no { font-weight: 700; }
+.tpr-answer-exp-mark {
+  background: #c0392b;
+  color: #fff;
+  padding: 1pt 6pt;
+  border-radius: 4px;
+  font-size: 10pt;
+  font-weight: 600;
+}
+.tpr-answer-exp-points {
+  font-size: 10pt;
+  color: #666;
+  margin-left: auto;
+}
+.tpr-answer-exp-stem {
+  font-size: 10pt;
+  color: #555;
+  margin: 4pt 0;
+}
+.tpr-answer-exp-body {
+  margin-top: 4pt;
+  font-size: 10.5pt;
+}
+.tpr-answer-exp-body strong {
+  color: #c0392b;
+  margin-right: 6pt;
+  font-size: 10pt;
+}
+
+.tpr-empty {
+  padding: 60px 20px;
+  text-align: center;
+  color: #888;
+}
+
+/* ── 인쇄 ── */
+@media print {
+  body { background: #fff !important; }
+  .admin-side, .admin-toolbar-row, .admin-topbar, .admin-backdrop,
+  .tpr-toolbar, .tpr-empty { display: none !important; }
+
+  .admin-page, .admin-shell, .admin-main {
+    background: #fff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .admin-main > * { max-width: none !important; margin: 0 !important; }
+
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  .tpr-root {
+    background: #fff;
+    padding: 0;
+    gap: 0;
+  }
+  .tpr-page {
+    box-shadow: none;
+    margin: 0;
+    page-break-after: always;
+  }
+  .tpr-page:last-child {
+    page-break-after: auto;
+  }
+}
