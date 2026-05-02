@@ -4,7 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.ApiResponse
 import com.korfarm.api.security.AdminGuard
+import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.*
 
@@ -22,7 +25,9 @@ class AdminTestLayoutController(
     private val testService: TestService,
     private val testLayoutService: TestLayoutService,
     private val testPaperRepo: TestPaperRepo,
-    private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper,
+    private val layoutToTypst: LayoutToTypstConverter,
+    private val typstCompiler: TypstCompileService
 ) {
     private fun requireAdmin() = AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
     private fun current() = com.korfarm.api.security.SecurityUtils.currentUserId()
@@ -78,13 +83,51 @@ class AdminTestLayoutController(
             ApiException("NOT_FOUND", "test not found", HttpStatus.NOT_FOUND)
         }
         val layout = if (type == "answer") {
-            testLayoutService.buildAnswerLayout(paper)
+            testLayoutService.buildAnswerLayoutV2(paper)
         } else {
-            testLayoutService.buildPaperLayout(paper)
+            testLayoutService.buildPaperLayoutV2(paper)
         }
         val json = objectMapper.writeValueAsString(layout)
         if (type == "answer") paper.answerLayoutJson = json else paper.layoutJson = json
         testPaperRepo.save(paper)
         return ApiResponse(success = true, data = mapOf("layout" to layout, "type" to type))
+    }
+
+    /**
+     * 편집기 layout 을 typst 로 변환·컴파일하여 PDF 응답.
+     * body 에 layout 이 있으면 그걸 우선 사용 (편집 중 미리보기), 없으면 DB 의 저장된 layout 사용.
+     */
+    @PostMapping("/compile")
+    fun compileLayout(
+        @PathVariable testId: String,
+        @RequestParam(defaultValue = "paper") type: String,
+        @RequestBody(required = false) body: Map<String, Any?>?
+    ): ResponseEntity<ByteArray> {
+        requireAdmin()
+        testService.verifyAdminTestAccess(testId, current())
+        val paper = testPaperRepo.findById(testId).orElseThrow {
+            ApiException("NOT_FOUND", "test not found", HttpStatus.NOT_FOUND)
+        }
+        @Suppress("UNCHECKED_CAST")
+        val layout: Map<String, Any?> = (body?.get("layout") as? Map<String, Any?>)
+            ?: run {
+                val raw = if (type == "answer") paper.answerLayoutJson else paper.layoutJson
+                if (raw.isNullOrBlank()) {
+                    throw ApiException("BAD_REQUEST", "레이아웃이 없습니다. 자동 채우기를 먼저 실행해주세요.", HttpStatus.BAD_REQUEST)
+                }
+                @Suppress("UNCHECKED_CAST")
+                objectMapper.readValue(raw, Map::class.java) as Map<String, Any?>
+            }
+        val typstSource = layoutToTypst.convert(layout)
+        val pdf = try {
+            typstCompiler.compileToPdf(typstSource)
+        } catch (e: Exception) {
+            throw ApiException("COMPILE_ERROR", e.message ?: "컴파일 실패", HttpStatus.UNPROCESSABLE_ENTITY)
+        }
+        val headers = HttpHeaders()
+        headers.contentType = MediaType.APPLICATION_PDF
+        headers.set(HttpHeaders.CONTENT_DISPOSITION, """inline; filename="test_${testId}_${type}.pdf"""")
+        headers.set(HttpHeaders.CACHE_CONTROL, "no-store")
+        return ResponseEntity.ok().headers(headers).body(pdf)
     }
 }

@@ -1,0 +1,376 @@
+/* ===== 시험지 비주얼 편집기 ===== */
+
+.lve-root {
+  padding: 14px;
+  background: #faf8f4;
+  min-height: 600px;
+}
+
+.lve-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #fff;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid rgba(31, 58, 44, 0.15);
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+.lve-tb-label { font-size: 12px; font-weight: 600; color: var(--admin-ink, #1a2920); }
+.lve-tb-divider { width: 1px; height: 18px; background: rgba(31, 58, 44, 0.15); }
+.lve-toggle {
+  display: inline-flex;
+  border: 1px solid rgba(31, 58, 44, 0.18);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.lve-toggle button {
+  padding: 4px 10px;
+  font-size: 12px;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+}
+.lve-toggle button.active {
+  background: var(--admin-accent, #2d6a4f);
+  color: #fff;
+}
+.lve-tb-btn {
+  padding: 5px 12px;
+  font-size: 12px;
+  border: 1px solid rgba(31, 58, 44, 0.18);
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.lve-tb-btn.primary {
+  background: var(--admin-accent, #2d6a4f);
+  color: #fff;
+  border-color: var(--admin-accent, #2d6a4f);
+}
+
+.lve-add-menu {
+  position: relative;
+  margin-left: auto;
+}
+.lve-add-list {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 10;
+  background: #fff;
+  border: 1px solid rgba(31, 58, 44, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  min-width: 180px;
+}
+.lve-add-list li {
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.lve-add-list li:hover {
+  background: var(--admin-panel-light, #f5f9f3);
+}
+
+.lve-header-edit {
+  padding: 12px;
+  background: #fff;
+  border: 1px solid rgba(31, 58, 44, 0.12);
+  border-radius: 6px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.lve-header-title {
+  font-size: 16px;
+  font-weight: 700;
+  border: 1px dashed transparent;
+  padding: 4px 6px;
+}
+.lve-header-meta {
+  font-size: 12px;
+  color: #666;
+  border: 1px dashed transparent;
+  padding: 4px 6px;
+}
+.lve-header-edit input {
+  outline: none;
+  background: transparent;
+}
+.lve-header-edit input:focus {
+  border-color: var(--admin-accent, #2d6a4f);
+}
+
+.lve-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lve-empty {
+  text-align: center;
+  color: #888;
+  padding: 40px 20px;
+  border: 2px dashed #ccc;
+  border-radius: 6px;
+  background: #fff;
+}
+
+/* 블록 wrap */
+.lve-block-wrap {
+  position: relative;
+  background: #fff;
+  border: 1px solid rgba(31, 58, 44, 0.15);
+  border-radius: 6px;
+  padding: 10px;
+  transition: border-color 0.15s;
+}
+.lve-block-wrap:hover {
+  border-color: var(--admin-accent, #2d6a4f);
+}
+.lve-block-controls {
+  position: absolute;
+  top: -10px;
+  right: 8px;
+  display: none;
+  gap: 2px;
+  background: #fff;
+  border: 1px solid rgba(31, 58, 44, 0.2);
+  border-radius: 6px;
+  padding: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+.lve-block-wrap:hover .lve-block-controls {
+  display: flex;
+}
+.lve-block-controls button {
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.lve-block-controls button:hover {
+  background: rgba(45, 106, 79, 0.12);
+}
+.lve-block-controls button.danger { color: #c0392b; }
+.lve-block-controls button.danger:hover { background: rgba(192, 57, 43, 0.12); }
+.lve-block-controls button:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* 입력 공통 */
+.lve-block input,
+.lve-block textarea,
+.lve-block select {
+  font-family: inherit;
+  font-size: 13px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 6px 8px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+.lve-block textarea {
+  resize: vertical;
+  min-height: 50px;
+  line-height: 1.5;
+}
+.lve-block input:focus,
+.lve-block textarea:focus {
+  border-color: var(--admin-accent, #2d6a4f);
+}
+
+.lve-block-meta {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 6px;
+  align-items: center;
+}
+.lve-block-meta select {
+  width: auto;
+  font-size: 11px;
+  padding: 2px 6px;
+}
+
+/* 종류별 */
+.lve-info textarea { background: #fafafa; }
+
+.lve-passage { border-left: 3px solid var(--admin-accent, #2d6a4f); padding-left: 10px; }
+.lve-passage-label {
+  font-weight: 700;
+  color: var(--admin-accent, #2d6a4f);
+  margin-bottom: 6px;
+  width: auto !important;
+  display: inline-block;
+  max-width: 200px;
+}
+
+.lve-question .lve-q-head {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.lve-q-no {
+  width: 60px !important;
+  font-weight: 700;
+  text-align: center;
+}
+.lve-q-points {
+  width: 70px !important;
+  text-align: center;
+}
+.lve-choices {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+}
+.lve-choices li {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin: 4px 0;
+}
+.lve-choice-marker {
+  font-weight: 600;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+  color: var(--admin-accent, #2d6a4f);
+}
+.lve-mini-del {
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: rgba(192, 57, 43, 0.1);
+  color: #c0392b;
+  border-radius: 3px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.lve-add-choice {
+  margin-top: 4px;
+  padding: 3px 10px;
+  border: 1px dashed rgba(45, 106, 79, 0.5);
+  background: transparent;
+  color: var(--admin-accent-strong, #1f4a37);
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.lve-box {
+  border: 2px solid #555 !important;
+  background: #fafafa;
+}
+.lve-box-label {
+  font-weight: 700;
+  margin-bottom: 6px;
+  width: auto !important;
+  display: inline-block;
+  max-width: 200px;
+}
+
+.lve-image { text-align: center; }
+.lve-image img { display: inline-block; }
+.lve-image-placeholder {
+  padding: 30px;
+  background: #f5f5f5;
+  border: 2px dashed #ccc;
+  border-radius: 6px;
+}
+.lve-image-placeholder button {
+  padding: 8px 16px;
+  background: var(--admin-accent, #2d6a4f);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.lve-page-break {
+  text-align: center;
+  font-size: 11px;
+  color: #888;
+  background: repeating-linear-gradient(90deg, #ccc, #ccc 6px, transparent 6px, transparent 12px);
+  background-size: 100% 1px;
+  background-position: 0 50%;
+  background-repeat: no-repeat;
+  padding: 8px 0;
+}
+.lve-page-break {
+  /* 위 background 가 가운데 line. 텍스트는 그 위에 */
+  position: relative;
+}
+.lve-page-break::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: repeating-linear-gradient(90deg, #ccc, #ccc 6px, transparent 6px, transparent 12px);
+}
+
+.lve-spacer {
+  text-align: center;
+  font-size: 11px;
+  color: #888;
+  padding: 4px 0;
+  background: #f0eae5;
+  border-radius: 4px;
+}
+
+.lve-heading input {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.lve-answer-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin-top: 4px;
+}
+.lve-answer-table th, .lve-answer-table td {
+  border: 1px solid #ccc;
+  padding: 4px 8px;
+  text-align: center;
+}
+.lve-answer-exp { background: #faf3f1; padding: 8px; border-left: 3px solid #c0392b; }
+
+.lve-insert-after {
+  position: relative;
+}
+.lve-insert-after > button {
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: rgba(45, 106, 79, 0.1);
+  color: var(--admin-accent-strong, #1f4a37);
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.lve-insert-after > button:hover {
+  background: rgba(45, 106, 79, 0.2);
+}
+
+.lve-unknown {
+  background: #fff5e6;
+  padding: 6px;
+  font-size: 11px;
+  font-family: monospace;
+  color: #c98c00;
+  border-radius: 3px;
+}

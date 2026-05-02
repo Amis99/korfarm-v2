@@ -23,6 +23,159 @@ class TestLayoutService(
     private val objectMapper: ObjectMapper
 ) {
 
+    /**
+     * V2 layout — 단일 blocks 배열. 페이지 nav 없음, typst 가 자동 분할.
+     * (현재 비주얼 편집기가 사용하는 표준 스키마)
+     */
+    fun buildPaperLayoutV2(paper: TestPaperEntity): Map<String, Any?> {
+        val payload = loadPayload(paper) ?: return emptyLayoutV2(paper.title, "paper")
+        @Suppress("UNCHECKED_CAST")
+        val passages = (payload["passages"] as? List<Map<String, Any?>>) ?: emptyList()
+        @Suppress("UNCHECKED_CAST")
+        val questions = (payload["questions"] as? List<Map<String, Any?>>) ?: emptyList()
+
+        val blocks = mutableListOf<Map<String, Any?>>()
+        var bid = 1
+        fun nbid() = "b${bid++}"
+
+        // 응시 정보 칸
+        blocks.add(mapOf(
+            "id" to nbid(),
+            "type" to "info",
+            "text" to "학교 _________  학년/반 ____  이름 _________  응시일 ____"
+        ))
+
+        val passageMap = passages.associateBy { (it["id"] as? String) ?: "" }
+        val byPassage = questions.groupBy { it["passageId"] as? String }
+        val orderedKeys = byPassage.keys.sortedWith(compareBy({ it == null }, { it ?: "" }))
+
+        for (key in orderedKeys) {
+            val qs = byPassage[key]?.sortedBy { numberOf(it) } ?: continue
+            if (qs.isEmpty()) continue
+            val passage = if (key != null) passageMap[key] else null
+            if (passage != null) {
+                val firstNo = qs.minOf { numberOf(it) }
+                val lastNo = qs.maxOf { numberOf(it) }
+                blocks.add(mapOf(
+                    "id" to nbid(),
+                    "type" to "passage",
+                    "label" to (if (firstNo == lastNo) "[$firstNo]" else "[$firstNo~$lastNo]"),
+                    "text" to ((passage["text"] as? String) ?: "")
+                ))
+            }
+            qs.forEach { q ->
+                @Suppress("UNCHECKED_CAST")
+                val rawChoices = (q["choices"] as? List<Map<String, Any?>>) ?: emptyList()
+                blocks.add(mapOf(
+                    "id" to nbid(),
+                    "type" to "question",
+                    "no" to numberOf(q),
+                    "stem" to ((q["stem"] as? String) ?: ""),
+                    "questionType" to ((q["type"] as? String) ?: "MULTI_CHOICE"),
+                    "points" to (q["points"] ?: 4),
+                    "choices" to rawChoices.mapIndexed { idx, c ->
+                        mapOf(
+                            "id" to (c["id"] ?: "c${idx + 1}"),
+                            "text" to (c["text"] ?: ""),
+                            "marker" to "①②③④⑤".getOrNull(idx)?.toString().orEmpty()
+                        )
+                    }
+                ))
+            }
+        }
+
+        return mapOf(
+            "version" to "2.0",
+            "type" to "paper",
+            "title" to paper.title,
+            "header" to mapOf(
+                "title" to paper.title,
+                "meta" to "${paper.totalQuestions}문항 · ${paper.totalPoints}점${paper.timeLimitMinutes?.let { " · ${it}분" } ?: ""}"
+            ),
+            "columns" to 2,  // 시험지 본문 2단 기본
+            "blocks" to blocks
+        )
+    }
+
+    fun buildAnswerLayoutV2(paper: TestPaperEntity): Map<String, Any?> {
+        val payload = loadPayload(paper) ?: return emptyLayoutV2(paper.title, "answer")
+        @Suppress("UNCHECKED_CAST")
+        val questions = (payload["questions"] as? List<Map<String, Any?>>) ?: emptyList()
+
+        val blocks = mutableListOf<Map<String, Any?>>()
+        var bid = 1
+
+        // 정답표
+        val rows = questions.sortedBy { numberOf(it) }.map { q ->
+            @Suppress("UNCHECKED_CAST")
+            val choices = (q["choices"] as? List<Map<String, Any?>>) ?: emptyList()
+            val ansIdx = choices.indexOfFirst { it["id"] == q["answerId"] }
+            val ansLabel = if (ansIdx >= 0) "①②③④⑤".getOrNull(ansIdx)?.toString() ?: "${ansIdx + 1}" else "-"
+            mapOf("no" to numberOf(q), "answer" to ansLabel, "points" to (q["points"] ?: 4))
+        }
+        blocks.add(mapOf(
+            "id" to "b${bid++}",
+            "type" to "heading",
+            "level" to 2,
+            "text" to "정답표"
+        ))
+        blocks.add(mapOf(
+            "id" to "b${bid++}",
+            "type" to "answer-table",
+            "rows" to rows
+        ))
+        blocks.add(mapOf("id" to "b${bid++}", "type" to "spacer", "height" to 8))
+        blocks.add(mapOf(
+            "id" to "b${bid++}",
+            "type" to "heading",
+            "level" to 2,
+            "text" to "해설"
+        ))
+
+        questions.sortedBy { numberOf(it) }.forEach { q ->
+            @Suppress("UNCHECKED_CAST")
+            val choices = (q["choices"] as? List<Map<String, Any?>>) ?: emptyList()
+            val ansIdx = choices.indexOfFirst { it["id"] == q["answerId"] }
+            val ansLabel = if (ansIdx >= 0) "①②③④⑤".getOrNull(ansIdx)?.toString() ?: "${ansIdx + 1}" else "-"
+            blocks.add(mapOf(
+                "id" to "b${bid++}",
+                "type" to "answer-explanation",
+                "no" to numberOf(q),
+                "answer" to ansLabel,
+                "points" to (q["points"] ?: 4),
+                "explanation" to ((q["explanation"] as? String) ?: ""),
+                "modelAnswer" to ((q["modelAnswer"] as? String) ?: "")
+            ))
+        }
+
+        return mapOf(
+            "version" to "2.0",
+            "type" to "answer",
+            "title" to "${paper.title} — 정답·해설",
+            "header" to mapOf(
+                "title" to "${paper.title} — 정답·해설",
+                "meta" to "총 ${paper.totalQuestions}문항"
+            ),
+            "columns" to 2,  // 정답해설 2단
+            "blocks" to blocks
+        )
+    }
+
+    private fun emptyLayoutV2(title: String, type: String): Map<String, Any?> = mapOf(
+        "version" to "2.0",
+        "type" to type,
+        "title" to title,
+        "header" to mapOf("title" to title),
+        "columns" to 1,
+        "blocks" to listOf(
+            mapOf(
+                "id" to "b1",
+                "type" to "text",
+                "text" to "시험지에 문항이 등록되지 않았습니다. 시험지 비주얼 에디터에서 문항을 먼저 등록해주세요."
+            )
+        )
+    )
+
     fun buildPaperLayout(paper: TestPaperEntity): Map<String, Any?> {
         val payload = loadPayload(paper) ?: return emptyLayout("미배정")
         @Suppress("UNCHECKED_CAST")
