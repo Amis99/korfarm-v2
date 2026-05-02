@@ -204,6 +204,7 @@ data class CellResponse(
     val cellId: String,
     val scopeId: String,
     val assetId: String,
+    val userId: String,
     val status: String,
     val score: Int?,
     val submissionCount: Int,
@@ -336,7 +337,7 @@ internal fun StudyPlanCellEntity.toResponse(
     val overdue = dueAt != null && dueAt!!.isBefore(now) &&
         status !in setOf("completed", "submitted", "reviewed")
     return CellResponse(
-        cellId = id, scopeId = scopeId, assetId = assetId,
+        cellId = id, scopeId = scopeId, assetId = assetId, userId = userId,
         status = status, score = score, submissionCount = submissionCount,
         adminNote = adminNote, reviewedAt = reviewedAt?.toString(),
         assetType = asset?.assetType, assetKind = asset?.assetKind, refId = asset?.refId,
