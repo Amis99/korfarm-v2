@@ -2,6 +2,7 @@ package com.korfarm.api.test
 
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.ApiResponse
+import com.korfarm.api.files.FileService
 import com.korfarm.api.security.AdminGuard
 import com.korfarm.api.security.SecurityUtils
 import org.springframework.http.HttpStatus
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController
 class AdminTestController(
     private val testService: TestService,
     private val testStatisticsService: TestStatisticsService,
+    private val testPdfService: TestPdfService,
+    private val fileService: FileService,
     private val objectMapper: com.fasterxml.jackson.databind.ObjectMapper,
 ) {
     private fun requireAdmin() {
@@ -73,6 +76,43 @@ class AdminTestController(
             ?: throw ApiException("BAD_REQUEST", "fileId is required", HttpStatus.BAD_REQUEST)
         val entity = testService.setPdfFileId(testId, fileId)
         return ApiResponse(success = true, data = mapOf("testId" to entity.id))
+    }
+
+    /**
+     * 시험지 + 정답·해설을 한 PDF 로 자동 생성 (typst CLI).
+     * 새로 만들어진 PDF 의 fileId 를 test_papers.pdf_file_id 에 저장 → 학생 화면도 자동 반영.
+     */
+    @PostMapping("/{testId}/pdf-generate")
+    fun generatePdf(@PathVariable testId: String): ApiResponse<Map<String, Any?>> {
+        requireAdmin()
+        testService.verifyAdminTestAccess(testId, currentUser())
+        val paper = testService.getTestPaper(testId)
+
+        val pdfBytes = try {
+            testPdfService.generate(paper)
+        } catch (e: IllegalStateException) {
+            throw ApiException("BAD_REQUEST", e.message ?: "payload 가 비어 있습니다", HttpStatus.BAD_REQUEST)
+        } catch (e: Exception) {
+            throw ApiException("COMPILE_ERROR", e.message ?: "PDF 생성 실패", HttpStatus.UNPROCESSABLE_ENTITY)
+        }
+
+        val safeTitle = paper.title.replace(Regex("[\\\\/:*?\"<>|]"), "_").take(80).ifBlank { "test_paper" }
+        val fileId = fileService.saveBinary(
+            ownerUserId = currentUser(),
+            purpose = "test_paper_pdf",
+            filename = "${safeTitle}.pdf",
+            mime = "application/pdf",
+            data = pdfBytes
+        )
+        testService.setPdfFileId(testId, fileId)
+
+        return ApiResponse(success = true, data = mapOf(
+            "testId" to testId,
+            "fileId" to fileId,
+            "size" to pdfBytes.size,
+            "title" to paper.title,
+            "downloadUrl" to "/v1/files/$fileId/download"
+        ))
     }
 
     @GetMapping("/{testId}")

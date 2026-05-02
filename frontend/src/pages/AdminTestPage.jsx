@@ -4,6 +4,7 @@ import { apiGet, apiPost, apiDelete } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
 import Pagination from "../components/Pagination";
 import usePagination from "../hooks/usePagination";
+import TestPdfPreviewModal from "../components/admin/TestPdfPreviewModal";
 import "../styles/test-storage.css";
 
 // 백엔드 응답이 SNAKE_CASE이거나 camelCase일 수 있어 양쪽 모두 지원
@@ -88,6 +89,24 @@ function AdminTestPage() {
       alert("생성 실패: " + (e.message || ""));
     } finally {
       setCreating(false);
+    }
+  };
+
+  // PDF 자동 생성 + 미리보기
+  const [pdfPreview, setPdfPreview] = useState({ open: false, fileId: null, title: "" });
+  const [generatingId, setGeneratingId] = useState(null);
+
+  const handleGeneratePdf = async (t) => {
+    if (!t?.testId || generatingId) return;
+    setGeneratingId(t.testId);
+    try {
+      const res = await apiPost(`/v1/admin/test-papers/${t.testId}/pdf-generate`);
+      setPdfPreview({ open: true, fileId: res.fileId, title: res.title });
+      load();
+    } catch (e) {
+      alert("PDF 생성 실패:\n" + (e?.message || "알 수 없는 오류"));
+    } finally {
+      setGeneratingId(null);
     }
   };
 
@@ -324,6 +343,18 @@ function AdminTestPage() {
                 </td>
                 <td style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
                   <button
+                    onClick={() => handleGeneratePdf(t)}
+                    disabled={generatingId === t.testId}
+                    title="시험지 + 정답·해설 PDF 자동 생성"
+                    style={{
+                      padding: "4px 10px", fontSize: 11,
+                      background: "rgba(45, 106, 79, 0.15)", color: "#86efac",
+                      border: "1px solid rgba(45, 106, 79, 0.35)", borderRadius: 4,
+                      cursor: generatingId === t.testId ? "wait" : "pointer",
+                      opacity: generatingId === t.testId ? 0.6 : 1,
+                    }}
+                  >{generatingId === t.testId ? "생성 중..." : "📄 PDF 생성"}</button>
+                  <button
                     onClick={() => handleDelete(t)}
                     title="삭제"
                     style={{
@@ -343,6 +374,12 @@ function AdminTestPage() {
         </div>
       )}
     </div>
+    <TestPdfPreviewModal
+      open={pdfPreview.open}
+      fileId={pdfPreview.fileId}
+      title={pdfPreview.title}
+      onClose={() => setPdfPreview({ open: false, fileId: null, title: "" })}
+    />
     </AdminLayout>
   );
 }
