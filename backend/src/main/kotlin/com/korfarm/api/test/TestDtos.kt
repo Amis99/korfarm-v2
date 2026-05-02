@@ -18,6 +18,7 @@ data class TestPaperSummary(
     val hasSubmitted: Boolean,
     val score: Int?,
     val submissionCount: Int? = null,
+    val pdfFileId: String? = null,
     val createdAt: LocalDateTime,
     // 테스트 종류: "diagnostic" / "chapter" / "misc"
     // 종류별로 응시 카운트 소스가 다름 (diagnostic → diag_sessions, chapter → pro_test_sessions, misc → test_submissions)

@@ -1115,6 +1115,7 @@ class TestService(
                 hasSubmitted = false,
                 score = null,
                 submissionCount = subCount,
+                pdfFileId = p.pdfFileId,
                 createdAt = p.createdAt,
                 kind = kind
             )

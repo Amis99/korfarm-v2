@@ -23,6 +23,7 @@ function normalizeTest(t) {
     orgId: t.orgId ?? t.org_id ?? null,
     orgName: t.orgName ?? t.org_name ?? "",
     submissionCount: t.submissionCount ?? t.submission_count ?? 0,
+    pdfFileId: t.pdfFileId ?? t.pdf_file_id ?? null,
     createdAt: t.createdAt ?? t.created_at ?? null,
     // 종류: diagnostic / chapter / misc — 백엔드에서 제공. 누락 시 ID/series 로 추론.
     kind: t.kind || (
@@ -96,8 +97,9 @@ function AdminTestPage() {
   const [pdfPreview, setPdfPreview] = useState({ open: false, fileId: null, title: "" });
   const [generatingId, setGeneratingId] = useState(null);
 
-  const handleGeneratePdf = async (t) => {
+  const handleGeneratePdf = async (t, isRegen = false) => {
     if (!t?.testId || generatingId) return;
+    if (isRegen && !window.confirm(`"${t.title}" 시험지 PDF 를 다시 생성합니다.\n기존 PDF 는 새 PDF 로 덮어씁니다. 계속할까요?`)) return;
     setGeneratingId(t.testId);
     try {
       const res = await apiPost(`/v1/admin/test-papers/${t.testId}/pdf-generate`);
@@ -107,6 +109,16 @@ function AdminTestPage() {
       alert("PDF 생성 실패:\n" + (e?.message || "알 수 없는 오류"));
     } finally {
       setGeneratingId(null);
+    }
+  };
+
+  // 기존 PDF 보기 — file_id 면 모달, http URL 이면 새 탭
+  const handleViewPdf = (t) => {
+    if (!t?.pdfFileId) return;
+    if (/^https?:\/\//i.test(t.pdfFileId)) {
+      window.open(t.pdfFileId, "_blank", "noopener,noreferrer");
+    } else {
+      setPdfPreview({ open: true, fileId: t.pdfFileId, title: t.title });
     }
   };
 
@@ -342,19 +354,28 @@ function AdminTestPage() {
                   </span>
                 </td>
                 <td style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-                  <button
-                    onClick={() => handleGeneratePdf(t)}
-                    disabled={generatingId === t.testId}
-                    title="시험지 + 정답·해설 PDF 자동 생성"
-                    style={{
-                      padding: "5px 12px", fontSize: 12, fontWeight: 600,
-                      background: "#2d6a4f", color: "#fff",
-                      border: "1px solid #1f4a37", borderRadius: 5,
-                      cursor: generatingId === t.testId ? "wait" : "pointer",
-                      opacity: generatingId === t.testId ? 0.7 : 1,
-                      boxShadow: "0 1px 2px rgba(0,0,0,0.15)",
-                    }}
-                  >{generatingId === t.testId ? "생성 중..." : "📄 PDF 생성"}</button>
+                  {t.pdfFileId ? (
+                    <>
+                      <button
+                        onClick={() => handleViewPdf(t)}
+                        title="저장된 PDF 보기"
+                        style={pdfBtnStyle("primary")}
+                      >📄 PDF 보기</button>
+                      <button
+                        onClick={() => handleGeneratePdf(t, true)}
+                        disabled={generatingId === t.testId}
+                        title="기존 PDF 를 새 typst PDF 로 덮어쓰기"
+                        style={pdfBtnStyle("secondary", generatingId === t.testId)}
+                      >{generatingId === t.testId ? "재생성 중..." : "🔄 재생성"}</button>
+                    </>
+                  ) : (
+                    <button
+                      onClick={() => handleGeneratePdf(t, false)}
+                      disabled={generatingId === t.testId}
+                      title="시험지 + 정답·해설 PDF 자동 생성"
+                      style={pdfBtnStyle("primary", generatingId === t.testId)}
+                    >{generatingId === t.testId ? "생성 중..." : "📄 PDF 생성"}</button>
+                  )}
                   <button
                     onClick={() => handleDelete(t)}
                     title="삭제"
@@ -384,6 +405,27 @@ function AdminTestPage() {
     />
     </AdminLayout>
   );
+}
+
+// PDF 생성·보기·재생성 버튼 공통 스타일
+function pdfBtnStyle(variant, busy = false) {
+  const map = {
+    primary:   { bg: "#2d6a4f", border: "#1f4a37", color: "#fff" },   // 진한 초록 — PDF 보기 / 새 생성
+    secondary: { bg: "#6b7280", border: "#4b5563", color: "#fff" },   // 회색 — 재생성
+  };
+  const v = map[variant] || map.primary;
+  return {
+    padding: "5px 12px",
+    fontSize: 12,
+    fontWeight: 600,
+    background: v.bg,
+    color: v.color,
+    border: `1px solid ${v.border}`,
+    borderRadius: 5,
+    cursor: busy ? "wait" : "pointer",
+    opacity: busy ? 0.7 : 1,
+    boxShadow: "0 1px 2px rgba(0,0,0,0.15)",
+  };
 }
 
 export default AdminTestPage;
