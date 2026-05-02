@@ -48,15 +48,20 @@ export default function AdminTestPaperDesignPage() {
     load(type);
   }, [testId, type]); // eslint-disable-line
 
-  // 자동 채우기 — test.payload → HTML 변환은 백엔드 신규 endpoint 필요 (후속)
-  // 우선 빈 시작
   const handleAutoFill = async () => {
     if (html.trim() && !confirm("기존 편집 내용을 덮어씁니다. 계속할까요?")) return;
-    // 임시: 현재는 자동 채우기 endpoint 없음 — 빈 골조 제공
-    const skel = type === "answer"
-      ? `<h1 style="text-align:center">${meta?.title || "시험지"} — 정답·해설</h1><h2>정답표</h2><p>(여기에 정답표를 작성하세요)</p><h2>해설</h2><div class="tp-cols-2"><p>(해설을 작성하세요)</p></div>`
-      : `<h1 style="text-align:center">${meta?.title || "시험지"}</h1><p style="text-align:center">${meta?.totalQuestions ?? 0}문항 · ${meta?.totalPoints ?? 0}점${meta?.timeLimitMinutes ? ` · ${meta.timeLimitMinutes}분` : ""}</p><p>학교 _________ 학년/반 ____ 이름 _________</p><div class="tp-cols-2"><div class="tp-passage"><p><strong>[1~3]</strong> 다음 글을 읽고 답하시오.</p><p>지문 본문을 여기에 입력합니다.</p></div><div class="tp-question"><p>1. 문제 발문을 입력하세요.</p><p>① 첫 번째</p><p>② 두 번째</p><p>③ 세 번째</p></div></div>`;
-    setHtml(skel);
+    setSaving(true);
+    setError("");
+    try {
+      const res = await apiPost(`/v1/admin/test-papers/${testId}/html/auto-fill?type=${type}`);
+      const newHtml = res?.html || "";
+      setHtml(newHtml);
+      savedHtmlRef.current = newHtml;
+    } catch (e) {
+      setError(e?.message || "자동 채우기 실패");
+    } finally {
+      setSaving(false);
+    }
   };
 
   const handleSave = async () => {

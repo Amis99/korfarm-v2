@@ -1,6 +1,5 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { Underline } from "@tiptap/extension-underline";
 import { TextAlign } from "@tiptap/extension-text-align";
 import { Image } from "@tiptap/extension-image";
 import { TextStyle, Color, FontFamily } from "@tiptap/extension-text-style";
@@ -22,7 +21,6 @@ export default function TestPaperWordEditor({ html, onChange }) {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({ heading: { levels: [1, 2, 3] } }),
-      Underline,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
       Image.configure({ allowBase64: false }),
       TextStyle,

@@ -25,11 +25,30 @@ class AdminTestHtmlController(
     private val testService: TestService,
     private val testPaperRepo: TestPaperRepo,
     private val htmlToPdf: HtmlToPdfService,
+    private val htmlBuilder: HtmlBuilder,
     private val fileService: FileService
 ) {
     private fun requireAdmin() = AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
     private fun current() = SecurityUtils.currentUserId()
         ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+
+    /** test.payload → HTML 자동 생성 + DB 저장. 기존 html 덮어씀 (어드민 확인 후 호출) */
+    @PostMapping("/auto-fill")
+    @Transactional
+    fun autoFill(
+        @PathVariable testId: String,
+        @RequestParam(defaultValue = "paper") type: String
+    ): ApiResponse<Map<String, Any?>> {
+        requireAdmin()
+        testService.verifyAdminTestAccess(testId, current())
+        val paper = testPaperRepo.findById(testId).orElseThrow {
+            ApiException("NOT_FOUND", "test not found", HttpStatus.NOT_FOUND)
+        }
+        val html = if (type == "answer") htmlBuilder.buildAnswer(paper) else htmlBuilder.buildPaper(paper)
+        if (type == "answer") paper.answerHtmlContent = html else paper.htmlContent = html
+        testPaperRepo.save(paper)
+        return ApiResponse(success = true, data = mapOf("type" to type, "html" to html))
+    }
 
     @GetMapping
     fun getHtml(
