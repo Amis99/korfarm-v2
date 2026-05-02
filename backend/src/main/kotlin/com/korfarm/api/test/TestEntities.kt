@@ -68,6 +68,22 @@ class TestPaperEntity(
     @Column(name = "answer_typst_source", columnDefinition = "LONGTEXT")
     var answerTypstSource: String? = null,
 
+    /** 시험지 HTML (워드프로세서 산출) */
+    @Column(name = "html_content", columnDefinition = "LONGTEXT")
+    var htmlContent: String? = null,
+
+    /** 정답·해설 HTML */
+    @Column(name = "answer_html_content", columnDefinition = "LONGTEXT")
+    var answerHtmlContent: String? = null,
+
+    /** 시험지 HTML 자동 컴파일 PDF 파일 ID */
+    @Column(name = "html_pdf_file_id")
+    var htmlPdfFileId: String? = null,
+
+    /** 정답·해설 HTML 자동 컴파일 PDF 파일 ID */
+    @Column(name = "answer_html_pdf_file_id")
+    var answerHtmlPdfFileId: String? = null,
+
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now(),
 

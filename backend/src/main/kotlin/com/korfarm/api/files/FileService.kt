@@ -84,6 +84,34 @@ class FileService(
         fileRepository.save(entity)
     }
 
+    /**
+     * 서버 내부 생성물(예: HTML→PDF 변환 결과)을 직접 저장. 클라이언트 업로드 없이 byte[] 만 받음.
+     */
+    @Transactional
+    fun saveBinary(
+        ownerUserId: String,
+        purpose: String,
+        filename: String,
+        mime: String,
+        data: ByteArray
+    ): String {
+        val fileId = IdGenerator.newId("file")
+        val entity = FileEntity(
+            id = fileId,
+            ownerId = ownerUserId,
+            purpose = purpose,
+            url = "/v1/files/$fileId/download",
+            mime = mime,
+            size = data.size.toLong(),
+            status = "uploaded",
+            originalName = filename
+        )
+        fileRepository.save(entity)
+        val dest = uploadPath().resolve(fileId)
+        Files.write(dest, data)
+        return fileId
+    }
+
     fun getFileForDownload(userId: String?, isAdmin: Boolean, fileId: String): Pair<FileEntity, Path> {
         val entity = fileRepository.findById(fileId).orElseThrow {
             ApiException("NOT_FOUND", "파일을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
