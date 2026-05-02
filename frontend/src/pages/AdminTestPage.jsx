@@ -324,16 +324,6 @@ function AdminTestPage() {
                 </td>
                 <td style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
                   <button
-                    onClick={() => t.testId && navigate(`/admin/tests/${t.testId}/design`)}
-                    title="시험지 디자인 (인쇄용 페이지 편집)"
-                    style={{
-                      padding: "4px 10px", fontSize: 11,
-                      background: "rgba(45, 106, 79, 0.15)", color: "#2d6a4f",
-                      border: "1px solid rgba(45, 106, 79, 0.35)", borderRadius: 4,
-                      cursor: "pointer",
-                    }}
-                  >🎨 디자인</button>
-                  <button
                     onClick={() => handleDelete(t)}
                     title="삭제"
                     style={{

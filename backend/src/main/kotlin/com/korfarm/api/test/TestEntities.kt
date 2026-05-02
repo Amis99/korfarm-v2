@@ -52,38 +52,6 @@ class TestPaperEntity(
     @Column(name = "payload_json", columnDefinition = "LONGTEXT")
     var payloadJson: String? = null,
 
-    /** 시험지 시각 레이아웃 (디자인 에디터). null 이면 미디자인 — 어드민이 자동 채우기 후 편집 */
-    @Column(name = "layout_json", columnDefinition = "LONGTEXT")
-    var layoutJson: String? = null,
-
-    /** 정답·해설 시각 레이아웃. null 이면 미디자인 */
-    @Column(name = "answer_layout_json", columnDefinition = "LONGTEXT")
-    var answerLayoutJson: String? = null,
-
-    /** 시험지 Typst 소스 — 자동 생성 + 어드민 편집. CLI 컴파일하여 PDF 생산 */
-    @Column(name = "typst_source", columnDefinition = "LONGTEXT")
-    var typstSource: String? = null,
-
-    /** 정답·해설 Typst 소스 */
-    @Column(name = "answer_typst_source", columnDefinition = "LONGTEXT")
-    var answerTypstSource: String? = null,
-
-    /** 시험지 HTML (워드프로세서 산출) */
-    @Column(name = "html_content", columnDefinition = "LONGTEXT")
-    var htmlContent: String? = null,
-
-    /** 정답·해설 HTML */
-    @Column(name = "answer_html_content", columnDefinition = "LONGTEXT")
-    var answerHtmlContent: String? = null,
-
-    /** 시험지 HTML 자동 컴파일 PDF 파일 ID */
-    @Column(name = "html_pdf_file_id")
-    var htmlPdfFileId: String? = null,
-
-    /** 정답·해설 HTML 자동 컴파일 PDF 파일 ID */
-    @Column(name = "answer_html_pdf_file_id")
-    var answerHtmlPdfFileId: String? = null,
-
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now(),
 
