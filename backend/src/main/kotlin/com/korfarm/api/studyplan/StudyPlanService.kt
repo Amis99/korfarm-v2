@@ -532,6 +532,18 @@ class StudyPlanService(
                 cellAssignmentRepo.findByCellIdIn(korfarmCellIds).groupBy { it.cellId }
             else emptyMap()
 
+        // 시험 자산의 PDF fileId 일괄 조회 (통합 PDF 정책 — 시험지·정답해설 동일 fileId)
+        // testId 후보: cell.cellRefId (셀 단위 배정) + asset.refId (자산 단위 default) — 둘 다 모음
+        val testIdsFromAssets = assets.filter { it.assetType == "test" && !it.refId.isNullOrBlank() }
+            .mapNotNull { it.refId }
+        val testIdsFromCells = cells.filter {
+            assetMap[it.assetId]?.assetType == "test" && !it.cellRefId.isNullOrBlank()
+        }.mapNotNull { it.cellRefId }
+        val allTestIds = (testIdsFromAssets + testIdsFromCells).distinct()
+        val pdfByTestId: Map<String, String?> = if (allTestIds.isNotEmpty()) {
+            testPaperRepo.findAllById(allTestIds).associate { it.id to it.pdfFileId }
+        } else emptyMap()
+
         val cellResponses = cells.map { cell ->
             val asset = assetMap[cell.assetId]
             val action = buildCellAction(
@@ -547,14 +559,13 @@ class StudyPlanService(
                 ?.sortedWith(compareBy({ it.sortOrder }, { it.createdAt }))
                 ?.map { it.toResponse() }
                 ?: emptyList()
-            cell.toResponse(asset, action, assigns)
+            // 시험 셀이면 cell.cellRefId 우선 → asset.refId fallback 으로 PDF fileId 매핑
+            val cellTestPdf = if (asset?.assetType == "test") {
+                val tid = cell.cellRefId ?: asset.refId
+                tid?.let { pdfByTestId[it] }
+            } else null
+            cell.toResponse(asset, action, assigns, cellTestPdf)
         }
-        // 시험 자산의 PDF fileId 일괄 조회 (통합 PDF 정책 — 시험지·정답해설 동일 fileId)
-        val testAssetIds = assets.filter { it.assetType == "test" && !it.refId.isNullOrBlank() }
-            .mapNotNull { it.refId }
-        val pdfByTestId: Map<String, String?> = if (testAssetIds.isNotEmpty()) {
-            testPaperRepo.findAllById(testAssetIds).associate { it.id to it.pdfFileId }
-        } else emptyMap()
 
         val assetResponses = assets.map { asset ->
             val pdf = if (asset.assetType == "test") pdfByTestId[asset.refId] else null

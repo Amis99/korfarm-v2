@@ -227,7 +227,11 @@ data class CellResponse(
     /** 셀 클릭 시 화면 전환에 필요한 정보. asset_type 별로 다른 필드. */
     val cellAction: CellAction? = null,
     /** 국어농장 셀 복수 배정 — assignment row 들. 다른 자산 종류는 비어 있음. */
-    val assignments: List<CellAssignmentResponse> = emptyList()
+    val assignments: List<CellAssignmentResponse> = emptyList(),
+    /** 시험지 PDF — cell.cellRefId(testId) 로 매핑된 test_papers.pdf_file_id. 통합 PDF. */
+    val testPdfFileId: String? = null,
+    /** 정답·해설 PDF — 통합 PDF 정책상 testPdfFileId 와 같은 값 */
+    val answerPdfFileId: String? = null
 )
 
 data class CellAssignmentResponse(
@@ -355,7 +359,8 @@ internal fun StudyPlanAssetEntity.toResponse(
 internal fun StudyPlanCellEntity.toResponse(
     asset: StudyPlanAssetEntity? = null,
     cellAction: CellAction? = null,
-    assignments: List<CellAssignmentResponse> = emptyList()
+    assignments: List<CellAssignmentResponse> = emptyList(),
+    testPdfFileId: String? = null
 ): CellResponse {
     val now = java.time.LocalDateTime.now()
     val overdue = dueAt != null && dueAt!!.isBefore(now) &&
@@ -370,7 +375,9 @@ internal fun StudyPlanCellEntity.toResponse(
         assignedLabel = assignedLabel,
         isOverdue = overdue,
         cellAction = cellAction,
-        assignments = assignments
+        assignments = assignments,
+        testPdfFileId = testPdfFileId,
+        answerPdfFileId = testPdfFileId
     )
 }
 
