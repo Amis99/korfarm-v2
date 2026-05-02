@@ -341,27 +341,29 @@ function AdminTestPage() {
                     {t.submissionCount}명
                   </span>
                 </td>
-                <td style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
+                <td style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                   <button
                     onClick={() => handleGeneratePdf(t)}
                     disabled={generatingId === t.testId}
                     title="시험지 + 정답·해설 PDF 자동 생성"
                     style={{
-                      padding: "4px 10px", fontSize: 11,
-                      background: "rgba(45, 106, 79, 0.15)", color: "#86efac",
-                      border: "1px solid rgba(45, 106, 79, 0.35)", borderRadius: 4,
+                      padding: "5px 12px", fontSize: 12, fontWeight: 600,
+                      background: "#2d6a4f", color: "#fff",
+                      border: "1px solid #1f4a37", borderRadius: 5,
                       cursor: generatingId === t.testId ? "wait" : "pointer",
-                      opacity: generatingId === t.testId ? 0.6 : 1,
+                      opacity: generatingId === t.testId ? 0.7 : 1,
+                      boxShadow: "0 1px 2px rgba(0,0,0,0.15)",
                     }}
                   >{generatingId === t.testId ? "생성 중..." : "📄 PDF 생성"}</button>
                   <button
                     onClick={() => handleDelete(t)}
                     title="삭제"
                     style={{
-                      padding: "4px 10px", fontSize: 11,
-                      background: "rgba(239,68,68,0.12)", color: "#fca5a5",
-                      border: "1px solid rgba(239,68,68,0.3)", borderRadius: 4,
+                      padding: "5px 12px", fontSize: 12, fontWeight: 600,
+                      background: "#c0392b", color: "#fff",
+                      border: "1px solid #962f22", borderRadius: 5,
                       cursor: "pointer",
+                      boxShadow: "0 1px 2px rgba(0,0,0,0.15)",
                     }}
                   >🗑 삭제</button>
                 </td>
