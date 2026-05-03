@@ -1,4 +1,4 @@
-import InlineEditable from "./InlineEditable";
+import MarkdownEditField from "../MarkdownEditField";
 import MultiChoiceEditor from "./MultiChoiceEditor";
 import FillBlanksEditor from "./FillBlanksEditor";
 import TextSelectEditor from "./TextSelectEditor";
@@ -79,21 +79,50 @@ export default function QuestionCardEditor({
 
       <div className="dq-card-body">
         <div className="dq-section-label">발문 (stem)</div>
-        <InlineEditable
+        <MarkdownEditField
           value={question.stem || ""}
           onChange={(v) => editor.updateField(`${path}.stem`, v)}
-          placeholder="문제 발문 (마크다운: **굵게**, ==하이라이트==, *기울이기*, <u>밑줄</u>)"
-          className="dq-stem"
+          placeholder="문제 발문 (예: 알맞은 물건을 고르세요)"
+          minHeight={70}
         />
 
         {passageIsString && (
           <>
-            <div className="dq-section-label">지문 (선택)</div>
-            <InlineEditable
+            <div className="dq-section-label">지문 (passage) — 본문</div>
+            <MarkdownEditField
               value={typeof question.passage === "string" ? question.passage : ""}
               onChange={(v) => editor.updateField(`${path}.passage`, v)}
-              placeholder="지문이 없으면 비워두세요."
-              className="dq-passage"
+              placeholder="지문이 없으면 비워두세요. (마크다운·이미지·표 지원)"
+              minHeight={120}
+            />
+
+            <div className="dq-section-label">추가 안내문 (prompt) — 학생 화면에 본문 박스로 노출</div>
+            <MarkdownEditField
+              value={question.prompt || ""}
+              onChange={(v) => editor.updateField(`${path}.prompt`, v)}
+              placeholder="발문 외 추가 안내. 어휘 1번 등에서 학생에게 보여줄 본문이 여기에 들어갑니다."
+              minHeight={80}
+            />
+
+            <div className="dq-section-label">보기 (examples) — 학생 화면에 별도 박스로 노출 (선택)</div>
+            <MarkdownEditField
+              value={question["보기"] ?? question.examples ?? question.example ?? question.additionalInfo ?? ""}
+              onChange={(v) => editor.updateField(`${path}.보기`, v)}
+              placeholder="보기 박스에 표시할 텍스트. 사용 안 하면 비워두세요."
+              minHeight={80}
+            />
+
+            <div className="dq-section-label">강조 단어 (highlight) — 지문 안 형광펜 처리할 단어/구절</div>
+            <input
+              type="text"
+              value={question.highlight?.text || ""}
+              onChange={(e) => {
+                const v = e.target.value;
+                if (v) editor.updateField(`${path}.highlight`, { text: v });
+                else editor.updateField(`${path}.highlight`, null);
+              }}
+              placeholder="예: 단짝 (지문 안에서 이 단어를 노란색 형광펜으로 표시)"
+              style={{ width: "100%", padding: "6px 10px", fontSize: 13, border: "1px solid #ccc", borderRadius: 4 }}
             />
           </>
         )}
@@ -131,11 +160,11 @@ export default function QuestionCardEditor({
         })}
 
         <div className="dq-section-label" style={{ marginTop: 14 }}>해설 (explanation)</div>
-        <InlineEditable
+        <MarkdownEditField
           value={question.explanation || ""}
           onChange={(v) => editor.updateField(`${path}.explanation`, v)}
-          placeholder="정답 해설"
-          className="dq-explanation"
+          placeholder="정답 해설 (마크다운·이미지 지원)"
+          minHeight={90}
         />
 
         <div className="dq-section-label" style={{ marginTop: 12 }}>점수 (scoring)</div>

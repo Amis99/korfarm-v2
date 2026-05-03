@@ -1,14 +1,9 @@
-import InlineEditable from "./InlineEditable";
+import MarkdownEditField from "../MarkdownEditField";
 
 /**
  * MULTI_CHOICE 인라인 편집기.
- * - choices[] 인라인 (텍스트 + 정답 라디오)
+ * - choices[] (마크다운/이미지 지원 텍스트 + 정답 라디오)
  * - 추가/삭제
- *
- * props:
- *   question: { id, choices:[{id, text}], answerId, ... }
- *   path: 이 문제 question 의 path prefix (예: "questions[0]")
- *   editor: useContentEditor 반환 (updateField/addItem/removeItem)
  */
 export default function MultiChoiceEditor({ question, path, editor }) {
   const choices = question.choices || [];
@@ -26,36 +21,40 @@ export default function MultiChoiceEditor({ question, path, editor }) {
 
   return (
     <div className="dq-mc">
-      <div className="dq-section-label">선택지</div>
-      <div className="dq-mc-list">
+      <div className="dq-section-label">선택지 <span style={{ fontSize: 11, color: "#888", fontWeight: 400 }}>(마크다운·이미지 지원)</span></div>
+      <div className="dq-mc-list" style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         {choices.map((c, i) => (
-          <div key={c.id || i} className={`dq-mc-row ${answerId === c.id ? "is-answer" : ""}`}>
-            <label className="dq-mc-radio" title="정답으로 지정">
+          <div key={c.id || i} className={`dq-mc-row ${answerId === c.id ? "is-answer" : ""}`}
+            style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>
+            <label className="dq-mc-radio" title="정답으로 지정"
+              style={{ display: "flex", alignItems: "center", gap: 4, paddingTop: 8, flexShrink: 0 }}>
               <input
                 type="radio"
                 name={`${path}-answer`}
                 checked={answerId === c.id}
                 onChange={() => editor.updateField(`${path}.answerId`, c.id)}
               />
-              <span className="dq-mc-num">{i + 1}</span>
+              <span className="dq-mc-num" style={{ fontWeight: 600 }}>{i + 1}</span>
             </label>
-            <InlineEditable
-              value={c.text}
-              onChange={(v) => editor.updateField(`${path}.choices[${i}].text`, v)}
-              placeholder="선택지 텍스트"
-              multiline={false}
-              className="dq-mc-text"
-            />
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <MarkdownEditField
+                value={c.text || ""}
+                onChange={(v) => editor.updateField(`${path}.choices[${i}].text`, v)}
+                placeholder={`${i + 1}번 선택지 텍스트`}
+                minHeight={60}
+              />
+            </div>
             <button
               type="button"
               className="dq-mc-del"
               onClick={() => removeChoice(i)}
               title="삭제"
+              style={{ flexShrink: 0, paddingTop: 4 }}
             >×</button>
           </div>
         ))}
       </div>
-      <button type="button" className="dq-add-btn" onClick={addChoice}>+ 선택지 추가</button>
+      <button type="button" className="dq-add-btn" onClick={addChoice} style={{ marginTop: 8 }}>+ 선택지 추가</button>
     </div>
   );
 }
