@@ -5,6 +5,7 @@ import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.ApiResponse
 import com.korfarm.api.security.AdminGuard
 import com.korfarm.api.system.FeatureFlagService
+import com.korfarm.api.user.UserRepository
 import org.springframework.data.domain.PageRequest
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
@@ -25,9 +26,30 @@ class AdminDuelMatchController(
     private val duelAnswerRepository: DuelAnswerRepository,
     private val duelEscrowRepository: DuelEscrowRepository,
     private val duelQuestionPoolRepository: DuelQuestionPoolRepository,
+    private val userRepository: UserRepository,
     private val featureFlagService: FeatureFlagService,
     private val objectMapper: ObjectMapper
 ) {
+    /** userId → 사용자 표시용 메타 (이름 / 학교 / 학년). AI 플레이어는 그대로 ID. */
+    private fun userMeta(userId: String): Map<String, Any?> {
+        if (userId.startsWith("ai_player_")) {
+            return mapOf("userId" to userId, "displayName" to "AI ${userId.removePrefix("ai_player_")}", "isAi" to true)
+        }
+        val u = userRepository.findById(userId).orElse(null)
+        if (u == null) return mapOf("userId" to userId, "displayName" to userId, "isAi" to false)
+        val school = u.school?.takeIf { it.isNotBlank() }
+        val grade = u.gradeLabel?.takeIf { it.isNotBlank() }
+        val name = u.name?.takeIf { it.isNotBlank() } ?: u.email
+        val parts = listOfNotNull(school, grade).joinToString(" ")
+        return mapOf(
+            "userId" to userId,
+            "displayName" to if (parts.isNotBlank()) "$name ($parts)" else name,
+            "name" to name,
+            "school" to school,
+            "grade" to grade,
+            "isAi" to false
+        )
+    }
     @GetMapping
     fun list(
         @RequestParam(required = false) serverId: String?,
@@ -48,6 +70,7 @@ class AdminDuelMatchController(
         // 각 매치에 player count 포함
         val rows = pageResult.content.map { m ->
             val players = duelMatchPlayerRepository.findByMatchId(m.id)
+            val winner = players.firstOrNull { it.result == "WIN" }
             mapOf<String, Any?>(
                 "id" to m.id,
                 "seasonId" to m.seasonId,
@@ -55,7 +78,8 @@ class AdminDuelMatchController(
                 "roomId" to m.roomId,
                 "status" to m.status,
                 "playerCount" to players.size,
-                "winnerUserId" to players.firstOrNull { it.result == "WIN" }?.userId,
+                "winnerUserId" to winner?.userId,
+                "winnerDisplay" to winner?.let { userMeta(it.userId)["displayName"] },
                 "startedAt" to m.startedAt?.toString(),
                 "endedAt" to m.endedAt?.toString(),
                 "createdAt" to m.createdAt.toString()
@@ -83,6 +107,7 @@ class AdminDuelMatchController(
         val players = duelMatchPlayerRepository.findByMatchId(matchId).map { p ->
             mapOf<String, Any?>(
                 "userId" to p.userId,
+                "user" to userMeta(p.userId),
                 "result" to p.result,
                 "rankPosition" to p.rankPosition,
                 "stakeAmount" to p.stakeAmount,
@@ -91,21 +116,29 @@ class AdminDuelMatchController(
                 "rewardAmount" to p.rewardAmount
             )
         }
-        val questions = duelQuestionRepository.findByMatchIdOrderByOrderIndexAsc(matchId).map { q ->
-            // 풀에서 stem 한 번 조회 (없으면 빈 문자열)
-            val stem = duelQuestionPoolRepository.findById(q.questionId).orElse(null)?.let { pool ->
-                try { objectMapper.readTree(pool.questionJson).get("stem")?.asText() ?: "" }
-                catch (e: Exception) { "" }
-            } ?: ""
-            mapOf<String, Any?>(
-                "orderIndex" to q.orderIndex,
-                "questionId" to q.questionId,
-                "stem" to (if (stem.length > 80) stem.take(80) + "…" else stem)
-            )
-        }
+        // 매치 시작 시 풀 전체가 INSERT 되었으므로(과거 버그), 실제 풀린 문제만 노출.
+        // 풀린 기준 = duel_answers 에 등장한 questionId distinct.
+        val playedQuestionIds = duelAnswerRepository.findByMatchId(matchId)
+            .map { it.questionId }.toSet()
+        val allQuestions = duelQuestionRepository.findByMatchIdOrderByOrderIndexAsc(matchId)
+        val questions = allQuestions
+            .filter { it.questionId in playedQuestionIds }
+            .map { q ->
+                val stem = duelQuestionPoolRepository.findById(q.questionId).orElse(null)?.let { pool ->
+                    try { objectMapper.readTree(pool.questionJson).get("stem")?.asText() ?: "" }
+                    catch (e: Exception) { "" }
+                } ?: ""
+                mapOf<String, Any?>(
+                    "orderIndex" to q.orderIndex,
+                    "questionId" to q.questionId,
+                    "stem" to (if (stem.length > 80) stem.take(80) + "…" else stem)
+                )
+            }
+            .sortedBy { it["orderIndex"] as Int }
         val answers = duelAnswerRepository.findByMatchId(matchId).map { a ->
             mapOf<String, Any?>(
                 "userId" to a.userId,
+                "user" to userMeta(a.userId),
                 "questionId" to a.questionId,
                 "answerJson" to a.answerJson,
                 "isCorrect" to a.isCorrect,
@@ -116,6 +149,7 @@ class AdminDuelMatchController(
         val escrows = duelEscrowRepository.findByMatchId(matchId).map { e ->
             mapOf<String, Any?>(
                 "userId" to e.userId,
+                "user" to userMeta(e.userId),
                 "seedType" to e.seedType,
                 "amount" to e.amount,
                 "status" to e.status

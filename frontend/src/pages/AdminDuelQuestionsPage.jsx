@@ -1,4 +1,5 @@
 import { useEffect, useState, useMemo, useCallback } from "react";
+import { useSearchParams } from "react-router-dom";
 import { apiGet, apiPost, apiPut, apiDelete } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
 import MarkdownEditField from "../components/editor/MarkdownEditField";
@@ -42,6 +43,7 @@ const IMPORT_EXAMPLE = `[
 ]`;
 
 function AdminDuelQuestionsPage({ wrap = true }) {
+  const [searchParams, setSearchParams] = useSearchParams();
   // 서버 탭 상태
   const [activeServer, setActiveServer] = useState("saussure");
   // 문제 수 카운트 (서버별)
@@ -130,6 +132,49 @@ function AdminDuelQuestionsPage({ wrap = true }) {
     setSearch("");
     setTypeFilter("all");
   }, [activeServer, loadQuestions]);
+
+  // ?editId=... 쿼리 파라미터로 진입 시 해당 문제 수정 모달 자동 열기
+  // (매치 기록의 문제 클릭 → 수정 페이지 점프 흐름)
+  useEffect(() => {
+    const editId = searchParams.get("editId");
+    if (!editId) return;
+    (async () => {
+      try {
+        const detail = await apiGet(`/v1/admin/duel/questions/${editId}`);
+        if (!detail) return;
+        // 해당 서버 탭으로 자동 전환
+        const targetServer = detail.serverId || detail.server_id;
+        if (targetServer && targetServer !== activeServer) {
+          setActiveServer(targetServer);
+        }
+        // 수정 폼 채우기
+        const choices = detail.choices || [];
+        setAddForm({
+          serverId: targetServer || activeServer,
+          questionType: detail.questionType || detail.question_type || "QUIZ",
+          category: detail.category || "",
+          stem: detail.stem || "",
+          passage: detail.passage || "",
+          choice1: choices[0]?.text || "",
+          choice2: choices[1]?.text || "",
+          choice3: choices[2]?.text || "",
+          choice4: choices[3]?.text || "",
+          answerId: String(detail.answerId ?? detail.answer_id ?? "1"),
+          timeLimitSec: detail.timeLimitSec ?? detail.time_limit_sec ?? 15,
+        });
+        setEditingQuestionId(detail.id);
+        setAddError("");
+        setShowAddForm(true);
+        // 쿼리 파라미터 정리 (탭은 유지)
+        const next = new URLSearchParams(searchParams);
+        next.delete("editId");
+        setSearchParams(next, { replace: true });
+      } catch (err) {
+        console.warn("editId 자동 진입 실패:", err);
+      }
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams.get("editId")]);
 
   // DB + 샘플 병합
   const allQuestions = useMemo(() => {

@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
+import { useSearchParams } from "react-router-dom";
 import { apiGet } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/admin-detail.css";
@@ -18,6 +19,7 @@ const STATUSES = [
 ];
 
 function AdminDuelMatchesPage({ wrap = true }) {
+  const [, setParams] = useSearchParams();
   const [serverFilter, setServerFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");
   const [page, setPage] = useState(0);
@@ -116,7 +118,7 @@ function AdminDuelMatchesPage({ wrap = true }) {
                   }>{m.status}</span>
                 </td>
                 <td>{m.playerCount}명</td>
-                <td style={{ fontSize: 12 }}>{m.winnerUserId || "-"}</td>
+                <td style={{ fontSize: 12 }}>{m.winnerDisplay || m.winnerUserId || "-"}</td>
                 <td style={{ fontSize: 12 }}>{m.startedAt?.substring(0, 16) || "-"}</td>
                 <td style={{ fontSize: 12 }}>{m.endedAt?.substring(0, 16) || "-"}</td>
                 <td>
@@ -152,11 +154,16 @@ function AdminDuelMatchesPage({ wrap = true }) {
 
             <h3 style={{ marginTop: 12 }}>참가자 ({detail.players?.length})</h3>
             <table className="admin-detail-table" style={{ fontSize: 13 }}>
-              <thead><tr><th>userId</th><th>결과</th><th>순위</th><th>정답</th><th>총 시간(s)</th><th>걸음(씨앗)</th><th>보상</th></tr></thead>
+              <thead><tr><th>참가자</th><th>결과</th><th>순위</th><th>정답</th><th>총 시간(s)</th><th>걸음(씨앗)</th><th>보상</th></tr></thead>
               <tbody>
                 {detail.players?.map((p, i) => (
                   <tr key={i}>
-                    <td>{p.userId}</td>
+                    <td>
+                      <div style={{ fontWeight: 600 }}>{p.user?.displayName || p.userId}</div>
+                      {!p.user?.isAi && p.user?.school && (
+                        <div style={{ fontSize: 11, color: "#888" }}>{p.user.school} {p.user.grade || ""}</div>
+                      )}
+                    </td>
                     <td><span className="status-pill" data-status={p.result === "WIN" ? "active" : "inactive"}>{p.result}</span></td>
                     <td>{p.rankPosition || "-"}</td>
                     <td>{p.correctCount}</td>
@@ -168,22 +175,38 @@ function AdminDuelMatchesPage({ wrap = true }) {
               </tbody>
             </table>
 
-            <h3 style={{ marginTop: 12 }}>문제 ({detail.questions?.length})</h3>
-            <ol style={{ fontSize: 12, color: "#555", paddingLeft: 20 }}>
-              {detail.questions?.map((q, i) => (
-                <li key={i}>{q.stem || q.questionId}</li>
-              ))}
-            </ol>
+            <h3 style={{ marginTop: 12 }}>풀린 문제 ({detail.questions?.length})</h3>
+            {detail.questions?.length === 0 ? (
+              <p style={{ fontSize: 12, color: "#888" }}>(이 매치에서 풀린 문제 없음)</p>
+            ) : (
+              <ol style={{ fontSize: 12, color: "#555", paddingLeft: 20 }}>
+                {detail.questions?.map((q, i) => (
+                  <li key={i} style={{ marginBottom: 4 }}>
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setDetail(null);
+                        setParams({ tab: "questions", editId: q.questionId });
+                      }}
+                      style={{ color: "#2d6a4f", textDecoration: "underline", cursor: "pointer" }}
+                    >
+                      {q.stem || q.questionId}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            )}
 
             <h3 style={{ marginTop: 12 }}>답변 ({detail.answers?.length})</h3>
             <details>
               <summary style={{ cursor: "pointer", fontSize: 13 }}>모두 보기</summary>
               <table className="admin-detail-table" style={{ fontSize: 12 }}>
-                <thead><tr><th>userId</th><th>questionId</th><th>정답?</th><th>응답시간(ms)</th></tr></thead>
+                <thead><tr><th>참가자</th><th>questionId</th><th>정답?</th><th>응답시간(ms)</th></tr></thead>
                 <tbody>
                   {detail.answers?.map((a, i) => (
                     <tr key={i}>
-                      <td>{a.userId}</td>
+                      <td>{a.user?.displayName || a.userId}</td>
                       <td>{a.questionId.slice(0, 12)}…</td>
                       <td>{a.isCorrect ? "✅" : "❌"}</td>
                       <td>{a.timeMs}</td>
