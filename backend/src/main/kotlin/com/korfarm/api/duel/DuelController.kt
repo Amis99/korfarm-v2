@@ -21,11 +21,13 @@ class DuelController(
     private val duelService: DuelService,
     private val featureFlagService: FeatureFlagService,
     private val duelWebSocketHandler: DuelWebSocketHandler,
-    private val orgMembershipRepository: com.korfarm.api.org.OrgMembershipRepository
+    private val orgMembershipRepository: com.korfarm.api.org.OrgMembershipRepository,
+    private val orgRepository: com.korfarm.api.org.OrgRepository
 ) {
     /**
      * 학생 본인의 듀얼 컨텍스트.
      * - themeServerId: 본인 기관(첫 active membership) 의 테마 서버 ID — `theme_<orgId>` 또는 null
+     * - orgName: 본인 기관 이름 (학생/관리자 화면 라벨용)
      * 학생 화면 DuelMainPage 가 카드 노출 여부 결정에 사용.
      */
     @GetMapping("/me")
@@ -35,9 +37,11 @@ class DuelController(
         val firstOrg = orgMembershipRepository.findByUserIdAndStatus(userId, "active")
             .firstOrNull()
         val themeServerId = firstOrg?.let { "theme_${it.orgId}" }
+        val orgName = firstOrg?.let { orgRepository.findById(it.orgId).orElse(null)?.name }
         return ApiResponse(success = true, data = mapOf(
             "userId" to userId,
             "orgId" to firstOrg?.orgId,
+            "orgName" to orgName,
             "themeServerId" to themeServerId
         ))
     }

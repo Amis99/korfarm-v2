@@ -44,28 +44,31 @@ const IMPORT_EXAMPLE = `[
 
 function AdminDuelQuestionsPage({ wrap = true, themeOnly = false }) {
   const [searchParams, setSearchParams] = useSearchParams();
-  // 본인 기관 테마 서버 (themeOnly 모드 시)
-  const [themeServerId, setThemeServerId] = useState(null);
+  // 테마 대결 모드 — 백엔드에서 기관 list 받아옴 (HQ_ADMIN: 전사 공용 + 모든 기관, ORG_ADMIN: 본인 기관)
+  const [themeOrgs, setThemeOrgs] = useState([]);
   useEffect(() => {
     if (!themeOnly) return;
-    apiGet("/v1/duel/me").then(me => setThemeServerId(me?.themeServerId || null)).catch(() => {});
+    apiGet("/v1/admin/duel/theme-orgs")
+      .then(list => setThemeOrgs(Array.isArray(list) ? list : []))
+      .catch(() => setThemeOrgs([]));
   }, [themeOnly]);
-  // 노출할 서버 목록 — themeOnly 시 theme_common + themeServerId
+  // 노출할 서버 목록
   const SERVERS = useMemo(() => {
     if (!themeOnly) return RANK_SERVERS;
-    const list = [{ id: "theme_common", label: "전사 공용" }];
-    if (themeServerId) list.push({ id: themeServerId, label: "우리 기관" });
-    return list;
-  }, [themeOnly, themeServerId]);
-  // 서버 탭 상태 — themeOnly 시 default 가 theme_common 또는 본인 기관
-  const [activeServer, setActiveServer] = useState(themeOnly ? "theme_common" : "saussure");
+    return themeOrgs.map(o => ({ id: o.serverId, label: o.orgName, isCommon: o.isCommon }));
+  }, [themeOnly, themeOrgs]);
+  // 서버 탭 상태 — themeOnly 시 default 는 첫 항목
+  const [activeServer, setActiveServer] = useState(themeOnly ? "" : "saussure");
   useEffect(() => {
-    if (themeOnly && themeServerId && activeServer === "theme_common") {
-      // 기관 학생/관리자는 본인 기관 탭 우선
-      setActiveServer(themeServerId);
+    if (!themeOnly) return;
+    if (SERVERS.length === 0) return;
+    if (!SERVERS.some(s => s.id === activeServer)) {
+      // ORG_ADMIN 은 본인 기관(non-common) 우선, 없으면 첫 항목
+      const preferred = SERVERS.find(s => !s.isCommon) || SERVERS[0];
+      setActiveServer(preferred.id);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [themeServerId]);
+  }, [SERVERS]);
   // 문제 수 카운트 (서버별)
   const [counts, setCounts] = useState({});
   // 문제 목록

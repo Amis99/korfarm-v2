@@ -26,8 +26,60 @@ class AdminDuelController(
     private val adminDuelService: AdminDuelService,
     private val questionPoolService: DuelQuestionPoolService,
     private val featureFlagService: FeatureFlagService,
-    private val seasonService: com.korfarm.api.season.SeasonService
+    private val seasonService: com.korfarm.api.season.SeasonService,
+    private val orgRepository: com.korfarm.api.org.OrgRepository,
+    private val orgMembershipRepository: com.korfarm.api.org.OrgMembershipRepository
 ) {
+    /**
+     * 테마 대결 관리에서 사용할 기관 목록.
+     * - HQ_ADMIN: 전사 공용(theme_common) + 모든 active 기관
+     * - ORG_ADMIN: 본인이 ORG_ADMIN 인 기관만
+     */
+    @GetMapping("/theme-orgs")
+    fun themeOrgs(): ApiResponse<List<Map<String, Any?>>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        featureFlagService.requireEnabled("feature.admin.console")
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        val isHq = SecurityUtils.hasAnyRole("HQ_ADMIN")
+        val items = mutableListOf<Map<String, Any?>>()
+        if (isHq) {
+            items.add(mapOf(
+                "serverId" to "theme_common",
+                "orgId" to null,
+                "orgName" to "전사 공용",
+                "isCommon" to true
+            ))
+            orgRepository.findAll()
+                .filter { it.status == "active" }
+                .sortedBy { it.name }
+                .forEach { org ->
+                    items.add(mapOf(
+                        "serverId" to "theme_${org.id}",
+                        "orgId" to org.id,
+                        "orgName" to org.name,
+                        "isCommon" to false
+                    ))
+                }
+        } else {
+            val adminOrgIds = orgMembershipRepository.findByUserIdAndStatus(userId, "active")
+                .filter { it.role == "ORG_ADMIN" }
+                .map { it.orgId }
+                .toSet()
+            orgRepository.findAllById(adminOrgIds)
+                .sortedBy { it.name }
+                .forEach { org ->
+                    items.add(mapOf(
+                        "serverId" to "theme_${org.id}",
+                        "orgId" to org.id,
+                        "orgName" to org.name,
+                        "isCommon" to false
+                    ))
+                }
+        }
+        return ApiResponse(success = true, data = items)
+    }
+
     @GetMapping("/seasons")
     fun listSeasons(): ApiResponse<List<Map<String, Any?>>> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
