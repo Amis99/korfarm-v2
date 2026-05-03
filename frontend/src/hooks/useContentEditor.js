@@ -68,8 +68,12 @@ export function useContentEditor(contentId, staticInfo) {
           schemaVersion = apiRes.schemaVersion || apiRes.schema_version || "1.0";
 
           /* PRO_ANSWER 옛 구조(sections[].groups[].items[]) → 어드민 비주얼이 기대하는
-             평탄 구조(sections[].items[]) 로 자동 변환. 학생 화면은 양쪽 호환이라 영향 X. */
-          if (ct === "PRO_ANSWER" && Array.isArray(payload?.sections) &&
+             평탄 구조(sections[].items[]) 로 자동 변환. 학생 화면은 양쪽 호환이라 영향 X.
+             contentType 은 배열일 수도 있으므로 includes 로 검사. */
+          const isAnswer = Array.isArray(ct)
+            ? ct.includes("PRO_ANSWER")
+            : ct === "PRO_ANSWER" || (typeof ct === "string" && ct.includes("ANSWER"));
+          if (isAnswer && Array.isArray(payload?.sections) &&
               payload.sections.some((s) => Array.isArray(s?.groups))) {
             payload = {
               ...payload,
