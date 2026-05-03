@@ -2,140 +2,9 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
+import AnswerKeyView from "../components/answer-key/AnswerKeyView";
 import "../styles/pro-mode.css";
 import "../styles/answer-key.css";
-
-// 정답 인라인 표시 (객관식/OX/단답형)
-function CompactAnswers({ items }) {
-  const hasQuestions = items.some((it) => it.question);
-
-  return (
-    <div className="ak-compact">
-      {items.map((item, i) => (
-        <span key={i} className="ak-compact-item">
-          {item.num && <span className="ak-compact-num">{item.num}.</span>}
-          {hasQuestions && item.question && (
-            <span className="ak-compact-q">
-              {item.question}
-              {" → "}
-            </span>
-          )}
-          <span className="ak-compact-ans">{item.answer}</span>
-        </span>
-      ))}
-    </div>
-  );
-}
-
-// 해설 접기/펼치기 블록
-function Explanations({ items }) {
-  const withExpl = items.filter((it) => it.explanation);
-  if (withExpl.length === 0) return null;
-
-  return (
-    <details className="ak-details">
-      <summary className="ak-details-summary">해설</summary>
-      <div className="ak-details-body">
-        {withExpl.map((item, i) => (
-          <div key={i} className="ak-expl-row">
-            {item.num && <span className="ak-expl-num">{item.num}.</span>}
-            <span className="ak-expl-text">{item.explanation}</span>
-          </div>
-        ))}
-      </div>
-    </details>
-  );
-}
-
-// 빈칸 채우기 (문자열 정답)
-function FillAnswer({ items }) {
-  return (
-    <div className="ak-fill">
-      {items.map((item, i) => (
-        <p key={i} className="ak-fill-text">
-          {item.answer}
-        </p>
-      ))}
-    </div>
-  );
-}
-
-// 서술형/글쓰기 (모범답안)
-function EssayAnswers({ items }) {
-  return (
-    <div className="ak-essays">
-      {items.map((item, i) => (
-        <div key={i} className="ak-essay-item">
-          {item.num && <span className="ak-essay-num">{item.num}.</span>}
-          {item.question && <p className="ak-essay-q">{item.question}</p>}
-          <div className="ak-essay-ans">{item.answer}</div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-// 그룹 렌더러
-function AnswerGroup({ group }) {
-  const { title, type, items } = group;
-
-  return (
-    <div className="ak-group">
-      {title && <h4 className="ak-group-title">{title}</h4>}
-
-      {type === "choice" || type === "ox" || type === "short" || type === "nested" ? (
-        <>
-          <CompactAnswers items={items} />
-          <Explanations items={items} />
-        </>
-      ) : type === "fill" ? (
-        <FillAnswer items={items} />
-      ) : type === "essay" ? (
-        <EssayAnswers items={items} />
-      ) : (
-        <>
-          <CompactAnswers items={items} />
-          <Explanations items={items} />
-        </>
-      )}
-    </div>
-  );
-}
-
-// 기존 데이터 호환 (label + items 구조)
-function LegacyItems({ items }) {
-  return (
-    <div className="ak-group">
-      <div className="ak-compact">
-        {items.map((item, i) => (
-          <span key={i} className="ak-compact-item">
-            <span className="ak-compact-num">{item.number || item.num}.</span>
-            <span className="ak-compact-ans">
-              {item.answer || item.modelAnswer || ""}
-            </span>
-          </span>
-        ))}
-      </div>
-      {items.some((it) => it.explanation) && (
-        <details className="ak-details">
-          <summary className="ak-details-summary">해설</summary>
-          <div className="ak-details-body">
-            {items
-              .filter((it) => it.explanation)
-              .map((item, i) => (
-                <div key={i} className="ak-expl-row">
-                  <span className="ak-expl-num">
-                    {item.number || item.num}.
-                  </span>
-                  <span className="ak-expl-text">{item.explanation}</span>
-                </div>
-              ))}
-          </div>
-        </details>
-      )}
-    </div>
-  );
-}
 
 function ProAnswerKeyPage() {
   const { chapterId } = useParams();
@@ -243,30 +112,9 @@ function ProAnswerKeyPage() {
         </div>
       </div>
 
-      <div className="pro-body ak-body">
+      <div className="pro-body">
         {data?.title && <h2 className="ak-page-title">{data.title}</h2>}
-
-        {sections.length === 0 && (
-          <div className="pro-center">
-            <p>정답과 해설 데이터가 아직 등록되지 않았습니다.</p>
-          </div>
-        )}
-
-        {sections.map((section, si) => (
-          <section key={si} className="ak-section">
-            <h3 className="ak-section-title">
-              {section.title || section.label}
-            </h3>
-
-            {section.groups
-              ? section.groups.map((group, gi) => (
-                  <AnswerGroup key={gi} group={group} />
-                ))
-              : section.items
-                ? <LegacyItems items={section.items} />
-                : null}
-          </section>
-        ))}
+        <AnswerKeyView sections={sections} />
       </div>
     </div>
   );
