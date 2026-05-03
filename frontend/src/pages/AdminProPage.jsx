@@ -640,6 +640,7 @@ function AdminProPage() {
     chapters.forEach((ch) => {
       const chNum = ch.chapterNumber ?? ch.chapter_number;
       const chTitle = ch.title;
+      const lvId = ch.levelId ?? ch.level_id;
       const st = statusCache[ch.id];
       if (!st) return;
       (st.items || []).forEach((it) => {
@@ -648,6 +649,7 @@ function AdminProPage() {
             chapterId: ch.id,
             chapterNumber: chNum,
             chapterTitle: chTitle,
+            levelId: lvId,
             type: it.type,
             contentId: c.contentId || c.content_id,
             title: c.title,
@@ -665,6 +667,7 @@ function AdminProPage() {
           chapterId: ch.id,
           chapterNumber: chNum,
           chapterTitle: chTitle,
+          levelId: lvId,
           version: t.version,
           testPaperId: tpId,
           testTitle: meta?.title || tpId,
@@ -673,29 +676,67 @@ function AdminProPage() {
         });
       });
     });
-    // 챕터 번호 순으로 안정 정렬
-    const byChapter = (a, b) => (a.chapterNumber ?? 0) - (b.chapterNumber ?? 0);
-    return {
-      learning: learning.sort(byChapter),
-      answer: answer.sort(byChapter),
-      test: test.sort(byChapter),
-    };
+    return { learning, answer, test };
   }, [chapters, statusCache, testPapers]);
+
+  /* 강화된 필터·정렬 */
+  const [chapterFilter, setChapterFilter] = useState("all");      // 챕터 번호 (또는 "all")
+  const [typeFilter, setTypeFilter] = useState("all");            // 학습 유형 (reading/vocab/background/logic 또는 "all")
+  const [statusFilterTest, setStatusFilterTest] = useState("all"); // 테스트 상태
+  const [sortKey, setSortKey] = useState("chapter");              // chapter / title / updated
+  const [sortDir, setSortDir] = useState("asc");                  // asc / desc
+
+  const chapterOptions = useMemo(() => {
+    const set = new Set();
+    chapters.forEach((c) => set.add(c.chapterNumber ?? c.chapter_number));
+    return Array.from(set).filter((n) => n != null).sort((a, b) => a - b);
+  }, [chapters]);
 
   const filteredFlat = useMemo(() => {
     const q = chapterSearch.trim().toLowerCase();
-    if (!q) return flatItems;
-    const filt = (arr) => arr.filter((x) =>
-      (x.title || x.testTitle || "").toLowerCase().includes(q) ||
-      (x.chapterTitle || "").toLowerCase().includes(q) ||
-      String(x.chapterNumber ?? "").includes(q)
-    );
-    return {
-      learning: filt(flatItems.learning),
-      answer: filt(flatItems.answer),
-      test: filt(flatItems.test),
+    const applyCommon = (arr) => {
+      let out = arr;
+      if (q) {
+        out = out.filter((x) =>
+          (x.title || x.testTitle || "").toLowerCase().includes(q) ||
+          (x.chapterTitle || "").toLowerCase().includes(q) ||
+          String(x.chapterNumber ?? "").includes(q)
+        );
+      }
+      if (chapterFilter !== "all") {
+        out = out.filter((x) => String(x.chapterNumber) === String(chapterFilter));
+      }
+      return out;
     };
-  }, [flatItems, chapterSearch]);
+    const sortFn = (a, b) => {
+      const dir = sortDir === "asc" ? 1 : -1;
+      switch (sortKey) {
+        case "title":
+          return ((a.title || a.testTitle || "").localeCompare(b.title || b.testTitle || "", "ko")) * dir;
+        case "updated":
+          return ((new Date(a.updatedAt || 0).getTime() - new Date(b.updatedAt || 0).getTime())) * dir;
+        case "chapter":
+        default:
+          return ((a.chapterNumber ?? 0) - (b.chapterNumber ?? 0)) * dir;
+      }
+    };
+
+    let learning = applyCommon(flatItems.learning);
+    if (typeFilter !== "all") learning = learning.filter((x) => x.type === typeFilter);
+    learning = [...learning].sort(sortFn);
+
+    const answer = [...applyCommon(flatItems.answer)].sort(sortFn);
+
+    let test = applyCommon(flatItems.test);
+    if (statusFilterTest !== "all") test = test.filter((x) => (x.status || "") === statusFilterTest);
+    test = [...test].sort((a, b) => {
+      const dir = sortDir === "asc" ? 1 : -1;
+      if (sortKey === "title") return ((a.testTitle || "").localeCompare(b.testTitle || "", "ko")) * dir;
+      return ((a.chapterNumber ?? 0) - (b.chapterNumber ?? 0)) * dir;
+    });
+
+    return { learning, answer, test };
+  }, [flatItems, chapterSearch, chapterFilter, typeFilter, statusFilterTest, sortKey, sortDir]);
 
   /* ═══════════════════════════════════════════════════════
      ══════════════ 상세 뷰 (deprecated — 평면 리스트로 대체) ══════════════
@@ -782,12 +823,76 @@ function AdminProPage() {
             <select
               className="admin-type-filter-select"
               value={levelFilter}
-              onChange={(e) => setLevelFilter(e.target.value)}
+              onChange={(e) => { setLevelFilter(e.target.value); setChapterFilter("all"); }}
             >
               {COURSE_LEVELS.map((lv) => (
                 <option key={lv.id} value={lv.id}>{lv.name}</option>
               ))}
             </select>
+            <select
+              className="admin-type-filter-select"
+              value={chapterFilter}
+              onChange={(e) => setChapterFilter(e.target.value)}
+            >
+              <option value="all">챕터: 전체</option>
+              {chapterOptions.map((n) => (
+                <option key={n} value={n}>{n}장</option>
+              ))}
+            </select>
+            {globalTab === "learning" && (
+              <select
+                className="admin-type-filter-select"
+                value={typeFilter}
+                onChange={(e) => setTypeFilter(e.target.value)}
+              >
+                <option value="all">유형: 전체</option>
+                <option value="reading">독해</option>
+                <option value="vocab">어휘</option>
+                <option value="background">배경</option>
+                <option value="logic">논리</option>
+              </select>
+            )}
+            {globalTab === "test" && (
+              <select
+                className="admin-type-filter-select"
+                value={statusFilterTest}
+                onChange={(e) => setStatusFilterTest(e.target.value)}
+              >
+                <option value="all">상태: 전체</option>
+                <option value="published">published</option>
+                <option value="draft">draft</option>
+              </select>
+            )}
+            <select
+              className="admin-type-filter-select"
+              value={sortKey}
+              onChange={(e) => setSortKey(e.target.value)}
+            >
+              <option value="chapter">정렬: 챕터순</option>
+              <option value="title">정렬: 제목</option>
+              <option value="updated">정렬: 수정일</option>
+            </select>
+            <button
+              type="button"
+              className="admin-filter"
+              onClick={() => setSortDir((d) => (d === "asc" ? "desc" : "asc"))}
+              title="정렬 방향"
+            >{sortDir === "asc" ? "↑" : "↓"}</button>
+            {(chapterSearch || chapterFilter !== "all" || typeFilter !== "all" || statusFilterTest !== "all" || sortKey !== "chapter" || sortDir !== "asc") && (
+              <button
+                type="button"
+                className="admin-filter"
+                onClick={() => {
+                  setChapterSearch("");
+                  setChapterFilter("all");
+                  setTypeFilter("all");
+                  setStatusFilterTest("all");
+                  setSortKey("chapter");
+                  setSortDir("asc");
+                }}
+                style={{ borderStyle: "dashed" }}
+              >초기화</button>
+            )}
           </div>
         </div>
 
@@ -819,6 +924,7 @@ function AdminProPage() {
               <table className="admin-detail-table">
                 <thead>
                   <tr>
+                    <th style={{ width: 110 }}>레벨</th>
                     <th style={{ width: 60 }}>챕터</th>
                     <th>제목</th>
                     <th style={{ width: 80 }}>유형</th>
@@ -831,6 +937,7 @@ function AdminProPage() {
                     return (
                       <tr key={c.contentId} style={{ cursor: "pointer" }}
                         onClick={() => navigate(`/admin/content/edit?id=${c.contentId}&from=/admin/pro`)}>
+                        <td>{c.levelId || "-"}</td>
                         <td>{c.chapterNumber}장</td>
                         <td>{c.title}</td>
                         <td>
@@ -850,6 +957,7 @@ function AdminProPage() {
               <table className="admin-detail-table">
                 <thead>
                   <tr>
+                    <th style={{ width: 110 }}>레벨</th>
                     <th style={{ width: 60 }}>챕터</th>
                     <th>제목</th>
                     <th style={{ width: 130 }}>최종수정일</th>
@@ -859,6 +967,7 @@ function AdminProPage() {
                   {filteredFlat.answer.map((c) => (
                     <tr key={c.contentId} style={{ cursor: "pointer" }}
                       onClick={() => navigate(`/admin/content/edit?id=${c.contentId}&from=/admin/pro`)}>
+                      <td>{c.levelId || "-"}</td>
                       <td>{c.chapterNumber}장</td>
                       <td>{c.title}</td>
                       <td>{c.updatedAt ? new Date(c.updatedAt).toLocaleDateString() : "-"}</td>
@@ -874,6 +983,7 @@ function AdminProPage() {
               <table className="admin-detail-table">
                 <thead>
                   <tr>
+                    <th style={{ width: 110 }}>레벨</th>
                     <th style={{ width: 60 }}>챕터</th>
                     <th>시험명</th>
                     <th style={{ width: 70 }}>버전</th>
@@ -885,6 +995,7 @@ function AdminProPage() {
                   {filteredFlat.test.map((t) => (
                     <tr key={`${t.chapterId}-${t.version}`} style={{ cursor: "pointer" }}
                       onClick={() => t.testPaperId && navigate(`/admin/tests/${t.testPaperId}/edit?from=/admin/pro`)}>
+                      <td>{t.levelId || "-"}</td>
                       <td>{t.chapterNumber}장</td>
                       <td>{t.testTitle}</td>
                       <td>v{t.version}</td>
