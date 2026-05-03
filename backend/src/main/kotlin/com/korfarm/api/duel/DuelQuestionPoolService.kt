@@ -182,6 +182,9 @@ class DuelQuestionPoolService(
             val stem = try {
                 objectMapper.readTree(e.questionJson).get("stem")?.asText() ?: ""
             } catch (ex: Exception) { "" }
+            // 수정 이력 여부 — PrePersist 가 createdAt/updatedAt 을 동일 now 로 설정하므로
+            // updatedAt 이 createdAt 보다 뒤이면 수정된 적 있음
+            val edited = e.updatedAt.isAfter(e.createdAt)
             mapOf(
                 "id" to e.id,
                 "serverId" to e.serverId,
@@ -189,7 +192,9 @@ class DuelQuestionPoolService(
                 "category" to e.category,
                 "status" to e.status,
                 "stem" to stem,
-                "createdAt" to e.createdAt.toString()
+                "edited" to edited,
+                "createdAt" to e.createdAt.toString(),
+                "updatedAt" to e.updatedAt.toString()
             )
         }
     }

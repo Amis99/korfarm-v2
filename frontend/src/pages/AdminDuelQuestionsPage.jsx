@@ -573,6 +573,18 @@ function AdminDuelQuestionsPage({ wrap = true }) {
                               ? (q.stem.length > 80 ? q.stem.slice(0, 80) + "…" : q.stem)
                               : q.id}
                           </span>
+                          {q.edited && (
+                            <span
+                              title={q.updatedAt ? `수정됨 — ${String(q.updatedAt).substring(0, 19)}` : "수정됨"}
+                              style={{
+                                marginLeft: 6, padding: "1px 6px",
+                                fontSize: 10, fontWeight: 600,
+                                background: "#fff3cd", color: "#856404",
+                                border: "1px solid #ffeaa7", borderRadius: 8,
+                                verticalAlign: "middle",
+                              }}
+                            >✏️ 수정됨</span>
+                          )}
                           {q.stem && (
                             <div style={{ fontSize: 11, color: "#888", marginTop: 2 }}>{q.id}</div>
                           )}
