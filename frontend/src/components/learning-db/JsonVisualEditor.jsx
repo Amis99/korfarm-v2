@@ -1,4 +1,51 @@
 import { useState } from "react";
+import MarkdownEditField from "../editor/MarkdownEditField";
+
+// ─── 마크다운 자동 판정 ───
+// 키 이름이 아래 화이트리스트 중 하나를 포함하면 MarkdownEditField (분할 미리보기) 사용.
+// 그 외에도 값 길이 80 초과 또는 줄바꿈 포함이면 MarkdownEditField.
+const DEFAULT_MARKDOWN_KEYS = [
+  "지문", "본문", "해설", "문제", "보기", "선택지", "조건", "답안", "정답",
+  "모범_답안", "content", "contentMd", "description", "question", "passage",
+  "stem", "explanation"
+];
+
+function isAutoMarkdown(fieldKey, value, extraKeys) {
+  if (typeof value !== "string") return false;
+  if (value.length > 80 || value.includes("\n")) return true;
+  if (!fieldKey) return false;
+  const all = [...DEFAULT_MARKDOWN_KEYS, ...(extraKeys || [])];
+  return all.some(k => fieldKey.includes(k));
+}
+
+// ─── String 필드 — 자동/강제 마크다운 토글 ───
+function StringField({ value, onChange, fieldKey, markdownKeys }) {
+  const [forceMd, setForceMd] = useState(false);
+  const auto = isAutoMarkdown(fieldKey, value, markdownKeys);
+  const useMd = forceMd || auto;
+  if (useMd) {
+    return (
+      <div className="ldb-md-wrap">
+        <MarkdownEditField value={value} onChange={onChange} minHeight={120} />
+        {!auto && (
+          <button type="button" className="ldb-md-toggle"
+            title="일반 입력으로" onClick={() => setForceMd(false)}>
+            <span className="material-symbols-outlined" style={{ fontSize: 14 }}>edit_off</span>
+          </button>
+        )}
+      </div>
+    );
+  }
+  return (
+    <div className="ldb-string-row">
+      <input type="text" value={value} onChange={e => onChange(e.target.value)} />
+      <button type="button" className="ldb-md-toggle"
+        title="마크다운 + 미리보기" onClick={() => setForceMd(true)}>
+        <span className="material-symbols-outlined" style={{ fontSize: 14 }}>format_paragraph</span>
+      </button>
+    </div>
+  );
+}
 
 // ─── 교재 원고 필드 정렬/그루핑 ───
 
@@ -88,16 +135,13 @@ function AddFieldForm({ onAdd, onCancel }) {
 }
 
 // ─── 재귀적 JSON 편집기 ───
-function JsonEditor({ data, onChange, depth = 0, manuscriptMode = false }) {
+function JsonEditor({ data, onChange, depth = 0, manuscriptMode = false, parentKey = null, markdownKeys = [] }) {
   const [adding, setAdding] = useState(false);
 
   if (data === null || data === undefined) return null;
 
   if (typeof data === "string") {
-    const isLong = data.length > 80 || data.includes("\n");
-    return isLong
-      ? <textarea value={data} onChange={e => onChange(e.target.value)} />
-      : <input type="text" value={data} onChange={e => onChange(e.target.value)} />;
+    return <StringField value={data} onChange={onChange} fieldKey={parentKey} markdownKeys={markdownKeys} />;
   }
   if (typeof data === "number") {
     return <input type="number" value={data} onChange={e => onChange(Number(e.target.value) || 0)} />;
@@ -123,6 +167,7 @@ function JsonEditor({ data, onChange, depth = 0, manuscriptMode = false }) {
               </div>
             </div>
             <JsonEditor data={item} depth={depth + 1} manuscriptMode={manuscriptMode}
+              parentKey={parentKey} markdownKeys={markdownKeys}
               onChange={v => { const next = [...data]; next[i] = v; onChange(next); }} />
           </div>
         ))}
@@ -187,6 +232,7 @@ function JsonEditor({ data, onChange, depth = 0, manuscriptMode = false }) {
                 </button>
               </div>
               <JsonEditor data={val} depth={depth + 1} manuscriptMode={manuscriptMode}
+                parentKey={key} markdownKeys={markdownKeys}
                 onChange={v => onChange({ ...workData, [key]: v })} />
             </div>
           ];
@@ -208,7 +254,7 @@ function JsonEditor({ data, onChange, depth = 0, manuscriptMode = false }) {
 }
 
 // ─── 섹션별 아코디언 편집기 ───
-function SectionEditor({ sectionKey, data, onChange, onRemove, manuscriptMode = false }) {
+function SectionEditor({ sectionKey, data, onChange, onRemove, manuscriptMode = false, markdownKeys = [] }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="ldb-section">
@@ -225,7 +271,8 @@ function SectionEditor({ sectionKey, data, onChange, onRemove, manuscriptMode = 
         )}
       </div>
       <div className={`ldb-section-body ${open ? "" : "collapsed"}`}>
-        <JsonEditor data={data} onChange={onChange} manuscriptMode={manuscriptMode} />
+        <JsonEditor data={data} onChange={onChange} manuscriptMode={manuscriptMode}
+          parentKey={sectionKey} markdownKeys={markdownKeys} />
       </div>
     </div>
   );
@@ -279,7 +326,7 @@ function AddSectionForm({ onAdd }) {
  *   title: string
  *   actions?: ReactNode — 헤더 우측 액션 영역
  */
-function JsonVisualEditor({ data, onChange, rawMode, rawText, onRawTextChange, rawError, title, actions, manuscriptMode = false }) {
+function JsonVisualEditor({ data, onChange, rawMode, rawText, onRawTextChange, rawError, title, actions, manuscriptMode = false, markdownKeys = [] }) {
   if (!data) return <div className="ldb-editor-empty">좌측에서 항목을 선택하세요</div>;
 
   return (
@@ -299,7 +346,7 @@ function JsonVisualEditor({ data, onChange, rawMode, rawText, onRawTextChange, r
             <SectionEditor key={key} sectionKey={key} data={val}
               onChange={v => onChange({ ...data, [key]: v })}
               onRemove={() => { const next = { ...data }; delete next[key]; onChange(next); }}
-              manuscriptMode={manuscriptMode} />
+              manuscriptMode={manuscriptMode} markdownKeys={markdownKeys} />
           ))}
           <AddSectionForm onAdd={(key, val) => onChange({ ...data, [key]: val })} />
         </>
