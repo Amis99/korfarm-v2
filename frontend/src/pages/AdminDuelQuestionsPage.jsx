@@ -119,6 +119,34 @@ function AdminDuelQuestionsPage({ wrap = true, themeOnly = false }) {
   const [recalcLoading, setRecalcLoading] = useState(false);
   const [recalcResult, setRecalcResult] = useState("");
 
+  // 테마 모드: 선택된 server 의 운영 통계 (방 개수 / 매치 수)
+  const [themeStats, setThemeStats] = useState({ rooms: null, matches: null });
+  useEffect(() => {
+    if (!themeOnly || !activeServer) {
+      setThemeStats({ rooms: null, matches: null });
+      return;
+    }
+    let cancelled = false;
+    (async () => {
+      try {
+        const [roomsRes, matchesRes] = await Promise.all([
+          apiGet(`/v1/duel/rooms?serverId=${encodeURIComponent(activeServer)}`).catch(() => []),
+          apiGet(`/v1/admin/duel/matches?serverId=${encodeURIComponent(activeServer)}&page=0&size=1`).catch(() => null),
+        ]);
+        if (cancelled) return;
+        const rooms = Array.isArray(roomsRes) ? roomsRes : (roomsRes?.items || []);
+        const realRooms = rooms.filter(r => !String(r.roomId || r.id || "").startsWith("ai-room-"));
+        setThemeStats({
+          rooms: realRooms.length,
+          matches: matchesRes?.totalElements ?? 0,
+        });
+      } catch {
+        if (!cancelled) setThemeStats({ rooms: null, matches: null });
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [themeOnly, activeServer]);
+
   // 문제 수 카운트 로드
   const loadCounts = useCallback(async () => {
     try {
@@ -483,24 +511,80 @@ function AdminDuelQuestionsPage({ wrap = true, themeOnly = false }) {
           </p>
         )}
 
-        {/* 서버 탭 */}
-        <div className="admin-detail-filters admin-duel-server-tabs">
-          {SERVERS.map((server) => {
-            const dbTotal = counts[server.id]?.total ?? 0;
-            const sampleCount = SAMPLE_QUESTIONS.filter((s) => s.serverId === server.id).length;
-            const display = dbTotal || sampleCount ? `${dbTotal}+${sampleCount}` : "-";
-            return (
-              <button
-                key={server.id}
-                className={`admin-filter ${activeServer === server.id ? "active" : ""}`}
-                type="button"
-                onClick={() => setActiveServer(server.id)}
-              >
-                {server.label} ({display})
-              </button>
-            );
-          })}
-        </div>
+        {/* 서버 선택 — 4개 초과(예: 본사 시점에서 모든 기관) 면 dropdown, 아니면 탭 */}
+        {SERVERS.length > 4 ? (
+          <div className="admin-detail-toolbar" style={{ alignItems: "center", gap: 12 }}>
+            <label style={{ fontSize: 13, color: "#555", fontWeight: 600 }}>
+              {themeOnly ? "기관 선택" : "서버 선택"}
+            </label>
+            <select
+              value={activeServer}
+              onChange={(e) => setActiveServer(e.target.value)}
+              style={{ padding: "6px 10px", fontSize: 13, minWidth: 220 }}
+            >
+              {SERVERS.map((server) => {
+                const dbTotal = counts[server.id]?.total ?? 0;
+                const sampleCount = SAMPLE_QUESTIONS.filter((s) => s.serverId === server.id).length;
+                const display = dbTotal || sampleCount ? `${dbTotal}+${sampleCount}` : "0";
+                return (
+                  <option key={server.id} value={server.id}>
+                    {server.label} (문제 {display}개)
+                  </option>
+                );
+              })}
+            </select>
+            <span className="ldb-pill" style={{ marginLeft: "auto" }}>
+              총 {SERVERS.length}개{themeOnly ? " 기관" : " 서버"}
+            </span>
+          </div>
+        ) : (
+          <div className="admin-detail-filters admin-duel-server-tabs">
+            {SERVERS.map((server) => {
+              const dbTotal = counts[server.id]?.total ?? 0;
+              const sampleCount = SAMPLE_QUESTIONS.filter((s) => s.serverId === server.id).length;
+              const display = dbTotal || sampleCount ? `${dbTotal}+${sampleCount}` : "-";
+              return (
+                <button
+                  key={server.id}
+                  className={`admin-filter ${activeServer === server.id ? "active" : ""}`}
+                  type="button"
+                  onClick={() => setActiveServer(server.id)}
+                >
+                  {server.label} ({display})
+                </button>
+              );
+            })}
+          </div>
+        )}
+
+        {/* 테마 모드 운영 통계 — 선택된 기관의 방·매치 수 */}
+        {themeOnly && (
+          <div className="admin-detail-card" style={{ padding: 12, margin: "8px 0", display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
+            <div>
+              <div style={{ fontSize: 11, color: "#888" }}>현재 열린 방</div>
+              <div style={{ fontSize: 20, fontWeight: 700, color: "#2d6a4f" }}>
+                {themeStats.rooms === null ? "—" : `${themeStats.rooms}개`}
+              </div>
+            </div>
+            <div style={{ width: 1, height: 32, background: "#ddd" }} />
+            <div>
+              <div style={{ fontSize: 11, color: "#888" }}>누적 매치 수</div>
+              <div style={{ fontSize: 20, fontWeight: 700, color: "#2d6a4f" }}>
+                {themeStats.matches === null ? "—" : `${themeStats.matches}건`}
+              </div>
+            </div>
+            <div style={{ width: 1, height: 32, background: "#ddd" }} />
+            <div>
+              <div style={{ fontSize: 11, color: "#888" }}>등록 문제</div>
+              <div style={{ fontSize: 20, fontWeight: 700, color: "#2d6a4f" }}>
+                {(counts[activeServer]?.total ?? 0)}개
+              </div>
+            </div>
+            <span style={{ marginLeft: "auto", fontSize: 11, color: "#888" }}>
+              {(counts[activeServer]?.total ?? 0) < 20 && "⚠️ 최소 20문제 필요"}
+            </span>
+          </div>
+        )}
 
         {/* 서버별 문제 유형 통계 */}
         {(counts[activeServer] || SAMPLE_QUESTIONS.some((s) => s.serverId === activeServer)) && (
