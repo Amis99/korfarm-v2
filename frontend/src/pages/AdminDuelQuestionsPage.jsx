@@ -72,6 +72,7 @@ function AdminDuelQuestionsPage({ wrap = true }) {
     choice2: "",
     choice3: "",
     choice4: "",
+    choiceIds: null, // 수정 모드일 때 실제 choice id 들 (예: ["A","B","C","D"])
     answerId: "1",
     timeLimitSec: 15,
   });
@@ -159,7 +160,8 @@ function AdminDuelQuestionsPage({ wrap = true }) {
           choice2: choices[1]?.text || "",
           choice3: choices[2]?.text || "",
           choice4: choices[3]?.text || "",
-          answerId: String(detail.answerId ?? detail.answer_id ?? "1"),
+          choiceIds: choices.map(c => c.id),
+          answerId: String(detail.answerId ?? detail.answer_id ?? choices[0]?.id ?? "1"),
           timeLimitSec: detail.timeLimitSec ?? detail.time_limit_sec ?? 15,
         });
         setEditingQuestionId(detail.id);
@@ -193,15 +195,17 @@ function AdminDuelQuestionsPage({ wrap = true }) {
     return [...questions, ...samples];
   }, [questions, activeServer]);
 
-  // 필터링된 문제 목록
+  // 필터링된 문제 목록 — 검색 대상: id / 카테고리 / 유형 / 상태 / 발문 / 지문 / 선택지
   const filteredQuestions = useMemo(() => {
     const term = search.trim().toLowerCase();
     return allQuestions.filter((q) => {
       if (typeFilter !== "all" && q.questionType !== typeFilter) return false;
       if (!term) return true;
-      return [q.id, q.category, q.questionType, q.status]
+      const choicesText = q.choicesText
+        || (Array.isArray(q.choices) ? q.choices.map(c => c?.text || "").join(" | ") : "");
+      return [q.id, q.category, q.questionType, q.status, q.stem, q.passage, choicesText]
         .filter(Boolean)
-        .some((v) => v.toLowerCase().includes(term));
+        .some((v) => String(v).toLowerCase().includes(term));
     });
   }, [allQuestions, search, typeFilter]);
 
@@ -356,7 +360,8 @@ function AdminDuelQuestionsPage({ wrap = true }) {
   const handleEditQuestion = async (q) => {
     try {
       let detail = q;
-      if (!q.stem && !q.choices) {
+      // 목록 응답에는 choices/answerId 가 없으므로 항상 detail fetch
+      if (!q.choices || q.choices.length === 0) {
         detail = await apiGet(`/v1/admin/duel/questions/${q.id}`);
       }
       const choices = detail.choices || [];
@@ -370,7 +375,8 @@ function AdminDuelQuestionsPage({ wrap = true }) {
         choice2: choices[1]?.text || "",
         choice3: choices[2]?.text || "",
         choice4: choices[3]?.text || "",
-        answerId: String(detail.answerId ?? detail.answer_id ?? "1"),
+        choiceIds: choices.map(c => c.id),
+        answerId: String(detail.answerId ?? detail.answer_id ?? choices[0]?.id ?? "1"),
         timeLimitSec: detail.timeLimitSec ?? detail.time_limit_sec ?? 15,
       });
       setEditingQuestionId(detail.id);
@@ -764,10 +770,14 @@ function AdminDuelQuestionsPage({ wrap = true }) {
                 value={addForm.answerId}
                 onChange={(e) => setAddForm({ ...addForm, answerId: e.target.value })}
               >
-                <option value="1">1번</option>
-                <option value="2">2번</option>
-                <option value="3">3번</option>
-                <option value="4">4번</option>
+                {(addForm.choiceIds && addForm.choiceIds.length === 4
+                  ? addForm.choiceIds
+                  : ["1", "2", "3", "4"]
+                ).map((cid, i) => (
+                  <option key={cid} value={cid}>
+                    {i + 1}번{cid !== String(i + 1) ? ` (id=${cid})` : ""}
+                  </option>
+                ))}
               </select>
             </div>
 
