@@ -255,7 +255,7 @@ function JsonEditor({ data, onChange, depth = 0, manuscriptMode = false, parentK
 
 // ─── 섹션별 아코디언 편집기 ───
 function SectionEditor({ sectionKey, data, onChange, onRemove, manuscriptMode = false, markdownKeys = [] }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   return (
     <div className="ldb-section">
       <div className="ldb-section-header">
