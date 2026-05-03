@@ -109,9 +109,14 @@ function AdminDuelRulesPage({ wrap = true }) {
 
       {data && (
         <div className="admin-detail-card" style={{ padding: 16 }}>
-          <p style={{ fontSize: 12, color: "#666", marginBottom: 12 }}>
-            모든 키/값을 자유롭게 편집할 수 있습니다. 저장 즉시 대결 시스템에 반영됩니다.
-            (현재는 표시·기록 용도이며, 실제 매치 동작 변경은 후속 작업에서 단계적으로 연결됩니다.)
+          <p style={{ fontSize: 13, color: "#444", marginBottom: 12, lineHeight: 1.7 }}>
+            대결 모드의 규칙·AI 플레이어·큐·보상 설정을 한 곳에서 편집하는 화면입니다.<br />
+            네 가지 영역(<strong>매치 규칙 / AI 플레이어 / 큐 매칭 / 보상</strong>)으로 나뉘며,
+            각 항목 옆 화살표를 눌러 펼치면 세부 값을 바꿀 수 있어요.<br />
+            <span style={{ color: "#856404" }}>
+              ※ 현재는 본 화면이 <strong>설정값 보관·기록용</strong> 입니다. 실제 매치 동작에 자동 반영되는
+              연결은 단계적으로 추가될 예정이에요.
+            </span>
           </p>
           <JsonVisualEditor
             data={data}

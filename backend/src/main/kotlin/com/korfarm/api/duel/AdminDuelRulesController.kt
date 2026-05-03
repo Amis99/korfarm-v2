@@ -26,36 +26,36 @@ class AdminDuelRulesController(
     companion object {
         const val DEFAULT_ID = "default"
 
-        /** 기본 룰 — DB 에 행이 없거나 일부 키가 누락된 경우 채워 넣을 값 */
+        /** 기본 룰 — DB 에 행이 없거나 일부 키가 누락된 경우 채워 넣을 값. 키·값 모두 한국어 */
         val DEFAULTS: Map<String, Any?> = mapOf(
-            "matchRule" to mapOf(
-                "questionsPerMatch" to 10,
-                "questionTimeoutSec" to 30,
-                "matchTimeLimitSec" to 300,
-                "scoringMode" to "ELIMINATION (탈락제)",
-                "rankingTieBreaker" to "정답 수 ↓ → 응답 시간 ↑"
+            "매치 규칙" to mapOf(
+                "한 매치당 문제 수" to 10,
+                "문제 한 개 제한 시간 (초)" to 30,
+                "전체 매치 제한 시간 (초)" to 300,
+                "득점 방식" to "탈락제 (틀린 사람 즉시 탈락, 최후 1인까지)",
+                "동점 시 우선 순위" to "정답 수 많은 순 → 응답 시간 빠른 순"
             ),
-            "aiPlayer" to mapOf(
-                "available" to true,
-                "difficultyLevels" to listOf("EASY", "NORMAL", "HARD"),
-                "defaultDifficulty" to "NORMAL",
-                "responseTimeRangeMs" to mapOf("min" to 3000, "max" to 12000),
-                "accuracyByDifficulty" to mapOf(
-                    "EASY" to 0.4,
-                    "NORMAL" to 0.65,
-                    "HARD" to 0.85
+            "AI 플레이어" to mapOf(
+                "사용 가능" to true,
+                "난이도 단계" to listOf("쉬움", "보통", "어려움"),
+                "기본 난이도" to "보통",
+                "응답 시간 범위 (밀리초)" to mapOf("최소" to 3000, "최대" to 12000),
+                "난이도별 정답률" to mapOf(
+                    "쉬움" to 0.4,
+                    "보통" to 0.65,
+                    "어려움" to 0.85
                 )
             ),
-            "queue" to mapOf(
-                "matchSize" to "2~10명 (방장 결정)",
-                "modeSeparation" to "RANK / THEME (테마 서버 분리)",
-                "themeOrgScope" to "같은 기관 학생만"
+            "큐 매칭" to mapOf(
+                "방 인원" to "2~10명 (방장이 결정)",
+                "모드 분리" to "랭크 / 테마 (테마 서버는 별도 큐)",
+                "테마 큐 범위" to "같은 기관 학생끼리만"
             ),
-            "reward" to mapOf(
-                "stakeRequired" to true,
-                "themeStakeRequired" to false,
-                "winnerTakeAll" to true,
-                "seedTypes" to listOf("wheat", "rice", "corn", "grape", "apple")
+            "보상" to mapOf(
+                "씨앗 베팅 필수" to true,
+                "테마 모드는 씨앗 없이 진행" to true,
+                "승자 독식" to true,
+                "사용 가능 씨앗 종류" to listOf("밀", "쌀", "옥수수", "포도", "사과")
             )
         )
     }
