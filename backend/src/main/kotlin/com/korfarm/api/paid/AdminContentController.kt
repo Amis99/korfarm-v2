@@ -92,6 +92,26 @@ class AdminContentController(
         return ApiResponse(success = true, data = data)
     }
 
+    /**
+     * 일일퀴즈 10번 문제 backfill (HQ_ADMIN 전용).
+     * 해당 콘텐츠의 최신 content_version 의 contentJson.payload.questions[9] 를
+     * 새 q10 로 교체한 신규 content_version 을 INSERT (이력 보존).
+     *
+     * Body: { "contentId": "dq-SAUSSURE_1-020", "q10": {...} }
+     */
+    @PostMapping("/dailyquiz/q10-backfill")
+    fun dailyQuizQ10Backfill(@RequestBody request: Map<String, Any?>): ApiResponse<Map<String, Any?>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        val contentId = request["contentId"] as? String
+            ?: throw ApiException("BAD_REQUEST", "contentId is required", HttpStatus.BAD_REQUEST)
+        @Suppress("UNCHECKED_CAST")
+        val q10 = request["q10"] as? Map<String, Any?>
+            ?: throw ApiException("BAD_REQUEST", "q10 is required", HttpStatus.BAD_REQUEST)
+        val userId = SecurityUtils.currentUserId() ?: "system"
+        val result = adminContentService.backfillDailyQuizQ10(contentId, q10, userId)
+        return ApiResponse(success = true, data = result)
+    }
+
     @PostMapping("/tests")
     fun createTest(@Valid @RequestBody request: AdminTestCreateRequest): ApiResponse<TestPaperView> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")

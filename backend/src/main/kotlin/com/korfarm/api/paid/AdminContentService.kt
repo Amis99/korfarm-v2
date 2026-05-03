@@ -333,6 +333,65 @@ class AdminContentService(
         contentRepository.delete(content)
     }
 
+    /**
+     * 일일퀴즈 10번 문제 backfill — 최신 contentJson 의 payload.questions[9] 를 q10 으로 교체한 신규 version INSERT.
+     * 이력 보존 (옛 version 그대로). 응답으로 oldVersionId / newVersionId 반환.
+     */
+    @Transactional
+    fun backfillDailyQuizQ10(contentId: String, q10: Map<String, Any?>, userId: String): Map<String, Any?> {
+        contentRepository.findById(contentId).orElseThrow {
+            ApiException("NOT_FOUND", "content not found: $contentId", HttpStatus.NOT_FOUND)
+        }
+        val latest = contentVersionRepository.findTopByContentIdOrderByCreatedAtDesc(contentId)
+            ?: throw ApiException("NOT_FOUND", "content version not found: $contentId", HttpStatus.NOT_FOUND)
+
+        @Suppress("UNCHECKED_CAST")
+        val root = objectMapper.readValue(latest.contentJson, Map::class.java) as Map<String, Any?>
+        val mutableRoot = root.toMutableMap()
+
+        @Suppress("UNCHECKED_CAST")
+        val payload = (mutableRoot["payload"] as? Map<String, Any?>)?.toMutableMap()
+            ?: throw ApiException("BAD_REQUEST", "payload missing in $contentId", HttpStatus.BAD_REQUEST)
+
+        @Suppress("UNCHECKED_CAST")
+        val questions = (payload["questions"] as? List<Map<String, Any?>>)?.toMutableList()
+            ?: throw ApiException("BAD_REQUEST", "payload.questions missing in $contentId", HttpStatus.BAD_REQUEST)
+
+        if (questions.size < 10) {
+            throw ApiException("BAD_REQUEST", "questions.length < 10 (got ${questions.size}) in $contentId", HttpStatus.BAD_REQUEST)
+        }
+        val oldQ10 = questions[9]
+        questions[9] = q10
+        payload["questions"] = questions
+        mutableRoot["payload"] = payload
+
+        val newJson = objectMapper.writeValueAsString(mutableRoot)
+        val sizeBefore = latest.contentJson.length
+        // (content_id, schema_version) UNIQUE 제약 → 신 row INSERT 대신 기존 row UPDATE.
+        // 이력은 ContentEditLog 로 남김.
+        latest.contentJson = newJson
+        latest.uploadedBy = userId
+        latest.approvedBy = userId
+        latest.approvedAt = LocalDateTime.now()
+        contentVersionRepository.save(latest)
+
+        contentEditLogRepository.save(ContentEditLogEntity(
+            id = IdGenerator.newId("cel"),
+            contentId = contentId,
+            editorId = userId,
+            action = "BACKFILL_Q10"
+        ))
+
+        return mapOf(
+            "contentId" to contentId,
+            "versionId" to latest.id,
+            "oldQ10Id" to (oldQ10?.get("id") as? String),
+            "newQ10Id" to (q10["id"] as? String),
+            "sizeBefore" to sizeBefore,
+            "sizeAfter" to newJson.length
+        )
+    }
+
     @Transactional(readOnly = true)
     fun previewContent(contentId: String): ContentPreview {
         val content = contentRepository.findById(contentId).orElseThrow {
