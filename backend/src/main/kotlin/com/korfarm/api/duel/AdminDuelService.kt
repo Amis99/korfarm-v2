@@ -83,6 +83,39 @@ class AdminDuelService(
         return seasonDuelRankingRepository.save(ranking)
     }
 
+    /**
+     * 시즌·서버별 가장 최근 ranking snapshot 을 가져와 leaderboards 로 파싱.
+     * snapshot 이 없으면 null 응답.
+     */
+    fun latestRankingSnapshot(seasonId: String, serverId: String): Map<String, Any?> {
+        val snapshots = seasonDuelRankingRepository.findAll()
+            .filter { it.seasonId == seasonId && it.levelId == serverId }
+            .sortedByDescending { it.generatedAt }
+        val latest = snapshots.firstOrNull()
+        if (latest != null) {
+            val parsed = objectMapper.readValue(latest.rankingJson, Map::class.java)
+            return mapOf(
+                "seasonId" to seasonId,
+                "serverId" to serverId,
+                "generatedAt" to latest.generatedAt.toString(),
+                "leaderboards" to parsed
+            )
+        }
+        // snapshot 이 없으면 즉석 계산 (read-only, save 안 함)
+        val live = buildLeaderboards(seasonId, serverId)
+        return mapOf(
+            "seasonId" to seasonId,
+            "serverId" to serverId,
+            "generatedAt" to null,
+            "leaderboards" to mapOf(
+                "wins" to live.wins,
+                "winRate" to live.winRate,
+                "bestStreak" to live.bestStreak
+            ),
+            "live" to true
+        )
+    }
+
     private fun buildLeaderboards(seasonId: String, serverId: String): DuelLeaderboards {
         val wins = duelStatRepository.findTop50BySeasonIdAndServerIdOrderByWinsDesc(seasonId, serverId)
             .mapIndexed { index, stat ->

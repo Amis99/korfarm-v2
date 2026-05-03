@@ -36,11 +36,28 @@ class AdminDuelController(
             mapOf<String, Any?>(
                 "id" to season.seasonId,
                 "name" to season.name,
+                "levelId" to season.levelId,
                 "startAt" to season.startAt,
                 "endAt" to season.endAt,
                 "status" to season.status
             )
         }
+        return ApiResponse(success = true, data = data)
+    }
+
+    /**
+     * 시즌·서버별 가장 최근 랭킹 스냅샷.
+     * frontend 시즌 탭에서 시즌+서버 선택 시 호출.
+     */
+    @GetMapping("/rankings")
+    fun rankings(
+        @RequestParam seasonId: String,
+        @RequestParam(required = false) serverId: String?
+    ): ApiResponse<Map<String, Any?>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        featureFlagService.requireEnabled("feature.admin.console")
+        val sid = serverId ?: seasonService.getSeasonEntity(seasonId).levelId
+        val data = adminDuelService.latestRankingSnapshot(seasonId, sid)
         return ApiResponse(success = true, data = data)
     }
 

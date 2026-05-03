@@ -1,5 +1,7 @@
 package com.korfarm.api.duel
 
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface DuelRoomRepository : JpaRepository<DuelRoomEntity, String> {
@@ -15,6 +17,10 @@ interface DuelRoomPlayerRepository : JpaRepository<DuelRoomPlayerEntity, String>
 
 interface DuelMatchRepository : JpaRepository<DuelMatchEntity, String> {
     fun findByStatusIn(statuses: List<String>): List<DuelMatchEntity>
+    fun findAllByOrderByCreatedAtDesc(pageable: Pageable): Page<DuelMatchEntity>
+    fun findByServerIdOrderByCreatedAtDesc(serverId: String, pageable: Pageable): Page<DuelMatchEntity>
+    fun findByStatusOrderByCreatedAtDesc(status: String, pageable: Pageable): Page<DuelMatchEntity>
+    fun findByServerIdAndStatusOrderByCreatedAtDesc(serverId: String, status: String, pageable: Pageable): Page<DuelMatchEntity>
 }
 
 interface DuelMatchPlayerRepository : JpaRepository<DuelMatchPlayerEntity, String> {
