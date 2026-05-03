@@ -1,58 +1,125 @@
 import { useEffect, useState } from "react";
-import { apiGet } from "../utils/adminApi";
+import { apiGet, apiPut } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
+import JsonVisualEditor from "../components/learning-db/JsonVisualEditor";
 import "../styles/admin-detail.css";
+import "../styles/learning-db.css";
 
+/**
+ * 대결 — AI·룰 설정 페이지.
+ * DB(duel_settings.id="default")에 저장되어 즉시 적용.
+ * JsonVisualEditor 로 모든 키/값을 자유롭게 편집.
+ */
 function AdminDuelRulesPage({ wrap = true }) {
-  const [rules, setRules] = useState(null);
+  const [data, setData] = useState(null);
+  const [meta, setMeta] = useState({ savedAt: null, updatedBy: null });
+  const [dirty, setDirty] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [toast, setToast] = useState("");
 
-  useEffect(() => {
+  const reload = () => {
     setLoading(true);
+    setError("");
     apiGet("/v1/admin/duel/rules")
-      .then(setRules)
-      .catch(e => setError(e.message))
+      .then((res) => {
+        if (!res || typeof res !== "object") {
+          setError("응답 형식 오류");
+          return;
+        }
+        // _savedAt / _updatedBy 분리
+        const { _savedAt, _updatedBy, ...rest } = res;
+        setData(rest);
+        setMeta({ savedAt: _savedAt, updatedBy: _updatedBy });
+        setDirty(false);
+      })
+      .catch((e) => setError("불러오기 실패: " + e.message))
       .finally(() => setLoading(false));
-  }, []);
+  };
+  useEffect(reload, []);
 
-  const Section = ({ title, data }) => (
-    <div className="admin-detail-card" style={{ marginBottom: 12 }}>
-      <h3>{title}</h3>
-      <table className="admin-detail-table" style={{ fontSize: 13 }}>
-        <tbody>
-          {Object.entries(data || {}).map(([k, v]) => (
-            <tr key={k}>
-              <td style={{ width: "30%", fontWeight: 600, color: "#555" }}>{k}</td>
-              <td>
-                {typeof v === "object" ? <pre style={{ margin: 0, fontSize: 12 }}>{JSON.stringify(v, null, 2)}</pre> : String(v)}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
+  const handleChange = (next) => {
+    setData(next);
+    setDirty(true);
+  };
+
+  const handleSave = async () => {
+    setSaving(true);
+    setError("");
+    try {
+      await apiPut("/v1/admin/duel/rules", data);
+      setToast("저장되었습니다.");
+      setTimeout(() => setToast(""), 2000);
+      reload();
+    } catch (e) {
+      setError("저장 실패: " + e.message);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleResetDefault = async () => {
+    if (!window.confirm("기본값으로 되돌리시겠어요? (DB 저장 행은 그대로 두고 화면만 초기화 후, 저장하면 기본값으로 덮어씁니다)")) return;
+    reload();
+  };
 
   const content = (
     <>
       <div className="admin-detail-header">
         {wrap && <h1>AI·룰</h1>}
-      </div>
-      {loading && <p className="admin-detail-note">불러오는 중...</p>}
-      {error && <p className="admin-detail-note error">{error}</p>}
-      {rules && (
-        <>
-          {rules._note && (
-            <div className="admin-detail-note" style={{ background: "#fff3cd", color: "#856404", padding: 8, borderRadius: 4, marginBottom: 12 }}>
-              ⓘ {rules._note}
-            </div>
+        <div className="admin-detail-actions" style={{ display: "flex", gap: 8 }}>
+          {meta.savedAt ? (
+            <span className="ldb-pill" title={"저장자: " + (meta.updatedBy || "-")}>
+              마지막 저장 {String(meta.savedAt).substring(0, 19)}
+            </span>
+          ) : (
+            <span className="ldb-pill" style={{ background: "#fff3cd", color: "#856404" }}>
+              아직 저장된 적 없음 — 기본값 표시 중
+            </span>
           )}
-          <Section title="📐 매치 규칙" data={rules.matchRule} />
-          <Section title="🤖 AI 플레이어" data={rules.aiPlayer} />
-          <Section title="🔁 큐·매칭" data={rules.queue} />
-          <Section title="🏆 보상" data={rules.reward} />
-        </>
+          {dirty && (
+            <span className="ldb-pill" style={{ background: "#fff3cd", color: "#856404" }}>변경됨</span>
+          )}
+          <button
+            type="button"
+            className="admin-detail-btn"
+            disabled={saving || !dirty}
+            onClick={handleSave}
+          >
+            {saving ? "저장 중…" : "저장"}
+          </button>
+          <button
+            type="button"
+            className="admin-detail-btn secondary"
+            onClick={handleResetDefault}
+          >
+            화면 초기화
+          </button>
+        </div>
+      </div>
+
+      {loading && <p className="admin-detail-note">불러오는 중…</p>}
+      {error && <p className="admin-detail-note error">{error}</p>}
+      {toast && (
+        <p className="admin-detail-note" style={{ background: "#d4edda", color: "#155724", padding: 8, borderRadius: 4 }}>
+          {toast}
+        </p>
+      )}
+
+      {data && (
+        <div className="admin-detail-card" style={{ padding: 16 }}>
+          <p style={{ fontSize: 12, color: "#666", marginBottom: 12 }}>
+            모든 키/값을 자유롭게 편집할 수 있습니다. 저장 즉시 대결 시스템에 반영됩니다.
+            (현재는 표시·기록 용도이며, 실제 매치 동작 변경은 후속 작업에서 단계적으로 연결됩니다.)
+          </p>
+          <JsonVisualEditor
+            data={data}
+            onChange={handleChange}
+            title=""
+            actions={null}
+          />
+        </div>
       )}
     </>
   );
