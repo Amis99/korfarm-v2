@@ -299,7 +299,7 @@ function DuelMatchPage() {
                   onClick={() => handleAnswer(choice.id)}
                   disabled={!!myAnswer || phase !== "answering"}
                 >
-                  <RichText>{choice.text}</RichText>
+                  <PassageMarkdown className="duel-choice-md">{choice.text}</PassageMarkdown>
                 </button>
               );
             })}

@@ -733,10 +733,11 @@ function AdminDuelQuestionsPage({ wrap = true }) {
 
             <div className="admin-modal-field">
               <label>문제 텍스트 (stem)</label>
-              <input
+              <MarkdownEditField
                 value={addForm.stem}
-                onChange={(e) => setAddForm({ ...addForm, stem: e.target.value })}
-                placeholder="다음 중 올바른 것은?"
+                onChange={(val) => setAddForm({ ...addForm, stem: val })}
+                placeholder="다음 중 올바른 것은? (굵게·밑줄·이미지 가능)"
+                minHeight={90}
               />
             </div>
 
@@ -751,14 +752,15 @@ function AdminDuelQuestionsPage({ wrap = true }) {
             </div>
 
             <div className="admin-modal-section">
-              <h3>선택지</h3>
+              <h3>선택지 <span style={{ fontSize: 11, color: "#888", fontWeight: 400 }}>(마크다운·이미지 지원)</span></h3>
               {[1, 2, 3, 4].map((n) => (
                 <div className="admin-modal-field" key={n}>
                   <label>{n}번 선택지</label>
-                  <input
+                  <MarkdownEditField
                     value={addForm[`choice${n}`]}
-                    onChange={(e) => setAddForm({ ...addForm, [`choice${n}`]: e.target.value })}
+                    onChange={(val) => setAddForm({ ...addForm, [`choice${n}`]: val })}
                     placeholder={`${n}번 선택지 텍스트`}
+                    minHeight={70}
                   />
                 </div>
               ))}
