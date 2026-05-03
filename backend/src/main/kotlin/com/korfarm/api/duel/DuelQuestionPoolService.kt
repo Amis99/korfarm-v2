@@ -178,12 +178,17 @@ class DuelQuestionPoolService(
     fun listByServer(serverId: String): List<Map<String, Any>> {
         val entities = duelQuestionPoolRepository.findByServerIdAndStatus(serverId, "ACTIVE")
         return entities.map { e ->
+            // 목록에서도 발문 일부를 보여주기 위해 questionJson 에서 stem 추출
+            val stem = try {
+                objectMapper.readTree(e.questionJson).get("stem")?.asText() ?: ""
+            } catch (ex: Exception) { "" }
             mapOf(
                 "id" to e.id,
                 "serverId" to e.serverId,
                 "questionType" to e.questionType,
                 "category" to e.category,
                 "status" to e.status,
+                "stem" to stem,
                 "createdAt" to e.createdAt.toString()
             )
         }

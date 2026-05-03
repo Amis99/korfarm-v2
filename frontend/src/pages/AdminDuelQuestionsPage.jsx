@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo, useCallback } from "react";
 import { apiGet, apiPost, apiPut, apiDelete } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
+import MarkdownEditField from "../components/editor/MarkdownEditField";
 import SAMPLE_QUESTIONS from "../constants/duelSamples";
 import "../styles/admin-detail.css";
 
@@ -521,9 +522,15 @@ function AdminDuelQuestionsPage({ wrap = true }) {
                           <span
                             className="admin-duel-id-link"
                             onClick={() => handleShowDetail(q)}
+                            title={q.id}
                           >
-                            {q.id}
+                            {q.stem
+                              ? (q.stem.length > 80 ? q.stem.slice(0, 80) + "…" : q.stem)
+                              : q.id}
                           </span>
+                          {q.stem && (
+                            <div style={{ fontSize: 11, color: "#888", marginTop: 2 }}>{q.id}</div>
+                          )}
                         </td>
                         <td>
                           <span
@@ -672,11 +679,11 @@ function AdminDuelQuestionsPage({ wrap = true }) {
 
             <div className="admin-modal-field">
               <label>지문 (passage, 선택)</label>
-              <textarea
-                className="admin-json-input admin-duel-passage-textarea"
+              <MarkdownEditField
                 value={addForm.passage}
-                onChange={(e) => setAddForm({ ...addForm, passage: e.target.value })}
-                placeholder="독해형 문제의 경우 지문을 입력하세요 (없으면 비워두세요)"
+                onChange={(val) => setAddForm({ ...addForm, passage: val })}
+                placeholder="독해형 문제의 경우 지문을 입력하세요 (마크다운·이미지·표 지원, 없으면 비워두세요)"
+                minHeight={160}
               />
             </div>
 

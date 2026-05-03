@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { WS_BASE } from "../utils/api";
-import RichText from "../utils/RichText";
+import PassageMarkdown from "../components/PassageMarkdown";
 import "../styles/duel.css";
 
 function DuelMatchPage() {
@@ -270,10 +270,10 @@ function DuelMatchPage() {
           </span>
 
           {currentQuestion.passage && currentQuestion.passage !== "null" && (
-            <div className="duel-passage"><RichText>{currentQuestion.passage}</RichText></div>
+            <PassageMarkdown className="duel-passage">{currentQuestion.passage}</PassageMarkdown>
           )}
 
-          <div className="duel-stem"><RichText>{currentQuestion.stem}</RichText></div>
+          <PassageMarkdown className="duel-stem">{currentQuestion.stem}</PassageMarkdown>
 
           <div className="duel-choices">
             {currentQuestion.choices?.map((choice) => {
