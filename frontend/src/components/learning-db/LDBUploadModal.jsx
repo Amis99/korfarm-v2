@@ -71,10 +71,11 @@ function LDBUploadModal({ categories, onClose, onDone }) {
         items.map(it => ({ id: it.id, data: it.data })),
         mode
       );
-      setResult(res?.data);
-      if (res?.data && res.data.failed === 0) {
-        // 전체 성공 — 부모에 알림
-        onDone?.({ category, result: res.data });
+      // safeJson 이 풀어준 ImportResultDto: { total, ok, failed, results }
+      const result = res?.total !== undefined ? res : res?.data;
+      setResult(result);
+      if (result && result.failed === 0) {
+        onDone?.({ category, result });
       }
     } catch (err) {
       setParseError("업로드 실패: " + (err.message || String(err)));

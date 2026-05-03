@@ -22,7 +22,7 @@ function AdminLearningDBPage() {
 
   const loadCategories = () => {
     fetchCategories()
-      .then(res => setCategories(res?.data || []))
+      .then(res => setCategories(Array.isArray(res) ? res : (res?.data || [])))
       .catch(e => setToast({ msg: "카테고리 로드 실패: " + e.message, type: "error" }));
   };
   useEffect(loadCategories, []);
@@ -32,7 +32,9 @@ function AdminLearningDBPage() {
     setLoadingCats(prev => new Set(prev).add(catKey));
     try {
       const res = await fetchTree(catKey);
-      setTrees(prev => ({ ...prev, [catKey]: res?.data }));
+      // safeJson 이 이미 payload.data 를 풀었으므로 res 자체가 TreeNodeDto
+      const tree = res?.children !== undefined ? res : res?.data;
+      setTrees(prev => ({ ...prev, [catKey]: tree }));
     } catch (e) {
       setToast({ msg: `'${catKey}' 트리 로드 실패: ${e.message}`, type: "error" });
     } finally {
@@ -52,7 +54,9 @@ function AdminLearningDBPage() {
     setLoadingItem(true);
     try {
       const res = await fetchItem(catKey, itemId);
-      setSelected({ category: catKey, id: itemId, label, fullNodeId, data: res?.data?.data, dirty: false });
+      // safeJson 이 풀어준 ItemDto: { category, id, storage, data }
+      const itemData = res?.data !== undefined ? res.data : res;
+      setSelected({ category: catKey, id: itemId, label, fullNodeId, data: itemData, dirty: false });
     } catch (e) {
       setToast({ msg: `항목 로드 실패: ${e.message}`, type: "error" });
     } finally {
@@ -74,7 +78,9 @@ function AdminLearningDBPage() {
     setSaving(true);
     try {
       const res = await saveItem(selected.category, selected.id, selected.data);
-      setSelected(s => s ? { ...s, dirty: false, id: res?.data?.id || s.id } : null);
+      // safeJson 이 풀어준 SaveResultDto: { category, id, created }
+      const newId = res?.id || res?.data?.id || selected.id;
+      setSelected(s => s ? { ...s, dirty: false, id: newId } : null);
       setToast({ msg: "저장 완료", type: "success" });
       // 트리 새로고침
       await expandCategory(selected.category, true);
