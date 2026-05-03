@@ -174,6 +174,9 @@ export default function MarkdownEditField({ value, onChange, placeholder, minHei
         <ToolButton onClick={() => wrapSelection("> ", "", "인용")} title="인용">❝</ToolButton>
         <ToolButton onClick={() => wrapSelection("- ", "", "목록")} title="목록">•</ToolButton>
         <span style={{ width: 1, background: "var(--stroke)", margin: "0 4px" }} />
+        <ToolButton onClick={() => insertAtCursor("<br>\n")} title="줄바꿈 (같은 단락 내)">↵</ToolButton>
+        <ToolButton onClick={() => insertAtCursor("\n\n")} title="새 단락 (빈 줄)">¶</ToolButton>
+        <span style={{ width: 1, background: "var(--stroke)", margin: "0 4px" }} />
         <ToolButton
           onClick={() => fileInputRef.current?.click()}
           title="이미지 삽입"
