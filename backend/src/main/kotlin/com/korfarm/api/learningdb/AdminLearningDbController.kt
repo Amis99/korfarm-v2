@@ -4,7 +4,6 @@ import com.korfarm.api.common.ApiResponse
 import com.korfarm.api.security.AdminGuard
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -13,67 +12,51 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 /**
- * 학습 자료DB 통합 admin 컨트롤러.
- * 콘텐츠/테스트/일일학습/프로모드 콘텐츠는 별도 메뉴 — 본 컨트롤러에서 노출하지 않음.
+ * 학습 자료 DB — 영역·세부영역별 raw 자료 관리.
+ * 운영 데이터·콘텐츠·테스트·사용자 데이터는 모두 별도 메뉴 — 본 컨트롤러에서 노출하지 않음.
  */
 @RestController
-@RequestMapping("/v1/admin/learning-db")
+@RequestMapping("/v1/admin/learning-data")
 class AdminLearningDbController(
     private val service: AdminLearningDbService
 ) {
-    @GetMapping("/categories")
-    fun listCategories(): ApiResponse<List<CategoryMetaDto>> {
+    @GetMapping("/meta")
+    fun meta(): ApiResponse<LearningDataMetaDto> {
         AdminGuard.requireAnyRole("HQ_ADMIN")
-        return ApiResponse(success = true, data = service.listCategories())
+        return ApiResponse(success = true, data = service.listMeta())
     }
 
-    @GetMapping("/{cat}/tree")
-    fun tree(@PathVariable cat: String): ApiResponse<TreeNodeDto> {
+    @GetMapping("/tree")
+    fun tree(): ApiResponse<LearningDataNodeDto> {
         AdminGuard.requireAnyRole("HQ_ADMIN")
-        return ApiResponse(success = true, data = service.tree(LearningDbCategory.byKey(cat)))
+        return ApiResponse(success = true, data = service.tree())
     }
 
-    @GetMapping("/{cat}/item")
-    fun item(
-        @PathVariable cat: String,
-        @RequestParam id: String
-    ): ApiResponse<ItemDto> {
+    @GetMapping("/file")
+    fun read(@RequestParam path: String): ApiResponse<Any> {
         AdminGuard.requireAnyRole("HQ_ADMIN")
-        return ApiResponse(success = true, data = service.item(LearningDbCategory.byKey(cat), id))
+        return ApiResponse(success = true, data = service.readFile(path))
     }
 
-    @PutMapping("/{cat}/item")
-    fun saveItem(
-        @PathVariable cat: String,
-        @RequestParam(required = false) id: String?,
-        @RequestBody body: Map<String, Any?>
-    ): ApiResponse<SaveResultDto> {
+    @PutMapping("/file")
+    fun save(
+        @RequestParam path: String,
+        @RequestBody body: Any?
+    ): ApiResponse<FileSaveResultDto> {
         AdminGuard.requireAnyRole("HQ_ADMIN")
-        return ApiResponse(
-            success = true,
-            data = service.saveItem(LearningDbCategory.byKey(cat), id, body)
-        )
+        return ApiResponse(success = true, data = service.saveFile(path, body))
     }
 
-    @DeleteMapping("/{cat}/item")
-    fun deleteItem(
-        @PathVariable cat: String,
-        @RequestParam id: String
-    ): ApiResponse<Map<String, Boolean>> {
+    @DeleteMapping("/file")
+    fun delete(@RequestParam path: String): ApiResponse<Map<String, Boolean>> {
         AdminGuard.requireAnyRole("HQ_ADMIN")
-        service.deleteItem(LearningDbCategory.byKey(cat), id)
-        return ApiResponse(success = true, data = mapOf("deleted" to true))
+        val deleted = service.deleteFile(path)
+        return ApiResponse(success = true, data = mapOf("deleted" to deleted))
     }
 
-    @PostMapping("/{cat}/import")
-    fun importBatch(
-        @PathVariable cat: String,
-        @RequestBody request: ImportRequestDto
-    ): ApiResponse<ImportResultDto> {
+    @PostMapping("/import")
+    fun importBatch(@RequestBody request: FileImportRequestDto): ApiResponse<FileImportResultDto> {
         AdminGuard.requireAnyRole("HQ_ADMIN")
-        return ApiResponse(
-            success = true,
-            data = service.importBatch(LearningDbCategory.byKey(cat), request)
-        )
+        return ApiResponse(success = true, data = service.importBatch(request))
     }
 }

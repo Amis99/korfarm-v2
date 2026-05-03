@@ -1,81 +1,69 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { importBatch } from "../../utils/learningDbApi";
 
 /**
- * JSON 파일 업로드 모달.
+ * 다중 JSON 파일 업로드 모달.
+ * 영역·세부영역·자료종류 한 번 선택 → 선택된 모든 파일을 그 폴더에 저장.
+ * 파일명은 원본 그대로 사용 (덮어쓰기 모드).
  *
  * props:
- *   categories: [{ key, label, storage, readOnly }]
+ *   meta: { areas, kinds }
+ *   tree: 기존 세부영역 select 편의용
  *   onClose()
- *   onDone({ category, result })
+ *   onDone()
  */
-function LDBUploadModal({ categories, onClose, onDone }) {
-  const [category, setCategory] = useState(
-    (categories || []).find(c => !c.readOnly)?.key || ""
-  );
-  const [mode, setMode] = useState("upsert");
+function LDBUploadModal({ meta, tree, onClose, onDone }) {
+  const [area, setArea] = useState(meta?.areas?.[0]?.key || "");
+  const [subArea, setSubArea] = useState("");
+  const [kind, setKind] = useState(meta?.kinds?.[0]?.key || "");
   const [files, setFiles] = useState([]);
-  const [parsing, setParsing] = useState(false);
-  const [items, setItems] = useState([]);
+  const [parsed, setParsed] = useState([]);
   const [parseError, setParseError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState(null);
 
-  const writableCategories = (categories || []).filter(c => !c.readOnly);
+  const existingSubAreas = useMemo(() => {
+    const areaNode = (tree?.children || []).find(n => n.key === area);
+    return (areaNode?.children || []).map(s => s.key);
+  }, [tree, area]);
 
   const onFilesChosen = async (e) => {
     const fl = Array.from(e.target.files || []);
     setFiles(fl);
-    setItems([]);
+    setParsed([]);
     setParseError("");
     if (fl.length === 0) return;
-    setParsing(true);
     try {
-      const parsed = [];
+      const results = [];
       for (const f of fl) {
         const text = await f.text();
-        let json;
-        try { json = JSON.parse(text); }
-        catch (err) {
-          throw new Error(`'${f.name}' JSON 파싱 실패: ${err.message}`);
-        }
-        // 배열이면 각 원소를 항목으로, 단일 객체면 1개 항목
-        if (Array.isArray(json)) {
-          json.forEach((d, i) => {
-            const id = (d && typeof d === "object" && (d.id || d.contentId)) || null;
-            parsed.push({ source: `${f.name}[${i}]`, id, data: d });
-          });
-        } else if (json && typeof json === "object") {
-          const id = json.id || json.contentId || null;
-          parsed.push({ source: f.name, id, data: json });
-        } else {
-          throw new Error(`'${f.name}' — 객체 또는 배열만 지원`);
-        }
+        let data;
+        try { data = JSON.parse(text); }
+        catch (err) { throw new Error(`'${f.name}' JSON 파싱 실패: ${err.message}`); }
+        results.push({ filename: f.name, data });
       }
-      setItems(parsed);
+      setParsed(results);
     } catch (err) {
       setParseError(err.message || String(err));
-    } finally {
-      setParsing(false);
     }
   };
 
   const handleSubmit = async () => {
-    if (!category) { setParseError("카테고리 선택 필수"); return; }
-    if (items.length === 0) { setParseError("파일 선택 필수"); return; }
-    setSubmitting(true);
     setParseError("");
+    if (!area || !kind) { setParseError("영역·자료종류 필수"); return; }
+    const sub = subArea.trim();
+    if (!sub) { setParseError("세부영역 입력 필수"); return; }
+    if (parsed.length === 0) { setParseError("파일 선택 필수"); return; }
+    setSubmitting(true);
     try {
-      const res = await importBatch(
-        category,
-        items.map(it => ({ id: it.id, data: it.data })),
-        mode
-      );
-      // safeJson 이 풀어준 ImportResultDto: { total, ok, failed, results }
-      const result = res?.total !== undefined ? res : res?.data;
-      setResult(result);
-      if (result && result.failed === 0) {
-        onDone?.({ category, result });
+      const items = parsed.map(p => ({
+        area, subArea: sub, kind, filename: p.filename, data: p.data
+      }));
+      const res = await importBatch(items);
+      const r = res?.total !== undefined ? res : res?.data;
+      setResult(r);
+      if (r && r.failed === 0) {
+        onDone?.();
       }
     } catch (err) {
       setParseError("업로드 실패: " + (err.message || String(err)));
@@ -88,64 +76,76 @@ function LDBUploadModal({ categories, onClose, onDone }) {
     <div className="ldb-modal-backdrop" onClick={onClose}>
       <div className="ldb-modal" onClick={e => e.stopPropagation()}>
         <div className="ldb-modal-header">
-          <h3 style={{ margin: 0, fontSize: 16 }}>JSON 업로드</h3>
+          <h3 style={{ margin: 0, fontSize: 16 }}>JSON 파일 업로드</h3>
           <button type="button" className="ldb-modal-close" onClick={onClose}>×</button>
         </div>
         <div className="ldb-modal-body">
           {!result && (
             <>
               <div className="ldb-form-row">
-                <label>카테고리</label>
-                <select value={category} onChange={e => setCategory(e.target.value)}
-                  disabled={writableCategories.length === 0}>
-                  {writableCategories.map(c => (
-                    <option key={c.key} value={c.key}>{c.label} ({c.storage})</option>
+                <label>영역</label>
+                <div className="ldb-radio-grid">
+                  {(meta?.areas || []).map(a => (
+                    <label key={a.key} className={`ldb-radio-pill ${area === a.key ? "active" : ""}`}>
+                      <input type="radio" name="upload-area" value={a.key}
+                        checked={area === a.key} onChange={() => setArea(a.key)} />
+                      {a.label}
+                    </label>
                   ))}
-                </select>
-                {writableCategories.length === 0 && (
-                  <span className="ldb-form-hint">쓰기 가능한 카테고리가 없습니다.</span>
+                </div>
+              </div>
+              <div className="ldb-form-row">
+                <label>세부영역</label>
+                <input type="text" placeholder="예: 인문, 사회, 음운…"
+                  value={subArea} onChange={e => setSubArea(e.target.value)} list="upload-sub-list" />
+                {existingSubAreas.length > 0 && (
+                  <datalist id="upload-sub-list">
+                    {existingSubAreas.map(s => <option key={s} value={s} />)}
+                  </datalist>
                 )}
               </div>
               <div className="ldb-form-row">
-                <label>매칭 모드</label>
-                <select value={mode} onChange={e => setMode(e.target.value)}>
-                  <option value="upsert">upsert — id 있으면 덮어쓰기, 없으면 새로 생성</option>
-                  <option value="create">create — 항상 새로 생성 (id 무시)</option>
-                </select>
+                <label>자료 종류</label>
+                <div className="ldb-radio-grid">
+                  {(meta?.kinds || []).map(k => (
+                    <label key={k.key} className={`ldb-radio-pill ${kind === k.key ? "active" : ""}`}>
+                      <input type="radio" name="upload-kind" value={k.key}
+                        checked={kind === k.key} onChange={() => setKind(k.key)} />
+                      {k.label}
+                    </label>
+                  ))}
+                </div>
               </div>
               <div className="ldb-form-row">
-                <label>파일 선택</label>
+                <label>파일 선택 <span style={{ color: "#888", fontWeight: 400 }}>(다중 선택 가능)</span></label>
                 <input type="file" accept=".json" multiple onChange={onFilesChosen} />
+                {parsed.length > 0 && (
+                  <div className="ldb-form-preview">
+                    <strong>{parsed.length}개 파일 준비됨</strong>
+                    <ul>
+                      {parsed.slice(0, 8).map((p, i) => (
+                        <li key={i}>{p.filename}</li>
+                      ))}
+                      {parsed.length > 8 && <li>…외 {parsed.length - 8}건</li>}
+                    </ul>
+                  </div>
+                )}
               </div>
-              {parsing && <div className="ldb-form-hint">파싱 중…</div>}
               {parseError && <div className="ldb-form-error">{parseError}</div>}
-              {items.length > 0 && (
-                <div className="ldb-form-preview">
-                  <strong>{items.length}개 항목 준비됨</strong>
-                  <ul>
-                    {items.slice(0, 8).map((it, i) => (
-                      <li key={i}>
-                        <span className="ldb-pill">{it.id || "(신규)"}</span>{" "}
-                        <span style={{ color: "#666", fontSize: 12 }}>{it.source}</span>
-                      </li>
-                    ))}
-                    {items.length > 8 && <li>…외 {items.length - 8}건</li>}
-                  </ul>
-                </div>
-              )}
             </>
           )}
           {result && (
             <div className="ldb-form-result">
               <p>
-                총 <strong>{result.total}</strong> · 성공 <strong style={{ color: "#2d6a4f" }}>{result.ok}</strong> ·
-                실패 <strong style={{ color: "#c0392b" }}>{result.failed}</strong>
+                총 <strong>{result.total}</strong> · 성공{" "}
+                <strong style={{ color: "#2d6a4f" }}>{result.ok}</strong> · 실패{" "}
+                <strong style={{ color: "#c0392b" }}>{result.failed}</strong>
               </p>
               {result.failed > 0 && (
                 <ul>
-                  {result.results.filter(r => !r.success).slice(0, 10).map((r, i) => (
+                  {result.errors.slice(0, 10).map((r, i) => (
                     <li key={i} style={{ color: "#c0392b", fontSize: 13 }}>
-                      [{r.index}] {r.id || "(no id)"} — {r.error}
+                      [{r.index}] {r.filename} — {r.error}
                     </li>
                   ))}
                 </ul>
@@ -156,15 +156,13 @@ function LDBUploadModal({ categories, onClose, onDone }) {
         <div className="ldb-modal-footer">
           {!result && (
             <button type="button" className="ldb-btn ldb-btn-primary"
-              disabled={submitting || items.length === 0 || !category}
+              disabled={submitting || parsed.length === 0}
               onClick={handleSubmit}>
-              {submitting ? "업로드 중…" : `업로드 (${items.length}건)`}
+              {submitting ? "업로드 중…" : `업로드 (${parsed.length}건)`}
             </button>
           )}
           {result && (
-            <button type="button" className="ldb-btn ldb-btn-primary" onClick={onClose}>
-              닫기
-            </button>
+            <button type="button" className="ldb-btn ldb-btn-primary" onClick={onClose}>닫기</button>
           )}
           {!result && (
             <button type="button" className="ldb-btn ldb-btn-ghost" onClick={onClose}>취소</button>

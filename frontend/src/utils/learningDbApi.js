@@ -1,26 +1,21 @@
 import { apiGet, apiPost, apiPut, apiDelete } from "./api";
 
-/** 학습 자료DB v2 — 통합 admin endpoint 래퍼 */
+/** 학습 자료 DB — 영역·세부영역별 raw JSON 자료 admin endpoint */
 
-export const fetchCategories = () =>
-  apiGet("/v1/admin/learning-db/categories");
+export const fetchMeta = () =>
+  apiGet("/v1/admin/learning-data/meta");
 
-export const fetchTree = (categoryKey) =>
-  apiGet(`/v1/admin/learning-db/${encodeURIComponent(categoryKey)}/tree`);
+export const fetchTree = () =>
+  apiGet("/v1/admin/learning-data/tree");
 
-export const fetchItem = (categoryKey, id) =>
-  apiGet(`/v1/admin/learning-db/${encodeURIComponent(categoryKey)}/item?id=${encodeURIComponent(id)}`);
+export const fetchFile = (path) =>
+  apiGet(`/v1/admin/learning-data/file?path=${encodeURIComponent(path)}`);
 
-/** 단일 항목 저장 (id 가 없으면 신규 생성) */
-export const saveItem = (categoryKey, id, data) => {
-  const qs = id ? `?id=${encodeURIComponent(id)}` : "";
-  return apiPut(`/v1/admin/learning-db/${encodeURIComponent(categoryKey)}/item${qs}`, data);
-};
+export const saveFile = (path, data) =>
+  apiPut(`/v1/admin/learning-data/file?path=${encodeURIComponent(path)}`, data);
 
-/** 단일 항목 삭제 */
-export const deleteItem = (categoryKey, id) =>
-  apiDelete(`/v1/admin/learning-db/${encodeURIComponent(categoryKey)}/item?id=${encodeURIComponent(id)}`);
+export const deleteFile = (path) =>
+  apiDelete(`/v1/admin/learning-data/file?path=${encodeURIComponent(path)}`);
 
-/** 배치 import (JSON 파일 업로드) — items: [{ id?, data }], mode: "upsert" | "create" | "merge" */
-export const importBatch = (categoryKey, items, mode = "upsert") =>
-  apiPost(`/v1/admin/learning-db/${encodeURIComponent(categoryKey)}/import`, { items, mode });
+export const importBatch = (items) =>
+  apiPost("/v1/admin/learning-data/import", { items });

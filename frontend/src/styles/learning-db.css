@@ -650,3 +650,31 @@
 .ldb-form-preview li { font-size: 12px; color: #555; }
 .ldb-form-result { font-size: 14px; }
 .ldb-form-result ul { margin: 6px 0 0; padding-left: 16px; }
+
+/* 라디오 그룹 (영역/자료종류 선택) */
+.ldb-radio-grid {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.ldb-radio-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 6px 12px; font-size: 13px;
+  background: #fff; border: 1px solid #ccc; border-radius: 16px;
+  cursor: pointer; user-select: none;
+}
+.ldb-radio-pill:hover { background: #f5f5f5; }
+.ldb-radio-pill.active {
+  background: #2d6a4f; color: #fff; border-color: #2d6a4f;
+}
+.ldb-radio-pill input[type="radio"] { display: none; }
+
+/* 트리 노드 자식 개수 뱃지 */
+.ldb-tree-count {
+  font-size: 10px; padding: 1px 6px;
+  background: #d8d8d8; color: #555; border-radius: 8px; margin-left: auto;
+}
+.ldb-tree-folder .ldb-tree-count { flex-shrink: 0; }
+
+.ldb-form-row input[type="text"] {
+  padding: 8px 10px; border: 1px solid #ccc; border-radius: 4px;
+  font-size: 13px; font-family: inherit;
+}
