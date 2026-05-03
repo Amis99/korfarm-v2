@@ -53,35 +53,29 @@ function AnswerKeyModule({ content }) {
           <div className="ak-items">
             {(section.items || []).map((item, ii) => (
               <div key={ii} className="ak-item">
-                <div className="ak-item-header">
-                  <span className="ak-item-num">{item.number || ii + 1}</span>
-                  <span className="ak-item-type">{item.type || "객관식"}</span>
-                  {item.points && <span className="ak-item-pts">{item.points}점</span>}
-                </div>
-
                 {item.question && (
                   <div className="ak-item-question">
-                    <span className="ak-label">문제</span>
-                    <p><RichText>{item.question}</RichText></p>
+                    <span className="ak-q-num">{item.number || ii + 1}.</span>
+                    <p className="ak-q-text"><RichText>{item.question}</RichText></p>
                   </div>
                 )}
 
                 <div className="ak-item-answer">
-                  <span className="ak-label">정답</span>
+                  <span className="ak-label ak-label-answer">정답</span>
                   <p className="ak-answer-text"><RichText>{item.answer || "-"}</RichText></p>
                 </div>
 
                 {item.explanation && (
                   <div className="ak-item-explanation">
-                    <span className="ak-label">해설</span>
-                    <p><RichText>{item.explanation}</RichText></p>
+                    <span className="ak-label ak-label-explanation">해설</span>
+                    <p className="ak-explanation-text"><RichText>{item.explanation}</RichText></p>
                   </div>
                 )}
 
                 {item.modelAnswer && (
                   <div className="ak-item-model">
-                    <span className="ak-label">모범답안</span>
-                    <p><RichText>{item.modelAnswer}</RichText></p>
+                    <span className="ak-label ak-label-answer">모범답안</span>
+                    <p className="ak-answer-text"><RichText>{item.modelAnswer}</RichText></p>
                   </div>
                 )}
               </div>
