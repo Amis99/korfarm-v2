@@ -66,6 +66,33 @@ export function useContentEditor(contentId, staticInfo) {
           payload = isWrapped ? rawContent.payload : rawContent;
           title = apiRes.title || "";
           schemaVersion = apiRes.schemaVersion || apiRes.schema_version || "1.0";
+
+          /* PRO_ANSWER 옛 구조(sections[].groups[].items[]) → 어드민 비주얼이 기대하는
+             평탄 구조(sections[].items[]) 로 자동 변환. 학생 화면은 양쪽 호환이라 영향 X. */
+          if (ct === "PRO_ANSWER" && Array.isArray(payload?.sections) &&
+              payload.sections.some((s) => Array.isArray(s?.groups))) {
+            payload = {
+              ...payload,
+              sections: payload.sections.flatMap((s) => {
+                if (!Array.isArray(s.groups) || s.groups.length === 0) {
+                  return [{ label: s.title || "", items: s.items || [] }];
+                }
+                return s.groups.map((g) => ({
+                  label: s.title && g.title && s.title !== g.title
+                    ? `${s.title} · ${g.title}`
+                    : (g.title || s.title || ""),
+                  type: g.type,
+                  items: (g.items || []).map((it) => ({
+                    number: it.number ?? it.num ?? "",
+                    answer: it.answer ?? "",
+                    explanation: it.explanation ?? "",
+                    question: it.question,
+                    choices: it.choices,
+                  })),
+                }));
+              }),
+            };
+          }
         }
         // contentType은 array (다중 분류). string으로 와도 wrap.
         const ctArray = Array.isArray(ct) ? ct.filter(Boolean) : (ct ? [ct] : []);
