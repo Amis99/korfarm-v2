@@ -22,9 +22,34 @@
 
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 
 const API_BASE = process.env.KORFARM_API || "https://gf2.hak1ad.kr";
-const TOKEN = process.env.KORFARM_ADMIN_TOKEN;
+// 1) KORFARM_ADMIN_TOKEN 직접 사용 또는 2) KORFARM_JWT_SECRET 으로 즉석 발급
+const JWT_SECRET = process.env.KORFARM_JWT_SECRET;
+const JWT_ISSUER = process.env.KORFARM_JWT_ISSUER || "korfarm";
+const TOKEN = process.env.KORFARM_ADMIN_TOKEN || (JWT_SECRET ? mintAdminToken(JWT_SECRET) : null);
+
+function base64url(buf) {
+  return Buffer.from(buf).toString("base64")
+    .replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
+}
+function mintAdminToken(secret) {
+  const now = Math.floor(Date.now() / 1000);
+  const header = { alg: "HS256", typ: "JWT" };
+  const subject = process.env.KORFARM_ADMIN_USER_ID || "u_hq_admin";
+  const payload = {
+    iss: JWT_ISSUER,
+    sub: subject,
+    roles: ["HQ_ADMIN"],
+    iat: now,
+    exp: now + 3600, // 1시간
+  };
+  const h = base64url(JSON.stringify(header));
+  const p = base64url(JSON.stringify(payload));
+  const sig = crypto.createHmac("sha256", secret).update(`${h}.${p}`).digest();
+  return `${h}.${p}.${base64url(sig)}`;
+}
 
 const DRAFTS_DIR = path.resolve(
   __dirname,
@@ -143,7 +168,7 @@ async function callApi(contentId, q10) {
 async function main() {
   const { dryRun, start, limit, onlyFailures } = parseArgs();
   if (!dryRun && !TOKEN) {
-    console.error("KORFARM_ADMIN_TOKEN 환경변수가 필요합니다 (어드민 sessionStorage 토큰).");
+    console.error("KORFARM_ADMIN_TOKEN 또는 KORFARM_JWT_SECRET 환경변수 중 하나가 필요합니다.");
     process.exit(1);
   }
 
