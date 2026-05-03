@@ -32,7 +32,8 @@ class AdminDuelController(
 ) {
     /**
      * 테마 대결 관리에서 사용할 기관 목록.
-     * - HQ_ADMIN: 전사 공용(theme_common) + 모든 active 기관
+     * - 테마 모드는 "특정 기관이 만든 문제로 그 기관 학생끼리만" 사용 — 전사 공용 개념 없음.
+     * - HQ_ADMIN: 본사를 제외한 모든 active 제휴기관
      * - ORG_ADMIN: 본인이 ORG_ADMIN 인 기관만
      */
     @GetMapping("/theme-orgs")
@@ -44,14 +45,9 @@ class AdminDuelController(
         val isHq = SecurityUtils.hasAnyRole("HQ_ADMIN")
         val items = mutableListOf<Map<String, Any?>>()
         if (isHq) {
-            items.add(mapOf(
-                "serverId" to "theme_common",
-                "orgId" to null,
-                "orgName" to "전사 공용",
-                "isCommon" to true
-            ))
+            // 본사(org_hq) 제외 — 테마 모드는 제휴기관 전용
             orgRepository.findAll()
-                .filter { it.status == "active" }
+                .filter { it.status == "active" && it.id != "org_hq" }
                 .sortedBy { it.name }
                 .forEach { org ->
                     items.add(mapOf(
@@ -65,6 +61,7 @@ class AdminDuelController(
             val adminOrgIds = orgMembershipRepository.findByUserIdAndStatus(userId, "active")
                 .filter { it.role == "ORG_ADMIN" }
                 .map { it.orgId }
+                .filter { it != "org_hq" }
                 .toSet()
             orgRepository.findAllById(adminOrgIds)
                 .sortedBy { it.name }

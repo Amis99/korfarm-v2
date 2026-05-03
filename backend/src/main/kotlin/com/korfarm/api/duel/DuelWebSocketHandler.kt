@@ -278,8 +278,10 @@ class DuelWebSocketHandler(
                 state.currentIndex++
                 if (state.currentIndex >= state.questions.size) {
                     // 문제 소진 → 매치 종료
+                    // 테마 모드는 이 시점의 살아남은 자(activePlayers) 모두 공동 우승
+                    val survivors = state.activePlayers.toSet()
                     try {
-                        val result = duelService.finishMatch(matchId)
+                        val result = duelService.finishMatch(matchId, survivors)
                         if (result != null) {
                             try { duelService.distributeMatchRewards(matchId) }
                             catch (e: Exception) { log.error("매치 보상 지급 실패: $matchId", e) }

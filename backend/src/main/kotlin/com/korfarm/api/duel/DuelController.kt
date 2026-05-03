@@ -34,13 +34,14 @@ class DuelController(
     fun me(): ApiResponse<Map<String, Any?>> {
         val userId = requireUserId()
         requireDuelEnabled(userId)
-        val firstOrg = orgMembershipRepository.findByUserIdAndStatus(userId, "active")
-            .firstOrNull()
-        val themeServerId = firstOrg?.let { "theme_${it.orgId}" }
-        val orgName = firstOrg?.let { orgRepository.findById(it.orgId).orElse(null)?.name }
+        // 본사(org_hq) 외의 첫 active 제휴기관 — 개인 회원(본사만 소속) 은 themeServerId null
+        val partnerOrg = orgMembershipRepository.findByUserIdAndStatus(userId, "active")
+            .firstOrNull { it.orgId != "org_hq" }
+        val themeServerId = partnerOrg?.let { "theme_${it.orgId}" }
+        val orgName = partnerOrg?.let { orgRepository.findById(it.orgId).orElse(null)?.name }
         return ApiResponse(success = true, data = mapOf(
             "userId" to userId,
-            "orgId" to firstOrg?.orgId,
+            "orgId" to partnerOrg?.orgId,
             "orgName" to orgName,
             "themeServerId" to themeServerId
         ))

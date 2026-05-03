@@ -290,8 +290,14 @@ class DuelService(
 
         // 문제 선정 (풀 전체 셔플하여 중복 없이 출제)
         val questions = questionPoolService.selectAllQuestions(room.serverId)
-        if (questions.size < 2) {
-            throw ApiException("NOT_ENOUGH_QUESTIONS", "문제가 부족합니다", HttpStatus.INTERNAL_SERVER_ERROR)
+        // 테마 모드는 최소 20문제 (탈락제로 충분히 진행되려면 풀이 충분해야 함)
+        val minQuestions = if (isThemeServer(room.serverId)) 20 else 2
+        if (questions.size < minQuestions) {
+            val msg = if (isThemeServer(room.serverId))
+                "테마 모드는 최소 20문제가 등록되어야 시작할 수 있습니다 (현재 ${questions.size}개)"
+            else
+                "문제가 부족합니다"
+            throw ApiException("NOT_ENOUGH_QUESTIONS", msg, HttpStatus.BAD_REQUEST)
         }
 
         val season = seasonService.currentSeason()
@@ -391,7 +397,7 @@ class DuelService(
     // === 매치 종료 ===
 
     @Transactional
-    fun finishMatch(matchId: String): DuelMatchResultDetailView? {
+    fun finishMatch(matchId: String, survivors: Set<String>? = null): DuelMatchResultDetailView? {
         val match = duelMatchRepository.findById(matchId).orElse(null) ?: return null
         if (match.status == "finished") return null
 
@@ -413,16 +419,32 @@ class DuelService(
                 .thenBy { it.totalTimeMs }
         )
 
-        var rank = 1
-        sorted.forEachIndexed { index, player ->
-            if (index > 0) {
-                val prev = sorted[index - 1]
-                if (player.correctCount != prev.correctCount || player.totalTimeMs != prev.totalTimeMs) {
-                    rank = index + 1
+        // 테마 모드 + 풀 소진 종료: 살아남은 모두 공동 우승 (rank=1, win)
+        // 그 외(RANK 모드 또는 1인 남음): 정답 수 sort 로 단독 결정
+        val isThemeWithSurvivors = isThemeServer(match.serverId) && !survivors.isNullOrEmpty()
+
+        if (isThemeWithSurvivors) {
+            sorted.forEach { player ->
+                if (survivors!!.contains(player.userId)) {
+                    player.rankPosition = 1
+                    player.result = "win"
+                } else {
+                    player.rankPosition = 2 // 탈락자 통일 표기
+                    player.result = "lose"
                 }
             }
-            player.rankPosition = rank
-            player.result = if (rank == 1) "win" else "lose"
+        } else {
+            var rank = 1
+            sorted.forEachIndexed { index, player ->
+                if (index > 0) {
+                    val prev = sorted[index - 1]
+                    if (player.correctCount != prev.correctCount || player.totalTimeMs != prev.totalTimeMs) {
+                        rank = index + 1
+                    }
+                }
+                player.rankPosition = rank
+                player.result = if (rank == 1) "win" else "lose"
+            }
         }
 
         // 정산 (보상 계산)
