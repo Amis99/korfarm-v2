@@ -33,6 +33,7 @@ class DuelQuestionPoolService(
         return (quizPool + readingPool).shuffled()
     }
 
+
     // 같은 카테고리에서 최대 2문제만 선정하여 다양성 보장
     private fun selectWithCategoryDiversity(
         pool: List<DuelQuestionPoolEntity>,

@@ -22,29 +22,51 @@ class DuelController(
     private val featureFlagService: FeatureFlagService,
     private val duelWebSocketHandler: DuelWebSocketHandler,
     private val orgMembershipRepository: com.korfarm.api.org.OrgMembershipRepository,
-    private val orgRepository: com.korfarm.api.org.OrgRepository
+    private val orgRepository: com.korfarm.api.org.OrgRepository,
+    private val themeSubServerRepository: ThemeSubServerRepository
 ) {
     /**
      * 학생 본인의 듀얼 컨텍스트.
-     * - themeServerId: 본인 기관(첫 active membership) 의 테마 서버 ID — `theme_<orgId>` 또는 null
+     * - themeOrgId: 본사(org_hq) 외의 첫 제휴기관 ID — 개인 회원이면 null
      * - orgName: 본인 기관 이름 (학생/관리자 화면 라벨용)
-     * 학생 화면 DuelMainPage 가 카드 노출 여부 결정에 사용.
+     * 학생 화면 DuelMainPage 가 테마 카드 노출 여부 결정.
      */
     @GetMapping("/me")
     fun me(): ApiResponse<Map<String, Any?>> {
         val userId = requireUserId()
         requireDuelEnabled(userId)
-        // 본사(org_hq) 외의 첫 active 제휴기관 — 개인 회원(본사만 소속) 은 themeServerId null
         val partnerOrg = orgMembershipRepository.findByUserIdAndStatus(userId, "active")
             .firstOrNull { it.orgId != "org_hq" }
-        val themeServerId = partnerOrg?.let { "theme_${it.orgId}" }
         val orgName = partnerOrg?.let { orgRepository.findById(it.orgId).orElse(null)?.name }
         return ApiResponse(success = true, data = mapOf(
             "userId" to userId,
             "orgId" to partnerOrg?.orgId,
             "orgName" to orgName,
-            "themeServerId" to themeServerId
+            "themeOrgId" to partnerOrg?.orgId
         ))
+    }
+
+    /**
+     * 학생 — 본인 기관의 활성 테마 서브 서버 목록.
+     * 시한 만료된 서버는 자동 제외. (어드민 화면에서는 만료된 것까지 보임)
+     */
+    @GetMapping("/theme-servers")
+    fun themeServers(): ApiResponse<List<Map<String, Any?>>> {
+        val userId = requireUserId()
+        requireDuelEnabled(userId)
+        val partnerOrg = orgMembershipRepository.findByUserIdAndStatus(userId, "active")
+            .firstOrNull { it.orgId != "org_hq" }
+            ?: return ApiResponse(success = true, data = emptyList())
+        val now = java.time.LocalDateTime.now()
+        val rows = themeSubServerRepository.findByOrgIdAndStatusOrderByCreatedAtDesc(partnerOrg.orgId, "active")
+            .filter { it.expireAt == null || it.expireAt!!.isAfter(now) }
+        return ApiResponse(success = true, data = rows.map { r ->
+            mapOf<String, Any?>(
+                "serverId" to r.id,
+                "subName" to r.subName,
+                "expireAt" to r.expireAt?.toString()
+            )
+        })
     }
 
     // 서버별 방 목록 조회

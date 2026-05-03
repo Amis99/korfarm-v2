@@ -57,6 +57,7 @@ const TestWrongNotePage = lazy(() => import("./pages/TestWrongNotePage"));
 const HarvestLedgerPage = lazy(() => import("./pages/HarvestLedgerPage"));
 const SeedLedgerPage = lazy(() => import("./pages/SeedLedgerPage"));
 const DuelMainPage = lazy(() => import("./pages/DuelMainPage"));
+const DuelThemeMainPage = lazy(() => import("./pages/DuelThemeMainPage"));
 const DuelLobbyPage = lazy(() => import("./pages/DuelLobbyPage"));
 const DuelWaitingRoomPage = lazy(() => import("./pages/DuelWaitingRoomPage"));
 const DuelMatchPage = lazy(() => import("./pages/DuelMatchPage"));
@@ -236,6 +237,7 @@ function App() {
           <Route path="/harvest-ledger" element={P(<HarvestLedgerPage />)} />
           <Route path="/seed-log" element={P(<SeedLedgerPage />)} />
           <Route path="/duel" element={P(<DuelMainPage />)} />
+          <Route path="/duel/theme" element={P(<DuelThemeMainPage />)} />
           <Route path="/duel/lobby/:serverId" element={P(<DuelLobbyPage />)} />
           <Route path="/duel/room/:roomId" element={P(<DuelWaitingRoomPage />)} />
           <Route path="/duel/match/:matchId" element={P(<DuelMatchPage />)} />

@@ -42,33 +42,21 @@ const IMPORT_EXAMPLE = `[
   }
 ]`;
 
-function AdminDuelQuestionsPage({ wrap = true, themeOnly = false }) {
+function AdminDuelQuestionsPage({ wrap = true, themeOnly = false, fixedServerId = null }) {
   const [searchParams, setSearchParams] = useSearchParams();
-  // 테마 대결 모드 — 백엔드에서 기관 list 받아옴 (HQ_ADMIN: 전사 공용 + 모든 기관, ORG_ADMIN: 본인 기관)
-  const [themeOrgs, setThemeOrgs] = useState([]);
-  useEffect(() => {
-    if (!themeOnly) return;
-    apiGet("/v1/admin/duel/theme-orgs")
-      .then(list => setThemeOrgs(Array.isArray(list) ? list : []))
-      .catch(() => setThemeOrgs([]));
-  }, [themeOnly]);
-  // 노출할 서버 목록
+  // SERVERS — fixedServerId 가 있으면 그 server 한 개. 아니면 RANK 4서버.
   const SERVERS = useMemo(() => {
-    if (!themeOnly) return RANK_SERVERS;
-    return themeOrgs.map(o => ({ id: o.serverId, label: o.orgName, isCommon: o.isCommon }));
-  }, [themeOnly, themeOrgs]);
-  // 서버 탭 상태 — themeOnly 시 default 는 첫 항목
-  const [activeServer, setActiveServer] = useState(themeOnly ? "" : "saussure");
+    if (fixedServerId) return [{ id: fixedServerId, label: fixedServerId }];
+    return RANK_SERVERS;
+  }, [fixedServerId]);
+  // 서버 탭 상태
+  const [activeServer, setActiveServer] = useState(fixedServerId || "saussure");
   useEffect(() => {
-    if (!themeOnly) return;
-    if (SERVERS.length === 0) return;
-    if (!SERVERS.some(s => s.id === activeServer)) {
-      // ORG_ADMIN 은 본인 기관(non-common) 우선, 없으면 첫 항목
-      const preferred = SERVERS.find(s => !s.isCommon) || SERVERS[0];
-      setActiveServer(preferred.id);
+    if (fixedServerId && activeServer !== fixedServerId) {
+      setActiveServer(fixedServerId);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [SERVERS]);
+  }, [fixedServerId]);
   // 문제 수 카운트 (서버별)
   const [counts, setCounts] = useState({});
   // 문제 목록
@@ -511,8 +499,8 @@ function AdminDuelQuestionsPage({ wrap = true, themeOnly = false }) {
           </p>
         )}
 
-        {/* 서버 선택 — 4개 초과(예: 본사 시점에서 모든 기관) 면 dropdown, 아니면 탭 */}
-        {SERVERS.length > 4 ? (
+        {/* 서버 선택 — fixedServerId 있으면 selector 숨김 (parent 가 결정). 그 외에는 탭 */}
+        {fixedServerId ? null : (SERVERS.length > 4) ? (
           <div className="admin-detail-toolbar" style={{ alignItems: "center", gap: 12 }}>
             <label style={{ fontSize: 13, color: "#555", fontWeight: 600 }}>
               {themeOnly ? "기관 선택" : "서버 선택"}

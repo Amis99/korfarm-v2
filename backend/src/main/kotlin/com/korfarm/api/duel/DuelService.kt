@@ -288,13 +288,13 @@ class DuelService(
             throw ApiException("NOT_ENOUGH_PLAYERS", "2명 이상이어야 시작할 수 있습니다", HttpStatus.BAD_REQUEST)
         }
 
-        // 문제 선정 (풀 전체 셔플하여 중복 없이 출제)
+        // 문제 선정 (서버 풀 전체 셔플 — 테마 서브 서버도 자체 풀만 사용)
         val questions = questionPoolService.selectAllQuestions(room.serverId)
-        // 테마 모드는 최소 20문제 (탈락제로 충분히 진행되려면 풀이 충분해야 함)
+        // 테마 모드는 최소 20문제
         val minQuestions = if (isThemeServer(room.serverId)) 20 else 2
         if (questions.size < minQuestions) {
             val msg = if (isThemeServer(room.serverId))
-                "테마 모드는 최소 20문제가 등록되어야 시작할 수 있습니다 (현재 ${questions.size}개)"
+                "테마 모드는 최소 20문제가 배정되어야 시작할 수 있습니다 (현재 ${questions.size}개)"
             else
                 "문제가 부족합니다"
             throw ApiException("NOT_ENOUGH_QUESTIONS", msg, HttpStatus.BAD_REQUEST)

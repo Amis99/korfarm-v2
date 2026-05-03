@@ -11,6 +11,8 @@ const SERVER_NAMES = {
   wittgenstein: "비트겐슈타인",
 };
 
+const isThemeServer = (sid) => typeof sid === "string" && sid.startsWith("theme_");
+
 function DuelLobbyPage() {
   const { serverId } = useParams();
   const navigate = useNavigate();
@@ -22,7 +24,8 @@ function DuelLobbyPage() {
   const [stakeAmount, setStakeAmount] = useState(5);
   const [creating, setCreating] = useState(false);
 
-  const serverName = SERVER_NAMES[serverId] || serverId;
+  const isTheme = isThemeServer(serverId);
+  const serverName = isTheme ? "테마 대결" : (SERVER_NAMES[serverId] || serverId);
 
   const loadRooms = () => {
     apiGet(`/v1/duel/rooms?serverId=${serverId}`)
@@ -77,9 +80,9 @@ function DuelLobbyPage() {
     <div className="duel-lobby">
       <div className="duel-lobby-header">
         <div>
-          <h1>{serverName} 서버</h1>
-          <Link to="/duel" style={{ fontSize: 13, color: "#8a7468" }}>
-            서버 목록으로
+          <h1>{serverName}{isTheme ? " (우리 기관 테마)" : " 서버"}</h1>
+          <Link to={isTheme ? "/duel/theme" : "/duel"} style={{ fontSize: 13, color: "#8a7468" }}>
+            ← {isTheme ? "테마 서버 목록" : "서버 목록"}으로
           </Link>
         </div>
         <button className="duel-create-btn" onClick={() => setShowCreate(true)}>
@@ -87,30 +90,51 @@ function DuelLobbyPage() {
         </button>
       </div>
 
+      {isTheme && (
+        <div style={{ background: "rgba(45,106,79,0.08)", padding: "10px 14px", borderRadius: 8, fontSize: 13, color: "#1a3a2c", marginBottom: 12 }}>
+          🏫 테마 대결은 우리 기관 관리자가 만든 방에만 입장할 수 있어요. 씨앗 X · 정해진 기한까지만 운영
+        </div>
+      )}
+
       {loading ? (
         <div className="duel-empty-msg">불러오는 중...</div>
       ) : rooms.length === 0 ? (
-        <div className="duel-empty-msg">열린 방이 없습니다. 새 방을 만들어보세요!</div>
+        <div className="duel-empty-msg">
+          {isTheme
+            ? "현재 열린 테마 방이 없습니다. 기관 관리자에게 문의하세요."
+            : "열린 방이 없습니다. 새 방을 만들어보세요!"}
+        </div>
       ) : (
         <div className="duel-room-list">
-          {rooms.map((room) => (
-            <div key={room.roomId} className={`duel-room-item${isAiRoom(room) ? " ai-room" : ""}`} onClick={() => handleJoinRoom(room)}>
-              <div className="duel-room-info">
-                <div className="room-name">
-                  {isAiRoom(room) && <span className="ai-badge">AI</span>}
-                  {room.roomName || "대결방"}
+          {rooms.map((room) => {
+            const expired = room.expireAt && new Date(room.expireAt) < new Date();
+            return (
+              <div
+                key={room.roomId}
+                className={`duel-room-item${isAiRoom(room) ? " ai-room" : ""}`}
+                onClick={expired ? undefined : () => handleJoinRoom(room)}
+                style={expired ? { opacity: 0.5, cursor: "not-allowed" } : undefined}
+              >
+                <div className="duel-room-info">
+                  <div className="room-name">
+                    {isAiRoom(room) && <span className="ai-badge">AI</span>}
+                    {room.roomName || "대결방"}
+                    {expired && <span style={{ marginLeft: 6, fontSize: 11, color: "#c0392b" }}>· 기한 만료</span>}
+                  </div>
+                  <div className="room-meta">
+                    {isTheme
+                      ? `씨앗 X · 최대 ${room.roomSize}명${room.expireAt ? ` · 기한 ${String(room.expireAt).substring(0, 16)}` : ""}`
+                      : `베팅 ${room.stakeAmount}씨앗 | 최대 ${room.roomSize}명${isAiRoom(room) ? " | 즉시 시작" : ""}`
+                    }
+                  </div>
                 </div>
-                <div className="room-meta">
-                  베팅 {room.stakeAmount}씨앗 | 최대 {room.roomSize}명
-                  {isAiRoom(room) && " | 즉시 시작"}
+                <div className="duel-room-right">
+                  <div className="player-count">{room.playerCount}/{room.roomSize}</div>
+                  <div className="stake-info">참가자</div>
                 </div>
               </div>
-              <div className="duel-room-right">
-                <div className="player-count">{room.playerCount}/{room.roomSize}</div>
-                <div className="stake-info">참가자</div>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 
@@ -120,8 +144,15 @@ function DuelLobbyPage() {
             <h2>방 만들기</h2>
             <label>방 이름</label>
             <input value={roomName} onChange={(e) => setRoomName(e.target.value)} placeholder="방 이름을 입력하세요" maxLength={50} />
-            <label>베팅 씨앗 (1~50)</label>
-            <input type="number" min={1} max={50} value={stakeAmount} onChange={(e) => setStakeAmount(e.target.value)} />
+            {!isTheme && (
+              <>
+                <label>베팅 씨앗 (1~50)</label>
+                <input type="number" min={1} max={50} value={stakeAmount} onChange={(e) => setStakeAmount(e.target.value)} />
+              </>
+            )}
+            {isTheme && (
+              <p style={{ fontSize: 12, color: "#666" }}>테마 대결은 씨앗을 걸지 않습니다.</p>
+            )}
             <div className="duel-modal-actions">
               <button className="cancel-btn" onClick={() => setShowCreate(false)}>취소</button>
               <button className="confirm-btn" onClick={handleCreateRoom} disabled={creating || !roomName.trim()}>
