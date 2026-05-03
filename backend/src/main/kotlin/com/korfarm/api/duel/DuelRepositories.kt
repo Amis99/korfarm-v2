@@ -42,6 +42,7 @@ interface DuelStatRepository : JpaRepository<DuelStatEntity, String> {
     fun findTop50BySeasonIdAndServerIdOrderByWinsDesc(seasonId: String, serverId: String): List<DuelStatEntity>
     fun findTop50BySeasonIdAndServerIdOrderByWinRateDesc(seasonId: String, serverId: String): List<DuelStatEntity>
     fun findTop50BySeasonIdAndServerIdOrderByBestStreakDesc(seasonId: String, serverId: String): List<DuelStatEntity>
+    fun findBySeasonIdAndServerIdIn(seasonId: String, serverIds: List<String>): List<DuelStatEntity>
 }
 
 interface DuelEscrowRepository : JpaRepository<DuelEscrowEntity, String> {

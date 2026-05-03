@@ -95,6 +95,19 @@ class AdminDuelController(
     }
 
     /**
+     * 테마 대결 랭킹 — 기관 통합 + 서브 서버별.
+     */
+    @GetMapping("/theme-rankings")
+    fun themeRankings(
+        @RequestParam orgId: String,
+        @RequestParam(required = false) seasonId: String?
+    ): ApiResponse<Map<String, Any?>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        featureFlagService.requireEnabled("feature.admin.console")
+        return ApiResponse(success = true, data = adminDuelService.themeRankings(orgId, seasonId))
+    }
+
+    /**
      * 시즌·서버별 가장 최근 랭킹 스냅샷.
      * frontend 시즌 탭에서 시즌+서버 선택 시 호출.
      */

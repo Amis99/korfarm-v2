@@ -16,7 +16,7 @@ import "../styles/learning-db.css";
 function AdminThemeDuelPage() {
   const [orgs, setOrgs] = useState([]);
   const [orgId, setOrgId] = useState("");
-  const [sub, setSub] = useState("servers"); // "servers" | "questions"
+  const [sub, setSub] = useState("servers"); // "servers" | "questions" | "rankings"
 
   useEffect(() => {
     apiGet("/v1/admin/duel/theme-orgs")
@@ -55,11 +55,124 @@ function AdminThemeDuelPage() {
           <span className="material-symbols-outlined" style={{ fontSize: 14, marginRight: 4 }}>quiz</span>
           문제 풀
         </button>
+        <button type="button" className={`admin-tab ${sub === "rankings" ? "active" : ""}`} onClick={() => setSub("rankings")}>
+          <span className="material-symbols-outlined" style={{ fontSize: 14, marginRight: 4 }}>leaderboard</span>
+          랭킹
+        </button>
       </div>
 
       {!orgId && <p className="admin-detail-note">먼저 관리할 기관을 선택하세요.</p>}
       {orgId && sub === "servers" && <SubServerManager orgId={orgId} orgName={orgName} />}
       {orgId && sub === "questions" && <SubServerQuestionPool orgId={orgId} orgName={orgName} />}
+      {orgId && sub === "rankings" && <ThemeRankings orgId={orgId} orgName={orgName} />}
+    </div>
+  );
+}
+
+// ───────────────────────── 랭킹 ─────────────────────────
+
+function ThemeRankings({ orgId, orgName }) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    setLoading(true);
+    setError("");
+    apiGet(`/v1/admin/duel/theme-rankings?orgId=${encodeURIComponent(orgId)}`)
+      .then(setData)
+      .catch((e) => setError(e.message))
+      .finally(() => setLoading(false));
+  }, [orgId]);
+
+  if (loading) return <p className="admin-detail-note">불러오는 중…</p>;
+  if (error) return <p className="admin-detail-note error">{error}</p>;
+  if (!data) return null;
+
+  const aggregated = data.aggregated || [];
+  const perServer = data.perServer || [];
+
+  return (
+    <div>
+      {/* 통합 랭킹 */}
+      <div className="admin-detail-card" style={{ marginBottom: 16 }}>
+        <h3 style={{ margin: "0 0 8px" }}>🏆 {orgName} 통합 랭킹 (모든 서브 서버 합산)</h3>
+        <p style={{ fontSize: 12, color: "#888", marginBottom: 8 }}>시즌: {data.seasonId}</p>
+        {aggregated.length === 0 ? (
+          <p style={{ color: "#888", fontSize: 13 }}>아직 매치 통계가 없습니다.</p>
+        ) : (
+          <table className="admin-detail-table" style={{ fontSize: 13 }}>
+            <thead>
+              <tr>
+                <th style={{ width: 40 }}>#</th>
+                <th>참가자</th>
+                <th style={{ width: 60 }}>승</th>
+                <th style={{ width: 60 }}>패</th>
+                <th style={{ width: 80 }}>승률</th>
+                <th style={{ width: 80 }}>최고 연승</th>
+              </tr>
+            </thead>
+            <tbody>
+              {aggregated.slice(0, 10).map((r, i) => (
+                <tr key={r.userId}>
+                  <td>{i + 1}</td>
+                  <td>{r.displayName || r.userId}</td>
+                  <td>{r.wins}</td>
+                  <td>{r.losses}</td>
+                  <td>{((r.winRate || 0) * 100).toFixed(1)}%</td>
+                  <td>{r.bestStreak}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+
+      {/* 서브 서버별 랭킹 */}
+      <h3 style={{ margin: "16px 0 8px" }}>서브 서버별 랭킹</h3>
+      {perServer.length === 0 && (
+        <p style={{ color: "#888", fontSize: 13 }}>등록된 서브 서버가 없습니다.</p>
+      )}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(360px,1fr))", gap: 12 }}>
+        {perServer.map((s) => (
+          <div key={s.serverId} className="admin-detail-card" style={{ padding: 12 }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 6 }}>
+              <strong style={{ fontSize: 14 }}>{s.subName}</strong>
+              <span className="status-pill" data-status={
+                s.status === "active" ? "active" : s.status === "expired" ? "inactive" : "pending"
+              }>
+                {s.status === "active" ? "운영 중" : s.status === "expired" ? "기한 종료" : "마감"}
+              </span>
+            </div>
+            {(s.leaderboard || []).length === 0 ? (
+              <p style={{ fontSize: 12, color: "#888" }}>매치 통계 없음</p>
+            ) : (
+              <table className="admin-detail-table" style={{ fontSize: 12 }}>
+                <thead>
+                  <tr>
+                    <th style={{ width: 28 }}>#</th>
+                    <th>참가자</th>
+                    <th style={{ width: 36 }}>승</th>
+                    <th style={{ width: 36 }}>패</th>
+                    <th style={{ width: 60 }}>승률</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {s.leaderboard.slice(0, 10).map((r) => (
+                    <tr key={r.userId}>
+                      <td>{r.rank}</td>
+                      <td style={{ fontSize: 11 }}>{r.displayName || r.userId}</td>
+                      <td>{r.wins}</td>
+                      <td>{r.losses}</td>
+                      <td>{((r.winRate || 0) * 100).toFixed(0)}%</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
