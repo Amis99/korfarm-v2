@@ -17,6 +17,7 @@ function DuelMainPage() {
   const [serverStats, setServerStats] = useState({});
   const [myStats, setMyStats] = useState(null);
   const [error, setError] = useState(null);
+  const [themeServerId, setThemeServerId] = useState(null);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -24,7 +25,13 @@ function DuelMainPage() {
       return;
     }
 
-    SERVERS.forEach((server) => {
+    // 본인 기관 테마 서버 ID 조회
+    apiGet("/v1/duel/me")
+      .then((me) => setThemeServerId(me?.themeServerId || null))
+      .catch((e) => console.error(e));
+
+    const allServers = [...SERVERS];
+    allServers.forEach((server) => {
       apiGet(`/v1/duel/rooms?serverId=${server.id}`)
         .then((rooms) => {
           const list = Array.isArray(rooms) ? rooms : [];
@@ -43,6 +50,20 @@ function DuelMainPage() {
       .then((stats) => setMyStats(stats))
       .catch((e) => console.error(e));
   }, [isLoggedIn, navigate]);
+
+  // 테마 서버 카드 노출 — 본인 기관 학생만
+  useEffect(() => {
+    if (!themeServerId) return;
+    apiGet(`/v1/duel/rooms?serverId=${themeServerId}`)
+      .then((rooms) => {
+        const list = Array.isArray(rooms) ? rooms : [];
+        setServerStats((prev) => ({
+          ...prev,
+          [themeServerId]: { roomCount: list.length },
+        }));
+      })
+      .catch((e) => console.error(e));
+  }, [themeServerId]);
 
   return (
     <div className="duel-main">
@@ -72,6 +93,22 @@ function DuelMainPage() {
             </div>
           </Link>
         ))}
+        {themeServerId && (
+          <Link
+            to={`/duel/lobby/${themeServerId}`}
+            className="duel-server-card"
+            style={{ borderColor: "#2d6a4f", background: "rgba(45,106,79,0.04)" }}
+          >
+            <div className="server-icon">🏫</div>
+            <div className="server-name">테마 대결</div>
+            <div className="server-desc">우리 기관 전용 (씨앗 X)</div>
+            <div className="server-stats">
+              <span>
+                열린 방 {serverStats[themeServerId]?.roomCount ?? 0}개
+              </span>
+            </div>
+          </Link>
+        )}
       </div>
 
       {myStats && (

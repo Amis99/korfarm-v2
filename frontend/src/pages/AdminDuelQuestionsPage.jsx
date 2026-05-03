@@ -6,8 +6,8 @@ import MarkdownEditField from "../components/editor/MarkdownEditField";
 import SAMPLE_QUESTIONS from "../constants/duelSamples";
 import "../styles/admin-detail.css";
 
-// 서버 목록
-const SERVERS = [
+// 서버 목록 (RANK)
+const RANK_SERVERS = [
   { id: "saussure", label: "소쉬르" },
   { id: "frege", label: "프레게" },
   { id: "russell", label: "러셀" },
@@ -42,10 +42,30 @@ const IMPORT_EXAMPLE = `[
   }
 ]`;
 
-function AdminDuelQuestionsPage({ wrap = true }) {
+function AdminDuelQuestionsPage({ wrap = true, themeOnly = false }) {
   const [searchParams, setSearchParams] = useSearchParams();
-  // 서버 탭 상태
-  const [activeServer, setActiveServer] = useState("saussure");
+  // 본인 기관 테마 서버 (themeOnly 모드 시)
+  const [themeServerId, setThemeServerId] = useState(null);
+  useEffect(() => {
+    if (!themeOnly) return;
+    apiGet("/v1/duel/me").then(me => setThemeServerId(me?.themeServerId || null)).catch(() => {});
+  }, [themeOnly]);
+  // 노출할 서버 목록 — themeOnly 시 theme_common + themeServerId
+  const SERVERS = useMemo(() => {
+    if (!themeOnly) return RANK_SERVERS;
+    const list = [{ id: "theme_common", label: "전사 공용" }];
+    if (themeServerId) list.push({ id: themeServerId, label: "우리 기관" });
+    return list;
+  }, [themeOnly, themeServerId]);
+  // 서버 탭 상태 — themeOnly 시 default 가 theme_common 또는 본인 기관
+  const [activeServer, setActiveServer] = useState(themeOnly ? "theme_common" : "saussure");
+  useEffect(() => {
+    if (themeOnly && themeServerId && activeServer === "theme_common") {
+      // 기관 학생/관리자는 본인 기관 탭 우선
+      setActiveServer(themeServerId);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [themeServerId]);
   // 문제 수 카운트 (서버별)
   const [counts, setCounts] = useState({});
   // 문제 목록

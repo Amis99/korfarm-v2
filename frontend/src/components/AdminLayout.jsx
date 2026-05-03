@@ -35,10 +35,15 @@ function AdminLayout({ children }) {
   const { user } = useAuth();
   const userRoles = user?.roles || [];
 
-  const visibleNavItems = NAV_ITEMS.filter((item) => {
-    if (!item.roles) return true;
-    return item.roles.some((r) => userRoles.includes(r));
-  });
+  // ORG_ADMIN 만 있는 사용자(본사 관리자 X)는 테마 대결만 노출
+  const isOrgAdminOnly = userRoles.includes("ORG_ADMIN") && !userRoles.includes("HQ_ADMIN");
+
+  const visibleNavItems = isOrgAdminOnly
+    ? [{ to: "/admin/duel?tab=theme", icon: "groups", label: "테마 대결" }]
+    : NAV_ITEMS.filter((item) => {
+        if (!item.roles) return true;
+        return item.roles.some((r) => userRoles.includes(r));
+      });
 
   return (
     <div className="admin-page">

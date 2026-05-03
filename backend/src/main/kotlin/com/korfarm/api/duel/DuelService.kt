@@ -80,14 +80,18 @@ class DuelService(
     @Transactional
     fun createRoom(userId: String, request: com.korfarm.api.contracts.DuelRoomCreateRequest): DuelRoomDetail {
         validateServerId(request.serverId)
-        val stakeAmount = request.stakeAmount
-        if (stakeAmount < 1 || stakeAmount > 50) {
+        // 테마 서버는 씨앗 X — stake 강제 0 + 검증 skip
+        val isTheme = isThemeServer(request.serverId)
+        val stakeAmount = if (isTheme) 0 else request.stakeAmount
+        if (!isTheme && (stakeAmount < 1 || stakeAmount > 50)) {
             throw ApiException("INVALID_STAKE", "베팅은 1~50 씨앗", HttpStatus.BAD_REQUEST)
         }
         val roomSize = request.roomSize.coerceIn(2, 10)
 
-        // 씨앗 보유량 검증
-        validateSeedBalance(userId, stakeAmount)
+        // 씨앗 보유량 검증 (테마는 skip)
+        if (!isTheme) {
+            validateSeedBalance(userId, stakeAmount)
+        }
 
         val room = DuelRoomEntity(
             id = IdGenerator.newId("room"),
@@ -131,8 +135,10 @@ class DuelService(
             throw ApiException("ROOM_FULL", "방이 가득 찼습니다", HttpStatus.CONFLICT)
         }
 
-        // 씨앗 보유량 검증
-        validateSeedBalance(userId, room.stakeAmount)
+        // 씨앗 보유량 검증 (테마 서버는 stake 0 이라 skip)
+        if (!isThemeServer(room.serverId)) {
+            validateSeedBalance(userId, room.stakeAmount)
+        }
 
         val player = DuelRoomPlayerEntity(
             id = IdGenerator.newId("rp"),
@@ -312,9 +318,11 @@ class DuelService(
         }
 
         // 참가자 처리: 씨앗 에스크로 차감 + 매치 플레이어 생성
+        // (테마 서버는 stake 0 — 에스크로/씨앗 차감 모두 skip)
+        val isThemeMatch = isThemeServer(room.serverId)
         players.forEach { rp ->
-            // AI 플레이어는 에스크로 차감 건너뛰기
-            if (!aiPlayerService.isAiPlayer(rp.userId)) {
+            // AI 플레이어는 에스크로 차감 건너뛰기 + 테마 서버 전체 skip
+            if (!aiPlayerService.isAiPlayer(rp.userId) && !isThemeMatch) {
                 if (rp.stakeSeedType != null && rp.stakeSeedType in SEED_TYPES) {
                     deductSeedsFromType(rp.userId, rp.stakeSeedType!!, room.stakeAmount, match.id)
                 } else {
@@ -717,10 +725,14 @@ class DuelService(
     }
 
     private fun validateServerId(serverId: String) {
-        if (serverId !in VALID_SERVERS) {
+        // RANK 4서버 + 테마 서버(theme_<orgId>, theme_common) 허용
+        if (serverId !in VALID_SERVERS && !serverId.startsWith("theme_")) {
             throw ApiException("INVALID_SERVER", "유효하지 않은 서버: $serverId", HttpStatus.BAD_REQUEST)
         }
     }
+
+    /** 테마 서버 여부 — 매치/방 생성 시 stake/escrow 분기에 사용 */
+    private fun isThemeServer(serverId: String): Boolean = serverId.startsWith("theme_")
 
     private fun getUserName(userId: String): String {
         if (aiPlayerService.isAiPlayer(userId)) return aiPlayerService.getAiPlayerName(userId)

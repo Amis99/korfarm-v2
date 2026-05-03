@@ -20,8 +20,28 @@ import org.springframework.web.bind.annotation.RestController
 class DuelController(
     private val duelService: DuelService,
     private val featureFlagService: FeatureFlagService,
-    private val duelWebSocketHandler: DuelWebSocketHandler
+    private val duelWebSocketHandler: DuelWebSocketHandler,
+    private val orgMembershipRepository: com.korfarm.api.org.OrgMembershipRepository
 ) {
+    /**
+     * 학생 본인의 듀얼 컨텍스트.
+     * - themeServerId: 본인 기관(첫 active membership) 의 테마 서버 ID — `theme_<orgId>` 또는 null
+     * 학생 화면 DuelMainPage 가 카드 노출 여부 결정에 사용.
+     */
+    @GetMapping("/me")
+    fun me(): ApiResponse<Map<String, Any?>> {
+        val userId = requireUserId()
+        requireDuelEnabled(userId)
+        val firstOrg = orgMembershipRepository.findByUserIdAndStatus(userId, "active")
+            .firstOrNull()
+        val themeServerId = firstOrg?.let { "theme_${it.orgId}" }
+        return ApiResponse(success = true, data = mapOf(
+            "userId" to userId,
+            "orgId" to firstOrg?.orgId,
+            "themeServerId" to themeServerId
+        ))
+    }
+
     // 서버별 방 목록 조회
     @GetMapping("/rooms")
     fun rooms(@RequestParam(required = false) serverId: String?): ApiResponse<List<DuelRoomView>> {

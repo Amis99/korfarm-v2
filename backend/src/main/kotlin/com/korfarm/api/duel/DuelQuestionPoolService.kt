@@ -24,12 +24,18 @@ class DuelQuestionPoolService(
     }
 
     // 풀의 모든 활성 문제를 셔플하여 반환 (문제 수 제한 없이 전체 출제)
+    // 테마 서버(theme_<orgId>)는 본인 기관 풀 + 전사 공용(theme_common) 합쳐서 반환
     fun selectAllQuestions(serverId: String): List<DuelQuestionPoolEntity> {
-        val quizPool = duelQuestionPoolRepository
-            .findByServerIdAndQuestionTypeAndStatus(serverId, "QUIZ", "ACTIVE")
-        val readingPool = duelQuestionPoolRepository
-            .findByServerIdAndQuestionTypeAndStatus(serverId, "READING", "ACTIVE")
-        return (quizPool + readingPool).shuffled()
+        val serverIds = if (serverId.startsWith("theme_") && serverId != "theme_common") {
+            listOf(serverId, "theme_common")
+        } else {
+            listOf(serverId)
+        }
+        val pool = serverIds.flatMap { sid ->
+            duelQuestionPoolRepository.findByServerIdAndQuestionTypeAndStatus(sid, "QUIZ", "ACTIVE") +
+            duelQuestionPoolRepository.findByServerIdAndQuestionTypeAndStatus(sid, "READING", "ACTIVE")
+        }
+        return pool.shuffled()
     }
 
     // 같은 카테고리에서 최대 2문제만 선정하여 다양성 보장
