@@ -122,6 +122,12 @@ export default function StudyPlanCellModal({ cell, scope, asset, onClose, onUpda
     navigate(`/admin/students/${userId}?${params.toString()}`);
   };
 
+  const handlePrintContent = () => {
+    if (!refId) return;
+    const url = `/admin/print-content?ids=${encodeURIComponent(refId)}`;
+    window.open(url, "_blank");
+  };
+
   const handleOpenWisdomFeedback = () => {
     if (!wisdomPostId) return;
     navigate(`/admin/wisdom/posts/${wisdomPostId}`);
@@ -238,6 +244,18 @@ export default function StudyPlanCellModal({ cell, scope, asset, onClose, onUpda
             >
               <span className="material-symbols-outlined">history</span>
               학습 히스토리 보기
+            </button>
+          )}
+
+          {isKorfarm && refId && (
+            <button
+              type="button"
+              className="asp-btn-jump"
+              onClick={handlePrintContent}
+              title="이 학습 콘텐츠를 PDF 로 인쇄"
+            >
+              <span className="material-symbols-outlined">print</span>
+              PDF 인쇄
             </button>
           )}
 

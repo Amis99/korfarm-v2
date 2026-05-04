@@ -349,34 +349,7 @@ export default function StudyPlanMatrix({
                             {cell.assignments.length}
                           </div>
                         )}
-                        {/* 개별 PDF 인쇄 — 국어농장 + 배정된 셀만 */}
-                        {asset.assetType === "korfarm" && cell.status !== "unassigned" && (() => {
-                          const ids = [];
-                          if (Array.isArray(cell.assignments)) {
-                            cell.assignments.forEach((a) => {
-                              const cid = a.contentId || a.refId || a.cellRefId;
-                              if (cid) ids.push(cid);
-                            });
-                          } else {
-                            const cid = cell.contentId || cell.cellRefId || cell.refId;
-                            if (cid) ids.push(cid);
-                          }
-                          if (ids.length === 0) return null;
-                          return (
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                window.open(`/admin/print-content?ids=${encodeURIComponent(ids.join(","))}`, "_blank");
-                              }}
-                              title="이 셀 PDF 인쇄"
-                              style={{
-                                marginTop: 4, fontSize: 11, padding: "1px 6px",
-                                background: "none", border: "1px solid #cbd5e0",
-                                borderRadius: 3, cursor: "pointer",
-                              }}
-                            >🖨</button>
-                          );
-                        })()}
+                        {/* 개별 PDF 인쇄는 셀 클릭 → 학습 결과 확인 모달 안의 'PDF 인쇄' 버튼으로 이동 */}
                       </>
                     ) : (
                       <span style={{ color: "#bbb", fontSize: "0.75rem" }}>-</span>
