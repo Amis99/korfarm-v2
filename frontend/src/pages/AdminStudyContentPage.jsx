@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AdminLayout from "../components/AdminLayout";
-import { apiGet, apiDelete } from "../utils/adminApi";
+import { apiGetCamel, apiDelete } from "../utils/adminApi";
 import Pagination from "../components/Pagination";
 import usePagination from "../hooks/usePagination";
 import "../styles/admin-detail.css";
@@ -20,7 +20,7 @@ function AdminStudyContentPage() {
   const load = async () => {
     setLoading(true);
     try {
-      const data = await apiGet("/v1/admin/study/contents");
+      const data = await apiGetCamel("/v1/admin/study/contents");
       setItems(Array.isArray(data) ? data : []);
     } catch (err) {
       setError(err.message);
