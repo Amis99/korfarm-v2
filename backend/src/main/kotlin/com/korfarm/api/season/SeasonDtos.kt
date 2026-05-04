@@ -20,7 +20,12 @@ data class DuelLeaderboardItem(
     val rank: Int,
     val userId: String,
     val value: Double,
-    val matches: Int? = null
+    val matches: Int? = null,
+    /** "이름 (학교 학년)" 형식. 학생이면 채워지고, 정보 없거나 AI 면 null. */
+    val displayName: String? = null,
+    val name: String? = null,
+    val school: String? = null,
+    val grade: String? = null
 )
 
 data class DuelLeaderboards(

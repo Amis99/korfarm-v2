@@ -122,15 +122,24 @@ function AdminSeasonsPage({ wrap = true }) {
         <p style={{ fontSize: 12, color: "#888" }}>(데이터 없음)</p>
       ) : (
         <table className="admin-detail-table" style={{ fontSize: 12 }}>
-          <thead><tr><th style={{ width: 36 }}>#</th><th>userId</th><th style={{ width: 80 }}>값</th></tr></thead>
+          <thead><tr><th style={{ width: 36 }}>#</th><th>참가자</th><th style={{ width: 80 }}>값</th></tr></thead>
           <tbody>
-            {items.slice(0, 10).map((it, i) => (
-              <tr key={i}>
-                <td>{it.rank}</td>
-                <td>{it.userId}</td>
-                <td style={{ fontWeight: 600 }}>{typeof it.value === "number" ? it.value.toFixed(2) : it.value}</td>
-              </tr>
-            ))}
+            {items.slice(0, 10).map((it, i) => {
+              const display = it.displayName || it.name || it.userId;
+              const sub = [it.school, it.grade].filter(Boolean).join(" ");
+              return (
+                <tr key={i}>
+                  <td>{it.rank}</td>
+                  <td>
+                    <div style={{ fontWeight: 500 }}>{display}</div>
+                    {sub && !it.displayName && (
+                      <div style={{ fontSize: 10, color: "#888" }}>{sub}</div>
+                    )}
+                  </td>
+                  <td style={{ fontWeight: 600 }}>{typeof it.value === "number" ? it.value.toFixed(2) : it.value}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       )}

@@ -180,12 +180,14 @@ class AdminDuelService(
             .sortedByDescending { it.generatedAt }
         val latest = snapshots.firstOrNull()
         if (latest != null) {
-            val parsed = objectMapper.readValue(latest.rankingJson, Map::class.java)
+            @Suppress("UNCHECKED_CAST")
+            val parsed = objectMapper.readValue(latest.rankingJson, Map::class.java) as Map<String, Any?>
+            val enriched = enrichSnapshotMap(parsed)
             return mapOf(
                 "seasonId" to seasonId,
                 "serverId" to serverId,
                 "generatedAt" to latest.generatedAt.toString(),
-                "leaderboards" to parsed
+                "leaderboards" to enriched
             )
         }
         // snapshot 이 없으면 즉석 계산 (read-only, save 안 함)
@@ -203,20 +205,94 @@ class AdminDuelService(
         )
     }
 
+    /** userId 들에 대해 한 번에 user lookup. AI 는 fallback 표기. */
+    private fun lookupUsers(userIds: Collection<String>): Map<String, Map<String, String?>> {
+        val realIds = userIds.filter { !it.startsWith("ai_player_") }.distinct()
+        val userMap = if (realIds.isEmpty()) emptyMap()
+                      else userRepository.findAllById(realIds).associateBy { it.id }
+        return userIds.distinct().associateWith { uid ->
+            if (uid.startsWith("ai_player_")) {
+                mapOf("displayName" to "AI ${uid.removePrefix("ai_player_")}", "name" to null, "school" to null, "grade" to null)
+            } else {
+                val u = userMap[uid]
+                if (u == null) {
+                    mapOf("displayName" to uid, "name" to null, "school" to null, "grade" to null)
+                } else {
+                    val name = u.name?.takeIf { it.isNotBlank() } ?: u.email
+                    val school = u.school?.takeIf { it.isNotBlank() }
+                    val grade = u.gradeLabel?.takeIf { it.isNotBlank() }
+                    val parts = listOfNotNull(school, grade).joinToString(" ")
+                    val display = if (parts.isNotBlank()) "$name ($parts)" else name
+                    mapOf("displayName" to display, "name" to name, "school" to school, "grade" to grade)
+                }
+            }
+        }
+    }
+
+    private fun enrichItem(item: DuelLeaderboardItem, lookup: Map<String, Map<String, String?>>): DuelLeaderboardItem {
+        val meta = lookup[item.userId] ?: return item
+        return item.copy(
+            displayName = meta["displayName"],
+            name = meta["name"],
+            school = meta["school"],
+            grade = meta["grade"]
+        )
+    }
+
     private fun buildLeaderboards(seasonId: String, serverId: String): DuelLeaderboards {
-        val wins = duelStatRepository.findTop50BySeasonIdAndServerIdOrderByWinsDesc(seasonId, serverId)
-            .mapIndexed { index, stat ->
-                DuelLeaderboardItem(rank = index + 1, userId = stat.userId, value = stat.wins.toDouble())
-            }
-        val winRate = duelStatRepository.findTop50BySeasonIdAndServerIdOrderByWinRateDesc(seasonId, serverId)
-            .mapIndexed { index, stat ->
-                val matches = stat.wins + stat.losses
-                DuelLeaderboardItem(rank = index + 1, userId = stat.userId, value = stat.winRate.toDouble(), matches = matches)
-            }
-        val bestStreak = duelStatRepository.findTop50BySeasonIdAndServerIdOrderByBestStreakDesc(seasonId, serverId)
-            .mapIndexed { index, stat ->
-                DuelLeaderboardItem(rank = index + 1, userId = stat.userId, value = stat.bestStreak.toDouble())
-            }
+        val winsStats = duelStatRepository.findTop50BySeasonIdAndServerIdOrderByWinsDesc(seasonId, serverId)
+        val winRateStats = duelStatRepository.findTop50BySeasonIdAndServerIdOrderByWinRateDesc(seasonId, serverId)
+        val bestStreakStats = duelStatRepository.findTop50BySeasonIdAndServerIdOrderByBestStreakDesc(seasonId, serverId)
+        val allIds = (winsStats + winRateStats + bestStreakStats).map { it.userId }
+        val lookup = lookupUsers(allIds)
+
+        val wins = winsStats.mapIndexed { index, stat ->
+            DuelLeaderboardItem(rank = index + 1, userId = stat.userId, value = stat.wins.toDouble())
+        }.map { enrichItem(it, lookup) }
+        val winRate = winRateStats.mapIndexed { index, stat ->
+            val matches = stat.wins + stat.losses
+            DuelLeaderboardItem(rank = index + 1, userId = stat.userId, value = stat.winRate.toDouble(), matches = matches)
+        }.map { enrichItem(it, lookup) }
+        val bestStreak = bestStreakStats.mapIndexed { index, stat ->
+            DuelLeaderboardItem(rank = index + 1, userId = stat.userId, value = stat.bestStreak.toDouble())
+        }.map { enrichItem(it, lookup) }
         return DuelLeaderboards(wins = wins, winRate = winRate, bestStreak = bestStreak)
+    }
+
+    /** 옛 snapshot JSON 에는 displayName 이 없으므로, 응답 직전에 user lookup 으로 채워넣는다. */
+    private fun enrichSnapshotMap(parsed: Map<*, *>): Map<String, List<Map<String, Any?>>> {
+        val result = mutableMapOf<String, List<Map<String, Any?>>>()
+        val collectIds = mutableListOf<String>()
+        for ((_, listVal) in parsed) {
+            if (listVal is List<*>) {
+                for (item in listVal) {
+                    if (item is Map<*, *>) {
+                        (item["userId"] as? String)?.let { collectIds += it }
+                    }
+                }
+            }
+        }
+        val lookup = lookupUsers(collectIds)
+        for ((key, listVal) in parsed) {
+            val k = key as? String ?: continue
+            if (listVal !is List<*>) { result[k] = emptyList(); continue }
+            result[k] = listVal.mapNotNull { item ->
+                if (item !is Map<*, *>) return@mapNotNull null
+                val merged = mutableMapOf<String, Any?>()
+                for ((mk, mv) in item) merged[mk as String] = mv
+                val uid = merged["userId"] as? String
+                if (uid != null) {
+                    val meta = lookup[uid]
+                    if (meta != null) {
+                        merged["displayName"] = meta["displayName"]
+                        merged["name"] = meta["name"]
+                        merged["school"] = meta["school"]
+                        merged["grade"] = meta["grade"]
+                    }
+                }
+                merged
+            }
+        }
+        return result
     }
 }
