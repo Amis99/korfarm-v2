@@ -80,6 +80,7 @@ const AdminContentPage = lazy(() => import("./pages/AdminContentPage"));
 const AdminContentUploadPage = lazy(() => import("./pages/AdminContentUploadPage"));
 const AdminContentPreviewPage = lazy(() => import("./pages/AdminContentPreviewPage"));
 const AdminContentEditorPage = lazy(() => import("./pages/AdminContentEditorPage"));
+const AdminPrintContentPage = lazy(() => import("./pages/AdminPrintContentPage"));
 const AdminShopPage = lazy(() => import("./pages/AdminShopPage"));
 const AdminDuelPage = lazy(() => import("./pages/AdminDuelPage"));
 const AdminParentLinksPage = lazy(() => import("./pages/AdminParentLinksPage"));
@@ -266,6 +267,7 @@ function App() {
           <Route path="/admin/content" element={A(<AdminContentPage />)} />
           <Route path="/admin/content/upload" element={A(<AdminContentUploadPage />)} />
           <Route path="/admin/content/preview" element={A(<AdminContentPreviewPage />)} />
+          <Route path="/admin/print-content" element={A(<AdminPrintContentPage />)} />
           <Route path="/admin/content/edit" element={A(<AdminContentEditorPage />)} />
           <Route path="/admin/study-content" element={A(<AdminStudyContentPage />)} />
           {/* 옛 에디터 라우트는 v2 로 매핑 (backward 호환). AdminStudyContentEditorPage 는 폐기 예정 */}

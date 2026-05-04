@@ -199,6 +199,39 @@ export default function StudyPlanMatrix({
             }}
           >초기화</button>
         )}
+        {/* 일괄 PDF 인쇄 — 매트릭스의 모든 국어농장 배정 콘텐츠 ID 수집 후 새 탭으로 */}
+        <button
+          className="sp-toolbar-reset"
+          style={{ marginLeft: "auto", background: "#2f7a3e", color: "#fff", borderColor: "#2f7a3e" }}
+          onClick={() => {
+            const ids = [];
+            filteredAssets.forEach((asset) => {
+              if (asset.assetType !== "korfarm") return;
+              filteredScopes.forEach((scope) => {
+                const cell = cellMap[`${scope.id}_${asset.id}`];
+                if (!cell) return;
+                if (Array.isArray(cell.assignments)) {
+                  cell.assignments.forEach((a) => {
+                    const cid = a.contentId || a.refId || a.cellRefId;
+                    if (cid) ids.push(cid);
+                  });
+                } else {
+                  const cid = cell.contentId || cell.cellRefId || cell.refId;
+                  if (cid) ids.push(cid);
+                }
+              });
+            });
+            const uniq = [...new Set(ids)];
+            if (uniq.length === 0) {
+              alert("인쇄할 국어농장 배정 콘텐츠가 없습니다.");
+              return;
+            }
+            window.open(`/admin/print-content?ids=${encodeURIComponent(uniq.join(","))}`, "_blank");
+          }}
+          title="배정된 국어농장 콘텐츠 모두 PDF 로 인쇄"
+        >
+          🖨 일괄 PDF 인쇄
+        </button>
       </div>
       <table className={`sp-matrix${admin ? " admin-theme" : ""}`}>
         <thead>
@@ -316,6 +349,34 @@ export default function StudyPlanMatrix({
                             {cell.assignments.length}
                           </div>
                         )}
+                        {/* 개별 PDF 인쇄 — 국어농장 + 배정된 셀만 */}
+                        {asset.assetType === "korfarm" && cell.status !== "unassigned" && (() => {
+                          const ids = [];
+                          if (Array.isArray(cell.assignments)) {
+                            cell.assignments.forEach((a) => {
+                              const cid = a.contentId || a.refId || a.cellRefId;
+                              if (cid) ids.push(cid);
+                            });
+                          } else {
+                            const cid = cell.contentId || cell.cellRefId || cell.refId;
+                            if (cid) ids.push(cid);
+                          }
+                          if (ids.length === 0) return null;
+                          return (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                window.open(`/admin/print-content?ids=${encodeURIComponent(ids.join(","))}`, "_blank");
+                              }}
+                              title="이 셀 PDF 인쇄"
+                              style={{
+                                marginTop: 4, fontSize: 11, padding: "1px 6px",
+                                background: "none", border: "1px solid #cbd5e0",
+                                borderRadius: 3, cursor: "pointer",
+                              }}
+                            >🖨</button>
+                          );
+                        })()}
                       </>
                     ) : (
                       <span style={{ color: "#bbb", fontSize: "0.75rem" }}>-</span>
