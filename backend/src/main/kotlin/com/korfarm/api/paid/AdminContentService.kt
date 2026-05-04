@@ -523,7 +523,18 @@ class AdminContentService(
 
     @Transactional(readOnly = true)
     fun listContents(): List<AdminContentSummary> {
+        // content_id 별 가장 최근 editor_id 한 번에 조회
+        val latestEditorByContent: Map<String, String> = contentEditLogRepository.findAll()
+            .groupBy { it.contentId }
+            .mapValues { (_, logs) -> logs.maxByOrNull { it.createdAt }?.editorId ?: "" }
+            .filterValues { it.isNotEmpty() }
+        // editor user 메타 일괄 조회 (이름 표시용)
+        val editorIds = latestEditorByContent.values.toSet()
+        val editorNameMap = if (editorIds.isEmpty()) emptyMap()
+        else userRepository.findAllById(editorIds).associate { it.id to (it.name?.takeIf { n -> n.isNotBlank() } ?: it.email) }
+
         return contentRepository.findAll().sortedBy { it.createdAt }.map { content ->
+            val editorId = latestEditorByContent[content.id]
             AdminContentSummary(
                 contentId = content.id,
                 contentType = parseCategories(content),
@@ -534,7 +545,9 @@ class AdminContentService(
                 subArea = content.subArea,
                 title = content.title,
                 status = content.status,
-                videoUrl = content.videoUrl
+                videoUrl = content.videoUrl,
+                lastEditorId = editorId,
+                lastEditorName = editorId?.let { editorNameMap[it] }
             )
         }
     }

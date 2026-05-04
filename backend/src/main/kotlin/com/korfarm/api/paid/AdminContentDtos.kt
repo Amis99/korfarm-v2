@@ -18,7 +18,10 @@ data class AdminContentSummary(
     val subArea: String? = null,
     val title: String,
     val status: String,
-    val videoUrl: String? = null
+    val videoUrl: String? = null,
+    /** 가장 최근 수정자 user_id (content_edit_logs 최근 row). 수정 이력 없으면 null */
+    val lastEditorId: String? = null,
+    val lastEditorName: String? = null
 )
 
 data class ContentPreview(

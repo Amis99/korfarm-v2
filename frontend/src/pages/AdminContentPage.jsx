@@ -85,8 +85,54 @@ const mapContentList = (items) =>
       area: content.area || "",
       subArea: content.subArea || content.sub_area || "",
       status: normalizeContentStatus(content.status),
+      lastEditorId: content.lastEditorId || content.last_editor_id || null,
+      lastEditorName: content.lastEditorName || content.last_editor_name || null,
     };
   });
+
+/* 관리자별 도형 — 사용자 명시 */
+const EDITOR_SHAPE = {
+  u_hq_admin:  { shape: "star",    label: "본사관리자(★)" },
+  u_hq_admin2: { shape: "circle",  label: "본사관리자2(●)" },
+  u_hq_admin3: { shape: "square",  label: "본사관리자3(■)" },
+  u_hq_admin4: { shape: "diamond", label: "본사관리자4(◆)" },
+};
+function editorBadgeMeta(editorId, editorName) {
+  if (!editorId) return null;
+  const known = EDITOR_SHAPE[editorId];
+  if (known) return { ...known, name: editorName || editorId };
+  // 그 외 admin — 작은 삼각형
+  return { shape: "triangle", label: `${editorName || editorId} (▲)`, name: editorName || editorId };
+}
+function EditorShapeBadge({ shape }) {
+  const sz = 12;
+  const color = "#1e6fdc";  // 파란색
+  if (shape === "star") {
+    // ★
+    return (
+      <svg width={sz} height={sz} viewBox="0 0 24 24" style={{ display: "inline-block", verticalAlign: "middle" }}>
+        <polygon fill={color} points="12,2 15,9 22,9 17,14 19,22 12,17 5,22 7,14 2,9 9,9" />
+      </svg>
+    );
+  }
+  if (shape === "circle") {
+    return <span style={{ display: "inline-block", width: sz, height: sz, borderRadius: "50%", background: color, verticalAlign: "middle" }} />;
+  }
+  if (shape === "square") {
+    return <span style={{ display: "inline-block", width: sz, height: sz, background: color, verticalAlign: "middle" }} />;
+  }
+  if (shape === "diamond") {
+    return <span style={{ display: "inline-block", width: sz, height: sz, background: color, transform: "rotate(45deg)", verticalAlign: "middle" }} />;
+  }
+  if (shape === "triangle") {
+    return (
+      <svg width={sz} height={sz} viewBox="0 0 24 24" style={{ display: "inline-block", verticalAlign: "middle" }}>
+        <polygon fill={color} points="12,3 22,21 2,21" />
+      </svg>
+    );
+  }
+  return null;
+}
 
 /* contentType (대문자 코드) → 농장 ID(lowercase) 매핑 */
 const CONTENT_TYPE_TO_FARM_ID = {
@@ -726,13 +772,26 @@ function AdminContentPage() {
                       })()}
                     </td>
                     <td>
-                      <span className="admin-tooltip-wrap" style={{ cursor: "default" }}>
-                        <span
-                          className="status-dot"
-                          data-status={content.status}
-                        />
-                        <span className="admin-tooltip">{STATUS_LABEL[content.status] || content.status}</span>
-                      </span>
+                      {(() => {
+                        const editor = editorBadgeMeta(content.lastEditorId, content.lastEditorName);
+                        // 활성 + 수정 이력 있음 → 파란 도형 (수정자별)
+                        // 활성 + 수정 이력 없음 → 기존 녹색 점
+                        // 비활성 → 회색 점
+                        if (content.status === "active" && editor) {
+                          return (
+                            <span className="admin-tooltip-wrap" style={{ cursor: "default", display: "inline-flex", alignItems: "center", gap: 4 }}>
+                              <EditorShapeBadge shape={editor.shape} />
+                              <span className="admin-tooltip">{editor.label} 수정</span>
+                            </span>
+                          );
+                        }
+                        return (
+                          <span className="admin-tooltip-wrap" style={{ cursor: "default" }}>
+                            <span className="status-dot" data-status={content.status} />
+                            <span className="admin-tooltip">{STATUS_LABEL[content.status] || content.status}</span>
+                          </span>
+                        );
+                      })()}
                     </td>
                     <td>
                       <span className="admin-content-actions-cell">
