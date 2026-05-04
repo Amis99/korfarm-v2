@@ -65,26 +65,21 @@ const fetchWithTimeout = async (url, options = {}, timeoutMs = DEFAULT_TIMEOUT_M
 
 /**
  * 401(미인증/만료) → 토큰 폐기 + 로그인 페이지로
- * 403(권한 부족) → 토큰은 유지, 어드민 메인(/admin) 으로 부드럽게 되돌리기
- *   (ORG_ADMIN 이 HQ 전용 페이지를 호출했을 때 한 번 forbidden 후 모든 라우트가
- *    로그인 페이지로 튀는 사고를 방지)
+ * 403(권한 부족) → 토큰 유지, 페이지 redirect 도 X. 단순히 에러만 throw 해서
+ *   호출한 컴포넌트가 catch 후 그 부분만 비우게 한다.
+ *   (라우트 자체 가드는 useRequireRole 훅이 책임. 여기는 endpoint 단위 403)
  */
 const handleAuthFailure = (status) => {
-  const current = window.location.pathname;
   if (status === 401) {
     try { sessionStorage.removeItem(TOKEN_KEY); } catch { /* ignore */ }
+    const current = window.location.pathname;
     if (current.startsWith("/admin")) {
       const base = import.meta.env.BASE_URL || "/";
       const redirect = encodeURIComponent(current + window.location.search);
       window.location.href = `${base}login?redirect=${redirect}&reason=expired`;
     }
-    return;
   }
-  // 403 — 토큰 유지. admin 영역이고 admin 메인이 아닐 때만 메인으로 보냄.
-  if (current.startsWith("/admin") && current !== "/admin" && current !== "/admin/") {
-    const base = import.meta.env.BASE_URL || "/";
-    window.location.href = `${base}admin?reason=forbidden`;
-  }
+  // 403 → 아무 일도 하지 않음. 호출한 곳이 try/catch 로 처리하거나 무시.
 };
 
 /**
