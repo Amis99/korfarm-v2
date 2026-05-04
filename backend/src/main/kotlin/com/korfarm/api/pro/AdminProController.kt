@@ -31,7 +31,8 @@ class AdminProController(
 
     @GetMapping("/chapters")
     fun listChapters(@RequestParam(required = false) levelId: String?): ApiResponse<List<ProChapterEntity>> {
-        AdminGuard.requireAnyRole("HQ_ADMIN")
+        // 학습 계획표에서 ORG_ADMIN 도 챕터를 학생에게 배정할 수 있어야 함
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
         val chapters = proModeService.listAllChapters(levelId)
         return ApiResponse(success = true, data = chapters)
     }

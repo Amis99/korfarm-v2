@@ -33,6 +33,15 @@ function farmName(area) {
   return FARM_MAP[key]?.name || area;
 }
 
+// FARM_MAP 의 11 농장 ID 만 학습 콘텐츠로 인정.
+// 일일퀴즈는 area 가 ART·SCIENCE·HUMANITIES·LANGUAGE 등 주제별로 들어가 있어 농장 X.
+// 정답해설(area=ANSWER)·원고(area=MANUSCRIPT)·일일독해(한국어 area) 도 학습 콘텐츠 아님.
+const VALID_FARM_KEYS = new Set(Object.keys(FARM_MAP).map((k) => k.toLowerCase()));
+function isValidFarmArea(area) {
+  if (!area) return false;
+  return VALID_FARM_KEYS.has(String(area).toLowerCase());
+}
+
 export default function KorfarmContentSearchModal({ onSelect, onClose }) {
   const [tab, setTab] = useState("all");
 
@@ -48,22 +57,38 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
   const [farmSearch, setFarmSearch] = useState("");
   const [farmLoading, setFarmLoading] = useState(false);
 
-  // ── 프로 모드 ──
+  // ── 프로 모드 ── (레벨 → 챕터 → 챕터 콘텐츠)
   const [proLevel, setProLevel] = useState("");
-  const [proItems, setProItems] = useState([]);
+  const [proChapters, setProChapters] = useState([]);
   const [proLoading, setProLoading] = useState(false);
+  const [proSelectedChapter, setProSelectedChapter] = useState("");
+  const [proItems, setProItems] = useState([]);
+  const [proItemsLoading, setProItemsLoading] = useState(false);
 
-  // ── 내용 숙지 ──
+  // ── 내용 숙지 ── 본사/기관 필터
   const [studyItems, setStudyItems] = useState([]);
   const [studySearch, setStudySearch] = useState("");
+  const [studyOwnerFilter, setStudyOwnerFilter] = useState("all"); // all | hq(public) | org(my)
   const [studyLoading, setStudyLoading] = useState(false);
 
-  // 농장 영역 목록
+  // 농장 영역 목록 — FARM_MAP 의 11 농장만 (학습이 아닌 ART/ANSWER/MANUSCRIPT 등 제외)
   useEffect(() => {
     apiGet("/v1/learning/catalog")
       .then((data) => {
         const farms = data?.farms || [];
-        setFarmAreas(farms.map(f => ({ area: f.area, count: f.totalCount || f.items?.length || 0 })));
+        const valid = farms
+          .filter(f => isValidFarmArea(f.area))
+          .map(f => ({ area: f.area, count: f.totalCount || f.items?.length || 0 }));
+        // 같은 농장이 대소문자 다르게 들어와 있으면 합산
+        const merged = new Map();
+        for (const f of valid) {
+          const k = String(f.area).toLowerCase();
+          if (merged.has(k)) merged.get(k).count += f.count;
+          else merged.set(k, { ...f, area: k });
+        }
+        // FARM_MAP 정의 순서로 정렬
+        const ordered = Object.keys(FARM_MAP).map(k => merged.get(k)).filter(Boolean);
+        setFarmAreas(ordered);
       })
       .catch(() => setFarmAreas([]));
   }, []);
@@ -73,15 +98,20 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
     if (tab !== "all" || allSearch.trim().length < 2) { setAllItems([]); return; }
     const timer = setTimeout(() => {
       setAllLoading(true);
+      const NON_LEARN = new Set(["PRO_ANSWER", "PRO_MANUSCRIPT"]);
+      const dropNonLearn = (list) => list.filter(it => {
+        const ct = (it.contentType || it.content_type || "").toString().toUpperCase();
+        return !NON_LEARN.has(ct);
+      });
       apiGet(`/v1/learning/catalog/search?q=${encodeURIComponent(allSearch.trim())}`)
-        .then((data) => setAllItems(Array.isArray(data) ? data : []))
+        .then((data) => setAllItems(dropNonLearn(Array.isArray(data) ? data : [])))
         .catch(() => {
           // search API가 없으면 전체 카탈로그에서 필터
           apiGet("/v1/admin/content")
             .then((data) => {
               const list = Array.isArray(data) ? data : [];
               const term = allSearch.trim().toLowerCase();
-              setAllItems(list.filter(it => (it.title || "").toLowerCase().includes(term)).slice(0, 50));
+              setAllItems(dropNonLearn(list.filter(it => (it.title || "").toLowerCase().includes(term))).slice(0, 50));
             })
             .catch(() => setAllItems([]));
         })
@@ -90,25 +120,51 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
     return () => clearTimeout(timer);
   }, [tab, allSearch]);
 
-  // 농장별 콘텐츠
+  // 농장별 콘텐츠 — 정답해설(PRO_ANSWER)·원고(PRO_MANUSCRIPT)·일일학습(DAILY_*)은 학습 X 라 제외
   useEffect(() => {
     if (tab !== "farm" || !selectedArea) { setFarmItems([]); return; }
     setFarmLoading(true);
     apiGet(`/v1/learning/catalog/${encodeURIComponent(selectedArea)}`)
-      .then((data) => setFarmItems(Array.isArray(data) ? data : []))
+      .then((data) => {
+        const list = Array.isArray(data) ? data : [];
+        const filtered = list.filter((it) => {
+          const ct = (it.contentType || it.content_type || "").toString().toUpperCase();
+          if (!ct) return true;
+          if (ct === "PRO_ANSWER" || ct === "PRO_MANUSCRIPT") return false;
+          if (ct === "DAILY_QUIZ" || ct === "DAILY_READING") return false;
+          return true;
+        });
+        setFarmItems(filtered);
+      })
       .catch(() => setFarmItems([]))
       .finally(() => setFarmLoading(false));
   }, [tab, selectedArea]);
 
   // 프로 모드 챕터 — 어드민 endpoint (레벨별 필터)
   useEffect(() => {
-    if (tab !== "pro" || !proLevel) { setProItems([]); return; }
+    if (tab !== "pro" || !proLevel) { setProChapters([]); setProSelectedChapter(""); return; }
     setProLoading(true);
     apiGetCamel(`/v1/admin/pro/chapters?levelId=${encodeURIComponent(proLevel)}`)
-      .then((data) => setProItems(Array.isArray(data) ? data : []))
-      .catch(() => setProItems([]))
+      .then((data) => setProChapters(Array.isArray(data) ? data : []))
+      .catch(() => setProChapters([]))
       .finally(() => setProLoading(false));
+    setProSelectedChapter("");
+    setProItems([]);
   }, [tab, proLevel]);
+
+  // 챕터 선택 시 그 챕터의 콘텐츠 목록
+  useEffect(() => {
+    if (tab !== "pro" || !proSelectedChapter) { setProItems([]); return; }
+    setProItemsLoading(true);
+    apiGetCamel(`/v1/admin/pro/chapters/${encodeURIComponent(proSelectedChapter)}/content-status`)
+      .then((data) => {
+        // content-status 응답에서 등록된 콘텐츠 추출
+        const items = data?.items || data?.contents || [];
+        setProItems(Array.isArray(items) ? items.filter(it => it.contentId || it.id) : []);
+      })
+      .catch(() => setProItems([]))
+      .finally(() => setProItemsLoading(false));
+  }, [tab, proSelectedChapter]);
 
   // 내용 숙지 — 어드민 listForAdmin (HQ 전체 / ORG 자기 기관 + PUBLIC)
   useEffect(() => {
@@ -124,9 +180,16 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
     ? farmItems.filter(it => (it.title || "").includes(farmSearch))
     : farmItems;
 
-  const studyFiltered = studySearch.trim()
-    ? studyItems.filter(it => (it.title || "").toLowerCase().includes(studySearch.trim().toLowerCase()))
-    : studyItems;
+  const studyFiltered = studyItems
+    .filter((it) => {
+      if (studyOwnerFilter === "hq") return it.visibility === "PUBLIC";
+      if (studyOwnerFilter === "org") return it.visibility === "ORG";
+      return true; // all
+    })
+    .filter((it) => {
+      if (!studySearch.trim()) return true;
+      return (it.title || "").toLowerCase().includes(studySearch.trim().toLowerCase());
+    });
 
   const handleSelect = (item) => {
     onSelect({
@@ -205,7 +268,7 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
           </>
         )}
 
-        {/* ── 프로 모드 ── */}
+        {/* ── 프로 모드 ── 레벨 → 챕터 → 콘텐츠 */}
         {tab === "pro" && (
           <>
             <div className="sp-csm-filters">
@@ -215,19 +278,34 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
                   <option key={lv} value={lv}>{LEVEL_LABELS[lv]}</option>
                 ))}
               </select>
+              <select
+                value={proSelectedChapter}
+                onChange={(e) => setProSelectedChapter(e.target.value)}
+                disabled={!proLevel || proChapters.length === 0}
+              >
+                <option value="">챕터 선택</option>
+                {proChapters.map((ch) => (
+                  <option key={ch.id} value={ch.id}>
+                    Ch.{ch.chapterNo || "?"} {ch.title || ""}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="sp-csm-list">
-              {proLoading ? <p className="sp-csm-empty">불러오는 중...</p>
+              {proLoading ? <p className="sp-csm-empty">챕터 불러오는 중...</p>
                 : !proLevel ? <p className="sp-csm-empty">레벨을 선택하세요</p>
-                : proItems.length === 0 ? <p className="sp-csm-empty">해당 레벨에 프로 모드 챕터가 없습니다</p>
+                : proChapters.length === 0 ? <p className="sp-csm-empty">해당 레벨에 프로 모드 챕터가 없습니다</p>
+                : !proSelectedChapter ? <p className="sp-csm-empty">챕터를 선택하세요</p>
+                : proItemsLoading ? <p className="sp-csm-empty">콘텐츠 불러오는 중...</p>
+                : proItems.length === 0 ? <p className="sp-csm-empty">이 챕터에 등록된 콘텐츠가 없습니다</p>
                 : proItems.map((item, i) => (
-                  <div key={item.id || item.chapterId || i} className="sp-csm-item" onClick={() => handleSelect({
-                    contentId: item.id || item.chapterId,
-                    title: `Chapter ${item.chapterNo || ""} ${item.title || ""}`.trim(),
-                    contentType: "PRO_CHAPTER",
+                  <div key={item.contentId || item.id || i} className="sp-csm-item" onClick={() => handleSelect({
+                    contentId: item.contentId || item.id,
+                    title: item.title || "",
+                    contentType: item.contentType || "PRO_CONTENT",
                   })}>
-                    <span className="sp-csm-item-title">Ch.{item.chapterNo || "?"} {item.title}</span>
-                    <span className="sp-csm-item-area">프로 모드</span>
+                    <span className="sp-csm-item-title">{item.title}</span>
+                    <span className="sp-csm-item-area">{TYPE_LABEL[item.contentType] || item.contentType || "프로 모드"}</span>
                   </div>
                 ))}
             </div>
@@ -238,6 +316,11 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
         {tab === "study" && (
           <>
             <div className="sp-csm-filters">
+              <select value={studyOwnerFilter} onChange={(e) => setStudyOwnerFilter(e.target.value)}>
+                <option value="all">전체</option>
+                <option value="hq">본사 콘텐츠 (전체 공개)</option>
+                <option value="org">기관 콘텐츠 (자기 기관)</option>
+              </select>
               <input type="text" placeholder="제목 검색..." value={studySearch} onChange={(e) => setStudySearch(e.target.value)} style={{ flex: 1 }} />
             </div>
             <div className="sp-csm-list">
