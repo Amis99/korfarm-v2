@@ -397,16 +397,36 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
               {previewData && (() => {
                 const c = previewData.content || {};
                 const payload = c.payload || c;
-                // 공통 지문 — passage, passages[0], 보기, examples 등
-                const sharedPassage =
-                  (typeof payload.passage === "string" && payload.passage) ||
-                  (Array.isArray(payload.passages) && payload.passages[0]?.text) ||
-                  payload["보기"] || payload.examples || payload.example || "";
-                // 문제 배열 — questions, payload.questions, items 등
+                // ── 지문 추출 ──
+                // 1) payload.passage 가 객체 + paragraphs 배열 (PRO_READING 등)
+                // 2) payload.passage 가 string
+                // 3) payload.passages[0].text
+                // 4) bodyMarkdown / markdown / body
+                // 5) recall.cards[] (회상 카드)
+                let sharedPassage = "";
+                if (payload.passage && typeof payload.passage === "object") {
+                  const paras = payload.passage.paragraphs || payload.passage.items || [];
+                  sharedPassage = paras.map(p => p.text || p.content || "").filter(Boolean).join("\n\n");
+                } else if (typeof payload.passage === "string") {
+                  sharedPassage = payload.passage;
+                } else if (Array.isArray(payload.passages) && payload.passages[0]) {
+                  sharedPassage = payload.passages[0].text || payload.passages[0].content || "";
+                } else if (payload.bodyMarkdown || payload.markdown || payload.body) {
+                  sharedPassage = payload.bodyMarkdown || payload.markdown || payload.body;
+                } else if (typeof payload["보기"] === "string") {
+                  sharedPassage = payload["보기"];
+                } else if (Array.isArray(payload.recall?.cards)) {
+                  sharedPassage = payload.recall.cards
+                    .map((card, i) => `${i + 1}. ${card.text || card.content || ""}`)
+                    .join("\n");
+                }
+                // ── 발문 추출 ──
                 const questions =
                   (Array.isArray(payload.questions) && payload.questions) ||
                   (Array.isArray(c.questions) && c.questions) ||
                   (Array.isArray(payload.items) && payload.items) ||
+                  (Array.isArray(payload.confirm?.questions) && payload.confirm.questions) ||
+                  (Array.isArray(payload.intensive?.questions) && payload.intensive.questions) ||
                   [];
                 return (
                   <div style={{ fontSize: 13, lineHeight: 1.6 }}>
@@ -437,13 +457,19 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
                     {questions.length === 0 && !sharedPassage && (
                       <p style={{ color: "#888" }}>표시할 지문·문제가 없습니다.</p>
                     )}
+                    {/* 지문이 없고 발문만 있을 때 — 발문 모음 형태 */}
+                    {!sharedPassage && questions.length > 0 && (
+                      <div style={{ marginBottom: 10, fontSize: 12, color: "#555" }}>
+                        지문이 없는 콘텐츠 — 발문/문제 목록만 표시합니다.
+                      </div>
+                    )}
                     {questions.map((q, qi) => {
-                      const stem = q.stem || q.question || q.title || `문제 ${qi + 1}`;
+                      const stem = q.stem || q.prompt || q.question || q.title || `문제 ${qi + 1}`;
                       const qPassage = (typeof q.passage === "string" && q.passage) ||
                         (q.passage?.paragraphs?.map(p => p.text).join("\n\n")) || "";
                       const choices = q.choices || q.options || [];
                       const answerId = q.answerId || q.answer || q.correctId;
-                      const explanation = q.explanation || q.commentary || "";
+                      const explanation = q.explanation || q.commentary || q.answerText || "";
                       return (
                         <div key={q.id || qi} style={{
                           border: "1px solid #e2e8f0", borderRadius: 6,
