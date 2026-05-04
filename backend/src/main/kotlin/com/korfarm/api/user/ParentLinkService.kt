@@ -39,8 +39,17 @@ class ParentLinkService(
     private val economyService: EconomyService,
     private val farmLearningService: FarmLearningService,
     private val testService: TestService,
-    private val diagnosticService: DiagnosticService
+    private val diagnosticService: DiagnosticService,
+    private val orgMembershipRepository: com.korfarm.api.org.OrgMembershipRepository
 ) {
+    /** 학생 ID 들을 받아 각 학생이 속한 active orgId 들의 map 반환 */
+    @Transactional(readOnly = true)
+    fun getStudentOrgMap(studentIds: List<String>): Map<String, Set<String>> {
+        if (studentIds.isEmpty()) return emptyMap()
+        val memberships = orgMembershipRepository.findAll()
+            .filter { it.userId in studentIds && it.status == "active" }
+        return memberships.groupBy { it.userId }.mapValues { (_, ms) -> ms.map { it.orgId }.toSet() }
+    }
     @Transactional
     fun createLink(request: ParentLinkRequest, reviewerId: String): ParentLinkView {
         val parent = resolveUser(request.parentUserId, request.parentLoginId, "parent")

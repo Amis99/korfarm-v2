@@ -28,13 +28,17 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/v1")
 class ParentLinkController(
-    private val parentLinkService: ParentLinkService
+    private val parentLinkService: ParentLinkService,
+    private val orgService: com.korfarm.api.org.OrgService,
+    private val parentStudentLinkRepository: ParentStudentLinkRepository
 ) {
     @PostMapping("/admin/parents/links")
     fun createLink(@Valid @RequestBody request: ParentLinkRequest): ApiResponse<ParentLinkView> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
         val reviewerId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        // request.studentUserId 가 자기 기관 학생인지 검증 (HQ_ADMIN 은 통과)
+        request.studentUserId?.let { orgService.verifyOrgAdminAccessForStudent(it) }
         val data = parentLinkService.createLink(request, reviewerId)
         return ApiResponse(success = true, data = data)
     }
@@ -42,7 +46,18 @@ class ParentLinkController(
     @GetMapping("/admin/parents/links")
     fun listLinks(): ApiResponse<List<ParentLinkView>> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
-        val data = parentLinkService.listAll()
+        val all = parentLinkService.listAll()
+        val isHq = SecurityUtils.hasAnyRole("HQ_ADMIN")
+        val data = if (isHq) all else {
+            // ORG_ADMIN — 자기 기관 학생 연결만 응답
+            val uid = SecurityUtils.currentUserId() ?: return ApiResponse(success = true, data = emptyList())
+            val myOrgIds = orgService.listUserOrgs(uid).map { it.id }.toSet()
+            if (myOrgIds.isEmpty()) emptyList() else {
+                val studentIds = all.map { it.studentUserId }.distinct()
+                val studentOrgMap = parentLinkService.getStudentOrgMap(studentIds)
+                all.filter { (studentOrgMap[it.studentUserId] ?: emptySet()).any { o -> o in myOrgIds } }
+            }
+        }
         return ApiResponse(success = true, data = data)
     }
 
@@ -61,6 +76,9 @@ class ParentLinkController(
     @DeleteMapping("/admin/parents/links/{linkId}")
     fun deleteLink(@PathVariable linkId: String): ApiResponse<Map<String, String>> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        // 연결 학생이 자기 기관 학생인지 검증
+        val link = parentStudentLinkRepository.findById(linkId).orElse(null)
+        if (link != null) orgService.verifyOrgAdminAccessForStudent(link.studentUserId)
         parentLinkService.deactivate(linkId)
         return ApiResponse(success = true, data = mapOf("status" to "inactive"))
     }
