@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo, lazy, Suspense } from "react";
 import { useParams, useNavigate, useSearchParams } from "react-router-dom";
-import { apiGet, apiPost } from "../utils/adminApi";
+import { apiGet, apiGetCamel, apiPost } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
 import { calcSeasonScore, FORMULA_TEXT } from "../utils/seasonScore";
 import { TYPE_LABEL } from "../constants/contentTypes";
@@ -102,14 +102,14 @@ function AdminStudentDetailPage() {
   useEffect(() => {
     if (tab === "learning" && !learningLoaded) {
       setLoadingLearning(true);
-      apiGet(`/v1/admin/students/${userId}/learning-logs`)
+      apiGetCamel(`/v1/admin/students/${userId}/learning-logs`)
         .then((data) => { const logs = data?.logs || data || []; setLearningLogs(Array.isArray(logs) ? logs : []); })
         .catch((e) => console.error(e))
         .finally(() => { setLoadingLearning(false); setLearningLoaded(true); });
     }
     if (tab === "tests" && !testsLoaded) {
       setLoadingTests(true);
-      apiGet(`/v1/admin/students/${userId}/test-history`)
+      apiGetCamel(`/v1/admin/students/${userId}/test-history`)
         .then((data) => { setTestHistory(Array.isArray(data) ? data : []); })
         .catch((e) => console.error(e))
         .finally(() => { setLoadingTests(false); setTestsLoaded(true); });
@@ -117,14 +117,14 @@ function AdminStudentDetailPage() {
     if (tab === "inventory" && !inventoryLoaded) {
       setLoadingInventory(true);
       Promise.all([
-        apiGet(`/v1/admin/students/${userId}/inventory`).catch(() => null),
-        apiGet(`/v1/admin/students/${userId}/ledger`).catch(() => []),
+        apiGetCamel(`/v1/admin/students/${userId}/inventory`).catch(() => null),
+        apiGetCamel(`/v1/admin/students/${userId}/ledger`).catch(() => []),
       ]).then(([inv, ldg]) => { setInventory(inv); setLedger(Array.isArray(ldg) ? ldg : []); })
         .finally(() => { setLoadingInventory(false); setInventoryLoaded(true); });
     }
     if (tab === "duel" && !duelLoaded) {
       setLoadingDuel(true);
-      apiGet(`/v1/admin/students/${userId}/duel-stats`)
+      apiGetCamel(`/v1/admin/students/${userId}/duel-stats`)
         .then(setDuelStats)
         .catch(() => setDuelStats({ wins: 0, losses: 0, winRate: 0, currentStreak: 0, bestStreak: 0, forfeitLosses: 0 }))
         .finally(() => { setLoadingDuel(false); setDuelLoaded(true); });
@@ -151,7 +151,7 @@ function AdminStudentDetailPage() {
     setLoadingReport(true);
     const s = sd || reportStartDate;
     const e = ed || reportEndDate;
-    apiGet(`/v1/admin/students/${userId}/report/unified?startDate=${s}&endDate=${e}`)
+    apiGetCamel(`/v1/admin/students/${userId}/report/unified?startDate=${s}&endDate=${e}`)
       .then(setReportData)
       .catch(() => setReportData(null))
       .finally(() => { setLoadingReport(false); setReportLoaded(true); });
@@ -168,7 +168,7 @@ function AdminStudentDetailPage() {
       if (result?.inventory) setInventory(result.inventory);
       setGrantSuccess(mode === "grant" ? "지급 완료!" : "차감 완료!");
       setGrantForm({ ...grantForm, amount: 1, reason: "" });
-      apiGet(`/v1/admin/students/${userId}/ledger`).then((ldg) => setLedger(Array.isArray(ldg) ? ldg : [])).catch((e) => console.error(e));
+      apiGetCamel(`/v1/admin/students/${userId}/ledger`).then((ldg) => setLedger(Array.isArray(ldg) ? ldg : [])).catch((e) => console.error(e));
     } catch (err) { setGrantError(err.message); } finally { setGrantLoading(false); }
   };
 
@@ -236,11 +236,11 @@ function AdminStudentDetailPage() {
               <>
                 <p className="admin-detail-note" style={{ marginBottom: 12 }}>최근 {learningLogs.length}건 (완료: {learningLogs.filter((l) => l.status === "COMPLETED").length}건)</p>
                 <div style={{ overflowX: "auto" }}>
-                  <table className="admin-detail-table"><thead><tr><th>유형</th><th>콘텐츠 ID</th><th>상태</th><th>점수</th><th>정답률</th><th>획득 씨앗</th><th>시작일</th><th>완료일</th></tr></thead>
+                  <table className="admin-detail-table"><thead><tr><th>유형</th><th>콘텐츠</th><th>상태</th><th>점수</th><th>정답률</th><th>획득 씨앗</th><th>시작일</th><th>완료일</th></tr></thead>
                     <tbody>{learningPg.paged.map((log, i) => (
                       <tr key={log.logId || i}>
                         <td>{contentTypeLabel(log.contentType)}</td>
-                        <td style={{ fontSize: 12, maxWidth: 150, overflow: "hidden", textOverflow: "ellipsis" }}>{log.contentId}</td>
+                        <td style={{ fontSize: 12, maxWidth: 240, overflow: "hidden", textOverflow: "ellipsis" }} title={log.contentId}>{log.contentTitle || log.contentId || "-"}</td>
                         <td><span className="status-pill" data-status={log.status === "COMPLETED" ? "active" : "pending"}>{log.status === "COMPLETED" ? "완료" : "진행중"}</span></td>
                         <td>{log.score ?? "-"}</td>
                         <td>{log.accuracy != null ? `${log.accuracy}%` : "-"}</td>
