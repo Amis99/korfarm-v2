@@ -112,6 +112,20 @@ class AdminContentController(
         return ApiResponse(success = true, data = result)
     }
 
+    /**
+     * 일일퀴즈 1번 문제(어휘) 의 본문 텍스트 키들을 단일 "보기" 키로 통합.
+     * 학생 화면이 passage / prompt / 보기 / examples 등 여러 키를 박스로 렌더하던 것을
+     * 한 박스("보기")로 단순화하기 위한 1회성 마이그레이션.
+     * 기존 텍스트는 우선순위(보기→examples→example→additionalInfo→passage→prompt) 로 모두 join.
+     */
+    @PostMapping("/dailyquiz/q1-merge-bogi")
+    fun mergeDailyQuizQ1Bogi(): ApiResponse<Map<String, Any?>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        val userId = SecurityUtils.currentUserId() ?: "system"
+        val result = adminContentService.mergeDailyQuizQ1Bogi(userId)
+        return ApiResponse(success = true, data = result)
+    }
+
     @PostMapping("/tests")
     fun createTest(@Valid @RequestBody request: AdminTestCreateRequest): ApiResponse<TestPaperView> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")

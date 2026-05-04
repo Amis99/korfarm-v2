@@ -334,6 +334,93 @@ class AdminContentService(
     }
 
     /**
+     * 일일퀴즈 1번 문제(어휘) 의 본문 텍스트 키들을 단일 "보기" 키로 통합.
+     * 모든 dq- contents 의 latest content_versions 의 questions[0] 에서
+     * passage / prompt / 보기 / examples / example / additionalInfo 텍스트들을 우선순위 순으로
+     * 빈 줄(\n\n) 로 join 하여 "보기" 키에 저장. 다른 키는 비움/제거.
+     * 기존 row UPDATE (이력 보존 목적이 아닌 1회성 정리 — UNIQUE(content_id, schema_version) 제약 우회).
+     */
+    @Transactional
+    fun mergeDailyQuizQ1Bogi(userId: String): Map<String, Any?> {
+        val all = contentRepository.findAll()
+            .filter { it.id.startsWith("dq-") && it.status == "active" }
+        var processed = 0
+        var updated = 0
+        var skipped = 0
+        var emptyBogi = 0
+        val errors = mutableListOf<String>()
+
+        all.forEach { content ->
+            try {
+                val latest = contentVersionRepository.findTopByContentIdOrderByCreatedAtDesc(content.id)
+                    ?: run { skipped++; return@forEach }
+
+                @Suppress("UNCHECKED_CAST")
+                val root = (objectMapper.readValue(latest.contentJson, Map::class.java) as Map<String, Any?>).toMutableMap()
+                @Suppress("UNCHECKED_CAST")
+                val payload = (root["payload"] as? Map<String, Any?>)?.toMutableMap()
+                    ?: run { skipped++; return@forEach }
+                @Suppress("UNCHECKED_CAST")
+                val questions = (payload["questions"] as? List<Map<String, Any?>>)?.toMutableList()
+                    ?: run { skipped++; return@forEach }
+                if (questions.isEmpty()) { skipped++; return@forEach }
+
+                val q1 = questions[0].toMutableMap()
+
+                // 우선순위 순으로 텍스트 키 수집 (중복 제거)
+                val keys = listOf("보기", "examples", "example", "additionalInfo", "passage", "prompt")
+                val parts = mutableListOf<String>()
+                for (k in keys) {
+                    val raw = q1[k]
+                    val s = (raw as? String)?.trim() ?: continue
+                    if (s.isNotEmpty() && parts.none { it == s }) parts.add(s)
+                }
+                val combined = parts.joinToString("\n\n")
+                if (combined.isEmpty()) emptyBogi++
+
+                q1["보기"] = combined
+                q1["passage"] = ""
+                q1.remove("prompt")
+                q1.remove("examples")
+                q1.remove("example")
+                q1.remove("additionalInfo")
+
+                questions[0] = q1
+                payload["questions"] = questions
+                root["payload"] = payload
+
+                latest.contentJson = objectMapper.writeValueAsString(root)
+                latest.uploadedBy = userId
+                latest.approvedBy = userId
+                latest.approvedAt = LocalDateTime.now()
+                contentVersionRepository.save(latest)
+
+                contentEditLogRepository.save(ContentEditLogEntity(
+                    id = IdGenerator.newId("cel"),
+                    contentId = content.id,
+                    editorId = userId,
+                    action = "MERGE_Q1_BOGI"
+                ))
+
+                updated++
+            } catch (e: Exception) {
+                skipped++
+                errors.add("${content.id}: ${e.message ?: e::class.simpleName}")
+            }
+            processed++
+        }
+
+        return mapOf(
+            "totalContents" to all.size,
+            "processed" to processed,
+            "updated" to updated,
+            "skipped" to skipped,
+            "emptyBogiCount" to emptyBogi,
+            "errors" to errors.take(20)
+        )
+    }
+
+    /**
      * 일일퀴즈 10번 문제 backfill — 최신 contentJson 의 payload.questions[9] 를 q10 으로 교체한 신규 version INSERT.
      * 이력 보존 (옛 version 그대로). 응답으로 oldVersionId / newVersionId 반환.
      */

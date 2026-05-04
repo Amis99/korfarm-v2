@@ -86,7 +86,21 @@ export default function QuestionCardEditor({
           minHeight={70}
         />
 
-        {passageIsString && (
+        {/* 일일퀴즈 1번(어휘) 은 본문 키들을 "보기" 한 박스로 통일.
+            2~10번은 기존대로 지문/안내/보기/형광펜 4박스 분리. */}
+        {passageIsString && idx === 0 && (
+          <>
+            <div className="dq-section-label">보기 (어휘 문제 본문)</div>
+            <MarkdownEditField
+              value={question["보기"] ?? ""}
+              onChange={(v) => editor.updateField(`${path}.보기`, v)}
+              placeholder="학생 화면에 본문 박스로 노출되는 텍스트. (마크다운·이미지·표 지원)"
+              minHeight={140}
+            />
+          </>
+        )}
+
+        {passageIsString && idx !== 0 && (
           <>
             <div className="dq-section-label">지문 (passage) — 본문</div>
             <MarkdownEditField
@@ -100,7 +114,7 @@ export default function QuestionCardEditor({
             <MarkdownEditField
               value={question.prompt || ""}
               onChange={(v) => editor.updateField(`${path}.prompt`, v)}
-              placeholder="발문 외 추가 안내. 어휘 1번 등에서 학생에게 보여줄 본문이 여기에 들어갑니다."
+              placeholder="발문 외 추가 안내."
               minHeight={80}
             />
 
