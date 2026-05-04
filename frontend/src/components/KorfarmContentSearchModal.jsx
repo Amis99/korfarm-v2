@@ -1,13 +1,15 @@
 import { useState, useEffect, useMemo } from "react";
 import { apiGet } from "../utils/api";
+import { apiGetCamel } from "../utils/adminApi";
 import { TYPE_LABEL } from "../constants/contentTypes";
+import { FARM_MAP } from "../data/learning/learningCatalog";
 import "../styles/study-plan.css";
 
 const TABS = [
   { key: "all", label: "종합 검색" },
   { key: "farm", label: "농장별 모드" },
-  { key: "daily", label: "일일 학습" },
   { key: "pro", label: "프로 모드" },
+  { key: "study", label: "내용 숙지" },
 ];
 
 const LEVEL_LIST = [
@@ -24,6 +26,13 @@ const LEVEL_LABELS = {
   WITTGENSTEIN_1:"비트겐슈타인1",WITTGENSTEIN_2:"비트겐슈타인2",WITTGENSTEIN_3:"비트겐슈타인3",
 };
 
+// area(대문자/소문자 섞임) → 학생 화면 농장명
+function farmName(area) {
+  if (!area) return "";
+  const key = String(area).toLowerCase();
+  return FARM_MAP[key]?.name || area;
+}
+
 export default function KorfarmContentSearchModal({ onSelect, onClose }) {
   const [tab, setTab] = useState("all");
 
@@ -39,13 +48,15 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
   const [farmSearch, setFarmSearch] = useState("");
   const [farmLoading, setFarmLoading] = useState(false);
 
-  // ── 일일 학습 ──
-  const [dailyLevel, setDailyLevel] = useState("");
-
   // ── 프로 모드 ──
   const [proLevel, setProLevel] = useState("");
   const [proItems, setProItems] = useState([]);
   const [proLoading, setProLoading] = useState(false);
+
+  // ── 내용 숙지 ──
+  const [studyItems, setStudyItems] = useState([]);
+  const [studySearch, setStudySearch] = useState("");
+  const [studyLoading, setStudyLoading] = useState(false);
 
   // 농장 영역 목록
   useEffect(() => {
@@ -89,25 +100,33 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
       .finally(() => setFarmLoading(false));
   }, [tab, selectedArea]);
 
-  // 프로 모드 챕터
+  // 프로 모드 챕터 — 어드민 endpoint (레벨별 필터)
   useEffect(() => {
     if (tab !== "pro" || !proLevel) { setProItems([]); return; }
     setProLoading(true);
-    apiGet(`/v1/learning/catalog/pro?levelId=${encodeURIComponent(proLevel)}`)
+    apiGetCamel(`/v1/admin/pro/chapters?levelId=${encodeURIComponent(proLevel)}`)
       .then((data) => setProItems(Array.isArray(data) ? data : []))
       .catch(() => setProItems([]))
       .finally(() => setProLoading(false));
   }, [tab, proLevel]);
 
-  const AREA_LABELS = {
-    GRAMMAR:"문법",VOCAB:"어휘",READING:"독해",BACKGROUND:"배경지식",
-    LOGIC:"논리사고력",WRITING:"서술형",CONCEPT:"국어개념",
-    CONTENT:"내용숙지",FUSION:"융합",GENERAL:"일반",
-  };
+  // 내용 숙지 — 어드민 listForAdmin (HQ 전체 / ORG 자기 기관 + PUBLIC)
+  useEffect(() => {
+    if (tab !== "study") return;
+    setStudyLoading(true);
+    apiGetCamel("/v1/admin/study/contents")
+      .then((data) => setStudyItems(Array.isArray(data) ? data : []))
+      .catch(() => setStudyItems([]))
+      .finally(() => setStudyLoading(false));
+  }, [tab]);
 
   const farmFiltered = farmSearch.trim()
     ? farmItems.filter(it => (it.title || "").includes(farmSearch))
     : farmItems;
+
+  const studyFiltered = studySearch.trim()
+    ? studyItems.filter(it => (it.title || "").toLowerCase().includes(studySearch.trim().toLowerCase()))
+    : studyItems;
 
   const handleSelect = (item) => {
     onSelect({
@@ -117,15 +136,6 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
     });
     onClose();
   };
-
-  // 일일 학습 항목 생성
-  const dailyItems = useMemo(() => {
-    if (!dailyLevel) return [];
-    return [
-      { id: `daily-quiz-${dailyLevel}`, title: `일일 퀴즈 (${LEVEL_LABELS[dailyLevel]})`, contentType: "DAILY_QUIZ", contentId: `daily-quiz-${dailyLevel.toLowerCase()}` },
-      { id: `daily-reading-${dailyLevel}`, title: `일일 독해 (${LEVEL_LABELS[dailyLevel]})`, contentType: "DAILY_READING", contentId: `daily-reading-${dailyLevel.toLowerCase()}` },
-    ];
-  }, [dailyLevel]);
 
   return (
     <div className="sp-reminder-overlay" onClick={onClose}>
@@ -177,7 +187,7 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
               <select value={selectedArea} onChange={(e) => setSelectedArea(e.target.value)}>
                 <option value="">농장 선택</option>
                 {farmAreas.map((a, i) => (
-                  <option key={i} value={a.area}>{AREA_LABELS[a.area] || a.area} ({a.count}개)</option>
+                  <option key={i} value={a.area}>{farmName(a.area)} ({a.count}개)</option>
                 ))}
               </select>
               <input type="text" placeholder="제목 검색..." value={farmSearch} onChange={(e) => setFarmSearch(e.target.value)} />
@@ -189,29 +199,6 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
                   <div key={item.contentId || i} className="sp-csm-item" onClick={() => handleSelect(item)}>
                     <span className="sp-csm-item-title">{item.title}</span>
                     <span className="sp-csm-item-area">{TYPE_LABEL[item.contentType] || item.contentType}</span>
-                  </div>
-                ))}
-            </div>
-          </>
-        )}
-
-        {/* ── 일일 학습 ── */}
-        {tab === "daily" && (
-          <>
-            <div className="sp-csm-filters">
-              <select value={dailyLevel} onChange={(e) => setDailyLevel(e.target.value)}>
-                <option value="">레벨 선택</option>
-                {LEVEL_LIST.map(lv => (
-                  <option key={lv} value={lv}>{LEVEL_LABELS[lv]}</option>
-                ))}
-              </select>
-            </div>
-            <div className="sp-csm-list">
-              {!dailyLevel ? <p className="sp-csm-empty">레벨을 선택하세요</p>
-                : dailyItems.map((item) => (
-                  <div key={item.id} className="sp-csm-item" onClick={() => handleSelect(item)}>
-                    <span className="sp-csm-item-title">{item.title}</span>
-                    <span className="sp-csm-item-area">{item.contentType === "DAILY_QUIZ" ? "일일 퀴즈" : "일일 독해"}</span>
                   </div>
                 ))}
             </div>
@@ -232,11 +219,40 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
             <div className="sp-csm-list">
               {proLoading ? <p className="sp-csm-empty">불러오는 중...</p>
                 : !proLevel ? <p className="sp-csm-empty">레벨을 선택하세요</p>
-                : proItems.length === 0 ? <p className="sp-csm-empty">해당 레벨에 프로 모드 콘텐츠가 없습니다</p>
+                : proItems.length === 0 ? <p className="sp-csm-empty">해당 레벨에 프로 모드 챕터가 없습니다</p>
                 : proItems.map((item, i) => (
-                  <div key={item.contentId || i} className="sp-csm-item" onClick={() => handleSelect(item)}>
+                  <div key={item.id || item.chapterId || i} className="sp-csm-item" onClick={() => handleSelect({
+                    contentId: item.id || item.chapterId,
+                    title: `Chapter ${item.chapterNo || ""} ${item.title || ""}`.trim(),
+                    contentType: "PRO_CHAPTER",
+                  })}>
+                    <span className="sp-csm-item-title">Ch.{item.chapterNo || "?"} {item.title}</span>
+                    <span className="sp-csm-item-area">프로 모드</span>
+                  </div>
+                ))}
+            </div>
+          </>
+        )}
+
+        {/* ── 내용 숙지 ── */}
+        {tab === "study" && (
+          <>
+            <div className="sp-csm-filters">
+              <input type="text" placeholder="제목 검색..." value={studySearch} onChange={(e) => setStudySearch(e.target.value)} style={{ flex: 1 }} />
+            </div>
+            <div className="sp-csm-list">
+              {studyLoading ? <p className="sp-csm-empty">불러오는 중...</p>
+                : studyFiltered.length === 0 ? <p className="sp-csm-empty">등록된 내용 숙지 콘텐츠가 없습니다</p>
+                : studyFiltered.map((item) => (
+                  <div key={item.id} className="sp-csm-item" onClick={() => handleSelect({
+                    contentId: item.id,
+                    title: item.title || "",
+                    contentType: "STUDY_CONTENT",
+                  })}>
                     <span className="sp-csm-item-title">{item.title}</span>
-                    <span className="sp-csm-item-area">{TYPE_LABEL[item.contentType] || "프로 모드"}</span>
+                    <span className="sp-csm-item-area">
+                      {item.visibility === "PUBLIC" ? "전체 공개" : (item.ownerOrgName || "기관 한정")} · {item.questionCount || 0}문제
+                    </span>
                   </div>
                 ))}
             </div>
