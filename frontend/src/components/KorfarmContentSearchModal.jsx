@@ -1,9 +1,24 @@
 import { useState, useEffect, useMemo } from "react";
 import { apiGet } from "../utils/api";
 import { apiGetCamel } from "../utils/adminApi";
-import { TYPE_LABEL } from "../constants/contentTypes";
+import { TYPE_LABEL, LEVEL_LABEL_MAP } from "../constants/contentTypes";
 import { FARM_MAP } from "../data/learning/learningCatalog";
 import "../styles/study-plan.css";
+
+// levelId ("russell1", "RUSSELL_1" 등 다양한 case) → 한국어 레벨명
+function levelLabel(lv) {
+  if (!lv) return "";
+  const norm = String(lv).toUpperCase().replace(/[\s-]/g, "_");
+  const withUnderscore = norm.replace(/^([A-Z]+?)(\d+)$/, "$1_$2");
+  return LEVEL_LABEL_MAP[withUnderscore] || LEVEL_LABEL_MAP[norm] || lv;
+}
+
+// 새 탭으로 미리보기 페이지 열기
+function openPreview(contentId) {
+  if (!contentId) return;
+  const url = `/admin/content/preview?id=${encodeURIComponent(contentId)}`;
+  window.open(url, "_blank", "noopener,noreferrer");
+}
 
 const TABS = [
   { key: "all", label: "종합 검색" },
@@ -73,7 +88,7 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
 
   // 농장 영역 목록 — FARM_MAP 의 11 농장만 (학습이 아닌 ART/ANSWER/MANUSCRIPT 등 제외)
   useEffect(() => {
-    apiGet("/v1/learning/catalog")
+    apiGetCamel("/v1/learning/catalog")
       .then((data) => {
         const farms = data?.farms || [];
         const valid = farms
@@ -103,11 +118,11 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
         const ct = (it.contentType || it.content_type || "").toString().toUpperCase();
         return !NON_LEARN.has(ct);
       });
-      apiGet(`/v1/learning/catalog/search?q=${encodeURIComponent(allSearch.trim())}`)
+      apiGetCamel(`/v1/learning/catalog/search?q=${encodeURIComponent(allSearch.trim())}`)
         .then((data) => setAllItems(dropNonLearn(Array.isArray(data) ? data : [])))
         .catch(() => {
           // search API가 없으면 전체 카탈로그에서 필터
-          apiGet("/v1/admin/content")
+          apiGetCamel("/v1/admin/content")
             .then((data) => {
               const list = Array.isArray(data) ? data : [];
               const term = allSearch.trim().toLowerCase();
@@ -124,7 +139,7 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
   useEffect(() => {
     if (tab !== "farm" || !selectedArea) { setFarmItems([]); return; }
     setFarmLoading(true);
-    apiGet(`/v1/learning/catalog/${encodeURIComponent(selectedArea)}`)
+    apiGetCamel(`/v1/learning/catalog/${encodeURIComponent(selectedArea)}`)
       .then((data) => {
         const list = Array.isArray(data) ? data : [];
         const filtered = list.filter((it) => {
@@ -200,6 +215,35 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
     onClose();
   };
 
+  // 공통 row 렌더 — 제목 + 레벨 칩 + 영역 칩 + 미리보기 버튼
+  const renderItemRow = (item, key, opts = {}) => {
+    const cid = item.contentId || item.id;
+    const ct = item.contentType || item.content_type || opts.fallbackType || "";
+    const lv = item.levelId || item.level_id;
+    const subRight = opts.right || (TYPE_LABEL[ct] || ct);
+    return (
+      <div key={key} className="sp-csm-item" onClick={() => handleSelect({
+        contentId: cid, title: item.title || "", contentType: ct,
+      })}>
+        <span className="sp-csm-item-title">{item.title}</span>
+        <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          {lv && <span className="sp-csm-item-area" style={{ background: "#fdf2e3", color: "#e07a1a" }}>{levelLabel(lv)}</span>}
+          {subRight && <span className="sp-csm-item-area">{subRight}</span>}
+          {cid && (
+            <button
+              type="button"
+              title="미리보기 (새 탭)"
+              onClick={(e) => { e.stopPropagation(); openPreview(cid); }}
+              style={{ background: "none", border: "1px solid #cbd5e0", borderRadius: 4, padding: "2px 6px", cursor: "pointer", fontSize: 13 }}
+            >
+              👁
+            </button>
+          )}
+        </span>
+      </div>
+    );
+  };
+
   return (
     <div className="sp-reminder-overlay" onClick={onClose}>
       <div className="sp-content-search-modal" onClick={(e) => e.stopPropagation()}>
@@ -229,16 +273,7 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
               {allLoading ? <p className="sp-csm-empty">검색 중...</p>
                 : allSearch.trim().length < 2 ? <p className="sp-csm-empty">검색어를 2글자 이상 입력하세요</p>
                 : allItems.length === 0 ? <p className="sp-csm-empty">검색 결과가 없습니다</p>
-                : allItems.map((item, i) => (
-                  <div key={item.contentId || item.content_id || i} className="sp-csm-item" onClick={() => handleSelect({
-                    contentId: item.contentId || item.content_id || item.id,
-                    title: item.title || "",
-                    contentType: item.contentType || item.content_type || "",
-                  })}>
-                    <span className="sp-csm-item-title">{item.title}</span>
-                    <span className="sp-csm-item-area">{TYPE_LABEL[item.contentType || item.content_type] || item.contentType || item.content_type || ""}</span>
-                  </div>
-                ))}
+                : allItems.map((item, i) => renderItemRow(item, item.contentId || i))}
             </div>
           </>
         )}
@@ -258,12 +293,7 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
             <div className="sp-csm-list">
               {farmLoading ? <p className="sp-csm-empty">불러오는 중...</p>
                 : farmFiltered.length === 0 ? <p className="sp-csm-empty">농장을 선택하세요</p>
-                : farmFiltered.map((item, i) => (
-                  <div key={item.contentId || i} className="sp-csm-item" onClick={() => handleSelect(item)}>
-                    <span className="sp-csm-item-title">{item.title}</span>
-                    <span className="sp-csm-item-area">{TYPE_LABEL[item.contentType] || item.contentType}</span>
-                  </div>
-                ))}
+                : farmFiltered.map((item, i) => renderItemRow(item, item.contentId || i))}
             </div>
           </>
         )}
@@ -298,16 +328,7 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
                 : !proSelectedChapter ? <p className="sp-csm-empty">챕터를 선택하세요</p>
                 : proItemsLoading ? <p className="sp-csm-empty">콘텐츠 불러오는 중...</p>
                 : proItems.length === 0 ? <p className="sp-csm-empty">이 챕터에 등록된 콘텐츠가 없습니다</p>
-                : proItems.map((item, i) => (
-                  <div key={item.contentId || item.id || i} className="sp-csm-item" onClick={() => handleSelect({
-                    contentId: item.contentId || item.id,
-                    title: item.title || "",
-                    contentType: item.contentType || "PRO_CONTENT",
-                  })}>
-                    <span className="sp-csm-item-title">{item.title}</span>
-                    <span className="sp-csm-item-area">{TYPE_LABEL[item.contentType] || item.contentType || "프로 모드"}</span>
-                  </div>
-                ))}
+                : proItems.map((item, i) => renderItemRow(item, item.contentId || item.id || i, { fallbackType: "PRO_CONTENT" }))}
             </div>
           </>
         )}
@@ -326,18 +347,13 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
             <div className="sp-csm-list">
               {studyLoading ? <p className="sp-csm-empty">불러오는 중...</p>
                 : studyFiltered.length === 0 ? <p className="sp-csm-empty">등록된 내용 숙지 콘텐츠가 없습니다</p>
-                : studyFiltered.map((item) => (
-                  <div key={item.id} className="sp-csm-item" onClick={() => handleSelect({
-                    contentId: item.id,
-                    title: item.title || "",
-                    contentType: "STUDY_CONTENT",
-                  })}>
-                    <span className="sp-csm-item-title">{item.title}</span>
-                    <span className="sp-csm-item-area">
-                      {item.visibility === "PUBLIC" ? "전체 공개" : (item.ownerOrgName || "기관 한정")} · {item.questionCount || 0}문제
-                    </span>
-                  </div>
-                ))}
+                : studyFiltered.map((item) => renderItemRow(
+                    { ...item, contentId: item.id, contentType: "STUDY_CONTENT" },
+                    item.id,
+                    {
+                      right: `${item.visibility === "PUBLIC" ? "전체 공개" : (item.ownerOrgName || "기관 한정")} · ${item.questionCount || 0}문제`,
+                    }
+                  ))}
             </div>
           </>
         )}
