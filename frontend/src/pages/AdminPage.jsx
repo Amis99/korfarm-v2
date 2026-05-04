@@ -124,7 +124,7 @@ function AdminPage() {
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
             <Link className="admin-action" to="/admin/study-plans">학습 계획표</Link>
             {isHq && <Link className="admin-action" to="/admin/duel?tab=seasons">시즌 관리</Link>}
-            <Link className="admin-action" to="/admin/shop">상점 관리</Link>
+            {isHq && <Link className="admin-action" to="/admin/shop">상점 관리</Link>}
             <Link className="admin-action" to="/admin/reports">보고 관리</Link>
             <Link className="admin-action" to={isHq ? "/admin/duel" : "/admin/duel?tab=theme"}>대결 관리</Link>
           </div>
