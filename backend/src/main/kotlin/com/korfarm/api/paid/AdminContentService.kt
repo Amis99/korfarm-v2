@@ -523,8 +523,11 @@ class AdminContentService(
 
     @Transactional(readOnly = true)
     fun listContents(): List<AdminContentSummary> {
-        // content_id 별 가장 최근 editor_id 한 번에 조회
+        // content_id 별 가장 최근 editor_id — 어드민이 페이지에서 "수정 후 저장" 한 경우(action="UPDATE")만 인정.
+        // 일괄 import / backfill / migration 같은 자동 작업(BATCH_CREATE / BACKFILL_Q10 / MERGE_Q1_BOGI 등)은
+        // 화면 기호 표시에서 무시하고 status-dot(초록 원) 으로 되돌린다.
         val latestEditorByContent: Map<String, String> = contentEditLogRepository.findAll()
+            .filter { it.action == "UPDATE" }
             .groupBy { it.contentId }
             .mapValues { (_, logs) -> logs.maxByOrNull { it.createdAt }?.editorId ?: "" }
             .filterValues { it.isNotEmpty() }
