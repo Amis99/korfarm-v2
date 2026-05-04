@@ -13,12 +13,7 @@ function levelLabel(lv) {
   return LEVEL_LABEL_MAP[withUnderscore] || LEVEL_LABEL_MAP[norm] || lv;
 }
 
-// 새 탭으로 미리보기 페이지 열기
-function openPreview(contentId) {
-  if (!contentId) return;
-  const url = `/admin/content/preview?id=${encodeURIComponent(contentId)}`;
-  window.open(url, "_blank", "noopener,noreferrer");
-}
+// (미리보기는 모달 내부에서 in-place 로 표시 — 새 탭은 sessionStorage 토큰 격리로 로그인 풀림)
 
 const TABS = [
   { key: "all", label: "종합 검색" },
@@ -59,6 +54,30 @@ function isValidFarmArea(area) {
 
 export default function KorfarmContentSearchModal({ onSelect, onClose }) {
   const [tab, setTab] = useState("all");
+
+  // 미리보기 패널 (모달 내부에서 in-place)
+  const [previewData, setPreviewData] = useState(null);
+  const [previewLoading, setPreviewLoading] = useState(false);
+  const [previewError, setPreviewError] = useState("");
+
+  const openPreview = async (contentId) => {
+    if (!contentId) return;
+    setPreviewLoading(true);
+    setPreviewError("");
+    setPreviewData(null);
+    try {
+      const data = await apiGetCamel(`/v1/learning/content/${encodeURIComponent(contentId)}`);
+      setPreviewData(data);
+    } catch (e) {
+      setPreviewError(e.message || "미리보기를 불러오지 못했습니다");
+    } finally {
+      setPreviewLoading(false);
+    }
+  };
+  const closePreview = () => {
+    setPreviewData(null);
+    setPreviewError("");
+  };
 
   // ── 종합 검색 ──
   const [allSearch, setAllSearch] = useState("");
@@ -356,6 +375,50 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
                   ))}
             </div>
           </>
+        )}
+
+        {/* 미리보기 — 모달 내부 in-place 패널 */}
+        {(previewLoading || previewError || previewData) && (
+          <div
+            onClick={(e) => { if (e.target === e.currentTarget) closePreview(); }}
+            style={{
+              position: "absolute", inset: 0, background: "rgba(0,0,0,0.4)",
+              display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10,
+              borderRadius: 12,
+            }}
+          >
+            <div style={{ background: "#fff", borderRadius: 8, width: "92%", maxHeight: "82%", overflow: "auto", padding: 16, boxShadow: "0 4px 24px rgba(0,0,0,0.2)" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+                <strong>콘텐츠 미리보기</strong>
+                <button onClick={closePreview} style={{ background: "none", border: "none", fontSize: 20, cursor: "pointer" }}>✕</button>
+              </div>
+              {previewLoading && <p style={{ color: "#666" }}>불러오는 중…</p>}
+              {previewError && <p style={{ color: "#c00" }}>{previewError}</p>}
+              {previewData && (
+                <div style={{ fontSize: 13, lineHeight: 1.6 }}>
+                  <div style={{ marginBottom: 6 }}>
+                    <strong style={{ fontSize: 15 }}>{previewData.title || "(제목 없음)"}</strong>
+                  </div>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 10 }}>
+                    {previewData.levelId && <span className="sp-csm-item-area" style={{ background: "#fdf2e3", color: "#e07a1a" }}>{levelLabel(previewData.levelId)}</span>}
+                    {previewData.area && <span className="sp-csm-item-area">{farmName(previewData.area)}</span>}
+                    {previewData.subArea && <span className="sp-csm-item-area">{previewData.subArea}</span>}
+                    {previewData.dayIndex != null && <span className="sp-csm-item-area">Day {previewData.dayIndex}</span>}
+                    {Array.isArray(previewData.contentType) && previewData.contentType.map((t, i) => (
+                      <span key={i} className="sp-csm-item-area">{TYPE_LABEL[t] || t}</span>
+                    ))}
+                    {typeof previewData.contentType === "string" && (
+                      <span className="sp-csm-item-area">{TYPE_LABEL[previewData.contentType] || previewData.contentType}</span>
+                    )}
+                  </div>
+                  <pre style={{ background: "#f7f7f7", padding: 10, borderRadius: 6, fontSize: 11, overflow: "auto", maxHeight: 400, lineHeight: 1.4 }}>
+                    {JSON.stringify(previewData.content || previewData, null, 2).substring(0, 4000)}
+                    {JSON.stringify(previewData.content || previewData, null, 2).length > 4000 && "\n…(생략)"}
+                  </pre>
+                </div>
+              )}
+            </div>
+          </div>
         )}
       </div>
     </div>
