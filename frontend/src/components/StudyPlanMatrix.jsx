@@ -108,13 +108,20 @@ export default function StudyPlanMatrix({
   };
 
   const handleAssetAdd = () => {
-    if (!newAssetLabel.trim() || !onAddAsset) return;
+    if (!onAddAsset) return;
     const assetKind =
       newAssetType === "test" ? "test" :
       newAssetType === "writing" ? "write" : "study";
+    // 이름 비어있으면 자동 생성: "국어농장 1", "학습활동 2", ...
+    let label = newAssetLabel.trim();
+    if (!label) {
+      const typeLabel = ASSET_TYPE_LABELS[newAssetType] || newAssetType;
+      const sameTypeCount = (assets || []).filter(a => a.assetType === newAssetType).length;
+      label = `${typeLabel} ${sameTypeCount + 1}`;
+    }
     onAddAsset({
       assetType: newAssetType,
-      label: newAssetLabel.trim(),
+      label,
       assetKind,
     });
     setNewAssetLabel("");
@@ -244,7 +251,7 @@ export default function StudyPlanMatrix({
                       className="asp-input sp-popover-input"
                       value={newAssetLabel}
                       onChange={(e) => setNewAssetLabel(e.target.value)}
-                      placeholder="열 이름"
+                      placeholder={`열 이름 (비우면 "${ASSET_TYPE_LABELS[newAssetType] || newAssetType} ${(assets || []).filter(a => a.assetType === newAssetType).length + 1}")`}
                       onKeyDown={(e) => e.key === "Enter" && handleAssetAdd()}
                       autoFocus
                     />

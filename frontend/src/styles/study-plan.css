@@ -85,11 +85,24 @@
   top: 0;
   z-index: 2;
 }
+/* 첫 열(범위 라벨) 도 sticky — thead 첫 셀은 가장 위(좌상단 모서리) z-index */
 .sp-matrix thead th:first-child {
   text-align: left;
   min-width: 120px;
   max-width: 120px;
   width: 120px;
+  position: sticky;
+  left: 0;
+  top: 0;
+  z-index: 4;
+  background: #f5f0eb;
+}
+.sp-matrix tbody th:first-child,
+.sp-matrix tbody th.sp-scope-header {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: #faf7f4;
 }
 /* 자산(열) 셀 너비 고정 — 가로축 균일하게 */
 .sp-matrix thead th:not(:first-child):not(.sp-add-col-th),
@@ -121,7 +134,11 @@
   background: rgba(255,255,255,0.05);
   color: #8a7468;
 }
-.sp-matrix.admin-theme tbody th {
+.sp-matrix.admin-theme thead th:first-child {
+  background: rgba(255,255,255,0.05);
+}
+.sp-matrix.admin-theme tbody th,
+.sp-matrix.admin-theme tbody th.sp-scope-header {
   background: rgba(255,255,255,0.03);
   color: #ccc;
 }
