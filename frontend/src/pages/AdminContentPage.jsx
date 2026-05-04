@@ -2,6 +2,7 @@ import { useMemo, useState, useRef, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { apiGet, apiDelete } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
+import { useAuth } from "../hooks/useAuth";
 import { FARM_MAP } from "../data/learning/learningCatalog";
 import { LEARNING_TEMPLATES } from "../data/learning/learningTemplates";
 import { Link } from "react-router-dom";
@@ -173,6 +174,8 @@ const TEMPLATE_GROUPS = [
 ];
 
 function AdminContentPage() {
+  const { user } = useAuth();
+  const isHq = (user?.roles || []).includes("HQ_ADMIN");
   const { data: contents, loading, error } = useAdminList(
     "/v1/admin/content",
     CONTENTS,
@@ -495,8 +498,9 @@ function AdminContentPage() {
     <AdminLayout>
       <div className="admin-detail-wrap">
         <div className="admin-detail-header">
-          <h1>콘텐츠 관리</h1>
-          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+          <h1>콘텐츠 관리{!isHq && <span style={{ marginLeft: 8, fontSize: 13, fontWeight: 400, color: "var(--admin-muted)" }}>(읽기 전용)</span>}</h1>
+          {isHq && (
+                    <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
             <div ref={templatePanelRef} style={{ position: "relative" }}>
               <button
                 className="admin-detail-btn secondary"
@@ -542,6 +546,7 @@ function AdminContentPage() {
               콘텐츠 업로드
             </button>
           </div>
+          )}
         </div>
         {/* 내용 숙지 안내 */}
         <div
@@ -648,8 +653,8 @@ function AdminContentPage() {
             </div>
           </div>
 
-          {/* 벌크 액션 바 */}
-          {selectedIds.size > 0 && (
+          {/* 벌크 액션 바 — 본사 관리자 전용 */}
+          {isHq && selectedIds.size > 0 && (
             <div className="admin-content-bulk-bar">
               <span className="admin-content-bulk-count">{selectedIds.size}개 선택됨</span>
               <button type="button" className="admin-detail-btn danger" onClick={handleBulkDelete}>
@@ -666,14 +671,16 @@ function AdminContentPage() {
           <table className="admin-detail-table">
             <thead>
               <tr>
-                <th className="admin-th-checkbox">
-                  <input
-                    type="checkbox"
-                    checked={pagedContents.length > 0 && pagedContents.every((c) => selectedIds.has(c.id))}
-                    onChange={togglePageSelectAll}
-                    title="현재 페이지 전체 선택"
-                  />
-                </th>
+                {isHq && (
+                  <th className="admin-th-checkbox">
+                    <input
+                      type="checkbox"
+                      checked={pagedContents.length > 0 && pagedContents.every((c) => selectedIds.has(c.id))}
+                      onChange={togglePageSelectAll}
+                      title="현재 페이지 전체 선택"
+                    />
+                  </th>
+                )}
                 <th className="admin-th-sortable" onClick={() => handleSort("title")} style={{ cursor: "pointer" }}>
                   제목{sortIcon("title")}
                 </th>
@@ -700,7 +707,7 @@ function AdminContentPage() {
             <tbody>
               {pagedContents.length === 0 && !loading ? (
                 <tr>
-                  <td colSpan={7} className="admin-content-status-cell">
+                  <td colSpan={isHq ? 7 : 6} className="admin-content-status-cell">
                     {allContents.length === 0 ? "등록된 콘텐츠가 없습니다." : "검색 결과가 없습니다."}
                   </td>
                 </tr>
@@ -713,16 +720,19 @@ function AdminContentPage() {
                 const typeFull = types.map((t) => TYPE_LABEL[t] || t).join(" · ");
                 return (
                   <tr key={content.id}>
-                    <td className="admin-th-checkbox">
-                      <input
-                        type="checkbox"
-                        checked={selectedIds.has(content.id)}
-                        onChange={() => toggleSelectOne(content.id)}
-                      />
-                    </td>
+                    {isHq && (
+                      <td className="admin-th-checkbox">
+                        <input
+                          type="checkbox"
+                          checked={selectedIds.has(content.id)}
+                          onChange={() => toggleSelectOne(content.id)}
+                        />
+                      </td>
+                    )}
                     <td>
                       <Link
-                        to={`/admin/content/edit?id=${content.id}&from=${fromParam}`}
+                        to={isHq ? `/admin/content/edit?id=${content.id}&from=${fromParam}` : "#"}
+                        onClick={(e) => { if (!isHq) e.preventDefault(); }}
                         className="admin-content-title-link"
                         title={content.title}
                       >
@@ -804,6 +814,8 @@ function AdminContentPage() {
                           {previewLoadingId === content.id ? "..." : "\uD83D\uDC41"}
                           <span className="admin-tooltip">미리보기</span>
                         </button>
+                        {isHq && (
+                          <>
                         <button
                           className="admin-icon-btn admin-tooltip-wrap"
                           type="button"
@@ -825,6 +837,8 @@ function AdminContentPage() {
                           🗑
                           <span className="admin-tooltip">삭제</span>
                         </button>
+                          </>
+                        )}
                       </span>
                     </td>
                   </tr>

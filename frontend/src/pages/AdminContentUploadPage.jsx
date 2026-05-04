@@ -11,6 +11,7 @@ import {
   resolveModuleKeyForContentType,
 } from "../constants/contentTypes";
 import AdminLayout from "../components/AdminLayout";
+import { useRequireRole } from "../hooks/useRequireRole";
 import Pagination from "../components/Pagination";
 import usePagination from "../hooks/usePagination";
 import "../styles/admin-detail.css";
@@ -96,6 +97,7 @@ const extractTemplateId = (v) => {
 const CONTENT_PDF_MODULE = "farm:content:study_content";
 
 function AdminContentUploadPage() {
+  useRequireRole("HQ_ADMIN");
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const editId = searchParams.get("id");

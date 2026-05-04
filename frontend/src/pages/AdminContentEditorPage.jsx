@@ -1,12 +1,14 @@
 import { useSearchParams, useNavigate } from "react-router-dom";
 import AdminLayout from "../components/AdminLayout";
 import EditorShell from "../components/editor/EditorShell";
+import { useRequireRole } from "../hooks/useRequireRole";
 
 /**
  * 콘텐츠 비주얼 에디터 페이지
  * 라우트: /admin/content/edit?id=xxx
  */
 export default function AdminContentEditorPage() {
+  useRequireRole("HQ_ADMIN");
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const contentId = params.get("id");
