@@ -27,9 +27,10 @@ class AdminContentController(
     private val adminContentService: AdminContentService,
     private val featureFlagService: FeatureFlagService
 ) {
+    // 콘텐츠 import / 수정 / 원고 = 전사 콘텐츠 풀 운영 → 본사 관리자 전용
     @PostMapping("/content/import")
     fun importContent(@Valid @RequestBody request: AdminContentImportRequest): ApiResponse<AdminContentImportResult> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         featureFlagService.requireEnabled("feature.admin.console")
         val userId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
@@ -39,7 +40,7 @@ class AdminContentController(
 
     @PostMapping("/content/batch-import")
     fun batchImportContent(@Valid @RequestBody request: AdminContentBatchImportRequest): ApiResponse<AdminContentBatchImportResult> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         featureFlagService.requireEnabled("feature.admin.console")
         val userId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
@@ -49,7 +50,7 @@ class AdminContentController(
 
     @GetMapping("/manuscripts")
     fun listManuscripts(): ApiResponse<List<ManuscriptSummary>> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         featureFlagService.requireEnabled("feature.admin.console")
         val data = adminContentService.listManuscripts()
         return ApiResponse(success = true, data = data)
@@ -68,7 +69,7 @@ class AdminContentController(
         @PathVariable contentId: String,
         @Valid @RequestBody request: AdminContentImportRequest
     ): ApiResponse<AdminContentImportResult> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         featureFlagService.requireEnabled("feature.admin.console")
         val userId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
@@ -151,9 +152,10 @@ class AdminContentController(
         return ApiResponse(success = true, data = data)
     }
 
+    // 콘텐츠 편집 이력은 본사 관리자 전용 (콘텐츠 운영 추적)
     @GetMapping("/content/{contentId}/edit-history")
     fun getContentEditHistory(@PathVariable contentId: String): ApiResponse<List<ContentEditLogDto>> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         featureFlagService.requireEnabled("feature.admin.console")
         val data = adminContentService.getEditLogsByContent(contentId)
         return ApiResponse(success = true, data = data)
@@ -161,7 +163,7 @@ class AdminContentController(
 
     @GetMapping("/edit-history/by-editor")
     fun getEditorEditHistory(@RequestParam editorId: String): ApiResponse<List<ContentEditLogDto>> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         featureFlagService.requireEnabled("feature.admin.console")
         val data = adminContentService.getEditLogsByEditor(editorId)
         return ApiResponse(success = true, data = data)
@@ -169,7 +171,7 @@ class AdminContentController(
 
     @GetMapping("/editors")
     fun listEditors(): ApiResponse<List<AdminUserDto>> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         featureFlagService.requireEnabled("feature.admin.console")
         val data = adminContentService.listAdminUsers()
         return ApiResponse(success = true, data = data)
