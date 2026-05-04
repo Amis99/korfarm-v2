@@ -18,7 +18,7 @@ class AdminDiagnosticController(
         @RequestParam(required = false) genre: String?,
         @RequestParam(required = false) type: String?
     ): ApiResponse<List<AdminQuestionSummary>> {
-        requireAdmin()
+        requireHq()
         return ApiResponse(success = true, data = diagnosticService.adminListQuestions(tier, genre, type))
     }
 
@@ -39,13 +39,19 @@ class AdminDiagnosticController(
 
     @GetMapping("/statistics")
     fun getStatistics(): ApiResponse<DiagnosticStatistics> {
-        requireAdmin()
+        requireHq()
         return ApiResponse(success = true, data = diagnosticService.adminGetStatistics())
     }
 
     private fun requireAdmin() {
         if (!SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")) {
             throw ApiException("FORBIDDEN", "관리자 권한이 필요합니다", HttpStatus.FORBIDDEN)
+        }
+    }
+
+    private fun requireHq() {
+        if (!SecurityUtils.hasAnyRole("HQ_ADMIN")) {
+            throw ApiException("FORBIDDEN", "본사 관리자 권한이 필요합니다", HttpStatus.FORBIDDEN)
         }
     }
 }

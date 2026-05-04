@@ -1,6 +1,7 @@
 package com.korfarm.api.learning
 
 import com.korfarm.api.common.ApiResponse
+import com.korfarm.api.org.OrgService
 import com.korfarm.api.security.AdminGuard
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -13,7 +14,8 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RestController
 class AdminLearningHistoryController(
-    private val farmLearningLogRepository: FarmLearningLogRepository
+    private val farmLearningLogRepository: FarmLearningLogRepository,
+    private val orgService: OrgService
 ) {
     @GetMapping("/v1/admin/students/{userId}/content/{contentId}/history")
     fun getHistory(
@@ -21,6 +23,7 @@ class AdminLearningHistoryController(
         @PathVariable contentId: String
     ): ApiResponse<LearningHistorySummary> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        orgService.verifyOrgAdminAccessForStudent(userId)
         val logs = farmLearningLogRepository.findByUserIdAndContentIdOrderByCreatedAtDesc(userId, contentId)
         val attempts = logs.map { log ->
             LearningAttempt(

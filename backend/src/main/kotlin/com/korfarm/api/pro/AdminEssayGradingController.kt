@@ -13,7 +13,7 @@ class AdminEssayGradingController(
     private val essayGradingService: EssayGradingService
 ) {
     private fun requireAdminUserId(): String {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         return SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "로그인이 필요합니다.", HttpStatus.UNAUTHORIZED)
     }

@@ -11,7 +11,8 @@ import java.time.LocalDate
 
 @RestController
 class UnifiedReportController(
-    private val reportService: UnifiedReportService
+    private val reportService: UnifiedReportService,
+    private val orgService: com.korfarm.api.org.OrgService
 ) {
     // 학생 본인
     @GetMapping("/v1/report/unified")
@@ -49,6 +50,7 @@ class UnifiedReportController(
         @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) endDate: LocalDate
     ): ApiResponse<UnifiedReportResponse> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        orgService.verifyOrgAdminAccessForStudent(studentId)
         val data = reportService.getReport(studentId, startDate, endDate)
         return ApiResponse(success = true, data = data)
     }

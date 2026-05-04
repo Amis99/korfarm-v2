@@ -18,8 +18,9 @@ class AiTestGenController(
     private val fileToMarkdownService: FileToMarkdownService,
     private val objectMapper: com.fasterxml.jackson.databind.ObjectMapper,
 ) {
+    // AI 콘텐츠 생성은 본사 관리자 전용 (전사 콘텐츠 풀에 영향)
     private fun requireAdmin() {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
     }
     private fun currentUser(): String =
         SecurityUtils.currentUserId()
