@@ -1,9 +1,75 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { apiGet } from "../utils/api";
+import { apiGetCamel } from "../utils/adminApi";
 import { normalizeModuleKey } from "../constants/contentTypes";
 import PrintLayout from "../engine/core/PrintLayout";
 import "../styles/learning-engine.css";
+
+// 내용 숙지 콘텐츠 인쇄 — 페이지별 본문 + 4유형 문제
+function StudyContentPrint({ detail, pages }) {
+  const TYPE_LABEL = { mcq: "객관식", ox: "OX", short: "단답", essay: "서술" };
+  return (
+    <div className="print-only print-layout">
+      <header style={{ borderBottom: "2px solid #333", paddingBottom: 6, marginBottom: 12 }}>
+        <div style={{ fontSize: 11, color: "#666" }}>
+          학교 [ &nbsp; ] &nbsp;&nbsp; 학년/반 [ &nbsp; ] &nbsp;&nbsp; 이름 [ &nbsp; ] &nbsp;&nbsp; 시작 [ : ]
+        </div>
+        <h1 style={{ fontSize: 22, margin: "8px 0 4px" }}>{detail?.title || "내용 숙지"}</h1>
+        <div style={{ fontSize: 12, color: "#555" }}>
+          {detail?.levelId || ""}
+          {detail?.area && ` · ${detail.area}`}
+          {detail?.subArea && ` · ${detail.subArea}`}
+        </div>
+      </header>
+      {(pages || []).map((page, pi) => (
+        <section key={page.id || pi} style={{ pageBreakInside: "avoid", marginBottom: 18 }}>
+          <h2 style={{ fontSize: 16, borderLeft: "4px solid #2f7a3e", paddingLeft: 8, margin: "16px 0 8px" }}>
+            페이지 {pi + 1}{page.title ? ` — ${page.title}` : ""}
+          </h2>
+          {page.markdown && (
+            <div style={{ whiteSpace: "pre-wrap", fontSize: 13, lineHeight: 1.7, marginBottom: 10 }}>
+              {page.markdown}
+            </div>
+          )}
+          {Array.isArray(page.questions) && page.questions.length > 0 && (
+            <ol style={{ paddingLeft: 22 }}>
+              {page.questions.map((q, qi) => (
+                <li key={q.id || qi} style={{ marginBottom: 8, fontSize: 12 }}>
+                  <div>
+                    <span style={{ display: "inline-block", padding: "1px 6px", background: "#eef2e8", borderRadius: 3, fontSize: 10, marginRight: 6 }}>
+                      {TYPE_LABEL[q.type] || q.type}
+                    </span>
+                    {q.prompt || q.question || q.title}
+                  </div>
+                  {Array.isArray(q.choices) && q.choices.length > 0 && (
+                    <ol style={{ paddingLeft: 18, fontSize: 12, marginTop: 2 }}>
+                      {q.choices.map((c, ci) => (
+                        <li key={c.id || ci}>{c.text || c.label || (typeof c === "string" ? c : "")}</li>
+                      ))}
+                    </ol>
+                  )}
+                  {q.type === "ox" && (
+                    <div style={{ fontSize: 11, color: "#666", marginTop: 2 }}>O / X</div>
+                  )}
+                  {(q.type === "short" || q.type === "essay") && (
+                    <div style={{
+                      borderBottom: "1px solid #999", height: q.type === "essay" ? 60 : 18,
+                      marginTop: 4,
+                    }} />
+                  )}
+                </li>
+              ))}
+            </ol>
+          )}
+        </section>
+      ))}
+      {(!pages || pages.length === 0) && (
+        <p style={{ color: "#666" }}>등록된 페이지가 없습니다. (콘텐츠 메타만 표시)</p>
+      )}
+    </div>
+  );
+}
 
 /**
  * 어드민 PDF 인쇄 페이지
@@ -29,18 +95,23 @@ export default function AdminPrintContentPage() {
     Promise.all(
       ids.map(async (id) => {
         try {
+          // study_ 로 시작하면 내용 숙지 콘텐츠 — 별도 endpoint
+          if (id.startsWith("study_")) {
+            const detail = await apiGetCamel(`/v1/admin/study/contents/${encodeURIComponent(id)}`);
+            const pages = await apiGetCamel(`/v1/admin/study/contents/${encodeURIComponent(id)}/pages`).catch(() => []);
+            return { contentId: id, kind: "study", detail, pages: Array.isArray(pages) ? pages : [] };
+          }
+          // 일반 콘텐츠
           const data = await apiGet(`/v1/learning/content/${encodeURIComponent(id)}`);
-          // data.content_type 은 배열, content 는 객체
           const moduleKeyRaw = data?.module_key || data?.moduleKey;
           const moduleKey = normalizeModuleKey(moduleKeyRaw) ||
             normalizeModuleKey(Array.isArray(data?.content_type) ? data.content_type[0] : data?.contentType);
-          // PrintLayout 이 받는 content 객체 형태로 정리
           const content = {
             title: data?.title || "",
             targetLevel: data?.level_id || data?.levelId || "",
             payload: data?.content?.payload || data?.content || {},
           };
-          return { contentId: id, content, moduleKey: moduleKey || "worksheet_quiz" };
+          return { contentId: id, kind: "general", content, moduleKey: moduleKey || "worksheet_quiz" };
         } catch (e) {
           return { contentId: id, error: e.message };
         }
@@ -88,6 +159,8 @@ export default function AdminPrintContentPage() {
             <div style={{ padding: 24, color: "#c00" }}>
               <strong>{it.contentId}</strong> — 불러오기 실패: {it.error}
             </div>
+          ) : it.kind === "study" ? (
+            <StudyContentPrint detail={it.detail} pages={it.pages} />
           ) : (
             <PrintLayout moduleKey={it.moduleKey} content={it.content} />
           )}
