@@ -24,10 +24,11 @@ const NAV_ITEMS = [
   { to: "/admin/learning-db", icon: "database", label: "학습자료 DB", roles: ["HQ_ADMIN"] },
   { to: "/admin/duel", icon: "swords", label: "대결 관리" },
   { to: "/admin/shop", icon: "storefront", label: "상점 관리", roles: ["HQ_ADMIN"] },
-  { to: "/admin/inquiry", icon: "contact_support", label: "문의 관리" },
+  { to: "/admin/inquiry", icon: "contact_support", label: "문의 관리", roles: ["HQ_ADMIN"] },
   { to: "/admin/edit-history", icon: "history", label: "수정 이력", roles: ["HQ_ADMIN"] },
   { to: "/admin/ai-usage", icon: "smart_toy", label: "AI 사용 내역", roles: ["HQ_ADMIN"] },
-  { to: "/admin/reports", icon: "flag", label: "보고" },
+  { to: "/admin/reports", icon: "flag", label: "보고", roles: ["HQ_ADMIN"] },
+  { to: "/admin/org-settings", icon: "settings", label: "기관 설정", roles: ["ORG_ADMIN"] },
   { to: "/", icon: "home", label: "랜딩" },
   { to: "/start", icon: "play_arrow", label: "스타트" },
 ];

@@ -1069,10 +1069,10 @@ class TestService(
     fun listAllTests(callerUserId: String): List<TestPaperSummary> {
         var papers = testPaperRepo.findAll().sortedByDescending { it.createdAt }
 
-        // ORG_ADMIN이면 본사(orgId=null|"org_hq") + 자기 기관 시험만 필터링
+        // ORG_ADMIN 은 자기 기관이 만들거나 추가한 시험만 노출 (본사 PUBLIC 시험지 제외)
         if (!SecurityUtils.hasAnyRole("HQ_ADMIN")) {
             val callerOrgIds = orgMembershipRepository.findByUserIdAndStatus(callerUserId, "active").map { it.orgId }
-            papers = papers.filter { it.orgId == null || it.orgId == "org_hq" || callerOrgIds.contains(it.orgId) }
+            papers = papers.filter { it.orgId != null && it.orgId != "org_hq" && callerOrgIds.contains(it.orgId) }
         }
 
         val orgIds = papers.mapNotNull { it.orgId }.distinct()

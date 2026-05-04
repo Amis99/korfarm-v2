@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { CompletedWordCard, buildCorrectDestCells } from "../modules/PhonemeChangeModule";
 import { CompletedSentenceCard } from "../modules/MorphemeAnalysisModule";
 import RichText from "../../utils/RichText";
+import { useOrgLogo } from "../../hooks/useOrgLogo";
 
 const ROLE_SHORT = { "주어":"주","서술어":"서","목적어":"목","보어":"보","부사어":"부","관형어":"관","독립어":"독" };
 
@@ -35,12 +36,29 @@ export default function PrintLayout({ moduleKey, content }) {
 }
 
 /* ─────────────── 공통 헤더 ─────────────── */
-function PrintHeader({ title, level }) {
+// 다른 인쇄 페이지에서도 재사용 (예: AdminPrintContentPage 의 StudyContentPrint)
+export function PrintHeader({ title, level }) {
+  const orgLogoUrl = useOrgLogo();
   return (
     <header className="print-header">
-      <div className="print-header-row">
-        <span className="print-brand">국어농장</span>
-        {level && <span className="print-level">· {level}</span>}
+      <div className="print-header-row" style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <img
+          src={import.meta.env.BASE_URL + "korfarm-logo.png"}
+          alt="국어농장"
+          style={{ height: 32, width: "auto" }}
+        />
+        {orgLogoUrl && (
+          <>
+            <span style={{ fontSize: 18, color: "#999" }}>×</span>
+            <img
+              src={orgLogoUrl}
+              alt="기관 로고"
+              style={{ height: 32, width: "auto", maxWidth: 120 }}
+              onError={(e) => { e.currentTarget.style.display = "none"; }}
+            />
+          </>
+        )}
+        {level && <span className="print-level" style={{ marginLeft: "auto", fontSize: 12, color: "#666" }}>· {level}</span>}
       </div>
       <h1 className="print-title">{title}</h1>
       <div className="print-meta-row">

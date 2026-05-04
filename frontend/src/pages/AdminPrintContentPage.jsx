@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { apiGet } from "../utils/api";
 import { apiGetCamel } from "../utils/adminApi";
 import { normalizeModuleKey } from "../constants/contentTypes";
-import PrintLayout from "../engine/core/PrintLayout";
+import PrintLayout, { PrintHeader } from "../engine/core/PrintLayout";
 import PassageMarkdown from "../components/PassageMarkdown";
 import "../styles/learning-engine.css";
 
@@ -159,19 +159,11 @@ function StudyQuestionItem({ q }) {
 
 // 내용 숙지 콘텐츠 인쇄 — 페이지별 본문 + 4유형 문제
 function StudyContentPrint({ detail, pages }) {
+  // PrintLayout 의 공통 헤더 재사용 — 국어농장 로고 + ORG_ADMIN 기관 로고 자동 처리
+  const levelLabel = [detail?.levelId, detail?.area, detail?.subArea].filter(Boolean).join(" · ");
   return (
     <div className="print-only print-layout">
-      <header style={{ borderBottom: "2px solid #333", paddingBottom: 6, marginBottom: 12 }}>
-        <div style={{ fontSize: 11, color: "#666" }}>
-          학교 [ &nbsp; ] &nbsp;&nbsp; 학년/반 [ &nbsp; ] &nbsp;&nbsp; 이름 [ &nbsp; ] &nbsp;&nbsp; 시작 [ : ]
-        </div>
-        <h1 style={{ fontSize: 22, margin: "8px 0 4px" }}>{detail?.title || "내용 숙지"}</h1>
-        <div style={{ fontSize: 12, color: "#555" }}>
-          {detail?.levelId || ""}
-          {detail?.area && ` · ${detail.area}`}
-          {detail?.subArea && ` · ${detail.subArea}`}
-        </div>
-      </header>
+      <PrintHeader title={detail?.title || "내용 숙지"} level={levelLabel} />
       {(pages || []).map((page, pi) => (
         <section
           key={page.id || pi}

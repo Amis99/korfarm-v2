@@ -120,6 +120,7 @@ class OrgService(
                 orgType = org.orgType,
                 addressRegion = org.addressRegion,
                 addressDetail = org.addressDetail,
+                logoFileId = org.logoFileId,
                 seatLimit = org.seatLimit,
                 admins = admins,
                 status = org.status
@@ -310,6 +311,8 @@ class OrgService(
         request.orgType?.let { org.orgType = it }
         request.addressRegion?.let { org.addressRegion = it }
         request.addressDetail?.let { org.addressDetail = it }
+        // logoFileId 는 빈 문자열 → null (로고 제거) 처리
+        request.logoFileId?.let { org.logoFileId = it.takeIf { v -> v.isNotBlank() } }
         request.seatLimit?.let { org.seatLimit = it }
         request.status?.let { org.status = it }
         return orgRepository.save(org)
@@ -383,6 +386,7 @@ class OrgService(
             orgType = org.orgType,
             addressRegion = org.addressRegion,
             addressDetail = org.addressDetail,
+            logoFileId = org.logoFileId,
             seatLimit = org.seatLimit,
             admins = admins,
             status = org.status

@@ -48,6 +48,31 @@ class OrgController(
         return ApiResponse(success = true, data = orgService.getOrgView(org.id))
     }
 
+    // ORG_ADMIN 본인 기관 조회·수정 (사이드바 '기관 설정' 메뉴 용도)
+    // HQ_ADMIN 은 기존 /orgs/{orgId} 사용
+    @GetMapping("/orgs/me")
+    fun getMyOrg(): ApiResponse<AdminOrgView> {
+        AdminGuard.requireAnyRole("ORG_ADMIN", "HQ_ADMIN")
+        val userId = com.korfarm.api.security.SecurityUtils.currentUserId()
+            ?: throw com.korfarm.api.common.ApiException("UNAUTHORIZED", "unauthorized", org.springframework.http.HttpStatus.UNAUTHORIZED)
+        val myOrg = orgService.listUserOrgs(userId).firstOrNull()
+            ?: throw com.korfarm.api.common.ApiException("NOT_FOUND", "소속 기관을 찾을 수 없습니다", org.springframework.http.HttpStatus.NOT_FOUND)
+        return ApiResponse(success = true, data = orgService.getOrgView(myOrg.id))
+    }
+
+    @PatchMapping("/orgs/me")
+    fun updateMyOrg(@Valid @RequestBody request: AdminOrgUpdateRequest): ApiResponse<AdminOrgView> {
+        AdminGuard.requireAnyRole("ORG_ADMIN", "HQ_ADMIN")
+        val userId = com.korfarm.api.security.SecurityUtils.currentUserId()
+            ?: throw com.korfarm.api.common.ApiException("UNAUTHORIZED", "unauthorized", org.springframework.http.HttpStatus.UNAUTHORIZED)
+        val myOrg = orgService.listUserOrgs(userId).firstOrNull()
+            ?: throw com.korfarm.api.common.ApiException("NOT_FOUND", "소속 기관을 찾을 수 없습니다", org.springframework.http.HttpStatus.NOT_FOUND)
+        // ORG_ADMIN 은 status / seatLimit 변경 금지 — 무시
+        val safe = request.copy(status = null, seatLimit = null, plan = null)
+        orgService.updateOrg(myOrg.id, safe)
+        return ApiResponse(success = true, data = orgService.getOrgView(myOrg.id))
+    }
+
     @PatchMapping("/orgs/{orgId}")
     fun updateOrg(@PathVariable orgId: String, @Valid @RequestBody request: AdminOrgUpdateRequest): ApiResponse<AdminOrgView> {
         AdminGuard.requireAnyRole("HQ_ADMIN")

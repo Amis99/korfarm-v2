@@ -20,6 +20,7 @@ data class AdminOrgView(
     val orgType: String?,
     val addressRegion: String?,
     val addressDetail: String?,
+    val logoFileId: String?,
     val seatLimit: Int,
     val admins: List<AdminOrgAdminView>,
     val status: String

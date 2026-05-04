@@ -85,6 +85,7 @@ const AdminShopPage = lazy(() => import("./pages/AdminShopPage"));
 const AdminDuelPage = lazy(() => import("./pages/AdminDuelPage"));
 const AdminParentLinksPage = lazy(() => import("./pages/AdminParentLinksPage"));
 const AdminReportsPage = lazy(() => import("./pages/AdminReportsPage"));
+const AdminOrgSettingsPage = lazy(() => import("./pages/AdminOrgSettingsPage"));
 const AdminWisdomPage = lazy(() => import("./pages/AdminWisdomPage"));
 const AdminWisdomDetailPage = lazy(() => import("./pages/AdminWisdomDetailPage"));
 const AdminTestPage = lazy(() => import("./pages/AdminTestPage"));
@@ -287,6 +288,7 @@ function App() {
           <Route path="/admin/parents" element={A(<AdminParentLinksPage />)} />
           <Route path="/admin/inquiry" element={A(<AdminInquiryPage />)} />
           <Route path="/admin/reports" element={A(<AdminReportsPage />)} />
+          <Route path="/admin/org-settings" element={A(<AdminOrgSettingsPage />)} />
           <Route path="/admin/wisdom" element={A(<AdminWisdomPage />)} />
           <Route path="/admin/wisdom/:postId" element={A(<AdminWisdomDetailPage />)} />
           {/* 학습 계획표 셀에서 진입하는 표준 경로 */}

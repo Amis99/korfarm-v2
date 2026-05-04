@@ -32,6 +32,9 @@ class OrgEntity(
     @Column(name = "address_detail")
     var addressDetail: String? = null,
 
+    @Column(name = "logo_file_id")
+    var logoFileId: String? = null,
+
     @Column(name = "seat_limit", nullable = false)
     var seatLimit: Int = 0,
 

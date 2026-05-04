@@ -146,6 +146,7 @@ data class AdminOrgUpdateRequest(
     val orgType: String? = null,
     val addressRegion: String? = null,
     val addressDetail: String? = null,
+    val logoFileId: String? = null,
     val seatLimit: Int? = null,
     val status: String? = null
 )
