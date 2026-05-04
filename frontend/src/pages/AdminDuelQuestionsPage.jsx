@@ -104,8 +104,6 @@ function AdminDuelQuestionsPage({ wrap = true, themeOnly = false, fixedServerId 
   const [detailQuestion, setDetailQuestion] = useState(null);
 
   // 재계산 상태
-  const [recalcLoading, setRecalcLoading] = useState(false);
-  const [recalcResult, setRecalcResult] = useState("");
 
   // 테마 모드: 선택된 server 의 운영 통계 (방 개수 / 매치 수)
   const [themeStats, setThemeStats] = useState({ rooms: null, matches: null });
@@ -380,21 +378,6 @@ function AdminDuelQuestionsPage({ wrap = true, themeOnly = false, fixedServerId 
     }
   };
 
-  // 랭킹 재계산
-  const handleRecalculate = async () => {
-    if (!confirm("랭킹을 재계산하시겠습니까? 시간이 걸릴 수 있습니다.")) return;
-    setRecalcLoading(true);
-    setRecalcResult("");
-    try {
-      await apiPost("/v1/admin/duel/recalculate");
-      setRecalcResult("랭킹 재계산이 완료되었습니다.");
-    } catch (err) {
-      setRecalcResult("재계산 실패: " + err.message);
-    } finally {
-      setRecalcLoading(false);
-    }
-  };
-
   // 수정 모드 진입
   const handleEditQuestion = async (q) => {
     try {
@@ -482,22 +465,8 @@ function AdminDuelQuestionsPage({ wrap = true, themeOnly = false, fixedServerId 
             >
               JSON 일괄 등록
             </button>
-            <button
-              className="admin-detail-btn secondary"
-              type="button"
-              onClick={handleRecalculate}
-              disabled={recalcLoading}
-            >
-              {recalcLoading ? "재계산 중..." : "랭킹 재계산"}
-            </button>
           </div>
         </div>
-
-        {recalcResult && (
-          <p className={`admin-detail-note ${recalcResult.includes("실패") ? "error" : "admin-duel-import-success"}`}>
-            {recalcResult}
-          </p>
-        )}
 
         {/* 서버 선택 — fixedServerId 있으면 selector 숨김 (parent 가 결정). 그 외에는 탭 */}
         {fixedServerId ? null : (SERVERS.length > 4) ? (
