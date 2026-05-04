@@ -27,8 +27,18 @@ class OrgController(
 ) {
     @GetMapping("/orgs")
     fun listOrgs(): ApiResponse<List<AdminOrgView>> {
-        AdminGuard.requireAnyRole("HQ_ADMIN")
-        return ApiResponse(success = true, data = orgService.listOrgsAdmin())
+        // HQ_ADMIN — 전체 기관 / ORG_ADMIN — 자기 기관 1개만 (학생 등록 모달 dropdown 등)
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        val isHq = com.korfarm.api.security.SecurityUtils.currentRoles().contains("HQ_ADMIN")
+        val all = orgService.listOrgsAdmin()
+        val data = if (isHq) all else {
+            val uid = com.korfarm.api.security.SecurityUtils.currentUserId()
+            val myOrgIds = if (uid != null) {
+                orgService.listUserOrgs(uid).map { it.id }.toSet()
+            } else emptySet()
+            all.filter { it.orgId in myOrgIds }
+        }
+        return ApiResponse(success = true, data = data)
     }
 
     @PostMapping("/orgs")
