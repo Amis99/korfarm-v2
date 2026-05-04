@@ -394,29 +394,101 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
               </div>
               {previewLoading && <p style={{ color: "#666" }}>불러오는 중…</p>}
               {previewError && <p style={{ color: "#c00" }}>{previewError}</p>}
-              {previewData && (
-                <div style={{ fontSize: 13, lineHeight: 1.6 }}>
-                  <div style={{ marginBottom: 6 }}>
-                    <strong style={{ fontSize: 15 }}>{previewData.title || "(제목 없음)"}</strong>
-                  </div>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 10 }}>
-                    {previewData.levelId && <span className="sp-csm-item-area" style={{ background: "#fdf2e3", color: "#e07a1a" }}>{levelLabel(previewData.levelId)}</span>}
-                    {previewData.area && <span className="sp-csm-item-area">{farmName(previewData.area)}</span>}
-                    {previewData.subArea && <span className="sp-csm-item-area">{previewData.subArea}</span>}
-                    {previewData.dayIndex != null && <span className="sp-csm-item-area">Day {previewData.dayIndex}</span>}
-                    {Array.isArray(previewData.contentType) && previewData.contentType.map((t, i) => (
-                      <span key={i} className="sp-csm-item-area">{TYPE_LABEL[t] || t}</span>
-                    ))}
-                    {typeof previewData.contentType === "string" && (
-                      <span className="sp-csm-item-area">{TYPE_LABEL[previewData.contentType] || previewData.contentType}</span>
+              {previewData && (() => {
+                const c = previewData.content || {};
+                const payload = c.payload || c;
+                // 공통 지문 — passage, passages[0], 보기, examples 등
+                const sharedPassage =
+                  (typeof payload.passage === "string" && payload.passage) ||
+                  (Array.isArray(payload.passages) && payload.passages[0]?.text) ||
+                  payload["보기"] || payload.examples || payload.example || "";
+                // 문제 배열 — questions, payload.questions, items 등
+                const questions =
+                  (Array.isArray(payload.questions) && payload.questions) ||
+                  (Array.isArray(c.questions) && c.questions) ||
+                  (Array.isArray(payload.items) && payload.items) ||
+                  [];
+                return (
+                  <div style={{ fontSize: 13, lineHeight: 1.6 }}>
+                    <div style={{ marginBottom: 6 }}>
+                      <strong style={{ fontSize: 15 }}>{previewData.title || "(제목 없음)"}</strong>
+                    </div>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 12 }}>
+                      {previewData.levelId && <span className="sp-csm-item-area" style={{ background: "#fdf2e3", color: "#e07a1a" }}>{levelLabel(previewData.levelId)}</span>}
+                      {previewData.area && <span className="sp-csm-item-area">{farmName(previewData.area)}</span>}
+                      {previewData.subArea && <span className="sp-csm-item-area">{previewData.subArea}</span>}
+                      {previewData.dayIndex != null && <span className="sp-csm-item-area">Day {previewData.dayIndex}</span>}
+                      {Array.isArray(previewData.contentType) && previewData.contentType.map((t, i) => (
+                        <span key={i} className="sp-csm-item-area">{TYPE_LABEL[t] || t}</span>
+                      ))}
+                      {typeof previewData.contentType === "string" && (
+                        <span className="sp-csm-item-area">{TYPE_LABEL[previewData.contentType] || previewData.contentType}</span>
+                      )}
+                    </div>
+                    {sharedPassage && (
+                      <div style={{
+                        background: "#fafaf3", borderLeft: "3px solid #2f7a3e",
+                        padding: "10px 14px", marginBottom: 12, borderRadius: 4,
+                        whiteSpace: "pre-wrap", fontSize: 13,
+                      }}>
+                        {String(sharedPassage)}
+                      </div>
                     )}
+                    {questions.length === 0 && !sharedPassage && (
+                      <p style={{ color: "#888" }}>표시할 지문·문제가 없습니다.</p>
+                    )}
+                    {questions.map((q, qi) => {
+                      const stem = q.stem || q.question || q.title || `문제 ${qi + 1}`;
+                      const qPassage = (typeof q.passage === "string" && q.passage) ||
+                        (q.passage?.paragraphs?.map(p => p.text).join("\n\n")) || "";
+                      const choices = q.choices || q.options || [];
+                      const answerId = q.answerId || q.answer || q.correctId;
+                      const explanation = q.explanation || q.commentary || "";
+                      return (
+                        <div key={q.id || qi} style={{
+                          border: "1px solid #e2e8f0", borderRadius: 6,
+                          padding: "10px 12px", marginBottom: 10, background: "#fff",
+                        }}>
+                          <div style={{ fontSize: 11, color: "#888", marginBottom: 4 }}>문제 {qi + 1}</div>
+                          {qPassage && (
+                            <div style={{ background: "#f5f7fa", padding: "8px 10px", borderRadius: 4, marginBottom: 6, whiteSpace: "pre-wrap", fontSize: 12 }}
+                              dangerouslySetInnerHTML={{ __html: String(qPassage).replace(/\n/g, "<br/>") }} />
+                          )}
+                          <div style={{ fontWeight: 600, marginBottom: 6 }}
+                            dangerouslySetInnerHTML={{ __html: String(stem).replace(/\n/g, "<br/>") }} />
+                          {Array.isArray(choices) && choices.length > 0 && (
+                            <ol style={{ paddingLeft: 22, margin: "4px 0" }}>
+                              {choices.map((ch, ci) => {
+                                const cid = ch.id || ch.choiceId || ch.code;
+                                const text = ch.text || ch.label || (typeof ch === "string" ? ch : "");
+                                const isAns = answerId && cid === answerId;
+                                return (
+                                  <li key={cid || ci} style={{
+                                    marginBottom: 2, padding: "1px 6px",
+                                    background: isAns ? "#fef3c7" : "transparent",
+                                    borderRadius: 3,
+                                  }}>
+                                    {text} {isAns && <span style={{ color: "#b45309", fontSize: 11 }}>← 정답</span>}
+                                  </li>
+                                );
+                              })}
+                            </ol>
+                          )}
+                          {!Array.isArray(choices) && answerId && (
+                            <div style={{ fontSize: 12, color: "#b45309" }}>정답: {answerId}</div>
+                          )}
+                          {explanation && (
+                            <div style={{ borderTop: "1px dashed #e2e8f0", marginTop: 6, paddingTop: 6, fontSize: 12, color: "#555" }}>
+                              <strong style={{ color: "#2f7a3e" }}>해설</strong> {String(explanation).slice(0, 600)}
+                              {String(explanation).length > 600 && "…"}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
-                  <pre style={{ background: "#f7f7f7", padding: 10, borderRadius: 6, fontSize: 11, overflow: "auto", maxHeight: 400, lineHeight: 1.4 }}>
-                    {JSON.stringify(previewData.content || previewData, null, 2).substring(0, 4000)}
-                    {JSON.stringify(previewData.content || previewData, null, 2).length > 4000 && "\n…(생략)"}
-                  </pre>
-                </div>
-              )}
+                );
+              })()}
             </div>
           </div>
         )}
