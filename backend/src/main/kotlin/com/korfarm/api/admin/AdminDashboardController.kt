@@ -41,11 +41,30 @@ class AdminDashboardController(
                 .firstOrNull()?.orgId
         } else null
 
-        // 기존 지표
-        val totalUsers = userRepository.count()
-        val activeUsers = userRepository.countByStatus("active")
-        val todaySignups = userRepository.countByCreatedAtAfter(todayStart)
-        val activeOrgs = orgRepository.findByStatusOrderByNameAsc("active").size.toLong()
+        // 기존 지표 — ORG_ADMIN 은 자기 기관 한정으로 집계
+        val totalUsers: Long
+        val activeUsers: Long
+        val todaySignups: Long
+        val activeOrgs: Long
+        if (isHqAdmin || userOrgId == null) {
+            totalUsers = userRepository.count()
+            activeUsers = userRepository.countByStatus("active")
+            todaySignups = userRepository.countByCreatedAtAfter(todayStart)
+            activeOrgs = orgRepository.findByStatusOrderByNameAsc("active").size.toLong()
+        } else {
+            // ORG_ADMIN — 자기 기관 active 멤버십만 집계
+            val orgMembers = orgMembershipRepository.findByOrgIdAndStatus(userOrgId, "active")
+            val orgUserIds = orgMembers.map { it.userId }.toSet()
+            if (orgUserIds.isEmpty()) {
+                totalUsers = 0L; activeUsers = 0L; todaySignups = 0L; activeOrgs = 1L
+            } else {
+                val users = userRepository.findAllById(orgUserIds)
+                totalUsers = users.count().toLong()
+                activeUsers = users.count { it.status == "active" }.toLong()
+                todaySignups = users.count { it.createdAt.isAfter(todayStart) }.toLong()
+                activeOrgs = 1L
+            }
+        }
 
         // 신규 지표: 오늘 학습 참여 학생 수
         val todayLearners = if (isHqAdmin || userOrgId == null) {

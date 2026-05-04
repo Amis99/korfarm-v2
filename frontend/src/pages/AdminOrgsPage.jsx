@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { apiGet, apiPost, apiPatch } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
+import { useRequireRole } from "../hooks/useRequireRole";
 import AdminLayout from "../components/AdminLayout";
 import AdminPaymentsPage from "./AdminPaymentsPage";
 import Pagination from "../components/Pagination";
@@ -537,6 +538,7 @@ function OrgsListContent() {
 }
 
 function AdminOrgsPage() {
+  useRequireRole("HQ_ADMIN");
   const [params, setParams] = useSearchParams();
   const tab = params.get("tab") || "orgs";
 

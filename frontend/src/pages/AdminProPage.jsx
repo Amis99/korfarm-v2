@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { apiGet, apiPost, apiPut } from "../utils/adminApi";
 import { API_BASE } from "../utils/api";
 import AdminLayout from "../components/AdminLayout";
+import { useRequireRole } from "../hooks/useRequireRole";
 import { resolveModuleKeyForContentType } from "../constants/contentTypes";
 import Pagination from "../components/Pagination";
 import usePagination from "../hooks/usePagination";
@@ -41,6 +42,7 @@ const ANSWER_TEMPLATE = JSON.stringify({
 
 /* ─────────────────────── 컴포넌트 ─────────────────────── */
 function AdminProPage() {
+  useRequireRole("HQ_ADMIN");
   const navigate = useNavigate();
 
   /* 레벨 & 챕터 목록 */

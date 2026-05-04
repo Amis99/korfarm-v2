@@ -1,7 +1,9 @@
 package com.korfarm.api.board
 
 import com.korfarm.api.common.ApiResponse
+import com.korfarm.api.org.OrgMembershipRepository
 import com.korfarm.api.security.AdminGuard
+import com.korfarm.api.security.SecurityUtils
 import com.korfarm.api.user.UserRepository
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -12,20 +14,47 @@ import org.springframework.web.bind.annotation.RestController
 class AdminInquiryController(
     private val boardRepository: BoardRepository,
     private val postRepository: PostRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val orgMembershipRepository: OrgMembershipRepository
 ) {
-    /** 문의/상담 게시글 전체 목록 (관리자 전용). 회원 작성자는 이름·연락처·학교/학년 함께 응답. */
+    /**
+     * 문의/상담 게시글 목록 (관리자 전용).
+     *  - HQ_ADMIN: 전체 + 비회원 문의 모두
+     *  - ORG_ADMIN: 자기 기관 학생/학부모 작성 문의 + 비회원 문의(자기 기관 식별 불가능하므로 함께 노출)
+     * 회원 작성자는 이름·연락처·학교/학년 함께 응답.
+     */
     @GetMapping
     fun listInquiryPosts(): ApiResponse<List<PostSummary>> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        val isHq = SecurityUtils.currentRoles().contains("HQ_ADMIN")
+        val myOrgIds: Set<String> = if (isHq) emptySet() else {
+            val uid = SecurityUtils.currentUserId() ?: return ApiResponse(success = true, data = emptyList())
+            orgMembershipRepository.findByUserIdAndStatus(uid, "active").map { it.orgId }.toSet()
+        }
         val boards = boardRepository.findByBoardType("inquiry")
-        val raw = boards.flatMap { board ->
+        val rawAll = boards.flatMap { board ->
             postRepository.findByBoardIdOrderByCreatedAtDesc(board.id)
         }.filter { post -> post.status != "deleted" }
         // 회원 user 메타 일괄 조회
-        val memberIds = raw.filter { !it.isGuest }.map { it.userId }.distinct()
+        val memberIds = rawAll.filter { !it.isGuest }.map { it.userId }.distinct()
         val userMap = if (memberIds.isEmpty()) emptyMap()
                       else userRepository.findAllById(memberIds).associateBy { it.id }
+        // ORG_ADMIN — 자기 기관 학생/학부모만 필터링 (비회원 문의는 함께 노출)
+        val raw = if (isHq) rawAll else {
+            val memberOrgs = if (memberIds.isNotEmpty()) {
+                orgMembershipRepository.findAll()
+                    .filter { it.userId in memberIds && it.status == "active" }
+                    .groupBy { it.userId }
+                    .mapValues { (_, ms) -> ms.map { it.orgId }.toSet() }
+            } else emptyMap()
+            rawAll.filter { post ->
+                if (post.isGuest) true
+                else {
+                    val orgs = memberOrgs[post.userId] ?: emptySet()
+                    orgs.any { it in myOrgIds }
+                }
+            }
+        }
         val posts = raw.map { post ->
             val u = if (!post.isGuest) userMap[post.userId] else null
             PostSummary(

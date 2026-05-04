@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiGet, apiPost, apiDelete } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
+import { useRequireRole } from "../hooks/useRequireRole";
 import "../styles/admin-detail.css";
 import "../styles/wisdom.css";
 
@@ -16,6 +17,7 @@ const LEVEL_OPTIONS = [
 const PER_PAGE = 20;
 
 function AdminWisdomPage() {
+  useRequireRole("HQ_ADMIN");
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [levelId, setLevelId] = useState("");

@@ -26,13 +26,13 @@ class AdminWisdomController(
         @RequestParam("level_id", required = false) levelId: String?,
         @RequestParam("topic_key", required = false) topicKey: String?
     ): ApiResponse<List<AdminWisdomPostSummary>> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         return ApiResponse(success = true, data = wisdomService.adminListPosts(levelId, topicKey))
     }
 
     @GetMapping("/posts/{postId}")
     fun getPost(@PathVariable postId: String): ApiResponse<AdminWisdomPostDetail> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         return ApiResponse(success = true, data = wisdomService.adminGetPost(postId))
     }
 
@@ -41,7 +41,7 @@ class AdminWisdomController(
         @PathVariable postId: String,
         @Valid @RequestBody request: AdminWisdomFeedbackCreateRequest
     ): ApiResponse<WisdomFeedbackView> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         val reviewerId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
         val data = wisdomService.adminCreateFeedback(postId, reviewerId, request.comment, request.correction)
@@ -50,7 +50,7 @@ class AdminWisdomController(
 
     @DeleteMapping("/comments/{commentId}")
     fun deleteComment(@PathVariable commentId: String): ApiResponse<Map<String, String>> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         val userId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
         wisdomService.deleteComment(commentId, userId, isAdmin = true)
@@ -60,7 +60,7 @@ class AdminWisdomController(
     /** 어드민 글 삭제 — soft delete (status='deleted'). 작성자 확인 우회. */
     @DeleteMapping("/posts/{postId}")
     fun deletePost(@PathVariable postId: String): ApiResponse<Map<String, String>> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         wisdomService.adminDeletePost(postId)
         return ApiResponse(success = true, data = mapOf("status" to "deleted"))
     }
@@ -73,7 +73,7 @@ class AdminWisdomController(
      */
     @PostMapping("/posts/{postId}/ai-feedback")
     fun aiFeedback(@PathVariable postId: String): ApiResponse<AiFeedbackJobEnqueueResponse> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         val reviewerId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
         val result = wisdomService.enqueueAiFeedback(postId, reviewerId)
@@ -82,14 +82,14 @@ class AdminWisdomController(
 
     @GetMapping("/ai-feedback/jobs/{jobId}")
     fun aiFeedbackJob(@PathVariable jobId: String): ApiResponse<AiFeedbackJobStatusResponse> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         val result = wisdomService.getAiFeedbackJob(jobId)
         return ApiResponse(success = true, data = result)
     }
 
     @PostMapping("/posts/{postId}/ocr")
     fun ocr(@PathVariable postId: String): ApiResponse<OcrResult> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         val reviewerId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
         val result = wisdomService.ocrAndSaveContent(postId, reviewerId)
@@ -98,7 +98,7 @@ class AdminWisdomController(
 
     @PostMapping("/ai-feedback-batch")
     fun aiFeedbackBatch(@RequestBody request: AiBatchRequest): ApiResponse<List<AiBatchResultItem>> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         val reviewerId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
         val results = wisdomService.batchAiFeedback(request.postIds, reviewerId)

@@ -63,17 +63,27 @@ const fetchWithTimeout = async (url, options = {}, timeoutMs = DEFAULT_TIMEOUT_M
   }
 };
 
-/** 401(미인증) 또는 403(권한/만료) 시 토큰 정리 + 로그인 페이지로 이동 */
+/**
+ * 401(미인증/만료) → 토큰 폐기 + 로그인 페이지로
+ * 403(권한 부족) → 토큰은 유지, 어드민 메인(/admin) 으로 부드럽게 되돌리기
+ *   (ORG_ADMIN 이 HQ 전용 페이지를 호출했을 때 한 번 forbidden 후 모든 라우트가
+ *    로그인 페이지로 튀는 사고를 방지)
+ */
 const handleAuthFailure = (status) => {
-  // 토큰 폐기
-  try { sessionStorage.removeItem(TOKEN_KEY); } catch { /* ignore */ }
-  // 로그인 페이지로 이동 (현재 admin 페이지가 아니면 무시)
   const current = window.location.pathname;
-  if (current.startsWith("/admin")) {
+  if (status === 401) {
+    try { sessionStorage.removeItem(TOKEN_KEY); } catch { /* ignore */ }
+    if (current.startsWith("/admin")) {
+      const base = import.meta.env.BASE_URL || "/";
+      const redirect = encodeURIComponent(current + window.location.search);
+      window.location.href = `${base}login?redirect=${redirect}&reason=expired`;
+    }
+    return;
+  }
+  // 403 — 토큰 유지. admin 영역이고 admin 메인이 아닐 때만 메인으로 보냄.
+  if (current.startsWith("/admin") && current !== "/admin" && current !== "/admin/") {
     const base = import.meta.env.BASE_URL || "/";
-    // 현재 경로를 redirect 파라미터로 전달
-    const redirect = encodeURIComponent(current + window.location.search);
-    window.location.href = `${base}login?redirect=${redirect}&reason=${status === 401 ? "expired" : "forbidden"}`;
+    window.location.href = `${base}admin?reason=forbidden`;
   }
 };
 

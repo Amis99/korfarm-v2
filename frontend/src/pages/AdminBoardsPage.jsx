@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import AdminLayout from "../components/AdminLayout";
 import Pagination from "../components/Pagination";
 import usePagination from "../hooks/usePagination";
+import { useRequireRole } from "../hooks/useRequireRole";
 import { apiGet, apiPost, apiPatch, apiDelete } from "../utils/adminApi";
 import { camelize } from "../utils/api";
 import "../styles/admin-detail.css";
@@ -25,6 +26,7 @@ const ROLE_OPTIONS = [
 const ROLE_LABEL = Object.fromEntries(ROLE_OPTIONS.map((r) => [r.value, r.label]));
 
 function AdminBoardsPage() {
+  useRequireRole("HQ_ADMIN");
   const [boards, setBoards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");

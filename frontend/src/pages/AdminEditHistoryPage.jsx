@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import AdminLayout from "../components/AdminLayout";
+import { useRequireRole } from "../hooks/useRequireRole";
 import Pagination from "../components/Pagination";
 import usePagination from "../hooks/usePagination";
 import { apiGet } from "../utils/adminApi";
@@ -19,6 +20,7 @@ function formatDate(dt) {
 }
 
 export default function AdminEditHistoryPage() {
+  useRequireRole("HQ_ADMIN");
   const [params, setParams] = useSearchParams();
   const [tab, setTab] = useState(params.get("tab") || "editors");
   const [editors, setEditors] = useState([]);

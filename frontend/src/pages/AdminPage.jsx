@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { apiGet } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
+import { useAuth } from "../hooks/useAuth";
 
 function AdminPage() {
   const [summary, setSummary] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const isHq = (user?.roles || []).includes("HQ_ADMIN");
 
   useEffect(() => {
     apiGet("/v1/admin/dashboard/summary")
@@ -110,21 +113,20 @@ function AdminPage() {
         <div className="admin-card">
           <h2>빠른 이동</h2>
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <Link className="admin-action" to="/admin/orgs">기관 관리</Link>
+            {isHq && <Link className="admin-action" to="/admin/orgs">기관 관리</Link>}
             <Link className="admin-action" to="/admin/students">학생 관리</Link>
             <Link className="admin-action" to="/admin/content">콘텐츠 관리</Link>
-
-            <Link className="admin-action" to="/admin/orgs?tab=payments">결제 관리</Link>
+            {isHq && <Link className="admin-action" to="/admin/orgs?tab=payments">결제 관리</Link>}
           </div>
         </div>
         <div className="admin-card">
           <h2>관리 메뉴</h2>
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
             <Link className="admin-action" to="/admin/study-plans">학습 계획표</Link>
-            <Link className="admin-action" to="/admin/duel?tab=seasons">시즌 관리</Link>
+            {isHq && <Link className="admin-action" to="/admin/duel?tab=seasons">시즌 관리</Link>}
             <Link className="admin-action" to="/admin/shop">상점 관리</Link>
             <Link className="admin-action" to="/admin/reports">보고 관리</Link>
-            <Link className="admin-action" to="/admin/duel">대결 관리</Link>
+            <Link className="admin-action" to={isHq ? "/admin/duel" : "/admin/duel?tab=theme"}>대결 관리</Link>
           </div>
         </div>
       </section>

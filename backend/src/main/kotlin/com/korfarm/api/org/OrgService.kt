@@ -129,7 +129,19 @@ class OrgService(
 
     @Transactional(readOnly = true)
     fun listClassesAdmin(): List<AdminClassView> {
-        val classes = classRepository.findAll()
+        // ORG_ADMIN 은 자기 기관 반만, HQ_ADMIN 은 전체
+        val isHq = SecurityUtils.currentRoles().contains("HQ_ADMIN")
+        val all = classRepository.findAll()
+        val classes = if (isHq) {
+            all
+        } else {
+            val currentUserId = SecurityUtils.currentUserId()
+            val myOrgIds = if (currentUserId != null) {
+                orgMembershipRepository.findByUserIdAndStatus(currentUserId, "active")
+                    .map { it.orgId }.toSet()
+            } else emptySet()
+            all.filter { it.orgId in myOrgIds }
+        }
         val orgIds = classes.map { it.orgId }.distinct()
         val orgMap = if (orgIds.isNotEmpty()) {
             orgRepository.findAllById(orgIds).associateBy { it.id }

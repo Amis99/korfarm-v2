@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import AdminLayout from "../components/AdminLayout";
+import { useRequireRole } from "../hooks/useRequireRole";
 import Toast from "../components/learning-db/Toast";
 import LDBTreePanel from "../components/learning-db/LDBTreePanel";
 import LDBNewFileModal from "../components/learning-db/LDBNewFileModal";
@@ -11,6 +12,7 @@ import {
 import "../styles/learning-db.css";
 
 function AdminLearningDBPage() {
+  useRequireRole("HQ_ADMIN");
   const [meta, setMeta] = useState({ areas: [], kinds: [] });
   const [tree, setTree] = useState(null);
   const [loadingTree, setLoadingTree] = useState(false);

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import AdminLayout from "../components/AdminLayout";
+import { useRequireRole } from "../hooks/useRequireRole";
 import { apiGet } from "../utils/adminApi";
 import Pagination from "../components/Pagination";
 import usePagination from "../hooks/usePagination";
@@ -61,6 +62,7 @@ function normResponse(d) {
 }
 
 export default function AdminAiUsagePage() {
+  useRequireRole("HQ_ADMIN");
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
