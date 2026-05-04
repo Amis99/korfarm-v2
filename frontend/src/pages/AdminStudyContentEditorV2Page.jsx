@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AdminLayout from "../components/AdminLayout";
+import { useAuth } from "../hooks/useAuth";
 import MarkdownEditField from "../components/editor/MarkdownEditField";
 import StudyQuestionCard from "../components/study-editor/StudyQuestionCard";
 import AiPdfImageUploadModal from "../components/study-editor/AiPdfImageUploadModal";
@@ -92,6 +93,8 @@ const LEVEL_OPTIONS = [
 export default function AdminStudyContentEditorV2Page() {
   const { contentId } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const isHq = (user?.roles || []).includes("HQ_ADMIN");
   const isNew = contentId === "new" || !contentId;
 
   // ── 콘텐츠 메타 ──
@@ -548,14 +551,24 @@ export default function AdminStudyContentEditorV2Page() {
             </FormField>
             {meta.visibility === "ORG" && (
               <FormField label="소속 기관">
-                <select
-                  value={meta.ownerOrgId || ""}
-                  onChange={(e) => setMeta({ ...meta, ownerOrgId: e.target.value || null })}
-                  className="study-input"
-                >
-                  <option value="">(자동 — 본인 소속)</option>
-                  {orgs.map(o => <option key={o.orgId || o.id} value={o.orgId || o.id}>{o.name}</option>)}
-                </select>
+                {isHq ? (
+                  <select
+                    value={meta.ownerOrgId || ""}
+                    onChange={(e) => setMeta({ ...meta, ownerOrgId: e.target.value || null })}
+                    className="study-input"
+                  >
+                    <option value="">(자동 — 본인 소속)</option>
+                    {orgs.map(o => <option key={o.orgId || o.id} value={o.orgId || o.id}>{o.name}</option>)}
+                  </select>
+                ) : (
+                  // ORG_ADMIN — 자기 기관 자동 고정 (드롭다운 X)
+                  <input
+                    type="text"
+                    value={(orgs[0]?.name) || "(본인 소속 기관)"}
+                    disabled
+                    className="study-input"
+                  />
+                )}
               </FormField>
             )}
           </div>

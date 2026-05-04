@@ -18,9 +18,13 @@ class AiTestGenController(
     private val fileToMarkdownService: FileToMarkdownService,
     private val objectMapper: com.fasterxml.jackson.databind.ObjectMapper,
 ) {
-    // AI 콘텐츠 생성은 본사 관리자 전용 (전사 콘텐츠 풀에 영향)
-    private fun requireAdmin() {
+    // 전사 콘텐츠 풀에 영향가는 작업(passage·question)은 본사 전용,
+    // 내용 숙지 콘텐츠 작성용 도구(study-question·file-to-markdown 등)는 ORG 도 가능
+    private fun requireHq() {
         AdminGuard.requireAnyRole("HQ_ADMIN")
+    }
+    private fun requireAdmin() {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
     }
     private fun currentUser(): String =
         SecurityUtils.currentUserId()
@@ -29,7 +33,7 @@ class AiTestGenController(
     // ─── 비동기 잡 패턴 (CloudFront 60초 timeout 회피) ───
     @PostMapping("/passage")
     fun genPassage(@RequestBody req: PassageGenRequest): ApiResponse<Map<String, String>> {
-        requireAdmin()
+        requireHq()  // 전사 콘텐츠 풀용 지문 생성
         val userId = currentUser()
         val job = jobService.submitPassage(req, userId)
         return ApiResponse(success = true, data = mapOf("jobId" to job.id, "status" to job.status))
@@ -37,7 +41,7 @@ class AiTestGenController(
 
     @PostMapping("/question")
     fun genQuestion(@RequestBody req: QuestionGenRequest): ApiResponse<Map<String, String>> {
-        requireAdmin()
+        requireHq()  // 전사 콘텐츠 풀용 문항 생성
         val userId = currentUser()
         val job = jobService.submitQuestion(req, userId)
         return ApiResponse(success = true, data = mapOf("jobId" to job.id, "status" to job.status))
