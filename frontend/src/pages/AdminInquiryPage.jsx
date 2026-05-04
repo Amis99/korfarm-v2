@@ -107,7 +107,7 @@ function AdminInquiryPage() {
                     <span style={{ background: "var(--admin-accent-soft)", padding: "1px 8px", borderRadius: 4, fontSize: 11, fontWeight: 700, color: "var(--admin-accent-strong)" }}>비회원</span>
                   </>
                 ) : (
-                  <span>작성자: {detail.authorId}</span>
+                  <span>작성자: <strong style={{ color: "var(--admin-ink)" }}>{detail.authorName || detail.authorId}</strong></span>
                 )}
                 <span>작성일: {formatDate(detail.createdAt)}</span>
               </div>
@@ -137,7 +137,7 @@ function AdminInquiryPage() {
                     }}
                   >
                     <div style={{ fontSize: 13, color: "var(--admin-muted)", marginBottom: 6 }}>
-                      {c.authorId} · {formatDate(c.createdAt)}
+                      {c.authorName || c.authorId} · {formatDate(c.createdAt)}
                     </div>
                     <div style={{ fontSize: 15, lineHeight: 1.7, whiteSpace: "pre-wrap" }}>
                       {c.content}
@@ -218,7 +218,19 @@ function AdminInquiryPage() {
                             <span style={{ marginLeft: 6, fontSize: 12, color: "#999" }}>{post.guestContact}</span>
                             <span style={{ marginLeft: 6, background: "#fff3e0", padding: "1px 6px", borderRadius: 4, fontSize: 10, fontWeight: 700, color: "#e65100" }}>비회원</span>
                           </span>
-                        ) : post.authorId}
+                        ) : (
+                          <span>
+                            <strong style={{ color: "#333" }}>{post.authorName || post.authorId}</strong>
+                            {post.authorPhone && (
+                              <span style={{ marginLeft: 6, fontSize: 12, color: "#666" }}>{post.authorPhone}</span>
+                            )}
+                            {(post.authorSchool || post.authorGrade) && (
+                              <span style={{ marginLeft: 6, fontSize: 11, color: "#999" }}>
+                                {[post.authorSchool, post.authorGrade].filter(Boolean).join(" ")}
+                              </span>
+                            )}
+                          </span>
+                        )}
                       </td>
                       <td style={{ padding: "12px 16px", fontSize: 14, color: "#888" }}>{formatDate(post.createdAt)}</td>
                     </tr>

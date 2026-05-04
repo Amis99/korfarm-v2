@@ -38,7 +38,11 @@ data class PostSummary(
     val reportCount: Int = 0,
     val isGuest: Boolean = false,
     val guestName: String? = null,
-    val guestContact: String? = null
+    val guestContact: String? = null,
+    /** 회원 작성자의 연락처(학생→학부모 우선) — 어드민 문의 관리에서만 채움. */
+    val authorPhone: String? = null,
+    val authorSchool: String? = null,
+    val authorGrade: String? = null
 )
 
 data class PostDetail(
