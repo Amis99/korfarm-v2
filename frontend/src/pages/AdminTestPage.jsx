@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiGet, apiPost, apiDelete } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
+import { useAuth } from "../hooks/useAuth";
 import Pagination from "../components/Pagination";
 import usePagination from "../hooks/usePagination";
 import TestPdfPreviewModal from "../components/admin/TestPdfPreviewModal";
@@ -42,6 +43,8 @@ const KIND_LABEL = {
 
 function AdminTestPage() {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const isHq = (user?.roles || []).includes("HQ_ADMIN");
   const [tests, setTests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [creating, setCreating] = useState(false);
@@ -194,7 +197,8 @@ function AdminTestPage() {
         </button>
       </header>
 
-      {/* 종류 탭 */}
+      {/* 종류 탭 — ORG_ADMIN 은 자기 기관 테스트(기타)만 보이므로 탭 숨김 */}
+      {isHq && (
       <div className="ts-kind-tabs" style={{
         display: "flex", gap: 4, marginBottom: 10,
         borderBottom: "2px solid var(--stroke)",
@@ -223,6 +227,7 @@ function AdminTestPage() {
           );
         })}
       </div>
+      )}
 
       {/* 필터/검색 바 */}
       <div className="ts-filter-bar" style={{
