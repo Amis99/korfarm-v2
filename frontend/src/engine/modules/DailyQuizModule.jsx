@@ -6,6 +6,7 @@ import ChoiceAnalysisCore from "../shared/ChoiceAnalysisCore";
 import QuestionModal from "../shared/QuestionModal";
 import RichText from "../../utils/RichText";
 import PassageMarkdown from "../../utils/PassageMarkdown";
+import { replaceChoiceLetters } from "../../utils/explanationLetters";
 
 // 타이머 규칙 (정답 +20초, 오답 -40초)
 const DEFAULT_SCORING = { correctDeltaSec: 20, wrongDeltaSec: -40 };
@@ -269,6 +270,9 @@ function DailyQuizModule({ content }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   /** completedMap: { [questionId]: { selectedId/filled/..., isCorrect } } */
   const [completedMap, setCompletedMap] = useState({});
+  // CHOICE_COMPLEX_OX 등 ChoiceAnalysisCore 가 셔플한 결과를 부모가 보관 — explanation 의 A/B/C/D 치환에 사용
+  // shape: { [questionId]: [{ id }, ...]  ← 학생이 본 표시 순서대로 }
+  const [choiceShuffleMap, setChoiceShuffleMap] = useState({});
   const [lastResult, setLastResult] = useState(null);
 
   // FILL_BLANKS 진행 상태
@@ -636,6 +640,9 @@ function DailyQuizModule({ content }) {
                     onFail={handleChoiceAnalysisFail}
                     adjustTime={adjustTime}
                     recordAnswer={recordAnswer}
+                    onShuffle={(qid, shuffled) =>
+                      setChoiceShuffleMap((prev) => ({ ...prev, [qid]: shuffled }))
+                    }
                   />
                 ) : (
                   // 완료된 카드 — stem만 표시 (전체 인터랙션은 풀이 끝나서 의미 없음)
@@ -645,7 +652,7 @@ function DailyQuizModule({ content }) {
                 )}
                 {completion && q.explanation && (
                   <div className="cum-card-explanation">
-                    <RichText>{q.explanation}</RichText>
+                    <RichText>{replaceChoiceLetters(q.explanation, choiceShuffleMap[q.id])}</RichText>
                   </div>
                 )}
               </div>

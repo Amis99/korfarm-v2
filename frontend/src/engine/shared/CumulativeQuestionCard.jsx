@@ -3,6 +3,7 @@ import RichText from "../../utils/RichText";
 import PassageMarkdown from "../../utils/PassageMarkdown";
 import QuestionModal from "./QuestionModal";
 import { FEEDBACK } from "./feedbackTimings";
+import { replaceChoiceLetters } from "../../utils/explanationLetters";
 
 /**
  * 누적형(C형) 학습 모듈용 공통 문제 카드 — 시험지 컨셉.
@@ -257,7 +258,7 @@ export default function CumulativeQuestionCard({
 
       {completion && question.explanation && (
         <div className="cum-card-explanation">
-          <RichText>{question.explanation}</RichText>
+          <RichText>{replaceChoiceLetters(question.explanation, shuffledChoices)}</RichText>
         </div>
       )}
 

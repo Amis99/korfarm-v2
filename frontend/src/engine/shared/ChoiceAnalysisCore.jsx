@@ -47,6 +47,7 @@ export default function ChoiceAnalysisCore({
   onFail,
   adjustTime,
   recordAnswer,
+  onShuffle,
 }) {
   const passage = question?.passage || {};
   const paragraphs = useMemo(() => passage.paragraphs || [], [passage]);
@@ -58,6 +59,17 @@ export default function ChoiceAnalysisCore({
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
     return arr;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [question?.id]);
+
+  // 셔플 결과를 부모에게 통지 — 부모가 explanation 의 알파벳 기호를 셔플 번호로 치환할 수 있도록
+  useEffect(() => {
+    if (onShuffle && question?.id) {
+      onShuffle(
+        question.id,
+        choices.map((c) => ({ id: c.choiceId || c.id }))
+      );
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [question?.id]);
   const scoring = question?.scoring || { correctDeltaSec: 20, wrongDeltaSec: -40 };
