@@ -15,21 +15,38 @@ const STUDY_TYPE_LABEL = {
   ESSAY: "서술형",
 };
 
+// 원문자 번호 (1~20). 그 이상은 그냥 숫자.
+const CIRCLED_NUMS = ["①","②","③","④","⑤","⑥","⑦","⑧","⑨","⑩","⑪","⑫","⑬","⑭","⑮","⑯","⑰","⑱","⑲","⑳"];
+const circledNo = (n) => CIRCLED_NUMS[n] || `(${n + 1})`;
+
+// Fisher-Yates shuffle (인쇄할 때마다 다른 순서)
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 // 한 문제 한 세트 — 문제 stem + 선지/답란이 페이지 분할되지 않게 묶음
-function StudyQuestionItem({ q, qi }) {
+function StudyQuestionItem({ q }) {
   const type = (q.questionType || q.type || "").toUpperCase();
   const label = STUDY_TYPE_LABEL[type] || type || "문제";
   const stem = q.stem || q.prompt || q.question || q.title || "";
   const choices = Array.isArray(q.choices) ? q.choices : [];
+  const condition = q.conditionContent || q.condition || "";
 
-  // 한 문제 세트는 페이지 사이에서 잘리지 않도록
+  // 객관식 선지를 매 인쇄마다 셔플 (정답 위치 랜덤화)
+  const shuffledChoices =
+    type === "MULTI_CHOICE" ? shuffleArray(choices) : choices;
+
   const itemStyle = {
     breakInside: "avoid",
     pageBreakInside: "avoid",
     marginBottom: 12,
     fontSize: 13,
   };
-  const stemStyle = { display: "flex", alignItems: "flex-start", gap: 6, lineHeight: 1.6 };
   const labelStyle = {
     display: "inline-block",
     padding: "1px 6px",
@@ -39,35 +56,92 @@ function StudyQuestionItem({ q, qi }) {
     fontSize: 11,
     fontWeight: 600,
     flexShrink: 0,
-    marginTop: 2,
+    marginRight: 6,
+    verticalAlign: "middle",
   };
+
+  // OX 는 stem 바로 뒤에 같은 줄로 작은 박스 표시
+  const isOX = type === "OX";
 
   return (
     <li style={itemStyle}>
-      <div style={stemStyle}>
+      <div style={{ display: "flex", alignItems: "flex-start", gap: 4, lineHeight: 1.6 }}>
         <span style={labelStyle}>{label}</span>
         <div style={{ flex: 1 }}>
-          <PassageMarkdown>{stem}</PassageMarkdown>
+          {/* stem + (OX 인 경우) 작은 O/X 박스 inline */}
+          <PassageMarkdown className="study-stem-md">{stem}</PassageMarkdown>
+          {isOX && (
+            <span style={{ display: "inline-flex", gap: 6, marginLeft: 8, verticalAlign: "middle" }}>
+              <span style={{
+                display: "inline-block",
+                width: 18, height: 18,
+                border: "1.5px solid #333", borderRadius: 4,
+                textAlign: "center", lineHeight: "15px",
+                fontSize: 12, fontWeight: 700,
+              }}>O</span>
+              <span style={{
+                display: "inline-block",
+                width: 18, height: 18,
+                border: "1.5px solid #333", borderRadius: 4,
+                textAlign: "center", lineHeight: "15px",
+                fontSize: 12, fontWeight: 700,
+              }}>X</span>
+            </span>
+          )}
         </div>
       </div>
 
-      {/* 객관식 — 1)2)3) 번호 선지 */}
-      {type === "MULTI_CHOICE" && choices.length > 0 && (
-        <ol style={{ paddingLeft: 28, marginTop: 4, listStyleType: "decimal" }}>
-          {choices.map((c, ci) => (
-            <li key={c.id || ci} style={{ marginBottom: 2 }}>
-              <PassageMarkdown>{c.text || c.label || (typeof c === "string" ? c : "")}</PassageMarkdown>
+      {/* 객관식 — 셔플된 선지 + 원문자 번호 */}
+      {type === "MULTI_CHOICE" && shuffledChoices.length > 0 && (
+        <ul style={{ paddingLeft: 28, marginTop: 4, listStyle: "none" }}>
+          {shuffledChoices.map((c, ci) => (
+            <li key={c.id || ci} style={{ marginBottom: 2, display: "flex", alignItems: "flex-start", gap: 6 }}>
+              <span style={{ fontSize: 14, flexShrink: 0, lineHeight: 1.5 }}>{circledNo(ci)}</span>
+              <div style={{ flex: 1 }}>
+                <PassageMarkdown>{c.text || c.label || (typeof c === "string" ? c : "")}</PassageMarkdown>
+              </div>
             </li>
           ))}
-        </ol>
+        </ul>
       )}
 
-      {/* OX — O · X 큰 박스 */}
-      {type === "OX" && (
-        <div style={{ display: "flex", gap: 16, marginTop: 6, marginLeft: 28 }}>
-          <div style={{ width: 36, height: 36, border: "2px solid #333", borderRadius: 6, textAlign: "center", lineHeight: "32px", fontSize: 18, fontWeight: 700 }}>O</div>
-          <div style={{ width: 36, height: 36, border: "2px solid #333", borderRadius: 6, textAlign: "center", lineHeight: "32px", fontSize: 18, fontWeight: 700 }}>X</div>
-        </div>
+      {/* 서술형 — <조건> 박스 + 답란 */}
+      {type === "ESSAY" && (
+        <>
+          {condition && (
+            <div style={{
+              marginTop: 8, marginLeft: 28,
+              padding: "8px 12px",
+              border: "1.5px solid #555",
+              borderRadius: 4,
+              background: "#fafafa",
+              fontSize: 12,
+              lineHeight: 1.7,
+            }}>
+              <div style={{ fontWeight: 700, fontSize: 11, color: "#555", marginBottom: 4 }}>&lt;조건&gt;</div>
+              <PassageMarkdown>{condition}</PassageMarkdown>
+            </div>
+          )}
+          {q.modelAnswerMasked ? (
+            <div style={{
+              marginTop: 6, marginLeft: 28,
+              padding: 8,
+              border: "1px dashed #999",
+              background: "#fff",
+              fontSize: 13,
+              lineHeight: 1.8,
+              whiteSpace: "pre-wrap",
+            }}>
+              {q.modelAnswerMasked}
+            </div>
+          ) : (
+            <div style={{ marginTop: 6, marginLeft: 28 }}>
+              {[0, 1, 2, 3].map((i) => (
+                <div key={i} style={{ borderBottom: "1px solid #999", height: 22 }} />
+              ))}
+            </div>
+          )}
+        </>
       )}
 
       {/* 단답형 — 한 줄 답란 */}
@@ -78,29 +152,6 @@ function StudyQuestionItem({ q, qi }) {
           marginTop: 6,
           marginLeft: 28,
         }} />
-      )}
-
-      {/* 서술형 — 여러 줄 답란 (modelAnswerMasked 빈칸 형태가 있으면 그대로 표시) */}
-      {type === "ESSAY" && (
-        q.modelAnswerMasked ? (
-          <div style={{
-            marginTop: 6, marginLeft: 28,
-            padding: 8,
-            border: "1px dashed #999",
-            background: "#fafafa",
-            fontSize: 13,
-            lineHeight: 1.8,
-            whiteSpace: "pre-wrap",
-          }}>
-            {q.modelAnswerMasked}
-          </div>
-        ) : (
-          <div style={{ marginTop: 6, marginLeft: 28 }}>
-            {[0, 1, 2, 3].map((i) => (
-              <div key={i} style={{ borderBottom: "1px solid #999", height: 22 }} />
-            ))}
-          </div>
-        )
       )}
     </li>
   );
@@ -225,7 +276,10 @@ export default function AdminPrintContentPage() {
       <style>{`
         .admin-print-host .print-only { display: block !important; }
         @media print { .admin-print-host .no-print { display: none !important; } }
-        .admin-print-host .print-layout + .print-layout { page-break-before: always; }
+        /* 각 학습 콘텐츠가 새 페이지에서 시작 — 첫 콘텐츠 제외, 두 번째부터 page-break */
+        .admin-print-host .print-item + .print-item { page-break-before: always; break-before: page; }
+        /* 문제 stem 을 inline 으로 (OX 박스가 같은 줄에 붙도록) */
+        .admin-print-host .study-stem-md, .admin-print-host .study-stem-md > p { display: inline; margin: 0; }
       `}</style>
       <div className="no-print" style={{ position: "sticky", top: 0, background: "#fff", padding: "8px 16px", borderBottom: "1px solid #eee", display: "flex", gap: 12, alignItems: "center" }}>
         <strong>PDF 인쇄 — {items.length}건</strong>
@@ -237,7 +291,7 @@ export default function AdminPrintContentPage() {
         </button>
       </div>
       {items.map((it, i) => (
-        <div key={`${it.contentId}-${i}`}>
+        <div key={`${it.contentId}-${i}`} className="print-item">
           {it.error ? (
             <div style={{ padding: 24, color: "#c00" }}>
               <strong>{it.contentId}</strong> — 불러오기 실패: {it.error}
