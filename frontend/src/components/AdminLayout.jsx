@@ -18,7 +18,7 @@ const NAV_ITEMS = [
   { to: "/admin/boards", icon: "forum", label: "게시판 관리", roles: ["HQ_ADMIN"] },
   { to: "/admin/boards/chat-archives", icon: "shield", label: "채팅 관리", roles: ["HQ_ADMIN"] },
   { to: "/admin/study-plans", icon: "event_note", label: "학습 계획표" },
-  { to: "/admin/wisdom", icon: "auto_stories", label: "지식과 지혜", roles: ["HQ_ADMIN"] },
+  { to: "/admin/wisdom", icon: "auto_stories", label: "지식과 지혜" },
   { to: "/admin/tests", icon: "assignment", label: "테스트 관리" },
   { to: "/admin/pro", icon: "workspace_premium", label: "프로 모드", roles: ["HQ_ADMIN"] },
   { to: "/admin/learning-db", icon: "database", label: "학습자료 DB", roles: ["HQ_ADMIN"] },

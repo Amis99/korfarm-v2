@@ -5,6 +5,8 @@ import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.contracts.CreateWisdomPostRequest
 import com.korfarm.api.files.FileRepository
 import com.korfarm.api.files.FileService
+import com.korfarm.api.org.OrgMembershipRepository
+import com.korfarm.api.security.SecurityUtils
 import com.korfarm.api.studyplan.StudyPlanCellRepository
 import com.korfarm.api.user.UserRepository
 import org.springframework.beans.factory.annotation.Value
@@ -31,9 +33,37 @@ class WisdomService(
     private val studyPlanCellRepository: StudyPlanCellRepository,
     private val aiFeedbackJobRepository: AiFeedbackJobRepository,
     private val aiFeedbackJobService: AiFeedbackJobService,
+    private val orgMembershipRepository: OrgMembershipRepository,
     @Value("\${app.upload.dir:./uploads}") private val uploadDir: String
 ) {
     private val log = LoggerFactory.getLogger(WisdomService::class.java)
+
+    /**
+     * 어드민 권한 분기 — 호출자가 볼 수 있는 학생 userId set.
+     * - HQ_ADMIN: null 반환 (전체 학생 접근)
+     * - ORG_ADMIN: 자기 기관 멤버 userId set
+     * - 권한 없음: 빈 set
+     */
+    private fun callerAllowedAuthorIds(): Set<String>? {
+        if (SecurityUtils.hasAnyRole("HQ_ADMIN")) return null
+        val adminUserId = SecurityUtils.currentUserId() ?: return emptySet()
+        val adminOrgIds = orgMembershipRepository.findByUserIdAndStatus(adminUserId, "active")
+            .filter { it.role == "ORG_ADMIN" }
+            .map { it.orgId }
+            .toSet()
+        if (adminOrgIds.isEmpty()) return emptySet()
+        return adminOrgIds.flatMap {
+            orgMembershipRepository.findByOrgIdAndStatus(it, "active").map { m -> m.userId }
+        }.toSet()
+    }
+
+    /** post 작성자가 호출자 ORG_ADMIN 의 자기 기관 학생인지 검증 (HQ_ADMIN 통과) */
+    private fun ensureCallerCanAccessAuthor(authorUserId: String) {
+        val allowed = callerAllowedAuthorIds() ?: return
+        if (authorUserId !in allowed) {
+            throw ApiException("FORBIDDEN", "해당 학생의 글에 접근할 권한이 없습니다", HttpStatus.FORBIDDEN)
+        }
+    }
     @Transactional(readOnly = true)
     fun listPosts(levelId: String, topicKey: String?, currentUserId: String?): WisdomPostListResponse {
         // Check if user has written a post in this level+topic (for view restriction)
@@ -251,6 +281,7 @@ class WisdomService(
         val post = postRepository.findById(postId).orElseThrow {
             ApiException("NOT_FOUND", "post not found", HttpStatus.NOT_FOUND)
         }
+        ensureCallerCanAccessAuthor(post.userId)
         post.status = "deleted"
         postRepository.save(post)
     }
@@ -355,7 +386,7 @@ class WisdomService(
 
     @Transactional(readOnly = true)
     fun adminListPosts(levelId: String?, topicKey: String?): List<AdminWisdomPostSummary> {
-        val posts = when {
+        val rawPosts = when {
             levelId != null && topicKey != null ->
                 postRepository.findByLevelIdAndTopicKeyOrderByCreatedAtDesc(levelId, topicKey)
             levelId != null ->
@@ -363,6 +394,9 @@ class WisdomService(
             else ->
                 postRepository.findAll().sortedByDescending { it.createdAt }
         }
+        // ORG_ADMIN 은 자기 기관 학생 글만
+        val allowedAuthors = callerAllowedAuthorIds()
+        val posts = if (allowedAuthors == null) rawPosts else rawPosts.filter { it.userId in allowedAuthors }
         val postIds = posts.map { it.id }
         val feedbackMap = if (postIds.isNotEmpty()) {
             feedbackRepository.findByPostIdIn(postIds).associateBy { it.postId }
@@ -389,6 +423,7 @@ class WisdomService(
         val post = postRepository.findById(postId).orElseThrow {
             ApiException("NOT_FOUND", "post not found", HttpStatus.NOT_FOUND)
         }
+        ensureCallerCanAccessAuthor(post.userId)
         val attachments = attachmentRepository.findByPostId(post.id).map { it.toView() }
         val feedback = feedbackRepository.findByPostId(post.id)?.toView()
 
@@ -425,6 +460,7 @@ class WisdomService(
         val post = postRepository.findById(postId).orElseThrow {
             ApiException("NOT_FOUND", "post not found", HttpStatus.NOT_FOUND)
         }
+        ensureCallerCanAccessAuthor(post.userId)
         val existing = feedbackRepository.findByPostId(postId)
         val savedFeedback = if (existing != null) {
             existing.reviewerId = reviewerId
@@ -521,6 +557,7 @@ class WisdomService(
         val post = postRepository.findById(postId).orElseThrow {
             ApiException("NOT_FOUND", "글을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
         }
+        ensureCallerCanAccessAuthor(post.userId)
         if (post.content.isNullOrBlank()) {
             throw ApiException("NO_CONTENT", "글 내용이 없습니다. 파일 업로드 글은 먼저 OCR 변환이 필요합니다.", HttpStatus.BAD_REQUEST)
         }
@@ -600,11 +637,12 @@ class WisdomService(
 
     @Transactional
     fun ocrAndSaveContent(postId: String, requesterId: String): OcrResult {
+        val post = postRepository.findById(postId).orElseThrow {
+            ApiException("NOT_FOUND", "글을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        ensureCallerCanAccessAuthor(post.userId)
         val result = ocrPost(postId, requesterId)
         if (result.text.isNotBlank()) {
-            val post = postRepository.findById(postId).orElseThrow {
-                ApiException("NOT_FOUND", "글을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
-            }
             post.content = result.text
             postRepository.save(post)
         }
@@ -615,6 +653,23 @@ class WisdomService(
     fun batchAiFeedback(postIds: List<String>, reviewerId: String): List<AiBatchResultItem> {
         // 같은 레벨끼리 묶어 처리 (캐시 적중률 최대화)
         val posts = postRepository.findAllById(postIds).associateBy { it.id }
+        // ORG_ADMIN 은 자기 기관 학생 글만 처리 — 권한 없는 postId 는 skipped 로 표시
+        val allowed = callerAllowedAuthorIds()
+        if (allowed != null) {
+            val filteredPosts = posts.filterValues { it.userId in allowed }
+            val skipped = posts.keys - filteredPosts.keys
+            val results = mutableListOf<AiBatchResultItem>()
+            skipped.forEach { results.add(AiBatchResultItem(it, "skipped", "권한 없음")) }
+            return results + batchAiFeedbackInternal(filteredPosts.keys.toList(), filteredPosts, reviewerId)
+        }
+        return batchAiFeedbackInternal(postIds, posts, reviewerId)
+    }
+
+    private fun batchAiFeedbackInternal(
+        postIds: List<String>,
+        posts: Map<String, WisdomPostEntity>,
+        reviewerId: String
+    ): List<AiBatchResultItem> {
         val sortedIds = postIds
             .mapNotNull { id -> posts[id]?.let { id to it } }
             .sortedBy { it.second.levelId }
