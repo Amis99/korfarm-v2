@@ -173,7 +173,11 @@ function StudyContentPrint({ detail, pages }) {
         </div>
       </header>
       {(pages || []).map((page, pi) => (
-        <section key={page.id || pi} style={{ marginBottom: 18 }}>
+        <section
+          key={page.id || pi}
+          className="study-page"
+          style={{ marginBottom: 18 }}
+        >
           <h2 style={{
             fontSize: 16,
             borderLeft: "4px solid #2f7a3e",
@@ -278,6 +282,8 @@ export default function AdminPrintContentPage() {
         @media print { .admin-print-host .no-print { display: none !important; } }
         /* 각 학습 콘텐츠가 새 페이지에서 시작 — 첫 콘텐츠 제외, 두 번째부터 page-break */
         .admin-print-host .print-item + .print-item { page-break-before: always; break-before: page; }
+        /* 내용 숙지 페이지 1, 2, 3, ... 도 각각 새 페이지에서 시작 — 첫 페이지 제외 */
+        .admin-print-host .study-page + .study-page { page-break-before: always; break-before: page; }
         /* 문제 stem 을 inline 으로 (OX 박스가 같은 줄에 붙도록) */
         .admin-print-host .study-stem-md, .admin-print-host .study-stem-md > p { display: inline; margin: 0; }
       `}</style>
