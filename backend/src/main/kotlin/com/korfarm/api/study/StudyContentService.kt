@@ -285,14 +285,18 @@ class StudyContentService(
         request.errorPatterns?.let { c.errorPatterns = toJson(it) }
         request.status?.let { c.status = it }
 
-        // visibility 변경은 HQ_ADMIN만
+        // visibility 변경은 HQ_ADMIN만 — 단, 같은 값을 재전송한 경우는 변경 X 로 간주해 통과
         if (request.visibility != null) {
-            if (!isHqAdmin()) throw ApiException("FORBIDDEN", "visibility 변경은 본사 관리자만", HttpStatus.FORBIDDEN)
             val v = request.visibility.uppercase()
             if (v !in setOf("PUBLIC", "ORG")) throw ApiException("INVALID", "visibility 잘못됨", HttpStatus.BAD_REQUEST)
-            c.visibility = v
-            if (v == "PUBLIC") c.ownerOrgId = null
-            else c.ownerOrgId = request.ownerOrgId ?: c.ownerOrgId
+            val changing = v != c.visibility ||
+                (v == "ORG" && request.ownerOrgId != null && request.ownerOrgId != c.ownerOrgId)
+            if (changing) {
+                if (!isHqAdmin()) throw ApiException("FORBIDDEN", "visibility 변경은 본사 관리자만", HttpStatus.FORBIDDEN)
+                c.visibility = v
+                if (v == "PUBLIC") c.ownerOrgId = null
+                else c.ownerOrgId = request.ownerOrgId ?: c.ownerOrgId
+            }
         }
 
         studyContentRepository.save(c)
