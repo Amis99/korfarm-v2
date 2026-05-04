@@ -29,7 +29,9 @@ data class DuelRoomPlayerView(
     val levelId: String? = null,
     val wins: Int = 0,
     val losses: Int = 0,
-    val winRate: Double = 0.0
+    val winRate: Double = 0.0,
+    /** AI 플레이어일 때 채팅 이모티콘 file_id (학생 화면에서 EmoticonImage 로 표시). */
+    val aiAvatarFileId: String? = null
 )
 
 data class DuelRoomJoinResult(
@@ -60,7 +62,8 @@ data class DuelPlayerProgress(
     val answered: Int,
     val correctCount: Int = 0,
     val answeredCurrent: Boolean = false,
-    val active: Boolean = true
+    val active: Boolean = true,
+    val aiAvatarFileId: String? = null
 )
 
 data class DuelQuestionView(
@@ -87,7 +90,8 @@ data class DuelMatchResultView(
     val correctCount: Int,
     val answeredCount: Int,
     val totalTimeMs: Long,
-    val rewardAmount: Int
+    val rewardAmount: Int,
+    val aiAvatarFileId: String? = null
 )
 
 data class DuelMatchResultDetailView(

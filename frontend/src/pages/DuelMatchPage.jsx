@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { WS_BASE } from "../utils/api";
 import PassageMarkdown from "../components/PassageMarkdown";
+import EmoticonImage from "../components/chat/EmoticonImage";
 import "../styles/duel.css";
 
 function DuelMatchPage() {
@@ -242,13 +243,18 @@ function DuelMatchPage() {
           const answeredCurrent = p.answered_current ?? p.answeredCurrent;
           const isMe = pid === userId;
           const isAi = pid?.startsWith("ai_player_");
+          const aiAvatarFileId = p.ai_avatar_file_id ?? p.aiAvatarFileId;
           return (
             <div
               key={pid}
               className={`duel-player-avatar${!isActive ? " eliminated" : ""}${answeredCurrent ? " answered" : ""}${isMe ? " me" : ""}${isAi ? " ai" : ""}`}
               title={name}
             >
-              <span className="avatar-letter">{isAi ? "\uD83E\uDD16" : name.charAt(0)}</span>
+              {isAi && aiAvatarFileId ? (
+                <EmoticonImage fileId={aiAvatarFileId} alt={name} className="avatar-emoticon" />
+              ) : (
+                <span className="avatar-letter">{isAi ? "\uD83E\uDD16" : name.charAt(0)}</span>
+              )}
               {answeredCurrent && isActive && <span className="avatar-check">✓</span>}
             </div>
           );

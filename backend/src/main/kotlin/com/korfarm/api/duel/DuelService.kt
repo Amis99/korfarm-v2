@@ -211,7 +211,7 @@ class DuelService(
         duelRoomPlayerRepository.save(userPlayer)
 
         // AI 3명 등록 (isReady=true)
-        AiPlayerService.AI_PLAYERS.forEach { ai ->
+        aiPlayerService.getAllAiPlayers().forEach { ai ->
             val aiPlayer = DuelRoomPlayerEntity(
                 id = IdGenerator.newId("rp"),
                 roomId = room.id,
@@ -833,7 +833,8 @@ class DuelService(
                 levelId = null,
                 wins = 0,
                 losses = 0,
-                winRate = 0.0
+                winRate = 0.0,
+                aiAvatarFileId = aiPlayerService.getAiAvatarFileId(player.userId)
             )
         }
 
@@ -854,6 +855,7 @@ class DuelService(
     }
 
     private fun toMatchResultView(player: DuelMatchPlayerEntity, answeredCount: Int): DuelMatchResultView {
+        val isAi = aiPlayerService.isAiPlayer(player.userId)
         return DuelMatchResultView(
             userId = player.userId,
             userName = getUserName(player.userId),
@@ -862,7 +864,8 @@ class DuelService(
             correctCount = player.correctCount,
             answeredCount = answeredCount,
             totalTimeMs = player.totalTimeMs,
-            rewardAmount = player.rewardAmount
+            rewardAmount = player.rewardAmount,
+            aiAvatarFileId = if (isAi) aiPlayerService.getAiAvatarFileId(player.userId) else null
         )
     }
 

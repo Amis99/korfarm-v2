@@ -4,6 +4,7 @@ import AdminDuelQuestionsPage from "./AdminDuelQuestionsPage";
 import AdminSeasonsPage from "./AdminSeasonsPage";
 import AdminDuelMatchesPage from "./AdminDuelMatchesPage";
 import AdminThemeDuelPage from "./AdminThemeDuelPage";
+import AdminAiPlayersPage from "./AdminAiPlayersPage";
 import { useAuth } from "../hooks/useAuth";
 import "../styles/admin-detail.css";
 
@@ -11,6 +12,7 @@ const HQ_TABS = [
   { key: "questions", label: "문제 풀", icon: "quiz" },
   { key: "matches", label: "매치 기록", icon: "history" },
   { key: "seasons", label: "시즌·랭킹", icon: "leaderboard" },
+  { key: "ai", label: "AI 플레이어", icon: "smart_toy" },
   { key: "theme", label: "테마 대결", icon: "groups" },
 ];
 
@@ -47,6 +49,7 @@ function AdminDuelPage() {
         {tab === "questions" && !isOrgAdminOnly && <AdminDuelQuestionsPage wrap={false} />}
         {tab === "matches" && !isOrgAdminOnly && <AdminDuelMatchesPage wrap={false} />}
         {tab === "seasons" && !isOrgAdminOnly && <AdminSeasonsPage wrap={false} />}
+        {tab === "ai" && !isOrgAdminOnly && <AdminAiPlayersPage wrap={false} />}
         {tab === "theme" && <AdminThemeDuelPage wrap={false} />}
       </div>
     </AdminLayout>

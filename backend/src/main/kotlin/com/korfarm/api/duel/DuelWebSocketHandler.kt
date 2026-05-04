@@ -433,12 +433,15 @@ class DuelWebSocketHandler(
 
         val players = duelService.getMatchPlayers(matchId)
         val progress = players.map {
+            val isAi = aiPlayerService.isAiPlayer(it.userId)
             DuelPlayerProgress(
                 userId = it.userId,
+                userName = if (isAi) aiPlayerService.getAiPlayerName(it.userId) else null,
                 answered = duelService.getAnswerCount(matchId, it.userId),
                 correctCount = duelService.getCorrectCount(matchId, it.userId),
                 answeredCurrent = it.userId in answeredForCurrent,
-                active = it.userId in state.activePlayers
+                active = it.userId in state.activePlayers,
+                aiAvatarFileId = if (isAi) aiPlayerService.getAiAvatarFileId(it.userId) else null
             )
         }
         val matchState = DuelMatchState(

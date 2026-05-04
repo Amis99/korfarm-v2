@@ -35,6 +35,7 @@ interface DuelAnswerRepository : JpaRepository<DuelAnswerEntity, String> {
     fun findByMatchIdAndUserId(matchId: String, userId: String): List<DuelAnswerEntity>
     fun findByMatchId(matchId: String): List<DuelAnswerEntity>
     fun findByMatchIdAndQuestionId(matchId: String, questionId: String): List<DuelAnswerEntity>
+    fun findByQuestionId(questionId: String): List<DuelAnswerEntity>
 }
 
 interface DuelStatRepository : JpaRepository<DuelStatEntity, String> {

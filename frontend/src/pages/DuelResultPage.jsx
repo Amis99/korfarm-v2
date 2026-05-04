@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { apiGet } from "../utils/api";
 import { useAuth } from "../hooks/useAuth";
+import EmoticonImage from "../components/chat/EmoticonImage";
 import "../styles/duel.css";
 
 function DuelResultPage() {
@@ -58,6 +59,7 @@ function DuelResultPage() {
           const isMe = r.userId === userId;
           const isWinner = r.rankPosition === 1;
           const isAi = r.userId?.startsWith("ai_player_");
+          const aiAvatarFileId = r.ai_avatar_file_id ?? r.aiAvatarFileId;
           const answered = r.answeredCount ?? 0;
           return (
             <div
@@ -69,7 +71,11 @@ function DuelResultPage() {
               </div>
               <div className="duel-result-player">
                 <div className="name">
-                  {isAi && <span style={{ marginRight: 4 }}>{"\uD83E\uDD16"}</span>}
+                  {isAi && (aiAvatarFileId ? (
+                    <EmoticonImage fileId={aiAvatarFileId} alt={r.userName || "AI"} className="result-ai-avatar" />
+                  ) : (
+                    <span style={{ marginRight: 4 }}>{"\uD83E\uDD16"}</span>
+                  ))}
                   {r.userName || "참가자"}
                   {isMe && " (나)"}
                 </div>

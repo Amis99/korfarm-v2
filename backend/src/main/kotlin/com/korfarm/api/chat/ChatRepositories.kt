@@ -67,6 +67,7 @@ interface ChatAttachmentArchiveRepository : JpaRepository<ChatAttachmentArchiveE
 @Repository
 interface ChatEmoticonRepository : JpaRepository<ChatEmoticonEntity, String> {
     fun findByStatusOrderBySortOrderAscCreatedAtAsc(status: String): List<ChatEmoticonEntity>
+    fun findByStatusOrderBySeriesAscSortOrderAsc(status: String): List<ChatEmoticonEntity>
 }
 
 @Repository
