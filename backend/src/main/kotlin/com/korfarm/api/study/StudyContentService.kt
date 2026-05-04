@@ -198,7 +198,7 @@ class StudyContentService(
     fun getForAdmin(contentId: String, userId: String): StudyContentDetail {
         val c = studyContentRepository.findById(contentId).orElse(null)
             ?: throw ApiException("NOT_FOUND", "콘텐츠 없음", HttpStatus.NOT_FOUND)
-        ensureAdminCanAccess(c, userId)
+        ensureAdminCanRead(c, userId)
         val qs = studyQuestionRepository.findAllByContentIdOrderByQuestionNoAsc(contentId)
         return toContentDetail(c, qs)
     }
@@ -206,6 +206,18 @@ class StudyContentService(
     private fun ensureAdminCanAccess(c: StudyContentEntity, userId: String) {
         if (isHqAdmin()) return
         if (isOrgAdmin()) {
+            val orgId = currentUserOrgId(userId)
+            if (orgId != null && c.ownerOrgId == orgId) return
+        }
+        throw ApiException("FORBIDDEN", "접근 권한 없음", HttpStatus.FORBIDDEN)
+    }
+
+    // 읽기 전용 게이트 — 미리보기·인쇄·검수용. ORG_ADMIN 이 PUBLIC 콘텐츠도 read 가능.
+    // (write 권한은 ensureAdminCanAccess 가 담당)
+    private fun ensureAdminCanRead(c: StudyContentEntity, userId: String) {
+        if (isHqAdmin()) return
+        if (isOrgAdmin()) {
+            if (c.visibility == "PUBLIC") return
             val orgId = currentUserOrgId(userId)
             if (orgId != null && c.ownerOrgId == orgId) return
         }
@@ -432,7 +444,7 @@ class StudyContentService(
     fun listPages(contentId: String, userId: String): List<StudyPageDto> {
         val c = studyContentRepository.findById(contentId).orElse(null)
             ?: throw ApiException("NOT_FOUND", "콘텐츠 없음", HttpStatus.NOT_FOUND)
-        ensureAdminCanAccess(c, userId)
+        ensureAdminCanRead(c, userId)
         val pages = studyPageRepository.findAllByContentIdOrderByPageNoAsc(contentId)
         val allQuestions = studyQuestionRepository.findAllByContentIdOrderByQuestionNoAsc(contentId)
             .groupBy { it.pageId }
