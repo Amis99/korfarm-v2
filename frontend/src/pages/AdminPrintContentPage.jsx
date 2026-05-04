@@ -4,11 +4,110 @@ import { apiGet } from "../utils/api";
 import { apiGetCamel } from "../utils/adminApi";
 import { normalizeModuleKey } from "../constants/contentTypes";
 import PrintLayout from "../engine/core/PrintLayout";
+import PassageMarkdown from "../components/PassageMarkdown";
 import "../styles/learning-engine.css";
+
+// 문제 유형 라벨 — study question 의 questionType 은 대문자
+const STUDY_TYPE_LABEL = {
+  MULTI_CHOICE: "객관식",
+  OX: "OX",
+  SHORT_ANSWER: "단답형",
+  ESSAY: "서술형",
+};
+
+// 한 문제 한 세트 — 문제 stem + 선지/답란이 페이지 분할되지 않게 묶음
+function StudyQuestionItem({ q, qi }) {
+  const type = (q.questionType || q.type || "").toUpperCase();
+  const label = STUDY_TYPE_LABEL[type] || type || "문제";
+  const stem = q.stem || q.prompt || q.question || q.title || "";
+  const choices = Array.isArray(q.choices) ? q.choices : [];
+
+  // 한 문제 세트는 페이지 사이에서 잘리지 않도록
+  const itemStyle = {
+    breakInside: "avoid",
+    pageBreakInside: "avoid",
+    marginBottom: 12,
+    fontSize: 13,
+  };
+  const stemStyle = { display: "flex", alignItems: "flex-start", gap: 6, lineHeight: 1.6 };
+  const labelStyle = {
+    display: "inline-block",
+    padding: "1px 6px",
+    background: "#eef2e8",
+    color: "#2f7a3e",
+    borderRadius: 3,
+    fontSize: 11,
+    fontWeight: 600,
+    flexShrink: 0,
+    marginTop: 2,
+  };
+
+  return (
+    <li style={itemStyle}>
+      <div style={stemStyle}>
+        <span style={labelStyle}>{label}</span>
+        <div style={{ flex: 1 }}>
+          <PassageMarkdown>{stem}</PassageMarkdown>
+        </div>
+      </div>
+
+      {/* 객관식 — 1)2)3) 번호 선지 */}
+      {type === "MULTI_CHOICE" && choices.length > 0 && (
+        <ol style={{ paddingLeft: 28, marginTop: 4, listStyleType: "decimal" }}>
+          {choices.map((c, ci) => (
+            <li key={c.id || ci} style={{ marginBottom: 2 }}>
+              <PassageMarkdown>{c.text || c.label || (typeof c === "string" ? c : "")}</PassageMarkdown>
+            </li>
+          ))}
+        </ol>
+      )}
+
+      {/* OX — O · X 큰 박스 */}
+      {type === "OX" && (
+        <div style={{ display: "flex", gap: 16, marginTop: 6, marginLeft: 28 }}>
+          <div style={{ width: 36, height: 36, border: "2px solid #333", borderRadius: 6, textAlign: "center", lineHeight: "32px", fontSize: 18, fontWeight: 700 }}>O</div>
+          <div style={{ width: 36, height: 36, border: "2px solid #333", borderRadius: 6, textAlign: "center", lineHeight: "32px", fontSize: 18, fontWeight: 700 }}>X</div>
+        </div>
+      )}
+
+      {/* 단답형 — 한 줄 답란 */}
+      {type === "SHORT_ANSWER" && (
+        <div style={{
+          borderBottom: "1px solid #555",
+          height: 24,
+          marginTop: 6,
+          marginLeft: 28,
+        }} />
+      )}
+
+      {/* 서술형 — 여러 줄 답란 (modelAnswerMasked 빈칸 형태가 있으면 그대로 표시) */}
+      {type === "ESSAY" && (
+        q.modelAnswerMasked ? (
+          <div style={{
+            marginTop: 6, marginLeft: 28,
+            padding: 8,
+            border: "1px dashed #999",
+            background: "#fafafa",
+            fontSize: 13,
+            lineHeight: 1.8,
+            whiteSpace: "pre-wrap",
+          }}>
+            {q.modelAnswerMasked}
+          </div>
+        ) : (
+          <div style={{ marginTop: 6, marginLeft: 28 }}>
+            {[0, 1, 2, 3].map((i) => (
+              <div key={i} style={{ borderBottom: "1px solid #999", height: 22 }} />
+            ))}
+          </div>
+        )
+      )}
+    </li>
+  );
+}
 
 // 내용 숙지 콘텐츠 인쇄 — 페이지별 본문 + 4유형 문제
 function StudyContentPrint({ detail, pages }) {
-  const TYPE_LABEL = { mcq: "객관식", ox: "OX", short: "단답", essay: "서술" };
   return (
     <div className="print-only print-layout">
       <header style={{ borderBottom: "2px solid #333", paddingBottom: 6, marginBottom: 12 }}>
@@ -23,42 +122,26 @@ function StudyContentPrint({ detail, pages }) {
         </div>
       </header>
       {(pages || []).map((page, pi) => (
-        <section key={page.id || pi} style={{ pageBreakInside: "avoid", marginBottom: 18 }}>
-          <h2 style={{ fontSize: 16, borderLeft: "4px solid #2f7a3e", paddingLeft: 8, margin: "16px 0 8px" }}>
+        <section key={page.id || pi} style={{ marginBottom: 18 }}>
+          <h2 style={{
+            fontSize: 16,
+            borderLeft: "4px solid #2f7a3e",
+            paddingLeft: 8,
+            margin: "16px 0 8px",
+            breakInside: "avoid",
+            pageBreakAfter: "avoid",
+          }}>
             페이지 {pi + 1}{page.title ? ` — ${page.title}` : ""}
           </h2>
           {page.markdown && (
-            <div style={{ whiteSpace: "pre-wrap", fontSize: 13, lineHeight: 1.7, marginBottom: 10 }}>
-              {page.markdown}
+            <div style={{ fontSize: 13, lineHeight: 1.7, marginBottom: 10 }}>
+              <PassageMarkdown>{page.markdown}</PassageMarkdown>
             </div>
           )}
           {Array.isArray(page.questions) && page.questions.length > 0 && (
-            <ol style={{ paddingLeft: 22 }}>
+            <ol style={{ paddingLeft: 22, listStyleType: "decimal" }}>
               {page.questions.map((q, qi) => (
-                <li key={q.id || qi} style={{ marginBottom: 8, fontSize: 12 }}>
-                  <div>
-                    <span style={{ display: "inline-block", padding: "1px 6px", background: "#eef2e8", borderRadius: 3, fontSize: 10, marginRight: 6 }}>
-                      {TYPE_LABEL[q.type] || q.type}
-                    </span>
-                    {q.prompt || q.question || q.title}
-                  </div>
-                  {Array.isArray(q.choices) && q.choices.length > 0 && (
-                    <ol style={{ paddingLeft: 18, fontSize: 12, marginTop: 2 }}>
-                      {q.choices.map((c, ci) => (
-                        <li key={c.id || ci}>{c.text || c.label || (typeof c === "string" ? c : "")}</li>
-                      ))}
-                    </ol>
-                  )}
-                  {q.type === "ox" && (
-                    <div style={{ fontSize: 11, color: "#666", marginTop: 2 }}>O / X</div>
-                  )}
-                  {(q.type === "short" || q.type === "essay") && (
-                    <div style={{
-                      borderBottom: "1px solid #999", height: q.type === "essay" ? 60 : 18,
-                      marginTop: 4,
-                    }} />
-                  )}
-                </li>
+                <StudyQuestionItem key={q.id || qi} q={q} qi={qi} />
               ))}
             </ol>
           )}
