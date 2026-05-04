@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import AdminLayout from "../components/AdminLayout";
+import { useRequireRole } from "../hooks/useRequireRole";
 import Pagination from "../components/Pagination";
 import usePagination from "../hooks/usePagination";
 import { apiGet, apiPost, apiPatch } from "../utils/adminApi";
@@ -17,6 +18,7 @@ const TABS = [
 ];
 
 function AdminChatArchivesPage() {
+  useRequireRole("HQ_ADMIN");
   const [activeTab, setActiveTab] = useState("archives");
   const [archives, setArchives] = useState([]);
   const [mutes, setMutes] = useState([]);

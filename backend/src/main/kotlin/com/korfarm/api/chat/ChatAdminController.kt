@@ -25,13 +25,13 @@ class ChatAdminController(
 
     @GetMapping("/rooms/{roomId}/archives")
     fun listArchives(@PathVariable roomId: String): ApiResponse<List<ArchiveListItem>> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         return ApiResponse(success = true, data = chatService.listArchives(roomId))
     }
 
     @GetMapping("/archives/{archiveId}/download")
     fun downloadArchive(@PathVariable archiveId: String): ResponseEntity<Resource> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         val archive = chatService.getArchiveForDownload(archiveId)
         val path = Paths.get(archive.zipPath)
         if (!Files.exists(path)) {
@@ -48,7 +48,7 @@ class ChatAdminController(
 
     @GetMapping("/rooms/{roomId}/mutes")
     fun listMutes(@PathVariable roomId: String): ApiResponse<List<MutedUserView>> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         return ApiResponse(success = true, data = chatService.listMutes(roomId))
     }
 
@@ -57,7 +57,7 @@ class ChatAdminController(
         @PathVariable roomId: String,
         @RequestBody request: MuteUserRequest
     ): ApiResponse<MutedUserView> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         return ApiResponse(success = true, data = chatService.muteUser(roomId, adminId(), request))
     }
 
@@ -66,7 +66,7 @@ class ChatAdminController(
         @PathVariable roomId: String,
         @PathVariable userId: String
     ): ApiResponse<Map<String, Any>> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         chatService.unmuteUser(roomId, userId)
         return ApiResponse(success = true, data = mapOf("userId" to userId, "status" to "unmuted"))
     }
@@ -75,19 +75,19 @@ class ChatAdminController(
 
     @GetMapping("/emoticons")
     fun listEmoticons(): ApiResponse<List<EmoticonView>> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         return ApiResponse(success = true, data = chatService.listEmoticons())
     }
 
     @PostMapping("/emoticons")
     fun createEmoticon(@RequestBody request: CreateEmoticonRequest): ApiResponse<EmoticonView> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         return ApiResponse(success = true, data = chatService.createEmoticon(adminId(), request))
     }
 
     @DeleteMapping("/emoticons/{emoticonId}")
     fun deleteEmoticon(@PathVariable emoticonId: String): ApiResponse<Map<String, Any>> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         chatService.deleteEmoticon(emoticonId)
         return ApiResponse(success = true, data = mapOf("emoticonId" to emoticonId, "status" to "deleted"))
     }
@@ -97,7 +97,7 @@ class ChatAdminController(
         @PathVariable emoticonId: String,
         @RequestBody request: UpdateEmoticonRequest
     ): ApiResponse<EmoticonView> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         return ApiResponse(success = true, data = chatService.updateEmoticon(emoticonId, request))
     }
 }

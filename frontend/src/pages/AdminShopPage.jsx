@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { apiPost, apiPatch, apiDelete } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
+import { useRequireRole } from "../hooks/useRequireRole";
 import AdminLayout from "../components/AdminLayout";
 import Pagination from "../components/Pagination";
 import usePagination from "../hooks/usePagination";
@@ -406,6 +407,7 @@ function ShopOrdersTab() {
 /* ── 메인 페이지 ── */
 
 function AdminShopPage() {
+  useRequireRole("HQ_ADMIN");
   const [params, setParams] = useSearchParams();
   const tab = params.get("tab") || "products";
 
