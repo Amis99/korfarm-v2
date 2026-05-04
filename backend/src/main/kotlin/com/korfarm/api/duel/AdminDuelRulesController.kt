@@ -26,13 +26,16 @@ class AdminDuelRulesController(
     companion object {
         const val DEFAULT_ID = "default"
 
-        /** 기본 룰 — DB 에 행이 없거나 일부 키가 누락된 경우 채워 넣을 값. 키·값 모두 한국어 */
+        /** 기본 룰 — DB 에 행이 없거나 일부 키가 누락된 경우 채워 넣을 값. 키·값 모두 한국어
+         *  ※ 실제 코드 동작과 일치하도록 작성. (이전 default 의 dead value 정정)
+         */
         val DEFAULTS: Map<String, Any?> = mapOf(
             "매치 규칙" to mapOf(
-                "한 매치당 문제 수" to 10,
-                "문제 한 개 제한 시간 (초)" to 30,
-                "전체 매치 제한 시간 (초)" to 300,
+                "출제 방식" to "해당 서버 문제 풀 전체에서 랜덤 셔플 (개수 제한 없음)",
+                "문제 한 개 제한 시간" to "문제별 timeLimitSec 우선, 미지정 시 30초",
+                "전체 매치 제한 시간" to "없음 — 탈락제로 자연 종료",
                 "득점 방식" to "탈락제 (틀린 사람 즉시 탈락, 최후 1인까지)",
+                "테마 모드 종료" to "풀 소진 시 살아남은 모두 공동 우승",
                 "동점 시 우선 순위" to "정답 수 많은 순 → 응답 시간 빠른 순"
             ),
             "AI 플레이어" to mapOf(
