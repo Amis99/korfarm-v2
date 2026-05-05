@@ -35,6 +35,12 @@ class OrgEntity(
     @Column(name = "logo_file_id")
     var logoFileId: String? = null,
 
+    @Column(name = "monthly_base_fee_override")
+    var monthlyBaseFeeOverride: Int? = null,
+
+    @Column(name = "billing_suspended", nullable = false)
+    var billingSuspended: Boolean = false,
+
     @Column(name = "seat_limit", nullable = false)
     var seatLimit: Int = 0,
 

@@ -21,6 +21,8 @@ data class AdminOrgView(
     val addressRegion: String?,
     val addressDetail: String?,
     val logoFileId: String?,
+    val monthlyBaseFeeOverride: Int?,
+    val billingSuspended: Boolean,
     val seatLimit: Int,
     val admins: List<AdminOrgAdminView>,
     val status: String

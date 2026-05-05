@@ -17,7 +17,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 
 @Configuration
 class SecurityConfig(
-    private val jwtProperties: JwtProperties
+    private val jwtProperties: JwtProperties,
+    private val orgBillingSuspensionFilter: com.korfarm.api.billing.OrgBillingSuspensionFilter,
 ) {
     @Bean
     fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
@@ -58,6 +59,8 @@ class SecurityConfig(
             it.anyRequest().authenticated()
         }
         http.addFilterBefore(JwtAuthenticationFilter(jwtService), UsernamePasswordAuthenticationFilter::class.java)
+        // ORG_ADMIN 미결제 정지 필터 — JWT 인증 후, 컨트롤러 진입 전
+        http.addFilterAfter(orgBillingSuspensionFilter, JwtAuthenticationFilter::class.java)
         return http.build()
     }
 }

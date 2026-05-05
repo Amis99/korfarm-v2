@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { useOrgBillingStatus, daysUntil } from "../hooks/useOrgBillingStatus";
 import "../styles/admin.css";
 
 // roles 미지정 = HQ_ADMIN + ORG_ADMIN 둘 다 (자기 기관 한정으로 운영)
@@ -30,7 +31,9 @@ const NAV_ITEMS = [
   { to: "/admin/reports", icon: "flag", label: "보고", roles: ["HQ_ADMIN"] },
   { to: "/admin/org-settings", icon: "settings", label: "기관 설정", roles: ["ORG_ADMIN"] },
   { to: "/admin/grapefruit-wallet", icon: "nutrition", label: "AI 자몽 지갑", roles: ["ORG_ADMIN"] },
+  { to: "/admin/billing", icon: "receipt_long", label: "월 사용료", roles: ["ORG_ADMIN"] },
   { to: "/admin/grapefruit-pricing", icon: "savings", label: "AI 자몽 단가", roles: ["HQ_ADMIN"] },
+  { to: "/admin/all-billings", icon: "payments", label: "기관 청구 관리", roles: ["HQ_ADMIN"] },
   { to: "/", icon: "home", label: "랜딩" },
   { to: "/start", icon: "play_arrow", label: "스타트" },
 ];
@@ -40,6 +43,10 @@ function AdminLayout({ children }) {
   const location = useLocation();
   const { user } = useAuth();
   const userRoles = user?.roles || [];
+  const billingStatus = useOrgBillingStatus();
+  const dueDays = billingStatus?.nextDueAt ? daysUntil(billingStatus.nextDueAt) : null;
+  const showSuspendedBanner = !!billingStatus?.suspended;
+  const showImminentBanner = !showSuspendedBanner && billingStatus?.pendingCount > 0 && dueDays != null && dueDays <= 7 && dueDays >= 0;
 
   // 메뉴별 권한 분기 — roles 미지정은 HQ + ORG 공통, roles 명시는 그 역할만
   const visibleNavItems = NAV_ITEMS.filter((item) => {
@@ -110,6 +117,16 @@ function AdminLayout({ children }) {
               <span className="material-symbols-outlined">menu</span>
             </button>
           </div>
+          {showSuspendedBanner && (
+            <div style={{ padding: "12px 16px", background: "#f8d7da", color: "#721c24", borderRadius: 6, marginBottom: 12, fontWeight: 600 }}>
+              ⛔ 월 사용료 미결제로 기관 관리 기능이 정지되었습니다. <Link to="/admin/billing" style={{ color: "#721c24", textDecoration: "underline" }}>월 사용료 결제</Link> 후 다시 이용해 주세요.
+            </div>
+          )}
+          {showImminentBanner && (
+            <div style={{ padding: "10px 16px", background: "#fff3cd", color: "#856404", borderRadius: 6, marginBottom: 12 }}>
+              ⏰ 결제 마감 {dueDays === 0 ? "당일" : `${dueDays}일 전`}입니다. 미결제 시 다음 날부터 기관 관리 기능이 정지됩니다. <Link to="/admin/billing" style={{ color: "#856404", textDecoration: "underline" }}>월 사용료 결제하기</Link>
+            </div>
+          )}
           {children}
         </main>
       </div>

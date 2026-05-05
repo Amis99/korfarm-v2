@@ -121,6 +121,8 @@ class OrgService(
                 addressRegion = org.addressRegion,
                 addressDetail = org.addressDetail,
                 logoFileId = org.logoFileId,
+                monthlyBaseFeeOverride = org.monthlyBaseFeeOverride,
+                billingSuspended = org.billingSuspended,
                 seatLimit = org.seatLimit,
                 admins = admins,
                 status = org.status
@@ -387,6 +389,8 @@ class OrgService(
             addressRegion = org.addressRegion,
             addressDetail = org.addressDetail,
             logoFileId = org.logoFileId,
+            monthlyBaseFeeOverride = org.monthlyBaseFeeOverride,
+            billingSuspended = org.billingSuspended,
             seatLimit = org.seatLimit,
             admins = admins,
             status = org.status
