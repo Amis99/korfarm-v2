@@ -1,4 +1,5 @@
 import { Link, useSearchParams } from "react-router-dom";
+import SiteFooter from "../components/SiteFooter";
 import "../styles/commerce.css";
 
 function PaymentFailPage() {
@@ -7,8 +8,9 @@ function PaymentFailPage() {
   const message = params.get("message") || "결제가 취소되었거나 실패했습니다.";
 
   return (
-    <div className="payment-page">
-      <div className="payment-card">
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <div className="payment-page" style={{ flex: 1 }}>
+        <div className="payment-card">
         <span className="material-symbols-outlined" style={{ fontSize: "48px", color: "#e74c3c" }}>
           cancel
         </span>
@@ -26,7 +28,9 @@ function PaymentFailPage() {
             홈으로
           </Link>
         </div>
+        </div>
       </div>
+      <SiteFooter />
     </div>
   );
 }

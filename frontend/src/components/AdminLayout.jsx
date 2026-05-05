@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useOrgBillingStatus, daysUntil } from "../hooks/useOrgBillingStatus";
+import SiteFooter from "./SiteFooter";
 import "../styles/admin.css";
 
 // roles 미지정 = HQ_ADMIN + ORG_ADMIN 둘 다 (자기 기관 한정으로 운영)
@@ -129,6 +130,7 @@ function AdminLayout({ children }) {
             </div>
           )}
           {children}
+          <SiteFooter compact />
         </main>
       </div>
     </div>

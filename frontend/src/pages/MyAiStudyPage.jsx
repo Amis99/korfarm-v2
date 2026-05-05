@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { apiGet, apiPost } from "../utils/api";
+import SiteFooter from "../components/SiteFooter";
 import "../styles/admin.css";
 
 const LEVELS = [
@@ -210,6 +211,7 @@ export default function MyAiStudyPage() {
           </tbody>
         </table>
       )}
+      <SiteFooter />
     </div>
   );
 }

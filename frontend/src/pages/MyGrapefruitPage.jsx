@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { apiGet, apiPost } from "../utils/api";
+import SiteFooter from "../components/SiteFooter";
 import "../styles/admin.css";
 
 const PRESET = [
@@ -149,6 +150,7 @@ export default function MyGrapefruitPage() {
           </tbody>
         </table>
       )}
+      <SiteFooter />
     </div>
   );
 }

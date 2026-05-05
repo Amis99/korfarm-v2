@@ -112,6 +112,7 @@ const FaqPage = lazy(() => import("./pages/FaqPage"));
 const PricingDetailPage = lazy(() => import("./pages/PricingPage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
+const RefundPolicyPage = lazy(() => import("./pages/RefundPolicyPage"));
 // AdminDuelQuestionsPage는 AdminDuelPage 내부에서 직접 import됨
 const AdminInquiryPage = lazy(() => import("./pages/AdminInquiryPage"));
 const InquiryPage = lazy(() => import("./pages/InquiryPage"));
@@ -205,6 +206,7 @@ function App() {
           <Route path="/pricing" element={<PricingDetailPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/refund-policy" element={<RefundPolicyPage />} />
           <Route path="/inquiry" element={<InquiryPage />} />
 
           {/* 인증 필요 페이지 */}
