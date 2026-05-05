@@ -16,6 +16,7 @@ const NAV_ITEMS = [
   { to: "/admin/parents", icon: "family_restroom", label: "학부모 관리" },
   { to: "/admin/content", icon: "menu_book", label: "콘텐츠" },
   { to: "/admin/study-content", icon: "auto_stories", label: "내용 숙지" },
+  { to: "/admin/own-study-contents", icon: "group", label: "학생 생성 학습", roles: ["HQ_ADMIN"] },
   { to: "/admin/boards", icon: "forum", label: "게시판 관리", roles: ["HQ_ADMIN"] },
   { to: "/admin/boards/chat-archives", icon: "shield", label: "채팅 관리", roles: ["HQ_ADMIN"] },
   { to: "/admin/study-plans", icon: "event_note", label: "학습 계획표" },

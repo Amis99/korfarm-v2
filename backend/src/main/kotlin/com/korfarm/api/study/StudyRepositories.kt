@@ -26,6 +26,14 @@ interface StudyContentRepository : JpaRepository<StudyContentEntity, String> {
         "ORDER BY s.createdAt DESC"
     )
     fun findVisibleForStudentNoOrg(): List<StudyContentEntity>
+
+    fun findAllByVisibilityAndCreatorIdAndStatusOrderByCreatedAtDesc(
+        visibility: String, creatorId: String, status: String
+    ): List<StudyContentEntity>
+
+    fun findAllByVisibilityAndStatusOrderByCreatedAtDesc(
+        visibility: String, status: String
+    ): List<StudyContentEntity>
 }
 
 interface StudyPageRepository : JpaRepository<StudyPageEntity, String> {

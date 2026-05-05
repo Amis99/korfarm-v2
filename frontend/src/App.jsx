@@ -91,6 +91,8 @@ const AdminGrapefruitWalletPage = lazy(() => import("./pages/AdminGrapefruitWall
 const AdminOrgBillingPage = lazy(() => import("./pages/AdminOrgBillingPage"));
 const AdminAllOrgBillingPage = lazy(() => import("./pages/AdminAllOrgBillingPage"));
 const MyGrapefruitPage = lazy(() => import("./pages/MyGrapefruitPage"));
+const MyAiStudyPage = lazy(() => import("./pages/MyAiStudyPage"));
+const AdminOwnStudyContentsPage = lazy(() => import("./pages/AdminOwnStudyContentsPage"));
 const AdminWisdomPage = lazy(() => import("./pages/AdminWisdomPage"));
 const AdminWisdomDetailPage = lazy(() => import("./pages/AdminWisdomDetailPage"));
 const AdminTestPage = lazy(() => import("./pages/AdminTestPage"));
@@ -299,6 +301,8 @@ function App() {
           <Route path="/admin/billing" element={A(<AdminOrgBillingPage />)} />
           <Route path="/admin/all-billings" element={A(<AdminAllOrgBillingPage />)} />
           <Route path="/my/grapefruit" element={A(<MyGrapefruitPage />)} />
+          <Route path="/my/ai-study" element={A(<MyAiStudyPage />)} />
+          <Route path="/admin/own-study-contents" element={A(<AdminOwnStudyContentsPage />)} />
           <Route path="/admin/wisdom" element={A(<AdminWisdomPage />)} />
           <Route path="/admin/wisdom/:postId" element={A(<AdminWisdomDetailPage />)} />
           {/* 학습 계획표 셀에서 진입하는 표준 경로 */}

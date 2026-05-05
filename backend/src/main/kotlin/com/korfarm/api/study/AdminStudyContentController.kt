@@ -29,6 +29,13 @@ class AdminStudyContentController(
         return ApiResponse(success = true, data = studyContentService.listForAdmin(userId))
     }
 
+    /** 본사 — 학생들이 만든 OWN 학습 검수 목록 (Phase C-2) */
+    @GetMapping("/contents/own")
+    fun listOwnContents(): ApiResponse<List<StudyContentSummary>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        return ApiResponse(success = true, data = studyContentService.listOwnContentsForHq())
+    }
+
     @GetMapping("/contents/{contentId}")
     fun getContent(@PathVariable contentId: String): ApiResponse<StudyContentDetail> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")

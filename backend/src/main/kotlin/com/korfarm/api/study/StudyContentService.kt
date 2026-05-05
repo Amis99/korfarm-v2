@@ -215,13 +215,83 @@ class StudyContentService(
     // 읽기 전용 게이트 — 미리보기·인쇄·검수용. ORG_ADMIN 이 PUBLIC 콘텐츠도 read 가능.
     // (write 권한은 ensureAdminCanAccess 가 담당)
     private fun ensureAdminCanRead(c: StudyContentEntity, userId: String) {
-        if (isHqAdmin()) return
+        if (isHqAdmin()) return  // HQ 는 OWN 도 검수 가능
         if (isOrgAdmin()) {
             if (c.visibility == "PUBLIC") return
             val orgId = currentUserOrgId(userId)
             if (orgId != null && c.ownerOrgId == orgId) return
         }
         throw ApiException("FORBIDDEN", "접근 권한 없음", HttpStatus.FORBIDDEN)
+    }
+
+    // ─────────────────────────────────────────────
+    // 학생 — 본인 AI 학습 생성 (Phase C-2)
+    // visibility='OWN', ownerOrgId=null, creatorId=학생
+    // ─────────────────────────────────────────────
+    @Transactional
+    fun createForUser(request: StudyContentCreateRequest, userId: String): StudyContentDetail {
+        if (request.title.isBlank()) throw ApiException("INVALID", "제목 필수", HttpStatus.BAD_REQUEST)
+        if (request.markdown.isBlank()) throw ApiException("INVALID", "본문 필수", HttpStatus.BAD_REQUEST)
+        val entity = StudyContentEntity(
+            id = IdGenerator.newId("study"),
+            title = request.title,
+            description = request.description,
+            levelId = request.levelId,
+            area = request.area,
+            subArea = request.subArea,
+            sourceType = request.sourceType.ifBlank { "manual" },
+            sourceFileUrl = request.sourceFileUrl,
+            sourceFileName = request.sourceFileName,
+            sourceFileHash = request.sourceFileHash,
+            sourceFileSizeBytes = request.sourceFileSizeBytes,
+            visibility = "OWN",
+            ownerOrgId = null,
+            creatorId = userId,
+            markdown = request.markdown,
+            evalPoints = toJson(request.evalPoints),
+            errorPatterns = toJson(request.errorPatterns),
+            questionCount = 0,
+            status = "active",
+        )
+        studyContentRepository.save(entity)
+        return toContentDetail(entity, emptyList())
+    }
+
+    /** 학생 본인이 만든 학습 목록 */
+    @Transactional(readOnly = true)
+    fun listForUser(userId: String): List<StudyContentSummary> {
+        val contents = studyContentRepository.findAllByVisibilityAndCreatorIdAndStatusOrderByCreatedAtDesc("OWN", userId, "active")
+        return contents.map { c -> c.toSummary(null) }
+    }
+
+    /** 본사 — 학생들이 만든 OWN 학습 목록 (검수용) */
+    @Transactional(readOnly = true)
+    fun listOwnContentsForHq(): List<StudyContentSummary> {
+        if (!isHqAdmin()) {
+            throw ApiException("FORBIDDEN", "forbidden", HttpStatus.FORBIDDEN)
+        }
+        val all = studyContentRepository.findAllByVisibilityAndStatusOrderByCreatedAtDesc("OWN", "active")
+        return all.map { c -> c.toSummary(null) }
+    }
+
+    private fun StudyContentEntity.toSummary(orgName: String?): StudyContentSummary {
+        return StudyContentSummary(
+            id = id,
+            title = title,
+            description = description,
+            levelId = levelId,
+            area = area,
+            subArea = subArea,
+            visibility = visibility,
+            ownerOrgId = ownerOrgId,
+            ownerOrgName = orgName,
+            creatorId = creatorId,
+            questionCount = questionCount,
+            status = status,
+            sourceType = sourceType,
+            createdAt = createdAt.format(fmt),
+            updatedAt = updatedAt.format(fmt),
+        )
     }
 
     // ─────────────────────────────────────────────
