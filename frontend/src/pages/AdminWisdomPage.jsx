@@ -17,7 +17,7 @@ const LEVEL_OPTIONS = [
 const PER_PAGE = 20;
 
 function AdminWisdomPage() {
-  useRequireRole("HQ_ADMIN");
+  useRequireRole("HQ_ADMIN", "ORG_ADMIN");
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [levelId, setLevelId] = useState("");

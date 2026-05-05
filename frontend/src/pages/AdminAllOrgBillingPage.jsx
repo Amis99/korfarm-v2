@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import AdminLayout from "../components/AdminLayout";
 import { apiGetCamel, apiPatchDeep, apiPostDeep } from "../utils/adminApi";
+import { useRequireRole } from "../hooks/useRequireRole";
 import "../styles/admin.css";
 
 // 본사 — 기관별 월 청구 관리 + 기본료 감면 (HQ_ADMIN)
 export default function AdminAllOrgBillingPage() {
+  useRequireRole("HQ_ADMIN");
   const [orgs, setOrgs] = useState([]);
   const [billingsByOrg, setBillingsByOrg] = useState({});
   const [loading, setLoading] = useState(true);

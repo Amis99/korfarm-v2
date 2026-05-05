@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminLayout from "../components/AdminLayout";
 import { apiGetCamel } from "../utils/adminApi";
+import { useRequireRole } from "../hooks/useRequireRole";
 import "../styles/admin.css";
 
 // 본사 — 학생들이 만든 OWN 학습 검수 (Phase C-2)
 export default function AdminOwnStudyContentsPage() {
+  useRequireRole("HQ_ADMIN");
   const navigate = useNavigate();
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
