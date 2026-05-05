@@ -29,6 +29,8 @@ const NAV_ITEMS = [
   { to: "/admin/ai-usage", icon: "smart_toy", label: "AI 사용 내역", roles: ["HQ_ADMIN"] },
   { to: "/admin/reports", icon: "flag", label: "보고", roles: ["HQ_ADMIN"] },
   { to: "/admin/org-settings", icon: "settings", label: "기관 설정", roles: ["ORG_ADMIN"] },
+  { to: "/admin/grapefruit-wallet", icon: "nutrition", label: "AI 자몽 지갑", roles: ["ORG_ADMIN"] },
+  { to: "/admin/grapefruit-pricing", icon: "savings", label: "AI 자몽 단가", roles: ["HQ_ADMIN"] },
   { to: "/", icon: "home", label: "랜딩" },
   { to: "/start", icon: "play_arrow", label: "스타트" },
 ];

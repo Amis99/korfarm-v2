@@ -2,6 +2,7 @@ package com.korfarm.api.aigen
 
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.ApiResponse
+import com.korfarm.api.grapefruit.GrapefruitService
 import com.korfarm.api.security.AdminGuard
 import com.korfarm.api.security.SecurityUtils
 import org.springframework.http.HttpStatus
@@ -16,6 +17,7 @@ class AiTestGenController(
     private val learningConceptService: LearningConceptService,
     private val grammarRagService: GrammarRagService,
     private val fileToMarkdownService: FileToMarkdownService,
+    private val grapefruitService: GrapefruitService,
     private val objectMapper: com.fasterxml.jackson.databind.ObjectMapper,
 ) {
     // 전사 콘텐츠 풀에 영향가는 작업(passage·question)은 본사 전용,
@@ -63,6 +65,20 @@ class AiTestGenController(
         if (req.pageMarkdown.isBlank()) {
             throw ApiException("EMPTY_PAGE", "페이지 본문이 비어 있습니다", HttpStatus.BAD_REQUEST)
         }
+        // ─── 자몽 차감 ───
+        // 1) 체크포인트 추출 (existingCheckpoints 없을 때만 실제 호출됨)
+        // 2) 문항 생성 — 5문항 단위 묶음 가격 × ceil(total/5)
+        val isAdvanced = req.tier == "ADVANCED"
+        if (req.existingCheckpoints == null) {
+            val ckKind = if (isAdvanced) "checkpoint-extract-opus" else "checkpoint-extract"
+            grapefruitService.spendForCaller(ckKind, memo = "체크포인트 추출")
+        }
+        val packages = (total + 4) / 5
+        val qKind = if (isAdvanced) "study-questions-opus" else "study-questions-sonnet"
+        repeat(packages) {
+            grapefruitService.spendForCaller(qKind, memo = "학습 문항 ${total}개 (${if (isAdvanced) "고급" else "일반"})")
+        }
+
         val job = jobService.submitStudyQuestion(req, userId)
         return ApiResponse(success = true, data = mapOf("jobId" to job.id, "status" to job.status))
     }
@@ -116,6 +132,9 @@ class AiTestGenController(
 
         val mediaType = (file.contentType ?: guessMediaType(file.originalFilename ?: ""))
             ?: throw ApiException("UNKNOWN_MEDIA_TYPE", "파일 형식을 알 수 없습니다", HttpStatus.BAD_REQUEST)
+
+        // 자몽 차감 — 일단 1자몽 (1~5장 단가) 고정. 실제 페이지 수 기반 추가 차감은 추후.
+        grapefruitService.spendForCaller("file-to-markdown-1to5", memo = "PDF/이미지 마크다운 변환")
 
         val job = jobService.submitFileToMarkdown(file.bytes, mediaType, file.originalFilename, userId)
         return ApiResponse(success = true, data = mapOf("jobId" to job.id, "status" to job.status))

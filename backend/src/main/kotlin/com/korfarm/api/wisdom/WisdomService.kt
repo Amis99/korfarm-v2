@@ -5,6 +5,7 @@ import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.contracts.CreateWisdomPostRequest
 import com.korfarm.api.files.FileRepository
 import com.korfarm.api.files.FileService
+import com.korfarm.api.grapefruit.GrapefruitService
 import com.korfarm.api.org.OrgMembershipRepository
 import com.korfarm.api.security.SecurityUtils
 import com.korfarm.api.studyplan.StudyPlanCellRepository
@@ -34,6 +35,7 @@ class WisdomService(
     private val aiFeedbackJobRepository: AiFeedbackJobRepository,
     private val aiFeedbackJobService: AiFeedbackJobService,
     private val orgMembershipRepository: OrgMembershipRepository,
+    private val grapefruitService: GrapefruitService,
     @Value("\${app.upload.dir:./uploads}") private val uploadDir: String
 ) {
     private val log = LoggerFactory.getLogger(WisdomService::class.java)
@@ -558,6 +560,8 @@ class WisdomService(
             ApiException("NOT_FOUND", "글을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
         }
         ensureCallerCanAccessAuthor(post.userId)
+        // 자몽 차감 (HQ_ADMIN 통과 / ORG_ADMIN 본인 기관 자몽). 잔액 부족 시 402 INSUFFICIENT_GRAPEFRUIT.
+        // 진행 중 job 재사용 케이스에서는 재차감 X — 새 job 생성 직전에만 차감.
         if (post.content.isNullOrBlank()) {
             throw ApiException("NO_CONTENT", "글 내용이 없습니다. 파일 업로드 글은 먼저 OCR 변환이 필요합니다.", HttpStatus.BAD_REQUEST)
         }
@@ -569,6 +573,8 @@ class WisdomService(
         if (existing != null && existing.createdAt.isAfter(LocalDateTime.now().minusMinutes(10))) {
             return AiFeedbackJobEnqueueResponse(jobId = existing.id, status = existing.status)
         }
+        // 자몽 차감 — 신규 job 생성 직전에만
+        grapefruitService.spendForCaller("wisdom-feedback", aiLogId = null, memo = "글쓰기 첨삭 (postId=$postId)")
         val job = AiFeedbackJobEntity(
             id = IdGenerator.newId("aifb"),
             postId = postId,
@@ -641,6 +647,8 @@ class WisdomService(
             ApiException("NOT_FOUND", "글을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
         }
         ensureCallerCanAccessAuthor(post.userId)
+        // 자몽 차감 — wisdom-ocr (사진 1장 단위, 첨부 여러 장이면 multi 처리는 추후 단가 분리)
+        grapefruitService.spendForCaller("wisdom-ocr", aiLogId = null, memo = "필기 OCR (postId=$postId)")
         val result = ocrPost(postId, requesterId)
         if (result.text.isNotBlank()) {
             post.content = result.text
