@@ -88,7 +88,7 @@ class UserStudyContentController(
             grapefruitService.spendForUser(userId, qKind, req.currency, memo = "학습 문항 ${total}개")
         }
 
-        // 비동기 잡 시작 — 콘텐츠 ID 는 결과 저장 시 사용
+        // 비동기 잡 시작 — autoSaveContentId 로 결과 자동 저장 (페이지·문제 → study_pages/study_questions)
         val genReq = StudyQuestionGenRequest(
             pageMarkdown = req.pageMarkdown,
             area = req.area,
@@ -100,6 +100,7 @@ class UserStudyContentController(
             essayCount = req.essayCount,
             existingCheckpoints = null,
             tier = req.tier,
+            autoSaveContentId = contentId,
         )
         val job = aiGenJobService.submitStudyQuestion(genReq, userId)
         return ApiResponse(success = true, data = mapOf("jobId" to job.id, "status" to job.status))

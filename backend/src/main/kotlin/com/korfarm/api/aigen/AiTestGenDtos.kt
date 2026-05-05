@@ -88,7 +88,9 @@ data class StudyQuestionGenRequest(
     val essayCount: Int = 0,
     /** 이미 추출된 출제 포인트 재사용 (없으면 새로 추출) */
     val existingCheckpoints: List<StudyCheckpointDto>? = null,
-    val tier: String? = "BASIC"             // BASIC | ADVANCED
+    val tier: String? = "BASIC",            // BASIC | ADVANCED
+    /** 결과를 자동으로 study content 페이지·문제로 저장 (학생 OWN 학습 흐름) */
+    val autoSaveContentId: String? = null
 )
 
 data class StudyCheckpointDto(

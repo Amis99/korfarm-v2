@@ -22,6 +22,7 @@ class AiGenJobService(
     private val service: AiTestGenService,
     private val studyGenerator: StudyQuestionGenerator,
     private val fileToMarkdownService: FileToMarkdownService,
+    private val studyContentService: com.korfarm.api.study.StudyContentService,
     private val objectMapper: ObjectMapper,
 ) {
     private val log = LoggerFactory.getLogger(AiGenJobService::class.java)
@@ -193,6 +194,23 @@ class AiGenJobService(
                 "totalDurationMs" to result.totalDurationMs,
             )
             markCompleted(jobId, objectMapper.writeValueAsString(payload))
+            // 학생 OWN 학습 흐름 — autoSaveContentId 가 있으면 자동 저장
+            req.autoSaveContentId?.let { cid ->
+                try {
+                    val checkpointsJson = objectMapper.writeValueAsString(payload["checkpoints"])
+                    @Suppress("UNCHECKED_CAST")
+                    val questionsList = (payload["questions"] as? List<Map<String, Any?>>) ?: emptyList()
+                    val saved = studyContentService.autoSaveAiResult(
+                        contentId = cid,
+                        pageMarkdown = req.pageMarkdown,
+                        checkpointsJson = checkpointsJson,
+                        questions = questionsList,
+                    )
+                    log.info("AI 학습 자동 저장 완료: contentId={}, questions={}", cid, saved)
+                } catch (e: Exception) {
+                    log.error("AI 학습 자동 저장 실패: contentId={}", cid, e)
+                }
+            }
         } catch (e: Exception) {
             log.error("AI study-question job 실패 jobId=$jobId", e)
             markFailed(jobId, e.message ?: e.javaClass.simpleName)

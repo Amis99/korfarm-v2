@@ -264,6 +264,75 @@ class StudyContentService(
         return contents.map { c -> c.toSummary(null) }
     }
 
+    /**
+     * AI 학습 결과 자동 저장 (학생 OWN 학습 흐름).
+     * 페이지 1 + 질문들 INSERT + questionCount 갱신.
+     * AI 결과 questions 는 generic Map 형태로 받아 안전하게 매핑.
+     */
+    @Transactional
+    fun autoSaveAiResult(
+        contentId: String,
+        pageMarkdown: String,
+        checkpointsJson: String?,
+        questions: List<Map<String, Any?>>,
+    ): Int {
+        val c = studyContentRepository.findById(contentId).orElseThrow {
+            ApiException("NOT_FOUND", "콘텐츠 없음", HttpStatus.NOT_FOUND)
+        }
+        // 기존 페이지·문제 삭제 (재생성 시)
+        val existingPages = studyPageRepository.findAllByContentIdOrderByPageNoAsc(contentId)
+        existingPages.forEach { p ->
+            studyQuestionRepository.deleteAllByPageId(p.id)
+        }
+        studyPageRepository.deleteAllByContentId(contentId)
+        studyQuestionRepository.flush()
+        studyPageRepository.flush()
+
+        // 페이지 1 신설
+        val pageEntity = StudyPageEntity(
+            id = IdGenerator.newId("sp"),
+            contentId = contentId,
+            pageNo = 1,
+            title = null,
+            markdown = pageMarkdown,
+            checkpoints = checkpointsJson,
+        )
+        studyPageRepository.save(pageEntity)
+
+        // 문제들 INSERT — AI 결과 키를 generic 하게 매핑
+        val now = LocalDateTime.now()
+        val mapper = com.fasterxml.jackson.databind.ObjectMapper()
+        val entities = questions.mapIndexed { idx, q ->
+            val choicesAny = q["choices"] ?: q["options"]
+            val fillBlanksAny = q["fillBlanks"]
+            StudyQuestionEntity(
+                id = IdGenerator.newId("sq"),
+                contentId = contentId,
+                pageId = pageEntity.id,
+                questionNo = idx + 1,
+                questionType = (q["questionType"] ?: q["type"])?.toString()?.uppercase() ?: "MULTI_CHOICE",
+                stem = q["stem"]?.toString() ?: q["question"]?.toString() ?: "",
+                boxContent = q["boxContent"]?.toString()?.takeIf { it.isNotBlank() },
+                conditionContent = q["conditionContent"]?.toString()?.takeIf { it.isNotBlank() },
+                choices = choicesAny?.let { mapper.writeValueAsString(it) },
+                modelAnswer = (q["modelAnswer"] ?: q["answer"])?.toString(),
+                fillBlanks = fillBlanksAny?.let { mapper.writeValueAsString(it) },
+                distractorSyllables = q["distractorSyllables"]?.let { mapper.writeValueAsString(it) },
+                evalPointIdx = "[]",
+                difficulty = (q["difficulty"] as? Number)?.toInt() ?: 1,
+                competencyVector = null,
+                wrongVector = null,
+                createdAt = now,
+                updatedAt = now,
+            )
+        }
+        if (entities.isNotEmpty()) studyQuestionRepository.saveAll(entities)
+
+        c.questionCount = studyQuestionRepository.countByContentId(contentId)
+        studyContentRepository.save(c)
+        return entities.size
+    }
+
     /** 본사 — 학생들이 만든 OWN 학습 목록 (검수용) */
     @Transactional(readOnly = true)
     fun listOwnContentsForHq(): List<StudyContentSummary> {
