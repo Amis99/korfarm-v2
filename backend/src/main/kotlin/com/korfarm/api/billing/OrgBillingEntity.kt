@@ -17,8 +17,8 @@ class OrgBillingEntity(
     @Column(name = "org_id", nullable = false)
     var orgId: String,
 
-    @Column(name = "year_month", nullable = false, length = 7)
-    var yearMonth: String,           // "2026-05"
+    @Column(name = "billing_month", nullable = false, length = 7)
+    var yearMonth: String,           // "2026-05" — DB 컬럼명은 billing_month (MySQL year_month 예약어 회피)
 
     @Column(name = "base_fee", nullable = false)
     var baseFee: Int,

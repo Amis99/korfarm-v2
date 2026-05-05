@@ -5,7 +5,7 @@
 CREATE TABLE org_billing (
   id VARCHAR(64) PRIMARY KEY,
   org_id VARCHAR(64) NOT NULL,
-  year_month VARCHAR(7) NOT NULL,           -- '2026-05'
+  billing_month VARCHAR(7) NOT NULL,        -- '2026-05' (MySQL year_month 예약어 회피)
   base_fee INT NOT NULL,                    -- 기본료 (기본 200000, 본사 감면 가능)
   excess_student_count INT NOT NULL DEFAULT 0,  -- 21명 초과 학생 수
   excess_days INT NOT NULL DEFAULT 0,       -- 초과 학생들의 등록일수 합계
@@ -18,7 +18,7 @@ CREATE TABLE org_billing (
   status VARCHAR(16) NOT NULL DEFAULT 'pending',  -- pending / paid / overdue / canceled
   notes TEXT,                               -- 산정 내역 메모
   created_at DATETIME(6) NOT NULL,
-  UNIQUE KEY uk_org_yearmonth (org_id, year_month),
+  UNIQUE KEY uk_org_billing_month (org_id, billing_month),
   KEY idx_status_due (status, due_at),
   KEY idx_org_status (org_id, status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
