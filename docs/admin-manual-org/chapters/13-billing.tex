@@ -1,0 +1,70 @@
+\chapter{월 사용료}
+
+\begin{summarybox}{한눈에}
+본사에 매월 지불하는 \textbf{기관 월 사용료}를 청구·결제·이력 조회합니다. 매월 1일 새벽 자동 발행, 그 달 말일까지 결제, 다음 달 1일 미결제 시 기관 관리 기능 자동 정지.
+\end{summarybox}
+
+\kfShot{13-billing}{월 사용료 — 청구 이력 + 산정 미리보기 + 결제}
+
+\section*{산정 방식}
+
+\begin{itemize}[leftmargin=1.2em]
+  \item \textbf{0\,$\sim$\,20명}: 기본료 200,000원 고정 (본사가 기관별 감면 가능)
+  \item \textbf{21\,$\sim$\,50명}: 기본료 + (가장 등록일수 짧은 (학생수-20)명의 등록일수 합 × 500원)
+  \item 등록일수 = 그 달 안에 status='active' 였던 일수 (가입 중간이면 가입일\,$\sim$\,말일)
+\end{itemize}
+
+예시) 24명 등록 시: 기본료 200,000 + (등록일수 짧은 4명의 일수 합 × 500원)
+
+\section*{화면 구조}
+
+\begin{screenbox}{청구 이력 + 실시간 산정 미리보기}
+\textbf{이번 달 예상 사용료 (실시간)}
+\noindent
+\begin{tabular}{@{}p{4cm}p{4cm}@{}}
+활성 학생 수 & N 명 \\
+기본료 & 200,000원 \\
+초과 학생 & N 명 \\
+초과 등록일수 합 & N 일 × 500원 = N원 \\
+\midrule
+\textbf{합계} & \textbf{N원} \\
+\bottomrule
+\end{tabular}
+
+\medskip
+\textbf{청구 이력}
+\noindent
+\begin{tabular}{@{}p{1.8cm}p{2cm}p{2.5cm}p{2cm}p{2cm}p{2cm}@{}}
+\toprule
+\textbf{월} & \textbf{기본료} & \textbf{초과/일수} & \textbf{합계} & \textbf{상태} & \textbf{결제} \\
+\midrule
+2026-05 & 200,000 & 5명 / 80일 & 240,000 & 결제 대기 & \activetab{결제} \\
+2026-04 & 200,000 & 0 / 0 & 200,000 & 결제 완료 & — \\
+\bottomrule
+\end{tabular}
+\end{screenbox}
+
+\section*{여기서 할 수 있는 일}
+\begin{itemize}[leftmargin=1.2em]
+  \item 이번 달 \textbf{실시간 예상 사용료} 미리 계산 (학생 수 변동에 따라 갱신)
+  \item 발행된 청구서 \textbf{결제} (mock — 정식 토스 연동은 추후)
+  \item \textbf{청구 이력} 조회 (월별 기본료·초과·합계·상태)
+  \item 정지 상태 시 결제 → 즉시 해제
+\end{itemize}
+
+\section*{자주 쓰는 흐름}
+\begin{enumerate}
+  \item 매월 1일 → 청구서 자동 발행 + 화면 상단에 빨간/노란 배너
+  \item 결제 마감 7일 전부터 노란 ``결제 임박'' 배너
+  \item ``결제'' 버튼 → mock 결제 → 즉시 paid 처리
+  \item 마감 지난 후 새벽 3시에 자동 정지 → 결제하면 즉시 해제
+\end{enumerate}
+
+\begin{tipbox}{알아두면 좋은 점}
+\begin{itemize}[leftmargin=1.2em]
+  \item 정지 상태에서도 \textbf{이 메뉴(``월 사용료'') 와 자몽 충전 / 기관 설정 / 로그인}은 가능
+  \item 학생 관리·콘텐츠 등 다른 기관 운영은 차단됨
+  \item 본사가 기관별로 \textbf{기본료 감면} 가능 — 협의 후 본사가 설정
+  \item 학생 학습은 미결제와 무관하게 정상 진행 (학생이 학원 정책으로 피해보지 않도록)
+\end{itemize}
+\end{tipbox}

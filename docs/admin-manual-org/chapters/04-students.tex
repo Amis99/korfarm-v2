@@ -1,0 +1,60 @@
+\chapter{학생 관리}
+
+\begin{summarybox}{한눈에}
+본 기관에 소속된 학생을 등록·수정·구독 연장·인벤토리 조작·학습 현황 조회 등 모든 학생 운영의 \textbf{허브} 입니다. 클릭 한 번으로 학생 상세 화면에 들어가 6개 탭(기본/학습/테스트/인벤토리/대결/통합 성적표)으로 깊이 살펴볼 수 있어요.
+\end{summarybox}
+
+\kfShot{04-students}{학생 관리 — 본 기관 학생 목록}
+
+\section*{화면 구조}
+
+\begin{screenbox}{학생 목록 + 검색·필터·요약}
+\noindent
+\begin{tabular}{@{}p{2.5cm}p{2cm}p{2cm}p{2.5cm}p{2cm}p{2cm}@{}}
+\toprule
+\textbf{이름} & \textbf{아이디} & \textbf{학년} & \textbf{수강반} & \textbf{구독} & \textbf{액션} \\
+\midrule
+홍길동 & st01 & 초5 & 초5 월수금 A & 유료 & \inacttab{상세} \\
+김영희 & st02 & 중1 & 중1 화목 B & 유료 & \inacttab{상세} \\
+\bottomrule
+\end{tabular}
+
+\medskip
+\textbf{우측 요약 패널} — 기관별·수강반별·레벨별·구독별 그룹화 드롭다운
+\end{screenbox}
+
+\section*{여기서 할 수 있는 일}
+\begin{itemize}[leftmargin=1.2em]
+  \item \textbf{학생 신규 등록} — 이메일·이름·소속 반(여러 개 가능) 입력
+  \item \textbf{학생 정보 수정} — 학년·학교·연락처·학부모 연락처
+  \item \textbf{구독 연장·취소} — 학생 단위 구독 상태 직접 조작 (학생 결제는 본인이 하지만 본사·기관이 조정 가능)
+  \item \textbf{인벤토리 직접 지급/차감} — 씨앗·작물·비료를 운영용 보상 또는 회수
+  \item \textbf{학생 비활성화} — soft delete (즉시 로그인 차단, 30일 후 본사 hard delete)
+  \item 학생 클릭 → \textbf{상세 페이지} 6개 탭으로 학습/테스트/인벤토리/대결/통합 성적표 정밀 분석
+\end{itemize}
+
+\section*{학생 상세 페이지 — 6개 탭}
+\begin{enumerate}
+  \item \textbf{기본 정보} — 이름·아이디·레벨·학교·학년·연락처·구독 상태
+  \item \textbf{학습 현황} — 최근 학습 로그 (유형·콘텐츠 제목·점수·정답률·시작/완료일)
+  \item \textbf{테스트 성적} — 응시한 시험 이력 + 점수·정답률
+  \item \textbf{인벤토리} — 씨앗 / 작물 / 비료 보유 현황 + 직접 지급·차감
+  \item \textbf{대결 전적} — 듀얼 게임 승·패·연승
+  \item \textbf{통합 성적표} — 10대 역량 레이더·영역별 강약점·기간별 추이
+\end{enumerate}
+
+\section*{자주 쓰는 흐름}
+\begin{enumerate}
+  \item ``학생 추가'' → 이메일 + 이름 + 소속 반 선택 → 등록 (학생에게 임시 비밀번호 안내)
+  \item 학생 클릭 → 학습 현황 탭에서 ``유형 / 콘텐츠 제목 / 점수'' 확인 (시작일은 STARTED 만 있어도 표시)
+  \item 통합 성적표 탭 → 10대 역량 점수가 낮은 영역 확인 → 학습 계획표에서 보강 콘텐츠 배정
+\end{enumerate}
+
+\begin{tipbox}{알아두면 좋은 점}
+\begin{itemize}[leftmargin=1.2em]
+  \item 학생 목록은 본 기관 소속만 보임 — 다른 기관 학생은 사이드바·검색에서 자동 필터됨
+  \item ``기관 드롭다운'' 은 본 기관 자동 고정 — 선택할 필요 없음
+  \item 학생 비활성화 후 30일 안에 본사가 복구할 수 있어요. 30일 지나면 \textbf{영구 삭제} (이름·기록 백업 ZIP 으로만 보존)
+  \item 인벤토리 조작 이력은 별도 ledger 에 기록되어 본사가 추적 가능합니다
+\end{itemize}
+\end{tipbox}

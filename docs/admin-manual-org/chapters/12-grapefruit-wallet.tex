@@ -1,0 +1,78 @@
+\chapter{AI 자몽 지갑}
+
+\begin{summarybox}{한눈에}
+AI 기능(글쓰기 첨삭·OCR·문제 생성·학습 통합 생성)을 쓸 때 차감되는 \textbf{자몽}을 충전·확인합니다. 1자몽 = 200원, 1만 원 = 50자몽 (기관 단가). 잔액·거래 이력·기능별 단가를 한 곳에서 봅니다.
+\end{summarybox}
+
+\kfShot{12-grapefruit-wallet}{AI 자몽 지갑 — 잔액 + 충전 + 거래 이력}
+
+\section*{화면 구조}
+
+\begin{screenbox}{잔액 카드 + 충전 옵션 + 거래 이력}
+\textbf{현재 잔액} \quad N \, 자몽 \quad (약 N00원 상당)
+
+\medskip
+\textbf{충전 옵션} (5개 프리셋)
+\noindent
+\begin{tabular}{@{}p{3cm}p{3cm}p{3cm}p{3cm}p{3cm}@{}}
+\toprule
+1만원 / 50자몽 & 3만원 / 150자몽 & 5만원 / 250자몽 & 10만원 / 500자몽 & 30만원 / 1500자몽 \\
+\bottomrule
+\end{tabular}
+\medskip
+
+\textbf{거래 이력 — 최근 100건}
+\noindent
+\begin{tabular}{@{}p{3cm}p{1.5cm}p{4cm}p{1.5cm}p{1.5cm}@{}}
+\toprule
+\textbf{날짜} & \textbf{구분} & \textbf{내용} & \textbf{변동} & \textbf{잔액} \\
+\midrule
+2026-05-06 & 충전 & 30,000원 충전 & +150 & 200 \\
+2026-05-06 & 사용 & AI 글쓰기 첨삭 & -1 & 199 \\
+\bottomrule
+\end{tabular}
+\end{screenbox}
+
+\section*{여기서 할 수 있는 일}
+\begin{itemize}[leftmargin=1.2em]
+  \item \textbf{자몽 충전} — 5개 프리셋 또는 직접 금액 입력 (200원 단위)
+  \item \textbf{거래 이력 조회} — 충전·사용 내역 + 잔액 추이
+  \item AI 기능 사용 시 자동 차감 (지식과 지혜 첨삭, OCR, 내용 숙지 학습 생성, 마크다운 변환)
+  \item 잔액 부족 시 AI 호출 차단 + 충전 안내
+\end{itemize}
+
+\section*{AI 기능별 자몽 단가 (기관)}
+\noindent
+\begin{tabular}{@{}p{6cm}p{2cm}p{2cm}p{2cm}@{}}
+\toprule
+\textbf{기능} & \textbf{모델} & \textbf{자몽} & \textbf{원화} \\
+\midrule
+AI 글쓰기 첨삭 (1편) & Sonnet & 1 & 200 \\
+AI 필기 OCR (사진 1장) & Sonnet & 1 & 200 \\
+AI PDF 마크다운 변환 (1\,$\sim$\,5장) & Sonnet & 1 & 200 \\
+AI PDF 마크다운 변환 (6\,$\sim$\,10장) & Sonnet & 2 & 400 \\
+AI 지문 생성 (1편) & Sonnet & 1 & 200 \\
+AI 체크포인트 추출 — 일반 & Sonnet & 1 & 200 \\
+AI 체크포인트 추출 — 고급 & Opus & 4 & 800 \\
+AI 학습 문항 생성 — 일반 (5문항) & Sonnet & 2 & 400 \\
+AI 학습 문항 생성 — 고급 (5문항) & Opus & 8 & 1,600 \\
+AI 단건 문제 출제 & Opus & 3 & 600 \\
+AI 학습 통합 생성 & Sonnet & 4 & 800 \\
+\bottomrule
+\end{tabular}
+
+\section*{자주 쓰는 흐름}
+\begin{enumerate}
+  \item 자몽 잔액 확인 (대시보드 또는 사이드바 ``AI 자몽 지갑'')
+  \item 부족 시 충전 프리셋 클릭 → mock 즉시 결제 (정식 토스페이 연동은 추후)
+  \item AI 기능 사용 시 자동 차감 — 거래 이력에서 사용 내역 확인
+\end{enumerate}
+
+\begin{tipbox}{알아두면 좋은 점}
+\begin{itemize}[leftmargin=1.2em]
+  \item 자몽 단가는 본사가 운영 중에 변경 가능 — 단가표는 항상 최신 단가 표시
+  \item 충전·사용은 즉시 거래 이력에 기록 (감사용 balance\_after 포함)
+  \item 잔액 부족 시 백엔드가 402 INSUFFICIENT\_GRAPEFRUIT 에러 → 화면에 ``자몽 충전 후 다시 시도'' 안내
+  \item 정식 토스페이 결제는 가맹 승인 후 적용 — 그 전에는 mock 즉시 충전
+\end{itemize}
+\end{tipbox}

@@ -1,0 +1,197 @@
+% ============================================================
+% preamble.tex — 기관 관리자 매뉴얼 공통 프리앰블
+% xelatex + kotex + fontspec + tcolorbox
+% ============================================================
+
+\usepackage[a4paper,top=22mm,bottom=22mm,left=22mm,right=22mm,headheight=14pt,headsep=8mm,footskip=12mm]{geometry}
+\usepackage{fontspec}
+\usepackage{kotex}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% ---------- 폰트 ----------
+\setmainfont{NotoSerifKR-VF.ttf}[
+  Path = C:/WINDOWS/Fonts/,
+  UprightFeatures = {RawFeature={+axis={wght=500}}},
+  BoldFeatures    = {RawFeature={+axis={wght=800}}}
+]
+\setsansfont{NotoSansKR-VF.ttf}[
+  Path = C:/WINDOWS/Fonts/,
+  UprightFeatures = {RawFeature={+axis={wght=500}}},
+  BoldFeatures    = {RawFeature={+axis={wght=800}}}
+]
+\setmonofont{Consolas}
+% kotex 의 \setmainhangulfont / \setsanshangulfont 로 한글 처리
+\setmainhangulfont{NotoSerifKR-VF.ttf}[
+  Path = C:/WINDOWS/Fonts/,
+  UprightFeatures = {RawFeature={+axis={wght=500}}},
+  BoldFeatures    = {RawFeature={+axis={wght=800}}}
+]
+\setsanshangulfont{NotoSansKR-VF.ttf}[
+  Path = C:/WINDOWS/Fonts/,
+  UprightFeatures = {RawFeature={+axis={wght=500}}},
+  BoldFeatures    = {RawFeature={+axis={wght=800}}}
+]
+
+% ---------- 색상 ----------
+\definecolor{kfgreen}{HTML}{2f7a3e}
+\definecolor{kfgreensoft}{HTML}{e8f4ec}
+\definecolor{kfblue}{HTML}{1e6fdc}
+\definecolor{kfbluesoft}{HTML}{e7f0fc}
+\definecolor{kforange}{HTML}{e07a1a}
+\definecolor{kforangesoft}{HTML}{fdf2e3}
+\definecolor{kfgray}{HTML}{4a5568}
+\definecolor{kfgrayline}{HTML}{cbd5e0}
+
+% ---------- 챕터/섹션 타이틀 ----------
+\titleformat{\chapter}[display]
+  {\sffamily\Huge\bfseries\color{kfgreen}}
+  {\fontsize{14}{16}\selectfont CHAPTER \thechapter}
+  {6pt}
+  {\Huge}
+\titlespacing*{\chapter}{0pt}{-20pt}{20pt}
+
+\titleformat{\part}[display]
+  {\sffamily\Huge\bfseries\centering\color{kfgreen}}
+  {\Large PART \thepart}
+  {12pt}
+  {\Huge}
+
+\titleformat{\section}{\sffamily\Large\bfseries\color{kfgreen}}{}{0pt}{}
+\titleformat{\subsection}{\sffamily\large\bfseries\color{kfgray}}{}{0pt}{}
+
+% ---------- 헤더/푸터 ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\small\color{kfgray}국어농장v2 기관 관리자 매뉴얼}
+\fancyhead[R]{\sffamily\small\color{kfgray}\leftmark}
+\fancyfoot[C]{\sffamily\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+
+% ---------- 박스 매크로 ----------
+% 1) summarybox — 한눈에 요약 (초록)
+\newtcolorbox{summarybox}[1]{
+  enhanced,
+  colback=kfgreensoft,
+  colframe=kfgreen,
+  coltitle=white,
+  colbacktitle=kfgreen,
+  title={\sffamily\bfseries #1},
+  fonttitle=\bfseries,
+  boxrule=0.6pt,
+  arc=4pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+% 2) screenbox — 화면 구조 다이어그램 컨테이너 (회색)
+%    안에는 booktabs 표 또는 tcolorbox 카드 사용 (verbatim ASCII 금지 — 한글 폭 정렬 깨짐)
+\newtcolorbox{screenbox}[1]{
+  enhanced,
+  colback=white,
+  colframe=kfgrayline,
+  coltitle=kfgray,
+  colbacktitle=white,
+  title={\sffamily\bfseries\color{kfgray} #1},
+  boxrule=0.5pt,
+  arc=2pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  breakable
+}
+
+% 화면 카드 — 사이드바·메인 영역 등을 작은 박스로 표현
+\newtcolorbox{screencard}[1]{
+  enhanced,
+  colback=kfbluesoft!50,
+  colframe=kfblue,
+  coltitle=kfblue,
+  fonttitle=\sffamily\bfseries\small,
+  title=#1,
+  boxrule=0.5pt,
+  arc=2pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\sffamily\small,
+  width=\linewidth,
+  before skip=2pt,
+  after skip=2pt
+}
+
+% 탭 바 — 가로로 늘어선 탭 표현
+\newcommand{\screentabs}[1]{%
+  \par\noindent
+  \tcbox[colback=kfgreensoft,colframe=kfgreen,boxrule=0.5pt,arc=2pt,left=4pt,right=4pt,top=2pt,bottom=2pt,nobeforeafter,box align=center]{%
+    \sffamily\bfseries\small #1%
+  }\par\smallskip%
+}
+
+% 활성 탭 강조
+\newcommand{\activetab}[1]{\colorbox{kfgreen}{\textcolor{white}{\sffamily\bfseries\small\,#1\,}}}
+\newcommand{\inacttab}[1]{\fcolorbox{kfgrayline}{white}{\sffamily\small\,#1\,}}
+
+% 3) tipbox — 알아두면 좋은 점 (주황)
+\newtcolorbox{tipbox}[1]{
+  enhanced,
+  colback=kforangesoft,
+  colframe=kforange,
+  coltitle=white,
+  colbacktitle=kforange,
+  title={\sffamily\bfseries 💡 #1},
+  boxrule=0.6pt,
+  arc=4pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+% 4) warnbox — 주의 (빨강)
+\newtcolorbox{warnbox}[1]{
+  enhanced,
+  colback=red!5!white,
+  colframe=red!70!black,
+  coltitle=white,
+  colbacktitle=red!70!black,
+  title={\sffamily\bfseries ⚠ #1},
+  boxrule=0.6pt,
+  arc=4pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+% ---------- 캡처 placeholder ----------
+% 사용법: \kfShot{파일명}{캡션}
+% images/파일명.png 가 있으면 그걸 표시, 없으면 placeholder 박스
+\newcommand{\kfShot}[2]{%
+  \begin{figure}[!ht]
+    \centering
+    \IfFileExists{images/#1.png}{%
+      \includegraphics[width=0.95\linewidth,keepaspectratio]{images/#1.png}%
+    }{%
+      \fbox{\parbox[c][5cm][c]{0.9\linewidth}{\centering\itshape\color{kfgray}(캡처 자리: #2 — \texttt{images/#1.png} 자동 생성 예정)}}%
+    }
+    \caption{#2}
+  \end{figure}
+}
+
+% ---------- 표지 ----------
+\newcommand{\kfTitlePage}{
+  \begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\sffamily\fontsize{18}{22}\selectfont\color{kfgray} 국어농장 v2}\\[1.2em]
+    {\sffamily\fontsize{36}{44}\selectfont\bfseries\color{kfgreen} 기관 관리자 매뉴얼}\\[1em]
+    {\sffamily\fontsize{14}{18}\selectfont\color{kfgray} ORG\_ADMIN Operations Guide}\\[2em]
+    \rule{0.4\textwidth}{0.6pt}\\[1em]
+    {\sffamily\large\color{kfgray} 학원·교습소·교실 운영자를 위한 14개 화면 통합 안내}\\[6em]
+    {\sffamily\small\color{kfgray} 발행: 국어농장 \quad / \quad 빌드일: \today}
+    \vfill
+  \end{titlepage}
+}

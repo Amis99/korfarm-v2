@@ -1,0 +1,89 @@
+\chapter*{시작하기 — 기관 관리자(ORG\_ADMIN) 한눈에}
+\addcontentsline{toc}{chapter}{시작하기}
+\markboth{시작하기}{}
+
+\begin{summarybox}{이 매뉴얼이 다루는 범위}
+국어농장 v2 의 \textbf{기관 관리자(ORG\_ADMIN)} 가 운영 중에 마주치는 14개 화면을 한 권에 정리했어요. 학원·교습소·교실 단위로 학생을 등록·관리하고, 콘텐츠를 골라 학습 계획표에 배정하고, AI 첨삭과 자몽 결제 같은 새 기능까지 모두 다룹니다. 본사 관리자(HQ\_ADMIN) 매뉴얼과 달리 \textbf{본인 기관 데이터만} 보이는 시점에서 작성되었습니다.
+\end{summarybox}
+
+\section*{본사 관리자와 어떻게 다른가요?}
+
+같은 사이트, 같은 사이드바를 보지만 \textbf{보이는 데이터의 범위}와 \textbf{사용할 수 있는 액션}이 다릅니다.
+
+\medskip
+\noindent\begin{tabular}{@{}p{3.5cm} p{5.5cm} p{5.5cm}@{}}
+\toprule
+\textbf{영역} & \textbf{본사 관리자(HQ\_ADMIN)} & \textbf{기관 관리자(ORG\_ADMIN)} \\
+\midrule
+학생 / 반 / 학부모 & 전사(全社) 모든 기관 & 본인 기관 소속만 \\
+콘텐츠 관리 & 만들기 + 검수 + 수정 & \textbf{읽기 전용} (배정만 가능) \\
+내용 숙지 학습 & 본사 + 모든 기관 OWN & 본사 PUBLIC + 본인 기관 \\
+테스트 관리 & 진단 / 챕터 / 기타 모두 & \textbf{본인 기관이 만든 시험만} (탭 숨김) \\
+지식과 지혜 & 모든 학생 글 & \textbf{본인 기관 학생 글만} 첨삭 \\
+AI 자몽 단가 & 운영 중 변경 & 단가 조회 + 충전·사용 \\
+월 사용료 & 모든 기관 청구·감면 & 본인 기관 청구서 결제 \\
+기관 정보 & 모든 기관 등록·수정 & 본인 기관만 (\textbf{기관 설정} 메뉴) \\
+\bottomrule
+\end{tabular}
+
+\section*{사이드바 메뉴 맵 (14개)}
+
+\kfShot{00-overview-sidebar}{사이드바 — 기관 관리자가 볼 수 있는 14개 메뉴}
+
+\begin{screenbox}{좌측 사이드바 구조}
+\begin{minipage}[t]{0.32\linewidth}
+\begin{screencard}{Part 1 — 사용자 운영}
+대시보드 / 가입 승인 / 반 관리 / 학생 관리 / 학부모 관리
+\end{screencard}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}
+\begin{screencard}{Part 2 — 콘텐츠·학습}
+콘텐츠 / 내용 숙지 / 학습 계획표
+\end{screencard}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}
+\begin{screencard}{Part 3 — 시험·대결}
+테스트 관리 / 대결 관리
+\end{screencard}
+\end{minipage}
+
+\medskip
+\begin{minipage}[t]{0.48\linewidth}
+\begin{screencard}{Part 4 — 글쓰기}
+지식과 지혜
+\end{screencard}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\linewidth}
+\begin{screencard}{Part 5 — AI·결제·기관}
+AI 자몽 지갑 / 월 사용료 / 기관 설정
+\end{screencard}
+\end{minipage}
+\end{screenbox}
+
+\section*{기관 관리자가 못 보는 메뉴 (참고)}
+
+다음 메뉴는 사이드바에서 자동으로 사라지며, 직접 URL 을 입력해도 ``forbidden'' 으로 차단됩니다.
+
+\begin{itemize}[leftmargin=1.2em]
+  \item \textbf{기관 관리} (\texttt{/admin/orgs}) — 본사가 모든 기관을 등록·수정. 기관 관리자는 ``기관 설정'' 으로 본인 기관만 수정 가능.
+  \item \textbf{게시판 관리·채팅 관리} — 전사 운영. 본사 전용.
+  \item \textbf{지식과 지혜 콘텐츠 풀 / 프로 모드 / 학습자료 DB / 수정 이력 / AI 사용 내역} — 콘텐츠 자체를 만들거나 시스템 운영하는 영역.
+  \item \textbf{문의 관리·보고} — 전사 사용자 문의·신고 모음. 기관 관리자는 본인 기관 학생 문의만 따로 본사가 전달.
+  \item \textbf{상점 관리} — 본사가 운영하는 쇼핑몰.
+\end{itemize}
+
+\section*{이번 매뉴얼 사용법}
+
+\begin{enumerate}
+  \item Part 1\,2\,3 순서로 학생 등록부터 학습 운영까지 익힙니다.
+  \item Part 4 (글쓰기) 와 Part 5 (AI 자몽·결제·기관 정보) 는 필요할 때 찾아봅니다.
+  \item 각 chapter 는 \textbf{한눈에 → 화면 구조 → 할 수 있는 일 → 자주 쓰는 흐름 → 알아두면 좋은 점} 순으로 일관되게 구성됩니다.
+\end{enumerate}
+
+\begin{tipbox}{매뉴얼이 다루지 않는 주제}
+\begin{itemize}[leftmargin=1.2em]
+  \item \textbf{학생 시점의 학습 진행} (실제로 농장 모드, 프로 모드, 일일 퀴즈를 푸는 화면) — 별도 학생용 매뉴얼 참고
+  \item \textbf{본사가 다루는 콘텐츠 제작·검수} — 본사 관리자 매뉴얼 참고
+  \item \textbf{토스페이먼츠 결제 가맹 신청 절차} — \texttt{docs/토스\_결제경로\_캡처가이드.md} 참고
+\end{itemize}
+\end{tipbox}

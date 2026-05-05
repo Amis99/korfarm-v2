@@ -1,0 +1,59 @@
+\chapter{기관 설정}
+
+\begin{summarybox}{한눈에}
+본 기관의 \textbf{이름·종류·주소·로고}를 직접 수정합니다. 로고는 인쇄물(시험지·학습지) 헤더에 \textbf{국어농장 로고와 나란히} 자동 출력되어 학생들에게 우리 학원 브랜드를 보여줍니다.
+\end{summarybox}
+
+\kfShot{14-org-settings}{기관 설정 — 정보 수정 + 로고 업로드}
+
+\section*{화면 구조}
+
+\begin{screenbox}{기관 정보 폼}
+\noindent
+\begin{tabular}{@{}p{3cm}p{8cm}@{}}
+\toprule
+\textbf{필드} & \textbf{설명} \\
+\midrule
+기관 이름 & 학원·교실 이름 (필수) \\
+기관 종류 & 학원 / 학교 / 공부방 / 기타 \\
+지역 & 시·도 단위 \\
+상세 주소 & 도로명·동·층까지 \\
+\textbf{로고} & PNG 권장 (배경 투명) — 인쇄물에 자동 출력 \\
+\bottomrule
+\end{tabular}
+
+\medskip
+\textbf{우측 상단}: 기관 ID + 플랜 + 좌석 수 (수정 불가, 본사 운영)
+\end{screenbox}
+
+\section*{여기서 할 수 있는 일}
+\begin{itemize}[leftmargin=1.2em]
+  \item 기관 \textbf{이름·종류·주소} 직접 수정
+  \item \textbf{로고 업로드} — PNG/JPG (정사각형 또는 가로형)
+  \item 로고 \textbf{미리보기} — 기존 로고 표시 + 교체
+  \item 로고 \textbf{제거} — 빈 상태로 복구
+\end{itemize}
+
+\section*{로고가 출력되는 곳}
+\begin{itemize}[leftmargin=1.2em]
+  \item 학생 학습 \textbf{시험지 인쇄} (학습 계획표 셀에서 ``PDF 인쇄'')
+  \item \textbf{내용 숙지 학습 인쇄}
+  \item \textbf{학습 계획표 일괄 PDF}
+  \item 형식: \texttt{\,[국어농장 로고] $\times$ [본 기관 로고]\,} (가로 나란히)
+\end{itemize}
+
+\section*{자주 쓰는 흐름}
+\begin{enumerate}
+  \item 기관 설정 진입 → 현재 정보 확인
+  \item ``이미지 선택'' → 로고 PNG 업로드 → 미리보기 확인
+  \item ``저장'' → 즉시 모든 인쇄 화면에 반영
+\end{enumerate}
+
+\begin{tipbox}{알아두면 좋은 점}
+\begin{itemize}[leftmargin=1.2em]
+  \item 기관 ID·플랜·좌석 수는 본사가 관리 — 변경하려면 본사에 요청
+  \item 로고는 정사각형 또는 가로로 긴 PNG (배경 투명) 권장 — 너무 세로로 길면 시험지 헤더에서 잘릴 수 있음
+  \item 로고 url 은 \texttt{/v1/files/\{id\}/download} — 추후 S3 마이그레이션 시 자동 호환
+  \item 로고 미설정 시 인쇄물에는 국어농장 로고만 출력
+\end{itemize}
+\end{tipbox}

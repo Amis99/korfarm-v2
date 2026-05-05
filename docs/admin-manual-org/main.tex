@@ -1,0 +1,47 @@
+\documentclass[11pt,oneside]{book}
+\input{preamble.tex}
+
+\begin{document}
+
+\kfTitlePage
+
+\frontmatter
+\tableofcontents
+
+\mainmatter
+
+% ─────────────── PART 0 ───────────────
+\part*{시작하기}
+\addcontentsline{toc}{part}{시작하기}
+\include{chapters/00-overview}
+
+% ─────────────── PART 1 ───────────────
+\part{학생·학부모·반 운영}
+\include{chapters/01-dashboard}
+\include{chapters/02-approvals}
+\include{chapters/03-classes}
+\include{chapters/04-students}
+\include{chapters/05-parents}
+
+% ─────────────── PART 2 ───────────────
+\part{콘텐츠와 학습}
+\include{chapters/06-content}
+\include{chapters/07-study-content}
+\include{chapters/08-study-plans}
+
+% ─────────────── PART 3 ───────────────
+\part{시험·대결}
+\include{chapters/09-tests}
+\include{chapters/10-duel}
+
+% ─────────────── PART 4 ───────────────
+\part{글쓰기 첨삭}
+\include{chapters/11-wisdom}
+
+% ─────────────── PART 5 ───────────────
+\part{AI 자몽·결제·기관 운영}
+\include{chapters/12-grapefruit-wallet}
+\include{chapters/13-billing}
+\include{chapters/14-org-settings}
+
+\end{document}
