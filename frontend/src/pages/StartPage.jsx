@@ -798,6 +798,17 @@ function StartPage() {
               <p>담당 선생님이 있는 경우 시험 공부 스케줄을 관리합니다.</p>
               {!hasSub && <span className="start-lock-badge">구독 필요</span>}
             </div>
+            <div className={`start-learn-card${!hasSub ? " --locked" : ""}`} onClick={() => navigate(hasSub ? "/my/ai-study" : "/subscription")}>
+              <span className="material-symbols-outlined">auto_awesome</span>
+              <h3>AI 학습 만들기</h3>
+              <p>본문을 입력하면 AI 가 문제를 자동 생성해 줘요.</p>
+              {!hasSub && <span className="start-lock-badge">구독 필요</span>}
+            </div>
+            <div className="start-learn-card" onClick={() => navigate("/my/grapefruit")} style={{ background: "linear-gradient(135deg, #fff5e6, #ffe9c2)" }}>
+              <span className="material-symbols-outlined" style={{ color: "#a85c00" }}>nutrition</span>
+              <h3>내 자몽 지갑</h3>
+              <p>AI 사용용 자몽 충전 / 작물 잔액 확인</p>
+            </div>
           </div>
         </section>
 

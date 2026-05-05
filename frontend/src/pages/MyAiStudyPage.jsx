@@ -187,6 +187,7 @@ export default function MyAiStudyPage() {
               <th style={{ padding: 8 }}>레벨</th>
               <th style={{ padding: 8 }}>문항 수</th>
               <th style={{ padding: 8 }}>생성일</th>
+              <th style={{ padding: 8 }}>학습</th>
             </tr>
           </thead>
           <tbody>
@@ -196,6 +197,14 @@ export default function MyAiStudyPage() {
                 <td style={{ padding: 8, textAlign: "center" }}>{LEVELS.find(l => l.id === c.levelId)?.label || c.levelId}</td>
                 <td style={{ padding: 8, textAlign: "center" }}>{c.questionCount}</td>
                 <td style={{ padding: 8, fontSize: 11 }}>{c.createdAt?.slice(0, 16).replace("T", " ")}</td>
+                <td style={{ padding: 8, textAlign: "center" }}>
+                  {c.questionCount > 0 ? (
+                    <button onClick={() => navigate(`/learning/${c.id}`)}
+                      style={{ padding: "4px 10px", background: "#2f7a3e", color: "#fff", border: "none", borderRadius: 4, cursor: "pointer", fontSize: 12 }}>
+                      학습 시작
+                    </button>
+                  ) : <span style={{ color: "#999", fontSize: 11 }}>생성 중</span>}
+                </td>
               </tr>
             ))}
           </tbody>

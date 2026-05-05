@@ -938,6 +938,11 @@ class StudyContentService(
                 if (orgId != null && c.ownerOrgId == orgId) return
                 throw ApiException("FORBIDDEN", "이 콘텐츠는 소속 기관 학생만 학습할 수 있습니다", HttpStatus.FORBIDDEN)
             }
+            "OWN" -> {
+                // 학생이 본인이 만든 학습 — creatorId 가 본인이어야
+                if (c.creatorId == userId) return
+                throw ApiException("FORBIDDEN", "본인이 만든 학습만 학습할 수 있습니다", HttpStatus.FORBIDDEN)
+            }
             else -> throw ApiException("FORBIDDEN", "알 수 없는 가시성", HttpStatus.FORBIDDEN)
         }
     }
