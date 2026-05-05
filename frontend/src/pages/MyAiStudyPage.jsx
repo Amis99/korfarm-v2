@@ -74,10 +74,27 @@ export default function MyAiStudyPage() {
         tier,
         currency,
       });
-      setMessage("학습 생성 시작! 잠시 후 목록에서 결과를 확인할 수 있어요.");
+      setMessage("학습 생성 중... AI 가 문제를 만들고 있어요. (보통 30초~1분)");
       setShowForm(false);
       setTitle(""); setMarkdown(""); setCounts({ mcq: 5, ox: 0, short: 0, essay: 0 });
-      await reload();
+      // 자동 폴링 — 5초 간격으로 reload, questionCount 가 0 초과되면 종료 (최대 5분)
+      const startedAt = Date.now();
+      const targetId = content.id;
+      const poll = async () => {
+        await reload();
+        const updated = await apiGet("/v1/me/study/contents").catch(() => []);
+        const found = (updated || []).find((x) => x.id === targetId);
+        if (found && found.questionCount > 0) {
+          setMessage(`✅ 학습 생성 완료! '${found.title}' 의 학습 시작 버튼을 눌러 풀어보세요.`);
+          return;
+        }
+        if (Date.now() - startedAt > 5 * 60 * 1000) {
+          setMessage("AI 가 응답하지 않습니다. 잠시 후 새로고침해 주세요.");
+          return;
+        }
+        setTimeout(poll, 5000);
+      };
+      setTimeout(poll, 5000);
     } catch (e) {
       setError(e.message);
     } finally {
