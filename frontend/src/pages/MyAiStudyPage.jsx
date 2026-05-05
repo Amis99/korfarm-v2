@@ -200,7 +200,7 @@ export default function MyAiStudyPage() {
                 <td style={{ padding: 8, fontSize: 11 }}>{c.createdAt?.slice(0, 16).replace("T", " ")}</td>
                 <td style={{ padding: 8, textAlign: "center" }}>
                   {c.questionCount > 0 ? (
-                    <button onClick={() => navigate(`/learning/${c.id}`)}
+                    <button onClick={() => navigate(`/study-learning/${c.id}`)}
                       style={{ padding: "4px 10px", background: "#2f7a3e", color: "#fff", border: "none", borderRadius: 4, cursor: "pointer", fontSize: 12 }}>
                       학습 시작
                     </button>
