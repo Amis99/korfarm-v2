@@ -26,6 +26,7 @@ class GrapefruitService(
     private val userWalletRepository: UserGrapefruitWalletRepository,
     private val transactionRepository: GrapefruitTransactionRepository,
     private val orgMembershipRepository: OrgMembershipRepository,
+    private val userCropWalletRepository: UserCropWalletRepository,
 ) {
     private val log = LoggerFactory.getLogger(GrapefruitService::class.java)
 
@@ -54,6 +55,11 @@ class GrapefruitService(
     data class PricingSeed(
         val kind: String, val label: String, val model: String,
         val price: Int, val description: String
+    )
+
+    data class UserAiBalance(
+        val grapefruits: Int,
+        val crops: Map<String, Int>,        // crop_type → balance
     )
 
     /** 첫 부팅 시 단가 시드 — DB 비어있을 때만 INSERT (Flyway 비활성 환경 대응) */
@@ -234,6 +240,101 @@ class GrapefruitService(
         if (pageCount <= 0) return 0
         val kind = if (pageCount <= 5) "file-to-markdown-1to5" else "file-to-markdown-6to10"
         return spendForCaller(kind, aiLogId, "${pageCount}페이지 변환")
+    }
+
+    // ─── 개인 충전·차감 (Phase C) ────────────────────────────────────
+
+    /** 개인 자몽 잔액 + 보유 작물 합계 (모두 1:1 자몽 환산) */
+    @Transactional(readOnly = true)
+    fun getUserAiBalance(userId: String): UserAiBalance {
+        val grapefruits = getUserBalance(userId)
+        val crops = userCropWalletRepository.findByIdUserId(userId)
+            .filter { it.balance > 0 }
+            .associate { it.id.cropType to it.balance }
+        return UserAiBalance(grapefruits = grapefruits, crops = crops)
+    }
+
+    /**
+     * 학생 AI 사용 차감.
+     * currency: "grapefruit" 또는 "crop_<type>" (예: "crop_wheat", "crop_apple")
+     * 잔액 부족 시 INSUFFICIENT_GRAPEFRUIT (402).
+     */
+    @Transactional
+    fun spendForUser(
+        userId: String,
+        kind: String,
+        currency: String,
+        aiLogId: String? = null,
+        memo: String? = null,
+    ): Int {
+        val price = getPrice(kind)
+        return when {
+            currency == "grapefruit" -> spendUserGrapefruit(userId, kind, price, aiLogId, memo)
+            currency.startsWith("crop_") -> spendUserCrop(userId, currency, kind, price, aiLogId, memo)
+            else -> throw ApiException("INVALID_CURRENCY", "통화 잘못됨: $currency", HttpStatus.BAD_REQUEST)
+        }
+    }
+
+    private fun spendUserGrapefruit(userId: String, kind: String, price: Int, aiLogId: String?, memo: String?): Int {
+        val wallet = userWalletRepository.findById(userId).orElseGet {
+            UserGrapefruitWalletEntity(userId = userId, balance = 0)
+        }
+        if (wallet.balance < price) {
+            throw ApiException(
+                "INSUFFICIENT_GRAPEFRUIT",
+                "자몽 잔액 부족 — 필요: ${price}자몽, 보유: ${wallet.balance}자몽",
+                HttpStatus.PAYMENT_REQUIRED
+            )
+        }
+        wallet.balance -= price
+        userWalletRepository.save(wallet)
+        recordTransaction(
+            walletType = "user", ownerId = userId,
+            direction = "spend", amount = price,
+            kind = kind, aiLogId = aiLogId, paymentId = null,
+            amountWon = null, balanceAfter = wallet.balance,
+            memo = memo,
+        )
+        return wallet.balance
+    }
+
+    private fun spendUserCrop(userId: String, cropType: String, kind: String, price: Int, aiLogId: String?, memo: String?): Int {
+        val id = UserCropWalletId(userId = userId, cropType = cropType)
+        val wallet = userCropWalletRepository.findById(id).orElseGet {
+            UserCropWalletEntity(id = id, balance = 0)
+        }
+        if (wallet.balance < price) {
+            throw ApiException(
+                "INSUFFICIENT_CROP",
+                "${cropType} 잔액 부족 — 필요: ${price}개, 보유: ${wallet.balance}개",
+                HttpStatus.PAYMENT_REQUIRED
+            )
+        }
+        wallet.balance -= price
+        userCropWalletRepository.save(wallet)
+        recordTransaction(
+            walletType = "user", ownerId = userId,
+            direction = "spend", amount = price,
+            kind = kind, aiLogId = aiLogId, paymentId = null,
+            amountWon = null, balanceAfter = wallet.balance,
+            memo = "${cropType} 사용: ${memo ?: kind}",
+        )
+        return wallet.balance
+    }
+
+    /**
+     * 작물 변환 시 ai_wallet 에 추가 (랭킹용 user_crops 는 별도 +1).
+     * EconomyService.convertSeedsToCrops 에서 호출.
+     */
+    @Transactional
+    fun grantCropToWallet(userId: String, cropType: String, amount: Int = 1) {
+        if (amount <= 0) return
+        val id = UserCropWalletId(userId = userId, cropType = cropType)
+        val wallet = userCropWalletRepository.findById(id).orElseGet {
+            UserCropWalletEntity(id = id, balance = 0)
+        }
+        wallet.balance += amount
+        userCropWalletRepository.save(wallet)
     }
 
     // ─── 거래 이력 ────────────────────────────────────

@@ -554,6 +554,50 @@ class WisdomService(
      * AI 첨삭 비동기 enqueue.
      * 동일 post 에 PENDING/RUNNING job 이 있으면 그 jobId 재사용 (중복 호출 방지).
      */
+    /**
+     * 학생 본인 글 AI 첨삭 — currency 로 자몽 또는 작물 선택.
+     * 본인 글만 가능 (post.userId == requesterId).
+     */
+    @Transactional
+    fun enqueueAiFeedbackSelf(postId: String, requesterId: String, currency: String): AiFeedbackJobEnqueueResponse {
+        val post = postRepository.findById(postId).orElseThrow {
+            ApiException("NOT_FOUND", "글을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        if (post.userId != requesterId) {
+            throw ApiException("FORBIDDEN", "본인이 쓴 글에만 AI 첨삭이 가능합니다", HttpStatus.FORBIDDEN)
+        }
+        if (post.content.isNullOrBlank()) {
+            throw ApiException("NO_CONTENT", "글 내용이 비어 있습니다", HttpStatus.BAD_REQUEST)
+        }
+        val existing = aiFeedbackJobRepository.findFirstByPostIdAndStatusInOrderByCreatedAtDesc(
+            postId, listOf(AiFeedbackJobStatus.PENDING, AiFeedbackJobStatus.RUNNING)
+        )
+        if (existing != null && existing.createdAt.isAfter(LocalDateTime.now().minusMinutes(10))) {
+            return AiFeedbackJobEnqueueResponse(jobId = existing.id, status = existing.status)
+        }
+        // 학생 자몽 또는 작물 차감
+        grapefruitService.spendForUser(requesterId, "wisdom-feedback", currency, memo = "본인 글 AI 첨삭")
+
+        val job = AiFeedbackJobEntity(
+            id = IdGenerator.newId("aifb"),
+            postId = postId,
+            requestedBy = requesterId,
+            status = AiFeedbackJobStatus.PENDING,
+        )
+        aiFeedbackJobRepository.save(job)
+        val jobId = job.id
+        if (TransactionSynchronizationManager.isSynchronizationActive()) {
+            TransactionSynchronizationManager.registerSynchronization(object : TransactionSynchronization {
+                override fun afterCommit() {
+                    aiFeedbackJobService.runJob(jobId)
+                }
+            })
+        } else {
+            aiFeedbackJobService.runJob(jobId)
+        }
+        return AiFeedbackJobEnqueueResponse(jobId = jobId, status = job.status)
+    }
+
     @Transactional
     fun enqueueAiFeedback(postId: String, requesterId: String): AiFeedbackJobEnqueueResponse {
         val post = postRepository.findById(postId).orElseThrow {

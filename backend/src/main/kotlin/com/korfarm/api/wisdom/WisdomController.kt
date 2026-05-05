@@ -87,4 +87,23 @@ class WisdomController(
         wisdomService.deleteComment(commentId, userId, isAdmin = false)
         return ApiResponse(success = true, data = mapOf("status" to "deleted"))
     }
+
+    /**
+     * 학생 본인 글 AI 첨삭 (Phase C). currency 로 자몽 또는 작물 선택.
+     * 본인 글이 아니면 403.
+     */
+    @PostMapping("/v1/wisdom/posts/{postId}/ai-feedback-self")
+    fun aiFeedbackSelf(
+        @PathVariable postId: String,
+        @Valid @RequestBody req: AiFeedbackSelfRequest,
+    ): ApiResponse<AiFeedbackJobEnqueueResponse> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        val result = wisdomService.enqueueAiFeedbackSelf(postId, userId, req.currency)
+        return ApiResponse(success = true, data = result)
+    }
 }
+
+data class AiFeedbackSelfRequest(
+    val currency: String = "grapefruit",  // grapefruit / crop_wheat / crop_rice / crop_corn / crop_grape / crop_apple
+)

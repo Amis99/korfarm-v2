@@ -48,6 +48,11 @@ function WisdomPostDetailPage() {
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState("");
+  const [aiModalOpen, setAiModalOpen] = useState(false);
+  const [aiBalance, setAiBalance] = useState(null);
+  const [aiCurrency, setAiCurrency] = useState("grapefruit");
+  const [aiBusy, setAiBusy] = useState(false);
+  const [aiMessage, setAiMessage] = useState("");
 
   // Like state
   const [likeCount, setLikeCount] = useState(0);
@@ -257,6 +262,26 @@ function WisdomPostDetailPage() {
             <span>좋아요 {likeCount}</span>
           </button>
 
+          {post.isOwn && !post.feedback && (
+            <button
+              className="wis-btn"
+              style={{ background: "#fff5e6", border: "1px solid #f5b342", color: "#a85c00" }}
+              onClick={async () => {
+                setAiMessage("");
+                try {
+                  const b = await apiGet("/v1/me/grapefruit/balance");
+                  setAiBalance(b);
+                  setAiCurrency("grapefruit");
+                  setAiModalOpen(true);
+                } catch (e) {
+                  setError(e.message);
+                }
+              }}
+            >
+              🍊 AI 첨삭
+            </button>
+          )}
+
           {post.isOwn && (
             <button
               className="wis-btn wis-btn-danger"
@@ -267,6 +292,53 @@ function WisdomPostDetailPage() {
             </button>
           )}
         </div>
+
+        {/* AI 첨삭 모달 */}
+        {aiModalOpen && (
+          <div onClick={() => !aiBusy && setAiModalOpen(false)}
+            style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.4)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000 }}>
+            <div onClick={(e) => e.stopPropagation()}
+              style={{ background: "#fff", padding: 24, borderRadius: 8, maxWidth: 420, width: "90%" }}>
+              <h2 style={{ marginTop: 0 }}>🍊 AI 글쓰기 첨삭</h2>
+              <p style={{ fontSize: 13, color: "#666", marginBottom: 12 }}>
+                AI 가 글을 분석해 첨삭 의견을 제공합니다 (자몽 1개 사용).
+                자몽이 부족하면 학습으로 모은 작물로도 결제할 수 있어요.
+              </p>
+              <label style={{ display: "block", fontSize: 13, marginBottom: 6, fontWeight: 600 }}>결제 수단 선택</label>
+              <select value={aiCurrency} onChange={(e) => setAiCurrency(e.target.value)}
+                style={{ width: "100%", padding: 10, border: "1px solid #ccc", borderRadius: 4, marginBottom: 12 }}>
+                <option value="grapefruit">🍊 자몽 ({aiBalance?.grapefruits ?? 0}개)</option>
+                {Object.entries(aiBalance?.crops || {}).filter(([, v]) => v > 0).map(([k, v]) => {
+                  const labels = { crop_wheat: "🌾 밀", crop_rice: "🍙 쌀", crop_corn: "🌽 옥수수", crop_grape: "🍇 포도", crop_apple: "🍎 사과" };
+                  return <option key={k} value={k}>{labels[k] || k} ({v}개)</option>;
+                })}
+              </select>
+              {aiMessage && <div style={{ padding: 8, background: "#fff3cd", borderRadius: 4, marginBottom: 12, fontSize: 13 }}>{aiMessage}</div>}
+              <div style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
+                <button onClick={() => setAiModalOpen(false)} disabled={aiBusy}
+                  style={{ padding: "8px 16px", background: "none", border: "1px solid #ccc", borderRadius: 4, cursor: "pointer" }}>취소</button>
+                <button disabled={aiBusy} onClick={async () => {
+                  setAiBusy(true); setAiMessage("");
+                  try {
+                    await apiPost(`/v1/wisdom/posts/${postId}/ai-feedback-self`, { currency: aiCurrency });
+                    setAiMessage("AI 첨삭이 시작되었습니다. 잠시 후 새로고침하면 결과를 확인할 수 있어요.");
+                    setTimeout(() => { setAiModalOpen(false); window.location.reload(); }, 2000);
+                  } catch (e) {
+                    setAiMessage(e.message || "오류 발생");
+                  } finally {
+                    setAiBusy(false);
+                  }
+                }}
+                  style={{ padding: "8px 16px", background: "#2f7a3e", color: "#fff", border: "none", borderRadius: 4, cursor: "pointer" }}>
+                  {aiBusy ? "처리 중..." : "첨삭 시작"}
+                </button>
+              </div>
+              <p style={{ fontSize: 11, color: "#999", marginTop: 8 }}>
+                자몽 부족 시 <Link to="/my/grapefruit">자몽 충전 페이지</Link>에서 충전할 수 있어요.
+              </p>
+            </div>
+          </div>
+        )}
 
         {post.feedback && (
           <div className="wis-feedback-section">

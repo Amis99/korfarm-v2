@@ -12,7 +12,8 @@ class EconomyService(
     private val userSeedRepository: UserSeedRepository,
     private val userCropRepository: UserCropRepository,
     private val userFertilizerRepository: UserFertilizerRepository,
-    private val economyLedgerRepository: EconomyLedgerRepository
+    private val economyLedgerRepository: EconomyLedgerRepository,
+    private val grapefruitService: com.korfarm.api.grapefruit.GrapefruitService,
 ) {
     private val seedRequired = 10
     private val fertilizerSpent = 1
@@ -148,6 +149,8 @@ class EconomyService(
         if (fertilizerCost > 0) {
             addLedger(userId, "fertilizer", "fertilizer", -fertilizerCost, "harvest_craft", "harvest", null)
         }
+        // AI 사용용 작물 지갑에도 추가 (랭킹 점수는 user_crops 누적 / AI 사용은 user_crop_wallet 차감)
+        grapefruitService.grantCropToWallet(userId, cropType, cropDelta)
 
         return HarvestCraftResult(
             cropType = cropType,
@@ -199,6 +202,8 @@ class EconomyService(
         if (fertilizerCost > 0) {
             addLedger(userId, "fertilizer", "fertilizer", -fertilizerCost, "harvest_craft_batch", "harvest", null)
         }
+        // AI 사용용 작물 지갑에도 추가
+        grapefruitService.grantCropToWallet(userId, cropType, cropDelta)
 
         return HarvestCraftResult(
             cropType = cropType,

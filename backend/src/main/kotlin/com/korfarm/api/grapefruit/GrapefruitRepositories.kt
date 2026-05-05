@@ -16,3 +16,7 @@ interface GrapefruitTransactionRepository : JpaRepository<GrapefruitTransactionE
         walletOwnerId: String,
     ): List<GrapefruitTransactionEntity>
 }
+
+interface UserCropWalletRepository : org.springframework.data.jpa.repository.JpaRepository<UserCropWalletEntity, UserCropWalletId> {
+    fun findByIdUserId(userId: String): List<UserCropWalletEntity>
+}
