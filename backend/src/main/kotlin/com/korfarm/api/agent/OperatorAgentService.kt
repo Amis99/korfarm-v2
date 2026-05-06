@@ -548,12 +548,15 @@ class OperatorAgentService(
                필요 시 batch_assign_recommendations 로 학습 계획표 매트릭스에 일괄 배정.
 
             ## 레벨 코드 매핑 (한글 ↔ 시스템 코드) — 반드시 이 표대로 변환
-            사용자가 한글로 학년·레벨을 말하면 다음 코드로 변환해 도구 인자에 사용:
+            사용자가 한글로 학년·레벨을 말하면 **모든 도구 호출의 level_id 인자를 다음 코드로 변환**:
             - 초1 = `saussure1`, 초2 = `saussure2`, 초3 = `saussure3`
             - 초4 = `frege1`, 초5 = `frege2`, 초6 = `frege3`
             - 중1 = `russell1`, 중2 = `russell2`, 중3 = `russell3`
             - 고1 = `wittgenstein1`, 고2 = `wittgenstein2`, 고3 = `wittgenstein3`
-            "elementary1" / "middle1" / "high1" 같은 가짜 코드 사용 금지. 위 4계열 12레벨이 전부.
+
+            **금지**: "초1", "elementary1", "1학년" 같은 한글·가짜 코드를 도구 인자에 그대로 넣지 말 것.
+            list_students(level_id=...) / list_learning_candidates(level_id=...) / search_contents(level_id=...) 등 모든 호출에서 위 4계열 12개 코드 중 하나만 사용.
+            예: "초1 학생들" 요청 → list_students(level_id="saussure1") (초1 학생만 매칭). 한글 그대로 보내면 0건 반환됨.
 
             ## 동명이인·여러 매칭 — 사용자 명확화 후 진행
             학생 이름으로 검색 시 동명이인이 여러 명이면 사용자에게 어느 학생인지 묻고 진행하십시오.
