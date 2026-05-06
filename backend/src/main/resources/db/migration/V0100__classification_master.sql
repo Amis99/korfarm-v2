@@ -1,7 +1,7 @@
 -- 콘텐츠 분류 마스터 + 매핑 테이블 — v3 카탈로그
 -- docs/콘텐츠_분류_카탈로그_v3.md 와 1:1 매칭
 
-CREATE TABLE classification_master (
+CREATE TABLE IF NOT EXISTS classification_master (
   code VARCHAR(64) PRIMARY KEY,
   type VARCHAR(16) NOT NULL,            -- 'area' / 'sub_area' / 'theme'
   parent_code VARCHAR(64) DEFAULT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE classification_master (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 콘텐츠 ↔ 분류 다대다 (복수 지정)
-CREATE TABLE content_classifications (
+CREATE TABLE IF NOT EXISTS content_classifications (
   content_id VARCHAR(64) NOT NULL,
   classification_code VARCHAR(64) NOT NULL,
   classification_type VARCHAR(16) NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE content_classifications (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 시험 문항 ↔ 분류 다대다 (test_questions 가 콘텐츠와 별도라 별도 매핑)
-CREATE TABLE test_question_classifications (
+CREATE TABLE IF NOT EXISTS test_question_classifications (
   question_id VARCHAR(255) NOT NULL,
   classification_code VARCHAR(64) NOT NULL,
   classification_type VARCHAR(16) NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE test_question_classifications (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ─── SEED: 영역 6개 ──────────────────────────────────────
-INSERT INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
+INSERT IGNORE INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
 ('READ', 'area', NULL, '독서 (비문학)', 10, 1, NOW(6), NOW(6)),
 ('LIT', 'area', NULL, '문학', 20, 1, NOW(6), NOW(6)),
 ('GRAM', 'area', NULL, '문법', 30, 1, NOW(6), NOW(6)),
@@ -47,7 +47,7 @@ INSERT INTO classification_master (code, type, parent_code, label_ko, sort_order
 ('MEDIA', 'area', NULL, '매체', 60, 1, NOW(6), NOW(6));
 
 -- ─── SEED: 세부영역 37개 ─────────────────────────────────
-INSERT INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
+INSERT IGNORE INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
 -- READ 6
 ('READ_HUMANITIES','sub_area','READ','인문',10,1,NOW(6),NOW(6)),
 ('READ_SOCIETY','sub_area','READ','사회',20,1,NOW(6),NOW(6)),
@@ -94,7 +94,7 @@ INSERT INTO classification_master (code, type, parent_code, label_ko, sort_order
 
 -- ─── SEED: 주제 (theme) ─────────────────────────────────
 -- 인문 32
-INSERT INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
+INSERT IGNORE INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
 -- 동양사상 5
 ('READ_HUM_E_HUNDRED','theme','READ_HUMANITIES','제자백가',10,1,NOW(6),NOW(6)),
 ('READ_HUM_E_CONFUCIAN','theme','READ_HUMANITIES','유학 (공·맹·순)',11,1,NOW(6),NOW(6)),
@@ -135,7 +135,7 @@ INSERT INTO classification_master (code, type, parent_code, label_ko, sort_order
 ('READ_HUM_AES_OTHER','theme','READ_HUMANITIES','기타 미학',64,1,NOW(6),NOW(6));
 
 -- 사회 31
-INSERT INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
+INSERT IGNORE INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
 -- 경제 8
 ('READ_SOC_ECON_MICRO','theme','READ_SOCIETY','미시경제',10,1,NOW(6),NOW(6)),
 ('READ_SOC_ECON_MACRO','theme','READ_SOCIETY','거시경제',11,1,NOW(6),NOW(6)),
@@ -174,7 +174,7 @@ INSERT INTO classification_master (code, type, parent_code, label_ko, sort_order
 ('READ_SOC_POL_POWER','theme','READ_SOCIETY','권력구조',53,1,NOW(6),NOW(6));
 
 -- 과학 22
-INSERT INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
+INSERT IGNORE INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
 ('READ_SCI_PHY_MECH','theme','READ_SCIENCE','역학',10,1,NOW(6),NOW(6)),
 ('READ_SCI_PHY_EM','theme','READ_SCIENCE','전자기·광학',11,1,NOW(6),NOW(6)),
 ('READ_SCI_PHY_QUANTUM','theme','READ_SCIENCE','양자·상대성',12,1,NOW(6),NOW(6)),
@@ -199,7 +199,7 @@ INSERT INTO classification_master (code, type, parent_code, label_ko, sort_order
 ('READ_SCI_EAR_OTHER','theme','READ_SCIENCE','기타 지구과학',54,1,NOW(6),NOW(6));
 
 -- 기술 22
-INSERT INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
+INSERT IGNORE INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
 ('READ_TECH_ICT_AI','theme','READ_TECH','AI·머신러닝',10,1,NOW(6),NOW(6)),
 ('READ_TECH_ICT_NET','theme','READ_TECH','네트워크',11,1,NOW(6),NOW(6)),
 ('READ_TECH_ICT_SEC','theme','READ_TECH','정보보안',12,1,NOW(6),NOW(6)),
@@ -224,7 +224,7 @@ INSERT INTO classification_master (code, type, parent_code, label_ko, sort_order
 ('READ_TECH_ARCH_GREEN','theme','READ_TECH','친환경 건축',53,1,NOW(6),NOW(6));
 
 -- 예술 16
-INSERT INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
+INSERT IGNORE INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
 ('READ_ART_MUS_CLASSIC','theme','READ_ART','클래식',10,1,NOW(6),NOW(6)),
 ('READ_ART_MUS_POP','theme','READ_ART','대중음악',11,1,NOW(6),NOW(6)),
 ('READ_ART_MUS_KOREAN','theme','READ_ART','국악',12,1,NOW(6),NOW(6)),
@@ -243,7 +243,7 @@ INSERT INTO classification_master (code, type, parent_code, label_ko, sort_order
 ('READ_ART_FORM_OTHER','theme','READ_ART','기타 조형',43,1,NOW(6),NOW(6));
 
 -- 문학 50
-INSERT INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
+INSERT IGNORE INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
 -- 현대시 10
 ('LIT_MP_NATURE','theme','LIT_MODERN_POETRY','자연/생명',10,1,NOW(6),NOW(6)),
 ('LIT_MP_LOVE','theme','LIT_MODERN_POETRY','사랑/이별',11,1,NOW(6),NOW(6)),
@@ -302,7 +302,7 @@ INSERT INTO classification_master (code, type, parent_code, label_ko, sort_order
 ('LIT_DR_FORM','theme','LIT_DRAMA','시나리오/희곡 형식',15,1,NOW(6),NOW(6));
 
 -- 문법 26
-INSERT INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
+INSERT IGNORE INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
 -- 음운 4
 ('GRAM_PH_CHANGE','theme','GRAM_PHONOLOGY','음운의 변동',10,1,NOW(6),NOW(6)),
 ('GRAM_PH_SYSTEM','theme','GRAM_PHONOLOGY','음운의 체계',11,1,NOW(6),NOW(6)),
@@ -336,7 +336,7 @@ INSERT INTO classification_master (code, type, parent_code, label_ko, sort_order
 ('GRAM_HS_LEXICAL','theme','GRAM_HISTORY','어휘 변천',55,1,NOW(6),NOW(6));
 
 -- 화법·작문 공통 내용 주제 (각 영역별 prefix 적용) — 화법 18 + 작문 18 + 매체 21
-INSERT INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
+INSERT IGNORE INTO classification_master (code, type, parent_code, label_ko, sort_order, active, created_at, updated_at) VALUES
 -- 화법 — 6개 sub_area 모두에 동일 주제 적용? → 화법 영역 자체에 묶기 (parent=area=SPEAK 가 아니라 sub_area 각각에 묶으면 row 가 너무 많음)
 -- 정책: 주제는 영역 단위로 정의 (parent_code = area). 화법·작문·매체 모두 영역에 직접 매달림.
 -- 화법 18
