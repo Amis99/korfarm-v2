@@ -145,6 +145,28 @@ class OperatorAgentToolExecutorImpl(
         if (method !in setOf("GET", "POST", "PUT", "PATCH", "DELETE")) {
             return AgentToolResult(false, errorCode = "BAD_METHOD", errorMessage = "허용되지 않는 method")
         }
+        // ORG_ADMIN 의 HQ 전용 path 시도 차단 (UX — 백엔드 endpoint 자체도 403 으로 막음)
+        if (callerRole == "ORG_ADMIN" && method != "GET") {
+            val hqOnlyPatterns = listOf(
+                Regex("^/v1/admin/seasons"),
+                Regex("^/v1/admin/grapefruit-pricing"),
+                Regex("^/v1/admin/grapefruit-wallet/charge"),
+                Regex("^/v1/admin/grapefruit-wallet/.*/charge"),
+                Regex("^/v1/admin/all-billings"),
+                Regex("^/v1/admin/orgs(?!/me)"),
+                Regex("^/v1/admin/inquiry"),
+                Regex("^/v1/admin/reports"),
+                Regex("^/v1/admin/ai-players"),
+                Regex("^/v1/admin/duel/rules"),
+            )
+            if (hqOnlyPatterns.any { it.containsMatchIn(path) }) {
+                return AgentToolResult(
+                    success = false,
+                    errorCode = "HQ_ONLY",
+                    errorMessage = "이 작업은 본사(HQ_ADMIN) 권한이 필요합니다. 기관 운영자는 자기 기관 데이터만 다룰 수 있습니다.",
+                )
+            }
+        }
         // internal token 발급 — 호출자의 userId·role 그대로 (권한 escalation 차단)
         val token = jwtService.createAccessToken(callerUserId, listOf(callerRole))
         val body = input["body"]
