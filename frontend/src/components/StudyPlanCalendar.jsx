@@ -61,11 +61,14 @@ export default function StudyPlanCalendar({ schedules, startDate, endDate, admin
     (assets || []).forEach((a) => { assetMap[a.id] = a; });
     cells.forEach((c) => {
       if (c.status === "unassigned" || !c.dueAt) return;
-      // 배정일 = createdAt or 오늘 fallback (createdAt 은 매트릭스 응답에 없을 수 있음)
       const due = new Date(String(c.dueAt).slice(0, 10) + "T00:00:00");
+      // 배정일 — 백엔드가 cell.updated_at 기반 assignedAt 제공.
+      // 안 오면 due 당일만 표시 (이전 7일 fallback 은 잘못된 미션 배포 표시 야기)
       const start = c.assignedAt
         ? new Date(String(c.assignedAt).slice(0, 10) + "T00:00:00")
-        : new Date(due.getTime() - 7 * 24 * 60 * 60 * 1000); // 7일 전
+        : due;
+      // start 가 due 보다 늦으면 (재배정 후 due 가 더 빠른 경우 등) due 로 보정
+      if (start > due) start.setTime(due.getTime());
       // 범위 매일에 추가
       for (let t = new Date(start); t <= due; t.setDate(t.getDate() + 1)) {
         const ds = fmt(t);

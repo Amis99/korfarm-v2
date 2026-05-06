@@ -220,6 +220,8 @@ data class CellResponse(
     val cellRefId: String? = null,
     /** 마감 기한 (ISO LocalDateTime). 배정 후에만 값 존재 */
     val dueAt: String? = null,
+    /** 배정 시점 (ISO LocalDateTime). cell.updated_at 기반 — 캘린더 표시 시작일 */
+    val assignedAt: String? = null,
     /** 자유 텍스트 라벨 (활동·자유주제 학생 입력 등) */
     val assignedLabel: String? = null,
     /** 만료 여부 — dueAt < now 이면서 status NOT IN ('completed','submitted','reviewed') */
@@ -372,6 +374,7 @@ internal fun StudyPlanCellEntity.toResponse(
         assetType = asset?.assetType, assetKind = asset?.assetKind, refId = asset?.refId,
         cellRefId = cellRefId,
         dueAt = dueAt?.toString(),
+        assignedAt = if (status != "unassigned") updatedAt.toString() else null,
         assignedLabel = assignedLabel,
         isOverdue = overdue,
         cellAction = cellAction,

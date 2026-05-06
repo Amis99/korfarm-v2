@@ -679,7 +679,14 @@ class StudyPlanService(
         }
 
         cell.cellRefId = req.cellRefId
-        cell.assignedLabel = req.assignedLabel
+        // assignedLabel 누락 시 콘텐츠/테스트 title 로 자동 채움 (모달에 학습명 표시)
+        cell.assignedLabel = req.assignedLabel ?: req.cellRefId?.let { ref ->
+            when (asset.assetType) {
+                "korfarm" -> contentRepo.findById(ref).orElse(null)?.title
+                "test" -> testPaperRepo.findById(ref).orElse(null)?.title
+                else -> null
+            }
+        }
         cell.dueAt = parseDueAt(req.dueAt) ?: LocalDate.now().plusDays(7).atTime(23, 59)
         // 재배정 허용 — 이전이 completed/expired 였더라도 배정됨 상태로 리셋
         cell.status = "pending"
