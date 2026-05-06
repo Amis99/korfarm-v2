@@ -43,53 +43,106 @@ class AiUsageController(
     ): ApiResponse<UsageListResponse> {
         AdminGuard.requireAnyRole("HQ_ADMIN")
 
-        val where = mutableListOf<String>()
-        val params = mutableMapOf<String, Any>()
-        if (!userId.isNullOrBlank()) { where.add("l.user_id = :userId"); params["userId"] = userId }
-        if (!kind.isNullOrBlank()) { where.add("l.kind = :kind"); params["kind"] = kind }
+        // ai_gen_logs 전용 where (kind 포함)
+        val whereGen = mutableListOf<String>()
+        val paramsGen = mutableMapOf<String, Any>()
+        if (!userId.isNullOrBlank()) { whereGen.add("l.user_id = :userId"); paramsGen["userId"] = userId }
+        if (!kind.isNullOrBlank()) { whereGen.add("l.kind = :kind"); paramsGen["kind"] = kind }
         if (!from.isNullOrBlank()) {
-            where.add("l.created_at >= :fromDt"); params["fromDt"] = LocalDate.parse(from).atStartOfDay()
+            whereGen.add("l.created_at >= :fromDt"); paramsGen["fromDt"] = LocalDate.parse(from).atStartOfDay()
         }
         if (!to.isNullOrBlank()) {
-            where.add("l.created_at < :toDt"); params["toDt"] = LocalDate.parse(to).plusDays(1).atStartOfDay()
+            whereGen.add("l.created_at < :toDt"); paramsGen["toDt"] = LocalDate.parse(to).plusDays(1).atStartOfDay()
         }
-        val whereClause = if (where.isEmpty()) "" else "WHERE " + where.joinToString(" AND ")
+        val whereClauseGen = if (whereGen.isEmpty()) "" else "WHERE " + whereGen.joinToString(" AND ")
+
+        // agent_usage_log / tutor_usage_log 공통 where (user_id, created_at)
+        val whereCommon = mutableListOf<String>()
+        val paramsCommon = mutableMapOf<String, Any>()
+        if (!userId.isNullOrBlank()) { whereCommon.add("user_id = :userId"); paramsCommon["userId"] = userId }
+        if (!from.isNullOrBlank()) {
+            whereCommon.add("created_at >= :fromDt"); paramsCommon["fromDt"] = LocalDate.parse(from).atStartOfDay()
+        }
+        if (!to.isNullOrBlank()) {
+            whereCommon.add("created_at < :toDt"); paramsCommon["toDt"] = LocalDate.parse(to).plusDays(1).atStartOfDay()
+        }
+        val whereClauseCommon = if (whereCommon.isEmpty()) "" else "WHERE " + whereCommon.joinToString(" AND ")
+
+        // kind 필터에 따라 어느 테이블 조회할지 결정
+        val includeGen = kind.isNullOrBlank() || (!kind.startsWith("agent-call") && kind != "tutor-call")
+        val includeAgent = kind.isNullOrBlank() || kind.startsWith("agent-call")
+        val includeTutor = kind.isNullOrBlank() || kind == "tutor-call"
 
         val safeLimit = limit.coerceIn(1, 1000)
-        // 3개 테이블 UNION ALL — ai_gen_logs (콘텐츠 생성·첨삭) + agent_usage_log (운영자 AI 비서) + tutor_usage_log (학생 튜터)
-        // 컬럼 정렬: id / user_id / test_id / kind / model / input / output / duration / passed / retry / status / error / created_at
-        val sql = """
-            SELECT * FROM (
+
+        // ai_gen_logs (콘텐츠 생성·첨삭)
+        val rows1: List<Array<Any?>> = if (!includeGen) emptyList() else {
+            val sql1 = """
                 SELECT l.id, l.user_id, l.test_id, l.kind, l.model,
                        l.input_tokens, l.output_tokens, l.duration_ms,
                        l.passed, l.retry_count, l.status, l.error_message,
                        l.created_at
                 FROM ai_gen_logs l
-                UNION ALL
-                SELECT a.id, a.user_id, NULL AS test_id,
-                       CASE WHEN a.is_extra = 1 THEN 'agent-call-extra' ELSE 'agent-call-free' END AS kind,
+                $whereClauseGen
+                ORDER BY l.created_at DESC
+                LIMIT $safeLimit
+            """.trimIndent()
+            val q1 = em.createNativeQuery(sql1)
+            paramsGen.forEach { (k, v) -> q1.setParameter(k, v) }
+            @Suppress("UNCHECKED_CAST")
+            q1.resultList as List<Array<Any?>>
+        }
+
+        // agent_usage_log (운영자 AI 비서)
+        val rows2: List<Array<Any?>> = if (!includeAgent) emptyList() else try {
+            // kind=agent-call-extra/free 인 경우 is_extra 도 추가 필터
+            val extraFilter = when (kind) {
+                "agent-call-extra" -> " AND is_extra = 1"
+                "agent-call-free" -> " AND is_extra = 0"
+                else -> ""
+            }
+            val sql2 = """
+                SELECT id, user_id, NULL AS test_id,
+                       CASE WHEN is_extra = 1 THEN 'agent-call-extra' ELSE 'agent-call-free' END AS kind,
                        'sonnet' AS model,
-                       a.total_input_tokens, a.total_output_tokens, NULL AS duration_ms,
+                       total_input_tokens, total_output_tokens, NULL AS duration_ms,
                        NULL AS passed, 0 AS retry_count, 'success' AS status, NULL AS error_message,
-                       a.created_at
-                FROM agent_usage_log a
-                UNION ALL
-                SELECT t.id, t.user_id, NULL AS test_id,
+                       created_at
+                FROM agent_usage_log
+                ${if (whereClauseCommon.isEmpty()) (if (extraFilter.isNotEmpty()) "WHERE 1=1$extraFilter" else "") else "$whereClauseCommon$extraFilter"}
+                ORDER BY created_at DESC
+                LIMIT $safeLimit
+            """.trimIndent()
+            val q2 = em.createNativeQuery(sql2)
+            paramsCommon.forEach { (k, v) -> q2.setParameter(k, v) }
+            @Suppress("UNCHECKED_CAST")
+            q2.resultList as List<Array<Any?>>
+        } catch (_: Exception) { emptyList() }
+
+        // tutor_usage_log (학생 튜터)
+        val rows3: List<Array<Any?>> = if (!includeTutor) emptyList() else try {
+            val sql3 = """
+                SELECT id, user_id, NULL AS test_id,
                        'tutor-call' AS kind,
                        'sonnet' AS model,
-                       t.total_input_tokens, t.total_output_tokens, NULL AS duration_ms,
+                       total_input_tokens, total_output_tokens, NULL AS duration_ms,
                        NULL AS passed, 0 AS retry_count, 'success' AS status, NULL AS error_message,
-                       t.created_at
-                FROM tutor_usage_log t
-            ) l
-            $whereClause
-            ORDER BY l.created_at DESC
-            LIMIT $safeLimit
-        """.trimIndent()
-        val q = em.createNativeQuery(sql)
-        params.forEach { (k, v) -> q.setParameter(k, v) }
-        @Suppress("UNCHECKED_CAST")
-        val rows = q.resultList as List<Array<Any?>>
+                       created_at
+                FROM tutor_usage_log
+                $whereClauseCommon
+                ORDER BY created_at DESC
+                LIMIT $safeLimit
+            """.trimIndent()
+            val q3 = em.createNativeQuery(sql3)
+            paramsCommon.forEach { (k, v) -> q3.setParameter(k, v) }
+            @Suppress("UNCHECKED_CAST")
+            q3.resultList as List<Array<Any?>>
+        } catch (_: Exception) { emptyList() }
+
+        // Kotlin 단에서 merge + sort by created_at desc + limit
+        val rows = (rows1 + rows2 + rows3)
+            .sortedByDescending { (it[12] as? java.sql.Timestamp)?.time ?: 0L }
+            .take(safeLimit)
 
         // 사용자·기관 join
         val userIds = rows.mapNotNull { it[1] as? String }.distinct()
