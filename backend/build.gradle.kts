@@ -31,6 +31,8 @@ dependencies {
     implementation("com.auth0:java-jwt:4.4.0")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.apache.pdfbox:pdfbox:3.0.2")
+    implementation("software.amazon.awssdk:s3:2.25.16")
+    implementation("software.amazon.awssdk:s3-transfer-manager:2.25.16")
     runtimeOnly("com.mysql:mysql-connector-j")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

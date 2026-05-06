@@ -6,8 +6,8 @@ import com.korfarm.api.contracts.PresignRequest
 import com.korfarm.api.security.SecurityUtils
 import com.korfarm.api.system.FeatureFlagService
 import jakarta.validation.Valid
+import org.springframework.core.io.InputStreamResource
 import org.springframework.core.io.Resource
-import org.springframework.core.io.UrlResource
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
-import java.nio.file.Files
 
 @RestController
 @RequestMapping("/v1/files")
@@ -56,8 +55,8 @@ class FileController(
         // 이모티콘 등 공개 파일은 비인증 허용
         val userId = SecurityUtils.currentUserId()
         val isAdmin = userId != null && SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
-        val (entity, filePath) = fileService.getFileForDownload(userId, isAdmin, fileId)
-        val resource = UrlResource(filePath.toUri())
+        val (entity, stream) = fileService.openFileForDownload(userId, isAdmin, fileId)
+        val resource = InputStreamResource(stream)
         val fileName = entity.originalName ?: entity.id
         val disposition = if (entity.mime.startsWith("image/") || entity.mime == "application/pdf") {
             "inline; filename=\"${fileName}\""
@@ -66,7 +65,7 @@ class FileController(
         }
         return ResponseEntity.ok()
             .contentType(MediaType.parseMediaType(entity.mime))
-            .contentLength(Files.size(filePath))
+            .contentLength(entity.size)
             .header(HttpHeaders.CONTENT_DISPOSITION, disposition)
             .body(resource)
     }

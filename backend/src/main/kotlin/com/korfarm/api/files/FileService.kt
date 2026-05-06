@@ -3,21 +3,42 @@ package com.korfarm.api.files
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.contracts.PresignRequest
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.multipart.MultipartFile
+import software.amazon.awssdk.core.sync.RequestBody
+import software.amazon.awssdk.core.sync.ResponseTransformer
+import software.amazon.awssdk.services.s3.S3Client
+import software.amazon.awssdk.services.s3.model.GetObjectRequest
+import software.amazon.awssdk.services.s3.model.HeadObjectRequest
+import software.amazon.awssdk.services.s3.model.NoSuchKeyException
+import software.amazon.awssdk.services.s3.model.PutObjectRequest
+import java.io.ByteArrayInputStream
+import java.io.InputStream
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
-import java.nio.file.StandardCopyOption
 
+/**
+ * 파일 저장·조회 서비스 (2026-05-06: EC2 디스크 → S3 마이그레이션).
+ *
+ * 정책:
+ *  - 신규 업로드: S3 (`korfarm-uploads` 버킷, key = fileId)
+ *  - 다운로드: 1차 S3 → 미존재 시 EC2 로컬 fallback (마이그레이션 전 기존 파일 보호)
+ *  - 마이그레이션 완료 후 EC2 fallback 제거 가능
+ */
 @Service
 class FileService(
     private val fileRepository: FileRepository,
-    @Value("\${app.upload.dir:./uploads}") private val uploadDir: String
+    private val s3Client: S3Client,
+    @Value("\${app.upload.dir:./uploads}") private val uploadDir: String,
+    @Value("\${app.s3.bucket:korfarm-uploads}") private val bucket: String,
 ) {
+    private val log = LoggerFactory.getLogger(FileService::class.java)
+
     companion object {
         private val ALLOWED_MIME_TYPES = setOf(
             "image/jpeg", "image/png", "image/gif", "image/webp", "image/svg+xml",
@@ -32,11 +53,8 @@ class FileService(
         private const val MAX_FILE_SIZE: Long = 50 * 1024 * 1024
     }
 
-    private fun uploadPath(): Path {
-        val path = Paths.get(uploadDir)
-        if (!Files.exists(path)) Files.createDirectories(path)
-        return path
-    }
+    /** 마이그레이션 전 EC2 fallback 다운로드 경로 */
+    private fun ec2Path(fileId: String): Path = Paths.get(uploadDir).resolve(fileId)
 
     @Transactional
     fun createPresign(userId: String, request: PresignRequest): PresignResponse {
@@ -76,8 +94,16 @@ class FileService(
         if (entity.status == "uploaded") {
             throw ApiException("ALREADY_UPLOADED", "이미 업로드된 파일입니다", HttpStatus.CONFLICT)
         }
-        val dest = uploadPath().resolve(fileId)
-        Files.copy(file.inputStream, dest, StandardCopyOption.REPLACE_EXISTING)
+        // S3 putObject — bucket=korfarm-uploads, key=fileId
+        s3Client.putObject(
+            PutObjectRequest.builder()
+                .bucket(bucket)
+                .key(fileId)
+                .contentType(file.contentType ?: entity.mime)
+                .contentLength(file.size)
+                .build(),
+            RequestBody.fromInputStream(file.inputStream, file.size),
+        )
         entity.status = "uploaded"
         entity.size = file.size
         entity.originalName = file.originalFilename
@@ -85,7 +111,7 @@ class FileService(
     }
 
     /**
-     * 서버 내부 생성물(예: HTML→PDF 변환 결과)을 직접 저장. 클라이언트 업로드 없이 byte[] 만 받음.
+     * 서버 내부 생성물(예: HTML→PDF 변환 결과)을 직접 저장. byte[] → S3.
      */
     @Transactional
     fun saveBinary(
@@ -107,29 +133,88 @@ class FileService(
             originalName = filename
         )
         fileRepository.save(entity)
-        val dest = uploadPath().resolve(fileId)
-        Files.write(dest, data)
+        s3Client.putObject(
+            PutObjectRequest.builder()
+                .bucket(bucket)
+                .key(fileId)
+                .contentType(mime)
+                .contentLength(data.size.toLong())
+                .build(),
+            RequestBody.fromBytes(data),
+        )
         return fileId
     }
 
-    fun getFileForDownload(userId: String?, isAdmin: Boolean, fileId: String): Pair<FileEntity, Path> {
+    /**
+     * 다운로드용 — 권한 검증 후 S3 stream 반환. S3 미존재 시 EC2 디스크 fallback.
+     *
+     * Pair(FileEntity, InputStream) 반환. 호출자는 stream 을 끝까지 읽고 닫아야 함.
+     */
+    fun openFileForDownload(userId: String?, isAdmin: Boolean, fileId: String): Pair<FileEntity, InputStream> {
         val entity = fileRepository.findById(fileId).orElseThrow {
             ApiException("NOT_FOUND", "파일을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
         }
         // 공개 파일: 이모티콘, 게시판 첨부파일
         val isPublic = entity.purpose in listOf("chat", "chat-emoticon", "board_attachment", "board-attachment", "content", "study_plan")
-        // 로그인 사용자는 공개 파일 + 본인 파일 접근 가능, 비로그인은 공개 파일만
         if (!isPublic && !isAdmin && userId == null) {
             throw ApiException("UNAUTHORIZED", "로그인이 필요합니다", HttpStatus.UNAUTHORIZED)
         }
         if (!isPublic && !isAdmin && entity.ownerId != userId) {
             throw ApiException("FORBIDDEN", "권한이 없습니다", HttpStatus.FORBIDDEN)
         }
-        val filePath = uploadPath().resolve(fileId)
+
+        // 1차: S3 시도
+        try {
+            val resp = s3Client.getObject(
+                GetObjectRequest.builder().bucket(bucket).key(fileId).build(),
+                ResponseTransformer.toBytes(),
+            )
+            return Pair(entity, ByteArrayInputStream(resp.asByteArray()))
+        } catch (_: NoSuchKeyException) {
+            log.debug("S3 에 없음, EC2 fallback 시도: {}", fileId)
+        } catch (e: Exception) {
+            log.warn("S3 조회 실패, EC2 fallback 시도: {} — {}", fileId, e.message)
+        }
+
+        // 2차: EC2 로컬 fallback
+        val localPath = ec2Path(fileId)
+        if (Files.exists(localPath)) {
+            return Pair(entity, Files.newInputStream(localPath))
+        }
+
+        throw ApiException("FILE_NOT_FOUND", "파일이 존재하지 않습니다", HttpStatus.NOT_FOUND)
+    }
+
+    /**
+     * @deprecated openFileForDownload 사용. 호환성 위해 임시 유지 — 호출처 제거 후 삭제.
+     */
+    @Deprecated("openFileForDownload 사용", ReplaceWith("openFileForDownload(userId, isAdmin, fileId)"))
+    fun getFileForDownload(userId: String?, isAdmin: Boolean, fileId: String): Pair<FileEntity, Path> {
+        val entity = fileRepository.findById(fileId).orElseThrow {
+            ApiException("NOT_FOUND", "파일을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        val isPublic = entity.purpose in listOf("chat", "chat-emoticon", "board_attachment", "board-attachment", "content", "study_plan")
+        if (!isPublic && !isAdmin && userId == null) {
+            throw ApiException("UNAUTHORIZED", "로그인이 필요합니다", HttpStatus.UNAUTHORIZED)
+        }
+        if (!isPublic && !isAdmin && entity.ownerId != userId) {
+            throw ApiException("FORBIDDEN", "권한이 없습니다", HttpStatus.FORBIDDEN)
+        }
+        val filePath = ec2Path(fileId)
         if (!Files.exists(filePath)) {
-            throw ApiException("FILE_NOT_FOUND", "파일이 서버에 존재하지 않습니다", HttpStatus.NOT_FOUND)
+            throw ApiException("FILE_NOT_FOUND", "파일이 서버에 존재하지 않습니다 (구식 API). openFileForDownload 사용 필요.", HttpStatus.NOT_FOUND)
         }
         return Pair(entity, filePath)
+    }
+
+    /** S3 객체 존재 여부 (마이그레이션 검증용) */
+    fun existsInS3(fileId: String): Boolean = try {
+        s3Client.headObject(HeadObjectRequest.builder().bucket(bucket).key(fileId).build())
+        true
+    } catch (_: NoSuchKeyException) {
+        false
+    } catch (_: Exception) {
+        false
     }
 }
 
