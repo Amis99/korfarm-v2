@@ -2,6 +2,7 @@ package com.korfarm.api.aigen
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.korfarm.api.corpus.LearningCorpusService
 import org.springframework.stereotype.Service
 
 /**
@@ -13,15 +14,19 @@ class QuestionGenerator(
     private val helper: AiCallHelper,
     private val promptBuilder: PromptBuilder,
     private val grammarRagService: GrammarRagService,
+    private val corpusService: LearningCorpusService,
     private val reviewer: StudentPersonaReviewer,
     private val objectMapper: ObjectMapper,
 ) {
     fun generate(req: QuestionGenRequest): GenWithReview {
         // 문법 영역이면 자료 첨부 (user 메시지로 — 시스템 정적 유지)
         val effectiveArea = req.area ?: "READ"
-        val refs = if (effectiveArea == "GRAM" && !req.grammarTopic.isNullOrBlank())
+        val grammarRefs = if (effectiveArea == "GRAM" && !req.grammarTopic.isNullOrBlank())
             grammarRagService.fetchByTopic(req.grammarTopic, limit = 2)
         else emptyList()
+        // learning_corpus 자료 첨부 — 체크리스트·출제포인트 활용
+        val corpusRef = corpusService.buildExamReferenceText(req.corpusId)
+        val refs = grammarRefs + listOfNotNull(corpusRef.takeIf { it.isNotBlank() })
 
         val isEssay = req.type == "ESSAY" || req.type == "서술형"
         // 시스템 프롬프트는 100% 정적 (캐시 hit 보장)

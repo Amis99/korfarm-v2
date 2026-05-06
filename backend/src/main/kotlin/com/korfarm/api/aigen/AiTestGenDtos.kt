@@ -14,6 +14,7 @@ data class PassageGenRequest(
     val concepts: List<String> = emptyList(),  // 강조 학습 개념 이름들
     val moodPrompt: String? = null,
     val grammarTopic: String? = null,  // GRAM 영역인 경우 RAG 검색용
+    val corpusId: String? = null,       // learning_corpus 의 작품·지문 ID — 첨부 시 본문·체크리스트·출제포인트 참조
     val tier: String? = "BASIC"          // BASIC | ADVANCED
 )
 
@@ -44,6 +45,7 @@ data class QuestionGenRequest(
     val attachment: String? = null,         // 첨부 자료 (해설/모범답안 등)
     val stemHint: String? = null,           // 발문 가이드
     val grammarTopic: String? = null,
+    val corpusId: String? = null,           // 학습 자료 corpus 첨부 (체크포인트·출제포인트 활용)
     val tier: String? = "BASIC"             // BASIC | ADVANCED
 )
 

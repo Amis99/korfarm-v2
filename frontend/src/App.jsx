@@ -123,6 +123,7 @@ const AdminQBRecordDetailPage = lazy(() => import("./pages/AdminQBRecordDetailPa
 const AdminQBCodesPage = lazy(() => import("./pages/AdminQBCodesPage"));
 const AdminEditHistoryPage = lazy(() => import("./pages/AdminEditHistoryPage"));
 const AdminLearningDBPage = lazy(() => import("./pages/AdminLearningDBPage"));
+const AdminLearningCorpusPage = lazy(() => import("./pages/AdminLearningCorpusPage"));
 const AdminStudyContentPage = lazy(() => import("./pages/AdminStudyContentPage"));
 const AdminStudyContentEditorV2Page = lazy(() => import("./pages/AdminStudyContentEditorV2Page"));
 const AdminBoardsPage = lazy(() => import("./pages/AdminBoardsPage"));
@@ -319,6 +320,8 @@ function App() {
           <Route path="/admin/tests/:testId" element={A(<AdminTestStatisticsPage />)} />
           {/* 학습자료 DB 통합 */}
           <Route path="/admin/learning-db" element={A(<AdminLearningDBPage />)} />
+          {/* 학습 자료 v2 — 작품·지문 corpus + 임시 체크포인트 */}
+          <Route path="/admin/learning-corpus" element={A(<AdminLearningCorpusPage />)} />
           <Route path="/admin/learning-db/qb-import" element={A(<AdminQBImportPage />)} />
           <Route path="/admin/learning-db/qb-records/:id" element={A(<AdminQBRecordDetailPage />)} />
           <Route path="/admin/learning-db/qb-codes" element={A(<AdminQBCodesPage />)} />

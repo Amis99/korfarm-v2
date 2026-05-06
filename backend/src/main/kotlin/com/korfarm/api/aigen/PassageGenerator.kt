@@ -2,6 +2,7 @@ package com.korfarm.api.aigen
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.korfarm.api.corpus.LearningCorpusService
 import org.springframework.stereotype.Service
 
 @Service
@@ -9,14 +10,18 @@ class PassageGenerator(
     private val helper: AiCallHelper,
     private val promptBuilder: PromptBuilder,
     private val grammarRagService: GrammarRagService,
+    private val corpusService: LearningCorpusService,
     private val objectMapper: ObjectMapper,
 ) {
     fun generate(req: PassageGenRequest): PassageGenResponse {
         val effectiveArea = req.area ?: "READ"
         // 문법 영역이면 grammar_corpus 자료 첨부
-        val refs = if (effectiveArea == "GRAM" && !req.grammarTopic.isNullOrBlank())
+        val grammarRefs = if (effectiveArea == "GRAM" && !req.grammarTopic.isNullOrBlank())
             grammarRagService.fetchByTopic(req.grammarTopic, limit = 2)
         else emptyList()
+        // learning_corpus 자료 첨부 (corpusId 지정 시)
+        val corpusRef = corpusService.buildExamReferenceText(req.corpusId)
+        val refs = grammarRefs + listOfNotNull(corpusRef.takeIf { it.isNotBlank() })
 
         // 시스템 프롬프트는 100% 정적 (캐시 hit 보장). 참고 자료는 user 메시지에.
         val systemBlocks = promptBuilder.passageSystemBlocks(helper)
