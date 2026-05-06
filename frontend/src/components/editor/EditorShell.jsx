@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useContentEditor } from "../../hooks/useContentEditor";
 import { AREA_LABELS, SUB_AREA_LABELS } from "../../constants/questionBankCodes";
+import ClassificationPicker from "./ClassificationPicker";
 import ReadingPreview from "./preview/ReadingPreview";
 import WorksheetPreview from "./preview/WorksheetPreview";
 import AnswerKeyPreview from "./preview/AnswerKeyPreview";
@@ -427,6 +428,9 @@ export default function EditorShell({ contentId, staticInfo }) {
                   disabled={isStatic}
                   placeholder="https://..."
                 />
+              </div>
+              <div className="ce-meta-field full-width" style={{ marginTop: 12 }}>
+                <ClassificationPicker targetType="content" targetId={contentId} />
               </div>
             </div>
           )}

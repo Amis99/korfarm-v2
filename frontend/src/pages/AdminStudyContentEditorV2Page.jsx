@@ -6,6 +6,7 @@ import MarkdownEditField from "../components/editor/MarkdownEditField";
 import StudyQuestionCard from "../components/study-editor/StudyQuestionCard";
 import AiPdfImageUploadModal from "../components/study-editor/AiPdfImageUploadModal";
 import AiStudyQuestionGenModal from "../components/study-editor/AiStudyQuestionGenModal";
+import ClassificationPicker from "../components/editor/ClassificationPicker";
 import { apiGet, apiGetCamel, apiPost, apiPostDeep, apiPatch, apiPatchDeep, apiPut, apiDelete } from "../utils/adminApi";
 import "../styles/admin-detail.css";
 import "../styles/study-editor.css";
@@ -584,6 +585,13 @@ export default function AdminStudyContentEditorV2Page() {
             </FormField>
           </div>
         </div>
+
+        {/* 분류 (영역·세부영역·주제) — 저장된 콘텐츠만 */}
+        {!isNew && (
+          <div className="admin-detail-card" style={{ marginTop: 12 }}>
+            <ClassificationPicker targetType="content" targetId={contentId} compact />
+          </div>
+        )}
 
         {/* 페이지 에디터: 좌 사이드바 + 우 본문 */}
         {!isNew && (

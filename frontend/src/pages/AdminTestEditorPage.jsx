@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams, useSearchParams, Link } from "react-router-dom";
 import AdminLayout from "../components/AdminLayout";
 import TestPaperDocEditor from "../components/editor/testpaper/TestPaperDocEditor";
+import ClassificationPicker from "../components/editor/ClassificationPicker";
 import { useTestEditor } from "../hooks/useTestEditor";
 import { apiPut } from "../utils/adminApi";
 import { LEVEL_LABELS } from "../constants/levels";
@@ -195,6 +196,9 @@ export default function AdminTestEditorPage() {
                   <Field label="설명" full>
                     <input value={metaForm.description} onChange={(e) => setMetaForm({ ...metaForm, description: e.target.value })} style={metaInpStyle} />
                   </Field>
+                </div>
+                <div style={{ marginTop: 12 }}>
+                  <ClassificationPicker targetType="content" targetId={testId} compact />
                 </div>
               </div>
             )}
