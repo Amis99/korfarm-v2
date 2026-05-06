@@ -13,3 +13,6 @@ interface TutorChatMessageRepository : JpaRepository<TutorChatMessageEntity, Str
 interface TutorUsageLogRepository : JpaRepository<TutorUsageLogEntity, String> {
     fun countByUserId(userId: String): Long
 }
+
+interface TutorDailyQuotaRepository : JpaRepository<TutorDailyQuotaEntity, TutorDailyQuotaId>
+

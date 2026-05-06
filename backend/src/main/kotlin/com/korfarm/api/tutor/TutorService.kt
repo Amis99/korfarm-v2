@@ -36,6 +36,7 @@ class TutorService(
     private val sessionRepo: TutorChatSessionRepository,
     private val messageRepo: TutorChatMessageRepository,
     private val usageRepo: TutorUsageLogRepository,
+    private val quotaRepo: TutorDailyQuotaRepository,
     private val toolRegistry: TutorToolRegistry,
     private val toolExecutor: TutorToolExecutor,
     private val grapefruitService: GrapefruitService,
@@ -58,6 +59,32 @@ class TutorService(
 
     companion object {
         const val PRICING_KIND = "tutor-call"
+        const val DAILY_FREE_TURNS = 5  // 매일 5턴 무료
+    }
+
+    /**
+     * 오늘 quota 조회·생성 (lazy reset). 자정 넘기면 새 row.
+     */
+    @Transactional
+    fun getOrInitTodayQuota(userId: String): TutorDailyQuotaEntity {
+        val today = LocalDate.now()
+        val id = TutorDailyQuotaId(userId = userId, quotaDate = today)
+        return quotaRepo.findById(id).orElseGet {
+            quotaRepo.save(TutorDailyQuotaEntity(
+                userId = userId,
+                quotaDate = today,
+                usedTurns = 0,
+                autoAnalysisUsed = false,
+                updatedAt = LocalDateTime.now(),
+            ))
+        }
+    }
+
+    @Transactional(readOnly = true)
+    fun peekTodayQuota(userId: String): TutorDailyQuotaEntity? {
+        val today = LocalDate.now()
+        val id = TutorDailyQuotaId(userId = userId, quotaDate = today)
+        return quotaRepo.findById(id).orElse(null)
     }
 
     data class TurnResult(
@@ -83,6 +110,10 @@ class TutorService(
         val crops: Map<String, Int>,
         val pricePerTurn: Int,
         val totalTurns: Long,
+        val dailyFreeLimit: Int,
+        val dailyFreeUsed: Int,
+        val dailyFreeRemaining: Int,
+        val autoAnalysisAvailableToday: Boolean,
     )
 
     @Transactional(readOnly = true)
@@ -135,13 +166,80 @@ class TutorService(
         val balance = grapefruitService.getUserAiBalance(userId)
         val price = grapefruitService.getPrice(PRICING_KIND)
         val total = usageRepo.countByUserId(userId)
+        val quota = peekTodayQuota(userId)
+        val used = quota?.usedTurns ?: 0
+        val autoUsed = quota?.autoAnalysisUsed ?: false
         return TutorStatus(
             grapefruits = balance.grapefruits,
             crops = balance.crops,
             pricePerTurn = price,
             totalTurns = total,
+            dailyFreeLimit = DAILY_FREE_TURNS,
+            dailyFreeUsed = used,
+            dailyFreeRemaining = (DAILY_FREE_TURNS - used).coerceAtLeast(0),
+            autoAnalysisAvailableToday = !autoUsed,
         )
     }
+
+    /**
+     * 매일 1회 무료 자동 학습 분석 — 첫 호출 시 결과 반환, 그 후엔 캐시되어 같은 결과 또는 빈 응답.
+     * 학생이 /my/tutor 에 첫 진입할 때 클라이언트가 호출.
+     * 일반 5턴 quota 와 별도 — auto_analysis_used 가 false 일 때 무료, true 면 사용 불가 (다음날까지).
+     */
+    @Transactional
+    fun runDailyAnalysis(userId: String): DailyAnalysisResult {
+        val quota = getOrInitTodayQuota(userId)
+        if (quota.autoAnalysisUsed) {
+            return DailyAnalysisResult(
+                alreadyUsedToday = true,
+                summary = null,
+                weakAreas = emptyList(),
+                recommendations = emptyList(),
+            )
+        }
+        // 약점 + 추천 후보 한꺼번에 — RecommendationService 활용
+        val candidates = runCatching {
+            recommendationServiceRef.getRecommendationCandidatesForStudent(userId, totalLimit = 10)
+        }.getOrNull()
+        val summary = userRepo.findById(userId).orElse(null)?.let {
+            "${it.name ?: "학생"} 님 오늘의 학습 분석을 준비했어요. 약점 영역을 먼저 보강할 수 있는 학습을 추천드려요."
+        }
+        val competencySummary = competencySummaryRepo.findByUserId(userId)
+        val weakAreas = competencySummary
+            .sortedBy { it.cumulativePercent }
+            .take(3)
+            .map { "${it.competency}: ${"%.1f".format(it.cumulativePercent)}%" }
+
+        val recommendations: List<Map<String, Any?>> = (candidates?.competencyMatches ?: emptyList())
+            .take(5)
+            .map { rec ->
+                mapOf(
+                    "contentId" to rec.contentId,
+                    "title" to rec.title,
+                    "area" to rec.area,
+                    "url" to "/learning/start/${rec.contentId}",
+                    "label" to "이 학습 시작",
+                )
+            }
+
+        quota.autoAnalysisUsed = true
+        quota.updatedAt = LocalDateTime.now()
+        quotaRepo.save(quota)
+
+        return DailyAnalysisResult(
+            alreadyUsedToday = false,
+            summary = summary,
+            weakAreas = weakAreas,
+            recommendations = recommendations,
+        )
+    }
+
+    data class DailyAnalysisResult(
+        val alreadyUsedToday: Boolean,
+        val summary: String?,
+        val weakAreas: List<String>,
+        val recommendations: List<Map<String, Any?>>,
+    )
 
     @Transactional
     fun saveMessageTx(
@@ -220,9 +318,16 @@ class TutorService(
             }
         }
 
-        // 차감 (자몽 또는 작물)
+        // 일일 quota 5턴까지 무료, 그 이후 자몽/작물 차감
+        val quota = getOrInitTodayQuota(userId)
         val price = grapefruitService.getPrice(PRICING_KIND)
-        grapefruitService.spendForUser(userId, PRICING_KIND, currency, null, "AI 튜터 1회")
+        val isFreeTurn = quota.usedTurns < DAILY_FREE_TURNS
+        if (!isFreeTurn) {
+            grapefruitService.spendForUser(userId, PRICING_KIND, currency, null, "AI 튜터 1회")
+        }
+        quota.usedTurns += 1
+        quota.updatedAt = LocalDateTime.now()
+        quotaRepo.save(quota)
 
         saveMessageTx(sessionId = session.id, role = "user", content = userText)
 

@@ -3,8 +3,11 @@ package com.korfarm.api.tutor
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
+import jakarta.persistence.IdClass
 import jakarta.persistence.PrePersist
 import jakarta.persistence.Table
+import java.io.Serializable
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Entity
@@ -92,4 +95,42 @@ class TutorUsageLogEntity(
     fun onCreate() {
         if (createdAt == LocalDateTime.MIN) createdAt = LocalDateTime.now()
     }
+}
+
+/**
+ * 학생 AI 튜터 일일 무료 quota — 매일 5턴 + 1회 자동 분석.
+ * (user_id, quota_date) 복합 PK, 자정 넘기면 새 row 자동 생성.
+ */
+@Entity
+@Table(name = "tutor_daily_quota")
+@IdClass(TutorDailyQuotaId::class)
+class TutorDailyQuotaEntity(
+    @Id
+    @Column(name = "user_id", nullable = false)
+    var userId: String = "",
+
+    @Id
+    @Column(name = "quota_date", nullable = false)
+    var quotaDate: LocalDate = LocalDate.now(),
+
+    @Column(name = "used_turns", nullable = false)
+    var usedTurns: Int = 0,
+
+    @Column(name = "auto_analysis_used", nullable = false)
+    var autoAnalysisUsed: Boolean = false,
+
+    @Column(name = "updated_at", nullable = false)
+    var updatedAt: LocalDateTime = LocalDateTime.now(),
+)
+
+class TutorDailyQuotaId(
+    var userId: String = "",
+    var quotaDate: LocalDate = LocalDate.now(),
+) : Serializable {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is TutorDailyQuotaId) return false
+        return userId == other.userId && quotaDate == other.quotaDate
+    }
+    override fun hashCode(): Int = userId.hashCode() * 31 + quotaDate.hashCode()
 }

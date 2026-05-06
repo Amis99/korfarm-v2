@@ -74,6 +74,12 @@ class TutorController(
     fun getStatus(): ApiResponse<TutorService.TutorStatus> {
         return ApiResponse(success = true, data = tutorService.getStatus(currentUserId()))
     }
+
+    /** 매일 1회 무료 학습 분석 — 학생이 /my/tutor 첫 진입 시 클라이언트가 호출. */
+    @PostMapping("/daily-analysis")
+    fun runDailyAnalysis(): ApiResponse<TutorService.DailyAnalysisResult> {
+        return ApiResponse(success = true, data = tutorService.runDailyAnalysis(currentUserId()))
+    }
 }
 
 data class TutorRenameRequest(val title: String)

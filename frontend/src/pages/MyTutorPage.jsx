@@ -21,6 +21,7 @@ function MyTutorPage() {
   const [error, setError] = useState("");
   const [status, setStatus] = useState(null);
   const [currency, setCurrency] = useState("grapefruit");
+  const [dailyAnalysis, setDailyAnalysis] = useState(null);
   const scrollRef = useRef(null);
 
   const loadSessions = async () => {
@@ -54,9 +55,21 @@ function MyTutorPage() {
     }
   };
 
+  const triggerDailyAnalysis = async () => {
+    try {
+      const data = await apiPost("/v1/tutor/daily-analysis", {});
+      if (data && !data.alreadyUsedToday) {
+        setDailyAnalysis(data);
+      }
+    } catch {
+      // ignore
+    }
+  };
+
   useEffect(() => {
     loadSessions();
     loadStatus();
+    triggerDailyAnalysis();
   }, []);
 
   useEffect(() => {
@@ -176,8 +189,42 @@ function MyTutorPage() {
       <main className="agent-main">
         <header className="agent-main-header">
           <h1>AI 튜터</h1>
-          <p>모르는 개념이나 풀이가 막힌 문제를 자유롭게 물어봐. 1번 대화에 자몽 또는 작물 1개가 차감돼.</p>
+          <p>
+            오늘 무료 대화 {status?.dailyFreeRemaining ?? "-"} / {status?.dailyFreeLimit ?? 5} 남음.
+            {" "}한도 초과 후에는 1번 대화당 자몽 또는 작물 1개 차감.
+          </p>
         </header>
+
+        {dailyAnalysis && !dailyAnalysis.alreadyUsedToday && (
+          <div className="agent-error" style={{ background: "#eff6ff", color: "#1e40af", border: "1px solid #bfdbfe" }}>
+            <div style={{ fontWeight: 700, marginBottom: 6 }}>오늘의 학습 분석</div>
+            {dailyAnalysis.summary && <div style={{ marginBottom: 6 }}>{dailyAnalysis.summary}</div>}
+            {dailyAnalysis.weakAreas?.length > 0 && (
+              <div style={{ fontSize: 12, color: "#475569", marginBottom: 6 }}>
+                약점: {dailyAnalysis.weakAreas.join(" / ")}
+              </div>
+            )}
+            {dailyAnalysis.recommendations?.length > 0 && (
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                {dailyAnalysis.recommendations.map(rec => (
+                  <button
+                    key={rec.contentId}
+                    onClick={() => navigate(rec.url)}
+                    style={{
+                      padding: "4px 10px", fontSize: 12,
+                      background: "#fff", color: "#1e40af",
+                      border: "1px solid #93c5fd", borderRadius: 4, cursor: "pointer",
+                    }}
+                  >📚 {rec.title}</button>
+                ))}
+              </div>
+            )}
+            <button
+              onClick={() => setDailyAnalysis(null)}
+              style={{ marginTop: 6, fontSize: 11, background: "transparent", border: 0, color: "#64748b", cursor: "pointer" }}
+            >닫기</button>
+          </div>
+        )}
 
         {error && <div className="agent-error">{error}</div>}
 
