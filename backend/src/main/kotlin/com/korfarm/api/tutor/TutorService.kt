@@ -197,30 +197,30 @@ class TutorService(
                 recommendations = emptyList(),
             )
         }
-        // 약점 + 추천 후보 한꺼번에 — RecommendationService 활용
-        val candidates = runCatching {
-            recommendationServiceRef.getRecommendationCandidatesForStudent(userId, totalLimit = 10)
-        }.getOrNull()
+        // 약점 + 추천 후보 — RecommendationService.recommendForCompetency (약점 자동 식별)
+        val recCandidates = runCatching {
+            recommendationServiceRef.recommendForCompetency(userId = userId, limit = 5)
+        }.getOrNull() ?: emptyList()
         val summary = userRepo.findById(userId).orElse(null)?.let {
             "${it.name ?: "학생"} 님 오늘의 학습 분석을 준비했어요. 약점 영역을 먼저 보강할 수 있는 학습을 추천드려요."
         }
+        // 약점 영역 — ratioScore 가 가장 낮은 3개
         val competencySummary = competencySummaryRepo.findByUserId(userId)
         val weakAreas = competencySummary
-            .sortedBy { it.cumulativePercent }
+            .filter { it.sampleCount > 0 }
+            .sortedBy { it.ratioScore }
             .take(3)
-            .map { "${it.competency}: ${"%.1f".format(it.cumulativePercent)}%" }
+            .map { "${it.competency}: ${"%.1f".format(it.ratioScore)}%" }
 
-        val recommendations: List<Map<String, Any?>> = (candidates?.competencyMatches ?: emptyList())
-            .take(5)
-            .map { rec ->
-                mapOf(
-                    "contentId" to rec.contentId,
-                    "title" to rec.title,
-                    "area" to rec.area,
-                    "url" to "/learning/start/${rec.contentId}",
-                    "label" to "이 학습 시작",
-                )
-            }
+        val recommendations: List<Map<String, Any?>> = recCandidates.map { rec ->
+            mapOf(
+                "contentId" to rec.contentId,
+                "title" to rec.title,
+                "area" to rec.area,
+                "url" to "/learning/start/${rec.contentId}",
+                "label" to "이 학습 시작",
+            )
+        }
 
         quota.autoAnalysisUsed = true
         quota.updatedAt = LocalDateTime.now()
