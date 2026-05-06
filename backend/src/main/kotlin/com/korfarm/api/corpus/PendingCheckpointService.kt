@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.korfarm.api.aigen.AiCallHelper
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
+import com.korfarm.api.study.StudyContentRepository
 import com.korfarm.api.study.StudyPageRepository
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
@@ -35,6 +36,7 @@ class PendingCheckpointService(
     private val corpusRepo: LearningCorpusRepository,
     private val itemRepo: LearningCorpusItemRepository,
     private val studyPageRepo: StudyPageRepository,
+    private val studyContentRepo: StudyContentRepository,
     private val aiCallHelper: AiCallHelper,
     private val objectMapper: ObjectMapper,
 ) {
@@ -88,6 +90,43 @@ class PendingCheckpointService(
         log.info("pending_checkpoints 추출 완료 — sourceContentId={}, inserted={}, skipped={}",
             sourceContentId, inserted, skipped)
         return ExtractResult(sourceContentId = sourceContentId, inserted = inserted, skipped = skipped)
+    }
+
+    /**
+     * 모든 active study_contents 의 체크리스트를 임시 풀로 일괄 backfill.
+     * 한 번 실행하면 기존에 누적된 체크리스트들을 모두 임시 폴더로 가져옴 (멱등 — 같은 텍스트 skip).
+     * 신규 작성 분은 자동 hook 으로 들어옴.
+     */
+    @Transactional
+    fun bulkExtractFromAllStudyContents(): BulkExtractResult {
+        val all = studyContentRepo.findAll().filter { it.status == "active" }
+        var totalInserted = 0
+        var totalSkipped = 0
+        var contentScanned = 0
+        var errors = 0
+        for (c in all) {
+            contentScanned++
+            try {
+                val r = extractFromStudyContent(
+                    sourceContentId = c.id,
+                    sourceUserId = c.creatorId,
+                    sourceOrgId = c.ownerOrgId,
+                )
+                totalInserted += r.inserted
+                totalSkipped += r.skipped
+            } catch (e: Exception) {
+                log.warn("bulk extract 실패 — contentId={}: {}", c.id, e.message)
+                errors++
+            }
+        }
+        log.info("bulk extract 완료 — contents={}, inserted={}, skipped={}, errors={}",
+            contentScanned, totalInserted, totalSkipped, errors)
+        return BulkExtractResult(
+            contentScanned = contentScanned,
+            inserted = totalInserted,
+            skipped = totalSkipped,
+            errors = errors,
+        )
     }
 
     // ── AI 분류 ────────────────────────────────────
@@ -340,6 +379,13 @@ data class ExtractResult(
     val sourceContentId: String,
     val inserted: Int,
     val skipped: Int,
+)
+
+data class BulkExtractResult(
+    val contentScanned: Int,
+    val inserted: Int,
+    val skipped: Int,
+    val errors: Int,
 )
 
 data class ClassifyBatchResult(

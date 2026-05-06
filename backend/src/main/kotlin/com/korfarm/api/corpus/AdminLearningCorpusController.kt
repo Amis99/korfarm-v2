@@ -145,6 +145,13 @@ class AdminLearningCorpusController(
             data = pendingService.extractFromStudyContent(sourceContentId, sourceUserId, sourceOrgId))
     }
 
+    /** 모든 active study_contents 의 체크리스트를 임시 풀로 일괄 backfill. 1회성 운영 도구. */
+    @PostMapping("/pending/bulk-extract")
+    fun bulkExtractAll(): ApiResponse<BulkExtractResult> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        return ApiResponse(success = true, data = pendingService.bulkExtractFromAllStudyContents())
+    }
+
     /** 단일 pending 항목 AI 분류 */
     @PostMapping("/pending/{pendingId}/classify")
     fun classifyOne(@PathVariable pendingId: String): ApiResponse<PendingCheckpointView> {
