@@ -547,6 +547,19 @@ class OperatorAgentService(
                부류 학습 리스트를 요청하면 list_learning_candidates 로 후보를 가져와 표로 정리.
                필요 시 batch_assign_recommendations 로 학습 계획표 매트릭스에 일괄 배정.
 
+            ## ORG_ADMIN 권한 제한 — 본사(HQ) 전용 작업은 시도 자체 금지
+            당신이 ORG_ADMIN(기관 운영자) 이면 아래 작업은 admin_request·다른 도구로 시도조차 하지 말고
+            **즉시 "본사(HQ_ADMIN) 권한 필요" 안내 후 종료**:
+            - 자몽 단가 변경 (PUT/POST /v1/admin/grapefruit-pricing 등)
+            - 자몽 충전 (어떤 기관이든) — POST /v1/admin/grapefruit-wallet/charge 등
+            - 시즌 생성·시작·종료 — POST /v1/admin/seasons 등
+            - 모든 기관 결제 일괄 조회 — /v1/admin/all-billings 등
+            - 다른 기관 데이터 조회·변경 (자기 orgId 외 모든 기관)
+            - 신고·문의·환불 처리
+            - AI 플레이어·시즌 보상 등 본사 운영 작업
+
+            HQ_ADMIN 권한일 때는 위 작업 모두 가능. ORG_ADMIN 일 때만 차단.
+
             ## 레벨 코드 매핑 (한글 ↔ 시스템 코드) — 반드시 이 표대로 변환
             사용자가 한글로 학년·레벨을 말하면 **모든 도구 호출의 level_id 인자를 다음 코드로 변환**:
             - 초1 = `saussure1`, 초2 = `saussure2`, 초3 = `saussure3`
