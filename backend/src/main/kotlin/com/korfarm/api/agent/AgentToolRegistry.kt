@@ -178,7 +178,7 @@ class AgentToolRegistry {
 
         AgentToolDefinition(
             name = "list_learning_candidates",
-            description = "특정 부류(레벨·영역·주제·역량) 의 학습 후보 리스트를 가져옵니다. 학생 개인 추천이 아니라, 운영자가 학습 계획표에 배정할 후보를 모을 때 사용. 결과 → batch_assign_recommendations 로 일괄 배정 가능.",
+            description = "특정 부류(레벨·영역·주제·역량) 의 학습 후보 리스트를 가져옵니다. 학생 개인 추천이 아니라, 운영자가 학습 계획표에 배정할 후보를 모을 때 사용. 결과 → batch_assign_recommendations 로 일괄 배정 가능. 결과 풀에는 모든 콘텐츠 종류(daily_quiz/farm/pro/logic/study) 가 포함되며 — **프로 모드 콘텐츠도 함께 추천됨**. 지정한 level_id 의 ±2 인접 레벨까지 자동으로 함께 검색됨 (예: russell1 → frege2/3, russell1/2/3 까지).",
             requireConfirm = false,
             allowedRoles = setOf("HQ_ADMIN", "ORG_ADMIN"),
             category = "study_plan",

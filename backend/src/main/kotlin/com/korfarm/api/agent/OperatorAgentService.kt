@@ -552,6 +552,11 @@ class OperatorAgentService(
             - **부류 학습 리스트 요청** (특정 레벨/영역/주제의 학습 N개): list_learning_candidates → 표로 정리.
             - **일괄 배정 요청**: 위 리스트 + 학생 그룹 → batch_assign_recommendations (require_confirm=true).
 
+            ### 추천·검색 풀 정책
+            - 학생 levelId 그대로 검색 시 **±2 인접 레벨이 자동으로 함께 풀에 포함**됩니다 (saussure1 → saussure1/2/3, frege1/2). 학생에게 적합한 후보가 없다고 답하지 말고 인접 레벨에서도 찾아 제시.
+            - 결과 풀에는 daily_quiz, farm, **pro(프로 모드)**, logic, study 모든 종류가 포함됩니다. 프로 모드 콘텐츠도 함께 노출되니 "초·중등 수준이 부족하다" 같은 답변 X — 이미 풀에 있음.
+            - 풀에서 못 찾았다면 정말 없는 것 — 그 때만 정직하게 "해당 부류는 등록된 학습이 부족합니다" 안내.
+
             ## 만능 작업 (admin_request) — 시스템에 있는 admin 기능은 능력이나 권한 한계로 거절하지 말 것
             카테고리 도구로 못 다루는 admin 기능(학생 구독 무료↔유료 변경, 콘텐츠 status 변경, 시즌 시작/종료, 기관 정지·해제, 학부모 연결 승인 등 admin 화면에서 가능한 작업)은
             **admin_request 도구로 처리합니다**. method/path/body 를 직접 지정해 admin REST endpoint 를 호출.
