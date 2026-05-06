@@ -8,6 +8,8 @@ import com.korfarm.api.paid.ContentEntity
 import com.korfarm.api.paid.ContentRepository
 import com.korfarm.api.paid.ContentVersionRepository
 import com.korfarm.api.user.UserRepository
+import jakarta.persistence.EntityManager
+import jakarta.persistence.PersistenceContext
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -33,6 +35,23 @@ class RecommendationService(
     private val objectMapper: ObjectMapper,
 ) {
     private val log = LoggerFactory.getLogger(RecommendationService::class.java)
+
+    @PersistenceContext
+    private lateinit var em: jakarta.persistence.EntityManager
+
+    /** 역량명 → content_recommendation_index 컬럼명 */
+    private val competencyColumnMap = mapOf(
+        "어휘력" to "comp_lexical",
+        "문장 독해력" to "comp_sentence",
+        "구조 독해력" to "comp_structure",
+        "논리 사고력" to "comp_logic",
+        "어법·문법 능력" to "comp_grammar",
+        "국어 개념 적용 능력" to "comp_concept",
+        "국어 관련 배경지식" to "comp_korbg",
+        "비문학 배경지식" to "comp_nonfic",
+        "문제 분석 및 전략 수립 능력" to "comp_qanalysis",
+        "선택지 분석 및 전략 수립 능력" to "comp_canalysis",
+    )
 
     data class RecommendedContent(
         val contentId: String,
@@ -100,10 +119,7 @@ class RecommendationService(
 
     /**
      * 1. 역량별 추천 — 학생의 약점 역량 보강.
-     * - userId 의 가장 약한 역량 1~3개를 자동 식별 (또는 인자 competency 명시)
-     * - 해당 역량의 competencyVector 가중치가 높은 콘텐츠 우선
-     * - 학생이 이미 풀어 본 콘텐츠 평생 이력 제외
-     * - 본 레벨 부족 시 ±2 레벨 까지 fallback
+     * 인덱스 기반 단일 SQL — content_recommendation_index 의 사전계산된 컬럼 활용.
      */
     @Transactional(readOnly = true)
     fun recommendForCompetency(
@@ -114,21 +130,101 @@ class RecommendationService(
     ): List<RecommendedContent> {
         val targetLevel = levelId ?: userRepository.findById(userId).orElse(null)?.levelId
 
-        // 약점 역량 자동 식별 (competency 미지정 시)
+        // 약점 역량 자동 식별 (competency 미지정 시 ratio 가장 낮은 1개)
+        val targetCompetency: String = if (competency != null && competency in COMPETENCIES) competency else {
+            val summaries = competencySummaryRepository.findByUserId(userId)
+            COMPETENCIES.sortedBy { c ->
+                summaries.firstOrNull { it.competency == c }?.ratioScore ?: 50.0
+            }.first()
+        }
+        val compColumn = competencyColumnMap[targetCompetency] ?: return emptyList()
+
+        // 인덱스에서 인덱스 기반 추천 — 단일 SELECT
+        val rows = queryByCompetency(userId, compColumn, parseLevelNumber(targetLevel), limit)
+        if (rows.isEmpty()) return emptyList()
+
+        return rows.map {
+            RecommendedContent(
+                contentId = it.contentId,
+                title = it.title,
+                contentType = it.contentType,
+                levelId = it.levelId,
+                area = it.area,
+                subArea = it.subArea,
+                score = it.score,
+                reason = "약점 보강 ($targetCompetency)",
+            )
+        }
+    }
+
+    private data class IndexRow(
+        val contentId: String, val title: String, val contentType: String,
+        val levelId: String?, val area: String?, val subArea: String?, val score: Double,
+    )
+
+    /**
+     * 인덱스 SQL — 약점 역량 컬럼 DESC + level_num ±2 fallback + 평생 풀이 이력 제외 + 학습 콘텐츠만.
+     */
+    private fun queryByCompetency(userId: String, compColumn: String, levelNum: Int?, limit: Int): List<IndexRow> {
+        val safeLimit = limit.coerceIn(1, 50)
+        val levelClause = if (levelNum != null) "AND i.level_num BETWEEN ${levelNum - 2} AND ${levelNum + 2}" else ""
+        val sql = """
+            SELECT i.content_id, c.title, c.content_type, i.level_id, i.area, i.sub_area, i.$compColumn AS score
+            FROM content_recommendation_index i
+            JOIN contents c ON c.id = i.content_id
+            WHERE i.$compColumn > 0
+              AND i.content_kind IN ('farm','pro','daily_quiz','study','logic')
+              $levelClause
+              AND i.content_id NOT IN (
+                  SELECT content_id FROM learning_competency_log WHERE user_id = :userId
+              )
+            ORDER BY i.$compColumn DESC, i.updated_at DESC
+            LIMIT $safeLimit
+        """.trimIndent()
+        val q = em.createNativeQuery(sql)
+        q.setParameter("userId", userId)
+        @Suppress("UNCHECKED_CAST")
+        val rows = q.resultList as List<Array<Any?>>
+        return rows.map {
+            IndexRow(
+                contentId = it[0] as String,
+                title = (it[1] as? String) ?: "",
+                contentType = (it[2] as? String) ?: "",
+                levelId = it[3] as? String,
+                area = it[4] as? String,
+                subArea = it[5] as? String,
+                score = (it[6] as? Number)?.toDouble() ?: 0.0,
+            )
+        }
+    }
+
+    private fun parseLevelNumber(levelId: String?): Int? {
+        if (levelId.isNullOrBlank()) return null
+        val tier = levelId.dropLastWhile { it.isDigit() }.lowercase()
+        val num = levelId.takeLastWhile { it.isDigit() }.toIntOrNull() ?: return null
+        val base = when (tier) {
+            "saussure", "sohssure" -> 0
+            "frege" -> 3
+            "russell" -> 6
+            "wittgenstein", "witt" -> 9
+            else -> return null
+        }
+        return base + num
+    }
+
+    // 옛 in-memory 추천 — 인덱스 미빌드된 콘텐츠를 위한 fallback (추후 제거)
+    @Suppress("UNUSED_PARAMETER")
+    private fun legacyRecommendForCompetency(userId: String, competency: String?, levelId: String?, limit: Int): List<RecommendedContent> {
+        val targetLevel = levelId ?: userRepository.findById(userId).orElse(null)?.levelId
         val targetCompetencies: List<String> = if (competency != null) {
             if (competency in COMPETENCIES) listOf(competency) else return emptyList()
         } else {
             val summaries = competencySummaryRepository.findByUserId(userId)
-            // 측정된 것 중 ratioScore 낮은 순, 측정 없는 것은 prior 50 으로 가정
             COMPETENCIES.sortedBy { c ->
                 summaries.firstOrNull { it.competency == c }?.ratioScore ?: 50.0
             }.take(3)
         }
-
-        // 평생 풀이 이력 제외
         val solvedIds = loadSolvedContentIds(userId)
-
-        // 후보 콘텐츠 — 본 레벨 + ±2 레벨 (인접 레벨 fallback)
         val candidateLevels = resolveAdjacentLevelIds(targetLevel)
         val candidates = if (candidateLevels.isNotEmpty()) {
             candidateLevels.flatMap { lvl ->

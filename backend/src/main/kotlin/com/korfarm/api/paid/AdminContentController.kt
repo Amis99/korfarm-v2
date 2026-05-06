@@ -25,7 +25,8 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/v1/admin")
 class AdminContentController(
     private val adminContentService: AdminContentService,
-    private val featureFlagService: FeatureFlagService
+    private val featureFlagService: FeatureFlagService,
+    private val recommendationIndexService: com.korfarm.api.learning.ContentRecommendationIndexService
 ) {
     // 콘텐츠 import / 수정 / 원고 = 전사 콘텐츠 풀 운영 → 본사 관리자 전용
     @PostMapping("/content/import")
@@ -123,6 +124,18 @@ class AdminContentController(
         AdminGuard.requireAnyRole("HQ_ADMIN")
         val userId = SecurityUtils.currentUserId() ?: "system"
         val result = adminContentService.backfillDailyQuizQ1to9Competency(userId)
+        return ApiResponse(success = true, data = result)
+    }
+
+    /**
+     * 추천 인덱스 일괄 백필 (HQ_ADMIN 전용).
+     * 모든 active 콘텐츠의 content_recommendation_index 갱신.
+     * 1회 실행으로 약 4,500건 인덱스 채움.
+     */
+    @PostMapping("/recommendation-index/rebuild")
+    fun rebuildRecommendationIndex(): ApiResponse<com.korfarm.api.learning.ContentRecommendationIndexService.RebuildResult> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        val result = recommendationIndexService.rebuildAll()
         return ApiResponse(success = true, data = result)
     }
 
