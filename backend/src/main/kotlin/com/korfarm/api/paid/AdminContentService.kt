@@ -479,6 +479,97 @@ class AdminContentService(
         )
     }
 
+    /**
+     * 일일퀴즈 1~9번 역량 벡터 일괄 backfill.
+     *
+     * 정책: 사용자 결정 — Q1~9 가 10대 역량 1~9 와 1:1 매칭.
+     *  Q1=어휘력, Q2=문장 독해력, Q3=구조 독해력, Q4=논리 사고력,
+     *  Q5=어법·문법 능력, Q6=국어 개념 적용 능력, Q7=국어 관련 배경지식,
+     *  Q8=비문학 배경지식, Q9=문제 분석 및 전략 수립 능력
+     *  Q10 (선택지 분석 및 전략 수립 능력) 은 이미 CHOICE_COMPLEX_OX 로 박혀 있으므로 건드리지 않음.
+     *
+     * 보호: 각 question 에 competencyVector 또는 competency 가 이미 있으면 skip (수동 작성 보호).
+     */
+    @Transactional
+    fun backfillDailyQuizQ1to9Competency(userId: String): Map<String, Any?> {
+        // 일일퀴즈 콘텐츠 — content_type='DAILY_QUIZ' 또는 categories 에 'DAILY_QUIZ' 포함
+        val ctsJson = "[\"DAILY_QUIZ\"]"
+        val targets = contentRepository.findByCategoriesInAndStatus(listOf("DAILY_QUIZ"), ctsJson, "active")
+
+        val q1to9Mapping = listOf(
+            "어휘력", "문장 독해력", "구조 독해력", "논리 사고력", "어법·문법 능력",
+            "국어 개념 적용 능력", "국어 관련 배경지식", "비문학 배경지식", "문제 분석 및 전략 수립 능력",
+        )
+
+        var processedContents = 0
+        var modifiedContents = 0
+        var addedFields = 0
+        var skippedExisting = 0
+        val errors = mutableListOf<Map<String, String>>()
+
+        for (content in targets) {
+            processedContents++
+            try {
+                val latest = contentVersionRepository.findTopByContentIdOrderByCreatedAtDesc(content.id) ?: continue
+
+                @Suppress("UNCHECKED_CAST")
+                val root = (objectMapper.readValue(latest.contentJson, Map::class.java) as Map<String, Any?>).toMutableMap()
+                @Suppress("UNCHECKED_CAST")
+                val payload = (root["payload"] as? Map<String, Any?>)?.toMutableMap() ?: continue
+                @Suppress("UNCHECKED_CAST")
+                val questions = (payload["questions"] as? List<Map<String, Any?>>)?.toMutableList() ?: continue
+
+                if (questions.size < 9) continue
+
+                var changed = false
+                for (i in 0..8) {
+                    val q = questions[i].toMutableMap()
+                    // 이미 벡터/단일 competency 있으면 보호
+                    val hasVector = q["competencyVector"] != null
+                    val hasSingle = (q["competency"] as? String)?.isNotBlank() == true
+                    if (hasVector || hasSingle) {
+                        skippedExisting++
+                        continue
+                    }
+                    q["competency"] = q1to9Mapping[i]
+                    questions[i] = q
+                    changed = true
+                    addedFields++
+                }
+
+                if (!changed) continue
+
+                payload["questions"] = questions
+                root["payload"] = payload
+                latest.contentJson = objectMapper.writeValueAsString(root)
+                latest.uploadedBy = userId
+                latest.approvedBy = userId
+                latest.approvedAt = LocalDateTime.now()
+                contentVersionRepository.save(latest)
+
+                contentEditLogRepository.save(
+                    ContentEditLogEntity(
+                        id = IdGenerator.newId("cel"),
+                        contentId = content.id,
+                        editorId = userId,
+                        action = "BACKFILL_Q1TO9_COMPETENCY",
+                    )
+                )
+                modifiedContents++
+            } catch (e: Exception) {
+                errors.add(mapOf("contentId" to content.id, "error" to (e.message ?: "unknown")))
+            }
+        }
+
+        return mapOf(
+            "totalDailyQuizContents" to processedContents,
+            "modifiedContents" to modifiedContents,
+            "addedFields" to addedFields,
+            "skippedExisting" to skippedExisting,
+            "errors" to errors,
+        )
+    }
+
     @Transactional(readOnly = true)
     fun previewContent(contentId: String): ContentPreview {
         val content = contentRepository.findById(contentId).orElseThrow {

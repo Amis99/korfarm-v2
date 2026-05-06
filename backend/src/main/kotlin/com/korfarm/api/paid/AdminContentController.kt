@@ -114,6 +114,19 @@ class AdminContentController(
     }
 
     /**
+     * 일일퀴즈 Q1~9 의 competency 단일 필드 일괄 backfill (HQ_ADMIN 전용).
+     * 1번=어휘력 ~ 9번=문제 분석 및 전략 수립 능력. Q10 은 건드리지 않음.
+     * 이미 competencyVector 또는 competency 있는 문항은 보호.
+     */
+    @PostMapping("/dailyquiz/q1to9-competency-backfill")
+    fun dailyQuizQ1to9CompetencyBackfill(): ApiResponse<Map<String, Any?>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        val userId = SecurityUtils.currentUserId() ?: "system"
+        val result = adminContentService.backfillDailyQuizQ1to9Competency(userId)
+        return ApiResponse(success = true, data = result)
+    }
+
+    /**
      * 일일퀴즈 1번 문제(어휘) 의 본문 텍스트 키들을 단일 "보기" 키로 통합.
      * 학생 화면이 passage / prompt / 보기 / examples 등 여러 키를 박스로 렌더하던 것을
      * 한 박스("보기")로 단순화하기 위한 1회성 마이그레이션.

@@ -3,11 +3,17 @@ package com.korfarm.api.learning
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.korfarm.api.common.IdGenerator
+import com.korfarm.api.diagnostic.DiagSessionRepository
 import com.korfarm.api.diagnostic.scoring.COMPETENCIES
 import com.korfarm.api.diagnostic.scoring.normalizeKey
+import com.korfarm.api.paid.ContentRepository
+import com.korfarm.api.user.UserRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
+import kotlin.math.exp
+import kotlin.math.max
 
 /**
  * 한 문항의 응시 결과 (벡터 기반).
@@ -47,7 +53,23 @@ class LearningCompetencyService(
     private val logRepository: LearningCompetencyLogRepository,
     private val summaryRepository: UserCompetencySummaryRepository,
     private val objectMapper: ObjectMapper,
+    private val diagSessionRepository: DiagSessionRepository,
+    private val contentRepository: ContentRepository,
+    private val userRepository: UserRepository,
 ) {
+
+    companion object {
+        /** 시간 decay half-life (일) — 30일 지나면 가중치 절반 */
+        const val DECAY_HALF_LIFE_DAYS = 30.0
+
+        /** 베이지안 prior 의 가상 샘플 수 — 8회까지 prior 영향. 그 이후 경험치가 prior 압도 */
+        const val BAYESIAN_PRIOR_SAMPLES = 8.0
+
+        /** 난이도 1 차이당 multiplier 변화 (콘텐츠가 학생 레벨보다 1단계 위면 +10%) */
+        const val DIFFICULTY_MULTIPLIER_PER_LEVEL = 0.10
+        const val DIFFICULTY_MULTIPLIER_MAX = 1.5
+        const val DIFFICULTY_MULTIPLIER_MIN = 0.6
+    }
 
     /**
      * [DEPRECATED] 단순 ratio 기반 — vector 가 없는 옛 호출자를 위한 fallback.
@@ -154,11 +176,23 @@ class LearningCompetencyService(
         logRepository.saveAll(asc.take(toEvict))
     }
 
-    /** 윈도우 내 모든 entry 를 모아 user_competency_summary 갱신 */
+    /**
+     * 윈도우 내 모든 entry 를 모아 user_competency_summary 갱신.
+     *
+     * 고도화 (V2):
+     * 1) 시간 decay — exp(-ln2 × daysAgo / HALF_LIFE) 가중. 30일 지나면 0.5, 60일 0.25 …
+     * 2) 난이도 가중 — 콘텐츠 레벨 vs 학생 레벨 차이로 multiplier (1단계 위 = ×1.1, 2단계 위 = ×1.2 …)
+     * 3) 베이지안 prior — 측정 횟수 < BAYESIAN_PRIOR_SAMPLES 일 때 진단값을 prior 로 가중 평균
+     */
     private fun recomputeSummary(userId: String) {
         val entries = logRepository.findInWindowDesc(userId)
         val typeRef = object : TypeReference<Map<String, Double>>() {}
         val intTypeRef = object : TypeReference<Map<String, Int>>() {}
+
+        val now = LocalDateTime.now()
+        val studentLevelNum = resolveStudentLevelNumber(userId)
+        // 콘텐츠 레벨 캐시 — 같은 사용자 윈도우 내에서 같은 콘텐츠 여러 번 등장하지 않지만, 다른 콘텐츠에서 같은 levelId 자주 → 캐시
+        val contentLevelCache = mutableMapOf<String, Int?>()
 
         val earnedTotal = COMPETENCIES.associateWith { 0.0 }.toMutableMap()
         val maxTotal = COMPETENCIES.associateWith { 0.0 }.toMutableMap()
@@ -167,33 +201,115 @@ class LearningCompetencyService(
         for (e in entries) {
             val v: Map<String, Double> = try { objectMapper.readValue(e.vectorJson, typeRef) } catch (_: Exception) { emptyMap() }
             val m: Map<String, Int> = try { objectMapper.readValue(e.measuredJson, intTypeRef) } catch (_: Exception) { emptyMap() }
+
+            val daysAgo = ChronoUnit.DAYS.between(e.completedAt, now).coerceAtLeast(0L).toDouble()
+            val decay = exp(-Math.log(2.0) * daysAgo / DECAY_HALF_LIFE_DAYS)
+
+            val contentLevelNum = contentLevelCache.getOrPut(e.contentId) {
+                resolveContentLevelNumber(e.contentId)
+            }
+            val difficultyMultiplier = computeDifficultyMultiplier(studentLevelNum, contentLevelNum)
+
+            val effectiveWeight = e.weight * decay * difficultyMultiplier
+
             for (c in COMPETENCIES) {
                 val measured = (m[c] ?: 0).toDouble()
                 if (measured == 0.0) continue
-                // Option B: ratio 가 음수 가능 (학생이 약점 누적). -1.0 ~ 1.0 범위 허용.
                 val ratio = (v[c] ?: 0.0).coerceIn(-1.0, 1.0)
-                earnedTotal[c] = earnedTotal.getValue(c) + e.weight * measured * ratio
-                maxTotal[c] = maxTotal.getValue(c) + e.weight * measured
+                earnedTotal[c] = earnedTotal.getValue(c) + effectiveWeight * measured * ratio
+                maxTotal[c] = maxTotal.getValue(c) + effectiveWeight * measured
                 sampleCount[c] = sampleCount.getValue(c) + 1
             }
         }
 
-        val now = LocalDateTime.now()
+        // 진단 prior 조회 (한 번만)
+        val diagPriorByCompetency = loadDiagnosticPriorRatio(userId)
+
         val existing = summaryRepository.findByUserId(userId).associateBy { it.competency }.toMutableMap()
         val updates = mutableListOf<UserCompetencySummaryEntity>()
         for (c in COMPETENCIES) {
             val ent = existing[c] ?: UserCompetencySummaryEntity(userId = userId, competency = c)
             ent.earnedTotal = earnedTotal.getValue(c)
             ent.maxTotal = maxTotal.getValue(c)
-            // 표시용 ratioScore: 0~100 clamp (earned 가 음수면 0)
-            ent.ratioScore = if (ent.maxTotal > 0.0)
-                ((ent.earnedTotal / ent.maxTotal) * 100.0).coerceIn(0.0, 100.0)
-            else 0.0
             ent.sampleCount = sampleCount.getValue(c)
+
+            val rawRatio = if (ent.maxTotal > 0.0) (ent.earnedTotal / ent.maxTotal) else 0.0  // -1..1 가능
+            // 베이지안 prior 보정: 측정 횟수 < BAYESIAN_PRIOR_SAMPLES 일 때 prior 로 가중 평균
+            val priorWeight = max(0.0, BAYESIAN_PRIOR_SAMPLES - ent.sampleCount.toDouble())
+            val sampleWeight = ent.sampleCount.toDouble()
+            val priorRatio = diagPriorByCompetency[c] ?: 0.5  // 진단 없으면 중립값 0.5 (50%)
+            val posterior = if (priorWeight + sampleWeight > 0.0) {
+                (priorWeight * priorRatio + sampleWeight * ((rawRatio + 1.0) / 2.0)) / (priorWeight + sampleWeight)
+                // (rawRatio + 1) / 2 → -1..1 을 0..1 로 변환
+            } else 0.5
+
+            // 표시용 ratioScore: 0~100
+            ent.ratioScore = (posterior * 100.0).coerceIn(0.0, 100.0)
             ent.updatedAt = now
             updates.add(ent)
         }
         summaryRepository.saveAll(updates)
+    }
+
+    /**
+     * 콘텐츠의 레벨 숫자(1~12). levelId="russell1" → 7, "saussure3" → 3, "wittgenstein2" → 11 등.
+     * resolution 실패 시 null.
+     */
+    private fun resolveContentLevelNumber(contentId: String): Int? {
+        val content = contentRepository.findById(contentId).orElse(null) ?: return null
+        return parseLevelNumber(content.levelId)
+    }
+
+    private fun resolveStudentLevelNumber(userId: String): Int? {
+        val user = userRepository.findById(userId).orElse(null) ?: return null
+        return parseLevelNumber(user.levelId)
+    }
+
+    /**
+     * "saussure1"~"saussure3"=1~3, "frege1"~"frege3"=4~6,
+     * "russell1"~"russell3"=7~9, "wittgenstein1"~"wittgenstein3"=10~12
+     */
+    private fun parseLevelNumber(levelId: String?): Int? {
+        if (levelId.isNullOrBlank()) return null
+        val tier = levelId.dropLastWhile { it.isDigit() }.lowercase()
+        val num = levelId.takeLastWhile { it.isDigit() }.toIntOrNull() ?: return null
+        val base = when (tier) {
+            "saussure", "sohssure" -> 0
+            "frege" -> 3
+            "russell" -> 6
+            "wittgenstein", "witt" -> 9
+            else -> return null
+        }
+        return base + num
+    }
+
+    /** 학생 레벨 vs 콘텐츠 레벨 차이로 multiplier */
+    private fun computeDifficultyMultiplier(studentLevel: Int?, contentLevel: Int?): Double {
+        if (studentLevel == null || contentLevel == null) return 1.0
+        val delta = contentLevel - studentLevel
+        val raw = 1.0 + delta * DIFFICULTY_MULTIPLIER_PER_LEVEL
+        return raw.coerceIn(DIFFICULTY_MULTIPLIER_MIN, DIFFICULTY_MULTIPLIER_MAX)
+    }
+
+    /**
+     * 학생의 가장 최근 완료 진단 세션의 역량별 정답률(0~1) 반환.
+     * 없으면 빈 맵.
+     */
+    private fun loadDiagnosticPriorRatio(userId: String): Map<String, Double> {
+        val sessions = diagSessionRepository.findByUserIdOrderByStartedAtDesc(userId)
+        val completed = sessions.firstOrNull { it.status == "completed" } ?: return emptyMap()
+        val scoresJson = completed.scoresJson ?: return emptyMap()
+        val maxJson = completed.maxScoresJson ?: return emptyMap()
+        return try {
+            val typeRef = object : TypeReference<Map<String, Double>>() {}
+            val scores = objectMapper.readValue(scoresJson, typeRef)
+            val maxes = objectMapper.readValue(maxJson, typeRef)
+            COMPETENCIES.associateWith { c ->
+                val s = scores[c] ?: 0.0
+                val mx = maxes[c] ?: 0.0
+                if (mx <= 0.0) 0.5 else (s / mx).coerceIn(0.0, 1.0)
+            }
+        } catch (_: Exception) { emptyMap() }
     }
 
     /** 사용자별 누적 요약 조회 (10대 역량 모두 포함) */

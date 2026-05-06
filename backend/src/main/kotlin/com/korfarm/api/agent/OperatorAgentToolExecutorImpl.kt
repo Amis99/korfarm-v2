@@ -8,6 +8,7 @@ import com.korfarm.api.duel.AiPlayerService
 import com.korfarm.api.duel.DuelMatchRepository
 import com.korfarm.api.grapefruit.GrapefruitTransactionRepository
 import com.korfarm.api.learning.LearningCompetencyLogRepository
+import com.korfarm.api.learning.RecommendationService
 import com.korfarm.api.learning.UserCompetencySummaryRepository
 import com.korfarm.api.org.ClassMembershipRepository
 import com.korfarm.api.org.ClassRepository
@@ -63,6 +64,7 @@ class OperatorAgentToolExecutorImpl(
     private val postRepository: PostRepository,
     private val reportRepository: ReportRepository,
     private val grapefruitTransactionRepository: GrapefruitTransactionRepository,
+    private val recommendationService: RecommendationService,
 ) : AgentToolExecutor {
     private val log = LoggerFactory.getLogger(OperatorAgentToolExecutorImpl::class.java)
 
@@ -310,35 +312,37 @@ class OperatorAgentToolExecutorImpl(
         val targetUserId = input["user_id"] as? String
         val limit = (input["limit"] as? Number)?.toInt()?.coerceIn(1, 50) ?: 10
 
-        // 학생 ID 가 지정되었으면 ORG_ADMIN 권한 체크
         if (targetUserId != null) verifyStudentOwnership(targetUserId, role, orgId)
 
-        val pickedCode = theme ?: subArea ?: area
-        val candidates = if (pickedCode != null) {
-            // 분류 코드에 매핑된 contentId 만 추출 (메모리 폭발 방지)
-            val contentIds = contentClassificationRepository.findContentIdsByCode(pickedCode)
-            if (contentIds.isEmpty()) emptyList()
-            else contentRepository.findAllById(contentIds)
-                .filter { it.status == "active" && (level == null || it.levelId == level) }
-                .take(limit)
-        } else if (level != null) {
-            // 레벨만 지정된 경우 — level 기반 검색
-            contentRepository.findByContentTypeAndLevelIdAndStatus("DAILY_READING", level, "active")
-                .ifEmpty { contentRepository.findByAreaAndLevelIdAndStatus("nonfiction", level, "active") }
-                .take(limit)
-        } else {
-            // 추천 기준이 전혀 없으면 빈 결과 (전체 적재 금지)
-            emptyList()
+        // 학생 ID 가 명시되지 않으면 추천이 무의미 → 명시 요구
+        if (targetUserId == null) {
+            return AgentToolResult(
+                success = true,
+                data = mapOf(
+                    "note" to "user_id 가 필요합니다. 어떤 학생을 위한 추천인지 알려주십시오.",
+                    "count" to 0,
+                ),
+            )
         }
 
-        val data = candidates.map {
+        // RecommendationService 의 3종 추천 — 우선순위: theme → area → competency
+        val recommended = when {
+            !theme.isNullOrBlank() -> recommendationService.recommendForTheme(targetUserId, theme, level, limit)
+            !area.isNullOrBlank() || !subArea.isNullOrBlank() ->
+                recommendationService.recommendForArea(targetUserId, area, subArea, level, limit)
+            else -> recommendationService.recommendForCompetency(targetUserId, competency, level, limit)
+        }
+
+        val data = recommended.map {
             mapOf(
-                "content_id" to it.id,
+                "content_id" to it.contentId,
                 "title" to it.title,
                 "content_type" to it.contentType,
                 "level_id" to it.levelId,
                 "area" to it.area,
                 "sub_area" to it.subArea,
+                "score" to it.score,
+                "reason" to it.reason,
             )
         }
         return AgentToolResult(
@@ -351,9 +355,6 @@ class OperatorAgentToolExecutorImpl(
                 ),
                 "count" to data.size,
                 "contents" to data,
-                "note" to if (pickedCode == null && level == null)
-                    "최소 한 가지 필터(theme/sub_area/area/level/competency)가 필요합니다."
-                else null,
             ),
         )
     }

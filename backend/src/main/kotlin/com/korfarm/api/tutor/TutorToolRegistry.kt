@@ -49,12 +49,13 @@ class TutorToolRegistry {
         ),
         TutorToolDefinition(
             name = "recommend_my_study",
-            description = "내 약점 역량 또는 지정한 영역의 추천 학습 콘텐츠를 가져옵니다.",
+            description = "내 약점 역량 또는 지정한 영역·주제의 추천 학습 콘텐츠를 가져옵니다. 우선순위: theme > area > competency. 인자 미지정 시 자동 약점 보강.",
             inputSchema = mapOf(
                 "type" to "object",
                 "properties" to mapOf(
-                    "competency" to mapOf("type" to "string", "description" to "10대 역량 코드"),
-                    "area" to mapOf("type" to "string", "description" to "분류 영역"),
+                    "competency" to mapOf("type" to "string", "description" to "10대 역량명 (예: 어휘력, 문장 독해력, 논리 사고력)"),
+                    "area" to mapOf("type" to "string", "description" to "분류 영역 코드"),
+                    "theme" to mapOf("type" to "string", "description" to "분류 주제 코드"),
                     "limit" to mapOf("type" to "integer"),
                 ),
                 "required" to emptyList<String>(),

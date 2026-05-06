@@ -3,6 +3,7 @@ package com.korfarm.api.tutor
 import com.korfarm.api.classification.ContentClassificationRepository
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.learning.LearningCompetencyLogRepository
+import com.korfarm.api.learning.RecommendationService
 import com.korfarm.api.learning.UserCompetencySummaryRepository
 import com.korfarm.api.paid.ContentRepository
 import com.korfarm.api.paid.ContentVersionRepository
@@ -31,6 +32,7 @@ class TutorToolExecutor(
     private val classificationRepository: ContentClassificationRepository,
     private val competencyLogRepository: LearningCompetencyLogRepository,
     private val competencySummaryRepository: UserCompetencySummaryRepository,
+    private val recommendationService: RecommendationService,
 ) {
     private val log = LoggerFactory.getLogger(TutorToolExecutor::class.java)
 
@@ -99,32 +101,31 @@ class TutorToolExecutor(
     private fun recommendMyStudy(input: Map<String, Any?>, userId: String): TutorToolResult {
         val competency = input["competency"] as? String
         val area = input["area"] as? String
+        val theme = input["theme"] as? String
         val limit = (input["limit"] as? Number)?.toInt()?.coerceIn(1, 30) ?: 10
         val user = userRepository.findById(userId).orElse(null)
         val level = user?.levelId
 
-        val pickedCode = area
-        val candidates = if (pickedCode != null) {
-            val ids = classificationRepository.findContentIdsByCode(pickedCode)
-            if (ids.isEmpty()) emptyList()
-            else contentRepository.findAllById(ids)
-                .filter { it.status == "active" && (level == null || it.levelId == level) }
-                .take(limit)
-        } else if (level != null) {
-            contentRepository.findByContentTypeAndLevelIdAndStatus("DAILY_READING", level, "active").take(limit)
-        } else emptyList()
+        // 우선순위: theme → area → competency(약점 자동)
+        val recommended = when {
+            !theme.isNullOrBlank() -> recommendationService.recommendForTheme(userId, theme, level, limit)
+            !area.isNullOrBlank() -> recommendationService.recommendForArea(userId, area, null, level, limit)
+            else -> recommendationService.recommendForCompetency(userId, competency, level, limit)
+        }
 
-        val data = candidates.map {
+        val data = recommended.map {
             mapOf(
-                "content_id" to it.id,
+                "content_id" to it.contentId,
                 "title" to it.title,
                 "content_type" to it.contentType,
                 "level_id" to it.levelId,
                 "area" to it.area,
+                "sub_area" to it.subArea,
+                "reason" to it.reason,
             )
         }
         return TutorToolResult(success = true, data = mapOf(
-            "filter" to mapOf("competency" to competency, "area" to area, "level" to level),
+            "filter" to mapOf("competency" to competency, "area" to area, "theme" to theme, "level" to level),
             "count" to data.size,
             "contents" to data,
         ))
