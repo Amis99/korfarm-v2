@@ -646,7 +646,7 @@ class AdminContentService(
                         id = IdGenerator.newId("cel"),
                         contentId = content.id,
                         editorId = userId,
-                        action = "BACKFILL_DEFAULT_COMPETENCY_VECTOR",
+                        action = "BACKFILL_DEFAULT_VEC",
                     )
                 )
                 modified++
