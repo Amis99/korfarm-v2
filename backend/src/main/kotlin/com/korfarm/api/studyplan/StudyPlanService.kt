@@ -6,6 +6,7 @@ import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.learning.FarmLearningLogRepository
 import com.korfarm.api.org.*
+import com.korfarm.api.paid.ContentRepository
 import com.korfarm.api.security.SecurityUtils
 import com.korfarm.api.test.TestPaperEntity
 import com.korfarm.api.test.TestPaperRepo
@@ -39,6 +40,7 @@ class StudyPlanService(
     private val farmLearningLogRepo: FarmLearningLogRepository,
     private val testSubmissionRepo: TestSubmissionRepo,
     private val testPaperRepo: TestPaperRepo,
+    private val contentRepo: ContentRepository,
     private val wisdomPostRepo: WisdomPostRepository,
     private val wisdomFeedbackRepo: WisdomFeedbackRepository,
     private val objectMapper: ObjectMapper
