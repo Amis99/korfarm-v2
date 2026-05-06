@@ -33,23 +33,21 @@ function ShopPage() {
 
   const hasShipping = shipping.shippingName && shipping.shippingAddress;
 
-  // 배송지 로드
+  // 배송지 로드 — apiGet 이 이미 payload.data 를 unwrap + camelize 해서 평면 user 객체를 반환.
   useEffect(() => {
     apiGet("/v1/auth/me")
-      .then((res) => {
-        if (res?.data) {
-          const d = res.data;
-          const loaded = {
-            shippingName: d.shippingName || "",
-            shippingPhone: d.shippingPhone || "",
-            shippingZipCode: d.shippingZipCode || "",
-            shippingAddress: d.shippingAddress || "",
-            shippingAddressDetail: d.shippingAddressDetail || "",
-          };
-          setShipping(loaded);
-          if (loaded.shippingName && loaded.shippingAddress) {
-            setShippingSaved(true);
-          }
+      .then((d) => {
+        if (!d) return;
+        const loaded = {
+          shippingName: d.shippingName || "",
+          shippingPhone: d.shippingPhone || "",
+          shippingZipCode: d.shippingZipCode || "",
+          shippingAddress: d.shippingAddress || "",
+          shippingAddressDetail: d.shippingAddressDetail || "",
+        };
+        setShipping(loaded);
+        if (loaded.shippingName && loaded.shippingAddress) {
+          setShippingSaved(true);
         }
       })
       .catch((e) => console.error(e));

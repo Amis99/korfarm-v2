@@ -27,16 +27,15 @@ function ProductDetailPage() {
     if (!isLoggedIn) return;
     setAddressLoading(true);
     apiGet("/v1/auth/me")
-      .then((data) => {
-        if (data.shippingAddress || data.shipping_address) {
-          setAddress(data.shippingAddress || data.shipping_address);
-        } else if (data.recipientName || data.recipient_name) {
+      .then((d) => {
+        // 백엔드 UserEntity 의 평면 5개 컬럼: shippingName/shippingPhone/shippingZipCode/shippingAddress/shippingAddressDetail
+        if (d?.shippingName && d?.shippingAddress) {
           setAddress({
-            recipientName: data.recipientName || data.recipient_name,
-            phone: data.phone,
-            zipCode: data.zipCode || data.zip_code,
-            address: data.address,
-            addressDetail: data.addressDetail || data.address_detail,
+            recipientName: d.shippingName,
+            phone: d.shippingPhone || "",
+            zipCode: d.shippingZipCode || "",
+            address: d.shippingAddress,
+            addressDetail: d.shippingAddressDetail || "",
           });
         }
       })
@@ -49,7 +48,7 @@ function ProductDetailPage() {
       setError("로그인 후 이용해주세요.");
       return;
     }
-    if (!address || !address.address) {
+    if (!address || !address.address || !address.recipientName) {
       setError("쇼핑몰에서 배송지를 먼저 등록해주세요.");
       return;
     }

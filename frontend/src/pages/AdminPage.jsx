@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { apiDelete, apiGet, apiPatch, apiPost } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
 import { useAuth } from "../hooks/useAuth";
@@ -7,10 +9,8 @@ import { useAuth } from "../hooks/useAuth";
 /**
  * /admin — 운영자 AI 비서 채팅 대시보드.
  * 좌측: 세션 목록(+ 새 대화)
- * 중앙: 채팅 메시지 + 입력창
- * 우측: 오늘의 브리핑 + 빠른 작업
- *
- * 기존 대시보드 통계 4개 카드는 우측 "오늘의 브리핑" 박스에 흡수.
+ * 중앙: 채팅 메시지 + 입력창 (마크다운 렌더 + tool 진행 표시)
+ * 우측: 자몽/한도 카드 + 오늘의 브리핑 + 빠른 작업
  */
 function AdminPage() {
   const { user } = useAuth();
@@ -24,10 +24,10 @@ function AdminPage() {
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
   const [briefing, setBriefing] = useState(null);
+  const [agentStatus, setAgentStatus] = useState(null);
 
   const scrollRef = useRef(null);
 
-  // 세션 목록
   const loadSessions = async () => {
     try {
       const data = await apiGet("/v1/admin/agent/sessions");
@@ -37,7 +37,6 @@ function AdminPage() {
     }
   };
 
-  // 메시지
   const loadMessages = async (sid) => {
     if (!sid) {
       setMessages([]);
@@ -51,26 +50,34 @@ function AdminPage() {
     }
   };
 
-  // 오늘의 브리핑 (기존 dashboard summary 흡수)
   const loadBriefing = async () => {
     try {
       const data = await apiGet("/v1/admin/dashboard/summary");
       setBriefing(data);
     } catch {
-      // 권한 없거나 실패해도 무시
+      // ignore
+    }
+  };
+
+  const loadAgentStatus = async () => {
+    try {
+      const data = await apiGet("/v1/admin/agent/status");
+      setAgentStatus(data);
+    } catch {
+      // ignore
     }
   };
 
   useEffect(() => {
     loadSessions();
     loadBriefing();
+    loadAgentStatus();
   }, []);
 
   useEffect(() => {
     loadMessages(activeSessionId);
   }, [activeSessionId]);
 
-  // 새 메시지 도착 시 하단 스크롤
   useEffect(() => {
     if (!scrollRef.current) return;
     scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -88,7 +95,6 @@ function AdminPage() {
     setSending(true);
     setError("");
 
-    // 낙관적 업데이트 — user 메시지 즉시 표시
     const optimisticUser = {
       id: `tmp-${Date.now()}`,
       role: "user",
@@ -103,16 +109,15 @@ function AdminPage() {
         sessionId: activeSessionId,
         message: text,
       });
-      // 새 세션이면 ID 받기
       if (!activeSessionId && result?.session_id) {
         setActiveSessionId(result.session_id);
         await loadSessions();
       }
-      // 서버 메시지로 다시 로드 (tool 메시지 포함)
       await loadMessages(result?.session_id || activeSessionId);
+      // 자몽/한도 카드 업데이트
+      loadAgentStatus();
     } catch (e) {
       setError(e.message);
-      // 실패 시 낙관적 메시지 제거
       setMessages((prev) => prev.filter((m) => m.id !== optimisticUser.id));
     } finally {
       setSending(false);
@@ -170,7 +175,7 @@ function AdminPage() {
           { label: "기관 관리", path: "/admin/orgs" },
           { label: "결제 관리", path: "/admin/orgs?tab=payments" },
         ]
-      : []),
+      : [{ label: "AI 자몽 지갑", path: "/admin/grapefruit-wallet" }]),
   ];
 
   return (
@@ -239,20 +244,46 @@ function AdminPage() {
                 </ul>
               </div>
             )}
-            {messages
-              .filter((m) => m.role !== "tool")
-              .map((m) => (
+            {messages.map((m, idx) => {
+              if (m.role === "tool") {
+                // 인접한 tool 들 묶어서 첫 번째에서만 그려주기
+                const prev = messages[idx - 1];
+                if (prev && prev.role === "tool") return null;
+                const group = [];
+                for (let j = idx; j < messages.length && messages[j].role === "tool"; j++) {
+                  group.push(messages[j]);
+                }
+                return (
+                  <div key={`tools-${m.id}`} className="agent-tool-trace">
+                    {group.map((g) => (
+                      <span
+                        key={g.id}
+                        className={`agent-tool-pill ${g.status === "success" ? "ok" : "err"}`}
+                      >
+                        {g.status === "success" ? "✓" : "✗"} {g.functionName}
+                      </span>
+                    ))}
+                  </div>
+                );
+              }
+              if (m.role === "assistant_tool_use") return null; // 내부 history 용
+              return (
                 <div key={m.id} className={`agent-msg ${m.role}`}>
                   <div className="agent-msg-meta">
                     {m.role === "user" ? "운영자" : "AI 비서"}
                   </div>
                   <div className="agent-msg-body">
-                    {(m.content || "").split("\n").map((line, i) => (
-                      <div key={i}>{line || " "}</div>
-                    ))}
+                    {m.role === "assistant" ? (
+                      <Markdown remarkPlugins={[remarkGfm]}>{m.content || ""}</Markdown>
+                    ) : (
+                      (m.content || "").split("\n").map((line, i) => (
+                        <div key={i}>{line || " "}</div>
+                      ))
+                    )}
                   </div>
                 </div>
-              ))}
+              );
+            })}
             {sending && (
               <div className="agent-msg assistant">
                 <div className="agent-msg-meta">AI 비서</div>
@@ -277,6 +308,35 @@ function AdminPage() {
         </main>
 
         <aside className="agent-context">
+          <section className="agent-card">
+            <h3>AI 비서 사용량</h3>
+            {!agentStatus ? (
+              <p className="muted">불러오는 중…</p>
+            ) : agentStatus.unlimited ? (
+              <p className="muted">본사 권한 — 무제한 무료 이용</p>
+            ) : (
+              <ul className="agent-briefing">
+                <li>
+                  <span>오늘 사용</span>
+                  <strong>{agentStatus.daily_used} / {agentStatus.daily_limit}회</strong>
+                </li>
+                <li>
+                  <span>이번 달 사용</span>
+                  <strong>{agentStatus.monthly_used} / {agentStatus.monthly_limit}회</strong>
+                </li>
+                <li className="clickable" onClick={() => navigate("/admin/grapefruit-wallet")}>
+                  <span>자몽 잔액</span>
+                  <strong>🍊 {agentStatus.org_grapefruit_balance ?? 0}개</strong>
+                </li>
+              </ul>
+            )}
+            {!agentStatus?.unlimited && (
+              <p className="agent-help">
+                무료 한도 초과 시 자몽 1개당 10회 추가 호출
+              </p>
+            )}
+          </section>
+
           <section className="agent-card">
             <h3>오늘의 브리핑</h3>
             <ul className="agent-briefing">

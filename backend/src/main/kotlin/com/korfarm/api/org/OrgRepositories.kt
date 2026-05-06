@@ -29,7 +29,10 @@ interface OrgMembershipRepository : JpaRepository<OrgMembershipEntity, String> {
     fun countByOrgIdAndStatus(orgId: String, status: String): Long
 }
 
-interface ClassRepository : JpaRepository<ClassEntity, String>
+interface ClassRepository : JpaRepository<ClassEntity, String> {
+    fun findByStatusOrderByNameAsc(status: String): List<ClassEntity>
+    fun findByOrgIdAndStatusOrderByNameAsc(orgId: String, status: String): List<ClassEntity>
+}
 
 interface ClassMembershipRepository : JpaRepository<ClassMembershipEntity, String> {
     fun findByUserIdAndStatus(userId: String, status: String): List<ClassMembershipEntity>

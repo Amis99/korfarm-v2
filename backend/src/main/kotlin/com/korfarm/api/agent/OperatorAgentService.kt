@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.grapefruit.GrapefruitService
+import com.korfarm.api.org.OrgMembershipRepository
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
@@ -20,7 +21,7 @@ import java.time.LocalDateTime
 /**
  * 운영자 AI 비서 서비스.
  *
- * 한 turn = 사용자 메시지 1개 + 모델의 최종 assistant 응답 1개. 그 사이에 tool_use 가 N회 발생할 수 있음.
+ * 한 turn = 사용자 메시지 1개 + 모델의 최종 assistant 응답 1개. 그 사이 tool_use 가 N회 발생할 수 있음.
  *
  * ## 한도
  * - 일 100회 / 월 2,000회 무료 (HQ_ADMIN 은 무료 — 자몽 차감 없음)
@@ -33,6 +34,10 @@ import java.time.LocalDateTime
  * 3. stop_reason="tool_use" 면 → tool 실행 → tool_result 메시지 추가 → 다시 호출
  * 4. stop_reason="end_turn" 면 → assistant 메시지 저장 → 종료
  * 5. usage_log 1 row INSERT
+ *
+ * ## 트랜잭션 분리 (B7)
+ * - processTurn 자체는 비-트랜잭션 (Claude API 호출이 길어도 connection pool 점유 X)
+ * - 짧은 DB 작업(세션 조회/생성, 메시지 저장, 한도 체크/차감, usage 로그)만 각자 @Transactional
  */
 @Service
 class OperatorAgentService(
@@ -45,6 +50,7 @@ class OperatorAgentService(
     private val toolRegistry: AgentToolRegistry,
     private val toolExecutor: AgentToolExecutor,
     private val grapefruitService: GrapefruitService,
+    private val orgMembershipRepository: OrgMembershipRepository,
 ) {
     private val log = LoggerFactory.getLogger(OperatorAgentService::class.java)
     private val httpClient = HttpClient.newBuilder()
@@ -70,6 +76,18 @@ class OperatorAgentService(
         val grapefruitSpent: Int,
         val inputTokens: Int,
         val outputTokens: Int,
+    )
+
+    /** 한도/잔액 표시용 status 응답 — /v1/admin/agent/status 가 사용 */
+    data class AgentStatus(
+        val role: String,
+        val orgId: String?,
+        val dailyUsed: Long,
+        val dailyLimit: Int,
+        val monthlyUsed: Long,
+        val monthlyLimit: Int,
+        val orgGrapefruitBalance: Int?,
+        val unlimited: Boolean,
     )
 
     // ─── 세션 관리 ───────────────────────────────────
@@ -121,14 +139,44 @@ class OperatorAgentService(
         sessionRepo.save(s)
     }
 
+    /** 호출자의 ORG_ADMIN orgId — 첫 active membership. 통일 헬퍼 (B7 #8). */
+    fun resolveCallerOrgId(userId: String): String? =
+        orgMembershipRepository.findByUserIdAndStatus(userId, "active")
+            .firstOrNull { it.role == "ORG_ADMIN" }?.orgId
+
+    /** /v1/admin/agent/status — 한도/잔액 카드 표시용 */
+    @Transactional(readOnly = true)
+    fun getStatus(userId: String, role: String, orgId: String?): AgentStatus {
+        val today = LocalDate.now()
+        val dayStart = today.atStartOfDay()
+        val dayEnd = today.plusDays(1).atStartOfDay()
+        val monthStart = today.withDayOfMonth(1).atStartOfDay()
+        val monthEnd = today.withDayOfMonth(1).plusMonths(1).atStartOfDay()
+
+        val dailyUsed = usageRepo.countAllTurnsInRange(userId, dayStart, dayEnd)
+        val monthlyUsed = usageRepo.countAllTurnsInRange(userId, monthStart, monthEnd)
+        val balance = if (role == "ORG_ADMIN" && orgId != null) grapefruitService.getOrgBalance(orgId) else null
+
+        return AgentStatus(
+            role = role,
+            orgId = orgId,
+            dailyUsed = dailyUsed,
+            dailyLimit = DAILY_FREE_LIMIT,
+            monthlyUsed = monthlyUsed,
+            monthlyLimit = MONTHLY_FREE_LIMIT,
+            orgGrapefruitBalance = balance,
+            unlimited = (role == "HQ_ADMIN"),
+        )
+    }
+
     // ─── 한도·자몽 차감 ───────────────────────────────────
 
     /**
      * 한도 체크 + 필요 시 자몽 차감을 해서 (isExtra, grapefruitSpent) 반환.
      * HQ_ADMIN 은 항상 무료(0원).
-     * ORG_ADMIN 은 일/월 무료 한도를 같이 사용.
      */
-    private fun checkLimitAndCharge(userId: String, role: String): Pair<Boolean, Int> {
+    @Transactional
+    fun checkLimitAndCharge(userId: String, role: String, orgId: String?): Pair<Boolean, Int> {
         if (role == "HQ_ADMIN") return false to 0
 
         val today = LocalDate.now()
@@ -144,200 +192,18 @@ class OperatorAgentService(
         if (!needsExtra) return false to 0
 
         // 한도 초과 — 자몽 차감
-        // EXTRA_CALLS_PER_GRAPEFRUIT(10) 회당 자몽 1개. 즉, 호출 횟수가 10의 배수일 때만 자몽 차감.
-        // 마지막 자몽 차감 후 9 회까지는 무료. 10회째 호출에서 다시 차감.
-        // → DB 의 grapefruit_spent 합계 == ceil(extraCalls / 10)
         val extraCallsBefore = usageRepo.countAllTurnsInRange(userId, monthStart, monthEnd) - MONTHLY_FREE_LIMIT
-        // extraCallsBefore 가 10 의 배수면 새 자몽 차감, 아니면 무료
         val needCharge = extraCallsBefore < 0 || extraCallsBefore % EXTRA_CALLS_PER_GRAPEFRUIT == 0L
         if (!needCharge) return true to 0
 
-        // 자몽 차감 — ORG_ADMIN 만 도달 가능
-        val (orgId, _) = grapefruitService.getCallerOrgBalance()
-            ?: throw ApiException("FORBIDDEN", "기관 소속 없음", HttpStatus.FORBIDDEN)
+        // ORG_ADMIN 만 도달. orgId 가 명시 전달돼야 함.
+        if (orgId == null) throw ApiException("FORBIDDEN", "기관 소속 없음", HttpStatus.FORBIDDEN)
         grapefruitService.spendOrg(orgId, EXTRA_PRICING_KIND, null, "AI 비서 한도 초과")
         return true to 1
     }
 
-    // ─── 한 turn 실행 ───────────────────────────────────
-
-    /**
-     * 사용자 메시지를 받아 한 turn 을 실행한다. 모델이 tool_use 를 요청하면 자동 실행 후 다시 호출.
-     */
     @Transactional
-    fun processTurn(
-        sessionIdInput: String?,
-        userId: String,
-        role: String,
-        orgId: String?,
-        userText: String,
-    ): TurnResult {
-        if (apiKey.isBlank()) throw ApiException("AI_DISABLED", "AI API 키 미설정", HttpStatus.SERVICE_UNAVAILABLE)
-        if (userText.isBlank()) throw ApiException("INVALID", "메시지가 비어 있음", HttpStatus.BAD_REQUEST)
-
-        // 1) 세션 확보
-        val session = if (sessionIdInput.isNullOrBlank()) {
-            createSession(userId, role, orgId, title = userText.take(40))
-        } else {
-            sessionRepo.findById(sessionIdInput).orElseThrow {
-                ApiException("NOT_FOUND", "세션 없음", HttpStatus.NOT_FOUND)
-            }.also {
-                if (it.userId != userId) throw ApiException("FORBIDDEN", "본인 세션만", HttpStatus.FORBIDDEN)
-            }
-        }
-
-        // 2) 한도 체크 + 자몽 차감
-        val (isExtra, grapefruitSpent) = checkLimitAndCharge(userId, role)
-
-        // 3) 사용자 메시지 저장
-        saveMessage(
-            sessionId = session.id,
-            role = "user",
-            content = userText,
-        )
-
-        // 4) tool_use loop
-        val systemPrompt = buildSystemPrompt(role, orgId)
-        val tools = toolRegistry.toolsForRole(role)
-        val historyMessages = buildApiHistory(session.id)
-
-        var totalInputTokens = 0
-        var totalOutputTokens = 0
-        var toolCallsExecuted = 0
-        var assistantText = ""
-        var assistantMessageId = ""
-
-        var loopMessages = historyMessages.toMutableList()
-        loopMessages.add(mapOf("role" to "user", "content" to userText))
-
-        for (loop in 0 until maxToolLoops) {
-            val response = callClaude(systemPrompt, tools, loopMessages)
-            totalInputTokens += response.inputTokens ?: 0
-            totalOutputTokens += response.outputTokens ?: 0
-
-            val stopReason = response.stopReason
-            val contentBlocks = response.contentBlocks
-
-            // assistant 응답을 다음 호출용 history 에 그대로 추가
-            loopMessages.add(mapOf("role" to "assistant", "content" to contentBlocks))
-
-            if (stopReason == "tool_use") {
-                // 모델이 함수 호출을 요청. 모든 tool_use 블록 실행.
-                val toolResultBlocks = mutableListOf<Map<String, Any>>()
-                for (block in contentBlocks) {
-                    val type = block["type"] as? String ?: continue
-                    if (type != "tool_use") continue
-                    val toolUseId = block["id"] as? String ?: continue
-                    val funcName = block["name"] as? String ?: continue
-                    @Suppress("UNCHECKED_CAST")
-                    val input = (block["input"] as? Map<String, Any?>) ?: emptyMap()
-
-                    // 권한 검증 (모델이 보지 못한 함수를 호출하는 경우 거부)
-                    val def = toolRegistry.find(funcName)
-                    val allowed = def != null && role in def.allowedRoles
-                    val result: AgentToolResult = if (!allowed) {
-                        AgentToolResult(success = false, errorCode = "UNAUTHORIZED_FUNCTION", errorMessage = "권한 없음: $funcName")
-                    } else {
-                        try {
-                            toolExecutor.execute(funcName, input, userId, role, orgId)
-                        } catch (e: ApiException) {
-                            AgentToolResult(success = false, errorCode = e.code, errorMessage = e.message)
-                        } catch (e: Exception) {
-                            log.error("tool 실행 오류 — name={}", funcName, e)
-                            AgentToolResult(success = false, errorCode = "TOOL_ERROR", errorMessage = e.message)
-                        }
-                    }
-
-                    // tool 메시지 DB 저장
-                    saveMessage(
-                        sessionId = session.id,
-                        role = "tool",
-                        content = null,
-                        toolUseJson = objectMapper.writeValueAsString(
-                            mapOf("tool_use_id" to toolUseId, "input" to input, "result" to result)
-                        ),
-                        functionName = funcName,
-                        status = if (result.success) "success" else "error",
-                    )
-                    toolCallsExecuted += 1
-
-                    toolResultBlocks.add(
-                        mapOf(
-                            "type" to "tool_result",
-                            "tool_use_id" to toolUseId,
-                            "content" to objectMapper.writeValueAsString(result),
-                            "is_error" to (!result.success),
-                        )
-                    )
-                }
-                // tool_result 들을 user 역할로 다음 호출에 전달
-                loopMessages.add(mapOf("role" to "user", "content" to toolResultBlocks))
-                continue  // 다시 모델 호출
-            }
-
-            // 종료 조건 — assistant 텍스트 추출
-            assistantText = contentBlocks
-                .filter { it["type"] == "text" }
-                .joinToString("\n") { it["text"] as? String ?: "" }
-                .trim()
-            val saved = saveMessage(
-                sessionId = session.id,
-                role = "assistant",
-                content = assistantText,
-            )
-            assistantMessageId = saved.id
-            break
-        }
-
-        if (assistantMessageId.isBlank()) {
-            // maxToolLoops 도달
-            assistantText = "(최대 호출 횟수 초과 — 더 짧은 요청으로 다시 시도해 주세요.)"
-            val saved = saveMessage(
-                sessionId = session.id,
-                role = "assistant",
-                content = assistantText,
-                status = "error",
-            )
-            assistantMessageId = saved.id
-        }
-
-        // 5) usage 로그
-        usageRepo.save(
-            AgentUsageLogEntity(
-                id = IdGenerator.newId("aulg"),
-                userId = userId,
-                userRole = role,
-                sessionId = session.id,
-                isExtra = isExtra,
-                grapefruitSpent = grapefruitSpent,
-                totalInputTokens = totalInputTokens,
-                totalOutputTokens = totalOutputTokens,
-                createdAt = LocalDateTime.now(),
-            )
-        )
-
-        // 세션 updatedAt 갱신 + 자동 제목
-        session.updatedAt = LocalDateTime.now()
-        if (session.title.isNullOrBlank()) {
-            session.title = userText.take(40)
-        }
-        sessionRepo.save(session)
-
-        return TurnResult(
-            sessionId = session.id,
-            assistantMessageId = assistantMessageId,
-            assistantText = assistantText,
-            toolCallsExecuted = toolCallsExecuted,
-            isExtra = isExtra,
-            grapefruitSpent = grapefruitSpent,
-            inputTokens = totalInputTokens,
-            outputTokens = totalOutputTokens,
-        )
-    }
-
-    // ─── 헬퍼 ───────────────────────────────────
-
-    private fun saveMessage(
+    fun saveMessageTx(
         sessionId: String,
         role: String,
         content: String?,
@@ -359,27 +225,275 @@ class OperatorAgentService(
         )
     }
 
+    @Transactional
+    fun saveUsageAndTouchSession(
+        userId: String,
+        role: String,
+        sessionId: String,
+        isExtra: Boolean,
+        grapefruitSpent: Int,
+        totalInputTokens: Int,
+        totalOutputTokens: Int,
+        userText: String,
+    ) {
+        usageRepo.save(
+            AgentUsageLogEntity(
+                id = IdGenerator.newId("aulg"),
+                userId = userId,
+                userRole = role,
+                sessionId = sessionId,
+                isExtra = isExtra,
+                grapefruitSpent = grapefruitSpent,
+                totalInputTokens = totalInputTokens,
+                totalOutputTokens = totalOutputTokens,
+                createdAt = LocalDateTime.now(),
+            )
+        )
+        sessionRepo.findById(sessionId).ifPresent { s ->
+            s.updatedAt = LocalDateTime.now()
+            if (s.title.isNullOrBlank()) s.title = userText.take(40)
+            sessionRepo.save(s)
+        }
+    }
+
+    // ─── 한 turn 실행 ───────────────────────────────────
+
     /**
-     * DB에 저장된 메시지를 Anthropic API messages 배열로 변환.
-     * - user / assistant 텍스트는 단순 텍스트
-     * - tool 호출 메시지는 assistant tool_use + user tool_result 쌍으로 복원해야 하지만,
-     *   1차 구현에서는 새로운 turn 마다 history 를 텍스트만 사용 — DB 의 tool 메시지는 응답 표시용.
+     * 사용자 메시지를 받아 한 turn 을 실행한다. 모델이 tool_use 를 요청하면 자동 실행 후 다시 호출.
+     * 비-@Transactional — Claude API 호출 동안 DB connection 점유하지 않도록.
      */
-    private fun buildApiHistory(sessionId: String): List<Map<String, Any>> {
-        val msgs = messageRepo.findBySessionIdOrderByCreatedAtAsc(sessionId)
-        val out = mutableListOf<Map<String, Any>>()
-        for (m in msgs) {
-            when (m.role) {
-                "user" -> if (!m.content.isNullOrBlank()) {
-                    out.add(mapOf("role" to "user", "content" to m.content!!))
-                }
-                "assistant" -> if (!m.content.isNullOrBlank()) {
-                    out.add(mapOf("role" to "assistant", "content" to m.content!!))
-                }
-                // "tool" 메시지는 history 에서 제외 — 모델이 보는 history 는 텍스트 대화만
-                else -> {}
+    fun processTurn(
+        sessionIdInput: String?,
+        userId: String,
+        role: String,
+        orgId: String?,
+        userText: String,
+    ): TurnResult {
+        if (apiKey.isBlank()) throw ApiException("AI_DISABLED", "AI API 키 미설정", HttpStatus.SERVICE_UNAVAILABLE)
+        if (userText.isBlank()) throw ApiException("INVALID", "메시지가 비어 있음", HttpStatus.BAD_REQUEST)
+
+        // 1) 세션 확보 (트랜잭션 1 — 짧음)
+        val session = if (sessionIdInput.isNullOrBlank()) {
+            createSession(userId, role, orgId, title = userText.take(40))
+        } else {
+            sessionRepo.findById(sessionIdInput).orElseThrow {
+                ApiException("NOT_FOUND", "세션 없음", HttpStatus.NOT_FOUND)
+            }.also {
+                if (it.userId != userId) throw ApiException("FORBIDDEN", "본인 세션만", HttpStatus.FORBIDDEN)
             }
         }
+
+        // 2) 한도 체크 + 자몽 차감 (트랜잭션 2 — 짧음)
+        val (isExtra, grapefruitSpent) = checkLimitAndCharge(userId, role, orgId)
+
+        // 3) 사용자 메시지 저장 (트랜잭션 3 — 짧음)
+        saveMessageTx(sessionId = session.id, role = "user", content = userText)
+
+        // 4) tool_use loop — 비-트랜잭션 (Claude API 호출이 오래 걸려도 OK)
+        val systemPrompt = buildSystemPrompt(role, orgId)
+        val tools = toolRegistry.toolsForRole(role)
+        val historyMessages = buildApiHistory(session.id)
+
+        var totalInputTokens = 0
+        var totalOutputTokens = 0
+        var toolCallsExecuted = 0
+        var assistantText = ""
+        var assistantMessageId = ""
+
+        val loopMessages = historyMessages.toMutableList()
+        loopMessages.add(mapOf("role" to "user", "content" to userText))
+
+        for (loop in 0 until maxToolLoops) {
+            val response = callClaude(systemPrompt, tools, loopMessages)
+            totalInputTokens += response.inputTokens ?: 0
+            totalOutputTokens += response.outputTokens ?: 0
+
+            val stopReason = response.stopReason
+            val contentBlocks = response.contentBlocks
+
+            // assistant 응답을 다음 호출용 history 에 그대로 추가 (tool_use 블록 포함)
+            loopMessages.add(mapOf("role" to "assistant", "content" to contentBlocks))
+
+            if (stopReason == "tool_use") {
+                val toolResultBlocks = mutableListOf<Map<String, Any>>()
+
+                // assistant 의 tool_use 블록을 DB에 저장 (history 복원용)
+                val toolUseBlocks = contentBlocks.filter { it["type"] == "tool_use" }
+                if (toolUseBlocks.isNotEmpty()) {
+                    saveMessageTx(
+                        sessionId = session.id,
+                        role = "assistant_tool_use",
+                        content = null,
+                        toolUseJson = objectMapper.writeValueAsString(toolUseBlocks),
+                        functionName = null,
+                        status = "tool_use",
+                    )
+                }
+
+                for (block in contentBlocks) {
+                    val type = block["type"] as? String ?: continue
+                    if (type != "tool_use") continue
+                    val toolUseId = block["id"] as? String ?: continue
+                    val funcName = block["name"] as? String ?: continue
+                    @Suppress("UNCHECKED_CAST")
+                    val input = (block["input"] as? Map<String, Any?>) ?: emptyMap()
+
+                    val def = toolRegistry.find(funcName)
+                    val allowed = def != null && role in def.allowedRoles
+                    val result: AgentToolResult = if (!allowed) {
+                        AgentToolResult(success = false, errorCode = "UNAUTHORIZED_FUNCTION", errorMessage = "권한 없음: $funcName")
+                    } else {
+                        try {
+                            toolExecutor.execute(funcName, input, userId, role, orgId)
+                        } catch (e: ApiException) {
+                            AgentToolResult(success = false, errorCode = e.code, errorMessage = e.message)
+                        } catch (e: Exception) {
+                            log.error("tool 실행 오류 — name={}", funcName, e)
+                            AgentToolResult(success = false, errorCode = "TOOL_ERROR", errorMessage = e.message)
+                        }
+                    }
+
+                    saveMessageTx(
+                        sessionId = session.id,
+                        role = "tool",
+                        content = null,
+                        toolUseJson = objectMapper.writeValueAsString(
+                            mapOf("tool_use_id" to toolUseId, "input" to input, "result" to result)
+                        ),
+                        functionName = funcName,
+                        status = if (result.success) "success" else "error",
+                    )
+                    toolCallsExecuted += 1
+
+                    toolResultBlocks.add(
+                        mapOf(
+                            "type" to "tool_result",
+                            "tool_use_id" to toolUseId,
+                            "content" to objectMapper.writeValueAsString(result),
+                            "is_error" to (!result.success),
+                        )
+                    )
+                }
+                loopMessages.add(mapOf("role" to "user", "content" to toolResultBlocks))
+                continue
+            }
+
+            assistantText = contentBlocks
+                .filter { it["type"] == "text" }
+                .joinToString("\n") { it["text"] as? String ?: "" }
+                .trim()
+            val saved = saveMessageTx(
+                sessionId = session.id,
+                role = "assistant",
+                content = assistantText,
+            )
+            assistantMessageId = saved.id
+            break
+        }
+
+        if (assistantMessageId.isBlank()) {
+            assistantText = "(최대 호출 횟수 초과 — 더 짧은 요청으로 다시 시도해 주세요.)"
+            val saved = saveMessageTx(
+                sessionId = session.id,
+                role = "assistant",
+                content = assistantText,
+                status = "error",
+            )
+            assistantMessageId = saved.id
+        }
+
+        // 5) usage 로그 + 세션 갱신 (트랜잭션 4 — 짧음)
+        saveUsageAndTouchSession(
+            userId = userId,
+            role = role,
+            sessionId = session.id,
+            isExtra = isExtra,
+            grapefruitSpent = grapefruitSpent,
+            totalInputTokens = totalInputTokens,
+            totalOutputTokens = totalOutputTokens,
+            userText = userText,
+        )
+
+        return TurnResult(
+            sessionId = session.id,
+            assistantMessageId = assistantMessageId,
+            assistantText = assistantText,
+            toolCallsExecuted = toolCallsExecuted,
+            isExtra = isExtra,
+            grapefruitSpent = grapefruitSpent,
+            inputTokens = totalInputTokens,
+            outputTokens = totalOutputTokens,
+        )
+    }
+
+    // ─── 헬퍼 ───────────────────────────────────
+
+    /**
+     * DB에 저장된 메시지를 Anthropic API messages 배열로 복원.
+     *
+     * tool history 복원 (B4 #4):
+     * - "user" → user 텍스트
+     * - "assistant" → assistant 텍스트
+     * - "assistant_tool_use" → assistant 가 tool_use 블록 배열
+     * - "tool" → user role 의 tool_result 블록 (Anthropic 규약상 tool_result 는 user 메시지 안에)
+     *
+     * 같은 turn 안에서 발생한 tool 블록들은 인접해 있어 하나의 user/assistant 메시지로 묶음.
+     */
+    @Transactional(readOnly = true)
+    fun buildApiHistory(sessionId: String): List<Map<String, Any>> {
+        val msgs = messageRepo.findBySessionIdOrderByCreatedAtAsc(sessionId)
+        val out = mutableListOf<Map<String, Any>>()
+        var pendingToolResults: MutableList<Map<String, Any>>? = null
+
+        fun flushPendingToolResults() {
+            pendingToolResults?.let {
+                if (it.isNotEmpty()) out.add(mapOf("role" to "user", "content" to it))
+                pendingToolResults = null
+            }
+        }
+
+        for (m in msgs) {
+            when (m.role) {
+                "user" -> {
+                    flushPendingToolResults()
+                    if (!m.content.isNullOrBlank()) {
+                        out.add(mapOf("role" to "user", "content" to m.content!!))
+                    }
+                }
+                "assistant" -> {
+                    flushPendingToolResults()
+                    if (!m.content.isNullOrBlank()) {
+                        out.add(mapOf("role" to "assistant", "content" to m.content!!))
+                    }
+                }
+                "assistant_tool_use" -> {
+                    flushPendingToolResults()
+                    val json = m.toolUseJson ?: continue
+                    @Suppress("UNCHECKED_CAST")
+                    val blocks = objectMapper.readValue(json, List::class.java) as List<Map<String, Any>>
+                    if (blocks.isNotEmpty()) {
+                        out.add(mapOf("role" to "assistant", "content" to blocks))
+                    }
+                }
+                "tool" -> {
+                    val json = m.toolUseJson ?: continue
+                    @Suppress("UNCHECKED_CAST")
+                    val parsed = objectMapper.readValue(json, Map::class.java) as Map<String, Any>
+                    val toolUseId = parsed["tool_use_id"] as? String ?: continue
+                    val result = parsed["result"]
+                    if (pendingToolResults == null) pendingToolResults = mutableListOf()
+                    pendingToolResults!!.add(
+                        mapOf(
+                            "type" to "tool_result",
+                            "tool_use_id" to toolUseId,
+                            "content" to objectMapper.writeValueAsString(result),
+                            "is_error" to (m.status == "error"),
+                        )
+                    )
+                }
+            }
+        }
+        flushPendingToolResults()
         return out
     }
 
@@ -405,7 +519,7 @@ class OperatorAgentService(
             격식체(~합니다 / ~하시겠습니까)를 사용하십시오.
 
             ## 출력 형식
-            - 작업 결과는 표·목록 등 가독성 있게 정리합니다.
+            - 작업 결과는 표·목록 등 가독성 있게 정리합니다. 마크다운 표/목록을 적극 사용하십시오.
             - 함수 결과를 그대로 노출하지 말고, 운영자가 한눈에 볼 수 있게 요약합니다.
             - 위험 작업(생성·수정·삭제·일괄 배정) 전에는 반드시 사용자 확인을 받습니다.
 
@@ -456,5 +570,4 @@ class OperatorAgentService(
         val outTok = (usage?.get("output_tokens") as? Number)?.toInt()
         return ClaudeResponse(stopReason, content, inTok, outTok)
     }
-
 }

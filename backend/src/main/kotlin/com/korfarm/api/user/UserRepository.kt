@@ -38,4 +38,34 @@ interface UserRepository : JpaRepository<UserEntity, String> {
         @Param("studentPhone") studentPhone: String,
         @Param("parentPhone") parentPhone: String
     ): UserEntity?
+
+    // ID 후보군 + 검색어 + 레벨 필터 — AI 비서 list_students 용. 페이징 적용.
+    @Query("""
+        SELECT u FROM UserEntity u
+        WHERE u.status = 'active' AND u.deletedAt IS NULL
+          AND u.id IN :ids
+          AND (:level IS NULL OR u.levelId = :level)
+          AND (:search IS NULL OR LOWER(u.name) LIKE :search OR LOWER(u.id) LIKE :search OR LOWER(u.email) LIKE :search)
+        ORDER BY u.name ASC
+    """)
+    fun findActiveByIdsFiltered(
+        @Param("ids") ids: Collection<String>,
+        @Param("level") level: String?,
+        @Param("search") search: String?,
+        pageable: org.springframework.data.domain.Pageable,
+    ): List<UserEntity>
+
+    // 본사 권한(전체 검색) 용 — IN 절 없이 검색
+    @Query("""
+        SELECT u FROM UserEntity u
+        WHERE u.status = 'active' AND u.deletedAt IS NULL
+          AND (:level IS NULL OR u.levelId = :level)
+          AND (:search IS NULL OR LOWER(u.name) LIKE :search OR LOWER(u.id) LIKE :search OR LOWER(u.email) LIKE :search)
+        ORDER BY u.name ASC
+    """)
+    fun findActiveFiltered(
+        @Param("level") level: String?,
+        @Param("search") search: String?,
+        pageable: org.springframework.data.domain.Pageable,
+    ): List<UserEntity>
 }

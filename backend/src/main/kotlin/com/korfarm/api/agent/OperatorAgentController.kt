@@ -2,7 +2,6 @@ package com.korfarm.api.agent
 
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.ApiResponse
-import com.korfarm.api.org.OrgMembershipRepository
 import com.korfarm.api.security.AdminGuard
 import com.korfarm.api.security.SecurityUtils
 import org.springframework.http.HttpStatus
@@ -19,8 +18,11 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/v1/admin/agent")
 class OperatorAgentController(
     private val agentService: OperatorAgentService,
-    private val membershipRepository: OrgMembershipRepository,
 ) {
+    /** 호출자 권한 결정 — HQ_ADMIN 우선 */
+    private fun resolveCallerRole(): String =
+        if (SecurityUtils.hasAnyRole("HQ_ADMIN")) "HQ_ADMIN" else "ORG_ADMIN"
+
     // ─── 세션 ───────────────────────────────────
 
     @GetMapping("/sessions")
@@ -69,11 +71,8 @@ class OperatorAgentController(
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
         val userId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "로그인 필요", HttpStatus.UNAUTHORIZED)
-        val role = if (SecurityUtils.hasAnyRole("HQ_ADMIN")) "HQ_ADMIN" else "ORG_ADMIN"
-        val orgId = if (role == "ORG_ADMIN") {
-            membershipRepository.findByUserIdAndStatus(userId, "active")
-                .firstOrNull { it.role == "ORG_ADMIN" }?.orgId
-        } else null
+        val role = resolveCallerRole()
+        val orgId = if (role == "ORG_ADMIN") agentService.resolveCallerOrgId(userId) else null
 
         val result = agentService.processTurn(
             sessionIdInput = req.sessionId,
@@ -95,6 +94,16 @@ class OperatorAgentController(
                 outputTokens = result.outputTokens,
             ),
         )
+    }
+
+    @GetMapping("/status")
+    fun getStatus(): ApiResponse<OperatorAgentService.AgentStatus> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "로그인 필요", HttpStatus.UNAUTHORIZED)
+        val role = resolveCallerRole()
+        val orgId = if (role == "ORG_ADMIN") agentService.resolveCallerOrgId(userId) else null
+        return ApiResponse(success = true, data = agentService.getStatus(userId, role, orgId))
     }
 }
 

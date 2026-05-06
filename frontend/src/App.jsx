@@ -302,8 +302,8 @@ function App() {
           <Route path="/admin/grapefruit-wallet" element={A(<AdminGrapefruitWalletPage />)} />
           <Route path="/admin/billing" element={A(<AdminOrgBillingPage />)} />
           <Route path="/admin/all-billings" element={A(<AdminAllOrgBillingPage />)} />
-          <Route path="/my/grapefruit" element={A(<MyGrapefruitPage />)} />
-          <Route path="/my/ai-study" element={A(<MyAiStudyPage />)} />
+          <Route path="/my/grapefruit" element={P(<MyGrapefruitPage />)} />
+          <Route path="/my/ai-study" element={P(<MyAiStudyPage />)} />
           <Route path="/admin/own-study-contents" element={A(<AdminOwnStudyContentsPage />)} />
           <Route path="/admin/wisdom" element={A(<AdminWisdomPage />)} />
           <Route path="/admin/wisdom/:postId" element={A(<AdminWisdomDetailPage />)} />

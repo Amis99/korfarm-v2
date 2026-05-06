@@ -480,6 +480,77 @@
 .agent-msg.assistant .agent-msg-body { background: #edf2f7; color: #1a202c; }
 .agent-typing { color: #888; font-style: italic; }
 
+.agent-tool-trace {
+  align-self: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: -4px 0;
+}
+.agent-tool-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 11px;
+  border-radius: 999px;
+  background: #f7fafc;
+  color: #4a5568;
+  border: 1px solid #cbd5e0;
+}
+.agent-tool-pill.ok { background: #f0fff4; color: #276749; border-color: #9ae6b4; }
+.agent-tool-pill.err { background: #fff5f5; color: #9b2c2c; border-color: #feb2b2; }
+
+/* AI 답변 마크다운 — 표·목록 가독성 */
+.agent-msg.assistant .agent-msg-body {
+  white-space: normal;
+}
+.agent-msg.assistant .agent-msg-body p { margin: 0 0 8px 0; line-height: 1.6; }
+.agent-msg.assistant .agent-msg-body p:last-child { margin-bottom: 0; }
+.agent-msg.assistant .agent-msg-body ul,
+.agent-msg.assistant .agent-msg-body ol { margin: 6px 0; padding-left: 22px; }
+.agent-msg.assistant .agent-msg-body li { margin-bottom: 2px; }
+.agent-msg.assistant .agent-msg-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0;
+  font-size: 13px;
+}
+.agent-msg.assistant .agent-msg-body th,
+.agent-msg.assistant .agent-msg-body td {
+  border: 1px solid #cbd5e0;
+  padding: 6px 8px;
+  text-align: left;
+}
+.agent-msg.assistant .agent-msg-body th { background: #f7fafc; font-weight: 600; }
+.agent-msg.assistant .agent-msg-body code {
+  background: #2d3748;
+  color: #fff;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+.agent-msg.assistant .agent-msg-body pre {
+  background: #2d3748;
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 12px;
+}
+.agent-msg.assistant .agent-msg-body pre code {
+  background: transparent;
+  padding: 0;
+}
+.agent-msg.assistant .agent-msg-body strong { font-weight: 600; }
+.agent-msg.assistant .agent-msg-body a { color: #2c7a7b; text-decoration: underline; }
+
+.agent-help {
+  font-size: 11px;
+  color: #888;
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+.muted { color: #888; font-size: 13px; }
+
 .agent-input {
   display: flex;
   gap: 8px;

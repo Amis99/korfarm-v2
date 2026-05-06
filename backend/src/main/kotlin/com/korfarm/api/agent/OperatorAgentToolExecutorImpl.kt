@@ -10,25 +10,32 @@ import com.korfarm.api.org.OrgMembershipRepository
 import com.korfarm.api.org.OrgRepository
 import com.korfarm.api.paid.ContentRepository
 import com.korfarm.api.studyplan.AssignCellContentRequest
+import com.korfarm.api.studyplan.StudyPlanCellRepository
 import com.korfarm.api.studyplan.StudyPlanRepository
 import com.korfarm.api.studyplan.StudyPlanService
+import com.korfarm.api.user.UserEntity
 import com.korfarm.api.user.UserRepository
 import org.slf4j.LoggerFactory
+import org.springframework.data.domain.PageRequest
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
+import org.springframework.transaction.annotation.Transactional
 
 /**
  * AgentToolExecutor 의 운영자(본사·기관) AI 비서용 구현체.
  *
- * 1차 8개 함수:
- * - 학습 계획표 5: list_study_plans / get_study_plan_matrix / assign_cell_content / batch_assign_recommendations / recommend_contents_for_competency
- * - 수강반·학생 3: list_students / get_student_detail / list_classes
+ * 1차 8개 함수 — 학습 계획표 5 + 수강반·학생 3.
  *
- * 2차 이후: 콘텐츠 관리·테스트·시즌·문의·결제 등.
+ * ## 권한 검증 정책
+ * - HQ_ADMIN: 모든 데이터 접근 OK
+ * - ORG_ADMIN: 본 기관 데이터만. cell/plan/user 의 orgId 가 본인 기관과 일치하는지 검증.
+ *   불일치 시 ApiException("FORBIDDEN") 발생 → AgentToolResult 의 errorCode 로 모델에게 전달.
  */
 @Component
 class OperatorAgentToolExecutorImpl(
     private val studyPlanService: StudyPlanService,
     private val studyPlanRepository: StudyPlanRepository,
+    private val studyPlanCellRepository: StudyPlanCellRepository,
     private val orgRepository: OrgRepository,
     private val orgMembershipRepository: OrgMembershipRepository,
     private val classRepository: ClassRepository,
@@ -52,9 +59,9 @@ class OperatorAgentToolExecutorImpl(
             when (functionName) {
                 "list_study_plans" -> listStudyPlans(input, callerUserId)
                 "get_study_plan_matrix" -> getStudyPlanMatrix(input, callerUserId, callerRole, callerOrgId)
-                "assign_cell_content" -> assignCellContent(input)
-                "batch_assign_recommendations" -> batchAssignRecommendations(input)
-                "recommend_contents_for_competency" -> recommendContents(input)
+                "assign_cell_content" -> assignCellContent(input, callerRole, callerOrgId)
+                "batch_assign_recommendations" -> batchAssignRecommendations(input, callerRole, callerOrgId)
+                "recommend_contents_for_competency" -> recommendContents(input, callerRole, callerOrgId)
                 "list_students" -> listStudents(input, callerRole, callerOrgId)
                 "get_student_detail" -> getStudentDetail(input, callerRole, callerOrgId)
                 "list_classes" -> listClasses(input, callerRole, callerOrgId)
@@ -72,8 +79,51 @@ class OperatorAgentToolExecutorImpl(
         }
     }
 
+    // ─── 권한 검증 헬퍼 ───────────────────────────────────
+
+    /**
+     * cell 이 호출자(ORG_ADMIN)의 본 기관 plan 의 cell 인지 검증. HQ_ADMIN 은 통과.
+     * 검증 실패 시 ApiException("FORBIDDEN").
+     */
+    private fun verifyCellOwnership(cellId: String, role: String, orgId: String?) {
+        if (role == "HQ_ADMIN") return
+        if (orgId == null) throw ApiException("FORBIDDEN", "기관 소속 없음", HttpStatus.FORBIDDEN)
+        val cell = studyPlanCellRepository.findById(cellId).orElseThrow {
+            ApiException("NOT_FOUND", "셀 없음: $cellId", HttpStatus.NOT_FOUND)
+        }
+        val plan = studyPlanRepository.findById(cell.planId).orElseThrow {
+            ApiException("NOT_FOUND", "계획표 없음: ${cell.planId}", HttpStatus.NOT_FOUND)
+        }
+        if (plan.orgId != orgId) {
+            throw ApiException("FORBIDDEN", "본 기관 셀이 아닙니다.", HttpStatus.FORBIDDEN)
+        }
+    }
+
+    /** plan 권한 검증 — 호출자가 본 기관 plan 인지. */
+    private fun verifyPlanOwnership(planId: String, role: String, orgId: String?) {
+        if (role == "HQ_ADMIN") return
+        if (orgId == null) throw ApiException("FORBIDDEN", "기관 소속 없음", HttpStatus.FORBIDDEN)
+        val plan = studyPlanRepository.findById(planId).orElseThrow {
+            ApiException("NOT_FOUND", "계획표 없음: $planId", HttpStatus.NOT_FOUND)
+        }
+        if (plan.orgId != orgId) {
+            throw ApiException("FORBIDDEN", "본 기관 계획표가 아닙니다.", HttpStatus.FORBIDDEN)
+        }
+    }
+
+    /** 학생 user 권한 검증 — ORG_ADMIN 은 본 기관 소속만. */
+    private fun verifyStudentOwnership(userId: String, role: String, orgId: String?) {
+        if (role == "HQ_ADMIN") return
+        if (orgId == null) throw ApiException("FORBIDDEN", "기관 소속 없음", HttpStatus.FORBIDDEN)
+        val belongsHere = orgMembershipRepository.findByOrgIdAndUserId(orgId, userId) != null
+        if (!belongsHere) {
+            throw ApiException("FORBIDDEN", "본 기관 학생이 아닙니다.", HttpStatus.FORBIDDEN)
+        }
+    }
+
     // ─── 1) 학습 계획표 ───────────────────────────────────
 
+    @Transactional(readOnly = true)
     private fun listStudyPlans(input: Map<String, Any?>, userId: String): AgentToolResult {
         val status = input["status"] as? String
         val search = input["search"] as? String
@@ -93,6 +143,7 @@ class OperatorAgentToolExecutorImpl(
         return AgentToolResult(success = true, data = mapOf("plans" to data, "count" to data.size))
     }
 
+    @Transactional(readOnly = true)
     private fun getStudyPlanMatrix(
         input: Map<String, Any?>,
         userId: String,
@@ -101,14 +152,8 @@ class OperatorAgentToolExecutorImpl(
     ): AgentToolResult {
         val planId = input["plan_id"] as? String
             ?: return AgentToolResult(false, errorCode = "INVALID", errorMessage = "plan_id 누락")
-        // ORG_ADMIN 권한 — 본 기관 plan 인지 확인
-        if (role == "ORG_ADMIN" && orgId != null) {
-            val plan = studyPlanRepository.findById(planId).orElse(null)
-                ?: return AgentToolResult(false, errorCode = "NOT_FOUND", errorMessage = "계획표 없음")
-            if (plan.orgId != orgId) {
-                return AgentToolResult(false, errorCode = "FORBIDDEN", errorMessage = "본 기관 계획표만 조회 가능")
-            }
-        }
+        verifyPlanOwnership(planId, role, orgId)
+
         val matrix = studyPlanService.getMatrix(planId, userId, isAdmin = true)
         val data = mapOf(
             "scopes" to matrix.scopes.map { mapOf("id" to it.id, "label" to it.label, "sort_order" to it.sortOrder) },
@@ -131,17 +176,21 @@ class OperatorAgentToolExecutorImpl(
         return AgentToolResult(success = true, data = data)
     }
 
-    private fun assignCellContent(input: Map<String, Any?>): AgentToolResult {
+    @Transactional
+    private fun assignCellContent(
+        input: Map<String, Any?>,
+        role: String,
+        orgId: String?,
+    ): AgentToolResult {
         val cellId = input["cell_id"] as? String
             ?: return AgentToolResult(false, errorCode = "INVALID", errorMessage = "cell_id 누락")
         val dueAt = input["due_at"] as? String
             ?: return AgentToolResult(false, errorCode = "INVALID", errorMessage = "due_at 누락")
-        val cellRefId = input["cell_ref_id"] as? String
-        val assignedLabel = input["assigned_label"] as? String
+        verifyCellOwnership(cellId, role, orgId)
 
         val req = AssignCellContentRequest(
-            cellRefId = cellRefId,
-            assignedLabel = assignedLabel,
+            cellRefId = input["cell_ref_id"] as? String,
+            assignedLabel = input["assigned_label"] as? String,
             dueAt = dueAt,
         )
         val cell = studyPlanService.assignCellContent(cellId, req)
@@ -157,12 +206,18 @@ class OperatorAgentToolExecutorImpl(
         )
     }
 
-    private fun batchAssignRecommendations(input: Map<String, Any?>): AgentToolResult {
+    @Transactional
+    private fun batchAssignRecommendations(
+        input: Map<String, Any?>,
+        role: String,
+        orgId: String?,
+    ): AgentToolResult {
         val planId = input["plan_id"] as? String
             ?: return AgentToolResult(false, errorCode = "INVALID", errorMessage = "plan_id 누락")
         @Suppress("UNCHECKED_CAST")
         val assignments = input["assignments"] as? List<Map<String, Any?>>
             ?: return AgentToolResult(false, errorCode = "INVALID", errorMessage = "assignments 누락")
+        verifyPlanOwnership(planId, role, orgId)
 
         val results = mutableListOf<Map<String, Any?>>()
         var success = 0
@@ -177,6 +232,7 @@ class OperatorAgentToolExecutorImpl(
                 continue
             }
             try {
+                verifyCellOwnership(cellId, role, orgId)
                 studyPlanService.assignCellContent(
                     cellId,
                     AssignCellContentRequest(
@@ -206,32 +262,39 @@ class OperatorAgentToolExecutorImpl(
         )
     }
 
-    private fun recommendContents(input: Map<String, Any?>): AgentToolResult {
+    @Transactional(readOnly = true)
+    private fun recommendContents(
+        input: Map<String, Any?>,
+        role: String,
+        orgId: String?,
+    ): AgentToolResult {
         val competency = input["competency"] as? String
         val area = input["area"] as? String
         val subArea = input["sub_area"] as? String
         val theme = input["theme"] as? String
         val level = input["level"] as? String
+        val targetUserId = input["user_id"] as? String
         val limit = (input["limit"] as? Number)?.toInt()?.coerceIn(1, 50) ?: 10
 
-        // 1차 추천 — 분류 코드 매칭. 현재는 area/sub_area/theme 중 가장 좁은 단위로 필터.
-        // (역량 기반 추천은 콘텐츠 competency_vector 가 도입된 후 정밀화 예정)
+        // 학생 ID 가 지정되었으면 ORG_ADMIN 권한 체크
+        if (targetUserId != null) verifyStudentOwnership(targetUserId, role, orgId)
+
         val pickedCode = theme ?: subArea ?: area
         val candidates = if (pickedCode != null) {
-            // content_classifications 에서 해당 코드를 가진 contentId 추출 후 contents 조회
-            val classifs = contentClassificationRepository.findAll()
-                .filter { it.id.classificationCode == pickedCode }
-            val contentIds = classifs.map { it.id.contentId }.toSet()
+            // 분류 코드에 매핑된 contentId 만 추출 (메모리 폭발 방지)
+            val contentIds = contentClassificationRepository.findContentIdsByCode(pickedCode)
             if (contentIds.isEmpty()) emptyList()
             else contentRepository.findAllById(contentIds)
                 .filter { it.status == "active" && (level == null || it.levelId == level) }
                 .take(limit)
         } else if (level != null) {
-            contentRepository.findByStatus("active")
-                .filter { it.levelId == level }
+            // 레벨만 지정된 경우 — level 기반 검색
+            contentRepository.findByContentTypeAndLevelIdAndStatus("DAILY_READING", level, "active")
+                .ifEmpty { contentRepository.findByAreaAndLevelIdAndStatus("nonfiction", level, "active") }
                 .take(limit)
         } else {
-            contentRepository.findByStatus("active").take(limit)
+            // 추천 기준이 전혀 없으면 빈 결과 (전체 적재 금지)
+            emptyList()
         }
 
         val data = candidates.map {
@@ -250,57 +313,50 @@ class OperatorAgentToolExecutorImpl(
                 "filter" to mapOf(
                     "competency" to competency, "area" to area,
                     "sub_area" to subArea, "theme" to theme, "level" to level,
+                    "user_id" to targetUserId,
                 ),
                 "count" to data.size,
                 "contents" to data,
+                "note" to if (pickedCode == null && level == null)
+                    "최소 한 가지 필터(theme/sub_area/area/level/competency)가 필요합니다."
+                else null,
             ),
         )
     }
 
     // ─── 2) 수강반·학생 ───────────────────────────────────
 
+    @Transactional(readOnly = true)
     private fun listStudents(input: Map<String, Any?>, role: String, orgId: String?): AgentToolResult {
         val classId = input["class_id"] as? String
         val level = input["level"] as? String
         val search = (input["search"] as? String)?.trim()?.takeIf { it.isNotBlank() }
+        val searchPattern = search?.let { "%${it.lowercase()}%" }
+        val pageable = PageRequest.of(0, 100)
 
-        // ORG_ADMIN 은 본 기관 학생만, HQ_ADMIN 은 전체
-        val candidateUserIds: Set<String> = when {
+        val users: List<UserEntity> = when {
+            // 본 기관 학생만 (ORG_ADMIN)
             role == "ORG_ADMIN" && orgId != null -> {
-                orgMembershipRepository.findByOrgIdAndStatus(orgId, "active")
+                val orgUserIds = orgMembershipRepository.findByOrgIdAndStatus(orgId, "active")
                     .filter { it.role == "STUDENT" }
                     .map { it.userId }
-                    .toSet()
+                val finalIds = if (classId != null) {
+                    val inClass = classMembershipRepository.findByClassIdAndStatus(classId, "active")
+                        .map { it.userId }.toSet()
+                    orgUserIds.filter { it in inClass }
+                } else orgUserIds
+                if (finalIds.isEmpty()) emptyList()
+                else userRepository.findActiveByIdsFiltered(finalIds, level, searchPattern, pageable)
             }
+            // HQ_ADMIN + class_id 지정
             classId != null -> {
-                classMembershipRepository.findByClassIdAndStatus(classId, "active")
-                    .map { it.userId }
-                    .toSet()
+                val ids = classMembershipRepository.findByClassIdAndStatus(classId, "active").map { it.userId }
+                if (ids.isEmpty()) emptyList()
+                else userRepository.findActiveByIdsFiltered(ids, level, searchPattern, pageable)
             }
-            else -> userRepository.findAll().map { it.id }.toSet()
+            // HQ_ADMIN — 전체에서 검색
+            else -> userRepository.findActiveFiltered(level, searchPattern, pageable)
         }
-
-        // classId 필터 추가 — ORG_ADMIN 의 본 기관 학생 중 해당 반 소속만
-        val finalUserIds = if (classId != null && role == "ORG_ADMIN") {
-            val inClass = classMembershipRepository.findByClassIdAndStatus(classId, "active")
-                .map { it.userId }.toSet()
-            candidateUserIds.intersect(inClass)
-        } else {
-            candidateUserIds
-        }
-
-        val users = userRepository.findAllById(finalUserIds)
-            .asSequence()
-            .filter { it.status == "active" && it.deletedAt == null }
-            .filter { level == null || it.levelId == level }
-            .filter { s ->
-                if (search == null) true
-                else (s.name?.contains(search, ignoreCase = true) == true) ||
-                    s.id.contains(search, ignoreCase = true) ||
-                    s.email.contains(search, ignoreCase = true)
-            }
-            .take(100)
-            .toList()
 
         val data = users.map {
             mapOf(
@@ -315,25 +371,17 @@ class OperatorAgentToolExecutorImpl(
         return AgentToolResult(success = true, data = mapOf("students" to data, "count" to data.size))
     }
 
+    @Transactional(readOnly = true)
     private fun getStudentDetail(input: Map<String, Any?>, role: String, orgId: String?): AgentToolResult {
         val userId = input["user_id"] as? String
             ?: return AgentToolResult(false, errorCode = "INVALID", errorMessage = "user_id 누락")
+        verifyStudentOwnership(userId, role, orgId)
         val user = userRepository.findById(userId).orElse(null)
             ?: return AgentToolResult(false, errorCode = "NOT_FOUND", errorMessage = "학생 없음")
 
-        // ORG_ADMIN 권한 — 본 기관 학생인지 확인
-        if (role == "ORG_ADMIN" && orgId != null) {
-            val belongsHere = orgMembershipRepository.findByOrgIdAndUserId(orgId, userId) != null
-            if (!belongsHere) {
-                return AgentToolResult(false, errorCode = "FORBIDDEN", errorMessage = "본 기관 학생만 조회 가능")
-            }
-        }
-
-        // 소속 기관 / 반
         val orgMemberships = orgMembershipRepository.findByUserIdAndStatus(userId, "active")
         val classMemberships = classMembershipRepository.findByUserIdAndStatus(userId, "active")
 
-        // 역량 요약 — 슬라이딩 윈도우 기반
         val summary = competencySummaryRepository.findByUserId(userId)
             .associate {
                 it.competency to mapOf(
@@ -360,18 +408,25 @@ class OperatorAgentToolExecutorImpl(
         return AgentToolResult(success = true, data = data)
     }
 
+    @Transactional(readOnly = true)
     private fun listClasses(input: Map<String, Any?>, role: String, orgId: String?): AgentToolResult {
         val targetOrgId = if (role == "ORG_ADMIN") orgId else (input["org_id"] as? String)
         val search = (input["search"] as? String)?.trim()?.takeIf { it.isNotBlank() }
 
-        val classes = classRepository.findAll()
-            .filter { it.status == "active" }
-            .filter { targetOrgId == null || it.orgId == targetOrgId }
-            .filter { search == null || it.name.contains(search, ignoreCase = true) }
+        // 쿼리 단에서 status + orgId 필터 (findAll 제거)
+        val baseClasses = if (targetOrgId != null) {
+            classRepository.findByOrgIdAndStatusOrderByNameAsc(targetOrgId, "active")
+        } else {
+            classRepository.findByStatusOrderByNameAsc("active")
+        }
+        val classes = baseClasses.filter { search == null || it.name.contains(search, ignoreCase = true) }
 
-        val orgsById = orgRepository.findAll().associateBy { it.id }
+        // org 이름은 보여줄 만큼만 일괄 조회 (페이지 결과 내에서만)
+        val orgIds = classes.map { it.orgId }.toSet()
+        val orgsById = if (orgIds.isEmpty()) emptyMap()
+        else orgRepository.findAllById(orgIds).associateBy { it.id }
 
-        val data = classes.map {
+        val data = classes.take(100).map {
             mapOf(
                 "class_id" to it.id,
                 "name" to it.name,
