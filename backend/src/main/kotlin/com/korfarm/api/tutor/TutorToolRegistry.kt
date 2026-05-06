@@ -49,7 +49,7 @@ class TutorToolRegistry {
         ),
         TutorToolDefinition(
             name = "recommend_my_study",
-            description = "내 약점 역량 또는 지정한 영역·주제의 추천 학습 콘텐츠를 가져옵니다. 우선순위: theme > area > competency. 인자 미지정 시 자동 약점 보강.",
+            description = "내가 원하는 영역·주제·역량을 명시했을 때 단순 추천(최대 10개). 인자 미지정 시 자동 약점 보강.",
             inputSchema = mapOf(
                 "type" to "object",
                 "properties" to mapOf(
@@ -57,6 +57,18 @@ class TutorToolRegistry {
                     "area" to mapOf("type" to "string", "description" to "분류 영역 코드"),
                     "theme" to mapOf("type" to "string", "description" to "분류 주제 코드"),
                     "limit" to mapOf("type" to "integer"),
+                ),
+                "required" to emptyList<String>(),
+            ),
+        ),
+        TutorToolDefinition(
+            name = "get_recommendation_candidates",
+            description = "정밀 추천을 위한 후보 풀을 한 번에 가져옵니다 — 역량 보강 10개 + 영역 매칭 10개 + 주제 매칭 10개 (총 30개). 본문 X, 메타만. 이걸 받은 후 너가 직접 학생 약점과 최근 경향을 종합해 카테고리별 1~2개씩 골라 이유와 함께 제시할 것.",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to mapOf(
+                    "level_id" to mapOf("type" to "string", "description" to "학생 레벨. 미지정 시 학생 본인 레벨 자동."),
+                    "per_category" to mapOf("type" to "integer", "description" to "카테고리당 후보 수 (기본 10, 최대 15)"),
                 ),
                 "required" to emptyList<String>(),
             ),

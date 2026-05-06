@@ -151,8 +151,44 @@ class AgentToolRegistry {
         ),
 
         AgentToolDefinition(
+            name = "recommend_for_student_via_tutor",
+            description = "특정 학생 1명을 위한 정밀 학습 추천. 학생 튜터 AI 를 소환하여 그 학생의 약점·최근 학습·진단 결과를 종합 분석한 추천을 받습니다. 학생 개인 추천은 반드시 이 함수를 사용 — 직접 후보를 고르거나 추천 이유를 만들지 말 것.",
+            requireConfirm = false,
+            allowedRoles = setOf("HQ_ADMIN", "ORG_ADMIN"),
+            category = "study_plan",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to mapOf(
+                    "user_id" to mapOf("type" to "string", "description" to "추천 받을 학생 ID"),
+                    "request_text" to mapOf("type" to "string", "description" to "운영자의 추가 요구사항 (예: '고전 시 위주', '최근 어려워한 영역 보강'). 미지정 시 자동 약점 보강."),
+                ),
+                "required" to listOf("user_id"),
+            ),
+        ),
+
+        AgentToolDefinition(
+            name = "list_learning_candidates",
+            description = "특정 부류(레벨·영역·주제·역량) 의 학습 후보 리스트를 가져옵니다. 학생 개인 추천이 아니라, 운영자가 학습 계획표에 배정할 후보를 모을 때 사용. 결과 → batch_assign_recommendations 로 일괄 배정 가능.",
+            requireConfirm = false,
+            allowedRoles = setOf("HQ_ADMIN", "ORG_ADMIN"),
+            category = "study_plan",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to mapOf(
+                    "level_id" to mapOf("type" to "string", "description" to "레벨 코드 (예: russell1)"),
+                    "area" to mapOf("type" to "string", "description" to "영역 코드"),
+                    "sub_area" to mapOf("type" to "string", "description" to "세부영역 코드"),
+                    "theme" to mapOf("type" to "string", "description" to "주제 코드"),
+                    "competency" to mapOf("type" to "string", "description" to "10대 역량명"),
+                    "limit" to mapOf("type" to "integer", "description" to "기본 10, 최대 30"),
+                ),
+                "required" to emptyList<String>(),
+            ),
+        ),
+
+        AgentToolDefinition(
             name = "recommend_contents_for_competency",
-            description = "10대 역량 또는 영역/세부영역/주제를 기준으로 학습 콘텐츠를 추천합니다. 약점 역량 보강 및 영역별 추천 모두 지원.",
+            description = "[deprecated] 단순 후보 리스트만 필요할 때 사용. 학생 개인 추천은 recommend_for_student_via_tutor 를, 부류 학습 리스트는 list_learning_candidates 를 우선 사용.",
             requireConfirm = false,
             allowedRoles = setOf("HQ_ADMIN", "ORG_ADMIN"),
             category = "study_plan",

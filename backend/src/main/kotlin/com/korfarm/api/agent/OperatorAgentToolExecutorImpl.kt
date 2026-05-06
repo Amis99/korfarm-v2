@@ -10,6 +10,7 @@ import com.korfarm.api.grapefruit.GrapefruitTransactionRepository
 import com.korfarm.api.learning.LearningCompetencyLogRepository
 import com.korfarm.api.learning.RecommendationService
 import com.korfarm.api.learning.UserCompetencySummaryRepository
+import com.korfarm.api.tutor.TutorService
 import com.korfarm.api.org.ClassMembershipRepository
 import com.korfarm.api.org.ClassRepository
 import com.korfarm.api.org.OrgMembershipRepository
@@ -65,6 +66,7 @@ class OperatorAgentToolExecutorImpl(
     private val reportRepository: ReportRepository,
     private val grapefruitTransactionRepository: GrapefruitTransactionRepository,
     private val recommendationService: RecommendationService,
+    private val tutorService: TutorService,
 ) : AgentToolExecutor {
     private val log = LoggerFactory.getLogger(OperatorAgentToolExecutorImpl::class.java)
 
@@ -101,6 +103,8 @@ class OperatorAgentToolExecutorImpl(
                 "list_orgs" -> listOrgs(input)
                 "get_org_billing_status" -> getOrgBillingStatus(input)
                 "list_grapefruit_transactions" -> listGrapefruitTransactions(input, callerRole, callerOrgId)
+                "recommend_for_student_via_tutor" -> recommendForStudentViaTutor(input, callerRole, callerOrgId)
+                "list_learning_candidates" -> listLearningCandidates(input, callerUserId)
                 else -> AgentToolResult(
                     success = false,
                     errorCode = "UNKNOWN_FUNCTION",
@@ -765,5 +769,85 @@ class OperatorAgentToolExecutorImpl(
             )
         }
         return AgentToolResult(success = true, data = mapOf("transactions" to data, "count" to data.size))
+    }
+
+    // ─── 7) 학생 튜터 소환 + 부류 학습 리스트 ───────────────────────────────────
+
+    /**
+     * 학생 1명을 위한 정밀 추천 — 학생 튜터를 소환해 그쪽 LLM 한 번 호출.
+     * 운영자(관리자)는 학생을 잘 모르니, 학생 컨텍스트(약점·최근 학습·진단)를 다 아는 학생 튜터에게 위임.
+     */
+    private fun recommendForStudentViaTutor(
+        input: Map<String, Any?>,
+        role: String,
+        orgId: String?,
+    ): AgentToolResult {
+        val userId = input["user_id"] as? String
+            ?: return AgentToolResult(false, errorCode = "INVALID", errorMessage = "user_id 누락")
+        val requestText = (input["request_text"] as? String) ?: "이 학생에게 가장 도움이 될 학습을 추천해 주세요."
+        verifyStudentOwnership(userId, role, orgId)
+
+        val r = tutorService.recommendForStudent(userId, requestText)
+        return AgentToolResult(
+            success = true,
+            data = mapOf(
+                "user_id" to userId,
+                "recommendation_text" to r.text,
+                "candidate_ids" to r.candidateIds,
+                "input_tokens" to r.inputTokens,
+                "output_tokens" to r.outputTokens,
+                "instruction" to "위 recommendation_text 를 운영자에게 그대로 전달하십시오. 추가로 직접 후보를 고치거나 이유를 새로 작성하지 마십시오.",
+            ),
+        )
+    }
+
+    /**
+     * 부류별 학습 리스트 — 특정 학생용이 아닌 일반 후보 모음.
+     * 운영자가 학습 계획표 매트릭스에 일괄 배정할 때 사용. 결과 → batch_assign_recommendations.
+     */
+    @Transactional(readOnly = true)
+    private fun listLearningCandidates(input: Map<String, Any?>, callerUserId: String): AgentToolResult {
+        val levelId = input["level_id"] as? String
+        val area = input["area"] as? String
+        val subArea = input["sub_area"] as? String
+        val theme = input["theme"] as? String
+        val competency = input["competency"] as? String
+        val limit = (input["limit"] as? Number)?.toInt()?.coerceIn(1, 30) ?: 10
+
+        // 특정 학생이 아닌 "공통 후보" 이므로 callerUserId 의 평생 이력은 무시 (운영자 본인 학습 이력 X).
+        // 단순화: RecommendationService 의 메서드를 호출하되, 운영자 본인 ID 사용 → 풀이 이력이 거의 없을 것.
+        val recommended = when {
+            !theme.isNullOrBlank() -> recommendationService.recommendForTheme(callerUserId, theme, levelId, limit)
+            !area.isNullOrBlank() || !subArea.isNullOrBlank() ->
+                recommendationService.recommendForArea(callerUserId, area, subArea, levelId, limit)
+            !competency.isNullOrBlank() ->
+                recommendationService.recommendForCompetency(callerUserId, competency, levelId, limit)
+            else -> recommendationService.recommendForCompetency(callerUserId, null, levelId, limit)
+        }
+
+        val data = recommended.map {
+            mapOf(
+                "content_id" to it.contentId,
+                "title" to it.title,
+                "content_type" to it.contentType,
+                "level_id" to it.levelId,
+                "area" to it.area,
+                "sub_area" to it.subArea,
+                "score" to it.score,
+                "reason" to it.reason,
+            )
+        }
+        return AgentToolResult(
+            success = true,
+            data = mapOf(
+                "filter" to mapOf(
+                    "level_id" to levelId, "area" to area, "sub_area" to subArea,
+                    "theme" to theme, "competency" to competency,
+                ),
+                "count" to data.size,
+                "contents" to data,
+                "instruction" to "위 후보 중 적합한 것들을 표로 정리해 운영자에게 제시. 일괄 배정이 필요하면 batch_assign_recommendations 호출 (require_confirm=true).",
+            ),
+        )
     }
 }

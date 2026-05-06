@@ -4,6 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.grapefruit.GrapefruitService
+import com.korfarm.api.learning.LearningCompetencyLogRepository
+import com.korfarm.api.learning.RecommendationService
+import com.korfarm.api.learning.UserCompetencySummaryRepository
+import com.korfarm.api.user.UserRepository
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
@@ -35,6 +39,10 @@ class TutorService(
     private val toolRegistry: TutorToolRegistry,
     private val toolExecutor: TutorToolExecutor,
     private val grapefruitService: GrapefruitService,
+    private val recommendationServiceRef: RecommendationService,
+    private val userRepo: UserRepository,
+    private val competencySummaryRepo: UserCompetencySummaryRepository,
+    private val competencyLogRepo: LearningCompetencyLogRepository,
 ) {
     private val log = LoggerFactory.getLogger(TutorService::class.java)
     private val httpClient = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(20)).build()
@@ -53,6 +61,13 @@ class TutorService(
         val toolCallsExecuted: Int,
         val currency: String,
         val amountSpent: Int,
+        val inputTokens: Int,
+        val outputTokens: Int,
+    )
+
+    data class RecommendForStudentResult(
+        val text: String,
+        val candidateIds: List<String>,
         val inputTokens: Int,
         val outputTokens: Int,
     )
@@ -316,6 +331,130 @@ class TutorService(
         )
     }
 
+    /**
+     * 운영자(본사·기관 관리자) 가 학생 튜터를 소환해 특정 학생용 추천을 받는 진입점.
+     *
+     * 토큰 효율을 위한 하네스:
+     *  - 후보 30개 메타정보(제목·역량·영역·주제·이유) 만 전달, 본문 X
+     *  - 학생 약점·최근 학습 이력·진단 결과를 압축 컨텍스트로 system 에 주입
+     *  - 모델은 단일 turn 으로 카테고리별 1~2개 + 이유 작성
+     *  - tool_use 강제 X — 자연어 답변 (운영자가 그대로 학생에게 전달 가능)
+     *
+     * 자몽 차감 정책: 호출자(운영자) 측에서 별도 차감 (운영자 turn 1회 카운트로 흡수).
+     * Tutor 쪽 자몽 차감 없음.
+     *
+     * @return 자연어 추천 텍스트 + 후보 ID 목록(트레이싱용)
+     */
+    fun recommendForStudent(
+        studentUserId: String,
+        operatorRequestText: String,
+    ): RecommendForStudentResult {
+        if (apiKey.isBlank()) throw ApiException("AI_DISABLED", "AI API 키 미설정", HttpStatus.SERVICE_UNAVAILABLE)
+
+        val all = recommendationServiceRef.recommendCandidatesAll(studentUserId, levelId = null, perCategory = 10)
+        val competencyList = all.competency
+        val areaList = all.area
+        val themeList = all.theme
+
+        // 학생 컨텍스트 압축
+        val studentSummary = buildStudentContextSummary(studentUserId)
+
+        // 모델 system 프롬프트 — 하네스
+        val sys = """
+            당신은 국어농장v2 의 학생 전용 AI 튜터입니다. 본 호출은 운영자(관리자)의 요청으로
+            특정 학생을 위한 정밀 학습 추천을 작성하는 임무입니다.
+
+            ## 절차 (반드시 지킬 것)
+            1. 아래 학생 컨텍스트(약점 역량·최근 학습 이력·진단 결과·테스트 결과)를 정독한다.
+            2. 후보 30개(역량 보강 10 + 영역 매칭 10 + 주제 매칭 10) 중에서 진정으로
+               이 학생에게 도움이 될 학습을 카테고리별 1~2개씩 선별한다.
+            3. 각 추천에 "이 학생의 약점/최근 경향에서 왜 필요한지" 이유를 한 문장씩 적는다.
+            4. 운영자의 추가 요청(예: "고전 시 위주", "최근 어려워한 영역")이 있으면 그에 맞춰 우선순위 조정.
+
+            ## 출력 형식 (마크다운)
+            ### 추천 학습
+            **역량 보강**
+            - [콘텐츠ID] 제목 — 이유
+            **영역 매칭**
+            - [콘텐츠ID] 제목 — 이유
+            **주제 매칭**
+            - [콘텐츠ID] 제목 — 이유
+
+            (필요 시) **추가 메모**
+            - 학생의 학습 추세에 대한 간단 코멘트
+
+            ## 토큰 절약
+            - 후보 콘텐츠 본문은 제공되지 않습니다. 메타데이터(제목·역량·영역·주제·이유)만으로 판단.
+            - 응답은 400자 이내로 압축.
+        """.trimIndent()
+
+        val userPayload = """
+            ## 학생 컨텍스트
+            $studentSummary
+
+            ## 운영자 요청
+            $operatorRequestText
+
+            ## 후보 — 역량 보강 (top 10)
+            ${formatCandidates(competencyList)}
+
+            ## 후보 — 영역 매칭 (top 10)
+            ${formatCandidates(areaList)}
+
+            ## 후보 — 주제 매칭 (top 10)
+            ${formatCandidates(themeList)}
+        """.trimIndent()
+
+        val response = callClaude(
+            sys,
+            tools = emptyList(),
+            messages = listOf(mapOf("role" to "user", "content" to userPayload)),
+        )
+        val text = response.contentBlocks
+            .filter { it["type"] == "text" }
+            .joinToString("\n") { it["text"] as? String ?: "" }
+            .trim()
+
+        return RecommendForStudentResult(
+            text = text,
+            candidateIds = (competencyList + areaList + themeList).map { it.contentId }.distinct(),
+            inputTokens = response.inputTokens ?: 0,
+            outputTokens = response.outputTokens ?: 0,
+        )
+    }
+
+    /** 학생 컨텍스트(약점/최근 학습/진단/테스트) 압축 요약. 토큰 절약을 위해 100자 내외 */
+    private fun buildStudentContextSummary(userId: String): String {
+        val user = try { userRepo.findById(userId).orElse(null) } catch (_: Exception) { null }
+        val name = user?.name ?: userId
+        val level = user?.levelId ?: "-"
+
+        val summaries = competencySummaryRepo.findByUserId(userId)
+        val weakest = summaries
+            .filter { it.sampleCount > 0 }
+            .sortedBy { it.ratioScore }
+            .take(3)
+            .joinToString(", ") { "${it.competency}(${it.ratioScore.toInt()}점·${it.sampleCount}회)" }
+            .ifBlank { "측정 부족" }
+
+        val recent = competencyLogRepo.findInWindowDesc(userId).take(8)
+        val recentSummary = if (recent.isEmpty()) "최근 학습 없음" else
+            recent.joinToString(", ") { "${it.contentId}(${it.source})" }
+
+        return """
+            - 이름: $name (레벨 $level)
+            - 약점 역량 top3: $weakest
+            - 최근 학습 8건: $recentSummary
+        """.trimIndent()
+    }
+
+    private fun formatCandidates(list: List<RecommendationService.RecommendedContent>): String {
+        if (list.isEmpty()) return "(없음)"
+        return list.joinToString("\n") {
+            "- [${it.contentId}] ${it.title} | ${it.contentType} | 레벨=${it.levelId ?: "-"} | 영역=${it.area ?: "-"}/${it.subArea ?: "-"} | 점수=${"%.2f".format(it.score)} | ${it.reason}"
+        }
+    }
+
     @Transactional(readOnly = true)
     fun buildApiHistory(sessionId: String): List<Map<String, Any>> {
         val msgs = messageRepo.findBySessionIdOrderByCreatedAtAsc(sessionId)
@@ -368,28 +507,45 @@ class TutorService(
         return out
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun buildSystemPrompt(userId: String): String {
         return """
             당신은 국어농장v2 의 학생 전용 AI 튜터입니다.
-            학생이 국어 학습을 잘 할 수 있도록 도와주세요.
+            학생을 1:1 로 밀착 지도하는 과외 선생님이 되어 주세요.
 
-            ## 핵심 원칙
+            ## 핵심 원칙 (밀착 과외 선생님)
             1. 정답을 바로 알려주지 마세요. 단계별 힌트 → 점진적 구체화.
             2. 학생의 수준(레벨)에 맞춰 친근한 말투(~해 / ~할까)를 쓰세요.
             3. 답변은 짧고 명료하게. 200자 안팎.
             4. 모르는 건 "모르겠어" 라고 솔직히. 추측하지 마세요.
 
+            ## 학습 추천 절차 (반드시 지킬 것 — 하네스)
+            학생이 "추천해줘" 또는 비슷한 요청을 하면:
+            1. 먼저 get_my_competency 로 약점 역량을 확인.
+            2. get_my_recent_history 로 최근 어떤 학습을 했는지 확인.
+            3. get_recommendation_candidates 를 호출해 후보 30개(역량10+영역10+주제10) 수집.
+            4. 후보 30개의 메타데이터와 학생의 약점·최근 경향을 종합 판단해
+               각 카테고리에서 1~2개씩만 골라 추천. 절대 30개 그대로 보여주지 말 것.
+            5. 각 추천에 "이 학습이 너에게 왜 필요한지" 이유를 한 문장으로 적어 줄 것.
+            6. 학생이 "이런 종류 학습 있어?" 식으로 특정 주제를 요청하면
+               search_content 로 후보를 받아 적합도 순으로 정리해 제시.
+
             ## 사용 가능한 함수
-            - explain_concept: 개념 설명용
-            - get_my_competency: 학생 약점 파악
-            - recommend_my_study: 추천 학습
+            - explain_concept: 개념 설명
+            - get_my_competency: 내 약점 역량
             - get_my_recent_history: 최근 학습 이력
-            - search_content: 학습 콘텐츠 검색
-            - explain_question_solution: 특정 문제 풀이 설명
+            - get_recommendation_candidates: 추천 후보 30개 (역량+영역+주제)
+            - recommend_my_study: 단순 추천 (특정 영역/주제 명시 시)
+            - search_content: 키워드로 학습 검색
+            - explain_question_solution: 특정 문제 풀이 단계별 설명
+
+            ## 토큰 효율
+            - 후보 메타데이터로 판단. 본문 풀텍스트 요청 X.
+            - 추천 결과는 5~7개 이내로 압축.
 
             ## 출력 형식
-            - 마크다운 사용 OK (목록/표).
-            - 다른 학생 데이터를 절대 다루지 마세요. 본인 정보만.
+            - 마크다운(표·목록)은 적극 사용.
+            - 다른 학생 데이터 절대 X. 본인 정보만.
 
             오늘 날짜: ${LocalDate.now()}
         """.trimIndent()
