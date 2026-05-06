@@ -10,6 +10,7 @@ import com.korfarm.api.grapefruit.GrapefruitTransactionRepository
 import com.korfarm.api.learning.LearningCompetencyLogRepository
 import com.korfarm.api.learning.RecommendationService
 import com.korfarm.api.learning.UserCompetencySummaryRepository
+import com.korfarm.api.security.JwtService
 import com.korfarm.api.tutor.TutorService
 import com.korfarm.api.org.ClassMembershipRepository
 import com.korfarm.api.org.ClassRepository
@@ -26,11 +27,18 @@ import com.korfarm.api.studyplan.StudyPlanService
 import com.korfarm.api.test.TestService
 import com.korfarm.api.user.UserEntity
 import com.korfarm.api.user.UserRepository
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.data.domain.PageRequest
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
+import java.net.URI
+import java.net.http.HttpClient
+import java.net.http.HttpRequest
+import java.net.http.HttpResponse
+import java.time.Duration
 
 /**
  * AgentToolExecutor 의 운영자(본사·기관) AI 비서용 구현체.
@@ -67,8 +75,12 @@ class OperatorAgentToolExecutorImpl(
     private val grapefruitTransactionRepository: GrapefruitTransactionRepository,
     private val recommendationService: RecommendationService,
     private val tutorService: TutorService,
+    private val jwtService: JwtService,
+    private val objectMapper: ObjectMapper,
+    @Value("\${server.self-base-url:http://localhost:8080}") private val selfBaseUrl: String,
 ) : AgentToolExecutor {
     private val log = LoggerFactory.getLogger(OperatorAgentToolExecutorImpl::class.java)
+    private val httpClient = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(5)).build()
 
     override fun execute(
         functionName: String,
@@ -105,6 +117,7 @@ class OperatorAgentToolExecutorImpl(
                 "list_grapefruit_transactions" -> listGrapefruitTransactions(input, callerRole, callerOrgId)
                 "recommend_for_student_via_tutor" -> recommendForStudentViaTutor(input, callerRole, callerOrgId)
                 "list_learning_candidates" -> listLearningCandidates(input, callerUserId)
+                "admin_request" -> adminRequest(input, callerUserId, callerRole)
                 else -> AgentToolResult(
                     success = false,
                     errorCode = "UNKNOWN_FUNCTION",
@@ -116,6 +129,53 @@ class OperatorAgentToolExecutorImpl(
         } catch (e: Exception) {
             log.error("tool 실행 실패 — name={}", functionName, e)
             AgentToolResult(success = false, errorCode = "INTERNAL", errorMessage = e.message)
+        }
+    }
+
+    // ─── 만능 admin_request — self HTTP call ───────────────────────────
+
+    private fun adminRequest(input: Map<String, Any?>, callerUserId: String, callerRole: String): AgentToolResult {
+        val method = (input["method"] as? String)?.uppercase()
+            ?: return AgentToolResult(false, errorCode = "BAD_INPUT", errorMessage = "method 필요")
+        val path = input["path"] as? String
+            ?: return AgentToolResult(false, errorCode = "BAD_INPUT", errorMessage = "path 필요")
+        if (!path.startsWith("/v1/")) {
+            return AgentToolResult(false, errorCode = "BAD_PATH", errorMessage = "/v1/ 로 시작하는 경로만 허용")
+        }
+        if (method !in setOf("GET", "POST", "PUT", "PATCH", "DELETE")) {
+            return AgentToolResult(false, errorCode = "BAD_METHOD", errorMessage = "허용되지 않는 method")
+        }
+        // internal token 발급 — 호출자의 userId·role 그대로 (권한 escalation 차단)
+        val token = jwtService.createAccessToken(callerUserId, listOf(callerRole))
+        val body = input["body"]
+        val bodyJson = if (body == null || (body is Map<*, *> && body.isEmpty())) "" else objectMapper.writeValueAsString(body)
+        val reqBuilder = HttpRequest.newBuilder()
+            .uri(URI.create("$selfBaseUrl$path"))
+            .header("Authorization", "Bearer $token")
+            .header("Content-Type", "application/json")
+            .timeout(Duration.ofSeconds(30))
+        when (method) {
+            "GET" -> reqBuilder.GET()
+            "DELETE" -> reqBuilder.DELETE()
+            "POST" -> reqBuilder.POST(HttpRequest.BodyPublishers.ofString(bodyJson))
+            "PUT" -> reqBuilder.PUT(HttpRequest.BodyPublishers.ofString(bodyJson))
+            "PATCH" -> reqBuilder.method("PATCH", HttpRequest.BodyPublishers.ofString(bodyJson))
+        }
+        val resp = httpClient.send(reqBuilder.build(), HttpResponse.BodyHandlers.ofString())
+        val status = resp.statusCode()
+        val parsed: Any? = runCatching {
+            if (resp.body().isNullOrBlank()) null
+            else objectMapper.readValue(resp.body(), Any::class.java)
+        }.getOrElse { resp.body() }
+        return if (status in 200..299) {
+            AgentToolResult(success = true, data = mapOf("status" to status, "response" to parsed))
+        } else {
+            AgentToolResult(
+                success = false,
+                errorCode = "HTTP_$status",
+                errorMessage = (parsed as? Map<*, *>)?.get("message")?.toString() ?: "HTTP $status",
+                data = mapOf("status" to status, "response" to parsed),
+            )
         }
     }
 

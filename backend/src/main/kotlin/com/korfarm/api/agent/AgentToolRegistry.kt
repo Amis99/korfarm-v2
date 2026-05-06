@@ -563,5 +563,51 @@ class AgentToolRegistry {
                 "required" to emptyList<String>(),
             ),
         ),
+
+        // ─────────────────────────────────────────────────────────────────
+        // 만능 도구 — 관리자가 평소 admin 화면에서 할 수 있는 모든 작업.
+        // 위 카테고리 도구로 못 다루는 기능을 자연어로 처리.
+        // ─────────────────────────────────────────────────────────────────
+        AgentToolDefinition(
+            name = "admin_request",
+            description = """
+                관리자 권한으로 임의 admin REST endpoint 를 호출. 위 카테고리별 함수로 못 다루는 작업에 사용.
+
+                예: 학생 구독 무료↔유료 변경, 콘텐츠 status 변경, 시즌 시작/종료, 기관 정지 해제, 학부모 연결 승인 등 admin 화면에서 가능한 모든 작업.
+
+                method: GET / POST / PUT / PATCH / DELETE
+                path:  '/v1/admin/...' 형태의 절대 경로
+                body:  POST/PUT/PATCH 시 JSON 객체
+
+                **중요 규칙**:
+                - GET (조회) 은 자유롭게 호출
+                - POST/PUT/PATCH/DELETE (변경) 은 반드시 사용자에게 무엇을, 어떤 ID 로, 무슨 값으로 변경할지 한 줄로 정확히 요약하고 "예/진행/확인" 같은 명시적 동의를 받은 직후 turn 에서만 호출
+                - 사용자가 모호하게 답하거나 다른 질문을 하면 다시 물어볼 것
+                - 한 번에 너무 많은 변경을 묶지 말 것 (실수 시 영향 큼)
+                - 호출 후 응답 JSON 의 핵심을 한 줄로 요약해 사용자에게 보고
+            """.trimIndent(),
+            requireConfirm = true,
+            allowedRoles = setOf("HQ_ADMIN", "ORG_ADMIN"),
+            category = "system",
+            preferredModel = "sonnet",  // 안전한 path 선택 위해 sonnet 권장
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to mapOf(
+                    "method" to mapOf(
+                        "type" to "string",
+                        "enum" to listOf("GET", "POST", "PUT", "PATCH", "DELETE"),
+                    ),
+                    "path" to mapOf(
+                        "type" to "string",
+                        "description" to "/v1/admin/... 형태",
+                    ),
+                    "body" to mapOf(
+                        "type" to "object",
+                        "description" to "POST/PUT/PATCH 시 JSON body. GET/DELETE 면 생략",
+                    ),
+                ),
+                "required" to listOf("method", "path"),
+            ),
+        ),
     )
 }

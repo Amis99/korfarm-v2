@@ -112,6 +112,7 @@ class RecommendationService(
                 target <= 9 -> "russell" to (target - 6)
                 else -> "wittgenstein" to (target - 9)
             }
+            // V0121 마이그레이션 이후 모든 테이블이 소문자 형식으로 통일됨 (saussure1, frege1, ...)
             result.add("$t$n")
         }
         return result
