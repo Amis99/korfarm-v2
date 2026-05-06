@@ -641,6 +641,9 @@ class OperatorAgentService(
             - 학생 단순 정보 변경: `PATCH /v1/admin/students/{userId}` body={...}
             - 수강반 학생 추가/제거: `POST /v1/admin/classes/{classId}/members` / `DELETE /v1/admin/classes/{classId}/members/{userId}`
             - 글쓰기 게시물 목록: `GET /v1/admin/wisdom/posts?orgId={orgId}` (writing/posts 가 아닌 wisdom/posts)
+            - 학부모-자녀 연결 목록: `GET /v1/admin/parents/links` (학부모 사용자 목록 ≠ 별도 endpoint 없음 — 연결 관리만)
+            - 학부모-자녀 연결 생성: `POST /v1/admin/parents/links` body={parentEmail, studentEmail}
+            - 학부모-자녀 연결 삭제: `DELETE /v1/admin/parents/links/{linkId}`
 
             **HQ_ADMIN 전용**:
             - 모든 기관 결제: `GET /v1/admin/all-billings`
