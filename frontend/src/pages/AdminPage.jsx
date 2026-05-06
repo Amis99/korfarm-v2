@@ -25,6 +25,7 @@ function AdminPage() {
   const [error, setError] = useState("");
   const [briefing, setBriefing] = useState(null);
   const [agentStatus, setAgentStatus] = useState(null);
+  const [suspended, setSuspended] = useState(false);
 
   const scrollRef = useRef(null);
 
@@ -32,8 +33,14 @@ function AdminPage() {
     try {
       const data = await apiGet("/v1/admin/agent/sessions");
       setSessions(Array.isArray(data) ? data : []);
+      setSuspended(false);
     } catch (e) {
-      setError(e.message);
+      // 정지 응답 (PAYMENT_REQUIRED + ORG_SUSPENDED) — 사이드바에서만 감지
+      if (/정지|미결제|ORG_SUSPENDED/.test(e.message || "")) {
+        setSuspended(true);
+      } else {
+        setError(e.message);
+      }
     }
   };
 
@@ -230,6 +237,16 @@ function AdminPage() {
             </p>
           </header>
 
+          {suspended && (
+            <div className="agent-suspended">
+              <strong>월 사용료 미결제로 본 기관의 운영 기능이 일시 정지되었습니다.</strong>
+              <p>
+                <button type="button" onClick={() => navigate("/admin/billing")}>결제 화면으로 이동</button>
+                <button type="button" onClick={() => navigate("/admin/grapefruit-wallet")}>자몽 충전</button>
+                결제 후 즉시 정지가 해제됩니다.
+              </p>
+            </div>
+          )}
           {error && <div className="agent-error">{error}</div>}
 
           <div className="agent-thread" ref={scrollRef}>

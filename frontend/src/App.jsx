@@ -92,6 +92,7 @@ const AdminOrgBillingPage = lazy(() => import("./pages/AdminOrgBillingPage"));
 const AdminAllOrgBillingPage = lazy(() => import("./pages/AdminAllOrgBillingPage"));
 const MyGrapefruitPage = lazy(() => import("./pages/MyGrapefruitPage"));
 const MyAiStudyPage = lazy(() => import("./pages/MyAiStudyPage"));
+const MyTutorPage = lazy(() => import("./pages/MyTutorPage"));
 const AdminOwnStudyContentsPage = lazy(() => import("./pages/AdminOwnStudyContentsPage"));
 const AdminWisdomPage = lazy(() => import("./pages/AdminWisdomPage"));
 const AdminWisdomDetailPage = lazy(() => import("./pages/AdminWisdomDetailPage"));
@@ -304,6 +305,7 @@ function App() {
           <Route path="/admin/all-billings" element={A(<AdminAllOrgBillingPage />)} />
           <Route path="/my/grapefruit" element={P(<MyGrapefruitPage />)} />
           <Route path="/my/ai-study" element={P(<MyAiStudyPage />)} />
+          <Route path="/my/tutor" element={P(<MyTutorPage />)} />
           <Route path="/admin/own-study-contents" element={A(<AdminOwnStudyContentsPage />)} />
           <Route path="/admin/wisdom" element={A(<AdminWisdomPage />)} />
           <Route path="/admin/wisdom/:postId" element={A(<AdminWisdomDetailPage />)} />

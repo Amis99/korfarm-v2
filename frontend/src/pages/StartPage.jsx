@@ -809,6 +809,12 @@ function StartPage() {
               <h3>내 자몽 지갑</h3>
               <p>AI 사용용 자몽 충전 / 작물 잔액 확인</p>
             </div>
+            <div className={`start-learn-card${!hasSub ? " --locked" : ""}`} onClick={() => navigate(hasSub ? "/my/tutor" : "/subscription")} style={{ background: "linear-gradient(135deg, #ebf8ff, #bee3f8)" }}>
+              <span className="material-symbols-outlined" style={{ color: "#2c5282" }}>smart_toy</span>
+              <h3>AI 튜터</h3>
+              <p>모르는 개념·문제 풀이를 AI 와 1:1 채팅</p>
+              {!hasSub && <span className="start-lock-badge">구독 필요</span>}
+            </div>
           </div>
         </section>
 

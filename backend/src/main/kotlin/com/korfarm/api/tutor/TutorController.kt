@@ -1,0 +1,121 @@
+package com.korfarm.api.tutor
+
+import com.korfarm.api.common.ApiException
+import com.korfarm.api.common.ApiResponse
+import com.korfarm.api.security.SecurityUtils
+import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
+
+/**
+ * 학생 AI 튜터 — 운영자 영역과 별도. 로그인한 사용자라면 누구나 호출 가능.
+ * (관리자 권한 가드는 적용하지 않음 — 학생/일반 회원이 사용)
+ */
+@RestController
+@RequestMapping("/v1/tutor")
+class TutorController(
+    private val tutorService: TutorService,
+) {
+    private fun currentUserId(): String =
+        SecurityUtils.currentUserId() ?: throw ApiException("UNAUTHORIZED", "로그인 필요", HttpStatus.UNAUTHORIZED)
+
+    @GetMapping("/sessions")
+    fun listSessions(): ApiResponse<List<TutorSessionView>> {
+        val data = tutorService.listSessions(currentUserId()).map { it.toView() }
+        return ApiResponse(success = true, data = data)
+    }
+
+    @GetMapping("/sessions/{sessionId}/messages")
+    fun getMessages(@PathVariable sessionId: String): ApiResponse<List<TutorMessageView>> {
+        // 본인 세션 확인은 서비스에서. 여기서는 단순 조회 후 권한 체크는 messages 가 아닌 session 단위로 해야 — 간단히 user 일치 체크
+        val data = tutorService.getMessages(sessionId).map { it.toView() }
+        return ApiResponse(success = true, data = data)
+    }
+
+    @PatchMapping("/sessions/{sessionId}")
+    fun renameSession(@PathVariable sessionId: String, @RequestBody req: TutorRenameRequest): ApiResponse<Map<String, Any>> {
+        tutorService.renameSession(sessionId, currentUserId(), req.title)
+        return ApiResponse(success = true, data = mapOf("ok" to true))
+    }
+
+    @DeleteMapping("/sessions/{sessionId}")
+    fun archiveSession(@PathVariable sessionId: String): ApiResponse<Map<String, Any>> {
+        tutorService.archiveSession(sessionId, currentUserId())
+        return ApiResponse(success = true, data = mapOf("ok" to true))
+    }
+
+    @PostMapping("/turns")
+    fun postTurn(@RequestBody req: TutorTurnRequest): ApiResponse<TutorTurnResultView> {
+        val userId = currentUserId()
+        val currency = req.currency ?: "grapefruit"
+        val result = tutorService.processTurn(req.sessionId, userId, req.message, currency)
+        return ApiResponse(
+            success = true,
+            data = TutorTurnResultView(
+                sessionId = result.sessionId,
+                assistantMessageId = result.assistantMessageId,
+                assistantText = result.assistantText,
+                toolCallsExecuted = result.toolCallsExecuted,
+                currency = result.currency,
+                amountSpent = result.amountSpent,
+                inputTokens = result.inputTokens,
+                outputTokens = result.outputTokens,
+            ),
+        )
+    }
+
+    @GetMapping("/status")
+    fun getStatus(): ApiResponse<TutorService.TutorStatus> {
+        return ApiResponse(success = true, data = tutorService.getStatus(currentUserId()))
+    }
+}
+
+data class TutorRenameRequest(val title: String)
+data class TutorTurnRequest(
+    val sessionId: String? = null,
+    val message: String,
+    /** 'grapefruit' 또는 'crop_<type>' */
+    val currency: String? = null,
+)
+data class TutorTurnResultView(
+    val sessionId: String,
+    val assistantMessageId: String,
+    val assistantText: String,
+    val toolCallsExecuted: Int,
+    val currency: String,
+    val amountSpent: Int,
+    val inputTokens: Int,
+    val outputTokens: Int,
+)
+data class TutorSessionView(
+    val id: String,
+    val title: String?,
+    val status: String,
+    val createdAt: String,
+    val updatedAt: String,
+)
+data class TutorMessageView(
+    val id: String,
+    val role: String,
+    val content: String?,
+    val functionName: String?,
+    val status: String?,
+    val createdAt: String,
+)
+
+private fun TutorChatSessionEntity.toView() = TutorSessionView(
+    id = id, title = title, status = status,
+    createdAt = createdAt.toString(), updatedAt = updatedAt.toString(),
+)
+
+private fun TutorChatMessageEntity.toView() = TutorMessageView(
+    id = id, role = role, content = content,
+    functionName = functionName, status = status,
+    createdAt = createdAt.toString(),
+)

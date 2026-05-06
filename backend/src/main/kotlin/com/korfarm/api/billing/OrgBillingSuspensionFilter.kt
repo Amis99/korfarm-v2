@@ -34,6 +34,8 @@ class OrgBillingSuspensionFilter(
         "/v1/admin/grapefruit/wallet/me",
         "/v1/admin/grapefruit/pricing",      // 단가 조회는 GET 만 허용 — 정보 표시용
         "/v1/admin/orgs/me",
+        // 정지 안내 배너에 잔액·정지 상태를 표시할 수 있도록 status 만 허용 (실제 AI 채팅은 차단됨)
+        "/v1/admin/agent/status",
         "/v1/auth",
     )
 

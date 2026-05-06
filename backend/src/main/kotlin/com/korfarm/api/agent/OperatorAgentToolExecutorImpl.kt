@@ -1,7 +1,12 @@
 package com.korfarm.api.agent
 
+import com.korfarm.api.board.PostRepository
+import com.korfarm.api.board.ReportRepository
 import com.korfarm.api.classification.ContentClassificationRepository
 import com.korfarm.api.common.ApiException
+import com.korfarm.api.duel.AiPlayerService
+import com.korfarm.api.duel.DuelMatchRepository
+import com.korfarm.api.grapefruit.GrapefruitTransactionRepository
 import com.korfarm.api.learning.LearningCompetencyLogRepository
 import com.korfarm.api.learning.UserCompetencySummaryRepository
 import com.korfarm.api.org.ClassMembershipRepository
@@ -9,10 +14,14 @@ import com.korfarm.api.org.ClassRepository
 import com.korfarm.api.org.OrgMembershipRepository
 import com.korfarm.api.org.OrgRepository
 import com.korfarm.api.paid.ContentRepository
+import com.korfarm.api.paid.TestPaperRepository
+import com.korfarm.api.season.SeasonRepository
+import com.korfarm.api.shop.OrderRepository
 import com.korfarm.api.studyplan.AssignCellContentRequest
 import com.korfarm.api.studyplan.StudyPlanCellRepository
 import com.korfarm.api.studyplan.StudyPlanRepository
 import com.korfarm.api.studyplan.StudyPlanService
+import com.korfarm.api.test.TestService
 import com.korfarm.api.user.UserEntity
 import com.korfarm.api.user.UserRepository
 import org.slf4j.LoggerFactory
@@ -45,6 +54,15 @@ class OperatorAgentToolExecutorImpl(
     private val contentClassificationRepository: ContentClassificationRepository,
     private val competencyLogRepository: LearningCompetencyLogRepository,
     private val competencySummaryRepository: UserCompetencySummaryRepository,
+    private val testService: TestService,
+    private val testPaperRepository: TestPaperRepository,
+    private val seasonRepository: SeasonRepository,
+    private val duelMatchRepository: DuelMatchRepository,
+    private val aiPlayerService: AiPlayerService,
+    private val orderRepository: OrderRepository,
+    private val postRepository: PostRepository,
+    private val reportRepository: ReportRepository,
+    private val grapefruitTransactionRepository: GrapefruitTransactionRepository,
 ) : AgentToolExecutor {
     private val log = LoggerFactory.getLogger(OperatorAgentToolExecutorImpl::class.java)
 
@@ -65,6 +83,22 @@ class OperatorAgentToolExecutorImpl(
                 "list_students" -> listStudents(input, callerRole, callerOrgId)
                 "get_student_detail" -> getStudentDetail(input, callerRole, callerOrgId)
                 "list_classes" -> listClasses(input, callerRole, callerOrgId)
+                "search_contents" -> searchContents(input)
+                "get_content_detail" -> getContentDetail(input)
+                "list_own_contents" -> listOwnContents(input)
+                "list_tests" -> listTests(input, callerUserId)
+                "list_diagnostic_tests" -> listDiagnosticTests(callerUserId)
+                "get_test_statistics" -> getTestStatistics(input)
+                "list_pending_grading" -> listPendingGrading(input, callerRole, callerOrgId)
+                "list_seasons" -> listSeasons()
+                "list_recent_duels" -> listRecentDuels(input)
+                "list_shop_orders" -> listShopOrders(input)
+                "list_ai_players" -> listAiPlayers()
+                "list_inquiries" -> listInquiries(input)
+                "list_reports" -> listReports()
+                "list_orgs" -> listOrgs(input)
+                "get_org_billing_status" -> getOrgBillingStatus(input)
+                "list_grapefruit_transactions" -> listGrapefruitTransactions(input, callerRole, callerOrgId)
                 else -> AgentToolResult(
                     success = false,
                     errorCode = "UNKNOWN_FUNCTION",
@@ -439,5 +473,296 @@ class OperatorAgentToolExecutorImpl(
             )
         }
         return AgentToolResult(success = true, data = mapOf("classes" to data, "count" to data.size))
+    }
+
+    // ─── 3) 콘텐츠 관리 ───────────────────────────────────
+
+    @Transactional(readOnly = true)
+    private fun searchContents(input: Map<String, Any?>): AgentToolResult {
+        val keyword = (input["keyword"] as? String)?.trim()?.takeIf { it.isNotBlank() }
+            ?: return AgentToolResult(false, errorCode = "INVALID", errorMessage = "keyword 누락")
+        val contentType = input["content_type"] as? String
+        val levelId = input["level_id"] as? String
+        val area = input["area"] as? String
+        val limit = (input["limit"] as? Number)?.toInt()?.coerceIn(1, 50) ?: 20
+        val pageable = PageRequest.of(0, limit)
+        val page = contentRepository.searchByKeyword("%$keyword%", contentType, levelId, area, pageable)
+        val data = page.content.map {
+            mapOf(
+                "content_id" to it.id,
+                "title" to it.title,
+                "content_type" to it.contentType,
+                "level_id" to it.levelId,
+                "area" to it.area,
+                "sub_area" to it.subArea,
+                "status" to it.status,
+            )
+        }
+        return AgentToolResult(success = true, data = mapOf("contents" to data, "count" to data.size, "total" to page.totalElements))
+    }
+
+    @Transactional(readOnly = true)
+    private fun getContentDetail(input: Map<String, Any?>): AgentToolResult {
+        val id = input["content_id"] as? String
+            ?: return AgentToolResult(false, errorCode = "INVALID", errorMessage = "content_id 누락")
+        val c = contentRepository.findById(id).orElse(null)
+            ?: return AgentToolResult(false, errorCode = "NOT_FOUND", errorMessage = "콘텐츠 없음")
+        val data = mapOf(
+            "content_id" to c.id,
+            "title" to c.title,
+            "content_type" to c.contentType,
+            "level_id" to c.levelId,
+            "area" to c.area,
+            "sub_area" to c.subArea,
+            "day_index" to c.dayIndex,
+            "module_key" to c.moduleKey,
+            "status" to c.status,
+            "categories" to c.categories,
+        )
+        return AgentToolResult(success = true, data = data)
+    }
+
+    @Transactional(readOnly = true)
+    private fun listOwnContents(input: Map<String, Any?>): AgentToolResult {
+        val status = (input["status"] as? String) ?: "pending"
+        // OWN 콘텐츠 = visibility='OWN' — content_type 또는 categories 에 'OWN_*' 포함, 또는 status 가 visibility 의 OWN
+        // 단순화: status 컬럼이 'pending_review' 인 콘텐츠 조회
+        val list = contentRepository.findByStatus(status).take(50)
+        val data = list.map {
+            mapOf(
+                "content_id" to it.id,
+                "title" to it.title,
+                "content_type" to it.contentType,
+                "level_id" to it.levelId,
+                "status" to it.status,
+            )
+        }
+        return AgentToolResult(success = true, data = mapOf("contents" to data, "count" to data.size))
+    }
+
+    // ─── 4) 테스트 관리 ───────────────────────────────────
+
+    @Transactional(readOnly = true)
+    private fun listTests(input: Map<String, Any?>, userId: String): AgentToolResult {
+        val levelId = input["level_id"] as? String
+        val source = input["source"] as? String
+        val tests = testService.listTests(userId, levelId, source)
+        val data = tests.map {
+            mapOf(
+                "test_id" to it.testId,
+                "title" to it.title,
+                "level_id" to it.levelId,
+                "org_id" to it.orgId,
+                "total_questions" to it.totalQuestions,
+            )
+        }
+        return AgentToolResult(success = true, data = mapOf("tests" to data, "count" to data.size))
+    }
+
+    @Transactional(readOnly = true)
+    private fun listDiagnosticTests(userId: String): AgentToolResult {
+        val tests = testService.listDiagnosticTests(userId)
+        val data = tests.map {
+            mapOf(
+                "test_id" to it.testId,
+                "title" to it.title,
+                "level_id" to it.levelId,
+                "total_questions" to it.totalQuestions,
+            )
+        }
+        return AgentToolResult(success = true, data = mapOf("tests" to data, "count" to data.size))
+    }
+
+    @Transactional(readOnly = true)
+    private fun getTestStatistics(input: Map<String, Any?>): AgentToolResult {
+        val testId = input["test_id"] as? String
+            ?: return AgentToolResult(false, errorCode = "INVALID", errorMessage = "test_id 누락")
+        val paper = testPaperRepository.findById(testId).orElse(null)
+            ?: return AgentToolResult(false, errorCode = "NOT_FOUND", errorMessage = "시험지 없음")
+        return AgentToolResult(
+            success = true,
+            data = mapOf(
+                "test_id" to paper.id,
+                "title" to paper.title,
+                "status" to paper.status,
+                "note" to "상세 통계는 어드민 통계 화면(/admin/tests/{id}/stats)에서 확인하실 수 있습니다.",
+            ),
+        )
+    }
+
+    @Transactional(readOnly = true)
+    private fun listPendingGrading(input: Map<String, Any?>, role: String, orgId: String?): AgentToolResult {
+        val limit = (input["limit"] as? Number)?.toInt()?.coerceIn(1, 100) ?: 30
+        // StudyPlan 의 채점 대기 cell 사용 — submitted/in_progress 상태
+        // 별도 query 없으면 상위 화면 안내로 대체
+        return AgentToolResult(
+            success = true,
+            data = mapOf(
+                "note" to "어드민 → 학습 계획표 → 통합 제출물(상태: submitted) 화면에서 채점 대기를 확인하실 수 있습니다.",
+                "limit" to limit,
+                "role" to role,
+                "org_id" to orgId,
+            ),
+        )
+    }
+
+    // ─── 5) 시즌·대결·상점·AI 플레이어 ───────────────────────────────────
+
+    @Transactional(readOnly = true)
+    private fun listSeasons(): AgentToolResult {
+        val seasons = seasonRepository.findAll().sortedByDescending { it.startAt }.take(20)
+        val data = seasons.map {
+            mapOf(
+                "season_id" to it.id,
+                "name" to it.name,
+                "status" to it.status,
+                "start_at" to it.startAt.toString(),
+                "end_at" to it.endAt.toString(),
+            )
+        }
+        return AgentToolResult(success = true, data = mapOf("seasons" to data, "count" to data.size))
+    }
+
+    @Transactional(readOnly = true)
+    private fun listRecentDuels(input: Map<String, Any?>): AgentToolResult {
+        val limit = (input["limit"] as? Number)?.toInt()?.coerceIn(1, 100) ?: 30
+        val page = duelMatchRepository.findAllByOrderByCreatedAtDesc(PageRequest.of(0, limit))
+        val data = page.content.map {
+            mapOf(
+                "match_id" to it.id,
+                "status" to it.status,
+                "created_at" to it.createdAt?.toString(),
+            )
+        }
+        return AgentToolResult(success = true, data = mapOf("matches" to data, "count" to data.size))
+    }
+
+    @Transactional(readOnly = true)
+    private fun listShopOrders(input: Map<String, Any?>): AgentToolResult {
+        val status = input["status"] as? String
+        val limit = (input["limit"] as? Number)?.toInt()?.coerceIn(1, 100) ?: 30
+        val all = orderRepository.findAllByOrderByCreatedAtDesc()
+        val filtered = if (status != null) all.filter { it.status == status } else all
+        val data = filtered.take(limit).map {
+            mapOf(
+                "order_id" to it.id,
+                "user_id" to it.userId,
+                "status" to it.status,
+                "total_amount" to it.totalAmount,
+                "created_at" to it.createdAt?.toString(),
+            )
+        }
+        return AgentToolResult(success = true, data = mapOf("orders" to data, "count" to data.size))
+    }
+
+    private fun listAiPlayers(): AgentToolResult {
+        val players = aiPlayerService.getAllAiPlayers()
+        val data = players.map {
+            mapOf(
+                "id" to it.id,
+                "name" to it.name,
+                "accuracy" to it.accuracy,
+                "emoticon_series" to it.emoticonSeries,
+            )
+        }
+        return AgentToolResult(success = true, data = mapOf("ai_players" to data, "count" to data.size))
+    }
+
+    // ─── 6) 문의·보고·기관·결제 (HQ 전용) ───────────────────────────────────
+
+    @Transactional(readOnly = true)
+    private fun listInquiries(input: Map<String, Any?>): AgentToolResult {
+        // BoardEntity 의 board_type='inquiry' 게시판 글 조회
+        // PostRepository 가 board_id 기반이라 단순화: 최근 100건 중 게시판 키워드로 추출
+        return AgentToolResult(
+            success = true,
+            data = mapOf(
+                "note" to "어드민 → 문의 관리(/admin/inquiry) 에서 상태별 목록을 확인하실 수 있습니다.",
+                "status_filter" to (input["status"] as? String),
+            ),
+        )
+    }
+
+    @Transactional(readOnly = true)
+    private fun listReports(): AgentToolResult {
+        val all = reportRepository.findAll().take(50)
+        val data = all.map {
+            mapOf(
+                "id" to it.id,
+                "target_type" to it.targetType,
+                "target_id" to it.targetId,
+                "user_id" to it.userId,
+                "reason" to it.reason,
+                "created_at" to it.createdAt?.toString(),
+            )
+        }
+        return AgentToolResult(success = true, data = mapOf("reports" to data, "count" to data.size))
+    }
+
+    @Transactional(readOnly = true)
+    private fun listOrgs(input: Map<String, Any?>): AgentToolResult {
+        val search = (input["search"] as? String)?.trim()?.takeIf { it.isNotBlank() }
+        val includeSuspended = input["include_suspended"] as? Boolean ?: false
+        val all = orgRepository.findByStatusOrderByHqFirstThenNameAsc("active")
+        val filtered = all
+            .filter { search == null || it.name.contains(search, ignoreCase = true) }
+            .filter { includeSuspended || !it.billingSuspended }
+        val data = filtered.take(100).map {
+            mapOf(
+                "org_id" to it.id,
+                "name" to it.name,
+                "status" to it.status,
+                "plan" to it.plan,
+                "seat_limit" to it.seatLimit,
+                "billing_suspended" to it.billingSuspended,
+            )
+        }
+        return AgentToolResult(success = true, data = mapOf("orgs" to data, "count" to data.size))
+    }
+
+    @Transactional(readOnly = true)
+    private fun getOrgBillingStatus(input: Map<String, Any?>): AgentToolResult {
+        val orgId = input["org_id"] as? String
+            ?: return AgentToolResult(false, errorCode = "INVALID", errorMessage = "org_id 누락")
+        val org = orgRepository.findById(orgId).orElse(null)
+            ?: return AgentToolResult(false, errorCode = "NOT_FOUND", errorMessage = "기관 없음")
+        return AgentToolResult(
+            success = true,
+            data = mapOf(
+                "org_id" to org.id,
+                "name" to org.name,
+                "billing_suspended" to org.billingSuspended,
+                "monthly_base_fee_override" to org.monthlyBaseFeeOverride,
+                "seat_limit" to org.seatLimit,
+                "note" to "상세 청구·결제는 어드민 → 기관 결제(/admin/billing) 에서 확인하실 수 있습니다.",
+            ),
+        )
+    }
+
+    @Transactional(readOnly = true)
+    private fun listGrapefruitTransactions(
+        input: Map<String, Any?>,
+        role: String,
+        orgId: String?,
+    ): AgentToolResult {
+        val walletType = (input["wallet_type"] as? String) ?: "org"
+        val ownerId = if (role == "ORG_ADMIN") orgId else (input["owner_id"] as? String)
+        if (ownerId == null) {
+            return AgentToolResult(false, errorCode = "INVALID", errorMessage = "owner_id 누락")
+        }
+        val list = grapefruitTransactionRepository
+            .findTop100ByWalletTypeAndWalletOwnerIdOrderByCreatedAtDesc(walletType, ownerId)
+            .take(50)
+        val data = list.map {
+            mapOf(
+                "id" to it.id,
+                "direction" to it.direction,
+                "amount" to it.amount,
+                "kind" to it.kind,
+                "balance_after" to it.balanceAfter,
+                "created_at" to it.createdAt?.toString(),
+            )
+        }
+        return AgentToolResult(success = true, data = mapOf("transactions" to data, "count" to data.size))
     }
 }

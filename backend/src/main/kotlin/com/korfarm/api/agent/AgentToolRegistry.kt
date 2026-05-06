@@ -264,5 +264,255 @@ class AgentToolRegistry {
                 "required" to emptyList<String>(),
             ),
         ),
+
+        // ═════════════════════════════════════════════════════════════════
+        // 3) 콘텐츠 관리 (HQ + ORG 공용)
+        // ═════════════════════════════════════════════════════════════════
+
+        AgentToolDefinition(
+            name = "search_contents",
+            description = "콘텐츠(일일독해/일일퀴즈/내용숙지/프로 등)를 키워드·레벨·종류로 검색합니다.",
+            requireConfirm = false,
+            allowedRoles = setOf("HQ_ADMIN", "ORG_ADMIN"),
+            category = "content",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to mapOf(
+                    "keyword" to mapOf("type" to "string", "description" to "제목·영역·세부영역 부분 일치 검색어"),
+                    "content_type" to mapOf("type" to "string", "description" to "예: DAILY_READING, DAILY_QUIZ, STUDY_CONTENT, PRO_READING"),
+                    "level_id" to mapOf("type" to "string"),
+                    "area" to mapOf("type" to "string"),
+                    "limit" to mapOf("type" to "integer", "description" to "최대 50, 기본 20"),
+                ),
+                "required" to listOf("keyword"),
+            ),
+        ),
+
+        AgentToolDefinition(
+            name = "get_content_detail",
+            description = "콘텐츠 단일 메타데이터(제목·레벨·영역·세부영역·상태)를 조회합니다.",
+            requireConfirm = false,
+            allowedRoles = setOf("HQ_ADMIN", "ORG_ADMIN"),
+            category = "content",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to mapOf("content_id" to mapOf("type" to "string")),
+                "required" to listOf("content_id"),
+            ),
+        ),
+
+        AgentToolDefinition(
+            name = "list_own_contents",
+            description = "학생이 직접 만든 OWN 학습 콘텐츠 검수 대기 목록을 조회합니다 (HQ 전용).",
+            requireConfirm = false,
+            allowedRoles = setOf("HQ_ADMIN"),
+            category = "content",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to mapOf(
+                    "status" to mapOf("type" to "string", "enum" to listOf("pending", "approved", "rejected")),
+                ),
+                "required" to emptyList<String>(),
+            ),
+        ),
+
+        // ═════════════════════════════════════════════════════════════════
+        // 4) 테스트 관리
+        // ═════════════════════════════════════════════════════════════════
+
+        AgentToolDefinition(
+            name = "list_tests",
+            description = "기타 테스트(시험지) 목록을 조회합니다. 본 기관 + 본사 PUBLIC.",
+            requireConfirm = false,
+            allowedRoles = setOf("HQ_ADMIN", "ORG_ADMIN"),
+            category = "test",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to mapOf(
+                    "level_id" to mapOf("type" to "string"),
+                    "source" to mapOf("type" to "string", "description" to "예: org / hq"),
+                ),
+                "required" to emptyList<String>(),
+            ),
+        ),
+
+        AgentToolDefinition(
+            name = "list_diagnostic_tests",
+            description = "진단 테스트 목록을 조회합니다.",
+            requireConfirm = false,
+            allowedRoles = setOf("HQ_ADMIN", "ORG_ADMIN"),
+            category = "test",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to emptyMap<String, Any>(),
+                "required" to emptyList<String>(),
+            ),
+        ),
+
+        AgentToolDefinition(
+            name = "get_test_statistics",
+            description = "특정 테스트의 통계(응시 인원·평균·역량별 분포)를 조회합니다.",
+            requireConfirm = false,
+            allowedRoles = setOf("HQ_ADMIN", "ORG_ADMIN"),
+            category = "test",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to mapOf("test_id" to mapOf("type" to "string")),
+                "required" to listOf("test_id"),
+            ),
+        ),
+
+        AgentToolDefinition(
+            name = "list_pending_grading",
+            description = "수동 채점 대기 중인 학생 제출물(서술형)을 조회합니다.",
+            requireConfirm = false,
+            allowedRoles = setOf("HQ_ADMIN", "ORG_ADMIN"),
+            category = "test",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to mapOf(
+                    "limit" to mapOf("type" to "integer", "description" to "기본 30, 최대 100"),
+                ),
+                "required" to emptyList<String>(),
+            ),
+        ),
+
+        // ═════════════════════════════════════════════════════════════════
+        // 5) 시즌·대결·상점·AI 플레이어
+        // ═════════════════════════════════════════════════════════════════
+
+        AgentToolDefinition(
+            name = "list_seasons",
+            description = "대결 시즌 목록(현재·과거)을 조회합니다.",
+            requireConfirm = false,
+            allowedRoles = setOf("HQ_ADMIN"),
+            category = "season",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to emptyMap<String, Any>(),
+                "required" to emptyList<String>(),
+            ),
+        ),
+
+        AgentToolDefinition(
+            name = "list_recent_duels",
+            description = "최근 대결 매치 이력을 조회합니다.",
+            requireConfirm = false,
+            allowedRoles = setOf("HQ_ADMIN"),
+            category = "season",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to mapOf(
+                    "limit" to mapOf("type" to "integer", "description" to "기본 30, 최대 100"),
+                ),
+                "required" to emptyList<String>(),
+            ),
+        ),
+
+        AgentToolDefinition(
+            name = "list_shop_orders",
+            description = "쇼핑몰 주문 목록을 조회합니다 (HQ 전용).",
+            requireConfirm = false,
+            allowedRoles = setOf("HQ_ADMIN"),
+            category = "shop",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to mapOf(
+                    "status" to mapOf("type" to "string", "enum" to listOf("pending", "shipping", "delivered")),
+                    "limit" to mapOf("type" to "integer"),
+                ),
+                "required" to emptyList<String>(),
+            ),
+        ),
+
+        AgentToolDefinition(
+            name = "list_ai_players",
+            description = "대결용 AI 플레이어 봇 목록을 조회합니다 (HQ 전용).",
+            requireConfirm = false,
+            allowedRoles = setOf("HQ_ADMIN"),
+            category = "season",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to emptyMap<String, Any>(),
+                "required" to emptyList<String>(),
+            ),
+        ),
+
+        // ═════════════════════════════════════════════════════════════════
+        // 6) 문의·보고·기관·결제 (HQ 전용)
+        // ═════════════════════════════════════════════════════════════════
+
+        AgentToolDefinition(
+            name = "list_inquiries",
+            description = "사용자 문의 게시글 목록을 조회합니다 (HQ 전용).",
+            requireConfirm = false,
+            allowedRoles = setOf("HQ_ADMIN"),
+            category = "hq",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to mapOf(
+                    "status" to mapOf("type" to "string", "enum" to listOf("open", "answered", "closed")),
+                ),
+                "required" to emptyList<String>(),
+            ),
+        ),
+
+        AgentToolDefinition(
+            name = "list_reports",
+            description = "신고된 게시물·댓글 목록을 조회합니다 (HQ 전용).",
+            requireConfirm = false,
+            allowedRoles = setOf("HQ_ADMIN"),
+            category = "hq",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to emptyMap<String, Any>(),
+                "required" to emptyList<String>(),
+            ),
+        ),
+
+        AgentToolDefinition(
+            name = "list_orgs",
+            description = "전체 기관 목록을 조회합니다 (HQ 전용).",
+            requireConfirm = false,
+            allowedRoles = setOf("HQ_ADMIN"),
+            category = "hq",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to mapOf(
+                    "search" to mapOf("type" to "string"),
+                    "include_suspended" to mapOf("type" to "boolean", "description" to "기본 false — 정지된 기관도 포함할지"),
+                ),
+                "required" to emptyList<String>(),
+            ),
+        ),
+
+        AgentToolDefinition(
+            name = "get_org_billing_status",
+            description = "특정 기관의 월결제 상태(미결제·정지·다음 결제일)를 조회합니다 (HQ 전용).",
+            requireConfirm = false,
+            allowedRoles = setOf("HQ_ADMIN"),
+            category = "hq",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to mapOf("org_id" to mapOf("type" to "string")),
+                "required" to listOf("org_id"),
+            ),
+        ),
+
+        AgentToolDefinition(
+            name = "list_grapefruit_transactions",
+            description = "자몽 거래 이력(충전/차감)을 조회합니다. ORG_ADMIN 은 본 기관, HQ_ADMIN 은 지정한 기관/사용자.",
+            requireConfirm = false,
+            allowedRoles = setOf("HQ_ADMIN", "ORG_ADMIN"),
+            category = "billing",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to mapOf(
+                    "wallet_type" to mapOf("type" to "string", "enum" to listOf("org", "user")),
+                    "owner_id" to mapOf("type" to "string", "description" to "조회 대상 ID"),
+                ),
+                "required" to emptyList<String>(),
+            ),
+        ),
     )
 }
