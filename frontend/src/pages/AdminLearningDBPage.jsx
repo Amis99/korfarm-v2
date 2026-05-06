@@ -6,6 +6,8 @@ import LDBTreePanel from "../components/learning-db/LDBTreePanel";
 import CorpusDetail, { AREAS, ITEM_TYPES, modalBackdrop, modalBox, Label, unwrap } from "../components/learning-db/CorpusDetail";
 import PendingGroupDetail from "../components/learning-db/PendingGroupDetail";
 import { useClassificationCatalog } from "../components/learning-db/useClassificationCatalog";
+import MultiSelectField from "../components/learning-db/MultiSelectField";
+import MarkdownEditField from "../components/editor/MarkdownEditField";
 import {
   searchCorpus, fetchCorpus, createCorpus,
   fetchPendingGrouped, fetchPendingStats,
@@ -246,15 +248,32 @@ function AdminLearningDBPage() {
 }
 
 function CorpusCreateModal({ onClose, onCreated }) {
-  const [draft, setDraft] = useState({ area: "literature", title: "" });
+  const [draft, setDraft] = useState({
+    areas: ["literature"], subAreas: [], topics: [],
+    title: "",
+  });
   const catalog = useClassificationCatalog();
-  const subAreas = catalog.subAreasFor(draft.area);
-  const themes = catalog.themesFor(draft.area, draft.subArea);
+  const primaryArea = draft.areas?.[0] || "literature";
+  const primarySubArea = draft.subAreas?.[0] || "";
+  const subAreas = catalog.subAreasFor(primaryArea);
+  const themes = catalog.themesFor(primaryArea, primarySubArea);
 
   const submit = async () => {
     if (!draft.title?.trim()) { alert("제목을 입력하세요"); return; }
     try {
-      const r = await createCorpus(draft);
+      const areasArr = (draft.areas || []).filter(Boolean);
+      const subAreasArr = (draft.subAreas || []).filter(Boolean);
+      const topicsArr = (draft.topics || []).filter(Boolean);
+      const meta = { areas: areasArr, subAreas: subAreasArr, topics: topicsArr };
+      const r = await createCorpus({
+        area: areasArr[0] || "literature",
+        subArea: subAreasArr[0] || null,
+        topic: topicsArr[0] || null,
+        title: draft.title,
+        source: draft.source, author: draft.author, era: draft.era,
+        genre: draft.genre, field: draft.field, bodyMd: draft.bodyMd,
+        meta,
+      });
       const ent = unwrap(r);
       onCreated?.(ent?.id);
     } catch (e) {
@@ -267,18 +286,18 @@ function CorpusCreateModal({ onClose, onCreated }) {
         <h3>작품·지문 추가</h3>
         <div style={{ display: "grid", gridTemplateColumns: "100px 1fr", gap: 8 }}>
           <Label>영역 *</Label>
-          <select value={draft.area} onChange={e => setDraft(d => ({ ...d, area: e.target.value, subArea: "", topic: "" }))}>
-            {AREAS.map(a => <option key={a.key} value={a.key}>{a.label}</option>)}
-          </select>
+          <MultiSelectField
+            values={draft.areas}
+            onChange={(arr) => setDraft(d => ({ ...d, areas: arr, subAreas: [], topics: [] }))}
+            options={AREAS.map(a => ({ code: a.key, labelKo: a.label }))}
+          />
           <Label>세부영역</Label>
-          {subAreas.length > 0 ? (
-            <select value={draft.subArea || ""} onChange={e => setDraft(d => ({ ...d, subArea: e.target.value, topic: "" }))}>
-              <option value="">— 선택 —</option>
-              {subAreas.map(s => <option key={s.code} value={s.labelKo}>{s.labelKo}</option>)}
-            </select>
-          ) : (
-            <input value={draft.subArea || ""} onChange={e => setDraft(d => ({ ...d, subArea: e.target.value }))} placeholder="자유 입력" />
-          )}
+          <MultiSelectField
+            values={draft.subAreas}
+            onChange={(arr) => setDraft(d => ({ ...d, subAreas: arr, topics: [] }))}
+            options={subAreas}
+            placeholder="자유 입력"
+          />
           <Label>제목 *</Label>
           <input value={draft.title || ""} onChange={e => setDraft(d => ({ ...d, title: e.target.value }))} />
           <Label>출처</Label>
@@ -290,18 +309,21 @@ function CorpusCreateModal({ onClose, onCreated }) {
           <Label>장르</Label>
           <input value={draft.genre || ""} onChange={e => setDraft(d => ({ ...d, genre: e.target.value }))} placeholder="시 / 소설 / 수필 등" />
           <Label>주제</Label>
-          {themes.length > 0 ? (
-            <select value={draft.topic || ""} onChange={e => setDraft(d => ({ ...d, topic: e.target.value }))}>
-              <option value="">— 선택 —</option>
-              {themes.map(t => <option key={t.code} value={t.labelKo}>{t.labelKo}</option>)}
-            </select>
-          ) : (
-            <input value={draft.topic || ""} onChange={e => setDraft(d => ({ ...d, topic: e.target.value }))} placeholder={draft.subArea ? "분류 마스터에 등록된 주제 없음 — 자유 입력" : "세부영역을 먼저 선택"} />
-          )}
+          <MultiSelectField
+            values={draft.topics}
+            onChange={(arr) => setDraft(d => ({ ...d, topics: arr }))}
+            options={themes}
+            placeholder={primarySubArea ? "분류 마스터에 등록된 주제 없음 — 자유 입력" : "세부영역을 먼저 선택"}
+          />
           <Label>분야</Label>
           <input value={draft.field || ""} onChange={e => setDraft(d => ({ ...d, field: e.target.value }))} placeholder="과학/사회/인문 등 (비문학)" />
           <Label>본문(선택)</Label>
-          <textarea rows={6} value={draft.bodyMd || ""} onChange={e => setDraft(d => ({ ...d, bodyMd: e.target.value }))} />
+          <MarkdownEditField
+            value={draft.bodyMd || ""}
+            onChange={(text) => setDraft(d => ({ ...d, bodyMd: text }))}
+            placeholder="본문 (마크다운). 이미지 업로드 가능"
+            minHeight={180}
+          />
         </div>
         <div style={{ marginTop: 12, display: "flex", justifyContent: "flex-end", gap: 8 }}>
           <button className="ldb-btn ldb-btn-ghost" onClick={onClose}>취소</button>

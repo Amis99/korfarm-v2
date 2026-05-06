@@ -3,6 +3,8 @@ import {
   updateCorpus, deleteCorpus, deleteItem, addItem,
 } from "../../utils/learningCorpusApi";
 import { useClassificationCatalog } from "./useClassificationCatalog";
+import MultiSelectField from "./MultiSelectField";
+import MarkdownEditField from "../editor/MarkdownEditField";
 
 export const AREAS = [
   { key: "reading", label: "독서(비문학)" },
@@ -33,21 +35,44 @@ export default function CorpusDetail({ detail, onChanged, onDeleted, onToast }) 
   const c = detail.corpus;
   const items = detail.items || [];
   const [editMode, setEditMode] = useState(false);
-  const [draft, setDraft] = useState({ ...c });
+  // primary 단일 + meta 의 배열로 복수 분류 지원
+  const initDraft = (corpus) => ({
+    ...corpus,
+    areas: corpus.meta?.areas?.length ? corpus.meta.areas : [corpus.area || "literature"],
+    subAreas: corpus.meta?.subAreas?.length ? corpus.meta.subAreas : (corpus.subArea ? [corpus.subArea] : []),
+    topics: corpus.meta?.topics?.length ? corpus.meta.topics : (corpus.topic ? [corpus.topic] : []),
+  });
+  const [draft, setDraft] = useState(initDraft(c));
   const [showAddItem, setShowAddItem] = useState(false);
   const catalog = useClassificationCatalog();
-  const subAreas = catalog.subAreasFor(draft.area);
-  const themes = catalog.themesFor(draft.area, draft.subArea);
+  const primaryArea = draft.areas?.[0] || draft.area;
+  const primarySubArea = draft.subAreas?.[0] || draft.subArea;
+  const subAreas = catalog.subAreasFor(primaryArea);
+  const themes = catalog.themesFor(primaryArea, primarySubArea);
 
-  useEffect(() => { setDraft({ ...c }); setEditMode(false); }, [c.id]);
+  useEffect(() => { setDraft(initDraft(c)); setEditMode(false); }, [c.id]);
 
   const save = async () => {
     try {
+      const areasArr = (draft.areas || []).filter(Boolean);
+      const subAreasArr = (draft.subAreas || []).filter(Boolean);
+      const topicsArr = (draft.topics || []).filter(Boolean);
+      const meta = {
+        ...(draft.meta || {}),
+        areas: areasArr,
+        subAreas: subAreasArr,
+        topics: topicsArr,
+      };
       await updateCorpus(c.id, {
-        area: draft.area, subArea: draft.subArea, title: draft.title,
+        area: areasArr[0] || draft.area,
+        subArea: subAreasArr[0] || null,
+        title: draft.title,
         source: draft.source, author: draft.author, era: draft.era,
-        genre: draft.genre, topic: draft.topic, field: draft.field,
+        genre: draft.genre,
+        topic: topicsArr[0] || null,
+        field: draft.field,
         bodyMd: draft.bodyMd, levelMin: draft.levelMin, levelMax: draft.levelMax,
+        meta,
       });
       setEditMode(false);
       onToast?.({ msg: "저장 완료", type: "success" });
@@ -81,28 +106,33 @@ export default function CorpusDetail({ detail, onChanged, onDeleted, onToast }) 
       <div style={{ background: "#f9fafb", padding: 12, marginBottom: 12, border: "1px solid #eee" }}>
         {!editMode ? (
           <div style={{ display: "grid", gridTemplateColumns: "120px 1fr", rowGap: 4, fontSize: 13 }}>
-            <Label>영역</Label><Val>{AREAS.find(a => a.key === c.area)?.label || c.area} {c.subArea && `/ ${c.subArea}`}</Val>
+            <Label>영역</Label>
+            <Val>{(c.meta?.areas?.length ? c.meta.areas : [c.area]).map(k => AREAS.find(a => a.key === k)?.label || k).join(", ")}</Val>
+            <Label>세부영역</Label>
+            <Val>{(c.meta?.subAreas?.length ? c.meta.subAreas : [c.subArea].filter(Boolean)).join(", ") || "-"}</Val>
             <Label>출처</Label><Val>{c.source || "-"}</Val>
             <Label>작가</Label><Val>{c.author || "-"}</Val>
             <Label>시대·장르</Label><Val>{[c.era, c.genre].filter(Boolean).join(" / ") || "-"}</Val>
-            <Label>주제·분야</Label><Val>{[c.topic, c.field].filter(Boolean).join(" / ") || "-"}</Val>
+            <Label>주제</Label>
+            <Val>{(c.meta?.topics?.length ? c.meta.topics : [c.topic].filter(Boolean)).join(", ") || "-"}</Val>
+            <Label>분야</Label><Val>{c.field || "-"}</Val>
             <Label>레벨</Label><Val>{c.levelMin || c.levelMax ? `${c.levelMin ?? ""} ~ ${c.levelMax ?? ""}` : "-"}</Val>
           </div>
         ) : (
           <div style={{ display: "grid", gridTemplateColumns: "120px 1fr", rowGap: 6, fontSize: 13 }}>
             <Label>영역</Label>
-            <select value={draft.area} onChange={e => setDraft(d => ({ ...d, area: e.target.value, subArea: "", topic: "" }))}>
-              {AREAS.map(a => <option key={a.key} value={a.key}>{a.label}</option>)}
-            </select>
+            <MultiSelectField
+              values={draft.areas || []}
+              onChange={(arr) => setDraft(d => ({ ...d, areas: arr, subAreas: [], topics: [] }))}
+              options={AREAS.map(a => ({ code: a.key, labelKo: a.label }))}
+            />
             <Label>세부영역</Label>
-            {subAreas.length > 0 ? (
-              <select value={draft.subArea || ""} onChange={e => setDraft(d => ({ ...d, subArea: e.target.value, topic: "" }))}>
-                <option value="">— 선택 —</option>
-                {subAreas.map(s => <option key={s.code} value={s.labelKo}>{s.labelKo}</option>)}
-              </select>
-            ) : (
-              <input value={draft.subArea || ""} onChange={e => setDraft(d => ({ ...d, subArea: e.target.value }))} placeholder="자유 입력" />
-            )}
+            <MultiSelectField
+              values={draft.subAreas || []}
+              onChange={(arr) => setDraft(d => ({ ...d, subAreas: arr, topics: [] }))}
+              options={subAreas}
+              placeholder="자유 입력"
+            />
             <Label>제목</Label>
             <input value={draft.title || ""} onChange={e => setDraft(d => ({ ...d, title: e.target.value }))} />
             <Label>출처</Label>
@@ -114,14 +144,12 @@ export default function CorpusDetail({ detail, onChanged, onDeleted, onToast }) 
             <Label>장르</Label>
             <input value={draft.genre || ""} onChange={e => setDraft(d => ({ ...d, genre: e.target.value }))} placeholder="시 / 소설 / 수필 등" />
             <Label>주제</Label>
-            {themes.length > 0 ? (
-              <select value={draft.topic || ""} onChange={e => setDraft(d => ({ ...d, topic: e.target.value }))}>
-                <option value="">— 선택 —</option>
-                {themes.map(t => <option key={t.code} value={t.labelKo}>{t.labelKo}</option>)}
-              </select>
-            ) : (
-              <input value={draft.topic || ""} onChange={e => setDraft(d => ({ ...d, topic: e.target.value }))} placeholder={draft.subArea ? "분류 마스터에 등록된 주제 없음 — 자유 입력" : "세부영역을 먼저 선택"} />
-            )}
+            <MultiSelectField
+              values={draft.topics || []}
+              onChange={(arr) => setDraft(d => ({ ...d, topics: arr }))}
+              options={themes}
+              placeholder={primarySubArea ? "분류 마스터에 등록된 주제 없음 — 자유 입력" : "세부영역을 먼저 선택"}
+            />
             <Label>분야</Label>
             <input value={draft.field || ""} onChange={e => setDraft(d => ({ ...d, field: e.target.value }))} placeholder="과학/사회/인문 등 (비문학)" />
           </div>
@@ -134,11 +162,11 @@ export default function CorpusDetail({ detail, onChanged, onDeleted, onToast }) 
           {c.bodyMd || <span style={{ color: "#999" }}>본문 없음</span>}
         </div>
       ) : (
-        <textarea
+        <MarkdownEditField
           value={draft.bodyMd || ""}
-          onChange={e => setDraft(d => ({ ...d, bodyMd: e.target.value }))}
-          rows={12}
-          style={{ width: "100%", padding: 8, fontFamily: "inherit", fontSize: 13 }}
+          onChange={(text) => setDraft(d => ({ ...d, bodyMd: text }))}
+          placeholder="본문 (마크다운). 이미지 업로드 가능"
+          minHeight={240}
         />
       )}
 
@@ -183,11 +211,14 @@ export default function CorpusDetail({ detail, onChanged, onDeleted, onToast }) 
 }
 
 export function ItemAddModal({ corpusId, onClose, onAdded }) {
-  const [draft, setDraft] = useState({ itemType: "checkpoint", textMd: "" });
+  const [draft, setDraft] = useState({ itemType: "checkpoint", textMd: "", customKey: "" });
+  const isOther = draft.itemType === "other";
   const submit = async () => {
     if (!draft.textMd?.trim()) { alert("본문을 입력하세요"); return; }
+    if (isOther && !draft.customKey?.trim()) { alert("기타 종류는 키 값을 입력하세요"); return; }
     try {
-      await addItem(corpusId, draft);
+      const meta = isOther ? { customKey: draft.customKey } : undefined;
+      await addItem(corpusId, { itemType: draft.itemType, textMd: draft.textMd, meta });
       onAdded?.();
     } catch (e) {
       alert("추가 실패: " + e.message);
@@ -202,6 +233,16 @@ export function ItemAddModal({ corpusId, onClose, onAdded }) {
           <select value={draft.itemType} onChange={e => setDraft(d => ({ ...d, itemType: e.target.value }))}>
             {ITEM_TYPES.map(t => <option key={t.key} value={t.key}>{t.label}</option>)}
           </select>
+          {isOther && (
+            <>
+              <Label>키 값 *</Label>
+              <input
+                value={draft.customKey || ""}
+                onChange={e => setDraft(d => ({ ...d, customKey: e.target.value }))}
+                placeholder="예: 인용문 / 핵심어 / 비교 대상 등"
+              />
+            </>
+          )}
           <Label>본문 *</Label>
           <textarea rows={8} value={draft.textMd} onChange={e => setDraft(d => ({ ...d, textMd: e.target.value }))} />
         </div>
