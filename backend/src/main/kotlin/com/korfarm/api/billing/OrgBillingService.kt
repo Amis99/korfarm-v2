@@ -228,6 +228,27 @@ class OrgBillingService(
         )
     }
 
+    /** HQ 한정 — 모든 기관 결제 요약 한 번에. 운영자 AI 가 호출. */
+    @Transactional(readOnly = true)
+    fun summaryForAllOrgs(): List<OrgBillingSummary> {
+        return orgRepository.findAll().map { org ->
+            val pending = billingRepository.findByOrgIdAndStatus(org.id, "pending")
+            val overdue = billingRepository.findByOrgIdAndStatus(org.id, "overdue")
+            val current = billingRepository.findByOrgIdAndYearMonth(org.id, YearMonth.now().toString())
+            OrgBillingSummary(
+                orgId = org.id,
+                orgName = org.name,
+                suspended = org.billingSuspended,
+                pendingCount = pending.size,
+                overdueCount = overdue.size,
+                unpaidTotal = (pending + overdue).sumOf { it.totalFee },
+                currentMonthStatus = current?.status,
+                currentMonthDueAt = current?.dueAt?.toString(),
+                currentMonthTotal = current?.totalFee,
+            )
+        }
+    }
+
     // ─── 본사 — 기본료 감면 ────────────────────────────────────
 
     @Transactional
@@ -263,4 +284,16 @@ data class OrgBillingStatus(
     val overdueCount: Int,
     val nextDueAt: LocalDateTime?,
     val unpaidTotal: Int,
+)
+
+data class OrgBillingSummary(
+    val orgId: String,
+    val orgName: String,
+    val suspended: Boolean,
+    val pendingCount: Int,
+    val overdueCount: Int,
+    val unpaidTotal: Int,
+    val currentMonthStatus: String?,
+    val currentMonthDueAt: String?,
+    val currentMonthTotal: Int?,
 )

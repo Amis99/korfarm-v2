@@ -63,6 +63,13 @@ class OrgBillingController(
 
     // ─── 본사 (HQ_ADMIN) — 기관별 청구·감면 ────────────────────────
 
+    /** 본사 — 모든 기관의 결제 상태 한 번에 조회 (출시 전 운영자 AI 가 호출) */
+    @GetMapping("/all")
+    fun listAllOrgBillings(): ApiResponse<List<OrgBillingSummary>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        return ApiResponse(success = true, data = orgBillingService.summaryForAllOrgs())
+    }
+
     @GetMapping("/orgs/{orgId}")
     fun listOrgBillings(@PathVariable orgId: String): ApiResponse<List<BillingView>> {
         AdminGuard.requireAnyRole("HQ_ADMIN")

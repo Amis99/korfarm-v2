@@ -553,7 +553,7 @@ class OperatorAgentService(
             - 자몽 단가 변경 (PUT/POST /v1/admin/grapefruit-pricing 등)
             - 자몽 충전 (어떤 기관이든) — POST /v1/admin/grapefruit-wallet/charge 등
             - 시즌 생성·시작·종료 — POST /v1/admin/seasons 등
-            - 모든 기관 결제 일괄 조회 — /v1/admin/all-billings 등
+            - 모든 기관 결제 일괄 조회 — /v1/admin/billing/all 등
             - 다른 기관 데이터 조회·변경 (자기 orgId 외 모든 기관)
             - 신고·문의·환불 처리
             - AI 플레이어·시즌 보상 등 본사 운영 작업
@@ -646,7 +646,7 @@ class OperatorAgentService(
             - 학부모-자녀 연결 삭제: `DELETE /v1/admin/parents/links/{linkId}`
 
             **HQ_ADMIN 전용**:
-            - 모든 기관 결제: `GET /v1/admin/all-billings`
+            - 모든 기관 결제: `GET /v1/admin/billing/all`
             - 자몽 단가: `GET /v1/admin/grapefruit/pricing` / `PUT /v1/admin/grapefruit/pricing/{kind}`
             - 시즌: `POST /v1/admin/seasons`
             - 기관 결제 발행: `POST /v1/admin/billing/orgs/{orgId}/issue`
