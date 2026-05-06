@@ -6,6 +6,7 @@ import Pagination from "../components/Pagination";
 import usePagination from "../hooks/usePagination";
 
 const KIND_LABELS = {
+  // 콘텐츠 생성
   passage: "지문 생성",
   question: "문항 생성",
   review: "학생 페르소나 검증",
@@ -13,11 +14,19 @@ const KIND_LABELS = {
   "study-questions": "학습 문항 (일괄)",
   "study-checkpoints": "학습 체크포인트",
   "file-to-markdown": "파일 → 마크다운",
+  // 글쓰기·OCR
   "wisdom-feedback": "글쓰기 AI 첨삭",
   "wisdom-ocr": "글쓰기 OCR",
+  // 커뮤니티 AI
   "podo-chat": "포도 AI 채팅",
   "podo-board": "포도 AI 게시판 댓글",
+  // 프로 채점
   "pro-grading": "프로모드 AI 채점",
+  // 운영자 AI 비서 (2026-05)
+  "agent-call-free": "AI 비서 (무료 한도)",
+  "agent-call-extra": "AI 비서 (자몽 차감)",
+  // 학생 AI 튜터 (2026-05)
+  "tutor-call": "AI 튜터 1회 대화",
 };
 
 // 백엔드 응답이 SNAKE_CASE로 올 수 있어 양쪽 지원

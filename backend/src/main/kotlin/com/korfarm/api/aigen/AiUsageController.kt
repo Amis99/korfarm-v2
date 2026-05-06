@@ -56,12 +56,32 @@ class AiUsageController(
         val whereClause = if (where.isEmpty()) "" else "WHERE " + where.joinToString(" AND ")
 
         val safeLimit = limit.coerceIn(1, 1000)
+        // 3개 테이블 UNION ALL — ai_gen_logs (콘텐츠 생성·첨삭) + agent_usage_log (운영자 AI 비서) + tutor_usage_log (학생 튜터)
+        // 컬럼 정렬: id / user_id / test_id / kind / model / input / output / duration / passed / retry / status / error / created_at
         val sql = """
-            SELECT l.id, l.user_id, l.test_id, l.kind, l.model,
-                   l.input_tokens, l.output_tokens, l.duration_ms,
-                   l.passed, l.retry_count, l.status, l.error_message,
-                   l.created_at
-            FROM ai_gen_logs l
+            SELECT * FROM (
+                SELECT l.id, l.user_id, l.test_id, l.kind, l.model,
+                       l.input_tokens, l.output_tokens, l.duration_ms,
+                       l.passed, l.retry_count, l.status, l.error_message,
+                       l.created_at
+                FROM ai_gen_logs l
+                UNION ALL
+                SELECT a.id, a.user_id, NULL AS test_id,
+                       CASE WHEN a.is_extra = 1 THEN 'agent-call-extra' ELSE 'agent-call-free' END AS kind,
+                       'sonnet' AS model,
+                       a.total_input_tokens, a.total_output_tokens, NULL AS duration_ms,
+                       NULL AS passed, 0 AS retry_count, 'success' AS status, NULL AS error_message,
+                       a.created_at
+                FROM agent_usage_log a
+                UNION ALL
+                SELECT t.id, t.user_id, NULL AS test_id,
+                       'tutor-call' AS kind,
+                       'sonnet' AS model,
+                       t.total_input_tokens, t.total_output_tokens, NULL AS duration_ms,
+                       NULL AS passed, 0 AS retry_count, 'success' AS status, NULL AS error_message,
+                       t.created_at
+                FROM tutor_usage_log t
+            ) l
             $whereClause
             ORDER BY l.created_at DESC
             LIMIT $safeLimit
