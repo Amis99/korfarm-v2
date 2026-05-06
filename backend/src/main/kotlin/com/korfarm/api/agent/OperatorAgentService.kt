@@ -536,6 +536,37 @@ class OperatorAgentService(
             - 함수 결과를 그대로 노출하지 말고 운영자가 한눈에 볼 수 있게 요약.
             - 위험 작업(생성·수정·삭제·일괄 배정) 전에는 반드시 사용자 확인.
 
+            ## 페이지 이동 링크 (반드시 포함)
+            응답에 관련 운영 화면으로 이동하는 마크다운 링크를 적절히 포함하십시오.
+            형식: `[화면 이름](경로)` — 클릭하면 해당 페이지로 자동 이동합니다.
+
+            자주 쓰이는 경로:
+            - 학습 계획표: /admin/study-plans
+            - 학생 관리: /admin/students
+            - 학생 상세: /admin/students/{userId}
+            - 수강반 관리: /admin/classes
+            - 콘텐츠 관리: /admin/content
+            - 콘텐츠 비주얼 에디터: /admin/content/{contentId}
+            - 학습 계획표 셀 상세: /admin/study-plans/{planId}
+            - 테스트 관리: /admin/tests
+            - 테스트 상세·통계: /admin/tests/{testId}/stats
+            - 진단 결과: /admin/diagnostic
+            - 글농장(글쓰기·첨삭): /admin/wisdom
+            - 본사 ─ 기관 관리: /admin/orgs
+            - 본사 ─ 결제 관리: /admin/orgs?tab=payments
+            - 본사 ─ 청구서: /admin/billing
+            - 자몽 단가표: /admin/grapefruit-pricing
+            - 자몽 지갑: /admin/grapefruit-wallet
+            - 본사 ─ 문의 관리: /admin/inquiry
+            - 본사 ─ 보고: /admin/reports
+            - 본사 ─ 시즌·대결: /admin/duel
+            - 본사 ─ 상점: /admin/shop
+            - 기관 설정: /admin/org-settings
+            - 학부모 관리: /admin/parents
+            - 학습 자료 DB: /admin/learning-db
+
+            예시: "학습 계획표는 [여기](/admin/study-plans) 에서 확인하실 수 있습니다."
+
             오늘 날짜: ${LocalDate.now()}
         """.trimIndent()
     }
@@ -572,7 +603,18 @@ class OperatorAgentService(
         val response = httpClient.send(request, HttpResponse.BodyHandlers.ofString())
         if (response.statusCode() !in 200..299) {
             log.error("Claude API 오류 — status={}, body={}", response.statusCode(), response.body())
-            throw ApiException("AI_API_ERROR", "AI 호출 실패: HTTP ${response.statusCode()}", HttpStatus.BAD_GATEWAY)
+            val body = response.body()
+            val friendly = when {
+                body.contains("credit balance is too low", ignoreCase = true) ->
+                    "Anthropic API 크레딧이 부족합니다. 본사 운영팀에 알려 주십시오. (관리자: console.anthropic.com/settings/billing)"
+                response.statusCode() == 429 ->
+                    "AI 요청이 일시적으로 몰려 있습니다. 잠시 후 다시 시도해 주십시오."
+                response.statusCode() in 500..599 ->
+                    "AI 서버가 일시적으로 응답하지 않습니다. 잠시 후 다시 시도해 주십시오."
+                else ->
+                    "AI 호출이 실패했습니다 (HTTP ${response.statusCode()}). 잠시 후 다시 시도해 주십시오."
+            }
+            throw ApiException("AI_API_ERROR", friendly, HttpStatus.BAD_GATEWAY)
         }
         val parsed = objectMapper.readValue(response.body(), Map::class.java)
         @Suppress("UNCHECKED_CAST")

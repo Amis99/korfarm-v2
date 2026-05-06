@@ -220,7 +220,35 @@ function MyTutorPage() {
                 <div className="agent-msg-meta">{m.role === "user" ? "나" : "튜터"}</div>
                 <div className="agent-msg-body">
                   {m.role === "assistant" ? (
-                    <Markdown remarkPlugins={[remarkGfm]}>{m.content || ""}</Markdown>
+                    <Markdown
+                      remarkPlugins={[remarkGfm]}
+                      components={{
+                        a: ({ href, children, ...props }) => {
+                          const isInternal = href && href.startsWith("/");
+                          if (isInternal) {
+                            return (
+                              <a
+                                href={href}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  navigate(href);
+                                }}
+                                {...props}
+                              >
+                                {children}
+                              </a>
+                            );
+                          }
+                          return (
+                            <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+                              {children}
+                            </a>
+                          );
+                        },
+                      }}
+                    >
+                      {m.content || ""}
+                    </Markdown>
                   ) : (
                     (m.content || "").split("\n").map((line, i) => <div key={i}>{line || " "}</div>)
                   )}

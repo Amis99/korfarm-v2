@@ -291,7 +291,36 @@ function AdminPage() {
                   </div>
                   <div className="agent-msg-body">
                     {m.role === "assistant" ? (
-                      <Markdown remarkPlugins={[remarkGfm]}>{m.content || ""}</Markdown>
+                      <Markdown
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                          a: ({ href, children, ...props }) => {
+                            // 내부 경로 (/ 로 시작) → react-router navigate, 외부 → 새 탭
+                            const isInternal = href && href.startsWith("/");
+                            if (isInternal) {
+                              return (
+                                <a
+                                  href={href}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    navigate(href);
+                                  }}
+                                  {...props}
+                                >
+                                  {children}
+                                </a>
+                              );
+                            }
+                            return (
+                              <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+                                {children}
+                              </a>
+                            );
+                          },
+                        }}
+                      >
+                        {m.content || ""}
+                      </Markdown>
                     ) : (
                       (m.content || "").split("\n").map((line, i) => (
                         <div key={i}>{line || " "}</div>

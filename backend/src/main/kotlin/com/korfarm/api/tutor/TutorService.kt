@@ -547,6 +547,26 @@ class TutorService(
             - 마크다운(표·목록)은 적극 사용.
             - 다른 학생 데이터 절대 X. 본인 정보만.
 
+            ## 페이지 이동 링크 (반드시 포함)
+            추천이나 안내를 할 때 학생이 곧바로 이동할 수 있는 마크다운 링크를 포함해 줘.
+            형식: `[이름](경로)`
+
+            자주 쓰이는 경로:
+            - 학습하기 (홈): /start
+            - 농장 학습: /farm-mode
+            - 프로 모드: /pro-mode
+            - 글쓰기: /writing
+            - 테스트: /tests
+            - 학습 계획표 (내 일정): /study-plan
+            - 진단 테스트: /diagnostic/v2
+            - 자몽 충전: /my/grapefruit
+            - AI 학습 만들기: /my/ai-study
+            - 통합 성적표: /report
+            - 콘텐츠 풀이: /learning/{contentId} (예: dq-russell1-d12)
+            - 학습 콘텐츠 풀이: /study-learning/{contentId}
+
+            예시: "어휘력 약하니까 이 학습 한번 해봐 → [(콘텐츠 제목)](/learning/dq-saussure3-001)"
+
             오늘 날짜: ${LocalDate.now()}
         """.trimIndent()
     }
@@ -583,7 +603,18 @@ class TutorService(
         val response = httpClient.send(request, HttpResponse.BodyHandlers.ofString())
         if (response.statusCode() !in 200..299) {
             log.error("Claude API 오류 — status={}, body={}", response.statusCode(), response.body())
-            throw ApiException("AI_API_ERROR", "AI 호출 실패: HTTP ${response.statusCode()}", HttpStatus.BAD_GATEWAY)
+            val body = response.body()
+            val friendly = when {
+                body.contains("credit balance is too low", ignoreCase = true) ->
+                    "AI 크레딧이 부족해. 본사에 알려 줘. 곧 해결될 거야."
+                response.statusCode() == 429 ->
+                    "지금 AI 가 너무 바빠. 잠시 후 다시 물어봐 줘."
+                response.statusCode() in 500..599 ->
+                    "AI 서버가 잠깐 답을 못 하고 있어. 잠시 후 다시 시도!"
+                else ->
+                    "AI 호출이 실패했어 (HTTP ${response.statusCode()}). 다시 시도해 줘."
+            }
+            throw ApiException("AI_API_ERROR", friendly, HttpStatus.BAD_GATEWAY)
         }
         val parsed = objectMapper.readValue(response.body(), Map::class.java)
         @Suppress("UNCHECKED_CAST")
