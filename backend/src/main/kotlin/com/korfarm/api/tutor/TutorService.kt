@@ -47,8 +47,14 @@ class TutorService(
     private val log = LoggerFactory.getLogger(TutorService::class.java)
     private val httpClient = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(20)).build()
     private val requestTimeout: Duration = Duration.ofMinutes(3)
-    private val modelId = "claude-sonnet-4-6"
+    private val modelSonnet = "claude-sonnet-4-6"
+    private val modelHaiku = "claude-haiku-4-5-20251001"
     private val maxToolLoops = 6
+
+    private fun resolveModelId(label: String): String = when (label.lowercase()) {
+        "haiku" -> modelHaiku
+        else -> modelSonnet
+    }
 
     companion object {
         const val PRICING_KIND = "tutor-call"
@@ -231,8 +237,10 @@ class TutorService(
         val loopMessages = historyMessages.toMutableList()
         loopMessages.add(mapOf("role" to "user", "content" to userText))
 
+        // 첫 호출 sonnet 고정. 후속 turn 은 직전 함수들의 preferredModel 기반.
+        var nextModelLabel = "sonnet"
         for (loop in 0 until maxToolLoops) {
-            val response = callClaude(systemPrompt, tools, loopMessages)
+            val response = callClaude(systemPrompt, tools, loopMessages, resolveModelId(nextModelLabel))
             totalInputTokens += response.inputTokens ?: 0
             totalOutputTokens += response.outputTokens ?: 0
             val stopReason = response.stopReason
@@ -282,6 +290,16 @@ class TutorService(
                     )
                 }
                 loopMessages.add(mapOf("role" to "user", "content" to toolResultBlocks))
+
+                // 다음 turn 모델 — 호출된 함수들의 preferredModel 종합
+                val calledFuncs = contentBlocks
+                    .filter { it["type"] == "tool_use" }
+                    .mapNotNull { it["name"] as? String }
+                val needsSonnet = calledFuncs.any { fn ->
+                    toolRegistry.find(fn)?.preferredModel == "sonnet"
+                }
+                nextModelLabel = if (needsSonnet) "sonnet" else "haiku"
+
                 continue
             }
 
@@ -582,6 +600,7 @@ class TutorService(
         systemPrompt: String,
         tools: List<Map<String, Any>>,
         messages: List<Map<String, Any>>,
+        modelId: String = modelSonnet,
     ): ClaudeResponse {
         val requestBody = objectMapper.writeValueAsString(
             mapOf(

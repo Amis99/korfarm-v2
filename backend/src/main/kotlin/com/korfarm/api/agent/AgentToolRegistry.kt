@@ -22,6 +22,15 @@ data class AgentToolDefinition(
     val requireConfirm: Boolean,
     val allowedRoles: Set<String>,
     val category: String,
+    /**
+     * 이 함수 호출 결과를 모델이 정리·요약할 때 사용할 권장 모델.
+     * - "sonnet" : 분석·추천·종합 판단
+     * - "haiku"  : 단순 데이터 조회·작업 실행 (기본값, 1/3 비용)
+     *
+     * 첫 호출(의도파악·함수선택)은 항상 sonnet. tool_use 후속 turn 에서만 다운시프트 적용.
+     * 한 turn 안에 여러 함수가 호출되면 그중 하나라도 sonnet 이 필요하면 sonnet 사용.
+     */
+    val preferredModel: String = "haiku",
 )
 
 @Component
@@ -156,6 +165,7 @@ class AgentToolRegistry {
             requireConfirm = false,
             allowedRoles = setOf("HQ_ADMIN", "ORG_ADMIN"),
             category = "study_plan",
+            preferredModel = "sonnet",
             inputSchema = mapOf(
                 "type" to "object",
                 "properties" to mapOf(
@@ -192,6 +202,7 @@ class AgentToolRegistry {
             requireConfirm = false,
             allowedRoles = setOf("HQ_ADMIN", "ORG_ADMIN"),
             category = "study_plan",
+            preferredModel = "sonnet",
             inputSchema = mapOf(
                 "type" to "object",
                 "properties" to mapOf(
@@ -264,10 +275,11 @@ class AgentToolRegistry {
 
         AgentToolDefinition(
             name = "get_student_detail",
-            description = "특정 학생의 상세 정보(소속·레벨·역량 벡터·최근 학습 이력)를 조회합니다.",
+            description = "특정 학생의 상세 정보(소속·레벨·역량 벡터·최근 학습 이력)를 조회합니다. 역량 분포 분석에 사용.",
             requireConfirm = false,
             allowedRoles = setOf("HQ_ADMIN", "ORG_ADMIN"),
             category = "class_student",
+            preferredModel = "sonnet",
             inputSchema = mapOf(
                 "type" to "object",
                 "properties" to mapOf(
@@ -387,10 +399,11 @@ class AgentToolRegistry {
 
         AgentToolDefinition(
             name = "get_test_statistics",
-            description = "특정 테스트의 통계(응시 인원·평균·역량별 분포)를 조회합니다.",
+            description = "특정 테스트의 통계(응시 인원·평균·역량별 분포)를 조회합니다. 통계 해석·인사이트 도출에 사용.",
             requireConfirm = false,
             allowedRoles = setOf("HQ_ADMIN", "ORG_ADMIN"),
             category = "test",
+            preferredModel = "sonnet",
             inputSchema = mapOf(
                 "type" to "object",
                 "properties" to mapOf("test_id" to mapOf("type" to "string")),

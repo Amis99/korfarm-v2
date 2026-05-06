@@ -57,8 +57,15 @@ class OperatorAgentService(
         .connectTimeout(Duration.ofSeconds(20))
         .build()
     private val requestTimeout: Duration = Duration.ofMinutes(3)
-    private val modelId = "claude-sonnet-4-6"
+    private val modelSonnet = "claude-sonnet-4-6"
+    private val modelHaiku = "claude-haiku-4-5-20251001"
     private val maxToolLoops = 6  // 안전장치 — 무한 루프 방지
+
+    /** "sonnet" / "haiku" → 실제 모델 ID */
+    private fun resolveModelId(label: String): String = when (label.lowercase()) {
+        "haiku" -> modelHaiku
+        else -> modelSonnet
+    }
 
     companion object {
         const val DAILY_FREE_LIMIT = 100
@@ -303,8 +310,11 @@ class OperatorAgentService(
         val loopMessages = historyMessages.toMutableList()
         loopMessages.add(mapOf("role" to "user", "content" to userText))
 
+        // 첫 호출은 항상 sonnet (의도파악·함수선택 정확도 우선)
+        // 후속 turn 부터는 직전 turn 에서 호출된 함수들의 preferredModel 로 다운시프트
+        var nextModelLabel = "sonnet"
         for (loop in 0 until maxToolLoops) {
-            val response = callClaude(systemPrompt, tools, loopMessages)
+            val response = callClaude(systemPrompt, tools, loopMessages, resolveModelId(nextModelLabel))
             totalInputTokens += response.inputTokens ?: 0
             totalOutputTokens += response.outputTokens ?: 0
 
@@ -375,6 +385,16 @@ class OperatorAgentService(
                     )
                 }
                 loopMessages.add(mapOf("role" to "user", "content" to toolResultBlocks))
+
+                // 다음 turn 모델 결정 — 이번 turn 에서 호출된 함수들 중 sonnet 필요 함수가 있으면 sonnet, 모두 haiku 면 haiku
+                val calledFuncs = contentBlocks
+                    .filter { it["type"] == "tool_use" }
+                    .mapNotNull { it["name"] as? String }
+                val needsSonnet = calledFuncs.any { fn ->
+                    toolRegistry.find(fn)?.preferredModel == "sonnet"
+                }
+                nextModelLabel = if (needsSonnet) "sonnet" else "haiku"
+
                 continue
             }
 
@@ -582,6 +602,7 @@ class OperatorAgentService(
         systemPrompt: String,
         tools: List<Map<String, Any>>,
         messages: List<Map<String, Any>>,
+        modelId: String = modelSonnet,
     ): ClaudeResponse {
         val requestBody = objectMapper.writeValueAsString(
             mapOf(
