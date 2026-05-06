@@ -570,6 +570,136 @@ class AdminContentService(
         )
     }
 
+    /**
+     * 농장·프로·논리 콘텐츠 default competency 매핑 backfill.
+     *
+     * 정책 (사용자 결정 기반 type/area 1:1):
+     *  - 일일독해 비문학 → 비문학 배경지식 0.5 + 구조 독해력 0.5
+     *  - 일일독해 문학  → 국어 관련 배경지식 0.5 + 문장 독해력 0.5
+     *  - 프로 어휘     → 어휘력 1.0
+     *  - 프로 문법     → 어법·문법 능력 1.0
+     *  - 프로 독해 비문학 → 비문학 배경지식 0.4 + 구조 독해력 0.4 + 문제 분석 및 전략 수립 능력 0.2
+     *  - 프로 독해 문학  → 국어 관련 배경지식 0.4 + 문장 독해력 0.4 + 문제 분석 및 전략 수립 능력 0.2
+     *  - 논리 (LOGIC_REASONING_QUIZ / PRO_LOGIC) → 논리 사고력 1.0
+     *
+     * 보호: 이미 questions[].competencyVector 또는 competency 가 있는 문항은 skip.
+     */
+    @Transactional
+    fun backfillDefaultCompetencyVector(userId: String): Map<String, Any?> {
+        val all = contentRepository.findByStatus("active")
+        var processed = 0
+        var modified = 0
+        var addedFields = 0
+        var skippedExisting = 0
+        var skippedKind = 0
+        val errors = mutableListOf<Map<String, String>>()
+
+        for (content in all) {
+            processed++
+            try {
+                val ct = content.contentType.uppercase()
+                // 학습 콘텐츠 아닌 것은 skip
+                if (ct.contains("TEST") || ct.contains("ANSWER_EXPLANATION") || ct.contains("MANUSCRIPT")) {
+                    skippedKind++; continue
+                }
+                // 일일퀴즈는 별도 backfill (Q1~9 매핑) 이 이미 있으므로 skip
+                if (ct.contains("DAILY_QUIZ")) { skippedKind++; continue }
+
+                val area = (content.area ?: "").lowercase()
+                val defaultVector = resolveDefaultVector(ct, area) ?: run {
+                    skippedKind++; return@run null
+                } ?: continue
+
+                val latest = contentVersionRepository.findTopByContentIdOrderByCreatedAtDesc(content.id) ?: continue
+                @Suppress("UNCHECKED_CAST")
+                val root = (objectMapper.readValue(latest.contentJson, Map::class.java) as Map<String, Any?>).toMutableMap()
+                @Suppress("UNCHECKED_CAST")
+                val payload = (root["payload"] as? Map<String, Any?>)?.toMutableMap() ?: continue
+                @Suppress("UNCHECKED_CAST")
+                val questions = (payload["questions"] as? List<Map<String, Any?>>)?.toMutableList() ?: continue
+                if (questions.isEmpty()) continue
+
+                var changed = false
+                for (i in questions.indices) {
+                    val q = questions[i].toMutableMap()
+                    val hasVector = q["competencyVector"] != null
+                    val hasSingle = (q["competency"] as? String)?.isNotBlank() == true
+                    if (hasVector || hasSingle) {
+                        skippedExisting++; continue
+                    }
+                    q["competencyVector"] = defaultVector
+                    questions[i] = q
+                    changed = true
+                    addedFields++
+                }
+                if (!changed) continue
+
+                payload["questions"] = questions
+                root["payload"] = payload
+                latest.contentJson = objectMapper.writeValueAsString(root)
+                latest.uploadedBy = userId
+                latest.approvedBy = userId
+                latest.approvedAt = LocalDateTime.now()
+                contentVersionRepository.save(latest)
+                contentEditLogRepository.save(
+                    ContentEditLogEntity(
+                        id = IdGenerator.newId("cel"),
+                        contentId = content.id,
+                        editorId = userId,
+                        action = "BACKFILL_DEFAULT_COMPETENCY_VECTOR",
+                    )
+                )
+                modified++
+            } catch (e: Exception) {
+                errors.add(mapOf("contentId" to content.id, "error" to (e.message ?: "unknown")))
+            }
+        }
+
+        return mapOf(
+            "processed" to processed,
+            "modified" to modified,
+            "addedFields" to addedFields,
+            "skippedExisting" to skippedExisting,
+            "skippedKind" to skippedKind,
+            "errors" to errors,
+        )
+    }
+
+    private fun resolveDefaultVector(ct: String, area: String): Map<String, Double>? {
+        return when {
+            ct.contains("LOGIC") -> mapOf("논리 사고력" to 1.0)
+            ct.contains("PRO_VOCAB") -> mapOf("어휘력" to 1.0)
+            ct.contains("PRO_GRAMMAR") -> mapOf("어법·문법 능력" to 1.0)
+            ct.contains("PRO_READING") -> {
+                if (area.contains("fiction") && !area.contains("non")) {
+                    mapOf("국어 관련 배경지식" to 0.4, "문장 독해력" to 0.4, "문제 분석 및 전략 수립 능력" to 0.2)
+                } else {
+                    mapOf("비문학 배경지식" to 0.4, "구조 독해력" to 0.4, "문제 분석 및 전략 수립 능력" to 0.2)
+                }
+            }
+            ct.contains("DAILY_READING") || ct.contains("FARM") -> {
+                if (area.contains("fiction") && !area.contains("non")) {
+                    mapOf("국어 관련 배경지식" to 0.5, "문장 독해력" to 0.5)
+                } else {
+                    mapOf("비문학 배경지식" to 0.5, "구조 독해력" to 0.5)
+                }
+            }
+            ct.contains("STUDY_CONTENT") || ct.contains("STUDY") -> {
+                // 내용 숙지 학습 — 영역 정보로 추정
+                if (area.contains("fiction")) {
+                    mapOf("국어 관련 배경지식" to 0.5, "문장 독해력" to 0.5)
+                } else if (area.contains("grammar")) {
+                    mapOf("어법·문법 능력" to 1.0)
+                } else if (area.contains("vocab")) {
+                    mapOf("어휘력" to 1.0)
+                } else {
+                    mapOf("비문학 배경지식" to 0.4, "구조 독해력" to 0.4, "국어 개념 적용 능력" to 0.2)
+                }
+            }
+            else -> null
+        }
+    }
+
     @Transactional(readOnly = true)
     fun previewContent(contentId: String): ContentPreview {
         val content = contentRepository.findById(contentId).orElseThrow {

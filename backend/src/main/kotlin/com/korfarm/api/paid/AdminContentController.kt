@@ -140,6 +140,20 @@ class AdminContentController(
     }
 
     /**
+     * 농장·프로·논리·내용숙지 콘텐츠에 default competency vector 일괄 backfill (HQ 전용).
+     * 매핑 정책은 AdminContentService.backfillDefaultCompetencyVector 참조.
+     * 일일퀴즈는 Q1~9 backfill 이 별도라 skip.
+     * 이미 vector 있는 문항은 보호.
+     */
+    @PostMapping("/content/default-competency-backfill")
+    fun defaultCompetencyVectorBackfill(): ApiResponse<Map<String, Any?>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        val userId = SecurityUtils.currentUserId() ?: "system"
+        val result = adminContentService.backfillDefaultCompetencyVector(userId)
+        return ApiResponse(success = true, data = result)
+    }
+
+    /**
      * 일일퀴즈 1번 문제(어휘) 의 본문 텍스트 키들을 단일 "보기" 키로 통합.
      * 학생 화면이 passage / prompt / 보기 / examples 등 여러 키를 박스로 렌더하던 것을
      * 한 박스("보기")로 단순화하기 위한 1회성 마이그레이션.

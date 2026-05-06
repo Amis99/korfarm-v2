@@ -2,16 +2,14 @@ package com.korfarm.api.chat
 
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.files.FileRepository
+import com.korfarm.api.files.FileService
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import java.io.BufferedOutputStream
 import java.io.FileOutputStream
 import java.nio.file.Files
-import java.nio.file.Path
-import java.nio.file.Paths
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -21,34 +19,28 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
 /**
- * 채팅 첨부 파일 라이프사이클 스케줄러.
+ * 채팅 첨부 파일 라이프사이클 스케줄러 (S3 마이그레이션 후).
  *
- *   D+0~6일: live (정상 표시)
- *   D+7일:   archived (썸네일만 노출 + 주차 ZIP 생성, 원본 삭제)
- *   D+37일:  purged (ZIP 삭제, 디스크 회수)
+ *   D+0~6일: live  (S3 에 원본, 정상 표시)
+ *   D+7일:    archived (썸네일 fileId 만 노출 + 주차 ZIP 을 S3 에 saveBinary, 원본 삭제)
+ *   D+37일:   purged (ZIP 도 S3 에서 삭제, 디스크 회수)
+ *
+ * archive.zipPath 컬럼 — 의미 변경: file path 가 아니라 fileId (S3 key) 저장.
+ * msg.thumbnailPath 컬럼 — 동일하게 fileId 저장.
  */
 @Component
 class ChatAttachmentLifecycleScheduler(
     private val messageRepo: ChatMessageRepository,
     private val archiveRepo: ChatAttachmentArchiveRepository,
     private val fileRepo: FileRepository,
+    private val fileService: FileService,
     private val thumbnailService: ChatThumbnailService,
-    @Value("\${app.upload.dir:./uploads}") private val uploadDir: String
 ) {
     private val log = LoggerFactory.getLogger(ChatAttachmentLifecycleScheduler::class.java)
 
-    private fun uploadPath(): Path = Paths.get(uploadDir).also {
-        if (!Files.exists(it)) Files.createDirectories(it)
-    }
-
-    private fun archiveDir(): Path {
-        val p = uploadPath().resolve("chat-archives")
-        if (!Files.exists(p)) Files.createDirectories(p)
-        return p
-    }
-
     /**
-     * 매일 00:30 KST: 7일 이상 지난 live 첨부 메시지를 주차별로 묶어 ZIP으로 보관.
+     * 매일 00:30 KST: 7일 이상 지난 live 첨부 메시지를 주차별로 묶어 ZIP 으로 보관.
+     * S3 putObject 로 saveBinary, 임시 로컬 파일은 ZIP 만들 때만 사용 후 삭제.
      */
     @Scheduled(cron = "0 30 0 * * *", zone = "Asia/Seoul")
     @Transactional
@@ -62,7 +54,7 @@ class ChatAttachmentLifecycleScheduler(
         }
         log.info("[ChatLifecycle] archive candidates: {}", targets.size)
 
-        // (roomId, periodStart) 단위로 그룹핑
+        // (roomId, periodStart) 단위 그룹핑
         val groups = targets.groupBy { msg ->
             val date = msg.createdAt.toLocalDate()
             val monday = date.with(DayOfWeek.MONDAY)
@@ -72,79 +64,94 @@ class ChatAttachmentLifecycleScheduler(
         for ((key, msgs) in groups) {
             val (roomId, periodStart) = key
             val periodEnd = periodStart.plusDays(6)
-            val zipFilename = makeZipFilename(roomId, periodStart)
-            val zipPath = archiveDir().resolve(zipFilename)
 
             try {
-                // 기존 archive가 있으면 추가 모드(레이지: 기존 zip 풀고 다시 압축) — 단순화: 기존이 있으면 메시지에 대해서만 처리하고 zip은 새로 만듦
                 val existingArchive = archiveRepo.findByRoomIdAndPeriodStart(roomId, periodStart)
-                val collected = mutableListOf<Triple<String, String, Path>>() // (entryName, fileId, srcPath)
+
+                // 1) 썸네일 생성 + 첨부 byte[] 수집
+                data class CollectedAttachment(val entryName: String, val fileId: String, val bytes: ByteArray)
+                val collected = mutableListOf<CollectedAttachment>()
+
                 for (msg in msgs) {
                     val fileId = msg.fileId ?: continue
-                    val src = uploadPath().resolve(fileId)
-                    if (Files.exists(src)) {
-                        val origName = fileRepo.findById(fileId).orElse(null)
-                        val ext = guessExt(origName?.mime)
-                        val entryName = "${msg.id}_${msg.userName}_${msg.messageType}$ext"
-                        collected.add(Triple(entryName, fileId, src))
-                    }
-                    // 썸네일 생성 (이미지만)
-                    val mime = fileRepo.findById(fileId).orElse(null)?.mime
-                    if (mime != null && Files.exists(src)) {
-                        val thumb = thumbnailService.createImageThumbnail(msg.id, src, mime)
-                        if (thumb != null) msg.thumbnailPath = thumb
-                    }
-                }
+                    val origMeta = fileRepo.findById(fileId).orElse(null)
+                    val mime = origMeta?.mime
+                    val bytes = fileService.readBytes(fileId) ?: continue
 
-                if (collected.isNotEmpty()) {
-                    // ZIP 생성 (기존 파일이 있으면 덮어씀)
-                    Files.deleteIfExists(zipPath)
-                    ZipOutputStream(BufferedOutputStream(FileOutputStream(zipPath.toFile()))).use { zos ->
-                        for ((entryName, _, src) in collected) {
-                            val entry = ZipEntry(entryName)
-                            zos.putNextEntry(entry)
-                            Files.copy(src, zos)
-                            zos.closeEntry()
+                    // 썸네일 생성 → S3 saveBinary, fileId 저장
+                    if (mime != null && mime.startsWith("image/")) {
+                        val thumb = thumbnailService.createImageThumbnailFromBytes(bytes, mime)
+                        if (thumb != null) {
+                            val (thumbBytes, thumbMime) = thumb
+                            val thumbExt = if (thumbMime == "image/png") "png" else "jpg"
+                            val thumbFileId = fileService.saveBinary(
+                                ownerUserId = msg.userId,
+                                purpose = "chat-thumb",
+                                filename = "${msg.id}.$thumbExt",
+                                mime = thumbMime,
+                                data = thumbBytes,
+                            )
+                            msg.thumbnailPath = thumbFileId  // 의미 변경: 파일경로 → fileId
                         }
                     }
-                    val zipSize = Files.size(zipPath)
 
-                    // archive row upsert
-                    if (existingArchive == null) {
-                        archiveRepo.save(
-                            ChatAttachmentArchiveEntity(
-                                id = IdGenerator.newId("carc"),
-                                roomId = roomId,
-                                periodStart = periodStart,
-                                periodEnd = periodEnd,
-                                zipPath = zipPath.toString(),
-                                zipSize = zipSize,
-                                fileCount = collected.size,
-                                expiresAt = LocalDateTime.now().plusDays(30),
-                                status = "available"
-                            )
+                    val ext = guessExt(mime)
+                    val entryName = "${msg.id}_${msg.userName}_${msg.messageType}$ext"
+                    collected.add(CollectedAttachment(entryName, fileId, bytes))
+                }
+
+                // 2) ZIP 임시 로컬에 만들고 S3 saveBinary 후 임시 삭제
+                if (collected.isNotEmpty()) {
+                    val tmpZip = Files.createTempFile("korfarm-chat-archive-", ".zip")
+                    try {
+                        ZipOutputStream(BufferedOutputStream(FileOutputStream(tmpZip.toFile()))).use { zos ->
+                            for (a in collected) {
+                                zos.putNextEntry(ZipEntry(a.entryName))
+                                zos.write(a.bytes)
+                                zos.closeEntry()
+                            }
+                        }
+                        val zipBytes = Files.readAllBytes(tmpZip)
+                        val zipFilename = makeZipFilename(roomId, periodStart)
+                        val zipFileId = fileService.saveBinary(
+                            ownerUserId = "system",
+                            purpose = "chat-archive",
+                            filename = zipFilename,
+                            mime = "application/zip",
+                            data = zipBytes,
                         )
-                    } else {
-                        existingArchive.zipPath = zipPath.toString()
-                        existingArchive.zipSize = zipSize
-                        existingArchive.fileCount = (existingArchive.fileCount + collected.size)
-                        existingArchive.status = "available"
-                        archiveRepo.save(existingArchive)
+
+                        if (existingArchive == null) {
+                            archiveRepo.save(
+                                ChatAttachmentArchiveEntity(
+                                    id = IdGenerator.newId("carc"),
+                                    roomId = roomId,
+                                    periodStart = periodStart,
+                                    periodEnd = periodEnd,
+                                    zipPath = zipFileId,  // 의미: fileId
+                                    zipSize = zipBytes.size.toLong(),
+                                    fileCount = collected.size,
+                                    expiresAt = LocalDateTime.now().plusDays(30),
+                                    status = "available"
+                                )
+                            )
+                        } else {
+                            existingArchive.zipPath = zipFileId
+                            existingArchive.zipSize = zipBytes.size.toLong()
+                            existingArchive.fileCount = (existingArchive.fileCount + collected.size)
+                            existingArchive.status = "available"
+                            archiveRepo.save(existingArchive)
+                        }
+                    } finally {
+                        try { Files.deleteIfExists(tmpZip) } catch (_: Exception) { /* ignore */ }
                     }
                 }
 
-                // 메시지 상태 갱신 + 원본 파일 삭제
+                // 3) 원본 파일 메타 status archived (S3 객체는 별도 cleanup job 에서 정리)
                 val now = LocalDateTime.now()
                 for (msg in msgs) {
                     val fileId = msg.fileId
                     if (fileId != null) {
-                        val src = uploadPath().resolve(fileId)
-                        try {
-                            Files.deleteIfExists(src)
-                        } catch (e: Exception) {
-                            log.warn("[ChatLifecycle] failed to delete $src", e)
-                        }
-                        // 파일 메타도 status 변경 (원본 fileId는 보존, 다운로드 차단은 ChatService에서 처리)
                         fileRepo.findById(fileId).ifPresent {
                             it.status = "archived"
                             fileRepo.save(it)
@@ -162,7 +169,7 @@ class ChatAttachmentLifecycleScheduler(
     }
 
     /**
-     * 매일 01:00 KST: 만료된 archive를 purge.
+     * 매일 01:00 KST: 만료된 archive 를 purge — archive.zipPath 가 fileId 면 status 만 변경.
      */
     @Scheduled(cron = "0 0 1 * * *", zone = "Asia/Seoul")
     @Transactional
@@ -173,8 +180,7 @@ class ChatAttachmentLifecycleScheduler(
         log.info("[ChatLifecycle] purge candidates: {}", expired.size)
         for (a in expired) {
             try {
-                val p = Paths.get(a.zipPath)
-                Files.deleteIfExists(p)
+                // S3 객체 삭제는 별도 cleanup job. 여기선 status 만 변경.
                 a.status = "purged"
                 archiveRepo.save(a)
             } catch (e: Exception) {
