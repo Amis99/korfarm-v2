@@ -4,10 +4,10 @@ import { useRequireRole } from "../hooks/useRequireRole";
 import Toast from "../components/learning-db/Toast";
 import LDBTreePanel from "../components/learning-db/LDBTreePanel";
 import CorpusDetail, { AREAS, ITEM_TYPES, modalBackdrop, modalBox, Label, unwrap } from "../components/learning-db/CorpusDetail";
-import PendingDetail from "../components/learning-db/PendingDetail";
+import PendingGroupDetail from "../components/learning-db/PendingGroupDetail";
 import {
   searchCorpus, fetchCorpus, createCorpus,
-  fetchPending, fetchPendingStats,
+  fetchPendingGrouped, fetchPendingStats,
   classifyAll, importLegacy,
 } from "../utils/learningCorpusApi";
 import "../styles/learning-db.css";
@@ -21,10 +21,10 @@ import "../styles/learning-db.css";
 function AdminLearningDBPage() {
   useRequireRole("HQ_ADMIN");
   const [corpusList, setCorpusList] = useState([]);
-  const [pendingList, setPendingList] = useState([]);
+  const [pendingGroups, setPendingGroups] = useState([]);
   const [pendingStats, setPendingStats] = useState(null);
   const [loadingTree, setLoadingTree] = useState(false);
-  const [selected, setSelected] = useState(null); // { kind: "corpus"|"pending", path, label, data }
+  const [selected, setSelected] = useState(null); // { kind: "corpus"|"pending-group", path, label, data }
   const [loadingDetail, setLoadingDetail] = useState(false);
   const [toast, setToast] = useState(null);
   const [showCreateCorpus, setShowCreateCorpus] = useState(false);
@@ -35,11 +35,11 @@ function AdminLearningDBPage() {
     try {
       const [r1, r2, r3] = await Promise.all([
         searchCorpus({ size: 500 }),
-        fetchPending("pending"),
+        fetchPendingGrouped("pending"),
         fetchPendingStats(),
       ]);
       setCorpusList(unwrap(r1) || []);
-      setPendingList(unwrap(r2) || []);
+      setPendingGroups(unwrap(r2) || []);
       setPendingStats(unwrap(r3));
     } catch (e) {
       setToast({ msg: "트리 로드 실패: " + e.message, type: "error" });
@@ -80,17 +80,17 @@ function AdminLearningDBPage() {
       };
     });
 
-    // 임시 체크리스트 폴더 — 파일처럼 노출
+    // 임시 체크리스트 폴더 — 그룹(제목 단위)이 파일처럼 노출, 한 그룹 안에 여러 체크리스트
     const pendingNode = {
       type: "subArea",
       key: "__pending__",
       label: `임시 체크리스트${pendingStats?.pending ? ` (대기 ${pendingStats.pending})` : ""}`,
       path: "pending",
-      children: pendingList.map(p => ({
+      children: pendingGroups.map(g => ({
         type: "file",
-        key: p.id,
-        label: p.textMd.slice(0, 60).replace(/\n/g, " ") + (p.textMd.length > 60 ? "…" : ""),
-        path: `pending/${p.id}`,
+        key: g.sourceContentId,
+        label: `${g.title} (${g.count})`,
+        path: `pending-group/${g.sourceContentId}`,
       })),
     };
 
@@ -101,9 +101,9 @@ function AdminLearningDBPage() {
       path: "",
       children: [...areaNodes, pendingNode],
     };
-  }, [corpusList, pendingList, pendingStats]);
+  }, [corpusList, pendingGroups, pendingStats]);
 
-  // 항목 선택 ── path 형식: corpus/{id} 또는 pending/{id}
+  // 항목 선택 ── path 형식: corpus/{id} 또는 pending-group/{sourceContentId}
   const selectFile = async (path, label) => {
     setSelected({ path, label, data: null });
     setLoadingDetail(true);
@@ -112,10 +112,10 @@ function AdminLearningDBPage() {
         const id = path.replace("corpus/", "");
         const r = await fetchCorpus(id);
         setSelected({ kind: "corpus", path, label, data: unwrap(r) });
-      } else if (path.startsWith("pending/")) {
-        const id = path.replace("pending/", "");
-        const found = pendingList.find(p => p.id === id);
-        setSelected({ kind: "pending", path, label, data: found || null });
+      } else if (path.startsWith("pending-group/")) {
+        const sourceContentId = path.replace("pending-group/", "");
+        const found = pendingGroups.find(g => g.sourceContentId === sourceContentId);
+        setSelected({ kind: "pending-group", path, label, data: found || null });
       }
     } catch (e) {
       setToast({ msg: "상세 로드 실패: " + e.message, type: "error" });
@@ -130,8 +130,9 @@ function AdminLearningDBPage() {
   };
 
   const handleClassifyAll = async () => {
-    if (pendingList.length === 0) { setToast({ msg: "분류할 대기 항목이 없습니다", type: "info" }); return; }
-    if (!window.confirm(`pending ${pendingList.length}건을 일괄 AI 분류합니다. 계속할까요?`)) return;
+    const totalPending = pendingGroups.reduce((sum, g) => sum + g.count, 0);
+    if (totalPending === 0) { setToast({ msg: "분류할 대기 항목이 없습니다", type: "info" }); return; }
+    if (!window.confirm(`pending ${totalPending}건을 일괄 AI 분류합니다. 계속할까요?`)) return;
     setBusy(true);
     try {
       const r = await classifyAll();
@@ -216,9 +217,9 @@ function AdminLearningDBPage() {
                 onToast={setToast}
               />
             )}
-            {selected && !loadingDetail && selected.kind === "pending" && selected.data && (
-              <PendingDetail
-                pending={selected.data}
+            {selected && !loadingDetail && selected.kind === "pending-group" && selected.data && (
+              <PendingGroupDetail
+                group={selected.data}
                 onChanged={() => { setSelected(null); reloadTree(); }}
                 onToast={setToast}
               />

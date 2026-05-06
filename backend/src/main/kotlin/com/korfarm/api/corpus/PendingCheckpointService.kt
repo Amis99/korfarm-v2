@@ -253,6 +253,65 @@ class PendingCheckpointService(
     fun listByStatus(status: String): List<PendingCheckpointView> =
         pendingRepo.findByStatusOrderByCreatedAtDesc(status).map { it.toView() }
 
+    /**
+     * sourceContentId 별 그룹으로 묶어 반환 — 임시 체크리스트 폴더의 "제목" 단위 파일.
+     * 각 그룹에 study_content title + 체크리스트 리스트 포함.
+     */
+    @Transactional(readOnly = true)
+    fun listGroupedByStatus(status: String): List<PendingGroupView> {
+        val all = pendingRepo.findByStatusOrderByCreatedAtDesc(status)
+        val byContent = all.groupBy { it.sourceContentId }
+        return byContent.map { (contentId, items) ->
+            val sc = studyContentRepo.findById(contentId).orElse(null)
+            PendingGroupView(
+                sourceContentId = contentId,
+                title = sc?.title ?: contentId,
+                area = sc?.area,
+                subArea = sc?.subArea,
+                creatorId = sc?.creatorId,
+                ownerOrgId = sc?.ownerOrgId,
+                count = items.size,
+                items = items.map { it.toView() },
+            )
+        }.sortedByDescending { it.items.firstOrNull()?.createdAt }
+    }
+
+    /**
+     * 한 sourceContentId 의 모든 pending 항목을 한 corpus 로 일괄 승인 (머지).
+     * 각 pending 마다 item_type 은 동일하게 적용. 다른 종류로 섞어 승인하려면 개별 approve() 사용.
+     */
+    @Transactional
+    fun bulkApproveByContent(
+        sourceContentId: String,
+        corpusId: String,
+        itemType: String,
+        approvedBy: String,
+    ): BulkApproveResult {
+        // corpus 존재 확인
+        corpusRepo.findById(corpusId).orElseThrow {
+            ApiException("NOT_FOUND", "작품·지문 없음: $corpusId", HttpStatus.NOT_FOUND)
+        }
+        val pendings = pendingRepo.findBySourceContentId(sourceContentId)
+            .filter { it.status == "pending" || it.status == "classified" }
+        var approved = 0
+        var errors = 0
+        for (p in pendings) {
+            try {
+                approve(p.id, corpusId, itemType, approvedBy)
+                approved++
+            } catch (e: Exception) {
+                log.warn("bulk approve 실패 — pendingId={}: {}", p.id, e.message)
+                errors++
+            }
+        }
+        return BulkApproveResult(
+            sourceContentId = sourceContentId,
+            corpusId = corpusId,
+            approved = approved,
+            errors = errors,
+        )
+    }
+
     @Transactional(readOnly = true)
     fun listByOrg(orgId: String, status: String = "pending"): List<PendingCheckpointView> =
         pendingRepo.findBySourceOrgIdAndStatusOrderByCreatedAtDesc(orgId, status).map { it.toView() }
@@ -385,6 +444,24 @@ data class BulkExtractResult(
     val contentScanned: Int,
     val inserted: Int,
     val skipped: Int,
+    val errors: Int,
+)
+
+data class PendingGroupView(
+    val sourceContentId: String,
+    val title: String,
+    val area: String?,
+    val subArea: String?,
+    val creatorId: String?,
+    val ownerOrgId: String?,
+    val count: Int,
+    val items: List<PendingCheckpointView>,
+)
+
+data class BulkApproveResult(
+    val sourceContentId: String,
+    val corpusId: String,
+    val approved: Int,
     val errors: Int,
 )
 

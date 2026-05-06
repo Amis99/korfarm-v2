@@ -123,6 +123,13 @@ class AdminLearningCorpusController(
         return ApiResponse(success = true, data = pendingService.listByStatus(status))
     }
 
+    /** 임시 체크리스트 풀 — sourceContentId 별 그룹(제목 단위 파일) 으로 묶어 반환 */
+    @GetMapping("/pending/grouped")
+    fun listPendingGrouped(@RequestParam(defaultValue = "pending") status: String): ApiResponse<List<PendingGroupView>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        return ApiResponse(success = true, data = pendingService.listGroupedByStatus(status))
+    }
+
     @GetMapping("/pending/stats")
     fun pendingStats(): ApiResponse<PendingStatsView> {
         AdminGuard.requireAnyRole("HQ_ADMIN")
@@ -179,6 +186,15 @@ class AdminLearningCorpusController(
             data = pendingService.approve(pendingId, req.corpusId, req.itemType, approvedBy))
     }
 
+    /** 한 sourceContentId 의 모든 pending 항목을 한 corpus 로 일괄 승인(머지). 그룹 단위 액션. */
+    @PostMapping("/pending/bulk-approve")
+    fun bulkApprove(@RequestBody req: BulkApproveRequest): ApiResponse<BulkApproveResult> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        val approvedBy = SecurityUtils.currentUserId() ?: "system"
+        return ApiResponse(success = true,
+            data = pendingService.bulkApproveByContent(req.sourceContentId, req.corpusId, req.itemType, approvedBy))
+    }
+
     @PostMapping("/pending/{pendingId}/reject")
     fun reject(@PathVariable pendingId: String): ApiResponse<PendingCheckpointView> {
         AdminGuard.requireAnyRole("HQ_ADMIN")
@@ -189,6 +205,12 @@ class AdminLearningCorpusController(
 }
 
 data class PendingApproveRequest(
+    val corpusId: String,
+    val itemType: String,
+)
+
+data class BulkApproveRequest(
+    val sourceContentId: String,
     val corpusId: String,
     val itemType: String,
 )

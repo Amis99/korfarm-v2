@@ -35,7 +35,15 @@ export const deleteItem = (itemId) => apiDelete(`${BASE}/items/${itemId}`);
 export const fetchPending = (status = "pending") =>
   apiGet(`${BASE}/pending?status=${encodeURIComponent(status)}`);
 
+/** sourceContentId 단위 그룹(파일처럼)으로 묶인 pending 목록 */
+export const fetchPendingGrouped = (status = "pending") =>
+  apiGet(`${BASE}/pending/grouped?status=${encodeURIComponent(status)}`);
+
 export const fetchPendingStats = () => apiGet(`${BASE}/pending/stats`);
+
+/** 한 sourceContentId 의 모든 pending 항목을 한 corpus 로 일괄 승인(머지) */
+export const bulkApproveByContent = (sourceContentId, corpusId, itemType) =>
+  apiPost(`${BASE}/pending/bulk-approve`, { sourceContentId, corpusId, itemType });
 
 export const extractPending = (sourceContentId, sourceUserId, sourceOrgId) => {
   const q = [
