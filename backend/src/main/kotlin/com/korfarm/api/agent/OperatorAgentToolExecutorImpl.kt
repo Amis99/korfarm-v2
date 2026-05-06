@@ -282,10 +282,39 @@ class OperatorAgentToolExecutorImpl(
         role: String,
         orgId: String?,
     ): AgentToolResult {
-        val cellId = input["cell_id"] as? String
+        val rawCellId = input["cell_id"] as? String
             ?: return AgentToolResult(false, errorCode = "INVALID", errorMessage = "cell_id 누락")
         val dueAt = input["due_at"] as? String
             ?: return AgentToolResult(false, errorCode = "INVALID", errorMessage = "due_at 누락")
+        val studentUserId = input["student_user_id"] as? String
+
+        // student_user_id 가 제공되면 cell.user_id 와 일치 검증, 불일치 시 자동 매핑
+        val cellId = if (studentUserId != null) {
+            val rawCell = studyPlanCellRepository.findById(rawCellId).orElseThrow {
+                ApiException("NOT_FOUND", "셀 없음: $rawCellId", HttpStatus.NOT_FOUND)
+            }
+            if (rawCell.userId == studentUserId) {
+                rawCellId
+            } else {
+                // 동일 plan·scope·asset 안에서 학생의 cell 자동 매핑
+                val mapped = studyPlanCellRepository.findAll().firstOrNull {
+                    it.planId == rawCell.planId &&
+                    it.scopeId == rawCell.scopeId &&
+                    it.assetId == rawCell.assetId &&
+                    it.userId == studentUserId
+                } ?: return AgentToolResult(
+                    success = false,
+                    errorCode = "CELL_MISMATCH",
+                    errorMessage = "cell_id 의 user_id (${rawCell.userId}) 가 student_user_id ($studentUserId) 와 다르고, 동일 scope·asset 의 학생 cell 도 없음",
+                )
+                log.info("assign_cell_content: cell 자동 매핑 — {} (user={}) → {} (user={})",
+                    rawCellId, rawCell.userId, mapped.id, mapped.userId)
+                mapped.id
+            }
+        } else {
+            rawCellId
+        }
+
         verifyCellOwnership(cellId, role, orgId)
 
         val req = AssignCellContentRequest(

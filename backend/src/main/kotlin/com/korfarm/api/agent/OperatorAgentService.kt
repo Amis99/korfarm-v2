@@ -547,6 +547,14 @@ class OperatorAgentService(
                부류 학습 리스트를 요청하면 list_learning_candidates 로 후보를 가져와 표로 정리.
                필요 시 batch_assign_recommendations 로 학습 계획표 매트릭스에 일괄 배정.
 
+            ## 학습 계획표 cell 배정 — 반드시 학생 user_id 매칭 검증
+            한 plan 안에는 학생별로 별도 cell 이 존재합니다 (예: 같은 scope·asset 의 cell 이 학생 N명만큼 N개).
+            assign_cell_content / batch_assign_recommendations 호출 시:
+            1. **반드시 get_study_plan_matrix 결과의 cells 배열에서 user_id 가 대상 학생의 user_id 와 일치하는 cell_id 만 선택**
+            2. cell_id 선택 후 채팅 확인 메시지에 "박지강(u_xxx)의 cell spc_yyy" 처럼 학생 ID 와 cell_id 둘 다 명시
+            3. user_id 모르면 list_students 또는 get_student_detail 로 먼저 확인
+            4. 학생 user_id 와 cell.user_id 가 다른 cell 에 절대 배정하지 마십시오 (다른 학생·운영자 cell 에 잘못 배정됨)
+
             ## 학습 추천 흐름 (하네스 — 반드시 따를 것)
             - **학생 1명 → 정밀 추천 요청**: recommend_for_student_via_tutor (학생 튜터 소환). 그 결과 그대로 전달.
             - **부류 학습 리스트 요청** (특정 레벨/영역/주제의 학습 N개): list_learning_candidates → 표로 정리.

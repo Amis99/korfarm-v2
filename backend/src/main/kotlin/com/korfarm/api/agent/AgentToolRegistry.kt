@@ -99,7 +99,7 @@ class AgentToolRegistry {
 
         AgentToolDefinition(
             name = "assign_cell_content",
-            description = "학습 계획표의 특정 셀에 콘텐츠(또는 활동)를 배정합니다. 배정 시 마감 기한(due_at) 필수. 사용자 확인이 필요한 위험 작업입니다.",
+            description = "학습 계획표의 특정 셀에 콘텐츠(또는 활동)를 배정합니다. 배정 시 마감 기한(due_at) 필수. 사용자 확인이 필요한 위험 작업입니다. **중요**: 한 plan 안에는 학생별로 별도 cell 이 존재합니다. 반드시 get_study_plan_matrix 결과의 cells 배열에서 user_id 가 대상 학생의 user_id 와 일치하는 cell_id 를 골라야 합니다. **student_user_id 인자를 함께 보내면** 서버가 cell.user_id 와 일치 검증 후 불일치 시 동일 plan·scope·asset 의 학생 cell 을 자동 매핑합니다 — 잘못 배정 방지.",
             requireConfirm = true,
             allowedRoles = setOf("HQ_ADMIN", "ORG_ADMIN"),
             category = "study_plan",
@@ -121,6 +121,10 @@ class AgentToolRegistry {
                     "due_at" to mapOf(
                         "type" to "string",
                         "description" to "마감 기한. ISO 형식 (yyyy-MM-dd 또는 yyyy-MM-ddTHH:mm:ss). 필수.",
+                    ),
+                    "student_user_id" to mapOf(
+                        "type" to "string",
+                        "description" to "(권장) 대상 학생의 user_id. 보내면 서버가 cell.user_id 와 일치 검증, 불일치 시 동일 scope·asset 의 학생 cell 로 자동 매핑.",
                     ),
                 ),
                 "required" to listOf("cell_id", "due_at"),
