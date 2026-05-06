@@ -3,13 +3,11 @@ package com.korfarm.api.board
 import com.korfarm.api.chat.PodoHarness
 import com.korfarm.api.chat.AiChatService
 import com.korfarm.api.common.IdGenerator
+import com.korfarm.api.files.FileService
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.nio.file.Files
-import java.nio.file.Paths
 
 @Service
 class PodoBoardService(
@@ -17,7 +15,7 @@ class PodoBoardService(
     private val postAttachmentRepository: PostAttachmentRepository,
     private val commentRepository: CommentRepository,
     private val podoHarness: PodoHarness,
-    @Value("\${app.upload.dir:./uploads}") private val uploadDir: String
+    private val fileService: FileService,
 ) {
     private val log = LoggerFactory.getLogger(PodoBoardService::class.java)
     private val imageTypes = setOf("image/jpeg", "image/png", "image/gif", "image/webp")
@@ -34,13 +32,13 @@ class PodoBoardService(
             val existing = commentRepository.findByPostIdAndUserId(postId, AiChatService.PODO_USER_ID)
             if (existing != null) return
 
-            // 첨부 이미지 수집
+            // 첨부 이미지 수집 (S3 → EC2 fallback)
             val attachments = postAttachmentRepository.findByPostId(postId)
             val imageDataList = attachments
                 .filter { it.mime in imageTypes }
                 .mapNotNull { att ->
-                    val path = Paths.get(uploadDir).resolve(att.fileId)
-                    if (Files.exists(path)) Pair(Files.readAllBytes(path), att.mime) else null
+                    val bytes = fileService.readBytes(att.fileId) ?: return@mapNotNull null
+                    Pair(bytes, att.mime)
                 }
 
             val response = if (imageDataList.isNotEmpty()) {

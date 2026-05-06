@@ -216,6 +216,29 @@ class FileService(
     } catch (_: Exception) {
         false
     }
+
+    /**
+     * 권한 체크 없이 파일 byte[] 조회 — 서버 내부 호출용 (포도 AI 댓글, 글쓰기 OCR 등).
+     * 1차 S3 → 2차 EC2 fallback. 둘 다 없으면 null.
+     * 호출자 책임: 권한 검증 별도로.
+     */
+    fun readBytes(fileId: String): ByteArray? {
+        // 1차: S3
+        try {
+            val resp = s3Client.getObject(
+                GetObjectRequest.builder().bucket(bucket).key(fileId).build(),
+                ResponseTransformer.toBytes(),
+            )
+            return resp.asByteArray()
+        } catch (_: NoSuchKeyException) {
+            log.debug("S3 에 없음, EC2 fallback 시도: {}", fileId)
+        } catch (e: Exception) {
+            log.warn("S3 조회 실패, EC2 fallback 시도: {} — {}", fileId, e.message)
+        }
+        // 2차: EC2 로컬 fallback
+        val localPath = ec2Path(fileId)
+        return if (Files.exists(localPath)) Files.readAllBytes(localPath) else null
+    }
 }
 
 data class PresignResponse(

@@ -104,7 +104,7 @@ class AiUsageController(
             val sql2 = """
                 SELECT id, user_id, NULL AS test_id,
                        CASE WHEN is_extra = 1 THEN 'agent-call-extra' ELSE 'agent-call-free' END AS kind,
-                       'sonnet' AS model,
+                       COALESCE(model, 'claude-sonnet-4-6') AS model,
                        total_input_tokens, total_output_tokens, NULL AS duration_ms,
                        NULL AS passed, 0 AS retry_count, 'success' AS status, NULL AS error_message,
                        created_at
@@ -124,7 +124,7 @@ class AiUsageController(
             val sql3 = """
                 SELECT id, user_id, NULL AS test_id,
                        'tutor-call' AS kind,
-                       'sonnet' AS model,
+                       COALESCE(model, 'claude-sonnet-4-6') AS model,
                        total_input_tokens, total_output_tokens, NULL AS duration_ms,
                        NULL AS passed, 0 AS retry_count, 'success' AS status, NULL AS error_message,
                        created_at

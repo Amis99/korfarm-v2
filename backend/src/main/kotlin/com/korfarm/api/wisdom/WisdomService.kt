@@ -36,7 +36,7 @@ class WisdomService(
     private val aiFeedbackJobService: AiFeedbackJobService,
     private val orgMembershipRepository: OrgMembershipRepository,
     private val grapefruitService: GrapefruitService,
-    @Value("\${app.upload.dir:./uploads}") private val uploadDir: String
+    private val fileService: com.korfarm.api.files.FileService,
 ) {
     private val log = LoggerFactory.getLogger(WisdomService::class.java)
 
@@ -669,11 +669,10 @@ class WisdomService(
         if (imageAttachments.isEmpty()) {
             throw ApiException("NO_IMAGE", "이미지 또는 PDF 첨부파일이 없습니다", HttpStatus.BAD_REQUEST)
         }
-        val uploadPath = Paths.get(uploadDir)
         val imageDataList = imageAttachments.mapNotNull { att ->
-            val filePath = uploadPath.resolve(att.fileId)
-            if (Files.exists(filePath)) {
-                Pair(Files.readAllBytes(filePath), att.mime)
+            val bytes = fileService.readBytes(att.fileId)
+            if (bytes != null) {
+                Pair(bytes, att.mime)
             } else {
                 log.warn("첨부파일 없음: fileId={}", att.fileId)
                 null

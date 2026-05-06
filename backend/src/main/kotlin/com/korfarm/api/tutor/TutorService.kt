@@ -175,6 +175,7 @@ class TutorService(
         totalInputTokens: Int,
         totalOutputTokens: Int,
         userText: String,
+        model: String = modelSonnet,
     ) {
         usageRepo.save(
             TutorUsageLogEntity(
@@ -185,6 +186,7 @@ class TutorService(
                 amountSpent = amountSpent,
                 totalInputTokens = totalInputTokens,
                 totalOutputTokens = totalOutputTokens,
+                model = model,
                 createdAt = LocalDateTime.now(),
             )
         )
@@ -335,6 +337,7 @@ class TutorService(
             totalInputTokens = totalInputTokens,
             totalOutputTokens = totalOutputTokens,
             userText = userText,
+            model = resolveModelId(nextModelLabel),
         )
 
         return TurnResult(
@@ -602,11 +605,19 @@ class TutorService(
         messages: List<Map<String, Any>>,
         modelId: String = modelSonnet,
     ): ClaudeResponse {
+        // Anthropic prompt caching — system block 캐시 (앞의 tools 까지 자동 포함, 90% 절감)
+        val cachedSystem = listOf(
+            mapOf(
+                "type" to "text",
+                "text" to systemPrompt,
+                "cache_control" to mapOf("type" to "ephemeral"),
+            )
+        )
         val requestBody = objectMapper.writeValueAsString(
             mapOf(
                 "model" to modelId,
                 "max_tokens" to 2048,
-                "system" to systemPrompt,
+                "system" to cachedSystem,
                 "tools" to tools,
                 "messages" to messages,
             )

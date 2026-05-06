@@ -82,6 +82,9 @@ class TutorUsageLogEntity(
     @Column(name = "total_output_tokens", nullable = false)
     var totalOutputTokens: Int = 0,
 
+    @Column(length = 64)
+    var model: String = "claude-sonnet-4-6",
+
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now(),
 ) {

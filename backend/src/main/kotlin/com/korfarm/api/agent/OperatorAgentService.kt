@@ -242,6 +242,7 @@ class OperatorAgentService(
         totalInputTokens: Int,
         totalOutputTokens: Int,
         userText: String,
+        model: String = modelSonnet,
     ) {
         usageRepo.save(
             AgentUsageLogEntity(
@@ -253,6 +254,7 @@ class OperatorAgentService(
                 grapefruitSpent = grapefruitSpent,
                 totalInputTokens = totalInputTokens,
                 totalOutputTokens = totalOutputTokens,
+                model = model,
                 createdAt = LocalDateTime.now(),
             )
         )
@@ -423,6 +425,7 @@ class OperatorAgentService(
         }
 
         // 5) usage 로그 + 세션 갱신 (트랜잭션 4 — 짧음)
+        // 마지막 turn 의 모델로 기록 (대부분 turn 이 같은 모델 — 다운시프트 후 마지막)
         saveUsageAndTouchSession(
             userId = userId,
             role = role,
@@ -432,6 +435,7 @@ class OperatorAgentService(
             totalInputTokens = totalInputTokens,
             totalOutputTokens = totalOutputTokens,
             userText = userText,
+            model = resolveModelId(nextModelLabel),
         )
 
         return TurnResult(
@@ -604,11 +608,21 @@ class OperatorAgentService(
         messages: List<Map<String, Any>>,
         modelId: String = modelSonnet,
     ): ClaudeResponse {
+        // Anthropic prompt caching — system block 에 cache_control 두면
+        // 그 앞의 tools 까지 자동으로 캐시 prefix 에 포함 (Tools → System → Messages 순서).
+        // 캐시 read = base input × 0.1 (90% 절감), 5분 TTL.
+        val cachedSystem = listOf(
+            mapOf(
+                "type" to "text",
+                "text" to systemPrompt,
+                "cache_control" to mapOf("type" to "ephemeral"),
+            )
+        )
         val requestBody = objectMapper.writeValueAsString(
             mapOf(
                 "model" to modelId,
                 "max_tokens" to 4096,
-                "system" to systemPrompt,
+                "system" to cachedSystem,
                 "tools" to tools,
                 "messages" to messages,
             )
