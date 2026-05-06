@@ -46,8 +46,8 @@ class AgentChatMessageEntity(
     @Column(name = "session_id", nullable = false)
     var sessionId: String,
 
-    @Column(nullable = false, length = 16)
-    var role: String,                 // "user" / "assistant" / "tool"
+    @Column(nullable = false, length = 32)
+    var role: String,                 // "user" / "assistant" / "assistant_tool_use" / "tool"
 
     @Column(columnDefinition = "LONGTEXT")
     var content: String? = null,
