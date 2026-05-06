@@ -149,9 +149,8 @@ class OperatorAgentToolExecutorImpl(
         if (callerRole == "ORG_ADMIN" && method != "GET") {
             val hqOnlyPatterns = listOf(
                 Regex("^/v1/admin/seasons"),
-                Regex("^/v1/admin/grapefruit-pricing"),
-                Regex("^/v1/admin/grapefruit-wallet/charge"),
-                Regex("^/v1/admin/grapefruit-wallet/.*/charge"),
+                Regex("^/v1/admin/grapefruit/pricing"),
+                Regex("^/v1/admin/grapefruit/orgs/.*/charge"),
                 Regex("^/v1/admin/all-billings"),
                 Regex("^/v1/admin/orgs(?!/me)"),
                 Regex("^/v1/admin/inquiry"),

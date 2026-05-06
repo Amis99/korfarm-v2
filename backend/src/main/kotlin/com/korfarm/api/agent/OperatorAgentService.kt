@@ -633,8 +633,8 @@ class OperatorAgentService(
             - 본 기관 결제 요약: `GET /v1/admin/billing/me`
             - 본 기관 결제 상태 (정지·정상): `GET /v1/admin/billing/me/status`
             - 본 기관 청구서 계산: `GET /v1/admin/billing/me/calculate`
-            - 본 기관 자몽 잔액: `GET /v1/admin/grapefruit-wallet/me`
-            - 본 기관 자몽 거래 내역: `GET /v1/admin/grapefruit-wallet/me/transactions`
+            - 본 기관 자몽 잔액: `GET /v1/admin/grapefruit/wallet/me`
+            - 본 기관 자몽 거래 내역: `GET /v1/admin/grapefruit/transactions/me`
 
             **ORG_ADMIN/HQ_ADMIN 공통 학생·수강반·계획표**:
             - 학생 구독 상태 변경: `POST /v1/admin/students/{userId}/subscription` body={status:"free|paid|expired"}
@@ -644,10 +644,10 @@ class OperatorAgentService(
 
             **HQ_ADMIN 전용**:
             - 모든 기관 결제: `GET /v1/admin/all-billings`
-            - 자몽 단가: `GET/PUT /v1/admin/grapefruit-pricing`
+            - 자몽 단가: `GET /v1/admin/grapefruit/pricing` / `PUT /v1/admin/grapefruit/pricing/{kind}`
             - 시즌: `POST /v1/admin/seasons`
             - 기관 결제 발행: `POST /v1/admin/billing/orgs/{orgId}/issue`
-            - 기관 자몽 충전: `POST /v1/admin/grapefruit-wallet/{orgId}/charge`
+            - 기관 자몽 충전: `POST /v1/admin/grapefruit/orgs/{orgId}/charge`
 
             **ORG_ADMIN 가 본 기관 외 path 시도 시 백엔드가 HQ_ONLY 에러로 거절**.
 
