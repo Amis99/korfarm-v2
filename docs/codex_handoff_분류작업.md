@@ -25,9 +25,16 @@
 ## 2. 작업 범위
 
 ### 우선순위 1: PRO_READING (597건) — 진행 중
-- **이미 분류 완료**: 10건 (ID 정렬 1~10번째)
-- **남은 작업**: **587건**
+- **이미 분류 완료**: **60건** (Claude 10건 + Subagent 50건, 모두 사용자 검수/검증 통과)
+- **남은 작업**: **537건**
 - 본사 정성 콘텐츠, 긴 지문, 학생 영향 큼
+
+> Codex 시작 시 미분류만 자동 추출 (OFFSET 불필요):
+> ```sql
+> WHERE c.content_type='PRO_READING'
+> AND c.id NOT IN (SELECT DISTINCT content_id FROM content_classifications)
+> ORDER BY c.id LIMIT 50
+> ```
 
 ### 우선순위 2: 그 외 지문 기반 콘텐츠
 | content_type | 건수 | 비고 |
