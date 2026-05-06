@@ -83,10 +83,14 @@ function SubscriptionPage() {
       });
       await requestTossPayment({
         clientKey: prepareResult.clientKey,
+        customerKey: prepareResult.customerKey,
         method: "CARD",
         amount: prepareResult.amount,
         orderId: prepareResult.tossOrderId,
         orderName: prepareResult.orderName,
+        customerName: prepareResult.customerName,
+        customerEmail: prepareResult.customerEmail,
+        customerMobilePhone: prepareResult.customerMobilePhone,
       });
     } catch (e) {
       // 사용자가 결제창을 닫은 경우 등

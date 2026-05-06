@@ -46,7 +46,12 @@ data class PaymentPrepareResult(
     val tossOrderId: String,
     val amount: Int,
     val orderName: String,
-    val clientKey: String
+    val clientKey: String,
+    /** 토스 customerKey — 사용자별 고유 ID. 비회원이면 ANONYMOUS. */
+    val customerKey: String,
+    val customerName: String? = null,
+    val customerEmail: String? = null,
+    val customerMobilePhone: String? = null,
 )
 
 data class PaymentConfirmRequest(

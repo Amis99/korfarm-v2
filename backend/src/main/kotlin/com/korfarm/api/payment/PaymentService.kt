@@ -7,6 +7,7 @@ import com.korfarm.api.shop.OrderRepository
 import com.korfarm.api.shop.OrderItemRepository
 import com.korfarm.api.shop.ProductRepository
 import com.korfarm.api.shop.ShipmentRepository
+import com.korfarm.api.user.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -24,8 +25,26 @@ class PaymentService(
     private val shipmentRepository: ShipmentRepository,
     private val tossPaymentClient: TossPaymentClient,
     private val tossProperties: TossProperties,
-    private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper,
+    private val userRepository: UserRepository,
 ) {
+    /** 토스 customerKey: 사용자 ID 그대로. 비회원이면 ANONYMOUS. */
+    private fun resolveCustomer(userId: String): TossCustomer {
+        val user = userRepository.findById(userId).orElse(null)
+        return TossCustomer(
+            customerKey = userId,
+            customerName = user?.name,
+            customerEmail = user?.email,
+            customerMobilePhone = user?.studentPhone?.replace("-", ""),
+        )
+    }
+
+    private data class TossCustomer(
+        val customerKey: String,
+        val customerName: String?,
+        val customerEmail: String?,
+        val customerMobilePhone: String?,
+    )
     companion object {
         val PLAN_PRICES = mapOf(1 to 65000, 3 to 175500, 6 to 312000, 12 to 546000)
     }
@@ -203,12 +222,17 @@ class PaymentService(
         )
         paymentRepository.save(payment)
 
+        val customer = resolveCustomer(userId)
         return PaymentPrepareResult(
             paymentId = payment.id,
             tossOrderId = tossOrderId,
             amount = expectedAmount,
             orderName = orderName,
-            clientKey = tossProperties.clientKey
+            clientKey = tossProperties.clientKey,
+            customerKey = customer.customerKey,
+            customerName = customer.customerName,
+            customerEmail = customer.customerEmail,
+            customerMobilePhone = customer.customerMobilePhone,
         )
     }
 
@@ -258,12 +282,17 @@ class PaymentService(
         )
         paymentRepository.save(payment)
 
+        val customer = resolveCustomer(userId)
         return PaymentPrepareResult(
             paymentId = payment.id,
             tossOrderId = tossOrderId,
             amount = order.totalAmount,
             orderName = orderName,
-            clientKey = tossProperties.clientKey
+            clientKey = tossProperties.clientKey,
+            customerKey = customer.customerKey,
+            customerName = customer.customerName,
+            customerEmail = customer.customerEmail,
+            customerMobilePhone = customer.customerMobilePhone,
         )
     }
 

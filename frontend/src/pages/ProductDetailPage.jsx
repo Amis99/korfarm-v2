@@ -69,10 +69,14 @@ function ProductDetailPage() {
       const prepareResult = await apiPost("/v1/payments/prepare/shop", { orderId });
       await requestTossPayment({
         clientKey: prepareResult.clientKey,
+        customerKey: prepareResult.customerKey,
         method: "CARD",
         amount: prepareResult.amount,
         orderId: prepareResult.tossOrderId,
         orderName: prepareResult.orderName,
+        customerName: prepareResult.customerName || address.recipientName,
+        customerEmail: prepareResult.customerEmail,
+        customerMobilePhone: (prepareResult.customerMobilePhone || address.phone || "").replace(/-/g, ""),
       });
     } catch (e) {
       if (e.code !== "USER_CANCEL") {
