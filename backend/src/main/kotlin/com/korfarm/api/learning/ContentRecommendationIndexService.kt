@@ -46,7 +46,17 @@ class ContentRecommendationIndexService(
             return false
         }
         val ver = contentVersionRepository.findTopByContentIdOrderByCreatedAtDesc(contentId)
-        val (compSums, qCount) = if (ver != null) computeCompetencySums(ver.contentJson) else Pair(emptyMap(), 0)
+        val (rawSums, qCount) = if (ver != null) computeCompetencySums(ver.contentJson) else Pair(emptyMap(), 0)
+
+        // 가중치 합이 0 이면 type/area 기반 default 부여 (DAILY_READING / PRO_READING 의 모듈형 payload,
+        // LOGIC, 옛 콘텐츠 등이 payload.questions[].competencyVector 가 없어도 추천 풀에 포함되도록)
+        val rawTotal = rawSums.values.sum()
+        val compSums: Map<String, Double> = if (rawTotal > 0.0) rawSums else {
+            val ct = content.contentType.uppercase()
+            val area = (content.area ?: "").lowercase()
+            resolveDefaultVectorForIndex(ct, area)
+        }
+
         val classifs = classificationRepository.findByIdContentId(contentId)
             .map { it.id.classificationCode }
         val codesJson = objectMapper.writeValueAsString(classifs)
@@ -145,6 +155,37 @@ class ContentRecommendationIndexService(
             }
         } catch (_: Exception) { /* skip */ }
         return Pair(sums, qCount)
+    }
+
+    /**
+     * 인덱스 빌드용 default vector — payload.questions[].competencyVector 가 없는 콘텐츠를 위한
+     * type/area 기반 default. AdminContentService.resolveDefaultVector 와 동일 정책.
+     */
+    private fun resolveDefaultVectorForIndex(ct: String, area: String): Map<String, Double> = when {
+        ct.contains("LOGIC") -> mapOf("논리 사고력" to 1.0)
+        ct.contains("PRO_VOCAB") -> mapOf("어휘력" to 1.0)
+        ct.contains("PRO_GRAMMAR") -> mapOf("어법·문법 능력" to 1.0)
+        ct.contains("PRO_READING") -> {
+            if (area.contains("fiction") && !area.contains("non")) {
+                mapOf("국어 관련 배경지식" to 0.4, "문장 독해력" to 0.4, "문제 분석 및 전략 수립 능력" to 0.2)
+            } else {
+                mapOf("비문학 배경지식" to 0.4, "구조 독해력" to 0.4, "문제 분석 및 전략 수립 능력" to 0.2)
+            }
+        }
+        ct.contains("DAILY_READING") || ct.contains("FARM") -> {
+            if (area.contains("fiction") && !area.contains("non")) {
+                mapOf("국어 관련 배경지식" to 0.5, "문장 독해력" to 0.5)
+            } else {
+                mapOf("비문학 배경지식" to 0.5, "구조 독해력" to 0.5)
+            }
+        }
+        ct.contains("STUDY_CONTENT") || ct.contains("STUDY") -> {
+            if (area.contains("fiction")) mapOf("국어 관련 배경지식" to 0.5, "문장 독해력" to 0.5)
+            else if (area.contains("grammar")) mapOf("어법·문법 능력" to 1.0)
+            else if (area.contains("vocab")) mapOf("어휘력" to 1.0)
+            else mapOf("비문학 배경지식" to 0.4, "구조 독해력" to 0.4, "국어 개념 적용 능력" to 0.2)
+        }
+        else -> emptyMap()
     }
 
     private fun parseLevelNumber(levelId: String?): Int? {
