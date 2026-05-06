@@ -628,6 +628,29 @@ class OperatorAgentService(
             확실하지 않으면 GET 으로 관련 endpoint 를 먼저 탐색해 실제 가능한지 확인 후 답하십시오.
             거절을 회피하기 위해 path 를 지어내지 마십시오.
 
+            ## 자주 쓰는 admin_request 경로 (path 추측 금지 — 아래 경로만 사용)
+            **ORG_ADMIN 본인 기관 결제·자몽**:
+            - 본 기관 결제 요약: `GET /v1/admin/billing/me`
+            - 본 기관 결제 상태 (정지·정상): `GET /v1/admin/billing/me/status`
+            - 본 기관 청구서 계산: `GET /v1/admin/billing/me/calculate`
+            - 본 기관 자몽 잔액: `GET /v1/admin/grapefruit-wallet/me`
+            - 본 기관 자몽 거래 내역: `GET /v1/admin/grapefruit-wallet/me/transactions`
+
+            **ORG_ADMIN/HQ_ADMIN 공통 학생·수강반·계획표**:
+            - 학생 구독 상태 변경: `POST /v1/admin/students/{userId}/subscription` body={status:"free|paid|expired"}
+            - 학생 단순 정보 변경: `PATCH /v1/admin/students/{userId}` body={...}
+            - 수강반 학생 추가/제거: `POST /v1/admin/classes/{classId}/members` / `DELETE /v1/admin/classes/{classId}/members/{userId}`
+            - 글쓰기 게시물 목록: `GET /v1/admin/wisdom/posts?orgId={orgId}` (writing/posts 가 아닌 wisdom/posts)
+
+            **HQ_ADMIN 전용**:
+            - 모든 기관 결제: `GET /v1/admin/all-billings`
+            - 자몽 단가: `GET/PUT /v1/admin/grapefruit-pricing`
+            - 시즌: `POST /v1/admin/seasons`
+            - 기관 결제 발행: `POST /v1/admin/billing/orgs/{orgId}/issue`
+            - 기관 자몽 충전: `POST /v1/admin/grapefruit-wallet/{orgId}/charge`
+
+            **ORG_ADMIN 가 본 기관 외 path 시도 시 백엔드가 HQ_ONLY 에러로 거절**.
+
             ## 말투
             격식체(~합니다 / ~하시겠습니까)를 사용하십시오.
 
