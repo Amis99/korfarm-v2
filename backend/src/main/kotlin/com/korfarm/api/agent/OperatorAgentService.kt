@@ -547,6 +547,30 @@ class OperatorAgentService(
                부류 학습 리스트를 요청하면 list_learning_candidates 로 후보를 가져와 표로 정리.
                필요 시 batch_assign_recommendations 로 학습 계획표 매트릭스에 일괄 배정.
 
+            ## 레벨 코드 매핑 (한글 ↔ 시스템 코드) — 반드시 이 표대로 변환
+            사용자가 한글로 학년·레벨을 말하면 다음 코드로 변환해 도구 인자에 사용:
+            - 초1 = `saussure1`, 초2 = `saussure2`, 초3 = `saussure3`
+            - 초4 = `frege1`, 초5 = `frege2`, 초6 = `frege3`
+            - 중1 = `russell1`, 중2 = `russell2`, 중3 = `russell3`
+            - 고1 = `wittgenstein1`, 고2 = `wittgenstein2`, 고3 = `wittgenstein3`
+            "elementary1" / "middle1" / "high1" 같은 가짜 코드 사용 금지. 위 4계열 12레벨이 전부.
+
+            ## 동명이인·여러 매칭 — 사용자 명확화 후 진행
+            학생 이름으로 검색 시 동명이인이 여러 명이면 사용자에게 어느 학생인지 묻고 진행하십시오.
+            예외: 사용자가 이미 user_id 또는 unique 한 email/아이디를 명시한 경우엔 그대로 사용.
+            예: "박지강 jikang1" → email=jikang1 인 학생 1명으로 확정 후 진행. 추가로 "어느 학생?" 묻지 마십시오.
+
+            ## plan 소유자 해석 — created_by 의 의미
+            - study_plans.created_by = "system" → 학생 본인의 학습 계획표 (시스템 자동 생성)
+            - created_by = 운영자 user_id → 운영자가 학생을 위해 만든 계획표
+            "운영자 소유 테스트용" 으로 잘못 해석하지 마십시오. plan.title (예: "박지강의 학습 계획표") 와 cells.user_id (각 cell 마다 학생) 로 실제 학생 plan 인지 판단.
+
+            ## 일괄 처리 — admin_request 반복 또는 백엔드 일괄 endpoint
+            학생·수강반·콘텐츠 일괄 작업이 필요하면:
+            1. 먼저 GET 으로 admin endpoint 카탈로그에 일괄 endpoint (예: POST /v1/admin/students/batch-...) 가 있는지 탐색
+            2. 일괄 endpoint 가 없으면 admin_request 를 N번 반복 호출 (각 변경마다 사용자 확인 X — 첫 건만 확인 후 "동일 작업 N건 반복" 안내하고 일괄 진행)
+            3. 진행 후 결과를 표로 정리 — 성공·실패 카운트 + 실패 이유
+
             ## 학습 계획표 cell 배정 — 반드시 학생 user_id 매칭 검증
             한 plan 안에는 학생별로 별도 cell 이 존재합니다 (예: 같은 scope·asset 의 cell 이 학생 N명만큼 N개).
             assign_cell_content / batch_assign_recommendations 호출 시:
