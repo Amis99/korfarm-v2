@@ -318,10 +318,12 @@ function App() {
           <Route path="/admin/tests/:testId/statistics" element={A(<AdminTestStatisticsPage />)} />
           {/* 옛 /admin/tests/:testId 디테일 페이지는 통계 페이지로 통합 → 통계로 redirect (외부 링크 호환) */}
           <Route path="/admin/tests/:testId" element={A(<AdminTestStatisticsPage />)} />
-          {/* 학습자료 DB 통합 */}
-          <Route path="/admin/learning-db" element={A(<AdminLearningDBPage />)} />
-          {/* 학습 자료 v2 — 작품·지문 corpus + 임시 체크포인트 */}
-          <Route path="/admin/learning-corpus" element={A(<AdminLearningCorpusPage />)} />
+          {/* 학습자료 DB — 작품·지문 corpus + 누적 항목 + 임시 체크포인트 풀 (V0107~) */}
+          <Route path="/admin/learning-db" element={A(<AdminLearningCorpusPage />)} />
+          {/* /admin/learning-corpus 는 옛 라우트 — /admin/learning-db 로 통합 */}
+          <Route path="/admin/learning-corpus" element={<Navigate to="/admin/learning-db" replace />} />
+          {/* 옛 file-tree 기반 페이지는 보존 — 직접 URL 진입만 가능, 사이드바 비노출 */}
+          <Route path="/admin/learning-db/legacy" element={A(<AdminLearningDBPage />)} />
           <Route path="/admin/learning-db/qb-import" element={A(<AdminQBImportPage />)} />
           <Route path="/admin/learning-db/qb-records/:id" element={A(<AdminQBRecordDetailPage />)} />
           <Route path="/admin/learning-db/qb-codes" element={A(<AdminQBCodesPage />)} />

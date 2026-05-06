@@ -40,9 +40,11 @@ export default function AdminLearningCorpusPage() {
   return (
     <AdminLayout>
       <div style={{ padding: 16 }}>
-        <h2 style={{ margin: 0 }}>학습 자료 DB v2 — 작품·지문</h2>
+        <h2 style={{ margin: 0 }}>학습자료 DB</h2>
         <p style={{ color: "#666", marginTop: 4 }}>
           작품·지문 단위로 누적되는 학습 자료 마스터. 체크리스트·출제포인트·구절해석을 영역별로 누적해 AI 출제·교재 빌드에 활용.
+          <br />
+          내용 숙지 학습에서 작성된 체크리스트는 임시 풀에 모이며, 본사 관리자가 AI 분류 후 승인하면 작품·지문에 누적됩니다.
         </p>
 
         <div style={{ display: "flex", gap: 8, borderBottom: "1px solid #ddd", marginTop: 16 }}>
