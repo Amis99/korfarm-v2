@@ -11,6 +11,23 @@ import "../styles/admin.css";
  * 중앙: 채팅 + 입력
  * 우측: 자몽/작물 잔액 + 통화 선택 + 안내
  */
+
+/** 세션 시간 표시 — 오늘이면 시간만, 어제면 "어제 HH:MM", 이전이면 "M/D HH:MM". */
+function formatSessionTime(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return "";
+  const now = new Date();
+  const sameDay = d.toDateString() === now.toDateString();
+  const yesterday = new Date(now); yesterday.setDate(now.getDate() - 1);
+  const isYesterday = d.toDateString() === yesterday.toDateString();
+  const hh = String(d.getHours()).padStart(2, "0");
+  const mm = String(d.getMinutes()).padStart(2, "0");
+  if (sameDay) return `오늘 ${hh}:${mm}`;
+  if (isYesterday) return `어제 ${hh}:${mm}`;
+  return `${d.getMonth() + 1}/${d.getDate()} ${hh}:${mm}`;
+}
+
 function MyTutorPage() {
   const navigate = useNavigate();
   const [sessions, setSessions] = useState([]);
@@ -24,10 +41,14 @@ function MyTutorPage() {
   const [dailyAnalysis, setDailyAnalysis] = useState(null);
   const scrollRef = useRef(null);
 
-  const loadSessions = async () => {
+  const loadSessions = async (autoSelectLatest = false) => {
     try {
       const data = await apiGet("/v1/tutor/sessions");
-      setSessions(Array.isArray(data) ? data : []);
+      const list = Array.isArray(data) ? data : [];
+      setSessions(list);
+      if (autoSelectLatest && list.length > 0) {
+        setActiveSessionId(list[0].id);
+      }
     } catch (e) {
       setError(e.message);
     }
@@ -67,7 +88,7 @@ function MyTutorPage() {
   };
 
   useEffect(() => {
-    loadSessions();
+    loadSessions(true); // 첫 진입 — 가장 최근 대화 자동 선택
     loadStatus();
     triggerDailyAnalysis();
   }, []);
@@ -177,6 +198,9 @@ function MyTutorPage() {
               onClick={() => setActiveSessionId(s.id)}
             >
               <span className="agent-session-title">{s.title || "(제목 없음)"}</span>
+              <span style={{ display: "block", fontSize: 11, color: "#9ca3af", marginTop: 2 }}>
+                {formatSessionTime(s.updatedAt || s.updated_at || s.createdAt || s.created_at)}
+              </span>
               <div className="agent-session-actions">
                 <button type="button" onClick={(e) => { e.stopPropagation(); renameSession(s.id); }}>이름</button>
                 <button type="button" onClick={(e) => { e.stopPropagation(); archiveSession(s.id); }}>보관</button>
