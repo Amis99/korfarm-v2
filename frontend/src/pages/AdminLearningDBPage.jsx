@@ -1,35 +1,46 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import AdminLayout from "../components/AdminLayout";
 import { useRequireRole } from "../hooks/useRequireRole";
 import Toast from "../components/learning-db/Toast";
 import LDBTreePanel from "../components/learning-db/LDBTreePanel";
-import LDBNewFileModal from "../components/learning-db/LDBNewFileModal";
-import LDBUploadModal from "../components/learning-db/LDBUploadModal";
-import JsonVisualEditor from "../components/learning-db/JsonVisualEditor";
+import CorpusDetail, { AREAS, ITEM_TYPES, modalBackdrop, modalBox, Label, unwrap } from "../components/learning-db/CorpusDetail";
+import PendingDetail from "../components/learning-db/PendingDetail";
 import {
-  fetchMeta, fetchTree, fetchFile, saveFile, deleteFile
-} from "../utils/learningDbApi";
+  searchCorpus, fetchCorpus, createCorpus,
+  fetchPending, fetchPendingStats,
+  classifyAll, importLegacy,
+} from "../utils/learningCorpusApi";
 import "../styles/learning-db.css";
 
+/**
+ * 학습자료 DB — 작품·지문 corpus 마스터 + 임시 체크포인트 풀.
+ *
+ * 좌측 트리: 영역(7) → 세부영역 → 작품·지문(파일처럼) + 별도 [임시 체크리스트] 폴더(파일처럼)
+ * 우측 패널: 선택한 corpus 의 메타·본문·누적 항목 편집 / 또는 pending 의 분류·승인·거부
+ */
 function AdminLearningDBPage() {
   useRequireRole("HQ_ADMIN");
-  const [meta, setMeta] = useState({ areas: [], kinds: [] });
-  const [tree, setTree] = useState(null);
+  const [corpusList, setCorpusList] = useState([]);
+  const [pendingList, setPendingList] = useState([]);
+  const [pendingStats, setPendingStats] = useState(null);
   const [loadingTree, setLoadingTree] = useState(false);
-  const [selected, setSelected] = useState(null); // { path, label, data, dirty }
-  const [loadingFile, setLoadingFile] = useState(false);
-  const [saving, setSaving] = useState(false);
-  const [deleting, setDeleting] = useState(false);
-  const [showNew, setShowNew] = useState(false);
-  const [showUpload, setShowUpload] = useState(false);
+  const [selected, setSelected] = useState(null); // { kind: "corpus"|"pending", path, label, data }
+  const [loadingDetail, setLoadingDetail] = useState(false);
   const [toast, setToast] = useState(null);
+  const [showCreateCorpus, setShowCreateCorpus] = useState(false);
+  const [busy, setBusy] = useState(false);
 
   const reloadTree = useCallback(async () => {
     setLoadingTree(true);
     try {
-      const res = await fetchTree();
-      const t = res?.children !== undefined ? res : res?.data;
-      setTree(t);
+      const [r1, r2, r3] = await Promise.all([
+        searchCorpus({ size: 500 }),
+        fetchPending("pending"),
+        fetchPendingStats(),
+      ]);
+      setCorpusList(unwrap(r1) || []);
+      setPendingList(unwrap(r2) || []);
+      setPendingStats(unwrap(r3));
     } catch (e) {
       setToast({ msg: "트리 로드 실패: " + e.message, type: "error" });
     } finally {
@@ -37,109 +48,149 @@ function AdminLearningDBPage() {
     }
   }, []);
 
-  useEffect(() => {
-    fetchMeta()
-      .then(res => {
-        const m = res?.areas !== undefined ? res : res?.data;
-        setMeta(m || { areas: [], kinds: [] });
-      })
-      .catch(e => setToast({ msg: "메타 로드 실패: " + e.message, type: "error" }));
-    reloadTree();
-  }, [reloadTree]);
+  useEffect(() => { reloadTree(); }, [reloadTree]);
 
+  // ── 트리 빌드 — 영역 → 세부영역 → 작품(파일) + [임시 체크리스트] 폴더(파일들) ──
+  const tree = useMemo(() => {
+    const areaNodes = AREAS.map(a => {
+      const corpusInArea = corpusList.filter(c => c.area === a.key);
+      // 세부영역 distinct
+      const subAreas = [...new Set(corpusInArea.map(c => c.subArea || "(미지정)"))].sort();
+      const children = subAreas.map(sub => {
+        const corpusInSub = corpusInArea.filter(c => (c.subArea || "(미지정)") === sub);
+        return {
+          type: "subArea",
+          key: `${a.key}/${sub}`,
+          label: sub,
+          path: `area/${a.key}/${sub}`,
+          children: corpusInSub.map(c => ({
+            type: "file",
+            key: c.id,
+            label: c.title + (c.author ? ` — ${c.author}` : ""),
+            path: `corpus/${c.id}`,
+          })),
+        };
+      });
+      return {
+        type: "area",
+        key: a.key,
+        label: a.label,
+        path: `area/${a.key}`,
+        children,
+      };
+    });
+
+    // 임시 체크리스트 폴더 — 파일처럼 노출
+    const pendingNode = {
+      type: "subArea",
+      key: "__pending__",
+      label: `임시 체크리스트${pendingStats?.pending ? ` (대기 ${pendingStats.pending})` : ""}`,
+      path: "pending",
+      children: pendingList.map(p => ({
+        type: "file",
+        key: p.id,
+        label: p.textMd.slice(0, 60).replace(/\n/g, " ") + (p.textMd.length > 60 ? "…" : ""),
+        path: `pending/${p.id}`,
+      })),
+    };
+
+    return {
+      type: "root",
+      key: "root",
+      label: "학습 자료",
+      path: "",
+      children: [...areaNodes, pendingNode],
+    };
+  }, [corpusList, pendingList, pendingStats]);
+
+  // 항목 선택 ── path 형식: corpus/{id} 또는 pending/{id}
   const selectFile = async (path, label) => {
-    if (selected?.dirty) {
-      if (!window.confirm("저장하지 않은 변경사항이 있습니다. 무시하고 다른 파일을 열까요?")) return;
-    }
-    setSelected({ path, label, data: null, dirty: false });
-    setLoadingFile(true);
+    setSelected({ path, label, data: null });
+    setLoadingDetail(true);
     try {
-      const res = await fetchFile(path);
-      // safeJson 이 풀어준 raw JSON (객체/배열/원시값)
-      setSelected({ path, label, data: res, dirty: false });
+      if (path.startsWith("corpus/")) {
+        const id = path.replace("corpus/", "");
+        const r = await fetchCorpus(id);
+        setSelected({ kind: "corpus", path, label, data: unwrap(r) });
+      } else if (path.startsWith("pending/")) {
+        const id = path.replace("pending/", "");
+        const found = pendingList.find(p => p.id === id);
+        setSelected({ kind: "pending", path, label, data: found || null });
+      }
     } catch (e) {
-      setToast({ msg: "파일 로드 실패: " + e.message, type: "error" });
+      setToast({ msg: "상세 로드 실패: " + e.message, type: "error" });
     } finally {
-      setLoadingFile(false);
+      setLoadingDetail(false);
     }
   };
 
-  const onEditorChange = (next) => {
-    setSelected(s => s ? { ...s, data: next, dirty: true } : null);
+  const refreshSelected = () => {
+    if (!selected) return reloadTree();
+    selectFile(selected.path, selected.label).then(reloadTree);
   };
 
-  const handleSave = async () => {
-    if (!selected) return;
-    setSaving(true);
+  const handleClassifyAll = async () => {
+    if (pendingList.length === 0) { setToast({ msg: "분류할 대기 항목이 없습니다", type: "info" }); return; }
+    if (!window.confirm(`pending ${pendingList.length}건을 일괄 AI 분류합니다. 계속할까요?`)) return;
+    setBusy(true);
     try {
-      await saveFile(selected.path, selected.data);
-      setSelected(s => s ? { ...s, dirty: false } : null);
-      setToast({ msg: "저장 완료", type: "success" });
+      const r = await classifyAll();
+      const d = unwrap(r);
+      setToast({ msg: `분류 완료 — ${d.classified}/${d.total} 성공, 오류 ${d.errors}`, type: "success" });
       reloadTree();
     } catch (e) {
-      setToast({ msg: "저장 실패: " + e.message, type: "error" });
+      setToast({ msg: "분류 실패: " + e.message, type: "error" });
     } finally {
-      setSaving(false);
+      setBusy(false);
     }
   };
 
-  const handleDelete = async () => {
-    if (!selected) return;
-    if (!window.confirm(`'${selected.label}' 파일을 삭제할까요? 되돌릴 수 없습니다.`)) return;
-    setDeleting(true);
+  const handleImport = async () => {
+    if (!window.confirm("./data/learning-data 폴더의 기존 JSON 파일을 corpus DB로 일괄 import 합니다. 계속할까요?")) return;
+    setBusy(true);
     try {
-      await deleteFile(selected.path);
-      setToast({ msg: "삭제 완료", type: "success" });
-      setSelected(null);
+      const r = await importLegacy(false);
+      const d = unwrap(r);
+      setToast({ msg: `import 완료 — corpus ${d.corpusCreated} / items ${d.itemsAdded} / 오류 ${d.errors?.length || 0}`, type: "success" });
       reloadTree();
     } catch (e) {
-      setToast({ msg: "삭제 실패: " + e.message, type: "error" });
+      setToast({ msg: "import 실패: " + e.message, type: "error" });
     } finally {
-      setDeleting(false);
+      setBusy(false);
     }
   };
-
-  const onCreated = ({ path, label }) => {
-    setShowNew(false);
-    setToast({ msg: "새 파일 생성됨", type: "success" });
-    reloadTree();
-    selectFile(path, label);
-  };
-
-  const onUploaded = () => {
-    setShowUpload(false);
-    setToast({ msg: "업로드 완료", type: "success" });
-    reloadTree();
-  };
-
-  // 비주얼 에디터에 보낼 data — 객체가 아니면 wrapping
-  const editorData = (() => {
-    if (!selected || selected.data === null || selected.data === undefined) return null;
-    if (typeof selected.data === "object" && !Array.isArray(selected.data)) return selected.data;
-    return { 값: selected.data };
-  })();
 
   return (
     <AdminLayout>
       <div className="ldb-page">
         <div className="ldb-v2-topbar">
           <div>
-            <h2 style={{ margin: 0, fontSize: 16, fontWeight: 700 }}>학습 자료DB</h2>
+            <h2 style={{ margin: 0, fontSize: 16, fontWeight: 700 }}>학습자료 DB</h2>
             <div style={{ fontSize: 11, color: "#666", marginTop: 2 }}>
-              영역·세부영역별 raw 자료(해설서·문제은행·문제분석)
+              작품·지문 + 누적 항목(체크리스트·출제포인트·구절해석) + 임시 체크포인트 풀
+              {pendingStats && (
+                <span style={{ marginLeft: 8 }}>
+                  · 대기 {pendingStats.pending} / 분류 {pendingStats.classified} / 승인 {pendingStats.approved}
+                </span>
+              )}
             </div>
           </div>
           <div style={{ display: "flex", gap: 8 }}>
-            <button type="button" className="ldb-btn ldb-btn-primary" onClick={() => setShowNew(true)}>
+            <button className="ldb-btn ldb-btn-primary" onClick={() => setShowCreateCorpus(true)}>
               <span className="material-symbols-outlined" style={{ fontSize: 16, marginRight: 4 }}>add</span>
-              새 JSON 만들기
+              + 작품·지문
             </button>
-            <button type="button" className="ldb-btn ldb-btn-ghost" onClick={() => setShowUpload(true)}>
-              <span className="material-symbols-outlined" style={{ fontSize: 16, marginRight: 4 }}>upload</span>
-              업로드
+            <button className="ldb-btn ldb-btn-ghost" onClick={handleClassifyAll} disabled={busy}>
+              <span className="material-symbols-outlined" style={{ fontSize: 16, marginRight: 4 }}>auto_awesome</span>
+              AI 일괄 분류
+            </button>
+            <button className="ldb-btn ldb-btn-ghost" onClick={handleImport} disabled={busy}>
+              <span className="material-symbols-outlined" style={{ fontSize: 16, marginRight: 4 }}>upload_file</span>
+              Legacy import
             </button>
           </div>
         </div>
+
         <div className="ldb-v2-workspace">
           <LDBTreePanel
             tree={tree}
@@ -150,60 +201,94 @@ function AdminLearningDBPage() {
           <div className="ldb-v2-editor">
             {!selected && (
               <div className="ldb-editor-empty">
-                좌측에서 영역 → 세부영역 → 자료종류 를 펼쳐 파일을 선택하세요.<br />
-                또는 우측 상단 [새 JSON 만들기] 로 시작하세요.
+                좌측에서 영역 → 세부영역 → 작품·지문 을 펼쳐 선택하세요.<br />
+                또는 [임시 체크리스트] 폴더에서 분류 대기 항목을 골라 처리하세요.
               </div>
             )}
-            {selected && loadingFile && (
-              <div className="ldb-editor-empty">불러오는 중...</div>
+            {selected && loadingDetail && (
+              <div className="ldb-editor-empty">불러오는 중…</div>
             )}
-            {selected && !loadingFile && editorData && (
-              <JsonVisualEditor
-                data={editorData}
-                onChange={onEditorChange}
-                title={selected.label}
-                actions={
-                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <span className="ldb-pill" title={selected.path}>{selected.path}</span>
-                    {selected.dirty && (
-                      <span className="ldb-pill" style={{ background: "#fff3cd", color: "#856404" }}>변경됨</span>
-                    )}
-                    <button type="button" className="ldb-btn ldb-btn-primary"
-                      disabled={saving || !selected.dirty}
-                      onClick={handleSave}>
-                      {saving ? "저장 중…" : "저장"}
-                    </button>
-                    <button type="button" className="ldb-btn ldb-btn-ghost"
-                      disabled={deleting}
-                      onClick={handleDelete}
-                      style={{ color: "#c0392b" }}>
-                      {deleting ? "삭제 중…" : "삭제"}
-                    </button>
-                  </div>
-                }
+            {selected && !loadingDetail && selected.kind === "corpus" && selected.data && (
+              <CorpusDetail
+                detail={selected.data}
+                onChanged={refreshSelected}
+                onDeleted={() => { setSelected(null); reloadTree(); }}
+                onToast={setToast}
+              />
+            )}
+            {selected && !loadingDetail && selected.kind === "pending" && selected.data && (
+              <PendingDetail
+                pending={selected.data}
+                onChanged={() => { setSelected(null); reloadTree(); }}
+                onToast={setToast}
               />
             )}
           </div>
         </div>
-        {showNew && (
-          <LDBNewFileModal
-            meta={meta}
-            tree={tree}
-            onClose={() => setShowNew(false)}
-            onCreated={onCreated}
-          />
-        )}
-        {showUpload && (
-          <LDBUploadModal
-            meta={meta}
-            tree={tree}
-            onClose={() => setShowUpload(false)}
-            onDone={onUploaded}
+
+        {showCreateCorpus && (
+          <CorpusCreateModal
+            onClose={() => setShowCreateCorpus(false)}
+            onCreated={(id) => {
+              setShowCreateCorpus(false);
+              setToast({ msg: "작품·지문 생성됨", type: "success" });
+              reloadTree();
+              if (id) selectFile(`corpus/${id}`, "");
+            }}
           />
         )}
       </div>
       {toast && <Toast msg={toast.msg} type={toast.type} onDone={() => setToast(null)} />}
     </AdminLayout>
+  );
+}
+
+function CorpusCreateModal({ onClose, onCreated }) {
+  const [draft, setDraft] = useState({ area: "literature", title: "" });
+  const submit = async () => {
+    if (!draft.title?.trim()) { alert("제목을 입력하세요"); return; }
+    try {
+      const r = await createCorpus(draft);
+      const ent = unwrap(r);
+      onCreated?.(ent?.id);
+    } catch (e) {
+      alert("생성 실패: " + e.message);
+    }
+  };
+  return (
+    <div style={modalBackdrop} onClick={onClose}>
+      <div style={modalBox} onClick={e => e.stopPropagation()}>
+        <h3>작품·지문 추가</h3>
+        <div style={{ display: "grid", gridTemplateColumns: "100px 1fr", gap: 8 }}>
+          <Label>영역 *</Label>
+          <select value={draft.area} onChange={e => setDraft(d => ({ ...d, area: e.target.value }))}>
+            {AREAS.map(a => <option key={a.key} value={a.key}>{a.label}</option>)}
+          </select>
+          <Label>세부영역</Label>
+          <input value={draft.subArea || ""} onChange={e => setDraft(d => ({ ...d, subArea: e.target.value }))} placeholder="현대시 / 고전시 / 논설 등" />
+          <Label>제목 *</Label>
+          <input value={draft.title || ""} onChange={e => setDraft(d => ({ ...d, title: e.target.value }))} />
+          <Label>출처</Label>
+          <input value={draft.source || ""} onChange={e => setDraft(d => ({ ...d, source: e.target.value }))} />
+          <Label>작가</Label>
+          <input value={draft.author || ""} onChange={e => setDraft(d => ({ ...d, author: e.target.value }))} />
+          <Label>시대</Label>
+          <input value={draft.era || ""} onChange={e => setDraft(d => ({ ...d, era: e.target.value }))} />
+          <Label>장르</Label>
+          <input value={draft.genre || ""} onChange={e => setDraft(d => ({ ...d, genre: e.target.value }))} />
+          <Label>주제</Label>
+          <input value={draft.topic || ""} onChange={e => setDraft(d => ({ ...d, topic: e.target.value }))} />
+          <Label>분야</Label>
+          <input value={draft.field || ""} onChange={e => setDraft(d => ({ ...d, field: e.target.value }))} />
+          <Label>본문(선택)</Label>
+          <textarea rows={6} value={draft.bodyMd || ""} onChange={e => setDraft(d => ({ ...d, bodyMd: e.target.value }))} />
+        </div>
+        <div style={{ marginTop: 12, display: "flex", justifyContent: "flex-end", gap: 8 }}>
+          <button className="ldb-btn ldb-btn-ghost" onClick={onClose}>취소</button>
+          <button className="ldb-btn ldb-btn-primary" onClick={submit}>생성</button>
+        </div>
+      </div>
+    </div>
   );
 }
 
