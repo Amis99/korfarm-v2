@@ -11,6 +11,7 @@ import com.korfarm.api.org.OrgMembershipRepository
 import com.korfarm.api.org.OrgRepository
 import com.korfarm.api.security.SecurityUtils
 import org.slf4j.LoggerFactory
+import org.springframework.context.annotation.Lazy
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -31,6 +32,7 @@ class StudyContentService(
     private val farmLearningLogRepository: FarmLearningLogRepository,
     private val economyService: EconomyService,
     private val competencyService: com.korfarm.api.learning.LearningCompetencyService,
+    @Lazy private val pendingCheckpointService: com.korfarm.api.corpus.PendingCheckpointService,
     private val objectMapper: ObjectMapper
 ) {
     private val log = LoggerFactory.getLogger(StudyContentService::class.java)
@@ -330,6 +332,16 @@ class StudyContentService(
 
         c.questionCount = studyQuestionRepository.countByContentId(contentId)
         studyContentRepository.save(c)
+
+        // 임시 체크포인트 풀 자동 추출 — 본사·기관·개인이 작성한 체크리스트가 corpus 대기열로 누적
+        runCatching {
+            pendingCheckpointService.extractFromStudyContent(
+                sourceContentId = contentId,
+                sourceUserId = c.creatorId,
+                sourceOrgId = c.ownerOrgId,
+            )
+        }.onFailure { log.warn("pending_checkpoints 추출 hook 실패 — contentId={}: {}", contentId, it.message) }
+
         return entities.size
     }
 
@@ -643,12 +655,23 @@ class StudyContentService(
         }
         request.title?.let { page.title = it.takeIf { v -> v.isNotBlank() } }
         request.markdown?.let { if (it.isNotBlank()) page.markdown = it }
+        val checkpointsChanged = request.checkpoints != null
         request.checkpoints?.let { page.checkpoints = toJson(it) }
         // 페이지 순서 변경
         if (request.pageNo != null && request.pageNo != page.pageNo) {
             reorderPage(contentId, page, request.pageNo)
         }
         studyPageRepository.save(page)
+        // checkpoints 가 갱신됐으면 임시 체크포인트 풀에 자동 누적 (멱등 — 같은 텍스트는 skip)
+        if (checkpointsChanged) {
+            runCatching {
+                pendingCheckpointService.extractFromStudyContent(
+                    sourceContentId = contentId,
+                    sourceUserId = c?.creatorId,
+                    sourceOrgId = c?.ownerOrgId,
+                )
+            }.onFailure { log.warn("pending_checkpoints 추출 hook 실패 — contentId={}: {}", contentId, it.message) }
+        }
         val questions = studyQuestionRepository.findAllByPageIdOrderByQuestionNoAsc(pageId)
         return StudyPageDto(
             id = page.id, pageNo = page.pageNo, title = page.title,

@@ -19,8 +19,9 @@ export function ProtectedRoute({ children, requiredRoles }) {
 }
 
 export function AdminRoute({ children }) {
+  // TEACHER 는 본사·기관 관리자 전용 메뉴 접근 X — admin 영역은 HQ_ADMIN/ORG_ADMIN 만
   return (
-    <ProtectedRoute requiredRoles={["HQ_ADMIN", "ORG_ADMIN", "TEACHER"]}>
+    <ProtectedRoute requiredRoles={["HQ_ADMIN", "ORG_ADMIN"]}>
       {children}
     </ProtectedRoute>
   );
