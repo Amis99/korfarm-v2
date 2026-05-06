@@ -5,6 +5,7 @@ import Toast from "../components/learning-db/Toast";
 import LDBTreePanel from "../components/learning-db/LDBTreePanel";
 import CorpusDetail, { AREAS, ITEM_TYPES, modalBackdrop, modalBox, Label, unwrap } from "../components/learning-db/CorpusDetail";
 import PendingGroupDetail from "../components/learning-db/PendingGroupDetail";
+import { useClassificationCatalog } from "../components/learning-db/useClassificationCatalog";
 import {
   searchCorpus, fetchCorpus, createCorpus,
   fetchPendingGrouped, fetchPendingStats,
@@ -246,6 +247,10 @@ function AdminLearningDBPage() {
 
 function CorpusCreateModal({ onClose, onCreated }) {
   const [draft, setDraft] = useState({ area: "literature", title: "" });
+  const catalog = useClassificationCatalog();
+  const subAreas = catalog.subAreasFor(draft.area);
+  const themes = catalog.themesFor(draft.area, draft.subArea);
+
   const submit = async () => {
     if (!draft.title?.trim()) { alert("제목을 입력하세요"); return; }
     try {
@@ -262,11 +267,18 @@ function CorpusCreateModal({ onClose, onCreated }) {
         <h3>작품·지문 추가</h3>
         <div style={{ display: "grid", gridTemplateColumns: "100px 1fr", gap: 8 }}>
           <Label>영역 *</Label>
-          <select value={draft.area} onChange={e => setDraft(d => ({ ...d, area: e.target.value }))}>
+          <select value={draft.area} onChange={e => setDraft(d => ({ ...d, area: e.target.value, subArea: "", topic: "" }))}>
             {AREAS.map(a => <option key={a.key} value={a.key}>{a.label}</option>)}
           </select>
           <Label>세부영역</Label>
-          <input value={draft.subArea || ""} onChange={e => setDraft(d => ({ ...d, subArea: e.target.value }))} placeholder="현대시 / 고전시 / 논설 등" />
+          {subAreas.length > 0 ? (
+            <select value={draft.subArea || ""} onChange={e => setDraft(d => ({ ...d, subArea: e.target.value, topic: "" }))}>
+              <option value="">— 선택 —</option>
+              {subAreas.map(s => <option key={s.code} value={s.labelKo}>{s.labelKo}</option>)}
+            </select>
+          ) : (
+            <input value={draft.subArea || ""} onChange={e => setDraft(d => ({ ...d, subArea: e.target.value }))} placeholder="자유 입력" />
+          )}
           <Label>제목 *</Label>
           <input value={draft.title || ""} onChange={e => setDraft(d => ({ ...d, title: e.target.value }))} />
           <Label>출처</Label>
@@ -274,13 +286,20 @@ function CorpusCreateModal({ onClose, onCreated }) {
           <Label>작가</Label>
           <input value={draft.author || ""} onChange={e => setDraft(d => ({ ...d, author: e.target.value }))} />
           <Label>시대</Label>
-          <input value={draft.era || ""} onChange={e => setDraft(d => ({ ...d, era: e.target.value }))} />
+          <input value={draft.era || ""} onChange={e => setDraft(d => ({ ...d, era: e.target.value }))} placeholder="고전 / 근대 / 현대 등" />
           <Label>장르</Label>
-          <input value={draft.genre || ""} onChange={e => setDraft(d => ({ ...d, genre: e.target.value }))} />
+          <input value={draft.genre || ""} onChange={e => setDraft(d => ({ ...d, genre: e.target.value }))} placeholder="시 / 소설 / 수필 등" />
           <Label>주제</Label>
-          <input value={draft.topic || ""} onChange={e => setDraft(d => ({ ...d, topic: e.target.value }))} />
+          {themes.length > 0 ? (
+            <select value={draft.topic || ""} onChange={e => setDraft(d => ({ ...d, topic: e.target.value }))}>
+              <option value="">— 선택 —</option>
+              {themes.map(t => <option key={t.code} value={t.labelKo}>{t.labelKo}</option>)}
+            </select>
+          ) : (
+            <input value={draft.topic || ""} onChange={e => setDraft(d => ({ ...d, topic: e.target.value }))} placeholder={draft.subArea ? "분류 마스터에 등록된 주제 없음 — 자유 입력" : "세부영역을 먼저 선택"} />
+          )}
           <Label>분야</Label>
-          <input value={draft.field || ""} onChange={e => setDraft(d => ({ ...d, field: e.target.value }))} />
+          <input value={draft.field || ""} onChange={e => setDraft(d => ({ ...d, field: e.target.value }))} placeholder="과학/사회/인문 등 (비문학)" />
           <Label>본문(선택)</Label>
           <textarea rows={6} value={draft.bodyMd || ""} onChange={e => setDraft(d => ({ ...d, bodyMd: e.target.value }))} />
         </div>
