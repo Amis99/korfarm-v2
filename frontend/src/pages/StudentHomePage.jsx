@@ -4,9 +4,11 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet, apiPost, normalizeInventoryKeys } from "../utils/api";
+import { FORMULA_TEXT } from "../utils/seasonScore";
 import NoticeBell from "../components/NoticeBell";
 import HarvestCraftModal from "../components/HarvestCraftModal";
 import "../styles/student-home.css";
+import "../styles/start.css";
 
 // 채팅 마크다운 렌더러 — 표·이미지·링크·코드블록 모두 지원
 function ChatMarkdown({ text }) {
@@ -50,6 +52,15 @@ const LEVEL_LABEL_MAP = {
   russell1: "러셀 1", russell2: "러셀 2", russell3: "러셀 3",
   wittgenstein1: "비트겐슈타인 1", wittgenstein2: "비트겐슈타인 2", wittgenstein3: "비트겐슈타인 3",
 };
+
+// 인벤토리 팝업용 — 씨앗 5종 + 작물 5종 (시즌 점수 클릭 시 노출)
+const INVENTORY_ITEMS = [
+  { seedKey: "seed_wheat", cropKey: "crop_wheat", emoji: "🌾", label: "밀" },
+  { seedKey: "seed_rice",  cropKey: "crop_rice",  emoji: "🍚", label: "쌀" },
+  { seedKey: "seed_corn",  cropKey: "crop_corn",  emoji: "🌽", label: "옥수수" },
+  { seedKey: "seed_grape", cropKey: "crop_grape", emoji: "🍇", label: "포도" },
+  { seedKey: "seed_apple", cropKey: "crop_apple", emoji: "🍎", label: "사과" },
+];
 
 // 작물 6종 메타 (이름·색상 표시용 — count 는 apiGet 으로 채움)
 const WALLET_META = [
@@ -255,6 +266,8 @@ function StudentHomePage() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [showCraftModal, setShowCraftModal] = useState(false);
   const [showStudyModeSheet, setShowStudyModeSheet] = useState(false);
+  const [showInventoryPopup, setShowInventoryPopup] = useState(false);
+  const [rawInventory, setRawInventory] = useState(null);
   const [activeSidebar, setActiveSidebar] = useState("daily-quiz");
   const [activeTab, setActiveTab] = useState("home");
   const [chatInput, setChatInput] = useState("");
@@ -308,6 +321,7 @@ function StudentHomePage() {
     apiGet("/v1/inventory")
       .then((d) => {
         const inv = normalizeInventoryKeys(d) || {};
+        setRawInventory(inv);
         // grapefruit
         const gp = inv.grapefruit ?? inv.grapefruits ?? d?.grapefruit ?? d?.grapefruits ?? 0;
         // crops — 배열 또는 객체 형태
@@ -511,6 +525,24 @@ function StudentHomePage() {
     navigate("/subscription");
   }
 
+  // 인벤토리 팝업용 — seeds/crops 정규화 + 비료 카운트
+  const inventorySummary = (() => {
+    const inv = rawInventory || {};
+    const rawSeeds = inv.seeds || {};
+    const rawCrops = inv.crops || {};
+    const seedsObj = Array.isArray(rawSeeds)
+      ? rawSeeds.reduce((acc, e) => { const k = e.type || e.itemType || e.seed; if (k) acc[k] = e.count || 0; return acc; }, {})
+      : rawSeeds;
+    const cropsObj = Array.isArray(rawCrops)
+      ? rawCrops.reduce((acc, e) => { const k = e.type || e.itemType || e.crop; if (k) acc[k] = e.count || 0; return acc; }, {})
+      : rawCrops;
+    return {
+      seedsObj,
+      cropsObj,
+      fertilizer: Number(inv.fertilizer ?? 0),
+    };
+  })();
+
   function handleSidebarClick(item) {
     if (free && item.lockedForFree) {
       showToast(item.label);
@@ -707,7 +739,20 @@ function StudentHomePage() {
             <ClaySpan color="orange" label="학생" />
             <span className="info">
               <span className="name">{student.name}</span>
-              <span className="meta"><span className="lvl">{student.level}</span> · {student.score.toLocaleString()}점</span>
+              <span className="meta">
+                <span className="lvl">{student.level}</span>
+                {" · "}
+                <span
+                  role="button"
+                  tabIndex={0}
+                  aria-label="시즌 점수 자세히 보기"
+                  onClick={(e) => { e.stopPropagation(); setShowInventoryPopup(true); }}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.stopPropagation(); setShowInventoryPopup(true); } }}
+                  style={{ cursor: "pointer", textDecoration: "underline", textUnderlineOffset: 2 }}
+                >
+                  {student.score.toLocaleString()}점
+                </span>
+              </span>
             </span>
           </button>
 
@@ -918,6 +963,38 @@ function StudentHomePage() {
           </>
         )}
 
+        {/* ─── 시즌 점수 인벤토리 팝업 (씨앗·작물·비료·시즌 공식) ─── */}
+        {showInventoryPopup && (
+          <div className="start-modal-overlay" onClick={() => setShowInventoryPopup(false)}>
+            <div className="start-modal-card" onClick={(e) => e.stopPropagation()}>
+              <h2>보유 현황</h2>
+              <div style={{ display: "grid", gap: 8 }}>
+                {INVENTORY_ITEMS.map((item) => (
+                  <div key={item.seedKey} className="start-inv-row">
+                    <span className="inv-emoji">{item.emoji}</span>
+                    <strong>{item.label}</strong>
+                    <span>씨앗 {inventorySummary.seedsObj[item.seedKey] ?? 0}</span>
+                    <span style={{ color: "#888" }}>·</span>
+                    <span>수확물 {inventorySummary.cropsObj[item.cropKey] ?? 0}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="start-inv-row" style={{ marginTop: 10 }}>
+                <span className="inv-emoji">🧪</span>
+                <strong>비료</strong>
+                <span>{inventorySummary.fertilizer}개</span>
+              </div>
+              <div className="start-formula-box">
+                <strong>시즌 점수 공식</strong><br />
+                {FORMULA_TEXT}
+              </div>
+              <button type="button" className="start-modal-close" onClick={() => setShowInventoryPopup(false)}>
+                닫기
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* ─── TOAST (무료 회원 잠긴 항목 클릭 시) ─── */}
         {free && (
           <div className={`toast${toast.show ? " show" : ""}`} role="status" aria-live="polite">
@@ -1110,7 +1187,16 @@ function FreeMain({ student, onCardClick, onLockedClick, onSubscribe }) {
             <strong>{student.name.replace(/이$/, "")} 학생</strong>, 어서 와요!<br />
             오늘은 무료 학습부터 시작해요.
           </h1>
-          <p className="greeting-meta">시즌 점수 <strong>{student.score.toLocaleString()}</strong>점</p>
+          <p
+            className="greeting-meta"
+            role="button"
+            tabIndex={0}
+            onClick={() => setShowInventoryPopup(true)}
+            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setShowInventoryPopup(true); } }}
+            style={{ cursor: "pointer" }}
+          >
+            시즌 점수 <strong>{student.score.toLocaleString()}</strong>점 <span style={{ fontSize: 11, opacity: 0.65 }}>· 자세히 ›</span>
+          </p>
         </div>
       </section>
 
