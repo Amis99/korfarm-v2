@@ -13,20 +13,21 @@ function getDayOfYear() {
   return Math.floor(diff / oneDay);
 }
 
-// 프론트의 levelFolder("saussure1") → 백엔드 levelId("SAUSSURE_1")
+// 프론트의 levelFolder("saussure1") → 백엔드 levelId
+// V0121 이후 DB level_id 는 소문자 통일 (saussure1, russell1 등). 그대로 사용.
 const LEVEL_FOLDER_TO_BACKEND_ID = {
-  saussure1: "SAUSSURE_1",
-  saussure2: "SAUSSURE_2",
-  saussure3: "SAUSSURE_3",
-  frege1: "FREGE_1",
-  frege2: "FREGE_2",
-  frege3: "FREGE_3",
-  russell1: "RUSSELL_1",
-  russell2: "RUSSELL_2",
-  russell3: "RUSSELL_3",
-  wittgenstein1: "WITTGENSTEIN_1",
-  wittgenstein2: "WITTGENSTEIN_2",
-  wittgenstein3: "WITTGENSTEIN_3",
+  saussure1: "saussure1",
+  saussure2: "saussure2",
+  saussure3: "saussure3",
+  frege1: "frege1",
+  frege2: "frege2",
+  frege3: "frege3",
+  russell1: "russell1",
+  russell2: "russell2",
+  russell3: "russell3",
+  wittgenstein1: "wittgenstein1",
+  wittgenstein2: "wittgenstein2",
+  wittgenstein3: "wittgenstein3",
 };
 
 /**
