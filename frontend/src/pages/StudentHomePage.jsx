@@ -873,7 +873,7 @@ function PaidMain({
                     {m.content}
                     {m.showRecommendations && (
                       <div className="reco-stack" role="list">
-                        {RECOMMENDATIONS.map((r) => (
+                        {FALLBACK_RECOMMENDATIONS.map((r) => (
                           <button
                             key={r.id}
                             className="reco-card"
