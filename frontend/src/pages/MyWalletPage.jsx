@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiGet, normalizeInventoryKeys } from "../utils/api";
+import HarvestCraftModal from "../components/HarvestCraftModal";
 import "../styles/student-home.css";
 import "../styles/wallet.css";
 
@@ -47,6 +48,7 @@ function MyWalletPage() {
   const [crops, setCrops] = useState({});
   const [transactions, setTransactions] = useState([]);
   const [filter, setFilter] = useState("all");
+  const [showCraft, setShowCraft] = useState(false);
   const [priority, setPriority] = useState(() => {
     try {
       const saved = localStorage.getItem(PRIORITY_KEY);
@@ -106,7 +108,25 @@ function MyWalletPage() {
   }
 
   function handleExchange() {
-    alert("씨앗 → 작물 교환은 준비 중입니다.");
+    setShowCraft(true);
+  }
+
+  function handleCrafted() {
+    // 교환 후 잔액·작물 갱신
+    apiGet("/v1/inventory")
+      .then((inv) => {
+        const norm = normalizeInventoryKeys(inv);
+        const cropsObj = {};
+        const rawCrops = norm?.crops || {};
+        if (Array.isArray(rawCrops)) {
+          rawCrops.forEach((e) => { cropsObj[e.type || e.itemType] = e.count || 0; });
+        } else {
+          Object.assign(cropsObj, rawCrops);
+        }
+        setCrops(cropsObj);
+      })
+      .catch(() => {});
+    setShowCraft(false);
   }
 
   function savePriority() {
@@ -283,6 +303,12 @@ function MyWalletPage() {
       </section>
 
       <div style={{ height: "32px" }} />
+
+      <HarvestCraftModal
+        open={showCraft}
+        onClose={() => setShowCraft(false)}
+        onCrafted={handleCrafted}
+      />
     </div>
   );
 }
