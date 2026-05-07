@@ -61,8 +61,24 @@ const WALLET_META = [
   { key: "crop_apple", color: "red",    name: "사과" },
 ];
 
-// RECOMMENDATIONS — daily-analysis 응답으로 동적 채움. fallback 빈 배열.
-const FALLBACK_RECOMMENDATIONS = [];
+// 채팅 헤더 day-label — 오늘 / 어제 / 날짜 + 현재 시각
+function formatTodayLabel() {
+  const d = new Date();
+  const h = d.getHours();
+  const m = d.getMinutes();
+  const ampm = h < 12 ? "오전" : "오후";
+  const h12 = ((h + 11) % 12) + 1;
+  const mm = String(m).padStart(2, "0");
+  return `오늘 · ${ampm} ${h12}:${mm}`;
+}
+
+// 첫 인사 추천 카드 — 학생이 어디부터 시작할지 안내 (실 라우팅)
+const FALLBACK_RECOMMENDATIONS = [
+  { id: "daily-quiz",    color: "yellow", label: "퀴즈",  title: "오늘의 일일 퀴즈",  meta: "10문제 · 5분",    flag: null },
+  { id: "daily-reading", color: "blue",   label: "독해",  title: "오늘의 일일 독해",  meta: "정독 훈련 · 약 10분", flag: null },
+  { id: "duel",          color: "red",    label: "대결",  title: "대결 라이브",       meta: "친구·AI와 라운드제", flag: "LIVE" },
+  { id: "diagnostic",    color: "green",  label: "진단",  title: "역량 진단 테스트",   meta: "10대 역량 분석",    flag: null },
+];
 
 // 페르소나별 첫 인사 톤 — useEffect 안에서 학생 이름과 결합해 동적 생성
 const PERSONA_GREETING = {
@@ -72,23 +88,14 @@ const PERSONA_GREETING = {
   null: () => "안녕하세요. 먼저 캐릭터를 골라주세요. 우측 상단에서 변경할 수 있어요.",
 };
 
-// 학습 계획표 fallback (API 실패 시)
-const FALLBACK_PLAN = [
-  { id: "p1", title: "일일 퀴즈 10문제", meta: "5분 · 비문학 + 어휘", due: "오늘", dueSoft: false, done: false },
-];
+// 학습 계획표 fallback — 라우팅 정보 없는 가짜 카드 노출 X (빈 배열)
+const FALLBACK_PLAN = [];
 
 // 시즌 랭킹 fallback
 const FALLBACK_RANKING = [
   { id: "1", pos: "🥇", color: "purple", name: "—", score: "—", me: false },
   { id: "2", pos: "🥈", color: "blue",   name: "—", score: "—", me: false },
   { id: "3", pos: "🥉", color: "orange", name: "—", score: "—", me: false },
-];
-
-const QUICK_CHIPS = [
-  { id: "q1", text: "📷 사진으로 물어보기", q: "사진을 찍어서 모르는 문제를 물어보고 싶어요" },
-  { id: "q2", text: "💡 어휘 도움", q: "헷갈리는 단어 뜻을 알려주세요" },
-  { id: "q3", text: "✏ 글쓰기 첨삭", q: "오늘 쓴 글 첨삭해 주세요" },
-  { id: "q4", text: "📊 약점 분석", q: "제 약점 영역을 분석해 주세요" },
 ];
 
 // 무료 회원용 큰 카드 (4장)
@@ -636,22 +643,30 @@ function StudentHomePage() {
     }
   }
 
-  function handleQuickChip(q) {
-    setChatInput(q);
-    const inputEl = document.getElementById("student-chat-input");
-    if (inputEl) inputEl.focus();
-  }
-
   function handlePersonaSwap() {
     navigate("/tutor/persona-select");
   }
 
   function handleWalletItemClick(key) {
-    console.log("[wallet]", key);
+    // 자몽 → 자몽 지갑 / 작물 → 수확 장부
+    if (key === "grapefruit") {
+      navigate("/my/grapefruit");
+    } else {
+      navigate("/harvest-ledger");
+    }
   }
 
   function handleRecommendationClick(id) {
-    console.log("[recommendation]", id);
+    // 추천 카드 클릭 — id 는 contentId(content_xxx) 또는 라우트 키
+    if (typeof id === "string" && id.startsWith("content_")) {
+      navigate(`/learning/${id}`);
+      return;
+    }
+    if (id === "daily-quiz") navigate("/daily-quiz");
+    else if (id === "daily-reading") navigate("/daily-reading");
+    else if (id === "duel") navigate("/duel");
+    else if (id === "diagnostic") navigate("/diagnostic/v2");
+    else navigate("/farm-mode");
   }
 
   return (
@@ -790,7 +805,6 @@ function StudentHomePage() {
                 chatInput={chatInput}
                 setChatInput={setChatInput}
                 handleSendChat={handleSendChat}
-                handleQuickChip={handleQuickChip}
                 handlePersonaSwap={handlePersonaSwap}
                 handleRecommendationClick={handleRecommendationClick}
                 chatHistoryRef={chatHistoryRef}
@@ -941,7 +955,7 @@ function StudentHomePage() {
 // ─── 메인 영역 — 유료 회원 (AI 튜터 채팅) ──────────────────────────
 
 function PaidMain({
-  tutor, student, messages, chatInput, setChatInput, handleSendChat, handleQuickChip,
+  tutor, student, messages, chatInput, setChatInput, handleSendChat,
   handlePersonaSwap, handleRecommendationClick, chatHistoryRef, navigate, tutorStatus,
 }) {
   return (
@@ -949,7 +963,7 @@ function PaidMain({
       {/* 모바일에서만 보이는 무료 기능 가로 스크롤 */}
       <div className="mobile-features-head">
         <h2>🌟 무료 기능</h2>
-        <a className="more" href="#" aria-label="무료 기능 전체 보기" onClick={(e) => e.preventDefault()}>전체</a>
+        <Link className="more" to="/daily-quiz" aria-label="무료 기능 — 일일 퀴즈로 이동">전체</Link>
       </div>
       <div className="mobile-features" role="list">
         <button className="feature-card tint-yellow" role="listitem" aria-label="일일 퀴즈 시작하기" onClick={() => navigate("/daily-quiz")}>
@@ -995,7 +1009,7 @@ function PaidMain({
         </div>
 
         <div className="chat-history" id="chat-history" data-od-id="chat-history" ref={chatHistoryRef}>
-          <div className="day-label">오늘 · 오후 4:12</div>
+          <div className="day-label">{formatTodayLabel()}</div>
           {messages.map((m) => (
             <div key={m.id} className={`msg msg-${m.role}`}>
               {m.role === "tutor" && (
@@ -1173,7 +1187,7 @@ function WalletWidget({ wallet, onItemClick, compact = false }) {
     <section className="widget">
       <div className="widget-head">
         <h3 className="widget-title">🌾 작물 지갑</h3>
-        <a className="widget-cta" href="#" onClick={(e) => e.preventDefault()}>{compact ? "상점 ›" : "상점 가기 ›"}</a>
+        <Link className="widget-cta" to="/shop">{compact ? "상점 ›" : "상점 가기 ›"}</Link>
       </div>
       <div className="wallet-grid">
         {(wallet || []).map((w) => (
@@ -1206,30 +1220,36 @@ function PlanWidget({ plan, onToggle, fullMeta = false }) {
     <section className="widget">
       <div className="widget-head">
         <h3 className="widget-title">📅 학습 계획표</h3>
-        <a className="widget-cta" href="#" onClick={(e) => e.preventDefault()}>열기 ›</a>
+        <Link className="widget-cta" to="/study-plan">열기 ›</Link>
       </div>
       <p className="plan-meta-row">
         오늘 미수행 <strong>{pendingCount}건</strong>{fullMeta ? " · 내일까지 끝내요" : ""}
       </p>
-      <div className="plan-list">
-        {plan.map((p) => (
-          <div
-            key={p.id}
-            className={`plan-row${p.done ? " done" : ""}`}
-            role="button"
-            tabIndex={0}
-            onClick={() => onToggle(p.id)}
-            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onToggle(p.id); } }}
-          >
-            <span className={`plan-check${p.done ? " done" : ""}`} aria-hidden="true"></span>
-            <span className="plan-text">
-              <span className="plan-title">{p.title}</span>
-              <span className="plan-meta">{p.meta}</span>
-            </span>
-            {p.due && <span className={`plan-due${p.dueSoft ? " soft" : ""}`}>{p.due}</span>}
-          </div>
-        ))}
-      </div>
+      {plan.length === 0 ? (
+        <p style={{ color: "var(--muted)", fontSize: 13, padding: "8px 4px" }}>
+          오늘 배정된 학습이 없어요. 농장별 모드에서 자유롭게 풀어볼 수 있어요.
+        </p>
+      ) : (
+        <div className="plan-list">
+          {plan.map((p) => (
+            <div
+              key={p.id}
+              className={`plan-row${p.done ? " done" : ""}`}
+              role="button"
+              tabIndex={0}
+              onClick={() => onToggle(p.id)}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onToggle(p.id); } }}
+            >
+              <span className={`plan-check${p.done ? " done" : ""}`} aria-hidden="true"></span>
+              <span className="plan-text">
+                <span className="plan-title">{p.title}</span>
+                <span className="plan-meta">{p.meta}</span>
+              </span>
+              {p.due && <span className={`plan-due${p.dueSoft ? " soft" : ""}`}>{p.due}</span>}
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }
@@ -1259,7 +1279,7 @@ function RankingWidget({ ranking, student, free = false }) {
     <section className="widget">
       <div className="widget-head">
         <h3 className="widget-title">🏆 시즌 랭킹</h3>
-        <a className="widget-cta" href="#" onClick={(e) => e.preventDefault()}>전체 ›</a>
+        <Link className="widget-cta" to="/ranking">전체 ›</Link>
       </div>
       <div className="rank-list">
         {(ranking || []).map((r) => (
