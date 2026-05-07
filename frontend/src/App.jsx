@@ -8,6 +8,7 @@ import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import StartPage from "./pages/StartPage";
 import StudentHomePage from "./pages/StudentHomePage";
+import ParentHomePage from "./pages/ParentHomePage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 // 나머지 페이지 (lazy import - 코드 분할)
@@ -214,6 +215,7 @@ function App() {
           {/* 인증 필요 페이지 */}
           <Route path="/start" element={P(<StartPage />)} />
           <Route path="/start-new" element={P(<StudentHomePage />)} />
+          <Route path="/parent-home" element={P(<ParentHomePage />)} />
           <Route path="/profile" element={P(<ProfilePage />)} />
           <Route path="/pending" element={P(<PendingApprovalPage />)} />
           <Route path="/community" element={P(<CommunityPage />)} />

@@ -17,6 +17,9 @@ class PaymentEntity(
     @Column(name = "user_id", nullable = false)
     var userId: String,
 
+    @Column(name = "target_user_id")
+    var targetUserId: String? = null,
+
     @Column(name = "payment_type", nullable = false)
     var paymentType: String,
 

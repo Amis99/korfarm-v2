@@ -236,6 +236,51 @@ class PaymentService(
         )
     }
 
+    /**
+     * 학부모(payingUserId) 가 자녀(childUserId) 의 구독을 결제 대행.
+     * payments.user_id = 학부모, payments.target_user_id = 자녀.
+     * 토스 customer 정보는 학부모 기준 (실제 카드 결제자).
+     * confirm 시점에 자녀의 subscription 이 갱신됨.
+     */
+    @Transactional
+    fun prepareSubscriptionForChild(payingUserId: String, childUserId: String, months: Int): PaymentPrepareResult {
+        val expectedAmount = PLAN_PRICES[months]
+            ?: throw ApiException("INVALID_REQUEST", "유효하지 않은 구독 기간: $months", HttpStatus.BAD_REQUEST)
+
+        val tossOrderId = generateTossOrderId(payingUserId)
+        val childUser = userRepository.findById(childUserId).orElseThrow {
+            ApiException("CHILD_NOT_FOUND", "자녀 사용자를 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        val orderName = "국어농장 구독 ${months}개월 (${childUser.name ?: "자녀"})"
+
+        val payment = PaymentEntity(
+            id = IdGenerator.newId("pay"),
+            userId = payingUserId,
+            targetUserId = childUserId,
+            paymentType = "subscription",
+            amount = expectedAmount,
+            status = "pending",
+            provider = "toss",
+            orderName = orderName,
+            tossOrderId = tossOrderId,
+            subscriptionMonths = months
+        )
+        paymentRepository.save(payment)
+
+        val customer = resolveCustomer(payingUserId)
+        return PaymentPrepareResult(
+            paymentId = payment.id,
+            tossOrderId = tossOrderId,
+            amount = expectedAmount,
+            orderName = orderName,
+            clientKey = tossProperties.clientKey,
+            customerKey = customer.customerKey,
+            customerName = customer.customerName,
+            customerEmail = customer.customerEmail,
+            customerMobilePhone = customer.customerMobilePhone,
+        )
+    }
+
     @Transactional
     fun prepareShop(userId: String, request: ShopPrepareRequest): PaymentPrepareResult {
         val order = orderRepository.findById(request.orderId).orElseThrow {
@@ -329,10 +374,12 @@ class PaymentService(
         paymentRepository.save(payment)
 
         // 후처리: 구독 생성 또는 쇼핑 주문 완료
+        // 결제 대행(학부모→자녀) 시 targetUserId 가 실제 구독자
         when (payment.paymentType) {
             "subscription" -> {
                 val months = payment.subscriptionMonths ?: 1
-                upsertSubscription(userId, months)
+                val subscriberUserId = payment.targetUserId ?: userId
+                upsertSubscription(subscriberUserId, months)
             }
             "shop" -> {
                 completeShopOrder(payment)

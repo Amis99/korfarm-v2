@@ -1,28 +1,46 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { apiGet } from "../utils/api";
+import { apiGet, normalizeInventoryKeys } from "../utils/api";
 import "../styles/student-home.css";
 
-// ─── 정적 데이터 (다음 단계에서 apiGet 으로 교체) ───────────────────
+// ─── fallback / 기본값 (API 응답이 늦거나 실패 시) ───────────────────
 
-const STUDENT = {
-  name: "민준이",
-  level: "러셀1",
-  score: 2340,
-  grapefruit: 64,
-  notifications: 3,
-  rankPos: 156,
-  rankTotal: 9420,
+const DEFAULT_STUDENT = {
+  name: "학생",
+  level: "—",
+  score: 0,
+  grapefruit: 0,
+  notifications: 0,
+  rankPos: 0,
+  rankTotal: 0,
 };
 
-// AI 튜터 페르소나 (다음 단계에서 user.preferredTutorPersona 로 교체)
-const TUTOR = {
-  persona: "owl",
-  name: "부엉이샘",
-  emoji: "🦉",
-  initial: "부엉",
+// 페르소나 키 → 표시용 메타
+const PERSONA_MAP = {
+  owl:      { name: "부엉이샘", emoji: "🦉", initial: "부엉" },
+  amis:     { name: "아미스샘", emoji: "👨‍🌾", initial: "아미스" },
+  nurungji: { name: "누룽지샘", emoji: "👩‍🌾", initial: "누룽지" },
 };
+const DEFAULT_TUTOR = { persona: null, name: "AI 선생님", emoji: "🌱", initial: "AI" };
+
+// 레벨 코드 → 한글 (표시용)
+const LEVEL_LABEL_MAP = {
+  saussure1: "소쉬르 1", saussure2: "소쉬르 2", saussure3: "소쉬르 3",
+  frege1: "프레게 1", frege2: "프레게 2", frege3: "프레게 3",
+  russell1: "러셀 1", russell2: "러셀 2", russell3: "러셀 3",
+  wittgenstein1: "비트겐슈타인 1", wittgenstein2: "비트겐슈타인 2", wittgenstein3: "비트겐슈타인 3",
+};
+
+// 작물 6종 메타 (이름·색상 표시용 — count 는 apiGet 으로 채움)
+const WALLET_META = [
+  { key: "grapefruit", color: "orange", name: "자몽", primary: true },
+  { key: "crop_wheat", color: "cream",  name: "밀" },
+  { key: "crop_rice",  color: "yellow", name: "쌀" },
+  { key: "crop_corn",  color: "yellow", name: "옥수수" },
+  { key: "crop_grape", color: "purple", name: "포도" },
+  { key: "crop_apple", color: "red",    name: "사과" },
+];
 
 const RECOMMENDATIONS = [
   { id: "r1", color: "yellow", label: "어휘", title: "어휘 5문제", flag: "즉시 시작", meta: "약 3분 · 어제 틀린 단어 위주" },
@@ -83,26 +101,16 @@ const INITIAL_MESSAGES = [
   },
 ];
 
-const WALLET = [
-  { key: "grapefruit", color: "orange", name: "자몽", count: 64, primary: true },
-  { key: "wheat",      color: "cream",  name: "밀",   count: 28 },
-  { key: "rice",       color: "yellow", name: "쌀",   count: 18 },
-  { key: "corn",       color: "yellow", name: "옥수수", count: 9 },
-  { key: "grape",      color: "purple", name: "포도", count: 5 },
-  { key: "apple",      color: "red",    name: "사과", count: 4 },
-];
-
-const INITIAL_PLAN = [
+// 학습 계획표 fallback (API 실패 시)
+const FALLBACK_PLAN = [
   { id: "p1", title: "일일 퀴즈 10문제", meta: "5분 · 비문학 + 어휘", due: "오늘", dueSoft: false, done: false },
-  { id: "p2", title: "한자 성어 7개", meta: "8분 · 어제 학습 이어가기", due: "오늘", dueSoft: false, done: false },
-  { id: "p3", title: "독해 5문제 — 사회", meta: "12분 · 도시화 지문", due: "내일", dueSoft: true, done: false },
-  { id: "p4", title: "서평 일기 쓰기", meta: "완료 · 첨삭 대기 중", due: null, dueSoft: false, done: true },
 ];
 
-const RANKING = [
-  { id: "1", pos: "🥇", color: "purple", name: "김다은", score: "8,420점", me: false },
-  { id: "2", pos: "🥈", color: "blue",   name: "박서준", score: "7,985점", me: false },
-  { id: "3", pos: "🥉", color: "orange", name: "민준이", score: "7,612점", me: true  },
+// 시즌 랭킹 fallback
+const FALLBACK_RANKING = [
+  { id: "1", pos: "🥇", color: "purple", name: "—", score: "—", me: false },
+  { id: "2", pos: "🥈", color: "blue",   name: "—", score: "—", me: false },
+  { id: "3", pos: "🥉", color: "orange", name: "—", score: "—", me: false },
 ];
 
 const QUICK_CHIPS = [
@@ -249,21 +257,171 @@ function StudentHomePage() {
   const [activeTab, setActiveTab] = useState("home");
   const [chatInput, setChatInput] = useState("");
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
-  const [plan, setPlan] = useState(INITIAL_PLAN);
-  const [profile, setProfile] = useState(null);
+  const [plan, setPlan] = useState(FALLBACK_PLAN);
   const [toast, setToast] = useState({ show: false, msg: "", subscribed: false });
   const chatHistoryRef = useRef(null);
   const toastTimerRef = useRef(null);
 
-  // 데이터 fetch (다음 단계에서 본격 연동)
+  // ─── 실제 API 데이터 state ─────────────────────────────────
+  const [student, setStudent] = useState(DEFAULT_STUDENT);
+  const [tutor, setTutor] = useState(DEFAULT_TUTOR);
+  const [wallet, setWallet] = useState(WALLET_META.map((w) => ({ ...w, count: 0 })));
+  const [ranking, setRanking] = useState(FALLBACK_RANKING);
+
+  // 1) 학생 프로필 — /v1/auth/me
   useEffect(() => {
     if (!isLoggedIn) return;
-    // TODO: 실제 데이터 연동
-    // apiGet("/v1/auth/me").then(setProfile).catch(() => {});
-    // apiGet("/v1/inventory").then(...);
-    // apiGet("/v1/study-plans").then(...);
-    // apiGet("/v1/tutor/persona").then(...);
+    apiGet("/v1/auth/me")
+      .then((data) => {
+        const lid = data?.level_id || data?.levelId;
+        setStudent((prev) => ({
+          ...prev,
+          name: data?.name || prev.name,
+          level: LEVEL_LABEL_MAP[lid] || lid || prev.level,
+        }));
+      })
+      .catch((e) => console.error("[auth/me]", e));
   }, [isLoggedIn]);
+
+  // 2) 페르소나 — /v1/tutor/persona
+  useEffect(() => {
+    if (!isLoggedIn || free) return;
+    apiGet("/v1/tutor/persona")
+      .then((data) => {
+        const persona = data?.persona;
+        if (persona && PERSONA_MAP[persona]) {
+          setTutor({ persona, ...PERSONA_MAP[persona] });
+        } else {
+          setTutor(DEFAULT_TUTOR);
+        }
+      })
+      .catch((e) => console.error("[tutor/persona]", e));
+  }, [isLoggedIn, free]);
+
+  // 3) 작물 잔액 — /v1/inventory
+  useEffect(() => {
+    if (!isLoggedIn) return;
+    apiGet("/v1/inventory")
+      .then((d) => {
+        const inv = normalizeInventoryKeys(d) || {};
+        // grapefruit
+        const gp = inv.grapefruit ?? inv.grapefruits ?? d?.grapefruit ?? d?.grapefruits ?? 0;
+        // crops — 배열 또는 객체 형태
+        const rawCrops = inv.crops || d?.crops || {};
+        const cropsObj = Array.isArray(rawCrops)
+          ? rawCrops.reduce((acc, e) => {
+              const k = e.type || e.itemType || e.crop;
+              if (k) acc[k] = e.count || 0;
+              return acc;
+            }, {})
+          : rawCrops;
+        setWallet(WALLET_META.map((w) => ({
+          ...w,
+          count: w.key === "grapefruit" ? Number(gp) || 0 : Number(cropsObj?.[w.key] ?? 0),
+        })));
+        setStudent((prev) => ({ ...prev, grapefruit: Number(gp) || 0 }));
+      })
+      .catch((e) => console.error("[inventory]", e));
+  }, [isLoggedIn]);
+
+  // 4) 학습 계획표 미수행 셀 — /v1/study-plans + 각 plan 의 matrix
+  useEffect(() => {
+    if (!isLoggedIn || free) return;
+    apiGet("/v1/study-plans")
+      .then(async (data) => {
+        const plans = Array.isArray(data) ? data : [];
+        if (plans.length === 0) {
+          setPlan([]);
+          return;
+        }
+        // 가장 최근 plan 의 cells 만 가져와 보여줌 (간단화 — 풀 통합은 다음 단계)
+        const tasks = [];
+        for (const p of plans.slice(0, 1)) {
+          try {
+            const matrix = await apiGet(`/v1/study-plans/${p.planId || p.id}/matrix`);
+            const cells = Array.isArray(matrix?.cells) ? matrix.cells : [];
+            cells.forEach((c, idx) => {
+              const isPending =
+                c.status === "pending" ||
+                c.status === "partial" ||
+                c.status === "retry" ||
+                c.status === "in_progress";
+              if (!isPending && c.status !== "completed") return;
+              tasks.push({
+                id: c.id || `c-${idx}`,
+                title: c.assignedLabel || c.title || c.cellRefId || "학습",
+                meta: c.scopeName || c.assetType || "",
+                due: c.dueAt ? "오늘" : null,
+                dueSoft: false,
+                done: c.status === "completed",
+              });
+            });
+          } catch (err) {
+            console.error("[matrix]", err);
+          }
+        }
+        setPlan(tasks.length > 0 ? tasks.slice(0, 8) : FALLBACK_PLAN);
+      })
+      .catch((e) => console.error("[study-plans]", e));
+  }, [isLoggedIn, free]);
+
+  // 5) 시즌 랭킹 + 시즌 점수 — /v1/seasons/current → harvest-rankings
+  useEffect(() => {
+    if (!isLoggedIn) return;
+    apiGet("/v1/seasons/current")
+      .then((season) => {
+        const sid = season?.id || season?.seasonId;
+        if (!sid) return;
+        return apiGet(`/v1/seasons/${sid}/harvest-rankings`).then((r) => {
+          const items = r?.items || r || [];
+          const myUid = user?.id || user?.userId;
+          const myRow = items.find((x) => x.userId === myUid);
+          const top3 = items.slice(0, 3).map((x, i) => ({
+            id: String(i + 1),
+            pos: ["🥇", "🥈", "🥉"][i] || `${i + 1}`,
+            color: ["purple", "blue", "orange"][i] || "cream",
+            name: x.userName || x.name || "—",
+            score: `${(x.value ?? x.totalCrops ?? x.score ?? 0).toLocaleString()}점`,
+            me: x.userId === myUid,
+          }));
+          setRanking(top3.length > 0 ? top3 : FALLBACK_RANKING);
+          if (myRow) {
+            const myPos = items.findIndex((x) => x.userId === myUid) + 1;
+            setStudent((prev) => ({
+              ...prev,
+              score: Number(myRow.value ?? myRow.totalCrops ?? myRow.score ?? prev.score),
+              rankPos: myPos || prev.rankPos,
+              rankTotal: items.length,
+            }));
+          } else {
+            setStudent((prev) => ({ ...prev, rankTotal: items.length }));
+          }
+        });
+      })
+      .catch((e) => console.error("[seasons]", e));
+  }, [isLoggedIn, user]);
+
+  // 첫 인사 메시지의 학생 이름 동적 치환 (정적 sample 유지하되 이름만 교체)
+  useEffect(() => {
+    if (!student.name || student.name === DEFAULT_STUDENT.name) return;
+    const dispName = student.name.replace(/이$/, "") + " 학생";
+    setMessages((prev) =>
+      prev.map((m) =>
+        m.id === "m1"
+          ? {
+              ...m,
+              content: (
+                <p>
+                  <strong>{dispName}</strong>, 어서 와요! 어제 비문학 점수 <strong>80점</strong> 정말 잘했어요.<br />
+                  오늘은 <strong>어휘 보강</strong>이 어떨까요? 세 가지 추천드려요 👇
+                </p>
+              ),
+            }
+          : m,
+      ),
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [student.name]);
 
   // 채팅 자동 스크롤 — 메시지 변경 시
   useEffect(() => {
@@ -374,7 +532,10 @@ function StudentHomePage() {
   }
 
   function handlePersonaSwap() {
-    navigate("/tutor/persona-select");
+    // /tutor/persona-select 미존재 — 다음 단계 신설 예정
+    console.warn("[persona] /tutor/persona-select 라우트 미구현 — 임시로 /profile 로 이동");
+    alert("캐릭터 변경 화면 준비 중입니다. 곧 만나요!");
+    // navigate("/tutor/persona-select");
   }
 
   function handleWalletItemClick(key) {
@@ -417,27 +578,27 @@ function StudentHomePage() {
             </button>
           )}
 
-          <button className="hdr-user" aria-label={`${STUDENT.name} 학생 프로필`} onClick={() => navigate("/profile")}>
+          <button className="hdr-user" aria-label={`${student.name} 학생 프로필`} onClick={() => navigate("/profile")}>
             <ClaySpan color="orange" label="학생" />
             <span className="info">
-              <span className="name">{STUDENT.name}</span>
-              <span className="meta"><span className="lvl">{STUDENT.level}</span> · {STUDENT.score.toLocaleString()}점</span>
+              <span className="name">{student.name}</span>
+              <span className="meta"><span className="lvl">{student.level}</span> · {student.score.toLocaleString()}점</span>
             </span>
           </button>
 
           <div className="hdr-actions">
             <button
               className="icon-btn"
-              aria-label={free ? "작물 지갑 — 0개, 구독 후 활성화" : `작물 지갑 — 자몽 ${STUDENT.grapefruit}개`}
+              aria-label={free ? "작물 지갑 — 0개, 구독 후 활성화" : `작물 지갑 — 자몽 ${student.grapefruit}개`}
               onClick={() => free ? showToast("작물 지갑") : navigate("/my/grapefruit")}
             >
               <ClaySpan color={free ? "cream" : "orange"} label={free ? "지갑" : "자몽"} />
-              <span className={`icon-count${free ? " zero" : ""}`}>{free ? 0 : STUDENT.grapefruit}</span>
+              <span className={`icon-count${free ? " zero" : ""}`}>{free ? 0 : student.grapefruit}</span>
               {free && <span className="icon-lock-mini" aria-hidden="true">🔒</span>}
             </button>
-            <button className="icon-btn" aria-label={`알림 ${free ? 1 : STUDENT.notifications}건`}>
+            <button className="icon-btn" aria-label={`알림 ${free ? 1 : student.notifications}건`}>
               <ClaySpan color="rose" label="알림" />
-              <span className="icon-dot">{free ? 1 : STUDENT.notifications}</span>
+              <span className="icon-dot">{free ? 1 : student.notifications}</span>
             </button>
             <button className="icon-btn" aria-label="설정" onClick={() => navigate("/profile")}>
               <ClaySpan color="green" label="설정" />
@@ -508,9 +669,16 @@ function StudentHomePage() {
           {/* ─── MAIN CENTER ─── */}
           <main className="center" id="center">
             {free ? (
-              <FreeMain onCardClick={(c) => navigate(c.route)} onLockedClick={(t) => showToast(t)} onSubscribe={handleSubscribe} />
+              <FreeMain
+                student={student}
+                onCardClick={(c) => navigate(c.route)}
+                onLockedClick={(t) => showToast(t)}
+                onSubscribe={handleSubscribe}
+              />
             ) : (
               <PaidMain
+                tutor={tutor}
+                student={student}
                 messages={messages}
                 chatInput={chatInput}
                 setChatInput={setChatInput}
@@ -532,11 +700,11 @@ function StudentHomePage() {
                 </>
               ) : (
                 <>
-                  <WalletWidget onItemClick={handleWalletItemClick} />
+                  <WalletWidget wallet={wallet} onItemClick={handleWalletItemClick} />
                   <PlanWidget plan={plan} onToggle={handlePlanToggle} fullMeta />
                 </>
               )}
-              <RankingWidget free={free} />
+              <RankingWidget ranking={ranking} student={student} free={free} />
             </div>
           </main>
 
@@ -549,11 +717,11 @@ function StudentHomePage() {
               </>
             ) : (
               <>
-                <WalletWidget onItemClick={handleWalletItemClick} compact />
+                <WalletWidget wallet={wallet} onItemClick={handleWalletItemClick} compact />
                 <PlanWidget plan={plan} onToggle={handlePlanToggle} />
               </>
             )}
-            <RankingWidget free={free} />
+            <RankingWidget ranking={ranking} student={student} free={free} />
           </aside>
         </div>
 
@@ -599,7 +767,7 @@ function StudentHomePage() {
 // ─── 메인 영역 — 유료 회원 (AI 튜터 채팅) ──────────────────────────
 
 function PaidMain({
-  messages, chatInput, setChatInput, handleSendChat, handleQuickChip,
+  tutor, student, messages, chatInput, setChatInput, handleSendChat, handleQuickChip,
   handlePersonaSwap, handleRecommendationClick, chatHistoryRef, navigate,
 }) {
   return (
@@ -628,22 +796,25 @@ function PaidMain({
         <button className="feature-card tint-green" role="listitem" aria-label="시즌 랭킹 보기" onClick={() => navigate("/ranking")}>
           <ClaySpan color="green" label="랭킹" />
           <span className="feature-name">시즌 랭킹<br />전국</span>
-          <span className="feature-tag">🌾 {STUDENT.rankPos}위 / {STUDENT.rankTotal.toLocaleString()}명</span>
+          <span className="feature-tag">🌾 {student.rankPos}위 / {student.rankTotal.toLocaleString()}명</span>
         </button>
       </div>
 
       {/* AI 튜터 채팅 영역 */}
       <section className="chat-shell" data-od-id="chat-shell" aria-label="AI 선생님 대화">
         <div className="chat-meta">
-          <ClaySpan color="cream" label={`${TUTOR.emoji}<br>${TUTOR.initial}`} />
+          <ClaySpan color="cream" label={`${tutor.emoji}<br>${tutor.initial}`} />
           <div className="info">
             <div className="title">
-              {TUTOR.name}
+              {tutor.name}
               <span className="ai-tag">AI 선생님</span>
             </div>
             <div className="switch">
-              캐릭터 변경 가능 — <strong>{TUTOR.name}</strong> · <span>아미스샘</span> · <span>누룽지샘</span>
-              <button className="swap" type="button" onClick={handlePersonaSwap}>바꾸기 ›</button>
+              {tutor.persona
+                ? <>캐릭터 변경 가능 — <strong>{tutor.name}</strong> · <span>다른 선생님</span></>
+                : <>아직 선생님을 고르지 않았어요</>
+              }
+              <button className="swap" type="button" onClick={handlePersonaSwap}>{tutor.persona ? "바꾸기 ›" : "고르기 ›"}</button>
             </div>
           </div>
           <button className="menu-btn" aria-label="대화 메뉴"></button>
@@ -655,13 +826,13 @@ function PaidMain({
             <div key={m.id} className={`msg msg-${m.role}`}>
               {m.role === "tutor" && (
                 <div className="clay clay-cream msg-avatar" aria-hidden="true">
-                  <span className="lbl">{TUTOR.emoji}</span>
+                  <span className="lbl">{tutor.emoji}</span>
                 </div>
               )}
               <div className="msg-stack">
-                {m.role === "tutor" && <span className="msg-name">{TUTOR.name}</span>}
+                {m.role === "tutor" && <span className="msg-name">{tutor.name}</span>}
                 {m.typing ? (
-                  <div className="bubble typing" aria-label={`${TUTOR.name}이 답변을 작성 중`}>
+                  <div className="bubble typing" aria-label={`${tutor.name}이 답변을 작성 중`}>
                     <span className="dot"></span>
                     <span className="dot"></span>
                     <span className="dot"></span>
@@ -740,7 +911,7 @@ function PaidMain({
 
 // ─── 메인 영역 — 무료 회원 (Welcome + 무료 카드 + 잠긴 카드 + 구독 CTA) ──
 
-function FreeMain({ onCardClick, onLockedClick, onSubscribe }) {
+function FreeMain({ student, onCardClick, onLockedClick, onSubscribe }) {
   return (
     <>
       <section className="greeting-block" data-od-id="greeting" aria-label="인사">
@@ -753,10 +924,10 @@ function FreeMain({ onCardClick, onLockedClick, onSubscribe }) {
         <div className="greeting-text">
           <span className="greeting-eyebrow"><span className="dot" aria-hidden="true"></span>오늘의 농장</span>
           <h1 className="greeting-title">
-            <strong>{STUDENT.name.replace(/이$/, "")} 학생</strong>, 어서 와요!<br />
+            <strong>{student.name.replace(/이$/, "")} 학생</strong>, 어서 와요!<br />
             오늘은 무료 학습부터 시작해요.
           </h1>
-          <p className="greeting-meta">3일 연속 출석 중 · 시즌 점수 <strong>{STUDENT.score.toLocaleString()}</strong>점</p>
+          <p className="greeting-meta">시즌 점수 <strong>{student.score.toLocaleString()}</strong>점</p>
         </div>
       </section>
 
@@ -827,7 +998,8 @@ function FreeMain({ onCardClick, onLockedClick, onSubscribe }) {
 
 // ─── 위젯 컴포넌트 ──────────────────────────────────────────────────
 
-function WalletWidget({ onItemClick, compact = false }) {
+function WalletWidget({ wallet, onItemClick, compact = false }) {
+  const total = (wallet || []).reduce((s, w) => s + (Number(w.count) || 0), 0);
   return (
     <section className="widget">
       <div className="widget-head">
@@ -835,7 +1007,7 @@ function WalletWidget({ onItemClick, compact = false }) {
         <a className="widget-cta" href="#" onClick={(e) => e.preventDefault()}>{compact ? "상점 ›" : "상점 가기 ›"}</a>
       </div>
       <div className="wallet-grid">
-        {WALLET.map((w) => (
+        {(wallet || []).map((w) => (
           <div
             key={w.key}
             className={`wallet-item${w.primary ? " primary" : ""}`}
@@ -852,7 +1024,7 @@ function WalletWidget({ onItemClick, compact = false }) {
         ))}
       </div>
       <div className="wallet-cta-row">
-        <span className="wallet-total">합계 <strong>{compact ? "128" : "128 작물"}</strong></span>
+        <span className="wallet-total">합계 <strong>{compact ? `${total}` : `${total} 작물`}</strong></span>
         <button className="btn-charge">＋ 자몽 충전</button>
       </div>
     </section>
@@ -909,7 +1081,11 @@ function LockedWidget({ title, subTitle, sub, onSubscribe }) {
   );
 }
 
-function RankingWidget({ free = false }) {
+function RankingWidget({ ranking, student, free = false }) {
+  // 1위 점수 - 내 점수 = 남은 점수
+  const top1Score = ranking?.[0] ? Number(String(ranking[0].score).replace(/[^0-9]/g, "")) : 0;
+  const myScore = Number(student?.score) || 0;
+  const gap = Math.max(0, top1Score - myScore);
   return (
     <section className="widget">
       <div className="widget-head">
@@ -917,7 +1093,7 @@ function RankingWidget({ free = false }) {
         <a className="widget-cta" href="#" onClick={(e) => e.preventDefault()}>전체 ›</a>
       </div>
       <div className="rank-list">
-        {RANKING.map((r) => (
+        {(ranking || []).map((r) => (
           <div key={r.id} className={`rank-row${r.me ? " me" : ""}`}>
             <span className="rank-pos gold" aria-label={`${r.id}위`}>{r.pos}</span>
             <span className={`clay clay-${r.color} rank-avatar`} aria-hidden="true">
@@ -929,9 +1105,11 @@ function RankingWidget({ free = false }) {
         ))}
       </div>
       <p className="rank-foot">
-        {free
-          ? <>무료 회원도 시즌 랭킹에 참여할 수 있어요. 1위까지 <strong>808점</strong>!</>
-          : <>1위까지 <strong>808점</strong>{" "}남았어요. 오늘 일일 퀴즈만 풀어도 +120점!</>
+        {gap > 0
+          ? <>1위까지 <strong>{gap.toLocaleString()}점</strong> 남았어요. 오늘도 화이팅!</>
+          : free
+            ? <>무료 회원도 시즌 랭킹에 참여할 수 있어요!</>
+            : <>지금 페이스 좋아요. 계속 달려봐요!</>
         }
       </p>
     </section>
