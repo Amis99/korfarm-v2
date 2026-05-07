@@ -1,0 +1,199 @@
+/*
+ * 클레이 아트 디자인 토큰 (학생·학부모 화면 공통)
+ * open-design 결과물에서 추출. 모든 학생 화면이 import 하여 일관성 보장.
+ *
+ * 사용 — 메인 진입점에서:
+ *   import './styles/clay-tokens.css';
+ */
+
+:root {
+  /* 컬러 — 베이스 */
+  --clay-bg:           #F4EFE6;
+  --clay-bg-deep:      #ECE3D2;
+  --clay-surface:      #FFFAF0;
+  --clay-surface-elev: #FFFFFF;
+
+  /* 컬러 — 텍스트 */
+  --clay-fg:     #2A2520;
+  --clay-muted:  #6B6359;
+  --clay-subtle: #9A8F82;
+
+  /* 컬러 — 보더 */
+  --clay-border:      #E8DFCF;
+  --clay-border-warm: #D8CBB1;
+
+  /* 컬러 — 액센트 (CTA·active) */
+  --clay-accent:      #F06C24;
+  --clay-accent-deep: #D8580E;
+  --clay-accent-soft: #FBE2D2;
+
+  /* 컬러 — 채팅 버블 */
+  --clay-tutor-bubble: #FFFAF0;
+
+  /* 그림자 — 점토 입체감 */
+  --clay-shadow:    0 4px 12px rgba(140, 90, 40, 0.10), 0 1px 3px rgba(140, 90, 40, 0.06);
+  --clay-shadow-lg: 0 10px 28px rgba(140, 90, 40, 0.13), 0 2px 6px rgba(140, 90, 40, 0.06);
+  --clay-shadow-press: 0 2px 6px rgba(140, 90, 40, 0.08);
+
+  /* 라운드 */
+  --clay-r-sm: 12px;
+  --clay-r:    16px;
+  --clay-r-lg: 22px;
+
+  /* 레이아웃 사이즈 */
+  --clay-hdr-h:     64px;
+  --clay-tab-h:     60px;
+  --clay-sidebar-w: 260px;
+  --clay-aside-w:   320px;
+}
+
+/* ─── 클레이 베이스 ─────────────────────────────────────────────── */
+
+.clay {
+  position: relative;
+  background: linear-gradient(155deg, #FFF6E2 0%, #EFDDB7 100%);
+  border-radius: var(--clay-r);
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  overflow: hidden;
+  box-shadow:
+    inset 1.5px 2px 3px rgba(255, 250, 240, 0.85),
+    inset -2px -3px 5px rgba(160, 110, 50, 0.18),
+    0 5px 12px rgba(140, 90, 40, 0.10),
+    0 1px 3px rgba(140, 90, 40, 0.06);
+}
+
+.clay::before {
+  content: '';
+  position: absolute;
+  top: 6%;
+  left: 16%;
+  width: 50%;
+  height: 26%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.55), transparent 80%);
+  border-radius: 50%;
+  filter: blur(3px);
+  pointer-events: none;
+}
+
+.clay > .clay-lbl {
+  position: relative;
+  z-index: 2;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: rgba(60, 50, 40, 0.55);
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  text-align: center;
+  padding: 0 4px;
+}
+
+/* 클레이 컬러 변형 */
+.clay-yellow { background: linear-gradient(155deg, #FFE9C2 0%, #F4C97A 100%); }
+.clay-blue   { background: linear-gradient(155deg, #DFEEFB 0%, #91C2E5 100%); }
+.clay-red    { background: linear-gradient(155deg, #FBDDDD 0%, #ED9F9F 100%); }
+.clay-green  { background: linear-gradient(155deg, #DDEFD5 0%, #94C68B 100%); }
+.clay-orange { background: linear-gradient(155deg, #FBD8B6 0%, #ED9554 100%); }
+.clay-purple { background: linear-gradient(155deg, #E5D9F2 0%, #B7A0DA 100%); }
+.clay-rose   { background: linear-gradient(155deg, #F8DCE2 0%, #DC9CAB 100%); }
+.clay-cream  { background: linear-gradient(155deg, #FFF2DC 0%, #F0DBB1 100%); }
+
+.clay-yellow .clay-lbl,
+.clay-orange .clay-lbl,
+.clay-rose .clay-lbl,
+.clay-red .clay-lbl,
+.clay-cream .clay-lbl {
+  color: rgba(80, 50, 30, 0.6);
+}
+.clay-blue .clay-lbl,
+.clay-purple .clay-lbl,
+.clay-green .clay-lbl {
+  color: rgba(40, 50, 80, 0.6);
+}
+
+/* ─── 학생 셸 글로벌 ─────────────────────────────────────────────── */
+
+.student-shell {
+  font-family: 'Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo',
+               'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+               system-ui, Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--clay-fg);
+  background: var(--clay-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.011em;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior-y: none;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+}
+
+.student-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.45 0 0 0 0 0.32 0 0 0 0.10 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.45;
+  z-index: 0;
+}
+
+.student-shell > * {
+  position: relative;
+  z-index: 1;
+}
+
+.student-shell button,
+.student-shell input,
+.student-shell textarea {
+  font: inherit;
+  color: inherit;
+}
+
+.student-shell button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.student-shell a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.student-shell input,
+.student-shell textarea {
+  border: none;
+  background: transparent;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.student-shell ::selection {
+  background: var(--clay-accent-soft);
+  color: var(--clay-fg);
+}
+
+/* ─── 모션 — reduce 대응 ─────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .student-shell *,
+  .student-shell *::before,
+  .student-shell *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
