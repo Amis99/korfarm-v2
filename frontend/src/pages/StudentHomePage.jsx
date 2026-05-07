@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useAuth } from "../hooks/useAuth";
@@ -247,6 +247,7 @@ function StudentHomePage() {
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [showCraftModal, setShowCraftModal] = useState(false);
+  const [showStudyModeSheet, setShowStudyModeSheet] = useState(false);
   const [activeSidebar, setActiveSidebar] = useState("daily-quiz");
   const [activeTab, setActiveTab] = useState("home");
   const [chatInput, setChatInput] = useState("");
@@ -538,8 +539,12 @@ function StudentHomePage() {
       setDrawerOpen(true);
       return;
     }
+    // 학습 탭 — 프로 모드 / 농장별 모드 선택 시트
+    if (t.id === "study") {
+      setShowStudyModeSheet(true);
+      return;
+    }
     const tabRoutes = {
-      "study": "/farm-mode",
       "writing": "/writing",
       "analysis": "/report",
     };
@@ -663,13 +668,13 @@ function StudentHomePage() {
           >
             <span></span>
           </button>
-          <a className="brand" href="/start" aria-label="국어농장 홈">
+          <Link className="brand" to="/start" aria-label="국어농장 홈">
             <img
               src={import.meta.env.BASE_URL + "korfarm-logo.png"}
               alt="국어농장"
               style={{ height: 36, width: "auto", display: "block" }}
             />
-          </a>
+          </Link>
           <div className="hdr-spacer"></div>
 
           {free && (
@@ -851,6 +856,53 @@ function StudentHomePage() {
             );
           })}
         </nav>
+
+        {/* ─── 학습 모드 선택 시트 (모바일 학습 탭) ─── */}
+        {showStudyModeSheet && (
+          <>
+            <button
+              type="button"
+              className="study-mode-backdrop"
+              aria-label="모드 선택 닫기"
+              onClick={() => setShowStudyModeSheet(false)}
+            />
+            <div className="study-mode-sheet" role="dialog" aria-label="학습 모드 선택">
+              <div className="study-mode-head">
+                <h3>학습 모드 선택</h3>
+                <button
+                  type="button"
+                  className="study-mode-close"
+                  aria-label="닫기"
+                  onClick={() => setShowStudyModeSheet(false)}
+                >✕</button>
+              </div>
+              <div className="study-mode-list">
+                <button
+                  type="button"
+                  className="study-mode-item"
+                  onClick={() => { setShowStudyModeSheet(false); navigate("/farm-mode"); }}
+                >
+                  <ClaySpan color="green" label="농장" />
+                  <span className="study-mode-text">
+                    <span className="study-mode-title">농장별 모드</span>
+                    <span className="study-mode-desc">레벨별 5영역 단계학습</span>
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  className="study-mode-item"
+                  onClick={() => { setShowStudyModeSheet(false); navigate("/pro-mode"); }}
+                >
+                  <ClaySpan color="purple" label="프로" />
+                  <span className="study-mode-text">
+                    <span className="study-mode-title">프로 모드</span>
+                    <span className="study-mode-desc">고난이도 정독·추론</span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </>
+        )}
 
         {/* ─── TOAST (무료 회원 잠긴 항목 클릭 시) ─── */}
         {free && (

@@ -1532,6 +1532,87 @@
     text-decoration-thickness: 1.5px;
   }
 
+  /* 학습 모드 선택 시트 */
+  .student-home .study-mode-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 16, 12, 0.4);
+    border: 0;
+    padding: 0;
+    z-index: 9000;
+    cursor: pointer;
+  }
+  .student-home .study-mode-sheet {
+    position: fixed;
+    left: 50%;
+    bottom: calc(env(safe-area-inset-bottom) + 88px);
+    transform: translateX(-50%);
+    width: min(420px, calc(100vw - 24px));
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 20px 60px rgba(20, 16, 12, 0.25);
+    z-index: 9001;
+    padding: 14px 14px 18px;
+    overflow: hidden;
+  }
+  .student-home .study-mode-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 4px 12px;
+  }
+  .student-home .study-mode-head h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+  }
+  .student-home .study-mode-close {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 0;
+    background: #f3eee5;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .student-home .study-mode-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .student-home .study-mode-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid #ebe1d2;
+    background: #fff8ef;
+    cursor: pointer;
+    text-align: left;
+  }
+  .student-home .study-mode-item:hover {
+    background: #fff1d9;
+    transform: translateY(-1px);
+  }
+  .student-home .study-mode-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .student-home .study-mode-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #2b2014;
+  }
+  .student-home .study-mode-desc {
+    font-size: 12.5px;
+    color: #6b5b48;
+  }
+  @media (min-width: 768px) {
+    .student-home .study-mode-sheet { bottom: 50%; transform: translate(-50%, 50%); }
+  }
+
   /* 무료 모드 모바일 미디어 */
   @media (max-width: 767px) {
     .student-home .cta-pill { height: 44px; padding: 0 14px 0 10px; font-size: 12.5px; }
