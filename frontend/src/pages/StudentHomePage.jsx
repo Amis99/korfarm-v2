@@ -1,9 +1,26 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet, apiPost, normalizeInventoryKeys } from "../utils/api";
 import NoticeBell from "../components/NoticeBell";
 import "../styles/student-home.css";
+
+// 채팅 마크다운 렌더러 — 표·이미지·링크·코드블록 모두 지원
+function ChatMarkdown({ text }) {
+  return (
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      components={{
+        a: ({ node, ...props }) => <a {...props} target="_blank" rel="noopener noreferrer" />,
+        img: ({ node, ...props }) => <img {...props} loading="lazy" />,
+      }}
+    >
+      {text || ""}
+    </ReactMarkdown>
+  );
+}
 
 // ─── fallback / 기본값 (API 응답이 늦거나 실패 시) ───────────────────
 
@@ -43,11 +60,8 @@ const WALLET_META = [
   { key: "crop_apple", color: "red",    name: "사과" },
 ];
 
-const RECOMMENDATIONS = [
-  { id: "r1", color: "yellow", label: "어휘", title: "어휘 5문제", flag: "즉시 시작", meta: "약 3분 · 어제 틀린 단어 위주" },
-  { id: "r2", color: "blue", label: "글쓰기", title: "글쓰기 첨삭 받기", flag: null, meta: "지난 일기 2편 첨삭 대기 중 · 평균 4분" },
-  { id: "r3", color: "green", label: "진단", title: "오늘의 진단 결과 보기", flag: null, meta: "강점 2개 · 약점 1개 · 학부모님께도 공유돼요" },
-];
+// RECOMMENDATIONS — daily-analysis 응답으로 동적 채움. fallback 빈 배열.
+const FALLBACK_RECOMMENDATIONS = [];
 
 // 페르소나별 첫 인사 톤 — useEffect 안에서 학생 이름과 결합해 동적 생성
 const PERSONA_GREETING = {
@@ -70,10 +84,10 @@ const FALLBACK_RANKING = [
 ];
 
 const QUICK_CHIPS = [
-  { id: "q1", text: "📷 사진 찍어 물어보기", q: "사진 찍어서 모르는 문제 물어보고 싶어요" },
-  { id: "q2", text: "🤔 '비유적' 뜻은?", q: "'비유적' 뜻이 뭐예요?" },
-  { id: "q3", text: "📝 오늘 풀이 채점", q: "오늘 푼 문제 채점해 주세요" },
-  { id: "q4", text: "📊 약점 진단 결과", q: "제 약점 진단 결과 알려주세요" },
+  { id: "q1", text: "📷 사진으로 물어보기", q: "사진을 찍어서 모르는 문제를 물어보고 싶어요" },
+  { id: "q2", text: "💡 어휘 도움", q: "헷갈리는 단어 뜻을 알려주세요" },
+  { id: "q3", text: "✏ 글쓰기 첨삭", q: "오늘 쓴 글 첨삭해 주세요" },
+  { id: "q4", text: "📊 약점 분석", q: "제 약점 영역을 분석해 주세요" },
 ];
 
 // 무료 회원용 큰 카드 (4장)
@@ -379,7 +393,7 @@ function StudentHomePage() {
             .map((m, i) => ({
               id: m.id || `h-${i}`,
               role: m.role === "user" ? "user" : "tutor",
-              content: <p style={{ whiteSpace: "pre-wrap" }}>{m.content}</p>,
+              content: <ChatMarkdown text={m.content} />,
             })),
         );
       })
@@ -519,7 +533,7 @@ function StudentHomePage() {
       setMessages((prev) =>
         prev.map((m) =>
           m.id === typingId
-            ? { ...m, typing: false, content: <p style={{ whiteSpace: "pre-wrap" }}>{reply}</p> }
+            ? { ...m, typing: false, content: <ChatMarkdown text={reply} /> }
             : m,
         ),
       );
