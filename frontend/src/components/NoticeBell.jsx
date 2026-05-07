@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback, useRef, forwardRef, useImperativeHandle } from "react";
+import { createPortal } from "react-dom";
 import { apiGet, apiPost } from "../utils/api";
 import "../styles/notice-bell.css";
 
@@ -114,7 +115,7 @@ const NoticeBell = forwardRef(function NoticeBell(_, ref) {
         )}
       </button>
 
-      {open && (
+      {open && createPortal(
         <>
           <button
             type="button"
@@ -177,7 +178,8 @@ const NoticeBell = forwardRef(function NoticeBell(_, ref) {
               )}
             </div>
           </div>
-        </>
+        </>,
+        document.body
       )}
     </>
   );

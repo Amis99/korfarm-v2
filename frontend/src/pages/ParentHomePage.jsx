@@ -344,10 +344,12 @@ function ParentHomePage() {
           <button className="hamburger" onClick={() => setDrawerOpen(true)} aria-label="메뉴 열기">
             <span></span>
           </button>
-          <Link to="/start" className="brand">
-            <div className="logo" aria-hidden="true">국</div>
-            <span className="name">국어농장</span>
-            <span className="ver">v2</span>
+          <Link to="/start" className="brand" aria-label="국어농장 홈">
+            <img
+              src={import.meta.env.BASE_URL + "korfarm-logo.png"}
+              alt="국어농장"
+              style={{ height: 36, width: "auto", display: "block" }}
+            />
           </Link>
           <div className="hdr-spacer"></div>
 

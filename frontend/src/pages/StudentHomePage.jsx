@@ -78,10 +78,10 @@ const QUICK_CHIPS = [
 
 // 무료 회원용 큰 카드 (4장)
 const FREE_BIG_CARDS = [
-  { id: "daily-quiz",    tint: "yellow", color: "yellow", label: "퀴즈<br/>일러스트",  tag: "무료 · 매일", title: "일일 퀴즈",    meta: "10문제 · 약 5분 · 매일 갱신돼요",   cta: "지금 풀기",    route: "/daily-quiz" },
-  { id: "daily-reading", tint: "blue",   color: "blue",   label: "독해<br/>일러스트",  tag: "무료 · 매일", title: "일일 독해",    meta: "비문학 1지문 · 약 7분 · 오늘 미수행", cta: "지금 읽기",    route: "/daily-reading" },
-  { id: "diagnostic",    tint: "green",  color: "green",  label: "진단<br/>일러스트",  tag: "1회 무료",    title: "진단 테스트",  meta: "10대 역량 분석 · 약 15분 · 학부모님께 결과 공유", cta: "응시하기", route: "/diagnostic/v2" },
-  { id: "battle",        tint: "red",    color: "red",    label: "대결<br/>일러스트",  tag: "무료 · LIVE", title: "대결 라이브",  meta: "1:1 속독전 · 3명 대기 중", live: true, cta: "도전하기", route: "/duel" },
+  { id: "daily-quiz",    tint: "yellow", color: "yellow", label: "퀴즈<br/>일러스트",  tag: "무료 · 매일", title: "일일 퀴즈",    meta: "10문제 · 약 5분 · 매일 갱신",   cta: "지금 풀기",    route: "/daily-quiz" },
+  { id: "daily-reading", tint: "blue",   color: "blue",   label: "독해<br/>일러스트",  tag: "무료 · 매일", title: "일일 독해",    meta: "다양한 영역 정독 훈련 · 약 10분", cta: "지금 읽기",    route: "/daily-reading" },
+  { id: "diagnostic",    tint: "green",  color: "green",  label: "진단<br/>일러스트",  tag: "1회 무료",    title: "진단 테스트",  meta: "10대 역량 분석 · 약 15분 · 학부모님께도 결과", cta: "응시하기", route: "/diagnostic/v2" },
+  { id: "battle",        tint: "red",    color: "red",    label: "대결<br/>일러스트",  tag: "무료 · LIVE", title: "대결 라이브",  meta: "라운드제 서바이벌 · 친구·AI 대결", live: true, cta: "도전하기", route: "/duel" },
 ];
 
 // 무료 회원용 잠긴 카드 (4장)
@@ -150,9 +150,8 @@ const SIDEBAR_GROUPS = [
     title: "💬 소통",
     titleClay: { color: "rose", label: "소통" },
     items: [
-      { id: "community",      icon: "📢", label: "커뮤니티 게시판", badge: null, badgeKind: null, lockedForFree: false },
-      { id: "community-chat", icon: "💬", label: "커뮤니티 채팅",   badge: null, badgeKind: null, lockedForFree: false },
-      { id: "shop",           icon: "🛒", label: "쇼핑몰",          badge: null, badgeKind: null, lockedForFree: false },
+      { id: "community", icon: "📢", label: "커뮤니티", badge: null, badgeKind: null, lockedForFree: false },
+      { id: "shop",      icon: "🛒", label: "쇼핑몰",   badge: null, badgeKind: null, lockedForFree: false },
     ],
   },
   {
@@ -160,8 +159,8 @@ const SIDEBAR_GROUPS = [
     title: "⚙ 설정",
     titleClay: { color: "cream", label: "설정" },
     items: [
-      { id: "wallet",    icon: "🍊", label: "작물 지갑",   badge: "128", badgeKind: "neutral", lockedForFree: true },
-      { id: "persona",   icon: "🦉", label: "캐릭터 변경", badge: null,  badgeKind: null,      lockedForFree: false },
+      { id: "wallet",    icon: "🍊", label: "작물 지갑",   badge: null,  badgeKind: null,      lockedForFree: true },
+      { id: "persona",   icon: "🦉", label: "캐릭터 변경", badge: null,  badgeKind: null,      lockedForFree: true },
       { id: "profile",   icon: "👤", label: "내 정보",     badge: null,  badgeKind: null,      lockedForFree: false },
     ],
   },
@@ -182,7 +181,6 @@ const SIDEBAR_ROUTES = {
   "test-report": "/tests?tab=history",
   "unified": "/report",
   "community": "/community",
-  "community-chat": "/community",
   "shop": "/shop",
   "wallet": "/my/grapefruit",
   "persona": "/tutor/persona-select",
@@ -579,11 +577,13 @@ function StudentHomePage() {
           >
             <span></span>
           </button>
-          <div className="brand">
-            <div className="logo" aria-hidden="true">국</div>
-            <span className="name">국어농장</span>
-            <span className="ver">v2</span>
-          </div>
+          <a className="brand" href="/start" aria-label="국어농장 홈">
+            <img
+              src={import.meta.env.BASE_URL + "korfarm-logo.png"}
+              alt="국어농장"
+              style={{ height: 36, width: "auto", display: "block" }}
+            />
+          </a>
           <div className="hdr-spacer"></div>
 
           {free && (
@@ -802,13 +802,13 @@ function PaidMain({
         </button>
         <button className="feature-card tint-blue" role="listitem" aria-label="일일 독해 시작하기" onClick={() => navigate("/daily-reading")}>
           <ClaySpan color="blue" label="독해" />
-          <span className="feature-name">일일 독해<br />비문학 1지문</span>
-          <span className="feature-tag">📖 7분 · 미수행</span>
+          <span className="feature-name">일일 독해<br />정독 훈련</span>
+          <span className="feature-tag">📖 약 10분 · 미수행</span>
         </button>
-        <button className="feature-card tint-red" role="listitem" aria-label="대결 라이브 — 3명 대기 중" onClick={() => navigate("/duel")}>
+        <button className="feature-card tint-red" role="listitem" aria-label="대결 라이브" onClick={() => navigate("/duel")}>
           <ClaySpan color="red" label="대결" />
-          <span className="feature-name">대결 라이브<br />1:1 속독전</span>
-          <span className="feature-tag"><span className="live-dot" aria-hidden="true"></span> LIVE · 3명</span>
+          <span className="feature-name">대결 라이브<br />서바이벌</span>
+          <span className="feature-tag"><span className="live-dot" aria-hidden="true"></span> LIVE</span>
         </button>
         <button className="feature-card tint-green" role="listitem" aria-label="시즌 랭킹 보기" onClick={() => navigate("/ranking")}>
           <ClaySpan color="green" label="랭킹" />

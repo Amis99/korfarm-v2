@@ -167,7 +167,9 @@ function GlobalLogo() {
   const { pathname } = useLocation();
   const { isLoggedIn } = useAuth();
   const hideLogo =
-    pathname === "/" || pathname.startsWith("/admin") || pathname === "/ops" || pathname.startsWith("/duel/match");
+    pathname === "/" || pathname.startsWith("/admin") || pathname === "/ops" || pathname.startsWith("/duel/match") ||
+    pathname === "/start" || pathname === "/start-new" || pathname === "/parent-home" ||
+    pathname === "/tutor/persona-select" || pathname === "/my/grapefruit" || pathname === "/report";
   if (hideLogo) {
     return null;
   }
