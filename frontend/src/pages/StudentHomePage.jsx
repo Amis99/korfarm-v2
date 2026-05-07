@@ -389,7 +389,7 @@ function StudentHomePage() {
         if (list.length === 0) return;
         setMessages(
           list
-            .filter((m) => m.content && m.content.trim().length > 0)
+            .filter((m) => typeof m.content === "string" && m.content.trim().length > 0)
             .map((m, i) => ({
               id: m.id || `h-${i}`,
               role: m.role === "user" ? "user" : "tutor",
@@ -406,8 +406,8 @@ function StudentHomePage() {
     if (messages.length > 0) return; // 이미 이력 있음
     if (!student.name || student.name === DEFAULT_STUDENT.name) return;
     const dispName = student.name.replace(/이$/, "");
-    const greetFn = PERSONA_GREETING[tutor.persona] || PERSONA_GREETING.null;
-    const greetText = greetFn(dispName);
+    const greetFn = (tutor.persona && PERSONA_GREETING[tutor.persona]) || PERSONA_GREETING.null;
+    const greetText = typeof greetFn === "function" ? greetFn(dispName) : "안녕하세요. 먼저 캐릭터를 골라주세요.";
     setMessages([
       {
         id: "greet-1",
@@ -929,18 +929,6 @@ function PaidMain({
               </svg>
             </button>
           </form>
-          <div className="quick-suggestions" id="quick">
-            {QUICK_CHIPS.map((c) => (
-              <button
-                key={c.id}
-                className="quick-chip"
-                data-q={c.q}
-                onClick={() => handleQuickChip(c.q)}
-              >
-                {c.text}
-              </button>
-            ))}
-          </div>
         </div>
       </section>
     </>

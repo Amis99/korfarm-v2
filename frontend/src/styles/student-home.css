@@ -935,8 +935,10 @@
       box-shadow: 8px 0 32px rgba(40, 30, 20, 0.20);
     }
     .right-aside { display: none; }
-    .center { grid-column: 1; }
-    .chat-shell { min-height: 64vh; }
+    .center { grid-column: 1; position: relative; z-index: 1; }
+    .student-home .mobile-features-head,
+    .student-home .mobile-features { position: relative; z-index: 2; }
+    .chat-shell { min-height: 64vh; position: relative; z-index: 0; isolation: isolate; }
     .chat-history { padding: 14px 12px 8px; }
     .input-bar { padding: 4px; }
     .tab-bar { display: grid; }
