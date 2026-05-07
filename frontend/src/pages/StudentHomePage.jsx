@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { apiGet, normalizeInventoryKeys } from "../utils/api";
+import { apiGet, apiPost, normalizeInventoryKeys } from "../utils/api";
 import NoticeBell from "../components/NoticeBell";
 import "../styles/student-home.css";
 
@@ -49,58 +49,13 @@ const RECOMMENDATIONS = [
   { id: "r3", color: "green", label: "진단", title: "오늘의 진단 결과 보기", flag: null, meta: "강점 2개 · 약점 1개 · 학부모님께도 공유돼요" },
 ];
 
-const INITIAL_MESSAGES = [
-  {
-    id: "m1",
-    role: "tutor",
-    kind: "first-greet",
-    content: (
-      <p>
-        <strong>민준 학생</strong>, 어서 와요! 어제 비문학 점수 <strong>80점</strong> 정말 잘했어요.<br />
-        오늘은 <strong>어휘 보강</strong>이 어떨까요? 세 가지 추천드려요 👇
-      </p>
-    ),
-    showRecommendations: true,
-  },
-  {
-    id: "m2",
-    role: "user",
-    content: (
-      <p>이 단어 뜻이 뭐예요? <strong>'회의적'</strong>이요</p>
-    ),
-  },
-  {
-    id: "m3",
-    role: "tutor",
-    content: (
-      <>
-        <p><strong>'회의적(懷疑的)'</strong> 좋은 어휘를 골랐어요! 시험에 자주 나오는 표현이에요.</p>
-        <h4><span className="ico">📖</span> 사전적 의미</h4>
-        <p>어떤 일이나 주장에 대해 <strong>의심을 품는</strong>. 또는 그런 것.</p>
-        <h4><span className="ico">✏</span> 예문</h4>
-        <blockquote>
-          그는 새로운 계획에 대해 <strong>회의적인</strong> 태도를 보였다.
-        </blockquote>
-        <h4><span className="ico">💡</span> 이렇게 기억해요</h4>
-        <p>'회의(懷疑)'는 한자로 '<strong>품을 회 + 의심할 의</strong>' — 마음에 의심을 품는다는 뜻이에요. 여기에 성질을 나타내는 '<strong>-적(的)</strong>'이 붙어 '의심하는 성질의'라는 뜻이 됩니다.</p>
-        <div className="lex-meta">
-          <span><strong>비슷한 말</strong> 부정적, 미덥지 않은</span>
-          <span><strong>반대말</strong> 긍정적, 낙관적</span>
-        </div>
-      </>
-    ),
-  },
-  {
-    id: "m4",
-    role: "user",
-    content: <p>예문 더 보여주세요</p>,
-  },
-  {
-    id: "m5",
-    role: "tutor",
-    typing: true,
-  },
-];
+// 페르소나별 첫 인사 톤 — useEffect 안에서 학생 이름과 결합해 동적 생성
+const PERSONA_GREETING = {
+  owl: (name) => `${name} 학생, 어서 오세요. 오늘은 무엇을 함께 살펴볼까요?`,
+  amis: (name) => `${name}야! 어서 와! 오늘 뭐 도와줄까?`,
+  nurungji: (name) => `${name}아~ 안녕! 오늘은 누나가 도와줄게~ 😊`,
+  null: () => "안녕하세요. 먼저 캐릭터를 골라주세요. 우측 상단에서 변경할 수 있어요.",
+};
 
 // 학습 계획표 fallback (API 실패 시)
 const FALLBACK_PLAN = [
@@ -257,7 +212,9 @@ function StudentHomePage() {
   const [activeSidebar, setActiveSidebar] = useState("daily-quiz");
   const [activeTab, setActiveTab] = useState("home");
   const [chatInput, setChatInput] = useState("");
-  const [messages, setMessages] = useState(INITIAL_MESSAGES);
+  const [messages, setMessages] = useState([]);
+  const [sessionId, setSessionId] = useState(null);
+  const [tutorStatus, setTutorStatus] = useState({ dailyFreeRemaining: null, dailyFreeLimit: null });
   const [plan, setPlan] = useState(FALLBACK_PLAN);
   const [toast, setToast] = useState({ show: false, msg: "", subscribed: false });
   const chatHistoryRef = useRef(null);
@@ -402,27 +359,68 @@ function StudentHomePage() {
       .catch((e) => console.error("[seasons]", e));
   }, [isLoggedIn, user]);
 
-  // 첫 인사 메시지의 학생 이름 동적 치환 (정적 sample 유지하되 이름만 교체)
+  // 6) AI 튜터 — 가장 최근 활성 세션 + 메시지 이력 로드 (유료만)
   useEffect(() => {
+    if (!isLoggedIn || free) return;
+    apiGet("/v1/tutor/sessions")
+      .then(async (data) => {
+        const sessions = Array.isArray(data) ? data : [];
+        if (sessions.length === 0) {
+          // 세션 없음 — 페르소나 기반 첫 인사만 노출 (아래 인사 useEffect 가 처리)
+          setSessionId(null);
+          return;
+        }
+        const latest = sessions[0]; // 백엔드가 updatedAt desc 로 정렬
+        setSessionId(latest.id);
+        const msgs = await apiGet(`/v1/tutor/sessions/${latest.id}/messages`).catch(() => []);
+        const list = Array.isArray(msgs) ? msgs : [];
+        if (list.length === 0) return;
+        setMessages(
+          list
+            .filter((m) => m.content && m.content.trim().length > 0)
+            .map((m, i) => ({
+              id: m.id || `h-${i}`,
+              role: m.role === "user" ? "user" : "tutor",
+              content: <p style={{ whiteSpace: "pre-wrap" }}>{m.content}</p>,
+            })),
+        );
+      })
+      .catch((e) => console.error("[tutor/sessions]", e));
+  }, [isLoggedIn, free]);
+
+  // 7) 페르소나 기반 첫 인사 (세션 없거나 빈 메시지일 때만)
+  useEffect(() => {
+    if (free) return;
+    if (messages.length > 0) return; // 이미 이력 있음
     if (!student.name || student.name === DEFAULT_STUDENT.name) return;
-    const dispName = student.name.replace(/이$/, "") + " 학생";
-    setMessages((prev) =>
-      prev.map((m) =>
-        m.id === "m1"
-          ? {
-              ...m,
-              content: (
-                <p>
-                  <strong>{dispName}</strong>, 어서 와요! 어제 비문학 점수 <strong>80점</strong> 정말 잘했어요.<br />
-                  오늘은 <strong>어휘 보강</strong>이 어떨까요? 세 가지 추천드려요 👇
-                </p>
-              ),
-            }
-          : m,
-      ),
-    );
+    const dispName = student.name.replace(/이$/, "");
+    const greetFn = PERSONA_GREETING[tutor.persona] || PERSONA_GREETING.null;
+    const greetText = greetFn(dispName);
+    setMessages([
+      {
+        id: "greet-1",
+        role: "tutor",
+        kind: "first-greet",
+        content: <p>{greetText}</p>,
+        showRecommendations: tutor.persona !== null && tutor.persona !== undefined,
+      },
+    ]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [student.name]);
+  }, [student.name, tutor.persona, free]);
+
+  // 8) 튜터 status — 일일 무료 잔여
+  useEffect(() => {
+    if (!isLoggedIn || free) return;
+    apiGet("/v1/tutor/status")
+      .then((d) => {
+        if (!d) return;
+        setTutorStatus({
+          dailyFreeRemaining: d.dailyFreeRemaining ?? null,
+          dailyFreeLimit: d.dailyFreeLimit ?? null,
+        });
+      })
+      .catch((e) => console.error("[tutor/status]", e));
+  }, [isLoggedIn, free, messages.length]);
 
   // 채팅 자동 스크롤 — 메시지 변경 시
   useEffect(() => {
@@ -497,33 +495,56 @@ function StudentHomePage() {
     setPlan((prev) => prev.map((p) => (p.id === id ? { ...p, done: !p.done } : p)));
   }
 
-  function handleSendChat(e) {
+  async function handleSendChat(e) {
     e.preventDefault();
     const v = chatInput.trim();
     if (!v) return;
     setChatInput("");
+    const userMsgId = `u-${Date.now()}`;
+    const typingId = `t-${Date.now()}`;
     setMessages((prev) => {
       const filtered = prev.filter((m) => !m.typing);
       return [
         ...filtered,
-        { id: `u-${Date.now()}`, role: "user", content: <p>{v}</p> },
-        { id: `t-${Date.now()}`, role: "tutor", typing: true },
+        { id: userMsgId, role: "user", content: <p>{v}</p> },
+        { id: typingId, role: "tutor", typing: true },
       ];
     });
-    setTimeout(() => {
+    try {
+      const res = await apiPost("/v1/tutor/turns", {
+        session_id: sessionId,
+        message: v,
+      });
+      const newSid = res?.sessionId || res?.session_id;
+      if (newSid && newSid !== sessionId) setSessionId(newSid);
+      const reply = res?.assistantText || res?.assistant_text || "(응답 없음)";
       setMessages((prev) =>
         prev.map((m) =>
-          m.typing
-            ? {
-                ...m,
-                typing: false,
-                content: <p>좋은 질문이에요! 더 자세한 답변은 실제 서비스에서 받을 수 있어요. 지금은 데모 화면이에요 🌱</p>,
-              }
+          m.id === typingId
+            ? { ...m, typing: false, content: <p style={{ whiteSpace: "pre-wrap" }}>{reply}</p> }
             : m,
         ),
       );
-    }, 1200);
-    console.log("[tutor chat]", v);
+      // 무료 잔여 갱신
+      apiGet("/v1/tutor/status")
+        .then((d) => {
+          if (d) setTutorStatus({
+            dailyFreeRemaining: d.dailyFreeRemaining ?? null,
+            dailyFreeLimit: d.dailyFreeLimit ?? null,
+          });
+        })
+        .catch(() => {});
+    } catch (err) {
+      console.error("[tutor/turns]", err);
+      const errMsg = err?.message || "전송 실패. 다시 시도해 주세요.";
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.id === typingId
+            ? { ...m, typing: false, content: <p style={{ color: "var(--accent-deep)" }}>⚠ {errMsg}</p> }
+            : m,
+        ),
+      );
+    }
   }
 
   function handleQuickChip(q) {
@@ -533,10 +554,7 @@ function StudentHomePage() {
   }
 
   function handlePersonaSwap() {
-    // /tutor/persona-select 미존재 — 다음 단계 신설 예정
-    console.warn("[persona] /tutor/persona-select 라우트 미구현 — 임시로 /profile 로 이동");
-    alert("캐릭터 변경 화면 준비 중입니다. 곧 만나요!");
-    // navigate("/tutor/persona-select");
+    navigate("/tutor/persona-select");
   }
 
   function handleWalletItemClick(key) {
@@ -686,6 +704,7 @@ function StudentHomePage() {
                 handleRecommendationClick={handleRecommendationClick}
                 chatHistoryRef={chatHistoryRef}
                 navigate={navigate}
+                tutorStatus={tutorStatus}
               />
             )}
 
@@ -766,7 +785,7 @@ function StudentHomePage() {
 
 function PaidMain({
   tutor, student, messages, chatInput, setChatInput, handleSendChat, handleQuickChip,
-  handlePersonaSwap, handleRecommendationClick, chatHistoryRef, navigate,
+  handlePersonaSwap, handleRecommendationClick, chatHistoryRef, navigate, tutorStatus,
 }) {
   return (
     <>
@@ -868,6 +887,13 @@ function PaidMain({
         </div>
 
         <div className="chat-input">
+          {tutorStatus?.dailyFreeRemaining !== null && tutorStatus?.dailyFreeRemaining !== undefined && (
+            <div style={{ fontSize: 11.5, color: "var(--muted)", padding: "4px 14px 6px", textAlign: "center" }}>
+              {tutorStatus.dailyFreeRemaining > 0
+                ? `오늘 무료 채팅 ${tutorStatus.dailyFreeRemaining}/${tutorStatus.dailyFreeLimit ?? 5}회 남음`
+                : "무료 채팅 소진 — 자몽 1개 차감 후 사용"}
+            </div>
+          )}
           <form className="input-bar" id="chat-form" autoComplete="off" onSubmit={handleSendChat}>
             <button type="button" className="attach-btn" aria-label="사진 찍어서 모르는 문제 물어보기">
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
