@@ -199,6 +199,7 @@ function AdminPage() {
     { label: "학생 관리", path: "/admin/students" },
     { label: "수강반 관리", path: "/admin/classes" },
     { label: "콘텐츠 관리", path: "/admin/content" },
+    { label: "공지 관리", path: "/admin/notices" },
     ...(isHq
       ? [
           { label: "기관 관리", path: "/admin/orgs" },

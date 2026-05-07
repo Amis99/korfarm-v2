@@ -93,8 +93,12 @@ const AdminGrapefruitWalletPage = lazy(() => import("./pages/AdminGrapefruitWall
 const AdminOrgBillingPage = lazy(() => import("./pages/AdminOrgBillingPage"));
 const AdminAllOrgBillingPage = lazy(() => import("./pages/AdminAllOrgBillingPage"));
 const MyGrapefruitPage = lazy(() => import("./pages/MyGrapefruitPage"));
+const MyWalletPage = lazy(() => import("./pages/MyWalletPage"));
 const MyAiStudyPage = lazy(() => import("./pages/MyAiStudyPage"));
 const MyTutorPage = lazy(() => import("./pages/MyTutorPage"));
+const TutorPersonaSelectPage = lazy(() => import("./pages/TutorPersonaSelectPage"));
+const AnalysisReportPage = lazy(() => import("./pages/AnalysisReportPage"));
+const AdminNoticePage = lazy(() => import("./pages/AdminNoticePage"));
 const AdminOwnStudyContentsPage = lazy(() => import("./pages/AdminOwnStudyContentsPage"));
 const AdminWisdomPage = lazy(() => import("./pages/AdminWisdomPage"));
 const AdminWisdomDetailPage = lazy(() => import("./pages/AdminWisdomDetailPage"));
@@ -259,7 +263,9 @@ function App() {
           <Route path="/duel/match/:matchId" element={P(<DuelMatchPage />)} />
           <Route path="/duel/result/:matchId" element={P(<DuelResultPage />)} />
           <Route path="/search" element={P(<SearchResultsPage />)} />
-          <Route path="/report" element={P(<UnifiedReportPage />)} />
+          <Route path="/report" element={P(<AnalysisReportPage />)} />
+          <Route path="/report/legacy" element={P(<UnifiedReportPage />)} />
+          <Route path="/tutor/persona-select" element={P(<TutorPersonaSelectPage />)} />
           {/* /assignments 라우트는 학습 계획표로 통합되어 폐기 (V2 study-plan) */}
           <Route path="/assignments" element={<Navigate to="/study-plan" replace />} />
           <Route path="/diagnostic/v2" element={P(<DiagnosticV2Page />)} />
@@ -302,12 +308,14 @@ function App() {
           <Route path="/admin/parents" element={A(<AdminParentLinksPage />)} />
           <Route path="/admin/inquiry" element={A(<AdminInquiryPage />)} />
           <Route path="/admin/reports" element={A(<AdminReportsPage />)} />
+          <Route path="/admin/notices" element={A(<AdminNoticePage />)} />
           <Route path="/admin/org-settings" element={A(<AdminOrgSettingsPage />)} />
           <Route path="/admin/grapefruit-pricing" element={A(<AdminGrapefruitPricingPage />)} />
           <Route path="/admin/grapefruit-wallet" element={A(<AdminGrapefruitWalletPage />)} />
           <Route path="/admin/billing" element={A(<AdminOrgBillingPage />)} />
           <Route path="/admin/all-billings" element={A(<AdminAllOrgBillingPage />)} />
-          <Route path="/my/grapefruit" element={P(<MyGrapefruitPage />)} />
+          <Route path="/my/grapefruit" element={P(<MyWalletPage />)} />
+          <Route path="/my/grapefruit/legacy" element={P(<MyGrapefruitPage />)} />
           <Route path="/my/ai-study" element={P(<MyAiStudyPage />)} />
           <Route path="/my/tutor" element={P(<MyTutorPage />)} />
           <Route path="/admin/own-study-contents" element={A(<AdminOwnStudyContentsPage />)} />
