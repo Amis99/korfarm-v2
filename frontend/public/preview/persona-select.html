@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F4EFE6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>국어농장 v2 — 함께 공부할 선생님 고르기</title>
+<style>
+  :root {
+    --bg:           #F4EFE6;
+    --bg-deep:      #ECE3D2;
+    --surface:      #FFFAF0;
+    --surface-elev: #FFFFFF;
+    --fg:           #2A2520;
+    --muted:        #6B6359;
+    --subtle:       #9A8F82;
+    --border:       #E8DFCF;
+    --border-warm:  #D8CBB1;
+    --accent:       #F06C24;
+    --accent-deep:  #D8580E;
+    --accent-soft:  #FBE2D2;
+
+    --shadow-clay:    0 4px 12px rgba(140, 90, 40, 0.10), 0 1px 3px rgba(140, 90, 40, 0.06);
+    --shadow-clay-lg: 0 10px 28px rgba(140, 90, 40, 0.13), 0 2px 6px rgba(140, 90, 40, 0.06);
+    --shadow-press:   0 2px 6px rgba(140, 90, 40, 0.08);
+
+    --r-sm: 12px;
+    --r:    16px;
+    --r-lg: 22px;
+    --hdr-h: 64px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: 'Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR',
+                 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--fg);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.011em;
+    text-rendering: optimizeLegibility;
+    overscroll-behavior-y: none;
+    min-height: 100vh; min-height: 100dvh;
+  }
+  button, input, textarea { font: inherit; color: inherit; }
+  button { cursor: pointer; background: none; border: none; padding: 0; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--accent-soft); color: var(--fg); }
+
+  .page {
+    width: 100%;
+    min-height: 100vh; min-height: 100dvh;
+    background: var(--bg);
+    position: relative;
+    isolation: isolate;
+    display: flex; flex-direction: column;
+  }
+  .page::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.45 0 0 0 0 0.32 0 0 0 0.10 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    opacity: 0.40;
+    z-index: 0;
+  }
+  .page > * { position: relative; z-index: 1; }
+
+  .clay {
+    position: relative;
+    background: linear-gradient(155deg, #FFF6E2 0%, #EFDDB7 100%);
+    border-radius: var(--r);
+    display: grid; place-items: center;
+    isolation: isolate; overflow: hidden;
+    box-shadow:
+      inset 1.5px 2px 3px rgba(255, 250, 240, 0.85),
+      inset -2px -3px 5px rgba(160, 110, 50, 0.18),
+      0 5px 12px rgba(140, 90, 40, 0.10),
+      0 1px 3px rgba(140, 90, 40, 0.06);
+  }
+  .clay::before {
+    content: '';
+    position: absolute;
+    top: 6%; left: 16%;
+    width: 50%; height: 26%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.55), transparent 80%);
+    border-radius: 50%;
+    filter: blur(3px);
+    pointer-events: none;
+  }
+  .clay-yellow { background: linear-gradient(155deg, #FFE9C2 0%, #F4C97A 100%); }
+  .clay-blue   { background: linear-gradient(155deg, #DFEEFB 0%, #91C2E5 100%); }
+  .clay-red    { background: linear-gradient(155deg, #FBDDDD 0%, #ED9F9F 100%); }
+  .clay-green  { background: linear-gradient(155deg, #DDEFD5 0%, #94C68B 100%); }
+  .clay-orange { background: linear-gradient(155deg, #FBD8B6 0%, #ED9554 100%); }
+  .clay-rose   { background: linear-gradient(155deg, #F8DCE2 0%, #DC9CAB 100%); }
+  .clay-cream  { background: linear-gradient(155deg, #FFF2DC 0%, #F0DBB1 100%); }
+
+  .top-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: calc(env(safe-area-inset-top) + 14px) 18px 14px;
+    flex-shrink: 0;
+    min-height: var(--hdr-h);
+  }
+  .brand { display: flex; align-items: center; gap: 9px; }
+  .brand .logo {
+    width: 36px; height: 36px; border-radius: 11px; flex-shrink: 0;
+    background: linear-gradient(155deg, #F4854A 0%, var(--accent-deep) 100%);
+    box-shadow: inset 1.5px 2px 3px rgba(255, 220, 180, 0.7),
+                inset -2px -3px 4px rgba(140, 50, 0, 0.30),
+                0 3px 8px rgba(240, 108, 36, 0.22);
+    display: grid; place-items: center;
+    color: white; font-size: 17px; font-weight: 800;
+    letter-spacing: -0.04em;
+  }
+  .brand .name {
+    font-size: 17px; font-weight: 800; letter-spacing: -0.02em;
+    color: var(--fg);
+  }
+  .brand .ver {
+    font-size: 10.5px; font-weight: 700;
+    color: var(--accent-deep); background: var(--accent-soft);
+    padding: 2px 7px; border-radius: 999px;
+    line-height: 1; margin-left: -2px;
+  }
+  .skip-link {
+    display: inline-flex; align-items: center; gap: 4px;
+    height: 44px; padding: 0 14px;
+    border-radius: 999px;
+    font-size: 13.5px; font-weight: 600;
+    color: var(--muted);
+    transition: background 120ms ease, color 120ms ease, transform 120ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .skip-link:hover { background: rgba(255, 250, 240, 0.7); color: var(--fg); }
+  .skip-link:active { transform: scale(0.97); }
+  .skip-link::after { content: '›'; font-size: 18px; line-height: 1; opacity: 0.7; }
+
+  .main {
+    flex: 1 1 auto;
+    display: flex; flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 8px 18px 32px;
+  }
+
+  .hero {
+    width: 100%;
+    text-align: center;
+    margin: 12px 0 28px;
+    position: relative;
+  }
+  .hero-deco {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 64px; height: 64px;
+    border-radius: 22px;
+    display: grid; place-items: center;
+    font-size: 30px;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .hero-deco.left  { left: 0;  background: linear-gradient(155deg, #DDEFD5 0%, #94C68B 100%); transform: translateY(-50%) rotate(-8deg); }
+  .hero-deco.right { right: 0; background: linear-gradient(155deg, #FFE9C2 0%, #F4C97A 100%); transform: translateY(-50%) rotate(10deg); }
+  .hero-deco {
+    box-shadow:
+      inset 1.5px 2px 3px rgba(255, 250, 240, 0.85),
+      inset -2px -3px 5px rgba(160, 110, 50, 0.18),
+      0 5px 12px rgba(140, 90, 40, 0.10);
+  }
+  .hero-deco.left::before, .hero-deco.right::before {
+    content: ''; position: absolute;
+    top: 8%; left: 14%; width: 56%; height: 30%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.55), transparent 80%);
+    border-radius: 50%; filter: blur(3px);
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 800;
+    color: var(--accent-deep);
+    background: var(--accent-soft);
+    padding: 5px 11px 5px 9px; border-radius: 999px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    line-height: 1.3;
+  }
+  .hero-eyebrow .spark {
+    width: 5px; height: 5px; background: var(--accent);
+    border-radius: 50%;
+    animation: spark 1.6s ease-in-out infinite;
+  }
+  @keyframes spark {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.4); opacity: 1; }
+  }
+  .hero-title {
+    margin: 14px 0 8px;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--fg);
+    letter-spacing: -0.025em;
+    line-height: 1.3;
+    word-break: keep-all;
+  }
+  .hero-title strong { color: var(--accent-deep); font-weight: 800; }
+  .hero-sub {
+    margin: 0 auto;
+    max-width: 540px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--muted);
+    word-break: keep-all;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    width: 100%;
+  }
+
+  .character-card {
+    position: relative;
+    display: flex; flex-direction: column;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 26px;
+    padding: 18px 18px 18px;
+    box-shadow: var(--shadow-clay);
+    transition:
+      transform 220ms cubic-bezier(0.32, 0.72, 0.24, 1.08),
+      box-shadow 220ms ease,
+      border-color 200ms ease,
+      background 200ms ease;
+    -webkit-tap-highlight-color: transparent;
+    text-align: left;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .character-card.tint-cream { background: linear-gradient(165deg, #FFFAF0 0%, #FFF1DA 100%); }
+  .character-card.tint-green { background: linear-gradient(165deg, #FAFCEF 0%, #E8F2DA 100%); }
+  .character-card.tint-rose  { background: linear-gradient(165deg, #FFF8F4 0%, #FCE3EA 100%); }
+
+  .character-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-clay-lg);
+  }
+  .character-card[aria-pressed="true"] {
+    border-color: var(--accent);
+    border-width: 3px;
+    padding: 17px 17px 17px;
+    box-shadow:
+      0 0 0 4px rgba(240, 108, 36, 0.18),
+      0 14px 32px rgba(216, 88, 14, 0.20),
+      0 4px 12px rgba(140, 60, 0, 0.12);
+    transform: translateY(-4px);
+  }
+  .character-card[aria-pressed="true"]::before {
+    content: ''; position: absolute;
+    top: -40px; right: -40px; width: 160px; height: 160px;
+    background: radial-gradient(circle, rgba(240, 108, 36, 0.12), transparent 70%);
+    border-radius: 50%; pointer-events: none;
+  }
+
+  .selected-tag {
+    position: absolute; top: 14px; right: 14px;
+    display: inline-flex; align-items: center; gap: 4px;
+    height: 26px; padding: 0 10px 0 8px;
+    background: linear-gradient(155deg, #F4854A 0%, var(--accent-deep) 100%);
+    color: white;
+    font-size: 11px; font-weight: 800;
+    letter-spacing: 0.04em;
+    border-radius: 999px;
+    line-height: 1;
+    box-shadow: 0 4px 10px rgba(240, 108, 36, 0.32),
+                inset 0 1px 0 rgba(255,255,255,0.25);
+    opacity: 0;
+    transform: scale(0.8) translateY(-4px);
+    transition: opacity 200ms ease, transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 2;
+    pointer-events: none;
+  }
+  .selected-tag::before { content: '✓'; font-size: 12px; font-weight: 800; }
+  .character-card[aria-pressed="true"] .selected-tag {
+    opacity: 1; transform: scale(1) translateY(0);
+  }
+
+  .character-art {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-width: 240px;
+    margin: 0 auto;
+    border-radius: 26px;
+    display: grid; place-items: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      inset 2px 3px 5px rgba(255, 240, 220, 0.7),
+      inset -3px -5px 8px rgba(150, 100, 50, 0.20),
+      0 12px 24px rgba(150, 100, 50, 0.16),
+      0 4px 10px rgba(150, 100, 50, 0.08);
+  }
+  .character-art.owl     { background: linear-gradient(155deg, #F8E5C3 0%, #E5C292 100%); }
+  .character-art.amis    { background: linear-gradient(155deg, #DDEFD5 0%, #9BC094 100%); }
+  .character-art.nurungji { background: linear-gradient(155deg, #FBD8B6 0%, #E8A584 100%); }
+  .character-art::before {
+    content: ''; position: absolute;
+    top: 8%; left: 16%; width: 56%; height: 28%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.55), transparent 80%);
+    border-radius: 50%; filter: blur(4px); pointer-events: none;
+  }
+  .character-art .stack {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    text-align: center; padding: 0 12px;
+  }
+  .character-art .face {
+    font-size: 76px; line-height: 1;
+    filter: drop-shadow(0 4px 8px rgba(80, 50, 20, 0.18));
+  }
+  .character-art .ph-tag {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.10em; text-transform: uppercase;
+    color: rgba(80, 50, 20, 0.55);
+    margin-top: 4px;
+  }
+  .character-art.amis .ph-tag    { color: rgba(50, 80, 50, 0.6); }
+  .character-art.nurungji .ph-tag { color: rgba(110, 60, 30, 0.6); }
+  .character-art .ph-size { font-size: 9.5px; color: rgba(80, 50, 20, 0.40); font-weight: 600; }
+  .character-art.amis .ph-size    { color: rgba(50, 80, 50, 0.45); }
+  .character-art.nurungji .ph-size { color: rgba(110, 60, 30, 0.45); }
+
+  .character-name {
+    margin: 14px 0 4px;
+    font-size: 22px; font-weight: 800;
+    color: var(--fg);
+    letter-spacing: -0.025em;
+    text-align: center;
+    line-height: 1.2;
+  }
+  .character-tagline {
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.5;
+    word-break: keep-all;
+    margin: 0 0 14px;
+  }
+
+  .sample {
+    position: relative;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 12px 14px 12px 16px;
+    margin: 0 0 16px;
+    line-height: 1.55;
+  }
+  .sample::before {
+    content: '“';
+    position: absolute; top: -2px; left: 8px;
+    font-size: 32px; font-weight: 800; line-height: 1;
+    color: var(--accent);
+    opacity: 0.55;
+    font-family: Georgia, 'Iowan Old Style', serif;
+  }
+  .sample p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--fg);
+    font-style: italic;
+    word-break: keep-all;
+    padding-left: 2px;
+  }
+  .sample .by {
+    margin-top: 6px;
+    font-size: 11px;
+    color: var(--subtle);
+    font-style: normal;
+    letter-spacing: 0.02em;
+  }
+  .sample .by strong { color: var(--muted); font-weight: 700; }
+
+  .pick-btn {
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    width: 100%; height: 56px; padding: 0 18px;
+    border-radius: 18px;
+    background: linear-gradient(155deg, #F4854A 0%, var(--accent-deep) 100%);
+    color: white;
+    font-size: 14.5px; font-weight: 800;
+    letter-spacing: -0.01em;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.25),
+      0 6px 14px rgba(240, 108, 36, 0.32),
+      0 1px 3px rgba(140, 60, 0, 0.18);
+    transition:
+      transform 120ms ease,
+      box-shadow 200ms ease,
+      background 200ms ease;
+    -webkit-tap-highlight-color: transparent;
+    margin-top: auto;
+  }
+  .pick-btn:active {
+    transform: scale(0.97);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.25),
+                0 3px 8px rgba(240, 108, 36, 0.30);
+  }
+  .pick-btn::after {
+    content: '→';
+    font-size: 16px;
+    transition: transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .character-card:hover .pick-btn::after { transform: translateX(3px); }
+
+  .character-card[aria-pressed="true"] .pick-btn {
+    background: var(--fg);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.10),
+      0 6px 16px rgba(40, 30, 20, 0.35);
+  }
+  .character-card[aria-pressed="true"] .pick-btn::before {
+    content: '✓'; font-size: 14px; font-weight: 800;
+    color: var(--accent);
+  }
+
+  .footer-note {
+    margin: 28px 0 8px;
+    text-align: center;
+    font-size: 12.5px;
+    color: var(--subtle);
+    line-height: 1.5;
+    word-break: keep-all;
+  }
+  .footer-note .icon { margin-right: 4px; opacity: 0.7; }
+
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: calc(env(safe-area-inset-bottom) + 24px);
+    transform: translateX(-50%) translateY(20px);
+    max-width: calc(100vw - 32px);
+    padding: 12px 16px 12px 14px;
+    background: var(--fg); color: var(--bg);
+    border-radius: 999px;
+    box-shadow: 0 10px 28px rgba(40, 30, 20, 0.30), 0 2px 6px rgba(40, 30, 20, 0.18);
+    font-size: 13.5px; font-weight: 600;
+    display: flex; align-items: center; gap: 10px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 200ms ease, transform 220ms cubic-bezier(0.32, 0.72, 0.24, 1.08);
+    z-index: 100;
+    white-space: nowrap;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  .toast .ico {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--accent); color: white;
+    display: grid; place-items: center;
+    font-size: 12px; flex-shrink: 0;
+  }
+  .toast strong { color: white; font-weight: 800; }
+
+  /* TABLET (768px+) — 3-up grid, hero decorations show */
+  @media (min-width: 768px) {
+    .top-bar { padding: 22px 28px 18px; }
+    .main { padding: 24px 28px 56px; max-width: 960px; }
+    .hero { margin: 32px 0 40px; }
+    .hero-title { font-size: 30px; margin: 18px 0 10px; }
+    .hero-sub { font-size: 14.5px; }
+    .hero-deco {
+      width: 76px; height: 76px;
+      border-radius: 26px;
+      font-size: 36px;
+      display: grid;
+    }
+    .hero-deco.left  { left: 8px; }
+    .hero-deco.right { right: 8px; }
+
+    .grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .character-card {
+      padding: 22px 22px 22px;
+      border-radius: 28px;
+    }
+    .character-card[aria-pressed="true"] { padding: 21px 21px 21px; }
+    .character-name { font-size: 24px; margin: 16px 0 6px; }
+    .character-tagline { font-size: 13.5px; }
+    .sample { padding: 13px 14px 13px 18px; }
+    .sample p { font-size: 13.5px; }
+    .pick-btn { height: 56px; font-size: 15px; }
+    .footer-note { margin: 36px 0 12px; font-size: 13px; }
+  }
+
+  @media (min-width: 1200px) {
+    .top-bar { padding: 26px 36px 20px; }
+    .main { padding: 32px 36px 72px; }
+    .hero { margin: 40px 0 48px; }
+    .hero-title { font-size: 32px; }
+  }
+
+  @media (max-width: 767px) {
+    .hero-deco { display: none; }
+  }
+  @media (max-width: 359px) {
+    .hero-title { font-size: 20px; }
+    .character-name { font-size: 20px; }
+    .character-art .face { font-size: 64px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page" data-od-id="character-select">
+
+  <header class="top-bar" data-od-id="top-bar">
+    <a class="brand" href="#" aria-label="국어농장 v2 홈">
+      <span class="logo" aria-hidden="true">국</span>
+      <span class="name">국어농장</span>
+      <span class="ver">v2</span>
+    </a>
+    <a class="skip-link" href="#" id="skip-link" aria-label="선생님 선택 건너뛰기">건너뛰기</a>
+  </header>
+
+  <main class="main" data-od-id="main">
+
+    <section class="hero" data-od-id="hero" aria-labelledby="hero-title">
+      <span class="hero-deco left" aria-hidden="true">🌱</span>
+      <span class="hero-deco right" aria-hidden="true">☀️</span>
+      <span class="hero-eyebrow">
+        <span class="spark" aria-hidden="true"></span>
+        AI 선생님 고르기
+      </span>
+      <h1 class="hero-title" id="hero-title">
+        함께 공부할 <strong>선생님</strong>을 골라 주세요
+      </h1>
+      <p class="hero-sub">
+        선택한 선생님이 학생의 학습을 분석하고 추천해 드려요.<br>
+        나중에 마이페이지에서 언제든 바꿀 수 있어요.
+      </p>
+    </section>
+
+    <div class="grid" data-od-id="character-grid" role="radiogroup" aria-labelledby="hero-title">
+
+      <button class="character-card tint-cream" role="radio" aria-pressed="false" data-persona="owl" aria-label="부엉이샘 선택하기">
+        <span class="selected-tag" aria-hidden="true">선택됨</span>
+        <div class="character-art owl" role="img" aria-label="부엉이샘 — 캐릭터 일러스트 자리">
+          <div class="stack">
+            <span class="face" aria-hidden="true">🦉</span>
+            <span class="ph-tag">캐릭터 일러스트</span>
+            <span class="ph-size">240 × 240 · 점토 아트</span>
+          </div>
+        </div>
+        <h2 class="character-name">부엉이샘</h2>
+        <p class="character-tagline">지혜롭고 차분하게 가르쳐요</p>
+        <div class="sample">
+          <p>음, 학생. 오늘은 비문학 한 편을 천천히 살펴봅시다. 차근차근 풀어보면 답이 보일 거예요.</p>
+          <span class="by"><strong>샘플 메시지</strong> · 어조 미리보기</span>
+        </div>
+        <span class="pick-btn">이 선생님과 시작하기</span>
+      </button>
+
+      <button class="character-card tint-green" role="radio" aria-pressed="false" data-persona="amis" aria-label="아미스샘 선택하기">
+        <span class="selected-tag" aria-hidden="true">선택됨</span>
+        <div class="character-art amis" role="img" aria-label="아미스샘 — 캐릭터 일러스트 자리">
+          <div class="stack">
+            <span class="face" aria-hidden="true">🧑‍🏫</span>
+            <span class="ph-tag">캐릭터 일러스트</span>
+            <span class="ph-size">240 × 240 · 점토 아트</span>
+          </div>
+        </div>
+        <h2 class="character-name">아미스샘</h2>
+        <p class="character-tagline">친근하고 든든한 형 같은 선생님</p>
+        <div class="sample">
+          <p>오! 어제 진짜 잘했어! 오늘은 어휘 보강하면 딱이지. 같이 화이팅하자 💪</p>
+          <span class="by"><strong>샘플 메시지</strong> · 어조 미리보기</span>
+        </div>
+        <span class="pick-btn">이 선생님과 시작하기</span>
+      </button>
+
+      <button class="character-card tint-rose" role="radio" aria-pressed="false" data-persona="nurungji" aria-label="누룽지샘 선택하기">
+        <span class="selected-tag" aria-hidden="true">선택됨</span>
+        <div class="character-art nurungji" role="img" aria-label="누룽지샘 — 캐릭터 일러스트 자리">
+          <div class="stack">
+            <span class="face" aria-hidden="true">👩‍🏫</span>
+            <span class="ph-tag">캐릭터 일러스트</span>
+            <span class="ph-size">240 × 240 · 점토 아트</span>
+          </div>
+        </div>
+        <h2 class="character-name">누룽지샘</h2>
+        <p class="character-tagline">활기차고 따뜻한 누나·언니 선생님</p>
+        <div class="sample">
+          <p>어머~ 이 단어 진짜 헷갈리지~? 누나가 쉽게 알려줄게, 걱정 마! 🌻</p>
+          <span class="by"><strong>샘플 메시지</strong> · 어조 미리보기</span>
+        </div>
+        <span class="pick-btn">이 선생님과 시작하기</span>
+      </button>
+
+    </div>
+
+    <p class="footer-note">
+      <span class="icon" aria-hidden="true">💡</span>
+      선생님은 마이페이지에서 언제든 바꿀 수 있어요.
+    </p>
+
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="ico" aria-hidden="true">✓</span>
+    <span class="msg"></span>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    const PERSONA_NAMES = {
+      owl:      '부엉이샘',
+      amis:     '아미스샘',
+      nurungji: '누룽지샘',
+    };
+
+    const cards = document.querySelectorAll('.character-card');
+    const toast = document.getElementById('toast');
+    const toastMsg = toast.querySelector('.msg');
+    let toastTimer;
+    let selectedPersona = null;
+
+    function showToast(html) {
+      clearTimeout(toastTimer);
+      toastMsg.innerHTML = html;
+      toast.classList.add('show');
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    function selectCard(card) {
+      cards.forEach(c => c.setAttribute('aria-pressed', 'false'));
+      card.setAttribute('aria-pressed', 'true');
+      selectedPersona = card.dataset.persona;
+      showToast('<strong>' + PERSONA_NAMES[selectedPersona] + '</strong>을 선택했어요');
+    }
+
+    function startWith(card) {
+      const persona = card.dataset.persona;
+      const name = PERSONA_NAMES[persona];
+      cards.forEach(c => c.setAttribute('aria-pressed', 'false'));
+      card.setAttribute('aria-pressed', 'true');
+      selectedPersona = persona;
+      showToast('<strong>' + name + '</strong>과 함께 시작해요!  학습 화면으로 이동…');
+    }
+
+    cards.forEach(card => {
+      const btn = card.querySelector('.pick-btn');
+
+      card.addEventListener('click', (e) => {
+        if (btn && btn.contains(e.target)) {
+          startWith(card);
+        } else {
+          if (card.getAttribute('aria-pressed') !== 'true') {
+            selectCard(card);
+          } else {
+            startWith(card);
+          }
+        }
+      });
+
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          if (card.getAttribute('aria-pressed') !== 'true') {
+            selectCard(card);
+          } else {
+            startWith(card);
+          }
+        }
+      });
+    });
+
+    document.getElementById('skip-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      showToast('나중에 마이페이지에서 선생님을 고를 수 있어요');
+    });
+  })();
+</script>
+
+</body>
+</html>

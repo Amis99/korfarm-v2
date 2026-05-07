@@ -1,0 +1,1521 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#F4EFE6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>국어농장 v2 — 내 작물 지갑</title>
+<style>
+  :root {
+    --bg:           #F4EFE6;
+    --bg-deep:      #ECE3D2;
+    --surface:      #FFFAF0;
+    --surface-elev: #FFFFFF;
+    --fg:           #2A2520;
+    --muted:        #6B6359;
+    --subtle:       #9A8F82;
+    --border:       #E8DFCF;
+    --border-warm:  #D8CBB1;
+    --accent:       #F06C24;
+    --accent-deep:  #D8580E;
+    --accent-soft:  #FBE2D2;
+
+    --shadow-clay:    0 4px 12px rgba(140, 90, 40, 0.10), 0 1px 3px rgba(140, 90, 40, 0.06);
+    --shadow-clay-lg: 0 10px 28px rgba(140, 90, 40, 0.13), 0 2px 6px rgba(140, 90, 40, 0.06);
+    --shadow-press:   0 2px 6px rgba(140, 90, 40, 0.08);
+
+    --r-sm: 12px;
+    --r:    16px;
+    --r-lg: 22px;
+
+    --hdr-h: 64px;
+    --tab-h: 60px;
+    --sidebar-w: 260px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: 'Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR',
+                 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif;
+    font-size: 15px; line-height: 1.5; color: var(--fg); background: var(--bg);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.011em; text-rendering: optimizeLegibility;
+    overscroll-behavior-y: none; overflow: hidden;
+  }
+  button, input, textarea { font: inherit; color: inherit; }
+  button { cursor: pointer; background: none; border: none; padding: 0; }
+  a { color: inherit; text-decoration: none; }
+  input, textarea { border: none; background: transparent; outline: none; -webkit-appearance: none; appearance: none; }
+  ::selection { background: var(--accent-soft); color: var(--fg); }
+
+  .app {
+    width: 100%; height: 100vh; height: 100dvh; background: var(--bg);
+    display: grid; grid-template-rows: auto 1fr auto;
+    overflow: hidden; position: relative; isolation: isolate;
+  }
+  .app::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.45 0 0 0 0 0.32 0 0 0 0.10 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
+    pointer-events: none; mix-blend-mode: multiply; opacity: 0.45; z-index: 0;
+  }
+  .app > * { position: relative; z-index: 1; }
+
+  .clay {
+    position: relative; background: linear-gradient(155deg, #FFF6E2 0%, #EFDDB7 100%);
+    border-radius: var(--r); display: grid; place-items: center;
+    isolation: isolate; overflow: hidden;
+    box-shadow:
+      inset 1.5px 2px 3px rgba(255, 250, 240, 0.85),
+      inset -2px -3px 5px rgba(160, 110, 50, 0.18),
+      0 5px 12px rgba(140, 90, 40, 0.10),
+      0 1px 3px rgba(140, 90, 40, 0.06);
+  }
+  .clay::before {
+    content: ''; position: absolute; top: 6%; left: 16%;
+    width: 50%; height: 26%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.55), transparent 80%);
+    border-radius: 50%; filter: blur(3px); pointer-events: none;
+  }
+  .clay > .lbl {
+    position: relative; z-index: 2;
+    font-size: 10.5px; font-weight: 600; color: rgba(60, 50, 40, 0.55);
+    letter-spacing: 0.01em; line-height: 1.2; text-align: center; padding: 0 4px;
+  }
+  .clay-yellow { background: linear-gradient(155deg, #FFE9C2 0%, #F4C97A 100%); }
+  .clay-blue   { background: linear-gradient(155deg, #DFEEFB 0%, #91C2E5 100%); }
+  .clay-red    { background: linear-gradient(155deg, #FBDDDD 0%, #ED9F9F 100%); }
+  .clay-green  { background: linear-gradient(155deg, #DDEFD5 0%, #94C68B 100%); }
+  .clay-orange { background: linear-gradient(155deg, #FBD8B6 0%, #ED9554 100%); }
+  .clay-purple { background: linear-gradient(155deg, #E5D9F2 0%, #B7A0DA 100%); }
+  .clay-rose   { background: linear-gradient(155deg, #F8DCE2 0%, #DC9CAB 100%); }
+  .clay-cream  { background: linear-gradient(155deg, #FFF2DC 0%, #F0DBB1 100%); }
+  .clay-yellow .lbl, .clay-orange .lbl, .clay-rose .lbl, .clay-red .lbl, .clay-cream .lbl { color: rgba(80, 50, 30, 0.6); }
+  .clay-blue .lbl   { color: rgba(40, 70, 100, 0.6); }
+  .clay-green .lbl  { color: rgba(50, 80, 50, 0.6); }
+  .clay-purple .lbl { color: rgba(70, 55, 100, 0.6); }
+
+  .top-bar {
+    display: flex; align-items: center; gap: 10px;
+    padding: calc(env(safe-area-inset-top) + 10px) 14px 10px;
+    background: linear-gradient(to bottom, rgba(244, 239, 230, 0.96) 0%, rgba(244, 239, 230, 0.86) 100%);
+    -webkit-backdrop-filter: saturate(140%) blur(14px); backdrop-filter: saturate(140%) blur(14px);
+    border-bottom: 1px solid rgba(216, 203, 177, 0.4); min-height: var(--hdr-h);
+  }
+  .hamburger {
+    display: grid; place-items: center; width: 44px; height: 44px;
+    border-radius: 12px; flex-shrink: 0;
+    transition: background 120ms ease, transform 120ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .hamburger:active { background: rgba(0,0,0,0.04); transform: scale(0.92); }
+  .hamburger span { width: 20px; height: 2px; background: var(--fg); border-radius: 2px; position: relative; display: block; }
+  .hamburger span::before, .hamburger span::after {
+    content: ''; position: absolute; left: 0; width: 20px; height: 2px;
+    background: var(--fg); border-radius: 2px;
+  }
+  .hamburger span::before { top: -7px; }
+  .hamburger span::after { top: 7px; }
+
+  .brand { display: flex; align-items: center; gap: 8px; flex-shrink: 0; padding: 0 4px; }
+  .brand .logo {
+    width: 32px; height: 32px; border-radius: 10px; flex-shrink: 0;
+    background: linear-gradient(155deg, #F4854A 0%, var(--accent-deep) 100%);
+    box-shadow: inset 1.5px 2px 3px rgba(255, 220, 180, 0.7),
+                inset -2px -3px 4px rgba(140, 50, 0, 0.30),
+                0 3px 8px rgba(240, 108, 36, 0.22);
+    display: grid; place-items: center; color: white;
+    font-size: 16px; font-weight: 800; letter-spacing: -0.04em;
+  }
+  .brand .name { font-size: 16px; font-weight: 800; letter-spacing: -0.02em; color: var(--fg); }
+  .brand .ver {
+    font-size: 10px; font-weight: 700; color: var(--accent-deep);
+    background: var(--accent-soft); padding: 2px 6px; border-radius: 999px;
+    margin-left: 2px; line-height: 1;
+  }
+  .crumb {
+    font-size: 13px; color: var(--muted); padding-left: 10px; margin-left: 8px;
+    border-left: 1px solid var(--border); white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis; min-width: 0;
+  }
+  .crumb strong { color: var(--fg); font-weight: 700; }
+  .hdr-spacer { flex: 1; }
+
+  .hdr-user {
+    display: flex; align-items: center; gap: 10px;
+    padding: 5px 12px 5px 5px; border-radius: 999px;
+    background: rgba(255, 250, 240, 0.5);
+    border: 1px solid var(--border);
+    transition: background 120ms ease;
+    -webkit-tap-highlight-color: transparent; min-height: 44px;
+  }
+  .hdr-user:active { background: var(--surface-elev); }
+  .hdr-user .clay { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; }
+  .hdr-user .clay > .lbl { font-size: 9px; }
+  .hdr-user .info { line-height: 1.15; min-width: 0; text-align: left; }
+  .hdr-user .info .name { font-size: 13px; font-weight: 700; color: var(--fg); white-space: nowrap; }
+  .hdr-user .meta { font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+  .hdr-user .meta .lvl {
+    font-size: 10px; font-weight: 700; color: #6E4A12;
+    background: linear-gradient(120deg, #FFF1CF, #FFE1A4);
+    padding: 1px 6px; border-radius: 999px; line-height: 1.4;
+    border: 1px solid rgba(212, 156, 60, 0.25);
+  }
+
+  .hdr-actions { display: flex; gap: 4px; flex-shrink: 0; }
+  .icon-btn {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: grid; place-items: center; position: relative;
+    transition: transform 120ms ease, background 120ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .icon-btn:active { transform: scale(0.92); background: rgba(0,0,0,0.04); }
+  .icon-btn .clay { width: 32px; height: 32px; border-radius: 11px; }
+  .icon-btn .clay > .lbl { font-size: 9px; }
+  .icon-btn.active .clay {
+    box-shadow:
+      inset 1.5px 2px 3px rgba(255, 245, 230, 0.95),
+      inset -2px -3px 5px rgba(180, 90, 30, 0.22),
+      0 0 0 2px var(--accent),
+      0 4px 10px rgba(240, 108, 36, 0.25);
+  }
+  .icon-count {
+    position: absolute; top: 2px; right: 2px;
+    background: var(--accent); color: white;
+    font-size: 10px; font-weight: 700; line-height: 1;
+    padding: 3px 5px; border-radius: 8px; min-width: 18px;
+    text-align: center; border: 1.5px solid var(--bg);
+    box-shadow: 0 2px 4px rgba(240, 108, 36, 0.30);
+  }
+  .icon-dot {
+    position: absolute; top: 4px; right: 4px;
+    width: 16px; height: 16px;
+    background: var(--accent); color: white;
+    font-size: 9px; font-weight: 700; border-radius: 50%;
+    display: grid; place-items: center;
+    border: 1.5px solid var(--bg); line-height: 1;
+  }
+
+  .body { display: grid; grid-template-columns: 1fr; overflow: hidden; position: relative; }
+
+  .sidebar {
+    background: rgba(255, 250, 240, 0.5);
+    border-right: 1px solid var(--border);
+    overflow-y: auto; -webkit-overflow-scrolling: touch;
+    padding: 16px 12px calc(env(safe-area-inset-bottom) + 16px);
+    scrollbar-width: thin; scrollbar-color: var(--border-warm) transparent;
+  }
+  .sidebar::-webkit-scrollbar { width: 6px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border-warm); border-radius: 999px; }
+
+  .sb-group { margin-bottom: 14px; }
+  .sb-group:last-child { margin-bottom: 0; }
+  .sb-title {
+    font-size: 12px; font-weight: 700; color: var(--muted);
+    line-height: 1; padding: 4px 12px 8px;
+    display: flex; align-items: center; gap: 8px; letter-spacing: 0.01em;
+  }
+  .sb-title .clay { width: 18px; height: 18px; border-radius: 6px; flex-shrink: 0; }
+  .sb-title .clay > .lbl { font-size: 7px; }
+  .sb-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; border-radius: 12px;
+    color: var(--fg); font-size: 13.5px; font-weight: 500;
+    min-height: 44px;
+    transition: background 120ms ease, transform 120ms ease;
+    -webkit-tap-highlight-color: transparent; position: relative;
+  }
+  .sb-item:active { transform: scale(0.985); }
+  .sb-item:hover, .sb-item:focus-visible { background: rgba(255, 250, 240, 0.8); }
+  .sb-item.active { background: var(--accent-soft); color: var(--accent-deep); font-weight: 700; }
+  .sb-item.active::before {
+    content: ''; position: absolute; left: 0; top: 12px; bottom: 12px; width: 3px;
+    background: var(--accent); border-radius: 0 3px 3px 0;
+  }
+  .sb-item .icon { width: 22px; flex-shrink: 0; text-align: center; font-size: 15px; line-height: 1; }
+  .sb-item .badge {
+    margin-left: auto; font-size: 10px; font-weight: 700;
+    background: var(--accent); color: white;
+    padding: 2px 7px; border-radius: 999px; line-height: 1.4;
+  }
+  .sb-item .badge.live { background: #E04A4A; display: inline-flex; align-items: center; gap: 3px; }
+  .sb-item .badge.live::before {
+    content: ''; width: 5px; height: 5px; background: white; border-radius: 50%;
+    animation: livePulse 1.6s infinite;
+  }
+  .sb-item .badge.neutral { background: rgba(216, 203, 177, 0.5); color: var(--muted); }
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .center {
+    display: flex; flex-direction: column;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain; position: relative;
+    padding-bottom: 24px;
+  }
+
+  .page-head {
+    margin: 14px 14px 4px;
+    padding: 18px 18px 16px;
+    background: linear-gradient(165deg, #FFFAF0 0%, #FFF1DA 60%, #FFE7C0 100%);
+    border: 1px solid var(--border-warm);
+    border-radius: 22px;
+    box-shadow: var(--shadow-clay);
+    position: relative; overflow: hidden;
+    display: grid; grid-template-columns: 1fr; gap: 12px; align-items: center;
+  }
+  .page-head::before {
+    content: ''; position: absolute; top: -30px; right: -30px;
+    width: 130px; height: 130px;
+    background: radial-gradient(circle, rgba(255, 220, 130, 0.45), transparent 70%);
+    border-radius: 50%; pointer-events: none;
+  }
+  .page-head-text { position: relative; z-index: 1; min-width: 0; }
+  .page-eyebrow {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 10.5px; font-weight: 800;
+    color: rgba(110, 74, 18, 0.9);
+    background: rgba(244, 201, 122, 0.32);
+    border: 1px solid rgba(212, 156, 60, 0.30);
+    padding: 3px 8px 3px 7px; border-radius: 999px;
+    letter-spacing: 0.04em; line-height: 1.3; text-transform: uppercase;
+  }
+  .page-eyebrow .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+  h1.page-title {
+    margin: 8px 0 4px;
+    font-size: 22px; font-weight: 800;
+    letter-spacing: -0.02em; line-height: 1.25; color: var(--fg);
+  }
+  .page-sub { font-size: 13px; color: var(--muted); line-height: 1.5; word-break: keep-all; }
+  .page-sub strong { color: var(--fg); font-weight: 700; }
+
+  .total-pill {
+    position: relative; z-index: 1;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 14px; border-radius: 16px;
+    background: var(--surface-elev);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-press);
+    align-self: start;
+    min-height: 44px;
+  }
+  .total-pill .label {
+    font-size: 11px; font-weight: 700; color: var(--muted);
+    letter-spacing: 0.04em; text-transform: uppercase; line-height: 1;
+  }
+  .total-pill .val {
+    font-size: 18px; font-weight: 800; color: var(--fg);
+    font-variant-numeric: tabular-nums; letter-spacing: -0.015em;
+    line-height: 1;
+  }
+  .total-pill .val strong { color: var(--accent-deep); font-weight: 800; }
+  .total-pill .val small {
+    font-size: 12px; color: var(--muted); font-weight: 600;
+    letter-spacing: 0; margin-left: 4px;
+  }
+
+  .section { margin: 18px 14px 0; }
+  .section-title {
+    font-size: 16px; font-weight: 800; letter-spacing: -0.02em;
+    margin: 0 4px 4px;
+  }
+  .section-sub {
+    font-size: 12.5px; color: var(--muted);
+    margin: 0 4px 12px; line-height: 1.45; word-break: keep-all;
+  }
+  .section-sub strong { color: var(--fg); font-weight: 700; }
+
+  .balance-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .balance-card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 14px 12px 12px;
+    box-shadow: var(--shadow-clay);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    text-align: center;
+    transition: transform 140ms ease, box-shadow 140ms ease;
+  }
+  .balance-card.primary {
+    background: linear-gradient(165deg, #FFFAF0 0%, #FFE7C0 100%);
+    border-color: rgba(240, 108, 36, 0.40);
+    box-shadow:
+      0 0 0 1px rgba(240, 108, 36, 0.30),
+      0 6px 16px rgba(240, 108, 36, 0.18),
+      0 1px 3px rgba(140, 60, 0, 0.10);
+  }
+  .balance-card .ai-tag {
+    position: absolute; top: 8px; right: 8px;
+    font-size: 9px; font-weight: 800;
+    color: white; background: var(--accent);
+    padding: 2px 6px; border-radius: 999px;
+    letter-spacing: 0.04em; line-height: 1.3;
+    box-shadow: 0 2px 4px rgba(240, 108, 36, 0.30);
+  }
+  .balance-card .clay { width: 64px; height: 64px; border-radius: 18px; }
+  .balance-card .clay > .lbl { font-size: 10px; }
+  .balance-card .name {
+    font-size: 13px; font-weight: 700; color: var(--fg);
+    line-height: 1; letter-spacing: -0.01em;
+  }
+  .balance-card .balance {
+    display: flex; align-items: baseline; gap: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+  .balance-card .balance .num {
+    font-size: 24px; font-weight: 800; color: var(--fg);
+    letter-spacing: -0.02em; line-height: 1;
+  }
+  .balance-card.primary .balance .num { color: var(--accent-deep); }
+  .balance-card .balance .unit {
+    font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1;
+  }
+  .balance-card .rate {
+    font-size: 10.5px; color: var(--subtle); line-height: 1.3;
+    font-variant-numeric: tabular-nums;
+  }
+  .balance-card .priority-pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 10px; font-weight: 700;
+    color: var(--muted); background: var(--bg-deep);
+    padding: 3px 7px; border-radius: 999px;
+    line-height: 1.3; margin-top: 2px;
+  }
+  .balance-card .priority-pill.off { background: rgba(216, 203, 177, 0.35); color: var(--subtle); }
+  .balance-card .priority-pill.off::before { content: '🚫'; font-size: 9px; }
+  .balance-card .priority-pill .rk {
+    width: 14px; height: 14px;
+    background: var(--accent); color: white; border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 9px; font-weight: 800; line-height: 1;
+  }
+
+  .priority-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 16px 14px 14px;
+    box-shadow: var(--shadow-clay);
+  }
+  .priority-list {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .pri-row {
+    display: grid;
+    grid-template-columns: 28px 36px 1fr auto auto;
+    align-items: center;
+    gap: 10px; padding: 10px 8px;
+    border-radius: 14px; min-height: 56px;
+    background: rgba(255, 250, 240, 0.6);
+    border: 1px solid var(--border);
+    transition: background 120ms ease, transform 140ms ease, box-shadow 140ms ease;
+    -webkit-user-select: none; user-select: none;
+  }
+  .pri-row.dragging {
+    background: linear-gradient(120deg, #FFF1CF, #FFE1A4);
+    transform: scale(1.01);
+    box-shadow: 0 8px 18px rgba(140, 90, 40, 0.18);
+    border-color: rgba(212, 156, 60, 0.40);
+  }
+  .pri-row.drop-target {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-soft);
+  }
+  .pri-row.disabled { opacity: 0.55; background: rgba(216, 203, 177, 0.18); }
+  .pri-row.disabled .pri-name s { text-decoration-color: var(--subtle); }
+  .pri-handle {
+    cursor: grab; touch-action: none;
+    color: var(--subtle); display: grid; place-items: center;
+    width: 28px; height: 44px;
+    transition: color 120ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .pri-handle:hover { color: var(--fg); }
+  .pri-handle:active { cursor: grabbing; }
+  .pri-handle::before {
+    content: '';
+    width: 10px; height: 18px;
+    background-image:
+      radial-gradient(circle, currentColor 1.3px, transparent 1.3px);
+    background-size: 5px 5px;
+    background-position: 0 0;
+    background-repeat: round;
+    opacity: 0.55;
+  }
+  .pri-row .clay { width: 36px; height: 36px; border-radius: 11px; }
+  .pri-row .clay > .lbl { font-size: 9px; }
+  .pri-row .pri-name { font-size: 13.5px; font-weight: 700; color: var(--fg); line-height: 1.2; }
+  .pri-row .pri-name s { color: var(--subtle); font-weight: 500; }
+  .pri-row .pri-meta {
+    font-size: 11.5px; color: var(--muted); margin-top: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+  .pri-row .pri-rank {
+    font-size: 11px; font-weight: 800;
+    color: var(--accent-deep);
+    background: var(--accent-soft);
+    padding: 3px 7px 3px 4px; border-radius: 999px;
+    line-height: 1.3;
+    display: inline-flex; align-items: center; gap: 4px;
+    flex-shrink: 0;
+  }
+  .pri-row .pri-rank .num {
+    width: 16px; height: 16px;
+    background: var(--accent); color: white;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 10px; font-weight: 800; line-height: 1;
+  }
+  .pri-row.disabled .pri-rank { background: rgba(216, 203, 177, 0.4); color: var(--muted); }
+  .pri-row.disabled .pri-rank .num { background: var(--subtle); }
+
+  .toggle {
+    --w: 40px; --h: 24px;
+    width: var(--w); height: var(--h);
+    background: var(--bg-deep);
+    border-radius: 999px;
+    position: relative;
+    transition: background 180ms ease;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    border: 1px solid rgba(140, 90, 40, 0.12);
+  }
+  .toggle::after {
+    content: ''; position: absolute;
+    top: 1px; left: 1px;
+    width: calc(var(--h) - 4px); height: calc(var(--h) - 4px);
+    background: white; border-radius: 50%;
+    transition: transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 2px 4px rgba(40, 30, 20, 0.20);
+  }
+  .toggle[aria-checked="true"] { background: var(--accent); border-color: var(--accent-deep); }
+  .toggle[aria-checked="true"]::after { transform: translateX(calc(var(--w) - var(--h))); }
+
+  .pri-actions {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; flex-wrap: wrap;
+    margin: 14px 0 4px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--border-warm);
+  }
+  .btn-save {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    height: 48px; padding: 0 22px;
+    border-radius: 14px;
+    background: linear-gradient(155deg, #F4854A 0%, var(--accent-deep) 100%);
+    color: white; font-weight: 800; font-size: 14px;
+    letter-spacing: -0.01em;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.25),
+      0 4px 10px rgba(240, 108, 36, 0.40),
+      0 1px 2px rgba(140, 60, 0, 0.18);
+    transition: transform 120ms ease, box-shadow 120ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn-save:active { transform: scale(0.97); box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), 0 2px 6px rgba(240, 108, 36, 0.32); }
+  .btn-save::before { content: '✓'; font-size: 13px; font-weight: 800; }
+  .btn-reset {
+    font-size: 12.5px; font-weight: 700; color: var(--muted);
+    padding: 12px 14px; margin: -6px -14px;
+    border-radius: 999px;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: underline; text-underline-offset: 3px;
+    text-decoration-color: var(--border-warm);
+    text-decoration-thickness: 1px;
+    min-height: 44px;
+    display: inline-flex; align-items: center;
+  }
+  .btn-reset:hover { color: var(--fg); text-decoration-color: var(--fg); }
+  .pri-note {
+    margin: 10px 0 0;
+    font-size: 11.5px; color: var(--subtle); line-height: 1.5;
+  }
+  .pri-note::before { content: 'ℹ '; color: var(--muted); margin-right: 2px; }
+
+  .charge-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 16px 14px;
+    box-shadow: var(--shadow-clay);
+  }
+  .charge-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .charge-btn {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px; border-radius: 18px;
+    transition: transform 140ms ease, box-shadow 140ms ease;
+    -webkit-tap-highlight-color: transparent;
+    text-align: left; min-height: 72px;
+    width: 100%; position: relative;
+  }
+  .charge-btn:active { transform: scale(0.98); }
+  .charge-btn.primary {
+    background: linear-gradient(155deg, #F4854A 0%, var(--accent-deep) 100%);
+    color: white;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.25),
+      0 8px 20px rgba(240, 108, 36, 0.32),
+      0 2px 6px rgba(140, 60, 0, 0.15);
+  }
+  .charge-btn.primary:active { box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), 0 4px 10px rgba(240, 108, 36, 0.30); }
+  .charge-btn.secondary {
+    background: var(--surface-elev);
+    border: 1px solid var(--border-warm);
+    color: var(--fg);
+    box-shadow: var(--shadow-press);
+  }
+  .charge-btn .clay { width: 48px; height: 48px; border-radius: 14px; flex-shrink: 0; }
+  .charge-btn .clay > .lbl { font-size: 9px; }
+  .charge-btn.primary .clay {
+    box-shadow:
+      inset 1.5px 2px 3px rgba(255, 230, 200, 0.85),
+      inset -2px -3px 5px rgba(140, 50, 0, 0.30),
+      0 4px 10px rgba(140, 60, 0, 0.20);
+  }
+  .charge-btn .text { line-height: 1.3; flex: 1; min-width: 0; }
+  .charge-btn .ttl { font-size: 15px; font-weight: 800; letter-spacing: -0.01em; }
+  .charge-btn .meta { font-size: 12px; opacity: 0.85; margin-top: 3px; }
+  .charge-btn.primary .meta { color: rgba(255, 240, 220, 0.92); }
+  .charge-btn.secondary .meta { color: var(--muted); }
+  .charge-btn .arrow {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+    font-size: 14px; font-weight: 800; line-height: 1;
+  }
+  .charge-btn.primary .arrow {
+    background: rgba(255, 255, 255, 0.20);
+    border: 1.5px solid rgba(255, 255, 255, 0.30);
+    color: white;
+  }
+  .charge-btn.secondary .arrow {
+    background: var(--accent-soft);
+    color: var(--accent-deep);
+    border: 1.5px solid rgba(240, 108, 36, 0.20);
+  }
+  .charge-rate {
+    margin: 14px 4px 0; padding-top: 12px;
+    border-top: 1px dashed var(--border-warm);
+    font-size: 12px; color: var(--muted); line-height: 1.5;
+    word-break: keep-all;
+  }
+  .charge-rate strong { color: var(--fg); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .charge-rate .pkg {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--bg-deep); padding: 2px 7px;
+    border-radius: 999px; font-weight: 700; font-size: 11px;
+    color: var(--fg); margin-left: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .filter-chips {
+    display: flex; gap: 6px; overflow-x: auto;
+    margin: 0 -2px 12px;
+    padding: 2px 4px 4px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .filter-chips::-webkit-scrollbar { display: none; }
+  .chip {
+    flex-shrink: 0;
+    font-size: 12.5px; font-weight: 600;
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--border);
+    padding: 0 12px; min-height: 36px;
+    border-radius: 999px;
+    transition: background 120ms ease, color 120ms ease, transform 120ms ease;
+    -webkit-tap-highlight-color: transparent;
+    white-space: nowrap; line-height: 1;
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .chip[aria-pressed="true"] {
+    background: var(--fg); color: var(--bg);
+    border-color: var(--fg); font-weight: 700;
+  }
+  .chip:active { transform: scale(0.96); }
+  .chip .clay { width: 14px; height: 14px; border-radius: 4px; }
+  .chip .clay > .lbl { font-size: 6px; }
+
+  .usage-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 14px;
+    box-shadow: var(--shadow-clay);
+  }
+  .usage-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 13px;
+    table-layout: fixed;
+    display: none;
+  }
+  .usage-table thead {
+    color: var(--muted); font-size: 11px; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .usage-table th {
+    text-align: left; padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 700;
+  }
+  .usage-table th:nth-child(4),
+  .usage-table th:nth-child(5),
+  .usage-table td:nth-child(4),
+  .usage-table td:nth-child(5) { text-align: right; font-variant-numeric: tabular-nums; }
+  .usage-table tbody tr {
+    transition: background 120ms ease;
+  }
+  .usage-table tbody tr:hover { background: rgba(255, 250, 240, 0.6); }
+  .usage-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.3;
+    vertical-align: middle;
+  }
+  .usage-table tbody tr:last-child td { border-bottom: none; }
+  .usage-table .col-time { color: var(--muted); white-space: nowrap; font-size: 12px; }
+  .usage-table .col-act { color: var(--fg); font-weight: 600; }
+  .usage-table .col-act .clay {
+    width: 22px; height: 22px; border-radius: 7px;
+    display: inline-grid; vertical-align: -6px; margin-right: 6px;
+  }
+  .usage-table .col-act .clay > .lbl { font-size: 7px; }
+  .usage-table .col-curr {
+    display: inline-flex; align-items: center; gap: 6px;
+    line-height: 1;
+  }
+  .usage-table .col-curr .chip-mini {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11px; font-weight: 700;
+    color: var(--fg); background: var(--bg-deep);
+    padding: 4px 8px 4px 4px; border-radius: 999px;
+    line-height: 1; border: 1px solid var(--border);
+  }
+  .usage-table .col-curr .chip-mini .clay {
+    width: 16px; height: 16px; border-radius: 5px; flex-shrink: 0;
+  }
+  .usage-table .col-curr .chip-mini .clay > .lbl { font-size: 6px; }
+  .usage-table .col-curr.primary-curr .chip-mini {
+    background: var(--accent-soft); color: var(--accent-deep);
+    border-color: rgba(240, 108, 36, 0.25);
+  }
+  .usage-table .col-delta {
+    color: var(--accent-deep); font-weight: 700;
+  }
+  .usage-table .col-balance { color: var(--fg); font-weight: 700; }
+
+  .usage-mobile { display: flex; flex-direction: column; gap: 8px; }
+  .usage-row {
+    display: grid; grid-template-columns: 36px 1fr auto;
+    gap: 10px; padding: 12px 4px; align-items: center;
+    border-bottom: 1px solid var(--border); transition: background 120ms ease;
+  }
+  .usage-row:last-child { border-bottom: none; }
+  .usage-row:hover { background: rgba(255, 250, 240, 0.6); }
+  .usage-row .clay { width: 36px; height: 36px; border-radius: 11px; }
+  .usage-row .clay > .lbl { font-size: 9px; }
+  .usage-row .body-text { min-width: 0; line-height: 1.3; }
+  .usage-row .ttl {
+    font-size: 13.5px; font-weight: 700; color: var(--fg);
+    letter-spacing: -0.01em; line-height: 1.25;
+  }
+  .usage-row .meta {
+    font-size: 11.5px; color: var(--subtle); margin-top: 3px;
+    display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .usage-row .meta .sep { color: var(--border-warm); }
+  .usage-row .meta .curr-mini {
+    display: inline-flex; align-items: center; gap: 3px;
+    font-weight: 700; color: var(--muted);
+  }
+  .usage-row .meta .curr-mini.primary-curr { color: var(--accent-deep); }
+  .usage-row .right { text-align: right; flex-shrink: 0; line-height: 1.3; }
+  .usage-row .delta {
+    font-size: 13.5px; font-weight: 800;
+    color: var(--accent-deep);
+    font-variant-numeric: tabular-nums;
+  }
+  .usage-row .bal-after {
+    font-size: 11px; color: var(--subtle); margin-top: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tab-bar {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    background: rgba(248, 244, 235, 0.85);
+    -webkit-backdrop-filter: saturate(140%) blur(20px);
+    backdrop-filter: saturate(140%) blur(20px);
+    border-top: 1px solid var(--border);
+    height: calc(var(--tab-h) + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .tab {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 3px; padding: 6px 4px 4px; min-height: 44px;
+    color: var(--subtle);
+    transition: transform 120ms ease, color 120ms ease;
+    -webkit-tap-highlight-color: transparent; position: relative;
+  }
+  .tab:active { transform: scale(0.94); }
+  .tab .clay {
+    width: 28px; height: 28px; border-radius: 9px;
+    transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .tab .clay > .lbl { font-size: 8px; }
+  .tab-label { font-size: 10.5px; font-weight: 600; line-height: 1; letter-spacing: -0.01em; }
+  .tab[aria-current="page"] { color: var(--accent-deep); }
+  .tab[aria-current="page"] .clay {
+    transform: translateY(-2px);
+    box-shadow:
+      inset 1.5px 2px 3px rgba(255, 245, 230, 0.95),
+      inset -2px -3px 5px rgba(180, 90, 30, 0.22),
+      0 6px 12px rgba(240, 108, 36, 0.30),
+      0 1px 3px rgba(140, 60, 0, 0.15);
+  }
+  .tab[aria-current="page"]::before {
+    content: ''; position: absolute;
+    top: 4px; left: 50%; transform: translateX(-50%);
+    width: 28px; height: 4px;
+    background: var(--accent); border-radius: 0 0 999px 999px;
+    box-shadow: 0 1px 4px rgba(240, 108, 36, 0.40);
+  }
+  .tab[aria-current="page"] .tab-label { font-weight: 700; }
+
+  .scrim {
+    position: absolute; inset: 0;
+    background: rgba(40, 30, 20, 0.45);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    opacity: 0; pointer-events: none;
+    transition: opacity 220ms ease;
+    z-index: 50;
+  }
+  .app[data-drawer="open"] .scrim { opacity: 1; pointer-events: auto; }
+
+  .toast {
+    position: fixed;
+    left: 50%; bottom: calc(var(--tab-h) + env(safe-area-inset-bottom) + 14px);
+    transform: translateX(-50%) translateY(20px);
+    max-width: calc(100vw - 32px);
+    padding: 12px 16px;
+    background: var(--fg); color: var(--bg);
+    border-radius: 999px;
+    box-shadow: 0 10px 28px rgba(40, 30, 20, 0.30), 0 2px 6px rgba(40, 30, 20, 0.18);
+    font-size: 13.5px; font-weight: 600;
+    display: flex; align-items: center; gap: 10px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 200ms ease, transform 220ms cubic-bezier(0.32, 0.72, 0.24, 1.08);
+    z-index: 100; white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast .ico {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: #94C68B; color: white;
+    display: grid; place-items: center;
+    font-size: 11px; flex-shrink: 0;
+  }
+
+  @media (max-width: 767px) {
+    .body { grid-template-columns: 1fr; grid-template-rows: 1fr; }
+    .sidebar {
+      position: absolute; top: 0; bottom: 0; left: 0;
+      width: min(280px, 86vw); transform: translateX(-100%);
+      transition: transform 260ms cubic-bezier(0.32, 0.72, 0.24, 1.08);
+      z-index: 60; background: var(--bg);
+      box-shadow: 8px 0 24px rgba(40, 30, 20, 0);
+      padding-top: calc(env(safe-area-inset-top) + 16px);
+      will-change: transform;
+    }
+    .app[data-drawer="open"] .sidebar {
+      transform: translateX(0);
+      box-shadow: 8px 0 32px rgba(40, 30, 20, 0.20);
+    }
+    .center { grid-column: 1; padding-bottom: 16px; }
+    .tab-bar { display: grid; }
+    .hdr-user .info { display: none; }
+    .hdr-user { padding: 4px; border-radius: 50%; background: transparent; border: none; gap: 0; }
+    .brand .ver, .crumb { display: none; }
+    .brand .name { font-size: 15px; }
+    .top-bar { gap: 6px; padding: calc(env(safe-area-inset-top) + 10px) 10px 10px; }
+  }
+
+  @media (min-width: 768px) {
+    .app { grid-template-rows: auto 1fr; }
+    .body { grid-template-columns: var(--sidebar-w) 1fr; grid-template-rows: 1fr; }
+    .sidebar { display: block; }
+    .hamburger { display: none; }
+    .tab-bar { display: none; }
+    .scrim { display: none; }
+    .toast { bottom: 22px; }
+    .top-bar { padding: 12px 18px; min-height: 68px; border-bottom: 1px solid var(--border); }
+    .brand .name { font-size: 17px; }
+
+    .page-head {
+      margin: 18px 22px 4px;
+      padding: 22px 26px;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+    }
+    h1.page-title { font-size: 26px; }
+    .page-sub { font-size: 14px; max-width: 600px; }
+
+    .section { margin: 22px 22px 0; }
+    .section-title { font-size: 18px; }
+    .section-sub { font-size: 13px; margin-bottom: 16px; }
+
+    .balance-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .balance-card { padding: 16px 12px 14px; }
+    .balance-card .clay { width: 72px; height: 72px; }
+    .balance-card .balance .num { font-size: 28px; }
+
+    .priority-card { padding: 18px; }
+    .pri-row { padding: 12px 10px; }
+
+    .charge-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+    .charge-card { padding: 18px; }
+    .charge-btn { padding: 18px 20px; min-height: 84px; }
+    .charge-btn .clay { width: 56px; height: 56px; border-radius: 16px; }
+    .charge-btn .ttl { font-size: 16px; }
+
+    .usage-card { padding: 18px; }
+    .usage-table { display: table; }
+    .usage-mobile { display: none; }
+  }
+
+  @media (min-width: 1200px) {
+    .app {
+      max-width: 1400px; margin: 0 auto;
+      box-shadow: 0 0 60px rgba(40, 30, 20, 0.05);
+    }
+    body { background: var(--bg-deep); }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='nb'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.45 0 0 0 0 0.32 0 0 0 0.10 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23nb)'/%3E%3C/svg%3E");
+      background-size: 240px;
+      pointer-events: none; mix-blend-mode: multiply; opacity: 0.4; z-index: 0;
+    }
+    .top-bar { padding: 14px 22px; }
+    .balance-card .clay { width: 80px; height: 80px; }
+  }
+
+  @media (max-width: 359px) {
+    .balance-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .balance-card { padding: 12px 8px 10px; }
+    .balance-card .clay { width: 56px; height: 56px; }
+    .balance-card .balance .num { font-size: 22px; }
+    h1.page-title { font-size: 18px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app" id="app" data-od-id="wallet">
+
+  <header class="top-bar" data-od-id="top-bar">
+    <button class="hamburger" id="open-drawer" aria-label="메뉴 열기" aria-controls="sidebar"><span></span></button>
+    <div class="brand">
+      <div class="logo" aria-hidden="true">국</div>
+      <span class="name">국어농장</span>
+      <span class="ver">v2</span>
+    </div>
+    <span class="crumb">설정 · <strong>작물 지갑</strong></span>
+    <div class="hdr-spacer"></div>
+    <button class="hdr-user" aria-label="민준 학생 프로필">
+      <span class="clay clay-orange" aria-hidden="true"><span class="lbl">학생</span></span>
+      <span class="info">
+        <span class="name">민준이</span>
+        <span class="meta"><span class="lvl">러셀1</span> · 2,340점</span>
+      </span>
+    </button>
+    <div class="hdr-actions">
+      <button class="icon-btn active" aria-label="작물 지갑 — 자몽 64개 (현재 페이지)" aria-current="page">
+        <span class="clay clay-orange" aria-hidden="true"><span class="lbl">자몽</span></span>
+        <span class="icon-count">64</span>
+      </button>
+      <button class="icon-btn" aria-label="알림 3건">
+        <span class="clay clay-rose" aria-hidden="true"><span class="lbl">알림</span></span>
+        <span class="icon-dot">3</span>
+      </button>
+      <button class="icon-btn" aria-label="설정">
+        <span class="clay clay-green" aria-hidden="true"><span class="lbl">설정</span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="body" data-od-id="body">
+
+    <button class="scrim" id="close-drawer" aria-label="메뉴 닫기" tabindex="-1"></button>
+
+    <aside class="sidebar" id="sidebar" data-od-id="sidebar" aria-label="주요 메뉴">
+      <div class="sb-group">
+        <div class="sb-title"><span class="clay clay-yellow" aria-hidden="true"><span class="lbl">★</span></span><span>🌟 무료 기능</span></div>
+        <a class="sb-item" href="#"><span class="icon">📝</span><span>일일 퀴즈</span><span class="badge">10</span></a>
+        <a class="sb-item" href="#"><span class="icon">📖</span><span>일일 독해</span><span class="badge">1</span></a>
+        <a class="sb-item" href="#"><span class="icon">⚔</span><span>대결 라이브</span><span class="badge live">3</span></a>
+        <a class="sb-item" href="#"><span class="icon">🏆</span><span>시즌 랭킹</span></a>
+      </div>
+      <div class="sb-group">
+        <div class="sb-title"><span class="clay clay-green" aria-hidden="true"><span class="lbl">학습</span></span><span>🌾 학습</span></div>
+        <a class="sb-item" href="#"><span class="icon">🌱</span><span>농장별 모드</span></a>
+        <a class="sb-item" href="#"><span class="icon">🎓</span><span>프로 모드</span></a>
+        <a class="sb-item" href="#"><span class="icon">✨</span><span>추천 학습</span></a>
+        <a class="sb-item" href="#"><span class="icon">📅</span><span>학습 계획표</span><span class="badge neutral">3</span></a>
+      </div>
+      <div class="sb-group">
+        <div class="sb-title"><span class="clay clay-blue" aria-hidden="true"><span class="lbl">쓰기</span></span><span>✏ 글쓰기</span></div>
+        <a class="sb-item" href="#"><span class="icon">📚</span><span>지식과 지혜</span></a>
+      </div>
+      <div class="sb-group">
+        <div class="sb-title"><span class="clay clay-purple" aria-hidden="true"><span class="lbl">분석</span></span><span>📊 분석</span></div>
+        <a class="sb-item" href="#"><span class="icon">🎯</span><span>역량 진단</span></a>
+        <a class="sb-item" href="#"><span class="icon">📈</span><span>테스트별 성적표</span></a>
+        <a class="sb-item" href="#"><span class="icon">📋</span><span>통합 분석표</span></a>
+      </div>
+      <div class="sb-group">
+        <div class="sb-title"><span class="clay clay-cream" aria-hidden="true"><span class="lbl">설정</span></span><span>⚙ 설정</span></div>
+        <a class="sb-item active" href="#"><span class="icon">🍊</span><span>작물 지갑</span><span class="badge neutral">128</span></a>
+        <a class="sb-item" href="#"><span class="icon">🦉</span><span>캐릭터 변경</span></a>
+        <a class="sb-item" href="#"><span class="icon">👤</span><span>내 정보</span></a>
+      </div>
+    </aside>
+
+    <main class="center" id="center" data-od-id="center">
+
+      <header class="page-head" data-od-id="page-head">
+        <div class="page-head-text">
+          <span class="page-eyebrow"><span class="dot" aria-hidden="true"></span>설정 · 통화</span>
+          <h1 class="page-title">🌾 내 작물 지갑</h1>
+          <p class="page-sub">AI 학습 · 글쓰기 첨삭에 <strong>자몽</strong>과 작물을 쓸 수 있어요. 어떤 작물을 먼저 쓸지 직접 정할 수 있어요.</p>
+        </div>
+        <div class="total-pill">
+          <span class="label">합계</span>
+          <span class="val"><strong>128</strong>개<small>· 약 32,000원 가치</small></span>
+        </div>
+      </header>
+
+      <section class="section" data-od-id="section-balances" aria-labelledby="balances-title">
+        <h2 class="section-title" id="balances-title">🪙 보유 잔액</h2>
+        <p class="section-sub">자몽이 <strong>AI 결제 통화</strong>예요. 다른 작물은 우선순위에 따라 자동으로 환산돼요.</p>
+        <div class="balance-grid" data-od-id="balance-grid">
+
+          <article class="balance-card primary">
+            <span class="ai-tag">AI 결제</span>
+            <span class="clay clay-orange" aria-hidden="true"><span class="lbl">자몽</span></span>
+            <span class="name">🍊 자몽</span>
+            <span class="balance"><span class="num">64</span><span class="unit">개</span></span>
+            <span class="rate">1자몽 = 250원</span>
+            <span class="priority-pill"><span class="rk">1</span>결제 우선순위</span>
+          </article>
+
+          <article class="balance-card">
+            <span class="clay clay-cream" aria-hidden="true"><span class="lbl">밀</span></span>
+            <span class="name">🌾 밀</span>
+            <span class="balance"><span class="num">28</span><span class="unit">개</span></span>
+            <span class="rate">1작물 = 1자몽 환산</span>
+            <span class="priority-pill"><span class="rk">2</span>결제 우선순위</span>
+          </article>
+
+          <article class="balance-card">
+            <span class="clay clay-yellow" aria-hidden="true"><span class="lbl">쌀</span></span>
+            <span class="name">🍚 쌀</span>
+            <span class="balance"><span class="num">18</span><span class="unit">개</span></span>
+            <span class="rate">1작물 = 1자몽 환산</span>
+            <span class="priority-pill"><span class="rk">3</span>결제 우선순위</span>
+          </article>
+
+          <article class="balance-card">
+            <span class="clay clay-yellow" aria-hidden="true"><span class="lbl">옥수수</span></span>
+            <span class="name">🌽 옥수수</span>
+            <span class="balance"><span class="num">9</span><span class="unit">개</span></span>
+            <span class="rate">1작물 = 1자몽 환산</span>
+            <span class="priority-pill"><span class="rk">4</span>결제 우선순위</span>
+          </article>
+
+          <article class="balance-card">
+            <span class="clay clay-purple" aria-hidden="true"><span class="lbl">포도</span></span>
+            <span class="name">🍇 포도</span>
+            <span class="balance"><span class="num">5</span><span class="unit">개</span></span>
+            <span class="rate">1작물 = 1자몽 환산</span>
+            <span class="priority-pill"><span class="rk">5</span>결제 우선순위</span>
+          </article>
+
+          <article class="balance-card">
+            <span class="clay clay-red" aria-hidden="true"><span class="lbl">사과</span></span>
+            <span class="name">🍎 사과</span>
+            <span class="balance"><span class="num">4</span><span class="unit">개</span></span>
+            <span class="rate">1작물 = 1자몽 환산</span>
+            <span class="priority-pill"><span class="rk">6</span>결제 우선순위</span>
+          </article>
+
+        </div>
+      </section>
+
+      <section class="section" data-od-id="section-priority" aria-labelledby="priority-title">
+        <h2 class="section-title" id="priority-title">💳 결제 우선순위 — 위에서부터 먼저 사용해요</h2>
+        <p class="section-sub">손가락이나 마우스로 <strong>≡</strong> 손잡이를 끌어 순서를 바꿀 수 있어요. 토글을 끄면 그 통화는 자동 결제에 사용되지 않아요.</p>
+
+        <div class="priority-card" data-od-id="priority-card">
+          <ol class="priority-list" id="priority-list">
+
+            <li class="pri-row" draggable="true" data-id="grapefruit">
+              <span class="pri-handle" aria-label="순서 바꾸기 — 자몽" role="button" tabindex="0"></span>
+              <span class="clay clay-orange" aria-hidden="true"><span class="lbl">자몽</span></span>
+              <span><span class="pri-name">🍊 자몽</span><span class="pri-meta">잔액 <strong>64</strong>개 · 1개 250원</span></span>
+              <span class="pri-rank"><span class="num">1</span>1순위</span>
+              <span class="toggle" role="switch" aria-checked="true" aria-label="자몽 사용 켜기"></span>
+            </li>
+
+            <li class="pri-row" draggable="true" data-id="wheat">
+              <span class="pri-handle" aria-label="순서 바꾸기 — 밀" role="button" tabindex="0"></span>
+              <span class="clay clay-cream" aria-hidden="true"><span class="lbl">밀</span></span>
+              <span><span class="pri-name">🌾 밀</span><span class="pri-meta">잔액 <strong>28</strong>개</span></span>
+              <span class="pri-rank"><span class="num">2</span>2순위</span>
+              <span class="toggle" role="switch" aria-checked="true" aria-label="밀 사용 켜기"></span>
+            </li>
+
+            <li class="pri-row" draggable="true" data-id="rice">
+              <span class="pri-handle" aria-label="순서 바꾸기 — 쌀" role="button" tabindex="0"></span>
+              <span class="clay clay-yellow" aria-hidden="true"><span class="lbl">쌀</span></span>
+              <span><span class="pri-name">🍚 쌀</span><span class="pri-meta">잔액 <strong>18</strong>개</span></span>
+              <span class="pri-rank"><span class="num">3</span>3순위</span>
+              <span class="toggle" role="switch" aria-checked="true" aria-label="쌀 사용 켜기"></span>
+            </li>
+
+            <li class="pri-row" draggable="true" data-id="corn">
+              <span class="pri-handle" aria-label="순서 바꾸기 — 옥수수" role="button" tabindex="0"></span>
+              <span class="clay clay-yellow" aria-hidden="true"><span class="lbl">옥수수</span></span>
+              <span><span class="pri-name">🌽 옥수수</span><span class="pri-meta">잔액 <strong>9</strong>개</span></span>
+              <span class="pri-rank"><span class="num">4</span>4순위</span>
+              <span class="toggle" role="switch" aria-checked="true" aria-label="옥수수 사용 켜기"></span>
+            </li>
+
+            <li class="pri-row" draggable="true" data-id="grape">
+              <span class="pri-handle" aria-label="순서 바꾸기 — 포도" role="button" tabindex="0"></span>
+              <span class="clay clay-purple" aria-hidden="true"><span class="lbl">포도</span></span>
+              <span><span class="pri-name">🍇 포도</span><span class="pri-meta">잔액 <strong>5</strong>개</span></span>
+              <span class="pri-rank"><span class="num">5</span>5순위</span>
+              <span class="toggle" role="switch" aria-checked="true" aria-label="포도 사용 켜기"></span>
+            </li>
+
+            <li class="pri-row disabled" draggable="true" data-id="apple">
+              <span class="pri-handle" aria-label="순서 바꾸기 — 사과" role="button" tabindex="0"></span>
+              <span class="clay clay-red" aria-hidden="true"><span class="lbl">사과</span></span>
+              <span><span class="pri-name"><s>🍎 사과</s></span><span class="pri-meta">잔액 <strong>4</strong>개 · 사용 안 함</span></span>
+              <span class="pri-rank"><span class="num">6</span>6순위</span>
+              <span class="toggle" role="switch" aria-checked="false" aria-label="사과 사용 켜기"></span>
+            </li>
+
+          </ol>
+
+          <div class="pri-actions">
+            <button class="btn-save" id="btn-save">이대로 저장</button>
+            <button class="btn-reset" id="btn-reset">기본값으로 되돌리기</button>
+          </div>
+
+          <p class="pri-note">결제 시마다 직접 통화를 선택할 수도 있어요. 마이페이지 · 결제 환경설정에서 바꿀 수 있어요.</p>
+        </div>
+      </section>
+
+      <section class="section" data-od-id="section-charge" aria-labelledby="charge-title">
+        <h2 class="section-title" id="charge-title">💰 충전 · 교환</h2>
+        <p class="section-sub">자몽은 충전해서 늘릴 수 있고, 학습으로 모은 씨앗은 작물로 교환할 수 있어요.</p>
+
+        <div class="charge-card" data-od-id="charge-card">
+          <div class="charge-grid">
+            <button class="charge-btn primary" data-route="charge">
+              <span class="clay clay-orange" aria-hidden="true"><span class="lbl">자몽</span></span>
+              <span class="text">
+                <span class="ttl">🍊 자몽 충전하기</span>
+                <span class="meta">카드 · 카카오페이 · 휴대폰 결제</span>
+              </span>
+              <span class="arrow" aria-hidden="true">→</span>
+            </button>
+
+            <button class="charge-btn secondary" data-route="exchange">
+              <span class="clay clay-green" aria-hidden="true"><span class="lbl">씨앗</span></span>
+              <span class="text">
+                <span class="ttl">🔄 씨앗 → 작물 교환</span>
+                <span class="meta">학습으로 모은 씨앗 412개 보유 중</span>
+              </span>
+              <span class="arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <p class="charge-rate">
+            현재 자몽 단가 <strong>1개 250원</strong>
+            · <span class="pkg">10개 묶음 2,500원</span>
+            · <span class="pkg">50개 묶음 12,000원 (4% 할인)</span>
+          </p>
+        </div>
+      </section>
+
+      <section class="section" data-od-id="section-usage" aria-labelledby="usage-title">
+        <h2 class="section-title" id="usage-title">📜 최근 사용 내역</h2>
+        <p class="section-sub">최근 7일간 사용한 작물·자몽 내역이에요. 통화별 필터를 적용할 수 있어요.</p>
+
+        <div class="usage-card" data-od-id="usage-card">
+
+          <div class="filter-chips" role="tablist" aria-label="통화 필터">
+            <button class="chip" role="tab" aria-pressed="true" data-filter="all">모두</button>
+            <button class="chip" role="tab" aria-pressed="false" data-filter="grapefruit"><span class="clay clay-orange" aria-hidden="true"><span class="lbl">자</span></span>자몽</button>
+            <button class="chip" role="tab" aria-pressed="false" data-filter="wheat"><span class="clay clay-cream" aria-hidden="true"><span class="lbl">밀</span></span>밀</button>
+            <button class="chip" role="tab" aria-pressed="false" data-filter="rice"><span class="clay clay-yellow" aria-hidden="true"><span class="lbl">쌀</span></span>쌀</button>
+            <button class="chip" role="tab" aria-pressed="false" data-filter="corn"><span class="clay clay-yellow" aria-hidden="true"><span class="lbl">옥</span></span>옥수수</button>
+            <button class="chip" role="tab" aria-pressed="false" data-filter="grape"><span class="clay clay-purple" aria-hidden="true"><span class="lbl">포</span></span>포도</button>
+            <button class="chip" role="tab" aria-pressed="false" data-filter="apple"><span class="clay clay-red" aria-hidden="true"><span class="lbl">사</span></span>사과</button>
+          </div>
+
+          <table class="usage-table" id="usage-table" aria-label="최근 사용 내역">
+            <thead>
+              <tr>
+                <th style="width: 18%;">시간</th>
+                <th style="width: 36%;">활동</th>
+                <th style="width: 20%;">사용 통화</th>
+                <th style="width: 12%;">차감</th>
+                <th style="width: 14%;">잔액</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-curr="grapefruit">
+                <td class="col-time">오늘 14:32</td>
+                <td class="col-act"><span class="clay clay-cream" aria-hidden="true"><span class="lbl">AI</span></span>AI 튜터 채팅 — 부엉이샘</td>
+                <td><span class="col-curr primary-curr"><span class="chip-mini"><span class="clay clay-orange" aria-hidden="true"><span class="lbl">자</span></span>자몽</span></span></td>
+                <td class="col-delta">−1</td>
+                <td class="col-balance">64</td>
+              </tr>
+              <tr data-curr="grapefruit">
+                <td class="col-time">오늘 11:05</td>
+                <td class="col-act"><span class="clay clay-blue" aria-hidden="true"><span class="lbl">글</span></span>글쓰기 첨삭 — 일기 「봄의 소리」</td>
+                <td><span class="col-curr primary-curr"><span class="chip-mini"><span class="clay clay-orange" aria-hidden="true"><span class="lbl">자</span></span>자몽</span></span></td>
+                <td class="col-delta">−1</td>
+                <td class="col-balance">65</td>
+              </tr>
+              <tr data-curr="grapefruit">
+                <td class="col-time">어제 19:48</td>
+                <td class="col-act"><span class="clay clay-green" aria-hidden="true"><span class="lbl">생성</span></span>AI 학습 만들기 — 어휘 5문제</td>
+                <td><span class="col-curr primary-curr"><span class="chip-mini"><span class="clay clay-orange" aria-hidden="true"><span class="lbl">자</span></span>자몽</span></span></td>
+                <td class="col-delta">−2</td>
+                <td class="col-balance">66</td>
+              </tr>
+              <tr data-curr="apple">
+                <td class="col-time">어제 18:15</td>
+                <td class="col-act"><span class="clay clay-rose" aria-hidden="true"><span class="lbl">📷</span></span>사진 OCR — 교과서 단어 4개</td>
+                <td><span class="col-curr"><span class="chip-mini"><span class="clay clay-red" aria-hidden="true"><span class="lbl">사</span></span>사과</span></span></td>
+                <td class="col-delta">−1</td>
+                <td class="col-balance">4</td>
+              </tr>
+              <tr data-curr="wheat">
+                <td class="col-time">어제 14:20</td>
+                <td class="col-act"><span class="clay clay-cream" aria-hidden="true"><span class="lbl">AI</span></span>AI 튜터 채팅 — 회의적 단어 풀이</td>
+                <td><span class="col-curr"><span class="chip-mini"><span class="clay clay-cream" aria-hidden="true"><span class="lbl">밀</span></span>밀</span></span></td>
+                <td class="col-delta">−1</td>
+                <td class="col-balance">28</td>
+              </tr>
+              <tr data-curr="grape">
+                <td class="col-time">2일 전 17:40</td>
+                <td class="col-act"><span class="clay clay-cream" aria-hidden="true"><span class="lbl">AI</span></span>AI 튜터 채팅 — 비유적 표현 설명</td>
+                <td><span class="col-curr"><span class="chip-mini"><span class="clay clay-purple" aria-hidden="true"><span class="lbl">포</span></span>포도</span></span></td>
+                <td class="col-delta">−1</td>
+                <td class="col-balance">5</td>
+              </tr>
+              <tr data-curr="corn">
+                <td class="col-time">3일 전 16:10</td>
+                <td class="col-act"><span class="clay clay-blue" aria-hidden="true"><span class="lbl">글</span></span>글쓰기 첨삭 — 독서 감상문</td>
+                <td><span class="col-curr"><span class="chip-mini"><span class="clay clay-yellow" aria-hidden="true"><span class="lbl">옥</span></span>옥수수</span></span></td>
+                <td class="col-delta">−1</td>
+                <td class="col-balance">9</td>
+              </tr>
+              <tr data-curr="rice">
+                <td class="col-time">4일 전 11:30</td>
+                <td class="col-act"><span class="clay clay-green" aria-hidden="true"><span class="lbl">생성</span></span>AI 학습 만들기 — 비문학 1지문</td>
+                <td><span class="col-curr"><span class="chip-mini"><span class="clay clay-yellow" aria-hidden="true"><span class="lbl">쌀</span></span>쌀</span></span></td>
+                <td class="col-delta">−2</td>
+                <td class="col-balance">18</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="usage-mobile" id="usage-mobile">
+            <div class="usage-row" data-curr="grapefruit">
+              <span class="clay clay-cream" aria-hidden="true"><span class="lbl">AI</span></span>
+              <span class="body-text">
+                <span class="ttl">AI 튜터 채팅 — 부엉이샘</span>
+                <span class="meta"><span>오늘 14:32</span><span class="sep">·</span><span class="curr-mini primary-curr">🍊 자몽</span></span>
+              </span>
+              <span class="right"><span class="delta">−1</span><span class="bal-after">잔액 64</span></span>
+            </div>
+            <div class="usage-row" data-curr="grapefruit">
+              <span class="clay clay-blue" aria-hidden="true"><span class="lbl">글</span></span>
+              <span class="body-text">
+                <span class="ttl">글쓰기 첨삭 — 「봄의 소리」</span>
+                <span class="meta"><span>오늘 11:05</span><span class="sep">·</span><span class="curr-mini primary-curr">🍊 자몽</span></span>
+              </span>
+              <span class="right"><span class="delta">−1</span><span class="bal-after">잔액 65</span></span>
+            </div>
+            <div class="usage-row" data-curr="grapefruit">
+              <span class="clay clay-green" aria-hidden="true"><span class="lbl">생성</span></span>
+              <span class="body-text">
+                <span class="ttl">AI 학습 만들기 — 어휘 5문제</span>
+                <span class="meta"><span>어제 19:48</span><span class="sep">·</span><span class="curr-mini primary-curr">🍊 자몽</span></span>
+              </span>
+              <span class="right"><span class="delta">−2</span><span class="bal-after">잔액 66</span></span>
+            </div>
+            <div class="usage-row" data-curr="apple">
+              <span class="clay clay-rose" aria-hidden="true"><span class="lbl">📷</span></span>
+              <span class="body-text">
+                <span class="ttl">사진 OCR — 단어 4개</span>
+                <span class="meta"><span>어제 18:15</span><span class="sep">·</span><span class="curr-mini">🍎 사과</span></span>
+              </span>
+              <span class="right"><span class="delta">−1</span><span class="bal-after">잔액 4</span></span>
+            </div>
+            <div class="usage-row" data-curr="wheat">
+              <span class="clay clay-cream" aria-hidden="true"><span class="lbl">AI</span></span>
+              <span class="body-text">
+                <span class="ttl">AI 튜터 채팅 — 회의적 풀이</span>
+                <span class="meta"><span>어제 14:20</span><span class="sep">·</span><span class="curr-mini">🌾 밀</span></span>
+              </span>
+              <span class="right"><span class="delta">−1</span><span class="bal-after">잔액 28</span></span>
+            </div>
+            <div class="usage-row" data-curr="grape">
+              <span class="clay clay-cream" aria-hidden="true"><span class="lbl">AI</span></span>
+              <span class="body-text">
+                <span class="ttl">AI 튜터 채팅 — 비유적 표현</span>
+                <span class="meta"><span>2일 전 17:40</span><span class="sep">·</span><span class="curr-mini">🍇 포도</span></span>
+              </span>
+              <span class="right"><span class="delta">−1</span><span class="bal-after">잔액 5</span></span>
+            </div>
+            <div class="usage-row" data-curr="corn">
+              <span class="clay clay-blue" aria-hidden="true"><span class="lbl">글</span></span>
+              <span class="body-text">
+                <span class="ttl">글쓰기 첨삭 — 독서 감상문</span>
+                <span class="meta"><span>3일 전 16:10</span><span class="sep">·</span><span class="curr-mini">🌽 옥수수</span></span>
+              </span>
+              <span class="right"><span class="delta">−1</span><span class="bal-after">잔액 9</span></span>
+            </div>
+            <div class="usage-row" data-curr="rice">
+              <span class="clay clay-green" aria-hidden="true"><span class="lbl">생성</span></span>
+              <span class="body-text">
+                <span class="ttl">AI 학습 만들기 — 비문학 1지문</span>
+                <span class="meta"><span>4일 전 11:30</span><span class="sep">·</span><span class="curr-mini">🍚 쌀</span></span>
+              </span>
+              <span class="right"><span class="delta">−2</span><span class="bal-after">잔액 18</span></span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <div style="height: 16px;"></div>
+
+    </main>
+  </div>
+
+  <nav class="tab-bar" data-od-id="tab-bar" role="tablist" aria-label="주요 탭">
+    <a class="tab" href="#" role="tab" aria-label="홈">
+      <span class="clay clay-orange" aria-hidden="true"><span class="lbl">홈</span></span>
+      <span class="tab-label">홈</span>
+    </a>
+    <a class="tab" href="#" role="tab" aria-label="학습">
+      <span class="clay clay-yellow" aria-hidden="true"><span class="lbl">학습</span></span>
+      <span class="tab-label">학습</span>
+    </a>
+    <a class="tab" href="#" role="tab" aria-label="글쓰기">
+      <span class="clay clay-blue" aria-hidden="true"><span class="lbl">쓰기</span></span>
+      <span class="tab-label">글쓰기</span>
+    </a>
+    <a class="tab" href="#" role="tab" aria-label="분석">
+      <span class="clay clay-green" aria-hidden="true"><span class="lbl">분석</span></span>
+      <span class="tab-label">분석</span>
+    </a>
+    <a class="tab" href="#" role="tab" aria-current="page" aria-label="더보기 — 작물 지갑">
+      <span class="clay clay-purple" aria-hidden="true"><span class="lbl">메뉴</span></span>
+      <span class="tab-label">더보기</span>
+    </a>
+  </nav>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="ico" aria-hidden="true">✓</span>
+    <span class="msg"></span>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    const app = document.getElementById('app');
+    const open = document.getElementById('open-drawer');
+    const close = document.getElementById('close-drawer');
+    open && open.addEventListener('click', () => app.dataset.drawer = 'open');
+    close && close.addEventListener('click', () => app.removeAttribute('data-drawer'));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && app.dataset.drawer === 'open') app.removeAttribute('data-drawer');
+    });
+
+    document.querySelectorAll('.sb-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        if (window.matchMedia('(max-width: 767px)').matches) app.removeAttribute('data-drawer');
+      });
+    });
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('.tab').forEach(t => t.removeAttribute('aria-current'));
+        tab.setAttribute('aria-current', 'page');
+      });
+    });
+
+    const toast = document.getElementById('toast');
+    const toastMsg = toast.querySelector('.msg');
+    let toastTimer;
+    function showToast(msg) {
+      clearTimeout(toastTimer);
+      toastMsg.textContent = msg;
+      toast.classList.add('show');
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    document.querySelectorAll('.toggle').forEach(t => {
+      t.addEventListener('click', () => {
+        const next = t.getAttribute('aria-checked') !== 'true';
+        t.setAttribute('aria-checked', next ? 'true' : 'false');
+        const row = t.closest('.pri-row');
+        if (row) {
+          row.classList.toggle('disabled', !next);
+          const label = row.querySelector('.pri-name');
+          if (label) {
+            const text = label.textContent.replace(/^[🍊🌾🍚🌽🍇🍎]\s*/, '');
+            const emoji = label.textContent.match(/^[🍊🌾🍚🌽🍇🍎]/);
+            const e = emoji ? emoji[0] + ' ' : '';
+            label.innerHTML = next ? e + text : '<s>' + e + text + '</s>';
+          }
+        }
+      });
+    });
+
+    const list = document.getElementById('priority-list');
+    let dragging = null;
+
+    function refreshRanks() {
+      Array.from(list.children).forEach((row, i) => {
+        const num = row.querySelector('.pri-rank .num');
+        const txt = row.querySelector('.pri-rank');
+        if (num) num.textContent = (i + 1);
+        if (txt) {
+          const remainder = txt.lastChild;
+          if (remainder && remainder.nodeType === 3) remainder.textContent = (i + 1) + '순위';
+        }
+      });
+    }
+
+    list.querySelectorAll('.pri-row').forEach(row => {
+      row.addEventListener('dragstart', (e) => {
+        dragging = row;
+        row.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        try { e.dataTransfer.setData('text/plain', row.dataset.id); } catch (_) {}
+      });
+      row.addEventListener('dragend', () => {
+        if (dragging) dragging.classList.remove('dragging');
+        list.querySelectorAll('.pri-row').forEach(r => r.classList.remove('drop-target'));
+        dragging = null;
+        refreshRanks();
+      });
+      row.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        if (!dragging || dragging === row) return;
+        const rect = row.getBoundingClientRect();
+        const before = (e.clientY - rect.top) < (rect.height / 2);
+        row.classList.add('drop-target');
+        if (before) list.insertBefore(dragging, row);
+        else list.insertBefore(dragging, row.nextSibling);
+      });
+      row.addEventListener('dragleave', () => row.classList.remove('drop-target'));
+      row.addEventListener('drop', (e) => { e.preventDefault(); row.classList.remove('drop-target'); });
+
+      const handle = row.querySelector('.pri-handle');
+      handle.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          const prev = row.previousElementSibling;
+          if (prev) { list.insertBefore(row, prev); refreshRanks(); handle.focus(); }
+        } else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          const next = row.nextElementSibling;
+          if (next) { list.insertBefore(next, row); refreshRanks(); handle.focus(); }
+        }
+      });
+    });
+
+    document.getElementById('btn-save').addEventListener('click', () => {
+      showToast('우선순위를 저장했어요');
+    });
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      const order = ['grapefruit','wheat','rice','corn','grape','apple'];
+      order.forEach(id => {
+        const row = list.querySelector('[data-id="' + id + '"]');
+        if (row) list.appendChild(row);
+      });
+      list.querySelectorAll('.toggle').forEach(t => t.setAttribute('aria-checked', 'true'));
+      list.querySelectorAll('.pri-row').forEach(r => {
+        r.classList.remove('disabled');
+        const label = r.querySelector('.pri-name');
+        if (label) label.innerHTML = label.textContent;
+      });
+      const apple = list.querySelector('[data-id="apple"]');
+      if (apple) {
+        apple.classList.add('disabled');
+        const t = apple.querySelector('.toggle');
+        if (t) t.setAttribute('aria-checked', 'false');
+        const lab = apple.querySelector('.pri-name');
+        if (lab) lab.innerHTML = '<s>🍎 사과</s>';
+      }
+      refreshRanks();
+      showToast('기본값으로 되돌렸어요');
+    });
+
+    const filterChips = document.querySelectorAll('.filter-chips .chip');
+    filterChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        filterChips.forEach(c => c.setAttribute('aria-pressed', 'false'));
+        chip.setAttribute('aria-pressed', 'true');
+        const f = chip.dataset.filter;
+        document.querySelectorAll('#usage-table tbody tr, #usage-mobile .usage-row').forEach(row => {
+          const c = row.dataset.curr;
+          row.style.display = (f === 'all' || f === c) ? '' : 'none';
+        });
+      });
+    });
+
+  })();
+</script>
+
+</body>
+</html>

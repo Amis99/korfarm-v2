@@ -1,0 +1,1481 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#F4EFE6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>국어농장 v2 — 민준의 통합 분석표</title>
+<style>
+  :root {
+    --bg:           #F4EFE6;
+    --bg-deep:      #ECE3D2;
+    --surface:      #FFFAF0;
+    --surface-elev: #FFFFFF;
+    --fg:           #2A2520;
+    --muted:        #6B6359;
+    --subtle:       #9A8F82;
+    --border:       #E8DFCF;
+    --border-warm:  #D8CBB1;
+    --accent:       #F06C24;
+    --accent-deep:  #D8580E;
+    --accent-soft:  #FBE2D2;
+
+    --shadow-clay:    0 4px 12px rgba(140, 90, 40, 0.10), 0 1px 3px rgba(140, 90, 40, 0.06);
+    --shadow-clay-lg: 0 10px 28px rgba(140, 90, 40, 0.13), 0 2px 6px rgba(140, 90, 40, 0.06);
+    --shadow-press:   0 2px 6px rgba(140, 90, 40, 0.08);
+
+    --r-sm: 12px;
+    --r:    16px;
+    --r-lg: 22px;
+
+    --hdr-h: 64px;
+    --tab-h: 60px;
+    --sidebar-w: 260px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: 'Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR',
+                 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif;
+    font-size: 15px; line-height: 1.5; color: var(--fg); background: var(--bg);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.011em; text-rendering: optimizeLegibility;
+    overscroll-behavior-y: none; overflow: hidden;
+  }
+  button, input, textarea { font: inherit; color: inherit; }
+  button { cursor: pointer; background: none; border: none; padding: 0; }
+  a { color: inherit; text-decoration: none; }
+  input, textarea { border: none; background: transparent; outline: none; -webkit-appearance: none; appearance: none; }
+  ::selection { background: var(--accent-soft); color: var(--fg); }
+
+  .app {
+    width: 100%; height: 100vh; height: 100dvh; background: var(--bg);
+    display: grid; grid-template-rows: auto 1fr auto;
+    overflow: hidden; position: relative; isolation: isolate;
+  }
+  .app::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.45 0 0 0 0 0.32 0 0 0 0.10 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
+    pointer-events: none; mix-blend-mode: multiply; opacity: 0.45; z-index: 0;
+  }
+  .app > * { position: relative; z-index: 1; }
+
+  .clay {
+    position: relative; background: linear-gradient(155deg, #FFF6E2 0%, #EFDDB7 100%);
+    border-radius: var(--r); display: grid; place-items: center;
+    isolation: isolate; overflow: hidden;
+    box-shadow:
+      inset 1.5px 2px 3px rgba(255, 250, 240, 0.85),
+      inset -2px -3px 5px rgba(160, 110, 50, 0.18),
+      0 5px 12px rgba(140, 90, 40, 0.10),
+      0 1px 3px rgba(140, 90, 40, 0.06);
+  }
+  .clay::before {
+    content: ''; position: absolute; top: 6%; left: 16%;
+    width: 50%; height: 26%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.55), transparent 80%);
+    border-radius: 50%; filter: blur(3px); pointer-events: none;
+  }
+  .clay > .lbl {
+    position: relative; z-index: 2;
+    font-size: 10.5px; font-weight: 600; color: rgba(60, 50, 40, 0.55);
+    letter-spacing: 0.01em; line-height: 1.2; text-align: center; padding: 0 4px;
+  }
+  .clay-yellow { background: linear-gradient(155deg, #FFE9C2 0%, #F4C97A 100%); }
+  .clay-blue   { background: linear-gradient(155deg, #DFEEFB 0%, #91C2E5 100%); }
+  .clay-red    { background: linear-gradient(155deg, #FBDDDD 0%, #ED9F9F 100%); }
+  .clay-green  { background: linear-gradient(155deg, #DDEFD5 0%, #94C68B 100%); }
+  .clay-orange { background: linear-gradient(155deg, #FBD8B6 0%, #ED9554 100%); }
+  .clay-purple { background: linear-gradient(155deg, #E5D9F2 0%, #B7A0DA 100%); }
+  .clay-rose   { background: linear-gradient(155deg, #F8DCE2 0%, #DC9CAB 100%); }
+  .clay-cream  { background: linear-gradient(155deg, #FFF2DC 0%, #F0DBB1 100%); }
+  .clay-yellow .lbl, .clay-orange .lbl, .clay-rose .lbl, .clay-red .lbl, .clay-cream .lbl { color: rgba(80, 50, 30, 0.6); }
+  .clay-blue .lbl   { color: rgba(40, 70, 100, 0.6); }
+  .clay-green .lbl  { color: rgba(50, 80, 50, 0.6); }
+  .clay-purple .lbl { color: rgba(70, 55, 100, 0.6); }
+
+  .top-bar {
+    display: flex; align-items: center; gap: 10px;
+    padding: calc(env(safe-area-inset-top) + 10px) 14px 10px;
+    background: linear-gradient(to bottom, rgba(244, 239, 230, 0.96) 0%, rgba(244, 239, 230, 0.86) 100%);
+    -webkit-backdrop-filter: saturate(140%) blur(14px); backdrop-filter: saturate(140%) blur(14px);
+    border-bottom: 1px solid rgba(216, 203, 177, 0.4); min-height: var(--hdr-h);
+  }
+  .hamburger {
+    display: grid; place-items: center; width: 44px; height: 44px;
+    border-radius: 12px; flex-shrink: 0;
+    transition: background 120ms ease, transform 120ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .hamburger:active { background: rgba(0,0,0,0.04); transform: scale(0.92); }
+  .hamburger span { width: 20px; height: 2px; background: var(--fg); border-radius: 2px; position: relative; display: block; }
+  .hamburger span::before, .hamburger span::after {
+    content: ''; position: absolute; left: 0; width: 20px; height: 2px;
+    background: var(--fg); border-radius: 2px;
+  }
+  .hamburger span::before { top: -7px; }
+  .hamburger span::after { top: 7px; }
+
+  .brand { display: flex; align-items: center; gap: 8px; flex-shrink: 0; padding: 0 4px; }
+  .brand .logo {
+    width: 32px; height: 32px; border-radius: 10px; flex-shrink: 0;
+    background: linear-gradient(155deg, #F4854A 0%, var(--accent-deep) 100%);
+    box-shadow: inset 1.5px 2px 3px rgba(255, 220, 180, 0.7),
+                inset -2px -3px 4px rgba(140, 50, 0, 0.30),
+                0 3px 8px rgba(240, 108, 36, 0.22);
+    display: grid; place-items: center; color: white;
+    font-size: 16px; font-weight: 800; letter-spacing: -0.04em;
+  }
+  .brand .name { font-size: 16px; font-weight: 800; letter-spacing: -0.02em; color: var(--fg); }
+  .brand .ver {
+    font-size: 10px; font-weight: 700; color: var(--accent-deep);
+    background: var(--accent-soft); padding: 2px 6px; border-radius: 999px;
+    margin-left: 2px; line-height: 1;
+  }
+  .crumb {
+    font-size: 13px; color: var(--muted); padding-left: 10px; margin-left: 8px;
+    border-left: 1px solid var(--border); white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis; min-width: 0;
+  }
+  .crumb strong { color: var(--fg); font-weight: 700; }
+  .hdr-spacer { flex: 1; }
+
+  .hdr-user {
+    display: flex; align-items: center; gap: 10px;
+    padding: 5px 12px 5px 5px; border-radius: 999px;
+    background: rgba(255, 250, 240, 0.5);
+    border: 1px solid var(--border);
+    -webkit-tap-highlight-color: transparent; min-height: 44px;
+  }
+  .hdr-user:active { background: var(--surface-elev); }
+  .hdr-user .clay { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; }
+  .hdr-user .clay > .lbl { font-size: 9px; }
+  .hdr-user .info { line-height: 1.15; min-width: 0; text-align: left; }
+  .hdr-user .info .name { font-size: 13px; font-weight: 700; color: var(--fg); white-space: nowrap; }
+  .hdr-user .meta { font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+  .hdr-user .meta .lvl {
+    font-size: 10px; font-weight: 700; color: #6E4A12;
+    background: linear-gradient(120deg, #FFF1CF, #FFE1A4);
+    padding: 1px 6px; border-radius: 999px; line-height: 1.4;
+    border: 1px solid rgba(212, 156, 60, 0.25);
+  }
+
+  .hdr-actions { display: flex; gap: 4px; flex-shrink: 0; }
+  .icon-btn {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: grid; place-items: center; position: relative;
+    transition: transform 120ms ease, background 120ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .icon-btn:active { transform: scale(0.92); background: rgba(0,0,0,0.04); }
+  .icon-btn .clay { width: 32px; height: 32px; border-radius: 11px; }
+  .icon-btn .clay > .lbl { font-size: 9px; }
+  .icon-count {
+    position: absolute; top: 2px; right: 2px;
+    background: var(--accent); color: white;
+    font-size: 10px; font-weight: 700; line-height: 1;
+    padding: 3px 5px; border-radius: 8px; min-width: 18px;
+    text-align: center; border: 1.5px solid var(--bg);
+    box-shadow: 0 2px 4px rgba(240, 108, 36, 0.30);
+  }
+  .icon-dot {
+    position: absolute; top: 4px; right: 4px;
+    width: 16px; height: 16px;
+    background: var(--accent); color: white;
+    font-size: 9px; font-weight: 700; border-radius: 50%;
+    display: grid; place-items: center;
+    border: 1.5px solid var(--bg); line-height: 1;
+  }
+
+  .body { display: grid; grid-template-columns: 1fr; overflow: hidden; position: relative; }
+
+  .sidebar {
+    background: rgba(255, 250, 240, 0.5);
+    border-right: 1px solid var(--border);
+    overflow-y: auto; -webkit-overflow-scrolling: touch;
+    padding: 16px 12px calc(env(safe-area-inset-bottom) + 16px);
+    scrollbar-width: thin; scrollbar-color: var(--border-warm) transparent;
+  }
+  .sidebar::-webkit-scrollbar { width: 6px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border-warm); border-radius: 999px; }
+
+  .sb-group { margin-bottom: 14px; }
+  .sb-group:last-child { margin-bottom: 0; }
+  .sb-title {
+    font-size: 12px; font-weight: 700; color: var(--muted);
+    line-height: 1; padding: 4px 12px 8px;
+    display: flex; align-items: center; gap: 8px; letter-spacing: 0.01em;
+  }
+  .sb-title .clay { width: 18px; height: 18px; border-radius: 6px; flex-shrink: 0; }
+  .sb-title .clay > .lbl { font-size: 7px; }
+  .sb-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; border-radius: 12px;
+    color: var(--fg); font-size: 13.5px; font-weight: 500;
+    min-height: 44px;
+    transition: background 120ms ease, transform 120ms ease;
+    -webkit-tap-highlight-color: transparent; position: relative;
+  }
+  .sb-item:active { transform: scale(0.985); }
+  .sb-item:hover, .sb-item:focus-visible { background: rgba(255, 250, 240, 0.8); }
+  .sb-item.active { background: var(--accent-soft); color: var(--accent-deep); font-weight: 700; }
+  .sb-item.active::before {
+    content: ''; position: absolute; left: 0; top: 12px; bottom: 12px; width: 3px;
+    background: var(--accent); border-radius: 0 3px 3px 0;
+  }
+  .sb-item .icon { width: 22px; flex-shrink: 0; text-align: center; font-size: 15px; line-height: 1; }
+  .sb-item .badge {
+    margin-left: auto; font-size: 10px; font-weight: 700;
+    background: var(--accent); color: white;
+    padding: 2px 7px; border-radius: 999px; line-height: 1.4;
+  }
+  .sb-item .badge.live { background: #E04A4A; display: inline-flex; align-items: center; gap: 3px; }
+  .sb-item .badge.live::before {
+    content: ''; width: 5px; height: 5px; background: white; border-radius: 50%;
+    animation: livePulse 1.6s infinite;
+  }
+  .sb-item .badge.neutral { background: rgba(216, 203, 177, 0.5); color: var(--muted); }
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .center {
+    display: flex; flex-direction: column;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain; position: relative;
+    padding-bottom: 24px;
+  }
+
+  .page-head {
+    margin: 14px 14px 4px;
+    padding: 18px 18px 16px;
+    background: linear-gradient(165deg, #FFFAF0 0%, #FFF1DA 60%, #FFE7C0 100%);
+    border: 1px solid var(--border-warm);
+    border-radius: 22px;
+    box-shadow: var(--shadow-clay);
+    position: relative; overflow: hidden;
+    display: grid; grid-template-columns: 1fr; gap: 14px;
+  }
+  .page-head::before {
+    content: ''; position: absolute; top: -30px; right: -30px;
+    width: 130px; height: 130px;
+    background: radial-gradient(circle, rgba(255, 220, 130, 0.45), transparent 70%);
+    border-radius: 50%; pointer-events: none;
+  }
+  .page-head-text { position: relative; z-index: 1; min-width: 0; }
+  .page-eyebrow {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 10.5px; font-weight: 800;
+    color: rgba(110, 74, 18, 0.9);
+    background: rgba(244, 201, 122, 0.32);
+    border: 1px solid rgba(212, 156, 60, 0.30);
+    padding: 3px 8px 3px 7px; border-radius: 999px;
+    letter-spacing: 0.04em; line-height: 1.3; text-transform: uppercase;
+  }
+  .page-eyebrow .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+  h1.page-title {
+    margin: 8px 0 4px;
+    font-size: 22px; font-weight: 800;
+    letter-spacing: -0.02em; line-height: 1.25; color: var(--fg);
+  }
+  .page-sub { font-size: 13px; color: var(--muted); line-height: 1.5; word-break: keep-all; max-width: 640px; }
+  .page-sub strong { color: var(--fg); font-weight: 700; }
+
+  .period-tabs {
+    position: relative; z-index: 1;
+    display: inline-flex; background: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--border); border-radius: 14px;
+    padding: 3px; box-shadow: var(--shadow-press);
+    align-self: start;
+  }
+  .period-tab {
+    min-height: 38px; padding: 0 14px;
+    font-size: 12.5px; font-weight: 700; color: var(--muted);
+    border-radius: 11px;
+    transition: background 140ms ease, color 140ms ease;
+    -webkit-tap-highlight-color: transparent;
+    line-height: 1; letter-spacing: -0.005em;
+    display: inline-flex; align-items: center;
+  }
+  .period-tab[aria-pressed="true"] {
+    background: linear-gradient(155deg, #F4854A 0%, var(--accent-deep) 100%);
+    color: white;
+    box-shadow: 0 3px 8px rgba(240, 108, 36, 0.30), inset 0 1px 0 rgba(255,255,255,0.20);
+  }
+  .period-tab:active { transform: scale(0.96); }
+
+  .section { margin: 18px 14px 0; }
+  .section-title {
+    font-size: 16px; font-weight: 800; letter-spacing: -0.02em;
+    margin: 0 4px 4px;
+  }
+  .section-sub {
+    font-size: 12.5px; color: var(--muted);
+    margin: 0 4px 12px; line-height: 1.45; word-break: keep-all;
+  }
+  .section-sub strong { color: var(--fg); font-weight: 700; }
+
+  /* Section 1: summary cards */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .summary-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 14px 12px;
+    box-shadow: var(--shadow-clay);
+    display: flex; align-items: flex-start; gap: 10px;
+    position: relative; overflow: hidden;
+    min-height: 96px;
+  }
+  .summary-card.tint-yellow { background: linear-gradient(155deg, #FFEFC8 0%, #FFE5A8 100%); border-color: rgba(212, 156, 60, 0.30); }
+  .summary-card.tint-blue   { background: linear-gradient(155deg, #DAEDFA 0%, #BCDDF2 100%); border-color: rgba(95, 145, 200, 0.30); }
+  .summary-card.tint-green  { background: linear-gradient(155deg, #DBEFD2 0%, #BFE3B2 100%); border-color: rgba(120, 170, 110, 0.30); }
+  .summary-card.tint-orange { background: linear-gradient(155deg, #FFE0C0 0%, #FFCB9A 100%); border-color: rgba(240, 150, 80, 0.35); }
+  .summary-card .clay { width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0; }
+  .summary-card .clay > .lbl { font-size: 9px; }
+  .summary-card .text { flex: 1; min-width: 0; line-height: 1.25; }
+  .summary-card .label {
+    display: block; font-size: 11px; font-weight: 700; color: rgba(60, 40, 20, 0.65);
+    letter-spacing: 0.04em; text-transform: uppercase; line-height: 1;
+  }
+  .summary-card .value {
+    display: block; margin-top: 6px;
+    font-size: 22px; font-weight: 800; color: var(--fg);
+    letter-spacing: -0.02em; line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .summary-card .value small {
+    font-size: 12px; font-weight: 700; color: var(--muted);
+    margin-left: 4px; letter-spacing: 0;
+  }
+  .summary-card .delta {
+    display: inline-flex; align-items: center; gap: 3px;
+    margin-top: 6px;
+    font-size: 11.5px; font-weight: 700; line-height: 1.3;
+    padding: 3px 7px; border-radius: 999px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(120, 170, 110, 0.30);
+    color: #2F6B30;
+  }
+  .summary-card .delta.flat { color: var(--muted); border-color: var(--border); }
+  .summary-card .delta.warn { color: var(--accent-deep); border-color: rgba(240, 108, 36, 0.30); background: rgba(255, 255, 255, 0.7); }
+
+  /* Section 2: radar chart card */
+  .chart-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 18px 14px 16px;
+    box-shadow: var(--shadow-clay);
+  }
+  .radar-wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+  .radar-svg-wrap {
+    width: 100%; max-width: 460px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .radar-svg { width: 100%; height: auto; display: block; }
+  .radar-grid { fill: none; stroke: var(--border-warm); stroke-width: 0.6; opacity: 0.55; }
+  .radar-axis { stroke: var(--border-warm); stroke-width: 0.7; opacity: 0.65; }
+  .radar-tick {
+    fill: var(--subtle); font-size: 9px; font-weight: 600;
+    font-family: 'Pretendard', sans-serif;
+    font-variant-numeric: tabular-nums;
+  }
+  .radar-label {
+    fill: var(--fg); font-size: 11.5px; font-weight: 700;
+    font-family: 'Pretendard', sans-serif;
+    letter-spacing: -0.01em;
+  }
+  .radar-poly-prev {
+    fill: rgba(95, 145, 200, 0.14);
+    stroke: rgba(95, 145, 200, 0.85);
+    stroke-width: 1.4;
+    stroke-dasharray: 4 3;
+  }
+  .radar-poly-curr {
+    fill: rgba(240, 108, 36, 0.22);
+    stroke: var(--accent);
+    stroke-width: 2.2;
+    stroke-linejoin: round;
+  }
+  .radar-dot {
+    fill: white;
+    stroke: var(--accent);
+    stroke-width: 2;
+  }
+  .radar-legend {
+    display: flex; flex-wrap: wrap; gap: 8px 14px;
+    margin: 10px 4px 0; padding-top: 12px;
+    border-top: 1px dashed var(--border-warm);
+  }
+  .leg-item {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600; color: var(--muted);
+  }
+  .leg-swatch {
+    width: 24px; height: 8px; border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .leg-swatch.curr {
+    background: rgba(240, 108, 36, 0.30);
+    box-shadow: inset 0 0 0 1px var(--accent);
+  }
+  .leg-swatch.prev {
+    background: rgba(95, 145, 200, 0.18);
+    box-shadow: inset 0 0 0 1px rgba(95, 145, 200, 0.85);
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(95, 145, 200, 0.85) 0 4px,
+      transparent 4px 7px
+    );
+    background-size: 7px 100%;
+    background-repeat: repeat-x;
+    background-position: 0 50%;
+  }
+  .leg-item strong { color: var(--fg); font-weight: 700; }
+
+  .skill-tags {
+    display: flex; flex-direction: column; gap: 12px;
+    padding-top: 12px;
+  }
+  .skill-tag-group h4 {
+    margin: 0 0 8px;
+    font-size: 13px; font-weight: 800;
+    color: var(--fg); letter-spacing: -0.01em;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .skill-tag-group .ic {
+    width: 20px; height: 20px; border-radius: 6px;
+    display: grid; place-items: center; font-size: 11px;
+    flex-shrink: 0;
+  }
+  .skill-tag-group.strength .ic { background: linear-gradient(155deg, #DDEFD5 0%, #94C68B 100%); }
+  .skill-tag-group.weakness .ic { background: linear-gradient(155deg, #F8DCE2 0%, #DC9CAB 100%); }
+  .skill-tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 12px 7px 8px;
+    border-radius: 999px;
+    font-size: 12.5px; font-weight: 700; letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .skill-pill.up {
+    color: #2F6B30;
+    background: linear-gradient(120deg, rgba(154, 207, 145, 0.32), rgba(120, 170, 110, 0.18));
+    border: 1px solid rgba(120, 170, 110, 0.40);
+  }
+  .skill-pill.down {
+    color: #944D5F;
+    background: linear-gradient(120deg, rgba(220, 156, 171, 0.28), rgba(190, 105, 130, 0.14));
+    border: 1px solid rgba(190, 105, 130, 0.40);
+  }
+  .skill-pill .delta-num {
+    font-size: 11px; font-weight: 800;
+    background: white; padding: 1px 6px;
+    border-radius: 999px; line-height: 1.3;
+    font-variant-numeric: tabular-nums;
+  }
+  .skill-pill.up .delta-num { color: #2F6B30; }
+  .skill-pill.down .delta-num { color: #944D5F; }
+
+  /* Section 3: bar chart */
+  .bar-chart {
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .bar-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 60px;
+    align-items: center; gap: 10px;
+  }
+  .bar-label {
+    font-size: 13px; font-weight: 700; color: var(--fg);
+    letter-spacing: -0.01em; line-height: 1.25;
+    word-break: keep-all;
+  }
+  .bar-label .sub-text {
+    display: block; font-size: 10.5px; font-weight: 500;
+    color: var(--subtle); margin-top: 2px; line-height: 1.2;
+  }
+  .bar-track {
+    height: 22px; border-radius: 999px;
+    background: var(--bg-deep);
+    box-shadow: inset 0 1px 2px rgba(140, 90, 40, 0.12);
+    overflow: hidden;
+    position: relative;
+  }
+  .bar-fill {
+    height: 100%; border-radius: 999px;
+    box-shadow: inset 1px 1.5px 2px rgba(255, 250, 240, 0.55),
+                inset -1px -2px 3px rgba(140, 70, 20, 0.18);
+    transition: width 700ms cubic-bezier(0.32, 0.72, 0.24, 1.08);
+    position: relative;
+  }
+  .bar-fill::after {
+    content: ''; position: absolute;
+    top: 18%; left: 6%; width: 20%; height: 30%;
+    background: linear-gradient(to bottom, rgba(255, 250, 240, 0.45), transparent 80%);
+    border-radius: 50%; filter: blur(2px); pointer-events: none;
+  }
+  .bar-fill.bf-yellow { background: linear-gradient(155deg, #F4C97A 0%, #E0A93D 100%); }
+  .bar-fill.bf-blue   { background: linear-gradient(155deg, #91C2E5 0%, #5C9BCB 100%); }
+  .bar-fill.bf-green  { background: linear-gradient(155deg, #94C68B 0%, #6FA868 100%); }
+  .bar-fill.bf-orange { background: linear-gradient(155deg, #ED9554 0%, var(--accent-deep) 100%); }
+  .bar-fill.bf-purple { background: linear-gradient(155deg, #B7A0DA 0%, #8B6FB6 100%); }
+  .bar-pct {
+    font-size: 14px; font-weight: 800; color: var(--fg);
+    text-align: right; font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em; line-height: 1;
+  }
+  .bar-pct small {
+    display: block; font-size: 10.5px; font-weight: 600;
+    color: var(--subtle); margin-top: 3px; letter-spacing: 0;
+  }
+
+  /* Section 4: heatmap */
+  .heatmap-shell {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 6px 8px;
+    margin-top: 4px;
+    align-items: start;
+  }
+  .heatmap-week-labels {
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    font-size: 10px; font-weight: 700; color: var(--subtle);
+    text-transform: uppercase; letter-spacing: 0.04em;
+    line-height: 1; padding: 0 2px 4px;
+  }
+  .heatmap-day-labels {
+    display: grid;
+    grid-template-rows: repeat(7, 1fr);
+    gap: 4px;
+    font-size: 10px; font-weight: 700; color: var(--subtle);
+    text-align: right; padding-top: 1px;
+  }
+  .heatmap-day-labels span {
+    line-height: 22px;
+  }
+  .heatmap-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    grid-auto-flow: column;
+    gap: 4px;
+  }
+  .hm-cell {
+    aspect-ratio: 1;
+    min-height: 18px;
+    border-radius: 5px;
+    background: var(--bg-deep);
+    box-shadow:
+      inset 1px 1px 1.5px rgba(255, 250, 240, 0.45),
+      inset -1px -1px 1.5px rgba(140, 90, 40, 0.10);
+    cursor: default;
+    transition: transform 120ms ease, box-shadow 120ms ease;
+    position: relative;
+  }
+  .hm-cell.l1 { background: linear-gradient(155deg, #FFF6E2, #F4D89A); }
+  .hm-cell.l2 { background: linear-gradient(155deg, #FFE9C2, #F4C97A); }
+  .hm-cell.l3 { background: linear-gradient(155deg, #FBD8B6, #ED9554); }
+  .hm-cell.l4 {
+    background: linear-gradient(155deg, #F4854A, var(--accent-deep));
+    box-shadow:
+      inset 1px 1.5px 2px rgba(255, 230, 200, 0.55),
+      inset -1px -1.5px 2px rgba(140, 50, 0, 0.30),
+      0 2px 4px rgba(240, 108, 36, 0.18);
+  }
+  .hm-cell.empty { background: transparent; box-shadow: none; }
+  .hm-cell:hover { transform: scale(1.18); z-index: 2; }
+  .hm-cell.today {
+    box-shadow:
+      inset 1px 1.5px 2px rgba(255, 230, 200, 0.55),
+      inset -1px -1.5px 2px rgba(140, 50, 0, 0.30),
+      0 0 0 2px var(--accent),
+      0 4px 10px rgba(240, 108, 36, 0.30);
+  }
+  .heatmap-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 8px;
+    margin-top: 14px; padding-top: 12px;
+    border-top: 1px dashed var(--border-warm);
+    font-size: 11.5px; color: var(--muted);
+  }
+  .heatmap-foot strong { color: var(--fg); font-weight: 700; }
+  .heatmap-legend { display: inline-flex; align-items: center; gap: 6px; }
+  .heatmap-legend .swatch-row {
+    display: inline-flex; gap: 3px; align-items: center;
+  }
+  .heatmap-legend .sw {
+    width: 12px; height: 12px; border-radius: 3px;
+  }
+  .heatmap-legend .sw.l0 { background: var(--bg-deep); }
+  .heatmap-legend .sw.l1 { background: linear-gradient(155deg, #FFF6E2, #F4D89A); }
+  .heatmap-legend .sw.l2 { background: linear-gradient(155deg, #FFE9C2, #F4C97A); }
+  .heatmap-legend .sw.l3 { background: linear-gradient(155deg, #FBD8B6, #ED9554); }
+  .heatmap-legend .sw.l4 { background: linear-gradient(155deg, #F4854A, var(--accent-deep)); }
+
+  .heatmap-tooltip {
+    position: absolute;
+    pointer-events: none; opacity: 0;
+    transform: translate(-50%, calc(-100% - 8px));
+    background: var(--fg); color: var(--bg);
+    padding: 8px 11px; border-radius: 10px;
+    font-size: 11.5px; font-weight: 600; line-height: 1.4;
+    box-shadow: 0 6px 16px rgba(40, 30, 20, 0.30);
+    white-space: nowrap;
+    transition: opacity 140ms ease;
+    z-index: 5;
+  }
+  .heatmap-tooltip strong { color: white; font-weight: 800; }
+  .heatmap-tooltip::after {
+    content: ''; position: absolute;
+    bottom: -5px; left: 50%; transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--fg);
+  }
+  .heatmap-tooltip.show { opacity: 1; }
+
+  /* Section 5: AI comment */
+  .ai-card {
+    background: linear-gradient(165deg, #FFFAF0 0%, #FFF1DA 60%, #FFE7C0 100%);
+    border: 2px solid rgba(240, 108, 36, 0.30);
+    border-radius: 22px;
+    padding: 16px 16px 14px;
+    box-shadow: 0 8px 22px rgba(240, 108, 36, 0.12), var(--shadow-press);
+    position: relative; overflow: hidden;
+  }
+  .ai-card::before {
+    content: ''; position: absolute;
+    top: -40px; right: -40px; width: 160px; height: 160px;
+    background: radial-gradient(circle, rgba(255, 220, 130, 0.40), transparent 70%);
+    border-radius: 50%; pointer-events: none;
+  }
+  .ai-card-head {
+    display: flex; align-items: center; gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--border-warm);
+    margin-bottom: 10px;
+    position: relative; z-index: 1;
+  }
+  .ai-card-head .clay { width: 44px; height: 44px; border-radius: 14px; flex-shrink: 0; }
+  .ai-card-head .clay > .lbl { font-size: 14px; }
+  .ai-card-head .info { flex: 1; min-width: 0; line-height: 1.25; }
+  .ai-card-head .name {
+    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    font-size: 14.5px; font-weight: 800; color: var(--fg);
+    letter-spacing: -0.01em;
+  }
+  .ai-card-head .name .ai-tag {
+    font-size: 9.5px; font-weight: 800;
+    color: var(--accent-deep); background: var(--accent-soft);
+    padding: 2px 6px; border-radius: 999px;
+    letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.4;
+  }
+  .ai-card-head .meta {
+    font-size: 11.5px; color: var(--muted); margin-top: 3px;
+  }
+  .ai-card-body {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .ai-para {
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 12px 14px 12px 12px;
+    display: flex; gap: 10px; align-items: flex-start;
+    line-height: 1.55;
+  }
+  .ai-para .pip {
+    width: 28px; height: 28px; border-radius: 9px;
+    flex-shrink: 0; display: grid; place-items: center;
+    font-size: 14px;
+  }
+  .ai-para.strength .pip { background: linear-gradient(155deg, #DDEFD5 0%, #94C68B 100%); }
+  .ai-para.weakness .pip { background: linear-gradient(155deg, #F8DCE2 0%, #DC9CAB 100%); }
+  .ai-para.next     .pip { background: linear-gradient(155deg, #DFEEFB 0%, #91C2E5 100%); }
+  .ai-para .text { font-size: 13.5px; color: var(--fg); flex: 1; min-width: 0; word-break: keep-all; }
+  .ai-para .text strong { color: var(--accent-deep); font-weight: 800; }
+  .ai-para .text .label {
+    display: block; font-size: 11px; font-weight: 800;
+    color: var(--muted); letter-spacing: 0.04em;
+    text-transform: uppercase; line-height: 1; margin-bottom: 6px;
+  }
+  .ai-para.strength .text .label { color: #2F6B30; }
+  .ai-para.weakness .text .label { color: #944D5F; }
+  .ai-para.next .text .label { color: #2F5184; }
+
+  /* Section 6: recommendations */
+  .reco-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .reco-card {
+    display: flex; align-items: stretch; gap: 12px;
+    padding: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow-press);
+    text-align: left; width: 100%;
+    transition: transform 140ms ease, box-shadow 140ms ease;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+  }
+  .reco-card:active { transform: scale(0.985); box-shadow: var(--shadow-clay); }
+  .reco-card .clay { width: 56px; height: 56px; border-radius: 16px; flex-shrink: 0; align-self: center; }
+  .reco-card .clay > .lbl { font-size: 9.5px; }
+  .reco-card .text { flex: 1; min-width: 0; line-height: 1.35; display: flex; flex-direction: column; gap: 4px; }
+  .reco-card .head {
+    display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap;
+  }
+  .reco-card .num {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--accent-soft); color: var(--accent-deep);
+    display: inline-grid; place-items: center;
+    font-size: 11px; font-weight: 800; line-height: 1;
+    flex-shrink: 0;
+  }
+  .reco-card h3 {
+    margin: 0; font-size: 14.5px; font-weight: 800;
+    color: var(--fg); letter-spacing: -0.015em;
+  }
+  .reco-card .reason {
+    font-size: 11.5px; font-weight: 700; line-height: 1.3;
+    color: var(--accent-deep);
+    background: var(--accent-soft);
+    padding: 4px 8px; border-radius: 999px;
+    border: 1px solid rgba(240, 108, 36, 0.25);
+    align-self: flex-start;
+    word-break: keep-all;
+  }
+  .reco-card .meta {
+    font-size: 12px; color: var(--muted); line-height: 1.4;
+    word-break: keep-all;
+  }
+  .reco-card .meta strong { color: var(--fg); font-weight: 700; }
+  .reco-card .arrow {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--bg-deep);
+    color: var(--muted);
+    display: grid; place-items: center;
+    font-size: 16px; font-weight: 700; flex-shrink: 0;
+    align-self: center;
+    transition: background 120ms ease, color 120ms ease;
+  }
+  .reco-card:hover .arrow { background: var(--accent); color: white; }
+
+  .tab-bar {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    background: rgba(248, 244, 235, 0.85);
+    -webkit-backdrop-filter: saturate(140%) blur(20px);
+    backdrop-filter: saturate(140%) blur(20px);
+    border-top: 1px solid var(--border);
+    height: calc(var(--tab-h) + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .tab {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 3px; padding: 6px 4px 4px; min-height: 44px;
+    color: var(--subtle);
+    transition: transform 120ms ease, color 120ms ease;
+    -webkit-tap-highlight-color: transparent; position: relative;
+  }
+  .tab:active { transform: scale(0.94); }
+  .tab .clay {
+    width: 28px; height: 28px; border-radius: 9px;
+    transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .tab .clay > .lbl { font-size: 8px; }
+  .tab-label { font-size: 10.5px; font-weight: 600; line-height: 1; letter-spacing: -0.01em; }
+  .tab[aria-current="page"] { color: var(--accent-deep); }
+  .tab[aria-current="page"] .clay {
+    transform: translateY(-2px);
+    box-shadow:
+      inset 1.5px 2px 3px rgba(255, 245, 230, 0.95),
+      inset -2px -3px 5px rgba(180, 90, 30, 0.22),
+      0 6px 12px rgba(240, 108, 36, 0.30),
+      0 1px 3px rgba(140, 60, 0, 0.15);
+  }
+  .tab[aria-current="page"]::before {
+    content: ''; position: absolute;
+    top: 4px; left: 50%; transform: translateX(-50%);
+    width: 28px; height: 4px;
+    background: var(--accent); border-radius: 0 0 999px 999px;
+    box-shadow: 0 1px 4px rgba(240, 108, 36, 0.40);
+  }
+  .tab[aria-current="page"] .tab-label { font-weight: 700; }
+
+  .scrim {
+    position: absolute; inset: 0;
+    background: rgba(40, 30, 20, 0.45);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    opacity: 0; pointer-events: none;
+    transition: opacity 220ms ease;
+    z-index: 50;
+  }
+  .app[data-drawer="open"] .scrim { opacity: 1; pointer-events: auto; }
+
+  @media (max-width: 767px) {
+    .body { grid-template-columns: 1fr; grid-template-rows: 1fr; }
+    .sidebar {
+      position: absolute; top: 0; bottom: 0; left: 0;
+      width: min(280px, 86vw); transform: translateX(-100%);
+      transition: transform 260ms cubic-bezier(0.32, 0.72, 0.24, 1.08);
+      z-index: 60; background: var(--bg);
+      padding-top: calc(env(safe-area-inset-top) + 16px);
+      will-change: transform;
+    }
+    .app[data-drawer="open"] .sidebar {
+      transform: translateX(0);
+      box-shadow: 8px 0 32px rgba(40, 30, 20, 0.20);
+    }
+    .center { grid-column: 1; padding-bottom: 16px; }
+    .tab-bar { display: grid; }
+    .hdr-user .info { display: none; }
+    .hdr-user { padding: 4px; border-radius: 50%; background: transparent; border: none; gap: 0; }
+    .brand .ver, .crumb { display: none; }
+    .brand .name { font-size: 15px; }
+    .top-bar { gap: 6px; padding: calc(env(safe-area-inset-top) + 10px) 10px 10px; }
+    .bar-row { grid-template-columns: 88px 1fr 50px; gap: 8px; }
+    .bar-label { font-size: 12px; }
+    .bar-pct { font-size: 13px; }
+  }
+
+  @media (min-width: 768px) {
+    .app { grid-template-rows: auto 1fr; }
+    .body { grid-template-columns: var(--sidebar-w) 1fr; grid-template-rows: 1fr; }
+    .sidebar { display: block; }
+    .hamburger { display: none; }
+    .tab-bar { display: none; }
+    .scrim { display: none; }
+    .top-bar { padding: 12px 18px; min-height: 68px; border-bottom: 1px solid var(--border); }
+    .brand .name { font-size: 17px; }
+
+    .page-head {
+      margin: 18px 22px 4px;
+      padding: 22px 26px;
+      grid-template-columns: 1fr auto;
+      gap: 24px; align-items: end;
+    }
+    h1.page-title { font-size: 26px; }
+    .page-sub { font-size: 14px; }
+
+    .section { margin: 22px 22px 0; }
+    .section-title { font-size: 18px; }
+    .section-sub { font-size: 13px; margin-bottom: 16px; }
+
+    .summary-grid { grid-template-columns: repeat(4, 1fr); }
+    .summary-card { padding: 16px 14px; min-height: 108px; }
+    .summary-card .value { font-size: 24px; }
+
+    .chart-card { padding: 22px 22px 18px; }
+    .radar-wrap { grid-template-columns: minmax(0, 1.2fr) 240px; gap: 24px; }
+
+    .reco-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .reco-card { padding: 16px; }
+    .reco-card h3 { font-size: 15px; }
+
+    .heatmap-shell { gap: 6px 10px; grid-template-columns: 36px 1fr; }
+  }
+
+  @media (min-width: 1200px) {
+    .app {
+      max-width: 1400px; margin: 0 auto;
+      box-shadow: 0 0 60px rgba(40, 30, 20, 0.05);
+    }
+    body { background: var(--bg-deep); }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='nb'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.45 0 0 0 0 0.32 0 0 0 0.10 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23nb)'/%3E%3C/svg%3E");
+      background-size: 240px;
+      pointer-events: none; mix-blend-mode: multiply; opacity: 0.4; z-index: 0;
+    }
+    .top-bar { padding: 14px 22px; }
+    .reco-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 359px) {
+    h1.page-title { font-size: 18px; }
+    .summary-card .value { font-size: 18px; }
+    .bar-row { grid-template-columns: 70px 1fr 44px; }
+    .bar-label { font-size: 11.5px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app" id="app" data-od-id="report">
+
+  <header class="top-bar" data-od-id="top-bar">
+    <button class="hamburger" id="open-drawer" aria-label="메뉴 열기" aria-controls="sidebar"><span></span></button>
+    <div class="brand">
+      <div class="logo" aria-hidden="true">국</div>
+      <span class="name">국어농장</span>
+      <span class="ver">v2</span>
+    </div>
+    <span class="crumb">분석 · <strong>통합 분석표</strong></span>
+    <div class="hdr-spacer"></div>
+    <button class="hdr-user" aria-label="민준 학생 프로필">
+      <span class="clay clay-orange" aria-hidden="true"><span class="lbl">학생</span></span>
+      <span class="info">
+        <span class="name">민준이</span>
+        <span class="meta"><span class="lvl">러셀1</span> · 2,340점</span>
+      </span>
+    </button>
+    <div class="hdr-actions">
+      <button class="icon-btn" aria-label="작물 지갑 — 자몽 64개">
+        <span class="clay clay-orange" aria-hidden="true"><span class="lbl">자몽</span></span>
+        <span class="icon-count">64</span>
+      </button>
+      <button class="icon-btn" aria-label="알림 3건">
+        <span class="clay clay-rose" aria-hidden="true"><span class="lbl">알림</span></span>
+        <span class="icon-dot">3</span>
+      </button>
+      <button class="icon-btn" aria-label="설정">
+        <span class="clay clay-green" aria-hidden="true"><span class="lbl">설정</span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="body" data-od-id="body">
+
+    <button class="scrim" id="close-drawer" aria-label="메뉴 닫기" tabindex="-1"></button>
+
+    <aside class="sidebar" id="sidebar" data-od-id="sidebar" aria-label="주요 메뉴">
+      <div class="sb-group">
+        <div class="sb-title"><span class="clay clay-yellow" aria-hidden="true"><span class="lbl">★</span></span><span>🌟 무료 기능</span></div>
+        <a class="sb-item" href="#"><span class="icon">📝</span><span>일일 퀴즈</span><span class="badge">10</span></a>
+        <a class="sb-item" href="#"><span class="icon">📖</span><span>일일 독해</span><span class="badge">1</span></a>
+        <a class="sb-item" href="#"><span class="icon">⚔</span><span>대결 라이브</span><span class="badge live">3</span></a>
+        <a class="sb-item" href="#"><span class="icon">🏆</span><span>시즌 랭킹</span></a>
+      </div>
+      <div class="sb-group">
+        <div class="sb-title"><span class="clay clay-green" aria-hidden="true"><span class="lbl">학습</span></span><span>🌾 학습</span></div>
+        <a class="sb-item" href="#"><span class="icon">🌱</span><span>농장별 모드</span></a>
+        <a class="sb-item" href="#"><span class="icon">🎓</span><span>프로 모드</span></a>
+        <a class="sb-item" href="#"><span class="icon">✨</span><span>추천 학습</span></a>
+        <a class="sb-item" href="#"><span class="icon">📅</span><span>학습 계획표</span><span class="badge neutral">3</span></a>
+      </div>
+      <div class="sb-group">
+        <div class="sb-title"><span class="clay clay-blue" aria-hidden="true"><span class="lbl">쓰기</span></span><span>✏ 글쓰기</span></div>
+        <a class="sb-item" href="#"><span class="icon">📚</span><span>지식과 지혜</span></a>
+      </div>
+      <div class="sb-group">
+        <div class="sb-title"><span class="clay clay-purple" aria-hidden="true"><span class="lbl">분석</span></span><span>📊 분석</span></div>
+        <a class="sb-item" href="#"><span class="icon">🎯</span><span>역량 진단</span></a>
+        <a class="sb-item" href="#"><span class="icon">📈</span><span>테스트별 성적표</span></a>
+        <a class="sb-item active" href="#"><span class="icon">📋</span><span>통합 분석표</span></a>
+      </div>
+      <div class="sb-group">
+        <div class="sb-title"><span class="clay clay-cream" aria-hidden="true"><span class="lbl">설정</span></span><span>⚙ 설정</span></div>
+        <a class="sb-item" href="#"><span class="icon">🍊</span><span>작물 지갑</span><span class="badge neutral">128</span></a>
+        <a class="sb-item" href="#"><span class="icon">🦉</span><span>캐릭터 변경</span></a>
+        <a class="sb-item" href="#"><span class="icon">👤</span><span>내 정보</span></a>
+      </div>
+    </aside>
+
+    <main class="center" id="center" data-od-id="center">
+
+      <header class="page-head" data-od-id="page-head">
+        <div class="page-head-text">
+          <span class="page-eyebrow"><span class="dot" aria-hidden="true"></span>분석 · 종합 리포트</span>
+          <h1 class="page-title">📊 민준의 통합 분석표</h1>
+          <p class="page-sub">최근 <strong>30일</strong> 학습 데이터를 한눈에 보여드려요. 약점은 무엇이고 어떻게 보강하면 좋을지 AI가 분석했어요.</p>
+        </div>
+        <div class="period-tabs" role="tablist" aria-label="기간 선택">
+          <button class="period-tab" role="tab" aria-pressed="false" data-period="7">7일</button>
+          <button class="period-tab" role="tab" aria-pressed="true"  data-period="30">30일</button>
+          <button class="period-tab" role="tab" aria-pressed="false" data-period="90">90일</button>
+          <button class="period-tab" role="tab" aria-pressed="false" data-period="all">전체</button>
+        </div>
+      </header>
+
+      <!-- SECTION 1: SUMMARY CARDS -->
+      <section class="section" data-od-id="summary" aria-labelledby="sum-title">
+        <h2 class="section-title" id="sum-title">📈 30일 한눈에 보기</h2>
+        <div class="summary-grid">
+          <article class="summary-card tint-yellow">
+            <span class="clay clay-yellow" aria-hidden="true"><span class="lbl">시간</span></span>
+            <span class="text">
+              <span class="label">학습 시간</span>
+              <span class="value">12<small>시간</small> 35<small>분</small></span>
+              <span class="delta">↑ +1.2시간 (전주 대비)</span>
+            </span>
+          </article>
+          <article class="summary-card tint-blue">
+            <span class="clay clay-blue" aria-hidden="true"><span class="lbl">문제</span></span>
+            <span class="text">
+              <span class="label">푼 문제</span>
+              <span class="value">287<small>문제</small></span>
+              <span class="delta flat">정답률 78%</span>
+            </span>
+          </article>
+          <article class="summary-card tint-green">
+            <span class="clay clay-green" aria-hidden="true"><span class="lbl">글쓰기</span></span>
+            <span class="text">
+              <span class="label">글쓰기</span>
+              <span class="value">5<small>편 / 4편 첨삭 완료</small></span>
+              <span class="delta">↑ +2편 (전주 대비)</span>
+            </span>
+          </article>
+          <article class="summary-card tint-orange">
+            <span class="clay clay-orange" aria-hidden="true"><span class="lbl">랭킹</span></span>
+            <span class="text">
+              <span class="label">시즌 점수</span>
+              <span class="value">2,340<small>점 · 156위</small></span>
+              <span class="delta">↑ 28위 ↑</span>
+            </span>
+          </article>
+        </div>
+      </section>
+
+      <!-- SECTION 2: RADAR CHART -->
+      <section class="section" data-od-id="radar-section" aria-labelledby="radar-title">
+        <h2 class="section-title" id="radar-title">🎯 10대 역량 분포</h2>
+        <p class="section-sub">현재 능력치를 <strong>30일 전</strong>과 비교했어요. 사실적 이해와 글쓰기 표현이 눈에 띄게 자랐어요.</p>
+
+        <div class="chart-card">
+          <div class="radar-wrap">
+            <div class="radar-svg-wrap">
+              <svg class="radar-svg" viewBox="0 0 440 440" role="img" aria-label="10대 역량 레이더 차트 — 어휘력 78, 추론력 72, 비판적 사고 60, 사실적 이해 85, 통합 사고 65, 감상력 70, 문법 정확성 80, 글쓰기 표현 75, 매체 이해 55, 메타인지 48">
+                <!-- Concentric grid (5 rings at 20/40/60/80/100) -->
+                <circle class="radar-grid" cx="220" cy="220" r="30"/>
+                <circle class="radar-grid" cx="220" cy="220" r="60"/>
+                <circle class="radar-grid" cx="220" cy="220" r="90"/>
+                <circle class="radar-grid" cx="220" cy="220" r="120"/>
+                <circle class="radar-grid" cx="220" cy="220" r="150"/>
+
+                <!-- 10 axis lines from center -->
+                <line class="radar-axis" x1="220" y1="220" x2="220" y2="70"/>
+                <line class="radar-axis" x1="220" y1="220" x2="308" y2="99"/>
+                <line class="radar-axis" x1="220" y1="220" x2="363" y2="174"/>
+                <line class="radar-axis" x1="220" y1="220" x2="363" y2="266"/>
+                <line class="radar-axis" x1="220" y1="220" x2="308" y2="341"/>
+                <line class="radar-axis" x1="220" y1="220" x2="220" y2="370"/>
+                <line class="radar-axis" x1="220" y1="220" x2="132" y2="341"/>
+                <line class="radar-axis" x1="220" y1="220" x2="77"  y2="266"/>
+                <line class="radar-axis" x1="220" y1="220" x2="77"  y2="174"/>
+                <line class="radar-axis" x1="220" y1="220" x2="132" y2="99"/>
+
+                <!-- Tick marks on top axis (20/40/60/80/100) -->
+                <text class="radar-tick" x="226" y="194" text-anchor="start">20</text>
+                <text class="radar-tick" x="226" y="164" text-anchor="start">40</text>
+                <text class="radar-tick" x="226" y="134" text-anchor="start">60</text>
+                <text class="radar-tick" x="226" y="104" text-anchor="start">80</text>
+                <text class="radar-tick" x="226" y="74"  text-anchor="start">100</text>
+
+                <!-- Previous (30일 전) polygon - dashed blue -->
+                <polygon class="radar-poly-prev" points="220,123 280,138 298,195 337,258 273,293 220,322 151,315 120,252 149,197 180,165"/>
+
+                <!-- Current polygon - filled orange -->
+                <polygon class="radar-poly-curr" points="220,103 283,133 306,192 341,259 277,299 220,325 149,317 113,255 142,195 178,162"/>
+
+                <!-- Current value dots -->
+                <circle class="radar-dot" cx="220" cy="103" r="4"/>
+                <circle class="radar-dot" cx="283" cy="133" r="4"/>
+                <circle class="radar-dot" cx="306" cy="192" r="4"/>
+                <circle class="radar-dot" cx="341" cy="259" r="4"/>
+                <circle class="radar-dot" cx="277" cy="299" r="4"/>
+                <circle class="radar-dot" cx="220" cy="325" r="4"/>
+                <circle class="radar-dot" cx="149" cy="317" r="4"/>
+                <circle class="radar-dot" cx="113" cy="255" r="4"/>
+                <circle class="radar-dot" cx="142" cy="195" r="4"/>
+                <circle class="radar-dot" cx="178" cy="162" r="4"/>
+
+                <!-- Axis labels (with values shown small) -->
+                <text class="radar-label" x="220" y="44" text-anchor="middle">어휘력 78</text>
+                <text class="radar-label" x="326" y="76" text-anchor="middle">추론력 72</text>
+                <text class="radar-label" x="391" y="156" text-anchor="middle">비판적 60</text>
+                <text class="radar-label" x="391" y="296" text-anchor="middle">사실적 85</text>
+                <text class="radar-label" x="326" y="376" text-anchor="middle">통합 65</text>
+                <text class="radar-label" x="220" y="408" text-anchor="middle">감상력 70</text>
+                <text class="radar-label" x="114" y="376" text-anchor="middle">문법 80</text>
+                <text class="radar-label" x="49"  y="296" text-anchor="middle">글쓰기 75</text>
+                <text class="radar-label" x="49"  y="156" text-anchor="middle">매체 55</text>
+                <text class="radar-label" x="114" y="76"  text-anchor="middle">메타인지 48</text>
+              </svg>
+              <div class="radar-legend">
+                <span class="leg-item"><span class="leg-swatch curr" aria-hidden="true"></span><strong>현재</strong> (5월 7일)</span>
+                <span class="leg-item"><span class="leg-swatch prev" aria-hidden="true"></span>30일 전 (4월 7일)</span>
+              </div>
+            </div>
+
+            <div class="skill-tags">
+              <div class="skill-tag-group strength">
+                <h4><span class="ic" aria-hidden="true">⬆</span>강점 영역</h4>
+                <div class="skill-tag-list">
+                  <span class="skill-pill up">사실적 이해 <span class="delta-num">+3</span></span>
+                  <span class="skill-pill up">문법 정확성 <span class="delta-num">+2</span></span>
+                  <span class="skill-pill up">어휘력 <span class="delta-num">+13</span></span>
+                </div>
+              </div>
+              <div class="skill-tag-group weakness">
+                <h4><span class="ic" aria-hidden="true">⬇</span>보강 필요</h4>
+                <div class="skill-tag-list">
+                  <span class="skill-pill down">메타인지 <span class="delta-num">48</span></span>
+                  <span class="skill-pill down">매체 이해 <span class="delta-num">55</span></span>
+                  <span class="skill-pill down">비판적 사고 <span class="delta-num">60</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: BAR CHART -->
+      <section class="section" data-od-id="bar-section" aria-labelledby="bar-title">
+        <h2 class="section-title" id="bar-title">📚 영역별 학습량</h2>
+        <p class="section-sub">최근 30일 동안 푼 287문제를 영역별로 나눴어요. 비문학 비중이 가장 커요.</p>
+        <div class="chart-card">
+          <div class="bar-chart" role="list">
+            <div class="bar-row" role="listitem">
+              <span class="bar-label">비문학<span class="sub-text">사회/과학/철학</span></span>
+              <span class="bar-track" role="progressbar" aria-label="비문학 38%" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100">
+                <span class="bar-fill bf-orange" style="width: 38%;"></span>
+              </span>
+              <span class="bar-pct">38<small>109문제</small></span>
+            </div>
+            <div class="bar-row" role="listitem">
+              <span class="bar-label">문학<span class="sub-text">시/소설/수필</span></span>
+              <span class="bar-track" role="progressbar" aria-label="문학 22%" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100">
+                <span class="bar-fill bf-yellow" style="width: 22%;"></span>
+              </span>
+              <span class="bar-pct">22<small>63문제</small></span>
+            </div>
+            <div class="bar-row" role="listitem">
+              <span class="bar-label">문법·어휘<span class="sub-text">표준국어대사전</span></span>
+              <span class="bar-track" role="progressbar" aria-label="문법·어휘 18%" aria-valuenow="18" aria-valuemin="0" aria-valuemax="100">
+                <span class="bar-fill bf-green" style="width: 18%;"></span>
+              </span>
+              <span class="bar-pct">18<small>52문제</small></span>
+            </div>
+            <div class="bar-row" role="listitem">
+              <span class="bar-label">화법·작문<span class="sub-text">말하기와 쓰기</span></span>
+              <span class="bar-track" role="progressbar" aria-label="화법·작문 12%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100">
+                <span class="bar-fill bf-blue" style="width: 12%;"></span>
+              </span>
+              <span class="bar-pct">12<small>34문제</small></span>
+            </div>
+            <div class="bar-row" role="listitem">
+              <span class="bar-label">매체<span class="sub-text">미디어 리터러시</span></span>
+              <span class="bar-track" role="progressbar" aria-label="매체 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+                <span class="bar-fill bf-purple" style="width: 10%;"></span>
+              </span>
+              <span class="bar-pct">10<small>29문제</small></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: HEATMAP -->
+      <section class="section" data-od-id="heatmap-section" aria-labelledby="hm-title">
+        <h2 class="section-title" id="hm-title">📅 최근 30일 학습 흔적</h2>
+        <p class="section-sub">매일 얼마나 학습했는지 칸의 짙기로 표시했어요. 5월 들어 꾸준해졌어요!</p>
+
+        <div class="chart-card">
+          <div class="heatmap-shell" id="heatmap-shell">
+            <div class="heatmap-week-labels">
+              <span>4월 1주</span><span>4월 2주</span><span>4월 3주</span><span>4월 4주</span><span>5월 1주</span>
+            </div>
+            <div class="heatmap-day-labels">
+              <span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span><span>일</span>
+            </div>
+            <div class="heatmap-grid" id="heatmap-grid" role="img" aria-label="최근 30일 학습 활동 강도 — 5주 × 7일 격자">
+              <!-- Cells injected by script; data is hardcoded below as fallback -->
+              <!-- Week 1 (4월 1주) -->
+              <div class="hm-cell empty" data-empty="1"></div>
+              <div class="hm-cell empty" data-empty="1"></div>
+              <div class="hm-cell empty" data-empty="1"></div>
+              <div class="hm-cell empty" data-empty="1"></div>
+              <div class="hm-cell l1" data-date="4월 7일" data-quiz="3" data-reading="0" data-writing="0"></div>
+              <div class="hm-cell l2" data-date="4월 8일" data-quiz="6" data-reading="1" data-writing="0"></div>
+              <div class="hm-cell l1" data-date="4월 9일" data-quiz="4" data-reading="0" data-writing="0"></div>
+              <!-- Week 2 (4월 2주) -->
+              <div class="hm-cell l3" data-date="4월 10일" data-quiz="10" data-reading="1" data-writing="1"></div>
+              <div class="hm-cell l2" data-date="4월 11일" data-quiz="8" data-reading="1" data-writing="0"></div>
+              <div class="hm-cell empty" data-empty="1" data-date="4월 12일" data-quiz="0"></div>
+              <div class="hm-cell l1" data-date="4월 13일" data-quiz="3" data-reading="1" data-writing="0"></div>
+              <div class="hm-cell l2" data-date="4월 14일" data-quiz="7" data-reading="1" data-writing="0"></div>
+              <div class="hm-cell l3" data-date="4월 15일" data-quiz="10" data-reading="2" data-writing="1"></div>
+              <div class="hm-cell l4" data-date="4월 16일" data-quiz="12" data-reading="2" data-writing="1"></div>
+              <!-- Week 3 (4월 3주) -->
+              <div class="hm-cell l2" data-date="4월 17일" data-quiz="6" data-reading="1" data-writing="0"></div>
+              <div class="hm-cell l1" data-date="4월 18일" data-quiz="4" data-reading="0" data-writing="0"></div>
+              <div class="hm-cell empty" data-empty="1" data-date="4월 19일" data-quiz="0"></div>
+              <div class="hm-cell empty" data-empty="1" data-date="4월 20일" data-quiz="0"></div>
+              <div class="hm-cell l1" data-date="4월 21일" data-quiz="2" data-reading="0" data-writing="0"></div>
+              <div class="hm-cell l3" data-date="4월 22일" data-quiz="9" data-reading="1" data-writing="1"></div>
+              <div class="hm-cell l3" data-date="4월 23일" data-quiz="10" data-reading="2" data-writing="0"></div>
+              <!-- Week 4 (4월 4주) -->
+              <div class="hm-cell l2" data-date="4월 24일" data-quiz="7" data-reading="1" data-writing="0"></div>
+              <div class="hm-cell l3" data-date="4월 25일" data-quiz="9" data-reading="2" data-writing="1"></div>
+              <div class="hm-cell l4" data-date="4월 26일" data-quiz="11" data-reading="2" data-writing="1"></div>
+              <div class="hm-cell l3" data-date="4월 27일" data-quiz="10" data-reading="2" data-writing="0"></div>
+              <div class="hm-cell l2" data-date="4월 28일" data-quiz="6" data-reading="1" data-writing="0"></div>
+              <div class="hm-cell l3" data-date="4월 29일" data-quiz="9" data-reading="1" data-writing="1"></div>
+              <div class="hm-cell l4" data-date="4월 30일" data-quiz="12" data-reading="2" data-writing="1"></div>
+              <!-- Week 5 (5월 1주) -->
+              <div class="hm-cell l3" data-date="5월 1일" data-quiz="9" data-reading="2" data-writing="0"></div>
+              <div class="hm-cell l4" data-date="5월 2일" data-quiz="11" data-reading="2" data-writing="1"></div>
+              <div class="hm-cell l3" data-date="5월 3일" data-quiz="10" data-reading="1" data-writing="1"></div>
+              <div class="hm-cell l4" data-date="5월 4일" data-quiz="12" data-reading="2" data-writing="1"></div>
+              <div class="hm-cell l4" data-date="5월 5일" data-quiz="13" data-reading="2" data-writing="1"></div>
+              <div class="hm-cell l3" data-date="5월 6일" data-quiz="10" data-reading="1" data-writing="1"></div>
+              <div class="hm-cell l4 today" data-date="오늘 · 5월 7일" data-quiz="10" data-reading="1" data-writing="1"></div>
+            </div>
+            <div class="heatmap-tooltip" id="hm-tooltip" role="tooltip"></div>
+          </div>
+
+          <div class="heatmap-foot">
+            <span><strong>27일</strong> 학습 · 연속 출석 <strong>7일</strong> · 가장 많이 학습한 날 5월 5일 (16건)</span>
+            <span class="heatmap-legend">
+              덜
+              <span class="swatch-row" aria-hidden="true">
+                <span class="sw l0"></span><span class="sw l1"></span><span class="sw l2"></span><span class="sw l3"></span><span class="sw l4"></span>
+              </span>
+              많이
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: AI COMMENT -->
+      <section class="section" data-od-id="ai-section" aria-labelledby="ai-title">
+        <h2 class="section-title" id="ai-title">🦉 부엉이샘의 분석 코멘트</h2>
+        <p class="section-sub">민준 학생의 30일 학습 데이터를 보고 부엉이샘이 직접 작성했어요.</p>
+
+        <div class="ai-card" data-od-id="ai-card">
+          <div class="ai-card-head">
+            <span class="clay clay-cream" aria-hidden="true"><span class="lbl">🦉</span></span>
+            <span class="info">
+              <span class="name">부엉이샘 <span class="ai-tag">AI 선생님</span></span>
+              <span class="meta">5월 7일 오후 4:42 분석 · 다음 분석 5월 14일 예정</span>
+            </span>
+          </div>
+          <div class="ai-card-body">
+
+            <div class="ai-para strength">
+              <span class="pip" aria-hidden="true">✨</span>
+              <div class="text">
+                <span class="label">잘하고 있는 부분</span>
+                민준 학생, 지난 한 달 동안 <strong>어휘력이 13점이나 올랐어요</strong>! 매일 일일 퀴즈를 푸는 습관이 단어를 단단하게 만들어 줬어요. 비문학에서 사실적 이해 점수가 <strong>85점</strong>까지 올라왔는데, 이건 학년 평균보다 한참 높은 수치예요. 글쓰기 표현도 5점 올랐어요 — 「봄의 소리」 일기에서 묘사가 훨씬 풍부해졌어요.
+              </div>
+            </div>
+
+            <div class="ai-para weakness">
+              <span class="pip" aria-hidden="true">🔍</span>
+              <div class="text">
+                <span class="label">조금 더 보강하면 좋은 부분</span>
+                <strong>메타인지(48점)</strong>가 다른 영역에 비해 낮아요. 메타인지는 "내가 무엇을 모르는지 아는 능력"이에요. 문제를 빠르게 풀고 채점만 보는 습관 때문이에요. <strong>매체 이해(55점)</strong>도 학습량이 적어요 — 광고·뉴스 기사를 분석하는 문제가 약점이에요. 비판적 사고는 60점에 머물러 있어요.
+              </div>
+            </div>
+
+            <div class="ai-para next">
+              <span class="pip" aria-hidden="true">🌱</span>
+              <div class="text">
+                <span class="label">다음 30일 추천 학습 흐름</span>
+                <strong>1주차</strong> — 매체 영역을 집중적으로 풀어 약점부터 보강해요 (광고 분석 5문제씩).
+                <strong>2주차</strong> — 문제 풀고 나서 "왜 틀렸는지" 30초씩 적어보는 메타인지 훈련.
+                <strong>3~4주차</strong> — 비판적 사고를 키우는 토론형 글쓰기 첨삭을 받아봐요. 부엉이샘이 매주 진척을 다시 확인할게요!
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 6: RECOMMENDATIONS -->
+      <section class="section" data-od-id="reco-section" aria-labelledby="reco-title">
+        <h2 class="section-title" id="reco-title">🌱 AI가 추천하는 다음 학습 5개</h2>
+        <p class="section-sub">분석 결과에 맞춰 부엉이샘이 골라드린 학습 5개예요. 위에서부터 풀면 가장 효과가 커요.</p>
+
+        <div class="reco-grid" role="list">
+
+          <button class="reco-card" role="listitem" data-route="reco-1">
+            <span class="clay clay-purple" aria-hidden="true"><span class="lbl">매체<br>분석</span></span>
+            <span class="text">
+              <span class="head"><span class="num">1</span><h3>광고 분석 5문제</h3></span>
+              <span class="reason">매체 이해 약점 보강에 추천</span>
+              <span class="meta">약 <strong>10분</strong> · 5문제 · 자몽 <strong>2개</strong> · 신문 광고 4편 + 영상 광고 1편</span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </button>
+
+          <button class="reco-card" role="listitem" data-route="reco-2">
+            <span class="clay clay-blue" aria-hidden="true"><span class="lbl">메타<br>인지</span></span>
+            <span class="text">
+              <span class="head"><span class="num">2</span><h3>오답 노트 만들기</h3></span>
+              <span class="reason">메타인지 약점 보강에 추천</span>
+              <span class="meta">약 <strong>8분</strong> · 어제 틀린 6문제 · 무료 · "왜 틀렸는지" 30초 작성</span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </button>
+
+          <button class="reco-card" role="listitem" data-route="reco-3">
+            <span class="clay clay-green" aria-hidden="true"><span class="lbl">토론<br>글쓰기</span></span>
+            <span class="text">
+              <span class="head"><span class="num">3</span><h3>토론 글쓰기 — 학교 앞 분식점, 단속해야 할까?</h3></span>
+              <span class="reason">비판적 사고 보강에 추천</span>
+              <span class="meta">약 <strong>15분</strong> · 글쓰기 1편 + 첨삭 · 자몽 <strong>1개</strong> · 누룽지샘 첨삭</span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </button>
+
+          <button class="reco-card" role="listitem" data-route="reco-4">
+            <span class="clay clay-yellow" aria-hidden="true"><span class="lbl">어휘<br>심화</span></span>
+            <span class="text">
+              <span class="head"><span class="num">4</span><h3>한자 성어 7개 — 비유 표현</h3></span>
+              <span class="reason">강점 영역 심화 학습</span>
+              <span class="meta">약 <strong>8분</strong> · 7문제 · 무료 · 어제 학습 이어가기</span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </button>
+
+          <button class="reco-card" role="listitem" data-route="reco-5">
+            <span class="clay clay-orange" aria-hidden="true"><span class="lbl">진단<br>퀴즈</span></span>
+            <span class="text">
+              <span class="head"><span class="num">5</span><h3>비문학 진단 퀴즈 10문제</h3></span>
+              <span class="reason">현재 능력치 재확인</span>
+              <span class="meta">약 <strong>12분</strong> · 10문제 · 무료 · 사회·과학·철학 혼합</span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </button>
+
+        </div>
+      </section>
+
+      <div style="height: 16px;"></div>
+
+    </main>
+  </div>
+
+  <nav class="tab-bar" data-od-id="tab-bar" role="tablist" aria-label="주요 탭">
+    <a class="tab" href="#" role="tab" aria-label="홈">
+      <span class="clay clay-orange" aria-hidden="true"><span class="lbl">홈</span></span>
+      <span class="tab-label">홈</span>
+    </a>
+    <a class="tab" href="#" role="tab" aria-label="학습">
+      <span class="clay clay-yellow" aria-hidden="true"><span class="lbl">학습</span></span>
+      <span class="tab-label">학습</span>
+    </a>
+    <a class="tab" href="#" role="tab" aria-label="글쓰기">
+      <span class="clay clay-blue" aria-hidden="true"><span class="lbl">쓰기</span></span>
+      <span class="tab-label">글쓰기</span>
+    </a>
+    <a class="tab" href="#" role="tab" aria-current="page" aria-label="분석 — 통합 분석표 (현재 화면)">
+      <span class="clay clay-green" aria-hidden="true"><span class="lbl">분석</span></span>
+      <span class="tab-label">분석</span>
+    </a>
+    <a class="tab" href="#" role="tab" aria-label="더보기">
+      <span class="clay clay-purple" aria-hidden="true"><span class="lbl">메뉴</span></span>
+      <span class="tab-label">더보기</span>
+    </a>
+  </nav>
+
+</div>
+
+<script>
+  (function () {
+    const app = document.getElementById('app');
+    const open = document.getElementById('open-drawer');
+    const close = document.getElementById('close-drawer');
+    open && open.addEventListener('click', () => app.dataset.drawer = 'open');
+    close && close.addEventListener('click', () => app.removeAttribute('data-drawer'));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && app.dataset.drawer === 'open') app.removeAttribute('data-drawer');
+    });
+
+    document.querySelectorAll('.sb-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        if (window.matchMedia('(max-width: 767px)').matches) app.removeAttribute('data-drawer');
+      });
+    });
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('.tab').forEach(t => t.removeAttribute('aria-current'));
+        tab.setAttribute('aria-current', 'page');
+      });
+    });
+
+    document.querySelectorAll('.period-tab').forEach(t => {
+      t.addEventListener('click', () => {
+        document.querySelectorAll('.period-tab').forEach(p => p.setAttribute('aria-pressed', 'false'));
+        t.setAttribute('aria-pressed', 'true');
+      });
+    });
+
+    // Heatmap tooltip
+    const tooltip = document.getElementById('hm-tooltip');
+    const shell = document.getElementById('heatmap-shell');
+    const grid = document.getElementById('heatmap-grid');
+
+    grid.querySelectorAll('.hm-cell').forEach(cell => {
+      cell.addEventListener('mouseenter', (e) => {
+        if (cell.dataset.empty) {
+          tooltip.innerHTML = (cell.dataset.date || '학습 없음') + '<br>학습 안 함';
+        } else {
+          const d = cell.dataset.date || '';
+          const q = cell.dataset.quiz || '0';
+          const r = cell.dataset.reading || '0';
+          const w = cell.dataset.writing || '0';
+          tooltip.innerHTML = '<strong>' + d + '</strong><br>퀴즈 ' + q + ' / 독해 ' + r + ' / 글쓰기 ' + w + '편';
+        }
+        const rect = cell.getBoundingClientRect();
+        const shellRect = shell.getBoundingClientRect();
+        tooltip.style.left = (rect.left - shellRect.left + rect.width / 2) + 'px';
+        tooltip.style.top = (rect.top - shellRect.top) + 'px';
+        tooltip.classList.add('show');
+      });
+      cell.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
+
+      cell.addEventListener('click', () => {
+        if (cell.dataset.empty) return;
+        cell.dispatchEvent(new MouseEvent('mouseenter'));
+        setTimeout(() => tooltip.classList.remove('show'), 1800);
+      });
+    });
+
+    document.querySelectorAll('[data-route]').forEach(el => {
+      if (el.closest('.sb-item') || el.closest('.tab')) return;
+      el.addEventListener('click', (e) => {
+        if (el.tagName === 'A' || el.tagName === 'BUTTON') e.preventDefault();
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

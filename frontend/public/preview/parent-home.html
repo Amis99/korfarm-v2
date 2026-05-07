@@ -1,0 +1,1479 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#F4EFE6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>국어농장 v2 — 학부모 홈</title>
+<style>
+  :root {
+    --bg:           #F4EFE6;
+    --bg-deep:      #ECE3D2;
+    --surface:      #FFFAF0;
+    --surface-elev: #FFFFFF;
+    --fg:           #2A2520;
+    --muted:        #6B6359;
+    --subtle:       #9A8F82;
+    --border:       #E8DFCF;
+    --border-warm:  #D8CBB1;
+    --accent:       #F06C24;
+    --accent-deep:  #D8580E;
+    --accent-soft:  #FBE2D2;
+
+    --shadow-clay:    0 4px 12px rgba(140, 90, 40, 0.10), 0 1px 3px rgba(140, 90, 40, 0.06);
+    --shadow-clay-lg: 0 10px 28px rgba(140, 90, 40, 0.13), 0 2px 6px rgba(140, 90, 40, 0.06);
+    --shadow-press:   0 2px 6px rgba(140, 90, 40, 0.08);
+
+    --r-sm: 12px;
+    --r:    16px;
+    --r-lg: 22px;
+
+    --hdr-h: 64px;
+    --tab-h: 60px;
+    --sidebar-w: 260px;
+    --aside-w:   320px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: 'Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR',
+                 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif;
+    font-size: 15px; line-height: 1.5; color: var(--fg); background: var(--bg);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.011em; text-rendering: optimizeLegibility;
+    overscroll-behavior-y: none; overflow: hidden;
+  }
+  button, input, textarea { font: inherit; color: inherit; }
+  button { cursor: pointer; background: none; border: none; padding: 0; }
+  a { color: inherit; text-decoration: none; }
+  input, textarea { border: none; background: transparent; outline: none; -webkit-appearance: none; appearance: none; }
+  ::selection { background: var(--accent-soft); color: var(--fg); }
+
+  .app {
+    width: 100%; height: 100vh; height: 100dvh; background: var(--bg);
+    display: grid; grid-template-rows: auto 1fr auto;
+    overflow: hidden; position: relative; isolation: isolate;
+  }
+  .app::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.45 0 0 0 0 0.32 0 0 0 0.10 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
+    pointer-events: none; mix-blend-mode: multiply; opacity: 0.45; z-index: 0;
+  }
+  .app > * { position: relative; z-index: 1; }
+
+  .clay {
+    position: relative; background: linear-gradient(155deg, #FFF6E2 0%, #EFDDB7 100%);
+    border-radius: var(--r); display: grid; place-items: center;
+    isolation: isolate; overflow: hidden;
+    box-shadow:
+      inset 1.5px 2px 3px rgba(255, 250, 240, 0.85),
+      inset -2px -3px 5px rgba(160, 110, 50, 0.18),
+      0 5px 12px rgba(140, 90, 40, 0.10),
+      0 1px 3px rgba(140, 90, 40, 0.06);
+  }
+  .clay::before {
+    content: ''; position: absolute; top: 6%; left: 16%;
+    width: 50%; height: 26%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.55), transparent 80%);
+    border-radius: 50%; filter: blur(3px); pointer-events: none;
+  }
+  .clay > .lbl {
+    position: relative; z-index: 2;
+    font-size: 10.5px; font-weight: 600; color: rgba(60, 50, 40, 0.55);
+    letter-spacing: 0.01em; line-height: 1.2; text-align: center; padding: 0 4px;
+  }
+  .clay-yellow { background: linear-gradient(155deg, #FFE9C2 0%, #F4C97A 100%); }
+  .clay-blue   { background: linear-gradient(155deg, #DFEEFB 0%, #91C2E5 100%); }
+  .clay-red    { background: linear-gradient(155deg, #FBDDDD 0%, #ED9F9F 100%); }
+  .clay-green  { background: linear-gradient(155deg, #DDEFD5 0%, #94C68B 100%); }
+  .clay-orange { background: linear-gradient(155deg, #FBD8B6 0%, #ED9554 100%); }
+  .clay-purple { background: linear-gradient(155deg, #E5D9F2 0%, #B7A0DA 100%); }
+  .clay-rose   { background: linear-gradient(155deg, #F8DCE2 0%, #DC9CAB 100%); }
+  .clay-cream  { background: linear-gradient(155deg, #FFF2DC 0%, #F0DBB1 100%); }
+  .clay-yellow .lbl, .clay-orange .lbl, .clay-rose .lbl, .clay-red .lbl, .clay-cream .lbl { color: rgba(80, 50, 30, 0.6); }
+  .clay-blue .lbl   { color: rgba(40, 70, 100, 0.6); }
+  .clay-green .lbl  { color: rgba(50, 80, 50, 0.6); }
+  .clay-purple .lbl { color: rgba(70, 55, 100, 0.6); }
+
+  .top-bar {
+    display: flex; align-items: center; gap: 8px;
+    padding: calc(env(safe-area-inset-top) + 10px) 14px 10px;
+    background: linear-gradient(to bottom, rgba(244, 239, 230, 0.96) 0%, rgba(244, 239, 230, 0.86) 100%);
+    -webkit-backdrop-filter: saturate(140%) blur(14px); backdrop-filter: saturate(140%) blur(14px);
+    border-bottom: 1px solid rgba(216, 203, 177, 0.4); min-height: var(--hdr-h);
+  }
+  .hamburger {
+    display: grid; place-items: center; width: 44px; height: 44px;
+    border-radius: 12px; flex-shrink: 0;
+    transition: background 120ms ease, transform 120ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .hamburger:active { background: rgba(0,0,0,0.04); transform: scale(0.92); }
+  .hamburger span { width: 20px; height: 2px; background: var(--fg); border-radius: 2px; position: relative; display: block; }
+  .hamburger span::before, .hamburger span::after {
+    content: ''; position: absolute; left: 0; width: 20px; height: 2px;
+    background: var(--fg); border-radius: 2px;
+  }
+  .hamburger span::before { top: -7px; }
+  .hamburger span::after { top: 7px; }
+
+  .brand { display: flex; align-items: center; gap: 8px; flex-shrink: 0; padding: 0 4px; }
+  .brand .logo {
+    width: 32px; height: 32px; border-radius: 10px; flex-shrink: 0;
+    background: linear-gradient(155deg, #F4854A 0%, var(--accent-deep) 100%);
+    box-shadow: inset 1.5px 2px 3px rgba(255, 220, 180, 0.7),
+                inset -2px -3px 4px rgba(140, 50, 0, 0.30),
+                0 3px 8px rgba(240, 108, 36, 0.22);
+    display: grid; place-items: center; color: white;
+    font-size: 16px; font-weight: 800; letter-spacing: -0.04em;
+  }
+  .brand .name { font-size: 16px; font-weight: 800; letter-spacing: -0.02em; color: var(--fg); }
+  .brand .ver {
+    font-size: 10px; font-weight: 700; color: var(--accent-deep);
+    background: var(--accent-soft); padding: 2px 6px; border-radius: 999px;
+    margin-left: 2px; line-height: 1;
+  }
+  .hdr-spacer { flex: 1; }
+
+  .child-pill-wrap { position: relative; flex-shrink: 0; }
+  .child-pill {
+    display: flex; align-items: center; gap: 9px;
+    padding: 5px 10px 5px 5px; border-radius: 999px;
+    background: linear-gradient(120deg, #FFEFC8 0%, #FFE5A8 100%);
+    border: 1px solid rgba(212, 156, 60, 0.30);
+    transition: background 120ms ease, transform 120ms ease;
+    -webkit-tap-highlight-color: transparent; min-height: 44px; position: relative;
+  }
+  .child-pill:active { transform: scale(0.97); }
+  .child-pill:hover { background: linear-gradient(120deg, #FFE5A8 0%, #FFD881 100%); }
+  .child-pill[aria-expanded="true"] { background: linear-gradient(120deg, #FFD881 0%, #F4C44C 100%); }
+  .child-pill .clay { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; }
+  .child-pill .clay > .lbl { font-size: 9px; }
+  .child-pill .info { line-height: 1.15; min-width: 0; text-align: left; }
+  .child-pill .info .kicker {
+    display: block; font-size: 9.5px; font-weight: 700;
+    color: rgba(110, 74, 18, 0.7);
+    letter-spacing: 0.06em; text-transform: uppercase; line-height: 1;
+  }
+  .child-pill .info .name {
+    display: block; font-size: 13px; font-weight: 800;
+    color: #5C3D08; line-height: 1.3; margin-top: 2px; white-space: nowrap;
+  }
+  .child-pill .caret {
+    color: rgba(110, 74, 18, 0.7); font-size: 12px;
+    line-height: 1; flex-shrink: 0; transition: transform 200ms ease;
+  }
+  .child-pill[aria-expanded="true"] .caret { transform: rotate(180deg); }
+
+  .child-menu {
+    position: absolute; top: calc(100% + 8px); left: 0;
+    min-width: 240px;
+    background: var(--surface-elev);
+    border: 1px solid var(--border); border-radius: 16px;
+    box-shadow: 0 14px 32px rgba(40, 30, 20, 0.15), 0 4px 10px rgba(40, 30, 20, 0.08);
+    padding: 8px;
+    opacity: 0; transform: translateY(-6px); pointer-events: none;
+    transition: opacity 180ms ease, transform 180ms cubic-bezier(0.32, 0.72, 0.24, 1.08);
+    z-index: 70;
+  }
+  .child-menu[data-open="true"] { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .child-menu-item {
+    display: flex; align-items: center; gap: 10px;
+    width: 100%; padding: 10px 10px; border-radius: 12px;
+    text-align: left; transition: background 120ms ease;
+    -webkit-tap-highlight-color: transparent; min-height: 48px;
+  }
+  .child-menu-item:hover { background: rgba(255, 250, 240, 0.9); }
+  .child-menu-item.selected { background: var(--accent-soft); }
+  .child-menu-item .clay { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; }
+  .child-menu-item .clay > .lbl { font-size: 9px; }
+  .child-menu-item .info { flex: 1; line-height: 1.3; min-width: 0; }
+  .child-menu-item .info .name { display: block; font-size: 13.5px; font-weight: 700; color: var(--fg); }
+  .child-menu-item.selected .info .name { color: var(--accent-deep); }
+  .child-menu-item .info .meta { display: block; font-size: 11px; color: var(--muted); }
+  .child-menu-item .check {
+    color: var(--accent-deep); font-size: 14px; font-weight: 800; flex-shrink: 0; opacity: 0;
+  }
+  .child-menu-item.selected .check { opacity: 1; }
+  .child-menu-divider { height: 1px; background: var(--border); margin: 6px 4px; }
+  .child-menu-add {
+    display: flex; align-items: center; gap: 10px;
+    width: 100%; padding: 10px 10px; border-radius: 12px;
+    color: var(--accent-deep); font-weight: 700; font-size: 13px;
+    transition: background 120ms ease;
+    -webkit-tap-highlight-color: transparent; min-height: 44px;
+  }
+  .child-menu-add:hover { background: var(--accent-soft); }
+  .child-menu-add .plus {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--accent-soft); color: var(--accent-deep);
+    display: grid; place-items: center;
+    font-size: 18px; font-weight: 800; flex-shrink: 0; line-height: 1;
+  }
+
+  .hdr-user {
+    display: flex; align-items: center; gap: 10px;
+    padding: 5px 12px 5px 5px; border-radius: 999px;
+    background: rgba(255, 250, 240, 0.5);
+    border: 1px solid var(--border);
+    transition: background 120ms ease;
+    -webkit-tap-highlight-color: transparent; min-height: 44px;
+  }
+  .hdr-user:active { background: var(--surface-elev); }
+  .hdr-user .clay { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; }
+  .hdr-user .clay > .lbl { font-size: 9px; }
+  .hdr-user .info { line-height: 1.15; min-width: 0; text-align: left; }
+  .hdr-user .info .name { font-size: 13px; font-weight: 700; color: var(--fg); white-space: nowrap; }
+  .hdr-user .meta {
+    font-size: 10.5px; color: var(--muted); margin-top: 1px;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .hdr-user .role-tag {
+    font-size: 10px; font-weight: 700; color: rgba(70, 55, 100, 0.85);
+    background: rgba(183, 160, 218, 0.25);
+    border: 1px solid rgba(140, 110, 200, 0.25);
+    padding: 1px 6px; border-radius: 999px; line-height: 1.4;
+  }
+
+  .hdr-actions { display: flex; gap: 4px; flex-shrink: 0; }
+  .icon-btn {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: grid; place-items: center; position: relative;
+    transition: transform 120ms ease, background 120ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .icon-btn:active { transform: scale(0.92); background: rgba(0,0,0,0.04); }
+  .icon-btn .clay { width: 32px; height: 32px; border-radius: 11px; }
+  .icon-btn .clay > .lbl { font-size: 9px; }
+  .icon-count {
+    position: absolute; top: 2px; right: 2px;
+    background: var(--accent); color: white;
+    font-size: 10px; font-weight: 700; line-height: 1;
+    padding: 3px 5px; border-radius: 8px; min-width: 18px;
+    text-align: center; border: 1.5px solid var(--bg);
+    box-shadow: 0 2px 4px rgba(240, 108, 36, 0.30);
+  }
+  .icon-dot {
+    position: absolute; top: 4px; right: 4px;
+    width: 16px; height: 16px;
+    background: var(--accent); color: white;
+    font-size: 9px; font-weight: 700; border-radius: 50%;
+    display: grid; place-items: center;
+    border: 1.5px solid var(--bg); line-height: 1;
+  }
+
+  .body { display: grid; grid-template-columns: 1fr; overflow: hidden; position: relative; }
+
+  .sidebar {
+    background: rgba(255, 250, 240, 0.5);
+    border-right: 1px solid var(--border);
+    overflow-y: auto; -webkit-overflow-scrolling: touch;
+    padding: 16px 12px calc(env(safe-area-inset-bottom) + 16px);
+    scrollbar-width: thin; scrollbar-color: var(--border-warm) transparent;
+  }
+  .sidebar::-webkit-scrollbar { width: 6px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border-warm); border-radius: 999px; }
+
+  .sb-context {
+    margin: 0 4px 14px; padding: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border); border-radius: 16px;
+    box-shadow: var(--shadow-press);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .sb-context .clay { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; }
+  .sb-context .clay > .lbl { font-size: 10px; }
+  .sb-context .text { flex: 1; min-width: 0; line-height: 1.3; }
+  .sb-context .kicker {
+    display: block; font-size: 10px; font-weight: 700;
+    color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; line-height: 1;
+  }
+  .sb-context .name {
+    display: block; font-size: 14px; font-weight: 800; color: var(--fg);
+    margin-top: 4px; line-height: 1.2;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .sb-context .name .level {
+    font-size: 10px; font-weight: 700; color: #6E4A12;
+    background: linear-gradient(120deg, #FFF1CF, #FFE1A4);
+    padding: 1px 6px; border-radius: 999px; line-height: 1.4;
+    border: 1px solid rgba(212, 156, 60, 0.25);
+    margin-left: 4px; vertical-align: 1px;
+  }
+  .sb-context .meta { display: block; font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.3; }
+
+  .sb-group { margin-bottom: 12px; }
+  .sb-group:last-child { margin-bottom: 0; }
+  .sb-title {
+    font-size: 12px; font-weight: 700; color: var(--muted);
+    line-height: 1; padding: 4px 12px 8px;
+    display: flex; align-items: center; gap: 8px; letter-spacing: 0.01em;
+  }
+  .sb-title .clay { width: 18px; height: 18px; border-radius: 6px; flex-shrink: 0; }
+  .sb-title .clay > .lbl { font-size: 7px; }
+
+  .sb-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; border-radius: 12px;
+    color: var(--fg); font-size: 13.5px; font-weight: 500;
+    min-height: 44px;
+    transition: background 120ms ease, transform 120ms ease;
+    -webkit-tap-highlight-color: transparent; position: relative;
+  }
+  .sb-item:active { transform: scale(0.985); }
+  .sb-item:hover, .sb-item:focus-visible { background: rgba(255, 250, 240, 0.8); }
+  .sb-item.active { background: var(--accent-soft); color: var(--accent-deep); font-weight: 700; }
+  .sb-item.active::before {
+    content: ''; position: absolute; left: 0; top: 12px; bottom: 12px; width: 3px;
+    background: var(--accent); border-radius: 0 3px 3px 0;
+  }
+  .sb-item .icon { width: 22px; flex-shrink: 0; text-align: center; font-size: 15px; line-height: 1; }
+  .sb-item .badge {
+    margin-left: auto; font-size: 10px; font-weight: 700;
+    background: var(--accent); color: white;
+    padding: 2px 7px; border-radius: 999px; line-height: 1.4;
+  }
+  .sb-item .badge.neutral { background: rgba(216, 203, 177, 0.5); color: var(--muted); }
+  .sb-item .badge.live { background: #E04A4A; display: inline-flex; align-items: center; gap: 3px; }
+  .sb-item .badge.live::before {
+    content: ''; width: 5px; height: 5px; background: white; border-radius: 50%;
+    animation: livePulse 1.6s infinite;
+  }
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .center {
+    display: flex; flex-direction: column;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain; position: relative;
+  }
+
+  .welcome {
+    margin: 12px 12px 6px; padding: 16px;
+    background: linear-gradient(165deg, #FFFAF0 0%, #FFF1DA 60%, #FFE7C0 100%);
+    border: 1px solid var(--border-warm);
+    border-radius: 22px;
+    box-shadow: var(--shadow-clay);
+    display: grid; grid-template-columns: 1fr; gap: 14px;
+    position: relative; overflow: hidden;
+  }
+  .welcome::before {
+    content: ''; position: absolute; top: -30px; right: -30px;
+    width: 130px; height: 130px;
+    background: radial-gradient(circle, rgba(255, 220, 130, 0.45), transparent 70%);
+    border-radius: 50%; pointer-events: none;
+  }
+  .welcome-text { position: relative; z-index: 1; line-height: 1.3; }
+  .welcome-eyebrow {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 10.5px; font-weight: 800;
+    color: rgba(60, 100, 60, 0.85);
+    background: rgba(148, 198, 139, 0.22);
+    border: 1px solid rgba(120, 170, 110, 0.30);
+    padding: 3px 8px 3px 7px; border-radius: 999px;
+    letter-spacing: 0.04em; line-height: 1.3; text-transform: uppercase;
+  }
+  .welcome-eyebrow .dot { width: 5px; height: 5px; border-radius: 50%; background: #6FA868; }
+  .welcome-title {
+    margin: 8px 0 4px;
+    font-size: 18px; font-weight: 800; color: var(--fg);
+    letter-spacing: -0.02em; line-height: 1.3; word-break: keep-all;
+  }
+  .welcome-title strong { color: var(--accent-deep); font-weight: 800; }
+  .welcome-meta { font-size: 12.5px; color: var(--muted); line-height: 1.5; word-break: keep-all; }
+  .welcome-meta .date { color: var(--fg); font-weight: 700; }
+
+  .child-card {
+    position: relative; z-index: 1;
+    background: var(--surface-elev);
+    border: 1px solid var(--border); border-radius: 18px;
+    padding: 14px;
+    display: flex; flex-direction: column; gap: 12px;
+    box-shadow: var(--shadow-press);
+  }
+  .child-card .row { display: flex; align-items: center; gap: 12px; }
+  .child-card .clay { width: 56px; height: 56px; border-radius: 18px; flex-shrink: 0; }
+  .child-card .clay > .lbl { font-size: 10px; }
+  .child-card .head { flex: 1; min-width: 0; line-height: 1.25; }
+  .child-card .head .name {
+    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    font-size: 16px; font-weight: 800; color: var(--fg); letter-spacing: -0.02em;
+  }
+  .child-card .head .level {
+    font-size: 10.5px; font-weight: 700; color: #6E4A12;
+    background: linear-gradient(120deg, #FFF1CF, #FFE1A4);
+    padding: 2px 7px; border-radius: 999px; line-height: 1.4;
+    border: 1px solid rgba(212, 156, 60, 0.25);
+  }
+  .child-card .stats {
+    display: flex; align-items: center; gap: 6px 12px; flex-wrap: wrap;
+    margin-top: 4px; font-size: 12px; color: var(--muted);
+  }
+  .child-card .stats strong { color: var(--fg); font-weight: 700; }
+  .child-card .stat-streak {
+    display: inline-flex; align-items: center; gap: 4px;
+    color: var(--accent-deep); font-weight: 700;
+  }
+  .child-card .progress { display: flex; flex-direction: column; gap: 6px; }
+  .child-card .progress-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    font-size: 12px; color: var(--muted);
+  }
+  .child-card .progress-head strong {
+    font-size: 14px; font-weight: 800; color: var(--accent-deep);
+    font-variant-numeric: tabular-nums;
+  }
+  .child-card .progress-bar {
+    height: 8px; border-radius: 999px;
+    background: var(--bg-deep); overflow: hidden;
+    box-shadow: inset 0 1px 2px rgba(140, 90, 40, 0.12);
+  }
+  .child-card .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #94C68B 0%, #F4C97A 50%, var(--accent) 100%);
+    border-radius: 999px;
+    box-shadow: 0 0 8px rgba(240, 108, 36, 0.30);
+    transition: width 600ms cubic-bezier(0.32, 0.72, 0.24, 1.08);
+  }
+  .child-card .cta-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding-top: 10px; border-top: 1px dashed var(--border-warm);
+  }
+  .child-card .cta-link {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 13px; font-weight: 800; color: var(--accent-deep);
+    padding: 12px 6px; margin: -8px -6px;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 44px; border-radius: 999px;
+  }
+  .child-card .cta-link:hover { background: var(--accent-soft); }
+  .child-card .cta-link::after { content: '→'; font-weight: 700; }
+  .child-card .cta-link:active { color: var(--fg); }
+  .child-card .cta-meta { font-size: 11px; color: var(--subtle); }
+  .child-card .cta-meta strong { color: var(--fg); font-weight: 700; }
+
+  .section-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 10px; padding: 18px 16px 8px;
+  }
+  .section-head .head-text { line-height: 1.3; min-width: 0; }
+  .section-head h2 { margin: 0; font-size: 16px; font-weight: 800; letter-spacing: -0.02em; }
+  .section-head .sub {
+    display: block; font-size: 12px; color: var(--muted);
+    margin-top: 4px; font-weight: 500; line-height: 1.4;
+  }
+  .section-head .more {
+    font-size: 12.5px; color: var(--accent-deep); font-weight: 700;
+    padding: 12px 14px; margin: -8px -14px;
+    border-radius: 999px;
+    -webkit-tap-highlight-color: transparent;
+    flex-shrink: 0; min-height: 44px;
+    display: inline-flex; align-items: center;
+  }
+  .section-head .more::after { content: ' →'; }
+  .section-head .more:active { background: var(--accent-soft); }
+
+  .chat-list {
+    margin: 0 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px; overflow: hidden;
+    box-shadow: var(--shadow-press);
+  }
+  .chat-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px; width: 100%; text-align: left;
+    transition: background 120ms ease, transform 120ms ease;
+    -webkit-tap-highlight-color: transparent;
+    border-bottom: 1px solid var(--border);
+    position: relative; min-height: 64px;
+  }
+  .chat-row:last-child { border-bottom: none; }
+  .chat-row:active { background: rgba(0,0,0,0.025); transform: scale(0.998); }
+  .chat-row.unread { background: rgba(251, 226, 210, 0.20); }
+  .chat-row .avatar { width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; position: relative; }
+  .chat-row .avatar > .lbl { font-size: 10px; }
+  .chat-row .avatar .pin {
+    position: absolute; right: -2px; bottom: -2px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--surface);
+    border: 1.5px solid var(--bg);
+    display: grid; place-items: center;
+    font-size: 10px; line-height: 1;
+  }
+  .chat-row .body-text { flex: 1; min-width: 0; line-height: 1.35; }
+  .chat-row .top-row { display: flex; align-items: baseline; gap: 6px; min-width: 0; }
+  .chat-row .name {
+    font-size: 14px; font-weight: 800; color: var(--fg); letter-spacing: -0.01em;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
+  }
+  .chat-row .role-tag {
+    font-size: 9.5px; font-weight: 800;
+    padding: 2px 6px; border-radius: 999px;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    line-height: 1.3; flex-shrink: 0; white-space: nowrap;
+  }
+  .chat-row .role-tag.teacher { color: #2F5184; background: rgba(150, 195, 230, 0.30); border: 1px solid rgba(95, 145, 200, 0.35); }
+  .chat-row .role-tag.parents { color: #944D5F; background: rgba(220, 156, 171, 0.25); border: 1px solid rgba(190, 105, 130, 0.30); }
+  .chat-row .role-tag.system  { color: #7A5710; background: rgba(244, 201, 122, 0.30); border: 1px solid rgba(200, 145, 50, 0.30); }
+  .chat-row .ts {
+    margin-left: auto; flex-shrink: 0;
+    font-size: 11px; color: var(--subtle);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .chat-row.unread .ts { color: var(--accent-deep); font-weight: 700; }
+  .chat-row .snippet {
+    font-size: 13px; color: var(--muted);
+    margin-top: 3px;
+    overflow: hidden; text-overflow: ellipsis;
+    display: -webkit-box; -webkit-line-clamp: 1; line-clamp: 1; -webkit-box-orient: vertical;
+    word-break: break-all;
+  }
+  .chat-row.unread .snippet { color: var(--fg); font-weight: 600; }
+  .chat-row .author { color: var(--fg); font-weight: 700; }
+  .chat-row .unread-badge {
+    margin-left: 8px; flex-shrink: 0;
+    background: var(--accent); color: white;
+    font-size: 11px; font-weight: 800;
+    min-width: 20px; height: 20px; padding: 0 6px;
+    border-radius: 999px;
+    display: inline-flex; align-items: center; justify-content: center;
+    line-height: 1;
+    box-shadow: 0 2px 4px rgba(240, 108, 36, 0.30);
+    font-variant-numeric: tabular-nums;
+  }
+  .chat-row .right-stack {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
+    flex-shrink: 0; margin-left: auto;
+  }
+  .chat-row .right-stack .ts { margin-left: 0; }
+
+  .timeline { margin: 0 12px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .timeline-day { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+  .timeline-day-label {
+    font-size: 12px; font-weight: 800; color: var(--muted);
+    letter-spacing: 0.02em; line-height: 1;
+  }
+  .timeline-day-rule {
+    flex: 1; height: 1px;
+    background: linear-gradient(to right, var(--border-warm), transparent);
+  }
+  .timeline-items { display: flex; flex-direction: column; gap: 8px; }
+  .timeline-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border); border-radius: 16px;
+    width: 100%; text-align: left;
+    transition: background 120ms ease, transform 120ms ease;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: var(--shadow-press);
+    min-height: 60px;
+  }
+  .timeline-row:active { background: rgba(0,0,0,0.02); transform: scale(0.99); }
+  .timeline-row .clay { width: 36px; height: 36px; border-radius: 11px; flex-shrink: 0; }
+  .timeline-row .clay > .lbl { font-size: 9px; }
+  .timeline-row .body-text { flex: 1; min-width: 0; line-height: 1.35; }
+  .timeline-row .title {
+    display: block; font-size: 13.5px; font-weight: 700;
+    color: var(--fg); letter-spacing: -0.01em; line-height: 1.3;
+  }
+  .timeline-row .title strong { color: var(--accent-deep); font-weight: 800; }
+  .timeline-row .meta {
+    display: block; font-size: 11.5px; color: var(--muted);
+    margin-top: 3px; line-height: 1.3;
+  }
+  .timeline-row .ts {
+    flex-shrink: 0; font-size: 11px; color: var(--subtle);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+    align-self: center;
+  }
+  .timeline-row.highlight {
+    background: linear-gradient(120deg, rgba(148, 198, 139, 0.20), rgba(255, 250, 240, 0.85));
+    border-color: rgba(120, 170, 110, 0.35);
+  }
+  .timeline-row.highlight .title strong { color: #2F6B30; }
+
+  .right-aside {
+    background: rgba(255, 250, 240, 0.4);
+    border-left: 1px solid var(--border);
+    overflow-y: auto; -webkit-overflow-scrolling: touch;
+    padding: 16px 14px calc(env(safe-area-inset-bottom) + 16px);
+    display: none;
+    flex-direction: column; gap: 14px;
+    scrollbar-width: thin; scrollbar-color: var(--border-warm) transparent;
+  }
+  .right-aside::-webkit-scrollbar { width: 6px; }
+  .right-aside::-webkit-scrollbar-thumb { background: var(--border-warm); border-radius: 999px; }
+
+  .widget {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg); padding: 14px;
+    box-shadow: var(--shadow-clay);
+  }
+  .widget-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
+  .widget-title { margin: 0; font-size: 14.5px; font-weight: 800; letter-spacing: -0.015em; }
+  .widget-cta {
+    font-size: 12px; color: var(--accent-deep); font-weight: 700;
+    padding: 8px 12px; margin: -8px -12px;
+    border-radius: 999px;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 32px;
+    display: inline-flex; align-items: center;
+  }
+  .widget-cta:active { background: var(--accent-soft); }
+
+  .score-block {
+    display: flex; align-items: center; gap: 12px;
+    padding: 4px 4px 12px;
+    border-bottom: 1px dashed var(--border-warm);
+    margin-bottom: 12px;
+  }
+  .score-block .clay { width: 48px; height: 48px; border-radius: 14px; flex-shrink: 0; }
+  .score-block .clay > .lbl { font-size: 9px; }
+  .score-block .text { flex: 1; min-width: 0; line-height: 1.3; }
+  .score-block .text .label {
+    font-size: 11px; font-weight: 700; color: var(--muted);
+    letter-spacing: 0.04em; text-transform: uppercase; line-height: 1;
+  }
+  .score-block .text .val {
+    display: block; font-size: 22px; font-weight: 800;
+    color: var(--fg); margin-top: 4px; line-height: 1;
+    font-variant-numeric: tabular-nums; letter-spacing: -0.02em;
+  }
+  .score-block .delta {
+    font-size: 11.5px; font-weight: 700;
+    color: #2F6B30; background: rgba(154, 207, 145, 0.22);
+    padding: 4px 8px; border-radius: 999px;
+    border: 1px solid rgba(120, 170, 110, 0.25);
+    flex-shrink: 0; align-self: center; line-height: 1.3;
+  }
+  .rank-list { display: flex; flex-direction: column; gap: 8px; }
+  .rank-row { display: flex; align-items: center; gap: 10px; }
+  .rank-row.me {
+    background: linear-gradient(120deg, var(--accent-soft), rgba(251, 226, 210, 0.3));
+    margin: 0 -10px; padding: 8px 10px; border-radius: 12px;
+    border: 1.5px solid rgba(240, 108, 36, 0.30);
+  }
+  .rank-pos { width: 22px; text-align: center; font-size: 13px; font-weight: 800; flex-shrink: 0; line-height: 1; }
+  .rank-pos.gold { font-size: 18px; }
+  .rank-avatar { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; }
+  .rank-avatar > .lbl { font-size: 9px; }
+  .rank-name {
+    flex: 1; font-size: 13.5px; font-weight: 600; color: var(--fg);
+    min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .rank-row.me .rank-name { color: var(--accent-deep); font-weight: 800; }
+  .rank-row.me .rank-name::after { content: ' (민지)'; font-size: 11px; opacity: 0.85; }
+  .rank-score {
+    font-size: 12.5px; font-weight: 700; color: var(--muted);
+    font-variant-numeric: tabular-nums; flex-shrink: 0;
+  }
+  .rank-row.me .rank-score { color: var(--accent-deep); }
+
+  .pending-list { display: flex; flex-direction: column; gap: 8px; }
+  .pending-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px;
+    background: rgba(251, 226, 210, 0.30);
+    border: 1px solid rgba(240, 108, 36, 0.25);
+    border-radius: 12px;
+    transition: transform 120ms ease, background 120ms ease;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer; min-height: 56px;
+  }
+  .pending-row:active { transform: scale(0.98); background: rgba(251, 226, 210, 0.50); }
+  .pending-row .clay { width: 32px; height: 32px; border-radius: 10px; flex-shrink: 0; }
+  .pending-row .clay > .lbl { font-size: 9px; }
+  .pending-row .text { flex: 1; min-width: 0; line-height: 1.3; }
+  .pending-row .title { display: block; font-size: 13px; font-weight: 700; color: var(--fg); line-height: 1.25; }
+  .pending-row .meta { display: block; font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .pending-row .due {
+    font-size: 10.5px; font-weight: 800;
+    color: var(--accent-deep); background: white;
+    padding: 3px 7px; border-radius: 6px; line-height: 1; flex-shrink: 0;
+    border: 1px solid rgba(240, 108, 36, 0.25);
+  }
+  .pending-foot {
+    margin: 12px 0 0; padding-top: 12px;
+    border-top: 1px dashed var(--border-warm);
+    font-size: 11.5px; color: var(--muted); line-height: 1.4;
+  }
+  .pending-foot strong { color: var(--accent-deep); font-weight: 700; }
+
+  .notice-list { display: flex; flex-direction: column; gap: 4px; }
+  .notice-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 4px;
+    border-bottom: 1px solid var(--border);
+    width: 100%; text-align: left;
+    transition: background 120ms ease;
+    -webkit-tap-highlight-color: transparent;
+    line-height: 1.35; min-height: 48px;
+  }
+  .notice-row:last-child { border-bottom: none; }
+  .notice-row:active { background: rgba(0,0,0,0.02); }
+  .notice-row .pin {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(155deg, #FFE9C2 0%, #F4C97A 100%);
+    display: grid; place-items: center;
+    font-size: 11px; flex-shrink: 0;
+    box-shadow: inset 1px 1.5px 2px rgba(255,250,240,0.85),
+                inset -1px -1.5px 2px rgba(160,110,50,0.18);
+  }
+  .notice-row .text { flex: 1; min-width: 0; }
+  .notice-row .title { display: block; font-size: 13px; font-weight: 700; color: var(--fg); line-height: 1.3; }
+  .notice-row .meta {
+    display: block; font-size: 11px; color: var(--subtle);
+    margin-top: 3px; font-variant-numeric: tabular-nums;
+  }
+  .notice-row .new-tag {
+    font-size: 9.5px; font-weight: 800;
+    color: white; background: var(--accent);
+    padding: 2px 5px; border-radius: 999px;
+    letter-spacing: 0.04em; line-height: 1.3;
+    flex-shrink: 0; align-self: flex-start; margin-top: 2px;
+  }
+
+  .tab-bar {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    background: rgba(248, 244, 235, 0.85);
+    -webkit-backdrop-filter: saturate(140%) blur(20px);
+    backdrop-filter: saturate(140%) blur(20px);
+    border-top: 1px solid var(--border);
+    height: calc(var(--tab-h) + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .tab {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 3px; padding: 6px 4px 4px; min-height: 44px;
+    color: var(--subtle);
+    transition: transform 120ms ease, color 120ms ease;
+    -webkit-tap-highlight-color: transparent; position: relative;
+  }
+  .tab:active { transform: scale(0.94); }
+  .tab .tab-icon {
+    position: relative; width: 28px; height: 28px;
+    display: inline-block;
+    transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .tab .tab-icon .clay { width: 28px; height: 28px; border-radius: 9px; }
+  .tab .tab-icon .clay > .lbl { font-size: 8px; }
+  .tab .tab-dot {
+    position: absolute; top: -4px; right: -5px;
+    min-width: 16px; height: 16px;
+    background: var(--accent); color: white;
+    border-radius: 999px;
+    display: grid; place-items: center;
+    font-size: 9px; line-height: 1; font-weight: 800;
+    border: 1.5px solid rgba(248, 244, 235, 0.95);
+    padding: 0 4px;
+    box-shadow: 0 2px 4px rgba(240, 108, 36, 0.30);
+    z-index: 2;
+  }
+  .tab-label { font-size: 10.5px; font-weight: 600; line-height: 1; letter-spacing: -0.01em; }
+  .tab[aria-current="page"] { color: var(--accent-deep); }
+  .tab[aria-current="page"] .tab-icon { transform: translateY(-2px); }
+  .tab[aria-current="page"] .tab-icon .clay {
+    box-shadow:
+      inset 1.5px 2px 3px rgba(255, 245, 230, 0.95),
+      inset -2px -3px 5px rgba(180, 90, 30, 0.22),
+      0 6px 12px rgba(240, 108, 36, 0.30),
+      0 1px 3px rgba(140, 60, 0, 0.15);
+  }
+  .tab[aria-current="page"]::before {
+    content: ''; position: absolute;
+    top: 4px; left: 50%; transform: translateX(-50%);
+    width: 28px; height: 4px;
+    background: var(--accent); border-radius: 0 0 999px 999px;
+    box-shadow: 0 1px 4px rgba(240, 108, 36, 0.40);
+  }
+  .tab[aria-current="page"] .tab-label { font-weight: 700; }
+
+  .scrim {
+    position: absolute; inset: 0;
+    background: rgba(40, 30, 20, 0.45);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    opacity: 0; pointer-events: none;
+    transition: opacity 220ms ease;
+    z-index: 50;
+  }
+  .app[data-drawer="open"] .scrim { opacity: 1; pointer-events: auto; }
+
+  .toast {
+    position: fixed;
+    left: 50%; bottom: calc(var(--tab-h) + env(safe-area-inset-bottom) + 14px);
+    transform: translateX(-50%) translateY(20px);
+    max-width: calc(100vw - 32px);
+    padding: 12px 16px 12px 14px;
+    background: var(--fg); color: var(--bg);
+    border-radius: 999px;
+    box-shadow: 0 10px 28px rgba(40, 30, 20, 0.30), 0 2px 6px rgba(40, 30, 20, 0.18);
+    font-size: 13.5px; font-weight: 600;
+    display: flex; align-items: center; gap: 10px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 200ms ease, transform 220ms cubic-bezier(0.32, 0.72, 0.24, 1.08);
+    z-index: 100; white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast .ico {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--accent); color: white;
+    display: grid; place-items: center;
+    font-size: 11px; flex-shrink: 0;
+  }
+
+  @media (max-width: 767px) {
+    .body { grid-template-columns: 1fr; grid-template-rows: 1fr; }
+    .sidebar {
+      position: absolute; top: 0; bottom: 0; left: 0;
+      width: min(280px, 86vw); transform: translateX(-100%);
+      transition: transform 260ms cubic-bezier(0.32, 0.72, 0.24, 1.08);
+      z-index: 60; background: var(--bg);
+      box-shadow: 8px 0 24px rgba(40, 30, 20, 0);
+      padding-top: calc(env(safe-area-inset-top) + 16px);
+      will-change: transform;
+    }
+    .app[data-drawer="open"] .sidebar {
+      transform: translateX(0);
+      box-shadow: 8px 0 32px rgba(40, 30, 20, 0.20);
+    }
+    .right-aside { display: none !important; }
+    .center { grid-column: 1; padding-bottom: 16px; }
+    .tab-bar { display: grid; }
+    .hdr-user { display: none; }
+    .brand .ver { display: none; }
+    .brand .name { display: none; }
+    .brand { padding: 0; }
+    .top-bar { gap: 6px; padding: calc(env(safe-area-inset-top) + 10px) 10px 10px; }
+    .child-pill { padding: 4px 8px 4px 4px; }
+    .child-pill .info .kicker { font-size: 8.5px; }
+    .child-pill .info .name { font-size: 12.5px; }
+    .child-menu { left: auto; right: 0; }
+  }
+
+  @media (min-width: 768px) {
+    .app { grid-template-rows: auto 1fr; }
+    .body { grid-template-columns: var(--sidebar-w) 1fr; grid-template-rows: 1fr; }
+    .sidebar { display: block; }
+    .hamburger { display: none; }
+    .center { padding-bottom: 0; }
+    .tab-bar { display: none; }
+    .scrim { display: none; }
+    .toast { bottom: calc(env(safe-area-inset-bottom) + 22px); }
+    .top-bar { padding: 12px 18px; min-height: 68px; border-bottom: 1px solid var(--border); }
+    .brand .name { font-size: 17px; }
+    .hdr-user .info { display: block; }
+
+    .welcome {
+      margin: 18px 18px 6px;
+      padding: 22px 24px;
+      grid-template-columns: 1fr 360px;
+      gap: 24px;
+      align-items: center;
+    }
+    .welcome-title { font-size: 22px; }
+    .welcome-meta { font-size: 13px; }
+    .child-card { padding: 16px; }
+    .child-card .head .name { font-size: 17px; }
+    .child-card .clay { width: 64px; height: 64px; border-radius: 20px; }
+
+    .section-head { padding: 24px 18px 8px; }
+    .section-head h2 { font-size: 18px; }
+    .chat-list, .timeline { margin: 0 18px; }
+    .chat-row { padding: 16px 18px; }
+    .chat-row .avatar { width: 48px; height: 48px; }
+    .chat-row .name { font-size: 15px; }
+    .chat-row .snippet { font-size: 13.5px; }
+    .timeline-row { padding: 14px 18px; }
+    .timeline-row .clay { width: 40px; height: 40px; border-radius: 12px; }
+    .timeline-row .title { font-size: 14px; }
+  }
+
+  @media (min-width: 1200px) {
+    .app {
+      max-width: 1600px; margin: 0 auto;
+      box-shadow: 0 0 60px rgba(40, 30, 20, 0.05);
+    }
+    .body { grid-template-columns: var(--sidebar-w) 1fr var(--aside-w); }
+    .right-aside { display: flex; }
+    .top-bar { padding: 14px 22px; }
+    body { background: var(--bg-deep); }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='nb'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.45 0 0 0 0 0.32 0 0 0 0.10 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23nb)'/%3E%3C/svg%3E");
+      background-size: 240px;
+      pointer-events: none; mix-blend-mode: multiply; opacity: 0.4; z-index: 0;
+    }
+  }
+
+  @media (max-width: 359px) {
+    .child-pill .info { display: none; }
+    .child-pill { padding: 4px; gap: 4px; }
+    .welcome-title { font-size: 16px; }
+    .child-card .head .name { font-size: 15px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app" id="app" data-od-id="dashboard-parent">
+
+  <header class="top-bar" data-od-id="top-bar">
+    <button class="hamburger" id="open-drawer" aria-label="메뉴 열기" aria-controls="sidebar">
+      <span></span>
+    </button>
+    <div class="brand">
+      <div class="logo" aria-hidden="true">국</div>
+      <span class="name">국어농장</span>
+      <span class="ver">v2</span>
+    </div>
+    <div class="hdr-spacer"></div>
+
+    <div class="child-pill-wrap">
+      <button class="child-pill" id="child-pill" aria-haspopup="listbox" aria-expanded="false" aria-label="자녀 선택 — 현재 민지">
+        <span class="clay clay-orange" aria-hidden="true"><span class="lbl">민지</span></span>
+        <span class="info">
+          <span class="kicker">자녀 선택</span>
+          <span class="name">민지</span>
+        </span>
+        <span class="caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="child-menu" id="child-menu" role="listbox" data-open="false">
+        <button class="child-menu-item selected" role="option" aria-selected="true" data-name="민지">
+          <span class="clay clay-orange" aria-hidden="true"><span class="lbl">민지</span></span>
+          <span class="info">
+            <span class="name">민지</span>
+            <span class="meta">5학년 · 러셀1</span>
+          </span>
+          <span class="check" aria-hidden="true">✓</span>
+        </button>
+        <button class="child-menu-item" role="option" aria-selected="false" data-name="민준">
+          <span class="clay clay-blue" aria-hidden="true"><span class="lbl">민준</span></span>
+          <span class="info">
+            <span class="name">민준</span>
+            <span class="meta">3학년 · 새싹2</span>
+          </span>
+          <span class="check" aria-hidden="true">✓</span>
+        </button>
+        <div class="child-menu-divider" aria-hidden="true"></div>
+        <button class="child-menu-add">
+          <span class="plus" aria-hidden="true">+</span>
+          <span>다른 자녀 추가</span>
+        </button>
+      </div>
+    </div>
+
+    <button class="hdr-user" aria-label="민지 학부모님 프로필">
+      <span class="clay clay-purple" aria-hidden="true"><span class="lbl">학부모</span></span>
+      <span class="info">
+        <span class="name">이수경 님</span>
+        <span class="meta"><span class="role-tag">학부모</span> · 민지 어머니</span>
+      </span>
+    </button>
+
+    <div class="hdr-actions">
+      <button class="icon-btn" aria-label="내 지갑 — 4개 자몽">
+        <span class="clay clay-orange" aria-hidden="true"><span class="lbl">자몽</span></span>
+        <span class="icon-count">4</span>
+      </button>
+      <button class="icon-btn" aria-label="알림 5건">
+        <span class="clay clay-rose" aria-hidden="true"><span class="lbl">알림</span></span>
+        <span class="icon-dot">5</span>
+      </button>
+      <button class="icon-btn" aria-label="설정">
+        <span class="clay clay-green" aria-hidden="true"><span class="lbl">설정</span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="body" data-od-id="body">
+
+    <button class="scrim" id="close-drawer" aria-label="메뉴 닫기" tabindex="-1"></button>
+
+    <aside class="sidebar" id="sidebar" data-od-id="sidebar" aria-label="주요 메뉴">
+
+      <div class="sb-context" data-od-id="sb-context">
+        <span class="clay clay-orange" aria-hidden="true"><span class="lbl">민지</span></span>
+        <span class="text">
+          <span class="kicker">현재 자녀</span>
+          <span class="name">민지 <span class="level">러셀1</span></span>
+          <span class="meta">출석 7일 연속 · 시즌 2,340점</span>
+        </span>
+      </div>
+
+      <div class="sb-group">
+        <div class="sb-title">
+          <span class="clay clay-orange" aria-hidden="true"><span class="lbl">자녀</span></span>
+          <span>👀 자녀 학습</span>
+        </div>
+        <a class="sb-item active" href="#" data-route="overview"><span class="icon">🏠</span><span>자녀 학습 현황</span></a>
+        <a class="sb-item" href="#" data-route="plan"><span class="icon">📅</span><span>학습 계획표</span><span class="badge">3</span></a>
+        <a class="sb-item" href="#" data-route="report"><span class="icon">📋</span><span>통합 분석표</span></a>
+        <a class="sb-item" href="#" data-route="writing"><span class="icon">✏</span><span>글쓰기 검토</span><span class="badge neutral">2</span></a>
+      </div>
+
+      <div class="sb-group">
+        <div class="sb-title">
+          <span class="clay clay-blue" aria-hidden="true"><span class="lbl">소통</span></span>
+          <span>💬 소통</span>
+        </div>
+        <a class="sb-item" href="#" data-route="board"><span class="icon">📌</span><span>커뮤니티 게시판</span></a>
+        <a class="sb-item" href="#" data-route="chat"><span class="icon">💬</span><span>커뮤니티 채팅</span><span class="badge">4</span></a>
+        <a class="sb-item" href="#" data-route="notice"><span class="icon">📢</span><span>공지사항</span><span class="badge live">1</span></a>
+      </div>
+
+      <div class="sb-group">
+        <div class="sb-title">
+          <span class="clay clay-yellow" aria-hidden="true"><span class="lbl">쇼핑</span></span>
+          <span>🎁 쇼핑몰</span>
+        </div>
+        <a class="sb-item" href="#" data-route="shop"><span class="icon">📦</span><span>교재 · 교구 구매</span></a>
+      </div>
+
+      <div class="sb-group">
+        <div class="sb-title">
+          <span class="clay clay-cream" aria-hidden="true"><span class="lbl">설정</span></span>
+          <span>⚙ 설정</span>
+        </div>
+        <a class="sb-item" href="#" data-route="link"><span class="icon">👨‍👩‍👧</span><span>자녀 연결 관리</span></a>
+        <a class="sb-item" href="#" data-route="billing"><span class="icon">💳</span><span>결제·구독</span></a>
+        <a class="sb-item" href="#" data-route="profile"><span class="icon">👤</span><span>내 정보</span></a>
+      </div>
+
+    </aside>
+
+    <main class="center" id="center" data-od-id="center">
+
+      <section class="welcome" data-od-id="welcome" aria-label="환영 메시지 및 자녀 요약">
+
+        <div class="welcome-text">
+          <span class="welcome-eyebrow"><span class="dot" aria-hidden="true"></span>오늘의 학부모실</span>
+          <h1 class="welcome-title"><strong>민지 학부모님</strong>, 어서 오세요!</h1>
+          <p class="welcome-meta"><span class="date">5월 7일 (수)</span> · 강사 메시지 <strong>2건</strong>, 학원 공지 <strong>1건</strong>이 와 있어요.</p>
+        </div>
+
+        <div class="child-card">
+          <div class="row">
+            <span class="clay clay-orange" aria-hidden="true"><span class="lbl">민지<br>아바타</span></span>
+            <span class="head">
+              <span class="name">민지 <span class="level">러셀1</span></span>
+              <span class="stats">
+                <span class="stat-streak">🔥 출석 7일 연속</span>
+                <span>· 시즌 <strong>2,340</strong>점</span>
+              </span>
+            </span>
+          </div>
+
+          <div class="progress">
+            <div class="progress-head">
+              <span>이번 주 학습 진척</span>
+              <strong>67%</strong>
+            </div>
+            <div class="progress-bar" role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" aria-label="이번 주 진척도 67%">
+              <div class="progress-fill" style="width: 67%;"></div>
+            </div>
+          </div>
+
+          <div class="cta-row">
+            <span class="cta-meta">미수행 <strong>3건</strong> · 지난주 대비 +12%</span>
+            <a class="cta-link" href="#" data-route="report" aria-label="민지의 통합 분석표 보기">민지의 통합 분석표 보기</a>
+          </div>
+        </div>
+
+      </section>
+
+      <div class="section-head" data-od-id="chat-head">
+        <div class="head-text">
+          <h2>💬 커뮤니티 채팅</h2>
+          <span class="sub">강사·학부모 1:1, 학년 학부모방, 학원 알림이 한곳에 모여요.</span>
+        </div>
+        <a class="more" href="#" data-route="chat" aria-label="커뮤니티 채팅 전체 열기">전체 채팅 열기</a>
+      </div>
+      <div class="chat-list" data-od-id="chat-list" role="list">
+
+        <button class="chat-row unread" role="listitem" data-route="chat-teacher" aria-label="김선생님 (담임)으로부터 새 메시지 3건">
+          <span class="clay clay-cream avatar" aria-hidden="true">
+            <span class="lbl">김선생</span>
+            <span class="pin" aria-hidden="true">🦉</span>
+          </span>
+          <span class="body-text">
+            <span class="top-row">
+              <span class="name">김선생님</span>
+              <span class="role-tag teacher">담임</span>
+            </span>
+            <span class="snippet">민지 어머님, 오늘 비문학 정말 잘했어요. 어제 약점이었던 추론 문제를 다 맞혔습니다.</span>
+          </span>
+          <span class="right-stack">
+            <span class="ts">5분 전</span>
+            <span class="unread-badge">3</span>
+          </span>
+        </button>
+
+        <button class="chat-row unread" role="listitem" data-route="chat-parents" aria-label="러셀1 학부모방으로부터 새 메시지 1건">
+          <span class="clay clay-rose avatar" aria-hidden="true">
+            <span class="lbl">학부모방</span>
+            <span class="pin" aria-hidden="true">👨‍👩‍👧</span>
+          </span>
+          <span class="body-text">
+            <span class="top-row">
+              <span class="name">러셀1 학부모방</span>
+              <span class="role-tag parents">학부모</span>
+            </span>
+            <span class="snippet"><span class="author">박○○ 어머님</span>: 교재 어디서 사세요? 저번에 추천받은 거 품절이라서요…</span>
+          </span>
+          <span class="right-stack">
+            <span class="ts">1시간 전</span>
+            <span class="unread-badge">1</span>
+          </span>
+        </button>
+
+        <button class="chat-row" role="listitem" data-route="chat-system" aria-label="시스템 알림톡">
+          <span class="clay clay-yellow avatar" aria-hidden="true">
+            <span class="lbl">알림</span>
+            <span class="pin" aria-hidden="true">📢</span>
+          </span>
+          <span class="body-text">
+            <span class="top-row">
+              <span class="name">알림톡</span>
+              <span class="role-tag system">공지</span>
+            </span>
+            <span class="snippet">이번 주 시험 안내 — 5월 10일(토) 오전 10시, 비문학 1지문 + 어휘 20문항</span>
+          </span>
+          <span class="right-stack">
+            <span class="ts">어제</span>
+          </span>
+        </button>
+
+      </div>
+
+      <div class="section-head" data-od-id="timeline-head">
+        <div class="head-text">
+          <h2>📊 자녀 학습 활동</h2>
+          <span class="sub">민지가 최근 푼 학습과 시험 결과를 모아 보여드려요.</span>
+        </div>
+        <a class="more" href="#" data-route="report" aria-label="전체 활동 보기">전체 보기</a>
+      </div>
+      <div class="timeline" data-od-id="timeline">
+
+        <div class="timeline-day">
+          <span class="timeline-day-label">오늘 · 5월 7일 (수)</span>
+          <span class="timeline-day-rule" aria-hidden="true"></span>
+        </div>
+        <div class="timeline-items">
+          <button class="timeline-row" data-route="quiz-result">
+            <span class="clay clay-yellow" aria-hidden="true"><span class="lbl">퀴즈</span></span>
+            <span class="body-text">
+              <span class="title">일일 퀴즈 <strong>9 / 10</strong></span>
+              <span class="meta">비문학 + 어휘 혼합 · 평균 정답률 92% · 3분 28초</span>
+            </span>
+            <span class="ts">오후 4:12</span>
+          </button>
+          <button class="timeline-row" data-route="writing-detail">
+            <span class="clay clay-blue" aria-hidden="true"><span class="lbl">글쓰기</span></span>
+            <span class="body-text">
+              <span class="title">글쓰기 <strong>1편 제출</strong> — 「우리 동네에서 본 봄」</span>
+              <span class="meta">총 412자 · 김선생님 첨삭 대기 중 (예상 4분)</span>
+            </span>
+            <span class="ts">오후 3:30</span>
+          </button>
+        </div>
+
+        <div class="timeline-day">
+          <span class="timeline-day-label">어제 · 5월 6일 (화)</span>
+          <span class="timeline-day-rule" aria-hidden="true"></span>
+        </div>
+        <div class="timeline-items">
+          <button class="timeline-row highlight" data-route="exam-result">
+            <span class="clay clay-green" aria-hidden="true"><span class="lbl">시험</span></span>
+            <span class="body-text">
+              <span class="title">비문학 시험 응시 — <strong>80점</strong></span>
+              <span class="meta">학년 평균 67점 · 추론 영역 우수 · 어휘 약점</span>
+            </span>
+            <span class="ts">오후 5:00</span>
+          </button>
+          <button class="timeline-row" data-route="tutor-history">
+            <span class="clay clay-cream" aria-hidden="true"><span class="lbl">AI<br>튜터</span></span>
+            <span class="body-text">
+              <span class="title">AI 튜터 채팅 <strong>12회</strong> — 부엉이샘과 대화</span>
+              <span class="meta">어휘 질문 7회 · 글쓰기 도움 3회 · 자몽 4개 사용</span>
+            </span>
+            <span class="ts">오후 6:15</span>
+          </button>
+          <button class="timeline-row" data-route="reading-detail">
+            <span class="clay clay-purple" aria-hidden="true"><span class="lbl">독해</span></span>
+            <span class="body-text">
+              <span class="title">일일 독해 — <strong>비문학 1지문</strong> 완료</span>
+              <span class="meta">「도시화와 인구 이동」 · 8문제 / 7분 12초 · 정답률 87%</span>
+            </span>
+            <span class="ts">오후 6:42</span>
+          </button>
+        </div>
+
+      </div>
+
+      <div style="height: 24px;"></div>
+
+    </main>
+
+    <aside class="right-aside" data-od-id="right-aside" aria-label="요약 위젯">
+
+      <section class="widget" data-od-id="widget-score">
+        <div class="widget-head">
+          <h3 class="widget-title">🏆 민지의 시즌 점수</h3>
+          <a class="widget-cta" href="#" data-route="ranking">전체 ›</a>
+        </div>
+        <div class="score-block">
+          <span class="clay clay-orange" aria-hidden="true"><span class="lbl">민지</span></span>
+          <span class="text">
+            <span class="label">시즌 점수</span>
+            <span class="val">2,340</span>
+          </span>
+          <span class="delta">+185 ↑</span>
+        </div>
+        <div class="rank-list">
+          <div class="rank-row">
+            <span class="rank-pos gold" aria-label="1위">🥇</span>
+            <span class="clay clay-purple rank-avatar" aria-hidden="true"><span class="lbl">1위</span></span>
+            <span class="rank-name">김다은</span>
+            <span class="rank-score">2,840점</span>
+          </div>
+          <div class="rank-row">
+            <span class="rank-pos gold" aria-label="2위">🥈</span>
+            <span class="clay clay-blue rank-avatar" aria-hidden="true"><span class="lbl">2위</span></span>
+            <span class="rank-name">박서준</span>
+            <span class="rank-score">2,610점</span>
+          </div>
+          <div class="rank-row me">
+            <span class="rank-pos" aria-label="3위">3</span>
+            <span class="clay clay-orange rank-avatar" aria-hidden="true"><span class="lbl">민지</span></span>
+            <span class="rank-name">민지</span>
+            <span class="rank-score">2,340점</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="widget" data-od-id="widget-pending">
+        <div class="widget-head">
+          <h3 class="widget-title">⏰ 미수행 학습</h3>
+          <a class="widget-cta" href="#" data-route="plan">계획표 ›</a>
+        </div>
+        <div class="pending-list">
+          <button class="pending-row" data-route="plan-quiz">
+            <span class="clay clay-yellow" aria-hidden="true"><span class="lbl">퀴즈</span></span>
+            <span class="text">
+              <span class="title">일일 퀴즈 — 1/10 남음</span>
+              <span class="meta">약 1분 · 어제 미완료</span>
+            </span>
+            <span class="due">오늘</span>
+          </button>
+          <button class="pending-row" data-route="plan-vocab">
+            <span class="clay clay-cream" aria-hidden="true"><span class="lbl">어휘</span></span>
+            <span class="text">
+              <span class="title">한자 성어 7개</span>
+              <span class="meta">약 8분 · 어제 학습 이어가기</span>
+            </span>
+            <span class="due">오늘</span>
+          </button>
+          <button class="pending-row" data-route="plan-reading">
+            <span class="clay clay-blue" aria-hidden="true"><span class="lbl">독해</span></span>
+            <span class="text">
+              <span class="title">독해 5문제 — 사회 영역</span>
+              <span class="meta">약 12분 · 도시화 지문</span>
+            </span>
+            <span class="due">내일</span>
+          </button>
+        </div>
+        <p class="pending-foot">민지가 오늘 안에 끝내면 <strong>+120점</strong> 보너스를 받아요.</p>
+      </section>
+
+      <section class="widget" data-od-id="widget-notice">
+        <div class="widget-head">
+          <h3 class="widget-title">📢 학원 공지사항</h3>
+          <a class="widget-cta" href="#" data-route="notice">전체 ›</a>
+        </div>
+        <div class="notice-list">
+          <button class="notice-row" data-route="notice-exam">
+            <span class="pin" aria-hidden="true">🗓</span>
+            <span class="text">
+              <span class="title">5월 시험 안내 — 5월 10일(토) 오전 10시</span>
+              <span class="meta">2026.05.06 · 김선생님</span>
+            </span>
+            <span class="new-tag">NEW</span>
+          </button>
+          <button class="notice-row" data-route="notice-book">
+            <span class="pin" aria-hidden="true">📚</span>
+            <span class="text">
+              <span class="title">5월 추천 도서 — 「자라나는 돌」</span>
+              <span class="meta">2026.05.04 · 박원장</span>
+            </span>
+          </button>
+          <button class="notice-row" data-route="notice-event">
+            <span class="pin" aria-hidden="true">🎁</span>
+            <span class="text">
+              <span class="title">시즌 마무리 시상식 — 5월 31일(토) 오후 2시</span>
+              <span class="meta">2026.05.01 · 박원장</span>
+            </span>
+          </button>
+        </div>
+      </section>
+
+    </aside>
+
+  </div>
+
+  <nav class="tab-bar" data-od-id="tab-bar" role="tablist" aria-label="주요 탭">
+    <a class="tab" href="#" role="tab" aria-current="page" aria-label="홈">
+      <span class="tab-icon">
+        <span class="clay clay-orange" aria-hidden="true"><span class="lbl">홈</span></span>
+      </span>
+      <span class="tab-label">홈</span>
+    </a>
+    <a class="tab" href="#" role="tab" aria-label="자녀 학습">
+      <span class="tab-icon">
+        <span class="clay clay-yellow" aria-hidden="true"><span class="lbl">자녀</span></span>
+      </span>
+      <span class="tab-label">자녀</span>
+    </a>
+    <a class="tab" href="#" role="tab" aria-label="채팅 — 새 메시지 4건">
+      <span class="tab-icon">
+        <span class="clay clay-blue" aria-hidden="true"><span class="lbl">채팅</span></span>
+        <span class="tab-dot" aria-hidden="true">4</span>
+      </span>
+      <span class="tab-label">채팅</span>
+    </a>
+    <a class="tab" href="#" role="tab" aria-label="공지사항 — 새 공지 1건">
+      <span class="tab-icon">
+        <span class="clay clay-rose" aria-hidden="true"><span class="lbl">공지</span></span>
+        <span class="tab-dot" aria-hidden="true">1</span>
+      </span>
+      <span class="tab-label">공지</span>
+    </a>
+    <a class="tab" href="#" role="tab" aria-label="더보기">
+      <span class="tab-icon">
+        <span class="clay clay-purple" aria-hidden="true"><span class="lbl">메뉴</span></span>
+      </span>
+      <span class="tab-label">더보기</span>
+    </a>
+  </nav>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="ico" aria-hidden="true">✓</span>
+    <span class="msg"></span>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    const app = document.getElementById('app');
+    const open = document.getElementById('open-drawer');
+    const close = document.getElementById('close-drawer');
+    open && open.addEventListener('click', () => app.dataset.drawer = 'open');
+    close && close.addEventListener('click', () => app.removeAttribute('data-drawer'));
+
+    document.querySelectorAll('.sb-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        if (window.matchMedia('(max-width: 767px)').matches) {
+          app.removeAttribute('data-drawer');
+        }
+      });
+    });
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('.tab').forEach(t => t.removeAttribute('aria-current'));
+        tab.setAttribute('aria-current', 'page');
+      });
+    });
+
+    const childPill = document.getElementById('child-pill');
+    const childMenu = document.getElementById('child-menu');
+    const childAvatar = childPill.querySelector('.clay');
+    const childName = childPill.querySelector('.info .name');
+
+    function setMenuOpen(open) {
+      childPill.setAttribute('aria-expanded', open ? 'true' : 'false');
+      childMenu.dataset.open = open ? 'true' : 'false';
+    }
+
+    childPill.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setMenuOpen(childMenu.dataset.open !== 'true');
+    });
+    document.addEventListener('click', (e) => {
+      if (!childMenu.contains(e.target) && e.target !== childPill && !childPill.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        setMenuOpen(false);
+        if (app.dataset.drawer === 'open') app.removeAttribute('data-drawer');
+      }
+    });
+
+    childMenu.querySelectorAll('.child-menu-item').forEach(item => {
+      item.addEventListener('click', () => {
+        childMenu.querySelectorAll('.child-menu-item').forEach(i => {
+          i.classList.remove('selected');
+          i.setAttribute('aria-selected', 'false');
+        });
+        item.classList.add('selected');
+        item.setAttribute('aria-selected', 'true');
+        const newName = item.dataset.name;
+        const newClay = item.querySelector('.clay');
+        childName.textContent = newName;
+        childAvatar.className = newClay.className.replace('avatar', '');
+        childAvatar.querySelector('.lbl').textContent = newName;
+        setMenuOpen(false);
+        showToast(newName + ' 학생으로 전환했어요');
+      });
+    });
+
+    childMenu.querySelector('.child-menu-add').addEventListener('click', () => {
+      setMenuOpen(false);
+      showToast('자녀 추가는 설정 → 자녀 연결 관리에서 할 수 있어요');
+    });
+
+    const toast = document.getElementById('toast');
+    const toastMsg = toast.querySelector('.msg');
+    let toastTimer;
+    function showToast(msg) {
+      clearTimeout(toastTimer);
+      toastMsg.textContent = msg;
+      toast.classList.add('show');
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    document.querySelectorAll('.chat-row, .timeline-row, .pending-row, .notice-row, .cta-link, .more, .widget-cta, [data-route]').forEach(el => {
+      if (el.closest('.sb-item') || el.closest('.tab') || el.classList.contains('child-menu-item') || el.classList.contains('child-menu-add')) return;
+      el.addEventListener('click', (e) => {
+        if (el.tagName === 'A') e.preventDefault();
+        const route = el.dataset.route;
+        if (route) showToast('「' + (el.getAttribute('aria-label') || el.textContent.trim().slice(0, 24)) + '」 화면으로 이동해요');
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
