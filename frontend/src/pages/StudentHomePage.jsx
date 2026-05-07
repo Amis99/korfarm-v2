@@ -182,6 +182,16 @@ const SIDEBAR_GROUPS = [
     ],
   },
   {
+    id: "social",
+    title: "💬 소통",
+    titleClay: { color: "rose", label: "소통" },
+    items: [
+      { id: "community",      icon: "📢", label: "커뮤니티 게시판", badge: null, badgeKind: null, lockedForFree: false },
+      { id: "community-chat", icon: "💬", label: "커뮤니티 채팅",   badge: null, badgeKind: null, lockedForFree: false },
+      { id: "shop",           icon: "🛒", label: "쇼핑몰",          badge: null, badgeKind: null, lockedForFree: false },
+    ],
+  },
+  {
     id: "settings",
     title: "⚙ 설정",
     titleClay: { color: "cream", label: "설정" },
@@ -192,6 +202,28 @@ const SIDEBAR_GROUPS = [
     ],
   },
 ];
+
+// 사이드바 항목 → 라우트 매핑
+const SIDEBAR_ROUTES = {
+  "daily-quiz": "/daily-quiz",
+  "daily-reading": "/daily-reading",
+  "duel": "/duel",
+  "ranking": "/ranking",
+  "farm-mode": "/farm-mode",
+  "pro-mode": "/pro-mode",
+  "recommend": "/my/tutor",
+  "study-plan": "/study-plan",
+  "wisdom": "/writing",
+  "diagnostic": "/diagnostic/v2",
+  "test-report": "/tests?tab=history",
+  "unified": "/report",
+  "community": "/community",
+  "community-chat": "/community",
+  "shop": "/shop",
+  "wallet": "/my/grapefruit",
+  "persona": "/tutor/persona-select",
+  "profile": "/profile",
+};
 
 // ─── 컴포넌트 ───────────────────────────────────────────────────────
 
@@ -278,7 +310,8 @@ function StudentHomePage() {
     if (window.matchMedia && window.matchMedia("(max-width: 767px)").matches) {
       setDrawerOpen(false);
     }
-    // TODO: 메뉴별 페이지 이동 라우팅
+    const route = SIDEBAR_ROUTES[item.id];
+    if (route) navigate(route);
   }
 
   function handleTabClick(t) {
@@ -287,7 +320,18 @@ function StudentHomePage() {
       return;
     }
     setActiveTab(t.id);
-    // TODO: 탭별 페이지 이동
+    // 더보기 = 사이드바 열기 (커뮤니티/쇼핑몰/설정 등 접근)
+    if (t.id === "more") {
+      setDrawerOpen(true);
+      return;
+    }
+    const tabRoutes = {
+      "study": "/farm-mode",
+      "writing": "/writing",
+      "analysis": "/report",
+    };
+    const route = tabRoutes[t.id];
+    if (route) navigate(route);
   }
 
   function handlePlanToggle(id) {
