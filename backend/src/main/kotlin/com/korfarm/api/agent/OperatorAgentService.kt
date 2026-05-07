@@ -651,6 +651,11 @@ class OperatorAgentService(
             - 시즌: `POST /v1/admin/seasons`
             - 기관 결제 발행: `POST /v1/admin/billing/orgs/{orgId}/issue`
             - 기관 자몽 충전: `POST /v1/admin/grapefruit/orgs/{orgId}/charge`
+            - AI 사용 내역(상세 list): `GET /v1/admin/ai-usage?from=YYYY-MM-DD&to=YYYY-MM-DD&kind=...&limit=200`
+              · ai_gen_logs(시험 출제) + agent_usage_log(운영자 AI) + tutor_usage_log(학생 튜터) 통합
+              · kind 필터: `aitest_paper`, `aitest_question`, `agent_chat`, `tutor_chat` 등
+            - AI 사용 요약(집계): `GET /v1/admin/ai-usage/summary?from=&to=&groupBy=model|day|org|kind`
+              · 호출 수·토큰 합·비용 추정 KRW 한 번에. 운영 비용 모니터링 용도.
 
             **ORG_ADMIN 가 본 기관 외 path 시도 시 백엔드가 HQ_ONLY 에러로 거절**.
 

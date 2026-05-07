@@ -202,6 +202,221 @@ class AiUsageController(
         ))
     }
 
+    /**
+     * AI 사용 요약 — 모델별 / 일별 / 기관별 / 종류별 집계.
+     * 운영 비용 모니터링용. HQ_ADMIN 만 호출 가능.
+     *
+     * groupBy: model (기본) / day / org / kind
+     * 응답: 집계 row 들 + 전체 합계 (호출 수·input·output·USD·KRW)
+     */
+    @GetMapping("/summary")
+    fun summary(
+        @RequestParam(required = false) from: String?,   // ISO yyyy-MM-dd
+        @RequestParam(required = false) to: String?,
+        @RequestParam(required = false, defaultValue = "model") groupBy: String,
+        @RequestParam(required = false) kind: String?,
+    ): ApiResponse<UsageSummaryResponse> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+
+        val fromDt = from?.let { LocalDate.parse(it).atStartOfDay() }
+        val toDt = to?.let { LocalDate.parse(it).plusDays(1).atStartOfDay() }
+
+        // ai_gen_logs / agent_usage_log / tutor_usage_log 통합해 메모리에서 집계
+        val rows = mutableListOf<RawRow>()
+
+        // 1) ai_gen_logs (시험 출제)
+        val whereGen = mutableListOf<String>()
+        val pGen = mutableMapOf<String, Any>()
+        if (fromDt != null) { whereGen.add("l.created_at >= :fromDt"); pGen["fromDt"] = fromDt }
+        if (toDt != null) { whereGen.add("l.created_at < :toDt"); pGen["toDt"] = toDt }
+        if (!kind.isNullOrBlank()) { whereGen.add("l.kind = :kind"); pGen["kind"] = kind }
+        val whereClauseGen = if (whereGen.isEmpty()) "" else "WHERE " + whereGen.joinToString(" AND ")
+        val sqlGen = """
+            SELECT l.created_at, l.user_id, l.kind, l.model,
+                   COALESCE(l.input_tokens, 0) AS input_tokens,
+                   COALESCE(l.output_tokens, 0) AS output_tokens
+            FROM ai_gen_logs l
+            $whereClauseGen
+        """.trimIndent()
+        val qGen = em.createNativeQuery(sqlGen)
+        pGen.forEach { (k, v) -> qGen.setParameter(k, v) }
+        @Suppress("UNCHECKED_CAST")
+        val resGen = qGen.resultList as List<Array<Any?>>
+        for (r in resGen) {
+            rows.add(RawRow(
+                createdAt = (r[0] as java.sql.Timestamp).toLocalDateTime(),
+                userId = r[1] as String,
+                kind = r[2] as String,
+                model = (r[3] as? String) ?: "claude-sonnet-4-6",
+                inputTokens = (r[4] as Number).toInt(),
+                outputTokens = (r[5] as Number).toInt(),
+            ))
+        }
+
+        // 2) agent_usage_log (운영자 AI)
+        if (kind.isNullOrBlank() || kind == "agent_chat") {
+            val whereA = mutableListOf<String>()
+            val pA = mutableMapOf<String, Any>()
+            if (fromDt != null) { whereA.add("u.created_at >= :fromDt"); pA["fromDt"] = fromDt }
+            if (toDt != null) { whereA.add("u.created_at < :toDt"); pA["toDt"] = toDt }
+            val whereClauseA = if (whereA.isEmpty()) "" else "WHERE " + whereA.joinToString(" AND ")
+            val sqlA = """
+                SELECT u.created_at, u.user_id, u.model,
+                       u.total_input_tokens, u.total_output_tokens
+                FROM agent_usage_log u
+                $whereClauseA
+            """.trimIndent()
+            val qA = em.createNativeQuery(sqlA)
+            pA.forEach { (k, v) -> qA.setParameter(k, v) }
+            @Suppress("UNCHECKED_CAST")
+            val resA = qA.resultList as List<Array<Any?>>
+            for (r in resA) {
+                rows.add(RawRow(
+                    createdAt = (r[0] as java.sql.Timestamp).toLocalDateTime(),
+                    userId = r[1] as String,
+                    kind = "agent_chat",
+                    model = (r[2] as? String) ?: "claude-sonnet-4-6",
+                    inputTokens = (r[3] as Number).toInt(),
+                    outputTokens = (r[4] as Number).toInt(),
+                ))
+            }
+        }
+
+        // 3) tutor_usage_log (학생 튜터) — 테이블 존재 시
+        if (kind.isNullOrBlank() || kind == "tutor_chat") {
+            try {
+                val whereT = mutableListOf<String>()
+                val pT = mutableMapOf<String, Any>()
+                if (fromDt != null) { whereT.add("u.created_at >= :fromDt"); pT["fromDt"] = fromDt }
+                if (toDt != null) { whereT.add("u.created_at < :toDt"); pT["toDt"] = toDt }
+                val whereClauseT = if (whereT.isEmpty()) "" else "WHERE " + whereT.joinToString(" AND ")
+                val sqlT = """
+                    SELECT u.created_at, u.user_id, u.model,
+                           u.total_input_tokens, u.total_output_tokens
+                    FROM tutor_usage_log u
+                    $whereClauseT
+                """.trimIndent()
+                val qT = em.createNativeQuery(sqlT)
+                pT.forEach { (k, v) -> qT.setParameter(k, v) }
+                @Suppress("UNCHECKED_CAST")
+                val resT = qT.resultList as List<Array<Any?>>
+                for (r in resT) {
+                    rows.add(RawRow(
+                        createdAt = (r[0] as java.sql.Timestamp).toLocalDateTime(),
+                        userId = r[1] as String,
+                        kind = "tutor_chat",
+                        model = (r[2] as? String) ?: "claude-sonnet-4-6",
+                        inputTokens = (r[3] as Number).toInt(),
+                        outputTokens = (r[4] as Number).toInt(),
+                    ))
+                }
+            } catch (_: Exception) {
+                // 테이블 없으면 스킵
+            }
+        }
+
+        // user → org 매핑 (groupBy=org 일 때만 필요)
+        val userOrgMap: Map<String, Pair<String, String>> = if (groupBy == "org") {
+            val userIds = rows.map { it.userId }.distinct()
+            if (userIds.isEmpty()) emptyMap()
+            else {
+                val sqlOrg = """
+                    SELECT m.user_id, m.org_id, o.name
+                    FROM org_memberships m
+                    JOIN orgs o ON o.id = m.org_id
+                    WHERE m.status = 'active' AND m.user_id IN (:uids)
+                """.trimIndent()
+                val qOrg = em.createNativeQuery(sqlOrg)
+                qOrg.setParameter("uids", userIds)
+                @Suppress("UNCHECKED_CAST")
+                val resOrg = qOrg.resultList as List<Array<Any?>>
+                resOrg.associate { row ->
+                    (row[0] as String) to ((row[1] as String) to ((row[2] as? String) ?: "(이름없음)"))
+                }
+            }
+        } else emptyMap()
+
+        // 그룹키 결정 함수
+        val keyFn: (RawRow) -> Pair<String, String> = when (groupBy) {
+            "day" -> { r -> r.createdAt.toLocalDate().toString().let { it to it } }
+            "kind" -> { r -> r.kind to r.kind }
+            "org" -> { r ->
+                val org = userOrgMap[r.userId]
+                if (org != null) org else "no_org" to "(소속 없음)"
+            }
+            else /* model */ -> { r -> r.model to r.model }
+        }
+
+        // 집계
+        val grouped = mutableMapOf<String, SummaryRow>()
+        var totalCalls = 0
+        var totalIn = 0L
+        var totalOut = 0L
+        var totalUsd = 0.0
+        var totalKrw = 0L
+        for (r in rows) {
+            val (key, label) = keyFn(r)
+            val (usd, krw) = estimateCost(r.model, r.inputTokens, r.outputTokens)
+            val agg = grouped.getOrPut(key) { SummaryRow(key, label, 0, 0L, 0L, 0.0, 0L) }
+            agg.calls += 1
+            agg.inputTokens += r.inputTokens
+            agg.outputTokens += r.outputTokens
+            agg.estimatedUsd += usd
+            agg.estimatedKrw += krw
+            totalCalls += 1
+            totalIn += r.inputTokens
+            totalOut += r.outputTokens
+            totalUsd += usd
+            totalKrw += krw
+        }
+
+        val sorted = grouped.values.sortedByDescending { it.calls }
+        return ApiResponse(success = true, data = UsageSummaryResponse(
+            groupBy = groupBy,
+            from = from,
+            to = to,
+            kind = kind,
+            rows = sorted,
+            totalCalls = totalCalls,
+            totalInputTokens = totalIn,
+            totalOutputTokens = totalOut,
+            totalUsd = totalUsd,
+            totalKrw = totalKrw,
+        ))
+    }
+
+    private data class RawRow(
+        val createdAt: LocalDateTime,
+        val userId: String,
+        val kind: String,
+        val model: String,
+        val inputTokens: Int,
+        val outputTokens: Int,
+    )
+
+    data class SummaryRow(
+        val key: String,
+        val label: String,
+        var calls: Int,
+        var inputTokens: Long,
+        var outputTokens: Long,
+        var estimatedUsd: Double,
+        var estimatedKrw: Long,
+    )
+
+    data class UsageSummaryResponse(
+        val groupBy: String,
+        val from: String?,
+        val to: String?,
+        val kind: String?,
+        val rows: List<SummaryRow>,
+        val totalCalls: Int,
+        val totalInputTokens: Long,
+        val totalOutputTokens: Long,
+        val totalUsd: Double,
+        val totalKrw: Long,
+    )
+
     private fun estimateCost(model: String, inputTokens: Int, outputTokens: Int): Pair<Double, Long> {
         // Claude API 단가 (USD per 1M tokens)
         val (inPer1M, outPer1M) = when {
