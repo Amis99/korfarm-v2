@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet, normalizeInventoryKeys } from "../utils/api";
+import NoticeBell from "../components/NoticeBell";
 import "../styles/student-home.css";
 
 // ─── fallback / 기본값 (API 응답이 늦거나 실패 시) ───────────────────
@@ -596,10 +597,7 @@ function StudentHomePage() {
               <span className={`icon-count${free ? " zero" : ""}`}>{free ? 0 : student.grapefruit}</span>
               {free && <span className="icon-lock-mini" aria-hidden="true">🔒</span>}
             </button>
-            <button className="icon-btn" aria-label={`알림 ${free ? 1 : student.notifications}건`}>
-              <ClaySpan color="rose" label="알림" />
-              <span className="icon-dot">{free ? 1 : student.notifications}</span>
-            </button>
+            <NoticeBell />
             <button className="icon-btn" aria-label="설정" onClick={() => navigate("/profile")}>
               <ClaySpan color="green" label="설정" />
             </button>

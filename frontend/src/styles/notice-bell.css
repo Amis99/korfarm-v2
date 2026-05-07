@@ -1,0 +1,199 @@
+/* 공지 종 아이콘 + 모달 — 클레이 톤 */
+
+.notice-bell {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background 120ms ease, transform 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.notice-bell:hover { background: rgba(0,0,0,0.04); }
+.notice-bell:active { transform: scale(0.92); }
+.notice-bell-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+.notice-bell-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: #F06C24;
+  color: white;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 18px;
+  text-align: center;
+  letter-spacing: -0.02em;
+  box-shadow: 0 2px 4px rgba(240, 108, 36, 0.3), 0 0 0 1.5px var(--bg, #F4EFE6);
+  pointer-events: none;
+}
+
+.notice-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(40, 30, 20, 0.45);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  z-index: 1000;
+  border: none;
+  cursor: pointer;
+}
+.notice-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(92vw, 480px);
+  max-height: 80vh;
+  background: #FFFAF0;
+  border-radius: 22px;
+  box-shadow: 0 20px 60px rgba(40, 30, 20, 0.25);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.notice-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(216, 203, 177, 0.4);
+  background: linear-gradient(155deg, #FFF6E2 0%, #F4EFE6 100%);
+}
+.notice-modal-head h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #2A2520;
+}
+.notice-modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #6B6359;
+  display: grid;
+  place-items: center;
+  transition: background 120ms ease;
+}
+.notice-modal-close:hover { background: rgba(0,0,0,0.05); }
+
+.notice-modal-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+.notice-loading,
+.notice-empty {
+  padding: 40px 16px;
+  text-align: center;
+  color: #9A8F82;
+  font-size: 14px;
+}
+
+.notice-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.notice-item {
+  border-bottom: 1px solid rgba(216, 203, 177, 0.3);
+}
+.notice-item:last-child { border-bottom: none; }
+.notice-item.unread .notice-item-title { font-weight: 700; color: #2A2520; }
+.notice-item.read .notice-item-title { color: #6B6359; font-weight: 500; }
+
+.notice-item-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "meta time"
+    "title title";
+  gap: 4px 12px;
+  width: 100%;
+  padding: 12px 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 120ms ease;
+}
+.notice-item-head:hover { background: rgba(255, 250, 240, 0.6); }
+
+.notice-item-meta {
+  grid-area: meta;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+.notice-item-meta .pin { font-size: 12px; }
+.notice-item-meta .scope {
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.notice-item-meta .scope.global {
+  background: #FBE2D2;
+  color: #D8580E;
+}
+.notice-item-meta .scope.org {
+  background: #DDEFD5;
+  color: #4A6F3D;
+}
+.notice-item-meta .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #F06C24;
+  margin-left: auto;
+}
+
+.notice-item-time {
+  grid-area: time;
+  font-size: 11px;
+  color: #9A8F82;
+  white-space: nowrap;
+}
+
+.notice-item-title {
+  grid-area: title;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.notice-item-body {
+  padding: 4px 20px 16px;
+  font-size: 13.5px;
+  color: #2A2520;
+  line-height: 1.6;
+  background: rgba(255, 250, 240, 0.4);
+  border-top: 1px dashed rgba(216, 203, 177, 0.5);
+}
+.notice-item-body p { margin: 0 0 8px; }
+.notice-item-body p:last-child { margin-bottom: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .notice-bell, .notice-bell *, .notice-modal, .notice-modal * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

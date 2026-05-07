@@ -141,6 +141,14 @@ function PublicOnlyRoute({ children }) {
   return children;
 }
 
+/* /start 진입 — 학부모면 /parent-home 자동 리다이렉트 (StartPage 자체는 그대로) */
+function StartRouter() {
+  const { user } = useAuth();
+  const isParent = user?.roles?.includes("PARENT");
+  if (isParent) return <Navigate to="/parent-home" replace />;
+  return <StartPage />;
+}
+
 /* /tests/history → /tests?tab=history 리다이렉트 (기존 쿼리 파라미터 보존) */
 function TestsHistoryRedirect() {
   const { search } = useLocation();
@@ -217,7 +225,7 @@ function App() {
           <Route path="/inquiry" element={<InquiryPage />} />
 
           {/* 인증 필요 페이지 */}
-          <Route path="/start" element={P(<StartPage />)} />
+          <Route path="/start" element={P(<StartRouter />)} />
           <Route path="/start-new" element={P(<StudentHomePage />)} />
           <Route path="/parent-home" element={P(<ParentHomePage />)} />
           <Route path="/profile" element={P(<ProfilePage />)} />
