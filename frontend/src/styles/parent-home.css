@@ -461,3 +461,32 @@
   .welcome-title { font-size: 16px; }
   .child-card .head .name { font-size: 15px; }
 }
+
+/* 자녀 인벤토리 그리드 — 자몽 + 5작물 */
+.parent-wallet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 4px;
+}
+.parent-wallet-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.parent-wallet-cell .clay {
+  width: 38px;
+  height: 38px;
+  font-size: 11px;
+}
+.parent-wallet-count {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--accent-deep);
+  letter-spacing: 0.2px;
+}

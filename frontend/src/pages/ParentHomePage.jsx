@@ -18,6 +18,16 @@ const LEVEL_LABEL_MAP = {
 
 const CHILD_COLORS = ["orange", "blue", "green", "purple", "rose", "yellow"];
 
+// 자녀 인벤토리 위젯 — 자몽 + 5작물
+const WALLET_META = [
+  { key: "grapefruit", color: "orange", name: "자몽" },
+  { key: "crop_wheat", color: "cream",  name: "밀" },
+  { key: "crop_rice",  color: "yellow", name: "쌀" },
+  { key: "crop_corn",  color: "yellow", name: "옥수수" },
+  { key: "crop_grape", color: "purple", name: "포도" },
+  { key: "crop_apple", color: "rose",   name: "사과" },
+];
+
 // ─── 사이드바 — 매칭 검증된 라우트만 (가상 기능 X) ───────────────────
 //
 // 미존재 매핑은 alert 로 처리. fake URL 보내지 않음.
@@ -61,6 +71,7 @@ const SIDEBAR_GROUPS = [
       { id: "link",    icon: "👨‍👩‍👧", label: "자녀 연결 관리", routeKey: "parents-links" },
       { id: "billing", icon: "💳", label: "결제·구독",          routeKey: "subscription" },
       { id: "profile", icon: "👤", label: "내 정보",             routeKey: "profile" },
+      { id: "logout",  icon: "🚪", label: "로그아웃",            routeKey: null },
     ],
   },
 ];
@@ -290,6 +301,10 @@ function ParentHomePage() {
 
   // 라우트 클릭 — 매칭 안 되는 항목은 toast / fake URL 안 보냄
   const handleSidebarClick = (item) => {
+    if (item.id === "logout") {
+      logout();
+      return;
+    }
     setActiveSidebar(item.id);
     if (window.matchMedia && window.matchMedia("(max-width: 767px)").matches) {
       setDrawerOpen(false);
@@ -665,6 +680,34 @@ function ParentHomePage() {
                 ))}
               </div>
             </section>
+
+            {/* 자녀 인벤토리 — 자몽 + 5작물 */}
+            {childInventory && (
+              <section className="widget">
+                <div className="widget-head">
+                  <h3 className="widget-title">🌾 {selectedChildName}의 작물 지갑</h3>
+                  <Link
+                    className="widget-cta"
+                    to={selectedChild ? `/farm/inventory?studentId=${selectedChild.studentUserId}` : "/farm/inventory"}
+                  >
+                    전체 ›
+                  </Link>
+                </div>
+                <div className="parent-wallet-grid">
+                  {WALLET_META.map((w) => {
+                    const count = w.key === "grapefruit"
+                      ? Number(childInventory.grapefruit ?? childInventory.grapefruits ?? 0)
+                      : Number((childInventory.crops || {})[w.key] ?? 0);
+                    return (
+                      <div key={w.key} className="parent-wallet-cell">
+                        <ClaySpan color={w.color} label={w.name} />
+                        <span className="parent-wallet-count">{count.toLocaleString()}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </section>
+            )}
 
             {/* 미수행 학습 */}
             <section className="widget">

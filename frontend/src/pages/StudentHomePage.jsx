@@ -350,6 +350,13 @@ function StudentHomePage() {
                 due: c.dueAt ? "오늘" : null,
                 dueSoft: false,
                 done: c.status === "completed",
+                // 라우팅 정보 — plan_row 클릭 시 사용
+                refId: c.cellRefId || c.refId,
+                assetType: c.assetType,
+                assetKind: c.assetKind,
+                status: c.status,
+                wisdomPostId: c.wisdomPostId || c.wisdom_post_id,
+                cellAction: c.cellAction,
               });
             });
           } catch (err) {
@@ -541,7 +548,35 @@ function StudentHomePage() {
   }
 
   function handlePlanToggle(id) {
-    setPlan((prev) => prev.map((p) => (p.id === id ? { ...p, done: !p.done } : p)));
+    // 완료 체크는 학생이 누르는 동작이 아니라 학습 페이지로 이동시키는 동작.
+    // (체크는 학습 결과 제출 시 자동 처리됨)
+    const cell = plan.find((p) => p.id === id);
+    if (!cell) return;
+    if (cell.done) {
+      // 이미 완료된 항목은 다시 풀어볼 수 있게 학습 페이지로
+    }
+    const aType = cell.assetType;
+    const aKind = cell.assetKind;
+    const refId = cell.refId;
+    if (aType === "korfarm" && refId) {
+      navigate(`/learning/${refId}`);
+      return;
+    }
+    if (aKind === "test" && refId) {
+      navigate(`/tests/${refId}/omr`);
+      return;
+    }
+    if (aType === "writing" || aKind === "write") {
+      const wisdomPostId = cell.wisdomPostId;
+      if (wisdomPostId) {
+        navigate(`/writing/post/${wisdomPostId}`);
+        return;
+      }
+      navigate("/writing");
+      return;
+    }
+    // fallback — 학습 계획표 페이지로
+    navigate("/study-plan");
   }
 
   async function handleSendChat(e) {
