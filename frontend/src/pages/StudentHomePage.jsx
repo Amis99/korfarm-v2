@@ -5,6 +5,7 @@ import remarkGfm from "remark-gfm";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet, apiPost, normalizeInventoryKeys } from "../utils/api";
 import NoticeBell from "../components/NoticeBell";
+import HarvestCraftModal from "../components/HarvestCraftModal";
 import "../styles/student-home.css";
 
 // 채팅 마크다운 렌더러 — 표·이미지·링크·코드블록 모두 지원
@@ -160,12 +161,31 @@ const SIDEBAR_GROUPS = [
     ],
   },
   {
+    id: "tests",
+    title: "📝 테스트",
+    titleClay: { color: "yellow", label: "시험" },
+    items: [
+      { id: "tests",       icon: "📚", label: "테스트 창고",     badge: null, badgeKind: null, lockedForFree: true },
+      { id: "ai-study",    icon: "✨", label: "AI 학습 만들기",  badge: null, badgeKind: null, lockedForFree: true },
+    ],
+  },
+  {
     id: "social",
     title: "💬 소통",
     titleClay: { color: "rose", label: "소통" },
     items: [
       { id: "community", icon: "📢", label: "커뮤니티", badge: null, badgeKind: null, lockedForFree: false },
       { id: "shop",      icon: "🛒", label: "쇼핑몰",   badge: null, badgeKind: null, lockedForFree: false },
+    ],
+  },
+  {
+    id: "harvest",
+    title: "🌾 수확",
+    titleClay: { color: "green", label: "수확" },
+    items: [
+      { id: "harvest-ledger", icon: "📒", label: "수확 장부",      badge: null, badgeKind: null, lockedForFree: false },
+      { id: "seed-log",       icon: "🌱", label: "씨앗 획득 내역", badge: null, badgeKind: null, lockedForFree: false },
+      { id: "seed-craft",     icon: "🔄", label: "씨앗 → 작물 교환", badge: null, badgeKind: null, lockedForFree: false },
     ],
   },
   {
@@ -176,6 +196,7 @@ const SIDEBAR_GROUPS = [
       { id: "wallet",    icon: "🍊", label: "작물 지갑",   badge: null,  badgeKind: null,      lockedForFree: true },
       { id: "persona",   icon: "🦉", label: "캐릭터 변경", badge: null,  badgeKind: null,      lockedForFree: true },
       { id: "profile",   icon: "👤", label: "내 정보",     badge: null,  badgeKind: null,      lockedForFree: false },
+      { id: "logout",    icon: "🚪", label: "로그아웃",    badge: null,  badgeKind: null,      lockedForFree: false },
     ],
   },
 ];
@@ -196,6 +217,10 @@ const SIDEBAR_ROUTES = {
   "unified": "/report",
   "community": "/community",
   "shop": "/shop",
+  "tests": "/tests",
+  "ai-study": "/my/ai-study",
+  "harvest-ledger": "/harvest-ledger",
+  "seed-log": "/seed-log",
   "wallet": "/my/grapefruit",
   "persona": "/tutor/persona-select",
   "profile": "/profile",
@@ -221,6 +246,7 @@ function StudentHomePage() {
   const free = !isPremium || forceFree;
 
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [showCraftModal, setShowCraftModal] = useState(false);
   const [activeSidebar, setActiveSidebar] = useState("daily-quiz");
   const [activeTab, setActiveTab] = useState("home");
   const [chatInput, setChatInput] = useState("");
@@ -473,6 +499,17 @@ function StudentHomePage() {
   function handleSidebarClick(item) {
     if (free && item.lockedForFree) {
       showToast(item.label);
+      return;
+    }
+    if (item.id === "logout") {
+      logout();
+      return;
+    }
+    if (item.id === "seed-craft") {
+      setShowCraftModal(true);
+      if (window.matchMedia && window.matchMedia("(max-width: 767px)").matches) {
+        setDrawerOpen(false);
+      }
       return;
     }
     setActiveSidebar(item.id);
@@ -791,6 +828,25 @@ function StudentHomePage() {
           </div>
         )}
       </div>
+
+      <HarvestCraftModal
+        open={showCraftModal}
+        onClose={() => setShowCraftModal(false)}
+        onCrafted={() => {
+          setShowCraftModal(false);
+          // 작물 잔액 갱신
+          apiGet("/v1/inventory")
+            .then((d) => {
+              if (!d) return;
+              const inv = normalizeInventoryKeys(d);
+              setWallet(WALLET_META.map((w) => ({
+                ...w,
+                count: Number(inv?.[w.key] ?? 0),
+              })));
+            })
+            .catch(() => {});
+        }}
+      />
     </div>
   );
 }
