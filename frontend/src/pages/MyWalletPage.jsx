@@ -152,9 +152,12 @@ function MyWalletPage() {
         <button className="hamburger" aria-label="홈으로" onClick={() => navigate("/start-new")}>
           <span></span>
         </button>
-        <a className="brand" href="/start-new" onClick={(e) => { e.preventDefault(); navigate("/start-new"); }}>
-          <span className="logo" aria-hidden="true">국</span>
-          <span className="name">국어농장</span>
+        <a className="brand" href="/start" aria-label="국어농장 홈" onClick={(e) => { e.preventDefault(); navigate("/start"); }}>
+          <img
+            src={import.meta.env.BASE_URL + "korfarm-logo.png"}
+            alt="국어농장"
+            style={{ height: 36, width: "auto", display: "block" }}
+          />
         </a>
         <div style={{ flex: 1 }}></div>
       </header>

@@ -96,10 +96,12 @@ function TutorPersonaSelectPage() {
   return (
     <div className="page" data-od-id="character-select">
       <header className="top-bar">
-        <a className="brand" href="/start-new" aria-label="국어농장 v2 홈" onClick={(e) => { e.preventDefault(); navigate("/start-new"); }}>
-          <span className="logo" aria-hidden="true">국</span>
-          <span className="name">국어농장</span>
-          <span className="ver">v2</span>
+        <a className="brand" href="/start" aria-label="국어농장 홈" onClick={(e) => { e.preventDefault(); navigate("/start"); }}>
+          <img
+            src={import.meta.env.BASE_URL + "korfarm-logo.png"}
+            alt="국어농장"
+            style={{ height: 36, width: "auto", display: "block" }}
+          />
         </a>
         <a className="skip-link" href="#" onClick={handleSkip} aria-label="선생님 선택 건너뛰기">건너뛰기</a>
       </header>
