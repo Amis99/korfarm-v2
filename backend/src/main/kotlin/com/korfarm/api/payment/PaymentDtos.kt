@@ -41,6 +41,17 @@ data class ShopPrepareRequest(
     val orderId: String
 )
 
+// 자몽 충전 — 1자몽=250원(개인), 최소 250원
+data class GrapefruitPrepareRequest(
+    @field:Min(1000) val amountWon: Int
+)
+
+// 기관 사용료 결제 — 발행된 청구서 ID
+data class OrgBillingPrepareRequest(
+    @field:NotBlank
+    val billingId: String
+)
+
 data class PaymentPrepareResult(
     val paymentId: String,
     val tossOrderId: String,

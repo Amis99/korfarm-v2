@@ -1,10 +1,18 @@
 import { useState, useEffect, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
-import { apiGet, normalizeInventoryKeys } from "../utils/api";
+import { Link, useNavigate } from "react-router-dom";
+import { apiGet, apiPost, normalizeInventoryKeys } from "../utils/api";
+import { requestTossPayment } from "../utils/tossPayment";
 import HarvestCraftModal from "../components/HarvestCraftModal";
 import SiteFooter from "../components/SiteFooter";
 import "../styles/student-home.css";
 import "../styles/wallet.css";
+
+const CHARGE_PRESETS = [
+  { won: 10000, grapefruits: 40 },
+  { won: 30000, grapefruits: 120 },
+  { won: 50000, grapefruits: 200 },
+  { won: 100000, grapefruits: 400 },
+];
 
 const PRIORITY_KEY = "korfarm_wallet_priority_v1";
 
@@ -50,6 +58,11 @@ function MyWalletPage() {
   const [transactions, setTransactions] = useState([]);
   const [filter, setFilter] = useState("all");
   const [showCraft, setShowCraft] = useState(false);
+  const [showCharge, setShowCharge] = useState(false);
+  const [chargeAmount, setChargeAmount] = useState(10000);
+  const [chargeAgree, setChargeAgree] = useState(false);
+  const [chargingPay, setChargingPay] = useState(false);
+  const [chargeError, setChargeError] = useState("");
   const [priority, setPriority] = useState(() => {
     try {
       const saved = localStorage.getItem(PRIORITY_KEY);
@@ -104,8 +117,45 @@ function MyWalletPage() {
   const totalKrw = totalCount * 250;
 
   function handleCharge() {
-    // 기존 자몽 충전 페이지로 위임 (토스 결제 흐름)
-    navigate("/subscription");
+    setChargeAmount(10000);
+    setChargeAgree(false);
+    setChargeError("");
+    setShowCharge(true);
+  }
+
+  async function submitCharge() {
+    if (!chargeAgree) {
+      setChargeError("결제 진행에 동의해 주세요.");
+      return;
+    }
+    if (!chargeAmount || chargeAmount < 1000) {
+      setChargeError("최소 충전 금액은 1,000원입니다.");
+      return;
+    }
+    setChargingPay(true);
+    setChargeError("");
+    try {
+      const prep = await apiPost("/v1/payments/prepare/grapefruit", {
+        amountWon: chargeAmount,
+      });
+      await requestTossPayment({
+        clientKey: prep.clientKey,
+        customerKey: prep.customerKey,
+        method: "CARD",
+        amount: prep.amount,
+        orderId: prep.tossOrderId,
+        orderName: prep.orderName,
+        customerName: prep.customerName,
+        customerEmail: prep.customerEmail,
+        customerMobilePhone: prep.customerMobilePhone,
+      });
+    } catch (e) {
+      if (e.code !== "USER_CANCEL") {
+        setChargeError(e.message || "결제 요청에 실패했습니다.");
+      }
+    } finally {
+      setChargingPay(false);
+    }
   }
 
   function handleExchange() {
@@ -303,6 +353,14 @@ function MyWalletPage() {
         </div>
       </section>
 
+      <p style={{ fontSize: 11, color: "#888", marginTop: 16, textAlign: "center" }}>
+        <Link to="/refund-policy" style={{ color: "#888" }}>환불규정</Link>
+        {" · "}
+        <Link to="/terms" style={{ color: "#888" }}>이용약관</Link>
+        {" · "}
+        <Link to="/privacy" style={{ color: "#888" }}>개인정보처리방침</Link>
+      </p>
+
       <div style={{ height: "32px" }} />
 
       <HarvestCraftModal
@@ -310,6 +368,137 @@ function MyWalletPage() {
         onClose={() => setShowCraft(false)}
         onCrafted={handleCrafted}
       />
+
+      {showCharge && (
+        <div
+          role="dialog"
+          aria-label="자몽 충전"
+          onClick={() => !chargingPay && setShowCharge(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,0.5)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 9000,
+            padding: 16,
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: "#fff",
+              borderRadius: 14,
+              padding: "20px 22px",
+              width: "min(440px, 100%)",
+              boxShadow: "0 12px 40px rgba(0,0,0,0.18)",
+            }}
+          >
+            <h2 style={{ margin: "0 0 14px", fontSize: 18 }}>🍊 자몽 충전</h2>
+            <p style={{ fontSize: 13, color: "#555", margin: "0 0 14px" }}>
+              1자몽 = 250원 · AI 튜터·글쓰기 첨삭·OCR 등 AI 기능에 사용됩니다.
+            </p>
+            <div style={{ display: "grid", gap: 8 }}>
+              {CHARGE_PRESETS.map((p) => (
+                <button
+                  key={p.won}
+                  type="button"
+                  onClick={() => setChargeAmount(p.won)}
+                  disabled={chargingPay}
+                  style={{
+                    padding: "12px 14px",
+                    border: chargeAmount === p.won ? "2px solid #f06c24" : "1px solid #ddd",
+                    background: chargeAmount === p.won ? "#fff5ee" : "#fff",
+                    borderRadius: 10,
+                    textAlign: "left",
+                    cursor: chargingPay ? "not-allowed" : "pointer",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <span>
+                    <strong style={{ fontSize: 15 }}>{p.won.toLocaleString()}원</strong>
+                  </span>
+                  <span style={{ color: "#f06c24", fontWeight: 700 }}>+{p.grapefruits}자몽</span>
+                </button>
+              ))}
+            </div>
+
+            <div style={{
+              marginTop: 14,
+              padding: 12,
+              background: "#fafafa",
+              borderRadius: 8,
+              fontSize: 13,
+            }}>
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
+                <span>상품명</span>
+                <strong>자몽 {Math.floor(chargeAmount / 250)}개 충전</strong>
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span>결제 금액</span>
+                <strong style={{ color: "#f06c24" }}>{chargeAmount.toLocaleString()}원</strong>
+              </div>
+            </div>
+
+            <label style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 14, fontSize: 13 }}>
+              <input
+                type="checkbox"
+                checked={chargeAgree}
+                onChange={(e) => setChargeAgree(e.target.checked)}
+                disabled={chargingPay}
+              />
+              <span>
+                <Link to="/refund-policy" target="_blank" style={{ color: "#f06c24" }}>환불규정</Link>
+                {" 및 "}
+                <Link to="/terms" target="_blank" style={{ color: "#f06c24" }}>이용약관</Link>
+                {"에 동의하고 결제를 진행합니다."}
+              </span>
+            </label>
+
+            {chargeError && (
+              <p style={{ color: "#d33", fontSize: 12, marginTop: 10 }}>{chargeError}</p>
+            )}
+
+            <div style={{ display: "flex", gap: 8, marginTop: 16 }}>
+              <button
+                type="button"
+                onClick={() => setShowCharge(false)}
+                disabled={chargingPay}
+                style={{
+                  flex: 1,
+                  padding: "12px 14px",
+                  border: "1px solid #ddd",
+                  background: "#fff",
+                  borderRadius: 10,
+                  cursor: chargingPay ? "not-allowed" : "pointer",
+                }}
+              >
+                취소
+              </button>
+              <button
+                type="button"
+                onClick={submitCharge}
+                disabled={chargingPay || !chargeAgree}
+                style={{
+                  flex: 1.5,
+                  padding: "12px 14px",
+                  border: "none",
+                  background: chargeAgree ? "#f06c24" : "#ccc",
+                  color: "#fff",
+                  fontWeight: 700,
+                  borderRadius: 10,
+                  cursor: chargingPay || !chargeAgree ? "not-allowed" : "pointer",
+                }}
+              >
+                {chargingPay ? "처리 중..." : "결제하기"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <SiteFooter />
     </div>

@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import AdminLayout from "../components/AdminLayout";
 import { apiGetCamel, apiPostDeep } from "../utils/adminApi";
+import { apiPost } from "../utils/api";
+import { requestTossPayment } from "../utils/tossPayment";
 import "../styles/admin.css";
 
 // 기관 — 월 사용료 청구·결제 (ORG_ADMIN)
@@ -34,16 +37,28 @@ export default function AdminOrgBillingPage() {
   useEffect(() => { reload(); }, []);
 
   const handlePay = async (billingId, fee) => {
-    if (!confirm(`${fee.toLocaleString()}원을 결제하시겠습니까?\n(테스트 환경 — 실결제는 추후 토스페이 연동 예정)`)) return;
+    if (!confirm(`${fee.toLocaleString()}원을 토스페이먼츠로 결제하시겠습니까?\n환불규정과 이용약관에 동의한 것으로 간주됩니다.`)) return;
     setPaying(billingId);
     setError(null);
     setMessage("");
     try {
-      await apiPostDeep(`/v1/admin/billing/${billingId}/pay`, {});
-      setMessage("결제 완료. 정지 상태가 해제되었습니다.");
-      await reload();
+      const prep = await apiPost("/v1/payments/prepare/org-billing", { billingId });
+      await requestTossPayment({
+        clientKey: prep.clientKey,
+        customerKey: prep.customerKey,
+        method: "CARD",
+        amount: prep.amount,
+        orderId: prep.tossOrderId,
+        orderName: prep.orderName,
+        customerName: prep.customerName,
+        customerEmail: prep.customerEmail,
+        customerMobilePhone: prep.customerMobilePhone,
+      });
+      // requestTossPayment 가 결제창 열고 successUrl/failUrl 로 리디렉션
     } catch (e) {
-      setError(e.message);
+      if (e.code !== "USER_CANCEL") {
+        setError(e.message || "결제 요청에 실패했습니다.");
+      }
     } finally {
       setPaying(null);
     }
@@ -144,8 +159,13 @@ export default function AdminOrgBillingPage() {
           </table>
         )}
 
-        <p style={{ fontSize: 11, color: "#999", marginTop: 16 }}>
-          ※ 정식 토스페이 연동은 추후 적용 예정입니다. 현재는 결제 클릭 시 즉시 정상 처리됩니다.
+        <p style={{ fontSize: 11, color: "#888", marginTop: 16 }}>
+          결제 시 <Link to="/refund-policy" target="_blank" style={{ color: "#888" }}>환불규정</Link>
+          {" · "}
+          <Link to="/terms" target="_blank" style={{ color: "#888" }}>이용약관</Link>
+          {" · "}
+          <Link to="/privacy" target="_blank" style={{ color: "#888" }}>개인정보처리방침</Link>
+          에 동의한 것으로 간주됩니다.
         </p>
       </div>
     </AdminLayout>

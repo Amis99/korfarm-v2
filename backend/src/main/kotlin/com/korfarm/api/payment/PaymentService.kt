@@ -8,6 +8,9 @@ import com.korfarm.api.shop.OrderItemRepository
 import com.korfarm.api.shop.ProductRepository
 import com.korfarm.api.shop.ShipmentRepository
 import com.korfarm.api.user.UserRepository
+import com.korfarm.api.grapefruit.GrapefruitService
+import com.korfarm.api.billing.OrgBillingService
+import com.korfarm.api.billing.OrgBillingRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -27,6 +30,9 @@ class PaymentService(
     private val tossProperties: TossProperties,
     private val objectMapper: ObjectMapper,
     private val userRepository: UserRepository,
+    private val grapefruitService: GrapefruitService,
+    private val orgBillingService: OrgBillingService,
+    private val orgBillingRepository: OrgBillingRepository,
 ) {
     /** 토스 customerKey: 사용자 ID 그대로. 비회원이면 ANONYMOUS. */
     private fun resolveCustomer(userId: String): TossCustomer {
@@ -341,6 +347,83 @@ class PaymentService(
         )
     }
 
+    /** 자몽 충전 — 1자몽=250원 (개인). amountWon 만큼 결제 후 confirm 시 잔액 증가. */
+    @Transactional
+    fun prepareUserGrapefruit(userId: String, request: GrapefruitPrepareRequest): PaymentPrepareResult {
+        if (request.amountWon < 1000) {
+            throw ApiException("INVALID_REQUEST", "최소 충전 금액은 1,000원입니다", HttpStatus.BAD_REQUEST)
+        }
+
+        val tossOrderId = generateTossOrderId(userId)
+        val grapefruits = request.amountWon / 250  // 1자몽=250원
+        val orderName = "국어농장 자몽 ${grapefruits}개 충전 (${request.amountWon.toString().reversed().chunked(3).joinToString(",").reversed()}원)"
+
+        val payment = PaymentEntity(
+            id = IdGenerator.newId("pay"),
+            userId = userId,
+            paymentType = "grapefruit",
+            amount = request.amountWon,
+            status = "pending",
+            provider = "toss",
+            orderName = orderName,
+            tossOrderId = tossOrderId,
+        )
+        paymentRepository.save(payment)
+
+        val customer = resolveCustomer(userId)
+        return PaymentPrepareResult(
+            paymentId = payment.id,
+            tossOrderId = tossOrderId,
+            amount = request.amountWon,
+            orderName = orderName,
+            clientKey = tossProperties.clientKey,
+            customerKey = customer.customerKey,
+            customerName = customer.customerName,
+            customerEmail = customer.customerEmail,
+            customerMobilePhone = customer.customerMobilePhone,
+        )
+    }
+
+    /** 기관 사용료 결제 — 발행된 청구서를 토스로 결제. */
+    @Transactional
+    fun prepareOrgBilling(userId: String, request: OrgBillingPrepareRequest): PaymentPrepareResult {
+        val billing = orgBillingRepository.findById(request.billingId).orElseThrow {
+            ApiException("NOT_FOUND", "청구서를 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        if (billing.status == "paid") {
+            throw ApiException("ALREADY_PAID", "이미 결제된 청구서입니다", HttpStatus.CONFLICT)
+        }
+
+        val tossOrderId = generateTossOrderId(userId)
+        val orderName = "국어농장 기관 월 사용료 (청구서 ${billing.id})"
+
+        val payment = PaymentEntity(
+            id = IdGenerator.newId("pay"),
+            userId = userId,
+            paymentType = "org_billing",
+            amount = billing.totalFee,
+            status = "pending",
+            provider = "toss",
+            orderName = orderName,
+            tossOrderId = tossOrderId,
+            metadata = objectMapper.writeValueAsString(mapOf("billingId" to billing.id, "orgId" to billing.orgId)),
+        )
+        paymentRepository.save(payment)
+
+        val customer = resolveCustomer(userId)
+        return PaymentPrepareResult(
+            paymentId = payment.id,
+            tossOrderId = tossOrderId,
+            amount = billing.totalFee,
+            orderName = orderName,
+            clientKey = tossProperties.clientKey,
+            customerKey = customer.customerKey,
+            customerName = customer.customerName,
+            customerEmail = customer.customerEmail,
+            customerMobilePhone = customer.customerMobilePhone,
+        )
+    }
+
     @Transactional
     fun confirmPayment(userId: String, request: PaymentConfirmRequest): PaymentConfirmResult {
         val payment = paymentRepository.findByTossOrderId(request.orderId)
@@ -383,6 +466,22 @@ class PaymentService(
             }
             "shop" -> {
                 completeShopOrder(payment)
+            }
+            "grapefruit" -> {
+                // amount 는 원화. 1자몽=250원으로 자몽 충전
+                grapefruitService.chargeUser(
+                    userId = payment.userId,
+                    amountWon = payment.amount,
+                    paymentId = payment.id,
+                    memo = "자몽 충전 (토스)",
+                )
+            }
+            "org_billing" -> {
+                // metadata.billingId 로 청구서 결제 처리
+                val meta = objectMapper.readValue(payment.metadata ?: "{}", Map::class.java)
+                val billingId = meta["billingId"] as? String
+                    ?: throw ApiException("INVALID_STATE", "청구서 ID 누락", HttpStatus.INTERNAL_SERVER_ERROR)
+                orgBillingService.payBilling(billingId, payment.id)
             }
         }
 
