@@ -643,11 +643,13 @@ class UnifiedReportService(
         val cells = activePlanIds.flatMap { studyPlanCellRepo.findByPlanIdAndUserId(it, userId) }
         if (cells.isEmpty()) return null
 
-        // 기간 필터: updatedAt이 범위 내이거나, 항상 포함 (계획표 셀은 기간과 무관하게 전체 상태를 보여줌)
-        val totalCells = cells.size
-        val completedCells = cells.count { it.status in listOf("completed", "passed") }
-        val submittedCells = cells.count { it.status in listOf("submitted", "scored") }
-        val pendingCells = cells.count { it.status == "pending" }
+        // 미배정(unassigned) 셀은 강사가 아직 할당하지 않아 학생이 진행할 수 없었던 빈 칸 —
+        // 모수·완료율·전체 카운트 어디에도 포함하지 않는다.
+        val assignedCells = cells.filter { it.status != "unassigned" }
+        val totalCells = assignedCells.size
+        val completedCells = assignedCells.count { it.status in listOf("completed", "passed") }
+        val submittedCells = assignedCells.count { it.status in listOf("submitted", "scored") }
+        val pendingCells = assignedCells.count { it.status == "pending" }
         val rejectedCells = 0
         val completionRate = if (totalCells > 0)
             round2((completedCells.toDouble() / totalCells * 100).coerceIn(0.0, 100.0)) else 0.0
