@@ -64,6 +64,11 @@ interface LearningCompetencyLogRepository : JpaRepository<LearningCompetencyLogE
 
     @Query("SELECT COUNT(l) FROM LearningCompetencyLogEntity l WHERE l.userId = :userId AND l.inWindow = true")
     fun countInWindow(@Param("userId") userId: String): Long
+
+    /** 학생 한 명의 누적 로그 전체 삭제 (admin backfill 용) */
+    @org.springframework.data.jpa.repository.Modifying
+    @Query("DELETE FROM LearningCompetencyLogEntity l WHERE l.userId = :userId")
+    fun deleteAllByUserId(@Param("userId") userId: String): Int
 }
 
 /* ──────────────────────────────────────────────────────────
@@ -104,4 +109,9 @@ class UserCompetencySummaryId(
 
 interface UserCompetencySummaryRepository : JpaRepository<UserCompetencySummaryEntity, UserCompetencySummaryId> {
     fun findByUserId(userId: String): List<UserCompetencySummaryEntity>
+
+    /** admin backfill 용 — 학생 한 명의 캐시 row 전체 삭제 */
+    @org.springframework.data.jpa.repository.Modifying
+    @Query("DELETE FROM UserCompetencySummaryEntity s WHERE s.userId = :userId")
+    fun deleteAllByUserId(@Param("userId") userId: String): Int
 }

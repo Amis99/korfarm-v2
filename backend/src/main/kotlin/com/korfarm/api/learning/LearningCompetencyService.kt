@@ -96,6 +96,15 @@ class LearningCompetencyService(
     }
 
     /**
+     * 학생 한 명의 누적 데이터 일괄 삭제 (admin backfill 직전 호출).
+     */
+    @Transactional
+    fun clearUserAccumulation(userId: String) {
+        logRepository.deleteAllByUserId(userId)
+        summaryRepository.deleteAllByUserId(userId)
+    }
+
+    /**
      * 학습 1회 결과(벡터 기반)를 누적 시스템에 기록.
      *
      * @param results 문항별 응시 결과 (correctVector + chosenWrongVector + isCorrect)
@@ -107,6 +116,7 @@ class LearningCompetencyService(
         contentId: String,
         source: String,
         results: List<QuestionResult>,
+        completedAt: LocalDateTime? = null,
     ): Boolean {
         if (results.isEmpty()) return false
         // 재응시 차단
@@ -153,7 +163,7 @@ class LearningCompetencyService(
             vectorJson = objectMapper.writeValueAsString(ratio),
             measuredJson = objectMapper.writeValueAsString(measured),
             inWindow = true,
-            completedAt = now,
+            completedAt = completedAt ?: now,
         )
         logRepository.save(log)
 

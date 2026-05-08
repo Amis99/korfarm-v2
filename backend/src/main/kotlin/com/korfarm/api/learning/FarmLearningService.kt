@@ -129,7 +129,7 @@ class FarmLearningService(
      *  3. contentType → 단일 default competency (CompetencyMapping)
      *  → 셋 다 없는 문항도 누적되도록 contentType 기반 fallback 보장
      */
-    private fun computeQuestionResults(
+    internal fun computeQuestionResults(
         contentId: String,
         contentType: String,
         answers: List<AnswerDetailRequest>?,
@@ -208,6 +208,67 @@ class FarmLearningService(
             ))
         }
         return results
+    }
+
+    /**
+     * 학생 한 명의 10대 역량 누적을 처음부터 다시 계산.
+     *
+     * 시나리오: competencyVector fallback 정책이 바뀌었거나, 과거 활동 시점에
+     * 누적 hook 이 silent fail 한 학생을 복구할 때 admin 이 호출.
+     *
+     * 1) user_competency_summary + learning_competency_log 의 해당 학생 row 일괄 삭제
+     * 2) farm_learning_logs (COMPLETED) 시간순 순회 → quiz_answer_details 가져와
+     *    computeQuestionResults + recordVector(completedAt 보존) 재기록
+     *
+     * 시간 가중(decay)·소스 가중(weight)·슬라이딩 윈도우는 recordVector 가 자동 처리.
+     */
+    @Transactional
+    fun rebuildUserCompetency(userId: String): com.korfarm.api.learning.RebuildCompetencyResult {
+        // 1. 기존 누적 삭제 (log + summary cache)
+        learningCompetencyService.clearUserAccumulation(userId)
+
+        // 2. 활동 순회 (오래된 것부터 — decay 가 자동으로 가중)
+        val veryEarly = java.time.LocalDateTime.of(2000, 1, 1, 0, 0)
+        val veryLate = java.time.LocalDateTime.now().plusDays(1)
+        val logs = farmLearningLogRepository
+            .findByUserIdAndStatusAndCompletedAtBetween(userId, "COMPLETED", veryEarly, veryLate)
+            .sortedBy { it.completedAt ?: it.createdAt }
+
+        var processed = 0
+        var recorded = 0
+        var skipped = 0
+        for (log in logs) {
+            processed++
+            val details = quizAnswerDetailRepository.findByLogId(log.id)
+            val answers = details.map { d ->
+                AnswerDetailRequest(
+                    questionId = d.questionId,
+                    questionKind = d.questionKind,
+                    correct = d.correct,
+                    chosenChoiceId = null  // quiz_answer_details 에 저장 X — wrongVector 매칭만 안 됨, 누적은 가능
+                )
+            }
+            val results = try {
+                computeQuestionResults(log.contentId, log.contentType, answers)
+            } catch (_: Exception) { emptyList() }
+            if (results.isEmpty()) { skipped++; continue }
+
+            val source = resolveSourceFromContentType(log.contentType)
+            val ok = learningCompetencyService.recordVector(
+                userId = userId,
+                contentId = log.contentId,
+                source = source,
+                results = results,
+                completedAt = log.completedAt ?: log.createdAt,
+            )
+            if (ok) recorded++ else skipped++
+        }
+        return com.korfarm.api.learning.RebuildCompetencyResult(
+            totalLogs = logs.size,
+            processed = processed,
+            recorded = recorded,
+            skipped = skipped,
+        )
     }
 
     @Transactional(readOnly = true)
