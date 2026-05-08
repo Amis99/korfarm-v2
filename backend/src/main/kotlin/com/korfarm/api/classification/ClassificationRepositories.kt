@@ -16,6 +16,9 @@ interface ContentClassificationRepository : JpaRepository<ContentClassificationE
         "SELECT c.id.contentId FROM ContentClassificationEntity c WHERE c.id.classificationCode = :code"
     )
     fun findContentIdsByCode(code: String): List<String>
+
+    /** 다수 콘텐츠 ID 의 분류 매핑 일괄 조회 — 통합 분석표 영역/주제 집계용 */
+    fun findByIdContentIdIn(contentIds: Collection<String>): List<ContentClassificationEntity>
 }
 
 interface TestQuestionClassificationRepository : JpaRepository<TestQuestionClassificationEntity, TestQuestionClassificationId> {

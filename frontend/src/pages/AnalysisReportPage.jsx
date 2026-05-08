@@ -6,49 +6,31 @@ import { apiGet as adminApiGet } from "../utils/adminApi";
 import ReportLearningDiagnosticPanel from "../components/report/ReportLearningDiagnosticPanel";
 import ReportCompetencyTrendChart from "../components/report/ReportCompetencyTrendChart";
 import ReportCompetencySection from "../components/report/ReportCompetencySection";
+import ReportAreaSection from "../components/report/ReportAreaSection";
+import ReportThemeSection from "../components/report/ReportThemeSection";
+import ReportTrendChart from "../components/report/ReportTrendChart";
 import ReportSectionDetail from "../components/report/ReportSectionDetail";
+import ReportStudyPlanMatrix from "../components/report/ReportStudyPlanMatrix";
+import ReportRecommendations from "../components/report/ReportRecommendations";
+import ReportAiComments from "../components/report/ReportAiComments";
+import ReportWritingStats from "../components/report/ReportWritingStats";
 import "../styles/student-home.css";
 import "../styles/unified-report.css";
 import "../styles/analysis-report.css";
 
 /**
- * 학생 / 학부모 / 관리자 공용 분석 리포트 페이지.
- * 백엔드 /v1/report/unified 응답을 그대로 매핑.
- * - studentIdParam 있으면 학부모/관리자 권한으로 자녀·학생 리포트
- * - period 변경 시 startDate / endDate 재계산해 재요청
+ * 통합 분석표 — 학생 / 학부모 / 관리자 공용
+ * 사용자 명시 8개 섹션:
+ *   1. 10대 역량 분석
+ *   2. 영역별·세부영역별·주제별 성취 분석
+ *   3. 최근 테스트 추이
+ *   4. 학습량 및 학습 분포
+ *   5. 학습 계획표 수행도
+ *   6. AI 코멘트
+ *   7. 다음 추천 학습 (일일 학습 제외)
+ *   8. 글쓰기 현황
+ * + 인쇄 버튼
  */
-
-// 백엔드 CompetencyConstants.kt 의 10대 역량과 일치해야 함.
-const COMPETENCY_LIST = [
-  "어휘력",
-  "문장 독해력",
-  "구조 독해력",
-  "논리 사고력",
-  "어법·문법 능력",
-  "국어 개념 적용 능력",
-  "국어 관련 배경지식",
-  "비문학 배경지식",
-  "문제 분석 및 전략 수립 능력",
-  "선택지 분석 및 전략 수립 능력",
-];
-
-function levelClass(v) {
-  if (v == null) return "";
-  if (v >= 4) return "lvl-4";
-  if (v >= 3) return "lvl-3";
-  if (v >= 2) return "lvl-2";
-  if (v >= 1) return "lvl-1";
-  return "";
-}
-
-// 활동 횟수 → heatmap 단계 (0~4)
-function countToLevel(c) {
-  if (!c || c === 0) return 0;
-  if (c <= 2) return 1;
-  if (c <= 5) return 2;
-  if (c <= 9) return 3;
-  return 4;
-}
 
 // 기간 → 날짜 범위
 function buildDateRange(period) {
@@ -58,94 +40,18 @@ function buildDateRange(period) {
   if (period === "7d") start.setDate(now.getDate() - 6);
   else if (period === "30d") start.setDate(now.getDate() - 29);
   else if (period === "90d") start.setDate(now.getDate() - 89);
-  else start.setFullYear(now.getFullYear() - 2); // "all" — 2년치
+  else start.setFullYear(now.getFullYear() - 2);
   return { start: start.toISOString().slice(0, 10), end };
 }
 
-// 영역별 매핑용 컬러
-const AREA_COLOR = {
-  "비문학": "#F06C24",
-  "문학":  "#5B9BD5",
-  "문법·어휘": "#A5C77E",
-  "문법": "#A5C77E",
-  "어휘": "#A5C77E",
-  "화법·작문": "#F4C97A",
-  "매체": "#C589CB",
-  "기타": "#B7AFA1",
+const SOURCE_COLOR = {
+  examOmr: "#5B9BD5",
+  farmMode: "#A5C77E",
+  dailyQuiz: "#F4C97A",
+  dailyReading: "#F06C24",
+  proMode: "#C589CB",
+  studyPlan: "#B7AFA1",
 };
-
-// SVG radar chart (10 axes)
-function RadarChart({ values }) {
-  const cx = 180, cy = 180, R = 130;
-  const N = 10;
-  const points = values.map((v, i) => {
-    const angle = (Math.PI * 2 * i) / N - Math.PI / 2;
-    const r = (R * Math.max(0, Math.min(100, v))) / 100;
-    return [cx + r * Math.cos(angle), cy + r * Math.sin(angle)];
-  });
-  const polygonPts = points.map((p) => p.join(",")).join(" ");
-
-  // 그리드 (5단계)
-  const gridLevels = [0.2, 0.4, 0.6, 0.8, 1.0];
-  return (
-    <svg viewBox="0 0 360 360" className="radar-svg" aria-label="10대 역량 분포 레이더">
-      {gridLevels.map((g) => (
-        <polygon
-          key={g}
-          points={Array.from({ length: N }, (_, i) => {
-            const a = (Math.PI * 2 * i) / N - Math.PI / 2;
-            const r = R * g;
-            return `${cx + r * Math.cos(a)},${cy + r * Math.sin(a)}`;
-          }).join(" ")}
-          fill="none"
-          stroke="rgba(216, 203, 177, 0.5)"
-          strokeWidth="1"
-        />
-      ))}
-      {Array.from({ length: N }, (_, i) => {
-        const a = (Math.PI * 2 * i) / N - Math.PI / 2;
-        return (
-          <line
-            key={i}
-            x1={cx}
-            y1={cy}
-            x2={cx + R * Math.cos(a)}
-            y2={cy + R * Math.sin(a)}
-            stroke="rgba(216, 203, 177, 0.4)"
-            strokeWidth="1"
-          />
-        );
-      })}
-      <polygon
-        points={polygonPts}
-        fill="rgba(240, 108, 36, 0.25)"
-        stroke="#F06C24"
-        strokeWidth="2"
-        strokeLinejoin="round"
-      />
-      {COMPETENCY_LIST.map((label, i) => {
-        const a = (Math.PI * 2 * i) / N - Math.PI / 2;
-        const r = R + 22;
-        const x = cx + r * Math.cos(a);
-        const y = cy + r * Math.sin(a);
-        return (
-          <text
-            key={label}
-            x={x}
-            y={y}
-            fontSize="10.5"
-            fill="#6B6359"
-            textAnchor="middle"
-            dominantBaseline="middle"
-            fontWeight="600"
-          >
-            {label}
-          </text>
-        );
-      })}
-    </svg>
-  );
-}
 
 function AnalysisReportPage() {
   const navigate = useNavigate();
@@ -161,11 +67,6 @@ function AnalysisReportPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // 시즌 점수·랭킹 (별도 API)
-  const [seasonScore, setSeasonScore] = useState(0);
-  const [rankPos, setRankPos] = useState(null);
-
-  // 자기 이름 / 자녀 이름은 응답의 studentName 사용. fallback 으로 /v1/auth/me
   const [meName, setMeName] = useState("");
 
   useEffect(() => {
@@ -199,122 +100,32 @@ function AnalysisReportPage() {
       .finally(() => setLoading(false));
   }, [period, isParent, isAdmin, studentIdParam]);
 
-  // 시즌 점수
-  useEffect(() => {
-    apiGet("/v1/seasons/current")
-      .then((season) => {
-        const sid = season?.id || season?.seasonId;
-        if (!sid) return;
-        apiGet(`/v1/seasons/${sid}/harvest-rankings`).then((r) => {
-          const items = r?.items || (Array.isArray(r) ? r : []);
-          if (Array.isArray(items)) {
-            const targetUserId = studentIdParam || user?.id;
-            const me = items.find((it) => it.me || it.isMe || it.userId === targetUserId);
-            if (me) {
-              setSeasonScore(me.value ?? me.totalCrops ?? me.score ?? 0);
-              setRankPos(me.rank ?? null);
-            }
-          }
-        });
-      })
-      .catch(() => {});
-  }, [studentIdParam, user]);
-
-  // ─── 파생 데이터 ────────────────────────────────────────────────
-
   const studentName = report?.studentName || meName || "학생";
 
-  // 10대 역량 radar
-  const radarValues = useMemo(() => {
-    const radar = report?.competencyRadarData;
-    if (!radar?.labels || !radar?.scores) return COMPETENCY_LIST.map(() => 0);
-    // labels 순서가 COMPETENCY_LIST 와 다를 수 있으니 매핑
-    return COMPETENCY_LIST.map((label) => {
-      const i = radar.labels.indexOf(label);
-      return i >= 0 ? Math.max(0, Math.min(100, radar.scores[i] ?? 0)) : 0;
-    });
-  }, [report]);
-
-  // 강점·약점
-  const { strongs, weaks } = useMemo(() => {
-    const arr = COMPETENCY_LIST.map((label, i) => ({
-      label,
-      score: radarValues[i],
-    })).filter((c) => c.score > 0);
-    arr.sort((a, b) => b.score - a.score);
-    return {
-      strongs: arr.slice(0, 3).map((c) => c.label),
-      weaks: arr.slice(-3).reverse().map((c) => c.label),
-    };
-  }, [radarValues]);
-
-  // 학습 요약 카드 — sections 합산
-  const summary = useMemo(() => {
+  // 학습량 — 활동 카드 + 비중 바
+  const activityList = useMemo(() => {
     const s = report?.sections || {};
-    const sum = (key) => s[key]?.count ?? 0;
-    const totalActivities = sum("examOmr") + sum("farmMode") + sum("dailyQuiz") +
-                            sum("dailyReading") + (s.proMode?.completedItems ?? 0) +
-                            (s.proMode?.testCount ?? 0);
-
-    // 평균 정답률 — calendar 의 averageAccuracy 평균
-    const cal = report?.calendar || [];
-    let accSum = 0, accCnt = 0;
-    cal.forEach((c) => {
-      if (c.averageAccuracy != null) {
-        accSum += c.averageAccuracy;
-        accCnt += 1;
-      }
-    });
-    const avgAccuracy = accCnt > 0 ? Math.round(accSum / accCnt) : null;
-
-    // 활동 일수
-    const activeDays = cal.filter((c) => (c.totalCount || 0) > 0).length;
-
-    return { totalActivities, avgAccuracy, activeDays };
-  }, [report]);
-
-  // 영역별 학습량 (areaStats → bar)
-  const areaList = useMemo(() => {
-    const stats = report?.areaStats || [];
-    const total = stats.reduce((s, a) => s + (a.activityCount || 0), 0) || 1;
-    return stats.map((a) => ({
-      area: a.areaLabel || a.areaKey,
-      activityCount: a.activityCount || 0,
-      pct: Math.round(((a.activityCount || 0) / total) * 100),
-      avgScore: a.averageScore,
-      color: AREA_COLOR[a.areaLabel] || "#A5C77E",
-    }));
-  }, [report]);
-
-  // 학습 흔적 heatmap — calendar 응답 사용 (날짜 → totalCount)
-  const heatmapDays = useMemo(() => {
-    const cal = report?.calendar || [];
-    const calMap = {};
-    cal.forEach((e) => { calMap[e.date] = e; });
-
-    const { start, end } = buildDateRange(period);
-    const days = [];
-    const startD = new Date(start);
-    const endD = new Date(end);
-    for (let d = new Date(startD); d <= endD; d.setDate(d.getDate() + 1)) {
-      const ds = d.toISOString().slice(0, 10);
-      const entry = calMap[ds];
-      const count = entry?.totalCount || 0;
-      days.push({
-        date: ds,
-        count,
-        accuracy: entry?.averageAccuracy ?? null,
-        level: countToLevel(count),
-      });
+    const out = [];
+    if (s.examOmr?.count) {
+      out.push({ key: "examOmr", label: "시험 OMR", count: s.examOmr.count, score: s.examOmr.averageScore, color: SOURCE_COLOR.examOmr });
     }
-    return days;
-  }, [report, period]);
-
-  // 추천 학습 — recommendations
-  const recommendations = useMemo(() => {
-    const recs = report?.recommendations || [];
-    return recs.slice(0, 6);
+    if (s.farmMode?.count) {
+      out.push({ key: "farmMode", label: "농장 모드", count: s.farmMode.count, score: s.farmMode.averageAccuracy ?? s.farmMode.averageScore, color: SOURCE_COLOR.farmMode });
+    }
+    if (s.dailyQuiz?.count) {
+      out.push({ key: "dailyQuiz", label: "일일 퀴즈", count: s.dailyQuiz.count, score: s.dailyQuiz.averageScore, color: SOURCE_COLOR.dailyQuiz });
+    }
+    if (s.dailyReading?.count) {
+      out.push({ key: "dailyReading", label: "일일 독해", count: s.dailyReading.count, score: s.dailyReading.averageScore, color: SOURCE_COLOR.dailyReading });
+    }
+    const proTotal = (s.proMode?.completedItems ?? 0) + (s.proMode?.testCount ?? 0);
+    if (proTotal > 0) {
+      out.push({ key: "proMode", label: "프로 모드", count: proTotal, score: s.proMode?.averageTestScore, color: SOURCE_COLOR.proMode, sub: `학습 ${s.proMode?.completedItems ?? 0} · 테스트 ${s.proMode?.testCount ?? 0}` });
+    }
+    return out;
   }, [report]);
+
+  const totalActivities = activityList.reduce((s, a) => s + a.count, 0);
 
   const periods = [
     { id: "7d", label: "최근 7일" },
@@ -323,38 +134,13 @@ function AnalysisReportPage() {
     { id: "all", label: "전체" },
   ];
 
-  // sections 활동별 상세 — 제목/회수
-  const sectionsList = useMemo(() => {
-    const s = report?.sections || {};
-    const out = [];
-    if (s.examOmr?.count) out.push({ key: "examOmr", label: "테스트", count: s.examOmr.count, color: "#5B9BD5" });
-    if (s.farmMode?.count) out.push({ key: "farmMode", label: "농장 모드", count: s.farmMode.count, accuracy: s.farmMode.averageAccuracy, color: "#A5C77E" });
-    if (s.dailyQuiz?.count) out.push({ key: "dailyQuiz", label: "일일 퀴즈", count: s.dailyQuiz.count, color: "#F4C97A" });
-    if (s.dailyReading?.count) out.push({ key: "dailyReading", label: "일일 독해", count: s.dailyReading.count, color: "#F06C24" });
-    if ((s.proMode?.completedItems ?? 0) + (s.proMode?.testCount ?? 0) > 0) {
-      out.push({
-        key: "proMode",
-        label: "프로 모드",
-        count: (s.proMode?.completedItems ?? 0) + (s.proMode?.testCount ?? 0),
-        sub: `학습 ${s.proMode?.completedItems ?? 0} · 테스트 ${s.proMode?.testCount ?? 0}`,
-        color: "#C589CB",
-      });
-    }
-    if (s.studyPlan?.totalCells) {
-      out.push({
-        key: "studyPlan",
-        label: "학습 계획표",
-        count: s.studyPlan.completedCells ?? 0,
-        sub: `${s.studyPlan.completedCells ?? 0}/${s.studyPlan.totalCells} 완료`,
-        color: "#B7AFA1",
-      });
-    }
-    return out;
-  }, [report]);
+  const handlePrint = () => {
+    window.print();
+  };
 
   return (
     <div className="student-home report-shell">
-      <header className="top-bar" style={{ padding: "calc(env(safe-area-inset-top) + 14px) 18px 14px" }}>
+      <header className="top-bar no-print" style={{ padding: "calc(env(safe-area-inset-top) + 14px) 18px 14px" }}>
         <button className="hamburger" aria-label="홈으로" onClick={() => navigate(-1)}>
           <span></span>
         </button>
@@ -371,238 +157,225 @@ function AnalysisReportPage() {
       <div className="report-page-head">
         <div className="row">
           <h1>📊 {studentName}의 통합 분석표</h1>
-          <div className="period-tabs" role="tablist">
-            {periods.map((p) => (
-              <button
-                key={p.id}
-                role="tab"
-                className={period === p.id ? "active" : ""}
-                onClick={() => setPeriod(p.id)}
-              >
-                {p.label}
-              </button>
-            ))}
+          <div className="report-actions">
+            <div className="period-tabs no-print" role="tablist">
+              {periods.map((p) => (
+                <button
+                  key={p.id}
+                  role="tab"
+                  className={period === p.id ? "active" : ""}
+                  onClick={() => setPeriod(p.id)}
+                >
+                  {p.label}
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              className="btn-print no-print"
+              onClick={handlePrint}
+              aria-label="인쇄하기"
+            >
+              🖨 인쇄
+            </button>
           </div>
         </div>
-        <p>학습 데이터를 한눈에 보여드려요. 약점은 무엇이고 어떻게 보강하면 좋을지 AI 가 분석했어요.</p>
+        <p>학습 데이터를 영역·주제·역량 단위로 분석해 강약점을 한눈에 보여줍니다.</p>
       </div>
 
       {loading && (
-        <div style={{ margin: "0 16px 16px", padding: 16, background: "var(--surface)", borderRadius: 16, textAlign: "center", color: "var(--muted)" }}>
-          분석 데이터를 불러오는 중...
-        </div>
+        <div className="report-status-msg">분석 데이터를 불러오는 중...</div>
       )}
       {error && !loading && (
-        <div style={{ margin: "0 16px 16px", padding: 16, background: "rgba(216, 88, 14, 0.1)", border: "1px solid rgba(216, 88, 14, 0.3)", borderRadius: 16, textAlign: "center", color: "var(--accent-deep)", fontSize: 13 }}>
-          ⚠️ {error}
-        </div>
+        <div className="report-status-msg report-status-error">⚠️ {error}</div>
       )}
 
-      <section className="report-section">
-        <h2>📈 학습 요약</h2>
-        <div className="summary-grid">
-          <div className="summary-card">
-            <span className="label">총 학습 활동</span>
-            <span className="value">{summary.totalActivities.toLocaleString()}</span>
-            <span className="delta">건</span>
-          </div>
-          <div className="summary-card tint-blue">
-            <span className="label">평균 정답률</span>
-            <span className="value">{summary.avgAccuracy != null ? `${summary.avgAccuracy}%` : "—"}</span>
-            <span className="delta">{summary.avgAccuracy != null ? "기간 평균" : "데이터 부족"}</span>
-          </div>
-          <div className="summary-card tint-green">
-            <span className="label">활동 일수</span>
-            <span className="value">{summary.activeDays}</span>
-            <span className="delta">일</span>
-          </div>
-          <div className="summary-card tint-orange">
-            <span className="label">시즌 점수</span>
-            <span className="value">{Number(seasonScore).toLocaleString()}</span>
-            <span className="delta">{rankPos ? `${rankPos}위` : "—"}</span>
-          </div>
-        </div>
-      </section>
-
-      {/* 10대 역량 분포 — 학습 누적 vs 진단 측정 (백엔드 표준 10대 역량 사용) */}
-      {(report?.learningCompetency || report?.diagnosticCompetency) && (
-        <section className="report-section">
-          <h2>🎯 10대 역량 분포</h2>
+      {/* 1. 10대 역량 분석 */}
+      <section className="report-section" id="sec-competency">
+        <h2>🎯 10대 역량 분석</h2>
+        {(report?.learningCompetency || report?.diagnosticCompetency) ? (
           <div className="competency-panel-compact">
             <ReportLearningDiagnosticPanel
               learningCompetency={report.learningCompetency}
               diagnosticCompetency={report.diagnosticCompetency}
             />
           </div>
-        </section>
-      )}
-
-      <section className="report-section">
-        <h2>📚 영역별 학습량</h2>
-        {areaList.length === 0 ? (
-          <p style={{ margin: 0, fontSize: 13, color: "var(--muted)" }}>
-            아직 영역별 데이터가 없어요. 학습을 시작하면 여기에 채워져요.
-          </p>
         ) : (
-          <div className="bar-list">
-            {areaList.map((a) => (
-              <div key={a.area} className="bar-row">
-                <span className="label">{a.area}</span>
-                <div className="bar-bg">
-                  <div className="bar-fill" style={{ width: `${a.pct}%`, background: a.color }}></div>
-                </div>
-                <span className="pct">
-                  {a.activityCount}회
-                  {a.avgScore != null && ` · ${a.avgScore.toFixed(0)}%`}
-                </span>
+          <p className="ur-empty">아직 역량 데이터가 충분하지 않습니다.</p>
+        )}
+
+        {Array.isArray(report?.competencyTrend) && report.competencyTrend.length > 0 && (
+          <div style={{ marginTop: 16 }}>
+            <h3>역량 변화 추이</h3>
+            <ReportCompetencyTrendChart trend={report.competencyTrend} />
+          </div>
+        )}
+
+        {Array.isArray(report?.competencyStats) && report.competencyStats.length > 0 && (
+          <div style={{ marginTop: 16 }}>
+            <h3>역량 상세 통계</h3>
+            <ReportCompetencySection competencyStats={report.competencyStats} />
+          </div>
+        )}
+
+        <p className="ur-algo-hint" style={{ marginTop: 12 }}>
+          최근 100건 학습/시험 + 30일 가중치 + 시험 10·일일 3·학습 1 가중 + 약점 가중치 + 난이도 보정
+        </p>
+      </section>
+
+      {/* 2. 영역별·세부영역별·주제별 성취 분석 */}
+      <section className="report-section" id="sec-area">
+        <h2>📚 영역별 · 세부영역별 · 주제별 성취 분석</h2>
+        <ReportAreaSection areaStats={report?.areaStats || []} />
+        <div style={{ marginTop: 20 }}>
+          <ReportThemeSection themeStats={report?.themeStats || []} />
+        </div>
+      </section>
+
+      {/* 3. 최근 테스트 추이 */}
+      <section className="report-section" id="sec-tests">
+        <h2>📝 최근 테스트 추이</h2>
+        {report?.sections?.examOmr?.items?.length > 0 ? (
+          <>
+            <table className="ur-test-table">
+              <thead>
+                <tr>
+                  <th>일시</th>
+                  <th>시험명</th>
+                  <th>점수</th>
+                  <th>정답수</th>
+                  <th>정답률</th>
+                </tr>
+              </thead>
+              <tbody>
+                {report.sections.examOmr.items.slice(0, 10).map((it) => (
+                  <tr key={it.submissionId || it.testId}>
+                    <td style={{ fontSize: 12, color: "#666" }}>
+                      {it.submittedAt ? it.submittedAt.slice(0, 10) : "-"}
+                    </td>
+                    <td>{it.testTitle || "-"}</td>
+                    <td>
+                      <strong>{it.score}</strong>/{it.totalPoints}
+                    </td>
+                    <td>{it.correctCount}/{it.totalQuestions}</td>
+                    <td style={{ fontWeight: 700 }}>{it.accuracy?.toFixed(1)}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {Array.isArray(report?.trend) && report.trend.length > 0 && (
+              <div style={{ marginTop: 16 }}>
+                <h3>일자별 추이</h3>
+                <ReportTrendChart trend={report.trend} />
               </div>
-            ))}
+            )}
+          </>
+        ) : (
+          <p className="ur-empty">최근 응시한 시험이 없습니다.</p>
+        )}
+      </section>
+
+      {/* 4. 학습량 및 학습 분포 */}
+      <section className="report-section" id="sec-volume">
+        <h2>🧩 학습량 및 학습 분포</h2>
+
+        <div className="activity-cards">
+          {activityList.map((a) => (
+            <div key={a.key} className="activity-card" style={{ borderColor: a.color }}>
+              <div className="activity-card-label">{a.label}</div>
+              <div className="activity-card-count">
+                {a.count}<span className="unit">회</span>
+              </div>
+              {a.score != null && (
+                <div className="activity-card-score">평균 {Number(a.score).toFixed(1)}점</div>
+              )}
+              {a.sub && <div className="activity-card-sub">{a.sub}</div>}
+            </div>
+          ))}
+          {activityList.length === 0 && (
+            <p className="ur-empty">이 기간엔 학습 활동이 없습니다.</p>
+          )}
+        </div>
+
+        {totalActivities > 0 && (
+          <div style={{ marginTop: 16 }}>
+            <h3>활동 비중</h3>
+            <div className="bar-list">
+              {activityList.map((a) => {
+                const pct = (a.count / totalActivities) * 100;
+                return (
+                  <div key={a.key} className="bar-row">
+                    <span className="label">{a.label}</span>
+                    <div className="bar-bg">
+                      <div className="bar-fill" style={{ width: `${pct}%`, background: a.color }} />
+                    </div>
+                    <span className="pct">{pct.toFixed(0)}% · {a.count}회</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {report?.sections && (
+          <div style={{ marginTop: 16 }}>
+            <h3>활동별 상세</h3>
+            <ReportSectionDetail sections={report.sections} />
           </div>
         )}
       </section>
 
-      <section className="report-section">
-        <h2>📅 학습 흔적</h2>
-        <p style={{ margin: "-8px 0 12px", fontSize: 11.5, color: "var(--subtle)" }}>
-          {summary.activeDays > 0
-            ? `최근 ${heatmapDays.length}일 동안 ${summary.activeDays}일 학습했어요.`
-            : `이 기간엔 학습 기록이 없어요. 일일 퀴즈/독해부터 시작해 보세요.`}
-        </p>
-        <div className="heatmap">
-          {heatmapDays.map((d) => (
-            <div
-              key={d.date}
-              className={`heatmap-cell ${levelClass(d.level)}`}
-              title={`${d.date} — ${d.count}건${d.accuracy != null ? ` · 정답률 ${Math.round(d.accuracy)}%` : ""}`}
-            ></div>
-          ))}
-        </div>
-        <div className="heatmap-legend">
-          <span>적음</span>
-          <span className="dot" style={{ background: "rgba(216, 203, 177, 0.3)" }}></span>
-          <span className="dot lvl-1" style={{ background: "rgba(244, 201, 122, 0.4)" }}></span>
-          <span className="dot lvl-2" style={{ background: "rgba(244, 201, 122, 0.65)" }}></span>
-          <span className="dot lvl-3" style={{ background: "rgba(240, 108, 36, 0.6)" }}></span>
-          <span className="dot lvl-4" style={{ background: "rgba(216, 88, 14, 0.85)" }}></span>
-          <span>많음</span>
-        </div>
-      </section>
-
-      {sectionsList.length > 0 && (
-        <section className="report-section">
-          <h2>🧩 활동 비중</h2>
-          <div className="bar-list">
-            {sectionsList.map((s) => (
-              <div key={s.key} className="bar-row">
-                <span className="label">{s.label}</span>
-                <div className="bar-bg" style={{ background: "rgba(216,203,177,0.25)" }}>
-                  <div
-                    className="bar-fill"
-                    style={{
-                      width: `${Math.min(100, (s.count / Math.max(1, summary.totalActivities)) * 100)}%`,
-                      background: s.color,
-                    }}
-                  ></div>
-                </div>
-                <span className="pct">{s.sub || `${s.count}회`}</span>
+      {/* 5. 학습 계획표 수행도 */}
+      <section className="report-section" id="sec-plan">
+        <h2>📋 학습 계획표 수행도</h2>
+        {report?.sections?.studyPlan?.totalCells > 0 ? (
+          <>
+            <div className="study-plan-summary">
+              <div className="sp-summary-card">
+                <span className="label">완료율</span>
+                <span className="value">{Number(report.sections.studyPlan.completionRate).toFixed(0)}%</span>
               </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* 역량별 일자별 변화 추이 */}
-      {Array.isArray(report?.competencyTrend) && report.competencyTrend.length > 0 && (
-        <section className="report-section">
-          <h2>📈 역량 변화 추이</h2>
-          <ReportCompetencyTrendChart trend={report.competencyTrend} />
-        </section>
-      )}
-
-      {/* 역량 상세 통계 — 정답률·표본수·강약점 */}
-      {Array.isArray(report?.competencyStats) && report.competencyStats.length > 0 && (
-        <section className="report-section">
-          <h2>🎯 역량 상세 통계</h2>
-          <ReportCompetencySection competencyStats={report.competencyStats} />
-        </section>
-      )}
-
-      {/* 활동별 상세 — 시험·농장·일일·프로·학습계획표 */}
-      {report?.sections && (
-        <section className="report-section">
-          <h2>🗂 활동별 상세</h2>
-          <ReportSectionDetail sections={report.sections} />
-        </section>
-      )}
-
-      <section className="report-section">
-        <h2>🤖 AI 코멘트</h2>
-        <div className="ai-comment-box">
-          <div className="head">
-            <span className="clay clay-cream" aria-hidden="true">
-              <span className="lbl">선생님</span>
-            </span>
-            <span className="name">선생님 분석</span>
-          </div>
-          {summary.totalActivities === 0 ? (
-            <p>
-              아직 학습 데이터가 없어요. 일일 퀴즈와 독해를 며칠 진행하면 분석이 나타나요.
-            </p>
-          ) : (
-            <>
-              {strongs.length > 0 && (
-                <p>
-                  <strong>{studentName}</strong> 학생, 최근 {summary.activeDays}일 동안 {summary.totalActivities}건의 학습을 했어요.{" "}
-                  <strong>{strongs[0]}</strong>이(가) 특히 좋아졌어요.
-                </p>
-              )}
-              {weaks.length > 0 && (
-                <p>
-                  다만 <strong>{weaks[0]}</strong> 영역이 아직 약해요. 다음 1~2주 동안 그 영역을 집중적으로 보강하면 균형이 잡힐 거예요.
-                </p>
-              )}
-              {summary.avgAccuracy != null && (
-                <p>
-                  기간 평균 정답률은 <strong>{summary.avgAccuracy}%</strong>예요.{" "}
-                  {summary.avgAccuracy >= 80
-                    ? "아주 잘하고 있어요! 같은 흐름을 유지해요."
-                    : summary.avgAccuracy >= 60
-                      ? "조금만 더 집중하면 80% 도 충분히 가능해요."
-                      : "기초부터 차근차근 풀어 보세요. 어려운 문제는 표시해 두면 도움이 돼요."}
-                </p>
-              )}
-              <p>아래 추천 학습부터 시작해 보세요. 화이팅! 🌱</p>
-            </>
-          )}
-        </div>
+              <div className="sp-summary-card">
+                <span className="label">완료</span>
+                <span className="value">{report.sections.studyPlan.completedCells}</span>
+              </div>
+              <div className="sp-summary-card">
+                <span className="label">제출</span>
+                <span className="value">{report.sections.studyPlan.submittedCells}</span>
+              </div>
+              <div className="sp-summary-card">
+                <span className="label">대기</span>
+                <span className="value">{report.sections.studyPlan.pendingCells}</span>
+              </div>
+              <div className="sp-summary-card">
+                <span className="label">반려</span>
+                <span className="value">{report.sections.studyPlan.rejectedCells}</span>
+              </div>
+            </div>
+            {Array.isArray(report.sections.studyPlan.planIds) && report.sections.studyPlan.planIds.length > 0 && (
+              <div style={{ marginTop: 16 }}>
+                <ReportStudyPlanMatrix planIds={report.sections.studyPlan.planIds} />
+              </div>
+            )}
+          </>
+        ) : (
+          <p className="ur-empty">아직 학습 계획표가 배정되지 않았습니다.</p>
+        )}
       </section>
 
-      <section className="report-section">
+      {/* 6. AI 코멘트 */}
+      <section className="report-section" id="sec-ai">
+        <ReportAiComments comments={report?.aiComments || []} />
+      </section>
+
+      {/* 7. 다음 추천 학습 (일일 학습 제외) */}
+      <section className="report-section" id="sec-reco">
         <h2>✨ 다음 추천 학습</h2>
-        {recommendations.length > 0 ? (
-          <div className="reco-grid">
-            {recommendations.map((r, i) => {
-              const targetRoute = r.contentId
-                ? `/learning/${r.contentId}`
-                : r.testId
-                  ? `/tests/${r.testId}/omr`
-                  : "/my/tutor";
-              return (
-                <button key={r.contentId || r.testId || i} className="reco-item" onClick={() => navigate(targetRoute)}>
-                  <span className="clay clay-yellow" aria-hidden="true">
-                    <span className="lbl">{r.contentTypeLabel?.slice(0, 2) || "추천"}</span>
-                  </span>
-                  <div className="info">
-                    <span className="title">{r.contentTitle || r.testTitle || "추천 학습"}</span>
-                    <span className="meta">
-                      {r.reason || r.areaLabel || r.contentTypeLabel || "약점 보강"}
-                    </span>
-                  </div>
-                  <span className="chev">›</span>
-                </button>
-              );
-            })}
-          </div>
+        <p className="ur-algo-hint">
+          역량·영역·주제별 강약점 기반 추천 (일일 학습 자동 제외)
+        </p>
+        {Array.isArray(report?.recommendations) && report.recommendations.length > 0 ? (
+          <ReportRecommendations recommendations={report.recommendations} />
         ) : (
           <div className="reco-grid">
             <button className="reco-item" onClick={() => navigate("/my/tutor")}>
@@ -615,28 +388,13 @@ function AnalysisReportPage() {
               </div>
               <span className="chev">›</span>
             </button>
-            <button className="reco-item" onClick={() => navigate("/daily-quiz")}>
-              <span className="clay clay-yellow" aria-hidden="true">
-                <span className="lbl">퀴즈</span>
-              </span>
-              <div className="info">
-                <span className="title">일일 퀴즈 풀기</span>
-                <span className="meta">10문제 · 약 5분 · 매일 갱신</span>
-              </div>
-              <span className="chev">›</span>
-            </button>
-            <button className="reco-item" onClick={() => navigate("/daily-reading")}>
-              <span className="clay clay-blue" aria-hidden="true">
-                <span className="lbl">독해</span>
-              </span>
-              <div className="info">
-                <span className="title">일일 독해 풀기</span>
-                <span className="meta">비문학 1지문 · 약 7분</span>
-              </div>
-              <span className="chev">›</span>
-            </button>
           </div>
         )}
+      </section>
+
+      {/* 8. 글쓰기 현황 */}
+      <section className="report-section" id="sec-writing">
+        <ReportWritingStats stats={report?.writingStats} />
       </section>
 
       <div style={{ height: "32px" }} />

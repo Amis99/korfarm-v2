@@ -21,7 +21,13 @@ data class UnifiedReportResponse(
     /** 역량별 일자별 변화 추이 (시계열). Phase 2 신규. */
     val competencyTrend: List<CompetencyTrendPoint> = emptyList(),
     val recommendations: List<LearningRecommendation> = emptyList(),
-    val calendar: List<CalendarDay> = emptyList()
+    val calendar: List<CalendarDay> = emptyList(),
+    /** 주제별 성취 — 영역·세부영역과 같은 가중 평가 공식 적용 */
+    val themeStats: List<ThemeStats> = emptyList(),
+    /** AI 코멘트 — 1차 룰 기반, 추후 LLM 깊은 분석 옵션 */
+    val aiComments: List<AiComment> = emptyList(),
+    /** 글쓰기(포도) 통계 — 작성·AI 첨삭·좋아요·댓글 합산 */
+    val writingStats: WritingStats? = null
 )
 
 /** 학습 종합 누적 10대 역량 (윈도우 내 가중평균) */
@@ -224,19 +230,64 @@ data class RadarData(
     val scores: List<Double>
 )
 
-// 영역별 통계 (비문학/문학/문법/기타)
+// 영역별 통계 (비문학/문학/문법/기타) — V2: 가중 필드 추가, 호환 위해 averageScore 유지
 data class AreaStats(
     val areaKey: String,
     val areaLabel: String,
     val activityCount: Int,
-    val averageScore: Double,
+    val averageScore: Double,                   // 단순 평균 (호환)
+    val rawAverage: Double = 0.0,               // 단순 평균 명시 (V2)
+    val weightedScore: Double = 0.0,            // 시간 decay × 소스 가중 (V2 — UI 표시용)
+    val recentWeight: Double = 0.0,             // 최근 가중치 합 (V2 — 데이터 신선도)
     val subAreas: List<SubAreaStats> = emptyList()
 )
 
 data class SubAreaStats(
     val subAreaLabel: String,
     val activityCount: Int,
-    val averageScore: Double
+    val averageScore: Double,                   // 단순 평균 (호환)
+    val weightedScore: Double = 0.0,            // V2
+    val recentWeight: Double = 0.0              // V2
+)
+
+/** 주제별 통계 (V2 신규) */
+data class ThemeStats(
+    val themeKey: String,
+    val themeLabel: String,
+    val areaLabel: String,                      // 상위 영역 (드릴다운용)
+    val subAreaLabel: String?,
+    val activityCount: Int,
+    val rawAverage: Double,
+    val weightedScore: Double,
+    val recentWeight: Double
+)
+
+/** AI 코멘트 (V2 신규) */
+data class AiComment(
+    val section: String,                        // "역량" / "영역" / "계획표" / "글쓰기" / "추천"
+    val title: String,                          // 짧은 제목
+    val content: String,                        // 본문 (한국어)
+    val severity: String = "info",              // info / warn / good
+    val generatedAt: String? = null
+)
+
+/** 글쓰기(포도) 통계 (V2 신규) */
+data class WritingStats(
+    val totalPostCount: Int,
+    val feedbackReceivedCount: Int,
+    val totalLikes: Int,
+    val totalComments: Int,
+    val recentPosts: List<WritingRecent>
+)
+
+data class WritingRecent(
+    val postId: String,
+    val title: String?,
+    val topicKey: String?,
+    val hasFeedback: Boolean,
+    val likeCount: Int,
+    val commentCount: Int,
+    val createdAt: String?
 )
 
 // 역량별 통계

@@ -2,6 +2,8 @@ package com.korfarm.api.report
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.korfarm.api.classification.ClassificationMasterRepository
+import com.korfarm.api.classification.ContentClassificationRepository
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.diagnostic.DiagSessionRepository
 import com.korfarm.api.diagnostic.scoring.COMPETENCIES
@@ -22,6 +24,12 @@ import com.korfarm.api.test.TestSubmissionRepo
 import com.korfarm.api.studyplan.*
 import com.korfarm.api.user.ParentLinkService
 import com.korfarm.api.user.UserRepository
+import com.korfarm.api.wisdom.AiFeedbackJobRepository
+import com.korfarm.api.wisdom.AiFeedbackJobStatus
+import com.korfarm.api.wisdom.WisdomCommentRepository
+import com.korfarm.api.wisdom.WisdomFeedbackRepository
+import com.korfarm.api.wisdom.WisdomLikeRepository
+import com.korfarm.api.wisdom.WisdomPostRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -29,6 +37,9 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
+import kotlin.math.exp
+import kotlin.math.ln
 
 @Service
 class UnifiedReportService(
@@ -54,6 +65,15 @@ class UnifiedReportService(
     private val learningCompetencyLogRepo: LearningCompetencyLogRepository,
     /** 진단 v2 결과 조회 (Phase 2 신규) */
     private val diagSessionRepo: DiagSessionRepository,
+    /** V0100 분류 마스터 — 영역·세부영역·주제 통합 평가 (V2 신규) */
+    private val classificationMasterRepo: ClassificationMasterRepository,
+    private val contentClassificationRepo: ContentClassificationRepository,
+    /** 글쓰기 통계 집계 (V2 신규) */
+    private val wisdomPostRepo: WisdomPostRepository,
+    private val wisdomFeedbackRepo: WisdomFeedbackRepository,
+    private val wisdomLikeRepo: WisdomLikeRepository,
+    private val wisdomCommentRepo: WisdomCommentRepository,
+    private val aiFeedbackJobRepo: AiFeedbackJobRepository,
     private val objectMapper: ObjectMapper
 ) {
     private val dtFmt = DateTimeFormatter.ISO_LOCAL_DATE_TIME
@@ -98,7 +118,10 @@ class UnifiedReportService(
 
         // 역량별·영역별 분석
         val competencyStats = buildCompetencyStats(studentId, start, end, farmMode)
-        val areaStats = buildAreaStats(farmMode)
+        // V2: 시험·일일·농장·프로 통합 + decay + 소스 가중 + 윈도우 200
+        val areaEntries = collectAreaEntries(studentId, start, end)
+        val areaStats = buildAreaStatsV2(areaEntries)
+        val themeStats = buildThemeStatsV2(areaEntries)
         val recommendations = buildRecommendations(competencyStats, areaStats)
 
         val competencyRadarData = if (competencyStats.isNotEmpty()) {
@@ -118,6 +141,18 @@ class UnifiedReportService(
         val diagnosticCompetency = buildDiagnosticCompetencySnapshot(studentId)
         val competencyTrend = buildCompetencyTrend(studentId, start, end)
 
+        // V2 — AI 코멘트 + 글쓰기 통계
+        val writingStats = buildWritingStats(studentId, start, end)
+        val aiComments = buildAiComments(
+            learningCompetency = learningCompetency,
+            diagnosticCompetency = diagnosticCompetency,
+            areaStats = areaStats,
+            themeStats = themeStats,
+            studyPlan = studyPlan,
+            writingStats = writingStats,
+            recommendations = recommendations
+        )
+
         return UnifiedReportResponse(
             studentId = studentId,
             studentName = user.name ?: "",
@@ -133,7 +168,10 @@ class UnifiedReportService(
             diagnosticCompetency = diagnosticCompetency,
             competencyTrend = competencyTrend,
             recommendations = recommendations,
-            calendar = calendar
+            calendar = calendar,
+            themeStats = themeStats,
+            aiComments = aiComments,
+            writingStats = writingStats
         )
     }
 
@@ -737,8 +775,434 @@ class UnifiedReportService(
         }
     }
 
-    /** 영역별 통계 빌드: contentType → 비문학/문학/문법/기타 + subArea 세부분류 */
-    private fun buildAreaStats(farmMode: FarmModeSection): List<AreaStats> {
+    /* ───────────────── V2: 영역·세부영역·주제 가중 평가 알고리즘 ─────────────────
+     * 10대 역량 알고리즘과 동일 공식: 슬라이딩 윈도우 200 + 시간 decay (30일 half-life)
+     *   + 소스 가중 (시험 10 / 일일 3 / 학습 1).
+     * 데이터 소스: 시험 OMR(test_submission) + 일일퀴즈/독해(learning_attempt) +
+     *   농장 모드(farm_learning_log) + 프로 모드(pro_progress).
+     * 분류: V0100 분류 마스터 + content_classifications 우선, 없으면 Content.area/subArea fallback.
+     */
+    private data class AreaEntry(
+        val areaLabel: String,
+        val subAreaLabel: String?,
+        val themeKey: String?,
+        val themeLabel: String?,
+        val score: Double,                  // 0~100
+        val weight: Double,                 // sourceWeight
+        val completedAt: LocalDateTime
+    )
+
+    /** 영역별 슬라이딩 윈도우 — 10대 역량(100)보다 큼 (영역 다양성↑) */
+    private val AREA_WINDOW_SIZE = 200
+    private val AREA_HALF_LIFE_DAYS = 30.0
+    private val SRC_WEIGHT_TEST = 10.0
+    private val SRC_WEIGHT_DAILY = 3.0
+    private val SRC_WEIGHT_LEARN = 1.0
+
+    private fun areaDecay(daysAgo: Long): Double =
+        exp(-ln(2.0) * daysAgo.coerceAtLeast(0).toDouble() / AREA_HALF_LIFE_DAYS)
+
+    /** 모든 활동 소스에서 area/subArea/theme 정규화된 entry 수집 */
+    private fun collectAreaEntries(
+        userId: String,
+        start: LocalDateTime,
+        end: LocalDateTime
+    ): List<AreaEntry> {
+        val entries = mutableListOf<AreaEntry>()
+
+        // 분류 마스터 캐시 — code → (type, label, parentCode)
+        val masterByCode = classificationMasterRepo.findAllByActiveOrderBySortOrderAsc(true)
+            .associateBy { it.code }
+
+        fun resolveByContentId(
+            contentId: String,
+            fallbackArea: String,
+            fallbackSubArea: String?,
+            classMap: Map<String, List<com.korfarm.api.classification.ContentClassificationEntity>>
+        ): Triple<String, String?, Pair<String?, String?>> {
+            // V0100 분류 우선
+            val mappings = classMap[contentId].orEmpty()
+            val themeMap = mappings.firstOrNull { it.classificationType == "theme" }
+            val subAreaMap = mappings.firstOrNull { it.classificationType == "sub_area" }
+            val areaMap = mappings.firstOrNull { it.classificationType == "area" }
+
+            val themeMaster = themeMap?.let { masterByCode[it.id.classificationCode] }
+            val subAreaFromTheme = themeMaster?.parentCode?.let { masterByCode[it] }
+            val areaFromSub = subAreaFromTheme?.parentCode?.let { masterByCode[it] }
+
+            val finalThemeLabel = themeMaster?.labelKo
+            val finalThemeKey = themeMap?.id?.classificationCode
+            val finalSubLabel = (subAreaFromTheme ?: subAreaMap?.let { masterByCode[it.id.classificationCode] })?.labelKo
+                ?: fallbackSubArea
+            val finalAreaLabel = (areaFromSub ?: areaMap?.let { masterByCode[it.id.classificationCode] })?.labelKo
+                ?: fallbackArea
+
+            return Triple(finalAreaLabel, finalSubLabel, finalThemeKey to finalThemeLabel)
+        }
+
+        // 1) 시험 OMR — 한 시험은 다영역 혼합이라 paper.area / 콘텐츠 분류 정보 부족.
+        //    1차에서는 시험 1건을 "기타" 또는 paper title 기반으로 저장. 점수=정답률 100점환산.
+        val testSubmissions = testSubmissionRepo.findByUserIdAndCreatedAtBetween(userId, start, end)
+        val testPaperIds = testSubmissions.map { it.testId }.distinct()
+        val testPapers = if (testPaperIds.isNotEmpty()) testPaperRepo.findAllById(testPaperIds).associateBy { it.id } else emptyMap()
+        for (sub in testSubmissions) {
+            val paper = testPapers[sub.testId] ?: continue
+            val totalQ = paper.totalQuestions
+            val score = if (totalQ > 0) (sub.correctCount.toDouble() / totalQ) * 100.0 else 0.0
+            entries += AreaEntry(
+                areaLabel = "시험",
+                subAreaLabel = paper.title.take(20),
+                themeKey = null,
+                themeLabel = null,
+                score = score,
+                weight = SRC_WEIGHT_TEST,
+                completedAt = sub.createdAt
+            )
+        }
+
+        // 2) 일일 퀴즈 + 일일 독해 — learning_attempt 활용
+        val attempts = learningAttemptRepo.findByUserIdAndActivityTypeAndSubmittedAtBetween(userId, "daily_quiz", start, end) +
+            learningAttemptRepo.findByUserIdAndActivityTypeAndSubmittedAtBetween(userId, "daily_reading", start, end)
+
+        // 3) 농장 모드 + 프로 모드 — farm_learning_log 통합 (PRO_, DAILY_ 포함된 log)
+        val farmLogs = farmLearningLogRepo.findByUserIdAndStatusAndCompletedAtBetween(userId, "COMPLETED", start, end)
+
+        // 콘텐츠 분류 일괄 조회 (attempts + farmLogs)
+        val attemptContentIds = attempts.map { it.contentId }.toSet()
+        val farmContentIds = farmLogs.map { it.contentId }.toSet()
+        val allContentIds = (attemptContentIds + farmContentIds).toList()
+        val contentInfoMap = if (allContentIds.isNotEmpty()) {
+            contentRepository.findAllById(allContentIds).associateBy { it.id }
+        } else emptyMap()
+        val classMap = if (allContentIds.isNotEmpty()) {
+            contentClassificationRepo.findByIdContentIdIn(allContentIds).groupBy { it.id.contentId }
+        } else emptyMap()
+
+        for (a in attempts) {
+            val content = contentInfoMap[a.contentId] ?: continue
+            val src = a.activityType
+            val (areaLabel, subLabel, themePair) = resolveByContentId(
+                a.contentId,
+                fallbackArea = CompetencyMapping.domainAreaFor(content.contentType),
+                fallbackSubArea = content.subArea,
+                classMap = classMap
+            )
+            val sc = (a.score ?: 0).toDouble()
+            val ts = a.submittedAt ?: continue
+            entries += AreaEntry(
+                areaLabel = areaLabel,
+                subAreaLabel = subLabel,
+                themeKey = themePair.first,
+                themeLabel = themePair.second,
+                score = sc,
+                weight = if (src == "daily_quiz" || src == "daily_reading") SRC_WEIGHT_DAILY else SRC_WEIGHT_LEARN,
+                completedAt = ts
+            )
+        }
+
+        for (log in farmLogs) {
+            val content = contentInfoMap[log.contentId]
+            // farm_learning_log 는 daily_quiz / daily_reading / pro_* / 농장 모드 모두 포함.
+            // 위 attempts 에서 이미 daily 처리했으므로 여기는 farm + pro 만.
+            if (log.contentType == "DAILY_QUIZ" || log.contentType == "DAILY_READING") continue
+            val ts = log.completedAt ?: continue
+            val sc = (log.accuracy ?: log.score ?: 0).toDouble()
+            val (areaLabel, subLabel, themePair) = resolveByContentId(
+                log.contentId,
+                fallbackArea = CompetencyMapping.domainAreaFor(log.contentType),
+                fallbackSubArea = content?.subArea,
+                classMap = classMap
+            )
+            entries += AreaEntry(
+                areaLabel = areaLabel,
+                subAreaLabel = subLabel,
+                themeKey = themePair.first,
+                themeLabel = themePair.second,
+                score = sc,
+                weight = SRC_WEIGHT_LEARN,
+                completedAt = ts
+            )
+        }
+
+        // 슬라이딩 윈도우 — 최근 200건만
+        return entries.sortedByDescending { it.completedAt }.take(AREA_WINDOW_SIZE)
+    }
+
+    /** 영역·세부영역 가중 평가 V2 */
+    private fun buildAreaStatsV2(entries: List<AreaEntry>): List<AreaStats> {
+        if (entries.isEmpty()) return emptyList()
+        val now = LocalDateTime.now()
+
+        val byArea = entries.groupBy { it.areaLabel }
+        val ordered = listOf("비문학", "문학", "문법", "화법", "작문", "매체", "독서 (비문학)", "시험", "기타")
+        val keys = (ordered.filter { it in byArea.keys } + (byArea.keys - ordered.toSet())).distinct()
+
+        return keys.mapNotNull { area ->
+            val list = byArea[area] ?: return@mapNotNull null
+            val (raw, weighted, recent) = computeWeighted(list, now)
+            val subList = list.groupBy { it.subAreaLabel ?: "기타" }.map { (sa, slist) ->
+                val (sraw, sweighted, srecent) = computeWeighted(slist, now)
+                SubAreaStats(
+                    subAreaLabel = sa,
+                    activityCount = slist.size,
+                    averageScore = round2(sraw),
+                    weightedScore = round2(sweighted),
+                    recentWeight = round2(srecent)
+                )
+            }.sortedByDescending { it.weightedScore }
+            AreaStats(
+                areaKey = area,
+                areaLabel = area,
+                activityCount = list.size,
+                averageScore = round2(raw),
+                rawAverage = round2(raw),
+                weightedScore = round2(weighted),
+                recentWeight = round2(recent),
+                subAreas = subList
+            )
+        }
+    }
+
+    /** 주제별 가중 평가 V2 — themeKey 가 있는 entry 만 */
+    private fun buildThemeStatsV2(entries: List<AreaEntry>): List<ThemeStats> {
+        if (entries.isEmpty()) return emptyList()
+        val now = LocalDateTime.now()
+
+        val themed = entries.filter { !it.themeKey.isNullOrBlank() && !it.themeLabel.isNullOrBlank() }
+        if (themed.isEmpty()) return emptyList()
+
+        return themed.groupBy { it.themeKey!! }.map { (key, list) ->
+            val sample = list.first()
+            val (raw, weighted, recent) = computeWeighted(list, now)
+            ThemeStats(
+                themeKey = key,
+                themeLabel = sample.themeLabel ?: key,
+                areaLabel = sample.areaLabel,
+                subAreaLabel = sample.subAreaLabel,
+                activityCount = list.size,
+                rawAverage = round2(raw),
+                weightedScore = round2(weighted),
+                recentWeight = round2(recent)
+            )
+        }.sortedByDescending { it.weightedScore }
+    }
+
+    /** entries → (rawAverage, weightedScore, recentWeight) 계산 */
+    private fun computeWeighted(list: List<AreaEntry>, now: LocalDateTime): Triple<Double, Double, Double> {
+        if (list.isEmpty()) return Triple(0.0, 0.0, 0.0)
+        var rawSum = 0.0
+        var weightedSum = 0.0
+        var weightSum = 0.0
+        for (e in list) {
+            val daysAgo = ChronoUnit.DAYS.between(e.completedAt, now)
+            val decay = areaDecay(daysAgo)
+            val effW = e.weight * decay
+            rawSum += e.score
+            weightedSum += e.score * effW
+            weightSum += effW
+        }
+        return Triple(
+            rawSum / list.size,
+            if (weightSum > 0) weightedSum / weightSum else 0.0,
+            weightSum
+        )
+    }
+
+    /** AI 코멘트 — 룰 기반 템플릿 (자몽 차감 X). 약점·강점·계획표·글쓰기 분석 */
+    private fun buildAiComments(
+        learningCompetency: LearningCompetencySnapshot?,
+        diagnosticCompetency: DiagnosticCompetencySnapshot?,
+        areaStats: List<AreaStats>,
+        themeStats: List<ThemeStats>,
+        studyPlan: StudyPlanSection?,
+        writingStats: WritingStats?,
+        recommendations: List<LearningRecommendation>
+    ): List<AiComment> {
+        val now = LocalDateTime.now().format(dtFmt)
+        val out = mutableListOf<AiComment>()
+
+        // 1) 10대 역량 — 강점·약점
+        val items = learningCompetency?.items.orEmpty().filter { it.sampleCount >= 5 }
+        if (items.isNotEmpty()) {
+            val sorted = items.sortedByDescending { it.ratioScore }
+            val best = sorted.first()
+            val weak = sorted.last()
+            if (best.ratioScore - weak.ratioScore > 15.0) {
+                out += AiComment(
+                    section = "역량",
+                    title = "강점 역량 — ${best.competency}",
+                    content = "최근 학습에서 ${best.competency}이(가) ${best.ratioScore.toInt()}점으로 가장 안정적입니다. 이 강점을 살려 더 깊은 단계의 학습을 시도해 보세요.",
+                    severity = "good",
+                    generatedAt = now
+                )
+                out += AiComment(
+                    section = "역량",
+                    title = "보강이 필요한 역량 — ${weak.competency}",
+                    content = "${weak.competency}이(가) ${weak.ratioScore.toInt()}점으로 상대적으로 낮습니다. 추천 학습에서 관련 콘텐츠를 우선 풀어보세요.",
+                    severity = "warn",
+                    generatedAt = now
+                )
+            }
+        }
+
+        // 2) 진단과 학습의 격차
+        val learnMap = learningCompetency?.items.orEmpty().associate { it.competency to it.ratioScore }
+        val diagMap = diagnosticCompetency?.items.orEmpty().associate { it.competency to it.score }
+        val gaps = COMPETENCIES.mapNotNull { c ->
+            val l = learnMap[c] ?: return@mapNotNull null
+            val d = diagMap[c] ?: return@mapNotNull null
+            if (d > 0 && l - d > 20) Triple(c, l, d) else null
+        }
+        if (gaps.isNotEmpty()) {
+            val first = gaps.first()
+            out += AiComment(
+                section = "역량",
+                title = "학습 누적과 진단의 격차 발견",
+                content = "${first.first}은(는) 학습 누적 ${first.second.toInt()}점 vs 진단 ${first.third.toInt()}점으로 차이가 큽니다. 한 번 더 진단 응시를 권장합니다.",
+                severity = "info",
+                generatedAt = now
+            )
+        }
+
+        // 3) 영역별 약점
+        val weakArea = areaStats.filter { it.activityCount >= 3 }.minByOrNull { it.weightedScore }
+        if (weakArea != null && weakArea.weightedScore < 60.0) {
+            out += AiComment(
+                section = "영역",
+                title = "${weakArea.areaLabel} 영역 보강",
+                content = "${weakArea.areaLabel} 영역의 가중 평균이 ${weakArea.weightedScore.toInt()}점입니다. 활동 ${weakArea.activityCount}회 기준 — 추천 학습에서 해당 영역을 우선해 보세요.",
+                severity = "warn",
+                generatedAt = now
+            )
+        }
+
+        // 4) 주제별 약점 (3건 이상 풀었는데 60 미만)
+        val weakTheme = themeStats.filter { it.activityCount >= 3 && it.weightedScore < 60.0 }.firstOrNull()
+        if (weakTheme != null) {
+            out += AiComment(
+                section = "영역",
+                title = "주제 — ${weakTheme.themeLabel} 보강",
+                content = "${weakTheme.themeLabel} 주제의 정확도가 ${weakTheme.weightedScore.toInt()}점입니다. ${weakTheme.areaLabel} 영역 안에서 같은 주제 콘텐츠를 더 풀어보면 점수 회복에 도움이 됩니다.",
+                severity = "warn",
+                generatedAt = now
+            )
+        }
+
+        // 5) 학습 계획표
+        if (studyPlan != null && studyPlan.totalCells > 0) {
+            val rate = studyPlan.completionRate
+            when {
+                rate >= 90.0 -> out += AiComment(
+                    section = "계획표",
+                    title = "학습 계획 우수 수행",
+                    content = "학습 계획표 완료율이 ${rate.toInt()}%로 매우 우수합니다. 꾸준한 페이스를 유지하세요.",
+                    severity = "good",
+                    generatedAt = now
+                )
+                rate < 50.0 -> out += AiComment(
+                    section = "계획표",
+                    title = "학습 계획 미수행 알림",
+                    content = "학습 계획표 완료율이 ${rate.toInt()}%로 절반 미만입니다. 미수행 셀 ${studyPlan.pendingCells}건을 먼저 마무리해 보세요.",
+                    severity = "warn",
+                    generatedAt = now
+                )
+            }
+        }
+
+        // 6) 글쓰기 활동
+        if (writingStats != null) {
+            if (writingStats.totalPostCount == 0) {
+                out += AiComment(
+                    section = "글쓰기",
+                    title = "글쓰기 시작해 보기",
+                    content = "최근 글쓰기 활동이 없습니다. 포도 게시판에서 주제 글을 한 편 작성하고 AI 첨삭을 받아보세요.",
+                    severity = "info",
+                    generatedAt = now
+                )
+            } else if (writingStats.feedbackReceivedCount == 0) {
+                out += AiComment(
+                    section = "글쓰기",
+                    title = "AI 첨삭 활용 권장",
+                    content = "글 ${writingStats.totalPostCount}편 작성, 그러나 AI 첨삭 0회입니다. 작성한 글에 AI 첨삭을 받으면 보완 포인트를 즉시 확인할 수 있습니다.",
+                    severity = "info",
+                    generatedAt = now
+                )
+            } else {
+                out += AiComment(
+                    section = "글쓰기",
+                    title = "꾸준한 글쓰기 활동",
+                    content = "글 ${writingStats.totalPostCount}편 작성 + AI 첨삭 ${writingStats.feedbackReceivedCount}회. 좋아요 ${writingStats.totalLikes} · 댓글 ${writingStats.totalComments}회를 받았습니다.",
+                    severity = "good",
+                    generatedAt = now
+                )
+            }
+        }
+
+        // 7) 추천 학습 안내
+        if (recommendations.isNotEmpty()) {
+            val total = recommendations.sumOf { it.items.size }
+            out += AiComment(
+                section = "추천",
+                title = "다음 추천 학습 ${total}건",
+                content = "약점 역량을 기반으로 추천 학습 ${total}건이 준비되어 있습니다. 페이지 하단의 추천 영역에서 바로 시작해 보세요.",
+                severity = "info",
+                generatedAt = now
+            )
+        }
+
+        return out
+    }
+
+    /** 글쓰기 통계 — wisdom_posts + ai_feedback_jobs + likes + comments 합산 */
+    private fun buildWritingStats(userId: String, start: LocalDateTime, end: LocalDateTime): WritingStats {
+        val posts = wisdomPostRepo.findByUserIdAndStatusOrderByCreatedAtDesc(userId, "active")
+            .filter { it.createdAt >= start && it.createdAt <= end }
+        if (posts.isEmpty()) {
+            return WritingStats(
+                totalPostCount = 0,
+                feedbackReceivedCount = 0,
+                totalLikes = 0,
+                totalComments = 0,
+                recentPosts = emptyList()
+            )
+        }
+
+        val postIds = posts.map { it.id }
+        val likes = wisdomLikeRepo.findByPostIdIn(postIds).size
+        val commentCounts = wisdomCommentRepo.findByPostIdInAndStatus(postIds, "active")
+        val totalComments = commentCounts.size
+        val feedbackPosts = wisdomFeedbackRepo.findByPostIdIn(postIds).map { it.postId }.toSet()
+        val aiFeedbackCount = postIds.count { pid ->
+            feedbackPosts.contains(pid) ||
+                aiFeedbackJobRepo.findFirstByPostIdAndStatusInOrderByCreatedAtDesc(pid, listOf(AiFeedbackJobStatus.COMPLETED)) != null
+        }
+
+        val likesByPost = wisdomLikeRepo.findByPostIdIn(postIds).groupBy { it.postId }
+        val commentsByPost = commentCounts.groupBy { it.postId }
+        val recent = posts.sortedByDescending { it.createdAt }.take(3).map { p ->
+            WritingRecent(
+                postId = p.id,
+                title = p.topicLabel,
+                topicKey = p.topicKey,
+                hasFeedback = feedbackPosts.contains(p.id),
+                likeCount = likesByPost[p.id]?.size ?: 0,
+                commentCount = commentsByPost[p.id]?.size ?: 0,
+                createdAt = p.createdAt.format(dtFmt)
+            )
+        }
+
+        return WritingStats(
+            totalPostCount = posts.size,
+            feedbackReceivedCount = aiFeedbackCount,
+            totalLikes = likes,
+            totalComments = totalComments,
+            recentPosts = recent
+        )
+    }
+
+    /** 영역별 통계 빌드: contentType → 비문학/문학/문법/기타 + subArea 세부분류 (호환용 — V2 로 대체) */
+    @Deprecated("V2 buildAreaStatsV2 로 대체. 1차 release 후 제거.")
+    private fun buildAreaStatsLegacy(farmMode: FarmModeSection): List<AreaStats> {
         data class SubAcc(var scoreSum: Double = 0.0, var count: Int = 0)
         data class AreaAcc(var scoreSum: Double = 0.0, var count: Int = 0, val subMap: MutableMap<String, SubAcc> = mutableMapOf())
 

@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { apiGet } from "../../utils/api";
 import CellStatusBadge from "../CellStatusBadge";
 
 /**
- * 성적표 내 학습 계획표 매트릭스 뷰
+ * 학습 계획표 매트릭스 뷰
  * - planIds를 받아 각 plan의 matrix API 호출
- * - 범위(행) x 에셋(열) 테이블 렌더링
+ * - 범위(행) × 에셋(열) 테이블
+ * - V2: 가로 폭 부족 시 한 행을 N행으로 자동 분할 (ResizeObserver). 가로 스크롤 X.
  */
 export default function ReportStudyPlanMatrix({ planIds }) {
   const [plans, setPlans] = useState([]);
@@ -60,8 +61,32 @@ export default function ReportStudyPlanMatrix({ planIds }) {
   );
 }
 
+const ROW_HEAD_MIN_PX = 96;     // 범위 헤더 최소 폭
+const CELL_MIN_PX = 80;         // 셀 최소 폭
+
 function MatrixTable({ plan }) {
   const { scopes, assets, cells } = plan;
+  const wrapRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const update = () => setContainerWidth(el.clientWidth || 0);
+    update();
+    let ro = null;
+    if (typeof ResizeObserver !== "undefined") {
+      ro = new ResizeObserver(update);
+      ro.observe(el);
+    } else {
+      window.addEventListener("resize", update);
+    }
+    return () => {
+      if (ro) ro.disconnect();
+      else window.removeEventListener("resize", update);
+    };
+  }, []);
+
   if (!scopes?.length || !assets?.length) return null;
 
   const cellMap = {};
@@ -69,44 +94,62 @@ function MatrixTable({ plan }) {
     cellMap[`${c.scopeId}_${c.assetId}`] = c;
   });
 
+  // 컨테이너 폭에서 chunk 크기 결정. 측정 전(초기 0)에는 모든 에셋을 한 chunk 로.
+  const usable = Math.max(0, containerWidth - ROW_HEAD_MIN_PX);
+  const perChunk = containerWidth === 0
+    ? assets.length
+    : Math.max(1, Math.floor(usable / CELL_MIN_PX));
+
+  const chunks = [];
+  for (let i = 0; i < assets.length; i += perChunk) {
+    chunks.push(assets.slice(i, i + perChunk));
+  }
+
   return (
-    <div className="ur-sp-matrix-wrap">
-      <table className="ur-sp-matrix">
-        <thead>
-          <tr>
-            <th>범위</th>
-            {assets.map((a) => (
-              <th key={a.id}>
-                <span className="ur-sp-asset-label">{a.label}</span>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {scopes.map((scope) => (
-            <tr key={scope.id}>
-              <th className="ur-sp-scope">{scope.label}</th>
-              {assets.map((asset) => {
-                const cell = cellMap[`${scope.id}_${asset.id}`];
-                return (
-                  <td key={asset.id}>
-                    {cell ? (
-                      <CellStatusBadge
-                        status={cell.status}
-                        score={cell.score}
-                        assetType={asset.assetType}
-                        assetKind={asset.assetKind}
-                      />
-                    ) : (
-                      <span style={{ color: "#bbb", fontSize: "0.75rem" }}>-</span>
-                    )}
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="ur-sp-matrix-wrap" ref={wrapRef}>
+      {chunks.map((chunkAssets, idx) => (
+        <div key={idx} className="ur-sp-matrix-chunk">
+          {idx > 0 && (
+            <div className="ur-sp-chunk-cont">↳ 이어서</div>
+          )}
+          <table className="ur-sp-matrix">
+            <thead>
+              <tr>
+                <th>범위</th>
+                {chunkAssets.map((a) => (
+                  <th key={a.id}>
+                    <span className="ur-sp-asset-label">{a.label}</span>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {scopes.map((scope) => (
+                <tr key={scope.id}>
+                  <th className="ur-sp-scope">{scope.label}</th>
+                  {chunkAssets.map((asset) => {
+                    const cell = cellMap[`${scope.id}_${asset.id}`];
+                    return (
+                      <td key={asset.id}>
+                        {cell ? (
+                          <CellStatusBadge
+                            status={cell.status}
+                            score={cell.score}
+                            assetType={asset.assetType}
+                            assetKind={asset.assetKind}
+                          />
+                        ) : (
+                          <span style={{ color: "#bbb", fontSize: "0.75rem" }}>-</span>
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ))}
     </div>
   );
 }
