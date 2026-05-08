@@ -20,12 +20,16 @@ class ShopService(
 ) {
     @Transactional(readOnly = true)
     fun listProducts(): List<ProductView> {
-        return productRepository.findByStatus("active").map { it.toView() }
+        return productRepository.findByStatus("active")
+            .sortedWith(compareBy({ it.sortOrder }, { it.createdAt }))
+            .map { it.toView() }
     }
 
     @Transactional(readOnly = true)
     fun listProductsAdmin(): List<ProductView> {
-        return productRepository.findAll().sortedBy { it.createdAt }.map { it.toView() }
+        return productRepository.findAll()
+            .sortedWith(compareBy({ it.sortOrder }, { it.createdAt }))
+            .map { it.toView() }
     }
 
     @Transactional(readOnly = true)
@@ -156,6 +160,15 @@ class ShopService(
             price = request.price,
             stock = request.stock ?: 0,
             status = request.status ?: "active",
+            category = request.category ?: "textbook",
+            levelLabel = request.levelLabel,
+            summary = request.summary,
+            imageUrl = request.imageUrl,
+            detailImagesJson = request.detailImages?.let { objectMapper.writeValueAsString(it) },
+            tagsJson = request.tags?.let { objectMapper.writeValueAsString(it) },
+            detailsJson = request.details?.let { objectMapper.writeValueAsString(it) },
+            badge = request.badge,
+            sortOrder = request.sortOrder ?: 0,
             createdAt = LocalDateTime.now(),
             updatedAt = LocalDateTime.now()
         )
@@ -170,12 +183,17 @@ class ShopService(
         }
         product.name = request.name
         product.price = request.price
-        if (request.stock != null) {
-            product.stock = request.stock
-        }
-        if (request.status != null) {
-            product.status = request.status
-        }
+        if (request.stock != null) product.stock = request.stock
+        if (request.status != null) product.status = request.status
+        if (request.category != null) product.category = request.category
+        if (request.levelLabel != null) product.levelLabel = request.levelLabel
+        if (request.summary != null) product.summary = request.summary
+        if (request.imageUrl != null) product.imageUrl = request.imageUrl
+        if (request.detailImages != null) product.detailImagesJson = objectMapper.writeValueAsString(request.detailImages)
+        if (request.tags != null) product.tagsJson = objectMapper.writeValueAsString(request.tags)
+        if (request.details != null) product.detailsJson = objectMapper.writeValueAsString(request.details)
+        if (request.badge != null) product.badge = request.badge
+        if (request.sortOrder != null) product.sortOrder = request.sortOrder
         return productRepository.save(product).toView()
     }
 
@@ -196,12 +214,26 @@ class ShopService(
     )
 
     private fun ProductEntity.toView(): ProductView {
+        fun parseList(json: String?): List<String> = if (json.isNullOrBlank()) emptyList()
+            else try {
+                @Suppress("UNCHECKED_CAST")
+                objectMapper.readValue(json, List::class.java) as List<String>
+            } catch (_: Exception) { emptyList() }
         return ProductView(
             productId = id,
             name = name,
             price = price,
             stock = stock,
-            status = status
+            status = status,
+            category = category,
+            levelLabel = levelLabel,
+            summary = summary,
+            imageUrl = imageUrl,
+            detailImages = parseList(detailImagesJson),
+            tags = parseList(tagsJson),
+            details = parseList(detailsJson),
+            badge = badge,
+            sortOrder = sortOrder
         )
     }
 

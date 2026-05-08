@@ -1,13 +1,28 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  SHOP_CATEGORIES,
-  SHOP_PRODUCTS,
-  SHOP_SECTIONS,
-} from "../data/shopCatalog";
+import { SHOP_CATEGORIES, SHOP_SECTIONS } from "../data/shopCatalog";
 import { apiGet, apiPut } from "../utils/api";
 import SiteFooter from "../components/SiteFooter";
 import "../styles/commerce.css";
+
+// 백엔드 응답을 프론트 카탈로그 형식으로 매핑
+function mapServerProduct(p) {
+  return {
+    id: p.productId || p.id || p.product_id,
+    name: p.name,
+    category: p.category || "textbook",
+    level: p.levelLabel || p.level_label || "",
+    price: p.price ?? 0,
+    badge: p.badge || "",
+    summary: p.summary || "",
+    image: p.imageUrl || p.image_url || "",
+    detailImages: p.detailImages || p.detail_images || [],
+    tags: p.tags || [],
+    details: p.details || [],
+    stock: p.stock ?? 0,
+    status: p.status || "active",
+  };
+}
 
 const formatPrice = (value) =>
   `${new Intl.NumberFormat("ko-KR").format(value)}원`;
@@ -18,6 +33,19 @@ function ShopPage() {
   const [category, setCategory] = useState("all");
   const [query, setQuery] = useState("");
   const [pages, setPages] = useState({ textBook: 1, tool: 1 });
+  const [products, setProducts] = useState([]);
+  const [productsLoading, setProductsLoading] = useState(true);
+
+  // DB 에서 상품 목록 fetch (관리자가 등록한 상품 = 학생/학부모 화면에 노출)
+  useEffect(() => {
+    apiGet("/v1/shop/products")
+      .then((data) => {
+        const list = Array.isArray(data) ? data : [];
+        setProducts(list.map(mapServerProduct).filter((p) => p.status === "active"));
+      })
+      .catch((e) => console.error("[shop] products fetch failed", e))
+      .finally(() => setProductsLoading(false));
+  }, []);
 
   // 배송지 관련 상태
   const EMPTY_SHIPPING = {
@@ -78,17 +106,17 @@ function ShopPage() {
 
   const visibleProducts = useMemo(() => {
     const normalized = query.trim().toLowerCase();
-    return SHOP_PRODUCTS.filter((product) => {
+    return products.filter((product) => {
       const matchCategory =
         category === "all" || product.category === category;
-      const searchable = [product.name, product.level, product.tags.join(" ")]
+      const searchable = [product.name, product.level, (product.tags || []).join(" ")]
         .filter(Boolean)
         .join(" ")
         .toLowerCase();
       const matchQuery = !normalized || searchable.includes(normalized);
       return matchCategory && matchQuery;
     });
-  }, [category, query]);
+  }, [category, query, products]);
 
   const getPageKey = (sectionId) =>
     sectionId === "textbook" ? "textBook" : "tool";

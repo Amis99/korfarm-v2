@@ -11,7 +11,16 @@ data class ProductView(
     val name: String,
     val price: Int,
     val stock: Int,
-    val status: String
+    val status: String,
+    val category: String? = null,
+    val levelLabel: String? = null,
+    val summary: String? = null,
+    val imageUrl: String? = null,
+    val detailImages: List<String> = emptyList(),
+    val tags: List<String> = emptyList(),
+    val details: List<String> = emptyList(),
+    val badge: String? = null,
+    val sortOrder: Int = 0
 )
 
 data class OrderItemRequest(
@@ -58,6 +67,15 @@ data class AdminProductRequest(
     @field:Min(0)
     val price: Int,
     val stock: Int? = null,
-    val status: String? = null
+    val status: String? = null,
+    val category: String? = null,
+    val levelLabel: String? = null,
+    val summary: String? = null,
+    val imageUrl: String? = null,
+    val detailImages: List<String>? = null,
+    val tags: List<String>? = null,
+    val details: List<String>? = null,
+    val badge: String? = null,
+    val sortOrder: Int? = null
 )
 

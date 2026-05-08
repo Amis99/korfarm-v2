@@ -1,11 +1,29 @@
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { SHOP_CATEGORIES, SHOP_PRODUCTS } from "../data/shopCatalog";
+import { SHOP_CATEGORIES } from "../data/shopCatalog";
 import { apiGet, apiPost } from "../utils/api";
 import { requestTossPayment } from "../utils/tossPayment";
 import { useAuth } from "../hooks/useAuth";
 import SiteFooter from "../components/SiteFooter";
 import "../styles/commerce.css";
+
+function mapServerProduct(p) {
+  return {
+    id: p.productId || p.id || p.product_id,
+    name: p.name,
+    category: p.category || "textbook",
+    level: p.levelLabel || p.level_label || "",
+    price: p.price ?? 0,
+    badge: p.badge || "",
+    summary: p.summary || "",
+    image: p.imageUrl || p.image_url || "",
+    detailImages: p.detailImages || p.detail_images || [],
+    tags: p.tags || [],
+    details: p.details || [],
+    stock: p.stock ?? 0,
+    status: p.status || "active",
+  };
+}
 
 const formatPrice = (value) =>
   `${new Intl.NumberFormat("ko-KR").format(value)}원`;
@@ -18,11 +36,21 @@ function ProductDetailPage() {
   const [error, setError] = useState("");
   const [address, setAddress] = useState(null);
   const [addressLoading, setAddressLoading] = useState(false);
+  const [product, setProduct] = useState(null);
+  const [productLoading, setProductLoading] = useState(true);
 
-  const product = SHOP_PRODUCTS.find((item) => item.id === productId);
   const categoryLabel = SHOP_CATEGORIES.find(
     (item) => item.id === product?.category
   )?.label;
+
+  // DB 에서 상품 fetch
+  useEffect(() => {
+    setProductLoading(true);
+    apiGet(`/v1/shop/products/${productId}`)
+      .then((d) => setProduct(d ? mapServerProduct(d) : null))
+      .catch(() => setProduct(null))
+      .finally(() => setProductLoading(false));
+  }, [productId]);
 
   useEffect(() => {
     if (!isLoggedIn) return;
@@ -88,6 +116,17 @@ function ProductDetailPage() {
     }
   };
 
+  if (productLoading) {
+    return (
+      <div className="commerce-page">
+        <div className="commerce-wrap commerce-detail">
+          <div className="commerce-card"><p>상품 정보를 불러오는 중...</p></div>
+        </div>
+        <SiteFooter />
+      </div>
+    );
+  }
+
   if (!product) {
     return (
       <div className="commerce-page">
@@ -108,7 +147,7 @@ function ProductDetailPage() {
   return (
     <div className="commerce-page">
       <div className="commerce-wrap commerce-detail">
-        <img src={product.image} alt={product.name} />
+        {product.image ? <img src={product.image} alt={product.name} /> : <div style={{ width: "100%", aspectRatio: "1", background: "#f4eee0", borderRadius: 12 }} />}
         <div className="commerce-card commerce-summary">
           <div className="commerce-meta">
             {categoryLabel && (
@@ -120,12 +159,15 @@ function ProductDetailPage() {
           </div>
           <h1>{product.name}</h1>
           <p>상품 코드: {product.id}</p>
+          {product.summary && <p style={{ color: "#555", marginBottom: 8 }}>{product.summary}</p>}
           <p className="commerce-price">{formatPrice(product.price)}</p>
-          <ul>
-            {product.details.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
+          {product.details && product.details.length > 0 && (
+            <ul>
+              {product.details.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          )}
           {!isLoggedIn && (
             <p style={{ color: "#e74c3c", fontSize: 14 }}>
               <Link to="/login" style={{ color: "#e74c3c", fontWeight: 600 }}>
@@ -165,6 +207,18 @@ function ProductDetailPage() {
           </p>
         </div>
       </div>
+
+      {product.detailImages && product.detailImages.length > 0 && (
+        <div className="commerce-wrap" style={{ marginTop: 24 }}>
+          <h2 style={{ fontSize: 18, marginBottom: 12 }}>상세 설명</h2>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {product.detailImages.map((url, i) => (
+              <img key={i} src={url} alt={`상세${i + 1}`} style={{ width: "100%", borderRadius: 12 }} />
+            ))}
+          </div>
+        </div>
+      )}
+
       <SiteFooter />
     </div>
   );
