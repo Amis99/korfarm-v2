@@ -307,3 +307,29 @@
     box-sizing: border-box;
   }
 }
+
+
+/* 10대 역량 분포 — 학습 누적 vs 진단 측정 패널 컴팩트 사이즈
+ * (옛 통합 성적표의 큰 사이즈 → 새 분석표의 카드 사이즈에 맞게 축소) */
+.competency-panel-compact .ur-card.ur-comp-panel {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.competency-panel-compact .ur-comp-panel-head {
+  margin-bottom: 8px;
+}
+.competency-panel-compact .ur-comp-panel-head h3 { display: none; }
+.competency-panel-compact .ur-comp-panel-body {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.competency-panel-compact .ur-comp-radar { padding: 0; }
+.competency-panel-compact .ur-comp-radar svg { max-width: 360px; height: auto; display: block; margin: 0 auto; }
+.competency-panel-compact .ur-comp-table { font-size: 11.5px; }
+.competency-panel-compact .ur-comp-table th,
+.competency-panel-compact .ur-comp-table td {
+  padding: 5px 6px;
+}

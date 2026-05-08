@@ -8,6 +8,7 @@ import ReportCompetencyTrendChart from "../components/report/ReportCompetencyTre
 import ReportCompetencySection from "../components/report/ReportCompetencySection";
 import ReportSectionDetail from "../components/report/ReportSectionDetail";
 import "../styles/student-home.css";
+import "../styles/unified-report.css";
 import "../styles/analysis-report.css";
 
 /**
@@ -17,9 +18,18 @@ import "../styles/analysis-report.css";
  * - period 변경 시 startDate / endDate 재계산해 재요청
  */
 
+// 백엔드 CompetencyConstants.kt 의 10대 역량과 일치해야 함.
 const COMPETENCY_LIST = [
-  "어휘력", "추론력", "비판적 사고", "사실적 이해", "통합 사고",
-  "감상력", "문법 정확성", "글쓰기 표현", "매체 이해", "메타인지",
+  "어휘력",
+  "문장 독해력",
+  "구조 독해력",
+  "논리 사고력",
+  "어법·문법 능력",
+  "국어 개념 적용 능력",
+  "국어 관련 배경지식",
+  "비문학 배경지식",
+  "문제 분석 및 전략 수립 능력",
+  "선택지 분석 및 전략 수립 능력",
 ];
 
 function levelClass(v) {
@@ -414,28 +424,18 @@ function AnalysisReportPage() {
         </div>
       </section>
 
-      <section className="report-section">
-        <h2>🎯 10대 역량 분포</h2>
-        <div className="radar-wrap">
-          <RadarChart values={radarValues} />
-        </div>
-        <div className="radar-tags">
-          <div className="group">
-            <span className="group-title">💪 강점</span>
-            <div className="tag-row">
-              {strongs.length === 0 && <span className="tag strong">데이터 부족</span>}
-              {strongs.map((s) => <span key={s} className="tag strong">{s}</span>)}
-            </div>
+      {/* 10대 역량 분포 — 학습 누적 vs 진단 측정 (백엔드 표준 10대 역량 사용) */}
+      {(report?.learningCompetency || report?.diagnosticCompetency) && (
+        <section className="report-section">
+          <h2>🎯 10대 역량 분포</h2>
+          <div className="competency-panel-compact">
+            <ReportLearningDiagnosticPanel
+              learningCompetency={report.learningCompetency}
+              diagnosticCompetency={report.diagnosticCompetency}
+            />
           </div>
-          <div className="group">
-            <span className="group-title">📌 약점</span>
-            <div className="tag-row">
-              {weaks.length === 0 && <span className="tag weak">데이터 부족</span>}
-              {weaks.map((w) => <span key={w} className="tag weak">{w}</span>)}
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <section className="report-section">
         <h2>📚 영역별 학습량</h2>
@@ -508,17 +508,6 @@ function AnalysisReportPage() {
               </div>
             ))}
           </div>
-        </section>
-      )}
-
-      {/* 학습 누적 vs 진단 측정 비교 */}
-      {(report?.learningCompetency || report?.diagnosticCompetency) && (
-        <section className="report-section">
-          <h2>📐 학습 누적 vs 진단 측정</h2>
-          <ReportLearningDiagnosticPanel
-            learningCompetency={report.learningCompetency}
-            diagnosticCompetency={report.diagnosticCompetency}
-          />
         </section>
       )}
 
