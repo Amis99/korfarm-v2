@@ -4,6 +4,7 @@ import { SHOP_CATEGORIES, SHOP_PRODUCTS } from "../data/shopCatalog";
 import { apiGet, apiPost } from "../utils/api";
 import { requestTossPayment } from "../utils/tossPayment";
 import { useAuth } from "../hooks/useAuth";
+import SiteFooter from "../components/SiteFooter";
 import "../styles/commerce.css";
 
 const formatPrice = (value) =>
@@ -99,6 +100,7 @@ function ProductDetailPage() {
             </Link>
           </div>
         </div>
+        <SiteFooter />
       </div>
     );
   }
@@ -154,8 +156,16 @@ function ProductDetailPage() {
               목록으로
             </Link>
           </div>
+          <p style={{ fontSize: 11, color: "#888", marginTop: 12, textAlign: "center" }}>
+            <Link to="/refund-policy" style={{ color: "#888" }}>환불규정</Link>
+            {" · "}
+            <Link to="/terms" style={{ color: "#888" }}>이용약관</Link>
+            {" · "}
+            <Link to="/privacy" style={{ color: "#888" }}>개인정보처리방침</Link>
+          </p>
         </div>
       </div>
+      <SiteFooter />
     </div>
   );
 }

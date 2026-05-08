@@ -6,6 +6,7 @@ import {
   SHOP_SECTIONS,
 } from "../data/shopCatalog";
 import { apiGet, apiPut } from "../utils/api";
+import SiteFooter from "../components/SiteFooter";
 import "../styles/commerce.css";
 
 const formatPrice = (value) =>
@@ -352,6 +353,7 @@ function ShopPage() {
           </div>
         </aside>
       </div>
+      <SiteFooter />
     </div>
   );
 }

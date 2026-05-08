@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiGet, normalizeInventoryKeys } from "../utils/api";
 import HarvestCraftModal from "../components/HarvestCraftModal";
+import SiteFooter from "../components/SiteFooter";
 import "../styles/student-home.css";
 import "../styles/wallet.css";
 
@@ -309,6 +310,8 @@ function MyWalletPage() {
         onClose={() => setShowCraft(false)}
         onCrafted={handleCrafted}
       />
+
+      <SiteFooter />
     </div>
   );
 }

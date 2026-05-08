@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { apiGet, apiPost } from "../utils/api";
 import { requestTossPayment } from "../utils/tossPayment";
+import SiteFooter from "../components/SiteFooter";
 import "../styles/commerce.css";
 
 const PLANS = [
@@ -243,6 +244,7 @@ function SubscriptionPage() {
           </Link>
         </div>
       </div>
+      <SiteFooter />
     </div>
   );
 }
