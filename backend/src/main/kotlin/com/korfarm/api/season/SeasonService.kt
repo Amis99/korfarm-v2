@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.economy.EconomyLedgerRepository
+import com.korfarm.api.economy.SeasonScoreCalculator
+import com.korfarm.api.economy.UserCropRepository
+import com.korfarm.api.economy.UserSeedRepository
 import com.korfarm.api.user.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -17,6 +20,8 @@ class SeasonService(
     private val seasonDuelRankingRepository: SeasonDuelRankingRepository,
     private val seasonAwardSnapshotRepository: SeasonAwardSnapshotRepository,
     private val economyLedgerRepository: EconomyLedgerRepository,
+    private val userCropRepository: UserCropRepository,
+    private val userSeedRepository: UserSeedRepository,
     private val userRepository: UserRepository,
     private val objectMapper: ObjectMapper
 ) {
@@ -55,20 +60,35 @@ class SeasonService(
     }
 
     fun harvestRankings(seasonId: String, levelId: String): List<HarvestRankingItem> {
-        // 시즌 기간 내 economy_ledger에서 실시간 씨앗 합산
-        val season = seasonRepository.findById(seasonId).orElse(null) ?: return emptyList()
-        val projections = economyLedgerRepository.sumSeedEarningsByPeriod(season.startAt, season.endAt)
-        if (projections.isEmpty()) return emptyList()
+        // 시즌 점수 공식 적용 — 작물합×50 + 최소작물×500 + 총씨앗
+        // (학생이 보는 자기 시즌 점수와 동일한 척도)
+        val allCrops = userCropRepository.findAll()
+        val allSeeds = userSeedRepository.findAll()
 
-        val userIds = projections.map { it.getUserId() }
+        val cropsByUser = allCrops.groupBy { it.userId }
+        val seedsByUser = allSeeds.groupBy { it.userId }
+
+        val userIds = (cropsByUser.keys + seedsByUser.keys).toSet()
+        if (userIds.isEmpty()) return emptyList()
+
         val userMap = userRepository.findAllById(userIds).associateBy { it.id }
 
-        return projections.mapIndexed { idx, proj ->
+        // 각 사용자 시즌 점수 계산 + 0점 초과만 노출
+        val ranked = userIds.map { userId ->
+            val cropsMap = cropsByUser[userId]?.associate { it.cropType to it.count } ?: emptyMap()
+            val totalSeeds = seedsByUser[userId]?.sumOf { it.count } ?: 0
+            val score = SeasonScoreCalculator.calculate(cropsMap, totalSeeds)
+            Triple(userId, score, userMap[userId]?.name ?: "?")
+        }
+            .filter { it.second > 0 }
+            .sortedByDescending { it.second }
+
+        return ranked.mapIndexed { idx, (userId, score, name) ->
             HarvestRankingItem(
                 rank = idx + 1,
-                userId = proj.getUserId(),
-                userName = userMap[proj.getUserId()]?.name ?: "?",
-                value = proj.getTotal().toInt()
+                userId = userId,
+                userName = name,
+                value = score
             )
         }
     }

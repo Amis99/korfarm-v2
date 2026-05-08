@@ -54,7 +54,10 @@ function formatTime(ts) {
 function MyWalletPage() {
   const navigate = useNavigate();
   const [grapefruit, setGrapefruit] = useState(0);
+  // crops: 시즌 점수용 누적 (user_crops, 차감 X)
   const [crops, setCrops] = useState({});
+  // walletCrops: AI 결제 가능 잔액 (user_crop_wallet, 차감 O)
+  const [walletCrops, setWalletCrops] = useState({});
   const [transactions, setTransactions] = useState([]);
   const [filter, setFilter] = useState("all");
   const [showCraft, setShowCraft] = useState(false);
@@ -76,8 +79,11 @@ function MyWalletPage() {
   useEffect(() => {
     apiGet("/v1/me/grapefruit/balance")
       .then((d) => {
-        const b = d?.balance ?? d?.grapefruit ?? d ?? 0;
-        setGrapefruit(typeof b === "number" ? b : 0);
+        const g = d?.grapefruits ?? d?.grapefruit ?? d?.balance ?? 0;
+        setGrapefruit(typeof g === "number" ? g : 0);
+        // 결제 가능 작물 (user_crop_wallet)
+        const wc = d?.crops || {};
+        setWalletCrops(typeof wc === "object" && wc !== null ? wc : {});
       })
       .catch((e) => console.error("balance fetch failed", e));
 
@@ -105,13 +111,14 @@ function MyWalletPage() {
       .catch((e) => console.error("transactions fetch failed", e));
   }, []);
 
+  // 결제 가능 합계 — 자몽 + walletCrops (user_crop_wallet)
   const balanceMap = useMemo(() => {
     const m = { grapefruit };
     WALLET_META.slice(1).forEach((w) => {
-      m[w.key] = crops[w.key] || 0;
+      m[w.key] = walletCrops[w.key] || 0;
     });
     return m;
-  }, [grapefruit, crops]);
+  }, [grapefruit, walletCrops]);
 
   const totalCount = WALLET_META.reduce((s, w) => s + (balanceMap[w.key] || 0), 0);
   const totalKrw = totalCount * 250;
@@ -243,17 +250,36 @@ function MyWalletPage() {
 
       <section className="wallet-section">
         <h2>💰 잔액</h2>
+        <p className="subhead" style={{ marginTop: -4 }}>
+          작물은 <strong>결제 가능</strong>(AI 사용 시 차감) 과 <strong>누적</strong>(시즌 랭킹용 — 사용해도 안 줄어요) 을 따로 관리해요.
+        </p>
         <div className="balance-grid">
-          {WALLET_META.map((w) => (
-            <div key={w.key} className={`balance-card ${w.primary ? "primary" : ""}`}>
-              <span className={`clay clay-${w.color}`} aria-hidden="true">
-                <span className="lbl">{w.name}</span>
-              </span>
-              <span className="name">{w.name}</span>
-              <span className="count">{balanceMap[w.key] || 0}개</span>
-              <span className="unit">{w.unit}</span>
-            </div>
-          ))}
+          {WALLET_META.map((w) => {
+            const isGrapefruit = w.primary;
+            const walletAmt = isGrapefruit ? grapefruit : (walletCrops[w.key] || 0);
+            const cumulAmt = isGrapefruit ? null : (crops[w.key] || 0);
+            return (
+              <div key={w.key} className={`balance-card ${w.primary ? "primary" : ""}`}>
+                <span className={`clay clay-${w.color}`} aria-hidden="true">
+                  <span className="lbl">{w.name}</span>
+                </span>
+                <span className="name">{w.name}</span>
+                {isGrapefruit ? (
+                  <span className="count">{walletAmt}개</span>
+                ) : (
+                  <span className="count" style={{ display: "flex", flexDirection: "column", gap: 2, alignItems: "center" }}>
+                    <span style={{ fontSize: 17, fontWeight: 700, color: "#f06c24" }}>
+                      {walletAmt}<span style={{ fontSize: 11, color: "#666", marginLeft: 2 }}>개 결제 가능</span>
+                    </span>
+                    <span style={{ fontSize: 11, color: "#888", fontWeight: 500 }}>
+                      누적 {cumulAmt}개 (랭킹용)
+                    </span>
+                  </span>
+                )}
+                <span className="unit">{w.unit}</span>
+              </div>
+            );
+          })}
         </div>
       </section>
 
