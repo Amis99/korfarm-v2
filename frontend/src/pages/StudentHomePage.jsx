@@ -939,6 +939,7 @@ function StudentHomePage() {
                 }}
                 onLockedClick={(t) => showToast(t)}
                 onSubscribe={handleSubscribe}
+                onShowInventory={() => setShowInventoryPopup(true)}
               />
             ) : (
               <PaidMain
@@ -1271,7 +1272,7 @@ function PaidMain({
 
 // ─── 메인 영역 — 무료 회원 (Welcome + 무료 카드 + 잠긴 카드 + 구독 CTA) ──
 
-function FreeMain({ student, onCardClick, onLockedClick, onSubscribe }) {
+function FreeMain({ student, onCardClick, onLockedClick, onSubscribe, onShowInventory }) {
   return (
     <>
       <section className="greeting-block" data-od-id="greeting" aria-label="인사">
@@ -1291,8 +1292,8 @@ function FreeMain({ student, onCardClick, onLockedClick, onSubscribe }) {
             className="greeting-meta"
             role="button"
             tabIndex={0}
-            onClick={() => setShowInventoryPopup(true)}
-            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setShowInventoryPopup(true); } }}
+            onClick={() => onShowInventory && onShowInventory()}
+            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onShowInventory && onShowInventory(); } }}
             style={{ cursor: "pointer" }}
           >
             시즌 점수 <strong>{student.score.toLocaleString()}</strong>점 <span style={{ fontSize: 11, opacity: 0.65 }}>· 자세히 ›</span>
