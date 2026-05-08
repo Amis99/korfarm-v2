@@ -127,7 +127,7 @@ export default function ReportCompetencyTrendChart({ trend }) {
           );
         })}
       </div>
-      <div className="ur-trend-canvas" style={{ height: 320 }}>
+      <div className="ur-trend-canvas" style={{ height: 240 }}>
         <Line data={data} options={options} />
       </div>
     </div>

@@ -385,9 +385,9 @@ function AnalysisReportPage() {
         {(report?.recommendationBundle &&
           (report.recommendationBundle.competency?.items?.length > 0 ||
             report.recommendationBundle.area?.items?.length > 0)) ? (
-          <ReportRecommendations bundle={report.recommendationBundle} />
+          <ReportRecommendations bundle={report.recommendationBundle} studentId={studentIdParam || undefined} />
         ) : Array.isArray(report?.recommendations) && report.recommendations.length > 0 ? (
-          <ReportRecommendations legacy={report.recommendations} />
+          <ReportRecommendations legacy={report.recommendations} studentId={studentIdParam || undefined} />
         ) : (
           <p className="ur-empty">아직 추천할 학습이 충분하지 않습니다. 학습 데이터가 누적되면 자동으로 표시됩니다.</p>
         )}

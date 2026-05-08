@@ -68,6 +68,41 @@ class StudyPlanController(
     fun cellFiles(@PathVariable cellId: String): ApiResponse<List<CellFileResponse>> {
         return ApiResponse(success = true, data = service.getCellFiles(cellId))
     }
+
+    /**
+     * 통합 분석표 추천 학습 일괄 등록 (학생/학부모/관리자 공용).
+     *  - studentId 생략: 호출자 본인 plan 에 등록
+     *  - studentId 명시 + 호출자 admin: admin 모드 (모든 학생 가능)
+     *  - studentId 명시 + 호출자 parent: verifyParentChildLink 통과해야 함
+     *  - 그 외: FORBIDDEN
+     */
+    @PostMapping("/bulk-from-recommendations")
+    fun bulkFromRecommendations(
+        @RequestBody req: BulkFromRecommendationsRequest
+    ): ApiResponse<BulkFromRecommendationsResponse> {
+        val caller = currentUser()
+        val targetStudentId = req.studentId ?: caller
+        if (targetStudentId != caller) {
+            val isAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
+            val isParent = parentLinkService.verifyParentChildLink(caller, targetStudentId)
+            if (!isAdmin && !isParent) {
+                throw ApiException(
+                    "FORBIDDEN",
+                    "다른 학생의 학습 계획표에 일괄 등록할 권한이 없습니다.",
+                    HttpStatus.FORBIDDEN
+                )
+            }
+        }
+        return ApiResponse(
+            success = true,
+            data = service.bulkAssignFromRecommendations(
+                studentId = targetStudentId,
+                contentIds = req.contentIds,
+                dueAtRaw = req.dueAt,
+                actorId = caller
+            )
+        )
+    }
 }
 
 // ── 학부모 학습 계획표 컨트롤러 ──

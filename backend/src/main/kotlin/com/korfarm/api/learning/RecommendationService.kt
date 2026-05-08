@@ -174,7 +174,7 @@ class RecommendationService(
             FROM content_recommendation_index i
             JOIN contents c ON c.id = i.content_id
             WHERE i.$compColumn > 0
-              AND i.content_kind IN ('farm','pro','daily_quiz','study','logic')
+              AND i.content_kind IN ('farm','pro','daily_quiz','study','logic','background','vocab','grammar','other')
               $levelClause
               AND i.content_id NOT IN (
                   SELECT content_id FROM learning_competency_log WHERE user_id = :userId

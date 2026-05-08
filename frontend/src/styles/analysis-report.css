@@ -289,10 +289,14 @@
 .reco-item .chev { color: var(--subtle); font-size: 16px; }
 
 @media (min-width: 768px) {
-  .report-page-head { padding: 28px 28px 12px; }
-  .report-section { margin: 0 28px 18px; padding: 20px; }
+  .report-page-head { padding: 22px 28px 10px; }
+  .report-page-head h1 { font-size: 19px; }
+  .report-section { margin: 0 28px 14px; padding: 16px 18px; }
+  .report-section h2 { font-size: 14px; margin: 0 0 10px; }
   .summary-grid { grid-template-columns: repeat(4, 1fr); }
   .heatmap { grid-template-columns: repeat(30, 1fr); }
+  /* 통합 분석표는 본문 가독성 우선 — 페이지 자체 max-width 도 살짝 제한 */
+  .student-home.report-shell { max-width: 1200px; margin: 0 auto; }
 }
 
 /* MOBILE OVERFLOW FIX — 페이지 전체 스크롤 + 우측 잘림 방지 */
@@ -880,4 +884,50 @@
     color: black !important;
     border: 1px solid #888;
   }
+  .ur-reco-actions { display: none !important; }
+}
+
+/* ── 일괄 등록 버튼 + 토스트 ── */
+.ur-reco-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.ur-reco-bulk-btn {
+  padding: 9px 16px;
+  background: var(--accent, #F06C24);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: filter 0.1s;
+}
+.ur-reco-bulk-btn:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+.ur-reco-bulk-btn:disabled {
+  background: var(--muted, #999);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.ur-reco-toast {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.ur-reco-toast-success {
+  background: rgba(76, 175, 80, 0.15);
+  color: #2D7B40;
+  border: 1px solid rgba(76, 175, 80, 0.4);
+}
+.ur-reco-toast-error {
+  background: rgba(231, 76, 60, 0.15);
+  color: #B14A12;
+  border: 1px solid rgba(231, 76, 60, 0.4);
 }

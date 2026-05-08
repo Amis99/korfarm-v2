@@ -593,3 +593,26 @@ data class AdminCalendarActionStudent(
     val score: Int? = null,
     val submissionCount: Int = 0
 )
+
+// ── 통합 분석표 추천 학습 일괄 등록 ──
+
+data class BulkFromRecommendationsRequest(
+    /** 대상 학생 ID. 생략 시 호출자 본인. 학부모/관리자만 다른 학생 명시 가능. */
+    val studentId: String? = null,
+    /** 추천 콘텐츠 ID 리스트. 모두 활성 학습 콘텐츠여야 함. */
+    val contentIds: List<String>,
+    /** 마감일 — "yyyy-MM-dd" 또는 ISO LocalDateTime. 생략 시 등록일 + 7일 23:59 */
+    val dueAt: String? = null
+)
+
+data class BulkFromRecommendationsResponse(
+    val planId: String,
+    val cellId: String,
+    val dueAt: String,
+    /** 새로 추가된 assignment 수 */
+    val createdAssignments: Int,
+    /** 이미 등록되어 있어 건너뛴 콘텐츠 수 */
+    val skippedAssignments: Int,
+    /** plan 이 새로 자동 생성되었는지 */
+    val planCreated: Boolean
+)

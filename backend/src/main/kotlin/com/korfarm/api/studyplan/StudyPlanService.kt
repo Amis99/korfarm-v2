@@ -720,6 +720,126 @@ class StudyPlanService(
      * 국어농장 셀에 콘텐츠 추가 배정 (복수 배정).
      * cell.cellRefId 는 첫 배정만 유지. 두 번째 이상은 assignment row 만.
      */
+    /**
+     * 통합 분석표 추천 학습 일괄 등록.
+     *   1. 학생의 활성 plan 중 가장 최근 plan 자동 선택. 없으면 createDefaultPlanForStudent 로 신규 생성.
+     *   2. 그 plan 의 korfarm asset 의 첫 번째 셀에 contentIds 를 cellAssignment 로 추가.
+     *   3. cell.dueAt = parsed dueAt 또는 LocalDate.now().plusDays(7).atTime(23,59).
+     *   4. 이미 같은 refId 가 등록되어 있으면 skip (BAD_REQUEST 던지지 않음).
+     *
+     * 권한 체크는 컨트롤러 책임. 여기서는 studentId 기준으로 일괄 처리만.
+     */
+    @Transactional
+    fun bulkAssignFromRecommendations(
+        studentId: String,
+        contentIds: List<String>,
+        dueAtRaw: String?,
+        actorId: String
+    ): BulkFromRecommendationsResponse {
+        if (contentIds.isEmpty()) {
+            throw ApiException("BAD_REQUEST", "추천 콘텐츠가 비어 있습니다", HttpStatus.BAD_REQUEST)
+        }
+        val due = parseDueAt(dueAtRaw) ?: LocalDate.now().plusDays(7).atTime(23, 59)
+
+        // 활성 plan 자동 결정
+        val planIds = targetRepo.findByTargetTypeAndTargetId("user", studentId).map { it.planId }.distinct()
+        val activePlans = if (planIds.isEmpty()) emptyList() else
+            planRepo.findAllById(planIds).filter { it.status == "active" }
+
+        var planCreated = false
+        val plan = activePlans.maxByOrNull { it.createdAt } ?: run {
+            val membership = orgMembershipRepo.findByUserIdAndStatus(studentId, "active").firstOrNull()
+                ?: throw ApiException(
+                    "BAD_REQUEST",
+                    "학생의 활성 기관 멤버십이 없어 학습 계획표를 자동 생성할 수 없습니다",
+                    HttpStatus.BAD_REQUEST
+                )
+            planCreated = true
+            createDefaultPlanForStudent(membership.orgId, studentId)
+        }
+
+        // korfarm asset + 첫 scope 의 cell 1개 확보
+        val assets = assetRepo.findByPlanIdOrderBySortOrder(plan.id).filter { it.assetType == "korfarm" }
+        if (assets.isEmpty()) {
+            throw ApiException(
+                "INTERNAL",
+                "학습 계획표에 국어농장 자산이 없습니다. 강사에게 문의해 주세요.",
+                HttpStatus.INTERNAL_SERVER_ERROR
+            )
+        }
+        val asset = assets.first()
+        val scopes = scopeRepo.findByPlanIdOrderBySortOrder(plan.id)
+        val scope = scopes.firstOrNull()
+            ?: throw ApiException(
+                "INTERNAL",
+                "학습 계획표에 범위가 없습니다.",
+                HttpStatus.INTERNAL_SERVER_ERROR
+            )
+        val cells = cellRepo.findByPlanIdAndUserId(plan.id, studentId)
+        val cell = cells.firstOrNull { it.scopeId == scope.id && it.assetId == asset.id }
+            ?: createCell(plan.id, scope.id, asset, studentId)
+
+        // 셀 dueAt / status 갱신
+        cell.dueAt = due
+        if (cell.status == "unassigned" || cell.status == "expired" || cell.status == "completed") {
+            cell.status = "pending"
+            cell.score = null
+            cell.reviewedBy = null
+            cell.reviewedAt = null
+        }
+        cellRepo.save(cell)
+
+        // contentIds 일괄 등록 — 이미 있는 refId 는 skip
+        val existing = cellAssignmentRepo.findByCellIdOrderBySortOrderAscCreatedAtAsc(cell.id)
+        val existingRefs = existing.map { it.refId }.toSet()
+        var nextOrder = (existing.maxOfOrNull { it.sortOrder } ?: -1) + 1
+        var created = 0
+        var skipped = 0
+
+        contentIds.distinct().forEach { contentId ->
+            if (contentId.isBlank()) {
+                skipped += 1
+                return@forEach
+            }
+            if (contentId in existingRefs) {
+                skipped += 1
+                return@forEach
+            }
+            val title = contentRepo.findById(contentId).orElse(null)?.title
+            cellAssignmentRepo.save(StudyPlanCellAssignmentEntity(
+                id = IdGenerator.newId("spca"),
+                cellId = cell.id,
+                refId = contentId,
+                assignedLabel = title,
+                status = "pending",
+                sortOrder = nextOrder
+            ))
+            nextOrder += 1
+            created += 1
+        }
+
+        // 첫 배정이면 cell.cellRefId / assignedLabel 도 갱신 (matrix 표시 호환)
+        if (existing.isEmpty() && created > 0) {
+            val firstNew = cellAssignmentRepo.findByCellIdOrderBySortOrderAscCreatedAtAsc(cell.id).firstOrNull()
+            if (firstNew != null) {
+                cell.cellRefId = firstNew.refId
+                cell.assignedLabel = firstNew.assignedLabel ?: "AI 추천 학습"
+                cellRepo.save(cell)
+            }
+        }
+
+        if (created > 0) createEvent(cell, "assigned", "AI 추천 ${created}건 일괄 등록 (by $actorId)")
+
+        return BulkFromRecommendationsResponse(
+            planId = plan.id,
+            cellId = cell.id,
+            dueAt = due.toString(),
+            createdAssignments = created,
+            skippedAssignments = skipped,
+            planCreated = planCreated
+        )
+    }
+
     @Transactional
     fun addCellAssignment(cellId: String, refId: String, label: String?): StudyPlanCellAssignmentEntity {
         val cell = findCell(cellId)

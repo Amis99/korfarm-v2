@@ -121,6 +121,11 @@ class ContentRecommendationIndexService(
             ct.contains("LOGIC") -> "logic"
             ct.contains("STUDY") -> "study"
             ct.contains("FARM") -> "farm"
+            // 농장 모드 세분 분류 — V3 추천 fallback 용 (BACKGROUND_KNOWLEDGE/VOCAB_*/GRAMMAR_* 가 'other' 로
+            // 묶여 SQL 필터에 누락되던 사고 방지)
+            ct.contains("BACKGROUND_KNOWLEDGE") -> "background"
+            ct.contains("VOCAB") -> "vocab"
+            ct.contains("GRAMMAR") -> "grammar"
             else -> "other"
         }
     }
@@ -163,8 +168,15 @@ class ContentRecommendationIndexService(
      */
     private fun resolveDefaultVectorForIndex(ct: String, area: String): Map<String, Double> = when {
         ct.contains("LOGIC") -> mapOf("논리 사고력" to 1.0)
-        ct.contains("PRO_VOCAB") -> mapOf("어휘력" to 1.0)
-        ct.contains("PRO_GRAMMAR") -> mapOf("어법·문법 능력" to 1.0)
+        ct.contains("PRO_VOCAB") -> mapOf("어휘력" to 0.7, "국어 개념 적용 능력" to 0.3)
+        ct.contains("PRO_GRAMMAR") -> mapOf("어법·문법 능력" to 0.7, "국어 개념 적용 능력" to 0.3)
+        ct.contains("PRO_BACKGROUND") -> {
+            if (area.contains("fiction") && !area.contains("non")) {
+                mapOf("국어 관련 배경지식" to 0.7, "문장 독해력" to 0.3)
+            } else {
+                mapOf("비문학 배경지식" to 0.7, "국어 관련 배경지식" to 0.3)
+            }
+        }
         ct.contains("PRO_READING") -> {
             if (area.contains("fiction") && !area.contains("non")) {
                 mapOf("국어 관련 배경지식" to 0.4, "문장 독해력" to 0.4, "문제 분석 및 전략 수립 능력" to 0.2)
@@ -172,6 +184,15 @@ class ContentRecommendationIndexService(
                 mapOf("비문학 배경지식" to 0.4, "구조 독해력" to 0.4, "문제 분석 및 전략 수립 능력" to 0.2)
             }
         }
+        ct.contains("BACKGROUND_KNOWLEDGE") -> {
+            if (area.contains("fiction") && !area.contains("non")) {
+                mapOf("국어 관련 배경지식" to 0.7, "문장 독해력" to 0.3)
+            } else {
+                mapOf("비문학 배경지식" to 0.7, "국어 관련 배경지식" to 0.3)
+            }
+        }
+        ct.contains("VOCAB") -> mapOf("어휘력" to 0.8, "국어 개념 적용 능력" to 0.2)
+        ct.contains("GRAMMAR") -> mapOf("어법·문법 능력" to 0.8, "국어 개념 적용 능력" to 0.2)
         ct.contains("DAILY_READING") || ct.contains("FARM") -> {
             if (area.contains("fiction") && !area.contains("non")) {
                 mapOf("국어 관련 배경지식" to 0.5, "문장 독해력" to 0.5)

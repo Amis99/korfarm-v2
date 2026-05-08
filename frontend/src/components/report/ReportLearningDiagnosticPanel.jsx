@@ -59,18 +59,19 @@ export default function ReportLearningDiagnosticPanel({ learningCompetency, diag
   const options = {
     responsive: true,
     maintainAspectRatio: true,
+    aspectRatio: 1.1,
     scales: {
       r: {
         beginAtZero: true,
         max: 100,
-        ticks: { stepSize: 20, color: "#888", backdropColor: "transparent", font: { size: 10 } },
+        ticks: { stepSize: 20, color: "#888", backdropColor: "transparent", font: { size: 9 } },
         grid: { color: "rgba(0, 0, 0, 0.1)" },
         angleLines: { color: "rgba(0, 0, 0, 0.1)" },
-        pointLabels: { color: "#333", font: { size: 11, weight: "bold" } },
+        pointLabels: { color: "#333", font: { size: 10, weight: "bold" } },
       },
     },
     plugins: {
-      legend: { display: true, position: "bottom", labels: { font: { size: 11 } } },
+      legend: { display: true, position: "bottom", labels: { font: { size: 10 } } },
     },
   };
 

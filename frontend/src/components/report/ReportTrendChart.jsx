@@ -54,7 +54,7 @@ export default function ReportTrendChart({ trend }) {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     interaction: { mode: "index", intersect: false },
     scales: {
       x: {
@@ -78,7 +78,9 @@ export default function ReportTrendChart({ trend }) {
   return (
     <div className="ur-trend-wrap">
       <h3>학습 추이</h3>
-      <Line data={data} options={options} />
+      <div style={{ position: "relative", height: 240 }}>
+        <Line data={data} options={options} />
+      </div>
     </div>
   );
 }

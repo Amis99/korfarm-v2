@@ -211,10 +211,31 @@ class UnifiedReportService(
                     area = item.area,
                     subArea = item.subArea,
                     reason = item.reason,
-                    path = "/engine?contentId=${item.contentId}&contentType=${item.contentType}",
+                    path = pathForContent(item.contentId, item.contentType),
                 )
             },
         )
+
+    /**
+     * 추천 카드 클릭 시 이동할 정식 라우트.
+     * 프론트에 등록된 경로 (`App.jsx`) 기준:
+     *   - DAILY_QUIZ → /daily-quiz
+     *   - DAILY_READING → /daily-reading
+     *   - STUDY_CONTENT → /study-learning/{id}
+     *   - PRO_*, FARM_*, BACKGROUND_KNOWLEDGE, VOCAB_*, GRAMMAR_*, READING_*,
+     *     LANGUAGE_CONCEPT*, LOGIC_REASONING*, CHOICE_JUDGEMENT, WRITING_DESCRIPTIVE
+     *     → /learning/{id}  (LearningRunnerPage 가 contentId 로 로드)
+     *   - 기타 → /learning/{id} (기본 fallback)
+     */
+    private fun pathForContent(contentId: String, contentType: String): String {
+        val ct = contentType.uppercase()
+        return when {
+            ct == "DAILY_QUIZ" -> "/daily-quiz"
+            ct == "DAILY_READING" -> "/daily-reading"
+            ct == "STUDY_CONTENT" -> "/study-learning/$contentId"
+            else -> "/learning/$contentId"
+        }
+    }
 
     private fun strategyLabel(strategy: String): String = when (strategy) {
         "weakness" -> "약점 보강"
