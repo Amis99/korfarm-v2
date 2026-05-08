@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -1063,9 +1064,9 @@ function StudentHomePage() {
           </>
         )}
 
-        {/* ─── 시즌 점수 인벤토리 팝업 (씨앗·작물·비료·시즌 공식) ─── */}
-        {showInventoryPopup && (
-          <div className="start-modal-overlay" onClick={() => setShowInventoryPopup(false)}>
+        {/* ─── 시즌 점수 인벤토리 팝업 (씨앗·작물·비료·시즌 공식) — portal 로 body 에 마운트 ─── */}
+        {showInventoryPopup && createPortal(
+          <div className="start-modal-overlay" onClick={() => setShowInventoryPopup(false)} style={{ zIndex: 9600 }}>
             <div className="start-modal-card" onClick={(e) => e.stopPropagation()}>
               <h2>보유 현황</h2>
               <div style={{ display: "grid", gap: 8 }}>
@@ -1092,7 +1093,8 @@ function StudentHomePage() {
                 닫기
               </button>
             </div>
-          </div>
+          </div>,
+          document.body
         )}
 
         {/* ─── TOAST (무료 회원 잠긴 항목 클릭 시) ─── */}
