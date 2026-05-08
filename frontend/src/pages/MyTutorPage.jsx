@@ -295,14 +295,27 @@ function MyTutorPage() {
                       remarkPlugins={[remarkGfm]}
                       components={{
                         a: ({ href, children, ...props }) => {
-                          const isInternal = href && href.startsWith("/");
-                          if (isInternal) {
+                          // 내부 경로(상대 / 절대 URL 둘 다 같은 호스트) → react-router navigate.
+                          // 새 탭으로 열면 sessionStorage 가 비어 401 → 자동 로그아웃 사고 방지.
+                          let internalPath = null;
+                          if (href) {
+                            if (href.startsWith("/")) internalPath = href;
+                            else {
+                              try {
+                                const u = new URL(href, window.location.origin);
+                                if (u.origin === window.location.origin) {
+                                  internalPath = u.pathname + u.search + u.hash;
+                                }
+                              } catch { /* invalid URL → 외부로 처리 */ }
+                            }
+                          }
+                          if (internalPath) {
                             return (
                               <a
-                                href={href}
+                                href={internalPath}
                                 onClick={(e) => {
                                   e.preventDefault();
-                                  navigate(href);
+                                  navigate(internalPath);
                                 }}
                                 {...props}
                               >
