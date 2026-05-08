@@ -323,7 +323,7 @@ function AnalysisReportPage() {
         {report?.sections && (
           <div style={{ marginTop: 16 }}>
             <h3>활동별 상세</h3>
-            <ReportSectionDetail sections={report.sections} />
+            <ReportSectionDetail sections={{ ...report.sections, studyPlan: null }} />
           </div>
         )}
       </section>

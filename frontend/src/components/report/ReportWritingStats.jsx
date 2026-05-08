@@ -50,15 +50,17 @@ export default function ReportWritingStats({ stats, levelId }) {
           <ul>
             {recentPosts.map((p) => (
               <li key={p.postId}>
-                <span className="ur-recent-title">
-                  {p.title || "(제목 없음)"}
-                </span>
-                {p.hasFeedback && (
-                  <span className="ur-feedback-badge">AI 첨삭</span>
-                )}
-                <span className="ur-recent-meta">
-                  ❤ {p.likeCount} · 💬 {p.commentCount} · {fmt(p.createdAt)}
-                </span>
+                <Link to={`/writing/post/${p.postId}`} className="ur-recent-link">
+                  <span className="ur-recent-title">
+                    {p.title || "(제목 없음)"}
+                  </span>
+                  {p.hasFeedback && (
+                    <span className="ur-feedback-badge">AI 첨삭</span>
+                  )}
+                  <span className="ur-recent-meta">
+                    ❤ {p.likeCount} · 💬 {p.commentCount} · {fmt(p.createdAt)}
+                  </span>
+                </Link>
               </li>
             ))}
           </ul>
