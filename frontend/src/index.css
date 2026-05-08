@@ -81,3 +81,35 @@ html, body {
 #root {
   min-height: 100vh;
 }
+
+/* ─────────────────── 모바일 우측 잘림 글로벌 안전망 ───────────────────
+ * 앱 패키징 + 모바일 웹에서 콘텐츠가 viewport 폭을 넘어가지 않도록 보장.
+ * 페이지별 CSS 의 산발적 룰(wallet/student-home/analysis-report/persona-select 등) 도 유지하되
+ * 글로벌에서 한 번 더 안전망을 친다.
+ *
+ * 의도적 가로 스크롤 컨테이너(예: 학습 매트릭스·시험 OMR 일부) 는 .allow-x-scroll
+ * 클래스로 max-width 제한을 풀 수 있게 escape hatch 제공. */
+@media (max-width: 767px) {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+  #root, #root > * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  /* 미디어 자동 축소 — 큰 이미지/SVG/캔버스가 폭을 초과해 잘리지 않도록 */
+  img, video, canvas, svg:not([width]), iframe {
+    max-width: 100%;
+    height: auto;
+  }
+  /* 표·코드블록 — 자체 가로 스크롤 유지하되 컨테이너는 폭 제한 */
+  table, pre {
+    max-width: 100%;
+  }
+  /* 가로 스크롤이 본질적으로 필요한 컨테이너만 글로벌 max-width 룰 escape */
+  .allow-x-scroll {
+    max-width: none !important;
+    overflow-x: auto;
+  }
+}
