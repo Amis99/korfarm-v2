@@ -17,12 +17,12 @@ const CHARGE_PRESETS = [
 const PRIORITY_KEY = "korfarm_wallet_priority_v1";
 
 const WALLET_META = [
-  { key: "grapefruit", color: "orange", name: "자몽", primary: true, unit: "AI 결제 통화 · 1자몽 = 250원" },
-  { key: "crop_wheat", color: "cream",  name: "밀",    unit: "1작물 = 1자몽 환산" },
-  { key: "crop_rice",  color: "yellow", name: "쌀",    unit: "1작물 = 1자몽 환산" },
-  { key: "crop_corn",  color: "yellow", name: "옥수수", unit: "1작물 = 1자몽 환산" },
-  { key: "crop_grape", color: "purple", name: "포도",   unit: "1작물 = 1자몽 환산" },
-  { key: "crop_apple", color: "red",    name: "사과",   unit: "1작물 = 1자몽 환산" },
+  { key: "grapefruit", color: "orange", name: "자몽", primary: true },
+  { key: "crop_wheat", color: "cream",  name: "밀" },
+  { key: "crop_rice",  color: "yellow", name: "쌀" },
+  { key: "crop_corn",  color: "yellow", name: "옥수수" },
+  { key: "crop_grape", color: "purple", name: "포도" },
+  { key: "crop_apple", color: "red",    name: "사과" },
 ];
 
 const ACTIVITY_LABEL = {
@@ -243,29 +243,35 @@ function MyWalletPage() {
       <div className="wallet-page-head">
         <h1>🌾 내 작물 지갑</h1>
         <p>AI 학습·글쓰기 첨삭에 자몽과 작물을 쓸 수 있어요. 어떤 작물을 먼저 쓸지 직접 정할 수 있어요.</p>
-        <span className="total">
-          합계 <strong>{totalCount}개</strong> · 약 <strong>{totalKrw.toLocaleString()}원</strong> 가치
-        </span>
       </div>
 
       <section className="wallet-section">
         <h2>💰 잔액</h2>
         <p className="subhead" style={{ marginTop: -4 }}>
           작물은 <strong>결제 가능</strong>(AI 사용 시 차감) 과 <strong>누적</strong>(시즌 랭킹용 — 사용해도 안 줄어요) 을 따로 관리해요.
+          자몽 카드를 누르면 충전할 수 있어요.
         </p>
         <div className="balance-grid">
           {WALLET_META.map((w) => {
             const isGrapefruit = w.primary;
             const walletAmt = isGrapefruit ? grapefruit : (walletCrops[w.key] || 0);
             const cumulAmt = isGrapefruit ? null : (crops[w.key] || 0);
+            const cardProps = isGrapefruit
+              ? { role: "button", tabIndex: 0, onClick: handleCharge,
+                  onKeyDown: (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleCharge(); } },
+                  style: { cursor: "pointer" } }
+              : {};
             return (
-              <div key={w.key} className={`balance-card ${w.primary ? "primary" : ""}`}>
+              <div key={w.key} className={`balance-card ${w.primary ? "primary" : ""}`} {...cardProps}>
                 <span className={`clay clay-${w.color}`} aria-hidden="true">
                   <span className="lbl">{w.name}</span>
                 </span>
                 <span className="name">{w.name}</span>
                 {isGrapefruit ? (
-                  <span className="count">{walletAmt}개</span>
+                  <>
+                    <span className="count">{walletAmt}개</span>
+                    <span className="unit" style={{ color: "var(--accent-deep)", fontWeight: 700 }}>＋ 충전하기</span>
+                  </>
                 ) : (
                   <span className="count" style={{ display: "flex", flexDirection: "column", gap: 2, alignItems: "center" }}>
                     <span style={{ fontSize: 17, fontWeight: 700, color: "#f06c24" }}>
@@ -276,7 +282,6 @@ function MyWalletPage() {
                     </span>
                   </span>
                 )}
-                <span className="unit">{w.unit}</span>
               </div>
             );
           })}
@@ -325,7 +330,6 @@ function MyWalletPage() {
           <button className="charge-primary" onClick={handleCharge}>+ 자몽 충전하기</button>
           <button className="exchange-btn" onClick={handleExchange}>🔄 씨앗 → 작물 교환</button>
         </div>
-        <p className="charge-note">현재 자몽 단가: 1개 250원 · 10개 묶음 2,500원 · 50개 묶음 12,000원</p>
       </section>
 
       <section className="wallet-section">
