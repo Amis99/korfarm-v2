@@ -43,6 +43,7 @@ class TutorToolExecutor(
                 "get_my_competency" -> getMyCompetency(userId)
                 "recommend_my_study" -> recommendMyStudy(input, userId)
                 "get_recommendation_candidates" -> getRecommendationCandidates(input, userId)
+                "get_my_recommendations" -> getMyRecommendations(input, userId)
                 "get_my_recent_history" -> getMyRecentHistory(input, userId)
                 "search_content" -> searchContent(input)
                 "explain_question_solution" -> explainQuestionSolution(input)
@@ -125,6 +126,43 @@ class TutorToolExecutor(
                 "area_candidates" to toMeta(all.area),
                 "theme_candidates" to toMeta(all.theme),
                 "instruction" to "위 30개 메타데이터만 보고, 학생의 약점·최근 학습·진단 결과를 종합하여 카테고리별 1~2개씩(총 3~6개) 선별해 이유와 함께 자연어로 제시할 것. 30개 그대로 노출 금지.",
+            ),
+        )
+    }
+
+    @Transactional(readOnly = true)
+    private fun getMyRecommendations(input: Map<String, Any?>, userId: String): TutorToolResult {
+        val perCategory = (input["per_category"] as? Number)?.toInt()?.coerceIn(1, 12) ?: 6
+        val bundle = recommendationService.recommendWithFallback(userId, perCategory)
+
+        fun toMeta(items: List<RecommendationService.RecommendedContent>): List<Map<String, Any?>> =
+            items.map {
+                mapOf(
+                    "content_id" to it.contentId,
+                    "title" to it.title,
+                    "content_type" to it.contentType,
+                    "level_id" to it.levelId,
+                    "area" to it.area,
+                    "sub_area" to it.subArea,
+                    "reason_hint" to it.reason,
+                )
+            }
+
+        return TutorToolResult(
+            success = true,
+            data = mapOf(
+                "level_id" to bundle.levelId,
+                "competency" to mapOf(
+                    "strategy" to bundle.competency.strategy,
+                    "target_labels" to bundle.competency.targetLabels,
+                    "items" to toMeta(bundle.competency.items),
+                ),
+                "area" to mapOf(
+                    "strategy" to bundle.area.strategy,
+                    "target_labels" to bundle.area.targetLabels,
+                    "items" to toMeta(bundle.area.items),
+                ),
+                "instruction" to "strategy 가 weakness 면 약점 보강, low_volume 이면 학습량 부족, level_default 면 레벨 가중치 기반 추천이라는 사실을 학생에게 자연어로 짧게 짚어준 뒤, 카테고리별 1~2개를 이유와 함께 제시할 것. 모든 항목 그대로 노출 금지. 자기 호칭은 '선생님'.",
             ),
         )
     }

@@ -1,8 +1,15 @@
+import { useNavigate } from "react-router-dom";
+
 /**
  * AI 코멘트 — 룰 기반 분석문 카드 리스트
  * - severity: good / warn / info
+ * - section 별 클릭 라우팅:
+ *   · "글쓰기" → /writing/{levelId}
+ *   · "추천"  → 같은 페이지의 #sec-reco 로 스크롤
  */
-export default function ReportAiComments({ comments }) {
+export default function ReportAiComments({ comments, levelId }) {
+  const navigate = useNavigate();
+
   if (!comments || comments.length === 0) {
     return (
       <div className="ur-ai-comments">
@@ -14,25 +21,44 @@ export default function ReportAiComments({ comments }) {
     );
   }
 
+  const handleClick = (section) => {
+    if (section === "글쓰기" && levelId) {
+      navigate(`/writing/${levelId}`);
+    } else if (section === "추천") {
+      const el = document.getElementById("sec-reco");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <div className="ur-ai-comments">
       <h3>AI 코멘트</h3>
-      <p className="ur-algo-hint">
-        역량 · 영역 · 주제 · 계획표 · 글쓰기를 종합 분석한 룰 기반 자동 코멘트
-      </p>
       <div className="ur-ai-comment-list">
-        {comments.map((c, i) => (
-          <div
-            key={`${c.section}-${i}`}
-            className={`ur-ai-comment ur-sev-${c.severity || "info"}`}
-          >
-            <div className="ur-ai-head">
-              <span className="ur-ai-section">[{c.section}]</span>
-              <span className="ur-ai-title">{c.title}</span>
+        {comments.map((c, i) => {
+          const clickable = (c.section === "글쓰기" && levelId) || c.section === "추천";
+          return (
+            <div
+              key={`${c.section}-${i}`}
+              className={`ur-ai-comment ur-sev-${c.severity || "info"}${clickable ? " ur-ai-clickable" : ""}`}
+              onClick={clickable ? () => handleClick(c.section) : undefined}
+              role={clickable ? "button" : undefined}
+              tabIndex={clickable ? 0 : undefined}
+              onKeyDown={clickable ? (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  handleClick(c.section);
+                }
+              } : undefined}
+            >
+              <div className="ur-ai-head">
+                <span className="ur-ai-section">[{c.section}]</span>
+                <span className="ur-ai-title">{c.title}</span>
+                {clickable && <span className="ur-ai-chev">›</span>}
+              </div>
+              <p className="ur-ai-body">{c.content}</p>
             </div>
-            <p className="ur-ai-body">{c.content}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

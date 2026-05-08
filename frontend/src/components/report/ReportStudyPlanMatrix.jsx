@@ -54,8 +54,29 @@ export default function ReportStudyPlanMatrix({ planIds }) {
 
   return (
     <div>
+      <CellLegend />
       {plans.map((plan) => (
         <MatrixTable key={plan.planId} plan={plan} />
+      ))}
+    </div>
+  );
+}
+
+/** 셀 상태 색상 범례 — 5단계 stage */
+function CellLegend() {
+  const items = [
+    { cls: "stage-unassigned", label: "배정 전" },
+    { cls: "stage-pending", label: "미수행" },
+    { cls: "stage-overdue", label: "미완료" },
+    { cls: "stage-done", label: "수행완료" },
+    { cls: "stage-reviewed", label: "점검완료" },
+  ];
+  return (
+    <div className="ur-sp-legend">
+      {items.map((it) => (
+        <span key={it.cls} className="ur-sp-legend-item">
+          <span className={`cell-stage ${it.cls}`}>{it.label}</span>
+        </span>
       ))}
     </div>
   );

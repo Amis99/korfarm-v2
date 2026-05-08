@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
 import { apiGet as adminApiGet } from "../utils/adminApi";
+import { clampPct } from "../utils/format";
 import ReportLearningDiagnosticPanel from "../components/report/ReportLearningDiagnosticPanel";
 import ReportCompetencyTrendChart from "../components/report/ReportCompetencyTrendChart";
 import ReportCompetencySection from "../components/report/ReportCompetencySection";
@@ -107,7 +108,7 @@ function AnalysisReportPage() {
     const s = report?.sections || {};
     const out = [];
     if (s.examOmr?.count) {
-      out.push({ key: "examOmr", label: "시험 OMR", count: s.examOmr.count, score: s.examOmr.averageScore, color: SOURCE_COLOR.examOmr });
+      out.push({ key: "examOmr", label: "지필 시험", count: s.examOmr.count, score: s.examOmr.averageScore, color: SOURCE_COLOR.examOmr });
     }
     if (s.farmMode?.count) {
       out.push({ key: "farmMode", label: "농장 모드", count: s.farmMode.count, score: s.farmMode.averageAccuracy ?? s.farmMode.averageScore, color: SOURCE_COLOR.farmMode });
@@ -218,17 +219,19 @@ function AnalysisReportPage() {
           </div>
         )}
 
-        <p className="ur-algo-hint" style={{ marginTop: 12 }}>
-          최근 100건 학습/시험 + 30일 가중치 + 시험 10·일일 3·학습 1 가중 + 약점 가중치 + 난이도 보정
-        </p>
+        {isAdmin && (
+          <p className="ur-algo-hint" style={{ marginTop: 12 }}>
+            최근 100건 학습/시험 + 30일 가중치 + 시험 10·일일 3·학습 1 가중 + 약점 가중치 + 난이도 보정
+          </p>
+        )}
       </section>
 
       {/* 2. 영역별·세부영역별·주제별 성취 분석 */}
       <section className="report-section" id="sec-area">
         <h2>📚 영역별 · 세부영역별 · 주제별 성취 분석</h2>
-        <ReportAreaSection areaStats={report?.areaStats || []} />
+        <ReportAreaSection areaStats={report?.areaStats || []} showAlgorithmHint={isAdmin} />
         <div style={{ marginTop: 20 }}>
-          <ReportThemeSection themeStats={report?.themeStats || []} />
+          <ReportThemeSection themeStats={report?.themeStats || []} showAlgorithmHint={isAdmin} />
         </div>
       </section>
 
@@ -333,7 +336,7 @@ function AnalysisReportPage() {
             <div className="study-plan-summary">
               <div className="sp-summary-card">
                 <span className="label">완료율</span>
-                <span className="value">{Number(report.sections.studyPlan.completionRate).toFixed(0)}%</span>
+                <span className="value">{clampPct(report.sections.studyPlan.completionRate).toFixed(0)}%</span>
               </div>
               <div className="sp-summary-card">
                 <span className="label">완료</span>
@@ -365,36 +368,37 @@ function AnalysisReportPage() {
 
       {/* 6. AI 코멘트 */}
       <section className="report-section" id="sec-ai">
-        <ReportAiComments comments={report?.aiComments || []} />
+        <ReportAiComments
+          comments={report?.aiComments || []}
+          levelId={report?.studentLevelId || user?.levelId}
+        />
       </section>
 
-      {/* 7. 다음 추천 학습 (일일 학습 제외) */}
+      {/* 7. 다음 추천 학습 — 약점 → 학습량 부족 → 레벨 가중치 fallback */}
       <section className="report-section" id="sec-reco">
         <h2>✨ 다음 추천 학습</h2>
-        <p className="ur-algo-hint">
-          역량·영역·주제별 강약점 기반 추천 (일일 학습 자동 제외)
-        </p>
-        {Array.isArray(report?.recommendations) && report.recommendations.length > 0 ? (
-          <ReportRecommendations recommendations={report.recommendations} />
+        {isAdmin && (
+          <p className="ur-algo-hint">
+            역량·영역 fallback 추천 (약점 → 학습량 부족 → 레벨 가중치)
+          </p>
+        )}
+        {(report?.recommendationBundle &&
+          (report.recommendationBundle.competency?.items?.length > 0 ||
+            report.recommendationBundle.area?.items?.length > 0)) ? (
+          <ReportRecommendations bundle={report.recommendationBundle} />
+        ) : Array.isArray(report?.recommendations) && report.recommendations.length > 0 ? (
+          <ReportRecommendations legacy={report.recommendations} />
         ) : (
-          <div className="reco-grid">
-            <button className="reco-item" onClick={() => navigate("/my/tutor")}>
-              <span className="clay clay-orange" aria-hidden="true">
-                <span className="lbl">AI</span>
-              </span>
-              <div className="info">
-                <span className="title">AI 튜터에게 추천받기</span>
-                <span className="meta">약점 분석 + 맞춤 학습 추천</span>
-              </div>
-              <span className="chev">›</span>
-            </button>
-          </div>
+          <p className="ur-empty">아직 추천할 학습이 충분하지 않습니다. 학습 데이터가 누적되면 자동으로 표시됩니다.</p>
         )}
       </section>
 
       {/* 8. 글쓰기 현황 */}
       <section className="report-section" id="sec-writing">
-        <ReportWritingStats stats={report?.writingStats} />
+        <ReportWritingStats
+          stats={report?.writingStats}
+          levelId={report?.studentLevelId || user?.levelId}
+        />
       </section>
 
       <div style={{ height: "32px" }} />

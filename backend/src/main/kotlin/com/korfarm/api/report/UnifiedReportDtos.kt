@@ -6,6 +6,8 @@ import java.time.LocalDate
 data class UnifiedReportResponse(
     val studentId: String,
     val studentName: String,
+    /** 학생 레벨 ID — 글쓰기/추천 라우팅에 사용 (e.g. "russell2") */
+    val studentLevelId: String? = null,
     val period: ReportPeriod,
     val summary: ReportSummary,
     val sections: ReportSections,
@@ -20,14 +22,43 @@ data class UnifiedReportResponse(
     val diagnosticCompetency: DiagnosticCompetencySnapshot? = null,
     /** 역량별 일자별 변화 추이 (시계열). Phase 2 신규. */
     val competencyTrend: List<CompetencyTrendPoint> = emptyList(),
+    /** @deprecated V3 부터 recommendationBundle 사용. 하위호환용. */
     val recommendations: List<LearningRecommendation> = emptyList(),
+    /** V3 신규 — 약점·학습량·레벨 가중치 fallback 통합 추천. AI 튜터 링크 대체. */
+    val recommendationBundle: RecommendationBundleDto? = null,
     val calendar: List<CalendarDay> = emptyList(),
     /** 주제별 성취 — 영역·세부영역과 같은 가중 평가 공식 적용 */
     val themeStats: List<ThemeStats> = emptyList(),
     /** AI 코멘트 — 1차 룰 기반, 추후 LLM 깊은 분석 옵션 */
     val aiComments: List<AiComment> = emptyList(),
-    /** 글쓰기(포도) 통계 — 작성·AI 첨삭·좋아요·댓글 합산 */
+    /** 글쓰기(지식과 지혜) 통계 — 작성·AI 첨삭·좋아요·댓글 합산 */
     val writingStats: WritingStats? = null
+)
+
+/** V3 추천 응답 — strategy(weakness/low_volume/level_default) 와 근거 라벨 + 콘텐츠 카드 */
+data class RecommendationBundleDto(
+    val competency: RecommendationGroupDto,
+    val area: RecommendationGroupDto,
+    val levelId: String?,
+)
+
+data class RecommendationGroupDto(
+    val strategy: String,
+    val strategyLabel: String,
+    val targetLabels: List<String>,
+    val items: List<RecommendedContentDto>,
+)
+
+data class RecommendedContentDto(
+    val contentId: String,
+    val title: String,
+    val contentType: String,
+    val contentTypeLabel: String,
+    val levelId: String?,
+    val area: String?,
+    val subArea: String?,
+    val reason: String,
+    val path: String,
 )
 
 /** 학습 종합 누적 10대 역량 (윈도우 내 가중평균) */

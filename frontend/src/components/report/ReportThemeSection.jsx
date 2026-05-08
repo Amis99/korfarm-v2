@@ -5,8 +5,9 @@ import { useState, useMemo } from "react";
  * - V2: weightedScore 우선
  * - 영역별로 그룹핑해서 펼침/접기
  * - 활동 3건 이상만 표시 (소표본 제외)
+ * - showAlgorithmHint: admin 전용 — 알고리즘 디버그 문구 노출
  */
-export default function ReportThemeSection({ themeStats }) {
+export default function ReportThemeSection({ themeStats, showAlgorithmHint = false }) {
   const items = (themeStats || []).filter((t) => (t.activityCount ?? 0) >= 1);
   const grouped = useMemo(() => {
     const m = new Map();
@@ -44,9 +45,11 @@ export default function ReportThemeSection({ themeStats }) {
   return (
     <div className="ur-theme-section">
       <h3>주제별 성취 분석</h3>
-      <p className="ur-algo-hint">
-        영역·세부영역과 동일한 가중 평가 — 약점 주제부터 보강 추천
-      </p>
+      {showAlgorithmHint && (
+        <p className="ur-algo-hint">
+          영역·세부영역과 동일한 가중 평가 — 약점 주제부터 보강 추천
+        </p>
+      )}
 
       {[...grouped.entries()].map(([area, themes]) => {
         const sorted = [...themes].sort(

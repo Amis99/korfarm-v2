@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.korfarm.api.classification.ClassificationMasterRepository
 import com.korfarm.api.classification.ContentClassificationRepository
+import com.korfarm.api.learning.RecommendationService
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.diagnostic.DiagSessionRepository
 import com.korfarm.api.diagnostic.scoring.COMPETENCIES
@@ -74,6 +75,8 @@ class UnifiedReportService(
     private val wisdomLikeRepo: WisdomLikeRepository,
     private val wisdomCommentRepo: WisdomCommentRepository,
     private val aiFeedbackJobRepo: AiFeedbackJobRepository,
+    /** V3 추천 통합 — 약점·학습량·레벨 가중치 fallback 자동 적용 */
+    private val recommendationService: RecommendationService,
     private val objectMapper: ObjectMapper
 ) {
     private val dtFmt = DateTimeFormatter.ISO_LOCAL_DATE_TIME
@@ -143,6 +146,10 @@ class UnifiedReportService(
 
         // V2 — AI 코멘트 + 글쓰기 통계
         val writingStats = buildWritingStats(studentId, start, end)
+
+        // V3 — 추천 fallback 통합 (약점 → 학습량 부족 → 레벨 가중치)
+        val recommendationBundle = buildRecommendationBundle(studentId)
+
         val aiComments = buildAiComments(
             learningCompetency = learningCompetency,
             diagnosticCompetency = diagnosticCompetency,
@@ -150,12 +157,14 @@ class UnifiedReportService(
             themeStats = themeStats,
             studyPlan = studyPlan,
             writingStats = writingStats,
-            recommendations = recommendations
+            recommendations = recommendations,
+            recommendationBundle = recommendationBundle
         )
 
         return UnifiedReportResponse(
             studentId = studentId,
             studentName = user.name ?: "",
+            studentLevelId = user.levelId,
             period = ReportPeriod(startDate, endDate),
             summary = summary,
             sections = sections,
@@ -168,11 +177,50 @@ class UnifiedReportService(
             diagnosticCompetency = diagnosticCompetency,
             competencyTrend = competencyTrend,
             recommendations = recommendations,
+            recommendationBundle = recommendationBundle,
             calendar = calendar,
             themeStats = themeStats,
             aiComments = aiComments,
             writingStats = writingStats
         )
+    }
+
+    /* ───────────────── V3 추천 fallback 통합 빌드 ───────────────── */
+
+    private fun buildRecommendationBundle(userId: String): RecommendationBundleDto {
+        val bundle = recommendationService.recommendWithFallback(userId, perCategory = 6)
+        return RecommendationBundleDto(
+            competency = mapGroup(bundle.competency),
+            area = mapGroup(bundle.area),
+            levelId = bundle.levelId,
+        )
+    }
+
+    private fun mapGroup(g: RecommendationService.FallbackRecommendation): RecommendationGroupDto =
+        RecommendationGroupDto(
+            strategy = g.strategy,
+            strategyLabel = strategyLabel(g.strategy),
+            targetLabels = g.targetLabels,
+            items = g.items.map { item ->
+                RecommendedContentDto(
+                    contentId = item.contentId,
+                    title = item.title,
+                    contentType = item.contentType,
+                    contentTypeLabel = CompetencyMapping.contentTypeLabel(item.contentType),
+                    levelId = item.levelId,
+                    area = item.area,
+                    subArea = item.subArea,
+                    reason = item.reason,
+                    path = "/engine?contentId=${item.contentId}&contentType=${item.contentType}",
+                )
+            },
+        )
+
+    private fun strategyLabel(strategy: String): String = when (strategy) {
+        "weakness" -> "약점 보강"
+        "low_volume" -> "학습량 부족"
+        "level_default" -> "레벨 추천"
+        else -> "추천"
     }
 
     /* ───────────────── Phase 2: 학습 종합 누적 / 진단 측정 / 시계열 ───────────────── */
@@ -471,10 +519,15 @@ class UnifiedReportService(
                 val allItems = proChapterItemRepo.findByChapterIdOrderByItemOrderAsc(ch.id)
                 val totalItems = allItems.size
 
-                // 완료 아이템 수
+                // 완료 아이템 수 — 잔존(삭제된 item) 제외 + 중복 progress 제거 + 100 클램프
                 val chapterProgress = progressByChapter[ch.id] ?: emptyList()
-                val completedCount = chapterProgress.count { it.completed }
-                val progressPercent = if (totalItems > 0) (completedCount * 100 / totalItems) else 0
+                val validItemIds = allItems.map { it.id }.toSet()
+                val completedCount = chapterProgress
+                    .filter { it.completed && it.itemId in validItemIds }
+                    .distinctBy { it.itemId }
+                    .size
+                val progressPercent = if (totalItems > 0)
+                    ((completedCount * 100) / totalItems).coerceIn(0, 100) else 0
 
                 // 테스트 통과 여부
                 val passedSessions = proTestSessionRepo.findByUserIdAndChapterIdAndStatusIn(
@@ -575,7 +628,8 @@ class UnifiedReportService(
         val submittedCells = cells.count { it.status in listOf("submitted", "scored") }
         val pendingCells = cells.count { it.status == "pending" }
         val rejectedCells = 0
-        val completionRate = if (totalCells > 0) round2(completedCells.toDouble() / totalCells * 100) else 0.0
+        val completionRate = if (totalCells > 0)
+            round2((completedCells.toDouble() / totalCells * 100).coerceIn(0.0, 100.0)) else 0.0
 
         // 정규화 점수: 완료율
         val normalizedScore = completionRate
@@ -1016,7 +1070,8 @@ class UnifiedReportService(
         themeStats: List<ThemeStats>,
         studyPlan: StudyPlanSection?,
         writingStats: WritingStats?,
-        recommendations: List<LearningRecommendation>
+        recommendations: List<LearningRecommendation>,
+        recommendationBundle: RecommendationBundleDto? = null
     ): List<AiComment> {
         val now = LocalDateTime.now().format(dtFmt)
         val out = mutableListOf<AiComment>()
@@ -1115,7 +1170,7 @@ class UnifiedReportService(
                 out += AiComment(
                     section = "글쓰기",
                     title = "글쓰기 시작해 보기",
-                    content = "최근 글쓰기 활동이 없습니다. 포도 게시판에서 주제 글을 한 편 작성하고 AI 첨삭을 받아보세요.",
+                    content = "최근 글쓰기 활동이 없습니다. 지식과 지혜에서 주제 글을 한 편 작성하고 AI 첨삭을 받아보세요.",
                     severity = "info",
                     generatedAt = now
                 )
@@ -1138,8 +1193,26 @@ class UnifiedReportService(
             }
         }
 
-        // 7) 추천 학습 안내
-        if (recommendations.isNotEmpty()) {
+        // 7) 추천 학습 안내 — V3 bundle 우선, 구버전 recommendations 는 fallback
+        if (recommendationBundle != null) {
+            val total = recommendationBundle.competency.items.size + recommendationBundle.area.items.size
+            if (total > 0) {
+                val strategy = recommendationBundle.competency.strategy
+                val titleHint = when (strategy) {
+                    "weakness" -> "약점 보강 추천"
+                    "low_volume" -> "학습량 부족 영역 추천"
+                    else -> "레벨 맞춤 추천"
+                }
+                val targetText = recommendationBundle.competency.targetLabels.joinToString("·").ifBlank { "맞춤" }
+                out += AiComment(
+                    section = "추천",
+                    title = "$titleHint — ${total}건",
+                    content = "$targetText 기준으로 추천 학습 ${total}건을 준비했습니다. 페이지 하단의 추천 영역에서 바로 시작할 수 있습니다.",
+                    severity = "info",
+                    generatedAt = now
+                )
+            }
+        } else if (recommendations.isNotEmpty()) {
             val total = recommendations.sumOf { it.items.size }
             out += AiComment(
                 section = "추천",

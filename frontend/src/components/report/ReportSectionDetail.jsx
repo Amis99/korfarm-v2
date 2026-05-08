@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { TYPE_LABEL } from "../../constants/contentTypes";
+import { clampPct } from "../../utils/format";
 import ReportStudyPlanMatrix from "./ReportStudyPlanMatrix";
 
 const toKorean = (label) => {
@@ -254,7 +255,9 @@ function ProChapterList({ chapters }) {
         </tr>
       </thead>
       <tbody>
-        {chapters.map((ch) => (
+        {chapters.map((ch) => {
+          const pct = clampPct(ch.progressPercent);
+          return (
           <tr key={ch.chapterId}>
             <td style={{ textAlign: "center", fontSize: 12 }}>{ch.chapterNumber}</td>
             <td>{ch.title}</td>
@@ -262,9 +265,9 @@ function ProChapterList({ chapters }) {
               <div className="ur-pro-progress-bar">
                 <div
                   className="ur-pro-progress-fill"
-                  style={{ width: `${ch.progressPercent}%` }}
+                  style={{ width: `${pct}%` }}
                 />
-                <span className="ur-pro-progress-label">{ch.progressPercent}%</span>
+                <span className="ur-pro-progress-label">{pct}%</span>
               </div>
             </td>
             <td style={{ textAlign: "center" }}>
@@ -280,7 +283,8 @@ function ProChapterList({ chapters }) {
               {ch.testAccuracy != null ? `${ch.testAccuracy}%` : "-"}
             </td>
           </tr>
-        ))}
+          );
+        })}
       </tbody>
     </table>
   );

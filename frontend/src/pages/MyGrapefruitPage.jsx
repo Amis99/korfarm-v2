@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { apiGet, apiPost } from "../utils/api";
+import { useAuth } from "../hooks/useAuth";
 import SiteFooter from "../components/SiteFooter";
 import "../styles/admin.css";
 
@@ -21,6 +22,8 @@ const CROP_LABELS = {
 
 // 학생(개인) 자몽 충전 + 작물 지갑 + 거래 이력
 export default function MyGrapefruitPage() {
+  const { user } = useAuth();
+  const wisdomHref = user?.levelId ? `/writing/${user.levelId}` : null;
   const [balance, setBalance] = useState({ grapefruits: 0, crops: {} });
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -113,7 +116,12 @@ export default function MyGrapefruitPage() {
       </div>
 
       <p style={{ fontSize: 11, color: "#999", marginBottom: 16 }}>
-        ※ 테스트 환경 — 토스페이 연동은 추후 적용. <Link to="/wisdom">지식과 지혜</Link> 본인 글에서 AI 첨삭 가능.
+        ※ 테스트 환경 — 토스페이 연동은 추후 적용.
+        {wisdomHref ? (
+          <> <Link to={wisdomHref}>지식과 지혜</Link> 본인 글에서 AI 첨삭 가능.</>
+        ) : (
+          <> 지식과 지혜 본인 글에서 AI 첨삭 가능.</>
+        )}
       </p>
 
       {/* 거래 이력 */}

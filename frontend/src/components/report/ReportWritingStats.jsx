@@ -1,14 +1,20 @@
 import { Link } from "react-router-dom";
 
 /**
- * 글쓰기 현황 — 포도 게시글 통계 + 최근 3개 포스트
+ * 글쓰기 현황 — 지식과 지혜 게시글 통계 + 최근 3개 포스트
+ * props.levelId 가 있으면 카드 하단에 "지식과 지혜로 이동 →" CTA 노출.
  */
-export default function ReportWritingStats({ stats }) {
+export default function ReportWritingStats({ stats, levelId }) {
+  const writingHref = levelId ? `/writing/${levelId}` : null;
+
   if (!stats) {
     return (
       <div className="ur-writing-stats">
         <h3>글쓰기 현황</h3>
         <p className="ur-empty">아직 글쓰기 활동이 없습니다.</p>
+        {writingHref && (
+          <Link to={writingHref} className="ur-writing-cta">지식과 지혜로 이동 →</Link>
+        )}
       </div>
     );
   }
@@ -19,7 +25,10 @@ export default function ReportWritingStats({ stats }) {
     return (
       <div className="ur-writing-stats">
         <h3>글쓰기 현황</h3>
-        <p className="ur-empty">아직 글쓰기 활동이 없습니다. 포도 게시판에서 첫 글을 작성해 보세요.</p>
+        <p className="ur-empty">아직 글쓰기 활동이 없습니다. 지식과 지혜에서 첫 글을 작성해 보세요.</p>
+        {writingHref && (
+          <Link to={writingHref} className="ur-writing-cta">지식과 지혜로 이동 →</Link>
+        )}
       </div>
     );
   }
@@ -54,6 +63,10 @@ export default function ReportWritingStats({ stats }) {
             ))}
           </ul>
         </div>
+      )}
+
+      {writingHref && (
+        <Link to={writingHref} className="ur-writing-cta">지식과 지혜로 이동 →</Link>
       )}
     </div>
   );

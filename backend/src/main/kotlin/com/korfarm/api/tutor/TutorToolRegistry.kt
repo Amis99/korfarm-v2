@@ -79,6 +79,20 @@ class TutorToolRegistry {
             ),
         ),
         TutorToolDefinition(
+            name = "get_my_recommendations",
+            description = "통합 분석표와 동일한 fallback 추천을 한 번에 가져옵니다 — 약점이 있으면 약점, 없으면 학습량 부족 영역, 그래도 없으면 학생 레벨별 가중치 기반 추천. " +
+                "응답에는 strategy(weakness/low_volume/level_default) 와 targetLabels(추천 근거 역량/영역) 가 포함됨. " +
+                "학생에게 추천을 제시할 때는 이 함수를 우선 사용하고, strategy 에 맞춰 자연어로 이유를 짚어줄 것. 예: 약점이 어휘력이라 어휘 학습부터 권합니다 / 비문학 학습량이 적어 비문학 콘텐츠를 추천합니다 / 현재 레벨에서는 선택지 분석 비중이 높아 관련 콘텐츠를 권합니다.",
+            preferredModel = "sonnet",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to mapOf(
+                    "per_category" to mapOf("type" to "integer", "description" to "카테고리(역량/영역)당 후보 수 (기본 6, 1~12)"),
+                ),
+                "required" to emptyList<String>(),
+            ),
+        ),
+        TutorToolDefinition(
             name = "get_my_recent_history",
             description = "최근 내가 푼 학습/문제 이력을 조회합니다.",
             inputSchema = mapOf(

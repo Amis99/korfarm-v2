@@ -423,6 +423,162 @@ class RecommendationService(
             .sortedByDescending { it.value }
             .map { it.key }
     }
+
+    /* ───────────────── Fallback 통합 추천 (자동 약점→학습량 부족→레벨 가중치) ─────────────────
+     * 통합 분석표·AI 튜터 양쪽이 사용. 추천 카드를 직접 분석표에 노출하므로
+     * 어떤 학생에게도 항상 결과가 나오는 것이 목표.
+     *
+     * 단계:
+     *   Step 1: 약점 — competencySummary.ratioScore < 60 (sampleCount ≥ 3) 또는
+     *           ratioScore 가 가장 낮은 역량 1~2개 선정.
+     *   Step 2: 학습량 부족 — Step 1 실패 시 sampleCount 적은 역량 2~3개.
+     *   Step 3: 레벨 기본 — Step 2 도 실패 시 LevelPriorityWeights.topCompetencies 상위 3개.
+     *
+     * 영역도 동일 패턴. 결과는 콘텐츠를 strategy 라벨과 함께 묶어 반환.
+     */
+
+    private val WEAKNESS_THRESHOLD = 60.0
+    private val WEAKNESS_MIN_SAMPLES = 3
+
+    /** 추천 fallback 결과 — strategy 와 근거 라벨 + 콘텐츠 리스트 */
+    data class FallbackRecommendation(
+        val strategy: String,           // "weakness" | "low_volume" | "level_default"
+        val targetLabels: List<String>, // 추천 근거가 된 역량/영역 라벨
+        val items: List<RecommendedContent>,
+    )
+
+    /** 분석표·AI 튜터 공용 통합 추천 응답 */
+    data class RecommendationBundle(
+        val competency: FallbackRecommendation,
+        val area: FallbackRecommendation,
+        val levelId: String?,
+    )
+
+    /**
+     * 통합 추천 — 약점·학습량·레벨 가중치 fallback 자동 적용.
+     * 항상 결과가 나도록 보장 (콘텐츠 풀이 비어 있지만 않으면).
+     */
+    @Transactional(readOnly = true)
+    fun recommendWithFallback(userId: String, perCategory: Int = 6): RecommendationBundle {
+        val user = userRepository.findById(userId).orElse(null)
+        val levelId = user?.levelId
+        val canonicalLevel = LevelPriorityWeights.normalizeLevelId(levelId)
+
+        // ─── 역량 fallback ───
+        val competency = pickCompetencyFallback(userId, levelId, canonicalLevel, perCategory)
+
+        // ─── 영역 fallback ───
+        val area = pickAreaFallback(userId, levelId, canonicalLevel, perCategory)
+
+        return RecommendationBundle(competency = competency, area = area, levelId = levelId)
+    }
+
+    private fun pickCompetencyFallback(
+        userId: String,
+        levelId: String?,
+        canonicalLevel: String,
+        perCategory: Int,
+    ): FallbackRecommendation {
+        val summaries = competencySummaryRepository.findByUserId(userId)
+
+        // Step 1: 약점 — 충분히 측정되었고(>=3) 점수 낮은 것
+        val measured = summaries.filter { it.sampleCount >= WEAKNESS_MIN_SAMPLES }
+        val weakness = measured
+            .filter { it.ratioScore < WEAKNESS_THRESHOLD }
+            .sortedBy { it.ratioScore }
+            .map { it.competency }
+            .take(2)
+        if (weakness.isNotEmpty()) {
+            val items = weakness.flatMap { c ->
+                recommendForCompetency(userId, c, levelId, perCategory)
+            }.distinctBy { it.contentId }.take(perCategory)
+            if (items.isNotEmpty()) {
+                return FallbackRecommendation("weakness", weakness, items)
+            }
+        }
+
+        // Step 2: 학습량 부족 — sampleCount 가 가장 적은 역량
+        val lowVolume = if (measured.isNotEmpty()) {
+            // 측정 자료가 있으면 sampleCount 적은 순
+            summaries.sortedBy { it.sampleCount }.map { it.competency }.take(3)
+        } else emptyList()
+        if (lowVolume.isNotEmpty()) {
+            val items = lowVolume.flatMap { c ->
+                recommendForCompetency(userId, c, levelId, perCategory)
+            }.distinctBy { it.contentId }.take(perCategory)
+            if (items.isNotEmpty()) {
+                return FallbackRecommendation("low_volume", lowVolume, items)
+            }
+        }
+
+        // Step 3: 레벨 기본 — 가중치 상위 역량 3개
+        val levelTops = LevelPriorityWeights.topCompetencies(canonicalLevel, 3)
+        val items = levelTops.flatMap { c ->
+            recommendForCompetency(userId, c, levelId, perCategory)
+        }.distinctBy { it.contentId }.take(perCategory)
+        return FallbackRecommendation("level_default", levelTops, items)
+    }
+
+    private fun pickAreaFallback(
+        userId: String,
+        levelId: String?,
+        canonicalLevel: String,
+        perCategory: Int,
+    ): FallbackRecommendation {
+        // Step 1: 학생이 가장 적게 푼 영역(학습량 적음 = 보강 필요)
+        val recent = competencyLogRepository.findInWindowDesc(userId).take(50)
+        val recentIds = recent.map { it.contentId }.toSet()
+        val recentAreas = if (recentIds.isNotEmpty()) {
+            contentRepository.findAllById(recentIds).mapNotNull { it.area }
+        } else emptyList()
+        val areaCounts = recentAreas.groupingBy { it }.eachCount()
+
+        val areaCandidates = listOf("nonfiction", "fiction", "grammar")
+        val underexposed = areaCandidates.sortedBy { areaCounts[it] ?: 0 }.take(2)
+
+        // 학습량 부족 영역으로 추천 시도
+        if (recentIds.isNotEmpty() && areaCounts.isNotEmpty()) {
+            val items = underexposed.flatMap { a ->
+                recommendForArea(userId, a, null, levelId, perCategory)
+            }.distinctBy { it.contentId }.take(perCategory)
+            if (items.isNotEmpty()) {
+                return FallbackRecommendation(
+                    strategy = "low_volume",
+                    targetLabels = underexposed.map { areaKeyToLabel(it) },
+                    items = items,
+                )
+            }
+        }
+
+        // Step 2: 레벨 기본 — 영역 가중치 상위 2개
+        val levelAreas = LevelPriorityWeights.topAreas(canonicalLevel, 2)
+        val itemsByLevelArea = levelAreas
+            .map { areaLabelToKey(it) }
+            .flatMap { recommendForArea(userId, it, null, levelId, perCategory) }
+            .distinctBy { it.contentId }
+            .take(perCategory)
+        return FallbackRecommendation(
+            strategy = "level_default",
+            targetLabels = levelAreas,
+            items = itemsByLevelArea,
+        )
+    }
+
+    /** content.area DB 값(영문) → 한국어 라벨 */
+    private fun areaKeyToLabel(key: String): String = when (key.lowercase()) {
+        "nonfiction" -> "비문학"
+        "fiction" -> "문학"
+        "grammar" -> "문법"
+        else -> "기타"
+    }
+
+    /** 한국어 영역 라벨 → DB area 값 */
+    private fun areaLabelToKey(label: String): String = when (label) {
+        "비문학" -> "nonfiction"
+        "문학" -> "fiction"
+        "문법" -> "grammar"
+        else -> "etc"
+    }
 }
 
 /** 후보 통합 추천 응답 — AI 튜터/에이전트가 후보를 받아 직접 선별 */

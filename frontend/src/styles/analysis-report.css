@@ -759,3 +759,125 @@
     border: 1px solid #888;
   }
 }
+
+/* ── V3 추천 그룹 (역량/영역 strategy 라벨) ── */
+.ur-reco-group {
+  margin-top: 12px;
+}
+.ur-reco-group + .ur-reco-group {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border);
+}
+.ur-reco-group-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+.ur-reco-group-title {
+  font-weight: 800;
+  color: var(--fg);
+  font-size: 14px;
+}
+.ur-reco-strategy-tag {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--muted);
+}
+.ur-reco-strategy-weakness {
+  background: #FFE3D5;
+  color: #B14A12;
+  border-color: #F4B58F;
+}
+.ur-reco-strategy-low_volume {
+  background: #FFF1C8;
+  color: #87671C;
+  border-color: #F0CE6F;
+}
+.ur-reco-strategy-level_default {
+  background: #E0EEFF;
+  color: #2A5B95;
+  border-color: #A6C4E8;
+}
+.ur-reco-target {
+  font-size: 12px;
+  color: var(--muted);
+}
+.ur-rec-item-type {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+.ur-rec-item-meta {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ── 글쓰기 CTA 버튼 ── */
+.ur-writing-cta {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 14px;
+  background: var(--accent, #F06C24);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.ur-writing-cta:hover {
+  filter: brightness(1.05);
+}
+
+/* ── AI 코멘트 클릭 가능 표시 ── */
+.ur-ai-clickable {
+  cursor: pointer;
+  transition: transform 0.05s;
+}
+.ur-ai-clickable:hover {
+  transform: translateY(-1px);
+}
+.ur-ai-chev {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+/* ── 학습 계획표 색 범례 ── */
+.ur-sp-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  margin-bottom: 10px;
+  font-size: 11px;
+}
+.ur-sp-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ── 인쇄: 추천 카드 색 보존 ── */
+@media print {
+  .ur-reco-strategy-tag {
+    border: 1px solid #888 !important;
+    background: white !important;
+    color: black !important;
+  }
+  .ur-writing-cta {
+    background: white !important;
+    color: black !important;
+    border: 1px solid #888;
+  }
+}

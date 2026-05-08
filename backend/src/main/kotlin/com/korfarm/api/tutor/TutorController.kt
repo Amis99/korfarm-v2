@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -80,9 +81,43 @@ class TutorController(
     fun runDailyAnalysis(): ApiResponse<TutorService.DailyAnalysisResult> {
         return ApiResponse(success = true, data = tutorService.runDailyAnalysis(currentUserId()))
     }
+
+    /** 학생이 선택한 AI 튜터 캐릭터 페르소나 조회. NULL 이면 첫 선택 화면으로 라우팅. */
+    @GetMapping("/persona")
+    fun getPersona(): ApiResponse<TutorPersonaView> {
+        val persona = tutorService.getPersona(currentUserId())
+        return ApiResponse(
+            success = true,
+            data = TutorPersonaView(
+                persona = persona,
+                options = listOf(
+                    TutorPersonaOption("owl", "부엉이샘", "지혜롭고 차분하게 가르쳐요. 격식 있는 존댓말."),
+                    TutorPersonaOption("amis", "아미스샘", "친근하고 든든한 선생님. 활기찬 반말."),
+                    TutorPersonaOption("nurungji", "누룽지샘", "활기차고 따뜻한 선생님. 다정한 친근체."),
+                ),
+            ),
+        )
+    }
+
+    /** 학생이 AI 튜터 캐릭터 선택/변경. */
+    @PutMapping("/persona")
+    fun setPersona(@RequestBody req: TutorPersonaRequest): ApiResponse<Map<String, String>> {
+        val saved = tutorService.setPersona(currentUserId(), req.persona)
+        return ApiResponse(success = true, data = mapOf("persona" to saved))
+    }
 }
 
 data class TutorRenameRequest(val title: String)
+data class TutorPersonaRequest(val persona: String)
+data class TutorPersonaView(
+    val persona: String?,
+    val options: List<TutorPersonaOption>,
+)
+data class TutorPersonaOption(
+    val key: String,
+    val name: String,
+    val tagline: String,
+)
 data class TutorTurnRequest(
     val sessionId: String? = null,
     val message: String,

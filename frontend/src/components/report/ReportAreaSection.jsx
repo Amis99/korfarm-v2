@@ -3,8 +3,9 @@ import { useMemo } from "react";
 /**
  * 영역 분석 (V0100 분류 마스터 — 6대 영역 + 세부영역)
  * - V2: weightedScore (시간 decay × 소스 가중) 우선 표시, rawAverage 보조
+ * - showAlgorithmHint: admin 전용 — 알고리즘 디버그 문구 노출
  */
-export default function ReportAreaSection({ areaStats }) {
+export default function ReportAreaSection({ areaStats, showAlgorithmHint = false }) {
   if (!areaStats || areaStats.length === 0) {
     return (
       <div className="ur-area-section">
@@ -35,9 +36,11 @@ export default function ReportAreaSection({ areaStats }) {
   return (
     <div className="ur-area-section">
       <h3>영역별 · 세부영역별 성취</h3>
-      <p className="ur-algo-hint">
-        최근 200건 활동 + 30일 시간 가중 + 시험 10·일일 3·학습 1 가중 평균
-      </p>
+      {showAlgorithmHint && (
+        <p className="ur-algo-hint">
+          최근 200건 활동 + 30일 시간 가중 + 시험 10·일일 3·학습 1 가중 평균
+        </p>
+      )}
 
       <div className="ur-strength-weak">
         {strength && (
