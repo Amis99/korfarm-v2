@@ -109,6 +109,10 @@ class EconomyService(
         crop.count = nextCount
         userCropRepository.save(crop)
         addLedger(userId, "crop", cropType, delta, reason, refType, refId)
+        // user_crops (랭킹 누적) 와 user_crop_wallet (AI 결제용) 동기 — 적립 시 wallet 도 함께
+        if (delta > 0) {
+            grapefruitService.grantCropToWallet(userId, cropType, delta)
+        }
     }
 
     @Transactional

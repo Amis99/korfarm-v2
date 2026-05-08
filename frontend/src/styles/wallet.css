@@ -1,6 +1,16 @@
 /* MyWalletPage — 학생 작물 지갑 상세 (open-design 결과 클레이 톤)
  * student-home.css 의 :root·.clay·.app·.top-bar·.sidebar 등 공통 토큰 재사용 */
 
+/* 페이지 자체 스크롤 — 결제 우선순위·충전·이력 모두 보이게 */
+.student-home.wallet-shell {
+  height: auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 24px);
+}
+
 .wallet-page-head {
   padding: 18px 18px 8px;
 }
@@ -137,8 +147,24 @@
   border-radius: 12px;
   transition: background 120ms ease;
   cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .priority-row:active { cursor: grabbing; }
+.priority-row .move-btn {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid var(--border);
+  font-size: 14px; font-weight: 700;
+  color: var(--muted);
+  cursor: pointer;
+}
+.priority-row .move-btn:hover:not(:disabled) {
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+}
+.priority-row .move-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 .priority-row.dragging { opacity: 0.4; }
 .priority-row .handle {
   width: 22px;

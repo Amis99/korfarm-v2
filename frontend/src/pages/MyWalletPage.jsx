@@ -200,12 +200,17 @@ function MyWalletPage() {
     setPriority(WALLET_META.map((w) => w.key));
   }
 
-  function dragStart(key) {
+  function dragStart(key, e) {
     setDraggingKey(key);
+    if (e?.dataTransfer) {
+      e.dataTransfer.effectAllowed = "move";
+      e.dataTransfer.setData("text/plain", key);
+    }
   }
 
   function dragOver(e, overKey) {
     e.preventDefault();
+    if (e.dataTransfer) e.dataTransfer.dropEffect = "move";
     if (!draggingKey || draggingKey === overKey) return;
     const oldIndex = priority.indexOf(draggingKey);
     const newIndex = priority.indexOf(overKey);
@@ -213,6 +218,22 @@ function MyWalletPage() {
     const next = [...priority];
     next.splice(oldIndex, 1);
     next.splice(newIndex, 0, draggingKey);
+    setPriority(next);
+  }
+
+  function moveUp(key) {
+    const idx = priority.indexOf(key);
+    if (idx <= 0) return;
+    const next = [...priority];
+    [next[idx - 1], next[idx]] = [next[idx], next[idx - 1]];
+    setPriority(next);
+  }
+
+  function moveDown(key) {
+    const idx = priority.indexOf(key);
+    if (idx < 0 || idx >= priority.length - 1) return;
+    const next = [...priority];
+    [next[idx + 1], next[idx]] = [next[idx], next[idx + 1]];
     setPriority(next);
   }
 
@@ -300,11 +321,12 @@ function MyWalletPage() {
                 key={key}
                 className={`priority-row ${draggingKey === key ? "dragging" : ""}`}
                 draggable
-                onDragStart={() => dragStart(key)}
+                onDragStart={(e) => dragStart(key, e)}
                 onDragOver={(e) => dragOver(e, key)}
+                onDrop={(e) => { e.preventDefault(); setDraggingKey(null); }}
                 onDragEnd={() => setDraggingKey(null)}
               >
-                <span className="handle" aria-hidden="true">⋮⋮</span>
+                <span className="handle" aria-hidden="true" title="드래그">⋮⋮</span>
                 <span className={`clay clay-${w.color}`} aria-hidden="true">
                   <span className="lbl">{w.name}</span>
                 </span>
@@ -312,6 +334,20 @@ function MyWalletPage() {
                   <span>{w.name}</span>
                   <span className="rank-badge">{idx + 1}순위</span>
                 </div>
+                <button
+                  type="button"
+                  className="move-btn"
+                  onClick={() => moveUp(key)}
+                  disabled={idx === 0}
+                  aria-label="위로"
+                >▲</button>
+                <button
+                  type="button"
+                  className="move-btn"
+                  onClick={() => moveDown(key)}
+                  disabled={idx === priority.length - 1}
+                  aria-label="아래로"
+                >▼</button>
                 <span className="balance-tag">{balanceMap[w.key] || 0}개</span>
               </div>
             );
