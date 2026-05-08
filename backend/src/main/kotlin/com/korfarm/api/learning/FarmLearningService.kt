@@ -109,7 +109,7 @@ class FarmLearningService(
         // 10대 역량 종합 누적 (벡터 기반) — 콘텐츠의 questions[] 의 competencyVector + choices[].wrongVector 추출
         // 재응시(같은 user × content)는 LearningCompetencyService 가 자동 무시.
         try {
-            val results = computeQuestionResults(log.contentId, request.answers)
+            val results = computeQuestionResults(log.contentId, log.contentType, request.answers)
             if (results.isNotEmpty()) {
                 val source = resolveSourceFromContentType(log.contentType)
                 learningCompetencyService.recordVector(userId, log.contentId, source, results)
@@ -123,25 +123,35 @@ class FarmLearningService(
      * 콘텐츠 questions[] 의 competencyVector + choices[].wrongVector 와 학생 응답 매칭하여
      * 문항별 QuestionResult 리스트 반환 (벡터 기반).
      *
-     * 호환:
-     *  - competencyVector 가 있으면 그 벡터 사용
-     *  - 없으면 단일 competency 필드를 {competency: 1.0} 으로 fallback
-     *  - 둘 다 없는 문항은 누적 제외
+     * 호환 (우선순위):
+     *  1. q.competencyVector — 가장 정확
+     *  2. q.competency (단일 필드) — {competency: 1.0}
+     *  3. contentType → 단일 default competency (CompetencyMapping)
+     *  → 셋 다 없는 문항도 누적되도록 contentType 기반 fallback 보장
      */
     private fun computeQuestionResults(
         contentId: String,
+        contentType: String,
         answers: List<AnswerDetailRequest>?,
     ): List<com.korfarm.api.learning.QuestionResult> {
         if (answers.isNullOrEmpty()) return emptyList()
         val version = contentVersionRepository.findTopByContentIdOrderByCreatedAtDesc(contentId)
-            ?: return emptyList()
-        val wrapper: Map<String, Any> = try {
-            objectMapper.readValue(version.contentJson, object : TypeReference<Map<String, Any>>() {})
-        } catch (_: Exception) { return emptyList() }
+        // contentType 기반 default vector — 콘텐츠 자체가 DB에 없거나 questions 가 비어도 사용 가능
+        val typeDefault: Map<String, Double> =
+            com.korfarm.api.report.CompetencyMapping.competencyForContentType(contentType)
+                ?.takeIf { it in COMPETENCIES }
+                ?.let { mapOf(it to 1.0) }
+                ?: emptyMap()
+
+        val wrapper: Map<String, Any>? = version?.let {
+            try {
+                objectMapper.readValue(it.contentJson, object : TypeReference<Map<String, Any>>() {})
+            } catch (_: Exception) { null }
+        }
         @Suppress("UNCHECKED_CAST")
-        val payload = (wrapper["payload"] as? Map<String, Any>) ?: wrapper
+        val payload = (wrapper?.get("payload") as? Map<String, Any>) ?: wrapper
         @Suppress("UNCHECKED_CAST")
-        val questions = (payload["questions"] as? List<Map<String, Any>>) ?: return emptyList()
+        val questions = (payload?.get("questions") as? List<Map<String, Any>>).orEmpty()
 
         // questionId → (correctVector, choiceId→wrongVector) 매핑
         val qInfo = mutableMapOf<String, Pair<Map<String, Double>, Map<String, Map<String, Double>>>>()
@@ -153,10 +163,16 @@ class FarmLearningService(
                 val w = (v as? Number)?.toDouble() ?: return@mapNotNull null
                 if (k !in COMPETENCIES) null else (k to w)
             }?.toMap() ?: emptyMap()
-            // fallback: 단일 competency 필드
-            val correctVector: Map<String, Double> = if (cv.isNotEmpty()) cv else {
-                val single = q["competency"]?.toString()?.trim()
-                if (single != null && single in COMPETENCIES) mapOf(single to 1.0) else emptyMap()
+            // fallback 1: 단일 competency 필드
+            val singleCompetency = q["competency"]?.toString()?.trim()
+            val singleVec: Map<String, Double> =
+                if (singleCompetency != null && singleCompetency in COMPETENCIES) mapOf(singleCompetency to 1.0) else emptyMap()
+            // fallback 2: contentType default
+            val correctVector: Map<String, Double> = when {
+                cv.isNotEmpty() -> cv
+                singleVec.isNotEmpty() -> singleVec
+                typeDefault.isNotEmpty() -> typeDefault
+                else -> emptyMap()
             }
             if (correctVector.isEmpty()) continue
 
@@ -175,12 +191,15 @@ class FarmLearningService(
             }
             qInfo[qid] = correctVector to wrongByChoice
         }
-        if (qInfo.isEmpty()) return emptyList()
 
         val results = mutableListOf<com.korfarm.api.learning.QuestionResult>()
         for (a in answers) {
-            val (correctVec, wrongMap) = qInfo[a.questionId] ?: continue
-            // 오답일 때만 학생이 고른 선택지의 wrongVector 활용
+            // questionId 매칭이 없거나 콘텐츠 자체에 questions 가 비어 있으면
+            // contentType default vector 로라도 누적 (역량 0% 방지).
+            val pair = qInfo[a.questionId]
+            val correctVec: Map<String, Double> = pair?.first
+                ?: if (typeDefault.isNotEmpty()) typeDefault else continue
+            val wrongMap: Map<String, Map<String, Double>> = pair?.second ?: emptyMap()
             val chosenWrong = if (!a.correct && a.chosenChoiceId != null) wrongMap[a.chosenChoiceId] else null
             results.add(com.korfarm.api.learning.QuestionResult(
                 correctVector = correctVec,
