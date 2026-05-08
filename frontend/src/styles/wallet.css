@@ -2,16 +2,19 @@
  * student-home.css 의 :root·.clay·.app·.top-bar·.sidebar 등 공통 토큰 재사용 */
 
 /* 페이지 자체 스크롤 — 결제 우선순위·충전·이력 모두 보이게.
- * student-home wrapper 를 단일 페이지(분석/지갑 등)에 쓸 때 height 100vh + overflow hidden
- * 영향으로 스크롤 안 됨. .wallet-shell / .report-shell 클래스 붙는 경우 모두 자체 스크롤. */
+ * student-home wrapper 를 단일 페이지(분석/지갑 등)에 쓸 때 height 100vh 영향으로
+ * 페이지가 viewport 안에 갇혀 스크롤 안 됨.
+ *
+ * wrapper 자체에 overflow:auto 를 주면 컨테이너 자체 스크롤이 되는데,
+ * 부모 stacking context / pointer-events 영향으로 마우스 휠이 안 먹는 경우가 있음.
+ * 따라서 height/overflow 를 풀고 body 자체가 자연스럽게 늘어나 native 스크롤 사용. */
 .student-home.wallet-shell,
 .student-home.report-shell,
 .student-home.scroll-shell {
-  height: auto;
+  height: auto !important;
   min-height: 100vh;
   min-height: 100dvh;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: visible !important;
   padding-bottom: calc(env(safe-area-inset-bottom) + 24px);
 }
 
