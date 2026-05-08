@@ -1,8 +1,12 @@
 /* MyWalletPage — 학생 작물 지갑 상세 (open-design 결과 클레이 톤)
  * student-home.css 의 :root·.clay·.app·.top-bar·.sidebar 등 공통 토큰 재사용 */
 
-/* 페이지 자체 스크롤 — 결제 우선순위·충전·이력 모두 보이게 */
-.student-home.wallet-shell {
+/* 페이지 자체 스크롤 — 결제 우선순위·충전·이력 모두 보이게.
+ * student-home wrapper 를 단일 페이지(분석/지갑 등)에 쓸 때 height 100vh + overflow hidden
+ * 영향으로 스크롤 안 됨. .wallet-shell / .report-shell 클래스 붙는 경우 모두 자체 스크롤. */
+.student-home.wallet-shell,
+.student-home.report-shell,
+.student-home.scroll-shell {
   height: auto;
   min-height: 100vh;
   min-height: 100dvh;
