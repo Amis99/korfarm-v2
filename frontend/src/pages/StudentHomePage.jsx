@@ -113,14 +113,14 @@ const FALLBACK_RANKING = [
 const FREE_BIG_CARDS = [
   { id: "daily-quiz",    tint: "yellow", color: "yellow", label: "퀴즈<br/>일러스트",  tag: "무료 · 매일", title: "일일 퀴즈",    meta: "10문제 · 약 5분 · 매일 갱신",   cta: "지금 풀기",    route: "/daily-quiz" },
   { id: "daily-reading", tint: "blue",   color: "blue",   label: "독해<br/>일러스트",  tag: "무료 · 매일", title: "일일 독해",    meta: "다양한 영역 정독 훈련 · 약 10분", cta: "지금 읽기",    route: "/daily-reading" },
-  { id: "diagnostic",    tint: "green",  color: "green",  label: "진단<br/>일러스트",  tag: "1회 무료",    title: "진단 테스트",  meta: "10대 역량 분석 · 약 15분 · 학부모님께도 결과", cta: "응시하기", route: "/diagnostic/v2" },
+  { id: "diagnostic",    tint: "green",  color: "green",  label: "진단<br/>일러스트",  tag: "1회 무료",    title: "진단 테스트",  meta: "10대 역량 분석 · 약 50분 · 학부모님께도 결과", cta: "응시하기", route: "/diagnostic/v2" },
   { id: "battle",        tint: "red",    color: "red",    label: "대결<br/>일러스트",  tag: "무료 · LIVE", title: "대결 라이브",  meta: "라운드제 서바이벌 · 친구·AI 대결", live: true, cta: "도전하기", route: "/duel" },
 ];
 
 // 무료 회원용 잠긴 카드 (4장)
 const LOCKED_PREVIEW_CARDS = [
   { id: "ai-tutor",     color: "cream",  label: "AI<br/>튜터",      title: "AI 튜터",                  tagline: "1:1 학습 코치 · 어휘·문법 즉답, 사진으로도 물어볼 수 있어요" },
-  { id: "study-modes",  color: "green",  label: "12레벨<br/>심화",  title: "농장별 모드 + 프로 모드",  tagline: "12레벨 심화 학습 · 문학·비문학·어휘 단계별 마스터" },
+  { id: "study-modes",  color: "green",  label: "12레벨<br/>심화",  title: "농장별 모드 + 프로 모드",  tagline: "교재와 연동한 12레벨 심화 학습 · 문학·비문학·어휘 단계별 마스터" },
   { id: "writing",      color: "blue",   label: "글쓰기<br/>첨삭",  title: "글쓰기 첨삭",              tagline: "AI가 글을 다듬어줘요 · 어휘 추천, 문장 흐름까지 친절하게" },
   { id: "analytics",    color: "purple", label: "분석<br/>리포트",  title: "통합 분석표",              tagline: "모든 학습 데이터 한눈에 · 강·약점, 학부모 리포트까지" },
 ];
@@ -157,7 +157,7 @@ const SIDEBAR_GROUPS = [
       { id: "farm-mode",  icon: "🌱", label: "농장별 모드",  badge: null, badgeKind: null,   lockedForFree: true },
       { id: "pro-mode",   icon: "🎓", label: "프로 모드",    badge: null, badgeKind: null,   lockedForFree: true },
       { id: "recommend",  icon: "✨", label: "추천 학습",    badge: null, badgeKind: null,   lockedForFree: true },
-      { id: "study-plan", icon: "📅", label: "학습 계획표",  badge: "3",  badgeKind: "soft", lockedForFree: true },
+      { id: "study-plan", icon: "📅", label: "학습 계획표",  badge: null, badgeKind: "soft", lockedForFree: true },
     ],
   },
   {
@@ -259,6 +259,11 @@ function StudentHomePage() {
   const { user, isLoggedIn, isPremium, logout } = useAuth();
   const [searchParams] = useSearchParams();
 
+  const userRoles = user?.roles || [];
+  const isAdmin = userRoles.includes("HQ_ADMIN") || userRoles.includes("ORG_ADMIN");
+  const [adminLevelOverride, setAdminLevelOverride] = useState("");
+  const [adminDayOverride, setAdminDayOverride] = useState("");
+
   // ?free=1 강제 무료 모드 (검증용 — 추후 제거 가능)
   const forceFree = searchParams.get("free") === "1";
   const free = !isPremium || forceFree;
@@ -291,10 +296,12 @@ function StudentHomePage() {
     apiGet("/v1/auth/me")
       .then((data) => {
         const lid = data?.level_id || data?.levelId;
+        const img = data?.profile_image_url || data?.profileImageUrl || "";
         setStudent((prev) => ({
           ...prev,
           name: data?.name || prev.name,
           level: LEVEL_LABEL_MAP[lid] || lid || prev.level,
+          profileImageUrl: img,
         }));
       })
       .catch((e) => console.error("[auth/me]", e));
@@ -525,6 +532,28 @@ function StudentHomePage() {
     navigate("/subscription");
   }
 
+  // 관리자 레벨/일차 override — 학생 모드 검수 시 후속 페이지에 query 로 전달
+  function navWithAdminOverride(path) {
+    if (!isAdmin) {
+      navigate(path);
+      return;
+    }
+    const params = [];
+    if (adminLevelOverride && LEVEL_LABEL_MAP[adminLevelOverride]) {
+      params.push(`level=${adminLevelOverride}`);
+    }
+    const dayNum = parseInt(adminDayOverride, 10);
+    if (Number.isFinite(dayNum) && dayNum >= 1 && dayNum <= 365) {
+      params.push(`day=${dayNum}`);
+    }
+    if (params.length === 0) {
+      navigate(path);
+      return;
+    }
+    const sep = path.includes("?") ? "&" : "?";
+    navigate(`${path}${sep}${params.join("&")}`);
+  }
+
   // 인벤토리 팝업용 — seeds/crops 정규화 + 비료 카운트
   const inventorySummary = (() => {
     const inv = rawInventory || {};
@@ -564,7 +593,12 @@ function StudentHomePage() {
       setDrawerOpen(false);
     }
     const route = SIDEBAR_ROUTES[item.id];
-    if (route) navigate(route);
+    if (route) {
+      // 학습 모드 / 일일 콘텐츠는 관리자 override 적용
+      const needsOverride = ["daily-quiz", "daily-reading", "farm-mode", "pro-mode"].includes(item.id);
+      if (needsOverride) navWithAdminOverride(route);
+      else navigate(route);
+    }
   }
 
   function handleTabClick(t) {
@@ -736,7 +770,26 @@ function StudentHomePage() {
           )}
 
           <button className="hdr-user" aria-label={`${student.name} 학생 프로필`} onClick={() => navigate("/profile")}>
-            <ClaySpan color="orange" label="학생" />
+            {student.profileImageUrl ? (
+              <span
+                className="hdr-user-avatar"
+                style={{
+                  display: "inline-block",
+                  width: 36,
+                  height: 36,
+                  borderRadius: "50%",
+                  backgroundImage: `url(${student.profileImageUrl})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  flex: "0 0 auto",
+                  border: "2px solid #fff",
+                  boxShadow: "0 1px 3px rgba(0,0,0,0.15)",
+                }}
+                aria-hidden="true"
+              />
+            ) : (
+              <ClaySpan color="orange" label="학생" />
+            )}
             <span className="info">
               <span className="name">{student.name}</span>
               <span className="meta">
@@ -757,6 +810,41 @@ function StudentHomePage() {
           </button>
 
           <div className="hdr-actions">
+            {isAdmin && (
+              <div
+                className="admin-override-row"
+                aria-label="관리자 — 학생 모드 검수 레벨/일차 override"
+                style={{ display: "flex", gap: 6, alignItems: "center", marginRight: 6 }}
+              >
+                <select
+                  value={adminLevelOverride}
+                  onChange={(e) => setAdminLevelOverride(e.target.value)}
+                  style={{ height: 32, fontSize: 12, padding: "2px 6px", borderRadius: 8, border: "1px solid #d4c8b6" }}
+                  title="관리자 레벨 override"
+                >
+                  <option value="">레벨</option>
+                  {Object.entries(LEVEL_LABEL_MAP).map(([key, label]) => (
+                    <option key={key} value={key}>{label}</option>
+                  ))}
+                </select>
+                <input
+                  type="number"
+                  min={1}
+                  max={365}
+                  value={adminDayOverride}
+                  onChange={(e) => {
+                    const v = e.target.value;
+                    if (v === "") { setAdminDayOverride(""); return; }
+                    const n = parseInt(v, 10);
+                    if (!Number.isFinite(n)) return;
+                    setAdminDayOverride(String(Math.max(1, Math.min(365, n))));
+                  }}
+                  placeholder="일차"
+                  style={{ width: 56, height: 32, fontSize: 12, padding: "2px 6px", borderRadius: 8, border: "1px solid #d4c8b6" }}
+                  title="관리자 일차 override (1~365)"
+                />
+              </div>
+            )}
             <button
               className="icon-btn"
               aria-label={free ? "작물 지갑 — 0개, 구독 후 활성화" : `작물 지갑 — 자몽 ${student.grapefruit}개`}
@@ -794,6 +882,12 @@ function StudentHomePage() {
                 {group.items.map((item) => {
                   const locked = free && item.lockedForFree;
                   const isActive = !locked && activeSidebar === item.id;
+                  // 학습 계획표 — 미수행 셀 수 동적 배지
+                  let dynamicBadge = item.badge;
+                  if (item.id === "study-plan") {
+                    const pending = plan.filter((p) => !p.done).length;
+                    dynamicBadge = pending > 0 ? String(pending) : null;
+                  }
                   return (
                     <a
                       key={item.id}
@@ -806,9 +900,9 @@ function StudentHomePage() {
                       {locked ? (
                         <span className="lock-tag">유료</span>
                       ) : (
-                        item.badge && (
+                        dynamicBadge && (
                           <span className={`badge${item.badgeKind ? ` ${item.badgeKind}` : ""}`}>
-                            {item.badge}
+                            {dynamicBadge}
                           </span>
                         )
                       )}
@@ -838,7 +932,11 @@ function StudentHomePage() {
             {free ? (
               <FreeMain
                 student={student}
-                onCardClick={(c) => navigate(c.route)}
+                onCardClick={(c) => {
+                  // 관리자 override 적용 — 일일 콘텐츠 카드는 query 동봉
+                  if (["daily-quiz", "daily-reading"].includes(c.id)) navWithAdminOverride(c.route);
+                  else navigate(c.route);
+                }}
                 onLockedClick={(t) => showToast(t)}
                 onSubscribe={handleSubscribe}
               />
@@ -854,6 +952,7 @@ function StudentHomePage() {
                 handleRecommendationClick={handleRecommendationClick}
                 chatHistoryRef={chatHistoryRef}
                 navigate={navigate}
+                navWithAdminOverride={navWithAdminOverride}
                 tutorStatus={tutorStatus}
               />
             )}
@@ -862,8 +961,8 @@ function StudentHomePage() {
             <div className="widgets-stack mobile-widgets" id="mobile-widgets">
               {free ? (
                 <>
-                  <LockedWidget title="🌾 작물 지갑" subTitle="구독 후 활성화" sub="자몽으로 AI 튜터를 부르고,&#10;학습으로 작물을 모아봐요." onSubscribe={handleSubscribe} />
-                  <LockedWidget title="📅 학습 계획표" subTitle="선생님이 학습 계획을 짜드려요" sub="매일 풀 분량을 학년·실력에 맞춰&#10;알맞게 추천해드려요." onSubscribe={handleSubscribe} />
+                  <LockedWidget title="🌾 작물 지갑" subTitle="구독 후 활성화" sub="학습으로 씨앗을 모아&#10;작물로 바꿔요." onSubscribe={handleSubscribe} />
+                  <LockedWidget title="📅 학습 계획표" subTitle="선생님이 학습 계획을 짜드려요" sub="과제를 확인하고 오늘의&#10;해야 할 학습을 수행해봐요." onSubscribe={handleSubscribe} />
                 </>
               ) : (
                 <>
@@ -879,8 +978,8 @@ function StudentHomePage() {
           <aside className="right-aside" data-od-id="right-aside" aria-label="요약 위젯">
             {free ? (
               <>
-                <LockedWidget title="🌾 작물 지갑" subTitle="구독 후 활성화" sub="자몽으로 AI 튜터를 부르고,&#10;학습으로 작물을 모아봐요." onSubscribe={handleSubscribe} />
-                <LockedWidget title="📅 학습 계획표" subTitle="선생님이 학습 계획을 짜드려요" sub="매일 풀 분량을 학년·실력에 맞춰&#10;알맞게 추천해드려요." onSubscribe={handleSubscribe} />
+                <LockedWidget title="🌾 작물 지갑" subTitle="구독 후 활성화" sub="학습으로 씨앗을 모아&#10;작물로 바꿔요." onSubscribe={handleSubscribe} />
+                <LockedWidget title="📅 학습 계획표" subTitle="선생님이 학습 계획을 짜드려요" sub="과제를 확인하고 오늘의&#10;해야 할 학습을 수행해봐요." onSubscribe={handleSubscribe} />
               </>
             ) : (
               <>
@@ -939,7 +1038,7 @@ function StudentHomePage() {
                 <button
                   type="button"
                   className="study-mode-item"
-                  onClick={() => { setShowStudyModeSheet(false); navigate("/farm-mode"); }}
+                  onClick={() => { setShowStudyModeSheet(false); navWithAdminOverride("/farm-mode"); }}
                 >
                   <ClaySpan color="green" label="농장" />
                   <span className="study-mode-text">
@@ -950,7 +1049,7 @@ function StudentHomePage() {
                 <button
                   type="button"
                   className="study-mode-item"
-                  onClick={() => { setShowStudyModeSheet(false); navigate("/pro-mode"); }}
+                  onClick={() => { setShowStudyModeSheet(false); navWithAdminOverride("/pro-mode"); }}
                 >
                   <ClaySpan color="purple" label="프로" />
                   <span className="study-mode-text">
@@ -1033,8 +1132,9 @@ function StudentHomePage() {
 
 function PaidMain({
   tutor, student, messages, chatInput, setChatInput, handleSendChat,
-  handlePersonaSwap, handleRecommendationClick, chatHistoryRef, navigate, tutorStatus,
+  handlePersonaSwap, handleRecommendationClick, chatHistoryRef, navigate, navWithAdminOverride, tutorStatus,
 }) {
+  const navDaily = navWithAdminOverride || navigate;
   return (
     <>
       {/* 모바일에서만 보이는 무료 기능 가로 스크롤 */}
@@ -1043,12 +1143,12 @@ function PaidMain({
         <Link className="more" to="/daily-quiz" aria-label="무료 기능 — 일일 퀴즈로 이동">전체</Link>
       </div>
       <div className="mobile-features" role="list">
-        <button className="feature-card tint-yellow" role="listitem" aria-label="일일 퀴즈 시작하기" onClick={() => navigate("/daily-quiz")}>
+        <button className="feature-card tint-yellow" role="listitem" aria-label="일일 퀴즈 시작하기" onClick={() => navDaily("/daily-quiz")}>
           <ClaySpan color="yellow" label="퀴즈" />
           <span className="feature-name">일일 퀴즈<br />10문제</span>
           <span className="feature-tag">⏱ 5분 · 매일 갱신</span>
         </button>
-        <button className="feature-card tint-blue" role="listitem" aria-label="일일 독해 시작하기" onClick={() => navigate("/daily-reading")}>
+        <button className="feature-card tint-blue" role="listitem" aria-label="일일 독해 시작하기" onClick={() => navDaily("/daily-reading")}>
           <ClaySpan color="blue" label="독해" />
           <span className="feature-name">일일 독해<br />정독 훈련</span>
           <span className="feature-tag">📖 약 10분 · 미수행</span>
@@ -1257,7 +1357,7 @@ function FreeMain({ student, onCardClick, onLockedClick, onSubscribe }) {
       <button className="sticky-cta" onClick={onSubscribe} aria-label="구독하고 모든 기능 풀기">
         <span className="sticky-cta-text">
           <span className="sticky-cta-title">구독하고 모든 기능 풀기</span>
-          <span className="sticky-cta-meta">월 <strong>₩9,900</strong> · 첫 <strong>7일 무료</strong> · 언제든 해지</span>
+          <span className="sticky-cta-meta">월 <strong>₩65,000</strong> · 장기 구독 시 할인</span>
         </span>
         <span className="sticky-cta-arrow" aria-hidden="true">→</span>
       </button>
