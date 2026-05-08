@@ -274,6 +274,8 @@ function StudentHomePage() {
   const [showStudyModeSheet, setShowStudyModeSheet] = useState(false);
   const [showInventoryPopup, setShowInventoryPopup] = useState(false);
   const [rawInventory, setRawInventory] = useState(null);
+  // 유료 회원 메인 모드 — "dashboard" (기본, 학습 계획표 + 카드) / "tutor" (AI 채팅 풀 영역)
+  const [mainMode, setMainMode] = useState("dashboard");
   const [activeSidebar, setActiveSidebar] = useState("daily-quiz");
   const [activeTab, setActiveTab] = useState("home");
   const [chatInput, setChatInput] = useState("");
@@ -944,8 +946,12 @@ function StudentHomePage() {
               />
             ) : (
               <PaidMain
+                mainMode={mainMode}
+                setMainMode={setMainMode}
                 tutor={tutor}
                 student={student}
+                plan={plan}
+                onPlanCellClick={handlePlanToggle}
                 messages={messages}
                 chatInput={chatInput}
                 setChatInput={setChatInput}
@@ -956,6 +962,7 @@ function StudentHomePage() {
                 navigate={navigate}
                 navWithAdminOverride={navWithAdminOverride}
                 tutorStatus={tutorStatus}
+                onShowInventory={() => setShowInventoryPopup(true)}
               />
             )}
 
@@ -1134,42 +1141,60 @@ function StudentHomePage() {
 // ─── 메인 영역 — 유료 회원 (AI 튜터 채팅) ──────────────────────────
 
 function PaidMain({
-  tutor, student, messages, chatInput, setChatInput, handleSendChat,
-  handlePersonaSwap, handleRecommendationClick, chatHistoryRef, navigate, navWithAdminOverride, tutorStatus,
+  mainMode, setMainMode,
+  tutor, student, plan, onPlanCellClick,
+  messages, chatInput, setChatInput, handleSendChat,
+  handlePersonaSwap, handleRecommendationClick, chatHistoryRef,
+  navigate, navWithAdminOverride, tutorStatus, onShowInventory,
 }) {
   const navDaily = navWithAdminOverride || navigate;
+
+  // 모드 토글 — 메인 영역 최상단
+  const ModeToggle = (
+    <div className="paid-mode-toggle" role="tablist" aria-label="메인 모드">
+      <button
+        type="button"
+        role="tab"
+        aria-selected={mainMode === "dashboard"}
+        className={`paid-mode-btn${mainMode === "dashboard" ? " active" : ""}`}
+        onClick={() => setMainMode("dashboard")}
+      >
+        🏠 대시보드
+      </button>
+      <button
+        type="button"
+        role="tab"
+        aria-selected={mainMode === "tutor"}
+        className={`paid-mode-btn${mainMode === "tutor" ? " active" : ""}`}
+        onClick={() => setMainMode("tutor")}
+      >
+        🌱 AI 튜터
+      </button>
+    </div>
+  );
+
+  if (mainMode === "dashboard") {
+    return (
+      <>
+        {ModeToggle}
+        <PaidDashboard
+          student={student}
+          plan={plan}
+          onPlanCellClick={onPlanCellClick}
+          navigate={navigate}
+          navDaily={navDaily}
+          onShowInventory={onShowInventory}
+        />
+      </>
+    );
+  }
+
+  // mainMode === "tutor" — AI 튜터 채팅 풀 영역
   return (
     <>
-      {/* 모바일에서만 보이는 무료 기능 가로 스크롤 */}
-      <div className="mobile-features-head">
-        <h2>🌟 무료 기능</h2>
-        <Link className="more" to="/daily-quiz" aria-label="무료 기능 — 일일 퀴즈로 이동">전체</Link>
-      </div>
-      <div className="mobile-features" role="list">
-        <button className="feature-card tint-yellow" role="listitem" aria-label="일일 퀴즈 시작하기" onClick={() => navDaily("/daily-quiz")}>
-          <ClaySpan color="yellow" label="퀴즈" />
-          <span className="feature-name">일일 퀴즈<br />10문제</span>
-          <span className="feature-tag">⏱ 5분 · 매일 갱신</span>
-        </button>
-        <button className="feature-card tint-blue" role="listitem" aria-label="일일 독해 시작하기" onClick={() => navDaily("/daily-reading")}>
-          <ClaySpan color="blue" label="독해" />
-          <span className="feature-name">일일 독해<br />정독 훈련</span>
-          <span className="feature-tag">📖 약 10분 · 미수행</span>
-        </button>
-        <button className="feature-card tint-red" role="listitem" aria-label="대결 라이브" onClick={() => navigate("/duel")}>
-          <ClaySpan color="red" label="대결" />
-          <span className="feature-name">대결 라이브<br />서바이벌</span>
-          <span className="feature-tag"><span className="live-dot" aria-hidden="true"></span> LIVE</span>
-        </button>
-        <button className="feature-card tint-green" role="listitem" aria-label="시즌 랭킹 보기" onClick={() => navigate("/ranking")}>
-          <ClaySpan color="green" label="랭킹" />
-          <span className="feature-name">시즌 랭킹<br />전국</span>
-          <span className="feature-tag">🌾 {student.rankPos}위 / {student.rankTotal.toLocaleString()}명</span>
-        </button>
-      </div>
-
-      {/* AI 튜터 채팅 영역 */}
-      <section className="chat-shell" data-od-id="chat-shell" aria-label="AI 선생님 대화">
+      {ModeToggle}
+      {/* AI 튜터 채팅 영역 — 풀 메인 사이즈 (별도 박스 X) */}
+      <section className="chat-shell chat-shell-fullbleed" data-od-id="chat-shell" aria-label="AI 선생님 대화">
         <div className="chat-meta">
           <ClaySpan color="cream" label={`${tutor.emoji}<br>${tutor.initial}`} />
           <div className="info">
@@ -1268,6 +1293,129 @@ function PaidMain({
           </form>
         </div>
       </section>
+    </>
+  );
+}
+
+// ─── 유료 회원 대시보드 — 학습 계획표 상단 + 큰 카드들 ──
+
+function PaidDashboard({ student, plan, onPlanCellClick, navigate, navDaily, onShowInventory }) {
+  const pendingCount = (plan || []).filter((p) => !p.done).length;
+  const dispName = (student.name || "학생").replace(/이$/, "");
+
+  // 큰 카드 4종 — 무료 회원과 동일하지만 모두 활성
+  const PAID_CARDS = [
+    { id: "daily-quiz", tint: "yellow", color: "yellow", label: "퀴즈<br/>일러스트", tag: "매일", title: "일일 퀴즈", meta: "10문제 · 약 5분", cta: "지금 풀기", route: "/daily-quiz", admin: true },
+    { id: "daily-reading", tint: "blue", color: "blue", label: "독해<br/>일러스트", tag: "매일", title: "일일 독해", meta: "정독 훈련 · 약 10분", cta: "지금 읽기", route: "/daily-reading", admin: true },
+    { id: "farm-mode", tint: "green", color: "green", label: "농장별<br/>모드", tag: "심화", title: "농장별 모드", meta: "교재와 연동한 단계별 학습", cta: "이어가기", route: "/farm-mode", admin: true },
+    { id: "pro-mode", tint: "purple", color: "purple", label: "프로<br/>모드", tag: "고난이도", title: "프로 모드", meta: "지문 정독 + 추론·논리", cta: "도전하기", route: "/pro-mode", admin: true },
+  ];
+
+  return (
+    <>
+      {/* 인사 + 시즌 점수 */}
+      <section className="greeting-block" data-od-id="greeting" aria-label="인사">
+        <div className="greeting-art" role="img" aria-label="새싹과 농장 일러스트">
+          <div className="ph">
+            <span className="ph-emoji" aria-hidden="true">🌱</span>
+            <span className="ph-tag">FARM ART</span>
+          </div>
+        </div>
+        <div className="greeting-text">
+          <span className="greeting-eyebrow"><span className="dot" aria-hidden="true"></span>오늘의 농장</span>
+          <h1 className="greeting-title">
+            <strong>{dispName} 학생</strong>, 어서 와요!<br />
+            {pendingCount > 0 ? `오늘 미수행 학습 ${pendingCount}건이 있어요.` : "오늘 학습 모두 끝냈어요. 이어서 도전!"}
+          </h1>
+          <p
+            className="greeting-meta"
+            role="button"
+            tabIndex={0}
+            onClick={() => onShowInventory && onShowInventory()}
+            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onShowInventory && onShowInventory(); } }}
+            style={{ cursor: "pointer" }}
+          >
+            시즌 점수 <strong>{student.score.toLocaleString()}</strong>점 <span style={{ fontSize: 11, opacity: 0.65 }}>· 자세히 ›</span>
+          </p>
+        </div>
+      </section>
+
+      {/* 학습 계획표 — 대시보드 최상단 */}
+      <section className="paid-dash-section">
+        <div className="paid-dash-section-head">
+          <h2>📅 학습 계획표</h2>
+          <Link className="more" to="/study-plan">전체 계획표 ›</Link>
+        </div>
+        {(!plan || plan.length === 0) ? (
+          <p className="paid-dash-note">오늘 배정된 학습이 없어요. 농장별 모드에서 자유롭게 풀어볼 수 있어요.</p>
+        ) : (
+          <div className="paid-dash-plan-list">
+            {plan.slice(0, 6).map((p) => (
+              <button
+                key={p.id}
+                type="button"
+                className={`paid-dash-plan-row${p.done ? " done" : ""}`}
+                onClick={() => onPlanCellClick(p.id)}
+              >
+                <span className={`plan-check${p.done ? " done" : ""}`} aria-hidden="true"></span>
+                <span className="plan-text">
+                  <span className="plan-title">{p.title}</span>
+                  {p.meta && <span className="plan-meta">{p.meta}</span>}
+                </span>
+                {p.due && <span className={`plan-due${p.dueSoft ? " soft" : ""}`}>{p.due}</span>}
+              </button>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* 큰 카드 4종 */}
+      <div className="free-section-head">
+        <h2>🌟 오늘 학습</h2>
+        <span className="sub">바로 풀어보거나 모드에서 이어갈 수 있어요.</span>
+      </div>
+      <div className="free-grid" role="list">
+        {PAID_CARDS.map((c) => (
+          <button
+            key={c.id}
+            className={`big-card tint-${c.tint}`}
+            role="listitem"
+            aria-label={`${c.title} — ${c.cta}`}
+            onClick={() => (c.admin ? navDaily(c.route) : navigate(c.route))}
+          >
+            <ClaySpan color={c.color} label={c.label} />
+            <span className="body-text">
+              <span className="free-tag">{c.tag}</span>
+              <h3>{c.title}</h3>
+              <span className="meta">{c.meta}</span>
+              <span className="cta">{c.cta}</span>
+            </span>
+          </button>
+        ))}
+      </div>
+
+      {/* 추가 메뉴 — 글쓰기 / 분석 / 대결 / 랭킹 */}
+      <div className="free-section-head">
+        <h2>🔗 빠른 진입</h2>
+      </div>
+      <div className="paid-dash-quick">
+        <button type="button" className="paid-dash-quick-card" onClick={() => navigate("/writing")}>
+          <ClaySpan color="blue" label="쓰기" />
+          <span className="qc-text"><strong>글쓰기 첨삭</strong><span>지식과 지혜</span></span>
+        </button>
+        <button type="button" className="paid-dash-quick-card" onClick={() => navigate("/report")}>
+          <ClaySpan color="purple" label="분석" />
+          <span className="qc-text"><strong>통합 분석표</strong><span>역량·영역·일별</span></span>
+        </button>
+        <button type="button" className="paid-dash-quick-card" onClick={() => navigate("/duel")}>
+          <ClaySpan color="red" label="대결" />
+          <span className="qc-text"><strong>대결 라이브</strong><span>친구·AI</span></span>
+        </button>
+        <button type="button" className="paid-dash-quick-card" onClick={() => navigate("/ranking")}>
+          <ClaySpan color="green" label="랭킹" />
+          <span className="qc-text"><strong>시즌 랭킹</strong><span>{student.rankPos > 0 ? `${student.rankPos}위 / ${student.rankTotal.toLocaleString()}명` : "아직 점수 없음"}</span></span>
+        </button>
+      </div>
     </>
   );
 }

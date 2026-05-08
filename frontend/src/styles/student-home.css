@@ -412,6 +412,130 @@
     flex: 1 1 auto;
     min-height: 540px;
   }
+  /* AI 튜터 모드 — 박스 디자인 제거하고 메인 영역 풀로 */
+  .chat-shell.chat-shell-fullbleed {
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: var(--bg);
+    min-height: 0;
+    flex: 1 1 auto;
+  }
+  .chat-shell.chat-shell-fullbleed::before,
+  .chat-shell.chat-shell-fullbleed::after { display: none; }
+
+  /* 유료 모드 토글 (대시보드 / AI 튜터) */
+  .student-home .paid-mode-toggle {
+    display: inline-flex;
+    gap: 4px;
+    margin: 14px 18px 6px;
+    padding: 4px;
+    background: rgba(216, 203, 177, 0.28);
+    border-radius: 999px;
+    width: fit-content;
+  }
+  .student-home .paid-mode-btn {
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 13px; font-weight: 700;
+    color: var(--muted);
+    transition: all 140ms ease;
+  }
+  .student-home .paid-mode-btn.active {
+    background: var(--fg);
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(40,30,20,0.18);
+  }
+
+  /* 유료 대시보드 — 학습 계획표 / 빠른 진입 섹션 */
+  .student-home .paid-dash-section {
+    margin: 14px 18px 0;
+    padding: 14px 16px;
+    background: rgba(255, 250, 240, 0.7);
+    border: 1px solid var(--border-warm);
+    border-radius: 18px;
+  }
+  .student-home .paid-dash-section-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .student-home .paid-dash-section-head h2 {
+    font-size: 15px; font-weight: 800; margin: 0;
+  }
+  .student-home .paid-dash-section-head .more {
+    font-size: 12px; color: var(--accent-deep);
+  }
+  .student-home .paid-dash-note {
+    color: var(--muted); font-size: 13px; padding: 8px 4px; margin: 0;
+  }
+  .student-home .paid-dash-plan-list {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .student-home .paid-dash-plan-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; border-radius: 12px;
+    background: #fff;
+    border: 1px solid #ebe1d2;
+    cursor: pointer; text-align: left;
+    transition: transform 100ms ease, background 100ms ease;
+  }
+  .student-home .paid-dash-plan-row:hover { background: #fff8ef; transform: translateY(-1px); }
+  .student-home .paid-dash-plan-row.done { opacity: 0.6; }
+  .student-home .paid-dash-plan-row .plan-check {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid var(--border-warm);
+    flex-shrink: 0;
+  }
+  .student-home .paid-dash-plan-row .plan-check.done {
+    background: var(--accent); border-color: var(--accent);
+  }
+  .student-home .paid-dash-plan-row .plan-text {
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .student-home .paid-dash-plan-row .plan-title { font-size: 13.5px; font-weight: 700; }
+  .student-home .paid-dash-plan-row .plan-meta { font-size: 11.5px; color: var(--muted); }
+  .student-home .paid-dash-plan-row .plan-due {
+    font-size: 11px; font-weight: 700; color: var(--accent-deep);
+    background: var(--accent-soft);
+    padding: 2px 8px; border-radius: 999px;
+  }
+  .student-home .paid-dash-plan-row .plan-due.soft {
+    color: var(--muted); background: rgba(216, 203, 177, 0.4);
+  }
+
+  /* 빠른 진입 그리드 */
+  .student-home .paid-dash-quick {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 4px 12px;
+  }
+  @media (min-width: 768px) {
+    .student-home .paid-dash-quick { grid-template-columns: repeat(4, 1fr); }
+  }
+  .student-home .paid-dash-quick-card {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 14px;
+    background: #fff;
+    border: 1px solid #ebe1d2;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: transform 100ms ease, box-shadow 100ms ease;
+    text-align: left;
+  }
+  .student-home .paid-dash-quick-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(40, 30, 20, 0.08);
+  }
+  .student-home .paid-dash-quick-card .clay { width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0; }
+  .student-home .paid-dash-quick-card .clay > .lbl { font-size: 9px; }
+  .student-home .paid-dash-quick-card .qc-text {
+    display: flex; flex-direction: column; gap: 2px; min-width: 0;
+  }
+  .student-home .paid-dash-quick-card .qc-text strong { font-size: 13.5px; font-weight: 800; }
+  .student-home .paid-dash-quick-card .qc-text span { font-size: 11.5px; color: var(--muted); }
   .chat-shell::before {
     content: ''; position: absolute;
     top: -40px; right: -40px; width: 160px; height: 160px;
