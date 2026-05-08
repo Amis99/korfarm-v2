@@ -5,6 +5,10 @@ import QuestionModal from "./QuestionModal";
 import { FEEDBACK } from "./feedbackTimings";
 import { replaceChoiceLetters } from "../../utils/explanationLetters";
 
+// 선택지 원문자 — 종이 시험지 컨셉
+const CIRCLED_NUMS = ["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨", "⑩"];
+const choiceLabel = (i) => CIRCLED_NUMS[i] ?? `${i + 1}`;
+
 /**
  * 누적형(C형) 학습 모듈용 공통 문제 카드 — 시험지 컨셉.
  *
@@ -231,7 +235,7 @@ export default function CumulativeQuestionCard({
                   showAsWrong ? "is-wrong" : ""
                 }`}
               >
-                <span className="cum-choice-num">{ci + 1}</span>
+                <span className="cum-choice-num">{choiceLabel(ci)}</span>
                 <span className="cum-choice-text">
                   <RichText>{c.text}</RichText>
                 </span>

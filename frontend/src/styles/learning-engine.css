@@ -2881,16 +2881,6 @@ mark.highlight {
   color: #2c2418;
 }
 
-.cum-choice.is-correct::after {
-  content: "";
-  display: inline-block;
-  width: 64px;
-  height: 64px;
-  margin-left: 8px;
-  background: url("/정답%20동그라미.png") center / contain no-repeat;
-  vertical-align: middle;
-}
-
 /* 학생이 잘못 고른 선택지 — 시험지 채점 PNG 이미지 (오답 꺾은선) */
 .cum-choice.is-wrong {
   background: transparent;
@@ -2898,18 +2888,9 @@ mark.highlight {
   color: #2c2418;
 }
 
-.cum-choice.is-wrong::after {
-  content: "";
-  display: inline-block;
-  width: 64px;
-  height: 64px;
-  margin-left: 8px;
-  background: url("/오답%20꺾은선.png") center / contain no-repeat;
-  vertical-align: middle;
-}
-
 .cum-choice-num {
-  display: inline;
+  position: relative;        /* 원문자 위에 첨삭 PNG 를 absolute 로 띄우기 위함 */
+  display: inline-block;     /* ::after position anchor */
   width: auto;
   height: auto;
   border-radius: 0;
@@ -2919,6 +2900,31 @@ mark.highlight {
   font-size: 16px;
   flex-shrink: 0;
   padding: 0;
+}
+
+/* 정오답 첨삭 PNG — 원문자(cum-choice-num) 위에 absolute 오버레이.
+ * inline-block 으로 텍스트 흐름에 두면 64×64 박스가 line-height 를 늘려
+ * 줄간격이 흐트러지므로 텍스트와 분리된 레이어로 띄움. */
+.cum-choice.is-correct .cum-choice-num::after,
+.cum-choice.is-wrong .cum-choice-num::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 64px;
+  height: 64px;
+  transform: translate(-50%, -50%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 2;
+}
+.cum-choice.is-correct .cum-choice-num::after {
+  background-image: url("/정답%20동그라미.png");
+}
+.cum-choice.is-wrong .cum-choice-num::after {
+  background-image: url("/오답%20꺾은선.png");
 }
 
 .cum-choice.is-correct .cum-choice-num,
