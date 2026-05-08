@@ -43,13 +43,21 @@ class ContentCatalogService(
     }
 
     @Transactional(readOnly = true)
-    fun getCatalogByContentType(contentType: String, levelId: String?): List<CatalogItem> {
+    fun getCatalogByContentType(contentType: String, levelId: String?, search: String? = null, subArea: String? = null): List<CatalogItem> {
         val items = if (levelId != null) {
             contentRepository.findByCategoryAndLevelIdAndStatus(contentType, levelId, "active")
         } else {
             contentRepository.findByCategoryAndStatus(contentType, "active")
         }
-        return items.map { toCatalogItem(it) }
+        var filtered = items
+        if (!search.isNullOrBlank()) {
+            val term = search.trim().lowercase()
+            filtered = filtered.filter { it.title.lowercase().contains(term) }
+        }
+        if (!subArea.isNullOrBlank()) {
+            filtered = filtered.filter { it.subArea == subArea }
+        }
+        return filtered.map { toCatalogItem(it) }
     }
 
     /**
@@ -59,7 +67,7 @@ class ContentCatalogService(
      * 결과는 contentId 기준 중복 제거.
      */
     @Transactional(readOnly = true)
-    fun getCatalogByContentTypes(contentTypes: List<String>, levelId: String?): List<CatalogItem> {
+    fun getCatalogByContentTypes(contentTypes: List<String>, levelId: String?, search: String? = null, subArea: String? = null): List<CatalogItem> {
         if (contentTypes.isEmpty()) return emptyList()
         val ctsJson = objectMapper.writeValueAsString(contentTypes)
         val items = if (levelId != null) {
@@ -67,7 +75,15 @@ class ContentCatalogService(
         } else {
             contentRepository.findByCategoriesInAndStatus(contentTypes, ctsJson, "active")
         }
-        return items.distinctBy { it.id }.map { toCatalogItem(it) }
+        var filtered = items.distinctBy { it.id }
+        if (!search.isNullOrBlank()) {
+            val term = search.trim().lowercase()
+            filtered = filtered.filter { it.title.lowercase().contains(term) }
+        }
+        if (!subArea.isNullOrBlank()) {
+            filtered = filtered.filter { it.subArea == subArea }
+        }
+        return filtered.map { toCatalogItem(it) }
     }
 
     private fun toCatalogItem(entity: com.korfarm.api.paid.ContentEntity) = CatalogItem(

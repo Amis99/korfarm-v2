@@ -975,7 +975,7 @@ function StudentHomePage() {
                 </>
               ) : (
                 <>
-                  <WalletWidget wallet={wallet} onItemClick={handleWalletItemClick} />
+                  <WalletWidget wallet={wallet} onItemClick={handleWalletItemClick} onCharge={() => navigate("/my/grapefruit")} />
                   <PlanWidget plan={plan} onToggle={handlePlanToggle} fullMeta />
                 </>
               )}
@@ -992,7 +992,7 @@ function StudentHomePage() {
               </>
             ) : (
               <>
-                <WalletWidget wallet={wallet} onItemClick={handleWalletItemClick} compact />
+                <WalletWidget wallet={wallet} onItemClick={handleWalletItemClick} onCharge={() => navigate("/my/grapefruit")} compact />
                 <PlanWidget plan={plan} onToggle={handlePlanToggle} />
               </>
             )}
@@ -1302,6 +1302,14 @@ function PaidMain({
 function PaidDashboard({ student, plan, onPlanCellClick, navigate, navDaily, onShowInventory }) {
   const pendingCount = (plan || []).filter((p) => !p.done).length;
   const dispName = (student.name || "학생").replace(/이$/, "");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  function handleSearchSubmit(e) {
+    e.preventDefault();
+    const q = searchQuery.trim();
+    if (!q) return;
+    navigate(`/search?q=${encodeURIComponent(q)}`);
+  }
 
   // 큰 카드 4종 — 무료 회원과 동일하지만 모두 활성
   const PAID_CARDS = [
@@ -1339,6 +1347,19 @@ function PaidDashboard({ student, plan, onPlanCellClick, navigate, navDaily, onS
           </p>
         </div>
       </section>
+
+      {/* 국어농장 학습 검색 */}
+      <form className="paid-dash-search" onSubmit={handleSearchSubmit} role="search">
+        <span className="paid-dash-search-icon" aria-hidden="true">🔍</span>
+        <input
+          type="search"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="국어농장 학습 검색 — 지문 제목·작가·키워드"
+          aria-label="국어농장 학습 검색"
+        />
+        <button type="submit" className="paid-dash-search-btn">검색</button>
+      </form>
 
       {/* 학습 계획표 — 대시보드 최상단 */}
       <section className="paid-dash-section">
@@ -1518,7 +1539,7 @@ function FreeMain({ student, onCardClick, onLockedClick, onSubscribe, onShowInve
 
 // ─── 위젯 컴포넌트 ──────────────────────────────────────────────────
 
-function WalletWidget({ wallet, onItemClick, compact = false }) {
+function WalletWidget({ wallet, onItemClick, onCharge, compact = false }) {
   const total = (wallet || []).reduce((s, w) => s + (Number(w.count) || 0), 0);
   return (
     <section className="widget">
@@ -1545,7 +1566,7 @@ function WalletWidget({ wallet, onItemClick, compact = false }) {
       </div>
       <div className="wallet-cta-row">
         <span className="wallet-total">합계 <strong>{compact ? `${total}` : `${total} 작물`}</strong></span>
-        <button className="btn-charge">＋ 자몽 충전</button>
+        <button type="button" className="btn-charge" onClick={onCharge}>＋ 자몽 충전</button>
       </div>
     </section>
   );

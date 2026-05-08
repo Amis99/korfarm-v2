@@ -42,9 +42,9 @@ class ContentCatalogController(
             // 콤마 구분 다중 카테고리 지원: ?contentType=A,B,C → JSON_OVERLAPS 매칭
             val types = contentType.split(",").map { it.trim() }.filter { it.isNotBlank() }
             if (types.size > 1) {
-                catalogService.getCatalogByContentTypes(types, levelId)
+                catalogService.getCatalogByContentTypes(types, levelId, search, subArea)
             } else {
-                catalogService.getCatalogByContentType(types.first(), levelId)
+                catalogService.getCatalogByContentType(types.first(), levelId, search, subArea)
             }
         } else {
             catalogService.getCatalogByArea(area, levelId, search, subArea)
