@@ -3,6 +3,10 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
 import { apiGet as adminApiGet } from "../utils/adminApi";
+import ReportLearningDiagnosticPanel from "../components/report/ReportLearningDiagnosticPanel";
+import ReportCompetencyTrendChart from "../components/report/ReportCompetencyTrendChart";
+import ReportCompetencySection from "../components/report/ReportCompetencySection";
+import ReportSectionDetail from "../components/report/ReportSectionDetail";
 import "../styles/student-home.css";
 import "../styles/analysis-report.css";
 
@@ -352,17 +356,6 @@ function AnalysisReportPage() {
           />
         </a>
         <div style={{ flex: 1 }}></div>
-        <button
-          type="button"
-          className="report-print-btn"
-          onClick={() => navigate(studentIdParam ? `/report?studentId=${studentIdParam}` : "/report")}
-          style={{
-            padding: "8px 14px", borderRadius: 999, border: "1px solid var(--border)",
-            background: "white", fontSize: 12.5, fontWeight: 700, cursor: "pointer",
-          }}
-        >
-          기존 통합 성적표 →
-        </button>
       </header>
 
       <div className="report-page-head">
@@ -497,7 +490,7 @@ function AnalysisReportPage() {
 
       {sectionsList.length > 0 && (
         <section className="report-section">
-          <h2>🧩 활동별 상세</h2>
+          <h2>🧩 활동 비중</h2>
           <div className="bar-list">
             {sectionsList.map((s) => (
               <div key={s.key} className="bar-row">
@@ -515,17 +508,41 @@ function AnalysisReportPage() {
               </div>
             ))}
           </div>
-          <button
-            type="button"
-            onClick={() => navigate(studentIdParam ? `/report?studentId=${studentIdParam}` : "/report")}
-            style={{
-              marginTop: 12, width: "100%", padding: "10px 14px",
-              background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 12,
-              fontSize: 13, fontWeight: 700, cursor: "pointer", color: "var(--accent-deep)",
-            }}
-          >
-            상세 성적표에서 활동·테스트별 결과 보기 →
-          </button>
+        </section>
+      )}
+
+      {/* 학습 누적 vs 진단 측정 비교 */}
+      {(report?.learningCompetency || report?.diagnosticCompetency) && (
+        <section className="report-section">
+          <h2>📐 학습 누적 vs 진단 측정</h2>
+          <ReportLearningDiagnosticPanel
+            learningCompetency={report.learningCompetency}
+            diagnosticCompetency={report.diagnosticCompetency}
+          />
+        </section>
+      )}
+
+      {/* 역량별 일자별 변화 추이 */}
+      {Array.isArray(report?.competencyTrend) && report.competencyTrend.length > 0 && (
+        <section className="report-section">
+          <h2>📈 역량 변화 추이</h2>
+          <ReportCompetencyTrendChart trend={report.competencyTrend} />
+        </section>
+      )}
+
+      {/* 역량 상세 통계 — 정답률·표본수·강약점 */}
+      {Array.isArray(report?.competencyStats) && report.competencyStats.length > 0 && (
+        <section className="report-section">
+          <h2>🎯 역량 상세 통계</h2>
+          <ReportCompetencySection competencyStats={report.competencyStats} />
+        </section>
+      )}
+
+      {/* 활동별 상세 — 시험·농장·일일·프로·학습계획표 */}
+      {report?.sections && (
+        <section className="report-section">
+          <h2>🗂 활동별 상세</h2>
+          <ReportSectionDetail sections={report.sections} />
         </section>
       )}
 
