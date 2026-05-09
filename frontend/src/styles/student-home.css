@@ -1169,6 +1169,38 @@
       order: 99;
     }
     .top-bar > * { min-width: 0; }
+
+    /* ─── 모바일 우측 잘림 근본 fix — flex/grid item 의 min-width: auto
+     * default 가 자식 intrinsic width(예: input 173px) 로 잡혀 부모 폭을
+     * viewport 밖으로 밀어내는 사고를 차단. layout 변경 X, intrinsic 만 풀음. */
+
+    /* 검색바 input — type=search 의 intrinsic width 차단 */
+    .student-home .paid-dash-search { min-width: 0; }
+    .student-home .paid-dash-search input { min-width: 0; flex: 1 1 0; }
+
+    /* 빠른 진입 카드 + 안 텍스트 */
+    .student-home .paid-dash-quick-card { min-width: 0; }
+    .student-home .paid-dash-quick-card .qc-text { min-width: 0; }
+    .student-home .paid-dash-quick-card .qc-text strong,
+    .student-home .paid-dash-quick-card .qc-text span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* 큰 카드 (4종) */
+    .student-home .big-card { min-width: 0; }
+    .student-home .big-card .body-text { min-width: 0; }
+
+    /* 섹션 헤더 (학습 계획표·widget) */
+    .student-home .paid-dash-section-head { min-width: 0; }
+    .student-home .paid-dash-section-head h2 { min-width: 0; }
+    .student-home .widget-head { min-width: 0; }
+    .student-home .widget-title { min-width: 0; }
+
+    /* 작물 지갑 grid item */
+    .student-home .wallet-item { min-width: 0; }
   }
 
   /* TABLET (768–1199px) */
