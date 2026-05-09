@@ -13,7 +13,8 @@ data class HarvestRankingItem(
     val rank: Int,
     val userId: String,
     val userName: String = "",
-    val value: Int
+    val value: Int,
+    val profileImageUrl: String? = null
 )
 
 data class DuelLeaderboardItem(

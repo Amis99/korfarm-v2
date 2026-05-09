@@ -35,6 +35,8 @@ function RankingPage() {
   const [rankings, setRankings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [childName, setChildName] = useState("");
+  const [page, setPage] = useState(1);
+  const PAGE_SIZE = 20;
 
   const levelLabel = LEVEL_OPTIONS.find((item) => item.id === level)?.label ?? "";
   const seasonLabel = `${new Date().getFullYear()}년 ${new Date().getMonth() + 1}월 시즌`;
@@ -74,9 +76,20 @@ function RankingPage() {
       name: r.userName || r.name || "?",
       score: r.value ?? r.totalCrops ?? r.score ?? 0,
       userId: r.userId,
+      profileImageUrl: r.profileImageUrl || r.profile_image_url || "",
       isHighlighted: isViewingChild && r.userId === studentId,
+      isMe: !isViewingChild && r.userId === user?.id,
     }));
-  }, [rankings, isViewingChild, studentId]);
+  }, [rankings, isViewingChild, studentId, user]);
+
+  const totalPages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+  const pageRows = useMemo(() => {
+    const start = (page - 1) * PAGE_SIZE;
+    return rows.slice(start, start + PAGE_SIZE);
+  }, [rows, page]);
+
+  // level/scope/period 변경 시 첫 페이지로
+  useEffect(() => { setPage(1); }, [level, scope, period]);
 
   return (
     <div className="ranking-page">
@@ -162,35 +175,68 @@ function RankingPage() {
           {loading ? (
             <p style={{ padding: 20, textAlign: "center", color: "#8a7468" }}>불러오는 중...</p>
           ) : rows.length > 0 ? (
-            <ul className="ranking-list">
-              {rows.map((row) => (
-                <li
-                  key={row.rank}
-                  className={`ranking-item${row.isHighlighted ? " ranking-item-highlight" : ""}`}
-                  style={row.isHighlighted ? {
-                    background: "linear-gradient(135deg, #fff5eb 0%, #ffe8d6 100%)",
-                    border: "2px solid #f06c24",
-                    borderRadius: 12,
-                  } : undefined}
-                >
-                  <span className="ranking-avatar">
-                    {(row.name || "?").charAt(0)}
+            <>
+              <table className="ranking-table">
+                <thead>
+                  <tr>
+                    <th className="col-rank">순위</th>
+                    <th className="col-user">학생</th>
+                    <th className="col-score">점수</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {pageRows.map((row) => (
+                    <tr
+                      key={row.userId || row.rank}
+                      className={`${row.isHighlighted ? "row-highlight" : ""}${row.isMe ? " row-me" : ""}`}
+                    >
+                      <td className="col-rank">
+                        {row.rank <= 3 ? ["🥇", "🥈", "🥉"][row.rank - 1] : `${row.rank}`}
+                      </td>
+                      <td className="col-user">
+                        <span className="ranking-avatar">
+                          {row.profileImageUrl ? (
+                            <img src={row.profileImageUrl} alt="" />
+                          ) : (
+                            (row.name || "?").charAt(0)
+                          )}
+                        </span>
+                        <span className="ranking-name-cell">
+                          {row.name}
+                          {row.isHighlighted && <span className="tag-child">(자녀)</span>}
+                          {row.isMe && <span className="tag-me">나</span>}
+                        </span>
+                      </td>
+                      <td className="col-score">
+                        <strong>{formatNumber(row.score)}</strong>
+                        <span className="unit">점</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {totalPages > 1 && (
+                <nav className="ranking-pagination" aria-label="페이지">
+                  <button
+                    type="button"
+                    onClick={() => setPage((p) => Math.max(1, p - 1))}
+                    disabled={page === 1}
+                  >
+                    ‹ 이전
+                  </button>
+                  <span className="page-info">
+                    {page} / {totalPages}
                   </span>
-                  <span className="ranking-badge">#{row.rank}</span>
-                  <div className="ranking-name">
-                    <strong>
-                      {row.name}
-                      {row.isHighlighted && <span style={{ marginLeft: 6, fontSize: 12, color: "#f06c24" }}>(자녀)</span>}
-                    </strong>
-                    <span>{scope === "level" ? levelLabel : "전체 레벨"}</span>
-                  </div>
-                  <div className="ranking-score">
-                    <strong>{formatNumber(row.score)}</strong>
-                    <span>점</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
+                  <button
+                    type="button"
+                    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                    disabled={page === totalPages}
+                  >
+                    다음 ›
+                  </button>
+                </nav>
+              )}
+            </>
           ) : (
             <p style={{ padding: 20, textAlign: "center", color: "#8a7468" }}>아직 랭킹 데이터가 없습니다.</p>
           )}

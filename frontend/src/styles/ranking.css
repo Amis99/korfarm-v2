@@ -269,3 +269,146 @@
     justify-self: end;
   }
 }
+
+/* ─────────────────── 표 형식 랭킹 + 페이지네이션 ─────────────────── */
+.ranking-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 14px;
+}
+.ranking-table thead th {
+  text-align: left;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--earth-brown);
+  background: rgba(255, 250, 240, 0.7);
+  padding: 10px 12px;
+  border-bottom: 2px solid rgba(216, 203, 177, 0.5);
+}
+.ranking-table thead th.col-rank { width: 64px; text-align: center; }
+.ranking-table thead th.col-score { width: 110px; text-align: right; }
+.ranking-table tbody tr {
+  border-bottom: 1px solid rgba(216, 203, 177, 0.35);
+  transition: background 120ms ease;
+}
+.ranking-table tbody tr:hover { background: rgba(255, 250, 240, 0.5); }
+.ranking-table tbody td {
+  padding: 10px 12px;
+  vertical-align: middle;
+}
+.ranking-table tbody td.col-rank {
+  text-align: center;
+  font-weight: 800;
+  font-size: 16px;
+  color: #6b5444;
+}
+.ranking-table tbody td.col-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ranking-table .ranking-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(155deg, #ffe6cc, #ffc28a);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  color: #6b3e1d;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.ranking-table .ranking-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  user-select: none;
+  pointer-events: none;
+}
+.ranking-table .ranking-name-cell {
+  font-weight: 700;
+  color: #2c2418;
+  font-size: 13.5px;
+}
+.ranking-table .tag-child {
+  margin-left: 6px;
+  font-size: 11px;
+  color: #f06c24;
+  font-weight: 700;
+}
+.ranking-table .tag-me {
+  margin-left: 6px;
+  font-size: 10.5px;
+  font-weight: 800;
+  background: var(--meadow-dark);
+  color: white;
+  padding: 1px 7px;
+  border-radius: 999px;
+}
+.ranking-table tbody td.col-score {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.ranking-table tbody td.col-score strong {
+  font-weight: 800;
+  color: var(--meadow-dark);
+  font-size: 14.5px;
+}
+.ranking-table tbody td.col-score .unit {
+  margin-left: 2px;
+  font-size: 11.5px;
+  color: var(--earth-brown);
+}
+.ranking-table tbody tr.row-highlight {
+  background: linear-gradient(135deg, #fff5eb 0%, #ffe8d6 100%);
+}
+.ranking-table tbody tr.row-me {
+  background: rgba(255, 220, 180, 0.3);
+}
+
+.ranking-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 8px;
+}
+.ranking-pagination button {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(216, 203, 177, 0.6);
+  background: white;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--earth-brown);
+  cursor: pointer;
+  transition: all 120ms ease;
+}
+.ranking-pagination button:hover:not(:disabled) {
+  background: var(--meadow-dark);
+  color: white;
+  border-color: var(--meadow-dark);
+}
+.ranking-pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.ranking-pagination .page-info {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--earth-brown);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 480px) {
+  .ranking-table thead th { padding: 8px 6px; font-size: 11.5px; }
+  .ranking-table tbody td { padding: 8px 6px; }
+  .ranking-table tbody td.col-rank { width: 48px; font-size: 14px; }
+  .ranking-table tbody td.col-score { width: 90px; font-size: 12.5px; }
+  .ranking-table .ranking-avatar { width: 30px; height: 30px; font-size: 12px; }
+  .ranking-table .ranking-name-cell { font-size: 12.5px; }
+}

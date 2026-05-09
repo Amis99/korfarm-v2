@@ -425,6 +425,7 @@ function StudentHomePage() {
             name: x.userName || x.name || "—",
             score: `${(x.value ?? x.totalCrops ?? x.score ?? 0).toLocaleString()}점`,
             me: x.userId === myUid,
+            profileImageUrl: x.profileImageUrl || x.profile_image_url || "",
           }));
           setRanking(top3.length > 0 ? top3 : FALLBACK_RANKING);
           if (myRow) {
@@ -1664,9 +1665,15 @@ function RankingWidget({ ranking, student, free = false }) {
         {(ranking || []).map((r) => (
           <div key={r.id} className={`rank-row${r.me ? " me" : ""}`}>
             <span className="rank-pos gold" aria-label={`${r.id}위`}>{r.pos}</span>
-            <span className={`clay clay-${r.color} rank-avatar`} aria-hidden="true">
-              <span className="lbl">{r.me ? "나" : `${r.id}위`}</span>
-            </span>
+            {r.profileImageUrl ? (
+              <span className={`clay clay-${r.color} rank-avatar has-profile`} aria-hidden="true">
+                <img src={r.profileImageUrl} alt="" />
+              </span>
+            ) : (
+              <span className={`clay clay-${r.color} rank-avatar`} aria-hidden="true">
+                <span className="lbl">{r.me ? "나" : `${r.id}위`}</span>
+              </span>
+            )}
             <span className="rank-name">{r.name}</span>
             <span className="rank-score">{r.score}</span>
           </div>

@@ -74,21 +74,24 @@ class SeasonService(
         val userMap = userRepository.findAllById(userIds).associateBy { it.id }
 
         // 각 사용자 시즌 점수 계산 + 0점 초과만 노출
+        data class RankRow(val userId: String, val score: Int, val name: String, val img: String?)
         val ranked = userIds.map { userId ->
             val cropsMap = cropsByUser[userId]?.associate { it.cropType to it.count } ?: emptyMap()
             val totalSeeds = seedsByUser[userId]?.sumOf { it.count } ?: 0
             val score = SeasonScoreCalculator.calculate(cropsMap, totalSeeds)
-            Triple(userId, score, userMap[userId]?.name ?: "?")
+            val u = userMap[userId]
+            RankRow(userId, score, u?.name ?: "?", u?.profileImageUrl)
         }
-            .filter { it.second > 0 }
-            .sortedByDescending { it.second }
+            .filter { it.score > 0 }
+            .sortedByDescending { it.score }
 
-        return ranked.mapIndexed { idx, (userId, score, name) ->
+        return ranked.mapIndexed { idx, row ->
             HarvestRankingItem(
                 rank = idx + 1,
-                userId = userId,
-                userName = name,
-                value = score
+                userId = row.userId,
+                userName = row.name,
+                value = row.score,
+                profileImageUrl = row.img
             )
         }
     }
