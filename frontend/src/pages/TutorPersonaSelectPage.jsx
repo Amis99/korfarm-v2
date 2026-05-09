@@ -15,6 +15,7 @@ const PERSONAS = [
     tint: "tint-cream",
     art: "owl",
     face: "🦉",
+    portrait: "images/tutor/tutor-owl-portrait.png",
     name: "부엉이샘",
     tagline: "지혜롭고 차분하게 가르쳐요",
     sample: "음, 학생. 오늘은 비문학 한 편을 천천히 살펴봅시다. 차근차근 풀어보면 답이 보일 거예요.",
@@ -24,6 +25,7 @@ const PERSONAS = [
     tint: "tint-green",
     art: "amis",
     face: "🧑‍🏫",
+    portrait: "images/tutor/tutor-amis-portrait.png",
     name: "아미스샘",
     tagline: "친근하고 든든한 선생님",
     sample: "오! 어제 진짜 잘했어! 오늘은 어휘 보강하면 딱이지. 같이 화이팅하자 💪",
@@ -33,6 +35,7 @@ const PERSONAS = [
     tint: "tint-rose",
     art: "nurungji",
     face: "👩‍🏫",
+    portrait: "images/tutor/tutor-nurungji-portrait.png",
     name: "누룽지샘",
     tagline: "활기차고 따뜻한 선생님",
     sample: "어머~ 이 단어 진짜 헷갈리지~? 선생님이 쉽게 알려줄게, 걱정 마! 🌻",
@@ -134,12 +137,11 @@ function TutorPersonaSelectPage() {
               onClick={() => handleCardClick(p.key)}
             >
               <span className="selected-tag" aria-hidden="true">선택됨</span>
-              <div className={`character-art ${p.art}`} role="img" aria-label={`${p.name} — 캐릭터 일러스트 자리`}>
-                <div className="stack">
-                  <span className="face" aria-hidden="true">{p.face}</span>
-                  <span className="ph-tag">캐릭터 일러스트</span>
-                  <span className="ph-size">240 × 240 · 점토 아트</span>
-                </div>
+              <div className={`character-art ${p.art}`}>
+                <img
+                  src={import.meta.env.BASE_URL + p.portrait}
+                  alt={`${p.name} 캐릭터 일러스트`}
+                />
               </div>
               <h2 className="character-name">{p.name}</h2>
               <p className="character-tagline">{p.tagline}</p>

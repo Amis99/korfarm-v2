@@ -190,7 +190,16 @@ function MyTutorPage() {
       <aside className="agent-sidebar">
         <button type="button" className="agent-new-btn" onClick={startNewSession}>+ 새 대화</button>
         <div className="agent-sessions">
-          {sessions.length === 0 && <p className="agent-empty">아직 대화가 없어요.</p>}
+          {sessions.length === 0 && (
+            <div className="agent-empty">
+              <img
+                className="agent-empty-illu"
+                src={import.meta.env.BASE_URL + "images/tutor/mytutor-empty-sessions.png"}
+                alt=""
+              />
+              <p>아직 대화가 없어요.</p>
+            </div>
+          )}
           {sessions.map((s) => (
             <div
               key={s.id}
@@ -255,6 +264,11 @@ function MyTutorPage() {
         <div className="agent-thread" ref={scrollRef}>
           {messages.length === 0 && !sending && (
             <div className="agent-greeting">
+              <img
+                className="agent-greeting-illu"
+                src={import.meta.env.BASE_URL + "images/tutor/mytutor-greeting-hero.png"}
+                alt=""
+              />
               <h2>안녕! 무엇이 궁금해?</h2>
               <p>이렇게 물어볼 수 있어:</p>
               <ul>

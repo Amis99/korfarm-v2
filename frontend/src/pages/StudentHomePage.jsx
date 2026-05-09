@@ -112,18 +112,18 @@ const FALLBACK_RANKING = [
 
 // 무료 회원용 큰 카드 (4장)
 const FREE_BIG_CARDS = [
-  { id: "daily-quiz",    tint: "yellow", color: "yellow", label: "퀴즈<br/>일러스트",  tag: "무료 · 매일", title: "일일 퀴즈",    meta: "10문제 · 약 5분 · 매일 갱신",   cta: "지금 풀기",    route: "/daily-quiz" },
-  { id: "daily-reading", tint: "blue",   color: "blue",   label: "독해<br/>일러스트",  tag: "무료 · 매일", title: "일일 독해",    meta: "다양한 영역 정독 훈련 · 약 10분", cta: "지금 읽기",    route: "/daily-reading" },
-  { id: "diagnostic",    tint: "green",  color: "green",  label: "진단<br/>일러스트",  tag: "1회 무료",    title: "진단 테스트",  meta: "10대 역량 분석 · 약 50분 · 학부모님께도 결과", cta: "응시하기", route: "/diagnostic/v2" },
-  { id: "battle",        tint: "red",    color: "red",    label: "대결<br/>일러스트",  tag: "무료 · LIVE", title: "대결 라이브",  meta: "라운드제 서바이벌 · 친구·AI 대결", live: true, cta: "도전하기", route: "/duel" },
+  { id: "daily-quiz",    tint: "yellow", color: "yellow", label: "퀴즈<br/>일러스트",  image: "images/student-home/free-card-daily-quiz.png",    tag: "무료 · 매일", title: "일일 퀴즈",    meta: "10문제 · 약 5분 · 매일 갱신",   cta: "지금 풀기",    route: "/daily-quiz" },
+  { id: "daily-reading", tint: "blue",   color: "blue",   label: "독해<br/>일러스트",  image: "images/student-home/free-card-daily-reading.png", tag: "무료 · 매일", title: "일일 독해",    meta: "다양한 영역 정독 훈련 · 약 10분", cta: "지금 읽기",    route: "/daily-reading" },
+  { id: "diagnostic",    tint: "green",  color: "green",  label: "진단<br/>일러스트",  image: "images/student-home/free-card-diagnostic.png",    tag: "1회 무료",    title: "진단 테스트",  meta: "10대 역량 분석 · 약 50분 · 학부모님께도 결과", cta: "응시하기", route: "/diagnostic/v2" },
+  { id: "battle",        tint: "red",    color: "red",    label: "대결<br/>일러스트",  image: "images/student-home/free-card-duel.png",          tag: "무료 · LIVE", title: "대결 라이브",  meta: "라운드제 서바이벌 · 친구·AI 대결", live: true, cta: "도전하기", route: "/duel" },
 ];
 
 // 무료 회원용 잠긴 카드 (4장)
 const LOCKED_PREVIEW_CARDS = [
-  { id: "ai-tutor",     color: "cream",  label: "AI<br/>튜터",      title: "AI 튜터",                  tagline: "1:1 학습 코치 · 어휘·문법 즉답, 사진으로도 물어볼 수 있어요" },
-  { id: "study-modes",  color: "green",  label: "12레벨<br/>심화",  title: "농장별 모드 + 프로 모드",  tagline: "교재와 연동한 12레벨 심화 학습 · 문학·비문학·어휘 단계별 마스터" },
-  { id: "writing",      color: "blue",   label: "글쓰기<br/>첨삭",  title: "글쓰기 첨삭",              tagline: "AI가 글을 다듬어줘요 · 어휘 추천, 문장 흐름까지 친절하게" },
-  { id: "analytics",    color: "purple", label: "분석<br/>리포트",  title: "통합 분석표",              tagline: "모든 학습 데이터 한눈에 · 강·약점, 학부모 리포트까지" },
+  { id: "ai-tutor",     color: "cream",  label: "AI<br/>튜터",      image: "images/student-home/locked-ai-tutor.png",     title: "AI 튜터",                  tagline: "1:1 학습 코치 · 어휘·문법 즉답, 사진으로도 물어볼 수 있어요" },
+  { id: "study-modes",  color: "green",  label: "12레벨<br/>심화",  image: "images/student-home/locked-study-modes.png",  title: "농장별 모드 + 프로 모드",  tagline: "교재와 연동한 12레벨 심화 학습 · 문학·비문학·어휘 단계별 마스터" },
+  { id: "writing",      color: "blue",   label: "글쓰기<br/>첨삭",  image: "images/student-home/locked-writing.png",      title: "글쓰기 첨삭",              tagline: "AI가 글을 다듬어줘요 · 어휘 추천, 문장 흐름까지 친절하게" },
+  { id: "analytics",    color: "purple", label: "분석<br/>리포트",  image: "images/student-home/locked-analytics.png",    title: "통합 분석표",              tagline: "모든 학습 데이터 한눈에 · 강·약점, 학부모 리포트까지" },
 ];
 
 const TABS = [
@@ -247,7 +247,14 @@ const SIDEBAR_ROUTES = {
 
 // ─── 컴포넌트 ───────────────────────────────────────────────────────
 
-function ClaySpan({ color = "", label = "", className = "", style }) {
+function ClaySpan({ color = "", label = "", className = "", style, image, alt = "" }) {
+  if (image) {
+    return (
+      <span className={`clay clay-${color} clay-img ${className}`} style={style} aria-hidden={alt ? undefined : "true"}>
+        <img src={import.meta.env.BASE_URL + image} alt={alt} />
+      </span>
+    );
+  }
   return (
     <span className={`clay clay-${color} ${className}`} aria-hidden="true" style={style}>
       <span className="lbl" dangerouslySetInnerHTML={{ __html: label }} />
@@ -1313,21 +1320,21 @@ function PaidDashboard({ student, plan, onPlanCellClick, navigate, navDaily, onS
 
   // 큰 카드 4종 — 무료 회원과 동일하지만 모두 활성
   const PAID_CARDS = [
-    { id: "daily-quiz", tint: "yellow", color: "yellow", label: "퀴즈<br/>일러스트", tag: "매일", title: "일일 퀴즈", meta: "10문제 · 약 5분", cta: "지금 풀기", route: "/daily-quiz", admin: true },
-    { id: "daily-reading", tint: "blue", color: "blue", label: "독해<br/>일러스트", tag: "매일", title: "일일 독해", meta: "정독 훈련 · 약 10분", cta: "지금 읽기", route: "/daily-reading", admin: true },
-    { id: "farm-mode", tint: "green", color: "green", label: "농장별<br/>모드", tag: "심화", title: "농장별 모드", meta: "교재와 연동한 단계별 학습", cta: "이어가기", route: "/farm-mode", admin: true },
-    { id: "pro-mode", tint: "purple", color: "purple", label: "프로<br/>모드", tag: "고난이도", title: "프로 모드", meta: "지문 정독 + 추론·논리", cta: "도전하기", route: "/pro-mode", admin: true },
+    { id: "daily-quiz", tint: "yellow", color: "yellow", label: "퀴즈<br/>일러스트", image: "images/student-home/paid-card-daily-quiz.png", tag: "매일", title: "일일 퀴즈", meta: "10문제 · 약 5분", cta: "지금 풀기", route: "/daily-quiz", admin: true },
+    { id: "daily-reading", tint: "blue", color: "blue", label: "독해<br/>일러스트", image: "images/student-home/paid-card-daily-reading.png", tag: "매일", title: "일일 독해", meta: "정독 훈련 · 약 10분", cta: "지금 읽기", route: "/daily-reading", admin: true },
+    { id: "farm-mode", tint: "green", color: "green", label: "농장별<br/>모드", image: "images/student-home/paid-card-farm-mode.png", tag: "심화", title: "농장별 모드", meta: "교재와 연동한 단계별 학습", cta: "이어가기", route: "/farm-mode", admin: true },
+    { id: "pro-mode", tint: "purple", color: "purple", label: "프로<br/>모드", image: "images/student-home/paid-card-pro-mode.png", tag: "고난이도", title: "프로 모드", meta: "지문 정독 + 추론·논리", cta: "도전하기", route: "/pro-mode", admin: true },
   ];
 
   return (
     <>
       {/* 인사 + 시즌 점수 */}
       <section className="greeting-block" data-od-id="greeting" aria-label="인사">
-        <div className="greeting-art" role="img" aria-label="새싹과 농장 일러스트">
-          <div className="ph">
-            <span className="ph-emoji" aria-hidden="true">🌱</span>
-            <span className="ph-tag">FARM ART</span>
-          </div>
+        <div className="greeting-art">
+          <img
+            src={import.meta.env.BASE_URL + "images/student-home/student-greeting-farm-morning.png"}
+            alt="아침의 작은 농장 일러스트"
+          />
         </div>
         <div className="greeting-text">
           <span className="greeting-eyebrow"><span className="dot" aria-hidden="true"></span>오늘의 농장</span>
@@ -1404,7 +1411,7 @@ function PaidDashboard({ student, plan, onPlanCellClick, navigate, navDaily, onS
             aria-label={`${c.title} — ${c.cta}`}
             onClick={() => (c.admin ? navDaily(c.route) : navigate(c.route))}
           >
-            <ClaySpan color={c.color} label={c.label} />
+            <ClaySpan color={c.color} label={c.label} image={c.image} />
             <span className="body-text">
               <span className="free-tag">{c.tag}</span>
               <h3>{c.title}</h3>
@@ -1447,11 +1454,11 @@ function FreeMain({ student, onCardClick, onLockedClick, onSubscribe, onShowInve
   return (
     <>
       <section className="greeting-block" data-od-id="greeting" aria-label="인사">
-        <div className="greeting-art" role="img" aria-label="새싹과 농장 일러스트 — 아침의 농장">
-          <div className="ph">
-            <span className="ph-emoji" aria-hidden="true">🌱</span>
-            <span className="ph-tag">FARM ART</span>
-          </div>
+        <div className="greeting-art">
+          <img
+            src={import.meta.env.BASE_URL + "images/student-home/student-greeting-farm-morning.png"}
+            alt="아침의 작은 농장 일러스트"
+          />
         </div>
         <div className="greeting-text">
           <span className="greeting-eyebrow"><span className="dot" aria-hidden="true"></span>오늘의 농장</span>
@@ -1487,7 +1494,7 @@ function FreeMain({ student, onCardClick, onLockedClick, onSubscribe, onShowInve
             aria-label={`${c.title} — ${c.cta}`}
             onClick={() => onCardClick(c)}
           >
-            <ClaySpan color={c.color} label={c.label} />
+            <ClaySpan color={c.color} label={c.label} image={c.image} />
             <span className="body-text">
               <span className="free-tag">{c.tag}</span>
               <h3>{c.title}</h3>
@@ -1515,7 +1522,7 @@ function FreeMain({ student, onCardClick, onLockedClick, onSubscribe, onShowInve
             role="listitem"
             onClick={() => onLockedClick(c.title)}
           >
-            <ClaySpan color={c.color} label={c.label} />
+            <ClaySpan color={c.color} label={c.label} image={c.image} />
             <span className="lock-overlay" aria-hidden="true"></span>
             <span className="text">
               <h3>{c.title} <span className="pro-tag">PRO</span></h3>

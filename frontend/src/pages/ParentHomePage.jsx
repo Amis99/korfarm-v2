@@ -500,6 +500,11 @@ function ParentHomePage() {
           <main className="center" data-od-id="center">
             {/* 1) WELCOME + CHILD SUMMARY */}
             <section className="welcome" data-od-id="welcome">
+              <img
+                className="welcome-hero"
+                src={import.meta.env.BASE_URL + "images/parent-home/parent-welcome-hero.png"}
+                alt="자녀의 학습을 함께 살피는 학부모 일러스트"
+              />
               <div className="welcome-text">
                 <span className="welcome-eyebrow">
                   <span className="dot" aria-hidden="true"></span>
@@ -583,8 +588,13 @@ function ParentHomePage() {
             </div>
             <div className="chat-list" role="list">
               {chatPreview.length === 0 ? (
-                <div style={{ margin: "0 12px", padding: 16, background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 16, fontSize: 13, color: "var(--muted)", textAlign: "center" }}>
-                  최근 대화가 없습니다. 첫 메시지를 남겨보세요.
+                <div className="parent-empty">
+                  <img
+                    src={import.meta.env.BASE_URL + "images/parent-home/parent-empty-chat.png"}
+                    alt=""
+                    className="parent-empty-illu"
+                  />
+                  <p>최근 대화가 없습니다. 첫 메시지를 남겨보세요.</p>
                 </div>
               ) : chatPreview.map((row, idx) => {
                 const author = row.userName || row.senderName || row.author || row.userId || "익명";
@@ -628,8 +638,13 @@ function ParentHomePage() {
             </div>
             <div className="timeline">
               {childActivity.length === 0 ? (
-                <div style={{ margin: "0 12px", padding: 16, background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 16, fontSize: 13, color: "var(--muted)", textAlign: "center" }}>
-                  최근 학습 활동이 없습니다.
+                <div className="parent-empty">
+                  <img
+                    src={import.meta.env.BASE_URL + "images/parent-home/parent-empty-activity.png"}
+                    alt=""
+                    className="parent-empty-illu"
+                  />
+                  <p>최근 학습 활동이 없습니다.</p>
                 </div>
               ) : (
                 <div className="timeline-items">
@@ -721,9 +736,14 @@ function ParentHomePage() {
                 </Link>
               </div>
               {pendingPlan.length === 0 ? (
-                <p style={{ fontSize: 12, color: "var(--muted)", margin: 0 }}>
-                  오늘 할 학습이 모두 완료됐어요.
-                </p>
+                <div className="parent-empty parent-empty--small">
+                  <img
+                    src={import.meta.env.BASE_URL + "images/parent-home/parent-pending-empty.png"}
+                    alt=""
+                    className="parent-empty-illu parent-empty-illu--small"
+                  />
+                  <p>오늘 할 학습이 모두 완료됐어요.</p>
+                </div>
               ) : (
                 <>
                   <div className="pending-list">
