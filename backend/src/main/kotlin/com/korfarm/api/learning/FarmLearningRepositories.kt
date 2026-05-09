@@ -31,6 +31,15 @@ interface FarmLearningLogRepository : JpaRepository<FarmLearningLogEntity, Strin
         end: java.time.LocalDateTime
     ): List<FarmLearningLogEntity>
 
+    /** 통합 분석표 일일 섹션 — content_type 별 완료 로그 (DAILY_QUIZ / DAILY_READING) */
+    fun findByUserIdAndContentTypeAndStatusAndCompletedAtBetween(
+        userId: String,
+        contentType: String,
+        status: String,
+        start: java.time.LocalDateTime,
+        end: java.time.LocalDateTime
+    ): List<FarmLearningLogEntity>
+
     @Query(
         "SELECT f.contentId AS contentId, COUNT(f) AS cnt " +
         "FROM FarmLearningLogEntity f " +

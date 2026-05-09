@@ -438,18 +438,39 @@ class UnifiedReportService(
 
     // 일일 퀴즈 / 일일 독해
     private fun buildDailySection(userId: String, activityType: String, start: LocalDateTime, end: LocalDateTime): DailyActivitySection {
+        // 일일 풀이는 두 경로로 저장됨 — 둘 다 합산해야 함
+        //  1) learning_attempts: /v1/learning/daily-quiz 전용 엔드포인트
+        //  2) farm_learning_logs: 콘텐츠 풀이 페이지(EngineShell 등) — content_type=DAILY_QUIZ/DAILY_READING
         val attempts = learningAttemptRepo.findByUserIdAndActivityTypeAndSubmittedAtBetween(userId, activityType, start, end)
-        if (attempts.isEmpty()) {
+        val contentType = when (activityType) {
+            "daily_quiz" -> "DAILY_QUIZ"
+            "daily_reading" -> "DAILY_READING"
+            else -> activityType.uppercase()
+        }
+        val farmLogs = farmLearningLogRepo.findByUserIdAndContentTypeAndStatusAndCompletedAtBetween(
+            userId, contentType, "COMPLETED", start, end
+        )
+
+        if (attempts.isEmpty() && farmLogs.isEmpty()) {
             return DailyActivitySection(0, 0.0, 0.0, emptyList())
         }
 
-        val items = attempts.map { a ->
+        val attemptItems = attempts.map { a ->
             DailyActivityItem(
                 contentId = a.contentId,
                 score = a.score,
                 submittedAt = a.submittedAt?.format(dtFmt)
             )
         }
+        val farmItems = farmLogs.map { f ->
+            DailyActivityItem(
+                contentId = f.contentId,
+                score = f.accuracy ?: f.score,
+                submittedAt = f.completedAt?.format(dtFmt)
+            )
+        }
+        // 같은 (contentId, 날짜) 가 두 소스에 동시에 들어가면 dedup (양쪽 동시 기록이 들어가는 미래 분기 대비)
+        val items = (attemptItems + farmItems).distinctBy { (it.contentId ?: "") + (it.submittedAt?.take(10) ?: "") }
 
         val scores = items.mapNotNull { it.score?.toDouble() }
         val avg = if (scores.isNotEmpty()) round2(scores.average()) else 0.0
