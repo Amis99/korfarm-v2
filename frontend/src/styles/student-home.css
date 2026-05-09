@@ -1202,6 +1202,26 @@
     /* 작물 지갑 grid item */
     .student-home .wallet-item { min-width: 0; }
 
+    /* 잔여 잘림 fix — 첫 화면(헤더·검색·계획표) 미세 잘림 */
+    /* hdr-actions 자체 폭 제한 (wrap 강제) */
+    .student-home .hdr-actions { max-width: 100%; min-width: 0; }
+    /* 학습 계획표 plan row 안 우측 "오늘" 배지 보호 */
+    .student-home .paid-dash-plan-row { min-width: 0; }
+    .student-home .paid-dash-plan-row .plan-text { min-width: 0; flex: 1 1 0; }
+    .student-home .paid-dash-plan-row .plan-text .plan-title,
+    .student-home .paid-dash-plan-row .plan-text .plan-meta {
+      min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .student-home .paid-dash-plan-row .plan-due { flex-shrink: 0; min-width: 0; }
+    /* 섹션 헤더의 .more 가 우측 padding 안에 있도록 */
+    .student-home .paid-dash-section-head .more {
+      flex-shrink: 0; min-width: 0; white-space: nowrap;
+    }
+    /* widget head 의 widget-cta(상점 ›) 도 같이 보호 */
+    .student-home .widget-head .widget-cta {
+      flex-shrink: 0; min-width: 0; white-space: nowrap;
+    }
+
     /* ─── grid container 자체의 min-width:auto 차단
      * .app/.body/.center 가 grid item 인데 default min-width:auto 라
      * 자식 intrinsic 폭으로 부모가 viewport 밖으로 확장됨. 강제 수축. */
