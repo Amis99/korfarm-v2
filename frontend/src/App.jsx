@@ -1,38 +1,7 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Link, Navigate, Route, Routes, useLocation, useParams } from "react-router-dom";
 import { ProtectedRoute, AdminRoute } from "./components/ProtectedRoute";
 import { useAuth } from "./hooks/useAuth";
-
-// 임시 디버그 — 모바일 잘림 진단용. 진단 끝나면 제거.
-function ViewportDebug() {
-  const [info, setInfo] = useState({ w: 0, sw: 0, dpr: 1, vv: 0 });
-  useEffect(() => {
-    const upd = () => setInfo({
-      w: window.innerWidth,
-      sw: document.body.scrollWidth,
-      dpr: window.devicePixelRatio,
-      vv: window.visualViewport ? Math.round(window.visualViewport.width) : 0,
-    });
-    upd();
-    window.addEventListener("resize", upd);
-    window.visualViewport?.addEventListener("resize", upd);
-    return () => {
-      window.removeEventListener("resize", upd);
-      window.visualViewport?.removeEventListener("resize", upd);
-    };
-  }, []);
-  return (
-    <div style={{
-      position: "fixed", top: 0, right: 0, zIndex: 99999,
-      background: "rgba(255, 0, 0, 0.85)", color: "white",
-      padding: "2px 6px", fontSize: 10, fontWeight: 700,
-      fontFamily: "monospace", pointerEvents: "none",
-      borderBottomLeftRadius: 4,
-    }}>
-      W{info.w} S{info.sw} V{info.vv} D{info.dpr}
-    </div>
-  );
-}
 
 // 핵심 페이지 (정적 import - 초기 로딩 필수)
 import LandingPage from "./pages/LandingPage";
@@ -237,7 +206,6 @@ const A = (page) => <AdminRoute>{page}</AdminRoute>;
 function App() {
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
-      <ViewportDebug />
       <GlobalLogo />
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
