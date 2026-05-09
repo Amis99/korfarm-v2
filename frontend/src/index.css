@@ -91,23 +91,30 @@ html, body {
  * 클래스로 max-width 제한을 풀 수 있게 escape hatch 제공. */
 @media (max-width: 767px) {
   html, body {
-    overflow-x: hidden;
+    width: 100%;
     max-width: 100%;
+    overflow-x: hidden !important;
   }
-  #root, #root > * {
+  body { position: relative; }
+  #root, #root > *, .app, main {
     max-width: 100%;
     box-sizing: border-box;
+    overflow-x: hidden;
   }
-  /* 미디어 자동 축소 — 큰 이미지/SVG/캔버스가 폭을 초과해 잘리지 않도록 */
+  /* 미디어 자동 축소 */
   img, video, canvas, svg:not([width]), iframe {
     max-width: 100%;
     height: auto;
   }
-  /* 표·코드블록 — 자체 가로 스크롤 유지하되 컨테이너는 폭 제한 */
-  table, pre {
+  /* 표·코드블록 */
+  table, pre, code {
     max-width: 100%;
   }
-  /* 가로 스크롤이 본질적으로 필요한 컨테이너만 글로벌 max-width 룰 escape */
+  pre, code {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* 의도적 가로 스크롤 escape */
   .allow-x-scroll {
     max-width: none !important;
     overflow-x: auto;

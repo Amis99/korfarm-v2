@@ -1,0 +1,176 @@
+/* ─────────────────── 모바일 가로 잘림 통합 fix
+ *
+ * 목적: 360~767px 폭에서 발생하던 가로 스크롤·잘림을 일괄 차단.
+ *   글로벌 안전망(index.css) 만으로 부족해 페이지별 셀렉터에 직접 override.
+ * 정책: 데스크톱 레이아웃은 그대로 두고 @media (max-width: 767px) 에서만 강제.
+ * ─────────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+
+  /* ─── 0. 공통 — 자식 요소가 부모 폭 초과하지 않도록 강한 안전망 ─── */
+  body, body * {
+    box-sizing: border-box;
+  }
+
+  /* ─── 1. AgentShell (MyTutorPage admin.css) — 3열 grid 모바일 stack ─── */
+  .agent-shell {
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .agent-sidebar,
+  .agent-side {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  .agent-main {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px !important;
+    overflow-x: hidden;
+  }
+  .agent-msg {
+    max-width: 92% !important;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  /* ─── 2. 학생 홈 그리드 — 3열 → 모바일 2열, 음수 마진 제거 ─── */
+  .wallet-grid,
+  .parent-wallet-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+  .balance-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+  .rank-row.me {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .mobile-features,
+  .chat-shell,
+  .chat-shell-fullbleed {
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .child-menu {
+    min-width: auto !important;
+    max-width: calc(100vw - 16px) !important;
+    left: auto !important;
+    right: 0 !important;
+  }
+  .welcome {
+    grid-template-columns: 1fr !important;
+  }
+  .welcome-hero {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* ─── 3. 통합 분석표 — auto-fill grid 폭 관대하게 ─── */
+  .activity-cards,
+  .study-plan-summary,
+  .ur-writing-cards {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
+    gap: 8px !important;
+  }
+  .ur-sp-matrix .ur-sp-scope {
+    width: 64px !important;
+    font-size: 10.5px !important;
+    padding: 4px 3px !important;
+  }
+  .ur-sp-matrix th,
+  .ur-sp-matrix td {
+    font-size: 10.5px !important;
+    padding: 4px 2px !important;
+  }
+  .ur-comp-radar svg {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* ─── 4. 페르소나 선택 — character-art 폭 ─── */
+  .character-card {
+    padding: 14px !important;
+  }
+  .character-art {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* ─── 5. 학습 엔진 — 모달 + 누적 카드 절대 위치 ─── */
+  .question-modal {
+    width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+    left: 12px !important;
+    right: 12px !important;
+  }
+  .cum-card.active::before {
+    left: 0 !important;
+    margin-left: -2px !important;
+  }
+  .cum-card-passage pre,
+  .cum-card-passage code,
+  .cum-card-passage table {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 12px !important;
+  }
+
+  /* ─── 6. 시작 페이지 — 무조건 3열 grid 깨기 ─── */
+  .start-learn-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+  .start-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* ─── 7. 상점·구독 — 사이드바 + 제품 그리드 ─── */
+  .commerce-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .commerce-products {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  /* ─── 8. 커뮤니티 채팅 — 말풍선·이미지 ─── */
+  .chat-bubble {
+    max-width: calc(100% - 40px) !important;
+    padding: 8px 14px 8px 10px;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .chat-image {
+    max-width: 180px !important;
+    max-height: 180px !important;
+  }
+
+  /* ─── 9. 360px 미만 초소형에서 1열로 더 축소 ─── */
+}
+
+@media (max-width: 380px) {
+  .wallet-grid,
+  .parent-wallet-grid,
+  .balance-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .start-learn-grid,
+  .start-stats,
+  .commerce-products {
+    grid-template-columns: 1fr !important;
+  }
+  .activity-cards,
+  .study-plan-summary,
+  .ur-writing-cards {
+    grid-template-columns: 1fr !important;
+  }
+}

@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import './App.css'
+import './styles/mobile-fixes.css'
 import App from './App.jsx'
 
 // ── 청크 로드 실패 시 자동 새로고침 ──
