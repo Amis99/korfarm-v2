@@ -1169,61 +1169,6 @@
       order: 99;
     }
     .top-bar > * { min-width: 0; }
-    /* 모든 폰 폭(360~430px)에서 좌우 12px 안전 여백 보장.
-     * 컨테이너에 padding-inline 을 직접 주고, 자식 섹션 좌우 margin 은 0 으로 통일.
-     * 자식의 width:100% 는 부모 padding 안쪽으로 자동 fit. */
-    .student-home {
-      padding-left: 12px;
-      padding-right: 12px;
-      padding-inline: 12px;
-      max-width: 100vw;
-      width: 100%;
-      overflow-x: hidden;
-      box-sizing: border-box;
-    }
-    .student-home .paid-dash-section,
-    .student-home .greeting-block,
-    .student-home .paid-dash-search,
-    .student-home .free-grid,
-    .student-home .locked-grid,
-    .student-home .free-section-head,
-    .student-home .paid-dash-quick,
-    .student-home .widget,
-    .student-home .mode-toggle,
-    .student-home .chat-shell,
-    .student-home .chat-shell-fullbleed {
-      margin-left: 0;
-      margin-right: 0;
-    }
-    /* top-bar 는 backdrop-filter 가 viewport 끝까지 가야 자연스러우므로 컨테이너 padding 상쇄 */
-    .student-home .top-bar {
-      margin-left: -12px;
-      margin-right: -12px;
-      padding-left: 14px;
-      padding-right: 14px;
-    }
-    .student-home .paid-dash-section-head {
-      flex-wrap: nowrap;
-      gap: 8px;
-      min-width: 0;
-    }
-    .student-home .paid-dash-section-head h2 {
-      min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .student-home .paid-dash-section-head .more {
-      flex-shrink: 0;
-      white-space: nowrap;
-    }
-    /* 큰 카드 우측 cta 버튼이 카드 우측 끝에 닿지 않도록 */
-    .student-home .big-card {
-      padding-right: 16px;
-    }
-    .student-home .big-card .cta {
-      margin-right: 0;
-    }
   }
 
   /* TABLET (768–1199px) */
