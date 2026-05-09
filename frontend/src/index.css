@@ -78,6 +78,14 @@ html, body {
   overflow-x: hidden;
 }
 
+/* Chrome Android · Samsung Internet 의 자동 텍스트 확대(Text Boosting) 차단.
+ * 폰 시스템의 글자 크기·접근성 설정이 100% 가 아닐 때 모든 padding/layout 이
+ * 비례 확장돼 viewport 초과 → 우측 잘림 사고 발생. 100% 로 고정해 글로벌 차단. */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 #root {
   min-height: 100vh;
 }
