@@ -1428,19 +1428,19 @@ function PaidDashboard({ student, plan, onPlanCellClick, navigate, navDaily, onS
       </div>
       <div className="paid-dash-quick">
         <button type="button" className="paid-dash-quick-card" onClick={() => navigate("/writing")}>
-          <ClaySpan color="blue" label="쓰기" />
+          <ClaySpan color="blue" label="쓰기" image="images/student-home/quick-writing-correction.png" />
           <span className="qc-text"><strong>글쓰기 첨삭</strong><span>지식과 지혜</span></span>
         </button>
         <button type="button" className="paid-dash-quick-card" onClick={() => navigate("/report")}>
-          <ClaySpan color="purple" label="분석" />
+          <ClaySpan color="purple" label="분석" image="images/student-home/quick-unified-analysis.png" />
           <span className="qc-text"><strong>통합 분석표</strong><span>역량·영역·일별</span></span>
         </button>
         <button type="button" className="paid-dash-quick-card" onClick={() => navigate("/duel")}>
-          <ClaySpan color="red" label="대결" />
+          <ClaySpan color="red" label="대결" image="images/student-home/quick-duel-live.png" />
           <span className="qc-text"><strong>대결 라이브</strong><span>친구·AI</span></span>
         </button>
         <button type="button" className="paid-dash-quick-card" onClick={() => navigate("/ranking")}>
-          <ClaySpan color="green" label="랭킹" />
+          <ClaySpan color="green" label="랭킹" image="images/student-home/quick-season-ranking.png" />
           <span className="qc-text"><strong>시즌 랭킹</strong><span>{student.rankPos > 0 ? `${student.rankPos}위 / ${student.rankTotal.toLocaleString()}명` : "아직 점수 없음"}</span></span>
         </button>
       </div>
@@ -1565,7 +1565,15 @@ function WalletWidget({ wallet, onItemClick, onCharge, compact = false }) {
             onClick={() => onItemClick(w.key)}
             onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onItemClick(w.key); } }}
           >
-            <ClaySpan color={w.color} label={w.name} />
+            <ClaySpan
+              color={w.color}
+              label={w.name}
+              image={(() => {
+                if (!w.key) return undefined;
+                const slug = w.key === "grapefruit" ? "grapefruit" : w.key.replace(/^crop_/, "");
+                return `images/student-home/wallet-crop-${slug}.png`;
+              })()}
+            />
             <span className="wallet-name">{w.name}</span>
             <span className="wallet-count">{w.count}</span>
           </div>
