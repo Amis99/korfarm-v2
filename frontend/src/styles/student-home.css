@@ -1151,7 +1151,24 @@
     .hdr-user { padding: 4px; border-radius: 50%; background: transparent; border: none; gap: 0; }
     .brand .ver { display: none; }
     .brand .name { font-size: 15px; }
-    .top-bar { gap: 6px; padding: calc(env(safe-area-inset-top) + 10px) 10px 10px; }
+    .top-bar {
+      gap: 6px;
+      padding: calc(env(safe-area-inset-top) + 10px) 10px 10px;
+      flex-wrap: wrap;             /* 좁은 폭에서 줄바꿈 허용 */
+      min-width: 0;
+    }
+    .hdr-actions {
+      flex-wrap: wrap;
+      flex-shrink: 1;
+      min-width: 0;
+      gap: 2px;
+    }
+    .admin-override-row {
+      flex-basis: 100%;            /* 관리자 학생 모드 진입 시 override 행을 다음 줄로 */
+      margin-top: 4px;
+      order: 99;
+    }
+    .top-bar > * { min-width: 0; }
   }
 
   /* TABLET (768–1199px) */
