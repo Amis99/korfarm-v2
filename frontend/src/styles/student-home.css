@@ -1169,6 +1169,27 @@
       order: 99;
     }
     .top-bar > * { min-width: 0; }
+    /* 좁은 폰(≤360px)에서 좌우 margin 축소 + 섹션 헤더 wrap */
+    .student-home .paid-dash-section,
+    .student-home .greeting-block,
+    .student-home .paid-dash-search,
+    .student-home .free-grid,
+    .student-home .locked-grid,
+    .student-home .free-section-head {
+      margin-left: 12px;
+      margin-right: 12px;
+    }
+    .student-home .paid-dash-section-head {
+      flex-wrap: wrap;
+      gap: 4px 8px;
+      min-width: 0;
+    }
+    .student-home .paid-dash-section-head h2 { min-width: 0; }
+    .student-home .paid-dash-section-head .more {
+      flex-shrink: 0;
+      white-space: nowrap;
+      margin-left: auto;
+    }
   }
 
   /* TABLET (768–1199px) */

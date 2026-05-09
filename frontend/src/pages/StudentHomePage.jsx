@@ -1330,10 +1330,13 @@ function PaidDashboard({ student, plan, onPlanCellClick, navigate, navDaily, onS
     <>
       {/* 인사 + 시즌 점수 */}
       <section className="greeting-block" data-od-id="greeting" aria-label="인사">
-        <div className="greeting-art">
+        <div className={`greeting-art${student.profileImageUrl ? " has-profile" : ""}`}>
           <img
-            src={import.meta.env.BASE_URL + "images/student-home/student-greeting-farm-morning.png"}
-            alt="아침의 작은 농장 일러스트"
+            src={
+              student.profileImageUrl
+                || import.meta.env.BASE_URL + "images/student-home/student-greeting-farm-morning.png"
+            }
+            alt={student.profileImageUrl ? `${student.name} 학생 프로필` : "아침의 작은 농장 일러스트"}
           />
         </div>
         <div className="greeting-text">
@@ -1454,10 +1457,13 @@ function FreeMain({ student, onCardClick, onLockedClick, onSubscribe, onShowInve
   return (
     <>
       <section className="greeting-block" data-od-id="greeting" aria-label="인사">
-        <div className="greeting-art">
+        <div className={`greeting-art${student.profileImageUrl ? " has-profile" : ""}`}>
           <img
-            src={import.meta.env.BASE_URL + "images/student-home/student-greeting-farm-morning.png"}
-            alt="아침의 작은 농장 일러스트"
+            src={
+              student.profileImageUrl
+                || import.meta.env.BASE_URL + "images/student-home/student-greeting-farm-morning.png"
+            }
+            alt={student.profileImageUrl ? `${student.name} 학생 프로필` : "아침의 작은 농장 일러스트"}
           />
         </div>
         <div className="greeting-text">
