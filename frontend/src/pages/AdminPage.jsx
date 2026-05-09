@@ -43,6 +43,7 @@ function AdminPage() {
   const [briefing, setBriefing] = useState(null);
   const [agentStatus, setAgentStatus] = useState(null);
   const [suspended, setSuspended] = useState(false);
+  const [showSessions, setShowSessions] = useState(false);
 
   const scrollRef = useRef(null);
 
@@ -211,52 +212,28 @@ function AdminPage() {
   return (
     <AdminLayout>
       <div className="agent-shell">
-        <aside className="agent-sidebar">
-          <button type="button" className="agent-new-btn" onClick={startNewSession}>
-            + 새 대화
-          </button>
-          <div className="agent-sessions">
-            {sessions.length === 0 && (
-              <p className="agent-empty">아직 대화가 없습니다.</p>
-            )}
-            {sessions.map((s) => (
-              <div
-                key={s.id}
-                className={`agent-session-row ${s.id === activeSessionId ? "active" : ""}`}
-                onClick={() => setActiveSessionId(s.id)}
-              >
-                <span className="agent-session-title">{s.title || "(제목 없음)"}</span>
-                <span style={{ display: "block", fontSize: 11, color: "#9ca3af", marginTop: 2 }}>
-                  {formatSessionTime(s.updatedAt || s.updated_at || s.createdAt || s.created_at)}
-                </span>
-                <div className="agent-session-actions">
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      renameSession(s.id);
-                    }}
-                  >
-                    이름
-                  </button>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      archiveSession(s.id);
-                    }}
-                  >
-                    보관
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </aside>
-
         <main className="agent-main">
           <header className="agent-main-header">
-            <h1>AI 비서</h1>
+            <div className="agent-main-header-row">
+              <h1>AI 비서</h1>
+              <div className="agent-main-actions">
+                <button
+                  type="button"
+                  className="agent-header-btn"
+                  onClick={() => setShowSessions(true)}
+                  aria-label="대화 목록 열기"
+                >
+                  📋 대화 목록 ({sessions.length})
+                </button>
+                <button
+                  type="button"
+                  className="agent-header-btn primary"
+                  onClick={startNewSession}
+                >
+                  ＋ 새 대화
+                </button>
+              </div>
+            </div>
             <p>
               자연어로 작업을 지시하시면 비서가 학습 계획표·학생·수강반을 처리합니다.
               데이터를 변경하는 작업은 실행 직전 확인을 받습니다.
@@ -454,6 +431,84 @@ function AdminPage() {
           </section>
         </aside>
       </div>
+
+      {showSessions && (
+        <div
+          className="agent-sessions-modal-overlay"
+          role="dialog"
+          aria-label="대화 목록"
+          onClick={() => setShowSessions(false)}
+        >
+          <div
+            className="agent-sessions-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <header className="agent-sessions-modal-head">
+              <h2>대화 목록</h2>
+              <button
+                type="button"
+                className="agent-sessions-close"
+                onClick={() => setShowSessions(false)}
+                aria-label="닫기"
+              >
+                ✕
+              </button>
+            </header>
+            <div className="agent-sessions-modal-body">
+              <button
+                type="button"
+                className="agent-new-btn"
+                onClick={() => {
+                  startNewSession();
+                  setShowSessions(false);
+                }}
+              >
+                ＋ 새 대화 시작
+              </button>
+              <div className="agent-sessions">
+                {sessions.length === 0 && (
+                  <p className="agent-empty">아직 대화가 없습니다.</p>
+                )}
+                {sessions.map((s) => (
+                  <div
+                    key={s.id}
+                    className={`agent-session-row ${s.id === activeSessionId ? "active" : ""}`}
+                    onClick={() => {
+                      setActiveSessionId(s.id);
+                      setShowSessions(false);
+                    }}
+                  >
+                    <span className="agent-session-title">{s.title || "(제목 없음)"}</span>
+                    <span style={{ display: "block", fontSize: 11, color: "#9ca3af", marginTop: 2 }}>
+                      {formatSessionTime(s.updatedAt || s.updated_at || s.createdAt || s.created_at)}
+                    </span>
+                    <div className="agent-session-actions">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          renameSession(s.id);
+                        }}
+                      >
+                        이름
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          archiveSession(s.id);
+                        }}
+                      >
+                        보관
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </AdminLayout>
   );
 }
