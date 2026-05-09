@@ -1222,9 +1222,7 @@
       flex-shrink: 0; min-width: 0; white-space: nowrap;
     }
 
-    /* ─── grid container 자체의 min-width:auto 차단
-     * .app/.body/.center 가 grid item 인데 default min-width:auto 라
-     * 자식 intrinsic 폭으로 부모가 viewport 밖으로 확장됨. 강제 수축. */
+    /* ─── grid container 자체의 min-width:auto 차단 (margin 0 박스만) */
     .student-home .top-bar,
     .student-home .body,
     .student-home .center,
@@ -1233,13 +1231,19 @@
     .student-home .paid-dash-quick,
     .student-home .widgets-stack.mobile-widgets,
     .student-home .tab-bar,
-    .student-home .paid-dash-section,
-    .student-home .greeting-block,
-    .student-home .paid-dash-search,
     .student-home .locked-grid {
       width: 100%;
       min-width: 0;
       max-width: 100vw;
+    }
+    /* 좌우 margin 18px 갖는 박스는 width:100% 주면 폭 초과 → margin 좁히기만 */
+    .student-home .greeting-block,
+    .student-home .paid-dash-search,
+    .student-home .paid-dash-section {
+      margin-left: 12px;
+      margin-right: 12px;
+      min-width: 0;
+      box-sizing: border-box;
     }
   }
 

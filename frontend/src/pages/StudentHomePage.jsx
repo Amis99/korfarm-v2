@@ -1365,7 +1365,7 @@ function PaidDashboard({ student, plan, onPlanCellClick, navigate, navDaily, onS
           type="search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="국어농장 학습 검색 — 지문 제목·작가·키워드"
+          placeholder="검색"
           aria-label="국어농장 학습 검색"
         />
         <button type="submit" className="paid-dash-search-btn">검색</button>
