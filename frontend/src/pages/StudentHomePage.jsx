@@ -984,7 +984,7 @@ function StudentHomePage() {
               ) : (
                 <>
                   <WalletWidget wallet={wallet} onItemClick={handleWalletItemClick} onCharge={() => navigate("/my/grapefruit")} />
-                  <PlanWidget plan={plan} onToggle={handlePlanToggle} fullMeta />
+                  <DuelLiveWidget levelId={student?.levelId} onEnter={() => navigate("/duel")} />
                 </>
               )}
               <RankingWidget ranking={ranking} student={student} free={free} />
@@ -996,12 +996,12 @@ function StudentHomePage() {
             {free ? (
               <>
                 <LockedWidget title="🌾 작물 지갑" subTitle="구독 후 활성화" sub="학습으로 씨앗을 모아&#10;작물로 바꿔요." onSubscribe={handleSubscribe} />
-                <LockedWidget title="📅 학습 계획표" subTitle="선생님이 학습 계획을 짜드려요" sub="과제를 확인하고 오늘의&#10;해야 할 학습을 수행해봐요." onSubscribe={handleSubscribe} />
+                <LockedWidget title="⚔️ 대결 라이브" subTitle="구독 후 활성화" sub="친구·AI와 라운드제&#10;서바이벌 대결!" onSubscribe={handleSubscribe} />
               </>
             ) : (
               <>
                 <WalletWidget wallet={wallet} onItemClick={handleWalletItemClick} onCharge={() => navigate("/my/grapefruit")} compact />
-                <PlanWidget plan={plan} onToggle={handlePlanToggle} />
+                <DuelLiveWidget levelId={student?.levelId} onEnter={() => navigate("/duel")} />
               </>
             )}
             <RankingWidget ranking={ranking} student={student} free={free} />
@@ -1439,9 +1439,9 @@ function PaidDashboard({ student, plan, onPlanCellClick, navigate, navDaily, onS
           <ClaySpan color="purple" label="분석" image="images/student-home/quick-unified-analysis.png" />
           <span className="qc-text"><strong>통합 분석표</strong><span>역량·영역·일별</span></span>
         </button>
-        <button type="button" className="paid-dash-quick-card" onClick={() => navigate("/duel")}>
-          <ClaySpan color="red" label="대결" image="images/student-home/quick-duel-live.png" />
-          <span className="qc-text"><strong>대결 라이브</strong><span>친구·AI</span></span>
+        <button type="button" className="paid-dash-quick-card" onClick={() => navigate("/tests")}>
+          <ClaySpan color="yellow" label="시험" image="images/student-home/quick-test-storage.png" />
+          <span className="qc-text"><strong>테스트 창고</strong><span>본사·기관 시험</span></span>
         </button>
         <button type="button" className="paid-dash-quick-card" onClick={() => navigate("/ranking")}>
           <ClaySpan color="green" label="랭킹" image="images/student-home/quick-season-ranking.png" />
@@ -1589,6 +1589,58 @@ function WalletWidget({ wallet, onItemClick, onCharge, compact = false }) {
       <div className="wallet-cta-row">
         <span className="wallet-total">합계 <strong>{compact ? `${total}` : `${total} 작물`}</strong></span>
         <button type="button" className="btn-charge" onClick={onCharge}>＋ 자몽 충전</button>
+      </div>
+    </section>
+  );
+}
+
+function DuelLiveWidget({ levelId, onEnter }) {
+  const [stats, setStats] = useState({ openRooms: 0, ongoing: 0 });
+  useEffect(() => {
+    let alive = true;
+    const sid = levelId || "frege1";
+    apiGet(`/v1/duel/rooms?serverId=${encodeURIComponent(sid)}`)
+      .then((rooms) => {
+        if (!alive) return;
+        const arr = Array.isArray(rooms) ? rooms : [];
+        const open = arr.filter((r) => r.status === "waiting" || r.status === "open").length;
+        const ongoing = arr.filter((r) => r.status === "playing" || r.status === "in_match").length;
+        setStats({ openRooms: open, ongoing });
+      })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, [levelId]);
+
+  return (
+    <section className="widget">
+      <div className="widget-head">
+        <h3 className="widget-title">⚔️ 대결 라이브</h3>
+        <Link className="widget-cta" to="/duel">전체 ›</Link>
+      </div>
+      <p className="plan-meta-row">
+        지금 대기 중인 방 <strong>{stats.openRooms}</strong>개
+        {stats.ongoing > 0 ? <> · 진행 중 <strong>{stats.ongoing}</strong></> : null}
+      </p>
+      <div style={{ padding: "8px 4px 4px" }}>
+        <p style={{ fontSize: 13, color: "#5a4a3c", margin: "0 0 12px", lineHeight: 1.5 }}>
+          친구·AI 와 라운드제 서바이벌 한 판! 정답 속도와 정확도로 승부.
+        </p>
+        <button
+          type="button"
+          onClick={onEnter}
+          style={{
+            width: "100%",
+            padding: "10px 14px",
+            border: "none",
+            background: "#f06c24",
+            color: "#fff",
+            fontWeight: 700,
+            borderRadius: 10,
+            cursor: "pointer",
+          }}
+        >
+          입장하기
+        </button>
       </div>
     </section>
   );

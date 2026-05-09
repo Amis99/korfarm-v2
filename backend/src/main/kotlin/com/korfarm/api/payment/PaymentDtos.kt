@@ -46,6 +46,11 @@ data class GrapefruitPrepareRequest(
     @field:Min(1000) val amountWon: Int
 )
 
+// 기관 자몽 충전 — 1자몽=200원, 최소 200원. 호출자의 ORG_ADMIN 기관에 충전.
+data class OrgGrapefruitPrepareRequest(
+    @field:Min(200) val amountWon: Int
+)
+
 // 기관 사용료 결제 — 발행된 청구서 ID
 data class OrgBillingPrepareRequest(
     @field:NotBlank

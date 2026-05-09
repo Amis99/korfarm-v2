@@ -83,6 +83,15 @@ class PaymentController(
         return ApiResponse(success = true, data = result)
     }
 
+    @PostMapping("/prepare/org-grapefruit")
+    fun prepareOrgGrapefruit(@Valid @RequestBody request: OrgGrapefruitPrepareRequest): ApiResponse<PaymentPrepareResult> {
+        featureFlagService.requireNotKilled("ops.kill_switch.payments")
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        val result = paymentService.prepareOrgGrapefruit(userId, request)
+        return ApiResponse(success = true, data = result)
+    }
+
     @PostMapping("/confirm")
     fun confirm(@Valid @RequestBody request: PaymentConfirmRequest): ApiResponse<PaymentConfirmResult> {
         featureFlagService.requireNotKilled("ops.kill_switch.payments")
