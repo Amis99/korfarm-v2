@@ -571,6 +571,133 @@ class AdminContentService(
     }
 
     /**
+     * 일일퀴즈 Q1~Q10 competencyVector(정답 +) + 모든 오답 선택지 wrongVector(- 약점)
+     * 일괄 backfill — 시스템이 일단 돌아가도록 minimal default 적용.
+     *
+     * 매핑 (Q번호 1:1 단일 역량 분포 1.0):
+     *   Q1=어휘력, Q2=문장 독해력, Q3=구조 독해력, Q4=논리 사고력, Q5=어법·문법 능력,
+     *   Q6=국어 개념 적용 능력, Q7=국어 관련 배경지식, Q8=비문학 배경지식,
+     *   Q9=문제 분석 및 전략 수립 능력, Q10=선택지 분석 및 전략 수립 능력
+     *
+     * 보호:
+     *   - competencyVector 가 이미 채워져 있고 비어있지 않으면 skip (Q10 같은 분포 백필 보존)
+     *   - choice.wrongVector 가 이미 채워져 있고 비어있지 않으면 skip
+     *
+     * 세부 분포 조정·차별 wrongVector 는 추후 사람·AI 가 개별 검수.
+     */
+    @Transactional
+    fun backfillDailyQuizFullVectors(userId: String): Map<String, Any?> {
+        val ctsJson = "[\"DAILY_QUIZ\"]"
+        val targets = contentRepository.findByCategoriesInAndStatus(listOf("DAILY_QUIZ"), ctsJson, "active")
+
+        val mapping = listOf(
+            "어휘력", "문장 독해력", "구조 독해력", "논리 사고력", "어법·문법 능력",
+            "국어 개념 적용 능력", "국어 관련 배경지식", "비문학 배경지식",
+            "문제 분석 및 전략 수립 능력", "선택지 분석 및 전략 수립 능력",
+        )
+
+        var processedContents = 0
+        var modifiedContents = 0
+        var addedCorrectVectors = 0
+        var addedWrongVectors = 0
+        var skippedCorrect = 0
+        var skippedWrong = 0
+        val errors = mutableListOf<Map<String, String>>()
+
+        for (content in targets) {
+            processedContents++
+            try {
+                val latest = contentVersionRepository.findTopByContentIdOrderByCreatedAtDesc(content.id) ?: continue
+
+                @Suppress("UNCHECKED_CAST")
+                val root = (objectMapper.readValue(latest.contentJson, Map::class.java) as Map<String, Any?>).toMutableMap()
+                @Suppress("UNCHECKED_CAST")
+                val payload = (root["payload"] as? Map<String, Any?>)?.toMutableMap() ?: continue
+                @Suppress("UNCHECKED_CAST")
+                val questions = (payload["questions"] as? List<Map<String, Any?>>)?.toMutableList() ?: continue
+
+                if (questions.isEmpty()) continue
+
+                var changed = false
+                for (i in questions.indices) {
+                    if (i >= mapping.size) break
+                    val q = questions[i].toMutableMap()
+                    val competency = mapping[i]
+                    val defaultVec = mapOf(competency to 1.0)
+
+                    // 1) competencyVector — 비어있으면 채움, 비어있지 않으면 보호
+                    @Suppress("UNCHECKED_CAST")
+                    val existingVec = q["competencyVector"] as? Map<String, Any?>
+                    if (existingVec == null || existingVec.isEmpty()) {
+                        q["competencyVector"] = defaultVec
+                        addedCorrectVectors++
+                        changed = true
+                    } else {
+                        skippedCorrect++
+                    }
+
+                    // 2) 선택지별 wrongVector — 정답 선지 제외, 비어있는 것만 채움
+                    @Suppress("UNCHECKED_CAST")
+                    val choices = (q["choices"] as? List<Map<String, Any?>>)?.toMutableList()
+                    val answerId = q["answerId"]
+                    if (choices != null && answerId != null) {
+                        for (ci in choices.indices) {
+                            val c = choices[ci].toMutableMap()
+                            if (c["id"] == answerId) continue  // 정답 선지는 wrongVector 없음
+                            @Suppress("UNCHECKED_CAST")
+                            val existingWv = c["wrongVector"] as? Map<String, Any?>
+                            if (existingWv == null || existingWv.isEmpty()) {
+                                c["wrongVector"] = defaultVec
+                                choices[ci] = c
+                                addedWrongVectors++
+                                changed = true
+                            } else {
+                                skippedWrong++
+                            }
+                        }
+                        q["choices"] = choices
+                    }
+
+                    questions[i] = q
+                }
+
+                if (!changed) continue
+
+                payload["questions"] = questions
+                root["payload"] = payload
+                latest.contentJson = objectMapper.writeValueAsString(root)
+                latest.uploadedBy = userId
+                latest.approvedBy = userId
+                latest.approvedAt = LocalDateTime.now()
+                contentVersionRepository.save(latest)
+
+                contentEditLogRepository.save(
+                    ContentEditLogEntity(
+                        id = IdGenerator.newId("cel"),
+                        contentId = content.id,
+                        editorId = userId,
+                        action = "BACKFILL_DAILYQUIZ_FULL_VECTORS",
+                    )
+                )
+                modifiedContents++
+            } catch (e: Exception) {
+                errors.add(mapOf("contentId" to content.id, "error" to (e.message ?: "unknown")))
+            }
+        }
+
+        return mapOf(
+            "totalDailyQuizContents" to processedContents,
+            "modifiedContents" to modifiedContents,
+            "addedCorrectVectors" to addedCorrectVectors,
+            "addedWrongVectors" to addedWrongVectors,
+            "skippedCorrect" to skippedCorrect,
+            "skippedWrong" to skippedWrong,
+            "errors" to errors.take(10),
+            "errorCount" to errors.size,
+        )
+    }
+
+    /**
      * 농장·프로·논리 콘텐츠 default competency 매핑 backfill.
      *
      * 정책 (사용자 결정 기반 type/area 1:1):

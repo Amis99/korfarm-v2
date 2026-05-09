@@ -128,6 +128,19 @@ class AdminContentController(
     }
 
     /**
+     * 일일퀴즈 Q1~Q10 의 competencyVector(정답 +) + 오답 선택지별 wrongVector(- 약점) 일괄 backfill.
+     * Q번호 → 단일 역량 1.0 분포로 채움. 이미 비어있지 않은 벡터는 보호.
+     * 사람이 비주얼 에디터로 세부 조정하기 전에 일단 시스템이 작동하도록 minimal default 적용.
+     */
+    @PostMapping("/dailyquiz/full-vector-backfill")
+    fun dailyQuizFullVectorBackfill(): ApiResponse<Map<String, Any?>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        val userId = SecurityUtils.currentUserId() ?: "system"
+        val result = adminContentService.backfillDailyQuizFullVectors(userId)
+        return ApiResponse(success = true, data = result)
+    }
+
+    /**
      * 추천 인덱스 일괄 백필 (HQ_ADMIN 전용).
      * 모든 active 콘텐츠의 content_recommendation_index 갱신.
      * 1회 실행으로 약 4,500건 인덱스 채움.
