@@ -673,4 +673,12 @@
   .agent-shell {
     grid-template-columns: 1fr;
   }
+  /* grid/flex item 의 min-content 가 자식 nowrap 텍스트 폭으로 강제되어
+   * 부모 그리드를 viewport 밖으로 밀어내는 사고 차단. */
+  .agent-shell > * { min-width: 0; }
+  .agent-sidebar,
+  .agent-side,
+  .agent-main { min-width: 0; }
+  .agent-session-row { min-width: 0; }
+  .agent-session-title { min-width: 0; flex: 1 1 auto; }
 }
