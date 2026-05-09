@@ -840,6 +840,144 @@ class StudyPlanService(
         )
     }
 
+    /**
+     * 학생 본인 plan 의 글쓰기 셀을 학생이 아직 쓰지 않은 토픽으로 채운다.
+     *  - 학생 levelId 의 wisdom-topics JSON(/wisdom-topics/{levelId}.json) 로드
+     *  - 학생이 (levelId, topicKey) 로 작성한 글 제외
+     *  - 안 쓴 토픽 count 개를 글쓰기 셀의 cellAssignment 로 등록
+     *  - refId = topicKey, assignedLabel = 토픽 라벨
+     *  - cell.dueAt = +7일 23:59
+     *
+     * 권한: 호출자 == studentId 이거나 컨트롤러 측 검증된 admin/parent.
+     */
+    @Transactional
+    fun fillWritingCellWithUnusedTopics(
+        studentId: String,
+        count: Int,
+        actorId: String
+    ): WritingFillResult {
+        val capped = count.coerceIn(1, 12)
+        val user = userRepo.findById(studentId).orElseThrow {
+            ApiException("NOT_FOUND", "학생을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        val levelId = user.levelId
+            ?: throw ApiException("BAD_REQUEST", "학생 레벨이 지정되어 있지 않습니다", HttpStatus.BAD_REQUEST)
+
+        // 활성 plan 자동 결정 — bulkAssignFromRecommendations 와 동일한 로직
+        val planIds = targetRepo.findByTargetTypeAndTargetId("user", studentId).map { it.planId }.distinct()
+        val activePlans = if (planIds.isEmpty()) emptyList() else
+            planRepo.findAllById(planIds).filter { it.status == "active" }
+        var planCreated = false
+        val plan = activePlans.maxByOrNull { it.createdAt } ?: run {
+            val membership = orgMembershipRepo.findByUserIdAndStatus(studentId, "active").firstOrNull()
+                ?: throw ApiException(
+                    "BAD_REQUEST",
+                    "학생의 활성 기관 멤버십이 없어 학습 계획표를 자동 생성할 수 없습니다",
+                    HttpStatus.BAD_REQUEST
+                )
+            planCreated = true
+            createDefaultPlanForStudent(membership.orgId, studentId)
+        }
+
+        val writingAsset = assetRepo.findByPlanIdOrderBySortOrder(plan.id).firstOrNull { it.assetType == "writing" }
+            ?: throw ApiException("INTERNAL", "학습 계획표에 글쓰기 자산이 없습니다", HttpStatus.INTERNAL_SERVER_ERROR)
+        val scope = scopeRepo.findByPlanIdOrderBySortOrder(plan.id).firstOrNull()
+            ?: throw ApiException("INTERNAL", "학습 계획표에 범위가 없습니다", HttpStatus.INTERNAL_SERVER_ERROR)
+        val cells = cellRepo.findByPlanIdAndUserId(plan.id, studentId)
+        val cell = cells.firstOrNull { it.scopeId == scope.id && it.assetId == writingAsset.id }
+            ?: createCell(plan.id, scope.id, writingAsset, studentId)
+
+        // 토픽 풀 로드 — backend resources/wisdom-topics/{levelId}.json
+        val resource = org.springframework.core.io.ClassPathResource("wisdom-topics/${levelId}.json")
+        if (!resource.exists()) {
+            throw ApiException("NOT_FOUND", "$levelId 레벨의 글쓰기 주제 풀이 없습니다", HttpStatus.NOT_FOUND)
+        }
+        val topics: List<Map<String, String>> = resource.inputStream.use { stream ->
+            objectMapper.readValue(stream, object : TypeReference<List<Map<String, String>>>() {})
+        }
+
+        // 학생이 쓴 (level, topicKey) — 본인 levelId 만 필터
+        val written = wisdomPostRepo.findByUserIdAndStatusOrderByCreatedAtDesc(studentId, "active")
+            .filter { it.levelId == levelId }
+            .map { it.topicKey }
+            .toSet()
+
+        val unused = topics.filter { (it["key"] ?: "") !in written && (it["key"] ?: "").isNotBlank() }
+        if (unused.isEmpty()) {
+            return WritingFillResult(
+                planId = plan.id, cellId = cell.id, levelId = levelId,
+                createdAssignments = 0, skippedAssignments = 0,
+                totalTopics = topics.size, alreadyWrittenCount = written.size,
+                planCreated = planCreated, message = "이미 모든 글쓰기 주제를 작성했어요!"
+            )
+        }
+
+        val due = LocalDate.now().plusDays(7).atTime(23, 59)
+        cell.dueAt = due
+        if (cell.status == "unassigned" || cell.status == "expired" || cell.status == "completed") {
+            cell.status = "pending"
+            cell.score = null
+            cell.reviewedBy = null
+            cell.reviewedAt = null
+        }
+        cellRepo.save(cell)
+
+        val existing = cellAssignmentRepo.findByCellIdOrderBySortOrderAscCreatedAtAsc(cell.id)
+        val existingRefs = existing.map { it.refId }.toSet()
+        var nextOrder = (existing.maxOfOrNull { it.sortOrder } ?: -1) + 1
+        var created = 0
+        var skipped = 0
+
+        unused.take(capped).forEach { topic ->
+            val key = topic["key"] ?: return@forEach
+            val label = topic["label"] ?: key
+            if (key in existingRefs) {
+                skipped += 1
+                return@forEach
+            }
+            cellAssignmentRepo.save(StudyPlanCellAssignmentEntity(
+                id = IdGenerator.newId("spca"),
+                cellId = cell.id,
+                refId = key,
+                assignedLabel = label,
+                status = "pending",
+                sortOrder = nextOrder
+            ))
+            nextOrder += 1
+            created += 1
+        }
+
+        if (existing.isEmpty() && created > 0) {
+            val firstNew = cellAssignmentRepo.findByCellIdOrderBySortOrderAscCreatedAtAsc(cell.id).firstOrNull()
+            if (firstNew != null) {
+                cell.cellRefId = firstNew.refId
+                cell.assignedLabel = firstNew.assignedLabel ?: "글쓰기 주제"
+                cellRepo.save(cell)
+            }
+        }
+
+        if (created > 0) createEvent(cell, "assigned", "AI 글쓰기 추천 ${created}건 일괄 등록 (by $actorId)")
+
+        return WritingFillResult(
+            planId = plan.id, cellId = cell.id, levelId = levelId,
+            createdAssignments = created, skippedAssignments = skipped,
+            totalTopics = topics.size, alreadyWrittenCount = written.size,
+            planCreated = planCreated, message = null
+        )
+    }
+
+    data class WritingFillResult(
+        val planId: String,
+        val cellId: String,
+        val levelId: String,
+        val createdAssignments: Int,
+        val skippedAssignments: Int,
+        val totalTopics: Int,
+        val alreadyWrittenCount: Int,
+        val planCreated: Boolean,
+        val message: String?
+    )
+
     @Transactional
     fun addCellAssignment(cellId: String, refId: String, label: String?): StudyPlanCellAssignmentEntity {
         val cell = findCell(cellId)

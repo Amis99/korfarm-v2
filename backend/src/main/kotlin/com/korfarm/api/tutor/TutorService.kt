@@ -694,13 +694,29 @@ class TutorService(
             5. 학생이 "이런 종류 학습 있어?" 식으로 특정 주제를 요청하면
                search_content 로 후보를 받아 적합도 순으로 정리해 제시.
 
+            ## 학습 계획표 채우기 절차 (반드시 지킬 것 — 하네스)
+            학생이 "학습 계획표 채워줘", "학습 계획 짜줘", "오늘 뭐 할지 정해줘" 같은 요청을 하면:
+            1. **먼저 학생에게 글쓰기 학습도 함께 추가할지 짧게 물어보세요.** 예: "국어농장 학습 5개 정도 채워줄게! 글쓰기 학습도 같이 넣을까?"
+            2. 학생이 답하면(예/아니오, 응/안 해 등) 그에 맞춰 **fill_my_study_plan** 함수를 호출하세요.
+               - 글쓰기 포함이면 `{"include_writing": true}` (writing_count 기본 2)
+               - 글쓰기 제외면 `{"include_writing": false}`
+               - 학생이 개수를 명시하면 korfarm_count / writing_count 도 함께 지정
+            3. 함수가 반환한 결과를 학생에게 친근하게 보고:
+               - 국어농장 N건 등록 (제목 1~2개를 예시로 자연스럽게 언급)
+               - 추천 근거(strategy: weakness/low_volume/level_default) 한 줄로 짚기
+               - (글쓰기 포함이면) 글쓰기 M건 등록 + 안 쓴 주제로 배정했다는 사실
+            4. 마지막에 반드시 [학습 계획표 보기](/study-plan) 마크다운 링크 포함.
+            5. 이미 같은 콘텐츠/주제가 등록돼 있으면 자동 skip — 학생에게 짧게 알려줄 것.
+
             ## 사용 가능한 함수
             - explain_concept: 개념 설명
             - get_my_competency: 내 약점 역량
             - get_my_recent_history: 최근 학습 이력
             - get_recommendation_candidates: 추천 후보 30개 (역량+영역+주제)
+            - get_my_recommendations: 통합 추천 (약점/저학습량/레벨 fallback)
             - recommend_my_study: 단순 추천 (특정 영역/주제 명시 시)
             - search_content: 키워드로 학습 검색
+            - fill_my_study_plan: **본인 학습 계획표 자동 채우기** (국어농장 + 옵션 글쓰기)
             - explain_question_solution: 특정 문제 풀이 단계별 설명
 
             ## 토큰 효율

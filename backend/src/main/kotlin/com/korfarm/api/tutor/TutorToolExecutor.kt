@@ -7,6 +7,7 @@ import com.korfarm.api.learning.RecommendationService
 import com.korfarm.api.learning.UserCompetencySummaryRepository
 import com.korfarm.api.paid.ContentRepository
 import com.korfarm.api.paid.ContentVersionRepository
+import com.korfarm.api.studyplan.StudyPlanService
 import com.korfarm.api.user.UserRepository
 import org.slf4j.LoggerFactory
 import org.springframework.data.domain.PageRequest
@@ -33,6 +34,7 @@ class TutorToolExecutor(
     private val competencyLogRepository: LearningCompetencyLogRepository,
     private val competencySummaryRepository: UserCompetencySummaryRepository,
     private val recommendationService: RecommendationService,
+    private val studyPlanService: StudyPlanService,
 ) {
     private val log = LoggerFactory.getLogger(TutorToolExecutor::class.java)
 
@@ -47,6 +49,7 @@ class TutorToolExecutor(
                 "get_my_recent_history" -> getMyRecentHistory(input, userId)
                 "search_content" -> searchContent(input)
                 "explain_question_solution" -> explainQuestionSolution(input)
+                "fill_my_study_plan" -> fillMyStudyPlan(input, userId)
                 else -> TutorToolResult(false, errorCode = "UNKNOWN_FUNCTION", errorMessage = "구현되지 않은 함수: $functionName")
             }
         } catch (e: ApiException) {
@@ -233,6 +236,103 @@ class TutorToolExecutor(
             )
         }
         return TutorToolResult(success = true, data = mapOf("contents" to data, "count" to data.size))
+    }
+
+    /**
+     * 학생 본인 학습 계획표 자동 채우기.
+     *  - 추천 학습(recommendWithFallback) 으로 국어농장 셀 채움
+     *  - include_writing 이면 본인 레벨에서 안 쓴 주제로 글쓰기 셀도 채움
+     */
+    @Transactional
+    private fun fillMyStudyPlan(input: Map<String, Any?>, userId: String): TutorToolResult {
+        val includeWriting = input["include_writing"] as? Boolean ?: false
+        val korfarmCount = (input["korfarm_count"] as? Number)?.toInt()?.coerceIn(1, 12) ?: 5
+        val writingCount = (input["writing_count"] as? Number)?.toInt()?.coerceIn(1, 12) ?: 2
+
+        // 1. 국어농장 추천 학습 — recommendWithFallback 으로 약점/저학습량/레벨 fallback
+        val bundle = recommendationService.recommendWithFallback(userId, perCategory = korfarmCount)
+        val candidates = (bundle.competency.items + bundle.area.items).distinctBy { it.contentId }
+        val contentIds = candidates.take(korfarmCount).map { it.contentId }
+        val korfarmStrategy = listOfNotNull(
+            "competency=${bundle.competency.strategy}".takeIf { bundle.competency.items.isNotEmpty() },
+            "area=${bundle.area.strategy}".takeIf { bundle.area.items.isNotEmpty() },
+        ).joinToString(", ")
+
+        val korfarmResult = if (contentIds.isNotEmpty()) {
+            try {
+                studyPlanService.bulkAssignFromRecommendations(
+                    studentId = userId,
+                    contentIds = contentIds,
+                    dueAtRaw = null,
+                    actorId = userId
+                )
+            } catch (e: ApiException) {
+                return TutorToolResult(false, errorCode = e.code, errorMessage = e.message)
+            }
+        } else null
+
+        // 2. (옵션) 글쓰기 셀 — 안 쓴 주제 N개 배정
+        val writingResult = if (includeWriting) {
+            try {
+                studyPlanService.fillWritingCellWithUnusedTopics(
+                    studentId = userId,
+                    count = writingCount,
+                    actorId = userId
+                )
+            } catch (e: ApiException) {
+                // 글쓰기 실패는 전체 실패로 만들지 않고 메시지만 전달
+                return TutorToolResult(
+                    success = true,
+                    data = mapOf(
+                        "korfarm" to korfarmResult?.let {
+                            mapOf(
+                                "plan_id" to it.planId,
+                                "cell_id" to it.cellId,
+                                "due_at" to it.dueAt,
+                                "created" to it.createdAssignments,
+                                "skipped" to it.skippedAssignments,
+                                "plan_created" to it.planCreated,
+                                "strategy" to korfarmStrategy,
+                                "titles" to candidates.take(korfarmCount).map { c -> c.title },
+                            )
+                        },
+                        "writing_error" to (e.message ?: "글쓰기 배정 실패"),
+                        "instruction" to "국어농장 학습은 등록되었음을 알리고, 글쓰기 배정이 실패한 이유를 짧게 안내. 학생에게 [학습 계획표 보기](/study-plan) 링크 제시.",
+                    )
+                )
+            }
+        } else null
+
+        return TutorToolResult(
+            success = true,
+            data = mapOf(
+                "korfarm" to korfarmResult?.let {
+                    mapOf(
+                        "plan_id" to it.planId,
+                        "cell_id" to it.cellId,
+                        "due_at" to it.dueAt,
+                        "created" to it.createdAssignments,
+                        "skipped" to it.skippedAssignments,
+                        "plan_created" to it.planCreated,
+                        "strategy" to korfarmStrategy,
+                        "titles" to candidates.take(korfarmCount).map { c -> c.title },
+                    )
+                },
+                "writing" to writingResult?.let {
+                    mapOf(
+                        "cell_id" to it.cellId,
+                        "level_id" to it.levelId,
+                        "created" to it.createdAssignments,
+                        "skipped" to it.skippedAssignments,
+                        "total_topics" to it.totalTopics,
+                        "already_written" to it.alreadyWrittenCount,
+                        "message" to it.message,
+                    )
+                },
+                "include_writing" to includeWriting,
+                "instruction" to "학생에게 등록 결과를 친근하게 보고하세요: 국어농장 N건 + (옵션) 글쓰기 M건. 추천 근거(strategy)도 한 줄 짚어주고, 마지막에 [학습 계획표 보기](/study-plan) 링크 포함. 콘텐츠 제목 1~2개를 예시로 자연스럽게 언급.",
+            )
+        )
     }
 
     @Transactional(readOnly = true)

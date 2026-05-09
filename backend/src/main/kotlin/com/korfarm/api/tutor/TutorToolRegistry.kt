@@ -117,6 +117,33 @@ class TutorToolRegistry {
             ),
         ),
         TutorToolDefinition(
+            name = "fill_my_study_plan",
+            description = "학생 본인 학습 계획표를 자동으로 채웁니다. " +
+                "추천 학습(약점/저학습량/레벨 fallback) 으로 국어농장 셀을 채우고, " +
+                "include_writing=true 면 학생이 아직 쓰지 않은 본인 레벨 글쓰기 주제도 글쓰기 셀에 배정합니다. " +
+                "**호출 직전 학생에게 글쓰기 학습도 함께 추가할지 반드시 확인**한 뒤 그 답에 맞춰 include_writing 을 설정할 것. " +
+                "중복 배정은 자동 skip. 결과로 plan_id, cell_id, 등록 건수, 추천 strategy 가 반환됩니다.",
+            preferredModel = "sonnet",
+            inputSchema = mapOf(
+                "type" to "object",
+                "properties" to mapOf(
+                    "include_writing" to mapOf(
+                        "type" to "boolean",
+                        "description" to "글쓰기 셀도 채울지 여부. 학생에게 직접 물어본 뒤 true/false 결정."
+                    ),
+                    "korfarm_count" to mapOf(
+                        "type" to "integer",
+                        "description" to "국어농장 학습 등록 개수 (기본 5, 1~12)"
+                    ),
+                    "writing_count" to mapOf(
+                        "type" to "integer",
+                        "description" to "글쓰기 주제 등록 개수 (기본 2, 1~12). include_writing=false 면 무시."
+                    ),
+                ),
+                "required" to listOf("include_writing"),
+            ),
+        ),
+        TutorToolDefinition(
             name = "explain_question_solution",
             description = "특정 문제(콘텐츠 ID + 문제 번호)의 풀이를 단계별로 설명합니다.",
             inputSchema = mapOf(
