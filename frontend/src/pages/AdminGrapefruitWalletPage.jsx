@@ -324,6 +324,7 @@ export default function AdminGrapefruitWalletPage() {
                 checked={chargeAgree}
                 onChange={(e) => setChargeAgree(e.target.checked)}
                 disabled={chargingPay}
+                style={{ width: 18, height: 18, accentColor: "#f06c24", cursor: chargingPay ? "not-allowed" : "pointer", flexShrink: 0 }}
               />
               <span>
                 <Link to="/refund-policy" target="_blank" style={{ color: "#f06c24" }}>환불규정</Link>
