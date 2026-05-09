@@ -1201,6 +1201,26 @@
 
     /* 작물 지갑 grid item */
     .student-home .wallet-item { min-width: 0; }
+
+    /* ─── grid container 자체의 min-width:auto 차단
+     * .app/.body/.center 가 grid item 인데 default min-width:auto 라
+     * 자식 intrinsic 폭으로 부모가 viewport 밖으로 확장됨. 강제 수축. */
+    .student-home .top-bar,
+    .student-home .body,
+    .student-home .center,
+    .student-home .free-section-head,
+    .student-home .free-grid,
+    .student-home .paid-dash-quick,
+    .student-home .widgets-stack.mobile-widgets,
+    .student-home .tab-bar,
+    .student-home .paid-dash-section,
+    .student-home .greeting-block,
+    .student-home .paid-dash-search,
+    .student-home .locked-grid {
+      width: 100%;
+      min-width: 0;
+      max-width: 100vw;
+    }
   }
 
   /* TABLET (768–1199px) */
