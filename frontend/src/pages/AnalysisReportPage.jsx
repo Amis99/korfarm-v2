@@ -5,8 +5,6 @@ import { apiGet } from "../utils/api";
 import { apiGet as adminApiGet } from "../utils/adminApi";
 import { clampPct } from "../utils/format";
 import ReportLearningDiagnosticPanel from "../components/report/ReportLearningDiagnosticPanel";
-import ReportCompetencyTrendChart from "../components/report/ReportCompetencyTrendChart";
-import ReportCompetencySection from "../components/report/ReportCompetencySection";
 import ReportAreaSection from "../components/report/ReportAreaSection";
 import ReportThemeSection from "../components/report/ReportThemeSection";
 import ReportTrendChart from "../components/report/ReportTrendChart";
@@ -203,20 +201,6 @@ function AnalysisReportPage() {
           </div>
         ) : (
           <p className="ur-empty">아직 역량 데이터가 충분하지 않습니다.</p>
-        )}
-
-        {Array.isArray(report?.competencyTrend) && report.competencyTrend.length > 0 && (
-          <div style={{ marginTop: 16 }}>
-            <h3>역량 변화 추이</h3>
-            <ReportCompetencyTrendChart trend={report.competencyTrend} />
-          </div>
-        )}
-
-        {Array.isArray(report?.competencyStats) && report.competencyStats.length > 0 && (
-          <div style={{ marginTop: 16 }}>
-            <h3>역량 상세 통계</h3>
-            <ReportCompetencySection competencyStats={report.competencyStats} />
-          </div>
         )}
 
         {isAdmin && (
