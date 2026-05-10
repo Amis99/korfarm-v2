@@ -101,12 +101,24 @@ class PaymentController(
         return ApiResponse(success = true, data = result)
     }
 
+    /**
+     * 환불 — HQ_ADMIN 전용. 일반 사용자는 1:1 문의 → CS → 관리자가 환불 처리.
+     * 보안 + 정합성: paymentType 별 부수효과(잔액 차감 / 구독 종료 / 재고 복구)는
+     * PaymentService.refundPayment 안에서 트랜잭션 처리.
+     */
     @PostMapping("/refund")
     fun refund(@Valid @RequestBody request: PaymentRefundRequest): ApiResponse<PaymentRefundResult> {
         featureFlagService.requireNotKilled("ops.kill_switch.payments")
-        val userId = SecurityUtils.currentUserId()
+        if (!com.korfarm.api.security.SecurityUtils.hasAnyRole("HQ_ADMIN")) {
+            throw ApiException(
+                "FORBIDDEN",
+                "환불은 본사 관리자만 처리할 수 있습니다. 1:1 문의를 이용해 주세요.",
+                HttpStatus.FORBIDDEN
+            )
+        }
+        val adminUserId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
-        val result = paymentService.refundPayment(userId, request)
+        val result = paymentService.refundPayment(adminUserId, request)
         return ApiResponse(success = true, data = result)
     }
 

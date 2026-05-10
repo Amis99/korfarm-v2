@@ -82,7 +82,11 @@ data class PaymentConfirmRequest(
 data class PaymentConfirmResult(
     val paymentId: String,
     val status: String,
-    val receiptUrl: String? = null
+    val receiptUrl: String? = null,
+    /** subscription / shop / grapefruit / org_grapefruit / org_billing — 결제 후 안내 페이지 분기용 */
+    val paymentType: String? = null,
+    /** 결제 금액 (환불·환산 표시용) */
+    val amount: Int? = null,
 )
 
 data class PaymentRefundRequest(

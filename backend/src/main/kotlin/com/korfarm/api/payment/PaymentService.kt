@@ -552,17 +552,27 @@ class PaymentService(
         return PaymentConfirmResult(
             paymentId = payment.id,
             status = payment.status,
-            receiptUrl = payment.receiptUrl
+            receiptUrl = payment.receiptUrl,
+            paymentType = payment.paymentType,
+            amount = payment.amount,
         )
     }
 
+    /**
+     * 환불 — 보안상 HQ_ADMIN 만 트리거 가능 (사용자 직접 호출 X).
+     * 사용자는 1:1 문의 → CS → 관리자가 환불 처리.
+     *
+     * paymentType 별 부수효과:
+     *  - org_billing: 부분 환불 정책상 거부 (RefundPolicyPage 제4조 1항)
+     *  - subscription: 구독 즉시 종료
+     *  - shop: 주문 status="refunded", 재고 복구
+     *  - grapefruit: 사용자 자몽 잔액 차감 (잔액 부족 시 거부)
+     *  - org_grapefruit: 기관 자몽 잔액 차감 (잔액 부족 시 거부)
+     */
     @Transactional
-    fun refundPayment(userId: String, request: PaymentRefundRequest): PaymentRefundResult {
+    fun refundPayment(adminUserId: String, request: PaymentRefundRequest): PaymentRefundResult {
         val payment = paymentRepository.findById(request.paymentId).orElseThrow {
             ApiException("NOT_FOUND", "결제 정보를 찾을 수 없습니다", HttpStatus.NOT_FOUND)
-        }
-        if (payment.userId != userId) {
-            throw ApiException("FORBIDDEN", "접근 권한이 없습니다", HttpStatus.FORBIDDEN)
         }
         if (payment.status != "paid") {
             throw ApiException("INVALID_STATE", "환불 가능한 상태가 아닙니다", HttpStatus.CONFLICT)
@@ -570,6 +580,76 @@ class PaymentService(
         val pk = payment.paymentKey
             ?: throw ApiException("INVALID_STATE", "결제 키가 없어 환불할 수 없습니다", HttpStatus.BAD_REQUEST)
 
+        // 정책 거부 — 기관 월 사용료는 부분 환불 X (회사 사유 중단 시만 별도 처리)
+        if (payment.paymentType == "org_billing") {
+            throw ApiException(
+                "REFUND_FORBIDDEN",
+                "기관 월 사용료는 환불 정책상 부분 환불이 불가합니다 (회사 사유 중단 시 별도 처리)",
+                HttpStatus.FORBIDDEN
+            )
+        }
+
+        // 부수효과 — 자몽은 잔액 차감을 토스 cancel 전에 시도해 잔액 부족이면 cancel 안 함
+        when (payment.paymentType) {
+            "grapefruit" -> {
+                grapefruitService.refundUserCharge(
+                    userId = payment.userId,
+                    amountWon = payment.amount,
+                    paymentId = payment.id,
+                    memo = "환불 (by $adminUserId): ${request.cancelReason}",
+                )
+            }
+            "org_grapefruit" -> {
+                val prepareMeta: Map<String, Any?> = try {
+                    @Suppress("UNCHECKED_CAST")
+                    val full = objectMapper.readValue(payment.metadata ?: "{}", Map::class.java) as Map<String, Any?>
+                    @Suppress("UNCHECKED_CAST")
+                    (full["prepare"] as? Map<String, Any?>) ?: full
+                } catch (_: Exception) { emptyMap() }
+                val orgId = prepareMeta["orgId"] as? String
+                    ?: throw ApiException("INVALID_STATE", "기관 ID 누락", HttpStatus.INTERNAL_SERVER_ERROR)
+                grapefruitService.refundOrgCharge(
+                    orgId = orgId,
+                    amountWon = payment.amount,
+                    paymentId = payment.id,
+                    memo = "환불 (by $adminUserId): ${request.cancelReason}",
+                )
+            }
+            "subscription" -> {
+                // 구독 즉시 종료 — 잔여 일수 일할 환불은 본 endpoint 가 amount 만 반영
+                val subscriberUserId = payment.targetUserId ?: payment.userId
+                subscriptionRepository.findTopByUserIdOrderByEndAtDesc(subscriberUserId)?.let { sub ->
+                    if (sub.status == "active" || sub.status == "canceled") {
+                        sub.endAt = LocalDateTime.now()
+                        sub.status = "refunded"
+                        subscriptionRepository.save(sub)
+                    }
+                }
+            }
+            "shop" -> {
+                val orderId = payment.shopOrderId
+                if (orderId != null) {
+                    orderRepository.findById(orderId).ifPresent { order ->
+                        // 재고 복구
+                        orderItemRepository.findByOrderId(order.id).forEach { item ->
+                            productRepository.findById(item.productId).ifPresent { p ->
+                                p.stock += item.quantity
+                                productRepository.save(p)
+                            }
+                        }
+                        order.status = "refunded"
+                        orderRepository.save(order)
+                        shipmentRepository.findByOrderId(order.id)?.let { sh ->
+                            sh.status = "refunded"
+                            shipmentRepository.save(sh)
+                        }
+                    }
+                }
+            }
+            // 그 외 paymentType 은 단순 status 만 변경
+        }
+
+        // 토스 cancel — 부수효과 성공 후 호출
         tossPaymentClient.cancelPayment(pk, request.cancelReason, request.cancelAmount)
 
         payment.status = "refunded"

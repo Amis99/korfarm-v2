@@ -178,6 +178,70 @@ class GrapefruitService(
         return wallet.balance
     }
 
+    // ─── 환불 (충전 취소) ────────────────────────────────────
+
+    /**
+     * 사용자 자몽 충전 환불 — 충전한 grapefruits 만큼 잔액 차감.
+     * 잔액 부족 시 환불 거부 (이미 사용해서 환불 불가).
+     */
+    @Transactional
+    fun refundUserCharge(userId: String, amountWon: Int, paymentId: String, memo: String?): Int {
+        if (amountWon <= 0) throw ApiException("INVALID", "환불 금액은 양수", HttpStatus.BAD_REQUEST)
+        val grapefruits = amountWon / USER_PRICE_PER_GRAPEFRUIT
+        val wallet = userWalletRepository.findById(userId).orElseThrow {
+            ApiException("INSUFFICIENT_BALANCE", "지갑이 없어 환불할 수 없습니다", HttpStatus.CONFLICT)
+        }
+        if (wallet.balance < grapefruits) {
+            throw ApiException(
+                "INSUFFICIENT_BALANCE",
+                "이미 사용한 자몽이 있어 충전 분 전액 환불 불가 (잔액 ${wallet.balance} / 충전 분 ${grapefruits})",
+                HttpStatus.CONFLICT
+            )
+        }
+        wallet.balance -= grapefruits
+        userWalletRepository.save(wallet)
+
+        recordTransaction(
+            walletType = "user", ownerId = userId,
+            direction = "refund", amount = grapefruits,
+            kind = null, aiLogId = null, paymentId = paymentId,
+            amountWon = amountWon, balanceAfter = wallet.balance,
+            memo = memo ?: "개인 자몽 충전 환불",
+        )
+        return wallet.balance
+    }
+
+    /**
+     * 기관 자몽 충전 환불 — 충전한 grapefruits 만큼 잔액 차감.
+     * 잔액 부족 시 거부.
+     */
+    @Transactional
+    fun refundOrgCharge(orgId: String, amountWon: Int, paymentId: String, memo: String?): Int {
+        if (amountWon <= 0) throw ApiException("INVALID", "환불 금액은 양수", HttpStatus.BAD_REQUEST)
+        val grapefruits = amountWon / ORG_PRICE_PER_GRAPEFRUIT
+        val wallet = orgWalletRepository.findById(orgId).orElseThrow {
+            ApiException("INSUFFICIENT_BALANCE", "지갑이 없어 환불할 수 없습니다", HttpStatus.CONFLICT)
+        }
+        if (wallet.balance < grapefruits) {
+            throw ApiException(
+                "INSUFFICIENT_BALANCE",
+                "이미 사용한 자몽이 있어 충전 분 전액 환불 불가 (잔액 ${wallet.balance} / 충전 분 ${grapefruits})",
+                HttpStatus.CONFLICT
+            )
+        }
+        wallet.balance -= grapefruits
+        orgWalletRepository.save(wallet)
+
+        recordTransaction(
+            walletType = "org", ownerId = orgId,
+            direction = "refund", amount = grapefruits,
+            kind = null, aiLogId = null, paymentId = paymentId,
+            amountWon = amountWon, balanceAfter = wallet.balance,
+            memo = memo ?: "기관 자몽 충전 환불",
+        )
+        return wallet.balance
+    }
+
     // ─── 차감 (AI 호출 시) ────────────────────────────────────
 
     /**
