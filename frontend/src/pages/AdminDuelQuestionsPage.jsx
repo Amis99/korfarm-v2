@@ -615,13 +615,21 @@ function AdminDuelQuestionsPage({ wrap = true, themeOnly = false, fixedServerId 
           {!loading && (
             <>
               <table className="admin-detail-table">
+                <colgroup>
+                  <col style={{ width: "auto" }} />
+                  <col style={{ width: 64 }} />
+                  <col style={{ width: 110 }} />
+                  <col style={{ width: 70 }} />
+                  <col style={{ width: 110 }} />
+                  <col style={{ width: 130 }} />
+                </colgroup>
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    <th>문제 / ID</th>
                     <th>유형</th>
                     <th>카테고리</th>
                     <th>상태</th>
-                    <th>등록일</th>
+                    <th>최종 수정일</th>
                     <th>관리</th>
                   </tr>
                 </thead>
@@ -676,7 +684,7 @@ function AdminDuelQuestionsPage({ wrap = true, themeOnly = false, fixedServerId 
                           </span>
                         </td>
                         <td className="admin-duel-date-cell">
-                          {q.createdAt ? q.createdAt.substring(0, 10) : "-"}
+                          {(q.updatedAt || q.createdAt) ? String(q.updatedAt || q.createdAt).substring(0, 10) : "-"}
                         </td>
                         <td>
                           {q.status === "ACTIVE" && (
