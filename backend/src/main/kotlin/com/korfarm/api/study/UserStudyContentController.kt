@@ -78,9 +78,10 @@ class UserStudyContentController(
         }
 
         // 자몽/작물 차감 (체크포인트 + 문항 패키지)
+        // 2026-05-10 정정: 체크포인트 단일 단가 (일반/고급 분기 없음).
+        // 문항은 일반/고급 분기 유지 + 5문항 단위 1회 차감 (1~5문항 동일 1회).
         val isAdvanced = req.tier == "ADVANCED"
-        val ckKind = if (isAdvanced) "checkpoint-extract-opus" else "checkpoint-extract"
-        grapefruitService.spendForUser(userId, ckKind, req.currency, memo = "체크포인트 추출")
+        grapefruitService.spendForUser(userId, "checkpoint-extract", req.currency, memo = "체크포인트 추출")
 
         val packages = (total + 4) / 5
         val qKind = if (isAdvanced) "study-questions-opus" else "study-questions-sonnet"

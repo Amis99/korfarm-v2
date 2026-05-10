@@ -203,10 +203,11 @@ class OperatorAgentService(
         val needCharge = extraCallsBefore < 0 || extraCallsBefore % EXTRA_CALLS_PER_GRAPEFRUIT == 0L
         if (!needCharge) return true to 0
 
-        // ORG_ADMIN 만 도달. orgId 가 명시 전달돼야 함.
+        // 2026-05-10: 사용자 결정 — AI 비서 채팅은 자몽 차감 없음.
+        // 한도 정책은 살아있어 사용량 표시는 그대로지만 자몽 spendOrg 호출 제거.
+        // 향후 정책 변경 시 spendOrg(orgId, EXTRA_PRICING_KIND, null, "AI 비서 한도 초과") 복구.
         if (orgId == null) throw ApiException("FORBIDDEN", "기관 소속 없음", HttpStatus.FORBIDDEN)
-        grapefruitService.spendOrg(orgId, EXTRA_PRICING_KIND, null, "AI 비서 한도 초과")
-        return true to 1
+        return true to 0
     }
 
     @Transactional

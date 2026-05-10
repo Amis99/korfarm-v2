@@ -346,13 +346,10 @@ class TutorService(
             }
         }
 
-        // 일일 quota 5턴까지 무료, 그 이후 자몽/작물 차감
+        // 2026-05-10: 사용자 결정 — AI 튜터 채팅은 자몽 차감 없음.
+        // 일일 quota 카운트는 유지 (사용량 통계용)하되 spendForUser 호출 제거.
+        // 향후 정책 변경 시 한도 초과 분 차감 복구 가능.
         val quota = getOrInitTodayQuota(userId)
-        val price = grapefruitService.getPrice(PRICING_KIND)
-        val isFreeTurn = quota.usedTurns < DAILY_FREE_TURNS
-        if (!isFreeTurn) {
-            grapefruitService.spendForUser(userId, PRICING_KIND, currency, null, "AI 튜터 1회")
-        }
         quota.usedTurns += 1
         quota.updatedAt = LocalDateTime.now()
         quotaRepo.save(quota)
@@ -466,7 +463,7 @@ class TutorService(
             userId = userId,
             sessionId = session.id,
             currency = currency,
-            amountSpent = price,
+            amountSpent = 0,  // 2026-05-10: AI 튜터 채팅 무과금
             totalInputTokens = totalInputTokens,
             totalOutputTokens = totalOutputTokens,
             userText = userText,
@@ -479,7 +476,7 @@ class TutorService(
             assistantText = assistantText,
             toolCallsExecuted = toolCallsExecuted,
             currency = currency,
-            amountSpent = price,
+            amountSpent = 0,
             inputTokens = totalInputTokens,
             outputTokens = totalOutputTokens,
         )

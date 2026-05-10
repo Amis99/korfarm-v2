@@ -66,12 +66,11 @@ class AiTestGenController(
             throw ApiException("EMPTY_PAGE", "페이지 본문이 비어 있습니다", HttpStatus.BAD_REQUEST)
         }
         // ─── 자몽 차감 ───
-        // 1) 체크포인트 추출 (existingCheckpoints 없을 때만 실제 호출됨)
-        // 2) 문항 생성 — 5문항 단위 묶음 가격 × ceil(total/5)
+        // 1) 체크포인트 추출 (existingCheckpoints 없을 때만 실제 호출됨) — 단일 단가 (2026-05-10 정정: 일반/고급 분기 없음)
+        // 2) 문항 생성 — 5문항 단위 묶음 가격 × ceil(total/5). 1~5문항 모두 동일 1회 차감.
         val isAdvanced = req.tier == "ADVANCED"
         if (req.existingCheckpoints == null) {
-            val ckKind = if (isAdvanced) "checkpoint-extract-opus" else "checkpoint-extract"
-            grapefruitService.spendForCaller(ckKind, memo = "체크포인트 추출")
+            grapefruitService.spendForCaller("checkpoint-extract", memo = "체크포인트 추출")
         }
         val packages = (total + 4) / 5
         val qKind = if (isAdvanced) "study-questions-opus" else "study-questions-sonnet"
