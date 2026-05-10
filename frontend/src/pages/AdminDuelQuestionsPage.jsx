@@ -426,6 +426,8 @@ function AdminDuelQuestionsPage({ wrap = true, themeOnly = false, fixedServerId 
 
   const content = (
     <>
+        {!showAddForm && (
+        <>
         {/* 헤더 */}
         <div className="admin-detail-header">
           {wrap && <h1>대결 문제 관리</h1>}
@@ -736,13 +738,23 @@ function AdminDuelQuestionsPage({ wrap = true, themeOnly = false, fixedServerId 
             </>
           )}
         </div>
+        </>
+        )}
 
-      {/* 문제 추가 모달 */}
+      {/* 문제 추가/수정 — 페이지 inline (모달 X). 작업 중 실수로 닫히지 않게 */}
       {showAddForm && (
-        <div className="admin-modal-overlay" onClick={() => setShowAddForm(false)}>
-          <div className="admin-modal admin-modal-wide" onClick={(e) => e.stopPropagation()}>
-            <h2>{editingQuestionId ? "문제 수정" : "문제 추가"}</h2>
-            {addError && <p className="admin-detail-note error">{addError}</p>}
+        <div className="admin-detail-card admin-duel-edit-page" style={{ padding: 20 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16, gap: 12, flexWrap: "wrap" }}>
+            <h2 style={{ margin: 0 }}>{editingQuestionId ? "✏️ 문제 수정" : "➕ 문제 추가"}</h2>
+            <button
+              className="admin-detail-btn secondary"
+              type="button"
+              onClick={() => { setShowAddForm(false); setEditingQuestionId(null); setAddError(""); }}
+            >
+              ← 문제 목록으로 돌아가기
+            </button>
+          </div>
+          {addError && <p className="admin-detail-note error">{addError}</p>}
 
             <div className="admin-modal-row">
               <div className="admin-modal-field">
@@ -847,23 +859,22 @@ function AdminDuelQuestionsPage({ wrap = true, themeOnly = false, fixedServerId 
               </select>
             </div>
 
-            <div className="admin-modal-actions">
-              <button
-                className="admin-detail-btn"
-                type="button"
-                onClick={handleAddQuestion}
-                disabled={addLoading}
-              >
-                {addLoading ? (editingQuestionId ? "저장 중..." : "등록 중...") : (editingQuestionId ? "저장" : "등록")}
-              </button>
-              <button
-                className="admin-detail-btn secondary"
-                type="button"
-                onClick={() => { setShowAddForm(false); setEditingQuestionId(null); }}
-              >
-                취소
-              </button>
-            </div>
+          <div className="admin-modal-actions">
+            <button
+              className="admin-detail-btn"
+              type="button"
+              onClick={handleAddQuestion}
+              disabled={addLoading}
+            >
+              {addLoading ? (editingQuestionId ? "저장 중..." : "등록 중...") : (editingQuestionId ? "저장" : "등록")}
+            </button>
+            <button
+              className="admin-detail-btn secondary"
+              type="button"
+              onClick={() => { setShowAddForm(false); setEditingQuestionId(null); }}
+            >
+              취소
+            </button>
           </div>
         </div>
       )}
