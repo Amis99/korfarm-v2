@@ -1,6 +1,8 @@
 package com.korfarm.api.agent
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.korfarm.api.chat.OcrLimitChecker
+import com.korfarm.api.chat.VisionImagePreparer
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.grapefruit.GrapefruitService
@@ -51,6 +53,8 @@ class OperatorAgentService(
     private val toolExecutor: AgentToolExecutor,
     private val grapefruitService: GrapefruitService,
     private val orgMembershipRepository: OrgMembershipRepository,
+    private val visionImagePreparer: VisionImagePreparer,
+    private val ocrLimitChecker: OcrLimitChecker,
 ) {
     private val log = LoggerFactory.getLogger(OperatorAgentService::class.java)
     private val httpClient = HttpClient.newBuilder()
@@ -278,13 +282,21 @@ class OperatorAgentService(
         role: String,
         orgId: String?,
         userText: String,
+        imageFileIds: List<String> = emptyList(),
     ): TurnResult {
         if (apiKey.isBlank()) throw ApiException("AI_DISABLED", "AI API 키 미설정", HttpStatus.SERVICE_UNAVAILABLE)
-        if (userText.isBlank()) throw ApiException("INVALID", "메시지가 비어 있음", HttpStatus.BAD_REQUEST)
+        val normalizedImageFileIds = imageFileIds.filter { it.isNotBlank() }.distinct()
+        if (normalizedImageFileIds.size > 1) {
+            throw ApiException("TOO_MANY_IMAGES", "이미지는 한 번에 1장만 첨부할 수 있습니다.", HttpStatus.BAD_REQUEST)
+        }
+        if (userText.isBlank() && normalizedImageFileIds.isEmpty()) {
+            throw ApiException("INVALID", "메시지가 비어 있음", HttpStatus.BAD_REQUEST)
+        }
+        val effectiveUserText = userText.ifBlank { "첨부 이미지를 분석해 주세요." }
 
         // 1) 세션 확보 (트랜잭션 1 — 짧음)
         val session = if (sessionIdInput.isNullOrBlank()) {
-            createSession(userId, role, orgId, title = userText.take(40))
+            createSession(userId, role, orgId, title = effectiveUserText.take(40))
         } else {
             sessionRepo.findById(sessionIdInput).orElseThrow {
                 ApiException("NOT_FOUND", "세션 없음", HttpStatus.NOT_FOUND)
@@ -295,14 +307,28 @@ class OperatorAgentService(
 
         // 2) 한도 체크 + 자몽 차감 (트랜잭션 2 — 짧음)
         val (isExtra, grapefruitSpent) = checkLimitAndCharge(userId, role, orgId)
+        if (normalizedImageFileIds.isNotEmpty()) {
+            normalizedImageFileIds.forEach { visionImagePreparer.prepareFromFileId(it, userId) }
+            ocrLimitChecker.checkAndCount(
+                userId = userId,
+                channel = OcrLimitChecker.CHANNEL_AGENT,
+                imageCount = normalizedImageFileIds.size,
+                orgId = orgId ?: userId,
+            )
+        }
 
         // 3) 사용자 메시지 저장 (트랜잭션 3 — 짧음)
-        saveMessageTx(sessionId = session.id, role = "user", content = userText)
+        saveMessageTx(
+            sessionId = session.id,
+            role = "user",
+            content = effectiveUserText,
+            toolUseJson = imageToolJson(normalizedImageFileIds),
+        )
 
         // 4) tool_use loop — 비-트랜잭션 (Claude API 호출이 오래 걸려도 OK)
         val systemPrompt = buildSystemPrompt(role, orgId)
         val tools = toolRegistry.toolsForRole(role)
-        val historyMessages = buildApiHistory(session.id)
+        val historyMessages = buildApiHistory(session.id, userId)
 
         var totalInputTokens = 0
         var totalOutputTokens = 0
@@ -311,7 +337,6 @@ class OperatorAgentService(
         var assistantMessageId = ""
 
         val loopMessages = historyMessages.toMutableList()
-        loopMessages.add(mapOf("role" to "user", "content" to userText))
 
         // 첫 호출은 항상 sonnet (의도파악·함수선택 정확도 우선)
         // 후속 turn 부터는 직전 turn 에서 호출된 함수들의 preferredModel 로 다운시프트
@@ -435,7 +460,7 @@ class OperatorAgentService(
             grapefruitSpent = grapefruitSpent,
             totalInputTokens = totalInputTokens,
             totalOutputTokens = totalOutputTokens,
-            userText = userText,
+            userText = effectiveUserText,
             model = resolveModelId(nextModelLabel),
         )
 
@@ -465,7 +490,7 @@ class OperatorAgentService(
      * 같은 turn 안에서 발생한 tool 블록들은 인접해 있어 하나의 user/assistant 메시지로 묶음.
      */
     @Transactional(readOnly = true)
-    fun buildApiHistory(sessionId: String): List<Map<String, Any>> {
+    fun buildApiHistory(sessionId: String, expectedOwnerId: String): List<Map<String, Any>> {
         val msgs = messageRepo.findBySessionIdOrderByCreatedAtAsc(sessionId)
         val out = mutableListOf<Map<String, Any>>()
         var pendingToolResults: MutableList<Map<String, Any>>? = null
@@ -482,7 +507,7 @@ class OperatorAgentService(
                 "user" -> {
                     flushPendingToolResults()
                     if (!m.content.isNullOrBlank()) {
-                        out.add(mapOf("role" to "user", "content" to m.content!!))
+                        out.add(mapOf("role" to "user", "content" to buildUserContent(m, expectedOwnerId)))
                     }
                 }
                 "assistant" -> {
@@ -520,6 +545,42 @@ class OperatorAgentService(
         }
         flushPendingToolResults()
         return out
+    }
+
+    private fun imageToolJson(imageFileIds: List<String>): String? {
+        if (imageFileIds.isEmpty()) return null
+        return objectMapper.writeValueAsString(
+            mapOf("images" to imageFileIds.map { mapOf("fileId" to it) })
+        )
+    }
+
+    private fun buildUserContent(m: AgentChatMessageEntity, expectedOwnerId: String): Any {
+        val text = m.content ?: ""
+        val imageBlocks = extractImageFileIds(m.toolUseJson).mapNotNull { fileId ->
+            runCatching {
+                visionImagePreparer.toClaudeImageBlock(
+                    visionImagePreparer.prepareFromFileId(fileId, expectedOwnerId)
+                )
+            }.getOrNull()
+        }
+        if (imageBlocks.isEmpty()) return text
+        return imageBlocks + mapOf("type" to "text", "text" to text)
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun extractImageFileIds(toolUseJson: String?): List<String> {
+        if (toolUseJson.isNullOrBlank()) return emptyList()
+        return runCatching {
+            val parsed = objectMapper.readValue(toolUseJson, Map::class.java) as Map<String, Any?>
+            val images = parsed["images"] as? List<*> ?: return@runCatching emptyList()
+            images.mapNotNull { item ->
+                when (item) {
+                    is Map<*, *> -> item["fileId"]?.toString()
+                    is String -> item
+                    else -> null
+                }
+            }
+        }.getOrDefault(emptyList())
     }
 
     private fun buildSystemPrompt(role: String, orgId: String?): String {

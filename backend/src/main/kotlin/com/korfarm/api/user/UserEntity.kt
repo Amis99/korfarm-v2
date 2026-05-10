@@ -63,6 +63,10 @@ class UserEntity(
     @Column(name = "learning_start_date")
     var learningStartDate: LocalDate? = null,
 
+    /** 학생 AI 튜터 캐릭터 — owl(부엉이샘) / amis(아미스샘) / nurungji(누룽지샘). NULL = 미선택, 첫 진입 시 강제 선택 화면 */
+    @Column(name = "preferred_tutor_persona", length = 16)
+    var preferredTutorPersona: String? = null,
+
     @Column(nullable = false)
     var status: String,
 

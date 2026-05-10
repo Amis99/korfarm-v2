@@ -2,8 +2,8 @@ package com.korfarm.api.board
 
 import com.korfarm.api.chat.PodoHarness
 import com.korfarm.api.chat.AiChatService
+import com.korfarm.api.chat.VisionImagePreparer
 import com.korfarm.api.common.IdGenerator
-import com.korfarm.api.files.FileService
 import org.slf4j.LoggerFactory
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
@@ -15,7 +15,7 @@ class PodoBoardService(
     private val postAttachmentRepository: PostAttachmentRepository,
     private val commentRepository: CommentRepository,
     private val podoHarness: PodoHarness,
-    private val fileService: FileService,
+    private val visionImagePreparer: VisionImagePreparer,
 ) {
     private val log = LoggerFactory.getLogger(PodoBoardService::class.java)
     private val imageTypes = setOf("image/jpeg", "image/png", "image/gif", "image/webp")
@@ -37,8 +37,12 @@ class PodoBoardService(
             val imageDataList = attachments
                 .filter { it.mime in imageTypes }
                 .mapNotNull { att ->
-                    val bytes = fileService.readBytes(att.fileId) ?: return@mapNotNull null
-                    Pair(bytes, att.mime)
+                    runCatching {
+                        val prepared = visionImagePreparer.prepareFromFileId(att.fileId, post.userId)
+                        prepared.bytes to prepared.mime
+                    }.onFailure { e ->
+                        log.warn("게시글 이미지 vision 준비 실패: fileId={}, postId={}", att.fileId, postId, e)
+                    }.getOrNull()
                 }
 
             val response = if (imageDataList.isNotEmpty()) {

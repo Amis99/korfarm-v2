@@ -1,6 +1,8 @@
 package com.korfarm.api.tutor
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.korfarm.api.chat.OcrLimitChecker
+import com.korfarm.api.chat.VisionImagePreparer
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.grapefruit.GrapefruitService
@@ -44,6 +46,8 @@ class TutorService(
     private val userRepo: UserRepository,
     private val competencySummaryRepo: UserCompetencySummaryRepository,
     private val competencyLogRepo: LearningCompetencyLogRepository,
+    private val visionImagePreparer: VisionImagePreparer,
+    private val ocrLimitChecker: OcrLimitChecker,
 ) {
     private val log = LoggerFactory.getLogger(TutorService::class.java)
     private val httpClient = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(20)).build()
@@ -332,12 +336,20 @@ class TutorService(
         userId: String,
         userText: String,
         currency: String,
+        imageFileIds: List<String> = emptyList(),
     ): TurnResult {
         if (apiKey.isBlank()) throw ApiException("AI_DISABLED", "AI API 키 미설정", HttpStatus.SERVICE_UNAVAILABLE)
-        if (userText.isBlank()) throw ApiException("INVALID", "메시지가 비어 있음", HttpStatus.BAD_REQUEST)
+        val normalizedImageFileIds = imageFileIds.filter { it.isNotBlank() }.distinct()
+        if (normalizedImageFileIds.size > 1) {
+            throw ApiException("TOO_MANY_IMAGES", "이미지는 한 번에 1장만 첨부할 수 있습니다.", HttpStatus.BAD_REQUEST)
+        }
+        if (userText.isBlank() && normalizedImageFileIds.isEmpty()) {
+            throw ApiException("INVALID", "메시지가 비어 있음", HttpStatus.BAD_REQUEST)
+        }
+        val effectiveUserText = userText.ifBlank { "첨부 이미지를 분석해 주세요." }
 
         val session = if (sessionIdInput.isNullOrBlank()) {
-            createSession(userId, userText.take(40))
+            createSession(userId, effectiveUserText.take(40))
         } else {
             sessionRepo.findById(sessionIdInput).orElseThrow {
                 ApiException("NOT_FOUND", "세션 없음", HttpStatus.NOT_FOUND)
@@ -353,12 +365,25 @@ class TutorService(
         quota.usedTurns += 1
         quota.updatedAt = LocalDateTime.now()
         quotaRepo.save(quota)
+        if (normalizedImageFileIds.isNotEmpty()) {
+            normalizedImageFileIds.forEach { visionImagePreparer.prepareFromFileId(it, userId) }
+            ocrLimitChecker.checkAndCount(
+                userId = userId,
+                channel = OcrLimitChecker.CHANNEL_TUTOR,
+                imageCount = normalizedImageFileIds.size,
+            )
+        }
 
-        saveMessageTx(sessionId = session.id, role = "user", content = userText)
+        saveMessageTx(
+            sessionId = session.id,
+            role = "user",
+            content = effectiveUserText,
+            toolUseJson = imageToolJson(normalizedImageFileIds),
+        )
 
         val systemPrompt = buildSystemPrompt(userId)
         val tools = toolRegistry.toolsForApi()
-        val historyMessages = buildApiHistory(session.id)
+        val historyMessages = buildApiHistory(session.id, userId)
 
         var totalInputTokens = 0
         var totalOutputTokens = 0
@@ -367,7 +392,6 @@ class TutorService(
         var assistantMessageId = ""
 
         val loopMessages = historyMessages.toMutableList()
-        loopMessages.add(mapOf("role" to "user", "content" to userText))
 
         // 첫 호출 sonnet 고정. 후속 turn 은 직전 함수들의 preferredModel 기반.
         var nextModelLabel = "sonnet"
@@ -466,7 +490,7 @@ class TutorService(
             amountSpent = 0,  // 2026-05-10: AI 튜터 채팅 무과금
             totalInputTokens = totalInputTokens,
             totalOutputTokens = totalOutputTokens,
-            userText = userText,
+            userText = effectiveUserText,
             model = resolveModelId(nextModelLabel),
         )
 
@@ -607,7 +631,7 @@ class TutorService(
     }
 
     @Transactional(readOnly = true)
-    fun buildApiHistory(sessionId: String): List<Map<String, Any>> {
+    fun buildApiHistory(sessionId: String, expectedOwnerId: String): List<Map<String, Any>> {
         val msgs = messageRepo.findBySessionIdOrderByCreatedAtAsc(sessionId)
         val out = mutableListOf<Map<String, Any>>()
         var pendingToolResults: MutableList<Map<String, Any>>? = null
@@ -623,7 +647,9 @@ class TutorService(
             when (m.role) {
                 "user" -> {
                     flushPending()
-                    if (!m.content.isNullOrBlank()) out.add(mapOf("role" to "user", "content" to m.content!!))
+                    if (!m.content.isNullOrBlank()) {
+                        out.add(mapOf("role" to "user", "content" to buildUserContent(m, expectedOwnerId)))
+                    }
                 }
                 "assistant" -> {
                     flushPending()
@@ -656,6 +682,42 @@ class TutorService(
         }
         flushPending()
         return out
+    }
+
+    private fun imageToolJson(imageFileIds: List<String>): String? {
+        if (imageFileIds.isEmpty()) return null
+        return objectMapper.writeValueAsString(
+            mapOf("images" to imageFileIds.map { mapOf("fileId" to it) })
+        )
+    }
+
+    private fun buildUserContent(m: TutorChatMessageEntity, expectedOwnerId: String): Any {
+        val text = m.content ?: ""
+        val imageBlocks = extractImageFileIds(m.toolUseJson).mapNotNull { fileId ->
+            runCatching {
+                visionImagePreparer.toClaudeImageBlock(
+                    visionImagePreparer.prepareFromFileId(fileId, expectedOwnerId)
+                )
+            }.getOrNull()
+        }
+        if (imageBlocks.isEmpty()) return text
+        return imageBlocks + mapOf("type" to "text", "text" to text)
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun extractImageFileIds(toolUseJson: String?): List<String> {
+        if (toolUseJson.isNullOrBlank()) return emptyList()
+        return runCatching {
+            val parsed = objectMapper.readValue(toolUseJson, Map::class.java) as Map<String, Any?>
+            val images = parsed["images"] as? List<*> ?: return@runCatching emptyList()
+            images.mapNotNull { item ->
+                when (item) {
+                    is Map<*, *> -> item["fileId"]?.toString()
+                    is String -> item
+                    else -> null
+                }
+            }
+        }.getOrDefault(emptyList())
     }
 
     @Suppress("UNUSED_PARAMETER")

@@ -146,7 +146,7 @@ class PodoHarness(
 
     // ─── 메인 파이프라인 ─────────────────────────────────
 
-    fun generate(triggerMessage: ChatMessageEntity): String {
+    fun generate(triggerMessage: ChatMessageEntity, attachedImageBlocks: List<Map<String, Any>> = emptyList()): String {
         if (apiKey.isBlank()) return ""
         if (isDailyLimitReached(triggerMessage.userId)) {
             return "오늘 포도가 너무 많이 일했어! 하루 ${dailyLimit}번 한도에 도달해서 더 답할 수 없어 ㅠㅠ 내일 다시 만나자~"
@@ -183,8 +183,13 @@ $chatContext
         )
 
         // Step 1: 첫 번째 호출 (도구 사용 가능)
+        val initialUserContent: Any = if (attachedImageBlocks.isEmpty()) {
+            userContent
+        } else {
+            attachedImageBlocks + mapOf("type" to "text", "text" to userContent)
+        }
         val messages = mutableListOf<Map<String, Any>>(
-            mapOf("role" to "user", "content" to userContent)
+            mapOf("role" to "user", "content" to initialUserContent)
         )
 
         var response = callClaude(systemBlocks, messages, triggerMessage.userId, "podo-chat")

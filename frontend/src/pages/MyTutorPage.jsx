@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { apiDelete, apiGet, apiPatch, apiPost } from "../utils/api";
+import { API_BASE, TOKEN_KEY, apiDelete, apiGet, apiPatch, apiPost } from "../utils/api";
+import AttachedImageStrip from "../components/chat/AttachedImageStrip";
 import "../styles/admin.css";
 
 /**
@@ -39,7 +40,10 @@ function MyTutorPage() {
   const [status, setStatus] = useState(null);
   const [currency, setCurrency] = useState("grapefruit");
   const [dailyAnalysis, setDailyAnalysis] = useState(null);
+  const [attachedImages, setAttachedImages] = useState([]);
+  const [imageUploading, setImageUploading] = useState(false);
   const scrollRef = useRef(null);
+  const imageInputRef = useRef(null);
 
   const loadSessions = async (autoSelectLatest = false) => {
     try {
@@ -106,11 +110,78 @@ function MyTutorPage() {
     setActiveSessionId(null);
     setMessages([]);
     setDraft("");
+    clearAttachedImages();
+  };
+
+  const clearAttachedImages = () => {
+    setAttachedImages((prev) => {
+      prev.forEach((img) => {
+        if (img.previewUrl?.startsWith("blob:")) URL.revokeObjectURL(img.previewUrl);
+      });
+      return [];
+    });
+    if (imageInputRef.current) imageInputRef.current.value = "";
+  };
+
+  const removeAttachedImage = (fileId) => {
+    setAttachedImages((prev) => {
+      const removed = prev.find((img) => img.fileId === fileId);
+      if (removed?.previewUrl?.startsWith("blob:")) URL.revokeObjectURL(removed.previewUrl);
+      return prev.filter((img) => img.fileId !== fileId);
+    });
+  };
+
+  const uploadVisionImage = async (file) => {
+    const allowed = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+    if (!allowed.includes(file.type)) {
+      throw new Error("jpeg, png, webp, gif 이미지만 첨부할 수 있습니다.");
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      throw new Error("이미지는 10MB 이하만 첨부할 수 있습니다.");
+    }
+    const presign = await apiPost("/v1/files/presign", {
+      purpose: "chat-vision",
+      filename: file.name || "chat-image",
+      mime: file.type,
+      size: file.size,
+    });
+    const fileId = presign.fileId || presign.file_id;
+    const fd = new FormData();
+    fd.append("file", file);
+    const token = sessionStorage.getItem(TOKEN_KEY);
+    const res = await fetch(`${API_BASE.replace(/\/$/, "")}/v1/files/${fileId}/upload`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+      body: fd,
+    });
+    if (!res.ok) throw new Error(`이미지 업로드 실패 (${res.status})`);
+    return {
+      fileId,
+      name: file.name,
+      previewUrl: URL.createObjectURL(file),
+    };
+  };
+
+  const handleVisionImageSelected = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (imageInputRef.current) imageInputRef.current.value = "";
+    setImageUploading(true);
+    setError("");
+    try {
+      clearAttachedImages();
+      const uploaded = await uploadVisionImage(file);
+      setAttachedImages([uploaded]);
+    } catch (err) {
+      setError(err.message || "이미지 업로드에 실패했습니다.");
+    } finally {
+      setImageUploading(false);
+    }
   };
 
   const sendMessage = async () => {
     const text = draft.trim();
-    if (!text || sending) return;
+    if ((!text && attachedImages.length === 0) || sending || imageUploading) return;
 
     // 잔액 사전 점검
     if (status) {
@@ -128,23 +199,28 @@ function MyTutorPage() {
     const optimistic = {
       id: `tmp-${Date.now()}`,
       role: "user",
-      content: text,
+      content: text || "첨부 이미지를 분석해 주세요.",
+      images: attachedImages,
       createdAt: new Date().toISOString(),
     };
     setMessages((prev) => [...prev, optimistic]);
     setDraft("");
+    const imageFileIds = attachedImages.map((img) => img.fileId);
 
     try {
       const result = await apiPost("/v1/tutor/turns", {
         sessionId: activeSessionId,
         message: text,
         currency,
+        imageFileIds,
       });
-      if (!activeSessionId && result?.session_id) {
-        setActiveSessionId(result.session_id);
+      clearAttachedImages();
+      const nextSessionId = result?.sessionId || result?.session_id || activeSessionId;
+      if (!activeSessionId && nextSessionId) {
+        setActiveSessionId(nextSessionId);
         await loadSessions();
       }
-      await loadMessages(result?.session_id || activeSessionId);
+      await loadMessages(nextSessionId);
       loadStatus();
     } catch (e) {
       setError(e.message);
@@ -304,6 +380,7 @@ function MyTutorPage() {
               <div key={m.id} className={`agent-msg ${m.role}`}>
                 <div className="agent-msg-meta">{m.role === "user" ? "나" : "튜터"}</div>
                 <div className="agent-msg-body">
+                  {m.images?.length > 0 && <AttachedImageStrip images={m.images} disabled />}
                   {m.role === "assistant" ? (
                     <Markdown
                       remarkPlugins={[remarkGfm]}
@@ -363,18 +440,36 @@ function MyTutorPage() {
         </div>
 
         <div className="agent-input">
+          <input
+            ref={imageInputRef}
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/gif"
+            style={{ display: "none" }}
+            onChange={handleVisionImageSelected}
+          />
+          <button
+            type="button"
+            className="agent-attach-btn"
+            onClick={() => imageInputRef.current?.click()}
+            disabled={sending || imageUploading}
+            aria-label="이미지 첨부"
+            title="이미지 첨부"
+          >
+            <span className="material-symbols-outlined">image</span>
+          </button>
           <textarea
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
             onKeyDown={handleKey}
             placeholder="질문을 입력해 (Enter 전송, Shift+Enter 줄바꿈)"
             rows={3}
-            disabled={sending}
+            disabled={sending || imageUploading}
           />
-          <button type="button" onClick={sendMessage} disabled={sending || !draft.trim()}>
+          <button type="button" onClick={sendMessage} disabled={sending || imageUploading || (!draft.trim() && attachedImages.length === 0)}>
             전송
           </button>
         </div>
+        <AttachedImageStrip images={attachedImages} onRemove={removeAttachedImage} disabled={sending || imageUploading} />
       </main>
 
       <aside className="agent-context">

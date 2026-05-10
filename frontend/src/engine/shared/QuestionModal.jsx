@@ -398,7 +398,6 @@ function QuestionModal({
         className={`question-modal ${isDragging ? "dragging" : ""}`}
         style={{
           transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
-          minHeight: anchorRect?.height ? `${anchorRect.height}px` : undefined,
           ...modalSizingStyle,
         }}
       >

@@ -80,6 +80,7 @@ class OperatorAgentController(
             role = role,
             orgId = orgId,
             userText = req.message,
+            imageFileIds = req.imageFileIds,
         )
         return ApiResponse(
             success = true,
@@ -114,6 +115,7 @@ data class RenameRequest(val title: String)
 data class TurnRequest(
     val sessionId: String? = null,
     val message: String,
+    val imageFileIds: List<String> = emptyList(),
 )
 
 data class TurnResultView(
@@ -141,7 +143,13 @@ data class MessageView(
     val content: String?,
     val functionName: String?,
     val status: String?,
+    val images: List<MessageImageView> = emptyList(),
     val createdAt: String,
+)
+
+data class MessageImageView(
+    val fileId: String,
+    val thumbnailUrl: String,
 )
 
 private fun AgentChatSessionEntity.toView() = SessionView(
@@ -158,5 +166,24 @@ private fun AgentChatMessageEntity.toView() = MessageView(
     content = content,
     functionName = functionName,
     status = status,
+    images = extractMessageImages(toolUseJson),
     createdAt = createdAt.toString(),
 )
+
+@Suppress("UNCHECKED_CAST")
+private fun extractMessageImages(toolUseJson: String?): List<MessageImageView> {
+    if (toolUseJson.isNullOrBlank()) return emptyList()
+    return runCatching {
+        val mapper = com.fasterxml.jackson.module.kotlin.jacksonObjectMapper()
+        val parsed = mapper.readValue(toolUseJson, Map::class.java) as Map<String, Any?>
+        val images = parsed["images"] as? List<*> ?: return@runCatching emptyList()
+        images.mapNotNull { item ->
+            val fileId = when (item) {
+                is Map<*, *> -> item["fileId"]?.toString()
+                is String -> item
+                else -> null
+            } ?: return@mapNotNull null
+            MessageImageView(fileId = fileId, thumbnailUrl = "/v1/files/$fileId/download")
+        }
+    }.getOrDefault(emptyList())
+}
