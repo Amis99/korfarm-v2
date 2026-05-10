@@ -26,7 +26,9 @@ data class SignupRequest(
     val studentPhone: String? = null,
     val parentPhone: String? = null,
     val diagnosticOptIn: Boolean = false,
-    val learningStartMode: String? = "calendar",
+    // 2026-05-10: calendar 옵션 비활성화 — 신규 가입은 모두 day1 (가입일=1일차).
+    // 다시 활성화할 때까지 프론트가 보내지 않더라도 백엔드 기본값으로 day1 보장.
+    val learningStartMode: String? = "day1",
 
     // 회원 유형: student, parent, org_admin
     val accountType: String? = "student",

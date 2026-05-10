@@ -93,7 +93,7 @@ function ProfilePage() {
       level_id: levelId,
       student_phone: studentPhone.trim(),
       parent_phone: parentPhone.trim(),
-      learning_start_mode: learningStartMode,
+      // 학습 시작 모드 변경 비활성화 (2026-05-10) — body 에 learning_start_mode 미포함
     };
     if (avatarPreview || avatarUrl) {
       body.profile_image_url = avatarPreview || avatarUrl;
@@ -248,16 +248,7 @@ function ProfilePage() {
                   maxLength={13}
                 />
               </label>
-              <label>
-                학습 시작일
-                <select
-                  value={learningStartMode}
-                  onChange={(e) => setLearningStartMode(e.target.value)}
-                >
-                  <option value="day1">1일 차부터 시작</option>
-                  <option value="calendar">오늘 날짜 기준</option>
-                </select>
-              </label>
+              {/* 학습 시작일 select 비활성화 (2026-05-10) — 일괄 day1 고정 */}
               <label>
                 비밀번호 변경
                 <input

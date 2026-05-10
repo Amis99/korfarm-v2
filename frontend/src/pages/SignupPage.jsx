@@ -65,7 +65,9 @@ function SignupPage() {
   const [studentPhone, setStudentPhone] = useState("");
   const [parentPhone, setParentPhone] = useState("");
   const [accountType, setAccountType] = useState("student");
-  const [learningStartMode, setLearningStartMode] = useState("calendar");
+  // "오늘 날짜 기준(calendar)" 옵션은 사용자 요청으로 비활성화 (2026-05-10).
+  // 모든 신규 회원은 day1(가입일=1일차)로 고정. 다시 활성화할 때까지 select UI 숨김.
+  const [learningStartMode, setLearningStartMode] = useState("day1");
   const [diagnosticOptIn, setDiagnosticOptIn] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -435,16 +437,7 @@ function SignupPage() {
                       maxLength={13}
                     />
                   </label>
-                  <label>
-                    학습 시작일
-                    <select
-                      value={learningStartMode}
-                      onChange={(event) => setLearningStartMode(event.target.value)}
-                    >
-                      <option value="day1">1일 차부터 시작</option>
-                      <option value="calendar">오늘 날짜 기준</option>
-                    </select>
-                  </label>
+                  {/* 학습 시작일 select 비활성화 (2026-05-10) — 일괄 day1 고정 */}
                   <label>
                     진단 테스트 응시
                     <select
