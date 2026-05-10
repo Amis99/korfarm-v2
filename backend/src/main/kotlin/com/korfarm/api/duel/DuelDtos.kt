@@ -11,7 +11,9 @@ data class DuelRoomView(
     val status: String,
     val playerCount: Int,
     val createdBy: String,
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime,
+    val readyCount: Int = 0,
+    val stakeSeedBreakdown: Map<String, Int> = emptyMap()
 )
 
 data class DuelRoomDetail(
@@ -30,6 +32,7 @@ data class DuelRoomPlayerView(
     val wins: Int = 0,
     val losses: Int = 0,
     val winRate: Double = 0.0,
+    val stakeSeedType: String? = null,
     /** AI 플레이어일 때 채팅 이모티콘 file_id (학생 화면에서 EmoticonImage 로 표시). */
     val aiAvatarFileId: String? = null
 )
@@ -91,6 +94,9 @@ data class DuelMatchResultView(
     val answeredCount: Int,
     val totalTimeMs: Long,
     val rewardAmount: Int,
+    val stakeSeedType: String? = null,
+    val stakeBreakdown: Map<String, Int> = emptyMap(),
+    val rewardBreakdown: Map<String, Int> = emptyMap(),
     val aiAvatarFileId: String? = null
 )
 
@@ -100,5 +106,6 @@ data class DuelMatchResultDetailView(
     val roomId: String? = null,
     val results: List<DuelMatchResultView>,
     val totalEscrow: Int,
-    val systemFee: Int
+    val systemFee: Int,
+    val escrowBreakdown: Map<String, Int> = emptyMap()
 )

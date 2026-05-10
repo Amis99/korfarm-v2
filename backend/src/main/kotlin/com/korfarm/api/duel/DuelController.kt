@@ -101,7 +101,8 @@ class DuelController(
         requireDuelEnabled(userId)
         val serverId = body["serverId"] ?: body["server_id"]
             ?: throw ApiException("INVALID_REQUEST", "serverId가 필요합니다", HttpStatus.BAD_REQUEST)
-        val result = duelService.joinAiRoom(userId, serverId)
+        val stakeSeedType = body["stakeSeedType"] ?: body["stake_seed_type"]
+        val result = duelService.joinAiRoom(userId, serverId, stakeSeedType)
 
         // 매치 상태 초기화 + 첫 문제 전송
         val matchId = result.second
@@ -127,10 +128,14 @@ class DuelController(
 
     // 준비 토글
     @PostMapping("/rooms/{roomId}/ready")
-    fun ready(@PathVariable roomId: String): ApiResponse<Map<String, Any>> {
+    fun ready(
+        @PathVariable roomId: String,
+        @RequestBody(required = false) body: Map<String, String>?
+    ): ApiResponse<Map<String, Any>> {
         val userId = requireUserId()
         requireDuelEnabled(userId)
-        val isReady = duelService.toggleReady(userId, roomId)
+        val stakeSeedType = body?.get("stakeSeedType") ?: body?.get("stake_seed_type")
+        val isReady = duelService.toggleReady(userId, roomId, stakeSeedType)
         return ApiResponse(success = true, data = mapOf("isReady" to isReady))
     }
 

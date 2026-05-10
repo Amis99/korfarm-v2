@@ -162,6 +162,9 @@ class DuelMatchPlayerEntity(
     @Column(name = "stake_amount", nullable = false)
     var stakeAmount: Int,
 
+    @Column(name = "stake_seed_type")
+    var stakeSeedType: String? = null,
+
     @Column(name = "correct_count", nullable = false)
     var correctCount: Int = 0,
 

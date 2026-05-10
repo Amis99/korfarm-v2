@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { apiGet } from "../utils/api";
+import { playDuelHaptic } from "../utils/haptics";
 import { useAuth } from "../hooks/useAuth";
 import EmoticonImage from "../components/chat/EmoticonImage";
+import { DUEL_SEED_LABELS, formatSeedStakeBreakdown } from "../constants/duelSeeds";
 import "../styles/duel.css";
+
+const DUEL_ASSET_BASE = `${import.meta.env.BASE_URL}images/duel`;
 
 function DuelResultPage() {
   const { matchId } = useParams();
@@ -19,6 +23,11 @@ function DuelResultPage() {
       .catch((e) => console.error(e))
       .finally(() => setLoading(false));
   }, [matchId]);
+
+  useEffect(() => {
+    const mine = result?.results?.find((r) => r.userId === userId);
+    if (mine?.rankPosition === 1) playDuelHaptic("win");
+  }, [result, userId]);
 
   if (loading) {
     return <div className="duel-result"><div className="duel-empty-msg">결과를 불러오는 중...</div></div>;
@@ -41,6 +50,7 @@ function DuelResultPage() {
   const results = result.results || [];
   const roomId = result.roomId;
   const serverId = result.serverId;
+  const escrowBreakdown = formatSeedStakeBreakdown(result.escrowBreakdown);
 
   // "다시 대결" 목적지: AI 방이거나 방 없으면 로비, 그 외 대기실
   const isAiMatch = results.some((r) => r.userId?.startsWith("ai_player_"));
@@ -52,7 +62,24 @@ function DuelResultPage() {
 
   return (
     <div className="duel-result">
+      <img className="duel-result-trophy" src={`${DUEL_ASSET_BASE}/duel-victory-ribbon.png`} alt="" aria-hidden="true" />
       <h1>대결 결과</h1>
+
+      {escrowBreakdown.length > 0 && (
+        <div className="duel-pot-panel result-pot">
+          <div>
+            <strong>이번 경기 씨앗 풀</strong>
+            <p>승리 보상은 걸린 씨앗 종류 비율대로 지급됩니다.</p>
+          </div>
+          <div className="duel-pot-chips">
+            {escrowBreakdown.map((seed) => (
+              <span key={seed.key} className={`duel-seed-chip ${seed.tone}`}>
+                <span>{seed.emoji}</span>{seed.label} {seed.amount}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="duel-result-card">
         {results.map((r, idx) => {
@@ -82,12 +109,21 @@ function DuelResultPage() {
                 <div className="score-detail">
                   {answered}문제 중 {r.correctCount}문제 정답
                 </div>
+                {formatSeedStakeBreakdown(r.stakeBreakdown).length > 0 && (
+                  <div className="score-detail seed-detail">
+                    판돈 {formatSeedStakeBreakdown(r.stakeBreakdown).map((seed) => `${seed.emoji}${seed.label} ${seed.amount}`).join(" · ")}
+                  </div>
+                )}
               </div>
               <div className="duel-result-reward">
                 {!isAi && r.rewardAmount > 0 ? (
                   <>
                     <div className="reward-amount">+{r.rewardAmount}</div>
-                    <div className="reward-label">씨앗 획득</div>
+                    <div className="reward-label">
+                      {formatSeedStakeBreakdown(r.rewardBreakdown).length > 0
+                        ? formatSeedStakeBreakdown(r.rewardBreakdown).map((seed) => `${DUEL_SEED_LABELS[seed.key] || seed.label} ${seed.amount}`).join(" · ")
+                        : "씨앗 획득"}
+                    </div>
                   </>
                 ) : (
                   <div className="reward-label" style={{ color: "#a08878" }}>-</div>

@@ -2,9 +2,16 @@ import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { WS_BASE } from "../utils/api";
+import { playDuelHaptic } from "../utils/haptics";
 import PassageMarkdown from "../components/PassageMarkdown";
 import EmoticonImage from "../components/chat/EmoticonImage";
 import "../styles/duel.css";
+
+const DUEL_ASSET_BASE = `${import.meta.env.BASE_URL}images/duel`;
+const DUEL_MARK_ASSETS = {
+  correct: `${DUEL_ASSET_BASE}/duel-correct-pop.png`,
+  wrong: `${DUEL_ASSET_BASE}/duel-wrong-pop.png`,
+};
 
 function DuelMatchPage() {
   const { matchId } = useParams();
@@ -59,6 +66,7 @@ function DuelMatchPage() {
   // 정답/오답 O/X 마크 표시
   useEffect(() => {
     if (!answerResult) { setVisibleMark(null); return; }
+    playDuelHaptic(answerResult.isCorrect ? "correct" : "wrong");
     setVisibleMark(answerResult.isCorrect ? "correct" : "wrong");
     const timer = setTimeout(() => setVisibleMark(null), 1000);
     return () => clearTimeout(timer);
@@ -97,6 +105,7 @@ function DuelMatchPage() {
         setRemainingCount(rp);
         setAnswerResult(null);
         setRoundResult(null);
+        if (idx === 0) playDuelHaptic("start");
         if (!eliminatedRef.current) {
           setPhase("answering");
         }
@@ -165,6 +174,7 @@ function DuelMatchPage() {
     const qId = currentQuestion?.question_id;
     if (!currentQuestion || answers[qId] || phase !== "answering") return;
 
+    playDuelHaptic("tap");
     setAnswers((prev) => ({ ...prev, [qId]: choiceId }));
 
     if (wsRef.current?.readyState === WebSocket.OPEN) {
@@ -235,6 +245,11 @@ function DuelMatchPage() {
       </div>
 
       {/* 참가자 프로필 스트립 */}
+      <div className="duel-match-stage" aria-hidden="true">
+        <img src={`${DUEL_ASSET_BASE}/duel-versus-burst.png`} alt="" />
+        <span>VS</span>
+      </div>
+
       <div className="duel-player-strip">
         {players.map((p) => {
           const pid = p.user_id ?? p.userId;
@@ -313,7 +328,12 @@ function DuelMatchPage() {
 
           {/* O/X 마크 오버레이 */}
           {visibleMark && (
-            <div className={`duel-answer-mark ${visibleMark}`} />
+            <div className={`duel-answer-mark ${visibleMark}`}>
+              <img
+                src={DUEL_MARK_ASSETS[visibleMark]}
+                alt={visibleMark === "correct" ? "Correct" : "Wrong"}
+              />
+            </div>
           )}
         </div>
       )}

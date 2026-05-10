@@ -1,8 +1,12 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { apiGet, apiPost, WS_BASE, camelize, normalizeInventoryKeys } from "../utils/api";
+import { playDuelHaptic } from "../utils/haptics";
 import { useAuth } from "../hooks/useAuth";
+import { DUEL_SEED_TYPES, DUEL_SEED_LABELS, formatSeedStakeBreakdown } from "../constants/duelSeeds";
 import "../styles/duel.css";
+
+const DUEL_ASSET_BASE = `${import.meta.env.BASE_URL}images/duel`;
 
 const LEVEL_LABELS = {
   saussure1: "소쉬르 1", saussure2: "소쉬르 2", saussure3: "소쉬르 3",
@@ -10,14 +14,6 @@ const LEVEL_LABELS = {
   russell1: "러셀 1", russell2: "러셀 2", russell3: "러셀 3",
   wittgenstein1: "비트겐슈타인 1", wittgenstein2: "비트겐슈타인 2", wittgenstein3: "비트겐슈타인 3",
 };
-
-const SEED_TYPES = [
-  { key: "seed_wheat", label: "밀" },
-  { key: "seed_rice", label: "쌀" },
-  { key: "seed_corn", label: "옥수수" },
-  { key: "seed_grape", label: "포도" },
-  { key: "seed_apple", label: "사과" },
-];
 
 function DuelWaitingRoomPage() {
   const { roomId } = useParams();
@@ -101,17 +97,30 @@ function DuelWaitingRoomPage() {
   // 준비하기 클릭 → 모달 열기 (인벤토리 조회)
   const handleReadyClick = () => {
     if (myReady) {
+      playDuelHaptic("tap");
       // 이미 준비 상태면 준비 해제
       if (wsRef.current?.readyState === WebSocket.OPEN) {
         wsRef.current.send(JSON.stringify({ type: "room.ready", payload: { roomId } }));
+      } else {
+        apiPost(`/v1/duel/rooms/${roomId}/ready`).catch((e) => console.error(e));
+      }
+      return;
+    }
+    if (isTheme) {
+      playDuelHaptic("ready");
+      if (wsRef.current?.readyState === WebSocket.OPEN) {
+        wsRef.current.send(JSON.stringify({ type: "room.ready", payload: { roomId } }));
+      } else {
+        apiPost(`/v1/duel/rooms/${roomId}/ready`).catch((e) => console.error(e));
       }
       return;
     }
     // 인벤토리 조회 후 모달 표시
+    playDuelHaptic("select");
     apiGet("/v1/inventory")
       .then((inv) => {
         setMyInventory(normalizeInventoryKeys(inv));
-        setSelectedSeedType(null);
+        setSelectedSeedType(myPlayer?.stakeSeedType || null);
         setShowSeedModal(true);
       })
       .catch(() => {
@@ -123,6 +132,7 @@ function DuelWaitingRoomPage() {
   // 모달에서 확인 → 준비 메시지 전송
   const handleSeedConfirm = () => {
     if (!selectedSeedType) return;
+    playDuelHaptic("ready");
     setShowSeedModal(false);
     if (wsRef.current?.readyState === WebSocket.OPEN) {
       wsRef.current.send(JSON.stringify({
@@ -130,11 +140,27 @@ function DuelWaitingRoomPage() {
         payload: { roomId, stakeSeedType: selectedSeedType },
       }));
     } else {
-      apiPost(`/v1/duel/rooms/${roomId}/ready`).catch((e) => console.error(e));
+      apiPost(`/v1/duel/rooms/${roomId}/ready`, { stake_seed_type: selectedSeedType }).catch((e) => console.error(e));
     }
   };
 
+  const handleHostSeedClick = () => {
+    playDuelHaptic("select");
+    apiGet("/v1/inventory")
+      .then((inv) => {
+        setMyInventory(normalizeInventoryKeys(inv));
+        setSelectedSeedType(myPlayer?.stakeSeedType || null);
+        setShowSeedModal(true);
+      })
+      .catch(() => {
+        setMyInventory(null);
+        setSelectedSeedType(myPlayer?.stakeSeedType || null);
+        setShowSeedModal(true);
+      });
+  };
+
   const handleStart = () => {
+    playDuelHaptic("start");
     if (wsRef.current?.readyState === WebSocket.OPEN) {
       wsRef.current.send(JSON.stringify({ type: "room.start", payload: { roomId } }));
     } else {
@@ -156,10 +182,14 @@ function DuelWaitingRoomPage() {
   };
 
   const isHost = room?.createdBy === userId;
-  const canStart = isHost && players.length >= 2;
   const myPlayer = players.find((p) => p.userId === userId);
   const myReady = myPlayer?.isReady ?? false;
   const stakeAmount = room?.stakeAmount ?? 0;
+  const isTheme = room?.serverId?.startsWith("theme_");
+  const humanPlayers = players.filter((p) => !String(p.userId || "").startsWith("ai_player_"));
+  const allHumansReady = isTheme || humanPlayers.every((p) => p.isReady && p.stakeSeedType);
+  const canStart = isHost && players.length >= 2 && allHumansReady;
+  const potBreakdown = formatSeedStakeBreakdown(room?.stakeSeedBreakdown);
 
   const seeds = myInventory?.seeds || {};
 
@@ -181,11 +211,30 @@ function DuelWaitingRoomPage() {
   return (
     <div className="duel-waiting">
       <div className="duel-waiting-header">
+        <img className="duel-room-emblem" src={`${DUEL_ASSET_BASE}/duel-arena-badge.png`} alt="" aria-hidden="true" />
         <h1>{room?.roomName || "대기방"}</h1>
         <div className="room-info">
-          베팅 {stakeAmount} {selectedSeedType ? (SEED_TYPES.find(s => s.key === selectedSeedType)?.label || "") + "씨앗" : "씨앗"} | {players.length}/{room?.roomSize ?? 10}명
+          {isTheme ? "씨앗 없는 테마전" : `베팅 ${stakeAmount}씨앗`} | {players.length}/{room?.roomSize ?? 10}명
         </div>
       </div>
+
+      {!isTheme && (
+        <div className="duel-pot-panel">
+          <div>
+            <strong>승리자가 가져갈 씨앗 풀</strong>
+            <p>{potBreakdown.length > 0 ? "준비 완료한 참가자의 판돈이 모이고 있어요." : "아직 모인 씨앗이 없습니다."}</p>
+          </div>
+          {potBreakdown.length > 0 && (
+            <div className="duel-pot-chips">
+              {potBreakdown.map((seed) => (
+                <span key={seed.key} className={`duel-seed-chip ${seed.tone}`}>
+                  <span>{seed.emoji}</span>{seed.label} {seed.amount}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="duel-players-list">
         {players.map((p) => {
@@ -219,6 +268,11 @@ function DuelWaitingRoomPage() {
                   <span className="losses">{losses}패</span>{" "}
                   <span className="win-rate">({(winRate * 100).toFixed(0)}%)</span>
                 </span>
+                {!isTheme && p.stakeSeedType && (
+                  <span className="player-stake-seed">
+                    판돈: {DUEL_SEED_LABELS[p.stakeSeedType] || "씨앗"} {stakeAmount}개
+                  </span>
+                )}
               </div>
 
               <div className="player-status">
@@ -234,9 +288,16 @@ function DuelWaitingRoomPage() {
       <div className="duel-waiting-actions">
         <button className="duel-leave-btn" onClick={handleLeave}>나가기</button>
         {isHost ? (
-          <button className="duel-start-btn" onClick={handleStart} disabled={!canStart}>
-            {canStart ? "시작하기" : `${players.length}/2명 이상 필요`}
-          </button>
+          <>
+            {!isTheme && (
+              <button className="duel-ready-btn not-ready" onClick={handleHostSeedClick}>
+                {myPlayer?.stakeSeedType ? `내 판돈: ${DUEL_SEED_LABELS[myPlayer.stakeSeedType]}` : "내 씨앗 선택"}
+              </button>
+            )}
+            <button className="duel-start-btn" onClick={handleStart} disabled={!canStart}>
+              {players.length < 2 ? `${players.length}/2명 이상 필요` : canStart ? "시작하기" : "참가자 준비 대기"}
+            </button>
+          </>
         ) : (
           <button
             className={`duel-ready-btn ${myReady ? "" : "not-ready"}`}
@@ -263,7 +324,7 @@ function DuelWaitingRoomPage() {
             </p>
 
             <div className="seed-grid">
-              {SEED_TYPES.map((s) => {
+              {DUEL_SEED_TYPES.map((s) => {
                 const count = seeds[s.key] ?? 0;
                 const enough = count >= stakeAmount;
                 const isSelected = selectedSeedType === s.key;
@@ -271,10 +332,14 @@ function DuelWaitingRoomPage() {
                   <button
                     key={s.key}
                     type="button"
-                    className={`duel-seed-btn ${isSelected ? "selected" : enough ? "available" : "unavailable"}`}
-                    onClick={() => enough && setSelectedSeedType(s.key)}
+                    className={`duel-seed-btn ${s.tone} ${isSelected ? "selected" : enough ? "available" : "unavailable"}`}
+                    onClick={() => {
+                      if (!enough) return;
+                      playDuelHaptic("select");
+                      setSelectedSeedType(s.key);
+                    }}
                   >
-                    {s.label} {count}개
+                    <span>{s.emoji}</span> {s.label} {count}개
                   </button>
                 );
               })}

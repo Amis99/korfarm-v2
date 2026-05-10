@@ -178,6 +178,25 @@
   border-color: var(--duel-primary);
 }
 
+.duel-room-mini-art {
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
+  object-fit: contain;
+  margin-right: 12px;
+  filter: drop-shadow(0 7px 10px rgba(140, 90, 40, 0.14));
+  transition: transform 160ms ease;
+}
+
+.duel-room-item:hover .duel-room-mini-art {
+  transform: translateY(-2px) scale(1.05);
+}
+
+.duel-room-info {
+  flex: 1;
+  min-width: 0;
+}
+
 .duel-room-info .room-name {
   font-weight: 700;
   color: var(--duel-text-dark);
@@ -293,6 +312,16 @@
 .duel-waiting-header {
   text-align: center;
   margin-bottom: 28px;
+}
+
+.duel-room-emblem {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 8px;
+  filter: drop-shadow(0 10px 16px rgba(140, 90, 40, 0.16));
+  animation: duel-float 2.4s ease-in-out infinite;
 }
 
 .duel-waiting-header h1 {
@@ -603,11 +632,13 @@
 .duel-choice-btn.correct {
   border-color: var(--duel-success);
   background: #f0fdf4;
+  animation: duel-choice-correct 360ms ease;
 }
 
 .duel-choice-btn.wrong {
   border-color: var(--duel-danger);
   background: #fef2f2;
+  animation: duel-choice-wrong 420ms ease;
 }
 
 /* 결과 화면 */
@@ -615,6 +646,16 @@
   max-width: 600px;
   margin: 40px auto;
   padding: 0 20px;
+}
+
+.duel-result-trophy {
+  width: 132px;
+  height: 132px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 4px;
+  filter: drop-shadow(0 12px 18px rgba(140, 90, 40, 0.18));
+  animation: duel-victory-pop 680ms cubic-bezier(.2,1.45,.35,1);
 }
 
 .duel-result h1 {
@@ -645,6 +686,7 @@
 
 .duel-result-row.winner {
   background: var(--duel-bg-hover);
+  animation: duel-winner-glow 1.6s ease-in-out infinite alternate;
 }
 
 .duel-result-row.me {
@@ -761,6 +803,32 @@
 }
 
 /* 참가자 프로필 스트립 */
+.duel-match-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 72px;
+  margin: -4px 0 10px;
+  pointer-events: none;
+}
+
+.duel-match-stage img {
+  width: min(270px, 78vw);
+  height: 96px;
+  object-fit: contain;
+  filter: drop-shadow(0 9px 14px rgba(140, 90, 40, 0.14));
+  animation: duel-stage-pulse 1.25s ease-in-out infinite;
+}
+
+.duel-match-stage span {
+  position: absolute;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 1000;
+  line-height: 1;
+  text-shadow: 0 2px 0 rgba(94, 50, 12, 0.3), 0 5px 12px rgba(94, 50, 12, 0.28);
+}
+
 .duel-player-strip {
   display: flex;
   flex-wrap: wrap;
@@ -982,23 +1050,21 @@
 .duel-answer-mark {
   position: absolute;
   inset: 0;
-  width: 200px;
-  height: 165px;
+  width: 230px;
+  height: 230px;
   margin: auto;
   z-index: 10;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+  display: grid;
+  place-items: center;
   pointer-events: none;
-  animation: duel-mark-pop 0.3s ease;
+  animation: duel-mark-pop 420ms cubic-bezier(.18,1.35,.35,1);
 }
 
-.duel-answer-mark.correct {
-  background-image: url("/정답 동그라미.png");
-}
-
-.duel-answer-mark.wrong {
-  background-image: url("/오답 꺾은선.png");
+.duel-answer-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 16px rgba(60, 40, 20, 0.14));
 }
 
 @keyframes duel-mark-pop {
@@ -1008,6 +1074,23 @@
 }
 
 /* === 탈락 오버레이 === */
+.duel-answer-mark.correct {
+  background-image: none;
+  animation: duel-mark-pop 420ms cubic-bezier(.18,1.35,.35,1);
+}
+
+.duel-answer-mark.wrong {
+  background-image: none;
+  animation: duel-mark-pop 360ms cubic-bezier(.18,1.35,.35,1), duel-mark-shake 420ms ease;
+}
+
+@keyframes duel-mark-shake {
+  0%, 100% { transform: translateX(0) scale(1); }
+  25% { transform: translateX(-7px) scale(1.02); }
+  50% { transform: translateX(7px) scale(1); }
+  75% { transform: translateX(-4px) scale(1.01); }
+}
+
 .duel-eliminated-overlay {
   position: fixed;
   inset: 0;
@@ -1114,6 +1197,40 @@
 }
 
 /* 반응형 */
+@keyframes duel-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes duel-stage-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+@keyframes duel-choice-correct {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.018); }
+  100% { transform: scale(1); }
+}
+
+@keyframes duel-choice-wrong {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-2px); }
+}
+
+@keyframes duel-victory-pop {
+  0% { opacity: 0; transform: scale(0.55) rotate(-5deg); }
+  70% { opacity: 1; transform: scale(1.08) rotate(2deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@keyframes duel-winner-glow {
+  from { box-shadow: inset 0 0 0 rgba(255, 143, 43, 0); }
+  to { box-shadow: inset 0 0 26px rgba(255, 205, 92, 0.2); }
+}
+
 @media (max-width: 768px) {
   .duel-lobby, .duel-waiting, .duel-result {
     padding: 0 16px;
@@ -1130,8 +1247,34 @@
     flex-direction: column;
   }
 
+  .duel-pot-panel {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .duel-pot-chips {
+    justify-content: flex-start;
+  }
+
   .duel-result-player {
     margin: 0 10px;
+  }
+
+  .duel-room-mini-art {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
+    margin-right: 8px;
+  }
+
+  .duel-room-emblem {
+    width: 82px;
+    height: 82px;
+  }
+
+  .duel-result-trophy {
+    width: 108px;
+    height: 108px;
   }
 }
 
@@ -1144,9 +1287,39 @@
     flex-wrap: wrap;
     gap: 8px;
   }
+
+  .duel-seed-picker {
+    grid-template-columns: 1fr;
+  }
+
+  .duel-match-stage {
+    height: 58px;
+    margin-bottom: 6px;
+  }
+
+  .duel-match-stage img {
+    height: 76px;
+  }
+
+  .duel-answer-mark {
+    width: 178px;
+    height: 178px;
+  }
 }
 
 /* 씨앗 선택 모달 */
+@media (prefers-reduced-motion: reduce) {
+  .duel-room-emblem,
+  .duel-match-stage img,
+  .duel-result-trophy,
+  .duel-result-row.winner,
+  .duel-choice-btn.correct,
+  .duel-choice-btn.wrong,
+  .duel-answer-mark {
+    animation: none !important;
+  }
+}
+
 .duel-seed-modal {
   padding: 24px;
   background: #fff;
@@ -1166,6 +1339,142 @@
   gap: 8px;
   justify-content: center;
   margin-bottom: 20px;
+}
+
+.duel-pot-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: linear-gradient(135deg, #fff8ec, #fff);
+  border: 1px solid var(--duel-border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 6px 16px rgba(140, 90, 40, 0.08);
+}
+
+.duel-pot-panel strong {
+  display: block;
+  color: var(--duel-text-dark);
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.duel-pot-panel p {
+  margin: 0;
+  color: var(--duel-text-muted);
+  font-size: 12px;
+}
+
+.duel-pot-panel.result-pot {
+  margin: 0 0 16px;
+}
+
+.duel-pot-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  justify-content: flex-end;
+}
+
+.duel-pot-chips.compact {
+  justify-content: flex-start;
+  margin-top: 8px;
+}
+
+.duel-seed-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 26px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(120, 88, 42, 0.14);
+  background: #fff3d4;
+  color: #5a3a12;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.duel-seed-chip.rice { background: #f3f0df; color: #5b5849; }
+.duel-seed-chip.corn { background: #fff0a6; color: #6a4f00; }
+.duel-seed-chip.grape { background: #eadff7; color: #59407c; }
+.duel-seed-chip.apple { background: #ffe1e1; color: #8b3030; }
+
+.duel-seed-picker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 8px 0 14px;
+}
+
+.duel-seed-choice {
+  min-width: 0;
+  padding: 10px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  background: #fff8ec;
+  box-shadow: inset 1px 1px 2px rgba(255,255,255,0.8), 0 3px 8px rgba(140, 90, 40, 0.08);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 8px;
+  row-gap: 2px;
+  align-items: center;
+  text-align: left;
+  transition: transform 120ms ease, border-color 120ms ease, opacity 120ms ease;
+}
+
+.duel-seed-choice:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.duel-seed-choice.selected {
+  border-color: var(--duel-primary);
+  background: #fff1df;
+}
+
+.duel-seed-choice.disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.duel-seed-choice .seed-emoji {
+  grid-row: span 2;
+  font-size: 20px;
+}
+
+.duel-seed-choice .seed-label {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--duel-text-dark);
+}
+
+.duel-seed-choice .seed-count {
+  font-size: 11px;
+  color: var(--duel-text-muted);
+}
+
+.duel-seed-loading,
+.duel-seed-note {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--duel-text-muted);
+  font-size: 12px;
+}
+
+.player-stake-seed {
+  display: block;
+  margin-top: 4px;
+  color: var(--duel-primary-dark);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.seed-detail {
+  margin-top: 3px;
+  color: var(--duel-primary-dark) !important;
 }
 
 .duel-seed-btn {
@@ -1232,3 +1541,9 @@
 .duel-passage p { margin: 0 0 8px; line-height: 1.7; }
 .duel-passage img { max-width: 100%; max-height: 320px; }
 .duel-stem p { margin: 0; line-height: 1.5; }
+
+@media (max-width: 600px) {
+  .duel-seed-picker {
+    grid-template-columns: 1fr;
+  }
+}

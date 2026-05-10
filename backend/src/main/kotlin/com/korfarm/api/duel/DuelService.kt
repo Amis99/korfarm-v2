@@ -89,8 +89,9 @@ class DuelService(
         val roomSize = request.roomSize.coerceIn(2, 10)
 
         // 씨앗 보유량 검증 (테마는 skip)
+        val selectedStakeSeedType = if (isTheme) null else requireValidStakeSeedType(request.stakeSeedType)
         if (!isTheme) {
-            validateSeedBalance(userId, stakeAmount)
+            validateSeedBalanceForType(userId, selectedStakeSeedType!!, stakeAmount)
         }
 
         val room = DuelRoomEntity(
@@ -110,6 +111,7 @@ class DuelService(
             userId = userId,
             status = "joined",
             isReady = true, // 방장은 자동 준비
+            stakeSeedType = selectedStakeSeedType,
             joinedAt = LocalDateTime.now()
         )
         duelRoomPlayerRepository.save(player)
@@ -180,12 +182,13 @@ class DuelService(
      * AI 방 참가: 실제 방 생성 + AI 3명 배치 + 매치 자동 시작
      */
     @Transactional
-    fun joinAiRoom(userId: String, serverId: String): Pair<String, String> {
+    fun joinAiRoom(userId: String, serverId: String, stakeSeedType: String?): Pair<String, String> {
         validateServerId(serverId)
         val stakeAmount = AiPlayerService.AI_STAKE_AMOUNT
+        val selectedStakeSeedType = requireValidStakeSeedType(stakeSeedType)
 
         // 사용자 씨앗 보유량 검증
-        validateSeedBalance(userId, stakeAmount)
+        validateSeedBalanceForType(userId, selectedStakeSeedType, stakeAmount)
 
         // 실제 방 DB 생성
         val room = DuelRoomEntity(
@@ -206,6 +209,7 @@ class DuelService(
             userId = userId,
             status = "joined",
             isReady = true,
+            stakeSeedType = selectedStakeSeedType,
             joinedAt = LocalDateTime.now()
         )
         duelRoomPlayerRepository.save(userPlayer)
@@ -254,17 +258,32 @@ class DuelService(
         val room = duelRoomRepository.findById(roomId).orElseThrow {
             ApiException("NOT_FOUND", "방을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
         }
+        val isTheme = isThemeServer(room.serverId)
+        val selectedStakeSeedType = if (isTheme) null else {
+            stakeSeedType?.let { requireValidStakeSeedType(it) } ?: player.stakeSeedType
+        }
         if (room.createdBy == userId) {
-            if (stakeSeedType != null) {
-                player.stakeSeedType = stakeSeedType
+            if (!isTheme) {
+                val requiredSeedType = selectedStakeSeedType
+                    ?: throw ApiException("STAKE_SEED_REQUIRED", "베팅할 씨앗 종류를 선택해 주세요", HttpStatus.BAD_REQUEST)
+                validateSeedBalanceForType(userId, requiredSeedType, room.stakeAmount)
+                player.stakeSeedType = requiredSeedType
                 duelRoomPlayerRepository.save(player)
             }
             return true
         }
-        player.isReady = !player.isReady
-        if (stakeSeedType != null) {
-            player.stakeSeedType = stakeSeedType
+        if (player.isReady) {
+            player.isReady = false
+            duelRoomPlayerRepository.save(player)
+            return false
         }
+        if (!isTheme) {
+            val requiredSeedType = selectedStakeSeedType
+                ?: throw ApiException("STAKE_SEED_REQUIRED", "베팅할 씨앗 종류를 선택해 주세요", HttpStatus.BAD_REQUEST)
+            validateSeedBalanceForType(userId, requiredSeedType, room.stakeAmount)
+            player.stakeSeedType = requiredSeedType
+        }
+        player.isReady = true
         duelRoomPlayerRepository.save(player)
         return player.isReady
     }
@@ -286,6 +305,18 @@ class DuelService(
             .filter { it.status == "joined" }
         if (players.size < 2) {
             throw ApiException("NOT_ENOUGH_PLAYERS", "2명 이상이어야 시작할 수 있습니다", HttpStatus.BAD_REQUEST)
+        }
+        val isThemeMatch = isThemeServer(room.serverId)
+        if (!isThemeMatch) {
+            val humanPlayers = players.filterNot { aiPlayerService.isAiPlayer(it.userId) }
+            val notReady = humanPlayers.filterNot { it.isReady }
+            if (notReady.isNotEmpty()) {
+                throw ApiException("NOT_READY", "모든 참가자가 준비해야 시작할 수 있습니다", HttpStatus.CONFLICT)
+            }
+            humanPlayers.forEach { player ->
+                val selectedSeedType = requireValidStakeSeedType(player.stakeSeedType)
+                validateSeedBalanceForType(player.userId, selectedSeedType, room.stakeAmount)
+            }
         }
 
         // 문제 선정 (서버 풀 전체 셔플 — 테마 서브 서버도 자체 풀만 사용)
@@ -325,15 +356,11 @@ class DuelService(
 
         // 참가자 처리: 씨앗 에스크로 차감 + 매치 플레이어 생성
         // (테마 서버는 stake 0 — 에스크로/씨앗 차감 모두 skip)
-        val isThemeMatch = isThemeServer(room.serverId)
         players.forEach { rp ->
             // AI 플레이어는 에스크로 차감 건너뛰기 + 테마 서버 전체 skip
             if (!aiPlayerService.isAiPlayer(rp.userId) && !isThemeMatch) {
-                if (rp.stakeSeedType != null && rp.stakeSeedType in SEED_TYPES) {
-                    deductSeedsFromType(rp.userId, rp.stakeSeedType!!, room.stakeAmount, match.id)
-                } else {
-                    deductSeedsFromAny(rp.userId, room.stakeAmount, match.id)
-                }
+                val selectedSeedType = requireValidStakeSeedType(rp.stakeSeedType)
+                deductSeedsFromType(rp.userId, selectedSeedType, room.stakeAmount, match.id)
             }
 
             val mp = DuelMatchPlayerEntity(
@@ -341,7 +368,8 @@ class DuelService(
                 matchId = match.id,
                 userId = rp.userId,
                 result = "pending",
-                stakeAmount = room.stakeAmount
+                stakeAmount = room.stakeAmount,
+                stakeSeedType = rp.stakeSeedType
             )
             duelMatchPlayerRepository.save(mp)
         }
@@ -450,6 +478,7 @@ class DuelService(
         // 정산 (보상 계산)
         val escrows = duelEscrowRepository.findByMatchId(matchId)
         val totalEscrow = escrows.sumOf { it.amount }
+        val escrowBreakdown = buildSeedBreakdown(escrows)
         val systemFee = (totalEscrow * SYSTEM_FEE_RATE).toInt()
         val winnerPool = totalEscrow - systemFee
 
@@ -500,9 +529,19 @@ class DuelService(
             matchId = matchId,
             serverId = match.serverId,
             roomId = match.roomId,
-            results = sorted.map { toMatchResultView(it, answeredCountMap[it.userId] ?: 0) },
+            results = sorted.map {
+                toMatchResultView(
+                    player = it,
+                    answeredCount = answeredCountMap[it.userId] ?: 0,
+                    escrows = escrows,
+                    rewardBreakdown = if (it.rankPosition == 1 && it.rewardAmount > 0) {
+                        calculateProportionalBreakdown(it.rewardAmount, escrowBreakdown)
+                    } else emptyMap()
+                )
+            },
             totalEscrow = totalEscrow,
-            systemFee = systemFee
+            systemFee = systemFee,
+            escrowBreakdown = escrowBreakdown
         )
     }
 
@@ -524,26 +563,15 @@ class DuelService(
         val winnerPool = totalEscrow - systemFee
         val rewardPerWinner = winnerPool / winners.size
 
-        val seedTypeAmounts = escrows.groupBy { it.seedType }
-            .mapValues { (_, escs) -> escs.sumOf { it.amount } }
-        val totalAmount = seedTypeAmounts.values.sum()
+        val seedTypeAmounts = buildSeedBreakdown(escrows)
 
         winners.forEach { winner ->
             // AI 승자는 보상 지급 건너뛰기
             if (aiPlayerService.isAiPlayer(winner.userId)) return@forEach
 
-            if (totalAmount > 0) {
-                var remaining = rewardPerWinner
-                seedTypeAmounts.entries.forEachIndexed { idx, (seedType, amount) ->
-                    val share = if (idx == seedTypeAmounts.size - 1) {
-                        remaining
-                    } else {
-                        (rewardPerWinner.toLong() * amount / totalAmount).toInt()
-                    }
-                    if (share > 0) {
-                        economyService.adjustSeed(winner.userId, seedType, share, "duel_reward", "duel_match", matchId)
-                        remaining -= share
-                    }
+            calculateProportionalBreakdown(rewardPerWinner, seedTypeAmounts).forEach { (seedType, share) ->
+                if (share > 0) {
+                    economyService.adjustSeed(winner.userId, seedType, share, "duel_reward", "duel_match", matchId)
                 }
             }
         }
@@ -607,15 +635,26 @@ class DuelService(
         }
         val escrows = duelEscrowRepository.findByMatchId(matchId)
         val totalEscrow = escrows.sumOf { it.amount }
+        val escrowBreakdown = buildSeedBreakdown(escrows)
         val systemFee = (totalEscrow * SYSTEM_FEE_RATE).toInt()
 
         return DuelMatchResultDetailView(
             matchId = matchId,
             serverId = match.serverId,
             roomId = match.roomId,
-            results = players.sortedBy { it.rankPosition ?: 999 }.map { toMatchResultView(it, answeredCountMap[it.userId] ?: 0) },
+            results = players.sortedBy { it.rankPosition ?: 999 }.map {
+                toMatchResultView(
+                    player = it,
+                    answeredCount = answeredCountMap[it.userId] ?: 0,
+                    escrows = escrows,
+                    rewardBreakdown = if (it.rankPosition == 1 && it.rewardAmount > 0) {
+                        calculateProportionalBreakdown(it.rewardAmount, escrowBreakdown)
+                    } else emptyMap()
+                )
+            },
             totalEscrow = totalEscrow,
-            systemFee = systemFee
+            systemFee = systemFee,
+            escrowBreakdown = escrowBreakdown
         )
     }
 
@@ -681,6 +720,9 @@ class DuelService(
             .filter { it.status == "joined" }
         players.forEach { p ->
             p.isReady = (p.userId == room.createdBy)
+            if (p.userId != room.createdBy) {
+                p.stakeSeedType = null
+            }
             duelRoomPlayerRepository.save(p)
         }
     }
@@ -697,6 +739,57 @@ class DuelService(
         if (total < amount) {
             throw ApiException("INSUFFICIENT_SEEDS", "씨앗이 부족합니다 (보유: ${total}, 필요: ${amount})", HttpStatus.BAD_REQUEST)
         }
+    }
+
+    private fun validateSeedBalanceForType(userId: String, seedType: String, amount: Int) {
+        val seed = userSeedRepository.findForUpdate(userId, seedType)
+        val count = seed?.count ?: 0
+        if (count < amount) {
+            throw ApiException(
+                "INSUFFICIENT_SEEDS",
+                "선택한 씨앗이 부족합니다 (보유: ${count}, 필요: ${amount})",
+                HttpStatus.BAD_REQUEST
+            )
+        }
+    }
+
+    private fun requireValidStakeSeedType(seedType: String?): String {
+        val normalized = seedType?.trim()
+        if (normalized.isNullOrBlank()) {
+            throw ApiException("STAKE_SEED_REQUIRED", "베팅할 씨앗 종류를 선택해 주세요", HttpStatus.BAD_REQUEST)
+        }
+        if (normalized !in SEED_TYPES) {
+            throw ApiException("INVALID_STAKE_SEED", "유효하지 않은 씨앗 종류입니다", HttpStatus.BAD_REQUEST)
+        }
+        return normalized
+    }
+
+    private fun buildSeedBreakdown(escrows: List<DuelEscrowEntity>): Map<String, Int> {
+        return SEED_TYPES.mapNotNull { seedType ->
+            val amount = escrows.filter { it.seedType == seedType }.sumOf { it.amount }
+            if (amount > 0) seedType to amount else null
+        }.toMap()
+    }
+
+    private fun calculateProportionalBreakdown(total: Int, sourceBreakdown: Map<String, Int>): Map<String, Int> {
+        if (total <= 0 || sourceBreakdown.isEmpty()) return emptyMap()
+        val ordered = SEED_TYPES.mapNotNull { seedType ->
+            val amount = sourceBreakdown[seedType] ?: 0
+            if (amount > 0) seedType to amount else null
+        }
+        val sourceTotal = ordered.sumOf { it.second }
+        if (sourceTotal <= 0) return emptyMap()
+
+        var remaining = total
+        return ordered.mapIndexedNotNull { index, (seedType, amount) ->
+            val share = if (index == ordered.lastIndex) {
+                remaining
+            } else {
+                (total.toLong() * amount / sourceTotal).toInt()
+            }
+            remaining -= share
+            if (share > 0) seedType to share else null
+        }.toMap()
     }
 
     // 5종 씨앗에서 순차 차감 + 에스크로 기록
@@ -795,7 +888,18 @@ class DuelService(
     }
 
     private fun toRoomView(room: DuelRoomEntity): DuelRoomView {
-        val playerCount = duelRoomPlayerRepository.countByRoomIdAndStatus(room.id, "joined").toInt()
+        val joinedPlayers = duelRoomPlayerRepository.findByRoomIdOrderByJoinedAtAsc(room.id)
+            .filter { it.status == "joined" }
+        val readyPlayers = joinedPlayers.filter { it.isReady }
+        val stakeSeedBreakdown = if (isThemeServer(room.serverId) || room.stakeAmount <= 0) {
+            emptyMap()
+        } else {
+            SEED_TYPES.mapNotNull { seedType ->
+                val count = readyPlayers.count { it.stakeSeedType == seedType && !aiPlayerService.isAiPlayer(it.userId) }
+                val amount = count * room.stakeAmount
+                if (amount > 0) seedType to amount else null
+            }.toMap()
+        }
         return DuelRoomView(
             roomId = room.id,
             serverId = room.serverId,
@@ -803,9 +907,11 @@ class DuelService(
             roomSize = room.roomSize,
             stakeAmount = room.stakeAmount,
             status = room.status,
-            playerCount = playerCount,
+            playerCount = joinedPlayers.size,
             createdBy = room.createdBy,
-            createdAt = room.createdAt
+            createdAt = room.createdAt,
+            readyCount = readyPlayers.size,
+            stakeSeedBreakdown = stakeSeedBreakdown
         )
     }
 
@@ -834,6 +940,7 @@ class DuelService(
                 wins = 0,
                 losses = 0,
                 winRate = 0.0,
+                stakeSeedType = player.stakeSeedType,
                 aiAvatarFileId = aiPlayerService.getAiAvatarFileId(player.userId)
             )
         }
@@ -850,12 +957,19 @@ class DuelService(
             levelId = userEntity?.levelId,
             wins = stat?.wins ?: 0,
             losses = stat?.losses ?: 0,
-            winRate = stat?.winRate?.toDouble() ?: 0.0
+            winRate = stat?.winRate?.toDouble() ?: 0.0,
+            stakeSeedType = player.stakeSeedType
         )
     }
 
-    private fun toMatchResultView(player: DuelMatchPlayerEntity, answeredCount: Int): DuelMatchResultView {
+    private fun toMatchResultView(
+        player: DuelMatchPlayerEntity,
+        answeredCount: Int,
+        escrows: List<DuelEscrowEntity>,
+        rewardBreakdown: Map<String, Int>
+    ): DuelMatchResultView {
         val isAi = aiPlayerService.isAiPlayer(player.userId)
+        val stakeBreakdown = buildSeedBreakdown(escrows.filter { it.userId == player.userId })
         return DuelMatchResultView(
             userId = player.userId,
             userName = getUserName(player.userId),
@@ -865,6 +979,9 @@ class DuelService(
             answeredCount = answeredCount,
             totalTimeMs = player.totalTimeMs,
             rewardAmount = player.rewardAmount,
+            stakeSeedType = player.stakeSeedType,
+            stakeBreakdown = stakeBreakdown,
+            rewardBreakdown = rewardBreakdown,
             aiAvatarFileId = if (isAi) aiPlayerService.getAiAvatarFileId(player.userId) else null
         )
     }

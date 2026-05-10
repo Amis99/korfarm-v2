@@ -81,7 +81,8 @@ data class DuelRoomCreateRequest(
     @field:NotBlank val serverId: String,
     @field:NotBlank val roomName: String,
     val roomSize: Int = 10,
-    @field:Min(1) val stakeAmount: Int
+    @field:Min(1) val stakeAmount: Int,
+    val stakeSeedType: String? = null
 )
 
 data class CreatePostRequest(
