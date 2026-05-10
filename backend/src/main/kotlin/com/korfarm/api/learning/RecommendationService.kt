@@ -284,7 +284,10 @@ class RecommendationService(
     }
 
     /**
-     * 2. 영역·세부영역별 추천 — area + subArea 매칭. ±2 레벨 fallback + 평생 이력 제외.
+     * 2. 영역·세부영역별 추천 — content_classifications 의 분류 코드 매칭. ±2 레벨 fallback + 평생 이력 제외.
+     *
+     * 2026-05-10 개선: 단일 컬럼(contents.area) 매칭 → content_classifications 다중 분류 매칭으로 전환.
+     * 한 콘텐츠가 여러 영역에 매핑돼 있어도 모두 잡힘.
      */
     @Transactional(readOnly = true)
     fun recommendForArea(
@@ -296,13 +299,21 @@ class RecommendationService(
     ): List<RecommendedContent> {
         val targetLevel = levelId ?: userRepository.findById(userId).orElse(null)?.levelId
         val solvedIds = loadSolvedContentIds(userId)
-        val candidateLevels = resolveAdjacentLevelIds(targetLevel)
+        val candidateLevels = resolveAdjacentLevelIds(targetLevel).toSet()
 
         val pool: List<ContentEntity> = when {
-            area != null && candidateLevels.isNotEmpty() ->
-                candidateLevels.flatMap { contentRepository.findByAreaAndLevelIdAndStatus(area, it, "active") }
-                    .distinctBy { it.id }
-            area != null -> contentRepository.findByAreaAndStatus(area, "active")
+            area != null -> {
+                // content_classifications.area 매칭 (theme 와 동일 패턴)
+                val areaIds = contentClassificationRepository.findContentIdsByCode(area).toMutableSet()
+                if (subArea != null) {
+                    val subIds = contentClassificationRepository.findContentIdsByCode(subArea).toSet()
+                    areaIds.retainAll(subIds)  // 교집합
+                }
+                if (areaIds.isEmpty()) emptyList()
+                else contentRepository.findAllById(areaIds)
+                    .filter { it.status == "active" }
+                    .filter { candidateLevels.isEmpty() || it.levelId in candidateLevels }
+            }
             candidateLevels.isNotEmpty() ->
                 candidateLevels.flatMap { contentRepository.findByContentTypeAndLevelIdAndStatus("DAILY_READING", it, "active") }
                     .distinctBy { it.id }
@@ -310,7 +321,6 @@ class RecommendationService(
         }
         val filtered = pool
             .filter { it.id !in solvedIds && isLearningContent(it) }
-            .filter { subArea == null || it.subArea == subArea }
         return filtered.take(limit).map {
             RecommendedContent(
                 contentId = it.id,
