@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useOrgBillingStatus, daysUntil } from "../hooks/useOrgBillingStatus";
 import SiteFooter from "./SiteFooter";
@@ -45,6 +45,13 @@ function AdminLayout({ children }) {
   const location = useLocation();
   const { user } = useAuth();
   const userRoles = user?.roles || [];
+
+  // 어드민 권한 가드 — HQ_ADMIN/ORG_ADMIN 만 접근. PARENT/STUDENT 등은 적절한 홈으로 리다이렉트.
+  // (백엔드도 차단하지만 사용자 경험상 직접 진입 시 빠르게 튕겨내기.)
+  if (user && !userRoles.includes("HQ_ADMIN") && !userRoles.includes("ORG_ADMIN")) {
+    if (userRoles.includes("PARENT")) return <Navigate to="/parent-home" replace />;
+    return <Navigate to="/start" replace />;
+  }
   const billingStatus = useOrgBillingStatus();
   const dueDays = billingStatus?.nextDueAt ? daysUntil(billingStatus.nextDueAt) : null;
   const showSuspendedBanner = !!billingStatus?.suspended;
