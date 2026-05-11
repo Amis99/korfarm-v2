@@ -32,15 +32,22 @@ class JwtAuthenticationFilter(
     }
 
     private fun extractToken(request: HttpServletRequest): String? {
-        // Authorization 헤더에서 토큰 추출
+        // 1차: Authorization 헤더 (표준 경로)
         val authHeader = request.getHeader("Authorization")
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             return authHeader.removePrefix("Bearer ").trim()
         }
-        // WebSocket 연결 등에서 query parameter로 전달되는 토큰 지원
-        val queryToken = request.getParameter("token")
-        if (!queryToken.isNullOrBlank()) {
-            return queryToken.trim()
+        // 2차: query parameter `token` — Authorization 헤더를 부착할 수 없는 경로에만 허용.
+        //   허용: WebSocket(브라우저 API 가 헤더 부착 X) + 파일 다운로드(window.open / <a target=_blank> 가 헤더 부착 X)
+        //   다른 임의 endpoint 에 query token 으로 인증 우회·referer 누설 방지.
+        val path = request.requestURI ?: ""
+        val queryAllowed = path.endsWith("/ws") ||
+            (path.startsWith("/v1/files/") && path.endsWith("/download"))
+        if (queryAllowed) {
+            val queryToken = request.getParameter("token")
+            if (!queryToken.isNullOrBlank()) {
+                return queryToken.trim()
+            }
         }
         return null
     }
