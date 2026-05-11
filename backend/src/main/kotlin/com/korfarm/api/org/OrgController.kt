@@ -224,6 +224,26 @@ class OrgController(
         return ApiResponse(success = true, data = orgService.getClassView(classId))
     }
 
+    /**
+     * 학생을 기관에서 탈퇴시키고 본사(ORG_HQ) 소속 무료 회원으로 자동 이전.
+     * - 호출자: HQ_ADMIN(모든 기관) / ORG_ADMIN(본인 기관만)
+     * - 본사(ORG_HQ) 소속 학생은 호출 시 NO-OP (이미 본사)
+     * - 해당 학생의 기존 기관 멤버십 status=inactive, 본사 멤버십 active 신설
+     * - 효과: resolveRoles 가 PAID 자동 부여를 안 함 → 무료 학생으로 자동 전환
+     */
+    @PostMapping("/orgs/{orgId}/students/{userId}/transfer-to-hq")
+    fun transferStudentToHq(
+        @PathVariable orgId: String,
+        @PathVariable userId: String
+    ): ApiResponse<Map<String, Any?>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        if (com.korfarm.api.security.SecurityUtils.currentRoles().contains("ORG_ADMIN")) {
+            orgService.verifyOrgAdminAccess(orgId)
+        }
+        val result = orgService.transferStudentToHq(orgId, userId)
+        return ApiResponse(success = true, data = result)
+    }
+
     @GetMapping("/orgs/available")
     fun listAvailableOrgs(): ApiResponse<List<OrgSummary>> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")

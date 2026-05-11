@@ -275,14 +275,14 @@ function SignupPage() {
         localStorage.removeItem("korfarm_refresh");
       }
 
-      // 승인이 필요한 경우 (국어농장 외 기관) 메시지 표시 후 pending 페이지로 이동
+      // 2026-05-11 정책: pending 상태도 무료 학생 자격으로 학습 가능.
+      // 기관 승인 순간 자동 유료(PAID role) 부여. pending 화면에 갇히지 않음.
       if (pendingApproval) {
-        setSuccessMessage("가입 요청이 완료되었습니다. 소속 기관의 승인 후 이용 가능합니다.");
+        setSuccessMessage("가입이 완료되었습니다. 기관 승인 전까지 무료 회원으로 이용할 수 있어요.");
         setTimeout(() => {
-          navigate("/pending");
-        }, 2000);
+          navigate(diagnosticOptIn && accountType === "student" ? "/diagnostic/v2" : "/start");
+        }, 1500);
       } else {
-        // 국어농장인 경우 바로 진행
         navigate(diagnosticOptIn && accountType === "student" ? "/diagnostic/v2" : "/start");
       }
     } catch (err) {

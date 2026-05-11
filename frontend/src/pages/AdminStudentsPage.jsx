@@ -404,6 +404,29 @@ function AdminStudentsPage() {
     }
   };
 
+  // 기관에서 학생 빼기 → 본사 무료 회원으로 자동 이전 (2026-05-11 정책)
+  const handleTransferToHq = async (student) => {
+    const orgId = student.orgId || student.org_id;
+    if (!orgId || orgId === "org_hq") {
+      alert("이 학생은 이미 본사 소속이거나 기관 정보가 없습니다.");
+      return;
+    }
+    if (!window.confirm(
+      `${student.name} 학생을 ${student.org || "현재 기관"}에서 빼고\n본사 무료 회원으로 이전하시겠습니까?\n\n` +
+      `- 학습 기록은 보존됩니다\n- 유료 기능(학습 계획표 등)이 비활성화됩니다\n- 학생이 다른 기관에 다시 가입하면 유료 자격 복구`
+    )) return;
+    try {
+      await apiPost(`/v1/admin/orgs/${orgId}/students/${student.id}/transfer-to-hq`);
+      alert(`${student.name} 학생이 본사 무료 회원으로 이전되었습니다.`);
+      // 목록에서 해당 학생의 기관 정보를 본사로 갱신
+      setRows((prev) => prev.map((r) =>
+        r.id === student.id ? { ...r, org: "국어농장 본사", orgId: "org_hq" } : r
+      ));
+    } catch (err) {
+      alert("이전 실패: " + err.message);
+    }
+  };
+
   const restoreStudent = async (userId) => {
     try {
       await apiPost(`/v1/admin/students/${userId}/restore`);
@@ -667,6 +690,16 @@ function AdminStudentsPage() {
                         >
                           인벤토리
                         </button>
+                        {s.orgId && s.orgId !== "org_hq" && (
+                          <button
+                            className="admin-detail-btn secondary xs"
+                            type="button"
+                            title="기관 멤버십을 빼고 본사 무료 회원으로 이전"
+                            onClick={() => handleTransferToHq(s)}
+                          >
+                            기관에서 빼기
+                          </button>
+                        )}
                         {isHqAdmin && (
                           <button
                             className="admin-detail-btn danger xs"

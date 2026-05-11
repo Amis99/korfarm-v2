@@ -229,6 +229,78 @@ class OrgService(
         classMembershipRepository.save(membership)
     }
 
+    /** ORG_ADMIN 이 특정 orgId 에 대한 권한이 있는지 검증 (HQ_ADMIN 은 통과). */
+    fun verifyOrgAdminAccess(targetOrgId: String) {
+        if (SecurityUtils.hasAnyRole("HQ_ADMIN")) return
+        val adminUserId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "인증되지 않은 요청입니다", HttpStatus.UNAUTHORIZED)
+        val adminOrgs = orgMembershipRepository.findByUserIdAndStatus(adminUserId, "active")
+            .filter { it.role == "ORG_ADMIN" }
+            .map { it.orgId }
+            .toSet()
+        if (targetOrgId !in adminOrgs) {
+            throw ApiException("FORBIDDEN", "해당 기관에 대한 권한이 없습니다", HttpStatus.FORBIDDEN)
+        }
+    }
+
+    /**
+     * 학생을 기관에서 탈퇴시키고 본사(ORG_HQ) 무료 회원으로 자동 이전.
+     * - 기존 기관 멤버십 → status=inactive
+     * - 본사 ORG_HQ 멤버십 → 신규 active 생성 (이미 있으면 active 로 복구)
+     * - 결과: resolveRoles 가 PAID 미부여 → 무료 학생으로 자동 전환
+     */
+    @Transactional
+    fun transferStudentToHq(orgId: String, userId: String): Map<String, Any?> {
+        if (orgId == "org_hq") {
+            return mapOf("status" to "noop", "message" to "이미 본사 소속입니다")
+        }
+        val membership = orgMembershipRepository.findByOrgIdAndUserId(orgId, userId)
+            ?: throw ApiException("NOT_FOUND", "해당 학생의 기관 멤버십을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        if (membership.role != "STUDENT") {
+            throw ApiException("BAD_REQUEST", "학생만 본사 이전이 가능합니다 (현재 역할: ${membership.role})", HttpStatus.BAD_REQUEST)
+        }
+        membership.status = "inactive"
+        orgMembershipRepository.save(membership)
+
+        // 본사 ORG_HQ 멤버십 신설 또는 active 복구
+        val now = LocalDateTime.now()
+        val hqMembership = orgMembershipRepository.findByOrgIdAndUserId("org_hq", userId)
+        if (hqMembership != null) {
+            hqMembership.status = "active"
+            hqMembership.approvedAt = hqMembership.approvedAt ?: now
+            orgMembershipRepository.save(hqMembership)
+        } else {
+            orgMembershipRepository.save(
+                OrgMembershipEntity(
+                    id = IdGenerator.newId("om"),
+                    orgId = "org_hq",
+                    userId = userId,
+                    role = "STUDENT",
+                    status = "active",
+                    requestedAt = now,
+                    approvedAt = now,
+                )
+            )
+        }
+
+        // 수강반 멤버십도 함께 정리 — 기존 기관의 모든 active 반에서 빠짐
+        classMembershipRepository.findByUserIdAndStatus(userId, "active").forEach { cm ->
+            val cls = classRepository.findById(cm.classId).orElse(null)
+            if (cls != null && cls.orgId == orgId) {
+                cm.status = "inactive"
+                classMembershipRepository.save(cm)
+            }
+        }
+
+        return mapOf(
+            "status" to "transferred",
+            "previousOrgId" to orgId,
+            "newOrgId" to "org_hq",
+            "userId" to userId,
+            "message" to "학생이 본사 무료 회원으로 이전되었습니다",
+        )
+    }
+
     @Transactional
     fun deactivateClass(classId: String) {
         val classEntity = classRepository.findById(classId).orElseThrow {

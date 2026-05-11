@@ -414,7 +414,13 @@ class AuthService(
         val memberships = orgMembershipRepository.findByUserIdAndStatus(userId, "active")
         val roles = memberships.map { it.role }.distinct().toMutableSet()
         val now = LocalDateTime.now()
-        // 학생 본인이 유효 구독 중이면 PAID 부여
+        // 2026-05-11 정책: ORG_HQ 외 기관에 STUDENT 활성 멤버십이면 자동 PAID
+        // (기관이 월 사용료 내고 학생을 운용 = 학생 = 유료 자격)
+        val hasOrgStudentMembership = memberships.any { it.role == "STUDENT" && it.orgId != ORG_HQ_ID }
+        if (hasOrgStudentMembership) {
+            roles.add("PAID")
+        }
+        // 학생 본인이 유효 구독 중이면 PAID 부여 (개인 구독자)
         try {
             val ownSub = subscriptionRepository.findTopByUserIdOrderByEndAtDesc(userId)
             if (ownSub != null && ownSub.endAt.isAfter(now)

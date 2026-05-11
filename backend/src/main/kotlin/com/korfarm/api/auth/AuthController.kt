@@ -23,7 +23,8 @@ import jakarta.validation.Valid
 class AuthController(
     private val authService: AuthService,
     private val userRepository: UserRepository,
-    private val orgService: OrgService
+    private val orgService: OrgService,
+    private val orgMembershipRepository: com.korfarm.api.org.OrgMembershipRepository,
 ) {
     @GetMapping("/check-login-id")
     fun checkLoginId(@RequestParam loginId: String): ApiResponse<Map<String, Boolean>> {
@@ -84,7 +85,10 @@ class AuthController(
             shippingZipCode = user.shippingZipCode,
             shippingAddress = user.shippingAddress,
             shippingAddressDetail = user.shippingAddressDetail,
-            profileImageUrl = user.profileImageUrl
+            profileImageUrl = user.profileImageUrl,
+            pendingApproval = orgMembershipRepository.findByUserIdAndStatus(userId, "pending").isNotEmpty(),
+            orgId = orgMembershipRepository.findByUserIdAndStatus(userId, "active").firstOrNull()?.orgId
+                ?: orgMembershipRepository.findByUserIdAndStatus(userId, "pending").firstOrNull()?.orgId,
         )
         return ApiResponse(success = true, data = profile)
     }

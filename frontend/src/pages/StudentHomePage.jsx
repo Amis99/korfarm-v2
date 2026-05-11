@@ -299,6 +299,7 @@ function StudentHomePage() {
   const [tutor, setTutor] = useState(DEFAULT_TUTOR);
   const [wallet, setWallet] = useState(WALLET_META.map((w) => ({ ...w, count: 0 })));
   const [ranking, setRanking] = useState(FALLBACK_RANKING);
+  const [pendingApproval, setPendingApproval] = useState(false);
 
   // 1) 학생 프로필 — /v1/auth/me
   useEffect(() => {
@@ -313,6 +314,7 @@ function StudentHomePage() {
           level: LEVEL_LABEL_MAP[lid] || lid || prev.level,
           profileImageUrl: img,
         }));
+        setPendingApproval(!!(data?.pending_approval ?? data?.pendingApproval));
       })
       .catch((e) => console.error("[auth/me]", e));
   }, [isLoggedIn]);
@@ -749,6 +751,20 @@ function StudentHomePage() {
   return (
     <div className="student-home">
       <div className="app" id="student-app" data-od-id="dashboard" data-drawer={drawerOpen ? "open" : undefined}>
+        {/* 기관 승인 대기 배너 — pending 학생도 무료 회원으로 학습 가능 (2026-05-11 정책) */}
+        {pendingApproval && (
+          <div style={{
+            background: "linear-gradient(90deg, #fff5e6 0%, #ffe9c2 100%)",
+            color: "#7a4d00",
+            padding: "10px 16px",
+            fontSize: 13,
+            fontWeight: 600,
+            textAlign: "center",
+            borderBottom: "1px solid #ffd089",
+          }}>
+            ⏱ 기관 승인 대기 중입니다. 승인되면 유료 기능(학습 계획표·AI 튜터·통합 분석표 등)이 자동으로 열려요.
+          </div>
+        )}
         {/* ─── HEADER ─────────────────────────────── */}
         <header className="top-bar" data-od-id="top-bar">
           <button
