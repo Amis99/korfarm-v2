@@ -80,7 +80,11 @@ class OperatorAgentToolExecutorImpl(
     @Value("\${server.self-base-url:http://localhost:8080}") private val selfBaseUrl: String,
 ) : AgentToolExecutor {
     private val log = LoggerFactory.getLogger(OperatorAgentToolExecutorImpl::class.java)
-    private val httpClient = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(5)).build()
+    // 외부 redirect 차단 — 308/301 등으로 외부 도메인으로 토큰 누설 방지
+    private val httpClient = HttpClient.newBuilder()
+        .connectTimeout(Duration.ofSeconds(5))
+        .followRedirects(HttpClient.Redirect.NEVER)
+        .build()
 
     override fun execute(
         functionName: String,
@@ -141,6 +145,10 @@ class OperatorAgentToolExecutorImpl(
             ?: return AgentToolResult(false, errorCode = "BAD_INPUT", errorMessage = "path 필요")
         if (!path.startsWith("/v1/")) {
             return AgentToolResult(false, errorCode = "BAD_PATH", errorMessage = "/v1/ 로 시작하는 경로만 허용")
+        }
+        // path 내 ../ 류 traversal 또는 절대 URL 차단 (외부 유출 방지)
+        if (path.contains("..") || path.startsWith("//") || path.contains(":")) {
+            return AgentToolResult(false, errorCode = "BAD_PATH", errorMessage = "허용되지 않는 path 형식")
         }
         if (method !in setOf("GET", "POST", "PUT", "PATCH", "DELETE")) {
             return AgentToolResult(false, errorCode = "BAD_METHOD", errorMessage = "허용되지 않는 method")

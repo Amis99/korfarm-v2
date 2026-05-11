@@ -2,6 +2,7 @@ package com.korfarm.api.chat
 
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
+import com.korfarm.api.files.FileRepository
 import com.korfarm.api.user.UserRepository
 import org.springframework.data.domain.PageRequest
 import org.springframework.http.HttpStatus
@@ -17,7 +18,8 @@ class ChatService(
     private val archiveRepo: ChatAttachmentArchiveRepository,
     private val emoticonRepo: ChatEmoticonRepository,
     private val likeRepo: ChatMessageLikeRepository,
-    private val userRepo: UserRepository
+    private val userRepo: UserRepository,
+    private val fileRepo: FileRepository
 ) {
     private val isoFmt: DateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
 
@@ -51,6 +53,28 @@ class ChatService(
             "image", "file", "voice" -> {
                 if (req.fileId.isNullOrBlank()) {
                     throw ApiException("EMPTY_FILE", "첨부 파일이 필요합니다", HttpStatus.BAD_REQUEST)
+                }
+                // 첨부 fileId 검증 — 소유자 / 업로드 완료 / purpose=chat / messageType 별 MIME
+                val file = fileRepo.findById(req.fileId).orElseThrow {
+                    ApiException("FILE_NOT_FOUND", "첨부 파일을 찾을 수 없습니다", HttpStatus.BAD_REQUEST)
+                }
+                if (file.ownerId != userId) {
+                    throw ApiException("FORBIDDEN", "본인이 업로드한 파일만 첨부할 수 있습니다", HttpStatus.FORBIDDEN)
+                }
+                if (file.status != "uploaded") {
+                    throw ApiException("FILE_NOT_READY", "업로드가 완료되지 않은 파일입니다", HttpStatus.BAD_REQUEST)
+                }
+                if (file.purpose != "chat") {
+                    throw ApiException("WRONG_PURPOSE", "채팅용 파일이 아닙니다", HttpStatus.BAD_REQUEST)
+                }
+                val mimeOk = when (type) {
+                    "image" -> file.mime.startsWith("image/")
+                    "voice" -> file.mime.startsWith("audio/")
+                    "file"  -> true
+                    else    -> true
+                }
+                if (!mimeOk) {
+                    throw ApiException("WRONG_MIME", "$type 메시지에 ${file.mime} 형식은 허용되지 않습니다", HttpStatus.BAD_REQUEST)
                 }
             }
             "emoticon" -> {

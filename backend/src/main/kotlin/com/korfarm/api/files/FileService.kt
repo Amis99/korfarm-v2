@@ -51,6 +51,38 @@ class FileService(
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
         )
         private const val MAX_FILE_SIZE: Long = 50 * 1024 * 1024
+
+        /**
+         * MIME 별 매직 넘버 시그니처. 업로드 본문 첫 N 바이트와 비교해 위·변조 방지.
+         * 텍스트류·svg(텍스트 기반) 는 시그니처 강제 X.
+         */
+        private val MIME_SIGNATURES: Map<String, List<ByteArray>> = mapOf(
+            "image/jpeg" to listOf(byteArrayOf(0xFF.toByte(), 0xD8.toByte(), 0xFF.toByte())),
+            "image/png"  to listOf(byteArrayOf(0x89.toByte(), 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A)),
+            "image/gif"  to listOf("GIF87a".toByteArray(), "GIF89a".toByteArray()),
+            "image/webp" to listOf("RIFF".toByteArray()),  // RIFF....WEBP
+            "application/pdf" to listOf("%PDF-".toByteArray()),
+            "audio/mpeg" to listOf(byteArrayOf(0xFF.toByte(), 0xFB.toByte()), byteArrayOf(0xFF.toByte(), 0xF3.toByte()), byteArrayOf(0xFF.toByte(), 0xF2.toByte()), "ID3".toByteArray()),
+            "audio/wav"  to listOf("RIFF".toByteArray()),
+            "audio/ogg"  to listOf("OggS".toByteArray()),
+            "audio/webm" to listOf(byteArrayOf(0x1A, 0x45.toByte(), 0xDF.toByte(), 0xA3.toByte())),
+            "video/mp4"  to listOf(byteArrayOf(0x00, 0x00, 0x00, 0x18, 0x66, 0x74, 0x79, 0x70), byteArrayOf(0x00, 0x00, 0x00, 0x20, 0x66, 0x74, 0x79, 0x70)),  // ....ftyp
+            "video/webm" to listOf(byteArrayOf(0x1A, 0x45.toByte(), 0xDF.toByte(), 0xA3.toByte())),
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" to listOf(byteArrayOf(0x50, 0x4B, 0x03, 0x04)),  // PK..
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document" to listOf(byteArrayOf(0x50, 0x4B, 0x03, 0x04)),
+        )
+
+        private fun signatureOk(mime: String, head: ByteArray): Boolean {
+            val sigs = MIME_SIGNATURES[mime] ?: return true  // 시그니처 정의 없으면 통과
+            return sigs.any { sig ->
+                if (head.size < sig.size) return@any false
+                var ok = true
+                for (i in sig.indices) {
+                    if (head[i] != sig[i]) { ok = false; break }
+                }
+                ok
+            }
+        }
     }
 
     /** 마이그레이션 전 EC2 fallback 다운로드 경로 */
@@ -94,15 +126,48 @@ class FileService(
         if (entity.status == "uploaded") {
             throw ApiException("ALREADY_UPLOADED", "이미 업로드된 파일입니다", HttpStatus.CONFLICT)
         }
+
+        // 1. 실제 크기 재검증 — presign 시 선언한 size 와 multipart 크기 일치, 절대 상한 미만
+        if (file.size <= 0L) {
+            throw ApiException("EMPTY_FILE", "파일이 비어 있습니다", HttpStatus.BAD_REQUEST)
+        }
+        if (file.size > MAX_FILE_SIZE) {
+            throw ApiException("FILE_TOO_LARGE", "파일 크기가 50MB를 초과합니다", HttpStatus.BAD_REQUEST)
+        }
+        // presign 보다 더 큰 파일을 업로드하려는 경우 거부 (5% 여유 허용 — multipart overhead)
+        val declaredSize = entity.size
+        if (declaredSize > 0 && file.size > declaredSize + (declaredSize / 20).coerceAtLeast(1024)) {
+            throw ApiException("SIZE_MISMATCH", "선언한 크기보다 실제 파일이 큽니다", HttpStatus.BAD_REQUEST)
+        }
+
+        // 2. multipart 의 contentType 이 presign MIME 와 일치 (브라우저가 multipart 에 자동 부착)
+        val multipartMime = file.contentType?.lowercase()?.substringBefore(";")?.trim()
+        if (!multipartMime.isNullOrBlank() && multipartMime != entity.mime.lowercase()) {
+            throw ApiException("MIME_MISMATCH", "선언한 형식(${entity.mime}) 과 실제(${multipartMime}) 가 다릅니다", HttpStatus.BAD_REQUEST)
+        }
+
+        // 3. 매직 넘버 시그니처 검증 — 본문 첫 16바이트만 읽고 다시 stream 재구성
+        val head = ByteArray(16)
+        val bytes = file.bytes  // <=50MB. spring 이 디스크/메모리로 buffer.
+        val headLen = minOf(head.size, bytes.size)
+        System.arraycopy(bytes, 0, head, 0, headLen)
+        if (!signatureOk(entity.mime, head)) {
+            throw ApiException(
+                "SIGNATURE_MISMATCH",
+                "파일 시그니처가 ${entity.mime} 형식과 일치하지 않습니다",
+                HttpStatus.BAD_REQUEST,
+            )
+        }
+
         // S3 putObject — bucket=korfarm-uploads, key=fileId
         s3Client.putObject(
             PutObjectRequest.builder()
                 .bucket(bucket)
                 .key(fileId)
-                .contentType(file.contentType ?: entity.mime)
+                .contentType(entity.mime)  // 클라이언트 선언 X — entity 의 검증된 MIME 사용
                 .contentLength(file.size)
                 .build(),
-            RequestBody.fromInputStream(file.inputStream, file.size),
+            RequestBody.fromBytes(bytes),
         )
         entity.status = "uploaded"
         entity.size = file.size
@@ -148,19 +213,29 @@ class FileService(
     /**
      * 다운로드용 — 권한 검증 후 S3 stream 반환. S3 미존재 시 EC2 디스크 fallback.
      *
+     * 권한 분기:
+     *  - chat-emoticon: anonymous OK (이모티콘은 공개 자산)
+     *  - chat / board_attachment / content / study_plan: 로그인된 사용자 누구나
+     *    (룸·게시판 멤버십 세밀 검증은 추후 별도 작업 — 1차로는 익명 차단)
+     *  - 그 외(privacy, 학생/학부모 자료, OCR 결과 등): 소유자 + 관리자
+     *
      * Pair(FileEntity, InputStream) 반환. 호출자는 stream 을 끝까지 읽고 닫아야 함.
      */
     fun openFileForDownload(userId: String?, isAdmin: Boolean, fileId: String): Pair<FileEntity, InputStream> {
         val entity = fileRepository.findById(fileId).orElseThrow {
             ApiException("NOT_FOUND", "파일을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
         }
-        // 공개 파일: 이모티콘, 게시판 첨부파일
-        val isPublic = entity.purpose in listOf("chat", "chat-emoticon", "board_attachment", "board-attachment", "content", "study_plan")
-        if (!isPublic && !isAdmin && userId == null) {
-            throw ApiException("UNAUTHORIZED", "로그인이 필요합니다", HttpStatus.UNAUTHORIZED)
-        }
-        if (!isPublic && !isAdmin && entity.ownerId != userId) {
-            throw ApiException("FORBIDDEN", "권한이 없습니다", HttpStatus.FORBIDDEN)
+        val isReallyPublic = entity.purpose == "chat-emoticon"
+        val isBroadCommunity = entity.purpose in listOf(
+            "chat", "board_attachment", "board-attachment", "content", "study_plan"
+        )
+        when {
+            isReallyPublic -> { /* anonymous OK */ }
+            userId == null -> throw ApiException("UNAUTHORIZED", "로그인이 필요합니다", HttpStatus.UNAUTHORIZED)
+            isAdmin -> { /* 관리자 OK */ }
+            entity.ownerId == userId -> { /* 본인 OK */ }
+            isBroadCommunity -> { /* 로그인 사용자 누구나 — 1차 정책 */ }
+            else -> throw ApiException("FORBIDDEN", "권한이 없습니다", HttpStatus.FORBIDDEN)
         }
 
         // 1차: S3 시도
@@ -193,12 +268,17 @@ class FileService(
         val entity = fileRepository.findById(fileId).orElseThrow {
             ApiException("NOT_FOUND", "파일을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
         }
-        val isPublic = entity.purpose in listOf("chat", "chat-emoticon", "board_attachment", "board-attachment", "content", "study_plan")
-        if (!isPublic && !isAdmin && userId == null) {
-            throw ApiException("UNAUTHORIZED", "로그인이 필요합니다", HttpStatus.UNAUTHORIZED)
-        }
-        if (!isPublic && !isAdmin && entity.ownerId != userId) {
-            throw ApiException("FORBIDDEN", "권한이 없습니다", HttpStatus.FORBIDDEN)
+        val isReallyPublic = entity.purpose == "chat-emoticon"
+        val isBroadCommunity = entity.purpose in listOf(
+            "chat", "board_attachment", "board-attachment", "content", "study_plan"
+        )
+        when {
+            isReallyPublic -> { /* anonymous OK */ }
+            userId == null -> throw ApiException("UNAUTHORIZED", "로그인이 필요합니다", HttpStatus.UNAUTHORIZED)
+            isAdmin -> { /* 관리자 OK */ }
+            entity.ownerId == userId -> { /* 본인 OK */ }
+            isBroadCommunity -> { /* 로그인 사용자 누구나 */ }
+            else -> throw ApiException("FORBIDDEN", "권한이 없습니다", HttpStatus.FORBIDDEN)
         }
         val filePath = ec2Path(fileId)
         if (!Files.exists(filePath)) {
