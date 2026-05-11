@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -16,6 +17,7 @@ import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 
 @Configuration
+@EnableMethodSecurity(prePostEnabled = true)
 class SecurityConfig(
     private val jwtProperties: JwtProperties,
     private val orgBillingSuspensionFilter: com.korfarm.api.billing.OrgBillingSuspensionFilter,
@@ -55,7 +57,8 @@ class SecurityConfig(
         http.sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
         http.authorizeHttpRequests {
             it.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-            it.requestMatchers("/v1/health", "/v1/auth/**", "/v1/learning/catalog/**", "/v1/learning/content/**", "/v1/public/**", "/v1/files/*/download").permitAll()
+            // /v1/learning/catalog/** 와 /v1/learning/content/** 는 로그인 강제 (정답·해설 노출 차단)
+            it.requestMatchers("/v1/health", "/v1/auth/**", "/v1/public/**", "/v1/files/*/download").permitAll()
             it.anyRequest().authenticated()
         }
         http.addFilterBefore(JwtAuthenticationFilter(jwtService), UsernamePasswordAuthenticationFilter::class.java)
