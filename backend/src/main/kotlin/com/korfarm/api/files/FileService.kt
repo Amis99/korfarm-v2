@@ -227,14 +227,23 @@ class FileService(
         }
         val isReallyPublic = entity.purpose == "chat-emoticon"
         val isBroadCommunity = entity.purpose in listOf(
-            "chat", "board_attachment", "board-attachment", "content", "study_plan"
+            // 채팅
+            "chat", "chat-thumb",
+            // 게시판 첨부
+            "board_attachment", "board-attachment", "wisdom",
+            // 학습 콘텐츠·계획표
+            "content", "content_pdf", "study_plan",
+            // 시험·프로 PDF (학생이 응시·확인)
+            "test_paper_pdf", "pro_answer_pdf",
+            // 상점 상품 이미지
+            "shop-product-image",
         )
         when {
             isReallyPublic -> { /* anonymous OK */ }
             userId == null -> throw ApiException("UNAUTHORIZED", "로그인이 필요합니다", HttpStatus.UNAUTHORIZED)
             isAdmin -> { /* 관리자 OK */ }
             entity.ownerId == userId -> { /* 본인 OK */ }
-            isBroadCommunity -> { /* 로그인 사용자 누구나 — 1차 정책 */ }
+            isBroadCommunity -> { /* 로그인 사용자 누구나 */ }
             else -> throw ApiException("FORBIDDEN", "권한이 없습니다", HttpStatus.FORBIDDEN)
         }
 
@@ -270,7 +279,11 @@ class FileService(
         }
         val isReallyPublic = entity.purpose == "chat-emoticon"
         val isBroadCommunity = entity.purpose in listOf(
-            "chat", "board_attachment", "board-attachment", "content", "study_plan"
+            "chat", "chat-thumb",
+            "board_attachment", "board-attachment", "wisdom",
+            "content", "content_pdf", "study_plan",
+            "test_paper_pdf", "pro_answer_pdf",
+            "shop-product-image",
         )
         when {
             isReallyPublic -> { /* anonymous OK */ }
