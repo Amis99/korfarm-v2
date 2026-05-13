@@ -20,7 +20,9 @@ data class UserProfile(
     val shippingAddressDetail: String? = null,
     val profileImageUrl: String? = null,
     val pendingApproval: Boolean = false,
-    val orgId: String? = null
+    val orgId: String? = null,
+    val orgName: String? = null,
+    val orgLogoFileId: String? = null,
 )
 
 data class AuthResponseData(

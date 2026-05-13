@@ -49,6 +49,7 @@ class GrapefruitService(
             PricingSeed("study-questions-opus", "AI 학습 문항 생성 — 고급 (5문항/회)", "opus", 8, "학습 문항 5개 생성 (고급 Opus)"),
             PricingSeed("question-single-opus", "AI 단건 문제 출제", "opus", 3, "문제 1개 단건 출제 (Opus)"),
             PricingSeed("study-package-sonnet", "AI 학습 통합 생성", "sonnet", 4, "지문+체크포인트+5문항 일괄 생성 (일반)"),
+            PricingSeed("test-analysis-full", "AI 시험 정보 분석 (시험지 1건)", "sonnet", 1, "시험지의 지문·문제 분류·역량 벡터·선지 해설·함정 패턴 자동 채움"),
         )
     }
 

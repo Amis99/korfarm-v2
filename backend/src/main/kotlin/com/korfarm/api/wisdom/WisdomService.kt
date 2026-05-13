@@ -49,13 +49,17 @@ class WisdomService(
     private fun callerAllowedAuthorIds(): Set<String>? {
         if (SecurityUtils.hasAnyRole("HQ_ADMIN")) return null
         val adminUserId = SecurityUtils.currentUserId() ?: return emptySet()
+        // ORG_ADMIN orgIds — `org_hq` 멤버십은 제외 (본사+기관 동시 ORG_ADMIN 케이스 차단)
         val adminOrgIds = orgMembershipRepository.findByUserIdAndStatus(adminUserId, "active")
-            .filter { it.role == "ORG_ADMIN" }
+            .filter { it.role == "ORG_ADMIN" && it.orgId != "org_hq" }
             .map { it.orgId }
             .toSet()
         if (adminOrgIds.isEmpty()) return emptySet()
+        // 그 기관의 STUDENT 만 (글 작성자는 학생이므로 학부모·관리자 제외)
         return adminOrgIds.flatMap {
-            orgMembershipRepository.findByOrgIdAndStatus(it, "active").map { m -> m.userId }
+            orgMembershipRepository.findByOrgIdAndStatus(it, "active")
+                .filter { m -> m.role == "STUDENT" }
+                .map { m -> m.userId }
         }.toSet()
     }
 

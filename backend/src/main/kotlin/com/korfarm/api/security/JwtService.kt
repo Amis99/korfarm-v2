@@ -7,25 +7,27 @@ import java.util.Date
 
 data class JwtPayload(
     val userId: String,
-    val roles: List<String>
+    val roles: List<String>,
+    val name: String? = null,
 )
 
 class JwtService(private val props: JwtProperties) {
     private val algorithm = Algorithm.HMAC256(props.secret)
 
-    fun createAccessToken(userId: String, roles: List<String>): String {
+    fun createAccessToken(userId: String, roles: List<String>, name: String? = null): String {
         val now = Instant.now()
         // 관리자(HQ_ADMIN/ORG_ADMIN) 는 길게, 학생/학부모는 짧게.
         val isAdmin = roles.any { it == "HQ_ADMIN" || it == "ORG_ADMIN" }
         val ttl = if (isAdmin) props.accessTokenSeconds else props.studentAccessTokenSeconds
         val exp = now.plusSeconds(ttl)
-        return JWT.create()
+        val builder = JWT.create()
             .withIssuer(props.issuer)
             .withSubject(userId)
             .withClaim("roles", roles)
             .withIssuedAt(Date.from(now))
             .withExpiresAt(Date.from(exp))
-            .sign(algorithm)
+        if (!name.isNullOrBlank()) builder.withClaim("name", name)
+        return builder.sign(algorithm)
     }
 
     fun createRefreshToken(userId: String): String {
@@ -43,6 +45,7 @@ class JwtService(private val props: JwtProperties) {
         val verifier = JWT.require(algorithm).withIssuer(props.issuer).build()
         val decoded = verifier.verify(token)
         val roles = decoded.getClaim("roles").asList(String::class.java) ?: emptyList()
-        return JwtPayload(decoded.subject, roles)
+        val name = decoded.getClaim("name")?.asString()
+        return JwtPayload(decoded.subject, roles, name)
     }
 }

@@ -386,6 +386,47 @@ class PaymentService(
         )
     }
 
+    /**
+     * 학부모 → 자녀 자몽 충전 prepare. 1자몽=250원 (개인 단가).
+     * confirm 시 payment.targetUserId(=자녀) 지갑에 충전.
+     * 연결 검증은 호출자(컨트롤러) 에서 수행 — 여기선 단순히 prepare.
+     */
+    @Transactional
+    fun prepareChildGrapefruit(parentUserId: String, childUserId: String, amountWon: Int): PaymentPrepareResult {
+        if (amountWon < 1000) {
+            throw ApiException("INVALID_REQUEST", "최소 충전 금액은 1,000원입니다", HttpStatus.BAD_REQUEST)
+        }
+        val tossOrderId = generateTossOrderId(parentUserId)
+        val grapefruits = amountWon / 250
+        val orderName = "자녀 자몽 ${grapefruits}개 충전 (${amountWon.toString().reversed().chunked(3).joinToString(",").reversed()}원)"
+
+        val payment = PaymentEntity(
+            id = IdGenerator.newId("pay"),
+            userId = parentUserId,             // 결제자 = 학부모
+            targetUserId = childUserId,        // 잔액 누적 = 자녀
+            paymentType = "grapefruit",
+            amount = amountWon,
+            status = "pending",
+            provider = "toss",
+            orderName = orderName,
+            tossOrderId = tossOrderId,
+        )
+        paymentRepository.save(payment)
+
+        val customer = resolveCustomer(parentUserId)
+        return PaymentPrepareResult(
+            paymentId = payment.id,
+            tossOrderId = tossOrderId,
+            amount = amountWon,
+            orderName = orderName,
+            clientKey = tossProperties.clientKey,
+            customerKey = customer.customerKey,
+            customerName = customer.customerName,
+            customerEmail = customer.customerEmail,
+            customerMobilePhone = customer.customerMobilePhone,
+        )
+    }
+
     /** 기관 자몽 충전 — 1자몽=200원. 호출자의 ORG_ADMIN 기관에 confirm 시 충전. */
     @Transactional
     fun prepareOrgGrapefruit(userId: String, request: OrgGrapefruitPrepareRequest): PaymentPrepareResult {
@@ -522,12 +563,14 @@ class PaymentService(
                 completeShopOrder(payment)
             }
             "grapefruit" -> {
-                // amount 는 원화. 1자몽=250원으로 자몽 충전
+                // amount 는 원화. 1자몽=250원으로 자몽 충전.
+                // targetUserId 가 있으면 학부모→자녀 대행 결제 — 자녀 지갑에 충전.
+                val chargeUserId = payment.targetUserId ?: payment.userId
                 grapefruitService.chargeUser(
-                    userId = payment.userId,
+                    userId = chargeUserId,
                     amountWon = payment.amount,
                     paymentId = payment.id,
-                    memo = "자몽 충전 (토스)",
+                    memo = if (payment.targetUserId != null) "자몽 충전 (학부모 결제)" else "자몽 충전 (토스)",
                 )
             }
             "org_grapefruit" -> {

@@ -29,7 +29,12 @@ data class ChildProfileView(
     val school: String?,
     val region: String?,
     val studentPhone: String?,
-    val parentPhone: String?
+    val parentPhone: String?,
+    // 자녀 기관 소속 (org_hq 제외 active STUDENT 멤버십이 있으면 그 orgId/orgName).
+    // 학부모 구독 화면이 "기관 소속이면 구독 결제 숨김" 판별에 사용.
+    val orgId: String? = null,
+    val orgName: String? = null,
+    val orgLogoFileId: String? = null,
 )
 
 @Service
@@ -40,7 +45,8 @@ class ParentLinkService(
     private val farmLearningService: FarmLearningService,
     private val testService: TestService,
     private val diagnosticService: DiagnosticService,
-    private val orgMembershipRepository: com.korfarm.api.org.OrgMembershipRepository
+    private val orgMembershipRepository: com.korfarm.api.org.OrgMembershipRepository,
+    private val orgRepository: com.korfarm.api.org.OrgRepository,
 ) {
     /** 학생 ID 들을 받아 각 학생이 속한 active orgId 들의 map 반환 */
     @Transactional(readOnly = true)
@@ -116,6 +122,48 @@ class ParentLinkService(
 
     // rejectLink 폐기.
 
+    /**
+     * 학부모 본인이 자녀를 직접 연결 — 학생 아이디(loginId) + 학생 이름이 모두 일치할 때 link 생성.
+     * 회원가입 시 자동 연결과 동일한 신뢰 수준 (이름·휴대폰 일치 → 즉시 active).
+     */
+    @Transactional
+    fun selfLinkChild(parentUserId: String, studentLoginId: String, studentName: String): ParentLinkView {
+        if (studentLoginId.isBlank() || studentName.isBlank()) {
+            throw ApiException("INVALID_REQUEST", "학생 아이디와 이름을 모두 입력해 주세요.", HttpStatus.BAD_REQUEST)
+        }
+        val parent = userRepository.findById(parentUserId).orElseThrow {
+            ApiException("NOT_FOUND", "학부모 정보를 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
+        }
+        val student = userRepository.findByEmail(studentLoginId.trim())
+            ?: throw ApiException("STUDENT_NOT_FOUND", "해당 아이디의 학생을 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
+        if (parent.id == student.id) {
+            throw ApiException("INVALID_LINK", "자기 자신은 자녀로 연결할 수 없습니다.", HttpStatus.BAD_REQUEST)
+        }
+        val inputName = studentName.trim().replace(" ", "")
+        val actualName = (student.name ?: "").trim().replace(" ", "")
+        if (inputName != actualName) {
+            throw ApiException("NAME_MISMATCH", "학생 아이디와 이름이 일치하지 않습니다.", HttpStatus.BAD_REQUEST)
+        }
+        val existing = parentStudentLinkRepository.findByParentUserIdAndStudentUserId(parent.id, student.id)
+        if (existing != null && existing.status == "active") {
+            throw ApiException("LINK_EXISTS", "이미 연결된 자녀입니다.", HttpStatus.CONFLICT)
+        }
+        val now = LocalDateTime.now()
+        val link = existing ?: ParentStudentLinkEntity(
+            id = IdGenerator.newId("pl"),
+            parentUserId = parent.id,
+            studentUserId = student.id,
+            status = "active",
+        )
+        link.status = "active"
+        link.requestCode = null
+        link.requestedAt = link.requestedAt ?: now
+        link.approvedAt = now
+        link.approvedBy = parent.id  // self-link
+        parentStudentLinkRepository.save(link)
+        return link.toView(parent, student)
+    }
+
     @Transactional
     fun deactivate(linkId: String) {
         val link = parentStudentLinkRepository.findById(linkId).orElseThrow {
@@ -168,6 +216,10 @@ class ParentLinkService(
         val student = userRepository.findById(studentUserId).orElseThrow {
             ApiException("NOT_FOUND", "학생을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
         }
+        // 자녀의 active STUDENT 멤버십 중 org_hq 가 아닌 첫 기관 → 기관 소속 판정용.
+        val orgMembership = orgMembershipRepository.findByUserIdAndStatus(studentUserId, "active")
+            .firstOrNull { it.role == "STUDENT" && it.orgId != "org_hq" }
+        val orgEntity = orgMembership?.orgId?.let { orgRepository.findById(it).orElse(null) }
         return ChildProfileView(
             userId = student.id,
             loginId = student.email,
@@ -177,7 +229,10 @@ class ParentLinkService(
             school = student.school,
             region = student.region,
             studentPhone = student.studentPhone,
-            parentPhone = student.parentPhone
+            parentPhone = student.parentPhone,
+            orgId = orgMembership?.orgId,
+            orgName = orgEntity?.name,
+            orgLogoFileId = orgEntity?.logoFileId,
         )
     }
 

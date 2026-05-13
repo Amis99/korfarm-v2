@@ -18,18 +18,21 @@ class MembershipApprovalController(
         @AuthenticationPrincipal user: UserPrincipal,
         @RequestParam(required = false) orgId: String?
     ): ApiResponse<List<PendingMembershipDto>> {
-        // HQ_ADMIN은 모든 기관의 pending 조회 가능
-        // ORG_ADMIN은 자신의 기관만 조회 가능
+        // HQ_ADMIN은 모든 기관의 pending 조회 가능. orgId 명시 시 그 기관만.
+        // ORG_ADMIN은 자기 ORG_ADMIN 멤버십 기관(org_hq 제외) 의 pending 만.
+        //   본사+기관 둘 다 ORG_ADMIN 인 사용자(예: pjchany1) 가 firstOrNull 로
+        //   본사를 잡아 자기 기관 pending 이 안 나오던 결함을 차단.
         val isHqAdmin = user.roles.contains("HQ_ADMIN")
-        val effectiveOrgId = if (isHqAdmin) {
-            orgId
+        val effectiveOrgIds: Collection<String>? = if (isHqAdmin) {
+            orgId?.let { listOf(it) }  // null 이면 전체
         } else {
-            // ORG_ADMIN은 본인 기관만 조회
-            val userOrg = orgMembershipRepository.findByUserIdAndStatus(user.userId, "active")
-                .firstOrNull()?.orgId
-            orgId ?: userOrg
+            val ids = orgMembershipRepository.findByUserIdAndStatus(user.userId, "active")
+                .filter { it.role == "ORG_ADMIN" && it.orgId != "org_hq" }
+                .map { it.orgId }
+                .toSet()
+            if (orgId != null) ids.filter { it == orgId }.toSet() else ids
         }
-        val result = membershipApprovalService.getPendingMemberships(effectiveOrgId)
+        val result = membershipApprovalService.getPendingMemberships(effectiveOrgIds)
         return ApiResponse(success = true, data = result)
     }
 

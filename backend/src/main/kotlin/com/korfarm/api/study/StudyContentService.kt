@@ -176,13 +176,10 @@ class StudyContentService(
         val contents = if (isHqAdmin()) {
             studyContentRepository.findAllByStatusOrderByCreatedAtDesc("active")
         } else if (isOrgAdmin()) {
-            // ORG_ADMIN — 자기 기관 콘텐츠 + 전체 공개(PUBLIC) 콘텐츠 모두
+            // ORG_ADMIN — 자기 기관 콘텐츠만 노출 (사용자 정책: 본사·타 기관 PUBLIC 도 어드민 목록에서 차단)
             val orgId = currentUserOrgId(userId)
                 ?: throw ApiException("FORBIDDEN", "기관 정보를 찾을 수 없습니다", HttpStatus.FORBIDDEN)
-            val mine = studyContentRepository.findAllByOwnerOrgIdAndStatusOrderByCreatedAtDesc(orgId, "active")
-            val publics = studyContentRepository.findAllByStatusOrderByCreatedAtDesc("active")
-                .filter { it.visibility == "PUBLIC" }
-            (mine + publics).distinctBy { it.id }.sortedByDescending { it.createdAt }
+            studyContentRepository.findAllByOwnerOrgIdAndStatusOrderByCreatedAtDesc(orgId, "active")
         } else {
             throw ApiException("FORBIDDEN", "forbidden", HttpStatus.FORBIDDEN)
         }

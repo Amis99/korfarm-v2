@@ -55,9 +55,8 @@ class OrgController(
         AdminGuard.requireAnyRole("ORG_ADMIN", "HQ_ADMIN")
         val userId = com.korfarm.api.security.SecurityUtils.currentUserId()
             ?: throw com.korfarm.api.common.ApiException("UNAUTHORIZED", "unauthorized", org.springframework.http.HttpStatus.UNAUTHORIZED)
-        val myOrg = orgService.listUserOrgs(userId).firstOrNull()
-            ?: throw com.korfarm.api.common.ApiException("NOT_FOUND", "소속 기관을 찾을 수 없습니다", org.springframework.http.HttpStatus.NOT_FOUND)
-        return ApiResponse(success = true, data = orgService.getOrgView(myOrg.id))
+        val myOrgId = resolveMyOrgId(userId)
+        return ApiResponse(success = true, data = orgService.getOrgView(myOrgId))
     }
 
     @PatchMapping("/orgs/me")
@@ -65,12 +64,29 @@ class OrgController(
         AdminGuard.requireAnyRole("ORG_ADMIN", "HQ_ADMIN")
         val userId = com.korfarm.api.security.SecurityUtils.currentUserId()
             ?: throw com.korfarm.api.common.ApiException("UNAUTHORIZED", "unauthorized", org.springframework.http.HttpStatus.UNAUTHORIZED)
-        val myOrg = orgService.listUserOrgs(userId).firstOrNull()
-            ?: throw com.korfarm.api.common.ApiException("NOT_FOUND", "소속 기관을 찾을 수 없습니다", org.springframework.http.HttpStatus.NOT_FOUND)
+        val myOrgId = resolveMyOrgId(userId)
         // ORG_ADMIN 은 status / seatLimit 변경 금지 — 무시
         val safe = request.copy(status = null, seatLimit = null, plan = null)
-        orgService.updateOrg(myOrg.id, safe)
-        return ApiResponse(success = true, data = orgService.getOrgView(myOrg.id))
+        orgService.updateOrg(myOrgId, safe)
+        return ApiResponse(success = true, data = orgService.getOrgView(myOrgId))
+    }
+
+    /**
+     * /orgs/me 용 본인 기관 식별:
+     *  - ORG_ADMIN: callerOrgAdminOrgIds (org_hq 제외) 의 첫 항목
+     *  - HQ_ADMIN: 본인 멤버십 첫 기관 (org_hq 포함)
+     *  본사+기관 ORG_ADMIN 을 동시에 가진 사용자가 본사 정보를 잡지 않도록.
+     */
+    private fun resolveMyOrgId(userId: String): String {
+        val roles = com.korfarm.api.security.SecurityUtils.currentRoles()
+        val pickedOrgId = if (roles.contains("HQ_ADMIN")) {
+            orgService.listUserOrgs(userId).firstOrNull()?.id
+        } else {
+            orgService.callerOrgAdminOrgIds(userId).firstOrNull()
+                ?: orgService.listUserOrgs(userId).firstOrNull()?.id  // ORG_ADMIN 인데 org_hq 만 가진 경우
+        }
+        return pickedOrgId
+            ?: throw com.korfarm.api.common.ApiException("NOT_FOUND", "소속 기관을 찾을 수 없습니다", org.springframework.http.HttpStatus.NOT_FOUND)
     }
 
     @PatchMapping("/orgs/{orgId}")
@@ -126,9 +142,9 @@ class OrgController(
         val filterOrgId = if (roles.contains("HQ_ADMIN")) {
             null // 본사관리자: 전체 학생
         } else {
-            // 기관관리자: 자기 기관 소속 학생만
+            // 기관관리자: 자기 기관 소속 학생만 — org_hq 제외 (본사+기관 동시 ORG_ADMIN 케이스 차단)
             val userId = com.korfarm.api.security.SecurityUtils.currentUserId()
-            orgService.listUserOrgs(userId!!).firstOrNull()?.id
+            orgService.callerOrgAdminOrgIds(userId!!).firstOrNull()
         }
         return ApiResponse(success = true, data = orgService.listStudentsAdmin(filterOrgId))
     }

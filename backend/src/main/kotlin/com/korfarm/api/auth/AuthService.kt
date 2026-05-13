@@ -345,9 +345,20 @@ class AuthService(
         return issueTokens(user)
     }
 
+    /**
+     * 현재 사용자의 최신 roles 로 새 access token 재발급.
+     * 결제 완료(PAID 부여) 직후 sessionStorage 갱신용 — refresh token DB 검증 없이 동작.
+     */
+    fun refreshClaimsFor(userId: String): AuthResponseData {
+        val user = userRepository.findById(userId).orElseThrow {
+            ApiException("NOT_FOUND", "user not found", HttpStatus.NOT_FOUND)
+        }
+        return issueTokens(user)
+    }
+
     private fun issueTokens(user: UserEntity, orgId: String? = null, pendingApproval: Boolean = false): AuthResponseData {
         val roles = resolveRoles(user.id)
-        val accessToken = jwtService.createAccessToken(user.id, roles)
+        val accessToken = jwtService.createAccessToken(user.id, roles, user.name)
         // 관리자(HQ_ADMIN/ORG_ADMIN) 만 refresh token 발급. 학생/학부모는 sessionStorage 로 짧게.
         val isAdmin = roles.any { it == "HQ_ADMIN" || it == "ORG_ADMIN" }
         val refreshToken: String? = if (isAdmin) {

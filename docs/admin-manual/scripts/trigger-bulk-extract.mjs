@@ -21,11 +21,14 @@ await page.click('button[type="submit"]');
 await page.waitForURL((u) => !u.toString().includes("/login"), { timeout: 12_000 });
 console.log("로그인 완료 →", page.url());
 
-// localStorage 또는 쿠키에서 토큰 가져오기
-const token = await page.evaluate(() => localStorage.getItem("token") || localStorage.getItem("accessToken") || "");
+// access token 은 sessionStorage[korfarm_token]
+const token = await page.evaluate(() => sessionStorage.getItem("korfarm_token") || "");
 if (!token) {
-  console.log("토큰 미발견 — localStorage 키 출력:");
-  const keys = await page.evaluate(() => Object.keys(localStorage));
+  console.log("토큰 미발견 — sessionStorage/localStorage 키:");
+  const keys = await page.evaluate(() => ({
+    session: Object.keys(sessionStorage),
+    local: Object.keys(localStorage),
+  }));
   console.log(keys);
   await browser.close();
   process.exit(1);

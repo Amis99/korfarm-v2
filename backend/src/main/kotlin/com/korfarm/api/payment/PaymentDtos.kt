@@ -70,6 +70,13 @@ data class PaymentPrepareResult(
     val customerMobilePhone: String? = null,
 )
 
+data class ChildGrapefruitPrepareRequest(
+    @field:NotBlank
+    val studentUserId: String,
+    @field:Min(1000)
+    val amountWon: Int,
+)
+
 data class PaymentConfirmRequest(
     @field:NotBlank
     val paymentKey: String,

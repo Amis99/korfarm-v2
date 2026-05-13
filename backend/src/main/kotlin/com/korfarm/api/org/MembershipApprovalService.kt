@@ -21,11 +21,12 @@ class MembershipApprovalService(
 ) {
     private val logger = LoggerFactory.getLogger(MembershipApprovalService::class.java)
 
-    fun getPendingMemberships(orgId: String?): List<PendingMembershipDto> {
-        val memberships = if (orgId.isNullOrBlank()) {
-            orgMembershipRepository.findByStatusOrderByRequestedAtDesc("pending")
-        } else {
-            orgMembershipRepository.findByOrgIdAndStatusOrderByRequestedAtDesc(orgId, "pending")
+    fun getPendingMemberships(orgIds: Collection<String>?): List<PendingMembershipDto> {
+        val memberships = when {
+            orgIds == null -> orgMembershipRepository.findByStatusOrderByRequestedAtDesc("pending")  // HQ_ADMIN 전체
+            orgIds.isEmpty() -> emptyList()                                                          // ORG_ADMIN 해당 없음
+            orgIds.size == 1 -> orgMembershipRepository.findByOrgIdAndStatusOrderByRequestedAtDesc(orgIds.first(), "pending")
+            else -> orgMembershipRepository.findByOrgIdInAndStatusOrderByRequestedAtDesc(orgIds, "pending")
         }
 
         val userIds = memberships.map { it.userId }.distinct()

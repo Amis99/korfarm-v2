@@ -233,7 +233,9 @@ class FileService(
             "board_attachment", "board-attachment", "wisdom",
             // 학습 콘텐츠·계획표
             "content", "content_pdf", "study_plan",
-            // 시험·프로 PDF (학생이 응시·확인)
+            // 시험·프로 PDF (학생이 응시·확인) — test_paper_pdf 는 시험지(학생용 OK).
+            // **주의**: 정답·해설 PDF 는 별도 purpose ("test_answer_pdf") 로 저장되며
+            //          여기에 포함하면 안 됨 (학생은 TestController 의 검증 엔드포인트만 통과해야 함).
             "test_paper_pdf", "pro_answer_pdf",
             // 상점 상품 이미지
             "shop-product-image",

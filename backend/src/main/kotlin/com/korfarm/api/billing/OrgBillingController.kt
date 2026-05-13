@@ -106,9 +106,10 @@ class OrgBillingController(
             val first = orgMembershipRepository.findByUserIdAndStatus(uid, "active").firstOrNull()?.orgId
             return first ?: throw ApiException("NOT_FOUND", "소속 기관 없음", HttpStatus.NOT_FOUND)
         }
+        // ORG_ADMIN — `org_hq` 멤버십 제외 (본사+기관 동시 ORG_ADMIN 케이스 차단)
         val uid = SecurityUtils.currentUserId() ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
         return orgMembershipRepository.findByUserIdAndStatus(uid, "active")
-            .firstOrNull { it.role == "ORG_ADMIN" }?.orgId
+            .firstOrNull { it.role == "ORG_ADMIN" && it.orgId != "org_hq" }?.orgId
             ?: throw ApiException("NOT_FOUND", "소속 기관 없음", HttpStatus.NOT_FOUND)
     }
 }

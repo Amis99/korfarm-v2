@@ -19,6 +19,9 @@ interface OrgMembershipRepository : JpaRepository<OrgMembershipEntity, String> {
     // 승인 대기 목록 조회 (기관별)
     fun findByOrgIdAndStatusOrderByRequestedAtDesc(orgId: String, status: String): List<OrgMembershipEntity>
 
+    // 다중 기관 승인 대기 목록 (한 명이 본사+기관 ORG_ADMIN 처럼 여러 기관에 속한 경우)
+    fun findByOrgIdInAndStatusOrderByRequestedAtDesc(orgIds: Collection<String>, status: String): List<OrgMembershipEntity>
+
     // 전체 승인 대기 목록 조회 (본사용)
     fun findByStatusOrderByRequestedAtDesc(status: String): List<OrgMembershipEntity>
 

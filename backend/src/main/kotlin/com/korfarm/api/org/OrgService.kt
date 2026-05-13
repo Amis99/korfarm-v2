@@ -91,6 +91,18 @@ class OrgService(
         }
     }
 
+    /**
+     * 호출자(ORG_ADMIN) 가 운영 권한을 가진 기관 orgId set.
+     * `org_hq` 멤버십은 본사 운영용이므로 제외(본사 ORG_ADMIN 이라도 운영 화면에서는 본사 데이터로 잡지 않음).
+     * HQ_ADMIN 케이스는 호출자가 별도 분기 필요.
+     */
+    @Transactional(readOnly = true)
+    fun callerOrgAdminOrgIds(userId: String): Set<String> =
+        orgMembershipRepository.findByUserIdAndStatus(userId, "active")
+            .filter { it.role == "ORG_ADMIN" && it.orgId != "org_hq" }
+            .map { it.orgId }
+            .toSet()
+
     @Transactional(readOnly = true)
     fun listOrgsAdmin(): List<AdminOrgView> {
         val adminMemberships = orgMembershipRepository.findByStatus("active")
@@ -132,17 +144,14 @@ class OrgService(
 
     @Transactional(readOnly = true)
     fun listClassesAdmin(): List<AdminClassView> {
-        // ORG_ADMIN 은 자기 기관 반만, HQ_ADMIN 은 전체
+        // ORG_ADMIN 은 자기 기관 반만(`org_hq` 제외), HQ_ADMIN 은 전체
         val isHq = SecurityUtils.currentRoles().contains("HQ_ADMIN")
         val all = classRepository.findAll()
         val classes = if (isHq) {
             all
         } else {
             val currentUserId = SecurityUtils.currentUserId()
-            val myOrgIds = if (currentUserId != null) {
-                orgMembershipRepository.findByUserIdAndStatus(currentUserId, "active")
-                    .map { it.orgId }.toSet()
-            } else emptySet()
+            val myOrgIds = if (currentUserId != null) callerOrgAdminOrgIds(currentUserId) else emptySet()
             all.filter { it.orgId in myOrgIds }
         }
         val orgIds = classes.map { it.orgId }.distinct()
@@ -338,7 +347,12 @@ class OrgService(
             val userClassMemberships = allClassMemberships[user.id] ?: emptyList()
             val classIds = userClassMemberships.map { it.classId }
             val classNames = userClassMemberships.mapNotNull { classMap[it.classId]?.name }
-            val subscription = subscriptionRepository.findTopByUserIdOrderByEndAtDesc(user.id)
+            // 구독 표시 정책: 학생이 비-`org_hq` 기관에 active STUDENT 멤버십이 있으면 자동 "active"(유료).
+            // 기관 가입 승인 = 유료 자동 전환. 별도 SubscriptionEntity 안 봄.
+            val isPaidByOrgMembership = studentMemberships.any {
+                it.userId == user.id && it.orgId != "org_hq"
+            }
+            val autoSubscriptionStatus = if (isPaidByOrgMembership) "active" else "free"
             AdminStudentView(
                 userId = user.id,
                 loginId = user.email,
@@ -353,8 +367,8 @@ class OrgService(
                 orgName = orgName,
                 classIds = classIds,
                 classNames = classNames,
-                subscriptionStatus = subscription?.status,
-                subscriptionEndAt = subscription?.endAt?.toString(),
+                subscriptionStatus = autoSubscriptionStatus,
+                subscriptionEndAt = null,
                 status = user.status
             )
         }

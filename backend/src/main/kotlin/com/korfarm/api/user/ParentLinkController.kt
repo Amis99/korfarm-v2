@@ -49,9 +49,9 @@ class ParentLinkController(
         val all = parentLinkService.listAll()
         val isHq = SecurityUtils.hasAnyRole("HQ_ADMIN")
         val data = if (isHq) all else {
-            // ORG_ADMIN — 자기 기관 학생 연결만 응답
+            // ORG_ADMIN — 자기 기관 학생 연결만 (`org_hq` 멤버십은 제외해야 본사+기관 동시 ORG_ADMIN 케이스에서 타 기관 새지 않음)
             val uid = SecurityUtils.currentUserId() ?: return ApiResponse(success = true, data = emptyList())
-            val myOrgIds = orgService.listUserOrgs(uid).map { it.id }.toSet()
+            val myOrgIds = orgService.callerOrgAdminOrgIds(uid)
             if (myOrgIds.isEmpty()) emptyList() else {
                 val studentIds = all.map { it.studentUserId }.distinct()
                 val studentOrgMap = parentLinkService.getStudentOrgMap(studentIds)
@@ -66,6 +66,21 @@ class ParentLinkController(
         val userId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
         val data = parentLinkService.listForParent(userId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    /**
+     * 학부모 셀프 자녀 연결 — 학생 아이디·이름 일치 시 즉시 active.
+     * 가입 후 자동 연결이 안 된 케이스에서 학부모가 직접 추가하기.
+     */
+    @PostMapping("/parents/links/self-link")
+    fun selfLink(@Valid @RequestBody request: SelfLinkRequest): ApiResponse<ParentLinkView> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        if (!SecurityUtils.hasAnyRole("PARENT")) {
+            throw ApiException("FORBIDDEN", "학부모 권한이 필요합니다.", HttpStatus.FORBIDDEN)
+        }
+        val data = parentLinkService.selfLinkChild(userId, request.studentLoginId, request.studentName)
         return ApiResponse(success = true, data = data)
     }
 

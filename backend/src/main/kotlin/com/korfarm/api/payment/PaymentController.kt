@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/v1/payments")
 class PaymentController(
     private val paymentService: PaymentService,
-    private val featureFlagService: FeatureFlagService
+    private val featureFlagService: FeatureFlagService,
+    private val parentStudentLinkRepository: com.korfarm.api.user.ParentStudentLinkRepository,
 ) {
     // 기존 mock 결제 엔드포인트 (하위 호환)
     @PostMapping("/checkout")
@@ -71,6 +72,24 @@ class PaymentController(
         val userId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
         val result = paymentService.prepareUserGrapefruit(userId, request)
+        return ApiResponse(success = true, data = result)
+    }
+
+    /** 학부모 → 자녀 자몽 충전 prepare. 학부모-자녀 active link 검증 후 prepare. */
+    @PostMapping("/prepare/grapefruit-child")
+    fun prepareGrapefruitChild(@Valid @RequestBody request: ChildGrapefruitPrepareRequest): ApiResponse<PaymentPrepareResult> {
+        featureFlagService.requireNotKilled("ops.kill_switch.payments")
+        val parentUserId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        if (!SecurityUtils.hasAnyRole("PARENT")) {
+            throw ApiException("FORBIDDEN", "학부모만 자녀에게 충전할 수 있습니다.", HttpStatus.FORBIDDEN)
+        }
+        val link = parentStudentLinkRepository.findByParentUserIdAndStudentUserId(parentUserId, request.studentUserId)
+            ?: throw ApiException("NOT_LINKED", "자녀와 연결되어 있지 않습니다.", HttpStatus.FORBIDDEN)
+        if (link.status != "active") {
+            throw ApiException("LINK_INACTIVE", "자녀 연결이 활성 상태가 아닙니다.", HttpStatus.FORBIDDEN)
+        }
+        val result = paymentService.prepareChildGrapefruit(parentUserId, request.studentUserId, request.amountWon)
         return ApiResponse(success = true, data = result)
     }
 

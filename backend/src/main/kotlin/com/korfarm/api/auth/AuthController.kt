@@ -25,6 +25,7 @@ class AuthController(
     private val userRepository: UserRepository,
     private val orgService: OrgService,
     private val orgMembershipRepository: com.korfarm.api.org.OrgMembershipRepository,
+    private val orgRepository: com.korfarm.api.org.OrgRepository,
 ) {
     @GetMapping("/check-login-id")
     fun checkLoginId(@RequestParam loginId: String): ApiResponse<Map<String, Boolean>> {
@@ -48,6 +49,19 @@ class AuthController(
     @PostMapping("/refresh")
     fun refresh(@RequestBody request: RefreshRequest): ApiResponse<AuthResponseData> {
         val data = authService.refresh(request.refreshToken)
+        return ApiResponse(success = true, data = data)
+    }
+
+    /**
+     * 현재 로그인된 사용자의 최신 roles 로 새 access token 발급.
+     * 결제 완료 직후 (구독 활성화 / PAID role 부여) 또는 권한 변경 직후 호출해 sessionStorage 갱신용.
+     * 학생용으로도 사용 가능 (refresh token 불필요).
+     */
+    @PostMapping("/refresh-claims")
+    fun refreshClaims(): ApiResponse<AuthResponseData> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        val data = authService.refreshClaimsFor(userId)
         return ApiResponse(success = true, data = data)
     }
 
@@ -89,7 +103,21 @@ class AuthController(
             pendingApproval = orgMembershipRepository.findByUserIdAndStatus(userId, "pending").isNotEmpty(),
             orgId = orgMembershipRepository.findByUserIdAndStatus(userId, "active").firstOrNull()?.orgId
                 ?: orgMembershipRepository.findByUserIdAndStatus(userId, "pending").firstOrNull()?.orgId,
-        )
+        ).let { p ->
+            // 기관 소속 학생(또는 학부모) — 학원 로고 헤더 표시용으로 orgName·logoFileId 채워줌.
+            // org_hq 는 본사이므로 별도 학원 로고 노출 불필요(orgId 만 유지).
+            val activeOrgId = orgMembershipRepository.findByUserIdAndStatus(userId, "active")
+                .firstOrNull { it.orgId != "org_hq" }?.orgId
+            if (activeOrgId == null) p
+            else {
+                val org = orgRepository.findById(activeOrgId).orElse(null)
+                p.copy(
+                    orgId = activeOrgId,
+                    orgName = org?.name,
+                    orgLogoFileId = org?.logoFileId,
+                )
+            }
+        }
         return ApiResponse(success = true, data = profile)
     }
 
