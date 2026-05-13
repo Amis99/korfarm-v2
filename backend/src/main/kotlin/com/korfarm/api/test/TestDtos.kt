@@ -19,6 +19,7 @@ data class TestPaperSummary(
     val score: Int?,
     val submissionCount: Int? = null,
     val pdfFileId: String? = null,
+    val answerPdfFileId: String? = null,
     val createdAt: LocalDateTime,
     // 테스트 종류: "diagnostic" / "chapter" / "misc"
     // 종류별로 응시 카운트 소스가 다름 (diagnostic → diag_sessions, chapter → pro_test_sessions, misc → test_submissions)
@@ -31,6 +32,7 @@ data class TestPaperDetail(
     val title: String,
     val description: String?,
     val pdfFileId: String?,
+    val answerPdfFileId: String? = null,
     val levelId: String?,
     val totalQuestions: Int,
     val totalPoints: Int,
@@ -221,6 +223,10 @@ data class TestHistoryItem(
 data class StudentForTest(
     val userId: String,
     val name: String?,
+    val orgId: String?,
+    val orgName: String?,
+    val classIds: List<String>,
+    val classNames: List<String>,
     val hasSubmitted: Boolean,
     val score: Int?
 )

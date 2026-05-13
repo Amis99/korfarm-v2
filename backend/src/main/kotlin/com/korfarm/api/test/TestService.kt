@@ -37,6 +37,8 @@ class TestService(
     private val diagPassageRepo: com.korfarm.api.diagnostic.DiagPassageRepository,
     private val diagQuestionRepo: com.korfarm.api.diagnostic.DiagQuestionRepository,
     private val diagResponseRepo: com.korfarm.api.diagnostic.DiagResponseRepository,
+    private val classRepository: com.korfarm.api.org.ClassRepository,
+    private val classMembershipRepository: com.korfarm.api.org.ClassMembershipRepository,
 ) {
 
     // 시험지 ID/series 로 종류 분류 — diagnostic / chapter / misc
@@ -1193,10 +1195,14 @@ class TestService(
     fun listAllTests(callerUserId: String): List<TestPaperSummary> {
         var papers = testPaperRepo.findAll().sortedByDescending { it.createdAt }
 
-        // ORG_ADMIN 은 자기 기관이 만들거나 추가한 시험만 노출 (본사 PUBLIC 시험지 제외)
+        // 권한 정책 (2026-05-13 사용자 명시):
+        //   - HQ_ADMIN: 본사 시험 + 모든 기관 시험
+        //   - ORG_ADMIN: 본사 시험 + 자기 기관 시험만 (타 기관 시험 차단)
         if (!SecurityUtils.hasAnyRole("HQ_ADMIN")) {
             val callerOrgIds = orgMembershipRepository.findByUserIdAndStatus(callerUserId, "active").map { it.orgId }
-            papers = papers.filter { it.orgId != null && it.orgId != "org_hq" && callerOrgIds.contains(it.orgId) }
+            papers = papers.filter {
+                it.orgId == null || it.orgId == "org_hq" || callerOrgIds.contains(it.orgId)
+            }
         }
 
         val orgIds = papers.mapNotNull { it.orgId }.distinct()
@@ -1298,12 +1304,28 @@ class TestService(
         val studentUserIds = studentMemberships.map { it.userId }.distinct()
         val users = userRepository.findAllById(studentUserIds).filter { it.status == "active" }.associateBy { it.id }
         val subs = submissionRepo.findByTestId(testId).associateBy { it.userId }
+        // 기관·수강반 정보 조회 (어드민 OMR 입력 페이지의 다단 필터링용)
+        val orgMembershipsByUser = studentMemberships
+            .filter { it.role == "STUDENT" }
+            .groupBy { it.userId }
+        val orgIdsAll = orgMembershipsByUser.values.flatten().map { it.orgId }.distinct()
+        val orgNameMap = if (orgIdsAll.isNotEmpty()) orgRepository.findAllById(orgIdsAll).associate { it.id to it.name } else emptyMap()
+        val classMembershipsByUser = classMembershipRepository.findAll()
+            .filter { it.status == "active" && it.userId in studentUserIds }
+            .groupBy { it.userId }
+        val classMap = classRepository.findAll().associateBy { it.id }
         return studentUserIds.mapNotNull { uid ->
             val u = users[uid] ?: return@mapNotNull null
             val sub = subs[uid]
+            val firstOrg = orgMembershipsByUser[uid]?.firstOrNull()
+            val userClasses = classMembershipsByUser[uid] ?: emptyList()
             StudentForTest(
                 userId = u.id,
                 name = u.name ?: u.email,
+                orgId = firstOrg?.orgId,
+                orgName = firstOrg?.orgId?.let { orgNameMap[it] },
+                classIds = userClasses.map { it.classId },
+                classNames = userClasses.mapNotNull { classMap[it.classId]?.name },
                 hasSubmitted = sub != null,
                 score = sub?.score
             )
