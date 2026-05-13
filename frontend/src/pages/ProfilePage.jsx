@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { apiGet, apiPut } from "../utils/api";
+import { useAuth } from "../hooks/useAuth";
 import "../styles/auth.css";
 
 const GRADE_LEVELS = [
@@ -34,6 +35,9 @@ const formatPhoneNumber = (value) => {
 
 function ProfilePage() {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  // 학부모는 학년·학교·레벨 필드 숨김 (본인 정보 수정이므로 학생용 필드 불필요)
+  const isParent = (user?.roles || []).includes("PARENT");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
@@ -77,24 +81,26 @@ function ProfilePage() {
 
     if (!name.trim()) { setError("이름을 입력해 주세요."); return; }
     if (!region) { setError("지역을 선택해 주세요."); return; }
-    if (!school.trim()) { setError("학교를 입력해 주세요."); return; }
-    if (!levelId) { setError("학년을 선택해 주세요."); return; }
+    if (!isParent && !school.trim()) { setError("학교를 입력해 주세요."); return; }
+    if (!isParent && !levelId) { setError("학년을 선택해 주세요."); return; }
     if (newPassword && newPassword.length < 8) {
       setError("비밀번호는 8자 이상이어야 합니다.");
       return;
     }
 
-    const selectedLevel = GRADE_LEVELS.find((g) => g.levelId === levelId);
+    const selectedLevel = !isParent ? GRADE_LEVELS.find((g) => g.levelId === levelId) : null;
     const body = {
       name: name.trim(),
       region: region.trim(),
-      school: school.trim(),
-      grade_label: selectedLevel?.label,
-      level_id: levelId,
       student_phone: studentPhone.trim(),
       parent_phone: parentPhone.trim(),
       // 학습 시작 모드 변경 비활성화 (2026-05-10) — body 에 learning_start_mode 미포함
     };
+    if (!isParent) {
+      body.school = school.trim();
+      body.grade_label = selectedLevel?.label;
+      body.level_id = levelId;
+    }
     if (avatarPreview || avatarUrl) {
       body.profile_image_url = avatarPreview || avatarUrl;
     }
@@ -197,17 +203,19 @@ function ProfilePage() {
                   required
                 />
               </label>
-              <label>
-                학년 (레벨)
-                <select value={levelId} onChange={(e) => setLevelId(e.target.value)}>
-                  <option value="">학년 선택</option>
-                  {GRADE_LEVELS.map((item) => (
-                    <option key={item.levelId} value={item.levelId}>
-                      {item.levelName} · {item.label}
-                    </option>
-                  ))}
-                </select>
-              </label>
+              {!isParent && (
+                <label>
+                  학년 (레벨)
+                  <select value={levelId} onChange={(e) => setLevelId(e.target.value)}>
+                    <option value="">학년 선택</option>
+                    {GRADE_LEVELS.map((item) => (
+                      <option key={item.levelId} value={item.levelId}>
+                        {item.levelName} · {item.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              )}
               <label>
                 지역
                 <select value={region} onChange={(e) => setRegion(e.target.value)} required>
@@ -217,15 +225,17 @@ function ProfilePage() {
                   ))}
                 </select>
               </label>
-              <label>
-                학교
-                <input
-                  type="text"
-                  value={school}
-                  onChange={(e) => setSchool(e.target.value)}
-                  required
-                />
-              </label>
+              {!isParent && (
+                <label>
+                  학교
+                  <input
+                    type="text"
+                    value={school}
+                    onChange={(e) => setSchool(e.target.value)}
+                    required
+                  />
+                </label>
+              )}
               <label>
                 학생 전화번호
                 <input

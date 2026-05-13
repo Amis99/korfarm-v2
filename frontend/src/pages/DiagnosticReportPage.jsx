@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { apiGet, apiPut } from "../utils/api";
+import { apiGet, apiPut, API_BASE, TOKEN_KEY } from "../utils/api";
 import { LEVEL_LABELS } from "../constants/levels";
 import CompetencyRadarChart from "../components/diagnostic/CompetencyRadarChart";
 import TciGaugeChart from "../components/diagnostic/TciGaugeChart";
@@ -26,6 +26,8 @@ function DiagnosticReportPage() {
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState(null);
   const [levelSaving, setLevelSaving] = useState(false);
+  const [answerPdf, setAnswerPdf] = useState({ checked: false, available: false });
+  const [answerDownloading, setAnswerDownloading] = useState(false);
 
   useEffect(() => {
     const url = isParentMode
@@ -42,6 +44,36 @@ function DiagnosticReportPage() {
       apiGet("/v1/auth/me").then(setProfile).catch(() => {});
     }
   }, [isParentMode]);
+
+  // 정답·해설 PDF 다운로드 가능 여부 — 본인 응시 + 관리자가 정답 PDF 생성한 시험만
+  useEffect(() => {
+    if (isParentMode || !report?.tier) return;
+    const testId = `diag_paper_${report.tier}`;
+    apiGet(`/v1/test-storage/${testId}/answer-pdf/meta`)
+      .then((m) => setAnswerPdf({ checked: true, available: !!m?.available }))
+      .catch(() => setAnswerPdf({ checked: true, available: false }));
+  }, [isParentMode, report?.tier]);
+
+  const handleAnswerDownload = async () => {
+    if (!report?.tier || answerDownloading) return;
+    setAnswerDownloading(true);
+    try {
+      const testId = `diag_paper_${report.tier}`;
+      const token = sessionStorage.getItem(TOKEN_KEY) || "";
+      const resp = await fetch(`${API_BASE}/v1/test-storage/${testId}/answer-pdf`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
+      if (!resp.ok) throw new Error("정답·해설 PDF 를 받을 수 없습니다.");
+      const blob = await resp.blob();
+      const url = URL.createObjectURL(blob);
+      window.open(url, "_blank", "noopener,noreferrer");
+      setTimeout(() => URL.revokeObjectURL(url), 60_000);
+    } catch (e) {
+      alert(e?.message || "다운로드 실패");
+    } finally {
+      setAnswerDownloading(false);
+    }
+  };
 
   // testKey → levelId 매핑
   const TIER_TO_PREFIX = { sohssure: "saussure", frege: "frege", russell: "russell", wittgenstein: "wittgenstein" };
@@ -176,6 +208,16 @@ function DiagnosticReportPage() {
       {/* 하단 버튼 */}
       <div className="diag-report-actions">
         <button className="btn-secondary" onClick={() => navigate(backUrl)}>진단 목록</button>
+        {!isParentMode && answerPdf.checked && answerPdf.available && (
+          <button
+            className="btn-secondary"
+            onClick={handleAnswerDownload}
+            disabled={answerDownloading}
+            title="정답·해설 PDF 를 새 탭에서 열어 인쇄·저장할 수 있습니다."
+          >
+            {answerDownloading ? "정답·해설 불러오는 중..." : "📑 정답·해설 인쇄"}
+          </button>
+        )}
         {!isParentMode && needsChoice ? (
           <div className="diag-level-choice">
             <h3>학습 레벨을 선택해 주세요</h3>

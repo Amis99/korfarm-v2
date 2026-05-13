@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useOrgBillingStatus, daysUntil } from "../hooks/useOrgBillingStatus";
+import { apiGetCamel } from "../utils/adminApi";
+import { useFileBlob } from "../hooks/useFileBlob";
 import SiteFooter from "./SiteFooter";
 import "../styles/admin.css";
 
@@ -57,6 +59,22 @@ function AdminLayout({ children }) {
   const showSuspendedBanner = !!billingStatus?.suspended;
   const showImminentBanner = !showSuspendedBanner && billingStatus?.pendingCount > 0 && dueDays != null && dueDays <= 7 && dueDays >= 0;
 
+  // ORG_ADMIN 헤더: 기관 로고(없으면 국어농장 디폴트) + 기관명. HQ_ADMIN 은 기존 'Admin' 텍스트 유지.
+  const isOnlyOrgAdmin = userRoles.includes("ORG_ADMIN") && !userRoles.includes("HQ_ADMIN");
+  const [orgInfo, setOrgInfo] = useState(null);
+  useEffect(() => {
+    if (!isOnlyOrgAdmin) {
+      setOrgInfo(null);
+      return;
+    }
+    let alive = true;
+    apiGetCamel("/v1/admin/orgs/me")
+      .then((d) => { if (alive) setOrgInfo(d); })
+      .catch(() => { if (alive) setOrgInfo(null); });
+    return () => { alive = false; };
+  }, [isOnlyOrgAdmin]);
+  const orgLogoBlob = useFileBlob(isOnlyOrgAdmin ? orgInfo?.logoFileId : null);
+
   // 메뉴별 권한 분기 — roles 미지정은 HQ + ORG 공통, roles 명시는 그 역할만
   const visibleNavItems = NAV_ITEMS.filter((item) => {
     if (!item.roles) return true;
@@ -76,13 +94,21 @@ function AdminLayout({ children }) {
 
         <aside className={`admin-side ${open ? "open" : ""}`}>
           <div className="admin-side-header">
-            <Link to="/" className="admin-brand" aria-label="국어농장 Admin">
+            <Link
+              to="/"
+              className="admin-brand"
+              aria-label={isOnlyOrgAdmin ? (orgInfo?.name || "기관") : "국어농장 Admin"}
+            >
               <img
                 className="admin-logo"
-                src={import.meta.env.BASE_URL + "korfarm-logo.png"}
-                alt="국어농장"
+                src={
+                  isOnlyOrgAdmin
+                    ? (orgLogoBlob || (import.meta.env.BASE_URL + "korfarm-logo.png"))
+                    : (import.meta.env.BASE_URL + "korfarm-logo.png")
+                }
+                alt={isOnlyOrgAdmin ? (orgInfo?.name || "기관") : "국어농장"}
               />
-              <span>Admin</span>
+              <span>{isOnlyOrgAdmin ? (orgInfo?.name || "기관") : "Admin"}</span>
             </Link>
             <button
               className="admin-side-close"

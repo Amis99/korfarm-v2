@@ -3,6 +3,7 @@ import { useNavigate, useParams, useSearchParams, Link } from "react-router-dom"
 import AdminLayout from "../components/AdminLayout";
 import TestPaperDocEditor from "../components/editor/testpaper/TestPaperDocEditor";
 import ClassificationPicker from "../components/editor/ClassificationPicker";
+import AiTestAnalysisModal from "../components/admin/AiTestAnalysisModal";
 import { useTestEditor } from "../hooks/useTestEditor";
 import { apiPut } from "../utils/adminApi";
 import { LEVEL_LABELS } from "../constants/levels";
@@ -33,6 +34,8 @@ export default function AdminTestEditorPage() {
   const [metaForm, setMetaForm] = useState(null);
   const [metaSaving, setMetaSaving] = useState(false);
   const [metaSaveMsg, setMetaSaveMsg] = useState("");
+  // AI 시험 정보 분석 모달
+  const [showAiAnalysisModal, setShowAiAnalysisModal] = useState(false);
 
   useEffect(() => {
     if (editor.meta && metaForm == null) {
@@ -159,6 +162,14 @@ export default function AdminTestEditorPage() {
                   <strong style={{ color: "var(--text)", fontSize: 13 }}>📝 시험지 메타 정보</strong>
                   <span style={{ flex: 1 }} />
                   {metaSaveMsg && <span style={{ marginRight: 8, color: "#86efac", fontSize: 12 }}>{metaSaveMsg}</span>}
+                  <button
+                    onClick={() => setShowAiAnalysisModal(true)}
+                    className="ce-btn ce-btn-secondary"
+                    style={{ padding: "4px 12px", fontSize: 12, marginRight: 6 }}
+                    title="AI 가 지문 분류·문항 벡터·선지 해설·함정 패턴 등을 자동으로 채워줍니다"
+                  >
+                    🤖 시험 정보 AI 분석
+                  </button>
                   <button onClick={saveMeta} disabled={metaSaving} className="ce-btn ce-btn-primary" style={{ padding: "4px 12px", fontSize: 12 }}>
                     {metaSaving ? "저장 중..." : "메타 저장"}
                   </button>
@@ -179,15 +190,25 @@ export default function AdminTestEditorPage() {
                     </select>
                   </Field>
                   <Field label="레벨">
+                    {/* 챕터 테스트 = 12레벨 exact match. 진단·기타 = 4단계 그룹 (소쉬르/프레게/러셀/비트겐슈타인) */}
                     <select
                       value={metaForm.levelId || ""}
                       onChange={(e) => setMetaForm({ ...metaForm, levelId: e.target.value })}
                       style={metaInpStyle}
                     >
                       <option value="">레벨 선택</option>
-                      {Object.entries(LEVEL_LABELS).map(([id, label]) => (
-                        <option key={id} value={id}>{label}</option>
-                      ))}
+                      {metaForm.series === "chapter" ? (
+                        Object.entries(LEVEL_LABELS).map(([id, label]) => (
+                          <option key={id} value={id}>{label}</option>
+                        ))
+                      ) : (
+                        <>
+                          <option value="saussure">소쉬르 (초1~3)</option>
+                          <option value="frege">프레게 (초4~6)</option>
+                          <option value="russell">러셀 (중1~3)</option>
+                          <option value="wittgenstein">비트겐슈타인 (고1~3)</option>
+                        </>
+                      )}
                     </select>
                   </Field>
                   <Field label="시간 제한 (분)">
@@ -228,6 +249,14 @@ export default function AdminTestEditorPage() {
           </div>
         </div>
       </div>
+      <AiTestAnalysisModal
+        open={showAiAnalysisModal}
+        onClose={() => setShowAiAnalysisModal(false)}
+        onDone={() => window.location.reload()}
+        testId={testId}
+        passages={editor.content?.passages || []}
+        questions={editor.content?.questions || []}
+      />
     </AdminLayout>
   );
 }

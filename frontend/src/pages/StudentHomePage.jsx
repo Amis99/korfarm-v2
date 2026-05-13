@@ -8,6 +8,7 @@ import { apiGet, apiPost, normalizeInventoryKeys } from "../utils/api";
 import { FORMULA_TEXT } from "../utils/seasonScore";
 import NoticeBell from "../components/NoticeBell";
 import HarvestCraftModal from "../components/HarvestCraftModal";
+import OrgBadge from "../components/OrgBadge";
 import "../styles/student-home.css";
 import "../styles/start.css";
 
@@ -300,6 +301,8 @@ function StudentHomePage() {
   const [wallet, setWallet] = useState(WALLET_META.map((w) => ({ ...w, count: 0 })));
   const [ranking, setRanking] = useState(FALLBACK_RANKING);
   const [pendingApproval, setPendingApproval] = useState(false);
+  // 학생이 기관 소속이면 헤더에 학원 로고/이름 표시용
+  const [orgInfo, setOrgInfo] = useState({ name: null, logoFileId: null });
 
   // 1) 학생 프로필 — /v1/auth/me
   useEffect(() => {
@@ -315,6 +318,10 @@ function StudentHomePage() {
           profileImageUrl: img,
         }));
         setPendingApproval(!!(data?.pending_approval ?? data?.pendingApproval));
+        setOrgInfo({
+          name: data?.org_name || data?.orgName || null,
+          logoFileId: data?.org_logo_file_id || data?.orgLogoFileId || null,
+        });
       })
       .catch((e) => console.error("[auth/me]", e));
   }, [isLoggedIn]);
@@ -783,6 +790,7 @@ function StudentHomePage() {
               style={{ height: 36, width: "auto", display: "block" }}
             />
           </Link>
+          <OrgBadge orgName={orgInfo.name} logoFileId={orgInfo.logoFileId} />
           <div className="hdr-spacer"></div>
 
           {free && (

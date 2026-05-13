@@ -1,8 +1,10 @@
 import { useState, useEffect, useMemo, useRef } from "react";
+import { createPortal } from "react-dom";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet, apiPost, normalizeInventoryKeys } from "../utils/api";
 import NoticeBell from "../components/NoticeBell";
+import OrgBadge from "../components/OrgBadge";
 import { requestTossPayment } from "../utils/tossPayment";
 import "../styles/student-home.css";
 import "../styles/parent-home.css";
@@ -70,6 +72,7 @@ const SIDEBAR_GROUPS = [
     items: [
       { id: "link",    icon: "👨‍👩‍👧", label: "자녀 연결 관리", routeKey: "parents-links" },
       { id: "billing", icon: "💳", label: "결제·구독",          routeKey: "subscription" },
+      { id: "grapefruit", icon: "🍊", label: "자녀 자몽 충전",  routeKey: "child-grapefruit" },
       { id: "profile", icon: "👤", label: "내 정보",             routeKey: "profile" },
       { id: "logout",  icon: "🚪", label: "로그아웃",            routeKey: null },
     ],
@@ -114,7 +117,8 @@ function buildRoute(routeKey, studentId) {
     case "community":      return "/community";
     case "shop":           return "/shop";
     case "parents-links":  return "/parents/links";
-    case "subscription":   return "/subscription";
+    case "subscription":   return `/subscription${sid}`;  // 학부모 모드: 자녀 sub 분기를 위해 studentId 동반
+    case "child-grapefruit": return `/parents/grapefruit${sid}`;
     case "profile":        return "/profile";
     default:               return null;
   }
@@ -366,6 +370,11 @@ function ParentHomePage() {
               style={{ height: 36, width: "auto", display: "block" }}
             />
           </Link>
+          {/* 선택된 자녀가 기관 소속이면 학원 로고/이름 — useFileBlob 으로 토큰 헤더 다운로드 */}
+          <OrgBadge
+            orgName={childProfile?.orgName || childProfile?.org_name}
+            logoFileId={childProfile?.orgLogoFileId || childProfile?.org_logo_file_id}
+          />
           <div className="hdr-spacer"></div>
 
           <div className="child-pill-wrap">
@@ -383,49 +392,54 @@ function ParentHomePage() {
               </span>
               <span className="caret" aria-hidden="true">▾</span>
             </button>
-            <div className="child-menu" role="listbox" data-open={childMenuOpen ? "true" : "false"}>
-              {linkedChildren.length === 0 && (
-                <div style={{ padding: "12px 10px", fontSize: 12, color: "var(--muted)" }}>
-                  연결된 자녀가 없습니다.
-                </div>
-              )}
-              {linkedChildren.map((child, idx) => {
-                const c = CHILD_COLORS[idx % CHILD_COLORS.length];
-                const isSel = selectedChild?.studentUserId === child.studentUserId;
-                const cName = child.studentName || child.studentLoginId || "자녀";
-                return (
-                  <button
-                    key={child.studentUserId}
-                    className={`child-menu-item${isSel ? " selected" : ""}`}
-                    role="option"
-                    aria-selected={isSel}
-                    onClick={() => {
-                      setSelectedChild(child);
-                      setChildMenuOpen(false);
-                      showToast(`${cName} 학생으로 전환했어요`);
-                    }}
-                  >
-                    <ClaySpan color={c} label={cName.slice(0, 2)} />
-                    <span className="info">
-                      <span className="name">{cName}</span>
-                      <span className="meta">{child.studentLoginId}</span>
-                    </span>
-                    <span className="check" aria-hidden="true">✓</span>
-                  </button>
-                );
-              })}
-              <div className="child-menu-divider" aria-hidden="true"></div>
-              <button
-                className="child-menu-add"
-                onClick={() => {
-                  setChildMenuOpen(false);
-                  navigate("/parents/links");
-                }}
-              >
-                <span className="plus" aria-hidden="true">+</span>
-                <span>다른 자녀 추가</span>
-              </button>
-            </div>
+            {/* 자녀 메뉴는 React Portal 로 document.body 에 렌더 — 부모(.app 의 isolation:isolate) stacking context 우회.
+                다른 어떤 사이드바 카드도 메뉴를 가리지 못함. */}
+            {createPortal(
+              <div className="child-menu" role="listbox" data-open={childMenuOpen ? "true" : "false"}>
+                {linkedChildren.length === 0 && (
+                  <div style={{ padding: "12px 10px", fontSize: 12, color: "var(--muted)" }}>
+                    연결된 자녀가 없습니다.
+                  </div>
+                )}
+                {linkedChildren.map((child, idx) => {
+                  const c = CHILD_COLORS[idx % CHILD_COLORS.length];
+                  const isSel = selectedChild?.studentUserId === child.studentUserId;
+                  const cName = child.studentName || child.studentLoginId || "자녀";
+                  return (
+                    <button
+                      key={child.studentUserId}
+                      className={`child-menu-item${isSel ? " selected" : ""}`}
+                      role="option"
+                      aria-selected={isSel}
+                      onClick={() => {
+                        setSelectedChild(child);
+                        setChildMenuOpen(false);
+                        showToast(`${cName} 학생으로 전환했어요`);
+                      }}
+                    >
+                      <ClaySpan color={c} label={cName.slice(0, 2)} />
+                      <span className="info">
+                        <span className="name">{cName}</span>
+                        <span className="meta">{child.studentLoginId}</span>
+                      </span>
+                      <span className="check" aria-hidden="true">✓</span>
+                    </button>
+                  );
+                })}
+                <div className="child-menu-divider" aria-hidden="true"></div>
+                <button
+                  className="child-menu-add"
+                  onClick={() => {
+                    setChildMenuOpen(false);
+                    navigate("/parents/links");
+                  }}
+                >
+                  <span className="plus" aria-hidden="true">+</span>
+                  <span>다른 자녀 추가</span>
+                </button>
+              </div>,
+              document.body
+            )}
           </div>
 
           <button className="hdr-user" aria-label={`${parentName} 학부모님 프로필`} onClick={() => navigate("/profile")}>
@@ -696,33 +710,7 @@ function ParentHomePage() {
               </div>
             </section>
 
-            {/* 자녀 인벤토리 — 자몽 + 5작물 */}
-            {childInventory && (
-              <section className="widget">
-                <div className="widget-head">
-                  <h3 className="widget-title">🌾 {selectedChildName}의 작물 지갑</h3>
-                  <Link
-                    className="widget-cta"
-                    to={selectedChild ? `/farm/inventory?studentId=${selectedChild.studentUserId}` : "/farm/inventory"}
-                  >
-                    전체 ›
-                  </Link>
-                </div>
-                <div className="parent-wallet-grid">
-                  {WALLET_META.map((w) => {
-                    const count = w.key === "grapefruit"
-                      ? Number(childInventory.grapefruit ?? childInventory.grapefruits ?? 0)
-                      : Number((childInventory.crops || {})[w.key] ?? 0);
-                    return (
-                      <div key={w.key} className="parent-wallet-cell">
-                        <ClaySpan color={w.color} label={w.name} />
-                        <span className="parent-wallet-count">{count.toLocaleString()}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
-            )}
+            {/* 자녀 작물 지갑 카드 제거 (2026-05-12) — 학부모가 자녀 작물 지갑을 볼 일을 만들지 않음. */}
 
             {/* 미수행 학습 */}
             <section className="widget">
@@ -765,7 +753,30 @@ function ParentHomePage() {
               )}
             </section>
 
-            {/* 자녀 월 구독 결제 */}
+            {/* 자녀 자몽 충전 — 학부모 결제로 자녀 자몽 지갑 충전. 항상 노출(기관 소속 여부 무관). */}
+            <section className="widget">
+              <div className="widget-head">
+                <h3 className="widget-title">🍊 {selectedChildName}의 자몽 충전</h3>
+              </div>
+              <p style={{ fontSize: 12, color: "var(--muted)", margin: "0 0 10px" }}>
+                자녀 자몽 지갑에 직접 충전. AI 튜터·포도 첨삭·OCR 등에 사용돼요.
+              </p>
+              <Link
+                to={selectedChild ? `/parents/grapefruit?studentId=${selectedChild.studentUserId}` : "/parents/grapefruit"}
+                className="commerce-btn"
+                style={{
+                  display: "block", width: "100%", textAlign: "center",
+                  background: "var(--accent)", color: "#fff",
+                  padding: "10px 14px", borderRadius: 12,
+                  fontSize: 13, fontWeight: 700, textDecoration: "none",
+                }}
+              >
+                자몽 충전하러 가기 →
+              </Link>
+            </section>
+
+            {/* 자녀 월 구독 결제 — 자녀가 기관 소속이면 숨김 (기관이 학습 운영비 부담, 개인 구독 불필요) */}
+            {!(childProfile?.orgId || childProfile?.org_id) && (
             <section className="widget">
               <div className="widget-head">
                 <h3 className="widget-title">💳 {selectedChildName}의 구독</h3>
@@ -820,6 +831,7 @@ function ParentHomePage() {
                 );
               })()}
             </section>
+            )}
 
             {/* 학원·본사 공지 미리보기 — 종 모달과 별개 위젯 */}
             <section className="widget">

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { apiPost } from "../utils/api";
+import { apiPost, TOKEN_KEY, REFRESH_KEY } from "../utils/api";
 import SiteFooter from "../components/SiteFooter";
 import "../styles/commerce.css";
 
@@ -60,9 +60,22 @@ function PaymentSuccessPage() {
       return;
     }
     apiPost("/v1/payments/confirm", { paymentKey, orderId, amount })
-      .then((data) => {
+      .then(async (data) => {
         setResult(data);
         setStatus("success");
+        // 구독·자몽 등 결제는 user roles(PAID 등) 변경 가능 → 새 access token 발급 받아 sessionStorage 갱신.
+        // 이렇게 해야 다음 화면(/start 등) 에서 isPremium 이 즉시 true 로 인식되고 무료 화면이 안 뜸.
+        try {
+          const auth = await apiPost("/v1/auth/refresh-claims", {});
+          if (auth?.accessToken) {
+            sessionStorage.setItem(TOKEN_KEY, auth.accessToken);
+            if (auth?.refreshToken) {
+              localStorage.setItem(REFRESH_KEY, auth.refreshToken);
+            }
+          }
+        } catch {
+          // 토큰 갱신 실패해도 결제 성공은 표시 — 재로그인 시 자동 반영.
+        }
       })
       .catch((e) => {
         setError(e.message || "결제 승인에 실패했습니다.");

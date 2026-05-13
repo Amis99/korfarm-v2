@@ -10,6 +10,7 @@
  *       여기서는 별도 import 불필요.
  */
 import katex from "katex";
+import FileImage from "../components/FileImage";
 
 function autoBreakItems(s) {
   if (!s || typeof s !== "string") return s;
@@ -41,9 +42,9 @@ function MathSnippet({ tex, displayMode = false }) {
 function RichText({ children }) {
   if (!children || typeof children !== 'string') return children ?? null;
   const text = autoBreakItems(children.replace(/\\n/g, '\n'));
-  // split 패턴: $$...$$ (블록), $...$ (인라인), <u>, <b>, **bold**
+  // split 패턴: $$...$$ (블록), $...$ (인라인), <u>, <b>, **bold**, ![alt](url)
   // 수식이 먼저 와야 더 길게 매치 (lazy 우선순위 처리)
-  const pattern = /(\$\$[\s\S]+?\$\$|\$[^$\n]+?\$|<u>[\s\S]*?<\/u>|<b>[\s\S]*?<\/b>|\*\*[\s\S]*?\*\*)/g;
+  const pattern = /(\$\$[\s\S]+?\$\$|\$[^$\n]+?\$|<u>[\s\S]*?<\/u>|<b>[\s\S]*?<\/b>|\*\*[\s\S]*?\*\*|!\[[^\]]*\]\([^)]+\))/g;
   const parts = text.split(pattern);
   return parts.map((part, i) => {
     if (typeof part !== "string") return part;
@@ -61,6 +62,26 @@ function RichText({ children }) {
     }
     if (part.startsWith('**') && part.endsWith('**') && part.length > 4) {
       return <strong key={i}>{part.slice(2, -2)}</strong>;
+    }
+    // ![alt](url) 이미지 — /v1/files/{id}/download 는 토큰 필요 → FileImage 사용
+    if (part.startsWith('![')) {
+      const m = part.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+      if (m) {
+        const alt = m[1];
+        const url = m[2].trim();
+        const fileMatch = url.match(/\/v1\/files\/([A-Za-z0-9_-]+)\/download/);
+        if (fileMatch) {
+          return <FileImage key={i} fileId={fileMatch[1]} alt={alt} />;
+        }
+        return (
+          <img
+            key={i}
+            src={url}
+            alt={alt}
+            style={{ maxWidth: "100%", display: "block", margin: "4px 0" }}
+          />
+        );
+      }
     }
     // 평문 내 \n을 <br/>로 변환
     if (part.includes('\n')) {

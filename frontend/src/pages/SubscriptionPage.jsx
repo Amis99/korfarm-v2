@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { apiGet, apiPost } from "../utils/api";
+import { useAuth } from "../hooks/useAuth";
 import { requestTossPayment } from "../utils/tossPayment";
 import SiteFooter from "../components/SiteFooter";
 import "../styles/commerce.css";
@@ -39,7 +40,16 @@ function formatPaymentStatus(status) {
 }
 
 function SubscriptionPage() {
+  const { user } = useAuth();
+  const isParent = (user?.roles || []).includes("PARENT");
+  const [searchParams] = useSearchParams();
+  const studentId = searchParams.get("studentId");
+  // 학부모 + studentId 있으면 자녀 모드 — 그 자녀의 sub·소속 기관 조회
+  const parentChildMode = isParent && !!studentId;
+
   const [sub, setSub] = useState(null);
+  const [childOrgId, setChildOrgId] = useState(null);     // 자녀 모드 — 기관 소속 여부
+  const [childName, setChildName] = useState("");
   const [payments, setPayments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedPlan, setSelectedPlan] = useState(1);
@@ -49,22 +59,38 @@ function SubscriptionPage() {
 
   const loadData = () => {
     setLoading(true);
-    Promise.all([
-      apiGet("/v1/subscription").catch(() => null),
-      apiGet("/v1/payments").catch(() => [])
-    ])
-      .then(([subData, paymentData]) => {
-        setSub(subData);
-        setPayments(paymentData || []);
-      })
-      .finally(() => setLoading(false));
+    if (parentChildMode) {
+      // 자녀의 subscription + 자녀 프로필(기관 소속 여부)
+      Promise.all([
+        apiGet(`/v1/parents/children/${studentId}/subscription`).catch(() => null),
+        apiGet(`/v1/parents/children/${studentId}/profile`).catch(() => null),
+      ])
+        .then(([subData, profile]) => {
+          setSub(subData);
+          setChildOrgId(profile?.orgId || profile?.org_id || null);
+          setChildName(profile?.name || profile?.studentName || "");
+        })
+        .finally(() => setLoading(false));
+    } else {
+      Promise.all([
+        apiGet("/v1/subscription").catch(() => null),
+        apiGet("/v1/payments").catch(() => [])
+      ])
+        .then(([subData, paymentData]) => {
+          setSub(subData);
+          setPayments(paymentData || []);
+        })
+        .finally(() => setLoading(false));
+    }
   };
 
-  useEffect(() => { loadData(); }, []);
+  useEffect(() => { loadData(); }, [parentChildMode, studentId]);
 
   const status = sub?.status || "none";
   const isActive = status === "active" || status === "canceled";
-  const canSubscribe = !isActive;
+  // 자녀가 기관 소속이면 구독 버튼 안 뜸 (기관이 학습 운영비를 부담하므로 개인 구독 불필요)
+  const childInOrg = parentChildMode && !!childOrgId;
+  const canSubscribe = !isActive && !childInOrg;
 
   const handleCancel = () => {
     if (!confirm("정말 구독을 해지하시겠습니까?")) return;
@@ -112,13 +138,31 @@ function SubscriptionPage() {
     <div className="subscription-page">
       <div className="subscription-card">
         <h1>구독 관리</h1>
+        {parentChildMode && childName && (
+          <p style={{ marginTop: -8, color: "#666", fontSize: 14 }}>
+            자녀: <strong>{childName}</strong>
+          </p>
+        )}
         {loading ? (
           <p>불러오는 중...</p>
         ) : (
           <>
             <div className="subscription-status">
-              <span className={`subscription-badge ${status}`}>{statusLabel}</span>
+              <span className={`subscription-badge ${status}`}>
+                {childInOrg ? "기관 소속" : statusLabel}
+              </span>
             </div>
+
+            {childInOrg && (
+              <div style={{
+                marginTop: 16, padding: 16,
+                background: "#eef7f0", border: "1px solid #c8e0cf",
+                borderRadius: 8, color: "#2e5b3a", fontSize: 14, lineHeight: 1.6,
+              }}>
+                자녀가 기관에 소속되어 학습 중입니다. 기관이 학습 운영비를 부담하므로
+                별도 구독 결제는 필요하지 않습니다.
+              </div>
+            )}
 
             {isActive && sub && (
               <div className="subscription-period">
@@ -174,7 +218,9 @@ function SubscriptionPage() {
                   onClick={handleSubscribe}
                   disabled={checkoutLoading}
                 >
-                  {checkoutLoading ? "결제 중..." : "구독하기"}
+                  {checkoutLoading
+                    ? "결제 중..."
+                    : (isActive ? "구독 연장하기" : "구독 신청하기")}
                 </button>
 
                 <div className="subscription-refund-policy">

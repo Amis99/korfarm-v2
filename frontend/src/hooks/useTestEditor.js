@@ -9,6 +9,57 @@ import {
 
 const MAX_UNDO = 20;
 
+function isDiagnosticPayload(testId, meta, payload) {
+  return String(testId || "").startsWith("diag_paper_")
+    || meta?.series === "diagnostic"
+    || payload?.kind === "diagnostic"
+    || Boolean(payload?.tier);
+}
+
+function stripPoints(question) {
+  const { points, ...rest } = question || {};
+  return rest;
+}
+
+function normalizeDiagnosticPayload(payload) {
+  const source = payload && typeof payload === "object" ? payload : {};
+  const questions = Array.isArray(source.questions) ? source.questions : [];
+  const passages = Array.isArray(source.passages) ? source.passages : [];
+
+  const byPassage = new Map();
+  questions.forEach((q, idx) => {
+    const key = q?.passageId || "_none";
+    if (!byPassage.has(key)) byPassage.set(key, []);
+    byPassage.get(key).push({ q: q || {}, idx });
+  });
+
+  for (const items of byPassage.values()) {
+    items.sort((a, b) => (a.q.number ?? a.idx + 1) - (b.q.number ?? b.idx + 1));
+  }
+
+  const order = [
+    ...passages.map((p) => p.id),
+    ...Array.from(byPassage.keys()).filter((k) => k !== "_none" && !passages.some((p) => p.id === k)),
+    "_none",
+  ];
+
+  const normalizedByIndex = new Map();
+  let number = 1;
+  order.forEach((key) => {
+    (byPassage.get(key) || []).forEach(({ q, idx }) => {
+      normalizedByIndex.set(idx, { ...stripPoints(q), number: number++ });
+    });
+  });
+
+  return {
+    ...source,
+    kind: source.kind || "diagnostic",
+    questions: questions.map((q, idx) => normalizedByIndex.get(idx) || { ...stripPoints(q), number: number++ }),
+    passages,
+    metadata: source.metadata || {},
+  };
+}
+
 /**
  * 시험지 비주얼 에디터 상태 관리 훅.
  * useContentEditor 와 동일한 인터페이스를 노출하여 DailyQuizDocEditor 등을 그대로 재사용 가능.
@@ -67,6 +118,7 @@ export function useTestEditor(testId) {
         // payload가 객체이고 questions 배열이 있으면 그대로, 아니면 빈 시험지로
         const payload = (loaded && typeof loaded === "object")
           ? {
+              ...loaded,
               questions: Array.isArray(loaded.questions) ? loaded.questions : [],
               passages: Array.isArray(loaded.passages) ? loaded.passages : [],
               metadata: loaded.metadata || {},
@@ -147,8 +199,12 @@ export function useTestEditor(testId) {
     setSaveMsg("");
     setError("");
     try {
-      await apiPut(`/v1/admin/test-papers/${testId}/payload`, { payload: content });
-      setOriginal(JSON.parse(JSON.stringify(content)));
+      const payloadToSave = isDiagnosticPayload(testId, meta, content)
+        ? normalizeDiagnosticPayload(content)
+        : content;
+      await apiPut(`/v1/admin/test-papers/${testId}/payload`, { payload: payloadToSave });
+      setContent(payloadToSave);
+      setOriginal(JSON.parse(JSON.stringify(payloadToSave)));
       setOriginalMeta(meta ? JSON.parse(JSON.stringify(meta)) : null);
       undoStack.current = [];
       setUndoLen(0);

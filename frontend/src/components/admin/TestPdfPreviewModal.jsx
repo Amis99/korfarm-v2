@@ -2,29 +2,56 @@ import { useEffect, useState } from "react";
 import { API_BASE, TOKEN_KEY } from "../../utils/api";
 
 /**
- * 시험지 PDF 자동 생성 직후 미리보기 모달.
+ * 시험지·정답 PDF 미리보기 모달.
  * 백엔드가 X-Frame-Options: DENY 헤더를 보내 iframe 에 직접 src 못 박음 →
  * fetch 로 PDF 받아 blob URL 로 iframe 에 표시 (same-origin 보장).
  *
  * Props:
- *   open      열림 여부
- *   fileId    생성된 PDF 의 file_id
- *   title     시험명
- *   onClose   닫기 콜백
+ *   open           열림 여부
+ *   examFileId     학생용 시험지 PDF file_id (필수)
+ *   answerFileId   정답·해설 PDF file_id (옵션 — null 이면 탭 미표시)
+ *   initialTab     "exam" | "answer" — 처음 표시할 탭
+ *   title          시험명
+ *   onClose        닫기 콜백
+ *
+ * 호환: fileId(단일) prop 도 받음 — 그러면 학생용 시험지만 표시.
  */
-export default function TestPdfPreviewModal({ open, fileId, title, onClose }) {
+export default function TestPdfPreviewModal({
+  open,
+  fileId,             // 호환용
+  examFileId,
+  answerFileId,
+  initialTab = "exam",
+  title,
+  onClose,
+}) {
+  const resolvedExam = examFileId ?? fileId ?? null;
+  const hasAnswer = !!answerFileId;
+  const initial = initialTab === "answer" && hasAnswer ? "answer" : "exam";
+  const [tab, setTab] = useState(initial);
+
+  useEffect(() => {
+    if (open) setTab(initialTab === "answer" && hasAnswer ? "answer" : "exam");
+  }, [open, initialTab, hasAnswer]);
+
+  const currentFileId = tab === "answer" ? answerFileId : resolvedExam;
+
   const [blobUrl, setBlobUrl] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (!open || !fileId) return;
+    if (!open || !currentFileId) {
+      setBlobUrl(null);
+      setError("");
+      return;
+    }
     let cancelled = false;
     let createdUrl = null;
     setLoading(true);
     setError("");
     const token = sessionStorage.getItem(TOKEN_KEY) || "";
-    fetch(`${API_BASE}/v1/files/${fileId}/download`, {
+    fetch(`${API_BASE}/v1/files/${currentFileId}/download`, {
       headers: token ? { Authorization: `Bearer ${token}` } : {},
     })
       .then((r) => {
@@ -47,15 +74,18 @@ export default function TestPdfPreviewModal({ open, fileId, title, onClose }) {
       if (createdUrl) URL.revokeObjectURL(createdUrl);
       setBlobUrl(null);
     };
-  }, [open, fileId]);
+  }, [open, currentFileId]);
 
-  if (!open || !fileId) return null;
+  if (!open || !resolvedExam) return null;
+
+  // 단순 표현식이라 useMemo 불필요. early return 뒤에서 hook 호출 시 hooks 순서 깨짐(React #310).
+  const downloadName = `${title || "시험지"}${tab === "answer" ? "_정답해설" : ""}.pdf`;
 
   const handleDownload = () => {
     if (!blobUrl) return;
     const a = document.createElement("a");
     a.href = blobUrl;
-    a.download = `${title || "시험지"}.pdf`;
+    a.download = downloadName;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -99,6 +129,22 @@ export default function TestPdfPreviewModal({ open, fileId, title, onClose }) {
           <button onClick={handleDownload} disabled={!blobUrl} style={btnStyle(true)}>다운로드</button>
           <button onClick={onClose} style={btnStyle(false)}>닫기</button>
         </div>
+        {hasAnswer && (
+          <div style={{
+            display: "flex",
+            gap: 4,
+            padding: "8px 16px 0",
+            borderBottom: "1px solid rgba(31,58,44,0.08)",
+            background: "var(--admin-panel-light, #f5f9f3)",
+          }}>
+            <button onClick={() => setTab("exam")} style={tabStyle(tab === "exam")}>
+              📄 학생용 시험지
+            </button>
+            <button onClick={() => setTab("answer")} style={tabStyle(tab === "answer")}>
+              📑 정답·해설
+            </button>
+          </div>
+        )}
         {loading && (
           <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--admin-muted, #666)" }}>
             PDF 불러오는 중...
@@ -130,4 +176,17 @@ const btnStyle = (primary) => ({
   color: primary ? "#fff" : "var(--admin-ink, #1a2920)",
   cursor: "pointer",
   fontWeight: primary ? 600 : 500,
+});
+
+const tabStyle = (active) => ({
+  padding: "6px 14px",
+  fontSize: 13,
+  borderRadius: "6px 6px 0 0",
+  border: "1px solid rgba(31,58,44,0.2)",
+  borderBottom: active ? "1px solid #fff" : "1px solid rgba(31,58,44,0.2)",
+  background: active ? "#fff" : "transparent",
+  color: active ? "var(--admin-ink, #1a2920)" : "var(--admin-muted, #666)",
+  fontWeight: active ? 700 : 500,
+  cursor: "pointer",
+  marginBottom: -1,
 });

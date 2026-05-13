@@ -173,7 +173,8 @@ function AdminStudentDetailPage() {
   };
 
   const sName = student?.name || "-";
-  const sEmail = student?.loginId || student?.email || "-";
+  // 백엔드 Jackson 이 SNAKE_CASE 직렬화 → 응답 키는 login_id. camelCase·snake 양쪽 fallback.
+  const sEmail = student?.loginId || student?.login_id || student?.email || "-";
   const sLevel = student?.levelId || student?.level_id || "-";
   const sLevelLabel = LEVEL_LABEL_MAP[sLevel] || sLevel;
   const sSchool = student?.school || "-";

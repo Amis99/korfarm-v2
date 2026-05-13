@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { apiGet } from "../utils/api";
+import { apiGet, API_BASE, TOKEN_KEY } from "../utils/api";
 import { apiGet as adminApiGet } from "../utils/adminApi";
 import TestReportView from "../components/test-report/TestReportView";
 import "../styles/test-storage.css";
@@ -18,6 +18,9 @@ function TestReportPage() {
   const [testHistory, setTestHistory] = useState([]);
 
   const isParent = user?.roles?.includes("PARENT");
+  const isAdmin = (user?.roles || []).some((r) => r === "HQ_ADMIN" || r === "ORG_ADMIN");
+  const [answerPdf, setAnswerPdf] = useState({ checked: false, available: false });
+  const [answerDownloading, setAnswerDownloading] = useState(false);
 
   useEffect(() => {
     if (!isLoggedIn) return;
@@ -42,6 +45,34 @@ function TestReportPage() {
       .then((data) => setTestHistory(Array.isArray(data) ? data : []))
       .catch(() => {});
   }, [isLoggedIn, studentId]);
+
+  // 정답·해설 PDF 다운로드 가능 여부 — 학부모 제외, 관리자/학생 본인 응시 OK
+  useEffect(() => {
+    if (!isLoggedIn || isParent || !testId) return;
+    apiGet(`/v1/test-storage/${testId}/answer-pdf/meta`)
+      .then((m) => setAnswerPdf({ checked: true, available: !!m?.available }))
+      .catch(() => setAnswerPdf({ checked: true, available: false }));
+  }, [isLoggedIn, isParent, testId]);
+
+  const handleAnswerDownload = async () => {
+    if (!testId || answerDownloading) return;
+    setAnswerDownloading(true);
+    try {
+      const token = sessionStorage.getItem(TOKEN_KEY) || "";
+      const resp = await fetch(`${API_BASE}/v1/test-storage/${testId}/answer-pdf`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
+      if (!resp.ok) throw new Error("정답·해설 PDF 를 받을 수 없습니다.");
+      const blob = await resp.blob();
+      const url = URL.createObjectURL(blob);
+      window.open(url, "_blank", "noopener,noreferrer");
+      setTimeout(() => URL.revokeObjectURL(url), 60_000);
+    } catch (e) {
+      alert(e?.message || "다운로드 실패");
+    } finally {
+      setAnswerDownloading(false);
+    }
+  };
 
   if (loading) return <div className="ts-page ts-center"><p>불러오는 중...</p></div>;
   if (!report) return null;
@@ -73,6 +104,17 @@ function TestReportPage() {
           <span className="material-symbols-outlined">error_outline</span>
           오답 노트
         </button>
+        {!isParent && answerPdf.checked && answerPdf.available && (
+          <button
+            className="ts-btn ts-btn-outline"
+            onClick={handleAnswerDownload}
+            disabled={answerDownloading}
+            title={isAdmin ? "정답·해설 PDF (관리자)" : "정답·해설 PDF (응시 완료 후 다운로드 가능)"}
+          >
+            <span className="material-symbols-outlined">picture_as_pdf</span>
+            {answerDownloading ? "정답·해설 불러오는 중..." : "정답·해설 인쇄"}
+          </button>
+        )}
         <Link to={listTo} className="ts-btn ts-btn-outline">{listLabel}</Link>
         {fromDiagnostic && (
           <Link to="/start" className="ts-btn ts-btn-primary">학습 시작하기</Link>

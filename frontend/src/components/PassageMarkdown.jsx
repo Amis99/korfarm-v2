@@ -4,6 +4,7 @@ import rehypeRaw from "rehype-raw";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
+import FileImage from "./FileImage";
 
 /**
  * 학생 화면용 read-only 마크다운 렌더러.
@@ -25,13 +26,21 @@ function PassageMarkdown({ children, value, className }) {
         remarkPlugins={[remarkGfm, remarkMath]}
         rehypePlugins={[rehypeRaw, rehypeKatex]}
         components={{
-          img: ({ node, ...props }) => (
-            <img
-              {...props}
-              alt={props.alt || ""}
-              style={{ maxWidth: "100%", maxHeight: 400, borderRadius: 4, margin: "8px 0" }}
-            />
-          ),
+          img: ({ node, src, alt, ...props }) => {
+            // /v1/files/{id}/download URL → token 헤더 필요 → FileImage
+            if (typeof src === "string") {
+              const m = src.match(/\/v1\/files\/([A-Za-z0-9_-]+)\/download/);
+              if (m) return <FileImage fileId={m[1]} alt={alt} style={{ maxWidth: "100%", maxHeight: 400, borderRadius: 4, margin: "8px 0" }} />;
+            }
+            return (
+              <img
+                {...props}
+                src={src}
+                alt={alt || ""}
+                style={{ maxWidth: "100%", maxHeight: 400, borderRadius: 4, margin: "8px 0" }}
+              />
+            );
+          },
           table: ({ node, ...props }) => (
             <div style={{ overflowX: "auto", margin: "8px 0" }}>
               <table {...props} style={{ borderCollapse: "collapse", width: "100%" }} />

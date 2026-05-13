@@ -474,37 +474,19 @@ function AdminStudentsPage() {
     setActionError("");
     setActionLoading(true);
     try {
+      // 정책 (2026-05-12): 모달은 학생 정보(이름·학교·학년·레벨·연락처·지역) 만 편집.
+      // 기관·수강반·상태·구독은 기관 관리자가 수동으로 고치지 않음. 가입 승인 시 자동 처리.
       const result = await apiPatch(`/v1/admin/students/${editStudent.id}`, {
         name: editFormData.name.trim() || undefined,
-        status: editFormData.status || undefined,
         school: editFormData.school.trim() || undefined,
         gradeLabel: editFormData.gradeLabel.trim() || undefined,
         levelId: editFormData.levelId.trim() || undefined,
         studentPhone: editFormData.studentPhone.trim() || undefined,
         parentPhone: editFormData.parentPhone.trim() || undefined,
         region: editFormData.region.trim() || undefined,
-        orgId: editFormData.orgId || undefined,
-        classIds: editFormData.classIds.length > 0 ? editFormData.classIds : undefined,
       });
       const mapped = mapStudents([result])[0];
-
-      // Handle subscription change
-      const currentSubStatus = editStudent.subscriptionStatus;
-      const newSubStatus = editFormData.subscriptionStatus;
-      const isCurrentlyPaid = currentSubStatus === "active";
-      const wantsPaid = newSubStatus === "active";
-
-      if (isCurrentlyPaid !== wantsPaid || (wantsPaid && editFormData.subscriptionEndAt !== (editStudent.subscriptionEndAt || "").slice(0, 10))) {
-        const subResult = await apiPost(`/v1/admin/students/${editStudent.id}/subscription`, {
-          status: wantsPaid ? "active" : "free",
-          endAt: wantsPaid && editFormData.subscriptionEndAt ? editFormData.subscriptionEndAt : undefined,
-        });
-        const subMapped = mapStudents([subResult])[0];
-        setRows((prev) => prev.map((r) => (r.id === editStudent.id ? { ...r, ...subMapped } : r)));
-      } else {
-        setRows((prev) => prev.map((r) => (r.id === editStudent.id ? { ...r, ...mapped } : r)));
-      }
-
+      setRows((prev) => prev.map((r) => (r.id === editStudent.id ? { ...r, ...mapped } : r)));
       setShowEditModal(false);
       setEditStudent(null);
     } catch (err) {
@@ -928,12 +910,7 @@ function AdminStudentsPage() {
               <div className="admin-modal-row">
                 <div className="admin-modal-field">
                   <label>기관</label>
-                  <OrgSelect
-                    orgs={orgs.map((o) => ({ id: o.orgId || o.id, name: o.name }))}
-                    value={editFormData.orgId}
-                    onChange={(v) => setEditFormData({ ...editFormData, orgId: v, classIds: [] })}
-                    placeholder="기관 없음"
-                  />
+                  <input value={editStudent?.org || "기관 없음"} readOnly disabled />
                 </div>
                 <div className="admin-modal-field">
                   <label>레벨</label>
@@ -944,77 +921,12 @@ function AdminStudentsPage() {
                   />
                 </div>
               </div>
-              <div className="admin-modal-field">
-                <label>수강반</label>
-                {filteredClasses.length === 0 ? (
-                  <p className="admin-detail-note">수강반이 없습니다.</p>
-                ) : (
-                  <div className="admin-checkbox-group">
-                    {filteredClasses.map((c) => {
-                      const cId = c.classId || c.id;
-                      return (
-                        <label key={cId} className="admin-checkbox-label">
-                          <input
-                            type="checkbox"
-                            checked={editFormData.classIds.includes(cId)}
-                            onChange={() => toggleClassId(cId)}
-                          />
-                          {c.name}
-                        </label>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-              <div className="admin-modal-field">
-                <label>상태</label>
-                <select
-                  value={editFormData.status}
-                  onChange={(e) => setEditFormData({ ...editFormData, status: e.target.value })}
-                >
-                  <option value="active">활성</option>
-                  <option value="trial">체험</option>
-                  <option value="inactive">비활성</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="admin-modal-section">
-              <h3>구독 정보</h3>
-              <div className="admin-modal-row">
-                <div className="admin-modal-field">
-                  <label>유형</label>
-                  <select
-                    value={editFormData.subscriptionStatus}
-                    onChange={(e) => setEditFormData({ ...editFormData, subscriptionStatus: e.target.value })}
-                  >
-                    <option value="free">무료</option>
-                    <option value="active">유료</option>
-                  </select>
-                </div>
-                {editFormData.subscriptionStatus === "active" ? (
-                  <div className="admin-modal-field">
-                    <label>구독 종료일</label>
-                    <input
-                      type="date"
-                      value={editFormData.subscriptionEndAt}
-                      onChange={(e) => setEditFormData({ ...editFormData, subscriptionEndAt: e.target.value })}
-                    />
-                  </div>
-                ) : null}
-              </div>
+              {/* 수강반·상태·구독 정보 섹션 제거 — 가입 승인 흐름에서 자동 처리 (2026-05-12 정책) */}
             </div>
 
             <div className="admin-modal-actions">
               <button className="admin-detail-btn" onClick={handleEdit} disabled={actionLoading}>
                 저장
-              </button>
-              <button
-                className="admin-detail-btn secondary"
-                onClick={() => handleDisable(editStudent.id)}
-                disabled={actionLoading}
-              >
-                비활성화
               </button>
               <button className="admin-detail-btn secondary" onClick={() => setShowEditModal(false)}>
                 취소

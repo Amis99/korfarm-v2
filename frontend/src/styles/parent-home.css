@@ -1,7 +1,8 @@
 /* parent-home.css — 학부모 메인 전용 스타일 (student-home.css 의 토큰·셸 위에 얹음) */
 
 /* ─── 자녀 선택 드롭다운 (헤더) ───────────────────────── */
-.child-pill-wrap { position: relative; flex-shrink: 0; }
+/* wrap 에 stacking context 강제 + 높은 z-index — 우측 시즌 점수 카드 등이 메뉴를 가리지 않도록. */
+.child-pill-wrap { position: relative; flex-shrink: 0; z-index: 200; }
 .child-pill {
   display: flex; align-items: center; gap: 9px;
   padding: 5px 10px 5px 5px; border-radius: 999px;
@@ -32,7 +33,9 @@
 .child-pill[aria-expanded="true"] .caret { transform: rotate(180deg); }
 
 .child-menu {
-  position: absolute; top: calc(100% + 8px); left: 0;
+  /* position: fixed — 부모(.app 의 isolation: isolate) stacking context 우회.
+     viewport 기준 우측 상단 헤더 아래 고정. 사이드바 카드가 가리지 않음. */
+  position: fixed; top: 64px; right: 240px;
   min-width: 240px;
   background: var(--surface-elev);
   border: 1px solid var(--border); border-radius: 16px;
@@ -40,7 +43,7 @@
   padding: 8px;
   opacity: 0; transform: translateY(-6px); pointer-events: none;
   transition: opacity 180ms ease, transform 180ms cubic-bezier(0.32, 0.72, 0.24, 1.08);
-  z-index: 70;
+  z-index: 99999;
 }
 .child-menu[data-open="true"] { opacity: 1; transform: translateY(0); pointer-events: auto; }
 .child-menu-item {
@@ -426,7 +429,7 @@
   .child-pill { padding: 4px 8px 4px 4px; }
   .child-pill .info .kicker { font-size: 8.5px; }
   .child-pill .info .name { font-size: 12.5px; }
-  .child-menu { left: auto; right: 0; }
+  .child-menu { top: 60px; right: 12px; }
 }
 
 @media (min-width: 768px) {

@@ -23,18 +23,16 @@ const ORG_TYPES = [
 ];
 
 const ORGS = [
-  { id: "sample1", name: "Korfarm Academy", plan: "Pro", seats: 120, status: "active", admins: [] },
+  { id: "sample1", name: "Korfarm Academy", status: "active", admins: [] },
 ];
 
 const mapOrgList = (items) =>
   items.map((org) => ({
     id: org.orgId || org.id || org.org_id || org.name,
     name: org.name,
-    plan: org.plan || "-",
     orgType: org.orgType || org.org_type || "",
     addressRegion: org.addressRegion || org.address_region || "",
     addressDetail: org.addressDetail || org.address_detail || "",
-    seats: org.seat_limit ?? org.seatLimit ?? 0,
     admins: (org.admins || []).map((a) => ({
       userId: a.userId || a.user_id,
       loginId: a.loginId || a.login_id || a.email || "",
@@ -54,7 +52,7 @@ function OrgsListContent() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [editOrg, setEditOrg] = useState(null);
   const [formData, setFormData] = useState({
-    name: "", plan: "Basic", seatLimit: 50,
+    name: "",
     orgType: "", addressRegion: "", addressDetail: "",
   });
   const [adminLoginId, setAdminLoginId] = useState("");
@@ -70,7 +68,7 @@ function OrgsListContent() {
     return rows.filter((org) => {
       if (statusFilter !== "all" && org.status !== statusFilter) return false;
       if (!term) return true;
-      return [org.name, org.plan, org.orgType, org.addressRegion, org.status]
+      return [org.name, org.orgType, org.addressRegion, org.status]
         .filter(Boolean)
         .some((v) => v.toLowerCase().includes(term));
     });
@@ -89,8 +87,6 @@ function OrgsListContent() {
     try {
       const result = await apiPost("/v1/admin/orgs", {
         name: formData.name.trim(),
-        plan: formData.plan,
-        seat_limit: Number(formData.seatLimit) || 50,
         org_type: formData.orgType || undefined,
         address_region: formData.addressRegion || undefined,
         address_detail: formData.addressDetail.trim() || undefined,
@@ -98,7 +94,7 @@ function OrgsListContent() {
       const mapped = mapOrgList([result])[0];
       setRows((prev) => [mapped, ...prev]);
       setShowCreateModal(false);
-      setFormData({ name: "", plan: "Basic", seatLimit: 50, orgType: "", addressRegion: "", addressDetail: "" });
+      setFormData({ name: "", orgType: "", addressRegion: "", addressDetail: "" });
     } catch (err) {
       setActionError(err.message);
     } finally {
@@ -113,8 +109,6 @@ function OrgsListContent() {
     try {
       await apiPatch(`/v1/admin/orgs/${editOrg.id}`, {
         name: formData.name.trim() || undefined,
-        plan: formData.plan || undefined,
-        seat_limit: Number(formData.seatLimit) || undefined,
         org_type: formData.orgType || undefined,
         address_region: formData.addressRegion || undefined,
         address_detail: formData.addressDetail.trim() || undefined,
@@ -191,8 +185,6 @@ function OrgsListContent() {
     setEditOrg(org);
     setFormData({
       name: org.name,
-      plan: org.plan,
-      seatLimit: org.seats,
       orgType: org.orgType || "",
       addressRegion: org.addressRegion || "",
       addressDetail: org.addressDetail || "",
@@ -213,7 +205,7 @@ function OrgsListContent() {
           className="admin-detail-btn"
           type="button"
           onClick={() => {
-            setFormData({ name: "", plan: "Basic", seatLimit: 50, orgType: "", addressRegion: "", addressDetail: "" });
+            setFormData({ name: "", orgType: "", addressRegion: "", addressDetail: "" });
             setActionError("");
             setShowCreateModal(true);
           }}
@@ -254,8 +246,6 @@ function OrgsListContent() {
                   <th>기관명</th>
                   <th>종류</th>
                   <th>주소</th>
-                  <th>플랜</th>
-                  <th>좌석</th>
                   <th>관리자</th>
                   <th>상태</th>
                   <th>조치</th>
@@ -267,8 +257,6 @@ function OrgsListContent() {
                     <td>{org.name}</td>
                     <td>{org.orgType || "-"}</td>
                     <td>{formatAddress(org)}</td>
-                    <td>{org.plan}</td>
-                    <td>{org.seats}</td>
                     <td>{org.admins.length > 0 ? `${org.admins.length}명` : "-"}</td>
                     <td>
                       <span className="status-pill" data-status={org.status}>
@@ -323,19 +311,6 @@ function OrgsListContent() {
                 </select>
               </div>
               <div className="admin-modal-field">
-                <label>플랜</label>
-                <select
-                  value={formData.plan}
-                  onChange={(e) => setFormData({ ...formData, plan: e.target.value })}
-                >
-                  <option value="Basic">Basic</option>
-                  <option value="Pro">Pro</option>
-                  <option value="Enterprise">Enterprise</option>
-                </select>
-              </div>
-            </div>
-            <div className="admin-modal-row">
-              <div className="admin-modal-field">
                 <label>시/도</label>
                 <select
                   value={formData.addressRegion}
@@ -346,14 +321,6 @@ function OrgsListContent() {
                     <option key={r} value={r}>{r}</option>
                   ))}
                 </select>
-              </div>
-              <div className="admin-modal-field">
-                <label>좌석 수</label>
-                <input
-                  type="number"
-                  value={formData.seatLimit}
-                  onChange={(e) => setFormData({ ...formData, seatLimit: e.target.value })}
-                />
               </div>
             </div>
             <div className="admin-modal-field">
@@ -407,19 +374,6 @@ function OrgsListContent() {
                   </select>
                 </div>
                 <div className="admin-modal-field">
-                  <label>플랜</label>
-                  <select
-                    value={formData.plan}
-                    onChange={(e) => setFormData({ ...formData, plan: e.target.value })}
-                  >
-                    <option value="Basic">Basic</option>
-                    <option value="Pro">Pro</option>
-                    <option value="Enterprise">Enterprise</option>
-                  </select>
-                </div>
-              </div>
-              <div className="admin-modal-row">
-                <div className="admin-modal-field">
                   <label>시/도</label>
                   <select
                     value={formData.addressRegion}
@@ -430,14 +384,6 @@ function OrgsListContent() {
                       <option key={r} value={r}>{r}</option>
                     ))}
                   </select>
-                </div>
-                <div className="admin-modal-field">
-                  <label>좌석 수</label>
-                  <input
-                    type="number"
-                    value={formData.seatLimit}
-                    onChange={(e) => setFormData({ ...formData, seatLimit: e.target.value })}
-                  />
                 </div>
               </div>
               <div className="admin-modal-field">

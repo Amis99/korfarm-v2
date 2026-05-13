@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import AdminLayout from "../components/AdminLayout";
 import { apiGetCamel, apiPatchDeep } from "../utils/adminApi";
-import { uploadFile, fileDownloadUrl } from "../utils/fileUpload";
+import { uploadFile } from "../utils/fileUpload";
+import { useFileBlob } from "../hooks/useFileBlob";
 import "../styles/admin.css";
 
 // 기관 관리자 — 본인 기관 정보 수정 + 로고 등록
@@ -20,6 +21,9 @@ export default function AdminOrgSettingsPage() {
   const [addressRegion, setAddressRegion] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
   const [logoFileId, setLogoFileId] = useState(null);
+
+  // 로고 미리보기 — token 헤더 필요. <img src=fileDownloadUrl()> 직접 박으면 401.
+  const logoBlobUrl = useFileBlob(logoFileId);
 
   const reload = async () => {
     setLoading(true);
@@ -136,11 +140,15 @@ export default function AdminOrgSettingsPage() {
                     display: "flex", alignItems: "center", justifyContent: "center",
                     overflow: "hidden",
                   }}>
-                    <img
-                      src={fileDownloadUrl(logoFileId)}
-                      alt="기관 로고"
-                      style={{ maxWidth: "100%", maxHeight: "100%" }}
-                    />
+                    {logoBlobUrl ? (
+                      <img
+                        src={logoBlobUrl}
+                        alt="기관 로고"
+                        style={{ maxWidth: "100%", maxHeight: "100%" }}
+                      />
+                    ) : (
+                      <span style={{ color: "#999", fontSize: 12 }}>불러오는 중...</span>
+                    )}
                   </div>
                 ) : (
                   <div style={{
