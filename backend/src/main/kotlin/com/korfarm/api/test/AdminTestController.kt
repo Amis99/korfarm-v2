@@ -25,6 +25,7 @@ class AdminTestController(
     private val objectMapper: com.fasterxml.jackson.databind.ObjectMapper,
     private val testAnalysisService: com.korfarm.api.aigen.TestAnalysisService,
     private val grapefruitService: com.korfarm.api.grapefruit.GrapefruitService,
+    private val diagnosticService: com.korfarm.api.diagnostic.DiagnosticService,
 ) {
     private fun requireAdmin() {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
@@ -510,4 +511,114 @@ class AdminTestController(
             "analysis" to analysis,
         ))
     }
+
+    // ─── 오프라인 OMR 일괄 입력 (학생별 다중 응시 + 진단/챕터/기타 자동 분기) ─────
+    // 흐름:
+    //   1) 어드민이 시험·학생들·응시 일자·OMR 답안 묶음을 한 번에 제출
+    //   2) testId.startsWith("diag_paper_") 면 DiagnosticService.adminBatchSubmitDiagnostic,
+    //      그 외는 TestService.adminOfflineOmrSubmit 호출
+    //   3) 학생별 성공/실패 결과 반환
+    // 권한: requireAdmin + verifyAdminTestAccess + 각 학생의 org 가 admin 권한 범위인지 검증
+
+    @PostMapping("/{testId}/offline-omr-bulk")
+    fun offlineOmrBulk(
+        @PathVariable testId: String,
+        @RequestBody body: OfflineOmrBulkRequest,
+    ): ApiResponse<Map<String, Any?>> {
+        requireAdmin()
+        val adminId = currentUser()
+        testService.verifyAdminTestAccess(testId, adminId)
+        val isHq = SecurityUtils.hasAnyRole("HQ_ADMIN")
+        // 어드민이 접근 가능한 학생 id set — 권한 검증용
+        val eligible = testService.getStudentsForTest(testId, adminId).map { it.userId }.toSet()
+        val isDiag = testId.startsWith("diag_paper_")
+        val tier = if (isDiag) testId.removePrefix("diag_paper_") else null
+        val attemptedAt = body.attemptedAt?.let {
+            try { java.time.LocalDateTime.parse(it) } catch (_: Exception) {
+                try { java.time.LocalDate.parse(it).atStartOfDay() } catch (_: Exception) { null }
+            }
+        }
+        val results = mutableListOf<Map<String, Any?>>()
+        for (entry in body.entries) {
+            try {
+                if (!isHq && entry.userId !in eligible) {
+                    throw ApiException("FORBIDDEN", "권한 범위 밖 학생입니다.", HttpStatus.FORBIDDEN)
+                }
+                if (isDiag) {
+                    val resp = diagnosticService.adminBatchSubmitDiagnostic(
+                        userId = entry.userId,
+                        tier = tier!!,
+                        answers = entry.answers,
+                        attemptedAt = attemptedAt,
+                    )
+                    results.add(mapOf(
+                        "userId" to entry.userId,
+                        "ok" to true,
+                        "sessionId" to resp.sessionId,
+                    ))
+                } else {
+                    // 챕터·기타: answers 는 String? → String 변환 (null 은 빈 문자열)
+                    val nonNullAnswers = entry.answers.mapValues { it.value ?: "" }
+                    val sub = testService.adminOfflineOmrSubmit(
+                        testId = testId,
+                        userId = entry.userId,
+                        adminId = adminId,
+                        answers = nonNullAnswers,
+                        attemptedAt = attemptedAt,
+                    )
+                    results.add(mapOf(
+                        "userId" to entry.userId,
+                        "ok" to true,
+                        "submissionId" to sub.id,
+                        "score" to sub.score,
+                        "correctCount" to sub.correctCount,
+                        "attemptNo" to sub.attemptNo,
+                    ))
+                }
+            } catch (e: Exception) {
+                results.add(mapOf(
+                    "userId" to entry.userId,
+                    "ok" to false,
+                    "error" to (e.message ?: "unknown"),
+                ))
+            }
+        }
+        return ApiResponse(success = true, data = mapOf(
+            "total" to body.entries.size,
+            "succeeded" to results.count { it["ok"] == true },
+            "failed" to results.count { it["ok"] == false },
+            "results" to results,
+        ))
+    }
+
+    // 학생 1인의 한 시험 응시 이력 조회 (다중 응시)
+    // 진단은 기존 /v1/admin/diagnostic/sessions?userId&tier 사용 — 여기는 챕터·기타용.
+    @GetMapping("/{testId}/student/{userId}/attempts")
+    fun listStudentAttempts(
+        @PathVariable testId: String,
+        @PathVariable userId: String,
+    ): ApiResponse<List<Map<String, Any?>>> {
+        requireAdmin()
+        val adminId = currentUser()
+        testService.verifyAdminTestAccess(testId, adminId)
+        val isHq = SecurityUtils.hasAnyRole("HQ_ADMIN")
+        if (!isHq) {
+            val eligible = testService.getStudentsForTest(testId, adminId).map { it.userId }.toSet()
+            if (userId !in eligible) {
+                throw ApiException("FORBIDDEN", "권한 범위 밖 학생입니다.", HttpStatus.FORBIDDEN)
+            }
+        }
+        val data = testService.listAttempts(testId, userId)
+        return ApiResponse(success = true, data = data)
+    }
 }
+
+// ── DTOs ─────────
+data class OfflineOmrBulkRequest(
+    val entries: List<OfflineOmrEntry>,
+    val attemptedAt: String? = null,    // "yyyy-MM-dd" 또는 "yyyy-MM-ddTHH:mm:ss"
+)
+data class OfflineOmrEntry(
+    val userId: String,
+    val answers: Map<String, String?>,
+)

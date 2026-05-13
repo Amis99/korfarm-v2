@@ -25,6 +25,7 @@ function normalizeTest(t) {
     orgName: t.orgName ?? t.org_name ?? "",
     submissionCount: t.submissionCount ?? t.submission_count ?? 0,
     pdfFileId: t.pdfFileId ?? t.pdf_file_id ?? null,
+    answerPdfFileId: t.answerPdfFileId ?? t.answer_pdf_file_id ?? null,
     createdAt: t.createdAt ?? t.created_at ?? null,
     // 종류: diagnostic / chapter / misc — 백엔드에서 제공. 누락 시 ID/series 로 추론.
     kind: t.kind || (
@@ -96,8 +97,14 @@ function AdminTestPage() {
     }
   };
 
-  // PDF 자동 생성 + 미리보기
-  const [pdfPreview, setPdfPreview] = useState({ open: false, fileId: null, title: "" });
+  // PDF 자동 생성 + 미리보기 (학생용 / 정답·해설 2개)
+  const [pdfPreview, setPdfPreview] = useState({
+    open: false,
+    examFileId: null,
+    answerFileId: null,
+    title: "",
+    initialTab: "exam",
+  });
   const [generatingId, setGeneratingId] = useState(null);
 
   const handleGeneratePdf = async (t, isRegen = false) => {
@@ -106,7 +113,13 @@ function AdminTestPage() {
     setGeneratingId(t.testId);
     try {
       const res = await apiPost(`/v1/admin/test-papers/${t.testId}/pdf-generate`);
-      setPdfPreview({ open: true, fileId: res.fileId, title: res.title });
+      setPdfPreview({
+        open: true,
+        examFileId: res.examFileId ?? res.fileId ?? null,
+        answerFileId: res.answerFileId ?? null,
+        title: res.title || t.title,
+        initialTab: "exam",
+      });
       load();
     } catch (e) {
       alert("PDF 생성 실패:\n" + (e?.message || "알 수 없는 오류"));
@@ -115,14 +128,21 @@ function AdminTestPage() {
     }
   };
 
-  // 기존 PDF 보기 — file_id 면 모달, http URL 이면 새 탭
-  const handleViewPdf = (t) => {
-    if (!t?.pdfFileId) return;
-    if (/^https?:\/\//i.test(t.pdfFileId)) {
-      window.open(t.pdfFileId, "_blank", "noopener,noreferrer");
-    } else {
-      setPdfPreview({ open: true, fileId: t.pdfFileId, title: t.title });
+  // 기존 PDF 보기 — 시험지·정답 모두 모달로. http URL 이면 새 탭.
+  const handleViewPdf = (t, tab = "exam") => {
+    const target = tab === "answer" ? t.answerPdfFileId : t.pdfFileId;
+    if (!target) return;
+    if (/^https?:\/\//i.test(target)) {
+      window.open(target, "_blank", "noopener,noreferrer");
+      return;
     }
+    setPdfPreview({
+      open: true,
+      examFileId: t.pdfFileId || null,
+      answerFileId: t.answerPdfFileId || null,
+      title: t.title,
+      initialTab: tab,
+    });
   };
 
   const handleDelete = async (t) => {
@@ -187,14 +207,24 @@ function AdminTestPage() {
     <div className="ts-page ts-admin">
       <header className="ts-header">
         <h1>테스트 관리</h1>
-        <button
-          className="ts-btn ts-btn-primary"
-          onClick={handleAddTest}
-          disabled={creating}
-          title="기타 테스트 신규 생성 — 비주얼 에디터로 이동"
-        >
-          <span className="material-symbols-outlined">add</span> {creating ? "생성 중..." : "시험 추가"}
-        </button>
+        <div style={{ display: "flex", gap: 8 }}>
+          <button
+            className="ts-btn"
+            onClick={() => window.location.href = "/admin/tests/offline-omr"}
+            title="오프라인 응시 OMR 일괄 입력 — 학생 대신 시험 답안을 일괄 채점"
+            style={{ background: "rgba(168,85,247,0.12)", color: "#7c3aed", borderColor: "rgba(168,85,247,0.4)" }}
+          >
+            <span className="material-symbols-outlined">edit_note</span> 오프라인 OMR
+          </button>
+          <button
+            className="ts-btn ts-btn-primary"
+            onClick={handleAddTest}
+            disabled={creating}
+            title="기타 테스트 신규 생성 — 비주얼 에디터로 이동"
+          >
+            <span className="material-symbols-outlined">add</span> {creating ? "생성 중..." : "시험 추가"}
+          </button>
+        </div>
       </header>
 
       {/* 종류 탭 — ORG_ADMIN 은 자기 기관 테스트(기타)만 보이므로 탭 숨김 */}
@@ -344,7 +374,7 @@ function AdminTestPage() {
                 <td>{t.levelId || "-"}</td>
                 <td>{t.examDate || "-"}</td>
                 <td>{t.totalQuestions}</td>
-                <td>{t.totalPoints}</td>
+                <td>{t.kind === "diagnostic" ? "-" : t.totalPoints}</td>
                 <td>
                   <span
                     onClick={() => t.testId && navigate(`/admin/tests/${t.testId}/statistics`)}
@@ -362,14 +392,24 @@ function AdminTestPage() {
                   {t.pdfFileId ? (
                     <>
                       <button
-                        onClick={() => handleViewPdf(t)}
-                        title="저장된 PDF 보기"
+                        onClick={() => handleViewPdf(t, "exam")}
+                        title="학생용 시험지 PDF"
                         style={pdfBtnStyle("primary")}
-                      >📄 PDF 보기</button>
+                      >📄 학생용 시험지</button>
+                      {/* 진단·기타 테스트만 정답·해설 별도 PDF 가 존재 */}
+                      {t.kind !== "chapter" && t.answerPdfFileId && (
+                        <button
+                          onClick={() => handleViewPdf(t, "answer")}
+                          title="정답·해설 PDF (관리자 전용)"
+                          style={pdfBtnStyle("secondary")}
+                        >📑 정답·해설</button>
+                      )}
                       <button
                         onClick={() => handleGeneratePdf(t, true)}
                         disabled={generatingId === t.testId}
-                        title="기존 PDF 를 새 typst PDF 로 덮어쓰기"
+                        title={t.kind === "chapter"
+                          ? "통합 PDF 재생성"
+                          : "시험지 + 정답·해설 PDF 동시 재생성"}
                         style={pdfBtnStyle("secondary", generatingId === t.testId)}
                       >{generatingId === t.testId ? "재생성 중..." : "🔄 재생성"}</button>
                     </>
@@ -377,7 +417,9 @@ function AdminTestPage() {
                     <button
                       onClick={() => handleGeneratePdf(t, false)}
                       disabled={generatingId === t.testId}
-                      title="시험지 + 정답·해설 PDF 자동 생성"
+                      title={t.kind === "chapter"
+                        ? "통합 PDF 자동 생성"
+                        : "학생용 시험지 + 정답·해설 PDF 자동 생성"}
                       style={pdfBtnStyle("primary", generatingId === t.testId)}
                     >{generatingId === t.testId ? "생성 중..." : "📄 PDF 생성"}</button>
                   )}
@@ -404,9 +446,11 @@ function AdminTestPage() {
     </div>
     <TestPdfPreviewModal
       open={pdfPreview.open}
-      fileId={pdfPreview.fileId}
+      examFileId={pdfPreview.examFileId}
+      answerFileId={pdfPreview.answerFileId}
+      initialTab={pdfPreview.initialTab}
       title={pdfPreview.title}
-      onClose={() => setPdfPreview({ open: false, fileId: null, title: "" })}
+      onClose={() => setPdfPreview({ open: false, examFileId: null, answerFileId: null, title: "", initialTab: "exam" })}
     />
     </AdminLayout>
   );

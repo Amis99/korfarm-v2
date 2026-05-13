@@ -46,6 +46,20 @@ class TestService(
         else -> "misc"
     }
 
+    /**
+     * 12레벨 또는 4그룹 levelId 를 4그룹으로 정규화. (saussure1/2/3 → saussure 등)
+     * 기타·진단 테스트는 그룹 단위로 매칭(소쉬르 시험 = 소쉬르1~3 학생 모두 응시).
+     * 프로 챕터 테스트는 12레벨 exact match 정책이라 이 헬퍼를 쓰지 않음.
+     */
+    private fun levelGroup(levelId: String?): String? = when {
+        levelId == null -> null
+        levelId.startsWith("saussure", ignoreCase = true) -> "saussure"
+        levelId.startsWith("frege", ignoreCase = true) -> "frege"
+        levelId.startsWith("russell", ignoreCase = true) -> "russell"
+        levelId.startsWith("wittgenstein", ignoreCase = true) -> "wittgenstein"
+        else -> levelId
+    }
+
     // ─── Student: list tests ───
     @Transactional(readOnly = true)
     fun listTests(userId: String, levelId: String?, source: String?): List<TestPaperSummary> {
@@ -67,9 +81,10 @@ class TestService(
             papers = papers.filter { it.orgId == null || userOrgIds.contains(it.orgId) }
         }
 
-        // levelId 필터
+        // levelId 필터 — 기타 테스트는 그룹 매칭 (학생 saussure1 → saussure 그룹 시험 응시 가능)
         if (levelId != null) {
-            papers = papers.filter { it.levelId == levelId }
+            val targetGroup = levelGroup(levelId)
+            papers = papers.filter { levelGroup(it.levelId) == targetGroup }
         }
 
         // 기관명 매핑
@@ -133,12 +148,13 @@ class TestService(
         val isAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
         val p = findPaper(testId)
         val hasQuestions = questionRepo.findByTestIdOrderByNumberAsc(testId).isNotEmpty()
-        val hasSub = submissionRepo.findByTestIdAndUserId(testId, userId) != null
+        val hasSub = submissionRepo.findFirstByTestIdAndUserIdOrderByAttemptNoDesc(testId, userId) != null
         return TestPaperDetail(
             testId = p.id,
             title = p.title,
             description = p.description,
             pdfFileId = p.pdfFileId,
+            answerPdfFileId = p.answerPdfFileId,
             levelId = p.levelId,
             totalQuestions = p.totalQuestions,
             totalPoints = p.totalPoints,
@@ -168,8 +184,18 @@ class TestService(
     }
 
     // ─── Student: submit OMR + auto-grade ───
+    // 다중 응시 정책 (V0137):
+    //   - 학생 직접 응시: 1회만 (ALREADY_SUBMITTED 차단)
+    //   - 어드민 대리(submittedBy=adminId): 중복 응시 허용. 기존 row 보존 + attempt_no+1 새 row INSERT.
+    //   - attemptedAt: 어드민이 응시 일자 지정 가능 (null 이면 createdAt 사용)
     @Transactional
-    fun submitOmr(testId: String, userId: String, submittedBy: String, answers: Map<String, String>): TestSubmissionEntity {
+    fun submitOmr(
+        testId: String,
+        userId: String,
+        submittedBy: String,
+        answers: Map<String, String>,
+        attemptedAt: LocalDateTime? = null,
+    ): TestSubmissionEntity {
         if (testId.startsWith("diag_paper_")) {
             throw ApiException(
                 "UNSUPPORTED",
@@ -178,15 +204,12 @@ class TestService(
             )
         }
         val isAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
-        val existing = submissionRepo.findByTestIdAndUserId(testId, userId)
-        if (existing != null) {
-            // 본사/기관 관리자는 무한 응시 가능 — 기존 제출 삭제 후 새로 채점
-            if (!isAdmin) {
-                throw ApiException("ALREADY_SUBMITTED", "이미 제출한 시험입니다.", HttpStatus.CONFLICT)
-            }
-            submissionRepo.delete(existing)
-            submissionRepo.flush()
+        val existing = submissionRepo.findFirstByTestIdAndUserIdOrderByAttemptNoDesc(testId, userId)
+        if (existing != null && !isAdmin) {
+            throw ApiException("ALREADY_SUBMITTED", "이미 제출한 시험입니다.", HttpStatus.CONFLICT)
         }
+        // 다중 응시 — 새 attempt_no 부여 (기존 row 삭제 안 함, 모든 이력 보존)
+        val nextAttemptNo = submissionRepo.maxAttemptNo(testId, userId) + 1
         val questions = questionRepo.findByTestIdOrderByNumberAsc(testId)
         if (questions.isEmpty()) {
             throw ApiException("NO_QUESTIONS", "문항이 등록되지 않은 시험입니다.", HttpStatus.BAD_REQUEST)
@@ -243,23 +266,29 @@ class TestService(
             score = score,
             correctCount = correctCount,
             statsJson = objectMapper.writeValueAsString(details),
-            status = "graded"
+            status = "graded",
+            attemptNo = nextAttemptNo,
+            attemptedAt = attemptedAt,
         )
         val saved = submissionRepo.save(entity)
 
-        // 씨앗 보상 지급 (점수 비율 기반)
-        val totalPoints = questions.sumOf { it.points }
-        val percentage = if (totalPoints > 0) (score * 100 / totalPoints) else 0
-        val seedReward = when {
-            percentage >= 90 -> 5
-            percentage >= 70 -> 3
-            percentage >= 50 -> 1
-            else -> 0
-        }
-        if (seedReward > 0) {
-            val catalog = seedCatalogRepository.findAll()
-            val seedType = SeedRewardPolicy.randomSeedType(catalog)
-            economyService.addSeeds(userId, seedType, seedReward, "테스트 완료", "test", testId)
+        // 씨앗 보상 — 학생 직접 응시 첫 회(attempt_no=1) 만 지급.
+        // 어드민 OMR 입력(submittedBy != userId) · 재응시(attempt_no>1) 는 인플레 방지로 지급 X.
+        val isFirstStudentAttempt = submittedBy == userId && nextAttemptNo == 1
+        if (isFirstStudentAttempt) {
+            val totalPoints = questions.sumOf { it.points }
+            val percentage = if (totalPoints > 0) (score * 100 / totalPoints) else 0
+            val seedReward = when {
+                percentage >= 90 -> 5
+                percentage >= 70 -> 3
+                percentage >= 50 -> 1
+                else -> 0
+            }
+            if (seedReward > 0) {
+                val catalog = seedCatalogRepository.findAll()
+                val seedType = SeedRewardPolicy.randomSeedType(catalog)
+                economyService.addSeeds(userId, seedType, seedReward, "테스트 완료", "test", testId)
+            }
         }
 
         // 학습 종합 누적 — domain → 10대 역량 매핑 후 정답률로 record (weight=10)
@@ -388,18 +417,68 @@ class TestService(
     @Transactional
     fun savePayload(testId: String, payloadJson: String) {
         val paper = findPaper(testId)
-        paper.payloadJson = payloadJson
+        val normalizedPayloadJson = if (testId.startsWith("diag_paper_")) {
+            normalizeDiagnosticPayloadJson(payloadJson)
+        } else {
+            payloadJson
+        }
+        paper.payloadJson = normalizedPayloadJson
         testPaperRepo.save(paper)
         // 진단 시험은 diag_questions / diag_passages 에 양방향 동기화 (편집 즉시 진단 시스템에 반영)
         if (testId.startsWith("diag_paper_")) {
             try {
-                applyPayloadToDiagnostic(testId.removePrefix("diag_paper_"), payloadJson)
+                applyPayloadToDiagnostic(testId.removePrefix("diag_paper_"), normalizedPayloadJson)
             } catch (e: Exception) {
                 // 진단 동기화 실패해도 payload_json은 저장된 상태로 둠
                 org.slf4j.LoggerFactory.getLogger(TestService::class.java)
                     .warn("진단 동기화 실패 (paperId=$testId): ${e.message}", e)
             }
         }
+    }
+
+    private fun normalizeDiagnosticPayloadJson(payloadJson: String): String {
+        val payload: MutableMap<String, Any?> = objectMapper.readValue(
+            payloadJson, object : TypeReference<MutableMap<String, Any?>>() {}
+        )
+        val questions = (payload["questions"] as? List<*>)?.filterIsInstance<Map<String, Any?>>() ?: emptyList()
+        val passages = (payload["passages"] as? List<*>)?.filterIsInstance<Map<String, Any?>>() ?: emptyList()
+
+        val byPassage = linkedMapOf<String, MutableList<Pair<Int, Map<String, Any?>>>>()
+        questions.forEachIndexed { idx, q ->
+            val key = (q["passageId"] as? String)?.takeIf { it.isNotBlank() } ?: "_none"
+            byPassage.getOrPut(key) { mutableListOf() }.add(idx to q)
+        }
+        byPassage.values.forEach { items ->
+            items.sortBy { (idx, q) -> (q["number"] as? Number)?.toInt() ?: idx + 1 }
+        }
+
+        val passageIds = passages.mapNotNull { it["id"] as? String }
+        val order = mutableListOf<String>()
+        order.addAll(passageIds)
+        byPassage.keys
+            .filter { it != "_none" && it !in passageIds }
+            .forEach { order.add(it) }
+        order.add("_none")
+
+        val normalizedByIndex = mutableMapOf<Int, Map<String, Any?>>()
+        var number = 1
+        for (key in order) {
+            for ((idx, q) in byPassage[key].orEmpty()) {
+                val cleaned = q.toMutableMap()
+                cleaned.remove("points")
+                cleaned["number"] = number++
+                normalizedByIndex[idx] = cleaned
+            }
+        }
+
+        payload["kind"] = payload["kind"] ?: "diagnostic"
+        payload["questions"] = questions.mapIndexed { idx, q ->
+            normalizedByIndex[idx] ?: q.toMutableMap().also {
+                it.remove("points")
+                it["number"] = number++
+            }
+        }
+        return objectMapper.writeValueAsString(payload)
     }
 
     /**
@@ -421,7 +500,27 @@ class TestService(
                 "text" to p.textMd
             )
         }
-        val questionsPayload = questions.map { q ->
+        val questionsByPassage = questions.groupBy { it.passageId }
+        val orderedQuestions = mutableListOf<com.korfarm.api.diagnostic.DiagQuestionEntity>()
+        val seenQuestionIds = mutableSetOf<String>()
+        for (p in passages) {
+            (questionsByPassage[p.id] ?: emptyList())
+                .sortedWith(compareBy<com.korfarm.api.diagnostic.DiagQuestionEntity> { it.orderInPassage }.thenBy { it.id })
+                .forEach { q ->
+                    orderedQuestions.add(q)
+                    seenQuestionIds.add(q.id)
+                }
+        }
+        questions
+            .filter { it.id !in seenQuestionIds }
+            .sortedWith(
+                compareBy<com.korfarm.api.diagnostic.DiagQuestionEntity> { it.passageId }
+                    .thenBy { it.orderInPassage }
+                    .thenBy { it.id }
+            )
+            .forEach { orderedQuestions.add(it) }
+
+        val questionsPayload = orderedQuestions.mapIndexed { idx, q ->
             // choices_json: 진단 스키마 [{choice_id, text, vector, error_path}] → 일일퀴즈 스키마 [{id, text}]
             val rawChoices: List<Map<String, Any?>> = try {
                 objectMapper.readValue(q.choicesJson, object : TypeReference<List<Map<String, Any?>>>() {})
@@ -443,6 +542,7 @@ class TestService(
             }
             mapOf(
                 "id" to q.id,
+                "number" to idx + 1,
                 "type" to type,
                 "stem" to q.stem,
                 "passage" to passage,
@@ -707,7 +807,7 @@ class TestService(
         if (testId.startsWith("diag_paper_")) return diagnosticReport(testId, userId)
 
         val paper = findPaper(testId)
-        val sub = submissionRepo.findByTestIdAndUserId(testId, userId)
+        val sub = submissionRepo.findFirstByTestIdAndUserIdOrderByAttemptNoDesc(testId, userId)
             ?: throw ApiException("NOT_SUBMITTED", "아직 제출하지 않았습니다.", HttpStatus.NOT_FOUND)
         val questions = questionRepo.findByTestIdOrderByNumberAsc(testId)
         val answers = parseAnswers(sub.answersJson)
@@ -792,7 +892,7 @@ class TestService(
         if (testId.startsWith("diag_paper_")) return diagnosticWrongNote(testId, userId)
 
         val paper = findPaper(testId)
-        val sub = submissionRepo.findByTestIdAndUserId(testId, userId)
+        val sub = submissionRepo.findFirstByTestIdAndUserIdOrderByAttemptNoDesc(testId, userId)
             ?: throw ApiException("NOT_SUBMITTED", "아직 제출하지 않았습니다.", HttpStatus.NOT_FOUND)
         val questions = questionRepo.findByTestIdOrderByNumberAsc(testId)
         val answers = parseAnswers(sub.answersJson)
@@ -991,6 +1091,30 @@ class TestService(
         return testPaperRepo.save(paper)
     }
 
+    // ─── Admin: set ANSWER PDF file id (진단·기타 테스트 전용 정답·해설 PDF) ───
+    @Transactional
+    fun setAnswerPdfFileId(testId: String, fileId: String?): TestPaperEntity {
+        val paper = findPaper(testId)
+        paper.answerPdfFileId = fileId
+        return testPaperRepo.save(paper)
+    }
+
+    /**
+     * 학생이 해당 시험에 응시 완료했는지 검증 — 정답·해설 PDF 접근용.
+     * 진단: diag_sessions 의 completed 세션 존재 → OK.
+     * 기타·챕터: test_submissions 의 graded 또는 submitted 상태 row 존재 → OK.
+     */
+    @Transactional(readOnly = true)
+    fun hasStudentSubmitted(testId: String, userId: String): Boolean {
+        if (testId.startsWith("diag_paper_")) {
+            val tier = testId.removePrefix("diag_paper_")
+            return diagSessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, tier)
+                .any { it.status == "completed" }
+        }
+        val sub = submissionRepo.findFirstByTestIdAndUserIdOrderByAttemptNoDesc(testId, userId) ?: return false
+        return sub.status == "graded" || sub.status == "submitted"
+    }
+
     // ─── Admin: get questions ───
     @Transactional(readOnly = true)
     fun getQuestions(testId: String): List<TestQuestionView> {
@@ -1116,6 +1240,7 @@ class TestService(
                 score = null,
                 submissionCount = subCount,
                 pdfFileId = p.pdfFileId,
+                answerPdfFileId = p.answerPdfFileId,
                 createdAt = p.createdAt,
                 kind = kind
             )
@@ -1149,9 +1274,11 @@ class TestService(
     @Transactional(readOnly = true)
     fun getStudentsForTest(testId: String, callerUserId: String): List<StudentForTest> {
         val paper = findPaper(testId)
+        // 본사 시험은 orgId == null 또는 "org_hq" (test_papers.org_id NOT NULL 인 환경 호환)
+        val isHqPaper = paper.orgId == null || paper.orgId == "org_hq"
 
         // STUDENT 역할 멤버십만 필터링
-        val studentMemberships = if (paper.orgId != null) {
+        val studentMemberships = if (!isHqPaper) {
             // 기관 시험: 해당 기관의 학생만
             orgMembershipRepository.findByOrgIdAndStatus(paper.orgId!!, "active")
                 .filter { it.role == "STUDENT" }
@@ -1329,5 +1456,36 @@ class TestService(
             if (modelAnswer != null) sb.append("\n$modelAnswer")
         }
         return sb.toString()
+    }
+
+    // ─── 다중 응시 — 이력 조회 ───
+    // 한 학생의 한 시험에 대한 모든 응시 이력 (최신순). 어드민 OMR 일괄 입력 후 이력 화면용.
+    @Transactional(readOnly = true)
+    fun listAttempts(testId: String, userId: String): List<Map<String, Any?>> {
+        val attempts = submissionRepo.findByTestIdAndUserIdOrderByAttemptNoDesc(testId, userId)
+        return attempts.map { s ->
+            mapOf(
+                "id" to s.id,
+                "attemptNo" to s.attemptNo,
+                "attemptedAt" to (s.attemptedAt ?: s.createdAt),
+                "submittedBy" to s.submittedBy,
+                "score" to s.score,
+                "correctCount" to s.correctCount,
+                "createdAt" to s.createdAt,
+            )
+        }
+    }
+
+    // 어드민 OMR 일괄 — 학생 1인 1테스트 응시 처리 (재사용 진입점)
+    // submitOmr 와 동일하지만 응시 일자 명시. submittedBy 는 호출자(adminId).
+    @Transactional
+    fun adminOfflineOmrSubmit(
+        testId: String,
+        userId: String,
+        adminId: String,
+        answers: Map<String, String>,
+        attemptedAt: LocalDateTime?,
+    ): TestSubmissionEntity {
+        return submitOmr(testId, userId, adminId, answers, attemptedAt)
     }
 }

@@ -28,6 +28,9 @@ class TestPaperEntity(
     @Column(name = "pdf_file_id")
     var pdfFileId: String? = null,
 
+    @Column(name = "answer_pdf_file_id")
+    var answerPdfFileId: String? = null,
+
     @Column(name = "level_id")
     var levelId: String? = null,
 
@@ -169,10 +172,7 @@ class TestQuestionEntity(
 }
 
 @Entity
-@Table(
-    name = "test_submissions",
-    uniqueConstraints = [UniqueConstraint(columnNames = ["test_id", "user_id"])]
-)
+@Table(name = "test_submissions")
 class TestSubmissionEntity(
     @Id
     var id: String,
@@ -200,6 +200,12 @@ class TestSubmissionEntity(
 
     @Column(nullable = false)
     var status: String = "submitted",
+
+    @Column(name = "attempt_no", nullable = false)
+    var attemptNo: Int = 1,                          // 1부터 시작. 새 응시마다 +1
+
+    @Column(name = "attempted_at")
+    var attemptedAt: LocalDateTime? = null,          // 어드민 지정 응시 일자 (null 이면 createdAt 사용)
 
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now()

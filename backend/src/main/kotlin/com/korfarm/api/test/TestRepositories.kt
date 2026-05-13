@@ -17,7 +17,15 @@ interface TestPaperStatisticsRepo : JpaRepository<TestPaperStatisticsEntity, Str
 
 
 interface TestSubmissionRepo : JpaRepository<TestSubmissionEntity, String> {
-    fun findByTestIdAndUserId(testId: String, userId: String): TestSubmissionEntity?
+    // 다중 응시 도입 후 — 가장 최근 응시(attempt_no 최대) 1건 반환. 단일 응시 시대 코드 호환용 helper.
+    fun findFirstByTestIdAndUserIdOrderByAttemptNoDesc(testId: String, userId: String): TestSubmissionEntity?
+    // 다중 응시 — 한 학생의 한 시험 응시 이력 (최신순)
+    fun findByTestIdAndUserIdOrderByAttemptNoDesc(testId: String, userId: String): List<TestSubmissionEntity>
+    // 최대 attempt_no 조회 (새 응시 번호 부여)
+    @org.springframework.data.jpa.repository.Query(
+        "SELECT COALESCE(MAX(s.attemptNo), 0) FROM TestSubmissionEntity s WHERE s.testId = :testId AND s.userId = :userId"
+    )
+    fun maxAttemptNo(testId: String, userId: String): Int
     fun findByUserId(userId: String): List<TestSubmissionEntity>
     fun findByTestId(testId: String): List<TestSubmissionEntity>
     fun findByUserIdAndCreatedAtBetween(userId: String, start: java.time.LocalDateTime, end: java.time.LocalDateTime): List<TestSubmissionEntity>

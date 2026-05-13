@@ -419,6 +419,29 @@ class DiagnosticService(
         return FromOmrResponse(sessionId = sessionId, report = report)
     }
 
+    // ── 어드민 일괄 OMR 입력 (응시 일자 지정 지원) ──
+    // submitFromOmr 래핑 + 학생 직접 응시처럼 처리되어 통합 분석표·진단 성적표에 자동 반영.
+    // 어드민이 응시 일자(attemptedAt) 를 지정하면 session 의 startedAt·completedAt 을 그 시각으로 설정해
+    // "그날 응시한 것"으로 기록한다.
+    @Transactional
+    fun adminBatchSubmitDiagnostic(
+        userId: String,
+        tier: String,
+        answers: Map<String, String?>,
+        attemptedAt: LocalDateTime? = null,
+    ): FromOmrResponse {
+        val resp = submitFromOmr(userId, FromOmrRequest(tier = tier, answers = answers))
+        if (attemptedAt != null) {
+            val session = sessionRepo.findById(resp.sessionId).orElse(null)
+            if (session != null) {
+                session.startedAt = attemptedAt
+                session.completedAt = attemptedAt
+                sessionRepo.save(session)
+            }
+        }
+        return resp
+    }
+
     // ── 리포트 조회 ──
 
     fun getReport(sessionId: String, userId: String): DiagnosticReport {

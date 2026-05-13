@@ -176,8 +176,10 @@ class StudyPlanService(
                 planRepo.findAll().sortedByDescending { it.createdAt }
             }
         } else {
+            // ORG_ADMIN — 자기 기관 plan 만. `org_hq` 멤버십 제외 + role 필터로 본사+기관 동시 ORG_ADMIN 케이스 차단.
             val orgId = orgMembershipRepo.findByUserIdAndStatus(userId, "active")
-                .firstOrNull()?.orgId ?: return emptyList()
+                .firstOrNull { it.role == "ORG_ADMIN" && it.orgId != "org_hq" }?.orgId
+                ?: return emptyList()
             if (status != null) {
                 planRepo.findByOrgIdAndStatusOrderByCreatedAtDesc(orgId, status)
             } else {
@@ -524,7 +526,7 @@ class StudyPlanService(
             assetMap[it.assetId]?.assetType == "test" && (it.cellRefId != null || assetMap[it.assetId]?.refId != null)
         }.mapNotNull { cell ->
             val testId = cell.cellRefId ?: assetMap[cell.assetId]?.refId ?: return@mapNotNull null
-            if (testSubmissionRepo.findByTestIdAndUserId(testId, userId) != null) cell.id else null
+            if (testSubmissionRepo.findFirstByTestIdAndUserIdOrderByAttemptNoDesc(testId, userId) != null) cell.id else null
         }.toSet()
 
         // 국어농장 셀의 assignment 일괄 조회 (복수 배정)
@@ -1419,7 +1421,7 @@ class StudyPlanService(
         testCells.forEach { cell ->
             // 셀 단위 배정이 우선, asset.refId 는 옛 모델 fallback
             val testId = cell.cellRefId ?: assetMap[cell.assetId]?.refId ?: return@forEach
-            val submission = testSubmissionRepo.findByTestIdAndUserId(testId, userId) ?: return@forEach
+            val submission = testSubmissionRepo.findFirstByTestIdAndUserIdOrderByAttemptNoDesc(testId, userId) ?: return@forEach
 
             // 재시험인 경우: 제출이 판정 이후인지 확인
             if (cell.status == "retry") {
@@ -2319,7 +2321,7 @@ class StudyPlanService(
         val testId = asset.refId
         val submissionByUser: Map<String, TestSubmissionEntity> = if (testId != null) {
             cells.mapNotNull { c ->
-                testSubmissionRepo.findByTestIdAndUserId(testId, c.userId)?.let { c.userId to it }
+                testSubmissionRepo.findFirstByTestIdAndUserIdOrderByAttemptNoDesc(testId, c.userId)?.let { c.userId to it }
             }.toMap()
         } else emptyMap()
 
@@ -2505,7 +2507,9 @@ class StudyPlanService(
 
     private fun resolveAdminScope(userId: String): AdminScope {
         if (SecurityUtils.hasAnyRole("HQ_ADMIN")) return AdminScope.All
-        val orgId = orgMembershipRepo.findByUserIdAndStatus(userId, "active").firstOrNull()?.orgId
+        // ORG_ADMIN orgId 추출 시 `org_hq` 멤버십은 제외 (본사+기관 동시 ORG_ADMIN 케이스에서 본사를 잡지 않도록)
+        val orgId = orgMembershipRepo.findByUserIdAndStatus(userId, "active")
+            .firstOrNull { it.role == "ORG_ADMIN" && it.orgId != "org_hq" }?.orgId
             ?: throw ApiException("FORBIDDEN", "기관 정보 없음", HttpStatus.FORBIDDEN)
         return AdminScope.Org(orgId)
     }

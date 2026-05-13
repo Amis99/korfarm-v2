@@ -29,6 +29,7 @@ const SubscriptionPage = lazy(() => import("./pages/SubscriptionPage"));
 
 const RankingPage = lazy(() => import("./pages/RankingPage"));
 const ParentLinksPage = lazy(() => import("./pages/ParentLinksPage"));
+const ChildGrapefruitPage = lazy(() => import("./pages/ChildGrapefruitPage"));
 
 const DailyLearningPage = lazy(() => import("./pages/DailyLearningPage"));
 const DailyQuizPage = lazy(() => import("./pages/DailyQuizPage"));
@@ -105,6 +106,7 @@ const AdminWisdomDetailPage = lazy(() => import("./pages/AdminWisdomDetailPage")
 const AdminTestPage = lazy(() => import("./pages/AdminTestPage"));
 const AdminAiUsagePage = lazy(() => import("./pages/AdminAiUsagePage"));
 const AdminTestEditorPage = lazy(() => import("./pages/AdminTestEditorPage"));
+const AdminOfflineOmrPage = lazy(() => import("./pages/AdminOfflineOmrPage"));
 const AdminTestStatisticsPage = lazy(() => import("./pages/AdminTestStatisticsPage"));
 const AdminProPage = lazy(() => import("./pages/AdminProPage"));
 const AdminStudyPlanDashboardPage = lazy(() => import("./pages/AdminStudyPlanDashboardPage"));
@@ -243,6 +245,7 @@ function App() {
           <Route path="/subscription" element={P(<SubscriptionPage />)} />
           <Route path="/ranking" element={P(<RankingPage />)} />
           <Route path="/parents/links" element={P(<ParentLinksPage />)} />
+          <Route path="/parents/grapefruit" element={P(<ChildGrapefruitPage />)} />
           <Route path="/daily" element={P(<DailyLearningPage />)} />
           <Route path="/daily-quiz" element={P(<DailyQuizPage />)} />
           <Route path="/daily-reading" element={P(<DailyReadingPage />)} />
@@ -338,6 +341,7 @@ function App() {
           <Route path="/admin/ai-usage" element={A(<AdminAiUsagePage />)} />
           <Route path="/admin/tests/:testId/edit" element={A(<AdminTestEditorPage />)} />
           <Route path="/admin/tests/:testId/statistics" element={A(<AdminTestStatisticsPage />)} />
+          <Route path="/admin/tests/offline-omr" element={A(<AdminOfflineOmrPage />)} />
           {/* 옛 /admin/tests/:testId 디테일 페이지는 통계 페이지로 통합 → 통계로 redirect (외부 링크 호환) */}
           <Route path="/admin/tests/:testId" element={A(<AdminTestStatisticsPage />)} />
           {/* 학습자료 DB — 작품·지문 corpus + 누적 항목 + 임시 체크포인트 풀 (V0107~) */}
