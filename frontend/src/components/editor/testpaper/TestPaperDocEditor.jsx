@@ -9,8 +9,13 @@ import { COMPETENCIES, vectorActiveCount, vectorSum } from "../../../constants/c
 import CompetencyVectorEditor from "../dailyquiz/CompetencyVectorEditor";
 import Modal from "../../Modal";
 import MarkdownEditField from "../MarkdownEditField";
+import { handleTextareaShortcut } from "../markdownShortcuts";
 import AiPassageGenModal from "./AiPassageGenModal";
 import AiQuestionGenModal from "./AiQuestionGenModal";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
+import { mdImgRenderer } from "../../FileImage";
 
 const PATTERN_OPTIONS = { ...READ_WRONG_PATTERN_LABELS, ...LIT_WRONG_PATTERN_LABELS };
 const QTYPE_OPTIONS = { ...READ_QUESTION_TYPE_LABELS, ...LIT_QUESTION_TYPE_LABELS };
@@ -34,6 +39,9 @@ export default function TestPaperDocEditor({ editor }) {
   const meta = editor.meta || {};
   const testId = meta.contentId;
   const defaultLevelId = meta.levelId || "";
+  const isDiagnostic = content?.kind === "diagnostic"
+    || meta.series === "diagnostic"
+    || String(testId || "").startsWith("diag_paper_");
 
   const grouped = useMemo(() => {
     const map = new Map();
@@ -80,31 +88,34 @@ export default function TestPaperDocEditor({ editor }) {
     editor.removeItem("passages", idx);
   };
 
-  const newQuestion = (type = "MULTI_CHOICE", passageId = null) => ({
-    id: `q${Date.now().toString(36)}`,
-    number: nextNumber(),
-    type,
-    stem: "",
-    passageId,
-    boxContent: "",
-    conditionContent: "",
-    choices: type === "MULTI_CHOICE" ? [
-      { id: "1", text: "", wrongPattern: null },
-      { id: "2", text: "", wrongPattern: null },
-      { id: "3", text: "", wrongPattern: null },
-      { id: "4", text: "", wrongPattern: null },
-      { id: "5", text: "", wrongPattern: null },
-    ] : [],
-    answerId: "",
-    choiceExplanations: {},
-    explanation: "",
-    modelAnswer: "",
-    essayKeywords: [],
-    essayRubric: "",
-    points: 5,
-    questionType: null,
-    competencyVector: {},
-  });
+  const newQuestion = (type = "MULTI_CHOICE", passageId = null) => {
+    const question = {
+      id: `q${Date.now().toString(36)}`,
+      number: nextNumber(),
+      type,
+      stem: "",
+      passageId,
+      boxContent: "",
+      conditionContent: "",
+      choices: type === "MULTI_CHOICE" ? [
+        { id: "1", text: "", wrongPattern: null },
+        { id: "2", text: "", wrongPattern: null },
+        { id: "3", text: "", wrongPattern: null },
+        { id: "4", text: "", wrongPattern: null },
+        { id: "5", text: "", wrongPattern: null },
+      ] : [],
+      answerId: "",
+      choiceExplanations: {},
+      explanation: "",
+      modelAnswer: "",
+      essayKeywords: [],
+      essayRubric: "",
+      questionType: null,
+      competencyVector: {},
+    };
+    if (!isDiagnostic) question.points = 5;
+    return question;
+  };
 
   const addQuestionTo = (passageId) => {
     editor.addItem("questions", questions.length, newQuestion("MULTI_CHOICE", passageId));
@@ -113,6 +124,28 @@ export default function TestPaperDocEditor({ editor }) {
   const removeQuestion = (idx) => {
     if (!window.confirm("이 문항을 삭제할까요?")) return;
     editor.removeItem("questions", idx);
+  };
+
+  // 같은 그룹(passageId) 안에서만 문항 순서 변경. 전역 questions 배열에서 swap 후 number 재할당.
+  const moveQuestionInGroup = (currentGlobalIdx, direction) => {
+    const cur = questions[currentGlobalIdx];
+    if (!cur) return;
+    const groupKey = cur.passageId || "_none";
+    const groupMembers = questions
+      .map((q, i) => ({ q, i }))
+      .filter(({ q }) => (q.passageId || "_none") === groupKey);
+    const localPos = groupMembers.findIndex((it) => it.i === currentGlobalIdx);
+    if (localPos < 0) return;
+    const targetLocalPos = direction === "up" ? localPos - 1 : localPos + 1;
+    if (targetLocalPos < 0 || targetLocalPos >= groupMembers.length) return;
+    const targetGlobalIdx = groupMembers[targetLocalPos].i;
+
+    const newQuestions = questions.map((q) => ({ ...q }));
+    [newQuestions[currentGlobalIdx], newQuestions[targetGlobalIdx]] =
+      [newQuestions[targetGlobalIdx], newQuestions[currentGlobalIdx]];
+    // 전체 number 재할당 — 그룹 안 순서가 바뀌어도 전역 번호 1..N 유지.
+    newQuestions.forEach((q, i) => { q.number = i + 1; });
+    editor.setContentDirect({ ...editor.content, questions: newQuestions });
   };
 
   return (
@@ -161,6 +194,8 @@ export default function TestPaperDocEditor({ editor }) {
             onRemovePassage={() => passage && passage.id !== "_none" && removePassage(passages.findIndex((p) => p.id === passage.id), passage.id)}
             onAddQuestion={() => addQuestionTo(passage?.id || null)}
             onRemoveQuestion={removeQuestion}
+            onMoveQuestion={moveQuestionInGroup}
+            isDiagnostic={isDiagnostic}
             onAiPassage={() => setAiPassageModal({ passageIndex: passages.findIndex((p) => p.id === passage?.id) })}
             onAiQuestion={() => setAiQuestionModal({
               passageId: passage?.id || null,
@@ -215,6 +250,7 @@ export default function TestPaperDocEditor({ editor }) {
               // review 결과는 메타로 같이 저장 (추후 필터링·재검수 용)
               _aiReview: review,
             };
+            if (isDiagnostic) delete newQ.points;
             editor.addItem("questions", questions.length, newQ);
           }}
         />
@@ -224,6 +260,7 @@ export default function TestPaperDocEditor({ editor }) {
 }
 
 // 발문 — textarea + 밑줄 토글만 (간단한 한 줄 도구)
+// 단축키: Ctrl+B/I/U(서식), Ctrl+J/E/R(정렬). markdownShortcuts.js 공용 헬퍼 사용.
 function StemEditor({ value, onChange }) {
   const taRef = useRef(null);
   const wrapU = () => {
@@ -256,10 +293,8 @@ function StemEditor({ value, onChange }) {
         ref={taRef}
         value={value || ""}
         onChange={(e) => onChange(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.ctrlKey && (e.key === "u" || e.key === "U")) { e.preventDefault(); wrapU(); }
-        }}
-        placeholder="발문 (Ctrl+U 또는 [U] 버튼으로 밑줄)"
+        onKeyDown={(e) => handleTextareaShortcut(e, { value: value || "", setValue: onChange })}
+        placeholder="발문 (Ctrl+B/I/U 서식, Ctrl+J/E/R 정렬, [U] 버튼으로 밑줄)"
         style={{
           flex: 1, padding: 8, fontSize: 13, lineHeight: 1.5,
           background: "var(--bg)", color: "var(--text)",
@@ -284,6 +319,7 @@ function StemEditor({ value, onChange }) {
 }
 
 // 자동 높이 textarea — 내용 길이에 맞춰 height 늘어남, 박스 내부 스크롤 없음
+// 단축키: Ctrl+B/I/U(서식), Ctrl+J/E/R(정렬). 호출자가 onChange(event) 형태로 받으므로 어댑팅.
 function AutoTextarea({ value, onChange, placeholder, minHeight = 60, style, ...rest }) {
   const ref = useRef(null);
   useLayoutEffect(() => {
@@ -297,6 +333,10 @@ function AutoTextarea({ value, onChange, placeholder, minHeight = 60, style, ...
       ref={ref}
       value={value || ""}
       onChange={onChange}
+      onKeyDown={(e) => handleTextareaShortcut(e, {
+        value: value || "",
+        setValue: (next) => onChange({ target: { value: next } }),
+      })}
       placeholder={placeholder}
       style={{
         width: "100%", padding: 10,
@@ -312,7 +352,7 @@ function AutoTextarea({ value, onChange, placeholder, minHeight = 60, style, ...
   );
 }
 
-function PassageBlock({ passage, items, passageIndex, editor, onRemovePassage, onAddQuestion, onRemoveQuestion, onAiPassage, onAiQuestion }) {
+function PassageBlock({ passage, items, passageIndex, editor, onRemovePassage, onAddQuestion, onRemoveQuestion, onMoveQuestion, isDiagnostic, onAiPassage, onAiQuestion }) {
   const isNone = !passage || passage.id === "_none";
   const passagePath = !isNone && passageIndex >= 0 ? `passages[${passageIndex}]` : null;
 
@@ -386,13 +426,18 @@ function PassageBlock({ passage, items, passageIndex, editor, onRemovePassage, o
         </div>
       )}
 
-      {items.map(({ q, idx }) => (
+      {items.map(({ q, idx }, localPos) => (
         <QuestionCard
           key={q.id || idx}
           q={q}
           idx={idx}
           editor={editor}
+          isDiagnostic={isDiagnostic}
           onRemove={() => onRemoveQuestion(idx)}
+          canMoveUp={localPos > 0}
+          canMoveDown={localPos < items.length - 1}
+          onMoveUp={() => onMoveQuestion(idx, "up")}
+          onMoveDown={() => onMoveQuestion(idx, "down")}
         />
       ))}
 
@@ -416,7 +461,7 @@ function PassageBlock({ passage, items, passageIndex, editor, onRemovePassage, o
   );
 }
 
-function QuestionCard({ q, idx, editor, onRemove }) {
+function QuestionCard({ q, idx, editor, isDiagnostic, onRemove, canMoveUp, canMoveDown, onMoveUp, onMoveDown }) {
   const path = `questions[${idx}]`;
   const isEssay = q.type === "ESSAY" || q.type === "서술형";
   const set = (k, v) => editor.updateField(`${path}.${k}`, v);
@@ -435,18 +480,36 @@ function QuestionCard({ q, idx, editor, onRemove }) {
     }}>
       <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 8, flexWrap: "wrap" }}>
         <strong style={{ color: "var(--accent)", minWidth: 36 }}>{displayNumber}번</strong>
+        <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <button
+            type="button"
+            onClick={onMoveUp}
+            disabled={!canMoveUp}
+            title="같은 지문 그룹 안에서 위로"
+            style={{ ...moveBtn, opacity: canMoveUp ? 1 : 0.3, cursor: canMoveUp ? "pointer" : "not-allowed" }}
+          >▲</button>
+          <button
+            type="button"
+            onClick={onMoveDown}
+            disabled={!canMoveDown}
+            title="같은 지문 그룹 안에서 아래로"
+            style={{ ...moveBtn, opacity: canMoveDown ? 1 : 0.3, cursor: canMoveDown ? "pointer" : "not-allowed" }}
+          >▼</button>
+        </div>
         <select value={q.type || "MULTI_CHOICE"} onChange={(e) => set("type", e.target.value)} style={selStyle}>
           <option value="MULTI_CHOICE">객관식</option>
           <option value="ESSAY">서술형</option>
         </select>
-        <input
-          type="number"
-          value={q.points ?? 0}
-          onChange={(e) => set("points", Number(e.target.value))}
-          style={{ ...inpStyle, width: 60 }}
-          placeholder="배점"
-          title="배점"
-        />
+        {!isDiagnostic && (
+          <input
+            type="number"
+            value={q.points ?? 0}
+            onChange={(e) => set("points", Number(e.target.value))}
+            style={{ ...inpStyle, width: 60 }}
+            placeholder="배점"
+            title="배점"
+          />
+        )}
         <select
           value={q.questionType || ""}
           onChange={(e) => set("questionType", e.target.value || null)}
@@ -537,7 +600,20 @@ function QuestionCard({ q, idx, editor, onRemove }) {
                     style={{ ...inpStyle, flex: 1 }}
                     placeholder={`선택지 ${ci + 1}`}
                   />
+                  <ChoiceImageButton
+                    onUploaded={(url, alt) => {
+                      const existing = (c.text || "").trimEnd();
+                      const sep = existing ? " " : "";
+                      editor.updateField(`${path}.choices[${ci}].text`, `${existing}${sep}![${alt}](${url})`);
+                    }}
+                  />
                 </div>
+                {/* 선택지에 이미지 markdown 이 있으면 입력란 아래 미리보기 */}
+                {/\!\[[^\]]*\]\([^)]+\)/.test(c.text || "") && (
+                  <div style={{ marginTop: 6, paddingLeft: 34 }}>
+                    <ChoicePreview text={c.text} />
+                  </div>
+                )}
                 {/* 2행: 해설 / 함정 패턴 / 약점 / 삭제 */}
                 <div style={{ display: "flex", gap: 6, marginTop: 6, alignItems: "center", paddingLeft: 34 }}>
                   <input
@@ -690,12 +766,79 @@ function CollapsibleField({ label, present, onAdd, onClear, children }) {
   );
 }
 
+/**
+ * 선택지 본문 옆 이미지 업로드 버튼. 클릭 시 파일 input → S3 업로드 →
+ * onUploaded(downloadUrl, alt) 호출. 부모가 c.text 끝에 markdown 을 append.
+ */
+function ChoiceImageButton({ onUploaded }) {
+  const [uploading, setUploading] = useState(false);
+  const inputRef = useRef(null);
+  const handleFile = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      alert("이미지 파일만 업로드 가능합니다.");
+      e.target.value = "";
+      return;
+    }
+    setUploading(true);
+    try {
+      const result = await uploadFile(file, { purpose: "content" });
+      const url = result.downloadUrl || fileDownloadUrl(result.fileId);
+      const alt = (result.originalName || "image").replace(/\.[^.]+$/, "");
+      onUploaded(url, alt);
+    } catch (err) {
+      alert("이미지 업로드 실패: " + (err.message || ""));
+    } finally {
+      setUploading(false);
+      e.target.value = "";
+    }
+  };
+  return (
+    <>
+      <input ref={inputRef} type="file" accept="image/*" hidden onChange={handleFile} />
+      <button
+        type="button"
+        onClick={() => inputRef.current?.click()}
+        disabled={uploading}
+        title="선택지에 이미지 삽입"
+        style={{ ...subtleBtn, flexShrink: 0, padding: "4px 8px" }}
+      >{uploading ? "..." : "🖼"}</button>
+    </>
+  );
+}
+
+/** 선택지 본문 마크다운 미리보기 (이미지 포함 시 입력란 아래 표시). */
+function ChoicePreview({ text }) {
+  return (
+    <div style={{
+      padding: "6px 8px", background: "var(--bg)",
+      border: "1px dashed var(--stroke)", borderRadius: 4,
+      fontSize: 12, color: "var(--text)",
+    }}>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw]}
+        components={{
+          img: mdImgRenderer,
+          p: ({ children }) => <span>{children}</span>,
+        }}
+      >{text || ""}</ReactMarkdown>
+    </div>
+  );
+}
+
 const inpStyle = {
   padding: "4px 8px", fontSize: 12,
   background: "var(--bg)", color: "var(--text)",
   border: "1px solid var(--stroke)", borderRadius: 4,
 };
 const selStyle = { ...inpStyle, padding: "4px 6px" };
+const moveBtn = {
+  padding: "1px 6px", fontSize: 9, lineHeight: 1.2,
+  background: "var(--bg)", color: "var(--text)",
+  border: "1px solid var(--stroke)", borderRadius: 3,
+};
 const subtleBtn = {
   padding: "2px 8px", fontSize: 11, cursor: "pointer",
   background: "var(--bg)", color: "var(--muted)",

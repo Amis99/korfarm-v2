@@ -1,8 +1,10 @@
 import { useRef, useState, useLayoutEffect } from "react";
 import ReactMarkdown from "react-markdown";
+import FileImage from "../FileImage";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import { uploadFile, fileDownloadUrl } from "../../utils/fileUpload";
+import { handleTextareaShortcut } from "./markdownShortcuts";
 
 /**
  * 지문/본문용 마크다운 에디터.
@@ -213,10 +215,7 @@ export default function MarkdownEditField({ value, onChange, placeholder, minHei
             value={value || ""}
             onChange={(e) => onChange(e.target.value)}
             placeholder={placeholder || "지문 본문 (마크다운). 이미지는 툴바의 [🖼️ 이미지]로 업로드)"}
-            onKeyDown={(e) => {
-              if (e.ctrlKey && (e.key === "b" || e.key === "B")) { e.preventDefault(); wrapSelection("**", "**", "굵게"); }
-              else if (e.ctrlKey && (e.key === "i" || e.key === "I")) { e.preventDefault(); wrapSelection("*", "*", "기울임"); }
-            }}
+            onKeyDown={(e) => handleTextareaShortcut(e, { value: value || "", setValue: onChange })}
             style={{
               flex: 1, padding: 12, fontSize: 13, lineHeight: 1.7,
               background: "var(--bg)", color: "var(--text)",
@@ -251,9 +250,14 @@ function MarkdownPreview({ value }) {
       remarkPlugins={[remarkGfm]}
       rehypePlugins={[rehypeRaw]}
       components={{
-        img: ({ node, ...props }) => (
-          <img {...props} style={{ maxWidth: "100%", maxHeight: 400, borderRadius: 4, margin: "8px 0" }} alt={props.alt || ""} />
-        ),
+        img: ({ node, src, alt, ...props }) => {
+          // /v1/files/{id}/download URL 은 token 헤더 필요 → FileImage 로 wrap.
+          if (typeof src === "string") {
+            const m = src.match(/\/v1\/files\/([A-Za-z0-9_-]+)\/download/);
+            if (m) return <FileImage fileId={m[1]} alt={alt} style={{ maxWidth: "100%", maxHeight: 400, borderRadius: 4, margin: "8px 0" }} />;
+          }
+          return <img {...props} src={src} alt={alt || ""} style={{ maxWidth: "100%", maxHeight: 400, borderRadius: 4, margin: "8px 0" }} />;
+        },
       }}
     >{value}</ReactMarkdown>
   );

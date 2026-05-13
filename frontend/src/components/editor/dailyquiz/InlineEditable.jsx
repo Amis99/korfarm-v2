@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { handleContentEditableShortcut } from "../markdownShortcuts";
 
 /**
  * contentEditable 래퍼 — 마크다운 토큰(**, ==, *, <u>) 을 raw 로 그대로 보존하며 인라인 편집.
@@ -40,25 +41,8 @@ export default function InlineEditable({
       e.preventDefault();
       e.currentTarget.blur();
     }
-    // Ctrl+B / Ctrl+I / Ctrl+U → 마크다운 토큰 삽입
-    if (e.ctrlKey || e.metaKey) {
-      const insertWrap = (left, right) => {
-        e.preventDefault();
-        document.execCommand("insertText", false, left + right);
-        // 커서를 토큰 사이로 이동 (간이 — 항상 끝에 추가됨)
-        const sel = window.getSelection();
-        if (sel && sel.rangeCount > 0) {
-          const range = sel.getRangeAt(0);
-          range.setStart(range.endContainer, range.endOffset - right.length);
-          range.setEnd(range.endContainer, range.endOffset);
-          // 커서 이동 표시
-        }
-      };
-      if (e.key === "b") insertWrap("**", "**");
-      else if (e.key === "i") insertWrap("*", "*");
-      else if (e.key === "u") insertWrap("<u>", "</u>");
-      else if (e.key === "h") insertWrap("==", "==");
-    }
+    // Ctrl+B/I/U/H/J/E/R → 마크다운 토큰 또는 정렬 div 삽입
+    handleContentEditableShortcut(e);
   };
 
   return (
