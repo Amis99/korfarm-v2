@@ -128,9 +128,12 @@ export function handleTextareaShortcut(e, { value, setValue }) {
     return true;
   };
 
-  // Enter 자동 <br> — 모디파이어 없는 단순 Enter 만
+  // Enter 자동 <br> — textarea 에서만 (input 은 한 줄이라 스킵)
   if (e.key === "Enter" && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
-    return handle(() => insertBrAndNewline(textarea, value, setValue));
+    if (textarea.tagName === "TEXTAREA") {
+      return handle(() => insertBrAndNewline(textarea, value, setValue));
+    }
+    return false;
   }
 
   // 마크다운 단축키 — Ctrl/Cmd 만 (Shift·Alt 동반은 무시)

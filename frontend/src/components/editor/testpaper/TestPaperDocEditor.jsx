@@ -591,12 +591,20 @@ function QuestionCard({ q, idx, editor, isDiagnostic, onRemove, canMoveUp, canMo
                   <input
                     value={c.id || ""}
                     onChange={(e) => editor.updateField(`${path}.choices[${ci}].id`, e.target.value)}
+                    onKeyDown={(e) => handleTextareaShortcut(e, {
+                      value: c.id || "",
+                      setValue: (next) => editor.updateField(`${path}.choices[${ci}].id`, next),
+                    })}
                     style={{ ...inpStyle, width: 44, flexShrink: 0 }}
                     placeholder="id"
                   />
                   <input
                     value={c.text || ""}
                     onChange={(e) => editor.updateField(`${path}.choices[${ci}].text`, e.target.value)}
+                    onKeyDown={(e) => handleTextareaShortcut(e, {
+                      value: c.text || "",
+                      setValue: (next) => editor.updateField(`${path}.choices[${ci}].text`, next),
+                    })}
                     style={{ ...inpStyle, flex: 1 }}
                     placeholder={`선택지 ${ci + 1}`}
                   />
@@ -619,6 +627,10 @@ function QuestionCard({ q, idx, editor, isDiagnostic, onRemove, canMoveUp, canMo
                   <input
                     value={(q.choiceExplanations || {})[c.id] || ""}
                     onChange={(e) => set(`choiceExplanations.${c.id}`, e.target.value)}
+                    onKeyDown={(e) => handleTextareaShortcut(e, {
+                      value: (q.choiceExplanations || {})[c.id] || "",
+                      setValue: (next) => set(`choiceExplanations.${c.id}`, next),
+                    })}
                     style={{ ...inpStyle, flex: 1, color: "var(--muted)", fontSize: 11 }}
                     placeholder="이 선지 해설"
                   />
