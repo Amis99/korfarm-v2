@@ -18,7 +18,9 @@ class ChatWebSocketConfig(
             .setAllowedOrigins(
                 "http://localhost:5173",
                 "http://localhost:8080",
-                "https://gf2.hak1ad.kr"
+                "https://gf2.hak1ad.kr",
+                "https://googerfarm.com",
+                "https://www.googerfarm.com"
             )
     }
 }

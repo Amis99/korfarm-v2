@@ -15,6 +15,6 @@ class DuelWebSocketConfig(
     override fun registerWebSocketHandlers(registry: WebSocketHandlerRegistry) {
         registry.addHandler(handler, "/v1/duel/ws")
             .addInterceptors(DuelWebSocketAuthInterceptor(jwtService))
-            .setAllowedOrigins("http://localhost:5173", "http://localhost:8080", "https://gf2.hak1ad.kr")
+            .setAllowedOrigins("http://localhost:5173", "http://localhost:8080", "https://gf2.hak1ad.kr", "https://googerfarm.com", "https://www.googerfarm.com")
     }
 }
