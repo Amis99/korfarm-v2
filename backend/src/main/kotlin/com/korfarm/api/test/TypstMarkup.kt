@@ -108,16 +108,18 @@ object MarkupToTypst {
             " M${imgTokens.size - 1} "
         }
 
-        // 3) **bold** → 임시 토큰
-        val boldRegex = Regex("\\*\\*([^*\\n]+?)\\*\\*")
+        // 3) **bold** → 임시 토큰. paragraph 내 줄바꿈(hard break)을 포함한 multiline bold 도
+        // 매칭되도록 `[^*]+?` (\n 포함). 매칭 실패 시 `**` 가 escape 되어 PDF 에 그대로 출력되던
+        // 회귀 방지 (예: `**[앞부분]\n...적혀 있다.**` 가 paragraph 내 hard break 로 끊기는 경우).
+        val boldRegex = Regex("\\*\\*([^*]+?)\\*\\*", RegexOption.DOT_MATCHES_ALL)
         val boldMatches = mutableListOf<String>()
         phase1 = boldRegex.replace(phase1) { m ->
             boldMatches.add(m.groupValues[1])
             " B${boldMatches.size - 1} "
         }
 
-        // 4) *italic* / _italic_ → 임시 토큰 (간단 — 단어 경계 안 함)
-        val italRegex = Regex("(?<![*_])([*_])([^*_\\n]+?)\\1(?![*_])")
+        // 4) *italic* / _italic_ → 임시 토큰 (multiline 허용)
+        val italRegex = Regex("(?<![*_])([*_])([^*_]+?)\\1(?![*_])", RegexOption.DOT_MATCHES_ALL)
         val italMatches = mutableListOf<String>()
         phase1 = italRegex.replace(phase1) { m ->
             italMatches.add(m.groupValues[2])

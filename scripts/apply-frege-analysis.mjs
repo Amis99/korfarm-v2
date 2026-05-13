@@ -84,16 +84,33 @@ function cleanVec(v) {
   return Object.fromEntries(Object.entries(v || {}).filter(([_, x]) => Number(x) > 0));
 }
 
+// 한글 세부영역 라벨 → classification_master 코드 매핑 (프레게 분석 JSON 호환)
+const SUBDOMAIN_LABEL_TO_CODE = {
+  '인문': 'READ_HUMANITIES', '사회': 'READ_SOCIETY', '과학': 'READ_SCIENCE',
+  '기술': 'READ_TECH', '예술': 'READ_ART',
+  '현대시': 'LIT_MODERN_POETRY', '고전시가': 'LIT_CLASSIC_POETRY',
+  '현대소설': 'LIT_MODERN_NOVEL', '고전산문': 'LIT_CLASSIC_PROSE',
+  '수필': 'LIT_ESSAY', '극': 'LIT_DRAMA',
+  '음운': 'GRAM_PHONOLOGY', '단어': 'GRAM_WORD', '단어·형태론': 'GRAM_WORD',
+  '문장': 'GRAM_SENTENCE', '담화': 'GRAM_DISCOURSE', '국어사': 'GRAM_HISTORY',
+};
+function labelToSubDomainCode(label) {
+  if (!label) return null;
+  return SUBDOMAIN_LABEL_TO_CODE[label] || null;
+}
+
 function buildUpdatedPayload(originalPayload, analysis) {
   // 깊은 복사 후 분석 메타 머지 (전체 덮어쓰기 정책)
+  // 비주얼 에디터 UI 는 passage.domain (영역 코드), passage.subDomain (세부영역 코드),
+  // choice.wrongVector / choice.wrongPattern 을 읽음.
   const p = JSON.parse(JSON.stringify(originalPayload));
 
   if (Array.isArray(p.passages)) {
     for (const pas of p.passages) {
       const a = analysis.passages[pas.id];
       if (!a) continue;
-      pas.domain = a.domain;
-      pas.subDomain = a.subDomain;
+      pas.domain = a.areaCode || a.domain;
+      pas.subDomain = a.subAreaCode || labelToSubDomainCode(a.subDomain);
       pas.theme = a.theme;
     }
   }
@@ -101,8 +118,8 @@ function buildUpdatedPayload(originalPayload, analysis) {
     for (const q of p.questions) {
       const a = analysis.questions[q.id];
       if (!a) continue;
-      q.domain = a.domain;
-      q.subDomain = a.subDomain;
+      q.domain = a.areaCode || a.domain;
+      q.subDomain = a.subAreaCode || labelToSubDomainCode(a.subDomain);
       q.questionType = a.questionType;
       q.competencyVector = a.competencyVector;
       q.intent = a.intent;
@@ -110,7 +127,7 @@ function buildUpdatedPayload(originalPayload, analysis) {
       q.choiceExplanations = a.choiceExplanations;
       q.wrongPattern = a.wrongPattern;
 
-      // choices[].vector·errorPath 도 분석 결과로 전체 덮어쓰기
+      // choices[] — 비주얼 에디터·학생 채점·PDF 호환 4개 필드
       const correctId = q.answerId;
       if (Array.isArray(q.choices)) {
         for (const c of q.choices) {
@@ -118,17 +135,33 @@ function buildUpdatedPayload(originalPayload, analysis) {
           if (cid === correctId) {
             c.vector = cleanVec(a.competencyVector);
             c.errorPath = '정답';
+            c.wrongVector = {};
+            c.wrongPattern = null;
           } else {
-            c.vector = cleanVec(a.choiceWrongVectors[cid] || {});
-            c.errorPath = a.wrongPattern[cid] || null;
+            const wv = cleanVec(a.choiceWrongVectors[cid] || {});
+            const wp = a.wrongPattern[cid] || null;
+            c.vector = wv;
+            c.errorPath = wp;
+            c.wrongVector = wv;
+            c.wrongPattern = wp;
           }
-          // 기존 wrongVector 잔재 제거
-          delete c.wrongVector;
         }
       }
     }
   }
   return p;
+}
+
+// 분석 결과에서 분류 코드 추출 (areaCode 또는 한글 라벨에서 매핑)
+function extractClassificationCodes(a, validCodes) {
+  const codes = [];
+  const area = a?.areaCode || a?.domain;  // domain 이 영역 코드 (READ/LIT/...)
+  if (area && validCodes.has(area)) codes.push(area);
+  const sub = a?.subAreaCode || labelToSubDomainCode(a?.subDomain);
+  if (sub && validCodes.has(sub)) codes.push(sub);
+  const theme = a?.themeCode;
+  if (theme && validCodes.has(theme)) codes.push(theme);
+  return codes;
 }
 
 function buildDiagChoicesJson(diagQuestion, analysis) {
@@ -224,6 +257,72 @@ async function main() {
         if (r.affectedRows > 0) ok++;
       }
       console.log(`diag_questions UPDATE: ${ok}/${diagUpdates.length}`);
+
+      // 분류 자동 INSERT — content_classifications + test_question_classifications
+      const [masterRows] = await conn.execute(
+        "SELECT code FROM classification_master WHERE active = 1",
+      );
+      const validCodes = new Set(masterRows.map((r) => r.code));
+
+      // 1) 지문 → content_classifications
+      for (const [pid, pa] of Object.entries(analysis.passages)) {
+        const codes = extractClassificationCodes(pa, validCodes);
+        if (codes.length === 0) continue;
+        const [existing] = await conn.execute(
+          "SELECT classification_code FROM content_classifications WHERE content_id = ?",
+          [pid],
+        );
+        const existSet = new Set(existing.map((r) => r.classification_code));
+        for (const code of codes) {
+          if (existSet.has(code)) continue;
+          await conn.execute(
+            "INSERT INTO content_classifications (content_id, classification_code, classification_type, is_primary, created_at) " +
+            "SELECT ?, ?, type, 0, NOW() FROM classification_master WHERE code = ?",
+            [pid, code, code],
+          );
+        }
+      }
+
+      // 2) 문항 → test_question_classifications
+      for (const [qid, qa] of Object.entries(analysis.questions)) {
+        const codes = extractClassificationCodes(qa, validCodes);
+        if (codes.length === 0) continue;
+        const [existing] = await conn.execute(
+          "SELECT classification_code FROM test_question_classifications WHERE question_id = ?",
+          [qid],
+        );
+        const existSet = new Set(existing.map((r) => r.classification_code));
+        for (const code of codes) {
+          if (existSet.has(code)) continue;
+          await conn.execute(
+            "INSERT INTO test_question_classifications (question_id, classification_code, classification_type, is_primary, created_at) " +
+            "SELECT ?, ?, type, 0, NOW() FROM classification_master WHERE code = ?",
+            [qid, code, code],
+          );
+        }
+      }
+
+      // 3) 시험지 전체 union → content_classifications (contentId = testId)
+      const testId = 'diag_paper_frege';
+      const allCodes = new Set();
+      for (const a of Object.values(analysis.passages)) extractClassificationCodes(a, validCodes).forEach((c) => allCodes.add(c));
+      for (const a of Object.values(analysis.questions)) extractClassificationCodes(a, validCodes).forEach((c) => allCodes.add(c));
+      const [paperExist] = await conn.execute(
+        "SELECT classification_code FROM content_classifications WHERE content_id = ?",
+        [testId],
+      );
+      const paperExistSet = new Set(paperExist.map((r) => r.classification_code));
+      let paperOk = 0;
+      for (const code of allCodes) {
+        if (paperExistSet.has(code)) continue;
+        await conn.execute(
+          "INSERT INTO content_classifications (content_id, classification_code, classification_type, is_primary, created_at) " +
+          "SELECT ?, ?, type, 0, NOW() FROM classification_master WHERE code = ?",
+          [testId, code, code],
+        );
+        paperOk++;
+      }
+      console.log(`분류 INSERT: 지문 ${Object.keys(analysis.passages).length}개 + 문항 ${Object.keys(analysis.questions).length}개 매핑, 시험지 누적 ${paperOk}건 추가 (총 ${allCodes.size}개 코드)`);
 
       await conn.commit();
       console.log('\n✔ 커밋 완료');
