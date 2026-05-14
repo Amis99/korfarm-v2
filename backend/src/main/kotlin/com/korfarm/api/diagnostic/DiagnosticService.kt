@@ -903,16 +903,20 @@ class DiagnosticService(
                     if (it.answeredCount > 0) it.correctCount.toDouble() / it.answeredCount * 100.0 else 0.0
                 }
 
-                // 역량별 통계
-                val allScoresData = allSessions.mapNotNull { s ->
+                // 역량별 통계 — scoresJson(earned) 을 maxScoresJson 으로 나눠 ratio(0~100) 로
+                // 변환. v2 채점은 raw earned 값이 가중치 누적이라 100을 넘을 수 있음.
+                // ratio 변환해야 모든 응시자 동일 스케일.
+                val allRatioData = allSessions.mapNotNull { s ->
                     try {
-                        if (!s.scoresJson.isNullOrBlank()) objectMapper.readValue<Map<String, Double>>(s.scoresJson!!)
-                        else null
+                        if (s.scoresJson.isNullOrBlank() || s.maxScoresJson.isNullOrBlank()) return@mapNotNull null
+                        val scores: Map<String, Double> = objectMapper.readValue(s.scoresJson!!)
+                        val maxes: Map<String, Double> = objectMapper.readValue(s.maxScoresJson!!)
+                        ScoringEngine.ratioScores(scores, maxes)
                     } catch (_: Exception) { null }
                 }
                 val competencyStats = mutableMapOf<String, ScoreStats>()
                 for (comp in COMPETENCIES) {
-                    val vals = allScoresData.mapNotNull { it[comp] }
+                    val vals = allRatioData.mapNotNull { it[comp]?.takeIf { v -> v > 0.0 } }
                     if (vals.isNotEmpty()) {
                         competencyStats[comp] = ScoreStats(
                             average = Math.round(vals.average() * 10.0) / 10.0,
@@ -947,7 +951,8 @@ class DiagnosticService(
 
                 val competencyPercentiles = mutableMapOf<String, Double>()
                 for (comp in COMPETENCIES) {
-                    val vals = allScoresData.mapNotNull { it[comp] }
+                    // ratio(0~100) 끼리 비교해야 본인 점수(scores)와 스케일 일치
+                    val vals = allRatioData.mapNotNull { it[comp]?.takeIf { v -> v > 0.0 } }
                     val myScore = scores[comp] ?: 50.0
                     if (vals.isNotEmpty()) {
                         val rank = vals.size - vals.count { it < myScore }
