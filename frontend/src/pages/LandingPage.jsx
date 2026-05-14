@@ -166,7 +166,8 @@ function LandingPage() {
               초등~고등 국어 전문 학습 플랫폼
             </span>
             <h1 className="landing-display landing-hero-title">
-              <span className="landing-hero-title-line">스스로 완성하는 국어 근육,</span>
+              <span className="landing-hero-title-line">스스로 완성하는</span>
+              <span className="landing-hero-title-line">국어 근육,</span>
               <span className="landing-hero-title-line">국어농장과 함께하세요.</span>
             </h1>
             <p>
@@ -260,12 +261,12 @@ function LandingPage() {
             {[
               { icon: "psychology_alt", title: "AI 학생 튜터", desc: "부엉이샘·아미스샘·누룽지샘 세 페르소나 중 선택. 학습 진도·약점을 함께 챙겨 줍니다." },
               { icon: "edit_note", title: "AI 글쓰기 첨삭", desc: "'지식과 지혜' 게시판의 글을 AI가 직접 첨삭해 표현력을 키워 줍니다." },
-              { icon: "smart_toy", title: "AI 자동 채점", desc: "객관식·서술형·OMR까지 자동 채점하고 풀이 흐름을 분석합니다." },
-              { icon: "analytics", title: "AI 통합 분석표", desc: "10대 역량·영역·주제별 통계와 AI 총평·맞춤 추천 학습을 제공합니다." },
-              { icon: "recommend", title: "AI 추천 학습", desc: "10대 역량·영역·주제를 기준으로 다음에 풀 콘텐츠를 자동 추천합니다." },
+              { icon: "document_scanner", title: "AI 내용 숙지 변환", desc: "학습 프린트(PDF·사진)를 올리면 AI가 본문을 읽어 체크리스트를 만들고, OX·빈칸 등 내용 숙지 학습으로 변환해 줍니다." },
+              { icon: "analytics", title: "AI 통합 분석표", desc: "10대 역량·영역·주제별 통계와 AI 총평·맞춤 추천 학습을 한 화면에 제공합니다." },
+              { icon: "recommend", title: "AI 추천 학습", desc: "10대 역량·영역·주제 3종 알고리즘으로 다음에 풀 콘텐츠를 자동 추천합니다." },
               { icon: "support_agent", title: "AI 운영자 비서", desc: "학생·반·콘텐츠·테스트 관리까지 관리자 업무 30여 종을 AI로 처리합니다." },
               { icon: "auto_fix_high", title: "AI 시험 출제", desc: "지문·문항·정답·해설까지 자동 생성. 출제 부담을 크게 줄여 줍니다." },
-              { icon: "document_scanner", title: "채팅 OCR", desc: "이미지를 채팅에 올리면 AI가 텍스트로 변환해 곧바로 활용합니다." },
+              { icon: "chat", title: "AI 채팅 도우미", desc: "AI 비서·학생 튜터·커뮤니티 포도와 자유롭게 대화. 이미지·문서를 함께 올려도 읽어 답합니다. 채팅은 무과금." },
             ].map((card) => (
               <div className="landing-card" key={card.title}>
                 <div className="landing-card-icon">
@@ -277,7 +278,7 @@ function LandingPage() {
             ))}
           </div>
           <p style={{ textAlign: "center", marginTop: 24, color: "#666", fontSize: 14 }}>
-            AI 기능 사용은 '자몽'으로 결제합니다. 채팅(튜터·비서·포도)은 무과금이며, 채팅 OCR은 월·일 한도가 있습니다.
+            AI 기능 사용은 '자몽'으로 결제합니다. AI 채팅(비서·튜터·포도)은 무과금이며, 채팅 속 이미지 인식만 월·일 한도가 있습니다.
           </p>
         </div>
       </section>
