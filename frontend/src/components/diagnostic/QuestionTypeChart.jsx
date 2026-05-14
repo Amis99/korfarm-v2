@@ -6,6 +6,7 @@ import {
   BarElement,
   Tooltip,
 } from "chart.js";
+import { QUESTION_TYPE_LABELS } from "../../constants/questionBankCodes";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip);
 
@@ -65,14 +66,24 @@ function QuestionTypeChart({ analysis }) {
           </tr>
         </thead>
         <tbody>
-          {analysis.map((a) => (
-            <tr key={a.questionType}>
-              <td>{a.questionType}</td>
-              <td>{a.totalCount}</td>
-              <td>{a.correctCount}</td>
-              <td>{a.accuracyRate.toFixed(1)}%</td>
-            </tr>
-          ))}
+          {analysis.map((a) => {
+            const fullLabel = QUESTION_TYPE_LABELS[a.questionType];
+            return (
+              <tr key={a.questionType}>
+                <td>
+                  <span style={{ fontWeight: 600 }}>{a.questionType}</span>
+                  {fullLabel && (
+                    <span style={{ marginLeft: 8, color: "#666", fontSize: "0.9em" }}>
+                      {fullLabel}
+                    </span>
+                  )}
+                </td>
+                <td>{a.totalCount}</td>
+                <td>{a.correctCount}</td>
+                <td>{a.accuracyRate.toFixed(1)}%</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

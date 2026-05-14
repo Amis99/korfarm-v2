@@ -134,6 +134,21 @@ function DiagnosticReportPage() {
                 <div className="diag-time-value">
                   상위 {report.speedPercentile.toFixed(1)}<span className="diag-time-unit">%</span>
                 </div>
+                {/* 막대 그래프 — 0% 좋음(빠름) 100% 나쁨(느림). 본인 위치 marker */}
+                <div className="speed-percentile-bar-wrap">
+                  <div className="speed-percentile-bar">
+                    <div
+                      className="speed-percentile-marker"
+                      style={{ left: `${Math.min(100, Math.max(0, report.speedPercentile))}%` }}
+                      title={`상위 ${report.speedPercentile.toFixed(1)}%`}
+                    />
+                  </div>
+                  <div className="speed-percentile-axis">
+                    <span>0% (빠름)</span>
+                    <span>50%</span>
+                    <span>100% (느림)</span>
+                  </div>
+                </div>
                 <div className="diag-time-note">
                   같은 단계 응시자 중 (1등 0% · 꼴등 100%)
                 </div>
@@ -205,39 +220,62 @@ function DiagnosticReportPage() {
       {/* 섹션 11: 추천 학습 방향 */}
       <LearningRecommendation report={report} />
 
-      {/* 하단 버튼 */}
+      {/* 하단 액션 카드 — 학습 홈페이지 컨셉 (라운드 카드 grid) */}
+      {!isParentMode && needsChoice && (
+        <div style={{ textAlign: "center", marginTop: 24, marginBottom: -12, color: "#5d4e37", fontWeight: 600 }}>
+          학습 레벨을 선택해 주세요
+        </div>
+      )}
       <div className="diag-report-actions">
-        <button className="btn-secondary" onClick={() => navigate(backUrl)}>진단 목록</button>
+        <button className="action-card" onClick={() => navigate(backUrl)}>
+          <span className="material-symbols-outlined action-icon">list_alt</span>
+          <span className="action-label">진단 목록</span>
+        </button>
+
         {!isParentMode && answerPdf.checked && answerPdf.available && (
           <button
-            className="btn-secondary"
+            className="action-card"
             onClick={handleAnswerDownload}
             disabled={answerDownloading}
             title="정답·해설 PDF 를 새 탭에서 열어 인쇄·저장할 수 있습니다."
           >
-            {answerDownloading ? "정답·해설 불러오는 중..." : "📑 정답·해설 인쇄"}
+            <span className="material-symbols-outlined action-icon">print</span>
+            <span className="action-label">
+              {answerDownloading ? "정답·해설 불러오는 중..." : "정답·해설 인쇄"}
+            </span>
           </button>
         )}
+
         {!isParentMode && needsChoice ? (
-          <div className="diag-level-choice">
-            <h3>학습 레벨을 선택해 주세요</h3>
-            <div className="diag-level-options">
-              <button className="diag-level-option" onClick={() => handleLevelSelect(currentLevelId)} disabled={levelSaving}>
-                <span className="material-symbols-outlined">school</span>
-                <div className="diag-level-option-label">학년 기준</div>
-                <div className="diag-level-option-value">{LEVEL_LABELS[currentLevelId] || currentLevelId}</div>
-                <div className="diag-level-option-note">{profile?.gradeLabel || profile?.grade_label} 기준</div>
-              </button>
-              <button className="diag-level-option diag-level-option--recommended" onClick={() => handleLevelSelect(recommendedLevelId)} disabled={levelSaving}>
-                <span className="material-symbols-outlined">neurology</span>
-                <div className="diag-level-option-label">진단 결과</div>
-                <div className="diag-level-option-value">{LEVEL_LABELS[recommendedLevelId] || report.recommendedLevel?.label}</div>
-                <div className="diag-level-option-note">진단 테스트 추천</div>
-              </button>
-            </div>
-          </div>
+          <>
+            <button
+              className="action-card"
+              onClick={() => handleLevelSelect(currentLevelId)}
+              disabled={levelSaving}
+            >
+              <span className="material-symbols-outlined action-icon">school</span>
+              <span className="action-label">학년 기준</span>
+              <span className="action-value">{LEVEL_LABELS[currentLevelId] || currentLevelId}</span>
+              <span className="action-note">{profile?.gradeLabel || profile?.grade_label} 기준</span>
+            </button>
+            <button
+              className="action-card action-card--recommended"
+              onClick={() => handleLevelSelect(recommendedLevelId)}
+              disabled={levelSaving}
+            >
+              <span className="material-symbols-outlined action-icon">neurology</span>
+              <span className="action-label">진단 결과</span>
+              <span className="action-value">{LEVEL_LABELS[recommendedLevelId] || report.recommendedLevel?.label}</span>
+              <span className="action-note">진단 테스트 추천</span>
+            </button>
+          </>
         ) : (
-          !isParentMode && <button className="btn-primary" onClick={() => navigate("/start")}>학습 시작하기</button>
+          !isParentMode && (
+            <button className="action-card action-card--primary" onClick={() => navigate("/start")}>
+              <span className="material-symbols-outlined action-icon">play_arrow</span>
+              <span className="action-label">학습 시작하기</span>
+            </button>
+          )
         )}
       </div>
     </div>

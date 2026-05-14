@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ErrorPathChart from "./ErrorPathChart";
+import RichText from "../../utils/RichText";
 
 function CompetencyDetailSection({ details, statistics }) {
   const [openIdx, setOpenIdx] = useState(null);
@@ -54,8 +55,8 @@ function CompetencyDetailSection({ details, statistics }) {
               </div>
               {openIdx === i && (
                 <div className="competency-detail-body">
-                  <p className="cd-description">{d.description}</p>
-                  <p className="cd-narrative">{d.narrative}</p>
+                  <p className="cd-description"><RichText>{d.description || ""}</RichText></p>
+                  <p className="cd-narrative"><RichText>{d.narrative || ""}</RichText></p>
                   <div className="cd-meta">
                     <span>측정 횟수: {d.touchCount}회</span>
                     {measured && <span>관련 문항 정답률: {d.relatedAccuracy.toFixed(1)}%</span>}
