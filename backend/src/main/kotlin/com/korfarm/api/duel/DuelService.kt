@@ -688,6 +688,30 @@ class DuelService(
         )
     }
 
+    /** 누적 전적 — 모든 시즌·모든 server 의 stat row 합산 */
+    @Transactional(readOnly = true)
+    fun getCumulativeStats(userId: String): DuelStatsView {
+        val rows = duelStatRepository.findByUserId(userId)
+        if (rows.isEmpty()) return DuelStatsView(0, 0, 0.0, 0, 0, 0)
+        val wins = rows.sumOf { it.wins }
+        val losses = rows.sumOf { it.losses }
+        val forfeit = rows.sumOf { it.forfeitLosses }
+        val totalMatches = wins + losses
+        val winRate = if (totalMatches > 0) wins.toDouble() / totalMatches else 0.0
+        // currentStreak — 모든 row 합산 의미 약함. bestStreak 만 누적 의미.
+        // currentStreak 은 가장 최근에 updatedAt 인 row 값을 사용 (최근 활동 시즌·서버 streak).
+        val current = rows.maxByOrNull { it.updatedAt }?.currentStreak ?: 0
+        val best = rows.maxOf { it.bestStreak }
+        return DuelStatsView(
+            wins = wins,
+            losses = losses,
+            winRate = winRate,
+            currentStreak = current,
+            bestStreak = best,
+            forfeitLosses = forfeit,
+        )
+    }
+
     @Transactional(readOnly = true)
     fun leaderboards(serverId: String): DuelLeaderboards {
         val season = seasonService.currentSeason()

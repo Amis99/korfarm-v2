@@ -44,6 +44,8 @@ interface DuelStatRepository : JpaRepository<DuelStatEntity, String> {
     fun findTop50BySeasonIdAndServerIdOrderByWinRateDesc(seasonId: String, serverId: String): List<DuelStatEntity>
     fun findTop50BySeasonIdAndServerIdOrderByBestStreakDesc(seasonId: String, serverId: String): List<DuelStatEntity>
     fun findBySeasonIdAndServerIdIn(seasonId: String, serverIds: List<String>): List<DuelStatEntity>
+    /** 한 user 의 모든 season·server 의 stat row — 누적 합산용 */
+    fun findByUserId(userId: String): List<DuelStatEntity>
 }
 
 interface DuelEscrowRepository : JpaRepository<DuelEscrowEntity, String> {

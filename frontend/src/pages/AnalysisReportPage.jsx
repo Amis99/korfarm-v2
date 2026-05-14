@@ -143,7 +143,7 @@ function AnalysisReportPage() {
         <button className="hamburger" aria-label="홈으로" onClick={() => navigate(-1)}>
           <span></span>
         </button>
-        <a className="brand" href="/start" aria-label="국어농장 홈" onClick={(e) => { e.preventDefault(); navigate("/start"); }}>
+        <a className="brand" href="/" aria-label="국어농장 랜딩으로" onClick={(e) => { e.preventDefault(); navigate("/"); }}>
           <img
             src={import.meta.env.BASE_URL + "korfarm-logo.png"}
             alt="국어농장"

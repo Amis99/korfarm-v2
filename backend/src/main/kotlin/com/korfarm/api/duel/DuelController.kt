@@ -194,6 +194,15 @@ class DuelController(
         return ApiResponse(success = true, data = data)
     }
 
+    /** 누적 전적 — 모든 시즌·모든 server 합산 (홈 화면 "내 전적" 용) */
+    @GetMapping("/stats/cumulative")
+    fun cumulativeStats(): ApiResponse<DuelStatsView> {
+        val userId = requireUserId()
+        requireDuelEnabled(userId)
+        val data = duelService.getCumulativeStats(userId)
+        return ApiResponse(success = true, data = data)
+    }
+
     // 리더보드
     @GetMapping("/leaderboards")
     fun leaderboards(@RequestParam(defaultValue = "frege") serverId: String): ApiResponse<com.korfarm.api.season.DuelLeaderboards> {

@@ -50,7 +50,8 @@ function DuelMainPage() {
         });
     });
 
-    apiGet("/v1/duel/stats?serverId=frege")
+    // 누적 전적 — 모든 시즌·모든 server 합산
+    apiGet("/v1/duel/stats/cumulative")
       .then((stats) => setMyStats(stats))
       .catch((e) => console.error(e));
   }, [isLoggedIn, navigate]);

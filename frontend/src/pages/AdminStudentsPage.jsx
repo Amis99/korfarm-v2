@@ -239,6 +239,7 @@ const mapStudents = (items) =>
     subscriptionStatus: s.subscriptionStatus || s.subscription_status || null,
     subscriptionEndAt: s.subscriptionEndAt || s.subscription_end_at || null,
     status: s.status || "active",
+    createdAt: s.createdAt || s.created_at || null,
   }));
 
 const subscriptionLabel = (status) => {
@@ -629,6 +630,7 @@ function AdminStudentsPage() {
                   <th style={{ width: 36 }}>레벨</th>
                   <th>기관</th>
                   <th>학교</th>
+                  <th>가입일</th>
                   <th>구독</th>
                   <th>조치</th>
                 </tr>
@@ -648,6 +650,9 @@ function AdminStudentsPage() {
                     <td style={{ whiteSpace: "nowrap" }} title={s.level}>{LEVEL_SHORT[s.level] || s.level}</td>
                     <td>{s.org}</td>
                     <td>{s.school || "-"}</td>
+                    <td style={{ whiteSpace: "nowrap", color: "#666", fontSize: "0.88em" }}>
+                      {s.createdAt ? new Date(s.createdAt).toLocaleDateString("ko-KR", { year: "2-digit", month: "2-digit", day: "2-digit" }) : "-"}
+                    </td>
                     <td>
                       <span
                         className="status-pill"

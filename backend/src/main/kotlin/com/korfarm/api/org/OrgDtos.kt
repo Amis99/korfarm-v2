@@ -54,5 +54,6 @@ data class AdminStudentView(
     val classNames: List<String>,
     val subscriptionStatus: String?,
     val subscriptionEndAt: String?,
-    val status: String
+    val status: String,
+    val createdAt: String? = null,  // 가입일 (ISO 문자열)
 )

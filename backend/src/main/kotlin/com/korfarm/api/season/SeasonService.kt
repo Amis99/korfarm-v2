@@ -8,6 +8,7 @@ import com.korfarm.api.economy.EconomyLedgerRepository
 import com.korfarm.api.economy.SeasonScoreCalculator
 import com.korfarm.api.economy.UserCropRepository
 import com.korfarm.api.economy.UserSeedRepository
+import com.korfarm.api.org.OrgMembershipRepository
 import com.korfarm.api.user.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -23,6 +24,7 @@ class SeasonService(
     private val userCropRepository: UserCropRepository,
     private val userSeedRepository: UserSeedRepository,
     private val userRepository: UserRepository,
+    private val orgMembershipRepository: OrgMembershipRepository,
     private val objectMapper: ObjectMapper
 ) {
     fun currentSeason(): Season {
@@ -71,11 +73,20 @@ class SeasonService(
         val userIds = (cropsByUser.keys + seedsByUser.keys).toSet()
         if (userIds.isEmpty()) return emptyList()
 
-        val userMap = userRepository.findAllById(userIds).associateBy { it.id }
+        // 시즌 랭킹은 STUDENT 만 — HQ_ADMIN/ORG_ADMIN/PARENT 는 제외.
+        // 관리자가 테스트로 학습한 점수가 1·2위 차지하는 문제 방지.
+        val studentUserIds = orgMembershipRepository.findByStatus("active")
+            .filter { it.role == "STUDENT" }
+            .map { it.userId }
+            .toSet()
+        val eligibleIds = userIds.intersect(studentUserIds)
+        if (eligibleIds.isEmpty()) return emptyList()
 
-        // 각 사용자 시즌 점수 계산 + 0점 초과만 노출
+        val userMap = userRepository.findAllById(eligibleIds).associateBy { it.id }
+
+        // 각 사용자 시즌 점수 계산 + 0점 초과만 노출 (STUDENT 만)
         data class RankRow(val userId: String, val score: Int, val name: String, val img: String?)
-        val ranked = userIds.map { userId ->
+        val ranked = eligibleIds.map { userId ->
             val cropsMap = cropsByUser[userId]?.associate { it.cropType to it.count } ?: emptyMap()
             val totalSeeds = seedsByUser[userId]?.sumOf { it.count } ?: 0
             val score = SeasonScoreCalculator.calculate(cropsMap, totalSeeds)

@@ -783,7 +783,7 @@ function StudentHomePage() {
           >
             <span></span>
           </button>
-          <Link className="brand" to="/start" aria-label="국어농장 홈">
+          <Link className="brand" to="/" aria-label="국어농장 랜딩으로">
             <img
               src={import.meta.env.BASE_URL + "korfarm-logo.png"}
               alt="국어농장"

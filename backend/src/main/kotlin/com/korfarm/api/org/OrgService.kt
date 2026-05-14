@@ -331,9 +331,10 @@ class OrgService(
             .filter { it.status == "active" }
             .groupBy { it.userId }
         // STUDENT 역할인 사용자만 표시 (부모/관리자 제외, soft deleted 제외)
+        // 가입일 최신 순 (기본 정렬) — frontend 가 추가 정렬 옵션 지원 가능.
         var students = userRepository.findAll()
             .filter { it.id in studentUserIds && it.deletedAt == null }
-            .sortedBy { it.createdAt }
+            .sortedByDescending { it.createdAt }
         // 기관 필터: ORG_ADMIN인 경우 해당 기관 소속 학생만
         if (filterOrgId != null) {
             val orgStudentIds = studentMemberships
@@ -369,7 +370,8 @@ class OrgService(
                 classNames = classNames,
                 subscriptionStatus = autoSubscriptionStatus,
                 subscriptionEndAt = null,
-                status = user.status
+                status = user.status,
+                createdAt = user.createdAt.toString(),
             )
         }
     }
