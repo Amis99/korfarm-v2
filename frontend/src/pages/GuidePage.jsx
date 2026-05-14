@@ -52,6 +52,7 @@ const MODES = [
       "OX·빈칸·확인 문제로 변환해 즉시 풀이",
       "학원·학교 교재 복습에 활용",
     ],
+    img: "card-content-mastery.png",
   },
   {
     icon: "menu_book",
@@ -80,7 +81,7 @@ function GuidePage() {
             홈으로
           </Link>
           <h1>학습 모드 소개</h1>
-          <p>국어농장의 6가지 학습 모드를 자세히 살펴보세요.</p>
+          <p>국어농장의 7가지 학습 모드를 자세히 살펴보세요.</p>
         </div>
       </div>
 
@@ -106,6 +107,17 @@ function GuidePage() {
                 </div>
               ))}
             </div>
+            {mode.img && (
+              <div style={{ marginTop: 28, borderRadius: 18, overflow: "hidden", maxWidth: 720, marginLeft: "auto", marginRight: "auto", boxShadow: "0 6px 20px rgba(0,0,0,0.08)" }}>
+                <img
+                  src={import.meta.env.BASE_URL + "images/landing/" + mode.img}
+                  alt={mode.title}
+                  style={{ width: "100%", height: "auto", display: "block" }}
+                  loading="lazy"
+                  onError={(e) => { e.target.parentElement.style.display = "none"; }}
+                />
+              </div>
+            )}
           </div>
         </section>
       ))}

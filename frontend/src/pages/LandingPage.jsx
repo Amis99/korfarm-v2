@@ -259,16 +259,17 @@ function LandingPage() {
           </div>
           <div className="landing-card-grid">
             {[
-              { icon: "psychology_alt", title: "AI 학생 튜터", desc: "부엉이샘·아미스샘·누룽지샘 세 페르소나 중 선택. 학습 진도·약점을 함께 챙겨 줍니다." },
-              { icon: "edit_note", title: "AI 글쓰기 첨삭", desc: "'지식과 지혜' 게시판의 글을 AI가 직접 첨삭해 표현력을 키워 줍니다." },
-              { icon: "document_scanner", title: "AI 내용 숙지 변환", desc: "학습 프린트(PDF·사진)를 올리면 AI가 본문을 읽어 체크리스트를 만들고, OX·빈칸 등 내용 숙지 학습으로 변환해 줍니다." },
-              { icon: "analytics", title: "AI 통합 분석표", desc: "10대 역량·영역·주제별 통계와 AI 총평·맞춤 추천 학습을 한 화면에 제공합니다." },
-              { icon: "recommend", title: "AI 추천 학습", desc: "10대 역량·영역·주제 3종 알고리즘으로 다음에 풀 콘텐츠를 자동 추천합니다." },
-              { icon: "support_agent", title: "AI 운영자 비서", desc: "학생·반·콘텐츠·테스트 관리까지 관리자 업무 30여 종을 AI로 처리합니다." },
-              { icon: "auto_fix_high", title: "AI 시험 출제", desc: "지문·문항·정답·해설까지 자동 생성. 출제 부담을 크게 줄여 줍니다." },
-              { icon: "chat", title: "AI 채팅 도우미", desc: "AI 비서·학생 튜터·커뮤니티 포도와 자유롭게 대화. 이미지·문서를 함께 올려도 읽어 답합니다. 채팅은 무과금." },
+              { icon: "psychology_alt", title: "AI 학생 튜터", desc: "부엉이샘·아미스샘·누룽지샘 세 페르소나 중 선택. 학습 진도·약점을 함께 챙겨 줍니다.", img: "card-ai-tutor.png" },
+              { icon: "edit_note", title: "AI 글쓰기 첨삭", desc: "'지식과 지혜' 게시판의 글을 AI가 직접 첨삭해 표현력을 키워 줍니다.", img: "card-ai-writing.png" },
+              { icon: "document_scanner", title: "AI 내용 숙지 변환", desc: "학습 프린트(PDF·사진)를 올리면 AI가 본문을 읽어 체크리스트를 만들고, OX·빈칸 등 내용 숙지 학습으로 변환해 줍니다.", img: "card-ai-print-extract.png" },
+              { icon: "analytics", title: "AI 통합 분석표", desc: "10대 역량·영역·주제별 통계와 AI 총평·맞춤 추천 학습을 한 화면에 제공합니다.", img: "card-ai-report.png" },
+              { icon: "recommend", title: "AI 추천 학습", desc: "10대 역량·영역·주제 3종 알고리즘으로 다음에 풀 콘텐츠를 자동 추천합니다.", img: "card-ai-recommend.png" },
+              { icon: "support_agent", title: "AI 운영자 비서", desc: "학생·반·콘텐츠·테스트 관리까지 관리자 업무 30여 종을 AI로 처리합니다.", img: "card-ai-assistant.png" },
+              { icon: "auto_fix_high", title: "AI 시험 출제", desc: "지문·문항·정답·해설까지 자동 생성. 출제 부담을 크게 줄여 줍니다.", img: "card-ai-test-gen.png" },
+              { icon: "chat", title: "AI 채팅 도우미", desc: "AI 비서·학생 튜터·커뮤니티 포도와 자유롭게 대화. 이미지·문서를 함께 올려도 읽어 답합니다. 채팅은 무과금.", img: "card-ai-chat.png" },
             ].map((card) => (
               <div className="landing-card" key={card.title}>
+                <CardImg src={card.img} alt={card.title} />
                 <div className="landing-card-icon">
                   <span className="material-symbols-outlined">{card.icon}</span>
                 </div>
@@ -318,12 +319,13 @@ function LandingPage() {
           </div>
           <div className="landing-card-grid">
             {[
-              { icon: "monitoring", title: "자녀 학습 모니터링", desc: "오늘의 학습 진도, 통합 분석표, 시즌 랭킹 추이를 실시간으로 확인합니다." },
-              { icon: "credit_card", title: "구독 결제 대행", desc: "자녀를 대신해 Pro 구독(1·3·6·12개월)을 결제합니다. 자녀가 기관 소속이면 자동 면제됩니다." },
-              { icon: "savings", title: "자몽 충전", desc: "AI 기능 사용량 결제(자몽)도 학부모가 대신 충전할 수 있습니다." },
-              { icon: "family_restroom", title: "여러 자녀 한 계정", desc: "한 학부모 계정으로 여러 자녀를 연결해 한꺼번에 관리합니다." },
+              { icon: "monitoring", title: "자녀 학습 모니터링", desc: "오늘의 학습 진도, 통합 분석표, 시즌 랭킹 추이를 실시간으로 확인합니다.", img: "card-parent-monitor.png" },
+              { icon: "credit_card", title: "구독 결제 대행", desc: "자녀를 대신해 Pro 구독(1·3·6·12개월)을 결제합니다. 자녀가 기관 소속이면 자동 면제됩니다.", img: "card-parent-pay.png" },
+              { icon: "savings", title: "자몽 충전", desc: "AI 기능 사용량 결제(자몽)도 학부모가 대신 충전할 수 있습니다.", img: "card-parent-grapefruit.png" },
+              { icon: "family_restroom", title: "여러 자녀 한 계정", desc: "한 학부모 계정으로 여러 자녀를 연결해 한꺼번에 관리합니다.", img: "card-parent-multi.png" },
             ].map((card) => (
               <div className="landing-card" key={card.title}>
+                <CardImg src={card.img} alt={card.title} />
                 <div className="landing-card-icon">
                   <span className="material-symbols-outlined">{card.icon}</span>
                 </div>
