@@ -7,6 +7,7 @@ import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.diagnostic.scoring.*
 import com.korfarm.api.security.SecurityUtils
 import com.korfarm.api.user.UserRepository
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -21,8 +22,11 @@ class DiagnosticService(
     private val sessionRepo: DiagSessionRepository,
     private val responseRepo: DiagResponseRepository,
     private val userRepo: UserRepository,
-    private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper,
+    private val summaryService: DiagnosticSummaryService,
+    private val recommendationService: com.korfarm.api.learning.RecommendationService,
 ) {
+    private val logger = LoggerFactory.getLogger(DiagnosticService::class.java)
 
     // ── tier 목록 ──
 
@@ -693,11 +697,15 @@ class DiagnosticService(
             }
         }
 
-        // 측정된 역량의 정답률 맵
+        // 측정된 역량의 점수 맵 — 매개변수 scores 는 이미 ScoringEngine.ratioScores 결과 (0~100).
+        // competencyAccuracy 는 "측정 여부" 판정에만 사용 (선택 choice 의 vector 에 그 역량이
+        // 박힌 응답이 있었는가). 점수 자체는 정상 ratio (scores/maxScores × 100) 사용.
+        // 옛 코드는 cor/tot 정답률을 점수로 썼는데, 이는 정답 choice 의 correctVector 와
+        // 오답 choice 의 wrongVector 가 측정하는 역량이 비대칭일 때 100% 왜곡됨.
         val measuredScoreMap: Map<String, Double> = COMPETENCIES
             .mapNotNull { name ->
-                val (tot, cor) = competencyAccuracy[name] ?: return@mapNotNull null
-                if (tot > 0) name to (cor.toDouble() / tot * 100.0) else null
+                val (tot, _) = competencyAccuracy[name] ?: return@mapNotNull null
+                if (tot > 0) name to (scores[name] ?: 0.0) else null
             }
             .toMap()
 
@@ -708,9 +716,11 @@ class DiagnosticService(
         // 하위 3개 취약 역량 (정답률 기준)
         val bottleneck = weak.map { comp ->
             val paths = errorContrib[comp] ?: emptyMap()
-            val topPaths = paths.entries.sortedByDescending { it.value }.take(3).map {
-                ErrorPathEntry(it.key, Math.round(it.value * 100.0) / 100.0)
-            }
+            val topPaths = paths.entries
+                .filter { it.key.isNotBlank() && it.key != "unknown" && it.key != "정답" }
+                .sortedByDescending { it.value }
+                .take(3)
+                .map { ErrorPathEntry(it.key, Math.round(it.value * 100.0) / 100.0) }
             BottleneckItem(
                 competency = comp,
                 score = Math.round((measuredScoreMap[comp] ?: 0.0) * 10.0) / 10.0,
@@ -721,9 +731,11 @@ class DiagnosticService(
         // ── 전체 측정 역량 오류경로 분석 (정답률 기준) ──
         val fullErrorAnalysis = sortedMeasured.map { (comp, s) ->
             val paths = errorContrib[comp] ?: emptyMap()
-            val topPaths = paths.entries.sortedByDescending { it.value }.take(3).map {
-                ErrorPathEntry(it.key, Math.round(it.value * 100.0) / 100.0)
-            }
+            val topPaths = paths.entries
+                .filter { it.key.isNotBlank() && it.key != "unknown" && it.key != "정답" }
+                .sortedByDescending { it.value }
+                .take(3)
+                .map { ErrorPathEntry(it.key, Math.round(it.value * 100.0) / 100.0) }
             BottleneckItem(comp, Math.round(s * 10.0) / 10.0, topPaths)
         }
 
@@ -739,13 +751,16 @@ class DiagnosticService(
 
         val competencyDetails = COMPETENCIES.map { name ->
             val tc = touchCounts[name] ?: 0
-            val (tot, cor) = competencyAccuracy.getOrDefault(name, 0 to 0)
+            val (tot, _) = competencyAccuracy.getOrDefault(name, 0 to 0)
             val measured = tot > 0
-            val accScore = if (measured) Math.round(cor.toDouble() / tot * 1000.0) / 10.0 else null
+            // 점수는 정상 ratioScores (scores/maxScores × 100) — cor/tot 단순 정답률 X
+            val accScore = if (measured) Math.round((scores[name] ?: 0.0) * 10.0) / 10.0 else null
             val paths = errorContrib[name] ?: emptyMap()
-            val topPaths = paths.entries.sortedByDescending { it.value }.take(3).map {
-                ErrorPathEntry(it.key, Math.round(it.value * 100.0) / 100.0)
-            }
+            val topPaths = paths.entries
+                .filter { it.key.isNotBlank() && it.key != "unknown" && it.key != "정답" }
+                .sortedByDescending { it.value }
+                .take(3)
+                .map { ErrorPathEntry(it.key, Math.round(it.value * 100.0) / 100.0) }
             val grade = when {
                 !measured -> "미측정"
                 accScore!! >= 70 -> "상"
@@ -958,6 +973,71 @@ class DiagnosticService(
             }
         } else competencyDetails
 
+        // ── AI 총평 (Claude Sonnet) + 추천 콘텐츠 ──
+        // 둘 다 실패해도 리포트 자체는 정상 반환
+        val fallbackAdvice = when {
+            (session.rawTci?.toDouble() ?: 0.0) >= 75 -> "높은 역량을 보유하고 있습니다. 고난도 문항과 심화 학습을 통해 최상위권을 목표로 하세요."
+            (session.rawTci?.toDouble() ?: 0.0) >= 60 -> "전반적으로 양호한 수준입니다. 취약 역량을 집중 보강하면 큰 폭의 성장이 가능합니다."
+            (session.rawTci?.toDouble() ?: 0.0) >= 45 -> "기초 역량은 갖추고 있으나 전반적인 보강이 필요합니다. 기본 개념부터 차근차근 학습하세요."
+            else -> "기초 역량 강화가 우선입니다. 쉬운 지문부터 시작하여 기본기를 다지는 것을 추천합니다."
+        }
+        val gradeLabel = try { userRepo.findById(session.userId).orElse(null)?.gradeLabel } catch (_: Exception) { null }
+        val topErrorPathsFlat: List<Pair<String, Double>> = fullErrorAnalysis
+            .flatMap { item -> item.topErrorPaths.map { ep -> ep.path to ep.contribution } }
+            .sortedByDescending { it.second }
+            .take(5)
+        // AI 총평 — DB 캐시 (session.aiSummary) 먼저 확인. 없으면 1회 생성·저장.
+        val aiSummary: String? = if (!session.aiSummary.isNullOrBlank()) {
+            session.aiSummary
+        } else {
+            val generated = try {
+                summaryService.generateSummary(
+                    DiagnosticSummaryService.SummaryInput(
+                        tierLabel = TIER_LABELS[session.tier] ?: session.tier,
+                        accuracyRate = accuracyRate,
+                        correctCount = session.correctCount,
+                        totalQuestions = 48,
+                        recommendedLevel = recommendation.label,
+                        gradeLabel = gradeLabel,
+                        competencyScores = measuredScoreMap,
+                        strongCompetencies = strong,
+                        weakCompetencies = weak,
+                        topErrorPaths = topErrorPathsFlat,
+                        fallback = fallbackAdvice,
+                    )
+                )
+            } catch (_: Exception) { fallbackAdvice }
+            // 비-fallback 결과만 캐시 저장 — fallback 은 다음 호출 시 재시도 가능
+            if (generated.isNotBlank() && generated != fallbackAdvice) {
+                try {
+                    session.aiSummary = generated
+                    sessionRepo.save(session)
+                } catch (e: Exception) {
+                    logger.warn("AI 총평 캐시 저장 실패 sessionId={} err={}", session.id, e.message)
+                }
+            }
+            generated
+        }
+
+        val recommendedContents: List<RecommendedContentBrief> = try {
+            recommendationService.recommendForCompetency(
+                userId = session.userId,
+                competency = weak.firstOrNull(),
+                levelId = recommendation.testKey + (recommendation.level ?: 1),
+                limit = 6,
+            ).map { rc ->
+                RecommendedContentBrief(
+                    contentId = rc.contentId,
+                    title = rc.title,
+                    contentType = rc.contentType,
+                    levelId = rc.levelId,
+                    area = rc.area,
+                    subArea = rc.subArea,
+                    reason = rc.reason,
+                )
+            }
+        } catch (_: Exception) { emptyList() }
+
         return DiagnosticReport(
             sessionId = session.id,
             tier = session.tier,
@@ -993,6 +1073,8 @@ class DiagnosticService(
             speedMinPerQuestion = speedMinPerQ,
             speedPercentile = speedPercentile,
             totalQuestions = 48,
+            aiSummary = aiSummary,
+            recommendedContents = recommendedContents,
         )
     }
 
