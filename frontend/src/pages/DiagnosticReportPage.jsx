@@ -112,56 +112,95 @@ function DiagnosticReportPage() {
         )}
       </div>
 
-      {/* 풀이 속도 카드 (온라인 응시만 표기) */}
+      {/* 풀이 속도 카드 (온라인 응시만, 본인 + 분포 통합) */}
       {report.mode !== "offline" && report.speedMinPerQuestion != null && (
         <div className="diag-report-section diag-time-section">
           <h2>풀이 속도</h2>
-          <div className="diag-time-grid">
-            <div className="diag-time-card highlight">
-              <div className="diag-time-label">풀이 속도 (보정)</div>
-              <div className="diag-time-value">
-                {report.speedMinPerQuestion.toFixed(2)} <span className="diag-time-unit">분/문항</span>
-              </div>
-              <div className="diag-time-note">
-                보정 시간({Math.floor((report.effectiveSpeedSec || 0) / 60)}분 {(report.effectiveSpeedSec || 0) % 60}초)
-                {" ÷ 푼 문항 "}{report.answeredCount}개<br />
-                <span style={{ opacity: 0.7 }}>* 보정 시간 = 마지막 마킹까지 + (오답 수 × 3분)</span>
-              </div>
-            </div>
-            {report.speedPercentile != null ? (
-              <div className="diag-time-card">
-                <div className="diag-time-label">속도 백분위</div>
+          <div className="speed-card-unified">
+            <div className="speed-card-head">
+              <div className="speed-card-mine">
+                <div className="diag-time-label">내 풀이 속도 (보정)</div>
                 <div className="diag-time-value">
-                  상위 {report.speedPercentile.toFixed(1)}<span className="diag-time-unit">%</span>
+                  {report.speedMinPerQuestion.toFixed(2)}
+                  <span className="diag-time-unit">분/문항</span>
                 </div>
-                {/* 막대 그래프 — 0% 좋음(빠름) 100% 나쁨(느림). 본인 위치 marker */}
+                <div className="diag-time-note">
+                  보정 시간({Math.floor((report.effectiveSpeedSec || 0) / 60)}분 {(report.effectiveSpeedSec || 0) % 60}초)
+                  {" ÷ 푼 문항 "}{report.answeredCount}개<br />
+                  <span style={{ opacity: 0.7 }}>* 보정 시간 = 마지막 마킹까지 + (오답 수 × 3분)</span>
+                </div>
+              </div>
+              {report.speedPercentile != null && (
+                <div className="speed-card-percentile">
+                  <div className="diag-time-label">속도 백분위</div>
+                  <div className="diag-time-value">
+                    상위 {report.speedPercentile.toFixed(1)}
+                    <span className="diag-time-unit">%</span>
+                  </div>
+                  <div className="diag-time-note">
+                    같은 단계 응시자 중 (1등 0% · 꼴등 100%)
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {report.speedPercentile != null && report.speedDistribution ? (
+              <>
+                {/* 막대 그래프 — 좌 빠름(녹) 우 느림(빨), 본인 위치 marker */}
                 <div className="speed-percentile-bar-wrap">
                   <div className="speed-percentile-bar">
                     <div
                       className="speed-percentile-marker"
                       style={{ left: `${Math.min(100, Math.max(0, report.speedPercentile))}%` }}
-                      title={`상위 ${report.speedPercentile.toFixed(1)}%`}
+                      title={`상위 ${report.speedPercentile.toFixed(1)}% · ${report.speedMinPerQuestion.toFixed(2)} 분/문항`}
                     />
                   </div>
                   <div className="speed-percentile-axis">
-                    <span>0% (빠름)</span>
-                    <span>50%</span>
-                    <span>100% (느림)</span>
+                    <span>0% · {report.speedDistribution.fastestMinPerQ.toFixed(2)}분/문항</span>
+                    <span>50% · {report.speedDistribution.medianMinPerQ.toFixed(2)}분/문항</span>
+                    <span>100% · {report.speedDistribution.slowestMinPerQ.toFixed(2)}분/문항</span>
                   </div>
                 </div>
-                <div className="diag-time-note">
-                  같은 단계 응시자 중 (1등 0% · 꼴등 100%)
+
+                {/* 분포 통계 표 */}
+                <table className="speed-distribution-table">
+                  <thead>
+                    <tr>
+                      <th>위치</th>
+                      <th>설명</th>
+                      <th>분/문항</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>0%</td>
+                      <td>가장 빠른 응시자</td>
+                      <td>{report.speedDistribution.fastestMinPerQ.toFixed(2)}</td>
+                    </tr>
+                    <tr>
+                      <td>50%</td>
+                      <td>중앙값 (응시자 절반의 기준)</td>
+                      <td>{report.speedDistribution.medianMinPerQ.toFixed(2)}</td>
+                    </tr>
+                    <tr>
+                      <td>100%</td>
+                      <td>가장 느린 응시자</td>
+                      <td>{report.speedDistribution.slowestMinPerQ.toFixed(2)}</td>
+                    </tr>
+                    <tr className="speed-row-mine">
+                      <td>상위 {report.speedPercentile.toFixed(1)}%</td>
+                      <td>내 풀이 속도</td>
+                      <td>{report.speedMinPerQuestion.toFixed(2)}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div className="diag-time-note" style={{ marginTop: 8 }}>
+                  같은 단계 응시자 {report.speedDistribution.sampleSize}명 기준
                 </div>
-              </div>
+              </>
             ) : (
-              <div className="diag-time-card">
-                <div className="diag-time-label">속도 백분위</div>
-                <div className="diag-time-value" style={{ fontSize: 16, opacity: 0.6 }}>
-                  데이터 부족
-                </div>
-                <div className="diag-time-note">
-                  비교를 위해서는 같은 단계 응시자가 2명 이상 필요합니다.
-                </div>
+              <div className="diag-time-note" style={{ marginTop: 8 }}>
+                비교 분포는 같은 단계 응시자가 2명 이상 누적되면 표시됩니다.
               </div>
             )}
           </div>

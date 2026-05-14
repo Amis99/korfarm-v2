@@ -861,6 +861,7 @@ class DiagnosticService(
         var tierStatistics: TierStatistics?
         var percentileInfo: PercentileInfo?
         var speedPercentile: Double? = null
+        var speedDistribution: SpeedDistribution? = null
         try {
             val allSessions = sessionRepo.findByTierAndStatus(session.tier, "completed")
             if (allSessions.size >= 2) {
@@ -929,11 +930,18 @@ class DiagnosticService(
                         if ((s.effectiveSpeedSec ?: 0) > 0 && s.answeredCount > 0)
                             s.effectiveSpeedSec!!.toDouble() / 60.0 / s.answeredCount
                         else null
-                    }
+                    }.sorted()
                     if (speedValues.size >= 2) {
                         // 속도가 더 빠른(작은) 사람의 수
                         val fasterCount = speedValues.count { it < speedMinPerQ }
                         speedPercentile = Math.round(fasterCount.toDouble() / speedValues.size * 1000.0) / 10.0
+                        // 통계: 0% (가장 빠름), 50% (중앙값), 100% (가장 느림)
+                        speedDistribution = SpeedDistribution(
+                            fastestMinPerQ = Math.round(speedValues.first() * 100.0) / 100.0,
+                            medianMinPerQ = Math.round(speedValues[speedValues.size / 2] * 100.0) / 100.0,
+                            slowestMinPerQ = Math.round(speedValues.last() * 100.0) / 100.0,
+                            sampleSize = speedValues.size,
+                        )
                     }
                 }
             } else {
@@ -1072,6 +1080,7 @@ class DiagnosticService(
             effectiveSpeedSec = session.effectiveSpeedSec,
             speedMinPerQuestion = speedMinPerQ,
             speedPercentile = speedPercentile,
+            speedDistribution = speedDistribution,
             totalQuestions = 48,
             aiSummary = aiSummary,
             recommendedContents = recommendedContents,

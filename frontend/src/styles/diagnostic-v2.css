@@ -523,6 +523,60 @@
   margin: 0 auto;
 }
 
+/* 풀이 속도 — 통합 카드 */
+.speed-card-unified {
+  background: #fff;
+  border: 1px solid #e0d6cc;
+  border-radius: 12px;
+  padding: 20px;
+}
+.speed-card-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed #e0d6cc;
+  margin-bottom: 16px;
+}
+@media (max-width: 600px) {
+  .speed-card-head { grid-template-columns: 1fr; }
+}
+.speed-card-mine,
+.speed-card-percentile {
+  display: flex; flex-direction: column; gap: 4px;
+}
+
+/* 분포 표 */
+.speed-distribution-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+  font-size: 0.9rem;
+}
+.speed-distribution-table th,
+.speed-distribution-table td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid #f0e9e0;
+}
+.speed-distribution-table th {
+  font-weight: 600;
+  color: #5d4e37;
+  background: #faf8f5;
+}
+.speed-distribution-table td:nth-child(3) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+.speed-row-mine {
+  background: #fff8e1;
+}
+.speed-row-mine td {
+  color: #5d4e37;
+  font-weight: 600;
+}
+
 /* 속도 백분위 막대 그래프 */
 .speed-percentile-bar-wrap {
   margin: 14px 0 6px;
