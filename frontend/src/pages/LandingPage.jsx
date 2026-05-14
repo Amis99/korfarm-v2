@@ -20,9 +20,86 @@ function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { isLoggedIn, user, logout } = useAuth();
   const isAdmin = user?.roles?.some((r) => r === "HQ_ADMIN" || r === "ORG_ADMIN");
+  const [showPaymentNotice, setShowPaymentNotice] = useState(() => {
+    try { return !sessionStorage.getItem("paymentNoticeDismissed_v1"); } catch { return true; }
+  });
+  const dismissPaymentNotice = useCallback(() => {
+    setShowPaymentNotice(false);
+    try { sessionStorage.setItem("paymentNoticeDismissed_v1", "1"); } catch {}
+  }, []);
 
   return (
     <div className="landing-page">
+      {showPaymentNotice && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="payment-notice-title"
+          onClick={dismissPaymentNotice}
+          style={{
+            position: "fixed", inset: 0, zIndex: 9999,
+            background: "rgba(20, 22, 30, 0.55)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            padding: "20px", backdropFilter: "blur(4px)",
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              maxWidth: "480px", width: "100%",
+              background: "#fff", borderRadius: "18px",
+              padding: "32px 28px 24px",
+              boxShadow: "0 20px 60px rgba(0,0,0,0.18)",
+              fontFamily: "inherit", lineHeight: 1.65,
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
+              <span
+                className="material-symbols-outlined"
+                style={{ fontSize: 28, color: "#3b8c3a" }}
+                aria-hidden="true"
+              >
+                campaign
+              </span>
+              <h3
+                id="payment-notice-title"
+                style={{ margin: 0, fontSize: "1.15rem", fontWeight: 700, color: "#1a2b1a" }}
+              >
+                결제 안내 말씀드립니다
+              </h3>
+            </div>
+            <p style={{ margin: "0 0 10px", color: "#3a3a3a", fontSize: "0.97rem" }}>
+              안녕하세요. 국어농장을 찾아 주셔서 진심으로 감사드립니다.
+            </p>
+            <p style={{ margin: "0 0 10px", color: "#3a3a3a", fontSize: "0.97rem" }}>
+              현재 <strong>결제 모듈 승인 절차가 마무리되지 않아</strong>,
+              공지 시까지 <strong>구독 결제가 불가</strong>한 점 안내드립니다.
+            </p>
+            <p style={{ margin: "0 0 10px", color: "#3a3a3a", fontSize: "0.97rem" }}>
+              승인이 완료되는 대로 별도 공지를 드리겠습니다.
+              그 외 학습 콘텐츠는 평소처럼 자유롭게 이용하실 수 있으니
+              번거롭더라도 조금만 기다려 주시면 감사하겠습니다.
+            </p>
+            <p style={{ margin: "0 0 22px", color: "#777", fontSize: "0.88rem" }}>
+              불편을 끼쳐 드려 죄송합니다. 따뜻한 양해 부탁드립니다.
+            </p>
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <button
+                type="button"
+                onClick={dismissPaymentNotice}
+                style={{
+                  background: "#3b8c3a", color: "#fff",
+                  border: "none", borderRadius: 10,
+                  padding: "10px 22px", fontSize: "0.95rem", fontWeight: 600,
+                  cursor: "pointer",
+                }}
+              >
+                확인했습니다
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {/* ── Nav ── */}
       <nav className="landing-nav">
         <div className="landing-wrap landing-nav-inner">

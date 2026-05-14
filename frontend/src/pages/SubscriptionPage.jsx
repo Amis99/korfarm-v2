@@ -100,6 +100,10 @@ function SubscriptionPage() {
   };
 
   const handleSubscribe = async () => {
+    // 출시 직전: 결제 모듈 승인 절차가 마무리되지 않아 공지 시까지 구독 결제 차단
+    alert("현재 결제 모듈 승인 절차가 마무리되지 않아\n공지 시까지 구독 결제가 불가합니다.\n\n승인이 완료되는 대로 별도 공지 드리니\n잠시만 양해 부탁드립니다.");
+    return;
+    // eslint-disable-next-line no-unreachable
     const plan = PLANS.find((p) => p.months === selectedPlan);
     if (!plan) return;
     setCheckoutLoading(true);
