@@ -122,6 +122,21 @@ data class DiagnosticReport(
     val speedMinPerQuestion: Double? = null, // 풀이속도 (분/문항) = effectiveSpeedSec/60/answeredCount
     val speedPercentile: Double? = null,  // 같은 tier 내 풀이속도 백분위 (낮을수록 빠름, 1등 0% 꼴등 100%)
     val totalQuestions: Int = 48,         // 전체 문항 수 (진단은 항상 48)
+    // AI 총평 (Claude Sonnet 생성, 무과금) — 진단 결과 종합 분석 500자 내외
+    val aiSummary: String? = null,
+    // 약점 역량 기반 상세 추천 콘텐츠 목록 (RecommendationService)
+    val recommendedContents: List<RecommendedContentBrief> = emptyList(),
+)
+
+/** 진단 리포트에 박는 추천 콘텐츠 간략 DTO */
+data class RecommendedContentBrief(
+    val contentId: String,
+    val title: String,
+    val contentType: String,
+    val levelId: String?,
+    val area: String?,
+    val subArea: String?,
+    val reason: String,
 )
 
 data class RecommendedLevel(

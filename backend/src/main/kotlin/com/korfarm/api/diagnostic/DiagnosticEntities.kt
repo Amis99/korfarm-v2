@@ -131,7 +131,11 @@ class DiagSessionEntity(
     var timeSpentSec: Int? = null,
 
     @Column(name = "effective_speed_sec")
-    var effectiveSpeedSec: Int? = null
+    var effectiveSpeedSec: Int? = null,
+
+    /** AI 총평 (Claude Sonnet 캐시) — 첫 호출 시 생성·저장. NULL 이면 다음 호출 시 생성. */
+    @Column(name = "ai_summary", columnDefinition = "MEDIUMTEXT")
+    var aiSummary: String? = null,
 )
 
 @Entity
