@@ -74,6 +74,7 @@ const SearchResultsPage = lazy(() => import("./pages/SearchResultsPage"));
 
 // 관리자 페이지
 const AdminPage = lazy(() => import("./pages/AdminPage"));
+const AdminSettingsPage = lazy(() => import("./pages/AdminSettingsPage"));
 const OpsStation = lazy(() => import("./pages/OpsStation"));
 const AdminOrgsPage = lazy(() => import("./pages/AdminOrgsPage"));
 const AdminClassesPage = lazy(() => import("./pages/AdminClassesPage"));
@@ -294,6 +295,7 @@ function App() {
 
           {/* 관리자 전용 페이지 */}
           <Route path="/admin" element={A(<AdminPage />)} />
+          <Route path="/admin/settings" element={A(<AdminSettingsPage />)} />
           <Route path="/admin/approvals" element={A(<AdminMembershipApprovalPage />)} />
           <Route path="/admin/orgs" element={A(<AdminOrgsPage />)} />
           <Route path="/admin/classes" element={A(<AdminClassesPage />)} />

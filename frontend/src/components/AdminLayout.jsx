@@ -38,6 +38,7 @@ const NAV_ITEMS = [
   { to: "/admin/billing", icon: "receipt_long", label: "월 사용료", roles: ["ORG_ADMIN"] },
   { to: "/admin/grapefruit-pricing", icon: "savings", label: "AI 자몽 단가", roles: ["HQ_ADMIN"] },
   { to: "/admin/all-billings", icon: "payments", label: "기관 청구 관리", roles: ["HQ_ADMIN"] },
+  { to: "/admin/settings", icon: "manage_accounts", label: "내 설정" },
   { to: "/", icon: "home", label: "랜딩" },
   { to: "/start", icon: "play_arrow", label: "스타트" },
 ];
