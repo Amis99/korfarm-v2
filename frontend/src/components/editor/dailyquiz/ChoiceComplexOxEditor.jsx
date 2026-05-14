@@ -22,6 +22,22 @@ export default function ChoiceComplexOxEditor({ question, path, editor }) {
   };
   const removeParagraph = (idx) => {
     if (!window.confirm(`단락 ${idx + 1} 삭제? (해당 단락의 evidenceRanges 도 무효화됩니다)`)) return;
+    // 단락 삭제 + 모든 명제(choices[].propositions[])의 evidenceRanges 중 그 paragraphId 가
+    // 박힌 항목 동시 정리 (orphan 잔존 방지).
+    const removedPid = paragraphs[idx]?.id;
+    if (removedPid) {
+      choices.forEach((c, ci) => {
+        (c.propositions || []).forEach((p, pi) => {
+          const orphanIdxs = (p.evidenceRanges || [])
+            .map((r, ri) => (r.paragraphId === removedPid ? ri : -1))
+            .filter((ri) => ri >= 0)
+            .sort((a, b) => b - a);
+          orphanIdxs.forEach((ri) =>
+            editor.removeItem(`${path}.choices[${ci}].propositions[${pi}].evidenceRanges`, ri),
+          );
+        });
+      });
+    }
     editor.removeItem(`${path}.passage.paragraphs`, idx);
   };
 

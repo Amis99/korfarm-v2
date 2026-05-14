@@ -17,27 +17,41 @@ export default function EvidenceRangePicker({
   const containerRef = useRef(null);
   const [pending, setPending] = useState(null); // {paragraphId, start, end, label}
 
-  // 등록된 ranges 를 char index 별 set 으로 변환
+  // 단락 삭제·ID 변경으로 paragraphs 에 없는 paragraphId 의 range 는 비주얼 에디터에서도
+  // 보이지 않고 카운트에서 제외. 카운트가 실제 유효 영역과 일치해야 사용자가 정확히 인지.
+  const paragraphIdSet = useMemo(() => new Set((paragraphs || []).map((p) => p.id)), [paragraphs]);
+  const validRanges = useMemo(
+    () => (ranges || []).filter((r) => paragraphIdSet.has(r.paragraphId)),
+    [ranges, paragraphIdSet],
+  );
+  const orphanCount = (ranges || []).length - validRanges.length;
+
+  // 등록된 ranges 를 char index 별 set 으로 변환 (유효 range 만)
   const highlightedByPara = useMemo(() => {
     const m = {};
-    for (const r of ranges) {
+    for (const r of validRanges) {
       if (!m[r.paragraphId]) m[r.paragraphId] = new Set();
       for (let i = r.start; i < r.end; i += 1) m[r.paragraphId].add(i);
     }
     return m;
-  }, [ranges]);
+  }, [validRanges]);
 
-  // 영역 내 모든 char index → range idx 매핑 (어느 글자를 클릭해도 그 range 삭제)
-  const charToRangeIdx = useMemo(() => {
+  // 영역 내 모든 char index → 그 위치에 걸친 모든 range idx 배열 매핑.
+  // - 같은 위치에 여러 range 가 등록(중복·일부 겹침) → 한 번 클릭으로 모두 삭제되도록 누적.
+  // - orphan range (paragraphs 에 없는 paragraphId) 는 화면에 표시 안 되므로 click 매핑 제외.
+  // 단, idx 는 원본 ranges 배열 기준 — onRemoveRange(idx) 호출 시 부모의 splice 와 일치.
+  const charToRangeIdxs = useMemo(() => {
     const m = {};
     ranges.forEach((r, idx) => {
+      if (!paragraphIdSet.has(r.paragraphId)) return;
       for (let i = r.start; i < r.end; i += 1) {
         const k = `${r.paragraphId}:${i}`;
-        if (!(k in m)) m[k] = idx;
+        if (!m[k]) m[k] = [];
+        m[k].push(idx);
       }
     });
     return m;
-  }, [ranges]);
+  }, [ranges, paragraphIdSet]);
 
   const handleMouseUp = () => {
     const sel = window.getSelection();
@@ -77,7 +91,7 @@ export default function EvidenceRangePicker({
             {Array.from(p.text || "").map((ch, i) => {
               const isHi = highlightedByPara[p.id]?.has(i);
               const charKey = `${p.id}:${i}`;
-              const rangeIdx = charToRangeIdx[charKey];
+              const rangeIdxs = charToRangeIdxs[charKey];
               if (ch === "\n") return <br key={`${p.id}-${i}-br`} />;
               return (
                 <span
@@ -94,12 +108,17 @@ export default function EvidenceRangePicker({
                     if (isHi) e.stopPropagation();
                   }}
                   onClick={(e) => {
-                    if (isHi && rangeIdx !== undefined && onRemoveRange) {
+                    if (isHi && rangeIdxs && rangeIdxs.length > 0 && onRemoveRange) {
                       e.stopPropagation();
-                      const r = ranges[rangeIdx];
-                      const label = r?.label || (p.text || "").slice(r.start, r.end);
-                      if (window.confirm(`이 영역("${label.slice(0, 30)}${label.length > 30 ? "…" : ""}")을 삭제할까요?`)) {
-                        onRemoveRange(rangeIdx);
+                      const firstR = ranges[rangeIdxs[0]];
+                      const label = firstR?.label || (p.text || "").slice(firstR.start, firstR.end);
+                      const labelStr = label.slice(0, 30) + (label.length > 30 ? "…" : "");
+                      const msg = rangeIdxs.length === 1
+                        ? `이 영역("${labelStr}")을 삭제할까요?`
+                        : `이 위치에 ${rangeIdxs.length}개 영역이 겹쳐 등록되어 있습니다.\n모두 삭제할까요?`;
+                      if (window.confirm(msg)) {
+                        // idx 큰 거부터 삭제해야 인덱스 변동이 누적되지 않음
+                        [...rangeIdxs].sort((a, b) => b - a).forEach((idx) => onRemoveRange(idx));
                       }
                     }
                   }}
@@ -127,7 +146,12 @@ export default function EvidenceRangePicker({
         )}
         <span style={{ flex: 1 }} />
         <span style={{ fontSize: 11, color: "#999" }}>
-          등록된 영역: {ranges.length}개 · 노란 형광펜 부분 클릭 시 삭제
+          등록된 영역: {validRanges.length}개
+          {orphanCount > 0 && (
+            <span style={{ color: "#c00", marginLeft: 6 }}>
+              · 옛 단락 잔존 {orphanCount}개 (학생 화면·채점 자동 제외)
+            </span>
+          )} · 노란 형광펜 부분 클릭 시 삭제
         </span>
       </div>
     </div>

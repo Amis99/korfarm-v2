@@ -18,6 +18,16 @@ export default function TextSelectEditor({ question, path, editor }) {
   };
   const removeParagraph = (idx) => {
     if (!window.confirm(`단락 ${idx + 1} 삭제? (이 단락의 정답 영역도 함께 무효화됩니다)`)) return;
+    // 단락 삭제 + 그 paragraphId 를 가진 answerRanges 도 동시 정리 (orphan 잔존 방지)
+    const removedPid = paragraphs[idx]?.id;
+    if (removedPid) {
+      // 큰 idx 부터 삭제해야 배열 인덱스 변동 누적 안 됨
+      const orphanIdxs = answerRanges
+        .map((r, i) => (r.paragraphId === removedPid ? i : -1))
+        .filter((i) => i >= 0)
+        .sort((a, b) => b - a);
+      orphanIdxs.forEach((i) => editor.removeItem(`${path}.answerRanges`, i));
+    }
     editor.removeItem(`${path}.passage.paragraphs`, idx);
   };
 

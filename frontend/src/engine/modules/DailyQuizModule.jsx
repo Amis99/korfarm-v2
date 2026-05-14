@@ -34,12 +34,18 @@ const buildHighlightMask = (length, ranges) => {
 const toRangeKey = (range) => `${range.paragraphId}:${range.start}-${range.end}`;
 
 const resolveAnswerRanges = (question, passage) => {
+  // 단락 삭제·재구성으로 passage.paragraphs 에 없는 paragraphId 의 range 가 잔존할 수 있음.
+  // 학생 응시·채점 시 그런 orphan range 는 매칭 불가능하므로 필터링해서 매칭 모드(ALL/ANY)
+  // 정답 카운트가 옛 데이터에 오염되지 않게 함.
+  const paragraphIdSet = new Set((passage?.paragraphs || []).map((p) => p.id));
   if (Array.isArray(question?.answerRanges) && question.answerRanges.length > 0) {
-    return question.answerRanges.map((range) => ({
-      paragraphId: range.paragraphId,
-      start: range.start,
-      end: range.end,
-    }));
+    return question.answerRanges
+      .filter((range) => paragraphIdSet.has(range.paragraphId))
+      .map((range) => ({
+        paragraphId: range.paragraphId,
+        start: range.start,
+        end: range.end,
+      }));
   }
   if (!question?.answerText) return [];
   const ranges = [];
@@ -556,6 +562,8 @@ function DailyQuizModule({ content }) {
   };
 
   // CHOICE_COMPLEX_OX 오답 시 즉시 학습 종료 (사용자 요구: 10번에서 오답 즉시 종료)
+  // success=true 로 호출해야 1~9번 정답률 기반 씨앗 지급 규칙이 적용됨 (10번 오답 패널티는
+  // accuracy 계산에 반영). finish(false) 는 EngineShell 에서 earnedSeed=0 강제이므로 사용 금지.
   const handleChoiceAnalysisFail = () => {
     if (!currentQuestion) return;
     setCompletedMap((prev) => ({
@@ -563,7 +571,7 @@ function DailyQuizModule({ content }) {
       [currentQuestion.id]: { isCorrect: false },
     }));
     // 엔진 종료 — 누적 정답률 등 결과 표시
-    setTimeout(() => finish(false), 200);
+    setTimeout(() => finish(true), 200);
   };
 
   // ── 렌더링 ──
