@@ -28,22 +28,39 @@ class DiagnosticService(
 ) {
     private val logger = LoggerFactory.getLogger(DiagnosticService::class.java)
 
+    /**
+     * tier 코드를 단계 이름으로 매핑. 같은 단계의 1·2·3 tier 는 통계·응시 제한에서 동일 취급.
+     * - saussure1/2/3 → "saussure"
+     * - frege1/2/3 → "frege"
+     * - russell1/2/3 → "russell"
+     * - wittgenstein1/2/3 → "wittgenstein"
+     */
+    private fun tierStage(tier: String): String = tier.dropLastWhile { it.isDigit() }
+
+    /** 단계의 모든 tier 목록 (예: stage="saussure" → ["saussure1","saussure2","saussure3"]) */
+    private fun stageTiers(stage: String): List<String> = TEST_ORDER.filter { tierStage(it) == stage }
+
     // ── tier 목록 ──
 
     fun getTiers(userId: String): List<TierInfo> {
+        // 진단은 1인당 1회 정책 — 어떤 tier 든 한 번 completed 면 모든 tier 가 응시 불가 표시.
+        // 본인이 완료한 tier 는 그 결과의 sessionId·tci 표시, 그 외 tier 는 단순 "응시 불가" 표시.
+        val anyCompleted = sessionRepo.findByUserIdAndStatus(userId, "completed").firstOrNull()
         return TEST_ORDER.map { tier ->
             val label = TIER_LABELS[tier] ?: tier
             val count = questionRepo.countByTier(tier)
             val objCount = questionRepo.countByTierAndQuestionTypeNot(tier, "서술형")
             val sessions = sessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, tier)
-            val completed = sessions.find { it.status == "completed" }
+            val completedThisTier = sessions.find { it.status == "completed" }
+            // hasCompleted 가 true 면 UI 가 카드를 잠금. anyCompleted 가 있으면 모든 tier 잠금.
+            val isCompleted = completedThisTier != null || anyCompleted != null
             TierInfo(
                 tier = tier,
                 label = label,
                 questionCount = count,
-                hasCompleted = completed != null,
-                lastTci = completed?.adjustedTci?.toDouble(),
-                lastSessionId = completed?.id,
+                hasCompleted = isCompleted,
+                lastTci = completedThisTier?.adjustedTci?.toDouble(),
+                lastSessionId = completedThisTier?.id,
                 objectiveCount = objCount
             )
         }
@@ -62,21 +79,26 @@ class DiagnosticService(
 
         val isAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
 
-        // 이미 완료한 tier는 재응시 차단 (관리자 우회)
+        // 정책: 진단 테스트는 학생 1인당 평생 1회만 응시 가능.
+        // 같은 tier 든 다른 tier (다른 단계 포함) 든 한 번이라도 completed 면 차단.
+        // 통계 이상치 방지 + 추천 레벨의 신뢰성 확보 목적.
         if (!isAdmin) {
-            val completedExists = sessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, tier)
-                .any { it.status == "completed" }
-            if (completedExists) {
-                throw ApiException("ALREADY_COMPLETED", "이미 완료한 진단입니다. 결과를 확인하세요.", HttpStatus.CONFLICT)
+            val completedAny = sessionRepo.findByUserIdAndStatus(userId, "completed")
+            if (completedAny.isNotEmpty()) {
+                val prev = completedAny.first()
+                val prevLabel = TIER_LABELS[prev.tier] ?: prev.tier
+                throw ApiException(
+                    "ALREADY_COMPLETED",
+                    "이미 $prevLabel 단계의 진단을 완료하셨습니다. 진단은 1인당 1회만 응시 가능합니다.",
+                    HttpStatus.CONFLICT,
+                )
             }
         } else {
             // 관리자: 이전 완료 세션을 모두 abandoned로 마킹해 새 세션을 깨끗이 시작
-            sessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, tier)
-                .filter { it.status == "completed" }
-                .forEach {
-                    it.status = "abandoned"
-                    sessionRepo.save(it)
-                }
+            sessionRepo.findByUserIdAndStatus(userId, "completed").forEach {
+                it.status = "abandoned"
+                sessionRepo.save(it)
+            }
         }
 
         // 기존 활성 세션이 있으면 자동 폐기
@@ -863,7 +885,18 @@ class DiagnosticService(
         var speedPercentile: Double? = null
         var speedDistribution: SpeedDistribution? = null
         try {
-            val allSessions = sessionRepo.findByTierAndStatus(session.tier, "completed")
+            // 통계 — 같은 단계의 응시자 중 **학년이 그 단계 대상 학년에 맞는 학생만**
+            // 포함. 예: sohssure 단계 통계 = 응시자 중 초1~초3 학생만. 학년 안 맞는
+            // 학생 (예: 중학생이 소쉬르 응시) 은 통계에서 제외해 이상치 방지.
+            val stage = tierStage(session.tier)
+            val tiersInStage = stageTiers(stage)
+            val rawSessions = tiersInStage.flatMap { t -> sessionRepo.findByTierAndStatus(t, "completed") }
+            val targetGrades = TIER_GRADE_RANGES[stage] ?: emptyList()
+            val allSessions = if (targetGrades.isNotEmpty()) {
+                val userIds = rawSessions.map { it.userId }.toSet()
+                val gradeByUser = userRepo.findAllById(userIds).associate { it.id to it.gradeLabel }
+                rawSessions.filter { gradeByUser[it.userId] in targetGrades }
+            } else rawSessions
             if (allSessions.size >= 2) {
                 val tciValues = allSessions.mapNotNull { it.adjustedTci?.toDouble() }
                 val accValues = allSessions.map {

@@ -4,7 +4,9 @@ function TierStatsSection({ statistics, percentiles }) {
   return (
     <div className="diag-report-section">
       <h2>전체 응시자 통계</h2>
-      <p className="tier-stats-subtitle">동일 레벨 응시자 {statistics.totalSessions}명 기준</p>
+      <p className="tier-stats-subtitle">
+        같은 단계 · 학년에 맞는 응시자 {statistics.totalSessions}명 기준
+      </p>
       <div className="tier-stats-grid">
         <StatCard
           title="TCI 종합"
