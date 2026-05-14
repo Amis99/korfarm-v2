@@ -290,7 +290,7 @@ function AdminStudentDetailPage() {
               <h2>보유 현황</h2>
               {loadingInventory ? (<p className="admin-detail-note">로딩 중...</p>) : !inventory ? (<p className="admin-detail-note">인벤토리 정보를 불러올 수 없습니다.</p>) : (
                 <>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+                  <div className="admin-grid-2col" style={{ marginBottom: 16 }}>
                     <div>
                       <h3 style={{ fontSize: 14, color: "#f06c24", margin: "0 0 8px" }}>씨앗</h3>
                       {Object.entries(SEED_LABELS).map(([key, label]) => (<div key={key} style={{ fontSize: 13, marginBottom: 4 }}>{label}: <strong>{(inventory.seeds || {})[key] ?? 0}</strong></div>))}

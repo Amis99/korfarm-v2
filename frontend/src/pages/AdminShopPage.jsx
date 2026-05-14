@@ -329,7 +329,7 @@ function ProductFormModal({
           <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="예: 소쉬르 어휘 훈련 교재 세트" />
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
+        <div className="admin-grid-3col" style={{ gap: 10 }}>
           <div className="admin-modal-field">
             <label>카테고리</label>
             <select value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })}>
@@ -347,7 +347,7 @@ function ProductFormModal({
           </div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
+        <div className="admin-grid-3col" style={{ gap: 10 }}>
           <div className="admin-modal-field">
             <label>가격 (원) *</label>
             <input type="number" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} />

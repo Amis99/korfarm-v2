@@ -140,7 +140,7 @@ function AdminDuelMatchesPage({ wrap = true }) {
           <div className="admin-modal" style={{ maxWidth: 800 }} onClick={(e) => e.stopPropagation()}>
             <h2>매치 상세 — {detail.match?.id?.slice(0, 16)}…</h2>
             {detailLoading && <p>불러오는 중...</p>}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 12 }}>
+            <div className="admin-grid-2col" style={{ marginBottom: 12 }}>
               <div>
                 <strong>서버:</strong> {detail.match?.serverId}<br />
                 <strong>상태:</strong> {detail.match?.status}<br />

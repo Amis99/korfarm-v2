@@ -90,6 +90,52 @@
   color: #222;
 }
 
+/* ── 태블릿 이하: 좌우 → 세로 분할 ── */
+@media (max-width: 1024px) {
+  .ce-shell {
+    height: auto;
+    min-height: calc(100vh - 60px);
+    overflow: visible;
+  }
+  .ce-split {
+    flex-direction: column;
+    overflow: visible;
+  }
+  .ce-preview-pane,
+  .ce-form-pane {
+    flex: 1 1 auto;
+    min-height: 60vh;
+    border-right: none;
+  }
+  .ce-preview-pane {
+    border-bottom: 1px solid var(--stroke);
+  }
+}
+
+/* ── 모바일: 툴바·미리보기 보강 ── */
+@media (max-width: 768px) {
+  .ce-toolbar {
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 6px 10px;
+  }
+  .ce-toolbar-title {
+    flex: 1 1 100%;
+    order: -1;
+    white-space: normal;
+    font-size: 13px;
+  }
+  .ce-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  .ce-preview-pane,
+  .ce-form-pane {
+    padding: 14px;
+    min-height: 50vh;
+  }
+}
+
 /* 미리보기 공통 */
 .ce-preview-label {
   font-size: 11px;

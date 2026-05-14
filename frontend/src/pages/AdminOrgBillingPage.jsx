@@ -97,7 +97,7 @@ export default function AdminOrgBillingPage() {
         {calc && (
           <div style={{ padding: 16, background: "#f7f9fc", borderRadius: 8, marginBottom: 20 }}>
             <h2 style={{ fontSize: 14, marginBottom: 8 }}>{calc.yearMonth} 예상 사용료 (실시간 산정)</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, fontSize: 13 }}>
+            <div className="admin-grid-2col" style={{ gap: 8, fontSize: 13 }}>
               <div>활성 학생 수: <strong>{calc.activeStudentCount}명</strong></div>
               <div>기본료: <strong>{calc.baseFee.toLocaleString()}원</strong>{calc.baseFeeIsOverride && " (감면 적용)"}</div>
               <div>초과 학생: <strong>{calc.excessStudentCount}명</strong></div>

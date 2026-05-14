@@ -189,19 +189,19 @@ function AdminBoardsPage() {
               <div>
                 <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 6 }}>권한 매트릭스 (최소 등급)</div>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ display: "grid", gridTemplateColumns: "100px 1fr", alignItems: "center", gap: 8 }}>
+                  <label className="admin-grid-label" style={{ alignItems: "center", gap: 8 }}>
                     <span style={{ fontSize: 12, color: "var(--admin-muted)" }}>열람</span>
                     <select value={newView} onChange={(e) => setNewView(e.target.value)} style={{ padding: 6 }}>
                       {ROLE_OPTIONS.map((r) => <option key={r.value} value={r.value}>{r.label}</option>)}
                     </select>
                   </label>
-                  <label style={{ display: "grid", gridTemplateColumns: "100px 1fr", alignItems: "center", gap: 8 }}>
+                  <label className="admin-grid-label" style={{ alignItems: "center", gap: 8 }}>
                     <span style={{ fontSize: 12, color: "var(--admin-muted)" }}>글쓰기</span>
                     <select value={newWrite} onChange={(e) => setNewWrite(e.target.value)} style={{ padding: 6 }}>
                       {ROLE_OPTIONS.map((r) => <option key={r.value} value={r.value}>{r.label}</option>)}
                     </select>
                   </label>
-                  <label style={{ display: "grid", gridTemplateColumns: "100px 1fr", alignItems: "center", gap: 8 }}>
+                  <label className="admin-grid-label" style={{ alignItems: "center", gap: 8 }}>
                     <span style={{ fontSize: 12, color: "var(--admin-muted)" }}>댓글·좋아요</span>
                     <select value={newComment} onChange={(e) => setNewComment(e.target.value)} style={{ padding: 6 }}>
                       {ROLE_OPTIONS.map((r) => <option key={r.value} value={r.value}>{r.label}</option>)}

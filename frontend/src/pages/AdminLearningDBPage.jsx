@@ -284,7 +284,7 @@ function CorpusCreateModal({ onClose, onCreated }) {
     <div style={modalBackdrop} onClick={onClose}>
       <div style={modalBox} onClick={e => e.stopPropagation()}>
         <h3>작품·지문 추가</h3>
-        <div style={{ display: "grid", gridTemplateColumns: "100px 1fr", gap: 8 }}>
+        <div className="admin-grid-label" style={{ gap: 8 }}>
           <Label>영역 *</Label>
           <MultiSelectField
             values={draft.areas}

@@ -161,7 +161,7 @@ function AdminSeasonsPage({ wrap = true }) {
           </button>
         </div>
       </div>
-      <div className="admin-detail-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 16 }}>
+      <div className="admin-detail-grid">
         <div className="admin-detail-card">
           <h2>시즌 목록</h2>
           <div className="admin-detail-toolbar">

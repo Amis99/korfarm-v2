@@ -36,7 +36,7 @@ function AdminThemeDuelPage() {
       {/* 기관 선택 (공유) */}
       <div className="admin-detail-toolbar" style={{ alignItems: "center", gap: 12, marginBottom: 8 }}>
         <label style={{ fontSize: 13, fontWeight: 600 }}>기관</label>
-        <select value={orgId} onChange={(e) => setOrgId(e.target.value)} style={{ padding: "6px 10px", fontSize: 13, minWidth: 240 }}>
+        <select value={orgId} onChange={(e) => setOrgId(e.target.value)} style={{ padding: "6px 10px", fontSize: 13, flex: "1 1 240px", minWidth: 0 }}>
           {orgs.length === 0 && <option value="">(관리 가능한 기관 없음)</option>}
           {orgs.map((o) => (
             <option key={o.orgId} value={o.orgId}>{o.orgName}</option>
@@ -360,7 +360,7 @@ function SubServerQuestionPool({ orgId, orgName }) {
     <div>
       <div className="admin-detail-toolbar" style={{ alignItems: "center", gap: 12, marginBottom: 8 }}>
         <label style={{ fontSize: 13, fontWeight: 600 }}>서브 서버</label>
-        <select value={serverId} onChange={(e) => setServerId(e.target.value)} style={{ padding: "6px 10px", fontSize: 13, minWidth: 240 }}>
+        <select value={serverId} onChange={(e) => setServerId(e.target.value)} style={{ padding: "6px 10px", fontSize: 13, flex: "1 1 240px", minWidth: 0 }}>
           {servers.map((s) => (
             <option key={s.id} value={s.id}>
               {s.subName} {s.status !== "active" ? `(${s.status === "expired" ? "기한 종료" : "마감"})` : ""}

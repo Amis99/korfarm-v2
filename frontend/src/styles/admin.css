@@ -39,6 +39,18 @@
   margin-bottom: 4px;
 }
 
+/* ── 현재 활성 메뉴 라벨 (모바일에서 햄버거 옆) ── */
+.admin-toolbar-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--admin-ink, #1a2b1a);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 /* ── Hamburger button ── */
 .admin-hamburger {
   display: inline-flex;
@@ -141,6 +153,54 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+.admin-nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 6px;
+}
+
+.admin-nav-group-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--admin-side-muted);
+  padding: 12px 14px 4px;
+  opacity: 0.7;
+}
+
+/* ── 청구 정지·임박 배너 (모바일 가독성) ── */
+.admin-billing-banner {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.admin-billing-banner a {
+  text-decoration: underline;
+  font-weight: 600;
+}
+.admin-billing-banner--suspended {
+  background: #f8d7da;
+  color: #721c24;
+  font-weight: 600;
+}
+.admin-billing-banner--suspended a { color: #721c24; }
+.admin-billing-banner--imminent {
+  background: #fff3cd;
+  color: #856404;
+}
+.admin-billing-banner--imminent a { color: #856404; }
+@media (max-width: 768px) {
+  .admin-billing-banner {
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
 }
 
 .admin-nav a {
@@ -330,6 +390,51 @@
   -webkit-overflow-scrolling: touch;
   margin: 0 -4px;
   padding: 0 4px;
+}
+
+/* ── 모바일/태블릿 — 본문 안의 모든 테이블 자동 가로 스크롤 ──
+   admin-table-scroll 미적용 페이지가 모바일에서 깨지지 않도록 안전망 */
+@media (max-width: 1024px) {
+  .admin-main table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+  .admin-main table thead,
+  .admin-main table tbody,
+  .admin-main table tr {
+    width: max-content;
+    min-width: 100%;
+  }
+}
+
+/* ── 반응형 그리드 유틸 ── */
+.admin-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.admin-grid-3col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+.admin-grid-label {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 12px;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .admin-grid-2col,
+  .admin-grid-3col {
+    grid-template-columns: 1fr;
+  }
+  .admin-grid-label {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
 }
 
 /* ───────────────────────────────────────

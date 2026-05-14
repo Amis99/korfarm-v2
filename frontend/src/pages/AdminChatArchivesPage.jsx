@@ -364,7 +364,7 @@ function AdminChatArchivesPage() {
                   style={{
                     padding: "8px 12px", border: "1px solid var(--admin-stroke)", borderRadius: 8,
                     background: "var(--admin-panel)", color: "var(--admin-ink)", fontSize: 13,
-                    fontFamily: "inherit", minWidth: 240,
+                    fontFamily: "inherit", flex: "1 1 240px", minWidth: 0,
                   }}
                   disabled={uploading}
                 />

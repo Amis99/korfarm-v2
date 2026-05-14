@@ -189,7 +189,7 @@ export default function AdminOfflineOmrPage() {
             <input
               type="search" placeholder="시험 제목·ID 검색"
               value={testSearch} onChange={(e) => setTestSearch(e.target.value)}
-              style={{ ...inpStyle, flex: 2, minWidth: 240 }}
+              style={{ ...inpStyle, flex: "2 1 240px", minWidth: 0 }}
             />
             <select value={testKind} onChange={(e) => setTestKind(e.target.value)} style={{ ...inpStyle, width: 140 }}>
               <option value="all">전체 종류</option>

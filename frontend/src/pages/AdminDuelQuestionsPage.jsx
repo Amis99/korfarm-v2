@@ -479,7 +479,7 @@ function AdminDuelQuestionsPage({ wrap = true, themeOnly = false, fixedServerId 
             <select
               value={activeServer}
               onChange={(e) => setActiveServer(e.target.value)}
-              style={{ padding: "6px 10px", fontSize: 13, minWidth: 220 }}
+              style={{ padding: "6px 10px", fontSize: 13, flex: "1 1 220px", minWidth: 0 }}
             >
               {SERVERS.map((server) => {
                 const dbTotal = counts[server.id]?.total ?? 0;

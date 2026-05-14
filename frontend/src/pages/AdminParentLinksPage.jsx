@@ -124,7 +124,7 @@ function AdminParentLinksPage() {
           학부모가 회원가입 시 학생 이름·휴대폰을 정확히 입력하면 자동 연결됩니다.
           어드민은 직접 연결 생성과 해제만 합니다.
         </p>
-        <div className="admin-detail-grid" style={{ gridTemplateColumns: "1fr 2fr" }}>
+        <div className="admin-detail-grid">
           <div className="admin-detail-card">
             <h2>연결 생성</h2>
             <div className="admin-detail-toolbar">
