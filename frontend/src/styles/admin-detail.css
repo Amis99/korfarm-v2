@@ -122,6 +122,8 @@
   padding: var(--admin-card-pad);
   border: 1px solid var(--admin-stroke);
   box-shadow: 0 2px 8px rgba(31, 58, 44, 0.05);
+  min-width: 0;
+  max-width: 100%;
 }
 
 .admin-detail-card h2 {
@@ -820,6 +822,185 @@
   cursor: not-allowed;
 }
 
+/* ──────────────────────────────────────────────
+   구글 스타일 어드민 검색창 (AdminSearchBox 컴포넌트)
+   - 둥근 알약 모양 + 미세 그림자, 호버·포커스 시 그림자 강조
+   - 우측 톱니 아이콘 → 검색 범위 토글 드롭다운
+   ────────────────────────────────────────────── */
+.admin-search-google {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid rgba(31, 58, 44, 0.14);
+  border-radius: 24px;
+  padding: 6px 8px 6px 16px;
+  min-width: 260px;
+  max-width: 560px;
+  flex: 1;
+  box-shadow: 0 1px 2px rgba(31, 58, 44, 0.04);
+  transition: box-shadow 0.18s, border-color 0.18s;
+}
+
+.admin-search-google:hover {
+  box-shadow: 0 2px 8px rgba(31, 58, 44, 0.10);
+  border-color: rgba(31, 58, 44, 0.22);
+}
+
+.admin-search-google:focus-within {
+  box-shadow: 0 2px 10px rgba(31, 58, 44, 0.14);
+  border-color: var(--admin-accent, #2d6a4f);
+}
+
+.admin-search-google__icon {
+  font-size: 20px;
+  color: var(--admin-muted, #5a6a5f);
+  flex-shrink: 0;
+}
+
+.admin-search-google__input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--admin-ink, #1a2920);
+  font-size: 14px;
+  font-family: inherit;
+  padding: 4px 0;
+  min-width: 0;
+}
+
+.admin-search-google__input::placeholder {
+  color: rgba(31, 58, 44, 0.42);
+}
+
+.admin-search-google__scope-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  color: var(--admin-muted, #5a6a5f);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.admin-search-google__scope-btn:hover {
+  background: rgba(45, 106, 79, 0.08);
+  color: var(--admin-accent, #2d6a4f);
+}
+
+.admin-search-google__scope-btn.active {
+  background: rgba(45, 106, 79, 0.12);
+  color: var(--admin-accent, #2d6a4f);
+}
+
+.admin-search-google__scope-btn .material-symbols-outlined {
+  font-size: 19px;
+}
+
+.admin-search-google__scope-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 50;
+  min-width: 220px;
+  background: #ffffff;
+  border: 1px solid rgba(31, 58, 44, 0.10);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(31, 58, 44, 0.14);
+  padding: 8px 0;
+}
+
+.admin-search-google__scope-title {
+  padding: 6px 16px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--admin-muted, #5a6a5f);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(31, 58, 44, 0.06);
+  margin-bottom: 4px;
+}
+
+.admin-search-google__scope-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 14px 8px 10px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  font-size: 13px;
+  color: var(--admin-ink, #1a2920);
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.admin-search-google__scope-item:hover {
+  background: rgba(45, 106, 79, 0.06);
+}
+
+.admin-search-google__scope-item.active {
+  color: var(--admin-accent, #2d6a4f);
+  font-weight: 600;
+}
+
+.admin-search-google__scope-check {
+  font-size: 18px;
+  width: 20px;
+  text-align: center;
+  color: var(--admin-accent, #2d6a4f);
+}
+
+/* 모바일 — 알약 폭 줄이고 폰트 축소 */
+@media (max-width: 600px) {
+  .admin-search-google {
+    min-width: 0;
+    padding: 5px 6px 5px 12px;
+    border-radius: 20px;
+  }
+  .admin-search-google__input {
+    font-size: 13px;
+  }
+  .admin-search-google__icon {
+    font-size: 18px;
+  }
+}
+
+/* 본문/문제 검색 — 결과 행에 매칭 스니펫 표시 */
+.admin-content-snippet {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--admin-muted, #5a6a5f);
+  background: rgba(45, 106, 79, 0.05);
+  border-left: 2px solid var(--admin-accent, #2d6a4f);
+  padding: 3px 8px;
+  border-radius: 0 4px 4px 0;
+  max-width: 540px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 본문 검색 로딩·에러 상태 */
+.admin-content-body-search-state {
+  margin-left: 8px;
+  font-size: 12px;
+  color: var(--admin-muted, #5a6a5f);
+  align-self: center;
+}
+.admin-content-body-search-state.error {
+  color: #c0392b;
+}
+
 .status-pill[data-status="rejected"] {
   color: #f0a59c;
   background: rgba(192, 57, 43, 0.18);
@@ -1479,11 +1660,23 @@
   grid-template-columns: repeat(6, 1fr);
   gap: 12px;
   margin-bottom: 16px;
+  min-width: 0;
 }
+.admin-content-stats > * { min-width: 0; }
 
 @media (max-width: 1100px) {
   .admin-content-stats {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .admin-content-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 400px) {
+  .admin-content-stats {
+    grid-template-columns: 1fr;
   }
 }
 

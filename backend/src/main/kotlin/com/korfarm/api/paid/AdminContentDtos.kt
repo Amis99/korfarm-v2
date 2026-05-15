@@ -21,7 +21,9 @@ data class AdminContentSummary(
     val videoUrl: String? = null,
     /** 가장 최근 수정자 user_id (content_edit_logs 최근 row). 수정 이력 없으면 null */
     val lastEditorId: String? = null,
-    val lastEditorName: String? = null
+    val lastEditorName: String? = null,
+    /** 본문/문제 검색 결과의 매칭 컨텍스트(전후 ±20자). 검색 endpoint 응답에만 포함, 일반 목록에서는 null */
+    val matchSnippet: String? = null
 )
 
 data class ContentPreview(

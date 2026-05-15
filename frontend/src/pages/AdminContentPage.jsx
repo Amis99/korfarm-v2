@@ -14,6 +14,7 @@ import {
   resolveModuleKeyForContentType,
 } from "../constants/contentTypes";
 import AdminLayout from "../components/AdminLayout";
+import AdminSearchBox from "../components/AdminSearchBox";
 import "../styles/admin-detail.css";
 
 const CONTENTS = [];
@@ -184,6 +185,7 @@ function AdminContentPage() {
   /* 필터/페이지를 URL 쿼리 파라미터에 보존 */
   const [params, setParams] = useSearchParams();
   const search = params.get("q") || "";
+  const searchScope = params.get("scope") || "all";  // all|title|area|body|question
   const statusFilter = params.get("status") || "all";
   const typeFilter = params.get("type") || "all";
   const tabFilter = params.get("tab") || "daily";  // 일일/농장/프로 (기본 일일)
@@ -217,6 +219,43 @@ function AdminContentPage() {
   useEffect(() => () => {
     if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current);
   }, []);
+
+  /* 본문/문제 검색 결과 (scope=body|question + q 있을 때만 백엔드 호출) */
+  const [bodySearchResults, setBodySearchResults] = useState(null); // null=미수행, []=결과없음
+  const [bodySearchLoading, setBodySearchLoading] = useState(false);
+  const [bodySearchError, setBodySearchError] = useState("");
+  useEffect(() => {
+    const needBodySearch = (searchScope === "body" || searchScope === "question") && search.trim().length > 0;
+    if (!needBodySearch) {
+      setBodySearchResults(null);
+      setBodySearchError("");
+      return;
+    }
+    let active = true;
+    setBodySearchLoading(true);
+    apiGet(`/v1/admin/content/search?q=${encodeURIComponent(search.trim())}&scope=${searchScope}`)
+      .then((rows) => {
+        if (!active) return;
+        const mapped = mapContentList(rows || []).map((r, i) => ({
+          ...r,
+          // 백엔드가 matchSnippet 또는 match_snippet 둘 중 하나로 줄 수 있음
+          matchSnippet: (rows[i] && (rows[i].matchSnippet || rows[i].match_snippet)) || null,
+        }));
+        setBodySearchResults(mapped);
+        setBodySearchError("");
+      })
+      .catch((err) => {
+        if (!active) return;
+        setBodySearchError(err.message || "본문/문제 검색에 실패했습니다.");
+        setBodySearchResults([]);
+      })
+      .finally(() => {
+        if (active) setBodySearchLoading(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, [searchScope, search]);
   /* 서버 콘텐츠 미리보기 상태 */
   const [previewLoadingId, setPreviewLoadingId] = useState(null);
   const [serverPreviewError, setServerPreviewError] = useState("");
@@ -279,6 +318,33 @@ function AdminContentPage() {
 
   const filteredContents = useMemo(() => {
     const term = search.trim().toLowerCase();
+
+    // 본문/문제 검색: 백엔드 검색 결과를 데이터 소스로 사용 (클라이언트 사이드 필터 X)
+    if ((searchScope === "body" || searchScope === "question") && term && bodySearchResults != null) {
+      let bodyResult = bodySearchResults.filter((content) => {
+        if (statusFilter !== "all" && content.status !== statusFilter) return false;
+        const tabs = getCategoryTabs(content.types);
+        if (!tabs.includes(tabFilter)) return false;
+        if (levelGroupFilter !== "all") {
+          if (getLevelGroup(content.levelId) !== levelGroupFilter) return false;
+        }
+        if (typeFilter !== "all") {
+          if (!content.types.includes(typeFilter)) return false;
+        }
+        return true;
+      });
+      // 정렬은 아래 sort 블록과 공유
+      const dir = sortDir === "desc" ? -1 : 1;
+      bodyResult = [...bodyResult].sort((a, b) => {
+        const sa = (a.title || "").toLowerCase();
+        const sb = (b.title || "").toLowerCase();
+        if (sa < sb) return -1 * dir;
+        if (sa > sb) return 1 * dir;
+        return 0;
+      });
+      return bodyResult;
+    }
+
     let result = allContents.filter((content) => {
       if (statusFilter !== "all" && content.status !== statusFilter) return false;
       // 탭 필터 — 콘텐츠의 카테고리 array 중 하나라도 현재 탭에 매핑되면 통과
@@ -293,33 +359,36 @@ function AdminContentPage() {
         if (!content.types.includes(typeFilter)) return false;
       }
       if (!term) return true;
-      // 검색 대상: 제목, 유형, 레벨(코드+한국어 라벨), 일차, 챕터, 영역, 세부영역
+      // 검색 범위(scope)별로 다른 필드만 매칭
       const typesStr = (content.types || []).join(" ");
       const levelShort = getLevelShort(content.levelId) || "";
       const levelFull = LEVEL_LABEL_MAP[content.levelId] || "";
-      // 일차: "266", "266일차" 모두 매칭
       const dayStr = content.dayIndex != null
         ? `${content.dayIndex} ${content.dayIndex}일차`
         : "";
       const numericTerm = term.replace(/일차/g, "").trim();
-      const haystack = [
-        content.title,
-        typesStr,
-        content.status,
-        content.levelId,
-        levelShort,
-        levelFull,
-        content.chapterId,
-        content.area,
-        content.subArea,
-        dayStr,
-      ]
+
+      let fields = [];
+      if (searchScope === "title") {
+        fields = [content.title];
+      } else if (searchScope === "area") {
+        fields = [content.area, content.subArea];
+      } else {
+        // all (통합)
+        fields = [
+          content.title, typesStr, content.status,
+          content.levelId, levelShort, levelFull,
+          content.chapterId, content.area, content.subArea, dayStr,
+        ];
+      }
+      const haystack = fields
         .filter(Boolean)
         .map((v) => String(v).toLowerCase())
         .join(" ");
       if (haystack.includes(term)) return true;
-      // 일차 숫자 정확 일치 (예: 검색어 "266" → dayIndex 266)
-      if (numericTerm && /^\d+$/.test(numericTerm)
+      // 일차 숫자 정확 일치 — 통합 검색에서만
+      if (searchScope === "all"
+          && numericTerm && /^\d+$/.test(numericTerm)
           && content.dayIndex != null
           && String(content.dayIndex) === numericTerm) {
         return true;
@@ -361,7 +430,7 @@ function AdminContentPage() {
     };
     result = [...result].sort(cmp);
     return result;
-  }, [allContents, search, statusFilter, typeFilter, tabFilter, levelGroupFilter, sortKey, sortDir]);
+  }, [allContents, bodySearchResults, search, searchScope, statusFilter, typeFilter, tabFilter, levelGroupFilter, sortKey, sortDir]);
 
   /* 페이지네이션 계산 */
   const totalPages = Math.max(1, Math.ceil(filteredContents.length / PER_PAGE));
@@ -610,16 +679,27 @@ function AdminContentPage() {
 
         <div className="admin-detail-card admin-single-card edit-mode">
           <div className="admin-detail-toolbar admin-content-toolbar">
-            <div className="admin-detail-search">
-              <span className="material-symbols-outlined">search</span>
-              <input
-                placeholder="제목·유형·레벨·일차·챕터·영역 검색"
-                value={searchInput}
-                onChange={handleSearchChange}
-                onCompositionStart={handleSearchCompositionStart}
-                onCompositionEnd={handleSearchCompositionEnd}
-              />
-            </div>
+            <AdminSearchBox
+              placeholder={
+                searchScope === "body" ? "본문에서 검색"
+                : searchScope === "question" ? "문제(보기·선택지)에서 검색"
+                : searchScope === "title" ? "제목에서 검색"
+                : searchScope === "area" ? "영역·세부영역에서 검색"
+                : "제목·유형·레벨·일차·챕터·영역 검색"
+              }
+              value={searchInput}
+              onChange={handleSearchChange}
+              onCompositionStart={handleSearchCompositionStart}
+              onCompositionEnd={handleSearchCompositionEnd}
+              scope={searchScope}
+              onScopeChange={(s) => updateParams({ scope: s, page: "" })}
+            />
+            {bodySearchLoading && (
+              <span className="admin-content-body-search-state">본문 검색 중…</span>
+            )}
+            {bodySearchError && (
+              <span className="admin-content-body-search-state error">{bodySearchError}</span>
+            )}
             <div className="admin-detail-filters">
               {["all", "active", "inactive"].map((f) => (
                 <button
@@ -739,6 +819,11 @@ function AdminContentPage() {
                         {content.title}
                       </Link>
                       {day ? <span className="admin-content-day">{day}</span> : null}
+                      {content.matchSnippet && (
+                        <div className="admin-content-snippet" title={content.matchSnippet}>
+                          {content.matchSnippet}
+                        </div>
+                      )}
                     </td>
                     <td>
                       <span className="type-pill admin-tooltip-wrap" data-group={ts.group}>

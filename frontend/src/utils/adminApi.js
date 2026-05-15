@@ -85,9 +85,19 @@ const handleAuthFailure = (status) => {
 /**
  * 응답을 안전하게 JSON 파싱.
  * CloudFront가 403/404를 200 + index.html로 변환하는 경우를 방어.
- * 401/403 시 토큰 만료로 간주하고 자동 로그아웃 + 리다이렉트.
+ *
+ * 401(토큰 만료) 우선 처리 — content-type / 본문 형식 무관:
+ *   handleAuthFailure 호출 후 pending Promise 반환. 호출 컴포넌트가 catch 못 하고
+ *   영구 대기하는 사이 window.location.href 가 적용되어 페이지가 unload 되므로
+ *   "JSON 아닌 응답…" / "로그인이 만료되었습니다…" 같은 에러 텍스트가 화면에 노출되지 않음.
+ *
+ * 403(권한 부족) 은 기존대로 자동 로그아웃 + 에러 throw — 라우트 진입 자체가 막혀야 하는 케이스.
  */
 const safeJson = async (response, method, path) => {
+  if (response.status === 401) {
+    handleAuthFailure(401);
+    return new Promise(() => {}); // pending — 페이지 redirect 까지 대기
+  }
   const ct = response.headers.get("content-type") || "";
   if (!ct.includes("application/json")) {
     throw new Error(
@@ -95,13 +105,11 @@ const safeJson = async (response, method, path) => {
     );
   }
   if (!response.ok) {
-    // 401/403 → 토큰 만료 또는 권한 부족 → 자동 로그아웃 시도
-    if (response.status === 401 || response.status === 403) {
-      handleAuthFailure(response.status);
+    // 403 → 권한 부족 → 자동 로그아웃 시도 + 에러 throw
+    if (response.status === 403) {
+      handleAuthFailure(403);
       throw new Error(
-        response.status === 401
-          ? "로그인이 만료되었습니다. 다시 로그인해 주세요."
-          : "관리자 권한이 필요하거나 세션이 만료되었습니다. 다시 로그인해 주세요."
+        "관리자 권한이 필요하거나 세션이 만료되었습니다. 다시 로그인해 주세요."
       );
     }
     let msg = `${method} ${path} 요청 실패: ${response.status}`;

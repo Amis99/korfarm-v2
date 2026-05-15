@@ -68,6 +68,20 @@ interface ContentVersionRepository : JpaRepository<ContentVersionEntity, String>
     fun findTopByContentIdOrderByCreatedAtDesc(contentId: String): ContentVersionEntity?
     fun deleteAllByContentId(contentId: String)
     fun findByContentIdAndSchemaVersion(contentId: String, schemaVersion: String): ContentVersionEntity?
+
+    /** 본문/문제 검색: content_json 에 query 가 포함된 최신 버전 row 들.
+     *  각 content_id 별로 가장 최근(created_at DESC) 1개만 골라서 반환. */
+    @org.springframework.data.jpa.repository.Query(
+        """
+        SELECT cv FROM ContentVersionEntity cv
+        WHERE cv.contentJson LIKE CONCAT('%', :query, '%')
+          AND cv.createdAt = (
+              SELECT MAX(cv2.createdAt) FROM ContentVersionEntity cv2
+              WHERE cv2.contentId = cv.contentId
+          )
+        """
+    )
+    fun searchLatestByJsonContent(@org.springframework.data.repository.query.Param("query") query: String): List<ContentVersionEntity>
 }
 
 interface TestPaperRepository : JpaRepository<TestPaperEntity, String> {

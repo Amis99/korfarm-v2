@@ -98,8 +98,17 @@ const tryRefresh = async () => {
 /**
  * 응답을 안전하게 처리.
  * CloudFront가 403/404를 200 + index.html로 변환하는 경우를 방어.
+ *
+ * 401(토큰 만료) 우선 처리 — content-type / 본문 형식 무관:
+ *   handle401 호출 후 pending Promise 반환. 호출 컴포넌트가 catch 못 하고
+ *   영구 대기하는 사이 window.location.href 가 적용되어 페이지가 unload 되므로
+ *   "JSON 아닌 응답…" / "요청 실패: 401" 같은 에러 텍스트가 화면에 노출되지 않음.
  */
 const safeJson = async (response, method, path) => {
+  if (response.status === 401) {
+    handle401(path);
+    return new Promise(() => {}); // pending — 페이지 redirect 까지 대기
+  }
   const ct = response.headers.get("content-type") || "";
   if (!ct.includes("application/json")) {
     throw new ApiError(
@@ -122,6 +131,8 @@ const safeJson = async (response, method, path) => {
 /**
  * 401 시 refresh 시도 → 성공하면 1회 재시도.
  * 학생/학부모는 refresh 토큰이 없어 즉시 logout 처리.
+ * refresh 실패 시 safeJson 안에서 handle401 + pending Promise 처리되므로
+ * 호출 컴포넌트는 에러 텍스트를 받지 못한다.
  */
 const fetchWithAuthRetry = async (method, path, makeInit) => {
   const url = buildUrl(path);
@@ -130,9 +141,8 @@ const fetchWithAuthRetry = async (method, path, makeInit) => {
     const refreshed = await tryRefresh();
     if (refreshed) {
       response = await fetch(url, makeInit());
-    } else {
-      handle401(path);
     }
+    // refresh 실패 케이스는 아래 safeJson 의 401 분기가 무성으로 처리.
   }
   return safeJson(response, method, path);
 };

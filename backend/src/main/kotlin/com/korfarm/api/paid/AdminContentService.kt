@@ -10,8 +10,10 @@ import com.korfarm.api.contracts.AdminTestCreateRequest
 import com.korfarm.api.contracts.AdminTestGradeRequest
 import com.korfarm.api.pro.ProChapterEntity
 import com.korfarm.api.pro.ProChapterItemEntity
+import com.korfarm.api.auth.AuthService.Companion.ORG_HQ_ID
 import com.korfarm.api.pro.ProChapterItemRepo
 import com.korfarm.api.pro.ProChapterRepo
+import com.korfarm.api.security.OrgScopeResolver
 import com.korfarm.api.test.TestPaperEntity
 import com.korfarm.api.files.FileRepository
 import com.korfarm.api.user.UserRepository
@@ -34,7 +36,8 @@ class AdminContentService(
     private val userRepository: UserRepository,
     private val proChapterRepo: ProChapterRepo,
     private val proChapterItemRepo: ProChapterItemRepo,
-    private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper,
+    private val orgScopeResolver: OrgScopeResolver,
 ) {
     private val log = LoggerFactory.getLogger(AdminContentService::class.java)
 
@@ -903,14 +906,79 @@ class AdminContentService(
         }
     }
 
+    /**
+     * 본문/문제 검색 — content_versions.content_json 에 query 포함된 콘텐츠 반환.
+     * scope 가 "body" 또는 "question" 이어도 동일 LIKE 매칭 (path 구분은 1차에서 안 함).
+     * 결과에는 매칭된 위치 주변 ±20자 snippet 동봉.
+     */
+    @Transactional(readOnly = true)
+    fun searchContentsByBody(query: String, limit: Int = 200): List<AdminContentSummary> {
+        if (query.isBlank()) return emptyList()
+        val trimmed = query.trim().take(60)
+        val versions = contentVersionRepository.searchLatestByJsonContent(trimmed)
+        if (versions.isEmpty()) return emptyList()
+        // contents 메타 일괄 조회
+        val contentIds = versions.map { it.contentId }.toSet()
+        val contentMap = contentRepository.findAllById(contentIds).associateBy { it.id }
+        // 최근 수정자
+        val latestEditorByContent: Map<String, String> = contentEditLogRepository.findAll()
+            .asSequence()
+            .filter { it.action == "UPDATE" && it.contentId in contentIds }
+            .groupBy { it.contentId }
+            .mapValues { (_, logs) -> logs.maxByOrNull { it.createdAt }?.editorId ?: "" }
+            .filterValues { it.isNotEmpty() }
+        val editorIds = latestEditorByContent.values.toSet()
+        val editorNameMap = if (editorIds.isEmpty()) emptyMap()
+        else userRepository.findAllById(editorIds).associate { it.id to (it.name?.takeIf { n -> n.isNotBlank() } ?: it.email) }
+
+        return versions.asSequence()
+            .mapNotNull { cv ->
+                val content = contentMap[cv.contentId] ?: return@mapNotNull null
+                if (content.status != "active") return@mapNotNull null
+                val snippet = buildSnippet(cv.contentJson, trimmed)
+                val editorId = latestEditorByContent[content.id]
+                AdminContentSummary(
+                    contentId = content.id,
+                    contentType = parseCategories(content),
+                    levelId = content.levelId,
+                    chapterId = content.chapterId,
+                    dayIndex = content.dayIndex,
+                    area = content.area,
+                    subArea = content.subArea,
+                    title = content.title,
+                    status = content.status,
+                    videoUrl = content.videoUrl,
+                    lastEditorId = editorId,
+                    lastEditorName = editorId?.let { editorNameMap[it] },
+                    matchSnippet = snippet
+                )
+            }
+            .take(limit)
+            .toList()
+    }
+
+    /** content_json 안 query 위치 ±20자 추출. 매칭 안 되면 null. */
+    private fun buildSnippet(json: String, query: String): String? {
+        val idx = json.indexOf(query, ignoreCase = false)
+        if (idx < 0) return null
+        val start = maxOf(0, idx - 20)
+        val end = minOf(json.length, idx + query.length + 20)
+        val prefix = if (start > 0) "…" else ""
+        val suffix = if (end < json.length) "…" else ""
+        return prefix + json.substring(start, end).replace("\n", " ") + suffix
+    }
+
     @Transactional
     fun createTest(request: AdminTestCreateRequest, userId: String): TestPaperView {
         val file = fileRepository.findById(request.pdfFileId).orElseThrow {
             ApiException("NOT_FOUND", "file not found", HttpStatus.NOT_FOUND)
         }
+        // orgId 위장 방어: HQ_ADMIN 자유 / ORG_ADMIN 본인 active 멤버십 강제.
+        // test_papers.org_id 는 DB 상 NOT NULL 이므로 HQ 가 null 보내면 ORG_HQ_ID fallback.
+        val orgId = orgScopeResolver.resolveCallerOrgId(userId, request.orgId) ?: ORG_HQ_ID
         val entity = TestPaperEntity(
             id = IdGenerator.newId("test"),
-            orgId = request.orgId,
+            orgId = orgId,
             title = request.title,
             pdfFileId = file.id,
             status = "open"

@@ -2,6 +2,7 @@ package com.korfarm.api.org
 
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
+import com.korfarm.api.security.OrgScopeResolver
 import com.korfarm.api.security.SecurityUtils
 import com.korfarm.api.contracts.AdminClassCreateRequest
 import com.korfarm.api.contracts.AdminClassStudentsRequest
@@ -32,7 +33,8 @@ class OrgService(
     private val classMembershipRepository: ClassMembershipRepository,
     private val userRepository: UserRepository,
     private val subscriptionRepository: SubscriptionRepository,
-    private val passwordEncoder: PasswordEncoder
+    private val passwordEncoder: PasswordEncoder,
+    private val orgScopeResolver: OrgScopeResolver,
 ) {
     // ORG_ADMIN인 경우 대상 학생이 자기 기관 소속인지 검증 (HQ_ADMIN은 통과)
     fun verifyOrgAdminAccessForStudent(targetUserId: String) {
@@ -628,9 +630,14 @@ class OrgService(
 
     @Transactional
     fun createClass(request: AdminClassCreateRequest): ClassEntity {
+        // orgId 위장 방어: HQ_ADMIN 자유 / ORG_ADMIN 본인 active 멤버십 강제
+        val callerId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "인증되지 않은 요청입니다", HttpStatus.UNAUTHORIZED)
+        val orgId = orgScopeResolver.resolveCallerOrgId(callerId, request.orgId)
+            ?: throw ApiException("BAD_REQUEST", "기관 ID 가 필요합니다.", HttpStatus.BAD_REQUEST)
         val classEntity = ClassEntity(
             id = IdGenerator.newId("class"),
-            orgId = request.orgId,
+            orgId = orgId,
             name = request.name,
             description = request.description,
             levelId = request.levelId,

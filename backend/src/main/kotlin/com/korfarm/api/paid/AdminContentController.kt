@@ -65,6 +65,21 @@ class AdminContentController(
         return ApiResponse(success = true, data = data)
     }
 
+    /** 본문/문제 검색 — content_versions.content_json LIKE 매칭.
+     *  scope: body|question (현재 동작 동일, 1차에서는 path 구분 안 함) */
+    @GetMapping("/content/search")
+    fun searchContentBody(
+        @RequestParam(name = "q") q: String,
+        @RequestParam(name = "scope", required = false, defaultValue = "body") scope: String,
+        @RequestParam(name = "limit", required = false, defaultValue = "200") limit: Int
+    ): ApiResponse<List<AdminContentSummary>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        featureFlagService.requireEnabled("feature.admin.console")
+        val capped = limit.coerceIn(1, 500)
+        val data = adminContentService.searchContentsByBody(q, capped)
+        return ApiResponse(success = true, data = data)
+    }
+
     @PutMapping("/content/{contentId}")
     fun updateContent(
         @PathVariable contentId: String,

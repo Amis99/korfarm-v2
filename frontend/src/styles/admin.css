@@ -24,6 +24,13 @@
   box-sizing: border-box;
 }
 
+/* ── 모바일·태블릿 — 가로 넘침 방지 안전망 ──
+   페이지 자체는 절대 가로 스크롤 X (모달은 fixed 라 영향 없음). */
+.admin-page {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 .admin-shell {
   display: grid;
   grid-template-columns: 1fr;
@@ -239,6 +246,12 @@
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
+  min-width: 0; /* grid/flex 자식이 자기 콘텐츠 폭으로 늘어나지 않게 — 모바일 가로 넘침 방지 핵심 */
+}
+
+/* admin-shell·admin-main 도 min-width:0 으로 강제해 자식이 화면 폭 안 넘게 */
+.admin-shell, .admin-main {
+  min-width: 0;
 }
 
 @media (max-width: 768px) {
@@ -289,7 +302,10 @@
   border: 1px solid rgba(45, 106, 79, 0.08);
   display: grid;
   gap: 8px;
+  min-width: 0;
+  max-width: 100%;
 }
+.admin-card > * { min-width: 0; max-width: 100%; }
 
 .admin-card strong {
   font-size: 22px;
@@ -393,19 +409,36 @@
 }
 
 /* ── 모바일/태블릿 — 본문 안의 모든 테이블 자동 가로 스크롤 ──
-   admin-table-scroll 미적용 페이지가 모바일에서 깨지지 않도록 안전망 */
+   table 자체를 display:block + overflow-x:auto 스크롤 컨테이너로,
+   th/td 에 white-space:nowrap 을 줘 자기 콘텐츠 폭으로 확장 → 가로 스크롤 동작 보장 */
 @media (max-width: 1024px) {
-  .admin-main table {
+  .admin-main table,
+  .admin-detail-card table,
+  .admin-card table {
     display: block;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     max-width: 100%;
+    width: 100%;
   }
-  .admin-main table thead,
-  .admin-main table tbody,
-  .admin-main table tr {
-    width: max-content;
-    min-width: 100%;
+  .admin-main table > thead,
+  .admin-main table > tbody,
+  .admin-main table > tfoot,
+  .admin-detail-card table > thead,
+  .admin-detail-card table > tbody,
+  .admin-detail-card table > tfoot {
+    display: table;
+    width: 100%;
+    min-width: max-content;
+  }
+  /* 핵심: 셀 내용 줄바꿈 막아 자기 콘텐츠 폭으로 늘어남 → table 이 스크롤 가능해짐 */
+  .admin-main table th,
+  .admin-main table td,
+  .admin-detail-card table th,
+  .admin-detail-card table td,
+  .admin-card table th,
+  .admin-card table td {
+    white-space: nowrap;
   }
 }
 
