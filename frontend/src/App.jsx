@@ -107,6 +107,8 @@ const AdminWisdomDetailPage = lazy(() => import("./pages/AdminWisdomDetailPage")
 const AdminTestPage = lazy(() => import("./pages/AdminTestPage"));
 const AdminAiUsagePage = lazy(() => import("./pages/AdminAiUsagePage"));
 const AdminTestEditorPage = lazy(() => import("./pages/AdminTestEditorPage"));
+const AdminTextbookListPage = lazy(() => import("./textbook/pages/AdminTextbookListPage"));
+const TextbookEditorPage = lazy(() => import("./textbook/canvas/CanvasTextbookEditorPage"));
 const AdminOfflineOmrPage = lazy(() => import("./pages/AdminOfflineOmrPage"));
 const AdminTestStatisticsPage = lazy(() => import("./pages/AdminTestStatisticsPage"));
 const AdminProPage = lazy(() => import("./pages/AdminProPage"));
@@ -340,6 +342,9 @@ function App() {
           {/* 학습 계획표 셀에서 진입하는 표준 경로 */}
           <Route path="/admin/wisdom/posts/:postId" element={A(<AdminWisdomDetailPage />)} />
           <Route path="/admin/tests" element={A(<AdminTestPage />)} />
+          <Route path="/admin/textbooks" element={A(<AdminTextbookListPage />)} />
+          <Route path="/admin/textbooks/new" element={A(<TextbookEditorPage />)} />
+          <Route path="/admin/textbooks/:textbookId/edit" element={A(<TextbookEditorPage />)} />
           <Route path="/admin/ai-usage" element={A(<AdminAiUsagePage />)} />
           <Route path="/admin/tests/:testId/edit" element={A(<AdminTestEditorPage />)} />
           <Route path="/admin/tests/:testId/statistics" element={A(<AdminTestStatisticsPage />)} />

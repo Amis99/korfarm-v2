@@ -1,0 +1,236 @@
+/*
+ * 교재 미리보기 보강 CSS.
+ * 기본 .tpr-* (test-paper.css) 와 .lve-* (layout-editor.css) 를 그대로 활용하고
+ * 사용자 요구사항(A4 절대 고정 / column-fill auto / keepTogether / 좌우 페이지 분기)만 보강.
+ */
+
+/* ── A4 절대 고정 — 길어지거나 짧아지지 않는다 ───────────────── */
+.tb-page {
+  width: 210mm;
+  height: 297mm;            /* min-height 가 아니라 height — 콘텐츠가 넘쳐도 컨테이너는 297mm */
+  overflow: hidden;          /* 넘친 콘텐츠는 다음 페이지에서 처리 (별도 page break 노드로 분리) */
+  padding: 18mm 16mm;
+  box-sizing: border-box;
+  background: #fff;
+  position: relative;
+  margin: 0 auto 20px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+  page-break-after: always;
+  break-after: page;
+  display: flex;
+  flex-direction: column;
+}
+
+.tb-page-header,
+.tb-page-footer {
+  flex-shrink: 0;
+  height: 12mm;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  font-size: 10pt;
+  color: #555;
+}
+.tb-page-header { border-bottom: 0.5pt solid #ddd; margin-bottom: 6mm; padding-bottom: 2mm; }
+.tb-page-footer { border-top: 0.5pt solid #ddd; margin-top: 6mm; padding-top: 2mm; }
+
+/* 좌측·우측 슬롯. 짝수/홀수 페이지에서 outer/inner 가 좌우 반전. */
+.tb-slot-outer, .tb-slot-inner { padding: 0 4mm; }
+.tb-page.even .tb-slot-outer { text-align: left; }
+.tb-page.even .tb-slot-inner { text-align: right; }
+.tb-page.odd  .tb-slot-outer { text-align: right; }
+.tb-page.odd  .tb-slot-inner { text-align: left; }
+.tb-page.even .tb-page-header { grid-template-areas: "outer inner"; }
+.tb-page.odd  .tb-page-header { grid-template-areas: "inner outer"; }
+.tb-page.even .tb-page-footer { grid-template-areas: "outer inner"; }
+.tb-page.odd  .tb-page-footer { grid-template-areas: "inner outer"; }
+.tb-slot-outer { grid-area: outer; }
+.tb-slot-inner { grid-area: inner; }
+
+.tb-page-body {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  font-size: 10.5pt;
+  line-height: 1.55;
+  color: #1a1a1a;
+}
+
+/* ── 다단 — 항상 column-fill: auto (사용자 명시: balance 가 아니라 auto) ── */
+.tb-multicol {
+  column-count: 2;
+  column-fill: auto;        /* 핵심 — 자연 흐름 */
+  column-gap: 10mm;
+  column-rule: 0.5pt solid #eee;
+  height: 100%;              /* 고정 height 가 있어야 column-fill: auto 작동 */
+}
+.tb-multicol.cols-3 { column-count: 3; }
+
+/* ── 한 덩이 결속 — break-inside avoid + box-decoration-break ─ */
+.tb-keep,
+.tb-keep * { page-break-inside: avoid; break-inside: avoid; }
+.tb-keep { box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+
+/* QuestionBlock 은 항상 keepTogether */
+.tb-question {
+  break-inside: avoid; page-break-inside: avoid;
+  margin: 0 0 8pt; padding: 4pt 0;
+}
+
+/* ── 강제 분리 ────────────────────────────────────────────── */
+.tb-page-break    { break-before: page; page-break-before: always; }
+.tb-column-break  { break-before: column; }
+.tb-spacer        { display: block; }
+
+/* ── Unknown 블록 — 누락 보존 시각화 ─────────────────────── */
+.tb-unknown {
+  margin: 8pt 0;
+  padding: 8pt;
+  background: #fff5e6;
+  border: 1px dashed #d68910;
+  border-radius: 4px;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 8.5pt;
+  color: #7e5109;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 60mm;
+  overflow: hidden;
+}
+.tb-unknown-note { font-weight: 600; margin-bottom: 4pt; color: #b9770e; font-family: inherit; }
+
+/* ── 골격 블록 ─────────────────────────────────────────── */
+.tb-book-cover, .tb-chapter-cover {
+  height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+}
+.tb-book-cover h1 { font-size: 48pt; margin: 0 0 12pt; }
+.tb-book-cover .meta { font-size: 14pt; color: #555; }
+.tb-chapter-cover .num {
+  width: 80pt; height: 80pt; border-radius: 50%;
+  background: #2C3E70; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36pt; font-weight: 700; margin: 0 auto 20pt;
+}
+.tb-chapter-cover h2 { font-size: 28pt; margin: 0 0 8pt; }
+.tb-chapter-cover .label { font-size: 12pt; color: #888; letter-spacing: 0.2em; }
+.tb-chapter-cover .intro { font-size: 11pt; color: #444; margin-top: 16pt; max-width: 120mm; }
+
+.tb-area-header {
+  border-left: 4pt solid var(--area-color, #2C3E70);
+  padding: 6pt 0 6pt 10pt;
+  margin: 8pt 0 12pt;
+}
+.tb-area-header .name { font-size: 16pt; font-weight: 700; }
+.tb-area-header .sub  { font-size: 10pt; color: #777; margin-top: 2pt; }
+
+.tb-section-label {
+  margin: 8pt 0 4pt;
+  font-size: 11pt;
+  color: var(--area-color, #2C3E70);
+  font-weight: 600;
+}
+.tb-section-label::before { content: "[ "; }
+.tb-section-label::after  { content: " ]"; }
+
+/* ── 본문 ──────────────────────────────────────────────── */
+.tb-concept, .tb-passage-full, .tb-passage-full-nt {
+  border: 1px solid #ddd; border-radius: 4px;
+  padding: 8pt 10pt; margin: 6pt 0;
+  background: #fafafa;
+}
+.tb-passage-full .title, .tb-concept .title {
+  display: inline-block;
+  background: #2C3E70; color: #fff;
+  padding: 2pt 8pt; border-radius: 3px;
+  font-size: 10pt; font-weight: 600;
+  margin-bottom: 4pt;
+}
+
+.tb-passage-note, .tb-passage-note-nt {
+  display: grid; grid-template-columns: 1fr 34mm;
+  gap: 3mm; margin: 6pt 0;
+}
+.tb-passage-note .body {
+  border: 1px solid #ddd; border-radius: 4px;
+  padding: 8pt 10pt; background: #FAF8F2;
+}
+.tb-passage-note .memo {
+  border-left: 1px dashed #aaa;
+  padding-left: 4pt;
+  font-size: 9pt; color: #888;
+  background-image: repeating-linear-gradient(
+    to bottom, transparent 0, transparent 4.5mm, #eee 4.5mm, #eee 4.6mm
+  );
+}
+.tb-passage-note .memo .cat {
+  font-weight: 700; color: var(--area-color, #2C3E70);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1pt; margin-bottom: 4pt;
+}
+
+.tb-passage-hint {
+  background: #f0f4ff; border: 1px solid #c9d6f5; border-radius: 4px;
+  padding: 6pt 10pt; margin: 6pt 0; font-size: 10pt;
+}
+
+/* ── 어휘 표 ───────────────────────────────────────────── */
+.tb-vocab { width: 100%; border-collapse: collapse; margin: 6pt 0; }
+.tb-vocab td { border: 1px solid #ddd; padding: 6pt; vertical-align: top; }
+.tb-vocab .num {
+  width: 20pt; height: 20pt; border-radius: 50%;
+  background: #2C3E70; color: #fff; display: inline-block;
+  text-align: center; font-weight: 700; font-size: 10pt; line-height: 20pt;
+}
+.tb-vocab .word { font-weight: 700; }
+.tb-vocab .meaning { font-size: 10pt; color: #444; }
+.tb-vocab .example { font-size: 9pt; color: #888; margin-top: 2pt; }
+
+/* ── 문제 ──────────────────────────────────────────────── */
+.tb-question .stem { font-weight: 600; margin-bottom: 4pt; }
+.tb-question .stem .num {
+  display: inline-block; min-width: 22pt; text-align: center;
+  background: #3498db; color: #fff; padding: 1pt 4pt;
+  border-radius: 3px; margin-right: 6pt; font-size: 9pt;
+}
+.tb-question.short .num { background: #27ae60; }
+.tb-question.essay .num { background: #e67e22; }
+.tb-question .box, .tb-question .cond {
+  border: 1px solid #ccc; border-radius: 3px;
+  padding: 4pt 6pt; margin: 4pt 0; background: #fafafa;
+  font-size: 10pt;
+}
+.tb-question .box::before { content: "<보기>"; font-weight: 700; color: #555; margin-right: 4pt; }
+.tb-question .cond::before { content: "<조건>"; font-weight: 700; color: #555; margin-right: 4pt; }
+.tb-question .choices { list-style: none; padding: 0; margin: 4pt 0 0; }
+.tb-question .choices li { padding: 1pt 0; }
+.tb-question .answer-lines {
+  border-bottom: 1px solid #888;
+  height: 14pt; margin: 4pt 0;
+}
+.tb-question .answer-note {
+  border: 1px solid #888; border-radius: 3px;
+  padding: 6pt; margin: 4pt 0;
+}
+.tb-question .answer-note .label {
+  font-size: 9pt; color: #555; margin-bottom: 4pt;
+}
+
+/* ── 정답·해설 (학생용에서는 숨김) ───────────────────── */
+.tb-page.student-mode .tb-answer-explain,
+.tb-page.student-mode .tb-model-answer,
+.tb-page.student-mode .tb-question .answer,
+.tb-page.student-mode .tb-question .explain { display: none !important; }
+.tb-answer-explain, .tb-model-answer {
+  background: #fffbe6; border: 1px dashed #f1c40f; border-radius: 3px;
+  padding: 4pt 8pt; margin: 4pt 0; font-size: 9pt; color: #7e5109;
+}
+
+/* ── 인쇄 ──────────────────────────────────────────────── */
+@page { size: A4 portrait; margin: 0; }
+@media print {
+  body { background: #fff; }
+  .tb-page { box-shadow: none; margin: 0 !important; }
+}

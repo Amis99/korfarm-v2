@@ -237,6 +237,8 @@ class FileService(
             // **주의**: 정답·해설 PDF 는 별도 purpose ("test_answer_pdf") 로 저장되며
             //          여기에 포함하면 안 됨 (학생은 TestController 의 검증 엔드포인트만 통과해야 함).
             "test_paper_pdf", "pro_answer_pdf",
+            // 교재 학생용 PDF — textbook_answer_pdf 는 의도적 제외 (관리자/별도 검증 통과만)
+            "textbook_pdf",
             // 상점 상품 이미지
             "shop-product-image",
         )
@@ -285,6 +287,7 @@ class FileService(
             "board_attachment", "board-attachment", "wisdom",
             "content", "content_pdf", "study_plan",
             "test_paper_pdf", "pro_answer_pdf",
+            "textbook_pdf",
             "shop-product-image",
         )
         when {
