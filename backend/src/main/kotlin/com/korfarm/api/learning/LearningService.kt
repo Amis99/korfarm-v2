@@ -35,13 +35,16 @@ class LearningService(
         val correctCount = request.answers.size
         val score = correctCount
         val userLevelId = userRepository.findById(userId).orElse(null)?.levelId
-        val seedCount = if (alreadyGranted) {
-            0
-        } else {
-            SeedRewardPolicy.seedCountFor(userLevelId, request.contentLevelId)
-        }
-        val catalog = seedCatalogRepository.findAll()
-        val seedType = SeedRewardPolicy.randomSeedType(catalog)
+        // 통합 정책 — random 씨앗 타입 제거. activityType 을 contentType 으로 사용.
+        val decision = SeedRewardPolicy.calculateGrant(
+            userLevelId = userLevelId,
+            contentLevelId = request.contentLevelId,
+            contentType = activityType,
+            accuracyPct = 100,
+            source = SeedRewardPolicy.GrantSource.LEGACY_LEARNING,
+        )
+        val seedCount = if (alreadyGranted) 0 else decision.rawCount
+        val seedType = decision.seedType
         val seedGrant = SeedGrant(seedType = seedType, count = seedCount)
         if (seedCount > 0) {
             economyService.addSeeds(userId, seedGrant.seedType, seedGrant.count, "daily_submit", "learning", null)

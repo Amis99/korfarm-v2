@@ -274,22 +274,22 @@ class TestService(
         )
         val saved = submissionRepo.save(entity)
 
-        // 씨앗 보상 — 학생 직접 응시 첫 회(attempt_no=1) 만 지급.
+        // 씨앗 보상 — 학생 직접 응시 첫 회(attempt_no=1) 만 지급. 통합 정책 사용.
         // 어드민 OMR 입력(submittedBy != userId) · 재응시(attempt_no>1) 는 인플레 방지로 지급 X.
         val isFirstStudentAttempt = submittedBy == userId && nextAttemptNo == 1
         if (isFirstStudentAttempt) {
             val totalPoints = questions.sumOf { it.points }
             val percentage = if (totalPoints > 0) (score * 100 / totalPoints) else 0
-            val seedReward = when {
-                percentage >= 90 -> 5
-                percentage >= 70 -> 3
-                percentage >= 50 -> 1
-                else -> 0
-            }
-            if (seedReward > 0) {
-                val catalog = seedCatalogRepository.findAll()
-                val seedType = SeedRewardPolicy.randomSeedType(catalog)
-                economyService.addSeeds(userId, seedType, seedReward, "테스트 완료", "test", testId)
+            val paperLevelId = testPaperRepo.findById(testId).orElse(null)?.levelId
+            val decision = SeedRewardPolicy.calculateGrant(
+                userLevelId = paperLevelId,
+                contentLevelId = paperLevelId,
+                contentType = "TEST",       // 매핑 없음 → seed_wheat fallback
+                accuracyPct = percentage,
+                source = SeedRewardPolicy.GrantSource.TEST,
+            )
+            if (decision.rawCount > 0) {
+                economyService.addSeeds(userId, decision.seedType, decision.rawCount, "테스트 완료", "test", testId)
             }
         }
 

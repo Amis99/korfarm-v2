@@ -108,4 +108,76 @@ object SeedRewardPolicy {
         if (contentType.isNullOrBlank()) return null
         return contentTypeFarmMapping[contentType]
     }
+
+    // ─── 통합 단일 진입점 (2026-05-15 일관성 재설계) ──────────────
+    //
+    // 모든 학습 완료 시 이 메서드 하나만 호출. 호출처는 결정의 적용(가산 + cap)
+    // 외에는 어떤 자체 계산도 하지 않는다.
+
+    enum class GrantSource { FARM_LEARNING, STUDY_CONTENT, TEST, PRO_MODE, LEGACY_LEARNING }
+
+    data class SeedGrantDecision(
+        val seedType: String,
+        val rawCount: Int,                  // cap 적용 전
+        val dailyCapPerContentType: Int,    // 9999 면 사실상 무제한
+        val reasonCode: String,
+    )
+
+    /**
+     * 통합 정책 — 모든 학습이 같은 식.
+     *
+     * 양 = seedCountFor(레벨차) × 정확도 가중 × source 가중
+     *  - 정확도 <70% → 0
+     *  - 정확도 70~99% → ×1
+     *  - 정확도 100% → ×2
+     *  - source = TEST → ×1.5  (테스트는 의미 있는 평가)
+     *  - source = PRO_MODE → ×1.2
+     *  - 그 외 → ×1
+     *
+     * 타입 = seedTypeForContentType (콘텐츠 매핑) ?: "seed_wheat"
+     *
+     * 하루 cap (per contentType, per user):
+     *  - DAILY_QUIZ / DAILY_READING → 10  (사용자 정책)
+     *  - 그 외 → 50  (악용 방지)
+     */
+    fun calculateGrant(
+        userLevelId: String?,
+        contentLevelId: String?,
+        contentType: String?,
+        accuracyPct: Int?,
+        source: GrantSource,
+    ): SeedGrantDecision {
+        val acc = accuracyPct ?: 100
+        val accBoost = when {
+            acc < 70 -> 0.0
+            acc < 100 -> 1.0
+            else -> 2.0
+        }
+        val sourceBoost = when (source) {
+            GrantSource.TEST -> 1.5
+            GrantSource.PRO_MODE -> 1.2
+            else -> 1.0
+        }
+        val base = seedCountFor(userLevelId, contentLevelId)
+        val raw = (base * accBoost * sourceBoost).toInt().coerceAtLeast(0)
+
+        val seedType = seedTypeForContentType(contentType) ?: "seed_wheat"
+        val cap = when (contentType) {
+            "DAILY_QUIZ", "DAILY_READING" -> 10
+            else -> 50
+        }
+
+        return SeedGrantDecision(
+            seedType = seedType,
+            rawCount = raw,
+            dailyCapPerContentType = cap,
+            reasonCode = "base=$base acc=$acc src=$source ct=$contentType lv=$contentLevelId/$userLevelId",
+        )
+    }
+
+    /** rawCount 를 (cap - todayEarned) 안으로 깎는다. todayEarned 가 cap 이상이면 0. */
+    fun applyDailyCap(rawCount: Int, capLimit: Int, todayEarned: Int): Int {
+        val remaining = (capLimit - todayEarned).coerceAtLeast(0)
+        return rawCount.coerceAtMost(remaining)
+    }
 }

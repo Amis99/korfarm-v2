@@ -52,22 +52,22 @@ class FarmLearningService(
             return FarmCompleteResponse(success = false, earnedSeed = 0)
         }
 
-        // 서버 측에서 contentType 기반으로 씨앗 종류 결정 (프론트 값 무시)
-        val resolvedSeedType = SeedRewardPolicy.seedTypeForContentType(log.contentType)
-            ?: request.seedType
-            ?: "seed_wheat"
-
-        // 일일 퀴즈/독해: 하루 씨앗 10개 제한
-        var actualEarned = request.earnedSeed
-        var dailySeedRemaining: Int? = null
-        if (log.contentType in DAILY_SEED_LIMIT_TYPES && actualEarned > 0) {
-            val todayStart = LocalDate.now().atStartOfDay()
-            val todayEarned = farmLearningLogRepository
-                .sumEarnedSeedByUserAndContentTypeSince(userId, log.contentType, todayStart)
-            val remaining = (DAILY_SEED_MAX - todayEarned).coerceAtLeast(0)
-            actualEarned = actualEarned.coerceAtMost(remaining)
-            dailySeedRemaining = (remaining - actualEarned).coerceAtLeast(0)
-        }
+        // 통합 정책 — 프론트 earnedSeed 무시. 서버가 결정.
+        val userLevelId = try { contentRepository.findById(log.contentId).orElse(null)?.levelId } catch (_: Exception) { null }
+        val contentLevelId = userLevelId  // 일관 매핑 — 같은 학년대 학습
+        val decision = SeedRewardPolicy.calculateGrant(
+            userLevelId = userLevelId,
+            contentLevelId = contentLevelId,
+            contentType = log.contentType,
+            accuracyPct = request.accuracy,
+            source = SeedRewardPolicy.GrantSource.FARM_LEARNING,
+        )
+        val todayStart = LocalDate.now().atStartOfDay()
+        val todayEarned = farmLearningLogRepository
+            .sumEarnedSeedByUserAndContentTypeSince(userId, log.contentType, todayStart)
+        val actualEarned = SeedRewardPolicy.applyDailyCap(decision.rawCount, decision.dailyCapPerContentType, todayEarned)
+        val dailySeedRemaining = (decision.dailyCapPerContentType - todayEarned - actualEarned).coerceAtLeast(0)
+        val resolvedSeedType = decision.seedType
 
         val now = LocalDateTime.now()
         log.status = "COMPLETED"

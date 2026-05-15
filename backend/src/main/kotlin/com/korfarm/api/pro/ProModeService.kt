@@ -188,8 +188,16 @@ class ProModeService(
             ApiException("NOT_FOUND", "챕터를 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
         }
 
-        val seedType = itemSeedTypeMap[item.type] ?: "seed_wheat"
-        val seedCount = SeedRewardPolicy.seedCountFor(user.levelId, chapter.levelId)
+        // 통합 정책 — itemSeedTypeMap 별도 매핑 제거. contentType=item.type 으로 seedTypeForContentType 사용.
+        val decision = SeedRewardPolicy.calculateGrant(
+            userLevelId = user.levelId,
+            contentLevelId = chapter.levelId,
+            contentType = item.type,        // PRO_VOCAB / PRO_READING 등 — 매핑 있음
+            accuracyPct = 100,              // 프로 모드는 단순 완료 — 100% 가정
+            source = SeedRewardPolicy.GrantSource.PRO_MODE,
+        )
+        val seedType = decision.seedType
+        val seedCount = decision.rawCount
 
         // 진행 기록 저장
         val now = LocalDateTime.now()

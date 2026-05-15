@@ -1321,11 +1321,21 @@ class StudyContentService(
         val totalCorrect = attempts.count { it.isCorrect }
         val accuracyPct = if (totalAttempted > 0) (totalCorrect.toDouble() / totalAttempted * 100).roundToInt() else 0
 
-        var earnedSeed = 0
-        if (accuracyPct >= SEEDS_PASS_THRESHOLD && totalAttempted > 0) {
-            earnedSeed = SEEDS_BASE
-            if (accuracyPct == 100) earnedSeed *= 2
-        }
+        // 통합 정책 — SEED_TYPE 하드코딩 제거, SEEDS_BASE 자체 계산 제거.
+        val contentType = "STUDY_CONTENT"
+        val decision = com.korfarm.api.learning.SeedRewardPolicy.calculateGrant(
+            userLevelId = c.levelId,
+            contentLevelId = c.levelId,
+            contentType = contentType,
+            accuracyPct = if (totalAttempted > 0) accuracyPct else 0,
+            source = com.korfarm.api.learning.SeedRewardPolicy.GrantSource.STUDY_CONTENT,
+        )
+        val todayStart = java.time.LocalDate.now().atStartOfDay()
+        val todayEarned = farmLearningLogRepository
+            .sumEarnedSeedByUserAndContentTypeSince(userId, contentType, todayStart)
+        val earnedSeed = com.korfarm.api.learning.SeedRewardPolicy
+            .applyDailyCap(decision.rawCount, decision.dailyCapPerContentType, todayEarned)
+        val resolvedSeedType = decision.seedType
 
         // farm_learning_logs 마무리
         val logEntity = farmLearningLogRepository.findById(logId).orElse(null)
@@ -1334,14 +1344,14 @@ class StudyContentService(
             logEntity.score = totalCorrect
             logEntity.accuracy = accuracyPct
             logEntity.earnedSeed = earnedSeed
-            logEntity.earnedSeedType = SEED_TYPE
+            logEntity.earnedSeedType = resolvedSeedType
             logEntity.completedAt = LocalDateTime.now()
             farmLearningLogRepository.save(logEntity)
         }
 
         if (earnedSeed > 0) {
             economyService.addSeeds(
-                userId, SEED_TYPE, earnedSeed,
+                userId, resolvedSeedType, earnedSeed,
                 "study_content_session", "farm_learning_log",
                 logId
             )

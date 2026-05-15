@@ -79,6 +79,11 @@ interface FarmLearningLogRepository : JpaRepository<FarmLearningLogEntity, Strin
     fun sumEarnedSeedByUserAndContentTypeSince(
         userId: String, contentType: String, since: java.time.LocalDateTime
     ): Int
+
+    /** 백테필 정산용 — 기간 안 COMPLETED 로그 전수 */
+    fun findByStatusAndCompletedAtAfter(
+        status: String, since: java.time.LocalDateTime
+    ): List<FarmLearningLogEntity>
 }
 
 interface ContentCountProjection {
