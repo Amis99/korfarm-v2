@@ -30,4 +30,24 @@ class SeedReconciliationController(
         val report = service.reconcile(days, apply)
         return ApiResponse(success = true, data = report)
     }
+
+    /**
+     * STUCK 백테필 — STARTED 로 멈춘 일일 학습(DAILY_QUIZ/DAILY_READING) 을
+     * 추정 정확도(default 70) 로 보상 처리.
+     *
+     *   POST /v1/admin/seed-reconciliation/stuck?days=5&accuracy=70&apply=false  → dry-run
+     *   POST /v1/admin/seed-reconciliation/stuck?days=5&accuracy=70&apply=true   → 적용
+     *
+     * 학생 권한자(STUDENT) 만 대상. ORG_ADMIN/HQ_ADMIN 어드민 테스트는 제외.
+     */
+    @PostMapping("/stuck")
+    fun reconcileStuck(
+        @RequestParam(defaultValue = "5") days: Int,
+        @RequestParam(defaultValue = "70") accuracy: Int,
+        @RequestParam(defaultValue = "false") apply: Boolean,
+    ): ApiResponse<SeedReconciliationService.StuckReport> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        val report = service.reconcileStuck(days, accuracy, apply)
+        return ApiResponse(success = true, data = report)
+    }
 }

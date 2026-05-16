@@ -264,7 +264,14 @@ data class StudentSubmissionDetail(
     val accuracy: Double,
     val submittedAt: LocalDateTime,
     val domainScores: Map<String, DomainScore>,
-    val wrongQuestionNumbers: List<Int>
+    val wrongQuestionNumbers: List<Int>,
+    // 학생명 클릭 → 실제 성적표 페이지 navigation 용 (2026-05-16 추가)
+    val kind: String = "misc",                 // "diagnostic" / "chapter" / "misc"
+    val sessionId: String? = null,             // 진단: diag_sessions.id / 챕터: pro_test_sessions.id
+    val submissionId: String? = null,          // 챕터·기타: test_submissions.id
+    val tier: String? = null,                  // 진단: sohssure/frege/russell/wittgenstein
+    val tci: Double? = null,                   // 진단: adjusted_tci (없으면 raw_tci)
+    val recommendedLevel: String? = null,      // 진단 판정 레벨
 )
 
 // ── Admin: 문항별 분석 ──

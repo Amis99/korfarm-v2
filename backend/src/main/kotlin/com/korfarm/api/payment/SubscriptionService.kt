@@ -44,6 +44,10 @@ class SubscriptionService(
     fun requireActive(userId: String) {
         // 본사 관리자/기관 관리자는 구독 검증 우회 — 모든 학습 메뉴 무제한 접근
         if (SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")) return
+        // 기관 가입 학생은 PAID/PREMIUM role 자동 부여됨 (AuthService 의 active 멤버십 기반).
+        // SubscriptionEntity row 없어도 학습 진입 OK — 일일 독해/농장학습 silent 402 사고 방지.
+        // 2026-05-16 일일 독해 씨앗 누락 사고 원인 fix.
+        if (SecurityUtils.hasAnyRole("PAID", "PREMIUM")) return
         val current = subscriptionRepository.findTopByUserIdOrderByEndAtDesc(userId)
             ?: throw ApiException("PAYMENT_REQUIRED", "subscription required", HttpStatus.PAYMENT_REQUIRED)
         if (!isEntitled(current)) {

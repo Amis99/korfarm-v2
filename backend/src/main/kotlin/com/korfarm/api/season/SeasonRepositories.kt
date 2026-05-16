@@ -17,3 +17,6 @@ interface SeasonDuelRankingRepository : JpaRepository<SeasonDuelRankingEntity, S
 interface SeasonAwardSnapshotRepository : JpaRepository<SeasonAwardSnapshotEntity, String> {
     fun findFirstBySeasonIdOrderByCapturedAtDesc(seasonId: String): SeasonAwardSnapshotEntity?
 }
+
+interface SeasonModalSeenRepository : JpaRepository<SeasonModalSeenEntity, SeasonModalSeenId>
+

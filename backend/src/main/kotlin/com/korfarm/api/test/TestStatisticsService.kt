@@ -334,7 +334,9 @@ class TestStatisticsService(
                 domainScores = domainAgg.mapValues { (_, a) ->
                     DomainScore(score = a[0], maxScore = a[1], correct = a[2], total = a[3])
                 },
-                wrongQuestionNumbers = wrongNumbers
+                wrongQuestionNumbers = wrongNumbers,
+                kind = kind,                    // "chapter" / "misc"
+                submissionId = sub.id,
             )
         }.sortedByDescending { it.score }
     }
@@ -527,7 +529,12 @@ class TestStatisticsService(
                 accuracy = accuracy,
                 submittedAt = s.completedAt ?: s.startedAt,
                 domainScores = domainScores,
-                wrongQuestionNumbers = wrongNumbers
+                wrongQuestionNumbers = wrongNumbers,
+                kind = "diagnostic",
+                sessionId = s.id,
+                tier = s.tier,
+                tci = (s.adjustedTci ?: s.rawTci)?.toDouble(),
+                recommendedLevel = s.recommendedLevel,
             )
         }.sortedByDescending { it.score }
     }

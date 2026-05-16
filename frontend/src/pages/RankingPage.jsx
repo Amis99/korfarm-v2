@@ -52,11 +52,25 @@ function RankingPage() {
 
   useEffect(() => {
     setLoading(true);
+    const levelParam = scope === "level" ? `?level=${level}` : "";
+
+    // 누적 랭킹 — 시즌 무관, ledger 양수 합산 기반
+    if (period === "cumulative") {
+      apiGet(`/v1/seasons/lifetime-rankings${levelParam}`)
+        .then((data) => {
+          const items = data?.items || data || [];
+          setRankings(items);
+        })
+        .catch(() => setRankings([]))
+        .finally(() => setLoading(false));
+      return;
+    }
+
+    // 시즌 랭킹 — 현재 active 시즌
     apiGet("/v1/seasons/current")
       .then((season) => {
         if (season?.id || season?.seasonId) {
           const sid = season.id || season.seasonId;
-          const levelParam = scope === "level" ? `?level=${level}` : "";
           return apiGet(`/v1/seasons/${sid}/harvest-rankings${levelParam}`);
         }
         return [];

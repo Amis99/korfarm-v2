@@ -84,6 +84,13 @@ interface FarmLearningLogRepository : JpaRepository<FarmLearningLogEntity, Strin
     fun findByStatusAndCompletedAtAfter(
         status: String, since: java.time.LocalDateTime
     ): List<FarmLearningLogEntity>
+
+    /** STUCK 백테필 — STARTED 로 멈춘 로그 전수 (createdAt 기준) */
+    fun findByStatusAndContentTypeInAndCreatedAtAfter(
+        status: String,
+        contentTypes: Collection<String>,
+        since: java.time.LocalDateTime
+    ): List<FarmLearningLogEntity>
 }
 
 interface ContentCountProjection {

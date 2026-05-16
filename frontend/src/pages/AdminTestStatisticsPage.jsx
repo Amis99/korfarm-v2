@@ -64,6 +64,13 @@ function normStudent(d) {
     submittedAt: d.submittedAt ?? d.submitted_at,
     domainScores: d.domainScores ?? d.domain_scores ?? {},
     wrongQuestionNumbers: d.wrongQuestionNumbers ?? d.wrong_question_numbers ?? [],
+    // 학생명 클릭 → 실제 성적표 페이지 navigation 용 (2026-05-16 추가)
+    kind: d.kind ?? "misc",
+    sessionId: d.sessionId ?? d.session_id ?? null,
+    submissionId: d.submissionId ?? d.submission_id ?? null,
+    tier: d.tier ?? null,
+    tci: d.tci ?? null,
+    recommendedLevel: d.recommendedLevel ?? d.recommended_level ?? null,
   };
 }
 function normEssayEntry(e) {
@@ -247,6 +254,21 @@ export default function AdminTestStatisticsPage() {
     border: "1px solid var(--stroke)", borderRadius: 6,
   };
 
+  // 진단 테스트 여부 — testId 가 'diag_paper_' 시작 또는 students[0].kind === 'diagnostic'
+  const isDiagnostic = String(testId || "").startsWith("diag_paper_") || students[0]?.kind === "diagnostic";
+
+  // 학생명 클릭 → 실제 성적표 페이지로 navigate (2026-05-16)
+  // 진단: /diagnostic/v2/report/:sessionId?adminReturn=...
+  // 챕터·기타: /admin/tests/:testId/students/:userId/report (어드민 전용 신규 페이지)
+  const adminReturnUrl = `/admin/tests/${testId}/statistics`;
+  const openStudentReport = (s) => {
+    if (s.kind === "diagnostic" && s.sessionId) {
+      navigate(`/diagnostic/v2/report/${s.sessionId}?adminReturn=${encodeURIComponent(adminReturnUrl)}`);
+    } else {
+      navigate(`/admin/tests/${testId}/students/${s.userId}/report`);
+    }
+  };
+
   // 모달 닫기
   const closeModal = () => setModal(null);
 
@@ -342,18 +364,22 @@ export default function AdminTestStatisticsPage() {
                     <th style={{ padding: "6px 6px" }}>응시일시</th>
                     <th style={{ padding: "6px 6px" }}>점수</th>
                     <th style={{ padding: "6px 6px" }}>정답률</th>
-                    <th style={{ padding: "6px 6px" }}>영역별</th>
+                    {/* 진단 테스트면 TCI/판정 레벨 컬럼 */}
+                    {isDiagnostic && <th style={{ padding: "6px 6px" }}>역량 지수 (TCI)</th>}
+                    {isDiagnostic && <th style={{ padding: "6px 6px" }}>판정 레벨</th>}
                     <th style={{ padding: "6px 6px" }}>틀린 번호</th>
                   </tr>
                 </thead>
                 <tbody>
                   {studentsPg.paged.map((s) => {
-                    const domainCount = Object.keys(s.domainScores || {}).length;
                     const wrongCount = (s.wrongQuestionNumbers || []).length;
                     return (
                       <tr key={s.userId} style={{ borderTop: "1px solid var(--stroke)" }}>
                         <td style={{ padding: "4px 6px", fontWeight: 600 }}>
-                          <ClickableCell onClick={() => setModal({ kind: "report", student: s })} title="성적표 보기">
+                          <ClickableCell
+                            onClick={() => openStudentReport(s)}
+                            title="실제 성적표 보기"
+                          >
                             {s.userName || "-"}
                           </ClickableCell>
                         </td>
@@ -365,13 +391,14 @@ export default function AdminTestStatisticsPage() {
                         </td>
                         <td style={{ padding: "4px 6px", fontWeight: 600 }}>{s.score} / {s.totalPoints}</td>
                         <td style={{ padding: "4px 6px" }}>{pct(s.accuracy)}</td>
-                        <td style={{ padding: "4px 6px" }}>
-                          {domainCount > 0 ? (
-                            <ClickableCell onClick={() => setModal({ kind: "domain", student: s })}>
-                              {domainCount}개 영역
-                            </ClickableCell>
-                          ) : "-"}
-                        </td>
+                        {isDiagnostic && (
+                          <td style={{ padding: "4px 6px", fontWeight: 600 }}>
+                            {s.tci != null ? `${Number(s.tci).toFixed(1)}` : "-"}
+                          </td>
+                        )}
+                        {isDiagnostic && (
+                          <td style={{ padding: "4px 6px" }}>{s.recommendedLevel || "-"}</td>
+                        )}
                         <td style={{ padding: "4px 6px", color: wrongCount > 0 ? "#fca5a5" : "var(--muted)" }}>
                           {wrongCount > 0 ? (
                             <ClickableCell onClick={() => setModal({ kind: "wrong", student: s })} title="틀린 번호 보기">
@@ -383,7 +410,7 @@ export default function AdminTestStatisticsPage() {
                     );
                   })}
                   {filteredStudents.length === 0 && (
-                    <tr><td colSpan={9} style={{ padding: 16, textAlign: "center", color: "var(--muted)" }}>응시 학생 없음</td></tr>
+                    <tr><td colSpan={isDiagnostic ? 10 : 8} style={{ padding: 16, textAlign: "center", color: "var(--muted)" }}>응시 학생 없음</td></tr>
                   )}
                 </tbody>
               </table>
@@ -428,12 +455,7 @@ export default function AdminTestStatisticsPage() {
         )}
       </div>
 
-      {/* ── 모달 ── */}
-      {modal?.kind === "domain" && (
-        <Modal open onClose={closeModal} title={`${modal.student.userName || "-"} — 영역별 점수`} size="md">
-          <DomainModalBody student={modal.student} />
-        </Modal>
-      )}
+      {/* ── 모달 ── (학생명 클릭은 navigate 로 변경 — 2026-05-16) */}
       {modal?.kind === "wrong" && (
         <Modal open onClose={closeModal} title={`${modal.student.userName || "-"} — 틀린 번호 (${modal.student.wrongQuestionNumbers.length}개)`} size="sm">
           <WrongModalBody numbers={modal.student.wrongQuestionNumbers} />
@@ -452,34 +474,6 @@ export default function AdminTestStatisticsPage() {
       {modal?.kind === "competency" && (
         <Modal open onClose={closeModal} title={`${modal.question.number}번 — 역량 가중치`} size="md">
           <CompetencyModalBody question={modal.question} />
-        </Modal>
-      )}
-      {modal?.kind === "report" && (
-        <Modal open onClose={closeModal} title={`성적표 — ${modal.student.userName || ""}`} size="xl">
-          {reportLoading ? <div style={{ padding: 24, textAlign: "center" }}>불러오는 중...</div> : (
-            reportData && (
-              <TestReportView
-                report={reportData}
-                userName={modal.student.userName}
-                embedded
-                onSwitchToWrongNote={() => setModal({ kind: "wrongNote", student: modal.student })}
-              />
-            )
-          )}
-        </Modal>
-      )}
-      {modal?.kind === "wrongNote" && (
-        <Modal open onClose={closeModal} title={`오답 노트 — ${modal.student.userName || ""}`} size="xl">
-          {wrongNoteLoading ? <div style={{ padding: 24, textAlign: "center" }}>불러오는 중...</div> : (
-            wrongNoteData && (
-              <TestWrongNoteView
-                data={wrongNoteData}
-                userName={modal.student.userName}
-                embedded
-                onSwitchToReport={() => setModal({ kind: "report", student: modal.student })}
-              />
-            )
-          )}
         </Modal>
       )}
     </AdminLayout>

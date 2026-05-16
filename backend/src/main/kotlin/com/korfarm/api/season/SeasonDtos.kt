@@ -39,3 +39,16 @@ data class SeasonAwards(
     val harvestAwards: Map<String, Any>,
     val duelAwards: Map<String, Any>
 )
+
+/** 시즌 시작 안내 모달 조회 응답 — 학생/학부모/관리자 모두 같은 endpoint, role 별 payload */
+data class SeasonModalStatus(
+    val shouldShow: Boolean,
+    val seasonId: String?,
+    val seasonName: String?,
+    val role: String,
+    val payload: Map<String, Any?>?,
+)
+
+data class MarkModalSeenRequest(
+    val seasonId: String,
+)

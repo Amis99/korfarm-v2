@@ -1,11 +1,14 @@
 package com.korfarm.api.season
 
 import jakarta.persistence.Column
+import jakarta.persistence.Embeddable
+import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
 import jakarta.persistence.PrePersist
 import jakarta.persistence.PreUpdate
 import jakarta.persistence.Table
+import java.io.Serializable
 import java.time.LocalDateTime
 
 @Entity
@@ -121,6 +124,23 @@ class SeasonDuelRankingEntity(
         updatedAt = LocalDateTime.now()
     }
 }
+
+@Embeddable
+data class SeasonModalSeenId(
+    @Column(name = "season_id") var seasonId: String = "",
+    @Column(name = "user_id") var userId: String = "",
+) : Serializable
+
+/** 시즌 시작 안내 모달을 사용자별 1회만 표시하기 위한 플래그 (V0141) */
+@Entity
+@Table(name = "season_modal_seen")
+class SeasonModalSeenEntity(
+    @EmbeddedId
+    var id: SeasonModalSeenId,
+
+    @Column(name = "seen_at", nullable = false)
+    var seenAt: LocalDateTime = LocalDateTime.now(),
+)
 
 @Entity
 @Table(name = "season_award_snapshots")

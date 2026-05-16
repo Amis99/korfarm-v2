@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Link, Navigate, Route, Routes, useLocation, useParams } from "react-router-dom";
 import { ProtectedRoute, AdminRoute } from "./components/ProtectedRoute";
 import { useAuth } from "./hooks/useAuth";
+import SeasonStartModal from "./components/SeasonStartModal";
 
 // 핵심 페이지 (정적 import - 초기 로딩 필수)
 import LandingPage from "./pages/LandingPage";
@@ -79,6 +80,9 @@ const OpsStation = lazy(() => import("./pages/OpsStation"));
 const AdminOrgsPage = lazy(() => import("./pages/AdminOrgsPage"));
 const AdminClassesPage = lazy(() => import("./pages/AdminClassesPage"));
 const AdminStudentsPage = lazy(() => import("./pages/AdminStudentsPage"));
+const AdminMembersPage = lazy(() => import("./pages/AdminMembersPage"));
+const OrgApplyPage = lazy(() => import("./pages/OrgApplyPage"));
+const AdminOrgApplicationsPage = lazy(() => import("./pages/AdminOrgApplicationsPage"));
 const AdminStudentDetailPage = lazy(() => import("./pages/AdminStudentDetailPage"));
 const AdminContentPage = lazy(() => import("./pages/AdminContentPage"));
 const AdminContentUploadPage = lazy(() => import("./pages/AdminContentUploadPage"));
@@ -111,6 +115,7 @@ const AdminTextbookListPage = lazy(() => import("./textbook/pages/AdminTextbookL
 const TextbookEditorPage = lazy(() => import("./textbook/canvas/CanvasTextbookEditorPage"));
 const AdminOfflineOmrPage = lazy(() => import("./pages/AdminOfflineOmrPage"));
 const AdminTestStatisticsPage = lazy(() => import("./pages/AdminTestStatisticsPage"));
+const AdminStudentReportPage = lazy(() => import("./pages/AdminStudentReportPage"));
 const AdminProPage = lazy(() => import("./pages/AdminProPage"));
 const AdminStudyPlanDashboardPage = lazy(() => import("./pages/AdminStudyPlanDashboardPage"));
 const StudyPlanPage = lazy(() => import("./pages/StudyPlanPage"));
@@ -208,10 +213,18 @@ function LoadingFallback() {
 const P = (page) => <ProtectedRoute>{page}</ProtectedRoute>;
 const A = (page) => <AdminRoute>{page}</AdminRoute>;
 
+/* 로그인 사용자에게만 새 시즌 안내 모달 표시 — 학생/학부모/관리자 모두 */
+function SeasonModalGate() {
+  const { isLoggedIn } = useAuth();
+  if (!isLoggedIn) return null;
+  return <SeasonStartModal />;
+}
+
 function App() {
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <GlobalLogo />
+      <SeasonModalGate />
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
           {/* 공개 페이지 */}
@@ -303,6 +316,9 @@ function App() {
           <Route path="/admin/classes" element={A(<AdminClassesPage />)} />
           <Route path="/admin/students" element={A(<AdminStudentsPage />)} />
           <Route path="/admin/students/:userId" element={A(<AdminStudentDetailPage />)} />
+          <Route path="/admin/members" element={A(<AdminMembersPage />)} />
+          <Route path="/admin/org-applications" element={A(<AdminOrgApplicationsPage />)} />
+          <Route path="/orgs/apply" element={A(<OrgApplyPage />)} />
           <Route path="/admin/content" element={A(<AdminContentPage />)} />
           <Route path="/admin/content/upload" element={A(<AdminContentUploadPage />)} />
           <Route path="/admin/content/preview" element={A(<AdminContentPreviewPage />)} />
@@ -348,6 +364,7 @@ function App() {
           <Route path="/admin/ai-usage" element={A(<AdminAiUsagePage />)} />
           <Route path="/admin/tests/:testId/edit" element={A(<AdminTestEditorPage />)} />
           <Route path="/admin/tests/:testId/statistics" element={A(<AdminTestStatisticsPage />)} />
+          <Route path="/admin/tests/:testId/students/:userId/report" element={A(<AdminStudentReportPage />)} />
           <Route path="/admin/tests/offline-omr" element={A(<AdminOfflineOmrPage />)} />
           {/* 옛 /admin/tests/:testId 디테일 페이지는 통계 페이지로 통합 → 통계로 redirect (외부 링크 호환) */}
           <Route path="/admin/tests/:testId" element={A(<AdminTestStatisticsPage />)} />

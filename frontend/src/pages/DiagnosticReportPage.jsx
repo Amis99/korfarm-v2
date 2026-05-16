@@ -21,6 +21,9 @@ function DiagnosticReportPage() {
   const [searchParams] = useSearchParams();
   const studentId = searchParams.get("studentId");
   const isParentMode = !!studentId;
+  // 어드민이 시험 통계 페이지에서 진입한 경우 — 돌아갈 URL (2026-05-16)
+  const adminReturn = searchParams.get("adminReturn");
+  const isAdminMode = !!adminReturn;
 
   const [report, setReport] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -97,7 +100,13 @@ function DiagnosticReportPage() {
   if (loading) return <div className="diag-v2-loading">리포트를 불러오는 중...</div>;
   if (!report) return null;
 
-  const backUrl = isParentMode ? `/diagnostic/v2?studentId=${studentId}` : "/diagnostic/v2";
+  // 돌아갈 URL — 어드민 모드 우선, 그 다음 학부모/학생
+  const backUrl = isAdminMode
+    ? adminReturn
+    : isParentMode
+      ? `/diagnostic/v2?studentId=${studentId}`
+      : "/diagnostic/v2";
+  const backLabel = isAdminMode ? "시험 통계로 돌아가기" : "진단 목록";
 
   return (
     <div className="diag-report-page">
@@ -268,7 +277,7 @@ function DiagnosticReportPage() {
       <div className="diag-report-actions">
         <button className="action-card" onClick={() => navigate(backUrl)}>
           <span className="material-symbols-outlined action-icon">list_alt</span>
-          <span className="action-label">진단 목록</span>
+          <span className="action-label">{backLabel}</span>
         </button>
 
         {!isParentMode && answerPdf.checked && answerPdf.available && (

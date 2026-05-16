@@ -471,7 +471,15 @@ class DiagnosticService(
     // ── 리포트 조회 ──
 
     fun getReport(sessionId: String, userId: String): DiagnosticReport {
-        val session = getSession(sessionId, userId)
+        // 어드민(HQ/ORG_ADMIN)은 본인 외 학생 세션도 조회 가능 (2026-05-16 추가).
+        // 어드민 시험 통계 페이지 → 학생명 클릭 → 학생 진단 결과 페이지 navigation 흐름 지원.
+        val isAdmin = com.korfarm.api.security.SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        val session = sessionRepo.findById(sessionId).orElseThrow {
+            ApiException("NOT_FOUND", "세션을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        if (!isAdmin && session.userId != userId) {
+            throw ApiException("FORBIDDEN", "접근 권한이 없습니다", HttpStatus.FORBIDDEN)
+        }
         if (session.status != "completed") {
             throw ApiException("SESSION_NOT_COMPLETED", "세션이 완료되지 않았습니다", HttpStatus.BAD_REQUEST)
         }

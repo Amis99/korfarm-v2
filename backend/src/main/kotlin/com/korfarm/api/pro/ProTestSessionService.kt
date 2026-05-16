@@ -3,11 +3,13 @@ package com.korfarm.api.pro
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
+import com.korfarm.api.economy.EconomyService
 import com.korfarm.api.learning.LearningCompetencyService
 import com.korfarm.api.learning.mapDomainToCompetency
 import com.korfarm.api.test.TestPaperRepo
 import com.korfarm.api.test.TestQuestionRepo
 import com.korfarm.api.test.TestService
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -25,12 +27,15 @@ class ProTestSessionService(
     private val proModeService: ProModeService,
     private val essayGradingService: EssayGradingService,
     private val learningCompetencyService: LearningCompetencyService,
+    private val economyService: EconomyService,
     private val objectMapper: ObjectMapper
 ) {
     companion object {
         const val PASS_SCORE = 70
         const val TIME_LIMIT_MINUTES = 60L
+        const val CHAPTER_PASS_FERTILIZER = 1  // 챕터 통과 보상 — 비료 1개
     }
+    private val logger = LoggerFactory.getLogger(ProTestSessionService::class.java)
 
     @Transactional
     fun printTest(userId: String, chapterId: String): ProTestPrintResponse {
@@ -209,7 +214,7 @@ class ProTestSessionService(
             }
         } catch (_: Exception) { /* 누적 실패는 채점 자체를 막지 않음 */ }
 
-        // 통과 시 프로그레스 완료 기록
+        // 통과 시 프로그레스 완료 기록 + 비료 보상
         if (passed) {
             run {
                 val testItems = proModeService.listChapterItems(userId, session.chapterId)
@@ -229,6 +234,20 @@ class ProTestSessionService(
                         progressRepo.save(progress)
                     }
                 }
+            }
+            // 챕터 통과 보상 — 비료 1개 지급 (2026-05-16 추가)
+            // startTest 의 ALREADY_PASSED 차단(line 60~63) 으로 챕터당 1번만 통과 가능 → 중복 지급 방지됨
+            try {
+                economyService.addFertilizer(
+                    userId = userId,
+                    count = CHAPTER_PASS_FERTILIZER,
+                    reason = "프로 모드 챕터 통과 보상",
+                    refType = "pro_chapter",
+                    refId = session.chapterId,
+                )
+            } catch (ex: Exception) {
+                // 비료 지급 실패는 채점·통과 자체를 막지 않음
+                logger.warn("챕터 통과 비료 지급 실패 userId={} chapterId={}", userId, session.chapterId, ex)
             }
         }
 

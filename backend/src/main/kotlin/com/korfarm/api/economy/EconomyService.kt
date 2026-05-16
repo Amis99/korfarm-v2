@@ -67,6 +67,21 @@ class EconomyService(
         addLedger(userId, "seed", seedType, count, reason, refType, refId)
     }
 
+    /**
+     * 비료 지급 — 2026-05-16 추가.
+     * 프로모드 챕터 통과 시 1개 지급 (ProTestSessionService.submitOmr 의 passed 분기).
+     * 비료는 시즌 리셋과 무관 (사용자 결정).
+     */
+    @Transactional
+    fun addFertilizer(userId: String, count: Int, reason: String, refType: String?, refId: String?) {
+        if (count <= 0) return
+        val fertilizer = userFertilizerRepository.findForUpdate(userId)
+            ?: UserFertilizerEntity(id = IdGenerator.newId("uf"), userId = userId, count = 0)
+        fertilizer.count += count
+        userFertilizerRepository.save(fertilizer)
+        addLedger(userId, "fertilizer", "fertilizer", count, reason, refType, refId)
+    }
+
     @Transactional
     fun adjustSeed(userId: String, seedType: String, delta: Int, reason: String, refType: String?, refId: String?) {
         val seed = userSeedRepository.findForUpdate(userId, seedType)

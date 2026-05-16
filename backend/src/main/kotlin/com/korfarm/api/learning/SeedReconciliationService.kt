@@ -1,6 +1,7 @@
 package com.korfarm.api.learning
 
 import com.korfarm.api.economy.EconomyService
+import com.korfarm.api.org.OrgMembershipRepository
 import com.korfarm.api.paid.ContentRepository
 import com.korfarm.api.user.UserRepository
 import org.slf4j.LoggerFactory
@@ -24,6 +25,7 @@ class SeedReconciliationService(
     private val economyService: EconomyService,
     private val contentRepository: ContentRepository,
     private val userRepository: UserRepository,
+    private val orgMembershipRepository: OrgMembershipRepository,
 ) {
     private val logger = LoggerFactory.getLogger(SeedReconciliationService::class.java)
 
@@ -156,6 +158,158 @@ class SeedReconciliationService(
             totalTopUpSeeds = totalTopUp,
             byContentType = byContentType,
             byUserId = topUsers,
+            examples = examples,
+        )
+    }
+
+    // ===== STUCK 백테필 — STARTED 로 멈춘 일일 학습 (DAILY_QUIZ/DAILY_READING) =====
+    //
+    // 2026-05-16 사건 — FarmLearningController 가 무료 학생의 일일 학습도 PAID 검증을 걸어
+    // farm/complete 가 PAYMENT_REQUIRED 로 silent fail. log status="STARTED" 로 멈춘 채
+    // 씨앗 미지급. 학생 권한자만 대상으로 추정 정확도(default 70) 로 보상 지급.
+    //
+    // 제외: HQ_ADMIN / ORG_ADMIN — 어드민 테스트 흔적이라 의미 없음.
+    data class StuckExample(
+        val logId: String,
+        val userId: String,
+        val contentType: String,
+        val contentId: String,
+        val createdAt: String,
+        val estimatedAccuracy: Int,
+        val grantedSeed: Int,
+        val seedType: String,
+    )
+
+    data class StuckReport(
+        val days: Int,
+        val accuracyEstimate: Int,
+        val apply: Boolean,
+        val since: String,
+        val totalStucks: Int,
+        val studentLogs: Int,           // 학생 권한 로그 (대상)
+        val adminLogs: Int,             // 어드민 권한 로그 (제외)
+        val totalGrantedSeeds: Int,
+        val byContentType: Map<String, ReconciliationStats>,
+        val byUserId: Map<String, ReconciliationStats>,
+        val examples: List<StuckExample>,
+    )
+
+    @Transactional
+    fun reconcileStuck(days: Int, accuracyEstimate: Int, apply: Boolean): StuckReport {
+        val since = LocalDateTime.now().minusDays(days.toLong())
+        val stuckLogs = farmLearningLogRepository.findByStatusAndContentTypeInAndCreatedAtAfter(
+            "STARTED",
+            listOf("DAILY_QUIZ", "DAILY_READING"),
+            since,
+        )
+
+        // 학생 권한자 식별 — org_memberships role=STUDENT (active)
+        val userIds = stuckLogs.map { it.userId }.toSet()
+        val studentUserIds = userIds.filter { uid ->
+            orgMembershipRepository.findByUserIdAndStatus(uid, "active")
+                .any { it.role == "STUDENT" }
+        }.toSet()
+
+        val byContentType = mutableMapOf<String, ReconciliationStats>()
+        val byUserId = mutableMapOf<String, ReconciliationStats>()
+        val examples = mutableListOf<StuckExample>()
+        var totalGranted = 0
+        var adminLogs = 0
+        var studentLogs = 0
+
+        // 같은 day·user·content_type cap 추적
+        val dayCapAcc = mutableMapOf<Triple<String, String, LocalDate>, Int>()
+
+        // 시간순 (오래된 것부터) — cap 누적 일관성
+        val sorted = stuckLogs.sortedBy { it.createdAt }
+        for (current in sorted) {
+            val ct = current.contentType
+            val userId = current.userId
+            if (userId !in studentUserIds) {
+                adminLogs += 1
+                continue
+            }
+            studentLogs += 1
+
+            val whenAt = current.createdAt
+            val day = whenAt.toLocalDate()
+            val capKey = Triple(userId, ct, day)
+
+            val ctStats = byContentType.getOrPut(ct) { ReconciliationStats() }
+            val userStats = byUserId.getOrPut(userId) { ReconciliationStats() }
+            ctStats.logCount += 1
+            userStats.logCount += 1
+
+            val contentLevelId = try {
+                contentRepository.findById(current.contentId).orElse(null)?.levelId
+            } catch (_: Exception) { null }
+            val decision = SeedRewardPolicy.calculateGrant(
+                userLevelId = contentLevelId,
+                contentLevelId = contentLevelId,
+                contentType = ct,
+                accuracyPct = accuracyEstimate,
+                source = SeedRewardPolicy.GrantSource.FARM_LEARNING,
+            )
+
+            val alreadyTodayEarned = dayCapAcc[capKey] ?: 0
+            val capped = SeedRewardPolicy.applyDailyCap(decision.rawCount, decision.dailyCapPerContentType, alreadyTodayEarned)
+            dayCapAcc[capKey] = alreadyTodayEarned + capped
+
+            if (examples.size < 50) {
+                examples.add(StuckExample(
+                    logId = current.id, userId = userId, contentType = ct,
+                    contentId = current.contentId, createdAt = whenAt.toString(),
+                    estimatedAccuracy = accuracyEstimate, grantedSeed = capped,
+                    seedType = decision.seedType,
+                ))
+            }
+
+            if (capped > 0) {
+                totalGranted += capped
+                ctStats.topUpCount += 1
+                ctStats.topUpSeeds += capped
+                userStats.topUpCount += 1
+                userStats.topUpSeeds += capped
+
+                if (apply) {
+                    economyService.addSeeds(
+                        userId, decision.seedType, capped,
+                        "stuck_started_reconcile_${days}d",
+                        "farm_learning_log",
+                        current.id,
+                    )
+                    current.status = "COMPLETED"
+                    current.accuracy = accuracyEstimate
+                    current.earnedSeed = capped
+                    current.earnedSeedType = decision.seedType
+                    current.completedAt = LocalDateTime.now()
+                    farmLearningLogRepository.save(current)
+                }
+            } else {
+                ctStats.alreadyOkCount += 1
+                userStats.alreadyOkCount += 1
+                // cap 차서 0 인 경우에도 status=COMPLETED 로 마무리 (apply 만)
+                if (apply) {
+                    current.status = "COMPLETED"
+                    current.accuracy = accuracyEstimate
+                    current.earnedSeed = 0
+                    current.completedAt = LocalDateTime.now()
+                    farmLearningLogRepository.save(current)
+                }
+            }
+        }
+
+        return StuckReport(
+            days = days,
+            accuracyEstimate = accuracyEstimate,
+            apply = apply,
+            since = since.toString(),
+            totalStucks = stuckLogs.size,
+            studentLogs = studentLogs,
+            adminLogs = adminLogs,
+            totalGrantedSeeds = totalGranted,
+            byContentType = byContentType,
+            byUserId = byUserId,
             examples = examples,
         )
     }
