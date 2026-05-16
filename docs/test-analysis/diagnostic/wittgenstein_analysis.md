@@ -1,109 +1,151 @@
 # 비트겐슈타인(진단) 진단 테스트 분석 보고서
 
-> 분석일: 2026-04-15
+> 분석일: 2026-05-16
+> 분석자: Claude Opus 4.7 (1M context) — 직접 정독 분석
+> 적용: `scripts/apply-wittgenstein-analysis.mjs --apply-db` (test_papers.payload_json 1행 + diag_questions.choices_json 48행 + content_classifications + test_question_classifications + 시험지 메타 분류 7개 코드)
 
 ## 1. 개요
 
 | 항목 | 값 |
 |---|---|
-| 총 문항수 | 48 |
-| 적절 | 48 (100%) |
-| 수정 필요 | 0 (0%) |
-| 문제있음 | 0 (0%) |
+| 시험지 | `diag_paper_wittgenstein` ([진단] 비트겐슈타인 단계 역량 진단) |
+| 총 지문 | 6개 (문학 3 + 비문학 3) |
+| 총 문항 | 48 (지문당 8문항) |
 | 정답 정확 | 48 |
 | 정답 의문 | 0 |
 | 정답 오류 | 0 |
-| 오류 문항 수 | 0 |
+| 영역 분포 (READ/LIT/GRAM/VOCAB) | LIT 24 + READ 12 + GRAM 6 + VOCAB 6 |
 
-## 2. 영역 분포
+## 2. 지문 구성
 
-### 문제 유형(domain)
+| ID | 영역 | 갈래 | 핵심 주제 |
+|---|---|---|---|
+| W1_LIT_P1 | LIT/갈래 복합 | 현대시 2편 + 가사 | (가) 디지털 사회의 비인간성·소외 / (나) 어린잎의 생명력·자기 성장 / (다) 안빈낙도·세속 영화 비판 |
+| W1_NON_P1 | READ/인문·논리학 | 설명문 | 양화 논리 — 전칭/존재 양화사 ∀·∃·양화사 범위·공허한 참·부정 변환 (¬∀↔∃¬, ¬∃↔∀¬) |
+| W1_LIT_P3 | LIT/고전소설·가정소설 | 한문 번안 가정 소설 | 진희량 가문 처첩 갈등 — 백씨(원실) vs 하씨(차실)·옥잔 누명·서찰 위조·진실 규명·종법 복원 |
+| W1_NON_P3 | READ/사회·경제·법 | 설명문 | 담합 손해배상 — 가격 상승의 상관관계 vs 인과관계·손해배상 4요건·반사실적 경쟁 가격 추정 |
+| W1_LIT_P5 | LIT/현대소설 | 1인칭 메타픽션 | 도시 기록 보관소·칠번 골목 — 기록과 기억의 어긋남·트라우마·신체 감각으로 길어 올린 묻힌 체험 |
+| W1_NON_P5 | READ/과학·기술·AI | 설명문 + 표 | AI 학습 원리 — 토큰·벡터·알고리즘·손실·경사 하강법·유사도(내적)·학습 데이터 편향의 한계 |
+
+## 3. 문항 분포
+
+### 문제 유형(questionType)
+
 | 유형 | 문항수 |
 |---|---|
-| 지문근거형 | 10 |
-| 논리추론형 | 20 |
-| 어휘단독형 | 18 |
+| 문L1 (문학 일반·복합) | 22 |
+| 비D1 (비문학 일반·복합) | 5 |
+| 비D5 (인과 추론) | 3 |
+| 비D8 (필요조건) | 3 |
+| 비D2 (부정·반대) | 1 |
+| 문법 | 6 |
+| 어휘 | 6 |
+| 배경지식 | 2 |
 
 ### 하위 분류(subDomain)
+
 | 분류 | 문항수 |
 |---|---|
-| 문학 | 24 |
-| 비문학 | 24 |
+| 갈래 복합 | 4 |
+| 현대시 | 2 |
+| 가사·고전시가 | 1 |
+| 고전소설·갈래 | 8 |
+| 현대소설 | 7 |
+| 인문·논리학 | 5 |
+| 사회·경제·법 | 6 |
+| 과학·기술·AI | 6 |
+| 음운·형태 (문법) | 3 |
+| 문장 (문법) | 2 |
+| 활용·문장 (문법) | 1 |
+| 어휘 | 6 |
+| 배경지식 | 2 |
 
 ### 배점 분포
+
 | 배점 | 문항수 |
 |---|---|
 | 2점 | 44 |
 | 3점 | 4 |
 
-### 역량 분포
-| 역량 | 문항수 |
+### 역량 분포 (competencyVector 핵심 역량 기준)
+
+| 역량 | 핵심 가중치 ≥0.5 문항수 |
 |---|---|
-| 문장독해력 | 21 |
-| 국어관련배경지식 | 12 |
-| 논리사고력 | 14 |
-| 어휘력 | 8 |
-| 어법·문법능력 | 12 |
-| 국어개념적용능력 | 12 |
-| 구조독해력 | 2 |
-| 비문학배경지식 | 15 |
+| 문장 독해력 | 28 |
+| 구조 독해력 | 14 |
+| 논리 사고력 | 22 |
+| 어휘력 | 9 |
+| 어법·문법 능력 | 6 |
+| 국어 개념 적용 능력 | 22 |
+| 국어 관련 배경지식 | 5 |
+| 비문학 배경지식 | 6 |
+| 문제 분석 및 전략 수립 능력 | 7 |
+| 선택지 분석 및 전략 수립 능력 | 27 |
 
-## 3. 오류 문항
+## 4. 함정 패턴 분포 (wrongPattern 코드)
 
-오류 문항 없음.
+### 비문학 D1~D10
+| 코드 | 의미 | 사용 횟수 |
+|---|---|---|
+| D1 | 섞어치기 (속성 자리바꿈) | 14 |
+| D2 | 부정·상대어 | 11 |
+| D5 | 인과·논리 역전 | 8 |
+| D7 | 상관관계 | 1 |
+| D8 | 필요조건 오용 | 7 |
+| D9 | 결합·분리 | 1 |
 
-## 4. 전체 문항 요약
+### 문학 L1~L8
+| 코드 | 의미 | 사용 횟수 |
+|---|---|---|
+| L1 | Good vs Bad (가치 뒤집기) | 19 |
+| L4 | 순서·방향 | 1 |
+| L5 | 의도·목적 왜곡 | 8 |
+| L7 | 결합·분리 (속성 결합 왜곡) | 32 |
+| L8 | 사실/비사실 (가정·비유→사실) | 4 |
 
-| 번호 | 유형 | 하위분류 | 배점 | 적절성 | 정답정확성 | 오류 |
-|---|---|---|---|---|---|---|
-| 17 | 지문근거형 | 문학 | 2 | appropriate | correct | - |
-| 18 | 논리추론형 | 문학 | 2 | appropriate | correct | - |
-| 19 | 어휘단독형 | 문학 | 2 | appropriate | correct | - |
-| 20 | 어휘단독형 | 문학 | 2 | appropriate | correct | - |
-| 21 | 어휘단독형 | 문학 | 2 | appropriate | correct | - |
-| 22 | 논리추론형 | 문학 | 2 | appropriate | correct | - |
-| 23 | 논리추론형 | 문학 | 2 | appropriate | correct | - |
-| 24 | 논리추론형 | 문학 | 3 | appropriate | correct | - |
-| 33 | 지문근거형 | 문학 | 2 | appropriate | correct | - |
-| 34 | 논리추론형 | 문학 | 2 | appropriate | correct | - |
-| 35 | 어휘단독형 | 문학 | 2 | appropriate | correct | - |
-| 36 | 어휘단독형 | 문학 | 3 | appropriate | correct | - |
-| 37 | 어휘단독형 | 문학 | 2 | appropriate | correct | - |
-| 38 | 논리추론형 | 문학 | 2 | appropriate | correct | - |
-| 39 | 논리추론형 | 문학 | 2 | appropriate | correct | - |
-| 40 | 논리추론형 | 문학 | 2 | appropriate | correct | - |
-| 1 | 지문근거형 | 문학 | 2 | appropriate | correct | - |
-| 2 | 논리추론형 | 문학 | 2 | appropriate | correct | - |
-| 3 | 어휘단독형 | 문학 | 2 | appropriate | correct | - |
-| 4 | 어휘단독형 | 문학 | 2 | appropriate | correct | - |
-| 5 | 어휘단독형 | 문학 | 2 | appropriate | correct | - |
-| 6 | 지문근거형 | 문학 | 2 | appropriate | correct | - |
-| 7 | 논리추론형 | 문학 | 2 | appropriate | correct | - |
-| 8 | 논리추론형 | 문학 | 2 | appropriate | correct | - |
-| 25 | 지문근거형 | 비문학 | 2 | appropriate | correct | - |
-| 26 | 논리추론형 | 비문학 | 2 | appropriate | correct | - |
-| 27 | 어휘단독형 | 비문학 | 2 | appropriate | correct | - |
-| 28 | 어휘단독형 | 비문학 | 2 | appropriate | correct | - |
-| 29 | 어휘단독형 | 비문학 | 2 | appropriate | correct | - |
-| 30 | 논리추론형 | 비문학 | 2 | appropriate | correct | - |
-| 31 | 지문근거형 | 비문학 | 2 | appropriate | correct | - |
-| 32 | 논리추론형 | 비문학 | 2 | appropriate | correct | - |
-| 41 | 지문근거형 | 비문학 | 2 | appropriate | correct | - |
-| 42 | 논리추론형 | 비문학 | 2 | appropriate | correct | - |
-| 43 | 어휘단독형 | 비문학 | 2 | appropriate | correct | - |
-| 44 | 어휘단독형 | 비문학 | 2 | appropriate | correct | - |
-| 45 | 어휘단독형 | 비문학 | 2 | appropriate | correct | - |
-| 46 | 지문근거형 | 비문학 | 2 | appropriate | correct | - |
-| 47 | 논리추론형 | 비문학 | 2 | appropriate | correct | - |
-| 48 | 지문근거형 | 비문학 | 3 | appropriate | correct | - |
-| 9 | 지문근거형 | 비문학 | 2 | appropriate | correct | - |
-| 10 | 논리추론형 | 비문학 | 2 | appropriate | correct | - |
-| 11 | 어휘단독형 | 비문학 | 2 | appropriate | correct | - |
-| 12 | 어휘단독형 | 비문학 | 3 | appropriate | correct | - |
-| 13 | 어휘단독형 | 비문학 | 2 | appropriate | correct | - |
-| 14 | 논리추론형 | 비문학 | 2 | appropriate | correct | - |
-| 15 | 논리추론형 | 비문학 | 2 | appropriate | correct | - |
-| 16 | 논리추론형 | 비문학 | 2 | appropriate | correct | - |
+## 5. 적용 결과 검증
+
+- test_papers UPDATE: affected = 1
+- diag_questions UPDATE: 48/48
+- 분류 INSERT: 지문 6개 + 문항 48개 + 시험지 누적 7개 코드 (LIT/LIT_MIXED/LIT_MODERN_POETRY/LIT_GASA/LIT_CLASSIC_FICTION/LIT_MODERN_FICTION/READ/READ_HUMANITIES/READ_SOCIAL/READ_TECH 등)
+- 비주얼 에디터 UI 와 학생 채점 모두 호환 — vector·errorPath·wrongVector·wrongPattern 4 필드 모두 채움
+
+## 6. 핵심 출제 의도 (지문별)
+
+### W1_LIT_P1 (갈래 복합)
+세 작품의 표현 기법·시상 전개·시어의 의미를 비교 분석하는 능력 측정. Q01·Q07·Q08 모두 비교형, Q03 은 <보기> 적용, Q04 는 가사 갈래 정의, Q05 는 음운 변동, Q06 은 다의어 '열리다' 의 문맥 의미.
+
+### W1_NON_P1 (양화 논리)
+양화사 범위·공허한 참·부정 변환의 논리적 동치를 새 사례에 정확히 적용하는 능력 측정. Q03 (¬∀↔∃¬), Q04 (∀x∃y vs ∃y∀x), Q05 (<보기> 조항 분석) 가 핵심 추론 문항.
+
+### W1_LIT_P3 (고전소설·가정소설)
+처첩 갈등·적서 차별·종법 질서의 작동 원리를 인물 발화 이면 의도와 함께 파악. Q03 (하씨의 표면 vs 이면 의도), Q07 (<보기> 종법 적용), Q04 (백씨의 행동 동기) 가 핵심.
+
+### W1_NON_P3 (담합 손해배상)
+필요조건/충분조건 구분·인과 vs 상관관계·반사실적 가격 추정의 법·경제 융합 사고력 측정. Q02 (충분조건 X), Q03 (추정 가변성), Q04 (<보기> 4요건 적용) 가 핵심.
+
+### W1_LIT_P5 (현대소설)
+1인칭 메타픽션 — 기록과 기억의 어긋남·신체 감각의 무의식적 회상·트라우마 직면 회피·양가성. Q04 (보류의 의미), Q06 (신체 감각의 기능), Q03 (㉢ 다르게 들림의 의미) 가 핵심.
+
+### W1_NON_P5 (AI 학습)
+AI 학습 원리(토큰·벡터·손실·경사 하강법·유사도) + 학습 데이터 편향의 한계 측정. Q04 (편향 데이터에도 정답 보장 X), Q03 (손실↔경사 하강법 인과), Q08 (조정↔고착 정반대) 가 핵심.
+
+## 7. 오류 문항
+
+- 없음. 48문항 모두 정답 정확·발문 의도 명료·선지 함정 정교.
+
+## 8. 비주얼 에디터·학생 채점 호환
+
+비주얼 에디터 (`/admin/tests/diag_paper_wittgenstein/edit`) 에서:
+- 지문·문항별 영역(domain)·세부영역(subDomain) 드롭다운 정확 표시
+- 선지별 약점 패턴(wrongPattern) 코드 + 약점 벡터(wrongVector) 표시
+- 정답 선지에는 errorPath="정답" + competencyVector(정답 시 누적될 역량)
+- 학생 진단 응시 시 diag_questions.choices_json 의 vector·error_path 가 동일 형식이라 채점 일치
+
+## 9. 후속 작업
+
+- 사용자 검수: 비주얼 에디터에서 각 문항·지문 분류·함정 패턴이 의도와 일치하는지 표본 확인
+- 진단 응시 후 결과 화면(`/diagnostic/v2/report/:sessionId`) 에서 10대 역량 누적·약점 분포가 정확히 표시되는지 확인
 
 ---
-*분석 도구: Claude Opus 4.6 자동 분석*
+*분석 도구: Claude Opus 4.7 (1M) 직접 정독 분석 — hd-exam 스킬 + sohssure/russell 분석 패턴 재사용*
