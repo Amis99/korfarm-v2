@@ -15,19 +15,20 @@ class UnifiedReportController(
     private val orgService: com.korfarm.api.org.OrgService,
     private val farmLearningService: com.korfarm.api.learning.FarmLearningService,
 ) {
-    // 학생 본인
+    // 학생 본인. refresh=true 일 때만 Claude AI 코멘트·추천 사유 생성 (일 1회 제한).
     @GetMapping("/v1/report/unified")
     fun getStudentReport(
         @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) startDate: LocalDate,
-        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) endDate: LocalDate
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) endDate: LocalDate,
+        @RequestParam(required = false) refresh: Boolean?,
     ): ApiResponse<UnifiedReportResponse> {
         val userId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "로그인이 필요합니다.", HttpStatus.UNAUTHORIZED)
-        val data = reportService.getReport(userId, startDate, endDate)
+        val data = reportService.getReportCached(userId, startDate, endDate, refresh == true)
         return ApiResponse(success = true, data = data)
     }
 
-    // 학부모
+    // 학부모. 학부모는 새로고침 X — 학생 본인이 갱신해야 함.
     @GetMapping("/v1/parents/children/{studentId}/report/unified")
     fun getParentReport(
         @PathVariable studentId: String,
@@ -43,16 +44,17 @@ class UnifiedReportController(
         return ApiResponse(success = true, data = data)
     }
 
-    // 관리자
+    // 관리자. refresh 허용 (학생 별 일 1회 제한 동일 적용).
     @GetMapping("/v1/admin/students/{studentId}/report/unified")
     fun getAdminReport(
         @PathVariable studentId: String,
         @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) startDate: LocalDate,
-        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) endDate: LocalDate
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) endDate: LocalDate,
+        @RequestParam(required = false) refresh: Boolean?,
     ): ApiResponse<UnifiedReportResponse> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
         orgService.verifyOrgAdminAccessForStudent(studentId)
-        val data = reportService.getReport(studentId, startDate, endDate)
+        val data = reportService.getReportCached(studentId, startDate, endDate, refresh == true)
         return ApiResponse(success = true, data = data)
     }
 

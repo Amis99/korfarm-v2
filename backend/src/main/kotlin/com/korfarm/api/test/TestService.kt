@@ -1349,6 +1349,29 @@ class TestService(
     }
 
     /**
+     * 관리자가 시험을 **편집**(수정·삭제·문항 변경·PDF 생성·AI 분석 등) 할 수 있는지 검증.
+     * 본사 시험: HQ_ADMIN 만 편집 가능 (ORG_ADMIN 차단).
+     * 기관 시험: 해당 기관 ORG_ADMIN 또는 HQ_ADMIN 만 편집 가능.
+     * (조회 전용 verifyAdminTestAccess 와 분리 — 2026-05-16 회귀 fix)
+     */
+    fun verifyAdminTestEditAccess(testId: String, callerUserId: String) {
+        if (SecurityUtils.hasAnyRole("HQ_ADMIN")) return
+        val paper = findPaper(testId)
+        if (paper.orgId == null || paper.orgId == "org_hq") {
+            // 본사 시험: ORG_ADMIN 편집 차단
+            throw ApiException(
+                "FORBIDDEN",
+                "본사에서 관리하는 시험은 편집할 수 없습니다. 통계만 조회 가능합니다.",
+                HttpStatus.FORBIDDEN
+            )
+        }
+        val callerOrgIds = orgMembershipRepository.findByUserIdAndStatus(callerUserId, "active").map { it.orgId }
+        if (!callerOrgIds.contains(paper.orgId)) {
+            throw ApiException("FORBIDDEN", "다른 기관의 시험을 편집할 수 없습니다.", HttpStatus.FORBIDDEN)
+        }
+    }
+
+    /**
      * 학생이 시험에 접근할 수 있는지 검증.
      * 본사 시험(orgId=null)은 모든 학생 접근 가능. 기관 시험은 해당 기관 소속만 가능.
      */

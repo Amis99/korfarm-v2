@@ -337,12 +337,20 @@ function AdminTestPage() {
               const kindBd = t.kind === "diagnostic" ? "rgba(168, 85, 247, 0.3)"
                 : t.kind === "chapter" ? "rgba(34, 197, 94, 0.3)"
                 : "rgba(148, 163, 184, 0.3)";
+              // 본사 시험(orgId=null|"org_hq")은 HQ_ADMIN 만 편집 가능. ORG_ADMIN 은 통계만.
+              const isHqOwnedPaper = !t.orgId || t.orgId === "org_hq";
+              const canEdit = isHq || !isHqOwnedPaper;
+              const onTitleClick = () => {
+                if (!t.testId) return;
+                if (canEdit) navigate(`/admin/tests/${t.testId}/edit`);
+                else navigate(`/admin/tests/${t.testId}/statistics`);
+              };
               return (
               <tr key={t.testId}>
                 <td>
                   <span
-                    onClick={() => t.testId && navigate(`/admin/tests/${t.testId}/edit`)}
-                    title="클릭: 시험지 비주얼 편집기 열기"
+                    onClick={onTitleClick}
+                    title={canEdit ? "클릭: 시험지 비주얼 편집기 열기" : "본사 관리 시험 — 통계만 조회 가능"}
                     style={{
                       cursor: t.testId ? "pointer" : "default",
                       color: "var(--accent)", fontWeight: 600,
@@ -404,36 +412,42 @@ function AdminTestPage() {
                           style={pdfBtnStyle("secondary")}
                         >📑 정답·해설</button>
                       )}
-                      <button
-                        onClick={() => handleGeneratePdf(t, true)}
-                        disabled={generatingId === t.testId}
-                        title={t.kind === "chapter"
-                          ? "통합 PDF 재생성"
-                          : "시험지 + 정답·해설 PDF 동시 재생성"}
-                        style={pdfBtnStyle("secondary", generatingId === t.testId)}
-                      >{generatingId === t.testId ? "재생성 중..." : "🔄 재생성"}</button>
+                      {canEdit && (
+                        <button
+                          onClick={() => handleGeneratePdf(t, true)}
+                          disabled={generatingId === t.testId}
+                          title={t.kind === "chapter"
+                            ? "통합 PDF 재생성"
+                            : "시험지 + 정답·해설 PDF 동시 재생성"}
+                          style={pdfBtnStyle("secondary", generatingId === t.testId)}
+                        >{generatingId === t.testId ? "재생성 중..." : "🔄 재생성"}</button>
+                      )}
                     </>
                   ) : (
-                    <button
-                      onClick={() => handleGeneratePdf(t, false)}
-                      disabled={generatingId === t.testId}
-                      title={t.kind === "chapter"
-                        ? "통합 PDF 자동 생성"
-                        : "학생용 시험지 + 정답·해설 PDF 자동 생성"}
-                      style={pdfBtnStyle("primary", generatingId === t.testId)}
-                    >{generatingId === t.testId ? "생성 중..." : "📄 PDF 생성"}</button>
+                    canEdit && (
+                      <button
+                        onClick={() => handleGeneratePdf(t, false)}
+                        disabled={generatingId === t.testId}
+                        title={t.kind === "chapter"
+                          ? "통합 PDF 자동 생성"
+                          : "학생용 시험지 + 정답·해설 PDF 자동 생성"}
+                        style={pdfBtnStyle("primary", generatingId === t.testId)}
+                      >{generatingId === t.testId ? "생성 중..." : "📄 PDF 생성"}</button>
+                    )
                   )}
-                  <button
-                    onClick={() => handleDelete(t)}
-                    title="삭제"
-                    style={{
-                      padding: "5px 12px", fontSize: 12, fontWeight: 600,
-                      background: "#c0392b", color: "#fff",
-                      border: "1px solid #962f22", borderRadius: 5,
-                      cursor: "pointer",
-                      boxShadow: "0 1px 2px rgba(0,0,0,0.15)",
-                    }}
-                  >🗑 삭제</button>
+                  {canEdit && (
+                    <button
+                      onClick={() => handleDelete(t)}
+                      title="삭제"
+                      style={{
+                        padding: "5px 12px", fontSize: 12, fontWeight: 600,
+                        background: "#c0392b", color: "#fff",
+                        border: "1px solid #962f22", borderRadius: 5,
+                        cursor: "pointer",
+                        boxShadow: "0 1px 2px rgba(0,0,0,0.15)",
+                      }}
+                    >🗑 삭제</button>
+                  )}
                 </td>
               </tr>
             );

@@ -294,7 +294,13 @@ data class QuestionAnalysis(
     val essayDistribution: Map<String, Int> = emptyMap(), // {"full": N, "partial": N, "zero": N}
     val essayBuckets: Map<String, List<EssayAnswerEntry>> = emptyMap(), // 점수 버킷별 학생/답안
     // 객관식 선지 ID 목록 — 진단(A/B/C/D 등) vs 일반(1/2/3/4/5) 구분 위해 동적 전달
-    val choiceIds: List<String> = emptyList()
+    val choiceIds: List<String> = emptyList(),
+    // 문항 모달용 — 번호 클릭 시 발문·선지·해설 보기 (2026-05-16)
+    val stemText: String? = null,             // 발문 본문
+    val passageText: String? = null,          // 지문 (지문형 문항)
+    val choiceTexts: Map<String, String> = emptyMap(), // 선지 id → 본문
+    val explanation: String? = null,          // 정답 해설
+    val choiceExplanations: Map<String, String> = emptyMap() // 선지별 해설
 )
 
 data class EssayAnswerEntry(

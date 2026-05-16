@@ -29,10 +29,14 @@ data class UnifiedReportResponse(
     val calendar: List<CalendarDay> = emptyList(),
     /** 주제별 성취 — 영역·세부영역과 같은 가중 평가 공식 적용 */
     val themeStats: List<ThemeStats> = emptyList(),
-    /** AI 코멘트 — 1차 룰 기반, 추후 LLM 깊은 분석 옵션 */
+    /** AI 코멘트 — 룰 기반(기본) 또는 Claude 생성(새로고침 후) */
     val aiComments: List<AiComment> = emptyList(),
     /** 글쓰기(지식과 지혜) 통계 — 작성·AI 첨삭·좋아요·댓글 합산 */
-    val writingStats: WritingStats? = null
+    val writingStats: WritingStats? = null,
+    /** AI 새로고침 메타 — 캐시·일 1회 제한 표시용 (2026-05-17 추가) */
+    val aiEnabled: Boolean = false,
+    val refreshableToday: Boolean = true,
+    val lastRefreshedAt: java.time.LocalDateTime? = null,
 )
 
 /** V3 추천 응답 — strategy(weakness/low_volume/level_default) 와 근거 라벨 + 콘텐츠 카드 */

@@ -64,6 +64,7 @@ function AnalysisReportPage() {
   const [period, setPeriod] = useState("30d");
   const [report, setReport] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState("");
 
   const [meName, setMeName] = useState("");
@@ -76,20 +77,22 @@ function AnalysisReportPage() {
     }
   }, [studentIdParam]);
 
+  const fetchReport = (refresh) => {
+    const { start, end } = buildDateRange(period);
+    const qs = `startDate=${start}&endDate=${end}${refresh ? "&refresh=true" : ""}`;
+    if (isParent && studentIdParam) {
+      return apiGet(`/v1/parents/children/${studentIdParam}/report/unified?${qs}`);
+    }
+    if (isAdmin && studentIdParam) {
+      return adminApiGet(`/v1/admin/students/${studentIdParam}/report/unified?${qs}`);
+    }
+    return apiGet(`/v1/report/unified?${qs}`);
+  };
+
   useEffect(() => {
     setLoading(true);
     setError("");
-    const { start, end } = buildDateRange(period);
-    const qs = `startDate=${start}&endDate=${end}`;
-    let req;
-    if (isParent && studentIdParam) {
-      req = apiGet(`/v1/parents/children/${studentIdParam}/report/unified?${qs}`);
-    } else if (isAdmin && studentIdParam) {
-      req = adminApiGet(`/v1/admin/students/${studentIdParam}/report/unified?${qs}`);
-    } else {
-      req = apiGet(`/v1/report/unified?${qs}`);
-    }
-    req
+    fetchReport(false)
       .then((d) => setReport(d || null))
       .catch((e) => {
         console.error("[analysis-report] fetch failed", e);
@@ -97,7 +100,24 @@ function AnalysisReportPage() {
         setReport(null);
       })
       .finally(() => setLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [period, isParent, isAdmin, studentIdParam]);
+
+  const handleRefresh = async () => {
+    if (refreshing || !report?.refreshableToday) return;
+    setRefreshing(true);
+    setError("");
+    try {
+      const d = await fetchReport(true);
+      setReport(d || null);
+    } catch (e) {
+      console.error("[analysis-report] refresh failed", e);
+      const msg = e?.message || "새로고침 실패";
+      setError(msg);
+    } finally {
+      setRefreshing(false);
+    }
+  };
 
   const studentName = report?.studentName || meName || "학생";
 
@@ -169,6 +189,23 @@ function AnalysisReportPage() {
                 </button>
               ))}
             </div>
+            {!isParent && (
+              <button
+                type="button"
+                className="btn-print no-print"
+                onClick={handleRefresh}
+                disabled={refreshing || !report?.refreshableToday}
+                aria-label="AI 새로고침 (일 1회)"
+                title={
+                  refreshing ? "AI 분석 중..."
+                  : report?.refreshableToday ? "AI 새로고침 — 일 1회 가능"
+                  : "오늘 이미 새로고침했습니다 (내일 다시 가능)"
+                }
+                style={{ opacity: report?.refreshableToday ? 1 : 0.4 }}
+              >
+                {refreshing ? "⏳ 분석 중" : report?.aiEnabled ? "🔄 AI 갱신" : "🔄 AI 새로고침"}
+              </button>
+            )}
             <button
               type="button"
               className="btn-print no-print"

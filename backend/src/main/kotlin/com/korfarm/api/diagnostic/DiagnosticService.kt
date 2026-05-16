@@ -21,11 +21,16 @@ class DiagnosticService(
     private val questionRepo: DiagQuestionRepository,
     private val sessionRepo: DiagSessionRepository,
     private val responseRepo: DiagResponseRepository,
+    private val omrDraftRepo: DiagOmrDraftRepository,
     private val userRepo: UserRepository,
     private val objectMapper: ObjectMapper,
     private val summaryService: DiagnosticSummaryService,
     private val recommendationService: com.korfarm.api.learning.RecommendationService,
 ) {
+    companion object {
+        const val OMR_TIME_LIMIT_MIN = 60L
+    }
+
     private val logger = LoggerFactory.getLogger(DiagnosticService::class.java)
 
     /**
@@ -298,6 +303,133 @@ class DiagnosticService(
         return buildReport(session, ratioScores, recommendation)
     }
 
+    // ── OMR 타이머 (V0142, 2026-05-16) ──
+    //
+    // 인쇄 진단 응시 시 기기 슬립 모드에서도 타이머가 서버 시각 기준으로 동작.
+    // 60분 초과 시 DiagnosticOmrScheduler 가 자동 제출 (입력된 답안까지 채점).
+    // 타이머 시작 전에는 클라이언트 측 OMR 입력 비활성화 정책.
+
+    @Transactional
+    fun startOmrTimer(userId: String, tier: String): OmrTimerStartResponse {
+        if (tier !in TEST_ORDER) throw ApiException("INVALID_TIER", "유효하지 않은 tier", HttpStatus.BAD_REQUEST)
+        // 이미 진단 완료한 경우 차단 (관리자 우회)
+        val isAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        if (!isAdmin) {
+            val anyCompleted = sessionRepo.findByUserIdAndStatus(userId, "completed").firstOrNull()
+            if (anyCompleted != null) {
+                throw ApiException("ALREADY_COMPLETED", "이미 완료한 진단입니다.", HttpStatus.CONFLICT)
+            }
+        }
+        val key = DiagOmrDraftId(userId = userId, tier = tier)
+        val existing = omrDraftRepo.findById(key).orElse(null)
+        if (existing != null && existing.status == "pending") {
+            // 이어가기 — deadline 유지
+            return OmrTimerStartResponse(
+                tier = tier,
+                startedAt = existing.startedAt.toString(),
+                deadline = existing.deadline.toString(),
+                resumed = true,
+            )
+        }
+        if (existing != null && existing.status == "submitted") {
+            throw ApiException("ALREADY_SUBMITTED", "이미 제출한 답안입니다.", HttpStatus.CONFLICT)
+        }
+        val now = LocalDateTime.now()
+        val deadline = now.plusMinutes(OMR_TIME_LIMIT_MIN)
+        val entity = existing?.also {
+            it.startedAt = now
+            it.deadline = deadline
+            it.answersJson = "{}"
+            it.status = "pending"
+            it.submittedSessionId = null
+            it.updatedAt = now
+        } ?: DiagOmrDraftEntity(
+            id = key,
+            startedAt = now,
+            deadline = deadline,
+            answersJson = "{}",
+            status = "pending",
+            createdAt = now,
+            updatedAt = now,
+        )
+        omrDraftRepo.save(entity)
+        return OmrTimerStartResponse(
+            tier = tier,
+            startedAt = now.toString(),
+            deadline = deadline.toString(),
+            resumed = false,
+        )
+    }
+
+    @Transactional(readOnly = true)
+    fun getOmrTimerStatus(userId: String, tier: String): OmrTimerStatusResponse {
+        val key = DiagOmrDraftId(userId = userId, tier = tier)
+        val draft = omrDraftRepo.findById(key).orElse(null)
+            ?: return OmrTimerStatusResponse(
+                started = false, tier = tier, startedAt = null, deadline = null,
+                answers = emptyMap(), expired = false, submitted = false, submittedSessionId = null,
+            )
+        val now = LocalDateTime.now()
+        val expired = draft.status == "pending" && draft.deadline.isBefore(now)
+        val answers: Map<String, String?> = try {
+            objectMapper.readValue(draft.answersJson)
+        } catch (_: Exception) { emptyMap() }
+        return OmrTimerStatusResponse(
+            started = true, tier = tier,
+            startedAt = draft.startedAt.toString(),
+            deadline = draft.deadline.toString(),
+            answers = answers,
+            expired = expired,
+            submitted = draft.status == "submitted",
+            submittedSessionId = draft.submittedSessionId,
+        )
+    }
+
+    @Transactional
+    fun saveOmrDraft(userId: String, tier: String, answers: Map<String, String?>) {
+        val key = DiagOmrDraftId(userId = userId, tier = tier)
+        val draft = omrDraftRepo.findById(key).orElseThrow {
+            ApiException("TIMER_NOT_STARTED", "타이머를 먼저 시작해 주세요.", HttpStatus.BAD_REQUEST)
+        }
+        if (draft.status != "pending") {
+            throw ApiException("DRAFT_CLOSED", "이미 종료된 응시입니다.", HttpStatus.CONFLICT)
+        }
+        // deadline 지난 후의 저장은 silent ignore (만료 모드)
+        if (draft.deadline.isBefore(LocalDateTime.now())) {
+            return
+        }
+        draft.answersJson = objectMapper.writeValueAsString(answers)
+        draft.updatedAt = LocalDateTime.now()
+        omrDraftRepo.save(draft)
+    }
+
+    @Transactional
+    fun submitOmrDraft(userId: String, tier: String): OmrTimerSubmitResponse {
+        // 비관적 락으로 중복 호출 차단 — 두 번째 호출이 첫 호출 commit 까지 대기.
+        // 이동건 사고 2026-05-16 — 12초 간격 두 번 제출로 세션 2건 생성 fix.
+        val draft = omrDraftRepo.findForUpdate(userId, tier)
+            ?: throw ApiException("TIMER_NOT_STARTED", "타이머를 먼저 시작해 주세요.", HttpStatus.BAD_REQUEST)
+        return finalizeOmrDraft(userId, draft)
+    }
+
+    /** Scheduler 또는 사용자 명시적 submit 모두 통과하는 단일 제출 경로 */
+    @Transactional
+    fun finalizeOmrDraft(userId: String, draft: DiagOmrDraftEntity): OmrTimerSubmitResponse {
+        if (draft.status == "submitted" && draft.submittedSessionId != null) {
+            val report = getReport(draft.submittedSessionId!!, userId)
+            return OmrTimerSubmitResponse(sessionId = draft.submittedSessionId!!, report = report)
+        }
+        val answers: Map<String, String?> = try {
+            objectMapper.readValue(draft.answersJson)
+        } catch (_: Exception) { emptyMap() }
+        val result = submitFromOmr(userId, FromOmrRequest(tier = draft.id.tier, answers = answers))
+        draft.status = "submitted"
+        draft.submittedSessionId = result.sessionId
+        draft.updatedAt = LocalDateTime.now()
+        omrDraftRepo.save(draft)
+        return OmrTimerSubmitResponse(sessionId = result.sessionId, report = result.report)
+    }
+
     // ── 인쇄 OMR 답안 일괄 제출 → 진단 세션 생성 + 채점 + 리포트 ──
 
     @Transactional
@@ -398,8 +530,12 @@ class DiagnosticService(
                 if (nk in touchCounts) touchCounts[nk] = touchCounts[nk]!! + 1
             }
 
-            answeredCount++
-            if (isCorrect) correctCount++
+            // 빈 답안(미응답)은 answeredCount 에 포함시키지 않음 — 2026-05-16 사용자 명시 fix.
+            // diag_responses row 는 응시 기록 완전성을 위해 빈 답안도 저장하되 carthography 만.
+            if (choice != null) {
+                answeredCount++
+                if (isCorrect) correctCount++
+            }
 
             responseRepo.save(
                 DiagResponseEntity(
@@ -408,13 +544,13 @@ class DiagnosticService(
                     questionId = qd.questionId,
                     selectedChoice = choice,
                     isCorrect = isCorrect,
-                    responseOrder = answeredCount,
+                    responseOrder = idx + 1,
                     batchNumber = 1
                 )
             )
         }
 
-        // 세션 종료 — 정답률 기반 TCI (correct / 48 × 100)
+        // 세션 종료 — 정답률 기반 TCI (correct / 48 × 100) — 전체 문항 분모 (TCI 정의 그대로 유지)
         val rawTci = if (answeredCount > 0) correctCount.toDouble() / 48.0 * 100.0 else 0.0
         val adjTci = rawTci
         val confidence = 1.0
@@ -949,13 +1085,15 @@ class DiagnosticService(
                     competencyStats = competencyStats,
                 )
 
-                // 백분위 계산 ("상위 X%" 직접 계산: 1등→~0%, 꼴등→~100%)
+                // 백분위 = "상위 X%" — 1등 0%, 꼴등 100%.
+                // 본인보다 높은 값을 가진 사람의 비율로 계산 (2026-05-16 fix:
+                // 기존 식 `자기보다 낮은 사람 비율` 은 1등도 50% 로 표시되어 직관 불일치).
                 val currentTci = session.adjustedTci?.toDouble() ?: 50.0
                 val currentAcc = accuracyRate
-                val tciRank = tciValues.size - tciValues.count { it < currentTci }
-                val tciPercentile = Math.round(tciRank.toDouble() / tciValues.size * 1000.0) / 10.0
-                val accRank = accValues.size - accValues.count { it < currentAcc }
-                val accPercentile = Math.round(accRank.toDouble() / accValues.size * 1000.0) / 10.0
+                val tciHigher = tciValues.count { it > currentTci }
+                val tciPercentile = Math.round(tciHigher.toDouble() / tciValues.size * 1000.0) / 10.0
+                val accHigher = accValues.count { it > currentAcc }
+                val accPercentile = Math.round(accHigher.toDouble() / accValues.size * 1000.0) / 10.0
 
                 val competencyPercentiles = mutableMapOf<String, Double>()
                 for (comp in COMPETENCIES) {
@@ -963,8 +1101,8 @@ class DiagnosticService(
                     val vals = allRatioData.mapNotNull { it[comp]?.takeIf { v -> v > 0.0 } }
                     val myScore = scores[comp] ?: 50.0
                     if (vals.isNotEmpty()) {
-                        val rank = vals.size - vals.count { it < myScore }
-                        competencyPercentiles[comp] = Math.round(rank.toDouble() / vals.size * 1000.0) / 10.0
+                        val higher = vals.count { it > myScore }
+                        competencyPercentiles[comp] = Math.round(higher.toDouble() / vals.size * 1000.0) / 10.0
                     }
                 }
 
@@ -1061,8 +1199,9 @@ class DiagnosticService(
                     )
                 )
             } catch (_: Exception) { fallbackAdvice }
-            // 비-fallback 결과만 캐시 저장 — fallback 은 다음 호출 시 재시도 가능
-            if (generated.isNotBlank() && generated != fallbackAdvice) {
+            // 결과 캐시 저장 — fallback 이라도 1회 호출했으면 그대로 저장 (사용자 명시 2026-05-17: 최초 1회만 구동).
+            // fallbackAdvice 가 그대로 반환되더라도 토큰 호출은 이미 일어났음 → 재시도 X.
+            if (generated.isNotBlank()) {
                 try {
                     session.aiSummary = generated
                     sessionRepo.save(session)

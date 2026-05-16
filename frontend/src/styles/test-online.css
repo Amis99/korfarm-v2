@@ -185,6 +185,46 @@
   }
 }
 
+/* ── 진단 OMR 페이지(.diag-omr-page) 전용 스크롤 보강 (2026-05-16) ──
+   diagnostic.css 의 `.diagnostic-page { overflow: hidden }` 가 OMR 답안 길이가 화면을 넘을 때
+   페이지 자체 스크롤을 차단해 태블릿·모바일에서 OMR 아래로 스크롤되지 않던 버그 fix.
+   OMR 페이지에 한정해 페이지 스크롤 허용 + 데스크톱 레이아웃의 답안 패널 자체 스크롤 보장. */
+.diag-omr-page {
+  overflow: visible;
+  min-height: auto;
+  height: auto;
+}
+.diag-omr-page .test-online-split > * {
+  min-height: 0;
+}
+.diag-omr-page .test-online-split .answer-panel-desktop {
+  height: 100%;
+  max-height: 100%;
+}
+@media (max-width: 1024px) {
+  /* 태블릿 가로·아이패드 등에서도 페이지 자체 스크롤 허용 + split 높이 자유화 */
+  .diag-omr-page .test-online-split {
+    height: auto;
+    min-height: auto;
+  }
+  .diag-omr-page .test-online-pdf {
+    min-height: 70vh;
+  }
+  .diag-omr-page .answer-panel-desktop {
+    width: 100%;
+    height: auto;
+    max-height: none;
+  }
+}
+@media (max-width: 768px) {
+  .diag-omr-page .test-online-split {
+    flex-direction: column;
+  }
+  .diag-omr-page .test-online-pdf {
+    min-height: 50vh;
+  }
+}
+
 /* ── ProTestPage 통합 레이아웃 ── */
 .pro-test-online-split {
   display: flex;

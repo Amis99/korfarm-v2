@@ -55,7 +55,7 @@ class AdminTestController(
         @RequestBody request: UpdateTestRequest
     ): ApiResponse<Map<String, String>> {
         requireAdmin()
-        testService.verifyAdminTestAccess(testId, currentUser())
+        testService.verifyAdminTestEditAccess(testId, currentUser())
         val entity = testService.updateTest(testId, request)
         return ApiResponse(success = true, data = mapOf("testId" to entity.id))
     }
@@ -63,7 +63,7 @@ class AdminTestController(
     @DeleteMapping("/{testId}")
     fun delete(@PathVariable testId: String): ApiResponse<Map<String, String>> {
         requireAdmin()
-        testService.verifyAdminTestAccess(testId, currentUser())
+        testService.verifyAdminTestEditAccess(testId, currentUser())
         testService.deleteTest(testId)
         return ApiResponse(success = true, data = mapOf("testId" to testId))
     }
@@ -74,7 +74,7 @@ class AdminTestController(
         @RequestBody body: Map<String, String>
     ): ApiResponse<Map<String, String>> {
         requireAdmin()
-        testService.verifyAdminTestAccess(testId, currentUser())
+        testService.verifyAdminTestEditAccess(testId, currentUser())
         val fileId = body["fileId"]
             ?: throw ApiException("BAD_REQUEST", "fileId is required", HttpStatus.BAD_REQUEST)
         val entity = testService.setPdfFileId(testId, fileId)
@@ -93,7 +93,7 @@ class AdminTestController(
     @PostMapping("/{testId}/pdf-generate")
     fun generatePdf(@PathVariable testId: String): ApiResponse<Map<String, Any?>> {
         requireAdmin()
-        testService.verifyAdminTestAccess(testId, currentUser())
+        testService.verifyAdminTestEditAccess(testId, currentUser())
         val paper = testService.getTestPaper(testId)
         val isChapter = paper.series == "chapter"
 
@@ -201,7 +201,7 @@ class AdminTestController(
         @RequestBody request: SetQuestionsRequest
     ): ApiResponse<Map<String, Any>> {
         requireAdmin()
-        testService.verifyAdminTestAccess(testId, currentUser())
+        testService.verifyAdminTestEditAccess(testId, currentUser())
         testService.setQuestions(testId, request.questions)
         return ApiResponse(success = true, data = mapOf("count" to request.questions.size))
     }
@@ -269,29 +269,42 @@ class AdminTestController(
     }
 
     // ─── 시험지 통계 (응시 즉시 캐시된 데이터) ───
+    // scope=all (default) | org — ORG_ADMIN 토글용. "org" 면 자기 기관 학생만 집계.
     @GetMapping("/{testId}/statistics")
-    fun getStatistics(@PathVariable testId: String): ApiResponse<TestPaperStatistics> {
+    fun getStatistics(
+        @PathVariable testId: String,
+        @org.springframework.web.bind.annotation.RequestParam(required = false) scope: String?
+    ): ApiResponse<TestPaperStatistics> {
         requireAdmin()
-        testService.verifyAdminTestAccess(testId, currentUser())
-        val data = testStatisticsService.getStatistics(testId)
+        val caller = currentUser()
+        testService.verifyAdminTestAccess(testId, caller)
+        val data = testStatisticsService.getStatistics(testId, scope ?: "all", caller)
         return ApiResponse(success = true, data = data)
     }
 
     // ─── 학생별 응시 상세 (학생 테이블·영역별·틀린 번호) ───
     @GetMapping("/{testId}/students-detail")
-    fun getStudentsDetail(@PathVariable testId: String): ApiResponse<List<StudentSubmissionDetail>> {
+    fun getStudentsDetail(
+        @PathVariable testId: String,
+        @org.springframework.web.bind.annotation.RequestParam(required = false) scope: String?
+    ): ApiResponse<List<StudentSubmissionDetail>> {
         requireAdmin()
-        testService.verifyAdminTestAccess(testId, currentUser())
-        val data = testStatisticsService.getStudentDetails(testId)
+        val caller = currentUser()
+        testService.verifyAdminTestAccess(testId, caller)
+        val data = testStatisticsService.getStudentDetails(testId, scope ?: "all", caller)
         return ApiResponse(success = true, data = data)
     }
 
     // ─── 문항별 분석 (오답률·선택지 분포·고른 학생·역량 벡터) ───
     @GetMapping("/{testId}/question-analysis")
-    fun getQuestionAnalysis(@PathVariable testId: String): ApiResponse<List<QuestionAnalysis>> {
+    fun getQuestionAnalysis(
+        @PathVariable testId: String,
+        @org.springframework.web.bind.annotation.RequestParam(required = false) scope: String?
+    ): ApiResponse<List<QuestionAnalysis>> {
         requireAdmin()
-        testService.verifyAdminTestAccess(testId, currentUser())
-        val data = testStatisticsService.getQuestionAnalysis(testId)
+        val caller = currentUser()
+        testService.verifyAdminTestAccess(testId, caller)
+        val data = testStatisticsService.getQuestionAnalysis(testId, scope ?: "all", caller)
         return ApiResponse(success = true, data = data)
     }
 
@@ -313,7 +326,7 @@ class AdminTestController(
         @RequestBody body: Map<String, Any?>
     ): ApiResponse<Map<String, String>> {
         requireAdmin()
-        testService.verifyAdminTestAccess(testId, currentUser())
+        testService.verifyAdminTestEditAccess(testId, currentUser())
         val payload = body["payload"]
         val json = objectMapper.writeValueAsString(payload)
         testService.savePayload(testId, json)
@@ -331,7 +344,7 @@ class AdminTestController(
         @RequestBody body: Map<String, String>
     ): ApiResponse<Map<String, Any?>> {
         requireAdmin()
-        testService.verifyAdminTestAccess(testId, currentUser())
+        testService.verifyAdminTestEditAccess(testId, currentUser())
         val isHqAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN")
         val model = testAnalysisService.pickModel(isHqAdmin)
         // 자몹 차감 — HQ_ADMIN 은 spendForCaller 가 자동 무료 처리.
@@ -352,7 +365,7 @@ class AdminTestController(
         @RequestBody body: Map<String, String>
     ): ApiResponse<Map<String, Any?>> {
         requireAdmin()
-        testService.verifyAdminTestAccess(testId, currentUser())
+        testService.verifyAdminTestEditAccess(testId, currentUser())
         val isHqAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN")
         val mode = body["mode"] ?: "full"
         val raw = testService.getPayload(testId)
@@ -384,7 +397,7 @@ class AdminTestController(
         @RequestBody body: Map<String, String>
     ): ApiResponse<Map<String, Any?>> {
         requireAdmin()
-        testService.verifyAdminTestAccess(testId, currentUser())
+        testService.verifyAdminTestEditAccess(testId, currentUser())
         val isHqAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN")
         val mode = body["mode"] ?: "full"
         val raw = testService.getPayload(testId)
@@ -431,7 +444,7 @@ class AdminTestController(
         @RequestBody body: Map<String, Any?>
     ): ApiResponse<Map<String, Any?>> {
         requireAdmin()
-        testService.verifyAdminTestAccess(testId, currentUser())
+        testService.verifyAdminTestEditAccess(testId, currentUser())
         val isHqAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN")
         val mode = (body["mode"] as? String) ?: "full"
         val scope = (body["scope"] as? String) ?: "passage_block"

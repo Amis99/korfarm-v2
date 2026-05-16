@@ -77,9 +77,110 @@ class UnifiedReportService(
     private val aiFeedbackJobRepo: AiFeedbackJobRepository,
     /** V3 추천 통합 — 약점·학습량·레벨 가중치 fallback 자동 적용 */
     private val recommendationService: RecommendationService,
+    private val cacheRepo: UnifiedReportCacheRepository,
+    private val aiCommentService: UnifiedReportAiService,
     private val objectMapper: ObjectMapper
 ) {
     private val dtFmt = DateTimeFormatter.ISO_LOCAL_DATE_TIME
+    private val log = org.slf4j.LoggerFactory.getLogger(UnifiedReportService::class.java)
+
+    /**
+     * 캐시 정책 (2026-05-17):
+     *   refresh=false (기본 진입): 캐시 있으면 그대로 반환. 없으면 룰 기반 계산 + 저장.
+     *   refresh=true (새로고침 아이콘): Claude AI 코멘트·추천 사유 생성. 일 1회 제한 (KST).
+     */
+    @Transactional
+    fun getReportCached(studentId: String, startDate: LocalDate, endDate: LocalDate, refresh: Boolean): UnifiedReportResponse {
+        val periodKey = "${startDate}_${endDate}"
+        val cacheId = UnifiedReportCacheId(studentId, periodKey)
+        val existing = cacheRepo.findById(cacheId).orElse(null)
+
+        if (refresh) {
+            // 일 1회 제한 — 마지막 refreshedAt 가 오늘(KST)이면 거부
+            val now = LocalDateTime.now()
+            val today = now.toLocalDate()
+            existing?.refreshedAt?.let { last ->
+                if (last.toLocalDate() == today) {
+                    throw com.korfarm.api.common.ApiException(
+                        "DAILY_LIMIT",
+                        "오늘은 이미 새로고침했습니다. 내일 다시 시도해주세요.",
+                        org.springframework.http.HttpStatus.TOO_MANY_REQUESTS
+                    )
+                }
+            }
+            val base = getReport(studentId, startDate, endDate)
+            val withAi = try {
+                aiCommentService.enhance(studentId, base)
+            } catch (e: Exception) {
+                log.warn("통합 분석표 AI 보강 실패 userId={} err={}", studentId, e.message)
+                base
+            }
+            val finalReport = withAi.copy(
+                aiEnabled = true,
+                refreshableToday = false,
+                lastRefreshedAt = now,
+            )
+            val json = objectMapper.writeValueAsString(finalReport)
+            val entity = existing ?: UnifiedReportCacheEntity(
+                id = cacheId,
+                payloadJson = json,
+                aiEnabled = true,
+                generatedAt = now,
+                refreshedAt = now,
+            )
+            entity.payloadJson = json
+            entity.aiEnabled = true
+            entity.generatedAt = now
+            entity.refreshedAt = now
+            if (existing == null) cacheRepo.save(entity)
+            return finalReport
+        }
+
+        if (existing != null) {
+            val today = LocalDateTime.now().toLocalDate()
+            val refreshable = existing.refreshedAt?.toLocalDate() != today
+            return try {
+                val cached = objectMapper.readValue(existing.payloadJson, UnifiedReportResponse::class.java)
+                cached.copy(
+                    aiEnabled = existing.aiEnabled,
+                    refreshableToday = refreshable,
+                    lastRefreshedAt = existing.refreshedAt,
+                )
+            } catch (e: Exception) {
+                log.warn("통합 분석표 캐시 파싱 실패 userId={} err={} — 재계산", studentId, e.message)
+                buildAndCacheBase(studentId, startDate, endDate, cacheId, existing)
+            }
+        }
+        return buildAndCacheBase(studentId, startDate, endDate, cacheId, null)
+    }
+
+    private fun buildAndCacheBase(
+        studentId: String, startDate: LocalDate, endDate: LocalDate,
+        cacheId: UnifiedReportCacheId, existing: UnifiedReportCacheEntity?
+    ): UnifiedReportResponse {
+        val base = getReport(studentId, startDate, endDate)
+        val now = LocalDateTime.now()
+        val today = now.toLocalDate()
+        val refreshable = existing?.refreshedAt?.toLocalDate() != today
+        val finalReport = base.copy(
+            aiEnabled = false,
+            refreshableToday = refreshable,
+            lastRefreshedAt = existing?.refreshedAt,
+        )
+        val json = objectMapper.writeValueAsString(finalReport)
+        val entity = existing ?: UnifiedReportCacheEntity(
+            id = cacheId,
+            payloadJson = json,
+            aiEnabled = false,
+            generatedAt = now,
+            refreshedAt = null,
+        )
+        entity.payloadJson = json
+        entity.aiEnabled = false
+        entity.generatedAt = now
+        if (existing == null) cacheRepo.save(entity)
+        return finalReport
+    }
 
     @Transactional(readOnly = true)
     fun getReport(studentId: String, startDate: LocalDate, endDate: LocalDate): UnifiedReportResponse {
@@ -334,13 +435,13 @@ class UnifiedReportService(
         return out
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     fun getReportForParent(parentId: String, studentId: String, startDate: LocalDate, endDate: LocalDate): UnifiedReportResponse {
         val linked = parentLinkService.verifyParentChildLink(parentId, studentId)
         if (!linked) {
             throw ApiException("FORBIDDEN", "자녀 연결이 확인되지 않습니다.", HttpStatus.FORBIDDEN)
         }
-        return getReport(studentId, startDate, endDate)
+        return getReportCached(studentId, startDate, endDate, refresh = false)
     }
 
     // 시험 OMR 영역

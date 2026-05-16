@@ -28,6 +28,34 @@ data class FromOmrResponse(
     val report: DiagnosticReport
 )
 
+// ── OMR 타이머 (V0142) ──
+data class OmrTimerStartRequest(val tier: String)
+data class OmrTimerStartResponse(
+    val tier: String,
+    val startedAt: String,   // ISO 8601
+    val deadline: String,    // ISO 8601, started_at + 60분
+    val resumed: Boolean,    // 기존 draft 가 있어 이어가는 경우 true
+)
+data class OmrTimerStatusResponse(
+    val started: Boolean,
+    val tier: String,
+    val startedAt: String?,
+    val deadline: String?,
+    val answers: Map<String, String?>,
+    val expired: Boolean,
+    val submitted: Boolean,
+    val submittedSessionId: String?,
+)
+data class OmrTimerSaveRequest(
+    val tier: String,
+    val answers: Map<String, String?>,
+)
+data class OmrTimerSubmitRequest(val tier: String)
+data class OmrTimerSubmitResponse(
+    val sessionId: String,
+    val report: DiagnosticReport,
+)
+
 // ── 응답 DTO ──
 
 data class TierInfo(

@@ -165,7 +165,7 @@ export default function AdminOfflineOmrPage() {
     URL.revokeObjectURL(url);
   };
 
-  const isDiag = testId.startsWith("diag_paper_");
+  const isDiag = String(testId || "").startsWith("diag_paper_");
   const kindLabel = { diagnostic: "진단", chapter: "챕터", misc: "기타" };
 
   return (

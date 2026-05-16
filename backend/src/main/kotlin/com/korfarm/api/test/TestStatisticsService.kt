@@ -28,6 +28,7 @@ class TestStatisticsService(
     private val diagSessionRepo: com.korfarm.api.diagnostic.DiagSessionRepository,
     private val diagResponseRepo: com.korfarm.api.diagnostic.DiagResponseRepository,
     private val diagQuestionRepo: com.korfarm.api.diagnostic.DiagQuestionRepository,
+    private val diagPassageRepo: com.korfarm.api.diagnostic.DiagPassageRepository,
     private val proTestSessionRepo: com.korfarm.api.pro.ProTestSessionRepo,
 ) {
 
@@ -212,18 +213,31 @@ class TestStatisticsService(
      *   - 진단: diag_sessions 의 raw_tci 기반
      *   - 챕터: pro_test_sessions 의 score 기반
      *   - 기타: test_submissions 의 score 기반 (캐시 사용)
+     *
+     * scope: "all" — 전체 응시자 (HQ_ADMIN 기본).
+     *        "org" — callerOrgIds 에 속한 학생만 (ORG_ADMIN 기본).
      */
     @Transactional
-    fun getStatistics(testId: String): TestPaperStatistics {
+    fun getStatistics(testId: String, scope: String = "all", callerUserId: String? = null): TestPaperStatistics {
         val paper = testPaperRepo.findById(testId).orElseThrow {
             com.korfarm.api.common.ApiException(
                 "NOT_FOUND", "시험지를 찾을 수 없습니다.",
                 org.springframework.http.HttpStatus.NOT_FOUND
             )
         }
+        val callerOrgIds = if (scope == "org" && callerUserId != null) {
+            orgMembershipRepository.findByUserIdAndStatus(callerUserId, "active")
+                .filter { it.role == "ORG_ADMIN" }
+                .map { it.orgId }
+        } else emptyList()
         val kind = resolveKind(testId, paper.series)
-        if (kind == "diagnostic") return diagnosticStatistics(testId, paper)
-        // chapter / misc 모두 test_submissions 기반 (캐시) — 동일 로직
+        if (kind == "diagnostic") return diagnosticStatistics(testId, paper, scope, callerOrgIds)
+        // chapter / misc 모두 test_submissions 기반
+
+        if (scope == "org") {
+            // 기관 필터 — on-the-fly 재계산
+            return computeStatisticsForOrgs(testId, paper, callerOrgIds)
+        }
 
         var cache = statisticsRepo.findById(testId).orElse(null)
         if (cache == null) {
@@ -264,22 +278,89 @@ class TestStatisticsService(
         )
     }
 
+    /** scope="org" 일 때 챕터·기타 통계 on-the-fly 계산 — 캐시 미사용. */
+    private fun computeStatisticsForOrgs(
+        testId: String, paper: TestPaperEntity, orgIds: List<String>
+    ): TestPaperStatistics {
+        if (orgIds.isEmpty()) {
+            return TestPaperStatistics(
+                paperId = testId, submissionCount = 0,
+                avgScore = null, maxScore = null, minScore = null, stdDev = null,
+                totalPoints = paper.totalPoints, gradeStats = emptyMap(), updatedAt = null
+            )
+        }
+        val allSubs = submissionRepo.findByTestId(testId)
+        if (allSubs.isEmpty()) return emptyStatsResponse(testId, paper)
+        val orgUserIds = orgIds.flatMap { orgId ->
+            orgMembershipRepository.findByOrgIdAndStatus(orgId, "active")
+                .filter { it.role == "STUDENT" }.map { it.userId }
+        }.toSet()
+        val subs = allSubs.filter { it.userId in orgUserIds }
+        if (subs.isEmpty()) return emptyStatsResponse(testId, paper)
+        val scores = subs.map { it.score }
+        val avg = scores.average()
+        val variance = scores.map { (it - avg) * (it - avg) }.average()
+        val userMap = userRepository.findAllById(subs.map { it.userId }).associateBy { it.id }
+        val gradeMap = mutableMapOf<String, MutableList<Int>>()
+        for (s in subs) {
+            val g = userMap[s.userId]?.gradeLabel ?: "미상"
+            gradeMap.getOrPut(g) { mutableListOf() }.add(s.score)
+        }
+        val gradeStats = gradeMap.mapValues { (_, list) ->
+            val a = list.average()
+            val v = list.map { (it - a) * (it - a) }.average()
+            GradeStat(
+                count = list.size, avg = a,
+                max = list.max(), min = list.min(),
+                stdDev = sqrt(v)
+            )
+        }
+        return TestPaperStatistics(
+            paperId = testId,
+            submissionCount = subs.size,
+            avgScore = avg,
+            maxScore = scores.max(),
+            minScore = scores.min(),
+            stdDev = sqrt(variance),
+            totalPoints = paper.totalPoints,
+            gradeStats = gradeStats,
+            updatedAt = subs.maxOf { it.createdAt }
+        )
+    }
+
+    private fun emptyStatsResponse(testId: String, paper: TestPaperEntity) = TestPaperStatistics(
+        paperId = testId, submissionCount = 0,
+        avgScore = null, maxScore = null, minScore = null, stdDev = null,
+        totalPoints = paper.totalPoints, gradeStats = emptyMap(), updatedAt = null
+    )
+
     /**
      * 학생별 응시 상세 (통계 페이지 학생 테이블용).
+     * scope="org" 일 때 callerOrgIds 멤버십 학생만 표시.
      */
     @Transactional(readOnly = true)
-    fun getStudentDetails(testId: String): List<StudentSubmissionDetail> {
+    fun getStudentDetails(testId: String, scope: String = "all", callerUserId: String? = null): List<StudentSubmissionDetail> {
         val paper = testPaperRepo.findById(testId).orElseThrow {
             com.korfarm.api.common.ApiException(
                 "NOT_FOUND", "시험지를 찾을 수 없습니다.",
                 org.springframework.http.HttpStatus.NOT_FOUND
             )
         }
+        val orgUserIds: Set<String>? = if (scope == "org" && callerUserId != null) {
+            val callerOrgIds = orgMembershipRepository.findByUserIdAndStatus(callerUserId, "active")
+                .filter { it.role == "ORG_ADMIN" }
+                .map { it.orgId }
+            callerOrgIds.flatMap { orgId ->
+                orgMembershipRepository.findByOrgIdAndStatus(orgId, "active")
+                    .filter { it.role == "STUDENT" }.map { it.userId }
+            }.toSet()
+        } else null
         val kind = resolveKind(testId, paper.series)
-        if (kind == "diagnostic") return diagnosticStudentDetails(testId, paper)
+        if (kind == "diagnostic") return diagnosticStudentDetails(testId, paper, orgUserIds)
         // chapter / misc 모두 test_submissions 기반 — 동일 로직
 
-        val submissions = submissionRepo.findByTestId(testId)
+        val submissionsAll = submissionRepo.findByTestId(testId)
+        val submissions = if (orgUserIds != null) submissionsAll.filter { it.userId in orgUserIds } else submissionsAll
         if (submissions.isEmpty()) return emptyList()
 
         val questions = questionRepo.findByTestIdOrderByNumberAsc(testId)
@@ -317,7 +398,11 @@ class TestStatisticsService(
             }
 
             val totalPoints = paper.totalPoints
-            val accuracy = if (totalPoints > 0) sub.score.toDouble() / totalPoints else 0.0
+            // 정답률 = 정답수 / 응답수 (전체 문항수 아님) — 사용자 명시 2026-05-16.
+            // 미응답 문항은 분모에서 제외해 학생이 푼 만큼의 정답률만 표시.
+            val answeredCount = answers.values.count { !it.isNullOrBlank() }
+            val correctCount = statsList.count { (it["correct"] as? Boolean) == true }
+            val accuracy = if (answeredCount > 0) correctCount.toDouble() / answeredCount else 0.0
 
             val user = userMap[sub.userId]
             val membership = membershipsByUser[sub.userId]
@@ -344,12 +429,30 @@ class TestStatisticsService(
     /**
      * 문항별 분석.
      * 진단 시험: diag_responses 분포 + diag_questions vector 사용.
-     * 챕터/기타: test_submissions 캐시 사용.
+     * 챕터/기타: test_submissions 기반.
+     * scope="org" 일 때 callerOrgIds 멤버십 학생만 집계.
      */
     @Transactional
-    fun getQuestionAnalysis(testId: String): List<QuestionAnalysis> {
-        if (testId.startsWith("diag_paper_")) return diagnosticQuestionAnalysis(testId)
+    fun getQuestionAnalysis(
+        testId: String, scope: String = "all", callerUserId: String? = null
+    ): List<QuestionAnalysis> {
+        val orgUserIds: Set<String>? = if (scope == "org" && callerUserId != null) {
+            val callerOrgIds = orgMembershipRepository.findByUserIdAndStatus(callerUserId, "active")
+                .filter { it.role == "ORG_ADMIN" }.map { it.orgId }
+            callerOrgIds.flatMap { orgId ->
+                orgMembershipRepository.findByOrgIdAndStatus(orgId, "active")
+                    .filter { it.role == "STUDENT" }.map { it.userId }
+            }.toSet()
+        } else null
+        if (testId.startsWith("diag_paper_")) return diagnosticQuestionAnalysis(testId, orgUserIds)
 
+        // 일반/챕터 — scope="org" 면 on-the-fly 계산, 아니면 캐시 사용
+        return if (orgUserIds != null) computeQuestionAnalysisForOrgs(testId, orgUserIds)
+        else questionAnalysisFromCache(testId)
+    }
+
+    /** 캐시 기반 문항 분석 (scope="all"). */
+    private fun questionAnalysisFromCache(testId: String): List<QuestionAnalysis> {
         var cache = statisticsRepo.findById(testId).orElse(null)
         if (cache == null) {
             recomputeAndCache(testId)
@@ -371,9 +474,15 @@ class TestStatisticsService(
             } ?: emptyList()
         }
 
+        // 문항 본문 사전 — 모달에서 발문·선지·해설 보여주기 (캐시에는 분포만 있음)
+        val questionMap = questionRepo.findByTestIdOrderByNumberAsc(testId).associateBy { it.number }
+
         return raw.map { m ->
+            val number = (m["number"] as? Number)?.toInt() ?: 0
+            val qEntity = questionMap[number]
+            val (choiceTexts, choiceExplMap, stemText, passageText, explanation) = extractQuestionBody(qEntity)
             QuestionAnalysis(
-                number = (m["number"] as? Number)?.toInt() ?: 0,
+                number = number,
                 type = (m["type"] as? String) ?: "객관식",
                 domain = m["domain"] as? String,
                 subDomain = m["subDomain"] as? String,
@@ -403,10 +512,150 @@ class TestStatisticsService(
                         )
                     } ?: emptyList()
                 } ?: emptyMap(),
-                choiceIds = (m["choiceIds"] as? List<*>)?.filterIsInstance<String>() ?: emptyList()
+                choiceIds = (m["choiceIds"] as? List<*>)?.filterIsInstance<String>() ?: emptyList(),
+                stemText = stemText,
+                passageText = passageText,
+                choiceTexts = choiceTexts,
+                explanation = explanation,
+                choiceExplanations = choiceExplMap,
             )
         }.sortedBy { it.number }
     }
+
+    /** scope="org" 일 때 챕터·기타 문항별 분석 on-the-fly 계산. */
+    private fun computeQuestionAnalysisForOrgs(
+        testId: String, orgUserIds: Set<String>
+    ): List<QuestionAnalysis> {
+        val questions = questionRepo.findByTestIdOrderByNumberAsc(testId)
+        if (questions.isEmpty()) return emptyList()
+        val subsAll = submissionRepo.findByTestId(testId)
+        val subs = subsAll.filter { it.userId in orgUserIds }
+        val userMap = userRepository.findAllById(subs.map { it.userId }).associateBy { it.id }
+
+        return questions.map { q ->
+            val isEssay = q.type == "서술형" || q.type == "서술"
+            var attempts = 0
+            var correctCount = 0
+            val choiceDist = mutableMapOf<String, Int>()
+            val choiceStudents = mutableMapOf<String, MutableList<String>>()
+            val wrongStudents = mutableListOf<String>()
+            val essayDist = mutableMapOf<String, Int>()
+            val essayBuckets = mutableMapOf<String, MutableList<Map<String, Any?>>>()
+
+            for (sub in subs) {
+                val answers = parseAnswers(sub.answersJson)
+                val myAns = answers[q.number.toString()] ?: continue
+                if (myAns.isBlank()) continue
+                attempts++
+                val studentName = userMap[sub.userId]?.name ?: "미상"
+                val statsList = parseStatsList(sub.statsJson)
+                val stat = statsList.find { (it["q"] as? Number)?.toInt() == q.number }
+                val earned = (stat?.get("earned") as? Number)?.toInt() ?: 0
+                val correctFromStats = stat?.get("correct") as? Boolean ?: false
+                val isCorrect = if (isEssay) correctFromStats else (myAns == q.correctAnswer)
+                if (isEssay) {
+                    val bucket = when {
+                        earned >= q.points -> "full"
+                        earned > 0 -> "partial"
+                        else -> "zero"
+                    }
+                    essayDist[bucket] = (essayDist[bucket] ?: 0) + 1
+                    essayBuckets.getOrPut(bucket) { mutableListOf() }.add(mapOf(
+                        "userId" to sub.userId, "name" to studentName,
+                        "answer" to myAns, "earned" to earned
+                    ))
+                } else {
+                    choiceDist[myAns] = (choiceDist[myAns] ?: 0) + 1
+                    choiceStudents.getOrPut(myAns) { mutableListOf() }.add(studentName)
+                }
+                if (isCorrect) correctCount++ else wrongStudents.add(studentName)
+            }
+            val correctRate = if (attempts > 0) correctCount.toDouble() / attempts else 0.0
+            val competencyVector = q.domain?.let {
+                com.korfarm.api.learning.mapDomainToCompetency(it)?.let { c -> mapOf(c to 1.0) }
+            } ?: emptyMap()
+            val choiceIds: List<String> = if (isEssay) emptyList() else {
+                try {
+                    val rawCh: List<Map<String, Any?>> = objectMapper.readValue(
+                        q.choicesJson ?: "[]",
+                        object : com.fasterxml.jackson.core.type.TypeReference<List<Map<String, Any?>>>() {}
+                    )
+                    rawCh.mapIndexed { i, m -> ((m["id"] ?: m["choice_id"]) as? String) ?: (i + 1).toString() }
+                        .takeIf { it.isNotEmpty() } ?: listOf("1", "2", "3", "4", "5")
+                } catch (_: Exception) { listOf("1", "2", "3", "4", "5") }
+            }
+            val (choiceTexts, choiceExplMap, stemText, passageText, explanation) = extractQuestionBody(q)
+            QuestionAnalysis(
+                number = q.number,
+                type = q.type,
+                domain = q.domain,
+                subDomain = q.subDomain,
+                points = q.points,
+                correctAnswer = q.correctAnswer,
+                wrongRate = 1.0 - correctRate,
+                correctRate = correctRate,
+                attempts = attempts,
+                correctCount = correctCount,
+                choiceDistribution = choiceDist,
+                choiceStudents = choiceStudents,
+                wrongStudentNames = wrongStudents,
+                competencyVector = competencyVector,
+                essayDistribution = essayDist,
+                essayBuckets = essayBuckets.mapValues { (_, list) ->
+                    list.map { e ->
+                        EssayAnswerEntry(
+                            userId = (e["userId"] as? String) ?: "",
+                            name = (e["name"] as? String) ?: "",
+                            answer = (e["answer"] as? String) ?: "",
+                            earned = (e["earned"] as? Number)?.toInt() ?: 0
+                        )
+                    }
+                },
+                choiceIds = choiceIds,
+                stemText = stemText,
+                passageText = passageText,
+                choiceTexts = choiceTexts,
+                explanation = explanation,
+                choiceExplanations = choiceExplMap,
+            )
+        }.sortedBy { it.number }
+    }
+
+    /** test_questions row 에서 모달 표시용 본문 추출. */
+    private fun extractQuestionBody(q: TestQuestionEntity?): QBodyPack {
+        if (q == null) return QBodyPack(emptyMap(), emptyMap(), null, null, null)
+        val choiceTexts = mutableMapOf<String, String>()
+        try {
+            val rawCh: List<Map<String, Any?>> = objectMapper.readValue(
+                q.choicesJson ?: "[]",
+                object : com.fasterxml.jackson.core.type.TypeReference<List<Map<String, Any?>>>() {}
+            )
+            rawCh.forEachIndexed { i, m ->
+                val id = (m["id"] ?: m["choice_id"]) as? String ?: (i + 1).toString()
+                val text = (m["text"] ?: m["content"]) as? String ?: ""
+                choiceTexts[id] = text
+            }
+        } catch (_: Exception) {}
+        val choiceExpl: Map<String, String> = try {
+            objectMapper.readValue(q.choiceExplanationsJson ?: "{}",
+                object : com.fasterxml.jackson.core.type.TypeReference<Map<String, String>>() {})
+        } catch (_: Exception) { emptyMap() }
+        return QBodyPack(
+            choiceTexts = choiceTexts,
+            choiceExplanations = choiceExpl,
+            stemText = q.stem,
+            passageText = q.passage,
+            explanation = q.intent
+        )
+    }
+
+    private data class QBodyPack(
+        val choiceTexts: Map<String, String>,
+        val choiceExplanations: Map<String, String>,
+        val stemText: String?,
+        val passageText: String?,
+        val explanation: String?
+    )
 
     private fun parseAnswers(json: String?): Map<String, String> {
         if (json.isNullOrBlank()) return emptyMap()
@@ -419,9 +668,19 @@ class TestStatisticsService(
     }
 
     // ─── 진단 시험 통계 ───
-    private fun diagnosticStatistics(testId: String, paper: TestPaperEntity): TestPaperStatistics {
+    private fun diagnosticStatistics(
+        testId: String, paper: TestPaperEntity,
+        scope: String = "all", callerOrgIds: List<String> = emptyList()
+    ): TestPaperStatistics {
         val tier = testId.removePrefix("diag_paper_")
-        val sessions = diagSessionRepo.findByTierAndStatus(tier, "completed")
+        val allSessions = diagSessionRepo.findByTierAndStatus(tier, "completed")
+        val sessions = if (scope == "org") {
+            val orgUserIds = callerOrgIds.flatMap { orgId ->
+                orgMembershipRepository.findByOrgIdAndStatus(orgId, "active")
+                    .filter { it.role == "STUDENT" }.map { it.userId }
+            }.toSet()
+            allSessions.filter { it.userId in orgUserIds }
+        } else allSessions
         if (sessions.isEmpty()) {
             return TestPaperStatistics(
                 paperId = testId,
@@ -472,9 +731,12 @@ class TestStatisticsService(
         )
     }
 
-    private fun diagnosticStudentDetails(testId: String, paper: TestPaperEntity): List<StudentSubmissionDetail> {
+    private fun diagnosticStudentDetails(
+        testId: String, paper: TestPaperEntity, orgUserIds: Set<String>? = null
+    ): List<StudentSubmissionDetail> {
         val tier = testId.removePrefix("diag_paper_")
-        val sessions = diagSessionRepo.findByTierAndStatus(tier, "completed")
+        val sessionsAll = diagSessionRepo.findByTierAndStatus(tier, "completed")
+        val sessions = if (orgUserIds != null) sessionsAll.filter { it.userId in orgUserIds } else sessionsAll
         if (sessions.isEmpty()) return emptyList()
 
         val userIds = sessions.map { it.userId }
@@ -545,9 +807,12 @@ class TestStatisticsService(
      * - 학생 이름 매핑: diag_responses → diag_sessions(user_id) → users
      * - 역량 벡터: diag_questions.choices_json[*].vector (정답 선지의 vector)
      */
-    private fun diagnosticQuestionAnalysis(testId: String): List<QuestionAnalysis> {
+    private fun diagnosticQuestionAnalysis(
+        testId: String, orgUserIds: Set<String>? = null
+    ): List<QuestionAnalysis> {
         val tier = testId.removePrefix("diag_paper_")
-        val sessions = diagSessionRepo.findByTierAndStatus(tier, "completed")
+        val sessionsAll = diagSessionRepo.findByTierAndStatus(tier, "completed")
+        val sessions = if (orgUserIds != null) sessionsAll.filter { it.userId in orgUserIds } else sessionsAll
         if (sessions.isEmpty()) return emptyList()
 
         val sessionIds = sessions.map { it.id }
@@ -563,11 +828,16 @@ class TestStatisticsService(
         val tierQuestions = diagQuestionRepo.findByTierOrderByIdAsc(tier)
         val questionNumberMap = tierQuestions.withIndex().associate { (idx, q) -> q.id to (idx + 1) }
 
+        // 진단 지문 — passageId → text_md 매핑 (모달용)
+        val passageIds = tierQuestions.map { it.passageId }.distinct()
+        val passageMap = if (passageIds.isNotEmpty()) {
+            diagPassageRepo.findAllById(passageIds).associate { it.id to it.textMd }
+        } else emptyMap()
+
         return tierQuestions.map { q ->
             val number = questionNumberMap[q.id] ?: 0
             val responsesForQ = allResponses.filter { it.questionId == q.id }
 
-            // 객관식 선택지 분포
             val choiceDist = mutableMapOf<String, Int>()
             val choiceStudents = mutableMapOf<String, MutableList<String>>()
             val wrongStudents = mutableListOf<String>()
@@ -587,7 +857,6 @@ class TestStatisticsService(
             val correctRate = if (attempts > 0) correctCount.toDouble() / attempts else 0.0
             val wrongRate = 1.0 - correctRate
 
-            // 역량 벡터 — choices_json 파싱 후 정답 선지의 vector
             val rawChoices: List<Map<String, Any?>> = try {
                 objectMapper.readValue(q.choicesJson, object : com.fasterxml.jackson.core.type.TypeReference<List<Map<String, Any?>>>() {})
             } catch (_: Exception) { emptyList() }
@@ -600,10 +869,19 @@ class TestStatisticsService(
             val mappedType = if (q.questionType.equals("ESSAY", ignoreCase = true) || q.questionType == "서술형")
                 "서술형" else "객관식"
 
-            // 진단 선지 ID — choices_json 에서 추출 (A/B/C/D 또는 진단 스키마)
             val choiceIds: List<String> = rawChoices.mapIndexed { i, m ->
                 ((m["choice_id"] ?: m["id"]) as? String) ?: ('A' + i).toString()
             }
+            val choiceTexts = rawChoices.mapIndexed { i, m ->
+                val id = ((m["choice_id"] ?: m["id"]) as? String) ?: ('A' + i).toString()
+                val text = (m["text"] ?: m["content"]) as? String ?: ""
+                id to text
+            }.toMap()
+            val choiceExplMap = rawChoices.mapIndexed { i, m ->
+                val id = ((m["choice_id"] ?: m["id"]) as? String) ?: ('A' + i).toString()
+                val expl = (m["explanation"] ?: m["analysis"]) as? String ?: ""
+                id to expl
+            }.filter { (_, v) -> v.isNotBlank() }.toMap()
 
             QuestionAnalysis(
                 number = number,
@@ -622,7 +900,12 @@ class TestStatisticsService(
                 competencyVector = competencyVector,
                 essayDistribution = emptyMap(),
                 essayBuckets = emptyMap(),
-                choiceIds = choiceIds
+                choiceIds = choiceIds,
+                stemText = q.stem,
+                passageText = passageMap[q.passageId],
+                choiceTexts = choiceTexts,
+                explanation = q.modelAnswer,  // 진단 문항 해설은 modelAnswer 컬럼에 저장됨
+                choiceExplanations = choiceExplMap,
             )
         }.sortedBy { it.number }
     }

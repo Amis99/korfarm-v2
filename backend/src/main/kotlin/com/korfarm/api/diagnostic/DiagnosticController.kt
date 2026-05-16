@@ -64,6 +64,33 @@ class DiagnosticController(
         return ApiResponse(success = true, data = diagnosticService.submitFromOmr(userId, request))
     }
 
+    // ── OMR 타이머 (V0142, 2026-05-16) — 모바일·태블릿 슬립 모드 대응 ──
+
+    @PostMapping("/omr-timer/start")
+    fun startOmrTimer(@RequestBody request: OmrTimerStartRequest): ApiResponse<OmrTimerStartResponse> {
+        val userId = currentUserId()
+        return ApiResponse(success = true, data = diagnosticService.startOmrTimer(userId, request.tier))
+    }
+
+    @GetMapping("/omr-timer/status")
+    fun omrTimerStatus(@RequestParam tier: String): ApiResponse<OmrTimerStatusResponse> {
+        val userId = currentUserId()
+        return ApiResponse(success = true, data = diagnosticService.getOmrTimerStatus(userId, tier))
+    }
+
+    @PostMapping("/omr-timer/save")
+    fun saveOmrDraft(@RequestBody request: OmrTimerSaveRequest): ApiResponse<Map<String, Boolean>> {
+        val userId = currentUserId()
+        diagnosticService.saveOmrDraft(userId, request.tier, request.answers)
+        return ApiResponse(success = true, data = mapOf("ok" to true))
+    }
+
+    @PostMapping("/omr-timer/submit")
+    fun submitOmrDraft(@RequestBody request: OmrTimerSubmitRequest): ApiResponse<OmrTimerSubmitResponse> {
+        val userId = currentUserId()
+        return ApiResponse(success = true, data = diagnosticService.submitOmrDraft(userId, request.tier))
+    }
+
     private fun currentUserId(): String {
         return SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "인증이 필요합니다", HttpStatus.UNAUTHORIZED)

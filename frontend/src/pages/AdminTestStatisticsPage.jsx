@@ -7,6 +7,7 @@ import TestReportView from "../components/test-report/TestReportView";
 import TestWrongNoteView from "../components/test-report/TestWrongNoteView";
 import Pagination from "../components/Pagination";
 import usePagination from "../hooks/usePagination";
+import { useAuth } from "../hooks/useAuth";
 import "../styles/test-storage.css";
 
 function fmt(n, digits = 1) {
@@ -105,6 +106,12 @@ function normQuestion(q) {
     essayDistribution: q.essayDistribution ?? q.essay_distribution ?? {},
     essayBuckets: eb,
     choiceIds: q.choiceIds ?? q.choice_ids ?? [],
+    // 문항 모달용 본문 (2026-05-16 추가)
+    stemText: q.stemText ?? q.stem_text ?? null,
+    passageText: q.passageText ?? q.passage_text ?? null,
+    choiceTexts: q.choiceTexts ?? q.choice_texts ?? {},
+    explanation: q.explanation ?? null,
+    choiceExplanations: q.choiceExplanations ?? q.choice_explanations ?? {},
   };
 }
 
@@ -138,6 +145,10 @@ function ClickableCell({ children, onClick, title }) {
 export default function AdminTestStatisticsPage() {
   const { testId } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const isHq = (user?.roles || []).includes("HQ_ADMIN");
+  // 통계 scope 토글: ORG_ADMIN 기본값 "org" (자기 기관) / HQ_ADMIN 은 항상 "all"
+  const [scope, setScope] = useState(isHq ? "all" : "org");
   const [test, setTest] = useState(null);
   const [stats, setStats] = useState(null);
   const [students, setStudents] = useState([]);
@@ -174,11 +185,12 @@ export default function AdminTestStatisticsPage() {
     (async () => {
       setLoading(true);
       try {
+        const qs = `?scope=${encodeURIComponent(scope)}`;
         const [t, s, sd, qa] = await Promise.all([
           apiGet(`/v1/admin/test-papers/${testId}`),
-          apiGet(`/v1/admin/test-papers/${testId}/statistics`),
-          apiGet(`/v1/admin/test-papers/${testId}/students-detail`),
-          apiGet(`/v1/admin/test-papers/${testId}/question-analysis`),
+          apiGet(`/v1/admin/test-papers/${testId}/statistics${qs}`),
+          apiGet(`/v1/admin/test-papers/${testId}/students-detail${qs}`),
+          apiGet(`/v1/admin/test-papers/${testId}/question-analysis${qs}`),
         ]);
         if (cancelled) return;
         setTest(normTest(t));
@@ -194,7 +206,7 @@ export default function AdminTestStatisticsPage() {
       }
     })();
     return () => { cancelled = true; };
-  }, [testId, navigate]);
+  }, [testId, navigate, scope]);
 
   // 모달이 report/wrongNote면 데이터 로드
   useEffect(() => {
@@ -232,9 +244,21 @@ export default function AdminTestStatisticsPage() {
     });
   }, [students, stuSearch, stuGrade]);
 
+  // 문항별 정렬 — 오답률 상위 (correctRate 낮은 순) 가 기본. 사용자 클릭으로 번호 순 전환 가능.
+  const [questionSort, setQuestionSort] = useState("wrongRate"); // "wrongRate" | "number"
+  const sortedQuestions = useMemo(() => {
+    const arr = [...questions];
+    if (questionSort === "wrongRate") {
+      arr.sort((a, b) => (a.correctRate ?? 0) - (b.correctRate ?? 0));
+    } else {
+      arr.sort((a, b) => (a.number ?? 0) - (b.number ?? 0));
+    }
+    return arr;
+  }, [questions, questionSort]);
+
   // 학생별/문항별 페이지네이션 (각 독립)
   const studentsPg = usePagination(filteredStudents, 15);
-  const questionsPg = usePagination(questions, 15);
+  const questionsPg = usePagination(sortedQuestions, 15);
 
   // 검색/필터/탭 변경 시 페이지 리셋
   useEffect(() => {
@@ -277,9 +301,40 @@ export default function AdminTestStatisticsPage() {
       <div className="ts-page ts-admin" style={{ paddingTop: 16 }}>
         <Link to="/admin/tests" className="ts-link" style={{ fontSize: 13 }}>← 시험 관리</Link>
         <h2 style={{ margin: "6px 0 4px", color: "var(--text)" }}>{test.title}</h2>
-        <div style={{ fontSize: 12, color: "var(--muted)", marginBottom: 12 }}>
-          {test.examDate || "-"} / 총 {test.totalQuestions}문항 / {totalPoints}점 / 응시자 {stats.submissionCount}명
-          <Link to={`/admin/tests/${testId}/edit`} style={{ marginLeft: 12, color: "var(--accent)" }}>[시험지 편집]</Link>
+        <div style={{ fontSize: 12, color: "var(--muted)", marginBottom: 12, display: "flex", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
+          <span>{test.examDate || "-"} / 총 {test.totalQuestions}문항 / {totalPoints}점 / 응시자 {stats.submissionCount}명</span>
+          {/* 본사 시험은 HQ_ADMIN 만 편집 가능 — ORG_ADMIN 에게는 편집 링크 숨김 */}
+          {isHq && (
+            <Link to={`/admin/tests/${testId}/edit`} style={{ color: "var(--accent)" }}>[시험지 편집]</Link>
+          )}
+          {/* scope 토글 — ORG_ADMIN 에게만 노출 (HQ_ADMIN 은 항상 전체) */}
+          {!isHq && (
+            <div style={{
+              display: "inline-flex", border: "1px solid var(--stroke)",
+              borderRadius: 6, overflow: "hidden",
+            }}>
+              <button
+                type="button"
+                onClick={() => setScope("org")}
+                style={{
+                  padding: "4px 10px", fontSize: 12, fontWeight: 600,
+                  border: 0, cursor: "pointer",
+                  background: scope === "org" ? "var(--accent)" : "var(--panel)",
+                  color: scope === "org" ? "#fff" : "var(--text)",
+                }}
+              >우리 기관</button>
+              <button
+                type="button"
+                onClick={() => setScope("all")}
+                style={{
+                  padding: "4px 10px", fontSize: 12, fontWeight: 600,
+                  border: 0, cursor: "pointer",
+                  background: scope === "all" ? "var(--accent)" : "var(--panel)",
+                  color: scope === "all" ? "#fff" : "var(--text)",
+                }}
+              >전체</button>
+            </div>
+          )}
         </div>
 
         <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 12 }}>
@@ -420,38 +475,72 @@ export default function AdminTestStatisticsPage() {
         )}
 
         {tab === "questions" && (
-          <div style={{ background: "var(--panel)", border: "1px solid var(--stroke)", borderRadius: 8, padding: 8, overflowX: "auto" }}>
-            <table style={{ width: "100%", fontSize: 12, minWidth: 1000, color: "var(--text)" }}>
-              <thead>
-                <tr style={{ background: "var(--bg)", textAlign: "left" }}>
-                  <th style={{ padding: "6px 6px" }}>번호</th>
-                  <th style={{ padding: "6px 6px" }}>유형</th>
-                  <th style={{ padding: "6px 6px" }}>영역</th>
-                  <th style={{ padding: "6px 6px" }}>배점</th>
-                  <th style={{ padding: "6px 6px" }}>정답</th>
-                  <th style={{ padding: "6px 6px" }}>정답률</th>
-                  <th style={{ padding: "6px 6px" }}>응시</th>
-                  <th style={{ padding: "6px 6px", minWidth: 240 }}>선택지 분포 (%)</th>
-                  <th style={{ padding: "6px 6px" }}>역량</th>
-                </tr>
-              </thead>
-              <tbody>
-                {questionsPg.paged.map((q) => (
-                  <QuestionRow
-                    key={q.number}
-                    q={q}
-                    onChoiceClick={(cid) => setModal({ kind: "choice", question: q, choiceId: cid })}
-                    onEssayClick={(bk) => setModal({ kind: "essay", question: q, bucketKey: bk })}
-                    onCompetencyClick={() => setModal({ kind: "competency", question: q })}
-                  />
-                ))}
-                {questions.length === 0 && (
-                  <tr><td colSpan={9} style={{ padding: 16, textAlign: "center", color: "var(--muted)" }}>문항 분석 없음</td></tr>
-                )}
-              </tbody>
-            </table>
-            <Pagination page={questionsPg.page} totalPages={questionsPg.totalPages} onChange={questionsPg.setPage} />
-          </div>
+          <>
+            <div style={{ display: "flex", gap: 8, marginBottom: 8, flexWrap: "wrap", alignItems: "center" }}>
+              <span style={{ fontSize: 12, color: "var(--muted)" }}>정렬:</span>
+              <div style={{
+                display: "inline-flex", border: "1px solid var(--stroke)",
+                borderRadius: 6, overflow: "hidden",
+              }}>
+                <button
+                  type="button"
+                  onClick={() => setQuestionSort("wrongRate")}
+                  style={{
+                    padding: "4px 10px", fontSize: 12, fontWeight: 600,
+                    border: 0, cursor: "pointer",
+                    background: questionSort === "wrongRate" ? "var(--accent)" : "var(--panel)",
+                    color: questionSort === "wrongRate" ? "#fff" : "var(--text)",
+                  }}
+                >오답률 상위 순</button>
+                <button
+                  type="button"
+                  onClick={() => setQuestionSort("number")}
+                  style={{
+                    padding: "4px 10px", fontSize: 12, fontWeight: 600,
+                    border: 0, cursor: "pointer",
+                    background: questionSort === "number" ? "var(--accent)" : "var(--panel)",
+                    color: questionSort === "number" ? "#fff" : "var(--text)",
+                  }}
+                >번호 순</button>
+              </div>
+              <span style={{ fontSize: 11, color: "var(--muted)", marginLeft: "auto" }}>
+                번호를 클릭하면 발문·선지·해설을 볼 수 있습니다.
+              </span>
+            </div>
+            <div style={{ background: "var(--panel)", border: "1px solid var(--stroke)", borderRadius: 8, padding: 8, overflowX: "auto" }}>
+              <table style={{ width: "100%", fontSize: 12, minWidth: 1000, color: "var(--text)" }}>
+                <thead>
+                  <tr style={{ background: "var(--bg)", textAlign: "left" }}>
+                    <th style={{ padding: "6px 6px" }}>번호</th>
+                    <th style={{ padding: "6px 6px" }}>유형</th>
+                    <th style={{ padding: "6px 6px" }}>영역</th>
+                    <th style={{ padding: "6px 6px" }}>배점</th>
+                    <th style={{ padding: "6px 6px" }}>정답</th>
+                    <th style={{ padding: "6px 6px" }}>정답률</th>
+                    <th style={{ padding: "6px 6px" }}>응시</th>
+                    <th style={{ padding: "6px 6px", minWidth: 240 }}>선택지 분포 (%)</th>
+                    <th style={{ padding: "6px 6px" }}>역량</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {questionsPg.paged.map((q) => (
+                    <QuestionRow
+                      key={q.number}
+                      q={q}
+                      onNumberClick={() => setModal({ kind: "questionDetail", question: q })}
+                      onChoiceClick={(cid) => setModal({ kind: "choice", question: q, choiceId: cid })}
+                      onEssayClick={(bk) => setModal({ kind: "essay", question: q, bucketKey: bk })}
+                      onCompetencyClick={() => setModal({ kind: "competency", question: q })}
+                    />
+                  ))}
+                  {questions.length === 0 && (
+                    <tr><td colSpan={9} style={{ padding: 16, textAlign: "center", color: "var(--muted)" }}>문항 분석 없음</td></tr>
+                  )}
+                </tbody>
+              </table>
+              <Pagination page={questionsPg.page} totalPages={questionsPg.totalPages} onChange={questionsPg.setPage} />
+            </div>
+          </>
         )}
       </div>
 
@@ -476,6 +565,11 @@ export default function AdminTestStatisticsPage() {
           <CompetencyModalBody question={modal.question} />
         </Modal>
       )}
+      {modal?.kind === "questionDetail" && (
+        <Modal open onClose={closeModal} title={`${modal.question.number}번 — 발문·선지·해설`} size="lg">
+          <QuestionDetailModalBody question={modal.question} />
+        </Modal>
+      )}
     </AdminLayout>
   );
 }
@@ -487,13 +581,17 @@ const ESSAY_COLOR = {
   zero: { bg: "rgba(239,68,68,0.18)", fg: "#fca5a5", bd: "rgba(239,68,68,0.4)" },
 };
 
-function QuestionRow({ q, onChoiceClick, onEssayClick, onCompetencyClick }) {
+function QuestionRow({ q, onNumberClick, onChoiceClick, onEssayClick, onCompetencyClick }) {
   const isEssay = q.type === "서술형" || q.type === "서술";
   const total = q.attempts || 0;
 
   return (
     <tr style={{ borderTop: "1px solid var(--stroke)" }}>
-      <td style={{ padding: "4px 6px", fontWeight: 600 }}>{q.number}</td>
+      <td style={{ padding: "4px 6px", fontWeight: 600 }}>
+        <ClickableCell onClick={onNumberClick} title="발문·선지·해설 보기">
+          {q.number}
+        </ClickableCell>
+      </td>
       <td style={{ padding: "4px 6px" }}>{q.type}</td>
       <td style={{ padding: "4px 6px" }}>{q.domain || "-"}{q.subDomain ? ` / ${q.subDomain}` : ""}</td>
       <td style={{ padding: "4px 6px" }}>{q.points}</td>
@@ -732,6 +830,86 @@ function EssayModalBody({ question, bucketKey }) {
             </div>
           ))}
         </div>
+      )}
+    </div>
+  );
+}
+
+function QuestionDetailModalBody({ question }) {
+  const choiceIds = (question.choiceIds && question.choiceIds.length > 0)
+    ? question.choiceIds
+    : Object.keys(question.choiceTexts || {});
+  const isNumeric = (c) => /^\d+$/.test(c);
+  const correct = question.correctAnswer;
+
+  return (
+    <div style={{ fontSize: 13, color: "var(--text)" }}>
+      <div style={{ marginBottom: 10, color: "var(--muted)", fontSize: 12 }}>
+        {question.type} · {question.points}점 · 정답률 {(question.correctRate * 100).toFixed(1)}%
+      </div>
+      {question.passageText && (
+        <div style={{
+          background: "var(--bg)", border: "1px solid var(--stroke)",
+          borderRadius: 6, padding: 10, marginBottom: 10,
+          fontSize: 12, whiteSpace: "pre-wrap", maxHeight: 240, overflowY: "auto",
+        }}>
+          <div style={{ fontWeight: 700, fontSize: 11, color: "var(--muted)", marginBottom: 4 }}>지문</div>
+          {question.passageText}
+        </div>
+      )}
+      {question.stemText && (
+        <div style={{ marginBottom: 12, lineHeight: 1.6, whiteSpace: "pre-wrap" }}>
+          <strong style={{ marginRight: 6 }}>{question.number}.</strong>{question.stemText}
+        </div>
+      )}
+      {choiceIds.length > 0 && (
+        <ol style={{ margin: "8px 0", paddingLeft: 0, listStyle: "none" }}>
+          {choiceIds.map((c) => {
+            const text = (question.choiceTexts || {})[c] || "";
+            const isCorrect = c === correct;
+            return (
+              <li key={c} style={{
+                padding: "6px 10px", marginBottom: 4, borderRadius: 4,
+                background: isCorrect ? "rgba(34,197,94,0.12)" : "var(--bg)",
+                border: `1px solid ${isCorrect ? "rgba(34,197,94,0.4)" : "var(--stroke)"}`,
+                display: "flex", gap: 8,
+              }}>
+                <span style={{
+                  fontWeight: 700, minWidth: 22,
+                  color: isCorrect ? "#86efac" : "var(--muted)",
+                }}>{isNumeric(c) ? `${c}.` : c}</span>
+                <span style={{ flex: 1, whiteSpace: "pre-wrap" }}>{text || "(선지 본문 없음)"}</span>
+                {isCorrect && (
+                  <span style={{ color: "#86efac", fontWeight: 700, fontSize: 11, alignSelf: "center" }}>정답</span>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+      )}
+      {question.explanation && (
+        <div style={{
+          marginTop: 10, padding: 10, borderRadius: 6,
+          background: "rgba(59,130,246,0.08)", border: "1px solid rgba(59,130,246,0.3)",
+        }}>
+          <div style={{ fontWeight: 700, fontSize: 11, color: "#60a5fa", marginBottom: 4 }}>해설</div>
+          <div style={{ whiteSpace: "pre-wrap", lineHeight: 1.6 }}>{question.explanation}</div>
+        </div>
+      )}
+      {question.choiceExplanations && Object.keys(question.choiceExplanations).length > 0 && (
+        <div style={{ marginTop: 10 }}>
+          <div style={{ fontWeight: 700, fontSize: 11, color: "var(--muted)", marginBottom: 4 }}>선지별 해설</div>
+          <ul style={{ margin: 0, paddingLeft: 16, fontSize: 12 }}>
+            {Object.entries(question.choiceExplanations).map(([cid, text]) => (
+              <li key={cid} style={{ marginBottom: 4, whiteSpace: "pre-wrap" }}>
+                <strong>{isNumeric(cid) ? `${cid}.` : cid}</strong> {text}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {!question.stemText && !question.passageText && choiceIds.length === 0 && !question.explanation && (
+        <div style={{ color: "var(--muted)" }}>문항 본문이 등록되지 않았습니다.</div>
       )}
     </div>
   );

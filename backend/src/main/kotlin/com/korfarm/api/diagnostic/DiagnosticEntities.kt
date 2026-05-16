@@ -165,3 +165,43 @@ class DiagResponseEntity(
     @Column(name = "responded_at", nullable = false)
     var respondedAt: LocalDateTime = LocalDateTime.now()
 )
+
+/**
+ * 진단 OMR 인쇄 응시 시 서버 측 타이머·답안 자동 저장용 draft (V0142).
+ * 사용자 명시 (2026-05-16): 모바일·태블릿 슬립 모드로 인한 타이머 정지·답안 손실 방지.
+ * deadline 은 서버 시각 기준. DiagnosticOmrScheduler 가 5분마다 만료 draft 자동 제출.
+ */
+@Embeddable
+data class DiagOmrDraftId(
+    @Column(name = "user_id") var userId: String = "",
+    @Column(name = "tier") var tier: String = "",
+) : java.io.Serializable
+
+@Entity
+@Table(name = "diag_omr_drafts")
+class DiagOmrDraftEntity(
+    @EmbeddedId
+    var id: DiagOmrDraftId,
+
+    @Column(name = "started_at", nullable = false)
+    var startedAt: LocalDateTime,
+
+    @Column(nullable = false)
+    var deadline: LocalDateTime,
+
+    @Column(name = "answers_json", columnDefinition = "json", nullable = false)
+    var answersJson: String,
+
+    @Column(nullable = false)
+    var status: String = "pending",  // pending | submitted | expired
+
+    @Column(name = "submitted_session_id")
+    var submittedSessionId: String? = null,
+
+    @Column(name = "created_at", nullable = false)
+    var createdAt: LocalDateTime = LocalDateTime.now(),
+
+    @Column(name = "updated_at", nullable = false)
+    var updatedAt: LocalDateTime = LocalDateTime.now(),
+)
+
