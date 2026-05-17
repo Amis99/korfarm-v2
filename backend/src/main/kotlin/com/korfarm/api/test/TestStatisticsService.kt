@@ -747,10 +747,6 @@ class TestStatisticsService(
         val orgIds = membershipsByUser.values.mapNotNull { it?.orgId }.distinct()
         val orgMap = if (orgIds.isNotEmpty()) orgRepository.findAllById(orgIds).associateBy { it.id } else emptyMap()
 
-        // 진단 문항 정보 (틀린 번호 산출용 — order_in_passage 기준)
-        val tierQuestions = diagQuestionRepo.findByTierOrderByIdAsc(tier).withIndex()
-            .associate { (idx, q) -> q.id to (idx + 1) }
-
         return sessions.map { s ->
             val user = userMap[s.userId]
             val membership = membershipsByUser[s.userId]
@@ -773,11 +769,11 @@ class TestStatisticsService(
                 key to DomainScore(score = sc, maxScore = mx, correct = if (sc > 0) 1 else 0, total = if (mx > 0) 1 else 0)
             }
 
-            // 틀린 번호 — diag_responses 에서 incorrect 응답 추출
+            // 틀린 번호 — 학생 시험지 PDF 의 실제 번호 = response_order (2026-05-17 fix)
             val responses = diagResponseRepo.findBySessionIdOrderByResponseOrderAsc(s.id)
             val wrongNumbers = responses
                 .filter { it.isCorrect == false }
-                .mapNotNull { tierQuestions[it.questionId] }
+                .map { it.responseOrder }
                 .sorted()
 
             StudentSubmissionDetail(

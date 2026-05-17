@@ -26,8 +26,6 @@ class DiagnosticService(
     private val objectMapper: ObjectMapper,
     private val summaryService: DiagnosticSummaryService,
     private val recommendationService: com.korfarm.api.learning.RecommendationService,
-    // Phase B (2026-05-17) — 채점·평가표 단일화. test_questions 가 단일 진실 소스(SSOT).
-    private val testQuestionRepo: com.korfarm.api.test.TestQuestionRepo,
 ) {
     companion object {
         const val OMR_TIME_LIMIT_MIN = 60L
@@ -857,33 +855,46 @@ class DiagnosticService(
      * 역량 벡터·오류 경로: choices_json 의 각 선지 vector·error_path (Phase C 에서 채워질 예정).
      *   Phase C 전엔 빈 vector·null errorPath → 채점·정답률은 정확하지만 역량 분석은 0점.
      */
+    /**
+     * 2026-05-17 — diag_questions 단일 진실 소스 (= test_papers.payload_json 의 양방향 동기화 카피).
+     * 비주얼 에디터(payload_json) → applyPayloadToDiagnostic 가 diag_passages/diag_questions 동기화.
+     * test_questions 는 폐기된 옛 데이터 — 사용 안 함.
+     */
     private fun loadQuestionPool(tier: String): List<QuestionData> {
-        val testId = "diag_paper_$tier"
-        val questions = testQuestionRepo.findByTestIdOrderByNumberAsc(testId)
-            .filter { it.type != "서술형" && it.type != "서술" }
-        return questions.map { q ->
-            val choicesRaw: List<Map<String, Any>> = try {
-                objectMapper.readValue(q.choicesJson ?: "[]")
-            } catch (_: Exception) { emptyList() }
-            QuestionData(
-                questionId = q.id,
-                passageId = "",
-                tier = tier,
-                questionType = q.type,
-                level = null,
-                correctChoice = q.correctAnswer,
-                choices = choicesRaw.map { c ->
-                    @Suppress("UNCHECKED_CAST")
-                    ChoiceData(
-                        choiceId = ((c["id"] ?: c["choice_id"]) as? String) ?: "",
-                        text = ((c["text"] ?: c["content"]) as? String) ?: "",
-                        vector = (c["vector"] as? Map<String, Any>)
-                            ?.mapValues { (it.value as Number).toDouble() } ?: emptyMap(),
-                        errorPath = c["error_path"] as? String
-                    )
-                }
+        val questions = questionRepo.findByTierOrderByIdAsc(tier)
+        val passages = passageRepo.findByTierOrderByLevelAscIdAsc(tier).associateBy { it.id }
+        return questions
+            .sortedWith(
+                compareBy(
+                    { passages[it.passageId]?.level ?: Int.MAX_VALUE },
+                    { it.passageId },
+                    { it.orderInPassage }
+                )
             )
-        }
+            .map { q ->
+                val passage = passages[q.passageId]
+                val choicesRaw: List<Map<String, Any>> = try {
+                    objectMapper.readValue(q.choicesJson)
+                } catch (_: Exception) { emptyList() }
+                QuestionData(
+                    questionId = q.id,
+                    passageId = q.passageId,
+                    tier = q.tier,
+                    questionType = q.questionType,
+                    level = passage?.level,
+                    correctChoice = q.correctChoice,
+                    choices = choicesRaw.map { c ->
+                        @Suppress("UNCHECKED_CAST")
+                        ChoiceData(
+                            choiceId = ((c["choice_id"] ?: c["id"]) as? String) ?: "",
+                            text = ((c["text"] ?: c["content"]) as? String) ?: "",
+                            vector = (c["vector"] as? Map<String, Any>)
+                                ?.mapValues { (it.value as Number).toDouble() } ?: emptyMap(),
+                            errorPath = c["error_path"] as? String
+                        )
+                    }
+                )
+            }
     }
 
     private fun getQuestionLevel(q: DiagQuestionEntity): Int? {
@@ -928,18 +939,15 @@ class DiagnosticService(
         // 전체 응답 조회
         val allResponses = responseRepo.findBySessionIdOrderByResponseOrderAsc(session.id)
 
-        // 사용된 문항 + 지문 일괄 조회 — 2026-05-17 Phase B: test_questions 우선, 옛 diag_questions 폴백.
+        // 사용된 문항 + 지문 일괄 조회 — 2026-05-17 롤백: diag_questions 가 진실 (test_questions 는 폐기 데이터)
         val questionIds = allResponses.map { it.questionId }.toSet()
         val questionsMap = questionRepo.findAllById(questionIds).associateBy { it.id }
         val passageIds = questionsMap.values.map { it.passageId }.toSet()
         val passagesMap = passageRepo.findAllById(passageIds).associateBy { it.id }
-        // 새 데이터 (Phase B 이후 응시) — test_questions 우선 lookup
-        val testQMap = testQuestionRepo.findAllById(questionIds).associateBy { it.id }
 
-        // 통합 어댑터 — stem / correctChoice / choicesJson / questionType 균일화
+        // 어댑터 — 호환성만 유지 (구조 그대로)
         data class QRow(val stem: String, val correctChoice: String?, val choicesJson: String?, val questionType: String, val passageId: String?)
         fun lookupQ(id: String): QRow? {
-            testQMap[id]?.let { return QRow(it.stem ?: "", it.correctAnswer, it.choicesJson, it.type, null) }
             questionsMap[id]?.let { return QRow(it.stem, it.correctChoice, it.choicesJson, it.questionType, it.passageId) }
             return null
         }
