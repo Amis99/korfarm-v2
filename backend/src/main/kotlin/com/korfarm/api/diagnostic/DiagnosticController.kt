@@ -88,7 +88,7 @@ class DiagnosticController(
     @PostMapping("/omr-timer/submit")
     fun submitOmrDraft(@RequestBody request: OmrTimerSubmitRequest): ApiResponse<OmrTimerSubmitResponse> {
         val userId = currentUserId()
-        return ApiResponse(success = true, data = diagnosticService.submitOmrDraft(userId, request.tier))
+        return ApiResponse(success = true, data = diagnosticService.submitOmrDraft(userId, request.tier, request.answers))
     }
 
     private fun currentUserId(): String {

@@ -79,6 +79,11 @@ function DiagnosticPrintPage() {
   );
   const submittedRef = useRef(false);
   const saveTimerRef = useRef(null);
+  // 자동 저장 상태 인디케이터 (2026-05-17 최민성 사고 fix) — "저장 중" / "저장됨" / "저장 실패"
+  const [saveStatus, setSaveStatus] = useState("idle");  // idle | saving | saved | error
+  const [lastSavedAt, setLastSavedAt] = useState(null);
+  // 최신 답안 ref — beforeunload 시 sendBeacon 으로 보낼 때 사용
+  const answersRef = useRef({});
 
   // 빈 객관식 문항 메타 (AnswerInputPanel용)
   const questions = Array.from({ length: TOTAL_Q }, (_, i) => ({
@@ -192,19 +197,63 @@ function DiagnosticPrintPage() {
       } else {
         next[key] = String(value);
       }
-      // 1초 debounce 자동 저장 — 짧게 잡아 막판 입력도 서버 도달 보장.
-      // 이민혁 사고 2026-05-16: 3초 debounce → 마지막 입력 후 deadline 1초 전 제출 → 부분 저장 fix.
+      answersRef.current = next;
+      // 300ms debounce 자동 저장 (2026-05-17 최민성 사고 fix).
+      //   - 1초 debounce 였는데 학생이 마지막 입력 직후 페이지 닫으면 저장 안 됨 → 짧게.
+      //   - 실패 시 silent X — saveStatus 인디케이터로 학생에게 표시.
+      //   - 매 입력 즉시 답안 수정/덮어쓰기 보장 (백엔드 saveOmrDraft 가 전체 answers 덮어씀).
       if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
+      setSaveStatus("saving");
       saveTimerRef.current = setTimeout(() => {
         const converted = {};
         for (const [k, v] of Object.entries(next)) {
           converted[k] = NUM_TO_LETTER[v] || v;
         }
-        apiPost("/v1/diagnostic/omr-timer/save", { tier, answers: converted }).catch(() => {});
-      }, 1000);
+        apiPost("/v1/diagnostic/omr-timer/save", { tier, answers: converted })
+          .then(() => {
+            setSaveStatus("saved");
+            setLastSavedAt(new Date());
+          })
+          .catch(() => {
+            setSaveStatus("error");
+          });
+      }, 300);
       return next;
     });
   };
+
+  // 페이지 닫기·이탈 직전 마지막 저장 보장 (sendBeacon — 동기, 백그라운드 OK)
+  useEffect(() => {
+    if (!timerStarted) return;
+    const beacon = () => {
+      const cur = answersRef.current;
+      if (!cur || Object.keys(cur).length === 0) return;
+      const converted = {};
+      for (const [k, v] of Object.entries(cur)) {
+        converted[k] = NUM_TO_LETTER[v] || v;
+      }
+      try {
+        const token = sessionStorage.getItem(TOKEN_KEY) || localStorage.getItem(TOKEN_KEY) || "";
+        const body = JSON.stringify({ tier, answers: converted });
+        const blob = new Blob([body], { type: "application/json" });
+        // navigator.sendBeacon 은 헤더 추가 불가 — fetch keepalive 로 대체 (Authorization 필요).
+        fetch(`${API_BASE}/v1/diagnostic/omr-timer/save`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+          body, keepalive: true,
+        }).catch(() => {});
+      } catch {}
+    };
+    window.addEventListener("beforeunload", beacon);
+    window.addEventListener("pagehide", beacon);
+    return () => {
+      window.removeEventListener("beforeunload", beacon);
+      window.removeEventListener("pagehide", beacon);
+    };
+  }, [timerStarted, tier]);
 
   const handleStartTimer = async () => {
     try {
@@ -247,10 +296,12 @@ function DiagnosticPrintPage() {
       for (const [k, v] of Object.entries(answers)) {
         converted[k] = NUM_TO_LETTER[v] || v;
       }
+      // save 실패 silent 였음 → submit 가 client answers 함께 보내 백엔드에서 덮어쓰기 보장.
       try {
         await apiPost("/v1/diagnostic/omr-timer/save", { tier, answers: converted });
       } catch {}
-      const res = await apiPost("/v1/diagnostic/omr-timer/submit", { tier });
+      // 2026-05-17 최민성 사고 fix: submit 에 answers 동봉 → draft 빈 채로 굳어도 채점 보장
+      const res = await apiPost("/v1/diagnostic/omr-timer/submit", { tier, answers: converted });
       if (auto) {
         playAlarmSound();
         notifyTimerEnd(tierInfo?.label || "");
@@ -291,6 +342,28 @@ function DiagnosticPrintPage() {
             >
               ⏱ {timerStarted ? formatMmSs(remainSec) : "60:00"}
             </div>
+            {/* 자동 저장 상태 인디케이터 (2026-05-17) */}
+            {timerStarted && (
+              <div style={{
+                padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700,
+                background: saveStatus === "error" ? "#fdecea"
+                  : saveStatus === "saving" ? "#fff8e1"
+                  : "#e8f5e9",
+                color: saveStatus === "error" ? "#c0392b"
+                  : saveStatus === "saving" ? "#b7791f"
+                  : "#2d6a4f",
+                border: `1px solid ${
+                  saveStatus === "error" ? "#e74c3c"
+                  : saveStatus === "saving" ? "#d4a017"
+                  : "#5cb85c"}`,
+              }}>
+                {saveStatus === "error" ? "⚠ 저장 실패 — 다시 입력해주세요"
+                  : saveStatus === "saving" ? "⏳ 저장 중"
+                  : saveStatus === "saved" && lastSavedAt
+                    ? `✓ 저장됨 ${lastSavedAt.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}`
+                    : "✓ 자동 저장 대기"}
+              </div>
+            )}
             {!timerStarted && (
               <button
                 className="btn primary"

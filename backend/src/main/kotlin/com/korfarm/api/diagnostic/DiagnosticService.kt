@@ -404,11 +404,24 @@ class DiagnosticService(
     }
 
     @Transactional
-    fun submitOmrDraft(userId: String, tier: String): OmrTimerSubmitResponse {
+    fun submitOmrDraft(userId: String, tier: String, clientAnswers: Map<String, String?>? = null): OmrTimerSubmitResponse {
         // 비관적 락으로 중복 호출 차단 — 두 번째 호출이 첫 호출 commit 까지 대기.
         // 이동건 사고 2026-05-16 — 12초 간격 두 번 제출로 세션 2건 생성 fix.
         val draft = omrDraftRepo.findForUpdate(userId, tier)
             ?: throw ApiException("TIMER_NOT_STARTED", "타이머를 먼저 시작해 주세요.", HttpStatus.BAD_REQUEST)
+
+        // 2026-05-17 (최민성 사고 fix): client 가 보낸 최신 답안으로 draft 덮어쓰기.
+        // 자동 저장 실패로 draft 가 비어있어도 제출 시점 client 답안으로 채점 → 빈 채점 사고 차단.
+        // 단, 옛 client (answers=null) + 이미 submitted draft 는 그대로 (idempotent).
+        if (clientAnswers != null && draft.status == "pending") {
+            // 빈 답안 키 제거 + null 인 값 제외
+            val cleaned = clientAnswers.filterValues { !it.isNullOrBlank() }
+            if (cleaned.isNotEmpty()) {
+                draft.answersJson = objectMapper.writeValueAsString(cleaned)
+                draft.updatedAt = LocalDateTime.now()
+                omrDraftRepo.save(draft)
+            }
+        }
         return finalizeOmrDraft(userId, draft)
     }
 

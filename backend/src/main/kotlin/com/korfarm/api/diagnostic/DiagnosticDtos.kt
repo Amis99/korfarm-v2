@@ -50,7 +50,15 @@ data class OmrTimerSaveRequest(
     val tier: String,
     val answers: Map<String, String?>,
 )
-data class OmrTimerSubmitRequest(val tier: String)
+data class OmrTimerSubmitRequest(
+    val tier: String,
+    /**
+     * 제출 시점 client 최신 답안 (2026-05-17 추가).
+     * 자동 저장 실패로 draft 가 비어있어도 이 값으로 덮어쓴 후 채점 — 빈 채점 사고 차단.
+     * 옛 클라이언트는 null 보낼 수 있어 nullable.
+     */
+    val answers: Map<String, String?>? = null,
+)
 data class OmrTimerSubmitResponse(
     val sessionId: String,
     val report: DiagnosticReport,
