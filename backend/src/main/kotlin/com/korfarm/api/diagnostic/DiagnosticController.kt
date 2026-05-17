@@ -91,6 +91,16 @@ class DiagnosticController(
         return ApiResponse(success = true, data = diagnosticService.submitOmrDraft(userId, request.tier, request.answers))
     }
 
+    /**
+     * 2026-05-17 Phase D — 모든 completed 진단 세션 일괄 재채점 (HQ_ADMIN 전용).
+     * test_questions SSOT 전환 후 옛 scores_json·max_scores_json 등을 재계산.
+     */
+    @PostMapping("/admin/rescore-all")
+    fun rescoreAllSessions(): ApiResponse<Map<String, Any>> {
+        com.korfarm.api.security.AdminGuard.requireAnyRole("HQ_ADMIN")
+        return ApiResponse(success = true, data = diagnosticService.rescoreAllCompletedSessions())
+    }
+
     private fun currentUserId(): String {
         return SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "인증이 필요합니다", HttpStatus.UNAUTHORIZED)

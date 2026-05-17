@@ -21,12 +21,20 @@ class DiagnosticOmrScheduler(
 ) {
     private val log = LoggerFactory.getLogger(DiagnosticOmrScheduler::class.java)
 
-    @Scheduled(fixedRate = 5 * 60 * 1000)
+    /**
+     * 정책 변경 (2026-05-17):
+     *   타이머 만료 즉시 자동 제출 X. 학생이 직접 제출 버튼을 눌러야 채점.
+     *   다만 학생이 제출 안 하고 페이지 떠난 경우 안전망으로 **24시간 후** 자동 제출.
+     *   그래야 draft 가 영구히 pending 상태로 남는 누수도 막고, 학생도 충분히 늦게라도 제출 기회 가짐.
+     */
+    @Scheduled(fixedRate = 30 * 60 * 1000)  // 30분 주기로 충분 (24h 지연 정책)
     fun autoSubmitExpiredOmrDrafts() {
         val now = LocalDateTime.now()
-        val expired = omrDraftRepo.findByStatusAndDeadlineBefore("pending", now)
+        // deadline 24시간 이전 = 만료 후 24시간 지난 draft 만 자동 제출
+        val threshold = now.minusHours(24)
+        val expired = omrDraftRepo.findByStatusAndDeadlineBefore("pending", threshold)
         if (expired.isEmpty()) return
-        log.info("진단 OMR 자동 제출 — 만료 draft {}건", expired.size)
+        log.info("진단 OMR 자동 제출 — 만료 후 24h 지난 draft {}건", expired.size)
         var ok = 0
         for (draft in expired) {
             try {

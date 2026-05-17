@@ -26,6 +26,8 @@ class DiagnosticService(
     private val objectMapper: ObjectMapper,
     private val summaryService: DiagnosticSummaryService,
     private val recommendationService: com.korfarm.api.learning.RecommendationService,
+    // Phase B (2026-05-17) — 채점·평가표 단일화. test_questions 가 단일 진실 소스(SSOT).
+    private val testQuestionRepo: com.korfarm.api.test.TestQuestionRepo,
 ) {
     companion object {
         const val OMR_TIME_LIMIT_MIN = 60L
@@ -505,22 +507,20 @@ class DiagnosticService(
         var answeredCount = 0
         var correctCount = 0
 
-        // OMR answers는 1부터 시작하는 문항번호 → 선택지(A~E)
+        // OMR answers는 1부터 시작하는 문항번호 → 선택지(A~E).
+        // 2026-05-17 Phase B: pool 이 test_questions 기반 → QuestionData 자체에 정답·choices·vector 가 들어있음.
         pool.forEachIndexed { idx, qd ->
             val number = idx + 1
             val rawAnswer = request.answers[number.toString()]?.trim()?.uppercase()
             val choice = if (rawAnswer.isNullOrBlank()) null else rawAnswer
 
-            val question = questionRepo.findById(qd.questionId).orElse(null) ?: return@forEachIndexed
-            val choicesData: List<Map<String, Any>> = objectMapper.readValue(question.choicesJson)
-            val correctChoiceData = choicesData.find { (it["choice_id"] as? String) == question.correctChoice }
-            val selectedChoice = choice?.let { c -> choicesData.find { (it["choice_id"] as? String) == c } }
-            val isCorrect = choice != null && choice == question.correctChoice
+            val correctChoiceId = qd.correctChoice ?: return@forEachIndexed
+            val correctChoiceData = qd.choices.find { it.choiceId == correctChoiceId }
+            val selectedChoice = choice?.let { c -> qd.choices.find { it.choiceId == c } }
+            val isCorrect = choice != null && choice == correctChoiceId
 
-            // 정답 vector — 그 문항이 측정하는 가중치
-            @Suppress("UNCHECKED_CAST")
-            val correctVector = (correctChoiceData?.get("vector") as? Map<String, Any>)
-                ?.mapValues { (it.value as Number).toDouble() } ?: emptyMap()
+            // 정답 vector — 그 문항이 측정하는 가중치 (Phase C 메타 채워지면 의미 있음)
+            val correctVector = correctChoiceData?.vector ?: emptyMap()
 
             // 모든 응답: max 누적
             ScoringEngine.accumulateMaxScores(maxScores, correctVector)
@@ -529,11 +529,7 @@ class DiagnosticService(
             if (isCorrect) {
                 ScoringEngine.applyCorrectVector(scores, correctVector)
             } else if (selectedChoice != null) {
-                @Suppress("UNCHECKED_CAST")
-                val selectedVector = (selectedChoice["vector"] as? Map<String, Any>)
-                    ?.mapValues { (it.value as Number).toDouble() } ?: emptyMap()
-                val errorPath = selectedChoice["error_path"] as? String
-                ScoringEngine.accumulateError(errorContrib, selectedVector, errorPath, 1.0, 1.0)
+                ScoringEngine.accumulateError(errorContrib, selectedChoice.vector, selectedChoice.errorPath, 1.0, 1.0)
             }
 
             // touch_count 누적 (정답 vector 양수 역량마다)
@@ -767,41 +763,127 @@ class DiagnosticService(
         return session
     }
 
-    private fun loadQuestionPool(tier: String): List<QuestionData> {
-        val questions = questionRepo.findByTierOrderByIdAsc(tier)
-        val passages = passageRepo.findByTierOrderByLevelAscIdAsc(tier).associateBy { it.id }
-        // 정렬: 지문 level → 지문 id → order_in_passage
-        // V0048 마이그레이션의 test_questions.number 부여 순서와 동일해야 함
-        return questions
-            .sortedWith(
-                compareBy(
-                    { passages[it.passageId]?.level ?: Int.MAX_VALUE },
-                    { it.passageId },
-                    { it.orderInPassage }
-                )
-            )
-            .map { q ->
-                val passage = passages[q.passageId]
-                val choicesRaw: List<Map<String, Any>> = objectMapper.readValue(q.choicesJson)
-                QuestionData(
-                    questionId = q.id,
-                    passageId = q.passageId,
-                    tier = q.tier,
-                    questionType = q.questionType,
-                    level = passage?.level,
-                    correctChoice = q.correctChoice,
-                    choices = choicesRaw.map { c ->
-                        @Suppress("UNCHECKED_CAST")
-                        ChoiceData(
-                            choiceId = c["choice_id"] as? String ?: "",
-                            text = c["text"] as? String ?: "",
-                            vector = (c["vector"] as? Map<String, Any>)
-                                ?.mapValues { (it.value as Number).toDouble() } ?: emptyMap(),
-                            errorPath = c["error_path"] as? String
-                        )
+    /**
+     * 2026-05-17 Phase D — 모든 completed 세션을 test_questions 기반으로 재채점.
+     *
+     * SQL UPDATE 로 이미 처리한 부분: is_correct, correct_count, answered_count, raw_tci, adjusted_tci
+     * 이 메서드가 처리: scores_json, max_scores_json, touch_counts_json, error_analysis_json (역량 벡터 누적)
+     *
+     * 각 세션마다:
+     *   1. loadQuestionPool(tier) — test_questions 기준
+     *   2. diag_responses 순회, response_order 로 pool 매핑
+     *   3. ScoringEngine 으로 vector 누적
+     *   4. session JSON 컬럼 업데이트
+     *
+     * HQ_ADMIN 만 호출. 일회성 운영 도구.
+     */
+    @Transactional
+    fun rescoreAllCompletedSessions(): Map<String, Any> {
+        val sessions = sessionRepo.findByStatusOrderByStartedAtDesc("completed")
+        var ok = 0
+        var failed = 0
+        val failures = mutableListOf<String>()
+        val poolCache = mutableMapOf<String, List<QuestionData>>()
+
+        for (session in sessions) {
+            try {
+                val pool = poolCache.getOrPut(session.tier) {
+                    loadQuestionPool(session.tier).filter { it.questionType != "서술형" && it.questionType != "서술" }
+                }
+                if (pool.isEmpty()) {
+                    failures.add("${session.id}: pool 비어있음 (tier=${session.tier})")
+                    failed++
+                    continue
+                }
+                val responses = responseRepo.findBySessionIdOrderByResponseOrderAsc(session.id)
+
+                val scores = ScoringEngine.initScores()
+                val maxScores = ScoringEngine.initMaxScores()
+                val touchCounts = ScoringEngine.initTouchCounts()
+                val errorContrib = ScoringEngine.initErrorContrib()
+
+                for (resp in responses) {
+                    val idx = resp.responseOrder - 1
+                    if (idx < 0 || idx >= pool.size) continue
+                    val qd = pool[idx]
+                    val correctChoiceData = qd.choices.find { it.choiceId == qd.correctChoice }
+                    val correctVector = correctChoiceData?.vector ?: emptyMap()
+
+                    ScoringEngine.accumulateMaxScores(maxScores, correctVector)
+                    if (resp.isCorrect) {
+                        ScoringEngine.applyCorrectVector(scores, correctVector)
+                    } else if (!resp.selectedChoice.isNullOrBlank()) {
+                        val selected = qd.choices.find { it.choiceId == resp.selectedChoice }
+                        if (selected != null) {
+                            ScoringEngine.accumulateError(errorContrib, selected.vector, selected.errorPath, 1.0, 1.0)
+                        }
                     }
-                )
+                    for ((k, v) in correctVector) {
+                        if (v <= 0) continue
+                        val nk = normalizeKey(k)
+                        if (nk in touchCounts) touchCounts[nk] = touchCounts[nk]!! + 1
+                    }
+                }
+
+                session.scoresJson = objectMapper.writeValueAsString(scores)
+                session.maxScoresJson = objectMapper.writeValueAsString(maxScores)
+                session.touchCountsJson = objectMapper.writeValueAsString(touchCounts)
+                session.errorAnalysisJson = objectMapper.writeValueAsString(errorContrib)
+                session.aiSummary = null  // 잘못된 채점 기반 총평 무효화 — 다음 조회 시 재생성
+                sessionRepo.save(session)
+                ok++
+            } catch (e: Exception) {
+                logger.warn("rescoreAll 실패 session={}: {}", session.id, e.message)
+                failures.add("${session.id}: ${e.message}")
+                failed++
             }
+        }
+        return mapOf(
+            "total" to sessions.size,
+            "succeeded" to ok,
+            "failed" to failed,
+            "failures" to failures,
+        )
+    }
+
+    /**
+     * 2026-05-17 Phase B — 진단 채점·평가표를 test_questions 단일 진실 소스(SSOT)로 전환.
+     *
+     * 학생이 푼 시험지 = test_papers/test_questions (어드민 비주얼 에디터로 출제됨).
+     * 따라서 채점·평가표도 그 데이터로 일관 처리. diag_questions 의존 제거.
+     *
+     * 정렬: test_questions.number ASC — 학생 OMR 답안 키와 1:1 매칭.
+     * 정답: test_questions.correct_answer.
+     * 역량 벡터·오류 경로: choices_json 의 각 선지 vector·error_path (Phase C 에서 채워질 예정).
+     *   Phase C 전엔 빈 vector·null errorPath → 채점·정답률은 정확하지만 역량 분석은 0점.
+     */
+    private fun loadQuestionPool(tier: String): List<QuestionData> {
+        val testId = "diag_paper_$tier"
+        val questions = testQuestionRepo.findByTestIdOrderByNumberAsc(testId)
+            .filter { it.type != "서술형" && it.type != "서술" }
+        return questions.map { q ->
+            val choicesRaw: List<Map<String, Any>> = try {
+                objectMapper.readValue(q.choicesJson ?: "[]")
+            } catch (_: Exception) { emptyList() }
+            QuestionData(
+                questionId = q.id,
+                passageId = "",
+                tier = tier,
+                questionType = q.type,
+                level = null,
+                correctChoice = q.correctAnswer,
+                choices = choicesRaw.map { c ->
+                    @Suppress("UNCHECKED_CAST")
+                    ChoiceData(
+                        choiceId = ((c["id"] ?: c["choice_id"]) as? String) ?: "",
+                        text = ((c["text"] ?: c["content"]) as? String) ?: "",
+                        vector = (c["vector"] as? Map<String, Any>)
+                            ?.mapValues { (it.value as Number).toDouble() } ?: emptyMap(),
+                        errorPath = c["error_path"] as? String
+                    )
+                }
+            )
+        }
     }
 
     private fun getQuestionLevel(q: DiagQuestionEntity): Int? {
@@ -846,18 +928,40 @@ class DiagnosticService(
         // 전체 응답 조회
         val allResponses = responseRepo.findBySessionIdOrderByResponseOrderAsc(session.id)
 
-        // 사용된 문항 + 지문 일괄 조회
+        // 사용된 문항 + 지문 일괄 조회 — 2026-05-17 Phase B: test_questions 우선, 옛 diag_questions 폴백.
         val questionIds = allResponses.map { it.questionId }.toSet()
         val questionsMap = questionRepo.findAllById(questionIds).associateBy { it.id }
         val passageIds = questionsMap.values.map { it.passageId }.toSet()
         val passagesMap = passageRepo.findAllById(passageIds).associateBy { it.id }
+        // 새 데이터 (Phase B 이후 응시) — test_questions 우선 lookup
+        val testQMap = testQuestionRepo.findAllById(questionIds).associateBy { it.id }
 
-        // 문항별 choices 파싱 캐시
+        // 통합 어댑터 — stem / correctChoice / choicesJson / questionType 균일화
+        data class QRow(val stem: String, val correctChoice: String?, val choicesJson: String?, val questionType: String, val passageId: String?)
+        fun lookupQ(id: String): QRow? {
+            testQMap[id]?.let { return QRow(it.stem ?: "", it.correctAnswer, it.choicesJson, it.type, null) }
+            questionsMap[id]?.let { return QRow(it.stem, it.correctChoice, it.choicesJson, it.questionType, it.passageId) }
+            return null
+        }
+
+        // 문항별 choices 파싱 캐시 — 두 데이터 소스의 choice 키 차이(id vs choice_id, text vs content) 통일
         val choicesCache = mutableMapOf<String, List<Map<String, Any>>>()
         fun getChoices(questionId: String): List<Map<String, Any>> {
             return choicesCache.getOrPut(questionId) {
-                val q = questionsMap[questionId] ?: return@getOrPut emptyList()
-                try { objectMapper.readValue(q.choicesJson) } catch (_: Exception) { emptyList() }
+                val q = lookupQ(questionId) ?: return@getOrPut emptyList()
+                val raw: List<Map<String, Any>> = try {
+                    objectMapper.readValue(q.choicesJson ?: "[]")
+                } catch (_: Exception) { return@getOrPut emptyList() }
+                // 키 정규화 — choice_id, text 보장 (test_questions 의 id/content 도 흡수)
+                raw.map { c ->
+                    val normalized = mutableMapOf<String, Any>()
+                    normalized.putAll(c)
+                    val cid = (c["choice_id"] ?: c["id"]) as? String
+                    val txt = (c["text"] ?: c["content"]) as? String
+                    if (cid != null) normalized["choice_id"] = cid
+                    if (txt != null) normalized["text"] = txt
+                    normalized
+                }
             }
         }
 
@@ -999,27 +1103,29 @@ class DiagnosticService(
             )
         }.sortedBy { it.accuracyRate }
 
-        // ── 개별 문항 리뷰 ──
+        // ── 개별 문항 리뷰 ── (2026-05-17 Phase B: lookupQ 어댑터로 test_questions/diag_questions 둘 다 지원)
+        fun choiceId(c: Map<String, Any>): String = (c["id"] ?: c["choice_id"]) as? String ?: ""
+        fun choiceText(c: Map<String, Any>): String = (c["text"] ?: c["content"]) as? String ?: ""
         val questionReviews = allResponses.mapNotNull { resp ->
-            val q = questionsMap[resp.questionId] ?: return@mapNotNull null
+            val q = lookupQ(resp.questionId) ?: return@mapNotNull null
             val choices = getChoices(resp.questionId)
-            val selected = choices.find { (it["choice_id"] as? String) == resp.selectedChoice }
+            val selected = choices.find { choiceId(it) == resp.selectedChoice }
             @Suppress("UNCHECKED_CAST")
             val selectedVector = (selected?.get("vector") as? Map<String, Any>)
                 ?.mapValues { (it.value as Number).toDouble() } ?: emptyMap()
             val errorPath = selected?.get("error_path") as? String
 
             val reviewChoices = choices.map { c ->
-                val cid = c["choice_id"] as? String ?: ""
+                val cid = choiceId(c)
                 ReviewChoiceItem(
                     choiceId = cid,
-                    text = c["text"] as? String ?: "",
+                    text = choiceText(c),
                     isCorrect = cid == q.correctChoice,
                     isSelected = cid == resp.selectedChoice,
                 )
             }
             QuestionReviewItem(
-                questionId = q.id,
+                questionId = resp.questionId,
                 stem = q.stem,
                 questionType = q.questionType,
                 choices = reviewChoices,

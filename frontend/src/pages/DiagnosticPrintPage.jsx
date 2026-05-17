@@ -78,12 +78,16 @@ function DiagnosticPrintPage() {
     typeof Notification !== "undefined" ? Notification.permission : "unsupported",
   );
   const submittedRef = useRef(false);
-  const saveTimerRef = useRef(null);
-  // 자동 저장 상태 인디케이터 (2026-05-17 최민성 사고 fix) — "저장 중" / "저장됨" / "저장 실패"
-  const [saveStatus, setSaveStatus] = useState("idle");  // idle | saving | saved | error
+  // 자동 저장 상태 인디케이터 (2026-05-17 OMR 0점 사고 fix)
+  const [saveStatus, setSaveStatus] = useState("idle");  // idle | saving | saved | error | unauthorized
   const [lastSavedAt, setLastSavedAt] = useState(null);
-  // 최신 답안 ref — beforeunload 시 sendBeacon 으로 보낼 때 사용
+  const [showAuthExpiredModal, setShowAuthExpiredModal] = useState(false);
+  // 최신 답안 ref — 재시도/페이지 이탈 시 사용
   const answersRef = useRef({});
+  // 진행 중 저장 요청 관리 — 직렬화 (race 차단)
+  const saveInFlightRef = useRef(false);
+  const pendingSaveRef = useRef(false);  // in-flight 중 새 답안 들어오면 마지막에 한 번 더 저장
+  const sessionStorageKey = `diag_omr_pending_${tier}`;
 
   // 빈 객관식 문항 메타 (AnswerInputPanel용)
   const questions = Array.from({ length: TOTAL_Q }, (_, i) => ({
@@ -136,18 +140,34 @@ function DiagnosticPrintPage() {
               navigate(`/diagnostic/v2/report/${status.submittedSessionId}`);
               return;
             }
-            // 답안 복원 (A~E → 1~5)
-            const restoredAnswers = {};
+            // 답안 복원 (A~E → 1~5). sessionStorage 백업이 더 최근이면 우선 사용.
+            const serverAnswers = {};
             for (const [k, v] of Object.entries(status.answers || {})) {
-              restoredAnswers[k] = LETTER_TO_NUM[v] || v;
+              serverAnswers[k] = LETTER_TO_NUM[v] || v;
             }
+            let restoredAnswers = serverAnswers;
+            try {
+              const cached = sessionStorage.getItem(`diag_omr_pending_${tier}`);
+              if (cached) {
+                const cachedObj = JSON.parse(cached);
+                const cachedNum = {};
+                for (const [k, v] of Object.entries(cachedObj)) {
+                  cachedNum[k] = LETTER_TO_NUM[v] || v;
+                }
+                // sessionStorage 답안 수가 서버보다 많으면 sessionStorage 우선 (서버 저장 실패 후 새로고침 케이스)
+                if (Object.keys(cachedNum).length > Object.keys(serverAnswers).length) {
+                  restoredAnswers = cachedNum;
+                  answersRef.current = cachedNum;
+                  // 서버에 곧바로 재전송 시도
+                  setTimeout(() => flushSave(), 100);
+                }
+              }
+            } catch {}
             setAnswers(restoredAnswers);
+            answersRef.current = restoredAnswers;
             setDeadline(new Date(status.deadline));
             setTimerStarted(true);
-            if (status.expired) {
-              // 만료된 draft — 즉시 자동 제출 시도 (서버 scheduler 가 처리하기 전 클라이언트가 먼저 도착했을 수도)
-              handleSubmit(true);
-            }
+            // 만료된 draft 도 자동 제출 X — 학생이 직접 제출 버튼 누르도록 (2026-05-17)
           }
         } catch {}
       } catch {
@@ -166,14 +186,15 @@ function DiagnosticPrintPage() {
     };
   }, [pdfUrl]);
 
-  // 서버 deadline 기준 잔여 시간 재계산 (setInterval). 슬립 모드 깨어남 시 visibilitychange 로 즉시 보정.
+  // 서버 deadline 기준 잔여 시간 재계산. 만료 시 자동 제출 X — 입력만 차단, 학생이 직접 제출 (2026-05-17 사용자 결정).
   useEffect(() => {
     if (!timerStarted || !deadline) return;
     const tick = () => {
       const sec = Math.max(0, Math.floor((deadline.getTime() - Date.now()) / 1000));
       setRemainSec(sec);
       if (sec <= 0) {
-        handleSubmit(true);
+        // 만료 직후 마지막 자동 저장만 1회. 자동 제출은 안 함.
+        flushSave();
       }
     };
     tick();
@@ -187,8 +208,46 @@ function DiagnosticPrintPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timerStarted, deadline]);
 
+  // 답안을 백엔드에 즉시 저장. race 직렬화 — 진행 중이면 pending=true 로 표시 후 끝나고 한 번 더.
+  const flushSave = async () => {
+    if (saveInFlightRef.current) { pendingSaveRef.current = true; return; }
+    const cur = answersRef.current;
+    if (!cur) return;
+    const converted = {};
+    for (const [k, v] of Object.entries(cur)) {
+      converted[k] = NUM_TO_LETTER[v] || v;
+    }
+    // 항상 sessionStorage 에 백업 — 네트워크·인증 실패 시에도 새로고침 후 복원 가능
+    try { sessionStorage.setItem(sessionStorageKey, JSON.stringify(converted)); } catch {}
+    saveInFlightRef.current = true;
+    setSaveStatus("saving");
+    try {
+      await apiPost("/v1/diagnostic/omr-timer/save", { tier, answers: converted });
+      setSaveStatus("saved");
+      setLastSavedAt(new Date());
+    } catch (e) {
+      // 401 인증 만료는 모달로 사용자 인지 강제. 그 외는 빨간 인디케이터 + 자동 재시도.
+      const msg = e?.message || "";
+      if (e?.status === 401 || /UNAUTHORIZED|401/.test(msg)) {
+        setSaveStatus("unauthorized");
+        setShowAuthExpiredModal(true);
+      } else {
+        setSaveStatus("error");
+        // 3초 후 자동 재시도 — 잠깐 네트워크 끊겼다면 자동 복구
+        setTimeout(() => { if (saveStatus === "error") flushSave(); }, 3000);
+      }
+    } finally {
+      saveInFlightRef.current = false;
+      if (pendingSaveRef.current) {
+        pendingSaveRef.current = false;
+        flushSave();
+      }
+    }
+  };
+
   const handleAnswer = (qNum, value) => {
-    if (!timerStarted) return; // 타이머 켜지 않으면 OMR 입력 차단 (사용자 명시 2026-05-16)
+    if (!timerStarted) return;
+    if (remainSec <= 0) return; // 시간 만료 후 입력 차단
     setAnswers(prev => {
       const key = String(qNum);
       const next = { ...prev };
@@ -198,31 +257,13 @@ function DiagnosticPrintPage() {
         next[key] = String(value);
       }
       answersRef.current = next;
-      // 300ms debounce 자동 저장 (2026-05-17 최민성 사고 fix).
-      //   - 1초 debounce 였는데 학생이 마지막 입력 직후 페이지 닫으면 저장 안 됨 → 짧게.
-      //   - 실패 시 silent X — saveStatus 인디케이터로 학생에게 표시.
-      //   - 매 입력 즉시 답안 수정/덮어쓰기 보장 (백엔드 saveOmrDraft 가 전체 answers 덮어씀).
-      if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
-      setSaveStatus("saving");
-      saveTimerRef.current = setTimeout(() => {
-        const converted = {};
-        for (const [k, v] of Object.entries(next)) {
-          converted[k] = NUM_TO_LETTER[v] || v;
-        }
-        apiPost("/v1/diagnostic/omr-timer/save", { tier, answers: converted })
-          .then(() => {
-            setSaveStatus("saved");
-            setLastSavedAt(new Date());
-          })
-          .catch(() => {
-            setSaveStatus("error");
-          });
-      }, 300);
+      // debounce 없이 즉시 저장 — 학생이 번호 누를 때마다 (사용자 명시 2026-05-17)
+      flushSave();
       return next;
     });
   };
 
-  // 페이지 닫기·이탈 직전 마지막 저장 보장 (sendBeacon — 동기, 백그라운드 OK)
+  // 페이지 닫기·이탈 직전 마지막 저장 보장 (fetch keepalive)
   useEffect(() => {
     if (!timerStarted) return;
     const beacon = () => {
@@ -232,11 +273,10 @@ function DiagnosticPrintPage() {
       for (const [k, v] of Object.entries(cur)) {
         converted[k] = NUM_TO_LETTER[v] || v;
       }
+      try { sessionStorage.setItem(sessionStorageKey, JSON.stringify(converted)); } catch {}
       try {
         const token = sessionStorage.getItem(TOKEN_KEY) || localStorage.getItem(TOKEN_KEY) || "";
         const body = JSON.stringify({ tier, answers: converted });
-        const blob = new Blob([body], { type: "application/json" });
-        // navigator.sendBeacon 은 헤더 추가 불가 — fetch keepalive 로 대체 (Authorization 필요).
         fetch(`${API_BASE}/v1/diagnostic/omr-timer/save`, {
           method: "POST",
           headers: {
@@ -253,6 +293,7 @@ function DiagnosticPrintPage() {
       window.removeEventListener("beforeunload", beacon);
       window.removeEventListener("pagehide", beacon);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timerStarted, tier]);
 
   const handleStartTimer = async () => {
@@ -433,18 +474,59 @@ function DiagnosticPrintPage() {
                 </div>
               </div>
             )}
+            {/* 시간 만료 안내 — 입력만 차단, 학생이 직접 제출 (2026-05-17) */}
+            {timerStarted && remainSec <= 0 && !submitting && (
+              <div style={{
+                background: "#fff7e8", border: "2px solid #d4a017",
+                borderRadius: 8, padding: "12px 16px", marginBottom: 8,
+                fontWeight: 700, color: "#7a5d0d", textAlign: "center",
+              }}>
+                ⏰ 시간 종료 — 더 이상 입력·수정할 수 없습니다. 아래 <strong>"제출하기"</strong> 버튼을 눌러 제출해주세요.
+              </div>
+            )}
             <AnswerInputPanel
               questions={questions}
               answers={answers}
               onAnswer={handleAnswer}
               onSubmit={() => handleSubmit(false)}
               submitting={submitting}
+              readOnly={!timerStarted || remainSec <= 0}
               label="OMR 답안 입력"
               showPoints={false}
             />
           </div>
         </div>
       </main>
+
+      {/* 인증 만료 모달 — save 401 시 사용자 명시적으로 다시 로그인 (2026-05-17) */}
+      {showAuthExpiredModal && (
+        <div style={{
+          position: "fixed", inset: 0, zIndex: 9999,
+          background: "rgba(0,0,0,0.6)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+        }}>
+          <div style={{
+            background: "#fff", borderRadius: 12, padding: 24, maxWidth: 400,
+            boxShadow: "0 10px 40px rgba(0,0,0,0.3)", textAlign: "center",
+          }}>
+            <h3 style={{ color: "#c0392b", marginTop: 0 }}>⚠ 로그인 만료</h3>
+            <p style={{ fontSize: 14, color: "#444", lineHeight: 1.6 }}>
+              로그인 세션이 만료되어 답안 자동 저장이 중단됐습니다.<br />
+              <strong>지금 입력한 답안은 임시로 보관되어 있습니다.</strong><br />
+              다시 로그인하면 자동으로 복원됩니다.
+            </p>
+            <button
+              type="button"
+              onClick={() => { window.location.href = "/login?next=" + encodeURIComponent(window.location.pathname); }}
+              style={{
+                marginTop: 12, padding: "10px 24px", fontWeight: 700,
+                background: "#2d6a4f", color: "#fff", border: 0,
+                borderRadius: 6, cursor: "pointer", fontSize: 15,
+              }}
+            >다시 로그인</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
