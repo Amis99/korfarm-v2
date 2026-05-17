@@ -189,11 +189,12 @@ class ProModeService(
         }
 
         // 통합 정책 — itemSeedTypeMap 별도 매핑 제거. contentType=item.type 으로 seedTypeForContentType 사용.
+        // 프로 모드 항목은 정답률 측정이 없으므로 80(1배) 로 처리 — 만점 보너스(×2) 부풀림 방지 (2026-05-17 사용자 결정).
         val decision = SeedRewardPolicy.calculateGrant(
             userLevelId = user.levelId,
             contentLevelId = chapter.levelId,
-            contentType = item.type,        // PRO_VOCAB / PRO_READING 등 — 매핑 있음
-            accuracyPct = 100,              // 프로 모드는 단순 완료 — 100% 가정
+            contentType = item.type,
+            accuracyPct = 80,
             source = SeedRewardPolicy.GrantSource.PRO_MODE,
         )
         val seedType = decision.seedType

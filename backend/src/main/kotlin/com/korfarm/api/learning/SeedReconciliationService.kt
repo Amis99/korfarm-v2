@@ -84,7 +84,8 @@ class SeedReconciliationService(
             val userId = current.userId
             val whenAt = current.completedAt ?: current.createdAt
             val day = whenAt.toLocalDate()
-            val capKey = Triple(userId, ct, day)
+            // 2026-05-17: cap 정책이 contentId 기준 1회 보상으로 변경. 같은 (userId, contentId, day) 의 두 번째부터는 보상 0.
+            val capKey = Triple(userId, current.contentId, day)
 
             val ctStats = byContentType.getOrPut(ct) { ReconciliationStats() }
             val userStats = byUserId.getOrPut(userId) { ReconciliationStats() }
@@ -103,9 +104,9 @@ class SeedReconciliationService(
                 source = sourceForContentType(ct),
             )
 
-            // 2) 같은 날 cap 적용 — 본 reconciliation 누적분 사용 (이미 시간순 처리 중)
+            // 2) contentId 기반 1회 보상 — 같은 콘텐츠 같은 날 2번째부터 보상 0
             val alreadyTodayEarned = dayCapAcc[capKey] ?: 0
-            val newCapped = SeedRewardPolicy.applyDailyCap(decision.rawCount, decision.dailyCapPerContentType, alreadyTodayEarned)
+            val newCapped = if (alreadyTodayEarned > 0) 0 else decision.rawCount
             dayCapAcc[capKey] = alreadyTodayEarned + newCapped
 
             val oldEarned = current.earnedSeed
@@ -233,7 +234,8 @@ class SeedReconciliationService(
 
             val whenAt = current.createdAt
             val day = whenAt.toLocalDate()
-            val capKey = Triple(userId, ct, day)
+            // 2026-05-17: contentId 기준 1회 보상
+            val capKey = Triple(userId, current.contentId, day)
 
             val ctStats = byContentType.getOrPut(ct) { ReconciliationStats() }
             val userStats = byUserId.getOrPut(userId) { ReconciliationStats() }
@@ -252,7 +254,7 @@ class SeedReconciliationService(
             )
 
             val alreadyTodayEarned = dayCapAcc[capKey] ?: 0
-            val capped = SeedRewardPolicy.applyDailyCap(decision.rawCount, decision.dailyCapPerContentType, alreadyTodayEarned)
+            val capped = if (alreadyTodayEarned > 0) 0 else decision.rawCount
             dayCapAcc[capKey] = alreadyTodayEarned + capped
 
             if (examples.size < 50) {

@@ -62,11 +62,14 @@ class FarmLearningService(
             accuracyPct = request.accuracy,
             source = SeedRewardPolicy.GrantSource.FARM_LEARNING,
         )
+        // 보상 정책 변경 (2026-05-17): 한 콘텐츠 하루 1회만 씨앗 지급.
+        // 무작정 같은 콘텐츠 반복으로 보상 노리는 행위 차단. contentType 일일 합산 cap 대신
+        // (userId, contentId) 기준으로 오늘 이미 보상받았는지 확인.
         val todayStart = LocalDate.now().atStartOfDay()
-        val todayEarned = farmLearningLogRepository
-            .sumEarnedSeedByUserAndContentTypeSince(userId, log.contentType, todayStart)
-        val actualEarned = SeedRewardPolicy.applyDailyCap(decision.rawCount, decision.dailyCapPerContentType, todayEarned)
-        val dailySeedRemaining = (decision.dailyCapPerContentType - todayEarned - actualEarned).coerceAtLeast(0)
+        val alreadyRewardedForThisContent = farmLearningLogRepository
+            .sumEarnedSeedByUserAndContentIdSince(userId, log.contentId, todayStart) > 0
+        val actualEarned = if (alreadyRewardedForThisContent) 0 else decision.rawCount
+        val dailySeedRemaining = if (alreadyRewardedForThisContent) 0 else actualEarned
         val resolvedSeedType = decision.seedType
 
         val now = LocalDateTime.now()

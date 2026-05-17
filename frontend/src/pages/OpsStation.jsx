@@ -761,16 +761,7 @@ const ACTION_GROUPS = [
     title: "결제/구독",
     description: "구독 결제와 주문 결제",
     actions: [
-      {
-        id: "paymentCheckout",
-        title: "구독 결제",
-        description: "정기 구독 결제",
-        method: "POST",
-        path: "/v1/payments/checkout",
-        scope: "user",
-        auth: true,
-        body: SAMPLE_PAYMENT_SUBSCRIPTION,
-      },
+      // mock checkout/shop 메뉴 제거 (2026-05-17) — 백엔드 엔드포인트 삭제 동기화
       {
         id: "subscription",
         title: "구독 상태",
@@ -788,16 +779,6 @@ const ACTION_GROUPS = [
         path: "/v1/subscription/cancel",
         scope: "user",
         auth: true,
-      },
-      {
-        id: "paymentShop",
-        title: "주문 결제",
-        description: "쇼핑몰 결제",
-        method: "POST",
-        path: "/v1/payments/shop",
-        scope: "user",
-        auth: true,
-        body: SAMPLE_PAYMENT_SHOP,
       },
     ],
   },

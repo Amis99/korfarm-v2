@@ -14,10 +14,19 @@ class EconomyService(
     private val userFertilizerRepository: UserFertilizerRepository,
     private val economyLedgerRepository: EconomyLedgerRepository,
     private val grapefruitService: com.korfarm.api.grapefruit.GrapefruitService,
+    private val userRepository: com.korfarm.api.user.UserRepository,
 ) {
     private val seedRequired = 10
     private val fertilizerSpent = 1
     private val fertilizerMultiplier = 3
+
+    // 정지·체험·삭제 학생 보상 적립 차단 (2026-05-17 사용자 결정).
+    // refType 이 admin_* 이면 관리자 보정·차감이므로 통과. 학습 적립만 차단.
+    private fun shouldBlockReward(userId: String, refType: String?): Boolean {
+        if (refType != null && refType.startsWith("admin_")) return false
+        val user = userRepository.findById(userId).orElse(null) ?: return false
+        return user.status != "active"
+    }
 
     @Transactional(readOnly = true)
     fun getInventory(userId: String): Inventory {
@@ -55,6 +64,7 @@ class EconomyService(
 
     @Transactional
     fun addSeeds(userId: String, seedType: String, count: Int, reason: String, refType: String?, refId: String?) {
+        if (count > 0 && shouldBlockReward(userId, refType)) return  // 정지·체험·삭제 학생 차단
         val seed = userSeedRepository.findForUpdate(userId, seedType)
             ?: UserSeedEntity(
                 id = IdGenerator.newId("us"),
@@ -75,6 +85,7 @@ class EconomyService(
     @Transactional
     fun addFertilizer(userId: String, count: Int, reason: String, refType: String?, refId: String?) {
         if (count <= 0) return
+        if (shouldBlockReward(userId, refType)) return  // 정지·체험·삭제 학생 차단
         val fertilizer = userFertilizerRepository.findForUpdate(userId)
             ?: UserFertilizerEntity(id = IdGenerator.newId("uf"), userId = userId, count = 0)
         fertilizer.count += count
@@ -84,6 +95,7 @@ class EconomyService(
 
     @Transactional
     fun adjustSeed(userId: String, seedType: String, delta: Int, reason: String, refType: String?, refId: String?) {
+        if (delta > 0 && shouldBlockReward(userId, refType)) return  // 정지·체험·삭제 학생 적립 차단 (차감은 통과)
         val seed = userSeedRepository.findForUpdate(userId, seedType)
             ?: if (delta > 0) {
                 UserSeedEntity(
@@ -106,6 +118,7 @@ class EconomyService(
 
     @Transactional
     fun adjustCrop(userId: String, cropType: String, delta: Int, reason: String, refType: String?, refId: String?) {
+        if (delta > 0 && shouldBlockReward(userId, refType)) return  // 정지·체험·삭제 학생 적립 차단 (차감은 통과)
         val crop = userCropRepository.findForUpdate(userId, cropType)
             ?: if (delta > 0) {
                 UserCropEntity(
@@ -132,6 +145,10 @@ class EconomyService(
 
     @Transactional
     fun harvestCraft(userId: String, seedType: String, useFertilizer: Boolean): HarvestCraftResult {
+        // 정지·체험·삭제 학생 차단 — 작물 만들기 = 보상 적립의 일종 (2026-05-17)
+        if (shouldBlockReward(userId, null)) {
+            throw ApiException("FORBIDDEN", "계정 상태로 작물을 만들 수 없습니다.", HttpStatus.FORBIDDEN)
+        }
         val seed = userSeedRepository.findForUpdate(userId, seedType)
             ?: throw ApiException("INSUFFICIENT_SEEDS", "not enough seeds", HttpStatus.BAD_REQUEST)
         val currentSeeds = seed.count
@@ -183,6 +200,10 @@ class EconomyService(
     @Transactional
     fun harvestCraftBatch(userId: String, seedType: String, quantity: Int, useFertilizer: Boolean): HarvestCraftResult {
         if (quantity < 1) throw ApiException("INVALID_QUANTITY", "quantity must be >= 1", HttpStatus.BAD_REQUEST)
+        // 정지·체험·삭제 학생 차단 (2026-05-17)
+        if (shouldBlockReward(userId, null)) {
+            throw ApiException("FORBIDDEN", "계정 상태로 작물을 만들 수 없습니다.", HttpStatus.FORBIDDEN)
+        }
 
         val totalSeedCost = seedRequired * quantity
         val seed = userSeedRepository.findForUpdate(userId, seedType)

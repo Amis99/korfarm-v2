@@ -719,8 +719,10 @@ class TestService(
             key to DomainScore(score = sc, maxScore = mx, correct = correct, total = 10)
         }
 
+        // 정답률 = 정답수 / 응답수 (빈답안 제외) — 2026-05-17 통일
+        val answeredCount = session.answeredCount.coerceAtLeast(1)
+        val accuracy = (session.correctCount.toDouble() / answeredCount) * 100.0
         val totalQ = responses.size.coerceAtLeast(session.answeredCount).coerceAtLeast(1)
-        val accuracy = (session.correctCount.toDouble() / totalQ) * 100.0
 
         return TestReportResponse(
             testId = paper.id,
@@ -870,8 +872,9 @@ class TestService(
             )
         }
 
-        val totalQ = questions.size
-        val accuracy = if (totalQ > 0) (sub.correctCount.toDouble() / totalQ) * 100.0 else 0.0
+        // 정답률 = 정답수 / 응답수 (빈답안 제외) — 사용자 명시 2026-05-17
+        val answeredCount = answers.values.count { it.isNotBlank() }
+        val accuracy = if (answeredCount > 0) (sub.correctCount.toDouble() / answeredCount) * 100.0 else 0.0
 
         return TestReportResponse(
             testId = paper.id,
@@ -1013,7 +1016,10 @@ class TestService(
         val allSubsByTest = submissionRepo.findByTestIdIn(subs.map { it.testId }).groupBy { it.testId }
         return subs.sortedByDescending { it.createdAt }.mapNotNull { s ->
             val p = paperMap[s.testId] ?: return@mapNotNull null
-            val accuracy = if (p.totalQuestions > 0) (s.correctCount.toDouble() / p.totalQuestions) * 100.0 else 0.0
+            // 정답률 = 정답수 / 응답수 (빈답안 제외) — 2026-05-17 통일
+            val sAnswers = parseAnswers(s.answersJson)
+            val sAnswered = sAnswers.values.count { it.isNotBlank() }
+            val accuracy = if (sAnswered > 0) (s.correctCount.toDouble() / sAnswered) * 100.0 else 0.0
             val testScores = allSubsByTest[s.testId]?.map { it.score } ?: emptyList()
             TestHistoryItem(
                 testId = p.id,
@@ -1262,8 +1268,10 @@ class TestService(
         val subs = submissionRepo.findByTestId(testId)
         val userMap = userRepository.findAllById(subs.map { it.userId }).associateBy { it.id }
         return subs.sortedByDescending { it.createdAt }.map { s ->
-            val totalQ = paper.totalQuestions
-            val accuracy = if (totalQ > 0) (s.correctCount.toDouble() / totalQ) * 100.0 else 0.0
+            // 정답률 = 정답수 / 응답수 (빈답안 제외) — 2026-05-17 통일
+            val sAnswers = parseAnswers(s.answersJson)
+            val sAnswered = sAnswers.values.count { it.isNotBlank() }
+            val accuracy = if (sAnswered > 0) (s.correctCount.toDouble() / sAnswered) * 100.0 else 0.0
             SubmissionSummary(
                 userId = s.userId,
                 userName = userMap[s.userId]?.name,

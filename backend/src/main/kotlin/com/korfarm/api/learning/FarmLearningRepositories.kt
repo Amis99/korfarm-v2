@@ -80,6 +80,19 @@ interface FarmLearningLogRepository : JpaRepository<FarmLearningLogEntity, Strin
         userId: String, contentType: String, since: java.time.LocalDateTime
     ): Int
 
+    /**
+     * 같은 학생이 같은 콘텐츠를 오늘 이미 보상받았는지 (2026-05-17 정책 변경).
+     * 반복 보상 차단 — 한 콘텐츠당 하루 1회만 씨앗 지급.
+     */
+    @Query(
+        "SELECT COALESCE(SUM(f.earnedSeed), 0) FROM FarmLearningLogEntity f " +
+        "WHERE f.userId = :userId AND f.contentId = :contentId " +
+        "AND f.status = 'COMPLETED' AND f.completedAt >= :since"
+    )
+    fun sumEarnedSeedByUserAndContentIdSince(
+        userId: String, contentId: String, since: java.time.LocalDateTime
+    ): Int
+
     /** 백테필 정산용 — 기간 안 COMPLETED 로그 전수 */
     fun findByStatusAndCompletedAtAfter(
         status: String, since: java.time.LocalDateTime

@@ -17,6 +17,14 @@ interface LearningAttemptRepository : JpaRepository<LearningAttemptEntity, Strin
         start: LocalDateTime,
         end: LocalDateTime
     ): List<LearningAttemptEntity>
+
+    /** 같은 학생이 같은 콘텐츠를 오늘 이미 제출했는지 (2026-05-17 contentId 기반 1회 보상 정책). */
+    fun existsByUserIdAndContentIdAndSubmittedAtBetween(
+        userId: String,
+        contentId: String,
+        start: LocalDateTime,
+        end: LocalDateTime
+    ): Boolean
 }
 
 interface LearningStreakRepository : JpaRepository<LearningStreakEntity, String> {

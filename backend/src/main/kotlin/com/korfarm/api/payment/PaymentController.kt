@@ -19,26 +19,10 @@ class PaymentController(
     private val featureFlagService: FeatureFlagService,
     private val parentStudentLinkRepository: com.korfarm.api.user.ParentStudentLinkRepository,
 ) {
-    // 기존 mock 결제 엔드포인트 (하위 호환)
-    @PostMapping("/checkout")
-    fun checkout(@Valid @RequestBody request: PaymentCheckoutRequest): ApiResponse<PaymentCheckoutResult> {
-        featureFlagService.requireNotKilled("ops.kill_switch.payments")
-        val userId = SecurityUtils.currentUserId()
-            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
-        featureFlagService.requireEnabled("feature.payments.subscription", userId)
-        val result = paymentService.checkoutSubscription(userId, request)
-        return ApiResponse(success = true, data = result)
-    }
-
-    @PostMapping("/shop")
-    fun shop(@Valid @RequestBody request: PaymentCheckoutRequest): ApiResponse<PaymentCheckoutResult> {
-        featureFlagService.requireNotKilled("ops.kill_switch.payments")
-        val userId = SecurityUtils.currentUserId()
-            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
-        featureFlagService.requireEnabled("feature.payments.shop", userId)
-        val result = paymentService.checkoutShop(userId, request)
-        return ApiResponse(success = true, data = result)
-    }
+    // mock 결제 엔드포인트 제거 (2026-05-17)
+    //   기존 /checkout · /shop 은 토스 우회 mock 통로였음.
+    //   feature flag 만으로는 운영 사고 시 실제 결제 받지 않고 활성화될 위험이 있어 컨트롤러에서 완전 제거.
+    //   토스 연동은 아래 /prepare/* + /confirm 흐름만 사용.
 
     // 토스페이먼츠 연동 엔드포인트
     @GetMapping("/config")

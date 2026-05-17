@@ -1330,11 +1330,11 @@ class StudyContentService(
             accuracyPct = if (totalAttempted > 0) accuracyPct else 0,
             source = com.korfarm.api.learning.SeedRewardPolicy.GrantSource.STUDY_CONTENT,
         )
+        // 2026-05-17 contentId 기준 1회 보상 — 같은 학생이 같은 콘텐츠 같은 날 두 번째부터 보상 0
         val todayStart = java.time.LocalDate.now().atStartOfDay()
-        val todayEarned = farmLearningLogRepository
-            .sumEarnedSeedByUserAndContentTypeSince(userId, contentType, todayStart)
-        val earnedSeed = com.korfarm.api.learning.SeedRewardPolicy
-            .applyDailyCap(decision.rawCount, decision.dailyCapPerContentType, todayEarned)
+        val alreadyRewardedForThisContent = farmLearningLogRepository
+            .sumEarnedSeedByUserAndContentIdSince(userId, contentId, todayStart) > 0
+        val earnedSeed = if (alreadyRewardedForThisContent) 0 else decision.rawCount
         val resolvedSeedType = decision.seedType
 
         // farm_learning_logs 마무리

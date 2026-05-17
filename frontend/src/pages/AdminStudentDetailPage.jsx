@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo, lazy, Suspense } from "react";
 import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { apiGet, apiGetCamel, apiPost } from "../utils/adminApi";
+import { useAuth } from "../hooks/useAuth";
 import AdminLayout from "../components/AdminLayout";
 import { calcSeasonScore, FORMULA_TEXT } from "../utils/seasonScore";
 import { TYPE_LABEL } from "../constants/contentTypes";
@@ -73,7 +74,10 @@ function AdminStudentDetailPage() {
   const [duelStats, setDuelStats] = useState(null);
   const [loadingDuel, setLoadingDuel] = useState(false);
   const [duelLoaded, setDuelLoaded] = useState(false);
-  const [grantForm, setGrantForm] = useState({ type: "seed", itemType: "seed_wheat", amount: 1, reason: "" });
+  const { user } = useAuth();
+  const isHq = (user?.roles || []).includes("HQ_ADMIN");
+  // 씨앗 지급은 본사 관리자만 — 기관 관리자는 작물·비료만 (2026-05-17).
+  const [grantForm, setGrantForm] = useState({ type: isHq ? "seed" : "crop", itemType: isHq ? "seed_wheat" : "crop_wheat", amount: 1, reason: "" });
   const [grantLoading, setGrantLoading] = useState(false);
   const [grantError, setGrantError] = useState("");
   const [grantSuccess, setGrantSuccess] = useState("");
@@ -316,7 +320,9 @@ function AdminStudentDetailPage() {
                 <div>
                   <label style={{ display: "block", fontSize: 12, color: "var(--muted)", marginBottom: 4 }}>종류</label>
                   <select value={grantForm.type} onChange={(e) => setGrantForm({ ...grantForm, type: e.target.value })} style={{ background: "#1a2118", border: "1px solid rgba(240,108,36,0.28)", color: "var(--text)", borderRadius: 8, padding: "6px 10px", fontSize: 13 }}>
-                    <option value="seed">씨앗</option><option value="crop">수확물</option><option value="fertilizer">비료</option>
+                    {/* 씨앗 지급은 본사 관리자만 (2026-05-17) */}
+                    {isHq && <option value="seed">씨앗</option>}
+                    <option value="crop">수확물</option><option value="fertilizer">비료</option>
                   </select>
                 </div>
                 {grantForm.type !== "fertilizer" && (

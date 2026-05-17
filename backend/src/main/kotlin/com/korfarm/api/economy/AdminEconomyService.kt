@@ -106,6 +106,15 @@ class AdminEconomyService(
 
         when (request.type) {
             "seed" -> {
+                // 씨앗 지급은 본사 관리자(HQ_ADMIN) 전용 — 기관 관리자는 차단 (2026-05-17 사용자 결정).
+                // 보정·복구 목적의 씨앗 지급은 본사에서만 가능. 기관에서 학생 보상 임의 부풀림 방지.
+                if (!SecurityUtils.hasAnyRole("HQ_ADMIN")) {
+                    throw ApiException(
+                        "FORBIDDEN",
+                        "씨앗 지급은 본사 관리자만 가능합니다.",
+                        HttpStatus.FORBIDDEN
+                    )
+                }
                 val itemType = request.itemType
                     ?: throw ApiException("BAD_REQUEST", "씨앗 지급 시 itemType은 필수입니다", HttpStatus.BAD_REQUEST)
                 economyService.adjustSeed(userId, itemType, delta, adminReason, "admin_grant", adminUserId)

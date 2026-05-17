@@ -136,9 +136,12 @@ object SeedRewardPolicy {
      *
      * 타입 = seedTypeForContentType (콘텐츠 매핑) ?: "seed_wheat"
      *
-     * 하루 cap (per contentType, per user):
-     *  - DAILY_QUIZ / DAILY_READING → 10  (사용자 정책)
-     *  - 그 외 → 50  (악용 방지)
+     * **보상 1회 정책 (2026-05-17 변경)**
+     *   같은 학생이 같은 콘텐츠(contentId)를 같은 날 두 번째 이상 완료해도 보상 0.
+     *   호출처 (FarmLearningService.complete, LearningService.submit, ProModeService.completeItem,
+     *   SeedReconciliationService) 가 contentId 기준으로 첫 완료만 보상 적용.
+     *   기존 dailyCapPerContentType 은 더 이상 의미 없음 — applyDailyCap 도 미사용.
+     *   (시즌 갱신 시 ledger 는 그대로, 다음 날엔 다시 첫 풀이부터 풀 보상)
      */
     fun calculateGrant(
         userLevelId: String?,

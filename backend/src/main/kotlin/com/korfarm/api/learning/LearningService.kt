@@ -25,9 +25,10 @@ class LearningService(
         val today = LocalDate.now(ZoneId.of("Asia/Seoul"))
         val startOfDay = today.atStartOfDay()
         val endOfDay = startOfDay.plusDays(1).minusNanos(1)
-        val alreadyGranted = learningAttemptRepository.existsByUserIdAndActivityTypeAndSubmittedAtBetween(
+        // 보상 정책 (2026-05-17): 한 콘텐츠 하루 1회만. activityType 합산이 아니라 contentId 기준.
+        val alreadyGranted = learningAttemptRepository.existsByUserIdAndContentIdAndSubmittedAtBetween(
             userId,
-            activityType,
+            contentId,
             startOfDay,
             endOfDay
         )
@@ -36,11 +37,12 @@ class LearningService(
         val score = correctCount
         val userLevelId = userRepository.findById(userId).orElse(null)?.levelId
         // 통합 정책 — random 씨앗 타입 제거. activityType 을 contentType 으로 사용.
+        // 구식 학습 통로는 정답률 채점이 없으므로 80(1배) 처리 — 만점 보너스(×2) 부풀림 방지 (2026-05-17).
         val decision = SeedRewardPolicy.calculateGrant(
             userLevelId = userLevelId,
             contentLevelId = request.contentLevelId,
             contentType = activityType,
-            accuracyPct = 100,
+            accuracyPct = 80,
             source = SeedRewardPolicy.GrantSource.LEGACY_LEARNING,
         )
         val seedCount = if (alreadyGranted) 0 else decision.rawCount

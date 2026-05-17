@@ -265,8 +265,19 @@ function ClaySpan({ color = "", label = "", className = "", style, image, alt = 
 
 function StudentHomePage() {
   const navigate = useNavigate();
-  const { user, isLoggedIn, isPremium, logout } = useAuth();
+  const { user, isLoggedIn, isPremium, logout, refreshClaims } = useAuth();
   const [searchParams] = useSearchParams();
+
+  // 학원장이 승인 직후 학생 PAID role 즉시 반영 — 진입 시 + 탭 복귀 시 토큰 재발급.
+  // 새 토큰이 다르면 자동 reload. 학습 모듈 페이지에서는 호출 안 함 (진도 보호).
+  useEffect(() => {
+    if (!isLoggedIn) return;
+    refreshClaims();
+    const handler = () => { if (document.visibilityState === "visible") refreshClaims(); };
+    document.addEventListener("visibilitychange", handler);
+    return () => document.removeEventListener("visibilitychange", handler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn]);
 
   const userRoles = user?.roles || [];
   const isAdmin = userRoles.includes("HQ_ADMIN") || userRoles.includes("ORG_ADMIN");
@@ -417,13 +428,16 @@ function StudentHomePage() {
   }, [isLoggedIn, free]);
 
   // 5) 시즌 랭킹 + 시즌 점수 — /v1/seasons/current → harvest-rankings
+  //    학생 홈은 본인 레벨 기준 랭킹 표시 (2026-05-17 사용자 결정).
   useEffect(() => {
     if (!isLoggedIn) return;
     apiGet("/v1/seasons/current")
       .then((season) => {
         const sid = season?.id || season?.seasonId;
         if (!sid) return;
-        return apiGet(`/v1/seasons/${sid}/harvest-rankings`).then((r) => {
+        const myLevel = user?.levelId || user?.level_id;
+        const qs = myLevel ? `?level=${encodeURIComponent(myLevel)}` : "";
+        return apiGet(`/v1/seasons/${sid}/harvest-rankings${qs}`).then((r) => {
           const items = r?.items || r || [];
           const myUid = user?.id || user?.userId;
           const myRow = items.find((x) => x.userId === myUid);
