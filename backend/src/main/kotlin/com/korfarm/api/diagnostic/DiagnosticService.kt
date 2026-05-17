@@ -26,6 +26,8 @@ class DiagnosticService(
     private val objectMapper: ObjectMapper,
     private val summaryService: DiagnosticSummaryService,
     private val recommendationService: com.korfarm.api.learning.RecommendationService,
+    // 2026-05-17 — 진짜 SSOT 는 test_papers.payload_json (학생 시험지 PDF 출력원).
+    private val testPaperRepo: com.korfarm.api.test.TestPaperRepo,
 ) {
     companion object {
         const val OMR_TIME_LIMIT_MIN = 60L
@@ -828,6 +830,11 @@ class DiagnosticService(
                 session.touchCountsJson = objectMapper.writeValueAsString(touchCounts)
                 session.errorAnalysisJson = objectMapper.writeValueAsString(errorContrib)
                 session.aiSummary = null  // 잘못된 채점 기반 총평 무효화 — 다음 조회 시 재생성
+                // 추천 레벨도 새 raw_tci 로 재계산 (시험 통계 "판정 레벨" 과 역량 진단표 "추천 레벨" 일치)
+                val newRawTci = session.rawTci?.toDouble() ?: 0.0
+                val confidence = session.confidence?.toDouble() ?: 1.0
+                val recommendation = ScoringEngine.calculateRecommendation(session.tier, newRawTci, confidence)
+                session.recommendedLevel = recommendation.label
                 sessionRepo.save(session)
                 ok++
             } catch (e: Exception) {
@@ -856,45 +863,42 @@ class DiagnosticService(
      *   Phase C 전엔 빈 vector·null errorPath → 채점·정답률은 정확하지만 역량 분석은 0점.
      */
     /**
-     * 2026-05-17 — diag_questions 단일 진실 소스 (= test_papers.payload_json 의 양방향 동기화 카피).
-     * 비주얼 에디터(payload_json) → applyPayloadToDiagnostic 가 diag_passages/diag_questions 동기화.
-     * test_questions 는 폐기된 옛 데이터 — 사용 안 함.
+     * 2026-05-17 (R2) — test_papers.payload_json 단일 진실 소스(SSOT).
+     *
+     * 학생 시험지 PDF = TestPdfService 가 payload_json 의 questions 배열 순서대로 출력.
+     * 따라서 채점·평가표도 같은 순서·같은 정답·같은 stem 으로.
+     *
+     * payload_json.questions[idx] → 학생 시험지 (idx+1) 번. question 의 `id`, `answerId`, `choices[].id|vector|errorPath` 사용.
+     * diag_questions·test_questions 는 미동기화 옛 카피 — 사용 안 함.
      */
+    @Suppress("UNCHECKED_CAST")
     private fun loadQuestionPool(tier: String): List<QuestionData> {
-        val questions = questionRepo.findByTierOrderByIdAsc(tier)
-        val passages = passageRepo.findByTierOrderByLevelAscIdAsc(tier).associateBy { it.id }
-        return questions
-            .sortedWith(
-                compareBy(
-                    { passages[it.passageId]?.level ?: Int.MAX_VALUE },
-                    { it.passageId },
-                    { it.orderInPassage }
-                )
+        val paper = testPaperRepo.findById("diag_paper_$tier").orElse(null) ?: return emptyList()
+        val payloadJson = paper.payloadJson ?: return emptyList()
+        val payload: Map<String, Any?> = try {
+            objectMapper.readValue(payloadJson)
+        } catch (_: Exception) { return emptyList() }
+        val questions = (payload["questions"] as? List<Map<String, Any?>>) ?: return emptyList()
+        return questions.map { q ->
+            val choicesRaw = (q["choices"] as? List<Map<String, Any?>>) ?: emptyList()
+            QuestionData(
+                questionId = (q["id"] as? String) ?: "",
+                passageId = (q["passageId"] as? String) ?: "",
+                tier = tier,
+                questionType = (q["questionType"] as? String) ?: (q["type"] as? String) ?: "객관식",
+                level = (q["level"] as? Number)?.toInt(),
+                correctChoice = (q["answerId"] as? String) ?: (q["correctChoice"] as? String),
+                choices = choicesRaw.map { c ->
+                    ChoiceData(
+                        choiceId = ((c["id"] ?: c["choice_id"]) as? String) ?: "",
+                        text = ((c["text"] ?: c["content"]) as? String) ?: "",
+                        vector = (c["vector"] as? Map<String, Any>)
+                            ?.mapValues { (it.value as Number).toDouble() } ?: emptyMap(),
+                        errorPath = (c["errorPath"] ?: c["error_path"]) as? String
+                    )
+                }
             )
-            .map { q ->
-                val passage = passages[q.passageId]
-                val choicesRaw: List<Map<String, Any>> = try {
-                    objectMapper.readValue(q.choicesJson)
-                } catch (_: Exception) { emptyList() }
-                QuestionData(
-                    questionId = q.id,
-                    passageId = q.passageId,
-                    tier = q.tier,
-                    questionType = q.questionType,
-                    level = passage?.level,
-                    correctChoice = q.correctChoice,
-                    choices = choicesRaw.map { c ->
-                        @Suppress("UNCHECKED_CAST")
-                        ChoiceData(
-                            choiceId = ((c["choice_id"] ?: c["id"]) as? String) ?: "",
-                            text = ((c["text"] ?: c["content"]) as? String) ?: "",
-                            vector = (c["vector"] as? Map<String, Any>)
-                                ?.mapValues { (it.value as Number).toDouble() } ?: emptyMap(),
-                            errorPath = c["error_path"] as? String
-                        )
-                    }
-                )
-            }
+        }
     }
 
     private fun getQuestionLevel(q: DiagQuestionEntity): Int? {
@@ -939,15 +943,53 @@ class DiagnosticService(
         // 전체 응답 조회
         val allResponses = responseRepo.findBySessionIdOrderByResponseOrderAsc(session.id)
 
-        // 사용된 문항 + 지문 일괄 조회 — 2026-05-17 롤백: diag_questions 가 진실 (test_questions 는 폐기 데이터)
+        // 옛 데이터 lookup (questionsMap·passagesMap) 유지 — 다른 분석 로직(장르·지문 분석 등)이 의존
         val questionIds = allResponses.map { it.questionId }.toSet()
         val questionsMap = questionRepo.findAllById(questionIds).associateBy { it.id }
         val passageIds = questionsMap.values.map { it.passageId }.toSet()
         val passagesMap = passageRepo.findAllById(passageIds).associateBy { it.id }
 
-        // 어댑터 — 호환성만 유지 (구조 그대로)
+        // 2026-05-17 R2 — 평가표·채점은 payload_json SSOT 로. 학생 시험지 번호(=response_order) 기반.
+        val paper = testPaperRepo.findById("diag_paper_${session.tier}").orElse(null)
+        @Suppress("UNCHECKED_CAST")
+        val payloadQuestions: List<Map<String, Any?>> = try {
+            val pj = paper?.payloadJson ?: "{}"
+            val payload: Map<String, Any?> = objectMapper.readValue(pj)
+            (payload["questions"] as? List<Map<String, Any?>>) ?: emptyList()
+        } catch (_: Exception) { emptyList() }
+        val payloadQuestionById = payloadQuestions.associateBy { (it["id"] as? String) ?: "" }
+        val responseOrderById = allResponses.associate { it.questionId to it.responseOrder }
+
         data class QRow(val stem: String, val correctChoice: String?, val choicesJson: String?, val questionType: String, val passageId: String?)
+        @Suppress("UNCHECKED_CAST")
+        fun toRow(meta: Map<String, Any?>): QRow {
+            val choices = (meta["choices"] as? List<Map<String, Any?>>) ?: emptyList()
+            val choicesNorm = choices.map { c ->
+                mapOf(
+                    "choice_id" to ((c["id"] ?: c["choice_id"]) as? String ?: ""),
+                    "text" to ((c["text"] ?: c["content"]) as? String ?: ""),
+                    "vector" to (c["vector"] ?: emptyMap<String, Any>()),
+                    "error_path" to (c["errorPath"] ?: c["error_path"]),
+                )
+            }
+            return QRow(
+                stem = (meta["stem"] as? String) ?: "",
+                correctChoice = (meta["answerId"] as? String) ?: (meta["correctChoice"] as? String),
+                choicesJson = objectMapper.writeValueAsString(choicesNorm),
+                questionType = (meta["questionType"] as? String) ?: (meta["type"] as? String) ?: "객관식",
+                passageId = (meta["passageId"] as? String) ?: "",
+            )
+        }
         fun lookupQ(id: String): QRow? {
+            // 1) payload_json 의 questions.id 와 직접 매칭 (새 응시)
+            payloadQuestionById[id]?.let { return toRow(it) }
+            // 2) 옛 응시(question_id 가 옛 diag_questions.id) 는 response_order 로 payload_json 매핑
+            val order = responseOrderById[id]
+            if (order != null) {
+                val idx = order - 1
+                if (idx in payloadQuestions.indices) return toRow(payloadQuestions[idx])
+            }
+            // 3) 마지막 폴백 — 옛 diag_questions (장르·지문 분석용으로 남겨둠)
             questionsMap[id]?.let { return QRow(it.stem, it.correctChoice, it.choicesJson, it.questionType, it.passageId) }
             return null
         }
