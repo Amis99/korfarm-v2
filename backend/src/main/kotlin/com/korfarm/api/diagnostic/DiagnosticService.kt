@@ -26,6 +26,7 @@ class DiagnosticService(
     private val objectMapper: ObjectMapper,
     private val summaryService: DiagnosticSummaryService,
     private val recommendationService: com.korfarm.api.learning.RecommendationService,
+    private val aiRecommendationService: com.korfarm.api.learning.AiRecommendationService,
     // 2026-05-17 — 진짜 SSOT 는 test_papers.payload_json (학생 시험지 PDF 출력원).
     private val testPaperRepo: com.korfarm.api.test.TestPaperRepo,
 ) {
@@ -245,8 +246,12 @@ class DiagnosticService(
         // 마지막 마킹 시각 갱신 (풀이속도 계산용)
         session.lastResponseAt = LocalDateTime.now()
 
-        // 정답률 기반 TCI (correct / 48 × 100)
-        val rawTci = if (answeredCount > 0) correctCount.toDouble() / 48.0 * 100.0 else 0.0
+        // 벡터합 기반 raw_tci (사용자 산식, 2026-05-18)
+        // submitResponses 단계(중간 저장)에서는 모든 응답이 누적된 후 completeSession 에서 최종 산출됨.
+        // 다만 화면 표시용으로 중간값도 기록해 둠.
+        val pool = loadQuestionPool(session.tier).filter { it.questionType != "서술형" }
+        val allResponses = responseRepo.findBySessionIdOrderByResponseOrderAsc(sessionId)
+        val rawTci = recomputeRawTciVectorSum(session, pool, allResponses)
         session.rawTci = BigDecimal.valueOf(rawTci).setScale(2, java.math.RoundingMode.HALF_UP)
         session.adjustedTci = BigDecimal.valueOf(rawTci).setScale(2, java.math.RoundingMode.HALF_UP)
         session.confidence = BigDecimal.valueOf(1.0).setScale(2, java.math.RoundingMode.HALF_UP)
@@ -270,12 +275,12 @@ class DiagnosticService(
         val scores: MutableMap<String, Double> = if (session.scoresJson.isNullOrBlank())
             ScoringEngine.initScores()
         else objectMapper.readValue(session.scoresJson!!)
-        // 정답률 기반 TCI: 미응답을 오답으로 간주 (correct / 48 × 100)
-        val rawTci = if (session.answeredCount > 0)
-            session.correctCount.toDouble() / 48.0 * 100.0
-        else 0.0
-        val adjTci = rawTci  // 신뢰도 보정 없이 그대로
-        val confidence = 1.0  // 더 이상 사용하지 않음 (호환용)
+        // 벡터합 기반 raw_tci (사용자 산식, 2026-05-18)
+        val pool = loadQuestionPool(session.tier).filter { it.questionType != "서술형" }
+        val allResponses = responseRepo.findBySessionIdOrderByResponseOrderAsc(sessionId)
+        val rawTci = recomputeRawTciVectorSum(session, pool, allResponses)
+        val adjTci = rawTci
+        val confidence = 1.0
         val recommendation = ScoringEngine.calculateRecommendation(session.tier, rawTci, confidence)
 
         session.status = "completed"
@@ -559,29 +564,41 @@ class DiagnosticService(
             )
         }
 
-        // 세션 종료 — 정답률 기반 TCI (correct / 48 × 100) — 전체 문항 분모 (TCI 정의 그대로 유지)
-        val rawTci = if (answeredCount > 0) correctCount.toDouble() / 48.0 * 100.0 else 0.0
-        val adjTci = rawTci
-        val confidence = 1.0
-        val recommendation = ScoringEngine.calculateRecommendation(tier, rawTci, confidence)
-
         session.scoresJson = objectMapper.writeValueAsString(scores)
         session.maxScoresJson = objectMapper.writeValueAsString(maxScores)
         session.touchCountsJson = objectMapper.writeValueAsString(touchCounts)
         session.errorAnalysisJson = objectMapper.writeValueAsString(errorContrib)
         session.answeredCount = answeredCount
         session.correctCount = correctCount
+        session.status = "completed"
+        val now = LocalDateTime.now()
+        session.completedAt = now
+
+        // 벡터합 기반 raw_tci (사용자 산식, 2026-05-18)
+        // 방금 저장한 응답을 다시 읽어 wrongSum·midSkip 산출.
+        val allResponses = responseRepo.findBySessionIdOrderByResponseOrderAsc(sessionId)
+        val rawTci = recomputeRawTciVectorSum(session, pool, allResponses)
+        val adjTci = rawTci
+        val confidence = 1.0
+        val recommendation = ScoringEngine.calculateRecommendation(tier, rawTci, confidence)
         session.rawTci = BigDecimal.valueOf(rawTci).setScale(2, java.math.RoundingMode.HALF_UP)
         session.adjustedTci = BigDecimal.valueOf(adjTci).setScale(2, java.math.RoundingMode.HALF_UP)
         session.confidence = BigDecimal.valueOf(confidence).setScale(2, java.math.RoundingMode.HALF_UP)
         session.recommendedLevel = recommendation.label
-        session.status = "completed"
-        val now = LocalDateTime.now()
-        session.completedAt = now
-        // OMR 채점은 풀이 시간 측정 불가 → null 유지
-        session.lastResponseAt = null
-        session.timeSpentSec = null
-        session.effectiveSpeedSec = null
+
+        // ── 풀이 속도 (인쇄 OMR, 2026-05-18) ──
+        // 타이머 시작 시각(diag_omr_drafts.started_at) ~ 제출 시각 차이 = timeSpent.
+        // 60분(=3600초) 초과는 60분으로 캡. 타이머 만료 후 자동 제출도 60분.
+        val draft = omrDraftRepo.findById(DiagOmrDraftId(userId = userId, tier = tier)).orElse(null)
+        val timeSpent: Int = if (draft != null) {
+            val sec = ChronoUnit.SECONDS.between(draft.startedAt, now).toInt().coerceAtLeast(0)
+            sec.coerceAtMost(3600)
+        } else 3600   // 타이머 기록이 없는 일괄 입력은 만점 시간(60분)으로 간주
+        val wrong = (answeredCount - correctCount).coerceAtLeast(0)
+        session.timeSpentSec = timeSpent
+        session.effectiveSpeedSec = timeSpent + wrong * 180
+        session.lastResponseAt = now
+
         sessionRepo.save(session)
 
         // v2: scores (earned) / maxScores → ratio (0~100) 변환
@@ -830,10 +847,13 @@ class DiagnosticService(
                 session.touchCountsJson = objectMapper.writeValueAsString(touchCounts)
                 session.errorAnalysisJson = objectMapper.writeValueAsString(errorContrib)
                 session.aiSummary = null  // 잘못된 채점 기반 총평 무효화 — 다음 조회 시 재생성
-                // 추천 레벨도 새 raw_tci 로 재계산 (시험 통계 "판정 레벨" 과 역량 진단표 "추천 레벨" 일치)
-                val newRawTci = session.rawTci?.toDouble() ?: 0.0
+
+                // 벡터합 기반 raw_tci 재계산 (사용자 산식, 2026-05-18)
+                val newRawTci = recomputeRawTciVectorSum(session, pool, responses)
                 val confidence = session.confidence?.toDouble() ?: 1.0
                 val recommendation = ScoringEngine.calculateRecommendation(session.tier, newRawTci, confidence)
+                session.rawTci = BigDecimal.valueOf(newRawTci).setScale(2, java.math.RoundingMode.HALF_UP)
+                session.adjustedTci = BigDecimal.valueOf(newRawTci).setScale(2, java.math.RoundingMode.HALF_UP)
                 session.recommendedLevel = recommendation.label
                 sessionRepo.save(session)
                 ok++
@@ -871,6 +891,43 @@ class DiagnosticService(
      * payload_json.questions[idx] → 학생 시험지 (idx+1) 번. question 의 `id`, `answerId`, `choices[].id|vector|errorPath` 사용.
      * diag_questions·test_questions 는 미동기화 옛 카피 — 사용 안 함.
      */
+    /**
+     * 2026-05-18 — 벡터합 기반 raw_tci 새 산식.
+     *   점수 = (earned − wrongPenalty − 0.5×midSkip) / maxSum × 100
+     * scores/maxScores 가 이미 누적된 세션에서 호출. responses 를 다시 순회해 wrongSum·midSkip 산출.
+     */
+    private fun recomputeRawTciVectorSum(
+        session: DiagSessionEntity,
+        pool: List<QuestionData>,
+        responses: List<DiagResponseEntity>,
+    ): Double {
+        val scores: Map<String, Double> = if (session.scoresJson.isNullOrBlank()) emptyMap()
+            else objectMapper.readValue(session.scoresJson!!)
+        val maxScores: Map<String, Double> = if (session.maxScoresJson.isNullOrBlank()) emptyMap()
+            else objectMapper.readValue(session.maxScoresJson!!)
+        val earnedSum = scores.values.sum()
+        val maxSum = maxScores.values.sum()
+
+        var wrongSum = 0.0
+        val answeredOrders = mutableSetOf<Int>()
+        var maxOrder = 0
+        for (resp in responses) {
+            val sel = resp.selectedChoice
+            if (sel.isNullOrBlank()) continue
+            answeredOrders.add(resp.responseOrder)
+            if (resp.responseOrder > maxOrder) maxOrder = resp.responseOrder
+            if (!resp.isCorrect) {
+                val idx = resp.responseOrder - 1
+                if (idx < 0 || idx >= pool.size) continue
+                val q = pool[idx]
+                val selChoice = q.choices.find { it.choiceId == sel }
+                wrongSum += (selChoice?.vector ?: emptyMap()).values.filter { it > 0 }.sum()
+            }
+        }
+        val midSkip = (1..maxOrder).count { it !in answeredOrders }
+        return ScoringEngine.calculateVectorSumScore(earnedSum, wrongSum, midSkip, maxSum)
+    }
+
     @Suppress("UNCHECKED_CAST")
     private fun loadQuestionPool(tier: String): List<QuestionData> {
         val paper = testPaperRepo.findById("diag_paper_$tier").orElse(null) ?: return emptyList()
@@ -1351,6 +1408,11 @@ class DiagnosticService(
         val aiSummary: String? = if (!session.aiSummary.isNullOrBlank()) {
             session.aiSummary
         } else {
+            // 영역별·문제유형별 정답률 (AI 총평 상세화 입력, 2026-05-18)
+            val genreAcc: Map<String, Double> = genreAnalysis.associate { it.genre to it.accuracyRate }
+            val typeAcc: Map<String, Double> = questionTypeAnalysis
+                .filter { it.totalCount > 0 }
+                .associate { it.questionType to it.accuracyRate }
             val generated = try {
                 summaryService.generateSummary(
                     DiagnosticSummaryService.SummaryInput(
@@ -1365,6 +1427,11 @@ class DiagnosticService(
                         weakCompetencies = weak,
                         topErrorPaths = topErrorPathsFlat,
                         fallback = fallbackAdvice,
+                        rawTci = session.rawTci?.toDouble() ?: 0.0,
+                        speedMinPerQuestion = speedMinPerQ,
+                        speedPercentile = speedPercentile,
+                        genreAccuracy = genreAcc,
+                        typeAccuracy = typeAcc,
                     )
                 )
             } catch (_: Exception) { fallbackAdvice }
@@ -1381,24 +1448,81 @@ class DiagnosticService(
             generated
         }
 
-        val recommendedContents: List<RecommendedContentBrief> = try {
-            recommendationService.recommendForCompetency(
-                userId = session.userId,
-                competency = weak.firstOrNull(),
-                levelId = recommendation.testKey + (recommendation.level ?: 1),
-                limit = 6,
-            ).map { rc ->
-                RecommendedContentBrief(
-                    contentId = rc.contentId,
-                    title = rc.title,
-                    contentType = rc.contentType,
-                    levelId = rc.levelId,
-                    area = rc.area,
-                    subArea = rc.subArea,
-                    reason = rc.reason,
+        // 진단 리포트 추천 학습 — 최초 1회 AI 추천 후 세션 컬럼에 영구 캐시 (2026-05-18).
+        val recommendedContents: List<RecommendedContentBrief> = if (!session.aiRecommendedContentsJson.isNullOrBlank()) {
+            try {
+                val cached: List<Map<String, Any?>> = objectMapper.readValue(session.aiRecommendedContentsJson!!)
+                cached.map { m ->
+                    RecommendedContentBrief(
+                        contentId = m["contentId"] as? String ?: "",
+                        title = m["title"] as? String ?: "",
+                        contentType = m["contentType"] as? String ?: "",
+                        levelId = m["levelId"] as? String,
+                        area = m["area"] as? String,
+                        subArea = m["subArea"] as? String,
+                        reason = m["reason"] as? String ?: "",
+                    )
+                }
+            } catch (_: Exception) { emptyList() }
+        } else {
+            try {
+                val levelArg = recommendation.testKey + (recommendation.level ?: 1)
+                // 후보 풀: 약점 역량 기준 30개 + 영역 매칭 20개 (수정 내역 필터 적용된 SQL 결과)
+                val compCands = recommendationService.recommendForCompetency(
+                    userId = session.userId,
+                    competency = weak.firstOrNull(),
+                    levelId = levelArg,
+                    limit = 30,
+                ).map { rc ->
+                    com.korfarm.api.learning.AiRecommendationService.Candidate(
+                        contentId = rc.contentId, title = rc.title, contentType = rc.contentType,
+                        levelId = rc.levelId, area = rc.area, subArea = rc.subArea,
+                        score = rc.score, tag = "약점역량:${weak.firstOrNull() ?: "전반"}",
+                    )
+                }
+                val areaCands = recommendationService.recommendForArea(
+                    userId = session.userId, area = null, subArea = null, levelId = levelArg, limit = 20,
+                ).map { rc ->
+                    com.korfarm.api.learning.AiRecommendationService.Candidate(
+                        contentId = rc.contentId, title = rc.title, contentType = rc.contentType,
+                        levelId = rc.levelId, area = rc.area, subArea = rc.subArea,
+                        score = rc.score, tag = "영역:${rc.area ?: "기타"}",
+                    )
+                }
+                val candidates = (compCands + areaCands).distinctBy { it.contentId }
+                val picked = aiRecommendationService.pickRecommendations(
+                    candidates = candidates,
+                    student = com.korfarm.api.learning.AiRecommendationService.StudentContext(
+                        gradeLabel = gradeLabel,
+                        tierLabel = TIER_LABELS[session.tier] ?: session.tier,
+                        recommendedLevel = recommendation.label,
+                        accuracyRate = accuracyRate,
+                        strongCompetencies = strong,
+                        weakCompetencies = weak,
+                    ),
+                    targetCount = 6,
                 )
+                val briefs = picked.map { p ->
+                    RecommendedContentBrief(
+                        contentId = p.contentId, title = p.title, contentType = p.contentType,
+                        levelId = p.levelId, area = p.area, subArea = p.subArea, reason = p.reason,
+                    )
+                }
+                // 캐시 저장 — 빈 결과면 저장 안 함 (다음 조회 시 다시 시도)
+                if (briefs.isNotEmpty()) {
+                    try {
+                        session.aiRecommendedContentsJson = objectMapper.writeValueAsString(briefs)
+                        sessionRepo.save(session)
+                    } catch (e: Exception) {
+                        logger.warn("진단 AI 추천 캐시 저장 실패 sid={}: {}", session.id, e.message)
+                    }
+                }
+                briefs
+            } catch (e: Exception) {
+                logger.warn("진단 AI 추천 실패 sid={}: {}", session.id, e.message)
+                emptyList()
             }
-        } catch (_: Exception) { emptyList() }
+        }
 
         return DiagnosticReport(
             sessionId = session.id,

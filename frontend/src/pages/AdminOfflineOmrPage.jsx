@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import AdminLayout from "../components/AdminLayout";
 import Modal from "../components/Modal";
-import { apiGet, apiPost } from "../utils/adminApi";
+import { apiGet, apiGetCamel, apiPost } from "../utils/adminApi";
 
 /**
  * 어드민 오프라인 OMR 일괄 입력 페이지.
@@ -33,6 +33,9 @@ export default function AdminOfflineOmrPage() {
   const [students, setStudents] = useState([]);
   const [filterOrg, setFilterOrg] = useState("all");     // 학생 필터 — 기관
   const [filterClass, setFilterClass] = useState("all"); // 학생 필터 — 수강반
+  const [studentSearch, setStudentSearch] = useState(""); // 학생 이름·ID 검색
+  const [studentPage, setStudentPage] = useState(1);      // 학생 목록 페이지 (1-base)
+  const STUDENT_PAGE_SIZE = 40;
   const [selectedIds, setSelectedIds] = useState([]);
   const [attemptedAt, setAttemptedAt] = useState(() => new Date().toISOString().slice(0, 10));
   const [answers, setAnswers] = useState({});
@@ -41,7 +44,8 @@ export default function AdminOfflineOmrPage() {
 
   useEffect(() => {
     apiGet("/v1/auth/me").then(setMe).catch(() => setMe(null));
-    apiGet("/v1/admin/test-papers").then((data) => setTests(Array.isArray(data) ? data : [])).catch(() => setTests([]));
+    // 백엔드가 SNAKE_CASE 응답이라 testId/orgId/orgName/kind 등을 camelCase 로 받기 위해 apiGetCamel 사용
+    apiGetCamel("/v1/admin/test-papers").then((data) => setTests(Array.isArray(data) ? data : [])).catch(() => setTests([]));
   }, []);
 
   const isHq = (me?.roles || []).includes("HQ_ADMIN");
@@ -78,11 +82,11 @@ export default function AdminOfflineOmrPage() {
       setFilterOrg("all"); setFilterClass("all");
       return;
     }
-    apiGet(`/v1/admin/test-papers/${encodeURIComponent(testId)}`).then(setTest).catch(() => setTest(null));
-    apiGet(`/v1/admin/test-papers/${encodeURIComponent(testId)}/questions`).then((qs) => {
+    apiGetCamel(`/v1/admin/test-papers/${encodeURIComponent(testId)}`).then(setTest).catch(() => setTest(null));
+    apiGetCamel(`/v1/admin/test-papers/${encodeURIComponent(testId)}/questions`).then((qs) => {
       setQuestions((qs || []).slice().sort((a, b) => (a.number || 0) - (b.number || 0)));
     }).catch(() => setQuestions([]));
-    apiGet(`/v1/admin/test-papers/${encodeURIComponent(testId)}/students`).then((data) => setStudents(Array.isArray(data) ? data : [])).catch(() => setStudents([]));
+    apiGetCamel(`/v1/admin/test-papers/${encodeURIComponent(testId)}/students`).then((data) => setStudents(Array.isArray(data) ? data : [])).catch(() => setStudents([]));
   }, [testId]);
 
   // 학생 필터링 — 기관·수강반
@@ -105,12 +109,24 @@ export default function AdminOfflineOmrPage() {
   }, [students, filterOrg]);
 
   const filteredStudents = useMemo(() => {
+    const q = studentSearch.trim().toLowerCase();
     return students.filter((s) => {
       if (filterOrg !== "all" && s.orgId !== filterOrg) return false;
       if (filterClass !== "all" && !(s.classIds || []).includes(filterClass)) return false;
+      if (q) {
+        const hay = `${s.name || ""} ${s.userId || ""} ${(s.classNames || []).join(" ")}`.toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
       return true;
     });
-  }, [students, filterOrg, filterClass]);
+  }, [students, filterOrg, filterClass, studentSearch]);
+
+  // 필터·검색 바뀌면 1페이지로 리셋
+  useEffect(() => { setStudentPage(1); }, [filterOrg, filterClass, studentSearch]);
+  const totalPages = Math.max(1, Math.ceil(filteredStudents.length / STUDENT_PAGE_SIZE));
+  const currentPage = Math.min(studentPage, totalPages);
+  const pageStart = (currentPage - 1) * STUDENT_PAGE_SIZE;
+  const pagedStudents = filteredStudents.slice(pageStart, pageStart + STUDENT_PAGE_SIZE);
 
   const setAnswer = (uid, qNum, value) => {
     setAnswers((prev) => ({ ...prev, [uid]: { ...(prev[uid] || {}), [qNum]: value } }));
@@ -271,6 +287,16 @@ export default function AdminOfflineOmrPage() {
                         {classesInStudents.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
                       </select>
                     </div>
+                    <div style={{ flex: "1 1 200px", minWidth: 0 }}>
+                      <label style={lbl}>학생 검색</label>
+                      <input
+                        type="search"
+                        placeholder="이름·ID·수강반 검색"
+                        value={studentSearch}
+                        onChange={(e) => setStudentSearch(e.target.value)}
+                        style={{ ...inpStyle, width: "100%" }}
+                      />
+                    </div>
                     <div style={{ marginLeft: "auto", display: "flex", gap: 6, alignItems: "flex-end" }}>
                       <button onClick={() => setSelectedIds(filteredStudents.map((s) => s.userId))} style={btnSmall}>전체 선택</button>
                       <button onClick={() => setSelectedIds([])} style={btnSmall}>선택 해제</button>
@@ -281,7 +307,7 @@ export default function AdminOfflineOmrPage() {
                       <div style={{ gridColumn: "1/-1", padding: 12, textAlign: "center", color: "#999", fontSize: 13 }}>
                         일치하는 학생이 없습니다.
                       </div>
-                    ) : filteredStudents.map((s) => (
+                    ) : pagedStudents.map((s) => (
                       <label key={s.userId} style={{ display: "flex", alignItems: "center", gap: 6, padding: 6, background: "#fff", borderRadius: 4, cursor: "pointer", fontSize: 13 }}>
                         <input type="checkbox" checked={selectedIds.includes(s.userId)} onChange={() => toggleStudent(s.userId)} />
                         <span>{s.name || s.userId}</span>
@@ -289,6 +315,34 @@ export default function AdminOfflineOmrPage() {
                       </label>
                     ))}
                   </div>
+                  {filteredStudents.length > STUDENT_PAGE_SIZE && (
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginTop: 12, flexWrap: "wrap" }}>
+                      <button
+                        onClick={() => setStudentPage(Math.max(1, currentPage - 1))}
+                        disabled={currentPage <= 1}
+                        style={{ ...btnSmall, opacity: currentPage <= 1 ? 0.4 : 1 }}
+                      >‹ 이전</button>
+                      <span style={{ fontSize: 13, color: "#555" }}>
+                        {currentPage} / {totalPages} <small style={{ color: "#999" }}>(총 {filteredStudents.length}명)</small>
+                      </span>
+                      <button
+                        onClick={() => setStudentPage(Math.min(totalPages, currentPage + 1))}
+                        disabled={currentPage >= totalPages}
+                        style={{ ...btnSmall, opacity: currentPage >= totalPages ? 0.4 : 1 }}
+                      >다음 ›</button>
+                      <input
+                        type="number"
+                        min={1}
+                        max={totalPages}
+                        value={currentPage}
+                        onChange={(e) => {
+                          const v = parseInt(e.target.value, 10);
+                          if (!isNaN(v)) setStudentPage(Math.max(1, Math.min(totalPages, v)));
+                        }}
+                        style={{ ...inpStyle, width: 64, textAlign: "center" }}
+                      />
+                    </div>
+                  )}
                 </div>
 
                 {/* OMR 카드 */}

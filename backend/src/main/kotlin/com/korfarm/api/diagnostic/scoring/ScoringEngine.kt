@@ -135,7 +135,34 @@ object ScoringEngine {
         return base + confidence * (rawTci - base)
     }
 
-    /** TCI + 신뢰도 기반 레벨 추천 (raw TCI 사용, 낮은 신뢰도 시 "(참고)" 표시) */
+    /**
+     * 벡터합 기반 raw 점수 산식 (2026-05-18 사용자 정의).
+     *   점수 = (earnedSum − wrongSum − 0.5 × midSkipCount) / maxSum × 100
+     *     earnedSum    : 맞힌 문항의 정답 vector 양수 합 (scores 합)
+     *     wrongSum     : 오답 시 고른 선택지의 vector 양수 합
+     *     midSkipCount : 마지막 응답 번호 이전의 미응답 문항 수 (시간 부족 후속 빈칸은 제외)
+     *     maxSum       : 시험지 전체 정답 vector 양수 합 (maxScores 합)
+     *   결과는 0~100 으로 clamp.
+     */
+    fun calculateVectorSumScore(
+        earnedSum: Double,
+        wrongSum: Double,
+        midSkipCount: Int,
+        maxSum: Double,
+    ): Double {
+        if (maxSum <= 0) return 0.0
+        val raw = (earnedSum - wrongSum - 0.5 * midSkipCount) / maxSum * 100.0
+        return raw.coerceIn(0.0, 100.0)
+    }
+
+    /**
+     * raw_tci 기반 레벨 판정 (2026-05-18 새 구간).
+     *   < 30 → 한 단계 아래 tier 3 (최저 tier 면 그대로 1)
+     *   30 ~ < 45 → 같은 tier 1
+     *   45 ~ < 60 → 같은 tier 2
+     *   ≥ 60 → 같은 tier 3 (한 단계 위 승급 없음)
+     * 낮은 신뢰도(<0.5) 일 때 라벨 뒤에 "(참고)" 표시.
+     */
     fun calculateRecommendation(tierKey: String, rawTci: Double, confidence: Double = 1.0): RecommendedLevel {
         val idx = TEST_ORDER.indexOf(tierKey)
         if (idx < 0) return RecommendedLevel(tierKey, null, "Unknown")
@@ -143,20 +170,15 @@ object ScoringEngine {
         val label = TIER_LABELS[tierKey] ?: tierKey
         val suffix = if (confidence < 0.5) " (참고)" else ""
 
-        if (rawTci < 35) {
+        if (rawTci < 30) {
             if (idx == 0) return RecommendedLevel(tierKey, 1, "$label 1$suffix")
             val prevKey = TEST_ORDER[idx - 1]
             val prevLabel = TIER_LABELS[prevKey] ?: prevKey
             return RecommendedLevel(prevKey, 3, "$prevLabel 3$suffix")
         }
         if (rawTci < 45) return RecommendedLevel(tierKey, 1, "$label 1$suffix")
-        if (rawTci < 55) return RecommendedLevel(tierKey, 2, "$label 2$suffix")
-        if (rawTci < 65) return RecommendedLevel(tierKey, 3, "$label 3$suffix")
-
-        if (idx == TEST_ORDER.size - 1) return RecommendedLevel(tierKey, 3, "$label 3$suffix")
-        val nextKey = TEST_ORDER[idx + 1]
-        val nextLabel = TIER_LABELS[nextKey] ?: nextKey
-        return RecommendedLevel(nextKey, 1, "$nextLabel 1$suffix")
+        if (rawTci < 60) return RecommendedLevel(tierKey, 2, "$label 2$suffix")
+        return RecommendedLevel(tierKey, 3, "$label 3$suffix")
     }
 
     /** 초기 점수맵 생성 (v2: 시작 0). */

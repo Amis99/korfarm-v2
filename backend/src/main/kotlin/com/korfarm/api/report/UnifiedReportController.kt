@@ -70,4 +70,28 @@ class UnifiedReportController(
         val result = farmLearningService.rebuildUserCompetency(studentId)
         return ApiResponse(success = true, data = result)
     }
+
+    /**
+     * 학생 본인 — 통합 분석표 추천 학습 갱신 (2026-05-18).
+     * 하루 1회 제한. 24h 이내 재호출 시 success=false + 다음 가능 시각 반환.
+     */
+    @PostMapping("/v1/learning/recommendations/regenerate")
+    fun regenerateRecommendations(): ApiResponse<RegenerateRecommendationsResponse> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "로그인이 필요합니다.", HttpStatus.UNAUTHORIZED)
+        val result = reportService.regenerateBundleForUser(userId)
+        return ApiResponse(success = true, data = RegenerateRecommendationsResponse(
+            success = result.success,
+            bundle = result.bundle,
+            nextAvailableAt = result.nextAvailableAt.toString(),
+            message = result.message,
+        ))
+    }
 }
+
+data class RegenerateRecommendationsResponse(
+    val success: Boolean,
+    val bundle: RecommendationBundleDto?,
+    val nextAvailableAt: String,
+    val message: String,
+)

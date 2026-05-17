@@ -77,6 +77,8 @@ class UnifiedReportService(
     private val aiFeedbackJobRepo: AiFeedbackJobRepository,
     /** V3 추천 통합 — 약점·학습량·레벨 가중치 fallback 자동 적용 */
     private val recommendationService: RecommendationService,
+    private val aiRecommendationService: com.korfarm.api.learning.AiRecommendationService,
+    private val userAiRecommendationRepo: com.korfarm.api.learning.UserAiRecommendationRepository,
     private val cacheRepo: UnifiedReportCacheRepository,
     private val aiCommentService: UnifiedReportAiService,
     private val objectMapper: ObjectMapper
@@ -286,36 +288,142 @@ class UnifiedReportService(
         )
     }
 
-    /* ───────────────── V3 추천 fallback 통합 빌드 ───────────────── */
+    /* ───────────────── 추천 학습 — AI 캐시 (2026-05-18) ─────────────────
+     * 정책: 최초 1회 AI 추천 후 캐시. "추천학습 생성" 버튼으로 갱신 (하루 1회).
+     * 옛 알고리즘 fallback (recommendWithFallback) 은 폐기 (AI 자체 실패 시 후보 우선 정렬만 사용).
+     */
 
     private fun buildRecommendationBundle(userId: String): RecommendationBundleDto {
-        val bundle = recommendationService.recommendWithFallback(userId, perCategory = 6)
+        // 1. 캐시 있으면 그대로
+        val cached = userAiRecommendationRepo.findById(userId).orElse(null)
+        if (cached != null) {
+            return try {
+                objectMapper.readValue(cached.bundleJson, RecommendationBundleDto::class.java)
+            } catch (e: Exception) {
+                log.warn("AI 추천 캐시 파싱 실패 user={}: {}", userId, e.message)
+                generateAndCacheBundle(userId)
+            }
+        }
+        // 2. 캐시 없으면 1회 자동 생성 + 저장
+        return generateAndCacheBundle(userId)
+    }
+
+    /** AI 추천 생성 + 캐시 upsert. POST regenerate 엔드포인트도 호출 가능. */
+    @Transactional
+    fun generateAndCacheBundle(userId: String): RecommendationBundleDto {
+        val bundle = generateAiBundle(userId)
+        try {
+            val json = objectMapper.writeValueAsString(bundle)
+            val entity = userAiRecommendationRepo.findById(userId).orElse(null)
+            if (entity != null) {
+                entity.bundleJson = json
+                entity.generatedAt = LocalDateTime.now()
+                userAiRecommendationRepo.save(entity)
+            } else {
+                userAiRecommendationRepo.save(
+                    com.korfarm.api.learning.UserAiRecommendationEntity(
+                        userId = userId, bundleJson = json, generatedAt = LocalDateTime.now()
+                    )
+                )
+            }
+        } catch (e: Exception) {
+            log.warn("AI 추천 캐시 저장 실패 user={}: {}", userId, e.message)
+        }
+        return bundle
+    }
+
+    /** AI 호출로 6개 선택해 RecommendationBundleDto 구성. AI 실패 시 후보 첫 6개 폴백. */
+    private fun generateAiBundle(userId: String): RecommendationBundleDto {
+        val user = userRepository.findById(userId).orElse(null)
+        val levelId = user?.levelId
+
+        // 후보 풀 — 수정 내역 콘텐츠만 (RecommendationService 가 이미 필터링)
+        val compCands = recommendationService.recommendForCompetency(userId, null, levelId, 30)
+            .map { rc ->
+                com.korfarm.api.learning.AiRecommendationService.Candidate(
+                    contentId = rc.contentId, title = rc.title, contentType = rc.contentType,
+                    levelId = rc.levelId, area = rc.area, subArea = rc.subArea,
+                    score = rc.score, tag = "약점역량",
+                )
+            }
+        val areaCands = listOf("nonfiction", "fiction", "grammar").flatMap { a ->
+            recommendationService.recommendForArea(userId, a, null, levelId, 8)
+        }.distinctBy { it.contentId }.map { rc ->
+            com.korfarm.api.learning.AiRecommendationService.Candidate(
+                contentId = rc.contentId, title = rc.title, contentType = rc.contentType,
+                levelId = rc.levelId, area = rc.area, subArea = rc.subArea,
+                score = rc.score, tag = "영역:${rc.area ?: "-"}",
+            )
+        }
+        val candidates = (compCands + areaCands).distinctBy { it.contentId }
+
+        // 학생 컨텍스트 — 통합 분석표 자체의 약점/강점은 별도 계산이 무거우므로 user.levelId 기반 단순 매핑
+        val student = com.korfarm.api.learning.AiRecommendationService.StudentContext(
+            gradeLabel = user?.gradeLabel,
+            tierLabel = "전체 학습 추천",
+            recommendedLevel = levelId ?: "-",
+            accuracyRate = 0.0,
+            strongCompetencies = emptyList(),
+            weakCompetencies = emptyList(),
+        )
+
+        val picked = aiRecommendationService.pickRecommendations(candidates, student, targetCount = 6)
+        val items = picked.map { p ->
+            RecommendedContentDto(
+                contentId = p.contentId,
+                title = p.title,
+                contentType = p.contentType,
+                contentTypeLabel = CompetencyMapping.contentTypeLabel(p.contentType),
+                levelId = p.levelId,
+                area = p.area,
+                subArea = p.subArea,
+                reason = p.reason,
+                path = pathForContent(p.contentId, p.contentType),
+            )
+        }
+        val mainGroup = RecommendationGroupDto(
+            strategy = "ai",
+            strategyLabel = "AI 추천 학습",
+            targetLabels = listOf("학생 맞춤 큐레이션"),
+            items = items,
+        )
+        // 옛 area 그룹 호환 — 빈 그룹으로 두면 화면이 자연스럽게 숨김
+        val emptyGroup = RecommendationGroupDto(strategy = "ai", strategyLabel = "", targetLabels = emptyList(), items = emptyList())
         return RecommendationBundleDto(
-            competency = mapGroup(bundle.competency),
-            area = mapGroup(bundle.area),
-            levelId = bundle.levelId,
+            competency = mainGroup,
+            area = emptyGroup,
+            levelId = levelId,
         )
     }
 
-    private fun mapGroup(g: RecommendationService.FallbackRecommendation): RecommendationGroupDto =
-        RecommendationGroupDto(
-            strategy = g.strategy,
-            strategyLabel = strategyLabel(g.strategy),
-            targetLabels = g.targetLabels,
-            items = g.items.map { item ->
-                RecommendedContentDto(
-                    contentId = item.contentId,
-                    title = item.title,
-                    contentType = item.contentType,
-                    contentTypeLabel = CompetencyMapping.contentTypeLabel(item.contentType),
-                    levelId = item.levelId,
-                    area = item.area,
-                    subArea = item.subArea,
-                    reason = item.reason,
-                    path = pathForContent(item.contentId, item.contentType),
+    /** "추천학습 생성" 버튼 처리 — 마지막 generated_at 가 24h 이내면 거부. */
+    @Transactional
+    fun regenerateBundleForUser(userId: String): RegenerateResult {
+        val existing = userAiRecommendationRepo.findById(userId).orElse(null)
+        val now = LocalDateTime.now()
+        if (existing != null) {
+            val diffMin = ChronoUnit.MINUTES.between(existing.generatedAt, now)
+            if (diffMin < 24 * 60) {
+                val nextAt = existing.generatedAt.plusHours(24)
+                return RegenerateResult(
+                    success = false,
+                    bundle = try { objectMapper.readValue(existing.bundleJson, RecommendationBundleDto::class.java) } catch (_: Exception) { null },
+                    nextAvailableAt = nextAt,
+                    message = "오늘은 이미 추천을 갱신했어요. 24시간 후(${nextAt}) 다시 시도해 주세요.",
                 )
-            },
-        )
+            }
+        }
+        val bundle = generateAndCacheBundle(userId)
+        val nextAt = (userAiRecommendationRepo.findById(userId).orElse(null)?.generatedAt ?: now).plusHours(24)
+        return RegenerateResult(success = true, bundle = bundle, nextAvailableAt = nextAt, message = "새 추천을 생성했어요.")
+    }
+
+    data class RegenerateResult(
+        val success: Boolean,
+        val bundle: RecommendationBundleDto?,
+        val nextAvailableAt: LocalDateTime,
+        val message: String,
+    )
 
     /**
      * 추천 카드 클릭 시 이동할 정식 라우트.

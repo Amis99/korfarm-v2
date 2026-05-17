@@ -1,9 +1,8 @@
 function ReportSummaryCards({ report }) {
   const total = report.totalQuestions ?? 48;
-  const incomplete = report.answeredCount < total;
-  // 점수: correct / 48 × 100 (미응답을 오답으로 가산)
-  const score = ((report.correctCount / total) * 100).toFixed(1);
-  // 정답률: correct / answered × 100 (응답한 문항 대비)
+  // 점수 — 벡터합 기준 raw_tci (2026-05-18). 큰 게이지(TCI) 값과 통일.
+  const score = (report.rawTci ?? report.adjustedTci ?? 0).toFixed(1);
+  // 정답률 — 정답 수 / 응답 수 × 100 (응답한 문항 대비)
   const accuracy = report.answeredCount > 0
     ? ((report.correctCount / report.answeredCount) * 100).toFixed(1)
     : "0.0";
@@ -13,16 +12,6 @@ function ReportSummaryCards({ report }) {
     { label: "정답률", value: accuracy, unit: "%", note: `응답 ${report.answeredCount}문항` },
     { label: "추천 레벨", value: report.recommendedLevel?.label ?? "-", unit: "" },
   ];
-
-  // 미완료 응시일 때만 TCI 카드 노출 (다 푼 경우 점수와 동일)
-  if (incomplete && report.adjustedTci != null) {
-    cards.splice(2, 0, {
-      label: "TCI (미완료 보정)",
-      value: report.adjustedTci.toFixed(1),
-      unit: "점",
-      note: `${total}문항 기준`,
-    });
-  }
 
   if (report.percentiles?.tciPercentile != null) {
     cards.push({

@@ -502,19 +502,45 @@
 .bottleneck-paths {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
-.bottleneck-paths li {
+.bottleneck-paths li.bottleneck-path-item {
   font-size: 13px;
   color: #5a4d42;
-  padding: 4px 0;
+  padding: 10px 0;
+  border-bottom: 1px dashed #ebe1d4;
+  display: block;
+}
+
+.bottleneck-paths li.bottleneck-path-item:last-child {
+  border-bottom: none;
+}
+
+.bottleneck-path-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.bottleneck-path-label {
+  font-weight: 600;
+  color: #4a3d33;
+}
+
+.bottleneck-path-advice {
+  margin-top: 6px;
+  font-size: 12.5px;
+  color: #7a6a5c;
+  line-height: 1.55;
+  padding-left: 2px;
 }
 
 .bottleneck-paths .path-val {
   color: #ef5350;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 /* 레이더 차트 컨테이너 */

@@ -78,6 +78,18 @@ class RecommendationService(
         return true
     }
 
+    /**
+     * 2026-05-18 — 어드민이 콘텐츠 관리에서 한 번이라도 손본 콘텐츠만 추천 후보로.
+     * content_edit_logs 에 row 가 1건 이상 있는 contentId 집합 반환 (DISTINCT).
+     * 어드민 화면의 "초록색 도형" 표시와 동일 기준.
+     */
+    private fun loadEditedContentIds(): Set<String> {
+        val sql = "SELECT DISTINCT content_id FROM content_edit_logs"
+        @Suppress("UNCHECKED_CAST")
+        val rows = em.createNativeQuery(sql).resultList as List<Any?>
+        return rows.filterIsInstance<String>().toSet()
+    }
+
     /** 학생 ID → 평생 풀이 이력 (in_window false 도 포함). 추후 user_completed_contents 테이블로 교체 예정. */
     private fun loadSolvedContentIds(userId: String): Set<String> {
         // 슬라이딩 윈도우 무관 — log 전체. 향후 user_completed_contents 인덱스 도입 시 단순 SELECT 1회로 대체.
@@ -165,6 +177,7 @@ class RecommendationService(
 
     /**
      * 인덱스 SQL — 약점 역량 컬럼 DESC + level_num ±2 fallback + 평생 풀이 이력 제외 + 학습 콘텐츠만.
+     * 2026-05-18 — 어드민이 손본 콘텐츠(content_edit_logs 에 기록된 contentId) 만.
      */
     private fun queryByCompetency(userId: String, compColumn: String, levelNum: Int?, limit: Int): List<IndexRow> {
         val safeLimit = limit.coerceIn(1, 50)
@@ -178,6 +191,9 @@ class RecommendationService(
               $levelClause
               AND i.content_id NOT IN (
                   SELECT content_id FROM learning_competency_log WHERE user_id = :userId
+              )
+              AND EXISTS (
+                  SELECT 1 FROM content_edit_logs el WHERE el.content_id = i.content_id
               )
             ORDER BY i.$compColumn DESC, i.updated_at DESC
             LIMIT $safeLimit
@@ -299,6 +315,7 @@ class RecommendationService(
     ): List<RecommendedContent> {
         val targetLevel = levelId ?: userRepository.findById(userId).orElse(null)?.levelId
         val solvedIds = loadSolvedContentIds(userId)
+        val editedIds = loadEditedContentIds()    // 어드민이 손본 콘텐츠만 (2026-05-18)
         val candidateLevels = resolveAdjacentLevelIds(targetLevel).toSet()
 
         val pool: List<ContentEntity> = when {
@@ -320,7 +337,7 @@ class RecommendationService(
             else -> emptyList()
         }
         val filtered = pool
-            .filter { it.id !in solvedIds && isLearningContent(it) }
+            .filter { it.id !in solvedIds && it.id in editedIds && isLearningContent(it) }
         return filtered.take(limit).map {
             RecommendedContent(
                 contentId = it.id,
@@ -347,12 +364,13 @@ class RecommendationService(
     ): List<RecommendedContent> {
         val targetLevel = levelId ?: userRepository.findById(userId).orElse(null)?.levelId
         val solvedIds = loadSolvedContentIds(userId)
+        val editedIds = loadEditedContentIds()    // 어드민이 손본 콘텐츠만 (2026-05-18)
         val allowedLevels = resolveAdjacentLevelIds(targetLevel).toSet()
 
         val ids = contentClassificationRepository.findContentIdsByCode(theme)
         if (ids.isEmpty()) return emptyList()
         val pool = contentRepository.findAllById(ids)
-            .filter { it.status == "active" && it.id !in solvedIds && isLearningContent(it) }
+            .filter { it.status == "active" && it.id !in solvedIds && it.id in editedIds && isLearningContent(it) }
             .filter { allowedLevels.isEmpty() || it.levelId in allowedLevels }
         return pool.take(limit).map {
             RecommendedContent(

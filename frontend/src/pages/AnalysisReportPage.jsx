@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { apiGet } from "../utils/api";
+import { apiGet, apiPost } from "../utils/api";
 import { apiGet as adminApiGet } from "../utils/adminApi";
 import { clampPct } from "../utils/format";
 import ReportLearningDiagnosticPanel from "../components/report/ReportLearningDiagnosticPanel";
@@ -51,6 +51,72 @@ const SOURCE_COLOR = {
   proMode: "#C589CB",
   studyPlan: "#B7AFA1",
 };
+
+// "추천학습 생성" 버튼 포함 섹션 — 하루 1회 갱신 제한 (백엔드 정책)
+function RecommendationsSection({ report, setReport, studentIdParam, canRegenerate }) {
+  const [busy, setBusy] = useState(false);
+  const [notice, setNotice] = useState(null);
+
+  const handleRegenerate = async () => {
+    if (busy) return;
+    setBusy(true); setNotice(null);
+    try {
+      const res = await apiPost("/v1/learning/recommendations/regenerate", {});
+      const data = res?.data;
+      if (data?.success && data.bundle) {
+        setReport((prev) => prev ? { ...prev, recommendationBundle: data.bundle } : prev);
+        setNotice({ ok: true, text: data.message || "새 추천이 생성됐어요." });
+      } else {
+        setNotice({ ok: false, text: data?.message || "하루 1회만 갱신할 수 있어요." });
+      }
+    } catch (e) {
+      setNotice({ ok: false, text: e?.message || "추천 생성에 실패했어요." });
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const has =
+    (report?.recommendationBundle &&
+      (report.recommendationBundle.competency?.items?.length > 0 ||
+        report.recommendationBundle.area?.items?.length > 0));
+
+  return (
+    <section className="report-section" id="sec-reco">
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+        <h2 style={{ margin: 0 }}>✨ 다음 추천 학습</h2>
+        {canRegenerate && (
+          <button
+            type="button"
+            onClick={handleRegenerate}
+            disabled={busy}
+            className="btn-soft"
+            style={{
+              padding: "6px 14px", borderRadius: 8, border: "1px solid #d6c9b3",
+              background: busy ? "#eee" : "#fff7e6", color: "#5a4d33",
+              fontWeight: 600, cursor: busy ? "default" : "pointer",
+            }}
+          >
+            {busy ? "생성 중…" : "🔄 추천학습 생성 (하루 1회)"}
+          </button>
+        )}
+      </div>
+      {notice && (
+        <p style={{
+          marginTop: 8, fontSize: 13,
+          color: notice.ok ? "#2e7d32" : "#c62828"
+        }}>{notice.text}</p>
+      )}
+      {has ? (
+        <ReportRecommendations bundle={report.recommendationBundle} studentId={studentIdParam || undefined} />
+      ) : Array.isArray(report?.recommendations) && report.recommendations.length > 0 ? (
+        <ReportRecommendations legacy={report.recommendations} studentId={studentIdParam || undefined} />
+      ) : (
+        <p className="ur-empty">아직 추천할 학습이 충분하지 않습니다. 학습 데이터가 누적되면 자동으로 표시됩니다.</p>
+      )}
+    </section>
+  );
+}
 
 function AnalysisReportPage() {
   const navigate = useNavigate();
@@ -395,24 +461,14 @@ function AnalysisReportPage() {
         />
       </section>
 
-      {/* 7. 다음 추천 학습 — 약점 → 학습량 부족 → 레벨 가중치 fallback */}
-      <section className="report-section" id="sec-reco">
-        <h2>✨ 다음 추천 학습</h2>
-        {isAdmin && (
-          <p className="ur-algo-hint">
-            역량·영역 fallback 추천 (약점 → 학습량 부족 → 레벨 가중치)
-          </p>
-        )}
-        {(report?.recommendationBundle &&
-          (report.recommendationBundle.competency?.items?.length > 0 ||
-            report.recommendationBundle.area?.items?.length > 0)) ? (
-          <ReportRecommendations bundle={report.recommendationBundle} studentId={studentIdParam || undefined} />
-        ) : Array.isArray(report?.recommendations) && report.recommendations.length > 0 ? (
-          <ReportRecommendations legacy={report.recommendations} studentId={studentIdParam || undefined} />
-        ) : (
-          <p className="ur-empty">아직 추천할 학습이 충분하지 않습니다. 학습 데이터가 누적되면 자동으로 표시됩니다.</p>
-        )}
-      </section>
+      {/* 7. 다음 추천 학습 — AI 추천 (최초 1회 자동 + 하루 1회 수동 갱신) */}
+      <RecommendationsSection
+        report={report}
+        setReport={setReport}
+        studentIdParam={studentIdParam}
+        canRegenerate={!isParent && !studentIdParam}   /* 학부모/관리자는 직접 갱신 X — 학생만 */
+      />
+
 
       {/* 8. 글쓰기 현황 */}
       <section className="report-section" id="sec-writing">

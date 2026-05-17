@@ -136,6 +136,14 @@ class DiagSessionEntity(
     /** AI 총평 (Claude Sonnet 캐시) — 첫 호출 시 생성·저장. NULL 이면 다음 호출 시 생성. */
     @Column(name = "ai_summary", columnDefinition = "MEDIUMTEXT")
     var aiSummary: String? = null,
+
+    /**
+     * 진단 리포트 추천 학습 캐시 (2026-05-18).
+     * 최초 리포트 조회 시 AI 가 6개 선정해 JSON 으로 저장. 이후 영구 유지.
+     * JSON 형식: [{"contentId":"...","title":"...","contentType":"...","levelId":"...","area":"...","subArea":"...","reason":"..."}]
+     */
+    @Column(name = "ai_recommended_contents_json", columnDefinition = "LONGTEXT")
+    var aiRecommendedContentsJson: String? = null,
 )
 
 @Entity

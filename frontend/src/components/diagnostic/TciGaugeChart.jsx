@@ -4,7 +4,7 @@ function TciGaugeChart({ tci, recommendation, statistics, accuracyRate }) {
   return (
     <div className="tci-gauge">
       <div className="tci-gauge-value">{tci.toFixed(1)}</div>
-      <div className="tci-gauge-label">점수 (정답 / 전체 문항)</div>
+      <div className="tci-gauge-label">점수</div>
 
       <div className="tci-gauge-bar">
         <div className="tci-gauge-fill" style={{ width: `${pct}%` }} />
