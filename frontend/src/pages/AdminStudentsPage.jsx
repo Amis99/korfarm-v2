@@ -257,6 +257,7 @@ function AdminStudentsPage() {
   const [rows, setRows] = useState(STUDENTS);
   const [search, setSearch] = useState("");
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showBulkModal, setShowBulkModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editStudent, setEditStudent] = useState(null);
   const [formData, setFormData] = useState({ email: "", name: "", orgId: "", password: "" });
@@ -564,6 +565,14 @@ function AdminStudentsPage() {
               </button>
             )}
             <button
+              className="admin-detail-btn secondary"
+              type="button"
+              onClick={() => setShowBulkModal(true)}
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: 18 }}>upload</span>
+              일괄 등록
+            </button>
+            <button
               className="admin-detail-btn"
               type="button"
               onClick={() => navigate("/signup")}
@@ -572,6 +581,19 @@ function AdminStudentsPage() {
             </button>
           </div>
         </div>
+
+        {showBulkModal && (
+          <BulkCreateStudentsModal
+            orgs={orgs}
+            isHQ={isHQ}
+            defaultOrgId={isHQ ? "" : (orgs[0]?.id ?? "")}
+            onClose={() => setShowBulkModal(false)}
+            onCompleted={() => {
+              setShowBulkModal(false);
+              load();
+            }}
+          />
+        )}
         <div className="admin-detail-grid">
           <div className="admin-detail-card">
             <h2>학생 목록</h2>
@@ -1071,6 +1093,174 @@ function AdminStudentsPage() {
         </div>
       ) : null}
     </AdminLayout>
+  );
+}
+
+function BulkCreateStudentsModal({ orgs, isHQ, defaultOrgId, onClose, onCompleted }) {
+  const [orgId, setOrgId] = useState(defaultOrgId);
+  const [csv, setCsv] = useState("이름,아이디,학생전화,학부모전화,학년,학교,지역\n홍길동,hong123,01012345678,01098765432,5학년,서울신촌초,서울");
+  const [parsing, setParsing] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState("");
+
+  const rows = useMemo(() => {
+    setParsing(true);
+    try {
+      const lines = csv.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+      if (lines.length < 2) return [];
+      // 첫 줄은 헤더, 나머지가 데이터
+      return lines.slice(1).map((line) => {
+        const cols = line.split(",").map((c) => c.trim());
+        return {
+          name: cols[0] || "",
+          loginId: cols[1] || "",
+          studentPhone: cols[2] || "",
+          parentPhone: cols[3] || "",
+          gradeLabel: cols[4] || "",
+          school: cols[5] || "",
+          region: cols[6] || "",
+        };
+      }).filter((r) => r.name && r.loginId);
+    } finally {
+      setParsing(false);
+    }
+  }, [csv]);
+
+  const handleSubmit = async () => {
+    if (!orgId) { setError("기관을 선택해 주세요."); return; }
+    if (rows.length === 0) { setError("등록할 학생 행이 없습니다."); return; }
+    setError(""); setSubmitting(true);
+    try {
+      const res = await apiPost("/v1/admin/students/bulk", {
+        org_id: orgId,
+        students: rows.map((r) => ({
+          login_id: r.loginId, name: r.name,
+          student_phone: r.studentPhone || undefined,
+          parent_phone: r.parentPhone || undefined,
+          grade_label: r.gradeLabel || undefined,
+          school: r.school || undefined,
+          region: r.region || undefined,
+        })),
+      });
+      const data = res?.data ?? res;
+      setResult(data);
+    } catch (e) {
+      setError(e.message || String(e));
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const copyAll = () => {
+    if (!result?.students) return;
+    const lines = ["[국어농장 학생 등록 결과]", `기관: ${result.org_name || result.orgName || ""}`,
+                   `성공 ${result.success_count || result.successCount}건 / 실패 ${result.fail_count || result.failCount}건`,
+                   "", "이름 / 아이디 / 임시 비밀번호 / 결과"];
+    result.students.forEach((s) => {
+      const pwd = s.temporary_password || s.temporaryPassword || "";
+      const err = s.error || "";
+      lines.push(`${s.name} / ${s.loginId || s.login_id} / ${pwd || "(실패)"} ${err ? `[${err}]` : ""}`);
+    });
+    navigator.clipboard?.writeText(lines.join("\n"));
+    alert("클립보드에 복사됨");
+  };
+
+  return (
+    <div className="admin-modal-overlay" onClick={onClose}>
+      <div className="admin-modal" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 720 }}>
+        <h2>학생 일괄 등록</h2>
+        <p style={{ fontSize: 12, color: "#666", margin: "0 0 8px" }}>
+          CSV 형식으로 한 번에 여러 명 등록. 첫 줄은 헤더, 두 번째 줄부터 데이터.
+          아이디는 영문/숫자 3자 이상, 중복 시 해당 행만 실패.
+          등록 후 학생마다 임시 비밀번호가 자동 생성되어 결과 화면에 한 번만 표시됩니다.
+        </p>
+
+        {!result ? (
+          <>
+            {isHQ && (
+              <div className="admin-modal-field">
+                <label>대상 기관</label>
+                <select value={orgId} onChange={(e) => setOrgId(e.target.value)}>
+                  <option value="">선택</option>
+                  {orgs.map((o) => <option key={o.id} value={o.id}>{o.name}</option>)}
+                </select>
+              </div>
+            )}
+            <div className="admin-modal-field">
+              <label>CSV ({rows.length}행 인식됨)</label>
+              <textarea value={csv} onChange={(e) => setCsv(e.target.value)} rows={12}
+                style={{ fontFamily: "monospace", fontSize: 12, width: "100%",
+                         padding: 8, border: "1px solid #ddd", borderRadius: 4 }} />
+            </div>
+            {rows.length > 0 && (
+              <details>
+                <summary style={{ cursor: "pointer", fontSize: 12, color: "#666" }}>
+                  미리보기 ({rows.length}행)
+                </summary>
+                <table className="admin-detail-table" style={{ fontSize: 11, marginTop: 6 }}>
+                  <thead><tr><th>이름</th><th>아이디</th><th>학생전화</th><th>학부모전화</th><th>학년</th><th>학교</th><th>지역</th></tr></thead>
+                  <tbody>
+                    {rows.slice(0, 10).map((r, i) => (
+                      <tr key={i}>
+                        <td>{r.name}</td><td>{r.loginId}</td><td>{r.studentPhone}</td>
+                        <td>{r.parentPhone}</td><td>{r.gradeLabel}</td><td>{r.school}</td><td>{r.region}</td>
+                      </tr>
+                    ))}
+                    {rows.length > 10 && <tr><td colSpan={7} style={{ color: "#888" }}>... 외 {rows.length - 10}행</td></tr>}
+                  </tbody>
+                </table>
+              </details>
+            )}
+            {error && <p className="admin-detail-note error">{error}</p>}
+            <div className="admin-modal-actions">
+              <button className="admin-detail-btn" onClick={handleSubmit} disabled={submitting || rows.length === 0}>
+                {submitting ? "등록 중..." : `${rows.length}명 등록`}
+              </button>
+              <button className="admin-detail-btn secondary" onClick={onClose} disabled={submitting}>
+                취소
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <p style={{ color: "#c0392b", fontWeight: 600 }}>
+              ⚠ 임시 비밀번호는 이 창을 닫으면 다시 볼 수 없습니다. 지금 복사해 학생에게 전달하세요.
+            </p>
+            <p>
+              성공 <strong>{result.success_count ?? result.successCount}</strong>건 /
+              실패 <strong>{result.fail_count ?? result.failCount}</strong>건
+            </p>
+            <table className="admin-detail-table" style={{ fontSize: 12 }}>
+              <thead><tr><th>이름</th><th>아이디</th><th>임시 비밀번호</th><th>결과</th></tr></thead>
+              <tbody>
+                {(result.students || []).map((s, i) => {
+                  const pwd = s.temporary_password || s.temporaryPassword;
+                  return (
+                    <tr key={i} style={{ background: s.success ? "transparent" : "#fff5e6" }}>
+                      <td>{s.name}</td>
+                      <td>{s.loginId || s.login_id}</td>
+                      <td style={{ fontFamily: "monospace", userSelect: "all" }}>
+                        {pwd || <span style={{ color: "#aaa" }}>-</span>}
+                      </td>
+                      <td>
+                        {s.success
+                          ? <span style={{ color: "#2d6a4f" }}>✓ 성공</span>
+                          : <span style={{ color: "#c0392b" }}>✗ {s.error}</span>}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            <div className="admin-modal-actions">
+              <button className="admin-detail-btn" onClick={copyAll}>전체 복사</button>
+              <button className="admin-detail-btn secondary" onClick={onCompleted}>닫기</button>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
   );
 }
 

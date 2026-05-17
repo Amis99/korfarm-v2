@@ -140,7 +140,30 @@ data class AdminOrgCreateRequest(
     val addressRegion: String? = null,
     val addressDetail: String? = null,
     val seatLimit: Int? = null,
-    val status: String? = null
+    val status: String? = null,
+    // 사업자 정보 (선택)
+    val businessNumber: String? = null,
+    val representativeName: String? = null,
+    val contactPhone: String? = null,
+    val contactEmail: String? = null,
+    val taxEmail: String? = null,
+    // 기관 관리자 동시 등록 (선택). loginId · name 둘 다 있으면 자동 생성 + 즉시 active.
+    val adminLoginId: String? = null,
+    val adminName: String? = null,
+    val adminPhone: String? = null,
+)
+
+/** createOrg 응답 — 같이 등록한 ORG_ADMIN 이 있으면 임시 비밀번호 한 번만 표시. */
+data class AdminOrgCreateResult(
+    val org: com.korfarm.api.org.AdminOrgView,
+    val admin: AdminCreatedView? = null,
+)
+
+data class AdminCreatedView(
+    val userId: String,
+    val loginId: String,
+    val name: String,
+    val temporaryPassword: String,  // 한 번만 응답. DB 엔 hash 만.
 )
 
 data class AdminOrgUpdateRequest(
@@ -151,11 +174,50 @@ data class AdminOrgUpdateRequest(
     val addressDetail: String? = null,
     val logoFileId: String? = null,
     val seatLimit: Int? = null,
-    val status: String? = null
+    val status: String? = null,
+    // 사업자 정보 수정
+    val businessNumber: String? = null,
+    val representativeName: String? = null,
+    val contactPhone: String? = null,
+    val contactEmail: String? = null,
+    val taxEmail: String? = null,
 )
 
 data class AdminOrgAdminCreateRequest(
     @field:NotBlank val loginId: String
+)
+
+data class AdminStudentBulkCreateRequest(
+    @field:NotBlank val orgId: String,
+    val students: List<BulkStudentRow> = emptyList(),
+)
+
+data class BulkStudentRow(
+    @field:NotBlank val loginId: String,
+    @field:NotBlank val name: String,
+    val studentPhone: String? = null,
+    val parentPhone: String? = null,
+    val gradeLabel: String? = null,
+    val levelId: String? = null,
+    val school: String? = null,
+    val region: String? = null,
+)
+
+data class AdminBulkCreateResult(
+    val orgId: String,
+    val orgName: String?,
+    val successCount: Int,
+    val failCount: Int,
+    val students: List<BulkStudentResult>,
+)
+
+data class BulkStudentResult(
+    val loginId: String,
+    val name: String,
+    val success: Boolean,
+    val userId: String? = null,
+    val temporaryPassword: String? = null,
+    val error: String? = null,
 )
 
 data class AdminStudentCreateRequest(

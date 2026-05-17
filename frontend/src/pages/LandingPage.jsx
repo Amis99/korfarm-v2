@@ -65,23 +65,25 @@ function LandingPage() {
                 id="payment-notice-title"
                 style={{ margin: 0, fontSize: "1.15rem", fontWeight: 700, color: "#1a2b1a" }}
               >
-                결제 안내 말씀드립니다
+                학원·학교 도입 안내
               </h3>
             </div>
             <p style={{ margin: "0 0 10px", color: "#3a3a3a", fontSize: "0.97rem" }}>
               안녕하세요. 국어농장을 찾아 주셔서 진심으로 감사드립니다.
             </p>
             <p style={{ margin: "0 0 10px", color: "#3a3a3a", fontSize: "0.97rem" }}>
-              현재 <strong>결제 모듈 승인 절차가 마무리되지 않아</strong>,
-              공지 시까지 <strong>구독 결제가 불가</strong>한 점 안내드립니다.
+              <strong>학원·학교 도입</strong>을 원하시면 아래로 연락 주세요.
+              본사가 직접 등록과 초기 설정을 도와드립니다.
             </p>
-            <p style={{ margin: "0 0 10px", color: "#3a3a3a", fontSize: "0.97rem" }}>
-              승인이 완료되는 대로 별도 공지를 드리겠습니다.
-              그 외 학습 콘텐츠는 평소처럼 자유롭게 이용하실 수 있으니
-              번거롭더라도 조금만 기다려 주시면 감사하겠습니다.
-            </p>
+            <ul style={{ margin: "0 0 14px 0", paddingLeft: 18, color: "#3a3a3a", fontSize: "0.95rem", lineHeight: 1.9 }}>
+              <li>📝 <a href="/orgs/apply" style={{ color: "#3b8c3a", fontWeight: 600 }}>학원·학교 도입 신청 폼</a> (셀프 서비스)</li>
+              <li>📞 010-8950-0655</li>
+              <li>✉ contact@korfarm.com</li>
+              <li>💬 <a href="/inquiry" style={{ color: "#3b8c3a", fontWeight: 600 }}>문의게시판</a></li>
+            </ul>
             <p style={{ margin: "0 0 22px", color: "#777", fontSize: "0.88rem" }}>
-              불편을 끼쳐 드려 죄송합니다. 따뜻한 양해 부탁드립니다.
+              개인 학생도 학습 콘텐츠는 자유롭게 이용하실 수 있습니다.
+              공식 구독 결제 시점은 별도 공지로 안내드립니다.
             </p>
             <div style={{ display: "flex", justifyContent: "flex-end" }}>
               <button

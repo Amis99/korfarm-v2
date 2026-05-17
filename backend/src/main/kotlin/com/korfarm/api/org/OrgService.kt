@@ -321,6 +321,49 @@ class OrgService(
         classRepository.save(classEntity)
     }
 
+    /** 회원 통합 조회 — HQ_ADMIN 전용. role: STUDENT / PARENT / ORG_ADMIN. */
+    @Transactional(readOnly = true)
+    fun listMembersAdmin(role: String): List<AdminMemberView> {
+        val orgMap = orgRepository.findAll().associateBy { it.id }
+        val memberships = orgMembershipRepository.findByStatus("active")
+            .filter { it.role == role }
+        val userIds = memberships.map { it.userId }.toSet()
+        val users = userRepository.findAllById(userIds).filter { it.deletedAt == null }
+            .associateBy { it.id }
+        // 학부모면 자녀 자동 연결 정보 — userId 별 linkedStudentName 들 모음
+        val linkedNamesByParentUserId: Map<String, List<String>> = if (role == "PARENT") {
+            memberships.groupBy { it.userId }.mapValues { (_, ms) ->
+                ms.mapNotNull { it.linkedStudentName?.takeIf { n -> n.isNotBlank() } }
+            }
+        } else emptyMap()
+
+        return memberships.mapNotNull { m ->
+            val user = users[m.userId] ?: return@mapNotNull null
+            val org = orgMap[m.orgId]
+            AdminMemberView(
+                userId = user.id,
+                loginId = user.email,
+                name = user.name,
+                role = m.role,
+                orgId = m.orgId,
+                orgName = org?.name,
+                phone = when (role) {
+                    "STUDENT" -> user.studentPhone
+                    "PARENT" -> user.parentPhone
+                    else -> user.studentPhone
+                },
+                email = if (user.email.contains("@")) user.email else null,
+                membershipStatus = m.status,
+                createdAt = user.createdAt.toString(),
+                levelId = if (role == "STUDENT") user.levelId else null,
+                gradeLabel = if (role == "STUDENT") user.gradeLabel else null,
+                school = if (role == "STUDENT") user.school else null,
+                region = if (role == "STUDENT") user.region else null,
+                linkedStudentNames = linkedNamesByParentUserId[user.id] ?: emptyList(),
+            )
+        }.sortedByDescending { it.createdAt }
+    }
+
     @Transactional(readOnly = true)
     fun listStudentsAdmin(filterOrgId: String? = null): List<AdminStudentView> {
         val orgMap = orgRepository.findAll().associateBy { it.id }
@@ -379,7 +422,8 @@ class OrgService(
     }
 
     @Transactional
-    fun createOrg(request: AdminOrgCreateRequest): OrgEntity {
+    fun createOrg(request: AdminOrgCreateRequest): com.korfarm.api.contracts.AdminOrgCreateResult {
+        // 1. orgs INSERT (사업자 정보 포함)
         val org = OrgEntity(
             id = IdGenerator.newId("org"),
             name = request.name,
@@ -388,9 +432,141 @@ class OrgService(
             orgType = request.orgType,
             addressRegion = request.addressRegion,
             addressDetail = request.addressDetail,
-            seatLimit = request.seatLimit ?: 0
+            seatLimit = request.seatLimit ?: 0,
+            businessNumber = request.businessNumber?.takeIf { it.isNotBlank() },
+            representativeName = request.representativeName?.takeIf { it.isNotBlank() },
+            contactPhone = request.contactPhone?.takeIf { it.isNotBlank() },
+            contactEmail = request.contactEmail?.takeIf { it.isNotBlank() },
+            taxEmail = request.taxEmail?.takeIf { it.isNotBlank() },
         )
-        return orgRepository.save(org)
+        val savedOrg = orgRepository.save(org)
+
+        // 2. ORG_ADMIN 동시 등록 (선택) — 닭-달걀 구조 제거
+        var adminCreated: com.korfarm.api.contracts.AdminCreatedView? = null
+        val adminLoginId = request.adminLoginId?.trim()?.takeIf { it.isNotBlank() }
+        val adminName = request.adminName?.trim()?.takeIf { it.isNotBlank() }
+        if (adminLoginId != null && adminName != null) {
+            // 중복 검사
+            if (userRepository.existsByEmail(adminLoginId)) {
+                throw ApiException(
+                    "LOGIN_ID_EXISTS",
+                    "이미 사용 중인 아이디입니다: $adminLoginId",
+                    HttpStatus.CONFLICT
+                )
+            }
+            val tempPwd = generateTemporaryPassword()
+            val user = userRepository.save(
+                UserEntity(
+                    id = IdGenerator.newId("u"),
+                    email = adminLoginId,
+                    passwordHash = passwordEncoder.encode(tempPwd),
+                    name = adminName,
+                    studentPhone = request.adminPhone?.takeIf { it.isNotBlank() },
+                    levelId = null,
+                    status = "active",
+                )
+            )
+            orgMembershipRepository.save(
+                OrgMembershipEntity(
+                    id = IdGenerator.newId("om"),
+                    orgId = savedOrg.id,
+                    userId = user.id,
+                    role = "ORG_ADMIN",
+                    status = "active",
+                    approvedAt = LocalDateTime.now(),
+                )
+            )
+            adminCreated = com.korfarm.api.contracts.AdminCreatedView(
+                userId = user.id,
+                loginId = adminLoginId,
+                name = adminName,
+                temporaryPassword = tempPwd,
+            )
+        }
+
+        return com.korfarm.api.contracts.AdminOrgCreateResult(
+            org = getOrgView(savedOrg.id),  // 기존 함수 — admins · 모든 필드 자동 채움
+            admin = adminCreated,
+        )
+    }
+
+    /** 임시 비밀번호 — 12자 영대소문자+숫자 (헷갈리는 0/O/I/l 제외). */
+    private fun generateTemporaryPassword(): String {
+        val chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789"
+        return (1..12).map { chars.random() }.joinToString("")
+    }
+
+    /** 학생 일괄 등록 — orgScopeResolver 적용. 행 단위 성공/실패 결과 + 임시 비밀번호 반환. */
+    @Transactional
+    fun bulkCreateStudents(request: com.korfarm.api.contracts.AdminStudentBulkCreateRequest):
+        com.korfarm.api.contracts.AdminBulkCreateResult {
+        val callerId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "인증되지 않은 요청입니다", HttpStatus.UNAUTHORIZED)
+        val orgId = orgScopeResolver.resolveCallerOrgId(callerId, request.orgId)
+            ?: throw ApiException("BAD_REQUEST", "기관 ID 가 필요합니다", HttpStatus.BAD_REQUEST)
+        val org = orgRepository.findById(orgId).orElseThrow {
+            ApiException("NOT_FOUND", "기관을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        val results = request.students.map { row ->
+            val loginId = row.loginId.trim()
+            val name = row.name.trim()
+            try {
+                if (loginId.isBlank() || name.isBlank()) {
+                    return@map com.korfarm.api.contracts.BulkStudentResult(
+                        loginId = loginId, name = name, success = false,
+                        error = "아이디·이름이 비어 있습니다"
+                    )
+                }
+                if (userRepository.existsByEmail(loginId)) {
+                    return@map com.korfarm.api.contracts.BulkStudentResult(
+                        loginId = loginId, name = name, success = false,
+                        error = "이미 사용 중인 아이디"
+                    )
+                }
+                val tempPwd = generateTemporaryPassword()
+                val user = userRepository.save(
+                    UserEntity(
+                        id = IdGenerator.newId("u"),
+                        email = loginId,
+                        passwordHash = passwordEncoder.encode(tempPwd),
+                        name = name,
+                        studentPhone = row.studentPhone?.takeIf { it.isNotBlank() },
+                        parentPhone = row.parentPhone?.takeIf { it.isNotBlank() },
+                        gradeLabel = row.gradeLabel?.takeIf { it.isNotBlank() },
+                        levelId = row.levelId?.takeIf { it.isNotBlank() },
+                        school = row.school?.takeIf { it.isNotBlank() },
+                        region = row.region?.takeIf { it.isNotBlank() },
+                        status = "active",
+                    )
+                )
+                orgMembershipRepository.save(
+                    OrgMembershipEntity(
+                        id = IdGenerator.newId("om"),
+                        orgId = orgId,
+                        userId = user.id,
+                        role = "STUDENT",
+                        status = "active",
+                        approvedAt = LocalDateTime.now(),
+                    )
+                )
+                com.korfarm.api.contracts.BulkStudentResult(
+                    loginId = loginId, name = name, success = true,
+                    userId = user.id, temporaryPassword = tempPwd,
+                )
+            } catch (e: Exception) {
+                com.korfarm.api.contracts.BulkStudentResult(
+                    loginId = loginId, name = name, success = false,
+                    error = e.message ?: "알 수 없는 오류"
+                )
+            }
+        }
+        return com.korfarm.api.contracts.AdminBulkCreateResult(
+            orgId = orgId,
+            orgName = org.name,
+            successCount = results.count { it.success },
+            failCount = results.count { !it.success },
+            students = results,
+        )
     }
 
     @Transactional
@@ -407,6 +583,11 @@ class OrgService(
         request.logoFileId?.let { org.logoFileId = it.takeIf { v -> v.isNotBlank() } }
         request.seatLimit?.let { org.seatLimit = it }
         request.status?.let { org.status = it }
+        request.businessNumber?.let { org.businessNumber = it.takeIf { v -> v.isNotBlank() } }
+        request.representativeName?.let { org.representativeName = it.takeIf { v -> v.isNotBlank() } }
+        request.contactPhone?.let { org.contactPhone = it.takeIf { v -> v.isNotBlank() } }
+        request.contactEmail?.let { org.contactEmail = it.takeIf { v -> v.isNotBlank() } }
+        request.taxEmail?.let { org.taxEmail = it.takeIf { v -> v.isNotBlank() } }
         return orgRepository.save(org)
     }
 
@@ -451,6 +632,7 @@ class OrgService(
         val user = userRepository.findByEmail(request.loginId)
             ?: throw ApiException("NOT_FOUND", "해당 국어농장 아이디의 계정을 찾을 수 없습니다: ${request.loginId}", HttpStatus.NOT_FOUND)
         val existing = orgMembershipRepository.findByOrgIdAndUserId(org.id, user.id)
+        val now = LocalDateTime.now()
         if (existing == null) {
             orgMembershipRepository.save(
                 OrgMembershipEntity(
@@ -458,9 +640,20 @@ class OrgService(
                     orgId = org.id,
                     userId = user.id,
                     role = "ORG_ADMIN",
-                    status = "active"
+                    status = "active",
+                    approvedAt = now
                 )
             )
+        } else {
+            // 버그 수정 (2026-05-16): 기존 멤버십이 inactive·pending·rejected 여도
+            // ORG_ADMIN 으로 강제 복구. 본사가 명시적으로 추가 호출했으므로 의도 분명.
+            // 박종찬 케이스 — pending 멤버십이 있어 createOrgAdmin 이 silent no-op 하던 버그.
+            existing.role = "ORG_ADMIN"
+            existing.status = "active"
+            existing.approvedAt = existing.approvedAt ?: now
+            existing.rejectionReason = null
+            existing.updatedAt = now
+            orgMembershipRepository.save(existing)
         }
         return getOrgView(orgId)
     }
@@ -483,7 +676,12 @@ class OrgService(
             billingSuspended = org.billingSuspended,
             seatLimit = org.seatLimit,
             admins = admins,
-            status = org.status
+            status = org.status,
+            businessNumber = org.businessNumber,
+            representativeName = org.representativeName,
+            contactPhone = org.contactPhone,
+            contactEmail = org.contactEmail,
+            taxEmail = org.taxEmail,
         )
     }
 

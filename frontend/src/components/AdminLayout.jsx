@@ -17,9 +17,11 @@ const NAV_GROUPS = [
   ]},
   { title: "회원", items: [
     { to: "/admin/orgs", icon: "business", label: "기관 관리", roles: ["HQ_ADMIN"] },
+    { to: "/admin/org-applications", icon: "mark_email_unread", label: "도입 신청", roles: ["HQ_ADMIN"] },
+    { to: "/admin/members", icon: "groups", label: "회원 관리", roles: ["HQ_ADMIN"] },
     { to: "/admin/classes", icon: "school", label: "반 관리" },
-    { to: "/admin/students", icon: "group", label: "학생 관리" },
-    { to: "/admin/parents", icon: "family_restroom", label: "학부모 관리" },
+    { to: "/admin/students", icon: "group", label: "학생 관리", roles: ["ORG_ADMIN"] },
+    { to: "/admin/parents", icon: "family_restroom", label: "학부모 관리", roles: ["ORG_ADMIN"] },
   ]},
   { title: "콘텐츠·학습", items: [
     { to: "/admin/content", icon: "menu_book", label: "콘텐츠" },

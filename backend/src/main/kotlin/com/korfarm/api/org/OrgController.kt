@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 
@@ -42,10 +43,32 @@ class OrgController(
     }
 
     @PostMapping("/orgs")
-    fun createOrg(@Valid @RequestBody request: AdminOrgCreateRequest): ApiResponse<AdminOrgView> {
+    fun createOrg(@Valid @RequestBody request: AdminOrgCreateRequest): ApiResponse<com.korfarm.api.contracts.AdminOrgCreateResult> {
         AdminGuard.requireAnyRole("HQ_ADMIN")
-        val org = orgService.createOrg(request)
-        return ApiResponse(success = true, data = orgService.getOrgView(org.id))
+        return ApiResponse(success = true, data = orgService.createOrg(request))
+    }
+
+    /** 학생 일괄 등록 — HQ_ADMIN 또는 본인 기관 ORG_ADMIN. */
+    @PostMapping("/students/bulk")
+    fun bulkCreateStudents(
+        @Valid @RequestBody request: com.korfarm.api.contracts.AdminStudentBulkCreateRequest
+    ): ApiResponse<com.korfarm.api.contracts.AdminBulkCreateResult> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        return ApiResponse(success = true, data = orgService.bulkCreateStudents(request))
+    }
+
+    /** HQ_ADMIN 회원 통합 조회 — role: STUDENT / PARENT / ORG_ADMIN. */
+    @GetMapping("/members")
+    fun listMembers(@RequestParam role: String): ApiResponse<List<AdminMemberView>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        val normalized = role.uppercase()
+        if (normalized !in listOf("STUDENT", "PARENT", "ORG_ADMIN")) {
+            throw com.korfarm.api.common.ApiException(
+                "INVALID_ROLE", "role 은 STUDENT/PARENT/ORG_ADMIN 중 하나여야 합니다",
+                org.springframework.http.HttpStatus.BAD_REQUEST
+            )
+        }
+        return ApiResponse(success = true, data = orgService.listMembersAdmin(normalized))
     }
 
     // ORG_ADMIN 본인 기관 조회·수정 (사이드바 '기관 설정' 메뉴 용도)

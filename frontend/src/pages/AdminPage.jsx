@@ -6,6 +6,7 @@ import { apiDelete, apiGet, apiPatch, apiPost } from "../utils/adminApi";
 import { API_BASE, TOKEN_KEY } from "../utils/api";
 import AdminLayout from "../components/AdminLayout";
 import AttachedImageStrip from "../components/chat/AttachedImageStrip";
+import OnboardingChecklist from "../components/OnboardingChecklist";
 import { useAuth } from "../hooks/useAuth";
 
 /**
@@ -290,6 +291,7 @@ function AdminPage() {
     <AdminLayout>
       <div className="agent-shell">
         <main className="agent-main">
+          {!isHq && <div style={{ padding: "0 16px" }}><OnboardingChecklist /></div>}
           <header className="agent-main-header">
             <div className="agent-main-header-row">
               <h1>AI 비서</h1>

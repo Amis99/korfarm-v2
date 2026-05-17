@@ -44,6 +44,22 @@ class OrgEntity(
     @Column(name = "seat_limit", nullable = false)
     var seatLimit: Int = 0,
 
+    // 사업자 정보 (V0139)
+    @Column(name = "business_number")
+    var businessNumber: String? = null,
+
+    @Column(name = "representative_name")
+    var representativeName: String? = null,
+
+    @Column(name = "contact_phone")
+    var contactPhone: String? = null,
+
+    @Column(name = "contact_email")
+    var contactEmail: String? = null,
+
+    @Column(name = "tax_email")
+    var taxEmail: String? = null,
+
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now(),
 
