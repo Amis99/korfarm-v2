@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { apiGet, apiPost, apiPatch, apiPostDownload } from "../utils/adminApi";
-import { useAdminList } from "../hooks/useAdminList";
-import { useAuth } from "../hooks/useAuth";
-import AdminLayout from "../components/AdminLayout";
-import OrgSelect from "../components/OrgSelect";
-import "../styles/admin-detail.css";
+import { apiGet, apiPost, apiPatch, apiPostDownload } from "../../../utils/adminApi";
+import { useAdminList } from "../../../hooks/useAdminList";
+import { useAuth } from "../../../hooks/useAuth";
+
+import OrgSelect from "../../OrgSelect";
+import "../../../styles/admin-detail.css";
 
 const STUDENTS = [
   { id: "s1", name: "김서연", email: "", level: "프레게1", org: "해든 국어학원", status: "active" },
@@ -249,7 +249,7 @@ const subscriptionLabel = (status) => {
   return status;
 };
 
-function AdminStudentsPage() {
+function StudentsTab() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const isHqAdmin = (user?.roles || []).includes("HQ_ADMIN");
@@ -549,7 +549,7 @@ function AdminStudentsPage() {
   };
 
   return (
-    <AdminLayout>
+    <>
       <div className="admin-detail-wrap">
         <div className="admin-detail-header">
           <h1>학생 관리</h1>
@@ -1092,7 +1092,7 @@ function AdminStudentsPage() {
           </div>
         </div>
       ) : null}
-    </AdminLayout>
+    </>
   );
 }
 
@@ -1264,4 +1264,4 @@ function BulkCreateStudentsModal({ orgs, isHQ, defaultOrgId, onClose, onComplete
   );
 }
 
-export default AdminStudentsPage;
+export default StudentsTab;

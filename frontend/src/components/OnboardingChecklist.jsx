@@ -8,7 +8,7 @@ import { apiGet } from "../utils/adminApi";
 
 const STEPS = [
   { key: "orgInfo",           label: "기관 정보 입력",         to: "/admin/org-settings", icon: "business" },
-  { key: "students",          label: "학생 등록",              to: "/admin/students",     icon: "group" },
+  { key: "students",          label: "학생 등록",              to: "/admin/users?tab=STUDENT", icon: "group" },
   { key: "studyPlanTemplate", label: "학습 계획표 템플릿 생성", to: "/admin/study-plans",  icon: "event_note" },
   { key: "billing",           label: "월 사용료 결제",          to: "/admin/billing",      icon: "payments" },
 ];

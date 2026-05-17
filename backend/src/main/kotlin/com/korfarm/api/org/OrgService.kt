@@ -312,6 +312,76 @@ class OrgService(
         )
     }
 
+    /**
+     * 2026-05-18 — 학생을 다른 기관으로 이동.
+     *
+     * - 현재 active 인 STUDENT 멤버십을 모두 inactive
+     * - toOrgId 에 active 멤버십 신설/복구
+     * - 옛 기관의 수강반 멤버십 모두 inactive
+     * - toOrgId == "org_hq" 면 transferStudentToHq 와 동등 (자동 위임)
+     */
+    @Transactional
+    fun transferStudent(userId: String, toOrgId: String): Map<String, Any?> {
+        val target = orgRepository.findById(toOrgId).orElse(null)
+            ?: throw ApiException("NOT_FOUND", "대상 기관을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        if (target.status != "active" && toOrgId != "org_hq") {
+            throw ApiException("BAD_REQUEST", "정지된 기관으로는 이동할 수 없습니다", HttpStatus.BAD_REQUEST)
+        }
+
+        val current = orgMembershipRepository.findByUserIdAndStatus(userId, "active")
+            .filter { it.role == "STUDENT" }
+        if (current.any { it.orgId == toOrgId }) {
+            return mapOf("status" to "noop", "message" to "이미 해당 기관 소속입니다")
+        }
+
+        val now = LocalDateTime.now()
+        val previousOrgIds = current.map { it.orgId }
+
+        // 모든 active STUDENT 멤버십 inactive
+        current.forEach {
+            it.status = "inactive"
+            orgMembershipRepository.save(it)
+        }
+
+        // toOrgId 멤버십 신설/복구
+        val existing = orgMembershipRepository.findByOrgIdAndUserId(toOrgId, userId)
+        if (existing != null) {
+            existing.status = "active"
+            existing.role = "STUDENT"
+            existing.approvedAt = existing.approvedAt ?: now
+            orgMembershipRepository.save(existing)
+        } else {
+            orgMembershipRepository.save(
+                OrgMembershipEntity(
+                    id = IdGenerator.newId("om"),
+                    orgId = toOrgId,
+                    userId = userId,
+                    role = "STUDENT",
+                    status = "active",
+                    requestedAt = now,
+                    approvedAt = now,
+                )
+            )
+        }
+
+        // 옛 기관의 수강반 멤버십 inactive
+        classMembershipRepository.findByUserIdAndStatus(userId, "active").forEach { cm ->
+            val cls = classRepository.findById(cm.classId).orElse(null)
+            if (cls != null && cls.orgId in previousOrgIds) {
+                cm.status = "inactive"
+                classMembershipRepository.save(cm)
+            }
+        }
+
+        return mapOf(
+            "status" to "transferred",
+            "previousOrgIds" to previousOrgIds,
+            "newOrgId" to toOrgId,
+            "userId" to userId,
+            "message" to "학생이 ${target.name} (으)로 이동되었습니다",
+        )
+    }
+
     @Transactional
     fun deactivateClass(classId: String) {
         val classEntity = classRepository.findById(classId).orElseThrow {

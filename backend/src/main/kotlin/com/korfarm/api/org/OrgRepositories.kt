@@ -14,6 +14,7 @@ interface OrgMembershipRepository : JpaRepository<OrgMembershipEntity, String> {
     fun findByUserIdAndStatus(userId: String, status: String): List<OrgMembershipEntity>
     fun findByOrgIdAndUserId(orgId: String, userId: String): OrgMembershipEntity?
     fun findByOrgIdAndStatus(orgId: String, status: String): List<OrgMembershipEntity>
+    fun findByOrgIdAndRole(orgId: String, role: String): List<OrgMembershipEntity>
     fun findByStatus(status: String): List<OrgMembershipEntity>
 
     // 승인 대기 목록 조회 (기관별)

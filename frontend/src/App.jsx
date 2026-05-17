@@ -79,8 +79,8 @@ const AdminSettingsPage = lazy(() => import("./pages/AdminSettingsPage"));
 const OpsStation = lazy(() => import("./pages/OpsStation"));
 const AdminOrgsPage = lazy(() => import("./pages/AdminOrgsPage"));
 const AdminClassesPage = lazy(() => import("./pages/AdminClassesPage"));
-const AdminStudentsPage = lazy(() => import("./pages/AdminStudentsPage"));
-const AdminMembersPage = lazy(() => import("./pages/AdminMembersPage"));
+// AdminStudentsPage / AdminMembersPage / AdminParentLinksPage 는 AdminUsersPage 로 통합됨 (2026-05-18)
+const AdminUsersPage = lazy(() => import("./pages/AdminUsersPage"));
 const OrgApplyPage = lazy(() => import("./pages/OrgApplyPage"));
 const AdminOrgApplicationsPage = lazy(() => import("./pages/AdminOrgApplicationsPage"));
 const AdminStudentDetailPage = lazy(() => import("./pages/AdminStudentDetailPage"));
@@ -91,7 +91,6 @@ const AdminContentEditorPage = lazy(() => import("./pages/AdminContentEditorPage
 const AdminPrintContentPage = lazy(() => import("./pages/AdminPrintContentPage"));
 const AdminShopPage = lazy(() => import("./pages/AdminShopPage"));
 const AdminDuelPage = lazy(() => import("./pages/AdminDuelPage"));
-const AdminParentLinksPage = lazy(() => import("./pages/AdminParentLinksPage"));
 const AdminReportsPage = lazy(() => import("./pages/AdminReportsPage"));
 const AdminOrgSettingsPage = lazy(() => import("./pages/AdminOrgSettingsPage"));
 const AdminGrapefruitPricingPage = lazy(() => import("./pages/AdminGrapefruitPricingPage"));
@@ -314,9 +313,13 @@ function App() {
           <Route path="/admin/approvals" element={A(<AdminMembershipApprovalPage />)} />
           <Route path="/admin/orgs" element={A(<AdminOrgsPage />)} />
           <Route path="/admin/classes" element={A(<AdminClassesPage />)} />
-          <Route path="/admin/students" element={A(<AdminStudentsPage />)} />
+          {/* 회원 관리 통합 페이지 (2026-05-18) — 학생/학부모/기관관리자/본사관리자 4탭 */}
+          <Route path="/admin/users" element={A(<AdminUsersPage />)} />
+          {/* 옛 분리 메뉴 호환 redirect */}
+          <Route path="/admin/students" element={<Navigate to="/admin/users?tab=STUDENT" replace />} />
+          <Route path="/admin/members" element={<Navigate to="/admin/users?tab=STUDENT" replace />} />
+          {/* 학생 상세는 유지 — 외부 6개 화면(분석표·OpsStation 등)이 이 라우트로 직접 링크 */}
           <Route path="/admin/students/:userId" element={A(<AdminStudentDetailPage />)} />
-          <Route path="/admin/members" element={A(<AdminMembersPage />)} />
           <Route path="/admin/org-applications" element={A(<AdminOrgApplicationsPage />)} />
           <Route path="/orgs/apply" element={A(<OrgApplyPage />)} />
           <Route path="/admin/content" element={A(<AdminContentPage />)} />
@@ -339,7 +342,7 @@ function App() {
           <Route path="/admin/duel" element={A(<AdminDuelPage />)} />
           <Route path="/admin/seasons" element={<Navigate to="/admin/duel?tab=seasons" replace />} />
           <Route path="/admin/payments" element={<Navigate to="/admin/orgs?tab=payments" replace />} />
-          <Route path="/admin/parents" element={A(<AdminParentLinksPage />)} />
+          <Route path="/admin/parents" element={<Navigate to="/admin/users?tab=PARENT" replace />} />
           <Route path="/admin/inquiry" element={A(<AdminInquiryPage />)} />
           <Route path="/admin/reports" element={A(<AdminReportsPage />)} />
           <Route path="/admin/notices" element={A(<AdminNoticePage />)} />

@@ -1,6 +1,8 @@
 package com.korfarm.api.org
 
+import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.ApiResponse
+import org.springframework.http.HttpStatus
 import com.korfarm.api.contracts.AdminClassCreateRequest
 import com.korfarm.api.contracts.AdminClassStudentsRequest
 import com.korfarm.api.contracts.AdminClassUpdateRequest
@@ -57,15 +59,15 @@ class OrgController(
         return ApiResponse(success = true, data = orgService.bulkCreateStudents(request))
     }
 
-    /** HQ_ADMIN 회원 통합 조회 — role: STUDENT / PARENT / ORG_ADMIN. */
+    /** HQ_ADMIN 회원 통합 조회 — role: STUDENT / PARENT / ORG_ADMIN / HQ_ADMIN. */
     @GetMapping("/members")
     fun listMembers(@RequestParam role: String): ApiResponse<List<AdminMemberView>> {
         AdminGuard.requireAnyRole("HQ_ADMIN")
         val normalized = role.uppercase()
-        if (normalized !in listOf("STUDENT", "PARENT", "ORG_ADMIN")) {
-            throw com.korfarm.api.common.ApiException(
-                "INVALID_ROLE", "role 은 STUDENT/PARENT/ORG_ADMIN 중 하나여야 합니다",
-                org.springframework.http.HttpStatus.BAD_REQUEST
+        if (normalized !in listOf("STUDENT", "PARENT", "ORG_ADMIN", "HQ_ADMIN")) {
+            throw ApiException(
+                "INVALID_ROLE", "role 은 STUDENT/PARENT/ORG_ADMIN/HQ_ADMIN 중 하나여야 합니다",
+                HttpStatus.BAD_REQUEST
             )
         }
         return ApiResponse(success = true, data = orgService.listMembersAdmin(normalized))
@@ -191,13 +193,16 @@ class OrgController(
         return ApiResponse(success = true, data = mapOf("user_id" to user.id))
     }
 
+    /**
+     * 학생 구독 상태 수정.
+     * 2026-05-18 — 사용자 정책: HQ_ADMIN 만 가능. ORG_ADMIN 은 임의로 학생 구독을 늘리지 못하게 차단.
+     */
     @PostMapping("/students/{userId}/subscription")
     fun updateSubscription(
         @PathVariable userId: String,
         @Valid @RequestBody request: AdminSubscriptionRequest
     ): ApiResponse<AdminStudentView> {
-        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
-        orgService.verifyOrgAdminAccessForStudent(userId)
+        AdminGuard.requireAnyRole("HQ_ADMIN")
         orgService.updateSubscription(userId, request)
         return ApiResponse(success = true, data = orgService.getStudentView(userId))
     }
@@ -280,6 +285,22 @@ class OrgController(
             orgService.verifyOrgAdminAccess(orgId)
         }
         val result = orgService.transferStudentToHq(orgId, userId)
+        return ApiResponse(success = true, data = result)
+    }
+
+    /**
+     * 2026-05-18 — 학생을 다른 기관으로 이동 (HQ 전용).
+     * body: { "toOrgId": "org_..." }
+     */
+    @PostMapping("/students/{userId}/transfer")
+    fun transferStudent(
+        @PathVariable userId: String,
+        @RequestBody body: Map<String, String>,
+    ): ApiResponse<Map<String, Any?>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        val toOrgId = body["toOrgId"]
+            ?: throw ApiException("BAD_REQUEST", "toOrgId 가 필요합니다", HttpStatus.BAD_REQUEST)
+        val result = orgService.transferStudent(userId, toOrgId)
         return ApiResponse(success = true, data = result)
     }
 

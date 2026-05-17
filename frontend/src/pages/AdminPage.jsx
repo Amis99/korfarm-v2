@@ -268,14 +268,14 @@ function AdminPage() {
       { label: "활성 사용자", value: briefing.activeUsers ?? 0 },
       { label: "오늘 학습 참여", value: briefing.todayLearners ?? 0 },
       { label: "승인 대기", value: briefing.pendingApprovals ?? 0, link: "/admin/approvals" },
-      { label: "학부모 연결 대기", value: briefing.pendingParentLinks ?? 0, link: "/admin/parents" },
+      { label: "학부모 연결 대기", value: briefing.pendingParentLinks ?? 0, link: "/admin/users?tab=PARENT" },
       { label: "최근 7일 시험 응시", value: briefing.recentTestSubmissions ?? 0, link: "/admin/tests" },
     ];
   }, [briefing]);
 
   const quickActions = [
     { label: "학습 계획표", path: "/admin/study-plans" },
-    { label: "학생 관리", path: "/admin/students" },
+    { label: "회원 관리", path: "/admin/users" },
     { label: "수강반 관리", path: "/admin/classes" },
     { label: "콘텐츠 관리", path: "/admin/content" },
     { label: "공지 관리", path: "/admin/notices" },

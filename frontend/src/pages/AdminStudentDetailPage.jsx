@@ -13,6 +13,10 @@ const ReportSummaryCards = lazy(() => import("../components/report/ReportSummary
 const ReportRadarChart = lazy(() => import("../components/report/ReportRadarChart"));
 const ReportTrendChart = lazy(() => import("../components/report/ReportTrendChart"));
 const ReportSectionDetail = lazy(() => import("../components/report/ReportSectionDetail"));
+// 학생 상세 — 통합 회원 관리 보강 섹션 (2026-05-18)
+const StudentSubscriptionSection = lazy(() => import("../components/admin/students/StudentSubscriptionSection"));
+const StudentOrgTransferSection = lazy(() => import("../components/admin/students/StudentOrgTransferSection"));
+const StudentParentLinkSection = lazy(() => import("../components/admin/students/StudentParentLinkSection"));
 import "../styles/unified-report.css";
 
 const SEED_LABELS = { seed_wheat: "밀", seed_rice: "쌀", seed_corn: "옥수수", seed_grape: "포도", seed_apple: "사과" };
@@ -214,23 +218,54 @@ function AdminStudentDetailPage() {
         </div>
 
         {tab === "info" && (
-          <div className="admin-detail-card">
-            <h2>기본 정보</h2>
-            {loadingInfo ? (<p className="admin-detail-note">로딩 중...</p>) : !student ? (<p className="admin-detail-note error">학생 정보를 찾을 수 없습니다.</p>) : (
-              <table className="admin-detail-table" style={{ maxWidth: 600 }}><tbody>
-                <tr><td style={{ fontWeight: 700, width: 120 }}>이름</td><td>{sName}</td></tr>
-                <tr><td style={{ fontWeight: 700 }}>아이디</td><td>{sEmail}</td></tr>
-                <tr><td style={{ fontWeight: 700 }}>레벨</td><td>{sLevelLabel}</td></tr>
-                <tr><td style={{ fontWeight: 700 }}>학교</td><td>{sSchool}</td></tr>
-                <tr><td style={{ fontWeight: 700 }}>학년</td><td>{sGrade}</td></tr>
-                <tr><td style={{ fontWeight: 700 }}>기관</td><td>{sOrg}</td></tr>
-                <tr><td style={{ fontWeight: 700 }}>지역</td><td>{sRegion}</td></tr>
-                <tr><td style={{ fontWeight: 700 }}>학생 연락처</td><td>{sStudentPhone}</td></tr>
-                <tr><td style={{ fontWeight: 700 }}>학부모 연락처</td><td>{sParentPhone}</td></tr>
-                <tr><td style={{ fontWeight: 700 }}>상태</td><td><span className="status-pill" data-status={sStatus}>{sStatus}</span></td></tr>
-                <tr><td style={{ fontWeight: 700 }}>구독</td><td><span className="status-pill" data-status={sSubStatus === "active" ? "active" : "inactive"}>{sSubStatus === "active" ? "유료" : "무료"}</span>{sSubEnd && <span style={{ marginLeft: 8, fontSize: 12, color: "var(--muted)" }}>~{sSubEnd.slice(0, 10)}</span>}</td></tr>
-              </tbody></table>
-            )}
+          <div style={{ display: "grid", gap: 20 }}>
+            <div className="admin-detail-card">
+              <h2>기본 정보</h2>
+              {loadingInfo ? (<p className="admin-detail-note">로딩 중...</p>) : !student ? (<p className="admin-detail-note error">학생 정보를 찾을 수 없습니다.</p>) : (
+                <table className="admin-detail-table" style={{ maxWidth: 600 }}><tbody>
+                  <tr><td style={{ fontWeight: 700, width: 120 }}>이름</td><td>{sName}</td></tr>
+                  <tr><td style={{ fontWeight: 700 }}>아이디</td><td>{sEmail}</td></tr>
+                  <tr><td style={{ fontWeight: 700 }}>레벨</td><td>{sLevelLabel}</td></tr>
+                  <tr><td style={{ fontWeight: 700 }}>학교</td><td>{sSchool}</td></tr>
+                  <tr><td style={{ fontWeight: 700 }}>학년</td><td>{sGrade}</td></tr>
+                  <tr><td style={{ fontWeight: 700 }}>기관</td><td>{sOrg}</td></tr>
+                  <tr><td style={{ fontWeight: 700 }}>지역</td><td>{sRegion}</td></tr>
+                  <tr><td style={{ fontWeight: 700 }}>학생 연락처</td><td>{sStudentPhone}</td></tr>
+                  <tr><td style={{ fontWeight: 700 }}>학부모 연락처</td><td>{sParentPhone}</td></tr>
+                  <tr><td style={{ fontWeight: 700 }}>상태</td><td><span className="status-pill" data-status={sStatus}>{sStatus}</span></td></tr>
+                  <tr><td style={{ fontWeight: 700 }}>구독</td><td><span className="status-pill" data-status={sSubStatus === "active" ? "active" : "inactive"}>{sSubStatus === "active" ? "유료" : "무료"}</span>{sSubEnd && <span style={{ marginLeft: 8, fontSize: 12, color: "var(--muted)" }}>~{sSubEnd.slice(0, 10)}</span>}</td></tr>
+                </tbody></table>
+              )}
+            </div>
+
+            {/* 학부모 매칭 — HQ/ORG 공용 */}
+            {student ? (
+              <Suspense fallback={<p className="admin-detail-note">불러오는 중…</p>}>
+                <StudentParentLinkSection
+                  studentUserId={userId}
+                  studentLoginId={sEmail}
+                  studentName={sName}
+                />
+              </Suspense>
+            ) : null}
+
+            {/* 기관 이동·구독 수정 — HQ 전용 */}
+            {isHq && student ? (
+              <Suspense fallback={<p className="admin-detail-note">불러오는 중…</p>}>
+                <StudentOrgTransferSection
+                  userId={userId}
+                  currentOrgId={student.orgId || student.org_id}
+                  currentOrgName={sOrg}
+                  onTransferred={() => window.location.reload()}
+                />
+                <StudentSubscriptionSection
+                  userId={userId}
+                  subStatus={sSubStatus}
+                  subEnd={sSubEnd}
+                  onUpdated={() => window.location.reload()}
+                />
+              </Suspense>
+            ) : null}
           </div>
         )}
 
