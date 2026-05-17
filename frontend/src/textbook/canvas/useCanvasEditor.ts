@@ -7,6 +7,7 @@ import {
   blankCanvasTextbook, blankCanvasPage, newElementId,
   type CanvasElement, type CanvasPage, type CanvasTextbook,
 } from "./types";
+import { flowToCanvas, isFlowTextbook } from "./flowToCanvas";
 
 function pickTextbookId(detail: any): string | null {
   return detail?.textbookId ?? detail?.textbook_id ?? null;
@@ -44,11 +45,17 @@ export function useCanvasEditor(textbookId: string | "new", orgId: string | null
           const isCanvas = payload && typeof payload === "object"
             && (payload as any).schemaVersion === 2
             && Array.isArray((payload as any).pages);
-          const tb: CanvasTextbook = isCanvas
-            ? (payload as CanvasTextbook)
-            : blankCanvasTextbook({
-                textbookId, title: detail?.title ?? "(제목 없음)", orgId: detail?.orgId ?? null,
-              });
+          let tb: CanvasTextbook;
+          if (isCanvas) {
+            tb = payload as CanvasTextbook;
+          } else if (isFlowTextbook(payload)) {
+            // flow → 캔버스 자동 변환 (2026-05-17). 사용자는 캔버스에서 자유 재배치.
+            tb = flowToCanvas(payload as any);
+          } else {
+            tb = blankCanvasTextbook({
+              textbookId, title: detail?.title ?? "(제목 없음)", orgId: detail?.orgId ?? null,
+            });
+          }
           tb.textbookId = pickTextbookId(detail) ?? textbookId;
           tb.orgId = detail?.orgId ?? null;
           tb.title = detail?.title ?? tb.title;
@@ -189,7 +196,7 @@ export function useCanvasEditor(textbookId: string | "new", orgId: string | null
   }, []);
 
   // ─── 메타 ──────────────────────────────────────────────
-  const updateMeta = useCallback((patch: Partial<Pick<CanvasTextbook, "title" | "series" | "level" | "volume" | "chapterRange">>) => {
+  const updateMeta = useCallback((patch: Partial<Pick<CanvasTextbook, "title" | "series" | "level" | "volume" | "chapterRange" | "header" | "footer">>) => {
     setTextbook((tb) => tb ? { ...tb, ...patch } : tb);
   }, []);
 

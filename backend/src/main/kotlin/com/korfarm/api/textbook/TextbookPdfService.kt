@@ -44,7 +44,16 @@ class TextbookPdfService(
 
             val imageMap = extractImages(textbook.payloadJson, tmpDir)
 
-            val source = TextbookTypstBuilder(payload, hasHcr, imageMap, mode).build()
+            // schemaVersion 분기 (2026-05-17 Phase 8):
+            //   2 → 캔바 모드 (자유 좌표 #place 빌더)
+            //   1 또는 미지정 → 흐름 모드 (기존 빌더)
+            val schemaVersion = (payload["schemaVersion"] as? Number)?.toInt() ?: 1
+            val source = if (schemaVersion >= 2) {
+                val canvasMode = if (mode == TextbookTypstBuilder.Mode.ANSWER) CanvasTypstBuilder.Mode.ANSWER else CanvasTypstBuilder.Mode.STUDENT
+                CanvasTypstBuilder(payload, hasHcr, imageMap, canvasMode).build()
+            } else {
+                TextbookTypstBuilder(payload, hasHcr, imageMap, mode).build()
+            }
             val typFile = tmpDir.resolve("textbook.typ")
             Files.writeString(typFile, source, StandardCharsets.UTF_8)
             val pdfFile = tmpDir.resolve("textbook.pdf")

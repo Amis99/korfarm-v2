@@ -5,7 +5,7 @@
  * - 줌은 wrapper 의 scale 로
  * - 스마트 가이드: Moveable 의 snappable + bounds + verticalGuidelines/horizontalGuidelines
  */
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import Moveable from "react-moveable";
 import { CanvasElementView } from "./CanvasElementView";
 import type { CanvasElement, CanvasPage } from "./types";
@@ -28,6 +28,8 @@ export function CanvasPagePreview({
   guidelinesY?: number[];
 }) {
   const pageRef = useRef<HTMLDivElement | null>(null);
+  // Phase 5 — 텍스트 인플레이스 편집 중인 요소 id
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   // 정렬된 요소 — z 순서대로
   const sorted = useMemo(
@@ -41,6 +43,16 @@ export function CanvasPagePreview({
       .map((id) => document.querySelector(`[data-el-id="${id}"]`) as HTMLElement | null)
       .filter((el): el is HTMLElement => !!el);
   }, [selectedIds, sorted]);   // sorted 변경 시 DOM 재취득
+
+  // Phase 6 — 스마트 가이드 강화: 페이지 내 다른 요소(선택되지 않은 것) 들의 DOM 을 elementGuidelines 로 전달
+  // → Moveable 이 그 요소들 모서리·중심까지 스냅 + 가이드라인 자동 표시
+  const elementGuidelines = useMemo(() => {
+    const selectedSet = new Set(selectedIds);
+    return sorted
+      .filter((e) => !selectedSet.has(e.id))
+      .map((e) => document.querySelector(`[data-el-id="${e.id}"]`) as HTMLElement | null)
+      .filter((el): el is HTMLElement => !!el);
+  }, [sorted, selectedIds]);
 
   const widthPx = pageWidthMm * MM;
   const heightPx = pageHeightMm * MM;
@@ -75,15 +87,27 @@ export function CanvasPagePreview({
         {sorted.map((el) => (
           <ElementNode key={el.id} element={el}
                        selected={selectedIds.includes(el.id)}
+                       editing={editingId === el.id}
                        onMouseDown={(e) => {
                          e.stopPropagation();
+                         if (editingId && editingId !== el.id) setEditingId(null);  // 다른 요소 클릭 시 편집 종료
                          if (e.shiftKey) onSelect([...selectedIds, el.id], true);
                          else if (!selectedIds.includes(el.id)) onSelect([el.id]);
+                       }}
+                       onDoubleClick={() => {
+                         if (el.type === "text" && !el.locked) {
+                           setEditingId(el.id);
+                           onSelect([el.id]);
+                         }
+                       }}
+                       onTextChange={(next) => {
+                         onChangeElement(el.id, { content: next } as any);
+                         setEditingId(null);
                        }} />
         ))}
 
-        {/* Moveable — 드래그·리사이즈·회전·스냅 */}
-        {targets.length > 0 && (
+        {/* Moveable — 드래그·리사이즈·회전·스냅 (편집 중 요소엔 비활성) */}
+        {targets.length > 0 && !editingId && (
           <Moveable
             target={targets}
             container={pageRef.current}
@@ -95,6 +119,8 @@ export function CanvasPagePreview({
             elementSnapDirections={{ top: true, left: true, bottom: true, right: true, center: true, middle: true }}
             verticalGuidelines={guidelinesX ?? [0, widthPx / 2, widthPx]}
             horizontalGuidelines={guidelinesY ?? [0, heightPx / 2, heightPx]}
+            elementGuidelines={elementGuidelines}
+            snapGap
             snapThreshold={5}
             keepRatio={false}
             throttleDrag={0}
@@ -161,15 +187,22 @@ export function CanvasPagePreview({
   );
 }
 
-function ElementNode({ element, selected, onMouseDown }: {
+function ElementNode({
+  element, selected, editing,
+  onMouseDown, onDoubleClick, onTextChange,
+}: {
   element: CanvasElement;
   selected: boolean;
+  editing?: boolean;
   onMouseDown: (e: React.MouseEvent) => void;
+  onDoubleClick: () => void;
+  onTextChange?: (next: string) => void;
 }) {
   return (
     <div
       data-el-id={element.id}
       onMouseDown={onMouseDown}
+      onDoubleClick={onDoubleClick}
       style={{
         position: "absolute",
         left: `${element.x * MM}px`,
@@ -179,22 +212,28 @@ function ElementNode({ element, selected, onMouseDown }: {
         transform: `rotate(${element.rotation}deg)`,
         transformOrigin: "center",
         opacity: element.opacity ?? 1,
-        cursor: element.locked ? "not-allowed" : "move",
+        cursor: editing ? "text" : (element.locked ? "not-allowed" : "move"),
         outline: selected ? "1.5px solid #2d6a4f" : "1.5px solid transparent",
         outlineOffset: 1,
         boxSizing: "border-box",
         pointerEvents: element.locked ? "none" : "auto",
       }}
     >
-      <CanvasElementView element={element} />
+      <CanvasElementView element={element} editing={editing} onTextChange={onTextChange} />
     </div>
   );
 }
 
 function PageBackground({ bg }: { bg: CanvasPage["background"] }) {
   if (bg.kind === "none") return null;
+  if (bg.kind === "color") {
+    return <div style={{ position: "absolute", inset: 0, background: (bg as any).color,
+                         pointerEvents: "none" }} />;
+  }
   if (bg.kind === "image") {
-    return <img src={(bg as any).url ?? ""} alt=""
+    const url = (bg as any).url
+      ?? ((bg as any).assetId ? `/v1/files/${(bg as any).assetId}/download` : "");
+    return <img src={url} alt=""
                 style={{ position: "absolute", inset: 0, width: "100%", height: "100%",
                          objectFit: "cover", opacity: (bg as any).opacity ?? 1,
                          pointerEvents: "none" }} draggable={false} />;

@@ -3,14 +3,26 @@
  * 위치·크기·회전·opacity 는 외부(Moveable)가 transform 으로 제어.
  * 이 컴포넌트는 "콘텐츠" 만 그린다.
  */
+import { useEffect, useRef } from "react";
 import type {
   CanvasElement, ImageElement, ShapeElement, StickerElement,
   TextElement, UnknownElement, DomainElement,
 } from "./types";
+import { DomainRenderer } from "./DomainRenderer";
 
-export function CanvasElementView({ element }: { element: CanvasElement }) {
+export function CanvasElementView({
+  element,
+  editing = false,
+  onTextChange,
+}: {
+  element: CanvasElement;
+  /** Phase 5 — 텍스트 인플레이스 편집 활성 여부 (외부에서 더블클릭 시 true) */
+  editing?: boolean;
+  /** 텍스트 편집 종료 (blur) 시 새 content 콜백 */
+  onTextChange?: (content: string) => void;
+}) {
   switch (element.type) {
-    case "text":    return <TextEl el={element} />;
+    case "text":    return <TextEl el={element} editing={editing} onTextChange={onTextChange} />;
     case "image":   return <ImageEl el={element} />;
     case "shape":   return <ShapeEl el={element} />;
     case "sticker": return <StickerEl el={element} />;
@@ -22,26 +34,63 @@ export function CanvasElementView({ element }: { element: CanvasElement }) {
 
 const MM = 3.7795;
 
-function TextEl({ el }: { el: TextElement }) {
+function TextEl({ el, editing, onTextChange }: {
+  el: TextElement;
+  editing?: boolean;
+  onTextChange?: (content: string) => void;
+}) {
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  // editing true 가 되는 순간 텍스트 끝으로 포커스 + 전체 선택
+  useEffect(() => {
+    if (!editing) return;
+    const node = ref.current;
+    if (!node) return;
+    node.focus();
+    // 전체 선택
+    const range = document.createRange();
+    range.selectNodeContents(node);
+    const sel = window.getSelection();
+    sel?.removeAllRanges();
+    sel?.addRange(range);
+  }, [editing]);
+
   return (
-    <div style={{
-      width: "100%", height: "100%",
-      fontFamily: el.fontFamily ?? "inherit",
-      fontSize: `${el.fontSize}pt`,
-      fontWeight: el.fontWeight ?? "normal",
-      fontStyle: el.fontStyle ?? "normal",
-      color: el.color,
-      background: el.backgroundColor ?? "transparent",
-      textAlign: el.align,
-      lineHeight: el.lineHeight ?? 1.4,
-      letterSpacing: el.letterSpacing ? `${el.letterSpacing}em` : undefined,
-      textDecoration: el.textDecoration ?? "none",
-      padding: el.padding ? `${el.padding}mm` : 0,
-      boxSizing: "border-box",
-      overflow: "hidden",
-      whiteSpace: "pre-wrap",
-      wordBreak: "break-word",
-    }}>{el.content}</div>
+    <div
+      ref={ref}
+      contentEditable={!!editing}
+      suppressContentEditableWarning
+      onBlur={(e) => {
+        if (!editing || !onTextChange) return;
+        // innerText 가 줄바꿈을 \n 로 보존하므로 그대로 사용
+        const next = (e.currentTarget as HTMLDivElement).innerText ?? "";
+        if (next !== el.content) onTextChange(next);
+      }}
+      // 편집 중 keydown 으로 부모(Moveable) 충돌 방지
+      onKeyDown={(e) => { if (editing) e.stopPropagation(); }}
+      onMouseDown={(e) => { if (editing) e.stopPropagation(); }}
+      style={{
+        width: "100%", height: "100%",
+        fontFamily: el.fontFamily ?? "inherit",
+        fontSize: `${el.fontSize}pt`,
+        fontWeight: el.fontWeight ?? "normal",
+        fontStyle: el.fontStyle ?? "normal",
+        color: el.color,
+        background: el.backgroundColor ?? "transparent",
+        textAlign: el.align,
+        lineHeight: el.lineHeight ?? 1.4,
+        letterSpacing: el.letterSpacing ? `${el.letterSpacing}em` : undefined,
+        textDecoration: el.textDecoration ?? "none",
+        padding: el.padding ? `${el.padding}mm` : 0,
+        boxSizing: "border-box",
+        overflow: "hidden",
+        whiteSpace: "pre-wrap",
+        wordBreak: "break-word",
+        outline: editing ? "1.5px dashed #2d6a4f" : "none",
+        cursor: editing ? "text" : "inherit",
+        userSelect: editing ? "text" : "none",
+      }}
+    >{el.content}</div>
   );
 }
 
@@ -139,24 +188,8 @@ function StickerEl({ el }: { el: StickerElement }) {
 }
 
 function DomainEl({ el }: { el: DomainElement }) {
-  // 1차 — 도메인 요소는 미리보기 캔버스 안에선 단순 박스 라벨 + 핵심 텍스트로.
-  // 자세한 내부 렌더는 Inspector 또는 별도 모달.
-  const title = (el.props as any).title ?? (el.props as any).chapterName ?? domainLabel(el.domainKind);
-  const body = (el.props as any).text ?? (el.props as any).body ?? (el.props as any).stem ?? "";
-  return (
-    <div style={{
-      width: "100%", height: "100%", boxSizing: "border-box",
-      border: "1px dashed #2d6a4f", borderRadius: 3, padding: "4mm",
-      background: "rgba(232,244,236,0.4)", overflow: "hidden",
-    }}>
-      <div style={{ fontSize: 8, color: "#2d6a4f", textTransform: "uppercase",
-                    letterSpacing: 0.05, marginBottom: 2 }}>{el.domainKind}</div>
-      {title && <div style={{ fontWeight: 600, marginBottom: 4 }}>{String(title)}</div>}
-      <div style={{ fontSize: 10, color: "#444", whiteSpace: "pre-wrap" }}>
-        {typeof body === "string" ? body.slice(0, 200) : JSON.stringify(body).slice(0, 200)}
-      </div>
-    </div>
-  );
+  // 도메인 풀 렌더 — DomainRenderer 가 종류별 박스/표/문항 표시 (2026-05-17)
+  return <DomainRenderer el={el} />;
 }
 
 function UnknownEl({ el }: { el: UnknownElement }) {

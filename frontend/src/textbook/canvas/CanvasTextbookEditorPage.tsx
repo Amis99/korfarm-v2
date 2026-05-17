@@ -16,6 +16,9 @@ import { CanvasPagePreview } from "./CanvasPagePreview";
 import { LeftAddPanel } from "./panels/LeftAddPanel";
 import { TopContextToolbar } from "./panels/TopContextToolbar";
 import { RightLayerPanel } from "./panels/RightLayerPanel";
+import { PageInspector } from "./panels/PageInspector";
+import { HeaderFooterEditor } from "./panels/HeaderFooterEditor";
+import { DomainInspector } from "./panels/DomainInspector";
 import "../../styles/admin-detail.css";
 
 export default function CanvasTextbookEditorPage() {
@@ -25,6 +28,7 @@ export default function CanvasTextbookEditorPage() {
   const orgId = search.get("orgId");
   const ed = useCanvasEditor(params.textbookId ?? "new", orgId);
   const [metaOpen, setMetaOpen] = useState(false);
+  const [hfOpen, setHfOpen] = useState(false);
 
   const selectedElement = useMemo(() => {
     if (!ed.currentPage || ed.selectedElementIds.length === 0) return null;
@@ -57,6 +61,10 @@ export default function CanvasTextbookEditorPage() {
           <button className="admin-detail-btn secondary sm" type="button"
                   onClick={() => setMetaOpen((v) => !v)}>
             메타 {metaOpen ? "▴" : "▾"}
+          </button>
+          <button className="admin-detail-btn secondary sm" type="button"
+                  onClick={() => setHfOpen((v) => !v)}>
+            머리/꼬리 {hfOpen ? "▴" : "▾"}
           </button>
           {metaOpen && (
             <>
@@ -104,6 +112,16 @@ export default function CanvasTextbookEditorPage() {
             onBringForward={(id) => ed.bringForward(id)}
             onSendBackward={(id) => ed.sendBackward(id)}
           />
+          {hfOpen && (
+            <div style={{ borderBottom: "1px solid #ddd", background: "#fffceb" }}>
+              <HeaderFooterEditor
+                header={tb.header}
+                footer={tb.footer}
+                onChangeHeader={(next) => ed.updateMeta({ header: next })}
+                onChangeFooter={(next) => ed.updateMeta({ footer: next })}
+              />
+            </div>
+          )}
           <div style={{ flex: 1, overflow: "auto", padding: 16 }}>
             {ed.currentPage ? (
               <CanvasPagePreview
@@ -119,14 +137,28 @@ export default function CanvasTextbookEditorPage() {
           </div>
         </main>
 
-        {/* 우측 — 레이어 */}
-        <aside style={{ background: "#fafafa", borderLeft: "1px solid #ddd", overflow: "hidden" }}>
-          <RightLayerPanel
+        {/* 우측 — 페이지 배경 + 레이어 */}
+        <aside style={{ background: "#fafafa", borderLeft: "1px solid #ddd",
+                        overflow: "auto", display: "flex", flexDirection: "column" }}>
+          <PageInspector
             page={ed.currentPage}
-            selectedIds={ed.selectedElementIds}
-            onSelect={ed.selectElements}
-            onChange={(id, patch) => ed.updateElement(id, patch)}
+            imagePool={tb.imagePool}
+            onChangeBackground={ed.updatePageBackground}
           />
+          {selectedElement?.type === "domain" && (
+            <DomainInspector
+              element={selectedElement}
+              onChange={(patch) => ed.updateElement(selectedElement.id, patch as any)}
+            />
+          )}
+          <div style={{ flex: 1, overflow: "auto" }}>
+            <RightLayerPanel
+              page={ed.currentPage}
+              selectedIds={ed.selectedElementIds}
+              onSelect={ed.selectElements}
+              onChange={(id, patch) => ed.updateElement(id, patch)}
+            />
+          </div>
         </aside>
 
         {/* 하단 — 페이지 썸네일 */}
